@@ -9,7 +9,7 @@ namespace Cthangband.Commands
     {
         public char Key => '-';
 
-        public bool Repeatable => true;
+        public int? Repeat => null;
 
         public bool IsEnabled => true;
 
@@ -25,7 +25,7 @@ namespace Cthangband.Commands
     //    private ICommand Command { get; }
     //    public abstract char Key { get; }
 
-    //    public bool Repeatable => false;
+    //    public int? Repeatable => 0;
 
     //    public abstract bool IsEnabled { get; }
 
@@ -54,7 +54,7 @@ namespace Cthangband.Commands
     {
         public char Key => ';';
 
-        public bool Repeatable => true;
+        public int? Repeat => null;
 
         public bool IsEnabled => true;
 

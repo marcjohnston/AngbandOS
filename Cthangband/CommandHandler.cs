@@ -26,7 +26,7 @@ namespace Cthangband
         /// <summary>
         /// Process the player's latest command
         /// </summary>
-        public void ProcessCommand()
+        public void ProcessCommand(bool isRepeated)
         {
             // Get the current command
             char c = Gui.CurrentCommand;
@@ -40,7 +40,14 @@ namespace Cthangband
                 {
                     command.Execute(Player, Level);
 
-                    if (command.Repeatable && Gui.CommandArgument > 0)
+                    // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
+                    if (!isRepeated && command.Repeat.HasValue)
+                    {
+                        // Only apply the default once.
+                        Gui.CommandArgument = command.Repeat.Value;
+                    }
+
+                    if (Gui.CommandArgument > 0)
                     {
                         CommandRepeat = Gui.CommandArgument - 1;
                         Player.RedrawNeeded.Set(RedrawFlag.PrState);

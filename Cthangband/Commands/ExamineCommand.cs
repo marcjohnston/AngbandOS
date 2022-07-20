@@ -15,7 +15,7 @@ namespace Cthangband.Commands
 
         char ICommand.Key => 'x';
 
-        public bool Repeatable => false;
+        public int? Repeat => 0;
 
         public bool IsEnabled => true;
 

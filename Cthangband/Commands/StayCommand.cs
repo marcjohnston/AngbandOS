@@ -11,7 +11,7 @@ namespace Cthangband.Commands
     {
         public char Key => ',';
 
-        public bool Repeatable => true;
+        public int? Repeat => null;
 
         public bool IsEnabled => true;
 
@@ -29,7 +29,7 @@ namespace Cthangband.Commands
     {
         public char Key => 'g';
 
-        public bool Repeatable => true;
+        public int? Repeat => null;
 
         public bool IsEnabled => true;
 

@@ -1948,14 +1948,14 @@ namespace Cthangband
                     Profile.Instance.MsgFlag = false;
                     Gui.PrintLine("", 0, 0);
                     UpdateCommand();
-                    Command.ProcessCommand();
+                    Command.ProcessCommand(true);
                 }
                 else
                 {
                     Level.MoveCursorRelative(Player.MapY, Player.MapX);
                     Gui.RequestCommand(false);
                     UpdateCommand();
-                    Command.ProcessCommand();
+                    Command.ProcessCommand(false);
                 }
                 if (EnergyUse != 0)
                 {

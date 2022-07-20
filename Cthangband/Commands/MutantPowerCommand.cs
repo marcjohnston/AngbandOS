@@ -13,7 +13,7 @@ namespace Cthangband.Commands
     {
         public char Key => 'p';
 
-        public bool Repeatable => false;
+        public int? Repeat => 0;
 
         public bool IsEnabled => true;
 

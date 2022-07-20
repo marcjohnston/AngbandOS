@@ -10,9 +10,9 @@ namespace Cthangband.Commands
     {
         public char Key => 'B';
 
-        public bool Repeatable => true;
+        public int? Repeat => 99;
 
-        public bool IsEnabled => false;
+        public bool IsEnabled => true;
 
         public void Execute(Player player, Level level)
         {
