@@ -1,8 +1,9 @@
-﻿using Cthangband.StaticData;
+﻿using Cthangband.Commands;
+using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Browse a book

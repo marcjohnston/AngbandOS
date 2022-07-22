@@ -1,4 +1,6 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.Commands;
+using Cthangband.Enumerations;
+using Cthangband.StoreCommands;
 using System;
 
 namespace Cthangband.Stores
@@ -23,5 +25,6 @@ namespace Cthangband.Stores
         protected override string OwnerName => "";
         protected override string Title => "Hall Of Records";
         protected override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
+        protected override IStoreCommand AdvertisedStoreCommand1 => new BuyHouseStoreCommand();
     }
 }

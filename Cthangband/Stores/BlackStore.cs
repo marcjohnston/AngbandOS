@@ -19,6 +19,16 @@ namespace Cthangband.Stores
             return item.Value() > 0;
         }
 
-        protected override int PriceMultiplier => 2;
+        protected override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
+        {
+            if (trueToMarkDownFalseToMarkUp == true)
+            {
+                return price / 2;
+            }
+            else
+            {
+                return price * 2;
+            }
+        }
     }
 }

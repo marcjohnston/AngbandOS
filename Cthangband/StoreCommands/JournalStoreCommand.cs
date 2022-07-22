@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Cthangband.Commands;
+using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons

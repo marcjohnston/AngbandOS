@@ -1,7 +1,8 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.Commands;
+using Cthangband.Enumerations;
 using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Take off an item

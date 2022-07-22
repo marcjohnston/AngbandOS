@@ -78,6 +78,7 @@
     <Compile Include="Commands\DestroyCommand.cs" />
     <Compile Include="Commands\EatFoodCommand.cs" />
     <Compile Include="Commands\FireCommand.cs" />
+    <Compile Include="StoreCommands\MessagesStoreCommand.cs" />
     <Compile Include="Commands\QuaffPotionCommand.cs" />
     <Compile Include="Commands\ReadScrollCommand.cs" />
     <Compile Include="Commands\RefillCommand.cs" />
@@ -717,7 +718,6 @@
     <Compile Include="StoreCommands\JournalStoreCommand.cs" />
     <Compile Include="StoreCommands\ManualStoreCommand.cs" />
     <Compile Include="StoreCommands\MessageOneStoreCommand.cs" />
-    <Compile Include="StoreCommands\MessagesStoreCommand.cs" />
     <Compile Include="StoreCommands\ExamineStoreCommand.cs" />
     <Compile Include="StoreCommands\SellStoreCommand.cs" />
     <Compile Include="StoreCommands\PurchaseStoreCommand.cs" />

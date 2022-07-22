@@ -10,6 +10,7 @@ using Cthangband.Enumerations;
 using Cthangband.Pantheon;
 using Cthangband.Spells;
 using Cthangband.StaticData;
+using Cthangband.StoreCommands;
 using Cthangband.Stores;
 using Cthangband.UI;
 using System;
@@ -135,6 +136,71 @@ namespace Cthangband
         }
 
         public abstract string FeatureType { get; }
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 42, 31.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual IStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 42, 56.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual IStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 31.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual IStoreCommand AdvertisedStoreCommand3 => null;
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 56.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual IStoreCommand AdvertisedStoreCommand4 => null;
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 0.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual IStoreCommand AdvertisedStoreCommand5 => null;
+
+        protected virtual IStoreCommand[] NonAdvertisedStoreCommands => new IStoreCommand[]
+        {
+            new BrowseStoreCommand(),
+            new CarriageReturnStoreCommand(),
+            new DestroyAllStoreCommand(),
+            new DestroyStoreCommand(),
+            new EquipStoreCommand(),
+            new ExamineInventoryStoreCommand(),
+            new ExamineStoreCommand(),
+            new InventoryStoreCommand(),
+            new JournalStoreCommand(),
+            new ManualStoreCommand(),
+            new MessageOneStoreCommand(),
+            new MessagesStoreCommand(),
+            new QuerySymbolStoreCommand(),
+            new TakeOffStoreCommand(),
+            new ViewCharacterStoreCommand(),
+            new WieldStoreCommand()
+        };
 
         public virtual void EnterStore(Player player)
         {
@@ -949,7 +1015,10 @@ namespace Cthangband
             oldStore._stockNum = 0;
         }
 
-        protected virtual int PriceMultiplier => 1;
+        protected virtual int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
+        {
+            return price;
+        }
 
         private int PriceItem(Item oPtr, int greed, bool trueToMarkDownFalseToMarkUp)
         {
@@ -968,7 +1037,6 @@ namespace Cthangband
                 {
                     adjust = 100;
                 }
-                price /= PriceMultiplier;
             }
             else
             {
@@ -977,8 +1045,8 @@ namespace Cthangband
                 {
                     adjust = 100;
                 }
-                price *= PriceMultiplier;
             }
+            price = AdjustPrice(price, trueToMarkDownFalseToMarkUp);
             price = ((price * adjust) + 50) / 100;
             if (price <= 0)
             {

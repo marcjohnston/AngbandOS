@@ -1,8 +1,9 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.Commands;
+using Cthangband.Enumerations;
 using Cthangband.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Equip an item

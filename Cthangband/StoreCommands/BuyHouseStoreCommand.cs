@@ -17,7 +17,7 @@ namespace Cthangband.StoreCommands
 
         public bool IsEnabled(Store store)
         {
-            return (store.StoreType == StoreType.StoreHome);
+            return (store.StoreType == StoreType.StoreHall);
         }
     }
 }

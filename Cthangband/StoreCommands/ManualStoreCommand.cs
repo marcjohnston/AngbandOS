@@ -1,7 +1,8 @@
-﻿using Cthangband.UI;
+﻿using Cthangband.Commands;
+using Cthangband.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Show the game manual

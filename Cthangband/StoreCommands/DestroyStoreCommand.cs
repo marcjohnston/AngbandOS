@@ -1,9 +1,10 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.Commands;
+using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace Cthangband.StoreCommands
 {
     /// <summary>
     /// Destroy a single item
