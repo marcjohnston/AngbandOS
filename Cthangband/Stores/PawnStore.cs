@@ -76,8 +76,11 @@ namespace Cthangband.Stores
         protected override IStoreCommand AdvertisedStoreCommand4 => new IdentifyAllStoreCommand();
         protected override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
 
-        protected override bool StoreIdentifiesItemsDuringPurchase => false;
+        protected override bool StoreIdentifiesItems => false;
         protected override bool StoreAnalyzesPurchases => false;
         protected override bool PerformsMaintenanceWhenResting => false;
+        protected override int CarryItem(Item qPtr) => HomeCarry(qPtr);
+        protected virtual string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
+
     }
 }

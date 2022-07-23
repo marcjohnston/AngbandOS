@@ -46,7 +46,15 @@ namespace Cthangband.StaticData
         public const int IdentCursed = 0x40;
         public const int IdentEmpty = 0x04;
         public const int IdentFixed = 0x02;
+
+        /// <summary>
+        /// The item has been identified.  
+        /// </summary>
         public const int IdentKnown = 0x08;
+
+        /// <summary>
+        /// Do we know anything about the item.
+        /// </summary>
         public const int IdentMental = 0x20;
         public const int IdentSense = 0x01;
         public const int IdentStoreb = 0x10;

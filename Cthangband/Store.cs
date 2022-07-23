@@ -15,7 +15,6 @@ using Cthangband.Stores;
 using Cthangband.UI;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Cthangband
@@ -54,6 +53,17 @@ namespace Cthangband
         private Player _player;
         private int _stockNum;
         private int _storeTop;
+
+        public void MoveInventoryToAnotherStore(Store newStore)
+        {
+            newStore._stockNum = _stockNum;
+            for (int i = 0; i < _stock.Length; i++)
+            {
+                newStore._stock[i] = new Item(_stock[i]);
+                _stock[i] = new Item();
+            }
+            _stockNum = 0;
+        }
 
         protected virtual ItemIdentifier[] GetStoreTable()
         {
@@ -642,7 +652,7 @@ namespace Cthangband
             {
                 return -1;
             }
-            if (StoreType != StoreType.StorePawn)
+            if (StoreIdentifiesItems)
             {
                 oPtr.IdentifyFlags.Set(Constants.IdentMental);
                 oPtr.Inscription = "";
@@ -713,7 +723,7 @@ namespace Cthangband
         /// </summary>
         /// <param name="oPtr"></param>
         /// <returns></returns>
-        private int HomeCarry(Item oPtr)
+        protected int HomeCarry(Item oPtr)
         {
             int slot;
             Item jPtr;
@@ -934,27 +944,6 @@ namespace Cthangband
             return t;
         }
 
-        private void MoveHouse(int oldTown, int newTown)
-        {
-            Store newStore = Array.Find(SaveGame.Instance.Towns[newTown].Stores, store => store.StoreType == StoreType.StoreHome);
-            Store oldStore = Array.Find(SaveGame.Instance.Towns[oldTown].Stores, store => store.StoreType == StoreType.StoreHome);
-            if (oldStore == null)
-            {
-                return;
-            }
-            if (newStore == null)
-            {
-                return;
-            }
-            newStore._stockNum = oldStore._stockNum;
-            for (int i = 0; i < oldStore._stock.Length; i++)
-            {
-                newStore._stock[i] = new Item(oldStore._stock[i]);
-                oldStore._stock[i] = new Item();
-            }
-            oldStore._stockNum = 0;
-        }
-
         protected virtual int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
         {
             return price;
@@ -1173,7 +1162,7 @@ namespace Cthangband
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
         }
 
-        private void SayComment_1()
+        protected void SayComment_1()
         {
             Profile.Instance.MsgPrint(_comment1[Program.Rng.RandomLessThan(_comment1.Length)]);
         }
@@ -1202,7 +1191,7 @@ namespace Cthangband
             return !Gui.GetCheck("Accept deal? ");
         }
 
-        private bool ServiceHaggle(int serviceCost, out int price)
+        protected bool ServiceHaggle(int serviceCost, out int price)
         {
             int finalAsk = serviceCost;
             Profile.Instance.MsgPrint("You quickly agree upon the price.");
@@ -1710,45 +1699,6 @@ namespace Cthangband
             }
         }
 
-        public void BuyHouse()
-        {
-            int price;
-            if (_player.TownWithHouse == SaveGame.Instance.CurTown.Index)
-            {
-                Profile.Instance.MsgPrint("You already have the deeds!");
-            }
-            else
-            {
-                if (!ServiceHaggle(SaveGame.Instance.CurTown.HousePrice, out price))
-                {
-                    if (price >= _player.Gold)
-                    {
-                        Profile.Instance.MsgPrint("You do not have the gold!");
-                    }
-                    else
-                    {
-                        _player.Gold -= price;
-                        SayComment_1();
-                        Gui.PlaySound(SoundEffect.StoreTransaction);
-                        StorePrtGold();
-                        int oldHouse = _player.TownWithHouse;
-                        _player.TownWithHouse = SaveGame.Instance.CurTown.Index;
-                        if (oldHouse == -1)
-                        {
-                            Profile.Instance.MsgPrint("You may move in at once.");
-                        }
-                        else
-                        {
-                            Profile.Instance.MsgPrint(
-                                "I've sold your old house to pay for the removal service.");
-                            MoveHouse(oldHouse, _player.TownWithHouse);
-                        }
-                    }
-                    SaveGame.Instance.HandleStuff();
-                }
-            }
-        }
-
         public void HireRoom()
         {
             int price;
@@ -1969,7 +1919,7 @@ namespace Cthangband
             SaveGame.Instance.HandleStuff();
         }
 
-        private void StorePrtGold()
+        protected void StorePrtGold()
         {
             Gui.PrintLine("Gold Remaining: ", 39, 53);
             string outVal = $"{_player.Gold,9}";
@@ -2063,15 +2013,13 @@ namespace Cthangband
                         Gui.PlaySound(SoundEffect.StoreTransaction);
                         _player.Gold -= price;
                         StorePrtGold();
-                        if (StoreType != StoreType.StorePawn)
+                        if (StoreIdentifiesItems)
                         {
                             jPtr.BecomeFlavourAware();
                         }
                         jPtr.IdentifyFlags.Clear(Constants.IdentFixed);
                         oName = jPtr.Description(true, 3);
-                        Profile.Instance.MsgPrint(StoreType == StoreType.StorePawn
-                            ? $"You bought back {oName} for {price} gold."
-                            : $"You bought {oName} for {price} gold.");
+                        Profile.Instance.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";
                         itemNew = _player.Inventory.InvenCarry(jPtr, false);
                         oName = _player.Inventory[itemNew].Description(true, 3);
@@ -2082,12 +2030,7 @@ namespace Cthangband
                         StoreItemOptimize(item);
                         if (_stockNum == 0)
                         {
-                            if (StoreType == StoreType.StorePawn)
-                            {
-                                _storeTop = 0;
-                                DisplayInventory();
-                            }
-                            else
+                            if (MaintainsStockLevels)
                             {
                                 if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                                 {
@@ -2102,9 +2045,9 @@ namespace Cthangband
                                 {
                                     StoreMaint();
                                 }
-                                _storeTop = 0;
-                                DisplayInventory();
                             }
+                            _storeTop = 0;
+                            DisplayInventory();
                         }
                         else if (_stockNum != i)
                         {
@@ -2152,6 +2095,7 @@ namespace Cthangband
                 }
             }
         }
+        protected virtual string BoughtMessage(string oName, int price) => $"You bought {oName} for {price} gold.";
 
         protected virtual string SellPrompt => "Sell which item? ";
         protected virtual string StoreFullMessage => "I have not the room in my Stores to keep it.";
@@ -2171,7 +2115,7 @@ namespace Cthangband
         /// <summary>
         /// Returns true, if the store identifies items when the player sells an item to the store.  Does not apply to stores that do not buy items.
         /// </summary>
-        protected virtual bool StoreIdentifiesItemsDuringPurchase => true;
+        protected virtual bool StoreIdentifiesItems => true;
 
         protected virtual bool StoreAnalyzesPurchases => true;
 
@@ -2225,7 +2169,7 @@ namespace Cthangband
                     _player.Gold += price;
                     StorePrtGold();
                     int guess = qPtr.Value() * qPtr.Count;
-                    if (StoreIdentifiesItemsDuringPurchase)
+                    if (StoreIdentifiesItems)
                     {
                         oPtr.BecomeFlavourAware();
                         oPtr.BecomeKnown();
@@ -2255,13 +2199,15 @@ namespace Cthangband
             _player.Inventory.InvenItemDescribe(item);
             _player.Inventory.InvenItemOptimize(item);
             SaveGame.Instance.HandleStuff();
-            itemPos = StoreType != StoreType.StorePawn ? StoreCarry(qPtr) : HomeCarry(qPtr);
+            itemPos = CarryItem(qPtr);
             if (itemPos >= 0)
             {
                 _storeTop = itemPos / 26 * 26;
                 DisplayInventory();
             }
         }
+
+        protected virtual int CarryItem(Item qPtr) => StoreCarry(qPtr);
 
         /// <summary>
         /// Returns true, if the store will accept items from the player (e.g. sell or drop).

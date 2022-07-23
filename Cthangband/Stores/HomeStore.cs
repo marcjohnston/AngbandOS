@@ -1,6 +1,7 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
 using Cthangband.StoreCommands;
+using Cthangband.UI;
 using System;
 using System.Linq;
 
@@ -59,5 +60,61 @@ namespace Cthangband.Stores
         protected override bool StoreSellsItems => false;
 
         protected override bool PerformsMaintenanceWhenResting => false;
+
+        public static HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SaveGame.Instance.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
+
+        public void BuyHouse(Player player)
+        {
+            int price;
+            if (player.TownWithHouse == SaveGame.Instance.CurTown.Index)
+            {
+                Profile.Instance.MsgPrint("You already have the deeds!");
+            }
+            else
+            {
+                if (!ServiceHaggle(SaveGame.Instance.CurTown.HousePrice, out price))
+                {
+                    if (price >= player.Gold)
+                    {
+                        Profile.Instance.MsgPrint("You do not have the gold!");
+                    }
+                    else
+                    {
+                        player.Gold -= price;
+                        SayComment_1();
+                        Gui.PlaySound(SoundEffect.StoreTransaction);
+                        StorePrtGold();
+                        int oldHouse = player.TownWithHouse;
+                        player.TownWithHouse = SaveGame.Instance.CurTown.Index;
+                        if (oldHouse == -1)
+                        {
+                            Profile.Instance.MsgPrint("You may move in at once.");
+                        }
+                        else
+                        {
+                            Profile.Instance.MsgPrint(
+                                "I've sold your old house to pay for the removal service.");
+                            MoveHouse(oldHouse, player.TownWithHouse);
+                        }
+                    }
+                    SaveGame.Instance.HandleStuff();
+                }
+            }
+        }
+
+        private static void MoveHouse(int oldTown, int newTown)
+        {
+            Store newStore = FindHomeStore(newTown);
+            Store oldStore = FindHomeStore(oldTown);
+            if (oldStore == null)
+            {
+                return;
+            }
+            if (newStore == null)
+            {
+                return;
+            }
+            oldStore.MoveInventoryToAnotherStore(newStore);
+        }
     }
 }

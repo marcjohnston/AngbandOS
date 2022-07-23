@@ -28,6 +28,10 @@ namespace Cthangband
         public int Dd;
         public int Ds;
         public bool EasyKnow;
+
+        /// <summary>
+        /// The special flavor of the item has been identified. (e.g. of "seeing")
+        /// </summary>
         public bool FlavourAware;
         public bool HasFlavor;
         public int Level;

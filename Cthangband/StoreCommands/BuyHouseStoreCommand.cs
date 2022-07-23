@@ -1,5 +1,8 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
+using Cthangband.Stores;
+using Cthangband.UI;
+using System;
 
 namespace Cthangband.StoreCommands
 {
@@ -14,7 +17,8 @@ namespace Cthangband.StoreCommands
 
         public void Execute(Player player, Store store)
         {
-            store.BuyHouse();
+            HomeStore homeStore = HomeStore.FindHomeStore(SaveGame.Instance.CurTown.Index);
+            homeStore.BuyHouse(player);
         }
 
         public bool IsEnabled(Store store)
