@@ -6,6 +6,8 @@ namespace Cthangband.StoreCommands
     {
         public char Key => '\r';
 
+        public string Description => "";
+
         public bool RequiresRerendering => false;
 
         public void Execute(Player player, Store store)

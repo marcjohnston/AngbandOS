@@ -1,4 +1,5 @@
 ﻿using Cthangband.Enumerations;
+using Cthangband.StoreCommands;
 using System;
 
 namespace Cthangband.Commands

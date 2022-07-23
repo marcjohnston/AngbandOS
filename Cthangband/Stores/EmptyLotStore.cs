@@ -10,6 +10,11 @@ namespace Cthangband.Stores
         {
         }
 
+        protected override StoreOwner[] StoreOwners => new StoreOwner[]
+        {
+            new StoreOwner("Empty lot", 0, 100, 99)
+        };
+
         public override string FeatureType => "";
 
         protected override bool StoreWillBuy(Item item)
@@ -19,5 +24,6 @@ namespace Cthangband.Stores
         protected override bool MaintainsStockLevels => false;
         public override bool ShufflesOwnersAndPricing => false;
         protected override bool HasStoreTable => false;
+        protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

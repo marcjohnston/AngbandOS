@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Research an item";
+
         public void Execute(Player player, Store store)
         {
             store.ResearchItem();

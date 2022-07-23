@@ -948,23 +948,6 @@ namespace Cthangband.UI
                 CurrentCommand = cmd;
                 break;
             }
-            if (shopping)
-            {
-                switch (CurrentCommand)
-                {
-                    case 'p':
-                        CurrentCommand = 'g';
-                        break;
-
-                    case 'm':
-                        CurrentCommand = 'g';
-                        break;
-
-                    case 's':
-                        CurrentCommand = 'd';
-                        break;
-                }
-            }
             PrintLine("", 0, 0);
         }
 

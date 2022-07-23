@@ -13,6 +13,8 @@ namespace Cthangband.StoreCommands
     {
         public char Key => 'i';
 
+        public string Description => "";
+
         public bool RequiresRerendering => false;
 
         public bool IsEnabled(Store store) => true;

@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Rest a while";
+
         public void Execute(Player player, Store store)
         {
             store.Rest();

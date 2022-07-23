@@ -55,7 +55,6 @@ namespace Cthangband
         private int _stockNum;
         private int _storeTop;
 
-
         protected virtual ItemIdentifier[] GetStoreTable()
         {
             return new[]
@@ -147,7 +146,7 @@ namespace Cthangband
         protected virtual IStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
 
         /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 42, 56.
+        /// Returns the store command that should be advertised to the player @ position 43, 31.
         /// </summary>
         /// <remarks>
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
@@ -156,13 +155,13 @@ namespace Cthangband
         protected virtual IStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
 
         /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 43, 31.
+        /// Returns the store command that should be advertised to the player @ position 42, 56.
         /// </summary>
         /// <remarks>
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand3 => null;
+        protected virtual IStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 56.
@@ -182,25 +181,15 @@ namespace Cthangband
         /// </remarks>
         protected virtual IStoreCommand AdvertisedStoreCommand5 => null;
 
-        protected virtual IStoreCommand[] NonAdvertisedStoreCommands => new IStoreCommand[]
+        private void RenderAdvertisedCommand(IStoreCommand command, int row, int col)
         {
-            new BrowseStoreCommand(),
-            new CarriageReturnStoreCommand(),
-            new DestroyAllStoreCommand(),
-            new DestroyStoreCommand(),
-            new EquipStoreCommand(),
-            new ExamineInventoryStoreCommand(),
-            new ExamineStoreCommand(),
-            new InventoryStoreCommand(),
-            new JournalStoreCommand(),
-            new ManualStoreCommand(),
-            new MessageOneStoreCommand(),
-            new MessagesStoreCommand(),
-            new QuerySymbolStoreCommand(),
-            new TakeOffStoreCommand(),
-            new ViewCharacterStoreCommand(),
-            new WieldStoreCommand()
-        };
+            if (command != null)
+            {
+                Gui.PrintLine($" {command.Key}) {command.Description}.", row, col);
+            }
+        }
+
+        protected virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
 
         public virtual void EnterStore(Player player)
         {
@@ -214,72 +203,11 @@ namespace Cthangband
                 int tmpCha = _player.AbilityScores[Ability.Charisma].Adjusted;
                 Gui.Clear(41);
                 Gui.PrintLine(" ESC) Exit from Building.", 42, 0);
-                if (StoreType == StoreType.StoreHome)
-                {
-                    Gui.PrintLine(" g) Get an item.", 42, 31);
-                    Gui.PrintLine(" d) Drop an item.", 43, 31);
-                }
-                if (StoreType != StoreType.StoreHome && StoreType != StoreType.StoreHall)
-                {
-                    Gui.PrintLine(" p) Purchase an item.", 42, 31);
-                    Gui.PrintLine(" s) Sell an item.", 43, 31);
-                }
-                if (StoreType == StoreType.StoreHall)
-                {
-                    Gui.PrintLine(" v) view racial Heroes.", 42, 31);
-                    Gui.PrintLine(" c) view Class heroes.", 43, 31);
-                }
-                else
-                {
-                    Gui.PrintLine(" x) eXamine an item.", 42, 56);
-                }
-                switch (StoreType)
-                {
-                    case StoreType.StoreGeneral:
-                        Gui.PrintLine(" r) Hire an escort.", 43, 56);
-                        break;
-
-                    case StoreType.StoreArmoury:
-                        Gui.PrintLine(" r) Enchant your armour.", 43, 56);
-                        break;
-
-                    case StoreType.StoreWeapon:
-                        Gui.PrintLine(" r) Enchant your weapon.", 43, 56);
-                        break;
-
-                    case StoreType.StoreTemple:
-                        Gui.PrintLine(" v) Sacrifice Item.", 43, 0);
-                        Gui.PrintLine(" r) buy Remove Curse.", 43, 56);
-                        break;
-
-                    case StoreType.StoreAlchemist:
-                        Gui.PrintLine(" r) buy Restoration.", 43, 56);
-                        break;
-
-                    case StoreType.StoreMagic:
-                        Gui.PrintLine(" r) Research an item.", 43, 56);
-                        break;
-
-                    case StoreType.StoreHome:
-                        Gui.PrintLine(" r) Rest a while.", 43, 56);
-                        break;
-
-                    case StoreType.StoreLibrary:
-                        Gui.PrintLine(" r) Research a spell.", 43, 56);
-                        break;
-
-                    case StoreType.StoreInn:
-                        Gui.PrintLine(" r) hire a Room.", 43, 56);
-                        break;
-
-                    case StoreType.StoreHall:
-                        Gui.PrintLine(" r) Buy a house.", 43, 56);
-                        break;
-
-                    case StoreType.StorePawn:
-                        Gui.PrintLine(" r) Identify all.", 43, 56);
-                        break;
-                }
+                RenderAdvertisedCommand(AdvertisedStoreCommand1, 42, 31);
+                RenderAdvertisedCommand(AdvertisedStoreCommand2, 43, 31);
+                RenderAdvertisedCommand(AdvertisedStoreCommand3, 42, 56);
+                RenderAdvertisedCommand(AdvertisedStoreCommand4, 43, 56);
+                RenderAdvertisedCommand(AdvertisedStoreCommand5, 43, 0);
                 Gui.Print("You may: ", 41, 0);
                 Gui.RequestCommand(true);
                 StoreProcessCommand();
@@ -295,7 +223,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint("Your pack is so full that you flee the Stores...");
                         _leaveStore = true;
                     }
-                    else if (!StoreCheckNum(oPtr))
+                    else if (!StoreCanAcceptMoreItems(oPtr))
                     {
                         Profile.Instance.MsgPrint("Your pack is so full that you flee your home...");
                         _leaveStore = true;
@@ -338,7 +266,7 @@ namespace Cthangband
 
         public virtual void StoreInit()
         {
-            _owner = StoreFactory.GetRandomOwner(StoreType);
+            _owner = GetRandomOwner();
             _stockNum = 0;
             for (int k = 0; k < _stockSize; k++)
             {
@@ -426,13 +354,20 @@ namespace Cthangband
         /// </summary>
         public virtual bool ShufflesOwnersAndPricing => true;
 
+        protected abstract StoreOwner[] StoreOwners { get; }
+
+        private StoreOwner GetRandomOwner()
+        {
+            return StoreOwners[Program.Rng.RandomLessThan(StoreOwners.Length)];
+        }
+
         public virtual void StoreShuffle()
         {
             if (!ShufflesOwnersAndPricing)
             {
                 return;
             }
-            _owner = StoreFactory.GetRandomOwner(StoreType);
+            _owner = GetRandomOwner();
             for (int i = 0; i < _stockNum; i++)
             {
                 Item oPtr = _stock[i];
@@ -445,10 +380,30 @@ namespace Cthangband
             }
         }
 
+        /// <summary>
+        /// Returns the description of an item that is rendered in the store inventory.  Pawn shops and the players home render different descriptions.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        protected virtual string GetItemDescription(Item oPtr)
+        {
+            return oPtr.StoreDescription(true, 3);
+        }
+
+        /// <summary>
+        /// Returns the width of the description column for rendering items in the store inventory.
+        /// </summary>
+        protected virtual int WidthOfDescriptionColumn => 58;
+
+        /// <summary>
+        /// Returns whether the weight column should render the lb. units of measurement.  The players home has sufficient space to render, but the other stores do not.
+        /// </summary>
+        protected virtual bool RenderWeightUnitOfMeasurement => false;
+
         private void DisplayEntry(int pos)
         {
             string oName;
-            int maxwid;
+            int maxwid = WidthOfDescriptionColumn;
             Item oPtr = _stock[pos];
             int i = pos % 26;
             string outVal = $"{i.IndexToLetter()}) ";
@@ -456,33 +411,18 @@ namespace Cthangband
             Colour a = oPtr.ItemType.Colour;
             char c = oPtr.ItemType.Character;
             Gui.Place(a, c, i + 6, 3);
-            if (StoreType == StoreType.StoreHome)
+            oName = GetItemDescription(oPtr);
+            if (maxwid < oName.Length)
             {
-                maxwid = 75;
-                maxwid -= 10;
-                oName = oPtr.Description(true, 3);
-                if (maxwid < oName.Length)
-                {
-                    oName = oName.Substring(0, maxwid);
-                }
-                Gui.Print(oPtr.Category.ToAttr(), oName, i + 6, 5);
-                int wgt = oPtr.Weight;
-                outVal = $"{wgt / 10,3}.{wgt % 10} lb";
-                Gui.Print(outVal, i + 6, 68);
+                oName = oName.Substring(0, maxwid);
             }
-            else
+            Gui.Print(oPtr.Category.ToAttr(), oName, i + 6, 5);
+            int wgt = oPtr.Weight;
+            outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
+            Gui.Print(outVal, i + 6, 61);
+
+            if (ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
             {
-                maxwid = 65;
-                maxwid -= 7;
-                oName = StoreType == StoreType.StorePawn ? oPtr.Description(true, 3) : oPtr.StoreDescription(true, 3);
-                if (maxwid < oName.Length)
-                {
-                    oName = oName.Substring(0, maxwid);
-                }
-                Gui.Print(oPtr.Category.ToAttr(), oName, i + 6, 5);
-                int wgt = oPtr.Weight;
-                outVal = $"{wgt / 10,3}.{wgt % 10}";
-                Gui.Print(outVal, i + 6, 61);
                 int x;
                 if (oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
                 {
@@ -532,7 +472,7 @@ namespace Cthangband
             {
                 string ownerName = _owner.OwnerName;
                 string raceName = Race.RaceInfo[_owner.OwnerRace].Title;
-                return $"{ownerName} ({raceName})";                
+                return $"{ownerName} ({raceName})";
             }
         }
 
@@ -1093,6 +1033,8 @@ namespace Cthangband
             return !Gui.GetCheck("Accept deal? ");
         }
 
+        protected virtual bool PerformsMaintenanceWhenResting => true;
+
         private void RoomRest(bool toDusk)
         {
             if (toDusk)
@@ -1114,28 +1056,9 @@ namespace Cthangband
             {
                 foreach (Store store in town.Stores)
                 {
-                    switch (store.StoreType)
-                    {
-                        case StoreType.StoreGeneral:
-                        case StoreType.StoreArmoury:
-                        case StoreType.StoreWeapon:
-                        case StoreType.StoreTemple:
-                        case StoreType.StoreAlchemist:
-                        case StoreType.StoreMagic:
-                        case StoreType.StoreBlack:
-                        case StoreType.StoreLibrary:
-                            store.StoreMaint();
-                            break;
-
-                        case StoreType.StoreHome:
-                        case StoreType.StoreInn:
-                        case StoreType.StoreHall:
-                        case StoreType.StorePawn:
-                        case StoreType.StoreEmptyLot:
-                            break;
-
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                    if (PerformsMaintenanceWhenResting)
+                    { 
+                        store.StoreMaint();
                     }
                 }
             }
@@ -1292,7 +1215,9 @@ namespace Cthangband
             return !Gui.GetCheck("Accept deal? ");
         }
 
-        private bool StoreCheckNum(Item oPtr)
+        protected virtual bool StoreCanMergeItem(Item oPtr, Item jPtr) => StoreObjectSimilar(jPtr, oPtr);
+
+        private bool StoreCanAcceptMoreItems(Item oPtr)
         {
             int i;
             Item jPtr;
@@ -1300,30 +1225,31 @@ namespace Cthangband
             {
                 return true;
             }
-            if (StoreType == StoreType.StoreHome)
+            for (i = 0; i < _stockNum; i++)
             {
-                for (i = 0; i < _stockNum; i++)
+                jPtr = _stock[i];
+                if (StoreCanMergeItem(oPtr, jPtr))
                 {
-                    jPtr = _stock[i];
-                    if (jPtr.CanAbsorb(oPtr))
-                    {
-                        return true;
-                    }
-                }
-            }
-            else
-            {
-                for (i = 0; i < _stockNum; i++)
-                {
-                    jPtr = _stock[i];
-                    if (StoreObjectSimilar(jPtr, oPtr))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;
         }
+
+        protected virtual Item CreateItem()
+        {
+            int level;
+            ItemType itemType;
+            int i = _table[Program.Rng.RandomLessThan(_tableNum)];
+            level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
+            itemType = Profile.Instance.ItemTypes[i];
+            Item qPtr = new Item();
+            qPtr.AssignItemType(itemType);
+            qPtr.ApplyMagic(level, false, false, false);
+            return qPtr;
+        }
+
+        protected virtual int MinimumItemValue => 0;
 
         private void StoreCreate()
         {
@@ -1333,27 +1259,12 @@ namespace Cthangband
             }
             for (int tries = 0; tries < 4; tries++)
             {
-                int i;
-                int level;
-                ItemType itemType;
-                if (StoreType == StoreType.StoreBlack)
+                Item qPtr = CreateItem();
+                if (qPtr == null)
                 {
-                    level = 35 + Program.Rng.RandomLessThan(35);
-                    itemType = ItemType.RandomItemType(level);
-                    if (itemType == null)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
-                else
-                {
-                    i = _table[Program.Rng.RandomLessThan(_tableNum)];
-                    level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
-                    itemType = Profile.Instance.ItemTypes[i];
-                }
-                Item qPtr = new Item();
-                qPtr.AssignItemType(itemType);
-                qPtr.ApplyMagic(level, false, false, false);
+
                 if (qPtr.Category == ItemCategory.Light)
                 {
                     if (qPtr.ItemSubCategory == LightType.Torch)
@@ -1371,19 +1282,9 @@ namespace Cthangband
                 {
                     continue;
                 }
-                if (StoreType == StoreType.StoreBlack)
+                if (qPtr.Value() < MinimumItemValue)
                 {
-                    if (qPtr.Value() < 10)
-                    {
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (qPtr.Value() <= 0)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
                 MassProduce(qPtr);
                 StoreCarry(qPtr);
@@ -2078,6 +1979,11 @@ namespace Cthangband
         protected virtual string NoStockMessage => "I am currently out of stock.";
         protected virtual string PurchaseMessage => "Which item are you interested in? ";
 
+        /// <summary>
+        /// Returns true, if the store sells items for gold to the player.  The home does not sell items.
+        /// </summary>
+        protected virtual bool StoreSellsItems => true;
+
         public void StorePurchase()
         {
             int itemNew;
@@ -2109,7 +2015,7 @@ namespace Cthangband
             int best = PriceItem(jPtr, _owner.MinInflate, false);
             if (oPtr.Count > 1)
             {
-                if (StoreType != StoreType.StoreHome && oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
+                if (StoreSellsItems && oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
                 {
                     Profile.Instance.MsgPrint($"That costs {best} gold per item.");
                 }
@@ -2133,7 +2039,7 @@ namespace Cthangband
                 Profile.Instance.MsgPrint("You cannot carry that many items.");
                 return;
             }
-            if (StoreType != StoreType.StoreHome)
+            if (StoreSellsItems)
             {
                 bool choice;
                 int price;
@@ -2144,9 +2050,7 @@ namespace Cthangband
                 }
                 else
                 {
-                    oName = StoreType == StoreType.StorePawn
-                        ? jPtr.Description(true, 3)
-                        : jPtr.StoreDescription(true, 3);
+                    oName = GetItemDescription(jPtr);
                     Profile.Instance.MsgPrint($"Buying {oName} ({item.IndexToLetter()}).");
                     Profile.Instance.MsgPrint(null);
                     choice = PurchaseHaggle(jPtr, out price);
@@ -2252,10 +2156,24 @@ namespace Cthangband
         protected virtual string SellPrompt => "Sell which item? ";
         protected virtual string StoreFullMessage => "I have not the room in my Stores to keep it.";
 
-        protected virtual bool ItemsInstantlyIdentified => true;
+        /// <summary>
+        /// Returns true, if the store keeps inscriptions on items it acquires.  Only the players home does this.
+        /// </summary>
+        protected virtual bool StoreMaintainsInscription => false;
 
-        protected virtual bool BuysItems => true;
+        protected virtual bool StoreBuysItems => true;
+
+        /// <summary>
+        /// Returns the verb when the player sells or drops an item to the store.  Normally, "sold", but the home "drops" and the pawn shop "pawns".
+        /// </summary>
         protected virtual string BoughtVerb => "sold";
+
+        /// <summary>
+        /// Returns true, if the store identifies items when the player sells an item to the store.  Does not apply to stores that do not buy items.
+        /// </summary>
+        protected virtual bool StoreIdentifiesItemsDuringPurchase => true;
+
+        protected virtual bool StoreAnalyzesPurchases => true;
 
         public void StoreSell()
         {
@@ -2286,16 +2204,16 @@ namespace Cthangband
             }
             Item qPtr = new Item(oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
-            if (ItemsInstantlyIdentified)
+            if (!StoreMaintainsInscription)
             {
                 qPtr.Inscription = "";
             }
-            if (!StoreCheckNum(qPtr))
+            if (!StoreCanAcceptMoreItems(qPtr))
             {
                 Profile.Instance.MsgPrint(StoreFullMessage);
                 return;
             }
-            if (BuysItems)
+            if (StoreBuysItems)
             {
                 Profile.Instance.MsgPrint($"Selling {oName} ({item.IndexToLabel()}).");
                 Profile.Instance.MsgPrint(null);
@@ -2306,8 +2224,8 @@ namespace Cthangband
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     _player.Gold += price;
                     StorePrtGold();
-                    int dummy = qPtr.Value() * qPtr.Count;
-                    if (StoreType != StoreType.StorePawn)
+                    int guess = qPtr.Value() * qPtr.Count;
+                    if (StoreIdentifiesItemsDuringPurchase)
                     {
                         oPtr.BecomeFlavourAware();
                         oPtr.BecomeKnown();
@@ -2315,9 +2233,9 @@ namespace Cthangband
                     _player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
                     qPtr = new Item(oPtr) { Count = amt };
                     int value;
-                    if (StoreType == StoreType.StorePawn)
+                    if (!StoreAnalyzesPurchases)
                     {
-                        value = dummy;
+                        value = guess;
                     }
                     else
                     {
@@ -2325,7 +2243,7 @@ namespace Cthangband
                         oName = qPtr.Description(true, 3);
                     }
                     Profile.Instance.MsgPrint($"You {BoughtVerb} {oName} for {price} gold.");
-                    PurchaseAnalyze(price, value, dummy);
+                    PurchaseAnalyze(price, value, guess);
                 }
             }
             else
@@ -2345,6 +2263,11 @@ namespace Cthangband
             }
         }
 
+        /// <summary>
+        /// Returns true, if the store will accept items from the player (e.g. sell or drop).
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected abstract bool StoreWillBuy(Item item);
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Commands\DestroyCommand.cs" />
     <Compile Include="Commands\EatFoodCommand.cs" />
     <Compile Include="Commands\FireCommand.cs" />
+    <Compile Include="StoreCommands\MGetStoreCommand.cs" />
     <Compile Include="StoreCommands\MessagesStoreCommand.cs" />
     <Compile Include="Commands\QuaffPotionCommand.cs" />
     <Compile Include="Commands\ReadScrollCommand.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="StoreCommands\BuyHouseStoreCommand.cs" />
     <Compile Include="StoreCommands\IdentifyAllStoreCommand.cs" />
     <Compile Include="StoreCommands\HireRoomStoreCommand.cs" />
+    <Compile Include="StoreCommands\GetStoreCommand.cs" />
     <Compile Include="StoreCommands\ResearchSpellStoreCommand.cs" />
     <Compile Include="StoreCommands\RestStoreCommand.cs" />
     <Compile Include="StoreCommands\ResearchItemStoreCommand.cs" />
@@ -102,7 +104,7 @@
     <Compile Include="StoreCommands\RemoveCurseStoreCommand.cs" />
     <Compile Include="StoreCommands\EnchantWeaponStoreCommand.cs" />
     <Compile Include="StoreCommands\EnchantArmourStoreCommand.cs" />
-    <Compile Include="StoreCommands\HireAnEscortStoreCommand.cs" />
+    <Compile Include="StoreCommands\HireEscortStoreCommand.cs" />
     <Compile Include="StoreCommands\IStoreCommand.cs" />
     <Compile Include="Commands\JournalCommand.cs" />
     <Compile Include="Commands\LocateCommand.cs" />
@@ -719,6 +721,7 @@
     <Compile Include="StoreCommands\ManualStoreCommand.cs" />
     <Compile Include="StoreCommands\MessageOneStoreCommand.cs" />
     <Compile Include="StoreCommands\ExamineStoreCommand.cs" />
+    <Compile Include="StoreCommands\DropStoreCommand.cs" />
     <Compile Include="StoreCommands\SellStoreCommand.cs" />
     <Compile Include="StoreCommands\PurchaseStoreCommand.cs" />
     <Compile Include="StoreCommands\QuerySymbolStoreCommand.cs" />
@@ -728,7 +731,6 @@
     <Compile Include="StoreCommands\SacrificeStoreCommand.cs" />
     <Compile Include="StoreCommands\ViewRacialHeroesStoreCommand.cs" />
     <Compile Include="StoreCommands\WieldStoreCommand.cs" />
-    <Compile Include="StoreFactory.cs" />
     <Compile Include="Stores\AlchemistStore.cs" />
     <Compile Include="Stores\ArmouryStore.cs" />
     <Compile Include="Stores\BlackStore.cs" />

@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Research a spell";
+
         public void Execute(Player player, Store store)
         {
             store.ResearchSpell();

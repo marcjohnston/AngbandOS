@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Identify all";
+
         public void Execute(Player player, Store store)
         {
             store.IdentifyAll();

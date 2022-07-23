@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Enchant your weapon";
+
         public void Execute(Player player, Store store)
         {
             store.EnchantWeapon();

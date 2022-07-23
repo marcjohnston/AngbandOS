@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "hire a Room";
+
         public void Execute(Player player, Store store)
         {
             store.HireRoom();

@@ -16,6 +16,8 @@ namespace Cthangband.StoreCommands
 
         public bool IsEnabled(Store store) => true;
 
+        public string Description => "";
+
         public bool RequiresRerendering => false;
 
         public void Execute(Player player, Store store)

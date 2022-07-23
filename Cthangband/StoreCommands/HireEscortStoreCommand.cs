@@ -4,12 +4,14 @@ using System;
 
 namespace Cthangband.StoreCommands
 {
-    internal class HireAnEscortStoreCommand : IStoreCommand
+    internal class HireEscortStoreCommand : IStoreCommand
 
     {
         public char Key => 'r';
 
         public bool RequiresRerendering => false;
+
+        public string Description => "Hire an escort";
 
         public void Execute(Player player, Store store)
         {

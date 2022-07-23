@@ -6,5 +6,6 @@
         bool IsEnabled(Store store);
         bool RequiresRerendering { get; }
         void Execute(Player player, Store store);
+        string Description { get; }
     }
 }

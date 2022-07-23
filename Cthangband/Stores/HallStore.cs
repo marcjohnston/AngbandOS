@@ -12,6 +12,11 @@ namespace Cthangband.Stores
         {
         }
 
+        protected override StoreOwner[] StoreOwners => new StoreOwner[]
+        {
+            new StoreOwner("Hall of Records", 0, 100, 99)
+        };
+
         public override string FeatureType => "HallOfRecords";
 
         protected override bool StoreWillBuy(Item item)
@@ -25,6 +30,10 @@ namespace Cthangband.Stores
         protected override string OwnerName => "";
         protected override string Title => "Hall Of Records";
         protected override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
-        protected override IStoreCommand AdvertisedStoreCommand1 => new BuyHouseStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand1 => new ViewRacialHeroesStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand2 => new ViewClassHeroesStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
+        protected override IStoreCommand AdvertisedStoreCommand4 => new BuyHouseStoreCommand();
+        protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

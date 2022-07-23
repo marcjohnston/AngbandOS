@@ -3,12 +3,14 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.StoreCommands
 {
-    internal class RestorationStoreCommand : IStoreCommand
+    internal class ReasearchItemStoreCommand : IStoreCommand
 
     {
         public char Key => 'r';
 
         public bool RequiresRerendering => false;
+
+        public string Description => "buy Restoration";
 
         public void Execute(Player player, Store store)
         {

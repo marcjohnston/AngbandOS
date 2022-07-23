@@ -10,6 +10,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "view racial Heroes";
+
         public void Execute(Player player, Store store)
         {
             Gui.Save();
@@ -19,9 +21,6 @@ namespace Cthangband.StoreCommands
             Gui.Load();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreHall);
-        }
+        public bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
     }
 }

@@ -3,17 +3,17 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.StoreCommands
 {
-    internal class ExamineStoreCommand : IStoreCommand
+    internal class GetStoreCommand : IStoreCommand
     {
-        public char Key => 'x';
+        public char Key => 'g';
 
         public bool RequiresRerendering => false;
 
-        public string Description => "eXamine an item";
+        public string Description => "Get an item";
 
         public void Execute(Player player, Store store)
         {
-            store.StoreExamine();
+            store.StorePurchase();
         }
 
         public bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);

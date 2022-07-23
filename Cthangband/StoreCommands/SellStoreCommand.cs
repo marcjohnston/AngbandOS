@@ -1,18 +1,21 @@
 ﻿using Cthangband.Commands;
+using Cthangband.Enumerations;
 
 namespace Cthangband.StoreCommands
 {
     internal class SellStoreCommand : IStoreCommand
     {
-        public char Key => 'd';
+        public char Key => 's';
 
         public bool RequiresRerendering => false;
+
+        public string Description => "Sell an item";
 
         public void Execute(Player player, Store store)
         {
             store.StoreSell();
         }
 
-        public bool IsEnabled(Store store) => true;
+        public bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using Cthangband.StoreCommands;
 using Cthangband.UI;
 using System;
 

@@ -1,4 +1,5 @@
-﻿using Cthangband.UI;
+﻿using Cthangband.StoreCommands;
+using Cthangband.UI;
 using System;
 
 namespace Cthangband.Commands

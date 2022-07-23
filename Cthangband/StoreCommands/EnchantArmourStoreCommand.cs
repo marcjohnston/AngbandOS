@@ -3,12 +3,14 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.StoreCommands
 {
-    internal class EnchantArmourStoreCommand : IStoreCommand
+    internal class EnchantArmorStoreCommand : IStoreCommand
 
     {
         public char Key => 'r';
 
         public bool RequiresRerendering => false;
+
+        public string Description => "Enchant your armour";
 
         public void Execute(Player player, Store store)
         {

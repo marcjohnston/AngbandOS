@@ -9,6 +9,8 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
+        public string Description => "Sacrifice Item";
+
         public void Execute(Player player, Store store)
         {
             store.SacrificeItem();
