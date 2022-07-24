@@ -18,7 +18,6 @@ namespace Cthangband
     {
         public int CurrentlyActingMonster;
         public int DunBias = 0;
-        public GetMonNumHookDelegate GetMonNumHook;
         public int NumRepro;
         public bool RepairMonsters;
         public bool ShimmerMonsters;
@@ -444,12 +443,12 @@ namespace Cthangband
             return table[i].Index;
         }
 
-        public void GetMonNumPrep()
+        public void GetMonNumPrep(GetMonNumHookDelegate getMonNumHook)
         {
             for (int i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
             {
                 AllocationEntry entry = SaveGame.Instance.AllocRaceTable[i];
-                if (GetMonNumHook == null || GetMonNumHook(entry.Index))
+                if (getMonNumHook == null || getMonNumHook(entry.Index))
                 {
                     entry.FilteredProbabiity = entry.BaseProbability;
                 }
@@ -730,11 +729,9 @@ namespace Cthangband
                         continue;
                     }
                     _placeMonsterIdx = rPtr.Index;
-                    GetMonNumHook = PlaceMonsterOkay;
-                    GetMonNumPrep();
+                    GetMonNumPrep(PlaceMonsterOkay);
                     int z = GetMonNum(rPtr.Level);
-                    GetMonNumHook = null;
-                    GetMonNumPrep();
+                    GetMonNumPrep(null);
                     if (z == 0)
                     {
                         break;
@@ -834,11 +831,9 @@ namespace Cthangband
                 return false;
             }
             _summonSpecificType = type;
-            GetMonNumHook = SummonSpecificOkay;
-            GetMonNumPrep();
+            GetMonNumPrep(SummonSpecificOkay);
             int rIdx = GetMonNum(((SaveGame.Instance.Difficulty + lev) / 2) + 5);
-            GetMonNumHook = null;
-            GetMonNumPrep();
+            GetMonNumPrep(null);
             if (rIdx == 0)
             {
                 return false;
@@ -883,11 +878,9 @@ namespace Cthangband
                 return false;
             }
             _summonSpecificType = type;
-            GetMonNumHook = SummonSpecificOkay;
-            GetMonNumPrep();
+            GetMonNumPrep(SummonSpecificOkay);
             int rIdx = GetMonNum(((SaveGame.Instance.Difficulty + lev) / 2) + 5);
-            GetMonNumHook = null;
-            GetMonNumPrep();
+            GetMonNumPrep(null);
             if (rIdx == 0)
             {
                 return false;

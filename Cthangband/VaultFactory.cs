@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
+using static Cthangband.MonsterList;
 
 namespace Cthangband
 {
@@ -661,6 +662,7 @@ namespace Cthangband
             int y2 = yval + 4;
             int x1 = xval - 11;
             int x2 = xval + 11;
+            GetMonNumHookDelegate getMonNumHook;
             for (y = y1 - 1; y <= y2 + 1; y++)
             {
                 for (x = x1 - 1; x <= x2 + 1; x++)
@@ -731,44 +733,44 @@ namespace Cthangband
                          SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
                 if (Program.Rng.DieRoll(2) != 1 && SaveGame.Instance.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxSymbol;
+                    getMonNumHook = VaultAuxSymbol;
                 }
                 else
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxClone;
+                    getMonNumHook = VaultAuxClone;
                 }
             }
             else if (tmp < 25)
             {
-                _level.Monsters.GetMonNumHook = VaultAuxJelly;
+                getMonNumHook = VaultAuxJelly;
             }
             else if (tmp < 50)
             {
-                _level.Monsters.GetMonNumHook = VaultAuxTreasure;
+                getMonNumHook = VaultAuxTreasure;
             }
             else if (tmp < 65)
             {
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxKennel;
+                    getMonNumHook  = VaultAuxKennel;
                 }
                 else
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxAnimal;
+                    getMonNumHook = VaultAuxAnimal;
                 }
             }
             else
             {
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxChapel;
+                    getMonNumHook = VaultAuxChapel;
                 }
                 else
                 {
-                    _level.Monsters.GetMonNumHook = VaultAuxUndead;
+                    getMonNumHook = VaultAuxUndead;
                 }
             }
-            _level.Monsters.GetMonNumPrep();
+            _level.Monsters.GetMonNumPrep(getMonNumHook);
             for (int i = 0; i < 64; i++)
             {
                 what[i] = _level.Monsters.GetMonNum(SaveGame.Instance.Difficulty + 10);
@@ -777,8 +779,7 @@ namespace Cthangband
                     empty = true;
                 }
             }
-            _level.Monsters.GetMonNumHook = null;
-            _level.Monsters.GetMonNumPrep();
+            _level.Monsters.GetMonNumPrep(null);
             if (empty)
             {
                 return;
@@ -810,6 +811,7 @@ namespace Cthangband
             int y2 = yval + 4;
             int x1 = xval - 11;
             int x2 = xval + 11;
+            GetMonNumHookDelegate getMonNumHook;
             for (y = y1 - 1; y <= y2 + 1; y++)
             {
                 for (x = x1 - 1; x <= x2 + 1; x++)
@@ -872,15 +874,15 @@ namespace Cthangband
             int tmp = Program.Rng.DieRoll(SaveGame.Instance.Difficulty);
             if (tmp < 20)
             {
-                _level.Monsters.GetMonNumHook = VaultAuxOrc;
+                getMonNumHook = VaultAuxOrc;
             }
             else if (tmp < 40)
             {
-                _level.Monsters.GetMonNumHook = VaultAuxTroll;
+                getMonNumHook = VaultAuxTroll;
             }
             else if (tmp < 55)
             {
-                _level.Monsters.GetMonNumHook = VaultAuxGiant;
+                getMonNumHook = VaultAuxGiant;
             }
             else if (tmp < 70)
             {
@@ -892,17 +894,17 @@ namespace Cthangband
                     } while ((Profile.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
                              Profile.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                              SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
-                    _level.Monsters.GetMonNumHook = VaultAuxSymbol;
+                    getMonNumHook = VaultAuxSymbol;
                 }
                 else
                 {
                     if (Program.Rng.DieRoll(2) == 1)
                     {
-                        _level.Monsters.GetMonNumHook = VaultAuxCult;
+                        getMonNumHook = VaultAuxCult;
                     }
                     else
                     {
-                        _level.Monsters.GetMonNumHook = VaultAuxChapel;
+                        getMonNumHook = VaultAuxChapel;
                     }
                 }
             }
@@ -942,13 +944,13 @@ namespace Cthangband
                             break;
                         }
                 }
-                _level.Monsters.GetMonNumHook = VaultAuxDragon;
+                getMonNumHook = VaultAuxDragon;
             }
             else
             {
-                _level.Monsters.GetMonNumHook = VaultAuxDemon;
+                getMonNumHook = VaultAuxDemon;
             }
-            _level.Monsters.GetMonNumPrep();
+            _level.Monsters.GetMonNumPrep(getMonNumHook);
             for (i = 0; i < 16; i++)
             {
                 what[i] = _level.Monsters.GetMonNum(SaveGame.Instance.Difficulty + 10);
@@ -957,8 +959,7 @@ namespace Cthangband
                     empty = true;
                 }
             }
-            _level.Monsters.GetMonNumHook = null;
-            _level.Monsters.GetMonNumPrep();
+            _level.Monsters.GetMonNumPrep(null);
             if (empty)
             {
                 return;
