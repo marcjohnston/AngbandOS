@@ -349,7 +349,7 @@ namespace Cthangband
         public void ApplyRandomResistance(int specific)
         {
             ItemForge forge = new ItemForge(this);
-            forge.ApplyRandomResistance(specific);
+            forge.ApplyRandomResistance(0, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
         public void AssignItemType(ItemType kIdx)
