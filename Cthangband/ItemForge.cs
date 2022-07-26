@@ -16,7 +16,6 @@ namespace Cthangband
     {
         private readonly Item _item;
         private int _artifactBias;
-        private GetObjNumHookDelegate _getObjNumHook;
 
         public ItemForge(Item item)
         {
@@ -1004,14 +1003,12 @@ namespace Cthangband
             {
                 if (good)
                 {
-                    _getObjNumHook = ItemType.KindIsGood;
-                    PrepareAllocationTable();
+                    PrepareAllocationTable(ItemType.KindIsGood);
                 }
                 ItemType kIdx = ItemType.RandomItemType(baselevel);
                 if (good)
                 {
-                    _getObjNumHook = null;
-                    PrepareAllocationTable();
+                    PrepareAllocationTable(null);
                 }
                 if (kIdx == null)
                 {
@@ -4266,12 +4263,12 @@ namespace Cthangband
             return false;
         }
 
-        private void PrepareAllocationTable()
+        private void PrepareAllocationTable(GetObjNumHookDelegate getObjNumHook)
         {
             AllocationEntry[] table = SaveGame.Instance.AllocKindTable;
             for (int i = 0; i < SaveGame.Instance.AllocKindSize; i++)
             {
-                if (_getObjNumHook == null || _getObjNumHook(table[i].Index))
+                if (getObjNumHook == null || getObjNumHook(table[i].Index))
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }
