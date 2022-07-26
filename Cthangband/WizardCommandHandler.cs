@@ -5,12 +5,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.ActivationPowers;
 using Cthangband.Enumerations;
 using Cthangband.Projection;
 using Cthangband.StaticData;
 using Cthangband.UI;
-using System;
 
 namespace Cthangband
 {
@@ -44,10 +42,6 @@ namespace Cthangband
 
                 case '?':
                     DoCmdWizHelp();
-                    break;
-
-                case 'A':
-
                     break;
 
                 case 'a':
@@ -408,7 +402,6 @@ namespace Cthangband
             Gui.Print("l = Learn About Objects", 12, 51);
             Gui.Print("o = Object Editor", 13, 51);
             Gui.Print("v = Generate Very Good Object", 14, 51);
-            Gui.Print("A = Activate Power", 15, 51);
             Gui.Print("Hit any key to continue", 43, 23);
             Gui.Inkey();
             Gui.Load();
@@ -610,33 +603,6 @@ namespace Cthangband
         {
             ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
             return kPtr.Name.Trim().Replace("$", "").Replace("~", "");
-        }
-
-        private void WizActivatePower()
-        {
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
-
-            Gui.Clear();
-            int index = 0;
-            string charList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-            foreach (IActivationPower activationPower in ActivationPowerManager.ActivationPowers)
-            {
-                int row = 2 + (index % 20);
-                int col = 30 * (index / 20);
-                char ch = (char)(_head[index / 20] + (char)(index % 20));
-                Gui.PrintLine($"{index}. {activationPower.GetType().Name}", row, col);
-            }
-            int maxNum = num;
-            if (!Gui.GetCom("Get what type of object? ", out ch))
-            {
-                return 0;
-            }
-
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
         }
 
         private void WizCreateItem()
