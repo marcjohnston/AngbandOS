@@ -5,10 +5,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using Cthangband.ActivationPowers;
 using Cthangband.Enumerations;
 using Cthangband.Projection;
 using Cthangband.StaticData;
 using Cthangband.UI;
+using System;
 
 namespace Cthangband
 {
@@ -42,6 +44,10 @@ namespace Cthangband
 
                 case '?':
                     DoCmdWizHelp();
+                    break;
+
+                case 'A':
+                    DoCmdWizActivatePower();
                     break;
 
                 case 'a':
@@ -204,6 +210,43 @@ namespace Cthangband
                 Profile.Instance.MsgPrint("Wizard mode activated.");
                 _player.RedrawNeeded.Set(RedrawFlag.PrTitle);
             }
+        }
+
+        private void DoCmdWizActivatePower()
+        {
+            Gui.FullScreenOverlay = true;
+            Gui.Save();
+            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+
+            Gui.Clear();
+            int index = 0;
+            foreach (IActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+            {
+                int row = 2 + (index % 40);
+                int col = 30 * (index / 40);
+                Gui.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                index++;
+            }
+            if (!Gui.GetString("Activation power?", out string selection, "", 3))
+            {
+                return;
+            }
+
+            Gui.Load();
+            Gui.FullScreenOverlay = false;
+            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+
+            if (!Int32.TryParse(selection, out int selectedIndex))
+            {
+                return;
+            }
+            selectedIndex--;
+            if (selectedIndex < 0 || selectedIndex > ActivationPowerManager.ActivationPowers.Length)
+            {
+                return;
+            }
+
+            ActivationPowerManager.ActivationPowers[selectedIndex].Activate(_player, _level);
         }
 
         private void DoCmdRedraw()

@@ -6,6 +6,17 @@
     internal abstract class ActivationPower : IActivationPower
     {
         /// <summary>
+        /// Returns the unique name for this activation power.
+        /// </summary>
+        public virtual string Name
+        {
+            get
+            {
+                return GetType().Name.Replace("ActivationPower", "");
+            }
+        }
+
+        /// <summary>
         /// Returns the message to be displayed to the player, before the activation power occurs.  No message is display, if empty or null.
         /// </summary>
         public abstract string PreActivationMessage { get; }

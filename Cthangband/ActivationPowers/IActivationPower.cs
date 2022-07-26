@@ -2,6 +2,14 @@
 {
     internal interface IActivationPower
     {
+        /// <summary>
+        /// Returns the unique name for this activation power.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Returns the message to be displayed to the player, before the activation power occurs.  No message is display, if empty or null.
+        /// </summary>
         string PreActivationMessage { get; }
 
         /// <summary>
