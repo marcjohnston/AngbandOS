@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows a deep green...";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             player.TryRestoringAbilityScore(Ability.Strength);
             player.TryRestoringAbilityScore(Ability.Intelligence);

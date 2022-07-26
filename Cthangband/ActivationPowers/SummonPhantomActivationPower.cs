@@ -14,7 +14,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "You summon a phantasmal servant.";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty, Constants.SummonPhantom, true);
             return true;

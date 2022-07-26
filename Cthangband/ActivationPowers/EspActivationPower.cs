@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             player.SetTimedTelepathy(player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
             return true;

@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             TargetEngine targetEngine = new TargetEngine(player, level);
             if (!targetEngine.TgtPt(out int ii, out int ij))

@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
         /// </summary>
         protected abstract string PostAimingMessage { get; }
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             TargetEngine targetEngine = new TargetEngine(player, level);
             if (!targetEngine.GetDirectionWithAim(out int direction))
@@ -24,7 +24,7 @@ namespace Cthangband.ActivationPowers
             {
                 Profile.Instance.MsgPrint(PostAimingMessage);
             }
-            return Activate(player, level, item, direction);
+            return Activate(player, level, direction);
         }
 
         /// <summary>
@@ -34,6 +34,6 @@ namespace Cthangband.ActivationPowers
         /// <param name="level"></param>
         /// <param name="item"></param>
         /// <param name="direction"></param>
-        protected abstract bool Activate(Player player, Level level, Item item, int direction);
+        protected abstract bool Activate(Player player, Level level, int direction);
     }
 }

@@ -25,9 +25,8 @@
         /// </summary>
         /// <param name="player"></param>
         /// <param name="level"></param>
-        /// <param name="item"></param>
         /// <returns></returns>
-        public abstract bool Activate(Player player, Level level, Item item);
+        public abstract bool Activate(Player player, Level level);
 
         /// <summary>
         /// Returns the gold value of the artifact power.

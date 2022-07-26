@@ -18,7 +18,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(8) + 8;
 
-        protected override bool Activate(Player player, Level level, Item item, int direction)
+        protected override bool Activate(Player player, Level level, int direction)
         {
             SaveGame.Instance.SpellEffects.FireBolt(new ProjectFire(SaveGame.Instance.SpellEffects), direction, Program.Rng.DiceRoll(9, 8));
             return true;

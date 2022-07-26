@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows deep blue...";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             Profile.Instance.MsgPrint("You feel a warm tingling inside...");
             player.RestoreHealth(700);

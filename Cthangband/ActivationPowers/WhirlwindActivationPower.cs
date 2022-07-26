@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 250;
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             for (int direction = 0; direction <= 9; direction++)
             {

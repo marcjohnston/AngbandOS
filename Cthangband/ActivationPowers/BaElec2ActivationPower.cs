@@ -18,7 +18,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 500;
 
-        protected override bool Activate(Player player, Level level, Item item, int direction)
+        protected override bool Activate(Player player, Level level, int direction)
         {
             SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), direction, 100, 3);
             return true;

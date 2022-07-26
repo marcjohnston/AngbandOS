@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 400;
 
-        protected override bool Activate(Player player, Level level, Item item, int direction)
+        protected override bool Activate(Player player, Level level, int direction)
         {
             SaveGame.Instance.SpellEffects.DrainLife(direction, 120);
             return true;

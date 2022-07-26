@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows many colours...";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(40) + 40);
             player.SetTimedLightningResistance(player.TimedLightningResistance + Program.Rng.DieRoll(40) + 40);

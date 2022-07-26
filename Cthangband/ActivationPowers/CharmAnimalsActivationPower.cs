@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 500;
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             SaveGame.Instance.SpellEffects.CharmAnimals(player.Level * 2);
             return true;

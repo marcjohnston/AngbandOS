@@ -59,7 +59,7 @@ namespace Cthangband
             {
                 Profile.Instance.MsgPrint(artifactPower.PreActivationMessage);
             }
-            if (artifactPower.Activate(Player, Level, item))
+            if (artifactPower.Activate(Player, Level))
             {
                 item.RechargeTimeLeft = artifactPower.RechargeTime(Player);
             }

@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             player.SetTimedInvulnerability(player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
             return true;

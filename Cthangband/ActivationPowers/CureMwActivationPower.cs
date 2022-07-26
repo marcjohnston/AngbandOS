@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It radiates deep purple...";
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
             player.SetTimedBleeding((player.TimedBleeding / 2) - 50);

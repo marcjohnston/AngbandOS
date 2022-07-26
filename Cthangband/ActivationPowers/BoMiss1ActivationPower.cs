@@ -18,7 +18,7 @@ namespace Cthangband.ActivationPowers
 
         protected override string PostAimingMessage => "";
 
-        protected override bool Activate(Player player, Level level, Item item, int direction)
+        protected override bool Activate(Player player, Level level, int direction)
         {
             SaveGame.Instance.SpellEffects.FireBolt(new ProjectMissile(SaveGame.Instance.SpellEffects), direction, Program.Rng.DiceRoll(2, 6));
             return true;

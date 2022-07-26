@@ -18,7 +18,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 200;
 
-        protected override bool Activate(Player player, Level level, Item item, int direction)
+        protected override bool Activate(Player player, Level level, int direction)
         {
             SaveGame.Instance.SpellEffects.FireBeam(new ProjectAwayAll(SaveGame.Instance.SpellEffects), direction, player.Level);
             return true;

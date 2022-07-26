@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(300) + 300;
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             SaveGame.Instance.SpellEffects.DispelEvil(player.Level * 5);
             return true;

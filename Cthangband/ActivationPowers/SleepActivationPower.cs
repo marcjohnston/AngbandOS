@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 55;
 
-        public override bool Activate(Player player, Level level, Item item)
+        public override bool Activate(Player player, Level level)
         {
             SaveGame.Instance.SpellEffects.SleepMonstersTouch();
             return true;
