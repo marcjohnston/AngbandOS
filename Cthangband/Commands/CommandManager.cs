@@ -11,7 +11,6 @@ namespace Cthangband.Commands
 
         static CommandManager()
         {
-            //List<Type> loadedTypes = new List<Type>();
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
@@ -33,5 +32,4 @@ namespace Cthangband.Commands
             }
         }
     }
-
 }

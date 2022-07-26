@@ -1,0 +1,52 @@
+﻿using Cthangband.Enumerations;
+using System;
+
+namespace Cthangband.ActivationPowers
+{
+    /// <summary>
+    /// Short range teleport to a specific destination.
+    /// </summary>
+    [Serializable]
+    internal class DimDoorActivationPower : ActivationPower
+    {
+        public override int RandomChance => 10;
+
+        public override string PreActivationMessage => "You open a dimensional gate. Choose a destination.";
+
+        public override bool Activate(Player player, Level level, Item item)
+        {
+            TargetEngine targetEngine = new TargetEngine(player, level);
+            if (!targetEngine.TgtPt(out int ii, out int ij))
+            {
+                return false;
+            }
+            player.Energy -= 60 - player.Level;
+            if (!level.GridPassableNoCreature(ij, ii) || 
+                level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) || 
+                level.Distance(ij, ii, player.MapY, player.MapX) > player.Level + 2 ||
+                Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
+            {
+                Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
+                player.Energy -= 100;
+                SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+            }
+            else
+            {
+                SaveGame.Instance.SpellEffects.TeleportPlayerTo(ij, ii);
+            }
+            return true;
+        }
+
+        public override int RechargeTime(Player player) => 100;
+
+        public override int Value => 10000;
+
+        public override string Description => "dimension door every 100 turns";
+
+        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+
+        public override uint SpecialPowerFlag => ItemFlag2.ResShards;
+
+        public override uint SpecialAbilityFlag => ItemFlag3.SlowDigest;
+    }
+}
