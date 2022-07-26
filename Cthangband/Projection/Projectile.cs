@@ -33,6 +33,16 @@ namespace Cthangband.Projection
             Level = SaveGame.Level;
         }
 
+        /// <summary>
+        /// Returns true, if the projectile actally hits and affects a monster.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="rad"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <param name="dam"></param>
+        /// <param name="flg"></param>
+        /// <returns></returns>
         public bool Fire(int who, int rad, int y, int x, int dam, ProjectionFlag flg)
         {
             int i, dist;

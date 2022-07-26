@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using Cthangband.ActivationPowers;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.UI;
@@ -223,7 +224,7 @@ namespace Cthangband
                 }
                 if (_item.BonusPowerType != 0 && string.IsNullOrEmpty(_item.RandartName))
                 {
-                    _item.BonusPowerSubType = Program.Rng.DieRoll(256);
+                    _item.BonusPowerSubType = ActivationPowerManager.GetRandom();
                 }
                 if (ePtr.Cost == 0)
                 {
@@ -868,7 +869,7 @@ namespace Cthangband
                     ? Constants.ActivationChance * 2
                     : Constants.ActivationChance) == 1)
             {
-                _item.BonusPowerSubType = 0;
+                _item.BonusPowerSubType = null;
                 GiveActivationPower();
             }
             if (fromScroll)
@@ -985,7 +986,7 @@ namespace Cthangband
                 _item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
                 if (_item.BonusPowerType != 0)
                 {
-                    _item.BonusPowerSubType = Program.Rng.DieRoll(256);
+                    _item.BonusPowerSubType = ActivationPowerManager.GetRandom();
                 }
             }
             _artifactBias = 0;
@@ -3963,7 +3964,7 @@ namespace Cthangband
 
         private void GiveActivationPower()
         {
-            int type = 0;
+            IActivationPower type = null;
             int chance = 0;
             if (_artifactBias != 0)
             {
@@ -3971,36 +3972,36 @@ namespace Cthangband
                 {
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        type = RandomArtifactPower.ActBoElec1;
+                        type = ActivationPowerManager.FindByType(typeof(BoElec1ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(5) != 1)
                     {
-                        type = RandomArtifactPower.ActBaElec2;
+                        type = ActivationPowerManager.FindByType(typeof(BaElec2ActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActBaElec3;
+                        type = ActivationPowerManager.FindByType(typeof(BaElec3ActivationPower));
                     }
                     chance = 101;
                 }
                 else if (_artifactBias == ArtifactBias.Poison)
                 {
-                    type = RandomArtifactPower.ActBaPois1;
+                    type = ActivationPowerManager.FindByType(typeof(BaPois1ActivationPower));
                     chance = 101;
                 }
                 else if (_artifactBias == ArtifactBias.Fire)
                 {
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        type = RandomArtifactPower.ActBoFire1;
+                        type = ActivationPowerManager.FindByType(typeof(BoFire1ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(5) != 1)
                     {
-                        type = RandomArtifactPower.ActBaFire1;
+                        type = ActivationPowerManager.FindByType(typeof(BaFire1ActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActBaFire2;
+                        type = ActivationPowerManager.FindByType(typeof(BaFire2ActivationPower));
                     }
                     chance = 101;
                 }
@@ -4009,66 +4010,71 @@ namespace Cthangband
                     chance = 101;
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        type = RandomArtifactPower.ActBoCold1;
+                        type = ActivationPowerManager.FindByType(typeof(BoCold1ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(3) != 1)
                     {
-                        type = RandomArtifactPower.ActBaCold1;
+                        type = ActivationPowerManager.FindByType(typeof(BaCold1ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(3) != 1)
                     {
-                        type = RandomArtifactPower.ActBaCold2;
+                        type = ActivationPowerManager.FindByType(typeof(BaCold2ActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActBaCold3;
+                        type = ActivationPowerManager.FindByType(typeof(BaCold3ActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Chaos)
                 {
                     chance = 50;
-                    type = Program.Rng.DieRoll(6) == 1
-                        ? RandomArtifactPower.ActSummonDemon
-                        : RandomArtifactPower.ActCallChaos;
+                    if (Program.Rng.DieRoll(6) == 1)
+                    {
+                        type = ActivationPowerManager.FindByType(typeof(SummonDemonActivationPower));
+                    }
+                    else
+                    {
+                        type = ActivationPowerManager.FindByType(typeof(CallChaosActivationPower));
+                    }
                 }
                 else if (_artifactBias == ArtifactBias.Priestly)
                 {
                     chance = 101;
                     if (Program.Rng.DieRoll(13) == 1)
                     {
-                        type = RandomArtifactPower.ActCharmUndead;
+                        type = ActivationPowerManager.FindByType(typeof(CharmUndeadActivationPower));
                     }
                     else if (Program.Rng.DieRoll(12) == 1)
                     {
-                        type = RandomArtifactPower.ActBanishEvil;
+                        type = ActivationPowerManager.FindByType(typeof(BanishEvilActivationPower));
                     }
                     else if (Program.Rng.DieRoll(11) == 1)
                     {
-                        type = RandomArtifactPower.ActDispEvil;
+                        type = ActivationPowerManager.FindByType(typeof(DispEvilActivationPower));
                     }
                     else if (Program.Rng.DieRoll(10) == 1)
                     {
-                        type = RandomArtifactPower.ActProtEvil;
+                        type = ActivationPowerManager.FindByType(typeof(ProtEvilActivationPower));
                     }
                     else if (Program.Rng.DieRoll(9) == 1)
                     {
-                        type = RandomArtifactPower.ActCure1000;
+                        type = ActivationPowerManager.FindByType(typeof(Cure1000ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(8) == 1)
                     {
-                        type = RandomArtifactPower.ActCure700;
+                        type = ActivationPowerManager.FindByType(typeof(Cure700ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(7) == 1)
                     {
-                        type = RandomArtifactPower.ActRestAll;
+                        type = ActivationPowerManager.FindByType(typeof(RestAllActivationPower));
                     }
                     else if (Program.Rng.DieRoll(6) == 1)
                     {
-                        type = RandomArtifactPower.ActRestLife;
+                        type = ActivationPowerManager.FindByType(typeof(RestLifeActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActCureMw;
+                        type = ActivationPowerManager.FindByType(typeof(CureMwActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Necromantic)
@@ -4076,35 +4082,35 @@ namespace Cthangband
                     chance = 101;
                     if (Program.Rng.DieRoll(66) == 1)
                     {
-                        type = RandomArtifactPower.ActWraith;
+                        type = ActivationPowerManager.FindByType(typeof(WraithActivationPower));
                     }
                     else if (Program.Rng.DieRoll(13) == 1)
                     {
-                        type = RandomArtifactPower.ActDispGood;
+                        type = ActivationPowerManager.FindByType(typeof(DispGoodActivationPower));
                     }
                     else if (Program.Rng.DieRoll(9) == 1)
                     {
-                        type = RandomArtifactPower.ActMassGeno;
+                        type = ActivationPowerManager.FindByType(typeof(MassGenoActivationPower));
                     }
                     else if (Program.Rng.DieRoll(8) == 1)
                     {
-                        type = RandomArtifactPower.ActCarnage;
+                        type = ActivationPowerManager.FindByType(typeof(CarnageActivationPower));
                     }
                     else if (Program.Rng.DieRoll(13) == 1)
                     {
-                        type = RandomArtifactPower.ActSummonUndead;
+                        type = ActivationPowerManager.FindByType(typeof(SummonUndeadActivationPower));
                     }
                     else if (Program.Rng.DieRoll(9) == 1)
                     {
-                        type = RandomArtifactPower.ActVampire2;
+                        type = ActivationPowerManager.FindByType(typeof(Vampire2ActivationPower));
                     }
                     else if (Program.Rng.DieRoll(6) == 1)
                     {
-                        type = RandomArtifactPower.ActCharmUndead;
+                        type = ActivationPowerManager.FindByType(typeof(CharmUndeadActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActVampire1;
+                        type = ActivationPowerManager.FindByType(typeof(Vampire1ActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Law)
@@ -4112,15 +4118,15 @@ namespace Cthangband
                     chance = 101;
                     if (Program.Rng.DieRoll(8) == 1)
                     {
-                        type = RandomArtifactPower.ActBanishEvil;
+                        type = ActivationPowerManager.FindByType(typeof(BanishEvilActivationPower));
                     }
                     else if (Program.Rng.DieRoll(4) == 1)
                     {
-                        type = RandomArtifactPower.ActDispEvil;
+                        type = ActivationPowerManager.FindByType(typeof(DispEvilActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActProtEvil;
+                        type = ActivationPowerManager.FindByType(typeof(ProtEvilActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Rogue)
@@ -4128,23 +4134,23 @@ namespace Cthangband
                     chance = 101;
                     if (Program.Rng.DieRoll(50) == 1)
                     {
-                        type = RandomArtifactPower.ActSpeed;
+                        type = ActivationPowerManager.FindByType(typeof(SpeedActivationPower));
                     }
                     else if (Program.Rng.DieRoll(4) == 1)
                     {
-                        type = RandomArtifactPower.ActSleep;
+                        type = ActivationPowerManager.FindByType(typeof(SleepActivationPower));
                     }
                     else if (Program.Rng.DieRoll(3) == 1)
                     {
-                        type = RandomArtifactPower.ActDetectAll;
+                        type = ActivationPowerManager.FindByType(typeof(DetectAllActivationPower));
                     }
                     else if (Program.Rng.DieRoll(8) == 1)
                     {
-                        type = RandomArtifactPower.ActIdFull;
+                        type = ActivationPowerManager.FindByType(typeof(IdFullActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActIdPlain;
+                        type = ActivationPowerManager.FindByType(typeof(IdPlainActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Mage)
@@ -4152,168 +4158,67 @@ namespace Cthangband
                     chance = 66;
                     if (Program.Rng.DieRoll(20) == 1)
                     {
-                        type = Constants.SummonElemental;
+                        type = ActivationPowerManager.FindByType(typeof(SummonElementalActivationPower));
                     }
                     else if (Program.Rng.DieRoll(10) == 1)
                     {
-                        type = Constants.SummonPhantom;
+                        type = ActivationPowerManager.FindByType(typeof(SummonPhantomActivationPower));
                     }
                     else if (Program.Rng.DieRoll(5) == 1)
                     {
-                        type = RandomArtifactPower.ActRuneExplo;
+                        type = ActivationPowerManager.FindByType(typeof(RuneExploActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActEsp;
+                        type = ActivationPowerManager.FindByType(typeof(EspActivationPower));
                     }
                 }
                 else if (_artifactBias == ArtifactBias.Warrior)
                 {
                     chance = 80;
-                    type = Program.Rng.DieRoll(100) == 1
-                        ? RandomArtifactPower.ActInvuln
-                        : RandomArtifactPower.ActBerserk;
+                    if (Program.Rng.DieRoll(100) == 1)
+                    {
+                        type = ActivationPowerManager.FindByType(typeof(InvulnActivationPower));
+
+                    }
+                    else
+                    {
+                        type = ActivationPowerManager.FindByType(typeof(BerserkActivationPower));
+                    }
                 }
                 else if (_artifactBias == ArtifactBias.Ranger)
                 {
                     chance = 101;
                     if (Program.Rng.DieRoll(20) == 1)
                     {
-                        type = RandomArtifactPower.ActCharmAnimals;
+                        type = ActivationPowerManager.FindByType(typeof(CharmAnimalsActivationPower));
                     }
                     else if (Program.Rng.DieRoll(7) == 1)
                     {
-                        type = RandomArtifactPower.ActSummonAnimal;
+                        type = ActivationPowerManager.FindByType(typeof(SummonAnimalActivationPower));
                     }
                     else if (Program.Rng.DieRoll(6) == 1)
                     {
-                        type = RandomArtifactPower.ActCharmAnimal;
+                        type = ActivationPowerManager.FindByType(typeof(CharmAnimalActivationPower));
                     }
                     else if (Program.Rng.DieRoll(4) == 1)
                     {
-                        type = RandomArtifactPower.ActResistAll;
+                        type = ActivationPowerManager.FindByType(typeof(ResistAllActivationPower));
                     }
                     else if (Program.Rng.DieRoll(3) == 1)
                     {
-                        type = RandomArtifactPower.ActSatiate;
+                        type = ActivationPowerManager.FindByType(typeof(SatiateActivationPower));
                     }
                     else
                     {
-                        type = RandomArtifactPower.ActCurePoison;
+                        type = ActivationPowerManager.FindByType(typeof(CurePoisonActivationPower));
                     }
                 }
             }
-            while (type == 0 || Program.Rng.DieRoll(100) >= chance)
+            while (type == null || Program.Rng.DieRoll(100) >= chance)
             {
-                type = Program.Rng.DieRoll(255);
-                switch (type)
-                {
-                    case RandomArtifactPower.ActSunlight:
-                    case RandomArtifactPower.ActBoMiss1:
-                    case RandomArtifactPower.ActBaPois1:
-                    case RandomArtifactPower.ActBoElec1:
-                    case RandomArtifactPower.ActBoAcid1:
-                    case RandomArtifactPower.ActBoCold1:
-                    case RandomArtifactPower.ActBoFire1:
-                    case RandomArtifactPower.ActConfuse:
-                    case RandomArtifactPower.ActSleep:
-                    case RandomArtifactPower.ActQuake:
-                    case RandomArtifactPower.ActCureLw:
-                    case RandomArtifactPower.ActCureMw:
-                    case RandomArtifactPower.ActCurePoison:
-                    case RandomArtifactPower.ActBerserk:
-                    case RandomArtifactPower.ActLight:
-                    case RandomArtifactPower.ActMapLight:
-                    case RandomArtifactPower.ActDestDoor:
-                    case RandomArtifactPower.ActStoneMud:
-                    case RandomArtifactPower.ActTeleport:
-                        chance = 101;
-                        break;
-
-                    case RandomArtifactPower.ActBaCold1:
-                    case RandomArtifactPower.ActBaFire1:
-                    case RandomArtifactPower.ActDrain1:
-                    case RandomArtifactPower.ActTeleAway:
-                    case RandomArtifactPower.ActEsp:
-                    case RandomArtifactPower.ActResistAll:
-                    case RandomArtifactPower.ActDetectAll:
-                    case RandomArtifactPower.ActRecall:
-                    case RandomArtifactPower.ActSatiate:
-                    case RandomArtifactPower.ActRecharge:
-                        chance = 85;
-                        break;
-
-                    case RandomArtifactPower.ActTerror:
-                    case RandomArtifactPower.ActProtEvil:
-                    case RandomArtifactPower.ActIdPlain:
-                        chance = 75;
-                        break;
-
-                    case RandomArtifactPower.ActDrain2:
-                    case RandomArtifactPower.ActVampire1:
-                    case RandomArtifactPower.ActBoMiss2:
-                    case RandomArtifactPower.ActBaFire2:
-                    case RandomArtifactPower.ActRestLife:
-                        chance = 66;
-                        break;
-
-                    case RandomArtifactPower.ActBaCold3:
-                    case RandomArtifactPower.ActBaElec3:
-                    case RandomArtifactPower.ActWhirlwind:
-                    case RandomArtifactPower.ActVampire2:
-                    case RandomArtifactPower.ActCharmAnimal:
-                        chance = 50;
-                        break;
-
-                    case RandomArtifactPower.ActSummonAnimal:
-                        chance = 40;
-                        break;
-
-                    case RandomArtifactPower.ActDispEvil:
-                    case RandomArtifactPower.ActBaMiss3:
-                    case RandomArtifactPower.ActDispGood:
-                    case RandomArtifactPower.ActBanishEvil:
-                    case RandomArtifactPower.ActCarnage:
-                    case RandomArtifactPower.ActMassGeno:
-                    case RandomArtifactPower.ActCharmUndead:
-                    case RandomArtifactPower.ActCharmOther:
-                    case RandomArtifactPower.ActSummonPhantom:
-                    case RandomArtifactPower.ActRestAll:
-                    case RandomArtifactPower.ActRuneExplo:
-                        chance = 33;
-                        break;
-
-                    case RandomArtifactPower.ActCallChaos:
-                    case RandomArtifactPower.ActShard:
-                    case RandomArtifactPower.ActCharmAnimals:
-                    case RandomArtifactPower.ActCharmOthers:
-                    case RandomArtifactPower.ActSummonElemental:
-                    case RandomArtifactPower.ActCure700:
-                    case RandomArtifactPower.ActSpeed:
-                    case RandomArtifactPower.ActIdFull:
-                    case RandomArtifactPower.ActRuneProt:
-                        chance = 25;
-                        break;
-
-                    case RandomArtifactPower.ActCure1000:
-                    case RandomArtifactPower.ActXtraSpeed:
-                    case RandomArtifactPower.ActDetectXtra:
-                    case RandomArtifactPower.ActDimDoor:
-                        chance = 10;
-                        break;
-
-                    case RandomArtifactPower.ActSummonUndead:
-                    case RandomArtifactPower.ActSummonDemon:
-                    case RandomArtifactPower.ActWraith:
-                    case RandomArtifactPower.ActInvuln:
-                    case RandomArtifactPower.ActAlchemy:
-                        chance = 5;
-                        break;
-
-                    default:
-                        chance = 0;
-                        break;
-                }
+                type = ActivationPowerManager.GetRandom();
+                chance = type.RandomChance;
             }
             _item.BonusPowerSubType = type;
             _item.RandartFlags3.Set(ItemFlag3.Activate);

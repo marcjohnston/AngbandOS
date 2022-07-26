@@ -1238,6 +1238,12 @@ namespace Cthangband.Spells
             Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeDoor(this), flg);
         }
 
+        /// <summary>
+        /// Returns true, if the drain life actally hits and affects a monster.
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="dam"></param>
+        /// <returns></returns>
         public bool DrainLife(int dir, int dam)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
@@ -2267,6 +2273,17 @@ namespace Cthangband.Spells
             }
         }
 
+        /// <summary>
+        /// Returns true, if the projectile actally hits and affects a monster.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="rad"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <param name="dam"></param>
+        /// <param name="projectile"></param>
+        /// <param name="flg"></param>
+        /// <returns></returns>
         public bool Project(int who, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
         {
             return projectile.Fire(who, rad, y, x, dam, flg);
@@ -4053,6 +4070,14 @@ namespace Cthangband.Spells
             return 6;
         }
 
+        /// <summary>
+        /// Returns true, if the projectile actually hits and affects a monster.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="dir"></param>
+        /// <param name="dam"></param>
+        /// <param name="flg"></param>
+        /// <returns></returns>
         private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
         {
             TargetEngine targetEngine = new TargetEngine(Player, Level);

@@ -1,0 +1,50 @@
+﻿using Cthangband.Enumerations;
+using Cthangband.StaticData;
+using System;
+
+namespace Cthangband.ActivationPowers
+{
+    /// <summary>
+    /// Summon undead, with a 1-in-3 chance of it being hostile.
+    /// </summary>
+    [Serializable]
+    internal class SummonUndeadActivationPower : ActivationPower
+    {
+        public override int RandomChance => 5;
+
+        public override string PreActivationMessage => "";
+
+        public override bool Activate(Player player, Level level, Item item)
+        {
+            if (Program.Rng.DieRoll(3) == 1)
+            {
+                if (level.Monsters.SummonSpecific(player.MapY, player.MapX, (int)(player.Level * 1.5), player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
+                {
+                    Profile.Instance.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                    Profile.Instance.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                }
+            }
+            else
+            {
+                if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, (int)(player.Level * 1.5), player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead, player.Level > 24 && Program.Rng.DieRoll(3) == 1))
+                {
+                    Profile.Instance.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                    Profile.Instance.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                }
+            }
+            return true;
+        }
+
+        public override int RechargeTime(Player player) => 666 + Program.Rng.DieRoll(333);
+
+        public override int Value => 20000;
+
+        public override string Description => "summon undead every 666+d333 turns";
+
+        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+
+        public override uint SpecialPowerFlag => ItemFlag2.ResPois;
+
+        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+    }
+}
