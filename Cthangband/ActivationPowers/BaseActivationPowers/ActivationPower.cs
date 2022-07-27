@@ -5,7 +5,7 @@
     /// </summary>
     internal abstract class ActivationPower : IActivationPower
     {
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual string Name
         {
             get
@@ -14,31 +14,31 @@
             }
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract string PreActivationMessage { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract int RechargeTime(Player player);
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract int RandomChance { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract bool Activate(Player player, Level level);
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract int Value { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract string Description { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract uint SpecialSustainFlag { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract uint SpecialPowerFlag { get; }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public abstract uint SpecialAbilityFlag { get; }
     }
 }
