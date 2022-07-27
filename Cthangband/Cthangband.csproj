@@ -144,7 +144,7 @@
     <Compile Include="ActivationPowers\WraithActivationPower.cs" />
     <Compile Include="ActivationPowers\XtraSpeedActivationPower.cs" />
     <Compile Include="ArtifactBiases\AcidArtifactBias.cs" />
-    <Compile Include="ArtifactBiases\ArtifactBias.cs" />
+    <Compile Include="ArtifactBiases\BaseArtifactBiases\ArtifactBias.cs" />
     <Compile Include="ArtifactBiases\ChaosArtifactBias.cs" />
     <Compile Include="ArtifactBiases\CharismaArtifactBias.cs" />
     <Compile Include="ArtifactBiases\ColdArtifactBias.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="ArtifactBiases\DexterityArtifactBias.cs" />
     <Compile Include="ArtifactBiases\ElectricityArtifactBias.cs" />
     <Compile Include="ArtifactBiases\FireArtifactBias.cs" />
-    <Compile Include="ArtifactBiases\IArtifactBias.cs" />
+    <Compile Include="ArtifactBiases\BaseArtifactBiases\IArtifactBias.cs" />
     <Compile Include="ArtifactBiases\IntelligenceArtifactBias.cs" />
     <Compile Include="ArtifactBiases\LawArtifactBias.cs" />
     <Compile Include="ArtifactBiases\MageArtifactBias.cs" />

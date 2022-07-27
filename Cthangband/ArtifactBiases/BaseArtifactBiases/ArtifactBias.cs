@@ -7,40 +7,40 @@ namespace Cthangband.ArtifactBiases
     /// </summary>
     internal abstract class ArtifactBias : IArtifactBias
     {
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual int ImmunityLuck => 20;
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual bool ApplyBonuses(Item item)
         {
             return false;
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual bool ApplyRandomResistances(Item item)
         {
             return false;
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual bool ApplyMiscPowers(Item item)
         {
             return false;
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual bool ApplySlaying(Item item)
         {
             return false;
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual IActivationPower GetActivationPowerType(Item item)
         {
             return null;
         }
 
-        /// <inheritdoc></inheritdoc>
+        /// <inheritdoc/>
         public virtual int ActivationPowerChance => 101;
     }
 }
