@@ -5,9 +5,7 @@
     /// </summary>
     internal abstract class ActivationPower : IActivationPower
     {
-        /// <summary>
-        /// Returns the unique name for this activation power.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public virtual string Name
         {
             get
@@ -16,52 +14,31 @@
             }
         }
 
-        /// <summary>
-        /// Returns the message to be displayed to the player, before the activation power occurs.  No message is display, if empty or null.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract string PreActivationMessage { get; }
 
-        /// <summary>
-        /// Returns the amount of time the artifact needs to recharge, if the Activate method returns true.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract int RechargeTime(Player player);
 
-        /// <summary>
-        /// Returns the chance this ArtifactPower will be selected when being chosen randomly.  
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract int RandomChance { get; }
 
-        /// <summary>
-        /// Activates the artifact power; returning true, if the activation was successful.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="level"></param>
-        /// <returns></returns>
+        /// <inheritdoc></inheritdoc>
         public abstract bool Activate(Player player, Level level);
 
-        /// <summary>
-        /// Returns the gold value of the artifact power.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract int Value { get; }
 
-        /// <summary>
-        /// Returns the description of the artifact power.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract string Description { get; }
 
-        /// <summary>
-        /// Returns the special sustain flag.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract uint SpecialSustainFlag { get; }
 
-        /// <summary>
-        /// Returns the special power flag.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract uint SpecialPowerFlag { get; }
 
-        /// <summary>
-        /// Returns the special ability flag.
-        /// </summary>
+        /// <inheritdoc></inheritdoc>
         public abstract uint SpecialAbilityFlag { get; }
     }
 }

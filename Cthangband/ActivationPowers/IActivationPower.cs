@@ -27,7 +27,6 @@
         /// </summary>
         /// <param name="player"></param>
         /// <param name="level"></param>
-        /// <param name="item"></param>
         /// <returns></returns>
         bool Activate(Player player, Level level);
 
