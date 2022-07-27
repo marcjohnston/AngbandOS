@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using Cthangband.ActivationPowers;
+using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.UI;
@@ -349,7 +350,8 @@ namespace Cthangband
         public void ApplyRandomResistance(int specific)
         {
             ItemForge forge = new ItemForge(this);
-            forge.ApplyRandomResistance(0, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
+            IArtifactBias artifactBias = null;
+            forge.ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
         public void AssignItemType(ItemType kIdx)
