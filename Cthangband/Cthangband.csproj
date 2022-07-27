@@ -68,7 +68,7 @@
     <Compile Include="AllocationEntry.cs" />
     <Compile Include="ActivationPowers\AlchemyActivationPower.cs" />
     <Compile Include="ActivationPowers\ActivationPowerManager.cs" />
-    <Compile Include="ActivationPowers\ActivationPower.cs" />
+    <Compile Include="ActivationPowers\BaseActivationPowers\ActivationPower.cs" />
     <Compile Include="ActivationPowers\BaCold1ActivationPower.cs" />
     <Compile Include="ActivationPowers\BaCold2ActivationPower.cs" />
     <Compile Include="ActivationPowers\BaCold3ActivationPower.cs" />
@@ -102,13 +102,13 @@
     <Compile Include="ActivationPowers\DetectAllActivationPower.cs" />
     <Compile Include="ActivationPowers\DetectXtraActivationPower.cs" />
     <Compile Include="ActivationPowers\DimDoorActivationPower.cs" />
-    <Compile Include="ActivationPowers\DirectionalActivationPower.cs" />
+    <Compile Include="ActivationPowers\BaseActivationPowers\DirectionalActivationPower.cs" />
     <Compile Include="ActivationPowers\DispEvilActivationPower.cs" />
     <Compile Include="ActivationPowers\DispGoodActivationPower.cs" />
     <Compile Include="ActivationPowers\Drain1ActivationPower.cs" />
     <Compile Include="ActivationPowers\Drain2ActivationPower.cs" />
     <Compile Include="ActivationPowers\EspActivationPower.cs" />
-    <Compile Include="ActivationPowers\IActivationPower.cs" />
+    <Compile Include="ActivationPowers\BaseActivationPowers\IActivationPower.cs" />
     <Compile Include="ActivationPowers\IdFullActivationPower.cs" />
     <Compile Include="ActivationPowers\IdPlainActivationPower.cs" />
     <Compile Include="ActivationPowers\InvulnActivationPower.cs" />
