@@ -10,7 +10,7 @@ namespace Cthangband.ArtifactBiases
         /// <summary>
         /// Returns the chance that the object will have immunity resistance.  The chance relates to a 1-in-chance value.
         /// </summary>
-        int ImmunityLuck { get; }
+        int ImmunityLuckOneInChance { get; }
 
         /// <summary>
         /// Apply bonuses to the item and returns true, if additional bonuses can be applied.  By default, no bonuses are applied and false is returned.

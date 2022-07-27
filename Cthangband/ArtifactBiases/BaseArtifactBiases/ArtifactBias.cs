@@ -8,7 +8,7 @@ namespace Cthangband.ArtifactBiases
     internal abstract class ArtifactBias : IArtifactBias
     {
         /// <inheritdoc/>
-        public virtual int ImmunityLuck => 20;
+        public virtual int ImmunityLuckOneInChance => 20;
 
         /// <inheritdoc/>
         public virtual bool ApplyBonuses(Item item)

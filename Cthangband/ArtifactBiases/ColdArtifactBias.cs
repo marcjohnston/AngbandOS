@@ -15,7 +15,7 @@ namespace Cthangband.ArtifactBiases
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(ImmunityLuck) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImCold))
+            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImCold))
             {
                 item.RandartFlags2.Set(ItemFlag2.ImCold);
                 if (Program.Rng.DieRoll(2) == 1)
