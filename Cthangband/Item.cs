@@ -12,6 +12,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 using System.IO;
+using System.Xml.Linq;
 
 namespace Cthangband
 {
@@ -634,7 +635,561 @@ namespace Cthangband
             return forge.CreateRandart(fromScroll);
         }
 
-        public string Description(bool pref, int mode)
+        private string Pluralize(string singular, int count)
+        {
+            if (count == 1)
+            {
+                return singular;
+            }
+            else
+            {
+                if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
+                {
+                    return $"{singular}es";
+                }
+                else
+                {
+                    return $"{singular}s";
+                }
+            }
+        }
+
+        private string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count)
+        {
+            if (Count <= 0)
+            {
+                return $"no more {singularNoun}";
+            }
+            else if (Count > 1)
+            {
+                return $"{Count} {singularNoun}";
+            }
+            else if (IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName)))
+            {
+                return $"The {singularNoun}";
+            }
+            else if (includeSingularPrefix)
+            {
+                if (singularNoun[0].IsVowel())
+                {
+                    return $"an {singularNoun}";
+                }
+                else
+                {
+                    return $"a {singularNoun}";
+                }
+            }
+            else
+            {
+                return singularNoun;
+            }
+        }
+
+        public string ApplyGetPrefixCountMacro(string name, int count)
+        {
+            bool includeSingularPrefix = (name[0] == '&');
+            if (includeSingularPrefix)
+            {
+                name = name.Substring(2);
+            }
+            return GetPrefixCount(includeSingularPrefix, name, count);
+        }
+
+        public string ApplyPlurizationMacro(string name, int count)
+        {
+            int pos = name.IndexOf("~");
+            if (pos >= 0)
+            {
+                return $"{Pluralize(name.Substring(0, pos), Count)}{name.Substring(pos + 1)}";
+            }
+            else
+            {
+                return name;
+            }
+        }
+
+        public string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count)
+        {
+            string pluralizedName = ApplyPlurizationMacro(name, Count);
+            return includeCountPrefix ? ApplyGetPrefixCountMacro(pluralizedName, Count) : pluralizedName;
+        }
+
+        public string GetSignedValue(int value)
+        {
+            if (value >= 0)
+            {
+                return $"+{value}";
+            }
+            else
+            {
+                return $"{value}";
+            }
+        }
+
+        public string Delimit(string prefix, string delimiter, string suffix)
+        {
+            if (!String.IsNullOrEmpty(prefix) && !String.IsNullOrEmpty(suffix))
+            {
+                return $"{prefix}{delimiter}{suffix}";
+            }
+            else
+            {
+                return $"{prefix}{suffix}";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="includeCountPrefix">Specify true, to prefix the description with the number of items (e.g. 5 Brown Dragon Scale Mails);
+        /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        private string NewDescription(bool includeCountPrefix, int mode)
+        {
+            const char c1 = '{';
+            const char c2 = '}';
+            string tmpVal2 = "";
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
+            ItemType kPtr = ItemType;
+            if (kPtr == null)
+            {
+                return "(nothing)";
+            }
+            GetMergedFlags(f1, f2, f3);
+            int indexx = ItemSubCategory;
+            string basenm = ApplyDescriptionMacros(includeCountPrefix, kPtr.Name, Count);
+            switch (Category)
+            {
+                case ItemCategory.Skeleton:
+                case ItemCategory.Bottle:
+                case ItemCategory.Junk:
+                case ItemCategory.Spike:
+                case ItemCategory.Flask:
+                case ItemCategory.Chest:
+                case ItemCategory.Shot:
+                case ItemCategory.Bolt:
+                case ItemCategory.Arrow:
+                case ItemCategory.Bow:
+                case ItemCategory.Hafted:
+                case ItemCategory.Polearm:
+                case ItemCategory.Sword:
+                case ItemCategory.Digging:
+                case ItemCategory.Boots:
+                case ItemCategory.Gloves:
+                case ItemCategory.Cloak:
+                case ItemCategory.Crown:
+                case ItemCategory.Helm:
+                case ItemCategory.Shield:
+                case ItemCategory.SoftArmor:
+                case ItemCategory.HardArmor:
+                case ItemCategory.DragArmor:
+                case ItemCategory.Light:
+                    break;
+                case ItemCategory.Amulet:
+                    {
+                        if (IsFixedArtifact() && IsFlavourAware())
+                        {
+                            break;
+                        }
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.AmuletFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Amulet", Count)}{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Ring:
+                    {
+                        if (IsFixedArtifact() && IsFlavourAware())
+                        {
+                            break;
+                        }
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RingFlavours[indexx].Name} ";
+                        if (!IsFlavourAware() && ItemSubCategory == RingType.Power)
+                        {
+                            flavour = "Plain Gold";
+                        }
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Ring", Count)}{ofName}";
+                        tmpVal2 = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Staff:
+                    {
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Staff", Count)}{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Wand:
+                    {
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.WandFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
+                        tmpVal2 = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Rod:
+                    {
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RodFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Rod", Count)}{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Scroll:
+                    {
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : SaveGame.Instance.ScrollFlavours[indexx].Name;
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{Pluralize("Scroll", Count)} titled \"{flavour}\"{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Potion:
+                    {
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.PotionFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Potion", Count)}{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Food:
+                    {
+                        if (ItemSubCategory >= Enumerations.FoodType.MinFood)
+                        {
+                            break;
+                        }
+                        string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.MushroomFlavours[indexx].Name} ";
+                        string ofName = IsFlavourAware() ? $" of {kPtr.Name}" : "";
+                        string name = $"{flavour}{Pluralize("Mushroom", Count)}{ofName}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.LifeBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Life Magic" : $"Life {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.SorceryBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Sorcery" : $"Sorcery {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.NatureBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Nature Magic" : $"Nature {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.ChaosBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Chaos Magic" : $"Chaos {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.DeathBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Death Magic" : $"Death {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.TarotBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Tarot Magic" : $"Tarot {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.FolkBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Folk Magic" : $"Folk {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.CorporealBook:
+                    {
+                        string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Corporeal Magic" : $"Corporeal {Pluralize("Spellbook", Count)}";
+                        name = $"{name} {kPtr.Name}";
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        break;
+                    }
+                case ItemCategory.Gold:
+                    return basenm;
+
+                default:
+                    return "(nothing)";
+            }
+            if (IsKnown())
+            {
+                if (!string.IsNullOrEmpty(RandartName))
+                {
+                    basenm += ' ';
+                    basenm += RandartName;
+                }
+                else if (FixedArtifactIndex != 0)
+                {
+                    FixedArtifact aPtr = Profile.Instance.FixedArtifacts[FixedArtifactIndex];
+                    basenm += ' ';
+                    basenm += aPtr.Name;
+                }
+                else if (RareItemTypeIndex != Enumerations.RareItemType.None)
+                {
+                    RareItemType ePtr = Profile.Instance.RareItemTypes[RareItemTypeIndex];
+                    basenm += ' ';
+                    basenm += ePtr.Name;
+                }
+            }
+            if (mode < 1)
+            {
+                return basenm;
+            }
+            if (Category == ItemCategory.Chest)
+            {
+                if (!IsKnown())
+                {
+                }
+                else if (TypeSpecificValue == 0)
+                {
+                    basenm += " (empty)";
+                }
+                else if (TypeSpecificValue < 0)
+                {
+                    if (GlobalData.ChestTraps[-TypeSpecificValue] != 0)
+                    {
+                        basenm += " (disarmed)";
+                    }
+                    else
+                    {
+                        basenm += " (unlocked)";
+                    }
+                }
+                else
+                {
+                    switch (GlobalData.ChestTraps[TypeSpecificValue])
+                    {
+                        case 0:
+                            {
+                                basenm += " (Locked)";
+                                break;
+                            }
+                        case ChestTrap.ChestLoseStr:
+                            {
+                                basenm += " (Poison Needle)";
+                                break;
+                            }
+                        case ChestTrap.ChestLoseCon:
+                            {
+                                basenm += " (Poison Needle)";
+                                break;
+                            }
+                        case ChestTrap.ChestPoison:
+                            {
+                                basenm += " (Gas Trap)";
+                                break;
+                            }
+                        case ChestTrap.ChestParalyze:
+                            {
+                                basenm += " (Gas Trap)";
+                                break;
+                            }
+                        case ChestTrap.ChestExplode:
+                            {
+                                basenm += " (Explosion Device)";
+                                break;
+                            }
+                        case ChestTrap.ChestSummon:
+                            {
+                                basenm += " (Summoning Runes)";
+                                break;
+                            }
+                        default:
+                            {
+                                basenm += " (Multiple Traps)";
+                                break;
+                            }
+                    }
+                }
+            }
+            switch (Category)
+            {
+                case ItemCategory.Shot:
+                case ItemCategory.Bolt:
+                case ItemCategory.Arrow:
+                case ItemCategory.Hafted:
+                case ItemCategory.Polearm:
+                case ItemCategory.Sword:
+                case ItemCategory.Digging:
+                    basenm += $" ({DamageDice}d{DamageDiceSides})";
+                    break;
+
+                case ItemCategory.Bow:
+                    int power = ItemSubCategory % 10;
+                    if (f3.IsSet(ItemFlag3.XtraMight))
+                    {
+                        power++;
+                    }
+                    basenm += $" (x{power})";
+                    break;
+            }
+            if (IsKnown())
+            {
+                if (f3.IsSet(ItemFlag3.ShowMods) || (BonusToHit != 0 && BonusDamage != 0) || Category == ItemCategory.Shot
+                    || Category == ItemCategory.Bolt || Category == ItemCategory.Arrow || Category == ItemCategory.Bow 
+                    || Category == ItemCategory.Hafted || Category == ItemCategory.Polearm || Category == ItemCategory.Sword || Category == ItemCategory.Digging)
+                {
+                    basenm += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
+                }
+                else if (BonusToHit != 0)
+                {
+                    basenm += $" ({GetSignedValue(BonusToHit)})";
+                }
+                else if (BonusDamage != 0)
+                {
+                    basenm += $" ({GetSignedValue(BonusDamage)})";
+                }
+
+                if (BaseArmourClass != 0 
+                    || Category == ItemCategory.Boots 
+                    || Category == ItemCategory.Gloves
+                    || Category == ItemCategory.Cloak
+                    || Category == ItemCategory.Crown
+                    || Category == ItemCategory.Helm
+                    || Category == ItemCategory.Shield
+                    || Category == ItemCategory.SoftArmor
+                    || Category == ItemCategory.HardArmor
+                    || Category == ItemCategory.DragArmor)
+                {
+                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                    basenm += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                }
+                else if (BonusArmourClass != 0)
+                {
+                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                    basenm += $" [{GetSignedValue(BonusArmourClass)}]";
+                }
+            }
+            else if (Category == ItemCategory.Boots
+                    || Category == ItemCategory.Gloves
+                    || Category == ItemCategory.Cloak
+                    || Category == ItemCategory.Crown
+                    || Category == ItemCategory.Helm
+                    || Category == ItemCategory.Shield
+                    || Category == ItemCategory.SoftArmor
+                    || Category == ItemCategory.HardArmor
+                    || Category == ItemCategory.DragArmor)
+            {
+                basenm += $" [{BaseArmourClass}]";
+            }
+            if (mode < 2)
+            {
+                return basenm;
+            }
+            if (IsKnown() && (Category == ItemCategory.Staff || Category == ItemCategory.Wand))
+            {
+                basenm += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
+            }
+            else if (IsKnown() && Category == ItemCategory.Rod)
+            {
+                if (TypeSpecificValue != 0)
+                {
+                    basenm += " (charging)";
+                }
+            }
+            else if (Category == ItemCategory.Light &&
+                     (ItemSubCategory == Enumerations.LightType.Torch || ItemSubCategory == Enumerations.LightType.Lantern))
+            {
+                basenm += $" (with {TypeSpecificValue} turns of light)";
+            }
+            if (IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
+            {
+                basenm += $" ({GetSignedValue(TypeSpecificValue)}";
+                if (f3.IsSet(ItemFlag3.HideType))
+                {
+                }
+                else if (f1.IsSet(ItemFlag1.Speed))
+                {
+                    basenm += " speed";
+                }
+                else if (f1.IsSet(ItemFlag1.Blows))
+                {
+                    if (TypeSpecificValue > 1)
+                    {
+                        basenm += " attacks";
+                    }
+                    else
+                    {
+                        basenm += " attack";
+                    }
+                }
+                else if (f1.IsSet(ItemFlag1.Stealth))
+                {
+                    basenm += " stealth";
+                }
+                else if (f1.IsSet(ItemFlag1.Search))
+                {
+                    basenm += " searching";
+                }
+                else if (f1.IsSet(ItemFlag1.Infra))
+                {
+                    basenm += " infravision";
+                }
+                else if (f1.IsSet(ItemFlag1.Tunnel))
+                {
+                }
+                basenm += ")";
+            }
+            if (IsKnown() && RechargeTimeLeft != 0)
+            {
+                basenm += " (charging)";
+            }
+            if (mode < 3)
+            {
+                return basenm;
+            }
+            if (!string.IsNullOrEmpty(Inscription))
+            {
+                tmpVal2 = Inscription;
+            }
+            else if (IsCursed() && (IsKnown() || IdentifyFlags.IsSet(Constants.IdentSense)))
+            {
+                tmpVal2 = "cursed";
+            }
+            else if (!IsKnown() && IdentifyFlags.IsSet(Constants.IdentEmpty))
+            {
+                tmpVal2 = "empty";
+            }
+            else if (!IsFlavourAware() && IsTried())
+            {
+                tmpVal2 = "tried";
+            }
+            else if (Discount != 0)
+            {
+                tmpVal2 = Discount.ToString();
+                tmpVal2 += "% off";
+            }
+            if (!string.IsNullOrEmpty(tmpVal2))
+            {
+                basenm += $" {{{tmpVal2}}}";
+            }
+            if (basenm.Length > 75)
+            {
+                basenm = basenm.Substring(0, 75);
+            }
+            return basenm;
+        }
+
+        private string OriginalDescription(bool pref, int mode)
         {
             bool aware = false;
             bool known = false;
@@ -1261,6 +1816,21 @@ namespace Cthangband
                 t = t.Substring(0, 75);
             }
             return t;
+        }
+
+        public string Description(bool pref, int mode)
+        {
+            string originalDescription = OriginalDescription(pref, mode);
+            string newDescription = NewDescription(pref, mode);
+            if (originalDescription == newDescription)
+            {
+                //Profile.Instance.MsgPrint("Inventory descriptions confirmed.");
+            }
+            else
+            {
+                Profile.Instance.MsgPrint("DESCRIPTION FAILED!");
+            }
+            return originalDescription;
         }
 
         public int FlagBasedCost(int plusses)

@@ -24,7 +24,7 @@ namespace Cthangband.Enumerations
         public const uint IgnoreCold = 0x00800000;
         public const uint IgnoreElec = 0x00200000;
         public const uint IgnoreFire = 0x00400000;
-        public const uint InstaArt = 0x00000800;
+        public const uint InstaArt = 0x00000800; // Instant Artifact?  Artifacts cannot be made worthless, not can they be created by Wizards?
         public const uint Lightsource = 0x00002000;
         public const uint NoMagic = 0x00000020;
         public const uint NoTele = 0x00000010;
