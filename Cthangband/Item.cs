@@ -30,7 +30,7 @@ namespace Cthangband
         public IActivationPower BonusPowerSubType;
         public Enumerations.RareItemType BonusPowerType;
         public int BonusToHit;
-        public ItemCategory Category;
+        public BaseItemCategory BaseCategory;
         public int Count;
         public int DamageDice;
         public int DamageDiceSides;
@@ -53,6 +53,8 @@ namespace Cthangband
         public Item()
         {
         }
+
+        public ItemCategory Category => BaseCategory.CategoryEnum;
 
         public bool IsBlessed()
         {
@@ -90,7 +92,7 @@ namespace Cthangband
             BonusArmourClass = original.BonusArmourClass;
             BonusDamage = original.BonusDamage;
             BonusToHit = original.BonusToHit;
-            Category = original.Category;
+            BaseCategory = new BaseItemCategory(original.Category);
             Weight = original.Weight;
             BonusPowerType = original.BonusPowerType;
             BonusPowerSubType = original.BonusPowerSubType;
@@ -359,7 +361,7 @@ namespace Cthangband
         {
             ItemType kPtr = kIdx;
             ItemType = kIdx;
-            Category = kPtr.Category;
+            BaseCategory = new BaseItemCategory(kPtr.Category);
             ItemSubCategory = kPtr.SubCategory;
             TypeSpecificValue = kPtr.Pval;
             Count = 1;
@@ -685,14 +687,14 @@ namespace Cthangband
             }
         }
 
-        public string ApplyGetPrefixCountMacro(string name, int count)
+        public string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count)
         {
             bool includeSingularPrefix = (name[0] == '&');
             if (includeSingularPrefix)
             {
                 name = name.Substring(2);
             }
-            return GetPrefixCount(includeSingularPrefix, name, count);
+            return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count) : name;
         }
 
         public string ApplyPlurizationMacro(string name, int count)
@@ -711,7 +713,7 @@ namespace Cthangband
         public string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count)
         {
             string pluralizedName = ApplyPlurizationMacro(name, Count);
-            return includeCountPrefix ? ApplyGetPrefixCountMacro(pluralizedName, Count) : pluralizedName;
+            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count);
         }
 
         public string GetSignedValue(int value)

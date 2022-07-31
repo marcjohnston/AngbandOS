@@ -5,8 +5,21 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
+
 namespace Cthangband.Enumerations
 {
+    [Serializable]
+    internal class BaseItemCategory
+    {
+        public ItemCategory CategoryEnum { get; }
+
+        public BaseItemCategory(ItemCategory itemCategory)
+        {
+            CategoryEnum = itemCategory;
+        }
+    }
+
     /// <summary>
     /// The category of an item
     /// </summary>
