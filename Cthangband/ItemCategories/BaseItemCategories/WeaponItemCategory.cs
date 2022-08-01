@@ -47,7 +47,6 @@ namespace Cthangband.ItemCategories
             return s;
         }
 
-        //    public override bool HasAdditionalTypeSpecificValue => true;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;

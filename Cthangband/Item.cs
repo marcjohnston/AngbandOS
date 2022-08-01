@@ -1988,24 +1988,10 @@ namespace Cthangband
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            if (Category == ItemCategory.Light)
+            string categoryIdentity = BaseCategory.Identify(this);
+            if (categoryIdentity != null)
             {
-                if (IsFixedArtifact())
-                {
-                    info[i++] = "It provides light (radius 3) forever.";
-                }
-                else if (ItemSubCategory == Enumerations.LightType.Lantern)
-                {
-                    info[i++] = "It provides light (radius 2) when fueled.";
-                }
-                else if (ItemSubCategory == Enumerations.LightType.Torch)
-                {
-                    info[i++] = "It provides light (radius 1) when fueled.";
-                }
-                else
-                {
-                    info[i++] = "It provides light (radius 2) forever.";
-                }
+                info[i++] = categoryIdentity;
             }
             if (f1.IsSet(ItemFlag1.Str))
             {

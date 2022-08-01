@@ -309,14 +309,12 @@ namespace Cthangband.ItemCategories
 
         public virtual bool IsWorthless(Item item) => false;
 
-        //    public virtual bool HasAdditionalTypeSpecificValue => false;
-
         //    public virtual string DescribeActivationEffect(Item item)
         //    {
         //        return null;
         //    }
 
-        //    public virtual string IdentifyFully(Item item) => null;
+        public virtual string Identify(Item item) => null;
 
         //    public virtual int BaseValue => 0;
         //    public virtual bool HatesElectricity => false;

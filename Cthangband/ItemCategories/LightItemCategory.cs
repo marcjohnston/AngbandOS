@@ -382,24 +382,24 @@ namespace Cthangband.ItemCategories
             return s;
         }
 
-        //public override string IdentifyFully(Item item)
-        //{
-        //    if (item.IsFixedArtifact())
-        //    {
-        //        return "It provides light (radius 3) forever.";
-        //    }
-        //    else if (item.ItemSubCategory == Enumerations.LightType.Lantern)
-        //    {
-        //        return "It provides light (radius 2) when fueled.";
-        //    }
-        //    else if (item.ItemSubCategory == Enumerations.LightType.Torch)
-        //    {
-        //        return "It provides light (radius 1) when fueled.";
-        //    }
-        //    else
-        //    {
-        //        return "It provides light (radius 2) forever.";
-        //    }
-        //}
+        public override string Identify(Item item)
+        {
+            if (item.IsFixedArtifact())
+            {
+                return "It provides light (radius 3) forever.";
+            }
+            else if (item.ItemSubCategory == LightType.Lantern)
+            {
+                return "It provides light (radius 2) when fueled.";
+            }
+            else if (item.ItemSubCategory == LightType.Torch)
+            {
+                return "It provides light (radius 1) when fueled.";
+            }
+            else
+            {
+                return "It provides light (radius 2) forever.";
+            }
+        }
     }
 }

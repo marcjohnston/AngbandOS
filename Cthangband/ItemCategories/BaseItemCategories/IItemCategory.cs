@@ -68,22 +68,16 @@ namespace Cthangband.ItemCategories
         bool IsWorthless(Item item);
 
         ///// <summary>
-        ///// Returns true, if the item has a type specific real value.  Returns false by default.
-        ///// </summary>
-        ///// <returns></returns>
-        //bool HasAdditionalTypeSpecificValue { get; }
-
-        ///// <summary>
         ///// Returns a description of the items' activation.  Returns null by default.
         ///// </summary>
         ///// <param name="item"></param>
         ///// <returns></returns>
         //string DescribeActivationEffect(Item item);
 
-        ///// <summary>
-        ///// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
-        ///// </summary>
-        //string IdentifyFully(Item item);
+        /// <summary>
+        /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
+        /// </summary>
+        string Identify(Item item);
 
         ///// <summary>
         ///// Returns the base value for an object.  Returns 0, by default.
