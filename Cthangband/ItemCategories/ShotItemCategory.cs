@@ -32,7 +32,7 @@ namespace Cthangband.ItemCategories
 
         //public override bool GeneratesMultipleCount => true;
 
-        //public override bool GetsDamageMultiplier => true;
+        public override bool GetsDamageMultiplier => true;
         public override int PercentageBreakageChance => 25;
 
     }

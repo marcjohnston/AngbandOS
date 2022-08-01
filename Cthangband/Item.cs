@@ -143,206 +143,196 @@ namespace Cthangband
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3);
-            switch (Category)
+            if (BaseCategory.GetsDamageMultiplier)
             {
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Digging:
+                if (f1.IsSet(ItemFlag1.SlayAnimal) && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
+                {
+                    if (mPtr.IsVisible)
                     {
-                        if (f1.IsSet(ItemFlag1.SlayAnimal) && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Animal;
-                            }
-                            if (mult < 2)
-                            {
-                                mult = 2;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayEvil) && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
-                            }
-                            if (mult < 2)
-                            {
-                                mult = 2;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayUndead) && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayDemon) && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Demon;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayOrc) && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Orc;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayTroll) && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Troll;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayGiant) && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Giant;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.SlayDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
-                            }
-                            if (mult < 3)
-                            {
-                                mult = 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.KillDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
-                        {
-                            if (mPtr.IsVisible)
-                            {
-                                rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
-                            }
-                            if (mult < 5)
-                            {
-                                mult = 5;
-                            }
-                            if (FixedArtifactIndex == FixedArtifactId.SwordLightning)
-                            {
-                                mult *= 3;
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.BrandAcid))
-                        {
-                            if ((rPtr.Flags3 & MonsterFlag3.ImmuneAcid) != 0)
-                            {
-                                if (mPtr.IsVisible)
-                                {
-                                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneAcid;
-                                }
-                            }
-                            else
-                            {
-                                if (mult < 3)
-                                {
-                                    mult = 3;
-                                }
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.BrandElec))
-                        {
-                            if ((rPtr.Flags3 & MonsterFlag3.ImmuneLightning) != 0)
-                            {
-                                if (mPtr.IsVisible)
-                                {
-                                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
-                                }
-                            }
-                            else
-                            {
-                                if (mult < 3)
-                                {
-                                    mult = 3;
-                                }
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.BrandFire))
-                        {
-                            if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
-                            {
-                                if (mPtr.IsVisible)
-                                {
-                                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
-                                }
-                            }
-                            else
-                            {
-                                if (mult < 3)
-                                {
-                                    mult = 3;
-                                }
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.BrandCold))
-                        {
-                            if ((rPtr.Flags3 & MonsterFlag3.ImmuneCold) != 0)
-                            {
-                                if (mPtr.IsVisible)
-                                {
-                                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneCold;
-                                }
-                            }
-                            else
-                            {
-                                if (mult < 3)
-                                {
-                                    mult = 3;
-                                }
-                            }
-                        }
-                        if (f1.IsSet(ItemFlag1.BrandPois))
-                        {
-                            if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
-                            {
-                                if (mPtr.IsVisible)
-                                {
-                                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmunePoison;
-                                }
-                            }
-                            else
-                            {
-                                if (mult < 3)
-                                {
-                                    mult = 3;
-                                }
-                            }
-                        }
-                        break;
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Animal;
                     }
+                    if (mult < 2)
+                    {
+                        mult = 2;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayEvil) && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    }
+                    if (mult < 2)
+                    {
+                        mult = 2;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayUndead) && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayDemon) && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Demon;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayOrc) && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Orc;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayTroll) && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Troll;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayGiant) && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Giant;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.SlayDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
+                    }
+                    if (mult < 3)
+                    {
+                        mult = 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.KillDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                {
+                    if (mPtr.IsVisible)
+                    {
+                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
+                    }
+                    if (mult < 5)
+                    {
+                        mult = 5;
+                    }
+                    if (FixedArtifactIndex == FixedArtifactId.SwordLightning)
+                    {
+                        mult *= 3;
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.BrandAcid))
+                {
+                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneAcid) != 0)
+                    {
+                        if (mPtr.IsVisible)
+                        {
+                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneAcid;
+                        }
+                    }
+                    else
+                    {
+                        if (mult < 3)
+                        {
+                            mult = 3;
+                        }
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.BrandElec))
+                {
+                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneLightning) != 0)
+                    {
+                        if (mPtr.IsVisible)
+                        {
+                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
+                        }
+                    }
+                    else
+                    {
+                        if (mult < 3)
+                        {
+                            mult = 3;
+                        }
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.BrandFire))
+                {
+                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
+                    {
+                        if (mPtr.IsVisible)
+                        {
+                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
+                        }
+                    }
+                    else
+                    {
+                        if (mult < 3)
+                        {
+                            mult = 3;
+                        }
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.BrandCold))
+                {
+                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneCold) != 0)
+                    {
+                        if (mPtr.IsVisible)
+                        {
+                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneCold;
+                        }
+                    }
+                    else
+                    {
+                        if (mult < 3)
+                        {
+                            mult = 3;
+                        }
+                    }
+                }
+                if (f1.IsSet(ItemFlag1.BrandPois))
+                {
+                    if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
+                    {
+                        if (mPtr.IsVisible)
+                        {
+                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmunePoison;
+                        }
+                    }
+                    else
+                    {
+                        if (mult < 3)
+                        {
+                            mult = 3;
+                        }
+                    }
+                }
             }
             return tdam * mult;
         }

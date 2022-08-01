@@ -114,10 +114,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         int PercentageBreakageChance { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
-        ///// </summary>
-        //bool GetsDamageMultiplier { get; }
+        /// <summary>
+        /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
+        /// </summary>
+        bool GetsDamageMultiplier { get; }
 
         ///// <summary>
         ///// Returns true, if the item generates multiple counts.  Returns false, by default.  Spikes, shots, arrows and bolts return true.

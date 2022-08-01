@@ -22,6 +22,6 @@ namespace Cthangband.ItemCategories
         //    }
         //}
 
-        //public override bool GetsDamageMultiplier => true;
+        public override bool GetsDamageMultiplier => true;
     }
 }
