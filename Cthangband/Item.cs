@@ -658,7 +658,7 @@ namespace Cthangband
             }
         }
 
-        private string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count)
+        private string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count, bool isKnownArtifact)
         {
             if (Count <= 0)
             {
@@ -668,7 +668,7 @@ namespace Cthangband
             {
                 return $"{Count} {singularNoun}";
             }
-            else if (IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName)))
+            else if (isKnownArtifact)
             {
                 return $"The {singularNoun}";
             }
@@ -689,14 +689,14 @@ namespace Cthangband
             }
         }
 
-        public string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count)
+        public string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
         {
             bool includeSingularPrefix = (name[0] == '&');
             if (includeSingularPrefix)
             {
                 name = name.Substring(2);
             }
-            return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count) : name;
+            return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
         }
 
         public string ApplyPlurizationMacro(string name, int count)
@@ -712,10 +712,10 @@ namespace Cthangband
             }
         }
 
-        public string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count)
+        public string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
         {
             string pluralizedName = ApplyPlurizationMacro(name, Count);
-            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count);
+            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count, isKnownArtifact);
         }
 
         public string GetSignedValue(int value)
@@ -760,7 +760,7 @@ namespace Cthangband
             }
             GetMergedFlags(f1, f2, f3);
             int indexx = ItemSubCategory;
-            string basenm = ApplyDescriptionMacros(includeCountPrefix, ItemType.Name, Count);
+            string basenm = ApplyDescriptionMacros(includeCountPrefix, ItemType.Name, Count, IsKnownArtifact);
             switch (Category)
             {
                 case ItemCategory.Skeleton:
@@ -797,7 +797,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.AmuletFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Amulet", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Ring:
@@ -813,7 +813,7 @@ namespace Cthangband
                         }
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Ring", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Staff:
@@ -821,7 +821,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Staff", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Wand:
@@ -829,7 +829,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.WandFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Rod:
@@ -837,7 +837,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RodFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Rod", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Scroll:
@@ -845,7 +845,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : SaveGame.Instance.ScrollFlavours[indexx].Name;
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{Pluralize("Scroll", Count)} titled \"{flavour}\"{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Potion:
@@ -853,7 +853,7 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.PotionFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Potion", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Food:
@@ -865,63 +865,63 @@ namespace Cthangband
                         string flavour = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.MushroomFlavours[indexx].Name} ";
                         string ofName = IsFlavourAware() ? $" of {ItemType.Name}" : "";
                         string name = $"{flavour}{Pluralize("Mushroom", Count)}{ofName}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.LifeBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Life Magic" : $"Life {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.SorceryBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Sorcery" : $"Sorcery {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.NatureBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Nature Magic" : $"Nature {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.ChaosBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Chaos Magic" : $"Chaos {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.DeathBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Death Magic" : $"Death {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.TarotBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Tarot Magic" : $"Tarot {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.FolkBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Folk Magic" : $"Folk {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.CorporealBook:
                     {
                         string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", Count)} of Corporeal Magic" : $"Corporeal {Pluralize("Spellbook", Count)}";
                         name = $"{name} {ItemType.Name}";
-                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count) : name;
+                        basenm = includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
                         break;
                     }
                 case ItemCategory.Gold:
