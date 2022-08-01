@@ -12,7 +12,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 using System.IO;
-using System.Xml.Linq;
+using static Cthangband.Extensions;
 
 namespace Cthangband
 {
@@ -30,7 +30,7 @@ namespace Cthangband
         public IActivationPower BonusPowerSubType;
         public Enumerations.RareItemType BonusPowerType;
         public int BonusToHit;
-        public TempItemCategory BaseCategory;
+        public TempItemCategory BaseCategory = null;
         public int Count;
         public int DamageDice;
         public int DamageDiceSides;
@@ -56,7 +56,7 @@ namespace Cthangband
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
-        public ItemCategory Category => BaseCategory.CategoryEnum;
+        public ItemCategory Category => BaseCategory == null ? ItemCategory.None : BaseCategory.CategoryEnum;
 
         public bool IsBlessed()
         {
@@ -637,109 +637,6 @@ namespace Cthangband
         {
             ItemForge forge = new ItemForge(this);
             return forge.CreateRandart(fromScroll);
-        }
-
-        private string Pluralize(string singular, int count)
-        {
-            if (count == 1)
-            {
-                return singular;
-            }
-            else
-            {
-                if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
-                {
-                    return $"{singular}es";
-                }
-                else
-                {
-                    return $"{singular}s";
-                }
-            }
-        }
-
-        private string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count, bool isKnownArtifact)
-        {
-            if (Count <= 0)
-            {
-                return $"no more {singularNoun}";
-            }
-            else if (Count > 1)
-            {
-                return $"{Count} {singularNoun}";
-            }
-            else if (isKnownArtifact)
-            {
-                return $"The {singularNoun}";
-            }
-            else if (includeSingularPrefix)
-            {
-                if (singularNoun[0].IsVowel())
-                {
-                    return $"an {singularNoun}";
-                }
-                else
-                {
-                    return $"a {singularNoun}";
-                }
-            }
-            else
-            {
-                return singularNoun;
-            }
-        }
-
-        public string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
-        {
-            bool includeSingularPrefix = (name[0] == '&');
-            if (includeSingularPrefix)
-            {
-                name = name.Substring(2);
-            }
-            return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
-        }
-
-        public string ApplyPlurizationMacro(string name, int count)
-        {
-            int pos = name.IndexOf("~");
-            if (pos >= 0)
-            {
-                return $"{Pluralize(name.Substring(0, pos), Count)}{name.Substring(pos + 1)}";
-            }
-            else
-            {
-                return name;
-            }
-        }
-
-        public string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
-        {
-            string pluralizedName = ApplyPlurizationMacro(name, Count);
-            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count, isKnownArtifact);
-        }
-
-        public string GetSignedValue(int value)
-        {
-            if (value >= 0)
-            {
-                return $"+{value}";
-            }
-            else
-            {
-                return $"{value}";
-            }
-        }
-
-        public string Delimit(string prefix, string delimiter, string suffix)
-        {
-            if (!String.IsNullOrEmpty(prefix) && !String.IsNullOrEmpty(suffix))
-            {
-                return $"{prefix}{delimiter}{suffix}";
-            }
-            else
-            {
-                return $"{prefix}{suffix}";
-            }
         }
 
         /// <summary>

@@ -486,5 +486,108 @@ namespace Cthangband
                     return ItemCategory.None;
             }
         }
+
+        public static string Pluralize(string singular, int count)
+        {
+            if (count == 1)
+            {
+                return singular;
+            }
+            else
+            {
+                if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
+                {
+                    return $"{singular}es";
+                }
+                else
+                {
+                    return $"{singular}s";
+                }
+            }
+        }
+
+        public static string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count, bool isKnownArtifact)
+        {
+            if (count <= 0)
+            {
+                return $"no more {singularNoun}";
+            }
+            else if (count > 1)
+            {
+                return $"{count} {singularNoun}";
+            }
+            else if (isKnownArtifact)
+            {
+                return $"The {singularNoun}";
+            }
+            else if (includeSingularPrefix)
+            {
+                if (singularNoun[0].IsVowel())
+                {
+                    return $"an {singularNoun}";
+                }
+                else
+                {
+                    return $"a {singularNoun}";
+                }
+            }
+            else
+            {
+                return singularNoun;
+            }
+        }
+
+        public static string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
+        {
+            bool includeSingularPrefix = (name[0] == '&');
+            if (includeSingularPrefix)
+            {
+                name = name.Substring(2);
+            }
+            return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
+        }
+
+        public static string ApplyPlurizationMacro(string name, int count)
+        {
+            int pos = name.IndexOf("~");
+            if (pos >= 0)
+            {
+                return $"{Pluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
+            }
+            else
+            {
+                return name;
+            }
+        }
+
+        public static string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
+        {
+            string pluralizedName = ApplyPlurizationMacro(name, count);
+            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, count, isKnownArtifact);
+        }
+
+        public static string GetSignedValue(int value)
+        {
+            if (value >= 0)
+            {
+                return $"+{value}";
+            }
+            else
+            {
+                return $"{value}";
+            }
+        }
+
+        public static string Delimit(string prefix, string delimiter, string suffix)
+        {
+            if (!String.IsNullOrEmpty(prefix) && !String.IsNullOrEmpty(suffix))
+            {
+                return $"{prefix}{delimiter}{suffix}";
+            }
+            else
+            {
+                return $"{prefix}{suffix}";
+            }
+        }
     }
 }
