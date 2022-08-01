@@ -244,7 +244,7 @@ namespace Cthangband.ItemCategories
             return tmpVal2;
         }
 
-        public virtual int GetBonusValue(Item item, int value) => 0;
+        public virtual int GetBonusRealValue(Item item, int value) => 0;
 
         protected int GetTypeSpecificValue(Item item, int value)
         {
@@ -351,5 +351,35 @@ namespace Cthangband.ItemCategories
         public virtual bool GetsDamageMultiplier => false;
 
         public virtual int PercentageBreakageChance => 10;
+
+        protected int GetBonusValue(int max, int level)
+        {
+            if (level > Constants.MaxDepth - 1)
+            {
+                level = Constants.MaxDepth - 1;
+            }
+            int bonus = max * level / Constants.MaxDepth;
+            int extra = max * level % Constants.MaxDepth;
+            if (Program.Rng.RandomLessThan(Constants.MaxDepth) < extra)
+            {
+                bonus++;
+            }
+            int stand = max / 4;
+            extra = max % 4;
+            if (Program.Rng.RandomLessThan(4) < extra)
+            {
+                stand++;
+            }
+            int value = Program.Rng.RandomNormal(bonus, stand);
+            if (value < 0)
+            {
+                return 0;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
+        }
     }
 }
