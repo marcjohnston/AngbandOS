@@ -401,30 +401,7 @@ namespace Cthangband
 
         public int BreakageChance()
         {
-            switch (Category)
-            {
-                case ItemCategory.Flask:
-                case ItemCategory.Potion:
-                case ItemCategory.Bottle:
-                case ItemCategory.Food:
-                case ItemCategory.Junk:
-                    return 100;
-
-                case ItemCategory.Light:
-                case ItemCategory.Scroll:
-                case ItemCategory.Skeleton:
-                    {
-                        return 50;
-                    }
-                case ItemCategory.Wand:
-                case ItemCategory.Arrow:
-                case ItemCategory.Shot:
-                case ItemCategory.Bolt:
-                    {
-                        return 25;
-                    }
-            }
-            return 10;
+            return BaseCategory.PercentageBreakageChance;
         }
 
         public bool CanAbsorb(Item other)

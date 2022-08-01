@@ -370,7 +370,7 @@ namespace Cthangband.ItemCategories
         //{
         //    ApplyMagicToLightSource(item, power);
         //}
-        //public override int PercentageBreakageChance => 50;
+        public override int PercentageBreakageChance => 50;
         public override string GetVerboseDescription(Item item)
         {
             string s = "";

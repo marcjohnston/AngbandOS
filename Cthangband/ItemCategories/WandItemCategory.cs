@@ -22,7 +22,7 @@ namespace Cthangband.ItemCategories
         public override bool HatesElectricity => true;
         //public override bool IsCharged => true;
         public override Colour Colour => Colour.Chartreuse;
-        //public override int PercentageBreakageChance => 25;
+        public override int PercentageBreakageChance => 25;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;

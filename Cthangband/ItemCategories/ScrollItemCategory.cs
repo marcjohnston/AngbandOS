@@ -23,6 +23,6 @@ namespace Cthangband.ItemCategories
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBeige;
-        //public override int PercentageBreakageChance => 50;
+        public override int PercentageBreakageChance => 50;
     }
 }

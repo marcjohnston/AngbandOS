@@ -109,10 +109,10 @@ namespace Cthangband.ItemCategories
         ///// </summary>
         //bool CanAbsorb { get; }
 
-        ///// <summary>
-        ///// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
-        ///// </summary>
-        //int PercentageBreakageChance { get; }
+        /// <summary>
+        /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
+        /// </summary>
+        int PercentageBreakageChance { get; }
 
         ///// <summary>
         ///// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.

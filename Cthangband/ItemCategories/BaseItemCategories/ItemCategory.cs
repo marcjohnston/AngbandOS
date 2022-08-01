@@ -377,8 +377,6 @@ namespace Cthangband.ItemCategories
 
         //    public virtual bool GetsDamageMultiplier => false;
 
-        //    public virtual int PercentageBreakageChance => 10;
-
-
+        public virtual int PercentageBreakageChance => 10;
     }
 }
