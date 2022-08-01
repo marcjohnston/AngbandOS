@@ -2914,38 +2914,11 @@ namespace Cthangband
 
         private int BaseValue()
         {
-            ItemType kPtr = ItemType;
             if (IsFlavourAware())
             {
-                return kPtr.Cost;
+                return ItemType.Cost;
             }
-            switch (Category)
-            {
-                case ItemCategory.Food:
-                    return 5;
-
-                case ItemCategory.Potion:
-                    return 20;
-
-                case ItemCategory.Scroll:
-                    return 20;
-
-                case ItemCategory.Staff:
-                    return 70;
-
-                case ItemCategory.Wand:
-                    return 50;
-
-                case ItemCategory.Rod:
-                    return 90;
-
-                case ItemCategory.Ring:
-                    return 45;
-
-                case ItemCategory.Amulet:
-                    return 45;
-            }
-            return 0;
+            return BaseCategory.BaseValue;
         }
 
         private string DescribeActivationEffect()

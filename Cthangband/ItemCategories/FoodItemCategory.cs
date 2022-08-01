@@ -22,7 +22,7 @@ namespace Cthangband.ItemCategories
             string name = $"{flavour}{Pluralize("Mushroom", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
-        //public override int BaseValue => 5;
+        public override int BaseValue => 5;
         //public override bool CanBeConsumed => true;
         //public override Colour Colour => Colour.Green;
         //public override int PercentageBreakageChance => 100;

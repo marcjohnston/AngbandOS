@@ -19,7 +19,7 @@ namespace Cthangband.ItemCategories
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
 
-        //public override int BaseValue => 70;
+        public override int BaseValue => 70;
         //public override bool HatesFire => true;
         //public override bool HatesAcid => true;
 

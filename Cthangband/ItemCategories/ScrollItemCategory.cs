@@ -18,7 +18,7 @@ namespace Cthangband.ItemCategories
             string name = $"{Pluralize("Scroll", item.Count)} titled \"{flavour}\"{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
-        //public override int BaseValue => 20;
+        public override int BaseValue => 20;
         //public override bool HatesFire => true;
         //public override bool HatesAcid => true;
 

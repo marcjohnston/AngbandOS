@@ -79,10 +79,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         string Identify(Item item);
 
-        ///// <summary>
-        ///// Returns the base value for an object.  Returns 0, by default.
-        ///// </summary>
-        //int BaseValue { get; }
+        /// <summary>
+        /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
+        /// </summary>
+        int BaseValue { get; }
 
         ///// <summary>
         ///// Returns true, if the item is susceptible to electricity.  Returns false, by default.

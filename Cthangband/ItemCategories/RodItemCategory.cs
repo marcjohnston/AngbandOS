@@ -18,7 +18,7 @@ namespace Cthangband.ItemCategories
             string name = $"{flavour}{Pluralize("Rod", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
-        //public override int BaseValue => 90;
+        public override int BaseValue => 90;
         //public override Colour Colour => Colour.Turquoise;
         public override string GetVerboseDescription(Item item)
         {
