@@ -188,22 +188,22 @@ namespace Cthangband.ItemCategories
         //    }
         //}
 
-        //public override string DescribeActivationEffect(Item item)
-        //{
-        //    switch (item.ItemSubCategory)
-        //    {
-        //        case RingType.Flames:
-        //            return "ball of fire and resist fire";
+        public override string DescribeActivationEffect(Item item)
+        {
+            switch (item.ItemSubCategory)
+            {
+                case RingType.Flames:
+                    return "ball of fire and resist fire";
 
-        //        case RingType.Ice:
-        //            return "ball of cold and resist cold";
+                case RingType.Ice:
+                    return "ball of cold and resist cold";
 
-        //        case RingType.Acid:
-        //            return "ball of acid and resist acid";
+                case RingType.Acid:
+                    return "ball of acid and resist acid";
 
-        //        default:
-        //            return null;
-        //    }
-        //}
+                default:
+                    return null;
+            }
+        }
     }
 }

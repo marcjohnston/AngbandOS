@@ -309,10 +309,10 @@ namespace Cthangband.ItemCategories
 
         public virtual bool IsWorthless(Item item) => false;
 
-        //    public virtual string DescribeActivationEffect(Item item)
-        //    {
-        //        return null;
-        //    }
+        public virtual string DescribeActivationEffect(Item item)
+        {
+            return null;
+        }
 
         public virtual string Identify(Item item) => null;
 

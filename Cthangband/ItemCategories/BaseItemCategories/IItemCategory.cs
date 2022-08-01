@@ -67,12 +67,12 @@ namespace Cthangband.ItemCategories
         /// </summary>
         bool IsWorthless(Item item);
 
-        ///// <summary>
-        ///// Returns a description of the items' activation.  Returns null by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //string DescribeActivationEffect(Item item);
+        /// <summary>
+        /// Returns a description of the items' activation.  Returns null by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        string DescribeActivationEffect(Item item);
 
         /// <summary>
         /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
