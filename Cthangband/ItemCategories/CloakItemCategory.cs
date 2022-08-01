@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public CloakItemCategory() : base(ItemCategory.Cloak)
         {
         }
-        //public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBrown;

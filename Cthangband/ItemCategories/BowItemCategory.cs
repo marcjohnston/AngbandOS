@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
         public BowItemCategory() : base(ItemCategory.Bow)
         {
         }
-        //public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override string GetDetailedDescription(Item item)
         {

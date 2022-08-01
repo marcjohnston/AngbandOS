@@ -20,7 +20,7 @@ namespace Cthangband.ItemCategories
         }
 
         public override int BaseValue => 70;
-        //public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override bool HatesAcid => true;
 
         //public override bool IsCharged => true;

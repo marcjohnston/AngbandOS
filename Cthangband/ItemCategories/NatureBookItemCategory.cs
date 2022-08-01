@@ -17,7 +17,7 @@ namespace Cthangband.ItemCategories
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
 
-        //public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightGreen;
         //public override Realm SpellBookToToRealm => Realm.Nature;
     }

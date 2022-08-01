@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
         public BootsItemCategory() : base(ItemCategory.Boots)
         {
         }
-        //public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBrown;

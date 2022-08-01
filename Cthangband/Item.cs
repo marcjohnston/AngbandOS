@@ -1883,42 +1883,7 @@ namespace Cthangband
 
         public bool HatesFire()
         {
-            switch (Category)
-            {
-                case ItemCategory.Light:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bow:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Cloak:
-                case ItemCategory.SoftArmor:
-                    {
-                        return true;
-                    }
-                case ItemCategory.LifeBook:
-                case ItemCategory.SorceryBook:
-                case ItemCategory.NatureBook:
-                case ItemCategory.ChaosBook:
-                case ItemCategory.DeathBook:
-                case ItemCategory.TarotBook:
-                case ItemCategory.FolkBook:
-                case ItemCategory.CorporealBook:
-                    {
-                        return true;
-                    }
-                case ItemCategory.Chest:
-                    {
-                        return true;
-                    }
-                case ItemCategory.Staff:
-                case ItemCategory.Scroll:
-                    {
-                        return true;
-                    }
-            }
-            return false;
+            return BaseCategory.HatesFire;
         }
 
         public bool IdentifyFully()

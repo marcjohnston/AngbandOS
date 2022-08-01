@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public ArrowItemCategory() : base(ItemCategory.Arrow)
         {
         }
-        //    public override bool HatesFire => true;
+        public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override int GetBonusValue(Item item, int value)
         {
