@@ -94,10 +94,10 @@ namespace Cthangband.ItemCategories
         ///// </summary>
         //bool HatesFire { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item is susceptible to acid.  Returns false, by default.
-        ///// </summary>
-        //bool HatesAcid { get; }
+        /// <summary>
+        /// Returns true, if the item is susceptible to acid.  Returns false, by default.
+        /// </summary>
+        bool HatesAcid { get; }
 
         ///// <summary>
         ///// Returns true, if the item is susceptible to cold.  Returns false, by default.
@@ -154,10 +154,10 @@ namespace Cthangband.ItemCategories
         ///// </summary>
         //bool CanBeConsumed { get; }
 
-        ///// <summary>
-        ///// Returns the color to be used to render the item for its description.  White is provided by default.
-        ///// </summary>
-        //Colour Colour { get; }
+        /// <summary>
+        /// Returns the color to be used to render the item for its description.  White is provided by default.
+        /// </summary>
+        Colour Colour { get; }
 
         ///// <summary>
         ///// Applies magic to the item.  Does nothing, by default.

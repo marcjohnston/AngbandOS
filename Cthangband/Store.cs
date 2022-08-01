@@ -426,7 +426,7 @@ namespace Cthangband
             {
                 oName = oName.Substring(0, maxwid);
             }
-            Gui.Print(oPtr.Category.ToAttr(), oName, i + 6, 5);
+            Gui.Print(oPtr.BaseCategory.Colour, oName, i + 6, 5);
             int wgt = oPtr.Weight;
             outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
             Gui.Print(outVal, i + 6, 61);

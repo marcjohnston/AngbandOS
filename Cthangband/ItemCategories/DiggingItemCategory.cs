@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public DiggingItemCategory() : base(ItemCategory.Digging)
         {
         }
-        //public override Colour Colour => Colour.Grey;
+        public override Colour Colour => Colour.Grey;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

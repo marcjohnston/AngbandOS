@@ -19,7 +19,7 @@ namespace Cthangband.ItemCategories
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
         public override int BaseValue => 90;
-        //public override Colour Colour => Colour.Turquoise;
+        public override Colour Colour => Colour.Turquoise;
         public override string GetVerboseDescription(Item item)
         {
             string s = "";

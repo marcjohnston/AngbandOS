@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
         {
         }
         //    public override bool HatesFire => true;
-        //    public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;
@@ -23,7 +23,7 @@ namespace Cthangband.ItemCategories
             return bonusValue;
         }
 
-        //    public override Colour Colour => Colour.BrightBrown;
+        public override Colour Colour => Colour.BrightBrown;
 
         //    public override void ApplyMagic(Item item, int level, int power)
         //    {

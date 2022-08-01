@@ -9,9 +9,9 @@ namespace Cthangband.ItemCategories
         public SwordItemCategory() : base(ItemCategory.Sword)
         {
         }
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
-        //public override Colour Colour => Colour.BrightWhite;
+        public override Colour Colour => Colour.BrightWhite;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

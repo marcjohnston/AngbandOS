@@ -10,9 +10,9 @@ namespace Cthangband.ItemCategories
         public CrownItemCategory() : base(ItemCategory.Crown)
         {
         }
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
-        //public override Colour Colour => Colour.BrightBrown;
+        public override Colour Colour => Colour.BrightBrown;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

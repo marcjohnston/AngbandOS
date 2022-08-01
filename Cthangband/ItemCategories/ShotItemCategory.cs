@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public ShotItemCategory() : base(ItemCategory.Shot)
         {
         }
-        //public override Colour Colour => Colour.BrightBrown;
+        public override Colour Colour => Colour.BrightBrown;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;

@@ -10,9 +10,9 @@ namespace Cthangband.ItemCategories
         public DragArmorItemCategory() : base(ItemCategory.DragArmor)
         {
         }
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
-        //public override Colour Colour => Colour.Grey;
+        public override Colour Colour => Colour.Grey;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

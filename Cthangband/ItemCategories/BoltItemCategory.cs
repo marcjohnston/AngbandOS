@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public BoltItemCategory() : base(ItemCategory.Bolt)
         {
         }
-        //public override Colour Colour => Colour.BrightBrown;
+        public override Colour Colour => Colour.BrightBrown;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;
@@ -22,7 +22,7 @@ namespace Cthangband.ItemCategories
             return bonusValue;
         }
 
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

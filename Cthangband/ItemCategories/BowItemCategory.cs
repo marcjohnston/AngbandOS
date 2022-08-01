@@ -11,7 +11,7 @@ namespace Cthangband.ItemCategories
         {
         }
         //public override bool HatesFire => true;
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
         public override string GetDetailedDescription(Item item)
         {
             string basenm = "";
@@ -47,7 +47,7 @@ namespace Cthangband.ItemCategories
             return basenm;
         }
 
-        //public override Colour Colour => Colour.Brown;
+        public override Colour Colour => Colour.Brown;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

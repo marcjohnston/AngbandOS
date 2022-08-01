@@ -9,9 +9,9 @@ namespace Cthangband.ItemCategories
         public SkeletonItemCategory() : base(ItemCategory.Skeleton)
         {
         }
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
-        //public override Colour Colour => Colour.Beige;
+        public override Colour Colour => Colour.Beige;
         //public override int PercentageBreakageChance => 50;
     }
 }

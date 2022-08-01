@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public JunkItemCategory() : base(ItemCategory.Junk)
         {
         }
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
         //public override int PercentageBreakageChance => 100;
     }

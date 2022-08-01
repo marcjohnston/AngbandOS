@@ -29,7 +29,7 @@ namespace Cthangband.ItemCategories
         }
         public override int BaseValue => 45;
         //public override bool HatesElectricity => true;
-        //public override Colour Colour => Colour.Gold;
+        public override Colour Colour => Colour.Gold;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

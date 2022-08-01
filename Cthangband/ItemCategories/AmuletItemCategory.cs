@@ -24,7 +24,7 @@ namespace Cthangband.ItemCategories
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
         public override int BaseValue => 45;
-        //public override Colour Colour => Colour.Orange;
+        public override Colour Colour => Colour.Orange;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

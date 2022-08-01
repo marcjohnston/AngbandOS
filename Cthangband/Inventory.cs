@@ -677,7 +677,7 @@ namespace Cthangband
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.Category.ToAttr();
+                outColour[k] = oPtr.BaseCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 16;
@@ -755,7 +755,7 @@ namespace Cthangband
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.Category.ToAttr();
+                outColour[k] = oPtr.BaseCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 9;

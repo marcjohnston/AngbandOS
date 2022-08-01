@@ -20,7 +20,7 @@ namespace Cthangband.ItemCategories
         }
         public override int BaseValue => 20;
         //public override bool HatesCold => true;
-        //public override Colour Colour => Colour.Blue;
+        public override Colour Colour => Colour.Blue;
         //public override int PercentageBreakageChance => 100;
     }
 }

@@ -1868,43 +1868,7 @@ namespace Cthangband
 
         public bool HatesAcid()
         {
-            switch (Category)
-            {
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Bow:
-                case ItemCategory.Sword:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Helm:
-                case ItemCategory.Crown:
-                case ItemCategory.Shield:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Cloak:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
-                    {
-                        return true;
-                    }
-                case ItemCategory.Staff:
-                case ItemCategory.Scroll:
-                    {
-                        return true;
-                    }
-                case ItemCategory.Chest:
-                    {
-                        return true;
-                    }
-                case ItemCategory.Skeleton:
-                case ItemCategory.Bottle:
-                case ItemCategory.Junk:
-                    {
-                        return true;
-                    }
-            }
-            return false;
+            return BaseCategory.HatesAcid;
         }
 
         public bool HatesCold()

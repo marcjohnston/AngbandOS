@@ -24,7 +24,7 @@ namespace Cthangband.ItemCategories
         }
         public override int BaseValue => 5;
         //public override bool CanBeConsumed => true;
-        //public override Colour Colour => Colour.Green;
+        public override Colour Colour => Colour.Green;
         //public override int PercentageBreakageChance => 100;
     }
 }

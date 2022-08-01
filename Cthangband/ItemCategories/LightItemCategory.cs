@@ -12,7 +12,7 @@ namespace Cthangband.ItemCategories
         {
         }
         //public override bool HatesFire => true;
-        //public override Colour Colour => Colour.BrightYellow;
+        public override Colour Colour => Colour.BrightYellow;
 
         //private void ApplyMagicToLightSource(Item item, int power)
         //{

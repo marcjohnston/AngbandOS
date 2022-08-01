@@ -11,9 +11,9 @@ namespace Cthangband.ItemCategories
         {
         }
         //public override bool HatesFire => true;
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
-        //public override Colour Colour => Colour.Grey;
+        public override Colour Colour => Colour.Grey;
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

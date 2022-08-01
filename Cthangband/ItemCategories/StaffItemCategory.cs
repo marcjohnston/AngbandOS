@@ -21,10 +21,10 @@ namespace Cthangband.ItemCategories
 
         public override int BaseValue => 70;
         //public override bool HatesFire => true;
-        //public override bool HatesAcid => true;
+        public override bool HatesAcid => true;
 
         //public override bool IsCharged => true;
-        //public override Colour Colour => Colour.Purple;
+        public override Colour Colour => Colour.Purple;
         public override int GetBonusValue(Item item, int value)
         {
             int bonusValue = 0;

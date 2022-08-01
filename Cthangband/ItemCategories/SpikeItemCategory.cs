@@ -10,6 +10,7 @@ namespace Cthangband.ItemCategories
         {
         }
 
+        public override Colour Colour => Colour.Grey;
         //public override bool GeneratesMultipleCount => true;
     }
 }
