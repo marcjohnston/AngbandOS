@@ -874,7 +874,6 @@
     <Compile Include="HighScoreTable.cs" />
     <Compile Include="Island.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="ItemForge.cs" />
     <Compile Include="ItemType.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="Level.cs" />
