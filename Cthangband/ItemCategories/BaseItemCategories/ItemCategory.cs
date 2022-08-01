@@ -28,6 +28,8 @@ namespace Cthangband.ItemCategories
         {
             switch (itemCategory)
             {
+                case ItemCategory.None:
+                    return null;
                 case ItemCategory.Skeleton:
                     return new SkeletonItemCategory();
                 case ItemCategory.Bottle:
@@ -334,9 +336,9 @@ namespace Cthangband.ItemCategories
         //    public virtual Realm SpellBookToToRealm => Realm.None;
 
 
-        //    public virtual void ApplyMagic(Item item, int level, int power)
-        //    {
-        //    }
+        public virtual void ApplyMagic(Item item, int level, int power)
+        {
+        }
 
         //    public virtual bool CanProvideSheathOfElectricity => false;
 

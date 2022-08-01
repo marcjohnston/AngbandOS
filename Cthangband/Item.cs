@@ -3151,10 +3151,7 @@ namespace Cthangband
                 case ItemCategory.Arrow:
                 case ItemCategory.Bolt:
                     {
-                        if (power != 0)
-                        {
-                            ApplyMagicToWeapon(lev, power);
-                        }
+                        ApplyMagicToWeapon(lev, power);
                         break;
                     }
                 case ItemCategory.DragArmor:
@@ -3167,22 +3164,12 @@ namespace Cthangband
                 case ItemCategory.Gloves:
                 case ItemCategory.Boots:
                     {
-                        if (power != 0 ||
-                            (Category == ItemCategory.Helm && ItemSubCategory == HelmType.SvDragonHelm) ||
-                            (Category == ItemCategory.Shield && ItemSubCategory == ShieldType.SvDragonShield) ||
-                            (Category == ItemCategory.Cloak && ItemSubCategory == CloakType.SvElvenCloak))
-                        {
-                            ApplyMagicToArmour(lev, power);
-                        }
+                        ApplyMagicToArmour(lev, power);
                         break;
                     }
                 case ItemCategory.Ring:
                 case ItemCategory.Amulet:
                     {
-                        if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
-                        {
-                            power = -1;
-                        }
                         ApplyMagicToJewellery(lev, power);
                         break;
                     }
@@ -3191,9 +3178,27 @@ namespace Cthangband
                         ApplyMagicToLightSource(power);
                         break;
                     }
-                default:
+                case ItemCategory.Wand:
                     {
-                        ApplyMagicToMiscItem();
+                        ChargeWand();
+                        break;
+                    }
+                case ItemCategory.Staff:
+                    {
+                        ChargeStaff();
+                        break;
+                    }
+                case ItemCategory.Chest:
+                    {
+                        if (ItemType.Level <= 0)
+                        {
+                            break;
+                        }
+                        TypeSpecificValue = Program.Rng.DieRoll(ItemType.Level);
+                        if (TypeSpecificValue > 55)
+                        {
+                            TypeSpecificValue = (short)(55 + Program.Rng.RandomLessThan(5));
+                        }
                         break;
                     }
             }
@@ -3959,175 +3964,104 @@ namespace Cthangband
 
         private void ApplyMagicToArmour(int level, int power)
         {
-            int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-            int toac2 = GetBonusValue(10, level);
-            IArtifactBias artifactBias = null;
-            if (power > 0)
+            if (power != 0 ||
+                (Category == ItemCategory.Helm && ItemSubCategory == HelmType.SvDragonHelm) ||
+                (Category == ItemCategory.Shield && ItemSubCategory == ShieldType.SvDragonShield) ||
+                (Category == ItemCategory.Cloak && ItemSubCategory == CloakType.SvElvenCloak))
             {
-                BonusArmourClass += toac1;
-                if (power > 1)
+                int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+                int toac2 = GetBonusValue(10, level);
+                IArtifactBias artifactBias = null;
+                if (power > 0)
                 {
-                    BonusArmourClass += toac2;
-                }
-            }
-            else if (power < 0)
-            {
-                BonusArmourClass -= toac1;
-                if (power < -1)
-                {
-                    BonusArmourClass -= toac2;
-                }
-                if (BonusArmourClass < 0)
-                {
-                    IdentifyFlags.Set(Constants.IdentCursed);
-                }
-            }
-            switch (Category)
-            {
-                case ItemCategory.DragArmor:
+                    BonusArmourClass += toac1;
+                    if (power > 1)
                     {
-                        if (SaveGame.Instance.Level != null)
-                        {
-                            SaveGame.Instance.Level.TreasureRating += 30;
-                        }
-                        break;
+                        BonusArmourClass += toac2;
                     }
-                case ItemCategory.HardArmor:
-                case ItemCategory.SoftArmor:
+                }
+                else if (power < 0)
+                {
+                    BonusArmourClass -= toac1;
+                    if (power < -1)
                     {
-                        if (power > 1)
-                        {
-                            if (Category == ItemCategory.SoftArmor &&
-                                ItemSubCategory == SoftArmourType.SvRobe && Program.Rng.RandomLessThan(100) < 10)
-                            {
-                                RareItemTypeIndex = Enumerations.RareItemType.ArmourOfPermanence;
-                                break;
-                            }
-                            switch (Program.Rng.DieRoll(21))
-                            {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistAcid;
-                                        break;
-                                    }
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistLightning;
-                                        break;
-                                    }
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistFire;
-                                        break;
-                                    }
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistCold;
-                                        break;
-                                    }
-                                case 17:
-                                case 18:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistance;
-                                        if (Program.Rng.DieRoll(4) == 1)
-                                        {
-                                            RandartFlags2.Set(ItemFlag2.ResPois);
-                                        }
-                                        ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                                        break;
-                                    }
-                                case 20:
-                                case 21:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.ArmourOfYith;
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        CreateRandart(false);
-                                        break;
-                                    }
-                            }
-                        }
-                        break;
+                        BonusArmourClass -= toac2;
                     }
-                case ItemCategory.Shield:
+                    if (BonusArmourClass < 0)
                     {
-                        if (ItemSubCategory == ShieldType.SvDragonShield)
+                        IdentifyFlags.Set(Constants.IdentCursed);
+                    }
+                }
+                switch (Category)
+                {
+                    case ItemCategory.DragArmor:
                         {
                             if (SaveGame.Instance.Level != null)
                             {
-                                SaveGame.Instance.Level.TreasureRating += 5;
+                                SaveGame.Instance.Level.TreasureRating += 30;
                             }
-                            ApplyDragonscaleResistance();
+                            break;
                         }
-                        else
+                    case ItemCategory.HardArmor:
+                    case ItemCategory.SoftArmor:
                         {
                             if (power > 1)
                             {
-                                switch (Program.Rng.DieRoll(23))
+                                if (Category == ItemCategory.SoftArmor &&
+                                    ItemSubCategory == SoftArmourType.SvRobe && Program.Rng.RandomLessThan(100) < 10)
+                                {
+                                    RareItemTypeIndex = Enumerations.RareItemType.ArmourOfPermanence;
+                                    break;
+                                }
+                                switch (Program.Rng.DieRoll(21))
                                 {
                                     case 1:
-                                    case 11:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistAcid;
-                                            break;
-                                        }
                                     case 2:
                                     case 3:
                                     case 4:
-                                    case 12:
-                                    case 13:
-                                    case 14:
                                         {
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistLightning;
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistAcid;
                                             break;
                                         }
                                     case 5:
                                     case 6:
+                                    case 7:
+                                    case 8:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistLightning;
+                                            break;
+                                        }
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistFire;
+                                            break;
+                                        }
+                                    case 13:
+                                    case 14:
                                     case 15:
                                     case 16:
                                         {
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistFire;
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistCold;
                                             break;
                                         }
-                                    case 7:
-                                    case 8:
-                                    case 9:
                                     case 17:
                                     case 18:
-                                    case 19:
                                         {
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistCold;
-                                            break;
-                                        }
-                                    case 10:
-                                    case 20:
-                                        {
-                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistance;
                                             if (Program.Rng.DieRoll(4) == 1)
                                             {
                                                 RandartFlags2.Set(ItemFlag2.ResPois);
                                             }
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistance;
+                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                                             break;
                                         }
+                                    case 20:
                                     case 21:
-                                    case 22:
                                         {
-                                            RareItemTypeIndex = Enumerations.RareItemType.ShieldOfReflection;
+                                            RareItemTypeIndex = Enumerations.RareItemType.ArmourOfYith;
                                             break;
                                         }
                                     default:
@@ -4137,240 +4071,86 @@ namespace Cthangband
                                         }
                                 }
                             }
+                            break;
                         }
-                        break;
-                    }
-                case ItemCategory.Gloves:
-                    {
-                        if (power > 1)
+                    case ItemCategory.Shield:
                         {
-                            if (Program.Rng.DieRoll(20) == 1)
+                            if (ItemSubCategory == ShieldType.SvDragonShield)
                             {
-                                CreateRandart(false);
-                            }
-                            else
-                            {
-                                switch (Program.Rng.DieRoll(10))
+                                if (SaveGame.Instance.Level != null)
                                 {
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfFreeAction;
-                                            break;
-                                        }
-                                    case 5:
-                                    case 6:
-                                    case 7:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfSlaying;
-                                            break;
-                                        }
-                                    case 8:
-                                    case 9:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfAgility;
-                                            break;
-                                        }
-                                    case 10:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfPower;
-                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                                            break;
-                                        }
+                                    SaveGame.Instance.Level.TreasureRating += 5;
                                 }
-                            }
-                        }
-                        else if (power < -1)
-                        {
-                            switch (Program.Rng.DieRoll(2))
-                            {
-                                case 1:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.GlovesOfClumsiness;
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.GlovesOfWeakness;
-                                        break;
-                                    }
-                            }
-                        }
-                        break;
-                    }
-                case ItemCategory.Boots:
-                    {
-                        if (power > 1)
-                        {
-                            if (Program.Rng.DieRoll(20) == 1)
-                            {
-                                CreateRandart(false);
+                                ApplyDragonscaleResistance();
                             }
                             else
                             {
-                                switch (Program.Rng.DieRoll(24))
+                                if (power > 1)
                                 {
-                                    case 1:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfSpeed;
-                                            break;
-                                        }
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 5:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfFreeAction;
-                                            break;
-                                        }
-                                    case 6:
-                                    case 7:
-                                    case 8:
-                                    case 9:
-                                    case 10:
-                                    case 11:
-                                    case 12:
-                                    case 13:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfStealth;
-                                            break;
-                                        }
-                                    default:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.BootsWinged;
-                                            if (Program.Rng.DieRoll(2) == 1)
+                                    switch (Program.Rng.DieRoll(23))
+                                    {
+                                        case 1:
+                                        case 11:
                                             {
-                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistAcid;
+                                                break;
                                             }
-                                            break;
-                                        }
-                                }
-                            }
-                        }
-                        else if (power < -1)
-                        {
-                            switch (Program.Rng.DieRoll(3))
-                            {
-                                case 1:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.BootsOfNoise;
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.BootsOfSlowness;
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.BootsOfAnnoyance;
-                                        break;
-                                    }
-                            }
-                        }
-                        break;
-                    }
-                case ItemCategory.Crown:
-                    {
-                        if (power > 1)
-                        {
-                            if (Program.Rng.DieRoll(20) == 1)
-                            {
-                                CreateRandart(false);
-                            }
-                            else
-                            {
-                                switch (Program.Rng.DieRoll(8))
-                                {
-                                    case 1:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfTheMagi;
-                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                                            break;
-                                        }
-                                    case 2:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfMight;
-                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                                            break;
-                                        }
-                                    case 3:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfTelepathy;
-                                            break;
-                                        }
-                                    case 4:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfRegeneration;
-                                            break;
-                                        }
-                                    case 5:
-                                    case 6:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfLordliness;
-                                            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                                            break;
-                                        }
-                                    default:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
-                                            if (Program.Rng.DieRoll(3) == 1)
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 12:
+                                        case 13:
+                                        case 14:
                                             {
-                                                RandartFlags3.Set(ItemFlag3.Telepathy);
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistLightning;
+                                                break;
                                             }
-                                            break;
-                                        }
+                                        case 5:
+                                        case 6:
+                                        case 15:
+                                        case 16:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistFire;
+                                                break;
+                                            }
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 17:
+                                        case 18:
+                                        case 19:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistCold;
+                                                break;
+                                            }
+                                        case 10:
+                                        case 20:
+                                            {
+                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+                                                if (Program.Rng.DieRoll(4) == 1)
+                                                {
+                                                    RandartFlags2.Set(ItemFlag2.ResPois);
+                                                }
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistance;
+                                                break;
+                                            }
+                                        case 21:
+                                        case 22:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.ShieldOfReflection;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                CreateRandart(false);
+                                                break;
+                                            }
+                                    }
                                 }
                             }
+                            break;
                         }
-                        else if (power < -1)
-                        {
-                            switch (Program.Rng.DieRoll(7))
-                            {
-                                case 1:
-                                case 2:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.HatOfStupidity;
-                                        break;
-                                    }
-                                case 3:
-                                case 4:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.HatOfNaivety;
-                                        break;
-                                    }
-                                case 5:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.HatOfUgliness;
-                                        break;
-                                    }
-                                case 6:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.HatOfSickliness;
-                                        break;
-                                    }
-                                case 7:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.HatOfTeleportation;
-                                        break;
-                                    }
-                            }
-                        }
-                        break;
-                    }
-                case ItemCategory.Helm:
-                    {
-                        if (ItemSubCategory == HelmType.SvDragonHelm)
-                        {
-                            if (SaveGame.Instance.Level != null)
-                            {
-                                SaveGame.Instance.Level.TreasureRating += 5;
-                            }
-                            ApplyDragonscaleResistance();
-                        }
-                        else
+                    case ItemCategory.Gloves:
                         {
                             if (power > 1)
                             {
@@ -4380,45 +4160,176 @@ namespace Cthangband
                                 }
                                 else
                                 {
-                                    switch (Program.Rng.DieRoll(14))
+                                    switch (Program.Rng.DieRoll(10))
                                     {
                                         case 1:
                                         case 2:
-                                            {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfIntelligence;
-                                                break;
-                                            }
                                         case 3:
                                         case 4:
                                             {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfWisdom;
+                                                RareItemTypeIndex = Enumerations.RareItemType.GlovesOfFreeAction;
+                                                break;
+                                            }
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.GlovesOfSlaying;
+                                                break;
+                                            }
+                                        case 8:
+                                        case 9:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.GlovesOfAgility;
+                                                break;
+                                            }
+                                        case 10:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.GlovesOfPower;
+                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                                                break;
+                                            }
+                                    }
+                                }
+                            }
+                            else if (power < -1)
+                            {
+                                switch (Program.Rng.DieRoll(2))
+                                {
+                                    case 1:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfClumsiness;
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.GlovesOfWeakness;
+                                            break;
+                                        }
+                                }
+                            }
+                            break;
+                        }
+                    case ItemCategory.Boots:
+                        {
+                            if (power > 1)
+                            {
+                                if (Program.Rng.DieRoll(20) == 1)
+                                {
+                                    CreateRandart(false);
+                                }
+                                else
+                                {
+                                    switch (Program.Rng.DieRoll(24))
+                                    {
+                                        case 1:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.BootsOfSpeed;
+                                                break;
+                                            }
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.BootsOfFreeAction;
+                                                break;
+                                            }
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.BootsOfStealth;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.BootsWinged;
+                                                if (Program.Rng.DieRoll(2) == 1)
+                                                {
+                                                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                                                }
+                                                break;
+                                            }
+                                    }
+                                }
+                            }
+                            else if (power < -1)
+                            {
+                                switch (Program.Rng.DieRoll(3))
+                                {
+                                    case 1:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfNoise;
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfSlowness;
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.BootsOfAnnoyance;
+                                            break;
+                                        }
+                                }
+                            }
+                            break;
+                        }
+                    case ItemCategory.Crown:
+                        {
+                            if (power > 1)
+                            {
+                                if (Program.Rng.DieRoll(20) == 1)
+                                {
+                                    CreateRandart(false);
+                                }
+                                else
+                                {
+                                    switch (Program.Rng.DieRoll(8))
+                                    {
+                                        case 1:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfTheMagi;
+                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfMight;
+                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfTelepathy;
+                                                break;
+                                            }
+                                        case 4:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfRegeneration;
                                                 break;
                                             }
                                         case 5:
                                         case 6:
                                             {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfBeauty;
-                                                break;
-                                            }
-                                        case 7:
-                                        case 8:
-                                            {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
-                                                if (Program.Rng.DieRoll(7) == 1)
-                                                {
-                                                    RandartFlags3.Set(ItemFlag3.Telepathy);
-                                                }
-                                                break;
-                                            }
-                                        case 9:
-                                        case 10:
-                                            {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfLight;
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfLordliness;
+                                                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                                                 break;
                                             }
                                         default:
                                             {
-                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfInfravision;
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
+                                                if (Program.Rng.DieRoll(3) == 1)
+                                                {
+                                                    RandartFlags3.Set(ItemFlag3.Telepathy);
+                                                }
                                                 break;
                                             }
                                     }
@@ -4457,95 +4368,199 @@ namespace Cthangband
                                         }
                                 }
                             }
+                            break;
                         }
-                        break;
-                    }
-                case ItemCategory.Cloak:
-                    {
-                        if (ItemSubCategory == CloakType.SvElvenCloak)
+                    case ItemCategory.Helm:
                         {
-                            TypeSpecificValue = Program.Rng.DieRoll(4);
-                        }
-                        if (power > 1)
-                        {
-                            if (Program.Rng.DieRoll(20) == 1)
+                            if (ItemSubCategory == HelmType.SvDragonHelm)
                             {
-                                CreateRandart(false);
+                                if (SaveGame.Instance.Level != null)
+                                {
+                                    SaveGame.Instance.Level.TreasureRating += 5;
+                                }
+                                ApplyDragonscaleResistance();
                             }
                             else
                             {
-                                switch (Program.Rng.DieRoll(19))
+                                if (power > 1)
+                                {
+                                    if (Program.Rng.DieRoll(20) == 1)
+                                    {
+                                        CreateRandart(false);
+                                    }
+                                    else
+                                    {
+                                        switch (Program.Rng.DieRoll(14))
+                                        {
+                                            case 1:
+                                            case 2:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfIntelligence;
+                                                    break;
+                                                }
+                                            case 3:
+                                            case 4:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfWisdom;
+                                                    break;
+                                                }
+                                            case 5:
+                                            case 6:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfBeauty;
+                                                    break;
+                                                }
+                                            case 7:
+                                            case 8:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
+                                                    if (Program.Rng.DieRoll(7) == 1)
+                                                    {
+                                                        RandartFlags3.Set(ItemFlag3.Telepathy);
+                                                    }
+                                                    break;
+                                                }
+                                            case 9:
+                                            case 10:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfLight;
+                                                    break;
+                                                }
+                                            default:
+                                                {
+                                                    RareItemTypeIndex = Enumerations.RareItemType.HatOfInfravision;
+                                                    break;
+                                                }
+                                        }
+                                    }
+                                }
+                                else if (power < -1)
+                                {
+                                    switch (Program.Rng.DieRoll(7))
+                                    {
+                                        case 1:
+                                        case 2:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfStupidity;
+                                                break;
+                                            }
+                                        case 3:
+                                        case 4:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfNaivety;
+                                                break;
+                                            }
+                                        case 5:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfUgliness;
+                                                break;
+                                            }
+                                        case 6:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfSickliness;
+                                                break;
+                                            }
+                                        case 7:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.HatOfTeleportation;
+                                                break;
+                                            }
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    case ItemCategory.Cloak:
+                        {
+                            if (ItemSubCategory == CloakType.SvElvenCloak)
+                            {
+                                TypeSpecificValue = Program.Rng.DieRoll(4);
+                            }
+                            if (power > 1)
+                            {
+                                if (Program.Rng.DieRoll(20) == 1)
+                                {
+                                    CreateRandart(false);
+                                }
+                                else
+                                {
+                                    switch (Program.Rng.DieRoll(19))
+                                    {
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.CloakOfProtection;
+                                                break;
+                                            }
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                        case 14:
+                                        case 15:
+                                        case 16:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.CloakOfStealth;
+                                                break;
+                                            }
+                                        case 17:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.CloakOfAman;
+                                                break;
+                                            }
+                                        case 18:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.CloakOfElectricity;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                RareItemTypeIndex = Enumerations.RareItemType.CloakOfImmolation;
+                                                break;
+                                            }
+                                    }
+                                }
+                            }
+                            else if (power < -1)
+                            {
+                                switch (Program.Rng.DieRoll(3))
                                 {
                                     case 1:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfIrritation;
+                                            break;
+                                        }
                                     case 2:
+                                        {
+                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfVulnerability;
+                                            break;
+                                        }
                                     case 3:
-                                    case 4:
-                                    case 5:
-                                    case 6:
-                                    case 7:
-                                    case 8:
                                         {
-                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfProtection;
-                                            break;
-                                        }
-                                    case 9:
-                                    case 10:
-                                    case 11:
-                                    case 12:
-                                    case 13:
-                                    case 14:
-                                    case 15:
-                                    case 16:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfStealth;
-                                            break;
-                                        }
-                                    case 17:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfAman;
-                                            break;
-                                        }
-                                    case 18:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfElectricity;
-                                            break;
-                                        }
-                                    default:
-                                        {
-                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfImmolation;
+                                            RareItemTypeIndex = Enumerations.RareItemType.CloakOfEnveloping;
                                             break;
                                         }
                                 }
                             }
+                            break;
                         }
-                        else if (power < -1)
-                        {
-                            switch (Program.Rng.DieRoll(3))
-                            {
-                                case 1:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.CloakOfIrritation;
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.CloakOfVulnerability;
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        RareItemTypeIndex = Enumerations.RareItemType.CloakOfEnveloping;
-                                        break;
-                                    }
-                            }
-                        }
-                        break;
-                    }
+                }
             }
         }
 
         private void ApplyMagicToJewellery(int level, int power)
         {
+            if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
+            {
+                power = -1;
+            }
             IArtifactBias artifactBias = null;
             switch (Category)
             {
@@ -5128,39 +5143,13 @@ namespace Cthangband
             }
         }
 
-        private void ApplyMagicToMiscItem()
-        {
-            switch (Category)
-            {
-                case ItemCategory.Wand:
-                    {
-                        ChargeWand();
-                        break;
-                    }
-                case ItemCategory.Staff:
-                    {
-                        ChargeStaff();
-                        break;
-                    }
-                case ItemCategory.Chest:
-                    {
-                        if (ItemType.Level <= 0)
-                        {
-                            break;
-                        }
-                        TypeSpecificValue =
-                            Program.Rng.DieRoll(ItemType.Level);
-                        if (TypeSpecificValue > 55)
-                        {
-                            TypeSpecificValue = (short)(55 + Program.Rng.RandomLessThan(5));
-                        }
-                        break;
-                    }
-            }
-        }
-
         private void ApplyMagicToWeapon(int level, int power)
         {
+            if (power == 0)
+            {
+                return;
+            }
+
             int tohit1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
             int todam1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
             int tohit2 = GetBonusValue(10, level);

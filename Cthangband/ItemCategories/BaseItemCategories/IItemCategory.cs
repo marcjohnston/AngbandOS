@@ -159,12 +159,12 @@ namespace Cthangband.ItemCategories
         /// </summary>
         Colour Colour { get; }
 
-        ///// <summary>
-        ///// Applies magic to the item.  Does nothing, by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <param name="level"></param>
-        ///// <param name="power"></param>
-        //void ApplyMagic(Item item, int level, int power);
+        /// <summary>
+        /// Applies magic to the item.  Does nothing, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
+        void ApplyMagic(Item item, int level, int power);
     }
 }
