@@ -1,0 +1,228 @@
+﻿using Cthangband.Enumerations;
+using Cthangband.StaticData;
+using static Cthangband.Extensions;
+
+namespace Cthangband.ItemCategories
+{
+    internal abstract class BaseItemCategory : IItemCategory
+    {
+        //    public virtual bool CanSlay => false;
+
+        //    /// <summary>
+        //    /// Returns the name of the item, post macro processing.  The pluralization (~) and the prefix count (&) macros are handled accordingly.
+        //    /// </summary>
+        //    /// <param name="includeCountPrefix"></param>
+        //    /// <param name="name"></param>
+        //    /// <param name="count"></param>
+        //    /// <returns></returns>
+        //    public virtual string GetDescription(Item item, bool includeCountPrefix)
+        //    {
+        //        string pluralizedName = ApplyPlurizationMacro(item.ItemType.Name, item.Count);
+        //        return includeCountPrefix ? ApplyGetPrefixCountMacro(pluralizedName, item.Count, item.IsKnownArtifact) : pluralizedName;
+        //    }
+
+        //    public virtual string GetDetailedDescription(Item item)
+        //    {
+        //        string s = "";
+        //        if (item.IsKnown())
+        //        {
+        //            FlagSet f1 = new FlagSet();
+        //            FlagSet f2 = new FlagSet();
+        //            FlagSet f3 = new FlagSet();
+        //            item.GetMergedFlags(f1, f2, f3);
+        //            if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
+        //            {
+        //                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+        //            }
+        //            else if (item.BonusToHit != 0)
+        //            {
+        //                s += $" ({GetSignedValue(item.BonusToHit)})";
+        //            }
+        //            else if (item.BonusDamage != 0)
+        //            {
+        //                s += $" ({GetSignedValue(item.BonusDamage)})";
+        //            }
+        //            if (item.BaseArmourClass != 0)
+        //            {
+        //                // Add base armour class for all types of armour and when the base armour class is greater than zero.
+        //                s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
+        //            }
+        //            else if (item.BonusArmourClass != 0)
+        //            {
+        //                // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+        //                s += $" [{GetSignedValue(item.BonusArmourClass)}]";
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // If the item is not known and it has a base armour class, we will show it.
+        //            if (item.BaseArmourClass != 0)
+        //            {
+        //                s += $" [{item.BaseArmourClass}]";
+        //            }
+        //        }
+        //        return s;
+        //    }
+
+        //    public virtual string GetVerboseDescription(Item item)
+        //    {
+        //        string s = "";
+
+        //        FlagSet f1 = new FlagSet();
+        //        FlagSet f2 = new FlagSet();
+        //        FlagSet f3 = new FlagSet();
+        //        item.GetMergedFlags(f1, f2, f3);
+        //        if (item.IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
+        //        {
+        //            s += $" ({GetSignedValue(item.TypeSpecificValue)}";
+        //            if (f3.IsSet(ItemFlag3.HideType))
+        //            {
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Speed))
+        //            {
+        //                s += " speed";
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Blows))
+        //            {
+        //                if (item.TypeSpecificValue > 1)
+        //                {
+        //                    s += " attacks";
+        //                }
+        //                else
+        //                {
+        //                    s += " attack";
+        //                }
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Stealth))
+        //            {
+        //                s += " stealth";
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Search))
+        //            {
+        //                s += " searching";
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Infra))
+        //            {
+        //                s += " infravision";
+        //            }
+        //            else if (f1.IsSet(ItemFlag1.Tunnel))
+        //            {
+        //            }
+        //            s += ")";
+        //        }
+        //        if (item.IsKnown() && item.RechargeTimeLeft != 0)
+        //        {
+        //            s += " (charging)";
+        //        }
+        //        return s;
+        //    }
+
+        //    public virtual string GetFullDescription(Item item)
+        //    {
+        //        string tmpVal2 = "";
+        //        if (!string.IsNullOrEmpty(item.Inscription))
+        //        {
+        //            tmpVal2 = item.Inscription;
+        //        }
+        //        else if (item.IsCursed() && (item.IsKnown() || item.IdentifyFlags.IsSet(Constants.IdentSense)))
+        //        {
+        //            tmpVal2 = "cursed";
+        //        }
+        //        else if (!item.IsKnown() && item.IdentifyFlags.IsSet(Constants.IdentEmpty))
+        //        {
+        //            tmpVal2 = "empty";
+        //        }
+        //        else if (!item.IsFlavourAware() && item.ItemType.Tried)
+        //        {
+        //            tmpVal2 = "tried";
+        //        }
+        //        else if (item.Discount != 0)
+        //        {
+        //            tmpVal2 = item.Discount.ToString();
+        //            tmpVal2 += "% off";
+        //        }
+        //        if (!string.IsNullOrEmpty(tmpVal2))
+        //        {
+        //            tmpVal2 = $" {{{tmpVal2}}}";
+        //        }
+        //        return tmpVal2;
+        //    }
+
+        //    public virtual int GetBonusValue(Item item, int value) => 0;
+        //    public virtual bool IsWorthless(Item item) => false;
+
+        //    public virtual bool HasAdditionalTypeSpecificValue => false;
+
+        //    public virtual string DescribeActivationEffect(Item item)
+        //    {
+        //        return null;
+        //    }
+
+        //    public virtual string IdentifyFully(Item item) => null;
+
+        //    public virtual int BaseValue => 0;
+        //    public virtual bool HatesElectricity => false;
+        //    public virtual bool HatesFire => false;
+        //    public virtual bool HatesAcid => false;
+
+        //    public virtual bool HatesCold => false;
+
+        //    public virtual bool IgnoredByMonsters => false;
+
+        //    public virtual bool IsCharged => false;
+
+        //    public virtual bool CanBeConsumed => false;
+
+        //    public virtual Colour Colour { get; }
+
+        //    public virtual Realm SpellBookToToRealm => Realm.None;
+
+        //    protected int GetBonusValue(int level, int max)
+        //    {
+        //        if (level > Constants.MaxDepth - 1)
+        //        {
+        //            level = Constants.MaxDepth - 1;
+        //        }
+        //        int bonus = max * level / Constants.MaxDepth;
+        //        int extra = max * level % Constants.MaxDepth;
+        //        if (Program.Rng.RandomLessThan(Constants.MaxDepth) < extra)
+        //        {
+        //            bonus++;
+        //        }
+        //        int stand = max / 4;
+        //        extra = max % 4;
+        //        if (Program.Rng.RandomLessThan(4) < extra)
+        //        {
+        //            stand++;
+        //        }
+        //        int value = Program.Rng.RandomNormal(bonus, stand);
+        //        if (value < 0)
+        //        {
+        //            return 0;
+        //        }
+        //        if (value > max)
+        //        {
+        //            return max;
+        //        }
+        //        return value;
+        //    }
+
+        //    public virtual void ApplyMagic(Item item, int level, int power)
+        //    {
+        //    }
+
+        //    public virtual bool CanProvideSheathOfElectricity => false;
+
+        //    public virtual bool CanProvideSheathOfFire => false;
+
+        //    public virtual bool CanReflectBoltsAndArrows => false;
+
+        //    public virtual bool GeneratesMultipleCount => false;
+
+        //    public virtual bool GetsDamageMultiplier => false;
+
+        //    public virtual int PercentageBreakageChance => 10;
+
+
+    }
+}

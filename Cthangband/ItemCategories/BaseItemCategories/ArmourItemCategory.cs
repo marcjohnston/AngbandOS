@@ -1,0 +1,76 @@
+﻿using Cthangband.ArtifactBiases;
+using Cthangband.Enumerations;
+using Cthangband.StaticData;
+using static Cthangband.Extensions;
+
+namespace Cthangband.ItemCategories
+{
+    /// <summary>
+    /// Represents armour items.  Boots, clocks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
+    /// </summary>
+    internal class ArmourItemCategory : BaseItemCategory
+    {
+        //public override bool HasAdditionalTypeSpecificValue => true;
+        //public override int GetBonusValue(Item item, int value) => (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+
+        //public override bool IsWorthless(Item item)
+        //{
+        //    if (item.TypeSpecificValue < 0)
+        //    {
+        //        return true;
+        //    }
+        //    if (item.BonusArmourClass < 0)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        ///// <summary>
+        ///// Applies additional bonus armour class based on the power.
+        ///// </summary>
+        ///// <param name="item"></param>
+        ///// <param name="level"></param>
+        ///// <param name="power"></param>
+        //public override void ApplyMagic(Item item, int level, int power)
+        //{
+        //    int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+        //    int toac2 = GetBonusValue(10, level);
+        //    if (power > 0)
+        //    {
+        //        item.BonusArmourClass += toac1;
+        //        if (power > 1)
+        //        {
+        //            item.BonusArmourClass += toac2;
+        //        }
+        //    }
+        //    else if (power < 0)
+        //    {
+        //        item.BonusArmourClass -= toac1;
+        //        if (power < -1)
+        //        {
+        //            item.BonusArmourClass -= toac2;
+        //        }
+        //        if (item.BonusArmourClass < 0)
+        //        {
+        //            item.IdentifyFlags.Set(Constants.IdentCursed);
+        //        }
+        //    }
+        //}
+
+        //public override string GetDetailedDescription(Item item)
+        //{
+        //    string s = "";
+        //    if (item.IsKnown())
+        //    {
+        //        // Add base armour class for all types of armour and when the base armour class is greater than zero.
+        //        s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
+        //    }
+        //    else
+        //    {
+        //        s += $" [{item.BaseArmourClass}]";
+        //    }
+        //    return s;
+        //}
+    }
+}

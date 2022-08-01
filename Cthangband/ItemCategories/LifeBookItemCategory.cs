@@ -1,0 +1,18 @@
+﻿using Cthangband.Enumerations;
+
+namespace Cthangband.ItemCategories
+{
+    internal class LifeBookItemCategory : BaseItemCategory
+    {
+        //public override string GetDescription(Item item, bool includeCountPrefix)
+        //{
+        //    string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Life Magic" : $"Life {Pluralize("Spellbook", item.Count)}";
+        //    name = $"{name} {item.ItemType.Name}";
+        //    return includeCountPrefix ? GetPrefixCount(true, name, item.Count) : name;
+        //}
+        //public override bool HatesFire => true;
+        //public override Colour Colour => Colour.BrightWhite;
+        //public override Realm SpellBookToToRealm => Realm.Life;
+    }
+
+}
