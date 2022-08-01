@@ -306,7 +306,7 @@ namespace Cthangband
                 case 1:
                     if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     else
                     {
@@ -321,7 +321,7 @@ namespace Cthangband
                 case 2:
                     if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     else
                     {
@@ -336,7 +336,7 @@ namespace Cthangband
                 case 3:
                     if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     else
                     {
@@ -351,7 +351,7 @@ namespace Cthangband
                 case 4:
                     if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     else
                     {
@@ -497,7 +497,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     if (artifactBias == null)
                     {
@@ -513,7 +513,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     if (artifactBias == null)
                     {
@@ -530,7 +530,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        ApplyRandomResistance(ref artifactBias, specific);
+                        ApplyRandomResistance(ref artifactBias, 0);
                     }
                     break;
             }
