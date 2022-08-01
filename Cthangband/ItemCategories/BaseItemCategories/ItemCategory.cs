@@ -321,7 +321,7 @@ namespace Cthangband.ItemCategories
         //    public virtual bool HatesFire => false;
         public virtual bool HatesAcid => false;
 
-        //    public virtual bool HatesCold => false;
+        public virtual bool HatesCold => false;
 
         //    public virtual bool IgnoredByMonsters => false;
 

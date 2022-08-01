@@ -1873,16 +1873,7 @@ namespace Cthangband
 
         public bool HatesCold()
         {
-            switch (Category)
-            {
-                case ItemCategory.Potion:
-                case ItemCategory.Flask:
-                case ItemCategory.Bottle:
-                    {
-                        return true;
-                    }
-            }
-            return false;
+            return BaseCategory.HatesCold;
         }
 
         public bool HatesElec()

@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
         public BottleItemCategory() : base(ItemCategory.Bottle)
         {
         }
-        //public override bool HatesCold => true;
+        public override bool HatesCold => true;
         public override bool HatesAcid => true;
 
         //public override int PercentageBreakageChance => 100;

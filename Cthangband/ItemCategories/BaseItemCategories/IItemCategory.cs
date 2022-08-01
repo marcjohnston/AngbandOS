@@ -99,10 +99,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         bool HatesAcid { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item is susceptible to cold.  Returns false, by default.
-        ///// </summary>
-        //bool HatesCold { get; }
+        /// <summary>
+        /// Returns true, if the item is susceptible to cold.  Returns false, by default.
+        /// </summary>
+        bool HatesCold { get; }
 
         ///// <summary>
         ///// Returns true, if the item can absorb other items of the same type.  Returns false, by default.
