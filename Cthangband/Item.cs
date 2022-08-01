@@ -363,7 +363,7 @@ namespace Cthangband
         {
             ItemType kPtr = kIdx;
             ItemType = kIdx;
-            BaseCategory = new BaseItemCategory(kPtr.Category);
+            BaseCategory = new TempItemCategory(kPtr.Category);
             ItemSubCategory = kPtr.SubCategory;
             TypeSpecificValue = kPtr.Pval;
             Count = 1;
