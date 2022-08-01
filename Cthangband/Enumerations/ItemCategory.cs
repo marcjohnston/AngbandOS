@@ -12,12 +12,6 @@ namespace Cthangband.Enumerations
     [Serializable]
     internal class TempItemCategory
     {
-        public ItemCategory CategoryEnum { get; }
-
-        public TempItemCategory(ItemCategory itemCategory)
-        {
-            CategoryEnum = itemCategory;
-        }
     }
 
     /// <summary>

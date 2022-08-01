@@ -1,14 +1,19 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     /// <summary>
     /// Represents jewellery items.  Amulets and rings are both armour classes.
     /// </summary>
     internal class JewelleryItemCategory : BaseItemCategory
     {
+        public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
+        {
+        }
         //public override bool HasAdditionalTypeSpecificValue => true;
         //public override int GetBonusValue(Item item, int value) => (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
         //public override bool IsWorthless(Item item)

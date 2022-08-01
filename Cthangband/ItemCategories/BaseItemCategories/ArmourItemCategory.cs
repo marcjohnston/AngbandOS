@@ -1,15 +1,21 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 using static Cthangband.Extensions;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     /// <summary>
     /// Represents armour items.  Boots, clocks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
     /// </summary>
     internal class ArmourItemCategory : BaseItemCategory
     {
+        public ArmourItemCategory(ItemCategory itemCategory) : base(itemCategory)
+        {
+        }
+
         //public override bool HasAdditionalTypeSpecificValue => true;
         //public override int GetBonusValue(Item item, int value) => (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
 

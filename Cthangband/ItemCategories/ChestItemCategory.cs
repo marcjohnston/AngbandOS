@@ -1,10 +1,15 @@
 ﻿using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 
 namespace Cthangband.ItemCategories
 {
-    internal class ChestItemCategory : BaseItemCategory
+    [Serializable]
+   internal class ChestItemCategory : BaseItemCategory
     {
+        public ChestItemCategory() : base(ItemCategory.Chest)
+        {
+        }
         //public override bool HatesFire => true;
         //public override bool HatesAcid => true;
 

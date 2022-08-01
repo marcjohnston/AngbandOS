@@ -1,15 +1,20 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 using static Cthangband.Extensions;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     /// <summary>
     /// Represents weapon items.  Arrow, bolt, bow, digging, hafted, polearm, shot and swords are all weapon classes.
     /// </summary>
     internal class WeaponItemCategory : BaseItemCategory
     {
+        public WeaponItemCategory(ItemCategory itemCategory) : base(itemCategory)
+        {
+        }
         //    public override bool CanSlay => true;
 
         //    public override string GetDetailedDescription(Item item)

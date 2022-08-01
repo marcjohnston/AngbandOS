@@ -4,6 +4,11 @@ namespace Cthangband.ItemCategories
 {
     internal interface IItemCategory
     {
+        /// <summary>
+        /// Returns the ItemCategoryEnum value for backwards compatibility.
+        /// </summary>
+        ItemCategory CategoryEnum { get; }
+        
         ///// <summary>
         ///// Returns true, if the item is capable of having a bonus armour class applied.  Only weapons return true.  Returns false by default.
         ///// </summary>
@@ -18,14 +23,14 @@ namespace Cthangband.ItemCategories
         ///// <returns></returns>
         //bool CanSlay { get; }
 
-        ///// <summary>
-        ///// Returns a description for the item.  Returns a macro processed description, by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
-        ///// occur when the count is not included.</param>
-        ///// <returns></returns>
-        //string GetDescription(Item item, bool includeCountPrefix);
+        /// <summary>
+        /// Returns a description for the item.  Returns a macro processed description, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
+        /// occur when the count is not included.</param>
+        /// <returns></returns>
+        string GetDescription(Item item, bool includeCountPrefix);
 
         ///// <summary>
         ///// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.

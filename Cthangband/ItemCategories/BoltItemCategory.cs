@@ -1,9 +1,14 @@
 ﻿using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class BoltItemCategory : WeaponItemCategory
     {
+        public BoltItemCategory() : base(ItemCategory.Bolt)
+        {
+        }
         //public override Colour Colour => Colour.BrightBrown;
         //public override int GetBonusValue(Item item, int value)
         //{

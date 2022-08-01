@@ -1,18 +1,23 @@
 ﻿using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 using static Cthangband.Extensions;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class StaffItemCategory : BaseItemCategory
     {
-        //public override string GetDescription(Item item, bool includeCountPrefix)
-        //{
-        //    string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[item.ItemSubCategory].Name} ";
-        //    string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
-        //    string name = $"{flavour}{Pluralize("Staff", item.Count)}{ofName}";
-        //    return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        //}
+        public StaffItemCategory() : base(ItemCategory.Staff)
+        {
+        }
+        public override string GetDescription(Item item, bool includeCountPrefix)
+        {
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[item.ItemSubCategory].Name} ";
+            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
+            string name = $"{flavour}{Pluralize("Staff", item.Count)}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+        }
 
         //public override int BaseValue => 70;
         //public override bool HatesFire => true;

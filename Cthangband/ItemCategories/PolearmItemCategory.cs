@@ -1,9 +1,14 @@
 ﻿using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class PolearmItemCategory : WeaponItemCategory
     {
+        public PolearmItemCategory() : base(ItemCategory.Polearm)
+        {
+        }
         //public override bool HatesFire => true;
         //public override bool HatesAcid => true;
 

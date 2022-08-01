@@ -1,10 +1,15 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class CrownItemCategory : ArmourItemCategory
     {
+        public CrownItemCategory() : base(ItemCategory.Crown)
+        {
+        }
         //public override bool HatesAcid => true;
 
         //public override Colour Colour => Colour.BrightBrown;

@@ -1,9 +1,14 @@
 ﻿using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class ArrowItemCategory : WeaponItemCategory
     {
+        public ArrowItemCategory() : base(ItemCategory.Arrow)
+        {
+        }
         //    public override bool HatesFire => true;
         //    public override bool HatesAcid => true;
         //    public override int GetBonusValue(Item item, int value)

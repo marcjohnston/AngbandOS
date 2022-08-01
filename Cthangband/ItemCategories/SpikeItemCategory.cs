@@ -1,10 +1,14 @@
 ﻿using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class SpikeItemCategory : BaseItemCategory
     {
-        //public override Colour Colour => Colour.Grey;
+        public SpikeItemCategory() : base(ItemCategory.Spike)
+        {
+        }
 
         //public override bool GeneratesMultipleCount => true;
     }

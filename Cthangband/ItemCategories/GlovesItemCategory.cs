@@ -1,10 +1,15 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class GlovesItemCategory : ArmourItemCategory
     {
+        public GlovesItemCategory() : base(ItemCategory.Gloves)
+        {
+        }
         //public override bool HatesFire => true;
         //public override bool HatesAcid => true;
 

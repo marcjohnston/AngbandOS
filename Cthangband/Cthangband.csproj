@@ -196,7 +196,7 @@
     <Compile Include="ItemCategories\CrownItemCategory.cs" />
     <Compile Include="ItemCategories\DeathBookItemCategory.cs" />
     <Compile Include="ItemCategories\DiggingItemCategory.cs" />
-    <Compile Include="ItemCategories\DragArmourItemCategory.cs" />
+    <Compile Include="ItemCategories\DragArmorItemCategory.cs" />
     <Compile Include="ItemCategories\FlaskItemCategory.cs" />
     <Compile Include="ItemCategories\FolkBookItemCategory.cs" />
     <Compile Include="ItemCategories\FoodItemCategory.cs" />

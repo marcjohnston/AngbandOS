@@ -1,10 +1,15 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband.ItemCategories
 {
-    internal class DragArmourItemCategory : ArmourItemCategory
+    [Serializable]
+    internal class DragArmorItemCategory : ArmourItemCategory
     {
+        public DragArmorItemCategory() : base(ItemCategory.DragArmor)
+        {
+        }
         //public override bool HatesAcid => true;
 
         //public override Colour Colour => Colour.Grey;

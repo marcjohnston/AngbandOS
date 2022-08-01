@@ -1,23 +1,28 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 using static Cthangband.Extensions;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class AmuletItemCategory : JewelleryItemCategory
     {
-        //public override string GetDescription(Item item, bool includeCountPrefix)
-        //{
-        //    if (item.IsFixedArtifact() && item.IsFlavourAware())
-        //    {
-        //        return base.GetDescription(item, includeCountPrefix);
-        //    }
-        //    string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.AmuletFlavours[item.ItemSubCategory].Name} ";
-        //    string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
-        //    string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
-        //    return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        //}
+        public AmuletItemCategory() : base(ItemCategory.Amulet)
+        {
+        }
+        public override string GetDescription(Item item, bool includeCountPrefix)
+        {
+            if (item.IsFixedArtifact() && item.IsFlavourAware())
+            {
+                return base.GetDescription(item, includeCountPrefix);
+            }
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.AmuletFlavours[item.ItemSubCategory].Name} ";
+            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
+            string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+        }
         //public override int BaseValue => 45;
         //public override Colour Colour => Colour.Orange;
 

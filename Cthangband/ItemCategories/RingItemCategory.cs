@@ -1,27 +1,32 @@
 ﻿using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
+using System;
 using static Cthangband.Extensions;
 
 namespace Cthangband.ItemCategories
 {
+    [Serializable]
     internal class RingItemCategory : JewelleryItemCategory
     {
-        //public override string GetDescription(Item item, bool includeCountPrefix)
-        //{
-        //    if (item.IsFixedArtifact() && item.IsFlavourAware())
-        //    {
-        //        return base.GetDescription(item, includeCountPrefix);
-        //    }
-        //    string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RingFlavours[item.ItemSubCategory].Name} ";
-        //    if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
-        //    {
-        //        flavour = "Plain Gold";
-        //    }
-        //    string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
-        //    string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
-        //    return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        //}
+        public RingItemCategory() : base(ItemCategory.Ring)
+        {
+        }
+        public override string GetDescription(Item item, bool includeCountPrefix)
+        {
+            if (item.IsFixedArtifact() && item.IsFlavourAware())
+            {
+                return base.GetDescription(item, includeCountPrefix);
+            }
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RingFlavours[item.ItemSubCategory].Name} ";
+            if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
+            {
+                flavour = "Plain Gold";
+            }
+            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
+            string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+        }
         //public override int BaseValue => 45;
         //public override bool HatesElectricity => true;
         //public override Colour Colour => Colour.Gold;
