@@ -48,27 +48,29 @@ namespace Cthangband.ItemCategories
         }
 
         //    public override bool HasAdditionalTypeSpecificValue => true;
-        //    public override int GetBonusValue(Item item, int value)
-        //    {
-        //        value = (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-        //        if (item.DamageDice > item.ItemType.Dd && item.DamageDiceSides == item.ItemType.Ds)
-        //        {
-        //            value += (item.DamageDice - item.ItemType.Dd) * item.DamageDiceSides * 100;
-        //        }
-        //        return value;
-        //    }
-        //    public override bool IsWorthless(Item item)
-        //    {
-        //        if (item.TypeSpecificValue < 0)
-        //        {
-        //            return true;
-        //        }
-        //        if (item.BonusToHit + item.BonusDamage < 0)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
+        public override int GetBonusValue(Item item, int value)
+        {
+            int bonusValue = 0;
+            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+            if (item.DamageDice > item.ItemType.Dd && item.DamageDiceSides == item.ItemType.Ds)
+            {
+                bonusValue += (item.DamageDice - item.ItemType.Dd) * item.DamageDiceSides * 100;
+            }
+            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
+            return bonusValue;
+        }
+        public override bool IsWorthless(Item item)
+        {
+            if (item.TypeSpecificValue < 0)
+            {
+                return true;
+            }
+            if (item.BonusToHit + item.BonusDamage < 0)
+            {
+                return true;
+            }
+            return false;
+        }
         //    protected void ApplyMagicToWeapon(Item item, int level, int power)
         //    {
         //        int tohit1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);

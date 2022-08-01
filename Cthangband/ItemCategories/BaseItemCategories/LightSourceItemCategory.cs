@@ -10,7 +10,12 @@ namespace Cthangband.ItemCategories
         public LightSourceItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
-        //public override bool HasAdditionalTypeSpecificValue => true;
-        //public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
+        public override int GetBonusValue(Item item, int value)
+        {
+            int bonusValue = 0;
+            bonusValue += base.GetTypeSpecificValue(item, value); // Apply type specific values;
+            return bonusValue;
+        }
+        public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
     }
 }

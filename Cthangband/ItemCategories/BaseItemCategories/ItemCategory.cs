@@ -242,8 +242,72 @@ namespace Cthangband.ItemCategories
             return tmpVal2;
         }
 
-        //    public virtual int GetBonusValue(Item item, int value) => 0;
-        //    public virtual bool IsWorthless(Item item) => false;
+        public virtual int GetBonusValue(Item item, int value) => 0;
+
+        protected int GetTypeSpecificValue(Item item, int value)
+        {
+            if (item.TypeSpecificValue == 0)
+            {
+                return 0;
+            }
+
+            int bonusValue = 0;
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
+            item.GetMergedFlags(f1, f2, f3);
+            if (f1.IsSet(ItemFlag1.Str))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Int))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Wis))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Dex))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Con))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Cha))
+            {
+                bonusValue += item.TypeSpecificValue * 200;
+            }
+            if (f1.IsSet(ItemFlag1.Stealth))
+            {
+                bonusValue += item.TypeSpecificValue * 100;
+            }
+            if (f1.IsSet(ItemFlag1.Search))
+            {
+                bonusValue += item.TypeSpecificValue * 100;
+            }
+            if (f1.IsSet(ItemFlag1.Infra))
+            {
+                bonusValue += item.TypeSpecificValue * 50;
+            }
+            if (f1.IsSet(ItemFlag1.Tunnel))
+            {
+                bonusValue += item.TypeSpecificValue * 50;
+            }
+            if (f1.IsSet(ItemFlag1.Blows))
+            {
+                bonusValue += item.TypeSpecificValue * 5000;
+            }
+            if (f1.IsSet(ItemFlag1.Speed))
+            {
+                bonusValue += item.TypeSpecificValue * 3000;
+            }
+            return bonusValue;
+        }
+
+        public virtual bool IsWorthless(Item item) => false;
 
         //    public virtual bool HasAdditionalTypeSpecificValue => false;
 

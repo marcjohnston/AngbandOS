@@ -1337,7 +1337,7 @@ namespace Cthangband
             {
                 Profile.Instance.MsgPrint("DESCRIPTION FAILED!");
             }
-            return originalDescription;
+            return newDescription;
         }
 
         public int FlagBasedCost(int plusses)
@@ -2538,7 +2538,7 @@ namespace Cthangband
             ItemType.Tried = true;
         }
 
-        public int RealValue()
+        public int OriginalRealValue()
         {
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
@@ -2733,6 +2733,62 @@ namespace Cthangband
             return value;
         }
 
+        public int NewRealValue()
+        {
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
+            ItemType kPtr = ItemType;
+            if (kPtr.Cost == 0)
+            {
+                return 0;
+            }
+            int value = kPtr.Cost;
+            GetMergedFlags(f1, f2, f3);
+            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
+            {
+                value += FlagBasedCost(TypeSpecificValue);
+            }
+            else if (FixedArtifactIndex != 0)
+            {
+                FixedArtifact aPtr = Profile.Instance.FixedArtifacts[FixedArtifactIndex];
+                if (aPtr.Cost == 0)
+                {
+                    return 0;
+                }
+                value = aPtr.Cost;
+            }
+            else if (RareItemTypeIndex != Enumerations.RareItemType.None)
+            {
+                RareItemType ePtr = Profile.Instance.RareItemTypes[RareItemTypeIndex];
+                if (ePtr.Cost == 0)
+                {
+                    return 0;
+                }
+                value += ePtr.Cost;
+            }
+            if (BaseCategory.IsWorthless(this))
+            {
+                return 0;
+            }
+            value += BaseCategory.GetBonusValue(this, value);
+            return value;
+        }
+
+        public int RealValue()
+        {
+            int originalValue = OriginalRealValue();
+            int newValue = NewRealValue();
+            if (originalValue == newValue)
+            {
+                //Profile.Instance.MsgPrint("Inventory descriptions confirmed.");
+            }
+            else
+            {
+                Profile.Instance.MsgPrint("REAL VALUE FAILED!");
+            }
+            return newValue;
+        }
         public bool Stompable()
         {
             var t = this;

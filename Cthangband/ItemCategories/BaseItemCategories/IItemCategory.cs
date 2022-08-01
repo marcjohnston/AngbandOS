@@ -5,7 +5,7 @@ namespace Cthangband.ItemCategories
     internal interface IItemCategory
     {
         /// <summary>
-        /// Returns the ItemCategoryEnum value for backwards compatibility.
+        /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
         /// </summary>
         ItemCategory CategoryEnum { get; }
         
@@ -55,20 +55,20 @@ namespace Cthangband.ItemCategories
         /// <returns></returns>
         string GetFullDescription(Item item);
 
-        ///// <summary>
-        ///// Gets an additional bonus gold value associated with the item.  Returns 0 by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //int GetBonusValue(Item item, int value);
+        /// <summary>
+        /// Gets an additional bonus gold value associated with the item.  Returns a type specific value by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        int GetBonusValue(Item item, int value);
+
+        /// <summary>
+        /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
+        /// </summary>
+        bool IsWorthless(Item item);
 
         ///// <summary>
-        ///// Returns true, if the item is deemed as worthless.  Worthless items will ignore their intrinsic value and always be presents with 0 real value.  Returns false by default.
-        ///// </summary>
-        //bool IsWorthless(Item item);
-
-        ///// <summary>
-        ///// Returns true, if the item has a type specific gold value.  Returns false by default.
+        ///// Returns true, if the item has a type specific real value.  Returns false by default.
         ///// </summary>
         ///// <returns></returns>
         //bool HasAdditionalTypeSpecificValue { get; }

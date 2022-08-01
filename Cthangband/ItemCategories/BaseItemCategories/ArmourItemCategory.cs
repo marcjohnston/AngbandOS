@@ -17,20 +17,26 @@ namespace Cthangband.ItemCategories
         }
 
         //public override bool HasAdditionalTypeSpecificValue => true;
-        //public override int GetBonusValue(Item item, int value) => (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+        public override int GetBonusValue(Item item, int value)
+        {
+            int bonusValue = 0;
+            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
+            return bonusValue;
+        }
 
-        //public override bool IsWorthless(Item item)
-        //{
-        //    if (item.TypeSpecificValue < 0)
-        //    {
-        //        return true;
-        //    }
-        //    if (item.BonusArmourClass < 0)
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
+        public override bool IsWorthless(Item item)
+        {
+            if (item.TypeSpecificValue < 0)
+            {
+                return true;
+            }
+            if (item.BonusArmourClass < 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         ///// <summary>
         ///// Applies additional bonus armour class based on the power.

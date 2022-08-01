@@ -23,7 +23,13 @@ namespace Cthangband.ItemCategories
         //public override bool IsCharged => true;
         //public override Colour Colour => Colour.Chartreuse;
         //public override int PercentageBreakageChance => 25;
-        //public override int GetBonusValue(Item item, int value) => value / 20 * item.TypeSpecificValue;
+        public override int GetBonusValue(Item item, int value)
+        {
+            int bonusValue = 0;
+            bonusValue += value / 20 * item.TypeSpecificValue;
+            return bonusValue;
+        }
+
         public override string GetVerboseDescription(Item item)
         {
             string s = "";

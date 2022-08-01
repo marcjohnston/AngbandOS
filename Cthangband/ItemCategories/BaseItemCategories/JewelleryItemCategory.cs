@@ -14,27 +14,20 @@ namespace Cthangband.ItemCategories
         public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
-        //public override bool HasAdditionalTypeSpecificValue => true;
-        //public override int GetBonusValue(Item item, int value) => (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-        //public override bool IsWorthless(Item item)
-        //{
-        //    if (item.TypeSpecificValue < 0)
-        //    {
-        //        return true;
-        //    }
-        //    if (item.BonusArmourClass < 0)
-        //    {
-        //        return true;
-        //    }
-        //    if (item.BonusToHit < 0)
-        //    {
-        //        return true;
-        //    }
-        //    if (item.BonusDamage < 0)
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}       
+        public override int GetBonusValue(Item item, int value)
+        {
+            int bonusValue = 0;
+            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+            bonusValue += base.GetTypeSpecificValue(item, value); // Apply type specific values;
+            return bonusValue;
+        }
+        public override bool IsWorthless(Item item)
+        {
+            if (item.TypeSpecificValue < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.BonusDamage < 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
