@@ -11,7 +11,7 @@ namespace Cthangband.ItemCategories
         }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
-        public override int GetBonusValue(Item item, int value)
+        public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;
             bonusValue = (item.BonusToHit + item.BonusDamage) * 5;

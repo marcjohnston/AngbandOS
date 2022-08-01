@@ -14,7 +14,7 @@ namespace Cthangband.ItemCategories
         public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
-        public override int GetBonusValue(Item item, int value)
+        public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;
             bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;

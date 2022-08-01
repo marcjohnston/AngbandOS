@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
         public LightSourceItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
-        public override int GetBonusValue(Item item, int value)
+        public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;
             bonusValue += base.GetTypeSpecificValue(item, value); // Apply type specific values;

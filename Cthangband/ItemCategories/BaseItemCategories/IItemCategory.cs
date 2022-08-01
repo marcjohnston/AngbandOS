@@ -56,11 +56,11 @@ namespace Cthangband.ItemCategories
         string GetFullDescription(Item item);
 
         /// <summary>
-        /// Gets an additional bonus gold value associated with the item.  Returns a type specific value by default.
+        /// Gets an additional bonus gold real value associated with the item.  Returns a type specific value by default.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        int GetBonusValue(Item item, int value);
+        int GetBonusRealValue(Item item, int value);
 
         /// <summary>
         /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.

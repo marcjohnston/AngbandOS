@@ -86,16 +86,16 @@ namespace Cthangband.ItemCategories
             return s;
         }
 
-        //public override void ApplyMagic(Item item, int level, int power)
-        //{
-        //    if (item.ItemType.Level > 0)
-        //    {
-        //        item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.Level);
-        //        if (item.TypeSpecificValue > 55)
-        //        {
-        //            item.TypeSpecificValue = (short)(55 + Program.Rng.RandomLessThan(5));
-        //        }
-        //    }
-        //}
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            if (item.ItemType.Level > 0)
+            {
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.Level);
+                if (item.TypeSpecificValue > 55)
+                {
+                    item.TypeSpecificValue = (short)(55 + Program.Rng.RandomLessThan(5));
+                }
+            }
+        }
     }
 }
