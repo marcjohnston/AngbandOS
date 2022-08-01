@@ -33,7 +33,7 @@ namespace Cthangband.Enumerations
         public const uint SeeInvis = 0x00004000;
         public const uint ShElec = 0x00000002;
         public const uint ShFire = 0x00000001;
-        public const uint ShowMods = 0x00000400;
+        public const uint ShowMods = 0x00000400; // Show ToHit and ToDamage modifiers.  This is applied to all 61 weapons and the ring of slaying.
         public const uint SlowDigest = 0x00010000;
         public const uint Telepathy = 0x00008000;
         public const uint Teleport = 0x04000000;

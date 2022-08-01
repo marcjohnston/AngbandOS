@@ -32,26 +32,28 @@ namespace Cthangband.ItemCategories
         /// <returns></returns>
         string GetDescription(Item item, bool includeCountPrefix);
 
-        ///// <summary>
-        ///// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //string GetDetailedDescription(Item item);
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        string GetDetailedDescription(Item item);
 
-        ///// <summary>
-        ///// Returns an additional description of the item that is appended to the detailed description, when needed.  Returns string.empty by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //string GetVerboseDescription(Item item);
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the detailed description, when needed.  
+        /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        string GetVerboseDescription(Item item);
 
-        ///// <summary>
-        ///// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  Returns string.empty by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //string GetFullDescription(Item item);
+        /// <summary>
+        /// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  
+        /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        string GetFullDescription(Item item);
 
         ///// <summary>
         ///// Gets an additional bonus gold value associated with the item.  Returns 0 by default.

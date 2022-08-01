@@ -371,16 +371,16 @@ namespace Cthangband.ItemCategories
         //    ApplyMagicToLightSource(item, power);
         //}
         //public override int PercentageBreakageChance => 50;
-        //public override string GetVerboseDescription(Item item)
-        //{
-        //    string s = "";
-        //    if (item.ItemSubCategory == LightType.Torch || item.ItemSubCategory == LightType.Lantern)
-        //    { 
-        //        s += $" (with {item.TypeSpecificValue} {Pluralize("turn", item.Count)} of light)";
-        //    }
-        //    s += base.GetVerboseDescription(item);
-        //    return s;
-        //}
+        public override string GetVerboseDescription(Item item)
+        {
+            string s = "";
+            if (item.ItemSubCategory == LightType.Torch || item.ItemSubCategory == LightType.Lantern)
+            {
+                s += $" (with {item.TypeSpecificValue} {Pluralize("turn", item.TypeSpecificValue)} of light)";
+            }
+            s += base.GetVerboseDescription(item);
+            return s;
+        }
 
         //public override string IdentifyFully(Item item)
         //{

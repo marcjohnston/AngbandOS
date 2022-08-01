@@ -1,5 +1,8 @@
-﻿namespace Cthangband.ActivationPowers
+﻿using System;
+
+namespace Cthangband.ActivationPowers
 {
+    [Serializable]
     /// <summary>
     /// Represents the base functionality for an ArtifactPower.  All ArtifactPower objects need to implement this functionality.
     /// </summary>

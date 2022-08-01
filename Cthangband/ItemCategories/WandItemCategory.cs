@@ -24,16 +24,16 @@ namespace Cthangband.ItemCategories
         //public override Colour Colour => Colour.Chartreuse;
         //public override int PercentageBreakageChance => 25;
         //public override int GetBonusValue(Item item, int value) => value / 20 * item.TypeSpecificValue;
-        //public override string GetVerboseDescription(Item item)
-        //{
-        //    string s = "";
-        //    if (item.IsKnown())
-        //    {
-        //        s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
-        //    }
-        //    s += base.GetVerboseDescription(item);
-        //    return s;
-        //}
+        public override string GetVerboseDescription(Item item)
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
+            }
+            s += base.GetVerboseDescription(item);
+            return s;
+        }
 
         //private void ChargeWand(Item item)
         //{

@@ -670,235 +670,25 @@ namespace Cthangband
                 return basenm;
             }
 
-            if (Category == ItemCategory.Chest)
-            {
-                if (!IsKnown())
-                {
-                }
-                else if (TypeSpecificValue == 0)
-                {
-                    basenm += " (empty)";
-                }
-                else if (TypeSpecificValue < 0)
-                {
-                    if (GlobalData.ChestTraps[-TypeSpecificValue] != 0)
-                    {
-                        basenm += " (disarmed)";
-                    }
-                    else
-                    {
-                        basenm += " (unlocked)";
-                    }
-                }
-                else
-                {
-                    switch (GlobalData.ChestTraps[TypeSpecificValue])
-                    {
-                        case 0:
-                            {
-                                basenm += " (Locked)";
-                                break;
-                            }
-                        case ChestTrap.ChestLoseStr:
-                            {
-                                basenm += " (Poison Needle)";
-                                break;
-                            }
-                        case ChestTrap.ChestLoseCon:
-                            {
-                                basenm += " (Poison Needle)";
-                                break;
-                            }
-                        case ChestTrap.ChestPoison:
-                            {
-                                basenm += " (Gas Trap)";
-                                break;
-                            }
-                        case ChestTrap.ChestParalyze:
-                            {
-                                basenm += " (Gas Trap)";
-                                break;
-                            }
-                        case ChestTrap.ChestExplode:
-                            {
-                                basenm += " (Explosion Device)";
-                                break;
-                            }
-                        case ChestTrap.ChestSummon:
-                            {
-                                basenm += " (Summoning Runes)";
-                                break;
-                            }
-                        default:
-                            {
-                                basenm += " (Multiple Traps)";
-                                break;
-                            }
-                    }
-                }
-            }
-            switch (Category)
-            {
-                case ItemCategory.Shot:
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Digging:
-                    basenm += $" ({DamageDice}d{DamageDiceSides})";
-                    break;
-
-                case ItemCategory.Bow:
-                    int power = ItemSubCategory % 10;
-                    if (f3.IsSet(ItemFlag3.XtraMight))
-                    {
-                        power++;
-                    }
-                    basenm += $" (x{power})";
-                    break;
-            }
-            if (IsKnown())
-            {
-                if (f3.IsSet(ItemFlag3.ShowMods) || (BonusToHit != 0 && BonusDamage != 0) || Category == ItemCategory.Shot
-                    || Category == ItemCategory.Bolt || Category == ItemCategory.Arrow || Category == ItemCategory.Bow 
-                    || Category == ItemCategory.Hafted || Category == ItemCategory.Polearm || Category == ItemCategory.Sword || Category == ItemCategory.Digging)
-                {
-                    basenm += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
-                }
-                else if (BonusToHit != 0)
-                {
-                    basenm += $" ({GetSignedValue(BonusToHit)})";
-                }
-                else if (BonusDamage != 0)
-                {
-                    basenm += $" ({GetSignedValue(BonusDamage)})";
-                }
-
-                if (BaseArmourClass != 0 
-                    || Category == ItemCategory.Boots 
-                    || Category == ItemCategory.Gloves
-                    || Category == ItemCategory.Cloak
-                    || Category == ItemCategory.Crown
-                    || Category == ItemCategory.Helm
-                    || Category == ItemCategory.Shield
-                    || Category == ItemCategory.SoftArmor
-                    || Category == ItemCategory.HardArmor
-                    || Category == ItemCategory.DragArmor)
-                {
-                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                    basenm += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
-                }
-                else if (BonusArmourClass != 0)
-                {
-                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-                    basenm += $" [{GetSignedValue(BonusArmourClass)}]";
-                }
-            }
-            else if (Category == ItemCategory.Boots
-                    || Category == ItemCategory.Gloves
-                    || Category == ItemCategory.Cloak
-                    || Category == ItemCategory.Crown
-                    || Category == ItemCategory.Helm
-                    || Category == ItemCategory.Shield
-                    || Category == ItemCategory.SoftArmor
-                    || Category == ItemCategory.HardArmor
-                    || Category == ItemCategory.DragArmor)
-            {
-                basenm += $" [{BaseArmourClass}]";
-            }
+            // This is the detailed description.
+            basenm += BaseCategory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
-            if (IsKnown() && (Category == ItemCategory.Staff || Category == ItemCategory.Wand))
-            {
-                basenm += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
-            }
-            else if (IsKnown() && Category == ItemCategory.Rod)
-            {
-                if (TypeSpecificValue != 0)
-                {
-                    basenm += " (charging)";
-                }
-            }
-            else if (Category == ItemCategory.Light &&
-                     (ItemSubCategory == Enumerations.LightType.Torch || ItemSubCategory == Enumerations.LightType.Lantern))
-            {
-                basenm += $" (with {TypeSpecificValue} turns of light)";
-            }
-            if (IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
-            {
-                basenm += $" ({GetSignedValue(TypeSpecificValue)}";
-                if (f3.IsSet(ItemFlag3.HideType))
-                {
-                }
-                else if (f1.IsSet(ItemFlag1.Speed))
-                {
-                    basenm += " speed";
-                }
-                else if (f1.IsSet(ItemFlag1.Blows))
-                {
-                    if (TypeSpecificValue > 1)
-                    {
-                        basenm += " attacks";
-                    }
-                    else
-                    {
-                        basenm += " attack";
-                    }
-                }
-                else if (f1.IsSet(ItemFlag1.Stealth))
-                {
-                    basenm += " stealth";
-                }
-                else if (f1.IsSet(ItemFlag1.Search))
-                {
-                    basenm += " searching";
-                }
-                else if (f1.IsSet(ItemFlag1.Infra))
-                {
-                    basenm += " infravision";
-                }
-                else if (f1.IsSet(ItemFlag1.Tunnel))
-                {
-                }
-                basenm += ")";
-            }
-            if (IsKnown() && RechargeTimeLeft != 0)
-            {
-                basenm += " (charging)";
-            }
+
+            basenm += BaseCategory.GetVerboseDescription(this);
+
+            // This is the verbose description.
             if (mode < 3)
             {
                 return basenm;
             }
-            string tmpVal2 = "";
-            if (!string.IsNullOrEmpty(Inscription))
-            {
-                tmpVal2 = Inscription;
-            }
-            else if (IsCursed() && (IsKnown() || IdentifyFlags.IsSet(Constants.IdentSense)))
-            {
-                tmpVal2 = "cursed";
-            }
-            else if (!IsKnown() && IdentifyFlags.IsSet(Constants.IdentEmpty))
-            {
-                tmpVal2 = "empty";
-            }
-            else if (!IsFlavourAware() && IsTried())
-            {
-                tmpVal2 = "tried";
-            }
-            else if (Discount != 0)
-            {
-                tmpVal2 = Discount.ToString();
-                tmpVal2 += "% off";
-            }
-            if (!string.IsNullOrEmpty(tmpVal2))
-            {
-                basenm += $" {{{tmpVal2}}}";
-            }
+
+            // This is the full description.
+            basenm += BaseCategory.GetFullDescription(this);
+
+            // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
             {
                 basenm = basenm.Substring(0, 75);

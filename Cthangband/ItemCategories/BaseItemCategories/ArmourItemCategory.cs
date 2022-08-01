@@ -64,19 +64,36 @@ namespace Cthangband.ItemCategories
         //    }
         //}
 
-        //public override string GetDetailedDescription(Item item)
-        //{
-        //    string s = "";
-        //    if (item.IsKnown())
-        //    {
-        //        // Add base armour class for all types of armour and when the base armour class is greater than zero.
-        //        s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
-        //    }
-        //    else
-        //    {
-        //        s += $" [{item.BaseArmourClass}]";
-        //    }
-        //    return s;
-        //}
+        public override string GetDetailedDescription(Item item)
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                FlagSet f1 = new FlagSet();
+                FlagSet f2 = new FlagSet();
+                FlagSet f3 = new FlagSet();
+                item.GetMergedFlags(f1, f2, f3);
+                if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                {
+                    s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+                }
+                else if (item.BonusToHit != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusToHit)})";
+                }
+                else if (item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                }
+
+                // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
+            }
+            else if (item.BaseArmourClass != 0)
+            {
+                s += $" [{item.BaseArmourClass}]";
+            }
+            return s;
+        }
     }
 }

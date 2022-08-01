@@ -20,16 +20,16 @@ namespace Cthangband.ItemCategories
         }
         //public override int BaseValue => 90;
         //public override Colour Colour => Colour.Turquoise;
-        //public override string GetVerboseDescription(Item item)
-        //{
-        //    string s = "";
-        //    if (item.IsKnown() && item.TypeSpecificValue != 0)
-        //    {
-        //        s += $" (charging)";
-        //    }
-        //    s += base.GetVerboseDescription(item);
-        //    return s;
-        //}
+        public override string GetVerboseDescription(Item item)
+        {
+            string s = "";
+            if (item.IsKnown() && item.TypeSpecificValue != 0)
+            {
+                s += $" (charging)";
+            }
+            s += base.GetVerboseDescription(item);
+            return s;
+        }
     }
 
 }

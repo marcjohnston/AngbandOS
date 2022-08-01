@@ -26,16 +26,16 @@ namespace Cthangband.ItemCategories
         //public override bool IsCharged => true;
         //public override Colour Colour => Colour.Purple;
         //public override int GetBonusValue(Item item, int value) => value / 20 * item.TypeSpecificValue;
-        //public override string GetVerboseDescription(Item item)
-        //{
-        //    string s = "";
-        //    if (item.IsKnown())
-        //    {
-        //        s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
-        //    }
-        //    s += base.GetVerboseDescription(item);
-        //    return s;
-        //}
+        public override string GetVerboseDescription(Item item)
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
+            }
+            s += base.GetVerboseDescription(item);
+            return s;
+        }
 
         //private void ChargeStaff(Item item)
         //{

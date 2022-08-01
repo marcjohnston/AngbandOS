@@ -17,21 +17,36 @@ namespace Cthangband.ItemCategories
         }
         //    public override bool CanSlay => true;
 
-        //    public override string GetDetailedDescription(Item item)
-        //    {
-        //        string s = $" ({item.DamageDice}d{item.DamageDiceSides})";
+        public override string GetDetailedDescription(Item item)
+        {
+            string s = "";
+            s += $" ({item.DamageDice}d{item.DamageDiceSides})";
+            if (item.IsKnown())
+            {
+                FlagSet f1 = new FlagSet();
+                FlagSet f2 = new FlagSet();
+                FlagSet f3 = new FlagSet();
+                item.GetMergedFlags(f1, f2, f3);
+                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
 
-        //        if (item.IsKnown())
-        //        {
-        //            s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
-        //        }
-        //        return s;
-        //    }
+                if (item.BaseArmourClass != 0)
+                {
+                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                    s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
+                }
+                else if (item.BonusArmourClass != 0)
+                {
+                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(item.BonusArmourClass)}]";
+                }
+            }
+            else if (item.BaseArmourClass != 0)
+            {
+                s += $" [{item.BaseArmourClass}]";
+            }
+            return s;
+        }
 
-        //    public override string GetVerboseDescription(Item item)
-        //    {
-        //        return base.GetVerboseDescription(item);
-        //    }
         //    public override bool HasAdditionalTypeSpecificValue => true;
         //    public override int GetBonusValue(Item item, int value)
         //    {

@@ -122,132 +122,125 @@ namespace Cthangband.ItemCategories
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 
-        //    public virtual string GetDetailedDescription(Item item)
-        //    {
-        //        string s = "";
-        //        if (item.IsKnown())
-        //        {
-        //            FlagSet f1 = new FlagSet();
-        //            FlagSet f2 = new FlagSet();
-        //            FlagSet f3 = new FlagSet();
-        //            item.GetMergedFlags(f1, f2, f3);
-        //            if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
-        //            {
-        //                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
-        //            }
-        //            else if (item.BonusToHit != 0)
-        //            {
-        //                s += $" ({GetSignedValue(item.BonusToHit)})";
-        //            }
-        //            else if (item.BonusDamage != 0)
-        //            {
-        //                s += $" ({GetSignedValue(item.BonusDamage)})";
-        //            }
-        //            if (item.BaseArmourClass != 0)
-        //            {
-        //                // Add base armour class for all types of armour and when the base armour class is greater than zero.
-        //                s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
-        //            }
-        //            else if (item.BonusArmourClass != 0)
-        //            {
-        //                // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-        //                s += $" [{GetSignedValue(item.BonusArmourClass)}]";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            // If the item is not known and it has a base armour class, we will show it.
-        //            if (item.BaseArmourClass != 0)
-        //            {
-        //                s += $" [{item.BaseArmourClass}]";
-        //            }
-        //        }
-        //        return s;
-        //    }
+        public virtual string GetDetailedDescription(Item item)
+        {
+            string s = "";
+            if (item.IsKnown())
+            {
+                FlagSet f1 = new FlagSet();
+                FlagSet f2 = new FlagSet();
+                FlagSet f3 = new FlagSet();
+                item.GetMergedFlags(f1, f2, f3);
+                if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                {
+                    s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+                }
+                else if (item.BonusToHit != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusToHit)})";
+                }
+                else if (item.BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(item.BonusDamage)})";
+                }
 
-        //    public virtual string GetVerboseDescription(Item item)
-        //    {
-        //        string s = "";
+                if (item.BaseArmourClass != 0)
+                {
+                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                    s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
+                }
+                else if (item.BonusArmourClass != 0)
+                {
+                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(item.BonusArmourClass)}]";
+                }
+            }
+            return s;
+        }
 
-        //        FlagSet f1 = new FlagSet();
-        //        FlagSet f2 = new FlagSet();
-        //        FlagSet f3 = new FlagSet();
-        //        item.GetMergedFlags(f1, f2, f3);
-        //        if (item.IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
-        //        {
-        //            s += $" ({GetSignedValue(item.TypeSpecificValue)}";
-        //            if (f3.IsSet(ItemFlag3.HideType))
-        //            {
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Speed))
-        //            {
-        //                s += " speed";
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Blows))
-        //            {
-        //                if (item.TypeSpecificValue > 1)
-        //                {
-        //                    s += " attacks";
-        //                }
-        //                else
-        //                {
-        //                    s += " attack";
-        //                }
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Stealth))
-        //            {
-        //                s += " stealth";
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Search))
-        //            {
-        //                s += " searching";
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Infra))
-        //            {
-        //                s += " infravision";
-        //            }
-        //            else if (f1.IsSet(ItemFlag1.Tunnel))
-        //            {
-        //            }
-        //            s += ")";
-        //        }
-        //        if (item.IsKnown() && item.RechargeTimeLeft != 0)
-        //        {
-        //            s += " (charging)";
-        //        }
-        //        return s;
-        //    }
+        public virtual string GetVerboseDescription(Item item)
+        {
+            string s = "";
 
-        //    public virtual string GetFullDescription(Item item)
-        //    {
-        //        string tmpVal2 = "";
-        //        if (!string.IsNullOrEmpty(item.Inscription))
-        //        {
-        //            tmpVal2 = item.Inscription;
-        //        }
-        //        else if (item.IsCursed() && (item.IsKnown() || item.IdentifyFlags.IsSet(Constants.IdentSense)))
-        //        {
-        //            tmpVal2 = "cursed";
-        //        }
-        //        else if (!item.IsKnown() && item.IdentifyFlags.IsSet(Constants.IdentEmpty))
-        //        {
-        //            tmpVal2 = "empty";
-        //        }
-        //        else if (!item.IsFlavourAware() && item.ItemType.Tried)
-        //        {
-        //            tmpVal2 = "tried";
-        //        }
-        //        else if (item.Discount != 0)
-        //        {
-        //            tmpVal2 = item.Discount.ToString();
-        //            tmpVal2 += "% off";
-        //        }
-        //        if (!string.IsNullOrEmpty(tmpVal2))
-        //        {
-        //            tmpVal2 = $" {{{tmpVal2}}}";
-        //        }
-        //        return tmpVal2;
-        //    }
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
+            item.GetMergedFlags(f1, f2, f3);
+            if (item.IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
+            {
+                s += $" ({GetSignedValue(item.TypeSpecificValue)}";
+                if (f3.IsSet(ItemFlag3.HideType))
+                {
+                }
+                else if (f1.IsSet(ItemFlag1.Speed))
+                {
+                    s += " speed";
+                }
+                else if (f1.IsSet(ItemFlag1.Blows))
+                {
+                    if (item.TypeSpecificValue > 1)
+                    {
+                        s += " attacks";
+                    }
+                    else
+                    {
+                        s += " attack";
+                    }
+                }
+                else if (f1.IsSet(ItemFlag1.Stealth))
+                {
+                    s += " stealth";
+                }
+                else if (f1.IsSet(ItemFlag1.Search))
+                {
+                    s += " searching";
+                }
+                else if (f1.IsSet(ItemFlag1.Infra))
+                {
+                    s += " infravision";
+                }
+                else if (f1.IsSet(ItemFlag1.Tunnel))
+                {
+                }
+                s += ")";
+            }
+            if (item.IsKnown() && item.RechargeTimeLeft != 0)
+            {
+                s += " (charging)";
+            }
+            return s;
+        }
+
+        public virtual string GetFullDescription(Item item)
+        {
+            string tmpVal2 = "";
+            if (!string.IsNullOrEmpty(item.Inscription))
+            {
+                tmpVal2 = item.Inscription;
+            }
+            else if (item.IsCursed() && (item.IsKnown() || item.IdentifyFlags.IsSet(Constants.IdentSense)))
+            {
+                tmpVal2 = "cursed";
+            }
+            else if (!item.IsKnown() && item.IdentifyFlags.IsSet(Constants.IdentEmpty))
+            {
+                tmpVal2 = "empty";
+            }
+            else if (!item.IsFlavourAware() && item.ItemType.Tried)
+            {
+                tmpVal2 = "tried";
+            }
+            else if (item.Discount != 0)
+            {
+                tmpVal2 = item.Discount.ToString();
+                tmpVal2 += "% off";
+            }
+            if (!string.IsNullOrEmpty(tmpVal2))
+            {
+                tmpVal2 = $" {{{tmpVal2}}}";
+            }
+            return tmpVal2;
+        }
 
         //    public virtual int GetBonusValue(Item item, int value) => 0;
         //    public virtual bool IsWorthless(Item item) => false;
