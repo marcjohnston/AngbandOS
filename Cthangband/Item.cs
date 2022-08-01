@@ -30,7 +30,7 @@ namespace Cthangband
         public IActivationPower BonusPowerSubType;
         public Enumerations.RareItemType BonusPowerType;
         public int BonusToHit;
-        public BaseItemCategory BaseCategory;
+        public TempItemCategory BaseCategory;
         public int Count;
         public int DamageDice;
         public int DamageDiceSides;
@@ -53,6 +53,8 @@ namespace Cthangband
         public Item()
         {
         }
+
+        public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
         public ItemCategory Category => BaseCategory.CategoryEnum;
 

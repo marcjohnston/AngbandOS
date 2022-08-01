@@ -10,11 +10,11 @@ using System;
 namespace Cthangband.Enumerations
 {
     [Serializable]
-    internal class BaseItemCategory
+    internal class TempItemCategory
     {
         public ItemCategory CategoryEnum { get; }
 
-        public BaseItemCategory(ItemCategory itemCategory)
+        public TempItemCategory(ItemCategory itemCategory)
         {
             CategoryEnum = itemCategory;
         }
