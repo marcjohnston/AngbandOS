@@ -84,10 +84,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         int BaseValue { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item is susceptible to electricity.  Returns false, by default.
-        ///// </summary>
-        //bool HatesElectricity { get; }
+        /// <summary>
+        /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
+        /// </summary>
+        bool HatesElectricity { get; }
 
         ///// <summary>
         ///// Returns true, if the item is susceptible to fire.  Returns false, by default.

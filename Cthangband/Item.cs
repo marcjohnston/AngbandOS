@@ -1878,15 +1878,7 @@ namespace Cthangband
 
         public bool HatesElec()
         {
-            switch (Category)
-            {
-                case ItemCategory.Ring:
-                case ItemCategory.Wand:
-                    {
-                        return true;
-                    }
-            }
-            return false;
+            return BaseCategory.HatesElectricity;
         }
 
         public bool HatesFire()

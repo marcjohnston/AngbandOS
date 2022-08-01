@@ -317,7 +317,7 @@ namespace Cthangband.ItemCategories
         public virtual string Identify(Item item) => null;
 
         public virtual int BaseValue => 0;
-        //    public virtual bool HatesElectricity => false;
+        public virtual bool HatesElectricity => false;
         //    public virtual bool HatesFire => false;
         public virtual bool HatesAcid => false;
 
