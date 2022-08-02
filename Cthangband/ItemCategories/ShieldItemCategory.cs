@@ -96,6 +96,6 @@ namespace Cthangband.ItemCategories
         //    }
         //}
 
-        //public override bool CanReflectBoltsAndArrows => true;
+        public override bool CanReflectBoltsAndArrows => true;
     }
 }

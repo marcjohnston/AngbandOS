@@ -3466,8 +3466,7 @@ namespace Cthangband
                     break;
 
                 case 39:
-                    if (Category >= ItemCategory.Cloak &&
-                        Category <= ItemCategory.HardArmor)
+                    if (BaseCategory.CanProvideSheathOfElectricity)
                     {
                         RandartFlags3.Set(ItemFlag3.ShElec);
                     }
@@ -3482,8 +3481,7 @@ namespace Cthangband
                     break;
 
                 case 40:
-                    if (Category >= ItemCategory.Cloak &&
-                        Category <= ItemCategory.HardArmor)
+                    if (BaseCategory.CanProvideSheathOfFire)
                     {
                         RandartFlags3.Set(ItemFlag3.ShFire);
                     }
@@ -3498,9 +3496,7 @@ namespace Cthangband
                     break;
 
                 case 41:
-                    if (Category == ItemCategory.Shield ||
-                        Category == ItemCategory.Cloak || Category == ItemCategory.Helm ||
-                        Category == ItemCategory.HardArmor)
+                    if (BaseCategory.CanReflectBoltsAndArrows)
                     {
                         RandartFlags2.Set(ItemFlag2.Reflect);
                     }

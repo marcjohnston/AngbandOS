@@ -124,20 +124,20 @@ namespace Cthangband.ItemCategories
         ///// </summary>
         //bool GeneratesMultipleCount { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.
-        ///// </summary>
-        //bool CanProvideSheathOfElectricity { get; }
+        /// <summary>
+        /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.
+        /// </summary>
+        bool CanProvideSheathOfElectricity { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item can provide a sheath of fire.  Returns false, by default.  Cloaks, soft and hard armor return true.
-        ///// </summary>
-        //bool CanProvideSheathOfFire { get; }
+        /// <summary>
+        /// Returns true, if the item can provide a sheath of fire.  Returns false, by default.  Cloaks, soft and hard armor return true.
+        /// </summary>
+        bool CanProvideSheathOfFire { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
-        ///// </summary>
-        //bool CanReflectBoltsAndArrows { get; }
+        /// <summary>
+        /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
+        /// </summary>
+        bool CanReflectBoltsAndArrows { get; }
 
         ///// <summary>
         ///// Returns true, if the item is ignored by monsters.  Only gold is ignored and returns true.

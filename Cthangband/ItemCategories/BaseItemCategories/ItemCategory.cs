@@ -340,11 +340,11 @@ namespace Cthangband.ItemCategories
         {
         }
 
-        //    public virtual bool CanProvideSheathOfElectricity => false;
+        public virtual bool CanProvideSheathOfElectricity => false;
 
-        //    public virtual bool CanProvideSheathOfFire => false;
+        public virtual bool CanProvideSheathOfFire => false;
 
-        //    public virtual bool CanReflectBoltsAndArrows => false;
+        public virtual bool CanReflectBoltsAndArrows => false;
 
         //    public virtual bool GeneratesMultipleCount => false;
 

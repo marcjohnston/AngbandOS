@@ -99,10 +99,10 @@ namespace Cthangband.ItemCategories
         //    }
         //}
 
-        //public override bool CanProvideSheathOfElectricity => true;
+        public override bool CanProvideSheathOfElectricity => true;
 
-        //public override bool CanProvideSheathOfFire => true;
+        public override bool CanProvideSheathOfFire => true;
 
-        //public override bool CanReflectBoltsAndArrows => true;
+        public override bool CanReflectBoltsAndArrows => true;
     }
 }
