@@ -11,6 +11,6 @@ namespace Cthangband.ItemCategories
         }
 
         public override Colour Colour => Colour.Grey;
-        //public override bool GeneratesMultipleCount => true;
+        public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
     }
 }

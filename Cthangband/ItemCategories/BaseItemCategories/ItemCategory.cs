@@ -346,7 +346,7 @@ namespace Cthangband.ItemCategories
 
         public virtual bool CanReflectBoltsAndArrows => false;
 
-        //    public virtual bool GeneratesMultipleCount => false;
+        public virtual int MakeObjectCount => 1;
 
         public virtual bool GetsDamageMultiplier => false;
 

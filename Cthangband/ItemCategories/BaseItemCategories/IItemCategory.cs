@@ -119,10 +119,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         bool GetsDamageMultiplier { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item generates multiple counts.  Returns false, by default.  Spikes, shots, arrows and bolts return true.
-        ///// </summary>
-        //bool GeneratesMultipleCount { get; }
+        /// <summary>
+        /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
+        /// </summary>
+        int MakeObjectCount { get; }
 
         /// <summary>
         /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.

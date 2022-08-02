@@ -3814,17 +3814,7 @@ namespace Cthangband
                 AssignItemType(kIdx);
             }
             ApplyMagic(SaveGame.Instance.Level.ObjectLevel, true, good, great);
-            switch (Category)
-            {
-                case ItemCategory.Spike:
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                    {
-                        Count = Program.Rng.DiceRoll(6, 7);
-                        break;
-                    }
-            }
+            Count = BaseCategory.MakeObjectCount;
             if (!IsCursed() && !IsBroken() &&
                 ItemType.Level > SaveGame.Instance.Difficulty)
             {
