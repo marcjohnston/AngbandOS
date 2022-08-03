@@ -14,6 +14,15 @@ namespace Cthangband.ItemCategories
         public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
+
+        public override bool IsStompable(Item item)
+        {
+            if (item.BonusDamage < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.TypeSpecificValue < 0)
+            {
+                return true;
+            }
+            return base.IsStompable(item);
+        }
         public override bool CanAbsorb(Item item, Item other)
         {
             if (!item.IsKnown() || !other.IsKnown())

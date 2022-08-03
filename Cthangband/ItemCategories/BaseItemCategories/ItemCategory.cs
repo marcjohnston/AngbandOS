@@ -12,6 +12,7 @@ using static Cthangband.Extensions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using Cthangband.ArtifactBiases;
 using System.Windows.Navigation;
+using System.IO;
 
 namespace Cthangband.ItemCategories
 {
@@ -30,7 +31,36 @@ namespace Cthangband.ItemCategories
 
         public virtual bool CanApplySlayingBonus => false;
 
-        public virtual bool IsStompable(Item item) => item.ItemType.Stompable[StompableType.Broken];
+        public virtual bool IsStompable(Item item)
+        {
+            if (item.ItemType.HasQuality())
+            {
+                switch (item.GetDetailedFeeling())
+                {
+                    case "terrible":
+                    case "worthless":
+                    case "cursed":
+                    case "broken":
+                        return item.ItemType.Stompable[StompableType.Broken];
+
+                    case "average":
+                        return item.ItemType.Stompable[StompableType.Average];
+
+                    case "good":
+                        return item.ItemType.Stompable[StompableType.Good];
+
+                    case "excellent":
+                        return item.ItemType.Stompable[StompableType.Excellent];
+
+                    case "special":
+                        return false;
+
+                    default:
+                        throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
+                }
+            }
+            return item.ItemType.Stompable[StompableType.Broken];
+        }
 
         public static IItemCategory CreateFromEnum(ItemCategory itemCategory)
         {
@@ -518,6 +548,12 @@ namespace Cthangband.ItemCategories
         public virtual bool CanProvideSheathOfFire => false;
 
         public virtual bool CanReflectBoltsAndArrows => false;
+
+        public virtual int RandartActivationChance => Constants.ActivationChance;
+
+        public virtual void ApplyRandartBonus(Item item)
+        {
+        }
 
         public virtual int MakeObjectCount => 1;
 

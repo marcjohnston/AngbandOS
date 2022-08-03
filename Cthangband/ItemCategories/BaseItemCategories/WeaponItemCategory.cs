@@ -15,7 +15,12 @@ namespace Cthangband.ItemCategories
         public WeaponItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
-        //    public override bool CanSlay => true;
+
+        public override void ApplyRandartBonus(Item item)
+        {
+            item.BonusToHit += Program.Rng.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);
+            item.BonusDamage += Program.Rng.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
+        }
 
         public override bool CanApplyBonusArmourClassMiscPower => true;
 

@@ -10,15 +10,20 @@ namespace Cthangband.ItemCategories
         /// </summary>
         ItemCategory CategoryEnum { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item is capable of having a bonus armour class applied.  Only weapons return true.  Returns false by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //bool CanHaveBonusArmourClass { get; }
+        /// <summary>
+        /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armour returns double the default.
+        /// </summary>
+        int RandartActivationChance { get; }
 
         /// <summary>
-        /// Returns true, if the item can be stomped.  Returns the broken stompable status, by default.
+        /// Applies an additional bonus to random artifacts.  Does nothing by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        void ApplyRandartBonus(Item item);
+
+        /// <summary>
+        /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>

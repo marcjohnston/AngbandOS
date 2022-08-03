@@ -2563,39 +2563,6 @@ namespace Cthangband
                     return false;
                 }
             }
-            if (ItemType.Category == ItemCategory.Ring || ItemType.Category == ItemCategory.Amulet)
-            {
-                if (BonusDamage < 0 || BonusArmourClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)
-                {
-                    return true;
-                }
-            }
-            if (ItemType.HasQuality())
-            {
-                switch (GetDetailedFeeling())
-                {
-                    case "terrible":
-                    case "worthless":
-                    case "cursed":
-                    case "broken":
-                        return ItemType.Stompable[StompableType.Broken];
-
-                    case "average":
-                        return ItemType.Stompable[StompableType.Average];
-
-                    case "good":
-                        return ItemType.Stompable[StompableType.Good];
-
-                    case "excellent":
-                        return ItemType.Stompable[StompableType.Excellent];
-
-                    case "special":
-                        return false;
-
-                    default:
-                        throw new InvalidDataException($"Unrecognised item quality ({GetDetailedFeeling()})");
-                }
-            }
             return BaseCategory.IsStompable(this);
         }
 
@@ -3506,25 +3473,14 @@ namespace Cthangband
                     TypeSpecificValue = 4;
                 }
             }
-            if (Category >= ItemCategory.Boots)
-            {
-                BonusArmourClass += Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
-            }
-            else
-            {
-                BonusToHit += Program.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
-                BonusDamage += Program.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
-            }
-            RandartFlags3.Set(ItemFlag3.IgnoreAcid | ItemFlag3.IgnoreElec | ItemFlag3.IgnoreFire |
-                                    ItemFlag3.IgnoreCold);
+            BaseCategory.ApplyRandartBonus(this);
+            RandartFlags3.Set(ItemFlag3.IgnoreAcid | ItemFlag3.IgnoreElec | ItemFlag3.IgnoreFire | ItemFlag3.IgnoreCold);
             int totalFlags = FlagBasedCost(TypeSpecificValue);
             if (aCursed)
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(Category >= ItemCategory.Boots
-                    ? Constants.ActivationChance * 2
-                    : Constants.ActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(BaseCategory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -3533,8 +3489,7 @@ namespace Cthangband
             {
                 IdentifyFully();
                 IdentifyFlags.Set(Constants.IdentStoreb);
-                if (!Gui.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)",
-                    80))
+                if (!Gui.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
                 {
                     newName = "(a DIY artifact)";
                 }
