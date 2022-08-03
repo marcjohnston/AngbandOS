@@ -19,6 +19,11 @@ namespace Cthangband
         public readonly FlagSet Flags2 = new FlagSet();
         public readonly FlagSet Flags3 = new FlagSet();
         public readonly int[] Locale = new int[4];
+
+        /// <summary>
+        /// Returns true, if the item is stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
+        /// Use StompableType enum to address each index.
+        /// </summary>
         public readonly bool[] Stompable = new bool[4];
         public int Ac;
         public ItemCategory Category;

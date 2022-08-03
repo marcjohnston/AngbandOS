@@ -2656,7 +2656,6 @@ namespace Cthangband
         }
         public bool Stompable()
         {
-            var t = this;
             ItemType kPtr = ItemType;
             if (!IsKnown())
             {
@@ -2664,7 +2663,7 @@ namespace Cthangband
                 {
                     if (IsFlavourAware())
                     {
-                        return kPtr.Stompable[0];
+                        return kPtr.Stompable[StompableType.Broken];
                     }
                 }
                 if (IdentifyFlags.IsClear(Constants.IdentSense))
@@ -2687,16 +2686,16 @@ namespace Cthangband
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return kPtr.Stompable[0];
+                        return kPtr.Stompable[StompableType.Broken];
 
                     case "average":
-                        return kPtr.Stompable[1];
+                        return kPtr.Stompable[StompableType.Average];
 
                     case "good":
-                        return kPtr.Stompable[2];
+                        return kPtr.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return kPtr.Stompable[3];
+                        return kPtr.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -2713,11 +2712,11 @@ namespace Cthangband
                 }
                 else if (TypeSpecificValue == 0)
                 {
-                    return kPtr.Stompable[0];
+                    return kPtr.Stompable[StompableType.Broken];
                 }
                 else if (TypeSpecificValue < 0)
                 {
-                    return kPtr.Stompable[1];
+                    return kPtr.Stompable[StompableType.Average];
                 }
                 else
                 {
@@ -2725,16 +2724,16 @@ namespace Cthangband
                     {
                         case 0:
                             {
-                                return kPtr.Stompable[2];
+                                return kPtr.Stompable[StompableType.Good];
                             }
                         default:
                             {
-                                return kPtr.Stompable[3];
+                                return kPtr.Stompable[StompableType.Excellent];
                             }
                     }
                 }
             }
-            return kPtr.Stompable[0];
+            return kPtr.Stompable[StompableType.Broken];
         }
 
         public string StoreDescription(bool pref, int mode)
@@ -3995,7 +3994,7 @@ namespace Cthangband
 
                 case 22:
                 case 23:
-                    if (Category == ItemCategory.Bow)
+                    if (!BaseCategory.CanApplyBlowsBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -4126,7 +4125,7 @@ namespace Cthangband
                 case 24:
                 case 25:
                 case 26:
-                    if (Category >= ItemCategory.Boots)
+                    if (!BaseCategory.CanApplyBonusArmourClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }
@@ -4155,7 +4154,7 @@ namespace Cthangband
             }
         }
 
-        private void ApplyRandomSlaying(ref IArtifactBias artifactBias)
+        public void ApplyRandomSlaying(ref IArtifactBias artifactBias)
         {
             if (artifactBias != null)
             {
@@ -4164,184 +4163,7 @@ namespace Cthangband
                     return;
                 }
             }
-            if (Category != ItemCategory.Bow)
-            {
-                switch (Program.Rng.DieRoll(34))
-                {
-                    case 1:
-                    case 2:
-                        RandartFlags1.Set(ItemFlag1.SlayAnimal);
-                        break;
-
-                    case 3:
-                    case 4:
-                        RandartFlags1.Set(ItemFlag1.SlayEvil);
-                        if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
-                        {
-                            artifactBias = new LawArtifactBias();
-                        }
-                        else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                        {
-                            artifactBias = new PriestlyArtifactBias();
-                        }
-                        break;
-
-                    case 5:
-                    case 6:
-                        RandartFlags1.Set(ItemFlag1.SlayUndead);
-                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                        {
-                            artifactBias = new PriestlyArtifactBias();
-                        }
-                        break;
-
-                    case 7:
-                    case 8:
-                        RandartFlags1.Set(ItemFlag1.SlayDemon);
-                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                        {
-                            artifactBias = new PriestlyArtifactBias();
-                        }
-                        break;
-
-                    case 9:
-                    case 10:
-                        RandartFlags1.Set(ItemFlag1.SlayOrc);
-                        break;
-
-                    case 11:
-                    case 12:
-                        RandartFlags1.Set(ItemFlag1.SlayTroll);
-                        break;
-
-                    case 13:
-                    case 14:
-                        RandartFlags1.Set(ItemFlag1.SlayGiant);
-                        break;
-
-                    case 15:
-                    case 16:
-                        RandartFlags1.Set(ItemFlag1.SlayDragon);
-                        break;
-
-                    case 17:
-                        RandartFlags1.Set(ItemFlag1.KillDragon);
-                        break;
-
-                    case 18:
-                    case 19:
-                        if (Category == ItemCategory.Sword)
-                        {
-                            RandartFlags1.Set(ItemFlag1.Vorpal);
-                            if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                            {
-                                artifactBias = new WarriorArtifactBias();
-                            }
-                        }
-                        else
-                        {
-                            ApplyRandomSlaying(ref artifactBias);
-                        }
-                        break;
-
-                    case 20:
-                        RandartFlags1.Set(ItemFlag1.Impact);
-                        break;
-
-                    case 21:
-                    case 22:
-                        RandartFlags1.Set(ItemFlag1.BrandFire);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new FireArtifactBias();
-                        }
-                        break;
-
-                    case 23:
-                    case 24:
-                        RandartFlags1.Set(ItemFlag1.BrandCold);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new ColdArtifactBias();
-                        }
-                        break;
-
-                    case 25:
-                    case 26:
-                        RandartFlags1.Set(ItemFlag1.BrandElec);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new ElectricityArtifactBias();
-                        }
-                        break;
-
-                    case 27:
-                    case 28:
-                        RandartFlags1.Set(ItemFlag1.BrandAcid);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new AcidArtifactBias();
-                        }
-                        break;
-
-                    case 29:
-                    case 30:
-                        RandartFlags1.Set(ItemFlag1.BrandPois);
-                        if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
-                        {
-                            artifactBias = new PoisonArtifactBias();
-                        }
-                        else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
-                        {
-                            artifactBias = new NecromanticArtifactBias();
-                        }
-                        else if (artifactBias == null)
-                        {
-                            artifactBias = new RogueArtifactBias();
-                        }
-                        break;
-
-                    case 31:
-                    case 32:
-                        RandartFlags1.Set(ItemFlag1.Vampiric);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new NecromanticArtifactBias();
-                        }
-                        break;
-
-                    default:
-                        RandartFlags1.Set(ItemFlag1.Chaotic);
-                        if (artifactBias == null)
-                        {
-                            artifactBias = new ChaosArtifactBias();
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (Program.Rng.DieRoll(6))
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                        RandartFlags3.Set(ItemFlag3.XtraMight);
-                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                        {
-                            artifactBias = new RangerArtifactBias();
-                        }
-                        break;
-
-                    default:
-                        RandartFlags3.Set(ItemFlag3.XtraShots);
-                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
-                        {
-                            artifactBias = new RangerArtifactBias();
-                        }
-                        break;
-                }
-            }
+            BaseCategory.ApplyRandomSlaying(ref artifactBias, this);
         }
 
         private void CurseRandart()

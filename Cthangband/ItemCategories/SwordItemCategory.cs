@@ -13,6 +13,8 @@ namespace Cthangband.ItemCategories
 
         public override Colour Colour => Colour.BrightWhite;
 
+        public override bool CanVorpalSlay => true;
+
         //public override void ApplyMagic(Item item, int level, int power)
         //{
         //    if (power != 0)

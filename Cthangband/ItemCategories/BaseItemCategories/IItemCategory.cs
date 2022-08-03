@@ -1,4 +1,5 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.ArtifactBiases;
+using Cthangband.Enumerations;
 
 namespace Cthangband.ItemCategories
 {
@@ -8,7 +9,7 @@ namespace Cthangband.ItemCategories
         /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
         /// </summary>
         ItemCategory CategoryEnum { get; }
-        
+
         ///// <summary>
         ///// Returns true, if the item is capable of having a bonus armour class applied.  Only weapons return true.  Returns false by default.
         ///// </summary>
@@ -22,6 +23,23 @@ namespace Cthangband.ItemCategories
         ///// <param name="item"></param>
         ///// <returns></returns>
         //bool CanSlay { get; }
+
+        /// <summary>
+        /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
+        /// </summary>
+        bool CanVorpalSlay { get; }
+
+        /// <summary>
+        /// Returns true, if the item can apply a bonus armour class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+        /// </summary>
+        bool CanApplyBonusArmourClassMiscPower { get; }
+
+        /// <summary>
+        /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
+        /// </summary>
+        bool CanApplyBlowsBonus { get; }
+
+        void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item);
 
         /// <summary>
         /// Returns a description for the item.  Returns a macro processed description, by default.

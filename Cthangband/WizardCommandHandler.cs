@@ -712,10 +712,10 @@ namespace Cthangband
                 ItemType kPtr = Profile.Instance.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
-                    if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
-                    {
-                        continue;
-                    }
+                    //if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
+                    //{
+                    //    continue;
+                    //}
                     row = 2 + (num % 20);
                     col = 30 * (num / 20);
                     ch = (char)(_head[num / 20] + (char)(num % 20));

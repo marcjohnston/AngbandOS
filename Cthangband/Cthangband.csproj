@@ -177,6 +177,7 @@
     <Compile Include="Commands\EatFoodCommand.cs" />
     <Compile Include="Commands\FireCommand.cs" />
     <Compile Include="ActivationPowers\Cure1000ActivationPower.cs" />
+    <Compile Include="Enumerations\StompableType.cs" />
     <Compile Include="ItemCategories\AmuletItemCategory.cs" />
     <Compile Include="ItemCategories\ArrowItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\ArmourItemCategory.cs" />

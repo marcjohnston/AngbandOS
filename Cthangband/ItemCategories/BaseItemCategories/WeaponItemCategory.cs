@@ -17,6 +17,8 @@ namespace Cthangband.ItemCategories
         }
         //    public override bool CanSlay => true;
 
+        public override bool CanApplyBonusArmourClassMiscPower => true;
+
         public override string GetDetailedDescription(Item item)
         {
             string s = "";
@@ -46,6 +48,8 @@ namespace Cthangband.ItemCategories
             }
             return s;
         }
+
+        public override bool CanApplyBlowsBonus => true;
 
         public override int GetBonusRealValue(Item item, int value)
         {

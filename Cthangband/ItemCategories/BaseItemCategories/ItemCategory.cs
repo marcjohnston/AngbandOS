@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System;
 using static Cthangband.Extensions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using Cthangband.ArtifactBiases;
+using System.Windows.Navigation;
 
 namespace Cthangband.ItemCategories
 {
@@ -23,6 +25,8 @@ namespace Cthangband.ItemCategories
         {
             CategoryEnum = itemCategory;
         }
+
+        public virtual bool CanVorpalSlay => false;
 
         public static IItemCategory CreateFromEnum(ItemCategory itemCategory)
         {
@@ -117,6 +121,162 @@ namespace Cthangband.ItemCategories
             }
         }
         //    public virtual bool CanSlay => false;
+
+        public virtual void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item)
+        {
+            switch (Program.Rng.DieRoll(34))
+            {
+                case 1:
+                case 2:
+                    item.RandartFlags1.Set(ItemFlag1.SlayAnimal);
+                    break;
+
+                case 3:
+                case 4:
+                    item.RandartFlags1.Set(ItemFlag1.SlayEvil);
+                    if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                    {
+                        artifactBias = new LawArtifactBias();
+                    }
+                    else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 5:
+                case 6:
+                    item.RandartFlags1.Set(ItemFlag1.SlayUndead);
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 7:
+                case 8:
+                    item.RandartFlags1.Set(ItemFlag1.SlayDemon);
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 9:
+                case 10:
+                    item.RandartFlags1.Set(ItemFlag1.SlayOrc);
+                    break;
+
+                case 11:
+                case 12:
+                    item.RandartFlags1.Set(ItemFlag1.SlayTroll);
+                    break;
+
+                case 13:
+                case 14:
+                    item.RandartFlags1.Set(ItemFlag1.SlayGiant);
+                    break;
+
+                case 15:
+                case 16:
+                    item.RandartFlags1.Set(ItemFlag1.SlayDragon);
+                    break;
+
+                case 17:
+                    item.RandartFlags1.Set(ItemFlag1.KillDragon);
+                    break;
+
+                case 18:
+                case 19:
+                    if (CanVorpalSlay)
+                    {
+                        item.RandartFlags1.Set(ItemFlag1.Vorpal);
+                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                        {
+                            artifactBias = new WarriorArtifactBias();
+                        }
+                    }
+                    else
+                    {
+                        item.ApplyRandomSlaying(ref artifactBias);
+                    }
+                    break;
+
+                case 20:
+                    item.RandartFlags1.Set(ItemFlag1.Impact);
+                    break;
+
+                case 21:
+                case 22:
+                    item.RandartFlags1.Set(ItemFlag1.BrandFire);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new FireArtifactBias();
+                    }
+                    break;
+
+                case 23:
+                case 24:
+                    item.RandartFlags1.Set(ItemFlag1.BrandCold);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ColdArtifactBias();
+                    }
+                    break;
+
+                case 25:
+                case 26:
+                    item.RandartFlags1.Set(ItemFlag1.BrandElec);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ElectricityArtifactBias();
+                    }
+                    break;
+
+                case 27:
+                case 28:
+                    item.RandartFlags1.Set(ItemFlag1.BrandAcid);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new AcidArtifactBias();
+                    }
+                    break;
+
+                case 29:
+                case 30:
+                    item.RandartFlags1.Set(ItemFlag1.BrandPois);
+                    if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
+                    {
+                        artifactBias = new PoisonArtifactBias();
+                    }
+                    else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
+                    {
+                        artifactBias = new NecromanticArtifactBias();
+                    }
+                    else if (artifactBias == null)
+                    {
+                        artifactBias = new RogueArtifactBias();
+                    }
+                    break;
+
+                case 31:
+                case 32:
+                    item.RandartFlags1.Set(ItemFlag1.Vampiric);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new NecromanticArtifactBias();
+                    }
+                    break;
+
+                default:
+                    item.RandartFlags1.Set(ItemFlag1.Chaotic);
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ChaosArtifactBias();
+                    }
+                    break;
+            }
+        }
 
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
@@ -351,6 +511,10 @@ namespace Cthangband.ItemCategories
         public virtual bool GetsDamageMultiplier => false;
 
         public virtual int PercentageBreakageChance => 10;
+
+        public virtual bool CanApplyBonusArmourClassMiscPower => false;
+
+        public virtual bool CanApplyBlowsBonus => false;
 
         protected int GetBonusValue(int max, int level)
         {

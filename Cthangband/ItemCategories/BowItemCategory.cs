@@ -1,4 +1,5 @@
-﻿using Cthangband.Enumerations;
+﻿using Cthangband.ArtifactBiases;
+using Cthangband.Enumerations;
 using System;
 using static Cthangband.Extensions;
 
@@ -47,7 +48,33 @@ namespace Cthangband.ItemCategories
             return basenm;
         }
 
+        public override bool CanApplyBlowsBonus => false;
+
         public override Colour Colour => Colour.Brown;
+
+        public override void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item)
+        {
+            switch (Program.Rng.DieRoll(6))
+            {
+                case 1:
+                case 2:
+                case 3:
+                    item.RandartFlags3.Set(ItemFlag3.XtraMight);
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new RangerArtifactBias();
+                    }
+                    break;
+
+                default:
+                    item.RandartFlags3.Set(ItemFlag3.XtraShots);
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new RangerArtifactBias();
+                    }
+                    break;
+            }
+        }
 
         //public override void ApplyMagic(Item item, int level, int power)
         //{

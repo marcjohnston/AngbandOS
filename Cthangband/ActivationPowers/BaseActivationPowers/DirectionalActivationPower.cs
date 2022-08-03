@@ -2,6 +2,7 @@
 
 namespace Cthangband.ActivationPowers
 {
+    [Serializable]
     /// <summary>
     /// Provides base functionality for an ArtifactPower that needs a direction/aiming.  This object inherits the base ArtifactPower but addings a GetDirectionWithAim
     /// to the activation functionality.
