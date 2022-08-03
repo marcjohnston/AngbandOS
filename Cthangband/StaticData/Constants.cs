@@ -40,7 +40,7 @@ namespace Cthangband.StaticData
         public const int GenerateChoose = 0;
         public const int GenerateRandom = 1;
         public const int GenerateReplay = 2;
-        public const int GreatObj = 20;
+        public const int GreatObj = 20; // This is a 1-in-chance of getting great gold or a great object.
         public const int GroupMax = 32;
         public const int IdentBroken = 0x80;
         public const int IdentCursed = 0x40;

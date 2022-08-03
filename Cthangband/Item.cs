@@ -20,7 +20,6 @@ namespace Cthangband
     [Serializable]
     internal class Item
     {
-        public static int CoinType;
         public readonly FlagSet IdentifyFlags = new FlagSet();
         public readonly FlagSet RandartFlags1 = new FlagSet();
         public readonly FlagSet RandartFlags2 = new FlagSet();
@@ -2286,16 +2285,16 @@ namespace Cthangband
             return RareItemTypeIndex != 0;
         }
 
-        public bool MakeGold()
+        public bool MakeGold(int coinType)
         {
             int i = ((Program.Rng.DieRoll(SaveGame.Instance.Level.ObjectLevel + 2) + 2) / 2) - 1;
             if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
             {
                 i += Program.Rng.DieRoll(SaveGame.Instance.Level.ObjectLevel + 1);
             }
-            if (CoinType != 0)
+            if (coinType != 0)
             {
-                i = CoinType;
+                i = coinType;
             }
             if (i >= Constants.MaxGold)
             {

@@ -1148,7 +1148,7 @@ namespace Cthangband
                 return;
             }
             Item qPtr = new Item();
-            if (!qPtr.MakeGold())
+            if (!qPtr.MakeGold(0))
             {
                 return;
             }

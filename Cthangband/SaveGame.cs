@@ -710,9 +710,7 @@ namespace Cthangband
             if (mPtr.StolenGold > 0)
             {
                 Item oPtr = new Item();
-                Item.CoinType = 10;
-                oPtr.MakeGold();
-                Item.CoinType = 0;
+                oPtr.MakeGold(10);
                 oPtr.TypeSpecificValue = mPtr.StolenGold;
                 Level.DropNear(oPtr, -1, y, x);
             }
@@ -759,14 +757,13 @@ namespace Cthangband
                     Quests[qIdx].Level = 0;
                 }
             }
-            Item.CoinType = forceCoin;
             Level.ObjectLevel = (Difficulty + rPtr.Level) / 2;
             for (int j = 0; j < number; j++)
             {
                 qPtr = new Item();
                 if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
                 {
-                    if (!qPtr.MakeGold())
+                    if (!qPtr.MakeGold(forceCoin))
                     {
                         continue;
                     }
@@ -793,7 +790,6 @@ namespace Cthangband
                 Level.DropNear(qPtr, -1, y, x);
             }
             Level.ObjectLevel = Difficulty;
-            Item.CoinType = 0;
             if (visible && (dumpItem != 0 || dumpGold != 0))
             {
                 Level.Monsters.LoreTreasure(mIdx, dumpItem, dumpGold);
@@ -868,7 +864,7 @@ namespace Cthangband
                 Item qPtr = new Item();
                 if (small && Program.Rng.RandomLessThan(100) < 75)
                 {
-                    if (!qPtr.MakeGold())
+                    if (!qPtr.MakeGold(0))
                     {
                         continue;
                     }
