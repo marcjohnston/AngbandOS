@@ -3872,7 +3872,6 @@ namespace Cthangband
 
         private void ApplyRandomBonuses(ref IArtifactBias artifactBias)
         {
-            int thisType = Category < ItemCategory.Boots ? 23 : 19;
             if (artifactBias != null)
             {
                 if (artifactBias.ApplyBonuses(this))
@@ -3880,7 +3879,7 @@ namespace Cthangband
                     return;
                 }
             }
-            switch (Program.Rng.DieRoll(thisType))
+            switch (Program.Rng.DieRoll(23))
             {
                 case 1:
                 case 2:
@@ -3989,7 +3988,14 @@ namespace Cthangband
 
                 case 20:
                 case 21:
-                    RandartFlags1.Set(ItemFlag1.Tunnel);
+                    if (!BaseCategory.CanApplyTunnelBonus)
+                    {
+                        ApplyRandomBonuses(ref artifactBias);
+                    }
+                    else
+                    {
+                        RandartFlags1.Set(ItemFlag1.Tunnel);
+                    }
                     break;
 
                 case 22:
