@@ -14,6 +14,37 @@ namespace Cthangband.ItemCategories
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Grey;
+
+        public override bool IsStompable(Item item)
+        {
+            if (!item.IsKnown())
+            {
+                return false;
+            }
+            else if (item.TypeSpecificValue == 0)
+            {
+                return item.ItemType.Stompable[StompableType.Broken];
+            }
+            else if (item.TypeSpecificValue < 0)
+            {
+                return item.ItemType.Stompable[StompableType.Average];
+            }
+            else
+            {
+                switch (GlobalData.ChestTraps[item.TypeSpecificValue])
+                {
+                    case 0:
+                        {
+                            return item.ItemType.Stompable[StompableType.Good];
+                        }
+                    default:
+                        {
+                            return item.ItemType.Stompable[StompableType.Excellent];
+                        }
+                }
+            }
+        }
+
         public override string GetDetailedDescription(Item item)
         {
             string s = string.Empty;

@@ -19,6 +19,8 @@ namespace Cthangband.ItemCategories
 
         public override bool CanApplyBonusArmourClassMiscPower => true;
 
+        public override bool CanApplySlayingBonus => true; 
+
         public override string GetDetailedDescription(Item item)
         {
             string s = "";

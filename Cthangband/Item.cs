@@ -2656,14 +2656,13 @@ namespace Cthangband
         }
         public bool Stompable()
         {
-            ItemType kPtr = ItemType;
             if (!IsKnown())
             {
                 if (Inventory.ObjectHasFlavor(ItemType))
                 {
                     if (IsFlavourAware())
                     {
-                        return kPtr.Stompable[StompableType.Broken];
+                        return ItemType.Stompable[StompableType.Broken];
                     }
                 }
                 if (IdentifyFlags.IsClear(Constants.IdentSense))
@@ -2671,14 +2670,14 @@ namespace Cthangband
                     return false;
                 }
             }
-            if (kPtr.Category == ItemCategory.Ring || kPtr.Category == ItemCategory.Amulet)
+            if (ItemType.Category == ItemCategory.Ring || ItemType.Category == ItemCategory.Amulet)
             {
                 if (BonusDamage < 0 || BonusArmourClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)
                 {
                     return true;
                 }
             }
-            if (kPtr.HasQuality())
+            if (ItemType.HasQuality())
             {
                 switch (GetDetailedFeeling())
                 {
@@ -2686,16 +2685,16 @@ namespace Cthangband
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return kPtr.Stompable[StompableType.Broken];
+                        return ItemType.Stompable[StompableType.Broken];
 
                     case "average":
-                        return kPtr.Stompable[StompableType.Average];
+                        return ItemType.Stompable[StompableType.Average];
 
                     case "good":
-                        return kPtr.Stompable[StompableType.Good];
+                        return ItemType.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return kPtr.Stompable[StompableType.Excellent];
+                        return ItemType.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -2704,36 +2703,7 @@ namespace Cthangband
                         throw new InvalidDataException($"Unrecognised item quality ({GetDetailedFeeling()})");
                 }
             }
-            if (kPtr.Category == ItemCategory.Chest)
-            {
-                if (!IsKnown())
-                {
-                    return false;
-                }
-                else if (TypeSpecificValue == 0)
-                {
-                    return kPtr.Stompable[StompableType.Broken];
-                }
-                else if (TypeSpecificValue < 0)
-                {
-                    return kPtr.Stompable[StompableType.Average];
-                }
-                else
-                {
-                    switch (GlobalData.ChestTraps[TypeSpecificValue])
-                    {
-                        case 0:
-                            {
-                                return kPtr.Stompable[StompableType.Good];
-                            }
-                        default:
-                            {
-                                return kPtr.Stompable[StompableType.Excellent];
-                            }
-                    }
-                }
-            }
-            return kPtr.Stompable[StompableType.Broken];
+            return BaseCategory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
@@ -3511,7 +3481,6 @@ namespace Cthangband
         {
             bool hasPval = false;
             int powers = Program.Rng.DieRoll(5) + 1;
-            int maxType = Category < ItemCategory.Boots ? 7 : 5;
             bool aCursed = false;
             int warriorArtifactBias = 0;
             IArtifactBias artifactBias = null;
@@ -3597,6 +3566,7 @@ namespace Cthangband
             }
             while (powers-- != 0)
             {
+                int maxType = (BaseCategory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -3645,8 +3615,7 @@ namespace Cthangband
             }
             if (Category >= ItemCategory.Boots)
             {
-                BonusArmourClass +=
-                    Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
+                BonusArmourClass += Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
             }
             else
             {

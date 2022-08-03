@@ -28,6 +28,10 @@ namespace Cthangband.ItemCategories
 
         public virtual bool CanVorpalSlay => false;
 
+        public virtual bool CanApplySlayingBonus => false;
+
+        public virtual bool IsStompable(Item item) => item.ItemType.Stompable[StompableType.Broken];
+
         public static IItemCategory CreateFromEnum(ItemCategory itemCategory)
         {
             switch (itemCategory)

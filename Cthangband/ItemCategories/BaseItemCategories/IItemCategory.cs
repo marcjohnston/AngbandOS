@@ -17,12 +17,19 @@ namespace Cthangband.ItemCategories
         ///// <returns></returns>
         //bool CanHaveBonusArmourClass { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
-        ///// </summary>
-        ///// <param name="item"></param>
-        ///// <returns></returns>
-        //bool CanSlay { get; }
+        /// <summary>
+        /// Returns true, if the item can be stomped.  Returns the broken stompable status, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        bool IsStompable(Item item);
+
+        /// <summary>
+        /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        bool CanApplySlayingBonus { get; }
 
         /// <summary>
         /// Returns true, if the item can apply a tunnel bonus.  Only weapons, return true.  Returns false, by default.
