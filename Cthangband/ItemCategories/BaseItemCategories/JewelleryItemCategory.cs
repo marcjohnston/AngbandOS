@@ -14,6 +14,19 @@ namespace Cthangband.ItemCategories
         public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
         {
         }
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!item.StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;

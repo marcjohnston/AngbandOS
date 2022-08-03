@@ -504,6 +504,15 @@ namespace Cthangband.ItemCategories
         {
         }
 
+        public virtual bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            return true;
+        }
+
         public virtual bool CanProvideSheathOfElectricity => false;
 
         public virtual bool CanProvideSheathOfFire => false;

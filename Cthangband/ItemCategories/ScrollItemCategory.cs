@@ -11,6 +11,10 @@ namespace Cthangband.ItemCategories
         public ScrollItemCategory() : base(ItemCategory.Scroll)
         {
         }
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            return true;
+        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $" titled \"{SaveGame.Instance.ScrollFlavours[item.ItemSubCategory].Name}\"";

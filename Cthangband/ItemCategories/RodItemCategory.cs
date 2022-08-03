@@ -11,6 +11,15 @@ namespace Cthangband.ItemCategories
         public RodItemCategory() : base(ItemCategory.Rod)
         {
         }
+
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (item.TypeSpecificValue != other.TypeSpecificValue)
+            {
+                return false;
+            }
+            return true;
+        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RodFlavours[item.ItemSubCategory].Name} ";

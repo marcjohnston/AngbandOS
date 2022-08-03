@@ -393,6 +393,63 @@ namespace Cthangband
             return BaseCategory.PercentageBreakageChance;
         }
 
+        public bool StatsAreSame(Item other)
+        {
+            if (IsKnown() != other.IsKnown())
+            {
+                return false;
+            }
+            if (BonusToHit != other.BonusToHit)
+            {
+                return false;
+            }
+            if (BonusDamage != other.BonusDamage)
+            {
+                return false;
+            }
+            if (BonusArmourClass != other.BonusArmourClass)
+            {
+                return false;
+            }
+            if (TypeSpecificValue != other.TypeSpecificValue)
+            {
+                return false;
+            }
+            if (FixedArtifactIndex != other.FixedArtifactIndex)
+            {
+                return false;
+            }
+            if (!string.IsNullOrEmpty(RandartName) || !string.IsNullOrEmpty(other.RandartName))
+            {
+                return false;
+            }
+            if (RareItemTypeIndex != other.RareItemTypeIndex)
+            {
+                return false;
+            }
+            if (BonusPowerType != 0 || other.BonusPowerType != 0)
+            {
+                return false;
+            }
+            if (RechargeTimeLeft != 0 || other.RechargeTimeLeft != 0)
+            {
+                return false;
+            }
+            if (BaseArmourClass != other.BaseArmourClass)
+            {
+                return false;
+            }
+            if (DamageDice != other.DamageDice)
+            {
+                return false;
+            }
+            if (DamageDiceSides != other.DamageDiceSides)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public bool CanAbsorb(Item other)
         {
             int total = Count + other.Count;
@@ -400,174 +457,11 @@ namespace Cthangband
             {
                 return false;
             }
-            switch (Category)
+            if (!BaseCategory.CanAbsorb(this, other))
             {
-                case ItemCategory.Chest:
-                    return false;
+                return false;
+            }    
 
-                case ItemCategory.Food:
-                case ItemCategory.Potion:
-                case ItemCategory.Scroll:
-                    break;
-
-                case ItemCategory.Staff:
-                case ItemCategory.Wand:
-                    if (!IsKnown() || !other.IsKnown())
-                    {
-                        return false;
-                    }
-                    if (TypeSpecificValue != other.TypeSpecificValue)
-                    {
-                        return false;
-                    }
-                    break;
-
-                case ItemCategory.Rod:
-                    if (TypeSpecificValue != other.TypeSpecificValue)
-                    {
-                        return false;
-                    }
-                    break;
-
-                case ItemCategory.Bow:
-                case ItemCategory.Digging:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Helm:
-                case ItemCategory.Crown:
-                case ItemCategory.Shield:
-                case ItemCategory.Cloak:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
-                case ItemCategory.Ring:
-                case ItemCategory.Amulet:
-                case ItemCategory.Light:
-                    if (!IsKnown() || !other.IsKnown())
-                    {
-                        return false;
-                    }
-                    if (IsKnown() != other.IsKnown())
-                    {
-                        return false;
-                    }
-                    if (BonusToHit != other.BonusToHit)
-                    {
-                        return false;
-                    }
-                    if (BonusDamage != other.BonusDamage)
-                    {
-                        return false;
-                    }
-                    if (BonusArmourClass != other.BonusArmourClass)
-                    {
-                        return false;
-                    }
-                    if (TypeSpecificValue != other.TypeSpecificValue)
-                    {
-                        return false;
-                    }
-                    if (FixedArtifactIndex != other.FixedArtifactIndex)
-                    {
-                        return false;
-                    }
-                    if (!string.IsNullOrEmpty(RandartName) || !string.IsNullOrEmpty(other.RandartName))
-                    {
-                        return false;
-                    }
-                    if (RareItemTypeIndex != other.RareItemTypeIndex)
-                    {
-                        return false;
-                    }
-                    if (BonusPowerType != 0 || other.BonusPowerType != 0)
-                    {
-                        return false;
-                    }
-                    if (RechargeTimeLeft != 0 || other.RechargeTimeLeft != 0)
-                    {
-                        return false;
-                    }
-                    if (BaseArmourClass != other.BaseArmourClass)
-                    {
-                        return false;
-                    }
-                    if (DamageDice != other.DamageDice)
-                    {
-                        return false;
-                    }
-                    if (DamageDiceSides != other.DamageDiceSides)
-                    {
-                        return false;
-                    }
-                    break;
-
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                case ItemCategory.Shot:
-                    if (IsKnown() != other.IsKnown())
-                    {
-                        return false;
-                    }
-                    if (BonusToHit != other.BonusToHit)
-                    {
-                        return false;
-                    }
-                    if (BonusDamage != other.BonusDamage)
-                    {
-                        return false;
-                    }
-                    if (BonusArmourClass != other.BonusArmourClass)
-                    {
-                        return false;
-                    }
-                    if (TypeSpecificValue != other.TypeSpecificValue)
-                    {
-                        return false;
-                    }
-                    if (FixedArtifactIndex != other.FixedArtifactIndex)
-                    {
-                        return false;
-                    }
-                    if (!string.IsNullOrEmpty(RandartName) || !string.IsNullOrEmpty(other.RandartName))
-                    {
-                        return false;
-                    }
-                    if (RareItemTypeIndex != other.RareItemTypeIndex)
-                    {
-                        return false;
-                    }
-                    if (BonusPowerType != 0 || other.BonusPowerType != 0)
-                    {
-                        return false;
-                    }
-                    if (RechargeTimeLeft != 0 || other.RechargeTimeLeft != 0)
-                    {
-                        return false;
-                    }
-                    if (BaseArmourClass != other.BaseArmourClass)
-                    {
-                        return false;
-                    }
-                    if (DamageDice != other.DamageDice)
-                    {
-                        return false;
-                    }
-                    if (DamageDiceSides != other.DamageDiceSides)
-                    {
-                        return false;
-                    }
-                    break;
-
-                default:
-                    if (!IsKnown() || !other.IsKnown())
-                    {
-                        return false;
-                    }
-                    break;
-            }
             if (RandartFlags1.Value != other.RandartFlags1.Value || RandartFlags2.Value != other.RandartFlags2.Value ||
                 RandartFlags3.Value != other.RandartFlags3.Value)
             {

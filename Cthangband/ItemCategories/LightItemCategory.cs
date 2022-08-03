@@ -14,6 +14,19 @@ namespace Cthangband.ItemCategories
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!item.StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (item.ItemSubCategory == LightType.Torch)

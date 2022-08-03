@@ -32,6 +32,14 @@ namespace Cthangband.ItemCategories
         //            ApplyMagicToWeapon(item, level, power);
         //        }
         //    }
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
 
         public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
 

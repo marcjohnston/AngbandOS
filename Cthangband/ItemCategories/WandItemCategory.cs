@@ -20,6 +20,19 @@ namespace Cthangband.ItemCategories
         }
         public override int BaseValue => 50;
         public override bool HatesElectricity => true;
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (item.TypeSpecificValue != other.TypeSpecificValue)
+            {
+                return false;
+            }
+            return true;
+        }
+
         //public override bool IsCharged => true;
         public override Colour Colour => Colour.Chartreuse;
         public override int PercentageBreakageChance => 25;

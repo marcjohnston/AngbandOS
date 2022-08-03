@@ -11,6 +11,10 @@ namespace Cthangband.ItemCategories
         public PotionItemCategory() : base(ItemCategory.Potion)
         {
         }
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            return true;
+        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.PotionFlavours[item.ItemSubCategory].Name} ";

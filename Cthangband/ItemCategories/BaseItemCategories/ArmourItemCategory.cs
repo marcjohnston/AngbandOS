@@ -24,6 +24,19 @@ namespace Cthangband.ItemCategories
             return bonusValue;
         }
 
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!item.StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public override bool IsWorthless(Item item)
         {
             if (item.TypeSpecificValue < 0)

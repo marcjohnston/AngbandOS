@@ -11,6 +11,12 @@ namespace Cthangband.ItemCategories
         public FoodItemCategory() : base(ItemCategory.Food)
         {
         }
+
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            return true;
+        }
+
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             if (item.ItemSubCategory >= FoodType.MinFood)

@@ -134,10 +134,10 @@ namespace Cthangband.ItemCategories
         /// </summary>
         bool HatesCold { get; }
 
-        ///// <summary>
-        ///// Returns true, if the item can absorb other items of the same type.  Returns false, by default.
-        ///// </summary>
-        //bool CanAbsorb { get; }
+        /// <summary>
+        /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
+        /// </summary>
+        bool CanAbsorb(Item item, Item other);
 
         /// <summary>
         /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.

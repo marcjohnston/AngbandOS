@@ -19,6 +19,19 @@ namespace Cthangband.ItemCategories
 
         public override bool CanApplyBonusArmourClassMiscPower => true;
 
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            if (!item.IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!item.StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public override bool CanApplySlayingBonus => true; 
 
         public override string GetDetailedDescription(Item item)

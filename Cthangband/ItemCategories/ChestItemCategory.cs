@@ -13,6 +13,11 @@ namespace Cthangband.ItemCategories
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 
+        public override bool CanAbsorb(Item item, Item other)
+        {
+            return false;
+        }
+
         public override Colour Colour => Colour.Grey;
 
         public override bool IsStompable(Item item)
