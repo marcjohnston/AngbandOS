@@ -515,6 +515,7 @@ namespace Cthangband.ItemCategories
         public virtual bool CanApplyBonusArmourClassMiscPower => false;
 
         public virtual bool CanApplyBlowsBonus => false;
+        public virtual bool CanApplyTunnelBonus => false;
 
         protected int GetBonusValue(int max, int level)
         {

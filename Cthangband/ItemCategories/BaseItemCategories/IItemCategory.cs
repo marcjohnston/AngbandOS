@@ -25,6 +25,11 @@ namespace Cthangband.ItemCategories
         //bool CanSlay { get; }
 
         /// <summary>
+        /// Returns true, if the item can apply a tunnel bonus.  Only weapons, return true.  Returns false, by default.
+        /// </summary>
+        bool CanApplyTunnelBonus { get; }
+
+        /// <summary>
         /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
         /// </summary>
         bool CanVorpalSlay { get; }

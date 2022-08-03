@@ -49,6 +49,7 @@ namespace Cthangband.ItemCategories
             return s;
         }
 
+        public override bool CanApplyTunnelBonus => true;
         public override bool CanApplyBlowsBonus => true;
 
         public override int GetBonusRealValue(Item item, int value)
