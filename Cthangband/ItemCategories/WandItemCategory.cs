@@ -8,9 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class WandItemCategory : BaseItemCategory
     {
-        public WandItemCategory() : base(ItemCategory.Wand)
-        {
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.WandFlavours[item.ItemSubCategory].Name} ";

@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class FolkBookItemCategory : BaseItemCategory
     {
-        public FolkBookItemCategory() : base(ItemCategory.FolkBook)
-        {
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Folk Magic" : $"Folk {Pluralize("Spellbook", item.Count)}";

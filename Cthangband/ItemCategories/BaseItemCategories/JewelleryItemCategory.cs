@@ -11,10 +11,6 @@ namespace Cthangband.ItemCategories
     /// </summary>
     internal class JewelleryItemCategory : BaseItemCategory
     {
-        public JewelleryItemCategory(ItemCategory itemCategory) : base(itemCategory)
-        {
-        }
-
         public override bool IsStompable(Item item)
         {
             if (item.BonusDamage < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.TypeSpecificValue < 0)

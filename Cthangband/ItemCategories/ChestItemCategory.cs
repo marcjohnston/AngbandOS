@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
    internal class ChestItemCategory : BaseItemCategory
     {
-        public ChestItemCategory() : base(ItemCategory.Chest)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

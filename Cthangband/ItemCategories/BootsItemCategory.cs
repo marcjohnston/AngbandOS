@@ -8,9 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class BootsItemCategory : ArmourItemCategory
     {
-        public BootsItemCategory() : base(ItemCategory.Boots)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

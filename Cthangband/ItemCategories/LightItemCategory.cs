@@ -8,9 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class LightItemCategory : LightSourceItemCategory
     {
-        public LightItemCategory() : base(ItemCategory.Light)
-        {
-        }
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 

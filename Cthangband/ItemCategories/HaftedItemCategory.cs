@@ -6,9 +6,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class HaftedItemCategory : WeaponItemCategory
     {
-        public HaftedItemCategory() : base(ItemCategory.Hafted)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

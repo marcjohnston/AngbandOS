@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class LightSourceItemCategory : BaseItemCategory
     {
-        public LightSourceItemCategory(ItemCategory itemCategory) : base(itemCategory)
-        {
-        }
         public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;

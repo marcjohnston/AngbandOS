@@ -9,9 +9,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class AmuletItemCategory : JewelleryItemCategory
     {
-        public AmuletItemCategory() : base(ItemCategory.Amulet)
-        {
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             if (item.IsFixedArtifact() && item.IsFlavourAware())

@@ -12,10 +12,6 @@ namespace Cthangband.ItemCategories
     /// </summary>
     internal class ArmourItemCategory : BaseItemCategory
     {
-        public ArmourItemCategory(ItemCategory itemCategory) : base(itemCategory)
-        {
-        }
-
         public override void ApplyRandartBonus(Item item)
         {
             item.BonusArmourClass += Program.Rng.DieRoll(item.BonusArmourClass > 19 ? 1 : 20 - item.BonusArmourClass);

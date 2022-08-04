@@ -8,10 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class RodItemCategory : BaseItemCategory
     {
-        public RodItemCategory() : base(ItemCategory.Rod)
-        {
-        }
-
         public override bool CanAbsorb(Item item, Item other)
         {
             if (item.TypeSpecificValue != other.TypeSpecificValue)

@@ -30,7 +30,7 @@ namespace Cthangband
         public IActivationPower BonusPowerSubType;
         public Enumerations.RareItemType BonusPowerType;
         public int BonusToHit;
-        public IItemCategory BaseCategory = null;
+        //public IItemCategory BaseCategory = null;
         public int Count;
         public int DamageDice;
         public int DamageDiceSides;
@@ -56,7 +56,7 @@ namespace Cthangband
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
-        public ItemCategory Category => BaseCategory == null ? ItemCategory.None : BaseCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.Category; // Provided for backwards compatability.  Will be deleted.
 
         public bool IsBlessed()
         {
@@ -94,7 +94,7 @@ namespace Cthangband
             BonusArmourClass = original.BonusArmourClass;
             BonusDamage = original.BonusDamage;
             BonusToHit = original.BonusToHit;
-            BaseCategory = BaseItemCategory.CreateFromEnum(original.Category);
+//            BaseCategory = BaseItemCategory.CreateFromEnum(original.Category);
             Weight = original.Weight;
             BonusPowerType = original.BonusPowerType;
             BonusPowerSubType = original.BonusPowerSubType;
@@ -142,7 +142,7 @@ namespace Cthangband
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3);
-            if (BaseCategory.GetsDamageMultiplier)
+            if (ItemType.BaseCategory.GetsDamageMultiplier)
             {
                 if (f1.IsSet(ItemFlag1.SlayAnimal) && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
                 {
@@ -346,7 +346,7 @@ namespace Cthangband
         {
             ItemType kPtr = kIdx;
             ItemType = kIdx;
-            BaseCategory = BaseItemCategory.CreateFromEnum(kPtr.Category);
+//            BaseCategory = BaseItemCategory.CreateFromEnum(kPtr.Category);
             ItemSubCategory = kPtr.SubCategory;
             TypeSpecificValue = kPtr.Pval;
             Count = 1;
@@ -390,7 +390,7 @@ namespace Cthangband
 
         public int BreakageChance()
         {
-            return BaseCategory.PercentageBreakageChance;
+            return ItemType.BaseCategory.PercentageBreakageChance;
         }
 
         public bool StatsAreSame(Item other)
@@ -457,7 +457,7 @@ namespace Cthangband
             {
                 return false;
             }
-            if (!BaseCategory.CanAbsorb(this, other))
+            if (!ItemType.BaseCategory.CanAbsorb(this, other))
             {
                 return false;
             }    
@@ -500,11 +500,11 @@ namespace Cthangband
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3);
-            if (ItemType == null || BaseCategory == null)
+            if (ItemType == null || ItemType.BaseCategory == null)
             {
                 return "(nothing)";
             }
-            string basenm = BaseCategory.GetDescription(this, includeCountPrefix);
+            string basenm = ItemType.BaseCategory.GetDescription(this, includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -531,13 +531,13 @@ namespace Cthangband
             }
 
             // This is the detailed description.
-            basenm += BaseCategory.GetDetailedDescription(this);
+            basenm += ItemType.BaseCategory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += BaseCategory.GetVerboseDescription(this);
+            basenm += ItemType.BaseCategory.GetVerboseDescription(this);
 
             // This is the verbose description.
             if (mode < 3)
@@ -546,7 +546,7 @@ namespace Cthangband
             }
 
             // This is the full description.
-            basenm += BaseCategory.GetFullDescription(this);
+            basenm += ItemType.BaseCategory.GetFullDescription(this);
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -1728,22 +1728,22 @@ namespace Cthangband
 
         public bool HatesAcid()
         {
-            return BaseCategory.HatesAcid;
+            return ItemType.BaseCategory.HatesAcid;
         }
 
         public bool HatesCold()
         {
-            return BaseCategory.HatesCold;
+            return ItemType.BaseCategory.HatesCold;
         }
 
         public bool HatesElec()
         {
-            return BaseCategory.HatesElectricity;
+            return ItemType.BaseCategory.HatesElectricity;
         }
 
         public bool HatesFire()
         {
-            return BaseCategory.HatesFire;
+            return ItemType.BaseCategory.HatesFire;
         }
 
         public bool IdentifyFully()
@@ -1760,7 +1760,7 @@ namespace Cthangband
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = BaseCategory.Identify(this);
+            string categoryIdentity = ItemType.BaseCategory.Identify(this);
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -2525,11 +2525,11 @@ namespace Cthangband
                 }
                 value += ePtr.Cost;
             }
-            if (BaseCategory.IsWorthless(this))
+            if (ItemType.BaseCategory.IsWorthless(this))
             {
                 return 0;
             }
-            value += BaseCategory.GetBonusRealValue(this, value);
+            value += ItemType.BaseCategory.GetBonusRealValue(this, value);
             return value;
         }
 
@@ -2564,7 +2564,7 @@ namespace Cthangband
                     return false;
                 }
             }
-            return BaseCategory.IsStompable(this);
+            return ItemType.BaseCategory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
@@ -2627,7 +2627,7 @@ namespace Cthangband
             {
                 return ItemType.Cost;
             }
-            return BaseCategory.BaseValue;
+            return ItemType.BaseCategory.BaseValue;
         }
 
         private string DescribeActivationEffect()
@@ -2876,7 +2876,7 @@ namespace Cthangband
             {
                 return "teleport every 50+d50 turns";
             }
-            return BaseCategory.DescribeActivationEffect(this);
+            return ItemType.BaseCategory.DescribeActivationEffect(this);
         }
 
         private bool IsTried()
@@ -2970,7 +2970,7 @@ namespace Cthangband
                 }
                 return;
             }
-            BaseCategory.ApplyMagic(this, lev, power);
+            ItemType.BaseCategory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Instance.Level != null)
@@ -3296,7 +3296,7 @@ namespace Cthangband
                     break;
 
                 case 39:
-                    if (BaseCategory.CanProvideSheathOfElectricity)
+                    if (ItemType.BaseCategory.CanProvideSheathOfElectricity)
                     {
                         RandartFlags3.Set(ItemFlag3.ShElec);
                     }
@@ -3311,7 +3311,7 @@ namespace Cthangband
                     break;
 
                 case 40:
-                    if (BaseCategory.CanProvideSheathOfFire)
+                    if (ItemType.BaseCategory.CanProvideSheathOfFire)
                     {
                         RandartFlags3.Set(ItemFlag3.ShFire);
                     }
@@ -3326,7 +3326,7 @@ namespace Cthangband
                     break;
 
                 case 41:
-                    if (BaseCategory.CanReflectBoltsAndArrows)
+                    if (ItemType.BaseCategory.CanReflectBoltsAndArrows)
                     {
                         RandartFlags2.Set(ItemFlag2.Reflect);
                     }
@@ -3427,7 +3427,7 @@ namespace Cthangband
             }
             while (powers-- != 0)
             {
-                int maxType = (BaseCategory.CanApplySlayingBonus ? 7 : 5);
+                int maxType = (ItemType.BaseCategory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -3474,14 +3474,14 @@ namespace Cthangband
                     TypeSpecificValue = 4;
                 }
             }
-            BaseCategory.ApplyRandartBonus(this);
+            ItemType.BaseCategory.ApplyRandartBonus(this);
             RandartFlags3.Set(ItemFlag3.IgnoreAcid | ItemFlag3.IgnoreElec | ItemFlag3.IgnoreFire | ItemFlag3.IgnoreCold);
             int totalFlags = FlagBasedCost(TypeSpecificValue);
             if (aCursed)
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(BaseCategory.RandartActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(ItemType.BaseCategory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -3631,9 +3631,8 @@ namespace Cthangband
                 AssignItemType(kIdx);
             }
             ApplyMagic(SaveGame.Instance.Level.ObjectLevel, true, good, great);
-            Count = BaseCategory.MakeObjectCount;
-            if (!IsCursed() && !IsBroken() &&
-                ItemType.Level > SaveGame.Instance.Difficulty)
+            Count = ItemType.BaseCategory.MakeObjectCount;
+            if (!IsCursed() && !IsBroken() && ItemType.Level > SaveGame.Instance.Difficulty)
             {
                 if (SaveGame.Instance.Level != null)
                 {
@@ -3806,7 +3805,7 @@ namespace Cthangband
 
                 case 20:
                 case 21:
-                    if (!BaseCategory.CanApplyTunnelBonus)
+                    if (!ItemType.BaseCategory.CanApplyTunnelBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3818,7 +3817,7 @@ namespace Cthangband
 
                 case 22:
                 case 23:
-                    if (!BaseCategory.CanApplyBlowsBonus)
+                    if (!ItemType.BaseCategory.CanApplyBlowsBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3949,7 +3948,7 @@ namespace Cthangband
                 case 24:
                 case 25:
                 case 26:
-                    if (!BaseCategory.CanApplyBonusArmourClassMiscPower)
+                    if (!ItemType.BaseCategory.CanApplyBonusArmourClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }
@@ -3987,7 +3986,7 @@ namespace Cthangband
                     return;
                 }
             }
-            BaseCategory.ApplyRandomSlaying(ref artifactBias, this);
+            ItemType.BaseCategory.ApplyRandomSlaying(ref artifactBias, this);
         }
 
         private void CurseRandart()
