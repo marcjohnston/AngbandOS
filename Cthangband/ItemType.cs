@@ -39,7 +39,7 @@ namespace Cthangband
         /// </summary>
         public bool FlavourAware;
         public bool HasFlavor;
-        public int Level;
+        public readonly int Level;
         public string Name;
         public int Pval;
         public int SubCategory;
@@ -48,46 +48,6 @@ namespace Cthangband
         public int ToH;
         public bool Tried;
         public int Weight;
-
-        public ItemType()
-        {
-        }
-
-        public ItemType(ItemType original)
-        {
-            Character = original.Character;
-            Colour = original.Colour;
-            Ac = original.Ac;
-            FlavourAware = original.FlavourAware;
-            Chance = new int[4];
-            for (int i = 0; i < 4; i++)
-            {
-                Chance[i] = original.Chance[i];
-            }
-            Cost = original.Cost;
-            Dd = original.Dd;
-            Ds = original.Ds;
-            EasyKnow = original.EasyKnow;
-            Flags1 = new FlagSet(original.Flags1);
-            Flags2 = new FlagSet(original.Flags2);
-            Flags3 = new FlagSet(original.Flags3);
-            HasFlavor = original.HasFlavor;
-            Level = original.Level;
-            Locale = new int[4];
-            for (int i = 0; i < 4; i++)
-            {
-                Locale[i] = original.Locale[i];
-            }
-            Name = original.Name;
-            Pval = original.Pval;
-            SubCategory = original.SubCategory;
-            ToA = original.ToA;
-            ToD = original.ToD;
-            ToH = original.ToH;
-            Tried = original.Tried;
-            Category = original.Category;
-            Weight = original.Weight;
-        }
 
         public ItemType(BaseItemType baseItem)
         {

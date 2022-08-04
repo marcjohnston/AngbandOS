@@ -2547,6 +2547,7 @@ namespace Cthangband
             }
             return newValue;
         }
+
         public bool Stompable()
         {
             if (!IsKnown())
