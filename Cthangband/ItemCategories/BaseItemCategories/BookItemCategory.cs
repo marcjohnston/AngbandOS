@@ -1,28 +1,22 @@
 ﻿using Cthangband.Enumerations;
+using Cthangband.StaticData;
 using System;
 
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class SpikeItemCategory : BaseItemCategory
+    internal class BookItemCategory : BaseItemCategory
     {
-        public override Colour Colour => Colour.Grey;
-        public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
-
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();
-            if (cost <= 5)
-            {
-                return MassRoll(5, 5);
-            }
             if (cost <= 50)
             {
-                return MassRoll(5, 5);
+                return MassRoll(2, 3) + 1;
             }
             if (cost <= 500)
             {
-                return MassRoll(5, 5);
+                return MassRoll(1, 3) + 1;
             }
             return 0;
         }

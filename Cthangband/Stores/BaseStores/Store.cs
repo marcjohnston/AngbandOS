@@ -810,102 +810,7 @@ namespace Cthangband
             int size = 1;
             int discount = 0;
             int cost = oPtr.Value();
-            switch (oPtr.Category)
-            {
-                case ItemCategory.Food:
-                case ItemCategory.Flask:
-                case ItemCategory.Light:
-                    {
-                        if (cost <= 5)
-                        {
-                            size += MassRoll(3, 5);
-                        }
-                        if (cost <= 20)
-                        {
-                            size += MassRoll(3, 5);
-                        }
-                        break;
-                    }
-                case ItemCategory.Potion:
-                case ItemCategory.Scroll:
-                    {
-                        if (cost <= 60)
-                        {
-                            size += MassRoll(3, 5);
-                        }
-                        if (cost <= 240)
-                        {
-                            size += MassRoll(1, 5);
-                        }
-                        break;
-                    }
-                case ItemCategory.LifeBook:
-                case ItemCategory.SorceryBook:
-                case ItemCategory.NatureBook:
-                case ItemCategory.ChaosBook:
-                case ItemCategory.DeathBook:
-                case ItemCategory.TarotBook:
-                case ItemCategory.FolkBook:
-                case ItemCategory.CorporealBook:
-                    {
-                        if (cost <= 50)
-                        {
-                            size += MassRoll(2, 3);
-                        }
-                        if (cost <= 500)
-                        {
-                            size += MassRoll(1, 3);
-                        }
-                        break;
-                    }
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.Shield:
-                case ItemCategory.Gloves:
-                case ItemCategory.Boots:
-                case ItemCategory.Cloak:
-                case ItemCategory.Helm:
-                case ItemCategory.Crown:
-                case ItemCategory.Sword:
-                case ItemCategory.Polearm:
-                case ItemCategory.Hafted:
-                case ItemCategory.Digging:
-                case ItemCategory.Bow:
-                    {
-                        if (oPtr.RareItemTypeIndex != 0)
-                        {
-                            break;
-                        }
-                        if (cost <= 10)
-                        {
-                            size += MassRoll(3, 5);
-                        }
-                        if (cost <= 100)
-                        {
-                            size += MassRoll(3, 5);
-                        }
-                        break;
-                    }
-                case ItemCategory.Spike:
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                    {
-                        if (cost <= 5)
-                        {
-                            size += MassRoll(5, 5);
-                        }
-                        if (cost <= 50)
-                        {
-                            size += MassRoll(5, 5);
-                        }
-                        if (cost <= 500)
-                        {
-                            size += MassRoll(5, 5);
-                        }
-                        break;
-                    }
-            }
+            size += oPtr.ItemType.BaseCategory.GetAdditionalMassProduceCount(oPtr);
             if (cost < 5)
             {
                 discount = 0;
@@ -932,16 +837,6 @@ namespace Cthangband
             }
             oPtr.Discount = discount;
             oPtr.Count = size - (size * discount / 100);
-        }
-
-        private int MassRoll(int num, int max)
-        {
-            int t = 0;
-            for (int i = 0; i < num; i++)
-            {
-                t += Program.Rng.RandomLessThan(max);
-            }
-            return t;
         }
 
         protected virtual int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)

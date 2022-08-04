@@ -5,7 +5,7 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class ChaosBookItemCategory : BaseItemCategory
+    internal class ChaosBookItemCategory : BookItemCategory
     {
         public override string GetDescription(Item item, bool includeCountPrefix)
         {

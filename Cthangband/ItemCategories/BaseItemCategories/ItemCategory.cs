@@ -144,6 +144,18 @@ namespace Cthangband.ItemCategories
         }
         //    public virtual bool CanSlay => false;
 
+        public virtual int GetAdditionalMassProduceCount(Item item) => 0;
+
+        protected int MassRoll(int num, int max)
+        {
+            int t = 0;
+            for (int i = 0; i < num; i++)
+            {
+                t += Program.Rng.RandomLessThan(max);
+            }
+            return t;
+        }
+
         public virtual void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item)
         {
             switch (Program.Rng.DieRoll(34))

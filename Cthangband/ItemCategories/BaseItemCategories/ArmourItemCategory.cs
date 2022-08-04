@@ -18,6 +18,23 @@ namespace Cthangband.ItemCategories
         }
 
         public override int RandartActivationChance => base.RandartActivationChance * 2;
+        public override int GetAdditionalMassProduceCount(Item item)
+        {
+            int cost = item.Value();
+            if (item.RareItemTypeIndex != 0)
+            {
+                return 0;
+            }
+            if (cost <= 10)
+            {
+                return MassRoll(3, 5);
+            }
+            if (cost <= 100)
+            {
+                return MassRoll(3, 5);
+            }
+            return 0;
+        }
 
         public override int GetBonusRealValue(Item item, int value)
         {

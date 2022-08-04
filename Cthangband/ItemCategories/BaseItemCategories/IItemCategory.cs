@@ -16,6 +16,13 @@ namespace Cthangband.ItemCategories
         int RandartActivationChance { get; }
 
         /// <summary>
+        /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        int GetAdditionalMassProduceCount(Item item);
+
+        /// <summary>
         /// Applies an additional bonus to random artifacts.  Does nothing by default.
         /// </summary>
         /// <param name="item"></param>

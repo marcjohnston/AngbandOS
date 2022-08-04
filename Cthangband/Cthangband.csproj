@@ -184,6 +184,7 @@
     <Compile Include="ItemCategories\BaseItemCategories\IItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\ItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\JewelleryItemCategory.cs" />
+    <Compile Include="ItemCategories\BaseItemCategories\BookItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\LightSourceItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\WeaponItemCategory.cs" />
     <Compile Include="ItemCategories\BoltItemCategory.cs" />
