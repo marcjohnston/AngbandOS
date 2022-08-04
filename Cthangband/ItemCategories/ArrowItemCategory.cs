@@ -6,9 +6,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class ArrowItemCategory : WeaponItemCategory
     {
-        public ArrowItemCategory() : base(ItemCategory.Arrow)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override int GetBonusRealValue(Item item, int value)

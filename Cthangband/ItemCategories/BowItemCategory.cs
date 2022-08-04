@@ -8,9 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class BowItemCategory : WeaponItemCategory
     {
-        public BowItemCategory() : base(ItemCategory.Bow)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override string GetDetailedDescription(Item item)

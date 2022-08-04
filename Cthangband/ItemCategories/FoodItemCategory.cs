@@ -8,10 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class FoodItemCategory : BaseItemCategory
     {
-        public FoodItemCategory() : base(ItemCategory.Food)
-        {
-        }
-
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

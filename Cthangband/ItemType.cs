@@ -6,11 +6,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StaticData;
 using System;
 
 namespace Cthangband
 {
+    /// <summary>
+    /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
+    /// properties are modifyable.
+    /// </summary>
     [Serializable]
     internal class ItemType
     {
@@ -25,13 +30,15 @@ namespace Cthangband
         /// Use StompableType enum to address each index.
         /// </summary>
         public readonly bool[] Stompable = new bool[4];
-        public int Ac;
-        public ItemCategory Category;
+        public readonly int Ac;
+        public readonly ItemCategory Category; // Provided for backwards compatability.  Will be deleted.
+        public IItemCategory BaseCategory = null;
+
         public char Character;
         public Colour Colour;
-        public int Cost;
-        public int Dd;
-        public int Ds;
+        public readonly int Cost;
+        public readonly int Dd;
+        public readonly int Ds;
         public bool EasyKnow;
 
         /// <summary>
@@ -40,14 +47,14 @@ namespace Cthangband
         public bool FlavourAware;
         public bool HasFlavor;
         public readonly int Level;
-        public string Name;
-        public int Pval;
-        public int SubCategory;
-        public int ToA;
-        public int ToD;
-        public int ToH;
+        public readonly string Name;
+        public readonly int Pval;
+        public readonly int SubCategory;
+        public readonly int ToA;
+        public readonly int ToD;
+        public readonly int ToH;
         public bool Tried;
-        public int Weight;
+        public readonly int Weight;
 
         public ItemType(BaseItemType baseItem)
         {
@@ -55,7 +62,8 @@ namespace Cthangband
             Colour = baseItem.Colour;
             Name = baseItem.FriendlyName;
             Ac = baseItem.Ac;
-            Category = baseItem.Category;
+            BaseCategory = BaseItemCategory.CreateFromEnum(baseItem.Category); // Instantiate the ItemCategory that this ItemType is based from.
+            Category = baseItem.Category; // We need a copy of this category enum for backwards compatability at this time.
             Chance[0] = baseItem.Chance1;
             Chance[1] = baseItem.Chance2;
             Chance[2] = baseItem.Chance3;

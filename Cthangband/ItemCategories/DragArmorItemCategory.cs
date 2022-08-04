@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class DragArmorItemCategory : ArmourItemCategory
     {
-        public DragArmorItemCategory() : base(ItemCategory.DragArmor)
-        {
-        }
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Grey;

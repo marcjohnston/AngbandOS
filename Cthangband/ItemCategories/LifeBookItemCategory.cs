@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class LifeBookItemCategory : BaseItemCategory
     {
-        public LifeBookItemCategory() : base(ItemCategory.LifeBook)
-        {
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Life Magic" : $"Life {Pluralize("Spellbook", item.Count)}";

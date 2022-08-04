@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class ShieldItemCategory : ArmourItemCategory
     {
-        public ShieldItemCategory() : base(ItemCategory.Shield)
-        {
-        }
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBrown;

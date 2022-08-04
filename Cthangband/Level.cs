@@ -86,7 +86,7 @@ namespace Cthangband
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)
             {
-                Items[j] = new Item();
+                Items[j] = new Item(); // No ItemType here
             }
             Monsters = new MonsterList(this);
         }

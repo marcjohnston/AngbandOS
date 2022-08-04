@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class SoftArmorItemCategory : ArmourItemCategory
     {
-        public SoftArmorItemCategory() : base(ItemCategory.SoftArmor)
-        {
-        }
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

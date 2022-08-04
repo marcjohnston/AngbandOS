@@ -8,9 +8,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class ScrollItemCategory : BaseItemCategory
     {
-        public ScrollItemCategory() : base(ItemCategory.Scroll)
-        {
-        }
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

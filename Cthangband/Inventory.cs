@@ -28,7 +28,7 @@ namespace Cthangband
             _player = player;
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                _items[i] = new Item();
+                _items[i] = new Item(); // No ItemType here
             }
             _invenCnt = 0;
         }
@@ -118,7 +118,7 @@ namespace Cthangband
                         {
                             _items[k] = new Item(_items[k + 1]);
                         }
-                        _items[k] = new Item();
+                        _items[k] = new Item(); // No ItemType here
                         break;
                     }
                 }
@@ -258,7 +258,7 @@ namespace Cthangband
                 {
                     _items[k + 1] = new Item(_items[k]);
                 }
-                _items[i] = new Item();
+                _items[i] = new Item(); // No ItemType here
             }
             _items[i] = new Item(oPtr);
             oPtr = _items[i];
@@ -415,11 +415,11 @@ namespace Cthangband
                 {
                     _items[i] = _items[i + 1];
                 }
-                _items[i] = new Item();
+                _items[i] = new Item(); // No ItemType here
             }
             else
             {
-                _items[item] = new Item();
+                _items[item] = new Item(); // No ItemType here
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
@@ -677,7 +677,7 @@ namespace Cthangband
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.BaseCategory.Colour;
+                outColour[k] = oPtr.ItemType.BaseCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 16;
@@ -755,7 +755,7 @@ namespace Cthangband
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.BaseCategory.Colour;
+                outColour[k] = oPtr.ItemType.BaseCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 9;

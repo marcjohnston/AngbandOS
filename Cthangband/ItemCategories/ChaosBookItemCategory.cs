@@ -7,9 +7,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class ChaosBookItemCategory : BaseItemCategory
     {
-        public ChaosBookItemCategory() : base(ItemCategory.ChaosBook)
-        {
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Chaos Magic" : $"Chaos {Pluralize("Spellbook", item.Count)}";

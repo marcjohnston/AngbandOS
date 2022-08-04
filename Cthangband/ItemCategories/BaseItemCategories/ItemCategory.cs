@@ -1,17 +1,8 @@
 ﻿using Cthangband.Enumerations;
-using Cthangband.Pantheon;
 using Cthangband.StaticData;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Media.Media3D;
-using System.Windows.Media;
 using System;
 using static Cthangband.Extensions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using Cthangband.ArtifactBiases;
-using System.Windows.Navigation;
 using System.IO;
 
 namespace Cthangband.ItemCategories
@@ -20,11 +11,8 @@ namespace Cthangband.ItemCategories
 
     internal abstract class BaseItemCategory : IItemCategory
     {
-        public ItemCategory CategoryEnum { get; }
-
-        public BaseItemCategory(ItemCategory itemCategory)
+        public BaseItemCategory()
         {
-            CategoryEnum = itemCategory;
         }
 
         public virtual bool CanVorpalSlay => false;
@@ -525,7 +513,7 @@ namespace Cthangband.ItemCategories
 
         //    public virtual bool CanBeConsumed => false;
 
-        public virtual Colour Colour { get; }
+        public virtual Colour Colour => Colour.White;
 
         //    public virtual Realm SpellBookToToRealm => Realm.None;
 

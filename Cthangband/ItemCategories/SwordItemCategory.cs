@@ -6,9 +6,6 @@ namespace Cthangband.ItemCategories
     [Serializable]
     internal class SwordItemCategory : WeaponItemCategory
     {
-        public SwordItemCategory() : base(ItemCategory.Sword)
-        {
-        }
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightWhite;
