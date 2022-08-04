@@ -885,7 +885,7 @@
     <Compile Include="Stores\HomeStore.cs" />
     <Compile Include="Stores\EmptyLotStore.cs" />
     <Compile Include="Stores\InnStore.cs" />
-    <Compile Include="Stores\IStore.cs" />
+    <Compile Include="Stores\BaseStores\IStore.cs" />
     <Compile Include="Stores\LibraryStore.cs" />
     <Compile Include="Stores\MagicStore.cs" />
     <Compile Include="Stores\PawnStore.cs" />
@@ -953,7 +953,7 @@
     <Compile Include="UI\PopupMenu.cs" />
     <Compile Include="UI\Screen.cs" />
     <Compile Include="UI\Settings.cs" />
-    <Compile Include="Store.cs" />
+    <Compile Include="Stores\BaseStores\Store.cs" />
     <Compile Include="StoreOwner.cs" />
     <Compile Include="TargetLocation.cs" />
     <Compile Include="Terminal\MainWindow.xaml.cs">

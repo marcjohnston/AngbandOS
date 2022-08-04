@@ -3,7 +3,7 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.StoreCommands
 {
-    internal class ReasearchItemStoreCommand : IStoreCommand
+    internal class RestorationStoreCommand : IStoreCommand
 
     {
         public char Key => 'r';

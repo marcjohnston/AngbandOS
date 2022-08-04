@@ -116,6 +116,6 @@ namespace Cthangband.Stores
                     return false;
             }
         }
-        protected override IStoreCommand AdvertisedStoreCommand4 => new ReasearchItemStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand4 => new RestorationStoreCommand();
     }
 }
