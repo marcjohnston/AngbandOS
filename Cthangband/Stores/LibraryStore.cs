@@ -1,5 +1,6 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StoreCommands;
 using System;
 
@@ -79,16 +80,16 @@ namespace Cthangband.Stores
 
         protected override bool StoreWillBuy(Item item)
         {
-            switch (item.Category)
+            switch (item.ItemType.BaseCategory)
             {
-                case ItemCategory.SorceryBook:
-                case ItemCategory.NatureBook:
-                case ItemCategory.ChaosBook:
-                case ItemCategory.DeathBook:
-                case ItemCategory.LifeBook:
-                case ItemCategory.TarotBook:
-                case ItemCategory.FolkBook:
-                case ItemCategory.CorporealBook:
+                case SorceryBookItemCategory _:
+                case NatureBookItemCategory _:
+                case ChaosBookItemCategory _:
+                case DeathBookItemCategory _:
+                case LifeBookItemCategory _:
+                case TarotBookItemCategory _:
+                case FolkBookItemCategory _:
+                case CorporealBookItemCategory _:
                     return item.Value() > 0;
                 default:
                     return false;

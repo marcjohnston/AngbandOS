@@ -1,5 +1,6 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StoreCommands;
 using System;
 
@@ -98,17 +99,17 @@ namespace Cthangband.Stores
 
         protected override bool StoreWillBuy(Item item)
         {
-            switch (item.Category)
+            switch (item.ItemType.BaseCategory)
             {
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Crown:
-                case ItemCategory.Helm:
-                case ItemCategory.Shield:
-                case ItemCategory.Cloak:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
+                case BootsItemCategory _:
+                case GlovesItemCategory _:
+                case CrownItemCategory _:
+                case HelmItemCategory _:
+                case ShieldItemCategory _:
+                case CloakItemCategory _:
+                case SoftArmorItemCategory _:
+                case HardArmorItemCategory _:
+                case DragArmorItemCategory _:
                     return item.Value() > 0;
                 default:
                     return false;

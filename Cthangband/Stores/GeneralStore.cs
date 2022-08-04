@@ -1,5 +1,6 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StoreCommands;
 using System;
 
@@ -97,18 +98,18 @@ namespace Cthangband.Stores
 
         protected override bool StoreWillBuy(Item item)
         {
-            switch (item.Category)
+            switch (item.ItemType.BaseCategory)
             {
-                case ItemCategory.Food:
-                case ItemCategory.Light:
-                case ItemCategory.Flask:
-                case ItemCategory.Spike:
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Digging:
-                case ItemCategory.Cloak:
-                case ItemCategory.Bottle:
+                case FoodItemCategory _:
+                case LightItemCategory _:
+                case FlaskItemCategory _:
+                case SpikeItemCategory _:
+                case ShotItemCategory _:
+                case ArrowItemCategory _:
+                case BoltItemCategory _:
+                case DiggingItemCategory _:
+                case CloakItemCategory _:
+                case BottleItemCategory _:
                     return item.Value() > 0;
                 default:
                     return false;

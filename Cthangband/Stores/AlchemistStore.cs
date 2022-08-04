@@ -1,5 +1,6 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StoreCommands;
 using System;
 
@@ -94,10 +95,10 @@ namespace Cthangband.Stores
 
         protected override bool StoreWillBuy(Item item)
         {
-            switch (item.Category)
+            switch (item.ItemType.BaseCategory)
             {
-                case ItemCategory.Scroll:
-                case ItemCategory.Potion:
+                case ScrollItemCategory _:
+                case PotionItemCategory _:
                     return item.Value() > 0;
                 default:
                     return false;
