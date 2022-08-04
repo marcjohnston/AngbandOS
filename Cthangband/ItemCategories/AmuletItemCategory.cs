@@ -7,8 +7,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class AmuletItemCategory : JewelleryItemCategory
+    internal abstract class AmuletItemCategory : JewelleryItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             if (item.IsFixedArtifact() && item.IsFlavourAware())

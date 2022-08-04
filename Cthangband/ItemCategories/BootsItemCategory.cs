@@ -6,8 +6,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class BootsItemCategory : ArmourItemCategory
+    internal abstract class BootsItemCategory : ArmourItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Boots;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

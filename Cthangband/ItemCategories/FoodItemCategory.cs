@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class FoodItemCategory : BaseItemCategory
+    internal abstract class FoodItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Food;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

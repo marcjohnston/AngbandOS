@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class PotionItemCategory : BaseItemCategory
+    internal abstract class PotionItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Potion;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

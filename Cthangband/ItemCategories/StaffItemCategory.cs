@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class StaffItemCategory : BaseItemCategory
+    internal abstract class StaffItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[item.ItemSubCategory].Name} ";

@@ -9,7 +9,7 @@ namespace Cthangband.ItemCategories
     /// <summary>
     /// Represents jewellery items.  Amulets and rings are both armour classes.
     /// </summary>
-    internal class JewelleryItemCategory : BaseItemCategory
+    internal abstract class JewelleryItemCategory : BaseItemCategory
     {
         public override bool IsStompable(Item item)
         {

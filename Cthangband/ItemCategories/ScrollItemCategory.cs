@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class ScrollItemCategory : BaseItemCategory
+    internal abstract class ScrollItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Scroll;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

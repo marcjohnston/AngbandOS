@@ -358,15 +358,6 @@ namespace Cthangband.Debug
             }
         }
 
-        private void Button6_Click(object sender, EventArgs e)
-        {
-            using (GenericEntityTypeEditor<BaseItemType> ete = new GenericEntityTypeEditor<BaseItemType>())
-            {
-                ete.LoadList(StaticResources.Instance.BaseItemTypes, "Editing Base Item Types");
-                ete.ShowDialog(this);
-            }
-        }
-
         private void Button7_Click(object sender, EventArgs e)
         {
             using (GenericEntityTypeEditor<AmuletFlavour> ete = new GenericEntityTypeEditor<AmuletFlavour>())

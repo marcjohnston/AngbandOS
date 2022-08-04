@@ -4,8 +4,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class ArrowItemCategory : WeaponItemCategory
+    internal abstract class ArrowItemCategory : WeaponItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Arrow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override int GetBonusRealValue(Item item, int value)

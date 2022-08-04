@@ -4,6 +4,7 @@ using System;
 using static Cthangband.Extensions;
 using Cthangband.ArtifactBiases;
 using System.IO;
+using System.ComponentModel;
 
 namespace Cthangband.ItemCategories
 {
@@ -11,6 +12,135 @@ namespace Cthangband.ItemCategories
 
     internal abstract class BaseItemCategory : IItemCategory
     {
+        /// <summary>
+        /// The column from which to take the graphical tile.
+        /// </summary>
+        public abstract char Character { get; }
+
+        /// <summary>
+        /// The row from which to take the graphical tile
+        /// </summary>
+        public virtual Colour Colour => Colour.White;
+
+        /// <summary>
+        /// A unique identifier for the entity
+        /// </summary>
+        public abstract string Name { get; }
+
+        public virtual int Ac => 0;
+        public virtual bool Activate => false;
+        public virtual bool Aggravate => false;
+        public virtual bool AntiTheft => false;
+        public virtual bool Blessed => false;
+        public virtual bool Blows => false;
+        public virtual bool BrandAcid => false;
+        public virtual bool BrandCold => false;
+        public virtual bool BrandElec => false;
+        public virtual bool BrandFire => false;
+        public virtual bool BrandPois => false;
+        public virtual bool Cha => false;
+        public virtual int Chance1 => 0;
+        public virtual int Chance2 => 0;
+        public virtual int Chance3 => 0;
+        public virtual int Chance4 => 0;
+        public virtual bool Chaotic => false;
+        public virtual bool Con => false;
+        public virtual int Cost => 0;
+        public virtual bool Cursed => false;
+        public virtual int Dd => 0;
+        public virtual bool Dex => false;
+        public virtual bool DrainExp => false;
+        public virtual bool DreadCurse => false;
+        public virtual int Ds => 0;
+        public virtual bool EasyKnow => false;
+        public virtual bool Feather => false;
+        public virtual bool FreeAct => false;
+        public abstract string FriendlyName { get; }
+        public virtual bool HeavyCurse => false;
+        public virtual bool HideType => false;
+        public virtual bool HoldLife => false;
+        public virtual bool IgnoreAcid => false;
+        public virtual bool IgnoreCold => false;
+        public virtual bool IgnoreElec => false;
+        public virtual bool IgnoreFire => false;
+        public virtual bool ImAcid => false;
+        public virtual bool ImCold => false;
+        public virtual bool ImElec => false;
+        public virtual bool ImFire => false;
+        public virtual bool Impact => false;
+        public virtual bool Infra => false;
+        public virtual bool InstaArt => false;
+        public virtual bool Int => false;
+        public virtual bool KillDragon => false;
+        public virtual int Level => 0;
+        public virtual bool Lightsource => false;
+        public virtual int Locale1 => 0;
+        public virtual int Locale2 => 0;
+        public virtual int Locale3 => 0;
+        public virtual int Locale4 => 0;
+        public virtual bool NoMagic => false;
+        public virtual bool NoTele => false;
+        public virtual bool PermaCurse => false;
+        public virtual int Pval => 0;
+        public virtual bool Reflect => false;
+        public virtual bool Regen => false;
+        public virtual bool ResAcid => false;
+        public virtual bool ResBlind => false;
+        public virtual bool ResChaos => false;
+        public virtual bool ResCold => false;
+        public virtual bool ResConf => false;
+        public virtual bool ResDark => false;
+        public virtual bool ResDisen => false;
+        public virtual bool ResElec => false;
+        public virtual bool ResFear => false;
+        public virtual bool ResFire => false;
+        public virtual bool ResLight => false;
+        public virtual bool ResNether => false;
+        public virtual bool ResNexus => false;
+        public virtual bool ResPois => false;
+        public virtual bool ResShards => false;
+        public virtual bool ResSound => false;
+        public virtual bool Search => false;
+        public virtual bool SeeInvis => false;
+        public virtual bool ShElec => false;
+        public virtual bool ShFire => false;
+        public virtual bool ShowMods => false;
+        public virtual bool SlayAnimal => false;
+        public virtual bool SlayDemon => false;
+        public virtual bool SlayDragon => false;
+        public virtual bool SlayEvil => false;
+        public virtual bool SlayGiant => false;
+        public virtual bool SlayOrc => false;
+        public virtual bool SlayTroll => false;
+        public virtual bool SlayUndead => false;
+        public virtual bool SlowDigest => false;
+        public virtual bool Speed => false;
+        public virtual bool Stealth => false;
+        public virtual bool Str => false;
+        public virtual int SubCategory => 0;
+        public virtual bool SustCha => false;
+        public virtual bool SustCon => false;
+        public virtual bool SustDex => false;
+        public virtual bool SustInt => false;
+        public virtual bool SustStr => false;
+        public virtual bool SustWis => false;
+        public virtual bool Telepathy => false;
+        public virtual bool Teleport => false;
+        public virtual int ToA => 0;
+        public virtual int ToD => 0;
+        public virtual int ToH => 0;
+        public virtual bool Tried => false;
+        public virtual bool Tunnel => false;
+        public virtual bool Vampiric => false;
+        public virtual bool Vorpal => false;
+        public virtual int Weight => 0;
+        public virtual bool Wis => false;
+        public virtual bool Wraith => false;
+        public virtual bool XtraMight => false;
+        public virtual bool XtraShots => false;
+
+        public virtual ItemCategory CategoryEnum { get; }
+
         public BaseItemCategory()
         {
         }
@@ -50,98 +180,98 @@ namespace Cthangband.ItemCategories
             return item.ItemType.Stompable[StompableType.Broken];
         }
 
-        public static IItemCategory CreateFromEnum(ItemCategory itemCategory)
-        {
-            switch (itemCategory)
-            {
-                case ItemCategory.None:
-                    return null;
-                case ItemCategory.Skeleton:
-                    return new SkeletonItemCategory();
-                case ItemCategory.Bottle:
-                    return new BottleItemCategory();
-                case ItemCategory.Junk:
-                    return new JunkItemCategory();
-                case ItemCategory.Spike:
-                    return new SpikeItemCategory();
-                case ItemCategory.Chest:
-                    return new ChestItemCategory();
-                case ItemCategory.Shot:
-                    return new ShotItemCategory();
-                case ItemCategory.Arrow:
-                    return new ArrowItemCategory();
-                case ItemCategory.Bolt:
-                    return new BoltItemCategory();
-                case ItemCategory.Bow:
-                    return new BowItemCategory();
-                case ItemCategory.Digging:
-                    return new DiggingItemCategory();
-                case ItemCategory.Hafted:
-                    return new HaftedItemCategory();
-                case ItemCategory.Polearm:
-                    return new PolearmItemCategory();
-                case ItemCategory.Sword:
-                    return new SwordItemCategory();
-                case ItemCategory.Boots:
-                    return new BootsItemCategory();
-                case ItemCategory.Gloves:
-                    return new GlovesItemCategory();
-                case ItemCategory.Helm:
-                    return new HelmItemCategory();
-                case ItemCategory.Crown:
-                    return new CrownItemCategory();
-                case ItemCategory.Shield:
-                    return new ShieldItemCategory();
-                case ItemCategory.Cloak:
-                    return new CloakItemCategory();
-                case ItemCategory.SoftArmor:
-                    return new SoftArmorItemCategory();
-                case ItemCategory.HardArmor:
-                    return new HardArmorItemCategory();
-                case ItemCategory.DragArmor:
-                    return new DragArmorItemCategory();
-                case ItemCategory.Light:
-                    return new LightItemCategory();
-                case ItemCategory.Amulet:
-                    return new AmuletItemCategory();
-                case ItemCategory.Ring:
-                    return new RingItemCategory();
-                case ItemCategory.Staff:
-                    return new StaffItemCategory();
-                case ItemCategory.Wand:
-                    return new WandItemCategory();
-                case ItemCategory.Rod:
-                    return new RodItemCategory();
-                case ItemCategory.Scroll:
-                    return new ScrollItemCategory();
-                case ItemCategory.Potion:
-                    return new PotionItemCategory();
-                case ItemCategory.Flask:
-                    return new FlaskItemCategory();
-                case ItemCategory.Food:
-                    return new FoodItemCategory();
-                case ItemCategory.LifeBook:
-                    return new LifeBookItemCategory();
-                case ItemCategory.SorceryBook:
-                    return new SorceryBookItemCategory();
-                case ItemCategory.NatureBook:
-                    return new NatureBookItemCategory();
-                case ItemCategory.ChaosBook:
-                    return new ChaosBookItemCategory();
-                case ItemCategory.DeathBook:
-                    return new DeathBookItemCategory();
-                case ItemCategory.TarotBook:
-                    return new TarotBookItemCategory();
-                case ItemCategory.FolkBook:
-                    return new FolkBookItemCategory();
-                case ItemCategory.CorporealBook:
-                    return new CorporealBookItemCategory();
-                case ItemCategory.Gold:
-                    return new GoldItemCategory();
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        //public static IItemCategory CreateFromEnum(ItemCategory itemCategory)
+        //{
+        //    switch (itemCategory)
+        //    {
+        //        case ItemCategory.None:
+        //            return null;
+        //        case ItemCategory.Skeleton:
+        //            return new SkeletonItemCategory();
+        //        case ItemCategory.Bottle:
+        //            return new BottleItemCategory();
+        //        case ItemCategory.Junk:
+        //            return new JunkItemCategory();
+        //        case ItemCategory.Spike:
+        //            return new SpikeItemCategory();
+        //        case ItemCategory.Chest:
+        //            return new ChestItemCategory();
+        //        case ItemCategory.Shot:
+        //            return new ShotItemCategory();
+        //        case ItemCategory.Arrow:
+        //            return new ArrowItemCategory();
+        //        case ItemCategory.Bolt:
+        //            return new BoltItemCategory();
+        //        case ItemCategory.Bow:
+        //            return new BowItemCategory();
+        //        case ItemCategory.Digging:
+        //            return new DiggingItemCategory();
+        //        case ItemCategory.Hafted:
+        //            return new HaftedItemCategory();
+        //        case ItemCategory.Polearm:
+        //            return new PolearmItemCategory();
+        //        case ItemCategory.Sword:
+        //            return new SwordItemCategory();
+        //        case ItemCategory.Boots:
+        //            return new BootsItemCategory();
+        //        case ItemCategory.Gloves:
+        //            return new GlovesItemCategory();
+        //        case ItemCategory.Helm:
+        //            return new HelmItemCategory();
+        //        case ItemCategory.Crown:
+        //            return new CrownItemCategory();
+        //        case ItemCategory.Shield:
+        //            return new ShieldItemCategory();
+        //        case ItemCategory.Cloak:
+        //            return new CloakItemCategory();
+        //        case ItemCategory.SoftArmor:
+        //            return new SoftArmorItemCategory();
+        //        case ItemCategory.HardArmor:
+        //            return new HardArmorItemCategory();
+        //        case ItemCategory.DragArmor:
+        //            return new DragArmorItemCategory();
+        //        case ItemCategory.Light:
+        //            return new LightItemCategory();
+        //        case ItemCategory.Amulet:
+        //            return new AmuletItemCategory();
+        //        case ItemCategory.Ring:
+        //            return new RingItemCategory();
+        //        case ItemCategory.Staff:
+        //            return new StaffItemCategory();
+        //        case ItemCategory.Wand:
+        //            return new WandItemCategory();
+        //        case ItemCategory.Rod:
+        //            return new RodItemCategory();
+        //        case ItemCategory.Scroll:
+        //            return new ScrollItemCategory();
+        //        case ItemCategory.Potion:
+        //            return new PotionItemCategory();
+        //        case ItemCategory.Flask:
+        //            return new FlaskItemCategory();
+        //        case ItemCategory.Food:
+        //            return new FoodItemCategory();
+        //        case ItemCategory.LifeBook:
+        //            return new LifeBookItemCategory();
+        //        case ItemCategory.SorceryBook:
+        //            return new SorceryBookItemCategory();
+        //        case ItemCategory.NatureBook:
+        //            return new NatureBookItemCategory();
+        //        case ItemCategory.ChaosBook:
+        //            return new ChaosBookItemCategory();
+        //        case ItemCategory.DeathBook:
+        //            return new DeathBookItemCategory();
+        //        case ItemCategory.TarotBook:
+        //            return new TarotBookItemCategory();
+        //        case ItemCategory.FolkBook:
+        //            return new FolkBookItemCategory();
+        //        case ItemCategory.CorporealBook:
+        //            return new CorporealBookItemCategory();
+        //        case ItemCategory.Gold:
+        //            return new GoldItemCategory();
+        //        default:
+        //            throw new ArgumentOutOfRangeException();
+        //    }
+        //}
         //    public virtual bool CanSlay => false;
 
         public virtual int GetAdditionalMassProduceCount(Item item) => 0;
@@ -525,7 +655,7 @@ namespace Cthangband.ItemCategories
 
         //    public virtual bool CanBeConsumed => false;
 
-        public virtual Colour Colour => Colour.White;
+  //      public virtual Colour Colour => Colour.White;
 
         //    public virtual Realm SpellBookToToRealm => Realm.None;
 

@@ -5,7 +5,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class BookItemCategory : BaseItemCategory
+    internal abstract class BookItemCategory : BaseItemCategory
     {
         public override int GetAdditionalMassProduceCount(Item item)
         {

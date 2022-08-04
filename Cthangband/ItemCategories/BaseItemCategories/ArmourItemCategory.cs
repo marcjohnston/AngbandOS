@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
     /// <summary>
     /// Represents armour items.  Boots, clocks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
     /// </summary>
-    internal class ArmourItemCategory : BaseItemCategory
+    internal abstract class ArmourItemCategory : BaseItemCategory
     {
         public override void ApplyRandartBonus(Item item)
         {

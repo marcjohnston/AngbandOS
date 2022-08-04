@@ -10,7 +10,7 @@ namespace Cthangband.ItemCategories
     /// <summary>
     /// Represents weapon items.  Arrow, bolt, bow, digging, hafted, polearm, shot and swords are all weapon classes.
     /// </summary>
-    internal class WeaponItemCategory : BaseItemCategory
+    internal abstract class WeaponItemCategory : BaseItemCategory
     {
         public override void ApplyRandartBonus(Item item)
         {

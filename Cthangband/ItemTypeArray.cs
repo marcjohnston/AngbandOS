@@ -5,10 +5,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using Cthangband.ActivationPowers;
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
 using Cthangband.StaticData;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Security.AccessControl;
 
 namespace Cthangband
 {
@@ -17,10 +21,23 @@ namespace Cthangband
     {
         public ItemTypeArray()
         {
-            foreach (KeyValuePair<string, BaseItemType> baseType in StaticResources.Instance.BaseItemTypes)
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            foreach (Type type in assembly.GetTypes())
             {
-                Add(new ItemType(baseType.Value));
+                // Check to see if the type implements the IArtifactPower interface and is not an abstract class.
+                if (!type.IsAbstract && typeof(IItemCategory).IsAssignableFrom(type))
+                {
+                    // Load the command.
+                    IItemCategory itemCategory = (IItemCategory)Activator.CreateInstance(type);
+                    Add(new ItemType(itemCategory));
+                    //Add(itemCategory);
+                }
             }
+
+            //foreach (KeyValuePair<string, BaseItemType> baseType in StaticResources.Instance.BaseItemTypes)
+            //{
+            //    Add(new ItemType(baseType.Value));
+            //}
         }
 
         public ItemType LookupKind(ItemCategory tval, int sval)

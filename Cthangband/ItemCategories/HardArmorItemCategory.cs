@@ -5,8 +5,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class HardArmorItemCategory : ArmourItemCategory
+    internal abstract class HardArmorItemCategory : ArmourItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.HardArmor;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Grey;

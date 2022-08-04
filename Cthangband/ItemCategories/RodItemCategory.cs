@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class RodItemCategory : BaseItemCategory
+    internal abstract class RodItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Rod;
         public override bool CanAbsorb(Item item, Item other)
         {
             if (item.TypeSpecificValue != other.TypeSpecificValue)

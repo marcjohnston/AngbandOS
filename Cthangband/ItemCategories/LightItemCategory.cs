@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class LightItemCategory : LightSourceItemCategory
+    internal abstract class LightItemCategory : LightSourceItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Light;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 

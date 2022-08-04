@@ -4,8 +4,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class CloakItemCategory : ArmourItemCategory
+    internal abstract class CloakItemCategory : ArmourItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Cloak;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

@@ -4,8 +4,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class BoltItemCategory : WeaponItemCategory
+    internal abstract class BoltItemCategory : WeaponItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Bolt;
         public override Colour Colour => Colour.BrightBrown;
         public override int GetBonusRealValue(Item item, int value)
         {

@@ -11,8 +11,10 @@ using Cthangband.Projection;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Cthangband.StaticData
 {
@@ -52,11 +54,11 @@ namespace Cthangband.StaticData
             private set;
         }
 
-        public Dictionary<string, BaseItemType> BaseItemTypes
-        {
-            get;
-            private set;
-        }
+        //public Dictionary<string, BaseItemType> BaseItemTypes
+        //{
+        //    get;
+        //    private set;
+        //}
 
         public Dictionary<string, BaseMonsterRace> BaseMonsterRaces
         {
@@ -145,7 +147,6 @@ namespace Cthangband.StaticData
             {
                 BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace())
             };
-            Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType());
             Instance.BaseFixedartifacts = ReadEntitiesFromCsv(new BaseFixedartifact());
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
@@ -168,7 +169,6 @@ namespace Cthangband.StaticData
         public void SaveForRecompile()
         {
             WriteEntitiesToCsv(BaseMonsterRaces, new BaseMonsterRace());
-            WriteEntitiesToCsv(BaseItemTypes, new BaseItemType());
             WriteEntitiesToCsv(BaseFixedartifacts, new BaseFixedartifact());
             WriteEntitiesToCsv(BaseRareItemTypes, new BaseRareItemType());
             WriteEntitiesToCsv(BaseVaultTypes, new BaseVaultType());
@@ -185,7 +185,7 @@ namespace Cthangband.StaticData
             WriteEntitiesToCsv(StaffFlavours, new StaffFlavour());
         }
 
-        private static Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample) where T : EntityType, new()
+        private static Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample, string scaffoldTemplateName = null) where T : EntityType, new()
         {
             Dictionary<string, T> dictionary = new Dictionary<string, T>();
             PropertyInfo[] properties = sample.GetType().GetProperties();
@@ -197,103 +197,185 @@ namespace Cthangband.StaticData
             {
                 if (match == resourceName)
                 {
+                    using (Stream ms = assembly.GetManifestResourceStream(resourceName))
                     {
-                        using (Stream ms = assembly.GetManifestResourceStream(resourceName))
+                        using (StreamReader reader = new StreamReader(ms))
                         {
-                            using (StreamReader reader = new StreamReader(ms))
+                            string[] header = reader.ReadLine().Split(',');
+                            Dictionary<string, int> headerNames = new Dictionary<string, int>();
+                            for (int i = 0; i < header.Length; i++)
                             {
-                                string[] header = reader.ReadLine().Split(',');
-                                Dictionary<string, int> headerNames = new Dictionary<string, int>();
-                                for (int i = 0; i < header.Length; i++)
+                                headerNames.Add(header[i], i);
+                            }
+                            if (reader.EndOfStream == false)
+                            {
+                                do
                                 {
-                                    headerNames.Add(header[i], i);
-                                }
-                                if (reader.EndOfStream == false)
-                                {
-                                    do
+                                    string line = reader.ReadLine();
+                                    if (string.IsNullOrEmpty(line))
                                     {
-                                        string line = reader.ReadLine();
-                                        if (string.IsNullOrEmpty(line))
+                                        continue;
+                                    }
+                                    string[] values = line.Split(',');
+                                    T entity = new T();
+                                    foreach (PropertyInfo p in properties)
+                                    {
+                                        if (headerNames.ContainsKey(p.Name))
                                         {
-                                            continue;
-                                        }
-                                        string[] values = line.Split(',');
-                                        T entity = new T();
-                                        foreach (PropertyInfo p in properties)
-                                        {
-                                            if (headerNames.ContainsKey(p.Name))
+                                            if (!p.CanWrite)
                                             {
-                                                if (!p.CanWrite)
-                                                {
-                                                    continue;
-                                                }
-                                                string stringValue = values[headerNames[p.Name]].FromCsvFriendly();
-                                                switch (p.PropertyType.Name)
-                                                {
-                                                    case "Colour":
-                                                        p.SetValue(entity, Enum.Parse(typeof(Colour), stringValue));
-                                                        break;
+                                                continue;
+                                            }
+                                            string stringValue = values[headerNames[p.Name]].FromCsvFriendly();
+                                            switch (p.PropertyType.Name)
+                                            {
+                                                case "Colour":
+                                                    p.SetValue(entity, Enum.Parse(typeof(Colour), stringValue));
+                                                    break;
 
-                                                    case "Char":
-                                                        p.SetValue(entity, Convert.ToChar(stringValue));
-                                                        break;
+                                                case "Char":
+                                                    p.SetValue(entity, Convert.ToChar(stringValue));
+                                                    break;
 
-                                                    case "String":
-                                                        p.SetValue(entity, stringValue);
-                                                        break;
+                                                case "String":
+                                                    p.SetValue(entity, stringValue);
+                                                    break;
 
-                                                    case "AttackEffect":
-                                                        p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
-                                                        break;
+                                                case "AttackEffect":
+                                                    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
+                                                    break;
 
-                                                    case "FloorTileAlterAction":
-                                                        p.SetValue(entity, Enum.Parse(typeof(FloorTileAlterAction), stringValue));
-                                                        break;
+                                                case "FloorTileAlterAction":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FloorTileAlterAction), stringValue));
+                                                    break;
 
-                                                    case "FixedArtifactId":
-                                                        p.SetValue(entity, Enum.Parse(typeof(FixedArtifactId), stringValue));
-                                                        break;
+                                                case "FixedArtifactId":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FixedArtifactId), stringValue));
+                                                    break;
 
-                                                    case "FloorTileTypeCategory":
-                                                        p.SetValue(entity, Enum.Parse(typeof(FloorTileTypeCategory), stringValue));
-                                                        break;
+                                                case "FloorTileTypeCategory":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FloorTileTypeCategory), stringValue));
+                                                    break;
 
-                                                    case "ItemCategory":
-                                                        p.SetValue(entity, Enum.Parse(typeof(ItemCategory), stringValue));
-                                                        break;
+                                                case "ItemCategory":
+                                                    p.SetValue(entity, Enum.Parse(typeof(ItemCategory), stringValue));
+                                                    break;
 
-                                                    case "RareItemType":
-                                                        p.SetValue(entity, Enum.Parse(typeof(Enumerations.RareItemType), stringValue));
-                                                        break;
+                                                case "RareItemType":
+                                                    p.SetValue(entity, Enum.Parse(typeof(Enumerations.RareItemType), stringValue));
+                                                    break;
 
-                                                    case "AttackType":
-                                                        p.SetValue(entity, Enum.Parse(typeof(AttackType), stringValue));
-                                                        break;
+                                                case "AttackType":
+                                                    p.SetValue(entity, Enum.Parse(typeof(AttackType), stringValue));
+                                                    break;
 
-                                                    case "Int32":
-                                                        p.SetValue(entity, Convert.ToInt32(stringValue));
-                                                        break;
+                                                case "Int32":
+                                                    p.SetValue(entity, Convert.ToInt32(stringValue));
+                                                    break;
 
-                                                    case "Boolean":
-                                                        p.SetValue(entity, Convert.ToBoolean(stringValue));
-                                                        break;
+                                                case "Boolean":
+                                                    p.SetValue(entity, Convert.ToBoolean(stringValue));
+                                                    break;
 
-                                                    case "MonsterAttack":
-                                                        break;
+                                                case "MonsterAttack":
+                                                    break;
 
-                                                    default:
-                                                        MessageBox.Show($"Unrecognised property type: {p.PropertyType.Name}");
-                                                        break;
-                                                }
+                                                default:
+                                                    MessageBox.Show($"Unrecognised property type: {p.PropertyType.Name}");
+                                                    break;
                                             }
                                         }
-                                        dictionary.Add(entity.Name, entity);
-                                    } while (reader.EndOfStream == false);
-                                }
+                                    }
+                                    dictionary.Add(entity.Name, entity);
+                                } while (reader.EndOfStream == false);
                             }
-                            ms.Close();
+                        }
+                        ms.Close();
+                    }
+                }
+            }
+
+            if (scaffoldTemplateName != null)
+            {
+                string templateName = $"Cthangband.Data.ScaffoldTemplates.{scaffoldTemplateName}.template";
+                List<string> templateLines = new List<string>();
+                using (Stream templateStream = assembly.GetManifestResourceStream(templateName))
+                {
+                    using (StreamReader streamReader = new StreamReader(templateStream))
+                    {
+                        while (!streamReader.EndOfStream)
+                        {
+                            templateLines.Add(streamReader.ReadLine());
                         }
                     }
+                }
+                string path = Path.GetDirectoryName(Application.ExecutablePath);
+                while (path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar) + 1) != "Cthangband")
+                {
+                    path = path.Substring(0, path.LastIndexOf(Path.DirectorySeparatorChar));
+                }
+                path = $"{path}{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}{scaffoldTemplateName}s{Path.DirectorySeparatorChar}";
+                foreach (T entity in dictionary.Values)
+                {
+                    List<string> scaffoldedOutput = new List<string>();
+                    PropertyInfo[] entityProperties = entity.GetType().GetProperties();
+                    foreach (string templateLine in templateLines)
+                    {
+                        string[] tokens = templateLine.Split(Path.DirectorySeparatorChar);
+                        bool include = true;
+                        for (int index = 1; index < tokens.Length; index += 2)
+                        {
+                            PropertyInfo desiredProperty = entityProperties.Single(property => property.Name == tokens[index]);
+                            switch (desiredProperty.PropertyType.Name)
+                            {
+                                case "Boolean":
+                                    {
+                                        bool value = (bool)desiredProperty.GetValue(entity);
+                                        tokens[index] = value ? "true" : "false";
+                                        include = value;
+                                        break;
+                                    }
+                                case "Colour":
+                                    {
+                                        Colour value = (Colour)desiredProperty.GetValue(entity);
+                                        tokens[index] = value.ToString();
+                                        include = (value != Colour.White); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "Int32":
+                                    {
+                                        int value = (int)desiredProperty.GetValue(entity);
+                                        tokens[index] = value.ToString();
+                                        include = (value != 0); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "ItemCategory":
+                                    {
+                                        tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        break;
+                                    }
+                                case "Char":
+                                    {
+                                        char value = (char)desiredProperty.GetValue(entity);
+                                        tokens[index] = value == '\\' ? @"\\" : value.ToString();
+                                        break;
+                                    }
+                                case "String":
+                                    {
+                                        tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        break;
+                                    }
+                                default:
+                                    throw new Exception("Scaffolding data type not supported.");
+                            }
+                        }
+                        if (include)
+                        {
+                            scaffoldedOutput.Add(String.Join("", tokens));
+                        }
+                    }
+                    string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity);
+                    File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
                 }
             }
             return dictionary;
@@ -333,8 +415,7 @@ namespace Cthangband.StaticData
                     try
                     {
                         //Save a new file - if we get an error at this point then we've not trashed anything
-                        FileStream fs = new FileStream(Path.Combine(saveDir.FullName, $"{name}s.new"), FileMode.Create,
-                            FileAccess.Write);
+                        FileStream fs = new FileStream(Path.Combine(saveDir.FullName, $"{name}s.new"), FileMode.Create, FileAccess.Write);
                         StreamWriter writer = new StreamWriter(fs);
                         bool header = false;
                         foreach (T entry in dictionary.Values)

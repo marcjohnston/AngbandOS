@@ -6,8 +6,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class BowItemCategory : WeaponItemCategory
+    internal abstract class BowItemCategory : WeaponItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Bow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override string GetDetailedDescription(Item item)

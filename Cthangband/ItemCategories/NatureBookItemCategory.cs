@@ -5,8 +5,9 @@ using static Cthangband.Extensions;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class NatureBookItemCategory : BookItemCategory
+    internal abstract class NatureBookItemCategory : BookItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.NatureBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Nature Magic" : $"Nature {Pluralize("Spellbook", item.Count)}";

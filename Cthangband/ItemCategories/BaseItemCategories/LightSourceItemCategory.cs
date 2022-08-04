@@ -5,7 +5,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class LightSourceItemCategory : BaseItemCategory
+    internal abstract class LightSourceItemCategory : BaseItemCategory
     {
         public override int GetBonusRealValue(Item item, int value)
         {

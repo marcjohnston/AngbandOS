@@ -4,8 +4,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class BottleItemCategory : BaseItemCategory
+    internal abstract class BottleItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Bottle;
         public override bool HatesCold => true;
         public override bool HatesAcid => true;
 

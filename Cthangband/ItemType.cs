@@ -56,14 +56,14 @@ namespace Cthangband
         public bool Tried;
         public readonly int Weight;
 
-        public ItemType(BaseItemType baseItem)
+        public ItemType(IItemCategory baseItem)
         {
             Character = baseItem.Character;
             Colour = baseItem.Colour;
             Name = baseItem.FriendlyName;
             Ac = baseItem.Ac;
-            BaseCategory = BaseItemCategory.CreateFromEnum(baseItem.Category); // Instantiate the ItemCategory that this ItemType is based from.
-            Category = baseItem.Category; // We need a copy of this category enum for backwards compatability at this time.
+            BaseCategory = baseItem; // Instantiate the ItemCategory that this ItemType is based from.
+            Category = baseItem.CategoryEnum; // We need a copy of this category enum for backwards compatability at this time.
             Chance[0] = baseItem.Chance1;
             Chance[1] = baseItem.Chance2;
             Chance[2] = baseItem.Chance3;

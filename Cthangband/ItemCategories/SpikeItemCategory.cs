@@ -4,8 +4,9 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class SpikeItemCategory : BaseItemCategory
+    internal abstract class SpikeItemCategory : BaseItemCategory
     {
+        public override ItemCategory CategoryEnum => ItemCategory.Spike;
         public override Colour Colour => Colour.Grey;
         public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
 
