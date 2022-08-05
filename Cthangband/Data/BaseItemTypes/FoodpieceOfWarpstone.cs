@@ -4,7 +4,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class FoodpieceOfWarpstone : FoodItemCategory
+    internal class FoodPieceOfWarpstone : FoodItemCategory
     {
         public override char Character => '*';
         public override Colour Colour => Colour.Purple;

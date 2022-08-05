@@ -166,7 +166,6 @@ namespace Cthangband.StaticData
         public const uint SmResPois = 0x00000010;
         public const uint SmResShard = 0x00008000;
         public const uint SmResSound = 0x00004000;
-        public const int StoreChoices = 48;
         public const int StoreInvenMax = 26;
         public const int StoreObjLevel = 5;
         public const int StoreShuffle = 21;

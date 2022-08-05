@@ -46,8 +46,12 @@ namespace Cthangband
         private static readonly string[] _comment1 = { "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!" };
         private readonly Item[] _stock;
         private readonly int _stockSize;
+
+        /// <summary>
+        /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
+        /// chance that it will be selected.  Each item in the table has a 1-in-count chance of being selected.
+        /// </summary>
         private readonly int[] _table;
-        private readonly int _tableNum;
         private bool _leaveStore;
         private StoreOwner _owner;
         private Player _player;
@@ -114,43 +118,23 @@ namespace Cthangband
             {
                 return;
             }
-            const int tableSize = Constants.StoreChoices;
-            _table = new int[tableSize];
             ItemIdentifier[] master = GetStoreTable();
-            for (int k = 0; k < Constants.StoreChoices; k++)
+            List<int> table = new List<int>();
+            for (int k = 0; k < master.Length; k++)
             {
                 int kIdx = -1;
-                if (master[k].ItemType != null)
+                for (int i = 0; i < Profile.Instance.ItemTypes.Count; i++)
                 {
-                    for (int i = 0; i < Profile.Instance.ItemTypes.Count; i++)
+                    ItemType itemType = Profile.Instance.ItemTypes[i];
+                    if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
                     {
-                        ItemType itemType = Profile.Instance.ItemTypes[i];
-                        if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
-                        {
-                            kIdx = i;
-                            break;
-                        }
+                        kIdx = i;
+                        break;
                     }
                 }
-                else
-                {
-                    ItemCategory tv = master[k].Category;
-                    int sv = master[k].SubCategory;
-                    for (kIdx = 1; kIdx < Profile.Instance.ItemTypes.Count; kIdx++)
-                    {
-                        ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
-                        if (kPtr.Category == tv && kPtr.SubCategory == sv)
-                        {
-                            break;
-                        }
-                    }
-                    if (kIdx == Profile.Instance.ItemTypes.Count)
-                    {
-                        continue;
-                    }
-                }
-                _table[_tableNum++] = kIdx;
+                table.Add(kIdx);
             }
+            _table = table.ToArray();
         }
 
         public void SetLocation(int x, int y)
@@ -1139,7 +1123,7 @@ namespace Cthangband
         {
             int level;
             ItemType itemType;
-            int i = _table[Program.Rng.RandomLessThan(_tableNum)];
+            int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
             itemType = Profile.Instance.ItemTypes[i];
             Item qPtr = new Item();
