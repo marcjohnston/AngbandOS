@@ -278,7 +278,7 @@
     <Compile Include="Data\BaseItemTypes\FoodPintOfFineAle.cs" />
     <Compile Include="Data\BaseItemTypes\FoodPintOfFineWine.cs" />
     <Compile Include="Data\BaseItemTypes\FoodPoison.cs" />
-    <Compile Include="Data\BaseItemTypes\FoodRationOfFood.cs" />
+    <Compile Include="Data\BaseItemTypes\FoodRation.cs" />
     <Compile Include="Data\BaseItemTypes\FoodRestoreConstitution.cs" />
     <Compile Include="Data\BaseItemTypes\FoodRestoreStrength.cs" />
     <Compile Include="Data\BaseItemTypes\FoodRestoring.cs" />

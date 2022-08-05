@@ -98,6 +98,11 @@ namespace Cthangband.ItemCategories
         string GetFullDescription(Item item);
 
         /// <summary>
+        /// Returns the realm a spellbook belongs to.  Returns Realm.None by default for non-book objects.
+        /// </summary>
+        Realm SpellBookToToRealm { get; }
+
+        /// <summary>
         /// Gets an additional bonus gold real value associated with the item.  Returns a type specific value by default.
         /// </summary>
         /// <param name="item"></param>

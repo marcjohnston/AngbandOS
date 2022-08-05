@@ -16,8 +16,6 @@ namespace Cthangband.ItemCategories
         }
         public override bool HatesFire => true;
         public override Colour Colour => Colour.Black;
-        //public override Realm SpellBookToToRealm => Realm.Death;
-
+        public override Realm SpellBookToToRealm => Realm.Death;
     }
-
 }

@@ -563,7 +563,7 @@ namespace Cthangband
                 }
             }
             Gui.Save();
-            SaveGame.Instance.Player.PrintSpells(spells, num, 1, 20, oPtr.Category.SpellBookToToRealm());
+            SaveGame.Instance.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseCategory.SpellBookToToRealm);
             Gui.PrintLine("", 0, 0);
             Gui.Print("[Press any key to continue]", 0, 23);
             Gui.Inkey();

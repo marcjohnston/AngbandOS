@@ -185,19 +185,19 @@ namespace Cthangband
                     {
                         break;
                     }
-                    if (oPtr.Category.SpellBookToToRealm() == _player.Realm1 && jPtr.Category.SpellBookToToRealm() != _player.Realm1)
+                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.Category.SpellBookToToRealm() == _player.Realm1 && oPtr.Category.SpellBookToToRealm() != _player.Realm1)
+                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.Category.SpellBookToToRealm() == _player.Realm2 && jPtr.Category.SpellBookToToRealm() != _player.Realm2)
+                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.Category.SpellBookToToRealm() == _player.Realm2 && oPtr.Category.SpellBookToToRealm() != _player.Realm2)
+                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -549,19 +549,19 @@ namespace Cthangband
                     {
                         break;
                     }
-                    if (oPtr.Category.SpellBookToToRealm() == _player.Realm1 && jPtr.Category.SpellBookToToRealm() != _player.Realm1)
+                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.Category.SpellBookToToRealm() == _player.Realm1 && oPtr.Category.SpellBookToToRealm() != _player.Realm1)
+                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.Category.SpellBookToToRealm() == _player.Realm2 && jPtr.Category.SpellBookToToRealm() != _player.Realm2)
+                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.Category.SpellBookToToRealm() == _player.Realm2 && oPtr.Category.SpellBookToToRealm() != _player.Realm2)
+                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }

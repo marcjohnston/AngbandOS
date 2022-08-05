@@ -193,44 +193,6 @@ namespace Cthangband
         }
 
         /// <summary>
-        /// Convert a spell book category to its realm
-        /// </summary>
-        /// <param name="category"> The spell book item category </param>
-        /// <returns> The realm of magic </returns>
-        public static Realm SpellBookToToRealm(this ItemCategory category)
-        {
-            switch (category)
-            {
-                case ItemCategory.LifeBook:
-                    return Realm.Life;
-
-                case ItemCategory.SorceryBook:
-                    return Realm.Sorcery;
-
-                case ItemCategory.NatureBook:
-                    return Realm.Nature;
-
-                case ItemCategory.ChaosBook:
-                    return Realm.Chaos;
-
-                case ItemCategory.DeathBook:
-                    return Realm.Death;
-
-                case ItemCategory.TarotBook:
-                    return Realm.Tarot;
-
-                case ItemCategory.FolkBook:
-                    return Realm.Folk;
-
-                case ItemCategory.CorporealBook:
-                    return Realm.Corporeal;
-
-                default:
-                    return Realm.None;
-            }
-        }
-
-        /// <summary>
         /// Converts a numeric ability score (3-118) to a string (3-40+)
         /// </summary>
         /// <param name="val"> The value of the ability score </param>
