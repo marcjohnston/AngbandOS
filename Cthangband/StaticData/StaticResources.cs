@@ -54,11 +54,11 @@ namespace Cthangband.StaticData
             private set;
         }
 
-        //public Dictionary<string, BaseItemType> BaseItemTypes
-        //{
-        //    get;
-        //    private set;
-        //}
+        public Dictionary<string, BaseItemType> BaseItemTypes
+        {
+            get;
+            private set;
+        }
 
         public Dictionary<string, BaseMonsterRace> BaseMonsterRaces
         {
@@ -147,6 +147,7 @@ namespace Cthangband.StaticData
             {
                 BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace())
             };
+//            Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType");
             Instance.BaseFixedartifacts = ReadEntitiesFromCsv(new BaseFixedartifact());
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());

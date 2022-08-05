@@ -166,6 +166,7 @@
     <Compile Include="ArtifactBiases\WisdomArtifactBias.cs" />
     <Compile Include="ArtificialIntelligence.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="BaseItemType.cs" />
     <Compile Include="Commands\ActivateCommand.cs" />
     <Compile Include="Commands\AimWandCommand.cs" />
     <Compile Include="Commands\CarriageReturnCommand.cs" />
