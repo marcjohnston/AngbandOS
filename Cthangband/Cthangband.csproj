@@ -419,6 +419,8 @@
     <Compile Include="Data\BaseItemTypes\PotionSlimeMoldJuice.cs" />
     <Compile Include="Data\BaseItemTypes\PotionSlowness.cs" />
     <Compile Include="Data\BaseItemTypes\PotionSlowPoison.cs" />
+    <Compile Include="Data\BaseItemTypes\PotionSpecialEnlightenment.cs" />
+    <Compile Include="Data\BaseItemTypes\PotionSpecialHealing.cs" />
     <Compile Include="Data\BaseItemTypes\PotionSpeed.cs" />
     <Compile Include="Data\BaseItemTypes\PotionStrength.cs" />
     <Compile Include="Data\BaseItemTypes\PotionStupidity.cs" />
@@ -538,6 +540,11 @@
     <Compile Include="Data\BaseItemTypes\ScrollRumour.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollRuneofProtection.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollSatisfyHunger.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollSpecialAcquirement.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollSpecialEnchantArmor.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollSpecialEnchantWeapon.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollSpecialIdentify.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollSpecialRemoveCurse.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollSummonMonster.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollSummonUndead.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollTeleportation.cs" />
@@ -546,7 +553,7 @@
     <Compile Include="Data\BaseItemTypes\ScrollTrapDetection.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollTrapDoorDestruction.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollTreasureDetection.cs" />
-    <Compile Include="Data\BaseItemTypes\ScrollWordofRecall.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollWordOfRecall.cs" />
     <Compile Include="Data\BaseItemTypes\ShieldDragonShield.cs" />
     <Compile Include="Data\BaseItemTypes\ShieldLargeLeatherShield.cs" />
     <Compile Include="Data\BaseItemTypes\ShieldLargeMetalShield.cs" />

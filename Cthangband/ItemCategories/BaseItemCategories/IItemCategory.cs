@@ -309,6 +309,10 @@ namespace Cthangband.ItemCategories
         bool Speed { get; }
         bool Stealth { get; }
         bool Str { get; }
+
+        /// <summary>
+        /// Returns the subcategory enumeration of the original scaffolded base item type.  This property will be deleted.
+        /// </summary>
         int SubCategory { get; }
         bool SustCha { get; }
         bool SustCon { get; }

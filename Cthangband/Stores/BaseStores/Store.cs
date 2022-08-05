@@ -119,20 +119,35 @@ namespace Cthangband
             ItemIdentifier[] master = GetStoreTable();
             for (int k = 0; k < Constants.StoreChoices; k++)
             {
-                int kIdx;
-                ItemCategory tv = master[k].Category;
-                int sv = master[k].SubCategory;
-                for (kIdx = 1; kIdx < Profile.Instance.ItemTypes.Count; kIdx++)
+                int kIdx = -1;
+                if (master[k].ItemType != null)
                 {
-                    ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
-                    if (kPtr.Category == tv && kPtr.SubCategory == sv)
+                    for (int i = 0; i < Profile.Instance.ItemTypes.Count; i++)
                     {
-                        break;
+                        ItemType itemType = Profile.Instance.ItemTypes[i];
+                        if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
+                        {
+                            kIdx = i;
+                            break;
+                        }
                     }
                 }
-                if (kIdx == Profile.Instance.ItemTypes.Count)
+                else
                 {
-                    continue;
+                    ItemCategory tv = master[k].Category;
+                    int sv = master[k].SubCategory;
+                    for (kIdx = 1; kIdx < Profile.Instance.ItemTypes.Count; kIdx++)
+                    {
+                        ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
+                        if (kPtr.Category == tv && kPtr.SubCategory == sv)
+                        {
+                            break;
+                        }
+                    }
+                    if (kIdx == Profile.Instance.ItemTypes.Count)
+                    {
+                        continue;
+                    }
                 }
                 _table[_tableNum++] = kIdx;
             }

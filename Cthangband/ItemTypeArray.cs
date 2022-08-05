@@ -5,14 +5,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.ActivationPowers;
 using Cthangband.Enumerations;
 using Cthangband.ItemCategories;
-using Cthangband.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Security.AccessControl;
+using System.Linq;
 
 namespace Cthangband
 {
@@ -38,6 +36,11 @@ namespace Cthangband
             //{
             //    Add(new ItemType(baseType.Value));
             //}
+        }
+
+        public ItemType Find(Type itemCategory)
+        {
+            return this.Single(_itemType => itemCategory.IsAssignableFrom(_itemType.BaseCategory.GetType()));
         }
 
         public ItemType LookupKind(ItemCategory tval, int sval)

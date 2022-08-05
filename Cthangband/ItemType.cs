@@ -31,7 +31,14 @@ namespace Cthangband
         /// </summary>
         public readonly bool[] Stompable = new bool[4];
         public readonly int Ac;
-        public readonly ItemCategory Category; // Provided for backwards compatability.  Will be deleted.
+        /// <summary>
+        /// Provided for backwards compatability.  Will be deleted.  Provides access to the ItemCategory enumerable.
+        /// </summary>
+        public readonly ItemCategory Category; 
+
+        /// <summary>
+        /// Returns the readonly scaffolded base item type.
+        /// </summary>
         public IItemCategory BaseCategory = null;
 
         public char Character;

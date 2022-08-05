@@ -4,7 +4,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class ScrollWordofRecall : ScrollItemCategory
+    internal class ScrollWordOfRecall : ScrollItemCategory
     {
         public override char Character => '?';
         public override Colour Colour => Colour.Background;

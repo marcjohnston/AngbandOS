@@ -147,7 +147,7 @@ namespace Cthangband.StaticData
             {
                 BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace())
             };
-//            Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType");
+            //Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType");
             Instance.BaseFixedartifacts = ReadEntitiesFromCsv(new BaseFixedartifact());
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());

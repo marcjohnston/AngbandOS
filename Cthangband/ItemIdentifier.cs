@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
+using Cthangband.ItemCategories;
+using System;
 
 namespace Cthangband
 {
@@ -13,11 +15,16 @@ namespace Cthangband
     {
         public ItemCategory Category;
         public int SubCategory;
+        public Type ItemType { get; }
 
         public ItemIdentifier(ItemCategory category, int subCategory)
         {
             Category = category;
             SubCategory = subCategory;
+        }
+        public ItemIdentifier(Type itemType)
+        {
+            ItemType = itemType;
         }
     }
 }
