@@ -28,19 +28,8 @@ namespace Cthangband
                     // Load the command.
                     IItemCategory itemCategory = (IItemCategory)Activator.CreateInstance(type);
                     Add(new ItemType(itemCategory));
-                    //Add(itemCategory);
                 }
             }
-
-            //foreach (KeyValuePair<string, BaseItemType> baseType in StaticResources.Instance.BaseItemTypes)
-            //{
-            //    Add(new ItemType(baseType.Value));
-            //}
-        }
-
-        public ItemType Find(Type itemCategory)
-        {
-            return this.Single(_itemType => itemCategory.IsAssignableFrom(_itemType.BaseCategory.GetType()));
         }
 
         public ItemType LookupKind(ItemCategory tval, int sval)

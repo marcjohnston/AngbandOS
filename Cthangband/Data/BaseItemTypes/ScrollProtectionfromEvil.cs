@@ -4,7 +4,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class ScrollProtectionfromEvil : ScrollItemCategory
+    internal class ScrollProtectionFromEvil : ScrollItemCategory
     {
         public override char Character => '?';
         public override Colour Colour => Colour.Background;

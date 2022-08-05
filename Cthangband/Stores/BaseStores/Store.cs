@@ -69,41 +69,11 @@ namespace Cthangband
             _stockNum = 0;
         }
 
-        protected virtual ItemIdentifier[] GetStoreTable()
-        {
-            return new[]
-            {
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0),
-                new ItemIdentifier(ItemCategory.None, 0), new ItemIdentifier(ItemCategory.None, 0)
-            };
-        }
-
         /// <summary>
-        /// Returns true, by default, if the store generates item identifier tables.
+        /// Returns an array of item types that the store carries.  Returns null, if the store does not carry items for sale.
         /// </summary>
-        protected virtual bool HasStoreTable => true;
+        /// <returns></returns>
+        protected abstract StockStoreInventoryItem[] GetStoreTable();
 
         public Store(StoreType storeType)
         {
@@ -114,11 +84,11 @@ namespace Cthangband
             {
                 _stock[k] = new Item();
             }
-            if (!HasStoreTable)
+            StockStoreInventoryItem[] master = GetStoreTable();
+            if (master == null)
             {
                 return;
             }
-            ItemIdentifier[] master = GetStoreTable();
             List<int> table = new List<int>();
             for (int k = 0; k < master.Length; k++)
             {
@@ -132,7 +102,10 @@ namespace Cthangband
                         break;
                     }
                 }
-                table.Add(kIdx);
+                for (int i = 0; i < master[k].Weight; i++)
+                {
+                    table.Add(kIdx);
+                }
             }
             _table = table.ToArray();
         }

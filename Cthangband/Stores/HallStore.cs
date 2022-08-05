@@ -24,7 +24,10 @@ namespace Cthangband.Stores
             return false;
         }
         protected override bool MaintainsStockLevels => false;
-        protected override bool HasStoreTable => false;
+        protected override StockStoreInventoryItem[] GetStoreTable()
+        {
+            return null;
+        }
 
         public override bool ShufflesOwnersAndPricing => false;
         protected override string OwnerName => "";

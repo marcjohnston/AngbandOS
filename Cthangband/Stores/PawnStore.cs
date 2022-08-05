@@ -43,8 +43,11 @@ namespace Cthangband.Stores
         {
             return item.Value() > 0;
         }
-        protected override bool HasStoreTable => false;
-        
+        protected override StockStoreInventoryItem[] GetStoreTable()
+        {
+            return null;
+        }
+
         protected override bool MaintainsStockLevels => false;
         public override bool ShufflesOwnersAndPricing => false;
         protected override string BoughtVerb => "pawn";

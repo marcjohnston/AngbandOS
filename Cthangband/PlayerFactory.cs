@@ -34,47 +34,56 @@ namespace Cthangband
         {
             new[]
             {
-                new ItemIdentifier(ItemCategory.Ring, RingType.ResFear), new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.Ring, RingType.ResFear), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
                 new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvChainMail)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
                 new ItemIdentifier(ItemCategory.DeathBook, 0)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvMace),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvMace),
                 new ItemIdentifier(ItemCategory.DeathBook, 0)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.NatureBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.NatureBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
                 new ItemIdentifier(ItemCategory.DeathBook, 0)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
                 new ItemIdentifier(ItemCategory.Scroll, ScrollType.ProtectionFromEvil)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvShortSword),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvShortSword),
                 new ItemIdentifier(ItemCategory.DeathBook, 0)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
                 new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvMetalScaleMail)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Potion, PotionType.Healing),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Potion, PotionType.Healing),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             },
             new[]
@@ -85,22 +94,26 @@ namespace Cthangband
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
                 new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvQuarterstaff),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvQuarterstaff),
                 new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt),
+                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt),
                 new ItemIdentifier(ItemCategory.DeathBook, 0)
             },
             new[]
             {
-                new ItemIdentifier(ItemCategory.Wand, WandType.MagicMissile), new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.Wand, WandType.MagicMissile), 
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
                 new ItemIdentifier(ItemCategory.Ring, RingType.SustainCha)
             },
             new[]

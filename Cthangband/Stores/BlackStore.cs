@@ -37,7 +37,10 @@ namespace Cthangband.Stores
             new StoreOwner("Falarewyn", 30000, 150, RaceId.Sprite)
         };
 
-        protected override bool HasStoreTable => false;
+        protected override StockStoreInventoryItem[] GetStoreTable()
+        {
+            return null;
+        }
 
         protected override bool StoreWillBuy(Item item)
         {
