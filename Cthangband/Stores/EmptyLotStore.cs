@@ -23,7 +23,10 @@ namespace Cthangband.Stores
         }
         protected override bool MaintainsStockLevels => false;
         public override bool ShufflesOwnersAndPricing => false;
-        protected override bool HasStoreTable => false;
+        protected override StockStoreInventoryItem[] GetStoreTable()
+        {
+            return null;
+        }
         protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

@@ -5,19 +5,25 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Enumerations;
+using System;
 
 namespace Cthangband
 {
-    internal class ItemIdentifier
+    internal class StockStoreInventoryItem
     {
-        public ItemCategory Category;
-        public int SubCategory;
+        public Type ItemType { get; }
+        public int Weight { get; }
 
-        public ItemIdentifier(ItemCategory category, int subCategory)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemType"></param>
+        /// <param name="weight">Specify the weight for the item.  A value of 0, means the item cannot be selected.  
+        /// All item weights are summed to provide a full 1-in-chance of selected.</param>
+        public StockStoreInventoryItem(Type itemType, int weight = 1)
         {
-            Category = category;
-            SubCategory = subCategory;
+            ItemType = itemType;
+            Weight = weight;
         }
     }
 }

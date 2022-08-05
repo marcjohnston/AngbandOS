@@ -52,58 +52,16 @@ namespace Cthangband.Stores
             return false;
         }
 
-        protected override ItemIdentifier[] GetStoreTable()
+        protected override StockStoreInventoryItem[] GetStoreTable()
         {
             return new[]
             {
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodHardBiscuit)),
-                new ItemIdentifier(typeof(FoodStripOfVenison)),
-                new ItemIdentifier(typeof(FoodStripOfVenison)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodHardBiscuit)),
-                new ItemIdentifier(typeof(FoodStripOfVenison)),
-                new ItemIdentifier(typeof(FoodStripOfVenison)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodRation)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(ScrollSatisfyHunger)),
-                new ItemIdentifier(typeof(ScrollSatisfyHunger)),
-                new ItemIdentifier(typeof(ScrollSatisfyHunger)),
-                new ItemIdentifier(typeof(ScrollSatisfyHunger)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle)),
-                new ItemIdentifier(typeof(FoodPintOfFineWine)),
-                new ItemIdentifier(typeof(FoodPintOfFineAle))
+                new StockStoreInventoryItem(typeof(FoodHardBiscuit), 2),
+                new StockStoreInventoryItem(typeof(FoodPintOfFineAle), 10),
+                new StockStoreInventoryItem(typeof(FoodPintOfFineWine), 10),
+                new StockStoreInventoryItem(typeof(FoodRation), 18),
+                new StockStoreInventoryItem(typeof(FoodStripOfVenison), 4),
+                new StockStoreInventoryItem(typeof(ScrollSatisfyHunger), 4),
             };
         }
 

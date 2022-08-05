@@ -534,7 +534,7 @@
     <Compile Include="Data\BaseItemTypes\ScrollMonsterConfusion.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollObjectDetection.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollPhaseDoor.cs" />
-    <Compile Include="Data\BaseItemTypes\ScrollProtectionfromEvil.cs" />
+    <Compile Include="Data\BaseItemTypes\ScrollProtectionFromEvil.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollRecharging.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollRemoveCurse.cs" />
     <Compile Include="Data\BaseItemTypes\ScrollRumour.cs" />
@@ -1363,6 +1363,7 @@
     <Compile Include="StoreCommands\SacrificeStoreCommand.cs" />
     <Compile Include="StoreCommands\ViewRacialHeroesStoreCommand.cs" />
     <Compile Include="StoreCommands\WieldStoreCommand.cs" />
+    <Compile Include="StockStoreInventoryItem.cs" />
     <Compile Include="Stores\AlchemistStore.cs" />
     <Compile Include="Stores\ArmouryStore.cs" />
     <Compile Include="Stores\BlackStore.cs" />
