@@ -351,7 +351,7 @@ namespace Cthangband.Commands
             bool channeled = false;
             if (player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.CommandEngine.DoCmdChannel(item);
+                channeled = SaveGame.Instance.DoCmdChannel(item);
             }
             // We didn't use mana, so decrease the wand's charges
             if (!channeled)

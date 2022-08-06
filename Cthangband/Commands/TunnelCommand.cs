@@ -39,12 +39,12 @@ namespace Cthangband.Commands
                 {
                     SaveGame.Instance.EnergyUse = 100;
                     Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(tileY, tileX);
+                    SaveGame.Instance.PlayerAttackMonster(tileY, tileX);
                 }
                 else
                 {
                     // Tunnel through the tile
-                    disturb = SaveGame.Instance.CommandEngine.TunnelThroughTile(tileY, tileX);
+                    disturb = SaveGame.Instance.TunnelThroughTile(tileY, tileX);
                 }
             }
             // Something might have disturbed us

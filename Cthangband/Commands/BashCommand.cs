@@ -36,12 +36,12 @@ namespace Cthangband.Commands
                     // Oops - a montser got in the way
                     SaveGame.Instance.EnergyUse = 100;
                     Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                    SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 else
                 {
                     // Bash the door
-                    disturb = SaveGame.Instance.CommandEngine.BashClosedDoor(y, x, dir);
+                    disturb = SaveGame.Instance.BashClosedDoor(y, x, dir);
                 }
             }
             if (!disturb)

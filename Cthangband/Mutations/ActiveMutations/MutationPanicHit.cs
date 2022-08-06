@@ -15,7 +15,7 @@ namespace Cthangband.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame, Player player, Level level)
         {
-            if (!SaveGame.Instance.CommandEngine.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
+            if (!SaveGame.Instance.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
             {
                 return;
             }
@@ -28,7 +28,7 @@ namespace Cthangband.Mutations.ActiveMutations
             int x = player.MapX + level.KeypadDirectionXOffset[dir];
             if (level.Grid[y][x].MonsterIndex != 0)
             {
-                SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                SaveGame.Instance.PlayerAttackMonster(y, x);
                 SaveGame.Instance.TeleportPlayer(30);
             }
             else

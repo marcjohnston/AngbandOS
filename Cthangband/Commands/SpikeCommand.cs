@@ -31,7 +31,7 @@ namespace Cthangband.Commands
                 }
                 else
                 {
-                    if (!SaveGame.Instance.CommandEngine.GetSpike(out int itemIndex))
+                    if (!SaveGame.Instance.GetSpike(out int itemIndex))
                     {
                         Profile.Instance.MsgPrint("You have no spikes!");
                     }
@@ -41,7 +41,7 @@ namespace Cthangband.Commands
                         // Attempting costs a turn anyway
                         SaveGame.Instance.EnergyUse = 100;
                         Profile.Instance.MsgPrint("There is a monster in the way!");
-                        SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                        SaveGame.Instance.PlayerAttackMonster(y, x);
                     }
                     else
                     {

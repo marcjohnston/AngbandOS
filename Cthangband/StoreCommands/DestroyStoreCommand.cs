@@ -95,7 +95,7 @@ namespace Cthangband.StoreCommands
             }
             Profile.Instance.MsgPrint($"You destroy {itemName}.");
             // Warriors and paladins get experience for destroying magic books
-            if (SaveGame.Instance.CommandEngine.ItemFilterHighLevelBook(item))
+            if (SaveGame.Instance.ItemFilterHighLevelBook(item))
             {
                 bool gainExpr = false;
                 if (player.ProfessionIndex == CharacterClass.Warrior)

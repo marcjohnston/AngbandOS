@@ -162,7 +162,7 @@ namespace Cthangband.Commands
                     bool visible = monster.IsVisible;
                     hitBody = true;
                     // Check if we actually hit it
-                    if (SaveGame.Instance.CommandEngine.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
+                    if (SaveGame.Instance.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
                         if ((race.Flags3 & MonsterFlag3.Demon) != 0 || (race.Flags3 & MonsterFlag3.Undead) != 0 ||
@@ -193,7 +193,7 @@ namespace Cthangband.Commands
                         }
                         // Work out the damage done
                         shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                        shotDamage = SaveGame.Instance.CommandEngine.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
+                        shotDamage = SaveGame.Instance.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
                         if (shotDamage < 0)
                         {
                             shotDamage = 0;

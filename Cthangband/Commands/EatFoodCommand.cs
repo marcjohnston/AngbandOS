@@ -268,7 +268,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.SlimeMold:
                     {
-                        SaveGame.Instance.CommandEngine.PotionEffect(PotionType.SlimeMold);
+                        SaveGame.Instance.PotionEffect(PotionType.SlimeMold);
                         ident = true;
                         break;
                     }

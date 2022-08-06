@@ -15,7 +15,7 @@ namespace Cthangband.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame, Player player, Level level)
         {
-            if (!saveGame.CommandEngine.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
+            if (!saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
             {
                 return;
             }
@@ -23,7 +23,7 @@ namespace Cthangband.Mutations.ActiveMutations
             Profile.Instance.MsgPrint("You concentrate...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
-                saveGame.CommandEngine.SummonItem(dir, player.Level * 10, true);
+                saveGame.SummonItem(dir, player.Level * 10, true);
             }
         }
 

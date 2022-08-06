@@ -30,7 +30,7 @@ namespace Cthangband.StoreCommands
             string weildPhrase;
             string itemName;
             // Only interested in wearable items
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterWearable;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterWearable;
             if (!SaveGame.Instance.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true))
             {
                 if (itemIndex == -2)

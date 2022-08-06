@@ -72,7 +72,7 @@ namespace Cthangband.Commands
             {
                 // Walking takes a full turn
                 SaveGame.Instance.EnergyUse = 100;
-                SaveGame.Instance.CommandEngine.MovePlayer(dir, dontPickup);
+                SaveGame.Instance.MovePlayer(dir, dontPickup);
                 disturb = true;
             }
             // We will have been disturbed, unless we cancelled the direction prompt

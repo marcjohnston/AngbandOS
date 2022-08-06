@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Folk
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.CommandEngine.CreatePhlogiston();
+            saveGame.CreatePhlogiston();
         }
 
         public override void Initialise(int characterClass)

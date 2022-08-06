@@ -29,7 +29,7 @@ namespace Cthangband.Commands
             if (itemIndex == -999)
             {
                 // No item passed in, so get one; filtering to activatable items only
-                SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterActivatable;
+                SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterActivatable;
                 if (!SaveGame.Instance.GetItem(out itemIndex, "Activate which item? ", true, false, false))
                 {
                     if (itemIndex == -2)
@@ -42,7 +42,7 @@ namespace Cthangband.Commands
             // Get the item from the index
             Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
             // Check if the item is activatable
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterActivatable;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterActivatable;
             if (!player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("You can't activate that!");
@@ -89,7 +89,7 @@ namespace Cthangband.Commands
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)
             {
-                SaveGame.Instance.CommandEngine.ActivateRandomArtifact(item);
+                SaveGame.Instance.ActivateRandomArtifact(item);
                 return;
             }
             // If it's a fixed artifact then use its ability
@@ -222,7 +222,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.CommandEngine.RingOfSetPower(dir);
+                            SaveGame.Instance.RingOfSetPower(dir);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -751,7 +751,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.CrossbowOfDeath:
                         {
                             Profile.Instance.MsgPrint("Your crossbow glows deep red...");
-                            SaveGame.Instance.CommandEngine.BrandBolts();
+                            SaveGame.Instance.BrandBolts();
                             item.RechargeTimeLeft = 999;
                             break;
                         }

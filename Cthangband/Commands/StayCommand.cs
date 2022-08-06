@@ -46,15 +46,15 @@ namespace Cthangband.Commands
             // Periodically search if we're not actively in search mode
             if (player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - player.SkillSearchFrequency))
             {
-                SaveGame.Instance.CommandEngine.Search();
+                SaveGame.Instance.Search();
             }
             // Always search if we are actively in search mode
             if (player.IsSearching)
             {
-                SaveGame.Instance.CommandEngine.Search();
+                SaveGame.Instance.Search();
             }
             // Pick up items if we should
-            SaveGame.Instance.CommandEngine.PickUpItems(pickup);
+            SaveGame.Instance.PickUpItems(pickup);
             // If we're in a shop doorway, enter the shop
             GridTile tile = level.Grid[player.MapY][player.MapX];
             if (tile.FeatureType.IsShop)

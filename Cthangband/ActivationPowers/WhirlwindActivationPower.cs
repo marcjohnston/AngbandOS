@@ -25,7 +25,7 @@ namespace Cthangband.ActivationPowers
                 Monster mPtr = level.Monsters[cPtr.MonsterIndex];
                 if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || level.GridPassable(y, x)))
                 {
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                    SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
             }
             return true;

@@ -408,7 +408,7 @@ namespace Cthangband.Commands
             bool channeled = false;
             if (player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.CommandEngine.DoCmdChannel(item);
+                channeled = SaveGame.Instance.DoCmdChannel(item);
                 if (channeled)
                 {
                     item.TypeSpecificValue = 0;

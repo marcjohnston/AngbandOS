@@ -15,7 +15,7 @@ namespace Cthangband.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame, Player player, Level level)
         {
-            if (saveGame.CommandEngine.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
+            if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
             {
                 saveGame.LightArea(Program.Rng.DiceRoll(2, player.Level / 2), (player.Level / 10) + 1);
             }

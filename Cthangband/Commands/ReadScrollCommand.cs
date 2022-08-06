@@ -91,7 +91,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.CurseArmour:
                     {
-                        if (SaveGame.Instance.CommandEngine.CurseArmour())
+                        if (SaveGame.Instance.CurseArmour())
                         {
                             identified = true;
                         }
@@ -99,7 +99,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.CurseWeapon:
                     {
-                        if (SaveGame.Instance.CommandEngine.CurseWeapon())
+                        if (SaveGame.Instance.CurseWeapon())
                         {
                             identified = true;
                         }
@@ -446,7 +446,7 @@ namespace Cthangband.Commands
                     {
                         Profile.Instance.MsgPrint("There is message on the scroll. It says:");
                         Profile.Instance.MsgPrint(null);
-                        SaveGame.Instance.CommandEngine.GetRumour();
+                        SaveGame.Instance.GetRumour();
                         identified = true;
                         break;
                     }
@@ -477,7 +477,7 @@ namespace Cthangband.Commands
             // Channelers can use mana instead of the scroll being used up
             if (player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.CommandEngine.DoCmdChannel(item);
+                channeled = SaveGame.Instance.DoCmdChannel(item);
             }
             if (!channeled)
             {

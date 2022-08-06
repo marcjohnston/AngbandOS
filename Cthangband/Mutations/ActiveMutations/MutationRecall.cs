@@ -15,7 +15,7 @@ namespace Cthangband.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame, Player player, Level level)
         {
-            if (!saveGame.CommandEngine.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
+            if (!saveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
             {
                 return;
             }

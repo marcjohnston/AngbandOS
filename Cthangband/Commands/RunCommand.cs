@@ -30,7 +30,7 @@ namespace Cthangband.Commands
                 // If we don't have a distance, assume we'll run for 1,000 steps
                 SaveGame.Instance.Running = Gui.CommandArgument != 0 ? Gui.CommandArgument : 1000;
                 // Run one step in the chosen direction
-                SaveGame.Instance.CommandEngine.RunOneStep(dir);
+                SaveGame.Instance.RunOneStep(dir);
             }
         }
     }

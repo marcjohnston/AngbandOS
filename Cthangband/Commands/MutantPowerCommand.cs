@@ -305,7 +305,7 @@ namespace Cthangband.Commands
             }
             if (powers[i] == int.MaxValue)
             {
-                SaveGame.Instance.CommandEngine.UseRacialPower();
+                SaveGame.Instance.UseRacialPower();
             }
             else if (powers[i] == 3)
             {

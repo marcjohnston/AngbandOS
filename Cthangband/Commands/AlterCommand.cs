@@ -33,7 +33,7 @@ namespace Cthangband.Commands
                 // We 'alter' a tile by attacking it
                 if (tile.MonsterIndex != 0)
                 {
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                    SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 else
                 {
@@ -45,23 +45,23 @@ namespace Cthangband.Commands
                             break;
 
                         case FloorTileAlterAction.Tunnel:
-                            disturb = SaveGame.Instance.CommandEngine.TunnelThroughTile(y, x);
+                            disturb = SaveGame.Instance.TunnelThroughTile(y, x);
                             break;
 
                         case FloorTileAlterAction.Disarm:
-                            disturb = SaveGame.Instance.CommandEngine.DisarmTrap(y, x, dir);
+                            disturb = SaveGame.Instance.DisarmTrap(y, x, dir);
                             break;
 
                         case FloorTileAlterAction.Open:
-                            disturb = SaveGame.Instance.CommandEngine.OpenDoor(y, x);
+                            disturb = SaveGame.Instance.OpenDoor(y, x);
                             break;
 
                         case FloorTileAlterAction.Close:
-                            disturb = SaveGame.Instance.CommandEngine.CloseDoor(y, x);
+                            disturb = SaveGame.Instance.CloseDoor(y, x);
                             break;
 
                         case FloorTileAlterAction.Bash:
-                            disturb = SaveGame.Instance.CommandEngine.BashClosedDoor(y, x, dir);
+                            disturb = SaveGame.Instance.BashClosedDoor(y, x, dir);
                             break;
 
                         default:

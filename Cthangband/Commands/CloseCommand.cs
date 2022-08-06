@@ -22,7 +22,7 @@ namespace Cthangband.Commands
             MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction
-            if (SaveGame.Instance.CommandEngine.CountOpenDoors(coord) == 1)
+            if (SaveGame.Instance.CountOpenDoors(coord) == 1)
             {
                 Gui.CommandDirection = level.CoordsToDir(coord.Y, coord.X);
             }
@@ -42,12 +42,12 @@ namespace Cthangband.Commands
                 {
                     SaveGame.Instance.EnergyUse = 100;
                     Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                    SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 // Actually close the door
                 else
                 {
-                    disturb = SaveGame.Instance.CommandEngine.CloseDoor(y, x);
+                    disturb = SaveGame.Instance.CloseDoor(y, x);
                 }
             }
             if (!disturb)

@@ -125,7 +125,7 @@ namespace Cthangband.Commands
                     bool visible = monster.IsVisible;
                     hitBody = true;
                     // See if it actually hit the monster
-                    if (SaveGame.Instance.CommandEngine.PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
+                    if (SaveGame.Instance.PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
                         if ((race.Flags3 & MonsterFlag3.Demon) != 0 || (race.Flags3 & MonsterFlag3.Undead) != 0 ||
@@ -150,7 +150,7 @@ namespace Cthangband.Commands
                         }
                         // Adjust the damage for the particular monster type
                         damage = missile.AdjustDamageForMonsterType(damage, monster);
-                        damage = SaveGame.Instance.CommandEngine.PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
+                        damage = SaveGame.Instance.PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
                         if (damage < 0)
                         {
                             damage = 0;

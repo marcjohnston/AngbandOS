@@ -47,7 +47,7 @@ namespace Cthangband.Commands
         private void RefillLamp(int itemIndex, Player player, Level level)
         {
             // Get an item if we don't already have one
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterLanternFuel;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterLanternFuel;
             if (itemIndex == -999)
             {
                 if (!SaveGame.Instance.GetItem(out itemIndex, "Refill with which flask? ", true, true, true))
@@ -61,7 +61,7 @@ namespace Cthangband.Commands
             }
             Item fuelSource = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
             // Make sure our item is suitable fuel
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterLanternFuel;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterLanternFuel;
             if (!player.Inventory.ItemMatchesFilter(fuelSource))
             {
                 Profile.Instance.MsgPrint("You can't refill a lantern from that!");
@@ -104,7 +104,7 @@ namespace Cthangband.Commands
         private void RefillTorch(int itemIndex, Player player, Level level)
         {
             // Get an item if we don't already have one
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterTorchFuel;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterTorchFuel;
             if (itemIndex == -999)
             {
                 if (!SaveGame.Instance.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true))
@@ -118,7 +118,7 @@ namespace Cthangband.Commands
             }
             Item fuelSource = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
             // Check that our fuel is suitable
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.CommandEngine.ItemFilterTorchFuel;
+            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterTorchFuel;
             if (!player.Inventory.ItemMatchesFilter(fuelSource))
             {
                 Profile.Instance.MsgPrint("You can't refill a torch with that!");

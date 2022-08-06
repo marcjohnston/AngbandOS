@@ -49,7 +49,7 @@ namespace Cthangband.Commands
             SaveGame.Instance.EnergyUse = 100;
             int itemLevel = item.ItemType.Level;
             // Do the actual potion effect
-            bool identified = SaveGame.Instance.CommandEngine.PotionEffect(item.ItemSubCategory);
+            bool identified = SaveGame.Instance.PotionEffect(item.ItemSubCategory);
             // Skeletons are messy drinkers
             if (player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
@@ -70,7 +70,7 @@ namespace Cthangband.Commands
             // If we're a channeler, we might be able to spend mana instead of using it up
             if (player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.CommandEngine.DoCmdChannel(item);
+                channeled = SaveGame.Instance.DoCmdChannel(item);
             }
             if (!channeled)
             {

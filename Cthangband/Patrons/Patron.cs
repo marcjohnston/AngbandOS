@@ -339,13 +339,13 @@ namespace Cthangband.Patrons
                 case Reward.CurseWp:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Thou reliest too much on thine weapon.'");
-                    saveGame.CommandEngine.CurseWeapon();
+                    saveGame.CurseWeapon();
                     break;
 
                 case Reward.CurseAr:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Thou reliest too much on thine equipment.'");
-                    saveGame.CommandEngine.CurseArmour();
+                    saveGame.CurseArmour();
                     break;
 
                 case Reward.PissOff:
@@ -364,11 +364,11 @@ namespace Cthangband.Patrons
                         case 3:
                             if (Program.Rng.DieRoll(2) == 1)
                             {
-                                saveGame.CommandEngine.CurseWeapon();
+                                saveGame.CurseWeapon();
                             }
                             else
                             {
-                                saveGame.CommandEngine.CurseArmour();
+                                saveGame.CurseArmour();
                             }
                             break;
 
@@ -393,11 +393,11 @@ namespace Cthangband.Patrons
                     saveGame.ActivateDreadCurse();
                     if (Program.Rng.DieRoll(2) == 1)
                     {
-                        saveGame.CommandEngine.CurseWeapon();
+                        saveGame.CurseWeapon();
                     }
                     if (Program.Rng.DieRoll(2) == 1)
                     {
-                        saveGame.CommandEngine.CurseArmour();
+                        saveGame.CurseArmour();
                     }
                     break;
 

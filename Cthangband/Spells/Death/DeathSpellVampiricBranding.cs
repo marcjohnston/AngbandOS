@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Death
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.CommandEngine.BrandWeapon(3);
+            saveGame.BrandWeapon(3);
         }
 
         public override void Initialise(int characterClass)

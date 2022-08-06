@@ -21,8 +21,8 @@ namespace Cthangband.Commands
             // Check if there's only one thing we can open
             MapCoordinate coord = new MapCoordinate();
             int numDoors =
-                SaveGame.Instance.CommandEngine.CountClosedDoors(coord);
-            int numChests = SaveGame.Instance.CommandEngine.CountChests(coord, false);
+                SaveGame.Instance.CountClosedDoors(coord);
+            int numChests = SaveGame.Instance.CountChests(coord, false);
             if (numDoors != 0 || numChests != 0)
             {
                 bool tooMany = (numDoors != 0 && numChests != 0) || numDoors > 1 || numChests > 1;
@@ -51,16 +51,16 @@ namespace Cthangband.Commands
                 {
                     SaveGame.Instance.EnergyUse = 100;
                     Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
+                    SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 // Open the chest or door
                 else if (itemIndex != 0)
                 {
-                    disturb = SaveGame.Instance.CommandEngine.OpenChest(y, x, itemIndex);
+                    disturb = SaveGame.Instance.OpenChestAtGivenLocation(y, x, itemIndex);
                 }
                 else
                 {
-                    disturb = SaveGame.Instance.CommandEngine.OpenDoor(y, x);
+                    disturb = SaveGame.Instance.OpenDoor(y, x);
                 }
             }
             if (!disturb)

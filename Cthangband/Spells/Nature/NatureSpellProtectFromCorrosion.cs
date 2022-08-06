@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.CommandEngine.Rustproof();
+            saveGame.Rustproof();
         }
 
         public override void Initialise(int characterClass)
