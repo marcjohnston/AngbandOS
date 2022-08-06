@@ -1035,9 +1035,7 @@
     <Compile Include="Projection\ProjectWater.cs" />
     <Compile Include="Projection\ProjectWizardBolt.cs" />
     <Compile Include="CharacterViewer.cs" />
-    <Compile Include="CombatEngine.cs" />
     <Compile Include="CommandEngine.cs" />
-    <Compile Include="CommandHandler.cs" />
     <Compile Include="Enumerations\Ability.cs" />
     <Compile Include="Enumerations\AttackEffect.cs" />
     <Compile Include="Enumerations\AttackType.cs" />
@@ -1166,7 +1164,6 @@
     <Compile Include="Spells\Folk\FolkSpellZap.cs" />
     <Compile Include="Spells\SpellList.cs" />
     <Compile Include="Spells\Spellcasting.cs" />
-    <Compile Include="Spells\SpellEffectsHandler.cs" />
     <Compile Include="Spells\Chaos\ChaosSpellAlterReality.cs" />
     <Compile Include="Spells\Chaos\ChaosSpellArcaneBinding.cs" />
     <Compile Include="Spells\Chaos\ChaosSpellBreatheChaos.cs" />

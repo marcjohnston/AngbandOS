@@ -2015,7 +2015,7 @@ namespace Cthangband
                 // If we're trying to move onto the player, then attack them instead
                 if (doMove && newY == _player.MapY && newX == _player.MapX)
                 {
-                    _saveGame.CombatEngine.MonsterAttackPlayer(monsterIndex);
+                    _saveGame.MonsterAttackPlayer(monsterIndex);
                     doMove = false;
                     doTurn = true;
                 }
