@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.Recharge(60);
+            saveGame.Recharge(60);
             return true;
         }
 

@@ -29,12 +29,12 @@ namespace Cthangband.Commands
             if (itemIndex == -999)
             {
                 // No item passed in, so get one; filtering to activatable items only
-                SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterActivatable;
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Activate which item? ", true, false, false))
+                saveGame.ItemFilter = saveGame.ItemFilterActivatable;
+                if (!saveGame.GetItem(out itemIndex, "Activate which item? ", true, false, false))
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have nothing to activate.");
+                        saveGame.Profile.MsgPrint("You have nothing to activate.");
                     }
                     return;
                 }
@@ -42,16 +42,16 @@ namespace Cthangband.Commands
             // Get the item from the index
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check if the item is activatable
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterActivatable;
+            saveGame.ItemFilter = saveGame.ItemFilterActivatable;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("You can't activate that!");
-                SaveGame.Instance.ItemFilter = null;
+                saveGame.ItemFilter = null;
                 return;
             }
-            SaveGame.Instance.ItemFilter = null;
+            saveGame.ItemFilter = null;
             // Activating an item uses 100 energy
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             // Get the level of the item
             int itemLevel = item.ItemType.Level;
             if (item.IsFixedArtifact())
@@ -74,17 +74,17 @@ namespace Cthangband.Commands
             // If we fail our use item roll just tell us and quit
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                Profile.Instance.MsgPrint("You failed to activate it properly.");
+                saveGame.Profile.MsgPrint("You failed to activate it properly.");
                 return;
             }
             // If the item is still recharging, then just tell us and quit
             if (item.RechargeTimeLeft != 0)
             {
-                Profile.Instance.MsgPrint("It whines, glows and fades...");
+                saveGame.Profile.MsgPrint("It whines, glows and fades...");
                 return;
             }
             // We passed the checks, so the item is activated
-            Profile.Instance.MsgPrint("You activate it...");
+            saveGame.Profile.MsgPrint("You activate it...");
             Gui.PlaySound(SoundEffect.ActivateArtifact);
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)

@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.DispelGood(saveGame.Player.Level * 5);
+            saveGame.DispelGood(saveGame.Player.Level * 5);
             return true;
         }
 

@@ -15,8 +15,8 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            Profile.Instance.MsgPrint("An image forms in your mind...");
-            SaveGame.Instance.DetectAll();
+            saveGame.Profile.MsgPrint("An image forms in your mind...");
+            saveGame.DetectAll();
             return true;
         }
 

@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
+            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
             return true;
         }
 

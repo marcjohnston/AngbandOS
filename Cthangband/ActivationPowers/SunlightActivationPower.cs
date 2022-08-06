@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            SaveGame.Instance.LightLine(direction);
+            saveGame.LightLine(direction);
             return true;
         }
 

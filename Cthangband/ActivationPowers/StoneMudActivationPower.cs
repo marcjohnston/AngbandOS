@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            SaveGame.Instance.WallToMud(direction);
+            saveGame.WallToMud(direction);
             return true;
         }
 

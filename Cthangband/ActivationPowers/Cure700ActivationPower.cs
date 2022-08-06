@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            Profile.Instance.MsgPrint("You feel a warm tingling inside...");
+            saveGame.Profile.MsgPrint("You feel a warm tingling inside...");
             saveGame.Player.RestoreHealth(700);
             saveGame.Player.SetTimedBleeding(0);
             return true;

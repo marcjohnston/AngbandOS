@@ -16,7 +16,7 @@ namespace Cthangband.ActivationPowers
         public override bool Activate(SaveGame saveGame)
         {
             saveGame.Level.MapArea();
-            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+            saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
             return true;
         }
 

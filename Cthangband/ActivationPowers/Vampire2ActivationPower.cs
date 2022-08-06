@@ -21,7 +21,7 @@ namespace Cthangband.ActivationPowers
         {
             for (int i = 0; i < 3; i++)
             {
-                if (SaveGame.Instance.DrainLife(direction, 100))
+                if (saveGame.DrainLife(direction, 100))
                 {
                     saveGame.Player.RestoreHealth(100);
                 }

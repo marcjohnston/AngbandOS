@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.CallChaos();
+            saveGame.CallChaos();
             return true;
         }
 

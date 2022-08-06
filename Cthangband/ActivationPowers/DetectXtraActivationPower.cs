@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.DetectAll();
-            SaveGame.Instance.Probing();
-            SaveGame.Instance.IdentifyFully();
+            saveGame.DetectAll();
+            saveGame.Probing();
+            saveGame.IdentifyFully();
             return true;
         }
 

@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            return SaveGame.Instance.DrainLife(direction, 100);
+            return saveGame.DrainLife(direction, 100);
         }
 
         public override int Value => 500;

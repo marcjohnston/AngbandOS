@@ -175,7 +175,7 @@
     <Compile Include="Commands\CarriageReturnCommand.cs" />
     <Compile Include="Commands\CastCommand.cs" />
     <Compile Include="Commands\CommandListCommand.cs" />
-    <Compile Include="Commands\CommandManager.cs" />
+    <Compile Include="Commands\BaseCommands\CommandManager.cs" />
     <Compile Include="Commands\DestroyAllCommand.cs" />
     <Compile Include="Commands\DestroyCommand.cs" />
     <Compile Include="Commands\EatFoodCommand.cs" />
@@ -934,7 +934,7 @@
     <Compile Include="Commands\BrowseCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\DisarmCommand.cs" />
-    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\BaseCommands\ICommand.cs" />
     <Compile Include="Commands\TargetCommand.cs" />
     <Compile Include="Commands\ToggleSearchCommand.cs" />
     <Compile Include="Commands\TunnelCommand.cs" />

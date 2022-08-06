@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.ElderSign();
+            saveGame.ElderSign();
             return true;
         }
 

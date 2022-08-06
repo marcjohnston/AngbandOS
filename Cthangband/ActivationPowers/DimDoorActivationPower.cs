@@ -26,13 +26,13 @@ namespace Cthangband.ActivationPowers
                 saveGame.Level.Distance(ij, ii, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
                 Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
             {
-                Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
+                saveGame.Profile.MsgPrint("You fail to exit the astral plane correctly!");
                 saveGame.Player.Energy -= 100;
-                SaveGame.Instance.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
             else
             {
-                SaveGame.Instance.TeleportPlayerTo(ij, ii);
+                saveGame.TeleportPlayerTo(ij, ii);
             }
             return true;
         }

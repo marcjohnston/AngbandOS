@@ -20,16 +20,16 @@ namespace Cthangband.ActivationPowers
             {
                 if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental))
                 {
-                    Profile.Instance.MsgPrint("An elemental materializes...");
-                    Profile.Instance.MsgPrint("You fail to control it!");
+                    saveGame.Profile.MsgPrint("An elemental materializes...");
+                    saveGame.Profile.MsgPrint("You fail to control it!");
                 }
             }
             else
             {
                 if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental, saveGame.Player.Level == 50))
                 {
-                    Profile.Instance.MsgPrint("An elemental materializes...");
-                    Profile.Instance.MsgPrint("It seems obedient to you.");
+                    saveGame.Profile.MsgPrint("An elemental materializes...");
+                    saveGame.Profile.MsgPrint("It seems obedient to you.");
                 }
             }
             return true;

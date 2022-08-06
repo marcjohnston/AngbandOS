@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.TeleportPlayer(100);
+            saveGame.TeleportPlayer(100);
             return true;
         }
 

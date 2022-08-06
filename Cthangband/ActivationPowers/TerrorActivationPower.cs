@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.TurnMonsters(40 + saveGame.Player.Level);
+            saveGame.TurnMonsters(40 + saveGame.Player.Level);
             return true;
         }
 

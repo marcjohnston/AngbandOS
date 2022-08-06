@@ -20,7 +20,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            SaveGame.Instance.FireBeam(new ProjectAwayAll(), direction, saveGame.Player.Level);
+            saveGame.FireBeam(new ProjectAwayAll(), direction, saveGame.Player.Level);
             return true;
         }
 

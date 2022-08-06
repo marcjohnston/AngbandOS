@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            if (SaveGame.Instance.BanishEvil(100))
+            if (saveGame.BanishEvil(100))
             {
                 Profile.Instance.MsgPrint("The power of the artifact banishes evil!");
             }

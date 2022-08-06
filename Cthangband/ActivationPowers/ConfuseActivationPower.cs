@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            SaveGame.Instance.ConfuseMonster(direction, 20);
+            saveGame.ConfuseMonster(direction, 20);
             return true;
         }
 

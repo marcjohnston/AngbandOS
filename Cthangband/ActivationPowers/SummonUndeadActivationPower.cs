@@ -20,16 +20,16 @@ namespace Cthangband.ActivationPowers
             {
                 if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
                 {
-                    Profile.Instance.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
-                    Profile.Instance.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                    saveGame.Profile.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                    saveGame.Profile.MsgPrint("'The dead arise... to punish you for disturbing them!'");
                 }
             }
             else
             {
                 if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead, saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
-                    Profile.Instance.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
-                    Profile.Instance.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                    saveGame.Profile.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                    saveGame.Profile.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
                 }
             }
             return true;
