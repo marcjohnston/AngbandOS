@@ -22,7 +22,7 @@ namespace Cthangband
     internal class SaveGame
     {
         public readonly CombatEngine CombatEngine;
-        public readonly CommandHandler Command = new CommandHandler();
+        public int CommandRepeat;
         public readonly CommandEngine CommandEngine;
         public readonly Dungeon[] Dungeons;
         public readonly Patron[] PatronList;
@@ -327,9 +327,9 @@ namespace Cthangband
 
         public void Disturb(bool stopSearch)
         {
-            if (Command.CommandRepeat != 0)
+            if (CommandRepeat != 0)
             {
-                Command.CommandRepeat = 0;
+                CommandRepeat = 0;
                 Player.RedrawNeeded.Set(RedrawFlag.PrState);
             }
             if (Resting != 0)
@@ -1290,7 +1290,7 @@ namespace Cthangband
             HackMind = false;
             Gui.CurrentCommand = (char)0;
             Gui.QueuedCommand = (char)0;
-            Command.CommandRepeat = 0;
+            CommandRepeat = 0;
             Gui.CommandArgument = 0;
             Gui.CommandDirection = 0;
             TargetWho = 0;
@@ -1366,7 +1366,6 @@ namespace Cthangband
             HackMind = true;
             if (CameFrom == LevelStart.StartHouse)
             {
-                UpdateCommand();
                 StoreCommand.DoCmdStore(Player, SaveGame.Instance.Level);
                 CameFrom = LevelStart.StartRandom;
             }
@@ -1863,7 +1862,7 @@ namespace Cthangband
                     }
                 }
             }
-            if (Running != 0 || Command.CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
+            if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
             {
                 Gui.DoNotWaitOnInkey = true;
                 if (Gui.Inkey() != 0)
@@ -1936,22 +1935,20 @@ namespace Cthangband
                 {
                     CommandEngine.RunOneStep(0);
                 }
-                else if (Command.CommandRepeat != 0)
+                else if (CommandRepeat != 0)
                 {
-                    Command.CommandRepeat--;
+                    CommandRepeat--;
                     Player.RedrawNeeded.Set(RedrawFlag.PrState);
                     RedrawStuff();
                     Profile.Instance.MsgFlag = false;
                     Gui.PrintLine("", 0, 0);
-                    UpdateCommand();
-                    Command.ProcessCommand(true);
+                    ProcessCommand(Player, Level, true);
                 }
                 else
                 {
                     Level.MoveCursorRelative(Player.MapY, Player.MapX);
                     Gui.RequestCommand(false);
-                    UpdateCommand();
-                    Command.ProcessCommand(false);
+                    ProcessCommand(Player, Level, false);
                 }
                 if (EnergyUse != 0)
                 {
@@ -2786,12 +2783,6 @@ namespace Cthangband
         private void SavePlayer()
         {
             Program.SerializeToSaveFolder(Profile.Instance, Program.ActiveSaveSlot);
-        }
-
-        private void UpdateCommand()
-        {
-            Command.Player = Player;
-            Command.Level = Level;
         }
 
         private bool Verify(string prompt, int item)
@@ -6938,6 +6929,45 @@ namespace Cthangband
             Level.Monsters.UpdateMonsterVisibility(mIdx, true);
             Level.RedrawSingleLocation(oy, ox);
             Level.RedrawSingleLocation(ny, nx);
+        }
+
+        // CommandHandler
+        /// <summary>
+        /// Process the player's latest command
+        /// </summary>
+        public void ProcessCommand(Player player, Level level, bool isRepeated)
+        {
+            // Get the current command
+            char c = Gui.CurrentCommand;
+
+            // Process commands
+            foreach (ICommand command in CommandManager.GameCommands)
+            {
+                // TODO: The IF statement below can be converted into a dictionary with the applicable object 
+                // attached for improved performance.
+                if (command.IsEnabled && command.Key == c)
+                {
+                    command.Execute(player, level);
+
+                    // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
+                    if (!isRepeated && command.Repeat.HasValue)
+                    {
+                        // Only apply the default once.
+                        Gui.CommandArgument = command.Repeat.Value;
+                    }
+
+                    if (Gui.CommandArgument > 0)
+                    {
+                        CommandRepeat = Gui.CommandArgument - 1;
+                        player.RedrawNeeded.Set(RedrawFlag.PrState);
+                        Gui.CommandArgument = 0;
+                    }
+
+                    // The command was processed.  Skip the SWITCH statement.
+                    return;
+                }
+            }
+            Gui.PrintLine("Type '?' for a list of commands.", 0, 0);
         }
     }
 }

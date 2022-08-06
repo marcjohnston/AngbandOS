@@ -19,46 +19,5 @@ namespace Cthangband
     [Serializable]
     internal class CommandHandler
     {
-        public int CommandRepeat;
-        public Level Level;
-        public Player Player;
-
-        /// <summary>
-        /// Process the player's latest command
-        /// </summary>
-        public void ProcessCommand(bool isRepeated)
-        {
-            // Get the current command
-            char c = Gui.CurrentCommand;
-
-            // Process commands
-            foreach (ICommand command in CommandManager.GameCommands)
-            {
-                // TODO: The IF statement below can be converted into a dictionary with the applicable object 
-                // attached for improved performance.
-                if (command.IsEnabled && command.Key == c)
-                {
-                    command.Execute(Player, Level);
-
-                    // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
-                    if (!isRepeated && command.Repeat.HasValue)
-                    {
-                        // Only apply the default once.
-                        Gui.CommandArgument = command.Repeat.Value;
-                    }
-
-                    if (Gui.CommandArgument > 0)
-                    {
-                        CommandRepeat = Gui.CommandArgument - 1;
-                        Player.RedrawNeeded.Set(RedrawFlag.PrState);
-                        Gui.CommandArgument = 0;
-                    }
-
-                    // The command was processed.  Skip the SWITCH statement.
-                    return;
-                }
-            }
-            Gui.PrintLine("Type '?' for a list of commands.", 0, 0);
-        }
     }
 }
