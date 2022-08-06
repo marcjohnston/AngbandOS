@@ -19,7 +19,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
 
@@ -36,10 +36,10 @@ namespace Cthangband.Commands
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a rod
             Inventory.ItemFilterCategory = ItemCategory.Rod;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("That is not a rod!");
                 Inventory.ItemFilterCategory = 0;
@@ -57,7 +57,7 @@ namespace Cthangband.Commands
             if ((item.ItemSubCategory >= RodType.MinimumAimed && item.ItemSubCategory != RodType.Havoc) ||
                 !item.IsFlavourAware())
             {
-                TargetEngine targetEngine = new TargetEngine(player, level);
+                TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
                 if (!targetEngine.GetDirectionWithAim(out dir))
                 {
                     return;
@@ -68,8 +68,8 @@ namespace Cthangband.Commands
             bool identified = false;
             int itemLevel = item.ItemType.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
-            int chance = player.SkillUseDevice;
-            if (player.TimedConfusion != 0)
+            int chance = saveGame.Player.SkillUseDevice;
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 chance /= 2;
             }
@@ -130,7 +130,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Recall:
                     {
-                        player.ToggleRecall();
+                        saveGame.Player.ToggleRecall();
                         identified = true;
                         item.TypeSpecificValue = 60;
                         break;
@@ -146,7 +146,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Mapping:
                     {
-                        level.MapArea();
+                        saveGame.Level.MapArea();
                         identified = true;
                         item.TypeSpecificValue = 99;
                         break;
@@ -167,27 +167,27 @@ namespace Cthangband.Commands
                     }
                 case RodType.Curing:
                     {
-                        if (player.SetTimedBlindness(0))
+                        if (saveGame.Player.SetTimedBlindness(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedPoison(0))
+                        if (saveGame.Player.SetTimedPoison(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedConfusion(0))
+                        if (saveGame.Player.SetTimedConfusion(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedStun(0))
+                        if (saveGame.Player.SetTimedStun(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedBleeding(0))
+                        if (saveGame.Player.SetTimedBleeding(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedHallucinations(0))
+                        if (saveGame.Player.SetTimedHallucinations(0))
                         {
                             identified = true;
                         }
@@ -196,15 +196,15 @@ namespace Cthangband.Commands
                     }
                 case RodType.Healing:
                     {
-                        if (player.RestoreHealth(500))
+                        if (saveGame.Player.RestoreHealth(500))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedStun(0))
+                        if (saveGame.Player.SetTimedStun(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedBleeding(0))
+                        if (saveGame.Player.SetTimedBleeding(0))
                         {
                             identified = true;
                         }
@@ -213,31 +213,31 @@ namespace Cthangband.Commands
                     }
                 case RodType.Restoration:
                     {
-                        if (player.RestoreLevel())
+                        if (saveGame.Player.RestoreLevel())
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Strength))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Strength))
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Intelligence))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Wisdom))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Dexterity))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Constitution))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
                         {
                             identified = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Charisma))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
                         {
                             identified = true;
                         }
@@ -246,16 +246,16 @@ namespace Cthangband.Commands
                     }
                 case RodType.Speed:
                     {
-                        if (player.TimedHaste == 0)
+                        if (saveGame.Player.TimedHaste == 0)
                         {
-                            if (player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
+                            if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
                             {
                                 identified = true;
                             }
                         }
                         else
                         {
-                            player.SetTimedHaste(player.TimedHaste + 5);
+                            saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                         }
                         item.TypeSpecificValue = 99;
                         break;
@@ -390,13 +390,13 @@ namespace Cthangband.Commands
                         break;
                     }
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may have just discovered what the rod does
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             // We may not have actually used a charge
             if (!useCharge)
@@ -406,7 +406,7 @@ namespace Cthangband.Commands
             }
             // Channelers can spend mana instead of a charge
             bool channeled = false;
-            if (player.Spellcasting.Type == CastingType.Channeling)
+            if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
                 channeled = SaveGame.Instance.DoCmdChannel(item);
                 if (channeled)
@@ -422,8 +422,8 @@ namespace Cthangband.Commands
                     Item singleRod = new Item(item) { Count = 1 };
                     item.TypeSpecificValue = 0;
                     item.Count--;
-                    player.WeightCarried -= singleRod.Weight;
-                    player.Inventory.InvenCarry(singleRod, false);
+                    saveGame.Player.WeightCarried -= singleRod.Weight;
+                    saveGame.Player.Inventory.InvenCarry(singleRod, false);
                     Profile.Instance.MsgPrint("You unstack your rod.");
                 }
             }

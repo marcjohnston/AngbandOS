@@ -16,13 +16,13 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            int startRow = level.PanelRow;
-            int startCol = level.PanelCol;
+            int startRow = saveGame.Level.PanelRow;
+            int startCol = saveGame.Level.PanelCol;
             int currentRow = startRow;
             int currentCol = startCol;
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             // Enter a loop so the player can browse the level
             while (true)
             {
@@ -54,39 +54,39 @@ namespace Cthangband.Commands
                     break;
                 }
                 // Move the view based on the direction
-                currentRow += level.KeypadDirectionYOffset[dir];
-                currentCol += level.KeypadDirectionXOffset[dir];
-                if (currentRow > level.MaxPanelRows)
+                currentRow += saveGame.Level.KeypadDirectionYOffset[dir];
+                currentCol += saveGame.Level.KeypadDirectionXOffset[dir];
+                if (currentRow > saveGame.Level.MaxPanelRows)
                 {
-                    currentRow = level.MaxPanelRows;
+                    currentRow = saveGame.Level.MaxPanelRows;
                 }
                 else if (currentRow < 0)
                 {
                     currentRow = 0;
                 }
-                if (currentCol > level.MaxPanelCols)
+                if (currentCol > saveGame.Level.MaxPanelCols)
                 {
-                    currentCol = level.MaxPanelCols;
+                    currentCol = saveGame.Level.MaxPanelCols;
                 }
                 else if (currentCol < 0)
                 {
                     currentCol = 0;
                 }
                 // Update the view if necessary
-                if (currentRow != level.PanelRow || currentCol != level.PanelCol)
+                if (currentRow != saveGame.Level.PanelRow || currentCol != saveGame.Level.PanelCol)
                 {
-                    level.PanelRow = currentRow;
-                    level.PanelCol = currentCol;
+                    saveGame.Level.PanelRow = currentRow;
+                    saveGame.Level.PanelCol = currentCol;
                     targetEngine.PanelBounds();
-                    player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    player.RedrawNeeded.Set(RedrawFlag.PrMap);
+                    saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                    saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
                     SaveGame.Instance.HandleStuff();
                 }
             }
             // We've finished, so snap back to the player's location
             targetEngine.RecenterScreenAroundPlayer();
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
             SaveGame.Instance.HandleStuff();
         }
     }

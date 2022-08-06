@@ -15,10 +15,10 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             // If we're a winner it's a simple question with a more positive connotation
-            if (player.IsWinner)
+            if (saveGame.Player.IsWinner)
             {
                 if (!Gui.GetCheck("Do you want to retire? "))
                 {
@@ -29,7 +29,7 @@ namespace Cthangband.Commands
             {
                 // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
                 // character doesn't need a prompt/confirmation
-                if (!player.IsWizard)
+                if (!saveGame.Player.IsWizard)
                 {
                     if (!Gui.GetCheck("Do you really want to give up? "))
                     {
@@ -48,7 +48,7 @@ namespace Cthangband.Commands
             }
             // Assuming whe player didn't give up, "kill" the character by quitting
             SaveGame.Instance.Playing = false;
-            player.IsDead = true;
+            saveGame.Player.IsDead = true;
             SaveGame.Instance.DiedFrom = "quitting";
         }
     }

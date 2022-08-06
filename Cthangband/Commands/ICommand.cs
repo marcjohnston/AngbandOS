@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Reflection;
-namespace Cthangband.Commands
+﻿namespace Cthangband.Commands
 { 
     internal interface ICommand
     {
@@ -16,6 +13,6 @@ namespace Cthangband.Commands
 
         bool IsEnabled { get; }
 
-        void Execute(Player player, Level level);
+        void Execute(SaveGame saveGame);
     }
 }

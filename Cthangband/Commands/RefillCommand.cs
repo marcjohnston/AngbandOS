@@ -16,23 +16,23 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
 
             // Make sure we actually have a light source to refuel
-            Item lightSource = player.Inventory[InventorySlot.Lightsource];
+            Item lightSource = saveGame.Player.Inventory[InventorySlot.Lightsource];
             if (lightSource.Category != ItemCategory.Light)
             {
                 Profile.Instance.MsgPrint("You are not wielding a light.");
             }
             else if (lightSource.ItemSubCategory == LightType.Lantern)
             {
-                RefillLamp(itemIndex, player, level);
+                RefillLamp(itemIndex, saveGame.Player, saveGame.Level);
             }
             else if (lightSource.ItemSubCategory == LightType.Torch)
             {
-                RefillTorch(itemIndex, player, level);
+                RefillTorch(itemIndex, saveGame.Player, saveGame.Level);
             }
             else
             {

@@ -15,9 +15,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DoCmdFeeling(player, level, false);
+            DoCmdFeeling(saveGame.Player, saveGame.Level, false);
         }
 
         public static void DoCmdFeeling(Player player, Level level, bool feelingOnly)

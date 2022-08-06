@@ -15,10 +15,10 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             bool isTrapDoor = false;
-            GridTile tile = level.Grid[player.MapY][player.MapX];
+            GridTile tile = saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX];
             if (tile.FeatureType.Category == FloorTileTypeCategory.TrapDoor)
             {
                 isTrapDoor = true;
@@ -42,7 +42,7 @@ namespace Cthangband.Commands
                 // If we're on the surface, enter the relevant dungeon
                 if (SaveGame.Instance.CurrentDepth == 0)
                 {
-                    SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[player.WildernessY][player.WildernessX].Dungeon;
+                    SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
                     Profile.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
                 }
                 else
@@ -70,8 +70,8 @@ namespace Cthangband.Commands
                 // If we left the dungeon, remember where we are
                 if (SaveGame.Instance.CurrentDepth == 0)
                 {
-                    player.WildernessX = SaveGame.Instance.CurDungeon.X;
-                    player.WildernessY = SaveGame.Instance.CurDungeon.Y;
+                    saveGame.Player.WildernessX = SaveGame.Instance.CurDungeon.X;
+                    saveGame.Player.WildernessY = SaveGame.Instance.CurDungeon.Y;
                     SaveGame.Instance.CameFrom = LevelStart.StartStairs;
                 }
             }

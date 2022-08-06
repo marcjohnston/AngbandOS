@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
 
@@ -35,10 +35,10 @@ namespace Cthangband.Commands
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a staff
             Inventory.ItemFilterCategory = ItemCategory.Staff;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("That is not a staff!");
                 Inventory.ItemFilterCategory = 0;
@@ -57,8 +57,8 @@ namespace Cthangband.Commands
             int itemLevel = item.ItemType.Level;
             // We have a chance of the device working equal to skill (halved if confused) - item
             // level (capped at 50)
-            int chance = player.SkillUseDevice;
-            if (player.TimedConfusion != 0)
+            int chance = saveGame.Player.SkillUseDevice;
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 chance /= 2;
             }
@@ -89,9 +89,9 @@ namespace Cthangband.Commands
             {
                 case StaffType.Darkness:
                     {
-                        if (!player.HasBlindnessResistance && !player.HasDarkResistance)
+                        if (!saveGame.Player.HasBlindnessResistance && !saveGame.Player.HasDarkResistance)
                         {
-                            if (player.SetTimedBlindness(player.TimedBlindness + 3 + Program.Rng.DieRoll(5)))
+                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 3 + Program.Rng.DieRoll(5)))
                             {
                                 identified = true;
                             }
@@ -104,7 +104,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Slowness:
                     {
-                        if (player.SetTimedSlow(player.TimedSlow + Program.Rng.DieRoll(30) + 15))
+                        if (saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(30) + 15))
                         {
                             identified = true;
                         }
@@ -122,7 +122,7 @@ namespace Cthangband.Commands
                     {
                         for (k = 0; k < Program.Rng.DieRoll(4); k++)
                         {
-                            if (level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty, 0))
+                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, 0))
                             {
                                 identified = true;
                             }
@@ -148,7 +148,7 @@ namespace Cthangband.Commands
                     {
                         if (SaveGame.Instance.RemoveCurse())
                         {
-                            if (player.TimedBlindness == 0)
+                            if (saveGame.Player.TimedBlindness == 0)
                             {
                                 Profile.Instance.MsgPrint("The staff glows blue for a moment...");
                             }
@@ -158,13 +158,13 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Starlight:
                     {
-                        if (player.TimedBlindness == 0)
+                        if (saveGame.Player.TimedBlindness == 0)
                         {
                             Profile.Instance.MsgPrint("The end of the staff glows brightly...");
                         }
                         for (k = 0; k < 8; k++)
                         {
-                            SaveGame.Instance.LightLine(level.OrderedDirection[k]);
+                            SaveGame.Instance.LightLine(saveGame.Level.OrderedDirection[k]);
                         }
                         identified = true;
                         break;
@@ -179,7 +179,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Mapping:
                     {
-                        level.MapArea();
+                        saveGame.Level.MapArea();
                         identified = true;
                         break;
                     }
@@ -241,7 +241,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.CureLight:
                     {
-                        if (player.RestoreHealth(Program.Rng.DieRoll(8)))
+                        if (saveGame.Player.RestoreHealth(Program.Rng.DieRoll(8)))
                         {
                             identified = true;
                         }
@@ -249,27 +249,27 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Curing:
                     {
-                        if (player.SetTimedBlindness(0))
+                        if (saveGame.Player.SetTimedBlindness(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedPoison(0))
+                        if (saveGame.Player.SetTimedPoison(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedConfusion(0))
+                        if (saveGame.Player.SetTimedConfusion(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedStun(0))
+                        if (saveGame.Player.SetTimedStun(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedBleeding(0))
+                        if (saveGame.Player.SetTimedBleeding(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedHallucinations(0))
+                        if (saveGame.Player.SetTimedHallucinations(0))
                         {
                             identified = true;
                         }
@@ -277,15 +277,15 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Healing:
                     {
-                        if (player.RestoreHealth(300))
+                        if (saveGame.Player.RestoreHealth(300))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedStun(0))
+                        if (saveGame.Player.SetTimedStun(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedBleeding(0))
+                        if (saveGame.Player.SetTimedBleeding(0))
                         {
                             identified = true;
                         }
@@ -293,17 +293,17 @@ namespace Cthangband.Commands
                     }
                 case StaffType.TheMagi:
                     {
-                        if (player.TryRestoringAbilityScore(Ability.Intelligence))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
                         {
                             identified = true;
                         }
-                        if (player.Mana < player.MaxMana)
+                        if (saveGame.Player.Mana < saveGame.Player.MaxMana)
                         {
-                            player.Mana = player.MaxMana;
-                            player.FractionalMana = 0;
+                            saveGame.Player.Mana = saveGame.Player.MaxMana;
+                            saveGame.Player.FractionalMana = 0;
                             identified = true;
                             Profile.Instance.MsgPrint("Your feel your head clear.");
-                            player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                         }
                         break;
                     }
@@ -325,16 +325,16 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Speed:
                     {
-                        if (player.TimedHaste == 0)
+                        if (saveGame.Player.TimedHaste == 0)
                         {
-                            if (player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
+                            if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
                             {
                                 identified = true;
                             }
                         }
                         else
                         {
-                            player.SetTimedHaste(player.TimedHaste + 5);
+                            saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                         }
                         break;
                     }
@@ -366,28 +366,28 @@ namespace Cthangband.Commands
                         {
                             identified = true;
                         }
-                        k = 3 * player.Level;
-                        if (player.SetTimedProtectionFromEvil(player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k))
+                        k = 3 * saveGame.Player.Level;
+                        if (saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedPoison(0))
+                        if (saveGame.Player.SetTimedPoison(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedFear(0))
+                        if (saveGame.Player.SetTimedFear(0))
                         {
                             identified = true;
                         }
-                        if (player.RestoreHealth(50))
+                        if (saveGame.Player.RestoreHealth(50))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedStun(0))
+                        if (saveGame.Player.SetTimedStun(0))
                         {
                             identified = true;
                         }
-                        if (player.SetTimedBleeding(0))
+                        if (saveGame.Player.SetTimedBleeding(0))
                         {
                             identified = true;
                         }
@@ -401,24 +401,24 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Earthquakes:
                     {
-                        SaveGame.Instance.Earthquake(player.MapY, player.MapX, 10);
+                        SaveGame.Instance.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
                         identified = true;
                         break;
                     }
                 case StaffType.Destruction:
                     {
-                        SaveGame.Instance.DestroyArea(player.MapY, player.MapX, 15);
+                        SaveGame.Instance.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
                         identified = true;
                         break;
                     }
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We might now know what the staff does
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             // We may not have used up a charge
             if (!useCharge)
@@ -427,7 +427,7 @@ namespace Cthangband.Commands
             }
             // Channelers can use mana instead of a charge
             bool channeled = false;
-            if (player.Spellcasting.Type == CastingType.Channeling)
+            if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
                 channeled = SaveGame.Instance.DoCmdChannel(item);
             }
@@ -441,14 +441,14 @@ namespace Cthangband.Commands
                     Item singleStaff = new Item(item) { Count = 1 };
                     item.TypeSpecificValue++;
                     item.Count--;
-                    player.WeightCarried -= singleStaff.Weight;
-                    itemIndex = player.Inventory.InvenCarry(singleStaff, false);
+                    saveGame.Player.WeightCarried -= singleStaff.Weight;
+                    itemIndex = saveGame.Player.Inventory.InvenCarry(singleStaff, false);
                     Profile.Instance.MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
                 if (itemIndex >= 0)
                 {
-                    player.Inventory.ReportChargeUsageFromInventory(itemIndex);
+                    saveGame.Player.Inventory.ReportChargeUsageFromInventory(itemIndex);
                 }
                 else
                 {

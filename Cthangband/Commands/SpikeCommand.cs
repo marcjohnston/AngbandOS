@@ -15,15 +15,15 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             // Get the location to be spiked
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[y][x];
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[y][x];
                 // Make sure it can be spiked and we have spikes to do it with
                 if (!tile.FeatureType.IsClosedDoor)
                 {
@@ -63,9 +63,9 @@ namespace Cthangband.Commands
                             }
                         }
                         // Use up the spike from the player's inventory
-                        player.Inventory.InvenItemIncrease(itemIndex, -1);
-                        player.Inventory.InvenItemDescribe(itemIndex);
-                        player.Inventory.InvenItemOptimize(itemIndex);
+                        saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                        saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                        saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
                     }
                 }
             }

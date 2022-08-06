@@ -16,7 +16,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
@@ -85,7 +85,7 @@ namespace Cthangband.Commands
             Gui.Print("S = Auto-search on/off", 21, 52);
             Gui.Print("T = Tunnel", 22, 52);
             Gui.Print("V = Version info", 24, 52);
-            if (player.IsWizard)
+            if (saveGame.Player.IsWizard)
             {
                 Gui.Print("W = Wizard command", 25, 52);
             }

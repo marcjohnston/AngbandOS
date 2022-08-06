@@ -15,9 +15,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            StayCommand.DoCmdStay(player, level, true);
+            StayCommand.DoCmdStay(saveGame.Player, saveGame.Level, true);
         }
     }
 
@@ -33,9 +33,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DoCmdStay(player, level, false);
+            DoCmdStay(saveGame.Player, saveGame.Level, false);
         }
 
         /// <param name="pickup"> Whether or not we should pick up an object in our location </param>

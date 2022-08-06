@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             var menuItems = new List<string>() { "Resume Game", "Options", "Quit to Menu", "Quit to Desktop" };
             var menu = new PopupMenu(menuItems);

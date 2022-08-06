@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
 
@@ -35,10 +35,10 @@ namespace Cthangband.Commands
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is a potion
             Inventory.ItemFilterCategory = ItemCategory.Potion;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("That is not a potion!");
                 return;
@@ -51,24 +51,24 @@ namespace Cthangband.Commands
             // Do the actual potion effect
             bool identified = SaveGame.Instance.PotionEffect(item.ItemSubCategory);
             // Skeletons are messy drinkers
-            if (player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
+            if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
                 Profile.Instance.MsgPrint("Some of the fluid falls through your jaws!");
-                SaveGame.Instance.PotionSmashEffect(0, player.MapY, player.MapX, item.ItemSubCategory);
+                SaveGame.Instance.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, item.ItemSubCategory);
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             // Most potions give us a bit of food too
-            player.SetFood(player.Food + item.TypeSpecificValue);
+            saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
             bool channeled = false;
             // If we're a channeler, we might be able to spend mana instead of using it up
-            if (player.Spellcasting.Type == CastingType.Channeling)
+            if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
                 channeled = SaveGame.Instance.DoCmdChannel(item);
             }
@@ -77,9 +77,9 @@ namespace Cthangband.Commands
                 // We didn't channel it, so use up one potion from the stack
                 if (itemIndex >= 0)
                 {
-                    player.Inventory.InvenItemIncrease(itemIndex, -1);
-                    player.Inventory.InvenItemDescribe(itemIndex);
-                    player.Inventory.InvenItemOptimize(itemIndex);
+                    saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                    saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                    saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
                 }
                 else
                 {

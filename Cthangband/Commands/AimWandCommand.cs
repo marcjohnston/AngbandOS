@@ -19,7 +19,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
             if (itemIndex == -999)
@@ -36,9 +36,9 @@ namespace Cthangband.Commands
                 }
             }
             // Get the item and check if it is really a wand
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             Inventory.ItemFilterCategory = ItemCategory.Wand;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("That is not a wand!");
                 Inventory.ItemFilterCategory = 0;
@@ -52,7 +52,7 @@ namespace Cthangband.Commands
                 return;
             }
             // Aim the wand
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
@@ -63,8 +63,8 @@ namespace Cthangband.Commands
             int itemLevel = item.ItemType.Level;
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
-            int chance = player.SkillUseDevice;
-            if (player.TimedConfusion != 0)
+            int chance = saveGame.Player.SkillUseDevice;
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 chance /= 2;
             }
@@ -338,18 +338,18 @@ namespace Cthangband.Commands
                         break;
                     }
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // Mark the wand as having been tried
             item.ObjectTried();
             // If we just discovered the item's flavour, mark it as so
             if (ident && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             // If we're a channeler then we should be using mana instead of charges
             bool channeled = false;
-            if (player.Spellcasting.Type == CastingType.Channeling)
+            if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
                 channeled = SaveGame.Instance.DoCmdChannel(item);
             }
@@ -363,14 +363,14 @@ namespace Cthangband.Commands
                     Item splitItem = new Item(item) { Count = 1 };
                     item.TypeSpecificValue++;
                     item.Count--;
-                    player.WeightCarried -= splitItem.Weight;
-                    itemIndex = player.Inventory.InvenCarry(splitItem, false);
+                    saveGame.Player.WeightCarried -= splitItem.Weight;
+                    itemIndex = saveGame.Player.Inventory.InvenCarry(splitItem, false);
                     Profile.Instance.MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
                 if (itemIndex >= 0)
                 {
-                    player.Inventory.ReportChargeUsageFromInventory(itemIndex);
+                    saveGame.Player.Inventory.ReportChargeUsageFromInventory(itemIndex);
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
             // Get a food item from the inventory if one wasn't already specified
@@ -34,10 +34,10 @@ namespace Cthangband.Commands
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is edible
             Inventory.ItemFilterCategory = ItemCategory.Food;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("You can't eat that!");
                 Inventory.ItemFilterCategory = 0;
@@ -57,14 +57,14 @@ namespace Cthangband.Commands
             {
                 case FoodType.Poison:
                     {
-                        if (!(player.HasPoisonResistance || player.TimedPoisonResistance != 0))
+                        if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance != 0))
                         {
                             // Hagarg Ryonis may protect us from poison
-                            if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
                                 Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
-                            else if (player.SetTimedPoison(player.TimedPoison + Program.Rng.RandomLessThan(10) + 10))
+                            else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -73,9 +73,9 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Blindness:
                     {
-                        if (!player.HasBlindnessResistance)
+                        if (!saveGame.Player.HasBlindnessResistance)
                         {
-                            if (player.SetTimedBlindness(player.TimedBlindness + Program.Rng.RandomLessThan(200) + 200))
+                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + Program.Rng.RandomLessThan(200) + 200))
                             {
                                 ident = true;
                             }
@@ -84,9 +84,9 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Paranoia:
                     {
-                        if (!player.HasFearResistance)
+                        if (!saveGame.Player.HasFearResistance)
                         {
-                            if (player.SetTimedFear(player.TimedFear + Program.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -95,9 +95,9 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Confusion:
                     {
-                        if (!player.HasConfusionResistance)
+                        if (!saveGame.Player.HasConfusionResistance)
                         {
-                            if (player.SetTimedConfusion(player.TimedConfusion + Program.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -106,9 +106,9 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Hallucination:
                     {
-                        if (!player.HasChaosResistance)
+                        if (!saveGame.Player.HasChaosResistance)
                         {
-                            if (player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 250))
+                            if (saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 250))
                             {
                                 ident = true;
                             }
@@ -117,9 +117,9 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Paralysis:
                     {
-                        if (!player.HasFreeAction)
+                        if (!saveGame.Player.HasFreeAction)
                         {
-                            if (player.SetTimedParalysis(player.TimedParalysis + Program.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -128,49 +128,49 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Weakness:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Strength);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
                         ident = true;
                         break;
                     }
                 case FoodType.Sickness:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Constitution);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
                         ident = true;
                         break;
                     }
                 case FoodType.Stupidity:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Intelligence);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
                         ident = true;
                         break;
                     }
                 case FoodType.Naivety:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Wisdom);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
                         ident = true;
                         break;
                     }
                 case FoodType.Unhealth:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Constitution);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
                         ident = true;
                         break;
                     }
                 case FoodType.Disease:
                     {
-                        player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
-                        player.TryDecreasingAbilityScore(Ability.Strength);
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
+                        saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
                         ident = true;
                         break;
                     }
                 case FoodType.CurePoison:
                     {
-                        if (player.SetTimedPoison(0))
+                        if (saveGame.Player.SetTimedPoison(0))
                         {
                             ident = true;
                         }
@@ -178,7 +178,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.CureBlindness:
                     {
-                        if (player.SetTimedBlindness(0))
+                        if (saveGame.Player.SetTimedBlindness(0))
                         {
                             ident = true;
                         }
@@ -186,7 +186,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.CureParanoia:
                     {
-                        if (player.SetTimedFear(0))
+                        if (saveGame.Player.SetTimedFear(0))
                         {
                             ident = true;
                         }
@@ -194,7 +194,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.CureConfusion:
                     {
-                        if (player.SetTimedConfusion(0))
+                        if (saveGame.Player.SetTimedConfusion(0))
                         {
                             ident = true;
                         }
@@ -202,7 +202,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.CureSerious:
                     {
-                        if (player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+                        if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
                         {
                             ident = true;
                         }
@@ -210,7 +210,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.RestoreStr:
                     {
-                        if (player.TryRestoringAbilityScore(Ability.Strength))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Strength))
                         {
                             ident = true;
                         }
@@ -218,7 +218,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.RestoreCon:
                     {
-                        if (player.TryRestoringAbilityScore(Ability.Constitution))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
                         {
                             ident = true;
                         }
@@ -226,27 +226,27 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Restoring:
                     {
-                        if (player.TryRestoringAbilityScore(Ability.Strength))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Strength))
                         {
                             ident = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Intelligence))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
                         {
                             ident = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Wisdom))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
                         {
                             ident = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Dexterity))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
                         {
                             ident = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Constitution))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
                         {
                             ident = true;
                         }
-                        if (player.TryRestoringAbilityScore(Ability.Charisma))
+                        if (saveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
                         {
                             ident = true;
                         }
@@ -275,8 +275,8 @@ namespace Cthangband.Commands
                 case FoodType.Waybread:
                     {
                         Profile.Instance.MsgPrint("That tastes good.");
-                        player.SetTimedPoison(0);
-                        player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+                        saveGame.Player.SetTimedPoison(0);
+                        saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                         ident = true;
                         break;
                     }
@@ -290,46 +290,46 @@ namespace Cthangband.Commands
                 case FoodType.Warpstone:
                     {
                         Profile.Instance.MsgPrint("That tastes... funky.");
-                        player.Dna.GainMutation();
+                        saveGame.Player.Dna.GainMutation();
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            player.Dna.GainMutation();
+                            saveGame.Player.Dna.GainMutation();
                         }
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            player.Dna.GainMutation();
+                            saveGame.Player.Dna.GainMutation();
                         }
                         ident = true;
                         break;
                     }
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We've tried this type of object
             item.ObjectTried();
             // Learn its flavour if necessary
             if (ident && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             // Dwarf bread isn't actually eaten so reduce our hunger and return early
             if (item.ItemSubCategory == FoodType.Dwarfbread)
             {
-                player.SetFood(player.Food + item.TypeSpecificValue);
+                saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
                 return;
             }
             // Vampires only get 1/10th of the food value
-            if (player.RaceIndex == RaceId.Vampire)
+            if (saveGame.Player.RaceIndex == RaceId.Vampire)
             {
-                _ = player.SetFood(player.Food + (item.TypeSpecificValue / 10));
+                _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
                 Profile.Instance.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-                if (player.Food < Constants.PyFoodAlert)
+                if (saveGame.Player.Food < Constants.PyFoodAlert)
                 {
                     Profile.Instance.MsgPrint("Your hunger can only be satisfied with fresh blood!");
                 }
             }
             // Skeletons get no food sustenance
-            else if (player.RaceIndex == RaceId.Skeleton)
+            else if (saveGame.Player.RaceIndex == RaceId.Skeleton)
             {
                 if (!(item.ItemSubCategory == FoodType.Waybread || item.ItemSubCategory == FoodType.Warpstone ||
                       item.ItemSubCategory < FoodType.Biscuit))
@@ -339,7 +339,7 @@ namespace Cthangband.Commands
                     Profile.Instance.MsgPrint("The food falls through your jaws!");
                     floorItem.AssignItemType(
                         Profile.Instance.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
-                    SaveGame.Instance.Level.DropNear(floorItem, -1, player.MapY, player.MapX);
+                    SaveGame.Instance.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 }
                 else
                 {
@@ -348,22 +348,22 @@ namespace Cthangband.Commands
                 }
             }
             // Golems, zombies, and spectres get only 1/20th of the food value
-            else if (player.RaceIndex == RaceId.Golem || player.RaceIndex == RaceId.Zombie || player.RaceIndex == RaceId.Spectre)
+            else if (saveGame.Player.RaceIndex == RaceId.Golem || saveGame.Player.RaceIndex == RaceId.Zombie || saveGame.Player.RaceIndex == RaceId.Spectre)
             {
                 Profile.Instance.MsgPrint("The food of mortals is poor sustenance for you.");
-                player.SetFood(player.Food + (item.TypeSpecificValue / 20));
+                saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
             }
             // Everyone else gets the full value
             else
             {
-                player.SetFood(player.Food + item.TypeSpecificValue);
+                saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
             }
             // Use up the item (if it fell to the floor this will have already been dealt with)
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {

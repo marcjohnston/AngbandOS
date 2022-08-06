@@ -15,16 +15,16 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            if (player.HasAntiMagic)
+            if (saveGame.Player.HasAntiMagic)
             {
                 string whichMagicType = "magic";
-                if (player.ProfessionIndex == CharacterClass.Mindcrafter || player.ProfessionIndex == CharacterClass.Mystic)
+                if (saveGame.Player.ProfessionIndex == CharacterClass.Mindcrafter || saveGame.Player.ProfessionIndex == CharacterClass.Mystic)
                 {
                     whichMagicType = "psychic talents";
                 }
-                else if (player.Spellcasting.Type == CastingType.Divine)
+                else if (saveGame.Player.Spellcasting.Type == CastingType.Divine)
                 {
                     whichMagicType = "prayer";
                 }
@@ -33,13 +33,13 @@ namespace Cthangband.Commands
             }
             else
             {
-                if (player.Spellcasting.Type == CastingType.Mentalism)
+                if (saveGame.Player.Spellcasting.Type == CastingType.Mentalism)
                 {
-                    DoCmdMentalism(player, level);
+                    DoCmdMentalism(saveGame.Player, saveGame.Level);
                 }
                 else
                 {
-                    DoCmdCast(player, level);
+                    DoCmdCast(saveGame.Player, saveGame.Level);
                 }
             }
         }

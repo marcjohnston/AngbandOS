@@ -16,9 +16,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DoCmdStore(player, level);
+            DoCmdStore(saveGame.Player, saveGame.Level);
         }
 
         public static void DoCmdStore(Player player, Level level)

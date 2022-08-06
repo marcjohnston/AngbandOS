@@ -17,13 +17,13 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int i = 0;
             int num;
             int[] powers = new int[36];
             string[] powerDesc = new string[36];
-            int lvl = player.Level;
+            int lvl = saveGame.Player.Level;
             int pets = 0;
             int petCtr;
             bool allPets = false;
@@ -36,13 +36,13 @@ namespace Cthangband.Commands
                 powerDesc[num] = "";
             }
             num = 0;
-            if (player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 Profile.Instance.MsgPrint("You are too confused to use any powers!");
                 SaveGame.Instance.EnergyUse = 0;
                 return;
             }
-            switch (player.RaceIndex)
+            switch (saveGame.Player.RaceIndex)
             {
                 case RaceId.Dwarf:
                     racialPower = lvl < 5
@@ -209,15 +209,15 @@ namespace Cthangband.Commands
                     hasRacial = true;
                     break;
             }
-            for (petCtr = level.MMax - 1; petCtr >= 1; petCtr--)
+            for (petCtr = saveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
             {
-                monster = level.Monsters[petCtr];
+                monster = saveGame.Level.Monsters[petCtr];
                 if ((monster.Mind & Constants.SmFriendly) != 0)
                 {
                     pets++;
                 }
             }
-            System.Collections.Generic.List<Mutations.Mutation> activeMutations = player.Dna.ActivatableMutations(player);
+            System.Collections.Generic.List<Mutations.Mutation> activeMutations = saveGame.Player.Dna.ActivatableMutations(saveGame.Player);
             if (!hasRacial && activeMutations.Count == 0 && pets == 0)
             {
                 Profile.Instance.MsgPrint("You have no powers to activate.");
@@ -233,7 +233,7 @@ namespace Cthangband.Commands
             for (int j = 0; j < activeMutations.Count; j++)
             {
                 powers[num] = j + 100;
-                powerDesc[num] = activeMutations[j].ActivationSummary(player.Level);
+                powerDesc[num] = activeMutations[j].ActivationSummary(saveGame.Player.Level);
                 num++;
             }
             if (pets > 0)
@@ -314,9 +314,9 @@ namespace Cthangband.Commands
                 {
                     allPets = true;
                 }
-                for (petCtr = level.MMax - 1; petCtr >= 1; petCtr--)
+                for (petCtr = saveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
                 {
-                    monster = level.Monsters[petCtr];
+                    monster = saveGame.Level.Monsters[petCtr];
                     if ((monster.Mind & Constants.SmFriendly) != 0)
                     {
                         bool deleteThis = false;
@@ -335,7 +335,7 @@ namespace Cthangband.Commands
                         }
                         if (deleteThis)
                         {
-                            level.Monsters.DeleteMonsterByIndex(petCtr, true);
+                            saveGame.Level.Monsters.DeleteMonsterByIndex(petCtr, true);
                             dismissed++;
                         }
                     }
@@ -346,7 +346,7 @@ namespace Cthangband.Commands
             else
             {
                 SaveGame.Instance.EnergyUse = 100;
-                activeMutations[powers[i] - 100].Activate(SaveGame.Instance, player, level);
+                activeMutations[powers[i] - 100].Activate(SaveGame.Instance, saveGame.Player, saveGame.Level);
             }
         }
     }

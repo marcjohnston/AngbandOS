@@ -19,19 +19,19 @@ namespace Cthangband.Commands
         private const int _testRoll = 100000;
         private readonly char[] _head = { 'a', 'A', '0' };
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            if (player.IsWizard)
+            if (saveGame.Player.IsWizard)
             {
-                DoCmdWizard(player, level);
+                DoCmdWizard(saveGame);
             }
             else
             {
-                DoCmdWizmode(player, level);
+                DoCmdWizmode(saveGame);
             }
         }
 
-        public void DoCmdWizard(Player player, Level level)
+        public void DoCmdWizard(SaveGame saveGame)
         {
             Gui.GetCom("Wizard Command: ", out char cmd);
             switch (cmd)
@@ -51,11 +51,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 'A':
-                    DoCmdWizActivatePower(player, level);
+                    DoCmdWizActivatePower(saveGame);
                     break;
 
                 case 'a':
-                    DoCmdWizCureAll(player, level);
+                    DoCmdWizCureAll(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'b':
@@ -63,11 +63,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 'c':
-                    WizCreateItem(player, level);
+                    WizCreateItem(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'C':
-                    WizCreateNamedArt(player, level, (FixedArtifactId)Gui.CommandArgument);
+                    WizCreateNamedArt(saveGame.Player, saveGame.Level, (FixedArtifactId)Gui.CommandArgument);
                     break;
 
                 case 'd':
@@ -75,7 +75,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'e':
-                    DoCmdWizChange(player, level);
+                    DoCmdWizChange(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'f':
@@ -87,15 +87,15 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    SaveGame.Instance.Level.Acquirement(player.MapY, player.MapX, Gui.CommandArgument, false);
+                    SaveGame.Instance.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, false);
                     break;
 
                 case 'h':
-                    player.RerollHitPoints();
+                    saveGame.Player.RerollHitPoints();
                     break;
 
                 case 'H':
-                    DoCmdSummonHorde(player, level);
+                    DoCmdSummonHorde(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'i':
@@ -115,27 +115,27 @@ namespace Cthangband.Commands
                     break;
 
                 case 'm':
-                    level.MapArea();
+                    saveGame.Level.MapArea();
                     break;
 
                 case 'M':
-                    player.Dna.GainMutation();
+                    saveGame.Player.Dna.GainMutation();
                     break;
 
                 case 'r':
-                    player.GainLevelReward();
+                    saveGame.Player.GainLevelReward();
                     break;
 
                 case 'N':
-                    DoCmdWizNamedFriendly(player, level, Gui.CommandArgument, true);
+                    DoCmdWizNamedFriendly(saveGame.Player, saveGame.Level, Gui.CommandArgument, true);
                     break;
 
                 case 'n':
-                    DoCmdWizNamed(player, level, Gui.CommandArgument, true);
+                    DoCmdWizNamed(saveGame.Player, saveGame.Level, Gui.CommandArgument, true);
                     break;
 
                 case 'o':
-                    DoCmdWizPlay(player, level);
+                    DoCmdWizPlay(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'p':
@@ -147,7 +147,7 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    DoCmdWizSummon(player, level, Gui.CommandArgument);
+                    DoCmdWizSummon(saveGame.Player, saveGame.Level, Gui.CommandArgument);
                     break;
 
                 case 't':
@@ -159,16 +159,16 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    level.Acquirement(player.MapY, player.MapX, Gui.CommandArgument, true);
+                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, true);
                     break;
 
                 case 'w':
-                    level.WizLight();
+                    saveGame.Level.WizLight();
                     break;
 
                 case 'W':
-                    player.IsWinner = true;
-                    player.RedrawNeeded.Set(RedrawFlag.PrTitle);
+                    saveGame.Player.IsWinner = true;
+                    saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
                     Profile.Instance.MsgPrint("*** CONGRATULATIONS ***");
                     Profile.Instance.MsgPrint("You have won the game!");
                     Profile.Instance.MsgPrint("You may retire ('Q') when you are ready.");
@@ -177,21 +177,21 @@ namespace Cthangband.Commands
                 case 'x':
                     if (Gui.CommandArgument != 0)
                     {
-                        player.GainExperience(Gui.CommandArgument);
+                        saveGame.Player.GainExperience(Gui.CommandArgument);
                     }
                     else
                     {
-                        player.GainExperience(player.ExperiencePoints + 1);
+                        saveGame.Player.GainExperience(saveGame.Player.ExperiencePoints + 1);
                     }
                     break;
 
                 case 'Z':
-                    DoCmdWizZap(player, level);
+                    DoCmdWizZap(saveGame.Player, saveGame.Level);
                     break;
 
                 case 'z':
                     {
-                        DoCmdWizardBolt(player, level);
+                        DoCmdWizardBolt(saveGame.Player, saveGame.Level);
                         break;
                     }
                 default:
@@ -200,7 +200,7 @@ namespace Cthangband.Commands
             }
         }
 
-        public void DoCmdWizmode(Player player, Level level)
+        public void DoCmdWizmode(SaveGame saveGame)
         {
             Gui.PrintLine("Enter Wizard Code: ", 0, 0);
             if (!Gui.AskforAux(out string tmp, "", 31))
@@ -210,13 +210,13 @@ namespace Cthangband.Commands
             Gui.Erase(0, 0, 255);
             if (tmp == "Dumbledore")
             {
-                player.IsWizard = true;
+                saveGame.Player.IsWizard = true;
                 Profile.Instance.MsgPrint("Wizard mode activated.");
-                player.RedrawNeeded.Set(RedrawFlag.PrTitle);
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
             }
         }
 
-        private void DoCmdWizActivatePower(Player player, Level level)
+        private void DoCmdWizActivatePower(SaveGame saveGame)
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
@@ -250,7 +250,7 @@ namespace Cthangband.Commands
                 return;
             }
 
-            ActivationPowerManager.ActivationPowers[selectedIndex].Activate(player, level);
+            ActivationPowerManager.ActivationPowers[selectedIndex].Activate(saveGame);
         }
 
         private void DoCmdRedraw(Player player, Level level)

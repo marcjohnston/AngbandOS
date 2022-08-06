@@ -18,23 +18,23 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
 
             int i;
             // Make sure we're in a situation where we can read
-            if (player.TimedBlindness != 0)
+            if (saveGame.Player.TimedBlindness != 0)
             {
                 Profile.Instance.MsgPrint("You can't see anything.");
                 return;
             }
-            if (level.NoLight())
+            if (saveGame.Level.NoLight())
             {
                 Profile.Instance.MsgPrint("You have no light to read by.");
                 return;
             }
-            if (player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 Profile.Instance.MsgPrint("You are too confused!");
                 return;
@@ -52,10 +52,10 @@ namespace Cthangband.Commands
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a scroll
             Inventory.ItemFilterCategory = ItemCategory.Scroll;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("That is not a scroll!");
                 Inventory.ItemFilterCategory = 0;
@@ -72,9 +72,9 @@ namespace Cthangband.Commands
             {
                 case ScrollType.Darkness:
                     {
-                        if (!player.HasBlindnessResistance && !player.HasDarkResistance)
+                        if (!saveGame.Player.HasBlindnessResistance && !saveGame.Player.HasDarkResistance)
                         {
-                            player.SetTimedBlindness(player.TimedBlindness + 3 + Program.Rng.DieRoll(5));
+                            saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 3 + Program.Rng.DieRoll(5));
                         }
                         if (SaveGame.Instance.UnlightArea(10, 3))
                         {
@@ -109,7 +109,7 @@ namespace Cthangband.Commands
                     {
                         for (i = 0; i < Program.Rng.DieRoll(3); i++)
                         {
-                            if (level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty, 0))
+                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, 0))
                             {
                                 identified = true;
                             }
@@ -120,7 +120,7 @@ namespace Cthangband.Commands
                     {
                         for (i = 0; i < Program.Rng.DieRoll(3); i++)
                         {
-                            if (level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty,
+                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty,
                                 Constants.SummonUndead))
                             {
                                 identified = true;
@@ -156,7 +156,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.WordOfRecall:
                     {
-                        player.ToggleRecall();
+                        saveGame.Player.ToggleRecall();
                         identified = true;
                         break;
                     }
@@ -257,7 +257,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Mapping:
                     {
-                        level.MapArea();
+                        saveGame.Level.MapArea();
                         identified = true;
                         break;
                     }
@@ -311,7 +311,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.SatisfyHunger:
                     {
-                        if (player.SetFood(Constants.PyFoodMax - 1))
+                        if (saveGame.Player.SetFood(Constants.PyFoodMax - 1))
                         {
                             identified = true;
                         }
@@ -319,7 +319,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Blessing:
                     {
-                        if (player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(12) + 6))
+                        if (saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(12) + 6))
                         {
                             identified = true;
                         }
@@ -327,7 +327,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.HolyChant:
                     {
-                        if (player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(24) + 12))
+                        if (saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(24) + 12))
                         {
                             identified = true;
                         }
@@ -335,7 +335,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.HolyPrayer:
                     {
-                        if (player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(48) + 24))
+                        if (saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(48) + 24))
                         {
                             identified = true;
                         }
@@ -343,18 +343,18 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.MonsterConfusion:
                     {
-                        if (!player.HasConfusingTouch)
+                        if (!saveGame.Player.HasConfusingTouch)
                         {
                             Profile.Instance.MsgPrint("Your hands begin to glow.");
-                            player.HasConfusingTouch = true;
+                            saveGame.Player.HasConfusingTouch = true;
                             identified = true;
                         }
                         break;
                     }
                 case ScrollType.ProtectionFromEvil:
                     {
-                        i = 3 * player.Level;
-                        if (player.SetTimedProtectionFromEvil(player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + i))
+                        i = 3 * saveGame.Player.Level;
+                        if (saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + i))
                         {
                             identified = true;
                         }
@@ -376,7 +376,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.StarDestruction:
                     {
-                        SaveGame.Instance.DestroyArea(player.MapY, player.MapX, 15);
+                        SaveGame.Instance.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
                         identified = true;
                         break;
                     }
@@ -402,22 +402,22 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Acquirement:
                     {
-                        SaveGame.Instance.Level.Acquirement(player.MapY, player.MapX, 1, true);
+                        SaveGame.Instance.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, 1, true);
                         identified = true;
                         break;
                     }
                 case ScrollType.StarAcquirement:
                     {
-                        SaveGame.Instance.Level.Acquirement(player.MapY, player.MapX, Program.Rng.DieRoll(2) + 1, true);
+                        SaveGame.Instance.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Program.Rng.DieRoll(2) + 1, true);
                         identified = true;
                         break;
                     }
                 case ScrollType.Fire:
                     {
                         SaveGame.Instance.FireBall(new ProjectFire(), 0, 150, 4);
-                        if (!(player.TimedFireResistance != 0 || player.HasFireResistance || player.HasFireImmunity))
+                        if (!(saveGame.Player.TimedFireResistance != 0 || saveGame.Player.HasFireResistance || saveGame.Player.HasFireImmunity))
                         {
-                            player.TakeHit(50 + Program.Rng.DieRoll(50), "a Scroll of Fire");
+                            saveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "a Scroll of Fire");
                         }
                         identified = true;
                         break;
@@ -425,9 +425,9 @@ namespace Cthangband.Commands
                 case ScrollType.Ice:
                     {
                         SaveGame.Instance.FireBall(new ProjectIce(), 0, 175, 4);
-                        if (!(player.TimedColdResistance != 0 || player.HasColdResistance || player.HasColdImmunity))
+                        if (!(saveGame.Player.TimedColdResistance != 0 || saveGame.Player.HasColdResistance || saveGame.Player.HasColdImmunity))
                         {
-                            player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
+                            saveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
                         }
                         identified = true;
                         break;
@@ -435,9 +435,9 @@ namespace Cthangband.Commands
                 case ScrollType.Chaos:
                     {
                         SaveGame.Instance.FireBall(new ProjectChaos(), 0, 222, 4);
-                        if (!player.HasChaosResistance)
+                        if (!saveGame.Player.HasChaosResistance)
                         {
-                            player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");
+                            saveGame.Player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");
                         }
                         identified = true;
                         break;
@@ -454,7 +454,7 @@ namespace Cthangband.Commands
                     {
                         var patron = SaveGame.Instance.PatronList[Program.Rng.DieRoll(SaveGame.Instance.PatronList.Length) - 1];
                         Profile.Instance.MsgPrint($"You invoke the secret name of {patron.LongName}.");
-                        patron.GetReward(player, SaveGame.Instance.Level, SaveGame.Instance);
+                        patron.GetReward(saveGame.Player, SaveGame.Instance.Level, SaveGame.Instance);
                         identified = true;
                         break;
                     }
@@ -465,17 +465,17 @@ namespace Cthangband.Commands
                         break;
                     }
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We might have just identified the scroll
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                player.GainExperience((itemLevel + (player.Level >> 1)) / player.Level);
+                saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             bool channeled = false;
             // Channelers can use mana instead of the scroll being used up
-            if (player.Spellcasting.Type == CastingType.Channeling)
+            if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
                 channeled = SaveGame.Instance.DoCmdChannel(item);
             }
@@ -488,9 +488,9 @@ namespace Cthangband.Commands
                 // If it wasn't used up then decrease the amount in the stack
                 if (itemIndex >= 0)
                 {
-                    player.Inventory.InvenItemIncrease(itemIndex, -1);
-                    player.Inventory.InvenItemDescribe(itemIndex);
-                    player.Inventory.InvenItemOptimize(itemIndex);
+                    saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                    saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                    saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
                 }
                 else
                 {

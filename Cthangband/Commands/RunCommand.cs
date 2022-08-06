@@ -15,11 +15,11 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             // Can't run if we're confused
-            if (player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 Profile.Instance.MsgPrint("You are too confused!");
                 return;

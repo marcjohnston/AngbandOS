@@ -15,7 +15,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             bool disturb = false;
             // Check if there's only one thing we can open
@@ -29,17 +29,17 @@ namespace Cthangband.Commands
                 if (!tooMany)
                 {
                     // There's only one thing we can open, so assume we mean that thing
-                    Gui.CommandDirection = level.CoordsToDir(coord.Y, coord.X);
+                    Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }
             // If we don't already have a direction, prompt for one
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[y][x];
-                int itemIndex = level.ChestCheck(y, x);
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[y][x];
+                int itemIndex = saveGame.Level.ChestCheck(y, x);
                 // Make sure there is something to open in the direction we chose
                 if (!tile.FeatureType.IsClosedDoor &&
                     itemIndex == 0)

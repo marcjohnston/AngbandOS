@@ -14,18 +14,18 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             // Assume it won't disturb us
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
 
             // Get the direction to bash
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[y][x];
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[y][x];
                 // Can only bash closed doors
                 if (!tile.FeatureType.IsClosedDoor)
                 {

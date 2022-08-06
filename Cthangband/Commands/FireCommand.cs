@@ -17,17 +17,17 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             // Check that we're actually wielding a ranged weapon
-            Item missileWeapon = player.Inventory[InventorySlot.RangedWeapon];
+            Item missileWeapon = saveGame.Player.Inventory[InventorySlot.RangedWeapon];
             if (missileWeapon.Category == 0)
             {
                 Profile.Instance.MsgPrint("You have nothing to fire with.");
                 return;
             }
             // Get the ammunition to fire
-            Inventory.ItemFilterCategory = player.AmmunitionItemCategory;
+            Inventory.ItemFilterCategory = saveGame.Player.AmmunitionItemCategory;
             if (!SaveGame.Instance.GetItem(out int itemIndex, "Fire which item? ", false, true, true))
             {
                 if (itemIndex == -2)
@@ -36,8 +36,8 @@ namespace Cthangband.Commands
                 }
                 return;
             }
-            Item ammunitionStack = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            Item ammunitionStack = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             // Find out where we're aiming at
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
@@ -48,9 +48,9 @@ namespace Cthangband.Commands
             // ...and reduced the amount in the stack
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
@@ -62,11 +62,11 @@ namespace Cthangband.Commands
             string missileName = individualAmmunition.Description(false, 3);
             Colour missileColour = individualAmmunition.ItemType.Colour;
             char missileCharacter = individualAmmunition.ItemType.Character;
-            int shotSpeed = player.MissileAttacksPerRound;
+            int shotSpeed = saveGame.Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage +
                        missileWeapon.BonusDamage;
-            int attackBonus = player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
-            int chanceToHit = player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
+            int attackBonus = saveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
+            int chanceToHit = saveGame.Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
             int damageMultiplier = 1;
             switch (missileWeapon.ItemSubCategory)
@@ -98,7 +98,7 @@ namespace Cthangband.Commands
                     }
             }
             // Extra might gives us an increased multiplier
-            if (player.HasExtraMight)
+            if (saveGame.Player.HasExtraMight)
             {
                 damageMultiplier++;
             }
@@ -107,10 +107,10 @@ namespace Cthangband.Commands
             int shotDistance = 10 + (5 * damageMultiplier);
             // Divide by our shot speed to give the equivalent of x shots per turn
             SaveGame.Instance.EnergyUse = 100 / shotSpeed;
-            int y = player.MapY;
-            int x = player.MapX;
-            int targetX = player.MapX + (99 * level.KeypadDirectionXOffset[dir]);
-            int targetY = player.MapY + (99 * level.KeypadDirectionYOffset[dir]);
+            int y = saveGame.Player.MapY;
+            int x = saveGame.Player.MapX;
+            int targetX = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
+            int targetY = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
             // Special case for if we're hitting our own square
             if (dir == 5 && targetEngine.TargetOkay())
             {
@@ -127,9 +127,9 @@ namespace Cthangband.Commands
                     break;
                 }
                 // Move a step towards the target
-                level.MoveOneStepTowards(out int newY, out int newX, y, x, player.MapY, player.MapX, targetY, targetX);
+                saveGame.Level.MoveOneStepTowards(out int newY, out int newX, y, x, saveGame.Player.MapY, saveGame.Player.MapX, targetY, targetX);
                 // If we were blocked by a wall or something then stop short
-                if (!level.GridPassable(newY, newX))
+                if (!saveGame.Level.GridPassable(newY, newX))
                 {
                     break;
                 }
@@ -138,13 +138,13 @@ namespace Cthangband.Commands
                 y = newY;
                 int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
                 // If we can see the current projectile location, show it briefly
-                if (level.PanelContains(y, x) && level.PlayerCanSeeBold(y, x))
+                if (saveGame.Level.PanelContains(y, x) && saveGame.Level.PlayerCanSeeBold(y, x))
                 {
-                    level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
-                    level.MoveCursorRelative(y, x);
+                    saveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                    saveGame.Level.MoveCursorRelative(y, x);
                     Gui.Refresh();
                     Gui.Pause(msec);
-                    level.RedrawSingleLocation(y, x);
+                    saveGame.Level.RedrawSingleLocation(y, x);
                     Gui.Refresh();
                 }
                 else
@@ -154,10 +154,10 @@ namespace Cthangband.Commands
                     Gui.Pause(msec);
                 }
                 // Check if we might hit a monster (not necessarily the one we were aiming at)
-                if (level.Grid[y][x].MonsterIndex != 0)
+                if (saveGame.Level.Grid[y][x].MonsterIndex != 0)
                 {
-                    GridTile tile = level.Grid[y][x];
-                    Monster monster = level.Monsters[tile.MonsterIndex];
+                    GridTile tile = saveGame.Level.Grid[y][x];
+                    Monster monster = saveGame.Level.Monsters[tile.MonsterIndex];
                     MonsterRace race = monster.Race;
                     bool visible = monster.IsVisible;
                     hitBody = true;
@@ -198,13 +198,13 @@ namespace Cthangband.Commands
                         {
                             shotDamage = 0;
                         }
-                        if (level.Monsters.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                        if (saveGame.Level.Monsters.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
                         {
                             // The monster is dead, so don't add further statuses or messages
                         }
                         else
                         {
-                            level.Monsters.MessagePain(tile.MonsterIndex, shotDamage);
+                            saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, shotDamage);
                             if (fear && monster.IsVisible)
                             {
                                 Gui.PlaySound(SoundEffect.MonsterFlees);

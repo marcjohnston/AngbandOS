@@ -82,12 +82,14 @@ namespace Cthangband
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
         public const int HurtChance = 16;
+        public readonly Profile Profile;
 
-        public SaveGame()
+        public SaveGame(Profile profile)
         {
             Towns = Town.NewTownList();
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList();
+            Profile = profile;
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
@@ -6950,7 +6952,7 @@ namespace Cthangband
                 // attached for improved performance.
                 if (command.IsEnabled && command.Key == c)
                 {
-                    command.Execute(Player, Level);
+                    command.Execute(SaveGame.Instance);
 
                     // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
                     if (!isRepeated && command.Repeat.HasValue)

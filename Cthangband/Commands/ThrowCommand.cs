@@ -17,9 +17,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DoCmdThrow(player, level, 1);
+            DoCmdThrow(saveGame.Player, saveGame.Level, 1);
         }
 
         public static void DoCmdThrow(Player player, Level level, int damageMultiplier)

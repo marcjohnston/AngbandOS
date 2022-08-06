@@ -15,9 +15,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             bool disturb = false;
             MapCoordinate coord = new MapCoordinate();
             int numTraps =
@@ -30,17 +30,17 @@ namespace Cthangband.Commands
                 // If only one then we have our target
                 if (!tooMany)
                 {
-                    Gui.CommandDirection = level.CoordsToDir(coord.Y, coord.X);
+                    Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }
             // Get a direction if we don't already have one
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[y][x];
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[y][x];
                 // Check for a chest
-                int itemIndex = level.ChestCheck(y, x);
+                int itemIndex = saveGame.Level.ChestCheck(y, x);
                 if (!tile.FeatureType.IsTrap &&
                     itemIndex == 0)
                 {

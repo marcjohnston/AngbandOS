@@ -21,11 +21,11 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int itemIndex = -999;
             int dir;
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (itemIndex == -999)
             {
                 // No item passed in, so get one; filtering to activatable items only
@@ -40,10 +40,10 @@ namespace Cthangband.Commands
                 }
             }
             // Get the item from the index
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check if the item is activatable
             SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterActivatable;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
                 Profile.Instance.MsgPrint("You can't activate that!");
                 SaveGame.Instance.ItemFilter = null;
@@ -60,8 +60,8 @@ namespace Cthangband.Commands
             }
             // Work out the chance of using the item successfully based on its level and the
             // player's skill
-            int chance = player.SkillUseDevice;
-            if (player.TimedConfusion != 0)
+            int chance = saveGame.Player.SkillUseDevice;
+            if (saveGame.Player.TimedConfusion != 0)
             {
                 chance /= 2;
             }
@@ -109,7 +109,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.StarEssenceOfXoth:
                         {
                             Profile.Instance.MsgPrint("The essence shines brightly...");
-                            level.MapArea();
+                            saveGame.Level.MapArea();
                             SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
@@ -119,15 +119,15 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ShiningTrapezohedron:
                         {
                             Profile.Instance.MsgPrint("The gemstone flashes bright red!");
-                            level.WizLight();
+                            saveGame.Level.WizLight();
                             Profile.Instance.MsgPrint("The gemstone drains your vitality...");
-                            player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+                            saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
                             SaveGame.Instance.DetectTraps();
                             SaveGame.Instance.DetectDoors();
                             SaveGame.Instance.DetectStairs();
                             if (Gui.GetCheck("Activate recall? "))
                             {
-                                player.ToggleRecall();
+                                saveGame.Player.ToggleRecall();
                             }
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(20) + 20;
                             break;
@@ -136,8 +136,8 @@ namespace Cthangband.Commands
                     case FixedArtifactId.AmuletOfLobon:
                         {
                             Profile.Instance.MsgPrint("The amulet lets out a shrill wail...");
-                            int k = 3 * player.Level;
-                            player.SetTimedProtectionFromEvil(player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
+                            int k = 3 * saveGame.Player.Level;
+                            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
                             break;
                         }
@@ -145,7 +145,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.AmuletOfAbdulAlhazred:
                         {
                             Profile.Instance.MsgPrint("The amulet floods the area with goodness...");
-                            SaveGame.Instance.DispelEvil(player.Level * 5);
+                            SaveGame.Instance.DispelEvil(saveGame.Player.Level * 5);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -167,13 +167,13 @@ namespace Cthangband.Commands
                     case FixedArtifactId.RingOfBast:
                         {
                             Profile.Instance.MsgPrint("The ring glows brightly...");
-                            if (player.TimedHaste == 0)
+                            if (saveGame.Player.TimedHaste == 0)
                             {
-                                player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
+                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
                             }
                             else
                             {
-                                player.SetTimedHaste(player.TimedHaste + 5);
+                                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                             }
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(150) + 150;
                             break;
@@ -232,7 +232,7 @@ namespace Cthangband.Commands
                             Profile.Instance.MsgPrint("Your armor is surrounded by lightning...");
                             for (int i = 0; i < 8; i++)
                             {
-                                SaveGame.Instance.FireBall(new ProjectElec(), level.OrderedDirection[i], 150, 3);
+                                SaveGame.Instance.FireBall(new ProjectElec(), saveGame.Level.OrderedDirection[i], 150, 3);
                             }
                             item.RechargeTimeLeft = 1000;
                             break;
@@ -247,15 +247,15 @@ namespace Cthangband.Commands
                             Profile.Instance.MsgPrint("You breathe the elements.");
                             SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, 4);
                             Profile.Instance.MsgPrint("Your armor glows many colors...");
-                            player.SetTimedFear(0);
-                            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
-                            player.RestoreHealth(30);
-                            player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(50) + 50);
-                            player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(50) + 50);
-                            player.SetTimedLightningResistance(player.TimedLightningResistance + Program.Rng.DieRoll(50) + 50);
-                            player.SetTimedFireResistance(player.TimedFireResistance + Program.Rng.DieRoll(50) + 50);
-                            player.SetTimedColdResistance(player.TimedColdResistance + Program.Rng.DieRoll(50) + 50);
-                            player.SetTimedPoisonResistance(player.TimedPoisonResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedFear(0);
+                            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.RestoreHealth(30);
+                            saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(50) + 50);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
@@ -264,8 +264,8 @@ namespace Cthangband.Commands
                         {
                             Profile.Instance.MsgPrint("Your armor glows a bright white...");
                             Profile.Instance.MsgPrint("You feel much better...");
-                            player.RestoreHealth(1000);
-                            player.SetTimedBleeding(0);
+                            saveGame.Player.RestoreHealth(1000);
+                            saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 888;
                             break;
                         }
@@ -273,13 +273,13 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ArmourOfTheVampireHunter:
                         {
                             Profile.Instance.MsgPrint("A heavenly choir sings...");
-                            player.SetTimedPoison(0);
-                            player.SetTimedBleeding(0);
-                            player.SetTimedStun(0);
-                            player.SetTimedConfusion(0);
-                            player.SetTimedBlindness(0);
-                            player.SetTimedHeroism(player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
-                            player.RestoreHealth(777);
+                            saveGame.Player.SetTimedPoison(0);
+                            saveGame.Player.SetTimedBleeding(0);
+                            saveGame.Player.SetTimedStun(0);
+                            saveGame.Player.SetTimedConfusion(0);
+                            saveGame.Player.SetTimedBlindness(0);
+                            saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
+                            saveGame.Player.RestoreHealth(777);
                             item.RechargeTimeLeft = 300;
                             break;
                         }
@@ -303,8 +303,8 @@ namespace Cthangband.Commands
                     case FixedArtifactId.DragonHelmOfPower:
                     case FixedArtifactId.HelmTerrorMask:
                         {
-                            SaveGame.Instance.TurnMonsters(40 + player.Level);
-                            item.RechargeTimeLeft = 3 * (player.Level + 10);
+                            SaveGame.Instance.TurnMonsters(40 + saveGame.Player.Level);
+                            item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
                             break;
                         }
                     // Skull Keeper detects everything
@@ -321,8 +321,8 @@ namespace Cthangband.Commands
                         {
                             Profile.Instance.MsgPrint("Your crown glows deep yellow...");
                             Profile.Instance.MsgPrint("You feel a warm tingling inside...");
-                            player.RestoreHealth(700);
-                            player.SetTimedBleeding(0);
+                            saveGame.Player.RestoreHealth(700);
+                            saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 250;
                             break;
                         }
@@ -330,11 +330,11 @@ namespace Cthangband.Commands
                     case FixedArtifactId.CloakOfBarzai:
                         {
                             Profile.Instance.MsgPrint("Your cloak glows many colours...");
-                            player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
-                            player.SetTimedLightningResistance(player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
-                            player.SetTimedFireResistance(player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
-                            player.SetTimedColdResistance(player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
-                            player.SetTimedPoisonResistance(player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = 111;
                             break;
                         }
@@ -366,7 +366,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ShadowCloakOfNyogtha:
                         {
                             Profile.Instance.MsgPrint("Your cloak glows a deep red...");
-                            player.RestoreLevel();
+                            saveGame.Player.RestoreLevel();
                             item.RechargeTimeLeft = 450;
                             break;
                         }
@@ -447,13 +447,13 @@ namespace Cthangband.Commands
                     case FixedArtifactId.BootsOfIthaqua:
                         {
                             Profile.Instance.MsgPrint("A wind swirls around your boots...");
-                            if (player.TimedHaste == 0)
+                            if (saveGame.Player.TimedHaste == 0)
                             {
-                                player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
+                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
                             }
                             else
                             {
-                                player.SetTimedHaste(player.TimedHaste + 5);
+                                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                             }
                             item.RechargeTimeLeft = 200;
                             break;
@@ -462,8 +462,8 @@ namespace Cthangband.Commands
                     case FixedArtifactId.BootsOfDancing:
                         {
                             Profile.Instance.MsgPrint("Your boots glow deep blue...");
-                            player.SetTimedFear(0);
-                            player.SetTimedPoison(0);
+                            saveGame.Player.SetTimedFear(0);
+                            saveGame.Player.SetTimedPoison(0);
                             item.RechargeTimeLeft = 5;
                             break;
                         }
@@ -585,8 +585,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.SwordOfTheDawn:
                         {
                             Profile.Instance.MsgPrint("Your sword flickers black for a moment...");
-                            level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty,
-                                Constants.SummonReaver, true);
+                            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, Constants.SummonReaver, true);
                             item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
                             break;
                         }
@@ -650,8 +649,8 @@ namespace Cthangband.Commands
                     case FixedArtifactId.AxeSpleenSlicer:
                         {
                             Profile.Instance.MsgPrint("Your battle axe radiates deep purple...");
-                            player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-                            player.SetTimedBleeding((player.TimedBleeding / 2) - 50);
+                            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+                            saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
                             break;
                         }
@@ -671,7 +670,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ScytheOfGharne:
                         {
                             Profile.Instance.MsgPrint("Your scythe glows soft white...");
-                            player.ToggleRecall();
+                            saveGame.Player.ToggleRecall();
                             item.RechargeTimeLeft = 200;
                             break;
                         }
@@ -703,13 +702,13 @@ namespace Cthangband.Commands
                     case FixedArtifactId.MaceThunder:
                         {
                             Profile.Instance.MsgPrint("Your mace glows bright green...");
-                            if (player.TimedHaste == 0)
+                            if (saveGame.Player.TimedHaste == 0)
                             {
-                                player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
+                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
                             }
                             else
                             {
-                                player.SetTimedHaste(player.TimedHaste + 5);
+                                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                             }
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
                             break;
@@ -929,21 +928,21 @@ namespace Cthangband.Commands
                     case RingType.Acid:
                         {
                             SaveGame.Instance.FireBall(new ProjectAcid(), dir, 50, 2);
-                            player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
                             SaveGame.Instance.FireBall(new ProjectCold(), dir, 50, 2);
-                            player.SetTimedColdResistance(player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
                             SaveGame.Instance.FireBall(new ProjectFire(), dir, 50, 2);
-                            player.SetTimedFireResistance(player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }

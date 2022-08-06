@@ -15,19 +15,19 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            if (player.IsSearching)
+            if (saveGame.Player.IsSearching)
             {
-                player.IsSearching = false;
-                player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                player.RedrawNeeded.Set(RedrawFlag.PrState);
+                saveGame.Player.IsSearching = false;
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
             }
             else
             {
-                player.IsSearching = true;
-                player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                player.RedrawNeeded.Set(RedrawFlag.PrState | RedrawFlag.PrSpeed);
+                saveGame.Player.IsSearching = true;
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState | RedrawFlag.PrSpeed);
             }
         }
     }

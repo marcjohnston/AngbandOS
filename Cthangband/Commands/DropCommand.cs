@@ -16,7 +16,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int amount = 1;
             // Get an item from the inventory/equipment
@@ -28,7 +28,7 @@ namespace Cthangband.Commands
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Can't drop a cursed item
             if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
             {
@@ -47,8 +47,8 @@ namespace Cthangband.Commands
             // Dropping things takes half a turn
             SaveGame.Instance.EnergyUse = 50;
             // Drop it
-            player.Inventory.InvenDrop(itemIndex, amount);
-            player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
+            saveGame.Player.Inventory.InvenDrop(itemIndex, amount);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
         }
     }
 }

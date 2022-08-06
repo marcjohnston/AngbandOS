@@ -165,7 +165,7 @@ namespace Cthangband
             // Create a new game if necessary
             if (Game == null)
             {
-                SaveGame game = new SaveGame();
+                SaveGame game = new SaveGame(this);
                 game.Initialise();
                 Game = game;
             }

@@ -16,7 +16,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             if (Gui.CommandArgument <= 0)
             {
@@ -63,9 +63,9 @@ namespace Cthangband.Commands
             // Resting takes at least one turn (we'll also be skipping future turns)
             SaveGame.Instance.EnergyUse = 100;
             SaveGame.Instance.Resting = Gui.CommandArgument;
-            player.IsSearching = false;
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            player.RedrawNeeded.Set(RedrawFlag.PrState);
+            saveGame.Player.IsSearching = false;
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
             SaveGame.Instance.HandleStuff();
             Gui.Refresh();
         }

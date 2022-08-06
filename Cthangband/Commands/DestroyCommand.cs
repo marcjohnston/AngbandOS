@@ -18,9 +18,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DestroyStoreCommand.DoCmdDestroy(player);
+            DestroyStoreCommand.DoCmdDestroy(saveGame.Player);
         }
     }
 }

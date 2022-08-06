@@ -16,22 +16,22 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction
             if (SaveGame.Instance.CountOpenDoors(coord) == 1)
             {
-                Gui.CommandDirection = level.CoordsToDir(coord.Y, coord.X);
+                Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
             }
             // Get the location to close
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[y][x];
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[y][x];
                 // Can only close actual open doors
                 if (tile.FeatureType.Category != FloorTileTypeCategory.OpenDoorway)
                 {

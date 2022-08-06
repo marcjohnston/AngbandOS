@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
             int cy = -1;
             int cx = -1;
@@ -34,13 +34,13 @@ namespace Cthangband.Commands
             {
                 // We're not on the surface, so draw the level map
                 Gui.SetBackground(BackgroundImage.Map);
-                level.DisplayMap(out cy, out cx);
+                saveGame.Level.DisplayMap(out cy, out cx);
             }
             // Give us a prompt, and display the cursor in the player's location
             Gui.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
             if (SaveGame.Instance.CurrentDepth == 0)
             {
-                Gui.Goto(player.WildernessY + 2, player.WildernessX + 2);
+                Gui.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
             }
             else
             {

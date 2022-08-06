@@ -14,17 +14,17 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             bool disturb = false;
             // Get the direction in which we wish to tunnel
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
                 // Pick up the tile that the player wishes to tunnel through
-                int tileY = player.MapY + level.KeypadDirectionYOffset[dir];
-                int tileX = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile tile = level.Grid[tileY][tileX];
+                int tileY = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int tileX = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile tile = saveGame.Level.Grid[tileY][tileX];
                 // Check if it can be tunneled through
                 if (tile.FeatureType.IsPassable || tile.FeatureType.Name == "YellowSign")
                 {

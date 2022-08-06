@@ -13,9 +13,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            WalkAndPickupCommand.DoCmdWalk(player, level, true);
+            WalkAndPickupCommand.DoCmdWalk(saveGame.Player, saveGame.Level, true);
         }
     }
 
@@ -29,7 +29,7 @@ namespace Cthangband.Commands
 
     //    public abstract bool IsEnabled { get; }
 
-    //    public void Execute(Player player, Level level)
+    //    public void Execute(SaveGame saveGame)
     //    {
     //        if (Gui.CommandArgument > 0)
     //        {
@@ -58,9 +58,9 @@ namespace Cthangband.Commands
 
         public bool IsEnabled => true;
 
-        public void Execute(Player player, Level level)
+        public void Execute(SaveGame saveGame)
         {
-            DoCmdWalk(player, level, false);
+            DoCmdWalk(saveGame.Player, saveGame.Level, false);
         }
 
         public static void DoCmdWalk(Player player, Level level, bool dontPickup)
