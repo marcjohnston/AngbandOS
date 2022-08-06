@@ -45,6 +45,9 @@
   <PropertyGroup>
     <ApplicationIcon>Terminal\Cthangband.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -1457,7 +1460,6 @@
     <Compile Include="VaultType.cs" />
     <Compile Include="VaultTypeArray.cs" />
     <Compile Include="WildernessRegion.cs" />
-    <Compile Include="WizardCommandHandler.cs" />
     <EmbeddedResource Include="Data\Animations.csv" />
     <EmbeddedResource Include="Debug\DebugMenu.resx">
       <DependentUpon>DebugMenu.cs</DependentUpon>

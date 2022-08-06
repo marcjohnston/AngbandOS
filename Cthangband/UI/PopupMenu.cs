@@ -74,6 +74,7 @@ namespace Cthangband.UI
                 }
                 Gui.HideCursorOnFullScreenInkey = true;
                 char k = Gui.Inkey();
+                
                 switch (k)
                 {
                     case '\x1b':
