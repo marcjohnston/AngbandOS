@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Chaos
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.FireBall(new ProjectMissile(SaveGame.Instance.SpellEffects), dir,
+            SaveGame.Instance.FireBall(new ProjectMissile(), dir,
                 Program.Rng.DiceRoll(3, 5) + player.Level + (player.Level /
                 (player.ProfessionIndex == CharacterClass.Mage || player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
                 player.Level < 30 ? 2 : 3);

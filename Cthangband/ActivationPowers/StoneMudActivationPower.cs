@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.WallToMud(direction);
+            SaveGame.Instance.WallToMud(direction);
             return true;
         }
 

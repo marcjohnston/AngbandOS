@@ -30,11 +30,11 @@ namespace Cthangband.Talents
                 {
                     return;
                 }
-                saveGame.SpellEffects.FireBall(new ProjectDomination(SaveGame.Instance.SpellEffects), dir, player.Level, 0);
+                saveGame.FireBall(new ProjectDomination(), dir, player.Level, 0);
             }
             else
             {
-                saveGame.SpellEffects.CharmMonsters(player.Level * 2);
+                saveGame.CharmMonsters(player.Level * 2);
             }
         }
 

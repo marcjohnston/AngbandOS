@@ -28,11 +28,11 @@ namespace Cthangband.ActivationPowers
             {
                 Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
                 player.Energy -= 100;
-                SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                SaveGame.Instance.TeleportPlayer(10);
             }
             else
             {
-                SaveGame.Instance.SpellEffects.TeleportPlayerTo(ij, ii);
+                SaveGame.Instance.TeleportPlayerTo(ij, ii);
             }
             return true;
         }

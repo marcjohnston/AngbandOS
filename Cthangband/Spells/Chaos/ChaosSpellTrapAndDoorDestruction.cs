@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DestroyDoorsTouch();
+            saveGame.DestroyDoorsTouch();
         }
 
         public override void Initialise(int characterClass)

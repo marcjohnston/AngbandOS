@@ -76,7 +76,7 @@ namespace Cthangband.Commands
                         {
                             player.SetTimedBlindness(player.TimedBlindness + 3 + Program.Rng.DieRoll(5));
                         }
-                        if (SaveGame.Instance.SpellEffects.UnlightArea(10, 3))
+                        if (SaveGame.Instance.UnlightArea(10, 3))
                         {
                             identified = true;
                         }
@@ -85,7 +85,7 @@ namespace Cthangband.Commands
                 case ScrollType.AggravateMonster:
                     {
                         Profile.Instance.MsgPrint("There is a high pitched humming noise.");
-                        SaveGame.Instance.SpellEffects.AggravateMonsters(1);
+                        SaveGame.Instance.AggravateMonsters(1);
                         identified = true;
                         break;
                     }
@@ -130,7 +130,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.TrapCreation:
                     {
-                        if (SaveGame.Instance.SpellEffects.TrapCreation())
+                        if (SaveGame.Instance.TrapCreation())
                         {
                             identified = true;
                         }
@@ -138,19 +138,19 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.PhaseDoor:
                     {
-                        SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                        SaveGame.Instance.TeleportPlayer(10);
                         identified = true;
                         break;
                     }
                 case ScrollType.Teleport:
                     {
-                        SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                        SaveGame.Instance.TeleportPlayer(100);
                         identified = true;
                         break;
                     }
                 case ScrollType.TeleportLevel:
                     {
-                        SaveGame.Instance.SpellEffects.TeleportPlayerLevel();
+                        SaveGame.Instance.TeleportPlayerLevel();
                         identified = true;
                         break;
                     }
@@ -163,7 +163,7 @@ namespace Cthangband.Commands
                 case ScrollType.Identify:
                     {
                         identified = true;
-                        if (!SaveGame.Instance.SpellEffects.IdentifyItem())
+                        if (!SaveGame.Instance.IdentifyItem())
                         {
                             usedUp = false;
                         }
@@ -172,7 +172,7 @@ namespace Cthangband.Commands
                 case ScrollType.StarIdentify:
                     {
                         identified = true;
-                        if (!SaveGame.Instance.SpellEffects.IdentifyFully())
+                        if (!SaveGame.Instance.IdentifyFully())
                         {
                             usedUp = false;
                         }
@@ -180,7 +180,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.RemoveCurse:
                     {
-                        if (SaveGame.Instance.SpellEffects.RemoveCurse())
+                        if (SaveGame.Instance.RemoveCurse())
                         {
                             Profile.Instance.MsgPrint("You feel as if someone is watching over you.");
                             identified = true;
@@ -189,14 +189,14 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.StarRemoveCurse:
                     {
-                        SaveGame.Instance.SpellEffects.RemoveAllCurse();
+                        SaveGame.Instance.RemoveAllCurse();
                         identified = true;
                         break;
                     }
                 case ScrollType.EnchantArmor:
                     {
                         identified = true;
-                        if (!SaveGame.Instance.SpellEffects.EnchantSpell(0, 0, 1))
+                        if (!SaveGame.Instance.EnchantSpell(0, 0, 1))
                         {
                             usedUp = false;
                         }
@@ -204,7 +204,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.EnchantWeaponToHit:
                     {
-                        if (!SaveGame.Instance.SpellEffects.EnchantSpell(1, 0, 0))
+                        if (!SaveGame.Instance.EnchantSpell(1, 0, 0))
                         {
                             usedUp = false;
                         }
@@ -213,7 +213,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.EnchantWeaponToDam:
                     {
-                        if (!SaveGame.Instance.SpellEffects.EnchantSpell(0, 1, 0))
+                        if (!SaveGame.Instance.EnchantSpell(0, 1, 0))
                         {
                             usedUp = false;
                         }
@@ -222,7 +222,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.StarEnchantArmor:
                     {
-                        if (!SaveGame.Instance.SpellEffects.EnchantSpell(0, 0, Program.Rng.DieRoll(3) + 2))
+                        if (!SaveGame.Instance.EnchantSpell(0, 0, Program.Rng.DieRoll(3) + 2))
                         {
                             usedUp = false;
                         }
@@ -231,7 +231,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.StarEnchantWeapon:
                     {
-                        if (!SaveGame.Instance.SpellEffects.EnchantSpell(Program.Rng.DieRoll(3), Program.Rng.DieRoll(3), 0))
+                        if (!SaveGame.Instance.EnchantSpell(Program.Rng.DieRoll(3), Program.Rng.DieRoll(3), 0))
                         {
                             usedUp = false;
                         }
@@ -240,7 +240,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Recharging:
                     {
-                        if (!SaveGame.Instance.SpellEffects.Recharge(60))
+                        if (!SaveGame.Instance.Recharge(60))
                         {
                             usedUp = false;
                         }
@@ -249,7 +249,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Light:
                     {
-                        if (SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+                        if (SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -263,11 +263,11 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.DetectGold:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectTreasure())
+                        if (SaveGame.Instance.DetectTreasure())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.SpellEffects.DetectObjectsGold())
+                        if (SaveGame.Instance.DetectObjectsGold())
                         {
                             identified = true;
                         }
@@ -275,7 +275,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.DetectItem:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectObjectsNormal())
+                        if (SaveGame.Instance.DetectObjectsNormal())
                         {
                             identified = true;
                         }
@@ -283,7 +283,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.DetectTrap:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectTraps())
+                        if (SaveGame.Instance.DetectTraps())
                         {
                             identified = true;
                         }
@@ -291,11 +291,11 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.DetectDoor:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectDoors())
+                        if (SaveGame.Instance.DetectDoors())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.SpellEffects.DetectStairs())
+                        if (SaveGame.Instance.DetectStairs())
                         {
                             identified = true;
                         }
@@ -303,7 +303,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.DetectInvis:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectMonstersInvis())
+                        if (SaveGame.Instance.DetectMonstersInvis())
                         {
                             identified = true;
                         }
@@ -362,13 +362,13 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.RuneOfProtection:
                     {
-                        SaveGame.Instance.SpellEffects.ElderSign();
+                        SaveGame.Instance.ElderSign();
                         identified = true;
                         break;
                     }
                 case ScrollType.TrapDoorDestruction:
                     {
-                        if (SaveGame.Instance.SpellEffects.DestroyDoorsTouch())
+                        if (SaveGame.Instance.DestroyDoorsTouch())
                         {
                             identified = true;
                         }
@@ -376,13 +376,13 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.StarDestruction:
                     {
-                        SaveGame.Instance.SpellEffects.DestroyArea(player.MapY, player.MapX, 15);
+                        SaveGame.Instance.DestroyArea(player.MapY, player.MapX, 15);
                         identified = true;
                         break;
                     }
                 case ScrollType.DispelUndead:
                     {
-                        if (SaveGame.Instance.SpellEffects.DispelUndead(60))
+                        if (SaveGame.Instance.DispelUndead(60))
                         {
                             identified = true;
                         }
@@ -390,13 +390,13 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Carnage:
                     {
-                        SaveGame.Instance.SpellEffects.Carnage(true);
+                        SaveGame.Instance.Carnage(true);
                         identified = true;
                         break;
                     }
                 case ScrollType.MassCarnage:
                     {
-                        SaveGame.Instance.SpellEffects.MassCarnage(true);
+                        SaveGame.Instance.MassCarnage(true);
                         identified = true;
                         break;
                     }
@@ -414,7 +414,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Fire:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), 0, 150, 4);
+                        SaveGame.Instance.FireBall(new ProjectFire(), 0, 150, 4);
                         if (!(player.TimedFireResistance != 0 || player.HasFireResistance || player.HasFireImmunity))
                         {
                             player.TakeHit(50 + Program.Rng.DieRoll(50), "a Scroll of Fire");
@@ -424,7 +424,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Ice:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectIce(SaveGame.Instance.SpellEffects), 0, 175, 4);
+                        SaveGame.Instance.FireBall(new ProjectIce(), 0, 175, 4);
                         if (!(player.TimedColdResistance != 0 || player.HasColdResistance || player.HasColdImmunity))
                         {
                             player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
@@ -434,7 +434,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Chaos:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectChaos(SaveGame.Instance.SpellEffects), 0, 222, 4);
+                        SaveGame.Instance.FireBall(new ProjectChaos(), 0, 222, 4);
                         if (!player.HasChaosResistance)
                         {
                             player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");
@@ -460,7 +460,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Artifact:
                     {
-                        SaveGame.Instance.SpellEffects.ArtifactScroll();
+                        SaveGame.Instance.ArtifactScroll();
                         identified = true;
                         break;
                     }

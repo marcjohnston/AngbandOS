@@ -17,7 +17,7 @@ namespace Cthangband.Mutations.ActiveMutations
         {
             if (saveGame.CommandEngine.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
             {
-                saveGame.SpellEffects.Alchemy();
+                saveGame.Alchemy();
             }
         }
 

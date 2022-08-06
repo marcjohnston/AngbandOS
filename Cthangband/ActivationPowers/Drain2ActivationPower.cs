@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.DrainLife(direction, 120);
+            SaveGame.Instance.DrainLife(direction, 120);
             return true;
         }
 

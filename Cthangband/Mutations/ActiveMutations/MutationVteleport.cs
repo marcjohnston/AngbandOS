@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             Profile.Instance.MsgPrint("You concentrate...");
-            saveGame.SpellEffects.TeleportPlayer(10 + (4 * player.Level));
+            saveGame.TeleportPlayer(10 + (4 * player.Level));
         }
 
         public override string ActivationSummary(int lvl)

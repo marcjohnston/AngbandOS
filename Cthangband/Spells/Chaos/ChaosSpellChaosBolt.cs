@@ -36,7 +36,7 @@ namespace Cthangband.Spells.Chaos
             {
                 return;
             }
-            saveGame.SpellEffects.FireBoltOrBeam(beam, new ProjectChaos(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBoltOrBeam(beam, new ProjectChaos(), dir,
                 Program.Rng.DiceRoll(10 + ((player.Level - 5) / 4), 8));
         }
 

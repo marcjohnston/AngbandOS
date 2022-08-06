@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectDarkWeak : Projectile
     {
-        public ProjectDarkWeak(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectDarkWeak()
         {
             BoltGraphic = "GreyBolt";
             ImpactGraphic = "GreySplat";

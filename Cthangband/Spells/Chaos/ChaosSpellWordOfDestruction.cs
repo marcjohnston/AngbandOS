@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DestroyArea(player.MapY, player.MapX, 15);
+            saveGame.DestroyArea(player.MapY, player.MapX, 15);
         }
 
         public override void Initialise(int characterClass)

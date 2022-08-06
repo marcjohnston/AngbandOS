@@ -25,22 +25,22 @@ namespace Cthangband.Spells.Folk
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    dummy = new ProjectFire(SaveGame.Instance.SpellEffects);
+                    dummy = new ProjectFire();
                     break;
 
                 case 2:
-                    dummy = new ProjectElec(SaveGame.Instance.SpellEffects);
+                    dummy = new ProjectElec();
                     break;
 
                 case 3:
-                    dummy = new ProjectCold(SaveGame.Instance.SpellEffects);
+                    dummy = new ProjectCold();
                     break;
 
                 default:
-                    dummy = new ProjectAcid(SaveGame.Instance.SpellEffects);
+                    dummy = new ProjectAcid();
                     break;
             }
-            saveGame.SpellEffects.FireBall(dummy, dir, 75 + player.Level, 2);
+            saveGame.FireBall(dummy, dir, 75 + player.Level, 2);
         }
 
         public override void Initialise(int characterClass)

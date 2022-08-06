@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectWizardBolt : Projectile
     {
-        public ProjectWizardBolt(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectWizardBolt()
         {
             BoltGraphic = "PinkBolt";
             ImpactGraphic = "PinkSplat";
@@ -75,7 +75,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectAwayUndead : Projectile
     {
-        public ProjectAwayUndead(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectAwayUndead()
         {
             BoltGraphic = "PinkBullet";
             ImpactGraphic = "PinkBullet";
@@ -129,7 +129,7 @@ namespace Cthangband.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                SpellEffects.TeleportAway(cPtr.MonsterIndex, doDist);
+                SaveGame.Instance.TeleportAway(cPtr.MonsterIndex, doDist);
                 y = mPtr.MapY;
                 x = mPtr.MapX;
                 cPtr = Level.Grid[y][x];

@@ -28,7 +28,7 @@ namespace Cthangband.Mutations.RandomMutations
             }
             saveGame.Disturb(false);
             Profile.Instance.MsgPrint("You suddenly feel almost lonely.");
-            saveGame.SpellEffects.BanishMonsters(100);
+            saveGame.BanishMonsters(100);
             Profile.Instance.MsgPrint(null);
         }
     }

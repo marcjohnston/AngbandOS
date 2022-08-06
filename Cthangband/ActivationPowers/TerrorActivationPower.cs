@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.TurnMonsters(40 + player.Level);
+            SaveGame.Instance.TurnMonsters(40 + player.Level);
             return true;
         }
 

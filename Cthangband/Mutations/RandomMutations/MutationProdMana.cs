@@ -32,7 +32,7 @@ namespace Cthangband.Mutations.RandomMutations
             Profile.Instance.MsgPrint("Magical energy flows through you! You must release it!");
             Profile.Instance.MsgPrint(null);
             targetEngine.GetDirectionNoAutoAim(out int dire);
-            saveGame.SpellEffects.FireBall(new ProjectMana(SaveGame.Instance.SpellEffects), dire, player.Level * 2, 3);
+            saveGame.FireBall(new ProjectMana(), dire, player.Level * 2, 3);
         }
     }
 }

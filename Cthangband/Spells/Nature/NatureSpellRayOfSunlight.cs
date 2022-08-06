@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Nature
                 return;
             }
             Profile.Instance.MsgPrint("A line of sunlight appears.");
-            saveGame.SpellEffects.LightLine(dir);
+            saveGame.LightLine(dir);
         }
 
         public override void Initialise(int characterClass)

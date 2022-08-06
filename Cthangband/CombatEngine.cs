@@ -407,7 +407,7 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (!player.HasDisenchantResistance)
                                 {
-                                    if (_saveGame.SpellEffects.ApplyDisenchant())
+                                    if (_saveGame.ApplyDisenchant())
                                     {
                                         obvious = true;
                                     }
@@ -603,7 +603,7 @@ namespace Cthangband
                             {
                                 obvious = true;
                                 Profile.Instance.MsgPrint("You are covered in acid!");
-                                _saveGame.SpellEffects.AcidDam(damage, monsterDescription);
+                                _saveGame.AcidDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                                 break;
                             }
@@ -611,7 +611,7 @@ namespace Cthangband
                             {
                                 obvious = true;
                                 Profile.Instance.MsgPrint("You are struck by electricity!");
-                                _saveGame.SpellEffects.ElecDam(damage, monsterDescription);
+                                _saveGame.ElecDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                                 break;
                             }
@@ -619,7 +619,7 @@ namespace Cthangband
                             {
                                 obvious = true;
                                 Profile.Instance.MsgPrint("You are enveloped in flames!");
-                                _saveGame.SpellEffects.FireDam(damage, monsterDescription);
+                                _saveGame.FireDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                                 break;
                             }
@@ -627,7 +627,7 @@ namespace Cthangband
                             {
                                 obvious = true;
                                 Profile.Instance.MsgPrint("You are covered with frost!");
-                                _saveGame.SpellEffects.ColdDam(damage, monsterDescription);
+                                _saveGame.ColdDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                                 break;
                             }
@@ -799,7 +799,7 @@ namespace Cthangband
                                 // Do an earthquake only if we did enough damage on the hit
                                 if (damage > 23)
                                 {
-                                    _saveGame.SpellEffects.Earthquake(monster.MapY, monster.MapX, 8);
+                                    _saveGame.Earthquake(monster.MapY, monster.MapX, 8);
                                 }
                                 break;
                             }
@@ -1106,7 +1106,7 @@ namespace Cthangband
             if (blinked)
             {
                 Profile.Instance.MsgPrint("The thief flees laughing!");
-                _saveGame.SpellEffects.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
+                _saveGame.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
             }
             // If the attack just killed the player, let future generations remember what killed
             // their ancestor

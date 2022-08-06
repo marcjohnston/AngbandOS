@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectDisintegrate : Projectile
     {
-        public ProjectDisintegrate(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectDisintegrate()
         {
             BoltGraphic = "GreenBolt";
             ImpactGraphic = "";
@@ -75,7 +75,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }

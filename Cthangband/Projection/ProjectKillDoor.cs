@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectKillDoor : Projectile
     {
-        public ProjectKillDoor(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectKillDoor()
         {
             BoltGraphic = "";
             ImpactGraphic = "";

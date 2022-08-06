@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.ItemFilter = saveGame.SpellEffects.ItemTesterHookRecharge;
+            saveGame.ItemFilter = saveGame.ItemTesterHookRecharge;
             if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true))
             {
                 return;

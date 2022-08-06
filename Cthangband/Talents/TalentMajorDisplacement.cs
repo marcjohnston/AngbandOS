@@ -22,10 +22,10 @@ namespace Cthangband.Talents
 
         public override void Use(Player player, Level level, SaveGame saveGame)
         {
-            SaveGame.Instance.SpellEffects.TeleportPlayer(player.Level * 5);
+            SaveGame.Instance.TeleportPlayer(player.Level * 5);
             if (player.Level > 29)
             {
-                SaveGame.Instance.SpellEffects.BanishMonsters(player.Level);
+                SaveGame.Instance.BanishMonsters(player.Level);
             }
         }
 

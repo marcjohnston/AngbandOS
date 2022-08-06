@@ -30,7 +30,7 @@ namespace Cthangband.Spells.Tarot
                 Profile.Instance.MsgPrint("Oh no! It's the Blasted Tower!");
                 for (int dummy = 0; dummy < Program.Rng.DieRoll(3); dummy++)
                 {
-                    SaveGame.Instance.SpellEffects.ActivateHiSummon();
+                    SaveGame.Instance.ActivateHiSummon();
                 }
             }
             else if (die < 14)
@@ -47,7 +47,7 @@ namespace Cthangband.Spells.Tarot
             else if (die < 22)
             {
                 Profile.Instance.MsgPrint("It's the swords of discord.");
-                saveGame.SpellEffects.AggravateMonsters(1);
+                saveGame.AggravateMonsters(1);
             }
             else if (die < 26)
             {
@@ -67,7 +67,7 @@ namespace Cthangband.Spells.Tarot
             else if (die < 33)
             {
                 Profile.Instance.MsgPrint("It's the Moon.");
-                saveGame.SpellEffects.UnlightArea(10, 3);
+                saveGame.UnlightArea(10, 3);
             }
             else if (die < 38)
             {
@@ -77,7 +77,7 @@ namespace Cthangband.Spells.Tarot
             else if (die < 40)
             {
                 Profile.Instance.MsgPrint("It's a teleport card.");
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
             else if (die < 42)
             {
@@ -87,27 +87,27 @@ namespace Cthangband.Spells.Tarot
             else if (die < 47)
             {
                 Profile.Instance.MsgPrint("It's a teleport card.");
-                SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                SaveGame.Instance.TeleportPlayer(100);
             }
             else if (die < 52)
             {
                 Profile.Instance.MsgPrint("It's a teleport card.");
-                SaveGame.Instance.SpellEffects.TeleportPlayer(200);
+                SaveGame.Instance.TeleportPlayer(200);
             }
             else if (die < 60)
             {
                 Profile.Instance.MsgPrint("It's the Tower.");
-                SaveGame.Instance.SpellEffects.WallBreaker();
+                SaveGame.Instance.WallBreaker();
             }
             else if (die < 72)
             {
                 Profile.Instance.MsgPrint("It's Temperance.");
-                SaveGame.Instance.SpellEffects.SleepMonstersTouch();
+                SaveGame.Instance.SleepMonstersTouch();
             }
             else if (die < 80)
             {
                 Profile.Instance.MsgPrint("It's the Tower.");
-                SaveGame.Instance.SpellEffects.Earthquake(player.MapY, player.MapX, 5);
+                SaveGame.Instance.Earthquake(player.MapY, player.MapX, 5);
             }
             else if (die < 82)
             {
@@ -152,12 +152,12 @@ namespace Cthangband.Spells.Tarot
                 {
                     return;
                 }
-                SaveGame.Instance.SpellEffects.CharmMonster(dir, Math.Min(player.Level, 20));
+                SaveGame.Instance.CharmMonster(dir, Math.Min(player.Level, 20));
             }
             else if (die < 101)
             {
                 Profile.Instance.MsgPrint("It's the Hermit.");
-                SaveGame.Instance.SpellEffects.WallStone();
+                SaveGame.Instance.WallStone();
             }
             else if (die < 111)
             {
@@ -276,63 +276,63 @@ namespace Cthangband.Spells.Tarot
                 case 1:
                 case 2:
                 case 3:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                    SaveGame.Instance.TeleportPlayer(10);
                     break;
 
                 case 4:
                 case 5:
                 case 6:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                    SaveGame.Instance.TeleportPlayer(100);
                     break;
 
                 case 7:
                 case 8:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(200);
+                    SaveGame.Instance.TeleportPlayer(200);
                     break;
 
                 case 9:
                 case 10:
                 case 11:
-                    SaveGame.Instance.SpellEffects.UnlightArea(10, 3);
+                    SaveGame.Instance.UnlightArea(10, 3);
                     break;
 
                 case 12:
                 case 13:
                 case 14:
-                    SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                    SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 3), 2);
                     break;
 
                 case 15:
-                    SaveGame.Instance.SpellEffects.DestroyDoorsTouch();
+                    SaveGame.Instance.DestroyDoorsTouch();
                     break;
 
                 case 16:
                 case 17:
-                    SaveGame.Instance.SpellEffects.WallBreaker();
+                    SaveGame.Instance.WallBreaker();
                     break;
 
                 case 18:
-                    SaveGame.Instance.SpellEffects.SleepMonstersTouch();
+                    SaveGame.Instance.SleepMonstersTouch();
                     break;
 
                 case 19:
                 case 20:
-                    SaveGame.Instance.SpellEffects.TrapCreation();
+                    SaveGame.Instance.TrapCreation();
                     break;
 
                 case 21:
                 case 22:
-                    SaveGame.Instance.SpellEffects.DoorCreation();
+                    SaveGame.Instance.DoorCreation();
                     break;
 
                 case 23:
                 case 24:
                 case 25:
-                    SaveGame.Instance.SpellEffects.AggravateMonsters(1);
+                    SaveGame.Instance.AggravateMonsters(1);
                     break;
 
                 case 26:
-                    SaveGame.Instance.SpellEffects.Earthquake(player.MapY, player.MapX, 5);
+                    SaveGame.Instance.Earthquake(player.MapY, player.MapX, 5);
                     break;
 
                 case 27:
@@ -342,19 +342,19 @@ namespace Cthangband.Spells.Tarot
 
                 case 29:
                 case 30:
-                    SaveGame.Instance.SpellEffects.ApplyDisenchant();
+                    SaveGame.Instance.ApplyDisenchant();
                     break;
 
                 case 31:
-                    SaveGame.Instance.SpellEffects.LoseAllInfo();
+                    SaveGame.Instance.LoseAllInfo();
                     break;
 
                 case 32:
-                    SaveGame.Instance.SpellEffects.FireBall(new ProjectChaos(SaveGame.Instance.SpellEffects), 0, spell + 5, 1 + (spell / 10));
+                    SaveGame.Instance.FireBall(new ProjectChaos(), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:
-                    SaveGame.Instance.SpellEffects.WallStone();
+                    SaveGame.Instance.WallStone();
                     break;
 
                 case 34:
@@ -367,11 +367,11 @@ namespace Cthangband.Spells.Tarot
 
                 case 36:
                 case 37:
-                    SaveGame.Instance.SpellEffects.ActivateHiSummon();
+                    SaveGame.Instance.ActivateHiSummon();
                     break;
 
                 case 38:
-                    SaveGame.Instance.SpellEffects.SummonReaver();
+                    SaveGame.Instance.SummonReaver();
                     break;
 
                 default:

@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.SlowMonsters();
+            saveGame.SlowMonsters();
         }
 
         public override void Initialise(int characterClass)

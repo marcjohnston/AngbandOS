@@ -30,7 +30,7 @@ namespace Cthangband.Mutations.RandomMutations
             saveGame.Disturb(false);
             Profile.Instance.MsgPrint("You feel the world warping around you!");
             Profile.Instance.MsgPrint(null);
-            saveGame.SpellEffects.FireBall(new ProjectChaos(SaveGame.Instance.SpellEffects), 0, player.Level, 8);
+            saveGame.FireBall(new ProjectChaos(), 0, player.Level, 8);
         }
     }
 }

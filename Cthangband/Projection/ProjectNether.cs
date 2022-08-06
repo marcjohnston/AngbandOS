@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectNether : Projectile
     {
-        public ProjectNether(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectNether()
         {
             BoltGraphic = "BlackBolt";
             ImpactGraphic = "BlackSplat";

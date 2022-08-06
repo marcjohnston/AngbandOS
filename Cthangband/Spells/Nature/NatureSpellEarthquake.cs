@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.Earthquake(player.MapY, player.MapX, 10);
+            saveGame.Earthquake(player.MapY, player.MapX, 10);
         }
 
         public override void Initialise(int characterClass)

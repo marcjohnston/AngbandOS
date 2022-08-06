@@ -20,8 +20,8 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectSound(SaveGame.Instance.SpellEffects), 0, 4 * player.Level, 8);
-            saveGame.SpellEffects.AggravateMonsters(0);
+            saveGame.FireBall(new ProjectSound(), 0, 4 * player.Level, 8);
+            saveGame.AggravateMonsters(0);
         }
 
         public override string ActivationSummary(int lvl)

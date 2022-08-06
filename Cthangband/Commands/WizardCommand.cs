@@ -71,7 +71,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'd':
-                    SaveGame.Instance.SpellEffects.DetectAll();
+                    SaveGame.Instance.DetectAll();
                     break;
 
                 case 'e':
@@ -79,7 +79,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'f':
-                    SaveGame.Instance.SpellEffects.IdentifyFully();
+                    SaveGame.Instance.IdentifyFully();
                     break;
 
                 case 'g':
@@ -99,7 +99,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'i':
-                    SaveGame.Instance.SpellEffects.IdentifyPack();
+                    SaveGame.Instance.IdentifyPack();
                     break;
 
                 case 'j':
@@ -107,7 +107,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'k':
-                    SaveGame.Instance.SpellEffects.SelfKnowledge();
+                    SaveGame.Instance.SelfKnowledge();
                     break;
 
                 case 'l':
@@ -139,7 +139,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'p':
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                    SaveGame.Instance.TeleportPlayer(10);
                     break;
 
                 case 's':
@@ -151,7 +151,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 't':
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                    SaveGame.Instance.TeleportPlayer(100);
                     break;
 
                 case 'v':
@@ -159,7 +159,7 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    SaveGame.Instance.Level.Acquirement(player.MapY, player.MapX, Gui.CommandArgument, true);
+                    level.Acquirement(player.MapY, player.MapX, Gui.CommandArgument, true);
                     break;
 
                 case 'w':
@@ -299,7 +299,7 @@ namespace Cthangband.Commands
                 tx = SaveGame.Instance.TargetCol;
                 ty = SaveGame.Instance.TargetRow;
             }
-            SaveGame.Instance.SpellEffects.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(SaveGame.Instance.SpellEffects), flg);
+            SaveGame.Instance.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(), flg);
         }
 
         private void DoCmdWizBamf()
@@ -308,7 +308,7 @@ namespace Cthangband.Commands
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.TeleportPlayerTo(SaveGame.Instance.TargetRow, SaveGame.Instance.TargetCol);
+            SaveGame.Instance.TeleportPlayerTo(SaveGame.Instance.TargetRow, SaveGame.Instance.TargetCol);
         }
 
         private void DoCmdWizChange(Player player, Level level)
@@ -376,7 +376,7 @@ namespace Cthangband.Commands
 
         private void DoCmdWizCureAll(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.RemoveAllCurse();
+            SaveGame.Instance.RemoveAllCurse();
             player.RestoreAbilityScore(Ability.Strength);
             player.RestoreAbilityScore(Ability.Intelligence);
             player.RestoreAbilityScore(Ability.Wisdom);

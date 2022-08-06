@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectSound : Projectile
     {
-        public ProjectSound(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectSound()
         {
             BoltGraphic = "GoldSplat";
             ImpactGraphic = "";
@@ -85,7 +85,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }
@@ -295,7 +295,7 @@ namespace Cthangband.Projection
             }
             if (!Player.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 2);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

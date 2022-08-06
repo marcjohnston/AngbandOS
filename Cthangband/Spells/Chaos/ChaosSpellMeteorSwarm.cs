@@ -41,7 +41,7 @@ namespace Cthangband.Spells.Chaos
                     break;
                 }
                 count = 0;
-                saveGame.SpellEffects.Project(0, 2, y, x, player.Level * 3 / 2, new ProjectMeteor(SaveGame.Instance.SpellEffects),
+                saveGame.Project(0, 2, y, x, player.Level * 3 / 2, new ProjectMeteor(),
                     ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
             }
         }

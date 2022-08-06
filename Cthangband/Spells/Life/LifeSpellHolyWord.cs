@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DispelEvil(player.Level * 4);
+            saveGame.DispelEvil(player.Level * 4);
             player.RestoreHealth(1000);
             player.SetTimedFear(0);
             player.SetTimedPoison(0);

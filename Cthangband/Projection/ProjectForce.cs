@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectForce : Projectile
     {
-        public ProjectForce(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectForce()
         {
             BoltGraphic = "BrightTurquoiseBolt";
             ImpactGraphic = "BrightTurquoiseSplat";
@@ -83,7 +83,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }

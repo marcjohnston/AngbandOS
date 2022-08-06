@@ -24,7 +24,7 @@ namespace Cthangband.Mutations.RandomMutations
         {
             if (!player.HasAntiMagic && Program.Rng.DieRoll(12000) == 1)
             {
-                saveGame.SpellEffects.AlterReality();
+                saveGame.AlterReality();
             }
         }
     }

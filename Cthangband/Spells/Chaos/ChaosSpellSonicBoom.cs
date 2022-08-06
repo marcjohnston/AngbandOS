@@ -16,8 +16,8 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, 45 + player.Level,
-                new ProjectSound(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            saveGame.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, 45 + player.Level,
+                new ProjectSound(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectInertia : Projectile
     {
-        public ProjectInertia(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectInertia()
         {
             BoltGraphic = "OrangeBolt";
             ImpactGraphic = "OrangeSplat";

@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.CallChaos();
+            saveGame.CallChaos();
         }
 
         public override void Initialise(int characterClass)

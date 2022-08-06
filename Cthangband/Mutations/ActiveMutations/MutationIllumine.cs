@@ -17,7 +17,7 @@ namespace Cthangband.Mutations.ActiveMutations
         {
             if (saveGame.CommandEngine.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
             {
-                saveGame.SpellEffects.LightArea(Program.Rng.DiceRoll(2, player.Level / 2), (player.Level / 10) + 1);
+                saveGame.LightArea(Program.Rng.DiceRoll(2, player.Level / 2), (player.Level / 10) + 1);
             }
         }
 

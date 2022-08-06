@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectDark(SaveGame.Instance.SpellEffects), dir, 120, 4);
+            saveGame.FireBall(new ProjectDark(), dir, 120, 4);
         }
 
         public override void Initialise(int characterClass)

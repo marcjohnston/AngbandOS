@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Chaos
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectChaos(SaveGame.Instance.SpellEffects), dir, player.Health, -2);
+            saveGame.FireBall(new ProjectChaos(), dir, player.Health, -2);
         }
 
         public override void Initialise(int characterClass)

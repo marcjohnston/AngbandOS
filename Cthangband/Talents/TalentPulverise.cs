@@ -28,7 +28,7 @@ namespace Cthangband.Talents
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectSound(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBall(new ProjectSound(), dir,
                 Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8), player.Level > 20 ? ((player.Level - 20) / 8) + 1 : 0);
         }
 

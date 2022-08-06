@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.CharmAnimal(direction, player.Level);
+            SaveGame.Instance.CharmAnimal(direction, player.Level);
             return true;
         }
 

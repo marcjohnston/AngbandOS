@@ -19,9 +19,9 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.SpellEffects.StunMonsters(player.Level * 4);
-            saveGame.SpellEffects.ConfuseMonsters(player.Level * 4);
-            saveGame.SpellEffects.TurnMonsters(player.Level * 4);
+            saveGame.StunMonsters(player.Level * 4);
+            saveGame.ConfuseMonsters(player.Level * 4);
+            saveGame.TurnMonsters(player.Level * 4);
         }
 
         public override string ActivationSummary(int lvl)

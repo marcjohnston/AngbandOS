@@ -60,7 +60,7 @@ namespace Cthangband.Mutations.RandomMutations
                     }
                 }
             }
-            saveGame.SpellEffects.UnlightArea(50, 10);
+            saveGame.UnlightArea(50, 10);
         }
     }
 }

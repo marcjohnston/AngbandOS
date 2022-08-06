@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectGravity : Projectile
     {
-        public ProjectGravity(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectGravity()
         {
             BoltGraphic = "TurquoiseBolt";
             ImpactGraphic = "TurquoiseSplat";
@@ -148,7 +148,7 @@ namespace Cthangband.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                SpellEffects.TeleportAway(cPtr.MonsterIndex, doDist);
+                SaveGame.Instance.TeleportAway(cPtr.MonsterIndex, doDist);
                 y = mPtr.MapY;
                 x = mPtr.MapX;
                 cPtr = Level.Grid[y][x];
@@ -286,7 +286,7 @@ namespace Cthangband.Projection
                 Profile.Instance.MsgPrint("You are hit by something heavy!");
             }
             Profile.Instance.MsgPrint("Gravity warps around you.");
-            SpellEffects.TeleportPlayer(5);
+            SaveGame.Instance.TeleportPlayer(5);
             if (!Player.HasFeatherFall)
             {
                 Player.SetTimedSlow(Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
@@ -302,7 +302,7 @@ namespace Cthangband.Projection
             }
             if (!Player.HasFeatherFall || Program.Rng.DieRoll(13) == 1)
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 2);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

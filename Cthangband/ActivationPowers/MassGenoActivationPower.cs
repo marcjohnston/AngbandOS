@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.MassCarnage(true);
+            SaveGame.Instance.MassCarnage(true);
             return true;
         }
 

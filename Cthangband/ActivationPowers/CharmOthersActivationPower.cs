@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.CharmMonsters(player.Level * 2);
+            SaveGame.Instance.CharmMonsters(player.Level * 2);
             return true;
         }
 

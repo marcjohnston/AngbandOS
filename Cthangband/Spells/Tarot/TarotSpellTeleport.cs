@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.TeleportPlayer(player.Level * 4);
+            saveGame.TeleportPlayer(player.Level * 4);
         }
 
         public override void Initialise(int characterClass)

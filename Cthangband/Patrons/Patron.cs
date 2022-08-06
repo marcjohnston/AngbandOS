@@ -253,13 +253,13 @@ namespace Cthangband.Patrons
                 case Reward.HSummon:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Thou needst worthier opponents!'");
-                    saveGame.SpellEffects.ActivateHiSummon();
+                    saveGame.ActivateHiSummon();
                     break;
 
                 case Reward.DoHavoc:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} whispers out:");
                     Profile.Instance.MsgPrint("'Death and destruction! This pleaseth me!'");
-                    saveGame.SpellEffects.CallChaos();
+                    saveGame.CallChaos();
                     break;
 
                 case Reward.GainAbl:
@@ -315,7 +315,7 @@ namespace Cthangband.Patrons
                 case Reward.HurtLot:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Suffer, pathetic fool!'");
-                    saveGame.SpellEffects.FireBall(new ProjectDisintegrate(SaveGame.Instance.SpellEffects), 0, player.Level * 4, 4);
+                    saveGame.FireBall(new ProjectDisintegrate(), 0, player.Level * 4, 4);
                     player.TakeHit(player.Level * 4, wrathReason);
                     break;
 
@@ -358,7 +358,7 @@ namespace Cthangband.Patrons
                             break;
 
                         case 2:
-                            saveGame.SpellEffects.ActivateHiSummon();
+                            saveGame.ActivateHiSummon();
                             break;
 
                         case 3:
@@ -389,7 +389,7 @@ namespace Cthangband.Patrons
                     {
                         player.DecreaseAbilityScore(dummy, 10 + Program.Rng.DieRoll(15), false);
                     }
-                    saveGame.SpellEffects.ActivateHiSummon();
+                    saveGame.ActivateHiSummon();
                     saveGame.ActivateDreadCurse();
                     if (Program.Rng.DieRoll(2) == 1)
                     {
@@ -404,24 +404,24 @@ namespace Cthangband.Patrons
                 case Reward.Destruct:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Death and destruction! This pleaseth me!'");
-                    saveGame.SpellEffects.DestroyArea(player.MapY, player.MapX, 25);
+                    saveGame.DestroyArea(player.MapY, player.MapX, 25);
                     break;
 
                 case Reward.Carnage:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     Profile.Instance.MsgPrint("'Let me relieve thee of thine oppressors!'");
-                    saveGame.SpellEffects.Carnage(false);
+                    saveGame.Carnage(false);
                     break;
 
                 case Reward.MassGen:
                     Profile.Instance.MsgPrint($"The voice of {ShortName} rings out:");
                     Profile.Instance.MsgPrint("'Let me relieve thee of thine oppressors!'");
-                    saveGame.SpellEffects.MassCarnage(false);
+                    saveGame.MassCarnage(false);
                     break;
 
                 case Reward.DispelC:
                     Profile.Instance.MsgPrint($"You can feel the power of {ShortName} assault your enemies!");
-                    saveGame.SpellEffects.DispelMonsters(player.Level * 4);
+                    saveGame.DispelMonsters(player.Level * 4);
                     break;
 
                 case Reward.Ignore:

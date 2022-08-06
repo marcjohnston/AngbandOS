@@ -16,10 +16,10 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DispelMonsters(player.Level * 4);
-            saveGame.SpellEffects.Earthquake(player.MapY, player.MapX, 20 + (player.Level / 2));
-            saveGame.SpellEffects.Project(0, 1 + (player.Level / 12), player.MapY, player.MapX, 100 + player.Level,
-                new ProjectDisintegrate(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            saveGame.DispelMonsters(player.Level * 4);
+            saveGame.Earthquake(player.MapY, player.MapX, 20 + (player.Level / 2));
+            saveGame.Project(0, 1 + (player.Level / 12), player.MapY, player.MapX, 100 + player.Level,
+                new ProjectDisintegrate(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

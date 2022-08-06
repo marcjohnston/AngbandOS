@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectHellFire : Projectile
     {
-        public ProjectHellFire(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectHellFire()
         {
             BoltGraphic = "RedSplat";
             ImpactGraphic = "";
@@ -85,7 +85,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }

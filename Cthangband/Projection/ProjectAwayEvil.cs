@@ -6,7 +6,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
-using Cthangband.Spells;
 using Cthangband.StaticData;
 using Cthangband.UI;
 
@@ -14,7 +13,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectAwayEvil : Projectile
     {
-        public ProjectAwayEvil(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectAwayEvil()
         {
             BoltGraphic = "PinkBullet";
             ImpactGraphic = "PinkBullet";
@@ -129,7 +128,7 @@ namespace Cthangband.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                SpellEffects.TeleportAway(cPtr.MonsterIndex, doDist);
+                SaveGame.Instance.TeleportAway(cPtr.MonsterIndex, doDist);
                 y = mPtr.MapY;
                 x = mPtr.MapX;
                 cPtr = Level.Grid[y][x];

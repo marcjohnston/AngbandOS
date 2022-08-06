@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.ElderSign();
+            saveGame.ElderSign();
         }
 
         public override void Initialise(int characterClass)

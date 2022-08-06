@@ -29,7 +29,7 @@ namespace Cthangband.Talents
             }
             else
             {
-                saveGame.SpellEffects.IdentifyItem();
+                saveGame.IdentifyItem();
             }
         }
 

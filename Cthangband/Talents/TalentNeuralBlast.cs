@@ -30,12 +30,12 @@ namespace Cthangband.Talents
             }
             if (Program.Rng.DieRoll(100) < player.Level * 2)
             {
-                saveGame.SpellEffects.FireBeam(new ProjectPsi(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBeam(new ProjectPsi(), dir,
                     Program.Rng.DiceRoll(3 + ((player.Level - 1) / 4), 3 + (player.Level / 15)));
             }
             else
             {
-                saveGame.SpellEffects.FireBall(new ProjectPsi(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBall(new ProjectPsi(), dir,
                     Program.Rng.DiceRoll(3 + ((player.Level - 1) / 4), 3 + (player.Level / 15)), 0);
             }
         }

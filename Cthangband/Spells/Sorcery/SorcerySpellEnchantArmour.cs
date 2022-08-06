@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.EnchantSpell(0, 0, Program.Rng.RandomLessThan(3) + 2);
+            saveGame.EnchantSpell(0, 0, Program.Rng.RandomLessThan(3) + 2);
         }
 
         public override void Initialise(int characterClass)

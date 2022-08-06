@@ -25,7 +25,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.SpellEffects.FireBeam(new ProjectLight(SaveGame.Instance.SpellEffects), dir, 2 * player.Level);
+            saveGame.FireBeam(new ProjectLight(), dir, 2 * player.Level);
         }
 
         public override string ActivationSummary(int lvl)

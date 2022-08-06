@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+            SaveGame.Instance.TeleportPlayer(100);
             return true;
         }
 

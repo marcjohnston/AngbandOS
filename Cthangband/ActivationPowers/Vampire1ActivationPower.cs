@@ -21,7 +21,7 @@ namespace Cthangband.ActivationPowers
         {
             for (int i = 0; i < 3; i++)
             {
-                if (SaveGame.Instance.SpellEffects.DrainLife(direction, 50))
+                if (SaveGame.Instance.DrainLife(direction, 50))
                 {
                     player.RestoreHealth(50);
                 }

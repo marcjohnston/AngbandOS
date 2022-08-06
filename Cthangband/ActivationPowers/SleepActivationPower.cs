@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.SleepMonstersTouch();
+            SaveGame.Instance.SleepMonstersTouch();
             return true;
         }
 

@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Folk
             {
                 return;
             }
-            saveGame.SpellEffects.FireBeam(new ProjectAwayAll(SaveGame.Instance.SpellEffects), dir, player.Level);
+            saveGame.FireBeam(new ProjectAwayAll(), dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

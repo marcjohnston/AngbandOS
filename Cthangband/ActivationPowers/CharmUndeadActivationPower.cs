@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.ControlOneUndead(direction, player.Level);
+            SaveGame.Instance.ControlOneUndead(direction, player.Level);
             return true;
         }
 

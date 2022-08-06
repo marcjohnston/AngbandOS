@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectNexus : Projectile
     {
-        public ProjectNexus(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectNexus()
         {
             BoltGraphic = "PinkBullet";
             ImpactGraphic = "";
@@ -215,7 +215,7 @@ namespace Cthangband.Projection
             }
             else
             {
-                SpellEffects.ApplyNexus(mPtr);
+                SaveGame.Instance.ApplyNexus(mPtr);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

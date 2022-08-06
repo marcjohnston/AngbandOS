@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectOldPoly : Projectile
     {
-        public ProjectOldPoly(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectOldPoly()
         {
             BoltGraphic = "PurpleSplat";
             ImpactGraphic = "";
@@ -108,7 +108,7 @@ namespace Cthangband.Projection
             {
                 note = " is unaffected!";
                 bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
-                int tmp = SpellEffects.PolymorphMonster(mPtr.Race);
+                int tmp = SaveGame.Instance.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
                     note = " changes!";

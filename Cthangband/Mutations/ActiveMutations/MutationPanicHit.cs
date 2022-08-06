@@ -29,7 +29,7 @@ namespace Cthangband.Mutations.ActiveMutations
             if (level.Grid[y][x].MonsterIndex != 0)
             {
                 SaveGame.Instance.CommandEngine.PlayerAttackMonster(y, x);
-                SaveGame.Instance.SpellEffects.TeleportPlayer(30);
+                SaveGame.Instance.TeleportPlayer(30);
             }
             else
             {

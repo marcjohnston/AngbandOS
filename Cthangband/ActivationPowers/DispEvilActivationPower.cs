@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.DispelEvil(player.Level * 5);
+            SaveGame.Instance.DispelEvil(player.Level * 5);
             return true;
         }
 

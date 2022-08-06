@@ -28,11 +28,11 @@ namespace Cthangband.Spells.Sorcery
             {
                 Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
                 player.Energy -= 100;
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
             else
             {
-                saveGame.SpellEffects.TeleportPlayerTo(ij, ii);
+                saveGame.TeleportPlayerTo(ij, ii);
             }
         }
 

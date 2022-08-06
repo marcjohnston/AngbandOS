@@ -24,7 +24,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.SpellEffects.TeleportSwap(dir);
+            saveGame.TeleportSwap(dir);
         }
 
         public override string ActivationSummary(int lvl)

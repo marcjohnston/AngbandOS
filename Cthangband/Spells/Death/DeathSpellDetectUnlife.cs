@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Death
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DetectMonstersNonliving();
+            saveGame.DetectMonstersNonliving();
         }
 
         public override void Initialise(int characterClass)

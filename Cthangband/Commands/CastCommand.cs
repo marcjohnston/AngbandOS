@@ -273,7 +273,7 @@ namespace Cthangband.Commands
                     if (i < 5)
                     {
                         Profile.Instance.MsgPrint("Oh, no! Your mind has gone blank!");
-                        SaveGame.Instance.SpellEffects.LoseAllInfo();
+                        SaveGame.Instance.LoseAllInfo();
                     }
                     else if (i < 15)
                     {
@@ -292,8 +292,8 @@ namespace Cthangband.Commands
                     else
                     {
                         Profile.Instance.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                        SaveGame.Instance.SpellEffects.Project(1, 2 + (plev / 10), player.MapY, player.MapX, plev * 2,
-                            new ProjectMana(SaveGame.Instance.SpellEffects),
+                        SaveGame.Instance.Project(1, 2 + (plev / 10), player.MapY, player.MapX, plev * 2,
+                            new ProjectMana(),
                             ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
                             ProjectionFlag.ProjectItem);
                         player.Mana = Math.Max(0, player.Mana - (plev * Math.Max(1, plev / 10)));
@@ -425,63 +425,63 @@ namespace Cthangband.Commands
                 case 1:
                 case 2:
                 case 3:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                    SaveGame.Instance.TeleportPlayer(10);
                     break;
 
                 case 4:
                 case 5:
                 case 6:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                    SaveGame.Instance.TeleportPlayer(100);
                     break;
 
                 case 7:
                 case 8:
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(200);
+                    SaveGame.Instance.TeleportPlayer(200);
                     break;
 
                 case 9:
                 case 10:
                 case 11:
-                    SaveGame.Instance.SpellEffects.UnlightArea(10, 3);
+                    SaveGame.Instance.UnlightArea(10, 3);
                     break;
 
                 case 12:
                 case 13:
                 case 14:
-                    SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                    SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 3), 2);
                     break;
 
                 case 15:
-                    SaveGame.Instance.SpellEffects.DestroyDoorsTouch();
+                    SaveGame.Instance.DestroyDoorsTouch();
                     break;
 
                 case 16:
                 case 17:
-                    SaveGame.Instance.SpellEffects.WallBreaker();
+                    SaveGame.Instance.WallBreaker();
                     break;
 
                 case 18:
-                    SaveGame.Instance.SpellEffects.SleepMonstersTouch();
+                    SaveGame.Instance.SleepMonstersTouch();
                     break;
 
                 case 19:
                 case 20:
-                    SaveGame.Instance.SpellEffects.TrapCreation();
+                    SaveGame.Instance.TrapCreation();
                     break;
 
                 case 21:
                 case 22:
-                    SaveGame.Instance.SpellEffects.DoorCreation();
+                    SaveGame.Instance.DoorCreation();
                     break;
 
                 case 23:
                 case 24:
                 case 25:
-                    SaveGame.Instance.SpellEffects.AggravateMonsters(1);
+                    SaveGame.Instance.AggravateMonsters(1);
                     break;
 
                 case 26:
-                    SaveGame.Instance.SpellEffects.Earthquake(player.MapY, player.MapX, 5);
+                    SaveGame.Instance.Earthquake(player.MapY, player.MapX, 5);
                     break;
 
                 case 27:
@@ -491,19 +491,19 @@ namespace Cthangband.Commands
 
                 case 29:
                 case 30:
-                    SaveGame.Instance.SpellEffects.ApplyDisenchant();
+                    SaveGame.Instance.ApplyDisenchant();
                     break;
 
                 case 31:
-                    SaveGame.Instance.SpellEffects.LoseAllInfo();
+                    SaveGame.Instance.LoseAllInfo();
                     break;
 
                 case 32:
-                    SaveGame.Instance.SpellEffects.FireBall(new ProjectChaos(SaveGame.Instance.SpellEffects), 0, spell + 5, 1 + (spell / 10));
+                    SaveGame.Instance.FireBall(new ProjectChaos(), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:
-                    SaveGame.Instance.SpellEffects.WallStone();
+                    SaveGame.Instance.WallStone();
                     break;
 
                 case 34:
@@ -517,11 +517,11 @@ namespace Cthangband.Commands
 
                 case 36:
                 case 37:
-                    SaveGame.Instance.SpellEffects.ActivateHiSummon();
+                    SaveGame.Instance.ActivateHiSummon();
                     break;
 
                 case 38:
-                    SaveGame.Instance.SpellEffects.SummonReaver();
+                    SaveGame.Instance.SummonReaver();
                     break;
 
                 default:

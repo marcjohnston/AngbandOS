@@ -26,7 +26,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.SpellEffects.FireBolt(new ProjectPsi(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBolt(new ProjectPsi(), dir,
                 Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
         }
 

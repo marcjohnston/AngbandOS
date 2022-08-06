@@ -1559,7 +1559,7 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.SpellEffects.IdentifyPack();
+                    SaveGame.Instance.IdentifyPack();
                     Profile.Instance.MsgPrint("All your goods have been identified.");
                 }
                 SaveGame.Instance.HandleStuff();
@@ -1642,7 +1642,7 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.SpellEffects.IdentifyFully();
+                    SaveGame.Instance.IdentifyFully();
                 }
                 SaveGame.Instance.HandleStuff();
             }
@@ -1690,7 +1690,7 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.SpellEffects.RemoveCurse();
+                    SaveGame.Instance.RemoveCurse();
                 }
                 SaveGame.Instance.HandleStuff();
             }
@@ -1711,7 +1711,7 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.SpellEffects.EnchantSpell(4, 4, 0);
+                    SaveGame.Instance.EnchantSpell(4, 4, 0);
                 }
                 SaveGame.Instance.HandleStuff();
             }
@@ -1732,7 +1732,7 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.SpellEffects.EnchantSpell(0, 0, 4);
+                    SaveGame.Instance.EnchantSpell(0, 0, 4);
                 }
                 SaveGame.Instance.HandleStuff();
             }

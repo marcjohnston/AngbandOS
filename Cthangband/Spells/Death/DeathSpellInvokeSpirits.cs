@@ -61,88 +61,88 @@ namespace Cthangband.Spells.Death
             }
             if (die < 31)
             {
-                saveGame.SpellEffects.PolyMonster(dir);
+                saveGame.PolyMonster(dir);
             }
             if (die < 36)
             {
-                saveGame.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectMissile(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(), dir,
                     Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 4));
             }
             if (die < 41)
             {
-                saveGame.SpellEffects.ConfuseMonster(dir, player.Level);
+                saveGame.ConfuseMonster(dir, player.Level);
             }
             if (die < 46)
             {
-                saveGame.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects), dir, 20 + (player.Level / 2), 3);
+                saveGame.FireBall(new ProjectPois(), dir, 20 + (player.Level / 2), 3);
             }
             if (die < 51)
             {
-                saveGame.SpellEffects.LightLine(dir);
+                saveGame.LightLine(dir);
             }
             if (die < 56)
             {
-                saveGame.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectElec(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(), dir,
                     Program.Rng.DiceRoll(3 + ((player.Level - 5) / 4), 8));
             }
             if (die < 61)
             {
-                saveGame.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectCold(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(), dir,
                     Program.Rng.DiceRoll(5 + ((player.Level - 5) / 4), 8));
             }
             if (die < 66)
             {
-                saveGame.SpellEffects.FireBoltOrBeam(beam, new ProjectAcid(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBoltOrBeam(beam, new ProjectAcid(), dir,
                     Program.Rng.DiceRoll(6 + ((player.Level - 5) / 4), 8));
             }
             if (die < 71)
             {
-                saveGame.SpellEffects.FireBoltOrBeam(beam, new ProjectFire(SaveGame.Instance.SpellEffects), dir,
+                saveGame.FireBoltOrBeam(beam, new ProjectFire(), dir,
                     Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8));
             }
             if (die < 76)
             {
-                saveGame.SpellEffects.DrainLife(dir, 75);
+                saveGame.DrainLife(dir, 75);
             }
             if (die < 81)
             {
-                saveGame.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 30 + (player.Level / 2), 2);
+                saveGame.FireBall(new ProjectElec(), dir, 30 + (player.Level / 2), 2);
             }
             if (die < 86)
             {
-                saveGame.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 40 + player.Level, 2);
+                saveGame.FireBall(new ProjectAcid(), dir, 40 + player.Level, 2);
             }
             if (die < 91)
             {
-                saveGame.SpellEffects.FireBall(new ProjectIce(SaveGame.Instance.SpellEffects), dir, 70 + player.Level, 3);
+                saveGame.FireBall(new ProjectIce(), dir, 70 + player.Level, 3);
             }
             if (die < 96)
             {
-                saveGame.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 80 + player.Level, 3);
+                saveGame.FireBall(new ProjectFire(), dir, 80 + player.Level, 3);
             }
             if (die < 101)
             {
-                saveGame.SpellEffects.DrainLife(dir, 100 + player.Level);
+                saveGame.DrainLife(dir, 100 + player.Level);
             }
             if (die < 104)
             {
-                saveGame.SpellEffects.Earthquake(player.MapY, player.MapX, 12);
+                saveGame.Earthquake(player.MapY, player.MapX, 12);
             }
             if (die < 106)
             {
-                saveGame.SpellEffects.DestroyArea(player.MapY, player.MapX, 15);
+                saveGame.DestroyArea(player.MapY, player.MapX, 15);
             }
             if (die < 108)
             {
-                saveGame.SpellEffects.Carnage(true);
+                saveGame.Carnage(true);
             }
             if (die < 110)
             {
-                saveGame.SpellEffects.DispelMonsters(120);
+                saveGame.DispelMonsters(120);
             }
-            saveGame.SpellEffects.DispelMonsters(150);
-            saveGame.SpellEffects.SlowMonsters();
-            saveGame.SpellEffects.SleepMonsters();
+            saveGame.DispelMonsters(150);
+            saveGame.SlowMonsters();
+            saveGame.SleepMonsters();
             player.RestoreHealth(300);
             if (die < 31)
             {

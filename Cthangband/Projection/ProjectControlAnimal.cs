@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectControlAnimal : Projectile
     {
-        public ProjectControlAnimal(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectControlAnimal()
         {
             BoltGraphic = "GreenBullet";
             ImpactGraphic = "";

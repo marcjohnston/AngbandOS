@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectPlasma : Projectile
     {
-        public ProjectPlasma(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectPlasma()
         {
             BoltGraphic = "BrightRedBolt";
             ImpactGraphic = "BrightRedSplat";
@@ -100,7 +100,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }
@@ -293,7 +293,7 @@ namespace Cthangband.Projection
             }
             if (!(Player.HasFireResistance || Player.TimedFireResistance != 0 || Player.HasFireImmunity))
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetAcidDestroy, 3);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetAcidDestroy, 3);
             }
             SaveGame.Disturb(true);
             return true;

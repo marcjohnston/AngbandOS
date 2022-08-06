@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.LightLine(direction);
+            SaveGame.Instance.LightLine(direction);
             return true;
         }
 

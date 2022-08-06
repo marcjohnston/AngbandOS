@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            if (saveGame.SpellEffects.BanishEvil(100))
+            if (saveGame.BanishEvil(100))
             {
                 Profile.Instance.MsgPrint("The power of your god banishes evil!");
             }

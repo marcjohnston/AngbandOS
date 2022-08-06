@@ -17,7 +17,6 @@ namespace Cthangband.Projection
         protected readonly Level Level;
         protected readonly Player Player;
         protected readonly SaveGame SaveGame;
-        protected readonly SpellEffectsHandler SpellEffects;
         protected string BoltGraphic = "WhiteBolt";
         protected string EffectAnimation = string.Empty;
         protected string ImpactGraphic = "WhiteSplat";
@@ -25,9 +24,8 @@ namespace Cthangband.Projection
         protected int ProjectMx;
         protected int ProjectMy;
 
-        public Projectile(SpellEffectsHandler spellEffectsHandler)
+        public Projectile()
         {
-            SpellEffects = spellEffectsHandler;
             SaveGame = SaveGame.Instance;
             Player = SaveGame.Player;
             Level = SaveGame.Level;

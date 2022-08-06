@@ -36,7 +36,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectCold(SaveGame.Instance.SpellEffects), dir,
+            SaveGame.Instance.FireBoltOrBeam(beam - 10, new ProjectCold(), dir,
                 Program.Rng.DiceRoll(5 + ((player.Level - 5) / 4), 8));
         }
 

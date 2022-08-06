@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectChaos : Projectile
     {
-        public ProjectChaos(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectChaos()
         {
             BoltGraphic = "PurpleBullet";
             ImpactGraphic = "PurpleSplat";
@@ -80,7 +80,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }
@@ -163,7 +163,7 @@ namespace Cthangband.Projection
             {
                 note = " is unaffected!";
                 bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
-                tmp = SpellEffects.PolymorphMonster(mPtr.Race);
+                tmp = SaveGame.Instance.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
                     note = " changes!";
@@ -342,8 +342,8 @@ namespace Cthangband.Projection
             }
             if (!Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetElecDestroy, 2);
-                Player.Inventory.InvenDamage(SpellEffects.SetFireDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetElecDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetFireDestroy, 2);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

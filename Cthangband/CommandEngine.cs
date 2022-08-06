@@ -130,7 +130,7 @@ namespace Cthangband
                 // Make the bolts into bolts of flame
                 Profile.Instance.MsgPrint("Your bolts are covered in a fiery aura!");
                 item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfFlame;
-                _saveGame.SpellEffects.Enchant(item, Program.Rng.RandomLessThan(3) + 4,
+                _saveGame.Enchant(item, Program.Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
                 // Quit after the first bolts have been upgraded
                 return;
@@ -195,7 +195,7 @@ namespace Cthangband
                 }
                 // Let the player know what happened
                 Profile.Instance.MsgPrint($"Your {itemName} {act}");
-                _saveGame.SpellEffects.Enchant(item, Program.Rng.RandomLessThan(3) + 4,
+                _saveGame.Enchant(item, Program.Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
             }
             else
@@ -221,21 +221,21 @@ namespace Cthangband
                 {
                     if (i - 5 != 0)
                     {
-                        _saveGame.SpellEffects.FireBall(new ProjectShard(SaveGame.Instance.SpellEffects), i, 175, 2);
+                        _saveGame.FireBall(new ProjectShard(), i, 175, 2);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        _saveGame.SpellEffects.FireBall(new ProjectMana(SaveGame.Instance.SpellEffects), i, 175, 3);
+                        _saveGame.FireBall(new ProjectMana(), i, 175, 3);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        _saveGame.SpellEffects.FireBall(new ProjectNuke(SaveGame.Instance.SpellEffects), i, 175, 4);
+                        _saveGame.FireBall(new ProjectNuke(), i, 175, 4);
                     }
                 }
             }
@@ -246,7 +246,7 @@ namespace Cthangband
                 string spell = Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
                 Profile.Instance.MsgPrint($"You {cast} the {spell} too close to a wall!");
                 Profile.Instance.MsgPrint("There is a loud explosion!");
-                _saveGame.SpellEffects.DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
+                _saveGame.DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
                 Profile.Instance.MsgPrint("The dungeon collapses...");
                 Player.TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
             }
@@ -1828,7 +1828,7 @@ namespace Cthangband
                     else if (chaosEffect && Program.Rng.DieRoll(2) == 1)
                     {
                         Profile.Instance.MsgPrint($"{monsterName} disappears!");
-                        _saveGame.SpellEffects.TeleportAway(tile.MonsterIndex, 50);
+                        _saveGame.TeleportAway(tile.MonsterIndex, 50);
                         // Can't have any more attacks because the monster isn't here any more
                         noExtra = true;
                         break;
@@ -1840,7 +1840,7 @@ namespace Cthangband
                         if (!((race.Flags1 & MonsterFlag1.Unique) != 0 || (race.Flags4 & MonsterFlag4.BreatheChaos) != 0 ||
                               (race.Flags1 & MonsterFlag1.Guardian) != 0))
                         {
-                            int newRaceIndex = _saveGame.SpellEffects.PolymorphMonster(monster.Race);
+                            int newRaceIndex = _saveGame.PolymorphMonster(monster.Race);
                             if (newRaceIndex != monster.Race.Index)
                             {
                                 Profile.Instance.MsgPrint($"{monsterName} changes!");
@@ -1881,7 +1881,7 @@ namespace Cthangband
             }
             if (doQuake)
             {
-                _saveGame.SpellEffects.Earthquake(Player.MapY, Player.MapX, 10);
+                _saveGame.Earthquake(Player.MapY, Player.MapX, 10);
             }
         }
 
@@ -2045,13 +2045,13 @@ namespace Cthangband
                                 // 1 in 3 chance of losing your memories after blacking out
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    _saveGame.SpellEffects.LoseAllInfo();
+                                    _saveGame.LoseAllInfo();
                                 }
                                 else
                                 {
                                     Level.WizDark();
                                 }
-                                _saveGame.SpellEffects.TeleportPlayer(100);
+                                _saveGame.TeleportPlayer(100);
                                 Level.WizDark();
                                 Profile.Instance.MsgPrint("You wake up somewhere with a sore head...");
                                 Profile.Instance.MsgPrint("You can't remember a thing, or how you got here!");
@@ -2604,14 +2604,14 @@ namespace Cthangband
                         Level.WizLight();
                         Player.TryIncreasingAbilityScore(Ability.Intelligence);
                         Player.TryIncreasingAbilityScore(Ability.Wisdom);
-                        _saveGame.SpellEffects.DetectTraps();
-                        _saveGame.SpellEffects.DetectDoors();
-                        _saveGame.SpellEffects.DetectStairs();
-                        _saveGame.SpellEffects.DetectTreasure();
-                        _saveGame.SpellEffects.DetectObjectsGold();
-                        _saveGame.SpellEffects.DetectObjectsNormal();
-                        _saveGame.SpellEffects.IdentifyPack();
-                        _saveGame.SpellEffects.SelfKnowledge();
+                        _saveGame.DetectTraps();
+                        _saveGame.DetectDoors();
+                        _saveGame.DetectStairs();
+                        _saveGame.DetectTreasure();
+                        _saveGame.DetectObjectsGold();
+                        _saveGame.DetectObjectsNormal();
+                        _saveGame.IdentifyPack();
+                        _saveGame.SelfKnowledge();
                         identified = true;
                         break;
                     }
@@ -2620,7 +2620,7 @@ namespace Cthangband
                     {
                         Profile.Instance.MsgPrint("You begin to know yourself a little better...");
                         Profile.Instance.MsgPrint(null);
-                        _saveGame.SpellEffects.SelfKnowledge();
+                        _saveGame.SelfKnowledge();
                         identified = true;
                         break;
                     }
@@ -2947,7 +2947,7 @@ namespace Cthangband
                     {
                         // Dispel monsters
                         Profile.Instance.MsgPrint("You are surrounded by a powerful aura.");
-                        _saveGame.SpellEffects.DispelMonsters(1000);
+                        _saveGame.DispelMonsters(1000);
                         break;
                     }
                 case 4:
@@ -2955,7 +2955,7 @@ namespace Cthangband
                 case 6:
                     {
                         // Do a 300 damage mana ball
-                        _saveGame.SpellEffects.FireBall(new ProjectMana(SaveGame.Instance.SpellEffects), direction, 300, 3);
+                        _saveGame.FireBall(new ProjectMana(), direction, 300, 3);
                         break;
                     }
                 case 7:
@@ -2964,7 +2964,7 @@ namespace Cthangband
                 case 10:
                     {
                         // Do a 250 damage mana bolt
-                        _saveGame.SpellEffects.FireBolt(new ProjectMana(SaveGame.Instance.SpellEffects), direction, 250);
+                        _saveGame.FireBolt(new ProjectMana(), direction, 250);
                         break;
                     }
             }
@@ -3016,7 +3016,7 @@ namespace Cthangband
         public void Rustproof()
         {
             // Get a piece of armour
-            _saveGame.ItemFilter = _saveGame.SpellEffects.ItemTesterHookArmour;
+            _saveGame.ItemFilter = _saveGame.ItemTesterHookArmour;
             if (!_saveGame.GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true))
             {
                 if (itemIndex == -2)
@@ -3352,12 +3352,12 @@ namespace Cthangband
             // Default to being randomly fire (66% chance) or cold (33% chance)
             if (Program.Rng.DieRoll(3) == 1)
             {
-                projectile = new ProjectCold(SaveGame.Instance.SpellEffects);
+                projectile = new ProjectCold();
                 projectileDescription = "cold";
             }
             else
             {
-                projectile = new ProjectFire(SaveGame.Instance.SpellEffects);
+                projectile = new ProjectFire();
                 projectileDescription = "fire";
             }
             TargetEngine targetEngine = new TargetEngine(Player, Level);
@@ -3369,9 +3369,9 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
                     {
                         Profile.Instance.MsgPrint("You examine your surroundings.");
-                        _saveGame.SpellEffects.DetectTraps();
-                        _saveGame.SpellEffects.DetectDoors();
-                        _saveGame.SpellEffects.DetectStairs();
+                        _saveGame.DetectTraps();
+                        _saveGame.DetectDoors();
+                        _saveGame.DetectStairs();
                     }
                     break;
                 // Hobbits can cook food
@@ -3389,7 +3389,7 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(5, 5 + (playerLevel / 5), Ability.Intelligence, 12))
                     {
                         Profile.Instance.MsgPrint("Blink!");
-                        _saveGame.SpellEffects.TeleportPlayer(10 + playerLevel);
+                        _saveGame.TeleportPlayer(10 + playerLevel);
                     }
                     break;
                 // Half-orcs can remove fear
@@ -3469,7 +3469,7 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
                     {
                         Profile.Instance.MsgPrint("You carefully draw The Yellow Sign...");
-                        _saveGame.SpellEffects.YellowSign();
+                        _saveGame.YellowSign();
                     }
                     break;
                 // Hlf-Ogres can go berserk
@@ -3491,7 +3491,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You bash at a stone wall.");
-                        _saveGame.SpellEffects.WallToMud(direction);
+                        _saveGame.WallToMud(direction);
                     }
                     break;
                 // Half-Titans can probe enemies
@@ -3499,7 +3499,7 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
                     {
                         Profile.Instance.MsgPrint("You examine your foes...");
-                        _saveGame.SpellEffects.Probing();
+                        _saveGame.Probing();
                     }
                     break;
                 // Cyclopes can throw boulders
@@ -3511,7 +3511,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You throw a huge boulder.");
-                        _saveGame.SpellEffects.FireBolt(new ProjectMissile(SaveGame.Instance.SpellEffects), direction,
+                        _saveGame.FireBolt(new ProjectMissile(), direction,
                             3 * Player.Level / 2);
                     }
                     break;
@@ -3524,7 +3524,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You make a horrible scream!");
-                        _saveGame.SpellEffects.FearMonster(direction, playerLevel);
+                        _saveGame.FearMonster(direction, playerLevel);
                     }
                     break;
                 // Klackons can spit acid
@@ -3538,11 +3538,11 @@ namespace Cthangband
                         Profile.Instance.MsgPrint("You spit acid.");
                         if (Player.Level < 25)
                         {
-                            _saveGame.SpellEffects.FireBolt(new ProjectAcid(SaveGame.Instance.SpellEffects), direction, playerLevel);
+                            _saveGame.FireBolt(new ProjectAcid(), direction, playerLevel);
                         }
                         else
                         {
-                            _saveGame.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), direction, playerLevel,
+                            _saveGame.FireBall(new ProjectAcid(), direction, playerLevel,
                                 2);
                         }
                     }
@@ -3556,7 +3556,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You throw a dart of poison.");
-                        _saveGame.SpellEffects.FireBolt(new ProjectPois(SaveGame.Instance.SpellEffects), direction, playerLevel);
+                        _saveGame.FireBolt(new ProjectPois(), direction, playerLevel);
                     }
                     break;
                 // Nibelungen can detect traps, doors, and stairs
@@ -3564,9 +3564,9 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
                     {
                         Profile.Instance.MsgPrint("You examine your surroundings.");
-                        _saveGame.SpellEffects.DetectTraps();
-                        _saveGame.SpellEffects.DetectDoors();
-                        _saveGame.SpellEffects.DetectStairs();
+                        _saveGame.DetectTraps();
+                        _saveGame.DetectDoors();
+                        _saveGame.DetectStairs();
                     }
                     break;
                 // Dark elves can cast magic missile
@@ -3578,7 +3578,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You cast a magic missile.");
-                        _saveGame.SpellEffects.FireBoltOrBeam(10, new ProjectMissile(SaveGame.Instance.SpellEffects),
+                        _saveGame.FireBoltOrBeam(10, new ProjectMissile(),
                             direction, Program.Rng.DiceRoll(3 + ((playerLevel - 1) / 5), 4));
                     }
                     break;
@@ -3595,12 +3595,12 @@ namespace Cthangband
                             case CharacterClass.ChosenOne:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectMissile(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectMissile();
                                     projectileDescription = "the elements";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectExplode(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectExplode();
                                     projectileDescription = "shards";
                                 }
                                 break;
@@ -3611,12 +3611,12 @@ namespace Cthangband
                             case CharacterClass.Channeler:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectMana(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectMana();
                                     projectileDescription = "mana";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectDisenchant(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectDisenchant();
                                     projectileDescription = "disenchantment";
                                 }
                                 break;
@@ -3625,12 +3625,12 @@ namespace Cthangband
                             case CharacterClass.Cultist:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectConfusion();
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectChaos(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectChaos();
                                     projectileDescription = "chaos";
                                 }
                                 break;
@@ -3638,12 +3638,12 @@ namespace Cthangband
                             case CharacterClass.Monk:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectConfusion();
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectSound(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectSound();
                                     projectileDescription = "sound";
                                 }
                                 break;
@@ -3652,12 +3652,12 @@ namespace Cthangband
                             case CharacterClass.Mystic:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectConfusion();
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectPsi(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectPsi();
                                     projectileDescription = "mental energy";
                                 }
                                 break;
@@ -3666,12 +3666,12 @@ namespace Cthangband
                             case CharacterClass.Paladin:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectHellFire(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectHellFire();
                                     projectileDescription = "hellfire";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectHolyFire(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectHolyFire();
                                     projectileDescription = "holy fire";
                                 }
                                 break;
@@ -3679,12 +3679,12 @@ namespace Cthangband
                             case CharacterClass.Rogue:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectDark(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectDark();
                                     projectileDescription = "darkness";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectPois(SaveGame.Instance.SpellEffects);
+                                    projectile = new ProjectPois();
                                     projectileDescription = "poison";
                                 }
                                 break;
@@ -3697,7 +3697,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint($"You breathe {projectileDescription}.");
-                        _saveGame.SpellEffects.FireBall(projectile, direction, Player.Level * 2, -(Player.Level / 15) + 1);
+                        _saveGame.FireBall(projectile, direction, Player.Level * 2, -(Player.Level / 15) + 1);
                     }
                     break;
                 // Mind Flayers can shoot psychic bolts
@@ -3709,7 +3709,7 @@ namespace Cthangband
                             break;
                         }
                         Profile.Instance.MsgPrint("You concentrate and your eyes glow red...");
-                        _saveGame.SpellEffects.FireBolt(new ProjectPsi(SaveGame.Instance.SpellEffects), direction, playerLevel);
+                        _saveGame.FireBolt(new ProjectPsi(), direction, playerLevel);
                     }
                     break;
                 // Imps can cast fire bolt/ball
@@ -3723,13 +3723,13 @@ namespace Cthangband
                         if (Player.Level >= 30)
                         {
                             Profile.Instance.MsgPrint("You cast a ball of fire.");
-                            _saveGame.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), direction, playerLevel,
+                            _saveGame.FireBall(new ProjectFire(), direction, playerLevel,
                                 2);
                         }
                         else
                         {
                             Profile.Instance.MsgPrint("You cast a bolt of fire.");
-                            _saveGame.SpellEffects.FireBolt(new ProjectFire(SaveGame.Instance.SpellEffects), direction, playerLevel);
+                            _saveGame.FireBolt(new ProjectFire(), direction, playerLevel);
                         }
                     }
                     break;
@@ -3767,7 +3767,7 @@ namespace Cthangband
                         }
                         Profile.Instance.MsgPrint("You grin and bare your fangs...");
                         int dummy = playerLevel + (Program.Rng.DieRoll(playerLevel) * Math.Max(1, playerLevel / 10));
-                        if (_saveGame.SpellEffects.DrainLife(direction, dummy))
+                        if (_saveGame.DrainLife(direction, dummy))
                         {
                             if (Player.Food < Constants.PyFoodFull)
                             {
@@ -3798,7 +3798,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        _saveGame.SpellEffects.FearMonster(direction, playerLevel);
+                        _saveGame.FearMonster(direction, playerLevel);
                     }
                     break;
                 // Sprites can sleep monsters
@@ -3808,11 +3808,11 @@ namespace Cthangband
                         Profile.Instance.MsgPrint("You throw some magic dust...");
                         if (Player.Level < 25)
                         {
-                            _saveGame.SpellEffects.SleepMonstersTouch();
+                            _saveGame.SleepMonstersTouch();
                         }
                         else
                         {
-                            _saveGame.SpellEffects.SleepMonsters();
+                            _saveGame.SleepMonsters();
                         }
                     }
                     break;
@@ -4008,13 +4008,13 @@ namespace Cthangband
                         break;
 
                     case MutationAttackType.Poison:
-                        _saveGame.SpellEffects.Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectPois(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill);
+                        _saveGame.Project(0, 0, monster.MapY, monster.MapX, damage,
+                            new ProjectPois(), ProjectionFlag.ProjectKill);
                         break;
 
                     case MutationAttackType.Hellfire:
-                        _saveGame.SpellEffects.Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectHellFire(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill);
+                        _saveGame.Project(0, 0, monster.MapY, monster.MapX, damage,
+                            new ProjectHellFire(), ProjectionFlag.ProjectKill);
                         break;
                 }
                 // The monster might hurt when we touch it
@@ -4203,7 +4203,7 @@ namespace Cthangband
                     {
                         // Teleport the player up to 100 squares
                         Profile.Instance.MsgPrint("You hit a teleport trap!");
-                        _saveGame.SpellEffects.TeleportPlayer(100);
+                        _saveGame.TeleportPlayer(100);
                         break;
                     }
                 case "FireTrap":
@@ -4211,7 +4211,7 @@ namespace Cthangband
                         // Do 4d6 fire damage
                         Profile.Instance.MsgPrint("You are enveloped in flames!");
                         damage = Program.Rng.DiceRoll(4, 6);
-                        _saveGame.SpellEffects.FireDam(damage, "a fire trap");
+                        _saveGame.FireDam(damage, "a fire trap");
                         break;
                     }
                 case "AcidTrap":
@@ -4219,7 +4219,7 @@ namespace Cthangband
                         // Do 4d6 acid damage
                         Profile.Instance.MsgPrint("You are splashed with acid!");
                         damage = Program.Rng.DiceRoll(4, 6);
-                        _saveGame.SpellEffects.AcidDam(damage, "an acid trap");
+                        _saveGame.AcidDam(damage, "an acid trap");
                         break;
                     }
                 case "SlowDart":

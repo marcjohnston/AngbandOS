@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectWater : Projectile
     {
-        public ProjectWater(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectWater()
         {
             BoltGraphic = "BlueSplat";
             ImpactGraphic = "BlueSplat";
@@ -224,7 +224,7 @@ namespace Cthangband.Projection
             }
             if (Program.Rng.DieRoll(5) == 1)
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 3);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 3);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectElec : Projectile
     {
-        public ProjectElec(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectElec()
         {
             BoltGraphic = "BrightYellowBolt";
             ImpactGraphic = "";
@@ -91,7 +91,7 @@ namespace Cthangband.Projection
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }
@@ -272,7 +272,7 @@ namespace Cthangband.Projection
             {
                 Profile.Instance.MsgPrint("You are hit by lightning!");
             }
-            SpellEffects.ElecDam(dam, killer);
+            SaveGame.Instance.ElecDam(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

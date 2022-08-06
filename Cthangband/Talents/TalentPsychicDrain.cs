@@ -29,7 +29,7 @@ namespace Cthangband.Talents
                 return;
             }
             int i = Program.Rng.DiceRoll(player.Level / 2, 6);
-            if (SaveGame.Instance.SpellEffects.FireBall(new ProjectPsiDrain(SaveGame.Instance.SpellEffects), dir, i, 0 + ((player.Level - 25) / 10)))
+            if (SaveGame.Instance.FireBall(new ProjectPsiDrain(), dir, i, 0 + ((player.Level - 25) / 10)))
             {
                 player.Energy -= Program.Rng.DieRoll(150);
             }

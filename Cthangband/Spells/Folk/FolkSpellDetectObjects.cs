@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Folk
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DetectObjectsNormal();
+            saveGame.DetectObjectsNormal();
         }
 
         public override void Initialise(int characterClass)

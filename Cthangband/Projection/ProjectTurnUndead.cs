@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectTurnUndead : Projectile
     {
-        public ProjectTurnUndead(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectTurnUndead()
         {
             BoltGraphic = "";
             ImpactGraphic = "";

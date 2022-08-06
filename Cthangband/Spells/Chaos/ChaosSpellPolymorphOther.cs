@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Chaos
             {
                 return;
             }
-            saveGame.SpellEffects.PolyMonster(dir);
+            saveGame.PolyMonster(dir);
         }
 
         public override void Initialise(int characterClass)

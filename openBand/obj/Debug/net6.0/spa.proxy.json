@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:44477",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Users\\Marc\\source\\repos\\Cthangband\\openBand\\ClientApp\\",
+"MaxTimeoutInSeconds": "120"
+}
+}

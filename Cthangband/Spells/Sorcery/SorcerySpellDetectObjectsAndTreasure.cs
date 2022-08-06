@@ -15,9 +15,9 @@ namespace Cthangband.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DetectObjectsNormal();
-            saveGame.SpellEffects.DetectTreasure();
-            saveGame.SpellEffects.DetectObjectsGold();
+            saveGame.DetectObjectsNormal();
+            saveGame.DetectTreasure();
+            saveGame.DetectObjectsGold();
         }
 
         public override void Initialise(int characterClass)

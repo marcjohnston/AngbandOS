@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectDisenchant : Projectile
     {
-        public ProjectDisenchant(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectDisenchant()
         {
             BoltGraphic = "ChartreuseSplat";
             ImpactGraphic = "ChartreuseSplat";
@@ -212,7 +212,7 @@ namespace Cthangband.Projection
             }
             else
             {
-                SpellEffects.ApplyDisenchant();
+                SaveGame.Instance.ApplyDisenchant();
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

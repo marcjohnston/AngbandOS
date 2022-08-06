@@ -25,7 +25,7 @@ namespace Cthangband.Talents
             TargetEngine targetEngine = new TargetEngine(player, level);
             if (player.Level < 25)
             {
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
             else
             {
@@ -42,11 +42,11 @@ namespace Cthangband.Talents
                 {
                     Profile.Instance.MsgPrint("Something disrupts your concentration!");
                     player.Energy -= 100;
-                    SaveGame.Instance.SpellEffects.TeleportPlayer(20);
+                    SaveGame.Instance.TeleportPlayer(20);
                 }
                 else
                 {
-                    SaveGame.Instance.SpellEffects.TeleportPlayerTo(j, i);
+                    SaveGame.Instance.TeleportPlayerTo(j, i);
                 }
             }
         }

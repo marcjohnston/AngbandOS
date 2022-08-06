@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectNuke : Projectile
     {
-        public ProjectNuke(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectNuke()
         {
             BoltGraphic = "BrightChartreuseSplat";
             ImpactGraphic = "";
@@ -113,7 +113,7 @@ namespace Cthangband.Projection
             {
                 note = " is unaffected!";
                 bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
-                int tmp = SpellEffects.PolymorphMonster(mPtr.Race);
+                int tmp = SaveGame.Instance.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
                     note = " changes!";
@@ -262,7 +262,7 @@ namespace Cthangband.Projection
                 }
                 if (Program.Rng.DieRoll(6) == 1)
                 {
-                    Player.Inventory.InvenDamage(SpellEffects.SetAcidDestroy, 2);
+                    Player.Inventory.InvenDamage(SaveGame.Instance.SetAcidDestroy, 2);
                 }
             }
             SaveGame.Disturb(true);

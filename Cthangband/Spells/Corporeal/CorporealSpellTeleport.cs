@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.TeleportPlayer(player.Level * 3);
+            saveGame.TeleportPlayer(player.Level * 3);
         }
 
         public override void Initialise(int characterClass)

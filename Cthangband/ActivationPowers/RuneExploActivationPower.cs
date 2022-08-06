@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.YellowSign();
+            SaveGame.Instance.YellowSign();
             return true;
         }
 

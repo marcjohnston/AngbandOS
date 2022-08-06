@@ -27,12 +27,12 @@ namespace Cthangband.Talents
             Profile.Instance.MsgPrint("Mind-warping forces emanate from your brain!");
             if (player.Level < 25)
             {
-                saveGame.SpellEffects.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, player.Level * 3 / 2,
-                    new ProjectPsi(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill);
+                saveGame.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, player.Level * 3 / 2,
+                    new ProjectPsi(), ProjectionFlag.ProjectKill);
             }
             else
             {
-                saveGame.SpellEffects.MindblastMonsters(player.Level * (((player.Level - 5) / 10) + 1));
+                saveGame.MindblastMonsters(player.Level * (((player.Level - 5) / 10) + 1));
             }
         }
 

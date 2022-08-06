@@ -189,7 +189,7 @@ namespace Cthangband.Commands
                 if (hitBody || !level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
                     Profile.Instance.MsgPrint($"The {missileName} shatters!");
-                    if (SaveGame.Instance.SpellEffects.PotionSmashEffect(1, y, x, missile.ItemSubCategory))
+                    if (SaveGame.Instance.PotionSmashEffect(1, y, x, missile.ItemSubCategory))
                     {
                         if (level.Grid[y][x].MonsterIndex != 0 &&
                             (level.Monsters[level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)

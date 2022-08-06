@@ -386,7 +386,7 @@ namespace Cthangband
             }
             if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
             {
-                if (SaveGame.Instance.SpellEffects.LoseAllInfo())
+                if (SaveGame.Instance.LoseAllInfo())
                 {
                     Profile.Instance.MsgPrint("You forget everything in your utmost terror!");
                 }

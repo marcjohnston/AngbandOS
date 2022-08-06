@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectHellFire(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBall(new ProjectHellFire(), dir,
                 Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3), 0);
             if (Program.Rng.DieRoll(5) != 1)
             {
@@ -30,17 +30,17 @@ namespace Cthangband.Spells.Death
             int dummy = Program.Rng.DieRoll(1000);
             if (dummy == 666)
             {
-                saveGame.SpellEffects.FireBolt(new ProjectDeathRay(SaveGame.Instance.SpellEffects), dir, player.Level);
+                saveGame.FireBolt(new ProjectDeathRay(), dir, player.Level);
             }
             if (dummy < 500)
             {
-                saveGame.SpellEffects.FireBolt(new ProjectTurnAll(SaveGame.Instance.SpellEffects), dir, player.Level);
+                saveGame.FireBolt(new ProjectTurnAll(), dir, player.Level);
             }
             if (dummy < 800)
             {
-                saveGame.SpellEffects.FireBolt(new ProjectOldConf(SaveGame.Instance.SpellEffects), dir, player.Level);
+                saveGame.FireBolt(new ProjectOldConf(), dir, player.Level);
             }
-            saveGame.SpellEffects.FireBolt(new ProjectStun(SaveGame.Instance.SpellEffects), dir, player.Level);
+            saveGame.FireBolt(new ProjectStun(), dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

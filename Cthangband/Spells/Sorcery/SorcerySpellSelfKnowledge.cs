@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.SelfKnowledge();
+            saveGame.SelfKnowledge();
         }
 
         public override void Initialise(int characterClass)

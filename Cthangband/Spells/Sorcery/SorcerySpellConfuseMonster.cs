@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Sorcery
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.ConfuseMonster(dir, player.Level * 3 / 2);
+            SaveGame.Instance.ConfuseMonster(dir, player.Level * 3 / 2);
         }
 
         public override void Initialise(int characterClass)

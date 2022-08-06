@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.LightArea(Program.Rng.DiceRoll(2, player.Level / 2), (player.Level / 10) + 1);
+            saveGame.LightArea(Program.Rng.DiceRoll(2, player.Level / 2), (player.Level / 10) + 1);
             if (player.RaceIndex != RaceId.Vampire || player.HasLightResistance)
             {
                 return;

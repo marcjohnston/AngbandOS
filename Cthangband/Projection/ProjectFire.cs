@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectFire : Projectile
     {
-        public ProjectFire(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectFire()
         {
             BoltGraphic = "RedBolt";
             ImpactGraphic = "RedSplat";
@@ -88,7 +88,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }
@@ -273,7 +273,7 @@ namespace Cthangband.Projection
             {
                 Profile.Instance.MsgPrint("You are hit by fire!");
             }
-            SpellEffects.FireDam(dam, killer);
+            SaveGame.Instance.FireDam(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

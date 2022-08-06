@@ -16,10 +16,10 @@ namespace Cthangband.Spells.Nature
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
             level.MapArea();
-            saveGame.SpellEffects.DetectTraps();
-            saveGame.SpellEffects.DetectDoors();
-            saveGame.SpellEffects.DetectStairs();
-            saveGame.SpellEffects.DetectMonstersNormal();
+            saveGame.DetectTraps();
+            saveGame.DetectDoors();
+            saveGame.DetectStairs();
+            saveGame.DetectMonstersNormal();
         }
 
         public override void Initialise(int characterClass)

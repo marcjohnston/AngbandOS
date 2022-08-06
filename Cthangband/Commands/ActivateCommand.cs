@@ -101,7 +101,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.StarEssenceOfPolaris:
                         {
                             Profile.Instance.MsgPrint("The essence wells with clear light...");
-                            SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+                            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(10) + 10;
                             break;
                         }
@@ -110,7 +110,7 @@ namespace Cthangband.Commands
                         {
                             Profile.Instance.MsgPrint("The essence shines brightly...");
                             level.MapArea();
-                            SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+                            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
@@ -122,9 +122,9 @@ namespace Cthangband.Commands
                             level.WizLight();
                             Profile.Instance.MsgPrint("The gemstone drains your vitality...");
                             player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-                            SaveGame.Instance.SpellEffects.DetectTraps();
-                            SaveGame.Instance.SpellEffects.DetectDoors();
-                            SaveGame.Instance.SpellEffects.DetectStairs();
+                            SaveGame.Instance.DetectTraps();
+                            SaveGame.Instance.DetectDoors();
+                            SaveGame.Instance.DetectStairs();
                             if (Gui.GetCheck("Activate recall? "))
                             {
                                 player.ToggleRecall();
@@ -145,7 +145,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.AmuletOfAbdulAlhazred:
                         {
                             Profile.Instance.MsgPrint("The amulet floods the area with goodness...");
-                            SaveGame.Instance.SpellEffects.DispelEvil(player.Level * 5);
+                            SaveGame.Instance.DispelEvil(player.Level * 5);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -157,7 +157,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            if (SaveGame.Instance.SpellEffects.DrainLife(dir, 100))
+                            if (SaveGame.Instance.DrainLife(dir, 100))
                             {
                                 item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
                             }
@@ -186,7 +186,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 120, 3);
+                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 120, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
                             break;
                         }
@@ -198,7 +198,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 200, 3);
+                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 200, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(325) + 325;
                             break;
                         }
@@ -210,7 +210,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 250, 3);
+                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 250, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(425) + 425;
                             break;
                         }
@@ -232,7 +232,7 @@ namespace Cthangband.Commands
                             Profile.Instance.MsgPrint("Your armor is surrounded by lightning...");
                             for (int i = 0; i < 8; i++)
                             {
-                                SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), level.OrderedDirection[i], 150, 3);
+                                SaveGame.Instance.FireBall(new ProjectElec(), level.OrderedDirection[i], 150, 3);
                             }
                             item.RechargeTimeLeft = 1000;
                             break;
@@ -245,7 +245,7 @@ namespace Cthangband.Commands
                                 return;
                             }
                             Profile.Instance.MsgPrint("You breathe the elements.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectMissile(SaveGame.Instance.SpellEffects), dir, 300, 4);
+                            SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, 4);
                             Profile.Instance.MsgPrint("Your armor glows many colors...");
                             player.SetTimedFear(0);
                             player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
@@ -287,7 +287,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ArmourOfTheOrcs:
                         {
                             Profile.Instance.MsgPrint("Your armor glows deep blue...");
-                            SaveGame.Instance.SpellEffects.Carnage(true);
+                            SaveGame.Instance.Carnage(true);
                             item.RechargeTimeLeft = 500;
                             break;
                         }
@@ -295,7 +295,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.ArmourOfTheOgreLords:
                         {
                             Profile.Instance.MsgPrint("Your armor glows bright red...");
-                            SaveGame.Instance.SpellEffects.DestroyDoorsTouch();
+                            SaveGame.Instance.DestroyDoorsTouch();
                             item.RechargeTimeLeft = 10;
                             break;
                         }
@@ -303,7 +303,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.DragonHelmOfPower:
                     case FixedArtifactId.HelmTerrorMask:
                         {
-                            SaveGame.Instance.SpellEffects.TurnMonsters(40 + player.Level);
+                            SaveGame.Instance.TurnMonsters(40 + player.Level);
                             item.RechargeTimeLeft = 3 * (player.Level + 10);
                             break;
                         }
@@ -312,7 +312,7 @@ namespace Cthangband.Commands
                         {
                             Profile.Instance.MsgPrint("Your helm glows bright white...");
                             Profile.Instance.MsgPrint("An image forms in your mind...");
-                            SaveGame.Instance.SpellEffects.DetectAll();
+                            SaveGame.Instance.DetectAll();
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
                             break;
                         }
@@ -342,7 +342,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.CloakDarkness:
                         {
                             Profile.Instance.MsgPrint("Your cloak glows deep blue...");
-                            SaveGame.Instance.SpellEffects.SleepMonstersTouch();
+                            SaveGame.Instance.SleepMonstersTouch();
                             item.RechargeTimeLeft = 55;
                             break;
                         }
@@ -350,7 +350,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.CloakOfTheSwashbuckler:
                         {
                             Profile.Instance.MsgPrint("Your cloak glows bright yellow...");
-                            SaveGame.Instance.SpellEffects.Recharge(60);
+                            SaveGame.Instance.Recharge(60);
                             item.RechargeTimeLeft = 70;
                             break;
                         }
@@ -358,7 +358,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.CloakShifter:
                         {
                             Profile.Instance.MsgPrint("Your cloak twists space around you...");
-                            SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                            SaveGame.Instance.TeleportPlayer(100);
                             item.RechargeTimeLeft = 45;
                             break;
                         }
@@ -378,7 +378,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectMissile(SaveGame.Instance.SpellEffects), dir,
+                            SaveGame.Instance.FireBolt(new ProjectMissile(), dir,
                                 Program.Rng.DiceRoll(2, 6));
                             item.RechargeTimeLeft = 2;
                             break;
@@ -391,7 +391,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectFire(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(9, 8));
+                            SaveGame.Instance.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
@@ -403,7 +403,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectCold(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(6, 8));
+                            SaveGame.Instance.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
@@ -415,7 +415,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectElec(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(4, 8));
+                            SaveGame.Instance.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
@@ -427,7 +427,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(5, 8));
+                            SaveGame.Instance.FireBolt(new ProjectAcid(), dir, Program.Rng.DiceRoll(5, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
@@ -439,7 +439,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectArrow(SaveGame.Instance.SpellEffects), dir, 150);
+                            SaveGame.Instance.FireBolt(new ProjectArrow(), dir, 150);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
                             break;
                         }
@@ -475,7 +475,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectFire(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(9, 8));
+                            SaveGame.Instance.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
@@ -487,7 +487,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectCold(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(6, 8));
+                            SaveGame.Instance.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
@@ -499,7 +499,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBolt(new ProjectElec(SaveGame.Instance.SpellEffects), dir, Program.Rng.DiceRoll(4, 8));
+                            SaveGame.Instance.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
@@ -511,7 +511,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects), dir, 12, 3);
+                            SaveGame.Instance.FireBall(new ProjectPois(), dir, 12, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
                             break;
                         }
@@ -523,7 +523,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 48, 2);
+                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
@@ -537,7 +537,7 @@ namespace Cthangband.Commands
                                 case 3:
                                 case 4:
                                 case 5:
-                                    SaveGame.Instance.SpellEffects.TeleportPlayer(10);
+                                    SaveGame.Instance.TeleportPlayer(10);
                                     break;
 
                                 case 6:
@@ -545,12 +545,12 @@ namespace Cthangband.Commands
                                 case 8:
                                 case 9:
                                 case 10:
-                                    SaveGame.Instance.SpellEffects.TeleportPlayer(222);
+                                    SaveGame.Instance.TeleportPlayer(222);
                                     break;
 
                                 case 11:
                                 case 12:
-                                    SaveGame.Instance.SpellEffects.StairCreation();
+                                    SaveGame.Instance.StairCreation();
                                     break;
 
                                 default:
@@ -577,7 +577,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 100, 2);
+                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 100, 2);
                             item.RechargeTimeLeft = 300;
                             break;
                         }
@@ -598,7 +598,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 72, 2);
+                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
@@ -610,7 +610,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.DrainLife(dir, 120);
+                            SaveGame.Instance.DrainLife(dir, 120);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
@@ -622,7 +622,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 100, 3);
+                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 100, 3);
                             item.RechargeTimeLeft = 500;
                             break;
                         }
@@ -634,7 +634,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.WallToMud(dir);
+                            SaveGame.Instance.WallToMud(dir);
                             item.RechargeTimeLeft = 5;
                             break;
                         }
@@ -642,7 +642,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.AxeOfTheTrolls:
                         {
                             Profile.Instance.MsgPrint("Your axe lets out a long, shrill note...");
-                            SaveGame.Instance.SpellEffects.MassCarnage(true);
+                            SaveGame.Instance.MassCarnage(true);
                             item.RechargeTimeLeft = 1000;
                             break;
                         }
@@ -663,7 +663,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.TeleportMonster(dir);
+                            SaveGame.Instance.TeleportMonster(dir);
                             item.RechargeTimeLeft = 150;
                             break;
                         }
@@ -683,7 +683,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.ConfuseMonster(dir, 20);
+                            SaveGame.Instance.ConfuseMonster(dir, 20);
                             item.RechargeTimeLeft = 15;
                             break;
                         }
@@ -695,7 +695,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 72, 3);
+                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 3);
                             item.RechargeTimeLeft = 100;
                             break;
                         }
@@ -718,7 +718,7 @@ namespace Cthangband.Commands
                     case FixedArtifactId.QuarterstaffEriril:
                         {
                             Profile.Instance.MsgPrint("Your quarterstaff glows yellow...");
-                            if (!SaveGame.Instance.SpellEffects.IdentifyItem())
+                            if (!SaveGame.Instance.IdentifyItem())
                             {
                                 return;
                             }
@@ -729,9 +729,9 @@ namespace Cthangband.Commands
                     case FixedArtifactId.QuarterstaffOfAtal:
                         {
                             Profile.Instance.MsgPrint("Your quarterstaff glows brightly...");
-                            SaveGame.Instance.SpellEffects.DetectAll();
-                            SaveGame.Instance.SpellEffects.Probing();
-                            SaveGame.Instance.SpellEffects.IdentifyFully();
+                            SaveGame.Instance.DetectAll();
+                            SaveGame.Instance.Probing();
+                            SaveGame.Instance.IdentifyFully();
                             item.RechargeTimeLeft = 1000;
                             break;
                         }
@@ -743,7 +743,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            SaveGame.Instance.SpellEffects.DrainLife(dir, 90);
+                            SaveGame.Instance.DrainLife(dir, 90);
                             item.RechargeTimeLeft = 70;
                             break;
                         }
@@ -762,7 +762,7 @@ namespace Cthangband.Commands
             // weapon teleports you
             if (item.RareItemTypeIndex == Enumerations.RareItemType.WeaponPlanarWeapon)
             {
-                SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                SaveGame.Instance.TeleportPlayer(100);
                 item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
                 return;
             }
@@ -778,35 +778,35 @@ namespace Cthangband.Commands
                     case DragonArmour.SvDragonBlue:
                         {
                             Profile.Instance.MsgPrint("You breathe lightning.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 100, -2);
+                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 100, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
                             Profile.Instance.MsgPrint("You breathe frost.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 110, -2);
+                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 110, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
                             Profile.Instance.MsgPrint("You breathe acid.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 130, -2);
+                            SaveGame.Instance.FireBall(new ProjectAcid(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
                             Profile.Instance.MsgPrint("You breathe poison gas.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects), dir, 150, -2);
+                            SaveGame.Instance.FireBall(new ProjectPois(), dir, 150, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
                             Profile.Instance.MsgPrint("You breathe fire.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 200, -2);
+                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -820,27 +820,27 @@ namespace Cthangband.Commands
                             switch (chance)
                             {
                                 case 0:
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects),
+                                    SaveGame.Instance.FireBall(new ProjectFire(),
                                         dir, 250, -2);
                                     break;
 
                                 case 1:
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects),
+                                    SaveGame.Instance.FireBall(new ProjectElec(),
                                         dir, 250, -2);
                                     break;
 
                                 case 2:
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects),
+                                    SaveGame.Instance.FireBall(new ProjectCold(),
                                         dir, 250, -2);
                                     break;
 
                                 case 3:
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects),
+                                    SaveGame.Instance.FireBall(new ProjectAcid(),
                                         dir, 250, -2);
                                     break;
 
                                 case 4:
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects),
+                                    SaveGame.Instance.FireBall(new ProjectPois(),
                                         dir, 250, -2);
                                     break;
                             }
@@ -850,14 +850,14 @@ namespace Cthangband.Commands
                     case DragonArmour.SvDragonBronze:
                         {
                             Profile.Instance.MsgPrint("You breathe confusion.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectConfusion(SaveGame.Instance.SpellEffects), dir, 120, -2);
+                            SaveGame.Instance.FireBall(new ProjectConfusion(), dir, 120, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
                             Profile.Instance.MsgPrint("You breathe sound.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectSound(SaveGame.Instance.SpellEffects), dir, 130, -2);
+                            SaveGame.Instance.FireBall(new ProjectSound(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -866,8 +866,8 @@ namespace Cthangband.Commands
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "chaos" : "disenchantment";
                             Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.SpellEffects.FireBall(
-                                projectile: chance == 1 ? (Projectile)new ProjectChaos(SaveGame.Instance.SpellEffects) : new ProjectDisenchant(SaveGame.Instance.SpellEffects), dir: dir, dam: 220, rad: -2);
+                            SaveGame.Instance.FireBall(
+                                projectile: chance == 1 ? (Projectile)new ProjectChaos() : new ProjectDisenchant(), dir: dir, dam: 220, rad: -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -876,8 +876,8 @@ namespace Cthangband.Commands
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "sound" : "shards";
                             Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.SpellEffects.FireBall(
-                                chance == 1 ? (Projectile)new ProjectSound(SaveGame.Instance.SpellEffects) : new ProjectExplode(SaveGame.Instance.SpellEffects), dir, 230, -2);
+                            SaveGame.Instance.FireBall(
+                                chance == 1 ? (Projectile)new ProjectSound() : new ProjectExplode(), dir, 230, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -888,12 +888,12 @@ namespace Cthangband.Commands
                                 ? "chaos"
                                 : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
                             Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.SpellEffects.FireBall(
+                            SaveGame.Instance.FireBall(
                                 chance == 1
-                                    ? new ProjectChaos(SaveGame.Instance.SpellEffects)
+                                    ? new ProjectChaos()
                                     : (chance == 2
-                                        ? new ProjectDisenchant(SaveGame.Instance.SpellEffects)
-                                        : (chance == 3 ? (Projectile)new ProjectSound(SaveGame.Instance.SpellEffects) : new ProjectExplode(SaveGame.Instance.SpellEffects))), dir, 250, -2);
+                                        ? new ProjectDisenchant()
+                                        : (chance == 3 ? (Projectile)new ProjectSound() : new ProjectExplode())), dir, 250, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -902,15 +902,15 @@ namespace Cthangband.Commands
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 0 ? "light" : "darkness";
                             Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.SpellEffects.FireBall(
-                                chance == 0 ? (Projectile)new ProjectLight(SaveGame.Instance.SpellEffects) : new ProjectDark(SaveGame.Instance.SpellEffects), dir, 200, -2);
+                            SaveGame.Instance.FireBall(
+                                chance == 0 ? (Projectile)new ProjectLight() : new ProjectDark(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonPower:
                         {
                             Profile.Instance.MsgPrint("You breathe the elements.");
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectMissile(SaveGame.Instance.SpellEffects), dir, 300, -3);
+                            SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, -3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -928,21 +928,21 @@ namespace Cthangband.Commands
                 {
                     case RingType.Acid:
                         {
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 50, 2);
+                            SaveGame.Instance.FireBall(new ProjectAcid(), dir, 50, 2);
                             player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 50, 2);
+                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 50, 2);
                             player.SetTimedColdResistance(player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
-                            SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 50, 2);
+                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 50, 2);
                             player.SetTimedFireResistance(player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;

@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.DetectAll();
-            SaveGame.Instance.SpellEffects.Probing();
-            SaveGame.Instance.SpellEffects.IdentifyFully();
+            SaveGame.Instance.DetectAll();
+            SaveGame.Instance.Probing();
+            SaveGame.Instance.IdentifyFully();
             return true;
         }
 

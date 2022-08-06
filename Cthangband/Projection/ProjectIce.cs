@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectIce : Projectile
     {
-        public ProjectIce(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectIce()
         {
             BoltGraphic = "DiamondBolt";
             ImpactGraphic = "DiamondSplat";
@@ -83,7 +83,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }
@@ -285,7 +285,7 @@ namespace Cthangband.Projection
             {
                 Profile.Instance.MsgPrint("You are hit by something sharp and cold!");
             }
-            SpellEffects.ColdDam(dam, killer);
+            SaveGame.Instance.ColdDam(dam, killer);
             if (!Player.HasShardResistance)
             {
                 Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DiceRoll(5, 8));
@@ -298,7 +298,7 @@ namespace Cthangband.Projection
             {
                 if (!Player.HasColdImmunity)
                 {
-                    Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 3);
+                    Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 3);
                 }
             }
             SaveGame.Disturb(true);

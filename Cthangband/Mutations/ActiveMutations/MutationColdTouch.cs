@@ -33,7 +33,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 Profile.Instance.MsgPrint("You wave your hands in the air.");
                 return;
             }
-            saveGame.SpellEffects.FireBolt(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 2 * player.Level);
+            saveGame.FireBolt(new ProjectCold(), dir, 2 * player.Level);
         }
 
         public override string ActivationSummary(int lvl)

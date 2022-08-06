@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Death
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DispelLiving(player.Level * 3);
+            saveGame.DispelLiving(player.Level * 3);
         }
 
         public override void Initialise(int characterClass)

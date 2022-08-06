@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.CharmAnimal(dir, player.Level);
+            SaveGame.Instance.CharmAnimal(dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

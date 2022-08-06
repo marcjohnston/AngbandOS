@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.CharmMonster(direction, player.Level);
+            SaveGame.Instance.CharmMonster(direction, player.Level);
             return true;
         }
 

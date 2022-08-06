@@ -33,7 +33,7 @@ namespace Cthangband.Mutations.RandomMutations
             saveGame.Disturb(false);
             Profile.Instance.MsgPrint("Your position suddenly seems very uncertain...");
             Profile.Instance.MsgPrint(null);
-            saveGame.SpellEffects.TeleportPlayer(40);
+            saveGame.TeleportPlayer(40);
         }
     }
 }

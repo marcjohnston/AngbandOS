@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Folk
             {
                 return;
             }
-            saveGame.SpellEffects.WizardLock(dir);
+            saveGame.WizardLock(dir);
         }
 
         public override void Initialise(int characterClass)

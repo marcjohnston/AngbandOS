@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Folk
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.TeleportPlayer(player.Level * 5);
+            saveGame.TeleportPlayer(player.Level * 5);
         }
 
         public override void Initialise(int characterClass)

@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.IdentifyFully();
+            saveGame.IdentifyFully();
         }
 
         public override void Initialise(int characterClass)

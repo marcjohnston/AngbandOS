@@ -17,14 +17,14 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.Project(0, 1, player.MapY, player.MapX, 777, new ProjectHolyFire(SaveGame.Instance.SpellEffects),
+            saveGame.Project(0, 1, player.MapY, player.MapX, 777, new ProjectHolyFire(),
                 ProjectionFlag.ProjectKill);
-            saveGame.SpellEffects.DispelMonsters(player.Level * 4);
-            saveGame.SpellEffects.SlowMonsters();
-            saveGame.SpellEffects.StunMonsters(player.Level * 4);
-            saveGame.SpellEffects.ConfuseMonsters(player.Level * 4);
-            saveGame.SpellEffects.TurnMonsters(player.Level * 4);
-            saveGame.SpellEffects.StasisMonsters(player.Level * 4);
+            saveGame.DispelMonsters(player.Level * 4);
+            saveGame.SlowMonsters();
+            saveGame.StunMonsters(player.Level * 4);
+            saveGame.ConfuseMonsters(player.Level * 4);
+            saveGame.TurnMonsters(player.Level * 4);
+            saveGame.StasisMonsters(player.Level * 4);
             level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonCthuloid, true);
             player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
             player.RestoreHealth(300);

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectPois : Projectile
     {
-        public ProjectPois(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectPois()
         {
             BoltGraphic = "GreenBullet";
             ImpactGraphic = "GreenSplat";
@@ -216,7 +216,7 @@ namespace Cthangband.Projection
                 dam = (dam + 2) / 3;
             }
             if (!(Player.TimedPoisonResistance != 0 || Player.HasPoisonResistance) &&
-                Program.Rng.DieRoll(SpellEffectsHandler.HurtChance) == 1)
+                Program.Rng.DieRoll(SaveGame.HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Constitution);
             }

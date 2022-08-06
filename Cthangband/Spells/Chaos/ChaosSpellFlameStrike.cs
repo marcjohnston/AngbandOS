@@ -16,7 +16,7 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), 0, 150 + (2 * player.Level), 8);
+            saveGame.FireBall(new ProjectFire(), 0, 150 + (2 * player.Level), 8);
         }
 
         public override void Initialise(int characterClass)

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectShard : Projectile
     {
-        public ProjectShard(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectShard()
         {
             BoltGraphic = "BrightBrownSplat";
             ImpactGraphic = "BrightBrownSplat";
@@ -218,7 +218,7 @@ namespace Cthangband.Projection
             }
             if (!Player.HasShardResistance || Program.Rng.DieRoll(12) == 1)
             {
-                Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 3);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 3);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

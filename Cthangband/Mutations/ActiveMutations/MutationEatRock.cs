@@ -61,7 +61,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 Profile.Instance.MsgPrint("This granite is very filling!");
                 player.SetFood(player.Food + 10000);
             }
-            saveGame.SpellEffects.WallToMud(dir);
+            saveGame.WallToMud(dir);
             int oy = player.MapY;
             int ox = player.MapX;
             player.MapY = y;

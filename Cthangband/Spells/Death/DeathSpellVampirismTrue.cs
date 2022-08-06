@@ -22,7 +22,7 @@ namespace Cthangband.Spells.Death
             }
             for (int dummy = 0; dummy < 3; dummy++)
             {
-                if (saveGame.SpellEffects.DrainLife(dir, 100))
+                if (saveGame.DrainLife(dir, 100))
                 {
                     player.RestoreHealth(100);
                 }

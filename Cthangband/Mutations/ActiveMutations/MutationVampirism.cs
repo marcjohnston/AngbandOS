@@ -24,7 +24,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            if (SaveGame.Instance.SpellEffects.DrainLife(dir, player.Level * 2))
+            if (SaveGame.Instance.DrainLife(dir, player.Level * 2))
             {
                 player.RestoreHealth(player.Level + Program.Rng.DieRoll(player.Level));
             }

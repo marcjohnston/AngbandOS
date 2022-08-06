@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Chaos
             {
                 return;
             }
-            saveGame.SpellEffects.FireBeam(new ProjectMana(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBeam(new ProjectMana(), dir,
                 Program.Rng.DiceRoll(11 + ((player.Level - 5) / 4), 8));
         }
 

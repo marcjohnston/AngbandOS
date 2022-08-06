@@ -22,7 +22,7 @@ namespace Cthangband.Spells.Death
                 return;
             }
             int dummy = player.Level + (Program.Rng.DieRoll(player.Level) * Math.Max(1, player.Level / 10));
-            if (!SaveGame.Instance.SpellEffects.DrainLife(dir, dummy))
+            if (!SaveGame.Instance.DrainLife(dir, dummy))
             {
                 return;
             }

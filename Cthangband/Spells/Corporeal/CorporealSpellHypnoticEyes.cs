@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Corporeal
             {
                 return;
             }
-            saveGame.SpellEffects.CharmMonster(dir, player.Level);
+            saveGame.CharmMonster(dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.CharmAnimals(player.Level * 2);
+            saveGame.CharmAnimals(player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

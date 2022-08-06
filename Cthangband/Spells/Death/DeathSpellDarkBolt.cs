@@ -36,7 +36,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.FireBoltOrBeam(beam, new ProjectDark(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBoltOrBeam(beam, new ProjectDark(), dir,
                 Program.Rng.DiceRoll(4 + ((player.Level - 5) / 4), 8));
         }
 

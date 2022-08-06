@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "wJvX7AzRQ5i7/lqjqvADZPIlx2WOMO1aKiswyJjnf2gtai2Rj4D7eH2jwrNzBNNz9jsfbZeBW9cNqB2fe5Qg1A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\openBand\\openBand.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Marc\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\6.0.7\\microsoft.aspnetcore.spaproxy.6.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}

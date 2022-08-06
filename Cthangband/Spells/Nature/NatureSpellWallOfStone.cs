@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Nature
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.WallStone();
+            saveGame.WallStone();
         }
 
         public override void Initialise(int characterClass)

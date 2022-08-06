@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectMakeElderSign : Projectile
     {
-        public ProjectMakeElderSign(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectMakeElderSign()
         {
             BoltGraphic = "";
             ImpactGraphic = "";

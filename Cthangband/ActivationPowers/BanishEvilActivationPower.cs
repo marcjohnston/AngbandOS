@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            if (SaveGame.Instance.SpellEffects.BanishEvil(100))
+            if (SaveGame.Instance.BanishEvil(100))
             {
                 Profile.Instance.MsgPrint("The power of the artifact banishes evil!");
             }

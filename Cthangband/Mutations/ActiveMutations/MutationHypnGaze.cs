@@ -23,7 +23,7 @@ namespace Cthangband.Mutations.ActiveMutations
             Profile.Instance.MsgPrint("Your eyes look mesmerizing...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
-                saveGame.SpellEffects.CharmMonster(dir, player.Level);
+                saveGame.CharmMonster(dir, player.Level);
             }
         }
 

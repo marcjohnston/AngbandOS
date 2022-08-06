@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectHellFire(SaveGame.Instance.SpellEffects), dir, 666, 3);
+            saveGame.FireBall(new ProjectHellFire(), dir, 666, 3);
             player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
         }
 

@@ -17,11 +17,11 @@ namespace Cthangband.Spells.Death
         {
             if (Program.Rng.DieRoll(50) > player.Level)
             {
-                saveGame.SpellEffects.IdentifyItem();
+                saveGame.IdentifyItem();
             }
             else
             {
-                saveGame.SpellEffects.IdentifyFully();
+                saveGame.IdentifyFully();
             }
         }
 

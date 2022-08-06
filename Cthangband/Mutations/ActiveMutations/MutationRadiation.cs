@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             Profile.Instance.MsgPrint("Radiation flows from your body!");
-            saveGame.SpellEffects.FireBall(new ProjectNuke(SaveGame.Instance.SpellEffects), 0, player.Level * 2, 3 + (player.Level / 20));
+            saveGame.FireBall(new ProjectNuke(), 0, player.Level * 2, 3 + (player.Level / 20));
         }
 
         public override string ActivationSummary(int lvl)

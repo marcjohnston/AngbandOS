@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Death
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.Carnage(true);
+            saveGame.Carnage(true);
         }
 
         public override void Initialise(int characterClass)

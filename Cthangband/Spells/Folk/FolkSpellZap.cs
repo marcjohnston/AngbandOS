@@ -36,7 +36,7 @@ namespace Cthangband.Spells.Folk
             {
                 return;
             }
-            saveGame.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectElec(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(), dir,
                 Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
         }
 

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectTime : Projectile
     {
-        public ProjectTime(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectTime()
         {
             BoltGraphic = "BrightGreenBolt";
             ImpactGraphic = "";

@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectCold : Projectile
     {
-        public ProjectCold(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectCold()
         {
             BoltGraphic = "WhiteSplat";
             ImpactGraphic = "WhiteSplat";
@@ -88,7 +88,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }
@@ -270,7 +270,7 @@ namespace Cthangband.Projection
             {
                 Profile.Instance.MsgPrint("You are hit by cold!");
             }
-            SpellEffects.ColdDam(dam, killer);
+            SaveGame.Instance.ColdDam(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

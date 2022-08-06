@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectMeteor : Projectile
     {
-        public ProjectMeteor(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectMeteor()
         {
             BoltGraphic = "BrightRedSplat";
             ImpactGraphic = "";
@@ -98,7 +98,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }
@@ -279,9 +279,9 @@ namespace Cthangband.Projection
             {
                 if (!Player.HasFireImmunity)
                 {
-                    Player.Inventory.InvenDamage(SpellEffects.SetFireDestroy, 2);
+                    Player.Inventory.InvenDamage(SaveGame.Instance.SetFireDestroy, 2);
                 }
-                Player.Inventory.InvenDamage(SpellEffects.SetColdDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 2);
             }
             SaveGame.Disturb(true);
             return true;

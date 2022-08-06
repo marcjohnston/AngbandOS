@@ -36,7 +36,7 @@ namespace Cthangband.Spells.Tarot
             {
                 return;
             }
-            saveGame.SpellEffects.FireBoltOrBeam(beam - 10, new ProjectPsi(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectPsi(), dir,
                 Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
         }
 

@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 90 + player.Level, (player.Level / 12) + 1);
+            SaveGame.Instance.FireBall(new ProjectElec(), dir, 90 + player.Level, (player.Level / 12) + 1);
         }
 
         public override void Initialise(int characterClass)

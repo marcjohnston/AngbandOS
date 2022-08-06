@@ -96,7 +96,7 @@ namespace Cthangband.Commands
                                 identified = true;
                             }
                         }
-                        if (SaveGame.Instance.SpellEffects.UnlightArea(10, 3))
+                        if (SaveGame.Instance.UnlightArea(10, 3))
                         {
                             identified = true;
                         }
@@ -112,7 +112,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.HasteMonsters:
                     {
-                        if (SaveGame.Instance.SpellEffects.HasteMonsters())
+                        if (SaveGame.Instance.HasteMonsters())
                         {
                             identified = true;
                         }
@@ -131,13 +131,13 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Teleportation:
                     {
-                        SaveGame.Instance.SpellEffects.TeleportPlayer(100);
+                        SaveGame.Instance.TeleportPlayer(100);
                         identified = true;
                         break;
                     }
                 case StaffType.Identify:
                     {
-                        if (!SaveGame.Instance.SpellEffects.IdentifyItem())
+                        if (!SaveGame.Instance.IdentifyItem())
                         {
                             useCharge = false;
                         }
@@ -146,7 +146,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.RemoveCurse:
                     {
-                        if (SaveGame.Instance.SpellEffects.RemoveCurse())
+                        if (SaveGame.Instance.RemoveCurse())
                         {
                             if (player.TimedBlindness == 0)
                             {
@@ -164,14 +164,14 @@ namespace Cthangband.Commands
                         }
                         for (k = 0; k < 8; k++)
                         {
-                            SaveGame.Instance.SpellEffects.LightLine(level.OrderedDirection[k]);
+                            SaveGame.Instance.LightLine(level.OrderedDirection[k]);
                         }
                         identified = true;
                         break;
                     }
                 case StaffType.Light:
                     {
-                        if (SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+                        if (SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -185,11 +185,11 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectGold:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectTreasure())
+                        if (SaveGame.Instance.DetectTreasure())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.SpellEffects.DetectObjectsGold())
+                        if (SaveGame.Instance.DetectObjectsGold())
                         {
                             identified = true;
                         }
@@ -197,7 +197,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectItem:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectObjectsNormal())
+                        if (SaveGame.Instance.DetectObjectsNormal())
                         {
                             identified = true;
                         }
@@ -205,7 +205,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectTrap:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectTraps())
+                        if (SaveGame.Instance.DetectTraps())
                         {
                             identified = true;
                         }
@@ -213,11 +213,11 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectDoor:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectDoors())
+                        if (SaveGame.Instance.DetectDoors())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.SpellEffects.DetectStairs())
+                        if (SaveGame.Instance.DetectStairs())
                         {
                             identified = true;
                         }
@@ -225,7 +225,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectInvis:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectMonstersInvis())
+                        if (SaveGame.Instance.DetectMonstersInvis())
                         {
                             identified = true;
                         }
@@ -233,7 +233,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectEvil:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectMonstersEvil())
+                        if (SaveGame.Instance.DetectMonstersEvil())
                         {
                             identified = true;
                         }
@@ -309,7 +309,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.SleepMonsters:
                     {
-                        if (SaveGame.Instance.SpellEffects.SleepMonsters())
+                        if (SaveGame.Instance.SleepMonsters())
                         {
                             identified = true;
                         }
@@ -317,7 +317,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.SlowMonsters:
                     {
-                        if (SaveGame.Instance.SpellEffects.SlowMonsters())
+                        if (SaveGame.Instance.SlowMonsters())
                         {
                             identified = true;
                         }
@@ -340,13 +340,13 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Probing:
                     {
-                        SaveGame.Instance.SpellEffects.Probing();
+                        SaveGame.Instance.Probing();
                         identified = true;
                         break;
                     }
                 case StaffType.DispelEvil:
                     {
-                        if (SaveGame.Instance.SpellEffects.DispelEvil(60))
+                        if (SaveGame.Instance.DispelEvil(60))
                         {
                             identified = true;
                         }
@@ -354,7 +354,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Power:
                     {
-                        if (SaveGame.Instance.SpellEffects.DispelMonsters(120))
+                        if (SaveGame.Instance.DispelMonsters(120))
                         {
                             identified = true;
                         }
@@ -362,7 +362,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Holiness:
                     {
-                        if (SaveGame.Instance.SpellEffects.DispelEvil(120))
+                        if (SaveGame.Instance.DispelEvil(120))
                         {
                             identified = true;
                         }
@@ -395,19 +395,19 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Carnage:
                     {
-                        SaveGame.Instance.SpellEffects.Carnage(true);
+                        SaveGame.Instance.Carnage(true);
                         identified = true;
                         break;
                     }
                 case StaffType.Earthquakes:
                     {
-                        SaveGame.Instance.SpellEffects.Earthquake(player.MapY, player.MapX, 10);
+                        SaveGame.Instance.Earthquake(player.MapY, player.MapX, 10);
                         identified = true;
                         break;
                     }
                 case StaffType.Destruction:
                     {
-                        SaveGame.Instance.SpellEffects.DestroyArea(player.MapY, player.MapX, 15);
+                        SaveGame.Instance.DestroyArea(player.MapY, player.MapX, 15);
                         identified = true;
                         break;
                     }

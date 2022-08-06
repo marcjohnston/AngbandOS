@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.ControlOneUndead(dir, player.Level);
+            saveGame.ControlOneUndead(dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

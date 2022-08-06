@@ -97,7 +97,7 @@ namespace Cthangband.Commands
             {
                 case WandType.HealMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.HealMonster(dir))
+                        if (SaveGame.Instance.HealMonster(dir))
                         {
                             ident = true;
                         }
@@ -105,7 +105,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.HasteMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.SpeedMonster(dir))
+                        if (SaveGame.Instance.SpeedMonster(dir))
                         {
                             ident = true;
                         }
@@ -113,7 +113,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.CloneMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.CloneMonster(dir))
+                        if (SaveGame.Instance.CloneMonster(dir))
                         {
                             ident = true;
                         }
@@ -121,7 +121,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.TeleportAway:
                     {
-                        if (SaveGame.Instance.SpellEffects.TeleportMonster(dir))
+                        if (SaveGame.Instance.TeleportMonster(dir))
                         {
                             ident = true;
                         }
@@ -129,7 +129,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Disarming:
                     {
-                        if (SaveGame.Instance.SpellEffects.DisarmTrap(dir))
+                        if (SaveGame.Instance.DisarmTrap(dir))
                         {
                             ident = true;
                         }
@@ -137,7 +137,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.TrapDoorDest:
                     {
-                        if (SaveGame.Instance.SpellEffects.DestroyDoor(dir))
+                        if (SaveGame.Instance.DestroyDoor(dir))
                         {
                             ident = true;
                         }
@@ -145,7 +145,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.StoneToMud:
                     {
-                        if (SaveGame.Instance.SpellEffects.WallToMud(dir))
+                        if (SaveGame.Instance.WallToMud(dir))
                         {
                             ident = true;
                         }
@@ -154,13 +154,13 @@ namespace Cthangband.Commands
                 case WandType.Light:
                     {
                         Profile.Instance.MsgPrint("A line of blue shimmering light appears.");
-                        SaveGame.Instance.SpellEffects.LightLine(dir);
+                        SaveGame.Instance.LightLine(dir);
                         ident = true;
                         break;
                     }
                 case WandType.SleepMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.SleepMonster(dir))
+                        if (SaveGame.Instance.SleepMonster(dir))
                         {
                             ident = true;
                         }
@@ -168,7 +168,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.SlowMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.SlowMonster(dir))
+                        if (SaveGame.Instance.SlowMonster(dir))
                         {
                             ident = true;
                         }
@@ -176,7 +176,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.ConfuseMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.ConfuseMonster(dir, 10))
+                        if (SaveGame.Instance.ConfuseMonster(dir, 10))
                         {
                             ident = true;
                         }
@@ -184,7 +184,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.FearMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.FearMonster(dir, 10))
+                        if (SaveGame.Instance.FearMonster(dir, 10))
                         {
                             ident = true;
                         }
@@ -192,7 +192,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.DrainLife:
                     {
-                        if (SaveGame.Instance.SpellEffects.DrainLife(dir, 75))
+                        if (SaveGame.Instance.DrainLife(dir, 75))
                         {
                             ident = true;
                         }
@@ -200,7 +200,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Polymorph:
                     {
-                        if (SaveGame.Instance.SpellEffects.PolyMonster(dir))
+                        if (SaveGame.Instance.PolyMonster(dir))
                         {
                             ident = true;
                         }
@@ -208,27 +208,27 @@ namespace Cthangband.Commands
                     }
                 case WandType.StinkingCloud:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects), dir, 12, 2);
+                        SaveGame.Instance.FireBall(new ProjectPois(), dir, 12, 2);
                         ident = true;
                         break;
                     }
                 case WandType.MagicMissile:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(20, new ProjectMissile(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectMissile(), dir,
                             Program.Rng.DiceRoll(2, 6));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(20, new ProjectAcid(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectAcid(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
                     }
                 case WandType.CharmMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.CharmMonster(dir, 45))
+                        if (SaveGame.Instance.CharmMonster(dir, 45))
                         {
                             ident = true;
                         }
@@ -236,39 +236,39 @@ namespace Cthangband.Commands
                     }
                 case WandType.FireBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(20, new ProjectFire(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectFire(), dir,
                             Program.Rng.DiceRoll(6, 8));
                         ident = true;
                         break;
                     }
                 case WandType.ColdBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(20, new ProjectCold(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectCold(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 60, 2);
+                        SaveGame.Instance.FireBall(new ProjectAcid(), dir, 60, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ElecBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 32, 2);
+                        SaveGame.Instance.FireBall(new ProjectElec(), dir, 32, 2);
                         ident = true;
                         break;
                     }
                 case WandType.FireBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 72, 2);
+                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ColdBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 48, 2);
+                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
                         ident = true;
                         break;
                     }
@@ -279,13 +279,13 @@ namespace Cthangband.Commands
                     }
                 case WandType.DragonFire:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 100, 3);
+                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 100, 3);
                         ident = true;
                         break;
                     }
                 case WandType.DragonCold:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 80, 3);
+                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 80, 3);
                         ident = true;
                         break;
                     }
@@ -295,27 +295,27 @@ namespace Cthangband.Commands
                         {
                             case 1:
                                 {
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 100, -3);
+                                    SaveGame.Instance.FireBall(new ProjectAcid(), dir, 100, -3);
                                     break;
                                 }
                             case 2:
                                 {
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 80, -3);
+                                    SaveGame.Instance.FireBall(new ProjectElec(), dir, 80, -3);
                                     break;
                                 }
                             case 3:
                                 {
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 100, -3);
+                                    SaveGame.Instance.FireBall(new ProjectFire(), dir, 100, -3);
                                     break;
                                 }
                             case 4:
                                 {
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 80, -3);
+                                    SaveGame.Instance.FireBall(new ProjectCold(), dir, 80, -3);
                                     break;
                                 }
                             default:
                                 {
-                                    SaveGame.Instance.SpellEffects.FireBall(new ProjectPois(SaveGame.Instance.SpellEffects), dir, 60, -3);
+                                    SaveGame.Instance.FireBall(new ProjectPois(), dir, 60, -3);
                                     break;
                                 }
                         }
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Annihilation:
                     {
-                        if (SaveGame.Instance.SpellEffects.DrainLife(dir, 125))
+                        if (SaveGame.Instance.DrainLife(dir, 125))
                         {
                             ident = true;
                         }
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Shard:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectShard(SaveGame.Instance.SpellEffects), dir, 75 + Program.Rng.DieRoll(50),
+                        SaveGame.Instance.FireBall(new ProjectShard(), dir, 75 + Program.Rng.DieRoll(50),
                             2);
                         ident = true;
                         break;

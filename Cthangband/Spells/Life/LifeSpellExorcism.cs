@@ -15,9 +15,9 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.DispelUndead(player.Level);
-            saveGame.SpellEffects.DispelDemons(player.Level);
-            saveGame.SpellEffects.TurnEvil(player.Level);
+            saveGame.DispelUndead(player.Level);
+            saveGame.DispelDemons(player.Level);
+            saveGame.TurnEvil(player.Level);
         }
 
         public override void Initialise(int characterClass)

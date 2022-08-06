@@ -329,7 +329,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
-                            SaveGame.Instance.SpellEffects.PotionSmashEffect(0, _player.MapY, _player.MapX,
+                            SaveGame.Instance.PotionSmashEffect(0, _player.MapY, _player.MapX,
                                 oPtr.ItemSubCategory);
                         }
                         InvenItemIncrease(i, -amt);

@@ -28,11 +28,11 @@ namespace Cthangband.Spells.Corporeal
             {
                 Profile.Instance.MsgPrint("You fail to concentrate correctly!");
                 player.Energy -= 100;
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
             else
             {
-                saveGame.SpellEffects.TeleportPlayerTo(ij, ii);
+                saveGame.TeleportPlayerTo(ij, ii);
             }
         }
 

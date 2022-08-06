@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.RemoveAllCurse();
+            saveGame.RemoveAllCurse();
         }
 
         public override void Initialise(int characterClass)

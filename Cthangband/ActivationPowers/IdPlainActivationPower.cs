@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            return SaveGame.Instance.SpellEffects.IdentifyItem();
+            return SaveGame.Instance.IdentifyItem();
         }
 
         public override int RechargeTime(Player player) => 10;

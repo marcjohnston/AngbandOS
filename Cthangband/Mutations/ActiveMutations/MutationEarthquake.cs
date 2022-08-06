@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.ActiveMutations
             }
             if (!saveGame.Quests.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
             {
-                saveGame.SpellEffects.Earthquake(player.MapY, player.MapX, 10);
+                saveGame.Earthquake(player.MapY, player.MapX, 10);
             }
         }
 

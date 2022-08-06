@@ -33,19 +33,19 @@ namespace Cthangband.Talents
             bool b;
             if (player.Level < 30)
             {
-                b = saveGame.SpellEffects.DetectMonstersNormal();
+                b = saveGame.DetectMonstersNormal();
                 if (player.Level > 14)
                 {
-                    b |= saveGame.SpellEffects.DetectMonstersInvis();
+                    b |= saveGame.DetectMonstersInvis();
                 }
                 if (player.Level > 4)
                 {
-                    b |= saveGame.SpellEffects.DetectTraps();
+                    b |= saveGame.DetectTraps();
                 }
             }
             else
             {
-                b = saveGame.SpellEffects.DetectAll();
+                b = saveGame.DetectAll();
             }
             if (player.Level > 24 && player.Level < 40)
             {

@@ -24,7 +24,7 @@ namespace Cthangband.Mutations.ActiveMutations
             Profile.Instance.MsgPrint("You breathe fire...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
-                saveGame.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, player.Level * 2, -(1 + (player.Level / 20)));
+                saveGame.FireBall(new ProjectFire(), dir, player.Level * 2, -(1 + (player.Level / 20)));
             }
         }
 

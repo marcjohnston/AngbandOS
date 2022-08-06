@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.FireBall(new ProjectOldDrain(SaveGame.Instance.SpellEffects), dir,
+            saveGame.FireBall(new ProjectOldDrain(), dir,
                 Program.Rng.DiceRoll(3, 6) + player.Level + (player.Level /
                 (player.ProfessionIndex == CharacterClass.Mage || player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
                 player.Level < 30 ? 2 : 3);

@@ -39,13 +39,13 @@ namespace Cthangband.Mutations.RandomMutations
                 Profile.Instance.MsgPrint(null);
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    saveGame.SpellEffects.LoseAllInfo();
+                    saveGame.LoseAllInfo();
                 }
                 else
                 {
                     level.WizDark();
                 }
-                saveGame.SpellEffects.TeleportPlayer(100);
+                saveGame.TeleportPlayer(100);
                 level.WizDark();
                 Profile.Instance.MsgPrint("You wake up somewhere with a sore head...");
                 Profile.Instance.MsgPrint("You can't remember a thing, or how you got here!");

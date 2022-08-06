@@ -54,7 +54,7 @@ namespace Cthangband.Commands
             if (player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
                 Profile.Instance.MsgPrint("Some of the fluid falls through your jaws!");
-                SaveGame.Instance.SpellEffects.PotionSmashEffect(0, player.MapY, player.MapX, item.ItemSubCategory);
+                SaveGame.Instance.PotionSmashEffect(0, player.MapY, player.MapX, item.ItemSubCategory);
             }
             player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type

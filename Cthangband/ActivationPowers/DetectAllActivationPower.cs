@@ -16,7 +16,7 @@ namespace Cthangband.ActivationPowers
         public override bool Activate(Player player, Level level)
         {
             Profile.Instance.MsgPrint("An image forms in your mind...");
-            SaveGame.Instance.SpellEffects.DetectAll();
+            SaveGame.Instance.DetectAll();
             return true;
         }
 

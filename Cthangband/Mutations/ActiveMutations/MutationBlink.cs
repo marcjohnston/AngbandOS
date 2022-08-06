@@ -17,7 +17,7 @@ namespace Cthangband.Mutations.ActiveMutations
         {
             if (saveGame.CommandEngine.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
             {
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
         }
 

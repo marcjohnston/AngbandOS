@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(Player player, Level level)
         {
-            SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
             return true;
         }
 

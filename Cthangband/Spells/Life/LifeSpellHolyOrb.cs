@@ -21,7 +21,7 @@ namespace Cthangband.Spells.Life
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.FireBall(new ProjectHolyFire(SaveGame.Instance.SpellEffects), dir,
+            SaveGame.Instance.FireBall(new ProjectHolyFire(), dir,
                 Program.Rng.DiceRoll(3, 6) + player.Level + (player.Level /
                 (player.ProfessionIndex == CharacterClass.Priest || player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
                 player.Level < 30 ? 2 : 3);

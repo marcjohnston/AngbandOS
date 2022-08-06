@@ -422,7 +422,7 @@ namespace Cthangband
                     obvious = true;
                     damage = Program.Rng.DiceRoll(dDice, dSide);
                     // Default to a missile attack
-                    Projectile pt = new ProjectMissile(SaveGame.Instance.SpellEffects);
+                    Projectile pt = new ProjectMissile();
                     // Choose the correct type of attack to display, as well as any other special
                     // effects for the attack
                     switch (effect)
@@ -437,12 +437,12 @@ namespace Cthangband
                             break;
 
                         case AttackEffect.Poison:
-                            pt = new ProjectPois(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectPois();
                             break;
 
                         case AttackEffect.UnBonus:
                         case AttackEffect.UnPower:
-                            pt = new ProjectDisenchant(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectDisenchant();
                             break;
 
                         case AttackEffect.EatFood:
@@ -463,34 +463,34 @@ namespace Cthangband
                             break;
 
                         case AttackEffect.Acid:
-                            pt = new ProjectAcid(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectAcid();
                             break;
 
                         case AttackEffect.Electricity:
-                            pt = new ProjectElec(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectElec();
                             break;
 
                         case AttackEffect.Fire:
-                            pt = new ProjectFire(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectFire();
                             break;
 
                         case AttackEffect.Cold:
-                            pt = new ProjectCold(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectCold();
                             break;
 
                         case AttackEffect.Blind:
                             break;
 
                         case AttackEffect.Confuse:
-                            pt = new ProjectConfusion(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectConfusion();
                             break;
 
                         case AttackEffect.Terrify:
-                            pt = new ProjectTurnAll(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectTurnAll();
                             break;
 
                         case AttackEffect.Paralyze:
-                            pt = new ProjectOldSleep(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectOldSleep();
                             damage = race.Level;
                             break;
 
@@ -506,7 +506,7 @@ namespace Cthangband
                         case AttackEffect.Shatter:
                             if (damage > 23)
                             {
-                                _saveGame.SpellEffects.Earthquake(monster.MapY, monster.MapX, 8);
+                                _saveGame.Earthquake(monster.MapY, monster.MapX, 8);
                             }
                             break;
 
@@ -514,7 +514,7 @@ namespace Cthangband
                         case AttackEffect.Exp20:
                         case AttackEffect.Exp40:
                         case AttackEffect.Exp80:
-                            pt = new ProjectNether(SaveGame.Instance.SpellEffects);
+                            pt = new ProjectNether();
                             break;
 
                         default:
@@ -524,7 +524,7 @@ namespace Cthangband
                     // Implement the attack as a projectile
                     if (pt != null)
                     {
-                        _saveGame.SpellEffects.Project(monsterIndex, 0, target.MapY, target.MapX, damage, pt,
+                        _saveGame.Project(monsterIndex, 0, target.MapY, target.MapX, damage, pt,
                             ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         // If we touched the target we might get burned or zapped
                         if (touched)
@@ -542,9 +542,9 @@ namespace Cthangband
                                         targetRace.Knowledge.RFlags2 |= MonsterFlag2.FireAura;
                                     }
                                 }
-                                _saveGame.SpellEffects.Project(targetIndex, 0, monster.MapY, monster.MapX,
+                                _saveGame.Project(targetIndex, 0, monster.MapY, monster.MapX,
                                     Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    new ProjectFire(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    new ProjectFire(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                             if ((targetRace.Flags2 & MonsterFlag2.LightningAura) != 0 && (race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
                             {
@@ -559,9 +559,9 @@ namespace Cthangband
                                         targetRace.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
                                     }
                                 }
-                                _saveGame.SpellEffects.Project(targetIndex, 0, monster.MapY, monster.MapX,
+                                _saveGame.Project(targetIndex, 0, monster.MapY, monster.MapX,
                                     Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    new ProjectElec(SaveGame.Instance.SpellEffects), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    new ProjectElec(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                         }
                     }
@@ -606,7 +606,7 @@ namespace Cthangband
             if (blinked)
             {
                 Profile.Instance.MsgPrint(monster.IsVisible ? "The thief flees laughing!" : "You hear laughter!");
-                _saveGame.SpellEffects.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
+                _saveGame.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
             }
             // We made the attack
             return true;
@@ -703,7 +703,7 @@ namespace Cthangband
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
-            _saveGame.SpellEffects.Project(monsterIndex, radius, targetY, targetX, damage, projectile, projectionFlags);
+            _saveGame.Project(monsterIndex, radius, targetY, targetX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -727,7 +727,7 @@ namespace Cthangband
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
-            _saveGame.SpellEffects.Project(monsterIndex, radius, _player.MapY, _player.MapX, damage, projectile, projectionFlags);
+            _saveGame.Project(monsterIndex, radius, _player.MapY, _player.MapX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1076,7 +1076,7 @@ namespace Cthangband
             {
                 radius = (race.Flags2 & MonsterFlag2.Powerful) != 0 ? 3 : 2;
             }
-            _saveGame.SpellEffects.Project(monsterIndex, radius, _player.MapY, _player.MapX, damage, projectile, projectionFlag);
+            _saveGame.Project(monsterIndex, radius, _player.MapY, _player.MapX, damage, projectile, projectionFlag);
         }
 
         /// <summary>
@@ -1090,7 +1090,7 @@ namespace Cthangband
         private void FireBoltAtMonster(int monsterIndex, int targetY, int targetX, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            _saveGame.SpellEffects.Project(monsterIndex, 0, targetY, targetX, damage, projectile, projectionFlags);
+            _saveGame.Project(monsterIndex, 0, targetY, targetX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1102,7 +1102,7 @@ namespace Cthangband
         private void FireBoltAtPlayer(int monsterIndex, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            _saveGame.SpellEffects.Project(monsterIndex, 0, _player.MapY, _player.MapX, damage, projectile, projectionFlags);
+            _saveGame.Project(monsterIndex, 0, _player.MapY, _player.MapX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1993,7 +1993,7 @@ namespace Cthangband
                             if (newY == _player.MapY && newX == _player.MapX)
                             {
                                 Profile.Instance.MsgPrint("The rune explodes!");
-                                _saveGame.SpellEffects.FireBall(new ProjectMana(SaveGame.Instance.SpellEffects), 0,
+                                _saveGame.FireBall(new ProjectMana(), 0,
                                     2 * ((_player.Level / 2) + Program.Rng.DiceRoll(7, 7)), 2);
                             }
                             else
@@ -3289,7 +3289,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a shard ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectShard(SaveGame.Instance.SpellEffects), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectShard(), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
                         break;
 
                     // MonsterFlag4.Arrow1D6
@@ -3298,7 +3298,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(1, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(1, 6));
                         break;
 
                     // MonsterFlag4.Arrow3D6
@@ -3307,7 +3307,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(3, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(3, 6));
                         break;
 
                     // MonsterFlag4.Arrow5D6
@@ -3316,7 +3316,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(5, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(5, 6));
                         break;
 
                     // MonsterFlag4.Arrow7D6
@@ -3332,7 +3332,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(blind
                             ? $"{monsterName} makes a strange noise."
                             : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(7, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(7, 6));
                         break;
 
                     // MonsterFlag4.BreatheAcid
@@ -3341,7 +3341,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes acid at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheLightning
@@ -3350,7 +3350,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes lightning at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheFire
@@ -3359,7 +3359,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes fire at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheCold
@@ -3368,7 +3368,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes frost at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreathePoison
@@ -3377,7 +3377,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes gas at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(SaveGame.Instance.SpellEffects), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheNether
@@ -3386,7 +3386,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes nether at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(SaveGame.Instance.SpellEffects), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheLight
@@ -3395,7 +3395,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes light at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectLight(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectLight(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheDark
@@ -3404,7 +3404,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes darkness at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheConfusion
@@ -3413,7 +3413,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes confusion at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectConfusion(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectConfusion(), monster.Health / 6 > 400 ? 400 : monster.Health / 6,
                             0);
                         break;
 
@@ -3423,7 +3423,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes sound at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectSound(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectSound(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheChaos
@@ -3432,7 +3432,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes chaos at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(SaveGame.Instance.SpellEffects), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheDisenchant
@@ -3441,7 +3441,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes disenchantment at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisenchant(SaveGame.Instance.SpellEffects), monster.Health / 6 > 500 ? 500 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisenchant(), monster.Health / 6 > 500 ? 500 : monster.Health / 6,
                             0);
                         break;
 
@@ -3451,7 +3451,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes nexus at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNexus(SaveGame.Instance.SpellEffects), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNexus(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheTime
@@ -3460,7 +3460,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes time at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectTime(SaveGame.Instance.SpellEffects), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectTime(), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheInertia
@@ -3469,7 +3469,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes inertia at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectInertia(SaveGame.Instance.SpellEffects), monster.Health / 6 > 200 ? 200 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectInertia(), monster.Health / 6 > 200 ? 200 : monster.Health / 6,
                             0);
                         break;
 
@@ -3479,7 +3479,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes gravity at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectGravity(SaveGame.Instance.SpellEffects), monster.Health / 3 > 200 ? 200 : monster.Health / 3,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectGravity(), monster.Health / 3 > 200 ? 200 : monster.Health / 3,
                             0);
                         break;
 
@@ -3489,7 +3489,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes shards at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectExplode(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectExplode(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreathePlasma
@@ -3498,7 +3498,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes plasma at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPlasma(SaveGame.Instance.SpellEffects), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPlasma(), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheForce
@@ -3507,7 +3507,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes force at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectForce(SaveGame.Instance.SpellEffects), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectForce(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheMana
@@ -3516,7 +3516,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes magical energy at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(SaveGame.Instance.SpellEffects), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.RadiationBall
@@ -3525,7 +3525,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a ball of radiation at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(SaveGame.Instance.SpellEffects), rlev + Program.Rng.DiceRoll(10, 6), 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(), rlev + Program.Rng.DiceRoll(10, 6), 2);
                         break;
 
                     // MonsterFlag4.BreatheRadiation
@@ -3534,7 +3534,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes toxic waste at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(SaveGame.Instance.SpellEffects), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.ChaosBall
@@ -3543,7 +3543,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble frighteningly."
                             : $"{monsterName} invokes raw chaos upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(SaveGame.Instance.SpellEffects), (rlev * 2) + Program.Rng.DiceRoll(10, 10),
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(), (rlev * 2) + Program.Rng.DiceRoll(10, 10),
                             4);
                         break;
 
@@ -3553,7 +3553,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes disintegration at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisintegrate(SaveGame.Instance.SpellEffects),
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisintegrate(),
                             monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
                         break;
 
@@ -3563,7 +3563,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts an acid ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 3) + 15, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(), Program.Rng.DieRoll(rlev * 3) + 15, 2);
                         break;
 
                     // MonsterFlag5.LightningBall
@@ -3572,7 +3572,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a lightning ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 3 / 2) + 8, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(), Program.Rng.DieRoll(rlev * 3 / 2) + 8, 2);
                         break;
 
                     // MonsterFlag5.FireBall
@@ -3581,7 +3581,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a fire ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 7 / 2) + 10, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(), Program.Rng.DieRoll(rlev * 7 / 2) + 10, 2);
                         break;
 
                     // MonsterFlag5.ColdBall
@@ -3590,7 +3590,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a frost ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 3 / 2) + 10, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(), Program.Rng.DieRoll(rlev * 3 / 2) + 10, 2);
                         break;
 
                     // MonsterFlag5.PoisonBall
@@ -3599,7 +3599,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a stinking cloud at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(12, 2), 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(), Program.Rng.DiceRoll(12, 2), 2);
                         break;
 
                     // MonsterFlag5.NetherBall
@@ -3608,7 +3608,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a nether ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(SaveGame.Instance.SpellEffects), 50 + Program.Rng.DiceRoll(10, 10) + rlev,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(), 50 + Program.Rng.DiceRoll(10, 10) + rlev,
                             2);
                         break;
 
@@ -3619,7 +3619,7 @@ namespace Cthangband
                             ? "You hear someone mumble."
                             : $"{monsterName} gestures fluidly at {targetName}");
                         Profile.Instance.MsgPrint($"{targetName} is engulfed in a whirlpool.");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectWater(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 5 / 2) + 50, 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectWater(), Program.Rng.DieRoll(rlev * 5 / 2) + 50, 4);
                         break;
 
                     // MonsterFlag5.ManaBall
@@ -3628,7 +3628,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble powerfully."
                             : $"{monsterName} invokes a mana storm upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(SaveGame.Instance.SpellEffects), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
                         break;
 
                     // MonsterFlag5.DarkBall
@@ -3637,7 +3637,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(!seeEither
                             ? "You hear someone mumble powerfully."
                             : $"{monsterName} invokes a darkness storm upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(SaveGame.Instance.SpellEffects), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
                         break;
 
                     // MonsterFlag5.DrainMana
@@ -3848,7 +3848,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a acid bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectAcid(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(7, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectAcid(), Program.Rng.DiceRoll(7, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.LightningBolt
@@ -3862,7 +3862,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a lightning bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectElec(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(4, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectElec(), Program.Rng.DiceRoll(4, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.FireBolt
@@ -3876,7 +3876,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a fire bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectFire(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(9, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectFire(), Program.Rng.DiceRoll(9, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.ColdBolt
@@ -3890,7 +3890,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a frost bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectCold(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(6, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectCold(), Program.Rng.DiceRoll(6, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.PoisonBolt
@@ -3908,7 +3908,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a nether bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectNether(SaveGame.Instance.SpellEffects),
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectNether(),
                             30 + Program.Rng.DiceRoll(5, 5) + (rlev * 3 / 2));
                         break;
 
@@ -3923,7 +3923,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a water bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectWater(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(10, 10) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectWater(), Program.Rng.DiceRoll(10, 10) + rlev);
                         break;
 
                     // MonsterFlag5.ManaBolt
@@ -3937,7 +3937,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a mana bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMana(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(rlev * 7 / 2) + 50);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMana(), Program.Rng.DieRoll(rlev * 7 / 2) + 50);
                         break;
 
                     // MonsterFlag5.PlasmaBolt
@@ -3951,7 +3951,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a plasma bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectPlasma(SaveGame.Instance.SpellEffects), 10 + Program.Rng.DiceRoll(8, 7) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectPlasma(), 10 + Program.Rng.DiceRoll(8, 7) + rlev);
                         break;
 
                     // MonsterFlag5.IceBolt
@@ -3965,7 +3965,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts an ice bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectIce(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(6, 6) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectIce(), Program.Rng.DiceRoll(6, 6) + rlev);
                         break;
 
                     // MonsterFlag5.MagicMissile
@@ -3979,7 +3979,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} casts a magic missile at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMissile(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(2, 6) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMissile(), Program.Rng.DiceRoll(2, 6) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.Scare
@@ -4269,7 +4269,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} blinks away.");
                         }
-                        _saveGame.SpellEffects.TeleportAway(monsterIndex, 10);
+                        _saveGame.TeleportAway(monsterIndex, 10);
                         break;
 
                     // MonsterFlag6.TeleportSelf
@@ -4279,7 +4279,7 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{monsterName} teleports away.");
                         }
-                        _saveGame.SpellEffects.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
+                        _saveGame.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
                         break;
 
                     // MonsterFlag6.Xxx3
@@ -4318,7 +4318,7 @@ namespace Cthangband
                         }
                         if (!resistsTele)
                         {
-                            _saveGame.SpellEffects.TeleportAway(targetIndex, (Constants.MaxSight * 2) + 5);
+                            _saveGame.TeleportAway(targetIndex, (Constants.MaxSight * 2) + 5);
                         }
                         break;
 
@@ -4336,9 +4336,9 @@ namespace Cthangband
                         {
                             Profile.Instance.MsgPrint($"{targetName} is surrounded by darkness.");
                         }
-                        _saveGame.SpellEffects.Project(monsterIndex, 3, y, x, 0, new ProjectDarkWeak(SaveGame.Instance.SpellEffects),
+                        _saveGame.Project(monsterIndex, 3, y, x, 0, new ProjectDarkWeak(),
                             ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill);
-                        _saveGame.SpellEffects.UnlightRoom(y, x);
+                        _saveGame.UnlightRoom(y, x);
                         break;
 
                     // MonsterFlag6.CreateTraps
@@ -4406,7 +4406,7 @@ namespace Cthangband
                         }
                         else
                         {
-                            _saveGame.SpellEffects.SummonReaver();
+                            _saveGame.SummonReaver();
                         }
                         break;
 
@@ -5110,7 +5110,7 @@ namespace Cthangband
                 case 96 + 0:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint($"{monsterName} makes a high pitched shriek.");
-                    _saveGame.SpellEffects.AggravateMonsters(monsterIndex);
+                    _saveGame.AggravateMonsters(monsterIndex);
                     break;
 
                 // MonsterFlag4.Xxx2
@@ -5123,7 +5123,7 @@ namespace Cthangband
                 case 96 + 3:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles something." : $"{monsterName} fires a shard ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectShard(SaveGame.Instance.SpellEffects), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectShard(), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsShard);
                     break;
 
@@ -5131,7 +5131,7 @@ namespace Cthangband
                 case 96 + 4:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(1, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(1, 6));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5139,7 +5139,7 @@ namespace Cthangband
                 case 96 + 5:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow!");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(3, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(3, 6));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5147,7 +5147,7 @@ namespace Cthangband
                 case 96 + 6:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName}s makes a strange noise." : $"{monsterName} fires a missile.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(5, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(5, 6));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5155,7 +5155,7 @@ namespace Cthangband
                 case 96 + 7:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires a missile!");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(7, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(7, 6));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5163,7 +5163,7 @@ namespace Cthangband
                 case 96 + 8:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes acid.");
-                    BreatheAtPlayer(monsterIndex, new ProjectAcid(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectAcid(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     break;
 
@@ -5171,7 +5171,7 @@ namespace Cthangband
                 case 96 + 9:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes lightning.");
-                    BreatheAtPlayer(monsterIndex, new ProjectElec(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectElec(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     break;
 
@@ -5179,7 +5179,7 @@ namespace Cthangband
                 case 96 + 10:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes fire.");
-                    BreatheAtPlayer(monsterIndex, new ProjectFire(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectFire(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     break;
 
@@ -5187,7 +5187,7 @@ namespace Cthangband
                 case 96 + 11:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes frost.");
-                    BreatheAtPlayer(monsterIndex, new ProjectCold(SaveGame.Instance.SpellEffects), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectCold(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     break;
 
@@ -5195,7 +5195,7 @@ namespace Cthangband
                 case 96 + 12:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gas.");
-                    BreatheAtPlayer(monsterIndex, new ProjectPois(SaveGame.Instance.SpellEffects), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectPois(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -5203,7 +5203,7 @@ namespace Cthangband
                 case 96 + 13:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nether.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNether(SaveGame.Instance.SpellEffects), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNether(), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     break;
 
@@ -5211,7 +5211,7 @@ namespace Cthangband
                 case 96 + 14:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes light.");
-                    BreatheAtPlayer(monsterIndex, new ProjectLight(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectLight(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsLight);
                     break;
 
@@ -5219,7 +5219,7 @@ namespace Cthangband
                 case 96 + 15:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes darkness.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDark(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDark(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDark);
                     break;
 
@@ -5227,7 +5227,7 @@ namespace Cthangband
                 case 96 + 16:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes confusion.");
-                    BreatheAtPlayer(monsterIndex, new ProjectConfusion(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectConfusion(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsConf);
                     break;
 
@@ -5235,7 +5235,7 @@ namespace Cthangband
                 case 96 + 17:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes sound.");
-                    BreatheAtPlayer(monsterIndex, new ProjectSound(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectSound(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsSound);
                     break;
 
@@ -5243,7 +5243,7 @@ namespace Cthangband
                 case 96 + 18:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes chaos.");
-                    BreatheAtPlayer(monsterIndex, new ProjectChaos(SaveGame.Instance.SpellEffects), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectChaos(), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsChaos);
                     break;
 
@@ -5251,7 +5251,7 @@ namespace Cthangband
                 case 96 + 19:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disenchantment.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDisenchant(SaveGame.Instance.SpellEffects), monster.Health / 6 > 500 ? 500 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDisenchant(), monster.Health / 6 > 500 ? 500 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDisen);
                     break;
 
@@ -5259,7 +5259,7 @@ namespace Cthangband
                 case 96 + 20:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nexus.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNexus(SaveGame.Instance.SpellEffects), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNexus(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNexus);
                     break;
 
@@ -5267,28 +5267,28 @@ namespace Cthangband
                 case 96 + 21:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes time.");
-                    BreatheAtPlayer(monsterIndex, new ProjectTime(SaveGame.Instance.SpellEffects), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectTime(), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.BreatheInertia
                 case 96 + 22:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes inertia.");
-                    BreatheAtPlayer(monsterIndex, new ProjectInertia(SaveGame.Instance.SpellEffects), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectInertia(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheGravity
                 case 96 + 23:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gravity.");
-                    BreatheAtPlayer(monsterIndex, new ProjectGravity(SaveGame.Instance.SpellEffects), monster.Health / 3 > 200 ? 200 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectGravity(), monster.Health / 3 > 200 ? 200 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.BreatheShards
                 case 96 + 24:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes shards.");
-                    BreatheAtPlayer(monsterIndex, new ProjectExplode(SaveGame.Instance.SpellEffects), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectExplode(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsShard);
                     break;
 
@@ -5296,28 +5296,28 @@ namespace Cthangband
                 case 96 + 25:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes plasma.");
-                    BreatheAtPlayer(monsterIndex, new ProjectPlasma(SaveGame.Instance.SpellEffects), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectPlasma(), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheForce
                 case 96 + 26:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes force.");
-                    BreatheAtPlayer(monsterIndex, new ProjectForce(SaveGame.Instance.SpellEffects), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectForce(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheMana
                 case 96 + 27:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes magical energy.");
-                    BreatheAtPlayer(monsterIndex, new ProjectMana(SaveGame.Instance.SpellEffects), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectMana(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.RadiationBall
                 case 96 + 28:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a ball of radiation.");
-                    FireBallAtPlayer(monsterIndex, new ProjectNuke(SaveGame.Instance.SpellEffects), monsterLevel + Program.Rng.DiceRoll(10, 6), 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectNuke(), monsterLevel + Program.Rng.DiceRoll(10, 6), 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -5325,7 +5325,7 @@ namespace Cthangband
                 case 96 + 29:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes toxic waste.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNuke(SaveGame.Instance.SpellEffects), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNuke(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -5335,7 +5335,7 @@ namespace Cthangband
                     Profile.Instance.MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles frighteningly."
                         : $"{monsterName} invokes raw chaos.");
-                    FireBallAtPlayer(monsterIndex, new ProjectChaos(SaveGame.Instance.SpellEffects), (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectChaos(), (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10), 4);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsChaos);
                     break;
 
@@ -5343,14 +5343,14 @@ namespace Cthangband
                 case 96 + 31:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disintegration.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDisintegrate(SaveGame.Instance.SpellEffects), monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDisintegrate(), monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag5.AcidBall
                 case 128 + 0:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an acid ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectAcid(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 3) + 15, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectAcid(), Program.Rng.DieRoll(monsterLevel * 3) + 15, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     break;
 
@@ -5358,7 +5358,7 @@ namespace Cthangband
                 case 128 + 1:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectElec(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectElec(), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     break;
 
@@ -5366,7 +5366,7 @@ namespace Cthangband
                 case 128 + 2:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectFire(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 10, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectFire(), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 10, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     break;
 
@@ -5374,7 +5374,7 @@ namespace Cthangband
                 case 128 + 3:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectCold(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectCold(), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     break;
 
@@ -5382,7 +5382,7 @@ namespace Cthangband
                 case 128 + 4:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a stinking cloud.");
-                    FireBallAtPlayer(monsterIndex, new ProjectPois(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(12, 2), 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectPois(), Program.Rng.DiceRoll(12, 2), 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -5390,7 +5390,7 @@ namespace Cthangband
                 case 128 + 5:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectNether(SaveGame.Instance.SpellEffects), 50 + Program.Rng.DiceRoll(10, 10) + monsterLevel, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectNether(), 50 + Program.Rng.DiceRoll(10, 10) + monsterLevel, 2);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     break;
 
@@ -5399,7 +5399,7 @@ namespace Cthangband
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} gestures fluidly.");
                     Profile.Instance.MsgPrint("You are engulfed in a whirlpool.");
-                    FireBallAtPlayer(monsterIndex, new ProjectWater(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 5 / 2) + 50, 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectWater(), Program.Rng.DieRoll(monsterLevel * 5 / 2) + 50, 4);
                     break;
 
                 // MonsterFlag5.ManaBall
@@ -5408,7 +5408,7 @@ namespace Cthangband
                     Profile.Instance.MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles powerfully."
                         : $"{monsterName} invokes a mana storm.");
-                    FireBallAtPlayer(monsterIndex, new ProjectMana(SaveGame.Instance.SpellEffects), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectMana(), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
                     break;
 
                 // MonsterFlag5.DarkBall
@@ -5417,7 +5417,7 @@ namespace Cthangband
                     Profile.Instance.MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles powerfully."
                         : $"{monsterName} invokes a darkness storm.");
-                    FireBallAtPlayer(monsterIndex, new ProjectDark(SaveGame.Instance.SpellEffects), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectDark(), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDark);
                     break;
 
@@ -5596,7 +5596,7 @@ namespace Cthangband
                 case 128 + 16:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a acid bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectAcid(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(7, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectAcid(), Program.Rng.DiceRoll(7, 8) + (monsterLevel / 3));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5605,7 +5605,7 @@ namespace Cthangband
                 case 128 + 17:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectElec(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(4, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectElec(), Program.Rng.DiceRoll(4, 8) + (monsterLevel / 3));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5614,7 +5614,7 @@ namespace Cthangband
                 case 128 + 18:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectFire(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(9, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectFire(), Program.Rng.DiceRoll(9, 8) + (monsterLevel / 3));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5623,7 +5623,7 @@ namespace Cthangband
                 case 128 + 19:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectCold(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(6, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectCold(), Program.Rng.DiceRoll(6, 8) + (monsterLevel / 3));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5636,7 +5636,7 @@ namespace Cthangband
                 case 128 + 21:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectNether(SaveGame.Instance.SpellEffects), 30 + Program.Rng.DiceRoll(5, 5) + (monsterLevel * 3 / 2));
+                    FireBoltAtPlayer(monsterIndex, new ProjectNether(), 30 + Program.Rng.DiceRoll(5, 5) + (monsterLevel * 3 / 2));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5645,7 +5645,7 @@ namespace Cthangband
                 case 128 + 22:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a water bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectWater(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(10, 10) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectWater(), Program.Rng.DiceRoll(10, 10) + monsterLevel);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5653,7 +5653,7 @@ namespace Cthangband
                 case 128 + 23:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a mana bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectMana(SaveGame.Instance.SpellEffects), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50);
+                    FireBoltAtPlayer(monsterIndex, new ProjectMana(), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5661,7 +5661,7 @@ namespace Cthangband
                 case 128 + 24:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a plasma bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectPlasma(SaveGame.Instance.SpellEffects), 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectPlasma(), 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5669,7 +5669,7 @@ namespace Cthangband
                 case 128 + 25:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an ice bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectIce(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(6, 6) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectIce(), Program.Rng.DiceRoll(6, 6) + monsterLevel);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -5678,7 +5678,7 @@ namespace Cthangband
                 case 128 + 26:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a magic missile.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectMissile(SaveGame.Instance.SpellEffects), Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectMissile(), Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3));
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -5854,14 +5854,14 @@ namespace Cthangband
                 case 160 + 4:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint($"{monsterName} blinks away.");
-                    _saveGame.SpellEffects.TeleportAway(monsterIndex, 10);
+                    _saveGame.TeleportAway(monsterIndex, 10);
                     break;
 
                 // MonsterFlag6.TeleportSelf
                 case 160 + 5:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint($"{monsterName} teleports away.");
-                    _saveGame.SpellEffects.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
+                    _saveGame.TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
                     break;
 
                 // MonsterFlag6.Xxx3
@@ -5874,14 +5874,14 @@ namespace Cthangband
                 case 160 + 8:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint($"{monsterName} commands you to return.");
-                    _saveGame.SpellEffects.TeleportPlayerTo(monster.MapY, monster.MapX);
+                    _saveGame.TeleportPlayerTo(monster.MapY, monster.MapX);
                     break;
 
                 // MonsterFlag6.TeleportAway
                 case 160 + 9:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint($"{monsterName} teleports you away.");
-                    _saveGame.SpellEffects.TeleportPlayer(100);
+                    _saveGame.TeleportPlayer(100);
                     break;
 
                 // MonsterFlag6.TeleportLevel
@@ -5900,7 +5900,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        _saveGame.SpellEffects.TeleportPlayerLevel();
+                        _saveGame.TeleportPlayerLevel();
                     }
                     _level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNexus);
                     break;
@@ -5913,7 +5913,7 @@ namespace Cthangband
                 case 160 + 12:
                     _saveGame.Disturb(true);
                     Profile.Instance.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} gestures in shadow.");
-                    _saveGame.SpellEffects.UnlightArea(0, 3);
+                    _saveGame.UnlightArea(0, 3);
                     break;
 
                 // MonsterFlag6.CreateTraps
@@ -5922,7 +5922,7 @@ namespace Cthangband
                     Profile.Instance.MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles, and then cackles evilly."
                         : $"{monsterName} casts a spell and cackles evilly.");
-                    _saveGame.SpellEffects.TrapCreation();
+                    _saveGame.TrapCreation();
                     break;
 
                 // MonsterFlag6.Forget
@@ -5933,7 +5933,7 @@ namespace Cthangband
                     {
                         Profile.Instance.MsgPrint("You resist the effects!");
                     }
-                    else if (_saveGame.SpellEffects.LoseAllInfo())
+                    else if (_saveGame.LoseAllInfo())
                     {
                         Profile.Instance.MsgPrint("Your memories fade away.");
                     }
@@ -5979,7 +5979,7 @@ namespace Cthangband
                     {
                         Profile.Instance.MsgPrint("You hear heavy steps nearby.");
                     }
-                    _saveGame.SpellEffects.SummonReaver();
+                    _saveGame.SummonReaver();
                     break;
 
                 // MonsterFlag6.SummonMonster

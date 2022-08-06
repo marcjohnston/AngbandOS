@@ -19,7 +19,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.ConfuseMonster(direction, 20);
+            SaveGame.Instance.ConfuseMonster(direction, 20);
             return true;
         }
 

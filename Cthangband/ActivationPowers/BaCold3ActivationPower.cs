@@ -20,7 +20,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(Player player, Level level, int direction)
         {
-            SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), direction, 200, 3);
+            SaveGame.Instance.FireBall(new ProjectCold(), direction, 200, 3);
             return true;
         }
 

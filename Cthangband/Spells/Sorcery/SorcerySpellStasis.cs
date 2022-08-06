@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Sorcery
             {
                 return;
             }
-            saveGame.SpellEffects.StasisMonster(dir);
+            saveGame.StasisMonster(dir);
         }
 
         public override void Initialise(int characterClass)

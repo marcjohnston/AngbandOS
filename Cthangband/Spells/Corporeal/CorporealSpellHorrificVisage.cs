@@ -20,8 +20,8 @@ namespace Cthangband.Spells.Corporeal
             {
                 return;
             }
-            SaveGame.Instance.SpellEffects.FearMonster(dir, player.Level);
-            SaveGame.Instance.SpellEffects.StunMonster(dir, player.Level);
+            SaveGame.Instance.FearMonster(dir, player.Level);
+            SaveGame.Instance.StunMonster(dir, player.Level);
         }
 
         public override void Initialise(int characterClass)

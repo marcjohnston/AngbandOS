@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            saveGame.SpellEffects.SleepMonster(dir);
+            saveGame.SleepMonster(dir);
         }
 
         public override void Initialise(int characterClass)

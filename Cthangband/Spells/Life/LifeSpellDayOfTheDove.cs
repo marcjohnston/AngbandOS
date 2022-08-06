@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Life
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.CharmMonsters(player.Level * 2);
+            saveGame.CharmMonsters(player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

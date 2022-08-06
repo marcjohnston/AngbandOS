@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectAcid : Projectile
     {
-        public ProjectAcid(SpellEffectsHandler spellEffectsHandler) : base(spellEffectsHandler)
+        public ProjectAcid()
         {
             BoltGraphic = "BrightChartreuseBolt";
             ImpactGraphic = "BrightChartreuseSplat";
@@ -88,7 +88,7 @@ namespace Cthangband.Projection
                         Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SpellEffects.PotionSmashEffect(who, y, x, oSval);
+                            SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
                         }
                         Level.RedrawSingleLocation(y, x);
                     }
@@ -270,7 +270,7 @@ namespace Cthangband.Projection
             {
                 Profile.Instance.MsgPrint("You are hit by acid!");
             }
-            SpellEffects.AcidDam(dam, killer);
+            SaveGame.Instance.AcidDam(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

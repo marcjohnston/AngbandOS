@@ -98,7 +98,7 @@ namespace Cthangband.Commands
             {
                 case RodType.DetectTrap:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectTraps())
+                        if (SaveGame.Instance.DetectTraps())
                         {
                             identified = true;
                         }
@@ -107,11 +107,11 @@ namespace Cthangband.Commands
                     }
                 case RodType.DetectDoor:
                     {
-                        if (SaveGame.Instance.SpellEffects.DetectDoors())
+                        if (SaveGame.Instance.DetectDoors())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.SpellEffects.DetectStairs())
+                        if (SaveGame.Instance.DetectStairs())
                         {
                             identified = true;
                         }
@@ -121,7 +121,7 @@ namespace Cthangband.Commands
                 case RodType.Identify:
                     {
                         identified = true;
-                        if (!SaveGame.Instance.SpellEffects.IdentifyItem())
+                        if (!SaveGame.Instance.IdentifyItem())
                         {
                             useCharge = false;
                         }
@@ -137,7 +137,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Illumination:
                     {
-                        if (SaveGame.Instance.SpellEffects.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+                        if (SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -153,14 +153,14 @@ namespace Cthangband.Commands
                     }
                 case RodType.Detection:
                     {
-                        SaveGame.Instance.SpellEffects.DetectAll();
+                        SaveGame.Instance.DetectAll();
                         identified = true;
                         item.TypeSpecificValue = 99;
                         break;
                     }
                 case RodType.Probing:
                     {
-                        SaveGame.Instance.SpellEffects.Probing();
+                        SaveGame.Instance.Probing();
                         identified = true;
                         item.TypeSpecificValue = 50;
                         break;
@@ -262,7 +262,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.TeleportAway:
                     {
-                        if (SaveGame.Instance.SpellEffects.TeleportMonster(dir))
+                        if (SaveGame.Instance.TeleportMonster(dir))
                         {
                             identified = true;
                         }
@@ -271,7 +271,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Disarming:
                     {
-                        if (SaveGame.Instance.SpellEffects.DisarmTrap(dir))
+                        if (SaveGame.Instance.DisarmTrap(dir))
                         {
                             identified = true;
                         }
@@ -281,14 +281,14 @@ namespace Cthangband.Commands
                 case RodType.Light:
                     {
                         Profile.Instance.MsgPrint("A line of blue shimmering light appears.");
-                        SaveGame.Instance.SpellEffects.LightLine(dir);
+                        SaveGame.Instance.LightLine(dir);
                         identified = true;
                         item.TypeSpecificValue = 9;
                         break;
                     }
                 case RodType.SleepMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.SleepMonster(dir))
+                        if (SaveGame.Instance.SleepMonster(dir))
                         {
                             identified = true;
                         }
@@ -297,7 +297,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.SlowMonster:
                     {
-                        if (SaveGame.Instance.SpellEffects.SlowMonster(dir))
+                        if (SaveGame.Instance.SlowMonster(dir))
                         {
                             identified = true;
                         }
@@ -306,7 +306,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.DrainLife:
                     {
-                        if (SaveGame.Instance.SpellEffects.DrainLife(dir, 75))
+                        if (SaveGame.Instance.DrainLife(dir, 75))
                         {
                             identified = true;
                         }
@@ -315,7 +315,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Polymorph:
                     {
-                        if (SaveGame.Instance.SpellEffects.PolyMonster(dir))
+                        if (SaveGame.Instance.PolyMonster(dir))
                         {
                             identified = true;
                         }
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(10, new ProjectAcid(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectAcid(), dir,
                             Program.Rng.DiceRoll(6, 8));
                         identified = true;
                         item.TypeSpecificValue = 12;
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ElecBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(10, new ProjectElec(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectElec(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         identified = true;
                         item.TypeSpecificValue = 11;
@@ -340,7 +340,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.FireBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(10, new ProjectFire(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectFire(), dir,
                             Program.Rng.DiceRoll(8, 8));
                         identified = true;
                         item.TypeSpecificValue = 15;
@@ -348,7 +348,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ColdBolt:
                     {
-                        SaveGame.Instance.SpellEffects.FireBoltOrBeam(10, new ProjectCold(SaveGame.Instance.SpellEffects), dir,
+                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectCold(), dir,
                             Program.Rng.DiceRoll(5, 8));
                         identified = true;
                         item.TypeSpecificValue = 13;
@@ -356,35 +356,35 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectAcid(SaveGame.Instance.SpellEffects), dir, 60, 2);
+                        SaveGame.Instance.FireBall(new ProjectAcid(), dir, 60, 2);
                         identified = true;
                         item.TypeSpecificValue = 27;
                         break;
                     }
                 case RodType.ElecBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectElec(SaveGame.Instance.SpellEffects), dir, 32, 2);
+                        SaveGame.Instance.FireBall(new ProjectElec(), dir, 32, 2);
                         identified = true;
                         item.TypeSpecificValue = 23;
                         break;
                     }
                 case RodType.FireBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectFire(SaveGame.Instance.SpellEffects), dir, 72, 2);
+                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
                         identified = true;
                         item.TypeSpecificValue = 30;
                         break;
                     }
                 case RodType.ColdBall:
                     {
-                        SaveGame.Instance.SpellEffects.FireBall(new ProjectCold(SaveGame.Instance.SpellEffects), dir, 48, 2);
+                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
                         identified = true;
                         item.TypeSpecificValue = 25;
                         break;
                     }
                 case RodType.Havoc:
                     {
-                        SaveGame.Instance.SpellEffects.CallChaos();
+                        SaveGame.Instance.CallChaos();
                         identified = true;
                         item.TypeSpecificValue = 250;
                         break;

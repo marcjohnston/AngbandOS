@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            saveGame.SpellEffects.Recharge(player.Level * 2);
+            saveGame.Recharge(player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

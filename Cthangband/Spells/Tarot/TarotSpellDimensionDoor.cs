@@ -28,9 +28,9 @@ namespace Cthangband.Spells.Tarot
             {
                 Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
                 player.Energy -= 100;
-                saveGame.SpellEffects.TeleportPlayer(10);
+                saveGame.TeleportPlayer(10);
             }
-            saveGame.SpellEffects.TeleportPlayerTo(ij, ii);
+            saveGame.TeleportPlayerTo(ij, ii);
         }
 
         public override void Initialise(int characterClass)
