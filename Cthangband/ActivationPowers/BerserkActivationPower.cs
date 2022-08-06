@@ -13,10 +13,10 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
-            player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(50) + 50);
+            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
+            saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(50) + 50);
             return true;
         }
 

@@ -12,7 +12,6 @@ using Cthangband.Enumerations;
 using Cthangband.Mutations;
 using Cthangband.Patrons;
 using Cthangband.Projection;
-using Cthangband.Spells;
 using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
@@ -8169,7 +8168,7 @@ namespace Cthangband
             {
                 Profile.Instance.MsgPrint(artifactPower.PreActivationMessage);
             }
-            if (artifactPower.Activate(Player, Level))
+            if (artifactPower.Activate(this))
             {
                 item.RechargeTimeLeft = artifactPower.RechargeTime(Player);
             }

@@ -13,15 +13,15 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows bright green...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            if (player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste == 0)
             {
-                player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
+                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
             }
             else
             {
-                player.SetTimedHaste(player.TimedHaste + 5);
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
             }
             return true;
         }

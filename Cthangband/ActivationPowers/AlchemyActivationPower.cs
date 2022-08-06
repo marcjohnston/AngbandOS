@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows bright yellow...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.Alchemy();
+            saveGame.Alchemy();
             return true;
         }
 

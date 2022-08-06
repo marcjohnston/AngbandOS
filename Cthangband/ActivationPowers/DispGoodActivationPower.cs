@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It floods the area with evil...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.DispelGood(player.Level * 5);
+            SaveGame.Instance.DispelGood(saveGame.Player.Level * 5);
             return true;
         }
 

@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It twists space around you...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             SaveGame.Instance.TeleportPlayer(100);
             return true;

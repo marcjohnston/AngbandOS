@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 3 * (player.Level + 10);
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.TurnMonsters(40 + player.Level);
+            SaveGame.Instance.TurnMonsters(40 + saveGame.Player.Level);
             return true;
         }
 

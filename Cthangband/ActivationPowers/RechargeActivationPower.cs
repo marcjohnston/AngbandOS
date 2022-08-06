@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             SaveGame.Instance.Recharge(60);
             return true;

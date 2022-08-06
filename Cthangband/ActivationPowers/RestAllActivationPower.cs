@@ -13,15 +13,15 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows a deep green...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.TryRestoringAbilityScore(Ability.Strength);
-            player.TryRestoringAbilityScore(Ability.Intelligence);
-            player.TryRestoringAbilityScore(Ability.Wisdom);
-            player.TryRestoringAbilityScore(Ability.Dexterity);
-            player.TryRestoringAbilityScore(Ability.Constitution);
-            player.TryRestoringAbilityScore(Ability.Charisma);
-            player.RestoreLevel();
+            saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+            saveGame.Player.RestoreLevel();
             return true;
         }
 

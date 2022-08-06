@@ -25,10 +25,9 @@
         /// <summary>
         /// Activates the artifact power; returning true, if the activation was successful.
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="level"></param>
+        /// <param name="saveGame"></param>
         /// <returns></returns>
-        bool Activate(Player player, Level level);
+        bool Activate(SaveGame saveGame);
 
         /// <summary>
         /// Returns the gold value of the artifact power.

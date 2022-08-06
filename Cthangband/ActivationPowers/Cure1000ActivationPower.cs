@@ -13,11 +13,11 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows a bright white...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             Profile.Instance.MsgPrint("You feel much better...");
-            player.RestoreHealth(1000);
-            player.SetTimedBleeding(0);
+            saveGame.Player.RestoreHealth(1000);
+            saveGame.Player.SetTimedBleeding(0);
             return true;
         }
 

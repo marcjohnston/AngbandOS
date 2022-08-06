@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetTimedEtherealness(player.TimedEtherealness + Program.Rng.DieRoll(player.Level / 2) + (player.Level / 2));
+            saveGame.Player.SetTimedEtherealness(saveGame.Player.TimedEtherealness + Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
             return true;
         }
 

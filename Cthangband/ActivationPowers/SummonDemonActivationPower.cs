@@ -14,11 +14,11 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (level.Monsters.SummonSpecific(player.MapY, player.MapX, (int)(player.Level * 1.5), Constants.SummonDemon))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon))
                 {
                     Profile.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     Profile.Instance.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -26,7 +26,7 @@ namespace Cthangband.ActivationPowers
             }
             else
             {
-                if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, (int)(player.Level * 1.5), Constants.SummonDemon, player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon, saveGame.Player.Level == 50))
                 {
                     Profile.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     Profile.Instance.MsgPrint("'What is thy bidding... Master?'");

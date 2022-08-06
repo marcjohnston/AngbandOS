@@ -13,13 +13,13 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows many colours...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetTimedAcidResistance(player.TimedAcidResistance + Program.Rng.DieRoll(40) + 40);
-            player.SetTimedLightningResistance(player.TimedLightningResistance + Program.Rng.DieRoll(40) + 40);
-            player.SetTimedFireResistance(player.TimedFireResistance + Program.Rng.DieRoll(40) + 40);
-            player.SetTimedColdResistance(player.TimedColdResistance + Program.Rng.DieRoll(40) + 40);
-            player.SetTimedPoisonResistance(player.TimedPoisonResistance + Program.Rng.DieRoll(40) + 40);
+            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(40) + 40);
+            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(40) + 40);
+            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(40) + 40);
+            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(40) + 40);
+            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(40) + 40);
             return true;
         }
 

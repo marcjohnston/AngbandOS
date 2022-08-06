@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows bright red...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             SaveGame.Instance.DestroyDoorsTouch();
             return true;

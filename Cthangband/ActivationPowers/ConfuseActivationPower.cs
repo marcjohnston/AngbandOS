@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         protected override string PostAimingMessage => "";
 
-        protected override bool Activate(Player player, Level level, int direction)
+        protected override bool Activate(SaveGame saveGame, int direction)
         {
             SaveGame.Instance.ConfuseMonster(direction, 20);
             return true;

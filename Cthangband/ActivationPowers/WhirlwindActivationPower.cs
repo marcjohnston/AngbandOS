@@ -15,15 +15,15 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 250;
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             for (int direction = 0; direction <= 9; direction++)
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[direction];
-                int x = player.MapX + level.KeypadDirectionXOffset[direction];
-                GridTile cPtr = level.Grid[y][x];
-                Monster mPtr = level.Monsters[cPtr.MonsterIndex];
-                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || level.GridPassable(y, x)))
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[direction];
+                GridTile cPtr = saveGame.Level.Grid[y][x];
+                Monster mPtr = saveGame.Level.Monsters[cPtr.MonsterIndex];
+                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || saveGame.Level.GridPassable(y, x)))
                 {
                     SaveGame.Instance.PlayerAttackMonster(y, x);
                 }

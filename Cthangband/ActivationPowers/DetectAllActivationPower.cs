@@ -13,7 +13,7 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows bright white...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             Profile.Instance.MsgPrint("An image forms in your mind...");
             SaveGame.Instance.DetectAll();

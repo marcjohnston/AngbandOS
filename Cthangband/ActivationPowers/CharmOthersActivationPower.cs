@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.CharmMonsters(player.Level * 2);
+            saveGame.CharmMonsters(saveGame.Player.Level * 2);
             return true;
         }
 

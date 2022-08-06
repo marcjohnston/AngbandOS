@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows a deep red...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.RestoreLevel();
+            saveGame.Player.RestoreLevel();
             return true;
         }
 

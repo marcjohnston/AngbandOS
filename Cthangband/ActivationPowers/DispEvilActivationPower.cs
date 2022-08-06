@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(300) + 300;
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.DispelEvil(player.Level * 5);
+            SaveGame.Instance.DispelEvil(saveGame.Player.Level * 5);
             return true;
         }
 

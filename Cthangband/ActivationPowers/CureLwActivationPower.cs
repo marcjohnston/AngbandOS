@@ -13,10 +13,10 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetTimedFear(0);
-            player.RestoreHealth(30);
+            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.RestoreHealth(30);
             return true;
         }
 

@@ -13,10 +13,10 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It lets out a shrill wail...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            int k = 3 * player.Level;
-            player.SetTimedProtectionFromEvil(player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
+            int k = 3 * saveGame.Player.Level;
+            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
             return true;
         }
 

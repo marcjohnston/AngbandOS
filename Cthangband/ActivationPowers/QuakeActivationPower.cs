@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 50;
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.Earthquake(player.MapY, player.MapX, 10);
+            SaveGame.Instance.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
             return true;
         }
 

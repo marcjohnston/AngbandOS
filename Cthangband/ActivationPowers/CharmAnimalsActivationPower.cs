@@ -15,9 +15,9 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 500;
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            SaveGame.Instance.CharmAnimals(player.Level * 2);
+            saveGame.CharmAnimals(saveGame.Player.Level * 2);
             return true;
         }
 

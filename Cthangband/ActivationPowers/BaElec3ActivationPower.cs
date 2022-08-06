@@ -18,7 +18,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(425) + 425;
 
-        protected override bool Activate(Player player, Level level, int direction)
+        protected override bool Activate(SaveGame saveGame, int direction)
         {
             SaveGame.Instance.FireBall(new ProjectElec(), direction, 250, 3);
             return true;

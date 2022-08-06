@@ -13,9 +13,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows soft white...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.ToggleRecall();
+            saveGame.Player.ToggleRecall();
             return true;
         }
 

@@ -14,11 +14,11 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (level.Monsters.SummonSpecific(player.MapY, player.MapX, (int)(player.Level * 1.5), Constants.SummonElemental))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental))
                 {
                     Profile.Instance.MsgPrint("An elemental materializes...");
                     Profile.Instance.MsgPrint("You fail to control it!");
@@ -26,7 +26,7 @@ namespace Cthangband.ActivationPowers
             }
             else
             {
-                if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, (int)(player.Level * 1.5), Constants.SummonElemental, player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental, saveGame.Player.Level == 50))
                 {
                     Profile.Instance.MsgPrint("An elemental materializes...");
                     Profile.Instance.MsgPrint("It seems obedient to you.");

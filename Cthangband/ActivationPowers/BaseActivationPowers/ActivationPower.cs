@@ -27,7 +27,7 @@ namespace Cthangband.ActivationPowers
         public abstract int RandomChance { get; }
 
         /// <inheritdoc/>
-        public abstract bool Activate(Player player, Level level);
+        public abstract bool Activate(SaveGame saveGame);
 
         /// <inheritdoc/>
         public abstract int Value { get; }

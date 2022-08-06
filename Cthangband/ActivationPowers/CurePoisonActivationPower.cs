@@ -13,10 +13,10 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "It glows deep blue...";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetTimedFear(0);
-            player.SetTimedPoison(0);
+            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.SetTimedPoison(0);
             return true;
         }
 

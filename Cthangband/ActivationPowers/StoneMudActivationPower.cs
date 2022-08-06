@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 5;
 
-        protected override bool Activate(Player player, Level level, int direction)
+        protected override bool Activate(SaveGame saveGame, int direction)
         {
             SaveGame.Instance.WallToMud(direction);
             return true;

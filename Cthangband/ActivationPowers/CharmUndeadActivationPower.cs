@@ -17,9 +17,9 @@ namespace Cthangband.ActivationPowers
 
         public override int RechargeTime(Player player) => 333;
 
-        protected override bool Activate(Player player, Level level, int direction)
+        protected override bool Activate(SaveGame saveGame, int direction)
         {
-            SaveGame.Instance.ControlOneUndead(direction, player.Level);
+            saveGame.ControlOneUndead(direction, saveGame.Player.Level);
             return true;
         }
 

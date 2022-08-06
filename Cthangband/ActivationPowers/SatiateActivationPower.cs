@@ -14,9 +14,9 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            player.SetFood(Constants.PyFoodMax - 1);
+            saveGame.Player.SetFood(Constants.PyFoodMax - 1);
             return true;
         }
 

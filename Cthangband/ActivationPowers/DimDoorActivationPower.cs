@@ -13,21 +13,21 @@ namespace Cthangband.ActivationPowers
 
         public override string PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
-        public override bool Activate(Player player, Level level)
+        public override bool Activate(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (!targetEngine.TgtPt(out int ii, out int ij))
             {
                 return false;
             }
-            player.Energy -= 60 - player.Level;
-            if (!level.GridPassableNoCreature(ij, ii) || 
-                level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) || 
-                level.Distance(ij, ii, player.MapY, player.MapX) > player.Level + 2 ||
-                Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
+            saveGame.Player.Energy -= 60 - saveGame.Player.Level;
+            if (!saveGame.Level.GridPassableNoCreature(ij, ii) ||
+                saveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+                saveGame.Level.Distance(ij, ii, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
+                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
             {
                 Profile.Instance.MsgPrint("You fail to exit the astral plane correctly!");
-                player.Energy -= 100;
+                saveGame.Player.Energy -= 100;
                 SaveGame.Instance.TeleportPlayer(10);
             }
             else
