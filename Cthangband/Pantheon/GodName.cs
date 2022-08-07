@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace Cthangband.Pantheon
 {
-    public enum GodName
+    internal enum GodName
     {
         None,
         Lobon,
