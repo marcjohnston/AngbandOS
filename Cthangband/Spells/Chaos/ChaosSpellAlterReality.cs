@@ -17,9 +17,7 @@ namespace Cthangband.Spells.Chaos
         {
             Profile.Instance.MsgPrint("The world changes!");
             {
-                saveGame.IsAutosave = true;
-                saveGame.DoCmdSaveGame();
-                saveGame.IsAutosave = false;
+                saveGame.DoCmdSaveGame(true);
             }
             saveGame.NewLevelFlag = true;
             saveGame.CameFrom = LevelStart.StartRandom;

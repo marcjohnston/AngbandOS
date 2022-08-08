@@ -477,9 +477,7 @@ namespace Cthangband.Commands
                 Gui.CommandArgument = SaveGame.Instance.CurDungeon.MaxLevel;
             }
             Profile.Instance.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
-            SaveGame.Instance.IsAutosave = true;
-            SaveGame.Instance.DoCmdSaveGame();
-            SaveGame.Instance.IsAutosave = false;
+            SaveGame.Instance.DoCmdSaveGame(true);
             SaveGame.Instance.CurrentDepth = Gui.CommandArgument;
             SaveGame.Instance.NewLevelFlag = true;
         }

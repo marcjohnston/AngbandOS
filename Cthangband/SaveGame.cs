@@ -50,7 +50,6 @@ namespace Cthangband
         public int DungeonDifficulty;
         public int EnergyUse;
         public bool HackMind;
-        public bool IsAutosave;
         public int ItemDisplayColumn = 50;
         public ItemFilterDelegate ItemFilter;
         public bool ItemFilterAll;
@@ -355,9 +354,9 @@ namespace Cthangband
             }
         }
 
-        public void DoCmdSaveGame()
+        public void DoCmdSaveGame(bool isAutosave)
         {
-            if (!IsAutosave)
+            if (!isAutosave)
             {
                 Disturb(true);
             }
@@ -1114,8 +1113,7 @@ namespace Cthangband
             }
             else
             {
-                IsAutosave = false;
-                DoCmdSaveGame();
+                DoCmdSaveGame(false);
                 if (!Program.ExitToDesktop)
                 {
                     Gui.Mixer.Play(MusicTrack.Menu);
@@ -2537,9 +2535,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(CurDungeon.Tower
                             ? "You feel yourself yanked downwards!"
                             : "You feel yourself yanked upwards!");
-                        IsAutosave = true;
-                        DoCmdSaveGame();
-                        IsAutosave = false;
+                        DoCmdSaveGame(true);
                         RecallDungeon = CurDungeon.Index;
                         CurrentDepth = 0;
                         if (Player.TownWithHouse > -1)
@@ -2563,9 +2559,7 @@ namespace Cthangband
                         Profile.Instance.MsgPrint(Dungeons[RecallDungeon].Tower
                             ? "You feel yourself yanked upwards!"
                             : "You feel yourself yanked downwards!");
-                        IsAutosave = true;
-                        DoCmdSaveGame();
-                        IsAutosave = false;
+                        DoCmdSaveGame(true);
                         CurDungeon = Dungeons[RecallDungeon];
                         Player.WildernessX = CurDungeon.X;
                         Player.WildernessY = CurDungeon.Y;
@@ -3058,9 +3052,7 @@ namespace Cthangband
         public void AlterReality()
         {
             Profile.Instance.MsgPrint("The world changes!");
-            IsAutosave = true;
-            DoCmdSaveGame();
-            IsAutosave = false;
+            DoCmdSaveGame(true);
             NewLevelFlag = true;
             CameFrom = LevelStart.StartRandom;
         }
@@ -6283,9 +6275,7 @@ namespace Cthangband
             if (CurrentDepth <= 0)
             {
                 Profile.Instance.MsgPrint(downDesc);
-                IsAutosave = true;
-                DoCmdSaveGame();
-                IsAutosave = false;
+                DoCmdSaveGame(true);
                 CurrentDepth++;
                 NewLevelFlag = true;
             }
@@ -6293,18 +6283,14 @@ namespace Cthangband
                      CurrentDepth >= CurDungeon.MaxLevel)
             {
                 Profile.Instance.MsgPrint(upDesc);
-                IsAutosave = true;
-                DoCmdSaveGame();
-                IsAutosave = false;
+                DoCmdSaveGame(true);
                 CurrentDepth--;
                 NewLevelFlag = true;
             }
             else if (Program.Rng.RandomLessThan(100) < 50)
             {
                 Profile.Instance.MsgPrint(upDesc);
-                IsAutosave = true;
-                DoCmdSaveGame();
-                IsAutosave = false;
+                DoCmdSaveGame(true);
                 CurrentDepth--;
                 NewLevelFlag = true;
                 CameFrom = LevelStart.StartRandom;
@@ -6312,15 +6298,11 @@ namespace Cthangband
             else
             {
                 Profile.Instance.MsgPrint(downDesc);
-                IsAutosave = true;
-                DoCmdSaveGame();
-                IsAutosave = false;
+                DoCmdSaveGame(true);
                 CurrentDepth++;
                 NewLevelFlag = true;
             }
-            IsAutosave = true;
-            DoCmdSaveGame();
-            IsAutosave = false;
+            DoCmdSaveGame(true);
             CurrentDepth++;
             NewLevelFlag = true;
             Gui.PlaySound(SoundEffect.TeleportLevel);
@@ -9235,9 +9217,7 @@ namespace Cthangband
                         // We'll need a new level
                         NewLevelFlag = true;
                         CameFrom = LevelStart.StartWalk;
-                        IsAutosave = true;
-                        DoCmdSaveGame();
-                        IsAutosave = false;
+                        DoCmdSaveGame(true);
                     }
                     else if (tile.FeatureType.IsClosedDoor)
                     {
@@ -9319,9 +9299,7 @@ namespace Cthangband
                         // We need a new map
                         NewLevelFlag = true;
                         CameFrom = LevelStart.StartWalk;
-                        IsAutosave = true;
-                        DoCmdSaveGame();
-                        IsAutosave = false;
+                        DoCmdSaveGame(true);
                     }
                     // If we can see that we're walking into a closed door, try to open it
                     else if (tile.FeatureType.IsClosedDoor)
@@ -11567,9 +11545,7 @@ namespace Cthangband
                         if (CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
                         {
                             Profile.Instance.MsgPrint("You start walking around. Your surroundings change.");
-                            IsAutosave = true;
-                            DoCmdSaveGame();
-                            IsAutosave = false;
+                            DoCmdSaveGame(true);
                             NewLevelFlag = true;
                             CameFrom = LevelStart.StartRandom;
                         }
@@ -12189,9 +12165,7 @@ namespace Cthangband
                             // Even if we survived, we need a new level
                             if (Player.Health >= 0)
                             {
-                                IsAutosave = true;
-                                DoCmdSaveGame();
-                                IsAutosave = false;
+                                DoCmdSaveGame(true);
                             }
                             NewLevelFlag = true;
                             // In dungeons we fall to a deeper level, but in towers we fall to a

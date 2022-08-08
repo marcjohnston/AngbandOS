@@ -38,9 +38,7 @@ namespace Cthangband.Commands
                 Profile.Instance.MsgPrint("You enter a maze of up staircases.");
             }
             // Autosave, just in case
-            SaveGame.Instance.IsAutosave = true;
-            SaveGame.Instance.DoCmdSaveGame();
-            SaveGame.Instance.IsAutosave = false;
+            SaveGame.Instance.DoCmdSaveGame(true);
             // In a tower, going up increases our level number
             if (SaveGame.Instance.CurDungeon.Tower)
             {
