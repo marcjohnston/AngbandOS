@@ -50,9 +50,7 @@ namespace Cthangband.Commands
                     Profile.Instance.MsgPrint("You enter a maze of down staircases.");
                 }
                 // Save the game, just in case
-                SaveGame.Instance.IsAutosave = true;
-                SaveGame.Instance.DoCmdSaveGame();
-                SaveGame.Instance.IsAutosave = false;
+                SaveGame.Instance.DoCmdSaveGame(true);
             }
             // If we're in a tower, a down staircase reduces our level number
             if (SaveGame.Instance.CurDungeon.Tower)

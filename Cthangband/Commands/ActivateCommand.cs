@@ -557,9 +557,7 @@ namespace Cthangband.Commands
                                     if (Gui.GetCheck("Leave this level? "))
                                     {
                                         {
-                                            SaveGame.Instance.IsAutosave = true;
-                                            SaveGame.Instance.DoCmdSaveGame();
-                                            SaveGame.Instance.IsAutosave = false;
+                                            SaveGame.Instance.DoCmdSaveGame(true);
                                         }
                                         SaveGame.Instance.NewLevelFlag = true;
                                         SaveGame.Instance.CameFrom = LevelStart.StartRandom;
