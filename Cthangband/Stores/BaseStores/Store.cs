@@ -239,7 +239,7 @@ namespace Cthangband
             SaveGame.Instance.ViewingItemList = false;
             Profile.Instance.MsgPrint(null);
             Gui.Clear();
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             _player.RedrawNeeded.Set(RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrEquippy);
@@ -478,7 +478,7 @@ namespace Cthangband
         private void DisplayStore()
         {
             Gui.Clear();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             string ownerName = OwnerName;
             if (String.IsNullOrEmpty(ownerName))
             {

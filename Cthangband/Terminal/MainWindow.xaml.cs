@@ -16,7 +16,6 @@ using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cthangband.Terminal
 {
@@ -28,7 +27,7 @@ namespace Cthangband.Terminal
         private const bool Fullscreen = false;
         public readonly Queue<char> KeyQueue = new Queue<char>();
         public TextBlock[][] Cells = new TextBlock[45][];
-        private BackgroundImage _backgroundImage = Cthangband.Terminal.BackgroundImage.None;
+        private BackgroundImage _backgroundImage = BackgroundImage.None;
 
         public void SetCellBackground(int row, int col, string color)
         {

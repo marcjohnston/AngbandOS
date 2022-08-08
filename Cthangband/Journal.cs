@@ -30,7 +30,7 @@ namespace Cthangband
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Paper);
+            Gui.SetBackground(BackgroundImage.Paper);
             while (true)
             {
                 Gui.Refresh();
@@ -106,7 +106,7 @@ namespace Cthangband
                         break;
                 }
             }
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             Gui.Load();
             Gui.FullScreenOverlay = false;
         }

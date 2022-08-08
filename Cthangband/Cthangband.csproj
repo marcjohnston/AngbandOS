@@ -668,6 +668,7 @@
     <Compile Include="Data\BaseItemTypes\WandTrapDoorDestruction.cs" />
     <Compile Include="Data\BaseItemTypes\WandWonder.cs" />
     <Compile Include="Enumerations\StompableType.cs" />
+    <Compile Include="GameServer.cs" />
     <Compile Include="ItemCategories\AmuletItemCategory.cs" />
     <Compile Include="ItemCategories\ArrowItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\ArmourItemCategory.cs" />

@@ -36,9 +36,9 @@ namespace Cthangband.Terminal
         /// Opens a terminal window using the given parameters
         /// </summary>
         /// <param name="parameters"> The parameters for the terminal window </param>
-        public Terminal()
+        public Terminal(IConsole console)
         {
-            _console = new MainWindow();
+            _console = console;
             CursorVisible = false;
             CursorRow = 0;
             CursorCol = 0;

@@ -394,10 +394,10 @@ namespace Cthangband.UI
         /// <summary>
         /// Initialises the Gui
         /// </summary>
-        public static void Initialise(Settings settings)
+        public static void Initialise(Settings settings, IConsole console)
         {
             Mixer.Initialise(settings.MusicVolume / 100.0f, settings.SoundVolume / 100.0f);
-            _terminal = new Terminal.Terminal();
+            _terminal = new Terminal.Terminal(console);
             _terminal.Refresh();
             _terminal.CursorColour = Color.SkyBlue;
             ColorData.Add(Colour.Background, Color.Black);

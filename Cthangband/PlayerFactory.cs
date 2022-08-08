@@ -201,7 +201,7 @@ namespace Cthangband
 
         public Player CharacterGeneration(ExPlayer ex)
         {
-            Gui.SetBackground(Terminal.BackgroundImage.Paper);
+            Gui.SetBackground(BackgroundImage.Paper);
             Gui.Mixer.Play(MusicTrack.Chargen);
             _player = new Player();
             if (PlayerBirth(ex))

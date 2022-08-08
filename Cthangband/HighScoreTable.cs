@@ -82,7 +82,7 @@ namespace Cthangband
             if (collectedScores.Count == 0)
             {
                 Gui.Clear();
-                Gui.SetBackground(Terminal.BackgroundImage.Normal);
+                Gui.SetBackground(BackgroundImage.Normal);
                 Gui.Print(Colour.Yellow, "High Scores", 1, 34);
                 Gui.Print(Colour.Yellow, "===========", 2, 34);
                 Gui.AnyKey(43);
@@ -97,7 +97,7 @@ namespace Cthangband
                 if (line == 0)
                 {
                     Gui.Clear();
-                    Gui.SetBackground(Terminal.BackgroundImage.Normal);
+                    Gui.SetBackground(BackgroundImage.Normal);
                     Gui.Print(Colour.Yellow, "High Scores", 1, 34);
                     Gui.Print(Colour.Yellow, "===========", 2, 34);
                 }

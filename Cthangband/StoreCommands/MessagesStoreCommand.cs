@@ -31,7 +31,7 @@ namespace Cthangband.StoreCommands
             int horizontalOffset = 0;
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
             while (true)
             {

@@ -220,7 +220,7 @@ namespace Cthangband.Commands
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
 
             Gui.Clear();
             int index = 0;
@@ -238,7 +238,7 @@ namespace Cthangband.Commands
 
             Gui.Load();
             Gui.FullScreenOverlay = false;
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
 
             if (!Int32.TryParse(selection, out int selectedIndex))
             {
@@ -407,7 +407,7 @@ namespace Cthangband.Commands
             Gui.Save();
             Gui.Refresh();
             Gui.Clear();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             Gui.Print(Colour.Red, "Wizard Commands", 1, 31);
             Gui.Print(Colour.Red, "===============", 2, 31);
             Gui.Print(Colour.Red, "Character Editing", 4, 1);
@@ -452,7 +452,7 @@ namespace Cthangband.Commands
             Gui.Print("Hit any key to continue", 43, 23);
             Gui.Inkey();
             Gui.Load();
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             Gui.FullScreenOverlay = false;
         }
 
@@ -656,11 +656,11 @@ namespace Cthangband.Commands
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             int kIdx = WizCreateItemtype();
             Gui.Load();
             Gui.FullScreenOverlay = false;
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             if (kIdx == 0)
             {
                 return;

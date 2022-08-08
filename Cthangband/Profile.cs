@@ -33,6 +33,11 @@ namespace Cthangband
         {
             get; private set;
         }
+        public Profile()
+        {
+            Instance = this;
+            Initialise();
+        }
 
         public SaveGame Game
         {

@@ -22,7 +22,7 @@ namespace Cthangband.Commands
             Gui.Save();
             Gui.Refresh();
             Gui.Clear();
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             Gui.Print(Colour.Yellow, "Numpad", 1, 1);
             Gui.Print("7 8 9", 3, 1);
             Gui.Print(" \\|/", 4, 1);
@@ -91,7 +91,7 @@ namespace Cthangband.Commands
             }
             Gui.AnyKey(44);
             Gui.Load();
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             Gui.FullScreenOverlay = false;
         }
     }

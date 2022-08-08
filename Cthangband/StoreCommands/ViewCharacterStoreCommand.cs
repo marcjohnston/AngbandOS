@@ -29,7 +29,7 @@ namespace Cthangband.StoreCommands
             // Save the current screen
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Gui.SetBackground(Terminal.BackgroundImage.Paper);
+            Gui.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(player);
             while (true)
@@ -50,7 +50,7 @@ namespace Cthangband.StoreCommands
                 Profile.Instance.MsgPrint(null);
             }
             // Restore the screen
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             Gui.Load();
             Gui.FullScreenOverlay = false;
             player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |

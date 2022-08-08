@@ -1,20 +1,8 @@
-﻿using Cthangband.StaticData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
+﻿using Cthangband.Terminal;
 
-namespace Cthangband.Terminal
+namespace Cthangband
 {
-    internal interface IConsole
+    public interface IConsole
     {
         void SetCellBackground(int row, int col, string color);
         void Clear();

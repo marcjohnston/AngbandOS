@@ -477,7 +477,7 @@ namespace Cthangband
             }
             StaticResources.LoadOrCreate();
             HiScores = new HighScoreTable();
-            Gui.Initialise(_settings);
+            Gui.Initialise(_settings, new MainWindow());
             while (!ExitToDesktop)
             {
                 ShowMainMenu();

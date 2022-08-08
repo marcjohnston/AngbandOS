@@ -892,7 +892,7 @@ namespace Cthangband
         public void Play()
         {
             Gui.FullScreenOverlay = true;
-            Gui.SetBackground(Terminal.BackgroundImage.Normal);
+            Gui.SetBackground(BackgroundImage.Normal);
             Gui.CursorVisible = false;
             if (Program.Rng.UseFixed)
             {
@@ -949,7 +949,7 @@ namespace Cthangband
                 factory.GenerateNewLevel();
             }
             Gui.FullScreenOverlay = false;
-            Gui.SetBackground(Terminal.BackgroundImage.Overhead);
+            Gui.SetBackground(BackgroundImage.Overhead);
             Playing = true;
             if (Player.Health < 0)
             {
@@ -1760,7 +1760,7 @@ namespace Cthangband
             Player.ExperiencePoints = Player.MaxExperienceGained;
             Player.Level = Player.MaxLevelGained;
             Player.Gold += 10000000;
-            Gui.SetBackground(Terminal.BackgroundImage.Crown);
+            Gui.SetBackground(BackgroundImage.Crown);
             Gui.Clear();
             Gui.AnyKey(44);
         }
@@ -1807,12 +1807,12 @@ namespace Cthangband
                 DateTime ct = DateTime.Now;
                 if (corpse.IsWinner)
                 {
-                    Gui.SetBackground(Terminal.BackgroundImage.Sunset);
+                    Gui.SetBackground(BackgroundImage.Sunset);
                     Gui.Mixer.Play(MusicTrack.Victory);
                 }
                 else
                 {
-                    Gui.SetBackground(Terminal.BackgroundImage.Tomb);
+                    Gui.SetBackground(BackgroundImage.Tomb);
                     Gui.Mixer.Play(MusicTrack.Death);
                 }
                 Gui.Clear();
