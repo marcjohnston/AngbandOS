@@ -12,20 +12,91 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cthangband.Terminal
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    internal partial class MainWindow : Window
+    internal partial class MainWindow : System.Windows.Window, IConsole
     {
+        private const bool Fullscreen = false;
         public readonly Queue<char> KeyQueue = new Queue<char>();
         public TextBlock[][] Cells = new TextBlock[45][];
         private BackgroundImage _backgroundImage = Cthangband.Terminal.BackgroundImage.None;
+
+        public void SetCellBackground(int row, int col, string color)
+        {
+            if (color == null)
+            {
+                Cells[row][col].Background = null;
+            }
+            else
+            {
+                Cells[row][col].Background = new SolidColorBrush(FromHex(color));
+            }
+        }
+
+        public void Clear()
+        {
+            foreach (System.Windows.Controls.TextBlock[] line in Cells)
+            {
+                foreach (System.Windows.Controls.TextBlock textBlock in line)
+                {
+                    textBlock.Text = " ";
+                }
+            }
+        }
+
+        public void Print(int row, int col, string text, string colour)
+        {
+            foreach (char c in text)
+            {
+                if (row >= 0 && row < Constants.ConsoleHeight && col >= 0 && col < 80)
+                {
+                    char printable = c;
+                    if (printable < 32)
+                    {
+                        printable = '?';
+                    }
+                    System.Windows.Controls.TextBlock t = Cells[row][col];
+                    t.Foreground = new SolidColorBrush(FromHex(colour));
+                    t.Text = printable.ToString();
+                    col++;
+                }
+            }
+        }
+
+        public void SetBackground(BackgroundImage image)
+        {
+            BackgroundImage = image;
+        }
+
+        public char WaitForKey()
+        {
+            while (KeyQueue.Count == 0)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                if (KeyQueue.Count == 0)
+                {
+                    System.Threading.Thread.Sleep(5);
+                }
+            }
+            return KeyQueue.Dequeue();
+        }
+
+        private System.Windows.Media.Color FromHex(string hex)
+        {
+            string colorcode = hex;
+            int argb = Int32.Parse(colorcode.Replace("#", ""), System.Globalization.NumberStyles.HexNumber);
+            System.Windows.Media.Color value = System.Windows.Media.Color.FromArgb((byte)((argb & -16777216) >> 0x18), (byte)((argb & 0xff0000) >> 0x10), (byte)((argb & 0xff00) >> 8), (byte)(argb & 0xff));
+            return value;
+        }
 
         public MainWindow()
         {
@@ -33,6 +104,22 @@ namespace Cthangband.Terminal
             KeyDown += MainWindow_KeyDown;
             Closing += MainWindow_Closing;
             TextInput += MainWindow_TextInput;
+            if (Fullscreen)
+            {
+                WindowStyle = WindowStyle.None;
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                Width = 1600;
+                Height = 900;
+            }
+            Title = "";
+            InitializeGrid();
+            ElementHost.EnableModelessKeyboardInterop(this);
+            Visibility = Visibility.Visible;
         }
 
         public BackgroundImage BackgroundImage
@@ -110,7 +197,7 @@ namespace Cthangband.Terminal
             get => _backgroundImage;
         }
 
-        public void InitializeGrid(TerminalParameters parameters)
+        public void InitializeGrid()
         {
             BackgroundImage = BackgroundImage.Menu;
             Content = null;
@@ -122,7 +209,7 @@ namespace Cthangband.Terminal
             grid.IsHitTestVisible = false;
             grid.IsEnabled = false;
             grid.Cursor = Cursors.None;
-            FontFamily family = new FontFamily(parameters.FontName);
+            FontFamily family = new FontFamily("Courier New");
             Cells = new TextBlock[Constants.ConsoleHeight][];
             for (int row = 0; row < Constants.ConsoleHeight; row++)
             {
@@ -133,8 +220,8 @@ namespace Cthangband.Terminal
                     TextBlock x = new TextBlock();
                     v.Stretch = Stretch.Fill;
                     x.FontFamily = family;
-                    x.FontWeight = parameters.FontBold ? FontWeights.Bold : FontWeights.Regular;
-                    x.FontStyle = parameters.FontItalic ? FontStyles.Italic : FontStyles.Normal;
+                    x.FontWeight = FontWeights.Regular;
+                    x.FontStyle = FontStyles.Normal;
                     x.Text = new string(' ', 1);
                     x.Background = null;
                     x.Foreground = Brushes.White;
@@ -250,5 +337,6 @@ namespace Cthangband.Terminal
                 }
             }
         }
+
     }
 }

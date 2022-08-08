@@ -397,8 +397,7 @@ namespace Cthangband.UI
         public static void Initialise(Settings settings)
         {
             Mixer.Initialise(settings.MusicVolume / 100.0f, settings.SoundVolume / 100.0f);
-            TerminalParameters startupParameters = settings.Parameters();
-            _terminal = new Terminal.Terminal(startupParameters);
+            _terminal = new Terminal.Terminal();
             _terminal.Refresh();
             _terminal.CursorColour = Color.SkyBlue;
             ColorData.Add(Colour.Background, Color.Black);

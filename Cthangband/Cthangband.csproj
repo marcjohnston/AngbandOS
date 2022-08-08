@@ -1394,6 +1394,7 @@
     <Compile Include="Talents\TalentTelekineticWave.cs" />
     <Compile Include="TargetEngine.cs" />
     <Compile Include="Terminal\BackgroundImage.cs" />
+    <Compile Include="Terminal\IConsole.cs" />
     <Compile Include="Terminal\Resolution.cs" />
     <Compile Include="UI\Display.cs" />
     <Compile Include="Dungeon.cs" />

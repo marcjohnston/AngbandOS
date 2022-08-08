@@ -19,7 +19,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            var menuItems = new List<string>() { "Resume Game", "Options", "Quit to Menu", "Quit to Desktop" };
+            var menuItems = new List<string>() { "Resume Game", "Quit to Menu", "Quit to Desktop" };
             var menu = new PopupMenu(menuItems);
             var result = menu.Show();
             switch (result)
@@ -28,17 +28,12 @@ namespace Cthangband.Commands
                 case -1:
                 case 0:
                     return;
-                // Options
-                case 1:
-                    Program.ChangeOptions();
-                    Gui.SetBackground(BackgroundImage.Overhead);
-                    break;
                 // Quit to Menu
-                case 2:
+                case 1:
                     SaveGame.Instance.Playing = false;
                     break;
                 // Quit to Desktop
-                case 3:
+                case 2:
                     SaveGame.Instance.Playing = false;
                     Program.ExitToDesktop = true;
                     break;

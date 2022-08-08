@@ -106,200 +106,200 @@ namespace Cthangband
             }
         }
 
-        internal static void ChangeOptions()
-        {
-            var fonts = Gui.Terminal.EnumerateFonts();
-            var font = 0;
-            for (int i = 0; i < fonts.Count; i++)
-            {
-                if (fonts[i] == _settings.Font)
-                {
-                    font = i;
-                    break;
-                }
-            }
-            var resolutions = Gui.Terminal.EnumerateResolutions();
-            var styles = new List<string> { "Regular", "Bold", "Italic", "Bold Italic" };
-            var resolution = _settings.Resolution;
-            var menuItem = 0;
-            if (resolution == 0)
-            {
-                resolution = 5;
-            }
-            int textStyle = 0;
-            if (_settings.Bold)
-            {
-                textStyle += 1;
-            }
-            if (_settings.Italic)
-            {
-                textStyle += 2;
-            }
-            Gui.Save();
-            Gui.FullScreenOverlay = true;
-            Gui.InPopupMenu = true;
-            Gui.SetBackground(BackgroundImage.Options);
-            PrintOptionsScreen();
-            var blank = new string(' ', 34);
-            while (true)
-            {
-                for (int i = 4; i < 10; i++)
-                {
-                    Gui.Print(Colour.White, blank, i, 16);
-                }
-                Gui.Print(menuItem == 0 ? Colour.Pink : Colour.Purple, _settings.Font, 4, 16);
-                Gui.Print(menuItem == 1 ? Colour.Pink : Colour.Purple, styles[textStyle], 5, 16);
-                Gui.Print(menuItem == 2 ? Colour.Pink : Colour.Purple, (_settings.Resolution == 0 ? "Fullscreen" : "Windowed"), 6, 16);
-                Gui.Print(menuItem == 3 ? Colour.Pink : Colour.Purple, resolutions[resolution - 1].ToString(), 7, 16);
-                Gui.Print(menuItem == 4 ? Colour.Pink : Colour.Purple, _settings.MusicVolume.ToString() + "%", 8, 16);
-                Gui.Print(menuItem == 5 ? Colour.Pink : Colour.Purple, _settings.SoundVolume.ToString() + "%", 9, 16);
-                Gui.HideCursorOnFullScreenInkey = true;
-                var c = Gui.Inkey();
-                if (c == '\r' || c == ' ' || c == '\x1b')
-                {
-                    break;
-                }
-                if (c == '2')
-                {
-                    menuItem++;
-                    if (menuItem == 6)
-                    {
-                        menuItem = 0;
-                    }
-                }
-                if (c == '8')
-                {
-                    menuItem--;
-                    if (menuItem == -1)
-                    {
-                        menuItem = 5;
-                    }
-                }
-                if (c == '6')
-                {
-                    switch (menuItem)
-                    {
-                        case 0:
-                            font++;
-                            if (font >= fonts.Count)
-                            {
-                                font = 0;
-                            }
-                            _settings.Font = fonts[font];
-                            Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
-                            break;
+ //       internal static void ChangeOptions()
+ //       {
+ //           var fonts = Gui.Terminal.EnumerateFonts();
+ //           var font = 0;
+ //           for (int i = 0; i < fonts.Count; i++)
+ //           {
+ //               if (fonts[i] == _settings.Font)
+ //               {
+ //                   font = i;
+ //                   break;
+ //               }
+ //           }
+ //           var resolutions = Gui.Terminal.EnumerateResolutions();
+ //           var styles = new List<string> { "Regular", "Bold", "Italic", "Bold Italic" };
+ //           var resolution = _settings.Resolution;
+ //           var menuItem = 0;
+ //           if (resolution == 0)
+ //           {
+ //               resolution = 5;
+ //           }
+ //           int textStyle = 0;
+ //           if (_settings.Bold)
+ //           {
+ //               textStyle += 1;
+ //           }
+ //           if (_settings.Italic)
+ //           {
+ //               textStyle += 2;
+ //           }
+ //           Gui.Save();
+ //           Gui.FullScreenOverlay = true;
+ //           Gui.InPopupMenu = true;
+ //           Gui.SetBackground(BackgroundImage.Options);
+ //           PrintOptionsScreen();
+ //           var blank = new string(' ', 34);
+ //           while (true)
+ //           {
+ //               for (int i = 4; i < 10; i++)
+ //               {
+ //                   Gui.Print(Colour.White, blank, i, 16);
+ //               }
+ //               Gui.Print(menuItem == 0 ? Colour.Pink : Colour.Purple, _settings.Font, 4, 16);
+ //               Gui.Print(menuItem == 1 ? Colour.Pink : Colour.Purple, styles[textStyle], 5, 16);
+ //               Gui.Print(menuItem == 2 ? Colour.Pink : Colour.Purple, (_settings.Resolution == 0 ? "Fullscreen" : "Windowed"), 6, 16);
+ //               Gui.Print(menuItem == 3 ? Colour.Pink : Colour.Purple, resolutions[resolution - 1].ToString(), 7, 16);
+ //               Gui.Print(menuItem == 4 ? Colour.Pink : Colour.Purple, _settings.MusicVolume.ToString() + "%", 8, 16);
+ //               Gui.Print(menuItem == 5 ? Colour.Pink : Colour.Purple, _settings.SoundVolume.ToString() + "%", 9, 16);
+ //               Gui.HideCursorOnFullScreenInkey = true;
+ //               var c = Gui.Inkey();
+ //               if (c == '\r' || c == ' ' || c == '\x1b')
+ //               {
+ //                   break;
+ //               }
+ //               if (c == '2')
+ //               {
+ //                   menuItem++;
+ //                   if (menuItem == 6)
+ //                   {
+ //                       menuItem = 0;
+ //                   }
+ //               }
+ //               if (c == '8')
+ //               {
+ //                   menuItem--;
+ //                   if (menuItem == -1)
+ //                   {
+ //                       menuItem = 5;
+ //                   }
+ //               }
+ //               if (c == '6')
+ //               {
+ //                   switch (menuItem)
+ //                   {
+ //                       case 0:
+ //                           font++;
+ //                           if (font >= fonts.Count)
+ //                           {
+ //                               font = 0;
+ //                           }
+ //                           _settings.Font = fonts[font];
+ ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
+ //                           break;
 
-                        case 1:
-                            textStyle++;
-                            if (textStyle >= styles.Count)
-                            {
-                                textStyle = 0;
-                            }
-                            _settings.Bold = (textStyle == 1 || textStyle == 3);
-                            _settings.Italic = (textStyle == 2 || textStyle == 3);
-                            Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
-                            break;
+ //                       case 1:
+ //                           textStyle++;
+ //                           if (textStyle >= styles.Count)
+ //                           {
+ //                               textStyle = 0;
+ //                           }
+ //                           _settings.Bold = (textStyle == 1 || textStyle == 3);
+ //                           _settings.Italic = (textStyle == 2 || textStyle == 3);
+ ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
+ //                           break;
 
-                        case 2:
-                            _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
-                            Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
-                            break;
+ //                       case 2:
+ //                           _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
+ //                           Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
+ //                           break;
 
-                        case 3:
-                            if (resolution < resolutions.Count)
-                            {
-                                resolution++;
-                                if (_settings.Resolution != 0)
-                                {
-                                    _settings.Resolution = resolution;
-                                    Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
-                                }
-                            }
-                            break;
+ //                       case 3:
+ //                           if (resolution < resolutions.Count)
+ //                           {
+ //                               resolution++;
+ //                               if (_settings.Resolution != 0)
+ //                               {
+ //                                   _settings.Resolution = resolution;
+ //                                   Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
+ //                               }
+ //                           }
+ //                           break;
 
-                        case 4:
-                            if (_settings.MusicVolume < 100)
-                            {
-                                _settings.MusicVolume += 5;
-                            }
-                            Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
-                            Gui.Mixer.ResetCurrentMusicVolume();
-                            break;
+ //                       case 4:
+ //                           if (_settings.MusicVolume < 100)
+ //                           {
+ //                               _settings.MusicVolume += 5;
+ //                           }
+ //                           Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
+ //                           Gui.Mixer.ResetCurrentMusicVolume();
+ //                           break;
 
-                        case 5:
-                            if (_settings.SoundVolume < 100)
-                            {
-                                _settings.SoundVolume += 5;
-                            }
-                            Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
-                            break;
-                    }
-                }
-                if (c == '4')
-                {
-                    switch (menuItem)
-                    {
-                        case 0:
-                            font--;
-                            if (font < 0)
-                            {
-                                font = fonts.Count - 1;
-                            }
-                            _settings.Font = fonts[font];
-                            Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
-                            break;
+ //                       case 5:
+ //                           if (_settings.SoundVolume < 100)
+ //                           {
+ //                               _settings.SoundVolume += 5;
+ //                           }
+ //                           Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
+ //                           break;
+ //                   }
+ //               }
+ //               if (c == '4')
+ //               {
+ //                   switch (menuItem)
+ //                   {
+ //                       case 0:
+ //                           font--;
+ //                           if (font < 0)
+ //                           {
+ //                               font = fonts.Count - 1;
+ //                           }
+ //                           _settings.Font = fonts[font];
+ ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
+ //                           break;
 
-                        case 1:
-                            textStyle--;
-                            if (textStyle < 0)
-                            {
-                                textStyle = styles.Count - 1;
-                            }
-                            _settings.Bold = (textStyle == 1 || textStyle == 3);
-                            _settings.Italic = (textStyle == 2 || textStyle == 3);
-                            Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
-                            break;
+ //                       case 1:
+ //                           textStyle--;
+ //                           if (textStyle < 0)
+ //                           {
+ //                               textStyle = styles.Count - 1;
+ //                           }
+ //                           _settings.Bold = (textStyle == 1 || textStyle == 3);
+ //                           _settings.Italic = (textStyle == 2 || textStyle == 3);
+ ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
+ //                           break;
 
-                        case 2:
-                            _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
-                            Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
-                            break;
+ //                       case 2:
+ //                           _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
+ //                           Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
+ //                           break;
 
-                        case 3:
-                            if (resolution > 1)
-                            {
-                                resolution--;
-                                if (_settings.Resolution != 0)
-                                {
-                                    _settings.Resolution = resolution;
-                                    Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
-                                }
-                            }
-                            break;
+ //                       case 3:
+ //                           if (resolution > 1)
+ //                           {
+ //                               resolution--;
+ //                               if (_settings.Resolution != 0)
+ //                               {
+ //                                   _settings.Resolution = resolution;
+ //                                   Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
+ //                               }
+ //                           }
+ //                           break;
 
-                        case 4:
-                            if (_settings.MusicVolume > 0)
-                            {
-                                _settings.MusicVolume -= 5;
-                            }
-                            Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
-                            Gui.Mixer.ResetCurrentMusicVolume();
-                            break;
+ //                       case 4:
+ //                           if (_settings.MusicVolume > 0)
+ //                           {
+ //                               _settings.MusicVolume -= 5;
+ //                           }
+ //                           Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
+ //                           Gui.Mixer.ResetCurrentMusicVolume();
+ //                           break;
 
-                        case 5:
-                            if (_settings.SoundVolume > 0)
-                            {
-                                _settings.SoundVolume -= 5;
-                            }
-                            Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
-                            break;
-                    }
-                }
-            }
-            Gui.InPopupMenu = false;
-            Gui.FullScreenOverlay = false;
-            Gui.Load();
-        }
+ //                       case 5:
+ //                           if (_settings.SoundVolume > 0)
+ //                           {
+ //                               _settings.SoundVolume -= 5;
+ //                           }
+ //                           Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
+ //                           break;
+ //                   }
+ //               }
+ //           }
+ //           Gui.InPopupMenu = false;
+ //           Gui.FullScreenOverlay = false;
+ //           Gui.Load();
+ //       }
 
         internal static Dictionary<string, HighScore> GetHighScoreFromSaves()
         {
@@ -789,18 +789,12 @@ namespace Cthangband
                 var profileChoice = -1;
                 if (canContinue)
                 {
-                    var list = new List<string> { "Continue Game", "New Game", "Load Game", "High Scores", "Cthangpedia", "Options", "Quit to Desktop" };
+                    var list = new List<string> { "Continue Game", "New Game", "Load Game", "High Scores", "Cthangpedia", "Quit to Desktop" };
                     var menu = new PopupMenu(list);
                     var menuChoice = menu.Show();
                     {
                         switch (menuChoice)
                         {
-                            case -1:
-                            case 6:
-                                // Exit to Desktop
-                                ExitToDesktop = true;
-                                return;
-
                             case 0:
                                 // Continue Game
                                 ActiveSaveSlot = _saveSlot[saveIndex];
@@ -841,27 +835,22 @@ namespace Cthangband
                                 Gui.ShowManual();
                                 break;
 
-                            case 5:
-                                // Options
-                                ChangeOptions();
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    var list = new List<string> { "New Game", "Load Game", "High Scores", "Cthangpedia", "Options", "Quit to Desktop" };
-                    var menu = new PopupMenu(list);
-                    var menuChoice = menu.Show();
-                    {
-                        switch (menuChoice)
-                        {
                             case -1:
                             case 5:
                                 // Exit to Desktop
                                 ExitToDesktop = true;
                                 return;
-
+                        }
+                    }
+                }
+                else
+                {
+                    var list = new List<string> { "New Game", "Load Game", "High Scores", "Cthangpedia", "Quit to Desktop" };
+                    var menu = new PopupMenu(list);
+                    var menuChoice = menu.Show();
+                    {
+                        switch (menuChoice)
+                        {
                             case 0:
                                 // New Game
                                 profileChoice = NewGame(saveIndex);
@@ -896,10 +885,11 @@ namespace Cthangband
                                 Gui.ShowManual();
                                 break;
 
+                            case -1:
                             case 4:
-                                // Options
-                                ChangeOptions();
-                                break;
+                                // Exit to Desktop
+                                ExitToDesktop = true;
+                                return;
                         }
                     }
                 }
