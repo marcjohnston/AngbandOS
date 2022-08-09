@@ -114,7 +114,7 @@ namespace Cthangband.Projection
                     note = " changes!";
                     dam = 0;
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    MonsterRace race = Profile.Instance.MonsterRaces[tmp];
+                    MonsterRace race = SaveGame.Instance.MonsterRaces[tmp];
                     Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
                     mPtr = Level.Monsters[cPtr.MonsterIndex];
                 }

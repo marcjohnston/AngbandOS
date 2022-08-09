@@ -215,7 +215,7 @@ namespace Cthangband.Patrons
                             dummy2 = SwordType.SvBladeOfChaos;
                             break;
                     }
-                    qPtr.AssignItemType(Profile.Instance.ItemTypes.LookupKind(ItemCategory.Sword, dummy2));
+                    qPtr.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Sword, dummy2));
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);

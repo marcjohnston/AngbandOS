@@ -199,20 +199,20 @@ namespace Cthangband
             }
             WeightCarried = 0;
             Inventory = new Inventory(this);
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in Profile.Instance.FixedArtifacts)
+            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.Instance.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;
             }
-            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;
             }
-            for (int i = 1; i < Profile.Instance.MonsterRaces.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.MonsterRaces.Count; i++)
             {
-                MonsterRace rPtr = Profile.Instance.MonsterRaces[i];
+                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[i];
                 rPtr.CurNum = 0;
                 rPtr.MaxNum = 100;
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
@@ -221,7 +221,7 @@ namespace Cthangband
                 }
                 rPtr.Knowledge.RPkills = 0;
             }
-            Profile.Instance.MonsterRaces[Profile.Instance.MonsterRaces.Count - 1].MaxNum = 0;
+            SaveGame.Instance.MonsterRaces[SaveGame.Instance.MonsterRaces.Count - 1].MaxNum = 0;
             Food = Constants.PyFoodFull - 1;
             IsWizard = false;
             IsWinner = false;

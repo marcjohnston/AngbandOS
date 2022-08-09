@@ -54,7 +54,7 @@ namespace Cthangband
                 {
                     return false;
                 }
-                rPtr = Profile.Instance.MonsterRaces[rIdx];
+                rPtr = SaveGame.Instance.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0 && (rPtr.Flags1 & MonsterFlag1.EscortsGroup) == 0)
                 {
                     break;
@@ -384,7 +384,7 @@ namespace Cthangband
                     continue;
                 }
                 int rIdx = table[i].Index;
-                MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
                 {
                     continue;
@@ -736,7 +736,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    MonsterRace race = Profile.Instance.MonsterRaces[z];
+                    MonsterRace race = SaveGame.Instance.MonsterRaces[z];
                     PlaceMonsterOne(ny, nx, race, slp, charm);
                     if ((race.Flags1 & MonsterFlag1.Friends) != 0 ||
                         (rPtr.Flags1 & MonsterFlag1.EscortsGroup) != 0)
@@ -758,7 +758,7 @@ namespace Cthangband
 
         public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
         {
-            return PlaceMonsterAux(y, x, Profile.Instance.MonsterRaces[index], slp, grp, charm);
+            return PlaceMonsterAux(y, x, SaveGame.Instance.MonsterRaces[index], slp, grp, charm);
         }
 
         public void ReplacePet(int y1, int x1, Monster monster)
@@ -838,7 +838,7 @@ namespace Cthangband
             {
                 return false;
             }
-            MonsterRace race = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
             if (type == Constants.SummonAvatar)
             {
                 groupOk = false;
@@ -885,7 +885,7 @@ namespace Cthangband
             {
                 return false;
             }
-            MonsterRace race = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
             if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
             {
                 return false;
@@ -1349,7 +1349,7 @@ namespace Cthangband
 
         private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             int extra = 0;
             int[] hackY = new int[Constants.GroupMax];
             int[] hackX = new int[Constants.GroupMax];
@@ -1406,8 +1406,8 @@ namespace Cthangband
 
         private bool PlaceMonsterOkay(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[_placeMonsterIdx];
-            MonsterRace zPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[_placeMonsterIdx];
+            MonsterRace zPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if (zPtr.Character != rPtr.Character)
             {
                 return false;
@@ -1551,7 +1551,7 @@ namespace Cthangband
 
         private bool SummonSpecificOkay(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             bool okay = false;
             switch (_summonSpecificType)
             {

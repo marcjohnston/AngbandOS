@@ -184,7 +184,7 @@ namespace Cthangband
 
         public static bool KindIsGood(int kIdx)
         {
-            ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
+            ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
             switch (kPtr.Category)
             {
                 case ItemCategory.HardArmor:
@@ -264,7 +264,7 @@ namespace Cthangband
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
                 if (SaveGame.Instance.Level?.OpeningChest == true &&
                     kPtr.Category == ItemCategory.Chest)
                 {
@@ -321,7 +321,7 @@ namespace Cthangband
                     i = j;
                 }
             }
-            return Profile.Instance.ItemTypes[table[i].Index];
+            return SaveGame.Instance.ItemTypes[table[i].Index];
         }
 
         public bool HasQuality()

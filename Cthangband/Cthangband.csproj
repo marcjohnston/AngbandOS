@@ -1426,7 +1426,6 @@
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="PlayerHistory.cs" />
     <Compile Include="Profession.cs" />
-    <Compile Include="Profile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />

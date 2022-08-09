@@ -27,6 +27,35 @@ namespace Cthangband
         private static string _activeSaveSlot;
         private static string[] _saveSlot;
         private static Settings _settings;
+        private static SaveGame saveGame;
+
+        public static SaveGame LoadOrCreate(string fileName)
+        {
+            FileInfo file = new FileInfo(fileName);
+            if (file.Exists)
+            {
+                return DeserializeFromSaveFolder<SaveGame>(fileName);
+            }
+            else
+            {
+                SaveGame game = new SaveGame();
+                game.Initialise();
+                return game;
+            }
+        }
+        public static void Run(SaveGame Game)
+        {
+            Game.MsgFlag = false;
+            Game.MsgPrint(null);
+            Game.MsgFlag = false;
+
+            // Set a globally accessible reference to our game
+            SaveGame.Instance = Game;
+            // And play it!
+            Game.Play();
+            // Remove the global reference
+            SaveGame.Instance = null;
+        }
 
         public static string ActiveSaveSlot
         {
@@ -34,7 +63,8 @@ namespace Cthangband
             private set
             {
                 _activeSaveSlot = value;
-                Profile.LoadOrCreate(value);
+
+                saveGame = LoadOrCreate(value);
             }
         }
 
@@ -426,24 +456,24 @@ namespace Cthangband
             {
                 return null;
             }
-            Profile tempProfile;
+            SaveGame tempSaveGame;
             try
             {
-                tempProfile = DeserializeFromSaveFolder<Profile>(save);
+                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
             }
             catch (Exception)
             {
                 return null;
             }
-            if (tempProfile.Game.Player == null)
+            if (tempSaveGame.Player == null)
             {
                 return null;
             }
-            if (tempProfile.Game.Player.IsWizard)
+            if (tempSaveGame.Player.IsWizard)
             {
                 return null;
             }
-            return new HighScore(tempProfile.Game.Player, tempProfile.Game);
+            return new HighScore(tempSaveGame.Player, tempSaveGame);
         }
 
         private static int LoadGame(int saveIndex)
@@ -569,10 +599,10 @@ namespace Cthangband
                 }
                 return false;
             }
-            Profile tempProfile;
+            SaveGame tempSaveGame;
             try
             {
-                tempProfile = DeserializeFromSaveFolder<Profile>(save);
+                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
             }
             catch (Exception)
             {
@@ -586,7 +616,7 @@ namespace Cthangband
             {
                 return true;
             }
-            bool tempDeath = tempProfile.Game.Player == null;
+            bool tempDeath = tempSaveGame.Player == null;
             Colour color;
             int tempLev;
             int tempRace;
@@ -596,24 +626,24 @@ namespace Cthangband
             if (tempDeath)
             {
                 color = Colour.Grey;
-                tempLev = tempProfile.Game.ExPlayer.Level;
-                tempRace = tempProfile.Game.ExPlayer.RaceIndex;
-                tempClass = tempProfile.Game.ExPlayer.ProfessionIndex;
-                tempRealm = tempProfile.Game.ExPlayer.Realm1;
-                tempName = tempProfile.Game.ExPlayer.Name.Trim() + tempProfile.Game.ExPlayer.Generation.ToRoman(true);
+                tempLev = tempSaveGame.ExPlayer.Level;
+                tempRace = tempSaveGame.ExPlayer.RaceIndex;
+                tempClass = tempSaveGame.ExPlayer.ProfessionIndex;
+                tempRealm = tempSaveGame.ExPlayer.Realm1;
+                tempName = tempSaveGame.ExPlayer.Name.Trim() + tempSaveGame.ExPlayer.Generation.ToRoman(true);
             }
             else
             {
                 color = Colour.White;
-                if (tempProfile.Game.Player.IsWizard)
+                if (tempSaveGame.Player.IsWizard)
                 {
                     color = Colour.Yellow;
                 }
-                tempLev = tempProfile.Game.Player.Level;
-                tempRace = tempProfile.Game.Player.RaceIndex;
-                tempClass = tempProfile.Game.Player.ProfessionIndex;
-                tempRealm = tempProfile.Game.Player.Realm1;
-                tempName = tempProfile.Game.Player.Name.Trim() + tempProfile.Game.Player.Generation.ToRoman(true);
+                tempLev = tempSaveGame.Player.Level;
+                tempRace = tempSaveGame.Player.RaceIndex;
+                tempClass = tempSaveGame.Player.ProfessionIndex;
+                tempRealm = tempSaveGame.Player.Realm1;
+                tempName = tempSaveGame.Player.Name.Trim() + tempSaveGame.Player.Generation.ToRoman(true);
             }
             Gui.Print(color, tempName, displayRow, displayCol + 14 - (tempName.Length / 2));
             string tempchar = $"the level {tempLev}";
@@ -627,7 +657,7 @@ namespace Cthangband
                 tempchar = "(deceased)";
                 Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
             }
-            else if (tempProfile.Game.Player.IsWizard)
+            else if (tempSaveGame.Player.IsWizard)
             {
                 tempchar = "-=<WIZARD>=-";
                 Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
@@ -804,7 +834,7 @@ namespace Cthangband
                             case 0:
                                 // Continue Game
                                 ActiveSaveSlot = _saveSlot[saveIndex];
-                                Profile.Instance.Run();
+                                Run(saveGame);
                                 return;
 
                             case 1:
@@ -814,7 +844,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -826,7 +856,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -869,7 +899,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -881,7 +911,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;

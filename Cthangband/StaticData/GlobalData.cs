@@ -212,14 +212,14 @@ namespace Cthangband.StaticData
             "with nothing of worth.", "what meagre pickings..."
         };
 
-        public static void PopulateNewProfile(Profile profile)
+        public static void PopulateNewProfile(SaveGame saveGame)
         {
-            profile.FixedArtifacts = new FixedArtifactArray();
-            profile.MonsterRaces = new MonsterRaceArray();
-            profile.MonsterRaces.AddKnowledge();
-            profile.RareItemTypes = new RareItemTypeArray();
-            profile.ItemTypes = new ItemTypeArray();
-            profile.VaultTypes = new VaultTypeArray();
+            saveGame.FixedArtifacts = new FixedArtifactArray();
+            saveGame.MonsterRaces = new MonsterRaceArray();
+            saveGame.MonsterRaces.AddKnowledge();
+            saveGame.RareItemTypes = new RareItemTypeArray();
+            saveGame.ItemTypes = new ItemTypeArray();
+            saveGame.VaultTypes = new VaultTypeArray();
         }
     }
 }

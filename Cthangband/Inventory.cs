@@ -41,7 +41,7 @@ namespace Cthangband
 
         public static bool ObjectEasyKnow(int i)
         {
-            ItemType kPtr = Profile.Instance.ItemTypes[i];
+            ItemType kPtr = SaveGame.Instance.ItemTypes[i];
             switch (kPtr.Category)
             {
                 case ItemCategory.LifeBook:

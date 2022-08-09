@@ -530,7 +530,7 @@ namespace Cthangband
                 SaveGame.Instance.MsgPrint($"The {oName} disappear{p}.");
                 if (jPtr.FixedArtifactIndex != 0)
                 {
-                    Profile.Instance.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
+                    SaveGame.Instance.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
                 }
                 return;
             }
@@ -1199,7 +1199,7 @@ namespace Cthangband
             {
                 if (qPtr.FixedArtifactIndex != 0)
                 {
-                    Profile.Instance.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                    SaveGame.Instance.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
                 }
             }
         }
@@ -1312,9 +1312,9 @@ namespace Cthangband
         public void PutQuestMonster(int rIdx)
         {
             int y, x;
-            if (Profile.Instance.MonsterRaces[rIdx].MaxNum == 0)
+            if (SaveGame.Instance.MonsterRaces[rIdx].MaxNum == 0)
             {
-                Profile.Instance.MonsterRaces[rIdx].MaxNum++;
+                SaveGame.Instance.MonsterRaces[rIdx].MaxNum++;
                 SaveGame.Instance.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
             }
             do
@@ -2211,14 +2211,14 @@ namespace Cthangband
 
         private void ImageMonster(out Colour ap, out char cp)
         {
-            cp = Profile.Instance.MonsterRaces[Program.Rng.DieRoll(Profile.Instance.MonsterRaces.Count - 2)].Character;
-            ap = Profile.Instance.MonsterRaces[Program.Rng.DieRoll(Profile.Instance.MonsterRaces.Count - 2)].Colour;
+            cp = SaveGame.Instance.MonsterRaces[Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2)].Character;
+            ap = SaveGame.Instance.MonsterRaces[Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2)].Colour;
         }
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = Profile.Instance.ItemTypes[Program.Rng.DieRoll(Profile.Instance.ItemTypes.Count - 1)].Character;
-            ap = Profile.Instance.ItemTypes[Program.Rng.DieRoll(Profile.Instance.ItemTypes.Count - 1)].Colour;
+            cp = SaveGame.Instance.ItemTypes[Program.Rng.DieRoll(SaveGame.Instance.ItemTypes.Count - 1)].Character;
+            ap = SaveGame.Instance.ItemTypes[Program.Rng.DieRoll(SaveGame.Instance.ItemTypes.Count - 1)].Colour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)
@@ -2457,7 +2457,7 @@ namespace Cthangband
             }
             if (y == _player.MapY && x == _player.MapX)
             {
-                MonsterRace rPtr = Profile.Instance.MonsterRaces[0];
+                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[0];
                 a = rPtr.Colour;
                 c = rPtr.Character;
                 ap = a;

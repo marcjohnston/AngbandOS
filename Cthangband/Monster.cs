@@ -93,7 +93,7 @@ namespace Cthangband
                 MonsterRace halluRace;
                 do
                 {
-                    halluRace = Profile.Instance.MonsterRaces[Program.Rng.DieRoll(Profile.Instance.MonsterRaces.Count - 2)];
+                    halluRace = SaveGame.Instance.MonsterRaces[Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2)];
                 } while ((halluRace.Flags1 & MonsterFlag1.Unique) != 0);
                 string sillyName = halluRace.Name;
                 name = sillyName;

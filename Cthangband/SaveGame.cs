@@ -16,6 +16,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Cthangband
 {
@@ -81,24 +82,30 @@ namespace Cthangband
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
         public const int HurtChance = 16;
-        public readonly Profile Profile;
 
-        public SaveGame(Profile profile)
+        public SaveGame()
         {
+            SaveGame.Instance = this;
+            GlobalData.PopulateNewProfile(this);
             Towns = Town.NewTownList();
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList();
-            Profile = profile;
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
 
         // PROFILE MESSAGING START
         public ExPlayer ExPlayer;
+        public FixedArtifactArray FixedArtifacts;
+        public ItemTypeArray ItemTypes;
+        public MonsterRaceArray MonsterRaces;
+        public RareItemTypeArray RareItemTypes;
+        public VaultTypeArray VaultTypes;
         private readonly List<string> _messageBuf = new List<string>();
         private readonly List<int> _messageCounts = new List<int>();
         private int _msgPrintP;
         public bool MsgFlag;
+
         public void MessageAdd(string str)
         {
             // simple case - list is empty
@@ -1042,7 +1049,7 @@ namespace Cthangband
                 {
                     dungeon.RandomiseOffset();
                 }
-                Profile.Instance.ItemTypes.ResetStompability();
+                SaveGame.Instance.ItemTypes.ResetStompability();
                 CurrentDepth = 0;
                 CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
@@ -1197,9 +1204,9 @@ namespace Cthangband
         private void ApplyFlavourVisuals()
         {
             int i;
-            for (i = 0; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 0; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 EntityType visual = ObjectFlavourEntity(i);
                 if (visual != null)
                 {
@@ -1757,9 +1764,9 @@ namespace Cthangband
                 }
             }
             Program.Rng.UseFixed = false;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 if (string.IsNullOrEmpty(kPtr.Name))
                 {
                     continue;
@@ -1781,9 +1788,9 @@ namespace Cthangband
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
             AllocKindSize = 0;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                kPtr = Profile.Instance.ItemTypes[i];
+                kPtr = SaveGame.Instance.ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -1807,9 +1814,9 @@ namespace Cthangband
                 AllocKindTable[k] = new AllocationEntry();
             }
             AllocationEntry[] table = AllocKindTable;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                kPtr = Profile.Instance.ItemTypes[i];
+                kPtr = SaveGame.Instance.ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -1830,9 +1837,9 @@ namespace Cthangband
             aux = new int[Constants.MaxDepth];
             num = new int[Constants.MaxDepth];
             AllocRaceSize = 0;
-            for (i = 1; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                rPtr = Profile.Instance.MonsterRaces[i];
+                rPtr = SaveGame.Instance.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     AllocRaceSize++;
@@ -1853,9 +1860,9 @@ namespace Cthangband
                 AllocRaceTable[k] = new AllocationEntry();
             }
             table = AllocRaceTable;
-            for (i = 1; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                rPtr = Profile.Instance.MonsterRaces[i];
+                rPtr = SaveGame.Instance.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     int x = rPtr.Level;
@@ -1886,7 +1893,7 @@ namespace Cthangband
 
         private EntityType ObjectFlavourEntity(int i)
         {
-            ItemType kPtr = Profile.Instance.ItemTypes[i];
+            ItemType kPtr = SaveGame.Instance.ItemTypes[i];
             if (kPtr.HasFlavor)
             {
                 int indexx = kPtr.SubCategory;
@@ -2902,7 +2909,7 @@ namespace Cthangband
 
         private void SavePlayer()
         {
-            Program.SerializeToSaveFolder(Profile.Instance, Program.ActiveSaveSlot);
+            Program.SerializeToSaveFolder(SaveGame.Instance, Program.ActiveSaveSlot);
         }
 
         private bool Verify(string prompt, int item)
@@ -4974,7 +4981,7 @@ namespace Cthangband
                 {
                     break;
                 }
-                rPtr = Profile.Instance.MonsterRaces[r];
+                rPtr = SaveGame.Instance.MonsterRaces[r];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
                 {
                     continue;
@@ -10055,7 +10062,7 @@ namespace Cthangband
                             {
                                 SaveGame.Instance.MsgPrint($"{monsterName} changes!");
                                 Level.Monsters.DeleteMonsterByIndex(tile.MonsterIndex, true);
-                                MonsterRace newRace = Profile.Instance.MonsterRaces[newRaceIndex];
+                                MonsterRace newRace = SaveGame.Instance.MonsterRaces[newRaceIndex];
                                 Level.Monsters.PlaceMonsterAux(y, x, newRace, false, false, false);
                                 monster = Level.Monsters[tile.MonsterIndex];
                                 monsterName = monster.MonsterDesc(0);
@@ -11589,7 +11596,7 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
                     {
                         Item item = new Item();
-                        item.AssignItemType(Profile.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
+                        item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
                         Level.DropNear(item, -1, Player.MapY, Player.MapX);
                         SaveGame.Instance.MsgPrint("You cook some food.");
                     }

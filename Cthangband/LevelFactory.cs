@@ -2547,10 +2547,10 @@ namespace Cthangband
         {
             int i;
             int k;
-            Profile.Instance.MonsterRaces.ResetGuardians();
+            SaveGame.Instance.MonsterRaces.ResetGuardians();
             if (SaveGame.Instance.Quests.IsQuest(SaveGame.Instance.CurrentDepth))
             {
-                Profile.Instance.MonsterRaces[SaveGame.Instance.Quests.GetQuestMonster()].Flags1 |=
+                SaveGame.Instance.MonsterRaces[SaveGame.Instance.Quests.GetQuestMonster()].Flags1 |=
                     MonsterFlag1.Guardian;
             }
             if (Program.Rng.PercentileRoll(4) && !SaveGame.Instance.CurDungeon.Tower)
@@ -2580,7 +2580,7 @@ namespace Cthangband
             {
                 int rIdx = SaveGame.Instance.Quests.GetQuestMonster();
                 int qIdx = SaveGame.Instance.Quests.GetQuestNumber();
-                while (Profile.Instance.MonsterRaces[rIdx].CurNum < (SaveGame.Instance.Quests[qIdx].ToKill - SaveGame.Instance.Quests[qIdx].Killed))
+                while (SaveGame.Instance.MonsterRaces[rIdx].CurNum < (SaveGame.Instance.Quests[qIdx].ToKill - SaveGame.Instance.Quests[qIdx].Killed))
                 {
                     _level.PutQuestMonster(SaveGame.Instance.Quests[qIdx].RIdx);
                 }

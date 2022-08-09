@@ -93,9 +93,9 @@ namespace Cthangband
             for (int k = 0; k < master.Length; k++)
             {
                 int kIdx = -1;
-                for (int i = 0; i < Profile.Instance.ItemTypes.Count; i++)
+                for (int i = 0; i < SaveGame.Instance.ItemTypes.Count; i++)
                 {
-                    ItemType itemType = Profile.Instance.ItemTypes[i];
+                    ItemType itemType = SaveGame.Instance.ItemTypes[i];
                     if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
@@ -1098,7 +1098,7 @@ namespace Cthangband
             ItemType itemType;
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
-            itemType = Profile.Instance.ItemTypes[i];
+            itemType = SaveGame.Instance.ItemTypes[i];
             Item qPtr = new Item();
             qPtr.AssignItemType(itemType);
             qPtr.ApplyMagic(level, false, false, false);

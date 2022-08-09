@@ -56,7 +56,7 @@ namespace Cthangband.Commands
             int itemLevel = item.ItemType.Level;
             if (item.IsFixedArtifact())
             {
-                itemLevel = Profile.Instance.FixedArtifacts[item.FixedArtifactIndex].Level;
+                itemLevel = SaveGame.Instance.FixedArtifacts[item.FixedArtifactIndex].Level;
             }
             // Work out the chance of using the item successfully based on its level and the
             // player's skill

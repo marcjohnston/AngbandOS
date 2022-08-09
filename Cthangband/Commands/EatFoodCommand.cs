@@ -338,7 +338,7 @@ namespace Cthangband.Commands
                     Item floorItem = new Item();
                     SaveGame.Instance.MsgPrint("The food falls through your jaws!");
                     floorItem.AssignItemType(
-                        Profile.Instance.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
+                        SaveGame.Instance.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
                     SaveGame.Instance.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 }
                 else

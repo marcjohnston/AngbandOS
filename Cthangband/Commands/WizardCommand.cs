@@ -484,9 +484,9 @@ namespace Cthangband.Commands
 
         private void DoCmdWizLearn()
         {
-            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 if (kPtr.Level <= Gui.CommandArgument)
                 {
                     kPtr.FlavourAware = true;
@@ -496,7 +496,7 @@ namespace Cthangband.Commands
 
         private void DoCmdWizNamed(Player player, Level level, int rIdx, bool slp)
         {
-            if (rIdx >= Profile.Instance.MonsterRaces.Count - 1)
+            if (rIdx >= SaveGame.Instance.MonsterRaces.Count - 1)
             {
                 return;
             }
@@ -517,7 +517,7 @@ namespace Cthangband.Commands
 
         private void DoCmdWizNamedFriendly(Player player, Level level, int rIdx, bool slp)
         {
-            if (rIdx >= Profile.Instance.MonsterRaces.Count - 1)
+            if (rIdx >= SaveGame.Instance.MonsterRaces.Count - 1)
             {
                 return;
             }
@@ -646,7 +646,7 @@ namespace Cthangband.Commands
 
         private string StripName(int kIdx)
         {
-            ItemType kPtr = Profile.Instance.ItemTypes[kIdx];
+            ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
             return kPtr.Name.Trim().Replace("$", "").Replace("~", "");
         }
 
@@ -664,7 +664,7 @@ namespace Cthangband.Commands
                 return;
             }
             Item qPtr = new Item();
-            qPtr.AssignItemType(Profile.Instance.ItemTypes[kIdx]);
+            qPtr.AssignItemType(SaveGame.Instance.ItemTypes[kIdx]);
             qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, false, false);
             SaveGame.Instance.Level.DropNear(qPtr, -1, player.MapY, player.MapX);
             SaveGame.Instance.MsgPrint("Allocated.");
@@ -709,9 +709,9 @@ namespace Cthangband.Commands
             ItemCategory tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
             Gui.Clear();
-            for (num = 0, i = 1; num < 60 && i < Profile.Instance.ItemTypes.Count; i++)
+            for (num = 0, i = 1; num < 60 && i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
                     //if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
@@ -757,13 +757,13 @@ namespace Cthangband.Commands
             {
                 return;
             }
-            FixedArtifact aPtr = Profile.Instance.FixedArtifacts[aIdx];
+            FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[aIdx];
             Item qPtr = new Item();
             if (string.IsNullOrEmpty(aPtr.Name))
             {
                 return;
             }
-            ItemType i = Profile.Instance.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
+            ItemType i = SaveGame.Instance.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
             if (i == null)
             {
                 return;
@@ -915,7 +915,7 @@ namespace Cthangband.Commands
             const string q = "Rolls: {0}, Matches: {1}, Better: {2}, Worse: {3}, Other: {4}";
             if (oPtr.IsFixedArtifact())
             {
-                Profile.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
+                SaveGame.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
             }
             while (true)
             {
@@ -974,7 +974,7 @@ namespace Cthangband.Commands
                     qPtr.MakeObject(good, great);
                     if (qPtr.IsFixedArtifact())
                     {
-                        Profile.Instance.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                        SaveGame.Instance.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
                     }
                     if (oPtr.Category != qPtr.Category)
                     {
@@ -1012,7 +1012,7 @@ namespace Cthangband.Commands
             }
             if (oPtr.IsFixedArtifact())
             {
-                Profile.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
+                SaveGame.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
             }
         }
 

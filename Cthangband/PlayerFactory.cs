@@ -2013,7 +2013,7 @@ namespace Cthangband
                 _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
             {
                 item.AssignItemType(
-                    Profile.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
+                    SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -2023,7 +2023,7 @@ namespace Cthangband
             }
             else
             {
-                item.AssignItemType(Profile.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
+                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -2034,7 +2034,7 @@ namespace Cthangband
                 _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
                 item.AssignItemType(
-                    Profile.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
+                    SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -2043,7 +2043,7 @@ namespace Cthangband
             }
             else
             {
-                item.AssignItemType(Profile.Instance.ItemTypes.LookupKind(ItemCategory.Light, LightType.Torch));
+                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Light, LightType.Torch));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
@@ -2070,7 +2070,7 @@ namespace Cthangband
                     sv = RingType.SustainStr;
                 }
                 item = new Item();
-                item.AssignItemType(Profile.Instance.ItemTypes.LookupKind(tv, sv));
+                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(tv, sv));
                 if (tv == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
