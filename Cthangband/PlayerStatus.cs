@@ -1351,15 +1351,15 @@ namespace Cthangband
             {
                 if (_player.HasHeavyBow)
                 {
-                    Profile.Instance.MsgPrint("You have trouble wielding such a heavy bow.");
+                    SaveGame.Instance.MsgPrint("You have trouble wielding such a heavy bow.");
                 }
                 else if (_player.Inventory[InventorySlot.RangedWeapon].ItemType != null)
                 {
-                    Profile.Instance.MsgPrint("You have no trouble wielding your bow.");
+                    SaveGame.Instance.MsgPrint("You have no trouble wielding your bow.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You feel relieved to put down your heavy bow.");
+                    SaveGame.Instance.MsgPrint("You feel relieved to put down your heavy bow.");
                 }
                 _player.OldHeavyBow = _player.HasHeavyBow;
             }
@@ -1367,15 +1367,15 @@ namespace Cthangband
             {
                 if (_player.HasHeavyWeapon)
                 {
-                    Profile.Instance.MsgPrint("You have trouble wielding such a heavy weapon.");
+                    SaveGame.Instance.MsgPrint("You have trouble wielding such a heavy weapon.");
                 }
                 else if (_player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
                 {
-                    Profile.Instance.MsgPrint("You have no trouble wielding your weapon.");
+                    SaveGame.Instance.MsgPrint("You have no trouble wielding your weapon.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You feel relieved to put down your heavy weapon.");
+                    SaveGame.Instance.MsgPrint("You feel relieved to put down your heavy weapon.");
                 }
                 _player.OldHeavyWeapon = _player.HasHeavyWeapon;
             }
@@ -1383,17 +1383,17 @@ namespace Cthangband
             {
                 if (_player.HasUnpriestlyWeapon)
                 {
-                    Profile.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
+                    SaveGame.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
                         ? "Your weapon restricts the flow of chaos through you."
                         : "You do not feel comfortable with your weapon.");
                 }
                 else if (_player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
                 {
-                    Profile.Instance.MsgPrint("You feel comfortable with your weapon.");
+                    SaveGame.Instance.MsgPrint("You feel comfortable with your weapon.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
+                    SaveGame.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
                         ? "Chaos flows freely through you again."
                         : "You feel more comfortable after removing your weapon.");
                 }
@@ -1402,7 +1402,7 @@ namespace Cthangband
             if ((_player.ProfessionIndex == CharacterClass.Monk || _player.ProfessionIndex == CharacterClass.Mystic) && SaveGame.Instance.MartialArtistArmourAux !=
                 SaveGame.Instance.MartialArtistNotifyAux)
             {
-                Profile.Instance.MsgPrint(MartialArtistHeavyArmour()
+                SaveGame.Instance.MsgPrint(MartialArtistHeavyArmour()
                     ? "The weight of your armour disrupts your balance."
                     : "You regain your balance.");
                 SaveGame.Instance.MartialArtistNotifyAux = SaveGame.Instance.MartialArtistArmourAux;
@@ -1526,14 +1526,14 @@ namespace Cthangband
             }
             if (_player.OldRestrictingGloves != _player.HasRestrictingGloves)
             {
-                Profile.Instance.MsgPrint(_player.HasRestrictingGloves
+                SaveGame.Instance.MsgPrint(_player.HasRestrictingGloves
                     ? "Your covered hands feel unsuitable for spellcasting."
                     : "Your hands feel more suitable for spellcasting.");
                 _player.OldRestrictingGloves = _player.HasRestrictingGloves;
             }
             if (_player.OldRestrictingArmour != _player.HasRestrictingArmour)
             {
-                Profile.Instance.MsgPrint(_player.HasRestrictingArmour
+                SaveGame.Instance.MsgPrint(_player.HasRestrictingArmour
                     ? "The weight of your armour encumbers your movement."
                     : "You feel able to move more freely.");
                 _player.OldRestrictingArmour = _player.HasRestrictingArmour;
@@ -1599,7 +1599,7 @@ namespace Cthangband
                 sPtr.Forgotten = true;
                 sPtr.Learned = false;
                 numKnown--;
-                Profile.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                SaveGame.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
                 _player.SpareSpellSlots++;
             }
             for (i = 63; i >= 0; i--)
@@ -1625,7 +1625,7 @@ namespace Cthangband
                 sPtr.Forgotten = true;
                 sPtr.Learned = false;
                 numKnown--;
-                Profile.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                SaveGame.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
                 _player.SpareSpellSlots++;
             }
             int forgottenTotal = 0;
@@ -1665,7 +1665,7 @@ namespace Cthangband
                 forgottenTotal--;
                 if (!Gui.FullScreenOverlay)
                 {
-                    Profile.Instance.MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
+                    SaveGame.Instance.MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
                 }
                 _player.SpareSpellSlots--;
             }
@@ -1709,7 +1709,7 @@ namespace Cthangband
                     if (!Gui.FullScreenOverlay)
                     {
                         string suffix = _player.SpareSpellSlots != 1 ? "s" : "";
-                        Profile.Instance.MsgPrint($"You can learn {_player.SpareSpellSlots} more {p}{suffix}.");
+                        SaveGame.Instance.MsgPrint($"You can learn {_player.SpareSpellSlots} more {p}{suffix}.");
                     }
                 }
                 _player.OldSpareSpellSlots = _player.SpareSpellSlots;

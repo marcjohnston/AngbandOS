@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             TargetEngine targetEngine = new TargetEngine(player, level);
-            Profile.Instance.MsgPrint("You spit acid...");
+            SaveGame.Instance.MsgPrint("You spit acid...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
                 saveGame.FireBall(new ProjectAcid(), dir, player.Level, 1 + (player.Level / 30));

@@ -35,7 +35,7 @@ namespace Cthangband.StoreCommands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing you can wear or wield.");
+                    SaveGame.Instance.MsgPrint("You have nothing you can wear or wield.");
                 }
                 return;
             }
@@ -46,7 +46,7 @@ namespace Cthangband.StoreCommands
             if (player.Inventory[slot].IsCursed())
             {
                 itemName = player.Inventory[slot].Description(false, 0);
-                Profile.Instance.MsgPrint($"The {itemName} you are {player.DescribeWieldLocation(slot)} appears to be cursed.");
+                SaveGame.Instance.MsgPrint($"The {itemName} you are {player.DescribeWieldLocation(slot)} appears to be cursed.");
                 return;
             }
             // If we know the item to be cursed, confirm its wearing
@@ -106,11 +106,11 @@ namespace Cthangband.StoreCommands
                 weildPhrase = "You are wearing";
             }
             itemName = wornItem.Description(true, 3);
-            Profile.Instance.MsgPrint($"{weildPhrase} {itemName} ({slot.IndexToLabel()}).");
+            SaveGame.Instance.MsgPrint($"{weildPhrase} {itemName} ({slot.IndexToLabel()}).");
             // Let us know if it's cursed
             if (wornItem.IsCursed())
             {
-                Profile.Instance.MsgPrint("Oops! It feels deathly cold!");
+                SaveGame.Instance.MsgPrint("Oops! It feels deathly cold!");
                 wornItem.IdentifyFlags.Set(Constants.IdentSense);
             }
             player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);

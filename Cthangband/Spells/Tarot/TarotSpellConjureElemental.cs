@@ -21,16 +21,16 @@ namespace Cthangband.Spells.Tarot
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonElemental,
                     false))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonElemental))
             {
-                Profile.Instance.MsgPrint("You fail to control the elemental creature!");
+                SaveGame.Instance.MsgPrint("You fail to control the elemental creature!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

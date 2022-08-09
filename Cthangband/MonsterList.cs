@@ -54,7 +54,7 @@ namespace Cthangband
                 {
                     return false;
                 }
-                rPtr = Profile.Instance.MonsterRaces[rIdx];
+                rPtr = SaveGame.Instance.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0 && (rPtr.Flags1 & MonsterFlag1.EscortsGroup) == 0)
                 {
                     break;
@@ -136,7 +136,7 @@ namespace Cthangband
             int i, num, cnt;
             if (size != 0)
             {
-                Profile.Instance.MsgPrint("Compacting monsters...");
+                SaveGame.Instance.MsgPrint("Compacting monsters...");
             }
             for (num = 0, cnt = 1; num < size; cnt++)
             {
@@ -203,11 +203,11 @@ namespace Cthangband
                 string mName = mPtr.MonsterDesc(0);
                 if ((rPtr.Flags3 & MonsterFlag3.GreatOldOne) != 0 && Program.Rng.DieRoll(2) == 1)
                 {
-                    Profile.Instance.MsgPrint($"{mName} retreats into another dimension!");
+                    SaveGame.Instance.MsgPrint($"{mName} retreats into another dimension!");
                     if (Program.Rng.DieRoll(5) == 1)
                     {
                         int curses = 1 + Program.Rng.DieRoll(3);
-                        Profile.Instance.MsgPrint("Nyarlathotep puts a terrible curse on you!");
+                        SaveGame.Instance.MsgPrint("Nyarlathotep puts a terrible curse on you!");
                         SaveGame.Instance.Player.CurseEquipment(100, 50);
                         do
                         {
@@ -218,21 +218,21 @@ namespace Cthangband
                 Gui.PlaySound(SoundEffect.MonsterDies);
                 if (string.IsNullOrEmpty(note) == false)
                 {
-                    Profile.Instance.MsgPrint($"{mName}{note}");
+                    SaveGame.Instance.MsgPrint($"{mName}{note}");
                 }
                 else if (!mPtr.IsVisible)
                 {
-                    Profile.Instance.MsgPrint($"You have killed {mName}.");
+                    SaveGame.Instance.MsgPrint($"You have killed {mName}.");
                 }
                 else if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
                          (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
                          (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
                 {
-                    Profile.Instance.MsgPrint($"You have destroyed {mName}.");
+                    SaveGame.Instance.MsgPrint($"You have destroyed {mName}.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"You have slain {mName}.");
+                    SaveGame.Instance.MsgPrint($"You have slain {mName}.");
                 }
                 int div = 10 * SaveGame.Instance.Player.MaxLevelGained;
                 if (rPtr.Knowledge.RPkills >= 19)
@@ -384,7 +384,7 @@ namespace Cthangband
                     continue;
                 }
                 int rIdx = table[i].Index;
-                MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
                 {
                     continue;
@@ -541,7 +541,7 @@ namespace Cthangband
             string mName = mPtr.MonsterDesc(0);
             if (dam == 0)
             {
-                Profile.Instance.MsgPrint($"{mName} is unharmed.");
+                SaveGame.Instance.MsgPrint($"{mName} is unharmed.");
                 return;
             }
             long newhp = mPtr.Health;
@@ -552,124 +552,124 @@ namespace Cthangband
             {
                 if (percentage > 95)
                 {
-                    Profile.Instance.MsgPrint($"{mName} barely notices.");
+                    SaveGame.Instance.MsgPrint($"{mName} barely notices.");
                 }
                 else if (percentage > 75)
                 {
-                    Profile.Instance.MsgPrint($"{mName} flinches.");
+                    SaveGame.Instance.MsgPrint($"{mName} flinches.");
                 }
                 else if (percentage > 50)
                 {
-                    Profile.Instance.MsgPrint($"{mName} squelches.");
+                    SaveGame.Instance.MsgPrint($"{mName} squelches.");
                 }
                 else if (percentage > 35)
                 {
-                    Profile.Instance.MsgPrint($"{mName} quivers in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} quivers in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    Profile.Instance.MsgPrint($"{mName} writhes about.");
+                    SaveGame.Instance.MsgPrint($"{mName} writhes about.");
                 }
                 else if (percentage > 10)
                 {
-                    Profile.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"{mName} jerks limply.");
+                    SaveGame.Instance.MsgPrint($"{mName} jerks limply.");
                 }
             }
             else if ("CZ".Contains(rPtr.Character.ToString()))
             {
                 if (percentage > 95)
                 {
-                    Profile.Instance.MsgPrint($"{mName} shrugs off the attack.");
+                    SaveGame.Instance.MsgPrint($"{mName} shrugs off the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    Profile.Instance.MsgPrint($"{mName} snarls with pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} snarls with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    Profile.Instance.MsgPrint($"{mName} yelps in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} yelps in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    Profile.Instance.MsgPrint($"{mName} howls in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} howls in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    Profile.Instance.MsgPrint($"{mName} howls in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} howls in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    Profile.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"{mName} yelps feebly.");
+                    SaveGame.Instance.MsgPrint($"{mName} yelps feebly.");
                 }
             }
             else if ("FIKMRSXabclqrst".Contains(rPtr.Character.ToString()))
             {
                 if (percentage > 95)
                 {
-                    Profile.Instance.MsgPrint($"{mName} ignores the attack.");
+                    SaveGame.Instance.MsgPrint($"{mName} ignores the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    Profile.Instance.MsgPrint($"{mName} grunts with pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} grunts with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    Profile.Instance.MsgPrint($"{mName} squeals in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} squeals in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    Profile.Instance.MsgPrint($"{mName} shrieks in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} shrieks in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    Profile.Instance.MsgPrint($"{mName} shrieks in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} shrieks in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    Profile.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"{mName} cries out feebly.");
+                    SaveGame.Instance.MsgPrint($"{mName} cries out feebly.");
                 }
             }
             else
             {
                 if (percentage > 95)
                 {
-                    Profile.Instance.MsgPrint($"{mName} shrugs off the attack.");
+                    SaveGame.Instance.MsgPrint($"{mName} shrugs off the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    Profile.Instance.MsgPrint($"{mName} grunts with pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} grunts with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    Profile.Instance.MsgPrint($"{mName} cries out in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} cries out in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    Profile.Instance.MsgPrint($"{mName} screams in pain.");
+                    SaveGame.Instance.MsgPrint($"{mName} screams in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    Profile.Instance.MsgPrint($"{mName} screams in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} screams in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    Profile.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"{mName} cries out feebly.");
+                    SaveGame.Instance.MsgPrint($"{mName} cries out feebly.");
                 }
             }
         }
@@ -736,7 +736,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    MonsterRace race = Profile.Instance.MonsterRaces[z];
+                    MonsterRace race = SaveGame.Instance.MonsterRaces[z];
                     PlaceMonsterOne(ny, nx, race, slp, charm);
                     if ((race.Flags1 & MonsterFlag1.Friends) != 0 ||
                         (rPtr.Flags1 & MonsterFlag1.EscortsGroup) != 0)
@@ -758,7 +758,7 @@ namespace Cthangband
 
         public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
         {
-            return PlaceMonsterAux(y, x, Profile.Instance.MonsterRaces[index], slp, grp, charm);
+            return PlaceMonsterAux(y, x, SaveGame.Instance.MonsterRaces[index], slp, grp, charm);
         }
 
         public void ReplacePet(int y1, int x1, Monster monster)
@@ -782,14 +782,14 @@ namespace Cthangband
             }
             if (i == 20)
             {
-                Profile.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
                 return;
             }
             GridTile cPtr = _level.Grid[y][x];
             cPtr.MonsterIndex = MPop();
             if (cPtr.MonsterIndex == 0)
             {
-                Profile.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
                 return;
             }
             _monsters[cPtr.MonsterIndex] = monster;
@@ -838,7 +838,7 @@ namespace Cthangband
             {
                 return false;
             }
-            MonsterRace race = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
             if (type == Constants.SummonAvatar)
             {
                 groupOk = false;
@@ -885,7 +885,7 @@ namespace Cthangband
             {
                 return false;
             }
-            MonsterRace race = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
             if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
             {
                 return false;
@@ -1342,14 +1342,14 @@ namespace Cthangband
             }
             if (_level != null)
             {
-                Profile.Instance.MsgPrint("Too many monsters!");
+                SaveGame.Instance.MsgPrint("Too many monsters!");
             }
             return 0;
         }
 
         private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             int extra = 0;
             int[] hackY = new int[Constants.GroupMax];
             int[] hackX = new int[Constants.GroupMax];
@@ -1406,8 +1406,8 @@ namespace Cthangband
 
         private bool PlaceMonsterOkay(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[_placeMonsterIdx];
-            MonsterRace zPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[_placeMonsterIdx];
+            MonsterRace zPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if (zPtr.Character != rPtr.Character)
             {
                 return false;
@@ -1551,7 +1551,7 @@ namespace Cthangband
 
         private bool SummonSpecificOkay(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             bool okay = false;
             switch (_summonSpecificType)
             {

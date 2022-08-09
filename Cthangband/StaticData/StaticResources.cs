@@ -147,7 +147,7 @@ namespace Cthangband.StaticData
             {
                 BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace())
             };
-            //Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType");
+            // Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
             Instance.BaseFixedartifacts = ReadEntitiesFromCsv(new BaseFixedartifact());
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
@@ -340,7 +340,7 @@ namespace Cthangband.StaticData
                                     {
                                         Colour value = (Colour)desiredProperty.GetValue(entity);
                                         tokens[index] = value.ToString();
-                                        include = (value != Colour.White); // Provided by the base class no need to override
+                                        include = (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
                                         break;
                                     }
                                 case "Int32":

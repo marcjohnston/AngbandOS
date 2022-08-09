@@ -42,7 +42,7 @@ namespace Cthangband
                     return kPtr;
                 }
             }
-            Profile.Instance.MsgPrint($"No object ({tval},{sval})");
+            SaveGame.Instance.MsgPrint($"No object ({tval},{sval})");
             return null;
         }
 

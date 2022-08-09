@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollMagicMapping : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Magic Mapping";
 
         public override int Chance1 => 1;

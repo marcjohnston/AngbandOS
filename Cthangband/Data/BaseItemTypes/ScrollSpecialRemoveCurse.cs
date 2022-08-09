@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollSpecialRemoveCurse : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:*Remove Curse*";
 
         public override int Chance1 => 2;

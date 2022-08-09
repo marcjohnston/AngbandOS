@@ -199,20 +199,20 @@ namespace Cthangband
             }
             WeightCarried = 0;
             Inventory = new Inventory(this);
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in Profile.Instance.FixedArtifacts)
+            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.Instance.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;
             }
-            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;
             }
-            for (int i = 1; i < Profile.Instance.MonsterRaces.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.MonsterRaces.Count; i++)
             {
-                MonsterRace rPtr = Profile.Instance.MonsterRaces[i];
+                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[i];
                 rPtr.CurNum = 0;
                 rPtr.MaxNum = 100;
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
@@ -221,7 +221,7 @@ namespace Cthangband
                 }
                 rPtr.Knowledge.RPkills = 0;
             }
-            Profile.Instance.MonsterRaces[Profile.Instance.MonsterRaces.Count - 1].MaxNum = 0;
+            SaveGame.Instance.MonsterRaces[SaveGame.Instance.MonsterRaces.Count - 1].MaxNum = 0;
             Food = Constants.PyFoodFull - 1;
             IsWizard = false;
             IsWinner = false;
@@ -322,7 +322,7 @@ namespace Cthangband
                     }
                 }
                 Gui.PlaySound(SoundEffect.LevelGain);
-                Profile.Instance.MsgPrint($"Welcome to level {Level}.");
+                SaveGame.Instance.MsgPrint($"Welcome to level {Level}.");
                 UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                 RedrawNeeded.Set(RedrawFlag.PrExp | RedrawFlag.PrLev | RedrawFlag.PrTitle);
                 SaveGame.Instance.HandleStuff();
@@ -333,7 +333,7 @@ namespace Cthangband
                 }
                 if (levelMutation)
                 {
-                    Profile.Instance.MsgPrint("You feel different...");
+                    SaveGame.Instance.MsgPrint("You feel different...");
                     Dna.GainMutation();
                     levelMutation = false;
                 }
@@ -360,7 +360,7 @@ namespace Cthangband
             {
                 string oName = oPtr.Description(false, 0);
                 string s = oPtr.Count > 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"Your {oName} resist{s} cursing!");
+                SaveGame.Instance.MsgPrint($"Your {oName} resist{s} cursing!");
                 return;
             }
             if (Program.Rng.DieRoll(100) <= heavyChance &&
@@ -386,7 +386,7 @@ namespace Cthangband
             }
             if (changed)
             {
-                Profile.Instance.MsgPrint("There is a malignant black aura surrounding you...");
+                SaveGame.Instance.MsgPrint("There is a malignant black aura surrounding you...");
                 if (!string.IsNullOrEmpty(oPtr.Inscription))
                 {
                     if (oPtr.Inscription == "uncursed")
@@ -1123,7 +1123,7 @@ namespace Cthangband
             int effects = Program.Rng.DieRoll(2);
             int tmp = 0;
             bool moreEffects = true;
-            Profile.Instance.MsgPrint("You feel a change coming over you...");
+            SaveGame.Instance.MsgPrint("You feel a change coming over you...");
             while (effects-- != 0 && moreEffects)
             {
                 switch (Program.Rng.DieRoll(12))
@@ -1148,7 +1148,7 @@ namespace Cthangband
                                 newRace = Program.Rng.DieRoll(Constants.MaxRaces) - 1;
                             } while (newRace == RaceIndex);
                             string n = newRace == RaceId.Elf || newRace == RaceId.Imp ? "n" : "";
-                            Profile.Instance.MsgPrint($"You turn into a{n} {Race.RaceInfo[newRace].Title}!");
+                            SaveGame.Instance.MsgPrint($"You turn into a{n} {Race.RaceInfo[newRace].Title}!");
                             ChangeRace(newRace);
                         }
                         SaveGame.Instance.Level.RedrawSingleLocation(MapY, MapX);
@@ -1156,7 +1156,7 @@ namespace Cthangband
                         break;
 
                     case 8:
-                        Profile.Instance.MsgPrint("You polymorph into an abomination!");
+                        SaveGame.Instance.MsgPrint("You polymorph into an abomination!");
                         while (tmp < 6)
                         {
                             DecreaseAbilityScore(tmp, Program.Rng.FixedSeed + 6, Program.Rng.DieRoll(3) == 1);
@@ -1164,7 +1164,7 @@ namespace Cthangband
                         }
                         if (Program.Rng.DieRoll(6) == 1)
                         {
-                            Profile.Instance.MsgPrint("You find living difficult in your present form!");
+                            SaveGame.Instance.MsgPrint("You find living difficult in your present form!");
                             TakeHit(Program.Rng.DiceRoll(Program.Rng.DieRoll(Level), Level), "a lethal mutation");
                         }
                         ShuffleAbilityScores();
@@ -1189,13 +1189,13 @@ namespace Cthangband
             }
             if (nastyEffect)
             {
-                Profile.Instance.MsgPrint("A new wound was created!");
+                SaveGame.Instance.MsgPrint("A new wound was created!");
                 TakeHit(change, "a polymorphed wound");
                 SetTimedBleeding(change);
             }
             else
             {
-                Profile.Instance.MsgPrint("Your wounds are polymorphed into less serious ones.");
+                SaveGame.Instance.MsgPrint("Your wounds are polymorphed into less serious ones.");
                 RestoreHealth(change);
                 SetTimedBleeding(TimedBleeding - (change / 2));
             }
@@ -1331,19 +1331,19 @@ namespace Cthangband
                 RedrawNeeded.Set(RedrawFlag.PrHp);
                 if (num < 5)
                 {
-                    Profile.Instance.MsgPrint("You feel a little better.");
+                    SaveGame.Instance.MsgPrint("You feel a little better.");
                 }
                 else if (num < 15)
                 {
-                    Profile.Instance.MsgPrint("You feel better.");
+                    SaveGame.Instance.MsgPrint("You feel better.");
                 }
                 else if (num < 35)
                 {
-                    Profile.Instance.MsgPrint("You feel much better.");
+                    SaveGame.Instance.MsgPrint("You feel much better.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You feel very good.");
+                    SaveGame.Instance.MsgPrint("You feel very good.");
                 }
                 return true;
             }
@@ -1354,7 +1354,7 @@ namespace Cthangband
         {
             if (ExperiencePoints < MaxExperienceGained)
             {
-                Profile.Instance.MsgPrint("You feel your life energies returning.");
+                SaveGame.Instance.MsgPrint("You feel your life energies returning.");
                 ExperiencePoints = MaxExperienceGained;
                 CheckExperience();
                 return true;
@@ -1529,13 +1529,13 @@ namespace Cthangband
                 if (i >= InventorySlot.MeleeWeapon)
                 {
                     string isare = item.Count == 1 ? "is" : "are";
-                    Profile.Instance.MsgPrint(
+                    SaveGame.Instance.MsgPrint(
                         $"You feel the {oName} ({i.IndexToLabel()}) you are {DescribeWieldLocation(i)} {isare} {feel}...");
                 }
                 else
                 {
                     string isare = item.Count == 1 ? "is" : "are";
-                    Profile.Instance.MsgPrint(
+                    SaveGame.Instance.MsgPrint(
                         $"You feel the {oName} ({i.IndexToLabel()}) in your pack {isare} {feel}...");
                 }
                 item.IdentifyFlags.Set(Constants.IdentSense);
@@ -1605,23 +1605,23 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 1:
-                        Profile.Instance.MsgPrint("You are still weak.");
+                        SaveGame.Instance.MsgPrint("You are still weak.");
                         break;
 
                     case 2:
-                        Profile.Instance.MsgPrint("You are still hungry.");
+                        SaveGame.Instance.MsgPrint("You are still hungry.");
                         break;
 
                     case 3:
-                        Profile.Instance.MsgPrint("You are no longer hungry.");
+                        SaveGame.Instance.MsgPrint("You are no longer hungry.");
                         break;
 
                     case 4:
-                        Profile.Instance.MsgPrint("You are full!");
+                        SaveGame.Instance.MsgPrint("You are full!");
                         break;
 
                     case 5:
-                        Profile.Instance.MsgPrint("You have gorged yourself!");
+                        SaveGame.Instance.MsgPrint("You have gorged yourself!");
                         break;
                 }
                 notice = true;
@@ -1631,23 +1631,23 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 0:
-                        Profile.Instance.MsgPrint("You are getting faint from hunger!");
+                        SaveGame.Instance.MsgPrint("You are getting faint from hunger!");
                         break;
 
                     case 1:
-                        Profile.Instance.MsgPrint("You are getting weak from hunger!");
+                        SaveGame.Instance.MsgPrint("You are getting weak from hunger!");
                         break;
 
                     case 2:
-                        Profile.Instance.MsgPrint("You are getting hungry.");
+                        SaveGame.Instance.MsgPrint("You are getting hungry.");
                         break;
 
                     case 3:
-                        Profile.Instance.MsgPrint("You are no longer full.");
+                        SaveGame.Instance.MsgPrint("You are no longer full.");
                         break;
 
                     case 4:
-                        Profile.Instance.MsgPrint("You are no longer gorged.");
+                        SaveGame.Instance.MsgPrint("You are no longer gorged.");
                         break;
                 }
                 notice = true;
@@ -1672,7 +1672,7 @@ namespace Cthangband
             {
                 if (TimedAcidResistance == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel resistant to acid!");
+                    SaveGame.Instance.MsgPrint("You feel resistant to acid!");
                     notice = true;
                 }
             }
@@ -1680,7 +1680,7 @@ namespace Cthangband
             {
                 if (TimedAcidResistance != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less resistant to acid.");
+                    SaveGame.Instance.MsgPrint("You feel less resistant to acid.");
                     notice = true;
                 }
             }
@@ -1775,31 +1775,31 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 1:
-                        Profile.Instance.MsgPrint("You have been given a graze.");
+                        SaveGame.Instance.MsgPrint("You have been given a graze.");
                         break;
 
                     case 2:
-                        Profile.Instance.MsgPrint("You have been given a light cut.");
+                        SaveGame.Instance.MsgPrint("You have been given a light cut.");
                         break;
 
                     case 3:
-                        Profile.Instance.MsgPrint("You have been given a bad cut.");
+                        SaveGame.Instance.MsgPrint("You have been given a bad cut.");
                         break;
 
                     case 4:
-                        Profile.Instance.MsgPrint("You have been given a nasty cut.");
+                        SaveGame.Instance.MsgPrint("You have been given a nasty cut.");
                         break;
 
                     case 5:
-                        Profile.Instance.MsgPrint("You have been given a severe cut.");
+                        SaveGame.Instance.MsgPrint("You have been given a severe cut.");
                         break;
 
                     case 6:
-                        Profile.Instance.MsgPrint("You have been given a deep gash.");
+                        SaveGame.Instance.MsgPrint("You have been given a deep gash.");
                         break;
 
                     case 7:
-                        Profile.Instance.MsgPrint("You have been given a mortal wound.");
+                        SaveGame.Instance.MsgPrint("You have been given a mortal wound.");
                         break;
                 }
                 notice = true;
@@ -1807,7 +1807,7 @@ namespace Cthangband
                 {
                     if (!HasSustainCharisma)
                     {
-                        Profile.Instance.MsgPrint("You have been horribly scarred.");
+                        SaveGame.Instance.MsgPrint("You have been horribly scarred.");
                         TryDecreasingAbilityScore(Ability.Charisma);
                     }
                 }
@@ -1817,7 +1817,7 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 0:
-                        Profile.Instance.MsgPrint("You are no longer bleeding.");
+                        SaveGame.Instance.MsgPrint("You are no longer bleeding.");
                         SaveGame.Instance.Disturb(false);
                         break;
                 }
@@ -1843,7 +1843,7 @@ namespace Cthangband
             {
                 if (TimedBlessing == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel righteous!");
+                    SaveGame.Instance.MsgPrint("You feel righteous!");
                     notice = true;
                 }
             }
@@ -1851,7 +1851,7 @@ namespace Cthangband
             {
                 if (TimedBlessing != 0)
                 {
-                    Profile.Instance.MsgPrint("The prayer has expired.");
+                    SaveGame.Instance.MsgPrint("The prayer has expired.");
                     notice = true;
                 }
             }
@@ -1874,7 +1874,7 @@ namespace Cthangband
             {
                 if (TimedBlindness == 0)
                 {
-                    Profile.Instance.MsgPrint("You are blind!");
+                    SaveGame.Instance.MsgPrint("You are blind!");
                     notice = true;
                 }
             }
@@ -1882,7 +1882,7 @@ namespace Cthangband
             {
                 if (TimedBlindness != 0)
                 {
-                    Profile.Instance.MsgPrint("You can see again.");
+                    SaveGame.Instance.MsgPrint("You can see again.");
                     notice = true;
                 }
             }
@@ -1909,7 +1909,7 @@ namespace Cthangband
             {
                 if (TimedColdResistance == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel resistant to cold!");
+                    SaveGame.Instance.MsgPrint("You feel resistant to cold!");
                     notice = true;
                 }
             }
@@ -1917,7 +1917,7 @@ namespace Cthangband
             {
                 if (TimedColdResistance != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less resistant to cold.");
+                    SaveGame.Instance.MsgPrint("You feel less resistant to cold.");
                     notice = true;
                 }
             }
@@ -1939,7 +1939,7 @@ namespace Cthangband
             {
                 if (TimedConfusion == 0)
                 {
-                    Profile.Instance.MsgPrint("You are confused!");
+                    SaveGame.Instance.MsgPrint("You are confused!");
                     notice = true;
                 }
             }
@@ -1947,7 +1947,7 @@ namespace Cthangband
             {
                 if (TimedConfusion != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less confused now.");
+                    SaveGame.Instance.MsgPrint("You feel less confused now.");
                     notice = true;
                 }
             }
@@ -1970,7 +1970,7 @@ namespace Cthangband
             {
                 if (TimedEtherealness == 0)
                 {
-                    Profile.Instance.MsgPrint("You leave the physical world and turn into a wraith-being!");
+                    SaveGame.Instance.MsgPrint("You leave the physical world and turn into a wraith-being!");
                     notice = true;
                     {
                         RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -1982,7 +1982,7 @@ namespace Cthangband
             {
                 if (TimedEtherealness != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel opaque.");
+                    SaveGame.Instance.MsgPrint("You feel opaque.");
                     notice = true;
                     {
                         RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -2008,7 +2008,7 @@ namespace Cthangband
             {
                 if (TimedFear == 0)
                 {
-                    Profile.Instance.MsgPrint("You are terrified!");
+                    SaveGame.Instance.MsgPrint("You are terrified!");
                     notice = true;
                 }
             }
@@ -2016,7 +2016,7 @@ namespace Cthangband
             {
                 if (TimedFear != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel bolder now.");
+                    SaveGame.Instance.MsgPrint("You feel bolder now.");
                     notice = true;
                 }
             }
@@ -2039,7 +2039,7 @@ namespace Cthangband
             {
                 if (TimedFireResistance == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel resistant to fire!");
+                    SaveGame.Instance.MsgPrint("You feel resistant to fire!");
                     notice = true;
                 }
             }
@@ -2047,7 +2047,7 @@ namespace Cthangband
             {
                 if (TimedFireResistance != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less resistant to fire.");
+                    SaveGame.Instance.MsgPrint("You feel less resistant to fire.");
                     notice = true;
                 }
             }
@@ -2069,7 +2069,7 @@ namespace Cthangband
             {
                 if (TimedHallucinations == 0)
                 {
-                    Profile.Instance.MsgPrint("Oh, wow! Everything looks so cosmic now!");
+                    SaveGame.Instance.MsgPrint("Oh, wow! Everything looks so cosmic now!");
                     notice = true;
                 }
             }
@@ -2077,7 +2077,7 @@ namespace Cthangband
             {
                 if (TimedHallucinations != 0)
                 {
-                    Profile.Instance.MsgPrint("You can see clearly again.");
+                    SaveGame.Instance.MsgPrint("You can see clearly again.");
                     notice = true;
                 }
             }
@@ -2101,7 +2101,7 @@ namespace Cthangband
             {
                 if (TimedHaste == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel yourself moving faster!");
+                    SaveGame.Instance.MsgPrint("You feel yourself moving faster!");
                     notice = true;
                 }
             }
@@ -2109,7 +2109,7 @@ namespace Cthangband
             {
                 if (TimedHaste != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel yourself slow down.");
+                    SaveGame.Instance.MsgPrint("You feel yourself slow down.");
                     notice = true;
                 }
             }
@@ -2132,7 +2132,7 @@ namespace Cthangband
             {
                 if (TimedHeroism == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel like a hero!");
+                    SaveGame.Instance.MsgPrint("You feel like a hero!");
                     notice = true;
                 }
             }
@@ -2140,7 +2140,7 @@ namespace Cthangband
             {
                 if (TimedHeroism != 0)
                 {
-                    Profile.Instance.MsgPrint("The heroism wears off.");
+                    SaveGame.Instance.MsgPrint("The heroism wears off.");
                     notice = true;
                 }
             }
@@ -2164,7 +2164,7 @@ namespace Cthangband
             {
                 if (TimedInfravision == 0)
                 {
-                    Profile.Instance.MsgPrint("Your eyes begin to tingle!");
+                    SaveGame.Instance.MsgPrint("Your eyes begin to tingle!");
                     notice = true;
                 }
             }
@@ -2172,7 +2172,7 @@ namespace Cthangband
             {
                 if (TimedInfravision != 0)
                 {
-                    Profile.Instance.MsgPrint("Your eyes stop tingling.");
+                    SaveGame.Instance.MsgPrint("Your eyes stop tingling.");
                     notice = true;
                 }
             }
@@ -2196,7 +2196,7 @@ namespace Cthangband
             {
                 if (TimedInvulnerability == 0)
                 {
-                    Profile.Instance.MsgPrint("Invulnerability!");
+                    SaveGame.Instance.MsgPrint("Invulnerability!");
                     notice = true;
                     {
                         RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -2208,7 +2208,7 @@ namespace Cthangband
             {
                 if (TimedInvulnerability != 0)
                 {
-                    Profile.Instance.MsgPrint("The invulnerability wears off.");
+                    SaveGame.Instance.MsgPrint("The invulnerability wears off.");
                     notice = true;
                     {
                         RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -2234,7 +2234,7 @@ namespace Cthangband
             {
                 if (TimedLightningResistance == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel resistant to electricity!");
+                    SaveGame.Instance.MsgPrint("You feel resistant to electricity!");
                     notice = true;
                 }
             }
@@ -2242,7 +2242,7 @@ namespace Cthangband
             {
                 if (TimedLightningResistance != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less resistant to electricity.");
+                    SaveGame.Instance.MsgPrint("You feel less resistant to electricity.");
                     notice = true;
                 }
             }
@@ -2263,7 +2263,7 @@ namespace Cthangband
             {
                 if (TimedParalysis == 0)
                 {
-                    Profile.Instance.MsgPrint("You are paralyzed!");
+                    SaveGame.Instance.MsgPrint("You are paralyzed!");
                     notice = true;
                 }
             }
@@ -2271,7 +2271,7 @@ namespace Cthangband
             {
                 if (TimedParalysis != 0)
                 {
-                    Profile.Instance.MsgPrint("You can move again.");
+                    SaveGame.Instance.MsgPrint("You can move again.");
                     notice = true;
                 }
             }
@@ -2294,7 +2294,7 @@ namespace Cthangband
             {
                 if (TimedPoison == 0)
                 {
-                    Profile.Instance.MsgPrint("You are poisoned!");
+                    SaveGame.Instance.MsgPrint("You are poisoned!");
                     notice = true;
                 }
             }
@@ -2302,7 +2302,7 @@ namespace Cthangband
             {
                 if (TimedPoison != 0)
                 {
-                    Profile.Instance.MsgPrint("You are no longer poisoned.");
+                    SaveGame.Instance.MsgPrint("You are no longer poisoned.");
                     notice = true;
                 }
             }
@@ -2325,7 +2325,7 @@ namespace Cthangband
             {
                 if (TimedPoisonResistance == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel resistant to poison!");
+                    SaveGame.Instance.MsgPrint("You feel resistant to poison!");
                     notice = true;
                 }
             }
@@ -2333,7 +2333,7 @@ namespace Cthangband
             {
                 if (TimedPoisonResistance != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less resistant to poison.");
+                    SaveGame.Instance.MsgPrint("You feel less resistant to poison.");
                     notice = true;
                 }
             }
@@ -2354,7 +2354,7 @@ namespace Cthangband
             {
                 if (TimedProtectionFromEvil == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel safe from evil!");
+                    SaveGame.Instance.MsgPrint("You feel safe from evil!");
                     notice = true;
                 }
             }
@@ -2362,7 +2362,7 @@ namespace Cthangband
             {
                 if (TimedProtectionFromEvil != 0)
                 {
-                    Profile.Instance.MsgPrint("You no longer feel safe from evil.");
+                    SaveGame.Instance.MsgPrint("You no longer feel safe from evil.");
                     notice = true;
                 }
             }
@@ -2384,7 +2384,7 @@ namespace Cthangband
             {
                 if (TimedSeeInvisibility == 0)
                 {
-                    Profile.Instance.MsgPrint("Your eyes feel very sensitive!");
+                    SaveGame.Instance.MsgPrint("Your eyes feel very sensitive!");
                     notice = true;
                 }
             }
@@ -2392,7 +2392,7 @@ namespace Cthangband
             {
                 if (TimedSeeInvisibility != 0)
                 {
-                    Profile.Instance.MsgPrint("Your eyes feel less sensitive.");
+                    SaveGame.Instance.MsgPrint("Your eyes feel less sensitive.");
                     notice = true;
                 }
             }
@@ -2416,7 +2416,7 @@ namespace Cthangband
             {
                 if (TimedSlow == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel yourself moving slower!");
+                    SaveGame.Instance.MsgPrint("You feel yourself moving slower!");
                     notice = true;
                 }
             }
@@ -2424,7 +2424,7 @@ namespace Cthangband
             {
                 if (TimedSlow != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel yourself speed up.");
+                    SaveGame.Instance.MsgPrint("You feel yourself speed up.");
                     notice = true;
                 }
             }
@@ -2447,7 +2447,7 @@ namespace Cthangband
             {
                 if (TimedStoneskin == 0)
                 {
-                    Profile.Instance.MsgPrint("Your skin turns to stone.");
+                    SaveGame.Instance.MsgPrint("Your skin turns to stone.");
                     notice = true;
                 }
             }
@@ -2455,7 +2455,7 @@ namespace Cthangband
             {
                 if (TimedStoneskin != 0)
                 {
-                    Profile.Instance.MsgPrint("Your skin returns to normal.");
+                    SaveGame.Instance.MsgPrint("Your skin returns to normal.");
                     notice = true;
                 }
             }
@@ -2515,20 +2515,20 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 1:
-                        Profile.Instance.MsgPrint("You have been stunned.");
+                        SaveGame.Instance.MsgPrint("You have been stunned.");
                         break;
 
                     case 2:
-                        Profile.Instance.MsgPrint("You have been heavily stunned.");
+                        SaveGame.Instance.MsgPrint("You have been heavily stunned.");
                         break;
 
                     case 3:
-                        Profile.Instance.MsgPrint("You have been knocked out.");
+                        SaveGame.Instance.MsgPrint("You have been knocked out.");
                         break;
                 }
                 if (Program.Rng.DieRoll(1000) < v || Program.Rng.DieRoll(16) == 1)
                 {
-                    Profile.Instance.MsgPrint("A vicious Attack hits your head.");
+                    SaveGame.Instance.MsgPrint("A vicious Attack hits your head.");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
                         if (!HasSustainIntelligence)
@@ -2562,7 +2562,7 @@ namespace Cthangband
                 switch (newAux)
                 {
                     case 0:
-                        Profile.Instance.MsgPrint("You are no longer stunned.");
+                        SaveGame.Instance.MsgPrint("You are no longer stunned.");
                         SaveGame.Instance.Disturb(false);
                         break;
                 }
@@ -2588,7 +2588,7 @@ namespace Cthangband
             {
                 if (TimedSuperheroism == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel like a killing machine!");
+                    SaveGame.Instance.MsgPrint("You feel like a killing machine!");
                     notice = true;
                 }
             }
@@ -2596,7 +2596,7 @@ namespace Cthangband
             {
                 if (TimedSuperheroism != 0)
                 {
-                    Profile.Instance.MsgPrint("You feel less Berserk.");
+                    SaveGame.Instance.MsgPrint("You feel less Berserk.");
                     notice = true;
                 }
             }
@@ -2620,7 +2620,7 @@ namespace Cthangband
             {
                 if (TimedTelepathy == 0)
                 {
-                    Profile.Instance.MsgPrint("You feel your consciousness expand!");
+                    SaveGame.Instance.MsgPrint("You feel your consciousness expand!");
                     notice = true;
                 }
             }
@@ -2628,7 +2628,7 @@ namespace Cthangband
             {
                 if (TimedTelepathy != 0)
                 {
-                    Profile.Instance.MsgPrint("Your consciousness contracts again.");
+                    SaveGame.Instance.MsgPrint("Your consciousness contracts again.");
                     notice = true;
                 }
             }
@@ -2712,13 +2712,13 @@ namespace Cthangband
             RedrawNeeded.Set(RedrawFlag.PrHp);
             if (penInvuln)
             {
-                Profile.Instance.MsgPrint("The attack penetrates your shield of invulnerability!");
+                SaveGame.Instance.MsgPrint("The attack penetrates your shield of invulnerability!");
             }
             if (Health < 0)
             {
                 if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Zo_Kalar).AdjustedFavour)
                 {
-                    Profile.Instance.MsgPrint("Zo-Kalar's favour saves you from death!");
+                    SaveGame.Instance.MsgPrint("Zo-Kalar's favour saves you from death!");
                     Health += damage;
                 }
                 else
@@ -2730,8 +2730,8 @@ namespace Cthangband
                     else
                     {
                         Gui.PlaySound(SoundEffect.PlayerDeath);
-                        Profile.Instance.MsgPrint("You die.");
-                        Profile.Instance.MsgPrint(null);
+                        SaveGame.Instance.MsgPrint("You die.");
+                        SaveGame.Instance.MsgPrint(null);
                         SaveGame.Instance.DiedFrom = hitFrom;
                         if (TimedHallucinations != 0)
                         {
@@ -2746,8 +2746,8 @@ namespace Cthangband
             if (Health < warning)
             {
                 Gui.PlaySound(SoundEffect.HealthWarning);
-                Profile.Instance.MsgPrint("*** LOW HITPOINT WARNING! ***");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint("*** LOW HITPOINT WARNING! ***");
+                SaveGame.Instance.MsgPrint(null);
             }
         }
 
@@ -2756,12 +2756,12 @@ namespace Cthangband
             if (WordOfRecallDelay == 0)
             {
                 WordOfRecallDelay = Program.Rng.DieRoll(20) + 15;
-                Profile.Instance.MsgPrint("The air about you becomes charged...");
+                SaveGame.Instance.MsgPrint("The air about you becomes charged...");
             }
             else
             {
                 WordOfRecallDelay = 0;
-                Profile.Instance.MsgPrint("A tension leaves the air around you...");
+                SaveGame.Instance.MsgPrint("A tension leaves the air around you...");
             }
         }
 
@@ -2814,18 +2814,18 @@ namespace Cthangband
             }
             if (sust)
             {
-                Profile.Instance.MsgPrint(
+                SaveGame.Instance.MsgPrint(
                     $"You feel {GlobalData.DescStatNeg[stat]} for a moment, but the feeling passes.");
                 return true;
             }
             if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Lobon).AdjustedFavour)
             {
-                Profile.Instance.MsgPrint($"You feel { GlobalData.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
+                SaveGame.Instance.MsgPrint($"You feel { GlobalData.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
                 return true;
             }
             if (DecreaseAbilityScore(stat, 10, false))
             {
-                Profile.Instance.MsgPrint($"You feel very {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.Instance.MsgPrint($"You feel very {GlobalData.DescStatNeg[stat]}.");
                 return true;
             }
             return false;
@@ -2836,12 +2836,12 @@ namespace Cthangband
             bool res = RestoreAbilityScore(stat);
             if (IncreaseAbilityScore(stat))
             {
-                Profile.Instance.MsgPrint($"Wow!  You feel very {GlobalData.DescStatPos[stat]}!");
+                SaveGame.Instance.MsgPrint($"Wow!  You feel very {GlobalData.DescStatPos[stat]}!");
                 return true;
             }
             if (res)
             {
-                Profile.Instance.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.Instance.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
                 return true;
             }
             return false;
@@ -2851,7 +2851,7 @@ namespace Cthangband
         {
             if (RestoreAbilityScore(stat))
             {
-                Profile.Instance.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.Instance.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
                 return true;
             }
             return false;

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class WandConfuseMonster : WandItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Wand:Confuse Monster";
 
         public override int Chance1 => 1;

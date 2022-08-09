@@ -28,8 +28,8 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("Your stomach roils, and you lose your lunch!");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("Your stomach roils, and you lose your lunch!");
+            SaveGame.Instance.MsgPrint(null);
             player.SetFood(Constants.PyFoodWeak);
         }
     }

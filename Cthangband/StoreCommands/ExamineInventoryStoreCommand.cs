@@ -30,7 +30,7 @@ namespace Cthangband.StoreCommands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to examine.");
+                    SaveGame.Instance.MsgPrint("You have nothing to examine.");
                 }
                 return;
             }
@@ -38,16 +38,16 @@ namespace Cthangband.StoreCommands
             // Do we know anything about it?
             if (item.IdentifyFlags.IsClear(Constants.IdentMental))
             {
-                Profile.Instance.MsgPrint("You have no special knowledge about that item.");
+                SaveGame.Instance.MsgPrint("You have no special knowledge about that item.");
                 return;
             }
             string itemName = item.Description(true, 3);
-            Profile.Instance.MsgPrint($"Examining {itemName}...");
+            SaveGame.Instance.MsgPrint($"Examining {itemName}...");
             // We're not actually identifying it, because it's already itentified, but we want to
             // repeat the identification text
             if (!item.IdentifyFully())
             {
-                Profile.Instance.MsgPrint("You see nothing special.");
+                SaveGame.Instance.MsgPrint("You see nothing special.");
             }
         }
     }

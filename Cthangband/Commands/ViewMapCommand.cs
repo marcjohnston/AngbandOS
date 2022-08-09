@@ -25,10 +25,10 @@ namespace Cthangband.Commands
             Gui.Save();
             Gui.Clear();
             // If we're on the surface, display the island map
-            if (SaveGame.Instance.CurrentDepth == 0)
+            if (saveGame.CurrentDepth == 0)
             {
                 Gui.SetBackground(BackgroundImage.WildMap);
-                SaveGame.Instance.DisplayWildMap();
+                saveGame.DisplayWildMap();
             }
             else
             {
@@ -38,7 +38,7 @@ namespace Cthangband.Commands
             }
             // Give us a prompt, and display the cursor in the player's location
             Gui.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
-            if (SaveGame.Instance.CurrentDepth == 0)
+            if (saveGame.CurrentDepth == 0)
             {
                 Gui.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
             }

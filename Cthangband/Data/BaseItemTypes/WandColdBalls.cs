@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class WandColdBalls : WandItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Wand:Cold Balls";
 
         public override int Chance1 => 1;

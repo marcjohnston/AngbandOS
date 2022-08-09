@@ -68,12 +68,8 @@ namespace Cthangband.WpfNet472
                 {
                     Quit($"Cannot create '{SaveFolder}'");
                 }
-                while (!ExitToDesktop)
-                {
-
-                    string gameGuid = GameServer.NewGame();
-                    GameServer.Play(gameGuid, new MainWindow());
-                }
+                string gameGuid = GameServer.NewGame();
+                GameServer.Play(gameGuid, new MainWindow());
             }
             catch (Exception ex)
             {

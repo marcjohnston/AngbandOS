@@ -20,9 +20,8 @@ namespace Cthangband.Commands
             bool disturb = false;
             // Check if there's only one thing we can open
             MapCoordinate coord = new MapCoordinate();
-            int numDoors =
-                SaveGame.Instance.CountClosedDoors(coord);
-            int numChests = SaveGame.Instance.CountChests(coord, false);
+            int numDoors = saveGame.CountClosedDoors(coord);
+            int numChests = saveGame.CountChests(coord, false);
             if (numDoors != 0 || numChests != 0)
             {
                 bool tooMany = (numDoors != 0 && numChests != 0) || numDoors > 1 || numChests > 1;
@@ -44,28 +43,28 @@ namespace Cthangband.Commands
                 if (!tile.FeatureType.IsClosedDoor &&
                     itemIndex == 0)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to open.");
+                    saveGame.MsgPrint("You see nothing there to open.");
                 }
                 // Can't open something if there's a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
-                    SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.EnergyUse = 100;
+                    saveGame.MsgPrint("There is a monster in the way!");
+                    saveGame.PlayerAttackMonster(y, x);
                 }
                 // Open the chest or door
                 else if (itemIndex != 0)
                 {
-                    disturb = SaveGame.Instance.OpenChestAtGivenLocation(y, x, itemIndex);
+                    disturb = saveGame.OpenChestAtGivenLocation(y, x, itemIndex);
                 }
                 else
                 {
-                    disturb = SaveGame.Instance.OpenDoor(y, x);
+                    disturb = saveGame.OpenDoor(y, x);
                 }
             }
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
 

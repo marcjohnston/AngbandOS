@@ -30,7 +30,7 @@ namespace Cthangband.StoreCommands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You are not wearing anything to take off.");
+                    SaveGame.Instance.MsgPrint("You are not wearing anything to take off.");
                 }
                 return;
             }
@@ -38,7 +38,7 @@ namespace Cthangband.StoreCommands
             // Can't take of cursed items
             if (item.IsCursed())
             {
-                Profile.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             // Take off the item

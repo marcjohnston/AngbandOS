@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingPoisonResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Poison Resistance";
 
         public override int Chance1 => 2;

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionDetectInvisible : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Detect Invisible";
 
         public override int Chance1 => 1;

@@ -33,8 +33,8 @@ namespace Cthangband.Mutations.ActiveMutations
             }
             else
             {
-                Profile.Instance.MsgPrint("You don't see any monster in this direction");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint("You don't see any monster in this direction");
+                SaveGame.Instance.MsgPrint(null);
             }
         }
 

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollMassCarnage : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Mass Carnage";
 
         public override int Chance1 => 4;

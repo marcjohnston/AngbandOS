@@ -20,8 +20,8 @@ namespace Cthangband.Commands
         {
             AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
             Version version = assembly.Version;
-            Profile.Instance.MsgPrint($"You are playing {Constants.VersionName} {version}.");
-            Profile.Instance.MsgPrint($"(Build time: {Constants.CompileTime})");
+            saveGame.MsgPrint($"You are playing {Constants.VersionName} {version}.");
+            saveGame.MsgPrint($"(Build time: {Constants.CompileTime})");
         }
 
     }

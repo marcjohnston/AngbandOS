@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodAcidBalls : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Acid Balls";
 
         public override int Chance1 => 1;

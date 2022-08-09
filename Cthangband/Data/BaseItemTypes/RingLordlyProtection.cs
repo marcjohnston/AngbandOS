@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingLordlyProtection : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Lordly Protection";
 
         public override int Chance1 => 5;

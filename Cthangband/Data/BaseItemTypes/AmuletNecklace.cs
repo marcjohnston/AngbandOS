@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class AmuletNecklace : AmuletItemCategory
     {
         public override char Character => '"';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Amulet:Necklace";
 
         public override int Cost => 75000;

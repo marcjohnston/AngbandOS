@@ -34,7 +34,7 @@ namespace Cthangband.Spells.Tarot
             {
                 dummy = player.MaxDlv[SaveGame.Instance.CurDungeon.Index];
             }
-            Profile.Instance.MsgPrint($"Recall depth set to level {dummy}.");
+            SaveGame.Instance.MsgPrint($"Recall depth set to level {dummy}.");
         }
 
         public override void Initialise(int characterClass)

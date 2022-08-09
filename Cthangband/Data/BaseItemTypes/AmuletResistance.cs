@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class AmuletResistance : AmuletItemCategory
     {
         public override char Character => '"';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Amulet:Resistance";
 
         public override int Chance1 => 4;

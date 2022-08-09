@@ -71,7 +71,7 @@ namespace Cthangband.Stores
             int price;
             if (player.TownWithHouse == SaveGame.Instance.CurTown.Index)
             {
-                Profile.Instance.MsgPrint("You already have the deeds!");
+                SaveGame.Instance.MsgPrint("You already have the deeds!");
             }
             else
             {
@@ -79,7 +79,7 @@ namespace Cthangband.Stores
                 {
                     if (price >= player.Gold)
                     {
-                        Profile.Instance.MsgPrint("You do not have the gold!");
+                        SaveGame.Instance.MsgPrint("You do not have the gold!");
                     }
                     else
                     {
@@ -91,11 +91,11 @@ namespace Cthangband.Stores
                         player.TownWithHouse = SaveGame.Instance.CurTown.Index;
                         if (oldHouse == -1)
                         {
-                            Profile.Instance.MsgPrint("You may move in at once.");
+                            SaveGame.Instance.MsgPrint("You may move in at once.");
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint(
+                            SaveGame.Instance.MsgPrint(
                                 "I've sold your old house to pay for the removal service.");
                             MoveHouse(oldHouse, player.TownWithHouse);
                         }

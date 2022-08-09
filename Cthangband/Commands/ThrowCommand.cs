@@ -19,22 +19,22 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DoCmdThrow(saveGame.Player, saveGame.Level, 1);
+            DoCmdThrow(saveGame, 1);
         }
 
-        public static void DoCmdThrow(Player player, Level level, int damageMultiplier)
+        public static void DoCmdThrow(SaveGame saveGame, int damageMultiplier)
         {
             // Get an item to throw
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Throw which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Throw which item? ", false, true, true))
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to throw.");
+                    saveGame.MsgPrint("You have nothing to throw.");
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
@@ -43,14 +43,14 @@ namespace Cthangband.Commands
             Item missile = new Item(item) { Count = 1 };
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
             string missileName = missile.Description(false, 3);
             Colour missileColour = missile.ItemType.Colour;
@@ -58,7 +58,7 @@ namespace Cthangband.Commands
             // Thrown distance is based on the weight of the missile
             int multiplier = 10 + (2 * (damageMultiplier - 1));
             int divider = missile.Weight > 10 ? missile.Weight : 10;
-            int throwDistance = (player.AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
+            int throwDistance = (saveGame.Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
             if (throwDistance > 10)
             {
                 throwDistance = 10;
@@ -66,21 +66,21 @@ namespace Cthangband.Commands
             // Work out the damage done
             int damage = Program.Rng.DiceRoll(missile.DamageDice, missile.DamageDiceSides) + missile.BonusDamage;
             damage *= damageMultiplier;
-            int chance = player.SkillThrowing + (player.AttackBonus * Constants.BthPlusAdj);
+            int chance = saveGame.Player.SkillThrowing + (saveGame.Player.AttackBonus * Constants.BthPlusAdj);
             // Throwing something always uses a full turn, even if you can make multiple missile attacks
-            SaveGame.Instance.EnergyUse = 100;
-            int y = player.MapY;
-            int x = player.MapX;
-            int targetX = player.MapX + (99 * level.KeypadDirectionXOffset[dir]);
-            int targetY = player.MapY + (99 * level.KeypadDirectionYOffset[dir]);
+            saveGame.EnergyUse = 100;
+            int y = saveGame.Player.MapY;
+            int x = saveGame.Player.MapX;
+            int targetX = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
+            int targetY = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
             if (dir == 5 && targetEngine.TargetOkay())
             {
-                targetX = SaveGame.Instance.TargetCol;
-                targetY = SaveGame.Instance.TargetRow;
+                targetX = saveGame.TargetCol;
+                targetY = saveGame.TargetRow;
             }
-            SaveGame.Instance.HandleStuff();
-            int newY = player.MapY;
-            int newX = player.MapX;
+            saveGame.HandleStuff();
+            int newY = saveGame.Player.MapY;
+            int newX = saveGame.Player.MapX;
             bool hitBody = false;
             // Send the thrown object in the right direction one square at a time
             for (int curDis = 0; curDis <= throwDistance;)
@@ -90,9 +90,9 @@ namespace Cthangband.Commands
                 {
                     break;
                 }
-                level.MoveOneStepTowards(out newY, out newX, y, x, player.MapY, player.MapX, targetY, targetX);
+                saveGame.Level.MoveOneStepTowards(out newY, out newX, y, x, saveGame.Player.MapY, saveGame.Player.MapX, targetY, targetX);
                 // If we hit a wall or something stop moving
-                if (!level.GridPassable(newY, newX))
+                if (!saveGame.Level.GridPassable(newY, newX))
                 {
                     break;
                 }
@@ -101,13 +101,13 @@ namespace Cthangband.Commands
                 y = newY;
                 const int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
                 // If we can see, display the thrown item with a suitable delay
-                if (level.PanelContains(y, x) && level.PlayerCanSeeBold(y, x))
+                if (saveGame.Level.PanelContains(y, x) && saveGame.Level.PlayerCanSeeBold(y, x))
                 {
-                    level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
-                    level.MoveCursorRelative(y, x);
+                    saveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                    saveGame.Level.MoveCursorRelative(y, x);
                     Gui.Refresh();
                     Gui.Pause(msec);
-                    level.RedrawSingleLocation(y, x);
+                    saveGame.Level.RedrawSingleLocation(y, x);
                     Gui.Refresh();
                 }
                 else
@@ -117,15 +117,15 @@ namespace Cthangband.Commands
                 }
                 // If there's a monster in the way, we might hit it regardless of whether or not it
                 // is our intended target
-                if (level.Grid[y][x].MonsterIndex != 0)
+                if (saveGame.Level.Grid[y][x].MonsterIndex != 0)
                 {
-                    GridTile tile = level.Grid[y][x];
-                    Monster monster = level.Monsters[tile.MonsterIndex];
+                    GridTile tile = saveGame.Level.Grid[y][x];
+                    Monster monster = saveGame.Level.Monsters[tile.MonsterIndex];
                     MonsterRace race = monster.Race;
                     bool visible = monster.IsVisible;
                     hitBody = true;
                     // See if it actually hit the monster
-                    if (SaveGame.Instance.PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
+                    if (saveGame.PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
                         if ((race.Flags3 & MonsterFlag3.Demon) != 0 || (race.Flags3 & MonsterFlag3.Undead) != 0 ||
@@ -137,44 +137,44 @@ namespace Cthangband.Commands
                         // Let the player know what happened
                         if (!visible)
                         {
-                            Profile.Instance.MsgPrint($"The {missileName} finds a mark.");
+                            saveGame.MsgPrint($"The {missileName} finds a mark.");
                         }
                         else
                         {
                             string mName = monster.MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"The {missileName} hits {mName}.");
+                            saveGame.MsgPrint($"The {missileName} hits {mName}.");
                             if (monster.IsVisible)
                             {
-                                SaveGame.Instance.HealthTrack(tile.MonsterIndex);
+                                saveGame.HealthTrack(tile.MonsterIndex);
                             }
                         }
                         // Adjust the damage for the particular monster type
                         damage = missile.AdjustDamageForMonsterType(damage, monster);
-                        damage = SaveGame.Instance.PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
+                        damage = saveGame.PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
                         if (damage < 0)
                         {
                             damage = 0;
                         }
-                        if (level.Monsters.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                        if (saveGame.Level.Monsters.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
                         {
                             // The monster is dead, so don't add further statuses or messages
                         }
                         else
                         {
                             // Let the player know what happens to the monster
-                            level.Monsters.MessagePain(tile.MonsterIndex, damage);
+                            saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, damage);
                             if ((monster.Mind & Constants.SmFriendly) != 0 &&
                                 missile.ItemType.Category != ItemCategory.Potion)
                             {
                                 string mName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{mName} gets angry!");
+                                saveGame.MsgPrint($"{mName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
                             if (fear && monster.IsVisible)
                             {
                                 Gui.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                                saveGame.MsgPrint($"{mName} flees in terror!");
                             }
                         }
                     }
@@ -186,17 +186,17 @@ namespace Cthangband.Commands
             // If we hit with a potion, the potion might affect the creature
             if (missile.ItemType.Category == ItemCategory.Potion)
             {
-                if (hitBody || !level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
+                if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    Profile.Instance.MsgPrint($"The {missileName} shatters!");
-                    if (SaveGame.Instance.PotionSmashEffect(1, y, x, missile.ItemSubCategory))
+                    saveGame.MsgPrint($"The {missileName} shatters!");
+                    if (saveGame.PotionSmashEffect(1, y, x, missile.ItemSubCategory))
                     {
-                        if (level.Grid[y][x].MonsterIndex != 0 &&
-                            (level.Monsters[level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
+                        if (saveGame.Level.Grid[y][x].MonsterIndex != 0 &&
+                            (saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
                         {
-                            string mName = level.Monsters[level.Grid[y][x].MonsterIndex].MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"{mName} gets angry!");
-                            level.Monsters[level.Grid[y][x].MonsterIndex].Mind &= ~Constants.SmFriendly;
+                            string mName = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].MonsterDesc(0);
+                            saveGame.MsgPrint($"{mName} gets angry!");
+                            saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind &= ~Constants.SmFriendly;
                         }
                     }
                     return;
@@ -204,7 +204,7 @@ namespace Cthangband.Commands
                 chanceToBreak = 0;
             }
             // Drop the item on the floor
-            SaveGame.Instance.Level.DropNear(missile, chanceToBreak, y, x);
+            saveGame.Level.DropNear(missile, chanceToBreak, y, x);
         }
     }
 }

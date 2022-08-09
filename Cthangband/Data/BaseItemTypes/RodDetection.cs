@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodDetection : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Detection";
 
         public override int Chance1 => 8;

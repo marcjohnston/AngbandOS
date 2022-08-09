@@ -24,7 +24,7 @@ namespace Cthangband.Talents
 
         public override void Use(Player player, Level level, SaveGame saveGame)
         {
-            Profile.Instance.MsgPrint("Mind-warping forces emanate from your brain!");
+            SaveGame.Instance.MsgPrint("Mind-warping forces emanate from your brain!");
             if (player.Level < 25)
             {
                 saveGame.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, player.Level * 3 / 2,

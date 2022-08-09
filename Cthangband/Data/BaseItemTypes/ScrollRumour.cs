@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollRumour : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Rumour";
 
         public override int Chance1 => 1;

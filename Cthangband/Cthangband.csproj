@@ -669,6 +669,7 @@
     <Compile Include="Data\BaseItemTypes\WandWonder.cs" />
     <Compile Include="Enumerations\StompableType.cs" />
     <Compile Include="GameServer.cs" />
+    <Compile Include="PersistentStorage\IPersistantStorage.cs" />
     <Compile Include="ItemCategories\AmuletItemCategory.cs" />
     <Compile Include="ItemCategories\ArrowItemCategory.cs" />
     <Compile Include="ItemCategories\BaseItemCategories\ArmourItemCategory.cs" />
@@ -717,6 +718,8 @@
     <Compile Include="ItemCategories\SwordItemCategory.cs" />
     <Compile Include="ItemCategories\TarotBookItemCategory.cs" />
     <Compile Include="ItemCategories\WandItemCategory.cs" />
+    <Compile Include="PersistentStorage\NtfsPersistentStorage.cs" />
+    <Compile Include="PersistentStorage\SqlPersistentStorage.cs" />
     <Compile Include="StoreCommands\MGetStoreCommand.cs" />
     <Compile Include="StoreCommands\MessagesStoreCommand.cs" />
     <Compile Include="Commands\QuaffPotionCommand.cs" />
@@ -1428,7 +1431,6 @@
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="PlayerHistory.cs" />
     <Compile Include="Profession.cs" />
-    <Compile Include="Profile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />

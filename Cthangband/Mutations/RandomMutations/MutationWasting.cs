@@ -74,7 +74,7 @@ namespace Cthangband.Mutations.RandomMutations
                     break;
 
                 default:
-                    Profile.Instance.MsgPrint("Invalid stat chosen!");
+                    SaveGame.Instance.MsgPrint("Invalid stat chosen!");
                     sustained = true;
                     break;
             }
@@ -85,12 +85,12 @@ namespace Cthangband.Mutations.RandomMutations
             saveGame.Disturb(false);
             if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
             {
-                Profile.Instance.MsgPrint("Lobon's favour protects you from wasting away!");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint("Lobon's favour protects you from wasting away!");
+                SaveGame.Instance.MsgPrint(null);
                 return;
             }
-            Profile.Instance.MsgPrint("You can feel yourself wasting away!");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("You can feel yourself wasting away!");
+            SaveGame.Instance.MsgPrint(null);
             player.DecreaseAbilityScore(whichStat, Program.Rng.DieRoll(6) + 6, Program.Rng.DieRoll(3) == 1);
         }
     }

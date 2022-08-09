@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionDetonations : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Detonations";
 
         public override int Chance1 => 8;

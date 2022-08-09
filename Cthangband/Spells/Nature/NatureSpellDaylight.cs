@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            Profile.Instance.MsgPrint("The daylight scorches your flesh!");
+            SaveGame.Instance.MsgPrint("The daylight scorches your flesh!");
             player.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
         }
 

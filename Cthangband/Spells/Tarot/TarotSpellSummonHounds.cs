@@ -16,22 +16,22 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You concentrate on the image of a hound...");
+            SaveGame.Instance.MsgPrint("You concentrate on the image of a hound...");
             if (Program.Rng.DieRoll(5) > 2)
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonHound,
                     true))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHound))
             {
-                Profile.Instance.MsgPrint("The summoned hounds get angry!");
+                SaveGame.Instance.MsgPrint("The summoned hounds get angry!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

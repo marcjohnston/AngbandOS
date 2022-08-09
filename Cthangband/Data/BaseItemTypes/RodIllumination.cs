@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodIllumination : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Illumination";
 
         public override int Chance1 => 1;

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class StaffSleepMonsters : StaffItemCategory
     {
         public override char Character => '_';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Staff:Sleep Monsters";
 
         public override int Chance1 => 1;

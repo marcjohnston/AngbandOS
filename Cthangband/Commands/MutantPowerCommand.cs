@@ -38,8 +38,8 @@ namespace Cthangband.Commands
             num = 0;
             if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused to use any powers!");
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.MsgPrint("You are too confused to use any powers!");
+                saveGame.EnergyUse = 0;
                 return;
             }
             switch (saveGame.Player.RaceIndex)
@@ -220,8 +220,8 @@ namespace Cthangband.Commands
             System.Collections.Generic.List<Mutations.Mutation> activeMutations = saveGame.Player.Dna.ActivatableMutations(saveGame.Player);
             if (!hasRacial && activeMutations.Count == 0 && pets == 0)
             {
-                Profile.Instance.MsgPrint("You have no powers to activate.");
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.MsgPrint("You have no powers to activate.");
+                saveGame.EnergyUse = 0;
                 return;
             }
             if (hasRacial)
@@ -300,12 +300,12 @@ namespace Cthangband.Commands
             }
             if (!flag)
             {
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.EnergyUse = 0;
                 return;
             }
             if (powers[i] == int.MaxValue)
             {
-                SaveGame.Instance.UseRacialPower();
+                saveGame.UseRacialPower();
             }
             else if (powers[i] == 3)
             {
@@ -341,11 +341,11 @@ namespace Cthangband.Commands
                     }
                 }
                 string s = dismissed == 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"You have dismissed {dismissed} pet{s}.");
+                saveGame.MsgPrint($"You have dismissed {dismissed} pet{s}.");
             }
             else
             {
-                SaveGame.Instance.EnergyUse = 100;
+                saveGame.EnergyUse = 100;
                 activeMutations[powers[i] - 100].Activate(SaveGame.Instance, saveGame.Player, saveGame.Level);
             }
         }

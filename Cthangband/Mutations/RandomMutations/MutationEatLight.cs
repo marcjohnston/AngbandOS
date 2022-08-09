@@ -27,8 +27,8 @@ namespace Cthangband.Mutations.RandomMutations
             {
                 return;
             }
-            Profile.Instance.MsgPrint("A shadow passes over you.");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("A shadow passes over you.");
+            SaveGame.Instance.MsgPrint(null);
             if (level.Grid[player.MapY][player.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
                 player.RestoreHealth(10);
@@ -41,7 +41,7 @@ namespace Cthangband.Mutations.RandomMutations
                 {
                     player.RestoreHealth(oPtr.TypeSpecificValue / 20);
                     oPtr.TypeSpecificValue /= 2;
-                    Profile.Instance.MsgPrint("You absorb energy from your light!");
+                    SaveGame.Instance.MsgPrint("You absorb energy from your light!");
                     if (player.TimedBlindness != 0)
                     {
                         if (oPtr.TypeSpecificValue == 0)
@@ -52,11 +52,11 @@ namespace Cthangband.Mutations.RandomMutations
                     else if (oPtr.TypeSpecificValue == 0)
                     {
                         saveGame.Disturb(false);
-                        Profile.Instance.MsgPrint("Your light has gone out!");
+                        SaveGame.Instance.MsgPrint("Your light has gone out!");
                     }
                     else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
                     {
-                        Profile.Instance.MsgPrint("Your light is growing faint.");
+                        SaveGame.Instance.MsgPrint("Your light is growing faint.");
                     }
                 }
             }

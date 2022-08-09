@@ -26,11 +26,11 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Potion;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Quaff which potion? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Quaff which potion? ", true, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no potions to quaff.");
+                        saveGame.MsgPrint("You have no potions to quaff.");
                     }
                     return;
                 }
@@ -40,21 +40,21 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Potion;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a potion!");
+                saveGame.MsgPrint("That is not a potion!");
                 return;
             }
             Inventory.ItemFilterCategory = 0;
             Gui.PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             int itemLevel = item.ItemType.Level;
             // Do the actual potion effect
-            bool identified = SaveGame.Instance.PotionEffect(item.ItemSubCategory);
+            bool identified = saveGame.PotionEffect(item.ItemSubCategory);
             // Skeletons are messy drinkers
             if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
-                Profile.Instance.MsgPrint("Some of the fluid falls through your jaws!");
-                SaveGame.Instance.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, item.ItemSubCategory);
+                saveGame.MsgPrint("Some of the fluid falls through your jaws!");
+                saveGame.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, item.ItemSubCategory);
             }
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type
@@ -70,7 +70,7 @@ namespace Cthangband.Commands
             // If we're a channeler, we might be able to spend mana instead of using it up
             if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.DoCmdChannel(item);
+                channeled = saveGame.DoCmdChannel(item);
             }
             if (!channeled)
             {
@@ -83,9 +83,9 @@ namespace Cthangband.Commands
                 }
                 else
                 {
-                    SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                    SaveGame.Instance.Level.FloorItemDescribe(0 - itemIndex);
-                    SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                    saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                    saveGame.Level.FloorItemDescribe(0 - itemIndex);
+                    saveGame.Level.FloorItemOptimize(0 - itemIndex);
                 }
             }
         }

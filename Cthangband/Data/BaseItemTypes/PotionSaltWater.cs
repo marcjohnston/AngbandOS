@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionSaltWater : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Salt Water";
 
         public override int Chance1 => 1;

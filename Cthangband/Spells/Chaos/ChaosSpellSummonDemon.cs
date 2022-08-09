@@ -20,12 +20,12 @@ namespace Cthangband.Spells.Chaos
             {
                 if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level * 3 / 2, Constants.SummonDemon))
                 {
-                    Profile.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    Profile.Instance.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                    SaveGame.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    SaveGame.Instance.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else
@@ -33,12 +33,12 @@ namespace Cthangband.Spells.Chaos
                 if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level * 3 / 2,
                     Constants.SummonDemon, player.Level == 50))
                 {
-                    Profile.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    Profile.Instance.MsgPrint("'What is thy bidding... Master?'");
+                    SaveGame.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    SaveGame.Instance.MsgPrint("'What is thy bidding... Master?'");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
         }

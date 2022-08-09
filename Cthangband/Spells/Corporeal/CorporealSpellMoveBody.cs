@@ -16,7 +16,7 @@ namespace Cthangband.Spells.Corporeal
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
             TargetEngine targetEngine = new TargetEngine(player, level);
-            Profile.Instance.MsgPrint("You focus your Chi. Choose a destination.");
+            SaveGame.Instance.MsgPrint("You focus your Chi. Choose a destination.");
             if (!targetEngine.TgtPt(out int ii, out int ij))
             {
                 return;
@@ -26,7 +26,7 @@ namespace Cthangband.Spells.Corporeal
                 level.Distance(ij, ii, player.MapY, player.MapX) > player.Level + 2 ||
                 Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
             {
-                Profile.Instance.MsgPrint("You fail to concentrate correctly!");
+                SaveGame.Instance.MsgPrint("You fail to concentrate correctly!");
                 player.Energy -= 100;
                 saveGame.TeleportPlayer(10);
             }

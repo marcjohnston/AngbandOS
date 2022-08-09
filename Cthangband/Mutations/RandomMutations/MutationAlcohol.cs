@@ -33,10 +33,10 @@ namespace Cthangband.Mutations.RandomMutations
             }
             saveGame.Disturb(false);
             player.RedrawNeeded.Set(RedrawFlag.PrExtra);
-            Profile.Instance.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
+            SaveGame.Instance.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
             if (Program.Rng.DieRoll(20) == 1)
             {
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     saveGame.LoseAllInfo();
@@ -47,8 +47,8 @@ namespace Cthangband.Mutations.RandomMutations
                 }
                 saveGame.TeleportPlayer(100);
                 level.WizDark();
-                Profile.Instance.MsgPrint("You wake up somewhere with a sore head...");
-                Profile.Instance.MsgPrint("You can't remember a thing, or how you got here!");
+                SaveGame.Instance.MsgPrint("You wake up somewhere with a sore head...");
+                SaveGame.Instance.MsgPrint("You can't remember a thing, or how you got here!");
             }
             else
             {
@@ -58,7 +58,7 @@ namespace Cthangband.Mutations.RandomMutations
                 }
                 if (Program.Rng.DieRoll(3) == 1 && !player.HasChaosResistance)
                 {
-                    Profile.Instance.MsgPrint("Thishcischs GooDSChtuff!");
+                    SaveGame.Instance.MsgPrint("Thishcischs GooDSChtuff!");
                     player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(150) + 150);
                 }
             }

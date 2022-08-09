@@ -29,24 +29,24 @@ namespace Cthangband.Commands
                 // Can only bash closed doors
                 if (!tile.FeatureType.IsClosedDoor)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to bash.");
+                    saveGame.MsgPrint("You see nothing there to bash.");
                 }
                 else if (tile.MonsterIndex != 0)
                 {
                     // Oops - a montser got in the way
-                    SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.EnergyUse = 100;
+                    saveGame.MsgPrint("There is a monster in the way!");
+                    saveGame.PlayerAttackMonster(y, x);
                 }
                 else
                 {
                     // Bash the door
-                    disturb = SaveGame.Instance.BashClosedDoor(y, x, dir);
+                    disturb = saveGame.BashClosedDoor(y, x, dir);
                 }
             }
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

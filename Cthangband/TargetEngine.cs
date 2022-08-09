@@ -53,7 +53,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                Profile.Instance.MsgPrint("You are confused.");
+                SaveGame.Instance.MsgPrint("You are confused.");
             }
             dp = dir;
             return true;
@@ -113,7 +113,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                Profile.Instance.MsgPrint("You are confused.");
+                SaveGame.Instance.MsgPrint("You are confused.");
             }
             dp = dir;
         }
@@ -176,7 +176,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                Profile.Instance.MsgPrint("You are confused.");
+                SaveGame.Instance.MsgPrint("You are confused.");
             }
             dp = dir;
             return true;
@@ -364,7 +364,7 @@ namespace Cthangband
             y = _player.MapY;
             bool cv = Gui.CursorVisible;
             Gui.CursorVisible = true;
-            Profile.Instance.MsgPrint("Select a point and press space.");
+            SaveGame.Instance.MsgPrint("Select a point and press space.");
             while (ch != 27 && ch != ' ')
             {
                 _level.MoveCursorRelative(y, x);

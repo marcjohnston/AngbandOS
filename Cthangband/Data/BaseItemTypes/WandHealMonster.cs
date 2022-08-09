@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class WandHealMonster : WandItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Wand:Heal Monster";
 
         public override int Chance1 => 1;

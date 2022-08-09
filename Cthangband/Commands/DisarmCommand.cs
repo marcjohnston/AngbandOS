@@ -21,8 +21,8 @@ namespace Cthangband.Commands
             bool disturb = false;
             MapCoordinate coord = new MapCoordinate();
             int numTraps =
-                SaveGame.Instance.CountKnownTraps(coord);
-            int numChests = SaveGame.Instance.CountChests(coord, true);
+                saveGame.CountKnownTraps(coord);
+            int numChests = saveGame.CountChests(coord, true);
             // Count the possible traps and chests we might want to disarm
             if (numTraps != 0 || numChests != 0)
             {
@@ -44,27 +44,27 @@ namespace Cthangband.Commands
                 if (!tile.FeatureType.IsTrap &&
                     itemIndex == 0)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to disarm.");
+                    saveGame.MsgPrint("You see nothing there to disarm.");
                 }
                 // Can't disarm with a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.MsgPrint("There is a monster in the way!");
+                    saveGame.PlayerAttackMonster(y, x);
                 }
                 // Disarm the chest or trap
                 else if (itemIndex != 0)
                 {
-                    disturb = SaveGame.Instance.DisarmChest(y, x, itemIndex);
+                    disturb = saveGame.DisarmChest(y, x, itemIndex);
                 }
                 else
                 {
-                    disturb = SaveGame.Instance.DisarmTrap(y, x, dir);
+                    disturb = saveGame.DisarmTrap(y, x, dir);
                 }
             }
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

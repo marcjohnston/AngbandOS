@@ -16,22 +16,22 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You concentrate on the image of a Black Reaver...");
+            SaveGame.Instance.MsgPrint("You concentrate on the image of a Black Reaver...");
             if (Program.Rng.DieRoll(10) > 3)
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonReaver,
                     true))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonReaver))
             {
-                Profile.Instance.MsgPrint("The summoned Black Reaver gets angry!");
+                SaveGame.Instance.MsgPrint("The summoned Black Reaver gets angry!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

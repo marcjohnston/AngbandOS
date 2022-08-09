@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingAccuracy : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Accuracy";
 
         public override int Chance1 => 1;

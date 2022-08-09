@@ -31,7 +31,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 if (oPtr.TypeSpecificValue > 0)
                 {
-                    Profile.Instance.MsgPrint("You can't absorb energy from a discharged rod.");
+                    SaveGame.Instance.MsgPrint("You can't absorb energy from a discharged rod.");
                 }
                 else
                 {
@@ -48,7 +48,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("There's no energy there to absorb!");
+                    SaveGame.Instance.MsgPrint("There's no energy there to absorb!");
                 }
                 oPtr.IdentifyFlags.Set(Constants.IdentEmpty);
             }

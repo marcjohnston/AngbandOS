@@ -22,7 +22,7 @@ namespace Cthangband.Commands
             MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction
-            if (SaveGame.Instance.CountOpenDoors(coord) == 1)
+            if (saveGame.CountOpenDoors(coord) == 1)
             {
                 Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
             }
@@ -35,24 +35,24 @@ namespace Cthangband.Commands
                 // Can only close actual open doors
                 if (tile.FeatureType.Category != FloorTileTypeCategory.OpenDoorway)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to close.");
+                    saveGame.MsgPrint("You see nothing there to close.");
                 }
                 // Can't close if there's a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
-                    SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.EnergyUse = 100;
+                    saveGame.MsgPrint("There is a monster in the way!");
+                    saveGame.PlayerAttackMonster(y, x);
                 }
                 // Actually close the door
                 else
                 {
-                    disturb = SaveGame.Instance.CloseDoor(y, x);
+                    disturb = saveGame.CloseDoor(y, x);
                 }
             }
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

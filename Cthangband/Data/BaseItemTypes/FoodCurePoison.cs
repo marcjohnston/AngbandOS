@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class FoodCurePoison : FoodItemCategory
     {
         public override char Character => ',';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Food:Cure Poison";
 
         public override int Chance1 => 1;

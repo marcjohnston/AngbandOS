@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class StaffPerception : StaffItemCategory
     {
         public override char Character => '_';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Staff:Perception";
 
         public override int Chance1 => 1;

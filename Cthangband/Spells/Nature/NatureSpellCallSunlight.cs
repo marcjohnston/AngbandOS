@@ -22,7 +22,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            Profile.Instance.MsgPrint("The sunlight scorches your flesh!");
+            SaveGame.Instance.MsgPrint("The sunlight scorches your flesh!");
             player.TakeHit(50, "sunlight");
         }
 

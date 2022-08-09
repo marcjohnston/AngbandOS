@@ -34,7 +34,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        saveGame.Profile.MsgPrint("You have nothing to activate.");
+                        saveGame.MsgPrint("You have nothing to activate.");
                     }
                     return;
                 }
@@ -45,7 +45,7 @@ namespace Cthangband.Commands
             saveGame.ItemFilter = saveGame.ItemFilterActivatable;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("You can't activate that!");
+                saveGame.MsgPrint("You can't activate that!");
                 saveGame.ItemFilter = null;
                 return;
             }
@@ -56,7 +56,7 @@ namespace Cthangband.Commands
             int itemLevel = item.ItemType.Level;
             if (item.IsFixedArtifact())
             {
-                itemLevel = Profile.Instance.FixedArtifacts[item.FixedArtifactIndex].Level;
+                itemLevel = saveGame.FixedArtifacts[item.FixedArtifactIndex].Level;
             }
             // Work out the chance of using the item successfully based on its level and the
             // player's skill
@@ -74,22 +74,22 @@ namespace Cthangband.Commands
             // If we fail our use item roll just tell us and quit
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                saveGame.Profile.MsgPrint("You failed to activate it properly.");
+                saveGame.MsgPrint("You failed to activate it properly.");
                 return;
             }
             // If the item is still recharging, then just tell us and quit
             if (item.RechargeTimeLeft != 0)
             {
-                saveGame.Profile.MsgPrint("It whines, glows and fades...");
+                saveGame.MsgPrint("It whines, glows and fades...");
                 return;
             }
             // We passed the checks, so the item is activated
-            saveGame.Profile.MsgPrint("You activate it...");
+            saveGame.MsgPrint("You activate it...");
             Gui.PlaySound(SoundEffect.ActivateArtifact);
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)
             {
-                SaveGame.Instance.ActivateRandomArtifact(item);
+                saveGame.ActivateRandomArtifact(item);
                 return;
             }
             // If it's a fixed artifact then use its ability
@@ -100,17 +100,17 @@ namespace Cthangband.Commands
                     // Star Essence of Polaris lights the area
                     case FixedArtifactId.StarEssenceOfPolaris:
                         {
-                            Profile.Instance.MsgPrint("The essence wells with clear light...");
-                            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+                            saveGame.MsgPrint("The essence wells with clear light...");
+                            saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(10) + 10;
                             break;
                         }
                     // Star essence of Xoth lights and maps the area
                     case FixedArtifactId.StarEssenceOfXoth:
                         {
-                            Profile.Instance.MsgPrint("The essence shines brightly...");
+                            saveGame.MsgPrint("The essence shines brightly...");
                             saveGame.Level.MapArea();
-                            SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+                            saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
@@ -118,13 +118,13 @@ namespace Cthangband.Commands
                     // health to do so
                     case FixedArtifactId.ShiningTrapezohedron:
                         {
-                            Profile.Instance.MsgPrint("The gemstone flashes bright red!");
+                            saveGame.MsgPrint("The gemstone flashes bright red!");
                             saveGame.Level.WizLight();
-                            Profile.Instance.MsgPrint("The gemstone drains your vitality...");
+                            saveGame.MsgPrint("The gemstone drains your vitality...");
                             saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-                            SaveGame.Instance.DetectTraps();
-                            SaveGame.Instance.DetectDoors();
-                            SaveGame.Instance.DetectStairs();
+                            saveGame.DetectTraps();
+                            saveGame.DetectDoors();
+                            saveGame.DetectStairs();
                             if (Gui.GetCheck("Activate recall? "))
                             {
                                 saveGame.Player.ToggleRecall();
@@ -135,7 +135,7 @@ namespace Cthangband.Commands
                     // Amulet of Lobon protects us from evil
                     case FixedArtifactId.AmuletOfLobon:
                         {
-                            Profile.Instance.MsgPrint("The amulet lets out a shrill wail...");
+                            saveGame.MsgPrint("The amulet lets out a shrill wail...");
                             int k = 3 * saveGame.Player.Level;
                             saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
@@ -144,20 +144,20 @@ namespace Cthangband.Commands
                     // Amulet of Abdul Alhazred dispels evil
                     case FixedArtifactId.AmuletOfAbdulAlhazred:
                         {
-                            Profile.Instance.MsgPrint("The amulet floods the area with goodness...");
-                            SaveGame.Instance.DispelEvil(saveGame.Player.Level * 5);
+                            saveGame.MsgPrint("The amulet floods the area with goodness...");
+                            saveGame.DispelEvil(saveGame.Player.Level * 5);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     // Ring of Magic has a djinn in it that drains life from an opponent
                     case FixedArtifactId.RingOfMagic:
                         {
-                            Profile.Instance.MsgPrint("You order Frakir to strangle your opponent.");
+                            saveGame.MsgPrint("You order Frakir to strangle your opponent.");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            if (SaveGame.Instance.DrainLife(dir, 100))
+                            if (saveGame.DrainLife(dir, 100))
                             {
                                 item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
                             }
@@ -166,7 +166,7 @@ namespace Cthangband.Commands
                     // Ring of Bast hastes you
                     case FixedArtifactId.RingOfBast:
                         {
-                            Profile.Instance.MsgPrint("The ring glows brightly...");
+                            saveGame.MsgPrint("The ring glows brightly...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
@@ -181,58 +181,58 @@ namespace Cthangband.Commands
                     // Ring of Elemental Fire casts a fireball
                     case FixedArtifactId.RingOfElementalPowerFire:
                         {
-                            Profile.Instance.MsgPrint("The ring glows deep red...");
+                            saveGame.MsgPrint("The ring glows deep red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 120, 3);
+                            saveGame.FireBall(new ProjectFire(), dir, 120, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
                             break;
                         }
                     // Ring of Elemental Ice casts a coldball
                     case FixedArtifactId.RingOfElementalPowerIce:
                         {
-                            Profile.Instance.MsgPrint("The ring glows bright white...");
+                            saveGame.MsgPrint("The ring glows bright white...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 200, 3);
+                            saveGame.FireBall(new ProjectCold(), dir, 200, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(325) + 325;
                             break;
                         }
                     // Ring of Elemental Lightning casts a lightning ball
                     case FixedArtifactId.RingOfElementalPowerStorm:
                         {
-                            Profile.Instance.MsgPrint("The ring glows deep blue...");
+                            saveGame.MsgPrint("The ring glows deep blue...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 250, 3);
+                            saveGame.FireBall(new ProjectElec(), dir, 250, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(425) + 425;
                             break;
                         }
                     // Ring of Set has a random effect
                     case FixedArtifactId.RingOfSet:
                         {
-                            Profile.Instance.MsgPrint("The ring glows intensely black...");
+                            saveGame.MsgPrint("The ring glows intensely black...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.RingOfSetPower(dir);
+                            saveGame.RingOfSetPower(dir);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     // Razorback gives you a point-blank lightning ball
                     case FixedArtifactId.DragonScaleRazorback:
                         {
-                            Profile.Instance.MsgPrint("Your armor is surrounded by lightning...");
+                            saveGame.MsgPrint("Your armor is surrounded by lightning...");
                             for (int i = 0; i < 8; i++)
                             {
-                                SaveGame.Instance.FireBall(new ProjectElec(), saveGame.Level.OrderedDirection[i], 150, 3);
+                                saveGame.FireBall(new ProjectElec(), saveGame.Level.OrderedDirection[i], 150, 3);
                             }
                             item.RechargeTimeLeft = 1000;
                             break;
@@ -244,9 +244,9 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            Profile.Instance.MsgPrint("You breathe the elements.");
-                            SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, 4);
-                            Profile.Instance.MsgPrint("Your armor glows many colors...");
+                            saveGame.MsgPrint("You breathe the elements.");
+                            saveGame.FireBall(new ProjectMissile(), dir, 300, 4);
+                            saveGame.MsgPrint("Your armor glows many colors...");
                             saveGame.Player.SetTimedFear(0);
                             saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
                             saveGame.Player.RestoreHealth(30);
@@ -262,8 +262,8 @@ namespace Cthangband.Commands
                     // Soulkeeper heals you a lot
                     case FixedArtifactId.PlateMailSoulkeeper:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows a bright white...");
-                            Profile.Instance.MsgPrint("You feel much better...");
+                            saveGame.MsgPrint("Your armor glows a bright white...");
+                            saveGame.MsgPrint("You feel much better...");
                             saveGame.Player.RestoreHealth(1000);
                             saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 888;
@@ -272,7 +272,7 @@ namespace Cthangband.Commands
                     // Vampire Hunter cures most ailments
                     case FixedArtifactId.ArmourOfTheVampireHunter:
                         {
-                            Profile.Instance.MsgPrint("A heavenly choir sings...");
+                            saveGame.MsgPrint("A heavenly choir sings...");
                             saveGame.Player.SetTimedPoison(0);
                             saveGame.Player.SetTimedBleeding(0);
                             saveGame.Player.SetTimedStun(0);
@@ -286,16 +286,16 @@ namespace Cthangband.Commands
                     // Orc does Carnage
                     case FixedArtifactId.ArmourOfTheOrcs:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows deep blue...");
-                            SaveGame.Instance.Carnage(true);
+                            saveGame.MsgPrint("Your armor glows deep blue...");
+                            saveGame.Carnage(true);
                             item.RechargeTimeLeft = 500;
                             break;
                         }
                     // Ogre Lords destroys doors
                     case FixedArtifactId.ArmourOfTheOgreLords:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows bright red...");
-                            SaveGame.Instance.DestroyDoorsTouch();
+                            saveGame.MsgPrint("Your armor glows bright red...");
+                            saveGame.DestroyDoorsTouch();
                             item.RechargeTimeLeft = 10;
                             break;
                         }
@@ -303,24 +303,24 @@ namespace Cthangband.Commands
                     case FixedArtifactId.DragonHelmOfPower:
                     case FixedArtifactId.HelmTerrorMask:
                         {
-                            SaveGame.Instance.TurnMonsters(40 + saveGame.Player.Level);
+                            saveGame.TurnMonsters(40 + saveGame.Player.Level);
                             item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
                             break;
                         }
                     // Skull Keeper detects everything
                     case FixedArtifactId.HelmSkullkeeper:
                         {
-                            Profile.Instance.MsgPrint("Your helm glows bright white...");
-                            Profile.Instance.MsgPrint("An image forms in your mind...");
-                            SaveGame.Instance.DetectAll();
+                            saveGame.MsgPrint("Your helm glows bright white...");
+                            saveGame.MsgPrint("An image forms in your mind...");
+                            saveGame.DetectAll();
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
                             break;
                         }
                     // Sun Crown heals
                     case FixedArtifactId.CrownOfTheSun:
                         {
-                            Profile.Instance.MsgPrint("Your crown glows deep yellow...");
-                            Profile.Instance.MsgPrint("You feel a warm tingling inside...");
+                            saveGame.MsgPrint("Your crown glows deep yellow...");
+                            saveGame.MsgPrint("You feel a warm tingling inside...");
                             saveGame.Player.RestoreHealth(700);
                             saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 250;
@@ -329,7 +329,7 @@ namespace Cthangband.Commands
                     // Cloak of Barzai gives resistances
                     case FixedArtifactId.CloakOfBarzai:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows many colours...");
+                            saveGame.MsgPrint("Your cloak glows many colours...");
                             saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
                             saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
@@ -341,31 +341,31 @@ namespace Cthangband.Commands
                     // Darkness sends monsters to sleep
                     case FixedArtifactId.CloakDarkness:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows deep blue...");
-                            SaveGame.Instance.SleepMonstersTouch();
+                            saveGame.MsgPrint("Your cloak glows deep blue...");
+                            saveGame.SleepMonstersTouch();
                             item.RechargeTimeLeft = 55;
                             break;
                         }
                     // Swashbuckler recharges items
                     case FixedArtifactId.CloakOfTheSwashbuckler:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows bright yellow...");
-                            SaveGame.Instance.Recharge(60);
+                            saveGame.MsgPrint("Your cloak glows bright yellow...");
+                            saveGame.Recharge(60);
                             item.RechargeTimeLeft = 70;
                             break;
                         }
                     // Shifter teleports you
                     case FixedArtifactId.CloakShifter:
                         {
-                            Profile.Instance.MsgPrint("Your cloak twists space around you...");
-                            SaveGame.Instance.TeleportPlayer(100);
+                            saveGame.MsgPrint("Your cloak twists space around you...");
+                            saveGame.TeleportPlayer(100);
                             item.RechargeTimeLeft = 45;
                             break;
                         }
                     // Nyogtha restores experience
                     case FixedArtifactId.ShadowCloakOfNyogtha:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows a deep red...");
+                            saveGame.MsgPrint("Your cloak glows a deep red...");
                             saveGame.Player.RestoreLevel();
                             item.RechargeTimeLeft = 450;
                             break;
@@ -373,12 +373,12 @@ namespace Cthangband.Commands
                     // Light shoots magic missiles
                     case FixedArtifactId.GlovesOfLight:
                         {
-                            Profile.Instance.MsgPrint("Your gloves glow extremely brightly...");
+                            saveGame.MsgPrint("Your gloves glow extremely brightly...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectMissile(), dir,
+                            saveGame.FireBolt(new ProjectMissile(), dir,
                                 Program.Rng.DiceRoll(2, 6));
                             item.RechargeTimeLeft = 2;
                             break;
@@ -386,67 +386,67 @@ namespace Cthangband.Commands
                     // Iron Fist shoots fire bolts
                     case FixedArtifactId.GauntletIronfist:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in fire...");
+                            saveGame.MsgPrint("Your gauntlets are covered in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
+                            saveGame.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
                     // Ghouls shoot cold bolts
                     case FixedArtifactId.GauntletsOfGhouls:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in frost...");
+                            saveGame.MsgPrint("Your gauntlets are covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
+                            saveGame.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
                     // White Spark shoot lightning bolts
                     case FixedArtifactId.GauntletsWhiteSpark:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in sparks...");
+                            saveGame.MsgPrint("Your gauntlets are covered in sparks...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
+                            saveGame.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
                     // The Dead shoot acid bolts
                     case FixedArtifactId.GauntletsOfTheDead:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in acid...");
+                            saveGame.MsgPrint("Your gauntlets are covered in acid...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectAcid(), dir, Program.Rng.DiceRoll(5, 8));
+                            saveGame.FireBolt(new ProjectAcid(), dir, Program.Rng.DiceRoll(5, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
                     // Cesti shoot arrows
                     case FixedArtifactId.CestiOfCombat:
                         {
-                            Profile.Instance.MsgPrint("Your cesti grows magical spikes...");
+                            saveGame.MsgPrint("Your cesti grows magical spikes...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectArrow(), dir, 150);
+                            saveGame.FireBolt(new ProjectArrow(), dir, 150);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
                             break;
                         }
                     // Boots haste you
                     case FixedArtifactId.BootsOfIthaqua:
                         {
-                            Profile.Instance.MsgPrint("A wind swirls around your boots...");
+                            saveGame.MsgPrint("A wind swirls around your boots...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
@@ -461,7 +461,7 @@ namespace Cthangband.Commands
                     // Dancing heal poison and fear
                     case FixedArtifactId.BootsOfDancing:
                         {
-                            Profile.Instance.MsgPrint("Your boots glow deep blue...");
+                            saveGame.MsgPrint("Your boots glow deep blue...");
                             saveGame.Player.SetTimedFear(0);
                             saveGame.Player.SetTimedPoison(0);
                             item.RechargeTimeLeft = 5;
@@ -470,60 +470,60 @@ namespace Cthangband.Commands
                     // Faith shoots a fire bolt
                     case FixedArtifactId.DaggerOfFaith:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in fire...");
+                            saveGame.MsgPrint("Your dagger is covered in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
+                            saveGame.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
                     // Hope shoots a frost bolt
                     case FixedArtifactId.DaggerOfHope:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in frost...");
+                            saveGame.MsgPrint("Your dagger is covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
+                            saveGame.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
                     // Charity shoots a lightning bolt
                     case FixedArtifactId.DaggerOfCharity:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in sparks...");
+                            saveGame.MsgPrint("Your dagger is covered in sparks...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
+                            saveGame.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
                     // Thoth shoots a poison ball
                     case FixedArtifactId.DaggerOfThoth:
                         {
-                            Profile.Instance.MsgPrint("Your dagger throbs deep green...");
+                            saveGame.MsgPrint("Your dagger throbs deep green...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectPois(), dir, 12, 3);
+                            saveGame.FireBall(new ProjectPois(), dir, 12, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
                             break;
                         }
                     // Icicle shoots a cold ball
                     case FixedArtifactId.DaggerIcicle:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in frost...");
+                            saveGame.MsgPrint("Your dagger is covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
+                            saveGame.FireBall(new ProjectCold(), dir, 48, 2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
@@ -537,7 +537,7 @@ namespace Cthangband.Commands
                                 case 3:
                                 case 4:
                                 case 5:
-                                    SaveGame.Instance.TeleportPlayer(10);
+                                    saveGame.TeleportPlayer(10);
                                     break;
 
                                 case 6:
@@ -545,22 +545,22 @@ namespace Cthangband.Commands
                                 case 8:
                                 case 9:
                                 case 10:
-                                    SaveGame.Instance.TeleportPlayer(222);
+                                    saveGame.TeleportPlayer(222);
                                     break;
 
                                 case 11:
                                 case 12:
-                                    SaveGame.Instance.StairCreation();
+                                    saveGame.StairCreation();
                                     break;
 
                                 default:
                                     if (Gui.GetCheck("Leave this level? "))
                                     {
                                         {
-                                            SaveGame.Instance.DoCmdSaveGame(true);
+                                            saveGame.DoCmdSaveGame(true);
                                         }
-                                        SaveGame.Instance.NewLevelFlag = true;
-                                        SaveGame.Instance.CameFrom = LevelStart.StartRandom;
+                                        saveGame.NewLevelFlag = true;
+                                        saveGame.CameFrom = LevelStart.StartRandom;
                                     }
                                     break;
                             }
@@ -570,83 +570,83 @@ namespace Cthangband.Commands
                     // Excalibur shoots a frost ball
                     case FixedArtifactId.SwordExcalibur:
                         {
-                            Profile.Instance.MsgPrint("Your sword glows an intense blue...");
+                            saveGame.MsgPrint("Your sword glows an intense blue...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 100, 2);
+                            saveGame.FireBall(new ProjectCold(), dir, 100, 2);
                             item.RechargeTimeLeft = 300;
                             break;
                         }
                     // Dawn Sword summons a reaver
                     case FixedArtifactId.SwordOfTheDawn:
                         {
-                            Profile.Instance.MsgPrint("Your sword flickers black for a moment...");
-                            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, Constants.SummonReaver, true);
+                            saveGame.MsgPrint("Your sword flickers black for a moment...");
+                            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonReaver, true);
                             item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
                             break;
                         }
                     // Everflame shoots a fire ball
                     case FixedArtifactId.SwordOfEverflame:
                         {
-                            Profile.Instance.MsgPrint("Your sword glows an intense red...");
+                            saveGame.MsgPrint("Your sword glows an intense red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
+                            saveGame.FireBall(new ProjectFire(), dir, 72, 2);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
                     // Theoden drains life
                     case FixedArtifactId.AxeOfTheoden:
                         {
-                            Profile.Instance.MsgPrint("Your axe blade glows black...");
+                            saveGame.MsgPrint("Your axe blade glows black...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.DrainLife(dir, 120);
+                            saveGame.DrainLife(dir, 120);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
                     // Grungnir shoots a lightning ball
                     case FixedArtifactId.SpearGungnir:
                         {
-                            Profile.Instance.MsgPrint("Your spear crackles with electricity...");
+                            saveGame.MsgPrint("Your spear crackles with electricity...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 100, 3);
+                            saveGame.FireBall(new ProjectElec(), dir, 100, 3);
                             item.RechargeTimeLeft = 500;
                             break;
                         }
                     // Destiny does rock to mud
                     case FixedArtifactId.SpearOfDestiny:
                         {
-                            Profile.Instance.MsgPrint("Your spear pulsates...");
+                            saveGame.MsgPrint("Your spear pulsates...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.WallToMud(dir);
+                            saveGame.WallToMud(dir);
                             item.RechargeTimeLeft = 5;
                             break;
                         }
                     // Trolls does mass carnage
                     case FixedArtifactId.AxeOfTheTrolls:
                         {
-                            Profile.Instance.MsgPrint("Your axe lets out a long, shrill note...");
-                            SaveGame.Instance.MassCarnage(true);
+                            saveGame.MsgPrint("Your axe lets out a long, shrill note...");
+                            saveGame.MassCarnage(true);
                             item.RechargeTimeLeft = 1000;
                             break;
                         }
                     // Spleens Slicer heals you
                     case FixedArtifactId.AxeSpleenSlicer:
                         {
-                            Profile.Instance.MsgPrint("Your battle axe radiates deep purple...");
+                            saveGame.MsgPrint("Your battle axe radiates deep purple...");
                             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                             saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
@@ -655,19 +655,19 @@ namespace Cthangband.Commands
                     // Gnorri teleports monsters away
                     case FixedArtifactId.TridentOfTheGnorri:
                         {
-                            Profile.Instance.MsgPrint("Your trident glows deep red...");
+                            saveGame.MsgPrint("Your trident glows deep red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.TeleportMonster(dir);
+                            saveGame.TeleportMonster(dir);
                             item.RechargeTimeLeft = 150;
                             break;
                         }
                     // G'Harne does Word of Recall
                     case FixedArtifactId.ScytheOfGharne:
                         {
-                            Profile.Instance.MsgPrint("Your scythe glows soft white...");
+                            saveGame.MsgPrint("Your scythe glows soft white...");
                             saveGame.Player.ToggleRecall();
                             item.RechargeTimeLeft = 200;
                             break;
@@ -675,31 +675,31 @@ namespace Cthangband.Commands
                     // Totila does confusion
                     case FixedArtifactId.FlailTotila:
                         {
-                            Profile.Instance.MsgPrint("Your flail glows in scintillating colours...");
+                            saveGame.MsgPrint("Your flail glows in scintillating colours...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.ConfuseMonster(dir, 20);
+                            saveGame.ConfuseMonster(dir, 20);
                             item.RechargeTimeLeft = 15;
                             break;
                         }
                     // Firestarter does fire ball
                     case FixedArtifactId.MorningStarFirestarter:
                         {
-                            Profile.Instance.MsgPrint("Your morning star rages in fire...");
+                            saveGame.MsgPrint("Your morning star rages in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 3);
+                            saveGame.FireBall(new ProjectFire(), dir, 72, 3);
                             item.RechargeTimeLeft = 100;
                             break;
                         }
                     // Thunder does haste
                     case FixedArtifactId.MaceThunder:
                         {
-                            Profile.Instance.MsgPrint("Your mace glows bright green...");
+                            saveGame.MsgPrint("Your mace glows bright green...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
@@ -714,8 +714,8 @@ namespace Cthangband.Commands
                     // Ereril does identify
                     case FixedArtifactId.QuarterstaffEriril:
                         {
-                            Profile.Instance.MsgPrint("Your quarterstaff glows yellow...");
-                            if (!SaveGame.Instance.IdentifyItem())
+                            saveGame.MsgPrint("Your quarterstaff glows yellow...");
+                            if (!saveGame.IdentifyItem())
                             {
                                 return;
                             }
@@ -725,30 +725,30 @@ namespace Cthangband.Commands
                     // Atal does full identify
                     case FixedArtifactId.QuarterstaffOfAtal:
                         {
-                            Profile.Instance.MsgPrint("Your quarterstaff glows brightly...");
-                            SaveGame.Instance.DetectAll();
-                            SaveGame.Instance.Probing();
-                            SaveGame.Instance.IdentifyFully();
+                            saveGame.MsgPrint("Your quarterstaff glows brightly...");
+                            saveGame.DetectAll();
+                            saveGame.Probing();
+                            saveGame.IdentifyFully();
                             item.RechargeTimeLeft = 1000;
                             break;
                         }
                     // Justice drains life
                     case FixedArtifactId.HammerJustice:
                         {
-                            Profile.Instance.MsgPrint("Your hammer glows white...");
+                            saveGame.MsgPrint("Your hammer glows white...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
                             }
-                            SaveGame.Instance.DrainLife(dir, 90);
+                            saveGame.DrainLife(dir, 90);
                             item.RechargeTimeLeft = 70;
                             break;
                         }
                     // Death brands your bolts
                     case FixedArtifactId.CrossbowOfDeath:
                         {
-                            Profile.Instance.MsgPrint("Your crossbow glows deep red...");
-                            SaveGame.Instance.BrandBolts();
+                            saveGame.MsgPrint("Your crossbow glows deep red...");
+                            saveGame.BrandBolts();
                             item.RechargeTimeLeft = 999;
                             break;
                         }
@@ -759,7 +759,7 @@ namespace Cthangband.Commands
             // weapon teleports you
             if (item.RareItemTypeIndex == Enumerations.RareItemType.WeaponPlanarWeapon)
             {
-                SaveGame.Instance.TeleportPlayer(100);
+                saveGame.TeleportPlayer(100);
                 item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
                 return;
             }
@@ -774,36 +774,36 @@ namespace Cthangband.Commands
                 {
                     case DragonArmour.SvDragonBlue:
                         {
-                            Profile.Instance.MsgPrint("You breathe lightning.");
-                            SaveGame.Instance.FireBall(new ProjectElec(), dir, 100, -2);
+                            saveGame.MsgPrint("You breathe lightning.");
+                            saveGame.FireBall(new ProjectElec(), dir, 100, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
-                            Profile.Instance.MsgPrint("You breathe frost.");
-                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 110, -2);
+                            saveGame.MsgPrint("You breathe frost.");
+                            saveGame.FireBall(new ProjectCold(), dir, 110, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
-                            Profile.Instance.MsgPrint("You breathe acid.");
-                            SaveGame.Instance.FireBall(new ProjectAcid(), dir, 130, -2);
+                            saveGame.MsgPrint("You breathe acid.");
+                            saveGame.FireBall(new ProjectAcid(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
-                            Profile.Instance.MsgPrint("You breathe poison gas.");
-                            SaveGame.Instance.FireBall(new ProjectPois(), dir, 150, -2);
+                            saveGame.MsgPrint("You breathe poison gas.");
+                            saveGame.FireBall(new ProjectPois(), dir, 150, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
-                            Profile.Instance.MsgPrint("You breathe fire.");
-                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 200, -2);
+                            saveGame.MsgPrint("You breathe fire.");
+                            saveGame.FireBall(new ProjectFire(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -813,31 +813,31 @@ namespace Cthangband.Commands
                             string element = chance == 1
                                 ? "lightning"
                                 : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            saveGame.MsgPrint($"You breathe {element}.");
                             switch (chance)
                             {
                                 case 0:
-                                    SaveGame.Instance.FireBall(new ProjectFire(),
+                                    saveGame.FireBall(new ProjectFire(),
                                         dir, 250, -2);
                                     break;
 
                                 case 1:
-                                    SaveGame.Instance.FireBall(new ProjectElec(),
+                                    saveGame.FireBall(new ProjectElec(),
                                         dir, 250, -2);
                                     break;
 
                                 case 2:
-                                    SaveGame.Instance.FireBall(new ProjectCold(),
+                                    saveGame.FireBall(new ProjectCold(),
                                         dir, 250, -2);
                                     break;
 
                                 case 3:
-                                    SaveGame.Instance.FireBall(new ProjectAcid(),
+                                    saveGame.FireBall(new ProjectAcid(),
                                         dir, 250, -2);
                                     break;
 
                                 case 4:
-                                    SaveGame.Instance.FireBall(new ProjectPois(),
+                                    saveGame.FireBall(new ProjectPois(),
                                         dir, 250, -2);
                                     break;
                             }
@@ -846,15 +846,15 @@ namespace Cthangband.Commands
                         }
                     case DragonArmour.SvDragonBronze:
                         {
-                            Profile.Instance.MsgPrint("You breathe confusion.");
-                            SaveGame.Instance.FireBall(new ProjectConfusion(), dir, 120, -2);
+                            saveGame.MsgPrint("You breathe confusion.");
+                            saveGame.FireBall(new ProjectConfusion(), dir, 120, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
-                            Profile.Instance.MsgPrint("You breathe sound.");
-                            SaveGame.Instance.FireBall(new ProjectSound(), dir, 130, -2);
+                            saveGame.MsgPrint("You breathe sound.");
+                            saveGame.FireBall(new ProjectSound(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -862,8 +862,8 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "chaos" : "disenchantment";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.FireBall(
+                            saveGame.MsgPrint($"You breathe {element}.");
+                            saveGame.FireBall(
                                 projectile: chance == 1 ? (Projectile)new ProjectChaos() : new ProjectDisenchant(), dir: dir, dam: 220, rad: -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
@@ -872,8 +872,8 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "sound" : "shards";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.FireBall(
+                            saveGame.MsgPrint($"You breathe {element}.");
+                            saveGame.FireBall(
                                 chance == 1 ? (Projectile)new ProjectSound() : new ProjectExplode(), dir, 230, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
@@ -884,8 +884,8 @@ namespace Cthangband.Commands
                             string element = chance == 1
                                 ? "chaos"
                                 : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.FireBall(
+                            saveGame.MsgPrint($"You breathe {element}.");
+                            saveGame.FireBall(
                                 chance == 1
                                     ? new ProjectChaos()
                                     : (chance == 2
@@ -898,16 +898,16 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 0 ? "light" : "darkness";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
-                            SaveGame.Instance.FireBall(
+                            saveGame.MsgPrint($"You breathe {element}.");
+                            saveGame.FireBall(
                                 chance == 0 ? (Projectile)new ProjectLight() : new ProjectDark(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonPower:
                         {
-                            Profile.Instance.MsgPrint("You breathe the elements.");
-                            SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, -3);
+                            saveGame.MsgPrint("You breathe the elements.");
+                            saveGame.FireBall(new ProjectMissile(), dir, 300, -3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -925,21 +925,21 @@ namespace Cthangband.Commands
                 {
                     case RingType.Acid:
                         {
-                            SaveGame.Instance.FireBall(new ProjectAcid(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectAcid(), dir, 50, 2);
                             saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
-                            SaveGame.Instance.FireBall(new ProjectCold(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectCold(), dir, 50, 2);
                             saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
-                            SaveGame.Instance.FireBall(new ProjectFire(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectFire(), dir, 50, 2);
                             saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
@@ -948,7 +948,7 @@ namespace Cthangband.Commands
                 return;
             }
             // We ran out of item types
-            Profile.Instance.MsgPrint("Oops. That object cannot be activated.");
+            saveGame.MsgPrint("Oops. That object cannot be activated.");
         }
     }
 }

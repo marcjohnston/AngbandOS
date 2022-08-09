@@ -13,8 +13,12 @@ using Cthangband.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Windows.Forms;
+using Cthangband.PersistentStorage;
 
 namespace Cthangband
 {
@@ -27,6 +31,37 @@ namespace Cthangband
         private static string _activeSaveSlot;
         private static string[] _saveSlot;
         private static Settings _settings;
+        private static SaveGame saveGame;
+        public static IPersistentStorage PersistentStorage;
+
+        public static SaveGame LoadOrCreate(string fileName)
+        {
+            FileInfo file = new FileInfo(fileName);
+            Program.PersistentStorage = new NtfsPersistentStorage();
+            if (file.Exists)
+            {
+                return DeserializeFromSaveFolder<SaveGame>(fileName);
+            }
+            else
+            {
+                SaveGame game = new SaveGame(Program.ActiveSaveSlot);
+                game.Initialise();
+                return game;
+            }
+        }
+        public static void Run(SaveGame Game)
+        {
+            Game.MsgFlag = false;
+            Game.MsgPrint(null);
+            Game.MsgFlag = false;
+
+            // Set a globally accessible reference to our game
+            SaveGame.Instance = Game;
+            // And play it!
+            Game.Play();
+            // Remove the global reference
+            SaveGame.Instance = null;
+        }
 
         public static string ActiveSaveSlot
         {
@@ -34,7 +69,8 @@ namespace Cthangband
             private set
             {
                 _activeSaveSlot = value;
-                Profile.LoadOrCreate(value);
+
+                saveGame = LoadOrCreate(value);
             }
         }
 
@@ -54,6 +90,31 @@ namespace Cthangband
                 stream.Close();
             }
             return o;
+        }
+
+        /// <summary>
+        /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="o"></param>
+        /// <param name="filename"></param>
+        public static void SerializeToSaveFolder<T>(T o, string filename)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream();
+            formatter.Serialize(memoryStream, o);
+//            memoryStream.Position = 0;
+//            T temp = (T)formatter.Deserialize(memoryStream);
+
+            //string path = Path.Combine(Program.SaveFolder, filename);
+            //FileInfo info = new FileInfo(path);
+            //using (FileStream stream = info.OpenWrite())
+            //{
+            //    stream.Write(value, 0, value.Length);
+            //    formatter.Serialize(stream, o);
+            //}
+
+            PersistentStorage.Write(memoryStream.ToArray(), filename);
         }
 
         public static bool DirCreate(string path)
@@ -95,211 +156,6 @@ namespace Cthangband
             Environment.Exit(0);
         }
 
-        public static void SerializeToSaveFolder<T>(T o, string filename)
-        {
-            string path = Path.Combine(SaveFolder, filename);
-            FileInfo info = new FileInfo(path);
-            using (FileStream stream = info.OpenWrite())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, o);
-            }
-        }
-
- //       internal static void ChangeOptions()
- //       {
- //           var fonts = Gui.Terminal.EnumerateFonts();
- //           var font = 0;
- //           for (int i = 0; i < fonts.Count; i++)
- //           {
- //               if (fonts[i] == _settings.Font)
- //               {
- //                   font = i;
- //                   break;
- //               }
- //           }
- //           var resolutions = Gui.Terminal.EnumerateResolutions();
- //           var styles = new List<string> { "Regular", "Bold", "Italic", "Bold Italic" };
- //           var resolution = _settings.Resolution;
- //           var menuItem = 0;
- //           if (resolution == 0)
- //           {
- //               resolution = 5;
- //           }
- //           int textStyle = 0;
- //           if (_settings.Bold)
- //           {
- //               textStyle += 1;
- //           }
- //           if (_settings.Italic)
- //           {
- //               textStyle += 2;
- //           }
- //           Gui.Save();
- //           Gui.FullScreenOverlay = true;
- //           Gui.InPopupMenu = true;
- //           Gui.SetBackground(BackgroundImage.Options);
- //           PrintOptionsScreen();
- //           var blank = new string(' ', 34);
- //           while (true)
- //           {
- //               for (int i = 4; i < 10; i++)
- //               {
- //                   Gui.Print(Colour.White, blank, i, 16);
- //               }
- //               Gui.Print(menuItem == 0 ? Colour.Pink : Colour.Purple, _settings.Font, 4, 16);
- //               Gui.Print(menuItem == 1 ? Colour.Pink : Colour.Purple, styles[textStyle], 5, 16);
- //               Gui.Print(menuItem == 2 ? Colour.Pink : Colour.Purple, (_settings.Resolution == 0 ? "Fullscreen" : "Windowed"), 6, 16);
- //               Gui.Print(menuItem == 3 ? Colour.Pink : Colour.Purple, resolutions[resolution - 1].ToString(), 7, 16);
- //               Gui.Print(menuItem == 4 ? Colour.Pink : Colour.Purple, _settings.MusicVolume.ToString() + "%", 8, 16);
- //               Gui.Print(menuItem == 5 ? Colour.Pink : Colour.Purple, _settings.SoundVolume.ToString() + "%", 9, 16);
- //               Gui.HideCursorOnFullScreenInkey = true;
- //               var c = Gui.Inkey();
- //               if (c == '\r' || c == ' ' || c == '\x1b')
- //               {
- //                   break;
- //               }
- //               if (c == '2')
- //               {
- //                   menuItem++;
- //                   if (menuItem == 6)
- //                   {
- //                       menuItem = 0;
- //                   }
- //               }
- //               if (c == '8')
- //               {
- //                   menuItem--;
- //                   if (menuItem == -1)
- //                   {
- //                       menuItem = 5;
- //                   }
- //               }
- //               if (c == '6')
- //               {
- //                   switch (menuItem)
- //                   {
- //                       case 0:
- //                           font++;
- //                           if (font >= fonts.Count)
- //                           {
- //                               font = 0;
- //                           }
- //                           _settings.Font = fonts[font];
- ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
- //                           break;
-
- //                       case 1:
- //                           textStyle++;
- //                           if (textStyle >= styles.Count)
- //                           {
- //                               textStyle = 0;
- //                           }
- //                           _settings.Bold = (textStyle == 1 || textStyle == 3);
- //                           _settings.Italic = (textStyle == 2 || textStyle == 3);
- ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
- //                           break;
-
- //                       case 2:
- //                           _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
- //                           Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
- //                           break;
-
- //                       case 3:
- //                           if (resolution < resolutions.Count)
- //                           {
- //                               resolution++;
- //                               if (_settings.Resolution != 0)
- //                               {
- //                                   _settings.Resolution = resolution;
- //                                   Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
- //                               }
- //                           }
- //                           break;
-
- //                       case 4:
- //                           if (_settings.MusicVolume < 100)
- //                           {
- //                               _settings.MusicVolume += 5;
- //                           }
- //                           Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
- //                           Gui.Mixer.ResetCurrentMusicVolume();
- //                           break;
-
- //                       case 5:
- //                           if (_settings.SoundVolume < 100)
- //                           {
- //                               _settings.SoundVolume += 5;
- //                           }
- //                           Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
- //                           break;
- //                   }
- //               }
- //               if (c == '4')
- //               {
- //                   switch (menuItem)
- //                   {
- //                       case 0:
- //                           font--;
- //                           if (font < 0)
- //                           {
- //                               font = fonts.Count - 1;
- //                           }
- //                           _settings.Font = fonts[font];
- ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
- //                           break;
-
- //                       case 1:
- //                           textStyle--;
- //                           if (textStyle < 0)
- //                           {
- //                               textStyle = styles.Count - 1;
- //                           }
- //                           _settings.Bold = (textStyle == 1 || textStyle == 3);
- //                           _settings.Italic = (textStyle == 2 || textStyle == 3);
- ////                           Gui.Terminal.SetNewFont(_settings.Font, _settings.Bold, _settings.Italic);
- //                           break;
-
- //                       case 2:
- //                           _settings.Resolution = _settings.Resolution == 0 ? resolution : 0;
- //                           Gui.Terminal.ResizeWindow(_settings.Resolution == 0, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
- //                           break;
-
- //                       case 3:
- //                           if (resolution > 1)
- //                           {
- //                               resolution--;
- //                               if (_settings.Resolution != 0)
- //                               {
- //                                   _settings.Resolution = resolution;
- //                                   Gui.Terminal.ResizeWindow(false, resolutions[resolution - 1].Width, resolutions[resolution - 1].Height);
- //                               }
- //                           }
- //                           break;
-
- //                       case 4:
- //                           if (_settings.MusicVolume > 0)
- //                           {
- //                               _settings.MusicVolume -= 5;
- //                           }
- //                           Gui.Mixer.MusicVolume = _settings.MusicVolume / 100.0f;
- //                           Gui.Mixer.ResetCurrentMusicVolume();
- //                           break;
-
- //                       case 5:
- //                           if (_settings.SoundVolume > 0)
- //                           {
- //                               _settings.SoundVolume -= 5;
- //                           }
- //                           Gui.Mixer.SoundVolume = _settings.SoundVolume / 100.0f;
- //                           break;
- //                   }
- //               }
- //           }
- //           Gui.InPopupMenu = false;
- //           Gui.FullScreenOverlay = false;
- //           Gui.Load();
- //       }
 
         internal static Dictionary<string, HighScore> GetHighScoreFromSaves()
         {
@@ -426,24 +282,24 @@ namespace Cthangband
             {
                 return null;
             }
-            Profile tempProfile;
+            SaveGame tempSaveGame;
             try
             {
-                tempProfile = DeserializeFromSaveFolder<Profile>(save);
+                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
             }
             catch (Exception)
             {
                 return null;
             }
-            if (tempProfile.Game.Player == null)
+            if (tempSaveGame.Player == null)
             {
                 return null;
             }
-            if (tempProfile.Game.Player.IsWizard)
+            if (tempSaveGame.Player.IsWizard)
             {
                 return null;
             }
-            return new HighScore(tempProfile.Game.Player, tempProfile.Game);
+            return new HighScore(tempSaveGame.Player, tempSaveGame);
         }
 
         private static int LoadGame(int saveIndex)
@@ -462,34 +318,30 @@ namespace Cthangband
         [STAThread]
         private static void Main()
         {
-#if !DEBUG
             try
             {
-#endif
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            General.CheckDebugStatus();
-            GetDefaultFolder();
-            _settings = DeserializeFromSaveFolder<Settings>("game.settings") ?? new Settings();
-            if (!DirCreate(SaveFolder))
-            {
-                Quit($"Cannot create '{SaveFolder}'");
-            }
-            StaticResources.LoadOrCreate();
-            HiScores = new HighScoreTable();
-            Gui.Initialise(_settings, new MainWindow());
-            while (!ExitToDesktop)
-            {
-                ShowMainMenu();
-            }
-            SerializeToSaveFolder(_settings, "game.settings");
-#if !DEBUG
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                General.CheckDebugStatus();
+                GetDefaultFolder();
+                _settings = DeserializeFromSaveFolder<Settings>("game.settings") ?? new Settings();
+                if (!DirCreate(SaveFolder))
+                {
+                    Quit($"Cannot create '{SaveFolder}'");
+                }
+                StaticResources.LoadOrCreate();
+                HiScores = new HighScoreTable();
+                Gui.Initialise(_settings, new MainWindow());
+                while (!ExitToDesktop)
+                {
+                    ShowMainMenu();
+                }
+                SerializeToSaveFolder(_settings, "game.settings");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-#endif
         }
 
         private static int NewGame(int saveIndex)
@@ -569,12 +421,12 @@ namespace Cthangband
                 }
                 return false;
             }
-            Profile tempProfile;
+            SaveGame tempSaveGame;
             try
             {
-                tempProfile = DeserializeFromSaveFolder<Profile>(save);
+                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if (!silently)
                 {
@@ -586,7 +438,7 @@ namespace Cthangband
             {
                 return true;
             }
-            bool tempDeath = tempProfile.Game.Player == null;
+            bool tempDeath = tempSaveGame.Player == null;
             Colour color;
             int tempLev;
             int tempRace;
@@ -596,24 +448,24 @@ namespace Cthangband
             if (tempDeath)
             {
                 color = Colour.Grey;
-                tempLev = tempProfile.ExPlayer.Level;
-                tempRace = tempProfile.ExPlayer.RaceIndex;
-                tempClass = tempProfile.ExPlayer.ProfessionIndex;
-                tempRealm = tempProfile.ExPlayer.Realm1;
-                tempName = tempProfile.ExPlayer.Name.Trim() + tempProfile.ExPlayer.Generation.ToRoman(true);
+                tempLev = tempSaveGame.ExPlayer.Level;
+                tempRace = tempSaveGame.ExPlayer.RaceIndex;
+                tempClass = tempSaveGame.ExPlayer.ProfessionIndex;
+                tempRealm = tempSaveGame.ExPlayer.Realm1;
+                tempName = tempSaveGame.ExPlayer.Name.Trim() + tempSaveGame.ExPlayer.Generation.ToRoman(true);
             }
             else
             {
                 color = Colour.White;
-                if (tempProfile.Game.Player.IsWizard)
+                if (tempSaveGame.Player.IsWizard)
                 {
                     color = Colour.Yellow;
                 }
-                tempLev = tempProfile.Game.Player.Level;
-                tempRace = tempProfile.Game.Player.RaceIndex;
-                tempClass = tempProfile.Game.Player.ProfessionIndex;
-                tempRealm = tempProfile.Game.Player.Realm1;
-                tempName = tempProfile.Game.Player.Name.Trim() + tempProfile.Game.Player.Generation.ToRoman(true);
+                tempLev = tempSaveGame.Player.Level;
+                tempRace = tempSaveGame.Player.RaceIndex;
+                tempClass = tempSaveGame.Player.ProfessionIndex;
+                tempRealm = tempSaveGame.Player.Realm1;
+                tempName = tempSaveGame.Player.Name.Trim() + tempSaveGame.Player.Generation.ToRoman(true);
             }
             Gui.Print(color, tempName, displayRow, displayCol + 14 - (tempName.Length / 2));
             string tempchar = $"the level {tempLev}";
@@ -627,7 +479,7 @@ namespace Cthangband
                 tempchar = "(deceased)";
                 Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
             }
-            else if (tempProfile.Game.Player.IsWizard)
+            else if (tempSaveGame.Player.IsWizard)
             {
                 tempchar = "-=<WIZARD>=-";
                 Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
@@ -798,7 +650,7 @@ namespace Cthangband
                             case 0:
                                 // Continue Game
                                 ActiveSaveSlot = _saveSlot[saveIndex];
-                                Profile.Instance.Run();
+                                Run(saveGame);
                                 return;
 
                             case 1:
@@ -808,7 +660,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -820,7 +672,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -858,7 +710,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;
@@ -870,7 +722,7 @@ namespace Cthangband
                                 {
                                     _settings.LastProfileUsed = profileChoice;
                                     ActiveSaveSlot = _saveSlot[profileChoice];
-                                    Profile.Instance.Run();
+                                    Run(saveGame);
                                     return;
                                 }
                                 break;

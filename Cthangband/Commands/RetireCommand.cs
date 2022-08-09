@@ -47,9 +47,9 @@ namespace Cthangband.Commands
                 }
             }
             // Assuming whe player didn't give up, "kill" the character by quitting
-            SaveGame.Instance.Playing = false;
+            saveGame.Playing = false;
             saveGame.Player.IsDead = true;
-            SaveGame.Instance.DiedFrom = "quitting";
+            saveGame.DiedFrom = "quitting";
         }
     }
 }

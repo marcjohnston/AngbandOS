@@ -28,12 +28,12 @@ namespace Cthangband.Mutations.RandomMutations
             }
             if (player.TimedTelepathy > 0)
             {
-                Profile.Instance.MsgPrint("Your mind feels cloudy!");
+                SaveGame.Instance.MsgPrint("Your mind feels cloudy!");
                 player.SetTimedTelepathy(0);
             }
             else
             {
-                Profile.Instance.MsgPrint("Your mind expands!");
+                SaveGame.Instance.MsgPrint("Your mind expands!");
                 player.SetTimedTelepathy(player.Level);
             }
         }

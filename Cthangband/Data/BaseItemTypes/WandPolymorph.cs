@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class WandPolymorph : WandItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Wand:Polymorph";
 
         public override int Chance1 => 1;

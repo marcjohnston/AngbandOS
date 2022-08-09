@@ -16,7 +16,7 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint(
+            SaveGame.Instance.MsgPrint(
                 level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level * 3 / 2, Constants.SummonPhantom,
                     false)
                     ? "'Your wish, master?'"

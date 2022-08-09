@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingFreeAction : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Free Action";
 
         public override int Chance1 => 1;

@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Folk
             {
                 return;
             }
-            Profile.Instance.MsgPrint("A line of light appears.");
+            SaveGame.Instance.MsgPrint("A line of light appears.");
             saveGame.LightLine(dir);
         }
 

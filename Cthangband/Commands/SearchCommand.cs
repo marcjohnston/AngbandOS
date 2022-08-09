@@ -16,8 +16,8 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            SaveGame.Instance.EnergyUse = 100;
-            SaveGame.Instance.Search();
+            saveGame.EnergyUse = 100;
+            saveGame.Search();
         }
     }
 }

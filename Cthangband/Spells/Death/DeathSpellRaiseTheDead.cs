@@ -21,13 +21,13 @@ namespace Cthangband.Spells.Death
                 if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level * 3 / 2,
                     player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
                 {
-                    Profile.Instance.MsgPrint(
+                    SaveGame.Instance.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    Profile.Instance.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                    SaveGame.Instance.MsgPrint("'The dead arise... to punish you for disturbing them!'");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else
@@ -36,13 +36,13 @@ namespace Cthangband.Spells.Death
                     player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead,
                     player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
-                    Profile.Instance.MsgPrint(
+                    SaveGame.Instance.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    Profile.Instance.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                    SaveGame.Instance.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
         }

@@ -20,16 +20,16 @@ namespace Cthangband.ActivationPowers
             {
                 if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon))
                 {
-                    saveGame.Profile.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    saveGame.Profile.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
                 }
             }
             else
             {
                 if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon, saveGame.Player.Level == 50))
                 {
-                    saveGame.Profile.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    saveGame.Profile.MsgPrint("'What is thy bidding... Master?'");
+                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    saveGame.MsgPrint("'What is thy bidding... Master?'");
                 }
             }
             return true;

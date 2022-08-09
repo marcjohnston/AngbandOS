@@ -47,7 +47,7 @@ namespace Cthangband.StoreCommands
                 {
                     player.InputPlayerName();
                 }
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
             }
             // Restore the screen
             Gui.SetBackground(BackgroundImage.Overhead);

@@ -26,11 +26,11 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Staff;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Use which staff? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Use which staff? ", false, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no staff to use.");
+                        saveGame.MsgPrint("You have no staff to use.");
                     }
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Staff;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a staff!");
+                saveGame.MsgPrint("That is not a staff!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -48,11 +48,11 @@ namespace Cthangband.Commands
             // We can't use a staff from the floor
             if (itemIndex < 0 && item.Count > 1)
             {
-                Profile.Instance.MsgPrint("You must first pick up the staffs.");
+                saveGame.MsgPrint("You must first pick up the staffs.");
                 return;
             }
             // Using a staff costs a full turn
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             bool identified = false;
             int itemLevel = item.ItemType.Level;
             // We have a chance of the device working equal to skill (halved if confused) - item
@@ -71,13 +71,13 @@ namespace Cthangband.Commands
             // Check to see if we use it properly
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                Profile.Instance.MsgPrint("You failed to use the staff properly.");
+                saveGame.MsgPrint("You failed to use the staff properly.");
                 return;
             }
             // Make sure it has charges left
             if (item.TypeSpecificValue <= 0)
             {
-                Profile.Instance.MsgPrint("The staff has no charges left.");
+                saveGame.MsgPrint("The staff has no charges left.");
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
@@ -96,7 +96,7 @@ namespace Cthangband.Commands
                                 identified = true;
                             }
                         }
-                        if (SaveGame.Instance.UnlightArea(10, 3))
+                        if (saveGame.UnlightArea(10, 3))
                         {
                             identified = true;
                         }
@@ -112,7 +112,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.HasteMonsters:
                     {
-                        if (SaveGame.Instance.HasteMonsters())
+                        if (saveGame.HasteMonsters())
                         {
                             identified = true;
                         }
@@ -122,7 +122,7 @@ namespace Cthangband.Commands
                     {
                         for (k = 0; k < Program.Rng.DieRoll(4); k++)
                         {
-                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, 0))
+                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0))
                             {
                                 identified = true;
                             }
@@ -131,13 +131,13 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Teleportation:
                     {
-                        SaveGame.Instance.TeleportPlayer(100);
+                        saveGame.TeleportPlayer(100);
                         identified = true;
                         break;
                     }
                 case StaffType.Identify:
                     {
-                        if (!SaveGame.Instance.IdentifyItem())
+                        if (!saveGame.IdentifyItem())
                         {
                             useCharge = false;
                         }
@@ -146,11 +146,11 @@ namespace Cthangband.Commands
                     }
                 case StaffType.RemoveCurse:
                     {
-                        if (SaveGame.Instance.RemoveCurse())
+                        if (saveGame.RemoveCurse())
                         {
                             if (saveGame.Player.TimedBlindness == 0)
                             {
-                                Profile.Instance.MsgPrint("The staff glows blue for a moment...");
+                                saveGame.MsgPrint("The staff glows blue for a moment...");
                             }
                             identified = true;
                         }
@@ -160,18 +160,18 @@ namespace Cthangband.Commands
                     {
                         if (saveGame.Player.TimedBlindness == 0)
                         {
-                            Profile.Instance.MsgPrint("The end of the staff glows brightly...");
+                            saveGame.MsgPrint("The end of the staff glows brightly...");
                         }
                         for (k = 0; k < 8; k++)
                         {
-                            SaveGame.Instance.LightLine(saveGame.Level.OrderedDirection[k]);
+                            saveGame.LightLine(saveGame.Level.OrderedDirection[k]);
                         }
                         identified = true;
                         break;
                     }
                 case StaffType.Light:
                     {
-                        if (SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+                        if (saveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -185,11 +185,11 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectGold:
                     {
-                        if (SaveGame.Instance.DetectTreasure())
+                        if (saveGame.DetectTreasure())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.DetectObjectsGold())
+                        if (saveGame.DetectObjectsGold())
                         {
                             identified = true;
                         }
@@ -197,7 +197,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectItem:
                     {
-                        if (SaveGame.Instance.DetectObjectsNormal())
+                        if (saveGame.DetectObjectsNormal())
                         {
                             identified = true;
                         }
@@ -205,7 +205,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectTrap:
                     {
-                        if (SaveGame.Instance.DetectTraps())
+                        if (saveGame.DetectTraps())
                         {
                             identified = true;
                         }
@@ -213,11 +213,11 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectDoor:
                     {
-                        if (SaveGame.Instance.DetectDoors())
+                        if (saveGame.DetectDoors())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.DetectStairs())
+                        if (saveGame.DetectStairs())
                         {
                             identified = true;
                         }
@@ -225,7 +225,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectInvis:
                     {
-                        if (SaveGame.Instance.DetectMonstersInvis())
+                        if (saveGame.DetectMonstersInvis())
                         {
                             identified = true;
                         }
@@ -233,7 +233,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.DetectEvil:
                     {
-                        if (SaveGame.Instance.DetectMonstersEvil())
+                        if (saveGame.DetectMonstersEvil())
                         {
                             identified = true;
                         }
@@ -302,14 +302,14 @@ namespace Cthangband.Commands
                             saveGame.Player.Mana = saveGame.Player.MaxMana;
                             saveGame.Player.FractionalMana = 0;
                             identified = true;
-                            Profile.Instance.MsgPrint("Your feel your head clear.");
+                            saveGame.MsgPrint("Your feel your head clear.");
                             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                         }
                         break;
                     }
                 case StaffType.SleepMonsters:
                     {
-                        if (SaveGame.Instance.SleepMonsters())
+                        if (saveGame.SleepMonsters())
                         {
                             identified = true;
                         }
@@ -317,7 +317,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.SlowMonsters:
                     {
-                        if (SaveGame.Instance.SlowMonsters())
+                        if (saveGame.SlowMonsters())
                         {
                             identified = true;
                         }
@@ -340,13 +340,13 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Probing:
                     {
-                        SaveGame.Instance.Probing();
+                        saveGame.Probing();
                         identified = true;
                         break;
                     }
                 case StaffType.DispelEvil:
                     {
-                        if (SaveGame.Instance.DispelEvil(60))
+                        if (saveGame.DispelEvil(60))
                         {
                             identified = true;
                         }
@@ -354,7 +354,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Power:
                     {
-                        if (SaveGame.Instance.DispelMonsters(120))
+                        if (saveGame.DispelMonsters(120))
                         {
                             identified = true;
                         }
@@ -362,7 +362,7 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Holiness:
                     {
-                        if (SaveGame.Instance.DispelEvil(120))
+                        if (saveGame.DispelEvil(120))
                         {
                             identified = true;
                         }
@@ -395,19 +395,19 @@ namespace Cthangband.Commands
                     }
                 case StaffType.Carnage:
                     {
-                        SaveGame.Instance.Carnage(true);
+                        saveGame.Carnage(true);
                         identified = true;
                         break;
                     }
                 case StaffType.Earthquakes:
                     {
-                        SaveGame.Instance.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
+                        saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
                         identified = true;
                         break;
                     }
                 case StaffType.Destruction:
                     {
-                        SaveGame.Instance.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
+                        saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
                         identified = true;
                         break;
                     }
@@ -429,7 +429,7 @@ namespace Cthangband.Commands
             bool channeled = false;
             if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.DoCmdChannel(item);
+                channeled = saveGame.DoCmdChannel(item);
             }
             if (!channeled)
             {
@@ -443,7 +443,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleStaff.Weight;
                     itemIndex = saveGame.Player.Inventory.InvenCarry(singleStaff, false);
-                    Profile.Instance.MsgPrint("You unstack your staff.");
+                    saveGame.MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
                 if (itemIndex >= 0)
@@ -452,7 +452,7 @@ namespace Cthangband.Commands
                 }
                 else
                 {
-                    SaveGame.Instance.Level.ReportChargeUsageFromFloor(0 - itemIndex);
+                    saveGame.Level.ReportChargeUsageFromFloor(0 - itemIndex);
                 }
             }
         }

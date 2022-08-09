@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You have turned into a Extradimensional Being.");
+            SaveGame.Instance.MsgPrint("You have turned into a Extradimensional Being.");
             player.Dna.GainMutation();
         }
 

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollRecharging : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Recharging";
 
         public override int Chance1 => 1;

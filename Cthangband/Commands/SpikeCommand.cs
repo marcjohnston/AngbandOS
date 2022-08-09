@@ -27,27 +27,27 @@ namespace Cthangband.Commands
                 // Make sure it can be spiked and we have spikes to do it with
                 if (!tile.FeatureType.IsClosedDoor)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to spike.");
+                    saveGame.MsgPrint("You see nothing there to spike.");
                 }
                 else
                 {
-                    if (!SaveGame.Instance.GetSpike(out int itemIndex))
+                    if (!saveGame.GetSpike(out int itemIndex))
                     {
-                        Profile.Instance.MsgPrint("You have no spikes!");
+                        saveGame.MsgPrint("You have no spikes!");
                     }
                     // Can't close a door if there's someone in the way
                     else if (tile.MonsterIndex != 0)
                     {
                         // Attempting costs a turn anyway
-                        SaveGame.Instance.EnergyUse = 100;
-                        Profile.Instance.MsgPrint("There is a monster in the way!");
-                        SaveGame.Instance.PlayerAttackMonster(y, x);
+                        saveGame.EnergyUse = 100;
+                        saveGame.MsgPrint("There is a monster in the way!");
+                        saveGame.PlayerAttackMonster(y, x);
                     }
                     else
                     {
                         // Spiking a door costs a turn
-                        SaveGame.Instance.EnergyUse = 100;
-                        Profile.Instance.MsgPrint("You jam the door with a spike.");
+                        saveGame.EnergyUse = 100;
+                        saveGame.MsgPrint("You jam the door with a spike.");
                         // Replace the door feature with a jammed door
                         if (tile.FeatureType.Category == FloorTileTypeCategory.LockedDoor)
                         {

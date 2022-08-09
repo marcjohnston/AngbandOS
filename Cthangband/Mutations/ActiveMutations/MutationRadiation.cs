@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            Profile.Instance.MsgPrint("Radiation flows from your body!");
+            SaveGame.Instance.MsgPrint("Radiation flows from your body!");
             saveGame.FireBall(new ProjectNuke(), 0, player.Level * 2, 3 + (player.Level / 20));
         }
 

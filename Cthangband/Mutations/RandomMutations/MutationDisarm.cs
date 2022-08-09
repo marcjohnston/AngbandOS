@@ -28,15 +28,15 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("You trip over your own feet!");
+            SaveGame.Instance.MsgPrint("You trip over your own feet!");
             player.TakeHit(Program.Rng.DieRoll(player.Weight / 6), "tripping");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             Item oPtr = player.Inventory[InventorySlot.MeleeWeapon];
             if (oPtr.ItemType == null)
             {
                 return;
             }
-            Profile.Instance.MsgPrint("You drop your weapon!");
+            SaveGame.Instance.MsgPrint("You drop your weapon!");
             player.Inventory.InvenDrop(InventorySlot.MeleeWeapon, 1);
         }
     }

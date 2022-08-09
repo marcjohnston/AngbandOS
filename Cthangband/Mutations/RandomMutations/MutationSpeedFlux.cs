@@ -27,7 +27,7 @@ namespace Cthangband.Mutations.RandomMutations
                 saveGame.Disturb(false);
                 if (Program.Rng.DieRoll(2) == 1)
                 {
-                    Profile.Instance.MsgPrint("Everything around you speeds up.");
+                    SaveGame.Instance.MsgPrint("Everything around you speeds up.");
                     if (player.TimedHaste > 0)
                     {
                         player.SetTimedHaste(0);
@@ -39,7 +39,7 @@ namespace Cthangband.Mutations.RandomMutations
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("Everything around you slows down.");
+                    SaveGame.Instance.MsgPrint("Everything around you slows down.");
                     if (player.TimedSlow > 0)
                     {
                         player.SetTimedSlow(0);
@@ -49,7 +49,7 @@ namespace Cthangband.Mutations.RandomMutations
                         player.SetTimedHaste(player.TimedHaste + Program.Rng.DieRoll(30) + 10);
                     }
                 }
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
             }
         }
     }

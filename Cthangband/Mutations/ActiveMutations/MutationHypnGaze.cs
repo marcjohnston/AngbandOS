@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             TargetEngine targetEngine = new TargetEngine(player, level);
-            Profile.Instance.MsgPrint("Your eyes look mesmerizing...");
+            SaveGame.Instance.MsgPrint("Your eyes look mesmerizing...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
                 saveGame.CharmMonster(dir, player.Level);

@@ -32,7 +32,7 @@ namespace Cthangband.StoreCommands
             // Make sure we can read
             if (player.Realm1 == 0 && player.Realm2 == 0)
             {
-                Profile.Instance.MsgPrint("You cannot read books!");
+                SaveGame.Instance.MsgPrint("You cannot read books!");
                 return;
             }
             // Get a book to read if we don't already have one
@@ -41,7 +41,7 @@ namespace Cthangband.StoreCommands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have no books that you can read.");
+                    SaveGame.Instance.MsgPrint("You have no books that you can read.");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
@@ -51,7 +51,7 @@ namespace Cthangband.StoreCommands
             Inventory.ItemFilterUseableSpellBook = true;
             if (!player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("You can't read that.");
+                SaveGame.Instance.MsgPrint("You can't read that.");
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }

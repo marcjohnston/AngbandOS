@@ -16,6 +16,8 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Cthangband
 {
@@ -81,17 +83,146 @@ namespace Cthangband
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
         public const int HurtChance = 16;
-        public readonly Profile Profile;
+        public string Guid { get; }
 
-        public SaveGame(Profile profile)
+        public SaveGame(string guid)
         {
+            Guid = guid;
+            SaveGame.Instance = this;
+            GlobalData.PopulateNewProfile(this);
             Towns = Town.NewTownList();
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList();
-            Profile = profile;
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
+
+        // PROFILE MESSAGING START
+        public ExPlayer ExPlayer;
+        public FixedArtifactArray FixedArtifacts;
+        public ItemTypeArray ItemTypes;
+        public MonsterRaceArray MonsterRaces;
+        public RareItemTypeArray RareItemTypes;
+        public VaultTypeArray VaultTypes;
+        private readonly List<string> _messageBuf = new List<string>();
+        private readonly List<int> _messageCounts = new List<int>();
+        private int _msgPrintP;
+        public bool MsgFlag;
+
+        public void MessageAdd(string str)
+        {
+            // simple case - list is empty
+            if (_messageBuf.Count == 0)
+            {
+                _messageBuf.Add(str);
+                _messageCounts.Add(1);
+                return;
+            }
+
+            // If it's not blank it might be a repeat
+            if (!string.IsNullOrEmpty(str))
+            {
+                if (_messageBuf[_messageBuf.Count - 1] == str)
+                {
+                    // Same as last - just increment the count
+                    _messageCounts[_messageCounts.Count - 1]++;
+                    return;
+                }
+            }
+
+            // We're still here, so we just add ourselves
+            _messageBuf.Add(str);
+            _messageCounts.Add(1);
+            // Limit the size
+            if (_messageBuf.Count > 2048)
+            {
+                _messageBuf.RemoveAt(0);
+                _messageCounts.RemoveAt(0);
+            }
+        }
+
+        public int MessageNum()
+        {
+            return _messageBuf.Count;
+        }
+
+        public string MessageStr(int age)
+        {
+            if (age >= _messageBuf.Count)
+            {
+                return string.Empty;
+            }
+            string message = _messageBuf[_messageBuf.Count - age - 1];
+            int count = _messageCounts[_messageCounts.Count - age - 1];
+            if (count > 1)
+            {
+                message += $" (x{count})";
+            }
+            return message;
+        }
+
+        public void MsgPrint(string msg)
+        {
+            if (!MsgFlag)
+            {
+                _msgPrintP = 0;
+            }
+            int n = string.IsNullOrEmpty(msg) ? 0 : msg.Length;
+            if (_msgPrintP != 0 && (string.IsNullOrEmpty(msg) || _msgPrintP + n > 72))
+            {
+                MsgFlush(_msgPrintP);
+                MsgFlag = false;
+                _msgPrintP = 0;
+            }
+            if (string.IsNullOrEmpty(msg))
+            {
+                return;
+            }
+            if (msg.Length > 2)
+            {
+                msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
+            }
+            if (n > 1000)
+            {
+                return;
+            }
+            if (Player != null)
+            {
+                MessageAdd(msg);
+            }
+            string buf = msg;
+            string t = buf;
+            while (n > 72)
+            {
+                int split = 72;
+                for (int check = 40; check < 72; check++)
+                {
+                    if (t[check] == ' ')
+                    {
+                        split = check;
+                    }
+                }
+                Gui.Print(Colour.White, t.Substring(0, split), 0, 0, split);
+                MsgFlush(split + 1);
+                t = t.Substring(split);
+                n -= split;
+            }
+            Gui.Print(Colour.White, t, 0, _msgPrintP, n);
+            MsgFlag = true;
+            _msgPrintP += n + 1;
+        }
+        private void MsgFlush(int x)
+        {
+            const Colour a = Colour.BrightBlue;
+            Gui.Print(a, "-more-", 0, x);
+            while (true)
+            {
+                Gui.Inkey();
+                break;
+            }
+            Gui.Erase(0, 0, 255);
+        }
+        // PROFILE MESSAGING END
 
         public static SaveGame Instance
         {
@@ -131,7 +262,7 @@ namespace Cthangband
                     case 10:
                     case 11:
                     case 12:
-                        Profile.Instance.MsgPrint("You feel your life draining away...");
+                        SaveGame.Instance.MsgPrint("You feel your life draining away...");
                         Player.LoseExperience(Player.ExperiencePoints / 16);
                         break;
 
@@ -142,7 +273,7 @@ namespace Cthangband
                     case 20:
                         if (!Player.HasFreeAction || Program.Rng.DieRoll(100) >= Player.SkillSavingThrow)
                         {
-                            Profile.Instance.MsgPrint("You feel like a statue!");
+                            SaveGame.Instance.MsgPrint("You feel like a statue!");
                             if (Player.HasFreeAction)
                             {
                                 Player.SetTimedParalysis(Player.TimedParalysis + Program.Rng.DieRoll(3));
@@ -161,7 +292,7 @@ namespace Cthangband
                         break;
 
                     case 24:
-                        Profile.Instance.MsgPrint("Huh? Who am I? What am I doing here?");
+                        SaveGame.Instance.MsgPrint("Huh? Who am I? What am I doing here?");
                         LoseAllInfo();
                         break;
 
@@ -193,24 +324,24 @@ namespace Cthangband
             int trap = GlobalData.ChestTraps[oPtr.TypeSpecificValue];
             if ((trap & Enumerations.ChestTrap.ChestLoseStr) != 0)
             {
-                Profile.Instance.MsgPrint("A small needle has pricked you!");
+                SaveGame.Instance.MsgPrint("A small needle has pricked you!");
                 Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
             if ((trap & Enumerations.ChestTrap.ChestLoseCon) != 0)
             {
-                Profile.Instance.MsgPrint("A small needle has pricked you!");
+                SaveGame.Instance.MsgPrint("A small needle has pricked you!");
                 Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
                 Player.TryDecreasingAbilityScore(Ability.Constitution);
             }
             if ((trap & Enumerations.ChestTrap.ChestPoison) != 0)
             {
-                Profile.Instance.MsgPrint("A puff of green gas surrounds you!");
+                SaveGame.Instance.MsgPrint("A puff of green gas surrounds you!");
                 if (!(Player.HasPoisonResistance || Player.TimedPoisonResistance != 0))
                 {
                     if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                     {
-                        Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                        SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                     }
                     else
                     {
@@ -220,7 +351,7 @@ namespace Cthangband
             }
             if ((trap & Enumerations.ChestTrap.ChestParalyze) != 0)
             {
-                Profile.Instance.MsgPrint("A puff of yellow gas surrounds you!");
+                SaveGame.Instance.MsgPrint("A puff of yellow gas surrounds you!");
                 if (!Player.HasFreeAction)
                 {
                     Player.SetTimedParalysis(Player.TimedParalysis + 10 + Program.Rng.DieRoll(20));
@@ -229,7 +360,7 @@ namespace Cthangband
             if ((trap & Enumerations.ChestTrap.ChestSummon) != 0)
             {
                 int num = 2 + Program.Rng.DieRoll(3);
-                Profile.Instance.MsgPrint("You are enveloped in a cloud of smoke!");
+                SaveGame.Instance.MsgPrint("You are enveloped in a cloud of smoke!");
                 for (int i = 0; i < num; i++)
                 {
                     if (Program.Rng.DieRoll(100) < Difficulty)
@@ -244,8 +375,8 @@ namespace Cthangband
             }
             if ((trap & Enumerations.ChestTrap.ChestExplode) != 0)
             {
-                Profile.Instance.MsgPrint("There is a sudden explosion!");
-                Profile.Instance.MsgPrint("Everything inside the chest is destroyed!");
+                SaveGame.Instance.MsgPrint("There is a sudden explosion!");
+                SaveGame.Instance.MsgPrint("Everything inside the chest is destroyed!");
                 oPtr.TypeSpecificValue = 0;
                 Player.TakeHit(Program.Rng.DiceRoll(5, 8), "an exploding chest");
             }
@@ -360,7 +491,7 @@ namespace Cthangband
             {
                 Disturb(true);
             }
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             HandleStuff();
             Gui.Refresh();
             DiedFrom = "(saved)";
@@ -376,7 +507,7 @@ namespace Cthangband
             int currentItemIndex;
             int nextItemIndex;
             bool allowFloor = false;
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             bool done = false;
             bool item = false;
             itemIndex = -1;
@@ -811,9 +942,9 @@ namespace Cthangband
             {
                 Player.IsWinner = true;
                 Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
-                Profile.Instance.MsgPrint("*** CONGRATULATIONS ***");
-                Profile.Instance.MsgPrint("You have won the game!");
-                Profile.Instance.MsgPrint("You may retire ('Q') when you are ready.");
+                SaveGame.Instance.MsgPrint("*** CONGRATULATIONS ***");
+                SaveGame.Instance.MsgPrint("You have won the game!");
+                SaveGame.Instance.MsgPrint("You may retire ('Q') when you are ready.");
             }
             else
             {
@@ -827,7 +958,7 @@ namespace Cthangband
                         x = nx;
                     }
                     Level.DeleteObject(y, x);
-                    Profile.Instance.MsgPrint("A magical stairway appears...");
+                    SaveGame.Instance.MsgPrint("A magical stairway appears...");
                     Level.CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
                 }
@@ -900,7 +1031,7 @@ namespace Cthangband
             if (Player == null)
             {
                 PlayerFactory factory = new PlayerFactory();
-                Player newPlayer = factory.CharacterGeneration(Profile.Instance.ExPlayer);
+                Player newPlayer = factory.CharacterGeneration(ExPlayer);
                 if (newPlayer == null)
                 {
                     return;
@@ -921,7 +1052,7 @@ namespace Cthangband
                 {
                     dungeon.RandomiseOffset();
                 }
-                Profile.Instance.ItemTypes.ResetStompability();
+                SaveGame.Instance.ItemTypes.ResetStompability();
                 CurrentDepth = 0;
                 CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
@@ -936,8 +1067,8 @@ namespace Cthangband
                 Player.WildernessY = CurTown.Y;
                 CameFrom = LevelStart.StartRandom;
             }
-            Profile.Instance.MsgFlag = false;
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgFlag = false;
+            SaveGame.Instance.MsgPrint(null);
             Gui.Refresh();
             FlavorInit();
             ApplyFlavourVisuals();
@@ -980,11 +1111,11 @@ namespace Cthangband
                 Level.WipeOList();
                 _petList = Level.Monsters.GetPets();
                 Level.Monsters.WipeMList();
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
                 if (Player.IsDead)
                 {
                     // Store the player info
-                    Profile.Instance.ExPlayer = new ExPlayer(Player);
+                    ExPlayer = new ExPlayer(Player);
                     break;
                 }
                 Level = new Level();
@@ -1076,9 +1207,9 @@ namespace Cthangband
         private void ApplyFlavourVisuals()
         {
             int i;
-            for (i = 0; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 0; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 EntityType visual = ObjectFlavourEntity(i);
                 if (visual != null)
                 {
@@ -1091,7 +1222,7 @@ namespace Cthangband
         private void CloseGame()
         {
             HandleStuff();
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             Gui.FullScreenOverlay = true;
             if (Player.IsDead)
             {
@@ -1338,7 +1469,7 @@ namespace Cthangband
             }
             targetEngine.RecenterScreenAroundPlayer();
             targetEngine.PanelBoundsCenter();
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             CharacterXtra = true;
             Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrEquippy);
             Player.RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -1369,7 +1500,7 @@ namespace Cthangband
             HackMind = true;
             if (CameFrom == LevelStart.StartHouse)
             {
-                StoreCommand.DoCmdStore(Player, SaveGame.Instance.Level);
+                StoreCommand.DoCmdStore(this);
                 CameFrom = LevelStart.StartRandom;
             }
             if (CurrentDepth == 0)
@@ -1476,7 +1607,7 @@ namespace Cthangband
                 }
                 if (CurrentDepth > 0)
                 {
-                    Commands.FeelingAndLocationCommand.DoCmdFeeling(Player, Level, true);
+                    Commands.FeelingAndLocationCommand.DoCmdFeeling(this, true);
                 }
             }
         }
@@ -1636,9 +1767,9 @@ namespace Cthangband
                 }
             }
             Program.Rng.UseFixed = false;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 if (string.IsNullOrEmpty(kPtr.Name))
                 {
                     continue;
@@ -1660,9 +1791,9 @@ namespace Cthangband
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
             AllocKindSize = 0;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                kPtr = Profile.Instance.ItemTypes[i];
+                kPtr = SaveGame.Instance.ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -1686,9 +1817,9 @@ namespace Cthangband
                 AllocKindTable[k] = new AllocationEntry();
             }
             AllocationEntry[] table = AllocKindTable;
-            for (i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                kPtr = Profile.Instance.ItemTypes[i];
+                kPtr = SaveGame.Instance.ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -1709,9 +1840,9 @@ namespace Cthangband
             aux = new int[Constants.MaxDepth];
             num = new int[Constants.MaxDepth];
             AllocRaceSize = 0;
-            for (i = 1; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                rPtr = Profile.Instance.MonsterRaces[i];
+                rPtr = SaveGame.Instance.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     AllocRaceSize++;
@@ -1732,9 +1863,9 @@ namespace Cthangband
                 AllocRaceTable[k] = new AllocationEntry();
             }
             table = AllocRaceTable;
-            for (i = 1; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                rPtr = Profile.Instance.MonsterRaces[i];
+                rPtr = SaveGame.Instance.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     int x = rPtr.Level;
@@ -1765,7 +1896,7 @@ namespace Cthangband
 
         private EntityType ObjectFlavourEntity(int i)
         {
-            ItemType kPtr = Profile.Instance.ItemTypes[i];
+            ItemType kPtr = SaveGame.Instance.ItemTypes[i];
             if (kPtr.HasFlavor)
             {
                 int indexx = kPtr.SubCategory;
@@ -1836,7 +1967,7 @@ namespace Cthangband
         {
             if (Player.GetFirstLevelMutation)
             {
-                Profile.Instance.MsgPrint("You feel different!");
+                SaveGame.Instance.MsgPrint("You feel different!");
                 Player.Dna.GainMutation();
                 Player.GetFirstLevelMutation = false;
             }
@@ -1871,7 +2002,7 @@ namespace Cthangband
                 if (Gui.Inkey() != 0)
                 {
                     Disturb(false);
-                    Profile.Instance.MsgPrint("Cancelled.");
+                    SaveGame.Instance.MsgPrint("Cancelled.");
                 }
             }
             while (Player.Energy >= 100)
@@ -1896,9 +2027,9 @@ namespace Cthangband
                     const int item = InventorySlot.Pack;
                     Item oPtr = Player.Inventory[item];
                     Disturb(false);
-                    Profile.Instance.MsgPrint("Your pack overflows!");
+                    SaveGame.Instance.MsgPrint("Your pack overflows!");
                     string oName = oPtr.Description(true, 3);
-                    Profile.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+                    SaveGame.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                     Level.DropNear(oPtr, 0, Player.MapY, Player.MapX);
                     Player.Inventory.InvenItemIncrease(item, -255);
                     Player.Inventory.InvenItemDescribe(item);
@@ -1943,7 +2074,7 @@ namespace Cthangband
                     CommandRepeat--;
                     Player.RedrawNeeded.Set(RedrawFlag.PrState);
                     RedrawStuff();
-                    Profile.Instance.MsgFlag = false;
+                    SaveGame.Instance.MsgFlag = false;
                     Gui.PrintLine("", 0, 0);
                     ProcessCommand(true);
                 }
@@ -2022,18 +2153,18 @@ namespace Cthangband
             FlagSet f3 = new FlagSet();
             if (Player.GameTime.IsBirthday)
             {
-                Profile.Instance.MsgPrint("Happy Birthday!");
+                SaveGame.Instance.MsgPrint("Happy Birthday!");
                 Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
                 Player.Age++;
             }
             if (Player.GameTime.IsNewYear)
             {
-                Profile.Instance.MsgPrint("Happy New Year!");
+                SaveGame.Instance.MsgPrint("Happy New Year!");
                 Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
             }
             if (Player.GameTime.IsHalloween)
             {
-                Profile.Instance.MsgPrint("All Hallows Eve and the ghouls come out to play...");
+                SaveGame.Instance.MsgPrint("All Hallows Eve and the ghouls come out to play...");
                 Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUndead);
             }
             if (CurrentDepth <= 0)
@@ -2043,7 +2174,7 @@ namespace Cthangband
                     GridTile cPtr;
                     int x;
                     int y;
-                    Profile.Instance.MsgPrint("The sun has risen.");
+                    SaveGame.Instance.MsgPrint("The sun has risen.");
                     for (y = 0; y < Level.CurHgt; y++)
                     {
                         for (x = 0; x < Level.CurWid; x++)
@@ -2060,7 +2191,7 @@ namespace Cthangband
                     GridTile cPtr;
                     int x;
                     int y;
-                    Profile.Instance.MsgPrint("The sun has fallen.");
+                    SaveGame.Instance.MsgPrint("The sun has fallen.");
                     for (y = 0; y < Level.CurHgt; y++)
                     {
                         for (x = 0; x < Level.CurWid; x++)
@@ -2120,7 +2251,7 @@ namespace Cthangband
                 {
                     if (Level.Grid[Player.MapY][Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
                     {
-                        Profile.Instance.MsgPrint("The sun's rays scorch your undead flesh!");
+                        SaveGame.Instance.MsgPrint("The sun's rays scorch your undead flesh!");
                         Player.TakeHit(1, "sunlight");
                         caveNoRegen = true;
                     }
@@ -2132,7 +2263,7 @@ namespace Cthangband
                 {
                     oPtr = Player.Inventory[InventorySlot.Lightsource];
                     string oName = oPtr.Description(false, 0);
-                    Profile.Instance.MsgPrint($"The {oName} scorches your undead flesh!");
+                    SaveGame.Instance.MsgPrint($"The {oName} scorches your undead flesh!");
                     caveNoRegen = true;
                     oName = oPtr.Description(true, 0);
                     string ouch = $"wielding {oName}";
@@ -2151,12 +2282,12 @@ namespace Cthangband
                     string damDesc;
                     if (Player.RaceIndex == RaceId.Spectre)
                     {
-                        Profile.Instance.MsgPrint("Your body feels disrupted!");
+                        SaveGame.Instance.MsgPrint("Your body feels disrupted!");
                         damDesc = "density";
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("You are being crushed!");
+                        SaveGame.Instance.MsgPrint("You are being crushed!");
                         damDesc = "solid rock";
                     }
                     Player.TakeHit(1 + (Player.Level / 5), damDesc);
@@ -2230,7 +2361,7 @@ namespace Cthangband
                 {
                     if (Player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) < 10)
                     {
-                        Profile.Instance.MsgPrint("You faint from the lack of food.");
+                        SaveGame.Instance.MsgPrint("You faint from the lack of food.");
                         Disturb(true);
                         Player.SetTimedParalysis(Player.TimedParalysis + 1 + Program.Rng.RandomLessThan(5));
                     }
@@ -2425,11 +2556,11 @@ namespace Cthangband
                     else if (oPtr.TypeSpecificValue == 0)
                     {
                         Disturb(true);
-                        Profile.Instance.MsgPrint("Your light has gone out!");
+                        SaveGame.Instance.MsgPrint("Your light has gone out!");
                     }
                     else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
                     {
-                        Profile.Instance.MsgPrint("Your light is growing faint.");
+                        SaveGame.Instance.MsgPrint("Your light is growing faint.");
                     }
                 }
             }
@@ -2448,7 +2579,7 @@ namespace Cthangband
                 if (Player.Inventory[InventorySlot.Lightsource].Category != 0 && Player.TimedInvulnerability == 0 &&
                     Player.Inventory[InventorySlot.Lightsource].ItemSubCategory == LightType.Thrain)
                 {
-                    Profile.Instance.MsgPrint("The Jewel of Judgement drains life from you!");
+                    SaveGame.Instance.MsgPrint("The Jewel of Judgement drains life from you!");
                     Player.TakeHit(Math.Min(Player.Level, 50), "the Jewel of Judgement");
                 }
             }
@@ -2532,7 +2663,7 @@ namespace Cthangband
                     Disturb(false);
                     if (CurrentDepth != 0)
                     {
-                        Profile.Instance.MsgPrint(CurDungeon.Tower
+                        SaveGame.Instance.MsgPrint(CurDungeon.Tower
                             ? "You feel yourself yanked downwards!"
                             : "You feel yourself yanked upwards!");
                         DoCmdSaveGame(true);
@@ -2556,7 +2687,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint(Dungeons[RecallDungeon].Tower
+                        SaveGame.Instance.MsgPrint(Dungeons[RecallDungeon].Tower
                             ? "You feel yourself yanked upwards!"
                             : "You feel yourself yanked downwards!");
                         DoCmdSaveGame(true);
@@ -2593,7 +2724,7 @@ namespace Cthangband
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrWipe))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrWipe);
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
                 Gui.Clear();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMap))
@@ -2781,7 +2912,7 @@ namespace Cthangband
 
         private void SavePlayer()
         {
-            Program.SerializeToSaveFolder(Profile.Instance, Program.ActiveSaveSlot);
+            Program.SerializeToSaveFolder(this, Guid);
         }
 
         private bool Verify(string prompt, int item)
@@ -2958,11 +3089,11 @@ namespace Cthangband
             }
             if (speed)
             {
-                Profile.Instance.MsgPrint("You feel a sudden stirring nearby!");
+                SaveGame.Instance.MsgPrint("You feel a sudden stirring nearby!");
             }
             else if (sleep)
             {
-                Profile.Instance.MsgPrint("You hear a sudden stirring in the distance!");
+                SaveGame.Instance.MsgPrint("You hear a sudden stirring in the distance!");
             }
         }
 
@@ -2974,7 +3105,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to turn to gold.");
+                    SaveGame.Instance.MsgPrint("You have nothing to turn to gold.");
                 }
                 return;
             }
@@ -3005,7 +3136,7 @@ namespace Cthangband
             if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
             {
                 string feel = "special";
-                Profile.Instance.MsgPrint($"You fail to turn {oName} to gold!");
+                SaveGame.Instance.MsgPrint($"You fail to turn {oName} to gold!");
                 if (oPtr.IsCursed() || oPtr.IsBroken())
                 {
                     feel = "terrible";
@@ -3018,7 +3149,7 @@ namespace Cthangband
             int price = oPtr.RealValue();
             if (price <= 0)
             {
-                Profile.Instance.MsgPrint($"You turn {oName} to fool's gold.");
+                SaveGame.Instance.MsgPrint($"You turn {oName} to fool's gold.");
             }
             else
             {
@@ -3031,7 +3162,7 @@ namespace Cthangband
                 {
                     price = 30000;
                 }
-                Profile.Instance.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
+                SaveGame.Instance.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
                 Player.Gold += price;
                 Player.RedrawNeeded.Set(RedrawFlag.PrGold);
             }
@@ -3051,7 +3182,7 @@ namespace Cthangband
 
         public void AlterReality()
         {
-            Profile.Instance.MsgPrint("The world changes!");
+            SaveGame.Instance.MsgPrint("The world changes!");
             DoCmdSaveGame(true);
             NewLevelFlag = true;
             CameFrom = LevelStart.StartRandom;
@@ -3109,7 +3240,7 @@ namespace Cthangband
                 Program.Rng.RandomLessThan(100) < 71)
             {
                 s = oPtr.Count != 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"Your {oName} ({t.IndexToLabel()}) resist{s} disenchantment!");
+                SaveGame.Instance.MsgPrint($"Your {oName} ({t.IndexToLabel()}) resist{s} disenchantment!");
                 return true;
             }
             if (oPtr.BonusToHit > 0)
@@ -3137,7 +3268,7 @@ namespace Cthangband
                 oPtr.BonusArmourClass--;
             }
             s = oPtr.Count != 1 ? "were" : "was";
-            Profile.Instance.MsgPrint($"Your {oName} ({t.IndexToLabel()}) {s} disenchanted!");
+            SaveGame.Instance.MsgPrint($"Your {oName} ({t.IndexToLabel()}) {s} disenchanted!");
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             return true;
         }
@@ -3163,7 +3294,7 @@ namespace Cthangband
                     {
                         if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
                         {
-                            Profile.Instance.MsgPrint("You resist the effects!");
+                            SaveGame.Instance.MsgPrint("You resist the effects!");
                             break;
                         }
                         TeleportPlayerLevel();
@@ -3173,10 +3304,10 @@ namespace Cthangband
                     {
                         if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
                         {
-                            Profile.Instance.MsgPrint("You resist the effects!");
+                            SaveGame.Instance.MsgPrint("You resist the effects!");
                             break;
                         }
-                        Profile.Instance.MsgPrint("Your body starts to scramble...");
+                        SaveGame.Instance.MsgPrint("Your body starts to scramble...");
                         Player.ShuffleAbilityScores();
                         break;
                     }
@@ -3191,7 +3322,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to enchant.");
+                    SaveGame.Instance.MsgPrint("You have nothing to enchant.");
                 }
                 return;
             }
@@ -3199,35 +3330,35 @@ namespace Cthangband
             string oName = oPtr.Description(false, 0);
             string your = item >= 0 ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
-            Profile.Instance.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
+            SaveGame.Instance.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
             if (oPtr.FixedArtifactIndex != 0 || string.IsNullOrEmpty(oPtr.RandartName) == false)
             {
                 string are = oPtr.Count > 1 ? "are" : "is";
                 s = oPtr.Count > 1 ? "artifacts" : "an artifact";
-                Profile.Instance.MsgPrint($"The {oName} {are} already {s}!");
+                SaveGame.Instance.MsgPrint($"The {oName} {are} already {s}!");
                 okay = false;
             }
             else if (oPtr.RareItemTypeIndex != 0)
             {
                 string are = oPtr.Count > 1 ? "are" : "is";
                 s = oPtr.Count > 1 ? "rare items" : "a rare item";
-                Profile.Instance.MsgPrint($"The {oName} {are} already {s}!");
+                SaveGame.Instance.MsgPrint($"The {oName} {are} already {s}!");
                 okay = false;
             }
             else
             {
                 if (oPtr.Count > 1)
                 {
-                    Profile.Instance.MsgPrint("Not enough enough energy to enchant more than one object!");
+                    SaveGame.Instance.MsgPrint("Not enough enough energy to enchant more than one object!");
                     s = oPtr.Count > 2 ? "were" : "was";
-                    Profile.Instance.MsgPrint($"{oPtr.Count - 1} of your oName {s} destroyed!");
+                    SaveGame.Instance.MsgPrint($"{oPtr.Count - 1} of your oName {s} destroyed!");
                     oPtr.Count = 1;
                 }
                 okay = oPtr.CreateRandart(true);
             }
             if (!okay)
             {
-                Profile.Instance.MsgPrint("The enchantment failed.");
+                SaveGame.Instance.MsgPrint("The enchantment failed.");
             }
         }
 
@@ -3251,7 +3382,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have weapon to bless.");
+                    SaveGame.Instance.MsgPrint("You have weapon to bless.");
                 }
                 return;
             }
@@ -3265,11 +3396,11 @@ namespace Cthangband
                     f3.IsSet(ItemFlag3.PermaCurse))
                 {
                     your = item >= 0 ? "your" : "the";
-                    Profile.Instance.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
+                    SaveGame.Instance.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                     return;
                 }
                 your = item >= 0 ? "your" : "the";
-                Profile.Instance.MsgPrint($"A malignant aura leaves {your} {oName}.");
+                SaveGame.Instance.MsgPrint($"A malignant aura leaves {your} {oName}.");
                 oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                 oPtr.IdentifyFlags.Set(Constants.IdentSense);
                 oPtr.Inscription = "uncursed";
@@ -3279,7 +3410,7 @@ namespace Cthangband
             {
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "were" : "was";
-                Profile.Instance.MsgPrint($"{your} {oName} {s} blessed already.");
+                SaveGame.Instance.MsgPrint($"{your} {oName} {s} blessed already.");
                 return;
             }
             if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifactIndex != 0) ||
@@ -3287,13 +3418,13 @@ namespace Cthangband
             {
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"{your} {oName} shine{s}!");
+                SaveGame.Instance.MsgPrint($"{your} {oName} shine{s}!");
                 oPtr.RandartFlags3.Set(ItemFlag3.Blessed);
             }
             else
             {
                 bool disHappened = false;
-                Profile.Instance.MsgPrint("The artifact resists your blessing!");
+                SaveGame.Instance.MsgPrint("The artifact resists your blessing!");
                 if (oPtr.BonusToHit > 0)
                 {
                     oPtr.BonusToHit--;
@@ -3323,10 +3454,10 @@ namespace Cthangband
                 }
                 if (disHappened)
                 {
-                    Profile.Instance.MsgPrint("There is a  feeling in the air...");
+                    SaveGame.Instance.MsgPrint("There is a  feeling in the air...");
                     string your = item >= 0 ? "your" : "the";
                     string s = oPtr.Count > 1 ? "were" : "was";
-                    Profile.Instance.MsgPrint($"{your} {oName} {s} disenchanted!");
+                    SaveGame.Instance.MsgPrint($"{your} {oName} {s} disenchanted!");
                 }
             }
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
@@ -3564,7 +3695,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("There is a searing blast of light!");
+                SaveGame.Instance.MsgPrint("There is a searing blast of light!");
                 if (!Player.HasBlindnessResistance && !Player.HasLightResistance)
                 {
                     Player.SetTimedBlindness(Player.TimedBlindness + 10 + Program.Rng.DieRoll(10));
@@ -3624,7 +3755,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of doors!");
+                SaveGame.Instance.MsgPrint("You sense the presence of doors!");
             }
             return detect;
         }
@@ -3658,7 +3789,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You sense the presence of evil creatures!");
+                SaveGame.Instance.MsgPrint("You sense the presence of evil creatures!");
             }
             return flag;
         }
@@ -3692,7 +3823,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You sense the presence of invisible creatures!");
+                SaveGame.Instance.MsgPrint("You sense the presence of invisible creatures!");
             }
             return flag;
         }
@@ -3726,7 +3857,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You sense the presence of unnatural beings!");
+                SaveGame.Instance.MsgPrint("You sense the presence of unnatural beings!");
             }
         }
 
@@ -3758,7 +3889,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You sense the presence of monsters!");
+                SaveGame.Instance.MsgPrint("You sense the presence of monsters!");
             }
             return flag;
         }
@@ -3792,7 +3923,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of treasure!");
+                SaveGame.Instance.MsgPrint("You sense the presence of treasure!");
             }
             if (DetectMonstersString("$*"))
             {
@@ -3837,7 +3968,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of magic objects!");
+                SaveGame.Instance.MsgPrint("You sense the presence of magic objects!");
             }
         }
 
@@ -3870,7 +4001,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of objects!");
+                SaveGame.Instance.MsgPrint("You sense the presence of objects!");
             }
             if (DetectMonstersString("!=?|"))
             {
@@ -3897,7 +4028,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of stairs!");
+                SaveGame.Instance.MsgPrint("You sense the presence of stairs!");
             }
             return detect;
         }
@@ -3927,7 +4058,7 @@ namespace Cthangband
             Player.RedrawNeeded.Set(RedrawFlag.PrMap);
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of traps!");
+                SaveGame.Instance.MsgPrint("You sense the presence of traps!");
             }
             return detect;
         }
@@ -3954,7 +4085,7 @@ namespace Cthangband
             }
             if (detect)
             {
-                Profile.Instance.MsgPrint("You sense the presence of buried treasure!");
+                SaveGame.Instance.MsgPrint("You sense the presence of buried treasure!");
             }
             return detect;
         }
@@ -4095,23 +4226,23 @@ namespace Cthangband
                 {
                     case 1:
                         {
-                            Profile.Instance.MsgPrint("The Level.Grid ceiling collapses!");
+                            SaveGame.Instance.MsgPrint("The Level.Grid ceiling collapses!");
                             break;
                         }
                     case 2:
                         {
-                            Profile.Instance.MsgPrint("The Level.Grid floor twists in an unnatural way!");
+                            SaveGame.Instance.MsgPrint("The Level.Grid floor twists in an unnatural way!");
                             break;
                         }
                     default:
                         {
-                            Profile.Instance.MsgPrint("The Level.Grid quakes!  You are pummeled with debris!");
+                            SaveGame.Instance.MsgPrint("The Level.Grid quakes!  You are pummeled with debris!");
                             break;
                         }
                 }
                 if (sn == 0)
                 {
-                    Profile.Instance.MsgPrint("You are severely crushed!");
+                    SaveGame.Instance.MsgPrint("You are severely crushed!");
                     damage = 300;
                 }
                 else
@@ -4120,20 +4251,20 @@ namespace Cthangband
                     {
                         case 1:
                             {
-                                Profile.Instance.MsgPrint("You nimbly dodge the blast!");
+                                SaveGame.Instance.MsgPrint("You nimbly dodge the blast!");
                                 damage = 0;
                                 break;
                             }
                         case 2:
                             {
-                                Profile.Instance.MsgPrint("You are bashed by rubble!");
+                                SaveGame.Instance.MsgPrint("You are bashed by rubble!");
                                 damage = Program.Rng.DiceRoll(10, 4);
                                 Player.SetTimedStun(Player.TimedStun + Program.Rng.DieRoll(50));
                                 break;
                             }
                         case 3:
                             {
-                                Profile.Instance.MsgPrint("You are crushed between the floor and ceiling!");
+                                SaveGame.Instance.MsgPrint("You are crushed between the floor and ceiling!");
                                 damage = Program.Rng.DiceRoll(10, 4);
                                 Player.SetTimedStun(Player.TimedStun + Program.Rng.DieRoll(50));
                                 break;
@@ -4203,13 +4334,13 @@ namespace Cthangband
                                 }
                             }
                             string mName = mPtr.MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"{mName} wails out in pain!");
+                            SaveGame.Instance.MsgPrint($"{mName} wails out in pain!");
                             damage = sn != 0 ? Program.Rng.DiceRoll(4, 8) : 200;
                             mPtr.SleepLevel = 0;
                             mPtr.Health -= damage;
                             if (mPtr.Health < 0)
                             {
-                                Profile.Instance.MsgPrint($"{mName} is embedded in the rock!");
+                                SaveGame.Instance.MsgPrint($"{mName} is embedded in the rock!");
                                 Level.DeleteMonster(yy, xx);
                                 sn = 0;
                             }
@@ -4278,7 +4409,7 @@ namespace Cthangband
         {
             if (!Level.GridOpenNoItem(Player.MapY, Player.MapX))
             {
-                Profile.Instance.MsgPrint("The object resists the spell.");
+                SaveGame.Instance.MsgPrint("The object resists the spell.");
                 return;
             }
             Level.CaveSetFeat(Player.MapY, Player.MapX, "ElderSign");
@@ -4362,7 +4493,7 @@ namespace Cthangband
                         if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusToHit >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
-                            Profile.Instance.MsgPrint("The curse is broken!");
+                            SaveGame.Instance.MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
                             if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
@@ -4398,7 +4529,7 @@ namespace Cthangband
                         if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusDamage >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
-                            Profile.Instance.MsgPrint("The curse is broken!");
+                            SaveGame.Instance.MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
                             if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
@@ -4434,7 +4565,7 @@ namespace Cthangband
                         if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusArmourClass >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
-                            Profile.Instance.MsgPrint("The curse is broken!");
+                            SaveGame.Instance.MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
                             if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
@@ -4471,7 +4602,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to enchant.");
+                    SaveGame.Instance.MsgPrint("You have nothing to enchant.");
                 }
                 return false;
             }
@@ -4479,7 +4610,7 @@ namespace Cthangband
             string oName = oPtr.Description(false, 0);
             string your = item >= 0 ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
-            Profile.Instance.MsgPrint($"{your} {oName} glow{s} brightly!");
+            SaveGame.Instance.MsgPrint($"{your} {oName} glow{s} brightly!");
             if (Enchant(oPtr, numHit, Constants.EnchTohit))
             {
                 okay = true;
@@ -4494,7 +4625,7 @@ namespace Cthangband
             }
             if (!okay)
             {
-                Profile.Instance.MsgPrint("The enchantment failed.");
+                SaveGame.Instance.MsgPrint("The enchantment failed.");
             }
             return true;
         }
@@ -4592,7 +4723,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to identify.");
+                    SaveGame.Instance.MsgPrint("You have nothing to identify.");
                 }
                 return false;
             }
@@ -4606,11 +4737,11 @@ namespace Cthangband
             string oName = oPtr.Description(true, 3);
             if (item >= InventorySlot.MeleeWeapon)
             {
-                Profile.Instance.MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
+                SaveGame.Instance.MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
                 if (oPtr.Stompable())
                 {
                     string itemName = oPtr.Description(true, 3);
-                    Profile.Instance.MsgPrint($"You destroy {oName}.");
+                    SaveGame.Instance.MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
                     Player.Inventory.InvenItemIncrease(item, -amount);
                     Player.Inventory.InvenItemOptimize(item);
@@ -4618,10 +4749,10 @@ namespace Cthangband
             }
             else if (item >= 0)
             {
-                Profile.Instance.MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
+                SaveGame.Instance.MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
                 if (oPtr.Stompable())
                 {
-                    Profile.Instance.MsgPrint($"You destroy {oName}.");
+                    SaveGame.Instance.MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
                     Player.Inventory.InvenItemIncrease(item, -amount);
                     Player.Inventory.InvenItemOptimize(item);
@@ -4629,7 +4760,7 @@ namespace Cthangband
             }
             else
             {
-                Profile.Instance.MsgPrint($"On the ground: {oName}.");
+                SaveGame.Instance.MsgPrint($"On the ground: {oName}.");
             }
             oPtr.IdentifyFully();
             return true;
@@ -4641,7 +4772,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to identify.");
+                    SaveGame.Instance.MsgPrint("You have nothing to identify.");
                 }
                 return false;
             }
@@ -4653,10 +4784,10 @@ namespace Cthangband
             string oName = oPtr.Description(true, 3);
             if (item >= InventorySlot.MeleeWeapon)
             {
-                Profile.Instance.MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
+                SaveGame.Instance.MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
                 if (oPtr.Stompable())
                 {
-                    Profile.Instance.MsgPrint($"You destroy {oName}.");
+                    SaveGame.Instance.MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
                     Player.Inventory.InvenItemIncrease(item, -amount);
                     Player.Inventory.InvenItemOptimize(item);
@@ -4664,10 +4795,10 @@ namespace Cthangband
             }
             else if (item >= 0)
             {
-                Profile.Instance.MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
+                SaveGame.Instance.MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
                 if (oPtr.Stompable())
                 {
-                    Profile.Instance.MsgPrint($"You destroy {oName}.");
+                    SaveGame.Instance.MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
                     Player.Inventory.InvenItemIncrease(item, -amount);
                     Player.Inventory.InvenItemOptimize(item);
@@ -4675,7 +4806,7 @@ namespace Cthangband
             }
             else
             {
-                Profile.Instance.MsgPrint($"On the ground: {oName}.");
+                SaveGame.Instance.MsgPrint($"On the ground: {oName}.");
             }
             return true;
         }
@@ -4694,7 +4825,7 @@ namespace Cthangband
                 if (oPtr.Stompable())
                 {
                     string itemName = oPtr.Description(true, 3);
-                    Profile.Instance.MsgPrint($"You destroy {itemName}.");
+                    SaveGame.Instance.MsgPrint($"You destroy {itemName}.");
                     int amount = oPtr.Count;
                     Player.Inventory.InvenItemIncrease(i, -amount);
                     Player.Inventory.InvenItemOptimize(i);
@@ -4745,7 +4876,7 @@ namespace Cthangband
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
             if (Player.TimedBlindness == 0)
             {
-                Profile.Instance.MsgPrint("You are surrounded by a white light.");
+                SaveGame.Instance.MsgPrint("You are surrounded by a white light.");
             }
             Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectLightWeak(), flg);
             LightRoom(Player.MapY, Player.MapX);
@@ -4853,7 +4984,7 @@ namespace Cthangband
                 {
                     break;
                 }
-                rPtr = Profile.Instance.MonsterRaces[r];
+                rPtr = SaveGame.Instance.MonsterRaces[r];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
                 {
                     continue;
@@ -5022,17 +5153,17 @@ namespace Cthangband
                 {
                     if (!probe)
                     {
-                        Profile.Instance.MsgPrint("Probing...");
+                        SaveGame.Instance.MsgPrint("Probing...");
                     }
                     string mName = mPtr.MonsterDesc(0x04);
-                    Profile.Instance.MsgPrint($"{mName} has {mPtr.Health} hit points.");
+                    SaveGame.Instance.MsgPrint($"{mName} has {mPtr.Health} hit points.");
                     Level.Monsters.LoreDoProbe(i);
                     probe = true;
                 }
             }
             if (probe)
             {
-                Profile.Instance.MsgPrint("That's all.");
+                SaveGame.Instance.MsgPrint("That's all.");
             }
         }
 
@@ -5060,7 +5191,7 @@ namespace Cthangband
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to recharge.");
+                    SaveGame.Instance.MsgPrint("You have nothing to recharge.");
                 }
                 return false;
             }
@@ -5075,7 +5206,7 @@ namespace Cthangband
                 }
                 if (Program.Rng.RandomLessThan(i) == 0)
                 {
-                    Profile.Instance.MsgPrint("The recharge backfires, draining the rod further!");
+                    SaveGame.Instance.MsgPrint("The recharge backfires, draining the rod further!");
                     if (oPtr.TypeSpecificValue < 10000)
                     {
                         oPtr.TypeSpecificValue = (oPtr.TypeSpecificValue + 100) * 2;
@@ -5103,7 +5234,7 @@ namespace Cthangband
                 }
                 if (Program.Rng.RandomLessThan(i) == 0)
                 {
-                    Profile.Instance.MsgPrint("There is a bright flash of light.");
+                    SaveGame.Instance.MsgPrint("There is a bright flash of light.");
                     if (item >= 0)
                     {
                         Player.Inventory.InvenItemIncrease(item, -999);
@@ -6045,7 +6176,7 @@ namespace Cthangband
         {
             if (!Level.CaveValidBold(Player.MapY, Player.MapX))
             {
-                Profile.Instance.MsgPrint("The object resists the spell.");
+                SaveGame.Instance.MsgPrint("The object resists the spell.");
                 return;
             }
             Level.DeleteObject(Player.MapY, Player.MapX);
@@ -6177,7 +6308,7 @@ namespace Cthangband
             bool look = true;
             if (Player.HasAntiTeleport)
             {
-                Profile.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
+                SaveGame.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
                 return;
             }
             if (dis > 200)
@@ -6267,14 +6398,14 @@ namespace Cthangband
         {
             if (Player.HasAntiTeleport)
             {
-                Profile.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
+                SaveGame.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
                 return;
             }
             var downDesc = CurDungeon.Tower ? "You rise up through the ceiling." : "You sink through the floor.";
             var upDesc = CurDungeon.Tower ? "You sink through the floor." : "You rise up through the ceiling.";
             if (CurrentDepth <= 0)
             {
-                Profile.Instance.MsgPrint(downDesc);
+                SaveGame.Instance.MsgPrint(downDesc);
                 DoCmdSaveGame(true);
                 CurrentDepth++;
                 NewLevelFlag = true;
@@ -6282,14 +6413,14 @@ namespace Cthangband
             else if (Quests.IsQuest(CurrentDepth) ||
                      CurrentDepth >= CurDungeon.MaxLevel)
             {
-                Profile.Instance.MsgPrint(upDesc);
+                SaveGame.Instance.MsgPrint(upDesc);
                 DoCmdSaveGame(true);
                 CurrentDepth--;
                 NewLevelFlag = true;
             }
             else if (Program.Rng.RandomLessThan(100) < 50)
             {
-                Profile.Instance.MsgPrint(upDesc);
+                SaveGame.Instance.MsgPrint(upDesc);
                 DoCmdSaveGame(true);
                 CurrentDepth--;
                 NewLevelFlag = true;
@@ -6297,7 +6428,7 @@ namespace Cthangband
             }
             else
             {
-                Profile.Instance.MsgPrint(downDesc);
+                SaveGame.Instance.MsgPrint(downDesc);
                 DoCmdSaveGame(true);
                 CurrentDepth++;
                 NewLevelFlag = true;
@@ -6313,7 +6444,7 @@ namespace Cthangband
             int y, x, dis = 0, ctr = 0;
             if (Player.HasAntiTeleport)
             {
-                Profile.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
+                SaveGame.Instance.MsgPrint("A mysterious force prevents you from teleporting!");
                 return;
             }
             while (true)
@@ -6368,7 +6499,7 @@ namespace Cthangband
             GridTile cPtr = Level.Grid[ty][tx];
             if (cPtr.MonsterIndex == 0)
             {
-                Profile.Instance.MsgPrint("You can't trade places with that!");
+                SaveGame.Instance.MsgPrint("You can't trade places with that!");
             }
             else
             {
@@ -6376,7 +6507,7 @@ namespace Cthangband
                 MonsterRace rPtr = mPtr.Race;
                 if ((rPtr.Flags3 & MonsterFlag3.ResistTeleport) != 0)
                 {
-                    Profile.Instance.MsgPrint("Your teleportation is blocked!");
+                    SaveGame.Instance.MsgPrint("Your teleportation is blocked!");
                 }
                 else
                 {
@@ -6421,7 +6552,7 @@ namespace Cthangband
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
             if (Player.TimedBlindness == 0)
             {
-                Profile.Instance.MsgPrint("Darkness surrounds you.");
+                SaveGame.Instance.MsgPrint("Darkness surrounds you.");
             }
             Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectDarkWeak(), flg);
             UnlightRoom(Player.MapY, Player.MapX);
@@ -6505,7 +6636,7 @@ namespace Cthangband
         {
             if (!Level.GridOpenNoItem(Player.MapY, Player.MapX))
             {
-                Profile.Instance.MsgPrint("The object resists the spell.");
+                SaveGame.Instance.MsgPrint("The object resists the spell.");
                 return;
             }
             Level.CaveSetFeat(Player.MapY, Player.MapX, "YellowSign");
@@ -6561,7 +6692,7 @@ namespace Cthangband
                         if (mPtr.IsVisible)
                         {
                             string mName = mPtr.MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"{mName} wakes up.");
+                            SaveGame.Instance.MsgPrint($"{mName} wakes up.");
                         }
                     }
                 }
@@ -6622,7 +6753,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You sense the presence of monsters!");
+                SaveGame.Instance.MsgPrint("You sense the presence of monsters!");
             }
             return flag;
         }
@@ -6717,10 +6848,10 @@ namespace Cthangband
             oPtr.GetMergedFlags(f1, f2, f3);
             if (f3.IsSet(ItemFlag3.IgnoreAcid))
             {
-                Profile.Instance.MsgPrint($"Your {oName} is unaffected!");
+                SaveGame.Instance.MsgPrint($"Your {oName} is unaffected!");
                 return true;
             }
-            Profile.Instance.MsgPrint($"Your {oName} is damaged!");
+            SaveGame.Instance.MsgPrint($"Your {oName} is damaged!");
             oPtr.BonusArmourClass--;
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             return true;
@@ -7142,7 +7273,7 @@ namespace Cthangband
                             // If it does, then they player knows the monster is evil
                             race.Knowledge.RFlags3 |= MonsterFlag3.Evil;
                         }
-                        Profile.Instance.MsgPrint($"{monsterName} is repelled.");
+                        SaveGame.Instance.MsgPrint($"{monsterName} is repelled.");
                         continue;
                     }
                     bool doCut = false;
@@ -7289,7 +7420,7 @@ namespace Cthangband
                     // Print the message
                     if (!string.IsNullOrEmpty(act))
                     {
-                        Profile.Instance.MsgPrint($"{monsterName} {act}");
+                        SaveGame.Instance.MsgPrint($"{monsterName} {act}");
                     }
                     obvious = true;
                     // Work out base damage done by the attack
@@ -7324,7 +7455,7 @@ namespace Cthangband
                                     // Hagarg Ryonis might save us from the additional damage
                                     if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                     {
-                                        Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                        SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                     }
                                     else if (player.SetTimedPoison(player.TimedPoison + Program.Rng.DieRoll(monsterLevel) + 5))
                                     {
@@ -7363,7 +7494,7 @@ namespace Cthangband
                                     if ((item.Category == ItemCategory.Staff ||
                                          item.Category == ItemCategory.Wand) && item.TypeSpecificValue != 0)
                                     {
-                                        Profile.Instance.MsgPrint("Energy drains from your pack!");
+                                        SaveGame.Instance.MsgPrint("Energy drains from your pack!");
                                         obvious = true;
                                         int j = monsterLevel;
                                         monster.Health += j * item.TypeSpecificValue * item.Count;
@@ -7390,7 +7521,7 @@ namespace Cthangband
                                 if ((player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) <
                                     player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + player.Level) || player.HasAntiTheft)
                                 {
-                                    Profile.Instance.MsgPrint("You quickly protect your money pouch!");
+                                    SaveGame.Instance.MsgPrint("You quickly protect your money pouch!");
                                     if (Program.Rng.RandomLessThan(3) != 0)
                                     {
                                         blinked = true;
@@ -7419,17 +7550,17 @@ namespace Cthangband
                                     // Inform the player what happened
                                     if (gold <= 0)
                                     {
-                                        Profile.Instance.MsgPrint("Nothing was stolen.");
+                                        SaveGame.Instance.MsgPrint("Nothing was stolen.");
                                     }
                                     else if (player.Gold != 0)
                                     {
-                                        Profile.Instance.MsgPrint("Your purse feels lighter.");
-                                        Profile.Instance.MsgPrint($"{gold} coins were stolen!");
+                                        SaveGame.Instance.MsgPrint("Your purse feels lighter.");
+                                        SaveGame.Instance.MsgPrint($"{gold} coins were stolen!");
                                     }
                                     else
                                     {
-                                        Profile.Instance.MsgPrint("Your purse feels lighter.");
-                                        Profile.Instance.MsgPrint("All of your coins were stolen!");
+                                        SaveGame.Instance.MsgPrint("Your purse feels lighter.");
+                                        SaveGame.Instance.MsgPrint("All of your coins were stolen!");
                                     }
                                     player.RedrawNeeded.Set(RedrawFlag.PrGold);
                                     blinked = true;
@@ -7443,7 +7574,7 @@ namespace Cthangband
                                 if ((player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) <
                                     player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + player.Level) || player.HasAntiTheft)
                                 {
-                                    Profile.Instance.MsgPrint("You grab hold of your backpack!");
+                                    SaveGame.Instance.MsgPrint("You grab hold of your backpack!");
                                     blinked = true;
                                     obvious = true;
                                     break;
@@ -7463,7 +7594,7 @@ namespace Cthangband
                                     }
                                     itemName = item.Description(false, 3);
                                     string y = item.Count > 1 ? "One of y" : "Y";
-                                    Profile.Instance.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
+                                    SaveGame.Instance.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
                                     int nextObjectIndex = Level.OPop();
                                     if (nextObjectIndex != 0)
                                     {
@@ -7504,7 +7635,7 @@ namespace Cthangband
                                     // it's gone
                                     itemName = item.Description(false, 0);
                                     string y = item.Count > 1 ? "One of y" : "Y";
-                                    Profile.Instance.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
+                                    SaveGame.Instance.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
                                     player.Inventory.InvenItemIncrease(i, -1);
                                     player.Inventory.InvenItemOptimize(i);
                                     obvious = true;
@@ -7526,7 +7657,7 @@ namespace Cthangband
                                     }
                                     if (player.TimedBlindness == 0)
                                     {
-                                        Profile.Instance.MsgPrint("Your light dims.");
+                                        SaveGame.Instance.MsgPrint("Your light dims.");
                                         obvious = true;
                                     }
                                 }
@@ -7535,7 +7666,7 @@ namespace Cthangband
                         case AttackEffect.Acid:
                             {
                                 obvious = true;
-                                Profile.Instance.MsgPrint("You are covered in acid!");
+                                SaveGame.Instance.MsgPrint("You are covered in acid!");
                                 AcidDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                                 break;
@@ -7543,7 +7674,7 @@ namespace Cthangband
                         case AttackEffect.Electricity:
                             {
                                 obvious = true;
-                                Profile.Instance.MsgPrint("You are struck by electricity!");
+                                SaveGame.Instance.MsgPrint("You are struck by electricity!");
                                 ElecDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                                 break;
@@ -7551,7 +7682,7 @@ namespace Cthangband
                         case AttackEffect.Fire:
                             {
                                 obvious = true;
-                                Profile.Instance.MsgPrint("You are enveloped in flames!");
+                                SaveGame.Instance.MsgPrint("You are enveloped in flames!");
                                 FireDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                                 break;
@@ -7559,7 +7690,7 @@ namespace Cthangband
                         case AttackEffect.Cold:
                             {
                                 obvious = true;
-                                Profile.Instance.MsgPrint("You are covered with frost!");
+                                SaveGame.Instance.MsgPrint("You are covered with frost!");
                                 ColdDam(damage, monsterDescription);
                                 level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                                 break;
@@ -7595,12 +7726,12 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasFearResistance)
                                 {
-                                    Profile.Instance.MsgPrint("You stand your ground!");
+                                    SaveGame.Instance.MsgPrint("You stand your ground!");
                                     obvious = true;
                                 }
                                 else if (Program.Rng.RandomLessThan(100) < player.SkillSavingThrow)
                                 {
-                                    Profile.Instance.MsgPrint("You stand your ground!");
+                                    SaveGame.Instance.MsgPrint("You stand your ground!");
                                     obvious = true;
                                 }
                                 else
@@ -7622,12 +7753,12 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasFreeAction)
                                 {
-                                    Profile.Instance.MsgPrint("You are unaffected!");
+                                    SaveGame.Instance.MsgPrint("You are unaffected!");
                                     obvious = true;
                                 }
                                 else if (Program.Rng.RandomLessThan(100) < player.SkillSavingThrow)
                                 {
-                                    Profile.Instance.MsgPrint("You resist the effects!");
+                                    SaveGame.Instance.MsgPrint("You resist the effects!");
                                     obvious = true;
                                 }
                                 else
@@ -7742,24 +7873,24 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 95)
                                 {
-                                    Profile.Instance.MsgPrint("You keep hold of your life force!");
+                                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
                                 }
                                 else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     // Hagarg Ryonis can protect us from experience loss
-                                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
                                     int d = Program.Rng.DiceRoll(10, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
                                     if (player.HasHoldLife)
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life slipping away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life slipping away!");
                                         player.LoseExperience(d / 10);
                                     }
                                     else
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life draining away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life draining away!");
                                         player.LoseExperience(d);
                                     }
                                 }
@@ -7771,24 +7902,24 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 90)
                                 {
-                                    Profile.Instance.MsgPrint("You keep hold of your life force!");
+                                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
                                 }
                                 else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     // Hagarg Ryonis can protect us from experience loss
-                                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
                                     int d = Program.Rng.DiceRoll(20, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
                                     if (player.HasHoldLife)
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life slipping away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life slipping away!");
                                         player.LoseExperience(d / 10);
                                     }
                                     else
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life draining away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life draining away!");
                                         player.LoseExperience(d);
                                     }
                                 }
@@ -7800,24 +7931,24 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
                                 {
-                                    Profile.Instance.MsgPrint("You keep hold of your life force!");
+                                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
                                 }
                                 else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     // Hagarg Ryonis can protect us from experience loss
-                                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
                                     int d = Program.Rng.DiceRoll(40, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
                                     if (player.HasHoldLife)
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life slipping away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life slipping away!");
                                         player.LoseExperience(d / 10);
                                     }
                                     else
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life draining away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life draining away!");
                                         player.LoseExperience(d);
                                     }
                                 }
@@ -7829,24 +7960,24 @@ namespace Cthangband
                                 player.TakeHit(damage, monsterDescription);
                                 if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 50)
                                 {
-                                    Profile.Instance.MsgPrint("You keep hold of your life force!");
+                                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
                                 }
                                 else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     // Hagarg Ryonis can protect us from experience loss
-                                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
                                     int d = Program.Rng.DiceRoll(80, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
                                     if (player.HasHoldLife)
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life slipping away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life slipping away!");
                                         player.LoseExperience(d / 10);
                                     }
                                     else
                                     {
-                                        Profile.Instance.MsgPrint("You feel your life draining away!");
+                                        SaveGame.Instance.MsgPrint("You feel your life draining away!");
                                         player.LoseExperience(d);
                                     }
                                 }
@@ -7959,7 +8090,7 @@ namespace Cthangband
                         {
                             if ((race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
                             {
-                                Profile.Instance.MsgPrint($"{monsterName} is suddenly very hot!");
+                                SaveGame.Instance.MsgPrint($"{monsterName} is suddenly very hot!");
                                 if (level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of ash."))
                                 {
@@ -7980,7 +8111,7 @@ namespace Cthangband
                         {
                             if ((race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
                             {
-                                Profile.Instance.MsgPrint($"{monsterName} gets zapped!");
+                                SaveGame.Instance.MsgPrint($"{monsterName} gets zapped!");
                                 if (level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of cinder."))
                                 {
@@ -8018,7 +8149,7 @@ namespace Cthangband
                             if (monster.IsVisible)
                             {
                                 Disturb(true);
-                                Profile.Instance.MsgPrint($"{monsterName} misses you.");
+                                SaveGame.Instance.MsgPrint($"{monsterName} misses you.");
                             }
                             break;
                     }
@@ -8038,7 +8169,7 @@ namespace Cthangband
             // If the monster teleported away after stealing, let the player know and do the actual teleport
             if (blinked)
             {
-                Profile.Instance.MsgPrint("The thief flees laughing!");
+                SaveGame.Instance.MsgPrint("The thief flees laughing!");
                 TeleportAway(monsterIndex, (Constants.MaxSight * 2) + 5);
             }
             // If the attack just killed the player, let future generations remember what killed
@@ -8051,7 +8182,7 @@ namespace Cthangband
             if (monster.IsVisible && fear)
             {
                 Gui.PlaySound(SoundEffect.MonsterFlees);
-                Profile.Instance.MsgPrint($"{monsterName} flees in terror!");
+                SaveGame.Instance.MsgPrint($"{monsterName} flees in terror!");
             }
         }
 
@@ -8150,7 +8281,7 @@ namespace Cthangband
 
             if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
             {
-                Profile.Instance.MsgPrint(artifactPower.PreActivationMessage);
+                SaveGame.Instance.MsgPrint(artifactPower.PreActivationMessage);
             }
             if (artifactPower.Activate(this))
             {
@@ -8163,7 +8294,7 @@ namespace Cthangband
             bool more = false;
             EnergyUse = 100;
             GridTile cPtr = Level.Grid[y][x];
-            Profile.Instance.MsgPrint("You smash into the door!");
+            SaveGame.Instance.MsgPrint("You smash into the door!");
             int bash = Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent;
             int temp = int.Parse(cPtr.FeatureType.Name.Substring(10));
             temp = bash - (temp * 10);
@@ -8173,7 +8304,7 @@ namespace Cthangband
             }
             if (Program.Rng.RandomLessThan(100) < temp)
             {
-                Profile.Instance.MsgPrint("The door crashes open!");
+                SaveGame.Instance.MsgPrint("The door crashes open!");
                 Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
                 Gui.PlaySound(SoundEffect.OpenDoor);
                 MovePlayer(dir, false);
@@ -8182,12 +8313,12 @@ namespace Cthangband
             }
             else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.Level)
             {
-                Profile.Instance.MsgPrint("The door holds firm.");
+                SaveGame.Instance.MsgPrint("The door holds firm.");
                 more = true;
             }
             else
             {
-                Profile.Instance.MsgPrint("You are off-balance.");
+                SaveGame.Instance.MsgPrint("You are off-balance.");
                 Player.SetTimedParalysis(Player.TimedParalysis + 2 + Program.Rng.RandomLessThan(2));
             }
             return more;
@@ -8221,7 +8352,7 @@ namespace Cthangband
                     continue;
                 }
                 // Make the bolts into bolts of flame
-                Profile.Instance.MsgPrint("Your bolts are covered in a fiery aura!");
+                SaveGame.Instance.MsgPrint("Your bolts are covered in a fiery aura!");
                 item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfFlame;
                 Enchant(item, Program.Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
@@ -8229,7 +8360,7 @@ namespace Cthangband
                 return;
             }
             // We fell off the end of the inventory without enchanting anything
-            Profile.Instance.MsgPrint("The fiery enchantment failed.");
+            SaveGame.Instance.MsgPrint("The fiery enchantment failed.");
         }
 
         /// <summary>
@@ -8287,13 +8418,13 @@ namespace Cthangband
                         break;
                 }
                 // Let the player know what happened
-                Profile.Instance.MsgPrint($"Your {itemName} {act}");
+                SaveGame.Instance.MsgPrint($"Your {itemName} {act}");
                 Enchant(item, Program.Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
             }
             else
             {
-                Profile.Instance.MsgPrint("The Branding failed.");
+                SaveGame.Instance.MsgPrint("The Branding failed.");
             }
         }
 
@@ -8337,10 +8468,10 @@ namespace Cthangband
                 // We were too close to a wall, so earthquake instead
                 string cast = Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
                 string spell = Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
-                Profile.Instance.MsgPrint($"You {cast} the {spell} too close to a wall!");
-                Profile.Instance.MsgPrint("There is a loud explosion!");
+                SaveGame.Instance.MsgPrint($"You {cast} the {spell} too close to a wall!");
+                SaveGame.Instance.MsgPrint("There is a loud explosion!");
                 DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
-                Profile.Instance.MsgPrint("The dungeon collapses...");
+                SaveGame.Instance.MsgPrint("The dungeon collapses...");
                 Player.TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
             }
         }
@@ -8360,14 +8491,14 @@ namespace Cthangband
             // Can't use it if we're too low level
             if (Player.Level < minLevel)
             {
-                Profile.Instance.MsgPrint($"You need to attain level {minLevel} to use this power.");
+                SaveGame.Instance.MsgPrint($"You need to attain level {minLevel} to use this power.");
                 EnergyUse = 0;
                 return false;
             }
             // Can't use it if we're confused
             if (Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused to use this power.");
+                SaveGame.Instance.MsgPrint("You are too confused to use this power.");
                 EnergyUse = 0;
                 return false;
             }
@@ -8421,7 +8552,7 @@ namespace Cthangband
                 return true;
             }
             // Let us know we failed
-            Profile.Instance.MsgPrint("You've failed to concentrate hard enough.");
+            SaveGame.Instance.MsgPrint("You've failed to concentrate hard enough.");
             return false;
         }
 
@@ -8437,7 +8568,7 @@ namespace Cthangband
             GridTile cPtr = Level.Grid[y][x];
             if (cPtr.FeatureType.Name == "BrokenDoor")
             {
-                Profile.Instance.MsgPrint("The door appears to be broken.");
+                SaveGame.Instance.MsgPrint("The door appears to be broken.");
             }
             else
             {
@@ -8609,23 +8740,23 @@ namespace Cthangband
             // Probably using an orb or a star essence (or maybe not holding a light source at all)
             else
             {
-                Profile.Instance.MsgPrint("You are not wielding anything which uses phlogiston.");
+                SaveGame.Instance.MsgPrint("You are not wielding anything which uses phlogiston.");
                 return;
             }
             // Item is already full
             if (item.TypeSpecificValue >= maxPhlogiston)
             {
-                Profile.Instance.MsgPrint("No more phlogiston can be put in this item.");
+                SaveGame.Instance.MsgPrint("No more phlogiston can be put in this item.");
                 return;
             }
             // Add half the max fuel of the item to its current fuel
             item.TypeSpecificValue += maxPhlogiston / 2;
-            Profile.Instance.MsgPrint("You add phlogiston to your light item.");
+            SaveGame.Instance.MsgPrint("You add phlogiston to your light item.");
             // Make sure it doesn't overflow
             if (item.TypeSpecificValue >= maxPhlogiston)
             {
                 item.TypeSpecificValue = maxPhlogiston;
-                Profile.Instance.MsgPrint("Your light item is full.");
+                SaveGame.Instance.MsgPrint("Your light item is full.");
             }
             // We need to update our light after this
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
@@ -8648,13 +8779,13 @@ namespace Cthangband
             if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) &&
                 Program.Rng.RandomLessThan(100) < 50)
             {
-                Profile.Instance.MsgPrint(
+                SaveGame.Instance.MsgPrint(
                     $"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
             }
             else
             {
                 // Completely remake the armour into a set of blasted armour
-                Profile.Instance.MsgPrint($"A terrible black aura blasts your {itemName}!");
+                SaveGame.Instance.MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifactIndex = 0;
                 item.RareItemTypeIndex = Enumerations.RareItemType.ArmourBlasted;
                 item.BonusArmourClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
@@ -8691,13 +8822,13 @@ namespace Cthangband
             if ((item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName)) &&
                 Program.Rng.RandomLessThan(100) < 50)
             {
-                Profile.Instance.MsgPrint(
+                SaveGame.Instance.MsgPrint(
                     $"A terrible black aura tries to surround your weapon, but your {itemName} resists the effects!");
             }
             else
             {
                 // Completely remake the item into a shattered weapon
-                Profile.Instance.MsgPrint($"A terrible black aura blasts your {itemName}!");
+                SaveGame.Instance.MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifactIndex = 0;
                 item.RareItemTypeIndex = Enumerations.RareItemType.WeaponShattered;
                 item.BonusToHit = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
@@ -8750,22 +8881,22 @@ namespace Cthangband
             // If we don't know about the traps, we don't know what to disarm
             if (!item.IsKnown())
             {
-                Profile.Instance.MsgPrint("I don't see any traps.");
+                SaveGame.Instance.MsgPrint("I don't see any traps.");
             }
             // If it has no traps there's nothing to disarm
             else if (item.TypeSpecificValue <= 0)
             {
-                Profile.Instance.MsgPrint("The chest is not trapped.");
+                SaveGame.Instance.MsgPrint("The chest is not trapped.");
             }
             // If it has a null trap then there's nothing to disarm
             else if (GlobalData.ChestTraps[item.TypeSpecificValue] == 0)
             {
-                Profile.Instance.MsgPrint("The chest is not trapped.");
+                SaveGame.Instance.MsgPrint("The chest is not trapped.");
             }
             // If we made the skill roll then we disarmed it
             else if (Program.Rng.RandomLessThan(100) < j)
             {
-                Profile.Instance.MsgPrint("You have disarmed the chest.");
+                SaveGame.Instance.MsgPrint("You have disarmed the chest.");
                 Player.GainExperience(item.TypeSpecificValue);
                 item.TypeSpecificValue = 0 - item.TypeSpecificValue;
             }
@@ -8773,11 +8904,11 @@ namespace Cthangband
             else if (i > 5 && Program.Rng.DieRoll(i) > 5)
             {
                 more = true;
-                Profile.Instance.MsgPrint("You failed to disarm the chest.");
+                SaveGame.Instance.MsgPrint("You failed to disarm the chest.");
             }
             else
             {
-                Profile.Instance.MsgPrint("You set off a trap!");
+                SaveGame.Instance.MsgPrint("You set off a trap!");
                 ChestTrap(y, x, itemIndex);
             }
             return more;
@@ -8817,7 +8948,7 @@ namespace Cthangband
             // Check the modified disarm skill
             if (Program.Rng.RandomLessThan(100) < j)
             {
-                Profile.Instance.MsgPrint($"You have disarmed the {trapName}.");
+                SaveGame.Instance.MsgPrint($"You have disarmed the {trapName}.");
                 Player.GainExperience(power);
                 tile.TileFlags.Clear(GridTile.PlayerMemorised);
                 Level.RevertTileToBackground(y, x);
@@ -8826,12 +8957,12 @@ namespace Cthangband
             // We might set the trap off if we failed to disarm it
             else if (i > 5 && Program.Rng.DieRoll(i) > 5)
             {
-                Profile.Instance.MsgPrint($"You failed to disarm the {trapName}.");
+                SaveGame.Instance.MsgPrint($"You failed to disarm the {trapName}.");
                 more = true;
             }
             else
             {
-                Profile.Instance.MsgPrint($"You set off the {trapName}!");
+                SaveGame.Instance.MsgPrint($"You set off the {trapName}!");
                 MovePlayer(dir, true);
             }
             return more;
@@ -8875,7 +9006,7 @@ namespace Cthangband
                     break;
 
                 default:
-                    Profile.Instance.MsgPrint("Tried to channel an unknown object type!");
+                    SaveGame.Instance.MsgPrint("Tried to channel an unknown object type!");
                     return false;
             }
             // Always cost at least 1 mana
@@ -8886,13 +9017,13 @@ namespace Cthangband
             // Spend the mana if we can
             if (cost <= Player.Mana)
             {
-                Profile.Instance.MsgPrint("You channel mana to power the effect.");
+                SaveGame.Instance.MsgPrint("You channel mana to power the effect.");
                 Player.Mana -= cost;
                 Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                 return true;
             }
             // Use some mana in the attempt, even if we failed
-            Profile.Instance.MsgPrint("You mana is insufficient to power the effect.");
+            SaveGame.Instance.MsgPrint("You mana is insufficient to power the effect.");
             Player.Mana -= Program.Rng.RandomLessThan(Player.Mana / 2);
             Player.RedrawNeeded.Set(RedrawFlag.PrMana);
             return false;
@@ -8974,7 +9105,7 @@ namespace Cthangband
                 rumor = $"They say that {d.Name} has a relative difficulty of {d.Offset}.";
                 d.KnownOffset = true;
             }
-            Profile.Instance.MsgPrint(rumor);
+            SaveGame.Instance.MsgPrint(rumor);
         }
 
         /// <summary>
@@ -9119,7 +9250,7 @@ namespace Cthangband
                     else if (Level.GridPassable(Player.MapY, Player.MapX) ||
                              (monster.Race.Flags2 & MonsterFlag2.PassWall) != 0)
                     {
-                        Profile.Instance.MsgPrint($"You push past {monsterName}.");
+                        SaveGame.Instance.MsgPrint($"You push past {monsterName}.");
                         monster.MapY = Player.MapY;
                         monster.MapX = Player.MapX;
                         Level.Grid[Player.MapY][Player.MapX].MonsterIndex = tile.MonsterIndex;
@@ -9129,7 +9260,7 @@ namespace Cthangband
                     // If we couldn't push past it, tell us it was in the way
                     else
                     {
-                        Profile.Instance.MsgPrint($"{monsterName} is in your way!");
+                        SaveGame.Instance.MsgPrint($"{monsterName} is in your way!");
                         EnergyUse = 0;
                         return;
                     }
@@ -9158,25 +9289,25 @@ namespace Cthangband
                 {
                     if (tile.FeatureType.Name == "Rubble")
                     {
-                        Profile.Instance.MsgPrint("You feel some rubble blocking your way.");
+                        SaveGame.Instance.MsgPrint("You feel some rubble blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else if (tile.FeatureType.Category == FloorTileTypeCategory.Tree)
                     {
-                        Profile.Instance.MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
+                        SaveGame.Instance.MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else if (tile.FeatureType.Name == "Pillar")
                     {
-                        Profile.Instance.MsgPrint("You feel a pillar blocking your way.");
+                        SaveGame.Instance.MsgPrint("You feel a pillar blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else if (tile.FeatureType.Name.Contains("Water"))
                     {
-                        Profile.Instance.MsgPrint("Your way seems to be blocked by water.");
+                        SaveGame.Instance.MsgPrint("Your way seems to be blocked by water.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
@@ -9186,7 +9317,7 @@ namespace Cthangband
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                         {
                             CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
-                            Profile.Instance.MsgPrint($"You stumble out of {CurTown.Name}.");
+                            SaveGame.Instance.MsgPrint($"You stumble out of {CurTown.Name}.");
                         }
                         if (newY == 0)
                         {
@@ -9211,7 +9342,7 @@ namespace Cthangband
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                         {
                             CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
-                            Profile.Instance.MsgPrint($"You stumble into {CurTown.Name}.");
+                            SaveGame.Instance.MsgPrint($"You stumble into {CurTown.Name}.");
                             CurTown.Visited = true;
                         }
                         // We'll need a new level
@@ -9221,13 +9352,13 @@ namespace Cthangband
                     }
                     else if (tile.FeatureType.IsClosedDoor)
                     {
-                        Profile.Instance.MsgPrint("You feel a closed door blocking your way.");
+                        SaveGame.Instance.MsgPrint("You feel a closed door blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
+                        SaveGame.Instance.MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
@@ -9237,7 +9368,7 @@ namespace Cthangband
                 {
                     if (tile.FeatureType.Name == "Rubble")
                     {
-                        Profile.Instance.MsgPrint("There is rubble blocking your way.");
+                        SaveGame.Instance.MsgPrint("There is rubble blocking your way.");
                         if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations != 0))
                         {
                             EnergyUse = 0;
@@ -9245,19 +9376,19 @@ namespace Cthangband
                     }
                     else if (tile.FeatureType.Category == FloorTileTypeCategory.Tree)
                     {
-                        Profile.Instance.MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
+                        SaveGame.Instance.MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else if (tile.FeatureType.Name == "Pillar")
                     {
-                        Profile.Instance.MsgPrint("There is a pillar blocking your way.");
+                        SaveGame.Instance.MsgPrint("There is a pillar blocking your way.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
                     else if (tile.FeatureType.Name.Contains("Water"))
                     {
-                        Profile.Instance.MsgPrint("You cannot swim.");
+                        SaveGame.Instance.MsgPrint("You cannot swim.");
                         tile.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(newY, newX);
                     }
@@ -9267,7 +9398,7 @@ namespace Cthangband
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                         {
                             CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
-                            Profile.Instance.MsgPrint($"You leave {CurTown.Name}.");
+                            SaveGame.Instance.MsgPrint($"You leave {CurTown.Name}.");
                             CurTown.Visited = true;
                         }
                         if (newY == 0)
@@ -9293,7 +9424,7 @@ namespace Cthangband
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                         {
                             CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
-                            Profile.Instance.MsgPrint($"You enter {CurTown.Name}.");
+                            SaveGame.Instance.MsgPrint($"You enter {CurTown.Name}.");
                             CurTown.Visited = true;
                         }
                         // We need a new map
@@ -9311,7 +9442,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
+                        SaveGame.Instance.MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
                         if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations != 0))
                         {
                             EnergyUse = 0;
@@ -9377,7 +9508,7 @@ namespace Cthangband
             else if (tile.FeatureType.Name == "Invis")
             {
                 Disturb(false);
-                Profile.Instance.MsgPrint("You found a trap!");
+                SaveGame.Instance.MsgPrint("You found a trap!");
                 Level.PickTrap(Player.MapY, Player.MapX);
                 StepOnTrap();
             }
@@ -9428,14 +9559,14 @@ namespace Cthangband
                 // See if we succeeded
                 if (Program.Rng.RandomLessThan(100) < j)
                 {
-                    Profile.Instance.MsgPrint("You have picked the lock.");
+                    SaveGame.Instance.MsgPrint("You have picked the lock.");
                     Player.GainExperience(1);
                     openedSuccessfully = true;
                 }
                 else
                 {
                     more = true;
-                    Profile.Instance.MsgPrint("You failed to pick the lock.");
+                    SaveGame.Instance.MsgPrint("You failed to pick the lock.");
                 }
             }
             // If we successfully opened it, set of any traps and then actually open the chest
@@ -9462,7 +9593,7 @@ namespace Cthangband
             // Some doors are simply jammed
             if (tile.FeatureType.Name.Contains("Jammed"))
             {
-                Profile.Instance.MsgPrint("The door appears to be stuck.");
+                SaveGame.Instance.MsgPrint("The door appears to be stuck.");
             }
             // Some doors are locked
             else if (tile.FeatureType.Name != "LockedDoor0")
@@ -9489,7 +9620,7 @@ namespace Cthangband
                 // Check if we succeeded in opening it
                 if (Program.Rng.RandomLessThan(100) < j)
                 {
-                    Profile.Instance.MsgPrint("You have picked the lock.");
+                    SaveGame.Instance.MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
                     Gui.PlaySound(SoundEffect.LockpickSuccess);
@@ -9498,7 +9629,7 @@ namespace Cthangband
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You failed to pick the lock.");
+                    SaveGame.Instance.MsgPrint("You failed to pick the lock.");
                     more = true;
                 }
             }
@@ -9531,7 +9662,7 @@ namespace Cthangband
                 // We always pick up gold
                 if (item.Category == ItemCategory.Gold)
                 {
-                    Profile.Instance.MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
+                    SaveGame.Instance.MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                     Player.Gold += item.TypeSpecificValue;
                     Player.RedrawNeeded.Set(RedrawFlag.PrGold);
                     Level.DeleteObjectIdx(thisItemIndex);
@@ -9541,18 +9672,18 @@ namespace Cthangband
                     // If we're not interested, simply say that we see it
                     if (!pickup)
                     {
-                        Profile.Instance.MsgPrint($"You see {itemName}.");
+                        SaveGame.Instance.MsgPrint($"You see {itemName}.");
                     }
                     // If it's worthless, stomp on it
                     else if (item.Stompable())
                     {
                         Level.DeleteObjectIdx(thisItemIndex);
-                        Profile.Instance.MsgPrint($"You stomp on {itemName}.");
+                        SaveGame.Instance.MsgPrint($"You stomp on {itemName}.");
                     }
                     // If we can't carry the item, let us know
                     else if (!Player.Inventory.InvenCarryOkay(item))
                     {
-                        Profile.Instance.MsgPrint($"You have no room for {itemName}.");
+                        SaveGame.Instance.MsgPrint($"You have no room for {itemName}.");
                     }
                     else
                     {
@@ -9560,7 +9691,7 @@ namespace Cthangband
                         int slot = Player.Inventory.InvenCarry(item, false);
                         item = Player.Inventory[slot];
                         itemName = item.Description(true, 3);
-                        Profile.Instance.MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
+                        SaveGame.Instance.MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
                         Level.DeleteObjectIdx(thisItemIndex);
                     }
                 }
@@ -9614,13 +9745,13 @@ namespace Cthangband
             if ((monster.Mind & Constants.SmFriendly) != 0 &&
                 !(Player.TimedStun != 0 || Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible))
             {
-                Profile.Instance.MsgPrint($"You stop to avoid hitting {monsterName}.");
+                SaveGame.Instance.MsgPrint($"You stop to avoid hitting {monsterName}.");
                 return;
             }
             // Can't attack if we're afraid
             if (Player.TimedFear != 0)
             {
-                Profile.Instance.MsgPrint(monster.IsVisible
+                SaveGame.Instance.MsgPrint(monster.IsVisible
                     ? $"You are too afraid to attack {monsterName}!"
                     : "There is something scary in your way!");
                 return;
@@ -9644,17 +9775,17 @@ namespace Cthangband
                     {
                         if (!((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands()))
                         {
-                            Profile.Instance.MsgPrint($"You hit {monsterName}.");
+                            SaveGame.Instance.MsgPrint($"You hit {monsterName}.");
                         }
                     }
                     else if (backstab)
                     {
-                        Profile.Instance.MsgPrint(
+                        SaveGame.Instance.MsgPrint(
                             $"You cruelly stab the helpless, sleeping {monster.Race.Name}!");
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint(
+                        SaveGame.Instance.MsgPrint(
                             $"You backstab the fleeing {monster.Race.Name}!");
                     }
                     // Default to 1 damage for an unarmed hit
@@ -9732,12 +9863,12 @@ namespace Cthangband
                         {
                             if ((race.Flags1 & MonsterFlag1.Male) != 0)
                             {
-                                Profile.Instance.MsgPrint($"You hit {monsterName} in the groin with your knee!");
+                                SaveGame.Instance.MsgPrint($"You hit {monsterName} in the groin with your knee!");
                                 specialEffect = Constants.MaKnee;
                             }
                             else
                             {
-                                Profile.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
+                                SaveGame.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                             }
                         }
                         // If it was an ankle kick and the monster has legs, slow it
@@ -9746,12 +9877,12 @@ namespace Cthangband
                             if ((race.Flags1 & MonsterFlag1.NeverMove) == 0 ||
                                 "UjmeEv$,DdsbBFIJQSXclnw!=?".Contains(race.Character.ToString()))
                             {
-                                Profile.Instance.MsgPrint($"You kick {monsterName} in the ankle.");
+                                SaveGame.Instance.MsgPrint($"You kick {monsterName} in the ankle.");
                                 specialEffect = Constants.MaSlow;
                             }
                             else
                             {
-                                Profile.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
+                                SaveGame.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                             }
                         }
                         // Have a chance of stunning based on the martial arts attack type chosen
@@ -9761,14 +9892,14 @@ namespace Cthangband
                             {
                                 stunEffect = (martialArtsAttack.Effect / 2) + Program.Rng.DieRoll(martialArtsAttack.Effect / 2);
                             }
-                            Profile.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
+                            SaveGame.Instance.MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                         }
                         // It might be a critical hit
                         totalDamage = PlayerCriticalMelee(Player.Level * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                         // Make a groin attack into a stunning attack
                         if (specialEffect == Constants.MaKnee && totalDamage + Player.DamageBonus < monster.Health)
                         {
-                            Profile.Instance.MsgPrint($"{monsterName} moans in agony!");
+                            SaveGame.Instance.MsgPrint($"{monsterName} moans in agony!");
                             stunEffect = 7 + Program.Rng.DieRoll(13);
                             resistStun /= 3;
                         }
@@ -9778,7 +9909,7 @@ namespace Cthangband
                             if ((race.Flags1 & MonsterFlag1.Unique) == 0 && Program.Rng.DieRoll(Player.Level) > race.Level &&
                                 monster.Speed > 60)
                             {
-                                Profile.Instance.MsgPrint($"{monsterName} starts limping slower.");
+                                SaveGame.Instance.MsgPrint($"{monsterName} starts limping slower.");
                                 monster.Speed -= 10;
                             }
                         }
@@ -9787,7 +9918,7 @@ namespace Cthangband
                         {
                             if (Player.Level > Program.Rng.DieRoll(race.Level + resistStun + 10))
                             {
-                                Profile.Instance.MsgPrint(monster.StunLevel != 0
+                                SaveGame.Instance.MsgPrint(monster.StunLevel != 0
                                     ? $"{monsterName} is more stunned."
                                     : $"{monsterName} is stunned.");
                                 monster.StunLevel += stunEffect;
@@ -9822,7 +9953,7 @@ namespace Cthangband
                         if (vorpalCut)
                         {
                             int stepK = totalDamage;
-                            Profile.Instance.MsgPrint(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade
+                            SaveGame.Instance.MsgPrint(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade
                                 ? "Your Vorpal Blade goes snicker-snack!"
                                 : $"Your weapon cuts deep into {monsterName}!");
                             do
@@ -9852,7 +9983,7 @@ namespace Cthangband
                     // Hitting a friend gets it angry
                     if ((monster.Mind & Constants.SmFriendly) != 0)
                     {
-                        Profile.Instance.MsgPrint($"{monsterName} gets angry!");
+                        SaveGame.Instance.MsgPrint($"{monsterName} gets angry!");
                         monster.Mind &= ~Constants.SmFriendly;
                     }
                     // The monster might have an aura that hurts the player
@@ -9877,7 +10008,7 @@ namespace Cthangband
                                 }
                                 if (drainMsg)
                                 {
-                                    Profile.Instance.MsgPrint($"Your weapon drains life from {monsterName}!");
+                                    SaveGame.Instance.MsgPrint($"Your weapon drains life from {monsterName}!");
                                 }
                                 Player.RestoreHealth(drainHeal);
                             }
@@ -9890,7 +10021,7 @@ namespace Cthangband
                         Player.HasConfusingTouch = false;
                         if (!chaosEffect)
                         {
-                            Profile.Instance.MsgPrint("Your hands stop glowing.");
+                            SaveGame.Instance.MsgPrint("Your hands stop glowing.");
                         }
                         // Some monsters are immune
                         if ((race.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
@@ -9899,24 +10030,24 @@ namespace Cthangband
                             {
                                 race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
                             }
-                            Profile.Instance.MsgPrint($"{monsterName} is unaffected.");
+                            SaveGame.Instance.MsgPrint($"{monsterName} is unaffected.");
                         }
                         // Even if not immune, the monster might resist
                         else if (Program.Rng.RandomLessThan(100) < race.Level)
                         {
-                            Profile.Instance.MsgPrint($"{monsterName} is unaffected.");
+                            SaveGame.Instance.MsgPrint($"{monsterName} is unaffected.");
                         }
                         // It didn't resist, so it's confused
                         else
                         {
-                            Profile.Instance.MsgPrint($"{monsterName} appears confused.");
+                            SaveGame.Instance.MsgPrint($"{monsterName} appears confused.");
                             monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(Player.Level) / 5);
                         }
                     }
                     // A chaos blade might teleport the monster away
                     else if (chaosEffect && Program.Rng.DieRoll(2) == 1)
                     {
-                        Profile.Instance.MsgPrint($"{monsterName} disappears!");
+                        SaveGame.Instance.MsgPrint($"{monsterName} disappears!");
                         TeleportAway(tile.MonsterIndex, 50);
                         // Can't have any more attacks because the monster isn't here any more
                         noExtra = true;
@@ -9932,9 +10063,9 @@ namespace Cthangband
                             int newRaceIndex = PolymorphMonster(monster.Race);
                             if (newRaceIndex != monster.Race.Index)
                             {
-                                Profile.Instance.MsgPrint($"{monsterName} changes!");
+                                SaveGame.Instance.MsgPrint($"{monsterName} changes!");
                                 Level.Monsters.DeleteMonsterByIndex(tile.MonsterIndex, true);
-                                MonsterRace newRace = Profile.Instance.MonsterRaces[newRaceIndex];
+                                MonsterRace newRace = SaveGame.Instance.MonsterRaces[newRaceIndex];
                                 Level.Monsters.PlaceMonsterAux(y, x, newRace, false, false, false);
                                 monster = Level.Monsters[tile.MonsterIndex];
                                 monsterName = monster.MonsterDesc(0);
@@ -9944,7 +10075,7 @@ namespace Cthangband
                         // Monster was immune to polymorph
                         else
                         {
-                            Profile.Instance.MsgPrint($"{monsterName} is unaffected.");
+                            SaveGame.Instance.MsgPrint($"{monsterName} is unaffected.");
                         }
                     }
                 }
@@ -9952,7 +10083,7 @@ namespace Cthangband
                 else
                 {
                     Gui.PlaySound(SoundEffect.Miss);
-                    Profile.Instance.MsgPrint($"You miss {monsterName}.");
+                    SaveGame.Instance.MsgPrint($"You miss {monsterName}.");
                 }
             }
             // Only make extra attacks if the monster is still there
@@ -9966,7 +10097,7 @@ namespace Cthangband
             if (fear && monster.IsVisible && !noExtra)
             {
                 Gui.PlaySound(SoundEffect.MonsterFlees);
-                Profile.Instance.MsgPrint($"{monsterName} flees in terror!");
+                SaveGame.Instance.MsgPrint($"{monsterName} flees in terror!");
             }
             if (doQuake)
             {
@@ -10019,17 +10150,17 @@ namespace Cthangband
                 int k = weight + Program.Rng.DieRoll(500);
                 if (k < 500)
                 {
-                    Profile.Instance.MsgPrint("It was a good hit!");
+                    SaveGame.Instance.MsgPrint("It was a good hit!");
                     damage = (2 * damage) + 5;
                 }
                 else if (k < 1000)
                 {
-                    Profile.Instance.MsgPrint("It was a great hit!");
+                    SaveGame.Instance.MsgPrint("It was a great hit!");
                     damage = (2 * damage) + 10;
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("It was a superb hit!");
+                    SaveGame.Instance.MsgPrint("It was a superb hit!");
                     damage = (3 * damage) + 15;
                 }
             }
@@ -10050,14 +10181,14 @@ namespace Cthangband
                 case PotionType.Water:
                 case PotionType.AppleJuice:
                     {
-                        Profile.Instance.MsgPrint("You feel less thirsty.");
+                        SaveGame.Instance.MsgPrint("You feel less thirsty.");
                         identified = true;
                         break;
                     }
                 // Slime mold juice has a random effect (calling this function again recusively)
                 case PotionType.SlimeMold:
                     {
-                        Profile.Instance.MsgPrint("That tastes awful.");
+                        SaveGame.Instance.MsgPrint("That tastes awful.");
                         PotionEffect(RandomPotion());
                         identified = true;
                         break;
@@ -10074,7 +10205,7 @@ namespace Cthangband
                 // Salt water makes you vomit, but gets rid of poison
                 case PotionType.SaltWater:
                     {
-                        Profile.Instance.MsgPrint("The saltiness makes you vomit!");
+                        SaveGame.Instance.MsgPrint("The saltiness makes you vomit!");
                         Player.SetFood(Constants.PyFoodStarve - 1);
                         Player.SetTimedPoison(0);
                         Player.SetTimedParalysis(Player.TimedParalysis + 4);
@@ -10089,7 +10220,7 @@ namespace Cthangband
                             // Hagarg Ryonis can protect you against poison
                             if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
-                                Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else if (Player.SetTimedPoison(Player.TimedPoison + Program.Rng.RandomLessThan(15) + 10))
                             {
@@ -10142,8 +10273,8 @@ namespace Cthangband
                                 }
                                 TeleportPlayer(100);
                                 Level.WizDark();
-                                Profile.Instance.MsgPrint("You wake up somewhere with a sore head...");
-                                Profile.Instance.MsgPrint("You can't remember a thing, or how you got here!");
+                                SaveGame.Instance.MsgPrint("You wake up somewhere with a sore head...");
+                                SaveGame.Instance.MsgPrint("You can't remember a thing, or how you got here!");
                             }
                         }
                         break;
@@ -10165,7 +10296,7 @@ namespace Cthangband
                     {
                         if (!Player.HasHoldLife && Player.ExperiencePoints > 0)
                         {
-                            Profile.Instance.MsgPrint("You feel your memories fade.");
+                            SaveGame.Instance.MsgPrint("You feel your memories fade.");
                             Player.LoseExperience(Player.ExperiencePoints / 4);
                             identified = true;
                         }
@@ -10175,7 +10306,7 @@ namespace Cthangband
                 // sustains and divine protection
                 case PotionType.Ruination:
                     {
-                        Profile.Instance.MsgPrint("Your nerves and muscles feel weak and lifeless!");
+                        SaveGame.Instance.MsgPrint("Your nerves and muscles feel weak and lifeless!");
                         Player.TakeHit(Program.Rng.DiceRoll(10, 10), "a potion of Ruination");
                         Player.DecreaseAbilityScore(Ability.Dexterity, 25, true);
                         Player.DecreaseAbilityScore(Ability.Wisdom, 25, true);
@@ -10243,7 +10374,7 @@ namespace Cthangband
                 // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
                 case PotionType.Detonations:
                     {
-                        Profile.Instance.MsgPrint("Massive explosions rupture your body!");
+                        SaveGame.Instance.MsgPrint("Massive explosions rupture your body!");
                         Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
                         Player.SetTimedStun(Player.TimedStun + 75);
                         Player.SetTimedBleeding(Player.TimedBleeding + 5000);
@@ -10253,7 +10384,7 @@ namespace Cthangband
                 // Iocaine simply does 5000 damage
                 case PotionType.Death:
                     {
-                        Profile.Instance.MsgPrint("A feeling of Death flows through your body.");
+                        SaveGame.Instance.MsgPrint("A feeling of Death flows through your body.");
                         Player.TakeHit(5000, "a potion of Death");
                         identified = true;
                         break;
@@ -10499,7 +10630,7 @@ namespace Cthangband
                 // cures blindness, confusion, stun, poison, and bleeding
                 case PotionType.Life:
                     {
-                        Profile.Instance.MsgPrint("You feel life flow through your body!");
+                        SaveGame.Instance.MsgPrint("You feel life flow through your body!");
                         Player.RestoreLevel();
                         Player.RestoreHealth(5000);
                         Player.SetTimedPoison(0);
@@ -10524,7 +10655,7 @@ namespace Cthangband
                         {
                             Player.Mana = Player.MaxMana;
                             Player.FractionalMana = 0;
-                            Profile.Instance.MsgPrint("Your feel your head clear.");
+                            SaveGame.Instance.MsgPrint("Your feel your head clear.");
                             Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                             identified = true;
                         }
@@ -10679,7 +10810,7 @@ namespace Cthangband
                 // Enlightenment shows you the whole level
                 case PotionType.Enlightenment:
                     {
-                        Profile.Instance.MsgPrint("An image of your surroundings forms in your mind...");
+                        SaveGame.Instance.MsgPrint("An image of your surroundings forms in your mind...");
                         Level.WizLight();
                         identified = true;
                         break;
@@ -10688,8 +10819,8 @@ namespace Cthangband
                 // wisdom, identifies all your items, and detects everything
                 case PotionType.StarEnlightenment:
                     {
-                        Profile.Instance.MsgPrint("You begin to feel more enlightened...");
-                        Profile.Instance.MsgPrint(null);
+                        SaveGame.Instance.MsgPrint("You begin to feel more enlightened...");
+                        SaveGame.Instance.MsgPrint(null);
                         Level.WizLight();
                         Player.TryIncreasingAbilityScore(Ability.Intelligence);
                         Player.TryIncreasingAbilityScore(Ability.Wisdom);
@@ -10707,8 +10838,8 @@ namespace Cthangband
                 // Self knowledge gives you information about yourself
                 case PotionType.SelfKnowledge:
                     {
-                        Profile.Instance.MsgPrint("You begin to know yourself a little better...");
-                        Profile.Instance.MsgPrint(null);
+                        SaveGame.Instance.MsgPrint("You begin to know yourself a little better...");
+                        SaveGame.Instance.MsgPrint(null);
                         SelfKnowledge();
                         identified = true;
                         break;
@@ -10724,7 +10855,7 @@ namespace Cthangband
                             {
                                 ee = 100000;
                             }
-                            Profile.Instance.MsgPrint("You feel more experienced.");
+                            SaveGame.Instance.MsgPrint("You feel more experienced.");
                             Player.GainExperience(ee);
                             identified = true;
                         }
@@ -10788,7 +10919,7 @@ namespace Cthangband
                         Player.RerollHitPoints();
                         if (Player.Dna.HasMutations)
                         {
-                            Profile.Instance.MsgPrint("You are cured of all mutations.");
+                            SaveGame.Instance.MsgPrint("You are cured of all mutations.");
                             Player.Dna.LoseAllMutations();
                             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                             HandleStuff();
@@ -10796,7 +10927,7 @@ namespace Cthangband
                         if (Player.RaceIndex != Player.RaceIndexAtBirth)
                         {
                             var oldRaceName = Race.RaceInfo[Player.RaceIndexAtBirth].Title;
-                            Profile.Instance.MsgPrint($"You feel more {oldRaceName} again.");
+                            SaveGame.Instance.MsgPrint($"You feel more {oldRaceName} again.");
                             Player.ChangeRace(Player.RaceIndexAtBirth);
                             SaveGame.Instance.Level.RedrawSingleLocation(Player.MapY, Player.MapX);
                         }
@@ -11019,7 +11150,7 @@ namespace Cthangband
                 case 2:
                     {
                         // Decrease all the players ability scores, bypassing sustain and divine protection
-                        Profile.Instance.MsgPrint("You are surrounded by a malignant aura.");
+                        SaveGame.Instance.MsgPrint("You are surrounded by a malignant aura.");
                         Player.DecreaseAbilityScore(Ability.Strength, 50, true);
                         Player.DecreaseAbilityScore(Ability.Intelligence, 50, true);
                         Player.DecreaseAbilityScore(Ability.Wisdom, 50, true);
@@ -11035,7 +11166,7 @@ namespace Cthangband
                 case 3:
                     {
                         // Dispel monsters
-                        Profile.Instance.MsgPrint("You are surrounded by a powerful aura.");
+                        SaveGame.Instance.MsgPrint("You are surrounded by a powerful aura.");
                         DispelMonsters(1000);
                         break;
                     }
@@ -11072,7 +11203,7 @@ namespace Cthangband
                 // Check if we can actually run in that direction
                 if (_autoNavigator.SeeWall(direction, Player.MapY, Player.MapX))
                 {
-                    Profile.Instance.MsgPrint("You cannot run in that direction.");
+                    SaveGame.Instance.MsgPrint("You cannot run in that direction.");
                     Disturb(false);
                     return;
                 }
@@ -11110,7 +11241,7 @@ namespace Cthangband
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to rustproof.");
+                    SaveGame.Instance.MsgPrint("You have nothing to rustproof.");
                 }
                 return;
             }
@@ -11125,12 +11256,12 @@ namespace Cthangband
             {
                 your = itemIndex > 0 ? "Your" : "The";
                 s = item.Count > 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"{your} {itenName} look{s} as good as new!");
+                SaveGame.Instance.MsgPrint($"{your} {itenName} look{s} as good as new!");
                 item.BonusArmourClass = 0;
             }
             your = itemIndex > 0 ? "Your" : "The";
             s = item.Count > 1 ? "are" : "is";
-            Profile.Instance.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
+            SaveGame.Instance.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
         }
 
         /// <summary>
@@ -11164,13 +11295,13 @@ namespace Cthangband
                         {
                             // Pick a random trap to replace the undetected one with
                             Level.PickTrap(y, x);
-                            Profile.Instance.MsgPrint("You have found a trap.");
+                            SaveGame.Instance.MsgPrint("You have found a trap.");
                             Disturb(false);
                         }
                         if (tile.FeatureType.Name == "SecretDoor")
                         {
                             // Replace the secret door with a visible door
-                            Profile.Instance.MsgPrint("You have found a secret door.");
+                            SaveGame.Instance.MsgPrint("You have found a secret door.");
                             Player.GainExperience(1);
                             Level.ReplaceSecretDoor(y, x);
                             Disturb(false);
@@ -11197,7 +11328,7 @@ namespace Cthangband
                             // It was a trapped chest - if we didn't already know that then let us know
                             if (!item.IsKnown())
                             {
-                                Profile.Instance.MsgPrint("You have discovered a trap on the chest!");
+                                SaveGame.Instance.MsgPrint("You have discovered a trap on the chest!");
                                 item.BecomeKnown();
                                 Disturb(false);
                             }
@@ -11221,7 +11352,7 @@ namespace Cthangband
             // Can't summon something if we're already standing on something
             if (Level.Grid[Player.MapY][Player.MapX].ItemIndex != 0)
             {
-                Profile.Instance.MsgPrint("You can't fetch when you're already standing on something.");
+                SaveGame.Instance.MsgPrint("You can't fetch when you're already standing on something.");
                 return;
             }
             TargetEngine targetEngine = new TargetEngine(Player, Level);
@@ -11233,14 +11364,14 @@ namespace Cthangband
                 // Check the range
                 if (Level.Distance(Player.MapY, Player.MapX, targetY, targetX) > Constants.MaxRange)
                 {
-                    Profile.Instance.MsgPrint("You can't fetch something that far away!");
+                    SaveGame.Instance.MsgPrint("You can't fetch something that far away!");
                     return;
                 }
                 // Check the line of sight if needed
                 tile = Level.Grid[targetY][targetX];
                 if (requireLos && !Level.PlayerHasLosBold(targetY, targetX))
                 {
-                    Profile.Instance.MsgPrint("You have no direct line of sight to that location.");
+                    SaveGame.Instance.MsgPrint("You have no direct line of sight to that location.");
                     return;
                 }
             }
@@ -11266,7 +11397,7 @@ namespace Cthangband
             // Check the weight of the item
             if (item.Weight > maxWeight)
             {
-                Profile.Instance.MsgPrint("The object is too heavy.");
+                SaveGame.Instance.MsgPrint("The object is too heavy.");
                 return;
             }
             // Remove the entire item stack from the tile and move it to the player's tile
@@ -11296,11 +11427,11 @@ namespace Cthangband
             {
                 if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
                 {
-                    Profile.Instance.MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
+                    SaveGame.Instance.MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint($"You hack away at the {tile.FeatureType.Description}.");
+                    SaveGame.Instance.MsgPrint($"You hack away at the {tile.FeatureType.Description}.");
                     repeat = true;
                 }
             }
@@ -11309,34 +11440,34 @@ namespace Cthangband
             {
                 if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
                 {
-                    Profile.Instance.MsgPrint("You have broken down the pillar.");
+                    SaveGame.Instance.MsgPrint("You have broken down the pillar.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You hack away at the pillar.");
+                    SaveGame.Instance.MsgPrint("You hack away at the pillar.");
                     repeat = true;
                 }
             }
             // We can't tunnel through water
             else if (tile.FeatureType.Name == "Water")
             {
-                Profile.Instance.MsgPrint("The water fills up your tunnel as quickly as you dig!");
+                SaveGame.Instance.MsgPrint("The water fills up your tunnel as quickly as you dig!");
             }
             // Permanent features resist being tunneled through
             else if (tile.FeatureType.IsPermanent)
             {
-                Profile.Instance.MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
+                SaveGame.Instance.MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
             }
             // It's a wall, so we tunnel normally
             else if (tile.FeatureType.Name.Contains("Wall"))
             {
                 if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
                 {
-                    Profile.Instance.MsgPrint("You have finished the tunnel.");
+                    SaveGame.Instance.MsgPrint("You have finished the tunnel.");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You tunnel into the granite wall.");
+                    SaveGame.Instance.MsgPrint("You tunnel into the granite wall.");
                     repeat = true;
                 }
             }
@@ -11369,22 +11500,22 @@ namespace Cthangband
                     if (hasValue)
                     {
                         Level.PlaceGold(y, x);
-                        Profile.Instance.MsgPrint("You have found something!");
+                        SaveGame.Instance.MsgPrint("You have found something!");
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("You have finished the tunnel.");
+                        SaveGame.Instance.MsgPrint("You have finished the tunnel.");
                     }
                 }
                 // Tunnelling failed, so let us know
                 else if (isMagma)
                 {
-                    Profile.Instance.MsgPrint("You tunnel into the magma vein.");
+                    SaveGame.Instance.MsgPrint("You tunnel into the magma vein.");
                     repeat = true;
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You tunnel into the quartz vein.");
+                    SaveGame.Instance.MsgPrint("You tunnel into the quartz vein.");
                     repeat = true;
                 }
             }
@@ -11393,27 +11524,27 @@ namespace Cthangband
             {
                 if (Player.SkillDigging > Program.Rng.RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
                 {
-                    Profile.Instance.MsgPrint("You have removed the rubble.");
+                    SaveGame.Instance.MsgPrint("You have removed the rubble.");
                     // 10% chance of finding something
                     if (Program.Rng.RandomLessThan(100) < 10)
                     {
                         Level.PlaceObject(y, x, false, false);
                         if (Level.PlayerCanSeeBold(y, x))
                         {
-                            Profile.Instance.MsgPrint("You have found something!");
+                            SaveGame.Instance.MsgPrint("You have found something!");
                         }
                     }
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You dig in the rubble.");
+                    SaveGame.Instance.MsgPrint("You dig in the rubble.");
                     repeat = true;
                 }
             }
             // We don't recognise what we're tunnelling into, so just assume it's permanent
             else
             {
-                Profile.Instance.MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
+                SaveGame.Instance.MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
                 repeat = true;
                 Search();
             }
@@ -11457,7 +11588,7 @@ namespace Cthangband
                 case RaceId.Dwarf:
                     if (CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
                     {
-                        Profile.Instance.MsgPrint("You examine your surroundings.");
+                        SaveGame.Instance.MsgPrint("You examine your surroundings.");
                         DetectTraps();
                         DetectDoors();
                         DetectStairs();
@@ -11468,16 +11599,16 @@ namespace Cthangband
                     if (CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
                     {
                         Item item = new Item();
-                        item.AssignItemType(Profile.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
+                        item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
                         Level.DropNear(item, -1, Player.MapY, Player.MapX);
-                        Profile.Instance.MsgPrint("You cook some food.");
+                        SaveGame.Instance.MsgPrint("You cook some food.");
                     }
                     break;
                 // Gnomes can do a short-range teleport
                 case RaceId.Gnome:
                     if (CheckIfRacialPowerWorks(5, 5 + (playerLevel / 5), Ability.Intelligence, 12))
                     {
-                        Profile.Instance.MsgPrint("Blink!");
+                        SaveGame.Instance.MsgPrint("Blink!");
                         TeleportPlayer(10 + playerLevel);
                     }
                     break;
@@ -11485,7 +11616,7 @@ namespace Cthangband
                 case RaceId.HalfOrc:
                     if (CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, Player.ProfessionIndex == CharacterClass.Warrior ? 5 : 10))
                     {
-                        Profile.Instance.MsgPrint("You play tough.");
+                        SaveGame.Instance.MsgPrint("You play tough.");
                         Player.SetTimedFear(0);
                     }
                     break;
@@ -11493,7 +11624,7 @@ namespace Cthangband
                 case RaceId.HalfTroll:
                     if (CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, Player.ProfessionIndex == CharacterClass.Warrior ? 6 : 12))
                     {
-                        Profile.Instance.MsgPrint("RAAAGH!");
+                        SaveGame.Instance.MsgPrint("RAAAGH!");
                         Player.SetTimedFear(0);
                         Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(playerLevel));
                         Player.RestoreHealth(30);
@@ -11524,7 +11655,7 @@ namespace Cthangband
                     {
                         if (CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
                         {
-                            Profile.Instance.MsgPrint("You dream of a time of health and peace...");
+                            SaveGame.Instance.MsgPrint("You dream of a time of health and peace...");
                             Player.SetTimedPoison(0);
                             Player.SetTimedHallucinations(0);
                             Player.SetTimedStun(0);
@@ -11544,7 +11675,7 @@ namespace Cthangband
                     {
                         if (CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
                         {
-                            Profile.Instance.MsgPrint("You start walking around. Your surroundings change.");
+                            SaveGame.Instance.MsgPrint("You start walking around. Your surroundings change.");
                             DoCmdSaveGame(true);
                             NewLevelFlag = true;
                             CameFrom = LevelStart.StartRandom;
@@ -11555,7 +11686,7 @@ namespace Cthangband
                 case RaceId.TchoTcho:
                     if (CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
                     {
-                        Profile.Instance.MsgPrint("You carefully draw The Yellow Sign...");
+                        SaveGame.Instance.MsgPrint("You carefully draw The Yellow Sign...");
                         YellowSign();
                     }
                     break;
@@ -11563,7 +11694,7 @@ namespace Cthangband
                 case RaceId.HalfOgre:
                     if (CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, Player.ProfessionIndex == CharacterClass.Warrior ? 6 : 12))
                     {
-                        Profile.Instance.MsgPrint("Raaagh!");
+                        SaveGame.Instance.MsgPrint("Raaagh!");
                         Player.SetTimedFear(0);
                         Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(playerLevel));
                         Player.RestoreHealth(30);
@@ -11577,7 +11708,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You bash at a stone wall.");
+                        SaveGame.Instance.MsgPrint("You bash at a stone wall.");
                         WallToMud(direction);
                     }
                     break;
@@ -11585,7 +11716,7 @@ namespace Cthangband
                 case RaceId.HalfTitan:
                     if (CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
                     {
-                        Profile.Instance.MsgPrint("You examine your foes...");
+                        SaveGame.Instance.MsgPrint("You examine your foes...");
                         Probing();
                     }
                     break;
@@ -11597,7 +11728,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You throw a huge boulder.");
+                        SaveGame.Instance.MsgPrint("You throw a huge boulder.");
                         FireBolt(new ProjectMissile(), direction,
                             3 * Player.Level / 2);
                     }
@@ -11610,7 +11741,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You make a horrible scream!");
+                        SaveGame.Instance.MsgPrint("You make a horrible scream!");
                         FearMonster(direction, playerLevel);
                     }
                     break;
@@ -11622,7 +11753,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You spit acid.");
+                        SaveGame.Instance.MsgPrint("You spit acid.");
                         if (Player.Level < 25)
                         {
                             FireBolt(new ProjectAcid(), direction, playerLevel);
@@ -11642,7 +11773,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You throw a dart of poison.");
+                        SaveGame.Instance.MsgPrint("You throw a dart of poison.");
                         FireBolt(new ProjectPois(), direction, playerLevel);
                     }
                     break;
@@ -11650,7 +11781,7 @@ namespace Cthangband
                 case RaceId.Nibelung:
                     if (CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
                     {
-                        Profile.Instance.MsgPrint("You examine your surroundings.");
+                        SaveGame.Instance.MsgPrint("You examine your surroundings.");
                         DetectTraps();
                         DetectDoors();
                         DetectStairs();
@@ -11664,7 +11795,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You cast a magic missile.");
+                        SaveGame.Instance.MsgPrint("You cast a magic missile.");
                         FireBoltOrBeam(10, new ProjectMissile(),
                             direction, Program.Rng.DiceRoll(3 + ((playerLevel - 1) / 5), 4));
                     }
@@ -11783,7 +11914,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint($"You breathe {projectileDescription}.");
+                        SaveGame.Instance.MsgPrint($"You breathe {projectileDescription}.");
                         FireBall(projectile, direction, Player.Level * 2, -(Player.Level / 15) + 1);
                     }
                     break;
@@ -11795,7 +11926,7 @@ namespace Cthangband
                         {
                             break;
                         }
-                        Profile.Instance.MsgPrint("You concentrate and your eyes glow red...");
+                        SaveGame.Instance.MsgPrint("You concentrate and your eyes glow red...");
                         FireBolt(new ProjectPsi(), direction, playerLevel);
                     }
                     break;
@@ -11809,13 +11940,13 @@ namespace Cthangband
                         }
                         if (Player.Level >= 30)
                         {
-                            Profile.Instance.MsgPrint("You cast a ball of fire.");
+                            SaveGame.Instance.MsgPrint("You cast a ball of fire.");
                             FireBall(new ProjectFire(), direction, playerLevel,
                                 2);
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("You cast a bolt of fire.");
+                            SaveGame.Instance.MsgPrint("You cast a bolt of fire.");
                             FireBolt(new ProjectFire(), direction, playerLevel);
                         }
                     }
@@ -11832,7 +11963,7 @@ namespace Cthangband
                 case RaceId.Zombie:
                     if (CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
                     {
-                        Profile.Instance.MsgPrint("You attempt to restore your lost energies.");
+                        SaveGame.Instance.MsgPrint("You attempt to restore your lost energies.");
                         Player.RestoreLevel();
                     }
                     break;
@@ -11849,10 +11980,10 @@ namespace Cthangband
                         GridTile tile = Level.Grid[y][x];
                         if (tile.MonsterIndex == 0)
                         {
-                            Profile.Instance.MsgPrint("You bite into thin air!");
+                            SaveGame.Instance.MsgPrint("You bite into thin air!");
                             break;
                         }
-                        Profile.Instance.MsgPrint("You grin and bare your fangs...");
+                        SaveGame.Instance.MsgPrint("You grin and bare your fangs...");
                         int dummy = playerLevel + (Program.Rng.DieRoll(playerLevel) * Math.Max(1, playerLevel / 10));
                         if (DrainLife(direction, dummy))
                         {
@@ -11862,7 +11993,7 @@ namespace Cthangband
                             }
                             else
                             {
-                                Profile.Instance.MsgPrint("You were not hungry.");
+                                SaveGame.Instance.MsgPrint("You were not hungry.");
                             }
                             dummy = Player.Food + Math.Min(5000, 100 * dummy);
                             if (Player.Food < Constants.PyFoodMax)
@@ -11872,7 +12003,7 @@ namespace Cthangband
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("Yechh. That tastes foul.");
+                            SaveGame.Instance.MsgPrint("Yechh. That tastes foul.");
                         }
                     }
                     break;
@@ -11880,7 +12011,7 @@ namespace Cthangband
                 case RaceId.Spectre:
                     if (CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
                     {
-                        Profile.Instance.MsgPrint("You emit an eldritch howl!");
+                        SaveGame.Instance.MsgPrint("You emit an eldritch howl!");
                         if (!targetEngine.GetDirectionWithAim(out direction))
                         {
                             break;
@@ -11892,7 +12023,7 @@ namespace Cthangband
                 case RaceId.Sprite:
                     if (CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
                     {
-                        Profile.Instance.MsgPrint("You throw some magic dust...");
+                        SaveGame.Instance.MsgPrint("You throw some magic dust...");
                         if (Player.Level < 25)
                         {
                             SleepMonstersTouch();
@@ -11905,7 +12036,7 @@ namespace Cthangband
                     break;
                 // Other races don't have powers
                 default:
-                    Profile.Instance.MsgPrint("This race has no bonus power.");
+                    SaveGame.Instance.MsgPrint("This race has no bonus power.");
                     EnergyUse = 0;
                     break;
             }
@@ -11929,7 +12060,7 @@ namespace Cthangband
             // If it's jammed we'll need to bash it
             if (tile.FeatureType.Name.Contains("Jammed"))
             {
-                Profile.Instance.MsgPrint("The door appears to be stuck.");
+                SaveGame.Instance.MsgPrint("The door appears to be stuck.");
             }
             // Most doors are locked, so try to pick the lock
             else if (!tile.FeatureType.Name.Contains("0"))
@@ -11954,7 +12085,7 @@ namespace Cthangband
                 // See if we succeed
                 if (Program.Rng.RandomLessThan(100) < chance)
                 {
-                    Profile.Instance.MsgPrint("You have picked the lock.");
+                    SaveGame.Instance.MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
                     Gui.PlaySound(SoundEffect.LockpickSuccess);
@@ -11963,7 +12094,7 @@ namespace Cthangband
                 // If we failed, simply let us know
                 else
                 {
-                    Profile.Instance.MsgPrint("You failed to pick the lock.");
+                    SaveGame.Instance.MsgPrint("You failed to pick the lock.");
                 }
             }
             // It wasn't locked, so simply open it
@@ -12019,27 +12150,27 @@ namespace Cthangband
                 int k = weight + Program.Rng.DieRoll(650);
                 if (k < 400)
                 {
-                    Profile.Instance.MsgPrint("It was a good hit!");
+                    SaveGame.Instance.MsgPrint("It was a good hit!");
                     damage = (2 * damage) + 5;
                 }
                 else if (k < 700)
                 {
-                    Profile.Instance.MsgPrint("It was a great hit!");
+                    SaveGame.Instance.MsgPrint("It was a great hit!");
                     damage = (2 * damage) + 10;
                 }
                 else if (k < 900)
                 {
-                    Profile.Instance.MsgPrint("It was a superb hit!");
+                    SaveGame.Instance.MsgPrint("It was a superb hit!");
                     damage = (3 * damage) + 15;
                 }
                 else if (k < 1300)
                 {
-                    Profile.Instance.MsgPrint("It was a *GREAT* hit!");
+                    SaveGame.Instance.MsgPrint("It was a *GREAT* hit!");
                     damage = (3 * damage) + 20;
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("It was a *SUPERB* hit!");
+                    SaveGame.Instance.MsgPrint("It was a *SUPERB* hit!");
                     damage = (7 * damage / 2) + 25;
                 }
             }
@@ -12071,7 +12202,7 @@ namespace Cthangband
             {
                 // It was a hit, so let the player know
                 Gui.PlaySound(SoundEffect.MeleeHit);
-                Profile.Instance.MsgPrint($"You hit {monsterName} with your {attackDescription}.");
+                SaveGame.Instance.MsgPrint($"You hit {monsterName} with your {attackDescription}.");
                 // Roll the damage, with possible critical damage
                 int damage = Program.Rng.DiceRoll(damageDice, damageSides);
                 damage = PlayerCriticalMelee(effectiveWeight, Player.AttackBonus, damage);
@@ -12084,7 +12215,7 @@ namespace Cthangband
                 // If it's a friend, it will get angry
                 if ((monster.Mind & Constants.SmFriendly) != 0)
                 {
-                    Profile.Instance.MsgPrint($"{monsterName} gets angry!");
+                    SaveGame.Instance.MsgPrint($"{monsterName} gets angry!");
                     monster.Mind &= ~Constants.SmFriendly;
                 }
                 // Apply damage of the correct type to the monster
@@ -12111,7 +12242,7 @@ namespace Cthangband
             {
                 // We missed, so just let us know
                 Gui.PlaySound(SoundEffect.Miss);
-                Profile.Instance.MsgPrint($"You miss {monsterName}.");
+                SaveGame.Instance.MsgPrint($"You miss {monsterName}.");
             }
         }
 
@@ -12153,11 +12284,11 @@ namespace Cthangband
                         // Trap doors can be flown over with feather fall
                         if (Player.HasFeatherFall)
                         {
-                            Profile.Instance.MsgPrint("You fly over a trap door.");
+                            SaveGame.Instance.MsgPrint("You fly over a trap door.");
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("You fell through a trap door!");
+                            SaveGame.Instance.MsgPrint("You fell through a trap door!");
                             // Trap doors do 2d8 fall damage
                             damage = Program.Rng.DiceRoll(2, 8);
                             name = "a trap door";
@@ -12186,11 +12317,11 @@ namespace Cthangband
                         // A pit can be flown over with feather fall
                         if (Player.HasFeatherFall)
                         {
-                            Profile.Instance.MsgPrint("You fly over a pit trap.");
+                            SaveGame.Instance.MsgPrint("You fly over a pit trap.");
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("You fell into a pit!");
+                            SaveGame.Instance.MsgPrint("You fell into a pit!");
                             // Pits do 2d6 fall damage
                             damage = Program.Rng.DiceRoll(2, 6);
                             name = "a pit trap";
@@ -12203,18 +12334,18 @@ namespace Cthangband
                         // A pit can be flown over with feather fall
                         if (Player.HasFeatherFall)
                         {
-                            Profile.Instance.MsgPrint("You fly over a spiked pit.");
+                            SaveGame.Instance.MsgPrint("You fly over a spiked pit.");
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("You fall into a spiked pit!");
+                            SaveGame.Instance.MsgPrint("You fall into a spiked pit!");
                             name = "a pit trap";
                             // A pit does 2d6 fall damage
                             damage = Program.Rng.DiceRoll(2, 6);
                             // 50% chance of doing double damage plus bleeding
                             if (Program.Rng.RandomLessThan(100) < 50)
                             {
-                                Profile.Instance.MsgPrint("You are impaled!");
+                                SaveGame.Instance.MsgPrint("You are impaled!");
                                 name = "a spiked pit";
                                 damage *= 2;
                                 Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
@@ -12228,29 +12359,29 @@ namespace Cthangband
                         // A pit can be flown over with feather fall
                         if (Player.HasFeatherFall)
                         {
-                            Profile.Instance.MsgPrint("You fly over a spiked pit.");
+                            SaveGame.Instance.MsgPrint("You fly over a spiked pit.");
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("You fall into a spiked pit!");
+                            SaveGame.Instance.MsgPrint("You fall into a spiked pit!");
                             // A pit does 2d6 fall damage
                             damage = Program.Rng.DiceRoll(2, 6);
                             name = "a pit trap";
                             // 50% chance of doing double damage plus bleeding plus poison
                             if (Program.Rng.RandomLessThan(100) < 50)
                             {
-                                Profile.Instance.MsgPrint("You are impaled on poisonous spikes!");
+                                SaveGame.Instance.MsgPrint("You are impaled on poisonous spikes!");
                                 name = "a spiked pit";
                                 damage *= 2;
                                 Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
                                 // Hagarg Ryonis can save us from the poison
                                 if (Player.HasPoisonResistance || Player.TimedPoisonResistance != 0)
                                 {
-                                    Profile.Instance.MsgPrint("The poison does not affect you!");
+                                    SaveGame.Instance.MsgPrint("The poison does not affect you!");
                                 }
                                 else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
-                                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
@@ -12264,7 +12395,7 @@ namespace Cthangband
                     }
                 case "SummonRune":
                     {
-                        Profile.Instance.MsgPrint("There is a flash of shimmering light!");
+                        SaveGame.Instance.MsgPrint("There is a flash of shimmering light!");
                         // Trap disappears when triggered
                         tile.TileFlags.Clear(GridTile.PlayerMemorised);
                         Level.RevertTileToBackground(Player.MapY, Player.MapX);
@@ -12287,14 +12418,14 @@ namespace Cthangband
                 case "TeleportRune":
                     {
                         // Teleport the player up to 100 squares
-                        Profile.Instance.MsgPrint("You hit a teleport trap!");
+                        SaveGame.Instance.MsgPrint("You hit a teleport trap!");
                         TeleportPlayer(100);
                         break;
                     }
                 case "FireTrap":
                     {
                         // Do 4d6 fire damage
-                        Profile.Instance.MsgPrint("You are enveloped in flames!");
+                        SaveGame.Instance.MsgPrint("You are enveloped in flames!");
                         damage = Program.Rng.DiceRoll(4, 6);
                         FireDam(damage, "a fire trap");
                         break;
@@ -12302,7 +12433,7 @@ namespace Cthangband
                 case "AcidTrap":
                     {
                         // Do 4d6 acid damage
-                        Profile.Instance.MsgPrint("You are splashed with acid!");
+                        SaveGame.Instance.MsgPrint("You are splashed with acid!");
                         damage = Program.Rng.DiceRoll(4, 6);
                         AcidDam(damage, "an acid trap");
                         break;
@@ -12312,7 +12443,7 @@ namespace Cthangband
                         // Dart traps need a to-hit roll
                         if (TrapCheckHitOnPlayer(125))
                         {
-                            Profile.Instance.MsgPrint("A small dart hits you!");
+                            SaveGame.Instance.MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus slow
                             damage = Program.Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, name);
@@ -12320,7 +12451,7 @@ namespace Cthangband
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("A small dart barely misses you.");
+                            SaveGame.Instance.MsgPrint("A small dart barely misses you.");
                         }
                         break;
                     }
@@ -12329,7 +12460,7 @@ namespace Cthangband
                         // Dart traps need a to-hit roll
                         if (TrapCheckHitOnPlayer(125))
                         {
-                            Profile.Instance.MsgPrint("A small dart hits you!");
+                            SaveGame.Instance.MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus strength drain
                             damage = Program.Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
@@ -12337,7 +12468,7 @@ namespace Cthangband
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("A small dart barely misses you.");
+                            SaveGame.Instance.MsgPrint("A small dart barely misses you.");
                         }
                         break;
                     }
@@ -12346,7 +12477,7 @@ namespace Cthangband
                         // Dart traps need a to-hit roll
                         if (TrapCheckHitOnPlayer(125))
                         {
-                            Profile.Instance.MsgPrint("A small dart hits you!");
+                            SaveGame.Instance.MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus dexterity drain
                             damage = Program.Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
@@ -12354,7 +12485,7 @@ namespace Cthangband
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("A small dart barely misses you.");
+                            SaveGame.Instance.MsgPrint("A small dart barely misses you.");
                         }
                         break;
                     }
@@ -12363,7 +12494,7 @@ namespace Cthangband
                         // Dart traps need a to-hit roll
                         if (TrapCheckHitOnPlayer(125))
                         {
-                            Profile.Instance.MsgPrint("A small dart hits you!");
+                            SaveGame.Instance.MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus constitution drain
                             damage = Program.Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
@@ -12371,14 +12502,14 @@ namespace Cthangband
                         }
                         else
                         {
-                            Profile.Instance.MsgPrint("A small dart barely misses you.");
+                            SaveGame.Instance.MsgPrint("A small dart barely misses you.");
                         }
                         break;
                     }
                 case "BlindGas":
                     {
                         // Blind the player
-                        Profile.Instance.MsgPrint("A black gas surrounds you!");
+                        SaveGame.Instance.MsgPrint("A black gas surrounds you!");
                         if (!Player.HasBlindnessResistance)
                         {
                             Player.SetTimedBlindness(Player.TimedBlindness + Program.Rng.RandomLessThan(50) + 25);
@@ -12388,7 +12519,7 @@ namespace Cthangband
                 case "ConfuseGas":
                     {
                         // Confuse the player
-                        Profile.Instance.MsgPrint("A gas of scintillating colours surrounds you!");
+                        SaveGame.Instance.MsgPrint("A gas of scintillating colours surrounds you!");
                         if (!Player.HasConfusionResistance)
                         {
                             Player.SetTimedConfusion(Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 10);
@@ -12398,13 +12529,13 @@ namespace Cthangband
                 case "PoisonGas":
                     {
                         // Poison the player
-                        Profile.Instance.MsgPrint("A pungent green gas surrounds you!");
+                        SaveGame.Instance.MsgPrint("A pungent green gas surrounds you!");
                         if (!Player.HasPoisonResistance && Player.TimedPoisonResistance == 0)
                         {
                             // Hagarg Ryonis may save you from the poison
                             if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
-                                Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else
                             {
@@ -12416,7 +12547,7 @@ namespace Cthangband
                 case "SleepGas":
                     {
                         // Paralyse the player
-                        Profile.Instance.MsgPrint("A strange white mist surrounds you!");
+                        SaveGame.Instance.MsgPrint("A strange white mist surrounds you!");
                         if (!Player.HasFreeAction)
                         {
                             Player.SetTimedParalysis(Player.TimedParalysis + Program.Rng.RandomLessThan(10) + 5);
@@ -12441,7 +12572,7 @@ namespace Cthangband
                 {
                     auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                     string auraDam = monster.MonsterDesc(0x88);
-                    Profile.Instance.MsgPrint("You are suddenly very hot!");
+                    SaveGame.Instance.MsgPrint("You are suddenly very hot!");
                     if (Player.TimedFireResistance != 0)
                     {
                         auraDamage = (auraDamage + 2) / 3;
@@ -12468,7 +12599,7 @@ namespace Cthangband
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
-                Profile.Instance.MsgPrint("You get zapped!");
+                SaveGame.Instance.MsgPrint("You get zapped!");
                 Player.TakeHit(auraDamage, auraDam);
                 race.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
                 HandleStuff();

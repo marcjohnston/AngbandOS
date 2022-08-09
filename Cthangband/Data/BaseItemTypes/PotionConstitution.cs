@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionConstitution : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Constitution";
 
         public override int Chance1 => 6;

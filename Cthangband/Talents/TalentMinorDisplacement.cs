@@ -29,7 +29,7 @@ namespace Cthangband.Talents
             }
             else
             {
-                Profile.Instance.MsgPrint("Choose a destination.");
+                SaveGame.Instance.MsgPrint("Choose a destination.");
                 if (!targetEngine.TgtPt(out int i, out int j))
                 {
                     return;
@@ -40,7 +40,7 @@ namespace Cthangband.Talents
                     level.Distance(j, i, player.MapY, player.MapX) > player.Level + 2 ||
                     Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
                 {
-                    Profile.Instance.MsgPrint("Something disrupts your concentration!");
+                    SaveGame.Instance.MsgPrint("Something disrupts your concentration!");
                     player.Energy -= 100;
                     SaveGame.Instance.TeleportPlayer(20);
                 }

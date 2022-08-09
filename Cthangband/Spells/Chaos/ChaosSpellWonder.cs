@@ -39,7 +39,7 @@ namespace Cthangband.Spells.Chaos
             }
             if (die > 100)
             {
-                Profile.Instance.MsgPrint("You feel a surge of power!");
+                SaveGame.Instance.MsgPrint("You feel a surge of power!");
             }
             if (die < 8)
             {

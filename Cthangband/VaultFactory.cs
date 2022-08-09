@@ -727,9 +727,9 @@ namespace Cthangband
             {
                 do
                 {
-                    _templateRace = Program.Rng.DieRoll(Profile.Instance.MonsterRaces.Count - 2);
-                } while ((Profile.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                         Profile.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                    _templateRace = Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2);
+                } while ((SaveGame.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                         SaveGame.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                          SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
                 if (Program.Rng.DieRoll(2) != 1 && SaveGame.Instance.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
@@ -795,7 +795,7 @@ namespace Cthangband
                 for (x = xval - 9; x <= xval + 9; x++)
                 {
                     int rIdx = what[Program.Rng.RandomLessThan(64)];
-                    MonsterRace race = Profile.Instance.MonsterRaces[rIdx];
+                    MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
                     _level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
                 }
             }
@@ -890,9 +890,9 @@ namespace Cthangband
                 {
                     do
                     {
-                        _templateRace = Program.Rng.DieRoll(Profile.Instance.MonsterRaces.Count - 2);
-                    } while ((Profile.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                             Profile.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                        _templateRace = Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2);
+                    } while ((SaveGame.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                             SaveGame.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                              SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
                     getMonNumHook = VaultAuxSymbol;
                 }
@@ -970,8 +970,8 @@ namespace Cthangband
                 {
                     int i1 = j;
                     int i2 = j + 1;
-                    int p1 = Profile.Instance.MonsterRaces[what[i1]].Level;
-                    int p2 = Profile.Instance.MonsterRaces[what[i2]].Level;
+                    int p1 = SaveGame.Instance.MonsterRaces[what[i1]].Level;
+                    int p2 = SaveGame.Instance.MonsterRaces[what[i2]].Level;
                     if (p1 > p2)
                     {
                         tmp = what[i1];
@@ -1026,12 +1026,12 @@ namespace Cthangband
 
         public void BuildType7(int yval, int xval)
         {
-            VaultType vPtr = Profile.Instance.VaultTypes[0];
+            VaultType vPtr = SaveGame.Instance.VaultTypes[0];
             int dummy = 0;
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = Profile.Instance.VaultTypes[Program.Rng.RandomLessThan(Profile.Instance.VaultTypes.Count)];
+                vPtr = SaveGame.Instance.VaultTypes[Program.Rng.RandomLessThan(SaveGame.Instance.VaultTypes.Count)];
                 if (vPtr.Category == 7)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1060,12 +1060,12 @@ namespace Cthangband
 
         public void BuildType8(int yval, int xval)
         {
-            VaultType vPtr = Profile.Instance.VaultTypes[0];
+            VaultType vPtr = SaveGame.Instance.VaultTypes[0];
             int dummy = 0;
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = Profile.Instance.VaultTypes[Program.Rng.RandomLessThan(Profile.Instance.VaultTypes.Count)];
+                vPtr = SaveGame.Instance.VaultTypes[Program.Rng.RandomLessThan(SaveGame.Instance.VaultTypes.Count)];
                 if (vPtr.Category == 8)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1281,7 +1281,7 @@ namespace Cthangband
 
         private bool VaultAuxAnimal(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1295,7 +1295,7 @@ namespace Cthangband
 
         private bool VaultAuxChapel(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1314,7 +1314,7 @@ namespace Cthangband
 
         private bool VaultAuxCult(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1328,7 +1328,7 @@ namespace Cthangband
 
         private bool VaultAuxDemon(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1342,7 +1342,7 @@ namespace Cthangband
 
         private bool VaultAuxDragon(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1360,7 +1360,7 @@ namespace Cthangband
 
         private bool VaultAuxGiant(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1374,7 +1374,7 @@ namespace Cthangband
 
         private bool VaultAuxJelly(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1392,7 +1392,7 @@ namespace Cthangband
 
         private bool VaultAuxKennel(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1402,7 +1402,7 @@ namespace Cthangband
 
         private bool VaultAuxOrc(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1416,13 +1416,13 @@ namespace Cthangband
 
         private bool VaultAuxSymbol(int rIdx)
         {
-            return Profile.Instance.MonsterRaces[rIdx].Character == Profile.Instance.MonsterRaces[_templateRace].Character &&
-                   (Profile.Instance.MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
+            return SaveGame.Instance.MonsterRaces[rIdx].Character == SaveGame.Instance.MonsterRaces[_templateRace].Character &&
+                   (SaveGame.Instance.MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
         }
 
         private bool VaultAuxTreasure(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1437,7 +1437,7 @@ namespace Cthangband
 
         private bool VaultAuxTroll(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1451,7 +1451,7 @@ namespace Cthangband
 
         private bool VaultAuxUndead(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;

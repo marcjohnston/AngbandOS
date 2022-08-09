@@ -20,11 +20,11 @@ namespace Cthangband.Commands
             TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (targetEngine.TargetSet(Constants.TargetKill))
             {
-                Profile.Instance.MsgPrint(SaveGame.Instance.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+                saveGame.MsgPrint(saveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
             }
             else
             {
-                Profile.Instance.MsgPrint("Target Aborted.");
+                saveGame.MsgPrint("Target Aborted.");
             }
         }
     }

@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodDrainLife : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Drain Life";
 
         public override int Chance1 => 4;

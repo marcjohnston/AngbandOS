@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingSustainConstitution : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Sustain Constitution";
 
         public override int Chance1 => 1;

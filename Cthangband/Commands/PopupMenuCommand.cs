@@ -30,11 +30,11 @@ namespace Cthangband.Commands
                     return;
                 // Quit to Menu
                 case 1:
-                    SaveGame.Instance.Playing = false;
+                    saveGame.Playing = false;
                     break;
                 // Quit to Desktop
                 case 2:
-                    SaveGame.Instance.Playing = false;
+                    saveGame.Playing = false;
                     Program.ExitToDesktop = true;
                     break;
             }

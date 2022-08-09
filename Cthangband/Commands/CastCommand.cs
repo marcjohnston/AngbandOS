@@ -28,23 +28,23 @@ namespace Cthangband.Commands
                 {
                     whichMagicType = "prayer";
                 }
-                Profile.Instance.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
-                SaveGame.Instance.EnergyUse = 5;
+                saveGame.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+                saveGame.EnergyUse = 5;
             }
             else
             {
                 if (saveGame.Player.Spellcasting.Type == CastingType.Mentalism)
                 {
-                    DoCmdMentalism(saveGame.Player, saveGame.Level);
+                    DoCmdMentalism(saveGame);
                 }
                 else
                 {
-                    DoCmdCast(saveGame.Player, saveGame.Level);
+                    DoCmdCast(saveGame);
                 }
             }
         }
 
-        public static bool GetSpell(out int sn, string prompt, int sval, bool known, bool realm2, Player player)
+        public static bool GetSpell(SaveGame saveGame, out int sn, string prompt, int sval, bool known, bool realm2, Player player)
         {
             int i;
             int spell;
@@ -106,7 +106,7 @@ namespace Cthangband.Commands
                 spell = spells[i];
                 if (!player.SpellOkay(spell, known, realm2))
                 {
-                    Profile.Instance.MsgPrint($"You may not {prompt} that {p}.");
+                    saveGame.MsgPrint($"You may not {prompt} that {p}.");
                     continue;
                 }
                 if (ask)
@@ -132,198 +132,198 @@ namespace Cthangband.Commands
             return true;
         }
 
-        private void DoCmdCast(Player player, Level level)
+        private void DoCmdCast(SaveGame saveGame)
         {
-            string prayer = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
-            if (player.Realm1 == 0)
+            string prayer = saveGame.Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            if (saveGame.Player.Realm1 == 0)
             {
-                Profile.Instance.MsgPrint("You cannot cast spells!");
+                saveGame.MsgPrint("You cannot cast spells!");
                 return;
             }
-            if (player.TimedBlindness != 0 || level.NoLight())
+            if (saveGame.Player.TimedBlindness != 0 || saveGame.Level.NoLight())
             {
-                Profile.Instance.MsgPrint("You cannot see!");
+                saveGame.MsgPrint("You cannot see!");
                 return;
             }
-            if (player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                saveGame.MsgPrint("You are too confused!");
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.Instance.GetItem(out int item, "Use which book? ", false, true, true))
+            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true))
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint($"You have no {prayer} books!");
+                    saveGame.MsgPrint($"You have no {prayer} books!");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = false;
-            Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
+            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             int sval = oPtr.ItemSubCategory;
-            bool useSetTwo = oPtr.Category == player.Realm2.ToSpellBookItemCategory();
-            SaveGame.Instance.HandleStuff();
-            if (!GetSpell(out int spell, player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval,
-                true, useSetTwo, player))
+            bool useSetTwo = oPtr.Category == saveGame.Player.Realm2.ToSpellBookItemCategory();
+            saveGame.HandleStuff();
+            if (!GetSpell(saveGame, out int spell, saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval,
+                true, useSetTwo, saveGame.Player))
             {
                 if (spell == -2)
                 {
-                    Profile.Instance.MsgPrint($"You don't know any {prayer}s in that book.");
+                    saveGame.MsgPrint($"You don't know any {prayer}s in that book.");
                 }
                 return;
             }
-            Spell sPtr = useSetTwo ? player.Spellcasting.Spells[1][spell] : player.Spellcasting.Spells[0][spell];
-            if (sPtr.ManaCost > player.Mana)
+            Spell sPtr = useSetTwo ? saveGame.Player.Spellcasting.Spells[1][spell] : saveGame.Player.Spellcasting.Spells[0][spell];
+            if (sPtr.ManaCost > saveGame.Player.Mana)
             {
-                string cast = player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
-                Profile.Instance.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+                string cast = saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
+                saveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
                 if (!Gui.GetCheck("Attempt it anyway? "))
                 {
                     return;
                 }
             }
-            int chance = sPtr.FailureChance(player);
+            int chance = sPtr.FailureChance(saveGame.Player);
             if (Program.Rng.RandomLessThan(100) < chance)
             {
-                Profile.Instance.MsgPrint($"You failed to get the {prayer} off!");
+                saveGame.MsgPrint($"You failed to get the {prayer} off!");
                 if (oPtr.Category == ItemCategory.ChaosBook && Program.Rng.DieRoll(100) < spell)
                 {
-                    Profile.Instance.MsgPrint("You produce a chaotic effect!");
-                    WildMagic(spell, player, level);
+                    saveGame.MsgPrint("You produce a chaotic effect!");
+                    WildMagic(spell, saveGame);
                 }
                 else if (oPtr.Category == ItemCategory.DeathBook && Program.Rng.DieRoll(100) < spell)
                 {
                     if (sval == 3 && Program.Rng.DieRoll(2) == 1)
                     {
-                        level.Monsters[0].SanityBlast(true);
+                        saveGame.Level.Monsters[0].SanityBlast(true);
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("It hurts!");
-                        player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
-                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !player.HasHoldLife)
+                        saveGame.MsgPrint("It hurts!");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
+                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !saveGame.Player.HasHoldLife)
                         {
-                            player.LoseExperience(spell * 250);
+                            saveGame.Player.LoseExperience(spell * 250);
                         }
                     }
                 }
             }
             else
             {
-                sPtr.Cast(SaveGame.Instance, player, level);
+                sPtr.Cast(SaveGame.Instance, saveGame.Player, saveGame.Level);
                 if (!sPtr.Worked)
                 {
                     int e = sPtr.FirstCastExperience;
                     sPtr.Worked = true;
-                    player.GainExperience(e * sPtr.Level);
+                    saveGame.Player.GainExperience(e * sPtr.Level);
                 }
             }
-            SaveGame.Instance.EnergyUse = 100;
-            if (sPtr.ManaCost <= player.Mana)
+            saveGame.EnergyUse = 100;
+            if (sPtr.ManaCost <= saveGame.Player.Mana)
             {
-                player.Mana -= sPtr.ManaCost;
+                saveGame.Player.Mana -= sPtr.ManaCost;
             }
             else
             {
-                int oops = sPtr.ManaCost - player.Mana;
-                player.Mana = 0;
-                player.FractionalMana = 0;
-                Profile.Instance.MsgPrint("You faint from the effort!");
-                player.SetTimedParalysis(player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                int oops = sPtr.ManaCost - saveGame.Player.Mana;
+                saveGame.Player.Mana = 0;
+                saveGame.Player.FractionalMana = 0;
+                saveGame.MsgPrint("You faint from the effort!");
+                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
-                    Profile.Instance.MsgPrint("You have damaged your health!");
-                    player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+                    saveGame.MsgPrint("You have damaged your health!");
+                    saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
-            player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
         }
 
-        private void DoCmdMentalism(Player player, Level level)
+        private void DoCmdMentalism(SaveGame saveGame)
         {
-            int plev = player.Level;
-            if (player.TimedConfusion != 0)
+            int plev = saveGame.Player.Level;
+            if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                saveGame.MsgPrint("You are too confused!");
                 return;
             }
-            if (!GetMentalismTalent(out int n, player))
+            if (!GetMentalismTalent(out int n, saveGame.Player))
             {
                 return;
             }
-            Talents.Talent talent = player.Spellcasting.Talents[n];
-            if (talent.ManaCost > player.Mana)
+            Talents.Talent talent = saveGame.Player.Spellcasting.Talents[n];
+            if (talent.ManaCost > saveGame.Player.Mana)
             {
-                Profile.Instance.MsgPrint("You do not have enough mana to use this talent.");
+                saveGame.MsgPrint("You do not have enough mana to use this talent.");
                 if (!Gui.GetCheck("Attempt it anyway? "))
                 {
                     return;
                 }
             }
-            int chance = talent.FailureChance(player);
+            int chance = talent.FailureChance(saveGame.Player);
             if (Program.Rng.RandomLessThan(100) < chance)
             {
-                Profile.Instance.MsgPrint("You failed to concentrate hard enough!");
+                saveGame.MsgPrint("You failed to concentrate hard enough!");
                 if (Program.Rng.DieRoll(100) < chance / 2)
                 {
                     int i = Program.Rng.DieRoll(100);
                     if (i < 5)
                     {
-                        Profile.Instance.MsgPrint("Oh, no! Your mind has gone blank!");
-                        SaveGame.Instance.LoseAllInfo();
+                        saveGame.MsgPrint("Oh, no! Your mind has gone blank!");
+                        saveGame.LoseAllInfo();
                     }
                     else if (i < 15)
                     {
-                        Profile.Instance.MsgPrint("Weird visions seem to dance before your eyes...");
-                        player.SetTimedHallucinations(player.TimedHallucinations + 5 + Program.Rng.DieRoll(10));
+                        saveGame.MsgPrint("Weird visions seem to dance before your eyes...");
+                        saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + 5 + Program.Rng.DieRoll(10));
                     }
                     else if (i < 45)
                     {
-                        Profile.Instance.MsgPrint("Your brain is addled!");
-                        player.SetTimedConfusion(player.TimedConfusion + Program.Rng.DieRoll(8));
+                        saveGame.MsgPrint("Your brain is addled!");
+                        saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.DieRoll(8));
                     }
                     else if (i < 90)
                     {
-                        player.SetTimedStun(player.TimedStun + Program.Rng.DieRoll(8));
+                        saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + Program.Rng.DieRoll(8));
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                        SaveGame.Instance.Project(1, 2 + (plev / 10), player.MapY, player.MapX, plev * 2,
+                        saveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
+                        saveGame.Project(1, 2 + (plev / 10), saveGame.Player.MapY, saveGame.Player.MapX, plev * 2,
                             new ProjectMana(),
                             ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
                             ProjectionFlag.ProjectItem);
-                        player.Mana = Math.Max(0, player.Mana - (plev * Math.Max(1, plev / 10)));
+                        saveGame.Player.Mana = Math.Max(0, saveGame.Player.Mana - (plev * Math.Max(1, plev / 10)));
                     }
                 }
             }
             else
             {
-                talent.Use(player, level, SaveGame.Instance);
+                talent.Use(saveGame.Player, saveGame.Level, SaveGame.Instance);
             }
-            SaveGame.Instance.EnergyUse = 100;
-            if (talent.ManaCost <= player.Mana)
+            saveGame.EnergyUse = 100;
+            if (talent.ManaCost <= saveGame.Player.Mana)
             {
-                player.Mana -= talent.ManaCost;
+                saveGame.Player.Mana -= talent.ManaCost;
             }
             else
             {
-                int oops = talent.ManaCost - player.Mana;
-                player.Mana = 0;
-                player.FractionalMana = 0;
-                Profile.Instance.MsgPrint("You faint from the effort!");
-                player.SetTimedParalysis(player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                int oops = talent.ManaCost - saveGame.Player.Mana;
+                saveGame.Player.Mana = 0;
+                saveGame.Player.FractionalMana = 0;
+                saveGame.MsgPrint("You faint from the effort!");
+                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
-                    Profile.Instance.MsgPrint("You have damaged your mind!");
-                    player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
+                    saveGame.MsgPrint("You have damaged your mind!");
+                    saveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
-            player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
         }
 
         private bool GetMentalismTalent(out int sn, Player player)
@@ -408,7 +408,7 @@ namespace Cthangband.Commands
             return true;
         }
 
-        private void WildMagic(int spell, Player player, Level level)
+        private void WildMagic(int spell, SaveGame saveGame)
         {
             int counter = 0;
             int type = Constants.SummonBizarre1 - 1 + Program.Rng.DieRoll(6);
@@ -425,107 +425,107 @@ namespace Cthangband.Commands
                 case 1:
                 case 2:
                 case 3:
-                    SaveGame.Instance.TeleportPlayer(10);
+                    saveGame.TeleportPlayer(10);
                     break;
 
                 case 4:
                 case 5:
                 case 6:
-                    SaveGame.Instance.TeleportPlayer(100);
+                    saveGame.TeleportPlayer(100);
                     break;
 
                 case 7:
                 case 8:
-                    SaveGame.Instance.TeleportPlayer(200);
+                    saveGame.TeleportPlayer(200);
                     break;
 
                 case 9:
                 case 10:
                 case 11:
-                    SaveGame.Instance.UnlightArea(10, 3);
+                    saveGame.UnlightArea(10, 3);
                     break;
 
                 case 12:
                 case 13:
                 case 14:
-                    SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                    saveGame.LightArea(Program.Rng.DiceRoll(2, 3), 2);
                     break;
 
                 case 15:
-                    SaveGame.Instance.DestroyDoorsTouch();
+                    saveGame.DestroyDoorsTouch();
                     break;
 
                 case 16:
                 case 17:
-                    SaveGame.Instance.WallBreaker();
+                    saveGame.WallBreaker();
                     break;
 
                 case 18:
-                    SaveGame.Instance.SleepMonstersTouch();
+                    saveGame.SleepMonstersTouch();
                     break;
 
                 case 19:
                 case 20:
-                    SaveGame.Instance.TrapCreation();
+                    saveGame.TrapCreation();
                     break;
 
                 case 21:
                 case 22:
-                    SaveGame.Instance.DoorCreation();
+                    saveGame.DoorCreation();
                     break;
 
                 case 23:
                 case 24:
                 case 25:
-                    SaveGame.Instance.AggravateMonsters(1);
+                    saveGame.AggravateMonsters(1);
                     break;
 
                 case 26:
-                    SaveGame.Instance.Earthquake(player.MapY, player.MapX, 5);
+                    saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 5);
                     break;
 
                 case 27:
                 case 28:
-                    player.Dna.GainMutation();
+                    saveGame.Player.Dna.GainMutation();
                     break;
 
                 case 29:
                 case 30:
-                    SaveGame.Instance.ApplyDisenchant();
+                    saveGame.ApplyDisenchant();
                     break;
 
                 case 31:
-                    SaveGame.Instance.LoseAllInfo();
+                    saveGame.LoseAllInfo();
                     break;
 
                 case 32:
-                    SaveGame.Instance.FireBall(new ProjectChaos(), 0, spell + 5, 1 + (spell / 10));
+                    saveGame.FireBall(new ProjectChaos(), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:
-                    SaveGame.Instance.WallStone();
+                    saveGame.WallStone();
                     break;
 
                 case 34:
                 case 35:
                     while (counter++ < 8)
                     {
-                        level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty * 3 / 2,
+                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
                             type);
                     }
                     break;
 
                 case 36:
                 case 37:
-                    SaveGame.Instance.ActivateHiSummon();
+                    saveGame.ActivateHiSummon();
                     break;
 
                 case 38:
-                    SaveGame.Instance.SummonReaver();
+                    saveGame.SummonReaver();
                     break;
 
                 default:
-                    SaveGame.Instance.ActivateDreadCurse();
+                    saveGame.ActivateDreadCurse();
                     break;
             }
         }

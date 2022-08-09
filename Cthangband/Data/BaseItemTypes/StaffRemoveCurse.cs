@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class StaffRemoveCurse : StaffItemCategory
     {
         public override char Character => '_';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Staff:Remove Curse";
 
         public override int Chance1 => 1;

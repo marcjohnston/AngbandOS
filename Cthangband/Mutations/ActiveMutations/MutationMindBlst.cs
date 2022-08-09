@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             TargetEngine targetEngine = new TargetEngine(player, level);
-            Profile.Instance.MsgPrint("You concentrate...");
+            SaveGame.Instance.MsgPrint("You concentrate...");
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;

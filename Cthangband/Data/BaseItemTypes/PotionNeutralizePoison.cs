@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionNeutralizePoison : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Neutralize Poison";
 
         public override int Chance1 => 1;

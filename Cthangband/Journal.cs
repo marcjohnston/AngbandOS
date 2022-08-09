@@ -187,7 +187,7 @@ namespace Cthangband
         {
             for (int i = 0; GlobalData.SymbolIdentification[i] != null; i++)
             {
-                if (GlobalData.SymbolIdentification[i][0] == Profile.Instance.MonsterRaces[rIdx].Character)
+                if (GlobalData.SymbolIdentification[i][0] == SaveGame.Instance.MonsterRaces[rIdx].Character)
                 {
                     string name = GlobalData.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
@@ -198,12 +198,12 @@ namespace Cthangband
             Gui.Goto(5, 0);
             DisplayMonsterHeader(rIdx);
             Gui.Goto(6, 0);
-            Profile.Instance.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
+            SaveGame.Instance.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
         }
 
         private void DisplayMonsterHeader(int rIdx)
         {
-            MonsterRace rPtr = Profile.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
             char c1 = rPtr.Character;
             Colour a1 = rPtr.Colour;
             if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0)
@@ -346,14 +346,14 @@ namespace Cthangband
 
         private void JournalKills()
         {
-            string[] names = new string[Profile.Instance.MonsterRaces.Count];
-            int[] counts = new int[Profile.Instance.MonsterRaces.Count];
-            bool[] unique = new bool[Profile.Instance.MonsterRaces.Count];
+            string[] names = new string[SaveGame.Instance.MonsterRaces.Count];
+            int[] counts = new int[SaveGame.Instance.MonsterRaces.Count];
+            bool[] unique = new bool[SaveGame.Instance.MonsterRaces.Count];
             int maxCount = 0;
             int total = 0;
-            for (int i = 0; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (int i = 0; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                MonsterRace monster = Profile.Instance.MonsterRaces[i];
+                MonsterRace monster = SaveGame.Instance.MonsterRaces[i];
                 if ((monster.Flags1 & MonsterFlag1.Unique) != 0)
                 {
                     bool dead = monster.MaxNum == 0;
@@ -464,8 +464,8 @@ namespace Cthangband
 
         private void JournalMonsters()
         {
-            int[] seen = new int[Profile.Instance.MonsterRaces.Count];
-            int[] filtered = new int[Profile.Instance.MonsterRaces.Count];
+            int[] seen = new int[SaveGame.Instance.MonsterRaces.Count];
+            int[] filtered = new int[SaveGame.Instance.MonsterRaces.Count];
             int maxSeen = 0;
             bool[] filterMask = new bool[256];
             int[] filterLookup = new int[256];
@@ -475,13 +475,13 @@ namespace Cthangband
             {
                 filterMask[i] = false;
             }
-            for (int i = 1; i < Profile.Instance.MonsterRaces.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.MonsterRaces.Count; i++)
             {
-                if (Profile.Instance.MonsterRaces[i].Knowledge.RSights != 0 || _player.IsWizard)
+                if (SaveGame.Instance.MonsterRaces[i].Knowledge.RSights != 0 || _player.IsWizard)
                 {
                     seen[maxSeen] = i;
                     maxSeen++;
-                    char symbol = Profile.Instance.MonsterRaces[i].Character;
+                    char symbol = SaveGame.Instance.MonsterRaces[i].Character;
                     if (!filterMask[symbol])
                     {
                         filterMask[symbol] = true;
@@ -517,7 +517,7 @@ namespace Cthangband
                 int maxFiltered = 0;
                 for (int i = 0; i < maxSeen; i++)
                 {
-                    if (Profile.Instance.MonsterRaces[seen[i]].Character == currentFilter)
+                    if (SaveGame.Instance.MonsterRaces[seen[i]].Character == currentFilter)
                     {
                         filtered[maxFiltered] = seen[i];
                         maxFiltered++;
@@ -804,12 +804,12 @@ namespace Cthangband
 
         private void JournalUniques()
         {
-            string[] names = new string[Profile.Instance.MonsterRaces.Count];
-            bool[] alive = new bool[Profile.Instance.MonsterRaces.Count];
+            string[] names = new string[SaveGame.Instance.MonsterRaces.Count];
+            bool[] alive = new bool[SaveGame.Instance.MonsterRaces.Count];
             int maxCount = 0;
-            for (int i = 0; i < Profile.Instance.MonsterRaces.Count - 1; i++)
+            for (int i = 0; i < SaveGame.Instance.MonsterRaces.Count - 1; i++)
             {
-                MonsterRace monster = Profile.Instance.MonsterRaces[i];
+                MonsterRace monster = SaveGame.Instance.MonsterRaces[i];
                 if ((monster.Flags1 & MonsterFlag1.Unique) != 0 &&
                     (monster.Knowledge.RSights > 0 || _player.IsWizard))
                 {
@@ -1057,9 +1057,9 @@ namespace Cthangband
         private void WorthlessItemTypeSelection(ItemCategory tval)
         {
             _menuLength = 0;
-            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
             {
-                ItemType kPtr = Profile.Instance.ItemTypes[i];
+                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
@@ -1099,14 +1099,14 @@ namespace Cthangband
                     }
                     if (c == '6')
                     {
-                        ItemType kPtr = Profile.Instance.ItemTypes[_menuIndices[menu]];
+                        ItemType kPtr = SaveGame.Instance.ItemTypes[_menuIndices[menu]];
                         if (kPtr.HasQuality())
                         {
                             WorthlessItemQualitySelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+                            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
                             {
-                                kPtr = Profile.Instance.ItemTypes[i];
+                                kPtr = SaveGame.Instance.ItemTypes[i];
                                 if (kPtr.Category == tval)
                                 {
                                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
@@ -1131,9 +1131,9 @@ namespace Cthangband
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 1; i < Profile.Instance.ItemTypes.Count; i++)
+                            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
                             {
-                                kPtr = Profile.Instance.ItemTypes[i];
+                                kPtr = SaveGame.Instance.ItemTypes[i];
                                 if (kPtr.Category == tval)
                                 {
                                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))

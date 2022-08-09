@@ -47,7 +47,7 @@ namespace Cthangband
 
         public void Display()
         {
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             Gui.Erase(1, 0, 255);
             DisplayBody(Colour.White);
             DisplayHeader();

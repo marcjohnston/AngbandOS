@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollEnchantWeaponToHit : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Enchant Weapon To-Hit";
 
         public override int Chance1 => 1;

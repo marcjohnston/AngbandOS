@@ -29,8 +29,8 @@ namespace Cthangband.Mutations.RandomMutations
             }
             TargetEngine targetEngine = new TargetEngine(player, level);
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("Magical energy flows through you! You must release it!");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("Magical energy flows through you! You must release it!");
+            SaveGame.Instance.MsgPrint(null);
             targetEngine.GetDirectionNoAutoAim(out int dire);
             saveGame.FireBall(new ProjectMana(), dire, player.Level * 2, 3);
         }
