@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingExtraAttacks : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Extra Attacks";
 
         public override bool Blows => true;

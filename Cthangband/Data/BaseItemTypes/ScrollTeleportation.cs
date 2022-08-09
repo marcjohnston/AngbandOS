@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollTeleportation : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Teleportation";
 
         public override int Chance1 => 1;

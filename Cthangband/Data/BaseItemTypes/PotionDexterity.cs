@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionDexterity : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Dexterity";
 
         public override int Chance1 => 6;

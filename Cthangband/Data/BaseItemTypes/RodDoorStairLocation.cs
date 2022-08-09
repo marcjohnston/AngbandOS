@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodDoorStairLocation : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Door/Stair Location";
 
         public override int Chance1 => 1;

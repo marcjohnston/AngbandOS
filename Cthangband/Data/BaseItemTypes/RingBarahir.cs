@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingBarahir : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Ring";
 
         public override int Cost => 65000;

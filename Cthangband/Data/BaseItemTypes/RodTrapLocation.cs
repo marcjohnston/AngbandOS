@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RodTrapLocation : RodItemCategory
     {
         public override char Character => '-';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Rod:Trap Location";
 
         public override int Chance1 => 1;

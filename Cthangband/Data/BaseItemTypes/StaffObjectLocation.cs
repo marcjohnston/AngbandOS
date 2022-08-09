@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class StaffObjectLocation : StaffItemCategory
     {
         public override char Character => '_';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Staff:Object Location";
 
         public override int Chance1 => 1;

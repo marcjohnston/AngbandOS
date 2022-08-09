@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionStupidity : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Stupidity";
 
         public override int Chance1 => 1;

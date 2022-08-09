@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingAcid : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Acid";
 
         public override bool Activate => true;

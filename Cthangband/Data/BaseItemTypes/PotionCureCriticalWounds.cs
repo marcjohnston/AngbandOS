@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class PotionCureCriticalWounds : PotionItemCategory
     {
         public override char Character => '!';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Potion:Cure Critical Wounds";
 
         public override int Chance1 => 1;

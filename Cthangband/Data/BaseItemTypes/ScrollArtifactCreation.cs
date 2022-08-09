@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class ScrollArtifactCreation : ScrollItemCategory
     {
         public override char Character => '?';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Scroll:Artifact Creation";
 
         public override int Chance1 => 16;

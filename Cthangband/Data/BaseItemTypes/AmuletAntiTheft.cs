@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class AmuletAntiTheft : AmuletItemCategory
     {
         public override char Character => '"';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Amulet:Anti-Theft";
 
         public override bool AntiTheft => true;

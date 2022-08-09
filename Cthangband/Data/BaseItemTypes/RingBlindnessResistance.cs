@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class RingBlindnessResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Ring:Blindness Resistance";
 
         public override int Chance1 => 2;

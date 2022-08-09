@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class AmuletCharisma : AmuletItemCategory
     {
         public override char Character => '"';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Amulet:Charisma";
 
         public override bool Cha => true;

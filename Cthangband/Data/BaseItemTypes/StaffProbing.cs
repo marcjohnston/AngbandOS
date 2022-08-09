@@ -7,7 +7,6 @@ namespace Cthangband.ItemCategories
     internal class StaffProbing : StaffItemCategory
     {
         public override char Character => '_';
-        public override Colour Colour => Colour.Background;
         public override string Name => "Staff:Probing";
 
         public override int Chance1 => 1;
