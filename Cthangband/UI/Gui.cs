@@ -8,6 +8,7 @@
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.Terminal;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
@@ -41,7 +42,6 @@ namespace Cthangband.UI
         public static bool HideCursorOnFullScreenInkey;
 
         public static bool InPopupMenu;
-        public static Mixer Mixer = new Mixer();
         public static char QueuedCommand;
         private static Display _display;
 
@@ -53,7 +53,6 @@ namespace Cthangband.UI
         private static string[][] _keymapAct;
         private static string _requestCommandBuffer;
         private static Terminal.Terminal _terminal;
-        private static Manual.ManualViewer ManualViewer;
 
         /// <summary>
         /// Sets or returns whether the cursor is visible
@@ -396,7 +395,6 @@ namespace Cthangband.UI
         /// </summary>
         public static void Initialise(Settings settings, IConsole console)
         {
-            Mixer.Initialise(settings.MusicVolume / 100.0f, settings.SoundVolume / 100.0f);
             _terminal = new Terminal.Terminal(console);
             _terminal.Refresh();
             _terminal.CursorColour = Color.SkyBlue;
@@ -561,10 +559,7 @@ namespace Cthangband.UI
         /// <param name="val"> The sound to play </param>
         public static void PlaySound(SoundEffect sound)
         {
-            if (Mixer.SoundVolume > 0)
-            {
-                Mixer.Play(sound);
-            }
+            Gui.Terminal.PlaySound(sound);
         }
 
         /// <summary>
@@ -962,16 +957,6 @@ namespace Cthangband.UI
 
         public static void ShowManual()
         {
-            if (ManualViewer == null)
-            {
-                ManualViewer = new Manual.ManualViewer();
-            }
-            if (ManualViewer.IsDisposed)
-            {
-                ManualViewer = new Manual.ManualViewer();
-            }
-            ManualViewer.Show();
-            ManualViewer.Activate();
         }
 
         internal static void SetBackground(BackgroundImage image)

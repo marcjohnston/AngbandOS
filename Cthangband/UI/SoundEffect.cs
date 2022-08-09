@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cthangband.UI
+namespace Cthangband
 {
-    internal enum SoundEffect
+    public enum SoundEffect
     {
         EnterTownDay,
         EnterTownNight,

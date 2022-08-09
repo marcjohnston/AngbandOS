@@ -315,35 +315,6 @@ namespace Cthangband
             return -1;
         }
 
-        [STAThread]
-        private static void Main()
-        {
-            try
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                General.CheckDebugStatus();
-                GetDefaultFolder();
-                _settings = DeserializeFromSaveFolder<Settings>("game.settings") ?? new Settings();
-                if (!DirCreate(SaveFolder))
-                {
-                    Quit($"Cannot create '{SaveFolder}'");
-                }
-                StaticResources.LoadOrCreate();
-                HiScores = new HighScoreTable();
-                Gui.Initialise(_settings, new MainWindow());
-                while (!ExitToDesktop)
-                {
-                    ShowMainMenu();
-                }
-                SerializeToSaveFolder(_settings, "game.settings");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private static int NewGame(int saveIndex)
         {
             int choice = ChooseProfile(saveIndex, "overwrite");
@@ -627,7 +598,7 @@ namespace Cthangband
         private static void ShowMainMenu()
         {
             Gui.CursorVisible = false;
-            Gui.Mixer.Play(MusicTrack.Menu);
+            Gui.Terminal.PlayMusic(MusicTrack.Menu);
             while (true)
             {
                 Gui.SetBackground(BackgroundImage.Menu);

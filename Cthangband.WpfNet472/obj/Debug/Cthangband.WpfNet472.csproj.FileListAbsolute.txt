@@ -63,7 +63,6 @@ C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\contr
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\final-count-by-kevin-macleod-from-filmmusic-io.mp3
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\ghost-processional-digitally-processed-by-kevin-macleod-from-filmmusic-io.mp3
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\land-of-phantoms-by-kevin-macleod-from-filmmusic-io.mp3
-C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\Music License.txt
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\scissors-by-kevin-macleod-from-filmmusic-io.mp3
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\take-a-chance-by-kevin-macleod-from-filmmusic-io.mp3
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Music\the-house-of-leaves-by-kevin-macleod-from-filmmusic-io.mp3
@@ -285,9 +284,7 @@ C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Sounds\sum_
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.WpfNet472.exe.config
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.WpfNet472.exe
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.WpfNet472.pdb
-C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.exe
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.pdb
-C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.exe.config
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472.csproj.AssemblyReference.cache
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472.csproj.SuggestedBindingRedirects.cache
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\MainWindow.g.cs
@@ -302,3 +299,8 @@ C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472.csproj.CopyComplete
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472.exe
 C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472.pdb
+C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.dll
+C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\Cthangband.dll.config
+C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\obj\Debug\Cthangband.WpfNet472_Content.g.cs
+C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\x86\sqlite3.dll
+C:\Users\Marc\Source\Repos\Cthangband\Cthangband.WpfNet472\bin\Debug\x64\sqlite3.dll

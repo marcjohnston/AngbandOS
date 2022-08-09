@@ -9,5 +9,7 @@ namespace Cthangband
         void Print(int row, int col, string text, string colour);
         char WaitForKey();
         void SetBackground(BackgroundImage image);
+        void PlaySound(SoundEffect sound);
+        void PlayMusic(MusicTrack music);
     }
 }

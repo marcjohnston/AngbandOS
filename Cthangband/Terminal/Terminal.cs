@@ -33,6 +33,20 @@ namespace Cthangband.Terminal
         private IConsole _console;
 
         /// <summary>
+        /// Plays a sound
+        /// </summary>
+        /// <param name="val"> The sound to play </param>
+        public void PlaySound(SoundEffect sound)
+        {
+            _console.PlaySound(sound);
+        }
+
+        public void PlayMusic(MusicTrack musicTrack)
+        {
+            _console.PlayMusic(musicTrack);
+        }
+
+        /// <summary>
         /// Opens a terminal window using the given parameters
         /// </summary>
         /// <param name="parameters"> The parameters for the terminal window </param>

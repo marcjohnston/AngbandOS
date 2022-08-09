@@ -1,6 +1,6 @@
-﻿namespace Cthangband.UI
+﻿namespace Cthangband
 {
-    internal enum MusicTrack
+    public enum MusicTrack
     {
         None,
         Menu,

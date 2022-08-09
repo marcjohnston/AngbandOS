@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cthangband.WpfNet472
 {
@@ -26,9 +19,29 @@ namespace Cthangband.WpfNet472
         private const int ConsoleWidth = 80;
         private const int ConsoleHeight = 45;
         private const bool Fullscreen = false;
+        private const float StartupMusicVolume = 100;
+        private const float StartupSoundVolume = 100;
         public readonly Queue<char> KeyQueue = new Queue<char>();
         public TextBlock[][] Cells = new TextBlock[45][];
         private BackgroundImage _backgroundImage = BackgroundImage.None;
+        public Mixer Mixer = new Mixer();
+
+        /// <summary>
+        /// Plays a sound
+        /// </summary>
+        /// <param name="val"> The sound to play </param>
+        public void PlaySound(SoundEffect sound)
+        {
+            if (Mixer.SoundVolume > 0)
+            {
+                Mixer.Play(sound);
+            }
+        }
+
+        public void PlayMusic(MusicTrack musicTrack)
+        {
+            Mixer.Play(musicTrack);
+        }
 
         public void SetCellBackground(int row, int col, string color)
         {
@@ -120,6 +133,7 @@ namespace Cthangband.WpfNet472
             InitializeGrid();
             ElementHost.EnableModelessKeyboardInterop(this);
             Visibility = Visibility.Visible;
+            Mixer.Initialise(StartupMusicVolume / 100.0f, StartupSoundVolume / 100.0f);
         }
         public BackgroundImage BackgroundImage
         {
