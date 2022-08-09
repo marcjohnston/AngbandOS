@@ -139,6 +139,7 @@
     <Content Include="Backgrounds\WildMap.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Cthangband.ico" />
     <Content Include="Music\come-play-with-me-by-kevin-macleod-from-filmmusic-io.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
