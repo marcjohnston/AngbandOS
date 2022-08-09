@@ -24,7 +24,7 @@ namespace Cthangband.Commands
             Item lightSource = saveGame.Player.Inventory[InventorySlot.Lightsource];
             if (lightSource.Category != ItemCategory.Light)
             {
-                Profile.Instance.MsgPrint("You are not wielding a light.");
+                SaveGame.Instance.MsgPrint("You are not wielding a light.");
             }
             else if (lightSource.ItemSubCategory == LightType.Lantern)
             {
@@ -36,7 +36,7 @@ namespace Cthangband.Commands
             }
             else
             {
-                Profile.Instance.MsgPrint("Your light cannot be refilled.");
+                SaveGame.Instance.MsgPrint("Your light cannot be refilled.");
             }
         }
 
@@ -54,7 +54,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no flasks of oil.");
+                        SaveGame.Instance.MsgPrint("You have no flasks of oil.");
                     }
                     return;
                 }
@@ -64,7 +64,7 @@ namespace Cthangband.Commands
             SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterLanternFuel;
             if (!player.Inventory.ItemMatchesFilter(fuelSource))
             {
-                Profile.Instance.MsgPrint("You can't refill a lantern from that!");
+                SaveGame.Instance.MsgPrint("You can't refill a lantern from that!");
                 SaveGame.Instance.ItemFilter = null;
                 return;
             }
@@ -74,12 +74,12 @@ namespace Cthangband.Commands
             Item lamp = player.Inventory[InventorySlot.Lightsource];
             // Add the fuel
             lamp.TypeSpecificValue += fuelSource.TypeSpecificValue;
-            Profile.Instance.MsgPrint("You fuel your lamp.");
+            SaveGame.Instance.MsgPrint("You fuel your lamp.");
             // Check for overfilling
             if (lamp.TypeSpecificValue >= Constants.FuelLamp)
             {
                 lamp.TypeSpecificValue = Constants.FuelLamp;
-                Profile.Instance.MsgPrint("Your lamp is full.");
+                SaveGame.Instance.MsgPrint("Your lamp is full.");
             }
             // Update the inventory
             if (itemIndex >= 0)
@@ -111,7 +111,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no extra torches.");
+                        SaveGame.Instance.MsgPrint("You have no extra torches.");
                     }
                     return;
                 }
@@ -121,7 +121,7 @@ namespace Cthangband.Commands
             SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterTorchFuel;
             if (!player.Inventory.ItemMatchesFilter(fuelSource))
             {
-                Profile.Instance.MsgPrint("You can't refill a torch with that!");
+                SaveGame.Instance.MsgPrint("You can't refill a torch with that!");
                 SaveGame.Instance.ItemFilter = null;
                 return;
             }
@@ -131,16 +131,16 @@ namespace Cthangband.Commands
             Item torch = player.Inventory[InventorySlot.Lightsource];
             // Add the fuel
             torch.TypeSpecificValue += fuelSource.TypeSpecificValue + 5;
-            Profile.Instance.MsgPrint("You combine the torches.");
+            SaveGame.Instance.MsgPrint("You combine the torches.");
             // Check for overfilling
             if (torch.TypeSpecificValue >= Constants.FuelTorch)
             {
                 torch.TypeSpecificValue = Constants.FuelTorch;
-                Profile.Instance.MsgPrint("Your torch is fully fueled.");
+                SaveGame.Instance.MsgPrint("Your torch is fully fueled.");
             }
             else
             {
-                Profile.Instance.MsgPrint("Your torch glows more brightly.");
+                SaveGame.Instance.MsgPrint("Your torch glows more brightly.");
             }
             // Update the player's inventory
             if (itemIndex >= 0)

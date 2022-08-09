@@ -29,7 +29,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have nothing to eat.");
+                        SaveGame.Instance.MsgPrint("You have nothing to eat.");
                     }
                     return;
                 }
@@ -39,7 +39,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Food;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("You can't eat that!");
+                SaveGame.Instance.MsgPrint("You can't eat that!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -62,7 +62,7 @@ namespace Cthangband.Commands
                             // Hagarg Ryonis may protect us from poison
                             if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
-                                Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + Program.Rng.RandomLessThan(10) + 10))
                             {
@@ -256,13 +256,13 @@ namespace Cthangband.Commands
                 case FoodType.Biscuit:
                 case FoodType.Jerky:
                     {
-                        Profile.Instance.MsgPrint("That tastes good.");
+                        SaveGame.Instance.MsgPrint("That tastes good.");
                         ident = true;
                         break;
                     }
                 case FoodType.Dwarfbread:
                     {
-                        Profile.Instance.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
+                        SaveGame.Instance.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
                         ident = true;
                         break;
                     }
@@ -274,7 +274,7 @@ namespace Cthangband.Commands
                     }
                 case FoodType.Waybread:
                     {
-                        Profile.Instance.MsgPrint("That tastes good.");
+                        SaveGame.Instance.MsgPrint("That tastes good.");
                         saveGame.Player.SetTimedPoison(0);
                         saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                         ident = true;
@@ -283,13 +283,13 @@ namespace Cthangband.Commands
                 case FoodType.PintOfAle:
                 case FoodType.PintOfWine:
                     {
-                        Profile.Instance.MsgPrint("That tastes good.");
+                        SaveGame.Instance.MsgPrint("That tastes good.");
                         ident = true;
                         break;
                     }
                 case FoodType.Warpstone:
                     {
-                        Profile.Instance.MsgPrint("That tastes... funky.");
+                        SaveGame.Instance.MsgPrint("That tastes... funky.");
                         saveGame.Player.Dna.GainMutation();
                         if (Program.Rng.DieRoll(3) == 1)
                         {
@@ -322,10 +322,10 @@ namespace Cthangband.Commands
             if (saveGame.Player.RaceIndex == RaceId.Vampire)
             {
                 _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
-                Profile.Instance.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
+                SaveGame.Instance.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
                 if (saveGame.Player.Food < Constants.PyFoodAlert)
                 {
-                    Profile.Instance.MsgPrint("Your hunger can only be satisfied with fresh blood!");
+                    SaveGame.Instance.MsgPrint("Your hunger can only be satisfied with fresh blood!");
                 }
             }
             // Skeletons get no food sustenance
@@ -336,7 +336,7 @@ namespace Cthangband.Commands
                 {
                     // Spawn a new food item on the floor to make up for the one that will be destroyed
                     Item floorItem = new Item();
-                    Profile.Instance.MsgPrint("The food falls through your jaws!");
+                    SaveGame.Instance.MsgPrint("The food falls through your jaws!");
                     floorItem.AssignItemType(
                         Profile.Instance.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
                     SaveGame.Instance.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
@@ -344,13 +344,13 @@ namespace Cthangband.Commands
                 else
                 {
                     // But some magical types work anyway and then vanish
-                    Profile.Instance.MsgPrint("The food falls through your jaws and vanishes!");
+                    SaveGame.Instance.MsgPrint("The food falls through your jaws and vanishes!");
                 }
             }
             // Golems, zombies, and spectres get only 1/20th of the food value
             else if (saveGame.Player.RaceIndex == RaceId.Golem || saveGame.Player.RaceIndex == RaceId.Zombie || saveGame.Player.RaceIndex == RaceId.Spectre)
             {
-                Profile.Instance.MsgPrint("The food of mortals is poor sustenance for you.");
+                SaveGame.Instance.MsgPrint("The food of mortals is poor sustenance for you.");
                 saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
             }
             // Everyone else gets the full value

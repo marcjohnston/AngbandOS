@@ -27,8 +27,8 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("RAAAAGHH!");
-            Profile.Instance.MsgPrint("You feel a fit of rage coming over you!");
+            SaveGame.Instance.MsgPrint("RAAAAGHH!");
+            SaveGame.Instance.MsgPrint("You feel a fit of rage coming over you!");
             player.SetTimedSuperheroism(player.TimedSuperheroism + 10 + Program.Rng.DieRoll(player.Level));
         }
     }

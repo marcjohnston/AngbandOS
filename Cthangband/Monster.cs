@@ -262,7 +262,7 @@ namespace Cthangband
             int power = 100;
             if (necro)
             {
-                Profile.Instance.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+                SaveGame.Instance.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
             }
             else
             {
@@ -301,16 +301,16 @@ namespace Cthangband
                 }
                 if (player.TimedHallucinations != 0)
                 {
-                    Profile.Instance.MsgPrint(
+                    SaveGame.Instance.MsgPrint(
                         $"You behold the {_funnyDesc[Program.Rng.DieRoll(Constants.MaxFunny) - 1]} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        Profile.Instance.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
+                        SaveGame.Instance.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
                         player.TimedHallucinations += Program.Rng.DieRoll(Race.Level);
                     }
                     return;
                 }
-                Profile.Instance.MsgPrint(
+                SaveGame.Instance.MsgPrint(
                     $"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
                 Race.Knowledge.RFlags2 |= MonsterFlag2.EldritchHorror;
                 if (player.RaceIndex == RaceId.Imp || player.RaceIndex == RaceId.MindFlayer)
@@ -380,7 +380,7 @@ namespace Cthangband
                 }
                 if (happened)
                 {
-                    Profile.Instance.MsgPrint("You feel much less sane than before.");
+                    SaveGame.Instance.MsgPrint("You feel much less sane than before.");
                 }
                 return;
             }
@@ -388,11 +388,11 @@ namespace Cthangband
             {
                 if (SaveGame.Instance.LoseAllInfo())
                 {
-                    Profile.Instance.MsgPrint("You forget everything in your utmost terror!");
+                    SaveGame.Instance.MsgPrint("You forget everything in your utmost terror!");
                 }
                 return;
             }
-            Profile.Instance.MsgPrint("The exposure to eldritch forces warps you.");
+            SaveGame.Instance.MsgPrint("The exposure to eldritch forces warps you.");
             player.Dna.GainMutation();
             player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             SaveGame.Instance.HandleStuff();

@@ -406,7 +406,7 @@ namespace Cthangband.Projection
                             }
                             if (Level.Monsters[cPtr.MonsterIndex].IsVisible)
                             {
-                                Profile.Instance.MsgPrint("The attack bounces!");
+                                SaveGame.Instance.MsgPrint("The attack bounces!");
                                 refPtr.Knowledge.RFlags2 |= MonsterFlag2.Reflecting;
                             }
                             Fire(cPtr.MonsterIndex, 0, tY, tX, dam, flg);

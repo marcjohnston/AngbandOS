@@ -26,7 +26,7 @@ namespace Cthangband.Commands
             // Need to be on a staircase or trapdoor
             if (tile.FeatureType.Name != "DownStair" && !isTrapDoor)
             {
-                Profile.Instance.MsgPrint("I see no down staircase here.");
+                SaveGame.Instance.MsgPrint("I see no down staircase here.");
                 SaveGame.Instance.EnergyUse = 0;
                 return;
             }
@@ -35,7 +35,7 @@ namespace Cthangband.Commands
             SaveGame.Instance.EnergyUse = 0;
             if (isTrapDoor)
             {
-                Profile.Instance.MsgPrint("You deliberately jump through the trap door.");
+                SaveGame.Instance.MsgPrint("You deliberately jump through the trap door.");
             }
             else
             {
@@ -43,11 +43,11 @@ namespace Cthangband.Commands
                 if (SaveGame.Instance.CurrentDepth == 0)
                 {
                     SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
-                    Profile.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
+                    SaveGame.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You enter a maze of down staircases.");
+                    SaveGame.Instance.MsgPrint("You enter a maze of down staircases.");
                 }
                 // Save the game, just in case
                 SaveGame.Instance.DoCmdSaveGame(true);

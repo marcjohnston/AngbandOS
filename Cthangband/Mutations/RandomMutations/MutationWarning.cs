@@ -42,27 +42,27 @@ namespace Cthangband.Mutations.RandomMutations
             }
             if (dangerAmount > 100)
             {
-                Profile.Instance.MsgPrint("You feel utterly terrified!");
+                SaveGame.Instance.MsgPrint("You feel utterly terrified!");
             }
             else if (dangerAmount > 50)
             {
-                Profile.Instance.MsgPrint("You feel terrified!");
+                SaveGame.Instance.MsgPrint("You feel terrified!");
             }
             else if (dangerAmount > 20)
             {
-                Profile.Instance.MsgPrint("You feel very worried!");
+                SaveGame.Instance.MsgPrint("You feel very worried!");
             }
             else if (dangerAmount > 10)
             {
-                Profile.Instance.MsgPrint("You feel paranoid!");
+                SaveGame.Instance.MsgPrint("You feel paranoid!");
             }
             else if (dangerAmount > 5)
             {
-                Profile.Instance.MsgPrint("You feel almost safe.");
+                SaveGame.Instance.MsgPrint("You feel almost safe.");
             }
             else
             {
-                Profile.Instance.MsgPrint("You feel lonely.");
+                SaveGame.Instance.MsgPrint("You feel lonely.");
             }
         }
     }

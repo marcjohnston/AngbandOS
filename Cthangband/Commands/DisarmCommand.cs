@@ -44,12 +44,12 @@ namespace Cthangband.Commands
                 if (!tile.FeatureType.IsTrap &&
                     itemIndex == 0)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to disarm.");
+                    SaveGame.Instance.MsgPrint("You see nothing there to disarm.");
                 }
                 // Can't disarm with a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
+                    SaveGame.Instance.MsgPrint("There is a monster in the way!");
                     SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 // Disarm the chest or trap

@@ -26,7 +26,7 @@ namespace Cthangband.StoreCommands
 
         public static void DoCmdMessages()
         {
-            int messageNumber = Profile.Instance.MessageNum();
+            int messageNumber = SaveGame.Instance.MessageNum();
             int index = 0;
             int horizontalOffset = 0;
             Gui.FullScreenOverlay = true;
@@ -41,7 +41,7 @@ namespace Cthangband.StoreCommands
                 // Print the messages
                 for (row = 0; row < 40 && index + row < messageNumber; row++)
                 {
-                    string msg = Profile.Instance.MessageStr((short)(index + row));
+                    string msg = SaveGame.Instance.MessageStr((short)(index + row));
                     msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
                     Gui.Print(Colour.White, msg, 41 - row, 0);
                 }

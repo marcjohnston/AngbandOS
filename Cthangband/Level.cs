@@ -160,7 +160,7 @@ namespace Cthangband
             int num, cnt;
             if (size != 0)
             {
-                Profile.Instance.MsgPrint("Compacting objects...");
+                SaveGame.Instance.MsgPrint("Compacting objects...");
                 SaveGame.Instance.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
             }
             for (num = 0, cnt = 1; num < size; cnt++)
@@ -410,7 +410,7 @@ namespace Cthangband
                 Program.Rng.RandomLessThan(100) < chance)
             {
                 string p = plural ? "" : "s";
-                Profile.Instance.MsgPrint($"The {oName} disappear{p}.");
+                SaveGame.Instance.MsgPrint($"The {oName} disappear{p}.");
                 return;
             }
             int bs = -1;
@@ -483,7 +483,7 @@ namespace Cthangband
             if (!flag && !(jPtr.IsFixedArtifact() || !string.IsNullOrEmpty(jPtr.RandartName)))
             {
                 string p = plural ? "" : "s";
-                Profile.Instance.MsgPrint($"The {oName} disappear{p}.");
+                SaveGame.Instance.MsgPrint($"The {oName} disappear{p}.");
                 return;
             }
             for (int i = 0; !flag; i++)
@@ -527,7 +527,7 @@ namespace Cthangband
             if (!done && oIdx == 0)
             {
                 string p = plural ? "" : "s";
-                Profile.Instance.MsgPrint($"The {oName} disappear{p}.");
+                SaveGame.Instance.MsgPrint($"The {oName} disappear{p}.");
                 if (jPtr.FixedArtifactIndex != 0)
                 {
                     Profile.Instance.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
@@ -549,7 +549,7 @@ namespace Cthangband
             Gui.PlaySound(SoundEffect.Drop);
             if (chance != 0 && by == SaveGame.Instance.Player.MapY && bx == SaveGame.Instance.Player.MapX)
             {
-                Profile.Instance.MsgPrint("You feel something roll beneath your feet.");
+                SaveGame.Instance.MsgPrint("You feel something roll beneath your feet.");
             }
         }
 
@@ -614,7 +614,7 @@ namespace Cthangband
         {
             Item oPtr = Items[item];
             string oName = oPtr.Description(true, 3);
-            Profile.Instance.MsgPrint($"You see {oName}.");
+            SaveGame.Instance.MsgPrint($"You see {oName}.");
         }
 
         public void FloorItemIncrease(int item, int num)
@@ -1315,7 +1315,7 @@ namespace Cthangband
             if (Profile.Instance.MonsterRaces[rIdx].MaxNum == 0)
             {
                 Profile.Instance.MonsterRaces[rIdx].MaxNum++;
-                Profile.Instance.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
+                SaveGame.Instance.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
             }
             do
             {
@@ -1394,7 +1394,7 @@ namespace Cthangband
             {
                 return;
             }
-            Profile.Instance.MsgPrint(oPtr.TypeSpecificValue != 1
+            SaveGame.Instance.MsgPrint(oPtr.TypeSpecificValue != 1
                 ? $"There are {oPtr.TypeSpecificValue} charges remaining."
                 : $"There is {oPtr.TypeSpecificValue} charge remaining.");
         }

@@ -17,7 +17,7 @@ namespace Cthangband.ActivationPowers
         {
             if (saveGame.BanishEvil(100))
             {
-                Profile.Instance.MsgPrint("The power of the artifact banishes evil!");
+                SaveGame.Instance.MsgPrint("The power of the artifact banishes evil!");
             }
             return true;
         }

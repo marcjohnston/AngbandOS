@@ -53,7 +53,7 @@ namespace Cthangband.Talents
             }
             if (!b)
             {
-                Profile.Instance.MsgPrint("You feel safe.");
+                SaveGame.Instance.MsgPrint("You feel safe.");
             }
         }
 

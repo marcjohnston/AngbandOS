@@ -29,7 +29,7 @@ namespace Cthangband.Commands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to throw.");
+                    SaveGame.Instance.MsgPrint("You have nothing to throw.");
                 }
                 return;
             }
@@ -137,12 +137,12 @@ namespace Cthangband.Commands
                         // Let the player know what happened
                         if (!visible)
                         {
-                            Profile.Instance.MsgPrint($"The {missileName} finds a mark.");
+                            SaveGame.Instance.MsgPrint($"The {missileName} finds a mark.");
                         }
                         else
                         {
                             string mName = monster.MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"The {missileName} hits {mName}.");
+                            SaveGame.Instance.MsgPrint($"The {missileName} hits {mName}.");
                             if (monster.IsVisible)
                             {
                                 SaveGame.Instance.HealthTrack(tile.MonsterIndex);
@@ -167,14 +167,14 @@ namespace Cthangband.Commands
                                 missile.ItemType.Category != ItemCategory.Potion)
                             {
                                 string mName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{mName} gets angry!");
+                                SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
                             if (fear && monster.IsVisible)
                             {
                                 Gui.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                                SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                             }
                         }
                     }
@@ -188,14 +188,14 @@ namespace Cthangband.Commands
             {
                 if (hitBody || !level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    Profile.Instance.MsgPrint($"The {missileName} shatters!");
+                    SaveGame.Instance.MsgPrint($"The {missileName} shatters!");
                     if (SaveGame.Instance.PotionSmashEffect(1, y, x, missile.ItemSubCategory))
                     {
                         if (level.Grid[y][x].MonsterIndex != 0 &&
                             (level.Monsters[level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
                         {
                             string mName = level.Monsters[level.Grid[y][x].MonsterIndex].MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"{mName} gets angry!");
+                            SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                             level.Monsters[level.Grid[y][x].MonsterIndex].Mind &= ~Constants.SmFriendly;
                         }
                     }

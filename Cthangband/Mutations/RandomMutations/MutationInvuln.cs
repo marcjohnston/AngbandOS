@@ -25,8 +25,8 @@ namespace Cthangband.Mutations.RandomMutations
             if (!player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
             {
                 saveGame.Disturb(false);
-                Profile.Instance.MsgPrint("You feel invincible!");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint("You feel invincible!");
+                SaveGame.Instance.MsgPrint(null);
                 player.SetTimedInvulnerability(player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
             }
         }

@@ -245,7 +245,7 @@ namespace Cthangband.UI
         public static bool GetCheck(string prompt)
         {
             int i;
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             string buf = $"{prompt}[Y/n]";
             PrintLine(buf, 0, 0);
             while (true)
@@ -272,7 +272,7 @@ namespace Cthangband.UI
 
         public static bool GetCom(string prompt, out char command)
         {
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             if (prompt.Length > 1)
             {
                 prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
@@ -362,7 +362,7 @@ namespace Cthangband.UI
 
         public static bool GetString(string prompt, out string buf, string initial, int len)
         {
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(null);
             PrintLine(prompt, 0, 0);
             bool res = AskforAux(out buf, initial, len);
             PrintLine("", 0, 0);
@@ -866,13 +866,13 @@ namespace Cthangband.UI
                 char cmd;
                 if (QueuedCommand != 0)
                 {
-                    Profile.Instance.MsgPrint(null);
+                    SaveGame.Instance.MsgPrint(null);
                     cmd = QueuedCommand;
                     QueuedCommand = (char)0;
                 }
                 else
                 {
-                    Profile.Instance.MsgFlag = false;
+                    SaveGame.Instance.MsgFlag = false;
                     HideCursorOnFullScreenInkey = true;
                     cmd = Inkey();
                 }

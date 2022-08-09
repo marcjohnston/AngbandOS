@@ -30,7 +30,7 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
-                Profile.Instance.MsgPrint("You wave your hands in the air.");
+                SaveGame.Instance.MsgPrint("You wave your hands in the air.");
                 return;
             }
             saveGame.FireBolt(new ProjectCold(), dir, 2 * player.Level);

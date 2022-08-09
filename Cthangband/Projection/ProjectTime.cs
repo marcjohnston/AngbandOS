@@ -60,7 +60,7 @@ namespace Cthangband.Projection
             {
                 if (who == 0)
                 {
-                    Profile.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -107,18 +107,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        Profile.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -135,7 +135,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -144,7 +144,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -175,7 +175,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                Profile.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -204,13 +204,13 @@ namespace Cthangband.Projection
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                Profile.Instance.MsgPrint("You are hit by a blast from the past!");
+                SaveGame.Instance.MsgPrint("You are hit by a blast from the past!");
             }
             if (Player.HasTimeResistance)
             {
                 dam *= 4;
                 dam /= Program.Rng.DieRoll(6) + 6;
-                Profile.Instance.MsgPrint("You feel as if time is passing you by.");
+                SaveGame.Instance.MsgPrint("You feel as if time is passing you by.");
             }
             else
             {
@@ -222,7 +222,7 @@ namespace Cthangband.Projection
                     case 4:
                     case 5:
                         {
-                            Profile.Instance.MsgPrint("You feel life has clocked back.");
+                            SaveGame.Instance.MsgPrint("You feel life has clocked back.");
                             Player.LoseExperience(100 + (Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                             break;
                         }
@@ -263,7 +263,7 @@ namespace Cthangband.Projection
                                     act = "beautiful";
                                     break;
                             }
-                            Profile.Instance.MsgPrint($"You're not as {act} as you used to be...");
+                            SaveGame.Instance.MsgPrint($"You're not as {act} as you used to be...");
                             Player.AbilityScores[k].Innate = Player.AbilityScores[k].Innate * 3 / 4;
                             if (Player.AbilityScores[k].Innate < 3)
                             {
@@ -274,7 +274,7 @@ namespace Cthangband.Projection
                         }
                     case 10:
                         {
-                            Profile.Instance.MsgPrint("You're not as powerful as you used to be...");
+                            SaveGame.Instance.MsgPrint("You're not as powerful as you used to be...");
                             for (k = 0; k < 6; k++)
                             {
                                 Player.AbilityScores[k].Innate = Player.AbilityScores[k].Innate * 3 / 4;

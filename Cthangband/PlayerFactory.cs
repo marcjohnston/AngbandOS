@@ -1232,11 +1232,11 @@ namespace Cthangband
             }
             _player.RaceIndexAtBirth = _player.RaceIndex;
             SaveGame.Instance.Quests.PlayerBirthQuests();
-            Profile.Instance.MessageAdd(" ");
-            Profile.Instance.MessageAdd("  ");
-            Profile.Instance.MessageAdd("====================");
-            Profile.Instance.MessageAdd("  ");
-            Profile.Instance.MessageAdd(" ");
+            SaveGame.Instance.MessageAdd(" ");
+            SaveGame.Instance.MessageAdd("  ");
+            SaveGame.Instance.MessageAdd("====================");
+            SaveGame.Instance.MessageAdd("  ");
+            SaveGame.Instance.MessageAdd(" ");
             _player.IsDead = false;
             PlayerOutfit();
             return true;

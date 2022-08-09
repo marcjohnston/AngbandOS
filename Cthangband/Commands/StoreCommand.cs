@@ -27,14 +27,14 @@ namespace Cthangband.Commands
             // Make sure we're actually on a shop tile
             if (!tile.FeatureType.IsShop)
             {
-                Profile.Instance.MsgPrint("You see no Stores here.");
+                SaveGame.Instance.MsgPrint("You see no Stores here.");
                 return;
             }
             Store which = SaveGame.Instance.GetWhichStore();
             // We can't enter a house unless we own it
             if (which.StoreType == StoreType.StoreHome && player.TownWithHouse != SaveGame.Instance.CurTown.Index)
             {
-                Profile.Instance.MsgPrint("The door is locked.");
+                SaveGame.Instance.MsgPrint("The door is locked.");
                 return;
             }
             // Switch from the normal game interface to the store interface

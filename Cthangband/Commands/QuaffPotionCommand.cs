@@ -30,7 +30,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no potions to quaff.");
+                        SaveGame.Instance.MsgPrint("You have no potions to quaff.");
                     }
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Potion;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a potion!");
+                SaveGame.Instance.MsgPrint("That is not a potion!");
                 return;
             }
             Inventory.ItemFilterCategory = 0;
@@ -53,7 +53,7 @@ namespace Cthangband.Commands
             // Skeletons are messy drinkers
             if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
-                Profile.Instance.MsgPrint("Some of the fluid falls through your jaws!");
+                SaveGame.Instance.MsgPrint("Some of the fluid falls through your jaws!");
                 SaveGame.Instance.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, item.ItemSubCategory);
             }
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;

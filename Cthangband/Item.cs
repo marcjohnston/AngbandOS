@@ -1189,11 +1189,11 @@ namespace Cthangband
             string newDescription = NewDescription(pref, mode);
             if (originalDescription == newDescription)
             {
-                //Profile.Instance.MsgPrint("Inventory descriptions confirmed.");
+                //SaveGame.Instance.MsgPrint("Inventory descriptions confirmed.");
             }
             else
             {
-                Profile.Instance.MsgPrint("DESCRIPTION FAILED!");
+                SaveGame.Instance.MsgPrint("DESCRIPTION FAILED!");
             }
             return newDescription;
         }
@@ -2537,11 +2537,11 @@ namespace Cthangband
             int newValue = NewRealValue();
             if (originalValue == newValue)
             {
-                //Profile.Instance.MsgPrint("Inventory descriptions confirmed.");
+                //SaveGame.Instance.MsgPrint("Inventory descriptions confirmed.");
             }
             else
             {
-                Profile.Instance.MsgPrint("REAL VALUE FAILED!");
+                SaveGame.Instance.MsgPrint("REAL VALUE FAILED!");
             }
             return newValue;
         }

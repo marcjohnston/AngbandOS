@@ -41,7 +41,7 @@ namespace Cthangband.StoreCommands
                     continue;
                 }
                 string itemName = item.Description(true, 3);
-                Profile.Instance.MsgPrint($"You destroy {itemName}.");
+                SaveGame.Instance.MsgPrint($"You destroy {itemName}.");
                 count++;
                 int amount = item.Count;
                 player.Inventory.InvenItemIncrease(i, -amount);
@@ -49,7 +49,7 @@ namespace Cthangband.StoreCommands
             }
             if (count == 0)
             {
-                Profile.Instance.MsgPrint("You are carrying nothing worth destroying.");
+                SaveGame.Instance.MsgPrint("You are carrying nothing worth destroying.");
                 SaveGame.Instance.EnergyUse = 0;
             }
             else

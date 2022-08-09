@@ -24,7 +24,7 @@ namespace Cthangband.Commands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to drop.");
+                    SaveGame.Instance.MsgPrint("You have nothing to drop.");
                 }
                 return;
             }
@@ -32,7 +32,7 @@ namespace Cthangband.Commands
             // Can't drop a cursed item
             if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
             {
-                Profile.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             // It's a stack, so find out how many to drop

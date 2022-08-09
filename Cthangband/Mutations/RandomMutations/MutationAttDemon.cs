@@ -42,7 +42,7 @@ namespace Cthangband.Mutations.RandomMutations
             {
                 return;
             }
-            Profile.Instance.MsgPrint("You have attracted a demon!");
+            SaveGame.Instance.MsgPrint("You have attracted a demon!");
             saveGame.Disturb(false);
         }
     }

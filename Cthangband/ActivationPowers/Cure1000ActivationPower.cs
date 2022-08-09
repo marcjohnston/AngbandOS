@@ -15,7 +15,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Profile.MsgPrint("You feel much better...");
+            saveGame.MsgPrint("You feel much better...");
             saveGame.Player.RestoreHealth(1000);
             saveGame.Player.SetTimedBleeding(0);
             return true;

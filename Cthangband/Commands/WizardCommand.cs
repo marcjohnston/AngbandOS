@@ -169,9 +169,9 @@ namespace Cthangband.Commands
                 case 'W':
                     saveGame.Player.IsWinner = true;
                     saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
-                    Profile.Instance.MsgPrint("*** CONGRATULATIONS ***");
-                    Profile.Instance.MsgPrint("You have won the game!");
-                    Profile.Instance.MsgPrint("You may retire ('Q') when you are ready.");
+                    SaveGame.Instance.MsgPrint("*** CONGRATULATIONS ***");
+                    SaveGame.Instance.MsgPrint("You have won the game!");
+                    SaveGame.Instance.MsgPrint("You may retire ('Q') when you are ready.");
                     break;
 
                 case 'x':
@@ -195,7 +195,7 @@ namespace Cthangband.Commands
                         break;
                     }
                 default:
-                    Profile.Instance.MsgPrint("That is not a valid wizard command.");
+                    SaveGame.Instance.MsgPrint("That is not a valid wizard command.");
                     break;
             }
         }
@@ -211,7 +211,7 @@ namespace Cthangband.Commands
             if (tmp == "Dumbledore")
             {
                 saveGame.Player.IsWizard = true;
-                Profile.Instance.MsgPrint("Wizard mode activated.");
+                SaveGame.Instance.MsgPrint("Wizard mode activated.");
                 saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
             }
         }
@@ -476,7 +476,7 @@ namespace Cthangband.Commands
             {
                 Gui.CommandArgument = SaveGame.Instance.CurDungeon.MaxLevel;
             }
-            Profile.Instance.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
+            SaveGame.Instance.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
             SaveGame.Instance.DoCmdSaveGame(true);
             SaveGame.Instance.CurrentDepth = Gui.CommandArgument;
             SaveGame.Instance.NewLevelFlag = true;
@@ -542,7 +542,7 @@ namespace Cthangband.Commands
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to play with.");
+                    SaveGame.Instance.MsgPrint("You have nothing to play with.");
                 }
                 return;
             }
@@ -585,7 +585,7 @@ namespace Cthangband.Commands
             Gui.FullScreenOverlay = false;
             if (changed)
             {
-                Profile.Instance.MsgPrint("Changes accepted.");
+                SaveGame.Instance.MsgPrint("Changes accepted.");
                 if (item >= 0)
                 {
                     player.Inventory[item] = qPtr;
@@ -599,7 +599,7 @@ namespace Cthangband.Commands
             }
             else
             {
-                Profile.Instance.MsgPrint("Changes ignored.");
+                SaveGame.Instance.MsgPrint("Changes ignored.");
             }
         }
 
@@ -667,7 +667,7 @@ namespace Cthangband.Commands
             qPtr.AssignItemType(Profile.Instance.ItemTypes[kIdx]);
             qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, false, false);
             SaveGame.Instance.Level.DropNear(qPtr, -1, player.MapY, player.MapX);
-            Profile.Instance.MsgPrint("Allocated.");
+            SaveGame.Instance.MsgPrint("Allocated.");
         }
 
         private int WizCreateItemtype()
@@ -784,7 +784,7 @@ namespace Cthangband.Commands
             }
             qPtr.GetFixedArtifactResistances();
             SaveGame.Instance.Level.DropNear(qPtr, -1, player.MapY, player.MapX);
-            Profile.Instance.MsgPrint("Allocated.");
+            SaveGame.Instance.MsgPrint("Allocated.");
         }
 
         private void WizDisplayItem(Item oPtr)
@@ -950,9 +950,9 @@ namespace Cthangband.Commands
                 {
                     break;
                 }
-                Profile.Instance.MsgPrint(
+                SaveGame.Instance.MsgPrint(
                     $"Creating a lot of {quality} items. Base level = {SaveGame.Instance.Difficulty}.");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(null);
                 long better;
                 long worse;
                 long other;
@@ -1007,8 +1007,8 @@ namespace Cthangband.Commands
                         other++;
                     }
                 }
-                Profile.Instance.MsgPrint(string.Format(q, i, matches, better, worse, other));
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint(string.Format(q, i, matches, better, worse, other));
+                SaveGame.Instance.MsgPrint(null);
             }
             if (oPtr.IsFixedArtifact())
             {

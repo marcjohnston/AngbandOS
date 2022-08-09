@@ -35,13 +35,13 @@ namespace Cthangband.Commands
                 // Can only close actual open doors
                 if (tile.FeatureType.Category != FloorTileTypeCategory.OpenDoorway)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to close.");
+                    SaveGame.Instance.MsgPrint("You see nothing there to close.");
                 }
                 // Can't close if there's a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
                     SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
+                    SaveGame.Instance.MsgPrint("There is a monster in the way!");
                     SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 // Actually close the door

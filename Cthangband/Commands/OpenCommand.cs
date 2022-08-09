@@ -44,13 +44,13 @@ namespace Cthangband.Commands
                 if (!tile.FeatureType.IsClosedDoor &&
                     itemIndex == 0)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to open.");
+                    SaveGame.Instance.MsgPrint("You see nothing there to open.");
                 }
                 // Can't open something if there's a monster in the way
                 else if (tile.MonsterIndex != 0)
                 {
                     SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
+                    SaveGame.Instance.MsgPrint("There is a monster in the way!");
                     SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 // Open the chest or door

@@ -213,16 +213,16 @@ namespace Cthangband
             int qNum = this[qIdx].ToKill - this[qIdx].Killed;
             if (this[qIdx].ToKill == 1)
             {
-                Profile.Instance.MsgPrint($"You still have to kill {name}.");
+                SaveGame.Instance.MsgPrint($"You still have to kill {name}.");
             }
             else if (qNum > 1)
             {
                 string plural = name.PluraliseMonsterName();
-                Profile.Instance.MsgPrint($"You still have to kill {qNum} {plural}.");
+                SaveGame.Instance.MsgPrint($"You still have to kill {qNum} {plural}.");
             }
             else
             {
-                Profile.Instance.MsgPrint($"You still have to kill 1 {name}.");
+                SaveGame.Instance.MsgPrint($"You still have to kill 1 {name}.");
             }
         }
 
@@ -232,16 +232,16 @@ namespace Cthangband
             MonsterRace rPtr = Profile.Instance.MonsterRaces[this[qIdx].RIdx];
             string name = rPtr.Name;
             int qNum = this[qIdx].ToKill;
-            Profile.Instance.MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
+            SaveGame.Instance.MsgPrint(null);
             if (qNum == 1)
             {
-                Profile.Instance.MsgPrint($"Beware, this level is protected by {name}!");
+                SaveGame.Instance.MsgPrint($"Beware, this level is protected by {name}!");
             }
             else
             {
                 string plural = name.PluraliseMonsterName();
-                Profile.Instance.MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
+                SaveGame.Instance.MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
             }
             this[qIdx].Discovered = true;
         }

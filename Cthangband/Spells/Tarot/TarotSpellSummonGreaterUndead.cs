@@ -16,22 +16,22 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You concentrate on the image of a greater undead being...");
+            SaveGame.Instance.MsgPrint("You concentrate on the image of a greater undead being...");
             if (Program.Rng.DieRoll(10) > 3)
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level,
                     Constants.SummonHiUndeadNoUniques, true))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHiUndeadNoUniques))
             {
-                Profile.Instance.MsgPrint("The summoned undead creature gets angry!");
+                SaveGame.Instance.MsgPrint("The summoned undead creature gets angry!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

@@ -29,7 +29,7 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
-                Profile.Instance.MsgPrint("You sense no evil there!");
+                SaveGame.Instance.MsgPrint("You sense no evil there!");
                 return;
             }
             Monster mPtr = level.Monsters[cPtr.MonsterIndex];
@@ -37,11 +37,11 @@ namespace Cthangband.Mutations.ActiveMutations
             if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
             {
                 level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                Profile.Instance.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
+                SaveGame.Instance.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
             }
             else
             {
-                Profile.Instance.MsgPrint("Your invocation is ineffectual!");
+                SaveGame.Instance.MsgPrint("Your invocation is ineffectual!");
             }
         }
 

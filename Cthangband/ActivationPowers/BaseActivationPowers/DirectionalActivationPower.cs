@@ -23,7 +23,7 @@ namespace Cthangband.ActivationPowers
             }
             if (!String.IsNullOrEmpty(PostAimingMessage))
             {
-                Profile.Instance.MsgPrint(PostAimingMessage);
+                SaveGame.Instance.MsgPrint(PostAimingMessage);
             }
             return Activate(saveGame, direction);
         }

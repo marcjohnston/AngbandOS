@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.ActiveMutations
                 return;
             }
             TargetEngine targetEngine = new TargetEngine(player, level);
-            Profile.Instance.MsgPrint("You breathe fire...");
+            SaveGame.Instance.MsgPrint("You breathe fire...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
                 saveGame.FireBall(new ProjectFire(), dir, player.Level * 2, -(1 + (player.Level / 20)));

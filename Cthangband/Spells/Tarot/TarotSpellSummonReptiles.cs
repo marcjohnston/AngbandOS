@@ -16,22 +16,22 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You concentrate on the image of a reptile...");
+            SaveGame.Instance.MsgPrint("You concentrate on the image of a reptile...");
             if (Program.Rng.DieRoll(5) > 2)
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonHydra,
                     true))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHydra))
             {
-                Profile.Instance.MsgPrint("The summoned reptile gets angry!");
+                SaveGame.Instance.MsgPrint("The summoned reptile gets angry!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

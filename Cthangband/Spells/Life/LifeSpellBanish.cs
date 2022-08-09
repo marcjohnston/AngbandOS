@@ -17,7 +17,7 @@ namespace Cthangband.Spells.Life
         {
             if (saveGame.BanishEvil(100))
             {
-                Profile.Instance.MsgPrint("The power of your god banishes evil!");
+                SaveGame.Instance.MsgPrint("The power of your god banishes evil!");
             }
         }
 

@@ -29,13 +29,13 @@ namespace Cthangband.Commands
                 // Can only bash closed doors
                 if (!tile.FeatureType.IsClosedDoor)
                 {
-                    Profile.Instance.MsgPrint("You see nothing there to bash.");
+                    SaveGame.Instance.MsgPrint("You see nothing there to bash.");
                 }
                 else if (tile.MonsterIndex != 0)
                 {
                     // Oops - a montser got in the way
                     SaveGame.Instance.EnergyUse = 100;
-                    Profile.Instance.MsgPrint("There is a monster in the way!");
+                    SaveGame.Instance.MsgPrint("There is a monster in the way!");
                     SaveGame.Instance.PlayerAttackMonster(y, x);
                 }
                 else

@@ -21,7 +21,7 @@ namespace Cthangband.Commands
             // Can't run if we're confused
             if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                SaveGame.Instance.MsgPrint("You are too confused!");
                 return;
             }
             // Get a direction if we don't already have one

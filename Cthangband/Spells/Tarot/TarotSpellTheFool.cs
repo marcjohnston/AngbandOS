@@ -17,7 +17,7 @@ namespace Cthangband.Spells.Tarot
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
             int dummy = 0;
-            Profile.Instance.MsgPrint("You concentrate on the Fool card...");
+            SaveGame.Instance.MsgPrint("You concentrate on the Fool card...");
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
@@ -38,7 +38,7 @@ namespace Cthangband.Spells.Tarot
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                Profile.Instance.MsgPrint(level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, dummy)
+                SaveGame.Instance.MsgPrint(level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, dummy)
                     ? "The summoned creature gets angry!"
                     : "No-one ever turns up.");
             }
@@ -46,7 +46,7 @@ namespace Cthangband.Spells.Tarot
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, dummy, false))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
         }

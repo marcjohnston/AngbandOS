@@ -42,7 +42,7 @@ namespace Cthangband.Mutations.RandomMutations
             {
                 return;
             }
-            Profile.Instance.MsgPrint("You have attracted an animal!");
+            SaveGame.Instance.MsgPrint("You have attracted an animal!");
             saveGame.Disturb(false);
         }
     }

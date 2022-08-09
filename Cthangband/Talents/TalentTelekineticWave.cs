@@ -24,7 +24,7 @@ namespace Cthangband.Talents
 
         public override void Use(Player player, Level level, SaveGame saveGame)
         {
-            Profile.Instance.MsgPrint("A wave of pure physical force radiates out from your body!");
+            SaveGame.Instance.MsgPrint("A wave of pure physical force radiates out from your body!");
             SaveGame.Instance.Project(0, 3 + (player.Level / 10), player.MapY, player.MapX,
                 player.Level * (player.Level > 39 ? 4 : 3), new ProjectTelekinesis(),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);

@@ -60,7 +60,7 @@ namespace Cthangband.Projection
             {
                 if (who == 0)
                 {
-                    Profile.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -121,18 +121,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        Profile.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -153,7 +153,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -162,7 +162,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                     }
                     if (doSleep != 0)
                     {
@@ -195,7 +195,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                Profile.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -226,7 +226,7 @@ namespace Cthangband.Projection
             }
             if (fuzzy)
             {
-                Profile.Instance.MsgPrint("You fall asleep!");
+                SaveGame.Instance.MsgPrint("You fall asleep!");
             }
             Player.SetTimedParalysis(Player.TimedParalysis + dam);
             SaveGame.Disturb(true);

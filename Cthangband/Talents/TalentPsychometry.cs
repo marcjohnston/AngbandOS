@@ -44,25 +44,25 @@ namespace Cthangband.Talents
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing appropriate.");
+                    SaveGame.Instance.MsgPrint("You have nothing appropriate.");
                 }
                 return;
             }
             Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
             if (oPtr.IsKnown() || oPtr.IdentifyFlags.IsSet(Constants.IdentSense))
             {
-                Profile.Instance.MsgPrint("You cannot find out anything more about that.");
+                SaveGame.Instance.MsgPrint("You cannot find out anything more about that.");
                 return;
             }
             string feel = oPtr.GetDetailedFeeling();
             string oName = oPtr.Description(false, 0);
             if (string.IsNullOrEmpty(feel))
             {
-                Profile.Instance.MsgPrint($"You do not perceive anything unusual about the {oName}.");
+                SaveGame.Instance.MsgPrint($"You do not perceive anything unusual about the {oName}.");
                 return;
             }
             string s = oPtr.Count == 1 ? "is" : "are";
-            Profile.Instance.MsgPrint($"You feel that the {oName} {s} {feel}...");
+            SaveGame.Instance.MsgPrint($"You feel that the {oName} {s} {feel}...");
             oPtr.IdentifyFlags.Set(Constants.IdentSense);
             if (string.IsNullOrEmpty(oPtr.Inscription))
             {

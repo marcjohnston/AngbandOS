@@ -38,7 +38,7 @@ namespace Cthangband.Commands
             num = 0;
             if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused to use any powers!");
+                SaveGame.Instance.MsgPrint("You are too confused to use any powers!");
                 SaveGame.Instance.EnergyUse = 0;
                 return;
             }
@@ -220,7 +220,7 @@ namespace Cthangband.Commands
             System.Collections.Generic.List<Mutations.Mutation> activeMutations = saveGame.Player.Dna.ActivatableMutations(saveGame.Player);
             if (!hasRacial && activeMutations.Count == 0 && pets == 0)
             {
-                Profile.Instance.MsgPrint("You have no powers to activate.");
+                SaveGame.Instance.MsgPrint("You have no powers to activate.");
                 SaveGame.Instance.EnergyUse = 0;
                 return;
             }
@@ -341,7 +341,7 @@ namespace Cthangband.Commands
                     }
                 }
                 string s = dismissed == 1 ? "" : "s";
-                Profile.Instance.MsgPrint($"You have dismissed {dismissed} pet{s}.");
+                SaveGame.Instance.MsgPrint($"You have dismissed {dismissed} pet{s}.");
             }
             else
             {

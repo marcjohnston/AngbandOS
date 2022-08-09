@@ -41,7 +41,7 @@ namespace Cthangband.Commands
                     switch (tile.FeatureType.AlterAction)
                     {
                         case FloorTileAlterAction.Nothing:
-                            Profile.Instance.MsgPrint("You're not sure what you can do with that...");
+                            SaveGame.Instance.MsgPrint("You're not sure what you can do with that...");
                             break;
 
                         case FloorTileAlterAction.Tunnel:

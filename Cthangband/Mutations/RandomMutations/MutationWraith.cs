@@ -27,8 +27,8 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("You feel insubstantial!");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("You feel insubstantial!");
+            SaveGame.Instance.MsgPrint(null);
             player.SetTimedEtherealness(player.TimedEtherealness + Program.Rng.DieRoll(player.Level / 2) + player.Level / 2);
         }
     }

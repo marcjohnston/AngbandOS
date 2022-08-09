@@ -60,7 +60,7 @@ namespace Cthangband.Projection
             {
                 if (who == 0)
                 {
-                    Profile.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -129,18 +129,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        Profile.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -157,7 +157,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -166,7 +166,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -195,7 +195,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                Profile.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -224,7 +224,7 @@ namespace Cthangband.Projection
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                Profile.Instance.MsgPrint("You are hit by nether forces!");
+                SaveGame.Instance.MsgPrint("You are hit by nether forces!");
             }
             if (Player.HasNetherResistance)
             {
@@ -238,26 +238,26 @@ namespace Cthangband.Projection
             {
                 if (Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
                 {
-                    Profile.Instance.MsgPrint("You keep hold of your life force!");
+                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
                 }
                 else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
-                    Profile.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
                 else if (Player.HasHoldLife)
                 {
-                    Profile.Instance.MsgPrint("You feel your life slipping away!");
+                    SaveGame.Instance.MsgPrint("You feel your life slipping away!");
                     Player.LoseExperience(200 + (Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
                 }
                 else
                 {
-                    Profile.Instance.MsgPrint("You feel your life draining away!");
+                    SaveGame.Instance.MsgPrint("You feel your life draining away!");
                     Player.LoseExperience(200 + (Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                 }
             }
             if (Player.RaceIndex == RaceId.Spectre)
             {
-                Profile.Instance.MsgPrint("You feel invigorated!");
+                SaveGame.Instance.MsgPrint("You feel invigorated!");
                 Player.RestoreHealth(dam / 4);
             }
             else

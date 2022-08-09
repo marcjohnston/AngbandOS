@@ -34,7 +34,7 @@ namespace Cthangband.StoreCommands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to destroy.");
+                    SaveGame.Instance.MsgPrint("You have nothing to destroy.");
                 }
                 return;
             }
@@ -82,7 +82,7 @@ namespace Cthangband.StoreCommands
             {
                 string feel = "special";
                 SaveGame.Instance.EnergyUse = 0;
-                Profile.Instance.MsgPrint($"You cannot destroy {itemName}.");
+                SaveGame.Instance.MsgPrint($"You cannot destroy {itemName}.");
                 if (item.IsCursed() || item.IsBroken())
                 {
                     feel = "terrible";
@@ -93,7 +93,7 @@ namespace Cthangband.StoreCommands
                 player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
                 return;
             }
-            Profile.Instance.MsgPrint($"You destroy {itemName}.");
+            SaveGame.Instance.MsgPrint($"You destroy {itemName}.");
             // Warriors and paladins get experience for destroying magic books
             if (SaveGame.Instance.ItemFilterHighLevelBook(item))
             {
@@ -134,7 +134,7 @@ namespace Cthangband.StoreCommands
                     {
                         testerExp = 1;
                     }
-                    Profile.Instance.MsgPrint("You feel more experienced.");
+                    SaveGame.Instance.MsgPrint("You feel more experienced.");
                     player.GainExperience(testerExp * amount);
                 }
             }

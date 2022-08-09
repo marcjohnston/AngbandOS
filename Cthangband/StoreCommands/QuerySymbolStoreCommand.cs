@@ -44,7 +44,7 @@ namespace Cthangband.StoreCommands
             string buf = GlobalData.SymbolIdentification[index] != null
                 ? $"{symbol} - {GlobalData.SymbolIdentification[index].Substring(2)}."
                 : $"{symbol} - Unknown Symbol";
-            Profile.Instance.MsgPrint(buf);
+            SaveGame.Instance.MsgPrint(buf);
         }
     }
 }

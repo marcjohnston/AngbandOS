@@ -28,7 +28,7 @@ namespace Cthangband.Commands
                 {
                     whichMagicType = "prayer";
                 }
-                Profile.Instance.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+                SaveGame.Instance.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
                 SaveGame.Instance.EnergyUse = 5;
             }
             else
@@ -106,7 +106,7 @@ namespace Cthangband.Commands
                 spell = spells[i];
                 if (!player.SpellOkay(spell, known, realm2))
                 {
-                    Profile.Instance.MsgPrint($"You may not {prompt} that {p}.");
+                    SaveGame.Instance.MsgPrint($"You may not {prompt} that {p}.");
                     continue;
                 }
                 if (ask)
@@ -137,17 +137,17 @@ namespace Cthangband.Commands
             string prayer = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
             if (player.Realm1 == 0)
             {
-                Profile.Instance.MsgPrint("You cannot cast spells!");
+                SaveGame.Instance.MsgPrint("You cannot cast spells!");
                 return;
             }
             if (player.TimedBlindness != 0 || level.NoLight())
             {
-                Profile.Instance.MsgPrint("You cannot see!");
+                SaveGame.Instance.MsgPrint("You cannot see!");
                 return;
             }
             if (player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                SaveGame.Instance.MsgPrint("You are too confused!");
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = true;
@@ -155,7 +155,7 @@ namespace Cthangband.Commands
             {
                 if (item == -2)
                 {
-                    Profile.Instance.MsgPrint($"You have no {prayer} books!");
+                    SaveGame.Instance.MsgPrint($"You have no {prayer} books!");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
@@ -170,7 +170,7 @@ namespace Cthangband.Commands
             {
                 if (spell == -2)
                 {
-                    Profile.Instance.MsgPrint($"You don't know any {prayer}s in that book.");
+                    SaveGame.Instance.MsgPrint($"You don't know any {prayer}s in that book.");
                 }
                 return;
             }
@@ -178,7 +178,7 @@ namespace Cthangband.Commands
             if (sPtr.ManaCost > player.Mana)
             {
                 string cast = player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
-                Profile.Instance.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+                SaveGame.Instance.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
                 if (!Gui.GetCheck("Attempt it anyway? "))
                 {
                     return;
@@ -187,10 +187,10 @@ namespace Cthangband.Commands
             int chance = sPtr.FailureChance(player);
             if (Program.Rng.RandomLessThan(100) < chance)
             {
-                Profile.Instance.MsgPrint($"You failed to get the {prayer} off!");
+                SaveGame.Instance.MsgPrint($"You failed to get the {prayer} off!");
                 if (oPtr.Category == ItemCategory.ChaosBook && Program.Rng.DieRoll(100) < spell)
                 {
-                    Profile.Instance.MsgPrint("You produce a chaotic effect!");
+                    SaveGame.Instance.MsgPrint("You produce a chaotic effect!");
                     WildMagic(spell, player, level);
                 }
                 else if (oPtr.Category == ItemCategory.DeathBook && Program.Rng.DieRoll(100) < spell)
@@ -201,7 +201,7 @@ namespace Cthangband.Commands
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("It hurts!");
+                        SaveGame.Instance.MsgPrint("It hurts!");
                         player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
                         if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !player.HasHoldLife)
                         {
@@ -230,12 +230,12 @@ namespace Cthangband.Commands
                 int oops = sPtr.ManaCost - player.Mana;
                 player.Mana = 0;
                 player.FractionalMana = 0;
-                Profile.Instance.MsgPrint("You faint from the effort!");
+                SaveGame.Instance.MsgPrint("You faint from the effort!");
                 player.SetTimedParalysis(player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
-                    Profile.Instance.MsgPrint("You have damaged your health!");
+                    SaveGame.Instance.MsgPrint("You have damaged your health!");
                     player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
@@ -247,7 +247,7 @@ namespace Cthangband.Commands
             int plev = player.Level;
             if (player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                SaveGame.Instance.MsgPrint("You are too confused!");
                 return;
             }
             if (!GetMentalismTalent(out int n, player))
@@ -257,7 +257,7 @@ namespace Cthangband.Commands
             Talents.Talent talent = player.Spellcasting.Talents[n];
             if (talent.ManaCost > player.Mana)
             {
-                Profile.Instance.MsgPrint("You do not have enough mana to use this talent.");
+                SaveGame.Instance.MsgPrint("You do not have enough mana to use this talent.");
                 if (!Gui.GetCheck("Attempt it anyway? "))
                 {
                     return;
@@ -266,23 +266,23 @@ namespace Cthangband.Commands
             int chance = talent.FailureChance(player);
             if (Program.Rng.RandomLessThan(100) < chance)
             {
-                Profile.Instance.MsgPrint("You failed to concentrate hard enough!");
+                SaveGame.Instance.MsgPrint("You failed to concentrate hard enough!");
                 if (Program.Rng.DieRoll(100) < chance / 2)
                 {
                     int i = Program.Rng.DieRoll(100);
                     if (i < 5)
                     {
-                        Profile.Instance.MsgPrint("Oh, no! Your mind has gone blank!");
+                        SaveGame.Instance.MsgPrint("Oh, no! Your mind has gone blank!");
                         SaveGame.Instance.LoseAllInfo();
                     }
                     else if (i < 15)
                     {
-                        Profile.Instance.MsgPrint("Weird visions seem to dance before your eyes...");
+                        SaveGame.Instance.MsgPrint("Weird visions seem to dance before your eyes...");
                         player.SetTimedHallucinations(player.TimedHallucinations + 5 + Program.Rng.DieRoll(10));
                     }
                     else if (i < 45)
                     {
-                        Profile.Instance.MsgPrint("Your brain is addled!");
+                        SaveGame.Instance.MsgPrint("Your brain is addled!");
                         player.SetTimedConfusion(player.TimedConfusion + Program.Rng.DieRoll(8));
                     }
                     else if (i < 90)
@@ -291,7 +291,7 @@ namespace Cthangband.Commands
                     }
                     else
                     {
-                        Profile.Instance.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
+                        SaveGame.Instance.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
                         SaveGame.Instance.Project(1, 2 + (plev / 10), player.MapY, player.MapX, plev * 2,
                             new ProjectMana(),
                             ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
@@ -314,12 +314,12 @@ namespace Cthangband.Commands
                 int oops = talent.ManaCost - player.Mana;
                 player.Mana = 0;
                 player.FractionalMana = 0;
-                Profile.Instance.MsgPrint("You faint from the effort!");
+                SaveGame.Instance.MsgPrint("You faint from the effort!");
                 player.SetTimedParalysis(player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
-                    Profile.Instance.MsgPrint("You have damaged your mind!");
+                    SaveGame.Instance.MsgPrint("You have damaged your mind!");
                     player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }

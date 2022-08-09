@@ -26,8 +26,8 @@ namespace Cthangband.Mutations.RandomMutations
             if (Program.Rng.DieRoll(3000) == 13)
             {
                 saveGame.Disturb(false);
-                Profile.Instance.MsgPrint("BRRAAAP! Oops.");
-                Profile.Instance.MsgPrint(null);
+                SaveGame.Instance.MsgPrint("BRRAAAP! Oops.");
+                SaveGame.Instance.MsgPrint(null);
                 saveGame.FireBall(new ProjectPois(), 0, player.Level, 3);
             }
         }

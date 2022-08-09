@@ -26,17 +26,17 @@ namespace Cthangband.Commands
             // Make sure we're in a situation where we can read
             if (saveGame.Player.TimedBlindness != 0)
             {
-                Profile.Instance.MsgPrint("You can't see anything.");
+                SaveGame.Instance.MsgPrint("You can't see anything.");
                 return;
             }
             if (saveGame.Level.NoLight())
             {
-                Profile.Instance.MsgPrint("You have no light to read by.");
+                SaveGame.Instance.MsgPrint("You have no light to read by.");
                 return;
             }
             if (saveGame.Player.TimedConfusion != 0)
             {
-                Profile.Instance.MsgPrint("You are too confused!");
+                SaveGame.Instance.MsgPrint("You are too confused!");
                 return;
             }
             // If we weren't passed in an item, prompt for one
@@ -47,7 +47,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no scrolls to read.");
+                        SaveGame.Instance.MsgPrint("You have no scrolls to read.");
                     }
                     return;
                 }
@@ -57,7 +57,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Scroll;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a scroll!");
+                SaveGame.Instance.MsgPrint("That is not a scroll!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -84,7 +84,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.AggravateMonster:
                     {
-                        Profile.Instance.MsgPrint("There is a high pitched humming noise.");
+                        SaveGame.Instance.MsgPrint("There is a high pitched humming noise.");
                         SaveGame.Instance.AggravateMonsters(1);
                         identified = true;
                         break;
@@ -182,7 +182,7 @@ namespace Cthangband.Commands
                     {
                         if (SaveGame.Instance.RemoveCurse())
                         {
-                            Profile.Instance.MsgPrint("You feel as if someone is watching over you.");
+                            SaveGame.Instance.MsgPrint("You feel as if someone is watching over you.");
                             identified = true;
                         }
                         break;
@@ -345,7 +345,7 @@ namespace Cthangband.Commands
                     {
                         if (!saveGame.Player.HasConfusingTouch)
                         {
-                            Profile.Instance.MsgPrint("Your hands begin to glow.");
+                            SaveGame.Instance.MsgPrint("Your hands begin to glow.");
                             saveGame.Player.HasConfusingTouch = true;
                             identified = true;
                         }
@@ -444,8 +444,8 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Rumor:
                     {
-                        Profile.Instance.MsgPrint("There is message on the scroll. It says:");
-                        Profile.Instance.MsgPrint(null);
+                        SaveGame.Instance.MsgPrint("There is message on the scroll. It says:");
+                        SaveGame.Instance.MsgPrint(null);
                         SaveGame.Instance.GetRumour();
                         identified = true;
                         break;
@@ -453,7 +453,7 @@ namespace Cthangband.Commands
                 case ScrollType.Invocation:
                     {
                         var patron = SaveGame.Instance.PatronList[Program.Rng.DieRoll(SaveGame.Instance.PatronList.Length) - 1];
-                        Profile.Instance.MsgPrint($"You invoke the secret name of {patron.LongName}.");
+                        SaveGame.Instance.MsgPrint($"You invoke the secret name of {patron.LongName}.");
                         patron.GetReward(saveGame.Player, SaveGame.Instance.Level, SaveGame.Instance);
                         identified = true;
                         break;

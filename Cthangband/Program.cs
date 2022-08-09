@@ -596,11 +596,11 @@ namespace Cthangband
             if (tempDeath)
             {
                 color = Colour.Grey;
-                tempLev = tempProfile.ExPlayer.Level;
-                tempRace = tempProfile.ExPlayer.RaceIndex;
-                tempClass = tempProfile.ExPlayer.ProfessionIndex;
-                tempRealm = tempProfile.ExPlayer.Realm1;
-                tempName = tempProfile.ExPlayer.Name.Trim() + tempProfile.ExPlayer.Generation.ToRoman(true);
+                tempLev = tempProfile.Game.ExPlayer.Level;
+                tempRace = tempProfile.Game.ExPlayer.RaceIndex;
+                tempClass = tempProfile.Game.ExPlayer.ProfessionIndex;
+                tempRealm = tempProfile.Game.ExPlayer.Realm1;
+                tempName = tempProfile.Game.ExPlayer.Name.Trim() + tempProfile.Game.ExPlayer.Generation.ToRoman(true);
             }
             else
             {

@@ -31,7 +31,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no rod to zap.");
+                        SaveGame.Instance.MsgPrint("You have no rod to zap.");
                     }
                     return;
                 }
@@ -41,7 +41,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Rod;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a rod!");
+                SaveGame.Instance.MsgPrint("That is not a rod!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -49,7 +49,7 @@ namespace Cthangband.Commands
             // Rods can't be used from the floor
             if (itemIndex < 0 && item.Count > 1)
             {
-                Profile.Instance.MsgPrint("You must first pick up the rods.");
+                SaveGame.Instance.MsgPrint("You must first pick up the rods.");
                 return;
             }
             // We may need to aim the rod
@@ -82,13 +82,13 @@ namespace Cthangband.Commands
             // Do the actual check
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                Profile.Instance.MsgPrint("You failed to use the rod properly.");
+                SaveGame.Instance.MsgPrint("You failed to use the rod properly.");
                 return;
             }
             // Rods only have a single charge but recharge over time
             if (item.TypeSpecificValue != 0)
             {
-                Profile.Instance.MsgPrint("The rod is still charging.");
+                SaveGame.Instance.MsgPrint("The rod is still charging.");
                 return;
             }
             Gui.PlaySound(SoundEffect.ZapRod);
@@ -280,7 +280,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Light:
                     {
-                        Profile.Instance.MsgPrint("A line of blue shimmering light appears.");
+                        SaveGame.Instance.MsgPrint("A line of blue shimmering light appears.");
                         SaveGame.Instance.LightLine(dir);
                         identified = true;
                         item.TypeSpecificValue = 9;
@@ -424,7 +424,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleRod.Weight;
                     saveGame.Player.Inventory.InvenCarry(singleRod, false);
-                    Profile.Instance.MsgPrint("You unstack your rod.");
+                    SaveGame.Instance.MsgPrint("You unstack your rod.");
                 }
             }
         }

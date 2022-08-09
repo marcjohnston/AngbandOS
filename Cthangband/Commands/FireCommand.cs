@@ -23,7 +23,7 @@ namespace Cthangband.Commands
             Item missileWeapon = saveGame.Player.Inventory[InventorySlot.RangedWeapon];
             if (missileWeapon.Category == 0)
             {
-                Profile.Instance.MsgPrint("You have nothing to fire with.");
+                SaveGame.Instance.MsgPrint("You have nothing to fire with.");
                 return;
             }
             // Get the ammunition to fire
@@ -32,7 +32,7 @@ namespace Cthangband.Commands
             {
                 if (itemIndex == -2)
                 {
-                    Profile.Instance.MsgPrint("You have nothing to fire.");
+                    SaveGame.Instance.MsgPrint("You have nothing to fire.");
                 }
                 return;
             }
@@ -173,12 +173,12 @@ namespace Cthangband.Commands
                         }
                         if (!visible)
                         {
-                            Profile.Instance.MsgPrint($"The {missileName} finds a mark.");
+                            SaveGame.Instance.MsgPrint($"The {missileName} finds a mark.");
                         }
                         else
                         {
                             string monsterName = monster.MonsterDesc(0);
-                            Profile.Instance.MsgPrint($"The {missileName} hits {monsterName}.");
+                            SaveGame.Instance.MsgPrint($"The {missileName} hits {monsterName}.");
                             if (monster.IsVisible)
                             {
                                 SaveGame.Instance.HealthTrack(tile.MonsterIndex);
@@ -187,7 +187,7 @@ namespace Cthangband.Commands
                             if ((monster.Mind & Constants.SmFriendly) != 0)
                             {
                                 monsterName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{monsterName} gets angry!");
+                                SaveGame.Instance.MsgPrint($"{monsterName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
                         }
@@ -209,7 +209,7 @@ namespace Cthangband.Commands
                             {
                                 Gui.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
-                                Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                                SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                             }
                         }
                     }

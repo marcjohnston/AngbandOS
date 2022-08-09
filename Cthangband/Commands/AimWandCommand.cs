@@ -30,7 +30,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no wand to aim.");
+                        SaveGame.Instance.MsgPrint("You have no wand to aim.");
                     }
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Wand;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a wand!");
+                SaveGame.Instance.MsgPrint("That is not a wand!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -48,7 +48,7 @@ namespace Cthangband.Commands
             // We can't use wands directly from the floor, since we need to aim them
             if (itemIndex < 0 && item.Count > 1)
             {
-                Profile.Instance.MsgPrint("You must first pick up the wands.");
+                SaveGame.Instance.MsgPrint("You must first pick up the wands.");
                 return;
             }
             // Aim the wand
@@ -76,13 +76,13 @@ namespace Cthangband.Commands
             }
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                Profile.Instance.MsgPrint("You failed to use the wand properly.");
+                SaveGame.Instance.MsgPrint("You failed to use the wand properly.");
                 return;
             }
             // Make sure we have charges
             if (item.TypeSpecificValue <= 0)
             {
-                Profile.Instance.MsgPrint("The wand has no charges left.");
+                SaveGame.Instance.MsgPrint("The wand has no charges left.");
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
@@ -153,7 +153,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Light:
                     {
-                        Profile.Instance.MsgPrint("A line of blue shimmering light appears.");
+                        SaveGame.Instance.MsgPrint("A line of blue shimmering light appears.");
                         SaveGame.Instance.LightLine(dir);
                         ident = true;
                         break;
@@ -274,7 +274,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Wonder:
                     {
-                        Profile.Instance.MsgPrint("Oops. Wand of wonder activated.");
+                        SaveGame.Instance.MsgPrint("Oops. Wand of wonder activated.");
                         break;
                     }
                 case WandType.DragonFire:
@@ -365,7 +365,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= splitItem.Weight;
                     itemIndex = saveGame.Player.Inventory.InvenCarry(splitItem, false);
-                    Profile.Instance.MsgPrint("You unstack your wand.");
+                    SaveGame.Instance.MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
                 if (itemIndex >= 0)

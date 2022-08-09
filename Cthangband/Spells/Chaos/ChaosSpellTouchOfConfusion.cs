@@ -17,7 +17,7 @@ namespace Cthangband.Spells.Chaos
         {
             if (!player.HasConfusingTouch)
             {
-                Profile.Instance.MsgPrint("Your hands start glowing.");
+                SaveGame.Instance.MsgPrint("Your hands start glowing.");
                 player.HasConfusingTouch = true;
             }
         }

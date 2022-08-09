@@ -38,25 +38,25 @@ namespace Cthangband.Spells.Death
             {
                 return;
             }
-            Profile.Instance.MsgPrint("You call on the power of the dead...");
+            SaveGame.Instance.MsgPrint("You call on the power of the dead...");
             if (die > 100)
             {
-                Profile.Instance.MsgPrint("You feel a surge of eldritch force!");
+                SaveGame.Instance.MsgPrint("You feel a surge of eldritch force!");
             }
             if (die < 8)
             {
-                Profile.Instance.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
+                SaveGame.Instance.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
                 level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty,
                     Constants.SummonUndead);
             }
             if (die < 14)
             {
-                Profile.Instance.MsgPrint("An unnamable evil brushes against your mind...");
+                SaveGame.Instance.MsgPrint("An unnamable evil brushes against your mind...");
                 player.SetTimedFear(player.TimedFear + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 26)
             {
-                Profile.Instance.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
+                SaveGame.Instance.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
                 player.SetTimedConfusion(player.TimedConfusion + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 31)
@@ -146,7 +146,7 @@ namespace Cthangband.Spells.Death
             player.RestoreHealth(300);
             if (die < 31)
             {
-                Profile.Instance.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
+                SaveGame.Instance.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
             }
         }
 

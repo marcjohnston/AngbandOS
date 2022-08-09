@@ -34,7 +34,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        saveGame.Profile.MsgPrint("You have nothing to activate.");
+                        saveGame.MsgPrint("You have nothing to activate.");
                     }
                     return;
                 }
@@ -45,7 +45,7 @@ namespace Cthangband.Commands
             saveGame.ItemFilter = saveGame.ItemFilterActivatable;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("You can't activate that!");
+                SaveGame.Instance.MsgPrint("You can't activate that!");
                 saveGame.ItemFilter = null;
                 return;
             }
@@ -74,17 +74,17 @@ namespace Cthangband.Commands
             // If we fail our use item roll just tell us and quit
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                saveGame.Profile.MsgPrint("You failed to activate it properly.");
+                saveGame.MsgPrint("You failed to activate it properly.");
                 return;
             }
             // If the item is still recharging, then just tell us and quit
             if (item.RechargeTimeLeft != 0)
             {
-                saveGame.Profile.MsgPrint("It whines, glows and fades...");
+                saveGame.MsgPrint("It whines, glows and fades...");
                 return;
             }
             // We passed the checks, so the item is activated
-            saveGame.Profile.MsgPrint("You activate it...");
+            saveGame.MsgPrint("You activate it...");
             Gui.PlaySound(SoundEffect.ActivateArtifact);
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)
@@ -100,7 +100,7 @@ namespace Cthangband.Commands
                     // Star Essence of Polaris lights the area
                     case FixedArtifactId.StarEssenceOfPolaris:
                         {
-                            Profile.Instance.MsgPrint("The essence wells with clear light...");
+                            SaveGame.Instance.MsgPrint("The essence wells with clear light...");
                             SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(10) + 10;
                             break;
@@ -108,7 +108,7 @@ namespace Cthangband.Commands
                     // Star essence of Xoth lights and maps the area
                     case FixedArtifactId.StarEssenceOfXoth:
                         {
-                            Profile.Instance.MsgPrint("The essence shines brightly...");
+                            SaveGame.Instance.MsgPrint("The essence shines brightly...");
                             saveGame.Level.MapArea();
                             SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 15), 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
@@ -118,9 +118,9 @@ namespace Cthangband.Commands
                     // health to do so
                     case FixedArtifactId.ShiningTrapezohedron:
                         {
-                            Profile.Instance.MsgPrint("The gemstone flashes bright red!");
+                            SaveGame.Instance.MsgPrint("The gemstone flashes bright red!");
                             saveGame.Level.WizLight();
-                            Profile.Instance.MsgPrint("The gemstone drains your vitality...");
+                            SaveGame.Instance.MsgPrint("The gemstone drains your vitality...");
                             saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
                             SaveGame.Instance.DetectTraps();
                             SaveGame.Instance.DetectDoors();
@@ -135,7 +135,7 @@ namespace Cthangband.Commands
                     // Amulet of Lobon protects us from evil
                     case FixedArtifactId.AmuletOfLobon:
                         {
-                            Profile.Instance.MsgPrint("The amulet lets out a shrill wail...");
+                            SaveGame.Instance.MsgPrint("The amulet lets out a shrill wail...");
                             int k = 3 * saveGame.Player.Level;
                             saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
@@ -144,7 +144,7 @@ namespace Cthangband.Commands
                     // Amulet of Abdul Alhazred dispels evil
                     case FixedArtifactId.AmuletOfAbdulAlhazred:
                         {
-                            Profile.Instance.MsgPrint("The amulet floods the area with goodness...");
+                            SaveGame.Instance.MsgPrint("The amulet floods the area with goodness...");
                             SaveGame.Instance.DispelEvil(saveGame.Player.Level * 5);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
@@ -152,7 +152,7 @@ namespace Cthangband.Commands
                     // Ring of Magic has a djinn in it that drains life from an opponent
                     case FixedArtifactId.RingOfMagic:
                         {
-                            Profile.Instance.MsgPrint("You order Frakir to strangle your opponent.");
+                            SaveGame.Instance.MsgPrint("You order Frakir to strangle your opponent.");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -166,7 +166,7 @@ namespace Cthangband.Commands
                     // Ring of Bast hastes you
                     case FixedArtifactId.RingOfBast:
                         {
-                            Profile.Instance.MsgPrint("The ring glows brightly...");
+                            SaveGame.Instance.MsgPrint("The ring glows brightly...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
@@ -181,7 +181,7 @@ namespace Cthangband.Commands
                     // Ring of Elemental Fire casts a fireball
                     case FixedArtifactId.RingOfElementalPowerFire:
                         {
-                            Profile.Instance.MsgPrint("The ring glows deep red...");
+                            SaveGame.Instance.MsgPrint("The ring glows deep red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -193,7 +193,7 @@ namespace Cthangband.Commands
                     // Ring of Elemental Ice casts a coldball
                     case FixedArtifactId.RingOfElementalPowerIce:
                         {
-                            Profile.Instance.MsgPrint("The ring glows bright white...");
+                            SaveGame.Instance.MsgPrint("The ring glows bright white...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -205,7 +205,7 @@ namespace Cthangband.Commands
                     // Ring of Elemental Lightning casts a lightning ball
                     case FixedArtifactId.RingOfElementalPowerStorm:
                         {
-                            Profile.Instance.MsgPrint("The ring glows deep blue...");
+                            SaveGame.Instance.MsgPrint("The ring glows deep blue...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -217,7 +217,7 @@ namespace Cthangband.Commands
                     // Ring of Set has a random effect
                     case FixedArtifactId.RingOfSet:
                         {
-                            Profile.Instance.MsgPrint("The ring glows intensely black...");
+                            SaveGame.Instance.MsgPrint("The ring glows intensely black...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -229,7 +229,7 @@ namespace Cthangband.Commands
                     // Razorback gives you a point-blank lightning ball
                     case FixedArtifactId.DragonScaleRazorback:
                         {
-                            Profile.Instance.MsgPrint("Your armor is surrounded by lightning...");
+                            SaveGame.Instance.MsgPrint("Your armor is surrounded by lightning...");
                             for (int i = 0; i < 8; i++)
                             {
                                 SaveGame.Instance.FireBall(new ProjectElec(), saveGame.Level.OrderedDirection[i], 150, 3);
@@ -244,9 +244,9 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            Profile.Instance.MsgPrint("You breathe the elements.");
+                            SaveGame.Instance.MsgPrint("You breathe the elements.");
                             SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, 4);
-                            Profile.Instance.MsgPrint("Your armor glows many colors...");
+                            SaveGame.Instance.MsgPrint("Your armor glows many colors...");
                             saveGame.Player.SetTimedFear(0);
                             saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
                             saveGame.Player.RestoreHealth(30);
@@ -262,8 +262,8 @@ namespace Cthangband.Commands
                     // Soulkeeper heals you a lot
                     case FixedArtifactId.PlateMailSoulkeeper:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows a bright white...");
-                            Profile.Instance.MsgPrint("You feel much better...");
+                            SaveGame.Instance.MsgPrint("Your armor glows a bright white...");
+                            SaveGame.Instance.MsgPrint("You feel much better...");
                             saveGame.Player.RestoreHealth(1000);
                             saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 888;
@@ -272,7 +272,7 @@ namespace Cthangband.Commands
                     // Vampire Hunter cures most ailments
                     case FixedArtifactId.ArmourOfTheVampireHunter:
                         {
-                            Profile.Instance.MsgPrint("A heavenly choir sings...");
+                            SaveGame.Instance.MsgPrint("A heavenly choir sings...");
                             saveGame.Player.SetTimedPoison(0);
                             saveGame.Player.SetTimedBleeding(0);
                             saveGame.Player.SetTimedStun(0);
@@ -286,7 +286,7 @@ namespace Cthangband.Commands
                     // Orc does Carnage
                     case FixedArtifactId.ArmourOfTheOrcs:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows deep blue...");
+                            SaveGame.Instance.MsgPrint("Your armor glows deep blue...");
                             SaveGame.Instance.Carnage(true);
                             item.RechargeTimeLeft = 500;
                             break;
@@ -294,7 +294,7 @@ namespace Cthangband.Commands
                     // Ogre Lords destroys doors
                     case FixedArtifactId.ArmourOfTheOgreLords:
                         {
-                            Profile.Instance.MsgPrint("Your armor glows bright red...");
+                            SaveGame.Instance.MsgPrint("Your armor glows bright red...");
                             SaveGame.Instance.DestroyDoorsTouch();
                             item.RechargeTimeLeft = 10;
                             break;
@@ -310,8 +310,8 @@ namespace Cthangband.Commands
                     // Skull Keeper detects everything
                     case FixedArtifactId.HelmSkullkeeper:
                         {
-                            Profile.Instance.MsgPrint("Your helm glows bright white...");
-                            Profile.Instance.MsgPrint("An image forms in your mind...");
+                            SaveGame.Instance.MsgPrint("Your helm glows bright white...");
+                            SaveGame.Instance.MsgPrint("An image forms in your mind...");
                             SaveGame.Instance.DetectAll();
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
                             break;
@@ -319,8 +319,8 @@ namespace Cthangband.Commands
                     // Sun Crown heals
                     case FixedArtifactId.CrownOfTheSun:
                         {
-                            Profile.Instance.MsgPrint("Your crown glows deep yellow...");
-                            Profile.Instance.MsgPrint("You feel a warm tingling inside...");
+                            SaveGame.Instance.MsgPrint("Your crown glows deep yellow...");
+                            SaveGame.Instance.MsgPrint("You feel a warm tingling inside...");
                             saveGame.Player.RestoreHealth(700);
                             saveGame.Player.SetTimedBleeding(0);
                             item.RechargeTimeLeft = 250;
@@ -329,7 +329,7 @@ namespace Cthangband.Commands
                     // Cloak of Barzai gives resistances
                     case FixedArtifactId.CloakOfBarzai:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows many colours...");
+                            SaveGame.Instance.MsgPrint("Your cloak glows many colours...");
                             saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
                             saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
@@ -341,7 +341,7 @@ namespace Cthangband.Commands
                     // Darkness sends monsters to sleep
                     case FixedArtifactId.CloakDarkness:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows deep blue...");
+                            SaveGame.Instance.MsgPrint("Your cloak glows deep blue...");
                             SaveGame.Instance.SleepMonstersTouch();
                             item.RechargeTimeLeft = 55;
                             break;
@@ -349,7 +349,7 @@ namespace Cthangband.Commands
                     // Swashbuckler recharges items
                     case FixedArtifactId.CloakOfTheSwashbuckler:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows bright yellow...");
+                            SaveGame.Instance.MsgPrint("Your cloak glows bright yellow...");
                             SaveGame.Instance.Recharge(60);
                             item.RechargeTimeLeft = 70;
                             break;
@@ -357,7 +357,7 @@ namespace Cthangband.Commands
                     // Shifter teleports you
                     case FixedArtifactId.CloakShifter:
                         {
-                            Profile.Instance.MsgPrint("Your cloak twists space around you...");
+                            SaveGame.Instance.MsgPrint("Your cloak twists space around you...");
                             SaveGame.Instance.TeleportPlayer(100);
                             item.RechargeTimeLeft = 45;
                             break;
@@ -365,7 +365,7 @@ namespace Cthangband.Commands
                     // Nyogtha restores experience
                     case FixedArtifactId.ShadowCloakOfNyogtha:
                         {
-                            Profile.Instance.MsgPrint("Your cloak glows a deep red...");
+                            SaveGame.Instance.MsgPrint("Your cloak glows a deep red...");
                             saveGame.Player.RestoreLevel();
                             item.RechargeTimeLeft = 450;
                             break;
@@ -373,7 +373,7 @@ namespace Cthangband.Commands
                     // Light shoots magic missiles
                     case FixedArtifactId.GlovesOfLight:
                         {
-                            Profile.Instance.MsgPrint("Your gloves glow extremely brightly...");
+                            SaveGame.Instance.MsgPrint("Your gloves glow extremely brightly...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -386,7 +386,7 @@ namespace Cthangband.Commands
                     // Iron Fist shoots fire bolts
                     case FixedArtifactId.GauntletIronfist:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in fire...");
+                            SaveGame.Instance.MsgPrint("Your gauntlets are covered in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -398,7 +398,7 @@ namespace Cthangband.Commands
                     // Ghouls shoot cold bolts
                     case FixedArtifactId.GauntletsOfGhouls:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in frost...");
+                            SaveGame.Instance.MsgPrint("Your gauntlets are covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -410,7 +410,7 @@ namespace Cthangband.Commands
                     // White Spark shoot lightning bolts
                     case FixedArtifactId.GauntletsWhiteSpark:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in sparks...");
+                            SaveGame.Instance.MsgPrint("Your gauntlets are covered in sparks...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -422,7 +422,7 @@ namespace Cthangband.Commands
                     // The Dead shoot acid bolts
                     case FixedArtifactId.GauntletsOfTheDead:
                         {
-                            Profile.Instance.MsgPrint("Your gauntlets are covered in acid...");
+                            SaveGame.Instance.MsgPrint("Your gauntlets are covered in acid...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -434,7 +434,7 @@ namespace Cthangband.Commands
                     // Cesti shoot arrows
                     case FixedArtifactId.CestiOfCombat:
                         {
-                            Profile.Instance.MsgPrint("Your cesti grows magical spikes...");
+                            SaveGame.Instance.MsgPrint("Your cesti grows magical spikes...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -446,7 +446,7 @@ namespace Cthangband.Commands
                     // Boots haste you
                     case FixedArtifactId.BootsOfIthaqua:
                         {
-                            Profile.Instance.MsgPrint("A wind swirls around your boots...");
+                            SaveGame.Instance.MsgPrint("A wind swirls around your boots...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
@@ -461,7 +461,7 @@ namespace Cthangband.Commands
                     // Dancing heal poison and fear
                     case FixedArtifactId.BootsOfDancing:
                         {
-                            Profile.Instance.MsgPrint("Your boots glow deep blue...");
+                            SaveGame.Instance.MsgPrint("Your boots glow deep blue...");
                             saveGame.Player.SetTimedFear(0);
                             saveGame.Player.SetTimedPoison(0);
                             item.RechargeTimeLeft = 5;
@@ -470,7 +470,7 @@ namespace Cthangband.Commands
                     // Faith shoots a fire bolt
                     case FixedArtifactId.DaggerOfFaith:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in fire...");
+                            SaveGame.Instance.MsgPrint("Your dagger is covered in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -482,7 +482,7 @@ namespace Cthangband.Commands
                     // Hope shoots a frost bolt
                     case FixedArtifactId.DaggerOfHope:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in frost...");
+                            SaveGame.Instance.MsgPrint("Your dagger is covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -494,7 +494,7 @@ namespace Cthangband.Commands
                     // Charity shoots a lightning bolt
                     case FixedArtifactId.DaggerOfCharity:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in sparks...");
+                            SaveGame.Instance.MsgPrint("Your dagger is covered in sparks...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -506,7 +506,7 @@ namespace Cthangband.Commands
                     // Thoth shoots a poison ball
                     case FixedArtifactId.DaggerOfThoth:
                         {
-                            Profile.Instance.MsgPrint("Your dagger throbs deep green...");
+                            SaveGame.Instance.MsgPrint("Your dagger throbs deep green...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -518,7 +518,7 @@ namespace Cthangband.Commands
                     // Icicle shoots a cold ball
                     case FixedArtifactId.DaggerIcicle:
                         {
-                            Profile.Instance.MsgPrint("Your dagger is covered in frost...");
+                            SaveGame.Instance.MsgPrint("Your dagger is covered in frost...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -570,7 +570,7 @@ namespace Cthangband.Commands
                     // Excalibur shoots a frost ball
                     case FixedArtifactId.SwordExcalibur:
                         {
-                            Profile.Instance.MsgPrint("Your sword glows an intense blue...");
+                            SaveGame.Instance.MsgPrint("Your sword glows an intense blue...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -582,7 +582,7 @@ namespace Cthangband.Commands
                     // Dawn Sword summons a reaver
                     case FixedArtifactId.SwordOfTheDawn:
                         {
-                            Profile.Instance.MsgPrint("Your sword flickers black for a moment...");
+                            SaveGame.Instance.MsgPrint("Your sword flickers black for a moment...");
                             saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, Constants.SummonReaver, true);
                             item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
                             break;
@@ -590,7 +590,7 @@ namespace Cthangband.Commands
                     // Everflame shoots a fire ball
                     case FixedArtifactId.SwordOfEverflame:
                         {
-                            Profile.Instance.MsgPrint("Your sword glows an intense red...");
+                            SaveGame.Instance.MsgPrint("Your sword glows an intense red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -602,7 +602,7 @@ namespace Cthangband.Commands
                     // Theoden drains life
                     case FixedArtifactId.AxeOfTheoden:
                         {
-                            Profile.Instance.MsgPrint("Your axe blade glows black...");
+                            SaveGame.Instance.MsgPrint("Your axe blade glows black...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -614,7 +614,7 @@ namespace Cthangband.Commands
                     // Grungnir shoots a lightning ball
                     case FixedArtifactId.SpearGungnir:
                         {
-                            Profile.Instance.MsgPrint("Your spear crackles with electricity...");
+                            SaveGame.Instance.MsgPrint("Your spear crackles with electricity...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -626,7 +626,7 @@ namespace Cthangband.Commands
                     // Destiny does rock to mud
                     case FixedArtifactId.SpearOfDestiny:
                         {
-                            Profile.Instance.MsgPrint("Your spear pulsates...");
+                            SaveGame.Instance.MsgPrint("Your spear pulsates...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -638,7 +638,7 @@ namespace Cthangband.Commands
                     // Trolls does mass carnage
                     case FixedArtifactId.AxeOfTheTrolls:
                         {
-                            Profile.Instance.MsgPrint("Your axe lets out a long, shrill note...");
+                            SaveGame.Instance.MsgPrint("Your axe lets out a long, shrill note...");
                             SaveGame.Instance.MassCarnage(true);
                             item.RechargeTimeLeft = 1000;
                             break;
@@ -646,7 +646,7 @@ namespace Cthangband.Commands
                     // Spleens Slicer heals you
                     case FixedArtifactId.AxeSpleenSlicer:
                         {
-                            Profile.Instance.MsgPrint("Your battle axe radiates deep purple...");
+                            SaveGame.Instance.MsgPrint("Your battle axe radiates deep purple...");
                             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                             saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
@@ -655,7 +655,7 @@ namespace Cthangband.Commands
                     // Gnorri teleports monsters away
                     case FixedArtifactId.TridentOfTheGnorri:
                         {
-                            Profile.Instance.MsgPrint("Your trident glows deep red...");
+                            SaveGame.Instance.MsgPrint("Your trident glows deep red...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -667,7 +667,7 @@ namespace Cthangband.Commands
                     // G'Harne does Word of Recall
                     case FixedArtifactId.ScytheOfGharne:
                         {
-                            Profile.Instance.MsgPrint("Your scythe glows soft white...");
+                            SaveGame.Instance.MsgPrint("Your scythe glows soft white...");
                             saveGame.Player.ToggleRecall();
                             item.RechargeTimeLeft = 200;
                             break;
@@ -675,7 +675,7 @@ namespace Cthangband.Commands
                     // Totila does confusion
                     case FixedArtifactId.FlailTotila:
                         {
-                            Profile.Instance.MsgPrint("Your flail glows in scintillating colours...");
+                            SaveGame.Instance.MsgPrint("Your flail glows in scintillating colours...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -687,7 +687,7 @@ namespace Cthangband.Commands
                     // Firestarter does fire ball
                     case FixedArtifactId.MorningStarFirestarter:
                         {
-                            Profile.Instance.MsgPrint("Your morning star rages in fire...");
+                            SaveGame.Instance.MsgPrint("Your morning star rages in fire...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -699,7 +699,7 @@ namespace Cthangband.Commands
                     // Thunder does haste
                     case FixedArtifactId.MaceThunder:
                         {
-                            Profile.Instance.MsgPrint("Your mace glows bright green...");
+                            SaveGame.Instance.MsgPrint("Your mace glows bright green...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
                                 saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
@@ -714,7 +714,7 @@ namespace Cthangband.Commands
                     // Ereril does identify
                     case FixedArtifactId.QuarterstaffEriril:
                         {
-                            Profile.Instance.MsgPrint("Your quarterstaff glows yellow...");
+                            SaveGame.Instance.MsgPrint("Your quarterstaff glows yellow...");
                             if (!SaveGame.Instance.IdentifyItem())
                             {
                                 return;
@@ -725,7 +725,7 @@ namespace Cthangband.Commands
                     // Atal does full identify
                     case FixedArtifactId.QuarterstaffOfAtal:
                         {
-                            Profile.Instance.MsgPrint("Your quarterstaff glows brightly...");
+                            SaveGame.Instance.MsgPrint("Your quarterstaff glows brightly...");
                             SaveGame.Instance.DetectAll();
                             SaveGame.Instance.Probing();
                             SaveGame.Instance.IdentifyFully();
@@ -735,7 +735,7 @@ namespace Cthangband.Commands
                     // Justice drains life
                     case FixedArtifactId.HammerJustice:
                         {
-                            Profile.Instance.MsgPrint("Your hammer glows white...");
+                            SaveGame.Instance.MsgPrint("Your hammer glows white...");
                             if (!targetEngine.GetDirectionWithAim(out dir))
                             {
                                 return;
@@ -747,7 +747,7 @@ namespace Cthangband.Commands
                     // Death brands your bolts
                     case FixedArtifactId.CrossbowOfDeath:
                         {
-                            Profile.Instance.MsgPrint("Your crossbow glows deep red...");
+                            SaveGame.Instance.MsgPrint("Your crossbow glows deep red...");
                             SaveGame.Instance.BrandBolts();
                             item.RechargeTimeLeft = 999;
                             break;
@@ -774,35 +774,35 @@ namespace Cthangband.Commands
                 {
                     case DragonArmour.SvDragonBlue:
                         {
-                            Profile.Instance.MsgPrint("You breathe lightning.");
+                            SaveGame.Instance.MsgPrint("You breathe lightning.");
                             SaveGame.Instance.FireBall(new ProjectElec(), dir, 100, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
-                            Profile.Instance.MsgPrint("You breathe frost.");
+                            SaveGame.Instance.MsgPrint("You breathe frost.");
                             SaveGame.Instance.FireBall(new ProjectCold(), dir, 110, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
-                            Profile.Instance.MsgPrint("You breathe acid.");
+                            SaveGame.Instance.MsgPrint("You breathe acid.");
                             SaveGame.Instance.FireBall(new ProjectAcid(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
-                            Profile.Instance.MsgPrint("You breathe poison gas.");
+                            SaveGame.Instance.MsgPrint("You breathe poison gas.");
                             SaveGame.Instance.FireBall(new ProjectPois(), dir, 150, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
-                            Profile.Instance.MsgPrint("You breathe fire.");
+                            SaveGame.Instance.MsgPrint("You breathe fire.");
                             SaveGame.Instance.FireBall(new ProjectFire(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
@@ -813,7 +813,7 @@ namespace Cthangband.Commands
                             string element = chance == 1
                                 ? "lightning"
                                 : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            SaveGame.Instance.MsgPrint($"You breathe {element}.");
                             switch (chance)
                             {
                                 case 0:
@@ -846,14 +846,14 @@ namespace Cthangband.Commands
                         }
                     case DragonArmour.SvDragonBronze:
                         {
-                            Profile.Instance.MsgPrint("You breathe confusion.");
+                            SaveGame.Instance.MsgPrint("You breathe confusion.");
                             SaveGame.Instance.FireBall(new ProjectConfusion(), dir, 120, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
-                            Profile.Instance.MsgPrint("You breathe sound.");
+                            SaveGame.Instance.MsgPrint("You breathe sound.");
                             SaveGame.Instance.FireBall(new ProjectSound(), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
@@ -862,7 +862,7 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "chaos" : "disenchantment";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            SaveGame.Instance.MsgPrint($"You breathe {element}.");
                             SaveGame.Instance.FireBall(
                                 projectile: chance == 1 ? (Projectile)new ProjectChaos() : new ProjectDisenchant(), dir: dir, dam: 220, rad: -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
@@ -872,7 +872,7 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "sound" : "shards";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            SaveGame.Instance.MsgPrint($"You breathe {element}.");
                             SaveGame.Instance.FireBall(
                                 chance == 1 ? (Projectile)new ProjectSound() : new ProjectExplode(), dir, 230, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
@@ -884,7 +884,7 @@ namespace Cthangband.Commands
                             string element = chance == 1
                                 ? "chaos"
                                 : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            SaveGame.Instance.MsgPrint($"You breathe {element}.");
                             SaveGame.Instance.FireBall(
                                 chance == 1
                                     ? new ProjectChaos()
@@ -898,7 +898,7 @@ namespace Cthangband.Commands
                         {
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 0 ? "light" : "darkness";
-                            Profile.Instance.MsgPrint($"You breathe {element}.");
+                            SaveGame.Instance.MsgPrint($"You breathe {element}.");
                             SaveGame.Instance.FireBall(
                                 chance == 0 ? (Projectile)new ProjectLight() : new ProjectDark(), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
@@ -906,7 +906,7 @@ namespace Cthangband.Commands
                         }
                     case DragonArmour.SvDragonPower:
                         {
-                            Profile.Instance.MsgPrint("You breathe the elements.");
+                            SaveGame.Instance.MsgPrint("You breathe the elements.");
                             SaveGame.Instance.FireBall(new ProjectMissile(), dir, 300, -3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
@@ -948,7 +948,7 @@ namespace Cthangband.Commands
                 return;
             }
             // We ran out of item types
-            Profile.Instance.MsgPrint("Oops. That object cannot be activated.");
+            SaveGame.Instance.MsgPrint("Oops. That object cannot be activated.");
         }
     }
 }

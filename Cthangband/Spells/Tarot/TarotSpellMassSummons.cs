@@ -17,7 +17,7 @@ namespace Cthangband.Spells.Tarot
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
             bool noneCame = true;
-            Profile.Instance.MsgPrint("You concentrate on several images at once...");
+            SaveGame.Instance.MsgPrint("You concentrate on several images at once...");
             for (int dummy = 0; dummy < 3 + (player.Level / 10); dummy++)
             {
                 if (Program.Rng.DieRoll(10) > 3)
@@ -30,13 +30,13 @@ namespace Cthangband.Spells.Tarot
                 }
                 else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, 0))
                 {
-                    Profile.Instance.MsgPrint("A summoned creature gets angry!");
+                    SaveGame.Instance.MsgPrint("A summoned creature gets angry!");
                     noneCame = false;
                 }
             }
             if (noneCame)
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

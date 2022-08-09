@@ -24,10 +24,10 @@ namespace Cthangband.Spells.Tarot
             {
                 die = Program.Rng.DieRoll(110) + (player.Level / 5);
             }
-            Profile.Instance.MsgPrint("You shuffle your Tarot deck and draw a card...");
+            SaveGame.Instance.MsgPrint("You shuffle your Tarot deck and draw a card...");
             if (die < 7)
             {
-                Profile.Instance.MsgPrint("Oh no! It's the Blasted Tower!");
+                SaveGame.Instance.MsgPrint("Oh no! It's the Blasted Tower!");
                 for (int dummy = 0; dummy < Program.Rng.DieRoll(3); dummy++)
                 {
                     SaveGame.Instance.ActivateHiSummon();
@@ -35,29 +35,29 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 14)
             {
-                Profile.Instance.MsgPrint("Oh no! It's the Devil!");
+                SaveGame.Instance.MsgPrint("Oh no! It's the Devil!");
                 level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty,
                     Constants.SummonDemon);
             }
             else if (die < 18)
             {
-                Profile.Instance.MsgPrint("Oh no! It's the Hanged Man.");
+                SaveGame.Instance.MsgPrint("Oh no! It's the Hanged Man.");
                 saveGame.ActivateDreadCurse();
             }
             else if (die < 22)
             {
-                Profile.Instance.MsgPrint("It's the swords of discord.");
+                SaveGame.Instance.MsgPrint("It's the swords of discord.");
                 saveGame.AggravateMonsters(1);
             }
             else if (die < 26)
             {
-                Profile.Instance.MsgPrint("It's the Fool.");
+                SaveGame.Instance.MsgPrint("It's the Fool.");
                 player.TryDecreasingAbilityScore(Ability.Intelligence);
                 player.TryDecreasingAbilityScore(Ability.Wisdom);
             }
             else if (die < 30)
             {
-                Profile.Instance.MsgPrint("It's a picture of a strange monster.");
+                SaveGame.Instance.MsgPrint("It's a picture of a strange monster.");
                 if (!level.Monsters.SummonSpecific(player.MapY, player.MapX, saveGame.Difficulty * 3 / 2,
                     32 + Program.Rng.DieRoll(6)))
                 {
@@ -66,52 +66,52 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 33)
             {
-                Profile.Instance.MsgPrint("It's the Moon.");
+                SaveGame.Instance.MsgPrint("It's the Moon.");
                 saveGame.UnlightArea(10, 3);
             }
             else if (die < 38)
             {
-                Profile.Instance.MsgPrint("It's the Wheel of Fortune.");
+                SaveGame.Instance.MsgPrint("It's the Wheel of Fortune.");
                 WildMagic(Program.Rng.DieRoll(32) - 1, player, level);
             }
             else if (die < 40)
             {
-                Profile.Instance.MsgPrint("It's a teleport card.");
+                SaveGame.Instance.MsgPrint("It's a teleport card.");
                 saveGame.TeleportPlayer(10);
             }
             else if (die < 42)
             {
-                Profile.Instance.MsgPrint("It's the Star.");
+                SaveGame.Instance.MsgPrint("It's the Star.");
                 player.SetTimedBlessing(player.TimedBlessing + player.Level);
             }
             else if (die < 47)
             {
-                Profile.Instance.MsgPrint("It's a teleport card.");
+                SaveGame.Instance.MsgPrint("It's a teleport card.");
                 SaveGame.Instance.TeleportPlayer(100);
             }
             else if (die < 52)
             {
-                Profile.Instance.MsgPrint("It's a teleport card.");
+                SaveGame.Instance.MsgPrint("It's a teleport card.");
                 SaveGame.Instance.TeleportPlayer(200);
             }
             else if (die < 60)
             {
-                Profile.Instance.MsgPrint("It's the Tower.");
+                SaveGame.Instance.MsgPrint("It's the Tower.");
                 SaveGame.Instance.WallBreaker();
             }
             else if (die < 72)
             {
-                Profile.Instance.MsgPrint("It's Temperance.");
+                SaveGame.Instance.MsgPrint("It's Temperance.");
                 SaveGame.Instance.SleepMonstersTouch();
             }
             else if (die < 80)
             {
-                Profile.Instance.MsgPrint("It's the Tower.");
+                SaveGame.Instance.MsgPrint("It's the Tower.");
                 SaveGame.Instance.Earthquake(player.MapY, player.MapX, 5);
             }
             else if (die < 82)
             {
-                Profile.Instance.MsgPrint("It's a picture of a friendly monster.");
+                SaveGame.Instance.MsgPrint("It's a picture of a friendly monster.");
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty * 3 / 2,
                     Constants.SummonBizarre1, false))
                 {
@@ -120,7 +120,7 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 84)
             {
-                Profile.Instance.MsgPrint("It's a picture of a friendly monster.");
+                SaveGame.Instance.MsgPrint("It's a picture of a friendly monster.");
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty * 3 / 2,
                     Constants.SummonBizarre2, false))
                 {
@@ -129,7 +129,7 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 86)
             {
-                Profile.Instance.MsgPrint("It's a picture of a friendly monster.");
+                SaveGame.Instance.MsgPrint("It's a picture of a friendly monster.");
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty * 3 / 2,
                     Constants.SummonBizarre4, false))
                 {
@@ -138,7 +138,7 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 88)
             {
-                Profile.Instance.MsgPrint("It's a picture of a friendly monster.");
+                SaveGame.Instance.MsgPrint("It's a picture of a friendly monster.");
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, SaveGame.Instance.Difficulty * 3 / 2,
                     Constants.SummonBizarre5, false))
                 {
@@ -147,7 +147,7 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 96)
             {
-                Profile.Instance.MsgPrint("It's the Lovers.");
+                SaveGame.Instance.MsgPrint("It's the Lovers.");
                 if (!targetEngine.GetDirectionWithAim(out int dir))
                 {
                     return;
@@ -156,16 +156,16 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 101)
             {
-                Profile.Instance.MsgPrint("It's the Hermit.");
+                SaveGame.Instance.MsgPrint("It's the Hermit.");
                 SaveGame.Instance.WallStone();
             }
             else if (die < 111)
             {
-                Profile.Instance.MsgPrint("It's the Judgement.");
+                SaveGame.Instance.MsgPrint("It's the Judgement.");
                 player.RerollHitPoints();
                 if (player.Dna.HasMutations)
                 {
-                    Profile.Instance.MsgPrint("You are cured of all mutations.");
+                    SaveGame.Instance.MsgPrint("You are cured of all mutations.");
                     player.Dna.LoseAllMutations();
                     player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                     SaveGame.Instance.HandleStuff();
@@ -173,12 +173,12 @@ namespace Cthangband.Spells.Tarot
             }
             else if (die < 120)
             {
-                Profile.Instance.MsgPrint("It's the Sun.");
+                SaveGame.Instance.MsgPrint("It's the Sun.");
                 level.WizLight();
             }
             else
             {
-                Profile.Instance.MsgPrint("It's the World.");
+                SaveGame.Instance.MsgPrint("It's the World.");
                 if (player.ExperiencePoints < Constants.PyMaxExp)
                 {
                     int ee = (player.ExperiencePoints / 25) + 1;
@@ -186,13 +186,13 @@ namespace Cthangband.Spells.Tarot
                     {
                         ee = 5000;
                     }
-                    Profile.Instance.MsgPrint("You feel more experienced.");
+                    SaveGame.Instance.MsgPrint("You feel more experienced.");
                     player.GainExperience(ee);
                 }
             }
             if (noneCame)
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

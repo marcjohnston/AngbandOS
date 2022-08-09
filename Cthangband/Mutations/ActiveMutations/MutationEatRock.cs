@@ -30,22 +30,22 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (level.GridPassable(y, x))
             {
-                Profile.Instance.MsgPrint("You bite into thin air!");
+                SaveGame.Instance.MsgPrint("You bite into thin air!");
                 return;
             }
             if (cPtr.FeatureType.IsPermanent)
             {
-                Profile.Instance.MsgPrint("Ouch!  This wall is harder than your teeth!");
+                SaveGame.Instance.MsgPrint("Ouch!  This wall is harder than your teeth!");
                 return;
             }
             if (cPtr.MonsterIndex != 0)
             {
-                Profile.Instance.MsgPrint("There's something in the way!");
+                SaveGame.Instance.MsgPrint("There's something in the way!");
                 return;
             }
             if (cPtr.FeatureType.Category == FloorTileTypeCategory.Tree)
             {
-                Profile.Instance.MsgPrint("You don't like the woody taste!");
+                SaveGame.Instance.MsgPrint("You don't like the woody taste!");
                 return;
             }
             if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.SecretDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.Rubble)
@@ -58,7 +58,7 @@ namespace Cthangband.Mutations.ActiveMutations
             }
             else
             {
-                Profile.Instance.MsgPrint("This granite is very filling!");
+                SaveGame.Instance.MsgPrint("This granite is very filling!");
                 player.SetFood(player.Food + 10000);
             }
             saveGame.WallToMud(dir);

@@ -16,22 +16,22 @@ namespace Cthangband.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("You concentrate on the image of an ancient dragon...");
+            SaveGame.Instance.MsgPrint("You concentrate on the image of an ancient dragon...");
             if (Program.Rng.DieRoll(10) > 3)
             {
                 if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level,
                     Constants.SummonHiDragonNoUniques, true))
                 {
-                    Profile.Instance.MsgPrint("No-one ever turns up.");
+                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
                 }
             }
             else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHiDragonNoUniques))
             {
-                Profile.Instance.MsgPrint("The summoned dragon gets angry!");
+                SaveGame.Instance.MsgPrint("The summoned dragon gets angry!");
             }
             else
             {
-                Profile.Instance.MsgPrint("No-one ever turns up.");
+                SaveGame.Instance.MsgPrint("No-one ever turns up.");
             }
         }
 

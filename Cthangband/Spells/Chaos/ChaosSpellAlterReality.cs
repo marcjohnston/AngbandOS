@@ -15,7 +15,7 @@ namespace Cthangband.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame, Player player, Level level)
         {
-            Profile.Instance.MsgPrint("The world changes!");
+            SaveGame.Instance.MsgPrint("The world changes!");
             {
                 saveGame.DoCmdSaveGame(true);
             }

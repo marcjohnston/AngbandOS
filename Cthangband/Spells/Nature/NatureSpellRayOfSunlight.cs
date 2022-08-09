@@ -20,7 +20,7 @@ namespace Cthangband.Spells.Nature
             {
                 return;
             }
-            Profile.Instance.MsgPrint("A line of sunlight appears.");
+            SaveGame.Instance.MsgPrint("A line of sunlight appears.");
             saveGame.LightLine(dir);
         }
 

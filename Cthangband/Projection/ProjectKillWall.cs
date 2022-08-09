@@ -37,8 +37,8 @@ namespace Cthangband.Projection
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
-                    Profile.Instance.MsgPrint("The vein turns into mud!");
-                    Profile.Instance.MsgPrint("You have found something!");
+                    SaveGame.Instance.MsgPrint("The vein turns into mud!");
+                    SaveGame.Instance.MsgPrint("You have found something!");
                     obvious = true;
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
@@ -49,7 +49,7 @@ namespace Cthangband.Projection
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
-                    Profile.Instance.MsgPrint("The vein turns into mud!");
+                    SaveGame.Instance.MsgPrint("The vein turns into mud!");
                     obvious = true;
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
@@ -59,7 +59,7 @@ namespace Cthangband.Projection
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
-                    Profile.Instance.MsgPrint("The wall turns into mud!");
+                    SaveGame.Instance.MsgPrint("The wall turns into mud!");
                     obvious = true;
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
@@ -69,7 +69,7 @@ namespace Cthangband.Projection
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
-                    Profile.Instance.MsgPrint("The rubble turns into mud!");
+                    SaveGame.Instance.MsgPrint("The rubble turns into mud!");
                     obvious = true;
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
@@ -78,7 +78,7 @@ namespace Cthangband.Projection
                 {
                     if (Level.PlayerCanSeeBold(y, x))
                     {
-                        Profile.Instance.MsgPrint("There was something buried in the rubble!");
+                        SaveGame.Instance.MsgPrint("There was something buried in the rubble!");
                         obvious = true;
                     }
                     Level.PlaceObject(y, x, false, false);
@@ -88,7 +88,7 @@ namespace Cthangband.Projection
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
-                    Profile.Instance.MsgPrint("The door turns into mud!");
+                    SaveGame.Instance.MsgPrint("The door turns into mud!");
                     obvious = true;
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
@@ -133,7 +133,7 @@ namespace Cthangband.Projection
                 bool getAngry = (rPtr.Flags3 & MonsterFlag3.HurtByRock) != 0;
                 if (getAngry && who == 0)
                 {
-                    Profile.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -187,18 +187,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        Profile.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -215,7 +215,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        Profile.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.Instance.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -224,7 +224,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        Profile.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -252,7 +252,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                Profile.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

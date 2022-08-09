@@ -28,8 +28,8 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            Profile.Instance.MsgPrint("You feel the world warping around you!");
-            Profile.Instance.MsgPrint(null);
+            SaveGame.Instance.MsgPrint("You feel the world warping around you!");
+            SaveGame.Instance.MsgPrint(null);
             saveGame.FireBall(new ProjectChaos(), 0, player.Level, 8);
         }
     }

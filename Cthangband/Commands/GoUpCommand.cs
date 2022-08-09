@@ -21,7 +21,7 @@ namespace Cthangband.Commands
             GridTile tile = saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX];
             if (tile.FeatureType.Name != "UpStair")
             {
-                Profile.Instance.MsgPrint("I see no up staircase here.");
+                SaveGame.Instance.MsgPrint("I see no up staircase here.");
                 SaveGame.Instance.EnergyUse = 0;
                 return;
             }
@@ -31,11 +31,11 @@ namespace Cthangband.Commands
             if (SaveGame.Instance.CurrentDepth == 0)
             {
                 SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
-                Profile.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
+                SaveGame.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
             }
             else
             {
-                Profile.Instance.MsgPrint("You enter a maze of up staircases.");
+                SaveGame.Instance.MsgPrint("You enter a maze of up staircases.");
             }
             // Autosave, just in case
             SaveGame.Instance.DoCmdSaveGame(true);

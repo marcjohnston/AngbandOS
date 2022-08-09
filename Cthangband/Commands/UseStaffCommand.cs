@@ -30,7 +30,7 @@ namespace Cthangband.Commands
                 {
                     if (itemIndex == -2)
                     {
-                        Profile.Instance.MsgPrint("You have no staff to use.");
+                        SaveGame.Instance.MsgPrint("You have no staff to use.");
                     }
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Staff;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                Profile.Instance.MsgPrint("That is not a staff!");
+                SaveGame.Instance.MsgPrint("That is not a staff!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -48,7 +48,7 @@ namespace Cthangband.Commands
             // We can't use a staff from the floor
             if (itemIndex < 0 && item.Count > 1)
             {
-                Profile.Instance.MsgPrint("You must first pick up the staffs.");
+                SaveGame.Instance.MsgPrint("You must first pick up the staffs.");
                 return;
             }
             // Using a staff costs a full turn
@@ -71,13 +71,13 @@ namespace Cthangband.Commands
             // Check to see if we use it properly
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                Profile.Instance.MsgPrint("You failed to use the staff properly.");
+                SaveGame.Instance.MsgPrint("You failed to use the staff properly.");
                 return;
             }
             // Make sure it has charges left
             if (item.TypeSpecificValue <= 0)
             {
-                Profile.Instance.MsgPrint("The staff has no charges left.");
+                SaveGame.Instance.MsgPrint("The staff has no charges left.");
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
@@ -150,7 +150,7 @@ namespace Cthangband.Commands
                         {
                             if (saveGame.Player.TimedBlindness == 0)
                             {
-                                Profile.Instance.MsgPrint("The staff glows blue for a moment...");
+                                SaveGame.Instance.MsgPrint("The staff glows blue for a moment...");
                             }
                             identified = true;
                         }
@@ -160,7 +160,7 @@ namespace Cthangband.Commands
                     {
                         if (saveGame.Player.TimedBlindness == 0)
                         {
-                            Profile.Instance.MsgPrint("The end of the staff glows brightly...");
+                            SaveGame.Instance.MsgPrint("The end of the staff glows brightly...");
                         }
                         for (k = 0; k < 8; k++)
                         {
@@ -302,7 +302,7 @@ namespace Cthangband.Commands
                             saveGame.Player.Mana = saveGame.Player.MaxMana;
                             saveGame.Player.FractionalMana = 0;
                             identified = true;
-                            Profile.Instance.MsgPrint("Your feel your head clear.");
+                            SaveGame.Instance.MsgPrint("Your feel your head clear.");
                             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                         }
                         break;
@@ -443,7 +443,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleStaff.Weight;
                     itemIndex = saveGame.Player.Inventory.InvenCarry(singleStaff, false);
-                    Profile.Instance.MsgPrint("You unstack your staff.");
+                    SaveGame.Instance.MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
                 if (itemIndex >= 0)

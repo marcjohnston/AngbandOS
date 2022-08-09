@@ -125,7 +125,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You combine some items in your pack.");
+                SaveGame.Instance.MsgPrint("You combine some items in your pack.");
             }
         }
 
@@ -326,7 +326,7 @@ namespace Cthangband
                             ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y"))
                             : "Y";
                         string w = amt > 1 ? "were" : "was";
-                        Profile.Instance.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
+                        SaveGame.Instance.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
                             SaveGame.Instance.PotionSmashEffect(0, _player.MapY, _player.MapX,
@@ -359,7 +359,7 @@ namespace Cthangband
             }
             Item qPtr = new Item(oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
-            Profile.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+            SaveGame.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
             SaveGame.Instance.Level.DropNear(qPtr, 0, _player.MapY, _player.MapX);
             InvenItemIncrease(item, -amt);
             InvenItemDescribe(item);
@@ -370,7 +370,7 @@ namespace Cthangband
         {
             Item oPtr = _items[item];
             string oName = oPtr.Description(true, 3);
-            Profile.Instance.MsgPrint($"You have {oName}.");
+            SaveGame.Instance.MsgPrint($"You have {oName}.");
         }
 
         public void InvenItemIncrease(int item, int num)
@@ -459,7 +459,7 @@ namespace Cthangband
             InvenItemIncrease(item, -amt);
             InvenItemOptimize(item);
             int slot = InvenCarry(qPtr, false);
-            Profile.Instance.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
+            SaveGame.Instance.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
             return slot;
         }
 
@@ -631,7 +631,7 @@ namespace Cthangband
             }
             if (flag)
             {
-                Profile.Instance.MsgPrint("You reorder some items in your pack.");
+                SaveGame.Instance.MsgPrint("You reorder some items in your pack.");
             }
         }
 
@@ -646,7 +646,7 @@ namespace Cthangband
             {
                 return;
             }
-            Profile.Instance.MsgPrint(oPtr.TypeSpecificValue != 1
+            SaveGame.Instance.MsgPrint(oPtr.TypeSpecificValue != 1
                 ? $"You have {oPtr.TypeSpecificValue} charges remaining."
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
