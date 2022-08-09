@@ -15,7 +15,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            WalkAndPickupCommand.DoCmdWalk(saveGame.Player, saveGame.Level, true);
+            WalkAndPickupCommand.DoCmdWalk(saveGame, true);
         }
     }
 
@@ -33,7 +33,7 @@ namespace Cthangband.Commands
     //    {
     //        if (Gui.CommandArgument > 0)
     //        {
-    //            SaveGame.Instance.Command.CommandRepeat = Gui.CommandArgument - 1;
+    //            saveGame.Command.CommandRepeat = Gui.CommandArgument - 1;
     //            player.RedrawNeeded.Set(RedrawFlag.PrState);
     //            Gui.CommandArgument = 0;
     //        }
@@ -60,25 +60,25 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DoCmdWalk(saveGame.Player, saveGame.Level, false);
+            DoCmdWalk(saveGame, false);
         }
 
-        public static void DoCmdWalk(Player player, Level level, bool dontPickup)
+        public static void DoCmdWalk(SaveGame saveGame, bool dontPickup)
         { 
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             // If we don't already have a direction, get one
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
                 // Walking takes a full turn
-                SaveGame.Instance.EnergyUse = 100;
-                SaveGame.Instance.MovePlayer(dir, dontPickup);
+                saveGame.EnergyUse = 100;
+                saveGame.MovePlayer(dir, dontPickup);
                 disturb = true;
             }
             // We will have been disturbed, unless we cancelled the direction prompt
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

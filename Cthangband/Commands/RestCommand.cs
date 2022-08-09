@@ -61,12 +61,12 @@ namespace Cthangband.Commands
                 Gui.CommandArgument = 9999;
             }
             // Resting takes at least one turn (we'll also be skipping future turns)
-            SaveGame.Instance.EnergyUse = 100;
-            SaveGame.Instance.Resting = Gui.CommandArgument;
+            saveGame.EnergyUse = 100;
+            saveGame.Resting = Gui.CommandArgument;
             saveGame.Player.IsSearching = false;
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
             Gui.Refresh();
         }
     }

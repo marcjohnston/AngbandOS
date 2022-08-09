@@ -28,11 +28,11 @@ namespace Cthangband.Commands
             }
             else if (lightSource.ItemSubCategory == LightType.Lantern)
             {
-                RefillLamp(itemIndex, saveGame.Player, saveGame.Level);
+                RefillLamp(itemIndex, saveGame);
             }
             else if (lightSource.ItemSubCategory == LightType.Torch)
             {
-                RefillTorch(itemIndex, saveGame.Player, saveGame.Level);
+                RefillTorch(itemIndex, saveGame);
             }
             else
             {
@@ -44,118 +44,118 @@ namespace Cthangband.Commands
         /// Refill a lamp
         /// </summary>
         /// <param name="itemIndex"> The inventory index of the fuel </param>
-        private void RefillLamp(int itemIndex, Player player, Level level)
+        private void RefillLamp(int itemIndex, SaveGame saveGame)
         {
             // Get an item if we don't already have one
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterLanternFuel;
+            saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Refill with which flask? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Refill with which flask? ", true, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        SaveGame.Instance.MsgPrint("You have no flasks of oil.");
+                        saveGame.MsgPrint("You have no flasks of oil.");
                     }
                     return;
                 }
             }
-            Item fuelSource = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure our item is suitable fuel
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterLanternFuel;
-            if (!player.Inventory.ItemMatchesFilter(fuelSource))
+            saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource))
             {
-                SaveGame.Instance.MsgPrint("You can't refill a lantern from that!");
-                SaveGame.Instance.ItemFilter = null;
+                saveGame.MsgPrint("You can't refill a lantern from that!");
+                saveGame.ItemFilter = null;
                 return;
             }
-            SaveGame.Instance.ItemFilter = null;
+            saveGame.ItemFilter = null;
             // Refilling takes half a turn
-            SaveGame.Instance.EnergyUse = 50;
-            Item lamp = player.Inventory[InventorySlot.Lightsource];
+            saveGame.EnergyUse = 50;
+            Item lamp = saveGame.Player.Inventory[InventorySlot.Lightsource];
             // Add the fuel
             lamp.TypeSpecificValue += fuelSource.TypeSpecificValue;
-            SaveGame.Instance.MsgPrint("You fuel your lamp.");
+            saveGame.MsgPrint("You fuel your lamp.");
             // Check for overfilling
             if (lamp.TypeSpecificValue >= Constants.FuelLamp)
             {
                 lamp.TypeSpecificValue = Constants.FuelLamp;
-                SaveGame.Instance.MsgPrint("Your lamp is full.");
+                saveGame.MsgPrint("Your lamp is full.");
             }
             // Update the inventory
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                SaveGame.Instance.Level.FloorItemDescribe(0 - itemIndex);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                saveGame.Level.FloorItemDescribe(0 - itemIndex);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
         }
 
         /// <summary>
         /// Refill a torch from another torch
         /// </summary>
         /// <param name="itemIndex"> The inventory index of the fuel </param>
-        private void RefillTorch(int itemIndex, Player player, Level level)
+        private void RefillTorch(int itemIndex, SaveGame saveGame)
         {
             // Get an item if we don't already have one
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterTorchFuel;
+            saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        SaveGame.Instance.MsgPrint("You have no extra torches.");
+                        saveGame.MsgPrint("You have no extra torches.");
                     }
                     return;
                 }
             }
-            Item fuelSource = itemIndex >= 0 ? player.Inventory[itemIndex] : level.Items[0 - itemIndex];
+            Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check that our fuel is suitable
-            SaveGame.Instance.ItemFilter = SaveGame.Instance.ItemFilterTorchFuel;
-            if (!player.Inventory.ItemMatchesFilter(fuelSource))
+            saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource))
             {
-                SaveGame.Instance.MsgPrint("You can't refill a torch with that!");
-                SaveGame.Instance.ItemFilter = null;
+                saveGame.MsgPrint("You can't refill a torch with that!");
+                saveGame.ItemFilter = null;
                 return;
             }
-            SaveGame.Instance.ItemFilter = null;
+            saveGame.ItemFilter = null;
             // Refueling takes half a turn
-            SaveGame.Instance.EnergyUse = 50;
-            Item torch = player.Inventory[InventorySlot.Lightsource];
+            saveGame.EnergyUse = 50;
+            Item torch = saveGame.Player.Inventory[InventorySlot.Lightsource];
             // Add the fuel
             torch.TypeSpecificValue += fuelSource.TypeSpecificValue + 5;
-            SaveGame.Instance.MsgPrint("You combine the torches.");
+            saveGame.MsgPrint("You combine the torches.");
             // Check for overfilling
             if (torch.TypeSpecificValue >= Constants.FuelTorch)
             {
                 torch.TypeSpecificValue = Constants.FuelTorch;
-                SaveGame.Instance.MsgPrint("Your torch is fully fueled.");
+                saveGame.MsgPrint("Your torch is fully fueled.");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Your torch glows more brightly.");
+                saveGame.MsgPrint("Your torch glows more brightly.");
             }
             // Update the player's inventory
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                SaveGame.Instance.Level.FloorItemDescribe(0 - itemIndex);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                saveGame.Level.FloorItemDescribe(0 - itemIndex);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
         }
     }
 }

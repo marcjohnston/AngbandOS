@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            ThrowCommand.DoCmdThrow(player, level, 2 + (player.Level / 16));
+            ThrowCommand.DoCmdThrow(saveGame, 2 + (player.Level / 16));
         }
 
         public override string ActivationSummary(int lvl)

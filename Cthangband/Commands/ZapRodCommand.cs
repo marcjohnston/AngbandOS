@@ -27,11 +27,11 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Rod;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Zap which rod? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Zap which rod? ", false, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        SaveGame.Instance.MsgPrint("You have no rod to zap.");
+                        saveGame.MsgPrint("You have no rod to zap.");
                     }
                     return;
                 }
@@ -41,7 +41,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Rod;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                SaveGame.Instance.MsgPrint("That is not a rod!");
+                saveGame.MsgPrint("That is not a rod!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -49,7 +49,7 @@ namespace Cthangband.Commands
             // Rods can't be used from the floor
             if (itemIndex < 0 && item.Count > 1)
             {
-                SaveGame.Instance.MsgPrint("You must first pick up the rods.");
+                saveGame.MsgPrint("You must first pick up the rods.");
                 return;
             }
             // We may need to aim the rod
@@ -64,7 +64,7 @@ namespace Cthangband.Commands
                 }
             }
             // Using a rod takes a whole turn
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             bool identified = false;
             int itemLevel = item.ItemType.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
@@ -82,13 +82,13 @@ namespace Cthangband.Commands
             // Do the actual check
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                SaveGame.Instance.MsgPrint("You failed to use the rod properly.");
+                saveGame.MsgPrint("You failed to use the rod properly.");
                 return;
             }
             // Rods only have a single charge but recharge over time
             if (item.TypeSpecificValue != 0)
             {
-                SaveGame.Instance.MsgPrint("The rod is still charging.");
+                saveGame.MsgPrint("The rod is still charging.");
                 return;
             }
             Gui.PlaySound(SoundEffect.ZapRod);
@@ -98,7 +98,7 @@ namespace Cthangband.Commands
             {
                 case RodType.DetectTrap:
                     {
-                        if (SaveGame.Instance.DetectTraps())
+                        if (saveGame.DetectTraps())
                         {
                             identified = true;
                         }
@@ -107,11 +107,11 @@ namespace Cthangband.Commands
                     }
                 case RodType.DetectDoor:
                     {
-                        if (SaveGame.Instance.DetectDoors())
+                        if (saveGame.DetectDoors())
                         {
                             identified = true;
                         }
-                        if (SaveGame.Instance.DetectStairs())
+                        if (saveGame.DetectStairs())
                         {
                             identified = true;
                         }
@@ -121,7 +121,7 @@ namespace Cthangband.Commands
                 case RodType.Identify:
                     {
                         identified = true;
-                        if (!SaveGame.Instance.IdentifyItem())
+                        if (!saveGame.IdentifyItem())
                         {
                             useCharge = false;
                         }
@@ -137,7 +137,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Illumination:
                     {
-                        if (SaveGame.Instance.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+                        if (saveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -153,14 +153,14 @@ namespace Cthangband.Commands
                     }
                 case RodType.Detection:
                     {
-                        SaveGame.Instance.DetectAll();
+                        saveGame.DetectAll();
                         identified = true;
                         item.TypeSpecificValue = 99;
                         break;
                     }
                 case RodType.Probing:
                     {
-                        SaveGame.Instance.Probing();
+                        saveGame.Probing();
                         identified = true;
                         item.TypeSpecificValue = 50;
                         break;
@@ -262,7 +262,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.TeleportAway:
                     {
-                        if (SaveGame.Instance.TeleportMonster(dir))
+                        if (saveGame.TeleportMonster(dir))
                         {
                             identified = true;
                         }
@@ -271,7 +271,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Disarming:
                     {
-                        if (SaveGame.Instance.DisarmTrap(dir))
+                        if (saveGame.DisarmTrap(dir))
                         {
                             identified = true;
                         }
@@ -280,15 +280,15 @@ namespace Cthangband.Commands
                     }
                 case RodType.Light:
                     {
-                        SaveGame.Instance.MsgPrint("A line of blue shimmering light appears.");
-                        SaveGame.Instance.LightLine(dir);
+                        saveGame.MsgPrint("A line of blue shimmering light appears.");
+                        saveGame.LightLine(dir);
                         identified = true;
                         item.TypeSpecificValue = 9;
                         break;
                     }
                 case RodType.SleepMonster:
                     {
-                        if (SaveGame.Instance.SleepMonster(dir))
+                        if (saveGame.SleepMonster(dir))
                         {
                             identified = true;
                         }
@@ -297,7 +297,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.SlowMonster:
                     {
-                        if (SaveGame.Instance.SlowMonster(dir))
+                        if (saveGame.SlowMonster(dir))
                         {
                             identified = true;
                         }
@@ -306,7 +306,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.DrainLife:
                     {
-                        if (SaveGame.Instance.DrainLife(dir, 75))
+                        if (saveGame.DrainLife(dir, 75))
                         {
                             identified = true;
                         }
@@ -315,7 +315,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.Polymorph:
                     {
-                        if (SaveGame.Instance.PolyMonster(dir))
+                        if (saveGame.PolyMonster(dir))
                         {
                             identified = true;
                         }
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectAcid(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectAcid(), dir,
                             Program.Rng.DiceRoll(6, 8));
                         identified = true;
                         item.TypeSpecificValue = 12;
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ElecBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectElec(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectElec(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         identified = true;
                         item.TypeSpecificValue = 11;
@@ -340,7 +340,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.FireBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectFire(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectFire(), dir,
                             Program.Rng.DiceRoll(8, 8));
                         identified = true;
                         item.TypeSpecificValue = 15;
@@ -348,7 +348,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ColdBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(10, new ProjectCold(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectCold(), dir,
                             Program.Rng.DiceRoll(5, 8));
                         identified = true;
                         item.TypeSpecificValue = 13;
@@ -356,35 +356,35 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectAcid(), dir, 60, 2);
+                        saveGame.FireBall(new ProjectAcid(), dir, 60, 2);
                         identified = true;
                         item.TypeSpecificValue = 27;
                         break;
                     }
                 case RodType.ElecBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectElec(), dir, 32, 2);
+                        saveGame.FireBall(new ProjectElec(), dir, 32, 2);
                         identified = true;
                         item.TypeSpecificValue = 23;
                         break;
                     }
                 case RodType.FireBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
+                        saveGame.FireBall(new ProjectFire(), dir, 72, 2);
                         identified = true;
                         item.TypeSpecificValue = 30;
                         break;
                     }
                 case RodType.ColdBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
+                        saveGame.FireBall(new ProjectCold(), dir, 48, 2);
                         identified = true;
                         item.TypeSpecificValue = 25;
                         break;
                     }
                 case RodType.Havoc:
                     {
-                        SaveGame.Instance.CallChaos();
+                        saveGame.CallChaos();
                         identified = true;
                         item.TypeSpecificValue = 250;
                         break;
@@ -408,7 +408,7 @@ namespace Cthangband.Commands
             bool channeled = false;
             if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.DoCmdChannel(item);
+                channeled = saveGame.DoCmdChannel(item);
                 if (channeled)
                 {
                     item.TypeSpecificValue = 0;
@@ -424,7 +424,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleRod.Weight;
                     saveGame.Player.Inventory.InvenCarry(singleRod, false);
-                    SaveGame.Instance.MsgPrint("You unstack your rod.");
+                    saveGame.MsgPrint("You unstack your rod.");
                 }
             }
         }

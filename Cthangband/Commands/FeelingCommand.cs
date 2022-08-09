@@ -17,45 +17,45 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DoCmdFeeling(saveGame.Player, saveGame.Level, false);
+            DoCmdFeeling(saveGame, false);
         }
 
-        public static void DoCmdFeeling(Player player, Level level, bool feelingOnly)
+        public static void DoCmdFeeling(SaveGame saveGame, bool feelingOnly)
         {
             // Some sanity checks
-            if (level.DangerFeeling < 0)
+            if (saveGame.Level.DangerFeeling < 0)
             {
-                level.DangerFeeling = 0;
+                saveGame.Level.DangerFeeling = 0;
             }
-            if (level.DangerFeeling > 10)
+            if (saveGame.Level.DangerFeeling > 10)
             {
-                level.DangerFeeling = 10;
+                saveGame.Level.DangerFeeling = 10;
             }
-            if (level.TreasureFeeling < 0)
+            if (saveGame.Level.TreasureFeeling < 0)
             {
-                level.TreasureFeeling = 0;
+                saveGame.Level.TreasureFeeling = 0;
             }
-            if (level.TreasureFeeling > 10)
+            if (saveGame.Level.TreasureFeeling > 10)
             {
-                level.TreasureFeeling = 10;
+                saveGame.Level.TreasureFeeling = 10;
             }
-            if (SaveGame.Instance.CurrentDepth <= 0)
+            if (saveGame.CurrentDepth <= 0)
             {
                 // If we need to say where we are, do so
                 if (!feelingOnly)
                 {
-                    if (SaveGame.Instance.Wilderness[player.WildernessY][player.WildernessX].Town != null)
+                    if (saveGame.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Town != null)
                     {
-                        SaveGame.Instance.MsgPrint($"You are in {SaveGame.Instance.CurTown.Name}.");
+                        saveGame.MsgPrint($"You are in {saveGame.CurTown.Name}.");
                     }
-                    else if (SaveGame.Instance.Wilderness[player.WildernessY][player.WildernessX].Dungeon != null)
+                    else if (saveGame.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon != null)
                     {
-                        SaveGame.Instance.MsgPrint(
-                            $"You are outside {SaveGame.Instance.Wilderness[player.WildernessY][player.WildernessX].Dungeon.Name}.");
+                        saveGame.MsgPrint(
+                            $"You are outside {saveGame.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon.Name}.");
                     }
                     else
                     {
-                        SaveGame.Instance.MsgPrint("You are wandering around outside.");
+                        saveGame.MsgPrint("You are wandering around outside.");
                     }
                 }
                 // If we're not in a dungeon, there's no feeling to be had
@@ -64,29 +64,29 @@ namespace Cthangband.Commands
             // If we need to say where we are, do so
             if (!feelingOnly)
             {
-                SaveGame.Instance.MsgPrint($"You are in {SaveGame.Instance.CurDungeon.Name}.");
-                if (SaveGame.Instance.Quests.IsQuest(SaveGame.Instance.CurrentDepth))
+                saveGame.MsgPrint($"You are in {saveGame.CurDungeon.Name}.");
+                if (saveGame.Quests.IsQuest(saveGame.CurrentDepth))
                 {
-                    SaveGame.Instance.Quests.PrintQuestMessage();
+                    saveGame.Quests.PrintQuestMessage();
                 }
             }
             // Special feeling overrides the normal two-part feeling
-            if (level.DangerFeeling == 1 || level.TreasureFeeling == 1)
+            if (saveGame.Level.DangerFeeling == 1 || saveGame.Level.TreasureFeeling == 1)
             {
                 string message = GlobalData.DangerFeelingText[1];
-                SaveGame.Instance.MsgPrint(player.GameTime.LevelFeel
+                saveGame.MsgPrint(saveGame.Player.GameTime.LevelFeel
                     ? message : GlobalData.DangerFeelingText[0]);
             }
             else
             {
                 // Make the two-part feeling make a bit more sense by using the correct conjunction
                 string conjunction = ", and ";
-                if ((level.DangerFeeling > 5 && level.TreasureFeeling < 6) || (level.DangerFeeling < 6 && level.TreasureFeeling > 5))
+                if ((saveGame.Level.DangerFeeling > 5 && saveGame.Level.TreasureFeeling < 6) || (saveGame.Level.DangerFeeling < 6 && saveGame.Level.TreasureFeeling > 5))
                 {
                     conjunction = ", but ";
                 }
-                string message = GlobalData.DangerFeelingText[level.DangerFeeling] + conjunction + GlobalData.TreasureFeelingText[level.TreasureFeeling];
-                SaveGame.Instance.MsgPrint(player.GameTime.LevelFeel
+                string message = GlobalData.DangerFeelingText[saveGame.Level.DangerFeeling] + conjunction + GlobalData.TreasureFeelingText[saveGame.Level.TreasureFeeling];
+                saveGame.MsgPrint(saveGame.Player.GameTime.LevelFeel
                     ? message : GlobalData.DangerFeelingText[0]);
             }
         }

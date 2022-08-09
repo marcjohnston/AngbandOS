@@ -1497,7 +1497,7 @@ namespace Cthangband
             HackMind = true;
             if (CameFrom == LevelStart.StartHouse)
             {
-                StoreCommand.DoCmdStore(Player, SaveGame.Instance.Level);
+                StoreCommand.DoCmdStore(this);
                 CameFrom = LevelStart.StartRandom;
             }
             if (CurrentDepth == 0)
@@ -1604,7 +1604,7 @@ namespace Cthangband
                 }
                 if (CurrentDepth > 0)
                 {
-                    Commands.FeelingAndLocationCommand.DoCmdFeeling(Player, Level, true);
+                    Commands.FeelingAndLocationCommand.DoCmdFeeling(this, true);
                 }
             }
         }

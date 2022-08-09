@@ -20,11 +20,11 @@ namespace Cthangband.Commands
         {
             int amount = 1;
             // Get an item from the inventory/equipment
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Drop which item? ", true, true, false))
+            if (!saveGame.GetItem(out int itemIndex, "Drop which item? ", true, true, false))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing to drop.");
+                    saveGame.MsgPrint("You have nothing to drop.");
                 }
                 return;
             }
@@ -32,7 +32,7 @@ namespace Cthangband.Commands
             // Can't drop a cursed item
             if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
             {
-                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                saveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             // It's a stack, so find out how many to drop
@@ -45,7 +45,7 @@ namespace Cthangband.Commands
                 }
             }
             // Dropping things takes half a turn
-            SaveGame.Instance.EnergyUse = 50;
+            saveGame.EnergyUse = 50;
             // Drop it
             saveGame.Player.Inventory.InvenDrop(itemIndex, amount);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);

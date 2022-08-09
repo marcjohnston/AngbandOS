@@ -80,14 +80,14 @@ namespace Cthangband.Commands
                     targetEngine.PanelBounds();
                     saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
                     saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
-                    SaveGame.Instance.HandleStuff();
+                    saveGame.HandleStuff();
                 }
             }
             // We've finished, so snap back to the player's location
             targetEngine.RecenterScreenAroundPlayer();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
         }
     }
 }

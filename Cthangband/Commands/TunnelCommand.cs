@@ -28,29 +28,29 @@ namespace Cthangband.Commands
                 // Check if it can be tunneled through
                 if (tile.FeatureType.IsPassable || tile.FeatureType.Name == "YellowSign")
                 {
-                    SaveGame.Instance.MsgPrint("You cannot tunnel through air.");
+                    saveGame.MsgPrint("You cannot tunnel through air.");
                 }
                 else if (tile.FeatureType.IsClosedDoor)
                 {
-                    SaveGame.Instance.MsgPrint("You cannot tunnel through doors.");
+                    saveGame.MsgPrint("You cannot tunnel through doors.");
                 }
                 // Can't tunnel if there's a monster there - so attack the monster instead
                 else if (tile.MonsterIndex != 0)
                 {
-                    SaveGame.Instance.EnergyUse = 100;
-                    SaveGame.Instance.MsgPrint("There is a monster in the way!");
-                    SaveGame.Instance.PlayerAttackMonster(tileY, tileX);
+                    saveGame.EnergyUse = 100;
+                    saveGame.MsgPrint("There is a monster in the way!");
+                    saveGame.PlayerAttackMonster(tileY, tileX);
                 }
                 else
                 {
                     // Tunnel through the tile
-                    disturb = SaveGame.Instance.TunnelThroughTile(tileY, tileX);
+                    disturb = saveGame.TunnelThroughTile(tileY, tileX);
                 }
             }
             // Something might have disturbed us
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

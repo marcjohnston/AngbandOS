@@ -16,7 +16,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, SaveGame.Instance.Difficulty, Constants.SummonPhantom, true);
+            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonPhantom, true);
             return true;
         }
 

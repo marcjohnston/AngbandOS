@@ -18,33 +18,33 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DoCmdStore(saveGame.Player, saveGame.Level);
+            DoCmdStore(saveGame);
         }
 
-        public static void DoCmdStore(Player player, Level level)
+        public static void DoCmdStore(SaveGame saveGame)
         {
-            GridTile tile = level.Grid[player.MapY][player.MapX];
+            GridTile tile = saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX];
             // Make sure we're actually on a shop tile
             if (!tile.FeatureType.IsShop)
             {
-                SaveGame.Instance.MsgPrint("You see no Stores here.");
+                saveGame.MsgPrint("You see no Stores here.");
                 return;
             }
-            Store which = SaveGame.Instance.GetWhichStore();
+            Store which = saveGame.GetWhichStore();
             // We can't enter a house unless we own it
-            if (which.StoreType == StoreType.StoreHome && player.TownWithHouse != SaveGame.Instance.CurTown.Index)
+            if (which.StoreType == StoreType.StoreHome && saveGame.Player.TownWithHouse != saveGame.CurTown.Index)
             {
-                SaveGame.Instance.MsgPrint("The door is locked.");
+                saveGame.MsgPrint("The door is locked.");
                 return;
             }
             // Switch from the normal game interface to the store interface
-            level.ForgetLight();
-            level.ForgetView();
+            saveGame.Level.ForgetLight();
+            saveGame.Level.ForgetView();
             Gui.FullScreenOverlay = true;
             Gui.CommandArgument = 0;
             //            CommandRepeat = 0; TODO: Confirm this is not needed
             Gui.QueuedCommand = '\0';
-            which.EnterStore(player);
+            which.EnterStore(saveGame.Player);
         }
     }
 }

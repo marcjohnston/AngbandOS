@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            StayCommand.DoCmdStay(saveGame.Player, saveGame.Level, true);
+            StayCommand.DoCmdStay(saveGame, true);
         }
     }
 
@@ -35,31 +35,31 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DoCmdStay(saveGame.Player, saveGame.Level, false);
+            DoCmdStay(saveGame, false);
         }
 
         /// <param name="pickup"> Whether or not we should pick up an object in our location </param>
-        public static void DoCmdStay(Player player, Level level, bool pickup)
+        public static void DoCmdStay(SaveGame saveGame, bool pickup)
         {
             // Standing still takes a turn
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             // Periodically search if we're not actively in search mode
-            if (player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - player.SkillSearchFrequency))
+            if (saveGame.Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - saveGame.Player.SkillSearchFrequency))
             {
-                SaveGame.Instance.Search();
+                saveGame.Search();
             }
             // Always search if we are actively in search mode
-            if (player.IsSearching)
+            if (saveGame.Player.IsSearching)
             {
-                SaveGame.Instance.Search();
+                saveGame.Search();
             }
             // Pick up items if we should
-            SaveGame.Instance.PickUpItems(pickup);
+            saveGame.PickUpItems(pickup);
             // If we're in a shop doorway, enter the shop
-            GridTile tile = level.Grid[player.MapY][player.MapX];
+            GridTile tile = saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX];
             if (tile.FeatureType.IsShop)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
                 Gui.QueuedCommand = '_';
             }
         }

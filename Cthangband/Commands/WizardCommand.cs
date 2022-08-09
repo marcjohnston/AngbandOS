@@ -55,31 +55,31 @@ namespace Cthangband.Commands
                     break;
 
                 case 'a':
-                    DoCmdWizCureAll(saveGame.Player, saveGame.Level);
+                    DoCmdWizCureAll(saveGame);
                     break;
 
                 case 'b':
-                    DoCmdWizBamf();
+                    DoCmdWizBamf(saveGame);
                     break;
 
                 case 'c':
-                    WizCreateItem(saveGame.Player, saveGame.Level);
+                    WizCreateItem(saveGame);
                     break;
 
                 case 'C':
-                    WizCreateNamedArt(saveGame.Player, saveGame.Level, (FixedArtifactId)Gui.CommandArgument);
+                    WizCreateNamedArt(saveGame, (FixedArtifactId)Gui.CommandArgument);
                     break;
 
                 case 'd':
-                    SaveGame.Instance.DetectAll();
+                    saveGame.DetectAll();
                     break;
 
                 case 'e':
-                    DoCmdWizChange(saveGame.Player, saveGame.Level);
+                    DoCmdWizChange(saveGame);
                     break;
 
                 case 'f':
-                    SaveGame.Instance.IdentifyFully();
+                    saveGame.IdentifyFully();
                     break;
 
                 case 'g':
@@ -87,7 +87,7 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    SaveGame.Instance.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, false);
+                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, false);
                     break;
 
                 case 'h':
@@ -95,23 +95,23 @@ namespace Cthangband.Commands
                     break;
 
                 case 'H':
-                    DoCmdSummonHorde(saveGame.Player, saveGame.Level);
+                    DoCmdSummonHorde(saveGame);
                     break;
 
                 case 'i':
-                    SaveGame.Instance.IdentifyPack();
+                    saveGame.IdentifyPack();
                     break;
 
                 case 'j':
-                    DoCmdWizJump();
+                    DoCmdWizJump(saveGame);
                     break;
 
                 case 'k':
-                    SaveGame.Instance.SelfKnowledge();
+                    saveGame.SelfKnowledge();
                     break;
 
                 case 'l':
-                    DoCmdWizLearn();
+                    DoCmdWizLearn(saveGame);
                     break;
 
                 case 'm':
@@ -127,19 +127,19 @@ namespace Cthangband.Commands
                     break;
 
                 case 'N':
-                    DoCmdWizNamedFriendly(saveGame.Player, saveGame.Level, Gui.CommandArgument, true);
+                    DoCmdWizNamedFriendly(saveGame, Gui.CommandArgument, true);
                     break;
 
                 case 'n':
-                    DoCmdWizNamed(saveGame.Player, saveGame.Level, Gui.CommandArgument, true);
+                    DoCmdWizNamed(saveGame, Gui.CommandArgument, true);
                     break;
 
                 case 'o':
-                    DoCmdWizPlay(saveGame.Player, saveGame.Level);
+                    DoCmdWizPlay(saveGame);
                     break;
 
                 case 'p':
-                    SaveGame.Instance.TeleportPlayer(10);
+                    saveGame.TeleportPlayer(10);
                     break;
 
                 case 's':
@@ -147,11 +147,11 @@ namespace Cthangband.Commands
                     {
                         Gui.CommandArgument = 1;
                     }
-                    DoCmdWizSummon(saveGame.Player, saveGame.Level, Gui.CommandArgument);
+                    DoCmdWizSummon(saveGame, Gui.CommandArgument);
                     break;
 
                 case 't':
-                    SaveGame.Instance.TeleportPlayer(100);
+                    saveGame.TeleportPlayer(100);
                     break;
 
                 case 'v':
@@ -169,9 +169,9 @@ namespace Cthangband.Commands
                 case 'W':
                     saveGame.Player.IsWinner = true;
                     saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
-                    SaveGame.Instance.MsgPrint("*** CONGRATULATIONS ***");
-                    SaveGame.Instance.MsgPrint("You have won the game!");
-                    SaveGame.Instance.MsgPrint("You may retire ('Q') when you are ready.");
+                    saveGame.MsgPrint("*** CONGRATULATIONS ***");
+                    saveGame.MsgPrint("You have won the game!");
+                    saveGame.MsgPrint("You may retire ('Q') when you are ready.");
                     break;
 
                 case 'x':
@@ -186,16 +186,16 @@ namespace Cthangband.Commands
                     break;
 
                 case 'Z':
-                    DoCmdWizZap(saveGame.Player, saveGame.Level);
+                    DoCmdWizZap(saveGame);
                     break;
 
                 case 'z':
                     {
-                        DoCmdWizardBolt(saveGame.Player, saveGame.Level);
+                        DoCmdWizardBolt(saveGame);
                         break;
                     }
                 default:
-                    SaveGame.Instance.MsgPrint("That is not a valid wizard command.");
+                    saveGame.MsgPrint("That is not a valid wizard command.");
                     break;
             }
         }
@@ -211,7 +211,7 @@ namespace Cthangband.Commands
             if (tmp == "Dumbledore")
             {
                 saveGame.Player.IsWizard = true;
-                SaveGame.Instance.MsgPrint("Wizard mode activated.");
+                saveGame.MsgPrint("Wizard mode activated.");
                 saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
             }
         }
@@ -253,78 +253,78 @@ namespace Cthangband.Commands
             ActivationPowerManager.ActivationPowers[selectedIndex].Activate(saveGame);
         }
 
-        private void DoCmdRedraw(Player player, Level level)
+        private void DoCmdRedraw(SaveGame saveGame)
         {
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
                               RedrawFlag.PrEquippy);
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
             Gui.Redraw();
         }
 
-        private void DoCmdSummonHorde(Player player, Level level)
+        private void DoCmdSummonHorde(SaveGame saveGame)
         {
-            int wy = player.MapY, wx = player.MapX;
+            int wy = saveGame.Player.MapY, wx = saveGame.Player.MapX;
             int attempts = 1000;
             while (--attempts != 0)
             {
-                level.Scatter(out wy, out wx, player.MapY, player.MapX, 3);
-                if (level.GridOpenNoItemOrCreature(wy, wx))
+                saveGame.Level.Scatter(out wy, out wx, saveGame.Player.MapY, saveGame.Player.MapX, 3);
+                if (saveGame.Level.GridOpenNoItemOrCreature(wy, wx))
                 {
                     break;
                 }
             }
-            level.Monsters.AllocHorde(wy, wx);
+            saveGame.Level.Monsters.AllocHorde(wy, wx);
         }
 
-        private void DoCmdWizardBolt(Player player, Level level)
+        private void DoCmdWizardBolt(SaveGame saveGame)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            int tx = player.MapX + (99 * level.KeypadDirectionXOffset[dir]);
-            int ty = player.MapY + (99 * level.KeypadDirectionYOffset[dir]);
+            int tx = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
+            int ty = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
             if (dir == 5 && targetEngine.TargetOkay())
             {
                 flg &= ~ProjectionFlag.ProjectStop;
-                tx = SaveGame.Instance.TargetCol;
-                ty = SaveGame.Instance.TargetRow;
+                tx = saveGame.TargetCol;
+                ty = saveGame.TargetRow;
             }
-            SaveGame.Instance.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(), flg);
+            saveGame.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(), flg);
         }
 
-        private void DoCmdWizBamf()
+        private void DoCmdWizBamf(SaveGame saveGame)
         {
-            if (SaveGame.Instance.TargetWho == 0)
+            if (saveGame.TargetWho == 0)
             {
                 return;
             }
-            SaveGame.Instance.TeleportPlayerTo(SaveGame.Instance.TargetRow, SaveGame.Instance.TargetCol);
+            saveGame.TeleportPlayerTo(saveGame.TargetRow, saveGame.TargetCol);
         }
 
-        private void DoCmdWizChange(Player player, Level level)
+        private void DoCmdWizChange(SaveGame saveGame)
         {
-            DoCmdWizChangeAux(player, level);
-            DoCmdRedraw(player, level);
+            DoCmdWizChangeAux(saveGame);
+            DoCmdRedraw(saveGame);
         }
 
-        private void DoCmdWizChangeAux(Player player, Level level)
+        private void DoCmdWizChangeAux(SaveGame saveGame)
         {
             string tmpVal;
             int tmpInt;
             for (int i = 0; i < 6; i++)
             {
                 string ppp = $"{GlobalData.StatNames[i]} (3-118): ";
-                if (!Gui.GetString(ppp, out tmpVal, $"{player.AbilityScores[i].InnateMax}", 3))
+                if (!Gui.GetString(ppp, out tmpVal, $"{saveGame.Player.AbilityScores[i].InnateMax}", 3))
                 {
                     return;
                 }
@@ -340,10 +340,10 @@ namespace Cthangband.Commands
                 {
                     tmpInt = 3;
                 }
-                player.AbilityScores[i].Innate = tmpInt;
-                player.AbilityScores[i].InnateMax = tmpInt;
+                saveGame.Player.AbilityScores[i].Innate = tmpInt;
+                saveGame.Player.AbilityScores[i].InnateMax = tmpInt;
             }
-            string def = $"{player.Gold}";
+            string def = $"{saveGame.Player.Gold}";
             if (!Gui.GetString("Gold: ", out tmpVal, def, 9))
             {
                 return;
@@ -356,8 +356,8 @@ namespace Cthangband.Commands
             {
                 tmpInt = 0;
             }
-            player.Gold = tmpInt;
-            def = $"{player.MaxExperienceGained}";
+            saveGame.Player.Gold = tmpInt;
+            def = $"{saveGame.Player.MaxExperienceGained}";
             if (!Gui.GetString("Experience: ", out tmpVal, def, 9))
             {
                 return;
@@ -370,35 +370,35 @@ namespace Cthangband.Commands
             {
                 tmpInt = 0;
             }
-            player.MaxExperienceGained = tmpInt;
-            player.CheckExperience();
+            saveGame.Player.MaxExperienceGained = tmpInt;
+            saveGame.Player.CheckExperience();
         }
 
-        private void DoCmdWizCureAll(Player player, Level level)
+        private void DoCmdWizCureAll(SaveGame saveGame)
         {
-            SaveGame.Instance.RemoveAllCurse();
-            player.RestoreAbilityScore(Ability.Strength);
-            player.RestoreAbilityScore(Ability.Intelligence);
-            player.RestoreAbilityScore(Ability.Wisdom);
-            player.RestoreAbilityScore(Ability.Constitution);
-            player.RestoreAbilityScore(Ability.Dexterity);
-            player.RestoreAbilityScore(Ability.Charisma);
-            player.RestoreLevel();
-            player.Health = player.MaxHealth;
-            player.FractionalHealth = 0;
-            player.Mana = player.MaxMana;
-            player.FractionalMana = 0;
-            player.SetTimedBlindness(0);
-            player.SetTimedConfusion(0);
-            player.SetTimedPoison(0);
-            player.SetTimedFear(0);
-            player.SetTimedParalysis(0);
-            player.SetTimedHallucinations(0);
-            player.SetTimedStun(0);
-            player.SetTimedBleeding(0);
-            player.SetTimedSlow(0);
-            player.SetFood(Constants.PyFoodMax - 1);
-            DoCmdRedraw(player, level);
+            saveGame.RemoveAllCurse();
+            saveGame.Player.RestoreAbilityScore(Ability.Strength);
+            saveGame.Player.RestoreAbilityScore(Ability.Intelligence);
+            saveGame.Player.RestoreAbilityScore(Ability.Wisdom);
+            saveGame.Player.RestoreAbilityScore(Ability.Constitution);
+            saveGame.Player.RestoreAbilityScore(Ability.Dexterity);
+            saveGame.Player.RestoreAbilityScore(Ability.Charisma);
+            saveGame.Player.RestoreLevel();
+            saveGame.Player.Health = saveGame.Player.MaxHealth;
+            saveGame.Player.FractionalHealth = 0;
+            saveGame.Player.Mana = saveGame.Player.MaxMana;
+            saveGame.Player.FractionalMana = 0;
+            saveGame.Player.SetTimedBlindness(0);
+            saveGame.Player.SetTimedConfusion(0);
+            saveGame.Player.SetTimedPoison(0);
+            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.SetTimedParalysis(0);
+            saveGame.Player.SetTimedHallucinations(0);
+            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.SetTimedSlow(0);
+            saveGame.Player.SetFood(Constants.PyFoodMax - 1);
+            DoCmdRedraw(saveGame);
         }
 
         private void DoCmdWizHelp()
@@ -456,12 +456,12 @@ namespace Cthangband.Commands
             Gui.FullScreenOverlay = false;
         }
 
-        private void DoCmdWizJump()
+        private void DoCmdWizJump(SaveGame saveGame)
         {
             if (Gui.CommandArgument <= 0)
             {
-                string ppp = $"Jump to level (0-{SaveGame.Instance.CurDungeon.MaxLevel}): ";
-                string def = $"{SaveGame.Instance.CurrentDepth}";
+                string ppp = $"Jump to level (0-{saveGame.CurDungeon.MaxLevel}): ";
+                string def = $"{saveGame.CurrentDepth}";
                 if (!Gui.GetString(ppp, out string tmpVal, def, 10))
                 {
                     return;
@@ -472,21 +472,21 @@ namespace Cthangband.Commands
             {
                 Gui.CommandArgument = 1;
             }
-            if (Gui.CommandArgument > SaveGame.Instance.CurDungeon.MaxLevel)
+            if (Gui.CommandArgument > saveGame.CurDungeon.MaxLevel)
             {
-                Gui.CommandArgument = SaveGame.Instance.CurDungeon.MaxLevel;
+                Gui.CommandArgument = saveGame.CurDungeon.MaxLevel;
             }
-            SaveGame.Instance.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
-            SaveGame.Instance.DoCmdSaveGame(true);
-            SaveGame.Instance.CurrentDepth = Gui.CommandArgument;
-            SaveGame.Instance.NewLevelFlag = true;
+            saveGame.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
+            saveGame.DoCmdSaveGame(true);
+            saveGame.CurrentDepth = Gui.CommandArgument;
+            saveGame.NewLevelFlag = true;
         }
 
-        private void DoCmdWizLearn()
+        private void DoCmdWizLearn(SaveGame saveGame)
         {
-            for (int i = 1; i < SaveGame.Instance.ItemTypes.Count; i++)
+            for (int i = 1; i < saveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
+                ItemType kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Level <= Gui.CommandArgument)
                 {
                     kPtr.FlavourAware = true;
@@ -494,59 +494,59 @@ namespace Cthangband.Commands
             }
         }
 
-        private void DoCmdWizNamed(Player player, Level level, int rIdx, bool slp)
+        private void DoCmdWizNamed(SaveGame saveGame, int rIdx, bool slp)
         {
-            if (rIdx >= SaveGame.Instance.MonsterRaces.Count - 1)
+            if (rIdx >= saveGame.MonsterRaces.Count - 1)
             {
                 return;
             }
             for (int i = 0; i < 10; i++)
             {
                 const int d = 1;
-                level.Scatter(out int y, out int x, player.MapY, player.MapX, d);
-                if (!level.GridPassableNoCreature(y, x))
+                saveGame.Level.Scatter(out int y, out int x, saveGame.Player.MapY, saveGame.Player.MapX, d);
+                if (!saveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                if (level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+                if (saveGame.Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
                 {
                     break;
                 }
             }
         }
 
-        private void DoCmdWizNamedFriendly(Player player, Level level, int rIdx, bool slp)
+        private void DoCmdWizNamedFriendly(SaveGame saveGame, int rIdx, bool slp)
         {
-            if (rIdx >= SaveGame.Instance.MonsterRaces.Count - 1)
+            if (rIdx >= saveGame.MonsterRaces.Count - 1)
             {
                 return;
             }
             for (int i = 0; i < 10; i++)
             {
                 const int d = 1;
-                level.Scatter(out int y, out int x, player.MapY, player.MapX, d);
-                if (!level.GridPassableNoCreature(y, x))
+                saveGame.Level.Scatter(out int y, out int x, saveGame.Player.MapY, saveGame.Player.MapX, d);
+                if (!saveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                if (level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
+                if (saveGame.Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
                 {
                     break;
                 }
             }
         }
 
-        private void DoCmdWizPlay(Player player, Level level)
+        private void DoCmdWizPlay(SaveGame saveGame)
         {
-            if (!SaveGame.Instance.GetItem(out int item, "Play with which object? ", true, true, true))
+            if (!saveGame.GetItem(out int item, "Play with which object? ", true, true, true))
             {
                 if (item == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing to play with.");
+                    saveGame.MsgPrint("You have nothing to play with.");
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
+            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             bool changed;
             Gui.FullScreenOverlay = true;
             Gui.Save();
@@ -566,11 +566,11 @@ namespace Cthangband.Commands
                 }
                 if (ch == 's' || ch == 'S')
                 {
-                    WizStatistics(qPtr);
+                    WizStatistics(saveGame, qPtr);
                 }
                 if (ch == 'r' || ch == 'r')
                 {
-                    qPtr = WizRerollItem(player, level, qPtr);
+                    qPtr = WizRerollItem(saveGame, qPtr);
                 }
                 if (ch == 't' || ch == 'T')
                 {
@@ -585,44 +585,44 @@ namespace Cthangband.Commands
             Gui.FullScreenOverlay = false;
             if (changed)
             {
-                SaveGame.Instance.MsgPrint("Changes accepted.");
+                saveGame.MsgPrint("Changes accepted.");
                 if (item >= 0)
                 {
-                    player.Inventory[item] = qPtr;
+                    saveGame.Player.Inventory[item] = qPtr;
                 }
                 else
                 {
-                    level.Items[0 - item] = qPtr;
+                    saveGame.Level.Items[0 - item] = qPtr;
                 }
-                player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Changes ignored.");
+                saveGame.MsgPrint("Changes ignored.");
             }
         }
 
-        private void DoCmdWizSummon(Player player, Level level, int num)
+        private void DoCmdWizSummon(SaveGame saveGame, int num)
         {
             for (int i = 0; i < num; i++)
             {
-                level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty, 0);
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0);
             }
         }
 
-        private void DoCmdWizZap(Player player, Level level)
+        private void DoCmdWizZap(SaveGame saveGame)
         {
-            for (int i = 1; i < level.MMax; i++)
+            for (int i = 1; i < saveGame.Level.MMax; i++)
             {
-                Monster mPtr = level.Monsters[i];
+                Monster mPtr = saveGame.Level.Monsters[i];
                 if (mPtr.Race == null)
                 {
                     continue;
                 }
                 if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
                 {
-                    level.Monsters.DeleteMonsterByIndex(i, true);
+                    saveGame.Level.Monsters.DeleteMonsterByIndex(i, true);
                 }
             }
         }
@@ -644,18 +644,18 @@ namespace Cthangband.Commands
             }
         }
 
-        private string StripName(int kIdx)
+        private string StripName(SaveGame saveGame, int kIdx)
         {
-            ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
+            ItemType kPtr = saveGame.ItemTypes[kIdx];
             return kPtr.Name.Trim().Replace("$", "").Replace("~", "");
         }
 
-        private void WizCreateItem(Player player, Level level)
+        private void WizCreateItem(SaveGame saveGame)
         {
             Gui.FullScreenOverlay = true;
             Gui.Save();
             Gui.SetBackground(Terminal.BackgroundImage.Normal);
-            int kIdx = WizCreateItemtype();
+            int kIdx = WizCreateItemtype(saveGame);
             Gui.Load();
             Gui.FullScreenOverlay = false;
             Gui.SetBackground(Terminal.BackgroundImage.Overhead);
@@ -664,13 +664,13 @@ namespace Cthangband.Commands
                 return;
             }
             Item qPtr = new Item();
-            qPtr.AssignItemType(SaveGame.Instance.ItemTypes[kIdx]);
-            qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, false, false);
-            SaveGame.Instance.Level.DropNear(qPtr, -1, player.MapY, player.MapX);
-            SaveGame.Instance.MsgPrint("Allocated.");
+            qPtr.AssignItemType(saveGame.ItemTypes[kIdx]);
+            qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
+            saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+            saveGame.MsgPrint("Allocated.");
         }
 
-        private int WizCreateItemtype()
+        private int WizCreateItemtype(SaveGame saveGame)
         {
             int i, num;
             int col, row;
@@ -709,9 +709,9 @@ namespace Cthangband.Commands
             ItemCategory tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
             Gui.Clear();
-            for (num = 0, i = 1; num < 60 && i < SaveGame.Instance.ItemTypes.Count; i++)
+            for (num = 0, i = 1; num < 60 && i < saveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = SaveGame.Instance.ItemTypes[i];
+                ItemType kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
                     //if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
@@ -721,7 +721,7 @@ namespace Cthangband.Commands
                     row = 2 + (num % 20);
                     col = 30 * (num / 20);
                     ch = (char)(_head[num / 20] + (char)(num % 20));
-                    string buf = StripName(i);
+                    string buf = StripName(saveGame, i);
                     Gui.PrintLine($"[{ch}] {buf}", row, col);
                     choice[num++] = i;
                 }
@@ -751,19 +751,19 @@ namespace Cthangband.Commands
             return choice[num];
         }
 
-        private void WizCreateNamedArt(Player player, Level level, FixedArtifactId aIdx)
+        private void WizCreateNamedArt(SaveGame saveGame, FixedArtifactId aIdx)
         {
             if (aIdx == FixedArtifactId.None)
             {
                 return;
             }
-            FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[aIdx];
+            FixedArtifact aPtr = saveGame.FixedArtifacts[aIdx];
             Item qPtr = new Item();
             if (string.IsNullOrEmpty(aPtr.Name))
             {
                 return;
             }
-            ItemType i = SaveGame.Instance.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
+            ItemType i = saveGame.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
             if (i == null)
             {
                 return;
@@ -783,8 +783,8 @@ namespace Cthangband.Commands
                 qPtr.IdentifyFlags.Set(Constants.IdentCursed);
             }
             qPtr.GetFixedArtifactResistances();
-            SaveGame.Instance.Level.DropNear(qPtr, -1, player.MapY, player.MapX);
-            SaveGame.Instance.MsgPrint("Allocated.");
+            saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+            saveGame.MsgPrint("Allocated.");
         }
 
         private void WizDisplayItem(Item oPtr)
@@ -864,7 +864,7 @@ namespace Cthangband.Commands
             }
         }
 
-        private Item WizRerollItem(Player player, Level level, Item oPtr)
+        private Item WizRerollItem(SaveGame saveGame, Item oPtr)
         {
             bool changed;
             if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
@@ -888,34 +888,34 @@ namespace Cthangband.Commands
                 if (ch == 'n' || ch == 'N')
                 {
                     qPtr.AssignItemType(oPtr.ItemType);
-                    qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, false, false);
+                    qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
                     qPtr.AssignItemType(oPtr.ItemType);
-                    qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, true, false);
+                    qPtr.ApplyMagic(saveGame.Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
                     qPtr.AssignItemType(oPtr.ItemType);
-                    qPtr.ApplyMagic(SaveGame.Instance.Difficulty, false, true, true);
+                    qPtr.ApplyMagic(saveGame.Difficulty, false, true, true);
                 }
             }
             if (changed)
             {
-                player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
                 return qPtr;
             }
             return oPtr;
         }
 
-        private void WizStatistics(Item oPtr)
+        private void WizStatistics(SaveGame saveGame, Item oPtr)
         {
             const string q = "Rolls: {0}, Matches: {1}, Better: {2}, Worse: {3}, Other: {4}";
             if (oPtr.IsFixedArtifact())
             {
-                SaveGame.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
+                saveGame.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
             }
             while (true)
             {
@@ -950,9 +950,9 @@ namespace Cthangband.Commands
                 {
                     break;
                 }
-                SaveGame.Instance.MsgPrint(
-                    $"Creating a lot of {quality} items. Base level = {SaveGame.Instance.Difficulty}.");
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint(
+                    $"Creating a lot of {quality} items. Base level = {saveGame.Difficulty}.");
+                saveGame.MsgPrint(null);
                 long better;
                 long worse;
                 long other;
@@ -974,7 +974,7 @@ namespace Cthangband.Commands
                     qPtr.MakeObject(good, great);
                     if (qPtr.IsFixedArtifact())
                     {
-                        SaveGame.Instance.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                        saveGame.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
                     }
                     if (oPtr.Category != qPtr.Category)
                     {
@@ -1007,12 +1007,12 @@ namespace Cthangband.Commands
                         other++;
                     }
                 }
-                SaveGame.Instance.MsgPrint(string.Format(q, i, matches, better, worse, other));
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint(string.Format(q, i, matches, better, worse, other));
+                saveGame.MsgPrint(null);
             }
             if (oPtr.IsFixedArtifact())
             {
-                SaveGame.Instance.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
+                saveGame.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
             }
         }
 
