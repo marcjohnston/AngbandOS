@@ -131,7 +131,7 @@ namespace Cthangband.WpfNet472
             }
             Title = "";
             InitializeGrid();
-            ElementHost.EnableModelessKeyboardInterop(this);
+            ElementHost.EnableModelessKeyboardInterop(this); // WPF Keyboard doesn't work without this.
             Visibility = Visibility.Visible;
             Mixer.Initialise(StartupMusicVolume / 100.0f, StartupSoundVolume / 100.0f);
         }

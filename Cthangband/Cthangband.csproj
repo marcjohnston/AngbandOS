@@ -775,23 +775,7 @@
     <Compile Include="Commands\WieldCommand.cs" />
     <Compile Include="Commands\WizardCommand.cs" />
     <Compile Include="Commands\ZapRodCommand.cs" />
-    <Compile Include="Debug\DebugMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debug\DebugMenu.designer.cs">
-      <DependentUpon>DebugMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Debug\EntityType.cs" />
-    <Compile Include="Debug\EntityTypeEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debug\EntityTypeEditor.designer.cs">
-      <DependentUpon>EntityTypeEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Debug\General.cs" />
-    <Compile Include="Debug\GenericEntityTypeEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EntityType.cs" />
     <Compile Include="Enumerations\AmmoType.cs" />
     <Compile Include="Enumerations\AmuletType.cs" />
     <Compile Include="Enumerations\BootsType.cs" />
@@ -1395,7 +1379,7 @@
     <Compile Include="Talents\TalentPulverise.cs" />
     <Compile Include="Talents\TalentTelekineticWave.cs" />
     <Compile Include="TargetEngine.cs" />
-    <Compile Include="Terminal\BackgroundImage.cs" />
+    <Compile Include="BackgroundImage.cs" />
     <Compile Include="Terminal\IConsole.cs" />
     <Compile Include="Terminal\Resolution.cs" />
     <Compile Include="UI\Display.cs" />
@@ -1456,15 +1440,6 @@
     <Compile Include="VaultTypeArray.cs" />
     <Compile Include="WildernessRegion.cs" />
     <EmbeddedResource Include="Data\Animations.csv" />
-    <EmbeddedResource Include="Debug\DebugMenu.resx">
-      <DependentUpon>DebugMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Debug\EntityTypeEditor.resx">
-      <DependentUpon>EntityTypeEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Debug\GenericEntityTypeEditor.resx">
-      <DependentUpon>GenericEntityTypeEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

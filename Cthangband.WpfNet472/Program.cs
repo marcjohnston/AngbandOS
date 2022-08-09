@@ -1,11 +1,5 @@
-﻿using Cthangband.WpfNet472.Properties;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cthangband.WpfNet472
@@ -13,9 +7,7 @@ namespace Cthangband.WpfNet472
     internal class Program
     {
         public static string SaveFolder;
-        private static Settings _settings;
         private static string[] _saveSlot;
-        public static bool ExitToDesktop;
 
         public static void GetDefaultFolder()
         {
@@ -57,12 +49,12 @@ namespace Cthangband.WpfNet472
         }
 
         [STAThread]
-        private static void Main()
+        private static void Main(string[] args)
         {
             try
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+                //Application.EnableVisualStyles();
+                //Application.SetCompatibleTextRenderingDefault(false);
                 GetDefaultFolder();
                 if (!DirCreate(SaveFolder))
                 {

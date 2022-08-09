@@ -1,0 +1,23 @@
+﻿using Cthangband.StoreCommands;
+using System;
+
+namespace Cthangband.Commands
+{
+    /// <summary>
+    /// Examine an item
+    /// </summary>
+    [Serializable]
+    internal class ExamineCommand : ICommand
+    {
+        public char Key => 'x';
+
+        public int? Repeat => 0;
+
+        public bool IsEnabled => true;
+
+        public void Execute(SaveGame saveGame)
+        {
+            ExamineInventoryStoreCommand.DoCmdExamine(saveGame.Player);
+        }
+    }
+}

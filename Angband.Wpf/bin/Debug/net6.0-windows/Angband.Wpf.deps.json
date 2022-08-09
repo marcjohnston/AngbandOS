@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Angband.Wpf/1.0.0": {
+        "dependencies": {
+          "AngbandOS.Core": "1.0.0"
+        },
+        "runtime": {
+          "Angband.Wpf.dll": {}
+        }
+      },
+      "AngbandOS.Core/1.0.0": {
+        "runtime": {
+          "AngbandOS.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Angband.Wpf/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AngbandOS.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

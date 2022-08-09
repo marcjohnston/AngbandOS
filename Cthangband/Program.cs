@@ -5,19 +5,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Debug;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
-using Cthangband.Terminal;
 using Cthangband.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Windows.Forms;
 using Cthangband.PersistentStorage;
 
 namespace Cthangband
@@ -151,9 +145,14 @@ namespace Cthangband
         {
             if (!string.IsNullOrEmpty(reason))
             {
-                MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxShow(reason);
             }
             Environment.Exit(0);
+        }
+
+        public static void MessageBoxShow(string message)
+        {
+            // MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
 

@@ -147,7 +147,7 @@ namespace Cthangband.StaticData
             {
                 BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace())
             };
-            // Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
+            //Instance.BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
             Instance.BaseFixedartifacts = ReadEntitiesFromCsv(new BaseFixedartifact());
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
@@ -162,28 +162,6 @@ namespace Cthangband.StaticData
             Instance.StaffFlavours = ReadEntitiesFromCsv(new StaffFlavour());
             Instance.RingFlavours = ReadEntitiesFromCsv(new RingFlavour());
             Instance.RodFlavours = ReadEntitiesFromCsv(new RodFlavour());
-        }
-
-        /// <summary>
-        /// Save the current data to a binary file that can be embedded as a resource next compilation
-        /// </summary>
-        public void SaveForRecompile()
-        {
-            WriteEntitiesToCsv(BaseMonsterRaces, new BaseMonsterRace());
-            WriteEntitiesToCsv(BaseFixedartifacts, new BaseFixedartifact());
-            WriteEntitiesToCsv(BaseRareItemTypes, new BaseRareItemType());
-            WriteEntitiesToCsv(BaseVaultTypes, new BaseVaultType());
-            WriteEntitiesToCsv(FloorTileTypes, new FloorTileType());
-            WriteEntitiesToCsv(Animations, new Animation());
-            WriteEntitiesToCsv(ProjectileGraphics, new ProjectileGraphic());
-            WriteEntitiesToCsv(AmuletFlavours, new AmuletFlavour());
-            WriteEntitiesToCsv(MushroomFlavours, new MushroomFlavour());
-            WriteEntitiesToCsv(PotionFlavours, new PotionFlavour());
-            WriteEntitiesToCsv(WandFlavours, new WandFlavour());
-            WriteEntitiesToCsv(RingFlavours, new RingFlavour());
-            WriteEntitiesToCsv(RodFlavours, new RodFlavour());
-            WriteEntitiesToCsv(ScrollFlavours, new ScrollFlavour());
-            WriteEntitiesToCsv(StaffFlavours, new StaffFlavour());
         }
 
         private static Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample, string scaffoldTemplateName = null) where T : EntityType, new()
@@ -282,7 +260,7 @@ namespace Cthangband.StaticData
                                                     break;
 
                                                 default:
-                                                    MessageBox.Show($"Unrecognised property type: {p.PropertyType.Name}");
+                                                    Program.MessageBoxShow($"Unrecognised property type: {p.PropertyType.Name}");
                                                     break;
                                             }
                                         }
@@ -380,101 +358,6 @@ namespace Cthangband.StaticData
                 }
             }
             return dictionary;
-        }
-
-        private static void WriteEntitiesToCsv<T>(Dictionary<string, T> dictionary, T sample)
-            where T : EntityType, new()
-        {
-            string name = sample.GetType().Name;
-            PropertyInfo[] properties = sample.GetType().GetProperties();
-            string path = Path.GetDirectoryName(Application.ExecutablePath);
-            DirectoryInfo saveDir = new DirectoryInfo(path);
-            if (saveDir.Parent != null)
-            {
-                saveDir = saveDir.Parent;
-            }
-            if (saveDir != null)
-            {
-                if (saveDir.Parent != null)
-                {
-                    saveDir = saveDir.Parent;
-                }
-                if (saveDir != null)
-                {
-                    if (saveDir != null)
-                    {
-                        saveDir = saveDir.GetDirectories("Data")[0];
-                    }
-                    if (saveDir == null)
-                    {
-                        return;
-                    }
-                    if (dictionary.Count == 0)
-                    {
-                        return;
-                    }
-                    try
-                    {
-                        //Save a new file - if we get an error at this point then we've not trashed anything
-                        FileStream fs = new FileStream(Path.Combine(saveDir.FullName, $"{name}s.new"), FileMode.Create, FileAccess.Write);
-                        StreamWriter writer = new StreamWriter(fs);
-                        bool header = false;
-                        foreach (T entry in dictionary.Values)
-                        {
-                            if (header == false)
-                            {
-                                string headerLine = "Name";
-                                foreach (PropertyInfo property in properties)
-                                {
-                                    if (property.Name != "Name")
-                                    {
-                                        if (!string.IsNullOrEmpty(headerLine))
-                                        {
-                                            headerLine += ",";
-                                        }
-                                        headerLine += property.Name;
-                                    }
-                                }
-                                header = true;
-                                writer.WriteLine(headerLine);
-                            }
-                            string dataLine = $"{entry.Name.ToCsvFriendly()}";
-                            foreach (PropertyInfo property in properties)
-                            {
-                                if (property.Name != "Name")
-                                {
-                                    dataLine += ",";
-                                    dataLine += property.GetValue(entry).ToString().ToCsvFriendly();
-                                }
-                            }
-                            writer.WriteLine(dataLine);
-                        }
-                        writer.Dispose();
-                        fs.Close();
-                        fs.Dispose();
-                        // Rename the existing file to get it out of the way
-                        FileInfo file = new FileInfo(Path.Combine(saveDir.FullName, $"{name}s.csv"));
-                        if (file.Exists)
-                        {
-                            file.MoveTo(Path.Combine(saveDir.FullName, $"{name}s.old"));
-                        }
-                        // Rename the new file to make it the existing one
-                        file = new FileInfo(Path.Combine(saveDir.FullName, $"{name}s.new"));
-                        file.MoveTo(Path.Combine(saveDir.FullName, $"{name}s.csv"));
-                        // Assuming we got here without error, delete the old file because we are okay
-                        file = new FileInfo(Path.Combine(saveDir.FullName, $"{name}s.old"));
-                        if (file.Exists)
-                        {
-                            file.Delete();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unable to save static resources because:" + Environment.NewLine + ex.Message,
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
         }
     }
 }

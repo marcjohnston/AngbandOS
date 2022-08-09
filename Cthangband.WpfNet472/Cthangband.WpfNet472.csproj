@@ -103,12 +103,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cthangband\Cthangband.csproj">
-      <Project>{d251fce9-8e34-4857-bf69-b7f99336ff8d}</Project>
-      <Name>Cthangband</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Backgrounds\Crown.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -809,6 +803,12 @@
     <Content Include="Music\the-house-of-leaves-by-kevin-macleod-from-filmmusic-io.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cthangband\Cthangband.csproj">
+      <Project>{d251fce9-8e34-4857-bf69-b7f99336ff8d}</Project>
+      <Name>Cthangband</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

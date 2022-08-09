@@ -17,3 +17,5 @@
 /Install/Output/cthangband.6.8.install.exe
 /Install/Payload
 /Install/Output/cthangband.6.9.install.exe
+/AngbandOS.Core/obj
+/AngbandOS.Web/ClientApp/.angular/cache/13.3.4

@@ -1,0 +1,21 @@
+using Cthangband.Enumerations;
+using System;
+
+namespace Cthangband.ItemCategories
+{
+    [Serializable]
+    internal class FoodRestoreStrength : FoodItemCategory
+    {
+        public override char Character => ',';
+        public override string Name => "Food:Restore Strength";
+
+        public override int Chance1 => 1;
+        public override int Cost => 350;
+        public override string FriendlyName => "Restore Strength";
+        public override int Level => 20;
+        public override int Locale1 => 20;
+        public override int Pval => 500;
+        public override int SubCategory => 17;
+        public override int Weight => 1;
+    }
+}

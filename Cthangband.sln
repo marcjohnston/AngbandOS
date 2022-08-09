@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cthangband", "Cthangband\Ct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cthangband.WpfNet472", "Cthangband.WpfNet472\Cthangband.WpfNet472.csproj", "{C2C20D6A-3128-4021-AE26-87EF3DFDFD85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Core", "AngbandOS.Core\AngbandOS.Core.csproj", "{C522F5F4-DB48-4564-83EA-57706DB9FCE5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Web", "AngbandOS.Web\AngbandOS.Web.csproj", "{E26035CA-839D-411B-8261-071020CFD5E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angband.Wpf", "Angband.Wpf\Angband.Wpf.csproj", "{BFBD9690-6D96-4691-9208-9F2C477156B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +37,30 @@ Global
 		{C2C20D6A-3128-4021-AE26-87EF3DFDFD85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2C20D6A-3128-4021-AE26-87EF3DFDFD85}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2C20D6A-3128-4021-AE26-87EF3DFDFD85}.Release|x86.Build.0 = Release|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Debug|x86.Build.0 = Debug|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C522F5F4-DB48-4564-83EA-57706DB9FCE5}.Release|x86.Build.0 = Release|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{E26035CA-839D-411B-8261-071020CFD5E4}.Release|x86.Build.0 = Release|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Debug|x86.Build.0 = Debug|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BFBD9690-6D96-4691-9208-9F2C477156B6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

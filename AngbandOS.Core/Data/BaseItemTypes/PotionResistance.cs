@@ -1,0 +1,33 @@
+using Cthangband.Enumerations;
+using System;
+
+namespace Cthangband.ItemCategories
+{
+    [Serializable]
+    internal class PotionResistance : PotionItemCategory
+    {
+        public override char Character => '!';
+        public override string Name => "Potion:Resistance";
+
+        public override int Chance1 => 1;
+        public override int Chance2 => 1;
+        public override int Chance3 => 1;
+        public override int Chance4 => 1;
+        public override int Cost => 250;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Resistance";
+        public override bool IgnoreAcid => true;
+        public override bool IgnoreCold => true;
+        public override bool IgnoreElec => true;
+        public override bool IgnoreFire => true;
+        public override int Level => 20;
+        public override int Locale1 => 20;
+        public override int Locale2 => 45;
+        public override int Locale3 => 80;
+        public override int Locale4 => 100;
+        public override int Pval => 100;
+        public override int SubCategory => 60;
+        public override int Weight => 4;
+    }
+}

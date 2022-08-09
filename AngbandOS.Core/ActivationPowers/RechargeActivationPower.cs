@@ -1,0 +1,34 @@
+﻿using Cthangband.Enumerations;
+using System;
+
+namespace Cthangband.ActivationPowers
+{
+    /// <summary>
+    /// Recharge an item.
+    /// </summary>
+    [Serializable]
+    internal class RechargeActivationPower : ActivationPower
+    {
+        public override int RandomChance => 85;
+
+        public override string PreActivationMessage => "";
+
+        public override bool Activate(SaveGame saveGame)
+        {
+            saveGame.Recharge(60);
+            return true;
+        }
+
+        public override int RechargeTime(Player player) => 70;
+
+        public override int Value => 1000;
+
+        public override string Description => "recharging every 70 turns";
+
+        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+
+        public override uint SpecialPowerFlag => ItemFlag2.ResConf;
+
+        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+    }
+}
