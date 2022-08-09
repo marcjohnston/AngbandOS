@@ -29,11 +29,11 @@ namespace Cthangband.Commands
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
                 GridTile tile = saveGame.Level.Grid[y][x];
                 // Altering a tile will take a turn
-                SaveGame.Instance.EnergyUse = 100;
+                saveGame.EnergyUse = 100;
                 // We 'alter' a tile by attacking it
                 if (tile.MonsterIndex != 0)
                 {
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.PlayerAttackMonster(y, x);
                 }
                 else
                 {
@@ -41,27 +41,27 @@ namespace Cthangband.Commands
                     switch (tile.FeatureType.AlterAction)
                     {
                         case FloorTileAlterAction.Nothing:
-                            SaveGame.Instance.MsgPrint("You're not sure what you can do with that...");
+                            saveGame.MsgPrint("You're not sure what you can do with that...");
                             break;
 
                         case FloorTileAlterAction.Tunnel:
-                            disturb = SaveGame.Instance.TunnelThroughTile(y, x);
+                            disturb = saveGame.TunnelThroughTile(y, x);
                             break;
 
                         case FloorTileAlterAction.Disarm:
-                            disturb = SaveGame.Instance.DisarmTrap(y, x, dir);
+                            disturb = saveGame.DisarmTrap(y, x, dir);
                             break;
 
                         case FloorTileAlterAction.Open:
-                            disturb = SaveGame.Instance.OpenDoor(y, x);
+                            disturb = saveGame.OpenDoor(y, x);
                             break;
 
                         case FloorTileAlterAction.Close:
-                            disturb = SaveGame.Instance.CloseDoor(y, x);
+                            disturb = saveGame.CloseDoor(y, x);
                             break;
 
                         case FloorTileAlterAction.Bash:
-                            disturb = SaveGame.Instance.BashClosedDoor(y, x, dir);
+                            disturb = saveGame.BashClosedDoor(y, x, dir);
                             break;
 
                         default:
@@ -72,7 +72,7 @@ namespace Cthangband.Commands
 
             if (!disturb)
             {
-                SaveGame.Instance.Disturb(false);
+                saveGame.Disturb(false);
             }
         }
     }

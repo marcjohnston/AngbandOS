@@ -28,8 +28,8 @@ namespace Cthangband.Commands
                 {
                     whichMagicType = "prayer";
                 }
-                SaveGame.Instance.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
-                SaveGame.Instance.EnergyUse = 5;
+                saveGame.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+                saveGame.EnergyUse = 5;
             }
             else
             {
@@ -39,12 +39,12 @@ namespace Cthangband.Commands
                 }
                 else
                 {
-                    DoCmdCast(saveGame.Player, saveGame.Level);
+                    DoCmdCast(saveGame);
                 }
             }
         }
 
-        public static bool GetSpell(out int sn, string prompt, int sval, bool known, bool realm2, Player player)
+        public static bool GetSpell(SaveGame saveGame, out int sn, string prompt, int sval, bool known, bool realm2, Player player)
         {
             int i;
             int spell;
@@ -106,7 +106,7 @@ namespace Cthangband.Commands
                 spell = spells[i];
                 if (!player.SpellOkay(spell, known, realm2))
                 {
-                    SaveGame.Instance.MsgPrint($"You may not {prompt} that {p}.");
+                    saveGame.MsgPrint($"You may not {prompt} that {p}.");
                     continue;
                 }
                 if (ask)
@@ -132,114 +132,114 @@ namespace Cthangband.Commands
             return true;
         }
 
-        private void DoCmdCast(Player player, Level level)
+        private void DoCmdCast(SaveGame saveGame)
         {
-            string prayer = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
-            if (player.Realm1 == 0)
+            string prayer = saveGame.Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            if (saveGame.Player.Realm1 == 0)
             {
-                SaveGame.Instance.MsgPrint("You cannot cast spells!");
+                saveGame.MsgPrint("You cannot cast spells!");
                 return;
             }
-            if (player.TimedBlindness != 0 || level.NoLight())
+            if (saveGame.Player.TimedBlindness != 0 || saveGame.Level.NoLight())
             {
-                SaveGame.Instance.MsgPrint("You cannot see!");
+                saveGame.MsgPrint("You cannot see!");
                 return;
             }
-            if (player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion != 0)
             {
-                SaveGame.Instance.MsgPrint("You are too confused!");
+                saveGame.MsgPrint("You are too confused!");
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.Instance.GetItem(out int item, "Use which book? ", false, true, true))
+            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true))
             {
                 if (item == -2)
                 {
-                    SaveGame.Instance.MsgPrint($"You have no {prayer} books!");
+                    saveGame.MsgPrint($"You have no {prayer} books!");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = false;
-            Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
+            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             int sval = oPtr.ItemSubCategory;
-            bool useSetTwo = oPtr.Category == player.Realm2.ToSpellBookItemCategory();
-            SaveGame.Instance.HandleStuff();
-            if (!GetSpell(out int spell, player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval,
-                true, useSetTwo, player))
+            bool useSetTwo = oPtr.Category == saveGame.Player.Realm2.ToSpellBookItemCategory();
+            saveGame.HandleStuff();
+            if (!GetSpell(saveGame, out int spell, saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval,
+                true, useSetTwo, saveGame.Player))
             {
                 if (spell == -2)
                 {
-                    SaveGame.Instance.MsgPrint($"You don't know any {prayer}s in that book.");
+                    saveGame.MsgPrint($"You don't know any {prayer}s in that book.");
                 }
                 return;
             }
-            Spell sPtr = useSetTwo ? player.Spellcasting.Spells[1][spell] : player.Spellcasting.Spells[0][spell];
-            if (sPtr.ManaCost > player.Mana)
+            Spell sPtr = useSetTwo ? saveGame.Player.Spellcasting.Spells[1][spell] : saveGame.Player.Spellcasting.Spells[0][spell];
+            if (sPtr.ManaCost > saveGame.Player.Mana)
             {
-                string cast = player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
-                SaveGame.Instance.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+                string cast = saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
+                saveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
                 if (!Gui.GetCheck("Attempt it anyway? "))
                 {
                     return;
                 }
             }
-            int chance = sPtr.FailureChance(player);
+            int chance = sPtr.FailureChance(saveGame.Player);
             if (Program.Rng.RandomLessThan(100) < chance)
             {
-                SaveGame.Instance.MsgPrint($"You failed to get the {prayer} off!");
+                saveGame.MsgPrint($"You failed to get the {prayer} off!");
                 if (oPtr.Category == ItemCategory.ChaosBook && Program.Rng.DieRoll(100) < spell)
                 {
-                    SaveGame.Instance.MsgPrint("You produce a chaotic effect!");
-                    WildMagic(spell, player, level);
+                    saveGame.MsgPrint("You produce a chaotic effect!");
+                    WildMagic(spell, saveGame.Player, saveGame.Level);
                 }
                 else if (oPtr.Category == ItemCategory.DeathBook && Program.Rng.DieRoll(100) < spell)
                 {
                     if (sval == 3 && Program.Rng.DieRoll(2) == 1)
                     {
-                        level.Monsters[0].SanityBlast(true);
+                        saveGame.Level.Monsters[0].SanityBlast(true);
                     }
                     else
                     {
-                        SaveGame.Instance.MsgPrint("It hurts!");
-                        player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
-                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !player.HasHoldLife)
+                        saveGame.MsgPrint("It hurts!");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
+                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !saveGame.Player.HasHoldLife)
                         {
-                            player.LoseExperience(spell * 250);
+                            saveGame.Player.LoseExperience(spell * 250);
                         }
                     }
                 }
             }
             else
             {
-                sPtr.Cast(SaveGame.Instance, player, level);
+                sPtr.Cast(SaveGame.Instance, saveGame.Player, saveGame.Level);
                 if (!sPtr.Worked)
                 {
                     int e = sPtr.FirstCastExperience;
                     sPtr.Worked = true;
-                    player.GainExperience(e * sPtr.Level);
+                    saveGame.Player.GainExperience(e * sPtr.Level);
                 }
             }
-            SaveGame.Instance.EnergyUse = 100;
-            if (sPtr.ManaCost <= player.Mana)
+            saveGame.EnergyUse = 100;
+            if (sPtr.ManaCost <= saveGame.Player.Mana)
             {
-                player.Mana -= sPtr.ManaCost;
+                saveGame.Player.Mana -= sPtr.ManaCost;
             }
             else
             {
-                int oops = sPtr.ManaCost - player.Mana;
-                player.Mana = 0;
-                player.FractionalMana = 0;
-                SaveGame.Instance.MsgPrint("You faint from the effort!");
-                player.SetTimedParalysis(player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                int oops = sPtr.ManaCost - saveGame.Player.Mana;
+                saveGame.Player.Mana = 0;
+                saveGame.Player.FractionalMana = 0;
+                saveGame.MsgPrint("You faint from the effort!");
+                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
-                    SaveGame.Instance.MsgPrint("You have damaged your health!");
-                    player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+                    saveGame.MsgPrint("You have damaged your health!");
+                    saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
-            player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
         }
 
         private void DoCmdMentalism(Player player, Level level)

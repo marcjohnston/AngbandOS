@@ -26,11 +26,11 @@ namespace Cthangband.Commands
             {
                 // Prompt for an item, showing only wands
                 Inventory.ItemFilterCategory = ItemCategory.Wand;
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Aim which wand? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Aim which wand? ", true, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        SaveGame.Instance.MsgPrint("You have no wand to aim.");
+                        saveGame.MsgPrint("You have no wand to aim.");
                     }
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Wand;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                SaveGame.Instance.MsgPrint("That is not a wand!");
+                saveGame.MsgPrint("That is not a wand!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -48,7 +48,7 @@ namespace Cthangband.Commands
             // We can't use wands directly from the floor, since we need to aim them
             if (itemIndex < 0 && item.Count > 1)
             {
-                SaveGame.Instance.MsgPrint("You must first pick up the wands.");
+                saveGame.MsgPrint("You must first pick up the wands.");
                 return;
             }
             // Aim the wand
@@ -58,7 +58,7 @@ namespace Cthangband.Commands
                 return;
             }
             // Using a wand takes 100 energy
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             bool ident = false;
             int itemLevel = item.ItemType.Level;
             // Chance of success is your skill - item level, with item level capped at 50 and your
@@ -76,13 +76,13 @@ namespace Cthangband.Commands
             }
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
-                SaveGame.Instance.MsgPrint("You failed to use the wand properly.");
+                saveGame.MsgPrint("You failed to use the wand properly.");
                 return;
             }
             // Make sure we have charges
             if (item.TypeSpecificValue <= 0)
             {
-                SaveGame.Instance.MsgPrint("The wand has no charges left.");
+                saveGame.MsgPrint("The wand has no charges left.");
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
@@ -97,7 +97,7 @@ namespace Cthangband.Commands
             {
                 case WandType.HealMonster:
                     {
-                        if (SaveGame.Instance.HealMonster(dir))
+                        if (saveGame.HealMonster(dir))
                         {
                             ident = true;
                         }
@@ -105,7 +105,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.HasteMonster:
                     {
-                        if (SaveGame.Instance.SpeedMonster(dir))
+                        if (saveGame.SpeedMonster(dir))
                         {
                             ident = true;
                         }
@@ -113,7 +113,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.CloneMonster:
                     {
-                        if (SaveGame.Instance.CloneMonster(dir))
+                        if (saveGame.CloneMonster(dir))
                         {
                             ident = true;
                         }
@@ -121,7 +121,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.TeleportAway:
                     {
-                        if (SaveGame.Instance.TeleportMonster(dir))
+                        if (saveGame.TeleportMonster(dir))
                         {
                             ident = true;
                         }
@@ -129,7 +129,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Disarming:
                     {
-                        if (SaveGame.Instance.DisarmTrap(dir))
+                        if (saveGame.DisarmTrap(dir))
                         {
                             ident = true;
                         }
@@ -137,7 +137,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.TrapDoorDest:
                     {
-                        if (SaveGame.Instance.DestroyDoor(dir))
+                        if (saveGame.DestroyDoor(dir))
                         {
                             ident = true;
                         }
@@ -145,7 +145,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.StoneToMud:
                     {
-                        if (SaveGame.Instance.WallToMud(dir))
+                        if (saveGame.WallToMud(dir))
                         {
                             ident = true;
                         }
@@ -153,14 +153,14 @@ namespace Cthangband.Commands
                     }
                 case WandType.Light:
                     {
-                        SaveGame.Instance.MsgPrint("A line of blue shimmering light appears.");
-                        SaveGame.Instance.LightLine(dir);
+                        saveGame.MsgPrint("A line of blue shimmering light appears.");
+                        saveGame.LightLine(dir);
                         ident = true;
                         break;
                     }
                 case WandType.SleepMonster:
                     {
-                        if (SaveGame.Instance.SleepMonster(dir))
+                        if (saveGame.SleepMonster(dir))
                         {
                             ident = true;
                         }
@@ -168,7 +168,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.SlowMonster:
                     {
-                        if (SaveGame.Instance.SlowMonster(dir))
+                        if (saveGame.SlowMonster(dir))
                         {
                             ident = true;
                         }
@@ -176,7 +176,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.ConfuseMonster:
                     {
-                        if (SaveGame.Instance.ConfuseMonster(dir, 10))
+                        if (saveGame.ConfuseMonster(dir, 10))
                         {
                             ident = true;
                         }
@@ -184,7 +184,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.FearMonster:
                     {
-                        if (SaveGame.Instance.FearMonster(dir, 10))
+                        if (saveGame.FearMonster(dir, 10))
                         {
                             ident = true;
                         }
@@ -192,7 +192,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.DrainLife:
                     {
-                        if (SaveGame.Instance.DrainLife(dir, 75))
+                        if (saveGame.DrainLife(dir, 75))
                         {
                             ident = true;
                         }
@@ -200,7 +200,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Polymorph:
                     {
-                        if (SaveGame.Instance.PolyMonster(dir))
+                        if (saveGame.PolyMonster(dir))
                         {
                             ident = true;
                         }
@@ -208,27 +208,27 @@ namespace Cthangband.Commands
                     }
                 case WandType.StinkingCloud:
                     {
-                        SaveGame.Instance.FireBall(new ProjectPois(), dir, 12, 2);
+                        saveGame.FireBall(new ProjectPois(), dir, 12, 2);
                         ident = true;
                         break;
                     }
                 case WandType.MagicMissile:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectMissile(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectMissile(), dir,
                             Program.Rng.DiceRoll(2, 6));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectAcid(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectAcid(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
                     }
                 case WandType.CharmMonster:
                     {
-                        if (SaveGame.Instance.CharmMonster(dir, 45))
+                        if (saveGame.CharmMonster(dir, 45))
                         {
                             ident = true;
                         }
@@ -236,56 +236,56 @@ namespace Cthangband.Commands
                     }
                 case WandType.FireBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectFire(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectFire(), dir,
                             Program.Rng.DiceRoll(6, 8));
                         ident = true;
                         break;
                     }
                 case WandType.ColdBolt:
                     {
-                        SaveGame.Instance.FireBoltOrBeam(20, new ProjectCold(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectCold(), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectAcid(), dir, 60, 2);
+                        saveGame.FireBall(new ProjectAcid(), dir, 60, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ElecBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectElec(), dir, 32, 2);
+                        saveGame.FireBall(new ProjectElec(), dir, 32, 2);
                         ident = true;
                         break;
                     }
                 case WandType.FireBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 72, 2);
+                        saveGame.FireBall(new ProjectFire(), dir, 72, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ColdBall:
                     {
-                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 48, 2);
+                        saveGame.FireBall(new ProjectCold(), dir, 48, 2);
                         ident = true;
                         break;
                     }
                 case WandType.Wonder:
                     {
-                        SaveGame.Instance.MsgPrint("Oops. Wand of wonder activated.");
+                        saveGame.MsgPrint("Oops. Wand of wonder activated.");
                         break;
                     }
                 case WandType.DragonFire:
                     {
-                        SaveGame.Instance.FireBall(new ProjectFire(), dir, 100, 3);
+                        saveGame.FireBall(new ProjectFire(), dir, 100, 3);
                         ident = true;
                         break;
                     }
                 case WandType.DragonCold:
                     {
-                        SaveGame.Instance.FireBall(new ProjectCold(), dir, 80, 3);
+                        saveGame.FireBall(new ProjectCold(), dir, 80, 3);
                         ident = true;
                         break;
                     }
@@ -295,27 +295,27 @@ namespace Cthangband.Commands
                         {
                             case 1:
                                 {
-                                    SaveGame.Instance.FireBall(new ProjectAcid(), dir, 100, -3);
+                                    saveGame.FireBall(new ProjectAcid(), dir, 100, -3);
                                     break;
                                 }
                             case 2:
                                 {
-                                    SaveGame.Instance.FireBall(new ProjectElec(), dir, 80, -3);
+                                    saveGame.FireBall(new ProjectElec(), dir, 80, -3);
                                     break;
                                 }
                             case 3:
                                 {
-                                    SaveGame.Instance.FireBall(new ProjectFire(), dir, 100, -3);
+                                    saveGame.FireBall(new ProjectFire(), dir, 100, -3);
                                     break;
                                 }
                             case 4:
                                 {
-                                    SaveGame.Instance.FireBall(new ProjectCold(), dir, 80, -3);
+                                    saveGame.FireBall(new ProjectCold(), dir, 80, -3);
                                     break;
                                 }
                             default:
                                 {
-                                    SaveGame.Instance.FireBall(new ProjectPois(), dir, 60, -3);
+                                    saveGame.FireBall(new ProjectPois(), dir, 60, -3);
                                     break;
                                 }
                         }
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Annihilation:
                     {
-                        if (SaveGame.Instance.DrainLife(dir, 125))
+                        if (saveGame.DrainLife(dir, 125))
                         {
                             ident = true;
                         }
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Shard:
                     {
-                        SaveGame.Instance.FireBall(new ProjectShard(), dir, 75 + Program.Rng.DieRoll(50),
+                        saveGame.FireBall(new ProjectShard(), dir, 75 + Program.Rng.DieRoll(50),
                             2);
                         ident = true;
                         break;
@@ -351,7 +351,7 @@ namespace Cthangband.Commands
             bool channeled = false;
             if (saveGame.Player.Spellcasting.Type == CastingType.Channeling)
             {
-                channeled = SaveGame.Instance.DoCmdChannel(item);
+                channeled = saveGame.DoCmdChannel(item);
             }
             // We didn't use mana, so decrease the wand's charges
             if (!channeled)
@@ -365,7 +365,7 @@ namespace Cthangband.Commands
                     item.Count--;
                     saveGame.Player.WeightCarried -= splitItem.Weight;
                     itemIndex = saveGame.Player.Inventory.InvenCarry(splitItem, false);
-                    SaveGame.Instance.MsgPrint("You unstack your wand.");
+                    saveGame.MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
                 if (itemIndex >= 0)
@@ -374,7 +374,7 @@ namespace Cthangband.Commands
                 }
                 else
                 {
-                    SaveGame.Instance.Level.ReportChargeUsageFromFloor(0 - itemIndex);
+                    saveGame.Level.ReportChargeUsageFromFloor(0 - itemIndex);
                 }
             }
         }

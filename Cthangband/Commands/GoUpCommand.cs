@@ -21,69 +21,69 @@ namespace Cthangband.Commands
             GridTile tile = saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX];
             if (tile.FeatureType.Name != "UpStair")
             {
-                SaveGame.Instance.MsgPrint("I see no up staircase here.");
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.MsgPrint("I see no up staircase here.");
+                saveGame.EnergyUse = 0;
                 return;
             }
             // Use no energy, so monsters in the new level don't get to go first
-            SaveGame.Instance.EnergyUse = 0;
+            saveGame.EnergyUse = 0;
             // If we're outside then we must be entering a tower
-            if (SaveGame.Instance.CurrentDepth == 0)
+            if (saveGame.CurrentDepth == 0)
             {
-                SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
-                SaveGame.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
+                saveGame.CurDungeon = saveGame.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
+                saveGame.MsgPrint($"You enter {saveGame.CurDungeon.Name}");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("You enter a maze of up staircases.");
+                saveGame.MsgPrint("You enter a maze of up staircases.");
             }
             // Autosave, just in case
-            SaveGame.Instance.DoCmdSaveGame(true);
+            saveGame.DoCmdSaveGame(true);
             // In a tower, going up increases our level number
-            if (SaveGame.Instance.CurDungeon.Tower)
+            if (saveGame.CurDungeon.Tower)
             {
                 int stairLength = Program.Rng.DieRoll(5);
-                if (stairLength > SaveGame.Instance.CurrentDepth)
+                if (stairLength > saveGame.CurrentDepth)
                 {
                     stairLength = 1;
                 }
                 // Make sure we don't go past a quest level
                 for (int i = 0; i < stairLength; i++)
                 {
-                    SaveGame.Instance.CurrentDepth++;
-                    if (SaveGame.Instance.Quests.IsQuest(SaveGame.Instance.CurrentDepth))
+                    saveGame.CurrentDepth++;
+                    if (saveGame.Quests.IsQuest(saveGame.CurrentDepth))
                     {
                         break;
                     }
                 }
                 // Make sure we don't go deeper than the dungeon depth
-                if (SaveGame.Instance.CurrentDepth > SaveGame.Instance.CurDungeon.MaxLevel)
+                if (saveGame.CurrentDepth > saveGame.CurDungeon.MaxLevel)
                 {
-                    SaveGame.Instance.CurrentDepth = SaveGame.Instance.CurDungeon.MaxLevel;
+                    saveGame.CurrentDepth = saveGame.CurDungeon.MaxLevel;
                 }
             }
             else
             {
                 // We're not in a tower, so going up decreases our level number
                 int j = Program.Rng.DieRoll(5);
-                if (j > SaveGame.Instance.CurrentDepth)
+                if (j > saveGame.CurrentDepth)
                 {
                     j = 1;
                 }
-                SaveGame.Instance.CurrentDepth -= j;
-                if (SaveGame.Instance.CurrentDepth < 0)
+                saveGame.CurrentDepth -= j;
+                if (saveGame.CurrentDepth < 0)
                 {
-                    SaveGame.Instance.CurrentDepth = 0;
+                    saveGame.CurrentDepth = 0;
                 }
-                if (SaveGame.Instance.CurrentDepth == 0)
+                if (saveGame.CurrentDepth == 0)
                 {
-                    saveGame.Player.WildernessX = SaveGame.Instance.CurDungeon.X;
-                    saveGame.Player.WildernessY = SaveGame.Instance.CurDungeon.Y;
-                    SaveGame.Instance.CameFrom = LevelStart.StartStairs;
+                    saveGame.Player.WildernessX = saveGame.CurDungeon.X;
+                    saveGame.Player.WildernessY = saveGame.CurDungeon.Y;
+                    saveGame.CameFrom = LevelStart.StartStairs;
                 }
             }
-            SaveGame.Instance.NewLevelFlag = true;
-            SaveGame.Instance.CreateDownStair = true;
+            saveGame.NewLevelFlag = true;
+            saveGame.CreateDownStair = true;
         }
     }
 }

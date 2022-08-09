@@ -25,11 +25,11 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Food;
             if (itemIndex == -999)
             {
-                if (!SaveGame.Instance.GetItem(out itemIndex, "Eat which item? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Eat which item? ", false, true, true))
                 {
                     if (itemIndex == -2)
                     {
-                        SaveGame.Instance.MsgPrint("You have nothing to eat.");
+                        saveGame.MsgPrint("You have nothing to eat.");
                     }
                     return;
                 }
@@ -39,7 +39,7 @@ namespace Cthangband.Commands
             Inventory.ItemFilterCategory = ItemCategory.Food;
             if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                SaveGame.Instance.MsgPrint("You can't eat that!");
+                saveGame.MsgPrint("You can't eat that!");
                 Inventory.ItemFilterCategory = 0;
                 return;
             }
@@ -50,7 +50,7 @@ namespace Cthangband.Commands
                 Gui.PlaySound(SoundEffect.Eat);
             }
             // Eating costs 100 energy
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             bool ident = false;
             int itemLevel = item.ItemType.Level;
             switch (item.ItemSubCategory)
@@ -62,7 +62,7 @@ namespace Cthangband.Commands
                             // Hagarg Ryonis may protect us from poison
                             if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
-                                SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                                saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + Program.Rng.RandomLessThan(10) + 10))
                             {
@@ -256,25 +256,25 @@ namespace Cthangband.Commands
                 case FoodType.Biscuit:
                 case FoodType.Jerky:
                     {
-                        SaveGame.Instance.MsgPrint("That tastes good.");
+                        saveGame.MsgPrint("That tastes good.");
                         ident = true;
                         break;
                     }
                 case FoodType.Dwarfbread:
                     {
-                        SaveGame.Instance.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
+                        saveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
                         ident = true;
                         break;
                     }
                 case FoodType.SlimeMold:
                     {
-                        SaveGame.Instance.PotionEffect(PotionType.SlimeMold);
+                        saveGame.PotionEffect(PotionType.SlimeMold);
                         ident = true;
                         break;
                     }
                 case FoodType.Waybread:
                     {
-                        SaveGame.Instance.MsgPrint("That tastes good.");
+                        saveGame.MsgPrint("That tastes good.");
                         saveGame.Player.SetTimedPoison(0);
                         saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                         ident = true;
@@ -283,13 +283,13 @@ namespace Cthangband.Commands
                 case FoodType.PintOfAle:
                 case FoodType.PintOfWine:
                     {
-                        SaveGame.Instance.MsgPrint("That tastes good.");
+                        saveGame.MsgPrint("That tastes good.");
                         ident = true;
                         break;
                     }
                 case FoodType.Warpstone:
                     {
-                        SaveGame.Instance.MsgPrint("That tastes... funky.");
+                        saveGame.MsgPrint("That tastes... funky.");
                         saveGame.Player.Dna.GainMutation();
                         if (Program.Rng.DieRoll(3) == 1)
                         {
@@ -322,10 +322,10 @@ namespace Cthangband.Commands
             if (saveGame.Player.RaceIndex == RaceId.Vampire)
             {
                 _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
-                SaveGame.Instance.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
+                saveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
                 if (saveGame.Player.Food < Constants.PyFoodAlert)
                 {
-                    SaveGame.Instance.MsgPrint("Your hunger can only be satisfied with fresh blood!");
+                    saveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
                 }
             }
             // Skeletons get no food sustenance
@@ -336,21 +336,21 @@ namespace Cthangband.Commands
                 {
                     // Spawn a new food item on the floor to make up for the one that will be destroyed
                     Item floorItem = new Item();
-                    SaveGame.Instance.MsgPrint("The food falls through your jaws!");
+                    saveGame.MsgPrint("The food falls through your jaws!");
                     floorItem.AssignItemType(
-                        SaveGame.Instance.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
-                    SaveGame.Instance.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+                        saveGame.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
+                    saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 }
                 else
                 {
                     // But some magical types work anyway and then vanish
-                    SaveGame.Instance.MsgPrint("The food falls through your jaws and vanishes!");
+                    saveGame.MsgPrint("The food falls through your jaws and vanishes!");
                 }
             }
             // Golems, zombies, and spectres get only 1/20th of the food value
             else if (saveGame.Player.RaceIndex == RaceId.Golem || saveGame.Player.RaceIndex == RaceId.Zombie || saveGame.Player.RaceIndex == RaceId.Spectre)
             {
-                SaveGame.Instance.MsgPrint("The food of mortals is poor sustenance for you.");
+                saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
                 saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
             }
             // Everyone else gets the full value
@@ -367,9 +367,9 @@ namespace Cthangband.Commands
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                SaveGame.Instance.Level.FloorItemDescribe(0 - itemIndex);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                saveGame.Level.FloorItemDescribe(0 - itemIndex);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
         }
     }

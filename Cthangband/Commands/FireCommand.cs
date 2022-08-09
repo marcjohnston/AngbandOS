@@ -23,16 +23,16 @@ namespace Cthangband.Commands
             Item missileWeapon = saveGame.Player.Inventory[InventorySlot.RangedWeapon];
             if (missileWeapon.Category == 0)
             {
-                SaveGame.Instance.MsgPrint("You have nothing to fire with.");
+                saveGame.MsgPrint("You have nothing to fire with.");
                 return;
             }
             // Get the ammunition to fire
             Inventory.ItemFilterCategory = saveGame.Player.AmmunitionItemCategory;
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Fire which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Fire which item? ", false, true, true))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing to fire.");
+                    saveGame.MsgPrint("You have nothing to fire.");
                 }
                 return;
             }
@@ -54,8 +54,8 @@ namespace Cthangband.Commands
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -1);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
             Gui.PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
@@ -106,7 +106,7 @@ namespace Cthangband.Commands
             // We're actually going to track the shot and draw it square by square
             int shotDistance = 10 + (5 * damageMultiplier);
             // Divide by our shot speed to give the equivalent of x shots per turn
-            SaveGame.Instance.EnergyUse = 100 / shotSpeed;
+            saveGame.EnergyUse = 100 / shotSpeed;
             int y = saveGame.Player.MapY;
             int x = saveGame.Player.MapX;
             int targetX = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
@@ -114,10 +114,10 @@ namespace Cthangband.Commands
             // Special case for if we're hitting our own square
             if (dir == 5 && targetEngine.TargetOkay())
             {
-                targetX = SaveGame.Instance.TargetCol;
-                targetY = SaveGame.Instance.TargetRow;
+                targetX = saveGame.TargetCol;
+                targetY = saveGame.TargetRow;
             }
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
             bool hitBody = false;
             // Loop until we've reached our distance or hit something
             for (int curDis = 0; curDis <= shotDistance;)
@@ -162,7 +162,7 @@ namespace Cthangband.Commands
                     bool visible = monster.IsVisible;
                     hitBody = true;
                     // Check if we actually hit it
-                    if (SaveGame.Instance.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
+                    if (saveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
                         if ((race.Flags3 & MonsterFlag3.Demon) != 0 || (race.Flags3 & MonsterFlag3.Undead) != 0 ||
@@ -173,27 +173,27 @@ namespace Cthangband.Commands
                         }
                         if (!visible)
                         {
-                            SaveGame.Instance.MsgPrint($"The {missileName} finds a mark.");
+                            saveGame.MsgPrint($"The {missileName} finds a mark.");
                         }
                         else
                         {
                             string monsterName = monster.MonsterDesc(0);
-                            SaveGame.Instance.MsgPrint($"The {missileName} hits {monsterName}.");
+                            saveGame.MsgPrint($"The {missileName} hits {monsterName}.");
                             if (monster.IsVisible)
                             {
-                                SaveGame.Instance.HealthTrack(tile.MonsterIndex);
+                                saveGame.HealthTrack(tile.MonsterIndex);
                             }
                             // Note that pets only get angry if they see us and we see them
                             if ((monster.Mind & Constants.SmFriendly) != 0)
                             {
                                 monsterName = monster.MonsterDesc(0);
-                                SaveGame.Instance.MsgPrint($"{monsterName} gets angry!");
+                                saveGame.MsgPrint($"{monsterName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
                         }
                         // Work out the damage done
                         shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                        shotDamage = SaveGame.Instance.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
+                        shotDamage = saveGame.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
                         if (shotDamage < 0)
                         {
                             shotDamage = 0;
@@ -209,7 +209,7 @@ namespace Cthangband.Commands
                             {
                                 Gui.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
-                                SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                                saveGame.MsgPrint($"{mName} flees in terror!");
                             }
                         }
                     }
@@ -220,7 +220,7 @@ namespace Cthangband.Commands
             // If we hit something we have a chance to break the ammo, otherwise it just drops at
             // the end of its travel
             int j = hitBody ? individualAmmunition.BreakageChance() : 0;
-            SaveGame.Instance.Level.DropNear(individualAmmunition, j, y, x);
+            saveGame.Level.DropNear(individualAmmunition, j, y, x);
         }
     }
 }

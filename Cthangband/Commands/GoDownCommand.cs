@@ -26,88 +26,88 @@ namespace Cthangband.Commands
             // Need to be on a staircase or trapdoor
             if (tile.FeatureType.Name != "DownStair" && !isTrapDoor)
             {
-                SaveGame.Instance.MsgPrint("I see no down staircase here.");
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.MsgPrint("I see no down staircase here.");
+                saveGame.EnergyUse = 0;
                 return;
             }
             // Going onto a new level takes no energy, so the monsters on that level don't get to
             // move before us
-            SaveGame.Instance.EnergyUse = 0;
+            saveGame.EnergyUse = 0;
             if (isTrapDoor)
             {
-                SaveGame.Instance.MsgPrint("You deliberately jump through the trap door.");
+                saveGame.MsgPrint("You deliberately jump through the trap door.");
             }
             else
             {
                 // If we're on the surface, enter the relevant dungeon
-                if (SaveGame.Instance.CurrentDepth == 0)
+                if (saveGame.CurrentDepth == 0)
                 {
-                    SaveGame.Instance.CurDungeon = SaveGame.Instance.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
-                    SaveGame.Instance.MsgPrint($"You enter {SaveGame.Instance.CurDungeon.Name}");
+                    saveGame.CurDungeon = saveGame.Wilderness[saveGame.Player.WildernessY][saveGame.Player.WildernessX].Dungeon;
+                    saveGame.MsgPrint($"You enter {saveGame.CurDungeon.Name}");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("You enter a maze of down staircases.");
+                    saveGame.MsgPrint("You enter a maze of down staircases.");
                 }
                 // Save the game, just in case
-                SaveGame.Instance.DoCmdSaveGame(true);
+                saveGame.DoCmdSaveGame(true);
             }
             // If we're in a tower, a down staircase reduces our level number
-            if (SaveGame.Instance.CurDungeon.Tower)
+            if (saveGame.CurDungeon.Tower)
             {
                 int stairLength = Program.Rng.DieRoll(5);
-                if (stairLength > SaveGame.Instance.CurrentDepth)
+                if (stairLength > saveGame.CurrentDepth)
                 {
                     stairLength = 1;
                 }
-                SaveGame.Instance.CurrentDepth -= stairLength;
-                if (SaveGame.Instance.CurrentDepth < 0)
+                saveGame.CurrentDepth -= stairLength;
+                if (saveGame.CurrentDepth < 0)
                 {
-                    SaveGame.Instance.CurrentDepth = 0;
+                    saveGame.CurrentDepth = 0;
                 }
                 // If we left the dungeon, remember where we are
-                if (SaveGame.Instance.CurrentDepth == 0)
+                if (saveGame.CurrentDepth == 0)
                 {
-                    saveGame.Player.WildernessX = SaveGame.Instance.CurDungeon.X;
-                    saveGame.Player.WildernessY = SaveGame.Instance.CurDungeon.Y;
-                    SaveGame.Instance.CameFrom = LevelStart.StartStairs;
+                    saveGame.Player.WildernessX = saveGame.CurDungeon.X;
+                    saveGame.Player.WildernessY = saveGame.CurDungeon.Y;
+                    saveGame.CameFrom = LevelStart.StartStairs;
                 }
             }
             else
             {
                 // We're not in a tower, so a down staircase increases our level number
                 int stairLength = Program.Rng.DieRoll(5);
-                if (stairLength > SaveGame.Instance.CurrentDepth)
+                if (stairLength > saveGame.CurrentDepth)
                 {
                     stairLength = 1;
                 }
                 // Check if we're about to go past a quest level
                 for (int i = 0; i < stairLength; i++)
                 {
-                    SaveGame.Instance.CurrentDepth++;
-                    if (SaveGame.Instance.Quests.IsQuest(SaveGame.Instance.CurrentDepth))
+                    saveGame.CurrentDepth++;
+                    if (saveGame.Quests.IsQuest(saveGame.CurrentDepth))
                     {
                         // Stop on the quest level
                         break;
                     }
                 }
                 // Don't go past the max dungeon level
-                if (SaveGame.Instance.CurrentDepth > SaveGame.Instance.CurDungeon.MaxLevel)
+                if (saveGame.CurrentDepth > saveGame.CurDungeon.MaxLevel)
                 {
-                    SaveGame.Instance.CurrentDepth = SaveGame.Instance.CurDungeon.MaxLevel;
+                    saveGame.CurrentDepth = saveGame.CurDungeon.MaxLevel;
                 }
                 // From the surface we always go to the first level
-                if (SaveGame.Instance.CurrentDepth == 0)
+                if (saveGame.CurrentDepth == 0)
                 {
-                    SaveGame.Instance.CurrentDepth++;
+                    saveGame.CurrentDepth++;
                 }
             }
             // We need a new level
-            SaveGame.Instance.NewLevelFlag = true;
+            saveGame.NewLevelFlag = true;
             if (!isTrapDoor)
             {
                 // Create an up staircase if we went down a staircase
-                SaveGame.Instance.CreateUpStair = true;
+                saveGame.CreateUpStair = true;
             }
         }
     }

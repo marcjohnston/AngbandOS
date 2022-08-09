@@ -24,7 +24,7 @@ namespace Cthangband.Commands
             Item lightSource = saveGame.Player.Inventory[InventorySlot.Lightsource];
             if (lightSource.Category != ItemCategory.Light)
             {
-                SaveGame.Instance.MsgPrint("You are not wielding a light.");
+                saveGame.MsgPrint("You are not wielding a light.");
             }
             else if (lightSource.ItemSubCategory == LightType.Lantern)
             {
@@ -36,7 +36,7 @@ namespace Cthangband.Commands
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Your light cannot be refilled.");
+                saveGame.MsgPrint("Your light cannot be refilled.");
             }
         }
 

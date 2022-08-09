@@ -1438,7 +1438,7 @@ namespace Cthangband
             // Arcane casters can choose their spell
             if (_player.Spellcasting.Type != CastingType.Divine)
             {
-                if (!CastCommand.GetSpell(out spellIndex, "study", itemSubCategory, false, useSetTwo, _player) && spellIndex == -1)
+                if (!CastCommand.GetSpell(SaveGame.Instance, out spellIndex, "study", itemSubCategory, false, useSetTwo, _player) && spellIndex == -1)
                 {
                     return;
                 }
