@@ -1,6 +1,6 @@
-using AngbandOS.Web;
-
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
@@ -8,10 +8,6 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.PropertyNamingPolicy = null;
     });
 
-builder.Services.AddSignalR(hubOptions =>
-{
-    hubOptions.EnableDetailedErrors = true;
-});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,14 +21,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");
-app.MapHub<GameHub>("/hub", options =>
-{
-    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
-});
+app.MapFallbackToFile("index.html");;
 
 app.Run();

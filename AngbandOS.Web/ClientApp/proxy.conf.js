@@ -6,14 +6,10 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 const PROXY_CONFIG = [
   {
     context: [
-      "/api/games",
-      "/hub"
+      "/api/games"
     ],
     target: target,
-    rejectUnauthorzied: false,
-    secure: true,
-    ws: true,
-    wss: true, 
+    secure: false,
     headers: {
       Connection: 'Keep-Alive'
     }
