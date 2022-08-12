@@ -106,6 +106,18 @@ export class HomeComponent {
       case "ArrowDown":
         this.connection.send("keypressed", `${shift}2`);
         break;
+      case "Home":
+        this.connection.send("keypressed", `${shift}7`);
+        break;
+      case "End":
+        this.connection.send("keypressed", `${shift}1`);
+        break;
+      case "PageUp":
+        this.connection.send("keypressed", `${shift}9`);
+        break;
+      case "PageDown":
+        this.connection.send("keypressed", `${shift}3`);
+        break;
       case "Enter":
         this.connection.send("keypressed", '\x0D');
         break;
@@ -114,6 +126,10 @@ export class HomeComponent {
         break;
       case "Escape":
         this.connection.send("keypressed", '\x1B');
+        break;
+      case "Ctrl":
+      case "Alt":
+      case "Shift":
         break;
       default:
         this.connection.send("keypressed", event.key);

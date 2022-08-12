@@ -37,12 +37,9 @@ namespace AngbandOS.Web.Hubs
         /// <param name="connectionId"></param>
         public void Play(string guid, string connectionId)
         {
-            SignalRConsole console = new SignalRConsole(GameServer, GameHub, connectionId, guid);
+            SignalRConsole console = new SignalRConsole(GameServer, GameHub.Clients.Client(connectionId), guid);
             Consoles.Add(connectionId, console);
             console.RunWorkerAsync();
-            //gamethread = new BackgroundWorker();
-            //gamethread.DoWork += Gamethread_DoWork;
-            //gamethread.RunWorkerAsync();
         }
 
         /// <summary>

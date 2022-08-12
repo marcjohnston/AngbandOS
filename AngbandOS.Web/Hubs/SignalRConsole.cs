@@ -14,16 +14,14 @@ namespace AngbandOS.Web.Hubs
     public class SignalRConsole : BackgroundWorker, IConsole
     {
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
-        private readonly IHubContext<GameHub, IGameHub> GameContext;
-        private readonly string ConnectionId;
+        private readonly IGameHub _gameHub;
         private readonly string Guid;
         private readonly GameServer2 GameServer;
 
-        public SignalRConsole(GameServer2 gameServer, IHubContext<GameHub, IGameHub> gameContext, string connectionId, string guid)
+        public SignalRConsole(GameServer2 gameServer, IGameHub gameHub, string guid)
         {
             Guid = guid;
-            GameContext = gameContext;
-            ConnectionId = connectionId;
+            _gameHub = gameHub;
             GameServer = gameServer;
         }
 
@@ -35,40 +33,37 @@ namespace AngbandOS.Web.Hubs
         public void Clear()
         {
             // Forward the clear command from the game to the signal-r hub.
-            GameContext.Clients.All.Clear();
-          //  GameHub.Clear();
+            _gameHub.Clear();
         }
 
         public void PlayMusic(MusicTrack music)
         {
             // Forward the play music command from the game to the signal-r hub.
-        //    GameHub.PlayMusic(music);
+            _gameHub.PlayMusic(music);
         }
 
         public void PlaySound(SoundEffect sound)
         {
             // Forward the play sound command from the game to the signal-r hub.
-        //    GameHub.PlaySound(sound);
+            _gameHub.PlaySound(sound);
         }
 
         public void Print(int row, int col, string text, string colour)
         {
             // Forward the print command from the game to the signal-r hub.
-            //GameContext.Clients.User(ConnectionId).Print(row, col, text, colour);
-            GameContext.Clients.All.Print(row, col, text, colour);
-//            GameHub.Print(row, col, text, colour);  
+            _gameHub.Print(row, col, text, colour);
         }
 
         public void SetBackground(BackgroundImage image)
         {
             // Forward the set background command from the game to the signal-r hub.
-     //       GameHub.SetBackground(image);
+            _gameHub.SetBackground(image);
         }
 
         public void SetCellBackground(int row, int col, string color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
-   //         GameHub.SetCellBackground(row, col, color);
+            _gameHub.SetCellBackground(row, col, color);
         }
 
         /// <summary>
@@ -89,7 +84,7 @@ namespace AngbandOS.Web.Hubs
             // Wait until there is a key from the client.
             while (!KeyQueue.TryDequeue(out c))
             {
-                Thread.Sleep(5);
+                Thread.Sleep(5); // TODO: Use a wait event
             }
 
             // Return the key.
