@@ -1,2 +1,7 @@
-<h3>ConnectionId: {{connectionId}}</h3>
-<h3>Game Guid: {{gameGuid}}</h3>
+<div id="container">
+  <h3>ConnectionId: {{connectionId}}</h3>
+  <h3>Game Guid: {{gameGuid}}</h3>
+  <div #canvasContainer id="canvas-container" (keydown)="onKeyDown($event)">
+    <canvas #console (keypress)="onKeyDown($event)"></canvas>
+  </div>
+</div>

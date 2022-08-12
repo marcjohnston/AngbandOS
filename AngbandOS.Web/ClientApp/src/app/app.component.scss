@@ -1,0 +1,12 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #component-window {
+    width: 100%;
+    height: 100%;
+    padding: 0 25px 25px 25px;
+  }
+}

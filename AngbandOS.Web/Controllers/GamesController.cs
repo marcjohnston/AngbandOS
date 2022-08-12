@@ -1,7 +1,9 @@
-﻿using Cthangband;
+﻿using AngbandOS.Web.Hubs;
+using Cthangband;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -10,12 +12,20 @@ namespace AngbandOS.Web.Controllers
     [Produces("application/json")]
     public class GamesController : ControllerBase
     {
+        private readonly IGameService GameService;
+
+        public GamesController(IGameService gameService)
+        {
+            GameService = gameService;
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult<string> PostNewGame([FromBody] PostNewGame postNewGame)
         {
-            string guid = GameServer.NewGame();
-            return Ok(Guid.NewGuid().ToString());
+            // Request a new game from the game server and return the guid to the client.
+            string guid = GameService.NewGame();
+            return Ok(guid);
         }
 
         [Route("{guid}")]

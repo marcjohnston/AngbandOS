@@ -1,0 +1,18 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #canvas-container {
+    width: 100%;
+    height: 100%;
+
+    & canvas {
+      border: 1px solid black;
+      background-color: black;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

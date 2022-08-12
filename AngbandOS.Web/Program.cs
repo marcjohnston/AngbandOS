@@ -10,6 +10,8 @@ using AngbandOS.Web.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 
+builder.Services.AddSingleton(typeof(IGameService), typeof(GameService)); // Maintains active games.
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
