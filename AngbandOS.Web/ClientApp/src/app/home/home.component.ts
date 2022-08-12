@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import * as SignalR from "@microsoft/signalr";
 
 export class PostNewGame {
   public username: string = "";
@@ -9,32 +10,26 @@ export class PostNewGame {
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  public readonly connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub").build();
+  public connectionId: string | null = null;
   public gameGuid: string | null = null;
 
   constructor(
-    private _httpClient: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
+    private _httpClient: HttpClient
   ) {
-
-  }
-
-  ngOnInit(): void {
     const postNewGame: PostNewGame = {
       username: "marc"
     };
-    this._httpClient.post<string>(`api/games`, postNewGame).toPromise().then((guid: string | undefined) => {
+    this._httpClient.post<string>(`/apiv1/games`, postNewGame).toPromise().then((guid: string | undefined) => {
       if (guid !== undefined) {
         this.gameGuid = guid;
       }
     }, (error: HttpErrorResponse) => {
       this.gameGuid = "post failed";
     });
-  //  this._httpClient.get<string>(`api/games`).toPromise().then((guid: string | undefined) => {
-  //    this.gameGuid = "get worked";
-  //  }, (error: HttpErrorResponse) => {
-  //    this.gameGuid = "get failed";
-  //  });
+    this.connection.start().then(() => {
+      this.connectionId = this.connection.connectionId;
+    });
   }
 }
-

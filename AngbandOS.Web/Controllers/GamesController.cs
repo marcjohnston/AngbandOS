@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AngbandOS.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("apiv1/[controller]")]
     [ApiController]
     [Produces("application/json")]
     public class GamesController : ControllerBase
