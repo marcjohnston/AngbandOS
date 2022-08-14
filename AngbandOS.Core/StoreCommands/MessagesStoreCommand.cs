@@ -19,14 +19,14 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdMessages();
+            DoCmdMessages(saveGame);
         }
 
-        public static void DoCmdMessages()
+        public static void DoCmdMessages(SaveGame saveGame)
         {
-            int messageNumber = SaveGame.Instance.MessageNum();
+            int messageNumber = saveGame.MessageNum();
             int index = 0;
             int horizontalOffset = 0;
             Gui.FullScreenOverlay = true;
@@ -41,7 +41,7 @@ namespace Cthangband.StoreCommands
                 // Print the messages
                 for (row = 0; row < 40 && index + row < messageNumber; row++)
                 {
-                    string msg = SaveGame.Instance.MessageStr((short)(index + row));
+                    string msg = saveGame.MessageStr((short)(index + row));
                     msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
                     Gui.Print(Colour.White, msg, 41 - row, 0);
                 }

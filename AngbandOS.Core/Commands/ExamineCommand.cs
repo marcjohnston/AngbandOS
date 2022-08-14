@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            ExamineInventoryStoreCommand.DoCmdExamine(saveGame.Player);
+            ExamineInventoryStoreCommand.DoCmdExamine(saveGame);
         }
     }
 }

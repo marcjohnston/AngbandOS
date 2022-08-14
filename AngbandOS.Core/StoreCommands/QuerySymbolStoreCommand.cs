@@ -19,12 +19,12 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdQuerySymbol();
+            DoCmdQuerySymbol(saveGame);
         }
 
-        public static void DoCmdQuerySymbol()
+        public static void DoCmdQuerySymbol(SaveGame saveGame)
         {
             int index;
             // Get the symbol
@@ -44,7 +44,7 @@ namespace Cthangband.StoreCommands
             string buf = GlobalData.SymbolIdentification[index] != null
                 ? $"{symbol} - {GlobalData.SymbolIdentification[index].Substring(2)}."
                 : $"{symbol} - Unknown Symbol";
-            SaveGame.Instance.MsgPrint(buf);
+            saveGame.MsgPrint(buf);
         }
     }
 }

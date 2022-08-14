@@ -11,7 +11,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "Sacrifice Item";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.SacrificeItem();
         }

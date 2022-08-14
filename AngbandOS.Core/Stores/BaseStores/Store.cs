@@ -22,7 +22,7 @@ namespace Cthangband
     [Serializable]
     internal abstract class Store : IStore
     {
-        public readonly SaveGame SaveGame;
+        protected readonly SaveGame SaveGame;
         public readonly StoreType StoreType;
 
         public int X => _x;
@@ -1524,7 +1524,7 @@ namespace Cthangband
                         matchingCommandFound = true;
                         if (command.IsEnabled(this))
                         {
-                            command.Execute(_player, this);
+                            command.Execute(SaveGame, this);
 
                             if (command.RequiresRerendering)
                                 DisplayStore();

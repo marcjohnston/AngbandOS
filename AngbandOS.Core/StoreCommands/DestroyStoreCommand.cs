@@ -20,25 +20,25 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdDestroy(player);
+            DoCmdDestroy(saveGame);
         }
 
-        public static void DoCmdDestroy(Player player)
+        public static void DoCmdDestroy(SaveGame saveGame)
         {
             int amount = 1;
             bool force = Gui.CommandArgument > 0;
             // Get an item to destroy
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Destroy which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Destroy which item? ", false, true, true))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing to destroy.");
+                    saveGame.MsgPrint("You have nothing to destroy.");
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // If we have more than one we might not want to destroy all of them
             if (item.Count > 1)
             {
@@ -76,35 +76,35 @@ namespace Cthangband.StoreCommands
                 }
             }
             // Destroying something takes a turn
-            SaveGame.Instance.EnergyUse = 100;
+            saveGame.EnergyUse = 100;
             // Can't destroy an artifact artifact
             if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
             {
                 string feel = "special";
-                SaveGame.Instance.EnergyUse = 0;
-                SaveGame.Instance.MsgPrint($"You cannot destroy {itemName}.");
+                saveGame.EnergyUse = 0;
+                saveGame.MsgPrint($"You cannot destroy {itemName}.");
                 if (item.IsCursed() || item.IsBroken())
                 {
                     feel = "terrible";
                 }
                 item.Inscription = feel;
                 item.IdentifyFlags.Set(Constants.IdentSense);
-                player.NoticeFlags |= Constants.PnCombine;
-                player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
+                saveGame.Player.NoticeFlags |= Constants.PnCombine;
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
                 return;
             }
-            SaveGame.Instance.MsgPrint($"You destroy {itemName}.");
+            saveGame.MsgPrint($"You destroy {itemName}.");
             // Warriors and paladins get experience for destroying magic books
-            if (SaveGame.Instance.ItemFilterHighLevelBook(item))
+            if (saveGame.ItemFilterHighLevelBook(item))
             {
                 bool gainExpr = false;
-                if (player.ProfessionIndex == CharacterClass.Warrior)
+                if (saveGame.Player.ProfessionIndex == CharacterClass.Warrior)
                 {
                     gainExpr = true;
                 }
-                else if (player.ProfessionIndex == CharacterClass.Paladin)
+                else if (saveGame.Player.ProfessionIndex == CharacterClass.Paladin)
                 {
-                    if (player.Realm1 == Realm.Life)
+                    if (saveGame.Player.Realm1 == Realm.Life)
                     {
                         if (item.Category == ItemCategory.DeathBook)
                         {
@@ -119,9 +119,9 @@ namespace Cthangband.StoreCommands
                         }
                     }
                 }
-                if (gainExpr && player.ExperiencePoints < Constants.PyMaxExp)
+                if (gainExpr && saveGame.Player.ExperiencePoints < Constants.PyMaxExp)
                 {
-                    int testerExp = player.MaxExperienceGained / 20;
+                    int testerExp = saveGame.Player.MaxExperienceGained / 20;
                     if (testerExp > 10000)
                     {
                         testerExp = 10000;
@@ -134,22 +134,22 @@ namespace Cthangband.StoreCommands
                     {
                         testerExp = 1;
                     }
-                    SaveGame.Instance.MsgPrint("You feel more experienced.");
-                    player.GainExperience(testerExp * amount);
+                    saveGame.MsgPrint("You feel more experienced.");
+                    saveGame.Player.GainExperience(testerExp * amount);
                 }
             }
             // Tidy up the player's inventory
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -amount);
-                player.Inventory.InvenItemDescribe(itemIndex);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -amount);
+                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
-                SaveGame.Instance.Level.FloorItemIncrease(0 - itemIndex, -amount);
-                SaveGame.Instance.Level.FloorItemDescribe(0 - itemIndex);
-                SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
+                saveGame.Level.FloorItemIncrease(0 - itemIndex, -amount);
+                saveGame.Level.FloorItemDescribe(0 - itemIndex);
+                saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
         }
     }

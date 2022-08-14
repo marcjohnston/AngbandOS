@@ -5,7 +5,7 @@
         char Key { get; }
         bool IsEnabled(Store store);
         bool RequiresRerendering { get; }
-        void Execute(Player player, Store store);
+        void Execute(SaveGame saveGame, Store store);
         string Description { get; }
     }
 }

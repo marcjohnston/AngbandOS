@@ -19,18 +19,18 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdDestroyAll(player);
+            DoCmdDestroyAll(saveGame);
         }
 
-        public static void DoCmdDestroyAll(Player player)
+        public static void DoCmdDestroyAll(SaveGame saveGame)
         {
             int count = 0;
             // Look for worthless items
             for (int i = InventorySlot.Pack - 1; i >= 0; i--)
             {
-                Item item = player.Inventory[i];
+                Item item = saveGame.Player.Inventory[i];
                 if (item.ItemType == null)
                 {
                     continue;
@@ -41,21 +41,21 @@ namespace Cthangband.StoreCommands
                     continue;
                 }
                 string itemName = item.Description(true, 3);
-                SaveGame.Instance.MsgPrint($"You destroy {itemName}.");
+                saveGame.MsgPrint($"You destroy {itemName}.");
                 count++;
                 int amount = item.Count;
-                player.Inventory.InvenItemIncrease(i, -amount);
-                player.Inventory.InvenItemOptimize(i);
+                saveGame.Player.Inventory.InvenItemIncrease(i, -amount);
+                saveGame.Player.Inventory.InvenItemOptimize(i);
             }
             if (count == 0)
             {
-                SaveGame.Instance.MsgPrint("You are carrying nothing worth destroying.");
-                SaveGame.Instance.EnergyUse = 0;
+                saveGame.MsgPrint("You are carrying nothing worth destroying.");
+                saveGame.EnergyUse = 0;
             }
             else
             {
                 // If we destroyed at least one thing, take a turn
-                SaveGame.Instance.EnergyUse = 100;
+                saveGame.EnergyUse = 100;
             }
 
         }

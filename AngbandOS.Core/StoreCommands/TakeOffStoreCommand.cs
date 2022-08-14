@@ -18,33 +18,33 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdTakeOff(player);
+            DoCmdTakeOff(saveGame);
         }
 
-        public static void DoCmdTakeOff(Player player)
+        public static void DoCmdTakeOff(SaveGame saveGame)
         {
             // Get the item to take off
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Take off which item? ", true, false, false))
+            if (!saveGame.GetItem(out int itemIndex, "Take off which item? ", true, false, false))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You are not wearing anything to take off.");
+                    saveGame.MsgPrint("You are not wearing anything to take off.");
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Can't take of cursed items
             if (item.IsCursed())
             {
-                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                saveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             // Take off the item
-            SaveGame.Instance.EnergyUse = 50;
-            player.Inventory.InvenTakeoff(itemIndex, 255);
-            player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
+            saveGame.EnergyUse = 50;
+            saveGame.Player.Inventory.InvenTakeoff(itemIndex, 255);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
         }
     }
 }

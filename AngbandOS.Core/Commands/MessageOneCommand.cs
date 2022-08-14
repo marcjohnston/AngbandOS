@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            MessageOneStoreCommand.DoCmdMessageOne();
+            MessageOneStoreCommand.DoCmdMessageOne(saveGame);
         }
     }
 }

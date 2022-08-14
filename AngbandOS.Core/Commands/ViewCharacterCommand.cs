@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            ViewCharacterStoreCommand.DoCmdViewCharacter(saveGame.Player);
+            ViewCharacterStoreCommand.DoCmdViewCharacter(saveGame);
         }
     }
 }

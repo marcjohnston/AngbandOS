@@ -13,11 +13,11 @@ namespace Cthangband.StoreCommands
 
         public string Description => "view Class heroes";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             Gui.Save();
-            Program.HiScores.ClassFilter = player.ProfessionIndex;
-            Program.HiScores.DisplayScores(new HighScore(player));
+            Program.HiScores.ClassFilter = saveGame.Player.ProfessionIndex;
+            Program.HiScores.DisplayScores(new HighScore(saveGame.Player));
             Program.HiScores.ClassFilter = -1;
             Gui.Load();
         }

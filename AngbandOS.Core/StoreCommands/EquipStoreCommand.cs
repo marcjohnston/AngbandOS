@@ -19,23 +19,23 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdEquip(player);
+            DoCmdEquip(saveGame);
         }
 
-        public static void DoCmdEquip(Player player)
+        public static void DoCmdEquip(SaveGame saveGame)
         {
             // We're viewing equipment
-            SaveGame.Instance.ViewingEquipment = true;
+            saveGame.ViewingEquipment = true;
             Gui.Save();
             // We're interested in seeing everything
-            SaveGame.Instance.ItemFilterAll = true;
-            player.Inventory.ShowEquip();
-            SaveGame.Instance.ItemFilterAll = false;
+            saveGame.ItemFilterAll = true;
+            saveGame.Player.Inventory.ShowEquip();
+            saveGame.ItemFilterAll = false;
             // Get a command
             string outVal =
-                $"Equipment: carrying {player.WeightCarried / 10}.{player.WeightCarried % 10} pounds ({player.WeightCarried * 100 / (player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+                $"Equipment: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             Gui.PrintLine(outVal, 0, 0);
             Gui.QueuedCommand = Gui.Inkey();
             Gui.Load();
@@ -43,11 +43,11 @@ namespace Cthangband.StoreCommands
             if (Gui.QueuedCommand == '\x1b')
             {
                 Gui.QueuedCommand = (char)0;
-                SaveGame.Instance.ItemDisplayColumn = 50;
+                saveGame.ItemDisplayColumn = 50;
             }
             else
             {
-                SaveGame.Instance.ViewingItemList = true;
+                saveGame.ViewingItemList = true;
             }
         }
     }

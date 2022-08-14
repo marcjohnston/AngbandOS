@@ -11,7 +11,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "Drop an item";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.StoreSell();
         }

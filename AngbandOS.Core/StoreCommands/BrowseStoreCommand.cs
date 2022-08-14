@@ -19,45 +19,45 @@ namespace Cthangband.StoreCommands
 
         public bool IsEnabled(Store store) => true;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdBrowse(player);
+            DoCmdBrowse(saveGame);
         }
 
-        public static void DoCmdBrowse(Player player)
+        public static void DoCmdBrowse(SaveGame saveGame)
         {
             int spell;
             int spellIndex = 0;
             int[] spells = new int[64];
             // Make sure we can read
-            if (player.Realm1 == 0 && player.Realm2 == 0)
+            if (saveGame.Player.Realm1 == 0 && saveGame.Player.Realm2 == 0)
             {
-                SaveGame.Instance.MsgPrint("You cannot read books!");
+                saveGame.MsgPrint("You cannot read books!");
                 return;
             }
             // Get a book to read if we don't already have one
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Browse which book? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Browse which book? ", false, true, true))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have no books that you can read.");
+                    saveGame.MsgPrint("You have no books that you can read.");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Check that the book is useable by the player
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
             {
-                SaveGame.Instance.MsgPrint("You can't read that.");
+                saveGame.MsgPrint("You can't read that.");
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = false;
             int bookSubCategory = item.ItemSubCategory;
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
             // Find all spells in the book and add them to the array
             for (spell = 0; spell < 32; spell++)
             {
@@ -68,7 +68,7 @@ namespace Cthangband.StoreCommands
             }
             // Save the screen and overprint the spells in the book
             Gui.Save();
-            player.PrintSpells(spells, spellIndex, 1, 20, item.ItemType.BaseCategory.SpellBookToToRealm);
+            saveGame.Player.PrintSpells(spells, spellIndex, 1, 20, item.ItemType.BaseCategory.SpellBookToToRealm);
             Gui.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
             Gui.Print("[Press any key to continue]", 0, 23);

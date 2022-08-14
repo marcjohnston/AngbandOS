@@ -17,15 +17,15 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => true;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdJournal(player);
+            DoCmdJournal(saveGame);
         }
 
-        public static void DoCmdJournal(Player player)
+        public static void DoCmdJournal(SaveGame saveGame)
         {
             // Let the journal itself handle it from here
-            Journal journal = new Journal(player);
+            Journal journal = new Journal(saveGame.Player);
             journal.ShowMenu();
         }
     }

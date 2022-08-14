@@ -12,7 +12,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "buy Restoration";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.Restoration();
         }

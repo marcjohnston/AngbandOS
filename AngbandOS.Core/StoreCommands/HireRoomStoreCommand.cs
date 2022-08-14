@@ -12,7 +12,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "hire a Room";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.HireRoom();
         }

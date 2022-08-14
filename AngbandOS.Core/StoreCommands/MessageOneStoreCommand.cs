@@ -18,14 +18,14 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => false;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdMessageOne();
+            DoCmdMessageOne(saveGame);
         }
 
-        public static void DoCmdMessageOne()
+        public static void DoCmdMessageOne(SaveGame saveGame)
         {
-            Gui.PrintLine($"> {SaveGame.Instance.MessageStr(0)}", 0, 0);
+            Gui.PrintLine($"> {saveGame.MessageStr(0)}", 0, 0);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "Research a spell";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.ResearchSpell();
         }

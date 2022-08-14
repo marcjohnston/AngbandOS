@@ -12,7 +12,7 @@ namespace Cthangband.StoreCommands
 
         public string Description => "Identify all";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             store.IdentifyAll();
         }

@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            DestroyAllStoreCommand.DoCmdDestroyAll(saveGame.Player);
+            DestroyAllStoreCommand.DoCmdDestroyAll(saveGame);
         }
     }
 }

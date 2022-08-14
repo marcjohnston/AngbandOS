@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            BrowseStoreCommand.DoCmdBrowse(saveGame.Player);
+            BrowseStoreCommand.DoCmdBrowse(saveGame);
         }
     }
 }

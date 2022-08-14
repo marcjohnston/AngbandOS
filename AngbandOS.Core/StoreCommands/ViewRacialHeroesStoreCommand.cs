@@ -12,11 +12,11 @@ namespace Cthangband.StoreCommands
 
         public string Description => "view racial Heroes";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
             Gui.Save();
-            Program.HiScores.RaceFilter = player.RaceIndex;
-            Program.HiScores.DisplayScores(new HighScore(player));
+            Program.HiScores.RaceFilter = saveGame.Player.RaceIndex;
+            Program.HiScores.DisplayScores(new HighScore(saveGame.Player));
             Program.HiScores.RaceFilter = -1;
             Gui.Load();
         }

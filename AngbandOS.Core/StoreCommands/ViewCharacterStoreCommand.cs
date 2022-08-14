@@ -19,19 +19,19 @@ namespace Cthangband.StoreCommands
 
         public bool RequiresRerendering => true;
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdViewCharacter(player);
+            DoCmdViewCharacter(saveGame);
         }
 
-        public static void DoCmdViewCharacter(Player player)
+        public static void DoCmdViewCharacter(SaveGame saveGame)
         {
             // Save the current screen
             Gui.FullScreenOverlay = true;
             Gui.Save();
             Gui.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
-            CharacterViewer characterViewer = new CharacterViewer(player);
+            CharacterViewer characterViewer = new CharacterViewer(saveGame.Player);
             while (true)
             {
                 characterViewer.DisplayPlayer();
@@ -45,17 +45,17 @@ namespace Cthangband.StoreCommands
                 // 'c' changes name
                 if (keyPress == 'c' || keyPress == 'C')
                 {
-                    player.InputPlayerName();
+                    saveGame.Player.InputPlayerName();
                 }
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint(null);
             }
             // Restore the screen
             Gui.SetBackground(BackgroundImage.Overhead);
             Gui.Load();
             Gui.FullScreenOverlay = false;
-            player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
                              RedrawFlag.PrEquippy);
-            SaveGame.Instance.HandleStuff();
+            saveGame.HandleStuff();
         }
     }
 }

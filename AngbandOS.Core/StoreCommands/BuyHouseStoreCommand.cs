@@ -15,10 +15,10 @@ namespace Cthangband.StoreCommands
 
         public string Description => "Buy a house";
 
-        public void Execute(Player player, Store store)
+        public void Execute(SaveGame saveGame, Store store)
         {
-            HomeStore homeStore = HomeStore.FindHomeStore(store.SaveGame, SaveGame.Instance.CurTown.Index);
-            homeStore.BuyHouse(player);
+            HomeStore homeStore = HomeStore.FindHomeStore(saveGame, saveGame.CurTown.Index);
+            homeStore.BuyHouse(saveGame.Player);
         }
 
         public bool IsEnabled(Store store)
