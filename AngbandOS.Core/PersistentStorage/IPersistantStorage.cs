@@ -3,6 +3,6 @@
     internal interface IPersistentStorage
     {
         string Read(string slot);
-        bool Write(byte[] value, string filename);
+        bool Write(string value, string filename);
     }
 }

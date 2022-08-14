@@ -17,13 +17,13 @@ namespace Cthangband.PersistentStorage
         /// <param name="guid">The filename to store the game as.</param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool Write(byte[] value, string filename)
+        public bool Write(string value, string filename)
         {
             string path = Path.Combine(Program.SaveFolder, filename);
             FileInfo info = new FileInfo(path);
             using (FileStream stream = info.OpenWrite())
             {
-                stream.Write(value, 0, value.Length);   
+                //stream.Write(value, 0, value.Length);   
             }
             return true;
         }

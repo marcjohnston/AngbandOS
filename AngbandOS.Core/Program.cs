@@ -11,6 +11,8 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using Cthangband.PersistentStorage;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Cthangband
 {
@@ -92,9 +94,10 @@ namespace Cthangband
         /// <param name="filename"></param>
         public static void SerializeToSaveFolder<T>(T o, string filename)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream memoryStream = new MemoryStream();
-            formatter.Serialize(memoryStream, o);
+            string jsonString = JsonSerializer.Serialize(o);
+//            BinaryFormatter formatter = new BinaryFormatter();
+//            MemoryStream memoryStream = new MemoryStream();
+//            formatter.Serialize(memoryStream, o);
 //            memoryStream.Position = 0;
 //            T temp = (T)formatter.Deserialize(memoryStream);
 
@@ -106,7 +109,7 @@ namespace Cthangband
             //    formatter.Serialize(stream, o);
             //}
 
-            PersistentStorage.Write(memoryStream.ToArray(), filename);
+            PersistentStorage.Write(jsonString, filename);
         }
 
         public static bool DirCreate(string path)

@@ -10,7 +10,7 @@ namespace Cthangband.PersistentStorage
             return null;
         }
 
-        public bool Write(byte[] value, string filename)
+        public bool Write(string value, string filename)
         {
             return true;
         }
