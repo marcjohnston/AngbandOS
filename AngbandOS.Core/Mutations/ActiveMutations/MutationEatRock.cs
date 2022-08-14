@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionNoAim(out int dir))
             {
                 return;
@@ -30,22 +30,22 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (level.GridPassable(y, x))
             {
-                SaveGame.Instance.MsgPrint("You bite into thin air!");
+                saveGame.MsgPrint("You bite into thin air!");
                 return;
             }
             if (cPtr.FeatureType.IsPermanent)
             {
-                SaveGame.Instance.MsgPrint("Ouch!  This wall is harder than your teeth!");
+                saveGame.MsgPrint("Ouch!  This wall is harder than your teeth!");
                 return;
             }
             if (cPtr.MonsterIndex != 0)
             {
-                SaveGame.Instance.MsgPrint("There's something in the way!");
+                saveGame.MsgPrint("There's something in the way!");
                 return;
             }
             if (cPtr.FeatureType.Category == FloorTileTypeCategory.Tree)
             {
-                SaveGame.Instance.MsgPrint("You don't like the woody taste!");
+                saveGame.MsgPrint("You don't like the woody taste!");
                 return;
             }
             if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.SecretDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.Rubble)
@@ -58,7 +58,7 @@ namespace Cthangband.Mutations.ActiveMutations
             }
             else
             {
-                SaveGame.Instance.MsgPrint("This granite is very filling!");
+                saveGame.MsgPrint("This granite is very filling!");
                 player.SetFood(player.Food + 10000);
             }
             saveGame.WallToMud(dir);

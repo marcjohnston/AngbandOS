@@ -20,24 +20,24 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer subject to fits of magical healing.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(2000) != 1)
             {
                 return;
             }
-            int wounds = player.MaxHealth - player.Health;
+            int wounds = saveGame.Player.MaxHealth - saveGame.Player.Health;
             if (wounds <= 0)
             {
                 return;
             }
-            int healing = player.Mana;
+            int healing = saveGame.Player.Mana;
             if (healing > wounds)
             {
                 healing = wounds;
             }
-            player.RestoreHealth(healing);
-            player.Mana -= healing;
+            saveGame.Player.RestoreHealth(healing);
+            saveGame.Player.Mana -= healing;
         }
     }
 }

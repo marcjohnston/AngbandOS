@@ -20,19 +20,19 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "Your position seems more certain.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(5000) != 88)
             {
                 return;
             }
-            if (player.HasNexusResistance || player.HasAntiTeleport)
+            if (saveGame.Player.HasNexusResistance || saveGame.Player.HasAntiTeleport)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("Your position suddenly seems very uncertain...");
-            SaveGame.Instance.MsgPrint(null);
+            saveGame.MsgPrint("Your position suddenly seems very uncertain...");
+            saveGame.MsgPrint(null);
             saveGame.TeleportPlayer(40);
         }
     }

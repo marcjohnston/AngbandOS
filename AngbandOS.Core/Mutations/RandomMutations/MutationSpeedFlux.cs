@@ -20,36 +20,36 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are firmly anchored in time.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(6000) == 1)
             {
                 saveGame.Disturb(false);
                 if (Program.Rng.DieRoll(2) == 1)
                 {
-                    SaveGame.Instance.MsgPrint("Everything around you speeds up.");
-                    if (player.TimedHaste > 0)
+                    saveGame.MsgPrint("Everything around you speeds up.");
+                    if (saveGame.Player.TimedHaste > 0)
                     {
-                        player.SetTimedHaste(0);
+                        saveGame.Player.SetTimedHaste(0);
                     }
                     else
                     {
-                        player.SetTimedSlow(player.TimedSlow + Program.Rng.DieRoll(30) + 10);
+                        saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(30) + 10);
                     }
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("Everything around you slows down.");
-                    if (player.TimedSlow > 0)
+                    saveGame.MsgPrint("Everything around you slows down.");
+                    if (saveGame.Player.TimedSlow > 0)
                     {
-                        player.SetTimedSlow(0);
+                        saveGame.Player.SetTimedSlow(0);
                     }
                     else
                     {
-                        player.SetTimedHaste(player.TimedHaste + Program.Rng.DieRoll(30) + 10);
+                        saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(30) + 10);
                     }
                 }
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint(null);
             }
         }
     }

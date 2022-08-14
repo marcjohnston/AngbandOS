@@ -14,9 +14,9 @@ namespace Cthangband.Projection
 {
     internal abstract class Projectile
     {
-        protected readonly Level Level;
-        protected readonly Player Player;
         protected readonly SaveGame SaveGame;
+        protected readonly Level Level; // TODO: Should be deleted.
+        protected readonly Player Player; // TODO: Should be deleted.
         protected string BoltGraphic = "WhiteBolt";
         protected string EffectAnimation = string.Empty;
         protected string ImpactGraphic = "WhiteSplat";
@@ -24,11 +24,11 @@ namespace Cthangband.Projection
         protected int ProjectMx;
         protected int ProjectMy;
 
-        public Projectile()
+        public Projectile(SaveGame saveGame)
         {
-            SaveGame = SaveGame.Instance;
-            Player = SaveGame.Player;
-            Level = SaveGame.Level;
+            SaveGame = saveGame;
+            Level = saveGame.Level;
+            Player = saveGame.Player;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Cthangband.Projection
             bool visual = false;
             bool drawn = false;
             bool breath = false;
-            bool blind = Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness != 0;
             int grids = 0;
             int[] gx = new int[256];
             int[] gy = new int[256];
@@ -67,13 +67,13 @@ namespace Cthangband.Projection
             }
             else if (who == 0)
             {
-                x1 = Player.MapX;
-                y1 = Player.MapY;
+                x1 = SaveGame.Player.MapX;
+                y1 = SaveGame.Player.MapY;
             }
             else
             {
-                x1 = Level.Monsters[who].MapX;
-                y1 = Level.Monsters[who].MapY;
+                x1 = SaveGame.Level.Monsters[who].MapX;
+                y1 = SaveGame.Level.Monsters[who].MapY;
             }
             int ySaver = y1;
             int xSaver = x1;
@@ -109,16 +109,16 @@ namespace Cthangband.Projection
                     grids++;
                 }
                 if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 &&
-                    (flg & ProjectionFlag.ProjectBeam) != 0 && Level.PanelContains(y, x) &&
-                    Level.PlayerHasLosBold(y, x))
+                    (flg & ProjectionFlag.ProjectBeam) != 0 && SaveGame.Level.PanelContains(y, x) &&
+                    SaveGame.Level.PlayerHasLosBold(y, x))
                 {
                     if (impactEntity != null)
                     {
-                        Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
+                        SaveGame.Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
                     }
                 }
-                cPtr = Level.Grid[y][x];
-                if (dist != 0 && !Level.GridPassable(y, x))
+                cPtr = SaveGame.Level.Grid[y][x];
+                if (dist != 0 && !SaveGame.Level.GridPassable(y, x))
                 {
                     break;
                 }
@@ -130,8 +130,8 @@ namespace Cthangband.Projection
                 {
                     break;
                 }
-                Level.MoveOneStepTowards(out int y9, out int x9, y, x, y1, x1, y2, x2);
-                if (!Level.GridPassable(y9, x9) && rad > 0)
+                SaveGame.Level.MoveOneStepTowards(out int y9, out int x9, y, x, y1, x1, y2, x2);
+                if (!SaveGame.Level.GridPassable(y9, x9) && rad > 0)
                 {
                     break;
                 }
@@ -142,7 +142,7 @@ namespace Cthangband.Projection
                 }
                 if (!blind && (flg & ProjectionFlag.ProjectHide) == 0)
                 {
-                    if (Level.PlayerHasLosBold(y9, x9) && Level.PanelContains(y9, x9))
+                    if (SaveGame.Level.PlayerHasLosBold(y9, x9) && SaveGame.Level.PanelContains(y9, x9))
                     {
                         if (projectileEntity != null)
                         {
@@ -151,12 +151,12 @@ namespace Cthangband.Projection
                             {
                                 directionalCharacter = BoltChar(y, x, y9, x9);
                             }
-                            Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
-                            Level.MoveCursorRelative(y9, x9);
+                            SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
+                            SaveGame.Level.MoveCursorRelative(y9, x9);
                             Gui.Refresh();
                             visual = true;
                             Gui.Pause(msec);
-                            Level.RedrawSingleLocation(y9, x9);
+                            SaveGame.Level.RedrawSingleLocation(y9, x9);
                             Gui.Refresh();
                         }
                     }
@@ -195,19 +195,19 @@ namespace Cthangband.Projection
                             {
                                 for (x = bx - cdis; x <= bx + cdis; x++)
                                 {
-                                    if (!Level.InBounds(y, x))
+                                    if (!SaveGame.Level.InBounds(y, x))
                                     {
                                         continue;
                                     }
-                                    if (Level.Distance(y1, x1, y, x) != bdis)
+                                    if (SaveGame.Level.Distance(y1, x1, y, x) != bdis)
                                     {
                                         continue;
                                     }
-                                    if (Level.Distance(by, bx, y, x) != cdis)
+                                    if (SaveGame.Level.Distance(by, bx, y, x) != cdis)
                                     {
                                         continue;
                                     }
-                                    if (!Level.Los(by, bx, y, x))
+                                    if (!SaveGame.Level.Los(by, bx, y, x))
                                     {
                                         continue;
                                     }
@@ -227,7 +227,7 @@ namespace Cthangband.Projection
                             bdis++;
                             continue;
                         }
-                        Level.MoveOneStepTowards(out by, out bx, by, bx, y1, x1, y2, x2);
+                        SaveGame.Level.MoveOneStepTowards(out by, out bx, by, bx, y1, x1, y2, x2);
                         bdis++;
                         brad = rad * bdis / dist;
                     }
@@ -241,26 +241,26 @@ namespace Cthangband.Projection
                         {
                             for (x = x2 - dist; x <= x2 + dist; x++)
                             {
-                                if (!Level.InBounds2(y, x))
+                                if (!SaveGame.Level.InBounds2(y, x))
                                 {
                                     continue;
                                 }
-                                if (Level.Distance(y2, x2, y, x) != dist)
+                                if (SaveGame.Level.Distance(y2, x2, y, x) != dist)
                                 {
                                     continue;
                                 }
                                 if (GetType().Name == "ProjectDisintegrate")
                                 {
-                                    if (Level.CaveValidBold(y, x))
+                                    if (SaveGame.Level.CaveValidBold(y, x))
                                     {
-                                        Level.RevertTileToBackground(y, x);
+                                        SaveGame.Level.RevertTileToBackground(y, x);
                                     }
-                                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent |
+                                    SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent |
                                                       UpdateFlags.UpdateMonsters);
                                 }
                                 else
                                 {
-                                    if (!Level.Los(y2, x2, y, x))
+                                    if (!SaveGame.Level.Los(y2, x2, y, x))
                                     {
                                         continue;
                                     }
@@ -286,18 +286,18 @@ namespace Cthangband.Projection
                     {
                         y = gy[i];
                         x = gx[i];
-                        if (Level.PlayerHasLosBold(y, x) && Level.PanelContains(y, x))
+                        if (SaveGame.Level.PlayerHasLosBold(y, x) && SaveGame.Level.PanelContains(y, x))
                         {
                             if (impactEntity != null)
                             {
                                 drawn = true;
-                                Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
+                                SaveGame.Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
                             }
                         }
                     }
                     if (impactEntity != null)
                     {
-                        Level.MoveCursorRelative(y2, x2);
+                        SaveGame.Level.MoveCursorRelative(y2, x2);
                         Gui.Refresh();
                         if (visual || drawn)
                         {
@@ -311,19 +311,19 @@ namespace Cthangband.Projection
                     {
                         y = gy[i];
                         x = gx[i];
-                        if (Level.PlayerHasLosBold(y, x) && Level.PanelContains(y, x))
+                        if (SaveGame.Level.PlayerHasLosBold(y, x) && SaveGame.Level.PanelContains(y, x))
                         {
-                            Level.RedrawSingleLocation(y, x);
+                            SaveGame.Level.RedrawSingleLocation(y, x);
                         }
                     }
-                    Level.MoveCursorRelative(y2, x2);
+                    SaveGame.Level.MoveCursorRelative(y2, x2);
                     Gui.Refresh();
                 }
             }
 
             if (animationEntity != null)
             {
-                animationEntity.Animate(Level, gy, gx);
+                animationEntity.Animate(SaveGame.Level, gy, gx);
             }
 
             if ((flg & ProjectionFlag.ProjectGrid) != 0)
@@ -387,7 +387,7 @@ namespace Cthangband.Projection
                         {
                             continue;
                         }
-                        MonsterRace refPtr = Level.Monsters[cPtr.MonsterIndex].Race;
+                        MonsterRace refPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex].Race;
                         if ((refPtr.Flags2 & MonsterFlag2.Reflecting) != 0 && Program.Rng.DieRoll(10) != 1 &&
                             distHack > 1 && GetType().Name != "ProjectWizardBolt")
                         {
@@ -398,15 +398,15 @@ namespace Cthangband.Projection
                                 tY = ySaver - 1 + Program.Rng.DieRoll(3);
                                 tX = xSaver - 1 + Program.Rng.DieRoll(3);
                                 maxAttempts--;
-                            } while (maxAttempts > 0 && Level.InBounds2(tY, tX) && !Level.Los(y, x, tY, tX));
+                            } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.Los(y, x, tY, tX));
                             if (maxAttempts < 1)
                             {
                                 tY = ySaver;
                                 tX = xSaver;
                             }
-                            if (Level.Monsters[cPtr.MonsterIndex].IsVisible)
+                            if (SaveGame.Level.Monsters[cPtr.MonsterIndex].IsVisible)
                             {
-                                SaveGame.Instance.MsgPrint("The attack bounces!");
+                                SaveGame.MsgPrint("The attack bounces!");
                                 refPtr.Knowledge.RFlags2 |= MonsterFlag2.Reflecting;
                             }
                             Fire(cPtr.MonsterIndex, 0, tY, tX, dam, flg);
@@ -424,10 +424,10 @@ namespace Cthangband.Projection
                 {
                     x = ProjectMx;
                     y = ProjectMy;
-                    cPtr = Level.Grid[y][x];
+                    cPtr = SaveGame.Level.Grid[y][x];
                     if (cPtr.MonsterIndex != 0)
                     {
-                        Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                        Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                         if (mPtr.IsVisible)
                         {
                             SaveGame.HealthTrack(cPtr.MonsterIndex);

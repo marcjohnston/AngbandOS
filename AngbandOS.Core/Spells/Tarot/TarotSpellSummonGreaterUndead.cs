@@ -14,24 +14,24 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellSummonGreaterUndead : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("You concentrate on the image of a greater undead being...");
+            saveGame.MsgPrint("You concentrate on the image of a greater undead being...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level,
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level,
                     Constants.SummonHiUndeadNoUniques, true))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHiUndeadNoUniques))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonHiUndeadNoUniques))
             {
-                SaveGame.Instance.MsgPrint("The summoned undead creature gets angry!");
+                saveGame.MsgPrint("The summoned undead creature gets angry!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                saveGame.MsgPrint("No-one ever turns up.");
             }
         }
 

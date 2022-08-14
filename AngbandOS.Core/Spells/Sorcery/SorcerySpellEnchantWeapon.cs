@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellEnchantWeapon : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.EnchantSpell(Program.Rng.RandomLessThan(4) + 1, Program.Rng.RandomLessThan(4) + 1, 0);
         }

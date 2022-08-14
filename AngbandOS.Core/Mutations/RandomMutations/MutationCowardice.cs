@@ -22,20 +22,20 @@ namespace Cthangband.Mutations.RandomMutations
             Group = MutationGroup.Bravery;
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) != 13)
             {
                 return;
             }
-            if (player.HasFearResistance || player.TimedHeroism != 0 || player.TimedSuperheroism != 0)
+            if (saveGame.Player.HasFearResistance || saveGame.Player.TimedHeroism != 0 || saveGame.Player.TimedSuperheroism != 0)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("It's so dark... so scary!");
-            player.RedrawNeeded.Set(RedrawFlag.PrAfraid);
-            player.TimedFear = player.TimedFear + 13 + Program.Rng.DieRoll(26);
+            saveGame.MsgPrint("It's so dark... so scary!");
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrAfraid);
+            saveGame.Player.TimedFear = saveGame.Player.TimedFear + 13 + Program.Rng.DieRoll(26);
         }
     }
 }

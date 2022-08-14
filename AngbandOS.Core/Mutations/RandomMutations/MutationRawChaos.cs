@@ -21,16 +21,16 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You feel the universe is more stable around you.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(8000) != 1)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(8000) != 1)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("You feel the world warping around you!");
-            SaveGame.Instance.MsgPrint(null);
-            saveGame.FireBall(new ProjectChaos(), 0, player.Level, 8);
+            saveGame.MsgPrint("You feel the world warping around you!");
+            saveGame.MsgPrint(null);
+            saveGame.FireBall(new ProjectChaos(saveGame), 0, saveGame.Player.Level, 8);
         }
     }
 }

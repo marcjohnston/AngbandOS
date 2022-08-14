@@ -20,11 +20,11 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You feel forces of chaos departing your old scars.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) == 1)
             {
-                player.PolymorphWounds();
+                saveGame.Player.PolymorphWounds();
             }
         }
     }

@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellResistPoison : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedPoisonResistance(player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
         }
 
         public override void Initialise(int characterClass)

@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellMassSleep : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.SleepMonsters();
         }

@@ -21,11 +21,11 @@ namespace Cthangband.Talents
             BaseFailure = 60;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            if (player.Level < 40)
+            if (saveGame.Player.Level < 40)
             {
-                Psychometry(player, level);
+                Psychometry(saveGame);
             }
             else
             {
@@ -38,37 +38,37 @@ namespace Cthangband.Talents
             return string.Empty;
         }
 
-        private void Psychometry(Player player, Level level)
+        private void Psychometry(SaveGame saveGame)
         {
-            if (!SaveGame.Instance.GetItem(out int item, "Meditate on which item? ", true, true, true))
+            if (!saveGame.GetItem(out int item, "Meditate on which item? ", true, true, true))
             {
                 if (item == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing appropriate.");
+                    saveGame.MsgPrint("You have nothing appropriate.");
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
+            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             if (oPtr.IsKnown() || oPtr.IdentifyFlags.IsSet(Constants.IdentSense))
             {
-                SaveGame.Instance.MsgPrint("You cannot find out anything more about that.");
+                saveGame.MsgPrint("You cannot find out anything more about that.");
                 return;
             }
             string feel = oPtr.GetDetailedFeeling();
             string oName = oPtr.Description(false, 0);
             if (string.IsNullOrEmpty(feel))
             {
-                SaveGame.Instance.MsgPrint($"You do not perceive anything unusual about the {oName}.");
+                saveGame.MsgPrint($"You do not perceive anything unusual about the {oName}.");
                 return;
             }
             string s = oPtr.Count == 1 ? "is" : "are";
-            SaveGame.Instance.MsgPrint($"You feel that the {oName} {s} {feel}...");
+            saveGame.MsgPrint($"You feel that the {oName} {s} {feel}...");
             oPtr.IdentifyFlags.Set(Constants.IdentSense);
             if (string.IsNullOrEmpty(oPtr.Inscription))
             {
                 oPtr.Inscription = feel;
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
         }
     }
 }

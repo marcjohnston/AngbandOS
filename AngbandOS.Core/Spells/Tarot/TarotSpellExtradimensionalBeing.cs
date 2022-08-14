@@ -13,10 +13,10 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellExtradimensionalBeing : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("You have turned into a Extradimensional Being.");
-            player.Dna.GainMutation();
+            saveGame.MsgPrint("You have turned into a Extradimensional Being.");
+            saveGame.Player.Dna.GainMutation(saveGame);
         }
 
         public override void Initialise(int characterClass)

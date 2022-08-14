@@ -32,7 +32,7 @@ namespace Cthangband.Commands
                 }
             }
             // If we don't already have a direction, prompt for one
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];

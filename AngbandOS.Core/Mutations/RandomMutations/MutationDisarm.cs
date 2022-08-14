@@ -21,23 +21,23 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "Your feet shrink to their former size.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(10000) != 1)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("You trip over your own feet!");
-            player.TakeHit(Program.Rng.DieRoll(player.Weight / 6), "tripping");
-            SaveGame.Instance.MsgPrint(null);
-            Item oPtr = player.Inventory[InventorySlot.MeleeWeapon];
+            saveGame.MsgPrint("You trip over your own feet!");
+            saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
+            saveGame.MsgPrint(null);
+            Item oPtr = saveGame.Player.Inventory[InventorySlot.MeleeWeapon];
             if (oPtr.ItemType == null)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You drop your weapon!");
-            player.Inventory.InvenDrop(InventorySlot.MeleeWeapon, 1);
+            saveGame.MsgPrint("You drop your weapon!");
+            saveGame.Player.Inventory.InvenDrop(InventorySlot.MeleeWeapon, 1);
         }
     }
 }

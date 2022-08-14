@@ -14,10 +14,10 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellMeteorSwarm : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            int x = player.MapX;
-            int y = player.MapY;
+            int x = saveGame.Player.MapX;
+            int y = saveGame.Player.MapY;
             int count = 0;
             int b = 10 + Program.Rng.DieRoll(10);
             for (int i = 0; i < b; i++)
@@ -30,18 +30,18 @@ namespace Cthangband.Spells.Chaos
                     {
                         break;
                     }
-                    x = player.MapX - 5 + Program.Rng.DieRoll(10);
-                    y = player.MapY - 5 + Program.Rng.DieRoll(10);
-                    int dx = player.MapX > x ? player.MapX - x : x - player.MapX;
-                    int dy = player.MapY > y ? player.MapY - y : y - player.MapY;
+                    x = saveGame.Player.MapX - 5 + Program.Rng.DieRoll(10);
+                    y = saveGame.Player.MapY - 5 + Program.Rng.DieRoll(10);
+                    int dx = saveGame.Player.MapX > x ? saveGame.Player.MapX - x : x - saveGame.Player.MapX;
+                    int dy = saveGame.Player.MapY > y ? saveGame.Player.MapY - y : y - saveGame.Player.MapY;
                     d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-                } while (d > 5 || !level.PlayerHasLosBold(y, x));
+                } while (d > 5 || !saveGame.Level.PlayerHasLosBold(y, x));
                 if (count > 1000)
                 {
                     break;
                 }
                 count = 0;
-                saveGame.Project(0, 2, y, x, player.Level * 3 / 2, new ProjectMeteor(),
+                saveGame.Project(0, 2, y, x, saveGame.Player.Level * 3 / 2, new ProjectMeteor(saveGame),
                     ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
             }
         }

@@ -14,24 +14,24 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellSummonHounds : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("You concentrate on the image of a hound...");
+            saveGame.MsgPrint("You concentrate on the image of a hound...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonHound,
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonHound,
                     true))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonHound))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonHound))
             {
-                SaveGame.Instance.MsgPrint("The summoned hounds get angry!");
+                saveGame.MsgPrint("The summoned hounds get angry!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                saveGame.MsgPrint("No-one ever turns up.");
             }
         }
 

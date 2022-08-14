@@ -14,23 +14,23 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellConjureElemental : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(6) > 3)
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonElemental,
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental,
                     false))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonElemental))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental))
             {
-                SaveGame.Instance.MsgPrint("You fail to control the elemental creature!");
+                saveGame.MsgPrint("You fail to control the elemental creature!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                saveGame.MsgPrint("No-one ever turns up.");
             }
         }
 

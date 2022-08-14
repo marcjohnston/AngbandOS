@@ -14,14 +14,14 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellShardBall : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectShard(), dir, 120 + player.Level, 2);
+            saveGame.FireBall(new ProjectShard(saveGame), dir, 120 + saveGame.Player.Level, 2);
         }
 
         public override void Initialise(int characterClass)

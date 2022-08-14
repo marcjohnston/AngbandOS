@@ -15,11 +15,11 @@ namespace Cthangband.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame, Player player, Level level)
         {
-            if (!SaveGame.Instance.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
+            if (!saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionNoAim(out int dir))
             {
                 return;
@@ -28,13 +28,13 @@ namespace Cthangband.Mutations.ActiveMutations
             int x = player.MapX + level.KeypadDirectionXOffset[dir];
             if (level.Grid[y][x].MonsterIndex != 0)
             {
-                SaveGame.Instance.PlayerAttackMonster(y, x);
-                SaveGame.Instance.TeleportPlayer(30);
+                saveGame.PlayerAttackMonster(y, x);
+                saveGame.TeleportPlayer(30);
             }
             else
             {
-                SaveGame.Instance.MsgPrint("You don't see any monster in this direction");
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint("You don't see any monster in this direction");
+                saveGame.MsgPrint(null);
             }
         }
 

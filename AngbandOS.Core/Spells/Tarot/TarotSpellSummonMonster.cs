@@ -14,24 +14,24 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellSummonMonster : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("You concentrate on the image of a monster...");
+            saveGame.MsgPrint("You concentrate on the image of a monster...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonNoUniques,
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonNoUniques,
                     false))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, 0))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, 0))
             {
-                SaveGame.Instance.MsgPrint("The summoned creature gets angry!");
+                saveGame.MsgPrint("The summoned creature gets angry!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                saveGame.MsgPrint("No-one ever turns up.");
             }
         }
 

@@ -13,14 +13,14 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellHolyWord : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelEvil(player.Level * 4);
-            player.RestoreHealth(1000);
-            player.SetTimedFear(0);
-            player.SetTimedPoison(0);
-            player.SetTimedStun(0);
-            player.SetTimedBleeding(0);
+            saveGame.DispelEvil(saveGame.Player.Level * 4);
+            saveGame.Player.RestoreHealth(1000);
+            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.SetTimedPoison(0);
+            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.SetTimedBleeding(0);
         }
 
         public override void Initialise(int characterClass)

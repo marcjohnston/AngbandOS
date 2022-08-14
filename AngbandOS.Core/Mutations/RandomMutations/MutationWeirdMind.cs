@@ -20,21 +20,21 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "Your thoughts return to boring paths.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
             {
                 return;
             }
-            if (player.TimedTelepathy > 0)
+            if (saveGame.Player.TimedTelepathy > 0)
             {
-                SaveGame.Instance.MsgPrint("Your mind feels cloudy!");
-                player.SetTimedTelepathy(0);
+                saveGame.MsgPrint("Your mind feels cloudy!");
+                saveGame.Player.SetTimedTelepathy(0);
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Your mind expands!");
-                player.SetTimedTelepathy(player.Level);
+                saveGame.MsgPrint("Your mind expands!");
+                saveGame.Player.SetTimedTelepathy(saveGame.Player.Level);
             }
         }
     }

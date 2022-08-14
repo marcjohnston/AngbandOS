@@ -14,16 +14,16 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellCallSunlight : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.FireBall(new ProjectLight(), 0, 150, 8);
-            level.WizLight();
-            if (player.RaceIndex != RaceId.Vampire || player.HasLightResistance)
+            saveGame.FireBall(new ProjectLight(saveGame), 0, 150, 8);
+            saveGame.Level.WizLight();
+            if (saveGame.Player.RaceIndex != RaceId.Vampire || saveGame.Player.HasLightResistance)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("The sunlight scorches your flesh!");
-            player.TakeHit(50, "sunlight");
+            saveGame.MsgPrint("The sunlight scorches your flesh!");
+            saveGame.Player.TakeHit(50, "sunlight");
         }
 
         public override void Initialise(int characterClass)

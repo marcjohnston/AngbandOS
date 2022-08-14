@@ -21,20 +21,20 @@ namespace Cthangband.Talents
             BaseFailure = 50;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            if (player.Level < 30)
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            if (saveGame.Player.Level < 30)
             {
                 if (!targetEngine.GetDirectionWithAim(out int dir))
                 {
                     return;
                 }
-                saveGame.FireBall(new ProjectDomination(), dir, player.Level, 0);
+                saveGame.FireBall(new ProjectDomination(saveGame), dir, saveGame.Player.Level, 0);
             }
             else
             {
-                saveGame.CharmMonsters(player.Level * 2);
+                saveGame.CharmMonsters(saveGame.Player.Level * 2);
             }
         }
 

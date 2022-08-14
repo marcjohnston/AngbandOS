@@ -21,14 +21,14 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer subject to uncontrollable flatulence.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) == 13)
             {
                 saveGame.Disturb(false);
-                SaveGame.Instance.MsgPrint("BRRAAAP! Oops.");
-                SaveGame.Instance.MsgPrint(null);
-                saveGame.FireBall(new ProjectPois(), 0, player.Level, 3);
+                saveGame.MsgPrint("BRRAAAP! Oops.");
+                saveGame.MsgPrint(null);
+                saveGame.FireBall(new ProjectPois(saveGame), 0, saveGame.Player.Level, 3);
             }
         }
     }

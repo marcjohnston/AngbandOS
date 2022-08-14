@@ -20,7 +20,7 @@ namespace Cthangband.ActivationPowers
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            saveGame.FireBall(new ProjectElec(), direction, 250, 3);
+            saveGame.FireBall(new ProjectElec(saveGame), direction, 250, 3);
             return true;
         }
 

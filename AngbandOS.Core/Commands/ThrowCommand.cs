@@ -34,7 +34,7 @@ namespace Cthangband.Commands
                 return;
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;

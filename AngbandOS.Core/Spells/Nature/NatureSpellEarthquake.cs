@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellEarthquake : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.Earthquake(player.MapY, player.MapX, 10);
+            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
         }
 
         public override void Initialise(int characterClass)

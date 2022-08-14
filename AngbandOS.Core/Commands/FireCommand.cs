@@ -37,7 +37,7 @@ namespace Cthangband.Commands
                 return;
             }
             Item ammunitionStack = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Find out where we're aiming at
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {

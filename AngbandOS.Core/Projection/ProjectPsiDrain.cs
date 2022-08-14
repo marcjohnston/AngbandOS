@@ -15,7 +15,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectPsiDrain : Projectile
     {
-        public ProjectPsiDrain()
+        public ProjectPsiDrain(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "BeigeBolt";
             ImpactGraphic = "";
@@ -55,7 +55,7 @@ namespace Cthangband.Projection
                 bool getAngry = (rPtr.Flags2 & MonsterFlag2.EmptyMind) == 0;
                 if (getAngry && who == 0)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -78,15 +78,15 @@ namespace Cthangband.Projection
                 {
                     note = null;
                     string s = seen ? "'s" : "s";
-                    SaveGame.Instance.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
+                    SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
                     if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
                     {
-                        SaveGame.Instance.MsgPrint("You resist the effects!");
+                        SaveGame.MsgPrint("You resist the effects!");
                     }
                     else
                     {
                         string killer = mPtr.MonsterDesc(0x88);
-                        SaveGame.Instance.MsgPrint("Your psychic energy is drained!");
+                        SaveGame.MsgPrint("Your psychic energy is drained!");
                         Player.Mana = Math.Max(0, Player.Mana - (Program.Rng.DiceRoll(5, dam) / 2));
                         Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                         Player.TakeHit(dam, killer);
@@ -98,7 +98,7 @@ namespace Cthangband.Projection
             {
                 int b = Program.Rng.DiceRoll(5, dam) / 4;
                 string s = seen ? "'s" : "s";
-                SaveGame.Instance.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
+                SaveGame.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
                 b = Math.Min(Player.MaxMana, Player.Mana + b);
                 Player.Mana = b;
                 Player.RedrawNeeded.Set(RedrawFlag.PrMana);
@@ -137,18 +137,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -165,7 +165,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -174,7 +174,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -202,7 +202,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

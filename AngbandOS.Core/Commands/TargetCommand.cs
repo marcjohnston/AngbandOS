@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (targetEngine.TargetSet(Constants.TargetKill))
             {
                 saveGame.MsgPrint(saveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");

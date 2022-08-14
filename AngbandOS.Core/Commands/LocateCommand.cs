@@ -22,7 +22,7 @@ namespace Cthangband.Commands
             int startCol = saveGame.Level.PanelCol;
             int currentRow = startRow;
             int currentCol = startCol;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Enter a loop so the player can browse the level
             while (true)
             {

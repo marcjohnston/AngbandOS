@@ -43,7 +43,7 @@ namespace Cthangband.Mutations
         {
         }
 
-        public virtual void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public virtual void OnProcessWorld(SaveGame saveGame)
         {
         }
     }

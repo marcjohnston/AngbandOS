@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectWater : Projectile
     {
-        public ProjectWater()
+        public ProjectWater(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "BlueSplat";
             ImpactGraphic = "BlueSplat";
@@ -61,7 +61,7 @@ namespace Cthangband.Projection
             {
                 if (who == 0)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -117,18 +117,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -145,7 +145,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -154,7 +154,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -183,7 +183,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -212,7 +212,7 @@ namespace Cthangband.Projection
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                SaveGame.Instance.MsgPrint("You are hit by something wet!");
+                SaveGame.MsgPrint("You are hit by something wet!");
             }
             if (!Player.HasSoundResistance)
             {
@@ -224,7 +224,7 @@ namespace Cthangband.Projection
             }
             if (Program.Rng.DieRoll(5) == 1)
             {
-                Player.Inventory.InvenDamage(SaveGame.Instance.SetColdDestroy, 3);
+                Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 3);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

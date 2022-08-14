@@ -197,7 +197,7 @@ namespace Cthangband.Commands
                 {
                     if (sval == 3 && Program.Rng.DieRoll(2) == 1)
                     {
-                        saveGame.Level.Monsters[0].SanityBlast(true);
+                        saveGame.Level.Monsters[0].SanityBlast(saveGame, true);
                     }
                     else
                     {
@@ -212,7 +212,7 @@ namespace Cthangband.Commands
             }
             else
             {
-                sPtr.Cast(SaveGame.Instance, saveGame.Player, saveGame.Level);
+                sPtr.Cast(saveGame);
                 if (!sPtr.Worked)
                 {
                     int e = sPtr.FirstCastExperience;
@@ -293,7 +293,7 @@ namespace Cthangband.Commands
                     {
                         saveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
                         saveGame.Project(1, 2 + (plev / 10), saveGame.Player.MapY, saveGame.Player.MapX, plev * 2,
-                            new ProjectMana(),
+                            new ProjectMana(saveGame),
                             ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
                             ProjectionFlag.ProjectItem);
                         saveGame.Player.Mana = Math.Max(0, saveGame.Player.Mana - (plev * Math.Max(1, plev / 10)));
@@ -302,7 +302,7 @@ namespace Cthangband.Commands
             }
             else
             {
-                talent.Use(saveGame.Player, saveGame.Level, SaveGame.Instance);
+                talent.Use(saveGame);
             }
             saveGame.EnergyUse = 100;
             if (talent.ManaCost <= saveGame.Player.Mana)
@@ -486,7 +486,7 @@ namespace Cthangband.Commands
 
                 case 27:
                 case 28:
-                    saveGame.Player.Dna.GainMutation();
+                    saveGame.Player.Dna.GainMutation(saveGame);
                     break;
 
                 case 29:
@@ -499,7 +499,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 32:
-                    saveGame.FireBall(new ProjectChaos(), 0, spell + 5, 1 + (spell / 10));
+                    saveGame.FireBall(new ProjectChaos(saveGame), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:

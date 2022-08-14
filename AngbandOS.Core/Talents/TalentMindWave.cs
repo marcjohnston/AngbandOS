@@ -22,17 +22,17 @@ namespace Cthangband.Talents
             BaseFailure = 45;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("Mind-warping forces emanate from your brain!");
-            if (player.Level < 25)
+            saveGame.MsgPrint("Mind-warping forces emanate from your brain!");
+            if (saveGame.Player.Level < 25)
             {
-                saveGame.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, player.Level * 3 / 2,
-                    new ProjectPsi(), ProjectionFlag.ProjectKill);
+                saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+                    new ProjectPsi(saveGame), ProjectionFlag.ProjectKill);
             }
             else
             {
-                saveGame.MindblastMonsters(player.Level * (((player.Level - 5) / 10) + 1));
+                saveGame.MindblastMonsters(saveGame.Player.Level * (((saveGame.Player.Level - 5) / 10) + 1));
             }
         }
 

@@ -20,16 +20,16 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer subject to fits of berserk rage!";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) != 1)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("RAAAAGHH!");
-            SaveGame.Instance.MsgPrint("You feel a fit of rage coming over you!");
-            player.SetTimedSuperheroism(player.TimedSuperheroism + 10 + Program.Rng.DieRoll(player.Level));
+            saveGame.MsgPrint("RAAAAGHH!");
+            saveGame.MsgPrint("You feel a fit of rage coming over you!");
+            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(saveGame.Player.Level));
         }
     }
 }

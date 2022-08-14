@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellDetectDoorsAndTraps : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectTraps();
             saveGame.DetectDoors();

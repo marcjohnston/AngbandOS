@@ -20,11 +20,11 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You feel normally strange.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(5000) == 1)
             {
-                player.Dna.LoseMutation();
+                saveGame.Player.Dna.LoseMutation();
             }
         }
     }

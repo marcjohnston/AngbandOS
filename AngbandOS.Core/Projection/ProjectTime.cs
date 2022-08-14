@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectTime : Projectile
     {
-        public ProjectTime()
+        public ProjectTime(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "BrightGreenBolt";
             ImpactGraphic = "";
@@ -33,8 +33,8 @@ namespace Cthangband.Projection
 
         protected override bool AffectMonster(int who, int r, int y, int x, int dam)
         {
-            GridTile cPtr = Level.Grid[y][x];
-            Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
+            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
@@ -60,7 +60,7 @@ namespace Cthangband.Projection
             {
                 if (who == 0)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -96,7 +96,7 @@ namespace Cthangband.Projection
             {
                 if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
                 {
-                    Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                    SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
                 }
                 mPtr.SleepLevel = 0;
                 mPtr.Health -= dam;
@@ -104,52 +104,52 @@ namespace Cthangband.Projection
                 {
                     bool sad = (mPtr.Mind & Constants.SmFriendly) != 0 && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                 }
             }
             else
             {
-                if (Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
                 {
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
-            Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            Level.RedrawSingleLocation(y, x);
+            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            SaveGame.Level.RedrawSingleLocation(y, x);
             ProjectMn++;
             ProjectMx = x;
             ProjectMy = y;
@@ -159,10 +159,10 @@ namespace Cthangband.Projection
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
             int k = 0;
-            bool blind = Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness != 0;
             bool fuzzy = false;
             string act = null;
-            if (x != Player.MapX || y != Player.MapY)
+            if (x != SaveGame.Player.MapX || y != SaveGame.Player.MapY)
             {
                 return false;
             }
@@ -170,22 +170,22 @@ namespace Cthangband.Projection
             {
                 return false;
             }
-            if (Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
+            if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
-                    tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
-                    tX = Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
+                    tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
+                    tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
                     maxAttempts--;
-                } while (maxAttempts > 0 && Level.InBounds2(tY, tX) && !Level.PlayerHasLosBold(tY, tX));
+                } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
                 if (maxAttempts < 1)
                 {
-                    tY = Level.Monsters[who].MapY;
-                    tX = Level.Monsters[who].MapX;
+                    tY = SaveGame.Level.Monsters[who].MapY;
+                    tX = SaveGame.Level.Monsters[who].MapX;
                 }
                 Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
                 SaveGame.Disturb(true);
@@ -200,17 +200,17 @@ namespace Cthangband.Projection
             {
                 fuzzy = true;
             }
-            Monster mPtr = Level.Monsters[who];
+            Monster mPtr = SaveGame.Level.Monsters[who];
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                SaveGame.Instance.MsgPrint("You are hit by a blast from the past!");
+                SaveGame.MsgPrint("You are hit by a blast from the past!");
             }
-            if (Player.HasTimeResistance)
+            if (SaveGame.Player.HasTimeResistance)
             {
                 dam *= 4;
                 dam /= Program.Rng.DieRoll(6) + 6;
-                SaveGame.Instance.MsgPrint("You feel as if time is passing you by.");
+                SaveGame.MsgPrint("You feel as if time is passing you by.");
             }
             else
             {
@@ -222,8 +222,8 @@ namespace Cthangband.Projection
                     case 4:
                     case 5:
                         {
-                            SaveGame.Instance.MsgPrint("You feel life has clocked back.");
-                            Player.LoseExperience(100 + (Player.ExperiencePoints / 100 * Constants.MonDrainLife));
+                            SaveGame.MsgPrint("You feel life has clocked back.");
+                            SaveGame.Player.LoseExperience(100 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                             break;
                         }
                     case 6:
@@ -263,32 +263,32 @@ namespace Cthangband.Projection
                                     act = "beautiful";
                                     break;
                             }
-                            SaveGame.Instance.MsgPrint($"You're not as {act} as you used to be...");
-                            Player.AbilityScores[k].Innate = Player.AbilityScores[k].Innate * 3 / 4;
-                            if (Player.AbilityScores[k].Innate < 3)
+                            SaveGame.MsgPrint($"You're not as {act} as you used to be...");
+                            SaveGame.Player.AbilityScores[k].Innate = SaveGame.Player.AbilityScores[k].Innate * 3 / 4;
+                            if (SaveGame.Player.AbilityScores[k].Innate < 3)
                             {
-                                Player.AbilityScores[k].Innate = 3;
+                                SaveGame.Player.AbilityScores[k].Innate = 3;
                             }
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                             break;
                         }
                     case 10:
                         {
-                            SaveGame.Instance.MsgPrint("You're not as powerful as you used to be...");
+                            SaveGame.MsgPrint("You're not as powerful as you used to be...");
                             for (k = 0; k < 6; k++)
                             {
-                                Player.AbilityScores[k].Innate = Player.AbilityScores[k].Innate * 3 / 4;
-                                if (Player.AbilityScores[k].Innate < 3)
+                                SaveGame.Player.AbilityScores[k].Innate = SaveGame.Player.AbilityScores[k].Innate * 3 / 4;
+                                if (SaveGame.Player.AbilityScores[k].Innate < 3)
                                 {
-                                    Player.AbilityScores[k].Innate = 3;
+                                    SaveGame.Player.AbilityScores[k].Innate = 3;
                                 }
                             }
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                             break;
                         }
                 }
             }
-            Player.TakeHit(dam, killer);
+            SaveGame.Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

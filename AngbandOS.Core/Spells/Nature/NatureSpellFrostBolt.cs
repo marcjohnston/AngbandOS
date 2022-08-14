@@ -14,30 +14,30 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellFrostBolt : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (player.ProfessionIndex)
+            switch (saveGame.Player.ProfessionIndex)
             {
                 case CharacterClass.Mage:
-                    beam = player.Level;
+                    beam = saveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = player.Level + 10;
+                    beam = saveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = player.Level / 2;
+                    beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.FireBoltOrBeam(beam - 10, new ProjectCold(), dir,
-                Program.Rng.DiceRoll(5 + ((player.Level - 5) / 4), 8));
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(saveGame), dir,
+                Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
         public override void Initialise(int characterClass)

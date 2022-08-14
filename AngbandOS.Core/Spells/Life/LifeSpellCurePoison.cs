@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellCurePoison : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedPoison(0);
+            saveGame.Player.SetTimedPoison(0);
         }
 
         public override void Initialise(int characterClass)

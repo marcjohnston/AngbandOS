@@ -1031,7 +1031,7 @@ namespace Cthangband
             if (Player == null)
             {
                 PlayerFactory factory = new PlayerFactory();
-                Player newPlayer = factory.CharacterGeneration(ExPlayer);
+                Player newPlayer = factory.CharacterGeneration(this, ExPlayer);
                 if (newPlayer == null)
                 {
                     return;
@@ -1074,7 +1074,7 @@ namespace Cthangband
             ApplyFlavourVisuals();
             if (Level == null)
             {
-                Level = new Level();
+                Level = new Level(this);
                 LevelFactory factory = new LevelFactory(this);
                 factory.GenerateNewLevel();
             }
@@ -1118,7 +1118,7 @@ namespace Cthangband
                     ExPlayer = new ExPlayer(Player);
                     break;
                 }
-                Level = new Level();
+                Level = new Level(this);
                 LevelFactory factory = new LevelFactory(this);
                 factory.GenerateNewLevel();
                 Level.ReplacePets(Player.MapY, Player.MapX, _petList);
@@ -1419,7 +1419,7 @@ namespace Cthangband
 
         private void DungeonLoop()
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             NewLevelFlag = false;
             HackMind = false;
             Gui.CurrentCommand = (char)0;
@@ -1967,7 +1967,7 @@ namespace Cthangband
             if (Player.GetFirstLevelMutation)
             {
                 MsgPrint("You feel different!");
-                Player.Dna.GainMutation();
+                Player.Dna.GainMutation(this);
                 Player.GetFirstLevelMutation = false;
             }
             Player.Energy += GlobalData.ExtractEnergy[Player.Speed];
@@ -3363,12 +3363,12 @@ namespace Cthangband
 
         public bool BanishEvil(int dist)
         {
-            return ProjectAtAllInLos(new ProjectAwayEvil(), dist);
+            return ProjectAtAllInLos(new ProjectAwayEvil(this), dist);
         }
 
         public void BanishMonsters(int dist)
         {
-            ProjectAtAllInLos(new ProjectAwayAll(), dist);
+            ProjectAtAllInLos(new ProjectAwayAll(this), dist);
         }
 
         public void BlessWeapon()
@@ -3464,19 +3464,19 @@ namespace Cthangband
 
         public void CallChaos()
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             int plev = Player.Level;
             bool lineChaos = false;
             Projectile[] hurtTypes =
             {
-                new ProjectElec(), new ProjectPois(), new ProjectAcid(), new ProjectCold(),
-                new ProjectFire(), new ProjectMissile(), new ProjectArrow(), new ProjectPlasma(),
-                new ProjectHolyFire(), new ProjectWater(), new ProjectLight(), new ProjectDark(),
-                new ProjectForce(), new ProjectInertia(), new ProjectMana(), new ProjectMeteor(),
-                new ProjectIce(), new ProjectChaos(), new ProjectNether(), new ProjectDisenchant(),
-                new ProjectExplode(), new ProjectSound(), new ProjectNexus(), new ProjectConfusion(),
-                new ProjectTime(), new ProjectGravity(), new ProjectShard(), new ProjectNuke(),
-                new ProjectHellFire(), new ProjectDisintegrate()
+                new ProjectElec(this), new ProjectPois(this), new ProjectAcid(this), new ProjectCold(this),
+                new ProjectFire(this), new ProjectMissile(this), new ProjectArrow(this), new ProjectPlasma(this),
+                new ProjectHolyFire(this), new ProjectWater(this), new ProjectLight(this), new ProjectDark(this),
+                new ProjectForce(this), new ProjectInertia(this), new ProjectMana(this), new ProjectMeteor(this),
+                new ProjectIce(this), new ProjectChaos(this), new ProjectNether(this), new ProjectDisenchant(this),
+                new ProjectExplode(this), new ProjectSound(this), new ProjectNexus(this), new ProjectConfusion(this),
+                new ProjectTime(this), new ProjectGravity(this), new ProjectShard(this), new ProjectNuke(this),
+                new ProjectHellFire(this), new ProjectDisintegrate(this)
             };
             Projectile chaosType = hurtTypes[Program.Rng.DieRoll(30) - 1];
             if (Program.Rng.DieRoll(4) == 1)
@@ -3561,29 +3561,29 @@ namespace Cthangband
         public void CharmAnimal(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectControlAnimal(), dir, plev, flg);
+            TargetedProject(new ProjectControlAnimal(this), dir, plev, flg);
         }
 
         public void CharmAnimals(int dam)
         {
-            ProjectAtAllInLos(new ProjectControlAnimal(), dam);
+            ProjectAtAllInLos(new ProjectControlAnimal(this), dam);
         }
 
         public bool CharmMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectCharm(), dir, plev, flg);
+            return TargetedProject(new ProjectCharm(this), dir, plev, flg);
         }
 
         public void CharmMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectCharm(), dam);
+            ProjectAtAllInLos(new ProjectCharm(this), dam);
         }
 
         public bool CloneMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldClone(), dir, 0, flg);
+            return TargetedProject(new ProjectOldClone(this), dir, 0, flg);
         }
 
         public void ColdDam(int dam, string kbStr)
@@ -3619,24 +3619,24 @@ namespace Cthangband
         public bool ConfuseMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldConf(), dir, plev, flg);
+            return TargetedProject(new ProjectOldConf(this), dir, plev, flg);
         }
 
         public void ConfuseMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectOldConf(), dam);
+            ProjectAtAllInLos(new ProjectOldConf(this), dam);
         }
 
         public void ControlOneUndead(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectControlUndead(), dir, plev, flg);
+            TargetedProject(new ProjectControlUndead(this), dir, plev, flg);
         }
 
         public void DeathRay(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectDeathRay(), dir, plev, flg);
+            TargetedProject(new ProjectDeathRay(this), dir, plev, flg);
         }
 
         public void DestroyArea(int y1, int x1, int r)
@@ -3709,13 +3709,13 @@ namespace Cthangband
         public bool DestroyDoor(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            return TargetedProject(new ProjectKillDoor(), dir, 0, flg);
+            return TargetedProject(new ProjectKillDoor(this), dir, 0, flg);
         }
 
         public bool DestroyDoorsTouch()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectKillDoor(), flg);
+            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectKillDoor(this), flg);
         }
 
         public bool DetectAll()
@@ -4092,43 +4092,43 @@ namespace Cthangband
         public bool DisarmTrap(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            return TargetedProject(new ProjectKillTrap(), dir, 0, flg);
+            return TargetedProject(new ProjectKillTrap(this), dir, 0, flg);
         }
 
         public void DispelDemons(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispDemon(), dam);
+            ProjectAtAllInLos(new ProjectDispDemon(this), dam);
         }
 
         public bool DispelEvil(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispEvil(), dam);
+            return ProjectAtAllInLos(new ProjectDispEvil(this), dam);
         }
 
         public void DispelGood(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispGood(), dam);
+            ProjectAtAllInLos(new ProjectDispGood(this), dam);
         }
 
         public void DispelLiving(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispLiving(), dam);
+            ProjectAtAllInLos(new ProjectDispLiving(this), dam);
         }
 
         public bool DispelMonsters(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispAll(), dam);
+            return ProjectAtAllInLos(new ProjectDispAll(this), dam);
         }
 
         public bool DispelUndead(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispUndead(), dam);
+            return ProjectAtAllInLos(new ProjectDispUndead(this), dam);
         }
 
         public void DoorCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeDoor(), flg);
+            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeDoor(this), flg);
         }
 
         /// <summary>
@@ -4140,12 +4140,12 @@ namespace Cthangband
         public bool DrainLife(int dir, int dam)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldDrain(), dir, dam, flg);
+            return TargetedProject(new ProjectOldDrain(this), dir, dam, flg);
         }
 
         public void Earthquake(int cy, int cx, int r)
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             int i, y, x, yy, xx, dy, dx;
             int damage = 0;
             int sn = 0, sy = 0, sx = 0;
@@ -4417,7 +4417,7 @@ namespace Cthangband
         public void ElderSignCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeElderSign(), flg);
+            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeElderSign(this), flg);
         }
 
         public void ElecDam(int dam, string kbStr)
@@ -4632,12 +4632,12 @@ namespace Cthangband
         public bool FearMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectTurnAll(), dir, plev, flg);
+            return TargetedProject(new ProjectTurnAll(this), dir, plev, flg);
         }
 
         public bool FireBall(Projectile projectile, int dir, int dam, int rad)
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
             int tx = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
@@ -4707,13 +4707,13 @@ namespace Cthangband
 
         public bool HasteMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSpeed(), Player.Level);
+            return ProjectAtAllInLos(new ProjectOldSpeed(this), Player.Level);
         }
 
         public bool HealMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldHeal(), dir, Program.Rng.DiceRoll(4, 6), flg);
+            return TargetedProject(new ProjectOldHeal(this), dir, Program.Rng.DiceRoll(4, 6), flg);
         }
 
         public bool IdentifyFully()
@@ -4877,7 +4877,7 @@ namespace Cthangband
             {
                 MsgPrint("You are surrounded by a white light.");
             }
-            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectLightWeak(), flg);
+            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectLightWeak(this), flg);
             LightRoom(Player.MapY, Player.MapX);
             return true;
         }
@@ -4885,7 +4885,7 @@ namespace Cthangband
         public void LightLine(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectLightWeak(), dir, Program.Rng.DiceRoll(6, 8), flg);
+            TargetedProject(new ProjectLightWeak(this), dir, Program.Rng.DiceRoll(6, 8), flg);
         }
 
         public bool LoseAllInfo()
@@ -4958,13 +4958,13 @@ namespace Cthangband
 
         public void MindblastMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectPsi(), dam);
+            ProjectAtAllInLos(new ProjectPsi(this), dam);
         }
 
         public bool PolyMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldPoly(), dir, Player.Level, flg);
+            return TargetedProject(new ProjectOldPoly(this), dir, Player.Level, flg);
         }
 
         public int PolymorphMonster(MonsterRace rPtr)
@@ -5052,79 +5052,79 @@ namespace Cthangband
                     return false;
 
                 case PotionType.Slowness:
-                    dt = new ProjectOldSlow();
+                    dt = new ProjectOldSlow(this);
                     dam = 5;
                     angry = true;
                     break;
 
                 case PotionType.Poison:
-                    dt = new ProjectPois();
+                    dt = new ProjectPois(this);
                     dam = 3;
                     angry = true;
                     break;
 
                 case PotionType.Blindness:
-                    dt = new ProjectDark();
+                    dt = new ProjectDark(this);
                     angry = true;
                     break;
 
                 case PotionType.Confusion:
-                    dt = new ProjectOldConf();
+                    dt = new ProjectOldConf(this);
                     angry = true;
                     break;
 
                 case PotionType.Sleep:
-                    dt = new ProjectOldSleep();
+                    dt = new ProjectOldSleep(this);
                     angry = true;
                     break;
 
                 case PotionType.Ruination:
                 case PotionType.Detonations:
-                    dt = new ProjectExplode();
+                    dt = new ProjectExplode(this);
                     dam = Program.Rng.DiceRoll(25, 25);
                     angry = true;
                     break;
 
                 case PotionType.Death:
-                    dt = new ProjectDeathRay();
+                    dt = new ProjectDeathRay(this);
                     angry = true;
                     radius = 1;
                     break;
 
                 case PotionType.Speed:
-                    dt = new ProjectOldSpeed();
+                    dt = new ProjectOldSpeed(this);
                     break;
 
                 case PotionType.CureLight:
-                    dt = new ProjectOldHeal();
+                    dt = new ProjectOldHeal(this);
                     dam = Program.Rng.DiceRoll(2, 3);
                     break;
 
                 case PotionType.CureSerious:
-                    dt = new ProjectOldHeal();
+                    dt = new ProjectOldHeal(this);
                     dam = Program.Rng.DiceRoll(4, 3);
                     break;
 
                 case PotionType.CureCritical:
                 case PotionType.Curing:
-                    dt = new ProjectOldHeal();
+                    dt = new ProjectOldHeal(this);
                     dam = Program.Rng.DiceRoll(6, 3);
                     break;
 
                 case PotionType.Healing:
-                    dt = new ProjectOldHeal();
+                    dt = new ProjectOldHeal(this);
                     dam = Program.Rng.DiceRoll(10, 10);
                     break;
 
                 case PotionType.StarHealing:
                 case PotionType.Life:
-                    dt = new ProjectOldHeal();
+                    dt = new ProjectOldHeal(this);
                     dam = Program.Rng.DiceRoll(50, 50);
                     radius = 1;
                     break;
 
                 case PotionType.RestoreMana:
-                    dt = new ProjectMana();
+                    dt = new ProjectMana(this);
                     dam = Program.Rng.DiceRoll(10, 10);
                     radius = 1;
                     break;
@@ -6140,35 +6140,35 @@ namespace Cthangband
         public bool SleepMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSleep(), dir, Player.Level, flg);
+            return TargetedProject(new ProjectOldSleep(this), dir, Player.Level, flg);
         }
 
         public bool SleepMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSleep(), Player.Level);
+            return ProjectAtAllInLos(new ProjectOldSleep(this), Player.Level);
         }
 
         public void SleepMonstersTouch()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-            Project(0, 1, Player.MapY, Player.MapX, Player.Level, new ProjectOldSleep(), flg);
+            Project(0, 1, Player.MapY, Player.MapX, Player.Level, new ProjectOldSleep(this), flg);
         }
 
         public bool SlowMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSlow(), dir, Player.Level, flg);
+            return TargetedProject(new ProjectOldSlow(this), dir, Player.Level, flg);
         }
 
         public bool SlowMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSlow(), Player.Level);
+            return ProjectAtAllInLos(new ProjectOldSlow(this), Player.Level);
         }
 
         public bool SpeedMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSpeed(), dir, Player.Level, flg);
+            return TargetedProject(new ProjectOldSpeed(this), dir, Player.Level, flg);
         }
 
         public void StairCreation()
@@ -6202,23 +6202,23 @@ namespace Cthangband
         public void StasisMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectStasis(), dir, Player.Level, flg);
+            TargetedProject(new ProjectStasis(this), dir, Player.Level, flg);
         }
 
         public void StasisMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectStasis(), dam);
+            ProjectAtAllInLos(new ProjectStasis(this), dam);
         }
 
         public void StunMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectStun(), dir, plev, flg);
+            TargetedProject(new ProjectStun(this), dir, plev, flg);
         }
 
         public void StunMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectStun(), dam);
+            ProjectAtAllInLos(new ProjectStun(this), dam);
         }
 
         public void SummonReaver()
@@ -6297,7 +6297,7 @@ namespace Cthangband
         public bool TeleportMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectAwayAll(), dir, Constants.MaxSight * 5, flg);
+            return TargetedProject(new ProjectAwayAll(this), dir, Constants.MaxSight * 5, flg);
         }
 
         public void TeleportPlayer(int dis)
@@ -6386,7 +6386,7 @@ namespace Cthangband
                 xx++;
             }
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             targetEngine.RecenterScreenAroundPlayer();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
@@ -6474,7 +6474,7 @@ namespace Cthangband
             Player.MapX = x;
             Level.RedrawSingleLocation(oy, ox);
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             targetEngine.RecenterScreenAroundPlayer();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
@@ -6483,7 +6483,7 @@ namespace Cthangband
 
         public void TeleportSwap(int dir)
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             int tx, ty;
             if (dir == 5 && targetEngine.TargetOkay())
             {
@@ -6533,17 +6533,17 @@ namespace Cthangband
         public bool TrapCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeTrap(), flg);
+            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeTrap(this), flg);
         }
 
         public void TurnEvil(int dam)
         {
-            ProjectAtAllInLos(new ProjectTurnEvil(), dam);
+            ProjectAtAllInLos(new ProjectTurnEvil(this), dam);
         }
 
         public void TurnMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectTurnAll(), dam);
+            ProjectAtAllInLos(new ProjectTurnAll(this), dam);
         }
 
         public bool UnlightArea(int dam, int rad)
@@ -6553,7 +6553,7 @@ namespace Cthangband
             {
                 MsgPrint("Darkness surrounds you.");
             }
-            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectDarkWeak(), flg);
+            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectDarkWeak(this), flg);
             UnlightRoom(Player.MapY, Player.MapX);
             return true;
         }
@@ -6611,7 +6611,7 @@ namespace Cthangband
         public void WallStone()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(), flg);
+            _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             Player.RedrawNeeded.Set(RedrawFlag.PrMap);
@@ -6621,14 +6621,14 @@ namespace Cthangband
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectKillWall(), dir, 20 + Program.Rng.DieRoll(30), flg);
+            return TargetedProject(new ProjectKillWall(this), dir, 20 + Program.Rng.DieRoll(30), flg);
         }
 
         public void WizardLock(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectJamDoor(), dir, 20 + Program.Rng.DieRoll(30), flg);
+            TargetedProject(new ProjectJamDoor(this), dir, 20 + Program.Rng.DieRoll(30), flg);
         }
 
         public void YellowSign()
@@ -6963,7 +6963,7 @@ namespace Cthangband
         /// <returns></returns>
         private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
         {
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             flg |= ProjectionFlag.ProjectThru;
             int tx = Player.MapX + Level.KeypadDirectionXOffset[dir];
             int ty = Player.MapY + Level.KeypadDirectionYOffset[dir];
@@ -8444,21 +8444,21 @@ namespace Cthangband
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectShard(), i, 175, 2);
+                        FireBall(new ProjectShard(this), i, 175, 2);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectMana(), i, 175, 3);
+                        FireBall(new ProjectMana(this), i, 175, 3);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectNuke(), i, 175, 4);
+                        FireBall(new ProjectNuke(this), i, 175, 4);
                     }
                 }
             }
@@ -9479,7 +9479,7 @@ namespace Cthangband
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
             Level.RedrawSingleLocation(oldY, oldX);
             // Recenter the screen if we have to
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             targetEngine.RecenterScreenAroundPlayer();
             // We'll need to update and redraw various things
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
@@ -11174,7 +11174,7 @@ namespace Cthangband
                 case 6:
                     {
                         // Do a 300 damage mana ball
-                        FireBall(new ProjectMana(), direction, 300, 3);
+                        FireBall(new ProjectMana(this), direction, 300, 3);
                         break;
                     }
                 case 7:
@@ -11183,7 +11183,7 @@ namespace Cthangband
                 case 10:
                     {
                         // Do a 250 damage mana bolt
-                        FireBolt(new ProjectMana(), direction, 250);
+                        FireBolt(new ProjectMana(this), direction, 250);
                         break;
                     }
             }
@@ -11354,7 +11354,7 @@ namespace Cthangband
                 MsgPrint("You can't fetch when you're already standing on something.");
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             // If we didn't have a direction, we might have an existing target
             if (dir == 5 && targetEngine.TargetOkay())
             {
@@ -11571,15 +11571,15 @@ namespace Cthangband
             // Default to being randomly fire (66% chance) or cold (33% chance)
             if (Program.Rng.DieRoll(3) == 1)
             {
-                projectile = new ProjectCold();
+                projectile = new ProjectCold(this);
                 projectileDescription = "cold";
             }
             else
             {
-                projectile = new ProjectFire();
+                projectile = new ProjectFire(this);
                 projectileDescription = "fire";
             }
-            TargetEngine targetEngine = new TargetEngine(Player, Level);
+            TargetEngine targetEngine = new TargetEngine(this);
             // Check the player's race to see what their power is
             switch (Player.RaceIndex)
             {
@@ -11728,7 +11728,7 @@ namespace Cthangband
                             break;
                         }
                         MsgPrint("You throw a huge boulder.");
-                        FireBolt(new ProjectMissile(), direction,
+                        FireBolt(new ProjectMissile(this), direction,
                             3 * Player.Level / 2);
                     }
                     break;
@@ -11755,11 +11755,11 @@ namespace Cthangband
                         MsgPrint("You spit acid.");
                         if (Player.Level < 25)
                         {
-                            FireBolt(new ProjectAcid(), direction, playerLevel);
+                            FireBolt(new ProjectAcid(this), direction, playerLevel);
                         }
                         else
                         {
-                            FireBall(new ProjectAcid(), direction, playerLevel,
+                            FireBall(new ProjectAcid(this), direction, playerLevel,
                                 2);
                         }
                     }
@@ -11773,7 +11773,7 @@ namespace Cthangband
                             break;
                         }
                         MsgPrint("You throw a dart of poison.");
-                        FireBolt(new ProjectPois(), direction, playerLevel);
+                        FireBolt(new ProjectPois(this), direction, playerLevel);
                     }
                     break;
                 // Nibelungen can detect traps, doors, and stairs
@@ -11795,7 +11795,7 @@ namespace Cthangband
                             break;
                         }
                         MsgPrint("You cast a magic missile.");
-                        FireBoltOrBeam(10, new ProjectMissile(),
+                        FireBoltOrBeam(10, new ProjectMissile(this),
                             direction, Program.Rng.DiceRoll(3 + ((playerLevel - 1) / 5), 4));
                     }
                     break;
@@ -11812,12 +11812,12 @@ namespace Cthangband
                             case CharacterClass.ChosenOne:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectMissile();
+                                    projectile = new ProjectMissile(this);
                                     projectileDescription = "the elements";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectExplode();
+                                    projectile = new ProjectExplode(this);
                                     projectileDescription = "shards";
                                 }
                                 break;
@@ -11828,12 +11828,12 @@ namespace Cthangband
                             case CharacterClass.Channeler:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectMana();
+                                    projectile = new ProjectMana(this);
                                     projectileDescription = "mana";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectDisenchant();
+                                    projectile = new ProjectDisenchant(this);
                                     projectileDescription = "disenchantment";
                                 }
                                 break;
@@ -11842,12 +11842,12 @@ namespace Cthangband
                             case CharacterClass.Cultist:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion();
+                                    projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectChaos();
+                                    projectile = new ProjectChaos(this);
                                     projectileDescription = "chaos";
                                 }
                                 break;
@@ -11855,12 +11855,12 @@ namespace Cthangband
                             case CharacterClass.Monk:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion();
+                                    projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectSound();
+                                    projectile = new ProjectSound(this);
                                     projectileDescription = "sound";
                                 }
                                 break;
@@ -11869,12 +11869,12 @@ namespace Cthangband
                             case CharacterClass.Mystic:
                                 if (Program.Rng.DieRoll(3) != 1)
                                 {
-                                    projectile = new ProjectConfusion();
+                                    projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectPsi();
+                                    projectile = new ProjectPsi(this);
                                     projectileDescription = "mental energy";
                                 }
                                 break;
@@ -11883,12 +11883,12 @@ namespace Cthangband
                             case CharacterClass.Paladin:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectHellFire();
+                                    projectile = new ProjectHellFire(this);
                                     projectileDescription = "hellfire";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectHolyFire();
+                                    projectile = new ProjectHolyFire(this);
                                     projectileDescription = "holy fire";
                                 }
                                 break;
@@ -11896,12 +11896,12 @@ namespace Cthangband
                             case CharacterClass.Rogue:
                                 if (Program.Rng.DieRoll(3) == 1)
                                 {
-                                    projectile = new ProjectDark();
+                                    projectile = new ProjectDark(this);
                                     projectileDescription = "darkness";
                                 }
                                 else
                                 {
-                                    projectile = new ProjectPois();
+                                    projectile = new ProjectPois(this);
                                     projectileDescription = "poison";
                                 }
                                 break;
@@ -11926,7 +11926,7 @@ namespace Cthangband
                             break;
                         }
                         MsgPrint("You concentrate and your eyes glow red...");
-                        FireBolt(new ProjectPsi(), direction, playerLevel);
+                        FireBolt(new ProjectPsi(this), direction, playerLevel);
                     }
                     break;
                 // Imps can cast fire bolt/ball
@@ -11940,13 +11940,13 @@ namespace Cthangband
                         if (Player.Level >= 30)
                         {
                             MsgPrint("You cast a ball of fire.");
-                            FireBall(new ProjectFire(), direction, playerLevel,
+                            FireBall(new ProjectFire(this), direction, playerLevel,
                                 2);
                         }
                         else
                         {
                             MsgPrint("You cast a bolt of fire.");
-                            FireBolt(new ProjectFire(), direction, playerLevel);
+                            FireBolt(new ProjectFire(this), direction, playerLevel);
                         }
                     }
                     break;
@@ -12226,12 +12226,12 @@ namespace Cthangband
 
                     case MutationAttackType.Poison:
                         Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectPois(), ProjectionFlag.ProjectKill);
+                            new ProjectPois(this), ProjectionFlag.ProjectKill);
                         break;
 
                     case MutationAttackType.Hellfire:
                         Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectHellFire(), ProjectionFlag.ProjectKill);
+                            new ProjectHellFire(this), ProjectionFlag.ProjectKill);
                         break;
                 }
                 // The monster might hurt when we touch it
@@ -13023,7 +13023,7 @@ namespace Cthangband
                     obvious = true;
                     damage = Program.Rng.DiceRoll(dDice, dSide);
                     // Default to a missile attack
-                    Projectile pt = new ProjectMissile();
+                    Projectile pt = new ProjectMissile(this);
                     // Choose the correct type of attack to display, as well as any other special
                     // effects for the attack
                     switch (effect)
@@ -13038,12 +13038,12 @@ namespace Cthangband
                             break;
 
                         case AttackEffect.Poison:
-                            pt = new ProjectPois();
+                            pt = new ProjectPois(this);
                             break;
 
                         case AttackEffect.UnBonus:
                         case AttackEffect.UnPower:
-                            pt = new ProjectDisenchant();
+                            pt = new ProjectDisenchant(this);
                             break;
 
                         case AttackEffect.EatFood:
@@ -13064,34 +13064,34 @@ namespace Cthangband
                             break;
 
                         case AttackEffect.Acid:
-                            pt = new ProjectAcid();
+                            pt = new ProjectAcid(this);
                             break;
 
                         case AttackEffect.Electricity:
-                            pt = new ProjectElec();
+                            pt = new ProjectElec(this);
                             break;
 
                         case AttackEffect.Fire:
-                            pt = new ProjectFire();
+                            pt = new ProjectFire(this);
                             break;
 
                         case AttackEffect.Cold:
-                            pt = new ProjectCold();
+                            pt = new ProjectCold(this);
                             break;
 
                         case AttackEffect.Blind:
                             break;
 
                         case AttackEffect.Confuse:
-                            pt = new ProjectConfusion();
+                            pt = new ProjectConfusion(this);
                             break;
 
                         case AttackEffect.Terrify:
-                            pt = new ProjectTurnAll();
+                            pt = new ProjectTurnAll(this);
                             break;
 
                         case AttackEffect.Paralyze:
-                            pt = new ProjectOldSleep();
+                            pt = new ProjectOldSleep(this);
                             damage = race.Level;
                             break;
 
@@ -13115,7 +13115,7 @@ namespace Cthangband
                         case AttackEffect.Exp20:
                         case AttackEffect.Exp40:
                         case AttackEffect.Exp80:
-                            pt = new ProjectNether();
+                            pt = new ProjectNether(this);
                             break;
 
                         default:
@@ -13145,7 +13145,7 @@ namespace Cthangband
                                 }
                                 Project(targetIndex, 0, monster.MapY, monster.MapX,
                                     Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    new ProjectFire(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    new ProjectFire(this), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                             if ((targetRace.Flags2 & MonsterFlag2.LightningAura) != 0 && (race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
                             {
@@ -13162,7 +13162,7 @@ namespace Cthangband
                                 }
                                 Project(targetIndex, 0, monster.MapY, monster.MapX,
                                     Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    new ProjectElec(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    new ProjectElec(this), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                         }
                     }
@@ -14594,7 +14594,7 @@ namespace Cthangband
                             if (newY == Player.MapY && newX == Player.MapX)
                             {
                                 MsgPrint("The rune explodes!");
-                                FireBall(new ProjectMana(), 0,
+                                FireBall(new ProjectMana(this), 0,
                                     2 * ((Player.Level / 2) + Program.Rng.DiceRoll(7, 7)), 2);
                             }
                             else
@@ -15890,7 +15890,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a shard ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectShard(), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectShard(this), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
                         break;
 
                     // MonsterFlag4.Arrow1D6
@@ -15899,7 +15899,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(1, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(this), Program.Rng.DiceRoll(1, 6));
                         break;
 
                     // MonsterFlag4.Arrow3D6
@@ -15908,7 +15908,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(3, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(this), Program.Rng.DiceRoll(3, 6));
                         break;
 
                     // MonsterFlag4.Arrow5D6
@@ -15917,7 +15917,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear a strange noise."
                             : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(5, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(this), Program.Rng.DiceRoll(5, 6));
                         break;
 
                     // MonsterFlag4.Arrow7D6
@@ -15933,7 +15933,7 @@ namespace Cthangband
                         MsgPrint(blind
                             ? $"{monsterName} makes a strange noise."
                             : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(), Program.Rng.DiceRoll(7, 6));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectArrow(this), Program.Rng.DiceRoll(7, 6));
                         break;
 
                     // MonsterFlag4.BreatheAcid
@@ -15942,7 +15942,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes acid at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheLightning
@@ -15951,7 +15951,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes lightning at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheFire
@@ -15960,7 +15960,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes fire at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheCold
@@ -15969,7 +15969,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes frost at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreathePoison
@@ -15978,7 +15978,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes gas at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(this), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheNether
@@ -15987,7 +15987,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes nether at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(this), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheLight
@@ -15996,7 +15996,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes light at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectLight(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectLight(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheDark
@@ -16005,7 +16005,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes darkness at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheConfusion
@@ -16014,7 +16014,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes confusion at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectConfusion(), monster.Health / 6 > 400 ? 400 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectConfusion(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6,
                             0);
                         break;
 
@@ -16024,7 +16024,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes sound at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectSound(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectSound(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheChaos
@@ -16033,7 +16033,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes chaos at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(this), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheDisenchant
@@ -16042,7 +16042,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes disenchantment at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisenchant(), monster.Health / 6 > 500 ? 500 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisenchant(this), monster.Health / 6 > 500 ? 500 : monster.Health / 6,
                             0);
                         break;
 
@@ -16052,7 +16052,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes nexus at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNexus(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNexus(this), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheTime
@@ -16061,7 +16061,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes time at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectTime(), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectTime(this), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.BreatheInertia
@@ -16070,7 +16070,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes inertia at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectInertia(), monster.Health / 6 > 200 ? 200 : monster.Health / 6,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectInertia(this), monster.Health / 6 > 200 ? 200 : monster.Health / 6,
                             0);
                         break;
 
@@ -16080,7 +16080,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes gravity at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectGravity(), monster.Health / 3 > 200 ? 200 : monster.Health / 3,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectGravity(this), monster.Health / 3 > 200 ? 200 : monster.Health / 3,
                             0);
                         break;
 
@@ -16090,7 +16090,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes shards at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectExplode(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectExplode(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreathePlasma
@@ -16099,7 +16099,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes plasma at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPlasma(), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPlasma(this), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheForce
@@ -16108,7 +16108,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes force at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectForce(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectForce(this), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                         break;
 
                     // MonsterFlag4.BreatheMana
@@ -16117,7 +16117,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes magical energy at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(this), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.RadiationBall
@@ -16126,7 +16126,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a ball of radiation at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(), rlev + Program.Rng.DiceRoll(10, 6), 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(this), rlev + Program.Rng.DiceRoll(10, 6), 2);
                         break;
 
                     // MonsterFlag4.BreatheRadiation
@@ -16135,7 +16135,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes toxic waste at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNuke(this), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                         break;
 
                     // MonsterFlag4.ChaosBall
@@ -16144,7 +16144,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble frighteningly."
                             : $"{monsterName} invokes raw chaos upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(), (rlev * 2) + Program.Rng.DiceRoll(10, 10),
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectChaos(this), (rlev * 2) + Program.Rng.DiceRoll(10, 10),
                             4);
                         break;
 
@@ -16154,7 +16154,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear breathing noise."
                             : $"{monsterName} breathes disintegration at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisintegrate(),
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDisintegrate(this),
                             monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
                         break;
 
@@ -16164,7 +16164,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts an acid ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(), Program.Rng.DieRoll(rlev * 3) + 15, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectAcid(this), Program.Rng.DieRoll(rlev * 3) + 15, 2);
                         break;
 
                     // MonsterFlag5.LightningBall
@@ -16173,7 +16173,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a lightning ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(), Program.Rng.DieRoll(rlev * 3 / 2) + 8, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectElec(this), Program.Rng.DieRoll(rlev * 3 / 2) + 8, 2);
                         break;
 
                     // MonsterFlag5.FireBall
@@ -16182,7 +16182,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a fire ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(), Program.Rng.DieRoll(rlev * 7 / 2) + 10, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectFire(this), Program.Rng.DieRoll(rlev * 7 / 2) + 10, 2);
                         break;
 
                     // MonsterFlag5.ColdBall
@@ -16191,7 +16191,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a frost ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(), Program.Rng.DieRoll(rlev * 3 / 2) + 10, 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectCold(this), Program.Rng.DieRoll(rlev * 3 / 2) + 10, 2);
                         break;
 
                     // MonsterFlag5.PoisonBall
@@ -16200,7 +16200,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a stinking cloud at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(), Program.Rng.DiceRoll(12, 2), 2);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectPois(this), Program.Rng.DiceRoll(12, 2), 2);
                         break;
 
                     // MonsterFlag5.NetherBall
@@ -16209,7 +16209,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble."
                             : $"{monsterName} casts a nether ball at {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(), 50 + Program.Rng.DiceRoll(10, 10) + rlev,
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectNether(this), 50 + Program.Rng.DiceRoll(10, 10) + rlev,
                             2);
                         break;
 
@@ -16220,7 +16220,7 @@ namespace Cthangband
                             ? "You hear someone mumble."
                             : $"{monsterName} gestures fluidly at {targetName}");
                         MsgPrint($"{targetName} is engulfed in a whirlpool.");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectWater(), Program.Rng.DieRoll(rlev * 5 / 2) + 50, 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectWater(this), Program.Rng.DieRoll(rlev * 5 / 2) + 50, 4);
                         break;
 
                     // MonsterFlag5.ManaBall
@@ -16229,7 +16229,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble powerfully."
                             : $"{monsterName} invokes a mana storm upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectMana(this), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
                         break;
 
                     // MonsterFlag5.DarkBall
@@ -16238,7 +16238,7 @@ namespace Cthangband
                         MsgPrint(!seeEither
                             ? "You hear someone mumble powerfully."
                             : $"{monsterName} invokes a darkness storm upon {targetName}");
-                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                        BreatheAtMonster(monsterIndex, y, x, new ProjectDark(this), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
                         break;
 
                     // MonsterFlag5.DrainMana
@@ -16449,7 +16449,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a acid bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectAcid(), Program.Rng.DiceRoll(7, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectAcid(this), Program.Rng.DiceRoll(7, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.LightningBolt
@@ -16463,7 +16463,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a lightning bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectElec(), Program.Rng.DiceRoll(4, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectElec(this), Program.Rng.DiceRoll(4, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.FireBolt
@@ -16477,7 +16477,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a fire bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectFire(), Program.Rng.DiceRoll(9, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectFire(this), Program.Rng.DiceRoll(9, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.ColdBolt
@@ -16491,7 +16491,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a frost bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectCold(), Program.Rng.DiceRoll(6, 8) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectCold(this), Program.Rng.DiceRoll(6, 8) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.PoisonBolt
@@ -16509,7 +16509,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a nether bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectNether(),
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectNether(this),
                             30 + Program.Rng.DiceRoll(5, 5) + (rlev * 3 / 2));
                         break;
 
@@ -16524,7 +16524,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a water bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectWater(), Program.Rng.DiceRoll(10, 10) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectWater(this), Program.Rng.DiceRoll(10, 10) + rlev);
                         break;
 
                     // MonsterFlag5.ManaBolt
@@ -16538,7 +16538,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a mana bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMana(), Program.Rng.DieRoll(rlev * 7 / 2) + 50);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMana(this), Program.Rng.DieRoll(rlev * 7 / 2) + 50);
                         break;
 
                     // MonsterFlag5.PlasmaBolt
@@ -16552,7 +16552,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a plasma bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectPlasma(), 10 + Program.Rng.DiceRoll(8, 7) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectPlasma(this), 10 + Program.Rng.DiceRoll(8, 7) + rlev);
                         break;
 
                     // MonsterFlag5.IceBolt
@@ -16566,7 +16566,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts an ice bolt at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectIce(), Program.Rng.DiceRoll(6, 6) + rlev);
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectIce(this), Program.Rng.DiceRoll(6, 6) + rlev);
                         break;
 
                     // MonsterFlag5.MagicMissile
@@ -16580,7 +16580,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{monsterName} casts a magic missile at {targetName}");
                         }
-                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMissile(), Program.Rng.DiceRoll(2, 6) + (rlev / 3));
+                        FireBoltAtMonster(monsterIndex, y, x, new ProjectMissile(this), Program.Rng.DiceRoll(2, 6) + (rlev / 3));
                         break;
 
                     // MonsterFlag5.Scare
@@ -16937,7 +16937,7 @@ namespace Cthangband
                         {
                             MsgPrint($"{targetName} is surrounded by darkness.");
                         }
-                        Project(monsterIndex, 3, y, x, 0, new ProjectDarkWeak(),
+                        Project(monsterIndex, 3, y, x, 0, new ProjectDarkWeak(this),
                             ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill);
                         UnlightRoom(y, x);
                         break;
@@ -17724,7 +17724,7 @@ namespace Cthangband
                 case 96 + 3:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles something." : $"{monsterName} fires a shard ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectShard(), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectShard(this), monster.Health / 4 > 800 ? 800 : monster.Health / 4, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsShard);
                     break;
 
@@ -17732,7 +17732,7 @@ namespace Cthangband
                 case 96 + 4:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(1, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(this), Program.Rng.DiceRoll(1, 6));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -17740,7 +17740,7 @@ namespace Cthangband
                 case 96 + 5:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow!");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(3, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(this), Program.Rng.DiceRoll(3, 6));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -17748,7 +17748,7 @@ namespace Cthangband
                 case 96 + 6:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName}s makes a strange noise." : $"{monsterName} fires a missile.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(5, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(this), Program.Rng.DiceRoll(5, 6));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -17756,7 +17756,7 @@ namespace Cthangband
                 case 96 + 7:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires a missile!");
-                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(), Program.Rng.DiceRoll(7, 6));
+                    FireBoltAtPlayer(monsterIndex, new ProjectArrow(this), Program.Rng.DiceRoll(7, 6));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -17764,7 +17764,7 @@ namespace Cthangband
                 case 96 + 8:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes acid.");
-                    BreatheAtPlayer(monsterIndex, new ProjectAcid(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectAcid(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     break;
 
@@ -17772,7 +17772,7 @@ namespace Cthangband
                 case 96 + 9:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes lightning.");
-                    BreatheAtPlayer(monsterIndex, new ProjectElec(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectElec(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     break;
 
@@ -17780,7 +17780,7 @@ namespace Cthangband
                 case 96 + 10:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes fire.");
-                    BreatheAtPlayer(monsterIndex, new ProjectFire(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectFire(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     break;
 
@@ -17788,7 +17788,7 @@ namespace Cthangband
                 case 96 + 11:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes frost.");
-                    BreatheAtPlayer(monsterIndex, new ProjectCold(), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectCold(this), monster.Health / 3 > 1600 ? 1600 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     break;
 
@@ -17796,7 +17796,7 @@ namespace Cthangband
                 case 96 + 12:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gas.");
-                    BreatheAtPlayer(monsterIndex, new ProjectPois(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectPois(this), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -17804,7 +17804,7 @@ namespace Cthangband
                 case 96 + 13:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nether.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNether(), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNether(this), monster.Health / 6 > 550 ? 550 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     break;
 
@@ -17812,7 +17812,7 @@ namespace Cthangband
                 case 96 + 14:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes light.");
-                    BreatheAtPlayer(monsterIndex, new ProjectLight(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectLight(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsLight);
                     break;
 
@@ -17820,7 +17820,7 @@ namespace Cthangband
                 case 96 + 15:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes darkness.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDark(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDark(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDark);
                     break;
 
@@ -17828,7 +17828,7 @@ namespace Cthangband
                 case 96 + 16:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes confusion.");
-                    BreatheAtPlayer(monsterIndex, new ProjectConfusion(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectConfusion(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsConf);
                     break;
 
@@ -17836,7 +17836,7 @@ namespace Cthangband
                 case 96 + 17:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes sound.");
-                    BreatheAtPlayer(monsterIndex, new ProjectSound(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectSound(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsSound);
                     break;
 
@@ -17844,7 +17844,7 @@ namespace Cthangband
                 case 96 + 18:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes chaos.");
-                    BreatheAtPlayer(monsterIndex, new ProjectChaos(), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectChaos(this), monster.Health / 6 > 600 ? 600 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsChaos);
                     break;
 
@@ -17852,7 +17852,7 @@ namespace Cthangband
                 case 96 + 19:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disenchantment.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDisenchant(), monster.Health / 6 > 500 ? 500 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDisenchant(this), monster.Health / 6 > 500 ? 500 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDisen);
                     break;
 
@@ -17860,7 +17860,7 @@ namespace Cthangband
                 case 96 + 20:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nexus.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNexus(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNexus(this), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNexus);
                     break;
 
@@ -17868,28 +17868,28 @@ namespace Cthangband
                 case 96 + 21:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes time.");
-                    BreatheAtPlayer(monsterIndex, new ProjectTime(), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectTime(this), monster.Health / 3 > 150 ? 150 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.BreatheInertia
                 case 96 + 22:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes inertia.");
-                    BreatheAtPlayer(monsterIndex, new ProjectInertia(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectInertia(this), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheGravity
                 case 96 + 23:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gravity.");
-                    BreatheAtPlayer(monsterIndex, new ProjectGravity(), monster.Health / 3 > 200 ? 200 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectGravity(this), monster.Health / 3 > 200 ? 200 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.BreatheShards
                 case 96 + 24:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes shards.");
-                    BreatheAtPlayer(monsterIndex, new ProjectExplode(), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectExplode(this), monster.Health / 6 > 400 ? 400 : monster.Health / 6, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsShard);
                     break;
 
@@ -17897,28 +17897,28 @@ namespace Cthangband
                 case 96 + 25:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes plasma.");
-                    BreatheAtPlayer(monsterIndex, new ProjectPlasma(), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectPlasma(this), monster.Health / 6 > 150 ? 150 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheForce
                 case 96 + 26:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes force.");
-                    BreatheAtPlayer(monsterIndex, new ProjectForce(), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectForce(this), monster.Health / 6 > 200 ? 200 : monster.Health / 6, 0);
                     break;
 
                 // MonsterFlag4.BreatheMana
                 case 96 + 27:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes magical energy.");
-                    BreatheAtPlayer(monsterIndex, new ProjectMana(), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectMana(this), monster.Health / 3 > 250 ? 250 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag4.RadiationBall
                 case 96 + 28:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a ball of radiation.");
-                    FireBallAtPlayer(monsterIndex, new ProjectNuke(), monsterLevel + Program.Rng.DiceRoll(10, 6), 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectNuke(this), monsterLevel + Program.Rng.DiceRoll(10, 6), 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -17926,7 +17926,7 @@ namespace Cthangband
                 case 96 + 29:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes toxic waste.");
-                    BreatheAtPlayer(monsterIndex, new ProjectNuke(), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectNuke(this), monster.Health / 3 > 800 ? 800 : monster.Health / 3, 0);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -17936,7 +17936,7 @@ namespace Cthangband
                     MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles frighteningly."
                         : $"{monsterName} invokes raw chaos.");
-                    FireBallAtPlayer(monsterIndex, new ProjectChaos(), (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectChaos(this), (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10), 4);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsChaos);
                     break;
 
@@ -17944,14 +17944,14 @@ namespace Cthangband
                 case 96 + 31:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disintegration.");
-                    BreatheAtPlayer(monsterIndex, new ProjectDisintegrate(), monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
+                    BreatheAtPlayer(monsterIndex, new ProjectDisintegrate(this), monster.Health / 3 > 300 ? 300 : monster.Health / 3, 0);
                     break;
 
                 // MonsterFlag5.AcidBall
                 case 128 + 0:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an acid ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectAcid(), Program.Rng.DieRoll(monsterLevel * 3) + 15, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectAcid(this), Program.Rng.DieRoll(monsterLevel * 3) + 15, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     break;
 
@@ -17959,7 +17959,7 @@ namespace Cthangband
                 case 128 + 1:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectElec(), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectElec(this), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     break;
 
@@ -17967,7 +17967,7 @@ namespace Cthangband
                 case 128 + 2:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectFire(), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 10, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectFire(this), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 10, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     break;
 
@@ -17975,7 +17975,7 @@ namespace Cthangband
                 case 128 + 3:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectCold(), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectCold(this), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     break;
 
@@ -17983,7 +17983,7 @@ namespace Cthangband
                 case 128 + 4:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a stinking cloud.");
-                    FireBallAtPlayer(monsterIndex, new ProjectPois(), Program.Rng.DiceRoll(12, 2), 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectPois(this), Program.Rng.DiceRoll(12, 2), 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
                     break;
 
@@ -17991,7 +17991,7 @@ namespace Cthangband
                 case 128 + 5:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether ball.");
-                    FireBallAtPlayer(monsterIndex, new ProjectNether(), 50 + Program.Rng.DiceRoll(10, 10) + monsterLevel, 2);
+                    FireBallAtPlayer(monsterIndex, new ProjectNether(this), 50 + Program.Rng.DiceRoll(10, 10) + monsterLevel, 2);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     break;
 
@@ -18000,7 +18000,7 @@ namespace Cthangband
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} gestures fluidly.");
                     MsgPrint("You are engulfed in a whirlpool.");
-                    FireBallAtPlayer(monsterIndex, new ProjectWater(), Program.Rng.DieRoll(monsterLevel * 5 / 2) + 50, 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectWater(this), Program.Rng.DieRoll(monsterLevel * 5 / 2) + 50, 4);
                     break;
 
                 // MonsterFlag5.ManaBall
@@ -18009,7 +18009,7 @@ namespace Cthangband
                     MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles powerfully."
                         : $"{monsterName} invokes a mana storm.");
-                    FireBallAtPlayer(monsterIndex, new ProjectMana(), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectMana(this), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
                     break;
 
                 // MonsterFlag5.DarkBall
@@ -18018,7 +18018,7 @@ namespace Cthangband
                     MsgPrint(playerIsBlind
                         ? $"{monsterName} mumbles powerfully."
                         : $"{monsterName} invokes a darkness storm.");
-                    FireBallAtPlayer(monsterIndex, new ProjectDark(), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
+                    FireBallAtPlayer(monsterIndex, new ProjectDark(this), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDark);
                     break;
 
@@ -18197,7 +18197,7 @@ namespace Cthangband
                 case 128 + 16:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a acid bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectAcid(), Program.Rng.DiceRoll(7, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectAcid(this), Program.Rng.DiceRoll(7, 8) + (monsterLevel / 3));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18206,7 +18206,7 @@ namespace Cthangband
                 case 128 + 17:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectElec(), Program.Rng.DiceRoll(4, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectElec(this), Program.Rng.DiceRoll(4, 8) + (monsterLevel / 3));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18215,7 +18215,7 @@ namespace Cthangband
                 case 128 + 18:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectFire(), Program.Rng.DiceRoll(9, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectFire(this), Program.Rng.DiceRoll(9, 8) + (monsterLevel / 3));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18224,7 +18224,7 @@ namespace Cthangband
                 case 128 + 19:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectCold(), Program.Rng.DiceRoll(6, 8) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectCold(this), Program.Rng.DiceRoll(6, 8) + (monsterLevel / 3));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18237,7 +18237,7 @@ namespace Cthangband
                 case 128 + 21:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectNether(), 30 + Program.Rng.DiceRoll(5, 5) + (monsterLevel * 3 / 2));
+                    FireBoltAtPlayer(monsterIndex, new ProjectNether(this), 30 + Program.Rng.DiceRoll(5, 5) + (monsterLevel * 3 / 2));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsNeth);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18246,7 +18246,7 @@ namespace Cthangband
                 case 128 + 22:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a water bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectWater(), Program.Rng.DiceRoll(10, 10) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectWater(this), Program.Rng.DiceRoll(10, 10) + monsterLevel);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -18254,7 +18254,7 @@ namespace Cthangband
                 case 128 + 23:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a mana bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectMana(), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50);
+                    FireBoltAtPlayer(monsterIndex, new ProjectMana(this), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -18262,7 +18262,7 @@ namespace Cthangband
                 case 128 + 24:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a plasma bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectPlasma(), 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectPlasma(this), 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 
@@ -18270,7 +18270,7 @@ namespace Cthangband
                 case 128 + 25:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an ice bolt.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectIce(), Program.Rng.DiceRoll(6, 6) + monsterLevel);
+                    FireBoltAtPlayer(monsterIndex, new ProjectIce(this), Program.Rng.DiceRoll(6, 6) + monsterLevel);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
@@ -18279,7 +18279,7 @@ namespace Cthangband
                 case 128 + 26:
                     Disturb(true);
                     MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a magic missile.");
-                    FireBoltAtPlayer(monsterIndex, new ProjectMissile(), Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3));
+                    FireBoltAtPlayer(monsterIndex, new ProjectMissile(this), Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3));
                     Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsReflect);
                     break;
 

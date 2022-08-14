@@ -14,10 +14,10 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellTheFool : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             int dummy = 0;
-            SaveGame.Instance.MsgPrint("You concentrate on the Fool card...");
+            saveGame.MsgPrint("You concentrate on the Fool card...");
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
@@ -38,15 +38,15 @@ namespace Cthangband.Spells.Tarot
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                SaveGame.Instance.MsgPrint(level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, dummy)
+                saveGame.MsgPrint(saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, dummy)
                     ? "The summoned creature gets angry!"
                     : "No-one ever turns up.");
             }
             else
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, dummy, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, dummy, false))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }

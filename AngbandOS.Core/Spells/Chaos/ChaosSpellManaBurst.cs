@@ -14,17 +14,17 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellManaBurst : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.FireBall(new ProjectMissile(), dir,
-                Program.Rng.DiceRoll(3, 5) + player.Level + (player.Level /
-                (player.ProfessionIndex == CharacterClass.Mage || player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
-                player.Level < 30 ? 2 : 3);
+            saveGame.FireBall(new ProjectMissile(saveGame), dir,
+                Program.Rng.DiceRoll(3, 5) + saveGame.Player.Level + (saveGame.Player.Level /
+                (saveGame.Player.ProfessionIndex == CharacterClass.Mage || saveGame.Player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
+                saveGame.Player.Level < 30 ? 2 : 3);
         }
 
         public override void Initialise(int characterClass)

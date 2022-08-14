@@ -20,14 +20,14 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer blessed with fits of invulnerability.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (!player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
+            if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
             {
                 saveGame.Disturb(false);
-                SaveGame.Instance.MsgPrint("You feel invincible!");
-                SaveGame.Instance.MsgPrint(null);
-                player.SetTimedInvulnerability(player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
+                saveGame.MsgPrint("You feel invincible!");
+                saveGame.MsgPrint(null);
+                saveGame.Player.SetTimedInvulnerability(saveGame.Player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
             }
         }
     }

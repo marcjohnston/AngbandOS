@@ -13,18 +13,18 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellBattleFrenzy : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
-            player.RestoreHealth(30);
-            player.SetTimedFear(0);
-            if (player.TimedHaste == 0)
+            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.RestoreHealth(30);
+            saveGame.Player.SetTimedFear(0);
+            if (saveGame.Player.TimedHaste == 0)
             {
-                player.SetTimedHaste(Program.Rng.DieRoll(20 + (player.Level / 2)) + (player.Level / 2));
+                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20 + (saveGame.Player.Level / 2)) + (saveGame.Player.Level / 2));
             }
             else
             {
-                player.SetTimedHaste(player.TimedHaste + Program.Rng.DieRoll(5));
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
             }
         }
 

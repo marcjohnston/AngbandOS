@@ -13,11 +13,11 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellExorcism : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelUndead(player.Level);
-            saveGame.DispelDemons(player.Level);
-            saveGame.TurnEvil(player.Level);
+            saveGame.DispelUndead(saveGame.Player.Level);
+            saveGame.DispelDemons(saveGame.Player.Level);
+            saveGame.TurnEvil(saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

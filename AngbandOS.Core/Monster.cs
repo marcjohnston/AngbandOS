@@ -255,7 +255,7 @@ namespace Cthangband
             return desc;
         }
 
-        public void SanityBlast(bool necro)
+        public void SanityBlast(SaveGame saveGame, bool necro)
         {
             Player player = SaveGame.Instance.Player;
             bool happened = false;
@@ -393,7 +393,7 @@ namespace Cthangband
                 return;
             }
             SaveGame.Instance.MsgPrint("The exposure to eldritch forces warps you.");
-            player.Dna.GainMutation();
+            player.Dna.GainMutation(saveGame);
             player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             SaveGame.Instance.HandleStuff();
         }

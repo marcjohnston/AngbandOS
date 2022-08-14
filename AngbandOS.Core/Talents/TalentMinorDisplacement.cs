@@ -20,33 +20,33 @@ namespace Cthangband.Talents
             BaseFailure = 25;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            if (player.Level < 25)
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            if (saveGame.Player.Level < 25)
             {
                 saveGame.TeleportPlayer(10);
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Choose a destination.");
+                saveGame.MsgPrint("Choose a destination.");
                 if (!targetEngine.TgtPt(out int i, out int j))
                 {
                     return;
                 }
-                player.Energy -= 60 - player.Level;
-                if (!level.GridPassableNoCreature(j, i) || level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
-                    level.Grid[j][i].FeatureType.Name != "Water" ||
-                    level.Distance(j, i, player.MapY, player.MapX) > player.Level + 2 ||
-                    Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
+                saveGame.Player.Energy -= 60 - saveGame.Player.Level;
+                if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
+                    saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
+                    saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
+                    Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
                 {
-                    SaveGame.Instance.MsgPrint("Something disrupts your concentration!");
-                    player.Energy -= 100;
-                    SaveGame.Instance.TeleportPlayer(20);
+                    saveGame.MsgPrint("Something disrupts your concentration!");
+                    saveGame.Player.Energy -= 100;
+                    saveGame.TeleportPlayer(20);
                 }
                 else
                 {
-                    SaveGame.Instance.TeleportPlayerTo(j, i);
+                    saveGame.TeleportPlayerTo(j, i);
                 }
             }
         }

@@ -20,9 +20,9 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You feel like you're trapped in reality.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (!player.HasAntiMagic && Program.Rng.DieRoll(12000) == 1)
+            if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(12000) == 1)
             {
                 saveGame.AlterReality();
             }

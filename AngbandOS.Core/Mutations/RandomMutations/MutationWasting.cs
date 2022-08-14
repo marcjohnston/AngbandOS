@@ -21,7 +21,7 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are cured of the horrible wasting disease!";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) != 13)
             {
@@ -32,49 +32,49 @@ namespace Cthangband.Mutations.RandomMutations
             switch (whichStat)
             {
                 case Ability.Strength:
-                    if (player.HasSustainStrength)
+                    if (saveGame.Player.HasSustainStrength)
                     {
                         sustained = true;
                     }
                     break;
 
                 case Ability.Intelligence:
-                    if (player.HasSustainIntelligence)
+                    if (saveGame.Player.HasSustainIntelligence)
                     {
                         sustained = true;
                     }
                     break;
 
                 case Ability.Wisdom:
-                    if (player.HasSustainWisdom)
+                    if (saveGame.Player.HasSustainWisdom)
                     {
                         sustained = true;
                     }
                     break;
 
                 case Ability.Dexterity:
-                    if (player.HasSustainDexterity)
+                    if (saveGame.Player.HasSustainDexterity)
                     {
                         sustained = true;
                     }
                     break;
 
                 case Ability.Constitution:
-                    if (player.HasSustainConstitution)
+                    if (saveGame.Player.HasSustainConstitution)
                     {
                         sustained = true;
                     }
                     break;
 
                 case Ability.Charisma:
-                    if (player.HasSustainCharisma)
+                    if (saveGame.Player.HasSustainCharisma)
                     {
                         sustained = true;
                     }
                     break;
 
                 default:
-                    SaveGame.Instance.MsgPrint("Invalid stat chosen!");
+                    saveGame.MsgPrint("Invalid stat chosen!");
                     sustained = true;
                     break;
             }
@@ -83,15 +83,15 @@ namespace Cthangband.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
             {
-                SaveGame.Instance.MsgPrint("Lobon's favour protects you from wasting away!");
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint("Lobon's favour protects you from wasting away!");
+                saveGame.MsgPrint(null);
                 return;
             }
-            SaveGame.Instance.MsgPrint("You can feel yourself wasting away!");
-            SaveGame.Instance.MsgPrint(null);
-            player.DecreaseAbilityScore(whichStat, Program.Rng.DieRoll(6) + 6, Program.Rng.DieRoll(3) == 1);
+            saveGame.MsgPrint("You can feel yourself wasting away!");
+            saveGame.MsgPrint(null);
+            saveGame.Player.DecreaseAbilityScore(whichStat, Program.Rng.DieRoll(6) + 6, Program.Rng.DieRoll(3) == 1);
         }
     }
 }

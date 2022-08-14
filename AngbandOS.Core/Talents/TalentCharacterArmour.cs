@@ -20,28 +20,28 @@ namespace Cthangband.Talents
             BaseFailure = 50;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            player.SetTimedStoneskin(player.TimedStoneskin + player.Level);
-            if (player.Level > 14)
+            saveGame.Player.SetTimedStoneskin(saveGame.Player.TimedStoneskin + saveGame.Player.Level);
+            if (saveGame.Player.Level > 14)
             {
-                player.SetTimedAcidResistance(player.TimedAcidResistance + player.Level);
+                saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + saveGame.Player.Level);
             }
-            if (player.Level > 19)
+            if (saveGame.Player.Level > 19)
             {
-                player.SetTimedFireResistance(player.TimedFireResistance + player.Level);
+                saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + saveGame.Player.Level);
             }
-            if (player.Level > 24)
+            if (saveGame.Player.Level > 24)
             {
-                player.SetTimedColdResistance(player.TimedColdResistance + player.Level);
+                saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + saveGame.Player.Level);
             }
-            if (player.Level > 29)
+            if (saveGame.Player.Level > 29)
             {
-                player.SetTimedLightningResistance(player.TimedLightningResistance + player.Level);
+                saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + saveGame.Player.Level);
             }
-            if (player.Level > 34)
+            if (saveGame.Player.Level > 34)
             {
-                player.SetTimedPoisonResistance(player.TimedPoisonResistance + player.Level);
+                saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + saveGame.Player.Level);
             }
         }
 

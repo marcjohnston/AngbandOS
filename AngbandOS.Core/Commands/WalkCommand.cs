@@ -66,7 +66,7 @@ namespace Cthangband.Commands
         public static void DoCmdWalk(SaveGame saveGame, bool dontPickup)
         { 
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             // If we don't already have a direction, get one
             if (targetEngine.GetDirectionNoAim(out int dir))
             {

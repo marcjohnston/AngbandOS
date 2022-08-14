@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellRemoveFear : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedFear(0);
+            saveGame.Player.SetTimedFear(0);
         }
 
         public override void Initialise(int characterClass)

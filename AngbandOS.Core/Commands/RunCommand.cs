@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Can't run if we're confused
             if (saveGame.Player.TimedConfusion != 0)
             {

@@ -119,7 +119,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'M':
-                    saveGame.Player.Dna.GainMutation();
+                    saveGame.Player.Dna.GainMutation(saveGame);
                     break;
 
                 case 'r':
@@ -286,7 +286,7 @@ namespace Cthangband.Commands
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
@@ -299,7 +299,7 @@ namespace Cthangband.Commands
                 tx = saveGame.TargetCol;
                 ty = saveGame.TargetRow;
             }
-            saveGame.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(), flg);
+            saveGame.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(saveGame), flg);
         }
 
         private void DoCmdWizBamf(SaveGame saveGame)

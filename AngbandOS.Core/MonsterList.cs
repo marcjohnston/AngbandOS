@@ -28,9 +28,11 @@ namespace Cthangband
         private int _hackMIdxIi;
         private int _placeMonsterIdx;
         private int _summonSpecificType;
+        private readonly SaveGame SaveGame;
 
-        public MonsterList(Level level)
+        public MonsterList(SaveGame saveGame, Level level)
         {
+            SaveGame = saveGame;
             _level = level;
             _monsters = new Monster[Constants.MaxMIdx];
             for (int j = 0; j < Constants.MaxMIdx; j++)
@@ -54,7 +56,7 @@ namespace Cthangband
                 {
                     return false;
                 }
-                rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+                rPtr = SaveGame.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0 && (rPtr.Flags1 & MonsterFlag1.EscortsGroup) == 0)
                 {
                     break;
@@ -80,7 +82,7 @@ namespace Cthangband
             SummonKinType = rPtr.Character;
             for (attempts = Program.Rng.DieRoll(10) + 5; attempts != 0; attempts--)
             {
-                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Instance.Difficulty, Constants.SummonKin);
+                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, Constants.SummonKin);
             }
             return true;
         }
@@ -98,7 +100,7 @@ namespace Cthangband
                 {
                     continue;
                 }
-                if (_level.Distance(y, x, SaveGame.Instance.Player.MapY, SaveGame.Instance.Player.MapX) > dis)
+                if (_level.Distance(y, x, SaveGame.Player.MapY, SaveGame.Player.MapX) > dis)
                 {
                     break;
                 }
@@ -108,7 +110,7 @@ namespace Cthangband
             {
                 return;
             }
-            if (Program.Rng.DieRoll(5000) <= SaveGame.Instance.Difficulty)
+            if (Program.Rng.DieRoll(5000) <= SaveGame.Difficulty)
             {
                 if (AllocHorde(y, x))
                 {
@@ -118,7 +120,7 @@ namespace Cthangband
             {
                 if (DunBias > 0 && Program.Rng.RandomBetween(1, 10) > 6)
                 {
-                    if (SummonSpecific(y, x, SaveGame.Instance.Difficulty, DunBias))
+                    if (SummonSpecific(y, x, SaveGame.Difficulty, DunBias))
                     {
                     }
                 }
@@ -136,7 +138,7 @@ namespace Cthangband
             int i, num, cnt;
             if (size != 0)
             {
-                SaveGame.Instance.MsgPrint("Compacting monsters...");
+                SaveGame.MsgPrint("Compacting monsters...");
             }
             for (num = 0, cnt = 1; num < size; cnt++)
             {
@@ -192,9 +194,9 @@ namespace Cthangband
             fear = false;
             Monster mPtr = _monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
-            if (SaveGame.Instance.TrackedMonsterIndex == mIdx)
+            if (SaveGame.TrackedMonsterIndex == mIdx)
             {
-                SaveGame.Instance.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
             }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;
@@ -203,38 +205,38 @@ namespace Cthangband
                 string mName = mPtr.MonsterDesc(0);
                 if ((rPtr.Flags3 & MonsterFlag3.GreatOldOne) != 0 && Program.Rng.DieRoll(2) == 1)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} retreats into another dimension!");
+                    SaveGame.MsgPrint($"{mName} retreats into another dimension!");
                     if (Program.Rng.DieRoll(5) == 1)
                     {
                         int curses = 1 + Program.Rng.DieRoll(3);
-                        SaveGame.Instance.MsgPrint("Nyarlathotep puts a terrible curse on you!");
-                        SaveGame.Instance.Player.CurseEquipment(100, 50);
+                        SaveGame.MsgPrint("Nyarlathotep puts a terrible curse on you!");
+                        SaveGame.Player.CurseEquipment(100, 50);
                         do
                         {
-                            SaveGame.Instance.ActivateDreadCurse();
+                            SaveGame.ActivateDreadCurse();
                         } while (--curses != 0);
                     }
                 }
                 Gui.PlaySound(SoundEffect.MonsterDies);
                 if (string.IsNullOrEmpty(note) == false)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName}{note}");
+                    SaveGame.MsgPrint($"{mName}{note}");
                 }
                 else if (!mPtr.IsVisible)
                 {
-                    SaveGame.Instance.MsgPrint($"You have killed {mName}.");
+                    SaveGame.MsgPrint($"You have killed {mName}.");
                 }
                 else if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
                          (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
                          (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
                 {
-                    SaveGame.Instance.MsgPrint($"You have destroyed {mName}.");
+                    SaveGame.MsgPrint($"You have destroyed {mName}.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint($"You have slain {mName}.");
+                    SaveGame.MsgPrint($"You have slain {mName}.");
                 }
-                int div = 10 * SaveGame.Instance.Player.MaxLevelGained;
+                int div = 10 * SaveGame.Player.MaxLevelGained;
                 if (rPtr.Knowledge.RPkills >= 19)
                 {
                     div *= 2;
@@ -256,18 +258,18 @@ namespace Cthangband
                     div = 1;
                 }
                 int newExp = rPtr.Mexp * rPtr.Level * 10 / div;
-                int newExpFrac = (rPtr.Mexp * rPtr.Level % div * 0x10000 / div) + SaveGame.Instance.Player.FractionalExperiencePoints;
+                int newExpFrac = (rPtr.Mexp * rPtr.Level % div * 0x10000 / div) + SaveGame.Player.FractionalExperiencePoints;
                 if (newExpFrac >= 0x10000)
                 {
                     newExp++;
-                    SaveGame.Instance.Player.FractionalExperiencePoints = newExpFrac - 0x10000;
+                    SaveGame.Player.FractionalExperiencePoints = newExpFrac - 0x10000;
                 }
                 else
                 {
-                    SaveGame.Instance.Player.FractionalExperiencePoints = newExpFrac;
+                    SaveGame.Player.FractionalExperiencePoints = newExpFrac;
                 }
-                SaveGame.Instance.Player.GainExperience(newExp);
-                SaveGame.Instance.MonsterDeath(mIdx);
+                SaveGame.Player.GainExperience(newExp);
+                SaveGame.MonsterDeath(mIdx);
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
                 {
                     rPtr.MaxNum = 0;
@@ -330,13 +332,13 @@ namespace Cthangband
             {
                 NumRepro--;
             }
-            if (i == SaveGame.Instance.TargetWho)
+            if (i == SaveGame.TargetWho)
             {
-                SaveGame.Instance.TargetWho = 0;
+                SaveGame.TargetWho = 0;
             }
-            if (i == SaveGame.Instance.TrackedMonsterIndex)
+            if (i == SaveGame.TrackedMonsterIndex)
             {
-                SaveGame.Instance.HealthTrack(0);
+                SaveGame.HealthTrack(0);
             }
             _level.Grid[y][x].MonsterIndex = 0;
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
@@ -357,7 +359,7 @@ namespace Cthangband
         public int GetMonNum(int level)
         {
             int i, j;
-            AllocationEntry[] table = SaveGame.Instance.AllocRaceTable;
+            AllocationEntry[] table = SaveGame.AllocRaceTable;
             if (level > 0)
             {
                 if (Program.Rng.RandomLessThan(Constants.NastyMon) == 0)
@@ -372,7 +374,7 @@ namespace Cthangband
                 }
             }
             int total = 0;
-            for (i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
+            for (i = 0; i < SaveGame.AllocRaceSize; i++)
             {
                 if (table[i].Level > level)
                 {
@@ -384,7 +386,7 @@ namespace Cthangband
                     continue;
                 }
                 int rIdx = table[i].Index;
-                MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+                MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
                 {
                     continue;
@@ -397,7 +399,7 @@ namespace Cthangband
                 return 0;
             }
             long value = Program.Rng.RandomLessThan(total);
-            for (i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
+            for (i = 0; i < SaveGame.AllocRaceSize; i++)
             {
                 if (value < table[i].FinalProbability)
                 {
@@ -410,7 +412,7 @@ namespace Cthangband
             {
                 j = i;
                 value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
+                for (i = 0; i < SaveGame.AllocRaceSize; i++)
                 {
                     if (value < table[i].FinalProbability)
                     {
@@ -427,7 +429,7 @@ namespace Cthangband
             {
                 j = i;
                 value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
+                for (i = 0; i < SaveGame.AllocRaceSize; i++)
                 {
                     if (value < table[i].FinalProbability)
                     {
@@ -445,9 +447,9 @@ namespace Cthangband
 
         public void GetMonNumPrep(GetMonNumHookDelegate getMonNumHook)
         {
-            for (int i = 0; i < SaveGame.Instance.AllocRaceSize; i++)
+            for (int i = 0; i < SaveGame.AllocRaceSize; i++)
             {
-                AllocationEntry entry = SaveGame.Instance.AllocRaceTable[i];
+                AllocationEntry entry = SaveGame.AllocRaceTable[i];
                 if (getMonNumHook == null || getMonNumHook(entry.Index))
                 {
                     entry.FilteredProbabiity = entry.BaseProbability;
@@ -541,7 +543,7 @@ namespace Cthangband
             string mName = mPtr.MonsterDesc(0);
             if (dam == 0)
             {
-                SaveGame.Instance.MsgPrint($"{mName} is unharmed.");
+                SaveGame.MsgPrint($"{mName} is unharmed.");
                 return;
             }
             long newhp = mPtr.Health;
@@ -552,124 +554,124 @@ namespace Cthangband
             {
                 if (percentage > 95)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} barely notices.");
+                    SaveGame.MsgPrint($"{mName} barely notices.");
                 }
                 else if (percentage > 75)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} flinches.");
+                    SaveGame.MsgPrint($"{mName} flinches.");
                 }
                 else if (percentage > 50)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} squelches.");
+                    SaveGame.MsgPrint($"{mName} squelches.");
                 }
                 else if (percentage > 35)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} quivers in pain.");
+                    SaveGame.MsgPrint($"{mName} quivers in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} writhes about.");
+                    SaveGame.MsgPrint($"{mName} writhes about.");
                 }
                 else if (percentage > 10)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} jerks limply.");
+                    SaveGame.MsgPrint($"{mName} jerks limply.");
                 }
             }
             else if ("CZ".Contains(rPtr.Character.ToString()))
             {
                 if (percentage > 95)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} shrugs off the attack.");
+                    SaveGame.MsgPrint($"{mName} shrugs off the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} snarls with pain.");
+                    SaveGame.MsgPrint($"{mName} snarls with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} yelps in pain.");
+                    SaveGame.MsgPrint($"{mName} yelps in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} howls in pain.");
+                    SaveGame.MsgPrint($"{mName} howls in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} howls in agony.");
+                    SaveGame.MsgPrint($"{mName} howls in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} yelps feebly.");
+                    SaveGame.MsgPrint($"{mName} yelps feebly.");
                 }
             }
             else if ("FIKMRSXabclqrst".Contains(rPtr.Character.ToString()))
             {
                 if (percentage > 95)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} ignores the attack.");
+                    SaveGame.MsgPrint($"{mName} ignores the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} grunts with pain.");
+                    SaveGame.MsgPrint($"{mName} grunts with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} squeals in pain.");
+                    SaveGame.MsgPrint($"{mName} squeals in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} shrieks in pain.");
+                    SaveGame.MsgPrint($"{mName} shrieks in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} shrieks in agony.");
+                    SaveGame.MsgPrint($"{mName} shrieks in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} cries out feebly.");
+                    SaveGame.MsgPrint($"{mName} cries out feebly.");
                 }
             }
             else
             {
                 if (percentage > 95)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} shrugs off the attack.");
+                    SaveGame.MsgPrint($"{mName} shrugs off the attack.");
                 }
                 else if (percentage > 75)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} grunts with pain.");
+                    SaveGame.MsgPrint($"{mName} grunts with pain.");
                 }
                 else if (percentage > 50)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} cries out in pain.");
+                    SaveGame.MsgPrint($"{mName} cries out in pain.");
                 }
                 else if (percentage > 35)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} screams in pain.");
+                    SaveGame.MsgPrint($"{mName} screams in pain.");
                 }
                 else if (percentage > 20)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} screams in agony.");
+                    SaveGame.MsgPrint($"{mName} screams in agony.");
                 }
                 else if (percentage > 10)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} writhes in agony.");
+                    SaveGame.MsgPrint($"{mName} writhes in agony.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} cries out feebly.");
+                    SaveGame.MsgPrint($"{mName} cries out feebly.");
                 }
             }
         }
@@ -736,7 +738,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    MonsterRace race = SaveGame.Instance.MonsterRaces[z];
+                    MonsterRace race = SaveGame.MonsterRaces[z];
                     PlaceMonsterOne(ny, nx, race, slp, charm);
                     if ((race.Flags1 & MonsterFlag1.Friends) != 0 ||
                         (rPtr.Flags1 & MonsterFlag1.EscortsGroup) != 0)
@@ -758,7 +760,7 @@ namespace Cthangband
 
         public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
         {
-            return PlaceMonsterAux(y, x, SaveGame.Instance.MonsterRaces[index], slp, grp, charm);
+            return PlaceMonsterAux(y, x, SaveGame.MonsterRaces[index], slp, grp, charm);
         }
 
         public void ReplacePet(int y1, int x1, Monster monster)
@@ -782,14 +784,14 @@ namespace Cthangband
             }
             if (i == 20)
             {
-                SaveGame.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
                 return;
             }
             GridTile cPtr = _level.Grid[y][x];
             cPtr.MonsterIndex = MPop();
             if (cPtr.MonsterIndex == 0)
             {
-                SaveGame.Instance.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
                 return;
             }
             _monsters[cPtr.MonsterIndex] = monster;
@@ -832,13 +834,13 @@ namespace Cthangband
             }
             _summonSpecificType = type;
             GetMonNumPrep(SummonSpecificOkay);
-            int rIdx = GetMonNum(((SaveGame.Instance.Difficulty + lev) / 2) + 5);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5);
             GetMonNumPrep(null);
             if (rIdx == 0)
             {
                 return false;
             }
-            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.MonsterRaces[rIdx];
             if (type == Constants.SummonAvatar)
             {
                 groupOk = false;
@@ -879,13 +881,13 @@ namespace Cthangband
             }
             _summonSpecificType = type;
             GetMonNumPrep(SummonSpecificOkay);
-            int rIdx = GetMonNum(((SaveGame.Instance.Difficulty + lev) / 2) + 5);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5);
             GetMonNumPrep(null);
             if (rIdx == 0)
             {
                 return false;
             }
-            MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.MonsterRaces[rIdx];
             if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
             {
                 return false;
@@ -905,12 +907,12 @@ namespace Cthangband
             int fx = mPtr.MapX;
             if (full)
             {
-                int dy = SaveGame.Instance.Player.MapY > fy
-                    ? SaveGame.Instance.Player.MapY - fy
-                    : fy - SaveGame.Instance.Player.MapY;
-                int dx = SaveGame.Instance.Player.MapX > fx
-                    ? SaveGame.Instance.Player.MapX - fx
-                    : fx - SaveGame.Instance.Player.MapX;
+                int dy = SaveGame.Player.MapY > fy
+                    ? SaveGame.Player.MapY - fy
+                    : fy - SaveGame.Player.MapY;
+                int dx = SaveGame.Player.MapX > fx
+                    ? SaveGame.Player.MapX - fx
+                    : fx - SaveGame.Player.MapX;
                 int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
                 mPtr.DistanceFromPlayer = d < 255 ? d : 255;
             }
@@ -936,9 +938,9 @@ namespace Cthangband
             else if (_level.PanelContains(fy, fx))
             {
                 GridTile cPtr = _level.Grid[fy][fx];
-                if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Instance.Player.TimedBlindness == 0)
+                if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Player.TimedBlindness == 0)
                 {
-                    if (mPtr.DistanceFromPlayer <= SaveGame.Instance.Player.InfravisionRange)
+                    if (mPtr.DistanceFromPlayer <= SaveGame.Player.InfravisionRange)
                     {
                         if ((rPtr.Flags2 & MonsterFlag2.ColdBlood) != 0)
                         {
@@ -956,14 +958,14 @@ namespace Cthangband
                         {
                             doInvisible = true;
                         }
-                        if (!doInvisible || SaveGame.Instance.Player.HasSeeInvisibility)
+                        if (!doInvisible || SaveGame.Player.HasSeeInvisibility)
                         {
                             easy = true;
                             flag = true;
                         }
                     }
                 }
-                if (SaveGame.Instance.Player.HasTelepathy)
+                if (SaveGame.Player.HasTelepathy)
                 {
                     if ((rPtr.Flags2 & MonsterFlag2.EmptyMind) != 0)
                     {
@@ -988,7 +990,7 @@ namespace Cthangband
                 {
                     flag = true;
                 }
-                if (SaveGame.Instance.Player.IsWizard)
+                if (SaveGame.Player.IsWizard)
                 {
                     flag = true;
                 }
@@ -999,9 +1001,9 @@ namespace Cthangband
                 {
                     mPtr.IsVisible = true;
                     _level.RedrawSingleLocation(fy, fx);
-                    if (SaveGame.Instance.TrackedMonsterIndex == mIdx)
+                    if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
-                        SaveGame.Instance.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
                     }
                     if (rPtr.Knowledge.RSights < Constants.MaxShort)
                     {
@@ -1042,9 +1044,9 @@ namespace Cthangband
                 {
                     mPtr.IsVisible = false;
                     _level.RedrawSingleLocation(fy, fx);
-                    if (SaveGame.Instance.TrackedMonsterIndex == mIdx)
+                    if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
-                        SaveGame.Instance.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
                     }
                 }
             }
@@ -1054,7 +1056,7 @@ namespace Cthangband
                 {
                     if ((rPtr.Flags2 & MonsterFlag2.EldritchHorror) != 0)
                     {
-                        mPtr.SanityBlast(false);
+                        mPtr.SanityBlast(SaveGame, false);
                     }
                 }
                 if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
@@ -1062,7 +1064,7 @@ namespace Cthangband
                     mPtr.IndividualMonsterFlags |= Constants.MflagView;
                     if ((mPtr.Mind & Constants.SmFriendly) == 0)
                     {
-                        SaveGame.Instance.Disturb(true);
+                        SaveGame.Disturb(true);
                     }
                 }
             }
@@ -1073,7 +1075,7 @@ namespace Cthangband
                     mPtr.IndividualMonsterFlags &= ~Constants.MflagView;
                     if ((mPtr.Mind & Constants.SmFriendly) == 0)
                     {
-                        SaveGame.Instance.Disturb(true);
+                        SaveGame.Disturb(true);
                     }
                 }
             }
@@ -1081,7 +1083,7 @@ namespace Cthangband
 
         public void UpdateSmartLearn(int mIdx, int what)
         {
-            Player player = SaveGame.Instance.Player;
+            Player player = SaveGame.Player;
             Monster mPtr = _monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
             if (rPtr == null)
@@ -1286,8 +1288,8 @@ namespace Cthangband
             _level.MMax = 1;
             _level.MCnt = 0;
             NumRepro = 0;
-            SaveGame.Instance.TargetWho = 0;
-            SaveGame.Instance.HealthTrack(0);
+            SaveGame.TargetWho = 0;
+            SaveGame.HealthTrack(0);
         }
 
         private void CompactMonstersAux(int i1, int i2)
@@ -1308,13 +1310,13 @@ namespace Cthangband
                 nextOIdx = oPtr.NextInStack;
                 oPtr.HoldingMonsterIndex = i2;
             }
-            if (SaveGame.Instance.TargetWho == i1)
+            if (SaveGame.TargetWho == i1)
             {
-                SaveGame.Instance.TargetWho = i2;
+                SaveGame.TargetWho = i2;
             }
-            if (SaveGame.Instance.TrackedMonsterIndex == i1)
+            if (SaveGame.TrackedMonsterIndex == i1)
             {
-                SaveGame.Instance.HealthTrack(i2);
+                SaveGame.HealthTrack(i2);
             }
             _monsters[i2] = _monsters[i1];
             _monsters[i1] = new Monster();
@@ -1342,26 +1344,26 @@ namespace Cthangband
             }
             if (_level != null)
             {
-                SaveGame.Instance.MsgPrint("Too many monsters!");
+                SaveGame.MsgPrint("Too many monsters!");
             }
             return 0;
         }
 
         private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             int extra = 0;
             int[] hackY = new int[Constants.GroupMax];
             int[] hackX = new int[Constants.GroupMax];
             int total = Program.Rng.DieRoll(13);
-            if (rPtr.Level > SaveGame.Instance.Difficulty)
+            if (rPtr.Level > SaveGame.Difficulty)
             {
-                extra = rPtr.Level - SaveGame.Instance.Difficulty;
+                extra = rPtr.Level - SaveGame.Difficulty;
                 extra = 0 - Program.Rng.DieRoll(extra);
             }
-            else if (rPtr.Level < SaveGame.Instance.Difficulty)
+            else if (rPtr.Level < SaveGame.Difficulty)
             {
-                extra = SaveGame.Instance.Difficulty - rPtr.Level;
+                extra = SaveGame.Difficulty - rPtr.Level;
                 extra = Program.Rng.DieRoll(extra);
             }
             if (extra > 12)
@@ -1406,8 +1408,8 @@ namespace Cthangband
 
         private bool PlaceMonsterOkay(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[_placeMonsterIdx];
-            MonsterRace zPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[_placeMonsterIdx];
+            MonsterRace zPtr = SaveGame.MonsterRaces[rIdx];
             if (zPtr.Character != rPtr.Character)
             {
                 return false;
@@ -1460,29 +1462,29 @@ namespace Cthangband
             }
             if ((rPtr.Flags1 & MonsterFlag1.OnlyGuardian) != 0 || (rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
             {
-                int qIdx = SaveGame.Instance.Quests.GetQuestNumber();
+                int qIdx = SaveGame.Quests.GetQuestNumber();
                 if (qIdx < 0)
                 {
                     return false;
                 }
-                if (rPtr.Index != SaveGame.Instance.Quests[qIdx].RIdx)
+                if (rPtr.Index != SaveGame.Quests[qIdx].RIdx)
                 {
                     return false;
                 }
-                if (rPtr.CurNum >= SaveGame.Instance.Quests[qIdx].ToKill - SaveGame.Instance.Quests[qIdx].Killed)
+                if (rPtr.CurNum >= SaveGame.Quests[qIdx].ToKill - SaveGame.Quests[qIdx].Killed)
                 {
                     return false;
                 }
             }
-            if (rPtr.Level > SaveGame.Instance.Difficulty)
+            if (rPtr.Level > SaveGame.Difficulty)
             {
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
                 {
-                    _level.DangerRating += (rPtr.Level - SaveGame.Instance.Difficulty) * 2;
+                    _level.DangerRating += (rPtr.Level - SaveGame.Difficulty) * 2;
                 }
                 else
                 {
-                    _level.DangerRating += rPtr.Level - SaveGame.Instance.Difficulty;
+                    _level.DangerRating += rPtr.Level - SaveGame.Difficulty;
                 }
             }
             GridTile cPtr = _level.Grid[y][x];
@@ -1551,7 +1553,7 @@ namespace Cthangband
 
         private bool SummonSpecificOkay(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             bool okay = false;
             switch (_summonSpecificType)
             {

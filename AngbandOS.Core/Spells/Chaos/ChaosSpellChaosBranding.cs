@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellChaosBranding : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.BrandWeapon(1);
         }

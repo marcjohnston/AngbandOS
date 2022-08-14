@@ -14,24 +14,24 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellSummonDemon : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("You concentrate on the image of a demon...");
+            saveGame.MsgPrint("You concentrate on the image of a demon...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonDemon,
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonDemon,
                     true))
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level, Constants.SummonDemon))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonDemon))
             {
-                SaveGame.Instance.MsgPrint("The summoned demon gets angry!");
+                saveGame.MsgPrint("The summoned demon gets angry!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                saveGame.MsgPrint("No-one ever turns up.");
             }
         }
 

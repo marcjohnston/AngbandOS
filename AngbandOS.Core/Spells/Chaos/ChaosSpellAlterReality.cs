@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellAlterReality : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("The world changes!");
+            saveGame.MsgPrint("The world changes!");
             {
                 saveGame.DoCmdSaveGame(true);
             }

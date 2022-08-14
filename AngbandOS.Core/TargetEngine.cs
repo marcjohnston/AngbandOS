@@ -16,11 +16,13 @@ namespace Cthangband
     {
         private readonly Level _level;
         private readonly Player _player;
+        private readonly SaveGame SaveGame;
 
-        public TargetEngine(Player player, Level level)
+        public TargetEngine(SaveGame saveGame)
         {
-            _player = player;
-            _level = level;
+            SaveGame = saveGame;
+            _player = saveGame.Player;
+            _level = saveGame.Level;
         }
 
         public bool GetDirectionNoAim(out int dp)
@@ -53,7 +55,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                SaveGame.Instance.MsgPrint("You are confused.");
+                SaveGame.MsgPrint("You are confused.");
             }
             dp = dir;
             return true;
@@ -113,7 +115,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                SaveGame.Instance.MsgPrint("You are confused.");
+                SaveGame.MsgPrint("You are confused.");
             }
             dp = dir;
         }
@@ -176,7 +178,7 @@ namespace Cthangband
             }
             if (Gui.CommandDirection != dir)
             {
-                SaveGame.Instance.MsgPrint("You are confused.");
+                SaveGame.MsgPrint("You are confused.");
             }
             dp = dir;
             return true;
@@ -239,21 +241,21 @@ namespace Cthangband
 
         public bool TargetOkay()
         {
-            if (SaveGame.Instance.TargetWho < 0)
+            if (SaveGame.TargetWho < 0)
             {
                 return true;
             }
-            if (SaveGame.Instance.TargetWho <= 0)
+            if (SaveGame.TargetWho <= 0)
             {
                 return false;
             }
-            if (!TargetAble(SaveGame.Instance.TargetWho))
+            if (!TargetAble(SaveGame.TargetWho))
             {
                 return false;
             }
-            Monster mPtr = _level.Monsters[SaveGame.Instance.TargetWho];
-            SaveGame.Instance.TargetRow = mPtr.MapY;
-            SaveGame.Instance.TargetCol = mPtr.MapX;
+            Monster mPtr = _level.Monsters[SaveGame.TargetWho];
+            SaveGame.TargetRow = mPtr.MapY;
+            SaveGame.TargetCol = mPtr.MapX;
             return true;
         }
 
@@ -262,7 +264,7 @@ namespace Cthangband
             int y = _player.MapY;
             int x = _player.MapX;
             bool done = false;
-            SaveGame.Instance.TargetWho = 0;
+            SaveGame.TargetWho = 0;
             TargetSetPrepare(mode);
             int m = 0;
             if (_level.TempN != 0)
@@ -286,18 +288,18 @@ namespace Cthangband
                         {
                             if (TargetAble(cPtr.MonsterIndex))
                             {
-                                SaveGame.Instance.HealthTrack(cPtr.MonsterIndex);
-                                SaveGame.Instance.TargetWho = cPtr.MonsterIndex;
-                                SaveGame.Instance.TargetRow = y;
-                                SaveGame.Instance.TargetCol = x;
+                                SaveGame.HealthTrack(cPtr.MonsterIndex);
+                                SaveGame.TargetWho = cPtr.MonsterIndex;
+                                SaveGame.TargetRow = y;
+                                SaveGame.TargetCol = x;
                                 done = true;
                             }
                             break;
                         }
                     case 'T':
-                        SaveGame.Instance.TargetWho = -1;
-                        SaveGame.Instance.TargetRow = y;
-                        SaveGame.Instance.TargetCol = x;
+                        SaveGame.TargetWho = -1;
+                        SaveGame.TargetRow = y;
+                        SaveGame.TargetCol = x;
                         done = true;
                         break;
 
@@ -353,7 +355,7 @@ namespace Cthangband
             }
             _level.TempN = 0;
             Gui.PrintLine("", 0, 0);
-            return SaveGame.Instance.TargetWho != 0;
+            return SaveGame.TargetWho != 0;
         }
 
         public bool TgtPt(out int x, out int y)
@@ -364,7 +366,7 @@ namespace Cthangband
             y = _player.MapY;
             bool cv = Gui.CursorVisible;
             Gui.CursorVisible = true;
-            SaveGame.Instance.MsgPrint("Select a point and press space.");
+            SaveGame.MsgPrint("Select a point and press space.");
             while (ch != 27 && ch != ' ')
             {
                 _level.MoveCursorRelative(y, x);
@@ -552,8 +554,8 @@ namespace Cthangband
                         bool recall = false;
                         boring = false;
                         string mName = mPtr.MonsterDesc(0x08);
-                        SaveGame.Instance.HealthTrack(cPtr.MonsterIndex);
-                        SaveGame.Instance.HandleStuff();
+                        SaveGame.HealthTrack(cPtr.MonsterIndex);
+                        SaveGame.HandleStuff();
                         while (true)
                         {
                             if (recall)

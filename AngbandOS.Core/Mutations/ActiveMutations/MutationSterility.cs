@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You suddenly have a headache!");
+            saveGame.MsgPrint("You suddenly have a headache!");
             player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
             level.Monsters.NumRepro += Constants.MaxRepro;
         }

@@ -171,13 +171,13 @@ namespace Cthangband.Mutations
             return list;
         }
 
-        public void GainMutation()
+        public void GainMutation(SaveGame saveGame)
         {
             if (_notPossessed.Count == 0)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You change...");
+            saveGame.MsgPrint("You change...");
             int total = 0;
             foreach (Mutation mutation in _notPossessed)
             {
@@ -203,7 +203,7 @@ namespace Cthangband.Mutations
                             Mutation other = _possessed[j];
                             _possessed.RemoveAt(j);
                             other.OnLose(this);
-                            SaveGame.Instance.MsgPrint(other.LoseMessage);
+                            saveGame.MsgPrint(other.LoseMessage);
                             _notPossessed.Add(other);
                         }
                         else
@@ -214,12 +214,12 @@ namespace Cthangband.Mutations
                 }
                 _possessed.Add(mutation);
                 mutation.OnGain(this);
-                SaveGame.Instance.MsgPrint(mutation.GainMessage);
-                SaveGame.Instance.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                SaveGame.Instance.HandleStuff();
+                saveGame.MsgPrint(mutation.GainMessage);
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.HandleStuff();
                 return;
             }
-            SaveGame.Instance.MsgPrint("Oops! Fell out of mutation list!");
+            saveGame.MsgPrint("Oops! Fell out of mutation list!");
         }
 
         public string[] GetMutationList()
@@ -291,7 +291,7 @@ namespace Cthangband.Mutations
         {
             foreach (Mutation mutation in _possessed)
             {
-                mutation.OnProcessWorld(saveGame, player, level);
+                mutation.OnProcessWorld(saveGame);
             }
         }
     }

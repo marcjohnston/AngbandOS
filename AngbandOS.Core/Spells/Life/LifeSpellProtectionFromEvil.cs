@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellProtectionFromEvil : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedProtectionFromEvil(player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + (3 * player.Level));
+            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + (3 * saveGame.Player.Level));
         }
 
         public override void Initialise(int characterClass)

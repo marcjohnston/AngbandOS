@@ -14,9 +14,9 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellElementalBall : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
@@ -25,22 +25,22 @@ namespace Cthangband.Spells.Folk
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    dummy = new ProjectFire();
+                    dummy = new ProjectFire(saveGame);
                     break;
 
                 case 2:
-                    dummy = new ProjectElec();
+                    dummy = new ProjectElec(saveGame);
                     break;
 
                 case 3:
-                    dummy = new ProjectCold();
+                    dummy = new ProjectCold(saveGame);
                     break;
 
                 default:
-                    dummy = new ProjectAcid();
+                    dummy = new ProjectAcid(saveGame);
                     break;
             }
-            saveGame.FireBall(dummy, dir, 75 + player.Level, 2);
+            saveGame.FireBall(dummy, dir, 75 + saveGame.Player.Level, 2);
         }
 
         public override void Initialise(int characterClass)

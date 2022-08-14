@@ -17,7 +17,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             bool disturb = false;
             MapCoordinate coord = new MapCoordinate();
             int numTraps =

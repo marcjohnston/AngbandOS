@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellNatureAwareness : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            level.MapArea();
+            saveGame.Level.MapArea();
             saveGame.DetectTraps();
             saveGame.DetectDoors();
             saveGame.DetectStairs();

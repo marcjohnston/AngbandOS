@@ -14,23 +14,23 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellVampiricDrain : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            int dummy = player.Level + (Program.Rng.DieRoll(player.Level) * Math.Max(1, player.Level / 10));
-            if (!SaveGame.Instance.DrainLife(dir, dummy))
+            int dummy = saveGame.Player.Level + (Program.Rng.DieRoll(saveGame.Player.Level) * Math.Max(1, saveGame.Player.Level / 10));
+            if (!saveGame.DrainLife(dir, dummy))
             {
                 return;
             }
-            player.RestoreHealth(dummy);
-            dummy = player.Food + Math.Min(5000, 100 * dummy);
-            if (player.Food < Constants.PyFoodMax)
+            saveGame.Player.RestoreHealth(dummy);
+            dummy = saveGame.Player.Food + Math.Min(5000, 100 * dummy);
+            if (saveGame.Player.Food < Constants.PyFoodMax)
             {
-                player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+                saveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
             }
         }
 

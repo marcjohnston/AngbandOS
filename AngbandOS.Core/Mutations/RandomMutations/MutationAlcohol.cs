@@ -21,45 +21,45 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "Your body stops producing alcohol!";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(6400) != 321)
             {
                 return;
             }
-            if (player.HasChaosResistance && player.HasConfusionResistance)
+            if (saveGame.Player.HasChaosResistance && saveGame.Player.HasConfusionResistance)
             {
                 return;
             }
             saveGame.Disturb(false);
-            player.RedrawNeeded.Set(RedrawFlag.PrExtra);
-            SaveGame.Instance.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrExtra);
+            saveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
             if (Program.Rng.DieRoll(20) == 1)
             {
-                SaveGame.Instance.MsgPrint(null);
+                saveGame.MsgPrint(null);
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     saveGame.LoseAllInfo();
                 }
                 else
                 {
-                    level.WizDark();
+                    saveGame.Level.WizDark();
                 }
                 saveGame.TeleportPlayer(100);
-                level.WizDark();
-                SaveGame.Instance.MsgPrint("You wake up somewhere with a sore head...");
-                SaveGame.Instance.MsgPrint("You can't remember a thing, or how you got here!");
+                saveGame.Level.WizDark();
+                saveGame.MsgPrint("You wake up somewhere with a sore head...");
+                saveGame.MsgPrint("You can't remember a thing, or how you got here!");
             }
             else
             {
-                if (!player.HasConfusionResistance)
+                if (!saveGame.Player.HasConfusionResistance)
                 {
-                    player.SetTimedConfusion(player.TimedConfusion + Program.Rng.RandomLessThan(20) + 15);
+                    saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 15);
                 }
-                if (Program.Rng.DieRoll(3) == 1 && !player.HasChaosResistance)
+                if (Program.Rng.DieRoll(3) == 1 && !saveGame.Player.HasChaosResistance)
                 {
-                    SaveGame.Instance.MsgPrint("Thishcischs GooDSChtuff!");
-                    player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(150) + 150);
+                    saveGame.MsgPrint("Thishcischs GooDSChtuff!");
+                    saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(150) + 150);
                 }
             }
         }

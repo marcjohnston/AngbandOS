@@ -63,7 +63,7 @@ namespace Cthangband.Talents
             return $"{Name} ({Level}, {ManaCost}, {BaseFailure})";
         }
 
-        public abstract void Use(Player player, Level level, SaveGame saveGame);
+        public abstract void Use(SaveGame saveGame);
 
         protected abstract string Comment(Player player);
     }

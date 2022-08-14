@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionNoAim(out int dir))
             {
                 return;
@@ -30,10 +30,10 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
-                SaveGame.Instance.MsgPrint("You wave your hands in the air.");
+                saveGame.MsgPrint("You wave your hands in the air.");
                 return;
             }
-            saveGame.FireBolt(new ProjectCold(), dir, 2 * player.Level);
+            saveGame.FireBolt(new ProjectCold(saveGame), dir, 2 * player.Level);
         }
 
         public override string ActivationSummary(int lvl)

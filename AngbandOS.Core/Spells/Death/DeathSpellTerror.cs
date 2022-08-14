@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellTerror : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.TurnMonsters(30 + player.Level);
+            saveGame.TurnMonsters(30 + saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

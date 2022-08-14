@@ -13,14 +13,14 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellRayOfLight : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("A line of light appears.");
+            saveGame.MsgPrint("A line of light appears.");
             saveGame.LightLine(dir);
         }
 

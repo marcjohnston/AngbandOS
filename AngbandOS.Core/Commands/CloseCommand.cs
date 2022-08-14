@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction

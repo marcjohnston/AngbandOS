@@ -21,19 +21,19 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer afflicted by a hallucinatory insanity!";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(6400) != 42)
             {
                 return;
             }
-            if (player.HasChaosResistance)
+            if (saveGame.Player.HasChaosResistance)
             {
                 return;
             }
             saveGame.Disturb(false);
-            player.RedrawNeeded.Set(RedrawFlag.PrExtra);
-            player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(50) + 20);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrExtra);
+            saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(50) + 20);
         }
     }
 }

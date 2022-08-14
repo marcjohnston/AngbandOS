@@ -20,8 +20,8 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("Radiation flows from your body!");
-            saveGame.FireBall(new ProjectNuke(), 0, player.Level * 2, 3 + (player.Level / 20));
+            saveGame.MsgPrint("Radiation flows from your body!");
+            saveGame.FireBall(new ProjectNuke(saveGame), 0, player.Level * 2, 3 + (player.Level / 20));
         }
 
         public override string ActivationSummary(int lvl)

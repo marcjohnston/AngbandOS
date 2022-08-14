@@ -25,7 +25,7 @@ namespace Cthangband.Commands
         {
             int itemIndex = -999;
             int dir;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (itemIndex == -999)
             {
                 // No item passed in, so get one; filtering to activatable items only
@@ -186,7 +186,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectFire(), dir, 120, 3);
+                            saveGame.FireBall(new ProjectFire(saveGame), dir, 120, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
                             break;
                         }
@@ -198,7 +198,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectCold(), dir, 200, 3);
+                            saveGame.FireBall(new ProjectCold(saveGame), dir, 200, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(325) + 325;
                             break;
                         }
@@ -210,7 +210,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectElec(), dir, 250, 3);
+                            saveGame.FireBall(new ProjectElec(saveGame), dir, 250, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(425) + 425;
                             break;
                         }
@@ -232,7 +232,7 @@ namespace Cthangband.Commands
                             saveGame.MsgPrint("Your armor is surrounded by lightning...");
                             for (int i = 0; i < 8; i++)
                             {
-                                saveGame.FireBall(new ProjectElec(), saveGame.Level.OrderedDirection[i], 150, 3);
+                                saveGame.FireBall(new ProjectElec(saveGame), saveGame.Level.OrderedDirection[i], 150, 3);
                             }
                             item.RechargeTimeLeft = 1000;
                             break;
@@ -245,7 +245,7 @@ namespace Cthangband.Commands
                                 return;
                             }
                             saveGame.MsgPrint("You breathe the elements.");
-                            saveGame.FireBall(new ProjectMissile(), dir, 300, 4);
+                            saveGame.FireBall(new ProjectMissile(saveGame), dir, 300, 4);
                             saveGame.MsgPrint("Your armor glows many colors...");
                             saveGame.Player.SetTimedFear(0);
                             saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
@@ -378,7 +378,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectMissile(), dir,
+                            saveGame.FireBolt(new ProjectMissile(saveGame), dir,
                                 Program.Rng.DiceRoll(2, 6));
                             item.RechargeTimeLeft = 2;
                             break;
@@ -391,7 +391,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
+                            saveGame.FireBolt(new ProjectFire(saveGame), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
@@ -403,7 +403,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
+                            saveGame.FireBolt(new ProjectCold(saveGame), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
@@ -415,7 +415,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
+                            saveGame.FireBolt(new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
@@ -427,7 +427,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectAcid(), dir, Program.Rng.DiceRoll(5, 8));
+                            saveGame.FireBolt(new ProjectAcid(saveGame), dir, Program.Rng.DiceRoll(5, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
@@ -439,7 +439,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectArrow(), dir, 150);
+                            saveGame.FireBolt(new ProjectArrow(saveGame), dir, 150);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
                             break;
                         }
@@ -475,7 +475,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectFire(), dir, Program.Rng.DiceRoll(9, 8));
+                            saveGame.FireBolt(new ProjectFire(saveGame), dir, Program.Rng.DiceRoll(9, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
                             break;
                         }
@@ -487,7 +487,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectCold(), dir, Program.Rng.DiceRoll(6, 8));
+                            saveGame.FireBolt(new ProjectCold(saveGame), dir, Program.Rng.DiceRoll(6, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
                             break;
                         }
@@ -499,7 +499,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectElec(), dir, Program.Rng.DiceRoll(4, 8));
+                            saveGame.FireBolt(new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(4, 8));
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
                             break;
                         }
@@ -511,7 +511,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectPois(), dir, 12, 3);
+                            saveGame.FireBall(new ProjectPois(saveGame), dir, 12, 3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
                             break;
                         }
@@ -523,7 +523,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectCold(), dir, 48, 2);
+                            saveGame.FireBall(new ProjectCold(saveGame), dir, 48, 2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
                             break;
                         }
@@ -575,7 +575,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectCold(), dir, 100, 2);
+                            saveGame.FireBall(new ProjectCold(saveGame), dir, 100, 2);
                             item.RechargeTimeLeft = 300;
                             break;
                         }
@@ -595,7 +595,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectFire(), dir, 72, 2);
+                            saveGame.FireBall(new ProjectFire(saveGame), dir, 72, 2);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
@@ -619,7 +619,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectElec(), dir, 100, 3);
+                            saveGame.FireBall(new ProjectElec(saveGame), dir, 100, 3);
                             item.RechargeTimeLeft = 500;
                             break;
                         }
@@ -692,7 +692,7 @@ namespace Cthangband.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBall(new ProjectFire(), dir, 72, 3);
+                            saveGame.FireBall(new ProjectFire(saveGame), dir, 72, 3);
                             item.RechargeTimeLeft = 100;
                             break;
                         }
@@ -775,35 +775,35 @@ namespace Cthangband.Commands
                     case DragonArmour.SvDragonBlue:
                         {
                             saveGame.MsgPrint("You breathe lightning.");
-                            saveGame.FireBall(new ProjectElec(), dir, 100, -2);
+                            saveGame.FireBall(new ProjectElec(saveGame), dir, 100, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
                             saveGame.MsgPrint("You breathe frost.");
-                            saveGame.FireBall(new ProjectCold(), dir, 110, -2);
+                            saveGame.FireBall(new ProjectCold(saveGame), dir, 110, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
                             saveGame.MsgPrint("You breathe acid.");
-                            saveGame.FireBall(new ProjectAcid(), dir, 130, -2);
+                            saveGame.FireBall(new ProjectAcid(saveGame), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
                             saveGame.MsgPrint("You breathe poison gas.");
-                            saveGame.FireBall(new ProjectPois(), dir, 150, -2);
+                            saveGame.FireBall(new ProjectPois(saveGame), dir, 150, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
                             saveGame.MsgPrint("You breathe fire.");
-                            saveGame.FireBall(new ProjectFire(), dir, 200, -2);
+                            saveGame.FireBall(new ProjectFire(saveGame), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -817,27 +817,27 @@ namespace Cthangband.Commands
                             switch (chance)
                             {
                                 case 0:
-                                    saveGame.FireBall(new ProjectFire(),
+                                    saveGame.FireBall(new ProjectFire(saveGame),
                                         dir, 250, -2);
                                     break;
 
                                 case 1:
-                                    saveGame.FireBall(new ProjectElec(),
+                                    saveGame.FireBall(new ProjectElec(saveGame),
                                         dir, 250, -2);
                                     break;
 
                                 case 2:
-                                    saveGame.FireBall(new ProjectCold(),
+                                    saveGame.FireBall(new ProjectCold(saveGame),
                                         dir, 250, -2);
                                     break;
 
                                 case 3:
-                                    saveGame.FireBall(new ProjectAcid(),
+                                    saveGame.FireBall(new ProjectAcid(saveGame),
                                         dir, 250, -2);
                                     break;
 
                                 case 4:
-                                    saveGame.FireBall(new ProjectPois(),
+                                    saveGame.FireBall(new ProjectPois(saveGame),
                                         dir, 250, -2);
                                     break;
                             }
@@ -847,14 +847,14 @@ namespace Cthangband.Commands
                     case DragonArmour.SvDragonBronze:
                         {
                             saveGame.MsgPrint("You breathe confusion.");
-                            saveGame.FireBall(new ProjectConfusion(), dir, 120, -2);
+                            saveGame.FireBall(new ProjectConfusion(saveGame), dir, 120, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
                             saveGame.MsgPrint("You breathe sound.");
-                            saveGame.FireBall(new ProjectSound(), dir, 130, -2);
+                            saveGame.FireBall(new ProjectSound(saveGame), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -864,7 +864,7 @@ namespace Cthangband.Commands
                             string element = chance == 1 ? "chaos" : "disenchantment";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
-                                projectile: chance == 1 ? (Projectile)new ProjectChaos() : new ProjectDisenchant(), dir: dir, dam: 220, rad: -2);
+                                projectile: chance == 1 ? (Projectile)new ProjectChaos(saveGame) : new ProjectDisenchant(saveGame), dir: dir, dam: 220, rad: -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -874,7 +874,7 @@ namespace Cthangband.Commands
                             string element = chance == 1 ? "sound" : "shards";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
-                                chance == 1 ? (Projectile)new ProjectSound() : new ProjectExplode(), dir, 230, -2);
+                                chance == 1 ? (Projectile)new ProjectSound(saveGame) : new ProjectExplode(saveGame), dir, 230, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -887,10 +887,10 @@ namespace Cthangband.Commands
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
                                 chance == 1
-                                    ? new ProjectChaos()
+                                    ? new ProjectChaos(saveGame)
                                     : (chance == 2
-                                        ? new ProjectDisenchant()
-                                        : (chance == 3 ? (Projectile)new ProjectSound() : new ProjectExplode())), dir, 250, -2);
+                                        ? new ProjectDisenchant(saveGame)
+                                        : (chance == 3 ? (Projectile)new ProjectSound(saveGame) : new ProjectExplode(saveGame))), dir, 250, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -900,14 +900,14 @@ namespace Cthangband.Commands
                             string element = chance == 0 ? "light" : "darkness";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
-                                chance == 0 ? (Projectile)new ProjectLight() : new ProjectDark(), dir, 200, -2);
+                                chance == 0 ? (Projectile)new ProjectLight(saveGame) : new ProjectDark(saveGame), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonPower:
                         {
                             saveGame.MsgPrint("You breathe the elements.");
-                            saveGame.FireBall(new ProjectMissile(), dir, 300, -3);
+                            saveGame.FireBall(new ProjectMissile(saveGame), dir, 300, -3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -925,21 +925,21 @@ namespace Cthangband.Commands
                 {
                     case RingType.Acid:
                         {
-                            saveGame.FireBall(new ProjectAcid(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectAcid(saveGame), dir, 50, 2);
                             saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
-                            saveGame.FireBall(new ProjectCold(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectCold(saveGame), dir, 50, 2);
                             saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
-                            saveGame.FireBall(new ProjectFire(), dir, 50, 2);
+                            saveGame.FireBall(new ProjectFire(saveGame), dir, 50, 2);
                             saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;

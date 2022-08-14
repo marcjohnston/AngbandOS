@@ -13,15 +13,15 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellHorrificVisage : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.FearMonster(dir, player.Level);
-            SaveGame.Instance.StunMonster(dir, player.Level);
+            saveGame.FearMonster(dir, saveGame.Player.Level);
+            saveGame.StunMonster(dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

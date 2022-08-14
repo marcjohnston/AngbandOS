@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellBanish : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.BanishMonsters(player.Level * 4);
+            saveGame.BanishMonsters(saveGame.Player.Level * 4);
         }
 
         public override void Initialise(int characterClass)

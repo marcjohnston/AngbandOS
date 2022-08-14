@@ -14,30 +14,30 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellMindBlast : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (player.ProfessionIndex)
+            switch (saveGame.Player.ProfessionIndex)
             {
                 case CharacterClass.Mage:
-                    beam = player.Level;
+                    beam = saveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = player.Level + 10;
+                    beam = saveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = player.Level / 2;
+                    beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam - 10, new ProjectPsi(), dir,
-                Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectPsi(saveGame), dir,
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
         public override void Initialise(int characterClass)

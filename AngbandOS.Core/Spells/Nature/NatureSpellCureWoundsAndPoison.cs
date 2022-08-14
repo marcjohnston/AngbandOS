@@ -13,10 +13,10 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellCureWoundsAndPoison : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedBleeding(0);
-            player.SetTimedPoison(0);
+            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.SetTimedPoison(0);
         }
 
         public override void Initialise(int characterClass)

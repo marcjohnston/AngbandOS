@@ -14,14 +14,14 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellTeleportAway : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectAwayAll(), dir, player.Level);
+            saveGame.FireBeam(new ProjectAwayAll(saveGame), dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

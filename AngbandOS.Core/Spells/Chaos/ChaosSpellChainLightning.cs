@@ -14,12 +14,12 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellChainLightning : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             for (int dir = 0; dir <= 9; dir++)
             {
-                saveGame.FireBeam(new ProjectElec(), dir,
-                    Program.Rng.DiceRoll(5 + (player.Level / 10), 8));
+                saveGame.FireBeam(new ProjectElec(saveGame), dir,
+                    Program.Rng.DiceRoll(5 + (saveGame.Player.Level / 10), 8));
             }
         }
 

@@ -18,7 +18,7 @@ namespace Cthangband.Commands
         public void Execute(SaveGame saveGame)
         {
             // Get the location to be spiked
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];

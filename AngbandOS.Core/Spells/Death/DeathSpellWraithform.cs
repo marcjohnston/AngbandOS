@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellWraithform : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedEtherealness(player.TimedEtherealness + Program.Rng.DieRoll(player.Level / 2) + (player.Level / 2));
+            saveGame.Player.SetTimedEtherealness(saveGame.Player.TimedEtherealness + Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
         }
 
         public override void Initialise(int characterClass)

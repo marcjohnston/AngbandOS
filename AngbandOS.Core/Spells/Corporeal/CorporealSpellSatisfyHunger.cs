@@ -14,9 +14,9 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellSatisfyHunger : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetFood(Constants.PyFoodMax - 1);
+            saveGame.Player.SetFood(Constants.PyFoodMax - 1);
         }
 
         public override void Initialise(int characterClass)

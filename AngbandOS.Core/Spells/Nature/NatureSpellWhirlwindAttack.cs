@@ -13,17 +13,17 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellWhirlwindAttack : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             for (int dir = 0; dir <= 9; dir++)
             {
-                int y = player.MapY + level.KeypadDirectionYOffset[dir];
-                int x = player.MapX + level.KeypadDirectionXOffset[dir];
-                GridTile cPtr = level.Grid[y][x];
-                Monster mPtr = level.Monsters[cPtr.MonsterIndex];
-                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || level.GridPassable(y, x)))
+                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile cPtr = saveGame.Level.Grid[y][x];
+                Monster mPtr = saveGame.Level.Monsters[cPtr.MonsterIndex];
+                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || saveGame.Level.GridPassable(y, x)))
                 {
-                    SaveGame.Instance.PlayerAttackMonster(y, x);
+                    saveGame.PlayerAttackMonster(y, x);
                 }
             }
         }

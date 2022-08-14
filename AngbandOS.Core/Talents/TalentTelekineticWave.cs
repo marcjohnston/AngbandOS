@@ -22,11 +22,11 @@ namespace Cthangband.Talents
             BaseFailure = 45;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint("A wave of pure physical force radiates out from your body!");
-            SaveGame.Instance.Project(0, 3 + (player.Level / 10), player.MapY, player.MapX,
-                player.Level * (player.Level > 39 ? 4 : 3), new ProjectTelekinesis(),
+            saveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
+            saveGame.Project(0, 3 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX,
+                saveGame.Player.Level * (saveGame.Player.Level > 39 ? 4 : 3), new ProjectTelekinesis(saveGame),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
         }
 

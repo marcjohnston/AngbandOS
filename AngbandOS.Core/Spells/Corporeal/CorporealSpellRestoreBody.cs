@@ -13,14 +13,14 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellRestoreBody : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.TryRestoringAbilityScore(Ability.Strength);
-            player.TryRestoringAbilityScore(Ability.Intelligence);
-            player.TryRestoringAbilityScore(Ability.Wisdom);
-            player.TryRestoringAbilityScore(Ability.Dexterity);
-            player.TryRestoringAbilityScore(Ability.Constitution);
-            player.TryRestoringAbilityScore(Ability.Charisma);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+            saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
         }
 
         public override void Initialise(int characterClass)

@@ -13,21 +13,21 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellDimensionDoor : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            SaveGame.Instance.MsgPrint("You open a dimensional gate. Choose a destination.");
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            saveGame.MsgPrint("You open a dimensional gate. Choose a destination.");
             if (!targetEngine.TgtPt(out int ii, out int ij))
             {
                 return;
             }
-            player.Energy -= 60 - player.Level;
-            if (!level.GridPassableNoCreature(ij, ii) || level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-                level.Distance(ij, ii, player.MapY, player.MapX) > player.Level + 2 ||
-                Program.Rng.RandomLessThan(player.Level * player.Level / 2) == 0)
+            saveGame.Player.Energy -= 60 - saveGame.Player.Level;
+            if (!saveGame.Level.GridPassableNoCreature(ij, ii) || saveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+                saveGame.Level.Distance(ij, ii, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
+                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
             {
-                SaveGame.Instance.MsgPrint("You fail to exit the astral plane correctly!");
-                player.Energy -= 100;
+                saveGame.MsgPrint("You fail to exit the astral plane correctly!");
+                saveGame.Player.Energy -= 100;
                 saveGame.TeleportPlayer(10);
             }
             else

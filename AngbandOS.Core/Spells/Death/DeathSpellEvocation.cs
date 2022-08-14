@@ -13,11 +13,11 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellEvocation : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelMonsters(player.Level * 4);
-            saveGame.TurnMonsters(player.Level * 4);
-            saveGame.BanishMonsters(player.Level * 4);
+            saveGame.DispelMonsters(saveGame.Player.Level * 4);
+            saveGame.TurnMonsters(saveGame.Player.Level * 4);
+            saveGame.BanishMonsters(saveGame.Player.Level * 4);
         }
 
         public override void Initialise(int characterClass)

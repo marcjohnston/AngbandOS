@@ -19,7 +19,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionNoAim(out int dir))
             {
                 return;
@@ -29,7 +29,7 @@ namespace Cthangband.Mutations.ActiveMutations
             GridTile cPtr = level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
-                SaveGame.Instance.MsgPrint("You sense no evil there!");
+                saveGame.MsgPrint("You sense no evil there!");
                 return;
             }
             Monster mPtr = level.Monsters[cPtr.MonsterIndex];
@@ -37,11 +37,11 @@ namespace Cthangband.Mutations.ActiveMutations
             if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
             {
                 level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                SaveGame.Instance.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
+                saveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("Your invocation is ineffectual!");
+                saveGame.MsgPrint("Your invocation is ineffectual!");
             }
         }
 

@@ -14,17 +14,17 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellHolyOrb : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.FireBall(new ProjectHolyFire(), dir,
-                Program.Rng.DiceRoll(3, 6) + player.Level + (player.Level /
-                (player.ProfessionIndex == CharacterClass.Priest || player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
-                player.Level < 30 ? 2 : 3);
+            saveGame.FireBall(new ProjectHolyFire(saveGame), dir,
+                Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
+                (saveGame.Player.ProfessionIndex == CharacterClass.Priest || saveGame.Player.ProfessionIndex == CharacterClass.HighMage ? 2 : 4)),
+                saveGame.Player.Level < 30 ? 2 : 3);
         }
 
         public override void Initialise(int characterClass)

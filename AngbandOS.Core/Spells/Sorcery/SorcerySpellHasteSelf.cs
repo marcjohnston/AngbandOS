@@ -13,15 +13,15 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellHasteSelf : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            if (player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste == 0)
             {
-                player.SetTimedHaste(Program.Rng.DieRoll(20 + player.Level) + player.Level);
+                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                player.SetTimedHaste(player.TimedHaste + Program.Rng.DieRoll(5));
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
             }
         }
 

@@ -14,32 +14,32 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellWonder : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (player.ProfessionIndex)
+            switch (saveGame.Player.ProfessionIndex)
             {
                 case CharacterClass.Mage:
-                    beam = player.Level;
+                    beam = saveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = player.Level + 10;
+                    beam = saveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = player.Level / 2;
+                    beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            int die = Program.Rng.DieRoll(100) + (player.Level / 5);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            int die = Program.Rng.DieRoll(100) + (saveGame.Player.Level / 5);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
             if (die > 100)
             {
-                SaveGame.Instance.MsgPrint("You feel a surge of power!");
+                saveGame.MsgPrint("You feel a surge of power!");
             }
             if (die < 8)
             {
@@ -59,16 +59,16 @@ namespace Cthangband.Spells.Chaos
             }
             else if (die < 36)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(), dir,
-                    Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 4));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(saveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
             }
             else if (die < 41)
             {
-                saveGame.ConfuseMonster(dir, player.Level);
+                saveGame.ConfuseMonster(dir, saveGame.Player.Level);
             }
             else if (die < 46)
             {
-                saveGame.FireBall(new ProjectPois(), dir, 20 + (player.Level / 2), 3);
+                saveGame.FireBall(new ProjectPois(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
             }
             else if (die < 51)
             {
@@ -76,23 +76,23 @@ namespace Cthangband.Spells.Chaos
             }
             else if (die < 56)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(), dir,
-                    Program.Rng.DiceRoll(3 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(saveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 61)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(), dir,
-                    Program.Rng.DiceRoll(5 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(saveGame), dir,
+                    Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 66)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectAcid(), dir,
-                    Program.Rng.DiceRoll(6 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam, new ProjectAcid(saveGame), dir,
+                    Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 71)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectFire(), dir,
-                    Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam, new ProjectFire(saveGame), dir,
+                    Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 76)
             {
@@ -100,31 +100,31 @@ namespace Cthangband.Spells.Chaos
             }
             else if (die < 81)
             {
-                saveGame.FireBall(new ProjectElec(), dir, 30 + (player.Level / 2), 2);
+                saveGame.FireBall(new ProjectElec(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
             }
             else if (die < 86)
             {
-                saveGame.FireBall(new ProjectAcid(), dir, 40 + player.Level, 2);
+                saveGame.FireBall(new ProjectAcid(saveGame), dir, 40 + saveGame.Player.Level, 2);
             }
             else if (die < 91)
             {
-                saveGame.FireBall(new ProjectIce(), dir, 70 + player.Level, 3);
+                saveGame.FireBall(new ProjectIce(saveGame), dir, 70 + saveGame.Player.Level, 3);
             }
             else if (die < 96)
             {
-                saveGame.FireBall(new ProjectFire(), dir, 80 + player.Level, 3);
+                saveGame.FireBall(new ProjectFire(saveGame), dir, 80 + saveGame.Player.Level, 3);
             }
             else if (die < 101)
             {
-                saveGame.DrainLife(dir, 100 + player.Level);
+                saveGame.DrainLife(dir, 100 + saveGame.Player.Level);
             }
             else if (die < 104)
             {
-                saveGame.Earthquake(player.MapY, player.MapX, 12);
+                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 12);
             }
             else if (die < 106)
             {
-                saveGame.DestroyArea(player.MapY, player.MapX, 15);
+                saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
             }
             else if (die < 108)
             {
@@ -139,7 +139,7 @@ namespace Cthangband.Spells.Chaos
                 saveGame.DispelMonsters(150);
                 saveGame.SlowMonsters();
                 saveGame.SleepMonsters();
-                player.RestoreHealth(300);
+                saveGame.Player.RestoreHealth(300);
             }
         }
 

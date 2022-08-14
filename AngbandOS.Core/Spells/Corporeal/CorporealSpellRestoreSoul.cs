@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellRestoreSoul : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.RestoreLevel();
+            saveGame.Player.RestoreLevel();
         }
 
         public override void Initialise(int characterClass)

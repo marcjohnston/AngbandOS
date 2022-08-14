@@ -14,14 +14,14 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellDarknessStorm : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectDark(), dir, 120, 4);
+            saveGame.FireBall(new ProjectDark(saveGame), dir, 120, 4);
         }
 
         public override void Initialise(int characterClass)

@@ -15,49 +15,49 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellInvokeSpirits : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (player.ProfessionIndex)
+            switch (saveGame.Player.ProfessionIndex)
             {
                 case CharacterClass.Mage:
-                    beam = player.Level;
+                    beam = saveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = player.Level + 10;
+                    beam = saveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = player.Level / 2;
+                    beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            int die = Program.Rng.DieRoll(100) + (player.Level / 5);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            int die = Program.Rng.DieRoll(100) + (saveGame.Player.Level / 5);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You call on the power of the dead...");
+            saveGame.MsgPrint("You call on the power of the dead...");
             if (die > 100)
             {
-                SaveGame.Instance.MsgPrint("You feel a surge of eldritch force!");
+                saveGame.MsgPrint("You feel a surge of eldritch force!");
             }
             if (die < 8)
             {
-                SaveGame.Instance.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-                level.Monsters.SummonSpecific(player.MapY, player.MapX, SaveGame.Instance.Difficulty,
+                saveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                     Constants.SummonUndead);
             }
             if (die < 14)
             {
-                SaveGame.Instance.MsgPrint("An unnamable evil brushes against your mind...");
-                player.SetTimedFear(player.TimedFear + Program.Rng.DieRoll(4) + 4);
+                saveGame.MsgPrint("An unnamable evil brushes against your mind...");
+                saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 26)
             {
-                SaveGame.Instance.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-                player.SetTimedConfusion(player.TimedConfusion + Program.Rng.DieRoll(4) + 4);
+                saveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
+                saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 31)
             {
@@ -65,16 +65,16 @@ namespace Cthangband.Spells.Death
             }
             if (die < 36)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(), dir,
-                    Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 4));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(saveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
             }
             if (die < 41)
             {
-                saveGame.ConfuseMonster(dir, player.Level);
+                saveGame.ConfuseMonster(dir, saveGame.Player.Level);
             }
             if (die < 46)
             {
-                saveGame.FireBall(new ProjectPois(), dir, 20 + (player.Level / 2), 3);
+                saveGame.FireBall(new ProjectPois(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
             }
             if (die < 51)
             {
@@ -82,23 +82,23 @@ namespace Cthangband.Spells.Death
             }
             if (die < 56)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(), dir,
-                    Program.Rng.DiceRoll(3 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(saveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 61)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(), dir,
-                    Program.Rng.DiceRoll(5 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(saveGame), dir,
+                    Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 66)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectAcid(), dir,
-                    Program.Rng.DiceRoll(6 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam, new ProjectAcid(saveGame), dir,
+                    Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 71)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectFire(), dir,
-                    Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8));
+                saveGame.FireBoltOrBeam(beam, new ProjectFire(saveGame), dir,
+                    Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 76)
             {
@@ -106,31 +106,31 @@ namespace Cthangband.Spells.Death
             }
             if (die < 81)
             {
-                saveGame.FireBall(new ProjectElec(), dir, 30 + (player.Level / 2), 2);
+                saveGame.FireBall(new ProjectElec(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
             }
             if (die < 86)
             {
-                saveGame.FireBall(new ProjectAcid(), dir, 40 + player.Level, 2);
+                saveGame.FireBall(new ProjectAcid(saveGame), dir, 40 + saveGame.Player.Level, 2);
             }
             if (die < 91)
             {
-                saveGame.FireBall(new ProjectIce(), dir, 70 + player.Level, 3);
+                saveGame.FireBall(new ProjectIce(saveGame), dir, 70 + saveGame.Player.Level, 3);
             }
             if (die < 96)
             {
-                saveGame.FireBall(new ProjectFire(), dir, 80 + player.Level, 3);
+                saveGame.FireBall(new ProjectFire(saveGame), dir, 80 + saveGame.Player.Level, 3);
             }
             if (die < 101)
             {
-                saveGame.DrainLife(dir, 100 + player.Level);
+                saveGame.DrainLife(dir, 100 + saveGame.Player.Level);
             }
             if (die < 104)
             {
-                saveGame.Earthquake(player.MapY, player.MapX, 12);
+                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 12);
             }
             if (die < 106)
             {
-                saveGame.DestroyArea(player.MapY, player.MapX, 15);
+                saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
             }
             if (die < 108)
             {
@@ -143,10 +143,10 @@ namespace Cthangband.Spells.Death
             saveGame.DispelMonsters(150);
             saveGame.SlowMonsters();
             saveGame.SleepMonsters();
-            player.RestoreHealth(300);
+            saveGame.Player.RestoreHealth(300);
             if (die < 31)
             {
-                SaveGame.Instance.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
+                saveGame.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
             }
         }
 

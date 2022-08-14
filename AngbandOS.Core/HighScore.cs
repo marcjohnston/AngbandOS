@@ -39,7 +39,7 @@ namespace Cthangband
             if (player.IsDead)
             {
                 When = DateTime.Now.ToString("dd-MMM-yyyy");
-                How = SaveGame.Instance.DiedFrom;
+                How = saveGame.DiedFrom;
             }
             else
             {

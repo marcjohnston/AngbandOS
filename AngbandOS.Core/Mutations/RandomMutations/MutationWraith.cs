@@ -20,16 +20,16 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are firmly in the physical world.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("You feel insubstantial!");
-            SaveGame.Instance.MsgPrint(null);
-            player.SetTimedEtherealness(player.TimedEtherealness + Program.Rng.DieRoll(player.Level / 2) + player.Level / 2);
+            saveGame.MsgPrint("You feel insubstantial!");
+            saveGame.MsgPrint(null);
+            saveGame.Player.SetTimedEtherealness(saveGame.Player.TimedEtherealness + Program.Rng.DieRoll(saveGame.Player.Level / 2) + saveGame.Player.Level / 2);
         }
     }
 }

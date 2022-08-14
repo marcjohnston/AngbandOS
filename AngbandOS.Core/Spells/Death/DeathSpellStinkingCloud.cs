@@ -14,14 +14,14 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellStinkingCloud : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectPois(), dir, 10 + (player.Level / 2), 2);
+            saveGame.FireBall(new ProjectPois(saveGame), dir, 10 + (saveGame.Player.Level / 2), 2);
         }
 
         public override void Initialise(int characterClass)

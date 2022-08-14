@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellDispelEvil : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelEvil(player.Level * 4);
+            saveGame.DispelEvil(saveGame.Player.Level * 4);
         }
 
         public override void Initialise(int characterClass)

@@ -19,7 +19,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You concentrate...");
+            saveGame.MsgPrint("You concentrate...");
             saveGame.TeleportPlayer(10 + (4 * player.Level));
         }
 

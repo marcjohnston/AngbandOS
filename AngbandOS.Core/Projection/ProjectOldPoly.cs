@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectOldPoly : Projectile
     {
-        public ProjectOldPoly()
+        public ProjectOldPoly(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "PurpleSplat";
             ImpactGraphic = "";
@@ -61,7 +61,7 @@ namespace Cthangband.Projection
                 bool getAngry = Program.Rng.DieRoll(8) == 1;
                 if (getAngry && who == 0)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -108,13 +108,13 @@ namespace Cthangband.Projection
             {
                 note = " is unaffected!";
                 bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
-                int tmp = SaveGame.Instance.PolymorphMonster(mPtr.Race);
+                int tmp = SaveGame.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
                     note = " changes!";
                     dam = 0;
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    MonsterRace race = SaveGame.Instance.MonsterRaces[tmp];
+                    MonsterRace race = SaveGame.MonsterRaces[tmp];
                     Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
                     mPtr = Level.Monsters[cPtr.MonsterIndex];
                 }
@@ -134,18 +134,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -162,7 +162,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -171,7 +171,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -199,7 +199,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

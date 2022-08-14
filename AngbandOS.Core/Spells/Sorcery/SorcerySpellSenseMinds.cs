@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellSenseMinds : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedTelepathy(player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
+            saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
         }
 
         public override void Initialise(int characterClass)

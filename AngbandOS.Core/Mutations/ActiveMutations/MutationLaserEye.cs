@@ -20,12 +20,12 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectLight(), dir, 2 * player.Level);
+            saveGame.FireBeam(new ProjectLight(saveGame), dir, 2 * player.Level);
         }
 
         public override string ActivationSummary(int lvl)

@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellIdentifyTrue : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.IdentifyFully();
         }

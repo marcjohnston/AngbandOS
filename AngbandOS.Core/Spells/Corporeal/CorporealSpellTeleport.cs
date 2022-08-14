@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellTeleport : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.TeleportPlayer(player.Level * 3);
+            saveGame.TeleportPlayer(saveGame.Player.Level * 3);
         }
 
         public override void Initialise(int characterClass)

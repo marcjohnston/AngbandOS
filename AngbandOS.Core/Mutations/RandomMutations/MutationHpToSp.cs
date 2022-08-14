@@ -20,24 +20,24 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You are no longer subject to fits of painful clarity.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
             {
                 return;
             }
-            int wounds = player.MaxMana - player.Mana;
+            int wounds = saveGame.Player.MaxMana - saveGame.Player.Mana;
             if (wounds <= 0)
             {
                 return;
             }
-            int healing = player.Health;
+            int healing = saveGame.Player.Health;
             if (healing > wounds)
             {
                 healing = wounds;
             }
-            player.Mana += healing;
-            player.TakeHit(healing, "blood rushing to the head");
+            saveGame.Player.Mana += healing;
+            saveGame.Player.TakeHit(healing, "blood rushing to the head");
         }
     }
 }

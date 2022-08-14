@@ -14,35 +14,35 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellRaiseTheDead : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level * 3 / 2,
-                    player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+                    saveGame.Player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
                 {
-                    SaveGame.Instance.MsgPrint(
+                    saveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    SaveGame.Instance.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                    saveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
             else
             {
-                if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level * 3 / 2,
-                    player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead,
-                    player.Level > 24 && Program.Rng.DieRoll(3) == 1))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+                    saveGame.Player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead,
+                    saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
-                    SaveGame.Instance.MsgPrint(
+                    saveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    SaveGame.Instance.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                    saveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellDetectTreasure : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectTreasure();
             saveGame.DetectObjectsGold();

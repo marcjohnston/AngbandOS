@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellMutateBody : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.Dna.GainMutation();
+            saveGame.Player.Dna.GainMutation(saveGame);
         }
 
         public override void Initialise(int characterClass)

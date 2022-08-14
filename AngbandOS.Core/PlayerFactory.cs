@@ -199,11 +199,11 @@ namespace Cthangband
         private Realm _prevRealm2;
         private int _prevSex;
 
-        public Player CharacterGeneration(ExPlayer ex)
+        public Player CharacterGeneration(SaveGame saveGame, ExPlayer ex)
         {
             Gui.SetBackground(BackgroundImage.Paper);
             Gui.Terminal.PlayMusic(MusicTrack.Chargen);
-            _player = new Player();
+            _player = new Player(saveGame);
             if (PlayerBirth(ex))
             {
                 return _player;

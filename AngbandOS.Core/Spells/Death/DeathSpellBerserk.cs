@@ -13,11 +13,11 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellBerserk : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
-            player.RestoreHealth(30);
-            player.SetTimedFear(0);
+            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.RestoreHealth(30);
+            saveGame.Player.SetTimedFear(0);
         }
 
         public override void Initialise(int characterClass)

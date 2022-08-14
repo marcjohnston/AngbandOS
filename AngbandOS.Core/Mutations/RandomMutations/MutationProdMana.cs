@@ -21,18 +21,18 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You stop producing magical energy uncontrollably.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("Magical energy flows through you! You must release it!");
-            SaveGame.Instance.MsgPrint(null);
+            saveGame.MsgPrint("Magical energy flows through you! You must release it!");
+            saveGame.MsgPrint(null);
             targetEngine.GetDirectionNoAutoAim(out int dire);
-            saveGame.FireBall(new ProjectMana(), dire, player.Level * 2, 3);
+            saveGame.FireBall(new ProjectMana(saveGame), dire, saveGame.Player.Level * 2, 3);
         }
     }
 }

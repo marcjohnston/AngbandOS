@@ -20,7 +20,7 @@ namespace Cthangband.Commands
         {
             // Assume we won't disturb the player
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
 
             // Get the direction in which to alter something
             if (targetEngine.GetDirectionNoAim(out int dir))

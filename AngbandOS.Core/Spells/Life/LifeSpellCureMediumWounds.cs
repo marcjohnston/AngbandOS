@@ -13,10 +13,10 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellCureMediumWounds : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
-            player.SetTimedBleeding((player.TimedBleeding / 2) - 20);
+            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
+            saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 20);
         }
 
         public override void Initialise(int characterClass)

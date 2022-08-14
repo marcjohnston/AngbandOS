@@ -13,10 +13,10 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellCureMediumWounds : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-            player.SetTimedBleeding((player.TimedBleeding / 2) - 50);
+            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+            saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50);
         }
 
         public override void Initialise(int characterClass)

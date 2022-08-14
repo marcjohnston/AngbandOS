@@ -14,15 +14,15 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellFistOfForce : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectDisintegrate(), dir,
-                Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8), 0);
+            saveGame.FireBall(new ProjectDisintegrate(saveGame), dir,
+                Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8), 0);
         }
 
         public override void Initialise(int characterClass)

@@ -13,12 +13,12 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellClairvoyance : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            level.WizLight();
-            if (!player.HasTelepathy)
+            saveGame.Level.WizLight();
+            if (!saveGame.Player.HasTelepathy)
             {
-                player.SetTimedTelepathy(player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
+                saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
             }
         }
 

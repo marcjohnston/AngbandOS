@@ -21,28 +21,28 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You stop attracting animals.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(7000) != 1)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(7000) != 1)
             {
                 return;
             }
             bool aSummon;
             if (Program.Rng.DieRoll(3) == 1)
             {
-                aSummon = level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, saveGame.Difficulty,
+                aSummon = saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                     Constants.SummonAnimal, true);
             }
             else
             {
-                aSummon = level.Monsters.SummonSpecific(player.MapY, player.MapX, saveGame.Difficulty,
+                aSummon = saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                     Constants.SummonAnimal);
             }
             if (!aSummon)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You have attracted an animal!");
+            saveGame.MsgPrint("You have attracted an animal!");
             saveGame.Disturb(false);
         }
     }

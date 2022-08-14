@@ -14,15 +14,15 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellMalediction : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectHellFire(), dir,
-                Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3), 0);
+            saveGame.FireBall(new ProjectHellFire(saveGame), dir,
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3), 0);
             if (Program.Rng.DieRoll(5) != 1)
             {
                 return;
@@ -30,17 +30,17 @@ namespace Cthangband.Spells.Death
             int dummy = Program.Rng.DieRoll(1000);
             if (dummy == 666)
             {
-                saveGame.FireBolt(new ProjectDeathRay(), dir, player.Level);
+                saveGame.FireBolt(new ProjectDeathRay(saveGame), dir, saveGame.Player.Level);
             }
             if (dummy < 500)
             {
-                saveGame.FireBolt(new ProjectTurnAll(), dir, player.Level);
+                saveGame.FireBolt(new ProjectTurnAll(saveGame), dir, saveGame.Player.Level);
             }
             if (dummy < 800)
             {
-                saveGame.FireBolt(new ProjectOldConf(), dir, player.Level);
+                saveGame.FireBolt(new ProjectOldConf(saveGame), dir, saveGame.Player.Level);
             }
-            saveGame.FireBolt(new ProjectStun(), dir, player.Level);
+            saveGame.FireBolt(new ProjectStun(saveGame), dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

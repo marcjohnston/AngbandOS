@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectDispDemon : Projectile
     {
-        public ProjectDispDemon()
+        public ProjectDispDemon(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "BrightRedSplat";
             ImpactGraphic = "";
@@ -54,7 +54,7 @@ namespace Cthangband.Projection
                 bool getAngry = (rPtr.Flags3 & MonsterFlag3.Demon) != 0;
                 if (getAngry && who == 0)
                 {
-                    SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                    SaveGame.MsgPrint($"{mName} gets angry!");
                     mPtr.Mind &= ~Constants.SmFriendly;
                 }
             }
@@ -109,18 +109,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -137,7 +137,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -146,7 +146,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -174,7 +174,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

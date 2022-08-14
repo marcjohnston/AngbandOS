@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellBless : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedBlessing(player.TimedBlessing + Program.Rng.DieRoll(12) + 12);
+            saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(12) + 12);
         }
 
         public override void Initialise(int characterClass)

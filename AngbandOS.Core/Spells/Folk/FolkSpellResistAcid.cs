@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellResistAcid : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedAcidResistance(player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
         }
 
         public override void Initialise(int characterClass)

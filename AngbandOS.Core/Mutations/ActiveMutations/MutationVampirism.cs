@@ -19,12 +19,12 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            if (SaveGame.Instance.DrainLife(dir, player.Level * 2))
+            if (saveGame.DrainLife(dir, player.Level * 2))
             {
                 player.RestoreHealth(player.Level + Program.Rng.DieRoll(player.Level));
             }

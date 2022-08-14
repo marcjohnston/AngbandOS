@@ -21,28 +21,28 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You feel the world's a brighter place.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3000) != 1)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("A shadow passes over you.");
-            SaveGame.Instance.MsgPrint(null);
-            if (level.Grid[player.MapY][player.MapX].TileFlags.IsSet(GridTile.SelfLit))
+            saveGame.MsgPrint("A shadow passes over you.");
+            saveGame.MsgPrint(null);
+            if (saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
-                player.RestoreHealth(10);
+                saveGame.Player.RestoreHealth(10);
             }
-            Item oPtr = player.Inventory[InventorySlot.Lightsource];
+            Item oPtr = saveGame.Player.Inventory[InventorySlot.Lightsource];
             if (oPtr.Category == ItemCategory.Light)
             {
                 if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) &&
                     oPtr.TypeSpecificValue > 0)
                 {
-                    player.RestoreHealth(oPtr.TypeSpecificValue / 20);
+                    saveGame.Player.RestoreHealth(oPtr.TypeSpecificValue / 20);
                     oPtr.TypeSpecificValue /= 2;
-                    SaveGame.Instance.MsgPrint("You absorb energy from your light!");
-                    if (player.TimedBlindness != 0)
+                    saveGame.MsgPrint("You absorb energy from your light!");
+                    if (saveGame.Player.TimedBlindness != 0)
                     {
                         if (oPtr.TypeSpecificValue == 0)
                         {
@@ -52,11 +52,11 @@ namespace Cthangband.Mutations.RandomMutations
                     else if (oPtr.TypeSpecificValue == 0)
                     {
                         saveGame.Disturb(false);
-                        SaveGame.Instance.MsgPrint("Your light has gone out!");
+                        saveGame.MsgPrint("Your light has gone out!");
                     }
                     else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
                     {
-                        SaveGame.Instance.MsgPrint("Your light is growing faint.");
+                        saveGame.MsgPrint("Your light is growing faint.");
                     }
                 }
             }

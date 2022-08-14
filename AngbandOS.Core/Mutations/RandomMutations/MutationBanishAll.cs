@@ -20,16 +20,16 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You no longer feel a terrifying power lurking behind you.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(9000) != 1)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("You suddenly feel almost lonely.");
+            saveGame.MsgPrint("You suddenly feel almost lonely.");
             saveGame.BanishMonsters(100);
-            SaveGame.Instance.MsgPrint(null);
+            saveGame.MsgPrint(null);
         }
     }
 }

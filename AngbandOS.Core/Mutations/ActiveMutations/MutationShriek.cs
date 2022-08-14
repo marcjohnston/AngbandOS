@@ -20,7 +20,7 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBall(new ProjectSound(), 0, 4 * player.Level, 8);
+            saveGame.FireBall(new ProjectSound(saveGame), 0, 4 * player.Level, 8);
             saveGame.AggravateMonsters(0);
         }
 

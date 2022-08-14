@@ -414,7 +414,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Fire:
                     {
-                        saveGame.FireBall(new ProjectFire(), 0, 150, 4);
+                        saveGame.FireBall(new ProjectFire(saveGame), 0, 150, 4);
                         if (!(saveGame.Player.TimedFireResistance != 0 || saveGame.Player.HasFireResistance || saveGame.Player.HasFireImmunity))
                         {
                             saveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "a Scroll of Fire");
@@ -424,7 +424,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Ice:
                     {
-                        saveGame.FireBall(new ProjectIce(), 0, 175, 4);
+                        saveGame.FireBall(new ProjectIce(saveGame), 0, 175, 4);
                         if (!(saveGame.Player.TimedColdResistance != 0 || saveGame.Player.HasColdResistance || saveGame.Player.HasColdImmunity))
                         {
                             saveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
@@ -434,7 +434,7 @@ namespace Cthangband.Commands
                     }
                 case ScrollType.Chaos:
                     {
-                        saveGame.FireBall(new ProjectChaos(), 0, 222, 4);
+                        saveGame.FireBall(new ProjectChaos(saveGame), 0, 222, 4);
                         if (!saveGame.Player.HasChaosResistance)
                         {
                             saveGame.Player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");
@@ -454,7 +454,7 @@ namespace Cthangband.Commands
                     {
                         var patron = saveGame.PatronList[Program.Rng.DieRoll(saveGame.PatronList.Length) - 1];
                         saveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
-                        patron.GetReward(saveGame.Player, saveGame.Level, SaveGame.Instance);
+                        patron.GetReward(saveGame);
                         identified = true;
                         break;
                     }

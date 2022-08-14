@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectAwayAll : Projectile
     {
-        public ProjectAwayAll()
+        public ProjectAwayAll(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "PinkBullet";
             ImpactGraphic = "PinkBullet";
@@ -113,7 +113,7 @@ namespace Cthangband.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                SaveGame.Instance.TeleportAway(cPtr.MonsterIndex, doDist);
+                SaveGame.TeleportAway(cPtr.MonsterIndex, doDist);
                 y = mPtr.MapY;
                 x = mPtr.MapX;
                 cPtr = Level.Grid[y][x];
@@ -133,18 +133,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -161,7 +161,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -170,7 +170,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -198,7 +198,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

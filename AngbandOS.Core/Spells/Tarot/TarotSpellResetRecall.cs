@@ -14,10 +14,10 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellResetRecall : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            string ppp = $"Reset to which level (1-{player.MaxDlv[SaveGame.Instance.CurDungeon.Index]}): ";
-            string def = $"{Math.Max(SaveGame.Instance.CurrentDepth, 1)}";
+            string ppp = $"Reset to which level (1-{saveGame.Player.MaxDlv[saveGame.CurDungeon.Index]}): ";
+            string def = $"{Math.Max(saveGame.CurrentDepth, 1)}";
             if (!Gui.GetString(ppp, out string tmpVal, def, 10))
             {
                 return;
@@ -30,11 +30,11 @@ namespace Cthangband.Spells.Tarot
             {
                 dummy = 1;
             }
-            if (dummy > player.MaxDlv[SaveGame.Instance.CurDungeon.Index])
+            if (dummy > saveGame.Player.MaxDlv[saveGame.CurDungeon.Index])
             {
-                dummy = player.MaxDlv[SaveGame.Instance.CurDungeon.Index];
+                dummy = saveGame.Player.MaxDlv[saveGame.CurDungeon.Index];
             }
-            SaveGame.Instance.MsgPrint($"Recall depth set to level {dummy}.");
+            saveGame.MsgPrint($"Recall depth set to level {dummy}.");
         }
 
         public override void Initialise(int characterClass)

@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellWordOfDestruction : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DestroyArea(player.MapY, player.MapX, 15);
+            saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
         }
 
         public override void Initialise(int characterClass)

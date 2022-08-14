@@ -18,7 +18,7 @@ namespace Cthangband.Commands
         {
             // Assume it won't disturb us
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
 
             // Get the direction to bash
             if (targetEngine.GetDirectionNoAim(out int dir))

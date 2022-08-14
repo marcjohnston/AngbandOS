@@ -15,12 +15,12 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellAnnihilation : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.Mana -= 100;
-            for (int i = 1; i < level.MMax; i++)
+            saveGame.Player.Mana -= 100;
+            for (int i = 1; i < saveGame.Level.MMax; i++)
             {
-                Monster mPtr = level.Monsters[i];
+                Monster mPtr = saveGame.Level.Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.Race == null)
                 {
@@ -34,16 +34,16 @@ namespace Cthangband.Spells.Death
                 {
                     continue;
                 }
-                level.Monsters.DeleteMonsterByIndex(i, true);
-                player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
-                player.Mana++;
-                level.MoveCursorRelative(player.MapY, player.MapX);
-                player.RedrawNeeded.Set(RedrawFlag.PrHp | RedrawFlag.PrMana);
-                SaveGame.Instance.HandleStuff();
+                saveGame.Level.Monsters.DeleteMonsterByIndex(i, true);
+                saveGame.Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
+                saveGame.Player.Mana++;
+                saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHp | RedrawFlag.PrMana);
+                saveGame.HandleStuff();
                 Gui.Refresh();
                 Gui.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);
             }
-            player.Mana += 100;
+            saveGame.Player.Mana += 100;
         }
 
         public override void Initialise(int characterClass)

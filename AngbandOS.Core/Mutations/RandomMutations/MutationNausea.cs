@@ -21,16 +21,16 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "Your stomach stops roiling.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
+            if (saveGame.Player.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
             {
                 return;
             }
             saveGame.Disturb(false);
-            SaveGame.Instance.MsgPrint("Your stomach roils, and you lose your lunch!");
-            SaveGame.Instance.MsgPrint(null);
-            player.SetFood(Constants.PyFoodWeak);
+            saveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
+            saveGame.MsgPrint(null);
+            saveGame.Player.SetFood(Constants.PyFoodWeak);
         }
     }
 }

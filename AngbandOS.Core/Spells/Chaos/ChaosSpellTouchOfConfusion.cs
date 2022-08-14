@@ -13,12 +13,12 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellTouchOfConfusion : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            if (!player.HasConfusingTouch)
+            if (!saveGame.Player.HasConfusingTouch)
             {
-                SaveGame.Instance.MsgPrint("Your hands start glowing.");
-                player.HasConfusingTouch = true;
+                saveGame.MsgPrint("Your hands start glowing.");
+                saveGame.Player.HasConfusingTouch = true;
             }
         }
 

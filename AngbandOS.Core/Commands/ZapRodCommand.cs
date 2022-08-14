@@ -57,7 +57,7 @@ namespace Cthangband.Commands
             if ((item.ItemSubCategory >= RodType.MinimumAimed && item.ItemSubCategory != RodType.Havoc) ||
                 !item.IsFlavourAware())
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+                TargetEngine targetEngine = new TargetEngine(saveGame);
                 if (!targetEngine.GetDirectionWithAim(out dir))
                 {
                     return;
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBolt:
                     {
-                        saveGame.FireBoltOrBeam(10, new ProjectAcid(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectAcid(saveGame), dir,
                             Program.Rng.DiceRoll(6, 8));
                         identified = true;
                         item.TypeSpecificValue = 12;
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ElecBolt:
                     {
-                        saveGame.FireBoltOrBeam(10, new ProjectElec(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectElec(saveGame), dir,
                             Program.Rng.DiceRoll(3, 8));
                         identified = true;
                         item.TypeSpecificValue = 11;
@@ -340,7 +340,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.FireBolt:
                     {
-                        saveGame.FireBoltOrBeam(10, new ProjectFire(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectFire(saveGame), dir,
                             Program.Rng.DiceRoll(8, 8));
                         identified = true;
                         item.TypeSpecificValue = 15;
@@ -348,7 +348,7 @@ namespace Cthangband.Commands
                     }
                 case RodType.ColdBolt:
                     {
-                        saveGame.FireBoltOrBeam(10, new ProjectCold(), dir,
+                        saveGame.FireBoltOrBeam(10, new ProjectCold(saveGame), dir,
                             Program.Rng.DiceRoll(5, 8));
                         identified = true;
                         item.TypeSpecificValue = 13;
@@ -356,28 +356,28 @@ namespace Cthangband.Commands
                     }
                 case RodType.AcidBall:
                     {
-                        saveGame.FireBall(new ProjectAcid(), dir, 60, 2);
+                        saveGame.FireBall(new ProjectAcid(saveGame), dir, 60, 2);
                         identified = true;
                         item.TypeSpecificValue = 27;
                         break;
                     }
                 case RodType.ElecBall:
                     {
-                        saveGame.FireBall(new ProjectElec(), dir, 32, 2);
+                        saveGame.FireBall(new ProjectElec(saveGame), dir, 32, 2);
                         identified = true;
                         item.TypeSpecificValue = 23;
                         break;
                     }
                 case RodType.FireBall:
                     {
-                        saveGame.FireBall(new ProjectFire(), dir, 72, 2);
+                        saveGame.FireBall(new ProjectFire(saveGame), dir, 72, 2);
                         identified = true;
                         item.TypeSpecificValue = 30;
                         break;
                     }
                 case RodType.ColdBall:
                     {
-                        saveGame.FireBall(new ProjectCold(), dir, 48, 2);
+                        saveGame.FireBall(new ProjectCold(saveGame), dir, 48, 2);
                         identified = true;
                         item.TypeSpecificValue = 25;
                         break;

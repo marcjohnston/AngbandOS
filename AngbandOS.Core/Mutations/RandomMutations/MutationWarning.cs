@@ -20,49 +20,49 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You no longer feel paranoid.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(1000) != 1)
             {
                 return;
             }
             int dangerAmount = 0;
-            for (int monster = 0; monster < level.MMax; monster++)
+            for (int monster = 0; monster < saveGame.Level.MMax; monster++)
             {
-                Monster mPtr = level.Monsters[monster];
+                Monster mPtr = saveGame.Level.Monsters[monster];
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.Race == null)
                 {
                     continue;
                 }
-                if (rPtr.Level >= player.Level)
+                if (rPtr.Level >= saveGame.Player.Level)
                 {
-                    dangerAmount += rPtr.Level - player.Level + 1;
+                    dangerAmount += rPtr.Level - saveGame.Player.Level + 1;
                 }
             }
             if (dangerAmount > 100)
             {
-                SaveGame.Instance.MsgPrint("You feel utterly terrified!");
+                saveGame.MsgPrint("You feel utterly terrified!");
             }
             else if (dangerAmount > 50)
             {
-                SaveGame.Instance.MsgPrint("You feel terrified!");
+                saveGame.MsgPrint("You feel terrified!");
             }
             else if (dangerAmount > 20)
             {
-                SaveGame.Instance.MsgPrint("You feel very worried!");
+                saveGame.MsgPrint("You feel very worried!");
             }
             else if (dangerAmount > 10)
             {
-                SaveGame.Instance.MsgPrint("You feel paranoid!");
+                saveGame.MsgPrint("You feel paranoid!");
             }
             else if (dangerAmount > 5)
             {
-                SaveGame.Instance.MsgPrint("You feel almost safe.");
+                saveGame.MsgPrint("You feel almost safe.");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("You feel lonely.");
+                saveGame.MsgPrint("You feel lonely.");
             }
         }
     }

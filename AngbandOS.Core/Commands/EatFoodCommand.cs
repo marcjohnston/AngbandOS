@@ -290,14 +290,14 @@ namespace Cthangband.Commands
                 case FoodType.Warpstone:
                     {
                         saveGame.MsgPrint("That tastes... funky.");
-                        saveGame.Player.Dna.GainMutation();
+                        saveGame.Player.Dna.GainMutation(saveGame);
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            saveGame.Player.Dna.GainMutation();
+                            saveGame.Player.Dna.GainMutation(saveGame);
                         }
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            saveGame.Player.Dna.GainMutation();
+                            saveGame.Player.Dna.GainMutation(saveGame);
                         }
                         ident = true;
                         break;

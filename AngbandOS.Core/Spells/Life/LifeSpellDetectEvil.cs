@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellDetectEvil : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectMonstersEvil();
         }

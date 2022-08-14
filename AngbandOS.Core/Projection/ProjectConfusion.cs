@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectConfusion : Projectile
     {
-        public ProjectConfusion()
+        public ProjectConfusion(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "GreySplat";
             ImpactGraphic = "";
@@ -58,7 +58,7 @@ namespace Cthangband.Projection
             }
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
-                SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                SaveGame.MsgPrint($"{mName} gets angry!");
                 mPtr.Mind &= ~Constants.SmFriendly;
             }
             if (seen)
@@ -126,18 +126,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -154,7 +154,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -163,7 +163,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -221,7 +221,7 @@ namespace Cthangband.Projection
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                SaveGame.Instance.MsgPrint("You are hit by something puzzling!");
+                SaveGame.MsgPrint("You are hit by something puzzling!");
             }
             if (Player.HasConfusionResistance)
             {

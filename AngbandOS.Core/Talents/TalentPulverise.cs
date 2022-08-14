@@ -21,15 +21,15 @@ namespace Cthangband.Talents
             BaseFailure = 30;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectSound(), dir,
-                Program.Rng.DiceRoll(8 + ((player.Level - 5) / 4), 8), player.Level > 20 ? ((player.Level - 20) / 8) + 1 : 0);
+            saveGame.FireBall(new ProjectSound(saveGame), dir,
+                Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8), saveGame.Player.Level > 20 ? ((saveGame.Player.Level - 20) / 8) + 1 : 0);
         }
 
         protected override string Comment(Player player)

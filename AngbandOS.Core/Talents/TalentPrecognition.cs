@@ -20,25 +20,25 @@ namespace Cthangband.Talents
             BaseFailure = 15;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            if (player.Level > 44)
+            if (saveGame.Player.Level > 44)
             {
-                level.WizLight();
+                saveGame.Level.WizLight();
             }
-            else if (player.Level > 19)
+            else if (saveGame.Player.Level > 19)
             {
-                level.MapArea();
+                saveGame.Level.MapArea();
             }
             bool b;
-            if (player.Level < 30)
+            if (saveGame.Player.Level < 30)
             {
                 b = saveGame.DetectMonstersNormal();
-                if (player.Level > 14)
+                if (saveGame.Player.Level > 14)
                 {
                     b |= saveGame.DetectMonstersInvis();
                 }
-                if (player.Level > 4)
+                if (saveGame.Player.Level > 4)
                 {
                     b |= saveGame.DetectTraps();
                 }
@@ -47,13 +47,13 @@ namespace Cthangband.Talents
             {
                 b = saveGame.DetectAll();
             }
-            if (player.Level > 24 && player.Level < 40)
+            if (saveGame.Player.Level > 24 && saveGame.Player.Level < 40)
             {
-                player.SetTimedTelepathy(player.TimedTelepathy + player.Level);
+                saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + saveGame.Player.Level);
             }
             if (!b)
             {
-                SaveGame.Instance.MsgPrint("You feel safe.");
+                saveGame.MsgPrint("You feel safe.");
             }
         }
 

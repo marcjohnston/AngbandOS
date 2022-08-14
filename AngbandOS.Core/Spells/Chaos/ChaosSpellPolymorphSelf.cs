@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellPolymorphSelf : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.PolymorphSelf();
+            saveGame.Player.PolymorphSelf(saveGame);
         }
 
         public override void Initialise(int characterClass)

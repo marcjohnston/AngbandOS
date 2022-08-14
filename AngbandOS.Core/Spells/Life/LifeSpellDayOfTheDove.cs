@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellDayOfTheDove : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.CharmMonsters(player.Level * 2);
+            saveGame.CharmMonsters(saveGame.Player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

@@ -16,7 +16,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             bool disturb = false;
             // Get the direction in which we wish to tunnel
             if (targetEngine.GetDirectionNoAim(out int dir))

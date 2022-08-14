@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellPhaseDoor : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.TeleportPlayer(10);
         }

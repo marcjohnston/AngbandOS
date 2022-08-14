@@ -13,12 +13,12 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellHerbalHealing : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.RestoreHealth(1000);
-            player.SetTimedStun(0);
-            player.SetTimedBleeding(0);
-            player.SetTimedPoison(0);
+            saveGame.Player.RestoreHealth(1000);
+            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.SetTimedPoison(0);
         }
 
         public override void Initialise(int characterClass)

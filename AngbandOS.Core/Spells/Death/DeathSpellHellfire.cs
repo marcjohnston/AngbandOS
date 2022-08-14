@@ -14,15 +14,15 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellHellfire : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ProjectHellFire(), dir, 666, 3);
-            player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
+            saveGame.FireBall(new ProjectHellFire(saveGame), dir, 666, 3);
+            saveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
         }
 
         public override void Initialise(int characterClass)

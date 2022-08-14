@@ -13,11 +13,11 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellBanish : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             if (saveGame.BanishEvil(100))
             {
-                SaveGame.Instance.MsgPrint("The power of your god banishes evil!");
+                saveGame.MsgPrint("The power of your god banishes evil!");
             }
         }
 

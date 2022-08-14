@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellDeathDealing : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelLiving(player.Level * 3);
+            saveGame.DispelLiving(saveGame.Player.Level * 3);
         }
 
         public override void Initialise(int characterClass)

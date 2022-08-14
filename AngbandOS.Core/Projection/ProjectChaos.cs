@@ -14,7 +14,7 @@ namespace Cthangband.Projection
 {
     internal class ProjectChaos : Projectile
     {
-        public ProjectChaos()
+        public ProjectChaos(SaveGame saveGame) : base(saveGame)
         {
             BoltGraphic = "PurpleBullet";
             ImpactGraphic = "PurpleSplat";
@@ -66,21 +66,21 @@ namespace Cthangband.Projection
                     if (oPtr.Marked)
                     {
                         string s = plural ? "are" : "is";
-                        SaveGame.Instance.MsgPrint($"The {oName} {s} unaffected!");
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                     }
                 }
                 else
                 {
                     if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                     {
-                        SaveGame.Instance.MsgPrint($"The {oName}{noteKill}");
+                        SaveGame.MsgPrint($"The {oName}{noteKill}");
                     }
                     int oSval = oPtr.ItemSubCategory;
                     bool isPotion = oPtr.ItemType.Category == ItemCategory.Potion;
                     Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SaveGame.Instance.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.PotionSmashEffect(who, y, x, oSval);
                     }
                     Level.RedrawSingleLocation(y, x);
                 }
@@ -116,7 +116,7 @@ namespace Cthangband.Projection
             }
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
-                SaveGame.Instance.MsgPrint($"{mName} gets angry!");
+                SaveGame.MsgPrint($"{mName} gets angry!");
                 mPtr.Mind &= ~Constants.SmFriendly;
             }
             if (seen)
@@ -163,13 +163,13 @@ namespace Cthangband.Projection
             {
                 note = " is unaffected!";
                 bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
-                tmp = SaveGame.Instance.PolymorphMonster(mPtr.Race);
+                tmp = SaveGame.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
                     note = " changes!";
                     dam = 0;
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    MonsterRace race = SaveGame.Instance.MonsterRaces[tmp];
+                    MonsterRace race = SaveGame.MonsterRaces[tmp];
                     Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
                     mPtr = Level.Monsters[cPtr.MonsterIndex];
                 }
@@ -204,18 +204,18 @@ namespace Cthangband.Projection
                     Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     if (sad)
                     {
-                        SaveGame.Instance.MsgPrint("You feel sad for a moment.");
+                        SaveGame.MsgPrint("You feel sad for a moment.");
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -232,7 +232,7 @@ namespace Cthangband.Projection
                 {
                     if (string.IsNullOrEmpty(note) == false && seen)
                     {
-                        SaveGame.Instance.MsgPrint($"{mName}{note}");
+                        SaveGame.MsgPrint($"{mName}{note}");
                     }
                     else if (dam > 0)
                     {
@@ -241,7 +241,7 @@ namespace Cthangband.Projection
                     if (fear && mPtr.IsVisible)
                     {
                         Gui.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.Instance.MsgPrint($"{mName} flees in terror!");
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                 }
             }
@@ -270,7 +270,7 @@ namespace Cthangband.Projection
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.Instance.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
@@ -299,7 +299,7 @@ namespace Cthangband.Projection
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
-                SaveGame.Instance.MsgPrint("You are hit by a wave of anarchy!");
+                SaveGame.MsgPrint("You are hit by a wave of anarchy!");
             }
             if (Player.HasChaosResistance)
             {
@@ -315,35 +315,35 @@ namespace Cthangband.Projection
                 Player.SetTimedHallucinations(Player.TimedHallucinations + Program.Rng.DieRoll(10));
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    SaveGame.Instance.MsgPrint("Your body is twisted by chaos!");
-                    Player.Dna.GainMutation();
+                    SaveGame.MsgPrint("Your body is twisted by chaos!");
+                    Player.Dna.GainMutation(SaveGame);
                 }
             }
             if (!Player.HasNetherResistance && !Player.HasChaosResistance)
             {
                 if (Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
                 {
-                    SaveGame.Instance.MsgPrint("You keep hold of your life force!");
+                    SaveGame.MsgPrint("You keep hold of your life force!");
                 }
                 else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
-                    SaveGame.Instance.MsgPrint("Hagarg Ryonis's favour protects you!");
+                    SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
                 else if (Player.HasHoldLife)
                 {
-                    SaveGame.Instance.MsgPrint("You feel your life slipping away!");
+                    SaveGame.MsgPrint("You feel your life slipping away!");
                     Player.LoseExperience(500 + (Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("You feel your life draining away!");
+                    SaveGame.MsgPrint("You feel your life draining away!");
                     Player.LoseExperience(5000 + (Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                 }
             }
             if (!Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
             {
-                Player.Inventory.InvenDamage(SaveGame.Instance.SetElecDestroy, 2);
-                Player.Inventory.InvenDamage(SaveGame.Instance.SetFireDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.SetElecDestroy, 2);
+                Player.Inventory.InvenDamage(SaveGame.SetFireDestroy, 2);
             }
             Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);

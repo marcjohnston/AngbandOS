@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellEtherealDivination : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectAll();
         }

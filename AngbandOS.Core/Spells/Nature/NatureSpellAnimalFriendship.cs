@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellAnimalFriendship : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.CharmAnimals(player.Level * 2);
+            saveGame.CharmAnimals(saveGame.Player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

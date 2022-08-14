@@ -52,7 +52,7 @@ namespace Cthangband.Commands
                 return;
             }
             // Aim the wand
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
@@ -208,20 +208,20 @@ namespace Cthangband.Commands
                     }
                 case WandType.StinkingCloud:
                     {
-                        saveGame.FireBall(new ProjectPois(), dir, 12, 2);
+                        saveGame.FireBall(new ProjectPois(saveGame), dir, 12, 2);
                         ident = true;
                         break;
                     }
                 case WandType.MagicMissile:
                     {
-                        saveGame.FireBoltOrBeam(20, new ProjectMissile(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectMissile(saveGame), dir,
                             Program.Rng.DiceRoll(2, 6));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBolt:
                     {
-                        saveGame.FireBoltOrBeam(20, new ProjectAcid(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectAcid(saveGame), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
@@ -236,39 +236,39 @@ namespace Cthangband.Commands
                     }
                 case WandType.FireBolt:
                     {
-                        saveGame.FireBoltOrBeam(20, new ProjectFire(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectFire(saveGame), dir,
                             Program.Rng.DiceRoll(6, 8));
                         ident = true;
                         break;
                     }
                 case WandType.ColdBolt:
                     {
-                        saveGame.FireBoltOrBeam(20, new ProjectCold(), dir,
+                        saveGame.FireBoltOrBeam(20, new ProjectCold(saveGame), dir,
                             Program.Rng.DiceRoll(3, 8));
                         ident = true;
                         break;
                     }
                 case WandType.AcidBall:
                     {
-                        saveGame.FireBall(new ProjectAcid(), dir, 60, 2);
+                        saveGame.FireBall(new ProjectAcid(saveGame), dir, 60, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ElecBall:
                     {
-                        saveGame.FireBall(new ProjectElec(), dir, 32, 2);
+                        saveGame.FireBall(new ProjectElec(saveGame), dir, 32, 2);
                         ident = true;
                         break;
                     }
                 case WandType.FireBall:
                     {
-                        saveGame.FireBall(new ProjectFire(), dir, 72, 2);
+                        saveGame.FireBall(new ProjectFire(saveGame), dir, 72, 2);
                         ident = true;
                         break;
                     }
                 case WandType.ColdBall:
                     {
-                        saveGame.FireBall(new ProjectCold(), dir, 48, 2);
+                        saveGame.FireBall(new ProjectCold(saveGame), dir, 48, 2);
                         ident = true;
                         break;
                     }
@@ -279,13 +279,13 @@ namespace Cthangband.Commands
                     }
                 case WandType.DragonFire:
                     {
-                        saveGame.FireBall(new ProjectFire(), dir, 100, 3);
+                        saveGame.FireBall(new ProjectFire(saveGame), dir, 100, 3);
                         ident = true;
                         break;
                     }
                 case WandType.DragonCold:
                     {
-                        saveGame.FireBall(new ProjectCold(), dir, 80, 3);
+                        saveGame.FireBall(new ProjectCold(saveGame), dir, 80, 3);
                         ident = true;
                         break;
                     }
@@ -295,27 +295,27 @@ namespace Cthangband.Commands
                         {
                             case 1:
                                 {
-                                    saveGame.FireBall(new ProjectAcid(), dir, 100, -3);
+                                    saveGame.FireBall(new ProjectAcid(saveGame), dir, 100, -3);
                                     break;
                                 }
                             case 2:
                                 {
-                                    saveGame.FireBall(new ProjectElec(), dir, 80, -3);
+                                    saveGame.FireBall(new ProjectElec(saveGame), dir, 80, -3);
                                     break;
                                 }
                             case 3:
                                 {
-                                    saveGame.FireBall(new ProjectFire(), dir, 100, -3);
+                                    saveGame.FireBall(new ProjectFire(saveGame), dir, 100, -3);
                                     break;
                                 }
                             case 4:
                                 {
-                                    saveGame.FireBall(new ProjectCold(), dir, 80, -3);
+                                    saveGame.FireBall(new ProjectCold(saveGame), dir, 80, -3);
                                     break;
                                 }
                             default:
                                 {
-                                    saveGame.FireBall(new ProjectPois(), dir, 60, -3);
+                                    saveGame.FireBall(new ProjectPois(saveGame), dir, 60, -3);
                                     break;
                                 }
                         }
@@ -332,7 +332,7 @@ namespace Cthangband.Commands
                     }
                 case WandType.Shard:
                     {
-                        saveGame.FireBall(new ProjectShard(), dir, 75 + Program.Rng.DieRoll(50),
+                        saveGame.FireBall(new ProjectShard(saveGame), dir, 75 + Program.Rng.DieRoll(50),
                             2);
                         ident = true;
                         break;

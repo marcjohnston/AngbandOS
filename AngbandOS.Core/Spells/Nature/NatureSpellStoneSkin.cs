@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellStoneSkin : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedStoneskin(player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
+            saveGame.Player.SetTimedStoneskin(saveGame.Player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
         }
 
         public override void Initialise(int characterClass)

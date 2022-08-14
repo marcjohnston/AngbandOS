@@ -13,11 +13,11 @@ namespace Cthangband.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellHeroism : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedHeroism(player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
-            player.RestoreHealth(10);
-            player.SetTimedFear(0);
+            saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.RestoreHealth(10);
+            saveGame.Player.SetTimedFear(0);
         }
 
         public override void Initialise(int characterClass)

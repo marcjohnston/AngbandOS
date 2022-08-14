@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellSenseUnseen : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.SetTimedSeeInvisibility(player.TimedSeeInvisibility + Program.Rng.DieRoll(24) + 24);
+            saveGame.Player.SetTimedSeeInvisibility(saveGame.Player.TimedSeeInvisibility + Program.Rng.DieRoll(24) + 24);
         }
 
         public override void Initialise(int characterClass)

@@ -15,28 +15,28 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellDivineIntervention : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.Project(0, 1, player.MapY, player.MapX, 777, new ProjectHolyFire(),
+            saveGame.Project(0, 1, saveGame.Player.MapY, saveGame.Player.MapX, 777, new ProjectHolyFire(saveGame),
                 ProjectionFlag.ProjectKill);
-            saveGame.DispelMonsters(player.Level * 4);
+            saveGame.DispelMonsters(saveGame.Player.Level * 4);
             saveGame.SlowMonsters();
-            saveGame.StunMonsters(player.Level * 4);
-            saveGame.ConfuseMonsters(player.Level * 4);
-            saveGame.TurnMonsters(player.Level * 4);
-            saveGame.StasisMonsters(player.Level * 4);
-            level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonCthuloid, true);
-            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
-            player.RestoreHealth(300);
-            if (player.TimedHaste == 0)
+            saveGame.StunMonsters(saveGame.Player.Level * 4);
+            saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
+            saveGame.TurnMonsters(saveGame.Player.Level * 4);
+            saveGame.StasisMonsters(saveGame.Player.Level * 4);
+            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonCthuloid, true);
+            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.RestoreHealth(300);
+            if (saveGame.Player.TimedHaste == 0)
             {
-                player.SetTimedHaste(Program.Rng.DieRoll(20 + player.Level) + player.Level);
+                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                player.SetTimedHaste(player.TimedHaste + Program.Rng.DieRoll(5));
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
             }
-            player.SetTimedFear(0);
+            saveGame.Player.SetTimedFear(0);
         }
 
         public override void Initialise(int characterClass)

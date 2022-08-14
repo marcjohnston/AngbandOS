@@ -20,12 +20,12 @@ namespace Cthangband.Talents
             BaseFailure = 35;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            SaveGame.Instance.TeleportPlayer(player.Level * 5);
-            if (player.Level > 29)
+            saveGame.TeleportPlayer(saveGame.Player.Level * 5);
+            if (saveGame.Player.Level > 29)
             {
-                SaveGame.Instance.BanishMonsters(player.Level);
+                saveGame.BanishMonsters(saveGame.Player.Level);
             }
         }
 

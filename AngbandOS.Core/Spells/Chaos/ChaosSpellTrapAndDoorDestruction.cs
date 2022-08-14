@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellTrapAndDoorDestruction : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.DestroyDoorsTouch();
         }

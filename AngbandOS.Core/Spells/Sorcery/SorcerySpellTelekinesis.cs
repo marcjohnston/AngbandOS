@@ -13,14 +13,14 @@ namespace Cthangband.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellTelekinesis : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.SummonItem(dir, player.Level * 15, false);
+            saveGame.SummonItem(dir, saveGame.Player.Level * 15, false);
         }
 
         public override void Initialise(int characterClass)

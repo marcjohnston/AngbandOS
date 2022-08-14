@@ -20,11 +20,11 @@ namespace Cthangband.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(player, level);
-            SaveGame.Instance.MsgPrint("You spit acid...");
+            TargetEngine targetEngine = new TargetEngine(saveGame);
+            saveGame.MsgPrint("You spit acid...");
             if (targetEngine.GetDirectionWithAim(out int dir))
             {
-                saveGame.FireBall(new ProjectAcid(), dir, player.Level, 1 + (player.Level / 30));
+                saveGame.FireBall(new ProjectAcid(saveGame), dir, player.Level, 1 + (player.Level / 30));
             }
         }
 

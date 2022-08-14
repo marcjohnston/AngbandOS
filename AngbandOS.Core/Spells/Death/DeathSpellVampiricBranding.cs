@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellVampiricBranding : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.BrandWeapon(3);
         }

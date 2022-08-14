@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellWordOfRecall : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.ToggleRecall();
+            saveGame.Player.ToggleRecall();
         }
 
         public override void Initialise(int characterClass)

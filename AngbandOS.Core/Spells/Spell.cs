@@ -38,7 +38,7 @@ namespace Cthangband.Spells
             get; set;
         }
 
-        public abstract void Cast(SaveGame saveGame, Player player, Level level);
+        public abstract void Cast(SaveGame saveGame);
 
         public int FailureChance(Player player)
         {

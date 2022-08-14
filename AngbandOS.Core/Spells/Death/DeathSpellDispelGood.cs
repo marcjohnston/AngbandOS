@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellDispelGood : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelGood(player.Level * 4);
+            saveGame.DispelGood(saveGame.Player.Level * 4);
         }
 
         public override void Initialise(int characterClass)

@@ -14,10 +14,10 @@ namespace Cthangband.Spells.Tarot
     [Serializable]
     internal class TarotSpellPhantasmalServant : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            SaveGame.Instance.MsgPrint(
-                level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level * 3 / 2, Constants.SummonPhantom,
+            saveGame.MsgPrint(
+                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, Constants.SummonPhantom,
                     false)
                     ? "'Your wish, master?'"
                     : "No-one ever turns up.");

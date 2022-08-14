@@ -14,10 +14,10 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellSonicBoom : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.Project(0, 2 + (player.Level / 10), player.MapY, player.MapX, 45 + player.Level,
-                new ProjectSound(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, 45 + saveGame.Player.Level,
+                new ProjectSound(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

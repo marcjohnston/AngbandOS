@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Life
     [Serializable]
     internal class LifeSpellWardingTrue : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.ElderSign();
             saveGame.ElderSignCreation();

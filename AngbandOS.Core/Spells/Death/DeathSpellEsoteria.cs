@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellEsoteria : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            if (Program.Rng.DieRoll(50) > player.Level)
+            if (Program.Rng.DieRoll(50) > saveGame.Player.Level)
             {
                 saveGame.IdentifyItem();
             }

@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellRecharging : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.Recharge(player.Level * 2);
+            saveGame.Recharge(saveGame.Player.Level * 2);
         }
 
         public override void Initialise(int characterClass)

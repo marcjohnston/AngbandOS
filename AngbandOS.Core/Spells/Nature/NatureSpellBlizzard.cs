@@ -14,14 +14,14 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellBlizzard : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.Instance.FireBall(new ProjectCold(), dir, 70 + player.Level, (player.Level / 12) + 1);
+            saveGame.FireBall(new ProjectCold(saveGame), dir, 70 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
         }
 
         public override void Initialise(int characterClass)

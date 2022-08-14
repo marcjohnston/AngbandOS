@@ -14,12 +14,12 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellNaturesWrath : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.DispelMonsters(player.Level * 4);
-            saveGame.Earthquake(player.MapY, player.MapX, 20 + (player.Level / 2));
-            saveGame.Project(0, 1 + (player.Level / 12), player.MapY, player.MapX, 100 + player.Level,
-                new ProjectDisintegrate(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            saveGame.DispelMonsters(saveGame.Player.Level * 4);
+            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 20 + (saveGame.Player.Level / 2));
+            saveGame.Project(0, 1 + (saveGame.Player.Level / 12), saveGame.Player.MapY, saveGame.Player.MapX, 100 + saveGame.Player.Level,
+                new ProjectDisintegrate(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

@@ -13,7 +13,7 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellStoneTell : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             saveGame.IdentifyFully();
         }

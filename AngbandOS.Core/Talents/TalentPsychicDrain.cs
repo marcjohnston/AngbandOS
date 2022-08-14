@@ -21,17 +21,17 @@ namespace Cthangband.Talents
             BaseFailure = 40;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            int i = Program.Rng.DiceRoll(player.Level / 2, 6);
-            if (SaveGame.Instance.FireBall(new ProjectPsiDrain(), dir, i, 0 + ((player.Level - 25) / 10)))
+            int i = Program.Rng.DiceRoll(saveGame.Player.Level / 2, 6);
+            if (saveGame.FireBall(new ProjectPsiDrain(saveGame), dir, i, 0 + ((saveGame.Player.Level - 25) / 10)))
             {
-                player.Energy -= Program.Rng.DieRoll(150);
+                saveGame.Player.Energy -= Program.Rng.DieRoll(150);
             }
         }
 

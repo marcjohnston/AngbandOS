@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Folk
     [Serializable]
     internal class FolkSpellWordOfRecall : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.ToggleRecall();
+            saveGame.Player.ToggleRecall();
         }
 
         public override void Initialise(int characterClass)

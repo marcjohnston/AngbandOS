@@ -13,9 +13,9 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellTeleportSelf : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            saveGame.TeleportPlayer(player.Level * 5);
+            saveGame.TeleportPlayer(saveGame.Player.Level * 5);
         }
 
         public override void Initialise(int characterClass)

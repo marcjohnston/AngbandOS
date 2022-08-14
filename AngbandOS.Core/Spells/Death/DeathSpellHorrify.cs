@@ -13,15 +13,15 @@ namespace Cthangband.Spells.Death
     [Serializable]
     internal class DeathSpellHorrify : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FearMonster(dir, player.Level);
-            saveGame.StunMonster(dir, player.Level);
+            saveGame.FearMonster(dir, saveGame.Player.Level);
+            saveGame.StunMonster(dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

@@ -14,15 +14,15 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellDoomBolt : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(player, level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectMana(), dir,
-                Program.Rng.DiceRoll(11 + ((player.Level - 5) / 4), 8));
+            saveGame.FireBeam(new ProjectMana(saveGame), dir,
+                Program.Rng.DiceRoll(11 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
         public override void Initialise(int characterClass)

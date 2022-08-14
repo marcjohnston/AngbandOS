@@ -13,10 +13,10 @@ namespace Cthangband.Spells.Nature
     [Serializable]
     internal class NatureSpellFirstAid : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
-            player.RestoreHealth(Program.Rng.DiceRoll(2, 8));
-            player.SetTimedBleeding(player.TimedBleeding - 15);
+            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8));
+            saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding - 15);
         }
 
         public override void Initialise(int characterClass)

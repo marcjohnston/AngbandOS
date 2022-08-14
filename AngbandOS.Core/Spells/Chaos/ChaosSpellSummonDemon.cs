@@ -14,31 +14,31 @@ namespace Cthangband.Spells.Chaos
     [Serializable]
     internal class ChaosSpellSummonDemon : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (level.Monsters.SummonSpecific(player.MapY, player.MapX, player.Level * 3 / 2, Constants.SummonDemon))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, Constants.SummonDemon))
                 {
-                    SaveGame.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    SaveGame.Instance.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
             else
             {
-                if (level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level * 3 / 2,
-                    Constants.SummonDemon, player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+                    Constants.SummonDemon, saveGame.Player.Level == 50))
                 {
-                    SaveGame.Instance.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    SaveGame.Instance.MsgPrint("'What is thy bidding... Master?'");
+                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    saveGame.MsgPrint("'What is thy bidding... Master?'");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("No-one ever turns up.");
+                    saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }

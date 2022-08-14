@@ -16,7 +16,7 @@ namespace Cthangband.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame.Player, saveGame.Level);
+            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (!targetEngine.GetDirectionWithAim(out int direction))
             {
                 return false;

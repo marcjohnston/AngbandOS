@@ -17,7 +17,7 @@ namespace Cthangband.Mutations.ActiveMutations
         {
             if (saveGame.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
             {
-                player.PolymorphSelf();
+                player.PolymorphSelf(saveGame);
             }
         }
 

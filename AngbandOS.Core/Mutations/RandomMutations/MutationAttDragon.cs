@@ -21,28 +21,28 @@ namespace Cthangband.Mutations.RandomMutations
             LoseMessage = "You stop attracting dragons.";
         }
 
-        public override void OnProcessWorld(SaveGame saveGame, Player player, Level level)
+        public override void OnProcessWorld(SaveGame saveGame)
         {
-            if (player.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
+            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
             {
                 return;
             }
             bool dSummon;
             if (Program.Rng.DieRoll(5) == 1)
             {
-                dSummon = level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, saveGame.Difficulty,
+                dSummon = saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                     Constants.SummonDragon, true);
             }
             else
             {
-                dSummon = level.Monsters.SummonSpecific(player.MapY, player.MapX, saveGame.Difficulty,
+                dSummon = saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                     Constants.SummonDragon);
             }
             if (!dSummon)
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You have attracted a dragon!");
+            saveGame.MsgPrint("You have attracted a dragon!");
             saveGame.Disturb(false);
         }
     }

@@ -12,7 +12,7 @@ namespace Cthangband.Spells
     [Serializable]
     internal class IllegibleSpell : Spell
     {
-        public override void Cast(SaveGame saveGame, Player player, Level level)
+        public override void Cast(SaveGame saveGame)
         {
         }
 

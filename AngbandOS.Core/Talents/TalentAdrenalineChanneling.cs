@@ -20,27 +20,27 @@ namespace Cthangband.Talents
             BaseFailure = 50;
         }
 
-        public override void Use(Player player, Level level, SaveGame saveGame)
+        public override void Use(SaveGame saveGame)
         {
-            player.SetTimedFear(0);
-            player.SetTimedStun(0);
-            player.RestoreHealth(player.Level);
-            int i = 10 + Program.Rng.DieRoll(player.Level * 3 / 2);
-            if (player.Level < 35)
+            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.RestoreHealth(saveGame.Player.Level);
+            int i = 10 + Program.Rng.DieRoll(saveGame.Player.Level * 3 / 2);
+            if (saveGame.Player.Level < 35)
             {
-                player.SetTimedHeroism(player.TimedHeroism + i);
+                saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + i);
             }
             else
             {
-                player.SetTimedSuperheroism(player.TimedSuperheroism + i);
+                saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + i);
             }
-            if (player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste == 0)
             {
-                player.SetTimedHaste(i);
+                saveGame.Player.SetTimedHaste(i);
             }
             else
             {
-                player.SetTimedHaste(player.TimedHaste + i);
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + i);
             }
         }
 
