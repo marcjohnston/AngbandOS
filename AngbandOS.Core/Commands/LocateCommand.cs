@@ -43,11 +43,11 @@ namespace Cthangband.Commands
                 int dir = 0;
                 while (dir == 0)
                 {
-                    if (!Gui.GetCom(message, out char command))
+                    if (!saveGame.Gui.GetCom(message, out char command))
                     {
                         break;
                     }
-                    dir = Gui.GetKeymapDir(command);
+                    dir = saveGame.Gui.GetKeymapDir(command);
                 }
                 if (dir == 0)
                 {

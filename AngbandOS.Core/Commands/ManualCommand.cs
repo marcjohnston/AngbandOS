@@ -18,7 +18,7 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            ManualStoreCommand.DoCmdManual();
+            ManualStoreCommand.DoCmdManual(saveGame);
         }
     }
 }

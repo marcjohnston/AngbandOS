@@ -25,7 +25,7 @@ namespace Cthangband.StoreCommands
 
         public static void DoCmdMessageOne(SaveGame saveGame)
         {
-            Gui.PrintLine($"> {saveGame.MessageStr(0)}", 0, 0);
+            saveGame.Gui.PrintLine($"> {saveGame.MessageStr(0)}", 0, 0);
         }
     }
 }

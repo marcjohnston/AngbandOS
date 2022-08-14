@@ -216,9 +216,9 @@ namespace Cthangband.StaticData
         {
             saveGame.FixedArtifacts = new FixedArtifactArray();
             saveGame.MonsterRaces = new MonsterRaceArray();
-            saveGame.MonsterRaces.AddKnowledge();
+            saveGame.MonsterRaces.AddKnowledge(saveGame);
             saveGame.RareItemTypes = new RareItemTypeArray();
-            saveGame.ItemTypes = new ItemTypeArray();
+            saveGame.ItemTypes = new ItemTypeArray(saveGame);
             saveGame.VaultTypes = new VaultTypeArray();
         }
     }

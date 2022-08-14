@@ -79,6 +79,7 @@ namespace Cthangband
         public bool ViewingEquipment;
         public bool ViewingItemList;
         public List<WandFlavour> WandFlavours;
+        public Gui Gui { get; }
 
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
@@ -88,7 +89,7 @@ namespace Cthangband
         public SaveGame(string guid)
         {
             Guid = guid;
-            SaveGame.Instance = this;
+            Gui = new Gui(this);
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             GlobalData.PopulateNewProfile(this);
@@ -225,11 +226,6 @@ namespace Cthangband
             Gui.Erase(0, 0, 255);
         }
         // PROFILE MESSAGING END
-
-        public static SaveGame Instance
-        {
-            get; set;
-        }
 
         public int Difficulty => CurrentDepth + DungeonDifficulty;
 
@@ -437,7 +433,7 @@ namespace Cthangband
                 string buffer;
                 if (Dungeons[y].Visited)
                 {
-                    buffer = y < Instance.Towns.Length
+                    buffer = y < Towns.Length
                         ? $"{Dungeons[y].MapSymbol} = {Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})"
                         : $"{Dungeons[y].MapSymbol} = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
                 }
@@ -446,7 +442,7 @@ namespace Cthangband
                     buffer = $"? = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
                 }
                 Colour keyAttr = Colour.Brown;
-                if (y < Instance.Towns.Length)
+                if (y < Towns.Length)
                 {
                     keyAttr = Colour.Grey;
                 }
@@ -2745,7 +2741,7 @@ namespace Cthangband
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrEquippy))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrEquippy);
-                CharacterViewer.PrintEquippy(Player);
+                CharacterViewer.PrintEquippy(this, Player);
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMisc))
             {

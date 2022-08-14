@@ -81,7 +81,7 @@ namespace Cthangband.Commands
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
-            Gui.PlaySound(SoundEffect.UseStaff);
+            saveGame.Gui.PlaySound(SoundEffect.UseStaff);
             int k;
             bool useCharge = true;
             // Do the specific effect for the type of staff

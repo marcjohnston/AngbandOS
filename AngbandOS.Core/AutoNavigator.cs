@@ -46,7 +46,7 @@ namespace Cthangband
         /// <summary>
         /// Initialise the navigator with no current direction
         /// </summary>
-        public AutoNavigator(SaveGame saveGame)
+        public AutoNavigator(SaveGame saveGame) // TODO: This constructor needs to be deleted.
         {
             SaveGame = saveGame;
             CurrentRunDirection = 5;

@@ -28,27 +28,27 @@ namespace Cthangband
 
         public void ShowMenu()
         {
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.SetBackground(BackgroundImage.Paper);
+            SaveGame.Gui.FullScreenOverlay = true;
+            SaveGame.Gui.Save();
+            SaveGame.Gui.SetBackground(BackgroundImage.Paper);
             while (true)
             {
-                Gui.Refresh();
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Journal", 0, 1);
-                Gui.Print(Colour.Blue, "=======", 1, 1);
-                Gui.Print(Colour.Blue, "(a) Abilities", 3, 0);
-                Gui.Print(Colour.Blue, "(d) Deities", 4, 0);
-                Gui.Print(Colour.Blue, "(k) Kill Count", 5, 0);
-                Gui.Print(Colour.Blue, "(m) Mutations", 6, 0);
-                Gui.Print(Colour.Blue, "(p) Pets", 7, 0);
-                Gui.Print(Colour.Blue, "(q) Quests", 8, 0);
-                Gui.Print(Colour.Blue, "(r) Word of Recall", 9, 0);
-                Gui.Print(Colour.Blue, "(s) Monsters Seen", 10, 0);
-                Gui.Print(Colour.Blue, "(u) Uniques", 11, 0);
-                Gui.Print(Colour.Blue, "(w) Worthless Items", 12, 0);
-                Gui.Print(Colour.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
-                char k = Gui.Inkey();
+                SaveGame.Gui.Refresh();
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Journal", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "=======", 1, 1);
+                SaveGame.Gui.Print(Colour.Blue, "(a) Abilities", 3, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(d) Deities", 4, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(k) Kill Count", 5, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(m) Mutations", 6, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(p) Pets", 7, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(q) Quests", 8, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(r) Word of Recall", 9, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(s) Monsters Seen", 10, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(u) Uniques", 11, 0);
+                SaveGame.Gui.Print(Colour.Blue, "(w) Worthless Items", 12, 0);
+                SaveGame.Gui.Print(Colour.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
+                char k = SaveGame.Gui.Inkey();
                 if (k == '\x1b')
                 {
                     break;
@@ -106,9 +106,9 @@ namespace Cthangband
                         break;
                 }
             }
-            Gui.SetBackground(BackgroundImage.Overhead);
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
+            SaveGame.Gui.SetBackground(BackgroundImage.Overhead);
+            SaveGame.Gui.Load();
+            SaveGame.Gui.FullScreenOverlay = false;
         }
 
         private void DisplayFlags(int mode)
@@ -149,8 +149,8 @@ namespace Cthangband
             b[n][5].Set(f3.HighOrder);
             for (int x = 0; x < 3; x++)
             {
-                CharacterViewer.DisplayPlayerEquippy(SaveGame.Player, top + 2, (x * 26) + 12);
-                Gui.Print(Colour.Blue, "abcdefghijklm@", top + 3, (x * 26) + 12);
+                CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, top + 2, (x * 26) + 12);
+                SaveGame.Gui.Print(Colour.Blue, "abcdefghijklm@", top + 3, (x * 26) + 12);
                 for (int y = 0; y < 16; y++)
                 {
                     string name = GlobalData.ObjectFlagNames[(48 * mode) + (16 * x) + y];
@@ -166,8 +166,8 @@ namespace Cthangband
                             baseColour = Colour.Green;
                         }
                     }
-                    Gui.Print(baseColour, name, top + y + 4, (x * 26) + 1);
-                    Gui.Print(baseColour, ':', top + y + 4, (x * 26) + 11);
+                    SaveGame.Gui.Print(baseColour, name, top + y + 4, (x * 26) + 1);
+                    SaveGame.Gui.Print(baseColour, ':', top + y + 4, (x * 26) + 11);
                     for (n = 0; n < 14; n++)
                     {
                         Colour a = Colour.Grey;
@@ -177,7 +177,7 @@ namespace Cthangband
                             a = baseColour;
                             c = '+';
                         }
-                        Gui.Print(a, c, top + y + 4, (x * 26) + 12 + n);
+                        SaveGame.Gui.Print(a, c, top + y + 4, (x * 26) + 12 + n);
                     }
                 }
             }
@@ -191,13 +191,13 @@ namespace Cthangband
                 {
                     string name = GlobalData.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
-                    Gui.Print(Colour.Blue, buf, 3, 0);
+                    SaveGame.Gui.Print(Colour.Blue, buf, 3, 0);
                     break;
                 }
             }
-            Gui.Goto(5, 0);
+            SaveGame.Gui.Goto(5, 0);
             DisplayMonsterHeader(rIdx);
-            Gui.Goto(6, 0);
+            SaveGame.Gui.Goto(6, 0);
             SaveGame.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
         }
 
@@ -208,28 +208,28 @@ namespace Cthangband
             Colour a1 = rPtr.Colour;
             if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0)
             {
-                Gui.Print(Colour.Brown, "The ", -1);
+                SaveGame.Gui.Print(Colour.Brown, "The ", -1);
             }
-            Gui.Print(Colour.Brown, rPtr.Name, -1);
-            Gui.Print(Colour.Brown, " ('", -1);
-            Gui.Print(a1, c1);
-            Gui.Print(Colour.Brown, "')", -1);
+            SaveGame.Gui.Print(Colour.Brown, rPtr.Name, -1);
+            SaveGame.Gui.Print(Colour.Brown, " ('", -1);
+            SaveGame.Gui.Print(a1, c1);
+            SaveGame.Gui.Print(Colour.Brown, "')", -1);
         }
 
         private void JournalAbilities()
         {
-            Gui.Clear();
+            SaveGame.Gui.Clear();
             DisplayFlags(0);
             DisplayFlags(1);
-            Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
-            Gui.Inkey();
+            SaveGame.Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Gui.Inkey();
         }
 
         private void JournalDeities()
         {
-            Gui.Clear();
-            Gui.Print(Colour.Blue, "Standings with Deities", 0, 1);
-            Gui.Print(Colour.Blue, "======================", 1, 1);
+            SaveGame.Gui.Clear();
+            SaveGame.Gui.Print(Colour.Blue, "Standings with Deities", 0, 1);
+            SaveGame.Gui.Print(Colour.Blue, "======================", 1, 1);
             int row = 3;
             God patron = null;
             foreach (var deity in SaveGame.Player.Religion.GetAllDeities())
@@ -327,21 +327,21 @@ namespace Cthangband
                     }
                 }
                 text += ".";
-                Gui.Print(Colour.Blue, text, row, 1);
+                SaveGame.Gui.Print(Colour.Blue, text, row, 1);
                 row++;
             }
             if (patron != null)
             {
-                Gui.Print(Colour.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
-                Gui.Print(Colour.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
-                Gui.Print(Colour.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
+                SaveGame.Gui.Print(Colour.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
+                SaveGame.Gui.Print(Colour.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
+                SaveGame.Gui.Print(Colour.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
             }
             else
             {
-                Gui.Print(Colour.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
+                SaveGame.Gui.Print(Colour.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
             }
-            Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
-            Gui.Inkey();
+            SaveGame.Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Gui.Inkey();
         }
 
         private void JournalKills()
@@ -401,12 +401,12 @@ namespace Cthangband
             while (true)
             {
                 string buf;
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Kill Count", 0, 1);
-                Gui.Print(Colour.Blue, "==========", 1, 1);
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Kill Count", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "==========", 1, 1);
                 if (maxCount == 0)
                 {
-                    Gui.Print(Colour.Blue, "You haven't killed anything yet!", 3, 0);
+                    SaveGame.Gui.Print(Colour.Blue, "You haven't killed anything yet!", 3, 0);
                 }
                 for (int i = first; i < first + 38; i++)
                 {
@@ -428,13 +428,13 @@ namespace Cthangband
                                 buf = $"You have killed {counts[i]} {names[i]}";
                             }
                         }
-                        Gui.Print(Colour.Blue, buf, i - first + 3, 0);
+                        SaveGame.Gui.Print(Colour.Blue, buf, i - first + 3, 0);
                     }
                 }
                 buf = $"Total Kills: {total}";
-                Gui.Print(Colour.Blue, buf, 41, 0);
-                Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-                int c = Gui.Inkey();
+                SaveGame.Gui.Print(Colour.Blue, buf, 41, 0);
+                SaveGame.Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                int c = SaveGame.Gui.Inkey();
                 if (c == '\x1b')
                 {
                     break;
@@ -501,12 +501,12 @@ namespace Cthangband
             }
             if (maxSeen == 0)
             {
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Monsters Seen", 0, 1);
-                Gui.Print(Colour.Blue, "=============", 1, 1);
-                Gui.Print(Colour.Blue, "You haven't seen any monsters yet!", 3, 0);
-                Gui.Print(Colour.Orange, "[Press any key to finish]", 43, 1);
-                Gui.Inkey();
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Monsters Seen", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "=============", 1, 1);
+                SaveGame.Gui.Print(Colour.Blue, "You haven't seen any monsters yet!", 3, 0);
+                SaveGame.Gui.Print(Colour.Orange, "[Press any key to finish]", 43, 1);
+                SaveGame.Gui.Inkey();
                 return;
             }
             int currentFilterIndex = 0;
@@ -531,13 +531,13 @@ namespace Cthangband
                 char c;
                 while (true)
                 {
-                    Gui.Clear();
-                    Gui.Print(Colour.Blue, "Monsters Seen", 0, 1);
-                    Gui.Print(Colour.Blue, "=============", 1, 1);
+                    SaveGame.Gui.Clear();
+                    SaveGame.Gui.Print(Colour.Blue, "Monsters Seen", 0, 1);
+                    SaveGame.Gui.Print(Colour.Blue, "=============", 1, 1);
                     DisplayMonster(filtered[currentIndex], currentIndex, maxFiltered);
-                    Gui.Print(Colour.Orange,
+                    SaveGame.Gui.Print(Colour.Orange,
                         "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
-                    c = Gui.Inkey();
+                    c = SaveGame.Gui.Inkey();
                     if (c == '4')
                     {
                         if (currentIndex > 0)
@@ -616,12 +616,12 @@ namespace Cthangband
             int first = 0;
             while (true)
             {
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Mutations", 0, 1);
-                Gui.Print(Colour.Blue, "=========", 1, 1);
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Mutations", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "=========", 1, 1);
                 if (maxFeature == 0)
                 {
-                    Gui.Print(Colour.Blue, "You have no mutations.", 3, 0);
+                    SaveGame.Gui.Print(Colour.Blue, "You have no mutations.", 3, 0);
                 }
                 else
                 {
@@ -629,12 +629,12 @@ namespace Cthangband
                     {
                         if (i < maxFeature)
                         {
-                            Gui.Print(Colour.Blue, features[i], i - first + 3, 0);
+                            SaveGame.Gui.Print(Colour.Blue, features[i], i - first + 3, 0);
                         }
                     }
                 }
-                Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-                int c = Gui.Inkey();
+                SaveGame.Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                int c = SaveGame.Gui.Inkey();
                 if (c == '\x1b')
                 {
                     break;
@@ -680,12 +680,12 @@ namespace Cthangband
             int first = 0;
             while (true)
             {
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Pets", 0, 1);
-                Gui.Print(Colour.Blue, "====", 1, 1);
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Pets", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "====", 1, 1);
                 if (pets == 0)
                 {
-                    Gui.Print(Colour.Blue, "You have no pets.", 3, 0);
+                    SaveGame.Gui.Print(Colour.Blue, "You have no pets.", 3, 0);
                 }
                 else
                 {
@@ -693,12 +693,12 @@ namespace Cthangband
                     {
                         if (i < pets)
                         {
-                            Gui.Print(Colour.Blue, petNames[i], i - first + 3, 0);
+                            SaveGame.Gui.Print(Colour.Blue, petNames[i], i - first + 3, 0);
                         }
                     }
                 }
-                Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-                int c = Gui.Inkey();
+                SaveGame.Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                int c = SaveGame.Gui.Inkey();
                 if (c == '\x1b')
                 {
                     break;
@@ -728,9 +728,9 @@ namespace Cthangband
 
         private void JournalQuests()
         {
-            Gui.Clear();
-            Gui.Print(Colour.Blue, "Outstanding Quests", 0, 1);
-            Gui.Print(Colour.Blue, "==================", 1, 1);
+            SaveGame.Gui.Clear();
+            SaveGame.Gui.Print(Colour.Blue, "Outstanding Quests", 0, 1);
+            SaveGame.Gui.Print(Colour.Blue, "==================", 1, 1);
             int[] lev = new int[Constants.MaxCaves];
             int[] first = new int[Constants.MaxCaves];
             for (int i = 0; i < Constants.MaxCaves; i++)
@@ -757,35 +757,35 @@ namespace Cthangband
                 if (first[i] != -1)
                 {
                     string line = SaveGame.Quests.DescribeQuest(first[i]);
-                    Gui.Print(Colour.Blue, line, row, 0);
+                    SaveGame.Gui.Print(Colour.Blue, line, row, 0);
                     row++;
                 }
             }
             if (row == 3)
             {
-                Gui.Print(Colour.Blue, "Congratulations! You have completed all the quests.", row, 0);
+                SaveGame.Gui.Print(Colour.Blue, "Congratulations! You have completed all the quests.", row, 0);
             }
-            Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
-            Gui.Inkey();
+            SaveGame.Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Gui.Inkey();
         }
 
         private void JournalRecall()
         {
-            Gui.Clear();
-            Gui.Print(Colour.Blue, "Word of Recall", 0, 1);
-            Gui.Print(Colour.Blue, "==============", 1, 1);
+            SaveGame.Gui.Clear();
+            SaveGame.Gui.Print(Colour.Blue, "Word of Recall", 0, 1);
+            SaveGame.Gui.Print(Colour.Blue, "==============", 1, 1);
             string recallTown = SaveGame.Player.TownWithHouse > -1
                 ? SaveGame.Towns[SaveGame.Player.TownWithHouse].Name
                 : SaveGame.CurTown.Name;
             string recallDungeon = SaveGame.Dungeons[SaveGame.RecallDungeon].Name;
             int recallLev = SaveGame.Player.MaxDlv[SaveGame.RecallDungeon];
-            Gui.Print(Colour.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
-            Gui.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
+            SaveGame.Gui.Print(Colour.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
+            SaveGame.Gui.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
             if (SaveGame.Player.TownWithHouse > -1)
             {
                 recallTown = "your house in " + SaveGame.Dungeons[SaveGame.Player.TownWithHouse].Shortname;
             }
-            Gui.Print(Colour.Brown,
+            SaveGame.Gui.Print(Colour.Brown,
                 SaveGame.CurrentDepth == 0
                     ? $"If you recall now, you will return to level {recallLev} of {recallDungeon}."
                     : $"If you recall now, you will return to {recallTown}.", 6, 0);
@@ -796,10 +796,10 @@ namespace Cthangband
             description += "Your Word of Recall position has its dungeon location updated ";
             description += "only when you recall from a new dungeon or tower; but has its level updated ";
             description += "each time you reach a new level within that dungeon or tower. In either case, you will be transported to a random location on the dungeon or tower level.)";
-            Gui.Goto(8, 0);
-            Gui.PrintWrap(Colour.Blue, description);
-            Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
-            Gui.Inkey();
+            SaveGame.Gui.Goto(8, 0);
+            SaveGame.Gui.PrintWrap(Colour.Blue, description);
+            SaveGame.Gui.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Gui.Inkey();
         }
 
         private void JournalUniques()
@@ -822,23 +822,23 @@ namespace Cthangband
             int first = 0;
             while (true)
             {
-                Gui.Clear();
-                Gui.Print(Colour.Blue, "Unique Foes", 0, 1);
-                Gui.Print(Colour.Blue, "===========", 1, 1);
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.Print(Colour.Blue, "Unique Foes", 0, 1);
+                SaveGame.Gui.Print(Colour.Blue, "===========", 1, 1);
                 if (maxCount == 0)
                 {
-                    Gui.Print(Colour.Blue, "You know of no unique foes!", 3, 0);
+                    SaveGame.Gui.Print(Colour.Blue, "You know of no unique foes!", 3, 0);
                 }
                 for (int i = first; i < first + 38; i++)
                 {
                     if (i < maxCount)
                     {
                         string buf = alive[i] ? $"{names[i]} is alive." : $"{names[i]} is dead.";
-                        Gui.Print(Colour.Blue, buf, i - first + 3, 0);
+                        SaveGame.Gui.Print(Colour.Blue, buf, i - first + 3, 0);
                     }
                 }
-                Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-                int c = Gui.Inkey();
+                SaveGame.Gui.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                int c = SaveGame.Gui.Inkey();
                 if (c == '\x1b')
                 {
                     break;
@@ -868,17 +868,17 @@ namespace Cthangband
 
         private void JournalWorthlessItems()
         {
-            Gui.Clear();
-            Gui.Print(Colour.Blue, "Worthless Items", 0, 1);
-            Gui.Print(Colour.Blue, "===============", 1, 1);
-            Gui.Goto(3, 0);
+            SaveGame.Gui.Clear();
+            SaveGame.Gui.Print(Colour.Blue, "Worthless Items", 0, 1);
+            SaveGame.Gui.Print(Colour.Blue, "===============", 1, 1);
+            SaveGame.Gui.Goto(3, 0);
             string text = "Items marked in red ";
             text += "will be considered 'worthless' and you will stomp on them (destroying them) rather than ";
             text += "picking them up. Destroying (using 'k' or 'K') a worthless object will be done automatically ";
             text += "without you being prompted. Items will only be destroyed if they are on the floor or in your ";
             text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
             text += "quality to a non-worthless level).";
-            Gui.PrintWrap(Colour.Blue, text);
+            SaveGame.Gui.PrintWrap(Colour.Blue, text);
             for (int i = 0; i < TvalDescriptionPair.Tvals.Length - 1; i++)
             {
                 _menuItem[i] = TvalDescriptionPair.Tvals[i].Desc;
@@ -889,10 +889,10 @@ namespace Cthangband
             while (true)
             {
                 MenuDisplay(menu);
-                Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
-                    char c = Gui.Inkey();
+                    char c = SaveGame.Gui.Inkey();
                     if (c == '8' && menu > 0)
                     {
                         menu--;
@@ -924,8 +924,8 @@ namespace Cthangband
 
         private void MenuDisplay(int current)
         {
-            Gui.Clear(9);
-            Gui.Print(Colour.Orange, "=>", 25, 0);
+            SaveGame.Gui.Clear(9);
+            SaveGame.Gui.Print(Colour.Orange, "=>", 25, 0);
             string desc = string.Empty;
             Colour descColour = Colour.Brown;
             for (int i = 0; i < _menuLength; i++)
@@ -957,9 +957,9 @@ namespace Cthangband
                     }
                     descColour = a;
                 }
-                Gui.Print(a, _menuItem[i], row, 2);
+                SaveGame.Gui.Print(a, _menuItem[i], row, 2);
             }
-            Gui.Print(descColour, desc, 25, 33);
+            SaveGame.Gui.Print(descColour, desc, 25, 33);
         }
 
         private string StripDownName(string name)
@@ -984,10 +984,10 @@ namespace Cthangband
             while (true)
             {
                 MenuDisplay(menu);
-                Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
-                    char c = Gui.Inkey();
+                    char c = SaveGame.Gui.Inkey();
                     if (c == '8' && menu > 0)
                     {
                         menu--;
@@ -1026,10 +1026,10 @@ namespace Cthangband
             while (true)
             {
                 MenuDisplay(menu);
-                Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
-                    char c = Gui.Inkey();
+                    char c = SaveGame.Gui.Inkey();
                     if (c == '8' && menu > 0)
                     {
                         menu--;
@@ -1083,10 +1083,10 @@ namespace Cthangband
             while (true)
             {
                 MenuDisplay(menu);
-                Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Gui.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
-                    char c = Gui.Inkey();
+                    char c = SaveGame.Gui.Inkey();
                     if (c == '8' && menu > 0)
                     {
                         menu--;

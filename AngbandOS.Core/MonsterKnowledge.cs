@@ -39,16 +39,18 @@ namespace Cthangband
         private readonly string[] _wdHeCap = { "It", "He", "She" };
         private readonly string[] _wdHis = { "its", "his", "her" };
         private StringBuilder _description;
+        private readonly SaveGame SaveGame;
 
-        public MonsterKnowledge(MonsterRace monsterType)
+        public MonsterKnowledge(SaveGame saveGame, MonsterRace monsterType)
         {
+            SaveGame = saveGame;
             _monsterType = monsterType;
         }
 
         public void Display()
         {
-            SaveGame.Instance.MsgPrint(null);
-            Gui.Erase(1, 0, 255);
+            SaveGame.MsgPrint(null);
+            SaveGame.Gui.Erase(1, 0, 255);
             DisplayBody(Colour.White);
             DisplayHeader();
         }
@@ -60,9 +62,9 @@ namespace Cthangband
             string[] vp = new string[64];
             MonsterKnowledge knowledge = this;
             _description = new StringBuilder();
-            if (SaveGame.Instance.Player.IsWizard)
+            if (SaveGame.Player.IsWizard)
             {
-                knowledge = new MonsterKnowledge(_monsterType);
+                knowledge = new MonsterKnowledge(SaveGame, _monsterType);
                 for (m = 0; m < 4; m++)
                 {
                     if (_monsterType.Attack[m].Effect != 0 || _monsterType.Attack[m].Method != 0)
@@ -334,9 +336,9 @@ namespace Cthangband
                 {
                     _description.Append(" creature");
                 }
-                int i = _monsterType.Mexp * _monsterType.Level / SaveGame.Instance.Player.Level;
-                int j = ((_monsterType.Mexp * _monsterType.Level % SaveGame.Instance.Player.Level * 1000 /
-                         SaveGame.Instance.Player.Level) + 5) / 10;
+                int i = _monsterType.Mexp * _monsterType.Level / SaveGame.Player.Level;
+                int j = ((_monsterType.Mexp * _monsterType.Level % SaveGame.Player.Level * 1000 /
+                         SaveGame.Player.Level) + 5) / 10;
                 if (i > 0)
                 {
                     _description.Append(" is worth ").AppendFormat("{0:n0}", i).Append("xp");
@@ -350,8 +352,8 @@ namespace Cthangband
                     _description.Append(" is worth no xp");
                 }
                 p = "th";
-                i = SaveGame.Instance.Player.Level % 10;
-                if (SaveGame.Instance.Player.Level / 10 == 1)
+                i = SaveGame.Player.Level % 10;
+                if (SaveGame.Player.Level / 10 == 1)
                 {
                 }
                 else if (i == 1)
@@ -367,7 +369,7 @@ namespace Cthangband
                     p = "rd";
                 }
                 q = "";
-                i = SaveGame.Instance.Player.Level;
+                i = SaveGame.Player.Level;
                 if (i == 8 || i == 11 || i == 18)
                 {
                     q = "n";
@@ -1581,23 +1583,23 @@ namespace Cthangband
             {
                 _description.Append("You feel an intense desire to kill this monster... ");
             }
-            Gui.PrintWrap(bodyColour, _description.ToString());
+            SaveGame.Gui.PrintWrap(bodyColour, _description.ToString());
         }
 
         private void DisplayHeader()
         {
             char c1 = _monsterType.Character;
             Colour a1 = _monsterType.Colour;
-            Gui.Erase(0, 0, 255);
-            Gui.Goto(0, 0);
+            SaveGame.Gui.Erase(0, 0, 255);
+            SaveGame.Gui.Goto(0, 0);
             if ((_monsterType.Flags1 & MonsterFlag1.Unique) == 0)
             {
-                Gui.Print(Colour.White, "The ", -1);
+                SaveGame.Gui.Print(Colour.White, "The ", -1);
             }
-            Gui.Print(Colour.White, _monsterType.Name, -1);
-            Gui.Print(Colour.White, " ('", -1);
-            Gui.Print(a1, c1);
-            Gui.Print(Colour.White, "')", -1);
+            SaveGame.Gui.Print(Colour.White, _monsterType.Name, -1);
+            SaveGame.Gui.Print(Colour.White, " ('", -1);
+            SaveGame.Gui.Print(a1, c1);
+            SaveGame.Gui.Print(Colour.White, "')", -1);
         }
 
         private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)

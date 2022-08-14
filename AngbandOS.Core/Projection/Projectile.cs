@@ -153,16 +153,16 @@ namespace Cthangband.Projection
                             }
                             SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
                             SaveGame.Level.MoveCursorRelative(y9, x9);
-                            Gui.Refresh();
+                            SaveGame.Gui.Refresh();
                             visual = true;
-                            Gui.Pause(msec);
+                            SaveGame.Gui.Pause(msec);
                             SaveGame.Level.RedrawSingleLocation(y9, x9);
-                            Gui.Refresh();
+                            SaveGame.Gui.Refresh();
                         }
                     }
                     else if (visual)
                     {
-                        Gui.Pause(msec);
+                        SaveGame.Gui.Pause(msec);
                     }
                 }
                 y = y9;
@@ -298,10 +298,10 @@ namespace Cthangband.Projection
                     if (impactEntity != null)
                     {
                         SaveGame.Level.MoveCursorRelative(y2, x2);
-                        Gui.Refresh();
+                        SaveGame.Gui.Refresh();
                         if (visual || drawn)
                         {
-                            Gui.Pause(msec);
+                            SaveGame.Gui.Pause(msec);
                         }
                     }
                 }
@@ -317,13 +317,13 @@ namespace Cthangband.Projection
                         }
                     }
                     SaveGame.Level.MoveCursorRelative(y2, x2);
-                    Gui.Refresh();
+                    SaveGame.Gui.Refresh();
                 }
             }
 
             if (animationEntity != null)
             {
-                animationEntity.Animate(SaveGame.Level, gy, gx);
+                animationEntity.Animate(SaveGame, SaveGame.Level, gy, gx);
             }
 
             if ((flg & ProjectionFlag.ProjectGrid) != 0)

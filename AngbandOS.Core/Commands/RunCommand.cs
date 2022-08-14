@@ -28,7 +28,7 @@ namespace Cthangband.Commands
             if (targetEngine.GetDirectionNoAim(out int dir))
             {
                 // If we don't have a distance, assume we'll run for 1,000 steps
-                saveGame.Running = Gui.CommandArgument != 0 ? Gui.CommandArgument : 1000;
+                saveGame.Running = saveGame.Gui.CommandArgument != 0 ? saveGame.Gui.CommandArgument : 1000;
                 // Run one step in the chosen direction
                 saveGame.RunOneStep(dir);
             }

@@ -17,8 +17,11 @@ namespace Cthangband
     [Serializable]
     internal class ItemTypeArray : List<ItemType>
     {
-        public ItemTypeArray()
+        private readonly SaveGame SaveGame;
+
+        public ItemTypeArray(SaveGame saveGame)
         {
+            SaveGame = saveGame;
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
@@ -42,7 +45,7 @@ namespace Cthangband
                     return kPtr;
                 }
             }
-            SaveGame.Instance.MsgPrint($"No object ({tval},{sval})");
+            SaveGame.MsgPrint($"No object ({tval},{sval})");
             return null;
         }
 

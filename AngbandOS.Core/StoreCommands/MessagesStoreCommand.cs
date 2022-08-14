@@ -29,26 +29,26 @@ namespace Cthangband.StoreCommands
             int messageNumber = saveGame.MessageNum();
             int index = 0;
             int horizontalOffset = 0;
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.SetBackground(BackgroundImage.Normal);
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            saveGame.Gui.SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
             while (true)
             {
                 // Clear the screen
-                Gui.Clear();
+                saveGame.Gui.Clear();
                 int row;
                 // Print the messages
                 for (row = 0; row < 40 && index + row < messageNumber; row++)
                 {
                     string msg = saveGame.MessageStr((short)(index + row));
                     msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
-                    Gui.Print(Colour.White, msg, 41 - row, 0);
+                    saveGame.Gui.Print(Colour.White, msg, 41 - row, 0);
                 }
                 // Get a command
-                Gui.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
-                Gui.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
-                int keyCode = Gui.Inkey();
+                saveGame.Gui.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
+                saveGame.Gui.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
+                int keyCode = saveGame.Gui.Inkey();
                 if (keyCode == '\x1b')
                 {
                     // Break out of the infinite loop
@@ -88,8 +88,8 @@ namespace Cthangband.StoreCommands
                 }
             }
             // Tidy up after ourselves
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
+            saveGame.Gui.Load();
+            saveGame.Gui.FullScreenOverlay = false;
         }
     }
 }

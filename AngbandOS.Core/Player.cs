@@ -324,7 +324,7 @@ namespace Cthangband
                         }
                     }
                 }
-                Gui.PlaySound(SoundEffect.LevelGain);
+                SaveGame.Gui.PlaySound(SoundEffect.LevelGain);
                 SaveGame.MsgPrint($"Welcome to level {Level}.");
                 UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                 RedrawNeeded.Set(RedrawFlag.PrExp | RedrawFlag.PrLev | RedrawFlag.PrTitle);
@@ -1057,12 +1057,12 @@ namespace Cthangband
             {
                 if (MaxDlv[i] > 0)
                 {
-                    score += ((MaxDlv[i] + saveGame.Dungeons[i].Offset) * 10);
+                    score += ((MaxDlv[i] + SaveGame.Dungeons[i].Offset) * 10);
                 }
             }
-            for (int i = 0; i < saveGame.Quests.Count; i++)
+            for (int i = 0; i < SaveGame.Quests.Count; i++)
             {
-                if (saveGame.Quests[i].Level == 0)
+                if (SaveGame.Quests[i].Level == 0)
                 {
                     score += 100;
                 }
@@ -1089,14 +1089,14 @@ namespace Cthangband
 
         public void InputPlayerName()
         {
-            Gui.Clear(42);
-            Gui.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+            SaveGame.Gui.Clear(42);
+            SaveGame.Gui.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
             const int col = 15;
             while (true)
             {
-                Gui.Goto(2, col);
+                SaveGame.Gui.Goto(2, col);
                 string tmp = Name;
-                if (!Gui.AskforAux(out Name, tmp, 12))
+                if (!SaveGame.Gui.AskforAux(out Name, tmp, 12))
                 {
                     Name = tmp;
                 }
@@ -1107,8 +1107,8 @@ namespace Cthangband
                 break;
             }
             Name = Name.PadRight(12);
-            Gui.Print(Colour.Brown, Name, 2, col);
-            Gui.Clear(22);
+            SaveGame.Gui.Print(Colour.Brown, Name, 2, col);
+            SaveGame.Gui.Clear(22);
         }
 
         public void LoseExperience(int amount)
@@ -1208,16 +1208,16 @@ namespace Cthangband
         {
             int i;
             int set = realm == Realm1 ? 0 : 1;
-            Gui.PrintLine("", y, x);
-            Gui.Print("Name", y, x + 5);
-            Gui.Print("Lv Mana Fail Info", y, x + 35);
+            SaveGame.Gui.PrintLine("", y, x);
+            SaveGame.Gui.Print("Name", y, x + 5);
+            SaveGame.Gui.Print("Lv Mana Fail Info", y, x + 35);
             for (i = 0; i < num; i++)
             {
                 int spell = spells[i];
                 Spell sPtr = Spellcasting.Spells[set][spell];
-                Gui.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
+                SaveGame.Gui.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
             }
-            Gui.PrintLine("", y + i + 1, x);
+            SaveGame.Gui.PrintLine("", y + i + 1, x);
         }
 
         public void RegenerateHealth(int percent)
@@ -2726,13 +2726,13 @@ namespace Cthangband
                 }
                 else
                 {
-                    if (IsWizard && !Gui.GetCheck("Die? "))
+                    if (IsWizard && !SaveGame.Gui.GetCheck("Die? "))
                     {
                         Health += damage;
                     }
                     else
                     {
-                        Gui.PlaySound(SoundEffect.PlayerDeath);
+                        SaveGame.Gui.PlaySound(SoundEffect.PlayerDeath);
                         SaveGame.MsgPrint("You die.");
                         SaveGame.MsgPrint(null);
                         SaveGame.DiedFrom = hitFrom;
@@ -2748,7 +2748,7 @@ namespace Cthangband
             }
             if (Health < warning)
             {
-                Gui.PlaySound(SoundEffect.HealthWarning);
+                SaveGame.Gui.PlaySound(SoundEffect.HealthWarning);
                 SaveGame.MsgPrint("*** LOW HITPOINT WARNING! ***");
                 SaveGame.MsgPrint(null);
             }

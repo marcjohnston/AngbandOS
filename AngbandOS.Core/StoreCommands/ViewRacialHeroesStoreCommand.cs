@@ -14,11 +14,11 @@ namespace Cthangband.StoreCommands
 
         public void Execute(SaveGame saveGame, Store store)
         {
-            Gui.Save();
+            saveGame.Gui.Save();
             Program.HiScores.RaceFilter = saveGame.Player.RaceIndex;
             Program.HiScores.DisplayScores(new HighScore(saveGame));
             Program.HiScores.RaceFilter = -1;
-            Gui.Load();
+            saveGame.Gui.Load();
         }
 
         public bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);

@@ -21,7 +21,7 @@ namespace Cthangband.Commands
         {
             var menuItems = new List<string>() { "Resume Game", "Quit to Menu", "Quit to Desktop" };
             var menu = new PopupMenu(menuItems);
-            var result = menu.Show();
+            var result = menu.Show(saveGame);
             switch (result)
             {
                 // Escape or Resume Game

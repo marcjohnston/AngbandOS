@@ -20,7 +20,7 @@ namespace Cthangband.Commands
             // If we're a winner it's a simple question with a more positive connotation
             if (saveGame.Player.IsWinner)
             {
-                if (!Gui.GetCheck("Do you want to retire? "))
+                if (!saveGame.Gui.GetCheck("Do you want to retire? "))
                 {
                     return;
                 }
@@ -31,15 +31,15 @@ namespace Cthangband.Commands
                 // character doesn't need a prompt/confirmation
                 if (!saveGame.Player.IsWizard)
                 {
-                    if (!Gui.GetCheck("Do you really want to give up? "))
+                    if (!saveGame.Gui.GetCheck("Do you really want to give up? "))
                     {
                         return;
                     }
                     // Require a confirmation to make sure the player doesn't accidentally give up a
                     // long-running character
-                    Gui.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
-                    int i = Gui.Inkey();
-                    Gui.PrintLine("", 0, 0);
+                    saveGame.Gui.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
+                    int i = saveGame.Gui.Inkey();
+                    saveGame.Gui.PrintLine("", 0, 0);
                     if (i != '@')
                     {
                         return;

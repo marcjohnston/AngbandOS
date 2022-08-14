@@ -18,10 +18,10 @@ namespace Cthangband.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            if (Gui.CommandArgument <= 0)
+            if (saveGame.Gui.CommandArgument <= 0)
             {
                 const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
-                if (!Gui.GetString(prompt, out string choice, "&", 4))
+                if (!saveGame.Gui.GetString(prompt, out string choice, "&", 4))
                 {
                     return;
                 }
@@ -33,41 +33,41 @@ namespace Cthangband.Commands
                 // -2 means rest until we're fine
                 if (choice[0] == '&')
                 {
-                    Gui.CommandArgument = -2;
+                    saveGame.Gui.CommandArgument = -2;
                 }
                 // -1 means rest until we're at full health, but don't worry about waiting for other
                 // status effects to go away
                 else if (choice[0] == '*')
                 {
-                    Gui.CommandArgument = -1;
+                    saveGame.Gui.CommandArgument = -1;
                 }
                 else
                 {
                     // A number means rest for that many turns
                     if (int.TryParse(choice, out int i))
                     {
-                        Gui.CommandArgument = i;
+                        saveGame.Gui.CommandArgument = i;
                     }
                     // The player might not have put a number in - so abandon if they didn't
-                    if (Gui.CommandArgument <= 0)
+                    if (saveGame.Gui.CommandArgument <= 0)
                     {
                         return;
                     }
                 }
             }
             // Can't rest for more than 9999 turns
-            if (Gui.CommandArgument > 9999)
+            if (saveGame.Gui.CommandArgument > 9999)
             {
-                Gui.CommandArgument = 9999;
+                saveGame.Gui.CommandArgument = 9999;
             }
             // Resting takes at least one turn (we'll also be skipping future turns)
             saveGame.EnergyUse = 100;
-            saveGame.Resting = Gui.CommandArgument;
+            saveGame.Resting = saveGame.Gui.CommandArgument;
             saveGame.Player.IsSearching = false;
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
             saveGame.HandleStuff();
-            Gui.Refresh();
+            saveGame.Gui.Refresh();
         }
     }
 }

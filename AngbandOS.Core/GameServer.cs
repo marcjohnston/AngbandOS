@@ -24,7 +24,7 @@ namespace Cthangband
         {
             SaveGame saveGame = saveGameDictionary[guid];
             Settings _settings = new Settings();
-            Gui.Initialise(_settings, console);
+            saveGame.Gui.Initialise(_settings, console);
             saveGame.Play();
         }
     }
@@ -55,9 +55,9 @@ namespace Cthangband
         {
             SaveGame saveGame = saveGameDictionary[guid];
             Settings _settings = new Settings();
-            if (Gui.ColorData.Count == 0)
+            if (saveGame.Gui.ColorData.Count == 0)
             {
-                Gui.Initialise(_settings, console);
+                saveGame.Gui.Initialise(_settings, console);
             }
             saveGame.Play();
         }

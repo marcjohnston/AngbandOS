@@ -42,22 +42,22 @@ namespace Cthangband.UI
             }
         }
 
-        public int DisplayMenu()
+        public int DisplayMenu(SaveGame saveGame)
         {
             var top = Constants.ConsoleHeight / 2 - (_items.Count + _text.Count) / 2;
             var left = Constants.ConsoleWidth / 2 - _menuWidth / 2;
             var topBottomBorder = "+" + new string('-', _menuWidth) + "+";
             var leftRightBorder = "|" + new string(' ', _menuWidth) + "|";
             var chosenItem = 0;
-            Gui.Print(Colour.White, topBottomBorder, top, left);
+            saveGame.Gui.Print(Colour.White, topBottomBorder, top, left);
             for (int i = 0; i < _text.Count + _items.Count; i++)
             {
-                Gui.Print(Colour.White, leftRightBorder, top + i + 1, left);
+                saveGame.Gui.Print(Colour.White, leftRightBorder, top + i + 1, left);
             }
-            Gui.Print(Colour.White, topBottomBorder, top + (_items.Count + _text.Count) + 1, left);
+            saveGame.Gui.Print(Colour.White, topBottomBorder, top + (_items.Count + _text.Count) + 1, left);
             for (int i = 0; i < _text.Count; i++)
             {
-                Gui.Print(Colour.White, _text[i], top + i + 1, left + 1);
+                saveGame.Gui.Print(Colour.White, _text[i], top + i + 1, left + 1);
             }
             while (true)
             {
@@ -65,15 +65,15 @@ namespace Cthangband.UI
                 {
                     if (i == chosenItem)
                     {
-                        Gui.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Gui.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
                     }
                     else
                     {
-                        Gui.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Gui.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
                     }
                 }
-                Gui.HideCursorOnFullScreenInkey = true;
-                char k = Gui.Inkey();
+                saveGame.Gui.HideCursorOnFullScreenInkey = true;
+                char k = saveGame.Gui.Inkey();
                 
                 switch (k)
                 {
@@ -103,15 +103,15 @@ namespace Cthangband.UI
             }
         }
 
-        public int Show()
+        public int Show(SaveGame saveGame)
         {
-            Gui.InPopupMenu = true;
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            var result = DisplayMenu();
-            Gui.Load();
-            Gui.InPopupMenu = false;
-            Gui.FullScreenOverlay = false;
+            saveGame.Gui.InPopupMenu = true;
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            var result = DisplayMenu(saveGame);
+            saveGame.Gui.Load();
+            saveGame.Gui.InPopupMenu = false;
+            saveGame.Gui.FullScreenOverlay = false;
             return result;
         }
     }

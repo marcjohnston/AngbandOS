@@ -12,15 +12,17 @@ using System.Collections.Generic;
 
 namespace Cthangband
 {
-    internal class HighScoreTable
+    internal class HighScoreTable // TODO: Reconnect back to the splash screen
     {
         public int ClassFilter = -1;
         public int RaceFilter = -1;
 
         private readonly List<HighScore> _scores;
+        private readonly SaveGame SaveGame;
 
-        public HighScoreTable()
+        public HighScoreTable(SaveGame saveGame)
         {
+            SaveGame = saveGame;
             _scores = Program.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
             ClearScoreFlags();
         }
@@ -81,11 +83,11 @@ namespace Cthangband
             }
             if (collectedScores.Count == 0)
             {
-                Gui.Clear();
-                Gui.SetBackground(BackgroundImage.Normal);
-                Gui.Print(Colour.Yellow, "High Scores", 1, 34);
-                Gui.Print(Colour.Yellow, "===========", 2, 34);
-                Gui.AnyKey(43);
+                SaveGame.Gui.Clear();
+                SaveGame.Gui.SetBackground(BackgroundImage.Normal);
+                SaveGame.Gui.Print(Colour.Yellow, "High Scores", 1, 34);
+                SaveGame.Gui.Print(Colour.Yellow, "===========", 2, 34);
+                SaveGame.Gui.AnyKey(43);
                 return;
             }
 
@@ -96,10 +98,10 @@ namespace Cthangband
             {
                 if (line == 0)
                 {
-                    Gui.Clear();
-                    Gui.SetBackground(BackgroundImage.Normal);
-                    Gui.Print(Colour.Yellow, "High Scores", 1, 34);
-                    Gui.Print(Colour.Yellow, "===========", 2, 34);
+                    SaveGame.Gui.Clear();
+                    SaveGame.Gui.SetBackground(BackgroundImage.Normal);
+                    SaveGame.Gui.Print(Colour.Yellow, "High Scores", 1, 34);
+                    SaveGame.Gui.Print(Colour.Yellow, "===========", 2, 34);
                 }
                 ShowScore(collectedScores[0], line);
                 line++;
@@ -107,7 +109,7 @@ namespace Cthangband
                 if (line > 9 || collectedScores.Count == 0)
                 {
                     line = 0;
-                    Gui.AnyKey(43);
+                    SaveGame.Gui.AnyKey(43);
                 }
             } while (collectedScores.Count > 0);
         }
@@ -273,15 +275,15 @@ namespace Cthangband
             if (score.Living)
             {
                 color = Colour.BrightGreen;
-                Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-                Gui.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
-                Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+                SaveGame.Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+                SaveGame.Gui.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
+                SaveGame.Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
             }
             else
             {
-                Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-                Gui.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
-                Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+                SaveGame.Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+                SaveGame.Gui.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
+                SaveGame.Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
             }
         }
 

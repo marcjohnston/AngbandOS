@@ -2109,28 +2109,28 @@ namespace Cthangband
             {
                 return false;
             }
-            Gui.Save();
+            SaveGame.Gui.Save();
             for (k = 1; k < 24; k++)
             {
-                Gui.PrintLine("", k, 13);
+                SaveGame.Gui.PrintLine("", k, 13);
             }
-            Gui.PrintLine("     Item Attributes:", 1, 15);
+            SaveGame.Gui.PrintLine("     Item Attributes:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
-                Gui.PrintLine(info[j], k++, 15);
+                SaveGame.Gui.PrintLine(info[j], k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    Gui.PrintLine("-- more --", k, 15);
-                    Gui.Inkey();
+                    SaveGame.Gui.PrintLine("-- more --", k, 15);
+                    SaveGame.Gui.Inkey();
                     for (; k > 2; k--)
                     {
-                        Gui.PrintLine("", k, 15);
+                        SaveGame.Gui.PrintLine("", k, 15);
                     }
                 }
             }
-            Gui.PrintLine("[Press any key to continue]", k, 15);
-            Gui.Inkey();
-            Gui.Load();
+            SaveGame.Gui.PrintLine("[Press any key to continue]", k, 15);
+            SaveGame.Gui.Inkey();
+            SaveGame.Gui.Load();
             return true;
         }
 
@@ -3491,7 +3491,7 @@ namespace Cthangband
             {
                 IdentifyFully();
                 IdentifyFlags.Set(Constants.IdentStoreb);
-                if (!Gui.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
+                if (!SaveGame.Gui.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
                 {
                     newName = "(a DIY artifact)";
                 }

@@ -16,54 +16,60 @@ using System.Threading;
 namespace Cthangband.UI
 {
     /// <summary>
-    /// Static class for user interaction
+    /// class for user interaction
     /// </summary>
-    internal static class Gui
+    internal class Gui
     {
-        public static readonly Dictionary<Colour, Color> ColorData = new Dictionary<Colour, Color>();
-        public static int CommandArgument;
-        public static int CommandDirection;
-        public static char CurrentCommand;
+        private readonly SaveGame SaveGame;
+
+        public Gui(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+        public readonly Dictionary<Colour, Color> ColorData = new Dictionary<Colour, Color>();
+        public int CommandArgument;
+        public int CommandDirection;
+        public char CurrentCommand;
 
         /// <summary>
         /// Set to skip waiting for a keypress in the Inkey() function
         /// </summary>
-        public static bool DoNotWaitOnInkey;
+        public bool DoNotWaitOnInkey;
 
         /// <summary>
         /// Set to indicate that there is a full screen overlay covering the normally updated locations
         /// </summary>
-        public static bool FullScreenOverlay;
+        public bool FullScreenOverlay;
 
         /// <summary>
         /// Set to indicate that the cursor should be hidden while waiting for a keypress with a
         /// full screen overlay
         /// </summary>
-        public static bool HideCursorOnFullScreenInkey;
+        public bool HideCursorOnFullScreenInkey;
 
-        public static bool InPopupMenu;
-        public static char QueuedCommand;
-        private static Display _display;
+        public bool InPopupMenu;
+        public char QueuedCommand;
+        private Display _display;
 
         /// <summary>
         /// A buffer of artificial keypresses
         /// </summary>
-        private static string _keyBuffer;
+        private string _keyBuffer;
 
-        private static string[][] _keymapAct;
-        private static string _requestCommandBuffer;
-        private static Terminal.Terminal _terminal;
+        private string[][] _keymapAct;
+        private string _requestCommandBuffer;
+        private Terminal.Terminal _terminal;
 
         /// <summary>
         /// Sets or returns whether the cursor is visible
         /// </summary>
-        public static bool CursorVisible
+        public bool CursorVisible
         {
             get => _display.Scr.Cv;
             set => _display.Scr.Cv = value;
         }
 
-        public static Terminal.Terminal Terminal
+        public Terminal.Terminal Terminal
         {
             get
             {
@@ -75,7 +81,7 @@ namespace Cthangband.UI
         /// Prints a 'press any key' message and waits for a key press
         /// </summary>
         /// <param name="row"> The row on which to print the message </param>
-        public static void AnyKey(int row)
+        public void AnyKey(int row)
         {
             PrintLine("", row, 0);
             Print(Colour.Orange, "[Press any key to continue]", row, 27);
@@ -83,7 +89,7 @@ namespace Cthangband.UI
             PrintLine("", row, 0);
         }
 
-        public static bool AskforAux(out string buf, string initial, int len)
+        public bool AskforAux(out string buf, string initial, int len)
         {
             buf = initial;
             char i = '\0';
@@ -147,7 +153,7 @@ namespace Cthangband.UI
         /// Clears the screen from the specified row downwards
         /// </summary>
         /// <param name="row"> The first row to clear </param>
-        public static void Clear(int row)
+        public void Clear(int row)
         {
             for (int y = row; y < _display.Height; y++)
             {
@@ -158,7 +164,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Clears the entire screen
         /// </summary>
-        public static void Clear()
+        public void Clear()
         {
             int w = _display.Width;
             int h = _display.Height;
@@ -190,7 +196,7 @@ namespace Cthangband.UI
         /// <param name="row"> The row position of the first character </param>
         /// <param name="col"> The column position of the first character </param>
         /// <param name="length"> The number of characters to erase </param>
-        public static void Erase(int row, int col, int length)
+        public void Erase(int row, int col, int length)
         {
             int w = _display.Width;
             int x1 = -1;
@@ -241,10 +247,10 @@ namespace Cthangband.UI
             }
         }
 
-        public static bool GetCheck(string prompt)
+        public bool GetCheck(string prompt)
         {
             int i;
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint(null);
             string buf = $"{prompt}[Y/n]";
             PrintLine(buf, 0, 0);
             while (true)
@@ -269,9 +275,9 @@ namespace Cthangband.UI
             return i == 'Y' || i == 'y' || i == 13;
         }
 
-        public static bool GetCom(string prompt, out char command)
+        public bool GetCom(string prompt, out char command)
         {
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint(null);
             if (prompt.Length > 1)
             {
                 prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
@@ -282,7 +288,7 @@ namespace Cthangband.UI
             return command != '\x1b';
         }
 
-        public static int GetKeymapDir(char ch)
+        public int GetKeymapDir(char ch)
         {
             int d = 0;
             string act = _keymapAct[Constants.KeymapModeOrig][ch];
@@ -308,7 +314,7 @@ namespace Cthangband.UI
             return d;
         }
 
-        public static int GetQuantity(string prompt, int max, bool allbydefault)
+        public int GetQuantity(string prompt, int max, bool allbydefault)
         {
             int amt;
             if (CommandArgument != 0)
@@ -359,9 +365,9 @@ namespace Cthangband.UI
             return amt;
         }
 
-        public static bool GetString(string prompt, out string buf, string initial, int len)
+        public bool GetString(string prompt, out string buf, string initial, int len)
         {
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint(null);
             PrintLine(prompt, 0, 0);
             bool res = AskforAux(out buf, initial, len);
             PrintLine("", 0, 0);
@@ -373,7 +379,7 @@ namespace Cthangband.UI
         /// </summary>
         /// <param name="row"> The row at which to print </param>
         /// <param name="col"> The column at which to print </param>
-        public static void Goto(int row, int col)
+        public void Goto(int row, int col)
         {
             int w = _display.Width;
             int h = _display.Height;
@@ -393,7 +399,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Initialises the Gui
         /// </summary>
-        public static void Initialise(Settings settings, IConsole console)
+        public void Initialise(Settings settings, IConsole console)
         {
             _terminal = new Terminal.Terminal(console);
             _terminal.Refresh();
@@ -438,7 +444,7 @@ namespace Cthangband.UI
         /// Returns the next keypress. The behaviour of this function is modified by other class properties
         /// </summary>
         /// <returns> The next key pressed </returns>
-        public static char Inkey()
+        public char Inkey()
         {
             char ch = '\0';
             bool done = false;
@@ -500,7 +506,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Re-loads the saved screen to the GUI
         /// </summary>
-        public static void Load()
+        public void Load()
         {
             int w = _display.Width;
             int h = _display.Height;
@@ -522,7 +528,7 @@ namespace Cthangband.UI
         /// Pauses for a duration
         /// </summary>
         /// <param name="duration"> The duration of the pause, in milliseconds </param>
-        public static void Pause(int duration)
+        public void Pause(int duration)
         {
             Thread.Sleep(duration);
         }
@@ -534,7 +540,7 @@ namespace Cthangband.UI
         /// <param name="ch"> The character to place </param>
         /// <param name="row"> The row at which to place the character </param>
         /// <param name="col"> The column at which to place the character </param>
-        public static void Place(Colour attr, char ch, int row, int col)
+        public void Place(Colour attr, char ch, int row, int col)
         {
             int w = _display.Width;
             int h = _display.Height;
@@ -557,9 +563,9 @@ namespace Cthangband.UI
         /// Plays a sound
         /// </summary>
         /// <param name="val"> The sound to play </param>
-        public static void PlaySound(SoundEffect sound)
+        public void PlaySound(SoundEffect sound)
         {
-            Gui.Terminal.PlaySound(sound);
+            Terminal.PlaySound(sound);
         }
 
         /// <summary>
@@ -567,7 +573,7 @@ namespace Cthangband.UI
         /// </summary>
         /// <param name="attr"> The colour in which to print the character </param>
         /// <param name="ch"> The character to print </param>
-        public static void Print(Colour attr, char ch)
+        public void Print(Colour attr, char ch)
         {
             int w = _display.Width;
             if (_display.Scr.Cu)
@@ -594,7 +600,7 @@ namespace Cthangband.UI
         /// <param name="ch"> The character to print </param>
         /// <param name="row"> The y position at which to print </param>
         /// <param name="col"> The x position at which to print </param>
-        public static void Print(Colour attr, char ch, int row, int col)
+        public void Print(Colour attr, char ch, int row, int col)
         {
             Goto(row, col);
             Print(attr, ch);
@@ -606,7 +612,7 @@ namespace Cthangband.UI
         /// <param name="attr"> The colour in which to print the string </param>
         /// <param name="str"> The string to print </param>
         /// <param name="length"> The number of characters to print (-1 for all) </param>
-        public static void Print(Colour attr, string str, int length)
+        public void Print(Colour attr, string str, int length)
         {
             if (string.IsNullOrEmpty(str))
             {
@@ -644,7 +650,7 @@ namespace Cthangband.UI
         /// <param name="row"> The y position at which to print the string </param>
         /// <param name="col"> The x position at which to print the string </param>
         /// <param name="length"> The number of characters to print (-1 for all) </param>
-        public static void Print(Colour attr, string str, int row, int col, int length)
+        public void Print(Colour attr, string str, int row, int col, int length)
         {
             Goto(row, col);
             Print(attr, str, length);
@@ -656,7 +662,7 @@ namespace Cthangband.UI
         /// <param name="str"> The string to print </param>
         /// <param name="row"> The row at which to print </param>
         /// <param name="col"> The column at which to print </param>
-        public static void Print(string str, int row, int col)
+        public void Print(string str, int row, int col)
         {
             Goto(row, col);
             Print(Colour.White, str, -1);
@@ -669,7 +675,7 @@ namespace Cthangband.UI
         /// <param name="str"> The string to print </param>
         /// <param name="row"> The row at which to print </param>
         /// <param name="col"> The column at which to print </param>
-        public static void Print(Colour attr, string str, int row, int col)
+        public void Print(Colour attr, string str, int row, int col)
         {
             Goto(row, col);
             Print(attr, str, -1);
@@ -682,7 +688,7 @@ namespace Cthangband.UI
         /// <param name="str"> The string to print </param>
         /// <param name="row"> The row at which to print </param>
         /// <param name="col"> The column at which to print </param>
-        public static void PrintLine(Colour attr, string str, int row, int col)
+        public void PrintLine(Colour attr, string str, int row, int col)
         {
             Erase(row, col, 255);
             Print(attr, str, -1);
@@ -694,7 +700,7 @@ namespace Cthangband.UI
         /// <param name="str"> The string to print </param>
         /// <param name="row"> The row at which to print </param>
         /// <param name="col"> The column at which to print </param>
-        public static void PrintLine(string str, int row, int col)
+        public void PrintLine(string str, int row, int col)
         {
             PrintLine(Colour.White, str, row, col);
         }
@@ -704,7 +710,7 @@ namespace Cthangband.UI
         /// </summary>
         /// <param name="a"> The colour in which to print </param>
         /// <param name="str"> The string to print </param>
-        public static void PrintWrap(Colour a, string str)
+        public void PrintWrap(Colour a, string str)
         {
             GetSize(out int w, out _);
             Locate(out int y, out int x);
@@ -754,7 +760,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Redraw the entire window
         /// </summary>
-        public static void Redraw()
+        public void Redraw()
         {
             _display.TotalErase = true;
             Refresh();
@@ -763,7 +769,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Refresh the window, drawing all queued print and erase requests
         /// </summary>
-        public static void Refresh()
+        public void Refresh()
         {
             int y;
             int w = _display.Width;
@@ -849,7 +855,7 @@ namespace Cthangband.UI
             _terminal.Refresh();
         }
 
-        public static void RequestCommand(bool shopping)
+        public void RequestCommand(bool shopping)
         {
             const int mode = Constants.KeymapModeOrig;
             CurrentCommand = (char)0;
@@ -860,13 +866,13 @@ namespace Cthangband.UI
                 char cmd;
                 if (QueuedCommand != 0)
                 {
-                    SaveGame.Instance.MsgPrint(null);
+                    SaveGame.MsgPrint(null);
                     cmd = QueuedCommand;
                     QueuedCommand = (char)0;
                 }
                 else
                 {
-                    SaveGame.Instance.MsgFlag = false;
+                    SaveGame.MsgFlag = false;
                     HideCursorOnFullScreenInkey = true;
                     cmd = Inkey();
                 }
@@ -948,18 +954,18 @@ namespace Cthangband.UI
         /// <summary>
         /// Save the screen to memory for later re-loading
         /// </summary>
-        public static void Save()
+        public void Save()
         {
             int w = _display.Width;
             int h = _display.Height;
             (_display.Mem ?? (_display.Mem = new Screen(w, h))).Copy(_display.Scr, w, h);
         }
 
-        public static void ShowManual()
+        public void ShowManual()
         {
         }
 
-        internal static void SetBackground(BackgroundImage image)
+        internal void SetBackground(BackgroundImage image)
         {
             _terminal.SetBackground(image);
         }
@@ -968,7 +974,7 @@ namespace Cthangband.UI
         /// Adds a keypress to the internal queue
         /// </summary>
         /// <param name="k"> The keypress to add </param>
-        private static void EnqueueKey(char k)
+        private void EnqueueKey(char k)
         {
             if (k == 0)
             {
@@ -988,7 +994,7 @@ namespace Cthangband.UI
         /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
         /// <param name="take"> Whether to take the keypress out of the queue </param>
         /// <returns> True if a keypress was available, false otherwise </returns>
-        private static bool GetKeypress(out char ch, bool wait, bool take)
+        private bool GetKeypress(out char ch, bool wait, bool take)
         {
             ch = '\0';
             if (wait)
@@ -1016,7 +1022,7 @@ namespace Cthangband.UI
         /// </summary>
         /// <param name="w"> The width of the display </param>
         /// <param name="h"> The height of the display </param>
-        private static void GetSize(out int w, out int h)
+        private void GetSize(out int w, out int h)
         {
             w = _display.Width;
             h = _display.Height;
@@ -1027,13 +1033,13 @@ namespace Cthangband.UI
         /// </summary>
         /// <param name="row"> The row of the cursor </param>
         /// <param name="col"> The column of the cursor </param>
-        private static void Locate(out int row, out int col)
+        private void Locate(out int row, out int col)
         {
             col = _display.Scr.Cx;
             row = _display.Scr.Cy;
         }
 
-        private static void MapMovementKeys()
+        private void MapMovementKeys()
         {
             _keymapAct = new string[Constants.KeymapModes][];
             for (int i = 0; i < Constants.KeymapModes; i++)
@@ -1062,7 +1068,7 @@ namespace Cthangband.UI
         /// <param name="y"> The y location to display the character </param>
         /// <param name="a"> The colour in which to display the character </param>
         /// <param name="c"> The character to display </param>
-        private static void QueueCharacter(int x, int y, Colour a, char c)
+        private void QueueCharacter(int x, int y, Colour a, char c)
         {
             int scrAa = _display.Scr.A[y];
             int scrCc = _display.Scr.C[y];
@@ -1100,7 +1106,7 @@ namespace Cthangband.UI
         /// <param name="n"> The number of characters to display (-1 for all) </param>
         /// <param name="a"> The colour in which to display the string </param>
         /// <param name="s"> The string to print </param>
-        private static void QueueCharacters(int x, int y, int n, Colour a, string s)
+        private void QueueCharacters(int x, int y, int n, Colour a, string s)
         {
             int x1 = -1;
             int x2 = -1;
@@ -1154,7 +1160,7 @@ namespace Cthangband.UI
         /// <param name="y"> The row to refresh </param>
         /// <param name="x1"> The first character to refresh </param>
         /// <param name="x2"> The last character to refresh </param>
-        private static void RefreshTextRow(int y, int x1, int x2)
+        private void RefreshTextRow(int y, int x1, int x2)
         {
             int oldAa = _display.Old.A[y];
             int oldCc = _display.Old.C[y];

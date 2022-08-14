@@ -91,7 +91,7 @@ namespace Cthangband.Commands
                 saveGame.MsgPrint("The rod is still charging.");
                 return;
             }
-            Gui.PlaySound(SoundEffect.ZapRod);
+            saveGame.Gui.PlaySound(SoundEffect.ZapRod);
             // Do the rod-specific effect
             bool useCharge = true;
             switch (item.ItemSubCategory)

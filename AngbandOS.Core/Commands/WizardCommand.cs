@@ -33,7 +33,7 @@ namespace Cthangband.Commands
 
         public void DoCmdWizard(SaveGame saveGame)
         {
-            Gui.GetCom("Wizard Command: ", out char cmd);
+            saveGame.Gui.GetCom("Wizard Command: ", out char cmd);
             switch (cmd)
             {
                 case '\x1b':
@@ -47,7 +47,7 @@ namespace Cthangband.Commands
                     break;
 
                 case '?':
-                    DoCmdWizHelp();
+                    DoCmdWizHelp(saveGame);
                     break;
 
                 case 'A':
@@ -67,7 +67,7 @@ namespace Cthangband.Commands
                     break;
 
                 case 'C':
-                    WizCreateNamedArt(saveGame, (FixedArtifactId)Gui.CommandArgument);
+                    WizCreateNamedArt(saveGame, (FixedArtifactId)saveGame.Gui.CommandArgument);
                     break;
 
                 case 'd':
@@ -83,11 +83,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 'g':
-                    if (Gui.CommandArgument <= 0)
+                    if (saveGame.Gui.CommandArgument <= 0)
                     {
-                        Gui.CommandArgument = 1;
+                        saveGame.Gui.CommandArgument = 1;
                     }
-                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, false);
+                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Gui.CommandArgument, false);
                     break;
 
                 case 'h':
@@ -127,11 +127,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 'N':
-                    DoCmdWizNamedFriendly(saveGame, Gui.CommandArgument, true);
+                    DoCmdWizNamedFriendly(saveGame, saveGame.Gui.CommandArgument, true);
                     break;
 
                 case 'n':
-                    DoCmdWizNamed(saveGame, Gui.CommandArgument, true);
+                    DoCmdWizNamed(saveGame, saveGame.Gui.CommandArgument, true);
                     break;
 
                 case 'o':
@@ -143,11 +143,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 's':
-                    if (Gui.CommandArgument <= 0)
+                    if (saveGame.Gui.CommandArgument <= 0)
                     {
-                        Gui.CommandArgument = 1;
+                        saveGame.Gui.CommandArgument = 1;
                     }
-                    DoCmdWizSummon(saveGame, Gui.CommandArgument);
+                    DoCmdWizSummon(saveGame, saveGame.Gui.CommandArgument);
                     break;
 
                 case 't':
@@ -155,11 +155,11 @@ namespace Cthangband.Commands
                     break;
 
                 case 'v':
-                    if (Gui.CommandArgument <= 0)
+                    if (saveGame.Gui.CommandArgument <= 0)
                     {
-                        Gui.CommandArgument = 1;
+                        saveGame.Gui.CommandArgument = 1;
                     }
-                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Gui.CommandArgument, true);
+                    saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Gui.CommandArgument, true);
                     break;
 
                 case 'w':
@@ -175,9 +175,9 @@ namespace Cthangband.Commands
                     break;
 
                 case 'x':
-                    if (Gui.CommandArgument != 0)
+                    if (saveGame.Gui.CommandArgument != 0)
                     {
-                        saveGame.Player.GainExperience(Gui.CommandArgument);
+                        saveGame.Player.GainExperience(saveGame.Gui.CommandArgument);
                     }
                     else
                     {
@@ -202,12 +202,12 @@ namespace Cthangband.Commands
 
         public void DoCmdWizmode(SaveGame saveGame)
         {
-            Gui.PrintLine("Enter Wizard Code: ", 0, 0);
-            if (!Gui.AskforAux(out string tmp, "", 31))
+            saveGame.Gui.PrintLine("Enter Wizard Code: ", 0, 0);
+            if (!saveGame.Gui.AskforAux(out string tmp, "", 31))
             {
                 return;
             }
-            Gui.Erase(0, 0, 255);
+            saveGame.Gui.Erase(0, 0, 255);
             if (tmp == "Dumbledore")
             {
                 saveGame.Player.IsWizard = true;
@@ -218,27 +218,27 @@ namespace Cthangband.Commands
 
         private void DoCmdWizActivatePower(SaveGame saveGame)
         {
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.SetBackground(BackgroundImage.Normal);
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            saveGame.Gui.SetBackground(BackgroundImage.Normal);
 
-            Gui.Clear();
+            saveGame.Gui.Clear();
             int index = 0;
             foreach (IActivationPower activationPower in ActivationPowerManager.ActivationPowers)
             {
                 int row = 2 + (index % 40);
                 int col = 30 * (index / 40);
-                Gui.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                saveGame.Gui.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
                 index++;
             }
-            if (!Gui.GetString("Activation power?", out string selection, "", 3))
+            if (!saveGame.Gui.GetString("Activation power?", out string selection, "", 3))
             {
                 return;
             }
 
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
-            Gui.SetBackground(BackgroundImage.Overhead);
+            saveGame.Gui.Load();
+            saveGame.Gui.FullScreenOverlay = false;
+            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
 
             if (!Int32.TryParse(selection, out int selectedIndex))
             {
@@ -264,7 +264,7 @@ namespace Cthangband.Commands
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
                               RedrawFlag.PrEquippy);
             saveGame.HandleStuff();
-            Gui.Redraw();
+            saveGame.Gui.Redraw();
         }
 
         private void DoCmdSummonHorde(SaveGame saveGame)
@@ -324,7 +324,7 @@ namespace Cthangband.Commands
             for (int i = 0; i < 6; i++)
             {
                 string ppp = $"{GlobalData.StatNames[i]} (3-118): ";
-                if (!Gui.GetString(ppp, out tmpVal, $"{saveGame.Player.AbilityScores[i].InnateMax}", 3))
+                if (!saveGame.Gui.GetString(ppp, out tmpVal, $"{saveGame.Player.AbilityScores[i].InnateMax}", 3))
                 {
                     return;
                 }
@@ -344,7 +344,7 @@ namespace Cthangband.Commands
                 saveGame.Player.AbilityScores[i].InnateMax = tmpInt;
             }
             string def = $"{saveGame.Player.Gold}";
-            if (!Gui.GetString("Gold: ", out tmpVal, def, 9))
+            if (!saveGame.Gui.GetString("Gold: ", out tmpVal, def, 9))
             {
                 return;
             }
@@ -358,7 +358,7 @@ namespace Cthangband.Commands
             }
             saveGame.Player.Gold = tmpInt;
             def = $"{saveGame.Player.MaxExperienceGained}";
-            if (!Gui.GetString("Experience: ", out tmpVal, def, 9))
+            if (!saveGame.Gui.GetString("Experience: ", out tmpVal, def, 9))
             {
                 return;
             }
@@ -401,84 +401,84 @@ namespace Cthangband.Commands
             DoCmdRedraw(saveGame);
         }
 
-        private void DoCmdWizHelp()
+        private void DoCmdWizHelp(SaveGame saveGame)
         {
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.Refresh();
-            Gui.Clear();
-            Gui.SetBackground(BackgroundImage.Normal);
-            Gui.Print(Colour.Red, "Wizard Commands", 1, 31);
-            Gui.Print(Colour.Red, "===============", 2, 31);
-            Gui.Print(Colour.Red, "Character Editing", 4, 1);
-            Gui.Print(Colour.Red, "=================", 5, 1);
-            Gui.Print("a = Cure All", 7, 1);
-            Gui.Print("e = Edit Stats", 8, 1);
-            Gui.Print("h = Reroll Hitpoints", 9, 1);
-            Gui.Print("k = Self Knowledge", 10, 1);
-            Gui.Print("M = Gain Mutation", 11, 1);
-            Gui.Print("r = Gain Level Reward", 12, 1);
-            Gui.Print("x = Gain Experience", 13, 1);
-            Gui.Print(Colour.Red, "Movement", 15, 1);
-            Gui.Print(Colour.Red, "========", 16, 1);
-            Gui.Print("b = Teleport to Target", 18, 1);
-            Gui.Print("j = Jump Levels", 19, 1);
-            Gui.Print("p = Phase Door", 20, 1);
-            Gui.Print("t = Teleport", 21, 1);
-            Gui.Print(Colour.Red, "Monsters", 4, 26);
-            Gui.Print(Colour.Red, "========", 5, 26);
-            Gui.Print("s = Summon Monster", 7, 26);
-            Gui.Print("n = Summon Named Monster", 8, 26);
-            Gui.Print("N = Summon Named Pet", 9, 26);
-            Gui.Print("H = Summon Horde", 10, 26);
-            Gui.Print("Z = Carnage True", 11, 26);
-            Gui.Print("z = Zap (Wizard Bolt)", 12, 26);
-            Gui.Print(Colour.Red, "General Commands", 14, 26);
-            Gui.Print(Colour.Red, "================", 15, 26);
-            Gui.Print("\" = Generate spoilers", 17, 26);
-            Gui.Print("d = Detect All", 18, 26);
-            Gui.Print("m = Map Area", 19, 26);
-            Gui.Print("w = Wizard Light", 20, 26);
-            Gui.Print(Colour.Red, "Object Commands", 4, 51);
-            Gui.Print(Colour.Red, "===============", 5, 51);
-            Gui.Print("c = Create Item", 7, 51);
-            Gui.Print("C = Create Named artifact", 8, 51);
-            Gui.Print("f = Identify Fully", 9, 51);
-            Gui.Print("g = Generate Good Object", 10, 51);
-            Gui.Print("i = Identify Pack", 11, 51);
-            Gui.Print("l = Learn About Objects", 12, 51);
-            Gui.Print("o = Object Editor", 13, 51);
-            Gui.Print("v = Generate Very Good Object", 14, 51);
-            Gui.Print("Hit any key to continue", 43, 23);
-            Gui.Inkey();
-            Gui.Load();
-            Gui.SetBackground(BackgroundImage.Overhead);
-            Gui.FullScreenOverlay = false;
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            saveGame.Gui.Refresh();
+            saveGame.Gui.Clear();
+            saveGame.Gui.SetBackground(BackgroundImage.Normal);
+            saveGame.Gui.Print(Colour.Red, "Wizard Commands", 1, 31);
+            saveGame.Gui.Print(Colour.Red, "===============", 2, 31);
+            saveGame.Gui.Print(Colour.Red, "Character Editing", 4, 1);
+            saveGame.Gui.Print(Colour.Red, "=================", 5, 1);
+            saveGame.Gui.Print("a = Cure All", 7, 1);
+            saveGame.Gui.Print("e = Edit Stats", 8, 1);
+            saveGame.Gui.Print("h = Reroll Hitpoints", 9, 1);
+            saveGame.Gui.Print("k = Self Knowledge", 10, 1);
+            saveGame.Gui.Print("M = Gain Mutation", 11, 1);
+            saveGame.Gui.Print("r = Gain Level Reward", 12, 1);
+            saveGame.Gui.Print("x = Gain Experience", 13, 1);
+            saveGame.Gui.Print(Colour.Red, "Movement", 15, 1);
+            saveGame.Gui.Print(Colour.Red, "========", 16, 1);
+            saveGame.Gui.Print("b = Teleport to Target", 18, 1);
+            saveGame.Gui.Print("j = Jump Levels", 19, 1);
+            saveGame.Gui.Print("p = Phase Door", 20, 1);
+            saveGame.Gui.Print("t = Teleport", 21, 1);
+            saveGame.Gui.Print(Colour.Red, "Monsters", 4, 26);
+            saveGame.Gui.Print(Colour.Red, "========", 5, 26);
+            saveGame.Gui.Print("s = Summon Monster", 7, 26);
+            saveGame.Gui.Print("n = Summon Named Monster", 8, 26);
+            saveGame.Gui.Print("N = Summon Named Pet", 9, 26);
+            saveGame.Gui.Print("H = Summon Horde", 10, 26);
+            saveGame.Gui.Print("Z = Carnage True", 11, 26);
+            saveGame.Gui.Print("z = Zap (Wizard Bolt)", 12, 26);
+            saveGame.Gui.Print(Colour.Red, "General Commands", 14, 26);
+            saveGame.Gui.Print(Colour.Red, "================", 15, 26);
+            saveGame.Gui.Print("\" = Generate spoilers", 17, 26);
+            saveGame.Gui.Print("d = Detect All", 18, 26);
+            saveGame.Gui.Print("m = Map Area", 19, 26);
+            saveGame.Gui.Print("w = Wizard Light", 20, 26);
+            saveGame.Gui.Print(Colour.Red, "Object Commands", 4, 51);
+            saveGame.Gui.Print(Colour.Red, "===============", 5, 51);
+            saveGame.Gui.Print("c = Create Item", 7, 51);
+            saveGame.Gui.Print("C = Create Named artifact", 8, 51);
+            saveGame.Gui.Print("f = Identify Fully", 9, 51);
+            saveGame.Gui.Print("g = Generate Good Object", 10, 51);
+            saveGame.Gui.Print("i = Identify Pack", 11, 51);
+            saveGame.Gui.Print("l = Learn About Objects", 12, 51);
+            saveGame.Gui.Print("o = Object Editor", 13, 51);
+            saveGame.Gui.Print("v = Generate Very Good Object", 14, 51);
+            saveGame.Gui.Print("Hit any key to continue", 43, 23);
+            saveGame.Gui.Inkey();
+            saveGame.Gui.Load();
+            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
+            saveGame.Gui.FullScreenOverlay = false;
         }
 
         private void DoCmdWizJump(SaveGame saveGame)
         {
-            if (Gui.CommandArgument <= 0)
+            if (saveGame.Gui.CommandArgument <= 0)
             {
                 string ppp = $"Jump to level (0-{saveGame.CurDungeon.MaxLevel}): ";
                 string def = $"{saveGame.CurrentDepth}";
-                if (!Gui.GetString(ppp, out string tmpVal, def, 10))
+                if (!saveGame.Gui.GetString(ppp, out string tmpVal, def, 10))
                 {
                     return;
                 }
-                Gui.CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
+                saveGame.Gui.CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
             }
-            if (Gui.CommandArgument < 1)
+            if (saveGame.Gui.CommandArgument < 1)
             {
-                Gui.CommandArgument = 1;
+                saveGame.Gui.CommandArgument = 1;
             }
-            if (Gui.CommandArgument > saveGame.CurDungeon.MaxLevel)
+            if (saveGame.Gui.CommandArgument > saveGame.CurDungeon.MaxLevel)
             {
-                Gui.CommandArgument = saveGame.CurDungeon.MaxLevel;
+                saveGame.Gui.CommandArgument = saveGame.CurDungeon.MaxLevel;
             }
-            saveGame.MsgPrint($"You jump to dungeon level {Gui.CommandArgument}.");
+            saveGame.MsgPrint($"You jump to dungeon level {saveGame.Gui.CommandArgument}.");
             saveGame.DoCmdSaveGame(true);
-            saveGame.CurrentDepth = Gui.CommandArgument;
+            saveGame.CurrentDepth = saveGame.Gui.CommandArgument;
             saveGame.NewLevelFlag = true;
         }
 
@@ -487,7 +487,7 @@ namespace Cthangband.Commands
             for (int i = 1; i < saveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = saveGame.ItemTypes[i];
-                if (kPtr.Level <= Gui.CommandArgument)
+                if (kPtr.Level <= saveGame.Gui.CommandArgument)
                 {
                     kPtr.FlavourAware = true;
                 }
@@ -548,13 +548,13 @@ namespace Cthangband.Commands
             }
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             bool changed;
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
             Item qPtr = new Item(saveGame, oPtr);
             while (true)
             {
-                WizDisplayItem(qPtr);
-                if (!Gui.GetCom("[a]ccept [s]tatistics [r]eroll [t]weak [q]uantity? ", out char ch))
+                WizDisplayItem(saveGame, qPtr);
+                if (!saveGame.Gui.GetCom("[a]ccept [s]tatistics [r]eroll [t]weak [q]uantity? ", out char ch))
                 {
                     changed = false;
                     break;
@@ -574,15 +574,15 @@ namespace Cthangband.Commands
                 }
                 if (ch == 't' || ch == 'T')
                 {
-                    WizTweakItem(qPtr);
+                    WizTweakItem(saveGame, qPtr);
                 }
                 if (ch == 'q' || ch == 'Q')
                 {
-                    WizQuantityItem(qPtr);
+                    WizQuantityItem(saveGame, qPtr);
                 }
             }
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
+            saveGame.Gui.Load();
+            saveGame.Gui.FullScreenOverlay = false;
             if (changed)
             {
                 saveGame.MsgPrint("Changes accepted.");
@@ -627,18 +627,18 @@ namespace Cthangband.Commands
             }
         }
 
-        private void PrtBinary(FlagSet flags, int row, int col)
+        private void PrtBinary(SaveGame saveGame, FlagSet flags, int row, int col)
         {
             uint bitmask = 1u;
             for (int i = 1; i <= 32; i++)
             {
                 if (flags.IsSet(bitmask))
                 {
-                    Gui.Print(Colour.Blue, '*', row, col++);
+                    saveGame.Gui.Print(Colour.Blue, '*', row, col++);
                 }
                 else
                 {
-                    Gui.Print(Colour.White, '-', row, col++);
+                    saveGame.Gui.Print(Colour.White, '-', row, col++);
                 }
                 bitmask *= 2;
             }
@@ -652,13 +652,13 @@ namespace Cthangband.Commands
 
         private void WizCreateItem(SaveGame saveGame)
         {
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.SetBackground(BackgroundImage.Normal);
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            saveGame.Gui.SetBackground(BackgroundImage.Normal);
             int kIdx = WizCreateItemtype(saveGame);
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
-            Gui.SetBackground(BackgroundImage.Overhead);
+            saveGame.Gui.Load();
+            saveGame.Gui.FullScreenOverlay = false;
+            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
             if (kIdx == 0)
             {
                 return;
@@ -676,16 +676,16 @@ namespace Cthangband.Commands
             int col, row;
             char ch;
             int[] choice = new int[60];
-            Gui.Clear();
+            saveGame.Gui.Clear();
             for (num = 0; num < 60 && TvalDescriptionPair.Tvals[num].Tval != 0; num++)
             {
                 row = 2 + (num % 20);
                 col = 30 * (num / 20);
                 ch = (char)(_head[num / 20] + (char)(num % 20));
-                Gui.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
+                saveGame.Gui.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
             }
             int maxNum = num;
-            if (!Gui.GetCom("Get what type of object? ", out ch))
+            if (!saveGame.Gui.GetCom("Get what type of object? ", out ch))
             {
                 return 0;
             }
@@ -708,7 +708,7 @@ namespace Cthangband.Commands
             }
             ItemCategory tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
-            Gui.Clear();
+            saveGame.Gui.Clear();
             for (num = 0, i = 1; num < 60 && i < saveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = saveGame.ItemTypes[i];
@@ -722,12 +722,12 @@ namespace Cthangband.Commands
                     col = 30 * (num / 20);
                     ch = (char)(_head[num / 20] + (char)(num % 20));
                     string buf = StripName(saveGame, i);
-                    Gui.PrintLine($"[{ch}] {buf}", row, col);
+                    saveGame.Gui.PrintLine($"[{ch}] {buf}", row, col);
                     choice[num++] = i;
                 }
             }
             maxNum = num;
-            if (!Gui.GetCom($"What Kind of {tvalDesc}? ", out ch))
+            if (!saveGame.Gui.GetCom($"What Kind of {tvalDesc}? ", out ch))
             {
                 return 0;
             }
@@ -787,7 +787,7 @@ namespace Cthangband.Commands
             saveGame.MsgPrint("Allocated.");
         }
 
-        private void WizDisplayItem(Item oPtr)
+        private void WizDisplayItem(SaveGame saveGame, Item oPtr)
         {
             const int j = 13;
             FlagSet f1 = new FlagSet();
@@ -796,57 +796,57 @@ namespace Cthangband.Commands
             oPtr.GetMergedFlags(f1, f2, f3);
             for (int i = 1; i <= 23; i++)
             {
-                Gui.PrintLine("", i, j - 2);
+                saveGame.Gui.PrintLine("", i, j - 2);
             }
             string buf = oPtr.StoreDescription(true, 3);
-            Gui.PrintLine(buf, 2, j);
-            Gui.PrintLine(
+            saveGame.Gui.PrintLine(buf, 2, j);
+            saveGame.Gui.PrintLine(
                 $"kind = {oPtr.ItemType,5}  level = {oPtr.ItemType.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}",
                 4, j);
-            Gui.PrintLine(
+            saveGame.Gui.PrintLine(
                 $"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}",
                 5, j);
-            Gui.PrintLine(
+            saveGame.Gui.PrintLine(
                 $"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}",
                 6, j);
-            Gui.PrintLine(
+            saveGame.Gui.PrintLine(
                 $"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}",
                 7, j);
-            Gui.PrintLine($"IdentifyFlags = {oPtr.IdentifyFlags:x4}  timeout = {oPtr.RechargeTimeLeft}", 8, j);
-            Gui.PrintLine("+------------FLAGS1------------+", 10, j);
-            Gui.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
-            Gui.PrintLine("              cvae      xsqpaefc", 12, j);
-            Gui.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
-            Gui.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
-            Gui.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
-            PrtBinary(f1, 16, j);
-            Gui.PrintLine("+------------FLAGS2------------+", 17, j);
-            Gui.PrintLine("SUST....IMMUN.RESIST............", 18, j);
-            Gui.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
-            Gui.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
-            Gui.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
-            Gui.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
-            PrtBinary(f2, 23, j);
-            Gui.PrintLine("+------------FLAGS3------------+", 10, j + 32);
-            Gui.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
-            Gui.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
-            Gui.PrintLine("re  nowysdose eld   nnnntalrl ym", 13, j + 32);
-            Gui.PrintLine("ec  omrcyewta ieirmsrrrriieaeccc", 14, j + 32);
-            Gui.PrintLine("aa  taauktmatlnpgeihaefcvnpvsuuu", 15, j + 32);
-            Gui.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
-            Gui.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
-            Gui.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
-            PrtBinary(f3, 19, j + 32);
+            saveGame.Gui.PrintLine($"IdentifyFlags = {oPtr.IdentifyFlags:x4}  timeout = {oPtr.RechargeTimeLeft}", 8, j);
+            saveGame.Gui.PrintLine("+------------FLAGS1------------+", 10, j);
+            saveGame.Gui.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
+            saveGame.Gui.PrintLine("              cvae      xsqpaefc", 12, j);
+            saveGame.Gui.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
+            saveGame.Gui.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
+            saveGame.Gui.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
+            PrtBinary(saveGame, f1, 16, j);
+            saveGame.Gui.PrintLine("+------------FLAGS2------------+", 17, j);
+            saveGame.Gui.PrintLine("SUST....IMMUN.RESIST............", 18, j);
+            saveGame.Gui.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
+            saveGame.Gui.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
+            saveGame.Gui.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
+            saveGame.Gui.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
+            PrtBinary(saveGame, f2, 23, j);
+            saveGame.Gui.PrintLine("+------------FLAGS3------------+", 10, j + 32);
+            saveGame.Gui.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
+            saveGame.Gui.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
+            saveGame.Gui.PrintLine("re  nowysdose eld   nnnntalrl ym", 13, j + 32);
+            saveGame.Gui.PrintLine("ec  omrcyewta ieirmsrrrriieaeccc", 14, j + 32);
+            saveGame.Gui.PrintLine("aa  taauktmatlnpgeihaefcvnpvsuuu", 15, j + 32);
+            saveGame.Gui.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
+            saveGame.Gui.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
+            saveGame.Gui.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
+            PrtBinary(saveGame, f3, 19, j + 32);
         }
 
-        private void WizQuantityItem(Item oPtr)
+        private void WizQuantityItem(SaveGame saveGame, Item oPtr)
         {
             if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
             {
                 return;
             }
             string def = $"{oPtr.Count}";
-            if (Gui.GetString("Quantity: ", out string tmpVal, def, 2))
+            if (saveGame.Gui.GetString("Quantity: ", out string tmpVal, def, 2))
             {
                 if (!int.TryParse(tmpVal, out int tmpInt))
                 {
@@ -874,8 +874,8 @@ namespace Cthangband.Commands
             Item qPtr = new Item(saveGame, oPtr);
             while (true)
             {
-                WizDisplayItem(qPtr);
-                if (!Gui.GetCom("[a]ccept, [n]ormal, [g]ood, [e]xcellent? ", out char ch))
+                WizDisplayItem(saveGame, qPtr);
+                if (!saveGame.Gui.GetCom("[a]ccept, [n]ormal, [g]ood, [e]xcellent? ", out char ch))
                 {
                     changed = false;
                     break;
@@ -920,8 +920,8 @@ namespace Cthangband.Commands
             while (true)
             {
                 const string pmt = "Roll for [n]ormal, [g]ood, or [e]xcellent treasure? ";
-                WizDisplayItem(oPtr);
-                if (!Gui.GetCom(pmt, out char ch))
+                WizDisplayItem(saveGame, oPtr);
+                if (!saveGame.Gui.GetCom(pmt, out char ch))
                 {
                     break;
                 }
@@ -962,13 +962,13 @@ namespace Cthangband.Commands
                 {
                     if (i < 100 || i % 100 == 0)
                     {
-                        Gui.DoNotWaitOnInkey = true;
-                        if (Gui.Inkey() == 0)
+                        saveGame.Gui.DoNotWaitOnInkey = true;
+                        if (saveGame.Gui.Inkey() == 0)
                         {
                             break;
                         }
-                        Gui.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
-                        Gui.Refresh();
+                        saveGame.Gui.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
+                        saveGame.Gui.Refresh();
                     }
                     Item qPtr = new Item(saveGame);
                     qPtr.MakeObject(good, great);
@@ -1016,7 +1016,7 @@ namespace Cthangband.Commands
             }
         }
 
-        private void WizTweakItem(Item oPtr)
+        private void WizTweakItem(SaveGame saveGame, Item oPtr)
         {
             if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
             {
@@ -1024,36 +1024,36 @@ namespace Cthangband.Commands
             }
             string p = "Enter new 'TypeSpecificValue' setting: ";
             string def = $"{oPtr.TypeSpecificValue}";
-            if (!Gui.GetString(p, out string tmpVal, def, 5))
+            if (!saveGame.Gui.GetString(p, out string tmpVal, def, 5))
             {
                 return;
             }
             oPtr.TypeSpecificValue = tmpVal.ToIntSafely();
-            WizDisplayItem(oPtr);
+            WizDisplayItem(saveGame, oPtr);
             p = "Enter new 'BonusArmourClass' setting: ";
             def = $"{oPtr.BonusArmourClass}";
-            if (!Gui.GetString(p, out tmpVal, def, 5))
+            if (!saveGame.Gui.GetString(p, out tmpVal, def, 5))
             {
                 return;
             }
             oPtr.BonusArmourClass = tmpVal.ToIntSafely();
-            WizDisplayItem(oPtr);
+            WizDisplayItem(saveGame, oPtr);
             p = "Enter new 'BonusToHit' setting: ";
             def = $"{oPtr.BonusToHit}";
-            if (!Gui.GetString(p, out tmpVal, def, 5))
+            if (!saveGame.Gui.GetString(p, out tmpVal, def, 5))
             {
                 return;
             }
             oPtr.BonusToHit = tmpVal.ToIntSafely();
-            WizDisplayItem(oPtr);
+            WizDisplayItem(saveGame, oPtr);
             p = "Enter new 'BonusDamage' setting: ";
             def = $"{oPtr.BonusDamage}";
-            if (!Gui.GetString(p, out tmpVal, def, 5))
+            if (!saveGame.Gui.GetString(p, out tmpVal, def, 5))
             {
                 return;
             }
             oPtr.BonusDamage = tmpVal.ToIntSafely();
-            WizDisplayItem(oPtr);
+            WizDisplayItem(saveGame, oPtr);
         }
     }
 }

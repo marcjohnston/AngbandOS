@@ -28,7 +28,7 @@ namespace Cthangband.StoreCommands
         public static void DoCmdDestroy(SaveGame saveGame)
         {
             int amount = 1;
-            bool force = Gui.CommandArgument > 0;
+            bool force = saveGame.Gui.CommandArgument > 0;
             // Get an item to destroy
             if (!saveGame.GetItem(out int itemIndex, "Destroy which item? ", false, true, true))
             {
@@ -42,7 +42,7 @@ namespace Cthangband.StoreCommands
             // If we have more than one we might not want to destroy all of them
             if (item.Count > 1)
             {
-                amount = Gui.GetQuantity(null, item.Count, true);
+                amount = saveGame.Gui.GetQuantity(null, item.Count, true);
                 if (amount <= 0)
                 {
                     return;
@@ -58,7 +58,7 @@ namespace Cthangband.StoreCommands
                 if (!item.Stompable())
                 {
                     string outVal = $"Really destroy {itemName}? ";
-                    if (!Gui.GetCheck(outVal))
+                    if (!saveGame.Gui.GetCheck(outVal))
                     {
                         return;
                     }
@@ -67,7 +67,7 @@ namespace Cthangband.StoreCommands
                     {
                         if (item.IsKnown())
                         {
-                            if (Gui.GetCheck($"Always destroy {itemName}?"))
+                            if (saveGame.Gui.GetCheck($"Always destroy {itemName}?"))
                             {
                                 item.ItemType.Stompable[0] = true;
                             }

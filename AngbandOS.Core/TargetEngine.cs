@@ -21,21 +21,21 @@ namespace Cthangband
         public TargetEngine(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            _player = saveGame.Player;
-            _level = saveGame.Level;
+            _player = SaveGame.Player;
+            _level = SaveGame.Level;
         }
 
         public bool GetDirectionNoAim(out int dp)
         {
             dp = 0;
-            int dir = Gui.CommandDirection;
+            int dir = SaveGame.Gui.CommandDirection;
             while (dir == 0)
             {
-                if (!Gui.GetCom("Direction (Escape to cancel)? ", out char ch))
+                if (!SaveGame.Gui.GetCom("Direction (Escape to cancel)? ", out char ch))
                 {
                     break;
                 }
-                dir = Gui.GetKeymapDir(ch);
+                dir = SaveGame.Gui.GetKeymapDir(ch);
             }
             if (dir == 5)
             {
@@ -45,7 +45,7 @@ namespace Cthangband
             {
                 return false;
             }
-            Gui.CommandDirection = dir;
+            SaveGame.Gui.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
                 if (Program.Rng.RandomLessThan(100) < 75)
@@ -53,7 +53,7 @@ namespace Cthangband
                     dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
                 }
             }
-            if (Gui.CommandDirection != dir)
+            if (SaveGame.Gui.CommandDirection != dir)
             {
                 SaveGame.MsgPrint("You are confused.");
             }
@@ -70,7 +70,7 @@ namespace Cthangband
                 string p = !TargetOkay()
                     ? "Direction ('*' to choose a target, Escape to cancel)? "
                     : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
-                if (!Gui.GetCom(p, out char command))
+                if (!SaveGame.Gui.GetCom(p, out char command))
                 {
                     break;
                 }
@@ -95,7 +95,7 @@ namespace Cthangband
                         }
                     default:
                         {
-                            dir = Gui.GetKeymapDir(command);
+                            dir = SaveGame.Gui.GetKeymapDir(command);
                             break;
                         }
                 }
@@ -108,12 +108,12 @@ namespace Cthangband
             {
                 return;
             }
-            Gui.CommandDirection = dir;
+            SaveGame.Gui.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
                 dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
-            if (Gui.CommandDirection != dir)
+            if (SaveGame.Gui.CommandDirection != dir)
             {
                 SaveGame.MsgPrint("You are confused.");
             }
@@ -123,7 +123,7 @@ namespace Cthangband
         public bool GetDirectionWithAim(out int dp)
         {
             dp = 0;
-            int dir = Gui.CommandDirection;
+            int dir = SaveGame.Gui.CommandDirection;
             if (TargetOkay())
             {
                 dir = 5;
@@ -133,7 +133,7 @@ namespace Cthangband
                 string p = !TargetOkay()
                     ? "Direction ('*' to choose a target, Escape to cancel)? "
                     : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
-                if (!Gui.GetCom(p, out char command))
+                if (!SaveGame.Gui.GetCom(p, out char command))
                 {
                     break;
                 }
@@ -158,7 +158,7 @@ namespace Cthangband
                         }
                     default:
                         {
-                            dir = Gui.GetKeymapDir(command);
+                            dir = SaveGame.Gui.GetKeymapDir(command);
                             break;
                         }
                 }
@@ -171,12 +171,12 @@ namespace Cthangband
             {
                 return false;
             }
-            Gui.CommandDirection = dir;
+            SaveGame.Gui.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
                 dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
-            if (Gui.CommandDirection != dir)
+            if (SaveGame.Gui.CommandDirection != dir)
             {
                 SaveGame.MsgPrint("You are confused.");
             }
@@ -327,7 +327,7 @@ namespace Cthangband
                         }
                     default:
                         {
-                            int d = Gui.GetKeymapDir(query);
+                            int d = SaveGame.Gui.GetKeymapDir(query);
                             if (d != 0)
                             {
                                 x += _level.KeypadDirectionXOffset[d];
@@ -354,7 +354,7 @@ namespace Cthangband
                 }
             }
             _level.TempN = 0;
-            Gui.PrintLine("", 0, 0);
+            SaveGame.Gui.PrintLine("", 0, 0);
             return SaveGame.TargetWho != 0;
         }
 
@@ -364,13 +364,13 @@ namespace Cthangband
             bool success = false;
             x = _player.MapX;
             y = _player.MapY;
-            bool cv = Gui.CursorVisible;
-            Gui.CursorVisible = true;
+            bool cv = SaveGame.Gui.CursorVisible;
+            SaveGame.Gui.CursorVisible = true;
             SaveGame.MsgPrint("Select a point and press space.");
             while (ch != 27 && ch != ' ')
             {
                 _level.MoveCursorRelative(y, x);
-                ch = Gui.Inkey();
+                ch = SaveGame.Gui.Inkey();
                 switch (ch)
                 {
                     case '\x1b':
@@ -382,7 +382,7 @@ namespace Cthangband
 
                     default:
                         {
-                            int d = Gui.GetKeymapDir(ch);
+                            int d = SaveGame.Gui.GetKeymapDir(ch);
                             if (d == 0)
                             {
                                 break;
@@ -409,8 +409,8 @@ namespace Cthangband
                         }
                 }
             }
-            Gui.CursorVisible = cv;
-            Gui.Refresh();
+            SaveGame.Gui.CursorVisible = cv;
+            SaveGame.Gui.Refresh();
             return success;
         }
 
@@ -534,9 +534,9 @@ namespace Cthangband
                 {
                     const string name = "something strange";
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
-                    Gui.PrintLine(outVal, 0, 0);
+                    SaveGame.Gui.PrintLine(outVal, 0, 0);
                     _level.MoveCursorRelative(y, x);
-                    query = Gui.Inkey();
+                    query = SaveGame.Gui.Inkey();
                     if (query != '\r' && query != '\n')
                     {
                         break;
@@ -560,20 +560,20 @@ namespace Cthangband
                         {
                             if (recall)
                             {
-                                Gui.Save();
+                                SaveGame.Gui.Save();
                                 rPtr.Knowledge.Display();
-                                Gui.Print(Colour.White, $"  [r,{info}]", -1);
-                                query = Gui.Inkey();
-                                Gui.Load();
+                                SaveGame.Gui.Print(Colour.White, $"  [r,{info}]", -1);
+                                query = SaveGame.Gui.Inkey();
+                                SaveGame.Gui.Load();
                             }
                             else
                             {
                                 string c = (mPtr.Mind & Constants.SmCloned) != 0 ? " (clone)" : "";
                                 string a = (mPtr.Mind & Constants.SmFriendly) != 0 ? " (allied) " : " ";
                                 outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
-                                Gui.PrintLine(outVal, 0, 0);
+                                SaveGame.Gui.PrintLine(outVal, 0, 0);
                                 _level.MoveCursorRelative(y, x);
-                                query = Gui.Inkey();
+                                query = SaveGame.Gui.Inkey();
                             }
                             if (query != 'r')
                             {
@@ -605,9 +605,9 @@ namespace Cthangband
                             nextOIdx = oPtr.NextInStack;
                             string oName = oPtr.Description(true, 3);
                             outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                            Gui.PrintLine(outVal, 0, 0);
+                            SaveGame.Gui.PrintLine(outVal, 0, 0);
                             _level.MoveCursorRelative(y, x);
-                            query = Gui.Inkey();
+                            query = SaveGame.Gui.Inkey();
                             if (query != '\r' && query != '\n' && query != ' ')
                             {
                                 break;
@@ -634,9 +634,9 @@ namespace Cthangband
                         boring = false;
                         string oName = oPtr.Description(true, 3);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                        Gui.PrintLine(outVal, 0, 0);
+                        SaveGame.Gui.PrintLine(outVal, 0, 0);
                         _level.MoveCursorRelative(y, x);
-                        query = Gui.Inkey();
+                        query = SaveGame.Gui.Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
                             break;
@@ -681,9 +681,9 @@ namespace Cthangband
                         s3 = name[0].IsVowel() ? "the entrance to an " : "the entrance to a ";
                     }
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
-                    Gui.PrintLine(outVal, 0, 0);
+                    SaveGame.Gui.PrintLine(outVal, 0, 0);
                     _level.MoveCursorRelative(y, x);
-                    query = Gui.Inkey();
+                    query = SaveGame.Gui.Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
                         break;

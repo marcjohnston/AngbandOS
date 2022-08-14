@@ -21,36 +21,36 @@ namespace Cthangband.Commands
         {
             int cy = -1;
             int cx = -1;
-            Gui.FullScreenOverlay = true;
-            Gui.Save();
-            Gui.Clear();
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.Save();
+            saveGame.Gui.Clear();
             // If we're on the surface, display the island map
             if (saveGame.CurrentDepth == 0)
             {
-                Gui.SetBackground(BackgroundImage.WildMap);
+                saveGame.Gui.SetBackground(BackgroundImage.WildMap);
                 saveGame.DisplayWildMap();
             }
             else
             {
                 // We're not on the surface, so draw the level map
-                Gui.SetBackground(BackgroundImage.Map);
+                saveGame.Gui.SetBackground(BackgroundImage.Map);
                 saveGame.Level.DisplayMap(out cy, out cx);
             }
             // Give us a prompt, and display the cursor in the player's location
-            Gui.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
+            saveGame.Gui.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
             if (saveGame.CurrentDepth == 0)
             {
-                Gui.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
+                saveGame.Gui.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
             }
             else
             {
-                Gui.Goto(cy, cx);
+                saveGame.Gui.Goto(cy, cx);
             }
             // Wait for a keypress, and restore the screen (looking at the map takes no time)
-            Gui.Inkey();
-            Gui.Load();
-            Gui.FullScreenOverlay = false;
-            Gui.SetBackground(BackgroundImage.Overhead);
+            saveGame.Gui.Inkey();
+            saveGame.Gui.Load();
+            saveGame.Gui.FullScreenOverlay = false;
+            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
         }
     }
 }

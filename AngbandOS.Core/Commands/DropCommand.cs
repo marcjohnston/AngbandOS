@@ -38,7 +38,7 @@ namespace Cthangband.Commands
             // It's a stack, so find out how many to drop
             if (item.Count > 1)
             {
-                amount = Gui.GetQuantity(null, item.Count, true);
+                amount = saveGame.Gui.GetQuantity(null, item.Count, true);
                 if (amount <= 0)
                 {
                     return;

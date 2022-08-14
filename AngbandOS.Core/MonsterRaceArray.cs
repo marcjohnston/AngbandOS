@@ -33,11 +33,11 @@ namespace Cthangband
             }
         }
 
-        public void AddKnowledge()
+        public void AddKnowledge(SaveGame saveGame)
         {
             foreach (MonsterRace monsterType in this)
             {
-                monsterType.Knowledge = new MonsterKnowledge(monsterType);
+                monsterType.Knowledge = new MonsterKnowledge(saveGame, monsterType);
             }
         }
 

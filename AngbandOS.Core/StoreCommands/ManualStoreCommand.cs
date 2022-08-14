@@ -20,12 +20,12 @@ namespace Cthangband.StoreCommands
 
         public void Execute(SaveGame saveGame, Store store)
         {
-            DoCmdManual();
+            DoCmdManual(saveGame);
         }
 
-        public static void DoCmdManual()
+        public static void DoCmdManual(SaveGame saveGame)
         {
-            Gui.ShowManual();
+            saveGame.Gui.ShowManual();
         }
     }
 }

@@ -696,29 +696,29 @@ namespace Cthangband
             {
                 i = outIndex[j];
                 oPtr = _items[i];
-                Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
+                SaveGame.Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
                 string tmpVal = $"{i.IndexToLabel()})";
-                Gui.Print(tmpVal, j + 1, col);
+                SaveGame.Gui.Print(tmpVal, j + 1, col);
                 if (oPtr.ItemType != null)
                 {
                     Colour a = oPtr.ItemType.Colour;
                     char c = oPtr.ItemType.Character;
-                    Gui.Place(a, c, j + 1, col + 3);
+                    SaveGame.Gui.Place(a, c, j + 1, col + 3);
                 }
                 else
                 {
-                    Gui.Place(Colour.Background, ' ', j + 1, col + 3);
+                    SaveGame.Gui.Place(Colour.Background, ' ', j + 1, col + 3);
                 }
                 tmpVal = $"{MentionUse(i)}: ";
-                Gui.Print(tmpVal, j + 1, col + 5);
-                Gui.Print(outColour[j], outDesc[j], j + 1, col + 21);
+                SaveGame.Gui.Print(tmpVal, j + 1, col + 5);
+                SaveGame.Gui.Print(outColour[j], outDesc[j], j + 1, col + 21);
                 int wgt = oPtr.Weight * oPtr.Count;
                 tmpVal = $"{wgt / 10}.{wgt % 10} lb";
-                Gui.Print(tmpVal, j + 1, 71);
+                SaveGame.Gui.Print(tmpVal, j + 1, 71);
             }
             if (j != 0 && j < 23)
             {
-                Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
+                SaveGame.Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
             SaveGame.ItemDisplayColumn = col;
         }
@@ -773,20 +773,20 @@ namespace Cthangband
             {
                 i = outIndex[j];
                 oPtr = _items[i];
-                Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
+                SaveGame.Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
                 string tmpVal = $"{i.IndexToLabel()})";
-                Gui.Print(tmpVal, j + 1, col);
+                SaveGame.Gui.Print(tmpVal, j + 1, col);
                 Colour a = oPtr.ItemType.Colour;
                 char c = oPtr.ItemType.Character;
-                Gui.Place(a, c, j + 1, col + 3);
-                Gui.Print(outColour[j], outDesc[j], j + 1, col + 5);
+                SaveGame.Gui.Place(a, c, j + 1, col + 3);
+                SaveGame.Gui.Print(outColour[j], outDesc[j], j + 1, col + 5);
                 int wgt = oPtr.Weight * oPtr.Count;
                 tmpVal = $"{wgt / 10,2}.{wgt % 10} lb";
-                Gui.Print(tmpVal, j + 1, 71);
+                SaveGame.Gui.Print(tmpVal, j + 1, 71);
             }
             if (j != 0 && j < 26)
             {
-                Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
+                SaveGame.Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
             SaveGame.ItemDisplayColumn = col;
         }

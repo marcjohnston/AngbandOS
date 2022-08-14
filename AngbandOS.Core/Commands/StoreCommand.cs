@@ -40,10 +40,10 @@ namespace Cthangband.Commands
             // Switch from the normal game interface to the store interface
             saveGame.Level.ForgetLight();
             saveGame.Level.ForgetView();
-            Gui.FullScreenOverlay = true;
-            Gui.CommandArgument = 0;
+            saveGame.Gui.FullScreenOverlay = true;
+            saveGame.Gui.CommandArgument = 0;
             //            CommandRepeat = 0; TODO: Confirm this is not needed
-            Gui.QueuedCommand = '\0';
+            saveGame.Gui.QueuedCommand = '\0';
             which.EnterStore(saveGame.Player);
         }
     }

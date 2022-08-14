@@ -27,7 +27,7 @@ namespace Cthangband.StaticData
             set;
         }
 
-        public void Animate(Level level, int y, int x)
+        public void Animate(SaveGame saveGame, Level level, int y, int x)
         {
             int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
             bool drawn = false;
@@ -42,8 +42,8 @@ namespace Cthangband.StaticData
                 }
                 if (drawn)
                 {
-                    Gui.Refresh();
-                    Gui.Pause(msec);
+                    saveGame.Gui.Refresh();
+                    saveGame.Gui.Pause(msec);
                 }
                 oddFrame = !oddFrame;
             }
@@ -53,11 +53,11 @@ namespace Cthangband.StaticData
                 {
                     level.RedrawSingleLocation(y, x);
                 }
-                Gui.Refresh();
+                saveGame.Gui.Refresh();
             }
         }
 
-        public void Animate(Level level, int[] y, int[] x)
+        public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
         {
             int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
             int grids = x.Length;
@@ -76,8 +76,8 @@ namespace Cthangband.StaticData
                 }
                 if (drawn)
                 {
-                    Gui.Refresh();
-                    Gui.Pause(msec);
+                    saveGame.Gui.Refresh();
+                    saveGame.Gui.Pause(msec);
                 }
                 oddFrame = !oddFrame;
             }
@@ -90,7 +90,7 @@ namespace Cthangband.StaticData
                         level.RedrawSingleLocation(y[j], x[j]);
                     }
                 }
-                Gui.Refresh();
+                saveGame.Gui.Refresh();
             }
         }
     }
