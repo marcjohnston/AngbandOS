@@ -10,7 +10,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class TempleStore : Store
     {
-        public TempleStore() : base(StoreType.StoreTemple)
+        public TempleStore(SaveGame saveGame) : base(saveGame, StoreType.StoreTemple)
         {
         }
 

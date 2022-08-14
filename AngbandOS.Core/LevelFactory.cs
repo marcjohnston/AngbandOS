@@ -2390,7 +2390,7 @@ namespace Cthangband
 
         private bool RoomBuild(int y0, int x0, int typ)
         {
-            VaultFactory vaultFactory = new VaultFactory(_saveGame.Level);
+            VaultFactory vaultFactory = new VaultFactory(_saveGame);
             if (_saveGame.Difficulty < _room[typ].Level)
             {
                 return false;

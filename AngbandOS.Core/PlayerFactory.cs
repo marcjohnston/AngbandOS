@@ -16,6 +16,12 @@ namespace Cthangband
 {
     internal class PlayerFactory
     {
+        private readonly SaveGame SaveGame;
+        public PlayerFactory(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         private readonly MenuItem[] _classMenu =
         {
             new MenuItem("Channeler", CharacterClass.Channeler), new MenuItem("Chosen One", CharacterClass.ChosenOne),
@@ -1231,14 +1237,14 @@ namespace Cthangband
                 return false;
             }
             _player.RaceIndexAtBirth = _player.RaceIndex;
-            SaveGame.Instance.Quests.PlayerBirthQuests();
-            SaveGame.Instance.MessageAdd(" ");
-            SaveGame.Instance.MessageAdd("  ");
-            SaveGame.Instance.MessageAdd("====================");
-            SaveGame.Instance.MessageAdd("  ");
-            SaveGame.Instance.MessageAdd(" ");
+            SaveGame.Quests.PlayerBirthQuests();
+            SaveGame.MessageAdd(" ");
+            SaveGame.MessageAdd("  ");
+            SaveGame.MessageAdd("====================");
+            SaveGame.MessageAdd("  ");
+            SaveGame.MessageAdd(" ");
             _player.IsDead = false;
-            PlayerOutfit();
+            PlayerOutfit(SaveGame);
             return true;
         }
 
@@ -1947,11 +1953,11 @@ namespace Cthangband
                         GetMoney();
                         _player.Spellcasting = new Spellcasting(_player);
                         _player.GooPatron =
-                            SaveGame.Instance.PatronList[Program.Rng.DieRoll(SaveGame.Instance.PatronList.Length) - 1];
+                            SaveGame.PatronList[Program.Rng.DieRoll(SaveGame.PatronList.Length) - 1];
                         _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth);
-                        SaveGame.Instance.Player = _player;
-                        SaveGame.Instance.UpdateStuff();
-                        SaveGame.Instance.Player = null;
+                        SaveGame.Player = _player;
+                        SaveGame.UpdateStuff();
+                        SaveGame.Player = null;
                         _player.Health = _player.MaxHealth;
                         _player.Mana = _player.MaxMana;
                         _player.Energy = 150;
@@ -2006,35 +2012,35 @@ namespace Cthangband
             }
         }
 
-        private void PlayerOutfit()
+        private void PlayerOutfit(SaveGame saveGame)
         {
-            Item item = new Item();
+            Item item = new Item(saveGame);
             if (_player.RaceIndex == RaceId.Golem || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Zombie ||
                 _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
             {
                 item.AssignItemType(
-                    SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
+                    SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentifyFlags.Set(Constants.IdentStoreb);
                 _player.Inventory.InvenCarry(item, false);
-                item = new Item();
+                item = new Item(saveGame);
             }
             else
             {
-                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
+                item.AssignItemType(SaveGame.ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 _player.Inventory.InvenCarry(item, false);
-                item = new Item();
+                item = new Item(saveGame);
             }
             if (_player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre ||
                 _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
                 item.AssignItemType(
-                    SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
+                    SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -2043,13 +2049,13 @@ namespace Cthangband
             }
             else
             {
-                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Light, LightType.Torch));
+                item.AssignItemType(SaveGame.ItemTypes.LookupKind(ItemCategory.Light, LightType.Torch));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 _player.Inventory.InvenCarry(item, false);
-                Item carried = new Item(item) { Count = 1 };
+                Item carried = new Item(saveGame, item) { Count = 1 };
                 _player.Inventory[InventorySlot.Lightsource] = carried;
                 _player.WeightCarried += carried.Weight;
             }
@@ -2069,8 +2075,8 @@ namespace Cthangband
                 {
                     sv = RingType.SustainStr;
                 }
-                item = new Item();
-                item.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(tv, sv));
+                item = new Item(saveGame);
+                item.AssignItemType(SaveGame.ItemTypes.LookupKind(tv, sv));
                 if (tv == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;

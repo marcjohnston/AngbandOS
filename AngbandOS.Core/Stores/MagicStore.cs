@@ -9,7 +9,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class MagicStore : Store
     {
-        public MagicStore() : base(StoreType.StoreMagic)
+        public MagicStore(SaveGame saveGame) : base(saveGame, StoreType.StoreMagic)
         {
         }
 

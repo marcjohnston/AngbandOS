@@ -90,7 +90,7 @@ namespace Cthangband
             Guid = guid;
             SaveGame.Instance = this;
             GlobalData.PopulateNewProfile(this);
-            Towns = Town.NewTownList();
+            Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList();
         }
@@ -838,13 +838,13 @@ namespace Cthangband
                 Item oPtr = Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
                 oPtr.HoldingMonsterIndex = 0;
-                qPtr = new Item(Level.Items[thisOIdx]);
+                qPtr = new Item(this, Level.Items[thisOIdx]);
                 Level.DeleteObjectIdx(thisOIdx);
                 Level.DropNear(qPtr, -1, y, x);
             }
             if (mPtr.StolenGold > 0)
             {
-                Item oPtr = new Item();
+                Item oPtr = new Item(this);
                 oPtr.MakeGold(10);
                 oPtr.TypeSpecificValue = mPtr.StolenGold;
                 Level.DropNear(oPtr, -1, y, x);
@@ -895,7 +895,7 @@ namespace Cthangband
             Level.ObjectLevel = (Difficulty + rPtr.Level) / 2;
             for (int j = 0; j < number; j++)
             {
-                qPtr = new Item();
+                qPtr = new Item(this);
                 if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
                 {
                     if (!qPtr.MakeGold(forceCoin))
@@ -996,7 +996,7 @@ namespace Cthangband
             Level.ObjectLevel = Math.Abs(oPtr.TypeSpecificValue) + 10;
             for (; number > 0; --number)
             {
-                Item qPtr = new Item();
+                Item qPtr = new Item(this);
                 if (small && Program.Rng.RandomLessThan(100) < 75)
                 {
                     if (!qPtr.MakeGold(0))
@@ -1030,7 +1030,7 @@ namespace Cthangband
             }
             if (Player == null)
             {
-                PlayerFactory factory = new PlayerFactory();
+                PlayerFactory factory = new PlayerFactory(this);
                 Player newPlayer = factory.CharacterGeneration(this, ExPlayer);
                 if (newPlayer == null)
                 {
@@ -1778,7 +1778,7 @@ namespace Cthangband
                 {
                     kPtr.FlavourAware = true;
                 }
-                kPtr.EasyKnow = Inventory.ObjectEasyKnow(i);
+                kPtr.EasyKnow = Inventory.ObjectEasyKnow(this, i);
             }
         }
 
@@ -7598,7 +7598,7 @@ namespace Cthangband
                                     if (nextObjectIndex != 0)
                                     {
                                         // Give the item to the thief so it can later drop it
-                                        Item stolenItem = new Item(item);
+                                        Item stolenItem = new Item(this, item);
                                         level.Items[nextObjectIndex] = stolenItem;
                                         stolenItem.Count = 1;
                                         stolenItem.Marked = false;
@@ -11597,7 +11597,7 @@ namespace Cthangband
                 case RaceId.Hobbit:
                     if (CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
                     {
-                        Item item = new Item();
+                        Item item = new Item(this);
                         item.AssignItemType(ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
                         Level.DropNear(item, -1, Player.MapY, Player.MapX);
                         MsgPrint("You cook some food.");

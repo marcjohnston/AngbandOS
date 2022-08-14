@@ -17,7 +17,7 @@ namespace Cthangband.StoreCommands
 
         public void Execute(Player player, Store store)
         {
-            HomeStore homeStore = HomeStore.FindHomeStore(SaveGame.Instance.CurTown.Index);
+            HomeStore homeStore = HomeStore.FindHomeStore(store.SaveGame, SaveGame.Instance.CurTown.Index);
             homeStore.BuyHouse(player);
         }
 

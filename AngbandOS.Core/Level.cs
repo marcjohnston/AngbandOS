@@ -88,7 +88,7 @@ namespace Cthangband
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)
             {
-                Items[j] = new Item(); // No ItemType here
+                Items[j] = new Item(SaveGame); // No ItemType here
             }
             Monsters = new MonsterList(saveGame, this);
         }
@@ -97,7 +97,7 @@ namespace Cthangband
         {
             while (num-- != 0)
             {
-                Item qPtr = new Item();
+                Item qPtr = new Item(SaveGame);
                 if (!qPtr.MakeObject(true, great))
                 {
                     continue;
@@ -264,7 +264,7 @@ namespace Cthangband
             {
                 Item oPtr = Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
-                Items[thisOIdx] = new Item();
+                Items[thisOIdx] = new Item(SaveGame);
                 OCnt--;
             }
             cPtr.ItemIndex = 0;
@@ -281,7 +281,7 @@ namespace Cthangband
                 int x = jPtr.X;
                 RedrawSingleLocation(y, x);
             }
-            Items[oIdx] = new Item();
+            Items[oIdx] = new Item(SaveGame);
             OCnt--;
         }
 
@@ -538,7 +538,7 @@ namespace Cthangband
             }
             if (!done)
             {
-                Items[oIdx] = new Item(jPtr);
+                Items[oIdx] = new Item(SaveGame, jPtr);
                 jPtr = Items[oIdx];
                 jPtr.Y = by;
                 jPtr.X = bx;
@@ -1149,7 +1149,7 @@ namespace Cthangband
             {
                 return;
             }
-            Item qPtr = new Item();
+            Item qPtr = new Item(SaveGame);
             if (!qPtr.MakeGold(0))
             {
                 return;
@@ -1157,7 +1157,7 @@ namespace Cthangband
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = new Item(qPtr);
+                Items[oIdx] = new Item(SaveGame, qPtr);
                 Item oPtr = Items[oIdx];
                 oPtr.Y = y;
                 oPtr.X = x;
@@ -1179,7 +1179,7 @@ namespace Cthangband
             {
                 return;
             }
-            Item qPtr = new Item();
+            Item qPtr = new Item(SaveGame);
             if (!qPtr.MakeObject(good, great))
             {
                 return;
@@ -1187,7 +1187,7 @@ namespace Cthangband
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = new Item(qPtr);
+                Items[oIdx] = new Item(SaveGame, qPtr);
                 Item oPtr = Items[oIdx];
                 oPtr.Y = y;
                 oPtr.X = x;
@@ -2017,7 +2017,7 @@ namespace Cthangband
                     GridTile cPtr = Grid[y][x];
                     cPtr.ItemIndex = 0;
                 }
-                Items[i] = new Item();
+                Items[i] = new Item(SaveGame);
             }
             OMax = 1;
             OCnt = 0;
@@ -2149,7 +2149,7 @@ namespace Cthangband
                 }
             }
             Items[i2] = Items[i1];
-            Items[i1] = new Item();
+            Items[i1] = new Item(SaveGame);
         }
 
         private Colour DimColour(Colour a)

@@ -7,7 +7,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class PawnStore : Store
     {
-        public PawnStore() : base(StoreType.StorePawn)
+        public PawnStore(SaveGame saveGame) : base(saveGame, StoreType.StorePawn)
         {
         }
 

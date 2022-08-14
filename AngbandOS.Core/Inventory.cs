@@ -21,14 +21,16 @@ namespace Cthangband
         private readonly Item[] _items;
         private readonly Player _player;
         private int _invenCnt;
+        private readonly SaveGame SaveGame;
 
-        public Inventory(Player player)
+        public Inventory(SaveGame saveGame, Player player)
         {
+            SaveGame = saveGame;
             _items = new Item[InventorySlot.Total];
             _player = player;
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                _items[i] = new Item(); // No ItemType here
+                _items[i] = new Item(SaveGame); // No ItemType here
             }
             _invenCnt = 0;
         }
@@ -39,9 +41,9 @@ namespace Cthangband
             set => _items[index] = value;
         }
 
-        public static bool ObjectEasyKnow(int i)
+        public static bool ObjectEasyKnow(SaveGame saveGame, int i)
         {
-            ItemType kPtr = SaveGame.Instance.ItemTypes[i];
+            ItemType kPtr = saveGame.ItemTypes[i];
             switch (kPtr.Category)
             {
                 case ItemCategory.LifeBook:
@@ -116,16 +118,16 @@ namespace Cthangband
                         int k;
                         for (k = i; k < InventorySlot.Pack; k++)
                         {
-                            _items[k] = new Item(_items[k + 1]);
+                            _items[k] = new Item(SaveGame, _items[k + 1]);
                         }
-                        _items[k] = new Item(); // No ItemType here
+                        _items[k] = new Item(SaveGame); // No ItemType here
                         break;
                     }
                 }
             }
             if (flag)
             {
-                SaveGame.Instance.MsgPrint("You combine some items in your pack.");
+                SaveGame.MsgPrint("You combine some items in your pack.");
             }
         }
 
@@ -256,11 +258,11 @@ namespace Cthangband
                 i = j;
                 for (int k = n; k >= i; k--)
                 {
-                    _items[k + 1] = new Item(_items[k]);
+                    _items[k + 1] = new Item(SaveGame, _items[k]);
                 }
-                _items[i] = new Item(); // No ItemType here
+                _items[i] = new Item(SaveGame); // No ItemType here
             }
-            _items[i] = new Item(oPtr);
+            _items[i] = new Item(SaveGame, oPtr);
             oPtr = _items[i];
             oPtr.Y = 0;
             oPtr.X = 0;
@@ -326,10 +328,10 @@ namespace Cthangband
                             ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y"))
                             : "Y";
                         string w = amt > 1 ? "were" : "was";
-                        SaveGame.Instance.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
+                        SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
-                            SaveGame.Instance.PotionSmashEffect(0, _player.MapY, _player.MapX,
+                            SaveGame.PotionSmashEffect(0, _player.MapY, _player.MapX,
                                 oPtr.ItemSubCategory);
                         }
                         InvenItemIncrease(i, -amt);
@@ -357,10 +359,10 @@ namespace Cthangband
                 item = InvenTakeoff(item, amt);
                 oPtr = _items[item];
             }
-            Item qPtr = new Item(oPtr) { Count = amt };
+            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
-            SaveGame.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-            SaveGame.Instance.Level.DropNear(qPtr, 0, _player.MapY, _player.MapX);
+            SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+            SaveGame.Level.DropNear(qPtr, 0, _player.MapY, _player.MapX);
             InvenItemIncrease(item, -amt);
             InvenItemDescribe(item);
             InvenItemOptimize(item);
@@ -370,7 +372,7 @@ namespace Cthangband
         {
             Item oPtr = _items[item];
             string oName = oPtr.Description(true, 3);
-            SaveGame.Instance.MsgPrint($"You have {oName}.");
+            SaveGame.MsgPrint($"You have {oName}.");
         }
 
         public void InvenItemIncrease(int item, int num)
@@ -415,11 +417,11 @@ namespace Cthangband
                 {
                     _items[i] = _items[i + 1];
                 }
-                _items[i] = new Item(); // No ItemType here
+                _items[i] = new Item(SaveGame); // No ItemType here
             }
             else
             {
-                _items[item] = new Item(); // No ItemType here
+                _items[item] = new Item(SaveGame); // No ItemType here
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
                 _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
@@ -438,7 +440,7 @@ namespace Cthangband
             {
                 amt = oPtr.Count;
             }
-            Item qPtr = new Item(oPtr) { Count = amt };
+            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
             if (item == InventorySlot.MeleeWeapon)
             {
@@ -459,13 +461,13 @@ namespace Cthangband
             InvenItemIncrease(item, -amt);
             InvenItemOptimize(item);
             int slot = InvenCarry(qPtr, false);
-            SaveGame.Instance.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
+            SaveGame.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
             return slot;
         }
 
         public bool ItemMatchesFilter(Item item)
         {
-            if (SaveGame.Instance.ItemFilterAll)
+            if (SaveGame.ItemFilterAll)
             {
                 return true;
             }
@@ -488,9 +490,9 @@ namespace Cthangband
                     return false;
                 }
             }
-            if (SaveGame.Instance.ItemFilter != null)
+            if (SaveGame.ItemFilter != null)
             {
-                if (!SaveGame.Instance.ItemFilter(item))
+                if (!SaveGame.ItemFilter(item))
                 {
                     return false;
                 }
@@ -622,16 +624,16 @@ namespace Cthangband
                     continue;
                 }
                 flag = true;
-                Item qPtr = new Item(_items[i]);
+                Item qPtr = new Item(SaveGame, _items[i]);
                 for (int k = i; k > j; k--)
                 {
-                    _items[k] = new Item(_items[k - 1]);
+                    _items[k] = new Item(SaveGame, _items[k - 1]);
                 }
-                _items[j] = new Item(qPtr);
+                _items[j] = new Item(SaveGame, qPtr);
             }
             if (flag)
             {
-                SaveGame.Instance.MsgPrint("You reorder some items in your pack.");
+                SaveGame.MsgPrint("You reorder some items in your pack.");
             }
         }
 
@@ -646,7 +648,7 @@ namespace Cthangband
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint(oPtr.TypeSpecificValue != 1
+            SaveGame.MsgPrint(oPtr.TypeSpecificValue != 1
                 ? $"You have {oPtr.TypeSpecificValue} charges remaining."
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
@@ -658,7 +660,7 @@ namespace Cthangband
             int[] outIndex = new int[23];
             Colour[] outColour = new Colour[23];
             string[] outDesc = new string[23];
-            int col = SaveGame.Instance.ItemDisplayColumn;
+            int col = SaveGame.ItemDisplayColumn;
             int len = 79 - col;
             int lim = 79 - 3;
             lim -= 14 + 2;
@@ -718,7 +720,7 @@ namespace Cthangband
             {
                 Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
-            SaveGame.Instance.ItemDisplayColumn = col;
+            SaveGame.ItemDisplayColumn = col;
         }
 
         public void ShowInven()
@@ -728,7 +730,7 @@ namespace Cthangband
             int[] outIndex = new int[26];
             Colour[] outColour = new Colour[26];
             string[] outDesc = new string[26];
-            int col = SaveGame.Instance.ItemDisplayColumn;
+            int col = SaveGame.ItemDisplayColumn;
             int len = 79 - col;
             int lim = 79 - 3;
             lim -= 9;
@@ -786,7 +788,7 @@ namespace Cthangband
             {
                 Gui.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
-            SaveGame.Instance.ItemDisplayColumn = col;
+            SaveGame.ItemDisplayColumn = col;
         }
 
         public int WieldSlot(Item oPtr)

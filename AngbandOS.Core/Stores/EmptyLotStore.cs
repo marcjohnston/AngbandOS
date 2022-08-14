@@ -6,7 +6,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class EmptyLotStore : Store
     {
-        public EmptyLotStore() : base(StoreType.StoreEmptyLot)
+        public EmptyLotStore(SaveGame saveGame) : base(saveGame, StoreType.StoreEmptyLot)
         {
         }
 

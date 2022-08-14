@@ -32,7 +32,7 @@ namespace Cthangband.Stores
             new StoreOwner("Dridash the Alchemist", 15000, 111, RaceId.HalfOrc)
         };
 
-        public AlchemistStore() : base(StoreType.StoreAlchemist)
+        public AlchemistStore(SaveGame saveGame) : base(saveGame, StoreType.StoreAlchemist)
         {
         }
 

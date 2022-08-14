@@ -12,20 +12,22 @@ namespace Cthangband
 {
     internal class VaultFactory
     {
+        private readonly SaveGame SaveGame;
         private readonly Level _level;
         private int _templateRace;
         private uint _vaultAuxDragonMask4;
 
-        public VaultFactory(Level level)
+        public VaultFactory(SaveGame saveGame)
         {
-            _level = level;
+            SaveGame = saveGame;
+            _level = saveGame.Level;
         }
 
         public void BuildType1(int yval, int xval)
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Instance.Difficulty <= Program.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int y1 = yval - Program.Rng.DieRoll(4);
             int y2 = yval + Program.Rng.DieRoll(3);
             int x1 = xval - Program.Rng.DieRoll(11);
@@ -91,7 +93,7 @@ namespace Cthangband
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Instance.Difficulty <= Program.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int y1A = yval - Program.Rng.DieRoll(4);
             int y2A = yval + Program.Rng.DieRoll(3);
             int x1A = xval - Program.Rng.DieRoll(11);
@@ -176,7 +178,7 @@ namespace Cthangband
         {
             int y, x, wy;
             GridTile cPtr;
-            bool light = SaveGame.Instance.Difficulty <= Program.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int wx = wy = 1;
             int dy = Program.Rng.RandomBetween(3, 4);
             int dx = Program.Rng.RandomBetween(3, 11);
@@ -372,7 +374,7 @@ namespace Cthangband
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Instance.Difficulty <= Program.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int y1 = yval - 4;
             int y2 = yval + 4;
             int x1 = xval - 11;
@@ -722,16 +724,16 @@ namespace Cthangband
                     PlaceSecretDoor(yval, x2 + 1);
                     break;
             }
-            int tmp = Program.Rng.DieRoll(SaveGame.Instance.Difficulty);
+            int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
             if (tmp < 25 && Program.Rng.DieRoll(2) != 1)
             {
                 do
                 {
-                    _templateRace = Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2);
-                } while ((SaveGame.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                         SaveGame.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                         SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
-                if (Program.Rng.DieRoll(2) != 1 && SaveGame.Instance.Difficulty >= 25 + Program.Rng.DieRoll(15))
+                    _templateRace = Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
+                } while ((SaveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                         SaveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                         SaveGame.Difficulty + Program.Rng.DieRoll(5));
+                if (Program.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
                     getMonNumHook = VaultAuxSymbol;
                 }
@@ -773,7 +775,7 @@ namespace Cthangband
             _level.Monsters.GetMonNumPrep(getMonNumHook);
             for (int i = 0; i < 64; i++)
             {
-                what[i] = _level.Monsters.GetMonNum(SaveGame.Instance.Difficulty + 10);
+                what[i] = _level.Monsters.GetMonNum(SaveGame.Difficulty + 10);
                 if (what[i] == 0)
                 {
                     empty = true;
@@ -785,8 +787,8 @@ namespace Cthangband
                 return;
             }
             _level.DangerRating += 10;
-            if (SaveGame.Instance.Difficulty <= 40 &&
-                Program.Rng.DieRoll((SaveGame.Instance.Difficulty * SaveGame.Instance.Difficulty) + 50) < 300)
+            if (SaveGame.Difficulty <= 40 &&
+                Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
             {
                 _level.SpecialDanger = true;
             }
@@ -795,7 +797,7 @@ namespace Cthangband
                 for (x = xval - 9; x <= xval + 9; x++)
                 {
                     int rIdx = what[Program.Rng.RandomLessThan(64)];
-                    MonsterRace race = SaveGame.Instance.MonsterRaces[rIdx];
+                    MonsterRace race = SaveGame.MonsterRaces[rIdx];
                     _level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
                 }
             }
@@ -871,7 +873,7 @@ namespace Cthangband
                     PlaceSecretDoor(yval, x2 + 1);
                     break;
             }
-            int tmp = Program.Rng.DieRoll(SaveGame.Instance.Difficulty);
+            int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
             if (tmp < 20)
             {
                 getMonNumHook = VaultAuxOrc;
@@ -890,10 +892,10 @@ namespace Cthangband
                 {
                     do
                     {
-                        _templateRace = Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2);
-                    } while ((SaveGame.Instance.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                             SaveGame.Instance.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                             SaveGame.Instance.Difficulty + Program.Rng.DieRoll(5));
+                        _templateRace = Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
+                    } while ((SaveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                             SaveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                             SaveGame.Difficulty + Program.Rng.DieRoll(5));
                     getMonNumHook = VaultAuxSymbol;
                 }
                 else
@@ -953,7 +955,7 @@ namespace Cthangband
             _level.Monsters.GetMonNumPrep(getMonNumHook);
             for (i = 0; i < 16; i++)
             {
-                what[i] = _level.Monsters.GetMonNum(SaveGame.Instance.Difficulty + 10);
+                what[i] = _level.Monsters.GetMonNum(SaveGame.Difficulty + 10);
                 if (what[i] == 0)
                 {
                     empty = true;
@@ -970,8 +972,8 @@ namespace Cthangband
                 {
                     int i1 = j;
                     int i2 = j + 1;
-                    int p1 = SaveGame.Instance.MonsterRaces[what[i1]].Level;
-                    int p2 = SaveGame.Instance.MonsterRaces[what[i2]].Level;
+                    int p1 = SaveGame.MonsterRaces[what[i1]].Level;
+                    int p2 = SaveGame.MonsterRaces[what[i2]].Level;
                     if (p1 > p2)
                     {
                         tmp = what[i1];
@@ -985,8 +987,8 @@ namespace Cthangband
                 what[i] = what[i * 2];
             }
             _level.DangerRating += 10;
-            if (SaveGame.Instance.Difficulty <= 40 &&
-                Program.Rng.DieRoll((SaveGame.Instance.Difficulty * SaveGame.Instance.Difficulty) + 50) < 300)
+            if (SaveGame.Difficulty <= 40 &&
+                Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
             {
                 _level.SpecialDanger = true;
             }
@@ -1026,12 +1028,12 @@ namespace Cthangband
 
         public void BuildType7(int yval, int xval)
         {
-            VaultType vPtr = SaveGame.Instance.VaultTypes[0];
+            VaultType vPtr = SaveGame.VaultTypes[0];
             int dummy = 0;
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = SaveGame.Instance.VaultTypes[Program.Rng.RandomLessThan(SaveGame.Instance.VaultTypes.Count)];
+                vPtr = SaveGame.VaultTypes[Program.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
                 if (vPtr.Category == 7)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1049,8 +1051,8 @@ namespace Cthangband
                 return;
             }
             _level.DangerRating += vPtr.Rating;
-            if (SaveGame.Instance.Difficulty <= 50 ||
-                Program.Rng.DieRoll(((SaveGame.Instance.Difficulty - 40) * (SaveGame.Instance.Difficulty - 40)) + 50) <
+            if (SaveGame.Difficulty <= 50 ||
+                Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) <
                 400)
             {
                 _level.SpecialDanger = true;
@@ -1060,12 +1062,12 @@ namespace Cthangband
 
         public void BuildType8(int yval, int xval)
         {
-            VaultType vPtr = SaveGame.Instance.VaultTypes[0];
+            VaultType vPtr = SaveGame.VaultTypes[0];
             int dummy = 0;
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = SaveGame.Instance.VaultTypes[Program.Rng.RandomLessThan(SaveGame.Instance.VaultTypes.Count)];
+                vPtr = SaveGame.VaultTypes[Program.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
                 if (vPtr.Category == 8)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1083,8 +1085,8 @@ namespace Cthangband
                 return;
             }
             _level.DangerRating += vPtr.Rating;
-            if (SaveGame.Instance.Difficulty <= 50 ||
-                Program.Rng.DieRoll(((SaveGame.Instance.Difficulty - 40) * (SaveGame.Instance.Difficulty - 40)) + 50) <
+            if (SaveGame.Difficulty <= 50 ||
+                Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) <
                 400)
             {
                 _level.SpecialDanger = true;
@@ -1164,59 +1166,59 @@ namespace Cthangband
                     {
                         case '&':
                             {
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty + 5;
+                                _level.MonsterLevel = SaveGame.Difficulty + 5;
                                 _level.Monsters.PlaceMonster(y, x, true, true);
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty;
+                                _level.MonsterLevel = SaveGame.Difficulty;
                                 break;
                             }
                         case '@':
                             {
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty + 11;
+                                _level.MonsterLevel = SaveGame.Difficulty + 11;
                                 _level.Monsters.PlaceMonster(y, x, true, true);
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty;
+                                _level.MonsterLevel = SaveGame.Difficulty;
                                 break;
                             }
                         case '9':
                             {
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty + 9;
+                                _level.MonsterLevel = SaveGame.Difficulty + 9;
                                 _level.Monsters.PlaceMonster(y, x, true, true);
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty;
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty + 7;
+                                _level.MonsterLevel = SaveGame.Difficulty;
+                                _level.ObjectLevel = SaveGame.Difficulty + 7;
                                 _level.PlaceObject(y, x, true, false);
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty;
+                                _level.ObjectLevel = SaveGame.Difficulty;
                                 break;
                             }
                         case '8':
                             {
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty + 40;
+                                _level.MonsterLevel = SaveGame.Difficulty + 40;
                                 _level.Monsters.PlaceMonster(y, x, true, true);
-                                _level.MonsterLevel = SaveGame.Instance.Difficulty;
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty + 20;
+                                _level.MonsterLevel = SaveGame.Difficulty;
+                                _level.ObjectLevel = SaveGame.Difficulty + 20;
                                 _level.PlaceObject(y, x, true, true);
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty;
+                                _level.ObjectLevel = SaveGame.Difficulty;
                                 break;
                             }
                         case ',':
                             {
                                 if (Program.Rng.RandomLessThan(100) < 50)
                                 {
-                                    _level.MonsterLevel = SaveGame.Instance.Difficulty + 3;
+                                    _level.MonsterLevel = SaveGame.Difficulty + 3;
                                     _level.Monsters.PlaceMonster(y, x, true, true);
-                                    _level.MonsterLevel = SaveGame.Instance.Difficulty;
+                                    _level.MonsterLevel = SaveGame.Difficulty;
                                 }
                                 if (Program.Rng.RandomLessThan(100) < 50)
                                 {
-                                    _level.ObjectLevel = SaveGame.Instance.Difficulty + 7;
+                                    _level.ObjectLevel = SaveGame.Difficulty + 7;
                                     _level.PlaceObject(y, x, false, false);
-                                    _level.ObjectLevel = SaveGame.Instance.Difficulty;
+                                    _level.ObjectLevel = SaveGame.Difficulty;
                                 }
                                 break;
                             }
                         case 'A':
                             {
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty + 12;
+                                _level.ObjectLevel = SaveGame.Difficulty + 12;
                                 _level.PlaceObject(y, x, true, false);
-                                _level.ObjectLevel = SaveGame.Instance.Difficulty;
+                                _level.ObjectLevel = SaveGame.Difficulty;
                             }
                             break;
                     }
@@ -1242,13 +1244,13 @@ namespace Cthangband
             {
                 return;
             }
-            if (SaveGame.Instance.CurrentDepth <= 0)
+            if (SaveGame.CurrentDepth <= 0)
             {
             }
-            if (SaveGame.Instance.Quests.IsQuest(SaveGame.Instance.CurrentDepth) ||
-                SaveGame.Instance.CurrentDepth == SaveGame.Instance.CurDungeon.MaxLevel)
+            if (SaveGame.Quests.IsQuest(SaveGame.CurrentDepth) ||
+                SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
             {
-                if (SaveGame.Instance.CurDungeon.Tower)
+                if (SaveGame.CurDungeon.Tower)
                 {
                     PlaceDownStairs(y, x);
                 }
@@ -1281,7 +1283,7 @@ namespace Cthangband
 
         private bool VaultAuxAnimal(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1295,7 +1297,7 @@ namespace Cthangband
 
         private bool VaultAuxChapel(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1314,7 +1316,7 @@ namespace Cthangband
 
         private bool VaultAuxCult(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1328,7 +1330,7 @@ namespace Cthangband
 
         private bool VaultAuxDemon(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1342,7 +1344,7 @@ namespace Cthangband
 
         private bool VaultAuxDragon(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1360,7 +1362,7 @@ namespace Cthangband
 
         private bool VaultAuxGiant(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1374,7 +1376,7 @@ namespace Cthangband
 
         private bool VaultAuxJelly(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1392,7 +1394,7 @@ namespace Cthangband
 
         private bool VaultAuxKennel(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1402,7 +1404,7 @@ namespace Cthangband
 
         private bool VaultAuxOrc(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1416,13 +1418,13 @@ namespace Cthangband
 
         private bool VaultAuxSymbol(int rIdx)
         {
-            return SaveGame.Instance.MonsterRaces[rIdx].Character == SaveGame.Instance.MonsterRaces[_templateRace].Character &&
-                   (SaveGame.Instance.MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
+            return SaveGame.MonsterRaces[rIdx].Character == SaveGame.MonsterRaces[_templateRace].Character &&
+                   (SaveGame.MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
         }
 
         private bool VaultAuxTreasure(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1437,7 +1439,7 @@ namespace Cthangband
 
         private bool VaultAuxTroll(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1451,7 +1453,7 @@ namespace Cthangband
 
         private bool VaultAuxUndead(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
@@ -1475,9 +1477,9 @@ namespace Cthangband
                     {
                         continue;
                     }
-                    _level.MonsterLevel = SaveGame.Instance.Difficulty + 2;
+                    _level.MonsterLevel = SaveGame.Difficulty + 2;
                     _level.Monsters.PlaceMonster(y, x, true, true);
-                    _level.MonsterLevel = SaveGame.Instance.Difficulty;
+                    _level.MonsterLevel = SaveGame.Difficulty;
                 }
             }
         }

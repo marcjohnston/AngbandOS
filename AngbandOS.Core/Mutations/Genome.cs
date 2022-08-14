@@ -46,9 +46,11 @@ namespace Cthangband.Mutations
         public int WisdomBonus;
         private readonly List<Mutation> _notPossessed = new List<Mutation>();
         private readonly List<Mutation> _possessed = new List<Mutation>();
+        private readonly SaveGame SaveGame;
 
-        public Genome()
+        public Genome(SaveGame saveGame)
         {
+            SaveGame = saveGame;
             _possessed.Clear();
             // Active Mutations
             _notPossessed.Add(new MutationBanish());
@@ -242,17 +244,17 @@ namespace Cthangband.Mutations
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You change...");
+            SaveGame.MsgPrint("You change...");
             do
             {
                 Mutation mutation = _possessed[0];
                 _possessed.RemoveAt(0);
                 mutation.OnLose(this);
                 _notPossessed.Add(mutation);
-                SaveGame.Instance.MsgPrint(mutation.LoseMessage);
+                SaveGame.MsgPrint(mutation.LoseMessage);
             } while (_possessed.Count > 0);
-            SaveGame.Instance.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.Instance.HandleStuff();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.HandleStuff();
         }
 
         public void LoseMutation()
@@ -261,7 +263,7 @@ namespace Cthangband.Mutations
             {
                 return;
             }
-            SaveGame.Instance.MsgPrint("You change...");
+            SaveGame.MsgPrint("You change...");
             int total = 0;
             foreach (Mutation mutation in _possessed)
             {
@@ -279,12 +281,12 @@ namespace Cthangband.Mutations
                 _possessed.RemoveAt(i);
                 mutation.OnLose(this);
                 _notPossessed.Add(mutation);
-                SaveGame.Instance.MsgPrint(mutation.LoseMessage);
+                SaveGame.MsgPrint(mutation.LoseMessage);
                 return;
             }
-            SaveGame.Instance.MsgPrint("Oops! Fell out of mutation list!");
-            SaveGame.Instance.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.Instance.HandleStuff();
+            SaveGame.MsgPrint("Oops! Fell out of mutation list!");
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.HandleStuff();
         }
 
         public void OnProcessWorld(SaveGame saveGame, Player player, Level level)

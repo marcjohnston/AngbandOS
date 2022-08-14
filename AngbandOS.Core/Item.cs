@@ -48,9 +48,11 @@ namespace Cthangband
         public int Weight;
         public int X;
         public int Y;
+        private readonly SaveGame SaveGame;
 
-        public Item()
+        public Item(SaveGame saveGame)
         {
+            SaveGame = saveGame;
         }
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
@@ -66,8 +68,9 @@ namespace Cthangband
             return f3.IsSet(ItemFlag3.Blessed);
         }
 
-        public Item(Item original)
+        public Item(SaveGame saveGame, Item original)
         {
+            SaveGame = saveGame;
             BaseArmourClass = original.BaseArmourClass;
             RandartFlags1.Copy(original.RandartFlags1);
             RandartFlags2.Copy(original.RandartFlags2);
@@ -512,13 +515,13 @@ namespace Cthangband
                 }
                 else if (FixedArtifactIndex != 0)
                 {
-                    FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                     basenm += ' ';
                     basenm += aPtr.Name;
                 }
                 else if (RareItemTypeIndex != Enumerations.RareItemType.None)
                 {
-                    RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                     basenm += ' ';
                     basenm += ePtr.Name;
                 }
@@ -631,7 +634,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    modstr = SaveGame.Instance.AmuletFlavours[indexx].Name;
+                    modstr = SaveGame.AmuletFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -644,7 +647,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    modstr = SaveGame.Instance.RingFlavours[indexx].Name;
+                    modstr = SaveGame.RingFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -657,7 +660,7 @@ namespace Cthangband
                     break;
 
                 case ItemCategory.Staff:
-                    modstr = SaveGame.Instance.StaffFlavours[indexx].Name;
+                    modstr = SaveGame.StaffFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -666,7 +669,7 @@ namespace Cthangband
                     break;
 
                 case ItemCategory.Wand:
-                    modstr = SaveGame.Instance.WandFlavours[indexx].Name;
+                    modstr = SaveGame.WandFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -675,7 +678,7 @@ namespace Cthangband
                     break;
 
                 case ItemCategory.Rod:
-                    modstr = SaveGame.Instance.RodFlavours[indexx].Name;
+                    modstr = SaveGame.RodFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -684,7 +687,7 @@ namespace Cthangband
                     break;
 
                 case ItemCategory.Scroll:
-                    modstr = SaveGame.Instance.ScrollFlavours[indexx].Name;
+                    modstr = SaveGame.ScrollFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -693,7 +696,7 @@ namespace Cthangband
                     break;
 
                 case ItemCategory.Potion:
-                    modstr = SaveGame.Instance.PotionFlavours[indexx].Name;
+                    modstr = SaveGame.PotionFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -706,7 +709,7 @@ namespace Cthangband
                     {
                         break;
                     }
-                    modstr = SaveGame.Instance.MushroomFlavours[indexx].Name;
+                    modstr = SaveGame.MushroomFlavours[indexx].Name;
                     if (aware)
                     {
                         appendName = true;
@@ -716,56 +719,56 @@ namespace Cthangband
 
                 case ItemCategory.LifeBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Life Magic #"
                         : "& Life Spellbook~ #";
                     break;
 
                 case ItemCategory.SorceryBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Sorcery #"
                         : "& Sorcery Spellbook~ #";
                     break;
 
                 case ItemCategory.NatureBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Nature Magic #"
                         : "& Nature Spellbook~ #";
                     break;
 
                 case ItemCategory.ChaosBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Chaos Magic #"
                         : "& Chaos Spellbook~ #";
                     break;
 
                 case ItemCategory.DeathBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Death Magic #"
                         : "& Death Spellbook~ #";
                     break;
 
                 case ItemCategory.TarotBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Tarot Magic #"
                         : "& Tarot Spellbook~ #";
                     break;
 
                 case ItemCategory.FolkBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Folk Magic #"
                         : "& Folk Spellbook~ #";
                     break;
 
                 case ItemCategory.CorporealBook:
                     modstr = basenm;
-                    basenm = SaveGame.Instance.Player.Spellcasting.Type == CastingType.Divine
+                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
                         ? "& Book~ of Corporeal Magic #"
                         : "& Corporeal Spellbook~ #";
                     break;
@@ -866,13 +869,13 @@ namespace Cthangband
                 }
                 else if (FixedArtifactIndex != 0)
                 {
-                    FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                     t += ' ';
                     t += aPtr.Name;
                 }
                 else if (RareItemTypeIndex != Enumerations.RareItemType.None)
                 {
-                    RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                     t += ' ';
                     t += ePtr.Name;
                 }
@@ -1189,11 +1192,11 @@ namespace Cthangband
             string newDescription = NewDescription(pref, mode);
             if (originalDescription == newDescription)
             {
-                //SaveGame.Instance.MsgPrint("Inventory descriptions confirmed.");
+                //SaveGame.MsgPrint("Inventory descriptions confirmed.");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("DESCRIPTION FAILED!");
+                SaveGame.MsgPrint("DESCRIPTION FAILED!");
             }
             return newDescription;
         }
@@ -1654,14 +1657,14 @@ namespace Cthangband
             f3.Set(ItemType.Flags3);
             if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                 f1.Set(aPtr.Flags1);
                 f2.Set(aPtr.Flags2);
                 f3.Set(aPtr.Flags3);
             }
             if (RareItemTypeIndex != Enumerations.RareItemType.None)
             {
-                RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 f1.Set(ePtr.Flags1);
                 f2.Set(ePtr.Flags2);
                 f3.Set(ePtr.Flags3);
@@ -2179,10 +2182,10 @@ namespace Cthangband
 
         public bool MakeGold(int coinType)
         {
-            int i = ((Program.Rng.DieRoll(SaveGame.Instance.Level.ObjectLevel + 2) + 2) / 2) - 1;
+            int i = ((Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 2) + 2) / 2) - 1;
             if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
             {
-                i += Program.Rng.DieRoll(SaveGame.Instance.Level.ObjectLevel + 1);
+                i += Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 1);
             }
             if (coinType != 0)
             {
@@ -2196,75 +2199,75 @@ namespace Cthangband
             switch (i)
             {
                 case 0:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperLow);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperLow);
                     break;
 
                 case 1:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperMed);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperMed);
                     break;
 
                 case 2:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperHi);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperHi);
                     break;
 
                 case 3:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverLow);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverLow);
                     break;
 
                 case 4:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverMed);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverMed);
                     break;
 
                 case 5:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverHi);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverHi);
                     break;
 
                 case 6:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsLow);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsLow);
                     break;
 
                 case 7:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsHi);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsHi);
                     break;
 
                 case 8:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldLow);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldLow);
                     break;
 
                 case 9:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldMed);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldMed);
                     break;
 
                 case 10:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldHigh);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldHigh);
                     break;
 
                 case 11:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Opals);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Opals);
                     break;
 
                 case 12:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Sapphires);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Sapphires);
                     break;
 
                 case 13:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Rubies);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Rubies);
                     break;
 
                 case 14:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Diamonds);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Diamonds);
                     break;
 
                 case 15:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Emeralds);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Emeralds);
                     break;
 
                 case 16:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Mithril);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Mithril);
                     break;
 
                 case 17:
-                    kPtr = SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Adamantite);
+                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Adamantite);
                     break;
             }
             if (kPtr == null)
@@ -2312,7 +2315,7 @@ namespace Cthangband
             }
             else if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                 if (aPtr.Cost == 0)
                 {
                     return 0;
@@ -2321,7 +2324,7 @@ namespace Cthangband
             }
             else if (RareItemTypeIndex != Enumerations.RareItemType.None)
             {
-                RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 if (ePtr.Cost == 0)
                 {
                     return 0;
@@ -2507,7 +2510,7 @@ namespace Cthangband
             }
             else if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                 if (aPtr.Cost == 0)
                 {
                     return 0;
@@ -2516,7 +2519,7 @@ namespace Cthangband
             }
             else if (RareItemTypeIndex != Enumerations.RareItemType.None)
             {
-                RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 if (ePtr.Cost == 0)
                 {
                     return 0;
@@ -2537,11 +2540,11 @@ namespace Cthangband
             int newValue = NewRealValue();
             if (originalValue == newValue)
             {
-                //SaveGame.Instance.MsgPrint("Inventory descriptions confirmed.");
+                //SaveGame.MsgPrint("Inventory descriptions confirmed.");
             }
             else
             {
-                SaveGame.Instance.MsgPrint("REAL VALUE FAILED!");
+                SaveGame.MsgPrint("REAL VALUE FAILED!");
             }
             return newValue;
         }
@@ -2939,7 +2942,7 @@ namespace Cthangband
             }
             if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.Instance.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
                 aPtr.CurNum = 1;
                 TypeSpecificValue = aPtr.Pval;
                 BaseArmourClass = aPtr.Ac;
@@ -2957,28 +2960,28 @@ namespace Cthangband
                 {
                     IdentifyFlags.Set(Constants.IdentCursed);
                 }
-                if (SaveGame.Instance.Level != null)
+                if (SaveGame.Level != null)
                 {
-                    SaveGame.Instance.Level.TreasureRating += 10;
+                    SaveGame.Level.TreasureRating += 10;
                     if (aPtr.Cost > 50000)
                     {
-                        SaveGame.Instance.Level.TreasureRating += 10;
+                        SaveGame.Level.TreasureRating += 10;
                     }
-                    SaveGame.Instance.Level.SpecialTreasure = true;
+                    SaveGame.Level.SpecialTreasure = true;
                 }
                 return;
             }
             ItemType.BaseCategory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
-                if (SaveGame.Instance.Level != null)
+                if (SaveGame.Level != null)
                 {
-                    SaveGame.Instance.Level.TreasureRating += 40;
+                    SaveGame.Level.TreasureRating += 40;
                 }
             }
             else if (RareItemTypeIndex != Enumerations.RareItemType.None)
             {
-                RareItemType ePtr = SaveGame.Instance.RareItemTypes[RareItemTypeIndex];
+                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 switch (RareItemTypeIndex)
                 {
                     case Enumerations.RareItemType.WeaponElderSign:
@@ -3075,9 +3078,9 @@ namespace Cthangband
                         TypeSpecificValue += Program.Rng.DieRoll(ePtr.MaxPval);
                     }
                 }
-                if (SaveGame.Instance.Level != null)
+                if (SaveGame.Level != null)
                 {
-                    SaveGame.Instance.Level.TreasureRating += ePtr.Rating;
+                    SaveGame.Level.TreasureRating += ePtr.Rating;
                 }
                 return;
             }
@@ -3345,7 +3348,7 @@ namespace Cthangband
             IArtifactBias artifactBias = null;
             if (fromScroll && Program.Rng.DieRoll(4) == 1)
             {
-                switch (SaveGame.Instance.Player.ProfessionIndex)
+                switch (SaveGame.Player.ProfessionIndex)
                 {
                     case CharacterClass.Warrior:
                     case CharacterClass.ChosenOne:
@@ -3513,7 +3516,7 @@ namespace Cthangband
             bool giveResistance = false, givePower = false;
             if (FixedArtifactIndex == FixedArtifactId.HelmTerrorMask)
             {
-                if (SaveGame.Instance.Player.ProfessionIndex == CharacterClass.Warrior)
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior)
                 {
                     givePower = true;
                     giveResistance = true;
@@ -3610,7 +3613,7 @@ namespace Cthangband
         public bool MakeObject(bool good, bool great)
         {
             int prob = good ? 10 : 1000;
-            int baselevel = good ? SaveGame.Instance.Level.ObjectLevel + 10 : SaveGame.Instance.Level.ObjectLevel;
+            int baselevel = good ? SaveGame.Level.ObjectLevel + 10 : SaveGame.Level.ObjectLevel;
             if (Program.Rng.RandomLessThan(prob) != 0 || !MakeFixedArtifact())
             {
                 if (good)
@@ -3628,14 +3631,14 @@ namespace Cthangband
                 }
                 AssignItemType(kIdx);
             }
-            ApplyMagic(SaveGame.Instance.Level.ObjectLevel, true, good, great);
+            ApplyMagic(SaveGame.Level.ObjectLevel, true, good, great);
             Count = ItemType.BaseCategory.MakeObjectCount;
-            if (!IsCursed() && !IsBroken() && ItemType.Level > SaveGame.Instance.Difficulty)
+            if (!IsCursed() && !IsBroken() && ItemType.Level > SaveGame.Difficulty)
             {
-                if (SaveGame.Instance.Level != null)
+                if (SaveGame.Level != null)
                 {
-                    SaveGame.Instance.Level.TreasureRating +=
-                        ItemType.Level - SaveGame.Instance.Difficulty;
+                    SaveGame.Level.TreasureRating +=
+                        ItemType.Level - SaveGame.Difficulty;
                 }
             }
             return true;
@@ -3647,7 +3650,7 @@ namespace Cthangband
             {
                 return false;
             }
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.Instance.FixedArtifacts)
+            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (aPtr.HasOwnType)
@@ -3666,9 +3669,9 @@ namespace Cthangband
                 {
                     continue;
                 }
-                if (aPtr.Level > SaveGame.Instance.Difficulty)
+                if (aPtr.Level > SaveGame.Difficulty)
                 {
-                    int d = (aPtr.Level - SaveGame.Instance.Difficulty) * 2;
+                    int d = (aPtr.Level - SaveGame.Difficulty) * 2;
                     if (Program.Rng.RandomLessThan(d) != 0)
                     {
                         continue;
@@ -4030,7 +4033,7 @@ namespace Cthangband
             {
                 RandartFlags3.Set(ItemFlag3.NoTele);
             }
-            if (SaveGame.Instance.Player.ProfessionIndex != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
+            if (SaveGame.Player.ProfessionIndex != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
             {
                 RandartFlags3.Set(ItemFlag3.NoMagic);
             }
@@ -4090,7 +4093,7 @@ namespace Cthangband
 
         private bool MakeFixedArtifact()
         {
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.Instance.FixedArtifacts)
+            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (!aPtr.HasOwnType)
@@ -4101,9 +4104,9 @@ namespace Cthangband
                 {
                     continue;
                 }
-                if (aPtr.Level > SaveGame.Instance.Difficulty)
+                if (aPtr.Level > SaveGame.Difficulty)
                 {
-                    int d = (aPtr.Level - SaveGame.Instance.Difficulty) * 2;
+                    int d = (aPtr.Level - SaveGame.Difficulty) * 2;
                     if (Program.Rng.RandomLessThan(d) != 0)
                     {
                         continue;
@@ -4113,10 +4116,10 @@ namespace Cthangband
                 {
                     return false;
                 }
-                ItemType kIdx = SaveGame.Instance.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
-                if (kIdx.Level > SaveGame.Instance.Level.ObjectLevel)
+                ItemType kIdx = SaveGame.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
+                if (kIdx.Level > SaveGame.Level.ObjectLevel)
                 {
-                    int d = (kIdx.Level - SaveGame.Instance.Level.ObjectLevel) * 5;
+                    int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
                     if (Program.Rng.RandomLessThan(d) != 0)
                     {
                         continue;
@@ -4131,8 +4134,8 @@ namespace Cthangband
 
         private void PrepareAllocationTable(GetObjNumHookDelegate getObjNumHook)
         {
-            AllocationEntry[] table = SaveGame.Instance.AllocKindTable;
-            for (int i = 0; i < SaveGame.Instance.AllocKindSize; i++)
+            AllocationEntry[] table = SaveGame.AllocKindTable;
+            for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
                 if (getObjNumHook == null || getObjNumHook(table[i].Index))
                 {

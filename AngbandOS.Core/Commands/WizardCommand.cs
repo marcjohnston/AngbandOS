@@ -550,7 +550,7 @@ namespace Cthangband.Commands
             bool changed;
             Gui.FullScreenOverlay = true;
             Gui.Save();
-            Item qPtr = new Item(oPtr);
+            Item qPtr = new Item(saveGame, oPtr);
             while (true)
             {
                 WizDisplayItem(qPtr);
@@ -663,7 +663,7 @@ namespace Cthangband.Commands
             {
                 return;
             }
-            Item qPtr = new Item();
+            Item qPtr = new Item(saveGame);
             qPtr.AssignItemType(saveGame.ItemTypes[kIdx]);
             qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
             saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
@@ -758,7 +758,7 @@ namespace Cthangband.Commands
                 return;
             }
             FixedArtifact aPtr = saveGame.FixedArtifacts[aIdx];
-            Item qPtr = new Item();
+            Item qPtr = new Item(saveGame);
             if (string.IsNullOrEmpty(aPtr.Name))
             {
                 return;
@@ -871,7 +871,7 @@ namespace Cthangband.Commands
             {
                 return oPtr;
             }
-            Item qPtr = new Item(oPtr);
+            Item qPtr = new Item(saveGame, oPtr);
             while (true)
             {
                 WizDisplayItem(qPtr);
@@ -970,7 +970,7 @@ namespace Cthangband.Commands
                         Gui.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
                         Gui.Refresh();
                     }
-                    Item qPtr = new Item();
+                    Item qPtr = new Item(saveGame);
                     qPtr.MakeObject(good, great);
                     if (qPtr.IsFixedArtifact())
                     {

@@ -335,7 +335,7 @@ namespace Cthangband.Commands
                       item.ItemSubCategory < FoodType.Biscuit))
                 {
                     // Spawn a new food item on the floor to make up for the one that will be destroyed
-                    Item floorItem = new Item();
+                    Item floorItem = new Item(saveGame);
                     saveGame.MsgPrint("The food falls through your jaws!");
                     floorItem.AssignItemType(
                         saveGame.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));

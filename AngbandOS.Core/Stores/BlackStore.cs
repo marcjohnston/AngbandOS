@@ -7,7 +7,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class BlackStore : Store
     {
-        public BlackStore() : base(StoreType.StoreBlack)
+        public BlackStore(SaveGame saveGame) : base(saveGame, StoreType.StoreBlack)
         {
         }
 
@@ -69,7 +69,7 @@ namespace Cthangband.Stores
             {
                 return null; ;
             }
-            Item qPtr = new Item();
+            Item qPtr = new Item(SaveGame);
             qPtr.AssignItemType(itemType);
             qPtr.ApplyMagic(level, false, false, false);
             return qPtr;

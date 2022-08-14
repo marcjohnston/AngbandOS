@@ -22,10 +22,10 @@ namespace Cthangband.StoreCommands
 
         public void Execute(Player player, Store store)
         {
-            DoCmdWield(player);
+            DoCmdWield(store.SaveGame); // TODO: Store.SaveGame was made public just for this
         }
 
-        public static void DoCmdWield(Player player)
+        public static void DoCmdWield(SaveGame saveGame)
         {
             string weildPhrase;
             string itemName;
@@ -39,14 +39,14 @@ namespace Cthangband.StoreCommands
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Find the correct item slot
-            int slot = player.Inventory.WieldSlot(item);
+            int slot = saveGame.Player.Inventory.WieldSlot(item);
             // Can't replace a cursed item
-            if (player.Inventory[slot].IsCursed())
+            if (saveGame.Player.Inventory[slot].IsCursed())
             {
-                itemName = player.Inventory[slot].Description(false, 0);
-                SaveGame.Instance.MsgPrint($"The {itemName} you are {player.DescribeWieldLocation(slot)} appears to be cursed.");
+                itemName = saveGame.Player.Inventory[slot].Description(false, 0);
+                SaveGame.Instance.MsgPrint($"The {itemName} you are {saveGame.Player.DescribeWieldLocation(slot)} appears to be cursed.");
                 return;
             }
             // If we know the item to be cursed, confirm its wearing
@@ -62,12 +62,12 @@ namespace Cthangband.StoreCommands
             // Use some energy
             SaveGame.Instance.EnergyUse = 100;
             // Pull one item out of the item stack
-            Item wornItem = new Item(item) { Count = 1 };
+            Item wornItem = new Item(saveGame, item) { Count = 1 };
             // Reduce the count of the item stack accordingly
             if (itemIndex >= 0)
             {
-                player.Inventory.InvenItemIncrease(itemIndex, -1);
-                player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
             }
             else
             {
@@ -75,15 +75,15 @@ namespace Cthangband.StoreCommands
                 SaveGame.Instance.Level.FloorItemOptimize(0 - itemIndex);
             }
             // Take off the old item
-            item = player.Inventory[slot];
+            item = saveGame.Player.Inventory[slot];
             if (item.ItemType != null)
             {
-                player.Inventory.InvenTakeoff(slot, 255);
+                saveGame.Player.Inventory.InvenTakeoff(slot, 255);
             }
             // Put the item into the wield slot
-            player.Inventory[slot] = wornItem;
+            saveGame.Player.Inventory[slot] = wornItem;
             // Add the weight of the item
-            player.WeightCarried += wornItem.Weight;
+            saveGame.Player.WeightCarried += wornItem.Weight;
             // Inform us what we did
             if (slot == InventorySlot.MeleeWeapon)
             {
@@ -113,10 +113,10 @@ namespace Cthangband.StoreCommands
                 SaveGame.Instance.MsgPrint("Oops! It feels deathly cold!");
                 wornItem.IdentifyFlags.Set(Constants.IdentSense);
             }
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
-            player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
         }
     }
 }

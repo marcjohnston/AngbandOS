@@ -419,7 +419,7 @@ namespace Cthangband.Commands
                 // If the rod was part of a stack, remove it
                 if (itemIndex >= 0 && item.Count > 1)
                 {
-                    Item singleRod = new Item(item) { Count = 1 };
+                    Item singleRod = new Item(saveGame, item) { Count = 1 };
                     item.TypeSpecificValue = 0;
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleRod.Weight;

@@ -22,6 +22,7 @@ namespace Cthangband
     [Serializable]
     internal abstract class Store : IStore
     {
+        public readonly SaveGame SaveGame;
         public readonly StoreType StoreType;
 
         public int X => _x;
@@ -63,8 +64,8 @@ namespace Cthangband
             newStore._stockNum = _stockNum;
             for (int i = 0; i < _stock.Length; i++)
             {
-                newStore._stock[i] = new Item(_stock[i]);
-                _stock[i] = new Item();
+                newStore._stock[i] = new Item(SaveGame, _stock[i]);
+                _stock[i] = new Item(SaveGame);
             }
             _stockNum = 0;
         }
@@ -75,14 +76,15 @@ namespace Cthangband
         /// <returns></returns>
         protected abstract StockStoreInventoryItem[] GetStoreTable();
 
-        public Store(StoreType storeType)
+        public Store(SaveGame saveGame, StoreType storeType)
         {
+            SaveGame = saveGame;
             StoreType = storeType;
             _stockSize = Constants.StoreInvenMax;
             _stock = new Item[_stockSize];
             for (int k = 0; k < _stockSize; k++)
             {
-                _stock[k] = new Item();
+                _stock[k] = new Item(SaveGame);
             }
             StockStoreInventoryItem[] master = GetStoreTable();
             if (master == null)
@@ -93,9 +95,9 @@ namespace Cthangband
             for (int k = 0; k < master.Length; k++)
             {
                 int kIdx = -1;
-                for (int i = 0; i < SaveGame.Instance.ItemTypes.Count; i++)
+                for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                 {
-                    ItemType itemType = SaveGame.Instance.ItemTypes[i];
+                    ItemType itemType = SaveGame.ItemTypes[i];
                     if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
@@ -194,32 +196,32 @@ namespace Cthangband
                 Gui.RequestCommand(true);
                 StoreProcessCommand();
                 Gui.FullScreenOverlay = true;
-                SaveGame.Instance.NoticeStuff();
-                SaveGame.Instance.HandleStuff();
+                SaveGame.NoticeStuff();
+                SaveGame.HandleStuff();
                 if (_player.Inventory[InventorySlot.Pack].ItemType != null)
                 {
                     const int item = InventorySlot.Pack;
                     Item oPtr = _player.Inventory[item];
                     if (StoreType != StoreType.StoreHome)
                     {
-                        SaveGame.Instance.MsgPrint("Your pack is so full that you flee the Stores...");
+                        SaveGame.MsgPrint("Your pack is so full that you flee the Stores...");
                         _leaveStore = true;
                     }
                     else if (!StoreCanAcceptMoreItems(oPtr))
                     {
-                        SaveGame.Instance.MsgPrint("Your pack is so full that you flee your home...");
+                        SaveGame.MsgPrint("Your pack is so full that you flee your home...");
                         _leaveStore = true;
                     }
                     else
                     {
-                        SaveGame.Instance.MsgPrint("Your pack overflows!");
-                        Item qPtr = new Item(oPtr);
+                        SaveGame.MsgPrint("Your pack overflows!");
+                        Item qPtr = new Item(SaveGame, oPtr);
                         string oName = qPtr.Description(true, 3);
-                        SaveGame.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+                        SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                         _player.Inventory.InvenItemIncrease(item, -255);
                         _player.Inventory.InvenItemDescribe(item);
                         _player.Inventory.InvenItemOptimize(item);
-                        SaveGame.Instance.HandleStuff();
+                        SaveGame.HandleStuff();
                         int itemPos = HomeCarry(qPtr);
                         if (itemPos >= 0)
                         {
@@ -233,11 +235,11 @@ namespace Cthangband
                     DisplayInventory();
                 }
             }
-            SaveGame.Instance.EnergyUse = 0;
+            SaveGame.EnergyUse = 0;
             Gui.FullScreenOverlay = false;
             Gui.QueuedCommand = '\0';
-            SaveGame.Instance.ViewingItemList = false;
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.ViewingItemList = false;
+            SaveGame.MsgPrint(null);
             Gui.Clear();
             Gui.SetBackground(BackgroundImage.Overhead);
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
@@ -252,7 +254,7 @@ namespace Cthangband
             _stockNum = 0;
             for (int k = 0; k < _stockSize; k++)
             {
-                _stock[k] = new Item();
+                _stock[k] = new Item(SaveGame);
             }
         }
 
@@ -280,9 +282,9 @@ namespace Cthangband
         public virtual void StoreMaint()
         {
             int oldRating = 0;
-            if (SaveGame.Instance.Level != null)
+            if (SaveGame.Level != null)
             {
-                oldRating = SaveGame.Instance.Level.TreasureRating;
+                oldRating = SaveGame.Level.TreasureRating;
             }
             if (!MaintainsStockLevels)
             {
@@ -324,9 +326,9 @@ namespace Cthangband
             {
                 StoreCreate();
             }
-            if (SaveGame.Instance.Level != null)
+            if (SaveGame.Level != null)
             {
-                SaveGame.Instance.Level.TreasureRating = oldRating;
+                SaveGame.Level.TreasureRating = oldRating;
             }
         }
 
@@ -520,7 +522,7 @@ namespace Cthangband
                 }
             }
             Gui.Save();
-            SaveGame.Instance.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseCategory.SpellBookToToRealm);
+            SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseCategory.SpellBookToToRealm);
             Gui.PrintLine("", 0, 0);
             Gui.Print("[Press any key to continue]", 0, 23);
             Gui.Inkey();
@@ -599,7 +601,7 @@ namespace Cthangband
         private bool GetStock(out int comVal, string pmt, int i, int j)
         {
             char command;
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint(null);
             comVal = -1;
             string outVal = $"(Items {i.IndexToLetter()}-{j.IndexToLetter()}, ESC to exit) {pmt}";
             while (Gui.GetCom(outVal, out command))
@@ -770,10 +772,10 @@ namespace Cthangband
             }
             for (int i = _stockNum; i > slot; i--)
             {
-                _stock[i] = new Item(_stock[i - 1]);
+                _stock[i] = new Item(SaveGame, _stock[i - 1]);
             }
             _stockNum++;
-            _stock[slot] = new Item(oPtr);
+            _stock[slot] = new Item(SaveGame, oPtr);
             return slot;
         }
 
@@ -855,22 +857,22 @@ namespace Cthangband
         {
             if (value <= 0 && price > value)
             {
-                SaveGame.Instance.MsgPrint(_comment_7A[Program.Rng.RandomLessThan(_comment_7A.Length)]);
+                SaveGame.MsgPrint(_comment_7A[Program.Rng.RandomLessThan(_comment_7A.Length)]);
                 Gui.PlaySound(SoundEffect.StoreSoldWorthless);
             }
             else if (value < guess && price > value)
             {
-                SaveGame.Instance.MsgPrint(_comment_7B[Program.Rng.RandomLessThan(_comment_7B.Length)]);
+                SaveGame.MsgPrint(_comment_7B[Program.Rng.RandomLessThan(_comment_7B.Length)]);
                 Gui.PlaySound(SoundEffect.StoreSoldBargain);
             }
             else if (value > guess && value < 4 * guess && price < value)
             {
-                SaveGame.Instance.MsgPrint(_comment_7C[Program.Rng.RandomLessThan(_comment_7C.Length)]);
+                SaveGame.MsgPrint(_comment_7C[Program.Rng.RandomLessThan(_comment_7C.Length)]);
                 Gui.PlaySound(SoundEffect.StoreSoldCheaply);
             }
             else if (value > guess && price < value)
             {
-                SaveGame.Instance.MsgPrint(_comment_7D[Program.Rng.RandomLessThan(_comment_7D.Length)]);
+                SaveGame.MsgPrint(_comment_7D[Program.Rng.RandomLessThan(_comment_7D.Length)]);
                 Gui.PlaySound(SoundEffect.StoreSoldExtraCheaply);
             }
         }
@@ -878,8 +880,8 @@ namespace Cthangband
         private bool PurchaseHaggle(Item oPtr, out int price)
         {
             int finalAsk = PriceItem(oPtr, _owner.MinInflate, false);
-            SaveGame.Instance.MsgPrint("You quickly agree upon the price.");
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint("You quickly agree upon the price.");
+            SaveGame.MsgPrint(null);
             finalAsk += finalAsk / 10;
             const string pmt = "Final Offer";
             finalAsk *= oPtr.Count;
@@ -896,19 +898,19 @@ namespace Cthangband
             if (toDusk)
             {
                 _player.GameTime.ToNextDusk();
-                SaveGame.Instance.MsgPrint("You awake, ready for the night.");
-                SaveGame.Instance.MsgPrint("You eat a tasty supper.");
+                SaveGame.MsgPrint("You awake, ready for the night.");
+                SaveGame.MsgPrint("You eat a tasty supper.");
             }
             else
             {
                 _player.GameTime.ToNextDawn();
-                SaveGame.Instance.MsgPrint("You awake refreshed for the new day.");
-                SaveGame.Instance.MsgPrint("You eat a hearty breakfast.");
+                SaveGame.MsgPrint("You awake refreshed for the new day.");
+                SaveGame.MsgPrint("You eat a hearty breakfast.");
             }
             _player.Religion.DecayFavour();
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
             _player.SetFood(Constants.PyFoodMax - 1);
-            foreach (Town town in SaveGame.Instance.Towns)
+            foreach (Town town in SaveGame.Towns)
             {
                 foreach (Store store in town.Stores)
                 {
@@ -947,8 +949,8 @@ namespace Cthangband
             _player.SetTimedBlindness(0);
             _player.SetTimedConfusion(0);
             _player.TimedStun = 0;
-            SaveGame.Instance.NewLevelFlag = true;
-            SaveGame.Instance.CameFrom = LevelStart.StartWalk;
+            SaveGame.NewLevelFlag = true;
+            SaveGame.CameFrom = LevelStart.StartWalk;
         }
 
         public void SacrificeItem()
@@ -960,19 +962,19 @@ namespace Cthangband
             }
             var deity = _player.Religion.GetNamedDeity(godName);
             string pmt = "Sacrifice which item? ";
-            SaveGame.Instance.ItemFilter = null;
-            if (!SaveGame.Instance.GetItem(out int item, pmt, true, true, false))
+            SaveGame.ItemFilter = null;
+            if (!SaveGame.GetItem(out int item, pmt, true, true, false))
             {
                 if (item == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing to sacrifice.");
+                    SaveGame.MsgPrint("You have nothing to sacrifice.");
                     return;
                 }
             }
-            Item oPtr = item >= 0 ? _player.Inventory[item] : SaveGame.Instance.Level.Items[0 - item];
+            Item oPtr = item >= 0 ? _player.Inventory[item] : SaveGame.Level.Items[0 - item];
             if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
             {
-                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             int amt = 1;
@@ -984,14 +986,14 @@ namespace Cthangband
                     return;
                 }
             }
-            Item qPtr = new Item(oPtr) { Count = amt };
+            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
             qPtr.Inscription = "";
             int finalAsk = PriceItem(qPtr, _owner.MinInflate, true) * qPtr.Count;
             _player.Inventory.InvenItemIncrease(item, -amt);
             _player.Inventory.InvenItemDescribe(item);
             _player.Inventory.InvenItemOptimize(item);
-            SaveGame.Instance.HandleStuff();
+            SaveGame.HandleStuff();
             var deityName = deity.ShortName;
             if (finalAsk <= 0)
             {
@@ -1004,34 +1006,34 @@ namespace Cthangband
             var change = newFavour - oldFavour;
             if (change < 0)
             {
-                SaveGame.Instance.MsgPrint($"{deityName} is displeased with your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} is displeased with your sacrifice!");
             }
             else if (change == 0)
             {
-                SaveGame.Instance.MsgPrint($"{deityName} is indifferent to your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} is indifferent to your sacrifice!");
             }
             else if (change == 1)
             {
-                SaveGame.Instance.MsgPrint($"{deityName} approves of your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} approves of your sacrifice!");
             }
             else if (change == 2)
             {
-                SaveGame.Instance.MsgPrint($"{deityName} likes your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} likes your sacrifice!");
             }
             else if (change == 3)
             {
-                SaveGame.Instance.MsgPrint($"{deityName} loves your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} loves your sacrifice!");
             }
             else
             {
-                SaveGame.Instance.MsgPrint($"{deityName} is delighted by your sacrifice!");
+                SaveGame.MsgPrint($"{deityName} is delighted by your sacrifice!");
             }
             _player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
         }
 
         protected void SayComment_1()
         {
-            SaveGame.Instance.MsgPrint(_comment1[Program.Rng.RandomLessThan(_comment1.Length)]);
+            SaveGame.MsgPrint(_comment1[Program.Rng.RandomLessThan(_comment1.Length)]);
         }
 
         private bool SellHaggle(Item oPtr, out int price)
@@ -1040,14 +1042,14 @@ namespace Cthangband
             int purse = _owner.MaxCost;
             if (finalAsk >= purse)
             {
-                SaveGame.Instance.MsgPrint("You instantly agree upon the price.");
-                SaveGame.Instance.MsgPrint(null);
+                SaveGame.MsgPrint("You instantly agree upon the price.");
+                SaveGame.MsgPrint(null);
                 finalAsk = purse;
             }
             else
             {
-                SaveGame.Instance.MsgPrint("You quickly agree upon the price.");
-                SaveGame.Instance.MsgPrint(null);
+                SaveGame.MsgPrint("You quickly agree upon the price.");
+                SaveGame.MsgPrint(null);
                 finalAsk -= finalAsk / 10;
             }
             const string pmt = "Final Offer";
@@ -1061,8 +1063,8 @@ namespace Cthangband
         protected bool ServiceHaggle(int serviceCost, out int price)
         {
             int finalAsk = serviceCost;
-            SaveGame.Instance.MsgPrint("You quickly agree upon the price.");
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint("You quickly agree upon the price.");
+            SaveGame.MsgPrint(null);
             finalAsk += finalAsk / 10;
             price = finalAsk;
             const string pmt = "Final Offer";
@@ -1098,8 +1100,8 @@ namespace Cthangband
             ItemType itemType;
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
-            itemType = SaveGame.Instance.ItemTypes[i];
-            Item qPtr = new Item();
+            itemType = SaveGame.ItemTypes[i];
+            Item qPtr = new Item(SaveGame);
             qPtr.AssignItemType(itemType);
             qPtr.ApplyMagic(level, false, false, false);
             return qPtr;
@@ -1168,7 +1170,7 @@ namespace Cthangband
         {
             if (_stockNum <= 0)
             {
-                SaveGame.Instance.MsgPrint(NoStockMessage);
+                SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
             int i = _stockNum - _storeTop;
@@ -1255,19 +1257,19 @@ namespace Cthangband
                         }
                         break;
                 }
-                SaveGame.Instance.MsgPrint("The spells in the book are unintelligible to you.");
+                SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
                 return;
             }
             if (oPtr.IdentifyFlags.IsClear(Constants.IdentMental))
             {
-                SaveGame.Instance.MsgPrint("You have no special knowledge about that item.");
+                SaveGame.MsgPrint("You have no special knowledge about that item.");
                 return;
             }
             string oName = oPtr.Description(true, 3);
-            SaveGame.Instance.MsgPrint($"Examining {oName}...");
+            SaveGame.MsgPrint($"Examining {oName}...");
             if (!oPtr.IdentifyFully())
             {
-                SaveGame.Instance.MsgPrint("You see nothing special.");
+                SaveGame.MsgPrint("You see nothing special.");
             }
         }
 
@@ -1304,7 +1306,7 @@ namespace Cthangband
             {
                 _stock[j] = _stock[j + 1];
             }
-            _stock[j] = new Item();
+            _stock[j] = new Item(SaveGame);
         }
 
         private void StoreObjectAbsorb(Item oPtr, Item jPtr)
@@ -1394,46 +1396,46 @@ namespace Cthangband
             // If we don't have a realm then we can't do anything
             if (_player.Realm1 == 0)
             {
-                SaveGame.Instance.MsgPrint("You cannot read books!");
+                SaveGame.MsgPrint("You cannot read books!");
                 return;
             }
             // We can't learn spells if we're blind or confused
             if (_player.TimedBlindness != 0)
             {
-                SaveGame.Instance.MsgPrint("You cannot see!");
+                SaveGame.MsgPrint("You cannot see!");
                 return;
             }
             if (_player.TimedConfusion != 0)
             {
-                SaveGame.Instance.MsgPrint("You are too confused!");
+                SaveGame.MsgPrint("You are too confused!");
                 return;
             }
             // We can only learn new spells if we have spare slots
             if (_player.SpareSpellSlots == 0)
             {
-                SaveGame.Instance.MsgPrint($"You cannot learn any new {spellType}s!");
+                SaveGame.MsgPrint($"You cannot learn any new {spellType}s!");
                 return;
             }
             string plural = _player.SpareSpellSlots == 1 ? "" : "s";
-            SaveGame.Instance.MsgPrint($"You can learn {_player.SpareSpellSlots} new {spellType}{plural}.");
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint($"You can learn {_player.SpareSpellSlots} new {spellType}{plural}.");
+            SaveGame.MsgPrint(null);
             // Get the spell books we have
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.Instance.GetItem(out int itemIndex, "Study which book? ", false, true, true))
+            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true))
             {
                 if (itemIndex == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have no books that you can read.");
+                    SaveGame.MsgPrint("You have no books that you can read.");
                 }
                 Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = false;
             // Check each book
-            Item item = itemIndex >= 0 ? _player.Inventory[itemIndex] : SaveGame.Instance.Level.Items[0 - itemIndex];
+            Item item = itemIndex >= 0 ? _player.Inventory[itemIndex] : SaveGame.Level.Items[0 - itemIndex];
             int itemSubCategory = item.ItemSubCategory;
             bool useSetTwo = item.Category == _player.Realm2.ToSpellBookItemCategory();
-            SaveGame.Instance.HandleStuff();
+            SaveGame.HandleStuff();
             int spellIndex;
             // Arcane casters can choose their spell
             if (_player.Spellcasting.Type != CastingType.Divine)
@@ -1469,11 +1471,11 @@ namespace Cthangband
             // If we failed to get a spell, return
             if (spellIndex < 0)
             {
-                SaveGame.Instance.MsgPrint($"You cannot learn any {spellType}s from that book.");
+                SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
                 return;
             }
             // Learning a spell takes a turn (although that's not very relevant)
-            SaveGame.Instance.EnergyUse = 100;
+            SaveGame.EnergyUse = 100;
             // Mark the spell as learned
             Spell spell = useSetTwo ? _player.Spellcasting.Spells[1][spellIndex] : _player.Spellcasting.Spells[0][spellIndex];
             spell.Learned = true;
@@ -1488,13 +1490,13 @@ namespace Cthangband
             }
             _player.Spellcasting.SpellOrder[i] = spellIndex;
             // Let the player know they've learned a spell
-            SaveGame.Instance.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
+            SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
             Gui.PlaySound(SoundEffect.Study);
             _player.SpareSpellSlots--;
             if (_player.SpareSpellSlots != 0)
             {
                 plural = _player.SpareSpellSlots != 1 ? "s" : "";
-                SaveGame.Instance.MsgPrint($"You can learn {_player.SpareSpellSlots} more {spellType}{plural}.");
+                SaveGame.MsgPrint($"You can learn {_player.SpareSpellSlots} more {spellType}{plural}.");
             }
             _player.OldSpareSpellSlots = _player.SpareSpellSlots;
             _player.RedrawNeeded.Set(RedrawFlag.PrStudy);
@@ -1535,11 +1537,11 @@ namespace Cthangband
 
                 if (matchingCommandFound)
                 {
-                    SaveGame.Instance.MsgPrint("That command does not work in this Store.");
+                    SaveGame.MsgPrint("That command does not work in this Store.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("That command does not work in stores.");
+                    SaveGame.MsgPrint("That command does not work in stores.");
                 }
             }
         }
@@ -1551,7 +1553,7 @@ namespace Cthangband
             {
                 if (price >= _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1559,10 +1561,10 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.IdentifyPack();
-                    SaveGame.Instance.MsgPrint("All your goods have been identified.");
+                    SaveGame.IdentifyPack();
+                    SaveGame.MsgPrint("All your goods have been identified.");
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1571,8 +1573,8 @@ namespace Cthangband
             int price;
             if (_player.TimedPoison > 0 || _player.TimedBleeding > 0)
             {
-                SaveGame.Instance.MsgPrint("You need a healer, not a room!");
-                SaveGame.Instance.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
+                SaveGame.MsgPrint("You need a healer, not a room!");
+                SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
             }
             else
             {
@@ -1580,7 +1582,7 @@ namespace Cthangband
                 {
                     if (price >= _player.Gold)
                     {
-                        SaveGame.Instance.MsgPrint("You do not have the gold!");
+                        SaveGame.MsgPrint("You do not have the gold!");
                     }
                     else
                     {
@@ -1611,7 +1613,7 @@ namespace Cthangband
         {
             if (_player.TimedPoison > 0 || _player.TimedBleeding > 0)
             {
-                SaveGame.Instance.MsgPrint("Your wounds prevent you from sleeping.");
+                SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
             }
             else
             {
@@ -1634,7 +1636,7 @@ namespace Cthangband
             {
                 if (price > _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1642,9 +1644,9 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.IdentifyFully();
+                    SaveGame.IdentifyFully();
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1655,7 +1657,7 @@ namespace Cthangband
             {
                 if (price > _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1671,7 +1673,7 @@ namespace Cthangband
                     _player.TryRestoringAbilityScore(Ability.Charisma);
                     _player.RestoreLevel();
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1682,7 +1684,7 @@ namespace Cthangband
             {
                 if (price > _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1690,9 +1692,9 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.RemoveCurse();
+                    SaveGame.RemoveCurse();
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1703,7 +1705,7 @@ namespace Cthangband
             {
                 if (price > _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1711,9 +1713,9 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.EnchantSpell(4, 4, 0);
+                    SaveGame.EnchantSpell(4, 4, 0);
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1724,7 +1726,7 @@ namespace Cthangband
             {
                 if (price > _player.Gold)
                 {
-                    SaveGame.Instance.MsgPrint("You do not have the gold!");
+                    SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
@@ -1732,9 +1734,9 @@ namespace Cthangband
                     SayComment_1();
                     Gui.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.Instance.EnchantSpell(0, 0, 4);
+                    SaveGame.EnchantSpell(0, 0, 4);
                 }
-                SaveGame.Instance.HandleStuff();
+                SaveGame.HandleStuff();
             }
         }
 
@@ -1742,17 +1744,17 @@ namespace Cthangband
         {
             int price;
             var escortable = new Dictionary<char, Town>();
-            foreach (var town in SaveGame.Instance.Towns)
+            foreach (var town in SaveGame.Towns)
             {
-                if (town.Visited && town.Name != SaveGame.Instance.CurTown.Name && town.Char != 'K')
+                if (town.Visited && town.Name != SaveGame.CurTown.Name && town.Char != 'K')
                 {
                     escortable.Add(town.Char, town);
                 }
             }
             if (escortable.Count == 0)
             {
-                SaveGame.Instance.MsgPrint("There are no valid destinations to be escorted to.");
-                SaveGame.Instance.MsgPrint("You must have visited a town before you can be escorted there.");
+                SaveGame.MsgPrint("There are no valid destinations to be escorted to.");
+                SaveGame.MsgPrint("You must have visited a town before you can be escorted there.");
             }
             else
             {
@@ -1763,7 +1765,7 @@ namespace Cthangband
                     {
                         if (price > _player.Gold)
                         {
-                            SaveGame.Instance.MsgPrint("You do not have the gold!");
+                            SaveGame.MsgPrint("You do not have the gold!");
                         }
                         else
                         {
@@ -1773,17 +1775,17 @@ namespace Cthangband
                             StorePrtGold();
                             _player.WildernessX = destination.X;
                             _player.WildernessY = destination.Y;
-                            SaveGame.Instance.CurTown = destination;
-                            SaveGame.Instance.NewLevelFlag = true;
-                            SaveGame.Instance.CameFrom = LevelStart.StartRandom;
-                            SaveGame.Instance.MsgPrint("The journey takes all day.");
+                            SaveGame.CurTown = destination;
+                            SaveGame.NewLevelFlag = true;
+                            SaveGame.CameFrom = LevelStart.StartRandom;
+                            SaveGame.MsgPrint("The journey takes all day.");
                             _player.GameTime.ToNextDusk();
                             _leaveStore = true;
                         }
                     }
                 }
             }
-            SaveGame.Instance.HandleStuff();
+            SaveGame.HandleStuff();
         }
 
         protected void StorePrtGold()
@@ -1807,7 +1809,7 @@ namespace Cthangband
             string oName;
             if (_stockNum <= 0)
             {
-                SaveGame.Instance.MsgPrint(NoStockMessage);
+                SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
             int i = _stockNum - _storeTop;
@@ -1823,10 +1825,10 @@ namespace Cthangband
             item += _storeTop;
             Item oPtr = _stock[item];
             int amt = 1;
-            Item jPtr = new Item(oPtr) { Count = amt };
+            Item jPtr = new Item(SaveGame, oPtr) { Count = amt };
             if (!_player.Inventory.InvenCarryOkay(jPtr))
             {
-                SaveGame.Instance.MsgPrint("You cannot carry that many different items.");
+                SaveGame.MsgPrint("You cannot carry that many different items.");
                 return;
             }
             int best = PriceItem(jPtr, _owner.MinInflate, false);
@@ -1834,7 +1836,7 @@ namespace Cthangband
             {
                 if (StoreSellsItems && oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
                 {
-                    SaveGame.Instance.MsgPrint($"That costs {best} gold per item.");
+                    SaveGame.MsgPrint($"That costs {best} gold per item.");
                 }
                 int maxBuy = Math.Min(_player.Gold / best, oPtr.Count);
                 if (maxBuy < 2)
@@ -1850,10 +1852,10 @@ namespace Cthangband
                     }
                 }
             }
-            jPtr = new Item(oPtr) { Count = amt };
+            jPtr = new Item(SaveGame, oPtr) { Count = amt };
             if (!_player.Inventory.InvenCarryOkay(jPtr))
             {
-                SaveGame.Instance.MsgPrint("You cannot carry that many items.");
+                SaveGame.MsgPrint("You cannot carry that many items.");
                 return;
             }
             if (StoreSellsItems)
@@ -1868,8 +1870,8 @@ namespace Cthangband
                 else
                 {
                     oName = GetItemDescription(jPtr);
-                    SaveGame.Instance.MsgPrint($"Buying {oName} ({item.IndexToLetter()}).");
-                    SaveGame.Instance.MsgPrint(null);
+                    SaveGame.MsgPrint($"Buying {oName} ({item.IndexToLetter()}).");
+                    SaveGame.MsgPrint(null);
                     choice = PurchaseHaggle(jPtr, out price);
                 }
                 if (!choice)
@@ -1886,12 +1888,12 @@ namespace Cthangband
                         }
                         jPtr.IdentifyFlags.Clear(Constants.IdentFixed);
                         oName = jPtr.Description(true, 3);
-                        SaveGame.Instance.MsgPrint(BoughtMessage(oName, price));
+                        SaveGame.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";
                         itemNew = _player.Inventory.InvenCarry(jPtr, false);
                         oName = _player.Inventory[itemNew].Description(true, 3);
-                        SaveGame.Instance.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-                        SaveGame.Instance.HandleStuff();
+                        SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+                        SaveGame.HandleStuff();
                         i = _stockNum;
                         StoreItemIncrease(item, -amt);
                         StoreItemOptimize(item);
@@ -1901,12 +1903,12 @@ namespace Cthangband
                             {
                                 if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                                 {
-                                    SaveGame.Instance.MsgPrint("The shopkeeper retires.");
+                                    SaveGame.MsgPrint("The shopkeeper retires.");
                                     StoreShuffle();
                                 }
                                 else
                                 {
-                                    SaveGame.Instance.MsgPrint("The shopkeeper brings out some new stock.");
+                                    SaveGame.MsgPrint("The shopkeeper brings out some new stock.");
                                 }
                                 for (i = 0; i < 10; i++)
                                 {
@@ -1931,7 +1933,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        SaveGame.Instance.MsgPrint("You do not have enough gold.");
+                        SaveGame.MsgPrint("You do not have enough gold.");
                     }
                 }
             }
@@ -1939,8 +1941,8 @@ namespace Cthangband
             {
                 itemNew = _player.Inventory.InvenCarry(jPtr, false);
                 oName = _player.Inventory[itemNew].Description(true, 3);
-                SaveGame.Instance.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-                SaveGame.Instance.HandleStuff();
+                SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+                SaveGame.HandleStuff();
                 i = _stockNum;
                 StoreItemIncrease(item, -amt);
                 StoreItemOptimize(item);
@@ -1989,19 +1991,19 @@ namespace Cthangband
         public void StoreSell()
         {
             int itemPos;
-            SaveGame.Instance.ItemFilter = StoreWillBuy;
-            if (!SaveGame.Instance.GetItem(out int item, SellPrompt, true, true, false))
+            SaveGame.ItemFilter = StoreWillBuy;
+            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false))
             {
                 if (item == -2)
                 {
-                    SaveGame.Instance.MsgPrint("You have nothing that I want.");
+                    SaveGame.MsgPrint("You have nothing that I want.");
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? _player.Inventory[item] : SaveGame.Instance.Level.Items[0 - item];
+            Item oPtr = item >= 0 ? _player.Inventory[item] : SaveGame.Level.Items[0 - item];
             if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
             {
-                SaveGame.Instance.MsgPrint("Hmmm, it seems to be cursed.");
+                SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
             }
             int amt = 1;
@@ -2013,7 +2015,7 @@ namespace Cthangband
                     return;
                 }
             }
-            Item qPtr = new Item(oPtr) { Count = amt };
+            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
             string oName = qPtr.Description(true, 3);
             if (!StoreMaintainsInscription)
             {
@@ -2021,13 +2023,13 @@ namespace Cthangband
             }
             if (!StoreCanAcceptMoreItems(qPtr))
             {
-                SaveGame.Instance.MsgPrint(StoreFullMessage);
+                SaveGame.MsgPrint(StoreFullMessage);
                 return;
             }
             if (StoreBuysItems)
             {
-                SaveGame.Instance.MsgPrint($"Selling {oName} ({item.IndexToLabel()}).");
-                SaveGame.Instance.MsgPrint(null);
+                SaveGame.MsgPrint($"Selling {oName} ({item.IndexToLabel()}).");
+                SaveGame.MsgPrint(null);
                 bool choice = SellHaggle(qPtr, out int price);
                 if (!choice)
                 {
@@ -2042,7 +2044,7 @@ namespace Cthangband
                         oPtr.BecomeKnown();
                     }
                     _player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
-                    qPtr = new Item(oPtr) { Count = amt };
+                    qPtr = new Item(SaveGame, oPtr) { Count = amt };
                     int value;
                     if (!StoreAnalyzesPurchases)
                     {
@@ -2053,19 +2055,19 @@ namespace Cthangband
                         value = qPtr.Value() * qPtr.Count;
                         oName = qPtr.Description(true, 3);
                     }
-                    SaveGame.Instance.MsgPrint($"You {BoughtVerb} {oName} for {price} gold.");
+                    SaveGame.MsgPrint($"You {BoughtVerb} {oName} for {price} gold.");
                     PurchaseAnalyze(price, value, guess);
                 }
             }
             else
             {
-                SaveGame.Instance.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+                SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
             }
 
             _player.Inventory.InvenItemIncrease(item, -amt);
             _player.Inventory.InvenItemDescribe(item);
             _player.Inventory.InvenItemOptimize(item);
-            SaveGame.Instance.HandleStuff();
+            SaveGame.HandleStuff();
             itemPos = CarryItem(qPtr);
             if (itemPos >= 0)
             {

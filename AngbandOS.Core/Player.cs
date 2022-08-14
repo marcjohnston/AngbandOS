@@ -20,7 +20,7 @@ namespace Cthangband
     internal class Player
     {
         public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
-        public readonly Genome Dna = new Genome();
+        public readonly Genome Dna;
         public readonly string[] History = new string[4];
         public readonly Inventory Inventory;
         public readonly int[] MaxDlv = new int[Constants.MaxCaves];
@@ -191,6 +191,7 @@ namespace Cthangband
         public Player(SaveGame saveGame)
         {
             SaveGame = saveGame;
+            Dna = new Genome(SaveGame);
             for (int i = 0; i < 4; i++)
             {
                 History[i] = "";
@@ -200,7 +201,7 @@ namespace Cthangband
                 AbilityScores[i] = new AbilityScore();
             }
             WeightCarried = 0;
-            Inventory = new Inventory(this);
+            Inventory = new Inventory(SaveGame, this);
             foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;

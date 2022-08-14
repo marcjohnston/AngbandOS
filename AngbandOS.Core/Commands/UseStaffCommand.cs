@@ -438,7 +438,7 @@ namespace Cthangband.Commands
                 // If the staff was part of a stack, separate it from the rest
                 if (itemIndex >= 0 && item.Count > 1)
                 {
-                    Item singleStaff = new Item(item) { Count = 1 };
+                    Item singleStaff = new Item(saveGame, item) { Count = 1 };
                     item.TypeSpecificValue++;
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleStaff.Weight;

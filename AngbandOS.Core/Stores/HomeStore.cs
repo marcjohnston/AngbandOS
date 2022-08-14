@@ -10,7 +10,7 @@ namespace Cthangband.Stores
     [Serializable]
     internal class HomeStore : Store
     {
-        public HomeStore() : base(StoreType.StoreHome)
+        public HomeStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHome)
         {
         }
 
@@ -64,22 +64,22 @@ namespace Cthangband.Stores
 
         protected override bool PerformsMaintenanceWhenResting => false;
 
-        public static HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SaveGame.Instance.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
+        public static HomeStore FindHomeStore(SaveGame saveGame, int town) => (HomeStore)Array.Find(saveGame.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
 
         public void BuyHouse(Player player)
         {
             int price;
-            if (player.TownWithHouse == SaveGame.Instance.CurTown.Index)
+            if (player.TownWithHouse == SaveGame.CurTown.Index)
             {
-                SaveGame.Instance.MsgPrint("You already have the deeds!");
+                SaveGame.MsgPrint("You already have the deeds!");
             }
             else
             {
-                if (!ServiceHaggle(SaveGame.Instance.CurTown.HousePrice, out price))
+                if (!ServiceHaggle(SaveGame.CurTown.HousePrice, out price))
                 {
                     if (price >= player.Gold)
                     {
-                        SaveGame.Instance.MsgPrint("You do not have the gold!");
+                        SaveGame.MsgPrint("You do not have the gold!");
                     }
                     else
                     {
@@ -88,27 +88,27 @@ namespace Cthangband.Stores
                         Gui.PlaySound(SoundEffect.StoreTransaction);
                         StorePrtGold();
                         int oldHouse = player.TownWithHouse;
-                        player.TownWithHouse = SaveGame.Instance.CurTown.Index;
+                        player.TownWithHouse = SaveGame.CurTown.Index;
                         if (oldHouse == -1)
                         {
-                            SaveGame.Instance.MsgPrint("You may move in at once.");
+                            SaveGame.MsgPrint("You may move in at once.");
                         }
                         else
                         {
-                            SaveGame.Instance.MsgPrint(
+                            SaveGame.MsgPrint(
                                 "I've sold your old house to pay for the removal service.");
-                            MoveHouse(oldHouse, player.TownWithHouse);
+                            MoveHouse(SaveGame, oldHouse, player.TownWithHouse);
                         }
                     }
-                    SaveGame.Instance.HandleStuff();
+                    SaveGame.HandleStuff();
                 }
             }
         }
 
-        private static void MoveHouse(int oldTown, int newTown)
+        private static void MoveHouse(SaveGame saveGame, int oldTown, int newTown)
         {
-            Store newStore = FindHomeStore(newTown);
-            Store oldStore = FindHomeStore(oldTown);
+            Store newStore = FindHomeStore(saveGame, newTown);
+            Store oldStore = FindHomeStore(saveGame, oldTown);
             if (oldStore == null)
             {
                 return;

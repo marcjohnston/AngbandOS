@@ -36,7 +36,7 @@ namespace Cthangband
             Char = character;
         }
 
-        public static Town[] NewTownList()
+        public static Town[] NewTownList(SaveGame saveGame) // TODO: Do we need this?
         {
             Town[] array = new[]
             {
@@ -44,89 +44,89 @@ namespace Cthangband
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new WeaponStore(), new TempleStore(),
-                        new TempleStore(), new AlchemistStore(),
-                        new MagicStore(), new HomeStore(),
-                        new LibraryStore(), new InnStore(),
-                        new HallStore(), new PawnStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new WeaponStore(saveGame), new TempleStore(saveGame),
+                        new TempleStore(saveGame), new AlchemistStore(saveGame),
+                        new MagicStore(saveGame), new HomeStore(saveGame),
+                        new LibraryStore(saveGame), new InnStore(saveGame),
+                        new HallStore(saveGame), new PawnStore(saveGame)
                     }, 50000, "the beautiful city of Celephais", 'C'),
                 // Dylath-Leen
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new WeaponStore(), new BlackStore(),
-                        new BlackStore(), new BlackStore(),
-                        new HomeStore(), new LibraryStore(),
-                        new EmptyLotStore(), new InnStore(),
-                        new HallStore(), new PawnStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new WeaponStore(saveGame), new BlackStore(saveGame),
+                        new BlackStore(saveGame), new BlackStore(saveGame),
+                        new HomeStore(saveGame), new LibraryStore(saveGame),
+                        new EmptyLotStore(saveGame), new InnStore(saveGame),
+                        new HallStore(saveGame), new PawnStore(saveGame)
                     }, 25000, "the unwholesome city of Dylath-Leen", 'D'),
                 // Hlanith
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new EmptyLotStore(), new WeaponStore(),
-                        new EmptyLotStore(), new AlchemistStore(),
-                        new MagicStore(), new BlackStore(),
-                        new HomeStore(), new LibraryStore(),
-                        new InnStore(), new HallStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new EmptyLotStore(saveGame), new WeaponStore(saveGame),
+                        new EmptyLotStore(saveGame), new AlchemistStore(saveGame),
+                        new MagicStore(saveGame), new BlackStore(saveGame),
+                        new HomeStore(saveGame), new LibraryStore(saveGame),
+                        new InnStore(saveGame), new HallStore(saveGame)
                     }, 45000, "the market town of Hlanith", 'H'),
                 // Inganok
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new WeaponStore(), new TempleStore(),
-                        new AlchemistStore(), new EmptyLotStore(),
-                        new MagicStore(), new BlackStore(),
-                        new EmptyLotStore(), new LibraryStore(),
-                        new InnStore(), new PawnStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new WeaponStore(saveGame), new TempleStore(saveGame),
+                        new AlchemistStore(saveGame), new EmptyLotStore(saveGame),
+                        new MagicStore(saveGame), new BlackStore(saveGame),
+                        new EmptyLotStore(saveGame), new LibraryStore(saveGame),
+                        new InnStore(saveGame), new PawnStore(saveGame)
                     }, 0, "the industrious town of Inganok", 'I'),
                 // Kadath
                 new Town(
                     new[]
                     {
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore()
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame)
                     }, 0, "Kadath, home of the Gods", 'K'),
                 // Nir
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new EmptyLotStore(), new EmptyLotStore(),
-                        new InnStore(), new PawnStore()
+                        new GeneralStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new EmptyLotStore(saveGame), new EmptyLotStore(saveGame),
+                        new InnStore(saveGame), new PawnStore(saveGame)
                     }, 0, "the hamlet of Nir", 'N'),
                 // Ulthar
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new WeaponStore(), new TempleStore(),
-                        new AlchemistStore(), new MagicStore(),
-                        new EmptyLotStore(), new HomeStore(),
-                        new LibraryStore(), new InnStore(),
-                        new HallStore(), new PawnStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new WeaponStore(saveGame), new TempleStore(saveGame),
+                        new AlchemistStore(saveGame), new MagicStore(saveGame),
+                        new EmptyLotStore(saveGame), new HomeStore(saveGame),
+                        new LibraryStore(saveGame), new InnStore(saveGame),
+                        new HallStore(saveGame), new PawnStore(saveGame)
                     }, 45000, "the picturesque town of Ulthar", 'U'),
                 // Ilek-Vad
                 new Town(
                     new Store[]
                     {
-                        new GeneralStore(), new ArmouryStore(),
-                        new WeaponStore(), new TempleStore(),
-                        new AlchemistStore(), new MagicStore(),
-                        new BlackStore(), new HomeStore(),
-                        new LibraryStore(), new EmptyLotStore(),
-                        new InnStore(), new HallStore()
+                        new GeneralStore(saveGame), new ArmouryStore(saveGame),
+                        new WeaponStore(saveGame), new TempleStore(saveGame),
+                        new AlchemistStore(saveGame), new MagicStore(saveGame),
+                        new BlackStore(saveGame), new HomeStore(saveGame),
+                        new LibraryStore(saveGame), new EmptyLotStore(saveGame),
+                        new InnStore(saveGame), new HallStore(saveGame)
                     }, 60000, "the city of Ilek-Vad", 'V')
             };
             for (int i = 0; i < array.Length; i++)

@@ -129,7 +129,7 @@ namespace Cthangband.Patrons
                 case Reward.ChaosWp:
                     SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
                     SaveGame.Instance.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
-                    Item qPtr = new Item();
+                    Item qPtr = new Item(saveGame);
                     int dummy2;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
                     {

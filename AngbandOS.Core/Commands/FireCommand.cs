@@ -44,7 +44,7 @@ namespace Cthangband.Commands
                 return;
             }
             // Copy an ammunition piece from the stack...
-            Item individualAmmunition = new Item(ammunitionStack) { Count = 1 };
+            Item individualAmmunition = new Item(saveGame, ammunitionStack) { Count = 1 };
             // ...and reduced the amount in the stack
             if (itemIndex >= 0)
             {
