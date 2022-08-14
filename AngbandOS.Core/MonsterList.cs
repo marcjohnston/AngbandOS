@@ -37,7 +37,7 @@ namespace Cthangband
             _monsters = new Monster[Constants.MaxMIdx];
             for (int j = 0; j < Constants.MaxMIdx; j++)
             {
-                _monsters[j] = new Monster();
+                _monsters[j] = new Monster(saveGame);
             }
         }
 
@@ -348,7 +348,7 @@ namespace Cthangband
                 oPtr.HoldingMonsterIndex = 0;
                 _level.DeleteObjectIdx(thisOIdx);
             }
-            _monsters[i] = new Monster();
+            _monsters[i] = new Monster(SaveGame);
             _level.MCnt--;
             if (visibly)
             {
@@ -1283,7 +1283,7 @@ namespace Cthangband
                 }
                 rPtr.CurNum--;
                 _level.Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
-                _monsters[i] = new Monster();
+                _monsters[i] = new Monster(SaveGame);
             }
             _level.MMax = 1;
             _level.MCnt = 0;
@@ -1319,7 +1319,7 @@ namespace Cthangband
                 SaveGame.HealthTrack(i2);
             }
             _monsters[i2] = _monsters[i1];
-            _monsters[i1] = new Monster();
+            _monsters[i1] = new Monster(SaveGame);
         }
 
         private int MPop()

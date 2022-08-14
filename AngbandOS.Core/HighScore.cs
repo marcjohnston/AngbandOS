@@ -23,20 +23,12 @@ namespace Cthangband
         public int Index;
         public bool Living;
 
-        public HighScore(Player player) : this(player, SaveGame.Instance)
+        public HighScore(SaveGame saveGame)
         {
-        }
-
-        public HighScore(Player player, SaveGame saveGame)
-        {
-            if (saveGame == null)
-            {
-                saveGame = SaveGame.Instance;
-            }
-            Pts = player.GetScore(saveGame);
-            Prace = player.RaceIndex;
-            Pclass = player.ProfessionIndex;
-            if (player.IsDead)
+            Pts = saveGame.Player.GetScore(saveGame);
+            Prace = saveGame.Player.RaceIndex;
+            Pclass = saveGame.Player.ProfessionIndex;
+            if (saveGame.Player.IsDead)
             {
                 When = DateTime.Now.ToString("dd-MMM-yyyy");
                 How = saveGame.DiedFrom;
@@ -48,7 +40,7 @@ namespace Cthangband
                 How = "nobody (yet!)";
             }
             Who =
-                $"{player.Name.Trim()}{player.Generation.ToRoman(true)} the level {player.Level} {Race.RaceInfo[player.RaceIndex].Title} {Profession.ClassSubName(player.ProfessionIndex, player.Realm1)}";
+                $"{saveGame.Player.Name.Trim()}{saveGame.Player.Generation.ToRoman(true)} the level {saveGame.Player.Level} {Race.RaceInfo[saveGame.Player.RaceIndex].Title} {Profession.ClassSubName(saveGame.Player.ProfessionIndex, saveGame.Player.Realm1)}";
             if (saveGame.CurrentDepth > 0)
             {
                 Where = $"on level {saveGame.CurrentDepth} of {saveGame.CurDungeon.Name}";
@@ -58,7 +50,7 @@ namespace Cthangband
                 Where = "in the wilderness";
                 foreach (Town t in saveGame.Towns)
                 {
-                    if (player.WildernessX == t.X && player.WildernessY == t.Y)
+                    if (saveGame.Player.WildernessX == t.X && saveGame.Player.WildernessY == t.Y)
                     {
                         Where = $"in {t.Name}";
                     }

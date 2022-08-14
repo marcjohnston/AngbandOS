@@ -45,6 +45,12 @@ namespace Cthangband
         public int StolenGold;
         public int StunLevel;
         private static readonly string[] _funnyComments = { "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!" };
+        private readonly SaveGame SaveGame;
+
+        public Monster(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
 
         private static readonly string[] _funnyDesc =
         {
@@ -88,12 +94,12 @@ namespace Cthangband
             }
             string desc;
             string name = Race.Name;
-            if (SaveGame.Instance.Player.TimedHallucinations != 0)
+            if (SaveGame.Player.TimedHallucinations != 0)
             {
                 MonsterRace halluRace;
                 do
                 {
-                    halluRace = SaveGame.Instance.MonsterRaces[Program.Rng.DieRoll(SaveGame.Instance.MonsterRaces.Count - 2)];
+                    halluRace = SaveGame.MonsterRaces[Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2)];
                 } while ((halluRace.Flags1 & MonsterFlag1.Unique) != 0);
                 string sillyName = halluRace.Name;
                 name = sillyName;
@@ -233,7 +239,7 @@ namespace Cthangband
             }
             else
             {
-                if ((Race.Flags1 & MonsterFlag1.Unique) != 0 && SaveGame.Instance.Player.TimedHallucinations == 0)
+                if ((Race.Flags1 & MonsterFlag1.Unique) != 0 && SaveGame.Player.TimedHallucinations == 0)
                 {
                     desc = name;
                 }
@@ -257,12 +263,12 @@ namespace Cthangband
 
         public void SanityBlast(SaveGame saveGame, bool necro)
         {
-            Player player = SaveGame.Instance.Player;
+            Player player = SaveGame.Player;
             bool happened = false;
             int power = 100;
             if (necro)
             {
-                SaveGame.Instance.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+                SaveGame.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
             }
             else
             {
@@ -279,7 +285,7 @@ namespace Cthangband
                         power /= 2;
                     }
                 }
-                if (!SaveGame.Instance.HackMind)
+                if (!SaveGame.HackMind)
                 {
                     return;
                 }
@@ -301,16 +307,16 @@ namespace Cthangband
                 }
                 if (player.TimedHallucinations != 0)
                 {
-                    SaveGame.Instance.MsgPrint(
+                    SaveGame.MsgPrint(
                         $"You behold the {_funnyDesc[Program.Rng.DieRoll(Constants.MaxFunny) - 1]} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        SaveGame.Instance.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
+                        SaveGame.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
                         player.TimedHallucinations += Program.Rng.DieRoll(Race.Level);
                     }
                     return;
                 }
-                SaveGame.Instance.MsgPrint(
+                SaveGame.MsgPrint(
                     $"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
                 Race.Knowledge.RFlags2 |= MonsterFlag2.EldritchHorror;
                 if (player.RaceIndex == RaceId.Imp || player.RaceIndex == RaceId.MindFlayer)
@@ -380,22 +386,22 @@ namespace Cthangband
                 }
                 if (happened)
                 {
-                    SaveGame.Instance.MsgPrint("You feel much less sane than before.");
+                    SaveGame.MsgPrint("You feel much less sane than before.");
                 }
                 return;
             }
             if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
             {
-                if (SaveGame.Instance.LoseAllInfo())
+                if (SaveGame.LoseAllInfo())
                 {
-                    SaveGame.Instance.MsgPrint("You forget everything in your utmost terror!");
+                    SaveGame.MsgPrint("You forget everything in your utmost terror!");
                 }
                 return;
             }
-            SaveGame.Instance.MsgPrint("The exposure to eldritch forces warps you.");
+            SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
             player.Dna.GainMutation(saveGame);
             player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.Instance.HandleStuff();
+            SaveGame.HandleStuff();
         }
     }
 }

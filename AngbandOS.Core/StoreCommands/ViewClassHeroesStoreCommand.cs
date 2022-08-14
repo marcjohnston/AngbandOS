@@ -17,7 +17,7 @@ namespace Cthangband.StoreCommands
         {
             Gui.Save();
             Program.HiScores.ClassFilter = saveGame.Player.ProfessionIndex;
-            Program.HiScores.DisplayScores(new HighScore(saveGame.Player));
+            Program.HiScores.DisplayScores(new HighScore(saveGame));
             Program.HiScores.ClassFilter = -1;
             Gui.Load();
         }

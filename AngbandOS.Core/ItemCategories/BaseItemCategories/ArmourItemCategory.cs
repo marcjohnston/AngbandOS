@@ -120,9 +120,9 @@ namespace Cthangband.ItemCategories
                 {
                     case ItemCategory.DragArmor:
                         {
-                            if (SaveGame.Instance.Level != null)
+                            if (item.SaveGame.Level != null)
                             {
-                                SaveGame.Instance.Level.TreasureRating += 30;
+                                item.SaveGame.Level.TreasureRating += 30;
                             }
                             break;
                         }
@@ -201,9 +201,9 @@ namespace Cthangband.ItemCategories
                         {
                             if (item.ItemSubCategory == ShieldType.SvDragonShield)
                             {
-                                if (SaveGame.Instance.Level != null)
+                                if (item.SaveGame.Level != null)
                                 {
-                                    SaveGame.Instance.Level.TreasureRating += 5;
+                                    item.SaveGame.Level.TreasureRating += 5;
                                 }
                                 ApplyDragonscaleResistance(item);
                             }
@@ -498,9 +498,9 @@ namespace Cthangband.ItemCategories
                         {
                             if (item.ItemSubCategory == HelmType.SvDragonHelm)
                             {
-                                if (SaveGame.Instance.Level != null)
+                                if (item.SaveGame.Level != null)
                                 {
-                                    SaveGame.Instance.Level.TreasureRating += 5;
+                                    item.SaveGame.Level.TreasureRating += 5;
                                 }
                                 ApplyDragonscaleResistance(item);
                             }

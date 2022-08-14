@@ -11,7 +11,7 @@ namespace Cthangband.ItemCategories
         public override ItemCategory CategoryEnum => ItemCategory.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.StaffFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.StaffFlavours[item.ItemSubCategory].Name} ";
             string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
             string name = $"{flavour}{Pluralize("Staff", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;

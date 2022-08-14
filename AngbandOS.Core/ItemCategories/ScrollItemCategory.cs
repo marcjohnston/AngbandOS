@@ -15,7 +15,7 @@ namespace Cthangband.ItemCategories
         }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $" titled \"{SaveGame.Instance.ScrollFlavours[item.ItemSubCategory].Name}\"";
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $" titled \"{item.SaveGame.ScrollFlavours[item.ItemSubCategory].Name}\"";
             string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
             string name = $"{Pluralize("Scroll", item.Count)}{flavour}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;

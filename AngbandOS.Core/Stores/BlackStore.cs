@@ -64,7 +64,7 @@ namespace Cthangband.Stores
             int level;
             ItemType itemType;
             level = 35 + Program.Rng.RandomLessThan(35);
-            itemType = ItemType.RandomItemType(level);
+            itemType = ItemType.RandomItemType(SaveGame, level);
             if (itemType == null)
             {
                 return null; ;

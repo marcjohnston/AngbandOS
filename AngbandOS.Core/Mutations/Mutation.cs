@@ -24,7 +24,7 @@ namespace Cthangband.Mutations
         public string LoseMessage;
         public MutationAttackType MutationAttackType = MutationAttackType.Physical;
 
-        public virtual void Activate(SaveGame saveGame, Player player, Level level)
+        public virtual void Activate(SaveGame saveGame, Player player, Level level) // TODO: Remove the player and level variables
         {
         }
 

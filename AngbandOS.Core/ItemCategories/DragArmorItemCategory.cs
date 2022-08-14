@@ -17,9 +17,9 @@ namespace Cthangband.ItemCategories
         //    if (power != 0)
         //    {
         //        base.ApplyMagic(item, level, power);
-        //        if (SaveGame.Instance.Level != null)
+        //        if (item.SaveGame.Level != null)
         //        {
-        //            SaveGame.Instance.Level.TreasureRating += 30;
+        //            item.SaveGame.Level.TreasureRating += 30;
         //        }
         //    }
         //}

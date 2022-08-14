@@ -19,7 +19,7 @@ namespace Cthangband.ItemCategories
         }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RodFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.RodFlavours[item.ItemSubCategory].Name} ";
             string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
             string name = $"{flavour}{Pluralize("Rod", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;

@@ -346,7 +346,7 @@ namespace Cthangband.Commands
             else
             {
                 saveGame.EnergyUse = 100;
-                activeMutations[powers[i] - 100].Activate(SaveGame.Instance, saveGame.Player, saveGame.Level);
+                activeMutations[powers[i] - 100].Activate(saveGame, saveGame.Player, saveGame.Level);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Cthangband.ItemCategories
             {
                 return base.GetDescription(item, includeCountPrefix);
             }
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.RingFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
             if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
             {
                 flavour = "Plain Gold";
@@ -81,9 +81,9 @@ namespace Cthangband.ItemCategories
                             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
                             break;
                         }
-                        if (SaveGame.Instance.Level != null)
+                        if (item.SaveGame.Level != null)
                         {
-                            SaveGame.Instance.Level.TreasureRating += 25;
+                            item.SaveGame.Level.TreasureRating += 25;
                         }
                         break;
                     }
@@ -94,9 +94,9 @@ namespace Cthangband.ItemCategories
                             item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(20) + 18);
                         } while (Program.Rng.DieRoll(4) == 1);
                         item.BonusArmourClass = 10 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
-                        if (SaveGame.Instance.Level != null)
+                        if (item.SaveGame.Level != null)
                         {
-                            SaveGame.Instance.Level.TreasureRating += 5;
+                            item.SaveGame.Level.TreasureRating += 5;
                         }
                     }
                     break;

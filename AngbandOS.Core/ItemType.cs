@@ -182,9 +182,8 @@ namespace Cthangband
             Flags3.Set(baseItem.XtraShots ? ItemFlag3.XtraShots : 0);
         }
 
-        public static bool KindIsGood(int kIdx)
+        public static bool KindIsGood(ItemType kPtr)
         {
-            ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
             switch (kPtr.Category)
             {
                 case ItemCategory.HardArmor:
@@ -243,11 +242,11 @@ namespace Cthangband
             return false;
         }
 
-        public static ItemType RandomItemType(int level)
+        public static ItemType RandomItemType(SaveGame saveGame, int level)
         {
             int i;
             int j;
-            AllocationEntry[] table = SaveGame.Instance.AllocKindTable;
+            AllocationEntry[] table = saveGame.AllocKindTable;
             if (level > 0)
             {
                 if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
@@ -256,7 +255,7 @@ namespace Cthangband
                 }
             }
             int total = 0;
-            for (i = 0; i < SaveGame.Instance.AllocKindSize; i++)
+            for (i = 0; i < saveGame.AllocKindSize; i++)
             {
                 if (table[i].Level > level)
                 {
@@ -264,8 +263,8 @@ namespace Cthangband
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemType kPtr = SaveGame.Instance.ItemTypes[kIdx];
-                if (SaveGame.Instance.Level?.OpeningChest == true &&
+                ItemType kPtr = saveGame.ItemTypes[kIdx];
+                if (saveGame.Level?.OpeningChest == true &&
                     kPtr.Category == ItemCategory.Chest)
                 {
                     continue;
@@ -278,7 +277,7 @@ namespace Cthangband
                 return null;
             }
             long value = Program.Rng.RandomLessThan(total);
-            for (i = 0; i < SaveGame.Instance.AllocKindSize; i++)
+            for (i = 0; i < saveGame.AllocKindSize; i++)
             {
                 if (value < table[i].FinalProbability)
                 {
@@ -291,7 +290,7 @@ namespace Cthangband
             {
                 j = i;
                 value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < SaveGame.Instance.AllocKindSize; i++)
+                for (i = 0; i < saveGame.AllocKindSize; i++)
                 {
                     if (value < table[i].FinalProbability)
                     {
@@ -308,7 +307,7 @@ namespace Cthangband
             {
                 j = i;
                 value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < SaveGame.Instance.AllocKindSize; i++)
+                for (i = 0; i < saveGame.AllocKindSize; i++)
                 {
                     if (value < table[i].FinalProbability)
                     {
@@ -321,7 +320,7 @@ namespace Cthangband
                     i = j;
                 }
             }
-            return SaveGame.Instance.ItemTypes[table[i].Index];
+            return saveGame.ItemTypes[table[i].Index];
         }
 
         public bool HasQuality()

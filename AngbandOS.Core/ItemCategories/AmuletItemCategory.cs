@@ -16,7 +16,7 @@ namespace Cthangband.ItemCategories
             {
                 return base.GetDescription(item, includeCountPrefix);
             }
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{SaveGame.Instance.AmuletFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.AmuletFlavours[item.ItemSubCategory].Name} ";
             string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
             string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
@@ -86,9 +86,9 @@ namespace Cthangband.ItemCategories
                         {
                             item.RandartFlags3.Set(ItemFlag3.SlowDigest);
                         }
-                        if (SaveGame.Instance.Level != null)
+                        if (item.SaveGame.Level != null)
                         {
-                            SaveGame.Instance.Level.TreasureRating += 25;
+                            item.SaveGame.Level.TreasureRating += 25;
                         }
                         break;
                     }

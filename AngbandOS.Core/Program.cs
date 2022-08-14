@@ -295,7 +295,7 @@ namespace Cthangband
             {
                 return null;
             }
-            return new HighScore(tempSaveGame.Player, tempSaveGame);
+            return new HighScore(tempSaveGame);
         }
 
         private static int LoadGame(int saveIndex)

@@ -590,7 +590,7 @@ namespace Cthangband
 
         public void GainLevelReward()
         {
-            GooPatron.GetReward(SaveGame.Instance);
+            GooPatron.GetReward(SaveGame);
         }
 
         public void GetAbilitiesAsItemFlags(FlagSet f1, FlagSet f2, FlagSet f3)

@@ -28,7 +28,7 @@ namespace Cthangband
         /// Maximum amount of health that can be drained from an opponent in one turn
         /// </summary>
         private const int _maxVampiricDrain = 100;
-        private AutoNavigator _autoNavigator = new AutoNavigator();
+        private AutoNavigator _autoNavigator;
 
         public int CommandRepeat;
         public readonly Dungeon[] Dungeons;
@@ -89,6 +89,7 @@ namespace Cthangband
         {
             Guid = guid;
             SaveGame.Instance = this;
+            _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             GlobalData.PopulateNewProfile(this);
             Towns = Town.NewTownList(this);
@@ -1232,7 +1233,7 @@ namespace Cthangband
                     Kingly();
                 }
                 Player corpse = Player;
-                HighScore score = new HighScore(Player);
+                HighScore score = new HighScore(this);
                 Player = null;
                 SavePlayer();
                 PrintTomb(corpse);
@@ -1249,7 +1250,7 @@ namespace Cthangband
                 if (!Program.ExitToDesktop)
                 {
                     Gui.Terminal.PlayMusic(MusicTrack.Menu);
-                    Program.HiScores.DisplayScores(new HighScore(Player));
+                    Program.HiScores.DisplayScores(new HighScore(this));
                 }
             }
         }
@@ -7065,7 +7066,7 @@ namespace Cthangband
                 // attached for improved performance.
                 if (command.IsEnabled && command.Key == c)
                 {
-                    command.Execute(SaveGame.Instance);
+                    command.Execute(this);
 
                     // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
                     if (!isRepeated && command.Repeat.HasValue)
@@ -11201,7 +11202,7 @@ namespace Cthangband
             if (direction != 0)
             {
                 // Check if we can actually run in that direction
-                if (_autoNavigator.SeeWall(direction, Player.MapY, Player.MapX))
+                if (AutoNavigator.SeeWall(Level, direction, Player.MapY, Player.MapX))
                 {
                     MsgPrint("You cannot run in that direction.");
                     Disturb(false);
@@ -11209,7 +11210,7 @@ namespace Cthangband
                 }
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
                 // Initialise our navigation state
-                _autoNavigator = new AutoNavigator(direction);
+                _autoNavigator = new AutoNavigator(this, direction); // TODO: This is aweful
             }
             else
             {

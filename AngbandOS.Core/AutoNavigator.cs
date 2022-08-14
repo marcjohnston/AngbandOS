@@ -41,11 +41,14 @@ namespace Cthangband
         /// </summary>
         private int _previousRunDirection;
 
+        private readonly SaveGame SaveGame;
+
         /// <summary>
         /// Initialise the navigator with no current direction
         /// </summary>
-        public AutoNavigator()
+        public AutoNavigator(SaveGame saveGame)
         {
+            SaveGame = saveGame;
             CurrentRunDirection = 5;
             _previousRunDirection = 5;
             _findOpenarea = true;
@@ -57,8 +60,9 @@ namespace Cthangband
         /// Initialise the navigator with a direction
         /// </summary>
         /// <param name="direction"> The direction in which we wish to run </param>
-        public AutoNavigator(int direction)
+        public AutoNavigator(SaveGame saveGame, int direction)
         {
+            SaveGame = saveGame;
             CurrentRunDirection = direction;
             _previousRunDirection = direction;
             _findOpenarea = true;
@@ -68,32 +72,32 @@ namespace Cthangband
             bool wallDoubleAheadRight = false;
             bool wallAheadRight = false;
             bool wallAheadLeft = false;
-            var player = SaveGame.Instance.Player;
+            var player = SaveGame.Player;
             // Get the row and column of the first step in the run
-            int row = player.MapY + SaveGame.Instance.Level.KeypadDirectionYOffset[direction];
-            int col = player.MapX + SaveGame.Instance.Level.KeypadDirectionXOffset[direction];
+            int row = player.MapY + SaveGame.Level.KeypadDirectionYOffset[direction];
+            int col = player.MapX + SaveGame.Level.KeypadDirectionXOffset[direction];
             // Get the index of our run direction in the cycle
             int cycleIndex = _cycleEntryPoint[direction];
             // If there's a wall ahead-left of us, remember that
-            if (SeeWall(_directionCycle[cycleIndex + 1], player.MapY, player.MapX))
+            if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex + 1], player.MapY, player.MapX))
             {
                 _findBreakleft = true;
                 wallAheadLeft = true;
             }
             // Else check if there's a wall ahead-left of our first step, and remember that
-            else if (SeeWall(_directionCycle[cycleIndex + 1], row, col))
+            else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex + 1], row, col))
             {
                 _findBreakleft = true;
                 wallDoubleAheadLeft = true;
             }
             // If there's a wall ahead-right of us, remember that
-            if (SeeWall(_directionCycle[cycleIndex - 1], player.MapY, player.MapX))
+            if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex - 1], player.MapY, player.MapX))
             {
                 _findBreakright = true;
                 wallAheadRight = true;
             }
             // Else check if there's a wall ahead-right of our first step, and remember that
-            else if (SeeWall(_directionCycle[cycleIndex - 1], row, col))
+            else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex - 1], row, col))
             {
                 _findBreakright = true;
                 wallDoubleAheadRight = true;
@@ -117,7 +121,7 @@ namespace Cthangband
                 }
                 // If there's a wall directly ahead but not diagonally ahead, nudge our assumed
                 // previous direction away from it
-                else if (SeeWall(_directionCycle[cycleIndex], row, col))
+                else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex], row, col))
                 {
                     if (wallAheadLeft && !wallAheadRight)
                     {
@@ -148,8 +152,8 @@ namespace Cthangband
             int option = 0;
             int option2 = 0;
             int previousDirection = _previousRunDirection;
-            var level = SaveGame.Instance.Level;
-            var player = SaveGame.Instance.Player;
+            var level = SaveGame.Level;
+            var player = SaveGame.Player;
             // Set our search width to 1 if we're moving diagonally, or two if we're moving orthogonally
             int searchWidth = (previousDirection & 0x01) + 1;
             // Search to either side from right to left with a width equal to the search width
@@ -311,9 +315,9 @@ namespace Cthangband
                 {
                     row = player.MapY + level.KeypadDirectionYOffset[option];
                     col = player.MapX + level.KeypadDirectionXOffset[option];
-                    if (!SeeWall(option, row, col) || !SeeWall(checkDir, row, col))
+                    if (!SeeWall(SaveGame.Level, option, row, col) || !SeeWall(SaveGame.Level, checkDir, row, col))
                     {
-                        if (SeeNothing(option, row, col) && SeeNothing(option2, row, col))
+                        if (SeeNothing(SaveGame.Level, option, row, col) && SeeNothing(SaveGame.Level, option2, row, col))
                         {
                             CurrentRunDirection = option;
                             _previousRunDirection = option2;
@@ -331,7 +335,7 @@ namespace Cthangband
                 }
             }
             // No options, so just return whether or not we can move forward
-            return SeeWall(CurrentRunDirection, player.MapY, player.MapX);
+            return SeeWall(SaveGame.Level, CurrentRunDirection, player.MapY, player.MapX);
         }
 
         /// <summary>
@@ -341,9 +345,8 @@ namespace Cthangband
         /// <param name="y"> The y coordinate of our location </param>
         /// <param name="x"> The x coordinate of our location </param>
         /// <returns> True if we can see a wall, false if not </returns>
-        public bool SeeWall(int direction, int y, int x)
+        public static bool SeeWall(Level level, int direction, int y, int x)
         {
-            var level = SaveGame.Instance.Level;
             y += level.KeypadDirectionYOffset[direction];
             x += level.KeypadDirectionXOffset[direction];
             // Out of bounds is not a wall
@@ -372,9 +375,8 @@ namespace Cthangband
         /// <param name="y"> The y coordinate of our location </param>
         /// <param name="x"> The x coordinate of our location </param>
         /// <returns> </returns>
-        private bool SeeNothing(int direction, int y, int x)
+        private static bool SeeNothing(Level level, int direction, int y, int x)
         {
-            var level = SaveGame.Instance.Level;
             y += level.KeypadDirectionYOffset[direction];
             x += level.KeypadDirectionXOffset[direction];
             // Out of bounds is empty

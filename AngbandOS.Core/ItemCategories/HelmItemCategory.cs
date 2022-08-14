@@ -18,9 +18,9 @@ namespace Cthangband.ItemCategories
         //        base.ApplyMagic(item, level, power);
         //        if (item.ItemSubCategory == HelmType.SvDragonHelm)
         //        {
-        //            if (SaveGame.Instance.Level != null)
+        //            if (item.SaveGame.Level != null)
         //            {
-        //                SaveGame.Instance.Level.TreasureRating += 5;
+        //                item.SaveGame.Level.TreasureRating += 5;
         //            }
         //            ApplyDragonscaleResistance();
         //        }

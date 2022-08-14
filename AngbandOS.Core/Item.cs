@@ -48,7 +48,7 @@ namespace Cthangband
         public int Weight;
         public int X;
         public int Y;
-        private readonly SaveGame SaveGame;
+        public readonly SaveGame SaveGame; // TODO: ItemCategories need access
 
         public Item(SaveGame saveGame)
         {
@@ -2885,7 +2885,7 @@ namespace Cthangband
             return ItemType.Tried;
         }
 
-        private delegate bool GetObjNumHookDelegate(int kIdx);
+        private delegate bool GetObjNumHookDelegate(ItemType kPtr);
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
         {
@@ -3620,7 +3620,7 @@ namespace Cthangband
                 {
                     PrepareAllocationTable(ItemType.KindIsGood);
                 }
-                ItemType kIdx = ItemType.RandomItemType(baselevel);
+                ItemType kIdx = ItemType.RandomItemType(SaveGame, baselevel);
                 if (good)
                 {
                     PrepareAllocationTable(null);
@@ -4137,7 +4137,7 @@ namespace Cthangband
             AllocationEntry[] table = SaveGame.AllocKindTable;
             for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
-                if (getObjNumHook == null || getObjNumHook(table[i].Index))
+                if (getObjNumHook == null || getObjNumHook(SaveGame.ItemTypes[table[i].Index]))
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }
