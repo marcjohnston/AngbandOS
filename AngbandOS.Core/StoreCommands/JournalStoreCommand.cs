@@ -25,7 +25,7 @@ namespace Cthangband.StoreCommands
         public static void DoCmdJournal(SaveGame saveGame)
         {
             // Let the journal itself handle it from here
-            Journal journal = new Journal(saveGame.Player);
+            Journal journal = new Journal(saveGame);
             journal.ShowMenu();
         }
     }

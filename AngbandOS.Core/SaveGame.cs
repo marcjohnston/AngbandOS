@@ -33,7 +33,7 @@ namespace Cthangband
         public int CommandRepeat;
         public readonly Dungeon[] Dungeons;
         public readonly Patron[] PatronList;
-        public readonly QuestArray Quests = new QuestArray();
+        public readonly QuestArray Quests;
         public readonly Town[] Towns;
         public readonly Island Wilderness = new Island();
         public int AllocKindSize;
@@ -89,6 +89,7 @@ namespace Cthangband
         {
             Guid = guid;
             SaveGame.Instance = this;
+            Quests = new QuestArray(this);
             GlobalData.PopulateNewProfile(this);
             Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();

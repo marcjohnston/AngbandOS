@@ -17,6 +17,7 @@ namespace Cthangband
     internal class QuestArray : List<Quest>
     {
         private const int _maxQuests = 50;
+        private readonly SaveGame SaveGame;
 
         private readonly string[] _findQuest =
         {
@@ -27,8 +28,9 @@ namespace Cthangband
             "You find a scroll with the following message"
         };
 
-        public QuestArray()
+        public QuestArray(SaveGame saveGame)
         {
+            SaveGame = saveGame;
             for (int i = 0; i < _maxQuests; i++)
             {
                 Add(new Quest());
@@ -40,10 +42,10 @@ namespace Cthangband
         public string DescribeQuest(int qIdx)
         {
             string buf;
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[this[qIdx].RIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[this[qIdx].RIdx];
             string name = rPtr.Name;
             int qNum = this[qIdx].ToKill;
-            string dunName = SaveGame.Instance.Dungeons[this[qIdx].Dungeon].Name;
+            string dunName = SaveGame.Dungeons[this[qIdx].Dungeon].Name;
             int lev = this[qIdx].Level;
             if (this[qIdx].Level == 0)
             {
@@ -90,8 +92,8 @@ namespace Cthangband
         {
             for (int i = 0; i < Count; i++)
             {
-                if (this[i].Level == SaveGame.Instance.CurrentDepth &&
-                    this[i].Dungeon == SaveGame.Instance.CurDungeon.Index)
+                if (this[i].Level == SaveGame.CurrentDepth &&
+                    this[i].Dungeon == SaveGame.CurDungeon.Index)
                 {
                     return this[i].RIdx;
                 }
@@ -103,8 +105,8 @@ namespace Cthangband
         {
             for (int i = 0; i < Count; i++)
             {
-                if (this[i].Level == SaveGame.Instance.CurrentDepth &&
-                    this[i].Dungeon == SaveGame.Instance.CurDungeon.Index)
+                if (this[i].Level == SaveGame.CurrentDepth &&
+                    this[i].Dungeon == SaveGame.CurDungeon.Index)
                 {
                     return i;
                 }
@@ -120,7 +122,7 @@ namespace Cthangband
             }
             for (int i = 0; i < Count; i++)
             {
-                if (this[i].Level == level && this[i].Dungeon == SaveGame.Instance.CurDungeon.Index)
+                if (this[i].Level == level && this[i].Dungeon == SaveGame.CurDungeon.Index)
                 {
                     return true;
                 }
@@ -130,7 +132,7 @@ namespace Cthangband
 
         public void PlayerBirthQuests()
         {
-            SaveGame.Instance.MonsterRaces.ResetUniqueOnlyGuardianStatus();
+            SaveGame.MonsterRaces.ResetUniqueOnlyGuardianStatus();
             int index = 0;
             Clear();
             for (int i = 0; i < _maxQuests; i++)
@@ -139,22 +141,22 @@ namespace Cthangband
             }
             for (int i = 0; i < Constants.MaxCaves; i++)
             {
-                if (SaveGame.Instance.Dungeons[i].FirstGuardian != "")
+                if (SaveGame.Dungeons[i].FirstGuardian != "")
                 {
-                    this[index].Level = SaveGame.Instance.Dungeons[i].FirstLevel;
+                    this[index].Level = SaveGame.Dungeons[i].FirstLevel;
                     this[index].RIdx =
-                        SaveGame.Instance.MonsterRaces.IndexFromName(SaveGame.Instance.Dungeons[i].FirstGuardian);
-                    SaveGame.Instance.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                        SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].FirstGuardian);
+                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
                     this[index].Killed = 0;
                     index++;
                 }
-                if (SaveGame.Instance.Dungeons[i].SecondGuardian != "")
+                if (SaveGame.Dungeons[i].SecondGuardian != "")
                 {
-                    this[index].Level = SaveGame.Instance.Dungeons[i].SecondLevel;
-                    this[index].RIdx = SaveGame.Instance.MonsterRaces.IndexFromName(SaveGame.Instance.Dungeons[i].SecondGuardian);
-                    SaveGame.Instance.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                    this[index].Level = SaveGame.Dungeons[i].SecondLevel;
+                    this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].SecondGuardian);
+                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
                     this[index].Killed = 0;
@@ -172,7 +174,7 @@ namespace Cthangband
                     {
                         this[index].RIdx = GetRndQMonster(index);
                     } while (this[index].RIdx == 0);
-                    this[index].Level = SaveGame.Instance.MonsterRaces[this[index].RIdx].Level;
+                    this[index].Level = SaveGame.MonsterRaces[this[index].RIdx].Level;
                     this[index].Level -= Program.Rng.RandomBetween(2, 3 + (this[index].Level / 6));
                     for (j = 0; j < index; j++)
                     {
@@ -183,22 +185,22 @@ namespace Cthangband
                         }
                     }
                 } while (sameLevel);
-                if ((SaveGame.Instance.MonsterRaces[this[index].RIdx].Flags1 & MonsterFlag1.Unique) != 0)
+                if ((SaveGame.MonsterRaces[this[index].RIdx].Flags1 & MonsterFlag1.Unique) != 0)
                 {
-                    SaveGame.Instance.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
                 }
                 j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
-                while (this[index].Level <= SaveGame.Instance.Dungeons[j].Offset ||
+                while (this[index].Level <= SaveGame.Dungeons[j].Offset ||
                        this[index].Level >
-                       SaveGame.Instance.Dungeons[j].MaxLevel + SaveGame.Instance.Dungeons[j].Offset ||
-                       this[index].Level == SaveGame.Instance.Dungeons[j].FirstLevel +
-                       SaveGame.Instance.Dungeons[j].Offset || this[index].Level ==
-                       SaveGame.Instance.Dungeons[j].SecondLevel + SaveGame.Instance.Dungeons[j].Offset)
+                       SaveGame.Dungeons[j].MaxLevel + SaveGame.Dungeons[j].Offset ||
+                       this[index].Level == SaveGame.Dungeons[j].FirstLevel +
+                       SaveGame.Dungeons[j].Offset || this[index].Level ==
+                       SaveGame.Dungeons[j].SecondLevel + SaveGame.Dungeons[j].Offset)
                 {
                     j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
                 }
                 this[index].Dungeon = j;
-                this[index].Level -= SaveGame.Instance.Dungeons[j].Offset;
+                this[index].Level -= SaveGame.Dungeons[j].Offset;
                 this[index].ToKill = GetNumberMonster(index);
                 this[index].Killed = 0;
                 index++;
@@ -208,52 +210,52 @@ namespace Cthangband
         public void PrintQuestMessage()
         {
             int qIdx = GetQuestNumber();
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[this[qIdx].RIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[this[qIdx].RIdx];
             string name = rPtr.Name;
             int qNum = this[qIdx].ToKill - this[qIdx].Killed;
             if (this[qIdx].ToKill == 1)
             {
-                SaveGame.Instance.MsgPrint($"You still have to kill {name}.");
+                SaveGame.MsgPrint($"You still have to kill {name}.");
             }
             else if (qNum > 1)
             {
                 string plural = name.PluraliseMonsterName();
-                SaveGame.Instance.MsgPrint($"You still have to kill {qNum} {plural}.");
+                SaveGame.MsgPrint($"You still have to kill {qNum} {plural}.");
             }
             else
             {
-                SaveGame.Instance.MsgPrint($"You still have to kill 1 {name}.");
+                SaveGame.MsgPrint($"You still have to kill 1 {name}.");
             }
         }
 
         public void QuestDiscovery()
         {
             int qIdx = GetQuestNumber();
-            MonsterRace rPtr = SaveGame.Instance.MonsterRaces[this[qIdx].RIdx];
+            MonsterRace rPtr = SaveGame.MonsterRaces[this[qIdx].RIdx];
             string name = rPtr.Name;
             int qNum = this[qIdx].ToKill;
-            SaveGame.Instance.MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
-            SaveGame.Instance.MsgPrint(null);
+            SaveGame.MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
+            SaveGame.MsgPrint(null);
             if (qNum == 1)
             {
-                SaveGame.Instance.MsgPrint($"Beware, this level is protected by {name}!");
+                SaveGame.MsgPrint($"Beware, this level is protected by {name}!");
             }
             else
             {
                 string plural = name.PluraliseMonsterName();
-                SaveGame.Instance.MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
+                SaveGame.MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
             }
             this[qIdx].Discovered = true;
         }
 
         private int GetNumberMonster(int i)
         {
-            if ((SaveGame.Instance.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Unique) != 0 ||
-                (SaveGame.Instance.MonsterRaces[this[i].RIdx].Flags2 & MonsterFlag2.Multiply) != 0)
+            if ((SaveGame.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Unique) != 0 ||
+                (SaveGame.MonsterRaces[this[i].RIdx].Flags2 & MonsterFlag2.Multiply) != 0)
             {
                 return 1;
             }
-            int num = (SaveGame.Instance.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Friends) != 0 ? 10 : 5;
+            int num = (SaveGame.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Friends) != 0 ? 10 : 5;
             num += Program.Rng.RandomBetween(1, (this[i].Level / 3) + 5);
             return num;
         }
@@ -308,7 +310,7 @@ namespace Cthangband
                     rIdx = Program.Rng.RandomBetween(87, 573);
                     break;
             }
-            if ((SaveGame.Instance.MonsterRaces[rIdx].Flags2 & MonsterFlag2.Multiply) != 0)
+            if ((SaveGame.MonsterRaces[rIdx].Flags2 & MonsterFlag2.Multiply) != 0)
             {
                 return 0;
             }
