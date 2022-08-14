@@ -595,7 +595,7 @@ namespace Cthangband
 
         public void GetAbilitiesAsItemFlags(FlagSet f1, FlagSet f2, FlagSet f3)
         {
-            PlayerStatus playerStatus = new PlayerStatus(this, SaveGame.Level);
+            PlayerStatus playerStatus = new PlayerStatus(SaveGame);
             f1.Clear();
             f2.Clear();
             f3.Clear();

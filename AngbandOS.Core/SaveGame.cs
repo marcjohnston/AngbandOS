@@ -92,7 +92,7 @@ namespace Cthangband
             GlobalData.PopulateNewProfile(this);
             Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
-            PatronList = Patron.NewPatronList();
+            PatronList = Patron.NewPatronList(this);
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
@@ -1132,7 +1132,7 @@ namespace Cthangband
             {
                 return;
             }
-            PlayerStatus playerStatus = new PlayerStatus(Player, Level);
+            PlayerStatus playerStatus = new PlayerStatus(this);
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateBonuses);
@@ -2719,7 +2719,7 @@ namespace Cthangband
             {
                 return;
             }
-            PlayerStatus playerStatus = new PlayerStatus(Player, Level);
+            PlayerStatus playerStatus = new PlayerStatus(this);
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrWipe))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrWipe);
@@ -9767,7 +9767,7 @@ namespace Cthangband
                 // Check if we hit
                 if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
                 {
-                    PlayerStatus playerStatus = new PlayerStatus(Player, Level);
+                    PlayerStatus playerStatus = new PlayerStatus(this);
                     Gui.PlaySound(SoundEffect.MeleeHit);
                     // Tell the player they hit it with the appropriate message
                     if (!(backstab || stabFleeing))

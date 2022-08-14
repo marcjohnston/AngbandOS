@@ -22,7 +22,7 @@ namespace Cthangband.Patrons
         protected Reward[] Rewards;
         protected string ShortName;
 
-        public static Patron[] NewPatronList()
+        public static Patron[] NewPatronList(SaveGame saveGame)
         {
             Patron[] list = new Patron[]
             {
@@ -81,21 +81,21 @@ namespace Cthangband.Patrons
             Reward effect = Rewards[type];
             if (Program.Rng.DieRoll(6) == 1)
             {
-                SaveGame.Instance.MsgPrint($"{ShortName} rewards you with a mutation!");
+                saveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
                 saveGame.Player.Dna.GainMutation(saveGame);
                 return;
             }
             switch (effect)
             {
                 case Reward.PolySlf:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thou needst a new form, mortal!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thou needst a new form, mortal!'");
                     saveGame.Player.PolymorphSelf(saveGame);
                     break;
 
                 case Reward.GainExp:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Well done, mortal! Lead on!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Well done, mortal! Lead on!'");
                     if (saveGame.Player.ExperiencePoints < Constants.PyMaxExp)
                     {
                         int ee = (saveGame.Player.ExperiencePoints / 2) + 10;
@@ -103,32 +103,32 @@ namespace Cthangband.Patrons
                         {
                             ee = 100000;
                         }
-                        SaveGame.Instance.MsgPrint("You feel more experienced.");
+                        saveGame.MsgPrint("You feel more experienced.");
                         saveGame.Player.GainExperience(ee);
                     }
                     break;
 
                 case Reward.LoseExp:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thou didst not deserve that, slave.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thou didst not deserve that, slave.'");
                     saveGame.Player.LoseExperience(saveGame.Player.ExperiencePoints / 6);
                     break;
 
                 case Reward.GoodObj:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} whispers:");
-                    SaveGame.Instance.MsgPrint("'Use my gift wisely.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} whispers:");
+                    saveGame.MsgPrint("'Use my gift wisely.'");
                     saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, 1, false);
                     break;
 
                 case Reward.GreaObj:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Use my gift wisely.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Use my gift wisely.'");
                     saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, 1, true);
                     break;
 
                 case Reward.ChaosWp:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
                     Item qPtr = new Item(saveGame);
                     int dummy2;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
@@ -215,7 +215,7 @@ namespace Cthangband.Patrons
                             dummy2 = SwordType.SvBladeOfChaos;
                             break;
                     }
-                    qPtr.AssignItemType(SaveGame.Instance.ItemTypes.LookupKind(ItemCategory.Sword, dummy2));
+                    qPtr.AssignItemType(saveGame.ItemTypes.LookupKind(ItemCategory.Sword, dummy2));
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);
@@ -224,26 +224,26 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.GoodObs:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thy deed hath earned thee a worthy reward.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thy deed hath earned thee a worthy reward.'");
                     saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Program.Rng.DieRoll(2) + 1, false);
                     break;
 
                 case Reward.GreaObs:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Behold, mortal, how generously I reward thy loyalty.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Behold, mortal, how generously I reward thy loyalty.'");
                     saveGame.Level.Acquirement(saveGame.Player.MapY, saveGame.Player.MapX, Program.Rng.DieRoll(2) + 1, true);
                     break;
 
                 case Reward.DreadCurse:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} thunders:");
-                    SaveGame.Instance.MsgPrint("'Thou art growing arrogant, mortal.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} thunders:");
+                    saveGame.MsgPrint("'Thou art growing arrogant, mortal.'");
                     saveGame.ActivateDreadCurse();
                     break;
 
                 case Reward.SummonM:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'My pets, destroy the arrogant mortal!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
                     for (dummy = 0; dummy < Program.Rng.DieRoll(5) + 1; dummy++)
                     {
                         saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0);
@@ -251,20 +251,20 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.HSummon:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thou needst worthier opponents!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thou needst worthier opponents!'");
                     saveGame.ActivateHiSummon();
                     break;
 
                 case Reward.DoHavoc:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} whispers out:");
-                    SaveGame.Instance.MsgPrint("'Death and destruction! This pleaseth me!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} whispers out:");
+                    saveGame.MsgPrint("'Death and destruction! This pleaseth me!'");
                     saveGame.CallChaos();
                     break;
 
                 case Reward.GainAbl:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} rings out:");
-                    SaveGame.Instance.MsgPrint("'Stay, mortal, and let me mould thee.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} rings out:");
+                    saveGame.MsgPrint("'Stay, mortal, and let me mould thee.'");
                     if (Program.Rng.DieRoll(3) == 1 && !(PreferredAbility < 0))
                     {
                         saveGame.Player.TryIncreasingAbilityScore(PreferredAbility);
@@ -276,8 +276,8 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.LoseAbl:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'I grow tired of thee, mortal.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'I grow tired of thee, mortal.'");
                     if (Program.Rng.DieRoll(3) == 1 && !(PreferredAbility < 0))
                     {
                         saveGame.Player.TryDecreasingAbilityScore(PreferredAbility);
@@ -289,9 +289,9 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.RuinAbl:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} thunders:");
-                    SaveGame.Instance.MsgPrint("'Thou needst a lesson in humility, mortal!'");
-                    SaveGame.Instance.MsgPrint("You feel less powerful!");
+                    saveGame.MsgPrint($"The voice of {ShortName} thunders:");
+                    saveGame.MsgPrint("'Thou needst a lesson in humility, mortal!'");
+                    saveGame.MsgPrint("You feel less powerful!");
                     for (dummy = 0; dummy < 6; dummy++)
                     {
                         saveGame.Player.DecreaseAbilityScore(dummy, 10 + Program.Rng.DieRoll(15), true);
@@ -299,13 +299,13 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.PolyWnd:
-                    SaveGame.Instance.MsgPrint($"You feel the power of {ShortName} touch you.");
+                    saveGame.MsgPrint($"You feel the power of {ShortName} touch you.");
                     saveGame.Player.PolymorphWounds();
                     break;
 
                 case Reward.AugmAbl:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Receive this modest gift from me!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Receive this modest gift from me!'");
                     for (dummy = 0; dummy < 6; dummy++)
                     {
                         saveGame.Player.TryIncreasingAbilityScore(dummy);
@@ -313,15 +313,15 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.HurtLot:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Suffer, pathetic fool!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Suffer, pathetic fool!'");
                     saveGame.FireBall(new ProjectDisintegrate(saveGame), 0, saveGame.Player.Level * 4, 4);
                     saveGame.Player.TakeHit(saveGame.Player.Level * 4, wrathReason);
                     break;
 
                 case Reward.HealFul:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Rise, my servant!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Rise, my servant!'");
                     saveGame.Player.RestoreLevel();
                     saveGame.Player.SetTimedPoison(0);
                     saveGame.Player.SetTimedBlindness(0);
@@ -337,20 +337,20 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.CurseWp:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thou reliest too much on thine weapon.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thou reliest too much on thine weapon.'");
                     saveGame.CurseWeapon();
                     break;
 
                 case Reward.CurseAr:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Thou reliest too much on thine equipment.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Thou reliest too much on thine equipment.'");
                     saveGame.CurseArmour();
                     break;
 
                 case Reward.PissOff:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} whispers:");
-                    SaveGame.Instance.MsgPrint("'Now thou shalt pay for annoying me.'");
+                    saveGame.MsgPrint($"The voice of {ShortName} whispers:");
+                    saveGame.MsgPrint("'Now thou shalt pay for annoying me.'");
                     switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
@@ -382,8 +382,8 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.Wrath:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} thunders:");
-                    SaveGame.Instance.MsgPrint("'Die, mortal!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} thunders:");
+                    saveGame.MsgPrint("'Die, mortal!'");
                     saveGame.Player.TakeHit(saveGame.Player.Level * 4, wrathReason);
                     for (dummy = 0; dummy < 6; dummy++)
                     {
@@ -402,62 +402,62 @@ namespace Cthangband.Patrons
                     break;
 
                 case Reward.Destruct:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Death and destruction! This pleaseth me!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Death and destruction! This pleaseth me!'");
                     saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 25);
                     break;
 
                 case Reward.Carnage:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} booms out:");
-                    SaveGame.Instance.MsgPrint("'Let me relieve thee of thine oppressors!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} booms out:");
+                    saveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
                     saveGame.Carnage(false);
                     break;
 
                 case Reward.MassGen:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} rings out:");
-                    SaveGame.Instance.MsgPrint("'Let me relieve thee of thine oppressors!'");
+                    saveGame.MsgPrint($"The voice of {ShortName} rings out:");
+                    saveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
                     saveGame.MassCarnage(false);
                     break;
 
                 case Reward.DispelC:
-                    SaveGame.Instance.MsgPrint($"You can feel the power of {ShortName} assault your enemies!");
+                    saveGame.MsgPrint($"You can feel the power of {ShortName} assault your enemies!");
                     saveGame.DispelMonsters(saveGame.Player.Level * 4);
                     break;
 
                 case Reward.Ignore:
-                    SaveGame.Instance.MsgPrint($"{ShortName} ignores you.");
+                    saveGame.MsgPrint($"{ShortName} ignores you.");
                     break;
 
                 case Reward.SerDemo:
-                    SaveGame.Instance.MsgPrint($"{ShortName} rewards you with a demonic servant!");
+                    saveGame.MsgPrint($"{ShortName} rewards you with a demonic servant!");
                     if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                         Constants.SummonDemon, false))
                     {
-                        SaveGame.Instance.MsgPrint("Nobody ever turns up...");
+                        saveGame.MsgPrint("Nobody ever turns up...");
                     }
                     break;
 
                 case Reward.SerMons:
-                    SaveGame.Instance.MsgPrint($"{ShortName} rewards you with a servant!");
+                    saveGame.MsgPrint($"{ShortName} rewards you with a servant!");
                     if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                         Constants.SummonNoUniques, false))
                     {
-                        SaveGame.Instance.MsgPrint("Nobody ever turns up...");
+                        saveGame.MsgPrint("Nobody ever turns up...");
                     }
                     break;
 
                 case Reward.SerUnde:
-                    SaveGame.Instance.MsgPrint($"{ShortName} rewards you with an undead servant!");
+                    saveGame.MsgPrint($"{ShortName} rewards you with an undead servant!");
                     if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
                         Constants.SummonUndead, false))
                     {
-                        SaveGame.Instance.MsgPrint("Nobody ever turns up...");
+                        saveGame.MsgPrint("Nobody ever turns up...");
                     }
                     break;
 
                 default:
-                    SaveGame.Instance.MsgPrint($"The voice of {ShortName} stammers:");
-                    SaveGame.Instance.MsgPrint($"'Uh... uh... the answer's {type}/{effect}, what's the question?'");
+                    saveGame.MsgPrint($"The voice of {ShortName} stammers:");
+                    saveGame.MsgPrint($"'Uh... uh... the answer's {type}/{effect}, what's the question?'");
                     break;
             }
         }

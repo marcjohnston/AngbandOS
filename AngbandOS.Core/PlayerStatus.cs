@@ -31,13 +31,11 @@ namespace Cthangband
             new[] {3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6}
         };
 
-        private readonly Level _level;
-        private readonly Player _player;
+        private readonly SaveGame SaveGame;
 
-        public PlayerStatus(Player player, Level level)
+        public PlayerStatus(SaveGame saveGame)
         {
-            _player = player;
-            _level = level;
+            SaveGame = saveGame;
         }
 
         public void CalcBonuses()
@@ -48,525 +46,525 @@ namespace Cthangband
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
-            int oldSpeed = _player.Speed;
-            bool oldTelepathy = _player.HasTelepathy;
-            bool oldSeeInv = _player.HasSeeInvisibility;
-            int oldDisAc = _player.DisplayedBaseArmourClass;
-            int oldDisToA = _player.DisplayedArmourClassBonus;
+            int oldSpeed = SaveGame.Player.Speed;
+            bool oldTelepathy = SaveGame.Player.HasTelepathy;
+            bool oldSeeInv = SaveGame.Player.HasSeeInvisibility;
+            int oldDisAc = SaveGame.Player.DisplayedBaseArmourClass;
+            int oldDisToA = SaveGame.Player.DisplayedArmourClassBonus;
             int extraBlows = extraShots = 0;
             for (i = 0; i < 6; i++)
             {
-                _player.AbilityScores[i].Bonus = 0;
+                SaveGame.Player.AbilityScores[i].Bonus = 0;
             }
-            _player.DisplayedBaseArmourClass = 0;
-            _player.BaseArmourClass = 0;
-            _player.DisplayedAttackBonus = 0;
-            _player.AttackBonus = 0;
-            _player.DisplayedDamageBonus = 0;
-            _player.DamageBonus = 0;
-            _player.DisplayedArmourClassBonus = 0;
-            _player.ArmourClassBonus = 0;
-            _player.HasAggravation = false;
-            _player.HasRandomTeleport = false;
-            _player.HasExperienceDrain = false;
-            _player.HasBlessedBlade = false;
-            _player.HasExtraMight = false;
-            _player.HasQuakeWeapon = false;
-            _player.HasSeeInvisibility = false;
-            _player.HasFreeAction = false;
-            _player.HasSlowDigestion = false;
-            _player.HasRegeneration = false;
-            _player.HasFeatherFall = false;
-            _player.HasHoldLife = false;
-            _player.HasTelepathy = false;
-            _player.HasGlow = false;
-            _player.HasSustainStrength = false;
-            _player.HasSustainIntelligence = false;
-            _player.HasSustainWisdom = false;
-            _player.HasSustainConstitution = false;
-            _player.HasSustainDexterity = false;
-            _player.HasSustainCharisma = false;
-            _player.HasAcidResistance = false;
-            _player.HasLightningResistance = false;
-            _player.HasFireResistance = false;
-            _player.HasColdResistance = false;
-            _player.HasPoisonResistance = false;
-            _player.HasConfusionResistance = false;
-            _player.HasSoundResistance = false;
-            _player.HasTimeResistance = false;
-            _player.HasLightResistance = false;
-            _player.HasDarkResistance = false;
-            _player.HasChaosResistance = false;
-            _player.HasDisenchantResistance = false;
-            _player.HasShardResistance = false;
-            _player.HasNexusResistance = false;
-            _player.HasBlindnessResistance = false;
-            _player.HasNetherResistance = false;
-            _player.HasFearResistance = false;
-            _player.HasElementalVulnerability = false;
-            _player.HasReflection = false;
-            _player.HasFireShield = false;
-            _player.HasLightningShield = false;
-            _player.HasAntiMagic = false;
-            _player.HasAntiTeleport = false;
-            _player.HasAntiTheft = false;
-            _player.HasAcidImmunity = false;
-            _player.HasLightningImmunity = false;
-            _player.HasFireImmunity = false;
-            _player.HasColdImmunity = false;
-            _player.InfravisionRange = _player.Race.Infravision;
-            _player.SkillDisarmTraps = _player.Race.BaseDisarmBonus + _player.Profession.BaseDisarmBonus;
-            _player.SkillUseDevice = _player.Race.BaseDeviceBonus + _player.Profession.BaseDeviceBonus;
-            _player.SkillSavingThrow = _player.Race.BaseSaveBonus + _player.Profession.BaseSaveBonus;
-            _player.SkillStealth = _player.Race.BaseStealthBonus + _player.Profession.BaseStealthBonus;
-            _player.SkillSearching = _player.Race.BaseSearchBonus + _player.Profession.BaseSearchBonus;
-            _player.SkillSearchFrequency = _player.Race.BaseSearchFrequency + _player.Profession.BaseSearchFrequency;
-            _player.SkillMelee = _player.Race.BaseMeleeAttackBonus + _player.Profession.BaseMeleeAttackBonus;
-            _player.SkillRanged = _player.Race.BaseRangedAttackBonus + _player.Profession.BaseRangedAttackBonus;
-            _player.SkillThrowing = _player.Race.BaseRangedAttackBonus + _player.Profession.BaseRangedAttackBonus;
-            _player.SkillDigging = 0;
-            if ((_player.ProfessionIndex == CharacterClass.Warrior && _player.Level > 29) ||
-                (_player.ProfessionIndex == CharacterClass.Paladin && _player.Level > 39) ||
-                (_player.ProfessionIndex == CharacterClass.Fanatic && _player.Level > 39))
+            SaveGame.Player.DisplayedBaseArmourClass = 0;
+            SaveGame.Player.BaseArmourClass = 0;
+            SaveGame.Player.DisplayedAttackBonus = 0;
+            SaveGame.Player.AttackBonus = 0;
+            SaveGame.Player.DisplayedDamageBonus = 0;
+            SaveGame.Player.DamageBonus = 0;
+            SaveGame.Player.DisplayedArmourClassBonus = 0;
+            SaveGame.Player.ArmourClassBonus = 0;
+            SaveGame.Player.HasAggravation = false;
+            SaveGame.Player.HasRandomTeleport = false;
+            SaveGame.Player.HasExperienceDrain = false;
+            SaveGame.Player.HasBlessedBlade = false;
+            SaveGame.Player.HasExtraMight = false;
+            SaveGame.Player.HasQuakeWeapon = false;
+            SaveGame.Player.HasSeeInvisibility = false;
+            SaveGame.Player.HasFreeAction = false;
+            SaveGame.Player.HasSlowDigestion = false;
+            SaveGame.Player.HasRegeneration = false;
+            SaveGame.Player.HasFeatherFall = false;
+            SaveGame.Player.HasHoldLife = false;
+            SaveGame.Player.HasTelepathy = false;
+            SaveGame.Player.HasGlow = false;
+            SaveGame.Player.HasSustainStrength = false;
+            SaveGame.Player.HasSustainIntelligence = false;
+            SaveGame.Player.HasSustainWisdom = false;
+            SaveGame.Player.HasSustainConstitution = false;
+            SaveGame.Player.HasSustainDexterity = false;
+            SaveGame.Player.HasSustainCharisma = false;
+            SaveGame.Player.HasAcidResistance = false;
+            SaveGame.Player.HasLightningResistance = false;
+            SaveGame.Player.HasFireResistance = false;
+            SaveGame.Player.HasColdResistance = false;
+            SaveGame.Player.HasPoisonResistance = false;
+            SaveGame.Player.HasConfusionResistance = false;
+            SaveGame.Player.HasSoundResistance = false;
+            SaveGame.Player.HasTimeResistance = false;
+            SaveGame.Player.HasLightResistance = false;
+            SaveGame.Player.HasDarkResistance = false;
+            SaveGame.Player.HasChaosResistance = false;
+            SaveGame.Player.HasDisenchantResistance = false;
+            SaveGame.Player.HasShardResistance = false;
+            SaveGame.Player.HasNexusResistance = false;
+            SaveGame.Player.HasBlindnessResistance = false;
+            SaveGame.Player.HasNetherResistance = false;
+            SaveGame.Player.HasFearResistance = false;
+            SaveGame.Player.HasElementalVulnerability = false;
+            SaveGame.Player.HasReflection = false;
+            SaveGame.Player.HasFireShield = false;
+            SaveGame.Player.HasLightningShield = false;
+            SaveGame.Player.HasAntiMagic = false;
+            SaveGame.Player.HasAntiTeleport = false;
+            SaveGame.Player.HasAntiTheft = false;
+            SaveGame.Player.HasAcidImmunity = false;
+            SaveGame.Player.HasLightningImmunity = false;
+            SaveGame.Player.HasFireImmunity = false;
+            SaveGame.Player.HasColdImmunity = false;
+            SaveGame.Player.InfravisionRange = SaveGame.Player.Race.Infravision;
+            SaveGame.Player.SkillDisarmTraps = SaveGame.Player.Race.BaseDisarmBonus + SaveGame.Player.Profession.BaseDisarmBonus;
+            SaveGame.Player.SkillUseDevice = SaveGame.Player.Race.BaseDeviceBonus + SaveGame.Player.Profession.BaseDeviceBonus;
+            SaveGame.Player.SkillSavingThrow = SaveGame.Player.Race.BaseSaveBonus + SaveGame.Player.Profession.BaseSaveBonus;
+            SaveGame.Player.SkillStealth = SaveGame.Player.Race.BaseStealthBonus + SaveGame.Player.Profession.BaseStealthBonus;
+            SaveGame.Player.SkillSearching = SaveGame.Player.Race.BaseSearchBonus + SaveGame.Player.Profession.BaseSearchBonus;
+            SaveGame.Player.SkillSearchFrequency = SaveGame.Player.Race.BaseSearchFrequency + SaveGame.Player.Profession.BaseSearchFrequency;
+            SaveGame.Player.SkillMelee = SaveGame.Player.Race.BaseMeleeAttackBonus + SaveGame.Player.Profession.BaseMeleeAttackBonus;
+            SaveGame.Player.SkillRanged = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
+            SaveGame.Player.SkillThrowing = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
+            SaveGame.Player.SkillDigging = 0;
+            if ((SaveGame.Player.ProfessionIndex == CharacterClass.Warrior && SaveGame.Player.Level > 29) ||
+                (SaveGame.Player.ProfessionIndex == CharacterClass.Paladin && SaveGame.Player.Level > 39) ||
+                (SaveGame.Player.ProfessionIndex == CharacterClass.Fanatic && SaveGame.Player.Level > 39))
             {
-                _player.HasFearResistance = true;
+                SaveGame.Player.HasFearResistance = true;
             }
-            if (_player.ProfessionIndex == CharacterClass.Fanatic && _player.Level > 29)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Fanatic && SaveGame.Player.Level > 29)
             {
-                _player.HasChaosResistance = true;
+                SaveGame.Player.HasChaosResistance = true;
             }
-            if (_player.ProfessionIndex == CharacterClass.Cultist && _player.Level > 19)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist && SaveGame.Player.Level > 19)
             {
-                _player.HasChaosResistance = true;
+                SaveGame.Player.HasChaosResistance = true;
             }
-            if (_player.ProfessionIndex == CharacterClass.Mindcrafter)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Mindcrafter)
             {
-                if (_player.Level > 9)
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.HasFearResistance = true;
+                    SaveGame.Player.HasFearResistance = true;
                 }
-                if (_player.Level > 19)
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasSustainWisdom = true;
+                    SaveGame.Player.HasSustainWisdom = true;
                 }
-                if (_player.Level > 29)
+                if (SaveGame.Player.Level > 29)
                 {
-                    _player.HasConfusionResistance = true;
+                    SaveGame.Player.HasConfusionResistance = true;
                 }
-                if (_player.Level > 39)
+                if (SaveGame.Player.Level > 39)
                 {
-                    _player.HasTelepathy = true;
+                    SaveGame.Player.HasTelepathy = true;
                 }
             }
-            if (_player.ProfessionIndex == CharacterClass.Monk && _player.Level > 24 && !MartialArtistHeavyArmour())
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Monk && SaveGame.Player.Level > 24 && !MartialArtistHeavyArmour())
             {
-                _player.HasFreeAction = true;
+                SaveGame.Player.HasFreeAction = true;
             }
-            if (_player.ProfessionIndex == CharacterClass.Mystic)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Mystic)
             {
-                if (_player.Level > 9)
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.HasConfusionResistance = true;
+                    SaveGame.Player.HasConfusionResistance = true;
                 }
-                if (_player.Level > 24)
+                if (SaveGame.Player.Level > 24)
                 {
-                    _player.HasFearResistance = true;
+                    SaveGame.Player.HasFearResistance = true;
                 }
-                if (_player.Level > 29 && !MartialArtistHeavyArmour())
+                if (SaveGame.Player.Level > 29 && !MartialArtistHeavyArmour())
                 {
-                    _player.HasFreeAction = true;
+                    SaveGame.Player.HasFreeAction = true;
                 }
-                if (_player.Level > 39)
+                if (SaveGame.Player.Level > 39)
                 {
-                    _player.HasTelepathy = true;
+                    SaveGame.Player.HasTelepathy = true;
                 }
             }
-            if (_player.ProfessionIndex == CharacterClass.ChosenOne)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.ChosenOne)
             {
-                _player.HasGlow = true;
-                if (_player.Level >= 2)
+                SaveGame.Player.HasGlow = true;
+                if (SaveGame.Player.Level >= 2)
                 {
-                    _player.HasConfusionResistance = true;
+                    SaveGame.Player.HasConfusionResistance = true;
                 }
-                if (_player.Level >= 4)
+                if (SaveGame.Player.Level >= 4)
                 {
-                    _player.HasFearResistance = true;
+                    SaveGame.Player.HasFearResistance = true;
                 }
-                if (_player.Level >= 6)
+                if (SaveGame.Player.Level >= 6)
                 {
-                    _player.HasBlindnessResistance = true;
+                    SaveGame.Player.HasBlindnessResistance = true;
                 }
-                if (_player.Level >= 8)
+                if (SaveGame.Player.Level >= 8)
                 {
-                    _player.HasFeatherFall = true;
+                    SaveGame.Player.HasFeatherFall = true;
                 }
-                if (_player.Level >= 10)
+                if (SaveGame.Player.Level >= 10)
                 {
-                    _player.HasSeeInvisibility = true;
+                    SaveGame.Player.HasSeeInvisibility = true;
                 }
-                if (_player.Level >= 12)
+                if (SaveGame.Player.Level >= 12)
                 {
-                    _player.HasSlowDigestion = true;
+                    SaveGame.Player.HasSlowDigestion = true;
                 }
-                if (_player.Level >= 14)
+                if (SaveGame.Player.Level >= 14)
                 {
-                    _player.HasSustainConstitution = true;
+                    SaveGame.Player.HasSustainConstitution = true;
                 }
-                if (_player.Level >= 16)
+                if (SaveGame.Player.Level >= 16)
                 {
-                    _player.HasPoisonResistance = true;
+                    SaveGame.Player.HasPoisonResistance = true;
                 }
-                if (_player.Level >= 18)
+                if (SaveGame.Player.Level >= 18)
                 {
-                    _player.HasSustainDexterity = true;
+                    SaveGame.Player.HasSustainDexterity = true;
                 }
-                if (_player.Level >= 20)
+                if (SaveGame.Player.Level >= 20)
                 {
-                    _player.HasSustainStrength = true;
+                    SaveGame.Player.HasSustainStrength = true;
                 }
-                if (_player.Level >= 22)
+                if (SaveGame.Player.Level >= 22)
                 {
-                    _player.HasHoldLife = true;
+                    SaveGame.Player.HasHoldLife = true;
                 }
-                if (_player.Level >= 24)
+                if (SaveGame.Player.Level >= 24)
                 {
-                    _player.HasFreeAction = true;
+                    SaveGame.Player.HasFreeAction = true;
                 }
-                if (_player.Level >= 26)
+                if (SaveGame.Player.Level >= 26)
                 {
-                    _player.HasTelepathy = true;
+                    SaveGame.Player.HasTelepathy = true;
                 }
-                if (_player.Level >= 28)
+                if (SaveGame.Player.Level >= 28)
                 {
-                    _player.HasDarkResistance = true;
+                    SaveGame.Player.HasDarkResistance = true;
                 }
-                if (_player.Level >= 30)
+                if (SaveGame.Player.Level >= 30)
                 {
-                    _player.HasLightResistance = true;
+                    SaveGame.Player.HasLightResistance = true;
                 }
-                if (_player.Level >= 32)
+                if (SaveGame.Player.Level >= 32)
                 {
-                    _player.HasSustainCharisma = true;
+                    SaveGame.Player.HasSustainCharisma = true;
                 }
-                if (_player.Level >= 34)
+                if (SaveGame.Player.Level >= 34)
                 {
-                    _player.HasSoundResistance = true;
+                    SaveGame.Player.HasSoundResistance = true;
                 }
-                if (_player.Level >= 36)
+                if (SaveGame.Player.Level >= 36)
                 {
-                    _player.HasDisenchantResistance = true;
+                    SaveGame.Player.HasDisenchantResistance = true;
                 }
-                if (_player.Level >= 38)
+                if (SaveGame.Player.Level >= 38)
                 {
-                    _player.HasRegeneration = true;
+                    SaveGame.Player.HasRegeneration = true;
                 }
-                if (_player.Level >= 40)
+                if (SaveGame.Player.Level >= 40)
                 {
-                    _player.HasSustainIntelligence = true;
+                    SaveGame.Player.HasSustainIntelligence = true;
                 }
-                if (_player.Level >= 42)
+                if (SaveGame.Player.Level >= 42)
                 {
-                    _player.HasChaosResistance = true;
+                    SaveGame.Player.HasChaosResistance = true;
                 }
-                if (_player.Level >= 44)
+                if (SaveGame.Player.Level >= 44)
                 {
-                    _player.HasSustainWisdom = true;
+                    SaveGame.Player.HasSustainWisdom = true;
                 }
-                if (_player.Level >= 46)
+                if (SaveGame.Player.Level >= 46)
                 {
-                    _player.HasNexusResistance = true;
+                    SaveGame.Player.HasNexusResistance = true;
                 }
-                if (_player.Level >= 48)
+                if (SaveGame.Player.Level >= 48)
                 {
-                    _player.HasShardResistance = true;
+                    SaveGame.Player.HasShardResistance = true;
                 }
-                if (_player.Level >= 50)
+                if (SaveGame.Player.Level >= 50)
                 {
-                    _player.HasNetherResistance = true;
+                    SaveGame.Player.HasNetherResistance = true;
                 }
             }
-            if (_player.RaceIndex == RaceId.Elf)
+            if (SaveGame.Player.RaceIndex == RaceId.Elf)
             {
-                _player.HasLightResistance = true;
+                SaveGame.Player.HasLightResistance = true;
             }
-            if (_player.RaceIndex == RaceId.Hobbit)
+            if (SaveGame.Player.RaceIndex == RaceId.Hobbit)
             {
-                _player.HasSustainDexterity = true;
+                SaveGame.Player.HasSustainDexterity = true;
             }
-            if (_player.RaceIndex == RaceId.Gnome)
+            if (SaveGame.Player.RaceIndex == RaceId.Gnome)
             {
-                _player.HasFreeAction = true;
+                SaveGame.Player.HasFreeAction = true;
             }
-            if (_player.RaceIndex == RaceId.Dwarf)
+            if (SaveGame.Player.RaceIndex == RaceId.Dwarf)
             {
-                _player.HasBlindnessResistance = true;
+                SaveGame.Player.HasBlindnessResistance = true;
             }
-            if (_player.RaceIndex == RaceId.HalfOrc)
+            if (SaveGame.Player.RaceIndex == RaceId.HalfOrc)
             {
-                _player.HasDarkResistance = true;
+                SaveGame.Player.HasDarkResistance = true;
             }
-            if (_player.RaceIndex == RaceId.HalfTroll)
+            if (SaveGame.Player.RaceIndex == RaceId.HalfTroll)
             {
-                _player.HasSustainStrength = true;
-                if (_player.Level > 14)
+                SaveGame.Player.HasSustainStrength = true;
+                if (SaveGame.Player.Level > 14)
                 {
-                    _player.HasRegeneration = true;
-                    _player.HasSlowDigestion = true;
+                    SaveGame.Player.HasRegeneration = true;
+                    SaveGame.Player.HasSlowDigestion = true;
                 }
             }
-            if (_player.RaceIndex == RaceId.Great)
+            if (SaveGame.Player.RaceIndex == RaceId.Great)
             {
-                _player.HasSustainConstitution = true;
-                _player.HasRegeneration = true;
+                SaveGame.Player.HasSustainConstitution = true;
+                SaveGame.Player.HasRegeneration = true;
             }
-            if (_player.RaceIndex == RaceId.HighElf)
+            if (SaveGame.Player.RaceIndex == RaceId.HighElf)
             {
-                _player.HasLightResistance = true;
+                SaveGame.Player.HasLightResistance = true;
             }
-            if (_player.RaceIndex == RaceId.HighElf)
+            if (SaveGame.Player.RaceIndex == RaceId.HighElf)
             {
-                _player.HasSeeInvisibility = true;
+                SaveGame.Player.HasSeeInvisibility = true;
             }
-            if (_player.RaceIndex == RaceId.TchoTcho)
+            if (SaveGame.Player.RaceIndex == RaceId.TchoTcho)
             {
-                _player.HasFearResistance = true;
+                SaveGame.Player.HasFearResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.HalfOgre)
+            else if (SaveGame.Player.RaceIndex == RaceId.HalfOgre)
             {
-                _player.HasDarkResistance = true;
-                _player.HasSustainStrength = true;
+                SaveGame.Player.HasDarkResistance = true;
+                SaveGame.Player.HasSustainStrength = true;
             }
-            else if (_player.RaceIndex == RaceId.HalfGiant)
+            else if (SaveGame.Player.RaceIndex == RaceId.HalfGiant)
             {
-                _player.HasSustainStrength = true;
-                _player.HasShardResistance = true;
+                SaveGame.Player.HasSustainStrength = true;
+                SaveGame.Player.HasShardResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.HalfTitan)
+            else if (SaveGame.Player.RaceIndex == RaceId.HalfTitan)
             {
-                _player.HasChaosResistance = true;
+                SaveGame.Player.HasChaosResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.Cyclops)
+            else if (SaveGame.Player.RaceIndex == RaceId.Cyclops)
             {
-                _player.HasSoundResistance = true;
+                SaveGame.Player.HasSoundResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.Yeek)
+            else if (SaveGame.Player.RaceIndex == RaceId.Yeek)
             {
-                _player.HasAcidResistance = true;
-                if (_player.Level > 19)
+                SaveGame.Player.HasAcidResistance = true;
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasAcidImmunity = true;
+                    SaveGame.Player.HasAcidImmunity = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Klackon)
+            else if (SaveGame.Player.RaceIndex == RaceId.Klackon)
             {
-                _player.HasConfusionResistance = true;
-                _player.HasAcidResistance = true;
+                SaveGame.Player.HasConfusionResistance = true;
+                SaveGame.Player.HasAcidResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.Kobold)
+            else if (SaveGame.Player.RaceIndex == RaceId.Kobold)
             {
-                _player.HasPoisonResistance = true;
+                SaveGame.Player.HasPoisonResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.Nibelung)
+            else if (SaveGame.Player.RaceIndex == RaceId.Nibelung)
             {
-                _player.HasDisenchantResistance = true;
-                _player.HasDarkResistance = true;
+                SaveGame.Player.HasDisenchantResistance = true;
+                SaveGame.Player.HasDarkResistance = true;
             }
-            else if (_player.RaceIndex == RaceId.DarkElf)
+            else if (SaveGame.Player.RaceIndex == RaceId.DarkElf)
             {
-                _player.HasDarkResistance = true;
-                if (_player.Level > 19)
+                SaveGame.Player.HasDarkResistance = true;
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasSeeInvisibility = true;
+                    SaveGame.Player.HasSeeInvisibility = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Draconian)
+            else if (SaveGame.Player.RaceIndex == RaceId.Draconian)
             {
-                _player.HasFeatherFall = true;
-                if (_player.Level > 4)
+                SaveGame.Player.HasFeatherFall = true;
+                if (SaveGame.Player.Level > 4)
                 {
-                    _player.HasFireResistance = true;
+                    SaveGame.Player.HasFireResistance = true;
                 }
-                if (_player.Level > 9)
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.HasColdResistance = true;
+                    SaveGame.Player.HasColdResistance = true;
                 }
-                if (_player.Level > 14)
+                if (SaveGame.Player.Level > 14)
                 {
-                    _player.HasAcidResistance = true;
+                    SaveGame.Player.HasAcidResistance = true;
                 }
-                if (_player.Level > 19)
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasLightningResistance = true;
+                    SaveGame.Player.HasLightningResistance = true;
                 }
-                if (_player.Level > 34)
+                if (SaveGame.Player.Level > 34)
                 {
-                    _player.HasPoisonResistance = true;
+                    SaveGame.Player.HasPoisonResistance = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.MindFlayer)
+            else if (SaveGame.Player.RaceIndex == RaceId.MindFlayer)
             {
-                _player.HasSustainIntelligence = true;
-                _player.HasSustainWisdom = true;
-                if (_player.Level > 14)
+                SaveGame.Player.HasSustainIntelligence = true;
+                SaveGame.Player.HasSustainWisdom = true;
+                if (SaveGame.Player.Level > 14)
                 {
-                    _player.HasSeeInvisibility = true;
+                    SaveGame.Player.HasSeeInvisibility = true;
                 }
-                if (_player.Level > 29)
+                if (SaveGame.Player.Level > 29)
                 {
-                    _player.HasTelepathy = true;
-                }
-            }
-            else if (_player.RaceIndex == RaceId.Imp)
-            {
-                _player.HasFireResistance = true;
-                if (_player.Level > 9)
-                {
-                    _player.HasSeeInvisibility = true;
-                }
-                if (_player.Level > 19)
-                {
-                    _player.HasFireImmunity = true;
+                    SaveGame.Player.HasTelepathy = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Golem)
+            else if (SaveGame.Player.RaceIndex == RaceId.Imp)
             {
-                if (_player.Level > 34)
+                SaveGame.Player.HasFireResistance = true;
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.HasHoldLife = true;
+                    SaveGame.Player.HasSeeInvisibility = true;
                 }
-                _player.HasSlowDigestion = true;
-                _player.HasFreeAction = true;
-                _player.HasSeeInvisibility = true;
-                _player.HasPoisonResistance = true;
-            }
-            else if (_player.RaceIndex == RaceId.Skeleton)
-            {
-                _player.HasShardResistance = true;
-                _player.HasHoldLife = true;
-                _player.HasSeeInvisibility = true;
-                _player.HasPoisonResistance = true;
-                if (_player.Level > 9)
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasColdResistance = true;
+                    SaveGame.Player.HasFireImmunity = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Zombie)
+            else if (SaveGame.Player.RaceIndex == RaceId.Golem)
             {
-                _player.HasNetherResistance = true;
-                _player.HasHoldLife = true;
-                _player.HasSeeInvisibility = true;
-                _player.HasPoisonResistance = true;
-                _player.HasSlowDigestion = true;
-                if (_player.Level > 4)
+                if (SaveGame.Player.Level > 34)
                 {
-                    _player.HasColdResistance = true;
+                    SaveGame.Player.HasHoldLife = true;
+                }
+                SaveGame.Player.HasSlowDigestion = true;
+                SaveGame.Player.HasFreeAction = true;
+                SaveGame.Player.HasSeeInvisibility = true;
+                SaveGame.Player.HasPoisonResistance = true;
+            }
+            else if (SaveGame.Player.RaceIndex == RaceId.Skeleton)
+            {
+                SaveGame.Player.HasShardResistance = true;
+                SaveGame.Player.HasHoldLife = true;
+                SaveGame.Player.HasSeeInvisibility = true;
+                SaveGame.Player.HasPoisonResistance = true;
+                if (SaveGame.Player.Level > 9)
+                {
+                    SaveGame.Player.HasColdResistance = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Vampire)
+            else if (SaveGame.Player.RaceIndex == RaceId.Zombie)
             {
-                _player.HasDarkResistance = true;
-                _player.HasHoldLife = true;
-                _player.HasNetherResistance = true;
-                _player.HasColdResistance = true;
-                _player.HasPoisonResistance = true;
-                _player.HasGlow = true;
-            }
-            else if (_player.RaceIndex == RaceId.Spectre)
-            {
-                _player.HasFeatherFall = true;
-                _player.HasNetherResistance = true;
-                _player.HasHoldLife = true;
-                _player.HasSeeInvisibility = true;
-                _player.HasPoisonResistance = true;
-                _player.HasSlowDigestion = true;
-                _player.HasColdResistance = true;
-                _player.HasGlow = true;
-                if (_player.Level > 34)
+                SaveGame.Player.HasNetherResistance = true;
+                SaveGame.Player.HasHoldLife = true;
+                SaveGame.Player.HasSeeInvisibility = true;
+                SaveGame.Player.HasPoisonResistance = true;
+                SaveGame.Player.HasSlowDigestion = true;
+                if (SaveGame.Player.Level > 4)
                 {
-                    _player.HasTelepathy = true;
+                    SaveGame.Player.HasColdResistance = true;
                 }
             }
-            else if (_player.RaceIndex == RaceId.Sprite)
+            else if (SaveGame.Player.RaceIndex == RaceId.Vampire)
             {
-                _player.HasFeatherFall = true;
-                _player.HasGlow = true;
-                _player.HasLightResistance = true;
+                SaveGame.Player.HasDarkResistance = true;
+                SaveGame.Player.HasHoldLife = true;
+                SaveGame.Player.HasNetherResistance = true;
+                SaveGame.Player.HasColdResistance = true;
+                SaveGame.Player.HasPoisonResistance = true;
+                SaveGame.Player.HasGlow = true;
             }
-            else if (_player.RaceIndex == RaceId.MiriNigri)
+            else if (SaveGame.Player.RaceIndex == RaceId.Spectre)
             {
-                _player.HasConfusionResistance = true;
-                _player.HasSoundResistance = true;
+                SaveGame.Player.HasFeatherFall = true;
+                SaveGame.Player.HasNetherResistance = true;
+                SaveGame.Player.HasHoldLife = true;
+                SaveGame.Player.HasSeeInvisibility = true;
+                SaveGame.Player.HasPoisonResistance = true;
+                SaveGame.Player.HasSlowDigestion = true;
+                SaveGame.Player.HasColdResistance = true;
+                SaveGame.Player.HasGlow = true;
+                if (SaveGame.Player.Level > 34)
+                {
+                    SaveGame.Player.HasTelepathy = true;
+                }
             }
-            _player.Speed = 110;
-            _player.MeleeAttacksPerRound = 1;
-            _player.MissileAttacksPerRound = 1;
-            _player.AmmunitionItemCategory = 0;
+            else if (SaveGame.Player.RaceIndex == RaceId.Sprite)
+            {
+                SaveGame.Player.HasFeatherFall = true;
+                SaveGame.Player.HasGlow = true;
+                SaveGame.Player.HasLightResistance = true;
+            }
+            else if (SaveGame.Player.RaceIndex == RaceId.MiriNigri)
+            {
+                SaveGame.Player.HasConfusionResistance = true;
+                SaveGame.Player.HasSoundResistance = true;
+            }
+            SaveGame.Player.Speed = 110;
+            SaveGame.Player.MeleeAttacksPerRound = 1;
+            SaveGame.Player.MissileAttacksPerRound = 1;
+            SaveGame.Player.AmmunitionItemCategory = 0;
             for (i = 0; i < 6; i++)
             {
-                _player.AbilityScores[i].Bonus += _player.Race.AbilityBonus[i] + _player.Profession.AbilityBonus[i];
+                SaveGame.Player.AbilityScores[i].Bonus += SaveGame.Player.Race.AbilityBonus[i] + SaveGame.Player.Profession.AbilityBonus[i];
             }
-            _player.AbilityScores[Ability.Strength].Bonus += _player.Dna.StrengthBonus;
-            _player.AbilityScores[Ability.Intelligence].Bonus += _player.Dna.IntelligenceBonus;
-            _player.AbilityScores[Ability.Wisdom].Bonus += _player.Dna.WisdomBonus;
-            _player.AbilityScores[Ability.Dexterity].Bonus += _player.Dna.DexterityBonus;
-            _player.AbilityScores[Ability.Constitution].Bonus += _player.Dna.ConstitutionBonus;
-            _player.AbilityScores[Ability.Charisma].Bonus += _player.Dna.CharismaBonus;
-            _player.Speed += _player.Dna.SpeedBonus;
-            _player.HasRegeneration |= _player.Dna.Regen;
-            _player.SkillSearchFrequency += _player.Dna.SearchBonus;
-            _player.SkillSearching += _player.Dna.SearchBonus;
-            _player.InfravisionRange += _player.Dna.InfravisionBonus;
-            _player.HasLightningShield |= _player.Dna.ElecHit;
-            _player.HasFireShield |= _player.Dna.FireHit;
-            _player.HasGlow |= _player.Dna.FireHit;
-            _player.ArmourClassBonus += _player.Dna.ArmourClassBonus;
-            _player.DisplayedArmourClassBonus += _player.Dna.ArmourClassBonus;
-            _player.HasFeatherFall |= _player.Dna.FeatherFall;
-            _player.HasFearResistance |= _player.Dna.ResFear;
-            _player.HasTimeResistance |= _player.Dna.ResTime;
-            _player.HasTelepathy |= _player.Dna.Esp;
-            _player.SkillStealth += _player.Dna.StealthBonus;
-            _player.HasFreeAction |= _player.Dna.FreeAction;
-            _player.HasElementalVulnerability |= _player.Dna.Vulnerable;
-            if (_player.Dna.MagicResistance)
+            SaveGame.Player.AbilityScores[Ability.Strength].Bonus += SaveGame.Player.Dna.StrengthBonus;
+            SaveGame.Player.AbilityScores[Ability.Intelligence].Bonus += SaveGame.Player.Dna.IntelligenceBonus;
+            SaveGame.Player.AbilityScores[Ability.Wisdom].Bonus += SaveGame.Player.Dna.WisdomBonus;
+            SaveGame.Player.AbilityScores[Ability.Dexterity].Bonus += SaveGame.Player.Dna.DexterityBonus;
+            SaveGame.Player.AbilityScores[Ability.Constitution].Bonus += SaveGame.Player.Dna.ConstitutionBonus;
+            SaveGame.Player.AbilityScores[Ability.Charisma].Bonus += SaveGame.Player.Dna.CharismaBonus;
+            SaveGame.Player.Speed += SaveGame.Player.Dna.SpeedBonus;
+            SaveGame.Player.HasRegeneration |= SaveGame.Player.Dna.Regen;
+            SaveGame.Player.SkillSearchFrequency += SaveGame.Player.Dna.SearchBonus;
+            SaveGame.Player.SkillSearching += SaveGame.Player.Dna.SearchBonus;
+            SaveGame.Player.InfravisionRange += SaveGame.Player.Dna.InfravisionBonus;
+            SaveGame.Player.HasLightningShield |= SaveGame.Player.Dna.ElecHit;
+            SaveGame.Player.HasFireShield |= SaveGame.Player.Dna.FireHit;
+            SaveGame.Player.HasGlow |= SaveGame.Player.Dna.FireHit;
+            SaveGame.Player.ArmourClassBonus += SaveGame.Player.Dna.ArmourClassBonus;
+            SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Dna.ArmourClassBonus;
+            SaveGame.Player.HasFeatherFall |= SaveGame.Player.Dna.FeatherFall;
+            SaveGame.Player.HasFearResistance |= SaveGame.Player.Dna.ResFear;
+            SaveGame.Player.HasTimeResistance |= SaveGame.Player.Dna.ResTime;
+            SaveGame.Player.HasTelepathy |= SaveGame.Player.Dna.Esp;
+            SaveGame.Player.SkillStealth += SaveGame.Player.Dna.StealthBonus;
+            SaveGame.Player.HasFreeAction |= SaveGame.Player.Dna.FreeAction;
+            SaveGame.Player.HasElementalVulnerability |= SaveGame.Player.Dna.Vulnerable;
+            if (SaveGame.Player.Dna.MagicResistance)
             {
-                _player.SkillSavingThrow += 15 + (_player.Level / 5);
+                SaveGame.Player.SkillSavingThrow += 15 + (SaveGame.Player.Level / 5);
             }
-            if (_player.Dna.SuppressRegen)
+            if (SaveGame.Player.Dna.SuppressRegen)
             {
-                _player.HasRegeneration = false;
+                SaveGame.Player.HasRegeneration = false;
             }
-            if (_player.Dna.CharismaOverride)
+            if (SaveGame.Player.Dna.CharismaOverride)
             {
-                _player.AbilityScores[Ability.Charisma].Bonus = 0;
+                SaveGame.Player.AbilityScores[Ability.Charisma].Bonus = 0;
             }
-            if (_player.Dna.SustainAll)
+            if (SaveGame.Player.Dna.SustainAll)
             {
-                _player.HasSustainConstitution = true;
-                if (_player.Level > 9)
+                SaveGame.Player.HasSustainConstitution = true;
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.HasSustainStrength = true;
+                    SaveGame.Player.HasSustainStrength = true;
                 }
-                if (_player.Level > 19)
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.HasSustainDexterity = true;
+                    SaveGame.Player.HasSustainDexterity = true;
                 }
-                if (_player.Level > 29)
+                if (SaveGame.Player.Level > 29)
                 {
-                    _player.HasSustainWisdom = true;
+                    SaveGame.Player.HasSustainWisdom = true;
                 }
-                if (_player.Level > 39)
+                if (SaveGame.Player.Level > 39)
                 {
-                    _player.HasSustainIntelligence = true;
+                    SaveGame.Player.HasSustainIntelligence = true;
                 }
-                if (_player.Level > 49)
+                if (SaveGame.Player.Level > 49)
                 {
-                    _player.HasSustainCharisma = true;
+                    SaveGame.Player.HasSustainCharisma = true;
                 }
             }
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                oPtr = _player.Inventory[i];
+                oPtr = SaveGame.Player.Inventory[i];
                 if (oPtr.ItemType == null)
                 {
                     continue;
@@ -574,51 +572,51 @@ namespace Cthangband
                 oPtr.GetMergedFlags(f1, f2, f3);
                 if (f1.IsSet(ItemFlag1.Str))
                 {
-                    _player.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Int))
                 {
-                    _player.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Wis))
                 {
-                    _player.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Dex))
                 {
-                    _player.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Con))
                 {
-                    _player.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Cha))
                 {
-                    _player.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
+                    SaveGame.Player.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Stealth))
                 {
-                    _player.SkillStealth += oPtr.TypeSpecificValue;
+                    SaveGame.Player.SkillStealth += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Search))
                 {
-                    _player.SkillSearching += oPtr.TypeSpecificValue * 5;
+                    SaveGame.Player.SkillSearching += oPtr.TypeSpecificValue * 5;
                 }
                 if (f1.IsSet(ItemFlag1.Search))
                 {
-                    _player.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
+                    SaveGame.Player.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
                 }
                 if (f1.IsSet(ItemFlag1.Infra))
                 {
-                    _player.InfravisionRange += oPtr.TypeSpecificValue;
+                    SaveGame.Player.InfravisionRange += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Tunnel))
                 {
-                    _player.SkillDigging += oPtr.TypeSpecificValue * 20;
+                    SaveGame.Player.SkillDigging += oPtr.TypeSpecificValue * 20;
                 }
                 if (f1.IsSet(ItemFlag1.Speed))
                 {
-                    _player.Speed += oPtr.TypeSpecificValue;
+                    SaveGame.Player.Speed += oPtr.TypeSpecificValue;
                 }
                 if (f1.IsSet(ItemFlag1.Blows))
                 {
@@ -626,11 +624,11 @@ namespace Cthangband
                 }
                 if (f1.IsSet(ItemFlag1.Impact))
                 {
-                    _player.HasQuakeWeapon = true;
+                    SaveGame.Player.HasQuakeWeapon = true;
                 }
                 if (f3.IsSet(ItemFlag3.AntiTheft))
                 {
-                    _player.HasAntiTheft = true;
+                    SaveGame.Player.HasAntiTheft = true;
                 }
                 if (f3.IsSet(ItemFlag3.XtraShots))
                 {
@@ -638,190 +636,190 @@ namespace Cthangband
                 }
                 if (f3.IsSet(ItemFlag3.Aggravate))
                 {
-                    _player.HasAggravation = true;
+                    SaveGame.Player.HasAggravation = true;
                 }
                 if (f3.IsSet(ItemFlag3.Teleport))
                 {
-                    _player.HasRandomTeleport = true;
+                    SaveGame.Player.HasRandomTeleport = true;
                 }
                 if (f3.IsSet(ItemFlag3.DrainExp))
                 {
-                    _player.HasExperienceDrain = true;
+                    SaveGame.Player.HasExperienceDrain = true;
                 }
                 if (f3.IsSet(ItemFlag3.Blessed))
                 {
-                    _player.HasBlessedBlade = true;
+                    SaveGame.Player.HasBlessedBlade = true;
                 }
                 if (f3.IsSet(ItemFlag3.XtraMight))
                 {
-                    _player.HasExtraMight = true;
+                    SaveGame.Player.HasExtraMight = true;
                 }
                 if (f3.IsSet(ItemFlag3.SlowDigest))
                 {
-                    _player.HasSlowDigestion = true;
+                    SaveGame.Player.HasSlowDigestion = true;
                 }
                 if (f3.IsSet(ItemFlag3.Regen))
                 {
-                    _player.HasRegeneration = true;
+                    SaveGame.Player.HasRegeneration = true;
                 }
                 if (f3.IsSet(ItemFlag3.Telepathy))
                 {
-                    _player.HasTelepathy = true;
+                    SaveGame.Player.HasTelepathy = true;
                 }
                 if (f3.IsSet(ItemFlag3.Lightsource))
                 {
-                    _player.HasGlow = true;
+                    SaveGame.Player.HasGlow = true;
                 }
                 if (f3.IsSet(ItemFlag3.SeeInvis))
                 {
-                    _player.HasSeeInvisibility = true;
+                    SaveGame.Player.HasSeeInvisibility = true;
                 }
                 if (f3.IsSet(ItemFlag3.Feather))
                 {
-                    _player.HasFeatherFall = true;
+                    SaveGame.Player.HasFeatherFall = true;
                 }
                 if (f2.IsSet(ItemFlag2.FreeAct))
                 {
-                    _player.HasFreeAction = true;
+                    SaveGame.Player.HasFreeAction = true;
                 }
                 if (f2.IsSet(ItemFlag2.HoldLife))
                 {
-                    _player.HasHoldLife = true;
+                    SaveGame.Player.HasHoldLife = true;
                 }
                 if (f3.IsSet(ItemFlag3.Wraith))
                 {
-                    _player.TimedEtherealness = Math.Max(_player.TimedEtherealness, 20);
+                    SaveGame.Player.TimedEtherealness = Math.Max(SaveGame.Player.TimedEtherealness, 20);
                 }
                 if (f2.IsSet(ItemFlag2.ImFire))
                 {
-                    _player.HasFireImmunity = true;
+                    SaveGame.Player.HasFireImmunity = true;
                 }
                 if (f2.IsSet(ItemFlag2.ImAcid))
                 {
-                    _player.HasAcidImmunity = true;
+                    SaveGame.Player.HasAcidImmunity = true;
                 }
                 if (f2.IsSet(ItemFlag2.ImCold))
                 {
-                    _player.HasColdImmunity = true;
+                    SaveGame.Player.HasColdImmunity = true;
                 }
                 if (f2.IsSet(ItemFlag2.ImElec))
                 {
-                    _player.HasLightningImmunity = true;
+                    SaveGame.Player.HasLightningImmunity = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResAcid))
                 {
-                    _player.HasAcidResistance = true;
+                    SaveGame.Player.HasAcidResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResElec))
                 {
-                    _player.HasLightningResistance = true;
+                    SaveGame.Player.HasLightningResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResFire))
                 {
-                    _player.HasFireResistance = true;
+                    SaveGame.Player.HasFireResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResCold))
                 {
-                    _player.HasColdResistance = true;
+                    SaveGame.Player.HasColdResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResPois))
                 {
-                    _player.HasPoisonResistance = true;
+                    SaveGame.Player.HasPoisonResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResFear))
                 {
-                    _player.HasFearResistance = true;
+                    SaveGame.Player.HasFearResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResConf))
                 {
-                    _player.HasConfusionResistance = true;
+                    SaveGame.Player.HasConfusionResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResSound))
                 {
-                    _player.HasSoundResistance = true;
+                    SaveGame.Player.HasSoundResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResLight))
                 {
-                    _player.HasLightResistance = true;
+                    SaveGame.Player.HasLightResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResDark))
                 {
-                    _player.HasDarkResistance = true;
+                    SaveGame.Player.HasDarkResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResChaos))
                 {
-                    _player.HasChaosResistance = true;
+                    SaveGame.Player.HasChaosResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResDisen))
                 {
-                    _player.HasDisenchantResistance = true;
+                    SaveGame.Player.HasDisenchantResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResShards))
                 {
-                    _player.HasShardResistance = true;
+                    SaveGame.Player.HasShardResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResNexus))
                 {
-                    _player.HasNexusResistance = true;
+                    SaveGame.Player.HasNexusResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResBlind))
                 {
-                    _player.HasBlindnessResistance = true;
+                    SaveGame.Player.HasBlindnessResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.ResNether))
                 {
-                    _player.HasNetherResistance = true;
+                    SaveGame.Player.HasNetherResistance = true;
                 }
                 if (f2.IsSet(ItemFlag2.Reflect))
                 {
-                    _player.HasReflection = true;
+                    SaveGame.Player.HasReflection = true;
                 }
                 if (f3.IsSet(ItemFlag3.ShFire))
                 {
-                    _player.HasFireShield = true;
+                    SaveGame.Player.HasFireShield = true;
                 }
                 if (f3.IsSet(ItemFlag3.ShElec))
                 {
-                    _player.HasLightningShield = true;
+                    SaveGame.Player.HasLightningShield = true;
                 }
                 if (f3.IsSet(ItemFlag3.NoMagic))
                 {
-                    _player.HasAntiMagic = true;
+                    SaveGame.Player.HasAntiMagic = true;
                 }
                 if (f3.IsSet(ItemFlag3.NoTele))
                 {
-                    _player.HasAntiTeleport = true;
+                    SaveGame.Player.HasAntiTeleport = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustStr))
                 {
-                    _player.HasSustainStrength = true;
+                    SaveGame.Player.HasSustainStrength = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustInt))
                 {
-                    _player.HasSustainIntelligence = true;
+                    SaveGame.Player.HasSustainIntelligence = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustWis))
                 {
-                    _player.HasSustainWisdom = true;
+                    SaveGame.Player.HasSustainWisdom = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustDex))
                 {
-                    _player.HasSustainDexterity = true;
+                    SaveGame.Player.HasSustainDexterity = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustCon))
                 {
-                    _player.HasSustainConstitution = true;
+                    SaveGame.Player.HasSustainConstitution = true;
                 }
                 if (f2.IsSet(ItemFlag2.SustCha))
                 {
-                    _player.HasSustainCharisma = true;
+                    SaveGame.Player.HasSustainCharisma = true;
                 }
-                _player.BaseArmourClass += oPtr.BaseArmourClass;
-                _player.DisplayedBaseArmourClass += oPtr.BaseArmourClass;
-                _player.ArmourClassBonus += oPtr.BonusArmourClass;
+                SaveGame.Player.BaseArmourClass += oPtr.BaseArmourClass;
+                SaveGame.Player.DisplayedBaseArmourClass += oPtr.BaseArmourClass;
+                SaveGame.Player.ArmourClassBonus += oPtr.BonusArmourClass;
                 if (oPtr.IsKnown())
                 {
-                    _player.DisplayedArmourClassBonus += oPtr.BonusArmourClass;
+                    SaveGame.Player.DisplayedArmourClassBonus += oPtr.BonusArmourClass;
                 }
                 if (i == InventorySlot.MeleeWeapon)
                 {
@@ -831,82 +829,82 @@ namespace Cthangband
                 {
                     continue;
                 }
-                _player.AttackBonus += oPtr.BonusToHit;
-                _player.DamageBonus += oPtr.BonusDamage;
+                SaveGame.Player.AttackBonus += oPtr.BonusToHit;
+                SaveGame.Player.DamageBonus += oPtr.BonusDamage;
                 if (oPtr.IsKnown())
                 {
-                    _player.DisplayedAttackBonus += oPtr.BonusToHit;
+                    SaveGame.Player.DisplayedAttackBonus += oPtr.BonusToHit;
                 }
                 if (oPtr.IsKnown())
                 {
-                    _player.DisplayedDamageBonus += oPtr.BonusDamage;
+                    SaveGame.Player.DisplayedDamageBonus += oPtr.BonusDamage;
                 }
             }
-            if ((_player.ProfessionIndex == CharacterClass.Monk || _player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
+            if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
             {
-                if (_player.Inventory[InventorySlot.Body].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Body].ItemType == null)
                 {
-                    _player.ArmourClassBonus += _player.Level * 3 / 2;
-                    _player.DisplayedArmourClassBonus += _player.Level * 3 / 2;
+                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level * 3 / 2;
+                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level * 3 / 2;
                 }
-                if (_player.Inventory[InventorySlot.Cloak].ItemType == null && _player.Level > 15)
+                if (SaveGame.Player.Inventory[InventorySlot.Cloak].ItemType == null && SaveGame.Player.Level > 15)
                 {
-                    _player.ArmourClassBonus += (_player.Level - 13) / 3;
-                    _player.DisplayedArmourClassBonus += (_player.Level - 13) / 3;
+                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
+                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
                 }
-                if (_player.Inventory[InventorySlot.Arm].ItemType == null && _player.Level > 10)
+                if (SaveGame.Player.Inventory[InventorySlot.Arm].ItemType == null && SaveGame.Player.Level > 10)
                 {
-                    _player.ArmourClassBonus += (_player.Level - 8) / 3;
-                    _player.DisplayedArmourClassBonus += (_player.Level - 8) / 3;
+                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
+                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
                 }
-                if (_player.Inventory[InventorySlot.Head].ItemType == null && _player.Level > 4)
+                if (SaveGame.Player.Inventory[InventorySlot.Head].ItemType == null && SaveGame.Player.Level > 4)
                 {
-                    _player.ArmourClassBonus += (_player.Level - 2) / 3;
-                    _player.DisplayedArmourClassBonus += (_player.Level - 2) / 3;
+                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
+                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
                 }
-                if (_player.Inventory[InventorySlot.Hands].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Hands].ItemType == null)
                 {
-                    _player.ArmourClassBonus += _player.Level / 2;
-                    _player.DisplayedArmourClassBonus += _player.Level / 2;
+                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 2;
+                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 2;
                 }
-                if (_player.Inventory[InventorySlot.Feet].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Feet].ItemType == null)
                 {
-                    _player.ArmourClassBonus += _player.Level / 3;
-                    _player.DisplayedArmourClassBonus += _player.Level / 3;
+                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 3;
+                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 3;
                 }
             }
-            if (_player.HasFireShield)
+            if (SaveGame.Player.HasFireShield)
             {
-                _player.HasGlow = true;
+                SaveGame.Player.HasGlow = true;
             }
-            if (_player.RaceIndex == RaceId.Golem)
+            if (SaveGame.Player.RaceIndex == RaceId.Golem)
             {
-                _player.ArmourClassBonus += 20 + (_player.Level / 5);
-                _player.DisplayedArmourClassBonus += 20 + (_player.Level / 5);
+                SaveGame.Player.ArmourClassBonus += 20 + (SaveGame.Player.Level / 5);
+                SaveGame.Player.DisplayedArmourClassBonus += 20 + (SaveGame.Player.Level / 5);
             }
             for (i = 0; i < 6; i++)
             {
                 int ind;
-                int top = _player.AbilityScores[i]
-                    .ModifyStatValue(_player.AbilityScores[i].InnateMax, _player.AbilityScores[i].Bonus);
-                if (_player.AbilityScores[i].AdjustedMax != top)
+                int top = SaveGame.Player.AbilityScores[i]
+                    .ModifyStatValue(SaveGame.Player.AbilityScores[i].InnateMax, SaveGame.Player.AbilityScores[i].Bonus);
+                if (SaveGame.Player.AbilityScores[i].AdjustedMax != top)
                 {
-                    _player.AbilityScores[i].AdjustedMax = top;
-                    _player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                    SaveGame.Player.AbilityScores[i].AdjustedMax = top;
+                    SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrStats);
                 }
-                int use = _player.AbilityScores[i]
-                    .ModifyStatValue(_player.AbilityScores[i].Innate, _player.AbilityScores[i].Bonus);
-                if (i == Ability.Charisma && _player.Dna.CharismaOverride)
+                int use = SaveGame.Player.AbilityScores[i]
+                    .ModifyStatValue(SaveGame.Player.AbilityScores[i].Innate, SaveGame.Player.AbilityScores[i].Bonus);
+                if (i == Ability.Charisma && SaveGame.Player.Dna.CharismaOverride)
                 {
-                    if (use < 8 + (2 * _player.Level))
+                    if (use < 8 + (2 * SaveGame.Player.Level))
                     {
-                        use = 8 + (2 * _player.Level);
+                        use = 8 + (2 * SaveGame.Player.Level);
                     }
                 }
-                if (_player.AbilityScores[i].Adjusted != use)
+                if (SaveGame.Player.AbilityScores[i].Adjusted != use)
                 {
-                    _player.AbilityScores[i].Adjusted = use;
-                    _player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                    SaveGame.Player.AbilityScores[i].Adjusted = use;
+                    SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrStats);
                 }
                 if (use <= 18)
                 {
@@ -920,228 +918,228 @@ namespace Cthangband
                 {
                     ind = 37;
                 }
-                if (_player.AbilityScores[i].TableIndex != ind)
+                if (SaveGame.Player.AbilityScores[i].TableIndex != ind)
                 {
-                    _player.AbilityScores[i].TableIndex = ind;
+                    SaveGame.Player.AbilityScores[i].TableIndex = ind;
                     if (i == Ability.Constitution)
                     {
-                        _player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
+                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
                     }
                     else if (i == Ability.Intelligence)
                     {
-                        if (_player.Spellcasting.SpellStat == Ability.Intelligence)
+                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Intelligence)
                         {
-                            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                         }
                     }
                     else if (i == Ability.Wisdom)
                     {
-                        if (_player.Spellcasting.SpellStat == Ability.Wisdom)
+                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Wisdom)
                         {
-                            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                         }
                     }
                     else if (i == Ability.Charisma)
                     {
-                        if (_player.Spellcasting.SpellStat == Ability.Charisma)
+                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Charisma)
                         {
-                            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                         }
                     }
                 }
             }
-            if (_player.TimedStun > 50)
+            if (SaveGame.Player.TimedStun > 50)
             {
-                _player.AttackBonus -= 20;
-                _player.DisplayedAttackBonus -= 20;
-                _player.DamageBonus -= 20;
-                _player.DisplayedDamageBonus -= 20;
+                SaveGame.Player.AttackBonus -= 20;
+                SaveGame.Player.DisplayedAttackBonus -= 20;
+                SaveGame.Player.DamageBonus -= 20;
+                SaveGame.Player.DisplayedDamageBonus -= 20;
             }
-            else if (_player.TimedStun != 0)
+            else if (SaveGame.Player.TimedStun != 0)
             {
-                _player.AttackBonus -= 5;
-                _player.DisplayedAttackBonus -= 5;
-                _player.DamageBonus -= 5;
-                _player.DisplayedDamageBonus -= 5;
+                SaveGame.Player.AttackBonus -= 5;
+                SaveGame.Player.DisplayedAttackBonus -= 5;
+                SaveGame.Player.DamageBonus -= 5;
+                SaveGame.Player.DisplayedDamageBonus -= 5;
             }
-            if (_player.TimedInvulnerability != 0)
+            if (SaveGame.Player.TimedInvulnerability != 0)
             {
-                _player.ArmourClassBonus += 100;
-                _player.DisplayedArmourClassBonus += 100;
+                SaveGame.Player.ArmourClassBonus += 100;
+                SaveGame.Player.DisplayedArmourClassBonus += 100;
             }
-            if (_player.TimedEtherealness != 0)
+            if (SaveGame.Player.TimedEtherealness != 0)
             {
-                _player.ArmourClassBonus += 100;
-                _player.DisplayedArmourClassBonus += 100;
-                _player.HasReflection = true;
+                SaveGame.Player.ArmourClassBonus += 100;
+                SaveGame.Player.DisplayedArmourClassBonus += 100;
+                SaveGame.Player.HasReflection = true;
             }
-            if (_player.TimedBlessing != 0)
+            if (SaveGame.Player.TimedBlessing != 0)
             {
-                _player.ArmourClassBonus += 5;
-                _player.DisplayedArmourClassBonus += 5;
-                _player.AttackBonus += 10;
-                _player.DisplayedAttackBonus += 10;
+                SaveGame.Player.ArmourClassBonus += 5;
+                SaveGame.Player.DisplayedArmourClassBonus += 5;
+                SaveGame.Player.AttackBonus += 10;
+                SaveGame.Player.DisplayedAttackBonus += 10;
             }
-            if (_player.TimedStoneskin != 0)
+            if (SaveGame.Player.TimedStoneskin != 0)
             {
-                _player.ArmourClassBonus += 50;
-                _player.DisplayedArmourClassBonus += 50;
+                SaveGame.Player.ArmourClassBonus += 50;
+                SaveGame.Player.DisplayedArmourClassBonus += 50;
             }
-            if (_player.TimedHeroism != 0)
+            if (SaveGame.Player.TimedHeroism != 0)
             {
-                _player.AttackBonus += 12;
-                _player.DisplayedAttackBonus += 12;
+                SaveGame.Player.AttackBonus += 12;
+                SaveGame.Player.DisplayedAttackBonus += 12;
             }
-            if (_player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedSuperheroism != 0)
             {
-                _player.AttackBonus += 24;
-                _player.DisplayedAttackBonus += 24;
-                _player.ArmourClassBonus -= 10;
-                _player.DisplayedArmourClassBonus -= 10;
+                SaveGame.Player.AttackBonus += 24;
+                SaveGame.Player.DisplayedAttackBonus += 24;
+                SaveGame.Player.ArmourClassBonus -= 10;
+                SaveGame.Player.DisplayedArmourClassBonus -= 10;
             }
-            if (_player.TimedHaste != 0)
+            if (SaveGame.Player.TimedHaste != 0)
             {
-                _player.Speed += 10;
+                SaveGame.Player.Speed += 10;
             }
-            if (_player.TimedSlow != 0)
+            if (SaveGame.Player.TimedSlow != 0)
             {
-                _player.Speed -= 10;
+                SaveGame.Player.Speed -= 10;
             }
-            if (_player.RaceIndex == RaceId.Klackon || _player.RaceIndex == RaceId.Sprite ||
-                ((_player.ProfessionIndex == CharacterClass.Monk || _player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour()))
+            if (SaveGame.Player.RaceIndex == RaceId.Klackon || SaveGame.Player.RaceIndex == RaceId.Sprite ||
+                ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour()))
             {
-                _player.Speed += _player.Level / 10;
+                SaveGame.Player.Speed += SaveGame.Player.Level / 10;
             }
-            if (_player.TimedTelepathy != 0)
+            if (SaveGame.Player.TimedTelepathy != 0)
             {
-                _player.HasTelepathy = true;
+                SaveGame.Player.HasTelepathy = true;
             }
-            if (_player.TimedSeeInvisibility != 0)
+            if (SaveGame.Player.TimedSeeInvisibility != 0)
             {
-                _player.HasSeeInvisibility = true;
+                SaveGame.Player.HasSeeInvisibility = true;
             }
-            if (_player.TimedInfravision != 0)
+            if (SaveGame.Player.TimedInfravision != 0)
             {
-                _player.InfravisionRange++;
+                SaveGame.Player.InfravisionRange++;
             }
-            if (_player.HasChaosResistance)
+            if (SaveGame.Player.HasChaosResistance)
             {
-                _player.HasConfusionResistance = true;
+                SaveGame.Player.HasConfusionResistance = true;
             }
-            if (_player.TimedHeroism != 0 || _player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedHeroism != 0 || SaveGame.Player.TimedSuperheroism != 0)
             {
-                _player.HasFearResistance = true;
+                SaveGame.Player.HasFearResistance = true;
             }
-            if (_player.HasTelepathy != oldTelepathy)
+            if (SaveGame.Player.HasTelepathy != oldTelepathy)
             {
-                _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             }
-            if (_player.HasSeeInvisibility != oldSeeInv)
+            if (SaveGame.Player.HasSeeInvisibility != oldSeeInv)
             {
-                _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             }
-            int j = _player.WeightCarried;
+            int j = SaveGame.Player.WeightCarried;
             i = WeightLimit();
             if (j > i / 2)
             {
-                _player.Speed -= (j - (i / 2)) / (i / 10);
+                SaveGame.Player.Speed -= (j - (i / 2)) / (i / 10);
             }
-            if (_player.Food >= Constants.PyFoodMax)
+            if (SaveGame.Player.Food >= Constants.PyFoodMax)
             {
-                _player.Speed -= 10;
+                SaveGame.Player.Speed -= 10;
             }
-            if (_player.IsSearching)
+            if (SaveGame.Player.IsSearching)
             {
-                _player.Speed -= 10;
+                SaveGame.Player.Speed -= 10;
             }
-            if (_player.Speed != oldSpeed)
+            if (SaveGame.Player.Speed != oldSpeed)
             {
-                _player.RedrawNeeded.Set(RedrawFlag.PrSpeed);
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrSpeed);
             }
-            _player.ArmourClassBonus += _player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
-            _player.DamageBonus += _player.AbilityScores[Ability.Strength].StrDamageBonus;
-            _player.AttackBonus += _player.AbilityScores[Ability.Dexterity].DexAttackBonus;
-            _player.AttackBonus += _player.AbilityScores[Ability.Strength].StrAttackBonus;
-            _player.DisplayedArmourClassBonus += _player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
-            _player.DisplayedDamageBonus += _player.AbilityScores[Ability.Strength].StrDamageBonus;
-            _player.DisplayedAttackBonus += _player.AbilityScores[Ability.Dexterity].DexAttackBonus;
-            _player.DisplayedAttackBonus += _player.AbilityScores[Ability.Strength].StrAttackBonus;
-            if (_player.DisplayedBaseArmourClass != oldDisAc || _player.DisplayedArmourClassBonus != oldDisToA)
+            SaveGame.Player.ArmourClassBonus += SaveGame.Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+            SaveGame.Player.DamageBonus += SaveGame.Player.AbilityScores[Ability.Strength].StrDamageBonus;
+            SaveGame.Player.AttackBonus += SaveGame.Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
+            SaveGame.Player.AttackBonus += SaveGame.Player.AbilityScores[Ability.Strength].StrAttackBonus;
+            SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+            SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.AbilityScores[Ability.Strength].StrDamageBonus;
+            SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
+            SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.AbilityScores[Ability.Strength].StrAttackBonus;
+            if (SaveGame.Player.DisplayedBaseArmourClass != oldDisAc || SaveGame.Player.DisplayedArmourClassBonus != oldDisToA)
             {
-                _player.RedrawNeeded.Set(RedrawFlag.PrArmor);
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrArmor);
             }
-            int hold = _player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
-            oPtr = _player.Inventory[InventorySlot.RangedWeapon];
-            _player.HasHeavyBow = false;
+            int hold = SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
+            oPtr = SaveGame.Player.Inventory[InventorySlot.RangedWeapon];
+            SaveGame.Player.HasHeavyBow = false;
             if (hold < oPtr.Weight / 10)
             {
-                _player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                _player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                _player.HasHeavyBow = true;
+                SaveGame.Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                SaveGame.Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                SaveGame.Player.HasHeavyBow = true;
             }
-            if (oPtr.ItemType != null && !_player.HasHeavyBow)
+            if (oPtr.ItemType != null && !SaveGame.Player.HasHeavyBow)
             {
                 switch (oPtr.ItemSubCategory)
                 {
                     case BowType.SvSling:
                         {
-                            _player.AmmunitionItemCategory = ItemCategory.Shot;
+                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Shot;
                             break;
                         }
                     case BowType.SvShortBow:
                     case BowType.SvLongBow:
                         {
-                            _player.AmmunitionItemCategory = ItemCategory.Arrow;
+                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Arrow;
                             break;
                         }
                     case BowType.SvLightXbow:
                     case BowType.SvHeavyXbow:
                         {
-                            _player.AmmunitionItemCategory = ItemCategory.Bolt;
+                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Bolt;
                             break;
                         }
                 }
-                if (_player.ProfessionIndex == CharacterClass.Ranger && _player.AmmunitionItemCategory == ItemCategory.Arrow)
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemCategory.Arrow)
                 {
-                    if (_player.Level >= 20)
+                    if (SaveGame.Player.Level >= 20)
                     {
-                        _player.MissileAttacksPerRound++;
+                        SaveGame.Player.MissileAttacksPerRound++;
                     }
-                    if (_player.Level >= 40)
+                    if (SaveGame.Player.Level >= 40)
                     {
-                        _player.MissileAttacksPerRound++;
+                        SaveGame.Player.MissileAttacksPerRound++;
                     }
                 }
-                if (_player.ProfessionIndex == CharacterClass.Warrior && _player.AmmunitionItemCategory <= ItemCategory.Bolt &&
-                    _player.AmmunitionItemCategory >= ItemCategory.Shot)
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemCategory.Bolt &&
+                    SaveGame.Player.AmmunitionItemCategory >= ItemCategory.Shot)
                 {
-                    if (_player.Level >= 25)
+                    if (SaveGame.Player.Level >= 25)
                     {
-                        _player.MissileAttacksPerRound++;
+                        SaveGame.Player.MissileAttacksPerRound++;
                     }
-                    if (_player.Level >= 50)
+                    if (SaveGame.Player.Level >= 50)
                     {
-                        _player.MissileAttacksPerRound++;
+                        SaveGame.Player.MissileAttacksPerRound++;
                     }
                 }
-                _player.MissileAttacksPerRound += extraShots;
-                if (_player.MissileAttacksPerRound < 1)
+                SaveGame.Player.MissileAttacksPerRound += extraShots;
+                if (SaveGame.Player.MissileAttacksPerRound < 1)
                 {
-                    _player.MissileAttacksPerRound = 1;
+                    SaveGame.Player.MissileAttacksPerRound = 1;
                 }
             }
-            oPtr = _player.Inventory[InventorySlot.MeleeWeapon];
-            _player.HasHeavyWeapon = false;
+            oPtr = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            SaveGame.Player.HasHeavyWeapon = false;
             if (hold < oPtr.Weight / 10)
             {
-                _player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                _player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                _player.HasHeavyWeapon = true;
+                SaveGame.Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                SaveGame.Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                SaveGame.Player.HasHeavyWeapon = true;
             }
-            if (oPtr.ItemType != null && !_player.HasHeavyWeapon)
+            if (oPtr.ItemType != null && !SaveGame.Player.HasHeavyWeapon)
             {
                 int num = 0, wgt = 0, mul = 0;
-                switch (_player.ProfessionIndex)
+                switch (SaveGame.Player.ProfessionIndex)
                 {
                     case CharacterClass.Warrior:
                         num = 6;
@@ -1199,263 +1197,263 @@ namespace Cthangband
 
                     case CharacterClass.Monk:
                     case CharacterClass.Mystic:
-                        num = _player.Level < 40 ? 3 : 4;
+                        num = SaveGame.Player.Level < 40 ? 3 : 4;
                         wgt = 40;
                         mul = 4;
                         break;
                 }
                 int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
-                int strIndex = _player.AbilityScores[Ability.Strength].StrAttackSpeedComponent * mul / div;
+                int strIndex = SaveGame.Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent * mul / div;
                 if (strIndex > 11)
                 {
                     strIndex = 11;
                 }
-                int dexIndex = _player.AbilityScores[Ability.Dexterity].DexAttackSpeedComponent;
+                int dexIndex = SaveGame.Player.AbilityScores[Ability.Dexterity].DexAttackSpeedComponent;
                 if (dexIndex > 11)
                 {
                     dexIndex = 11;
                 }
-                _player.MeleeAttacksPerRound = _blowsTable[strIndex][dexIndex];
-                if (_player.MeleeAttacksPerRound > num)
+                SaveGame.Player.MeleeAttacksPerRound = _blowsTable[strIndex][dexIndex];
+                if (SaveGame.Player.MeleeAttacksPerRound > num)
                 {
-                    _player.MeleeAttacksPerRound = num;
+                    SaveGame.Player.MeleeAttacksPerRound = num;
                 }
-                _player.MeleeAttacksPerRound += extraBlows;
-                if (_player.ProfessionIndex == CharacterClass.Warrior)
+                SaveGame.Player.MeleeAttacksPerRound += extraBlows;
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior)
                 {
-                    _player.MeleeAttacksPerRound += _player.Level / 15;
+                    SaveGame.Player.MeleeAttacksPerRound += SaveGame.Player.Level / 15;
                 }
-                if (_player.MeleeAttacksPerRound < 1)
+                if (SaveGame.Player.MeleeAttacksPerRound < 1)
                 {
-                    _player.MeleeAttacksPerRound = 1;
+                    SaveGame.Player.MeleeAttacksPerRound = 1;
                 }
-                _player.SkillDigging += oPtr.Weight / 10;
+                SaveGame.Player.SkillDigging += oPtr.Weight / 10;
             }
-            else if ((_player.ProfessionIndex == CharacterClass.Monk || _player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
+            else if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
             {
-                _player.MeleeAttacksPerRound = 0;
-                if (_player.Level > 9)
+                SaveGame.Player.MeleeAttacksPerRound = 0;
+                if (SaveGame.Player.Level > 9)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 19)
+                if (SaveGame.Player.Level > 19)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 29)
+                if (SaveGame.Player.Level > 29)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 34)
+                if (SaveGame.Player.Level > 34)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 39)
+                if (SaveGame.Player.Level > 39)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 44)
+                if (SaveGame.Player.Level > 44)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
-                if (_player.Level > 49)
+                if (SaveGame.Player.Level > 49)
                 {
-                    _player.MeleeAttacksPerRound++;
+                    SaveGame.Player.MeleeAttacksPerRound++;
                 }
                 if (MartialArtistHeavyArmour())
                 {
-                    _player.MeleeAttacksPerRound /= 2;
+                    SaveGame.Player.MeleeAttacksPerRound /= 2;
                 }
-                _player.MeleeAttacksPerRound += 1 + extraBlows;
+                SaveGame.Player.MeleeAttacksPerRound += 1 + extraBlows;
                 if (!MartialArtistHeavyArmour())
                 {
-                    _player.AttackBonus += _player.Level / 3;
-                    _player.DamageBonus += _player.Level / 3;
-                    _player.DisplayedAttackBonus += _player.Level / 3;
-                    _player.DisplayedDamageBonus += _player.Level / 3;
+                    SaveGame.Player.AttackBonus += SaveGame.Player.Level / 3;
+                    SaveGame.Player.DamageBonus += SaveGame.Player.Level / 3;
+                    SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 3;
+                    SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 3;
                 }
             }
-            _player.HasUnpriestlyWeapon = false;
-            SaveGame.Instance.MartialArtistArmourAux = false;
-            if (_player.ProfessionIndex == CharacterClass.Warrior)
+            SaveGame.Player.HasUnpriestlyWeapon = false;
+            SaveGame.MartialArtistArmourAux = false;
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior)
             {
-                _player.AttackBonus += _player.Level / 5;
-                _player.DamageBonus += _player.Level / 5;
-                _player.DisplayedAttackBonus += _player.Level / 5;
-                _player.DisplayedDamageBonus += _player.Level / 5;
+                SaveGame.Player.AttackBonus += SaveGame.Player.Level / 5;
+                SaveGame.Player.DamageBonus += SaveGame.Player.Level / 5;
+                SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 5;
+                SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 5;
             }
-            if ((_player.ProfessionIndex == CharacterClass.Priest || _player.ProfessionIndex == CharacterClass.Druid) &&
-                !_player.HasBlessedBlade && (oPtr.Category == ItemCategory.Sword ||
+            if ((SaveGame.Player.ProfessionIndex == CharacterClass.Priest || SaveGame.Player.ProfessionIndex == CharacterClass.Druid) &&
+                !SaveGame.Player.HasBlessedBlade && (oPtr.Category == ItemCategory.Sword ||
                                         oPtr.Category == ItemCategory.Polearm))
             {
-                _player.AttackBonus -= 2;
-                _player.DamageBonus -= 2;
-                _player.DisplayedAttackBonus -= 2;
-                _player.DisplayedDamageBonus -= 2;
-                _player.HasUnpriestlyWeapon = true;
+                SaveGame.Player.AttackBonus -= 2;
+                SaveGame.Player.DamageBonus -= 2;
+                SaveGame.Player.DisplayedAttackBonus -= 2;
+                SaveGame.Player.DisplayedDamageBonus -= 2;
+                SaveGame.Player.HasUnpriestlyWeapon = true;
             }
-            if (_player.ProfessionIndex == CharacterClass.Cultist &&
-                _player.Inventory[InventorySlot.MeleeWeapon].ItemType != null &&
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist &&
+                SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null &&
                 (oPtr.Category != ItemCategory.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
             {
                 oPtr.GetMergedFlags(f1, f2, f3);
                 if (f1.IsClear(ItemFlag1.Chaotic))
                 {
-                    _player.AttackBonus -= 10;
-                    _player.DamageBonus -= 10;
-                    _player.DisplayedAttackBonus -= 10;
-                    _player.DisplayedDamageBonus -= 10;
-                    _player.HasUnpriestlyWeapon = true;
+                    SaveGame.Player.AttackBonus -= 10;
+                    SaveGame.Player.DamageBonus -= 10;
+                    SaveGame.Player.DisplayedAttackBonus -= 10;
+                    SaveGame.Player.DisplayedDamageBonus -= 10;
+                    SaveGame.Player.HasUnpriestlyWeapon = true;
                 }
             }
             if (MartialArtistHeavyArmour())
             {
-                SaveGame.Instance.MartialArtistArmourAux = true;
+                SaveGame.MartialArtistArmourAux = true;
             }
-            _player.SkillStealth++;
-            _player.SkillDisarmTraps += _player.AbilityScores[Ability.Dexterity].DexDisarmBonus;
-            _player.SkillDisarmTraps += _player.AbilityScores[Ability.Intelligence].IntDisarmBonus;
-            _player.SkillUseDevice += _player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
-            _player.SkillSavingThrow += _player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
-            _player.SkillDigging += _player.AbilityScores[Ability.Strength].StrDiggingBonus;
-            _player.SkillDisarmTraps += (_player.Profession.DisarmBonusPerLevel * _player.Level) / 10;
-            _player.SkillUseDevice += (_player.Profession.DeviceBonusPerLevel * _player.Level) / 10;
-            _player.SkillSavingThrow += (_player.Profession.SaveBonusPerLevel * _player.Level) / 10;
-            _player.SkillStealth += (_player.Profession.StealthBonusPerLevel * _player.Level) / 10;
-            _player.SkillSearching += (_player.Profession.SearchBonusPerLevel * _player.Level) / 10;
-            _player.SkillSearchFrequency += (_player.Profession.SearchFrequencyPerLevel * _player.Level) / 10;
-            _player.SkillMelee += (_player.Profession.MeleeAttackBonusPerLevel * _player.Level) / 10;
-            _player.SkillRanged += (_player.Profession.RangedAttackBonusPerLevel * _player.Level) / 10;
-            _player.SkillThrowing += (_player.Profession.RangedAttackBonusPerLevel * _player.Level) / 10;
-            if (_player.SkillStealth > 30)
+            SaveGame.Player.SkillStealth++;
+            SaveGame.Player.SkillDisarmTraps += SaveGame.Player.AbilityScores[Ability.Dexterity].DexDisarmBonus;
+            SaveGame.Player.SkillDisarmTraps += SaveGame.Player.AbilityScores[Ability.Intelligence].IntDisarmBonus;
+            SaveGame.Player.SkillUseDevice += SaveGame.Player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
+            SaveGame.Player.SkillSavingThrow += SaveGame.Player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
+            SaveGame.Player.SkillDigging += SaveGame.Player.AbilityScores[Ability.Strength].StrDiggingBonus;
+            SaveGame.Player.SkillDisarmTraps += (SaveGame.Player.Profession.DisarmBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillUseDevice += (SaveGame.Player.Profession.DeviceBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSavingThrow += (SaveGame.Player.Profession.SaveBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillStealth += (SaveGame.Player.Profession.StealthBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSearching += (SaveGame.Player.Profession.SearchBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSearchFrequency += (SaveGame.Player.Profession.SearchFrequencyPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillMelee += (SaveGame.Player.Profession.MeleeAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillRanged += (SaveGame.Player.Profession.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillThrowing += (SaveGame.Player.Profession.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            if (SaveGame.Player.SkillStealth > 30)
             {
-                _player.SkillStealth = 30;
+                SaveGame.Player.SkillStealth = 30;
             }
-            if (_player.SkillStealth < 0)
+            if (SaveGame.Player.SkillStealth < 0)
             {
-                _player.SkillStealth = 0;
+                SaveGame.Player.SkillStealth = 0;
             }
-            if (_player.SkillDigging < 1)
+            if (SaveGame.Player.SkillDigging < 1)
             {
-                _player.SkillDigging = 1;
+                SaveGame.Player.SkillDigging = 1;
             }
-            if (_player.HasAntiMagic && _player.SkillSavingThrow < 95)
+            if (SaveGame.Player.HasAntiMagic && SaveGame.Player.SkillSavingThrow < 95)
             {
-                _player.SkillSavingThrow = 95;
+                SaveGame.Player.SkillSavingThrow = 95;
             }
-            if (SaveGame.Instance.CharacterXtra)
+            if (SaveGame.CharacterXtra)
             {
                 return;
             }
-            if (_player.OldHeavyBow != _player.HasHeavyBow)
+            if (SaveGame.Player.OldHeavyBow != SaveGame.Player.HasHeavyBow)
             {
-                if (_player.HasHeavyBow)
+                if (SaveGame.Player.HasHeavyBow)
                 {
-                    SaveGame.Instance.MsgPrint("You have trouble wielding such a heavy bow.");
+                    SaveGame.MsgPrint("You have trouble wielding such a heavy bow.");
                 }
-                else if (_player.Inventory[InventorySlot.RangedWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.RangedWeapon].ItemType != null)
                 {
-                    SaveGame.Instance.MsgPrint("You have no trouble wielding your bow.");
+                    SaveGame.MsgPrint("You have no trouble wielding your bow.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("You feel relieved to put down your heavy bow.");
+                    SaveGame.MsgPrint("You feel relieved to put down your heavy bow.");
                 }
-                _player.OldHeavyBow = _player.HasHeavyBow;
+                SaveGame.Player.OldHeavyBow = SaveGame.Player.HasHeavyBow;
             }
-            if (_player.OldHeavyWeapon != _player.HasHeavyWeapon)
+            if (SaveGame.Player.OldHeavyWeapon != SaveGame.Player.HasHeavyWeapon)
             {
-                if (_player.HasHeavyWeapon)
+                if (SaveGame.Player.HasHeavyWeapon)
                 {
-                    SaveGame.Instance.MsgPrint("You have trouble wielding such a heavy weapon.");
+                    SaveGame.MsgPrint("You have trouble wielding such a heavy weapon.");
                 }
-                else if (_player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
                 {
-                    SaveGame.Instance.MsgPrint("You have no trouble wielding your weapon.");
+                    SaveGame.MsgPrint("You have no trouble wielding your weapon.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint("You feel relieved to put down your heavy weapon.");
+                    SaveGame.MsgPrint("You feel relieved to put down your heavy weapon.");
                 }
-                _player.OldHeavyWeapon = _player.HasHeavyWeapon;
+                SaveGame.Player.OldHeavyWeapon = SaveGame.Player.HasHeavyWeapon;
             }
-            if (_player.OldUnpriestlyWeapon != _player.HasUnpriestlyWeapon)
+            if (SaveGame.Player.OldUnpriestlyWeapon != SaveGame.Player.HasUnpriestlyWeapon)
             {
-                if (_player.HasUnpriestlyWeapon)
+                if (SaveGame.Player.HasUnpriestlyWeapon)
                 {
-                    SaveGame.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
+                    SaveGame.MsgPrint(SaveGame.Player.ProfessionIndex == CharacterClass.Cultist
                         ? "Your weapon restricts the flow of chaos through you."
                         : "You do not feel comfortable with your weapon.");
                 }
-                else if (_player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
                 {
-                    SaveGame.Instance.MsgPrint("You feel comfortable with your weapon.");
+                    SaveGame.MsgPrint("You feel comfortable with your weapon.");
                 }
                 else
                 {
-                    SaveGame.Instance.MsgPrint(_player.ProfessionIndex == CharacterClass.Cultist
+                    SaveGame.MsgPrint(SaveGame.Player.ProfessionIndex == CharacterClass.Cultist
                         ? "Chaos flows freely through you again."
                         : "You feel more comfortable after removing your weapon.");
                 }
-                _player.OldUnpriestlyWeapon = _player.HasUnpriestlyWeapon;
+                SaveGame.Player.OldUnpriestlyWeapon = SaveGame.Player.HasUnpriestlyWeapon;
             }
-            if ((_player.ProfessionIndex == CharacterClass.Monk || _player.ProfessionIndex == CharacterClass.Mystic) && SaveGame.Instance.MartialArtistArmourAux !=
-                SaveGame.Instance.MartialArtistNotifyAux)
+            if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && SaveGame.MartialArtistArmourAux !=
+                SaveGame.MartialArtistNotifyAux)
             {
-                SaveGame.Instance.MsgPrint(MartialArtistHeavyArmour()
+                SaveGame.MsgPrint(MartialArtistHeavyArmour()
                     ? "The weight of your armour disrupts your balance."
                     : "You regain your balance.");
-                SaveGame.Instance.MartialArtistNotifyAux = SaveGame.Instance.MartialArtistArmourAux;
+                SaveGame.MartialArtistNotifyAux = SaveGame.MartialArtistArmourAux;
             }
         }
 
         public void CalcHitpoints()
         {
-            int bonus = _player.AbilityScores[Ability.Constitution].ConHealthBonus;
-            int mhp = _player.PlayerHp[_player.Level - 1] + (bonus * _player.Level / 2);
-            if (mhp < _player.Level + 1)
+            int bonus = SaveGame.Player.AbilityScores[Ability.Constitution].ConHealthBonus;
+            int mhp = SaveGame.Player.PlayerHp[SaveGame.Player.Level - 1] + (bonus * SaveGame.Player.Level / 2);
+            if (mhp < SaveGame.Player.Level + 1)
             {
-                mhp = _player.Level + 1;
+                mhp = SaveGame.Player.Level + 1;
             }
-            if (_player.TimedHeroism != 0)
+            if (SaveGame.Player.TimedHeroism != 0)
             {
                 mhp += 10;
             }
-            if (_player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedSuperheroism != 0)
             {
                 mhp += 30;
             }
-            var mult = _player.Religion.GetNamedDeity(Pantheon.GodName.Nath_Horthah).AdjustedFavour + 10;
+            var mult = SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Nath_Horthah).AdjustedFavour + 10;
             mhp *= mult;
             mhp /= 10;
-            if (_player.MaxHealth != mhp)
+            if (SaveGame.Player.MaxHealth != mhp)
             {
-                if (_player.Health >= mhp)
+                if (SaveGame.Player.Health >= mhp)
                 {
-                    _player.Health = mhp;
-                    _player.FractionalHealth = 0;
+                    SaveGame.Player.Health = mhp;
+                    SaveGame.Player.FractionalHealth = 0;
                 }
-                _player.MaxHealth = mhp;
-                _player.RedrawNeeded.Set(RedrawFlag.PrHp);
+                SaveGame.Player.MaxHealth = mhp;
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHp);
             }
         }
 
         public void CalcMana()
         {
             int levels;
-            switch (_player.Spellcasting.Type)
+            switch (SaveGame.Player.Spellcasting.Type)
             {
                 case CastingType.None:
                     return;
 
                 case CastingType.Arcane:
                 case CastingType.Divine:
-                    levels = _player.Level - _player.Spellcasting.SpellFirst + 1;
+                    levels = SaveGame.Player.Level - SaveGame.Player.Spellcasting.SpellFirst + 1;
                     break;
 
                 case CastingType.Mentalism:
                 case CastingType.Channeling:
-                    levels = _player.Level;
+                    levels = SaveGame.Player.Level;
                     break;
 
                 default:
@@ -1465,41 +1463,41 @@ namespace Cthangband
             {
                 levels = 0;
             }
-            int msp = _player.AbilityScores[_player.Spellcasting.SpellStat].ManaBonus * levels / 2;
+            int msp = SaveGame.Player.AbilityScores[SaveGame.Player.Spellcasting.SpellStat].ManaBonus * levels / 2;
             if (msp != 0)
             {
                 msp++;
             }
-            if (msp != 0 && _player.ProfessionIndex == CharacterClass.HighMage)
+            if (msp != 0 && SaveGame.Player.ProfessionIndex == CharacterClass.HighMage)
             {
                 msp += msp / 4;
             }
-            if (_player.Spellcasting.Type == CastingType.Arcane)
+            if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
             {
                 FlagSet f1 = new FlagSet();
                 FlagSet f2 = new FlagSet();
                 FlagSet f3 = new FlagSet();
-                _player.HasRestrictingGloves = false;
-                Item oPtr = _player.Inventory[InventorySlot.Hands];
+                SaveGame.Player.HasRestrictingGloves = false;
+                Item oPtr = SaveGame.Player.Inventory[InventorySlot.Hands];
                 oPtr.GetMergedFlags(f1, f2, f3);
                 if (oPtr.ItemType != null && f2.IsClear(ItemFlag2.FreeAct) && f1.IsClear(ItemFlag1.Dex) &&
                     oPtr.TypeSpecificValue > 0)
                 {
-                    _player.HasRestrictingGloves = true;
+                    SaveGame.Player.HasRestrictingGloves = true;
                     msp = 3 * msp / 4;
                 }
-                _player.HasRestrictingArmour = false;
+                SaveGame.Player.HasRestrictingArmour = false;
                 int curWgt = 0;
-                curWgt += _player.Inventory[InventorySlot.Body].Weight;
-                curWgt += _player.Inventory[InventorySlot.Head].Weight;
-                curWgt += _player.Inventory[InventorySlot.Arm].Weight;
-                curWgt += _player.Inventory[InventorySlot.Cloak].Weight;
-                curWgt += _player.Inventory[InventorySlot.Hands].Weight;
-                curWgt += _player.Inventory[InventorySlot.Feet].Weight;
-                int maxWgt = _player.Spellcasting.SpellWeight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Body].Weight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Head].Weight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Arm].Weight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Cloak].Weight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Hands].Weight;
+                curWgt += SaveGame.Player.Inventory[InventorySlot.Feet].Weight;
+                int maxWgt = SaveGame.Player.Spellcasting.SpellWeight;
                 if ((curWgt - maxWgt) / 10 > 0)
                 {
-                    _player.HasRestrictingArmour = true;
+                    SaveGame.Player.HasRestrictingArmour = true;
                     msp -= (curWgt - maxWgt) / 10;
                 }
             }
@@ -1507,36 +1505,36 @@ namespace Cthangband
             {
                 msp = 0;
             }
-            var mult = _player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
+            var mult = SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
             msp *= mult;
             msp /= 10;
-            if (_player.MaxMana != msp)
+            if (SaveGame.Player.MaxMana != msp)
             {
-                if (_player.Mana >= msp)
+                if (SaveGame.Player.Mana >= msp)
                 {
-                    _player.Mana = msp;
-                    _player.FractionalMana = 0;
+                    SaveGame.Player.Mana = msp;
+                    SaveGame.Player.FractionalMana = 0;
                 }
-                _player.MaxMana = msp;
-                _player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                SaveGame.Player.MaxMana = msp;
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
             }
-            if (SaveGame.Instance.CharacterXtra)
+            if (SaveGame.CharacterXtra)
             {
                 return;
             }
-            if (_player.OldRestrictingGloves != _player.HasRestrictingGloves)
+            if (SaveGame.Player.OldRestrictingGloves != SaveGame.Player.HasRestrictingGloves)
             {
-                SaveGame.Instance.MsgPrint(_player.HasRestrictingGloves
+                SaveGame.MsgPrint(SaveGame.Player.HasRestrictingGloves
                     ? "Your covered hands feel unsuitable for spellcasting."
                     : "Your hands feel more suitable for spellcasting.");
-                _player.OldRestrictingGloves = _player.HasRestrictingGloves;
+                SaveGame.Player.OldRestrictingGloves = SaveGame.Player.HasRestrictingGloves;
             }
-            if (_player.OldRestrictingArmour != _player.HasRestrictingArmour)
+            if (SaveGame.Player.OldRestrictingArmour != SaveGame.Player.HasRestrictingArmour)
             {
-                SaveGame.Instance.MsgPrint(_player.HasRestrictingArmour
+                SaveGame.MsgPrint(SaveGame.Player.HasRestrictingArmour
                     ? "The weight of your armour encumbers your movement."
                     : "You feel able to move more freely.");
-                _player.OldRestrictingArmour = _player.HasRestrictingArmour;
+                SaveGame.Player.OldRestrictingArmour = SaveGame.Player.HasRestrictingArmour;
             }
         }
 
@@ -1544,51 +1542,51 @@ namespace Cthangband
         {
             int i, j;
             Spell sPtr;
-            if (_player == null)
+            if (SaveGame.Player == null)
             {
                 return;
             }
-            string p = _player.Spellcasting.Type == CastingType.Arcane ? "spell" : "prayer";
-            if (_player.Spellcasting.Type == CastingType.None)
+            string p = SaveGame.Player.Spellcasting.Type == CastingType.Arcane ? "spell" : "prayer";
+            if (SaveGame.Player.Spellcasting.Type == CastingType.None)
             {
                 return;
             }
-            if (_player.Realm1 == Realm.None)
+            if (SaveGame.Player.Realm1 == Realm.None)
             {
                 return;
             }
-            if (SaveGame.Instance.CharacterXtra)
+            if (SaveGame.CharacterXtra)
             {
                 return;
             }
-            int levels = _player.Level - _player.Spellcasting.SpellFirst + 1;
+            int levels = SaveGame.Player.Level - SaveGame.Player.Spellcasting.SpellFirst + 1;
             if (levels < 0)
             {
                 levels = 0;
             }
-            int numAllowed = _player.AbilityScores[_player.Spellcasting.SpellStat].HalfSpellsPerLevel * levels / 2;
+            int numAllowed = SaveGame.Player.AbilityScores[SaveGame.Player.Spellcasting.SpellStat].HalfSpellsPerLevel * levels / 2;
             int numKnown = 0;
             for (j = 0; j < 64; j++)
             {
-                if (_player.Spellcasting.Spells[j / 32][j % 32].Learned)
+                if (SaveGame.Player.Spellcasting.Spells[j / 32][j % 32].Learned)
                 {
                     numKnown++;
                 }
             }
-            _player.SpareSpellSlots = numAllowed - numKnown;
+            SaveGame.Player.SpareSpellSlots = numAllowed - numKnown;
             for (i = 63; i >= 0; i--)
             {
                 if (numKnown == 0)
                 {
                     break;
                 }
-                j = _player.Spellcasting.SpellOrder[i];
+                j = SaveGame.Player.Spellcasting.SpellOrder[i];
                 if (j >= 99)
                 {
                     continue;
                 }
-                sPtr = _player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level <= _player.Level)
+                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level <= SaveGame.Player.Level)
                 {
                     continue;
                 }
@@ -1599,12 +1597,12 @@ namespace Cthangband
                 sPtr.Forgotten = true;
                 sPtr.Learned = false;
                 numKnown--;
-                SaveGame.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
-                _player.SpareSpellSlots++;
+                SaveGame.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                SaveGame.Player.SpareSpellSlots++;
             }
             for (i = 63; i >= 0; i--)
             {
-                if (_player.SpareSpellSlots >= 0)
+                if (SaveGame.Player.SpareSpellSlots >= 0)
                 {
                     break;
                 }
@@ -1612,12 +1610,12 @@ namespace Cthangband
                 {
                     break;
                 }
-                j = _player.Spellcasting.SpellOrder[i];
+                j = SaveGame.Player.Spellcasting.SpellOrder[i];
                 if (j >= 99)
                 {
                     continue;
                 }
-                sPtr = _player.Spellcasting.Spells[j / 32][j % 32];
+                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
                 if (!sPtr.Learned)
                 {
                     continue;
@@ -1625,20 +1623,20 @@ namespace Cthangband
                 sPtr.Forgotten = true;
                 sPtr.Learned = false;
                 numKnown--;
-                SaveGame.Instance.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
-                _player.SpareSpellSlots++;
+                SaveGame.MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                SaveGame.Player.SpareSpellSlots++;
             }
             int forgottenTotal = 0;
             for (int l = 0; l < 64; l++)
             {
-                if (_player.Spellcasting.Spells[l / 32][l % 32].Forgotten)
+                if (SaveGame.Player.Spellcasting.Spells[l / 32][l % 32].Forgotten)
                 {
                     forgottenTotal++;
                 }
             }
             for (i = 0; i < 64; i++)
             {
-                if (_player.SpareSpellSlots <= 0)
+                if (SaveGame.Player.SpareSpellSlots <= 0)
                 {
                     break;
                 }
@@ -1646,13 +1644,13 @@ namespace Cthangband
                 {
                     break;
                 }
-                j = _player.Spellcasting.SpellOrder[i];
+                j = SaveGame.Player.Spellcasting.SpellOrder[i];
                 if (j >= 99)
                 {
                     break;
                 }
-                sPtr = _player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level > _player.Level)
+                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level > SaveGame.Player.Level)
                 {
                     continue;
                 }
@@ -1665,16 +1663,16 @@ namespace Cthangband
                 forgottenTotal--;
                 if (!Gui.FullScreenOverlay)
                 {
-                    SaveGame.Instance.MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
+                    SaveGame.MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
                 }
-                _player.SpareSpellSlots--;
+                SaveGame.Player.SpareSpellSlots--;
             }
             int k = 0;
-            int limit = _player.Realm2 == Realm.None ? 32 : 64;
+            int limit = SaveGame.Player.Realm2 == Realm.None ? 32 : 64;
             for (j = 0; j < limit; j++)
             {
-                sPtr = _player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level > _player.Level)
+                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level > SaveGame.Player.Level)
                 {
                     continue;
                 }
@@ -1684,7 +1682,7 @@ namespace Cthangband
                 }
                 k++;
             }
-            if (_player.Realm2 == 0)
+            if (SaveGame.Player.Realm2 == 0)
             {
                 if (k > 32)
                 {
@@ -1698,22 +1696,22 @@ namespace Cthangband
                     k = 64;
                 }
             }
-            if (_player.SpareSpellSlots > k)
+            if (SaveGame.Player.SpareSpellSlots > k)
             {
-                _player.SpareSpellSlots = k;
+                SaveGame.Player.SpareSpellSlots = k;
             }
-            if (_player.OldSpareSpellSlots != _player.SpareSpellSlots)
+            if (SaveGame.Player.OldSpareSpellSlots != SaveGame.Player.SpareSpellSlots)
             {
-                if (_player.SpareSpellSlots != 0)
+                if (SaveGame.Player.SpareSpellSlots != 0)
                 {
                     if (!Gui.FullScreenOverlay)
                     {
-                        string suffix = _player.SpareSpellSlots != 1 ? "s" : "";
-                        SaveGame.Instance.MsgPrint($"You can learn {_player.SpareSpellSlots} more {p}{suffix}.");
+                        string suffix = SaveGame.Player.SpareSpellSlots != 1 ? "s" : "";
+                        SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} more {p}{suffix}.");
                     }
                 }
-                _player.OldSpareSpellSlots = _player.SpareSpellSlots;
-                _player.RedrawNeeded.Set(RedrawFlag.PrStudy);
+                SaveGame.Player.OldSpareSpellSlots = SaveGame.Player.SpareSpellSlots;
+                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrStudy);
             }
         }
 
@@ -1722,31 +1720,31 @@ namespace Cthangband
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
-            _player.LightLevel = 0;
+            SaveGame.Player.LightLevel = 0;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                Item oPtr = _player.Inventory[i];
+                Item oPtr = SaveGame.Player.Inventory[i];
                 if (i == InventorySlot.Lightsource && oPtr.ItemType != null &&
                     oPtr.Category == ItemCategory.Light)
                 {
                     if (oPtr.ItemSubCategory == LightType.Torch && oPtr.TypeSpecificValue > 0)
                     {
-                        _player.LightLevel++;
+                        SaveGame.Player.LightLevel++;
                         continue;
                     }
                     if (oPtr.ItemSubCategory == LightType.Lantern && oPtr.TypeSpecificValue > 0)
                     {
-                        _player.LightLevel += 2;
+                        SaveGame.Player.LightLevel += 2;
                         continue;
                     }
                     if (oPtr.ItemSubCategory == LightType.Orb)
                     {
-                        _player.LightLevel += 2;
+                        SaveGame.Player.LightLevel += 2;
                         continue;
                     }
                     if (oPtr.IsFixedArtifact())
                     {
-                        _player.LightLevel += 3;
+                        SaveGame.Player.LightLevel += 3;
                     }
                 }
                 else
@@ -1758,50 +1756,50 @@ namespace Cthangband
                     oPtr.GetMergedFlags(f1, f2, f3);
                     if (f3.IsSet(ItemFlag3.Lightsource))
                     {
-                        _player.LightLevel++;
+                        SaveGame.Player.LightLevel++;
                     }
                 }
             }
-            if (_player.LightLevel > 5)
+            if (SaveGame.Player.LightLevel > 5)
             {
-                _player.LightLevel = 5;
+                SaveGame.Player.LightLevel = 5;
             }
-            if (_player.LightLevel == 0 && _player.HasGlow)
+            if (SaveGame.Player.LightLevel == 0 && SaveGame.Player.HasGlow)
             {
-                _player.LightLevel = 1;
+                SaveGame.Player.LightLevel = 1;
             }
-            if (_player.OldLightLevel != _player.LightLevel)
+            if (SaveGame.Player.OldLightLevel != SaveGame.Player.LightLevel)
             {
-                _player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
-                _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                _player.OldLightLevel = _player.LightLevel;
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.Player.OldLightLevel = SaveGame.Player.LightLevel;
             }
         }
 
         public void HealthRedraw()
         {
-            if (SaveGame.Instance.TrackedMonsterIndex == 0)
+            if (SaveGame.TrackedMonsterIndex == 0)
             {
                 Gui.Erase(ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
                 Gui.Erase(ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
                 Gui.Erase(ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
                 Gui.Erase(ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
             }
-            else if (!_level.Monsters[SaveGame.Instance.TrackedMonsterIndex].IsVisible)
+            else if (!SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
             {
                 Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
-            else if (_player.TimedHallucinations != 0)
+            else if (SaveGame.Player.TimedHallucinations != 0)
             {
                 Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
-            else if (_level.Monsters[SaveGame.Instance.TrackedMonsterIndex].Health < 0)
+            else if (SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
             {
                 Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
             else
             {
-                Monster mPtr = _level.Monsters[SaveGame.Instance.TrackedMonsterIndex];
+                Monster mPtr = SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex];
                 Colour attr = Colour.Red;
                 string smb = "**********";
                 int pct = 100 * mPtr.Health / mPtr.MaxHealth;
@@ -1847,39 +1845,39 @@ namespace Cthangband
 
         public bool MartialArtistEmptyHands()
         {
-            if (_player.ProfessionIndex != CharacterClass.Monk && _player.ProfessionIndex != CharacterClass.Mystic)
+            if (SaveGame.Player.ProfessionIndex != CharacterClass.Monk && SaveGame.Player.ProfessionIndex != CharacterClass.Mystic)
             {
                 return false;
             }
-            return _player.Inventory[InventorySlot.MeleeWeapon].ItemType == null;
+            return SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType == null;
         }
 
         public bool MartialArtistHeavyArmour()
         {
             int martialArtistArmWgt = 0;
-            if (_player.ProfessionIndex != CharacterClass.Monk && _player.ProfessionIndex != CharacterClass.Mystic)
+            if (SaveGame.Player.ProfessionIndex != CharacterClass.Monk && SaveGame.Player.ProfessionIndex != CharacterClass.Mystic)
             {
                 return false;
             }
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Body].Weight;
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Head].Weight;
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Arm].Weight;
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Cloak].Weight;
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Hands].Weight;
-            martialArtistArmWgt += _player.Inventory[InventorySlot.Feet].Weight;
-            return martialArtistArmWgt > 100 + (_player.Level * 4);
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Body].Weight;
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Head].Weight;
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Arm].Weight;
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Cloak].Weight;
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Hands].Weight;
+            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Feet].Weight;
+            return martialArtistArmWgt > 100 + (SaveGame.Player.Level * 4);
         }
 
         public void PrtAc()
         {
             Gui.Print("Cur AC ", ScreenLocation.RowAc, ScreenLocation.ColAc);
-            string tmp = (_player.DisplayedBaseArmourClass + _player.DisplayedArmourClassBonus).ToString().PadLeft(5);
+            string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
             Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowAc, ScreenLocation.ColAc + 7);
         }
 
         public void PrtAfraid()
         {
-            if (_player.TimedFear > 0)
+            if (SaveGame.Player.TimedFear > 0)
             {
                 Gui.Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
             }
@@ -1891,7 +1889,7 @@ namespace Cthangband
 
         public void PrtBlind()
         {
-            if (_player.TimedBlindness > 0)
+            if (SaveGame.Player.TimedBlindness > 0)
             {
                 Gui.Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
             }
@@ -1903,7 +1901,7 @@ namespace Cthangband
 
         public void PrtConfused()
         {
-            if (_player.TimedConfusion > 0)
+            if (SaveGame.Player.TimedConfusion > 0)
             {
                 Gui.Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
             }
@@ -1915,7 +1913,7 @@ namespace Cthangband
 
         public void PrtCut()
         {
-            int c = _player.TimedBleeding;
+            int c = SaveGame.Player.TimedBleeding;
             if (c > 1000)
             {
                 Gui.Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);
@@ -1953,25 +1951,25 @@ namespace Cthangband
         public void PrtDepth()
         {
             string depths;
-            if (SaveGame.Instance.CurrentDepth == 0)
+            if (SaveGame.CurrentDepth == 0)
             {
-                if (SaveGame.Instance.Wilderness[_player.WildernessY][_player.WildernessX].Dungeon != null)
+                if (SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon != null)
                 {
-                    depths = SaveGame.Instance.Wilderness[_player.WildernessY][_player.WildernessX].Dungeon.Shortname;
-                    SaveGame.Instance.Wilderness[_player.WildernessY][_player.WildernessX].Dungeon.Visited = true;
+                    depths = SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon.Shortname;
+                    SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon.Visited = true;
                 }
                 else
                 {
-                    depths = $"Wild ({_player.WildernessX},{_player.WildernessY})";
+                    depths = $"Wild ({SaveGame.Player.WildernessX},{SaveGame.Player.WildernessY})";
                 }
             }
             else
             {
-                depths = $"lvl {SaveGame.Instance.CurrentDepth}+{SaveGame.Instance.DungeonDifficulty}";
-                SaveGame.Instance.CurDungeon.KnownOffset = true;
-                if (SaveGame.Instance.CurrentDepth == SaveGame.Instance.CurDungeon.MaxLevel)
+                depths = $"lvl {SaveGame.CurrentDepth}+{SaveGame.DungeonDifficulty}";
+                SaveGame.CurDungeon.KnownOffset = true;
+                if (SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
                 {
-                    SaveGame.Instance.CurDungeon.KnownDepth = true;
+                    SaveGame.CurDungeon.KnownDepth = true;
                 }
             }
             Gui.PrintLine(depths.PadLeft(9), ScreenLocation.RowDepth, ScreenLocation.ColDepth);
@@ -1980,24 +1978,24 @@ namespace Cthangband
         public void PrtDtrap()
         {
             int count = 0;
-            if (_level.Grid[_player.MapY][_player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
             {
                 Gui.Print(Colour.Green, "     ", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
                 return;
             }
-            if (_level.Grid[_player.MapY - 1][_player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY - 1][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
             {
                 count++;
             }
-            if (_level.Grid[_player.MapY + 1][_player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY + 1][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
             {
                 count++;
             }
-            if (_level.Grid[_player.MapY][_player.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
             {
                 count++;
             }
-            if (_level.Grid[_player.MapY][_player.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
             {
                 count++;
             }
@@ -2014,18 +2012,18 @@ namespace Cthangband
         public void PrtExp()
         {
             Colour colour = Colour.BrightGreen;
-            if (_player.ExperiencePoints < _player.MaxExperienceGained)
+            if (SaveGame.Player.ExperiencePoints < SaveGame.Player.MaxExperienceGained)
             {
                 colour = Colour.Yellow;
             }
             Gui.Print("NEXT", ScreenLocation.RowExp, 0);
-            if (_player.Level >= Constants.PyMaxLevel)
+            if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
                 Gui.Print(Colour.BrightGreen, "   *****", ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
             }
             else
             {
-                string outVal = ((GlobalData.PlayerExp[_player.Level - 1] * _player.ExperienceMultiplier / 100) - _player.ExperiencePoints).ToString()
+                string outVal = ((GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
                     .PadLeft(8);
                 Gui.Print(colour, outVal, ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
             }
@@ -2039,9 +2037,9 @@ namespace Cthangband
 
         public void PrtFrameBasic()
         {
-            PrtField(_player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
-            PrtField(_player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-            PrtField(Profession.ClassSubName(_player.ProfessionIndex, _player.Realm1), ScreenLocation.RowClass,
+            PrtField(SaveGame.Player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
+            PrtField(SaveGame.Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
+            PrtField(Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), ScreenLocation.RowClass,
                 ScreenLocation.ColClass);
             PrtTitle();
             PrtLevel();
@@ -2076,27 +2074,27 @@ namespace Cthangband
         public void PrtGold()
         {
             Gui.Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
-            string tmp = _player.Gold.ToString().PadLeft(9);
+            string tmp = SaveGame.Player.Gold.ToString().PadLeft(9);
             Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
         }
 
         public void PrtHp()
         {
             Gui.Print("Max HP ", ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp);
-            string tmp = _player.MaxHealth.ToString().PadLeft(5);
+            string tmp = SaveGame.Player.MaxHealth.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
             Gui.Print(colour, tmp, ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp + 7);
             Gui.Print("Cur HP ", ScreenLocation.RowCurhp, ScreenLocation.ColCurhp);
-            tmp = _player.Health.ToString().PadLeft(5);
-            if (_player.Health >= _player.MaxHealth)
+            tmp = SaveGame.Player.Health.ToString().PadLeft(5);
+            if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
             {
                 colour = Colour.BrightGreen;
             }
-            else if (_player.Health > _player.MaxHealth * GlobalData.HitpointWarn / 5)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 5)
             {
                 colour = Colour.BrightYellow;
             }
-            else if (_player.Health > _player.MaxHealth * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 10)
             {
                 colour = Colour.Orange;
             }
@@ -2109,23 +2107,23 @@ namespace Cthangband
 
         public void PrtHunger()
         {
-            if (_player.Food < Constants.PyFoodFaint)
+            if (SaveGame.Player.Food < Constants.PyFoodFaint)
             {
                 Gui.Print(Colour.Red, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
-            else if (_player.Food < Constants.PyFoodWeak)
+            else if (SaveGame.Player.Food < Constants.PyFoodWeak)
             {
                 Gui.Print(Colour.Orange, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
-            else if (_player.Food < Constants.PyFoodAlert)
+            else if (SaveGame.Player.Food < Constants.PyFoodAlert)
             {
                 Gui.Print(Colour.Yellow, "Hungry", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
-            else if (_player.Food < Constants.PyFoodFull)
+            else if (SaveGame.Player.Food < Constants.PyFoodFull)
             {
                 Gui.Print(Colour.BrightGreen, "      ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
-            else if (_player.Food < Constants.PyFoodMax)
+            else if (SaveGame.Player.Food < Constants.PyFoodMax)
             {
                 Gui.Print(Colour.BrightGreen, "Full  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
@@ -2137,8 +2135,8 @@ namespace Cthangband
 
         public void PrtLevel()
         {
-            string tmp = _player.Level.ToString().PadLeft(6);
-            if (_player.Level >= _player.MaxLevelGained)
+            string tmp = SaveGame.Player.Level.ToString().PadLeft(6);
+            if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)
             {
                 Gui.Print("LEVEL ", ScreenLocation.RowLevel, 0);
                 Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
@@ -2152,7 +2150,7 @@ namespace Cthangband
 
         public void PrtPoisoned()
         {
-            if (_player.TimedPoison > 0)
+            if (SaveGame.Player.TimedPoison > 0)
             {
                 Gui.Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
             }
@@ -2164,25 +2162,25 @@ namespace Cthangband
 
         public void PrtSp()
         {
-            if (_player.Spellcasting.Type == CastingType.None)
+            if (SaveGame.Player.Spellcasting.Type == CastingType.None)
             {
                 return;
             }
             Gui.Print("Max SP ", ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp);
-            string tmp = _player.MaxMana.ToString().PadLeft(5);
+            string tmp = SaveGame.Player.MaxMana.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
             Gui.Print(colour, tmp, ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp + 7);
             Gui.Print("Cur SP ", ScreenLocation.RowCursp, ScreenLocation.ColCursp);
-            tmp = _player.Mana.ToString().PadLeft(5);
-            if (_player.Mana >= _player.MaxMana)
+            tmp = SaveGame.Player.Mana.ToString().PadLeft(5);
+            if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
             {
                 colour = Colour.BrightGreen;
             }
-            else if (_player.Mana > _player.MaxMana * GlobalData.HitpointWarn / 5)
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 5)
             {
                 colour = Colour.BrightYellow;
             }
-            else if (_player.Mana > _player.MaxMana * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 10)
             {
                 colour = Colour.Orange;
             }
@@ -2195,10 +2193,10 @@ namespace Cthangband
 
         public void PrtSpeed()
         {
-            int i = _player.Speed;
+            int i = SaveGame.Player.Speed;
             Colour attr = Colour.White;
             string buf = "";
-            if (_player.IsSearching)
+            if (SaveGame.Player.IsSearching)
             {
                 i += 10;
             }
@@ -2219,19 +2217,19 @@ namespace Cthangband
         public void PrtStat(int stat)
         {
             string tmp;
-            if (_player.AbilityScores[stat].Innate < _player.AbilityScores[stat].InnateMax)
+            if (SaveGame.Player.AbilityScores[stat].Innate < SaveGame.Player.AbilityScores[stat].InnateMax)
             {
                 Gui.Print(GlobalData.StatNamesReduced[stat], ScreenLocation.RowStat + stat, 0);
-                tmp = _player.AbilityScores[stat].Adjusted.StatToString();
+                tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
                 Gui.Print(Colour.Yellow, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
             }
             else
             {
                 Gui.Print(GlobalData.StatNames[stat], ScreenLocation.RowStat + stat, 0);
-                tmp = _player.AbilityScores[stat].Adjusted.StatToString();
+                tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
                 Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
             }
-            if (_player.AbilityScores[stat].InnateMax == 18 + 100)
+            if (SaveGame.Player.AbilityScores[stat].InnateMax == 18 + 100)
             {
                 Gui.Print("!", ScreenLocation.RowStat + stat, 3);
             }
@@ -2241,23 +2239,23 @@ namespace Cthangband
         {
             Colour attr = Colour.White;
             string text;
-            if (_player.TimedParalysis > 0)
+            if (SaveGame.Player.TimedParalysis > 0)
             {
                 attr = Colour.Red;
                 text = "Paralyzed!";
             }
-            else if (SaveGame.Instance.Resting != 0)
+            else if (SaveGame.Resting != 0)
             {
                 text = "Rest ";
-                if (SaveGame.Instance.Resting > 0)
+                if (SaveGame.Resting > 0)
                 {
-                    text += SaveGame.Instance.Resting.ToString().PadLeft(5);
+                    text += SaveGame.Resting.ToString().PadLeft(5);
                 }
-                else if (SaveGame.Instance.Resting == -1)
+                else if (SaveGame.Resting == -1)
                 {
                     text += "*****";
                 }
-                else if (SaveGame.Instance.Resting == -2)
+                else if (SaveGame.Resting == -2)
                 {
                     text += "&&&&&";
                 }
@@ -2266,18 +2264,18 @@ namespace Cthangband
                     text += "?????";
                 }
             }
-            else if (SaveGame.Instance.CommandRepeat != 0)
+            else if (SaveGame.CommandRepeat != 0)
             {
-                if (SaveGame.Instance.CommandRepeat > 999)
+                if (SaveGame.CommandRepeat > 999)
                 {
-                    text = "Rep. " + SaveGame.Instance.CommandRepeat.ToString().PadRight(5);
+                    text = "Rep. " + SaveGame.CommandRepeat.ToString().PadRight(5);
                 }
                 else
                 {
-                    text = "Repeat " + SaveGame.Instance.CommandRepeat.ToString().PadRight(3);
+                    text = "Repeat " + SaveGame.CommandRepeat.ToString().PadRight(3);
                 }
             }
-            else if (_player.IsSearching)
+            else if (SaveGame.Player.IsSearching)
             {
                 text = "Searching ";
             }
@@ -2290,12 +2288,12 @@ namespace Cthangband
 
         public void PrtStudy()
         {
-            Gui.Print(_player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
+            Gui.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
         }
 
         public void PrtStun()
         {
-            int s = _player.TimedStun;
+            int s = SaveGame.Player.TimedStun;
             if (s > 100)
             {
                 Gui.Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);
@@ -2318,19 +2316,19 @@ namespace Cthangband
         {
             Gui.Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
             Gui.Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.colDate);
-            Gui.Print(Colour.BrightGreen, _player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
-            Gui.Print(Colour.BrightGreen, _player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
+            Gui.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
+            Gui.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
         }
 
         public void PrtTitle()
         {
             string p;
-            if (_player.IsWizard)
+            if (SaveGame.Player.IsWizard)
             {
                 p = "-=<WIZARD>=-";
                 PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
             }
-            else if (_player.IsWinner || _player.Level > Constants.PyMaxLevel)
+            else if (SaveGame.Player.IsWinner || SaveGame.Player.Level > Constants.PyMaxLevel)
             {
                 p = "***WINNER***";
                 PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
@@ -2339,7 +2337,7 @@ namespace Cthangband
 
         private int WeightLimit()
         {
-            int i = _player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100;
+            int i = SaveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100;
             return i;
         }
     }
