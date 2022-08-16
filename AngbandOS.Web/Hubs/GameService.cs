@@ -1,8 +1,7 @@
 ﻿using Cthangband;
 using Microsoft.AspNetCore.SignalR;
-using System;
-using System.ComponentModel;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using AngbandOS.PersistentStorage;
+using AngbandOS.PersistentStorage.Sql.Entities;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -11,18 +10,20 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class GameService : IGameService
     {
-        private readonly GameServer2 GameServer;
+        private readonly GameServer GameServer;
 
         /// <summary>
         /// The instance of the in-memory GameServer which manages all of the active games.
         /// </summary>
         private readonly IHubContext<GameHub, IGameHub> GameHub;
         private readonly Dictionary<string, SignalRConsole> Consoles = new Dictionary<string, SignalRConsole>();
+//        private readonly IConfiguration _config;
 
-        public GameService(IHubContext<GameHub, IGameHub> gameHub)
+        public GameService(IConfiguration config, IHubContext<GameHub, IGameHub> gameHub)
         {
+            string connectionString = config["ConnectionString"];
             GameHub = gameHub;
-            GameServer = new GameServer2();
+            GameServer = new GameServer(new AngbandOS.PersistentStorage.SqlPersistentStorage(connectionString));
         }
 
         public string NewGame()

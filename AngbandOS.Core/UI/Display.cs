@@ -2,6 +2,7 @@
 
 namespace Cthangband.UI
 {
+    [Serializable]
     internal class Display
     {
         public readonly Colour AttrBlank;

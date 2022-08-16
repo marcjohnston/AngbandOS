@@ -1,0 +1,68 @@
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.csproj.AssemblyReference.cache
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.AssemblyInfoInputs.cache
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.AssemblyInfo.cs
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.csproj.CoreCompileInputs.cache
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Ability Scores.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Channeler.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Chaos Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Charisma.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Chosen One.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Combat.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Commands.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Constitution.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Corporeal Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Cultist.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Death Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Dexterity.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Druid.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Elements.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Fanatic.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Favour.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Feelings.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Folk Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Great Ones.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\High-Mage.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\History.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Intelligence.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Introduction.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Items.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\License.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Life Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Mage.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Magic Basics.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\manual.css
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Martial Arts.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Mentalism Talents.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Mindcrafter.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Monk.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Mutations.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Mystic.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Nature Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Paladin.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Patrons.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Priest.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Ranger.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Rogue.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Score.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Sorcery Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Strength.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Tarot Spells.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Towns and Shops.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Turns, Time, and Speed.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Warrior-Mage.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Warrior.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\What's New.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\Manual\Wisdom.html
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.SqlPersistentStorage.deps.json
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.SqlPersistentStorage.dll
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.SqlPersistentStorage.pdb
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Core.dll
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Core.pdb
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.csproj.CopyComplete
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.dll
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\refint\AngbandOS.SqlPersistentStorage.dll
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.pdb
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\ref\AngbandOS.SqlPersistentStorage.dll
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.SqlPersistentStorage.runtimeconfig.json
+C:\Users\Marc\Source\Repos\Cthangband\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.SqlPersistentStorage.genruntimeconfig.cache

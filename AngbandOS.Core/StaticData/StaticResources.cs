@@ -18,6 +18,11 @@ namespace Cthangband.StaticData
     [Serializable]
     internal sealed class StaticResources
     {
+        public StaticResources()
+        {
+
+        }
+
         /// <summary>
         /// The singleton instance
         /// </summary>

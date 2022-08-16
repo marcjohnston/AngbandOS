@@ -18,6 +18,7 @@ namespace Cthangband.UI
     /// <summary>
     /// class for user interaction
     /// </summary>
+    [Serializable]
     internal class Gui
     {
         private readonly SaveGame SaveGame;

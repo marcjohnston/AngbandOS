@@ -1,0 +1,97 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "AngbandOS.Interface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AngbandOS.Interface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AngbandOS.Interface.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AngbandOS.Interface/1.0.0": {
+      "type": "project",
+      "path": "../AngbandOS.Interface/AngbandOS.Interface.csproj",
+      "msbuildProject": "../AngbandOS.Interface/AngbandOS.Interface.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "AngbandOS.Interface >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Marc\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj",
+      "projectName": "AngbandOS.PersistentStorage.FileSystem",
+      "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj",
+      "packagesPath": "C:\\Users\\Marc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Marc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {
+              "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Interface\\AngbandOS.Interface.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

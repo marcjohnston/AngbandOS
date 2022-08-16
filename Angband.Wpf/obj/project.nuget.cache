@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Vd6OC0m4zROMO5NtRKA+PEWHp/y0ycdsfp8t9+8cqgGSdLgS+//7FJE7PpBp0rXyVHou/ekUSoBx4W5hIZ1hLw==",
+  "dgSpecHash": "Jbsi+CbCpZ9co32h8SVRC/hnjHL7egf0vEp2qhZ4i0I+11TE7whSrekIy3MY0RLc6QPh93svBOqT68/ci1C3Ew==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\Angband.Wpf.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\AngbandOS.Wpf.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Marc\\.nuget\\packages\\system.text.json\\5.0.1\\system.text.json.5.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

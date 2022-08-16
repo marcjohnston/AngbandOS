@@ -8,6 +8,8 @@
     <SpaProxyServerUrl>https://localhost:44409</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <UserSecretsId>c2144372-5392-4374-ba7e-4a6a4b85ab7f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +32,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.SqlPersistentStorage\AngbandOS.PersistentStorage.Sql.csproj" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

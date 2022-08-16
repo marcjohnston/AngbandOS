@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Angband.Wpf
+namespace AngbandOS.Wpf
 {
     internal static class Constants
     {

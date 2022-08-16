@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Media;
 using Cthangband;
 
-namespace Angband.Wpf
+namespace AngbandOS.Wpf
 {
     public class Mixer
     {

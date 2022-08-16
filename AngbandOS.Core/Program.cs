@@ -10,7 +10,7 @@ using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.UI;
 using System.Runtime.Serialization.Formatters.Binary;
-using Cthangband.PersistentStorage;
+using AngbandOS.Interface;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
@@ -26,23 +26,22 @@ namespace Cthangband
         private static string[] _saveSlot;
         private static Settings _settings;
         private static SaveGame saveGame;
-        public static IPersistentStorage PersistentStorage;
 
-        public static SaveGame LoadOrCreate(string fileName)
-        {
-            FileInfo file = new FileInfo(fileName);
-            Program.PersistentStorage = new NtfsPersistentStorage();
-            if (file.Exists)
-            {
-                return DeserializeFromSaveFolder<SaveGame>(fileName);
-            }
-            else
-            {
-                SaveGame game = new SaveGame(Program.ActiveSaveSlot);
-                game.Initialise();
-                return game;
-            }
-        }
+        //public static SaveGame LoadOrCreate(string fileName)
+        //{
+        //    FileInfo file = new FileInfo(fileName);
+        //    Program.PersistentStorage = new NtfsPersistentStorage();
+        //    if (file.Exists)
+        //    {
+        //        return DeserializeFromSaveFolder<SaveGame>(fileName);
+        //    }
+        //    else
+        //    {
+        //        SaveGame game = new SaveGame(Program.ActiveSaveSlot);
+        //        game.Initialise();
+        //        return game;
+        //    }
+        //}
         //public static void Run(SaveGame Game)
         //{
         //    Game.MsgFlag = false;
@@ -57,90 +56,47 @@ namespace Cthangband
         //    SaveGame.Instance = null;
         //}
 
-        public static string ActiveSaveSlot
-        {
-            get => _activeSaveSlot;
-            private set
-            {
-                _activeSaveSlot = value;
+        //public static string ActiveSaveSlot
+        //{
+        //    get => _activeSaveSlot;
+        //    private set
+        //    {
+        //        _activeSaveSlot = value;
 
-                saveGame = LoadOrCreate(value);
-            }
-        }
+        //        saveGame = LoadOrCreate(value);
+        //    }
+        //}
 
-        public static T DeserializeFromSaveFolder<T>(string filename)
-        {
-            string path = Path.Combine(SaveFolder, filename);
-            FileInfo info = new FileInfo(path);
-            T o;
-            if (!info.Exists)
-            {
-                return default;
-            }
-            using (FileStream stream = info.OpenRead())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                o = (T)formatter.Deserialize(stream);
-                stream.Close();
-            }
-            return o;
-        }
 
-        /// <summary>
-        /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="o"></param>
-        /// <param name="filename"></param>
-        public static void SerializeToSaveFolder<T>(T o, string filename)
-        {
-            string jsonString = JsonSerializer.Serialize(o);
-//            BinaryFormatter formatter = new BinaryFormatter();
-//            MemoryStream memoryStream = new MemoryStream();
-//            formatter.Serialize(memoryStream, o);
-//            memoryStream.Position = 0;
-//            T temp = (T)formatter.Deserialize(memoryStream);
+        //public static bool DirCreate(string path)
+        //{
+        //    // Path might be empty - this is not an error condition
+        //    if (string.IsNullOrEmpty(path))
+        //    {
+        //        return true;
+        //    }
+        //    DirectoryInfo intended = new DirectoryInfo(path);
+        //    // If it already exists, then we're fine
+        //    if (intended.Exists)
+        //    {
+        //        return true;
+        //    }
+        //    intended.Create();
+        //    return true;
+        //}
 
-            //string path = Path.Combine(Program.SaveFolder, filename);
-            //FileInfo info = new FileInfo(path);
-            //using (FileStream stream = info.OpenWrite())
-            //{
-            //    stream.Write(value, 0, value.Length);
-            //    formatter.Serialize(stream, o);
-            //}
-
-            PersistentStorage.Write(jsonString, filename);
-        }
-
-        public static bool DirCreate(string path)
-        {
-            // Path might be empty - this is not an error condition
-            if (string.IsNullOrEmpty(path))
-            {
-                return true;
-            }
-            DirectoryInfo intended = new DirectoryInfo(path);
-            // If it already exists, then we're fine
-            if (intended.Exists)
-            {
-                return true;
-            }
-            intended.Create();
-            return true;
-        }
-
-        public static void GetDefaultFolder()
-        {
-            string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            savePath = Path.Combine(savePath, "My Games");
-            savePath = Path.Combine(savePath, Constants.VersionName);
-            SaveFolder = savePath;
-            _saveSlot = new string[4];
-            for (int i = 0; i < 4; i++)
-            {
-                _saveSlot[i] = Path.Combine(savePath, $"slot{i + 1}.v_{Constants.VersionMajor}_{Constants.VersionMinor}_savefile");
-            }
-        }
+        //public static void GetDefaultFolder()
+        //{
+        //    string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //    savePath = Path.Combine(savePath, "My Games");
+        //    savePath = Path.Combine(savePath, Constants.VersionName);
+        //    SaveFolder = savePath;
+        //    _saveSlot = new string[4];
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        _saveSlot[i] = Path.Combine(savePath, $"slot{i + 1}.v_{Constants.VersionMajor}_{Constants.VersionMinor}_savefile");
+        //    }
+        //}
 
         public static void Quit(string reason)
         {
@@ -156,163 +112,123 @@ namespace Cthangband
             // MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        internal static Dictionary<string, HighScore> GetHighScoreFromSaves()
-        {
-            var saves = new Dictionary<string, HighScore>();
-            for (int i = 0; i < 4; i++)
-            {
-                var score = GetHighScoreFromSave(_saveSlot[i]);
-                if (score != null)
-                {
-                    saves.Add(_saveSlot[i], score);
-                }
-            }
-            return saves;
-        }
+        //private static int ChooseProfile(int saveIndex, string action)
+        //{
+        //    saveGame.Gui.SetBackground(BackgroundImage.Normal);
+        //    saveGame.Gui.Clear();
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        PeekSavefile(_saveSlot[i], i, false);
+        //    }
+        //    saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 1", 5, 15);
+        //    saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 2", 5, 55);
+        //    saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 3", 28, 15);
+        //    saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 4", 28, 55);
+        //    saveGame.Gui.Print(Colour.BrightTurquoise, $"Select a savegame to {action}.".PadCenter(80), 23, 0);
+        //    saveGame.Gui.Refresh();
+        //    saveGame.Gui.Save();
+        //    int displayRow = 0;
+        //    int displayCol = 0;
+        //    while (true)
+        //    {
+        //        saveGame.Gui.Load();
+        //        switch (saveIndex)
+        //        {
+        //            case 0:
+        //                displayRow = 9;
+        //                displayCol = 6;
+        //                break;
 
-        private static int ChooseProfile(int saveIndex, string action)
-        {
-            saveGame.Gui.SetBackground(BackgroundImage.Normal);
-            saveGame.Gui.Clear();
-            for (int i = 0; i < 4; i++)
-            {
-                PeekSavefile(_saveSlot[i], i, false);
-            }
-            saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 1", 5, 15);
-            saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 2", 5, 55);
-            saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 3", 28, 15);
-            saveGame.Gui.Print(Colour.BrightTurquoise, "Savegame 4", 28, 55);
-            saveGame.Gui.Print(Colour.BrightTurquoise, $"Select a savegame to {action}.".PadCenter(80), 23, 0);
-            saveGame.Gui.Refresh();
-            saveGame.Gui.Save();
-            int displayRow = 0;
-            int displayCol = 0;
-            while (true)
-            {
-                saveGame.Gui.Load();
-                switch (saveIndex)
-                {
-                    case 0:
-                        displayRow = 9;
-                        displayCol = 6;
-                        break;
+        //            case 1:
+        //                displayRow = 9;
+        //                displayCol = 46;
+        //                break;
 
-                    case 1:
-                        displayRow = 9;
-                        displayCol = 46;
-                        break;
+        //            case 2:
+        //                displayRow = 31;
+        //                displayCol = 6;
+        //                break;
 
-                    case 2:
-                        displayRow = 31;
-                        displayCol = 6;
-                        break;
+        //            case 3:
+        //                displayRow = 31;
+        //                displayCol = 46;
+        //                break;
+        //        }
+        //        saveGame.Gui.Print(Colour.BrightPurple, "+----------------+", displayRow - 2, displayCol + 5);
+        //        saveGame.Gui.Print(Colour.BrightPurple, "+----------------+", displayRow + 5, displayCol + 5);
+        //        for (int i = -1; i < 5; i++)
+        //        {
+        //            saveGame.Gui.Print(Colour.BrightPurple, "|", displayRow + i, displayCol + 5);
+        //            saveGame.Gui.Print(Colour.BrightPurple, "|", displayRow + i, displayCol + 22);
+        //        }
+        //        saveGame.Gui.HideCursorOnFullScreenInkey = true;
+        //        var c = saveGame.Gui.Inkey();
+        //        if (c == '6' || c == '4')
+        //        {
+        //            switch (saveIndex)
+        //            {
+        //                case 0:
+        //                    saveIndex = 1;
+        //                    break;
 
-                    case 3:
-                        displayRow = 31;
-                        displayCol = 46;
-                        break;
-                }
-                saveGame.Gui.Print(Colour.BrightPurple, "+----------------+", displayRow - 2, displayCol + 5);
-                saveGame.Gui.Print(Colour.BrightPurple, "+----------------+", displayRow + 5, displayCol + 5);
-                for (int i = -1; i < 5; i++)
-                {
-                    saveGame.Gui.Print(Colour.BrightPurple, "|", displayRow + i, displayCol + 5);
-                    saveGame.Gui.Print(Colour.BrightPurple, "|", displayRow + i, displayCol + 22);
-                }
-                saveGame.Gui.HideCursorOnFullScreenInkey = true;
-                var c = saveGame.Gui.Inkey();
-                if (c == '6' || c == '4')
-                {
-                    switch (saveIndex)
-                    {
-                        case 0:
-                            saveIndex = 1;
-                            break;
+        //                case 1:
+        //                    saveIndex = 0;
+        //                    break;
 
-                        case 1:
-                            saveIndex = 0;
-                            break;
+        //                case 2:
+        //                    saveIndex = 3;
+        //                    break;
 
-                        case 2:
-                            saveIndex = 3;
-                            break;
+        //                case 3:
+        //                    saveIndex = 2;
+        //                    break;
+        //            }
+        //        }
+        //        if (c == '8' || c == '2')
+        //        {
+        //            switch (saveIndex)
+        //            {
+        //                case 0:
+        //                    saveIndex = 2;
+        //                    break;
 
-                        case 3:
-                            saveIndex = 2;
-                            break;
-                    }
-                }
-                if (c == '8' || c == '2')
-                {
-                    switch (saveIndex)
-                    {
-                        case 0:
-                            saveIndex = 2;
-                            break;
+        //                case 1:
+        //                    saveIndex = 3;
+        //                    break;
 
-                        case 1:
-                            saveIndex = 3;
-                            break;
+        //                case 2:
+        //                    saveIndex = 0;
+        //                    break;
 
-                        case 2:
-                            saveIndex = 0;
-                            break;
+        //                case 3:
+        //                    saveIndex = 1;
+        //                    break;
+        //            }
+        //        }
+        //        if (c == '\r' || c == ' ')
+        //        {
+        //            return saveIndex;
+        //        }
+        //        if (c == '\x1b')
+        //        {
+        //            return -1;
+        //        }
+        //    }
+        //}
 
-                        case 3:
-                            saveIndex = 1;
-                            break;
-                    }
-                }
-                if (c == '\r' || c == ' ')
-                {
-                    return saveIndex;
-                }
-                if (c == '\x1b')
-                {
-                    return -1;
-                }
-            }
-        }
 
-        private static HighScore GetHighScoreFromSave(string save)
-        {
-            FileInfo file = new FileInfo(save);
-            if (!file.Exists)
-            {
-                return null;
-            }
-            SaveGame tempSaveGame;
-            try
-            {
-                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-            if (tempSaveGame.Player == null)
-            {
-                return null;
-            }
-            if (tempSaveGame.Player.IsWizard)
-            {
-                return null;
-            }
-            return new HighScore(tempSaveGame);
-        }
-
-        private static int LoadGame(int saveIndex)
-        {
-            int choice = ChooseProfile(saveIndex, "load");
-            if (choice >= 0)
-            {
-                if (PeekSavefile(_saveSlot[choice], 0, true))
-                {
-                    return choice;
-                }
-            }
-            return -1;
-        }
+        //private static int LoadGame(int saveIndex)
+        //{
+        //    int choice = ChooseProfile(saveIndex, "load");
+        //    if (choice >= 0)
+        //    {
+        //        if (PeekSavefile(_saveSlot[choice], 0, true))
+        //        {
+        //            return choice;
+        //        }
+        //    }
+        //    return -1;
+        //}
 
         //private static int NewGame(int saveIndex)
         //{
@@ -356,106 +272,106 @@ namespace Cthangband
         //    return -1;
         //}
 
-        private static bool PeekSavefile(string save, int index, bool silently)
-        {
-            int displayRow = 0;
-            int displayCol = 0;
-            switch (index)
-            {
-                case 0:
-                    displayRow = 9;
-                    displayCol = 6;
-                    break;
+        //private static bool PeekSavefile(string save, int index, bool silently)
+        //{
+        //    int displayRow = 0;
+        //    int displayCol = 0;
+        //    switch (index)
+        //    {
+        //        case 0:
+        //            displayRow = 9;
+        //            displayCol = 6;
+        //            break;
 
-                case 1:
-                    displayRow = 9;
-                    displayCol = 46;
-                    break;
+        //        case 1:
+        //            displayRow = 9;
+        //            displayCol = 46;
+        //            break;
 
-                case 2:
-                    displayRow = 31;
-                    displayCol = 6;
-                    break;
+        //        case 2:
+        //            displayRow = 31;
+        //            displayCol = 6;
+        //            break;
 
-                case 3:
-                    displayRow = 31;
-                    displayCol = 46;
-                    break;
-            }
-            FileInfo file = new FileInfo(save);
-            if (!file.Exists)
-            {
-                if (!silently)
-                {
-                    saveGame.Gui.Print(Colour.BrightTurquoise, "<Empty>", displayRow, displayCol + 11);
-                }
-                return false;
-            }
-            SaveGame tempSaveGame;
-            try
-            {
-                tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
-            }
-            catch (Exception ex)
-            {
-                if (!silently)
-                {
-                    saveGame.Gui.Print(Colour.BrightRed, "<Unreadable>", displayRow, displayCol + 8);
-                }
-                return false;
-            }
-            if (silently)
-            {
-                return true;
-            }
-            bool tempDeath = tempSaveGame.Player == null;
-            Colour color;
-            int tempLev;
-            int tempRace;
-            int tempClass;
-            Realm tempRealm;
-            string tempName;
-            if (tempDeath)
-            {
-                color = Colour.Grey;
-                tempLev = tempSaveGame.ExPlayer.Level;
-                tempRace = tempSaveGame.ExPlayer.RaceIndex;
-                tempClass = tempSaveGame.ExPlayer.ProfessionIndex;
-                tempRealm = tempSaveGame.ExPlayer.Realm1;
-                tempName = tempSaveGame.ExPlayer.Name.Trim() + tempSaveGame.ExPlayer.Generation.ToRoman(true);
-            }
-            else
-            {
-                color = Colour.White;
-                if (tempSaveGame.Player.IsWizard)
-                {
-                    color = Colour.Yellow;
-                }
-                tempLev = tempSaveGame.Player.Level;
-                tempRace = tempSaveGame.Player.RaceIndex;
-                tempClass = tempSaveGame.Player.ProfessionIndex;
-                tempRealm = tempSaveGame.Player.Realm1;
-                tempName = tempSaveGame.Player.Name.Trim() + tempSaveGame.Player.Generation.ToRoman(true);
-            }
-            saveGame.Gui.Print(color, tempName, displayRow, displayCol + 14 - (tempName.Length / 2));
-            string tempchar = $"the level {tempLev}";
-            saveGame.Gui.Print(color, tempchar, displayRow + 1, displayCol + 14 - (tempchar.Length / 2));
-            tempchar = Race.RaceInfo[tempRace].Title;
-            saveGame.Gui.Print(color, tempchar, displayRow + 2, displayCol + 14 - (tempchar.Length / 2));
-            tempchar = Profession.ClassSubName(tempClass, tempRealm);
-            saveGame.Gui.Print(color, tempchar, displayRow + 3, displayCol + 14 - (tempchar.Length / 2));
-            if (tempDeath)
-            {
-                tempchar = "(deceased)";
-                saveGame.Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
-            }
-            else if (tempSaveGame.Player.IsWizard)
-            {
-                tempchar = "-=<WIZARD>=-";
-                saveGame.Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
-            }
-            return true;
-        }
+        //        case 3:
+        //            displayRow = 31;
+        //            displayCol = 46;
+        //            break;
+        //    }
+        //    FileInfo file = new FileInfo(save);
+        //    if (!file.Exists)
+        //    {
+        //        if (!silently)
+        //        {
+        //            saveGame.Gui.Print(Colour.BrightTurquoise, "<Empty>", displayRow, displayCol + 11);
+        //        }
+        //        return false;
+        //    }
+        //    SaveGame tempSaveGame;
+        //    try
+        //    {
+        //        tempSaveGame = DeserializeFromSaveFolder<SaveGame>(save);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (!silently)
+        //        {
+        //            saveGame.Gui.Print(Colour.BrightRed, "<Unreadable>", displayRow, displayCol + 8);
+        //        }
+        //        return false;
+        //    }
+        //    if (silently)
+        //    {
+        //        return true;
+        //    }
+        //    bool tempDeath = tempSaveGame.Player == null;
+        //    Colour color;
+        //    int tempLev;
+        //    int tempRace;
+        //    int tempClass;
+        //    Realm tempRealm;
+        //    string tempName;
+        //    if (tempDeath)
+        //    {
+        //        color = Colour.Grey;
+        //        tempLev = tempSaveGame.ExPlayer.Level;
+        //        tempRace = tempSaveGame.ExPlayer.RaceIndex;
+        //        tempClass = tempSaveGame.ExPlayer.ProfessionIndex;
+        //        tempRealm = tempSaveGame.ExPlayer.Realm1;
+        //        tempName = tempSaveGame.ExPlayer.Name.Trim() + tempSaveGame.ExPlayer.Generation.ToRoman(true);
+        //    }
+        //    else
+        //    {
+        //        color = Colour.White;
+        //        if (tempSaveGame.Player.IsWizard)
+        //        {
+        //            color = Colour.Yellow;
+        //        }
+        //        tempLev = tempSaveGame.Player.Level;
+        //        tempRace = tempSaveGame.Player.RaceIndex;
+        //        tempClass = tempSaveGame.Player.ProfessionIndex;
+        //        tempRealm = tempSaveGame.Player.Realm1;
+        //        tempName = tempSaveGame.Player.Name.Trim() + tempSaveGame.Player.Generation.ToRoman(true);
+        //    }
+        //    saveGame.Gui.Print(color, tempName, displayRow, displayCol + 14 - (tempName.Length / 2));
+        //    string tempchar = $"the level {tempLev}";
+        //    saveGame.Gui.Print(color, tempchar, displayRow + 1, displayCol + 14 - (tempchar.Length / 2));
+        //    tempchar = Race.RaceInfo[tempRace].Title;
+        //    saveGame.Gui.Print(color, tempchar, displayRow + 2, displayCol + 14 - (tempchar.Length / 2));
+        //    tempchar = Profession.ClassSubName(tempClass, tempRealm);
+        //    saveGame.Gui.Print(color, tempchar, displayRow + 3, displayCol + 14 - (tempchar.Length / 2));
+        //    if (tempDeath)
+        //    {
+        //        tempchar = "(deceased)";
+        //        saveGame.Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
+        //    }
+        //    else if (tempSaveGame.Player.IsWizard)
+        //    {
+        //        tempchar = "-=<WIZARD>=-";
+        //        saveGame.Gui.Print(color, tempchar, displayRow + 4, displayCol + 14 - (tempchar.Length / 2));
+        //    }
+        //    return true;
+        //}
 
         private static void PrintOptionsScreen()
         {

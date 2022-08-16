@@ -13,7 +13,9 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton(typeof(IGameService), typeof(GameService)); // Maintains active games.
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration["ConnectionString"]; // Connection string is stored as a user secret
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); // Connection string is stored in the appsettings.json file, if desired.
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

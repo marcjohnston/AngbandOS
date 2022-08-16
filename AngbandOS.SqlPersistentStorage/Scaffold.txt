@@ -1,0 +1,2 @@
+﻿Use package manager console, change directories into the AngbandOS.SqlPersistentStorage
+Scaffold-DbContext "Server=;Database=AngbandOS;user=;password=" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Project AngbandOS.PersistentStorage.Sql -force -StartupProject AngbandOS.PersistentStorage.Sql -Context AngbandOSContext -NoOnConfiguring

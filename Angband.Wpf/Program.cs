@@ -1,4 +1,5 @@
-﻿using Cthangband;
+﻿using AngbandOS.PersistentStorage;
+using Cthangband;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Angband.Wpf
+namespace AngbandOS.Wpf
 {
     internal class Program
     {
@@ -64,8 +65,9 @@ namespace Angband.Wpf
                 {
                     Quit($"Cannot create '{SaveFolder}'");
                 }
-                string gameGuid = GameServer.NewGame();
-                GameServer.Play(gameGuid, new MainWindow());
+                GameServer gameServer = new GameServer(new FileSystemPersistentStorage());
+                string gameGuid = gameServer.NewGame();
+                gameServer.Play(gameGuid, new MainWindow());
             }
             catch (Exception ex)
             {

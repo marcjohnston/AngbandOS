@@ -79,7 +79,9 @@ namespace Cthangband
         public bool ViewingEquipment;
         public bool ViewingItemList;
         public List<WandFlavour> WandFlavours;
-        public Gui Gui { get; }
+
+        [NonSerialized]
+        public Gui Gui;
 
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
@@ -2909,7 +2911,7 @@ namespace Cthangband
 
         private void SavePlayer()
         {
-            Program.SerializeToSaveFolder(this, Guid);
+            GameServer.SerializeToSaveFolder(this, Guid);
         }
 
         private bool Verify(string prompt, int item)

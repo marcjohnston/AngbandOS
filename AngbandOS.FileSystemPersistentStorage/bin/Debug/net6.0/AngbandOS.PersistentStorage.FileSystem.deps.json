@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "AngbandOS.PersistentStorage.FileSystem/1.0.0": {
+        "dependencies": {
+          "AngbandOS.Interface": "1.0.0"
+        },
+        "runtime": {
+          "AngbandOS.PersistentStorage.FileSystem.dll": {}
+        }
+      },
+      "AngbandOS.Interface/1.0.0": {
+        "runtime": {
+          "AngbandOS.Interface.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AngbandOS.PersistentStorage.FileSystem/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AngbandOS.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

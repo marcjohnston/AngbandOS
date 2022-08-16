@@ -16,9 +16,9 @@ namespace AngbandOS.Web.Hubs
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
         private readonly IGameHub _gameHub;
         private readonly string Guid;
-        private readonly GameServer2 GameServer;
+        private readonly GameServer GameServer;
 
-        public SignalRConsole(GameServer2 gameServer, IGameHub gameHub, string guid)
+        public SignalRConsole(GameServer gameServer, IGameHub gameHub, string guid)
         {
             Guid = guid;
             _gameHub = gameHub;

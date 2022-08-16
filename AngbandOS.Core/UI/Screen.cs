@@ -9,6 +9,7 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.UI
 {
+    [Serializable]
     internal class Screen
     {
         public readonly int[] A; // Was a pointer to part of va, now an index into it

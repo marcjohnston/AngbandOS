@@ -15,6 +15,7 @@ namespace Cthangband.Terminal
     /// <summary>
     /// A pseudo-terminal
     /// </summary>
+    [Serializable]
     internal class Terminal
     {
         private string _cursorBrushColor;
@@ -22,6 +23,8 @@ namespace Cthangband.Terminal
         private Color _cursorColour;
         private int _cursorRow;
         private bool _cursorVisible;
+
+        [NonSerialized]
         private IConsole _console;
 
         /// <summary>

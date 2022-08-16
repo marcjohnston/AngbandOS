@@ -255,4 +255,16 @@
     <EmbeddedResource Include="Data\WandFlavours.csv" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PersistentStorage\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
+  </ItemGroup>
+
 </Project>

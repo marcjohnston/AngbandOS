@@ -23,7 +23,7 @@ namespace Cthangband
         public HighScoreTable(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            _scores = Program.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
+            _scores = GameServer.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
             ClearScoreFlags();
         }
 
@@ -116,46 +116,47 @@ namespace Cthangband
 
         private List<HighScore> FilterByHighScore(HighScore living)
         {
-            int index = 0;
-            var useScores = InsertFromSaves(Program.ActiveSaveSlot);
-            List<HighScore> list = new List<HighScore>();
-            // Gather all the scores above ours
-            for (int i = 0; i < useScores.Count; i++)
-            {
-                if (useScores[index].Pts >= living.Pts)
-                {
-                    list.Add(useScores[index]);
-                    useScores[index].Index = index + 1;
-                    index++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            StripUnwanted(list);
-            // Add ours
-            list.Add(living);
-            living.Living = true;
-            living.Index = index + 1;
-            // Remove the excess
-            while (list.Count > 6)
-            {
-                list.RemoveAt(0);
-            }
-            int below = 10 - list.Count;
-            // Add some more below (shifting their index by one)
-            for (int i = 0; i < below; i++)
-            {
-                if (index < useScores.Count)
-                {
-                    list.Add(useScores[index]);
-                    useScores[index].Index = index + 2;
-                    index++;
-                }
-            }
-            StripUnwanted(list);
-            return list;
+            return null;
+            //int index = 0;
+            //var useScores = InsertFromSaves(Program.ActiveSaveSlot);
+            //List<HighScore> list = new List<HighScore>();
+            //// Gather all the scores above ours
+            //for (int i = 0; i < useScores.Count; i++)
+            //{
+            //    if (useScores[index].Pts >= living.Pts)
+            //    {
+            //        list.Add(useScores[index]);
+            //        useScores[index].Index = index + 1;
+            //        index++;
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+            //}
+            //StripUnwanted(list);
+            //// Add ours
+            //list.Add(living);
+            //living.Living = true;
+            //living.Index = index + 1;
+            //// Remove the excess
+            //while (list.Count > 6)
+            //{
+            //    list.RemoveAt(0);
+            //}
+            //int below = 10 - list.Count;
+            //// Add some more below (shifting their index by one)
+            //for (int i = 0; i < below; i++)
+            //{
+            //    if (index < useScores.Count)
+            //    {
+            //        list.Add(useScores[index]);
+            //        useScores[index].Index = index + 2;
+            //        index++;
+            //    }
+            //}
+            //StripUnwanted(list);
+            //return list;
         }
 
         private List<HighScore> FilterByScore(int centredScore)
@@ -216,21 +217,22 @@ namespace Cthangband
 
         private List<HighScore> InsertFromSaves(string activeSaveSlot)
         {
-            var list = new List<HighScore>();
-            foreach (var score in _scores)
-            {
-                list.Add(score);
-            }
-            var scoresFromSaves = Program.GetHighScoreFromSaves();
-            var keys = scoresFromSaves.Keys;
-            foreach (var key in keys)
-            {
-                if (key != activeSaveSlot)
-                {
-                    InsertScore(list, scoresFromSaves[key]);
-                }
-            }
-            return list;
+            return null;
+            //var list = new List<HighScore>();
+            //foreach (var score in _scores)
+            //{
+            //    list.Add(score);
+            //}
+            //var scoresFromSaves = GameServer.GetHighScoreFromSaves();
+            //var keys = scoresFromSaves.Keys;
+            //foreach (var key in keys)
+            //{
+            //    if (key != activeSaveSlot)
+            //    {
+            //        InsertScore(list, scoresFromSaves[key]);
+            //    }
+            //}
+            //return list;
         }
 
         private void InsertScore(List<HighScore> list, HighScore score)
@@ -257,8 +259,8 @@ namespace Cthangband
 
         private void Save()
         {
-            ClearScoreFlags();
-            Program.SerializeToSaveFolder(_scores, $"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile");
+            //ClearScoreFlags();
+            //GameServer.SerializeToSaveFolder(_scores, $"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile");
         }
 
         private void ShowScore(HighScore score, int line)

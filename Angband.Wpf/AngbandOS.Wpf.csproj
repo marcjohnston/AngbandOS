@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <StartupObject>Angband.Wpf.Program</StartupObject>
+    <StartupObject>AngbandOS.Wpf.Program</StartupObject>
     <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
@@ -947,6 +947,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
+    <ProjectReference Include="..\AngbandOS.FileSystemPersistentStorage\AngbandOS.PersistentStorage.FileSystem.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
   </ItemGroup>
 
   <ItemGroup>

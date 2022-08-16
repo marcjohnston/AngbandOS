@@ -79,6 +79,7 @@ export class HomeComponent {
         });
       });
 
+      //this.connection.send("play", "96454DEC-6B99-4840-9A79-F2914E7D2760"); //this.gameGuid
       this._httpClient.post<string>(`/apiv1/games`, postNewGame).toPromise().then((guid: string | undefined) => {
         if (guid !== undefined) {
           this.gameGuid = guid;

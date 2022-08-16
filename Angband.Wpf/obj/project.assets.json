@@ -2,28 +2,102 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "System.Text.Json/5.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/System.Text.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/System.Text.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "AngbandOS.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AngbandOS.Interface": "1.0.0",
+          "System.Text.Json": "5.0.1"
+        },
         "compile": {
           "bin/placeholder/AngbandOS.Core.dll": {}
         },
         "runtime": {
           "bin/placeholder/AngbandOS.Core.dll": {}
         }
+      },
+      "AngbandOS.Interface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AngbandOS.Interface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AngbandOS.Interface.dll": {}
+        }
+      },
+      "AngbandOS.PersistentStorage.FileSystem/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AngbandOS.Interface": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AngbandOS.PersistentStorage.FileSystem.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AngbandOS.PersistentStorage.FileSystem.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "System.Text.Json/5.0.1": {
+      "sha512": "/UM3UK1dXKl8Ybysg/21gM4S8DJgkR+yLU8JwqCVbuNqQNImelntgYFAN5QxR8sJJ1kMx//hOUdf0lltosi8cQ==",
+      "type": "package",
+      "path": "system.text.json/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Text.Json.dll",
+        "lib/net461/System.Text.Json.xml",
+        "lib/netcoreapp3.0/System.Text.Json.dll",
+        "lib/netcoreapp3.0/System.Text.Json.xml",
+        "lib/netstandard2.0/System.Text.Json.dll",
+        "lib/netstandard2.0/System.Text.Json.xml",
+        "system.text.json.5.0.1.nupkg.sha512",
+        "system.text.json.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "AngbandOS.Core/1.0.0": {
       "type": "project",
       "path": "../AngbandOS.Core/AngbandOS.Core.csproj",
       "msbuildProject": "../AngbandOS.Core/AngbandOS.Core.csproj"
+    },
+    "AngbandOS.Interface/1.0.0": {
+      "type": "project",
+      "path": "../AngbandOS.Interface/AngbandOS.Interface.csproj",
+      "msbuildProject": "../AngbandOS.Interface/AngbandOS.Interface.csproj"
+    },
+    "AngbandOS.PersistentStorage.FileSystem/1.0.0": {
+      "type": "project",
+      "path": "../AngbandOS.FileSystemPersistentStorage/AngbandOS.PersistentStorage.FileSystem.csproj",
+      "msbuildProject": "../AngbandOS.FileSystemPersistentStorage/AngbandOS.PersistentStorage.FileSystem.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "AngbandOS.Core >= 1.0.0"
+      "AngbandOS.Core >= 1.0.0",
+      "AngbandOS.Interface >= 1.0.0",
+      "AngbandOS.PersistentStorage.FileSystem >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -34,9 +108,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\Angband.Wpf.csproj",
-      "projectName": "Angband.Wpf",
-      "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\Angband.Wpf.csproj",
+      "projectUniqueName": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\AngbandOS.Wpf.csproj",
+      "projectName": "AngbandOS.Wpf",
+      "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\AngbandOS.Wpf.csproj",
       "packagesPath": "C:\\Users\\Marc\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\Angband.Wpf\\obj\\",
       "projectStyle": "PackageReference",
@@ -61,6 +135,12 @@
           "projectReferences": {
             "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Core\\AngbandOS.Core.csproj": {
               "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Core\\AngbandOS.Core.csproj"
+            },
+            "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj": {
+              "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj"
+            },
+            "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {
+              "projectPath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Interface\\AngbandOS.Interface.csproj"
             }
           }
         }
