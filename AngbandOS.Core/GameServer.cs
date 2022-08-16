@@ -14,7 +14,7 @@ namespace Cthangband
 
         internal static T DeserializeFromSaveFolder<T>(string filename)
         {
-            byte[] data = PersistentStorage.ReadGame("marc", filename);
+            byte[] data = PersistentStorage.ReadGame("", filename);
             if (data == null)
             {
                 return default;
@@ -46,7 +46,7 @@ namespace Cthangband
                 IsAlive = !o.Player.IsDead,
                 Comments = ""
             };
-            PersistentStorage.WriteGame("marc", filename, gameDetails, memoryStream.ToArray());
+            PersistentStorage.WriteGame("", filename, gameDetails, memoryStream.ToArray());
         }
 
         public GameServer(IPersistentStorage persistentStorage)
