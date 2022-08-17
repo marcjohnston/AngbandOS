@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AngbandOS.Web.Hubs
 {
+    [Authorize]
     public class GameHub : Hub<IGameHub>
     {
         private readonly GameService GameService;
@@ -17,11 +20,17 @@ namespace AngbandOS.Web.Hubs
         ///// <summary>
         ///// Process the incoming web client request to play a game.
         ///// </summary>
-        ///// <param name="guid"></param>
+        ///// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         ///// <returns></returns>
         public void Play(string guid)
         {
-            GameService.Play(guid, Context.ConnectionId);
+            // We need to ensure the user is authenticated.
+            string? userIdentifier = Context.UserIdentifier;
+
+            if (userIdentifier != null)
+            {
+                GameService.Play(userIdentifier, guid, Context.ConnectionId);
+            }
         }
 
         /// <summary>

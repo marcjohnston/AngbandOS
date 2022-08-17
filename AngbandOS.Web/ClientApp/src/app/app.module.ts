@@ -13,6 +13,7 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayComponent } from './play/play.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,11 @@ import { PlayComponent } from './play/play.component';
     FormsModule,
     ApiAuthorizationModule,
     MatTableModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'play', component: PlayComponent },
-      { path: 'play/:guid', component: PlayComponent },
+      { path: 'play/:guid', component: PlayComponent }
     ]),
     BrowserAnimationsModule
   ],

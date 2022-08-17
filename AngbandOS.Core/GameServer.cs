@@ -7,29 +7,21 @@ namespace Cthangband
 {
     public class GameServer
     {
-        public void Play(string? guid, IConsole console, IPersistentStorage persistentStorage)
+        public void Play(IConsole console, IPersistentStorage persistentStorage)
         {
             SaveGame saveGame;
 
-            // Check to see if this is a new game.
-            if (guid == null)
+            // Retrieve the game from the persistent storage.
+            byte[] data = persistentStorage.ReadGame();
+
+            // The game doesn't exist.  Start a new one.
+            if (data == null)
             {
-                // Generate a new guid for this game.
-                guid = Guid.NewGuid().ToString();
                 StaticResources.LoadOrCreate();
                 saveGame = new SaveGame();
             } 
             else
             {
-                // Retrieve the game from the persistent storage.
-                byte[] data = persistentStorage.ReadGame();
-
-                // The game doesn't exist.
-                if (data == null)
-                {
-                    return;
-                }
-
                 // Deserialize the game.
                 BinaryFormatter formatter = new BinaryFormatter();
                 MemoryStream memoryStream = new MemoryStream(data);

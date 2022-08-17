@@ -2,11 +2,14 @@
 using AngbandOS.PersistentStorage;
 using AngbandOS.Web.Data;
 using AngbandOS.Web.Hubs;
+using AngbandOS.Web.Models;
 using Cthangband;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -16,22 +19,28 @@ namespace AngbandOS.Web.Controllers
     public class GamesController : ControllerBase
     {
         private readonly GameService GameService;
-        //private SqlPersistentStorage SqlPersistentStorage { get; }
         private readonly string ConnectionString;
 
-        public GamesController(IConfiguration config, GameService gameService)
+        public GamesController(
+            IConfiguration config,
+            GameService gameService
+        )
         {
-            //SqlPersistentStorage = sqlPersistentStorage;
             GameService = gameService;
             ConnectionString = config["ConnectionString"];
         }
 
-        [Route("{username}")]
+        private string? GetUserIdentifier => User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<SavedGameDetails> GetSavedGames([FromRoute] string username)
+        public ActionResult<SavedGameDetails> GetSavedGames()
         {
-            return Ok(SavedGames.List(ConnectionString, username));
+            string? userIdentifier = GetUserIdentifier;
+            if (userIdentifier != null)
+                return Ok(SavedGames.List(ConnectionString, userIdentifier));
+            else
+                return Unauthorized();
         }
     }
 }

@@ -10,8 +10,6 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class GameService
     {
-        private readonly GameServer GameServer;
-
         /// <summary>
         /// The instance of the in-memory GameServer which manages all of the active games.
         /// </summary>
@@ -24,24 +22,31 @@ namespace AngbandOS.Web.Hubs
         {
             ConnectionString = config["ConnectionString"];
             GameHub = gameHub;
-            GameServer = new GameServer();
         }
 
         /// <summary>
         /// Initiate game play from the connection for a specific game guid.
         /// </summary>
-        /// <param name="guid"></param>
+        /// <param name="userIdentifier">The user identifier of the connected user.</param>
+        /// <param name="guid">The guid for the game to play.  Null, to start a new game.</param>
         /// <param name="connectionId"></param>
-        public void Play(string? guid, string connectionId)
+        public void Play(string userIdentifier, string? guid, string connectionId)
         {
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
 
+            // Check to see if this is a request for a new game.
+            if (guid == null)
+            {
+                // It is, create a new guid for the game.
+                guid = Guid.NewGuid().ToString();
+            }
+
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            IPersistentStorage persistentStorage = new AngbandOS.PersistentStorage.SqlPersistentStorage(ConnectionString, "marc", guid);
+            IPersistentStorage persistentStorage = new AngbandOS.PersistentStorage.SqlPersistentStorage(ConnectionString, userIdentifier, guid);
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console = new SignalRConsole(GameServer, gameHub, guid, persistentStorage);
+            SignalRConsole console = new SignalRConsole(gameHub, persistentStorage);
 
             // We need to track this game.
             Consoles.Add(connectionId, console);
