@@ -16,12 +16,14 @@ namespace AngbandOS.Web.Controllers
     public class GamesController : ControllerBase
     {
         private readonly GameService GameService;
-        private SqlPersistentStorage SqlPersistentStorage { get; }
+        //private SqlPersistentStorage SqlPersistentStorage { get; }
+        private readonly string ConnectionString;
 
-        public GamesController(SqlPersistentStorage sqlPersistentStorage, GameService gameService)
+        public GamesController(IConfiguration config, GameService gameService)
         {
-            SqlPersistentStorage = sqlPersistentStorage;
+            //SqlPersistentStorage = sqlPersistentStorage;
             GameService = gameService;
+            ConnectionString = config["ConnectionString"];
         }
 
         [Route("{username}")]
@@ -29,7 +31,7 @@ namespace AngbandOS.Web.Controllers
         [AllowAnonymous]
         public ActionResult<SavedGameDetails> GetSavedGames([FromRoute] string username)
         {
-            return Ok(SqlPersistentStorage.ListSavedGames(username));
+            return Ok(SavedGames.List(ConnectionString, username));
         }
     }
 }

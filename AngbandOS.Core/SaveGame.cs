@@ -87,7 +87,6 @@ namespace Cthangband
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
         public const int HurtChance = 16;
-        public string Guid { get; }
 
         [NonSerialized]
         private IPersistentStorage PersistentStorage;
@@ -96,9 +95,8 @@ namespace Cthangband
         /// Creates a new game.
         /// </summary>
         /// <param name="guid"></param>
-        public SaveGame(string guid)
+        public SaveGame()
         {
-            Guid = guid;
             Gui = new Gui(this);
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
@@ -130,24 +128,21 @@ namespace Cthangband
         /// <summary>
         /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="o"></param>
-        /// <param name="filename"></param>
-        internal void SerializeToSaveFolder(SaveGame o, string filename)
+        public void SavePlayer()
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream memoryStream = new MemoryStream();
-            formatter.Serialize(memoryStream, o);
+            formatter.Serialize(memoryStream, this);
             memoryStream.Position = 0;
             GameDetails gameDetails = new GameDetails()
             {
-                CharacterName = o.Player.Name,
-                Level = o.Player.Level,
-                Gold = o.Player.Gold,
-                IsAlive = !o.Player.IsDead,
+                CharacterName = Player.Name,
+                Level = Player.Level,
+                Gold = Player.Gold,
+                IsAlive = !Player.IsDead,
                 Comments = ""
             };
-            PersistentStorage.WriteGame("", filename, gameDetails, memoryStream.ToArray());
+            PersistentStorage.WriteGame(gameDetails, memoryStream.ToArray());
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
@@ -2952,11 +2947,6 @@ namespace Cthangband
                     }
                 }
             }
-        }
-
-        private void SavePlayer()
-        {
-            SerializeToSaveFolder(this, Guid);
         }
 
         private bool Verify(string prompt, int item)

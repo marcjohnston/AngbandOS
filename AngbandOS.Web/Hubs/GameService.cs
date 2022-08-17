@@ -38,7 +38,7 @@ namespace AngbandOS.Web.Hubs
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            IPersistentStorage persistentStorage = new AngbandOS.PersistentStorage.SqlPersistentStorage(ConnectionString);
+            IPersistentStorage persistentStorage = new AngbandOS.PersistentStorage.SqlPersistentStorage(ConnectionString, "marc", guid);
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
             SignalRConsole console = new SignalRConsole(GameServer, gameHub, guid, persistentStorage);

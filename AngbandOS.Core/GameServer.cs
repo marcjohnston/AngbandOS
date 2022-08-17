@@ -17,12 +17,12 @@ namespace Cthangband
                 // Generate a new guid for this game.
                 guid = Guid.NewGuid().ToString();
                 StaticResources.LoadOrCreate();
-                saveGame = new SaveGame(guid);
+                saveGame = new SaveGame();
             } 
             else
             {
                 // Retrieve the game from the persistent storage.
-                byte[] data = persistentStorage.ReadGame("", guid);
+                byte[] data = persistentStorage.ReadGame();
 
                 // The game doesn't exist.
                 if (data == null)

@@ -9,36 +9,33 @@ namespace AngbandOS.PersistentStorage
     /// </summary>
     public class SqlPersistentStorage : IPersistentStorage
     {
+        /// <summary>
+        /// Returns the connection string to the database.
+        /// </summary>
         protected string ConnectionString { get; }
 
-        public SqlPersistentStorage(string connectionString)
+        /// <summary>
+        /// Returns the username to use when reading and writing a saved game to the database.
+        /// </summary>
+        protected string Username { get; }
+
+        /// <summary>
+        /// Returns the guid for the game when reading and writing the saved game to and from the database.
+        /// </summary>
+        protected string GameGuid { get; }
+
+        public SqlPersistentStorage(string connectionString, string username, string guid)
         {
             ConnectionString = connectionString;
+            Username = username;    
+            GameGuid = guid;    
         }
 
-        public SavedGameDetails[] ListSavedGames(string username)
+        public byte[] ReadGame()
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                SavedGameDetails[] savedGames = context.SavedGames.Where(_savedGame => _savedGame.Username == username).Select(_savedGame => new SavedGameDetails()
-                {
-                    CharacterName = _savedGame.CharacterName,
-                    Comments = _savedGame.Comments,
-                    Gold = _savedGame.Gold,
-                    Level = _savedGame.Level,
-                    Guid = _savedGame.Guid.ToString(),
-                    IsAlive = _savedGame.IsAlive,
-                    SavedDateTime = _savedGame.DateTime
-                }).ToArray();
-                return savedGames;
-            }
-        }
-
-        public byte[] ReadGame(string username, string guid)
-        {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
-            {
-                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == username && _savedGame.Guid.ToString() == guid);
+                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
                 if (savedGame == null)
                 {
                     return null;
@@ -47,17 +44,17 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public bool WriteGame(string username, string guid, GameDetails gameDetails, byte[] value)
+        public bool WriteGame(GameDetails gameDetails, byte[] value)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == username && _savedGame.Guid.ToString() == guid);
+                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
                 if (savedGame == null)
                 {
                     savedGame = new SavedGame()
                     {
-                        Username = username,
-                        Guid = Guid.Parse(guid)
+                        Username = Username,
+                        Guid = Guid.Parse(GameGuid)
                     };
                     context.SavedGames.Add(savedGame);
                 }

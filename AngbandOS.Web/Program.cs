@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
-builder.Services.AddSingleton(typeof(SqlPersistentStorage), typeof(AngbandOSSql)); // Controllers that need access to the database can request SqlPersistentStorage and retrieve a scoped AngbandOSSql object.
+//builder.Services.AddSingleton(typeof(SqlPersistentStorage), typeof(AngbandOSSql)); // Controllers that need access to the database can request SqlPersistentStorage and retrieve a scoped AngbandOSSql object.
 
 // Add services to the container.
 var connectionString = builder.Configuration["ConnectionString"]; // Connection string is stored as a user secret
