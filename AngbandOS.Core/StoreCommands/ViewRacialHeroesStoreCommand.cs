@@ -15,9 +15,9 @@ namespace Cthangband.StoreCommands
         public void Execute(SaveGame saveGame, Store store)
         {
             saveGame.Gui.Save();
-            Program.HiScores.RaceFilter = saveGame.Player.RaceIndex;
-            Program.HiScores.DisplayScores(new HighScore(saveGame));
-            Program.HiScores.RaceFilter = -1;
+            //Program.HiScores.RaceFilter = saveGame.Player.RaceIndex;
+            //Program.HiScores.DisplayScores(new HighScore(saveGame));
+            //Program.HiScores.RaceFilter = -1;
             saveGame.Gui.Load();
         }
 

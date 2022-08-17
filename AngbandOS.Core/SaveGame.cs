@@ -114,6 +114,19 @@ namespace Cthangband
             PersistentStorage = persistentStorage;
         }
 
+        public void Quit(string reason)
+        {
+            if (!string.IsNullOrEmpty(reason))
+            {
+                MessageBoxShow(reason);
+            }
+        }
+
+        public void MessageBoxShow(string message)
+        {
+            // MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         /// <summary>
         /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
         /// </summary>
@@ -1271,17 +1284,17 @@ namespace Cthangband
                 {
                     return;
                 }
-                Program.HiScores.InsertNewScore(score);
-                Program.HiScores.DisplayScores(score.Pts);
+                //Program.HiScores.InsertNewScore(score);
+                //Program.HiScores.DisplayScores(score.Pts);
             }
             else
             {
                 DoCmdSaveGame(false);
-                if (!Program.ExitToDesktop)
-                {
-                    Gui.Terminal.PlayMusic(MusicTrack.Menu);
-                    Program.HiScores.DisplayScores(new HighScore(this));
-                }
+                //if (!Program.ExitToDesktop)
+                //{
+                //    Gui.Terminal.PlayMusic(MusicTrack.Menu);
+                //    Program.HiScores.DisplayScores(new HighScore(this));
+                //}
             }
         }
 
@@ -1840,7 +1853,7 @@ namespace Cthangband
             }
             if (num[0] == 0)
             {
-                Program.Quit("No town objects!");
+                Quit("No town objects!");
             }
             AllocKindTable = new AllocationEntry[AllocKindSize];
             for (int k = 0; k < AllocKindSize; k++)
@@ -1886,7 +1899,7 @@ namespace Cthangband
             }
             if (num[0] == 0)
             {
-                Program.Quit("No town monsters!");
+                Quit("No town monsters!");
             }
             AllocRaceTable = new AllocationEntry[AllocRaceSize];
             for (int k = 0; k < AllocRaceSize; k++)

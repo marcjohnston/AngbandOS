@@ -259,7 +259,7 @@ namespace Cthangband.StaticData
                                                     break;
 
                                                 default:
-                                                    Program.MessageBoxShow($"Unrecognised property type: {p.PropertyType.Name}");
+                                                    throw new Exception();
                                                     break;
                                             }
                                         }

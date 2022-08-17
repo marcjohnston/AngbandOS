@@ -36,11 +36,9 @@ namespace Cthangband
                 saveGame = (SaveGame)formatter.Deserialize(memoryStream);
             }
 
-            Settings _settings = new Settings();
-
             // The Gui is non-serialized.  We need to set it.
             saveGame.Gui = new Gui(saveGame);
-            saveGame.Gui.Initialise(_settings, console);
+            saveGame.Gui.Initialise(console);
 
             // The persistent storage is non-serialized.  We need to set it.
             saveGame.SetPersistentStorage(persistentStorage);

@@ -400,7 +400,7 @@ namespace Cthangband.UI
         /// <summary>
         /// Initialises the Gui
         /// </summary>
-        public void Initialise(Settings settings, IConsole console)
+        public void Initialise(IConsole console)
         {
             _terminal = new Terminal.Terminal(console);
             _terminal.Refresh();

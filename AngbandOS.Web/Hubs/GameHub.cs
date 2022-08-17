@@ -7,9 +7,9 @@ namespace AngbandOS.Web.Hubs
 {
     public class GameHub : Hub<IGameHub>
     {
-        private readonly IGameService GameService;
+        private readonly GameService GameService;
 
-        public GameHub(IGameService gameService)
+        public GameHub(GameService gameService)
         {
             GameService = gameService;
         }
