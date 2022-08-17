@@ -1,6 +1,6 @@
 export class SavedGameDetails {
   public guid: string | undefined;
-  public savedDateTime: Date | undefined;
+  public savedDateTime: string | undefined;
   public level: number | undefined;
   public gold: number | undefined;
   public characterName: string | undefined;

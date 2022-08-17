@@ -15,22 +15,13 @@ namespace AngbandOS.Web.Controllers
     [Produces("application/json")]
     public class GamesController : ControllerBase
     {
-        private readonly IGameService GameService;
+        private readonly GameService GameService;
         private SqlPersistentStorage SqlPersistentStorage { get; }
 
-        public GamesController(SqlPersistentStorage sqlPersistentStorage, IGameService gameService)
+        public GamesController(SqlPersistentStorage sqlPersistentStorage, GameService gameService)
         {
             SqlPersistentStorage = sqlPersistentStorage;
             GameService = gameService;
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult<string> PostNewGame([FromBody] PostNewGame postNewGame)
-        {
-            // Request a new game from the game server and return the guid to the client.
-            string guid = GameService.NewGame();
-            return Ok(guid);
         }
 
         [Route("{username}")]

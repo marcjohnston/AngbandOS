@@ -29,6 +29,7 @@ import { PlayComponent } from './play/play.component';
     MatTableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'play', component: PlayComponent },
       { path: 'play/:guid', component: PlayComponent },
     ]),
     BrowserAnimationsModule

@@ -7,6 +7,42 @@
         </th>
         <td mat-cell *matCellDef="let savedGame">{{savedGame.guid}}</td>
       </ng-container>
+      <ng-container matColumnDef="character-name">
+        <th mat-header-cell *matHeaderCellDef>
+          Character Name
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.characterName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="gold">
+        <th mat-header-cell *matHeaderCellDef>
+          Gold
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.gold}}</td>
+      </ng-container>
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef>
+          Level
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.level}}</td>
+      </ng-container>
+      <ng-container matColumnDef="is-alive">
+        <th mat-header-cell *matHeaderCellDef>
+          Is Alive?
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.isAlive}}</td>
+      </ng-container>
+      <ng-container matColumnDef="last-saved">
+        <th mat-header-cell *matHeaderCellDef>
+          Last Saved
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.savedDateTime | date: 'M/d/yy, h:mm a z'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef>
+          Notes
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.comments}}</td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let savedGame; columns: displayedColumns" (click)="onRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
     </table>

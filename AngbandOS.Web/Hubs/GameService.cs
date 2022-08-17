@@ -8,7 +8,7 @@ namespace AngbandOS.Web.Hubs
     /// <summary>
     /// Represents a singleton game service that maintains a GameServer object of all concurrent active games.
     /// </summary>
-    public class GameService : IGameService
+    public class GameService
     {
         private readonly GameServer GameServer;
 
@@ -18,17 +18,13 @@ namespace AngbandOS.Web.Hubs
         private readonly IHubContext<GameHub, IGameHub> GameHub;
         private readonly Dictionary<string, SignalRConsole> Consoles = new Dictionary<string, SignalRConsole>(); // Tracks the console by connection id.
         private readonly Dictionary<SignalRConsole, string> ConnectionIds = new Dictionary<SignalRConsole, string>(); // Tracks the connection id by console.
+        private readonly string ConnectionString;
 
         public GameService(IConfiguration config, IHubContext<GameHub, IGameHub> gameHub)
         {
-            string connectionString = config["ConnectionString"];
+            ConnectionString = config["ConnectionString"];
             GameHub = gameHub;
-            GameServer = new GameServer(new AngbandOS.PersistentStorage.SqlPersistentStorage(connectionString));
-        }
-
-        public string NewGame()
-        {
-            return GameServer.NewGame();
+            GameServer = new GameServer();
         }
 
         /// <summary>
@@ -36,13 +32,16 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="guid"></param>
         /// <param name="connectionId"></param>
-        public void Play(string guid, string connectionId)
+        public void Play(string? guid, string connectionId)
         {
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
 
+            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
+            IPersistentStorage persistentStorage = new AngbandOS.PersistentStorage.SqlPersistentStorage(ConnectionString);
+
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console = new SignalRConsole(GameServer, gameHub, guid);
+            SignalRConsole console = new SignalRConsole(GameServer, gameHub, guid, persistentStorage);
 
             // We need to track this game.
             Consoles.Add(connectionId, console);

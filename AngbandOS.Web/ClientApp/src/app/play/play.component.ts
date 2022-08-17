@@ -98,8 +98,6 @@ export class PlayComponent implements OnInit, OnDestroy {
               var rect = canvas.getBoundingClientRect();
               canvas.width = rect.width * dpr;
               canvas.height = rect.height * dpr;
-              //canvas.style.width = canvas.width;
-              //canvas.style.height = canvas.height;
               const context: CanvasRenderingContext2D = canvas.getContext('2d');
               context.clearRect(0, 0, rect.width, rect.height);
             }

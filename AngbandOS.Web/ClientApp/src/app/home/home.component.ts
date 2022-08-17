@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
   public readonly connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub").build();
   public savedGames: SavedGameDetails[] | undefined = undefined;
-  public displayedColumns: string[] = ['guid'];
+  public displayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "notes"];
   public selectedSavedGame: SavedGameDetails | null = null;
 
   constructor(
@@ -41,14 +41,14 @@ export class HomeComponent implements OnInit {
   }
 
   public onNewGame() {
-    const postNewGame: PostNewGame = {
-      username: "marc"
-    };
-    this._httpClient.post<string>(`/apiv1/games`, postNewGame).toPromise().then((guid: string | undefined) => {
-      if (guid !== undefined) {
-        this._router.navigate(['/play', guid]);
-      }
-    }, (error: HttpErrorResponse) => {
-    });
+    //const postNewGame: PostNewGame = {
+    //  username: "marc"
+    //};
+    //this._httpClient.post<string>(`/apiv1/games`, postNewGame).toPromise().then((guid: string | undefined) => {
+    //  if (guid !== undefined) {
+        this._router.navigate(['/play']);
+    //  }
+    //}, (error: HttpErrorResponse) => {
+    //});
   }
 }

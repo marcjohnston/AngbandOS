@@ -12,7 +12,7 @@ using AngbandOS.PersistentStorage;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 
-builder.Services.AddSingleton(typeof(IGameService), typeof(GameService)); // Maintains active games.
+builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
 builder.Services.AddSingleton(typeof(SqlPersistentStorage), typeof(AngbandOSSql)); // Controllers that need access to the database can request SqlPersistentStorage and retrieve a scoped AngbandOSSql object.
 
 // Add services to the container.

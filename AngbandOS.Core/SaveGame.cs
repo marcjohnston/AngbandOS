@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Interface;
 using Cthangband.ActivationPowers;
 using Cthangband.Commands;
 using Cthangband.Debug;
@@ -88,6 +89,13 @@ namespace Cthangband
         public const int HurtChance = 16;
         public string Guid { get; }
 
+        [NonSerialized]
+        private IPersistentStorage PersistentStorage;
+
+        /// <summary>
+        /// Creates a new game.
+        /// </summary>
+        /// <param name="guid"></param>
         public SaveGame(string guid)
         {
             Guid = guid;
@@ -99,6 +107,34 @@ namespace Cthangband
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitialiseAllocationTables();
+        }
+
+        public void SetPersistentStorage(IPersistentStorage persistentStorage)
+        {
+            PersistentStorage = persistentStorage;
+        }
+
+        /// <summary>
+        /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="o"></param>
+        /// <param name="filename"></param>
+        internal void SerializeToSaveFolder(SaveGame o, string filename)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream();
+            formatter.Serialize(memoryStream, o);
+            memoryStream.Position = 0;
+            GameDetails gameDetails = new GameDetails()
+            {
+                CharacterName = o.Player.Name,
+                Level = o.Player.Level,
+                Gold = o.Player.Gold,
+                IsAlive = !o.Player.IsDead,
+                Comments = ""
+            };
+            PersistentStorage.WriteGame("", filename, gameDetails, memoryStream.ToArray());
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
@@ -2907,7 +2943,7 @@ namespace Cthangband
 
         private void SavePlayer()
         {
-            GameServer.SerializeToSaveFolder(this, Guid);
+            SerializeToSaveFolder(this, Guid);
         }
 
         private bool Verify(string prompt, int item)

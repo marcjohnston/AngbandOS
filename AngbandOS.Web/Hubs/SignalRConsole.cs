@@ -5,6 +5,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System;
 using System.Collections.Concurrent;
+using AngbandOS.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -18,19 +19,21 @@ namespace AngbandOS.Web.Hubs
         private readonly IGameHub _gameHub;
         private readonly string Guid;
         private readonly GameServer GameServer;
+        private readonly IPersistentStorage PersistentStorage;
 
-        public SignalRConsole(GameServer gameServer, IGameHub gameHub, string guid)
+        public SignalRConsole(GameServer gameServer, IGameHub gameHub, string guid, IPersistentStorage persistentStorage)
         {
             Guid = guid;
             _gameHub = gameHub;
             GameServer = gameServer;
+            PersistentStorage = persistentStorage;
         }
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            GameServer.Play(Guid, this);
+            GameServer.Play(Guid, this, PersistentStorage);
 
             // The game is over.  Let the client know.
             _gameHub.GameOver();
