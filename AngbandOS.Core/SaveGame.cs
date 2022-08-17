@@ -98,6 +98,7 @@ namespace Cthangband
             Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
+            InitialiseAllocationTables();
         }
 
         internal delegate bool ItemFilterDelegate(Item item);
@@ -798,11 +799,6 @@ namespace Cthangband
         {
             TrackedMonsterIndex = mIdx;
             Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-        }
-
-        public void Initialise()
-        {
-            InitialiseAllocationTables();
         }
 
         public void MonsterDeath(int mIdx)

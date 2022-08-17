@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Interface
+﻿namespace AngbandOS.PersistentStorage
 {
     public class SavedGameDetails
     {

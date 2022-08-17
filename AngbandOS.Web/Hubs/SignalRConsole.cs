@@ -9,7 +9,8 @@ using System.Collections.Concurrent;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a console interface to accept messages from an active game and send the message via a SignalR hub.
+    /// Represents a console interface to accept messages from an active game and send the message via a SignalR hub.  This class operates 
+    /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
     {
@@ -27,7 +28,12 @@ namespace AngbandOS.Web.Hubs
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
+            // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
+            // IConsole to receive and process print and wait for key requests.
             GameServer.Play(Guid, this);
+
+            // The game is over.  Let the client know.
+            _gameHub.GameOver();
         }
 
         public void Clear()

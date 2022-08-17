@@ -4,15 +4,21 @@
   display: flex;
   flex-direction: column;
 
-  & #canvas-container {
+  table {
     width: 100%;
-    height: 100%;
 
-    & canvas {
-      border: 1px solid black;
-      background-color: black;
-      width: 100%;
-      height: 100%;
+    & [mat-cell] {
+      vertical-align: top;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    & .highlight {
+      background-color: yellow;
+    }
+
+    & [mat-row]:hover {
+      background-color: yellow;
     }
   }
 }

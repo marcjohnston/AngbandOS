@@ -1,7 +1,15 @@
 <div id="container">
-  <h3>ConnectionId: {{connectionId}}</h3>
-  <h3>Game Guid: {{gameGuid}}</h3>
-  <div #canvasContainer id="canvas-container" (keydown)="onKeyDown($event)">
-    <canvas #console (keypress)="onKeyDown($event)"></canvas>
-  </div>
+  <ng-container *ngIf="savedGames !== undefined">
+    <table mat-table [dataSource]="savedGames">
+      <ng-container matColumnDef="guid">
+        <th mat-header-cell *matHeaderCellDef>
+          Guid
+        </th>
+        <td mat-cell *matCellDef="let savedGame">{{savedGame.guid}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let savedGame; columns: displayedColumns" (click)="onRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
+    </table>
+  </ng-container>
+  <button (click)="onNewGame()">New Game</button>
 </div>

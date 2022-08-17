@@ -1,5 +1,8 @@
 ﻿namespace AngbandOS.Interface
 {
+    /// <summary>
+    /// Represents additional game details that can be saved alongside the game data.
+    /// </summary>
     public class GameDetails
     {
         public int Level { get; set; }

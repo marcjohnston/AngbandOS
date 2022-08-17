@@ -1,0 +1,24 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #canvas-container {
+    width: 100%;
+    height: 100%;
+
+    & canvas {
+      background-color: black;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  & #footer {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 8pt;
+  }
+}

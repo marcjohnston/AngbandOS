@@ -12,20 +12,6 @@ namespace Cthangband
         private static IPersistentStorage PersistentStorage;
         private Dictionary<string, SaveGame> saveGameDictionary = new Dictionary<string, SaveGame>();
 
-        internal static T DeserializeFromSaveFolder<T>(string filename)
-        {
-            byte[] data = PersistentStorage.ReadGame("", filename);
-            if (data == null)
-            {
-                return default;
-            }
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream memoryStream = new MemoryStream(data);
-            T o = (T)formatter.Deserialize(memoryStream);
-            return o;
-        }
-
         /// <summary>
         /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
         /// </summary>
@@ -59,7 +45,6 @@ namespace Cthangband
             string guid = Guid.NewGuid().ToString();
             StaticResources.LoadOrCreate();
             SaveGame saveGame = new SaveGame(guid);
-            saveGame.Initialise();
             saveGameDictionary.Add(guid, saveGame);
             return guid;
         }
@@ -68,7 +53,15 @@ namespace Cthangband
         {
             if (!saveGameDictionary.TryGetValue(guid, out SaveGame? saveGame))
             {
-                saveGame = DeserializeFromSaveFolder<SaveGame>(guid);
+                byte[] data = PersistentStorage.ReadGame("", guid);
+                if (data == null)
+                {
+                    return;
+                }
+
+                BinaryFormatter formatter = new BinaryFormatter();
+                MemoryStream memoryStream = new MemoryStream(data);
+                saveGame = (SaveGame)formatter.Deserialize(memoryStream);
                 saveGameDictionary.Add(guid, saveGame);
             }
             Settings _settings = new Settings();

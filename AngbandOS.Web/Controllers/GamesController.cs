@@ -1,4 +1,7 @@
-﻿using AngbandOS.Web.Hubs;
+﻿using AngbandOS.Interface;
+using AngbandOS.PersistentStorage;
+using AngbandOS.Web.Data;
+using AngbandOS.Web.Hubs;
 using Cthangband;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,9 +16,11 @@ namespace AngbandOS.Web.Controllers
     public class GamesController : ControllerBase
     {
         private readonly IGameService GameService;
+        private SqlPersistentStorage SqlPersistentStorage { get; }
 
-        public GamesController(IGameService gameService)
+        public GamesController(SqlPersistentStorage sqlPersistentStorage, IGameService gameService)
         {
+            SqlPersistentStorage = sqlPersistentStorage;
             GameService = gameService;
         }
 
@@ -28,12 +33,12 @@ namespace AngbandOS.Web.Controllers
             return Ok(guid);
         }
 
-        [Route("{guid}")]
-        [HttpPost]
+        [Route("{username}")]
+        [HttpGet]
         [AllowAnonymous]
-        public ActionResult<string> GetExistingGameToContinue(string guid)
+        public ActionResult<SavedGameDetails> GetSavedGames([FromRoute] string username)
         {
-            return Ok();
+            return Ok(SqlPersistentStorage.ListSavedGames(username));
         }
     }
 }

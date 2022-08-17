@@ -260,10 +260,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PersistentStorage\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
   </ItemGroup>
 

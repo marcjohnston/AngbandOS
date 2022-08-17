@@ -22,9 +22,9 @@ namespace Cthangband
 
         public HighScoreTable(SaveGame saveGame)
         {
-            SaveGame = saveGame;
-            _scores = GameServer.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
-            ClearScoreFlags();
+            //SaveGame = saveGame;
+            //_scores = GameServer.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
+            //ClearScoreFlags();
         }
 
         public int Count => _scores.Count;

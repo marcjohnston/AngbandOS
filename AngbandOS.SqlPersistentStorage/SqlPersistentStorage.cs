@@ -1,28 +1,12 @@
 ﻿using AngbandOS.Interface;
 using AngbandOS.PersistentStorage.Sql.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace AngbandOS.PersistentStorage
 {
-    public class AngbandOSSqlContext : AngbandOSContext
-    {
-        protected string ConnectionString { get; }
-
-        public AngbandOSSqlContext(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(ConnectionString);
-            }
-        }
-    }
-
-    [Serializable]
+    /// <summary>
+    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
+    /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
+    /// </summary>
     public class SqlPersistentStorage : IPersistentStorage
     {
         protected string ConnectionString { get; }
@@ -36,8 +20,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                SavedGame[] savedGames = context.SavedGames.Where(_savedGame => _savedGame.Username == username).ToArray();
-                return savedGames.Select(_savedGame => new SavedGameDetails()
+                SavedGameDetails[] savedGames = context.SavedGames.Where(_savedGame => _savedGame.Username == username).Select(_savedGame => new SavedGameDetails()
                 {
                     CharacterName = _savedGame.CharacterName,
                     Comments = _savedGame.Comments,
@@ -47,6 +30,7 @@ namespace AngbandOS.PersistentStorage
                     IsAlive = _savedGame.IsAlive,
                     SavedDateTime = _savedGame.DateTime
                 }).ToArray();
+                return savedGames;
             }
         }
 

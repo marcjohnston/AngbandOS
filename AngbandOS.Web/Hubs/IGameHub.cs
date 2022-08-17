@@ -2,20 +2,16 @@
 
 namespace AngbandOS.Web.Hubs
 {
+    /// <summary>
+    /// Represents an interface that defines the outgoing methods that the game can send through the Signal-R connection.
+    /// </summary>
     public interface IGameHub
     {
         /// <summary>
-        /// Incoming web client request to play a game.
-        /// </summary>
-        /// <param name="guid"></param>
-        /// <returns></returns>
-        Task Play(string guid);
-
-        /// <summary>
-        /// Incoming message from a web client of a keypress.
+        /// Outgoing message to a web client that the game is over.
         /// </summary>
         /// <returns></returns>
-        Task Keypressed(string c);
+        Task GameOver();
 
         /// <summary>
         /// Outgoing message to a web client to set the background color for a screen position.

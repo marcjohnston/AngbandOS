@@ -1,5 +1,8 @@
 ﻿namespace AngbandOS.Interface
 {
+    /// <summary>
+    /// Represents an interface that provides read and write functionailty for saved games.
+    /// </summary>
     public interface IPersistentStorage
     {
         /// <summary>
@@ -19,7 +22,5 @@
         /// <param name="value">The save game to write.</param>
         /// <returns></returns>
         bool WriteGame(string username, string guid, GameDetails gameDetails, byte[] value);
-
-        SavedGameDetails[] ListSavedGames(string username);
     }
 }

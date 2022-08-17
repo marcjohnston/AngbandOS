@@ -31,9 +31,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
     <ProjectReference Include="..\AngbandOS.SqlPersistentStorage\AngbandOS.PersistentStorage.Sql.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\home\saved-game-details.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
