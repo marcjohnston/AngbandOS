@@ -128,7 +128,8 @@ namespace Cthangband
         /// <summary>
         /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
         /// </summary>
-        public void SavePlayer()
+        /// <param name="player">The player to save.  If the player is dead (Player == null), then this should be the corpse.</param>
+        public void SavePlayer(Player player)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream memoryStream = new MemoryStream();
@@ -136,10 +137,10 @@ namespace Cthangband
             memoryStream.Position = 0;
             GameDetails gameDetails = new GameDetails()
             {
-                CharacterName = Player.Name,
-                Level = Player.Level,
-                Gold = Player.Gold,
-                IsAlive = !Player.IsDead,
+                CharacterName = player.Name, // The player parameter
+                Level = player.Level, // The player parameter
+                Gold = player.Gold, // The parameter
+                IsAlive = Player != null, // If the player is dead, then the savegame Player will be null.
                 Comments = ""
             };
             PersistentStorage.WriteGame(gameDetails, memoryStream.ToArray());
@@ -540,7 +541,7 @@ namespace Cthangband
             HandleStuff();
             Gui.Refresh();
             DiedFrom = "(saved)";
-            SavePlayer();
+            SavePlayer(Player);
             Gui.Refresh();
             DiedFrom = "(alive and well)";
         }
@@ -1273,7 +1274,7 @@ namespace Cthangband
                 Player corpse = Player;
                 HighScore score = new HighScore(this);
                 Player = null;
-                SavePlayer();
+                SavePlayer(corpse);
                 PrintTomb(corpse);
                 if (corpse.IsWizard)
                 {

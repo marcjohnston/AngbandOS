@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.SignalR;
 using AngbandOS.Web.Hubs;
 using AngbandOS.Interface;
 using AngbandOS.PersistentStorage;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using AngbandOS.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
-//builder.Services.AddSingleton(typeof(SqlPersistentStorage), typeof(AngbandOSSql)); // Controllers that need access to the database can request SqlPersistentStorage and retrieve a scoped AngbandOSSql object.
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Add services to the container.
 var connectionString = builder.Configuration["ConnectionString"]; // Connection string is stored as a user secret
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); // Connection string is stored in the appsettings.json file, if desired.
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

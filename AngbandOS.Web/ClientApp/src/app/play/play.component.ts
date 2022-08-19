@@ -35,6 +35,22 @@ export class PlayComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  //@HostListener('window:resize', ['$event'])
+  //public onResize(event: any) {
+  //  this._zone.run(() => {
+  //    if (this.canvasRef !== undefined) {
+  //      const canvas = this.canvasRef.nativeElement;
+  //      var dpr = window.devicePixelRatio || 1;
+  //      var rect = canvas.getBoundingClientRect();
+  //    //  canvas.width = 80 * 18; // rect.width * dpr;
+  //    //  canvas.height = 45 * 18; // rect.height * dpr;
+  //    //  canvas.style.width = 80 * 18;
+  //    //  canvas.style.height = 45 * 18;
+  //    //  canvas.style.aspectRatio = 1;
+  //    }
+  //  });
+  //}
+
   @HostListener('window:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent) {
     if (this.connection) {
@@ -73,7 +89,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         case "Escape":
           this.connection.send("keypressed", '\x1B');
           break;
-        case "Ctrl":
+        case "Control":
         case "Alt":
         case "Shift":
           break;
@@ -83,6 +99,35 @@ export class PlayComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+//  private getObjectFitSize(
+//    contains: boolean /* true = contain, false = cover */,
+//    containerWidth: number,
+//    containerHeight: number,
+//    width : number,
+//    height: number
+//  ) {
+//  var doRatio = width / height;
+//  var cRatio = containerWidth / containerHeight;
+//  var targetWidth = 0;
+//  var targetHeight = 0;
+//  var test = contains ? doRatio > cRatio : doRatio < cRatio;
+
+//  if (test) {
+//    targetWidth = containerWidth;
+//    targetHeight = targetWidth / doRatio;
+//  } else {
+//    targetHeight = containerHeight;
+//    targetWidth = targetHeight * doRatio;
+//  }
+
+//  return {
+//    width: targetWidth,
+//    height: targetHeight,
+//    x: (containerWidth - targetWidth) / 2,
+//    y: (containerHeight - targetHeight) / 2
+//  };
+//}
 
   check() {
     if (this.connection !== undefined && this.gameGuid !== undefined) {
@@ -100,9 +145,22 @@ export class PlayComponent implements OnInit, OnDestroy {
                 const canvas = this.canvasRef.nativeElement;
                 var dpr = window.devicePixelRatio || 1;
                 var rect = canvas.getBoundingClientRect();
-                canvas.width = rect.width * dpr;
-                canvas.height = rect.height * dpr;
+                //const dimensions = this.getObjectFitSize(
+                //  true,
+                //  canvas.clientWidth,
+                //  canvas.clientHeight,
+                //  canvas.width,
+                //  canvas.height
+                //);
+                //canvas.width = dimensions.width;
+                //canvas.height = dimensions.height;
+                //canvas.width = 80 * 18; // rect.width * dpr;
+                //canvas.height = 45 * 18; // rect.height * dpr;
+                //canvas.style.width = 80 * 18;
+                //canvas.style.height = 45 * 18;
+                //canvas.style.aspectRatio = 1;
                 const context: CanvasRenderingContext2D = canvas.getContext('2d');
+                //context.scale(1, 1);
                 context.clearRect(0, 0, rect.width, rect.height);
               }
             });
@@ -111,10 +169,12 @@ export class PlayComponent implements OnInit, OnDestroy {
             this._zone.run(() => {
               if (this.canvasRef !== undefined) {
                 const canvas = this.canvasRef.nativeElement;
+                canvas.style.width = 1440;
+                canvas.style.height = 810;
                 const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                var rect = canvas.getBoundingClientRect();
                 this.charSize = 18;
                 context.clearRect(col * this.charSize, row * this.charSize, text.length * this.charSize, this.charSize);
+                context.imageSmoothingEnabled = false;
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
                 context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB

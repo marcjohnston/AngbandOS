@@ -29,9 +29,9 @@
         </ng-container>
         <ng-container matColumnDef="is-alive">
           <th mat-header-cell *matHeaderCellDef>
-            Is Alive?
+            Health
           </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.isAlive}}</td>
+          <td mat-cell *matCellDef="let savedGame">{{savedGame.isAlive ? "Alive and well" : "Dead"}}</td>
         </ng-container>
         <ng-container matColumnDef="last-saved">
           <th mat-header-cell *matHeaderCellDef>
