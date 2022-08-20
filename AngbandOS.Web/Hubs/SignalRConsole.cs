@@ -68,10 +68,16 @@ namespace AngbandOS.Web.Hubs
             _gameHub.SetBackground(image);
         }
 
-        public void SetCellBackground(int row, int col, string color)
+        public void SetCellBackground(int row, int col, char c, string color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
-            _gameHub.SetCellBackground(row, col, color);
+            _gameHub.SetCellBackground(row, col, c, color);
+        }
+
+        public void UnsetCellBackground(int row, int col, char c, string color)
+        {
+            // Forward the set cell background command from the game to the signal-r hub.
+            _gameHub.UnsetCellBackground(row, col, c, color);
         }
 
         /// <summary>

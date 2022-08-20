@@ -34,8 +34,16 @@ namespace AngbandOS.Web
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Credentials = new NetworkCredential(SmtpAccount, SmtpPassword)
             };
+            MailMessage mailMessage = new MailMessage()
+            {
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = htmlMessage,
+                From = new MailAddress(SmtpAccount, SmtpFromName),
+            };
+            mailMessage.To.Add(new MailAddress(email));
 
-            return client.SendMailAsync($"{SmtpFromName}<{SmtpAccount}>", email, subject, htmlMessage);
+            return client.SendMailAsync(mailMessage);
         }
     }
 }

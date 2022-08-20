@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Color = System.Drawing.Color;
 
@@ -20,7 +21,6 @@ namespace Cthangband.Terminal
     {
         private string _cursorBrushColor;
         private int _cursorCol;
-        private Color _cursorColour;
         private int _cursorRow;
         private bool _cursorVisible;
 
@@ -56,7 +56,7 @@ namespace Cthangband.Terminal
         /// <summary>
         /// Sets or returns the column in which the cursor lies
         /// </summary>
-        public int CursorCol
+        private int CursorCol
         {
             get => _cursorCol;
             set
@@ -65,7 +65,7 @@ namespace Cthangband.Terminal
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, null);
+                   //     _console.SetCellBackground(CursorRow, CursorCol, null);
                     }
                 }
                 _cursorCol = value;
@@ -73,7 +73,7 @@ namespace Cthangband.Terminal
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
+               //         _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
                     }
                 }
             }
@@ -85,29 +85,9 @@ namespace Cthangband.Terminal
         }
 
         /// <summary>
-        /// Sets or returns the colour of the cursor
-        /// </summary>
-        public Color CursorColour
-        {
-            get => _cursorColour;
-            set
-            {
-                _cursorColour = value;
-                _cursorBrushColor = ToHex(value);
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-                        _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Sets or returns the row in which the cursor lies
         /// </summary>
-        public int CursorRow
+        private int CursorRow
         {
             get => _cursorRow;
             set
@@ -116,7 +96,7 @@ namespace Cthangband.Terminal
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, null);
+              //          _console.SetCellBackground(CursorRow, CursorCol, null);
                     }
                 }
                 _cursorRow = value;
@@ -124,10 +104,20 @@ namespace Cthangband.Terminal
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
+             //           _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
                     }
                 }
             }
+        }
+
+        public void ShowCursor(int row, int col, char c, Color color)
+        {
+            _console.SetCellBackground(row, col, c, ToHex(color));
+        }
+
+        public void HideCursor(int row, int col, char c, Color color)
+        {
+            _console.UnsetCellBackground(row, col, c, ToHex(color));
         }
 
         /// <summary>
@@ -143,14 +133,14 @@ namespace Cthangband.Terminal
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
+               //         _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
                     }
                 }
                 else
                 {
                     if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
                     {
-                        _console.SetCellBackground(CursorRow, CursorCol, null);
+             //           _console.SetCellBackground(CursorRow, CursorCol, null);
                     }
                 }
             }

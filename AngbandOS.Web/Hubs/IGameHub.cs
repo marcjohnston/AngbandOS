@@ -20,7 +20,8 @@ namespace AngbandOS.Web.Hubs
         /// <param name="col"></param>
         /// <param name="color"></param>
         /// <returns></returns>
-        Task SetCellBackground(int row, int col, string color);
+        Task SetCellBackground(int row, int col, char c, string color);
+        Task UnsetCellBackground(int row, int col, char c, string color);
 
         /// <summary>
         /// Outgoing message to a web client to clear the screen.

@@ -17,7 +17,7 @@ namespace Cthangband.UI
         public readonly Colour[] Va;
         public readonly char[] Vc;
         public bool Cu;
-        public bool Cv;
+        public bool CursorVisible;
         public int Cx;
         public int Cy;
 
@@ -51,7 +51,7 @@ namespace Cthangband.UI
             Cx = f.Cx;
             Cy = f.Cy;
             Cu = f.Cu;
-            Cv = f.Cv;
+            CursorVisible = f.CursorVisible;
         }
     }
 }

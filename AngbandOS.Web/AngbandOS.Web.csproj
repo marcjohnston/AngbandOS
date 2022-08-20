@@ -33,6 +33,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
+    <None Remove="TemplateProcessing\ConfirmEmail.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TemplateProcessing\ConfirmEmail.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

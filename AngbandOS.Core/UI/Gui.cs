@@ -66,8 +66,8 @@ namespace Cthangband.UI
         /// </summary>
         public bool CursorVisible
         {
-            get => _display.Scr.Cv;
-            set => _display.Scr.Cv = value;
+            get => _display.Scr.CursorVisible;
+            set => _display.Scr.CursorVisible = value;
         }
 
         public Terminal.Terminal Terminal
@@ -404,7 +404,6 @@ namespace Cthangband.UI
         {
             _terminal = new Terminal.Terminal(console);
             _terminal.Refresh();
-            _terminal.CursorColour = Color.SkyBlue;
             ColorData.Add(Colour.Background, Color.Black);
             ColorData.Add(Colour.Black, Color.DarkSlateGray);
             ColorData.Add(Colour.Grey, Color.DimGray);
@@ -779,7 +778,7 @@ namespace Cthangband.UI
             int y2 = _display.Y2;
             Screen old = _display.Old;
             Screen scr = _display.Scr;
-            if (y1 > y2 && scr.Cu == old.Cu && scr.Cv == old.Cv && scr.Cx == old.Cx && scr.Cy == old.Cy &&
+            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy &&
                 !_display.TotalErase)
             {
                 return;
@@ -789,7 +788,7 @@ namespace Cthangband.UI
                 Colour na = _display.AttrBlank;
                 char nc = _display.CharBlank;
                 _terminal.Clear();
-                old.Cv = false;
+                old.CursorVisible = false;
                 old.Cu = false;
                 old.Cx = 0;
                 old.Cy = 0;
@@ -812,8 +811,10 @@ namespace Cthangband.UI
                 }
                 _display.TotalErase = false;
             }
-            if (scr.Cu || !scr.Cv)
+            if (scr.Cu || !scr.CursorVisible)
             {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
                 _terminal.CursorVisible = false;
             }
             if (y1 <= y2)
@@ -836,21 +837,29 @@ namespace Cthangband.UI
                 if (scr.Cu)
                 {
                     _terminal.Goto(scr.Cy, w - 1);
+                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
                     _terminal.CursorVisible = false;
                 }
-                else if (!scr.Cv)
+                else if (!scr.CursorVisible)
                 {
                     _terminal.Goto(scr.Cy, scr.Cx);
+                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
                     _terminal.CursorVisible = false;
                 }
                 else
                 {
                     _terminal.Goto(scr.Cy, scr.Cx);
+                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
+                    scrCc = _display.Scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
+                    _terminal.ShowCursor(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ColorData[_display.Scr.Va[scrCc + scr.Cx]]);
                     _terminal.CursorVisible = true;
                 }
             }
             old.Cu = scr.Cu;
-            old.Cv = scr.Cv;
+            old.CursorVisible = scr.CursorVisible;
             old.Cx = scr.Cx;
             old.Cy = scr.Cy;
             _terminal.Refresh();

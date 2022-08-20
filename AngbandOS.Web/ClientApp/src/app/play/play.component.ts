@@ -6,9 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-export class PostNewGame {
-  public username: string = "";
-}
+const charSize = 18;
 
 @Component({
   selector: 'app-play',
@@ -23,7 +21,6 @@ export class PlayComponent implements OnInit, OnDestroy {
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
-  public charSize: number | undefined;
 
   constructor(
     private _httpClient: HttpClient,
@@ -129,14 +126,44 @@ export class PlayComponent implements OnInit, OnDestroy {
 //  };
 //}
 
+  public charSize(): number {
+    return charSize;
+}
+
   check() {
     if (this.connection !== undefined && this.gameGuid !== undefined) {
       this.connection.start().then(() => {
         if (this.connection) {
           this.connectionId = this.connection.connectionId;
 
-          this.connection.on("SetBackgroundCell", (row: number, col: number, color: string) => {
+          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: string) => {
             this._zone.run(() => {
+              if (this.canvasRef) {
+                const canvas = this.canvasRef.nativeElement;
+                const context: CanvasRenderingContext2D = canvas.getContext('2d');
+                context.fillStyle = `#FF0000`; // Rd background
+                context.fillRect(col * charSize, row * charSize, charSize, charSize);
+                context.textBaseline = 'top';
+                context.textAlign = 'left';
+                context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
+                context.font = `${charSize}px Courier`;
+                context.fillText(c, col * charSize, row * charSize);
+              }
+            });
+          });
+          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: string) => {
+            this._zone.run(() => {
+              if (this.canvasRef) {
+                const canvas = this.canvasRef.nativeElement;
+                const context: CanvasRenderingContext2D = canvas.getContext('2d');
+                context.fillStyle = `#000000`; // Rd background
+                context.fillRect(col * charSize, row * charSize, charSize, charSize);
+                context.textBaseline = 'top';
+                context.textAlign = 'left';
+                context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
+                context.font = `${charSize}px Courier`;
+                context.fillText(c, col * charSize, row * charSize);
+              }
             });
           });
           this.connection.on("Clear", () => {
@@ -172,16 +199,14 @@ export class PlayComponent implements OnInit, OnDestroy {
                 canvas.style.width = 1440;
                 canvas.style.height = 810;
                 const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                this.charSize = 18;
-                context.clearRect(col * this.charSize, row * this.charSize, text.length * this.charSize, this.charSize);
-                context.imageSmoothingEnabled = false;
+                context.clearRect(col * charSize, row * charSize, text.length * charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
                 context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
-                context.font = `${this.charSize}px Courier`;
+                context.font = `${charSize}px Courier`;
                 for (var i: number = 0; i < text.length; i++) {
                   const c = text[i];
-                  context.fillText(c, col * this.charSize, row * this.charSize);
+                  context.fillText(c, col * charSize, row * charSize);
                   col++;
                 }
               }
@@ -234,7 +259,8 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.connection) {
-      this.connection.off("SetBackgroundCell");
+      this.connection.off("UnsetCellBackground");
+      this.connection.off("SetCellBackground");
       this.connection.off("Clear");
       this.connection.off("Print");
       this.connection.off("SetBackground");

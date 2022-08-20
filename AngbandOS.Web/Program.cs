@@ -1,29 +1,28 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using AngbandOS.Web.Data;
 using AngbandOS.Web.Models;
-using Microsoft.AspNetCore.SignalR;
 using AngbandOS.Web.Hubs;
-using AngbandOS.Interface;
-using AngbandOS.PersistentStorage;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AngbandOS.Web;
+using AngbandOS.Web.TemplateProcessing;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration["ConnectionString"]; // Connection string is stored as a user secret
+
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped(typeof(TemplateProcessor), typeof(TemplateProcessor)); // Template macro processor
+builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
 
 // Add services to the container.
-var connectionString = builder.Configuration["ConnectionString"]; // Connection string is stored as a user secret
-
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("RequireConfirmedAccount"))
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
