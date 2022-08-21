@@ -86,6 +86,9 @@ export class PlayComponent implements OnInit, OnDestroy {
         case "Escape":
           this.connection.send("keypressed", '\x1B');
           break;
+        case "Backspace":
+          this.connection.send("keypressed", '\x08');
+          break;
         case "Control":
         case "Alt":
         case "Shift":

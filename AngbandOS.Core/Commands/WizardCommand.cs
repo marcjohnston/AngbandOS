@@ -205,6 +205,7 @@ namespace Cthangband.Commands
             saveGame.Gui.PrintLine("Enter Wizard Code: ", 0, 0);
             if (!saveGame.Gui.AskforAux(out string tmp, "", 31))
             {
+                saveGame.Gui.Erase(0, 0, 255);
                 return;
             }
             saveGame.Gui.Erase(0, 0, 255);
