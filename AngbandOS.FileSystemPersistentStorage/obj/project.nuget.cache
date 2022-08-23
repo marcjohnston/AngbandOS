@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ekpUuzPgkKDrMVqRrnPz6dCTyNBznlS7dWW+QF47Ma4lwUhg7vAsLkT59egsvZQ46FG8igKtyMoIThdOZ/0uFw==",
+  "dgSpecHash": "LmalDfTHUFfKdQDhSoljUovrEudw8U1Wiq/3RerrDZQ7iQ020JHWEGMnKAhJb964DtPbeAnPtuwRO5OIXIyehg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj",
+  "projectFilePath": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.FileSystemPersistentStorage\\AngbandOS.PersistentStorage.FileSystem.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

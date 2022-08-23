@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6kxLUaqVH3yje8QIyriU4bwxSdTrRK+HrxCrO7VxbmqqmfF+l3dMCvPXQoZgViNhDIskwoIhXHPABsmcflk0ug==",
+  "dgSpecHash": "EOqMNkyDeDOE97jdBgLlHTl4zAP62FT/jYlSxLg1Fc/1eAcHlBR1OB3MrkTQr0EnjQyTuoGWXTlMw5+BsX4JJA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
+  "projectFilePath": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

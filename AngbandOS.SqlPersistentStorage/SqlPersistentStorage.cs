@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Interface;
 using AngbandOS.PersistentStorage.Sql.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AngbandOS.PersistentStorage
 {
@@ -35,12 +36,14 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
+                SavedGame? savedGame = context.SavedGames
+                    .Include(_savedGame => _savedGame.SavedGameContent)
+                    .SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
                 if (savedGame == null)
                 {
                     return null;
                 }
-                return savedGame.Data;
+                return savedGame.SavedGameContent.Data;
             }
         }
 
@@ -64,7 +67,9 @@ namespace AngbandOS.PersistentStorage
                 savedGame.DateTime = DateTime.Now;
                 savedGame.Gold = gameDetails.Gold;
                 savedGame.IsAlive = gameDetails.IsAlive;
-                savedGame.Data = value;
+                if (savedGame.SavedGameContent == null)
+                    savedGame.SavedGameContent = new SavedGameContent();
+                savedGame.SavedGameContent.Data = value;
 
                 context.SaveChanges();
             }
