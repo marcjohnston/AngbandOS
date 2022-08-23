@@ -25,6 +25,7 @@ import { AuthenticationInterceptor } from './accounts/authentication-interceptor
 import { ProfileComponent } from './accounts/profile/profile.component';
 import { LogoutComponent } from './accounts/logout/logout.component';
 import { UnauthorizedInterceptorService } from './accounts/unauthorized-interceptor/unauthorized-interceptor.service';
+import { AccountConfirmationComponent } from './accounts/account-confirmation/account-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { UnauthorizedInterceptorService } from './accounts/unauthorized-intercep
     LoginMenuComponent,
     ForgotPasswordDialogComponent,
     ProfileComponent,
+    AccountConfirmationComponent,
     LogoutComponent
   ],
   imports: [
@@ -60,6 +62,7 @@ import { UnauthorizedInterceptorService } from './accounts/unauthorized-intercep
       { path: 'accounts/login', component: LoginComponent },
       { path: 'accounts/logout', component: LogoutComponent },
       { path: 'accounts/profile', component: ProfileComponent },
+      { path: 'accounts/confirm', component: AccountConfirmationComponent },
       { path: 'accounts/register', component: RegistrationComponent }
     ]),
     BrowserAnimationsModule

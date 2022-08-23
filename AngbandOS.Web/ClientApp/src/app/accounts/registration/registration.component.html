@@ -29,9 +29,7 @@
              autocomplete="new-password"
              placeholder="Confirm Password" />
     </mat-form-field>
-    <div [ngClass]="{'greyed': formGroup.invalid}" *ngIf="!isAuthenticated" (click)="onRegisterClick()">
-      Register
-    </div>
+    <button [ngClass]="{'greyed': formGroup.invalid}" *ngIf="!isAuthenticated" (click)="onRegisterClick()">Register</button>
     <mat-error *ngIf="formGroup.invalid && formGroup.confirmPassword.touched">{{formGroup.confirmError}}</mat-error>
     <ng-template ngFor [ngForOf]="messages" let-message>
       <div>{{message}}</div>
@@ -39,5 +37,6 @@
   </form>
 </ng-container>
 <ng-container *ngIf="isAuthenticated">
-  <p>You are already registered.</p>
+  <p>You are registered.</p>
+  <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
 </ng-container>

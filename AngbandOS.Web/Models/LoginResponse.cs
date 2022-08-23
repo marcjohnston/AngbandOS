@@ -2,5 +2,5 @@
 
 public class LoginResponse
 {
-public string JwtToken { get; set; } = default!;
+    public string JwtToken { get; set; } = default!;
 }

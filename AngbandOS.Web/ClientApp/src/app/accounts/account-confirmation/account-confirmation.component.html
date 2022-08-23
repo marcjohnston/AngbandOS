@@ -1,0 +1,24 @@
+<ng-container *ngIf="!isAuthenticated && errors.length === 0">
+  <form [formGroup]="formGroup">
+    <div>Login to complete confirmation of your email account.</div>
+    <mat-form-field id="email-address">
+      <input matInput
+             formControlName="emailAddress"
+             placeholder="Email Address" />
+    </mat-form-field>
+    <mat-form-field id="password">
+      <input matInput
+             type="password"
+             formControlName="password"
+             placeholder="Password" />
+    </mat-form-field>
+  </form>
+  <button (click)="onLoginClick()">Login</button>
+  <button (click)="onForgotPasswordClick()">Forgot Password</button>
+</ng-container>
+<ng-template ngFor [ngForOf]="errors" let-error>
+  <div>{{error}}</div>
+</ng-template>
+<ng-template ngFor [ngForOf]="messages" let-message>
+  <div>{{message}}</div>
+</ng-template>

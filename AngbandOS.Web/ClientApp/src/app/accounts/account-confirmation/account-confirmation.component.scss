@@ -2,11 +2,12 @@ form {
   display: flex; // Use flex to render the form-fields.
   flex-direction: column; // Arrange the form-fields straight down.
 
-  & mat-form-field {
-    width: 450px;
+  & div {
+    height: 2rem;
   }
-}
 
-button {
-    width: 100px;
+  & mat-form-field, & mat-checkbox {
+    display: block;
+    width: 250px;
+  }
 }

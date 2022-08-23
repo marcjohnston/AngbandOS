@@ -43,7 +43,7 @@ export class RegistrationComponent {
           this._authenticationService.removeLocallyStoredCredentials();
 
           // Navigate to the profile page to send the confirmation email.
-          this._zone.run(() => { this._router.navigate([`/profile`], { queryParams: { confirm: "true" } }) });
+          this._zone.run(() => { this._router.navigate([`/accounts/profile`], { queryParams: { confirm: "true" } }) });
         }, (_errorResponse: HttpErrorResponse) => {
           this.messages = [..._errorResponse.error];
         });

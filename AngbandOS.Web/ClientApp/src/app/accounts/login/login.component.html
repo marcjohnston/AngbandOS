@@ -23,5 +23,6 @@
   </form>
 </ng-container>
 <ng-container *ngIf="isAuthenticated">
-  Login successful.
+  <p>Login successful.</p>
+  <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
 </ng-container>

@@ -59,8 +59,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this._authenticationService.currentUser.value !== null && this._authenticationService.currentUser.value.email !== undefined) {
       this.messages = ["Sending confirmation email ..."];
       const emailAddress: string = this._authenticationService.currentUser.value.email;
-      this._httpClient.get(`/api/accounts/${encodeURI(emailAddress)}/verification`).toPromise().then(() => {
-        this.messages = [`Confirmation email sent.`];
+      this._httpClient.get(`/apiv1/accounts/verification`).toPromise().then(() => {
+        this.messages = [`Confirmation email sent.`, `Please click on the link in your email to confirm your email address.`];
       }, (_errorResponse: HttpErrorResponse) => {
         this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
           duration: 5000
