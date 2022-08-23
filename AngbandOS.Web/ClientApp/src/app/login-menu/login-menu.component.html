@@ -1,9 +1,9 @@
 <ul class="navbar-nav" *ngIf="isAuthenticated">
     <li class="nav-item">
-        <a  class="nav-link text-dark" [routerLink]='["/accounts/profile"]' title="Manage">Hello {{ userName }}</a>
+      <a class="nav-link text-dark" [routerLink]='["/accounts/profile"]' title="Manage">Hello {{username}}</a>
     </li>
     <li class="nav-item">
-        <a  class="nav-link text-dark" [routerLink]='["/account/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+        <a  class="nav-link text-dark" [routerLink]='["/accounts/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
     </li>
 </ul>
 <ul class="navbar-nav" *ngIf="(isAuthenticated) !== true">

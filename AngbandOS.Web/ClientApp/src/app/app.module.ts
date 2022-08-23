@@ -22,6 +22,9 @@ import { LoginMenuComponent } from './login-menu/login-menu.component';
 import { ForgotPasswordDialogComponent } from './accounts/forgot-password-dialog/forgot-password-dialog.component';
 import { RegistrationComponent } from './accounts/registration/registration.component';
 import { AuthenticationInterceptor } from './accounts/authentication-interceptor/authentication-interceptor';
+import { ProfileComponent } from './accounts/profile/profile.component';
+import { LogoutComponent } from './accounts/logout/logout.component';
+import { UnauthorizedInterceptorService } from './accounts/unauthorized-interceptor/unauthorized-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -29,10 +32,13 @@ import { AuthenticationInterceptor } from './accounts/authentication-interceptor
     NavMenuComponent,
     HomeComponent,
     PlayComponent,
+
     LoginComponent,
     RegistrationComponent,
     LoginMenuComponent,
-    ForgotPasswordDialogComponent
+    ForgotPasswordDialogComponent,
+    ProfileComponent,
+    LogoutComponent
   ],
   imports: [
     MatTableModule,
@@ -49,13 +55,17 @@ import { AuthenticationInterceptor } from './accounts/authentication-interceptor
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'play', component: PlayComponent },
+      { path: 'play/:guid', component: PlayComponent },
+
       { path: 'accounts/login', component: LoginComponent },
-      { path: 'accounts/register', component: RegistrationComponent },
-      { path: 'play/:guid', component: PlayComponent }
+      { path: 'accounts/logout', component: LogoutComponent },
+      { path: 'accounts/profile', component: ProfileComponent },
+      { path: 'accounts/register', component: RegistrationComponent }
     ]),
     BrowserAnimationsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthenticationService } from '../accounts/authentication/authentication.service';
-import { UserDetails } from '../accounts/authentication/user-details';
+import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
+import { UserDetails } from '../accounts/authentication-service/user-details';
 
 const charSize = 18;
 

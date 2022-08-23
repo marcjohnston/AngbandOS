@@ -1,0 +1,23 @@
+<form [formGroup]="formGroup">
+  <div>
+    Account Details
+  </div>
+  <mat-form-field id="username">
+    <input matInput
+           formControlName="username"
+           placeholder="Username" />
+  </mat-form-field>
+  <mat-form-field id="email-address">
+    <input matInput
+           formControlName="emailAddress"
+           placeholder="Email Address" />
+  </mat-form-field>
+</form>
+<ng-template ngFor [ngForOf]="messages" let-message>
+  <div>{{message}}</div>
+</ng-template>
+<button [routerLink]="['/change-password']" *ngIf="formGroup.disabled">Change Password</button>
+<button (click)="onEditClick()" *ngIf="formGroup.disabled">Edit</button>
+<button (click)="onSaveClick()" *ngIf="formGroup.enabled">Save</button>
+<button (click)="onCancelClick()" *ngIf="formGroup.enabled">Cancel</button>
+<button (click)="onResendConfirmationEmailClick()" *ngIf="!emailVerified && formGroup.disabled">Resend Confirmation Email</button>

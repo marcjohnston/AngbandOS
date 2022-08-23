@@ -33,18 +33,18 @@ namespace AngbandOS.Web.Controllers
             ConnectionString = config["ConnectionString"];
         }
 
-        private string? GetUserIdentifier => User?.FindFirst(ClaimTypes.Email)?.Value;
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<SavedGameDetails>> GetSavedGames()
         {
-            string? emailAddress = GetUserIdentifier;
-            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
-            if (user != null)
-                return Ok(SavedGames.List(ConnectionString, user.Id));
-            else
+            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+            if (emailAddress == null)
                 return Unauthorized();
+
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
+            if (user == null)
+                return Unauthorized();
+            return Ok(SavedGames.List(ConnectionString, user.Id));
         }
     }
 }

@@ -1,23 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../accounts/authentication/authentication.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
+import { Subscription } from 'rxjs';
+import { UserDetails } from '../accounts/authentication-service/user-details';
 
 @Component({
   selector: 'app-login-menu',
   templateUrl: './login-menu.component.html',
   styleUrls: ['./login-menu.component.css']
 })
-export class LoginMenuComponent implements OnInit {
+export class LoginMenuComponent implements OnInit, OnDestroy {
+  public username: string | null = null;
+  private _initSubscriptions = new Subscription();
   public isAuthenticated: boolean = false;
-  public userName?: string | null;
 
   constructor(
     private _authenticationService: AuthenticationService,
   ) { }
 
   ngOnInit() {
-    this.isAuthenticated = this._authenticationService.isAuthenticated;
-    this.userName = this._authenticationService.currentUser.value?.username;
+    this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
+      if (_userDetails == null || _userDetails.username == null) {
+        this.username = null;
+        this.isAuthenticated = false;
+      } else {
+        this.username = _userDetails.username;
+        this.isAuthenticated = true;
+      }
+    }));
+  }
+
+  ngOnDestroy() {
+    this._initSubscriptions.unsubscribe();
   }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ForgotPasswordDialogData } from '../forgot-password-dialog/forgot-password-dialog-data';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
 
 @Component({

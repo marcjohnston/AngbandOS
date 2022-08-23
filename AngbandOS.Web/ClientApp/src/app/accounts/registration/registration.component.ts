@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication-service/authentication.service';
 import { PostAccount } from './post-account';
 import { RegistrationFormGroup } from './registration-form-group';
 

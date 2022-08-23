@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using AngbandOS.Web.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -11,10 +13,15 @@ namespace AngbandOS.Web.Hubs
     public class GameHub : Hub<IGameHub>
     {
         private readonly GameService GameService;
+        private readonly UserManager<ApplicationUser> UserManager;
 
-        public GameHub(GameService gameService)
+        public GameHub(
+            GameService gameService,
+            UserManager<ApplicationUser> userManager
+        )
         {
             GameService = gameService;
+            UserManager = userManager;
         }
 
         ///// <summary>
@@ -22,14 +29,15 @@ namespace AngbandOS.Web.Hubs
         ///// </summary>
         ///// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         ///// <returns></returns>
-        public void Play(string guid)
+        public async Task Play(string guid)
         {
             // We need to ensure the user is authenticated.
-            string? userIdentifier = Context.UserIdentifier;
+            string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
 
-            if (userIdentifier != null)
+            if (user.Id != null)
             {
-                GameService.Play(userIdentifier, guid, Context.ConnectionId);
+                GameService.Play(user.Id, guid, Context.ConnectionId);
             }
         }
 
