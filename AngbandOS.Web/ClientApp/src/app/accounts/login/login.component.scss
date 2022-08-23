@@ -1,0 +1,38 @@
+.hide {
+  display: none;
+}
+
+form {
+  display: flex; // Use flex to render the form-fields.
+  flex-direction: column; // Arrange the form-fields straight down.
+
+  & #title {
+    font-size: 1.5rem;
+    font-family: Roboto;
+    height: 2rem;
+    padding: 0.5rem 0;
+  }
+
+  & #email-address, & #password {
+    width: 250px;
+  }
+
+  & mat-form-field, & mat-checkbox {
+    display: block;
+  }
+
+  & span {
+    color: red;
+    margin-top: 10px;
+  }
+
+  & button {
+    margin-top: 10px;
+    width: 70px;
+    height: 25px;
+  }
+
+  & a {
+    margin-top: 10px;
+  }
+}

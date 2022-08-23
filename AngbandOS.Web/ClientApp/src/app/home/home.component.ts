@@ -3,7 +3,7 @@ import { Component, ElementRef, HostListener, NgZone, OnInit, ViewChild } from '
 import { Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
 import { Observable } from 'rxjs';
-import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { AuthenticationService } from '../accounts/authentication/authentication.service';
 import { SavedGameDetails } from './saved-game-details';
 
 export class PostNewGame {
@@ -23,17 +23,17 @@ export class HomeComponent implements OnInit {
   public savedGames: SavedGameDetails[] | undefined = undefined;
   public displayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "notes"];
   public selectedSavedGame: SavedGameDetails | null = null;
-  public isAuthenticated?: Observable<boolean>;
+  public isAuthenticated: boolean = false;
 
   constructor(
     private _httpClient: HttpClient,
-    private authorizeService: AuthorizeService,
+    private _authenticationService: AuthenticationService,
     private _router: Router
   ) {
   }
 
   ngOnInit() {
-    this.isAuthenticated = this.authorizeService.isAuthenticated();
+    this.isAuthenticated = this._authenticationService.isAuthenticated;
     this._httpClient.get<SavedGameDetails[]>(`/apiv1/games`).toPromise().then((_savedGames) => {
       this.savedGames = _savedGames;
     }, (error: HttpErrorResponse) => {

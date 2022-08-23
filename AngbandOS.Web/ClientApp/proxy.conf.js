@@ -13,7 +13,8 @@ const PROXY_CONFIG = [
       "/ApplyDatabaseMigrations",
       "/_framework",
       "/apiv1/hub",
-      "/apiv1/games"
+      "/apiv1/games",
+      "/apiv1/accounts"
    ],
     target: target,
     secure: false,

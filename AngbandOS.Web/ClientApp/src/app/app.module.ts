@@ -1,43 +1,62 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayComponent } from './play/play.component';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+
+import { LoginComponent } from './accounts/login/login.component';
+import { LoginMenuComponent } from './login-menu/login-menu.component';
+import { ForgotPasswordDialogComponent } from './accounts/forgot-password-dialog/forgot-password-dialog.component';
+import { RegistrationComponent } from './accounts/registration/registration.component';
+import { AuthenticationInterceptor } from './accounts/authentication-interceptor/authentication-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    PlayComponent
+    PlayComponent,
+    LoginComponent,
+    RegistrationComponent,
+    LoginMenuComponent,
+    ForgotPasswordDialogComponent
   ],
   imports: [
+    MatTableModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    ApiAuthorizationModule,
-    MatTableModule,
-    MatSnackBarModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'play', component: PlayComponent },
+      { path: 'accounts/login', component: LoginComponent },
+      { path: 'accounts/register', component: RegistrationComponent },
       { path: 'play/:guid', component: PlayComponent }
     ]),
     BrowserAnimationsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

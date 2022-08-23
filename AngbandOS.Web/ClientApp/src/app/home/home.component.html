@@ -1,5 +1,5 @@
 <div id="container">
-  <ng-container *ngIf="isAuthenticated | async">
+  <ng-container *ngIf="isAuthenticated">
     <ng-container *ngIf="savedGames !== undefined">
       Your Saved Games
       <table mat-table [dataSource]="savedGames">
@@ -51,7 +51,7 @@
     </ng-container>
     <button (click)="onNewGame()">Play New Game</button>
   </ng-container>
-  <ng-container *ngIf="(isAuthenticated | async) === false">
+  <ng-container *ngIf="(isAuthenticated) === false">
     Welcome to AngbandOS.  You must login to play.
   </ng-container>
 </div>

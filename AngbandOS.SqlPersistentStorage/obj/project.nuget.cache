@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ugmGdDonuvHKqSZoRcNrVHguGreb/e+ubO0XK4sKUXN9wI8EisxUqd8MODFGdp0m7gMr6LhWFwOSoR14sKU9Ag==",
+  "dgSpecHash": "w/REvN0idnGSThRDVBZWQg4OihKSuhk7aIj8GKo/3aSF3rLamYKLNAjl9KJITh767KvRPpIXuTvXXgVvp6JCEQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.SqlPersistentStorage\\AngbandOS.PersistentStorage.Sql.csproj",
   "expectedPackageFiles": [

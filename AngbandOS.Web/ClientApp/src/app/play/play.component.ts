@@ -3,8 +3,9 @@ import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChi
 import { ActivatedRoute, Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
-import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from '../accounts/authentication/authentication.service';
+import { UserDetails } from '../accounts/authentication/user-details';
 
 const charSize = 18;
 
@@ -27,7 +28,7 @@ export class PlayComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private _authorizeService: AuthorizeService,
+    private _authenticationService: AuthenticationService,
     private _zone: NgZone
   ) {
   }
@@ -244,12 +245,15 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Wait for authorization.
-    this._initSubscriptions.add(this._authorizeService.getAccessToken().subscribe((_accessToken) => {
-      // Ensure there is an access token and that the connection has been established already.
-      if (_accessToken !== null && _accessToken !== undefined && this.connection == undefined) {
-        // Create the signal-r connection object.
-        this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub", { accessTokenFactory: () => _accessToken }).build();
-        this.check();
+    this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
+      if (_currentUser !== null) {
+        const accessToken = _currentUser.jwt;
+        // Ensure there is an access token and that the connection has been established already.
+        if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
+          // Create the signal-r connection object.
+          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub", { accessTokenFactory: () => accessToken }).build();
+          this.check();
+        }
       }
     }));
 

@@ -20,25 +20,29 @@ namespace AngbandOS.Web.Controllers
     {
         private readonly GameService GameService;
         private readonly string ConnectionString;
+        private readonly UserManager<ApplicationUser> UserManager;
 
         public GamesController(
             IConfiguration config,
+            UserManager<ApplicationUser> userManager,
             GameService gameService
         )
         {
             GameService = gameService;
+            UserManager = userManager;
             ConnectionString = config["ConnectionString"];
         }
 
-        private string? GetUserIdentifier => User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        private string? GetUserIdentifier => User?.FindFirst(ClaimTypes.Email)?.Value;
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<SavedGameDetails> GetSavedGames()
+        public async Task<ActionResult<SavedGameDetails>> GetSavedGames()
         {
-            string? userIdentifier = GetUserIdentifier;
-            if (userIdentifier != null)
-                return Ok(SavedGames.List(ConnectionString, userIdentifier));
+            string? emailAddress = GetUserIdentifier;
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
+            if (user != null)
+                return Ok(SavedGames.List(ConnectionString, user.Id));
             else
                 return Unauthorized();
         }
