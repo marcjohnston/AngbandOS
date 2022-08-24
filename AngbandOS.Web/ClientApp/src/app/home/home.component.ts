@@ -37,7 +37,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _httpClient: HttpClient,
     private _snackBar: MatSnackBar,
     private _authenticationService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _ngZone: NgZone
   ) {
   }
 
@@ -46,7 +47,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.serviceConnection.start().then(() => {
       if (this.serviceConnection !== undefined) {
         this.serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
-          this.activeGames = _activeGames;
+          this._ngZone.run(() => {
+            this.activeGames = _activeGames;
+          })
         });
       }
     });

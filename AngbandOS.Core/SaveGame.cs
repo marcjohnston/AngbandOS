@@ -1087,7 +1087,6 @@ namespace Cthangband
                     return;
                 }
                 Player = newPlayer;
-                NotifyNow();
                 foreach (Town town in Towns)
                 {
                     foreach (Store store in town.Stores)
@@ -1118,6 +1117,7 @@ namespace Cthangband
                 Player.WildernessY = CurTown.Y;
                 CameFrom = LevelStart.StartRandom;
             }
+            NotifyNow();
             MsgFlag = false;
             MsgPrint(null);
             Gui.Refresh();
