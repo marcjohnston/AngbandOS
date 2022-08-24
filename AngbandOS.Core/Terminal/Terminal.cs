@@ -9,8 +9,6 @@ using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Color = System.Drawing.Color;
 
-// ReSharper disable UnusedMember.Global
-// ReSharper disable MemberCanBePrivate.Global
 namespace Cthangband.Terminal
 {
     /// <summary>
@@ -19,11 +17,6 @@ namespace Cthangband.Terminal
     [Serializable]
     internal class Terminal
     {
-        private string _cursorBrushColor;
-        private int _cursorCol;
-        private int _cursorRow;
-        private bool _cursorVisible;
-
         [NonSerialized]
         private IConsole _console;
 
@@ -48,66 +41,11 @@ namespace Cthangband.Terminal
         public Terminal(IConsole console)
         {
             _console = console;
-            CursorVisible = false;
-            CursorRow = 0;
-            CursorCol = 0;
-        }
-
-        /// <summary>
-        /// Sets or returns the column in which the cursor lies
-        /// </summary>
-        private int CursorCol
-        {
-            get => _cursorCol;
-            set
-            {
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-                   //     _console.SetCellBackground(CursorRow, CursorCol, null);
-                    }
-                }
-                _cursorCol = value;
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-               //         _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
-                    }
-                }
-            }
         }
 
         public static string ToHex(Color c)
         {
             return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
-        }
-
-        /// <summary>
-        /// Sets or returns the row in which the cursor lies
-        /// </summary>
-        private int CursorRow
-        {
-            get => _cursorRow;
-            set
-            {
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-              //          _console.SetCellBackground(CursorRow, CursorCol, null);
-                    }
-                }
-                _cursorRow = value;
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-             //           _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
-                    }
-                }
-            }
         }
 
         public void ShowCursor(int row, int col, char c, Color color)
@@ -121,48 +59,11 @@ namespace Cthangband.Terminal
         }
 
         /// <summary>
-        /// Sets or returns whether the cursor is visible
-        /// </summary>
-        public bool CursorVisible
-        {
-            get => _cursorVisible;
-            set
-            {
-                _cursorVisible = value;
-                if (_cursorVisible)
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-               //         _console.SetCellBackground(CursorRow, CursorCol, _cursorBrushColor);
-                    }
-                }
-                else
-                {
-                    if (CursorRow >= 0 && CursorRow < Constants.ConsoleHeight && CursorCol >= 0 && CursorCol < Constants.ConsoleWidth)
-                    {
-             //           _console.SetCellBackground(CursorRow, CursorCol, null);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Clears the entire screen
         /// </summary>
         public void Clear()
         {
             _console.Clear();
-        }
-
-        /// <summary>
-        /// Moves the cursor to the specified location
-        /// </summary>
-        /// <param name="row"> The row on which to place the cursor </param>
-        /// <param name="col"> The column on which to place the cursor </param>
-        public void Goto(int row, int col)
-        {
-            CursorRow = row;
-            CursorCol = col;
         }
 
         /// <summary>
@@ -174,10 +75,7 @@ namespace Cthangband.Terminal
         /// <param name="colour"> The colour in which to print it </param>
         public void Print(int row, int col, string text, Color colour)
         {
-            CursorRow = row;
-            CursorCol = col;
             _console.Print(row, col, text, ToHex(colour));
-            CursorCol += text.Length;
         }
 
         /// <summary>
