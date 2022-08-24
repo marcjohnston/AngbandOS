@@ -17,6 +17,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -91,10 +92,12 @@ namespace Cthangband
         [NonSerialized]
         private IPersistentStorage PersistentStorage;
 
+        [NonSerialized]
+        private IUpdateNotifier _updateNotifier;
+
         /// <summary>
         /// Creates a new game.
         /// </summary>
-        /// <param name="guid"></param>
         public SaveGame()
         {
             Gui = new Gui(this);
@@ -107,9 +110,15 @@ namespace Cthangband
             InitialiseAllocationTables();
         }
 
-        public void SetPersistentStorage(IPersistentStorage persistentStorage)
+        public void NotifyNow()
+        {
+            _updateNotifier.NotifyNow();
+        }
+
+        public void SetInjections(IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             PersistentStorage = persistentStorage;
+            _updateNotifier = updateNotification;
         }
 
         public void Quit(string reason)
@@ -1078,6 +1087,7 @@ namespace Cthangband
                     return;
                 }
                 Player = newPlayer;
+                NotifyNow();
                 foreach (Town town in Towns)
                 {
                     foreach (Store store in town.Stores)

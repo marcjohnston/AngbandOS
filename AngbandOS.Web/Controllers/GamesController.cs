@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace AngbandOS.Web.Controllers
 {
-    [Route("apiv1/[controller]")]
+    [Route("apiv1")]
     [ApiController]
     [Produces("application/json")]
     public class GamesController : ControllerBase
@@ -34,7 +34,19 @@ namespace AngbandOS.Web.Controllers
         }
 
         [HttpGet]
+        [Route("games")]
+        [Produces("application/json")]
         [AllowAnonymous]
+        public ActionResult<ActiveGameDetails[]> GetActiveGames()
+        {
+            ActiveGameDetails[] activeGames = GameService.GetActiveGames();
+            return Ok(activeGames);
+        }
+
+        [HttpGet]
+        [Route("saved-games")]
+        [Produces("application/json")]
+        [Authorize]
         public async Task<ActionResult<SavedGameDetails>> GetSavedGames()
         {
             string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;

@@ -1,7 +1,38 @@
 <div id="container">
+  <ng-container *ngIf="activeGames !== undefined">
+    <span id="active-games-span">Active Games</span>
+    <table mat-table [dataSource]="activeGames">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let activeGame">{{activeGame.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="character-name">
+        <th mat-header-cell *matHeaderCellDef>
+          Character Name
+        </th>
+        <td mat-cell *matCellDef="let activeGame">{{activeGame.characterName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="gold">
+        <th mat-header-cell *matHeaderCellDef>
+          Gold
+        </th>
+        <td mat-cell *matCellDef="let activeGame">{{activeGame.gold}}</td>
+      </ng-container>
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef>
+          Level
+        </th>
+        <td mat-cell *matCellDef="let activeGame">{{activeGame.level}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="activeGamesDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns" (click)="onRowClick(activeGame)" [ngClass]="{'highlight': activeGame === selectedActiveGame}"></tr>
+    </table>
+  </ng-container>
   <ng-container *ngIf="isAuthenticated">
     <ng-container *ngIf="savedGames !== undefined">
-      Your Saved Games
+      <span id="saved-games-span">Your Saved Games</span>
       <table mat-table [dataSource]="savedGames">
         <ng-container matColumnDef="guid">
           <th mat-header-cell *matHeaderCellDef>
@@ -45,8 +76,8 @@
           </th>
           <td mat-cell *matCellDef="let savedGame">{{savedGame.comments}}</td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let savedGame; columns: displayedColumns" (click)="onRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
+        <tr mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" (click)="onRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
       </table>
     </ng-container>
     <button (click)="onNewGame()">Play New Game</button>

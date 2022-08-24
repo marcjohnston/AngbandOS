@@ -1,4 +1,4 @@
-﻿using Cthangband;
+﻿using Cthangband; // TODO: This namespace needs to go
 
 namespace AngbandOS.Web.Hubs
 {

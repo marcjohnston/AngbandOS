@@ -8,6 +8,7 @@ import { UserDetails } from '../accounts/authentication-service/user-details';
 import { SavedGameDetails } from './saved-game-details';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
+import { ActiveGameDetails } from './active-game-details';
 
 export class PostNewGame {
   public username: string = "";
@@ -22,9 +23,12 @@ export class PostNewGame {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
-  public readonly connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub").build();
+  public readonly serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
   public savedGames: SavedGameDetails[] | undefined = undefined;
-  public displayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "notes"];
+  public activeGames: ActiveGameDetails[] | undefined = undefined;
+  public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved"];
+  public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level"];
+  public selectedActiveGame: ActiveGameDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
   private _initSubscriptions = new Subscription();
@@ -38,11 +42,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Start a signal-r connection to receive updates to the list.
+    this.serviceConnection.start().then(() => {
+      if (this.serviceConnection !== undefined) {
+        this.serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
+          this.activeGames = _activeGames;
+        });
+      }
+    });
+
+    // Send a message to retrieve all of the active games.  This will force seed the list.
+    this._httpClient.get<ActiveGameDetails[]>(`/apiv1/games`).toPromise().then((_activeGames) => {
+      this.activeGames = _activeGames;
+    }, (_errorResponse: HttpErrorResponse) => {
+      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+        duration: 5000
+      });
+    });
+
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       this.isAuthenticated = (_userDetails !== null && _userDetails.username !== null);
 
       if (this.isAuthenticated) {
-        this._httpClient.get<SavedGameDetails[]>(`/apiv1/games`).toPromise().then((_savedGames) => {
+        this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
           this.savedGames = _savedGames;
         }, (_errorResponse: HttpErrorResponse) => {
           this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
@@ -56,7 +78,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    if (this.serviceConnection !== undefined) {
+      this.serviceConnection.off("ActiveGamesUpdated");
+    }
   }
 
   public onRowClick(savedGame: SavedGameDetails) {

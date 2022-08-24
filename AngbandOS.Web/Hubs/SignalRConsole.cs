@@ -18,21 +18,54 @@ namespace AngbandOS.Web.Hubs
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
         private readonly IGameHub _gameHub;
         private readonly IPersistentStorage PersistentStorage;
+        private GameServer _gameServer; // This is the actual game.
+        public readonly string UserId;
+        public readonly string Username;
+        private readonly IUpdateNotifier _updateNotifier;
 
-        public SignalRConsole(IGameHub gameHub, IPersistentStorage persistentStorage)
+        public SignalRConsole(IGameHub gameHub, IPersistentStorage persistentStorage, string userId, string username, IUpdateNotifier updateNotifier)
         {
             _gameHub = gameHub;
             PersistentStorage = persistentStorage;
+            UserId = userId;
+            Username = username;
+            _updateNotifier = updateNotifier;
+        }
+
+        /// <summary>
+        /// Returns the current level of the character in the game.  Returns null, if the game has been created yet or the player is dead.
+        /// </summary>
+        public int? Level
+        {
+            get
+            {
+                return _gameServer?.Level;
+            }
+        }
+
+        public int? Gold
+        {
+            get
+            {
+                return _gameServer?.Gold;
+            }
+        }
+        public string? CharacterName
+        {
+            get
+            {
+                return _gameServer?.CharacterName;
+            }
         }
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
             // Create a game server to play the game.  
-            GameServer gameServer = new GameServer(); // TODO: This should be simply a game object.
+            _gameServer = new GameServer(); // TODO: This should be simply a game object; not a game "server".
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            gameServer.Play(this, PersistentStorage);
+            _gameServer.Play(this, PersistentStorage, _updateNotifier);
 
             // The game is over.  Let the client know.
             _gameHub.GameOver();

@@ -25,11 +25,6 @@ builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("RequireConfirmedAccount"))
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-//builder.Services.AddIdentityServer()
-//    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 var secret = builder.Configuration["Jwt:Secret"];
 var key = Encoding.ASCII.GetBytes(secret);
 builder.Services.AddAuthentication(x =>
@@ -102,7 +97,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<GameHub>("/apiv1/hub");
+app.MapHub<GameHub>("/apiv1/game-hub");
+app.MapHub<ServiceHub>("/apiv1/service-hub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

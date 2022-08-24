@@ -33,22 +33,6 @@ export class PlayComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  //@HostListener('window:resize', ['$event'])
-  //public onResize(event: any) {
-  //  this._zone.run(() => {
-  //    if (this.canvasRef !== undefined) {
-  //      const canvas = this.canvasRef.nativeElement;
-  //      var dpr = window.devicePixelRatio || 1;
-  //      var rect = canvas.getBoundingClientRect();
-  //    //  canvas.width = 80 * 18; // rect.width * dpr;
-  //    //  canvas.height = 45 * 18; // rect.height * dpr;
-  //    //  canvas.style.width = 80 * 18;
-  //    //  canvas.style.height = 45 * 18;
-  //    //  canvas.style.aspectRatio = 1;
-  //    }
-  //  });
-  //}
-
   @HostListener('window:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent) {
     if (this.connection) {
@@ -101,35 +85,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
-//  private getObjectFitSize(
-//    contains: boolean /* true = contain, false = cover */,
-//    containerWidth: number,
-//    containerHeight: number,
-//    width : number,
-//    height: number
-//  ) {
-//  var doRatio = width / height;
-//  var cRatio = containerWidth / containerHeight;
-//  var targetWidth = 0;
-//  var targetHeight = 0;
-//  var test = contains ? doRatio > cRatio : doRatio < cRatio;
-
-//  if (test) {
-//    targetWidth = containerWidth;
-//    targetHeight = targetWidth / doRatio;
-//  } else {
-//    targetHeight = containerHeight;
-//    targetWidth = targetHeight * doRatio;
-//  }
-
-//  return {
-//    width: targetWidth,
-//    height: targetHeight,
-//    x: (containerWidth - targetWidth) / 2,
-//    y: (containerHeight - targetHeight) / 2
-//  };
-//}
-
   public charSize(): number {
     return charSize;
 }
@@ -176,22 +131,7 @@ export class PlayComponent implements OnInit, OnDestroy {
                 const canvas = this.canvasRef.nativeElement;
                 var dpr = window.devicePixelRatio || 1;
                 var rect = canvas.getBoundingClientRect();
-                //const dimensions = this.getObjectFitSize(
-                //  true,
-                //  canvas.clientWidth,
-                //  canvas.clientHeight,
-                //  canvas.width,
-                //  canvas.height
-                //);
-                //canvas.width = dimensions.width;
-                //canvas.height = dimensions.height;
-                //canvas.width = 80 * 18; // rect.width * dpr;
-                //canvas.height = 45 * 18; // rect.height * dpr;
-                //canvas.style.width = 80 * 18;
-                //canvas.style.height = 45 * 18;
-                //canvas.style.aspectRatio = 1;
                 const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                //context.scale(1, 1);
                 context.clearRect(0, 0, rect.width, rect.height);
               }
             });
@@ -244,14 +184,16 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Wait for authorization.
+    // Wait for the authentication.  Games can only be played with authenticated.
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
       if (_currentUser !== null) {
+        // Get the access token for this user.  We need it for the signal-r hub authorization.
         const accessToken = _currentUser.jwt;
+
         // Ensure there is an access token and that the connection has been established already.
         if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
           // Create the signal-r connection object.
-          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/hub", { accessTokenFactory: () => accessToken }).build();
+          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", { accessTokenFactory: () => accessToken }).build();
           this.check();
         }
       }
@@ -273,6 +215,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       this.connection.off("SetBackground");
       this.connection.off("PlaySound");
       this.connection.off("PlayMusic");
+      this.connection.off("GameOver");
       this._initSubscriptions.unsubscribe();
     }
   }

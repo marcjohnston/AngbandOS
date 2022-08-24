@@ -13,6 +13,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using Cthangband.Pantheon;
 using System;
+using AngbandOS.Interface;
 
 namespace Cthangband
 {
@@ -45,9 +46,21 @@ namespace Cthangband
         public GameTime GameTime;
         public Gender Gender = new Gender();
         public int GenderIndex;
-        public int Generation;
+        public int Generation; // This is how many times the character name has changed.
         public bool GetFirstLevelMutation;
-        public int Gold;
+        private int _gold;
+        public int Gold
+        {
+            get
+            {
+                return _gold;
+            }
+            set
+            {
+                _gold = value;
+                SaveGame.NotifyNow();
+            }
+        }
         public Patron GooPatron;
         public bool HasAcidImmunity;
         public bool HasAcidResistance;
@@ -111,7 +124,20 @@ namespace Cthangband
         public bool IsSearching;
         public bool IsWinner;
         public bool IsWizard;
-        public int Level;
+        private int _level;
+        public int Level
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                SaveGame.NotifyNow();
+            }
+        }
+
         public int LightLevel;
         public int Mana;
         public int MapX;
@@ -122,7 +148,19 @@ namespace Cthangband
         public int MaxMana;
         public int MeleeAttacksPerRound;
         public int MissileAttacksPerRound;
-        public string Name;
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                SaveGame.NotifyNow();
+            }
+        }
         public uint NoticeFlags;
         public bool OldHeavyBow;
         public bool OldHeavyWeapon;
@@ -1095,15 +1133,17 @@ namespace Cthangband
             while (true)
             {
                 SaveGame.Gui.Goto(2, col);
-                string tmp = Name;
-                if (!SaveGame.Gui.AskforAux(out Name, tmp, 12))
+                if (SaveGame.Gui.AskforAux(out string newName, Name, 12))
                 {
-                    Name = tmp;
+                    Name = newName;
+
+                    // Check to see if the name has actually changed (excluding any leading or trailing spaces).
+                    if (newName.Trim() != Name.Trim())
+                    {
+                        Generation = 1;
+                    }
                 }
-                if (Name.Trim() != tmp.Trim())
-                {
-                    Generation = 1;
-                }
+
                 break;
             }
             Name = Name.PadRight(12);

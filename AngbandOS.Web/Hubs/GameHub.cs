@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Identity;
 namespace AngbandOS.Web.Hubs
 {
     [Authorize]
+    /// <summary>
+    /// Represents the signal-r hub singleton service to process incoming and outgoing signal-r game messages.
+    /// </summary>
     public class GameHub : Hub<IGameHub>
     {
         private readonly GameService GameService;
@@ -37,7 +40,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                GameService.Play(user.Id, guid, Context.ConnectionId);
+                GameService.Play(user.Id, guid, Context.ConnectionId, user.UserName);
             }
         }
 
@@ -47,6 +50,7 @@ namespace AngbandOS.Web.Hubs
         /// <returns></returns>
         public void Keypressed(string keys)
         {
+            // Route this keypress message to the correct game console.
             GameService.Keypressed(Context.ConnectionId, keys);
         }
 

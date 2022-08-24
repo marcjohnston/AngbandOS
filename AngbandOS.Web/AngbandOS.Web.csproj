@@ -20,7 +20,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" ExcludeAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
     <None Remove="TemplateProcessing\ConfirmEmail.html" />
   </ItemGroup>
@@ -48,6 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\home\active-game-details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\home\saved-game-details.ts" />
   </ItemGroup>
 
