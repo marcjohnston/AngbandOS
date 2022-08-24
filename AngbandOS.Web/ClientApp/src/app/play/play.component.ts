@@ -85,11 +85,11 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
-  public charSize(): number {
+  public get charSize(): number {
     return charSize;
 }
 
-  check() {
+  private check() {
     if (this.connection !== undefined && this.gameGuid !== undefined) {
       this.connection.start().then(() => {
         if (this.connection) {
@@ -216,6 +216,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       this.connection.off("PlaySound");
       this.connection.off("PlayMusic");
       this.connection.off("GameOver");
+      this.connection.stop();
       this._initSubscriptions.unsubscribe();
     }
   }

@@ -99,6 +99,7 @@ app.UseAuthorization();
 
 app.MapHub<GameHub>("/apiv1/game-hub");
 app.MapHub<ServiceHub>("/apiv1/service-hub");
+app.MapHub<SpectatorsHub>("/apiv1/spectators-hub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

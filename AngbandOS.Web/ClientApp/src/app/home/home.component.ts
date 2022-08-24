@@ -51,17 +51,18 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.activeGames = _activeGames;
           })
         });
+        this.serviceConnection.send("Refresh");
       }
     });
 
     // Send a message to retrieve all of the active games.  This will force seed the list.
-    this._httpClient.get<ActiveGameDetails[]>(`/apiv1/games`).toPromise().then((_activeGames) => {
-      this.activeGames = _activeGames;
-    }, (_errorResponse: HttpErrorResponse) => {
-      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
-        duration: 5000
-      });
-    });
+    //this._httpClient.get<ActiveGameDetails[]>(`/apiv1/games`).toPromise().then((_activeGames) => {
+    //  this.activeGames = _activeGames;
+    //}, (_errorResponse: HttpErrorResponse) => {
+    //  this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+    //    duration: 5000
+    //  });
+    //});
 
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       this.isAuthenticated = (_userDetails !== null && _userDetails.username !== null);
@@ -86,8 +87,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onRowClick(savedGame: SavedGameDetails) {
+  public onSavedGameRowClick(savedGame: SavedGameDetails) {
     this._router.navigate(['/play', savedGame.guid]);
+  }
+
+  public onActiveGameRowClick(activeGame: ActiveGameDetails) {
+    this._router.navigate(['/watch', activeGame.connectionId]);
   }
 
   public onNewGame() {

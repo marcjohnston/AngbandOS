@@ -12,11 +12,13 @@ const PROXY_CONFIG = [
       "/connect",
       "/ApplyDatabaseMigrations",
       "/_framework",
-      "/apiv1/game-hub",
-      "/apiv1/service-hub",
       "/apiv1/saved-games",
       "/apiv1/games",
-      "/apiv1/accounts"
+      "/apiv1/accounts",
+
+      "/apiv1/game-hub",
+      "/apiv1/spectators-hub",
+      "/apiv1/service-hub"
    ],
     target: target,
     secure: false,

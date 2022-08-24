@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -59,6 +60,12 @@ namespace AngbandOS.Web.Hubs
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
             HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
             return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            GameService.GameDisconnected(Context.ConnectionId);
+            return base.OnDisconnectedAsync(exception);
         }
     }
 }

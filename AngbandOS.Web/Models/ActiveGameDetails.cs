@@ -3,7 +3,7 @@
     public class ActiveGameDetails
     {
         /// <summary>
-        /// Returns the username of the game owner.
+        /// Returns the username of the game owner.  This is rendered in the home screen active games list.
         /// </summary>
         public string Username { get; set; }
 

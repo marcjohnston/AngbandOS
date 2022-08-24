@@ -16,7 +16,8 @@ namespace AngbandOS.Web.Hubs
     public class SignalRConsole : BackgroundWorker, IConsole
     {
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
-        private readonly IGameHub _gameHub;
+        private readonly IGameHub _consoleGameHub;
+        private readonly List<IGameHub> _spectators = new List<IGameHub>();
         private readonly IPersistentStorage PersistentStorage;
         private GameServer _gameServer; // This is the actual game.
         public readonly string UserId;
@@ -25,11 +26,21 @@ namespace AngbandOS.Web.Hubs
 
         public SignalRConsole(IGameHub gameHub, IPersistentStorage persistentStorage, string userId, string username, IUpdateNotifier updateNotifier)
         {
-            _gameHub = gameHub;
+            _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
             _updateNotifier = updateNotifier;
+        }
+
+        public void AddWatcher(IGameHub watcherHub)
+        {
+            _spectators.Add(watcherHub);
+        }
+
+        public void RemoveWatcher(IGameHub watcherHub)
+        {
+            _spectators.Remove(watcherHub);
         }
 
         /// <summary>
@@ -68,49 +79,86 @@ namespace AngbandOS.Web.Hubs
             _gameServer.Play(this, PersistentStorage, _updateNotifier);
 
             // The game is over.  Let the client know.
-            _gameHub.GameOver();
+            GameOver();
+        }
+
+        private void GameOver()
+        {
+            _consoleGameHub.GameOver();
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.GameOver();
         }
 
         public void Clear()
         {
             // Forward the clear command from the game to the signal-r hub.
-            _gameHub.Clear();
+            _consoleGameHub.Clear();
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.Clear();
         }
 
         public void PlayMusic(MusicTrack music)
         {
             // Forward the play music command from the game to the signal-r hub.
-            _gameHub.PlayMusic(music);
+            _consoleGameHub.PlayMusic(music);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.PlayMusic(music);
         }
 
         public void PlaySound(SoundEffect sound)
         {
             // Forward the play sound command from the game to the signal-r hub.
-            _gameHub.PlaySound(sound);
+            _consoleGameHub.PlaySound(sound);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.PlaySound(sound);
         }
 
         public void Print(int row, int col, string text, string colour)
         {
             // Forward the print command from the game to the signal-r hub.
-            _gameHub.Print(row, col, text, colour);
+            _consoleGameHub.Print(row, col, text, colour);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.Print(row, col, text, colour);  
         }
 
         public void SetBackground(BackgroundImage image)
         {
             // Forward the set background command from the game to the signal-r hub.
-            _gameHub.SetBackground(image);
+            _consoleGameHub.SetBackground(image);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.SetBackground(image);
         }
 
         public void SetCellBackground(int row, int col, char c, string color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
-            _gameHub.SetCellBackground(row, col, c, color);
+            _consoleGameHub.SetCellBackground(row, col, c, color);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.SetCellBackground(row, col, c, color);
         }
 
         public void UnsetCellBackground(int row, int col, char c, string color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
-            _gameHub.UnsetCellBackground(row, col, c, color);
+            _consoleGameHub.UnsetCellBackground(row, col, c, color);
+
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+              gameHub.UnsetCellBackground(row, col, c, color);
         }
 
         /// <summary>
@@ -125,6 +173,10 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
+        /// <summary>
+        /// This message is received from the game when a key is needed.
+        /// </summary>
+        /// <returns></returns>
         public char WaitForKey()
         {
             char c;

@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayComponent } from './play/play.component';
+import { WatchComponent } from './watch/watch.component';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
@@ -33,6 +34,7 @@ import { AccountConfirmationComponent } from './accounts/account-confirmation/ac
     NavMenuComponent,
     HomeComponent,
     PlayComponent,
+    WatchComponent,
 
     LoginComponent,
     RegistrationComponent,
@@ -58,6 +60,7 @@ import { AccountConfirmationComponent } from './accounts/account-confirmation/ac
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'play', component: PlayComponent },
       { path: 'play/:guid', component: PlayComponent },
+      { path: 'watch/:guid', component: WatchComponent },
 
       { path: 'accounts/login', component: LoginComponent },
       { path: 'accounts/logout', component: LogoutComponent },

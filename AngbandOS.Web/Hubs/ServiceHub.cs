@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Connections;
+﻿using AngbandOS.Web.Models;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;
 
@@ -9,9 +10,24 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class ServiceHub : Hub<IServiceHub>
     {
+        private readonly GameService GameService;
+        private readonly IHubContext<ServiceHub, IServiceHub> _serviceHub;
+
         public ServiceHub(
+            IHubContext<ServiceHub, IServiceHub> serviceHub,
+            GameService gameService
         )
         {
+            _serviceHub = serviceHub;
+            GameService = gameService;
+        }
+
+        public void Refresh()
+        {
+            // Immediately send a seeding list of active games to the client.
+            ActiveGameDetails[] activeGames = GameService.GetActiveGames();
+            IServiceHub serviceHub = _serviceHub.Clients.Client(Context.ConnectionId);
+            serviceHub.ActiveGamesUpdated(activeGames);
         }
 
         public override Task OnConnectedAsync()

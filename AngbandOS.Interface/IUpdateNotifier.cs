@@ -8,6 +8,6 @@
         /// <summary>
         /// Called when a notifyable action occurs in the game.  Gold, level and character name changes are notifyable actions.
         /// </summary>
-        public void NotifyNow();
+        public void NotifyAllNow();
     }
 }

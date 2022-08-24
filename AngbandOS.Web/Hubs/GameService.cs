@@ -6,6 +6,8 @@ using AngbandOS.Web.Models;
 using AngbandOS.PersistentStorage;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mail;
+using System.Collections.Concurrent;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -18,27 +20,56 @@ namespace AngbandOS.Web.Hubs
         /// The instance of the in-memory GameServer which manages all of the active games.
         /// </summary>
         private readonly IHubContext<GameHub, IGameHub> GameHub;
-
         private readonly IHubContext<ServiceHub, IServiceHub> _serviceHub;
-        private readonly Dictionary<string, SignalRConsole> Consoles = new Dictionary<string, SignalRConsole>(); // Tracks the console by connection id.
-        private readonly Dictionary<SignalRConsole, string> ConnectionIds = new Dictionary<SignalRConsole, string>(); // Tracks the connection id by console.
+        private readonly IHubContext<SpectatorsHub, IGameHub> _spectatorsHub;
+
+        private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
+        private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
         private readonly IConfiguration Config;
         private IUpdateNotifier UpdateNotifier;
 
         public GameService(
             IConfiguration config,
+            IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
-            IHubContext<GameHub, IGameHub> gameHub
+            IHubContext<SpectatorsHub, IGameHub> spectatorsHub
         )
         {
             Config = config;
             GameHub = gameHub;
             _serviceHub = serviceHub;
+            _spectatorsHub = spectatorsHub;
             UpdateNotifier = new SignalRActiveGamesUpdateNotifier(() =>
             {
                 // When updates are received from the game, notify all clients.
                 _serviceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
             });
+        }
+
+        /// <summary>
+        /// Handles game signal-r disconnections.
+        /// </summary>
+        /// <param name="gameHub"></param>
+        public void GameDisconnected(string connectionId)
+        {
+            // Get the console running the game.
+            if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
+            {
+                ConnectionIds.Remove(console, out _);
+                Consoles.Remove(connectionId, out _);
+            }
+
+            // Run the update notifications.
+            UpdateNotifier.NotifyAllNow();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="gameHub"></param>
+        public void SpectatorDisconnected(string connectionId)
+        {
+
         }
 
         public ActiveGameDetails[] GetActiveGames()
@@ -53,11 +84,23 @@ namespace AngbandOS.Web.Hubs
                     Level = console.Value.Level,
                     ConnectionId = console.Key,
                     UserId = console.Value.UserId,
-                    Username = console.Value.Username
+                    Username = console.Value.Username,                    
                 };
                 activeGames.Add(activeGameDetails);
             }
             return activeGames.ToArray();
+        }
+
+        public void Watch(string watcherConnectionId, string watchingConnectionId)
+        {
+            // Get the console belonging to the game.
+            if (Consoles.TryGetValue(watchingConnectionId, out SignalRConsole? console))
+            {
+                // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
+                IGameHub spectatorHub = _spectatorsHub.Clients.Client(watcherConnectionId);
+
+                console.AddWatcher(spectatorHub);
+            }
         }
 
         /// <summary>
@@ -86,8 +129,11 @@ namespace AngbandOS.Web.Hubs
             SignalRConsole console = new SignalRConsole(gameHub, persistentStorage, userId, username, UpdateNotifier);
 
             // We need to track this game.
-            Consoles.Add(connectionId, console);
-            ConnectionIds.Add(console, connectionId);
+            if (!Consoles.TryAdd(connectionId, console))
+            {
+                return;
+            }
+            ConnectionIds.TryAdd(console, connectionId);
 
             // Add an event for when the game is over, that we can disconnect the client.
             console.RunWorkerCompleted += Console_RunWorkerCompleted;
@@ -96,7 +142,7 @@ namespace AngbandOS.Web.Hubs
             console.RunWorkerAsync();
 
             // Run the update notifications.
-            UpdateNotifier.NotifyNow();
+            UpdateNotifier.NotifyAllNow();
         }
 
         private void Console_RunWorkerCompleted(object? sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -104,11 +150,8 @@ namespace AngbandOS.Web.Hubs
             // A game is over.  Remove it from the active games.
             SignalRConsole console = (SignalRConsole)sender;
             string connectionId = ConnectionIds[console];
-            Consoles.Remove(connectionId);
-            ConnectionIds.Remove(console);
 
-            // Run the update notifications.
-            UpdateNotifier.NotifyNow();
+            GameDisconnected(connectionId);
         }
 
         /// <summary>

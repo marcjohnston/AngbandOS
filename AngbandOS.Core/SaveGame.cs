@@ -112,7 +112,7 @@ namespace Cthangband
 
         public void NotifyNow()
         {
-            _updateNotifier.NotifyNow();
+            _updateNotifier.NotifyAllNow();
         }
 
         public void SetInjections(IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)

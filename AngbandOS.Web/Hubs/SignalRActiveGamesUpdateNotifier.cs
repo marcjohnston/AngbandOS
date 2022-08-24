@@ -12,7 +12,7 @@ namespace AngbandOS.Web.Hubs
             _action = action;
         }
 
-        public void NotifyNow()
+        public void NotifyAllNow()
         {
             _action();
         }
