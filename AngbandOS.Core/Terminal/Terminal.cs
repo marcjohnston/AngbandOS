@@ -180,12 +180,6 @@ namespace Cthangband.Terminal
             CursorCol += text.Length;
         }
 
-        public void Refresh()
-        {
-            //_window.InvalidateVisual();
-            //Application.DoEvents();
-        }
-
         /// <summary>
         /// Waits for a key to be pressed, and then returns that key
         /// </summary>

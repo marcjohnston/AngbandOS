@@ -403,7 +403,6 @@ namespace Cthangband.UI
         public void Initialise(IConsole console)
         {
             _terminal = new Terminal.Terminal(console);
-            _terminal.Refresh();
             ColorData.Add(Colour.Background, Color.Black);
             ColorData.Add(Colour.Black, Color.DarkSlateGray);
             ColorData.Add(Colour.Grey, Color.DimGray);
@@ -778,8 +777,7 @@ namespace Cthangband.UI
             int y2 = _display.Y2;
             Screen old = _display.Old;
             Screen scr = _display.Scr;
-            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy &&
-                !_display.TotalErase)
+            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !_display.TotalErase)
             {
                 return;
             }
@@ -862,7 +860,6 @@ namespace Cthangband.UI
             old.CursorVisible = scr.CursorVisible;
             old.Cx = scr.Cx;
             old.Cy = scr.Cy;
-            _terminal.Refresh();
         }
 
         public void RequestCommand(bool shopping)
