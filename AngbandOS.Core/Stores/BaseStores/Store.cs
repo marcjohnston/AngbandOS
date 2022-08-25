@@ -12,10 +12,7 @@ using Cthangband.Spells;
 using Cthangband.StaticData;
 using Cthangband.StoreCommands;
 using Cthangband.Stores;
-using Cthangband.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using AngbandOS.Interface;
 
 namespace Cthangband
 {

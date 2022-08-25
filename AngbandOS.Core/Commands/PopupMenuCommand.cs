@@ -1,5 +1,4 @@
-﻿using Cthangband.Terminal;
-using Cthangband.UI;
+﻿using Cthangband.UI;
 using System;
 using System.Collections.Generic;
 

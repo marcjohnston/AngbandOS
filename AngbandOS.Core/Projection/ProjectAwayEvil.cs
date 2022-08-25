@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.Interface;
 
 namespace Cthangband.Projection
 {

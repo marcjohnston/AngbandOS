@@ -81,10 +81,7 @@ namespace Cthangband
         public int TrackedMonsterIndex;
         public bool ViewingEquipment;
         public bool ViewingItemList;
-        public List<WandFlavour> WandFlavours;
-
-        [NonSerialized]
-        public Gui Gui;
+        public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
 
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
@@ -96,11 +93,13 @@ namespace Cthangband
         [NonSerialized]
         private IUpdateNotifier _updateNotifier;
 
-
         /// GUI
         [NonSerialized]
         private IConsole _console;
-        public readonly Dictionary<Colour, Color> ColorData = new Dictionary<Colour, Color>();
+
+        [NonSerialized]
+        public Dictionary<Colour, Color> ColorData;
+
         public int CommandArgument;
         public int CommandDirection;
         public char CurrentCommand;
@@ -145,7 +144,44 @@ namespace Cthangband
             Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
-            InitialiseAllocationTables();
+            InitializeAllocationTables();
+        }
+
+        private void InitializeColorData()
+        {
+            ColorData = new Dictionary<Colour, Color>();
+            ColorData.Add(Colour.Background, Color.Black);
+            ColorData.Add(Colour.Black, Color.DarkSlateGray);
+            ColorData.Add(Colour.Grey, Color.DimGray);
+            ColorData.Add(Colour.BrightGrey, Color.DarkGray);
+            ColorData.Add(Colour.Silver, Color.LightSlateGray);
+            ColorData.Add(Colour.Beige, Color.Moccasin);
+            ColorData.Add(Colour.BrightBeige, Color.Beige);
+            ColorData.Add(Colour.White, Color.LightGray);
+            ColorData.Add(Colour.BrightWhite, Color.White);
+            ColorData.Add(Colour.Red, Color.DarkRed);
+            ColorData.Add(Colour.BrightRed, Color.Red);
+            ColorData.Add(Colour.Copper, Color.Chocolate);
+            ColorData.Add(Colour.Orange, Color.OrangeRed);
+            ColorData.Add(Colour.BrightOrange, Color.Orange);
+            ColorData.Add(Colour.Brown, Color.SaddleBrown);
+            ColorData.Add(Colour.BrightBrown, Color.BurlyWood);
+            ColorData.Add(Colour.Gold, Color.Gold);
+            ColorData.Add(Colour.Yellow, Color.Khaki);
+            ColorData.Add(Colour.BrightYellow, Color.Yellow);
+            ColorData.Add(Colour.Chartreuse, Color.YellowGreen);
+            ColorData.Add(Colour.BrightChartreuse, Color.Chartreuse);
+            ColorData.Add(Colour.Green, Color.DarkGreen);
+            ColorData.Add(Colour.BrightGreen, Color.LimeGreen);
+            ColorData.Add(Colour.Turquoise, Color.DarkTurquoise);
+            ColorData.Add(Colour.BrightTurquoise, Color.Cyan);
+            ColorData.Add(Colour.Blue, Color.MediumBlue);
+            ColorData.Add(Colour.BrightBlue, Color.DeepSkyBlue);
+            ColorData.Add(Colour.Diamond, Color.LightCyan);
+            ColorData.Add(Colour.Purple, Color.Purple);
+            ColorData.Add(Colour.BrightPurple, Color.Violet);
+            ColorData.Add(Colour.Pink, Color.DeepPink);
+            ColorData.Add(Colour.BrightPink, Color.HotPink);
         }
 
         public void NotifyNow()
@@ -1101,8 +1137,15 @@ namespace Cthangband
             oPtr.BecomeKnown();
         }
 
-        public void Play()
+        public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
+            _console = console;
+            PersistentStorage = persistentStorage;
+            _updateNotifier = updateNotification;
+            _display = new Display(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
+            MapMovementKeys();
+            InitializeColorData();
+
             FullScreenOverlay = true;
             SetBackground(BackgroundImage.Normal);
             CursorVisible = false;
@@ -1740,7 +1783,7 @@ namespace Cthangband
             } while (tempMushrooms.Count > 0);
             AmuletFlavours = new List<AmuletFlavour>();
             List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (KeyValuePair<string, AmuletFlavour> pair in StaticResources.Instance.AmuletFlavours)
+            foreach (KeyValuePair<string, AmuletFlavour> pair in StaticResources.Instance.BaseAmuletFlavours)
             {
                 tempAmulets.Add(pair.Value);
             }
@@ -1865,7 +1908,7 @@ namespace Cthangband
             }
         }
 
-        private void InitialiseAllocationTables()
+        private void InitializeAllocationTables()
         {
             int i, j;
             ItemType kPtr;
@@ -19285,50 +19328,6 @@ namespace Cthangband
         }
 
         /// <summary>
-        /// Initialises the Gui
-        /// </summary>
-        public void Initialize(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
-        {
-            _console = console;
-            PersistentStorage = persistentStorage;
-            _updateNotifier = updateNotification;
-            ColorData.Add(Colour.Background, Color.Black);
-            ColorData.Add(Colour.Black, Color.DarkSlateGray);
-            ColorData.Add(Colour.Grey, Color.DimGray);
-            ColorData.Add(Colour.BrightGrey, Color.DarkGray);
-            ColorData.Add(Colour.Silver, Color.LightSlateGray);
-            ColorData.Add(Colour.Beige, Color.Moccasin);
-            ColorData.Add(Colour.BrightBeige, Color.Beige);
-            ColorData.Add(Colour.White, Color.LightGray);
-            ColorData.Add(Colour.BrightWhite, Color.White);
-            ColorData.Add(Colour.Red, Color.DarkRed);
-            ColorData.Add(Colour.BrightRed, Color.Red);
-            ColorData.Add(Colour.Copper, Color.Chocolate);
-            ColorData.Add(Colour.Orange, Color.OrangeRed);
-            ColorData.Add(Colour.BrightOrange, Color.Orange);
-            ColorData.Add(Colour.Brown, Color.SaddleBrown);
-            ColorData.Add(Colour.BrightBrown, Color.BurlyWood);
-            ColorData.Add(Colour.Gold, Color.Gold);
-            ColorData.Add(Colour.Yellow, Color.Khaki);
-            ColorData.Add(Colour.BrightYellow, Color.Yellow);
-            ColorData.Add(Colour.Chartreuse, Color.YellowGreen);
-            ColorData.Add(Colour.BrightChartreuse, Color.Chartreuse);
-            ColorData.Add(Colour.Green, Color.DarkGreen);
-            ColorData.Add(Colour.BrightGreen, Color.LimeGreen);
-            ColorData.Add(Colour.Turquoise, Color.DarkTurquoise);
-            ColorData.Add(Colour.BrightTurquoise, Color.Cyan);
-            ColorData.Add(Colour.Blue, Color.MediumBlue);
-            ColorData.Add(Colour.BrightBlue, Color.DeepSkyBlue);
-            ColorData.Add(Colour.Diamond, Color.LightCyan);
-            ColorData.Add(Colour.Purple, Color.Purple);
-            ColorData.Add(Colour.BrightPurple, Color.Violet);
-            ColorData.Add(Colour.Pink, Color.DeepPink);
-            ColorData.Add(Colour.BrightPink, Color.HotPink);
-            _display = new Display(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
-            MapMovementKeys();
-        }
-
-        /// <summary>
         /// Returns the next keypress. The behaviour of this function is modified by other class properties
         /// </summary>
         /// <returns> The next key pressed </returns>
@@ -20158,5 +20157,9 @@ namespace Cthangband
             }
         }
         /// GUI
+        /// 
+        /// Static Resources
+        
+        /// Static Resources
     }
 }

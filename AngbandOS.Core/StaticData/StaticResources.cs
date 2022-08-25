@@ -32,7 +32,7 @@ namespace Cthangband.StaticData
             private set;
         }
 
-        public Dictionary<string, AmuletFlavour> AmuletFlavours
+        public Dictionary<string, AmuletFlavour> BaseAmuletFlavours
         {
             get;
             private set;
@@ -41,7 +41,7 @@ namespace Cthangband.StaticData
         /// <summary>
         /// Animations for spells and effects
         /// </summary>
-        public Dictionary<string, Animation> Animations
+        public Dictionary<string, Animation> BaseAnimations
         {
             get;
             private set;
@@ -151,9 +151,9 @@ namespace Cthangband.StaticData
             Instance.BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             Instance.BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
             Instance.FloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
-            Instance.Animations = ReadEntitiesFromCsv(new Animation());
+            Instance.BaseAnimations = ReadEntitiesFromCsv(new Animation());
             Instance.ProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic());
-            Instance.AmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour());
+            Instance.BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour());
             Instance.MushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour());
             Instance.PotionFlavours = ReadEntitiesFromCsv(new PotionFlavour());
             Instance.WandFlavours = ReadEntitiesFromCsv(new WandFlavour());

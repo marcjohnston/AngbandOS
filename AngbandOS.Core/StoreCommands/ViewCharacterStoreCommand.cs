@@ -1,7 +1,6 @@
 ﻿using Cthangband.Commands;
 using Cthangband.Enumerations;
-using Cthangband.UI;
-using System;
+using AngbandOS.Interface;
 
 namespace Cthangband.StoreCommands
 {

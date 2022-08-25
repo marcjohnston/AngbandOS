@@ -22,6 +22,7 @@
     <None Remove="Data\RingFlavours.csv" />
     <None Remove="Data\RodFlavours.csv" />
     <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
+    <None Remove="Data\ScaffoldTemplates\BaseWandFlavor.template" />
     <None Remove="Data\ScrollFlavours.csv" />
     <None Remove="Data\StaffFlavours.csv" />
     <None Remove="Data\WandFlavours.csv" />
@@ -42,6 +43,7 @@
     <EmbeddedResource Include="Data\ProjectileGraphics.csv" />
     <EmbeddedResource Include="Data\RingFlavours.csv" />
     <EmbeddedResource Include="Data\RodFlavours.csv" />
+    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseWandFlavor.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseItemType.template" />
     <EmbeddedResource Include="Data\ScrollFlavours.csv" />
     <EmbeddedResource Include="Data\StaffFlavours.csv" />

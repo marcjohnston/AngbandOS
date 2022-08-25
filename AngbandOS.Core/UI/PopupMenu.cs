@@ -7,11 +7,6 @@
 // copies. Other copyrights may also apply.”
 using Cthangband.StaticData;
 using Cthangband.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cthangband.UI
 {

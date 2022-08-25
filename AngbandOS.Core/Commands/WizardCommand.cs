@@ -2,8 +2,7 @@
 using Cthangband.Enumerations;
 using Cthangband.Projection;
 using Cthangband.StaticData;
-using Cthangband.UI;
-using System;
+using AngbandOS.Interface;
 
 namespace Cthangband.Commands
 {

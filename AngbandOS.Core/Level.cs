@@ -7,9 +7,8 @@
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
-using Cthangband.UI;
-using System;
-using System.Collections.Generic;
+using Cthangband.StaticData;
+using AngbandOS.Interface;
 
 namespace Cthangband
 {

@@ -8,8 +8,7 @@
 using Cthangband.Enumerations;
 using Cthangband.Pantheon;
 using Cthangband.StaticData;
-using Cthangband.UI;
-using System.Collections.Generic;
+using AngbandOS.Interface;
 
 namespace Cthangband
 {

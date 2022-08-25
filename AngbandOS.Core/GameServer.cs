@@ -68,10 +68,11 @@ namespace Cthangband
             // Retrieve the game from the persistent storage.
             byte[] data = persistentStorage.ReadGame();
 
+            StaticResources.LoadOrCreate();
+
             // The game doesn't exist.  Start a new one.
             if (data == null)
             {
-                StaticResources.LoadOrCreate();
                 saveGame = new SaveGame();
             } 
             else
@@ -81,13 +82,8 @@ namespace Cthangband
                 MemoryStream memoryStream = new MemoryStream(data);
                 saveGame = (SaveGame)formatter.Deserialize(memoryStream);
             }
-            // The Gui is non-serialized.  We need to set it.
-            // The persistent storage is non-serialized.  We need to set it.
-            saveGame.Initialize(console, persistentStorage, updateNotifier);
 
-
-            StaticResources.LoadOrCreate();
-            saveGame.Play();
+            saveGame.Play(console, persistentStorage, updateNotifier);
         }
     }
 }

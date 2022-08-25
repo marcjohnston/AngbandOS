@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Web.Hubs
 {
-    [Serializable]
     public class SignalRActiveGamesUpdateNotifier : IUpdateNotifier
     {
         private readonly Action _action;
