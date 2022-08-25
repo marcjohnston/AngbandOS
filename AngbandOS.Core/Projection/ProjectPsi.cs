@@ -258,7 +258,7 @@ namespace Cthangband.Projection
                     }
                     if ((fear || doFear != 0) && mPtr.IsVisible)
                     {
-                        SaveGame.Gui.PlaySound(SoundEffect.MonsterFlees);
+                        SaveGame.PlaySound(SoundEffect.MonsterFlees);
                         SaveGame.MsgPrint($"{mName} flees in terror!");
                     }
                     if (doSleep != 0)

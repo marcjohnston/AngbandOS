@@ -83,11 +83,11 @@ namespace Cthangband
             }
             if (collectedScores.Count == 0)
             {
-                SaveGame.Gui.Clear();
-                SaveGame.Gui.SetBackground(BackgroundImage.Normal);
-                SaveGame.Gui.Print(Colour.Yellow, "High Scores", 1, 34);
-                SaveGame.Gui.Print(Colour.Yellow, "===========", 2, 34);
-                SaveGame.Gui.AnyKey(43);
+                SaveGame.Clear();
+                SaveGame.SetBackground(BackgroundImage.Normal);
+                SaveGame.Print(Colour.Yellow, "High Scores", 1, 34);
+                SaveGame.Print(Colour.Yellow, "===========", 2, 34);
+                SaveGame.AnyKey(43);
                 return;
             }
 
@@ -98,10 +98,10 @@ namespace Cthangband
             {
                 if (line == 0)
                 {
-                    SaveGame.Gui.Clear();
-                    SaveGame.Gui.SetBackground(BackgroundImage.Normal);
-                    SaveGame.Gui.Print(Colour.Yellow, "High Scores", 1, 34);
-                    SaveGame.Gui.Print(Colour.Yellow, "===========", 2, 34);
+                    SaveGame.Clear();
+                    SaveGame.SetBackground(BackgroundImage.Normal);
+                    SaveGame.Print(Colour.Yellow, "High Scores", 1, 34);
+                    SaveGame.Print(Colour.Yellow, "===========", 2, 34);
                 }
                 ShowScore(collectedScores[0], line);
                 line++;
@@ -109,7 +109,7 @@ namespace Cthangband
                 if (line > 9 || collectedScores.Count == 0)
                 {
                     line = 0;
-                    SaveGame.Gui.AnyKey(43);
+                    SaveGame.AnyKey(43);
                 }
             } while (collectedScores.Count > 0);
         }
@@ -277,15 +277,15 @@ namespace Cthangband
             if (score.Living)
             {
                 color = Colour.BrightGreen;
-                SaveGame.Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-                SaveGame.Gui.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
-                SaveGame.Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+                SaveGame.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+                SaveGame.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
+                SaveGame.Print(color, $"{score.Where}", (line * 3) + 7, 11);
             }
             else
             {
-                SaveGame.Gui.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-                SaveGame.Gui.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
-                SaveGame.Gui.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+                SaveGame.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+                SaveGame.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
+                SaveGame.Print(color, $"{score.Where}", (line * 3) + 7, 11);
             }
         }
 

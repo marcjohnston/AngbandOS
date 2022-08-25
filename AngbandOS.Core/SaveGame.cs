@@ -18,6 +18,7 @@ using Cthangband.UI;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -95,12 +96,49 @@ namespace Cthangband
         [NonSerialized]
         private IUpdateNotifier _updateNotifier;
 
+
+        /// GUI
+        [NonSerialized]
+        private IConsole _console;
+        public readonly Dictionary<Colour, Color> ColorData = new Dictionary<Colour, Color>();
+        public int CommandArgument;
+        public int CommandDirection;
+        public char CurrentCommand;
+
+        /// <summary>
+        /// Set to skip waiting for a keypress in the Inkey() function
+        /// </summary>
+        public bool DoNotWaitOnInkey;
+
+        /// <summary>
+        /// Set to indicate that there is a full screen overlay covering the normally updated locations
+        /// </summary>
+        public bool FullScreenOverlay;
+
+        /// <summary>
+        /// Set to indicate that the cursor should be hidden while waiting for a keypress with a
+        /// full screen overlay
+        /// </summary>
+        public bool HideCursorOnFullScreenInkey;
+
+        public bool InPopupMenu;
+        public char QueuedCommand;
+        private Display _display;
+
+        /// <summary>
+        /// A buffer of artificial keypresses
+        /// </summary>
+        private string _keyBuffer;
+
+        private string[][] _keymapAct;
+        private string _requestCommandBuffer;
+        /// GUI
+        
         /// <summary>
         /// Creates a new game.
         /// </summary>
         public SaveGame()
         {
-            Gui = new Gui(this);
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             GlobalData.PopulateNewProfile(this);
@@ -113,12 +151,6 @@ namespace Cthangband
         public void NotifyNow()
         {
             _updateNotifier.NotifyAllNow();
-        }
-
-        public void SetInjections(IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
-        {
-            PersistentStorage = persistentStorage;
-            _updateNotifier = updateNotification;
         }
 
         public void Quit(string reason)
@@ -262,25 +294,25 @@ namespace Cthangband
                         split = check;
                     }
                 }
-                Gui.Print(Colour.White, t.Substring(0, split), 0, 0, split);
+                Print(Colour.White, t.Substring(0, split), 0, 0, split);
                 MsgFlush(split + 1);
                 t = t.Substring(split);
                 n -= split;
             }
-            Gui.Print(Colour.White, t, 0, _msgPrintP, n);
+            Print(Colour.White, t, 0, _msgPrintP, n);
             MsgFlag = true;
             _msgPrintP += n + 1;
         }
         private void MsgFlush(int x)
         {
             const Colour a = Colour.BrightBlue;
-            Gui.Print(a, "-more-", 0, x);
+            Print(a, "-more-", 0, x);
             while (true)
             {
-                Gui.Inkey();
+                Inkey();
                 break;
             }
-            Gui.Erase(0, 0, 255);
+            Erase(0, 0, 255);
         }
         // PROFILE MESSAGING END
 
@@ -473,16 +505,16 @@ namespace Cthangband
                         wildMapSymbol = "~";
                         wildMapAttr = Colour.Blue;
                     }
-                    Gui.Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
+                    Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
                 }
             }
-            Gui.Print(Colour.Purple, "+------------+", 1, 1);
+            Print(Colour.Purple, "+------------+", 1, 1);
             for (y = 0; y < 12; y++)
             {
-                Gui.Print(Colour.Purple, "|", y + 2, 1);
-                Gui.Print(Colour.Purple, "|", y + 2, 14);
+                Print(Colour.Purple, "|", y + 2, 1);
+                Print(Colour.Purple, "|", y + 2, 14);
             }
-            Gui.Print(Colour.Purple, "+------------+", 14, 1);
+            Print(Colour.Purple, "+------------+", 14, 1);
             for (y = 0; y < Constants.MaxCaves; y++)
             {
                 string depth = Dungeons[y].KnownDepth ? $"{Dungeons[y].MaxLevel}" : "?";
@@ -507,12 +539,12 @@ namespace Cthangband
                 {
                     keyAttr = Colour.BrightRed;
                 }
-                Gui.Print(keyAttr, buffer, y + 1, 19);
+                Print(keyAttr, buffer, y + 1, 19);
             }
-            Gui.Print(Colour.Purple, "L:levels", 16, 1);
-            Gui.Print(Colour.Purple, "D:difficulty", 17, 1);
-            Gui.Print(Colour.Purple, "Q:quests", 18, 1);
-            Gui.Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
+            Print(Colour.Purple, "L:levels", 16, 1);
+            Print(Colour.Purple, "D:difficulty", 17, 1);
+            Print(Colour.Purple, "Q:quests", 18, 1);
+            Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
         }
 
         public void Disturb(bool stopSearch)
@@ -548,10 +580,10 @@ namespace Cthangband
             }
             MsgPrint(null);
             HandleStuff();
-            Gui.UpdateScreen();
+            UpdateScreen();
             DiedFrom = "(saved)";
             SavePlayer(Player);
-            Gui.UpdateScreen();
+            UpdateScreen();
             DiedFrom = "(alive and well)";
         }
 
@@ -637,7 +669,7 @@ namespace Cthangband
             }
             if (ViewingItemList)
             {
-                Gui.Save();
+                Save();
             }
             while (!done)
             {
@@ -701,8 +733,8 @@ namespace Cthangband
                 }
                 outVal += " ESC";
                 tmpVal = $"({outVal}) {prompt}";
-                Gui.PrintLine(tmpVal, 0, 0);
-                char which = Gui.Inkey();
+                PrintLine(tmpVal, 0, 0);
+                char which = Inkey();
                 int k;
                 switch (which)
                 {
@@ -718,12 +750,12 @@ namespace Cthangband
                         {
                             if (!ViewingItemList)
                             {
-                                Gui.Save();
+                                Save();
                                 ViewingItemList = true;
                             }
                             else
                             {
-                                Gui.Load();
+                                Load();
                                 ViewingItemList = false;
                             }
                             break;
@@ -736,8 +768,8 @@ namespace Cthangband
                             }
                             if (ViewingItemList)
                             {
-                                Gui.Load();
-                                Gui.Save();
+                                Load();
+                                Save();
                             }
                             ViewingEquipment = !ViewingEquipment;
                             break;
@@ -811,12 +843,12 @@ namespace Cthangband
             }
             if (ViewingItemList)
             {
-                Gui.Load();
+                Load();
             }
             ViewingItemList = false;
             Inventory.ItemFilterCategory = 0;
             ItemFilter = null;
-            Gui.PrintLine("", 0, 0);
+            PrintLine("", 0, 0);
             return item;
         }
 
@@ -1071,9 +1103,9 @@ namespace Cthangband
 
         public void Play()
         {
-            Gui.FullScreenOverlay = true;
-            Gui.SetBackground(BackgroundImage.Normal);
-            Gui.CursorVisible = false;
+            FullScreenOverlay = true;
+            SetBackground(BackgroundImage.Normal);
+            CursorVisible = false;
             if (Program.Rng.UseFixed)
             {
                 Program.Rng.UseFixed = false;
@@ -1120,7 +1152,7 @@ namespace Cthangband
             NotifyNow();
             MsgFlag = false;
             MsgPrint(null);
-            Gui.UpdateScreen();
+            UpdateScreen();
             FlavorInit();
             ApplyFlavourVisuals();
             if (Level == null)
@@ -1129,8 +1161,8 @@ namespace Cthangband
                 LevelFactory factory = new LevelFactory(this);
                 factory.GenerateNewLevel();
             }
-            Gui.FullScreenOverlay = false;
-            Gui.SetBackground(BackgroundImage.Overhead);
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImage.Overhead);
             Playing = true;
             if (Player.Health < 0)
             {
@@ -1213,7 +1245,7 @@ namespace Cthangband
             {
                 return;
             }
-            if (Gui.FullScreenOverlay)
+            if (FullScreenOverlay)
             {
                 return;
             }
@@ -1274,7 +1306,7 @@ namespace Cthangband
         {
             HandleStuff();
             MsgPrint(null);
-            Gui.FullScreenOverlay = true;
+            FullScreenOverlay = true;
             if (Player.IsDead)
             {
                 if (Player.IsWinner)
@@ -1298,7 +1330,7 @@ namespace Cthangband
                 DoCmdSaveGame(false);
                 //if (!Program.ExitToDesktop)
                 //{
-                //    Gui.Terminal.PlayMusic(MusicTrack.Menu);
+                //    Terminal.PlayMusic(MusicTrack.Menu);
                 //    Program.HiScores.DisplayScores(new HighScore(this));
                 //}
             }
@@ -1473,11 +1505,11 @@ namespace Cthangband
             TargetEngine targetEngine = new TargetEngine(this);
             NewLevelFlag = false;
             HackMind = false;
-            Gui.CurrentCommand = (char)0;
-            Gui.QueuedCommand = (char)0;
+            CurrentCommand = (char)0;
+            QueuedCommand = (char)0;
             CommandRepeat = 0;
-            Gui.CommandArgument = 0;
-            Gui.CommandDirection = 0;
+            CommandArgument = 0;
+            CommandDirection = 0;
             TargetWho = 0;
             HealthTrack(0);
             Level.Monsters.ShimmerMonsters = true;
@@ -1537,7 +1569,7 @@ namespace Cthangband
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Gui.UpdateScreen();
+            UpdateScreen();
             if (!Playing || Player.IsDead || NewLevelFlag)
             {
                 return;
@@ -1558,22 +1590,22 @@ namespace Cthangband
             {
                 if (Difficulty == 0)
                 {
-                    Gui.PlayMusic(MusicTrack.Town);
+                    PlayMusic(MusicTrack.Town);
                 }
                 else
                 {
-                    Gui.PlayMusic(MusicTrack.Wilderness);
+                    PlayMusic(MusicTrack.Wilderness);
                 }
             }
             else
             {
                 if (Quests.IsQuest(CurrentDepth))
                 {
-                    Gui.PlayMusic(MusicTrack.QuestLevel);
+                    PlayMusic(MusicTrack.QuestLevel);
                 }
                 else
                 {
-                    Gui.PlayMusic(MusicTrack.Dungeon);
+                    PlayMusic(MusicTrack.Dungeon);
                 }
             }
             while (true)
@@ -1939,9 +1971,9 @@ namespace Cthangband
             Player.ExperiencePoints = Player.MaxExperienceGained;
             Player.Level = Player.MaxLevelGained;
             Player.Gold += 10000000;
-            Gui.SetBackground(BackgroundImage.Crown);
-            Gui.Clear();
-            Gui.AnyKey(44);
+            SetBackground(BackgroundImage.Crown);
+            Clear();
+            AnyKey(44);
         }
 
         private EntityType ObjectFlavourEntity(int i)
@@ -1986,30 +2018,30 @@ namespace Cthangband
                 DateTime ct = DateTime.Now;
                 if (corpse.IsWinner)
                 {
-                    Gui.SetBackground(BackgroundImage.Sunset);
-                    Gui.PlayMusic(MusicTrack.Victory);
+                    SetBackground(BackgroundImage.Sunset);
+                    PlayMusic(MusicTrack.Victory);
                 }
                 else
                 {
-                    Gui.SetBackground(BackgroundImage.Tomb);
-                    Gui.PlayMusic(MusicTrack.Death);
+                    SetBackground(BackgroundImage.Tomb);
+                    PlayMusic(MusicTrack.Death);
                 }
-                Gui.Clear();
+                Clear();
                 string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);
                 if (corpse.IsWinner || corpse.Level > Constants.PyMaxLevel)
                 {
                     buf += " the Magnificent";
                 }
-                Gui.Print(buf, 39, 1);
+                Print(buf, 39, 1);
                 buf = $"Level {corpse.Level} {Profession.ClassSubName(corpse.ProfessionIndex, corpse.Realm1)}";
-                Gui.Print(buf, 40, 1);
+                Print(buf, 40, 1);
                 string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
-                Gui.Print(tmp, 39, 34);
+                Print(tmp, 39, 34);
                 tmp = $"by {DiedFrom}".PadLeft(45);
-                Gui.Print(tmp, 40, 34);
+                Print(tmp, 40, 34);
                 tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
-                Gui.Print(tmp, 41, 34);
-                Gui.AnyKey(44);
+                Print(tmp, 41, 34);
+                AnyKey(44);
             }
         }
 
@@ -2048,8 +2080,8 @@ namespace Cthangband
             }
             if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
             {
-                Gui.DoNotWaitOnInkey = true;
-                if (Gui.Inkey() != 0)
+                DoNotWaitOnInkey = true;
+                if (Inkey() != 0)
                 {
                     Disturb(false);
                     MsgPrint("Cancelled.");
@@ -2071,7 +2103,7 @@ namespace Cthangband
                     RedrawStuff();
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                Gui.UpdateScreen();
+                UpdateScreen();
                 if (Player.Inventory[InventorySlot.Pack].ItemType != null)
                 {
                     const int item = InventorySlot.Pack;
@@ -2097,7 +2129,7 @@ namespace Cthangband
                         RedrawStuff();
                     }
                 }
-                if (Gui.QueuedCommand == 0)
+                if (QueuedCommand == 0)
                 {
                     ViewingItemList = false;
                 }
@@ -2125,13 +2157,13 @@ namespace Cthangband
                     Player.RedrawNeeded.Set(RedrawFlag.PrState);
                     RedrawStuff();
                     MsgFlag = false;
-                    Gui.PrintLine("", 0, 0);
+                    PrintLine("", 0, 0);
                     ProcessCommand(true);
                 }
                 else
                 {
                     Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                    Gui.RequestCommand(false);
+                    RequestCommand(false);
                     ProcessCommand(false);
                 }
                 if (EnergyUse != 0)
@@ -2651,7 +2683,7 @@ namespace Cthangband
                     }
                     else
                     {
-                        if (Gui.GetCheck("Teleport? "))
+                        if (GetCheck("Teleport? "))
                         {
                             Disturb(false);
                             TeleportPlayer(50);
@@ -2751,7 +2783,7 @@ namespace Cthangband
                         }
                         NewLevelFlag = true;
                     }
-                    Gui.PlaySound(SoundEffect.TeleportLevel);
+                    PlaySound(SoundEffect.TeleportLevel);
                 }
             }
         }
@@ -2766,7 +2798,7 @@ namespace Cthangband
             {
                 return;
             }
-            if (Gui.FullScreenOverlay)
+            if (FullScreenOverlay)
             {
                 return;
             }
@@ -2775,7 +2807,7 @@ namespace Cthangband
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrWipe);
                 MsgPrint(null);
-                Gui.Clear();
+                Clear();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMap))
             {
@@ -2965,7 +2997,7 @@ namespace Cthangband
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             string oName = oPtr.Description(true, 3);
             string outVal = $"{prompt} {oName}? ";
-            return Gui.GetCheck(outVal);
+            return GetCheck(outVal);
         }
 
 
@@ -3145,7 +3177,7 @@ namespace Cthangband
         public void Alchemy()
         {
             int amt = 1;
-            bool force = Gui.CommandArgument > 0;
+            bool force = CommandArgument > 0;
             if (!GetItem(out int item, "Turn which item to gold? ", false, true, true))
             {
                 if (item == -2)
@@ -3157,7 +3189,7 @@ namespace Cthangband
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             if (oPtr.Count > 1)
             {
-                amt = Gui.GetQuantity(null, oPtr.Count, true);
+                amt = GetQuantity(null, oPtr.Count, true);
                 if (amt <= 0)
                 {
                     return;
@@ -3172,7 +3204,7 @@ namespace Cthangband
                 if (!(oPtr.Value() < 1))
                 {
                     string outVal = $"Really turn {oName} to gold? ";
-                    if (!Gui.GetCheck(outVal))
+                    if (!GetCheck(outVal))
                     {
                         return;
                     }
@@ -3570,7 +3602,7 @@ namespace Cthangband
         public void Carnage(bool playerCast)
         {
             int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
-            Gui.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
+            GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
             for (int i = 1; i < Level.MMax; i++)
             {
                 Monster mPtr = Level.Monsters[i];
@@ -3599,8 +3631,8 @@ namespace Cthangband
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
                 HandleStuff();
-                Gui.UpdateScreen();
-                Gui.Pause(msec);
+                UpdateScreen();
+                Pause(msec);
             }
         }
 
@@ -4997,8 +5029,8 @@ namespace Cthangband
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
                 HandleStuff();
-                Gui.UpdateScreen();
-                Gui.Pause(msec);
+                UpdateScreen();
+                Pause(msec);
             }
         }
 
@@ -5418,29 +5450,29 @@ namespace Cthangband
                 info2[i] = ReportMagicsAux(Player.TimedPoisonResistance);
                 info[i++] = "You are resistant to poison";
             }
-            Gui.Save();
+            Save();
             for (k = 1; k < 24; k++)
             {
-                Gui.PrintLine("", k, 13);
+                PrintLine("", k, 13);
             }
-            Gui.PrintLine("     Your Current Magic:", 1, 15);
+            PrintLine("     Your Current Magic:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
                 string dummy = $"{info[j]} {GlobalData.ReportMagicDurations[info2[j]]}.";
-                Gui.PrintLine(dummy, k++, 15);
+                PrintLine(dummy, k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    Gui.PrintLine("-- more --", k, 15);
-                    Gui.Inkey();
+                    PrintLine("-- more --", k, 15);
+                    Inkey();
                     for (; k > 2; k--)
                     {
-                        Gui.PrintLine("", k, 15);
+                        PrintLine("", k, 15);
                     }
                 }
             }
-            Gui.PrintLine("[Press any key to continue]", k, 13);
-            Gui.Inkey();
-            Gui.Load();
+            PrintLine("[Press any key to continue]", k, 13);
+            Inkey();
+            Load();
         }
 
         public void SelfKnowledge()
@@ -6091,28 +6123,28 @@ namespace Cthangband
                     info[i++] = "Your weapon is a great bane of dragons.";
                 }
             }
-            Gui.Save();
+            Save();
             for (k = 1; k < 24; k++)
             {
-                Gui.PrintLine("", k, 13);
+                PrintLine("", k, 13);
             }
-            Gui.PrintLine("     Your Attributes:", 1, 15);
+            PrintLine("     Your Attributes:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
-                Gui.PrintLine(info[j], k++, 15);
+                PrintLine(info[j], k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    Gui.PrintLine("-- more --", k, 15);
-                    Gui.Inkey();
+                    PrintLine("-- more --", k, 15);
+                    Inkey();
                     for (; k > 2; k--)
                     {
-                        Gui.PrintLine("", k, 15);
+                        PrintLine("", k, 15);
                     }
                 }
             }
-            Gui.PrintLine("[Press any key to continue]", k, 13);
-            Gui.Inkey();
-            Gui.Load();
+            PrintLine("[Press any key to continue]", k, 13);
+            Inkey();
+            Load();
         }
 
         public bool SetAcidDestroy(Item oPtr)
@@ -6330,7 +6362,7 @@ namespace Cthangband
                 dis *= 2;
                 min /= 2;
             }
-            Gui.PlaySound(SoundEffect.Teleport);
+            PlaySound(SoundEffect.Teleport);
             Level.Grid[ny][nx].MonsterIndex = mIdx;
             Level.Grid[oy][ox].MonsterIndex = 0;
             mPtr.MapY = ny;
@@ -6397,7 +6429,7 @@ namespace Cthangband
                 dis *= 2;
                 min /= 2;
             }
-            Gui.PlaySound(SoundEffect.Teleport);
+            PlaySound(SoundEffect.Teleport);
             int oy = Player.MapY;
             int ox = Player.MapX;
             Player.MapY = y;
@@ -6481,7 +6513,7 @@ namespace Cthangband
             DoCmdSaveGame(true);
             CurrentDepth++;
             NewLevelFlag = true;
-            Gui.PlaySound(SoundEffect.TeleportLevel);
+            PlaySound(SoundEffect.TeleportLevel);
         }
 
         public void TeleportPlayerTo(int ny, int nx)
@@ -6513,7 +6545,7 @@ namespace Cthangband
                     dis++;
                 }
             }
-            Gui.PlaySound(SoundEffect.Teleport);
+            PlaySound(SoundEffect.Teleport);
             int oy = Player.MapY;
             int ox = Player.MapX;
             Player.MapY = y;
@@ -6556,7 +6588,7 @@ namespace Cthangband
                 }
                 else
                 {
-                    Gui.PlaySound(SoundEffect.Teleport);
+                    PlaySound(SoundEffect.Teleport);
                     Level.Grid[Player.MapY][Player.MapX].MonsterIndex = cPtr.MonsterIndex;
                     cPtr.MonsterIndex = 0;
                     mPtr.MapY = Player.MapY;
@@ -7084,7 +7116,7 @@ namespace Cthangband
             {
                 return;
             }
-            Gui.PlaySound(SoundEffect.Teleport);
+            PlaySound(SoundEffect.Teleport);
             Level.Grid[ny][nx].MonsterIndex = mIdx;
             Level.Grid[oy][ox].MonsterIndex = 0;
             mPtr.MapY = ny;
@@ -7101,7 +7133,7 @@ namespace Cthangband
         public void ProcessCommand(bool isRepeated)
         {
             // Get the current command
-            char c = Gui.CurrentCommand;
+            char c = CurrentCommand;
 
             // Process commands
             foreach (ICommand command in CommandManager.GameCommands)
@@ -7116,21 +7148,21 @@ namespace Cthangband
                     if (!isRepeated && command.Repeat.HasValue)
                     {
                         // Only apply the default once.
-                        Gui.CommandArgument = command.Repeat.Value;
+                        CommandArgument = command.Repeat.Value;
                     }
 
-                    if (Gui.CommandArgument > 0)
+                    if (CommandArgument > 0)
                     {
-                        CommandRepeat = Gui.CommandArgument - 1;
+                        CommandRepeat = CommandArgument - 1;
                         Player.RedrawNeeded.Set(RedrawFlag.PrState);
-                        Gui.CommandArgument = 0;
+                        CommandArgument = 0;
                     }
 
                     // The command was processed.  Skip the SWITCH statement.
                     return;
                 }
             }
-            Gui.PrintLine("Type '?' for a list of commands.", 0, 0);
+            PrintLine("Type '?' for a list of commands.", 0, 0);
         }
 
         // Combat Engine
@@ -8226,7 +8258,7 @@ namespace Cthangband
             // If the monster just got scared, let the player know
             if (monster.IsVisible && fear)
             {
-                Gui.PlaySound(SoundEffect.MonsterFlees);
+                PlaySound(SoundEffect.MonsterFlees);
                 MsgPrint($"{monsterName} flees in terror!");
             }
         }
@@ -8351,7 +8383,7 @@ namespace Cthangband
             {
                 MsgPrint("The door crashes open!");
                 Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
-                Gui.PlaySound(SoundEffect.OpenDoor);
+                PlaySound(SoundEffect.OpenDoor);
                 MovePlayer(dir, false);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
@@ -8550,7 +8582,7 @@ namespace Cthangband
             // If we're about to kill ourselves, give us chance to back out
             if (useHealth && Player.Health < cost)
             {
-                if (!Gui.GetCheck("Really use the power in your weakened state? "))
+                if (!GetCheck("Really use the power in your weakened state? "))
                 {
                     EnergyUse = 0;
                     return false;
@@ -8619,7 +8651,7 @@ namespace Cthangband
             {
                 Level.CaveSetFeat(y, x, "LockedDoor0");
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
-                Gui.PlaySound(SoundEffect.ShutDoor);
+                PlaySound(SoundEffect.ShutDoor);
             }
             return false;
         }
@@ -9494,7 +9526,7 @@ namespace Cthangband
                         }
                     }
                 }
-                Gui.PlaySound(SoundEffect.BumpWall);
+                PlaySound(SoundEffect.BumpWall);
                 return;
             }
             // Assuming we didn't bump into anything, maybe we can actually move
@@ -9547,7 +9579,7 @@ namespace Cthangband
             if (tile.FeatureType.IsShop)
             {
                 Disturb(false);
-                Gui.QueuedCommand = '_';
+                QueuedCommand = '_';
             }
             // If we've just stepped on an unknown trap then activate it
             else if (tile.FeatureType.Name == "Invis")
@@ -9668,7 +9700,7 @@ namespace Cthangband
                     MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
-                    Gui.PlaySound(SoundEffect.LockpickSuccess);
+                    PlaySound(SoundEffect.LockpickSuccess);
                     // Picking a lock gains you an experience point
                     Player.GainExperience(1);
                 }
@@ -9683,7 +9715,7 @@ namespace Cthangband
             {
                 Level.CaveSetFeat(y, x, "OpenDoor");
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
-                Gui.PlaySound(SoundEffect.OpenDoor);
+                PlaySound(SoundEffect.OpenDoor);
             }
             return more;
         }
@@ -9814,7 +9846,7 @@ namespace Cthangband
                 if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
                 {
                     PlayerStatus playerStatus = new PlayerStatus(this);
-                    Gui.PlaySound(SoundEffect.MeleeHit);
+                    PlaySound(SoundEffect.MeleeHit);
                     // Tell the player they hit it with the appropriate message
                     if (!(backstab || stabFleeing))
                     {
@@ -10127,7 +10159,7 @@ namespace Cthangband
                 // We missed
                 else
                 {
-                    Gui.PlaySound(SoundEffect.Miss);
+                    PlaySound(SoundEffect.Miss);
                     MsgPrint($"You miss {monsterName}.");
                 }
             }
@@ -10141,7 +10173,7 @@ namespace Cthangband
             }
             if (fear && monster.IsVisible && !noExtra)
             {
-                Gui.PlaySound(SoundEffect.MonsterFlees);
+                PlaySound(SoundEffect.MonsterFlees);
                 MsgPrint($"{monsterName} flees in terror!");
             }
             if (doQuake)
@@ -11600,7 +11632,7 @@ namespace Cthangband
             }
             if (!repeat)
             {
-                Gui.PlaySound(SoundEffect.Dig);
+                PlaySound(SoundEffect.Dig);
             }
             return repeat;
         }
@@ -11680,7 +11712,7 @@ namespace Cthangband
                     int dreamPower;
                     while (true)
                     {
-                        if (!Gui.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
+                        if (!GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
                         {
                             dreamPower = 0;
                             break;
@@ -12133,7 +12165,7 @@ namespace Cthangband
                     MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
-                    Gui.PlaySound(SoundEffect.LockpickSuccess);
+                    PlaySound(SoundEffect.LockpickSuccess);
                     Player.GainExperience(1);
                 }
                 // If we failed, simply let us know
@@ -12147,7 +12179,7 @@ namespace Cthangband
             {
                 Level.CaveSetFeat(y, x, "OpenDoor");
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
-                Gui.PlaySound(SoundEffect.OpenDoor);
+                PlaySound(SoundEffect.OpenDoor);
             }
             return true;
         }
@@ -12246,7 +12278,7 @@ namespace Cthangband
             if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
             {
                 // It was a hit, so let the player know
-                Gui.PlaySound(SoundEffect.MeleeHit);
+                PlaySound(SoundEffect.MeleeHit);
                 MsgPrint($"You hit {monsterName} with your {attackDescription}.");
                 // Roll the damage, with possible critical damage
                 int damage = Program.Rng.DiceRoll(damageDice, damageSides);
@@ -12286,7 +12318,7 @@ namespace Cthangband
             else
             {
                 // We missed, so just let us know
-                Gui.PlaySound(SoundEffect.Miss);
+                PlaySound(SoundEffect.Miss);
                 MsgPrint($"You miss {monsterName}.");
             }
         }
@@ -15646,7 +15678,7 @@ namespace Cthangband
                 {
                     // Construct a message telling the player what happened
                     string monsterName = monster.MonsterDesc(0);
-                    Gui.PlaySound(SoundEffect.MonsterDies);
+                    PlaySound(SoundEffect.MonsterDies);
                     // Append the note if there is one
                     if (!string.IsNullOrEmpty(note))
                     {
@@ -18920,5 +18952,1211 @@ namespace Cthangband
             // We did cast a spell
             return true;
         }
+
+
+
+        /// GUI
+        /// <summary>
+        /// Sets or returns whether the cursor is visible
+        /// </summary>
+        public bool CursorVisible
+        {
+            get => _display.Scr.CursorVisible;
+            set => _display.Scr.CursorVisible = value;
+        }
+
+        /// <summary>
+        /// Prints a 'press any key' message and waits for a key press
+        /// </summary>
+        /// <param name="row"> The row on which to print the message </param>
+        public void AnyKey(int row)
+        {
+            PrintLine("", row, 0);
+            Print(Colour.Orange, "[Press any key to continue]", row, 27);
+            Inkey();
+            PrintLine("", row, 0);
+        }
+
+        public bool AskforAux(out string buf, string initial, int len)
+        {
+            buf = initial;
+            char i = '\0';
+            int k = 0;
+            bool done = false;
+            Locate(out int y, out int x);
+            if (len < 1)
+            {
+                len = 1;
+            }
+            if (x < 0 || x >= Constants.ConsoleWidth)
+            {
+                x = 0;
+            }
+            if (x + len > Constants.ConsoleWidth)
+            {
+                len = Constants.ConsoleWidth - x;
+            }
+            Erase(y, x, len);
+            Print(Colour.Grey, buf, y, x);
+            while (!done)
+            {
+                Goto(y, x + k);
+                i = Inkey();
+                switch (i)
+                {
+                    case '\x1b':
+                        k = 0;
+                        done = true;
+                        break;
+
+                    case '\n':
+                    case '\r':
+                        k = buf.Length;
+                        done = true;
+                        break;
+
+                    case (char)8:
+                        if (k > 0)
+                        {
+                            k--;
+                        }
+                        buf = buf.Substring(0, k);
+                        break;
+
+                    default:
+                        if (k < len && (char.IsLetterOrDigit(i) || i == ' ' || char.IsPunctuation(i)))
+                        {
+                            buf = buf.Substring(0, k) + i;
+                            k++;
+                        }
+                        break;
+                }
+                Erase(y, x, len);
+                Print(Colour.Black, buf, y, x);
+            }
+            return i != '\x1b';
+        }
+
+        /// <summary>
+        /// Clears the screen from the specified row downwards
+        /// </summary>
+        /// <param name="row"> The first row to clear </param>
+        public void Clear(int row)
+        {
+            for (int y = row; y < _display.Height; y++)
+            {
+                Erase(y, 0, 255);
+            }
+        }
+
+        /// <summary>
+        /// Clears the entire screen
+        /// </summary>
+        public void Clear()
+        {
+            int w = _display.Width;
+            int h = _display.Height;
+            Colour na = _display.AttrBlank;
+            char nc = _display.CharBlank;
+            _display.Scr.Cu = false;
+            _display.Scr.Cx = 0;
+            _display.Scr.Cy = 0;
+            for (int y = 0; y < h; y++)
+            {
+                int scrAa = _display.Scr.A[y];
+                int scrCc = _display.Scr.C[y];
+                for (int x = 0; x < w; x++)
+                {
+                    _display.Scr.Va[scrAa + x] = na;
+                    _display.Scr.Vc[scrCc + x] = nc;
+                }
+                _display.X1[y] = 0;
+                _display.X2[y] = w - 1;
+            }
+            _display.Y1 = 0;
+            _display.Y2 = h - 1;
+            _display.TotalErase = true;
+        }
+
+        /// <summary>
+        /// Erases a number of characters on the screen
+        /// </summary>
+        /// <param name="row"> The row position of the first character </param>
+        /// <param name="col"> The column position of the first character </param>
+        /// <param name="length"> The number of characters to erase </param>
+        public void Erase(int row, int col, int length)
+        {
+            int w = _display.Width;
+            int x1 = -1;
+            int x2 = -1;
+            Colour na = _display.AttrBlank;
+            char nc = _display.CharBlank;
+            Goto(row, col);
+            if (col + length > w)
+            {
+                length = w - col;
+            }
+            int scrAa = _display.Scr.A[row];
+            int scrCc = _display.Scr.C[row];
+            for (int i = 0; i < length; i++, col++)
+            {
+                Colour oa = _display.Scr.Va[scrAa + col];
+                int oc = _display.Scr.Vc[scrCc + col];
+                if (oa == na && oc == nc)
+                {
+                    continue;
+                }
+                _display.Scr.Va[scrAa + col] = na;
+                _display.Scr.Vc[scrCc + col] = nc;
+                if (x1 < 0)
+                {
+                    x1 = col;
+                }
+                x2 = col;
+            }
+            if (x1 >= 0)
+            {
+                if (row < _display.Y1)
+                {
+                    _display.Y1 = row;
+                }
+                if (row > _display.Y2)
+                {
+                    _display.Y2 = row;
+                }
+                if (x1 < _display.X1[row])
+                {
+                    _display.X1[row] = x1;
+                }
+                if (x2 > _display.X2[row])
+                {
+                    _display.X2[row] = x2;
+                }
+            }
+        }
+
+        public bool GetCheck(string prompt)
+        {
+            int i;
+            MsgPrint(null);
+            string buf = $"{prompt}[Y/n]";
+            PrintLine(buf, 0, 0);
+            while (true)
+            {
+                i = Inkey();
+                switch (i)
+                {
+                    case 'y':
+                    case 'Y':
+                    case 'n':
+                    case 'N':
+                    case 13:
+                    case 27:
+                        break;
+
+                    default:
+                        continue;
+                }
+                break;
+            }
+            PrintLine("", 0, 0);
+            return i == 'Y' || i == 'y' || i == 13;
+        }
+
+        public bool GetCom(string prompt, out char command)
+        {
+            MsgPrint(null);
+            if (prompt.Length > 1)
+            {
+                prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
+            }
+            PrintLine(prompt, 0, 0);
+            command = Inkey();
+            PrintLine("", 0, 0);
+            return command != '\x1b';
+        }
+
+        public int GetKeymapDir(char ch)
+        {
+            int d = 0;
+            string act = _keymapAct[Constants.KeymapModeOrig][ch];
+            while (true)
+            {
+                if (act.Length == 0)
+                {
+                    return 0;
+                }
+                if (act[0] >= '1' && act[0] <= '9')
+                {
+                    break;
+                }
+                act = act.Remove(0, 1);
+            }
+            if (!string.IsNullOrEmpty(act))
+            {
+                if (!int.TryParse(act, out d))
+                {
+                    d = 0;
+                }
+            }
+            return d;
+        }
+
+        public int GetQuantity(string prompt, int max, bool allbydefault)
+        {
+            int amt;
+            if (CommandArgument != 0)
+            {
+                amt = CommandArgument;
+                CommandArgument = 0;
+                if (amt > max)
+                {
+                    amt = max;
+                }
+                return amt;
+            }
+            if (string.IsNullOrEmpty(prompt))
+            {
+                string tmp = $"Quantity (1-{max}): ";
+                prompt = tmp;
+            }
+            amt = 1;
+            if (allbydefault)
+            {
+                amt = max;
+            }
+            string def = amt.ToString();
+            if (!GetString(prompt, out string buf, def, 6))
+            {
+                return 0;
+            }
+            if (int.TryParse(buf, out int test))
+            {
+                amt = test;
+            }
+            if (string.IsNullOrEmpty(buf))
+            {
+                amt = max;
+            }
+            else if (char.IsLetter(buf[0]))
+            {
+                amt = max;
+            }
+            if (amt > max)
+            {
+                amt = max;
+            }
+            if (amt < 0)
+            {
+                amt = 0;
+            }
+            return amt;
+        }
+
+        public bool GetString(string prompt, out string buf, string initial, int len)
+        {
+            MsgPrint(null);
+            PrintLine(prompt, 0, 0);
+            bool res = AskforAux(out buf, initial, len);
+            PrintLine("", 0, 0);
+            return res;
+        }
+
+        /// <summary>
+        /// Moves the cursor and print location to a new position
+        /// </summary>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void Goto(int row, int col)
+        {
+            int w = _display.Width;
+            int h = _display.Height;
+            if (col < 0 || col >= w)
+            {
+                return;
+            }
+            if (row < 0 || row >= h)
+            {
+                return;
+            }
+            _display.Scr.Cx = col;
+            _display.Scr.Cy = row;
+            _display.Scr.Cu = false;
+        }
+
+        /// <summary>
+        /// Initialises the Gui
+        /// </summary>
+        public void Initialize(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
+        {
+            _console = console;
+            PersistentStorage = persistentStorage;
+            _updateNotifier = updateNotification;
+            ColorData.Add(Colour.Background, Color.Black);
+            ColorData.Add(Colour.Black, Color.DarkSlateGray);
+            ColorData.Add(Colour.Grey, Color.DimGray);
+            ColorData.Add(Colour.BrightGrey, Color.DarkGray);
+            ColorData.Add(Colour.Silver, Color.LightSlateGray);
+            ColorData.Add(Colour.Beige, Color.Moccasin);
+            ColorData.Add(Colour.BrightBeige, Color.Beige);
+            ColorData.Add(Colour.White, Color.LightGray);
+            ColorData.Add(Colour.BrightWhite, Color.White);
+            ColorData.Add(Colour.Red, Color.DarkRed);
+            ColorData.Add(Colour.BrightRed, Color.Red);
+            ColorData.Add(Colour.Copper, Color.Chocolate);
+            ColorData.Add(Colour.Orange, Color.OrangeRed);
+            ColorData.Add(Colour.BrightOrange, Color.Orange);
+            ColorData.Add(Colour.Brown, Color.SaddleBrown);
+            ColorData.Add(Colour.BrightBrown, Color.BurlyWood);
+            ColorData.Add(Colour.Gold, Color.Gold);
+            ColorData.Add(Colour.Yellow, Color.Khaki);
+            ColorData.Add(Colour.BrightYellow, Color.Yellow);
+            ColorData.Add(Colour.Chartreuse, Color.YellowGreen);
+            ColorData.Add(Colour.BrightChartreuse, Color.Chartreuse);
+            ColorData.Add(Colour.Green, Color.DarkGreen);
+            ColorData.Add(Colour.BrightGreen, Color.LimeGreen);
+            ColorData.Add(Colour.Turquoise, Color.DarkTurquoise);
+            ColorData.Add(Colour.BrightTurquoise, Color.Cyan);
+            ColorData.Add(Colour.Blue, Color.MediumBlue);
+            ColorData.Add(Colour.BrightBlue, Color.DeepSkyBlue);
+            ColorData.Add(Colour.Diamond, Color.LightCyan);
+            ColorData.Add(Colour.Purple, Color.Purple);
+            ColorData.Add(Colour.BrightPurple, Color.Violet);
+            ColorData.Add(Colour.Pink, Color.DeepPink);
+            ColorData.Add(Colour.BrightPink, Color.HotPink);
+            _display = new Display(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
+            MapMovementKeys();
+        }
+
+        /// <summary>
+        /// Returns the next keypress. The behaviour of this function is modified by other class properties
+        /// </summary>
+        /// <returns> The next key pressed </returns>
+        public char Inkey()
+        {
+            char ch = '\0';
+            bool done = false;
+            if (!string.IsNullOrEmpty(_keyBuffer))
+            {
+                ch = _keyBuffer[0];
+                _keyBuffer = _keyBuffer.Remove(0, 1);
+                HideCursorOnFullScreenInkey = false;
+                DoNotWaitOnInkey = false;
+                return ch;
+            }
+            _keyBuffer = null;
+            bool v = CursorVisible;
+            if (!DoNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+            {
+                CursorVisible = true;
+            }
+            if (InPopupMenu)
+            {
+                CursorVisible = false;
+            }
+            while (ch == 0)
+            {
+                if (DoNotWaitOnInkey && GetKeypress(out char kk, false, false))
+                {
+                    ch = kk;
+                    break;
+                }
+                if (!done && GetKeypress(out _, false, false))
+                {
+                    UpdateScreen();
+                    done = true;
+                }
+                if (DoNotWaitOnInkey)
+                {
+                    break;
+                }
+                GetKeypress(out ch, true, true);
+                if (ch == 29)
+                {
+                    ch = '\0';
+                    continue;
+                }
+                if (ch == '`')
+                {
+                    ch = '\x1b';
+                }
+                if (ch == 30)
+                {
+                    ch = '\0';
+                }
+            }
+            CursorVisible = v;
+            HideCursorOnFullScreenInkey = false;
+            DoNotWaitOnInkey = false;
+            return ch;
+        }
+
+        /// <summary>
+        /// Re-loads the saved screen to the GUI
+        /// </summary>
+        public void Load()
+        {
+            int w = _display.Width;
+            int h = _display.Height;
+            if (_display.Mem == null)
+            {
+                _display.Mem = new Screen(w, h);
+            }
+            _display.Scr.Copy(_display.Mem, w, h);
+            for (int y = 0; y < h; y++)
+            {
+                _display.X1[y] = 0;
+                _display.X2[y] = w - 1;
+            }
+            _display.Y1 = 0;
+            _display.Y2 = h - 1;
+        }
+
+        /// <summary>
+        /// Pauses for a duration
+        /// </summary>
+        /// <param name="duration"> The duration of the pause, in milliseconds </param>
+        public void Pause(int duration)
+        {
+            Thread.Sleep(duration);
+        }
+
+        /// <summary>
+        /// Places a character without moving the text position
+        /// </summary>
+        /// <param name="attr"> The colour to use for the character </param>
+        /// <param name="ch"> The character to place </param>
+        /// <param name="row"> The row at which to place the character </param>
+        /// <param name="col"> The column at which to place the character </param>
+        public void Place(Colour attr, char ch, int row, int col)
+        {
+            int w = _display.Width;
+            int h = _display.Height;
+            if (col < 0 || col >= w)
+            {
+                return;
+            }
+            if (row < 0 || row >= h)
+            {
+                return;
+            }
+            if (ch == 0)
+            {
+                return;
+            }
+            QueueCharacter(col, row, attr, ch);
+        }
+
+        /// <summary>
+        /// Plays a sound
+        /// </summary>
+        /// <param name="val"> The sound to play </param>
+        public void PlaySound(SoundEffect sound)
+        {
+            _console.PlaySound(sound);
+        }
+
+        /// <summary>
+        /// Prints a character at the current cursor position
+        /// </summary>
+        /// <param name="attr"> The colour in which to print the character </param>
+        /// <param name="ch"> The character to print </param>
+        public void Print(Colour attr, char ch)
+        {
+            int w = _display.Width;
+            if (_display.Scr.Cu)
+            {
+                return;
+            }
+            if (ch == 0)
+            {
+                return;
+            }
+            QueueCharacter(_display.Scr.Cx, _display.Scr.Cy, attr, ch);
+            _display.Scr.Cx++;
+            if (_display.Scr.Cx < w)
+            {
+                return;
+            }
+            _display.Scr.Cu = true;
+        }
+
+        /// <summary>
+        /// Prints a character at a given location
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="ch"> The character to print </param>
+        /// <param name="row"> The y position at which to print </param>
+        /// <param name="col"> The x position at which to print </param>
+        public void Print(Colour attr, char ch, int row, int col)
+        {
+            Goto(row, col);
+            Print(attr, ch);
+        }
+
+        /// <summary>
+        /// Prints a string at the current location
+        /// </summary>
+        /// <param name="attr"> The colour in which to print the string </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="length"> The number of characters to print (-1 for all) </param>
+        public void Print(Colour attr, string str, int length)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return;
+            }
+            int w = _display.Width;
+            int res = 0;
+            int len = str.Length;
+            if (_display.Scr.Cu)
+            {
+                return;
+            }
+            int k = length < 0 ? w + 1 : length;
+            for (length = 0; length < k && length < len; length++)
+            {
+            }
+            if (_display.Scr.Cx + length >= w)
+            {
+                res = w - _display.Scr.Cx;
+                length = w - _display.Scr.Cx;
+            }
+            QueueCharacters(_display.Scr.Cx, _display.Scr.Cy, length, attr, str);
+            _display.Scr.Cx += length;
+            if (res != 0)
+            {
+                _display.Scr.Cu = true;
+            }
+        }
+
+        /// <summary>
+        /// Prints a string at a given location
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The y position at which to print the string </param>
+        /// <param name="col"> The x position at which to print the string </param>
+        /// <param name="length"> The number of characters to print (-1 for all) </param>
+        public void Print(Colour attr, string str, int row, int col, int length)
+        {
+            Goto(row, col);
+            Print(attr, str, length);
+        }
+
+        /// <summary>
+        /// Prints a string at a given location
+        /// </summary>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void Print(string str, int row, int col)
+        {
+            Goto(row, col);
+            Print(Colour.White, str, -1);
+        }
+
+        /// <summary>
+        /// Prints a string
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void Print(Colour attr, string str, int row, int col)
+        {
+            Goto(row, col);
+            Print(attr, str, -1);
+        }
+
+        /// <summary>
+        /// Print a string, wiping the rest of the line
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void PrintLine(Colour attr, string str, int row, int col)
+        {
+            Erase(row, col, 255);
+            Print(attr, str, -1);
+        }
+
+        /// <summary>
+        /// Print a string, wiping to the end of the line
+        /// </summary>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void PrintLine(string str, int row, int col)
+        {
+            PrintLine(Colour.White, str, row, col);
+        }
+
+        /// <summary>
+        /// Prints a string, word-wrapping it onto successive lines
+        /// </summary>
+        /// <param name="a"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        public void PrintWrap(Colour a, string str)
+        {
+            GetSize(out int w, out _);
+            Locate(out int y, out int x);
+            string[] split = str.Split(' ');
+            for (int i = 0; i < split.Length; i++)
+            {
+                string s = split[i];
+                if (i > 0)
+                {
+                    s = " " + s;
+                }
+                if (x + s.Length > w)
+                {
+                    x = 0;
+                    y++;
+                    if (y > 22)
+                    {
+                        return;
+                    }
+                    Erase(y, x, 255);
+                }
+                foreach (char c in s)
+                {
+                    if (c == ' ' && x == 0)
+                    {
+                    }
+                    else if (c == '\n')
+                    {
+                        x = 0;
+                        y++;
+                        Erase(y, x, 255);
+                    }
+                    else if (c >= ' ')
+                    {
+                        Print(a, c, y, x);
+                        x++;
+                    }
+                    else
+                    {
+                        Print(a, ' ', y, x);
+                        x++;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Redraw the entire window
+        /// </summary>
+        public void Redraw()
+        {
+            _display.TotalErase = true;
+            UpdateScreen();
+        }
+
+        private string ToHex(Color c)
+        {
+            return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+
+        /// <summary>
+        /// Update the screen, drawing all queued print and erase requests.
+        /// </summary>
+        public void UpdateScreen()
+        {
+            Screen scr = _display.Scr; // This will always be the game screen contents.
+            Screen old = _display.Old;
+            int y;
+            int w = _display.Width;
+            int h = _display.Height;
+            int y1 = _display.Y1;
+            int y2 = _display.Y2;
+
+            // Check to see if any updates are needed.
+            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !_display.TotalErase)
+            {
+                // No updates are needed.
+                return;
+            }
+
+            if (_display.TotalErase)
+            {
+                // Clear the "old" screen 
+                _console.Clear();
+                old.CursorVisible = false;
+                old.Cu = false;
+                old.Cx = 0;
+                old.Cy = 0;
+
+                // For each row
+                for (y = 0; y < h; y++)
+                {
+                    // aa and cc point to the same index reference into Va and Vc.
+                    int aa = old.A[y];
+                    int cc = old.C[y];
+                    for (int x = 0; x < w; x++)
+                    {
+                        old.Va[aa++] = _display.AttrBlank; // Background color
+                        old.Vc[cc++] = _display.CharBlank; // Space
+                    }
+                }
+                // Reset the size of the display to be full height.
+                _display.Y1 = y1 = 0;
+                _display.Y2 = y2 = h - 1;
+
+                // Reset the width of the display for each row to be full width.
+                for (y = 0; y < h; y++)
+                {
+                    _display.X1[y] = 0;
+                    _display.X2[y] = w - 1;
+                }
+                _display.TotalErase = false;
+            }
+            if (scr.Cu || !scr.CursorVisible)
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+            }
+
+            // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
+            for (y = y1; y <= y2; ++y)
+            {
+                int x1 = _display.X1[y];
+                int x2 = _display.X2[y];
+                if (x1 <= x2)
+                {
+                    //RefreshTextRow(y, x1, x2);
+                    /////// Start RefreshTextRow
+                    int oldAa = old.A[y];
+                    int oldCc = old.C[y];
+                    int scrAa = scr.A[y];
+                    int scrCc = scr.C[y];
+                    int fn = 0;
+                    int fx = 0;
+                    Colour fa = _display.AttrBlank;
+                    for (int x = x1; x <= x2; x++)
+                    {
+                        Colour oa = old.Va[oldAa + x];
+                        char oc = old.Vc[oldCc + x];
+                        Colour na = scr.Va[scrAa + x];
+                        char nc = scr.Vc[scrCc + x];
+                        if (na == oa && nc == oc)
+                        {
+                            if (fn != 0)
+                            {
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                                fn = 0;
+                            }
+                            continue;
+                        }
+                        old.Va[oldAa + x] = na;
+                        old.Vc[oldCc + x] = nc;
+                        if (fa != na)
+                        {
+                            if (fn != 0)
+                            {
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                                fn = 0;
+                            }
+                            fa = na;
+                        }
+                        if (fn++ == 0)
+                        {
+                            fx = x;
+                        }
+                    }
+                    if (fn != 0)
+                    {
+                        _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                    }
+
+                    /////// end RefreshTextRow
+                    _display.X1[y] = w;
+                    _display.X2[y] = 0;
+                }
+            }
+            _display.Y1 = h;
+            _display.Y2 = 0;
+
+            if (scr.Cu)
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+            }
+            else if (!scr.CursorVisible)
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+            }
+            else
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+                scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
+                _console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ToHex(ColorData[scr.Va[scrCc + scr.Cx]]));
+            }
+            old.Cu = scr.Cu;
+            old.CursorVisible = scr.CursorVisible;
+            old.Cx = scr.Cx;
+            old.Cy = scr.Cy;
+        }
+
+        /// <summary>
+        /// Refresh the window, drawing all queued print and erase requests
+        /// </summary>
+        public void Refresh(IConsole console)
+        {
+            Screen scr = _display.Scr; // This will always be the game screen contents.
+            int y;
+            int w = _display.Width;
+            int h = _display.Height;
+            int y1 = _display.Y1;
+            int y2 = _display.Y2;
+
+            console.Clear();
+
+            // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
+            for (y = 0; y < _display.Height; ++y)
+            {
+                int scrAa = scr.A[y];
+                int scrCc = scr.C[y];
+                int fn = 0;
+                int fx = 0;
+                Colour currentColor = _display.AttrBlank;
+                for (int x = 0; x < _display.Width; x++)
+                {
+                    Colour na = scr.Va[scrAa + x];
+                    char nc = scr.Vc[scrCc + x];
+                    if (currentColor != na)
+                    {
+                        if (fn != 0)
+                        {
+                            console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[currentColor]));
+                            fn = 0;
+                        }
+                        currentColor = na;
+                    }
+                    if (fn++ == 0)
+                    {
+                        fx = x;
+                    }
+                }
+                if (fn != 0)
+                {
+                    console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[currentColor]));
+                }
+            }
+
+            if (scr.CursorVisible)
+            {
+                int scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
+                console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ToHex(ColorData[scr.Va[scrCc + scr.Cx]]));
+            }
+        }
+
+        public void PlayMusic(MusicTrack musicTrack)
+        {
+            _console.PlayMusic(musicTrack);
+        }
+
+        public void RequestCommand(bool shopping)
+        {
+            const int mode = Constants.KeymapModeOrig;
+            CurrentCommand = (char)0;
+            CommandArgument = 0;
+            CommandDirection = 0;
+            while (true)
+            {
+                char cmd;
+                if (QueuedCommand != 0)
+                {
+                    MsgPrint(null);
+                    cmd = QueuedCommand;
+                    QueuedCommand = (char)0;
+                }
+                else
+                {
+                    MsgFlag = false;
+                    HideCursorOnFullScreenInkey = true;
+                    cmd = Inkey();
+                }
+                PrintLine("", 0, 0);
+                if (cmd == '0')
+                {
+                    int oldArg = CommandArgument;
+                    CommandArgument = 0;
+                    PrintLine("Count: ", 0, 0);
+                    while (true)
+                    {
+                        cmd = Inkey();
+                        if (cmd == 0x7F || cmd == 0x08)
+                        {
+                            CommandArgument /= 10;
+                            PrintLine($"Count: {CommandArgument}", 0, 0);
+                        }
+                        else if (cmd >= '0' && cmd <= '9')
+                        {
+                            if (CommandArgument >= 1000)
+                            {
+                                CommandArgument = 9999;
+                            }
+                            else
+                            {
+                                CommandArgument = (CommandArgument * 10) + cmd.ToString().ToIntSafely();
+                            }
+                            PrintLine($"Count: {CommandArgument}", 0, 0);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (CommandArgument == 0)
+                    {
+                        CommandArgument = 99;
+                        PrintLine($"Count: {CommandArgument}", 0, 0);
+                    }
+                    if (oldArg != 0)
+                    {
+                        CommandArgument = oldArg;
+                        PrintLine($"Count: {CommandArgument}", 0, 0);
+                    }
+                    if (cmd == ' ' || cmd == '\n' || cmd == '\r')
+                    {
+                        if (!GetCom("Command: ", out cmd))
+                        {
+                            CommandArgument = 0;
+                            continue;
+                        }
+                    }
+                }
+                if (cmd == '\\')
+                {
+                    GetCom("Command: ", out cmd);
+                    if (string.IsNullOrEmpty(_keyBuffer))
+                    {
+                        _keyBuffer = "";
+                    }
+                }
+                string act = _keymapAct[mode][cmd];
+                if (!string.IsNullOrEmpty(act) && _keyBuffer == null)
+                {
+                    _requestCommandBuffer = act;
+                    _keyBuffer = _requestCommandBuffer;
+                    continue;
+                }
+                if (cmd == 0)
+                {
+                    continue;
+                }
+                CurrentCommand = cmd;
+                break;
+            }
+            PrintLine("", 0, 0);
+        }
+
+        /// <summary>
+        /// Save the screen to memory for later re-loading
+        /// </summary>
+        public void Save()
+        {
+            int w = _display.Width;
+            int h = _display.Height;
+            (_display.Mem ?? (_display.Mem = new Screen(w, h))).Copy(_display.Scr, w, h);
+        }
+
+        public void ShowManual() // TODO: Needs to be deleted
+        {
+        }
+
+        internal void SetBackground(BackgroundImage image)
+        {
+            _console.SetBackground(image);
+        }
+
+        /// <summary>
+        /// Adds a keypress to the internal queue
+        /// </summary>
+        /// <param name="k"> The keypress to add </param>
+        private void EnqueueKey(char k)
+        {
+            if (k == 0)
+            {
+                return;
+            }
+            _display.KeyQueue[_display.KeyHead++] = k;
+            if (_display.KeyHead == _display.KeySize)
+            {
+                _display.KeyHead = 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a keypress from the internal queue, waiting until one is added if necessary
+        /// </summary>
+        /// <param name="ch"> The next key from the queue </param>
+        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
+        /// <param name="take"> Whether to take the keypress out of the queue </param>
+        /// <returns> True if a keypress was available, false otherwise </returns>
+        private bool GetKeypress(out char ch, bool wait, bool take)
+        {
+            ch = '\0';
+            if (wait)
+            {
+                UpdateScreen();
+                while (_display.KeyHead == _display.KeyTail)
+                {
+                    EnqueueKey(_console.WaitForKey());
+                }
+            }
+            if (_display.KeyHead == _display.KeyTail)
+            {
+                return false;
+            }
+            ch = _display.KeyQueue[_display.KeyTail];
+            if (take && ++_display.KeyTail == _display.KeySize)
+            {
+                _display.KeyTail = 0;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Gets the size of the GUI display
+        /// </summary>
+        /// <param name="w"> The width of the display </param>
+        /// <param name="h"> The height of the display </param>
+        private void GetSize(out int w, out int h)
+        {
+            w = _display.Width;
+            h = _display.Height;
+        }
+
+        /// <summary>
+        /// Retrieves the cursor location
+        /// </summary>
+        /// <param name="row"> The row of the cursor </param>
+        /// <param name="col"> The column of the cursor </param>
+        private void Locate(out int row, out int col)
+        {
+            col = _display.Scr.Cx;
+            row = _display.Scr.Cy;
+        }
+
+        private void MapMovementKeys()
+        {
+            _keymapAct = new string[Constants.KeymapModes][];
+            for (int i = 0; i < Constants.KeymapModes; i++)
+            {
+                _keymapAct[i] = new string[256];
+                for (int j = 0; j < 256; j++)
+                {
+                    _keymapAct[i][j] = string.Empty;
+                }
+            }
+            _keymapAct[0]['1'] = ";1";
+            _keymapAct[0]['2'] = ";2";
+            _keymapAct[0]['3'] = ";3";
+            _keymapAct[0]['4'] = ";4";
+            _keymapAct[0]['5'] = ",";
+            _keymapAct[0]['6'] = ";6";
+            _keymapAct[0]['7'] = ";7";
+            _keymapAct[0]['8'] = ";8";
+            _keymapAct[0]['9'] = ";9";
+        }
+
+        /// <summary>
+        /// Queue up a printed character to be displayed when the screen is refreshed
+        /// </summary>
+        /// <param name="x"> The x location to display the character </param>
+        /// <param name="y"> The y location to display the character </param>
+        /// <param name="a"> The colour in which to display the character </param>
+        /// <param name="c"> The character to display </param>
+        private void QueueCharacter(int x, int y, Colour a, char c)
+        {
+            int scrAa = _display.Scr.A[y];
+            int scrCc = _display.Scr.C[y];
+            Colour oa = _display.Scr.Va[scrAa + x];
+            int oc = _display.Scr.Vc[scrCc + x];
+            if (oa == a && oc == c)
+            {
+                return;
+            }
+            _display.Scr.Va[scrAa + x] = a;
+            _display.Scr.Vc[scrCc + x] = c;
+            if (y < _display.Y1)
+            {
+                _display.Y1 = y;
+            }
+            if (y > _display.Y2)
+            {
+                _display.Y2 = y;
+            }
+            if (x < _display.X1[y])
+            {
+                _display.X1[y] = x;
+            }
+            if (x > _display.X2[y])
+            {
+                _display.X2[y] = x;
+            }
+        }
+
+        /// <summary>
+        /// Queue up a printed string to be displayed when the screen is refreshed
+        /// </summary>
+        /// <param name="x"> The x location to display the string </param>
+        /// <param name="y"> The y location to display the string </param>
+        /// <param name="n"> The number of characters to display (-1 for all) </param>
+        /// <param name="a"> The colour in which to display the string </param>
+        /// <param name="s"> The string to print </param>
+        private void QueueCharacters(int x, int y, int n, Colour a, string s)
+        {
+            int x1 = -1;
+            int x2 = -1;
+            int scrAa = _display.Scr.A[y];
+            int scrCc = _display.Scr.C[y];
+            int index = 0;
+            for (; n != 0 && index < s.Length; n--)
+            {
+                Colour oa = _display.Scr.Va[scrAa + x];
+                int oc = _display.Scr.Vc[scrCc + x];
+                if (oa == a && oc == s[index])
+                {
+                    x++;
+                    index++;
+                    continue;
+                }
+                _display.Scr.Va[scrAa + x] = a;
+                _display.Scr.Vc[scrCc + x] = s[index];
+                if (x1 < 0)
+                {
+                    x1 = x;
+                }
+                x2 = x;
+                x++;
+                index++;
+            }
+            if (x1 >= 0)
+            {
+                if (y < _display.Y1)
+                {
+                    _display.Y1 = y;
+                }
+                if (y > _display.Y2)
+                {
+                    _display.Y2 = y;
+                }
+                if (x1 < _display.X1[y])
+                {
+                    _display.X1[y] = x1;
+                }
+                if (x2 > _display.X2[y])
+                {
+                    _display.X2[y] = x2;
+                }
+            }
+        }
+        /// GUI
     }
 }

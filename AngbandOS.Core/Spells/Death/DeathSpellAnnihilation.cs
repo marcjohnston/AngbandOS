@@ -40,8 +40,8 @@ namespace Cthangband.Spells.Death
                 saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);
                 saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHp | RedrawFlag.PrMana);
                 saveGame.HandleStuff();
-                saveGame.Gui.UpdateScreen();
-                saveGame.Gui.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);
+                saveGame.UpdateScreen();
+                saveGame.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);
             }
             saveGame.Player.Mana += 100;
         }

@@ -105,15 +105,15 @@ namespace Cthangband.Commands
                 {
                     saveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
                     saveGame.Level.MoveCursorRelative(y, x);
-                    saveGame.Gui.UpdateScreen();
-                    saveGame.Gui.Pause(msec);
+                    saveGame.UpdateScreen();
+                    saveGame.Pause(msec);
                     saveGame.Level.RedrawSingleLocation(y, x);
-                    saveGame.Gui.UpdateScreen();
+                    saveGame.UpdateScreen();
                 }
                 else
                 {
                     // Delay even if we don't see it, so it doesn't look weird when it passes behind something
-                    saveGame.Gui.Pause(msec);
+                    saveGame.Pause(msec);
                 }
                 // If there's a monster in the way, we might hit it regardless of whether or not it
                 // is our intended target
@@ -172,7 +172,7 @@ namespace Cthangband.Commands
                             }
                             if (fear && monster.IsVisible)
                             {
-                                saveGame.Gui.PlaySound(SoundEffect.MonsterFlees);
+                                saveGame.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
                                 saveGame.MsgPrint($"{mName} flees in terror!");
                             }

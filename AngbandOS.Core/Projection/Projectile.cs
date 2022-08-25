@@ -27,8 +27,8 @@ namespace Cthangband.Projection
         public Projectile(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            Level = saveGame.Level;
-            Player = saveGame.Player;
+            Level = SaveGame.Level;
+            Player = SaveGame.Player;
         }
 
         /// <summary>
@@ -153,16 +153,16 @@ namespace Cthangband.Projection
                             }
                             SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
                             SaveGame.Level.MoveCursorRelative(y9, x9);
-                            SaveGame.Gui.UpdateScreen();
+                            SaveGame.UpdateScreen();
                             visual = true;
-                            SaveGame.Gui.Pause(msec);
+                            SaveGame.Pause(msec);
                             SaveGame.Level.RedrawSingleLocation(y9, x9);
-                            SaveGame.Gui.UpdateScreen();
+                            SaveGame.UpdateScreen();
                         }
                     }
                     else if (visual)
                     {
-                        SaveGame.Gui.Pause(msec);
+                        SaveGame.Pause(msec);
                     }
                 }
                 y = y9;
@@ -298,10 +298,10 @@ namespace Cthangband.Projection
                     if (impactEntity != null)
                     {
                         SaveGame.Level.MoveCursorRelative(y2, x2);
-                        SaveGame.Gui.UpdateScreen();
+                        SaveGame.UpdateScreen();
                         if (visual || drawn)
                         {
-                            SaveGame.Gui.Pause(msec);
+                            SaveGame.Pause(msec);
                         }
                     }
                 }
@@ -317,7 +317,7 @@ namespace Cthangband.Projection
                         }
                     }
                     SaveGame.Level.MoveCursorRelative(y2, x2);
-                    SaveGame.Gui.UpdateScreen();
+                    SaveGame.UpdateScreen();
                 }
             }
 

@@ -244,7 +244,7 @@ namespace Cthangband.Commands
             bool flag = false;
             bool redraw = false;
             string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
-            while (!flag && saveGame.Gui.GetCom(outVal, out char choice))
+            while (!flag && saveGame.GetCom(outVal, out char choice))
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
@@ -253,20 +253,20 @@ namespace Cthangband.Commands
                         int y = 1, x = 13;
                         int ctr = 0;
                         redraw = true;
-                        saveGame.Gui.Save();
-                        saveGame.Gui.PrintLine("", y++, x);
+                        saveGame.Save();
+                        saveGame.PrintLine("", y++, x);
                         while (ctr < num)
                         {
                             string dummy = $"{ctr.IndexToLetter()}) {powerDesc[ctr]}";
-                            saveGame.Gui.PrintLine(dummy, y + ctr, x);
+                            saveGame.PrintLine(dummy, y + ctr, x);
                             ctr++;
                         }
-                        saveGame.Gui.PrintLine("", y + ctr, x);
+                        saveGame.PrintLine("", y + ctr, x);
                     }
                     else
                     {
                         redraw = false;
-                        saveGame.Gui.Load();
+                        saveGame.Load();
                     }
                     continue;
                 }
@@ -287,7 +287,7 @@ namespace Cthangband.Commands
                 if (ask)
                 {
                     string tmpVal = $"Use {powerDesc[i]}? ";
-                    if (!saveGame.Gui.GetCheck(tmpVal))
+                    if (!saveGame.GetCheck(tmpVal))
                     {
                         continue;
                     }
@@ -296,7 +296,7 @@ namespace Cthangband.Commands
             }
             if (redraw)
             {
-                saveGame.Gui.Load();
+                saveGame.Load();
             }
             if (!flag)
             {
@@ -310,7 +310,7 @@ namespace Cthangband.Commands
             else if (powers[i] == 3)
             {
                 int dismissed = 0;
-                if (saveGame.Gui.GetCheck("Dismiss all pets? "))
+                if (saveGame.GetCheck("Dismiss all pets? "))
                 {
                     allPets = true;
                 }
@@ -328,7 +328,7 @@ namespace Cthangband.Commands
                         {
                             string friendName = monster.MonsterDesc(0x80);
                             string checkFriend = $"Dismiss {friendName}? ";
-                            if (saveGame.Gui.GetCheck(checkFriend))
+                            if (saveGame.GetCheck(checkFriend))
                             {
                                 deleteThis = true;
                             }

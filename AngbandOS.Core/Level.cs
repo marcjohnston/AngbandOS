@@ -371,7 +371,7 @@ namespace Cthangband
             }
             for (y = 0; y < maxy + 2; ++y)
             {
-                SaveGame.Gui.Goto(yOffset + y, xOffset);
+                SaveGame.Goto(yOffset + y, xOffset);
                 for (x = 0; x < maxx + 2; ++x)
                 {
                     ta = ma[y][x];
@@ -384,7 +384,7 @@ namespace Cthangband
                     {
                         ta = Colour.Black;
                     }
-                    SaveGame.Gui.Print(ta, tc);
+                    SaveGame.Print(ta, tc);
                 }
             }
             cy = yOffset + (_player.MapY / _ratio) + 1;
@@ -548,7 +548,7 @@ namespace Cthangband
             }
             NoteSpot(by, bx);
             RedrawSingleLocation(by, bx);
-            SaveGame.Gui.PlaySound(SoundEffect.Drop);
+            SaveGame.PlaySound(SoundEffect.Drop);
             if (chance != 0 && by == SaveGame.Player.MapY && bx == SaveGame.Player.MapX)
             {
                 SaveGame.MsgPrint("You feel something roll beneath your feet.");
@@ -937,7 +937,7 @@ namespace Cthangband
         {
             row -= PanelRowPrt;
             col -= PanelColPrt;
-            SaveGame.Gui.Goto(row, col);
+            SaveGame.Goto(row, col);
         }
 
         public void MoveOneStepTowards(out int newY, out int newX, int currentY, int currentX, int startY, int startX, int targetY, int targetX)
@@ -1264,7 +1264,7 @@ namespace Cthangband
                 {
                     a = Colour.Black;
                 }
-                SaveGame.Gui.Place(a, c, y - PanelRowPrt, x - PanelColPrt);
+                SaveGame.Place(a, c, y - PanelRowPrt, x - PanelColPrt);
             }
         }
 
@@ -1289,8 +1289,8 @@ namespace Cthangband
 
         public void PrtMap()
         {
-            bool v = SaveGame.Gui.CursorVisible;
-            SaveGame.Gui.CursorVisible = false;
+            bool v = SaveGame.CursorVisible;
+            SaveGame.CursorVisible = false;
             for (int y = PanelRowMin; y <= PanelRowMax; y++)
             {
                 for (int x = PanelColMin; x <= PanelColMax; x++)
@@ -1304,11 +1304,11 @@ namespace Cthangband
                     {
                         a = Colour.Black;
                     }
-                    SaveGame.Gui.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
+                    SaveGame.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
                 }
             }
             RedrawSingleLocation(_player.MapY, _player.MapX);
-            SaveGame.Gui.CursorVisible = v;
+            SaveGame.CursorVisible = v;
         }
 
         public void PutQuestMonster(int rIdx)
@@ -1356,7 +1356,7 @@ namespace Cthangband
                 {
                     a = Colour.Black;
                 }
-                SaveGame.Gui.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
+                SaveGame.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
             }
         }
 

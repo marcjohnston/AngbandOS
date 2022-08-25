@@ -60,7 +60,7 @@ namespace Cthangband.Commands
             if (tile.FeatureType.IsShop)
             {
                 saveGame.Disturb(false);
-                saveGame.Gui.QueuedCommand = '_';
+                saveGame.QueuedCommand = '_';
             }
         }
     }

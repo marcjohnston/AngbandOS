@@ -47,7 +47,7 @@ namespace Cthangband.Commands
             // We don't actually eat dwarf bread
             if (item.ItemSubCategory != FoodType.Dwarfbread)
             {
-                saveGame.Gui.PlaySound(SoundEffect.Eat);
+                saveGame.PlaySound(SoundEffect.Eat);
             }
             // Eating costs 100 energy
             saveGame.EnergyUse = 100;

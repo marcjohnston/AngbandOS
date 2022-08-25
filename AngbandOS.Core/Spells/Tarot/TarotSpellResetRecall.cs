@@ -18,7 +18,7 @@ namespace Cthangband.Spells.Tarot
         {
             string ppp = $"Reset to which level (1-{saveGame.Player.MaxDlv[saveGame.CurDungeon.Index]}): ";
             string def = $"{Math.Max(saveGame.CurrentDepth, 1)}";
-            if (!saveGame.Gui.GetString(ppp, out string tmpVal, def, 10))
+            if (!saveGame.GetString(ppp, out string tmpVal, def, 10))
             {
                 return;
             }

@@ -31,11 +31,11 @@ namespace Cthangband.Commands
 
     //    public void Execute(SaveGame saveGame)
     //    {
-    //        if (saveGame.Gui.CommandArgument > 0)
+    //        if (saveGame.CommandArgument > 0)
     //        {
-    //            saveGame.Command.CommandRepeat = saveGame.Gui.CommandArgument - 1;
+    //            saveGame.Command.CommandRepeat = saveGame.CommandArgument - 1;
     //            player.RedrawNeeded.Set(RedrawFlag.PrState);
-    //            saveGame.Gui.CommandArgument = 0;
+    //            saveGame.CommandArgument = 0;
     //        }
     //        Command.Execute(player, level);
     //    }

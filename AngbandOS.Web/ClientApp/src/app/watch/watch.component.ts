@@ -4,7 +4,7 @@ import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-const charSize = 18;
+const charSize = 12;
 
 @Component({
   selector: 'app-watch',

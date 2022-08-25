@@ -86,7 +86,7 @@ namespace Cthangband.Commands
                 item.IdentifyFlags.Set(Constants.IdentEmpty);
                 return;
             }
-            saveGame.Gui.PlaySound(SoundEffect.ZapRod);
+            saveGame.PlaySound(SoundEffect.ZapRod);
             int subCategory = item.ItemSubCategory;
             // Wand of wonder just chooses another type of wand less than its own index
             if (subCategory == WandType.Wonder)

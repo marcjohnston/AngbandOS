@@ -28,7 +28,7 @@ namespace Cthangband.Commands
                 if (!tooMany)
                 {
                     // There's only one thing we can open, so assume we mean that thing
-                    saveGame.Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
+                    saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }
             // If we don't already have a direction, prompt for one

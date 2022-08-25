@@ -50,7 +50,7 @@ namespace Cthangband
         public void Display()
         {
             SaveGame.MsgPrint(null);
-            SaveGame.Gui.Erase(1, 0, 255);
+            SaveGame.Erase(1, 0, 255);
             DisplayBody(Colour.White);
             DisplayHeader();
         }
@@ -1583,23 +1583,23 @@ namespace Cthangband
             {
                 _description.Append("You feel an intense desire to kill this monster... ");
             }
-            SaveGame.Gui.PrintWrap(bodyColour, _description.ToString());
+            SaveGame.PrintWrap(bodyColour, _description.ToString());
         }
 
         private void DisplayHeader()
         {
             char c1 = _monsterType.Character;
             Colour a1 = _monsterType.Colour;
-            SaveGame.Gui.Erase(0, 0, 255);
-            SaveGame.Gui.Goto(0, 0);
+            SaveGame.Erase(0, 0, 255);
+            SaveGame.Goto(0, 0);
             if ((_monsterType.Flags1 & MonsterFlag1.Unique) == 0)
             {
-                SaveGame.Gui.Print(Colour.White, "The ", -1);
+                SaveGame.Print(Colour.White, "The ", -1);
             }
-            SaveGame.Gui.Print(Colour.White, _monsterType.Name, -1);
-            SaveGame.Gui.Print(Colour.White, " ('", -1);
-            SaveGame.Gui.Print(a1, c1);
-            SaveGame.Gui.Print(Colour.White, "')", -1);
+            SaveGame.Print(Colour.White, _monsterType.Name, -1);
+            SaveGame.Print(Colour.White, " ('", -1);
+            SaveGame.Print(a1, c1);
+            SaveGame.Print(Colour.White, "')", -1);
         }
 
         private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)

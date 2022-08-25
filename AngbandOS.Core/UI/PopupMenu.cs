@@ -49,15 +49,15 @@ namespace Cthangband.UI
             var topBottomBorder = "+" + new string('-', _menuWidth) + "+";
             var leftRightBorder = "|" + new string(' ', _menuWidth) + "|";
             var chosenItem = 0;
-            saveGame.Gui.Print(Colour.White, topBottomBorder, top, left);
+            saveGame.Print(Colour.White, topBottomBorder, top, left);
             for (int i = 0; i < _text.Count + _items.Count; i++)
             {
-                saveGame.Gui.Print(Colour.White, leftRightBorder, top + i + 1, left);
+                saveGame.Print(Colour.White, leftRightBorder, top + i + 1, left);
             }
-            saveGame.Gui.Print(Colour.White, topBottomBorder, top + (_items.Count + _text.Count) + 1, left);
+            saveGame.Print(Colour.White, topBottomBorder, top + (_items.Count + _text.Count) + 1, left);
             for (int i = 0; i < _text.Count; i++)
             {
-                saveGame.Gui.Print(Colour.White, _text[i], top + i + 1, left + 1);
+                saveGame.Print(Colour.White, _text[i], top + i + 1, left + 1);
             }
             while (true)
             {
@@ -65,15 +65,15 @@ namespace Cthangband.UI
                 {
                     if (i == chosenItem)
                     {
-                        saveGame.Gui.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
                     }
                     else
                     {
-                        saveGame.Gui.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
                     }
                 }
-                saveGame.Gui.HideCursorOnFullScreenInkey = true;
-                char k = saveGame.Gui.Inkey();
+                saveGame.HideCursorOnFullScreenInkey = true;
+                char k = saveGame.Inkey();
                 
                 switch (k)
                 {
@@ -105,13 +105,13 @@ namespace Cthangband.UI
 
         public int Show(SaveGame saveGame)
         {
-            saveGame.Gui.InPopupMenu = true;
-            saveGame.Gui.FullScreenOverlay = true;
-            saveGame.Gui.Save();
+            saveGame.InPopupMenu = true;
+            saveGame.FullScreenOverlay = true;
+            saveGame.Save();
             var result = DisplayMenu(saveGame);
-            saveGame.Gui.Load();
-            saveGame.Gui.InPopupMenu = false;
-            saveGame.Gui.FullScreenOverlay = false;
+            saveGame.Load();
+            saveGame.InPopupMenu = false;
+            saveGame.FullScreenOverlay = false;
             return result;
         }
     }

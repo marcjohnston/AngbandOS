@@ -54,7 +54,7 @@ namespace Cthangband.StoreCommands
             {
                 itemName = item.Description(false, 0);
                 string dummy = $"Really use the {itemName} {{cursed}}? ";
-                if (!saveGame.Gui.GetCheck(dummy))
+                if (!saveGame.GetCheck(dummy))
                 {
                     return;
                 }

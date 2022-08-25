@@ -85,7 +85,7 @@ namespace Cthangband.Commands
             }
             // We passed the checks, so the item is activated
             saveGame.MsgPrint("You activate it...");
-            saveGame.Gui.PlaySound(SoundEffect.ActivateArtifact);
+            saveGame.PlaySound(SoundEffect.ActivateArtifact);
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)
             {
@@ -125,7 +125,7 @@ namespace Cthangband.Commands
                             saveGame.DetectTraps();
                             saveGame.DetectDoors();
                             saveGame.DetectStairs();
-                            if (saveGame.Gui.GetCheck("Activate recall? "))
+                            if (saveGame.GetCheck("Activate recall? "))
                             {
                                 saveGame.Player.ToggleRecall();
                             }
@@ -554,7 +554,7 @@ namespace Cthangband.Commands
                                     break;
 
                                 default:
-                                    if (saveGame.Gui.GetCheck("Leave this level? "))
+                                    if (saveGame.GetCheck("Leave this level? "))
                                     {
                                         {
                                             saveGame.DoCmdSaveGame(true);

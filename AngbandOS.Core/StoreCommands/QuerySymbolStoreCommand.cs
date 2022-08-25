@@ -28,7 +28,7 @@ namespace Cthangband.StoreCommands
         {
             int index;
             // Get the symbol
-            if (!saveGame.Gui.GetCom("Enter character to be identified: ", out char symbol))
+            if (!saveGame.GetCom("Enter character to be identified: ", out char symbol))
             {
                 return;
             }

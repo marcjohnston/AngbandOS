@@ -76,20 +76,20 @@ namespace Cthangband.Commands
             bool flag = false;
             bool redraw = false;
             string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
-            while (!flag && saveGame.Gui.GetCom(outVal, out char choice))
+            while (!flag && saveGame.GetCom(outVal, out char choice))
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
                     if (!redraw)
                     {
                         redraw = true;
-                        saveGame.Gui.Save();
+                        saveGame.Save();
                         player.PrintSpells(spells, num, 1, 20, useRealm);
                     }
                     else
                     {
                         redraw = false;
-                        saveGame.Gui.Load();
+                        saveGame.Load();
                     }
                     continue;
                 }
@@ -113,7 +113,7 @@ namespace Cthangband.Commands
                 {
                     Spell sPtr = player.Spellcasting.Spells[realm2 ? 1 : 0][spell % 32];
                     string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance(player)}% fail)? ";
-                    if (!saveGame.Gui.GetCheck(tmpVal))
+                    if (!saveGame.GetCheck(tmpVal))
                     {
                         continue;
                     }
@@ -122,7 +122,7 @@ namespace Cthangband.Commands
             }
             if (redraw)
             {
-                saveGame.Gui.Load();
+                saveGame.Load();
             }
             if (!flag)
             {
@@ -179,7 +179,7 @@ namespace Cthangband.Commands
             {
                 string cast = saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
                 saveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
-                if (!saveGame.Gui.GetCheck("Attempt it anyway? "))
+                if (!saveGame.GetCheck("Attempt it anyway? "))
                 {
                     return;
                 }
@@ -258,7 +258,7 @@ namespace Cthangband.Commands
             if (talent.ManaCost > saveGame.Player.Mana)
             {
                 saveGame.MsgPrint("You do not have enough mana to use this talent.");
-                if (!saveGame.Gui.GetCheck("Attempt it anyway? "))
+                if (!saveGame.GetCheck("Attempt it anyway? "))
                 {
                     return;
                 }
@@ -346,17 +346,17 @@ namespace Cthangband.Commands
                 }
             }
             string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
-            while (!flag && saveGame.Gui.GetCom(outVal, out char choice))
+            while (!flag && saveGame.GetCom(outVal, out char choice))
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
                     if (!redraw)
                     {
                         redraw = true;
-                        saveGame.Gui.Save();
-                        saveGame.Gui.PrintLine("", y, x);
-                        saveGame.Gui.Print("Name", y, x + 5);
-                        saveGame.Gui.Print("Lv Mana Fail Info", y, x + 35);
+                        saveGame.Save();
+                        saveGame.PrintLine("", y, x);
+                        saveGame.Print("Name", y, x + 5);
+                        saveGame.Print("Lv Mana Fail Info", y, x + 35);
                         for (i = 0; i < talents.Count; i++)
                         {
                             Talents.Talent talent = talents[i];
@@ -365,14 +365,14 @@ namespace Cthangband.Commands
                                 break;
                             }
                             string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(player)}";
-                            saveGame.Gui.PrintLine(psiDesc, y + i + 1, x);
+                            saveGame.PrintLine(psiDesc, y + i + 1, x);
                         }
-                        saveGame.Gui.PrintLine("", y + i + 1, x);
+                        saveGame.PrintLine("", y + i + 1, x);
                     }
                     else
                     {
                         redraw = false;
-                        saveGame.Gui.Load();
+                        saveGame.Load();
                     }
                     continue;
                 }
@@ -389,7 +389,7 @@ namespace Cthangband.Commands
                 if (ask)
                 {
                     string tmpVal = $"Use {talents[i].Name}? ";
-                    if (!saveGame.Gui.GetCheck(tmpVal))
+                    if (!saveGame.GetCheck(tmpVal))
                     {
                         continue;
                     }
@@ -398,7 +398,7 @@ namespace Cthangband.Commands
             }
             if (redraw)
             {
-                saveGame.Gui.Load();
+                saveGame.Load();
             }
             if (!flag)
             {

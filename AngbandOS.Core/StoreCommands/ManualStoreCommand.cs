@@ -25,7 +25,7 @@ namespace Cthangband.StoreCommands
 
         public static void DoCmdManual(SaveGame saveGame)
         {
-            saveGame.Gui.ShowManual();
+            saveGame.ShowManual();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Cthangband.Commands
                 return;
             }
             Inventory.ItemFilterCategory = 0;
-            saveGame.Gui.PlaySound(SoundEffect.Quaff);
+            saveGame.PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
             saveGame.EnergyUse = 100;
             int itemLevel = item.ItemType.Level;

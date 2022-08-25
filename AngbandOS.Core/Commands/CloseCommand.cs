@@ -24,7 +24,7 @@ namespace Cthangband.Commands
             // If there's only one door, assume we mean that one and don't ask for a direction
             if (saveGame.CountOpenDoors(coord) == 1)
             {
-                saveGame.Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
+                saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
             }
             // Get the location to close
             if (targetEngine.GetDirectionNoAim(out int dir))

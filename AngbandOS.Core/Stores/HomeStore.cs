@@ -85,7 +85,7 @@ namespace Cthangband.Stores
                     {
                         player.Gold -= price;
                         SayComment_1();
-                        SaveGame.Gui.PlaySound(SoundEffect.StoreTransaction);
+                        SaveGame.PlaySound(SoundEffect.StoreTransaction);
                         StorePrtGold();
                         int oldHouse = player.TownWithHouse;
                         player.TownWithHouse = SaveGame.CurTown.Index;

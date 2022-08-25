@@ -1661,7 +1661,7 @@ namespace Cthangband
                 sPtr.Forgotten = false;
                 sPtr.Learned = true;
                 forgottenTotal--;
-                if (!SaveGame.Gui.FullScreenOverlay)
+                if (!SaveGame.FullScreenOverlay)
                 {
                     SaveGame.MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
                 }
@@ -1704,7 +1704,7 @@ namespace Cthangband
             {
                 if (SaveGame.Player.SpareSpellSlots != 0)
                 {
-                    if (!SaveGame.Gui.FullScreenOverlay)
+                    if (!SaveGame.FullScreenOverlay)
                     {
                         string suffix = SaveGame.Player.SpareSpellSlots != 1 ? "s" : "";
                         SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} more {p}{suffix}.");
@@ -1780,22 +1780,22 @@ namespace Cthangband
         {
             if (SaveGame.TrackedMonsterIndex == 0)
             {
-                SaveGame.Gui.Erase(ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
-                SaveGame.Gui.Erase(ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
-                SaveGame.Gui.Erase(ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
-                SaveGame.Gui.Erase(ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
+                SaveGame.Erase(ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+                SaveGame.Erase(ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
+                SaveGame.Erase(ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
+                SaveGame.Erase(ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
             }
             else if (!SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
             {
-                SaveGame.Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
             else if (SaveGame.Player.TimedHallucinations != 0)
             {
-                SaveGame.Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
             else if (SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
             {
-                SaveGame.Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
             else
             {
@@ -1835,11 +1835,11 @@ namespace Cthangband
                     smb = "FRIENDLY**";
                 }
                 int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
-                SaveGame.Gui.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo);
-                SaveGame.Gui.Print(attr, smb, ScreenLocation.RowInfo, ScreenLocation.ColInfo + 1, len);
-                SaveGame.Gui.Print(Colour.White, mPtr.Race.SplitName1, ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
-                SaveGame.Gui.Print(Colour.White, mPtr.Race.SplitName2, ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
-                SaveGame.Gui.Print(Colour.White, mPtr.Race.SplitName3, ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo);
+                SaveGame.Print(attr, smb, ScreenLocation.RowInfo, ScreenLocation.ColInfo + 1, len);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName1, ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName2, ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName3, ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
             }
         }
 
@@ -1870,20 +1870,20 @@ namespace Cthangband
 
         public void PrtAc()
         {
-            SaveGame.Gui.Print("Cur AC ", ScreenLocation.RowAc, ScreenLocation.ColAc);
+            SaveGame.Print("Cur AC ", ScreenLocation.RowAc, ScreenLocation.ColAc);
             string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
-            SaveGame.Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowAc, ScreenLocation.ColAc + 7);
+            SaveGame.Print(Colour.BrightGreen, tmp, ScreenLocation.RowAc, ScreenLocation.ColAc + 7);
         }
 
         public void PrtAfraid()
         {
             if (SaveGame.Player.TimedFear > 0)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
+                SaveGame.Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
             }
             else
             {
-                SaveGame.Gui.Print("      ", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
+                SaveGame.Print("      ", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
             }
         }
 
@@ -1891,11 +1891,11 @@ namespace Cthangband
         {
             if (SaveGame.Player.TimedBlindness > 0)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
+                SaveGame.Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
             }
             else
             {
-                SaveGame.Gui.Print("     ", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
+                SaveGame.Print("     ", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
             }
         }
 
@@ -1903,11 +1903,11 @@ namespace Cthangband
         {
             if (SaveGame.Player.TimedConfusion > 0)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
+                SaveGame.Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
             }
             else
             {
-                SaveGame.Gui.Print("        ", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
+                SaveGame.Print("        ", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
             }
         }
 
@@ -1916,35 +1916,35 @@ namespace Cthangband
             int c = SaveGame.Player.TimedBleeding;
             if (c > 1000)
             {
-                SaveGame.Gui.Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 200)
             {
-                SaveGame.Gui.Print(Colour.Red, "Deep gash   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Red, "Deep gash   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 100)
             {
-                SaveGame.Gui.Print(Colour.Red, "Severe cut  ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Red, "Severe cut  ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 50)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Nasty cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Orange, "Nasty cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 25)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Bad cut     ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Orange, "Bad cut     ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 10)
             {
-                SaveGame.Gui.Print(Colour.Yellow, "Light cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Yellow, "Light cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else if (c > 0)
             {
-                SaveGame.Gui.Print(Colour.Yellow, "Graze       ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print(Colour.Yellow, "Graze       ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
             else
             {
-                SaveGame.Gui.Print("            ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+                SaveGame.Print("            ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
         }
 
@@ -1972,7 +1972,7 @@ namespace Cthangband
                     SaveGame.CurDungeon.KnownDepth = true;
                 }
             }
-            SaveGame.Gui.PrintLine(depths.PadLeft(9), ScreenLocation.RowDepth, ScreenLocation.ColDepth);
+            SaveGame.PrintLine(depths.PadLeft(9), ScreenLocation.RowDepth, ScreenLocation.ColDepth);
         }
 
         public void PrtDtrap()
@@ -1980,7 +1980,7 @@ namespace Cthangband
             int count = 0;
             if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
             {
-                SaveGame.Gui.Print(Colour.Green, "     ", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+                SaveGame.Print(Colour.Green, "     ", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
                 return;
             }
             if (SaveGame.Level.Grid[SaveGame.Player.MapY - 1][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
@@ -2001,11 +2001,11 @@ namespace Cthangband
             }
             if (count == 4)
             {
-                SaveGame.Gui.Print(Colour.Green, "DTrap", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+                SaveGame.Print(Colour.Green, "DTrap", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
             }
             else
             {
-                SaveGame.Gui.Print(Colour.Yellow, "DTRAP", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+                SaveGame.Print(Colour.Yellow, "DTRAP", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
             }
         }
 
@@ -2016,23 +2016,23 @@ namespace Cthangband
             {
                 colour = Colour.Yellow;
             }
-            SaveGame.Gui.Print("NEXT", ScreenLocation.RowExp, 0);
+            SaveGame.Print("NEXT", ScreenLocation.RowExp, 0);
             if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
-                SaveGame.Gui.Print(Colour.BrightGreen, "   *****", ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
+                SaveGame.Print(Colour.BrightGreen, "   *****", ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
             }
             else
             {
                 string outVal = ((GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
                     .PadLeft(8);
-                SaveGame.Gui.Print(colour, outVal, ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
+                SaveGame.Print(colour, outVal, ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
             }
         }
 
         public void PrtField(string info, int row, int col)
         {
-            SaveGame.Gui.Print(Colour.White, "             ", row, col);
-            SaveGame.Gui.Print(Colour.BrightBlue, info, row, col);
+            SaveGame.Print(Colour.White, "             ", row, col);
+            SaveGame.Print(Colour.BrightBlue, info, row, col);
         }
 
         public void PrtFrameBasic()
@@ -2073,18 +2073,18 @@ namespace Cthangband
 
         public void PrtGold()
         {
-            SaveGame.Gui.Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
+            SaveGame.Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
             string tmp = SaveGame.Player.Gold.ToString().PadLeft(9);
-            SaveGame.Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
+            SaveGame.Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
         }
 
         public void PrtHp()
         {
-            SaveGame.Gui.Print("Max HP ", ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp);
+            SaveGame.Print("Max HP ", ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp);
             string tmp = SaveGame.Player.MaxHealth.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
-            SaveGame.Gui.Print(colour, tmp, ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp + 7);
-            SaveGame.Gui.Print("Cur HP ", ScreenLocation.RowCurhp, ScreenLocation.ColCurhp);
+            SaveGame.Print(colour, tmp, ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp + 7);
+            SaveGame.Print("Cur HP ", ScreenLocation.RowCurhp, ScreenLocation.ColCurhp);
             tmp = SaveGame.Player.Health.ToString().PadLeft(5);
             if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
             {
@@ -2102,34 +2102,34 @@ namespace Cthangband
             {
                 colour = Colour.BrightRed;
             }
-            SaveGame.Gui.Print(colour, tmp, ScreenLocation.RowCurhp, ScreenLocation.ColCurhp + 7);
+            SaveGame.Print(colour, tmp, ScreenLocation.RowCurhp, ScreenLocation.ColCurhp + 7);
         }
 
         public void PrtHunger()
         {
             if (SaveGame.Player.Food < Constants.PyFoodFaint)
             {
-                SaveGame.Gui.Print(Colour.Red, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.Red, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
             else if (SaveGame.Player.Food < Constants.PyFoodWeak)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.Orange, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
             else if (SaveGame.Player.Food < Constants.PyFoodAlert)
             {
-                SaveGame.Gui.Print(Colour.Yellow, "Hungry", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.Yellow, "Hungry", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
             else if (SaveGame.Player.Food < Constants.PyFoodFull)
             {
-                SaveGame.Gui.Print(Colour.BrightGreen, "      ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.BrightGreen, "      ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
             else if (SaveGame.Player.Food < Constants.PyFoodMax)
             {
-                SaveGame.Gui.Print(Colour.BrightGreen, "Full  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.BrightGreen, "Full  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
             else
             {
-                SaveGame.Gui.Print(Colour.Green, "Gorged", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+                SaveGame.Print(Colour.Green, "Gorged", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
             }
         }
 
@@ -2138,13 +2138,13 @@ namespace Cthangband
             string tmp = SaveGame.Player.Level.ToString().PadLeft(6);
             if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)
             {
-                SaveGame.Gui.Print("LEVEL ", ScreenLocation.RowLevel, 0);
-                SaveGame.Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
+                SaveGame.Print("LEVEL ", ScreenLocation.RowLevel, 0);
+                SaveGame.Print(Colour.BrightGreen, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
             }
             else
             {
-                SaveGame.Gui.Print("Level ", ScreenLocation.RowLevel, 0);
-                SaveGame.Gui.Print(Colour.Yellow, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
+                SaveGame.Print("Level ", ScreenLocation.RowLevel, 0);
+                SaveGame.Print(Colour.Yellow, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
             }
         }
 
@@ -2152,11 +2152,11 @@ namespace Cthangband
         {
             if (SaveGame.Player.TimedPoison > 0)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
+                SaveGame.Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
             }
             else
             {
-                SaveGame.Gui.Print("        ", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
+                SaveGame.Print("        ", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
             }
         }
 
@@ -2166,11 +2166,11 @@ namespace Cthangband
             {
                 return;
             }
-            SaveGame.Gui.Print("Max SP ", ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp);
+            SaveGame.Print("Max SP ", ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp);
             string tmp = SaveGame.Player.MaxMana.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
-            SaveGame.Gui.Print(colour, tmp, ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp + 7);
-            SaveGame.Gui.Print("Cur SP ", ScreenLocation.RowCursp, ScreenLocation.ColCursp);
+            SaveGame.Print(colour, tmp, ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp + 7);
+            SaveGame.Print("Cur SP ", ScreenLocation.RowCursp, ScreenLocation.ColCursp);
             tmp = SaveGame.Player.Mana.ToString().PadLeft(5);
             if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
             {
@@ -2188,7 +2188,7 @@ namespace Cthangband
             {
                 colour = Colour.BrightRed;
             }
-            SaveGame.Gui.Print(colour, tmp, ScreenLocation.RowCursp, ScreenLocation.ColCursp + 7);
+            SaveGame.Print(colour, tmp, ScreenLocation.RowCursp, ScreenLocation.ColCursp + 7);
         }
 
         public void PrtSpeed()
@@ -2211,7 +2211,7 @@ namespace Cthangband
                 attr = Colour.BrightBrown;
                 buf = $"Slow {energy / 10.0}";
             }
-            SaveGame.Gui.Print(attr, buf.PadRight(14), ScreenLocation.RowSpeed, ScreenLocation.ColSpeed);
+            SaveGame.Print(attr, buf.PadRight(14), ScreenLocation.RowSpeed, ScreenLocation.ColSpeed);
         }
 
         public void PrtStat(int stat)
@@ -2219,19 +2219,19 @@ namespace Cthangband
             string tmp;
             if (SaveGame.Player.AbilityScores[stat].Innate < SaveGame.Player.AbilityScores[stat].InnateMax)
             {
-                SaveGame.Gui.Print(GlobalData.StatNamesReduced[stat], ScreenLocation.RowStat + stat, 0);
+                SaveGame.Print(GlobalData.StatNamesReduced[stat], ScreenLocation.RowStat + stat, 0);
                 tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-                SaveGame.Gui.Print(Colour.Yellow, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
+                SaveGame.Print(Colour.Yellow, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
             }
             else
             {
-                SaveGame.Gui.Print(GlobalData.StatNames[stat], ScreenLocation.RowStat + stat, 0);
+                SaveGame.Print(GlobalData.StatNames[stat], ScreenLocation.RowStat + stat, 0);
                 tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-                SaveGame.Gui.Print(Colour.BrightGreen, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
+                SaveGame.Print(Colour.BrightGreen, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
             }
             if (SaveGame.Player.AbilityScores[stat].InnateMax == 18 + 100)
             {
-                SaveGame.Gui.Print("!", ScreenLocation.RowStat + stat, 3);
+                SaveGame.Print("!", ScreenLocation.RowStat + stat, 3);
             }
         }
 
@@ -2283,12 +2283,12 @@ namespace Cthangband
             {
                 text = "          ";
             }
-            SaveGame.Gui.Print(attr, text, ScreenLocation.RowState, ScreenLocation.ColState);
+            SaveGame.Print(attr, text, ScreenLocation.RowState, ScreenLocation.ColState);
         }
 
         public void PrtStudy()
         {
-            SaveGame.Gui.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
+            SaveGame.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
         }
 
         public void PrtStun()
@@ -2296,28 +2296,28 @@ namespace Cthangband
             int s = SaveGame.Player.TimedStun;
             if (s > 100)
             {
-                SaveGame.Gui.Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+                SaveGame.Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);
             }
             else if (s > 50)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Heavy stun  ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+                SaveGame.Print(Colour.Orange, "Heavy stun  ", ScreenLocation.RowStun, ScreenLocation.ColStun);
             }
             else if (s > 0)
             {
-                SaveGame.Gui.Print(Colour.Orange, "Stun        ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+                SaveGame.Print(Colour.Orange, "Stun        ", ScreenLocation.RowStun, ScreenLocation.ColStun);
             }
             else
             {
-                SaveGame.Gui.Print("            ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+                SaveGame.Print("            ", ScreenLocation.RowStun, ScreenLocation.ColStun);
             }
         }
 
         public void PrtTime()
         {
-            SaveGame.Gui.Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
-            SaveGame.Gui.Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.colDate);
-            SaveGame.Gui.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
-            SaveGame.Gui.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
+            SaveGame.Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
+            SaveGame.Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.colDate);
+            SaveGame.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
+            SaveGame.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
         }
 
         public void PrtTitle()

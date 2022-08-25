@@ -28,7 +28,7 @@ namespace Cthangband.StoreCommands
         {
             // We're not viewing equipment
             saveGame.ViewingEquipment = false;
-            saveGame.Gui.Save();
+            saveGame.Save();
             // We want to see everything
             saveGame.ItemFilterAll = true;
             saveGame.Player.Inventory.ShowInven();
@@ -36,13 +36,13 @@ namespace Cthangband.StoreCommands
             // Get a new command
             string outVal =
                 $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-            saveGame.Gui.PrintLine(outVal, 0, 0);
-            saveGame.Gui.QueuedCommand = saveGame.Gui.Inkey();
-            saveGame.Gui.Load();
+            saveGame.PrintLine(outVal, 0, 0);
+            saveGame.QueuedCommand = saveGame.Inkey();
+            saveGame.Load();
             // Display details if the player wants
-            if (saveGame.Gui.QueuedCommand == '\x1b')
+            if (saveGame.QueuedCommand == '\x1b')
             {
-                saveGame.Gui.QueuedCommand = (char)0;
+                saveGame.QueuedCommand = (char)0;
                 saveGame.ItemDisplayColumn = 50;
             }
             else

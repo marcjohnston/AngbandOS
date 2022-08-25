@@ -60,7 +60,7 @@ namespace Cthangband
 
         public void Refresh(IConsole console)
         {
-            saveGame.Gui.Refresh(console);
+            saveGame.Refresh(console);
         }
 
         public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
@@ -82,11 +82,9 @@ namespace Cthangband
                 saveGame = (SaveGame)formatter.Deserialize(memoryStream);
             }
             // The Gui is non-serialized.  We need to set it.
-            saveGame.Gui = new Gui(saveGame);
-            saveGame.Gui.Initialise(console);
-
             // The persistent storage is non-serialized.  We need to set it.
-            saveGame.SetInjections(persistentStorage, updateNotifier);
+            saveGame.Initialize(console, persistentStorage, updateNotifier);
+
 
             StaticResources.LoadOrCreate();
             saveGame.Play();

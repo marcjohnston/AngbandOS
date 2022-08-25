@@ -362,7 +362,7 @@ namespace Cthangband
                         }
                     }
                 }
-                SaveGame.Gui.PlaySound(SoundEffect.LevelGain);
+                SaveGame.PlaySound(SoundEffect.LevelGain);
                 SaveGame.MsgPrint($"Welcome to level {Level}.");
                 UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
                 RedrawNeeded.Set(RedrawFlag.PrExp | RedrawFlag.PrLev | RedrawFlag.PrTitle);
@@ -1127,13 +1127,13 @@ namespace Cthangband
 
         public void InputPlayerName()
         {
-            SaveGame.Gui.Clear(42);
-            SaveGame.Gui.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+            SaveGame.Clear(42);
+            SaveGame.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
             const int col = 15;
             while (true)
             {
-                SaveGame.Gui.Goto(2, col);
-                if (SaveGame.Gui.AskforAux(out string newName, Name, 12))
+                SaveGame.Goto(2, col);
+                if (SaveGame.AskforAux(out string newName, Name, 12))
                 {
                     Name = newName;
 
@@ -1147,8 +1147,8 @@ namespace Cthangband
                 break;
             }
             Name = Name.PadRight(12);
-            SaveGame.Gui.Print(Colour.Brown, Name, 2, col);
-            SaveGame.Gui.Clear(22);
+            SaveGame.Print(Colour.Brown, Name, 2, col);
+            SaveGame.Clear(22);
         }
 
         public void LoseExperience(int amount)
@@ -1248,16 +1248,16 @@ namespace Cthangband
         {
             int i;
             int set = realm == Realm1 ? 0 : 1;
-            SaveGame.Gui.PrintLine("", y, x);
-            SaveGame.Gui.Print("Name", y, x + 5);
-            SaveGame.Gui.Print("Lv Mana Fail Info", y, x + 35);
+            SaveGame.PrintLine("", y, x);
+            SaveGame.Print("Name", y, x + 5);
+            SaveGame.Print("Lv Mana Fail Info", y, x + 35);
             for (i = 0; i < num; i++)
             {
                 int spell = spells[i];
                 Spell sPtr = Spellcasting.Spells[set][spell];
-                SaveGame.Gui.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
+                SaveGame.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
             }
-            SaveGame.Gui.PrintLine("", y + i + 1, x);
+            SaveGame.PrintLine("", y + i + 1, x);
         }
 
         public void RegenerateHealth(int percent)
@@ -2766,13 +2766,13 @@ namespace Cthangband
                 }
                 else
                 {
-                    if (IsWizard && !SaveGame.Gui.GetCheck("Die? "))
+                    if (IsWizard && !SaveGame.GetCheck("Die? "))
                     {
                         Health += damage;
                     }
                     else
                     {
-                        SaveGame.Gui.PlaySound(SoundEffect.PlayerDeath);
+                        SaveGame.PlaySound(SoundEffect.PlayerDeath);
                         SaveGame.MsgPrint("You die.");
                         SaveGame.MsgPrint(null);
                         SaveGame.DiedFrom = hitFrom;
@@ -2788,7 +2788,7 @@ namespace Cthangband
             }
             if (Health < warning)
             {
-                SaveGame.Gui.PlaySound(SoundEffect.HealthWarning);
+                SaveGame.PlaySound(SoundEffect.HealthWarning);
                 SaveGame.MsgPrint("*** LOW HITPOINT WARNING! ***");
                 SaveGame.MsgPrint(null);
             }

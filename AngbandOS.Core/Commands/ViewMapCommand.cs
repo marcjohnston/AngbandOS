@@ -21,36 +21,36 @@ namespace Cthangband.Commands
         {
             int cy = -1;
             int cx = -1;
-            saveGame.Gui.FullScreenOverlay = true;
-            saveGame.Gui.Save();
-            saveGame.Gui.Clear();
+            saveGame.FullScreenOverlay = true;
+            saveGame.Save();
+            saveGame.Clear();
             // If we're on the surface, display the island map
             if (saveGame.CurrentDepth == 0)
             {
-                saveGame.Gui.SetBackground(BackgroundImage.WildMap);
+                saveGame.SetBackground(BackgroundImage.WildMap);
                 saveGame.DisplayWildMap();
             }
             else
             {
                 // We're not on the surface, so draw the level map
-                saveGame.Gui.SetBackground(BackgroundImage.Map);
+                saveGame.SetBackground(BackgroundImage.Map);
                 saveGame.Level.DisplayMap(out cy, out cx);
             }
             // Give us a prompt, and display the cursor in the player's location
-            saveGame.Gui.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
+            saveGame.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
             if (saveGame.CurrentDepth == 0)
             {
-                saveGame.Gui.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
+                saveGame.Goto(saveGame.Player.WildernessY + 2, saveGame.Player.WildernessX + 2);
             }
             else
             {
-                saveGame.Gui.Goto(cy, cx);
+                saveGame.Goto(cy, cx);
             }
             // Wait for a keypress, and restore the screen (looking at the map takes no time)
-            saveGame.Gui.Inkey();
-            saveGame.Gui.Load();
-            saveGame.Gui.FullScreenOverlay = false;
-            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
+            saveGame.Inkey();
+            saveGame.Load();
+            saveGame.FullScreenOverlay = false;
+            saveGame.SetBackground(BackgroundImage.Overhead);
         }
     }
 }

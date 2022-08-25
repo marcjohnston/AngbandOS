@@ -27,16 +27,16 @@ namespace Cthangband.StoreCommands
         public static void DoCmdViewCharacter(SaveGame saveGame)
         {
             // Save the current screen
-            saveGame.Gui.FullScreenOverlay = true;
-            saveGame.Gui.Save();
-            saveGame.Gui.SetBackground(BackgroundImage.Paper);
+            saveGame.FullScreenOverlay = true;
+            saveGame.Save();
+            saveGame.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(saveGame, saveGame.Player);
             while (true)
             {
                 characterViewer.DisplayPlayer();
-                saveGame.Gui.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
-                char keyPress = saveGame.Gui.Inkey();
+                saveGame.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+                char keyPress = saveGame.Inkey();
                 // Escape breaks us out of the loop
                 if (keyPress == '\x1b')
                 {
@@ -50,9 +50,9 @@ namespace Cthangband.StoreCommands
                 saveGame.MsgPrint(null);
             }
             // Restore the screen
-            saveGame.Gui.SetBackground(BackgroundImage.Overhead);
-            saveGame.Gui.Load();
-            saveGame.Gui.FullScreenOverlay = false;
+            saveGame.SetBackground(BackgroundImage.Overhead);
+            saveGame.Load();
+            saveGame.FullScreenOverlay = false;
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
                              RedrawFlag.PrEquippy);
             saveGame.HandleStuff();

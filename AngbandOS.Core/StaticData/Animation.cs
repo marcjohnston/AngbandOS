@@ -42,8 +42,8 @@ namespace Cthangband.StaticData
                 }
                 if (drawn)
                 {
-                    saveGame.Gui.UpdateScreen();
-                    saveGame.Gui.Pause(msec);
+                    saveGame.UpdateScreen();
+                    saveGame.Pause(msec);
                 }
                 oddFrame = !oddFrame;
             }
@@ -53,7 +53,7 @@ namespace Cthangband.StaticData
                 {
                     level.RedrawSingleLocation(y, x);
                 }
-                saveGame.Gui.UpdateScreen();
+                saveGame.UpdateScreen();
             }
         }
 
@@ -76,8 +76,8 @@ namespace Cthangband.StaticData
                 }
                 if (drawn)
                 {
-                    saveGame.Gui.UpdateScreen();
-                    saveGame.Gui.Pause(msec);
+                    saveGame.UpdateScreen();
+                    saveGame.Pause(msec);
                 }
                 oddFrame = !oddFrame;
             }
@@ -90,7 +90,7 @@ namespace Cthangband.StaticData
                         level.RedrawSingleLocation(y[j], x[j]);
                     }
                 }
-                saveGame.Gui.UpdateScreen();
+                saveGame.UpdateScreen();
             }
         }
     }

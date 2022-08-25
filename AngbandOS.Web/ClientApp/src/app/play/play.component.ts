@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 
-const charSize = 18;
+const charSize = 12;
 enum SoundEffect {
   EnterTownDay,
   EnterTownNight,
@@ -348,6 +348,18 @@ export class PlayComponent implements OnInit, OnDestroy {
     this._sounds.set(SoundEffect.ZapRod, [ "plm_zap_rod.wav"]);
   }
 
+  private updateCanvasSize() {
+    if (this.canvasRef) {
+      const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
+      canvas.width = 80 * charSize;
+      canvas.height = 45 * charSize;
+      canvas.style.minWidth = canvas.width + "px";
+      canvas.style.maxWidth = canvas.width + "px";
+      canvas.style.minHeight = canvas.height + "px";
+      canvas.style.maxHeight = canvas.height + "px";
+    }
+  }
+
   private check() {
     if (this.connection !== undefined && this.gameGuid !== undefined) {
       this.connection.start().then(() => {
@@ -484,6 +496,8 @@ export class PlayComponent implements OnInit, OnDestroy {
       this.gameGuid = paramMap.get("guid");
       this.check();
     }));
+
+    this.updateCanvasSize();
   }
 
   ngOnDestroy() {

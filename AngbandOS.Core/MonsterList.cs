@@ -217,7 +217,7 @@ namespace Cthangband
                         } while (--curses != 0);
                     }
                 }
-                SaveGame.Gui.PlaySound(SoundEffect.MonsterDies);
+                SaveGame.PlaySound(SoundEffect.MonsterDies);
                 if (string.IsNullOrEmpty(note) == false)
                 {
                     SaveGame.MsgPrint($"{mName}{note}");

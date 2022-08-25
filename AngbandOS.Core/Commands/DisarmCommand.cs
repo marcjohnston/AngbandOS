@@ -30,7 +30,7 @@ namespace Cthangband.Commands
                 // If only one then we have our target
                 if (!tooMany)
                 {
-                    saveGame.Gui.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
+                    saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }
             // Get a direction if we don't already have one

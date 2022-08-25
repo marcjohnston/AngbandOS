@@ -57,7 +57,7 @@ namespace Cthangband.Commands
                 saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
                 saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
-            saveGame.Gui.PlaySound(SoundEffect.Shoot);
+            saveGame.PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
             Colour missileColour = individualAmmunition.ItemType.Colour;
@@ -142,16 +142,16 @@ namespace Cthangband.Commands
                 {
                     saveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
                     saveGame.Level.MoveCursorRelative(y, x);
-                    saveGame.Gui.UpdateScreen();
-                    saveGame.Gui.Pause(msec);
+                    saveGame.UpdateScreen();
+                    saveGame.Pause(msec);
                     saveGame.Level.RedrawSingleLocation(y, x);
-                    saveGame.Gui.UpdateScreen();
+                    saveGame.UpdateScreen();
                 }
                 else
                 {
                     // Pause even if we can't see it so it doesn't look weird if it goes in and out
                     // of sight
-                    saveGame.Gui.Pause(msec);
+                    saveGame.Pause(msec);
                 }
                 // Check if we might hit a monster (not necessarily the one we were aiming at)
                 if (saveGame.Level.Grid[y][x].MonsterIndex != 0)
@@ -207,7 +207,7 @@ namespace Cthangband.Commands
                             saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, shotDamage);
                             if (fear && monster.IsVisible)
                             {
-                                saveGame.Gui.PlaySound(SoundEffect.MonsterFlees);
+                                saveGame.PlaySound(SoundEffect.MonsterFlees);
                                 string mName = monster.MonsterDesc(0);
                                 saveGame.MsgPrint($"{mName} flees in terror!");
                             }

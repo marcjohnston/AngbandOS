@@ -67,13 +67,13 @@ namespace Cthangband.StoreCommands
                 }
             }
             // Save the screen and overprint the spells in the book
-            saveGame.Gui.Save();
+            saveGame.Save();
             saveGame.Player.PrintSpells(spells, spellIndex, 1, 20, item.ItemType.BaseCategory.SpellBookToToRealm);
-            saveGame.Gui.PrintLine("", 0, 0);
+            saveGame.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
-            saveGame.Gui.Print("[Press any key to continue]", 0, 23);
-            saveGame.Gui.Inkey();
-            saveGame.Gui.Load();
+            saveGame.Print("[Press any key to continue]", 0, 23);
+            saveGame.Inkey();
+            saveGame.Load();
         }
     }
 }
