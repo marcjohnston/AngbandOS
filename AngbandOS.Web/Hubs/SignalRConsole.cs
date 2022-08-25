@@ -37,12 +37,8 @@ namespace AngbandOS.Web.Hubs
         {
             _spectators.Add(watcherHub);
 
-            // We need to send the initial screen to the watching client.
-            //for (int row = 0; row < 45; row++)
-            //{
-            //    watcherHub..Print(row, 0, text, colour);
-            //}
-            
+            // Send a request to the game to refresh the screen.
+            _gameServer.Refresh(new SpectatorConsole(watcherHub));
         }
 
         public void RemoveWatcher(IGameHub watcherHub)

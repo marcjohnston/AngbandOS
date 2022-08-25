@@ -467,7 +467,7 @@ namespace Cthangband.UI
                 }
                 if (!done && GetKeypress(out _, false, false))
                 {
-                    Refresh();
+                    UpdateScreen();
                     done = true;
                 }
                 if (DoNotWaitOnInkey)
@@ -755,15 +755,7 @@ namespace Cthangband.UI
         public void Redraw()
         {
             _display.TotalErase = true;
-            Refresh();
-        }
-
-        /// <summary>
-        /// Refresh the window, drawing all queued print and erase requests
-        /// </summary>
-        public void Refresh()
-        {
-            Refresh(_display.Old, _display.Scr);
+            UpdateScreen();
         }
 
         private string ToHex(Color c)
@@ -771,17 +763,26 @@ namespace Cthangband.UI
             return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
         }
 
-        public void Refresh(Screen old, Screen scr)
-        { 
+        /// <summary>
+        /// Update the screen, drawing all queued print and erase requests.
+        /// </summary>
+        public void UpdateScreen()
+        {
+            Screen scr = _display.Scr; // This will always be the game screen contents.
+            Screen old = _display.Old;
             int y;
             int w = _display.Width;
             int h = _display.Height;
             int y1 = _display.Y1;
             int y2 = _display.Y2;
+
+            // Check to see if any updates are needed.
             if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !_display.TotalErase)
             {
+                // No updates are needed.
                 return;
             }
+
             if (_display.TotalErase)
             {
                 // Clear the "old" screen 
@@ -902,6 +903,59 @@ namespace Cthangband.UI
             old.CursorVisible = scr.CursorVisible;
             old.Cx = scr.Cx;
             old.Cy = scr.Cy;
+        }
+
+        /// <summary>
+        /// Refresh the window, drawing all queued print and erase requests
+        /// </summary>
+        public void Refresh(IConsole console)
+        {
+            Screen scr = _display.Scr; // This will always be the game screen contents.
+            int y;
+            int w = _display.Width;
+            int h = _display.Height;
+            int y1 = _display.Y1;
+            int y2 = _display.Y2;
+
+            console.Clear();
+
+            // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
+            for (y = 0; y < _display.Height; ++y)
+            {
+                int scrAa = scr.A[y];
+                int scrCc = scr.C[y];
+                int fn = 0;
+                int fx = 0;
+                Colour currentColor = _display.AttrBlank;
+                for (int x = 0; x < _display.Width; x++)
+                {
+                    Colour na = scr.Va[scrAa + x];
+                    char nc = scr.Vc[scrCc + x];
+                    if (currentColor != na)
+                    {
+                        if (fn != 0)
+                        {
+                            console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[currentColor]));
+                            fn = 0;
+                        }
+                        currentColor = na;
+                    }
+                    if (fn++ == 0)
+                    {
+                        fx = x;
+                    }
+                }
+                if (fn != 0)
+                {
+                    console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[currentColor]));
+                }
+            }
+
+            if (scr.CursorVisible)
+            {
+                int scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
+                console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ToHex(ColorData[scr.Va[scrCc + scr.Cx]]));
+            }
         }
 
         public void PlayMusic(MusicTrack musicTrack)
@@ -1053,7 +1107,7 @@ namespace Cthangband.UI
             ch = '\0';
             if (wait)
             {
-                Refresh();
+                UpdateScreen();
                 while (_display.KeyHead == _display.KeyTail)
                 {
                     EnqueueKey(_console.WaitForKey());
@@ -1205,58 +1259,6 @@ namespace Cthangband.UI
                 {
                     _display.X2[y] = x2;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Refresh a single text row
-        /// </summary>
-        /// <param name="y"> The row to refresh </param>
-        /// <param name="x1"> The first character to refresh </param>
-        /// <param name="x2"> The last character to refresh </param>
-        private void RefreshTextRow(int y, int x1, int x2)
-        {
-            int oldAa = _display.Old.A[y];
-            int oldCc = _display.Old.C[y];
-            int scrAa = _display.Scr.A[y];
-            int scrCc = _display.Scr.C[y];
-            int fn = 0;
-            int fx = 0;
-            Colour fa = _display.AttrBlank;
-            for (int x = x1; x <= x2; x++)
-            {
-                Colour oa = _display.Old.Va[oldAa + x];
-                char oc = _display.Old.Vc[oldCc + x];
-                Colour na = _display.Scr.Va[scrAa + x];
-                char nc = _display.Scr.Vc[scrCc + x];
-                if (na == oa && nc == oc)
-                {
-                    if (fn != 0)
-                    {
-                        _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
-                        fn = 0;
-                    }
-                    continue;
-                }
-                _display.Old.Va[oldAa + x] = na;
-                _display.Old.Vc[oldCc + x] = nc;
-                if (fa != na)
-                {
-                    if (fn != 0)
-                    {
-                        _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
-                        fn = 0;
-                    }
-                    fa = na;
-                }
-                if (fn++ == 0)
-                {
-                    fx = x;
-                }
-            }
-            if (fn != 0)
-            {
-                _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
             }
         }
     }

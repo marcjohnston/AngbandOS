@@ -67,7 +67,7 @@ namespace Cthangband.Commands
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
             saveGame.HandleStuff();
-            saveGame.Gui.Refresh();
+            saveGame.Gui.UpdateScreen();
         }
     }
 }

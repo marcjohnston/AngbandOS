@@ -33,7 +33,7 @@ namespace Cthangband
             SaveGame.Gui.SetBackground(BackgroundImage.Paper);
             while (true)
             {
-                SaveGame.Gui.Refresh();
+                SaveGame.Gui.UpdateScreen();
                 SaveGame.Gui.Clear();
                 SaveGame.Gui.Print(Colour.Blue, "Journal", 0, 1);
                 SaveGame.Gui.Print(Colour.Blue, "=======", 1, 1);

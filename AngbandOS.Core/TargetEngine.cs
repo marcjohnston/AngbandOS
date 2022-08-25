@@ -410,7 +410,7 @@ namespace Cthangband
                 }
             }
             SaveGame.Gui.CursorVisible = cv;
-            SaveGame.Gui.Refresh();
+            SaveGame.Gui.UpdateScreen();
             return success;
         }
 

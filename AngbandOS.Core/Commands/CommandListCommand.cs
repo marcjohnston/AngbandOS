@@ -20,7 +20,7 @@ namespace Cthangband.Commands
         {
             saveGame.Gui.FullScreenOverlay = true;
             saveGame.Gui.Save();
-            saveGame.Gui.Refresh();
+            saveGame.Gui.UpdateScreen();
             saveGame.Gui.Clear();
             saveGame.Gui.SetBackground(BackgroundImage.Normal);
             saveGame.Gui.Print(Colour.Yellow, "Numpad", 1, 1);

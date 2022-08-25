@@ -406,7 +406,7 @@ namespace Cthangband.Commands
         {
             saveGame.Gui.FullScreenOverlay = true;
             saveGame.Gui.Save();
-            saveGame.Gui.Refresh();
+            saveGame.Gui.UpdateScreen();
             saveGame.Gui.Clear();
             saveGame.Gui.SetBackground(BackgroundImage.Normal);
             saveGame.Gui.Print(Colour.Red, "Wizard Commands", 1, 31);
@@ -969,7 +969,7 @@ namespace Cthangband.Commands
                             break;
                         }
                         saveGame.Gui.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
-                        saveGame.Gui.Refresh();
+                        saveGame.Gui.UpdateScreen();
                     }
                     Item qPtr = new Item(saveGame);
                     qPtr.MakeObject(good, great);

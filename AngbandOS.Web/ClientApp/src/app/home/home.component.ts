@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.serviceConnection !== undefined) {
       this.serviceConnection.off("ActiveGamesUpdated");
+      this.serviceConnection.stop();
     }
   }
 

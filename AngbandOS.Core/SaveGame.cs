@@ -548,10 +548,10 @@ namespace Cthangband
             }
             MsgPrint(null);
             HandleStuff();
-            Gui.Refresh();
+            Gui.UpdateScreen();
             DiedFrom = "(saved)";
             SavePlayer(Player);
-            Gui.Refresh();
+            Gui.UpdateScreen();
             DiedFrom = "(alive and well)";
         }
 
@@ -1120,7 +1120,7 @@ namespace Cthangband
             NotifyNow();
             MsgFlag = false;
             MsgPrint(null);
-            Gui.Refresh();
+            Gui.UpdateScreen();
             FlavorInit();
             ApplyFlavourVisuals();
             if (Level == null)
@@ -1537,7 +1537,7 @@ namespace Cthangband
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Gui.Refresh();
+            Gui.UpdateScreen();
             if (!Playing || Player.IsDead || NewLevelFlag)
             {
                 return;
@@ -2071,7 +2071,7 @@ namespace Cthangband
                     RedrawStuff();
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                Gui.Refresh();
+                Gui.UpdateScreen();
                 if (Player.Inventory[InventorySlot.Pack].ItemType != null)
                 {
                     const int item = InventorySlot.Pack;
@@ -3599,7 +3599,7 @@ namespace Cthangband
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
                 HandleStuff();
-                Gui.Refresh();
+                Gui.UpdateScreen();
                 Gui.Pause(msec);
             }
         }
@@ -4997,7 +4997,7 @@ namespace Cthangband
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
                 HandleStuff();
-                Gui.Refresh();
+                Gui.UpdateScreen();
                 Gui.Pause(msec);
             }
         }

@@ -105,10 +105,10 @@ namespace Cthangband.Commands
                 {
                     saveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
                     saveGame.Level.MoveCursorRelative(y, x);
-                    saveGame.Gui.Refresh();
+                    saveGame.Gui.UpdateScreen();
                     saveGame.Gui.Pause(msec);
                     saveGame.Level.RedrawSingleLocation(y, x);
-                    saveGame.Gui.Refresh();
+                    saveGame.Gui.UpdateScreen();
                 }
                 else
                 {

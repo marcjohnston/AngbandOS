@@ -58,6 +58,11 @@ namespace Cthangband
             }
         }
 
+        public void Refresh(IConsole console)
+        {
+            saveGame.Gui.Refresh(console);
+        }
+
         public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
         {
             // Retrieve the game from the persistent storage.

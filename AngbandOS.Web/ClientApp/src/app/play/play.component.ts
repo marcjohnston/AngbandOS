@@ -193,7 +193,9 @@ export class PlayComponent implements OnInit, OnDestroy {
         // Ensure there is an access token and that the connection has been established already.
         if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
           // Create the signal-r connection object.
-          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", { accessTokenFactory: () => accessToken }).build();
+          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+            accessTokenFactory: () => accessToken,
+          }).build();
           this.check();
         }
       }

@@ -153,11 +153,11 @@ namespace Cthangband.Projection
                             }
                             SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
                             SaveGame.Level.MoveCursorRelative(y9, x9);
-                            SaveGame.Gui.Refresh();
+                            SaveGame.Gui.UpdateScreen();
                             visual = true;
                             SaveGame.Gui.Pause(msec);
                             SaveGame.Level.RedrawSingleLocation(y9, x9);
-                            SaveGame.Gui.Refresh();
+                            SaveGame.Gui.UpdateScreen();
                         }
                     }
                     else if (visual)
@@ -298,7 +298,7 @@ namespace Cthangband.Projection
                     if (impactEntity != null)
                     {
                         SaveGame.Level.MoveCursorRelative(y2, x2);
-                        SaveGame.Gui.Refresh();
+                        SaveGame.Gui.UpdateScreen();
                         if (visual || drawn)
                         {
                             SaveGame.Gui.Pause(msec);
@@ -317,7 +317,7 @@ namespace Cthangband.Projection
                         }
                     }
                     SaveGame.Level.MoveCursorRelative(y2, x2);
-                    SaveGame.Gui.Refresh();
+                    SaveGame.Gui.UpdateScreen();
                 }
             }
 
