@@ -208,7 +208,7 @@ namespace Cthangband
         public Player CharacterGeneration(SaveGame saveGame, ExPlayer ex)
         {
             SaveGame.Gui.SetBackground(BackgroundImage.Paper);
-            SaveGame.Gui.Terminal.PlayMusic(MusicTrack.Chargen);
+            SaveGame.Gui.PlayMusic(MusicTrack.Chargen);
             _player = new Player(saveGame);
             if (PlayerBirth(ex))
             {

@@ -12,10 +12,10 @@ namespace Cthangband.UI
     [Serializable]
     internal class Screen
     {
-        public readonly int[] A; // Was a pointer to part of va, now an index into it
+        public readonly int[] A; // Represents fast character index into Va for each row.  0, 80, 160 etc ...  // Was a pointer to part of va, now an index into it // TODO: not sure if this is needed anymore
         public readonly int[] C; // Was a pointer to part of va, now an index into it
-        public readonly Colour[] Va;
-        public readonly char[] Vc;
+        public readonly Colour[] Va; // Array of color data for the entire screen
+        public readonly char[] Vc; // Array of character data for the entire screen
         public bool Cu;
         public bool CursorVisible;
         public int Cx;
@@ -23,6 +23,7 @@ namespace Cthangband.UI
 
         public Screen(int w, int h)
         {
+            // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
             A = new int[h];
             C = new int[h];
             Va = new Colour[h * w];

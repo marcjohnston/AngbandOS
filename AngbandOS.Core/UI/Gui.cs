@@ -21,6 +21,8 @@ namespace Cthangband.UI
     [Serializable]
     internal class Gui
     {
+        [NonSerialized]
+        private IConsole _console;
         private readonly SaveGame SaveGame;
 
         public Gui(SaveGame saveGame)
@@ -59,7 +61,6 @@ namespace Cthangband.UI
 
         private string[][] _keymapAct;
         private string _requestCommandBuffer;
-        private Terminal.Terminal _terminal;
 
         /// <summary>
         /// Sets or returns whether the cursor is visible
@@ -68,14 +69,6 @@ namespace Cthangband.UI
         {
             get => _display.Scr.CursorVisible;
             set => _display.Scr.CursorVisible = value;
-        }
-
-        public Terminal.Terminal Terminal
-        {
-            get
-            {
-                return _terminal;
-            }
         }
 
         /// <summary>
@@ -402,7 +395,7 @@ namespace Cthangband.UI
         /// </summary>
         public void Initialise(IConsole console)
         {
-            _terminal = new Terminal.Terminal(console);
+            _console = console;
             ColorData.Add(Colour.Background, Color.Black);
             ColorData.Add(Colour.Black, Color.DarkSlateGray);
             ColorData.Add(Colour.Grey, Color.DimGray);
@@ -564,7 +557,7 @@ namespace Cthangband.UI
         /// <param name="val"> The sound to play </param>
         public void PlaySound(SoundEffect sound)
         {
-            Terminal.PlaySound(sound);
+            _console.PlaySound(sound);
         }
 
         /// <summary>
@@ -770,38 +763,51 @@ namespace Cthangband.UI
         /// </summary>
         public void Refresh()
         {
+            Refresh(_display.Old, _display.Scr);
+        }
+
+        private string ToHex(Color c)
+        {
+            return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
+        }
+
+        public void Refresh(Screen old, Screen scr)
+        { 
             int y;
             int w = _display.Width;
             int h = _display.Height;
             int y1 = _display.Y1;
             int y2 = _display.Y2;
-            Screen old = _display.Old;
-            Screen scr = _display.Scr;
             if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !_display.TotalErase)
             {
                 return;
             }
             if (_display.TotalErase)
             {
-                Colour na = _display.AttrBlank;
-                char nc = _display.CharBlank;
-                _terminal.Clear();
+                // Clear the "old" screen 
+                _console.Clear();
                 old.CursorVisible = false;
                 old.Cu = false;
                 old.Cx = 0;
                 old.Cy = 0;
+
+                // For each row
                 for (y = 0; y < h; y++)
                 {
+                    // aa and cc point to the same index reference into Va and Vc.
                     int aa = old.A[y];
                     int cc = old.C[y];
                     for (int x = 0; x < w; x++)
                     {
-                        old.Va[aa++] = na;
-                        old.Vc[cc++] = nc;
+                        old.Va[aa++] = _display.AttrBlank; // Background color
+                        old.Vc[cc++] = _display.CharBlank; // Space
                     }
                 }
+                // Reset the size of the display to be full height.
                 _display.Y1 = y1 = 0;
                 _display.Y2 = y2 = h - 1;
+
+                // Reset the width of the display for each row to be full width.
                 for (y = 0; y < h; y++)
                 {
                     _display.X1[y] = 0;
@@ -812,47 +818,95 @@ namespace Cthangband.UI
             if (scr.Cu || !scr.CursorVisible)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
             }
-            if (y1 <= y2)
+
+            // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
+            for (y = y1; y <= y2; ++y)
             {
-                for (y = y1; y <= y2; ++y)
+                int x1 = _display.X1[y];
+                int x2 = _display.X2[y];
+                if (x1 <= x2)
                 {
-                    int x1 = _display.X1[y];
-                    int x2 = _display.X2[y];
-                    if (x1 <= x2)
+                    //RefreshTextRow(y, x1, x2);
+                    /////// Start RefreshTextRow
+                    int oldAa = old.A[y];
+                    int oldCc = old.C[y];
+                    int scrAa = scr.A[y];
+                    int scrCc = scr.C[y];
+                    int fn = 0;
+                    int fx = 0;
+                    Colour fa = _display.AttrBlank;
+                    for (int x = x1; x <= x2; x++)
                     {
-                        RefreshTextRow(y, x1, x2);
-                        _display.X1[y] = w;
-                        _display.X2[y] = 0;
+                        Colour oa = old.Va[oldAa + x];
+                        char oc = old.Vc[oldCc + x];
+                        Colour na = scr.Va[scrAa + x];
+                        char nc = scr.Vc[scrCc + x];
+                        if (na == oa && nc == oc)
+                        {
+                            if (fn != 0)
+                            {
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                                fn = 0;
+                            }
+                            continue;
+                        }
+                        old.Va[oldAa + x] = na;
+                        old.Vc[oldCc + x] = nc;
+                        if (fa != na)
+                        {
+                            if (fn != 0)
+                            {
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                                fn = 0;
+                            }
+                            fa = na;
+                        }
+                        if (fn++ == 0)
+                        {
+                            fx = x;
+                        }
                     }
+                    if (fn != 0)
+                    {
+                        _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
+                    }
+
+                    /////// end RefreshTextRow
+                    _display.X1[y] = w;
+                    _display.X2[y] = 0;
                 }
-                _display.Y1 = h;
-                _display.Y2 = 0;
             }
+            _display.Y1 = h;
+            _display.Y2 = 0;
+
+            if (scr.Cu)
             {
-                if (scr.Cu)
-                {
-                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
-                }
-                else if (!scr.CursorVisible)
-                {
-                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
-                }
-                else
-                {
-                    int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                    _terminal.HideCursor(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ColorData[old.Va[scrCc + old.Cx]]);
-                    scrCc = _display.Scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                    _terminal.ShowCursor(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ColorData[_display.Scr.Va[scrCc + scr.Cx]]);
-                }
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+            }
+            else if (!scr.CursorVisible)
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+            }
+            else
+            {
+                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
+                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], ToHex(ColorData[old.Va[scrCc + old.Cx]]));
+                scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
+                _console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], ToHex(ColorData[scr.Va[scrCc + scr.Cx]]));
             }
             old.Cu = scr.Cu;
             old.CursorVisible = scr.CursorVisible;
             old.Cx = scr.Cx;
             old.Cy = scr.Cy;
+        }
+
+        public void PlayMusic(MusicTrack musicTrack)
+        {
+            _console.PlayMusic(musicTrack);
         }
 
         public void RequestCommand(bool shopping)
@@ -961,13 +1015,13 @@ namespace Cthangband.UI
             (_display.Mem ?? (_display.Mem = new Screen(w, h))).Copy(_display.Scr, w, h);
         }
 
-        public void ShowManual()
+        public void ShowManual() // TODO: Needs to be deleted
         {
         }
 
         internal void SetBackground(BackgroundImage image)
         {
-            _terminal.SetBackground(image);
+            _console.SetBackground(image);
         }
 
         /// <summary>
@@ -1002,7 +1056,7 @@ namespace Cthangband.UI
                 Refresh();
                 while (_display.KeyHead == _display.KeyTail)
                 {
-                    EnqueueKey(_terminal.WaitForKey());
+                    EnqueueKey(_console.WaitForKey());
                 }
             }
             if (_display.KeyHead == _display.KeyTail)
@@ -1179,7 +1233,7 @@ namespace Cthangband.UI
                 {
                     if (fn != 0)
                     {
-                        _terminal.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ColorData[fa]);
+                        _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
                         fn = 0;
                     }
                     continue;
@@ -1190,7 +1244,7 @@ namespace Cthangband.UI
                 {
                     if (fn != 0)
                     {
-                        _terminal.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ColorData[fa]);
+                        _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
                         fn = 0;
                     }
                     fa = na;
@@ -1202,7 +1256,7 @@ namespace Cthangband.UI
             }
             if (fn != 0)
             {
-                _terminal.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ColorData[fa]);
+                _console.Print(y, fx, new string(_display.Scr.Vc, scrCc + fx, fn), ToHex(ColorData[fa]));
             }
         }
     }

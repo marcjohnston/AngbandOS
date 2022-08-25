@@ -1558,22 +1558,22 @@ namespace Cthangband
             {
                 if (Difficulty == 0)
                 {
-                    Gui.Terminal.PlayMusic(MusicTrack.Town);
+                    Gui.PlayMusic(MusicTrack.Town);
                 }
                 else
                 {
-                    Gui.Terminal.PlayMusic(MusicTrack.Wilderness);
+                    Gui.PlayMusic(MusicTrack.Wilderness);
                 }
             }
             else
             {
                 if (Quests.IsQuest(CurrentDepth))
                 {
-                    Gui.Terminal.PlayMusic(MusicTrack.QuestLevel);
+                    Gui.PlayMusic(MusicTrack.QuestLevel);
                 }
                 else
                 {
-                    Gui.Terminal.PlayMusic(MusicTrack.Dungeon);
+                    Gui.PlayMusic(MusicTrack.Dungeon);
                 }
             }
             while (true)
@@ -1987,12 +1987,12 @@ namespace Cthangband
                 if (corpse.IsWinner)
                 {
                     Gui.SetBackground(BackgroundImage.Sunset);
-                    Gui.Terminal.PlayMusic(MusicTrack.Victory);
+                    Gui.PlayMusic(MusicTrack.Victory);
                 }
                 else
                 {
                     Gui.SetBackground(BackgroundImage.Tomb);
-                    Gui.Terminal.PlayMusic(MusicTrack.Death);
+                    Gui.PlayMusic(MusicTrack.Death);
                 }
                 Gui.Clear();
                 string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);

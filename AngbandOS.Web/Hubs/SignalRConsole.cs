@@ -36,6 +36,13 @@ namespace AngbandOS.Web.Hubs
         public void AddWatcher(IGameHub watcherHub)
         {
             _spectators.Add(watcherHub);
+
+            // We need to send the initial screen to the watching client.
+            //for (int row = 0; row < 45; row++)
+            //{
+            //    watcherHub..Print(row, 0, text, colour);
+            //}
+            
         }
 
         public void RemoveWatcher(IGameHub watcherHub)
