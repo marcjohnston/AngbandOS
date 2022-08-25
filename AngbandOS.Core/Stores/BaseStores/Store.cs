@@ -464,7 +464,7 @@ namespace Cthangband
         {
             get
             {
-                string storeName = StaticResources.Instance.FloorTileTypes[FeatureType].Description;
+                string storeName = SaveGame.BaseFloorTileTypes[FeatureType].Description;
                 return $"{storeName} ({_owner.MaxCost})";
             }
         }

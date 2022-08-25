@@ -15,11 +15,8 @@ using Cthangband.Patrons;
 using Cthangband.Projection;
 using Cthangband.StaticData;
 using Cthangband.UI;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Drawing;
-using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Cthangband
@@ -43,7 +40,7 @@ namespace Cthangband
         public AllocationEntry[] AllocKindTable;
         public int AllocRaceSize;
         public AllocationEntry[] AllocRaceTable;
-        public List<AmuletFlavour> AmuletFlavours;
+        public List<AmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
         public LevelStart CameFrom;
         public bool CharacterXtra;
         public bool CreateDownStair;
@@ -138,6 +135,7 @@ namespace Cthangband
         /// </summary>
         public SaveGame()
         {
+            LoadOrCreateStaticResources();
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             GlobalData.PopulateNewProfile(this);
@@ -1139,6 +1137,7 @@ namespace Cthangband
 
         public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
+            LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
             _console = console;
             PersistentStorage = persistentStorage;
             _updateNotifier = updateNotification;
@@ -1744,10 +1743,10 @@ namespace Cthangband
             Program.Rng.FixedSeed = _seedFlavor;
             PotionFlavours = new List<PotionFlavour>();
             List<PotionFlavour> tempPotions = new List<PotionFlavour>();
-            PotionFlavours.Add(StaticResources.Instance.PotionFlavours["Clear"]);
-            PotionFlavours.Add(StaticResources.Instance.PotionFlavours["Light Brown"]);
-            PotionFlavours.Add(StaticResources.Instance.PotionFlavours["Icky Green"]);
-            foreach (KeyValuePair<string, PotionFlavour> pair in StaticResources.Instance.PotionFlavours)
+            PotionFlavours.Add(BasePotionFlavours["Clear"]);
+            PotionFlavours.Add(BasePotionFlavours["Light Brown"]);
+            PotionFlavours.Add(BasePotionFlavours["Icky Green"]);
+            foreach (KeyValuePair<string, PotionFlavour> pair in BasePotionFlavours)
             {
                 if (pair.Key == "Clear")
                 {
@@ -1771,7 +1770,7 @@ namespace Cthangband
             } while (tempPotions.Count > 0);
             MushroomFlavours = new List<MushroomFlavour>();
             List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
-            foreach (KeyValuePair<string, MushroomFlavour> pair in StaticResources.Instance.MushroomFlavours)
+            foreach (KeyValuePair<string, MushroomFlavour> pair in BaseMushroomFlavours)
             {
                 tempMushrooms.Add(pair.Value);
             }
@@ -1783,7 +1782,7 @@ namespace Cthangband
             } while (tempMushrooms.Count > 0);
             AmuletFlavours = new List<AmuletFlavour>();
             List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (KeyValuePair<string, AmuletFlavour> pair in StaticResources.Instance.BaseAmuletFlavours)
+            foreach (KeyValuePair<string, AmuletFlavour> pair in BaseAmuletFlavours)
             {
                 tempAmulets.Add(pair.Value);
             }
@@ -1795,7 +1794,7 @@ namespace Cthangband
             } while (tempAmulets.Count > 0);
             WandFlavours = new List<WandFlavour>();
             List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (KeyValuePair<string, WandFlavour> pair in StaticResources.Instance.WandFlavours)
+            foreach (KeyValuePair<string, WandFlavour> pair in BaseWandFlavours)
             {
                 tempWands.Add(pair.Value);
             }
@@ -1807,7 +1806,7 @@ namespace Cthangband
             } while (tempWands.Count > 0);
             RingFlavours = new List<RingFlavour>();
             List<RingFlavour> tempRings = new List<RingFlavour>();
-            foreach (KeyValuePair<string, RingFlavour> pair in StaticResources.Instance.RingFlavours)
+            foreach (KeyValuePair<string, RingFlavour> pair in BaseRingFlavours)
             {
                 tempRings.Add(pair.Value);
             }
@@ -1819,7 +1818,7 @@ namespace Cthangband
             } while (tempRings.Count > 0);
             RodFlavours = new List<RodFlavour>();
             List<RodFlavour> tempRods = new List<RodFlavour>();
-            foreach (KeyValuePair<string, RodFlavour> pair in StaticResources.Instance.RodFlavours)
+            foreach (KeyValuePair<string, RodFlavour> pair in BaseRodFlavours)
             {
                 tempRods.Add(pair.Value);
             }
@@ -1831,7 +1830,7 @@ namespace Cthangband
             } while (tempRods.Count > 0);
             StaffFlavours = new List<StaffFlavour>();
             List<StaffFlavour> tempStaffs = new List<StaffFlavour>();
-            foreach (KeyValuePair<string, StaffFlavour> pair in StaticResources.Instance.StaffFlavours)
+            foreach (KeyValuePair<string, StaffFlavour> pair in BaseStaffFlavours)
             {
                 tempStaffs.Add(pair.Value);
             }
@@ -1843,7 +1842,7 @@ namespace Cthangband
             } while (tempStaffs.Count > 0);
             ScrollFlavours = new List<ScrollFlavour>();
             List<ScrollFlavour> tempScrolls = new List<ScrollFlavour>();
-            foreach (KeyValuePair<string, ScrollFlavour> pair in StaticResources.Instance.ScrollFlavours)
+            foreach (KeyValuePair<string, ScrollFlavour> pair in BaseScrollFlavours)
             {
                 tempScrolls.Add(pair.Value);
             }
@@ -20157,9 +20156,279 @@ namespace Cthangband
             }
         }
         /// GUI
-        /// 
+
         /// Static Resources
-        
+        [NonSerialized]
+        public Dictionary<string, AmuletFlavour> BaseAmuletFlavours;
+
+        /// <summary>
+        /// Animations for spells and effects
+        /// </summary>
+        [NonSerialized]
+        public Dictionary<string, Animation> BaseAnimations;
+
+        [NonSerialized]
+        public Dictionary<string, BaseFixedArtifact> BaseFixedArtifacts;
+
+        [NonSerialized]
+        public Dictionary<string, BaseItemType> BaseItemTypes;
+
+        [NonSerialized]
+        public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
+
+        [NonSerialized]
+        public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
+
+        [NonSerialized]
+        public Dictionary<string, BaseVaultType> BaseVaultTypes;
+
+        /// <summary>
+        /// Types of floor tile
+        /// </summary>
+        [NonSerialized]
+        public Dictionary<string, FloorTileType> BaseFloorTileTypes;
+
+        [NonSerialized]
+        public Dictionary<string, MushroomFlavour> BaseMushroomFlavours;
+
+        [NonSerialized]
+        public Dictionary<string, PotionFlavour> BasePotionFlavours;
+
+        /// <summary>
+        /// Graphics for projectiles
+        /// </summary>
+        [NonSerialized]
+        public Dictionary<string, ProjectileGraphic> BaseProjectileGraphics;
+
+        [NonSerialized]
+        public Dictionary<string, RingFlavour> BaseRingFlavours;
+
+        [NonSerialized]
+        public Dictionary<string, RodFlavour> BaseRodFlavours;
+
+        [NonSerialized]
+        public Dictionary<string, ScrollFlavour> BaseScrollFlavours;
+
+        [NonSerialized]
+        public Dictionary<string, StaffFlavour> BaseStaffFlavours;
+
+        [NonSerialized]
+        public Dictionary<string, WandFlavour> BaseWandFlavours;
+
+        /// <summary>
+        /// Load the dictionaries from the binary resource file
+        /// </summary>
+        public void LoadOrCreateStaticResources()
+        {
+            BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace());
+            // BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
+            BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
+            BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
+            BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
+            BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
+            BaseAnimations = ReadEntitiesFromCsv(new Animation());
+            BaseProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic());
+            BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour());
+            BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour());
+            BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour());
+            BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour());
+            BaseScrollFlavours = ReadEntitiesFromCsv(new ScrollFlavour());
+            BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour());
+            BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour());
+            BaseRodFlavours = ReadEntitiesFromCsv(new RodFlavour());
+        }
+
+        private Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample, string scaffoldTemplateName = null) where T : EntityType, new()
+        {
+            Dictionary<string, T> dictionary = new Dictionary<string, T>();
+            PropertyInfo[] properties = sample.GetType().GetProperties();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string[] names = assembly.GetManifestResourceNames();
+            string name = sample.GetType().Name;
+            string resourceName = $"AngbandOS.Core.Data.{name}s.csv";
+            foreach (string match in names)
+            {
+                if (match == resourceName)
+                {
+                    using (Stream ms = assembly.GetManifestResourceStream(resourceName))
+                    {
+                        using (StreamReader reader = new StreamReader(ms))
+                        {
+                            string[] header = reader.ReadLine().Split(',');
+                            Dictionary<string, int> headerNames = new Dictionary<string, int>();
+                            for (int i = 0; i < header.Length; i++)
+                            {
+                                headerNames.Add(header[i], i);
+                            }
+                            if (reader.EndOfStream == false)
+                            {
+                                do
+                                {
+                                    string line = reader.ReadLine();
+                                    if (string.IsNullOrEmpty(line))
+                                    {
+                                        continue;
+                                    }
+                                    string[] values = line.Split(',');
+                                    T entity = new T();
+                                    foreach (PropertyInfo p in properties)
+                                    {
+                                        if (headerNames.ContainsKey(p.Name))
+                                        {
+                                            if (!p.CanWrite)
+                                            {
+                                                continue;
+                                            }
+                                            string stringValue = values[headerNames[p.Name]].FromCsvFriendly();
+                                            switch (p.PropertyType.Name)
+                                            {
+                                                case "Colour":
+                                                    p.SetValue(entity, Enum.Parse(typeof(Colour), stringValue));
+                                                    break;
+
+                                                case "Char":
+                                                    p.SetValue(entity, Convert.ToChar(stringValue));
+                                                    break;
+
+                                                case "String":
+                                                    p.SetValue(entity, stringValue);
+                                                    break;
+
+                                                case "AttackEffect":
+                                                    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
+                                                    break;
+
+                                                case "FloorTileAlterAction":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FloorTileAlterAction), stringValue));
+                                                    break;
+
+                                                case "FixedArtifactId":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FixedArtifactId), stringValue));
+                                                    break;
+
+                                                case "FloorTileTypeCategory":
+                                                    p.SetValue(entity, Enum.Parse(typeof(FloorTileTypeCategory), stringValue));
+                                                    break;
+
+                                                case "ItemCategory":
+                                                    p.SetValue(entity, Enum.Parse(typeof(ItemCategory), stringValue));
+                                                    break;
+
+                                                case "RareItemType":
+                                                    p.SetValue(entity, Enum.Parse(typeof(Enumerations.RareItemType), stringValue));
+                                                    break;
+
+                                                case "AttackType":
+                                                    p.SetValue(entity, Enum.Parse(typeof(AttackType), stringValue));
+                                                    break;
+
+                                                case "Int32":
+                                                    p.SetValue(entity, Convert.ToInt32(stringValue));
+                                                    break;
+
+                                                case "Boolean":
+                                                    p.SetValue(entity, Convert.ToBoolean(stringValue));
+                                                    break;
+
+                                                case "MonsterAttack":
+                                                    break;
+
+                                                default:
+                                                    throw new Exception();
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    dictionary.Add(entity.Name, entity);
+                                } while (reader.EndOfStream == false);
+                            }
+                        }
+                        ms.Close();
+                    }
+                }
+            }
+
+            if (scaffoldTemplateName != null)
+            {
+                string templateName = $"Cthangband.Data.ScaffoldTemplates.{scaffoldTemplateName}.template";
+                List<string> templateLines = new List<string>();
+                using (Stream templateStream = assembly.GetManifestResourceStream(templateName))
+                {
+                    using (StreamReader streamReader = new StreamReader(templateStream))
+                    {
+                        while (!streamReader.EndOfStream)
+                        {
+                            templateLines.Add(streamReader.ReadLine());
+                        }
+                    }
+                }
+                string path = "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Core\\Data";
+                path = $"{path}{Path.DirectorySeparatorChar}{scaffoldTemplateName}s{Path.DirectorySeparatorChar}";
+                foreach (T entity in dictionary.Values)
+                {
+                    List<string> scaffoldedOutput = new List<string>();
+                    PropertyInfo[] entityProperties = entity.GetType().GetProperties();
+                    foreach (string templateLine in templateLines)
+                    {
+                        string[] tokens = templateLine.Split(Path.DirectorySeparatorChar);
+                        bool include = true;
+                        for (int index = 1; index < tokens.Length; index += 2)
+                        {
+                            PropertyInfo desiredProperty = entityProperties.Single(property => property.Name == tokens[index]);
+                            switch (desiredProperty.PropertyType.Name)
+                            {
+                                case "Boolean":
+                                    {
+                                        bool value = (bool)desiredProperty.GetValue(entity);
+                                        tokens[index] = value ? "true" : "false";
+                                        include = value;
+                                        break;
+                                    }
+                                case "Colour":
+                                    {
+                                        Colour value = (Colour)desiredProperty.GetValue(entity);
+                                        tokens[index] = value.ToString();
+                                        include = (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "Int32":
+                                    {
+                                        int value = (int)desiredProperty.GetValue(entity);
+                                        tokens[index] = value.ToString();
+                                        include = (value != 0); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "ItemCategory":
+                                    {
+                                        tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        break;
+                                    }
+                                case "Char":
+                                    {
+                                        char value = (char)desiredProperty.GetValue(entity);
+                                        tokens[index] = value == '\\' ? @"\\" : value.ToString();
+                                        break;
+                                    }
+                                case "String":
+                                    {
+                                        tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        break;
+                                    }
+                                default:
+                                    throw new Exception("Scaffolding data type not supported.");
+                            }
+                        }
+                        if (include)
+                        {
+                            scaffoldedOutput.Add(String.Join("", tokens));
+                        }
+                    }
+                    string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity);
+                    File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
+                }
+            }
+            return dictionary;
+        }
         /// Static Resources
     }
 }

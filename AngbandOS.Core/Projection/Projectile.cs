@@ -57,9 +57,9 @@ namespace Cthangband.Projection
             int[] gy = new int[256];
             int[] gm = new int[32];
             int gmRad = rad;
-            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : StaticResources.Instance.ProjectileGraphics[BoltGraphic];
-            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : StaticResources.Instance.ProjectileGraphics[ImpactGraphic];
-            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : StaticResources.Instance.BaseAnimations[EffectAnimation];
+            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : SaveGame.BaseProjectileGraphics[BoltGraphic];
+            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : SaveGame.BaseProjectileGraphics[ImpactGraphic];
+            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : SaveGame.BaseAnimations[EffectAnimation];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
                 x1 = x;

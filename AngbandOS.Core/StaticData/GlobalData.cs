@@ -214,12 +214,12 @@ namespace Cthangband.StaticData
 
         public static void PopulateNewProfile(SaveGame saveGame)
         {
-            saveGame.FixedArtifacts = new FixedArtifactArray();
-            saveGame.MonsterRaces = new MonsterRaceArray();
+            saveGame.FixedArtifacts = new FixedArtifactArray(saveGame);
+            saveGame.MonsterRaces = new MonsterRaceArray(saveGame);
             saveGame.MonsterRaces.AddKnowledge(saveGame);
-            saveGame.RareItemTypes = new RareItemTypeArray();
+            saveGame.RareItemTypes = new RareItemTypeArray(saveGame);
             saveGame.ItemTypes = new ItemTypeArray(saveGame);
-            saveGame.VaultTypes = new VaultTypeArray();
+            saveGame.VaultTypes = new VaultTypeArray(saveGame);
         }
     }
 }

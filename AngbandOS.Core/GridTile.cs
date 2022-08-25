@@ -16,6 +16,14 @@ namespace Cthangband
     [Serializable]
     internal class GridTile
     {
+        private readonly SaveGame SaveGame;
+        public GridTile(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+            BackgroundFeature = SaveGame.BaseFloorTileTypes["Nothing"];
+            FeatureType = SaveGame.BaseFloorTileTypes["Nothing"];
+        }
+
         /// <summary>
         /// Used within the view code to mark tiles that are "easily" visible
         /// </summary>
@@ -69,12 +77,12 @@ namespace Cthangband
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public FloorTileType BackgroundFeature = StaticResources.Instance.FloorTileTypes["Nothing"];
+        public FloorTileType BackgroundFeature;
 
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public FloorTileType FeatureType = StaticResources.Instance.FloorTileTypes["Nothing"];
+        public FloorTileType FeatureType;
 
         /// <summary>
         /// The index of the first item that is in this grid tile
@@ -103,7 +111,7 @@ namespace Cthangband
 
         public void SetBackgroundFeature(string name)
         {
-            BackgroundFeature = StaticResources.Instance.FloorTileTypes[name];
+            BackgroundFeature = SaveGame.BaseFloorTileTypes[name];
         }
 
         /// <summary>
@@ -112,7 +120,7 @@ namespace Cthangband
         /// <param name="name"> </param>
         public void SetFeature(string name)
         {
-            FeatureType = StaticResources.Instance.FloorTileTypes[name];
+            FeatureType = SaveGame.BaseFloorTileTypes[name];
         }
 
         public override string ToString()

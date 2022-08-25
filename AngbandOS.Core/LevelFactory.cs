@@ -78,7 +78,7 @@ namespace Cthangband
                     _saveGame.Level.Grid[i] = new GridTile[Level.MaxWid];
                     for (int j = 0; j < Level.MaxWid; j++)
                     {
-                        _saveGame.Level.Grid[i][j] = new GridTile();
+                        _saveGame.Level.Grid[i][j] = new GridTile(_saveGame);
                         if (_saveGame.CurrentDepth == 0)
                         {
                             _saveGame.Level.Grid[i][j].SetBackgroundFeature("Grass");

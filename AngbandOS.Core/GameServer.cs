@@ -68,8 +68,6 @@ namespace Cthangband
             // Retrieve the game from the persistent storage.
             byte[] data = persistentStorage.ReadGame();
 
-            StaticResources.LoadOrCreate();
-
             // The game doesn't exist.  Start a new one.
             if (data == null)
             {

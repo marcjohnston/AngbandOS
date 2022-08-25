@@ -15,9 +15,9 @@ namespace Cthangband
     [Serializable]
     internal class RareItemTypeArray : Dictionary<Enumerations.RareItemType, RareItemType>
     {
-        public RareItemTypeArray()
+        public RareItemTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseRareItemType> pair in StaticResources.Instance.BaseRareItemTypes)
+            foreach (KeyValuePair<string, BaseRareItemType> pair in saveGame.BaseRareItemTypes)
             {
                 Add(pair.Value.RareItemType, new RareItemType(pair.Value));
             }

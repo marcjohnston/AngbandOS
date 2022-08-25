@@ -16,9 +16,9 @@ namespace Cthangband
     [Serializable]
     internal class FixedArtifactArray : Dictionary<FixedArtifactId, FixedArtifact>
     {
-        public FixedArtifactArray()
+        public FixedArtifactArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseFixedartifact> pair in StaticResources.Instance.BaseFixedartifacts)
+            foreach (KeyValuePair<string, BaseFixedArtifact> pair in saveGame.BaseFixedArtifacts)
             {
                 Add(pair.Value.FixedArtifactID, new FixedArtifact(pair.Value));
             }

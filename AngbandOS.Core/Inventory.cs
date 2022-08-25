@@ -679,7 +679,7 @@ namespace Cthangband
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.ItemType.BaseCategory.Colour;
+                outColour[k] = oPtr.ItemType == null ? Colour.White : oPtr.ItemType.BaseCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 16;

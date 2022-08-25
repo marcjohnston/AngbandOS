@@ -658,8 +658,8 @@ namespace Cthangband
                     break;
                 }
                 string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
-                    ? StaticResources.Instance.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
-                    : StaticResources.Instance.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
+                    ? SaveGame.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
+                    : SaveGame.BaseFloorTileTypes[cPtr.FeatureType.AppearAs].Name;
                 if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !_level.PlayerCanSeeBold(y, x))
                 {
                     feat = string.Empty;
@@ -669,7 +669,7 @@ namespace Cthangband
                     string name = "unknown grid";
                     if (feat != string.Empty)
                     {
-                        name = StaticResources.Instance.FloorTileTypes[feat].Description;
+                        name = SaveGame.BaseFloorTileTypes[feat].Description;
                         if (s2 != "" && cPtr.FeatureType.BlocksLos)
                         {
                             s2 = "in ";

@@ -10,7 +10,7 @@ using Cthangband.Enumerations;
 
 namespace Cthangband.StaticData
 {
-    internal class BaseFixedartifact : EntityType
+    internal class BaseFixedArtifact : EntityType
     {
         public int Ac
         {

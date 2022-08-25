@@ -82,7 +82,7 @@ namespace Cthangband
                 Grid[i] = new GridTile[MaxWid];
                 for (int j = 0; j < MaxWid; j++)
                 {
-                    Grid[i][j] = new GridTile();
+                    Grid[i][j] = new GridTile(SaveGame);
                 }
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)
@@ -108,13 +108,13 @@ namespace Cthangband
         public void CaveSetBackground(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.BackgroundFeature = StaticResources.Instance.FloorTileTypes[feat];
+            cPtr.BackgroundFeature = SaveGame.BaseFloorTileTypes[feat];
         }
 
         public void CaveSetFeat(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.FeatureType = StaticResources.Instance.FloorTileTypes[feat];
+            cPtr.FeatureType = SaveGame.BaseFloorTileTypes[feat];
             NoteSpot(y, x);
             RedrawSingleLocation(y, x);
         }
@@ -2298,8 +2298,8 @@ namespace Cthangband
                 }
                 else
                 {
-                    a = StaticResources.Instance.FloorTileTypes["Nothing"].Colour;
-                    c = StaticResources.Instance.FloorTileTypes["Nothing"].Character;
+                    a = SaveGame.BaseFloorTileTypes["Nothing"].Colour;
+                    c = SaveGame.BaseFloorTileTypes["Nothing"].Character;
                 }
             }
             else
@@ -2307,8 +2307,8 @@ namespace Cthangband
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
                     feat = string.IsNullOrEmpty(feat.AppearAs)
-                        ? StaticResources.Instance.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
-                        : StaticResources.Instance.FloorTileTypes[feat.AppearAs];
+                        ? SaveGame.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs]
+                        : SaveGame.BaseFloorTileTypes[feat.AppearAs];
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
@@ -2348,8 +2348,8 @@ namespace Cthangband
                 }
                 else
                 {
-                    a = StaticResources.Instance.FloorTileTypes["Nothing"].Colour;
-                    c = StaticResources.Instance.FloorTileTypes["Nothing"].Character;
+                    a = SaveGame.BaseFloorTileTypes["Nothing"].Colour;
+                    c = SaveGame.BaseFloorTileTypes["Nothing"].Character;
                 }
             }
             if (_player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))

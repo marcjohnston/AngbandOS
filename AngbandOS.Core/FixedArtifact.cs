@@ -38,7 +38,7 @@ namespace Cthangband
         {
         }
 
-        public FixedArtifact(BaseFixedartifact baseItem)
+        public FixedArtifact(BaseFixedArtifact baseItem)
         {
             Flags1 = new FlagSet();
             Flags2 = new FlagSet();

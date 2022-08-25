@@ -14,9 +14,9 @@ namespace Cthangband
     [Serializable]
     internal class VaultTypeArray : List<VaultType>
     {
-        public VaultTypeArray()
+        public VaultTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseVaultType> baseType in StaticResources.Instance.BaseVaultTypes)
+            foreach (KeyValuePair<string, BaseVaultType> baseType in saveGame.BaseVaultTypes)
             {
                 Add(new VaultType(baseType.Value));
             }

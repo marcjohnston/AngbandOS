@@ -15,9 +15,9 @@ namespace Cthangband
     [Serializable]
     internal class MonsterRaceArray : List<MonsterRace>
     {
-        public MonsterRaceArray()
+        public MonsterRaceArray(SaveGame saveGame)
         {
-            Dictionary<string, BaseMonsterRace> baseRaces = StaticResources.Instance.BaseMonsterRaces;
+            Dictionary<string, BaseMonsterRace> baseRaces = saveGame.BaseMonsterRaces;
             int index = 0;
             for (int level = -1; level < 128; level++)
             {
