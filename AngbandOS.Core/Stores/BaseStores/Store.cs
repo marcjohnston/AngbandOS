@@ -22,8 +22,14 @@ namespace Cthangband
         protected readonly SaveGame SaveGame;
         public readonly StoreType StoreType;
 
+        /// <summary>
+        /// The grid x coordinate of the store on the town level.
+        /// </summary>
         public int X => _x;
 
+        /// <summary>
+        /// The grid y coordinate of the store on the town level.
+        /// </summary>
         public int Y => _y;
 
         private int _x;

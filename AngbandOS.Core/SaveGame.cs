@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core;
 using AngbandOS.Interface;
 using Cthangband.ActivationPowers;
 using Cthangband.Commands;
@@ -1335,11 +1336,51 @@ namespace Cthangband
             for (i = 0; i < ItemTypes.Count; i++)
             {
                 ItemType kPtr = ItemTypes[i];
-                EntityType visual = ObjectFlavourEntity(i);
-                if (visual != null)
+                if (kPtr.HasFlavor)
                 {
-                    kPtr.Character = visual.Character;
-                    kPtr.Colour = visual.Colour;
+                    int indexx = kPtr.SubCategory;
+                    switch (kPtr.Category)
+                    {
+                        case ItemCategory.Food:
+                            kPtr.Character = MushroomFlavours[indexx].Character;
+                            kPtr.Colour = MushroomFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Potion:
+                            kPtr.Character = PotionFlavours[indexx].Character;
+                            kPtr.Colour = PotionFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Scroll:
+                            kPtr.Character = ScrollFlavours[indexx].Character;
+                            kPtr.Colour = ScrollFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Amulet:
+                            kPtr.Character = AmuletFlavours[indexx].Character;
+                            kPtr.Colour = AmuletFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Ring:
+                            kPtr.Character = RingFlavours[indexx].Character;
+                            kPtr.Colour = RingFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Staff:
+                            kPtr.Character = StaffFlavours[indexx].Character;
+                            kPtr.Colour = StaffFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Wand:
+                            kPtr.Character = WandFlavours[indexx].Character;
+                            kPtr.Colour = WandFlavours[indexx].Colour;
+                            break;
+
+                        case ItemCategory.Rod:
+                            kPtr.Character = RodFlavours[indexx].Character;
+                            kPtr.Colour = RodFlavours[indexx].Colour;
+                            break;
+                    }
                 }
             }
         }
@@ -1794,9 +1835,9 @@ namespace Cthangband
             } while (tempAmulets.Count > 0);
             WandFlavours = new List<WandFlavour>();
             List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (KeyValuePair<string, WandFlavour> pair in BaseWandFlavours)
+            foreach (WandFlavour wandFlavour in CommandManager.BaseWandFlavours)
             {
-                tempWands.Add(pair.Value);
+                tempWands.Add(wandFlavour);
             }
             do
             {
@@ -2016,42 +2057,6 @@ namespace Cthangband
             SetBackground(BackgroundImage.Crown);
             Clear();
             AnyKey(44);
-        }
-
-        private EntityType ObjectFlavourEntity(int i)
-        {
-            ItemType kPtr = ItemTypes[i];
-            if (kPtr.HasFlavor)
-            {
-                int indexx = kPtr.SubCategory;
-                switch (kPtr.Category)
-                {
-                    case ItemCategory.Food:
-                        return MushroomFlavours[indexx];
-
-                    case ItemCategory.Potion:
-                        return PotionFlavours[indexx];
-
-                    case ItemCategory.Scroll:
-                        return ScrollFlavours[indexx];
-
-                    case ItemCategory.Amulet:
-                        return AmuletFlavours[indexx];
-
-                    case ItemCategory.Ring:
-                        return RingFlavours[indexx];
-
-                    case ItemCategory.Staff:
-                        return StaffFlavours[indexx];
-
-                    case ItemCategory.Wand:
-                        return WandFlavours[indexx];
-
-                    case ItemCategory.Rod:
-                        return RodFlavours[indexx];
-                }
-            }
-            return null;
         }
 
         private void PrintTomb(Player corpse)
@@ -20212,8 +20217,8 @@ namespace Cthangband
         [NonSerialized]
         public Dictionary<string, StaffFlavour> BaseStaffFlavours;
 
-        [NonSerialized]
-        public Dictionary<string, WandFlavour> BaseWandFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, WandFlavour> BaseWandFlavours;
 
         /// <summary>
         /// Load the dictionaries from the binary resource file
@@ -20231,7 +20236,7 @@ namespace Cthangband
             BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour());
             BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour());
             BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour());
-            BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour());
+            //BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour(), "BaseWandFlavor");
             BaseScrollFlavours = ReadEntitiesFromCsv(new ScrollFlavour());
             BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour());
             BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour());
@@ -20350,7 +20355,7 @@ namespace Cthangband
 
             if (scaffoldTemplateName != null)
             {
-                string templateName = $"Cthangband.Data.ScaffoldTemplates.{scaffoldTemplateName}.template";
+                string templateName = $"AngbandOS.Core.Data.ScaffoldTemplates.{scaffoldTemplateName}.template";
                 List<string> templateLines = new List<string>();
                 using (Stream templateStream = assembly.GetManifestResourceStream(templateName))
                 {
@@ -20362,7 +20367,7 @@ namespace Cthangband
                         }
                     }
                 }
-                string path = "C:\\Users\\Marc\\Source\\Repos\\Cthangband\\AngbandOS.Core\\Data";
+                string path = "C:\\Users\\Marc\\Source\\Repos\\AngbandOS\\AngbandOS.Core\\Data";
                 path = $"{path}{Path.DirectorySeparatorChar}{scaffoldTemplateName}s{Path.DirectorySeparatorChar}";
                 foreach (T entity in dictionary.Values)
                 {
@@ -20423,7 +20428,9 @@ namespace Cthangband
                             scaffoldedOutput.Add(String.Join("", tokens));
                         }
                     }
-                    string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity);
+                    //string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
+                    string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
+                    className = className.Replace("-", "") + "WandFlavor";
                     File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
                 }
             }
