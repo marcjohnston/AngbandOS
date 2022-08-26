@@ -41,7 +41,6 @@ namespace Cthangband
         public AllocationEntry[] AllocKindTable;
         public int AllocRaceSize;
         public AllocationEntry[] AllocRaceTable;
-        public List<AmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
         public LevelStart CameFrom;
         public bool CharacterXtra;
         public bool CreateDownStair;
@@ -59,18 +58,20 @@ namespace Cthangband
         public Level Level;
         public bool MartialArtistArmourAux;
         public bool MartialArtistNotifyAux;
-        public List<MushroomFlavour> MushroomFlavours;
         public bool NewLevelFlag;
         public Player Player;
         public bool Playing;
-        public List<PotionFlavour> PotionFlavours;
         public int RecallDungeon;
         public int Resting;
-        public List<RingFlavour> RingFlavours;
-        public List<RodFlavour> RodFlavours;
         public int Running;
-        public List<ScrollFlavour> ScrollFlavours;
-        public List<StaffFlavour> StaffFlavours;
+        public List<BaseAmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
+        public List<BaseMushroomFlavour> MushroomFlavours;
+        public List<BasePotionFlavour> PotionFlavours;
+        public List<BaseRingFlavour> RingFlavours;
+        public List<BaseRodFlavour> RodFlavours;
+        public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
+        public List<BaseStaffFlavour> StaffFlavours;
+        public List<BaseWandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
         public int TargetCol;
         public int TargetRow;
         public int TargetWho;
@@ -79,7 +80,6 @@ namespace Cthangband
         public int TrackedMonsterIndex;
         public bool ViewingEquipment;
         public bool ViewingItemList;
-        public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
 
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
@@ -1782,26 +1782,26 @@ namespace Cthangband
             int i, j;
             Program.Rng.UseFixed = true;
             Program.Rng.FixedSeed = _seedFlavor;
-            PotionFlavours = new List<PotionFlavour>();
-            List<PotionFlavour> tempPotions = new List<PotionFlavour>();
-            PotionFlavours.Add(BasePotionFlavours["Clear"]);
-            PotionFlavours.Add(BasePotionFlavours["Light Brown"]);
-            PotionFlavours.Add(BasePotionFlavours["Icky Green"]);
-            foreach (KeyValuePair<string, PotionFlavour> pair in BasePotionFlavours)
+            PotionFlavours = new List<BasePotionFlavour>();
+            List<BasePotionFlavour> tempPotions = new List<BasePotionFlavour>();
+            PotionFlavours.Add(new ClearPotionFlavour());
+            PotionFlavours.Add(new LightBrownPotionFlavour());
+            PotionFlavours.Add(new IckyGreenPotionFlavour());
+            foreach (BasePotionFlavour potionFlavour in CommandManager.BasePotionFlavours)
             {
-                if (pair.Key == "Clear")
+                if (potionFlavour is ClearPotionFlavour)
                 {
                     continue;
                 }
-                if (pair.Key == "Light Brown")
+                if (potionFlavour is LightBrownPotionFlavour)
                 {
                     continue;
                 }
-                if (pair.Key == "Icky Green")
+                if (potionFlavour is IckyGreenPotionFlavour)
                 {
                     continue;
                 }
-                tempPotions.Add(pair.Value);
+                tempPotions.Add(potionFlavour);
             }
             do
             {
@@ -1809,11 +1809,11 @@ namespace Cthangband
                 PotionFlavours.Add(tempPotions[index]);
                 tempPotions.RemoveAt(index);
             } while (tempPotions.Count > 0);
-            MushroomFlavours = new List<MushroomFlavour>();
-            List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
-            foreach (KeyValuePair<string, MushroomFlavour> pair in BaseMushroomFlavours)
+            MushroomFlavours = new List<BaseMushroomFlavour>();
+            List<BaseMushroomFlavour> tempMushrooms = new List<BaseMushroomFlavour>();
+            foreach (BaseMushroomFlavour mushroomFlavour in CommandManager.BaseMushroomFlavours)
             {
-                tempMushrooms.Add(pair.Value);
+                tempMushrooms.Add(mushroomFlavour);
             }
             do
             {
@@ -1821,11 +1821,11 @@ namespace Cthangband
                 MushroomFlavours.Add(tempMushrooms[index]);
                 tempMushrooms.RemoveAt(index);
             } while (tempMushrooms.Count > 0);
-            AmuletFlavours = new List<AmuletFlavour>();
-            List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (KeyValuePair<string, AmuletFlavour> pair in BaseAmuletFlavours)
+            AmuletFlavours = new List<BaseAmuletFlavour>();
+            List<BaseAmuletFlavour> tempAmulets = new List<BaseAmuletFlavour>();
+            foreach (BaseAmuletFlavour amuletFlavour in CommandManager.BaseAmuletFlavours)
             {
-                tempAmulets.Add(pair.Value);
+                tempAmulets.Add(amuletFlavour);
             }
             do
             {
@@ -1833,9 +1833,9 @@ namespace Cthangband
                 AmuletFlavours.Add(tempAmulets[index]);
                 tempAmulets.RemoveAt(index);
             } while (tempAmulets.Count > 0);
-            WandFlavours = new List<WandFlavour>();
-            List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (WandFlavour wandFlavour in CommandManager.BaseWandFlavours)
+            WandFlavours = new List<BaseWandFlavour>();
+            List<BaseWandFlavour> tempWands = new List<BaseWandFlavour>();
+            foreach (BaseWandFlavour wandFlavour in CommandManager.BaseWandFlavours)
             {
                 tempWands.Add(wandFlavour);
             }
@@ -1845,11 +1845,11 @@ namespace Cthangband
                 WandFlavours.Add(tempWands[index]);
                 tempWands.RemoveAt(index);
             } while (tempWands.Count > 0);
-            RingFlavours = new List<RingFlavour>();
-            List<RingFlavour> tempRings = new List<RingFlavour>();
-            foreach (KeyValuePair<string, RingFlavour> pair in BaseRingFlavours)
+            RingFlavours = new List<BaseRingFlavour>();
+            List<BaseRingFlavour> tempRings = new List<BaseRingFlavour>();
+            foreach (BaseRingFlavour ringFlavour in CommandManager.BaseRingFlavours)
             {
-                tempRings.Add(pair.Value);
+                tempRings.Add(ringFlavour);
             }
             do
             {
@@ -1857,11 +1857,11 @@ namespace Cthangband
                 RingFlavours.Add(tempRings[index]);
                 tempRings.RemoveAt(index);
             } while (tempRings.Count > 0);
-            RodFlavours = new List<RodFlavour>();
-            List<RodFlavour> tempRods = new List<RodFlavour>();
-            foreach (KeyValuePair<string, RodFlavour> pair in BaseRodFlavours)
+            RodFlavours = new List<BaseRodFlavour>();
+            List<BaseRodFlavour> tempRods = new List<BaseRodFlavour>();
+            foreach (BaseRodFlavour rodFlavour in CommandManager.BaseRodFlavours)
             {
-                tempRods.Add(pair.Value);
+                tempRods.Add(rodFlavour);
             }
             do
             {
@@ -1869,11 +1869,11 @@ namespace Cthangband
                 RodFlavours.Add(tempRods[index]);
                 tempRods.RemoveAt(index);
             } while (tempRods.Count > 0);
-            StaffFlavours = new List<StaffFlavour>();
-            List<StaffFlavour> tempStaffs = new List<StaffFlavour>();
-            foreach (KeyValuePair<string, StaffFlavour> pair in BaseStaffFlavours)
+            StaffFlavours = new List<BaseStaffFlavour>();
+            List<BaseStaffFlavour> tempStaffs = new List<BaseStaffFlavour>();
+            foreach (BaseStaffFlavour staffFlavour in CommandManager.BaseStaffFlavours)
             {
-                tempStaffs.Add(pair.Value);
+                tempStaffs.Add(staffFlavour);
             }
             do
             {
@@ -1882,12 +1882,12 @@ namespace Cthangband
                 tempStaffs.RemoveAt(index);
             } while (tempStaffs.Count > 0);
             ScrollFlavours = new List<ScrollFlavour>();
-            List<ScrollFlavour> tempScrolls = new List<ScrollFlavour>();
-            foreach (KeyValuePair<string, ScrollFlavour> pair in BaseScrollFlavours)
+            List<BaseScrollFlavour> tempScrolls = new List<BaseScrollFlavour>();
+            foreach (BaseScrollFlavour scrollFlavour in CommandManager.BaseScrollFlavours)
             {
-                tempScrolls.Add(pair.Value);
+                tempScrolls.Add(scrollFlavour);
             }
-            for (i = 0; i < Constants.MaxTitles; i++)
+            for (i = 0; i < Constants.MaxNumberOfScrollFlavoursGenerated; i++)
             {
                 ScrollFlavour flavour = new ScrollFlavour();
                 ScrollFlavours.Add(flavour);
@@ -1903,7 +1903,7 @@ namespace Cthangband
                         int s = Program.Rng.RandomLessThan(100) < 30 ? 1 : 2;
                         for (int q = 0; q < s; q++)
                         {
-                            tmp += ScrollFlavour.Syllables[Program.Rng.RandomLessThan(ScrollFlavour.Syllables.Length)];
+                            tmp += BaseScrollFlavour.Syllables[Program.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
                         }
                         if (buf.Length + tmp.Length > 14)
                         {
@@ -20163,8 +20163,8 @@ namespace Cthangband
         /// GUI
 
         /// Static Resources
-        [NonSerialized]
-        public Dictionary<string, AmuletFlavour> BaseAmuletFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, AmuletFlavour> BaseAmuletFlavours;
 
         /// <summary>
         /// Animations for spells and effects
@@ -20175,8 +20175,8 @@ namespace Cthangband
         [NonSerialized]
         public Dictionary<string, BaseFixedArtifact> BaseFixedArtifacts;
 
-        [NonSerialized]
-        public Dictionary<string, BaseItemType> BaseItemTypes;
+        //[NonSerialized]
+        //public Dictionary<string, BaseItemType> BaseItemTypes;
 
         [NonSerialized]
         public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
@@ -20193,11 +20193,11 @@ namespace Cthangband
         [NonSerialized]
         public Dictionary<string, FloorTileType> BaseFloorTileTypes;
 
-        [NonSerialized]
-        public Dictionary<string, MushroomFlavour> BaseMushroomFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, MushroomFlavour> BaseMushroomFlavours;
 
-        [NonSerialized]
-        public Dictionary<string, PotionFlavour> BasePotionFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, PotionFlavour> BasePotionFlavours;
 
         /// <summary>
         /// Graphics for projectiles
@@ -20205,17 +20205,17 @@ namespace Cthangband
         [NonSerialized]
         public Dictionary<string, ProjectileGraphic> BaseProjectileGraphics;
 
-        [NonSerialized]
-        public Dictionary<string, RingFlavour> BaseRingFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, RingFlavour> BaseRingFlavours;
 
-        [NonSerialized]
-        public Dictionary<string, RodFlavour> BaseRodFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, RodFlavour> BaseRodFlavours;
 
-        [NonSerialized]
-        public Dictionary<string, ScrollFlavour> BaseScrollFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, ScrollFlavour> BaseScrollFlavours;
 
-        [NonSerialized]
-        public Dictionary<string, StaffFlavour> BaseStaffFlavours;
+        //[NonSerialized]
+        //public Dictionary<string, StaffFlavour> BaseStaffFlavours;
 
         //[NonSerialized]
         //public Dictionary<string, WandFlavour> BaseWandFlavours;
@@ -20233,14 +20233,14 @@ namespace Cthangband
             BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
             BaseAnimations = ReadEntitiesFromCsv(new Animation());
             BaseProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic());
-            BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour());
-            BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour());
-            BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour());
-            //BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour(), "BaseWandFlavor");
-            BaseScrollFlavours = ReadEntitiesFromCsv(new ScrollFlavour());
-            BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour());
-            BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour());
-            BaseRodFlavours = ReadEntitiesFromCsv(new RodFlavour());
+            //BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour(), "BaseAmuletFlavour");
+            //BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour(), "BaseMushroomFlavour");
+            //BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour(), "BasePotionFlavour");
+            //BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour(), "BaseWandFlavour");
+            //BaseScrollFlavours = ReadEntitiesFromCsv(new ScrollFlavour(), "BaseScrollFlavour");
+            //BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour(), "BaseStaffFlavour");
+            //BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour(), "BaseRingFlavour");
+            //BaseRodFlavours = ReadEntitiesFromCsv(new RodFlavour(), "BaseRodFlavour");
         }
 
         private Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample, string scaffoldTemplateName = null) where T : EntityType, new()
@@ -20371,6 +20371,7 @@ namespace Cthangband
                 path = $"{path}{Path.DirectorySeparatorChar}{scaffoldTemplateName}s{Path.DirectorySeparatorChar}";
                 foreach (T entity in dictionary.Values)
                 {
+                    string className = "";
                     List<string> scaffoldedOutput = new List<string>();
                     PropertyInfo[] entityProperties = entity.GetType().GetProperties();
                     foreach (string templateLine in templateLines)
@@ -20379,7 +20380,14 @@ namespace Cthangband
                         bool include = true;
                         for (int index = 1; index < tokens.Length; index += 2)
                         {
-                            PropertyInfo desiredProperty = entityProperties.Single(property => property.Name == tokens[index]);
+                            string propertyName = tokens[index];
+                            bool identifier = false;
+                            if (propertyName.StartsWith("_"))
+                            {
+                                identifier = true;
+                                propertyName = propertyName.Substring(1);
+                            }
+                            PropertyInfo desiredProperty = entityProperties.Single(property => property.Name == propertyName);
                             switch (desiredProperty.PropertyType.Name)
                             {
                                 case "Boolean":
@@ -20417,20 +20425,26 @@ namespace Cthangband
                                 case "String":
                                     {
                                         tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        if (identifier)
+                                            tokens[index] = tokens[index].Replace("-", "").Replace(" ", "");
                                         break;
                                     }
                                 default:
                                     throw new Exception("Scaffolding data type not supported.");
                             }
                         }
+                        string output = String.Join("", tokens);
                         if (include)
                         {
-                            scaffoldedOutput.Add(String.Join("", tokens));
+                            scaffoldedOutput.Add(output.Replace("~", ""));
                         }
+                        tokens = output.Split("~");
+                        if (tokens.Length > 1)
+                            className = tokens[1];
                     }
-                    //string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
-                    string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
-                    className = className.Replace("-", "") + "WandFlavor";
+                    ////string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
+                    //string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
+                    //className = className.Replace("-", "") + "WandFlavor";
                     File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
                 }
             }

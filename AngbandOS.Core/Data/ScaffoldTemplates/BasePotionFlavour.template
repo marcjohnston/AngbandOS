@@ -1,0 +1,11 @@
+﻿using Cthangband.Enumerations;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class ~\_Name\PotionFlavour~ : BasePotionFlavour
+{
+    public override char Character => '\Character\';
+    public override Colour Colour => Colour.\Colour\;
+    public override string Name => "\Name\";
+}

@@ -92,7 +92,7 @@ namespace Cthangband.StaticData
         public const int MaxSight = 20;
         public const int MaxStackSize = 100;
         public const int MaxStoresTotal = 96;
-        public const int MaxTitles = 54;
+        public const int MaxNumberOfScrollFlavoursGenerated = 54;
         public const int MaxUchar = 255;
         public const int MaxWoods = 32;
         public const int MflagBorn = 0x10;

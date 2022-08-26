@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core;
 using Cthangband.ActivationPowers;
 using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
@@ -4053,7 +4054,7 @@ namespace Cthangband
             {
                 while (testcounter-- != 0)
                 {
-                    outString += ScrollFlavour.Syllables[Program.Rng.RandomLessThan(ScrollFlavour.Syllables.Length)];
+                    outString += BaseScrollFlavour.Syllables[Program.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
                 }
             }
             else

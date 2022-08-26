@@ -4,7 +4,7 @@ using System;
 namespace Cthangband.ItemCategories
 {
     [Serializable]
-    internal class \ClassName\ : \Category\ItemCategory
+    internal class ~\_ClassName\~ : \Category\ItemCategory
     {
         public override char Character => '\Character\';
         public override Colour Colour => Colour.\Colour\;
