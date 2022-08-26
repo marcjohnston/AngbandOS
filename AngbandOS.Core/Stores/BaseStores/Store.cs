@@ -187,8 +187,8 @@ namespace Cthangband
                 RenderAdvertisedCommand(AdvertisedStoreCommand1, 42, 31);
                 RenderAdvertisedCommand(AdvertisedStoreCommand2, 43, 31);
                 RenderAdvertisedCommand(AdvertisedStoreCommand3, 42, 56);
+                RenderAdvertisedCommand(AdvertisedStoreCommand5, 43, 0); // This needs to be before #4 to not erase it.
                 RenderAdvertisedCommand(AdvertisedStoreCommand4, 43, 56);
-                RenderAdvertisedCommand(AdvertisedStoreCommand5, 43, 0);
                 SaveGame.Print("You may: ", 41, 0);
                 SaveGame.RequestCommand(true);
                 StoreProcessCommand();
