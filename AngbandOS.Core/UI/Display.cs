@@ -1,4 +1,4 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Interface;
 
 namespace Cthangband.UI
 {

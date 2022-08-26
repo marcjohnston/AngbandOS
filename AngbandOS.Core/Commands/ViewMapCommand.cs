@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Interface;
-using Cthangband.Enumerations;
 using Cthangband.UI;
 using System;
 

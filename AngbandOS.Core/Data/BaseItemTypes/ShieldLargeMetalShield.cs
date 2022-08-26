@@ -1,4 +1,4 @@
-using Cthangband.Enumerations;
+using AngbandOS.Interface;
 using System;
 
 namespace Cthangband.ItemCategories

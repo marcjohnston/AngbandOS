@@ -4,8 +4,17 @@
   display: flex;
   flex-direction: column;
 
+  & span {
+    color: white;
+    background-color: rgb(20, 20, 20) !important;
+  }
+
   #active-games-span, #saved-games-span {
     background-color: lightgray;
+  }
+
+  & button {
+    border: 3px solid red;
   }
 
   #saved-games-span {
@@ -14,19 +23,25 @@
 
   table {
     width: 100%;
+    background-color: black;
+
+    & [mat-header-cell] {
+      color: white;
+    }
 
     & [mat-cell] {
       vertical-align: top;
       padding-top: 10px;
       padding-bottom: 10px;
+      color: white;
     }
 
     & .highlight {
-      background-color: yellow;
+      background-color: lightgray;
     }
 
     & [mat-row]:hover {
-      background-color: yellow;
+      background-color: lightgray;
     }
   }
 }

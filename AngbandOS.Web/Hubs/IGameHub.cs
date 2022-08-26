@@ -20,8 +20,8 @@ public interface IGameHub
     /// <param name="col"></param>
     /// <param name="color"></param>
     /// <returns></returns>
-    Task SetCellBackground(int row, int col, char c, string color);
-    Task UnsetCellBackground(int row, int col, char c, string color);
+    Task SetCellBackground(int row, int col, char c, Colour color);
+    Task UnsetCellBackground(int row, int col, char c, Colour color);
 
     /// <summary>
     /// Outgoing message to a web client to clear the screen.
@@ -37,7 +37,7 @@ public interface IGameHub
     /// <param name="text"></param>
     /// <param name="colour"></param>
     /// <returns></returns>
-    Task Print(int row, int col, string text, string color);
+    Task Print(int row, int col, string text, Colour color);
 
     /// <summary>
     /// Outgoing message to a web client to set a background image.

@@ -124,7 +124,7 @@ namespace AngbandOS.Web.Hubs
               gameHub.PlaySound(sound);
         }
 
-        public void Print(int row, int col, string text, string colour)
+        public void Print(int row, int col, string text, Colour colour)
         {
             // Forward the print command from the game to the signal-r hub.
             _consoleGameHub.Print(row, col, text, colour);
@@ -144,7 +144,7 @@ namespace AngbandOS.Web.Hubs
               gameHub.SetBackground(image);
         }
 
-        public void SetCellBackground(int row, int col, char c, string color)
+        public void SetCellBackground(int row, int col, char c, Colour color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
             _consoleGameHub.SetCellBackground(row, col, c, color);
@@ -154,7 +154,7 @@ namespace AngbandOS.Web.Hubs
               gameHub.SetCellBackground(row, col, c, color);
         }
 
-        public void UnsetCellBackground(int row, int col, char c, string color)
+        public void UnsetCellBackground(int row, int col, char c, Colour color)
         {
             // Forward the set cell background command from the game to the signal-r hub.
             _consoleGameHub.UnsetCellBackground(row, col, c, color);

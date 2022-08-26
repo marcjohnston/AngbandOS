@@ -5,6 +5,7 @@ using static Cthangband.Extensions;
 using Cthangband.ArtifactBiases;
 using System.IO;
 using System.ComponentModel;
+using AngbandOS.Interface;
 
 namespace Cthangband.ItemCategories
 {

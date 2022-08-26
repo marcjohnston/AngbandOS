@@ -8,133 +8,169 @@ import { AuthenticationService } from '../accounts/authentication-service/authen
 import { UserDetails } from '../accounts/authentication-service/user-details';
 
 const charSize = 12;
+
+enum Colour {
+  Background = 0,
+  Black = 1,
+  Grey = 2,
+  BrightGrey = 3,
+  Silver = 4,
+  Beige = 5,
+  BrightBeige = 6,
+  White = 7,
+  BrightWhite = 8,
+  Red = 9,
+  BrightRed = 10,
+  Copper = 11,
+  Orange = 12,
+  BrightOrange = 13,
+  Brown = 14,
+  BrightBrown = 15,
+  Gold = 16,
+  Yellow = 17,
+  BrightYellow = 18,
+  Chartreuse = 19,
+  BrightChartreuse = 20,
+  Green = 21,
+  BrightGreen = 22,
+  Turquoise = 23,
+  BrightTurquoise = 24,
+  Blue = 25,
+  BrightBlue = 26,
+  Diamond = 27,
+  Purple = 28,
+  BrightPurple = 29,
+  Pink = 30,
+  BrightPink = 31,
+}
+
 enum SoundEffect {
-  EnterTownDay,
-  EnterTownNight,
-  EnterDungeon1,
-  EnterDungeon2,
-  EnterDungeon3,
-  EnterDungeon4,
-  EnterDungeon5,
-  StoreSoldWorthless,
-  StoreSoldBargain,
-  StoreSoldCheaply,
-  StoreSoldExtraCheaply,
-  StoreTransaction,
-  EnterStore,
-  LeaveStore,
-  MeleeHit,
-  HitGood,
-  HitGreat,
-  HitSuperb,
-  HitHiGreat,
-  HitHiSuperb,
-  Miss,
-  Shoot,
-  RangedHit,
-  HealthWarning,
-  PlayerDeath,
-  PlayerBlind,
-  Playerconfused,
-  PlayerPoisoned,
-  PlayerAfraid,
-  PlayerParalysed,
-  PlayerDrugged,
-  PlayerSlow,
-  PlayerCut,
-  PlayerStatDrain,
-  PlayerRecover,
-  PlayerHaste,
-  PlayerShield,
-  PlayerBlessed,
-  PlayerHeroism,
-  PlayerBerserk,
-  PlayerProtEvil,
-  PlayerInvulnerable,
-  PlayerSeeInvisible,
-  PlayerInfravision,
-  PlayerResistAcid,
-  PlayerResistElectric,
-  PlayerResistFire,
-  PlayerResistCold,
-  PlayerResistPoison,
-  Hungry,
-  PickUpMoney1,
-  PickUpMoney2,
-  PickUpMoney3,
-  Drop,
-  LevelGain,
-  Study,
-  Teleport,
-  Quaff,
-  ZapRod,
-  BumpWall,
-  Eat,
-  Dig,
-  OpenDoor,
-  ShutDoor,
-  TeleportLevel,
-  Bell,
-  NothingToOpen,
-  LockpickFail,
-  LockpickSuccess,
-  DisarmTrap,
-  StairsUp,
-  StairsDown,
-  ActivateArtifact,
-  UseStaff,
-  DestroyItem,
-  WieldWeapon,
-  Cursed,
-  FindSecretDoor,
-  PseudoId,
-  CastSpell,
-  Pray,
-  MonsterFlees,
-  MonsterDies,
-  UniqueDies,
-  QuestMonsterDies,
-  MonsterHits,
-  MonsterTouches,
-  MonsterBashes,
-  MonsterKicks,
-  MonsterClaws,
-  MonsterBites,
-  MonsterStings,
-  MonsterButts,
-  MonsterCrushes,
-  MonsterEngulfs,
-  MonsterCrawls,
-  MonsterDrools,
-  MonsterSpits,
-  MonsterGazes,
-  MonsterWails,
-  MonsterSpores,
-  MonsterBegs,
-  MonsterInsults,
-  MonsterMoans,
-  MonsterShrieks,
-  MonsterCreatesTraps,
-  MonsterCausesFear,
-  MonsterBreeds,
-  SummonMonster,
-  SummonAngel,
-  SummonUndead,
-  SummonAnimals,
-  SummonSpiders,
-  SummonHounds,
-  SummonHydras,
-  SummonDemons,
-  SummonDragons,
-  SummonGreaterUndead,
-  SummonGreaterDragons,
-  SummonGreaterDemons,
-  SummonRingwraiths,
-  SummonUniques,
-  BreathWeapon,
-  IdentifyBad,
-  IdentifyGood,
-  IdentifySpecial
+  EnterTownDay = 0,
+  EnterTownNight = 1,
+  EnterDungeon1 = 2,
+  EnterDungeon2 = 3,
+  EnterDungeon3 = 4,
+  EnterDungeon4 = 5,
+  EnterDungeon5 = 6,
+  StoreSoldWorthless = 7,
+  StoreSoldBargain = 8,
+  StoreSoldCheaply = 9,
+  StoreSoldExtraCheaply = 10,
+  StoreTransaction = 11,
+  EnterStore = 12,
+  LeaveStore = 13,
+  MeleeHit = 14,
+  HitGood = 15,
+  HitGreat = 16,
+  HitSuperb = 17,
+  HitHiGreat = 18,
+  HitHiSuperb = 19,
+  Miss = 20,
+  Shoot = 21,
+  RangedHit = 22,
+  HealthWarning = 23,
+  PlayerDeath = 24,
+  PlayerBlind = 25,
+  Playerconfused = 26,
+  PlayerPoisoned = 27,
+  PlayerAfraid = 28,
+  PlayerParalysed = 29,
+  PlayerDrugged = 30,
+  PlayerSlow = 31,
+  PlayerCut = 32,
+  PlayerStatDrain = 33,
+  PlayerRecover = 34,
+  PlayerHaste = 35,
+  PlayerShield = 36,
+  PlayerBlessed = 37,
+  PlayerHeroism = 38,
+  PlayerBerserk = 39,
+  PlayerProtEvil = 40,
+  PlayerInvulnerable = 41,
+  PlayerSeeInvisible = 42,
+  PlayerInfravision = 43,
+  PlayerResistAcid = 44,
+  PlayerResistElectric = 45,
+  PlayerResistFire = 46,
+  PlayerResistCold = 47,
+  PlayerResistPoison = 48,
+  Hungry = 49,
+  PickUpMoney1 = 50,
+  PickUpMoney2 = 51,
+  PickUpMoney3 = 52,
+  Drop = 53,
+  LevelGain = 54,
+  Study = 55,
+  Teleport = 56,
+  Quaff = 57,
+  ZapRod = 58,
+  BumpWall = 59,
+  Eat = 60,
+  Dig = 61,
+  OpenDoor = 62,
+  ShutDoor = 63,
+  TeleportLevel = 64,
+  Bell = 65,
+  NothingToOpen = 66,
+  LockpickFail = 67,
+  LockpickSuccess = 68,
+  DisarmTrap = 69,
+  StairsUp = 70,
+  StairsDown = 71,
+  ActivateArtifact = 72,
+  UseStaff = 73,
+  DestroyItem = 74,
+  WieldWeapon = 75,
+  Cursed = 76,
+  FindSecretDoor = 77,
+  PseudoId = 78,
+  CastSpell = 79,
+  Pray = 80,
+  MonsterFlees = 81,
+  MonsterDies = 82,
+  UniqueDies = 83,
+  QuestMonsterDies = 84,
+  MonsterHits = 85,
+  MonsterTouches = 86,
+  MonsterBashes = 87,
+  MonsterKicks = 88,
+  MonsterClaws = 89,
+  MonsterBites = 90,
+  MonsterStings = 91,
+  MonsterButts = 92,
+  MonsterCrushes = 93,
+  MonsterEngulfs = 94,
+  MonsterCrawls = 95,
+  MonsterDrools = 96,
+  MonsterSpits = 97,
+  MonsterGazes = 98,
+  MonsterWails = 99,
+  MonsterSpores = 100,
+  MonsterBegs = 101,
+  MonsterInsults = 102,
+  MonsterMoans = 103,
+  MonsterShrieks = 104,
+  MonsterCreatesTraps = 105,
+  MonsterCausesFear = 106,
+  MonsterBreeds = 107,
+  SummonMonster = 108,
+  SummonAngel = 109,
+  SummonUndead = 110,
+  SummonAnimals = 111,
+  SummonSpiders = 112,
+  SummonHounds = 113,
+  SummonHydras = 114,
+  SummonDemons = 115,
+  SummonDragons = 116,
+  SummonGreaterUndead = 117,
+  SummonGreaterDragons = 118,
+  SummonGreaterDemons = 119,
+  SummonRingwraiths = 120,
+  SummonUniques = 121,
+  BreathWeapon = 122,
+  IdentifyBad = 123,
+  IdentifyGood = 124,
+  IdentifySpecial = 125
 }
 
 
@@ -151,7 +187,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
-  private _sounds = new Map<number, string[]>();
+  private _sounds = new Map<SoundEffect, string[]>();
+  private _colours = new Map<Colour, string>();
 
   constructor(
     private _httpClient: HttpClient,
@@ -217,6 +254,41 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   public get charSize(): number {
     return charSize;
+  }
+
+  private setupColorMap() {
+    this._colours.set(Colour.Background, "#000000");
+    this._colours.set(Colour.Black, "#F2F4F4F");
+    this._colours.set(Colour.Grey, "#696969");
+    this._colours.set(Colour.BrightGrey, "#A9A9A9");
+    this._colours.set(Colour.Silver, "#778899");
+    this._colours.set(Colour.Beige, "#FFE4B5");
+    this._colours.set(Colour.BrightBeige, "#F5F5DC");
+    this._colours.set(Colour.White, "#D3D3D3");
+    this._colours.set(Colour.BrightWhite, "#FFFFFF");
+    this._colours.set(Colour.Red, "#8B0000");
+    this._colours.set(Colour.BrightRed, "#FF0000");
+    this._colours.set(Colour.Copper, "#D2691E");
+    this._colours.set(Colour.Orange, "#FF4500");
+    this._colours.set(Colour.BrightOrange, "#FFA500");
+    this._colours.set(Colour.Brown, "#8B4513");
+    this._colours.set(Colour.BrightBrown, "#DEB887");
+    this._colours.set(Colour.Gold, "#FFD700");
+    this._colours.set(Colour.Yellow, "#F0E68C");
+    this._colours.set(Colour.BrightYellow, "#FFFF00");
+    this._colours.set(Colour.Chartreuse, "#9ACD32");
+    this._colours.set(Colour.BrightChartreuse, "#7FFF00");
+    this._colours.set(Colour.Green, "#006400");
+    this._colours.set(Colour.BrightGreen, "#32CD32");
+    this._colours.set(Colour.Turquoise, "#00CED1");
+    this._colours.set(Colour.BrightTurquoise, "#00FFFF");
+    this._colours.set(Colour.Blue, "#0000CD");
+    this._colours.set(Colour.BrightBlue, "#00BFFF");
+    this._colours.set(Colour.Diamond, "#E0FFFF");
+    this._colours.set(Colour.Purple, "#800080");
+    this._colours.set(Colour.BrightPurple, "#EE82EE");
+    this._colours.set(Colour.Pink, "#FF1493");
+    this._colours.set(Colour.BrightPink, "#FF69B4");
   }
 
   private setupSounds() {
@@ -366,7 +438,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         if (this.connection) {
           this.connectionId = this.connection.connectionId;
 
-          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: string) => {
+          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: Colour) => {
             this._zone.run(() => {
               if (this.canvasRef) {
                 const canvas = this.canvasRef.nativeElement;
@@ -375,13 +447,14 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.fillRect(col * charSize, row * charSize, charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
+                const rgbColor = this._colours.get(color);
+                context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 context.fillText(c, col * charSize, row * charSize);
               }
             });
           });
-          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: string) => {
+          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: Colour) => {
             this._zone.run(() => {
               if (this.canvasRef) {
                 const canvas = this.canvasRef.nativeElement;
@@ -390,7 +463,8 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.fillRect(col * charSize, row * charSize, charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
+                const rgbColor = this._colours.get(color);
+                context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 context.fillText(c, col * charSize, row * charSize);
               }
@@ -407,7 +481,7 @@ export class PlayComponent implements OnInit, OnDestroy {
               }
             });
           });
-          this.connection.on("Print", (row: number, col: number, text: string, color: string) => {
+          this.connection.on("Print", (row: number, col: number, text: string, color: Colour) => {
             this._zone.run(() => {
               if (this.canvasRef !== undefined) {
                 const canvas = this.canvasRef.nativeElement;
@@ -417,7 +491,8 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.clearRect(col * charSize, row * charSize, text.length * charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                context.fillStyle = `#${color.substring(3)}`; // Convert from RGBA to RGB
+                const rgbColor = this._colours.get(color);
+                context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 for (var i: number = 0; i < text.length; i++) {
                   const c = text[i];
@@ -473,6 +548,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setupSounds();
+    this.setupColorMap();
 
     // Wait for the authentication.  Games can only be played with authenticated.
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {

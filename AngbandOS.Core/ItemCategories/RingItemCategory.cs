@@ -1,4 +1,5 @@
-﻿using Cthangband.ArtifactBiases;
+﻿using AngbandOS.Interface;
+using Cthangband.ArtifactBiases;
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using System;

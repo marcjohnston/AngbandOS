@@ -1,6 +1,3 @@
-using Cthangband.Enumerations;
-using System;
-
 namespace Cthangband.ItemCategories
 {
     [Serializable]

@@ -1,7 +1,8 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Interface;
 
 namespace AngbandOS.Core;
 
+[Serializable]
 internal class ScrollFlavour
 {
     /// <summary>
