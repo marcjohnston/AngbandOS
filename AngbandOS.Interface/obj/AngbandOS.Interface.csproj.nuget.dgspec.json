@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {}
+    "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {
+    "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
+        "projectUniqueName": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
         "projectName": "AngbandOS.Interface",
-        "projectPath": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
+        "projectPath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj",
         "packagesPath": "C:\\Users\\Marc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.Interface\\obj\\",
+        "outputPath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

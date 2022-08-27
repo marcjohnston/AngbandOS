@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kvKaOu/UaFiPz8s97MnnYBtAo4ROWejz7JBi82rBOvDgpZRJYFSPgWbannFz9RZbTe2yrceaCwH15VXC6gCX1A==",
+  "dgSpecHash": "pg/rRu3f6mYTdLAx6wVVR09Om9NYMJDFwSSyKA8se/4HKQFQZlNEJZvWEnBLMMkwHnwpk8yJXw5vo/rY+FDViw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marc\\source\\repos\\AngbandOS\\AngbandOS.SqlPersistentStorage\\AngbandOS.PersistentStorage.Sql.csproj",
+  "projectFilePath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.SqlPersistentStorage\\AngbandOS.PersistentStorage.Sql.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

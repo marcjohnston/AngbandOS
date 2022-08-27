@@ -6,43 +6,9 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
+import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
 
 const charSize = 12;
-
-enum Colour {
-  Background = 0,
-  Black = 1,
-  Grey = 2,
-  BrightGrey = 3,
-  Silver = 4,
-  Beige = 5,
-  BrightBeige = 6,
-  White = 7,
-  BrightWhite = 8,
-  Red = 9,
-  BrightRed = 10,
-  Copper = 11,
-  Orange = 12,
-  BrightOrange = 13,
-  Brown = 14,
-  BrightBrown = 15,
-  Gold = 16,
-  Yellow = 17,
-  BrightYellow = 18,
-  Chartreuse = 19,
-  BrightChartreuse = 20,
-  Green = 21,
-  BrightGreen = 22,
-  Turquoise = 23,
-  BrightTurquoise = 24,
-  Blue = 25,
-  BrightBlue = 26,
-  Diamond = 27,
-  Purple = 28,
-  BrightPurple = 29,
-  Pink = 30,
-  BrightPink = 31,
-}
 
 enum SoundEffect {
   EnterTownDay = 0,
@@ -188,7 +154,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
   private _sounds = new Map<SoundEffect, string[]>();
-  private _colours = new Map<Colour, string>();
+  private _colours = new Map<ColourEnum, string>();
 
   constructor(
     private _httpClient: HttpClient,
@@ -257,38 +223,38 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   private setupColorMap() {
-    this._colours.set(Colour.Background, "#000000");
-    this._colours.set(Colour.Black, "#F2F4F4F");
-    this._colours.set(Colour.Grey, "#696969");
-    this._colours.set(Colour.BrightGrey, "#A9A9A9");
-    this._colours.set(Colour.Silver, "#778899");
-    this._colours.set(Colour.Beige, "#FFE4B5");
-    this._colours.set(Colour.BrightBeige, "#F5F5DC");
-    this._colours.set(Colour.White, "#D3D3D3");
-    this._colours.set(Colour.BrightWhite, "#FFFFFF");
-    this._colours.set(Colour.Red, "#8B0000");
-    this._colours.set(Colour.BrightRed, "#FF0000");
-    this._colours.set(Colour.Copper, "#D2691E");
-    this._colours.set(Colour.Orange, "#FF4500");
-    this._colours.set(Colour.BrightOrange, "#FFA500");
-    this._colours.set(Colour.Brown, "#8B4513");
-    this._colours.set(Colour.BrightBrown, "#DEB887");
-    this._colours.set(Colour.Gold, "#FFD700");
-    this._colours.set(Colour.Yellow, "#F0E68C");
-    this._colours.set(Colour.BrightYellow, "#FFFF00");
-    this._colours.set(Colour.Chartreuse, "#9ACD32");
-    this._colours.set(Colour.BrightChartreuse, "#7FFF00");
-    this._colours.set(Colour.Green, "#006400");
-    this._colours.set(Colour.BrightGreen, "#32CD32");
-    this._colours.set(Colour.Turquoise, "#00CED1");
-    this._colours.set(Colour.BrightTurquoise, "#00FFFF");
-    this._colours.set(Colour.Blue, "#0000CD");
-    this._colours.set(Colour.BrightBlue, "#00BFFF");
-    this._colours.set(Colour.Diamond, "#E0FFFF");
-    this._colours.set(Colour.Purple, "#800080");
-    this._colours.set(Colour.BrightPurple, "#EE82EE");
-    this._colours.set(Colour.Pink, "#FF1493");
-    this._colours.set(Colour.BrightPink, "#FF69B4");
+    this._colours.set(ColourEnum.Background, "#000000");
+    this._colours.set(ColourEnum.Black, "#F2F4F4F");
+    this._colours.set(ColourEnum.Grey, "#696969");
+    this._colours.set(ColourEnum.BrightGrey, "#A9A9A9");
+    this._colours.set(ColourEnum.Silver, "#778899");
+    this._colours.set(ColourEnum.Beige, "#FFE4B5");
+    this._colours.set(ColourEnum.BrightBeige, "#F5F5DC");
+    this._colours.set(ColourEnum.White, "#D3D3D3");
+    this._colours.set(ColourEnum.BrightWhite, "#FFFFFF");
+    this._colours.set(ColourEnum.Red, "#8B0000");
+    this._colours.set(ColourEnum.BrightRed, "#FF0000");
+    this._colours.set(ColourEnum.Copper, "#D2691E");
+    this._colours.set(ColourEnum.Orange, "#FF4500");
+    this._colours.set(ColourEnum.BrightOrange, "#FFA500");
+    this._colours.set(ColourEnum.Brown, "#8B4513");
+    this._colours.set(ColourEnum.BrightBrown, "#DEB887");
+    this._colours.set(ColourEnum.Gold, "#FFD700");
+    this._colours.set(ColourEnum.Yellow, "#F0E68C");
+    this._colours.set(ColourEnum.BrightYellow, "#FFFF00");
+    this._colours.set(ColourEnum.Chartreuse, "#9ACD32");
+    this._colours.set(ColourEnum.BrightChartreuse, "#7FFF00");
+    this._colours.set(ColourEnum.Green, "#006400");
+    this._colours.set(ColourEnum.BrightGreen, "#32CD32");
+    this._colours.set(ColourEnum.Turquoise, "#00CED1");
+    this._colours.set(ColourEnum.BrightTurquoise, "#00FFFF");
+    this._colours.set(ColourEnum.Blue, "#0000CD");
+    this._colours.set(ColourEnum.BrightBlue, "#00BFFF");
+    this._colours.set(ColourEnum.Diamond, "#E0FFFF");
+    this._colours.set(ColourEnum.Purple, "#800080");
+    this._colours.set(ColourEnum.BrightPurple, "#EE82EE");
+    this._colours.set(ColourEnum.Pink, "#FF1493");
+    this._colours.set(ColourEnum.BrightPink, "#FF69B4");
   }
 
   private setupSounds() {
@@ -438,7 +404,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         if (this.connection) {
           this.connectionId = this.connection.connectionId;
 
-          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: Colour) => {
+          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: ColourEnum) => {
             this._zone.run(() => {
               if (this.canvasRef) {
                 const canvas = this.canvasRef.nativeElement;
@@ -454,7 +420,7 @@ export class PlayComponent implements OnInit, OnDestroy {
               }
             });
           });
-          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: Colour) => {
+          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: ColourEnum) => {
             this._zone.run(() => {
               if (this.canvasRef) {
                 const canvas = this.canvasRef.nativeElement;
@@ -481,7 +447,7 @@ export class PlayComponent implements OnInit, OnDestroy {
               }
             });
           });
-          this.connection.on("Print", (row: number, col: number, text: string, color: Colour) => {
+          this.connection.on("Print", (row: number, col: number, text: string, color: ColourEnum) => {
             this._zone.run(() => {
               if (this.canvasRef !== undefined) {
                 const canvas = this.canvasRef.nativeElement;
