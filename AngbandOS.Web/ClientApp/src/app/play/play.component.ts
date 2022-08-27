@@ -8,6 +8,7 @@ import { AuthenticationService } from '../accounts/authentication-service/authen
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
 import { SoundEffectsEnum } from '../modules/sound-effects-enum/sound-effects-enum.module';
+import { ColoursMap } from '../modules/colours-map/colours-map.module';
 
 const charSize = 12;
 
@@ -25,7 +26,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
   private _sounds = new Map<SoundEffectsEnum, string[]>();
-  private _colours = new Map<ColourEnum, string>();
+  private _colours = ColoursMap.getColoursMap();
 
   constructor(
     private _httpClient: HttpClient,
@@ -91,41 +92,6 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   public get charSize(): number {
     return charSize;
-  }
-
-  private setupColorMap() {
-    this._colours.set(ColourEnum.Background, "#000000");
-    this._colours.set(ColourEnum.Black, "#F2F4F4F");
-    this._colours.set(ColourEnum.Grey, "#696969");
-    this._colours.set(ColourEnum.BrightGrey, "#A9A9A9");
-    this._colours.set(ColourEnum.Silver, "#778899");
-    this._colours.set(ColourEnum.Beige, "#FFE4B5");
-    this._colours.set(ColourEnum.BrightBeige, "#F5F5DC");
-    this._colours.set(ColourEnum.White, "#D3D3D3");
-    this._colours.set(ColourEnum.BrightWhite, "#FFFFFF");
-    this._colours.set(ColourEnum.Red, "#8B0000");
-    this._colours.set(ColourEnum.BrightRed, "#FF0000");
-    this._colours.set(ColourEnum.Copper, "#D2691E");
-    this._colours.set(ColourEnum.Orange, "#FF4500");
-    this._colours.set(ColourEnum.BrightOrange, "#FFA500");
-    this._colours.set(ColourEnum.Brown, "#8B4513");
-    this._colours.set(ColourEnum.BrightBrown, "#DEB887");
-    this._colours.set(ColourEnum.Gold, "#FFD700");
-    this._colours.set(ColourEnum.Yellow, "#F0E68C");
-    this._colours.set(ColourEnum.BrightYellow, "#FFFF00");
-    this._colours.set(ColourEnum.Chartreuse, "#9ACD32");
-    this._colours.set(ColourEnum.BrightChartreuse, "#7FFF00");
-    this._colours.set(ColourEnum.Green, "#006400");
-    this._colours.set(ColourEnum.BrightGreen, "#32CD32");
-    this._colours.set(ColourEnum.Turquoise, "#00CED1");
-    this._colours.set(ColourEnum.BrightTurquoise, "#00FFFF");
-    this._colours.set(ColourEnum.Blue, "#0000CD");
-    this._colours.set(ColourEnum.BrightBlue, "#00BFFF");
-    this._colours.set(ColourEnum.Diamond, "#E0FFFF");
-    this._colours.set(ColourEnum.Purple, "#800080");
-    this._colours.set(ColourEnum.BrightPurple, "#EE82EE");
-    this._colours.set(ColourEnum.Pink, "#FF1493");
-    this._colours.set(ColourEnum.BrightPink, "#FF69B4");
   }
 
   private setupSounds() {
@@ -284,7 +250,7 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.fillRect(col * charSize, row * charSize, charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                const rgbColor = this._colours.get(color);
+                const rgbColor = this._colours[color];
                 context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 context.fillText(c, col * charSize, row * charSize);
@@ -300,7 +266,7 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.fillRect(col * charSize, row * charSize, charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                const rgbColor = this._colours.get(color);
+                const rgbColor = this._colours[color];
                 context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 context.fillText(c, col * charSize, row * charSize);
@@ -328,7 +294,7 @@ export class PlayComponent implements OnInit, OnDestroy {
                 context.clearRect(col * charSize, row * charSize, text.length * charSize, charSize);
                 context.textBaseline = 'top';
                 context.textAlign = 'left';
-                const rgbColor = this._colours.get(color);
+                const rgbColor = this._colours[color];
                 context.fillStyle = `${rgbColor}`;
                 context.font = `${charSize}px Courier`;
                 for (var i: number = 0; i < text.length; i++) {
@@ -385,7 +351,6 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setupSounds();
-    this.setupColorMap();
 
     // Wait for the authentication.  Games can only be played with authenticated.
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
