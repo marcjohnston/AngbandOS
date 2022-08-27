@@ -35,6 +35,7 @@
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
     <None Remove="ClientApp\src\app\manual\manual.css" />
     <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
+    <None Remove="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
     <None Remove="TemplateProcessing\ConfirmEmail.html" />
   </ItemGroup>
 
@@ -62,6 +63,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\home\saved-game-details.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
