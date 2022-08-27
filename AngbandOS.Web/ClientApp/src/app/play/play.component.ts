@@ -27,12 +27,9 @@ export class PlayComponent implements OnInit, OnDestroy {
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
-  private _sounds = SoundEffectsMap.getSoundEffectsMap();
-  private _colours = ColoursMap.getColoursMap();
   private _htmlConsole: HtmlConsole | undefined = undefined;
 
   constructor(
-    private _httpClient: HttpClient,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
@@ -93,20 +90,8 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
-  public get charSize(): number {
-    return charSize;
-  }
-
-  private updateCanvasSize() {
-    if (this.canvasRef) {
-      const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-      canvas.width = 80 * charSize;
-      canvas.height = 45 * charSize;
-      canvas.style.minWidth = canvas.width + "px";
-      canvas.style.maxWidth = canvas.width + "px";
-      canvas.style.minHeight = canvas.height + "px";
-      canvas.style.maxHeight = canvas.height + "px";
-    }
+  public get charSize(): number | undefined {
+    return this._htmlConsole?.charSize;
   }
 
   private check() {
@@ -115,38 +100,6 @@ export class PlayComponent implements OnInit, OnDestroy {
         if (this.connection) {
           this.connectionId = this.connection.connectionId;
 
-          this.connection.on("SetCellBackground", (row: number, col: number, c: string, color: ColourEnum) => {
-            this._zone.run(() => {
-              if (this.canvasRef) {
-                const canvas = this.canvasRef.nativeElement;
-                const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                context.fillStyle = `#FF0000`; // Rd background
-                context.fillRect(col * charSize, row * charSize, charSize, charSize);
-                context.textBaseline = 'top';
-                context.textAlign = 'left';
-                const rgbColor = this._colours[color];
-                context.fillStyle = `${rgbColor}`;
-                context.font = `${charSize}px Courier`;
-                context.fillText(c, col * charSize, row * charSize);
-              }
-            });
-          });
-          this.connection.on("UnsetCellBackground", (row: number, col: number, c: string, color: ColourEnum) => {
-            this._zone.run(() => {
-              if (this.canvasRef) {
-                const canvas = this.canvasRef.nativeElement;
-                const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                context.fillStyle = `#000000`; // Rd background
-                context.fillRect(col * charSize, row * charSize, charSize, charSize);
-                context.textBaseline = 'top';
-                context.textAlign = 'left';
-                const rgbColor = this._colours[color];
-                context.fillStyle = `${rgbColor}`;
-                context.font = `${charSize}px Courier`;
-                context.fillText(c, col * charSize, row * charSize);
-              }
-            });
-          });
           this.connection.on("Clear", () => {
             this._zone.run(() => {
               this._htmlConsole?.clear();
@@ -163,23 +116,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
           this.connection.on("PlaySound", (sound: number) => {
             this._zone.run(() => {
-
-              // Get the list of available sounds.
-              const availableSounds: string[] | undefined = this._sounds[sound];
-
-              // Ensure there are sounds available.
-              if (availableSounds !== undefined) {
-                const randomSelection = Math.floor(Math.random() * availableSounds.length);
-
-                // Choose one.
-                var soundResourceName = availableSounds[randomSelection];
-
-                // Play it.
-                const audio = new Audio();
-                audio.src = `/assets/sounds/${soundResourceName}`;
-                audio.load();
-                audio.play();
-              }
+              this._htmlConsole?.playSound(sound);
             });
           });
           this.connection.on("PlayMusic", (music: number) => {
@@ -203,9 +140,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.canvasRef !== undefined) {
-      const canvas = this.canvasRef.nativeElement;
-      const context: CanvasRenderingContext2D = canvas.getContext('2d');
-      this._htmlConsole = new HtmlConsole(context);
+      this._htmlConsole = new HtmlConsole(this.canvasRef);
     }
 
     // Wait for the authentication.  Games can only be played with authenticated.
@@ -230,14 +165,10 @@ export class PlayComponent implements OnInit, OnDestroy {
       this.gameGuid = paramMap.get("guid");
       this.check();
     }));
-
-    this.updateCanvasSize();
   }
 
   ngOnDestroy() {
     if (this.connection) {
-      this.connection.off("UnsetCellBackground");
-      this.connection.off("SetCellBackground");
       this.connection.off("Clear");
       this.connection.off("Print");
       this.connection.off("SetBackground");
