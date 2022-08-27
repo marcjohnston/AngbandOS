@@ -4,16 +4,14 @@ import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
 
 export class HtmlConsole {
   public charSize = 16;
-  public xSpacing = 10;
-  public ySpacing = 15;
+  public xSpacing = 16;
+  public ySpacing = 16;
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
   private _colours = ColoursMap.getColoursMap();
 
   constructor(
     private context: CanvasRenderingContext2D
   ) {
-    this.context.textBaseline = 'top';
-    this.context.textAlign = 'left';
   }
 
   public clear() {
@@ -21,6 +19,11 @@ export class HtmlConsole {
   }
 
   public print(row: number, col: number, text: string, foreColor: ColourEnum, backColour: ColourEnum) {
+    // The text alignments need to be set every call.  Something changes them.
+    this.context.textBaseline = 'top';
+    this.context.textAlign = 'left';
+    this.context.font = `bold ${this.charSize}px Courier`;
+
     // Fill the background.
     const rgbBackColor = this._colours[backColour];
     this.context.fillStyle = `${rgbBackColor}`;
@@ -29,7 +32,6 @@ export class HtmlConsole {
     // Draw the text.
     const rgbForeColor = this._colours[foreColor];
     this.context.fillStyle = `${rgbForeColor}`;
-    this.context.font = `bold ${this.charSize}px Courier`;
     for (var i: number = 0; i < text.length; i++) {
       const c = text[i];
       this.context.fillText(c, col * this.xSpacing, row * this.ySpacing);

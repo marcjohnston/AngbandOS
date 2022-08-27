@@ -37,7 +37,7 @@ public interface IGameHub
     /// <param name="text"></param>
     /// <param name="colour"></param>
     /// <returns></returns>
-    Task Print(int row, int col, string text, Colour color);
+    Task Print(int row, int col, string text, Colour foreColor, Colour backColour);
 
     /// <summary>
     /// Outgoing message to a web client to set a background image.

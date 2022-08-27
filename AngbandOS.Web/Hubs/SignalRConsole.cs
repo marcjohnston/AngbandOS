@@ -124,14 +124,14 @@ namespace AngbandOS.Web.Hubs
               gameHub.PlaySound(sound);
         }
 
-        public void Print(int row, int col, string text, Colour colour)
+        public void Print(int row, int col, string text, Colour foreColour, Colour backColour)
         {
             // Forward the print command from the game to the signal-r hub.
-            _consoleGameHub.Print(row, col, text, colour);
+            _consoleGameHub.Print(row, col, text, foreColour, backColour);
 
             // These messages are relayed to all spectators.
             foreach (IGameHub gameHub in _spectators)
-              gameHub.Print(row, col, text, colour);  
+              gameHub.Print(row, col, text, foreColour, backColour);  
         }
 
         public void SetBackground(BackgroundImage image)
@@ -142,26 +142,6 @@ namespace AngbandOS.Web.Hubs
             // These messages are relayed to all spectators.
             foreach (IGameHub gameHub in _spectators)
               gameHub.SetBackground(image);
-        }
-
-        public void SetCellBackground(int row, int col, char c, Colour color)
-        {
-            // Forward the set cell background command from the game to the signal-r hub.
-            _consoleGameHub.SetCellBackground(row, col, c, color);
-
-            // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
-              gameHub.SetCellBackground(row, col, c, color);
-        }
-
-        public void UnsetCellBackground(int row, int col, char c, Colour color)
-        {
-            // Forward the set cell background command from the game to the signal-r hub.
-            _consoleGameHub.UnsetCellBackground(row, col, c, color);
-
-            // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
-              gameHub.UnsetCellBackground(row, col, c, color);
         }
 
         /// <summary>

@@ -4,10 +4,8 @@ namespace AngbandOS.Interface;
 
 public interface IConsole
 {
-    void SetCellBackground(int row, int col, char c, Colour colour);
-    void UnsetCellBackground(int row, int col, char c, Colour colour);
     void Clear();
-    void Print(int row, int col, string text, Colour colour);
+    void Print(int row, int col, string text, Colour foreColour, Colour backColour);
     char WaitForKey();
     void SetBackground(BackgroundImage image);
     void PlaySound(SoundEffect sound);

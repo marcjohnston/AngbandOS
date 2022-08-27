@@ -12,7 +12,7 @@ import { ColoursMap } from '../modules/colours-map/colours-map.module';
 import { SoundEffectsMap } from '../modules/sound-effects-map/sound-effects-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
 
-const charSize = 12;
+const charSize = 16;
 
 @Component({
   selector: 'app-play',
@@ -152,9 +152,9 @@ export class PlayComponent implements OnInit, OnDestroy {
               this._htmlConsole?.clear();
             });
           });
-          this.connection.on("Print", (row: number, col: number, text: string, color: ColourEnum) => {
+          this.connection.on("Print", (row: number, col: number, text: string, foreColor: ColourEnum, backColour: ColourEnum) => {
             this._zone.run(() => {
-              this._htmlConsole?.print(row, col, text, color, ColourEnum.Background);
+              this._htmlConsole?.print(row, col, text, foreColor, backColour);
             });
           });
           this.connection.on("SetBackground", (backgroundImage: number) => {

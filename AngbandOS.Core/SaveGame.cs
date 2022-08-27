@@ -19718,7 +19718,7 @@ namespace Cthangband
             if (scr.Cu || !scr.CursorVisible)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], old.Va[scrCc + old.Cx]);
+                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background);
             }
 
             // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
@@ -19747,7 +19747,7 @@ namespace Cthangband
                         {
                             if (fn != 0)
                             {
-                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa);
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
                                 fn = 0;
                             }
                             continue;
@@ -19758,7 +19758,7 @@ namespace Cthangband
                         {
                             if (fn != 0)
                             {
-                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa);
+                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
                                 fn = 0;
                             }
                             fa = na;
@@ -19770,7 +19770,7 @@ namespace Cthangband
                     }
                     if (fn != 0)
                     {
-                        _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa);
+                        _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
                     }
 
                     /////// end RefreshTextRow
@@ -19784,19 +19784,19 @@ namespace Cthangband
             if (scr.Cu)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], old.Va[scrCc + old.Cx]);
+                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background); // Was unset
             }
             else if (!scr.CursorVisible)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], old.Va[scrCc + old.Cx]);
+                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background); // Was unset
             }
             else
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.UnsetCellBackground(old.Cy, old.Cx, old.Vc[scrCc + old.Cx], old.Va[scrCc + old.Cx]);
+                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background);
                 scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                _console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], scr.Va[scrCc + scr.Cx]);
+                _console.Print(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple);
             }
             old.Cu = scr.Cu;
             old.CursorVisible = scr.CursorVisible;
@@ -19834,7 +19834,7 @@ namespace Cthangband
                     {
                         if (fn != 0)
                         {
-                            console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor);
+                            console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background);
                             fn = 0;
                         }
                         currentColor = na;
@@ -19846,14 +19846,14 @@ namespace Cthangband
                 }
                 if (fn != 0)
                 {
-                    console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor);
+                    console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background);
                 }
             }
 
             if (scr.CursorVisible)
             {
                 int scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                console.SetCellBackground(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx], scr.Va[scrCc + scr.Cx]);
+                console.Print(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple);
             }
         }
 

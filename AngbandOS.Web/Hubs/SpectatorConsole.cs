@@ -26,24 +26,14 @@ public class SpectatorConsole : IConsole
         _gameHub.PlaySound(sound);
     }
 
-    public void Print(int row, int col, string text, Colour colour)
+    public void Print(int row, int col, string text, Colour foreColour, Colour backColour)
     {
-        _gameHub.Print(row, col, text, colour);
+        _gameHub.Print(row, col, text, foreColour, backColour);
     }
 
     public void SetBackground(BackgroundImage image)
     {
         _gameHub.SetBackground(image);
-    }
-
-    public void SetCellBackground(int row, int col, char c, Colour color)
-    {
-        _gameHub.SetCellBackground(row, col, c, color);
-    }
-
-    public void UnsetCellBackground(int row, int col, char c, Colour color)
-    {
-        _gameHub.UnsetCellBackground(row, col, c, color);
     }
 
     public char WaitForKey()
