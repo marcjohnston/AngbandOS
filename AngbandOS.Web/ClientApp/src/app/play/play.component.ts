@@ -10,6 +10,7 @@ import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
 import { SoundEffectsEnum } from '../modules/sound-effects-enum/sound-effects-enum.module';
 import { ColoursMap } from '../modules/colours-map/colours-map.module';
 import { SoundEffectsMap } from '../modules/sound-effects-map/sound-effects-map.module';
+import { HtmlConsole } from '../modules/html-console/html-console.module';
 
 const charSize = 12;
 
@@ -28,6 +29,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   private _initSubscriptions = new Subscription();
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
   private _colours = ColoursMap.getColoursMap();
+  private _htmlConsole: HtmlConsole | undefined = undefined;
 
   constructor(
     private _httpClient: HttpClient,
@@ -147,34 +149,12 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
           this.connection.on("Clear", () => {
             this._zone.run(() => {
-              if (this.canvasRef !== undefined) {
-                const canvas = this.canvasRef.nativeElement;
-                var dpr = window.devicePixelRatio || 1;
-                var rect = canvas.getBoundingClientRect();
-                const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                context.clearRect(0, 0, rect.width, rect.height);
-              }
+              this._htmlConsole?.clear();
             });
           });
           this.connection.on("Print", (row: number, col: number, text: string, color: ColourEnum) => {
             this._zone.run(() => {
-              if (this.canvasRef !== undefined) {
-                const canvas = this.canvasRef.nativeElement;
-                canvas.style.width = 1440;
-                canvas.style.height = 810;
-                const context: CanvasRenderingContext2D = canvas.getContext('2d');
-                context.clearRect(col * charSize, row * charSize, text.length * charSize, charSize);
-                context.textBaseline = 'top';
-                context.textAlign = 'left';
-                const rgbColor = this._colours[color];
-                context.fillStyle = `${rgbColor}`;
-                context.font = `${charSize}px Courier`;
-                for (var i: number = 0; i < text.length; i++) {
-                  const c = text[i];
-                  context.fillText(c, col * charSize, row * charSize);
-                  col++;
-                }
-              }
+              this._htmlConsole?.print(row, col, text, color, ColourEnum.Background);
             });
           });
           this.connection.on("SetBackground", (backgroundImage: number) => {
@@ -222,6 +202,12 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.canvasRef !== undefined) {
+      const canvas = this.canvasRef.nativeElement;
+      const context: CanvasRenderingContext2D = canvas.getContext('2d');
+      this._htmlConsole = new HtmlConsole(context);
+    }
+
     // Wait for the authentication.  Games can only be played with authenticated.
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
       if (_currentUser !== null) {
