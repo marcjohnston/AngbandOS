@@ -2,6 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+*.js
+*.js.map
 obj/
 bin/
 /AngbandOS.PersistentStorage.FileSystem/obj
