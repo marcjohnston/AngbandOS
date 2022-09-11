@@ -28,3 +28,5 @@ bin/
 /AngbandOS.Core/obj
 /AngbandOS.Core/bin
 /AngbandOS.Web/ClientApp/.angular/cache/13.3.4
+/AngbandOS.Interface/obj/Debug/net6.0/AngbandOS.Interface.assets.cache
+/AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.assets.cache
