@@ -17,7 +17,7 @@ export class HtmlConsole {
     private canvasRef: ElementRef
   ) {
     const canvas = this.canvasRef.nativeElement;
-    const context: CanvasRenderingContext2D = canvas.getContext('2d');
+    this.context = CanvasRenderingContext2D = canvas.getContext('2d');
     canvas.width = this.width * this.charSize;
     canvas.height = this.height * this.charSize;
     canvas.style.minWidth = canvas.width + "px";

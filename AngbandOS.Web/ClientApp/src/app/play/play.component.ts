@@ -139,32 +139,36 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.canvasRef !== undefined) {
+    if (this.canvasRef === undefined) {
+      // If there is no canvas defined, log an error.
+      console.log("Cannot play game.  Canvas missing!");
+      this._router.navigate(['/']);
+    } else {
       this._htmlConsole = new HtmlConsole(this.canvasRef);
-    }
 
-    // Wait for the authentication.  Games can only be played with authenticated.
-    this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
-      if (_currentUser !== null) {
-        // Get the access token for this user.  We need it for the signal-r hub authorization.
-        const accessToken = _currentUser.jwt;
+      // Wait for the authentication.  Games can only be played with authenticated.
+      this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
+        if (_currentUser !== null) {
+          // Get the access token for this user.  We need it for the signal-r hub authorization.
+          const accessToken = _currentUser.jwt;
 
-        // Ensure there is an access token and that the connection has been established already.
-        if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
-          // Create the signal-r connection object.
-          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
-            accessTokenFactory: () => accessToken,
-          }).build();
-          this.check();
+          // Ensure there is an access token and that the connection has been established already.
+          if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
+            // Create the signal-r connection object.
+            this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+              accessTokenFactory: () => accessToken,
+            }).build();
+            this.check();
+          }
         }
-      }
-    }));
+      }));
 
-    // Retrieve the game guid from the query.
-    this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap) => {
-      this.gameGuid = paramMap.get("guid");
-      this.check();
-    }));
+      // Retrieve the game guid from the query.
+      this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap) => {
+        this.gameGuid = paramMap.get("guid");
+        this.check();
+      }));
+    }
   }
 
   ngOnDestroy() {
