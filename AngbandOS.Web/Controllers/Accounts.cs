@@ -209,5 +209,57 @@ namespace AngbandOS.Web.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("{emailAddress}/password")]
+        [Produces("application/json")]
+        public async Task<ActionResult> SendPasswordRecoveryToken([FromRoute] string emailAddress)
+        {
+            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+
+            // If the user does not exist, do not inform the client.  This is an anonymous call.
+            if (appUser == null)
+              return Ok();
+
+            string token = await UserManager.GeneratePasswordResetTokenAsync(appUser);
+
+            // Create an email to send to the user.
+            string resetPasswordLink = $"{Request.Scheme}://{Request.Host}/accounts/reset-password?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
+            Dictionary<string, string> macros = new Dictionary<string, string>();
+            macros.Add("reset-password-url", resetPasswordLink);
+            string htmlDocument = TemplateProcessor.GenerateContent("ResetPassword", macros);
+            await EmailSender.SendEmailAsync(appUser.Email, "AngbandOS Reset Password", htmlDocument);
+
+            // The account was created and there was no error sending email.
+            return Ok();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <param name="resetPasswordRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("{emailAddress}/password")]
+        [Produces("application/json")]
+        public async Task<ActionResult> ResetPassword([FromRoute] string emailAddress, [FromBody] ResetPassword resetPasswordRequest)
+        {
+            if (resetPasswordRequest == null)
+                return BadRequest("The password reset request to post was not supplied or parsed correctly.");
+            else
+            {
+                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                if (appUser != null)
+                {
+                    IdentityResult result = await UserManager.ResetPasswordAsync(appUser, resetPasswordRequest.ResetPasswordToken, resetPasswordRequest.NewPassword);
+                    if (result.Succeeded)
+                        return Ok();
+                }
+                return base.StatusCode((int)HttpStatusCode.Forbidden);
+            }
+        }
     }
 }

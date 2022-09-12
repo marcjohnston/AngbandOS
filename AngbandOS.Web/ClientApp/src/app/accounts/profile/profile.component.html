@@ -1,7 +1,5 @@
 <form [formGroup]="formGroup">
-  <div>
-    Account Details
-  </div>
+  <h2>Account Details</h2>
   <mat-form-field id="username">
     <input matInput
            formControlName="username"
@@ -14,10 +12,10 @@
   </mat-form-field>
 </form>
 <ng-template ngFor [ngForOf]="messages" let-message>
-  <div>{{message}}</div>
+  <div class="mat-error">{{message}}</div>
 </ng-template>
-<button [routerLink]="['/change-password']" *ngIf="formGroup.disabled">Change Password</button>
-<button (click)="onEditClick()" *ngIf="formGroup.disabled">Edit</button>
-<button (click)="onSaveClick()" *ngIf="formGroup.enabled">Save</button>
-<button (click)="onCancelClick()" *ngIf="formGroup.enabled">Cancel</button>
-<button (click)="onResendConfirmationEmailClick()" *ngIf="!emailVerified && formGroup.disabled">Resend Confirmation Email</button>
+<button mat-flat-button [routerLink]="['/change-password']" *ngIf="formGroup.disabled">Change Password</button>
+<button mat-flat-button (click)="onEditClick()" *ngIf="formGroup.disabled">Edit</button>
+<button mat-flat-button (click)="onSaveClick()" *ngIf="formGroup.enabled">Save</button>
+<button mat-flat-button (click)="onCancelClick()" *ngIf="formGroup.enabled">Cancel</button>
+<button mat-flat-button (click)="onResendConfirmationEmailClick()" *ngIf="!emailVerified && formGroup.disabled">Resend Confirmation Email</button>

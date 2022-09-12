@@ -2,8 +2,6 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ForgotPasswordDialogData } from '../forgot-password-dialog/forgot-password-dialog-data';
-import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
 
@@ -76,20 +74,5 @@ export class LoginComponent implements OnInit, OnDestroy {
         // Now set the message.
         this.message = "Login failed.";
     });
-  }
-
-  public onForgotPasswordClick() {
-    const data: ForgotPasswordDialogData = {
-      emailAddress: this.formGroup.emailAddress.value
-    };
-
-    const matDialogRef: MatDialogRef<ForgotPasswordDialogComponent> = this._forgotPasswordDialog.open(ForgotPasswordDialogComponent, {
-      height: '200px',
-      width: '450px',
-      data
-    });
-    this._initSubscriptions.add(matDialogRef.afterClosed().subscribe((message: string) => {
-      this.message = message;
-    }));
   }
 }

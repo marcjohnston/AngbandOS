@@ -19,15 +19,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
 import { LoginMenuComponent } from './login-menu/login-menu.component';
-import { ForgotPasswordDialogComponent } from './accounts/forgot-password-dialog/forgot-password-dialog.component';
+import { ForgotPasswordComponent } from './accounts/forgot-password/forgot-password.component';
 import { RegistrationComponent } from './accounts/registration/registration.component';
 import { AuthenticationInterceptor } from './accounts/authentication-interceptor/authentication-interceptor';
 import { ProfileComponent } from './accounts/profile/profile.component';
 import { LogoutComponent } from './accounts/logout/logout.component';
 import { UnauthorizedInterceptorService } from './accounts/unauthorized-interceptor/unauthorized-interceptor.service';
 import { AccountConfirmationComponent } from './accounts/account-confirmation/account-confirmation.component';
+
 import { AbilityScoresComponent } from './manual/ability-scores/ability-scores.component';
 import { ChannelerComponent } from './manual/channeler/channeler.component';
 import { ChaosSpellsComponent } from './manual/chaos-spells/chaos-spells.component';
@@ -91,10 +93,11 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     LoginComponent,
     RegistrationComponent,
     LoginMenuComponent,
-    ForgotPasswordDialogComponent,
+    ForgotPasswordComponent,
     ProfileComponent,
     AccountConfirmationComponent,
     LogoutComponent,
+    ResetPasswordComponent,
 
     AbilityScoresComponent,
     ChannelerComponent,
@@ -172,6 +175,8 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
       { path: 'accounts/profile', component: ProfileComponent },
       { path: 'accounts/confirm', component: AccountConfirmationComponent },
       { path: 'accounts/register', component: RegistrationComponent },
+      { path: 'accounts/forgot-password', component: ForgotPasswordComponent },
+      { path: 'accounts/reset-password', component: ResetPasswordComponent },
 
       { path: 'manual/table-of-contents', component: TableOfContentsComponent },
       { path: 'manual/ability-scores', component: AbilityScoresComponent },

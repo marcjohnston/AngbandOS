@@ -17,7 +17,7 @@
     <input type="submit" value="Save" hidden>
     <span>{{message}}</span>
     <button mat-flat-button>Login</button>
-    <a href="#" (click)="onForgotPasswordClick()">Forgot password!</a>
+    <a href="#" [routerLink]='["/accounts/forgot-password"]'>Forgot password!</a>
   </form>
 </ng-container>
 <ng-container *ngIf="isAuthenticated">
