@@ -1,6 +1,10 @@
 @import '~@angular/material/theming';
 @import '../../theme.scss';
 
+nav {
+    margin: 0 !important; // Override the margins for the nav to allow the logo to consume and become the margin space
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -9,7 +13,7 @@ a.navbar-brand {
 
 .container {
   display: flex;
-  margin: 0 25px 0 25px;
+  margin: 0 15px 0 15px; // We need left and right margins
   width: 100%;
   max-width: 100%;
 }
@@ -25,6 +29,7 @@ a.navbar-brand {
 }
 
 #logo {
-  font-size: 4pt;
-  color: mat-color($primary, text);
+  font-size: 6pt;
+  color: mat-color($primary, 100);
+  font-weight: bold;
 }
