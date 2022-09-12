@@ -17,6 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { LoginComponent } from './accounts/login/login.component';
 import { LoginMenuComponent } from './login-menu/login-menu.component';
@@ -154,6 +155,7 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
+    MatButtonModule,
 
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

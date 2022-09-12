@@ -1,5 +1,6 @@
 <ng-container *ngIf="!isAuthenticated">
   <form [formGroup]="formGroup">
+    <h2>Register</h2>
     <mat-form-field id="username">
       <input matInput
              formControlName="username"
@@ -29,7 +30,7 @@
              autocomplete="new-password"
              placeholder="Confirm Password" />
     </mat-form-field>
-    <button [ngClass]="{'greyed': formGroup.invalid}" *ngIf="!isAuthenticated" (click)="onRegisterClick()">Register</button>
+    <button mat-flat-button [ngClass]="{'greyed': formGroup.invalid}" (click)="onRegisterClick()">Register</button>
     <mat-error *ngIf="formGroup.invalid && formGroup.confirmPassword.touched">{{formGroup.confirmError}}</mat-error>
     <ng-template ngFor [ngForOf]="messages" let-message>
       <div>{{message}}</div>

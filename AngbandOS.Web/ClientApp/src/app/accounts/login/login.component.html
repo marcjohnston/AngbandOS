@@ -1,8 +1,6 @@
 <ng-container *ngIf="!isAuthenticated">
   <form [formGroup]="formGroup" (submit)="onLoginClick()">
-    <div id="title">
-      Login
-    </div>
+    <h2>Login</h2>
     <mat-form-field id="email-address">
       <input matInput
               formControlName="emailAddress"
@@ -18,7 +16,7 @@
     <mat-checkbox formControlName="keepLoggedIn">Keep me logged in.</mat-checkbox>
     <input type="submit" value="Save" hidden>
     <span>{{message}}</span>
-    <button>Login</button>
+    <button mat-flat-button>Login</button>
     <a href="#" (click)="onForgotPasswordClick()">Forgot password!</a>
   </form>
 </ng-container>

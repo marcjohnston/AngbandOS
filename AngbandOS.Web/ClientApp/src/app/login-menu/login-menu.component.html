@@ -1,17 +1,18 @@
 <ul class="navbar-nav">
   <li class="nav-item" *ngIf="isAuthenticated">
-    <a class="nav-link" [routerLink]='["/accounts/profile"]' title="Manage">Hello {{username}}</a>
+    <button mat-button [routerLink]='["/accounts/profile"]'>Hello {{username}}</button>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]='["/manual/table-of-contents"]'>Manual</a>
+    <button mat-button [routerLink]='["/accounts/profile"]'>Manual</button>
   </li>
   <li class="nav-item" *ngIf="isAuthenticated">
-    <a class="nav-link" [routerLink]='["/accounts/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+    <button mat-button [routerLink]='["/accounts/logout"]' [state]='{ local: true }'>Logout</button>
   </li>
   <li class="nav-item" *ngIf="!isAuthenticated">
-    <a class="nav-link" [routerLink]='["/accounts/register"]'>Register</a>
+    <button mat-button [routerLink]='["/accounts/register"]'>Register</button>
   </li>
   <li class="nav-item" *ngIf="!isAuthenticated">
-    <a class="nav-link" [routerLink]='["/accounts/login"]'>Login</a>
+    <button mat-button [routerLink]='["/accounts/login"]'>Login</button>
   </li>
 </ul>
+

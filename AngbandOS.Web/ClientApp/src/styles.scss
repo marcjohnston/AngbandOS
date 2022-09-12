@@ -1,6 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import "theme.scss";
 
-/* Provide sufficient contrast against white background */
+@include mat.core();
+
+@include mat.all-component-themes($theme);
+
 a {
   color: #0366d6;
 }

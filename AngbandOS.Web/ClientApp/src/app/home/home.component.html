@@ -1,6 +1,6 @@
 <div id="container">
   <ng-container *ngIf="activeGames !== undefined">
-    <span id="active-games-span">Active Games</span>
+    <h6 id="active-games-span">Active Games</h6>
     <table mat-table [dataSource]="activeGames">
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef>
@@ -32,7 +32,7 @@
   </ng-container>
   <ng-container *ngIf="isAuthenticated">
     <ng-container *ngIf="savedGames !== undefined">
-      <span id="saved-games-span">Your Saved Games</span>
+      <h6 id="saved-games-span">Your Saved Games</h6>
       <table mat-table [dataSource]="savedGames">
         <ng-container matColumnDef="guid">
           <th mat-header-cell *matHeaderCellDef>
@@ -80,7 +80,7 @@
         <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" (click)="onSavedGameRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
       </table>
     </ng-container>
-    <button (click)="onNewGame()">Play New Game</button>
+    <button mat-flat-button (click)="onNewGame()">Play New Game</button>
   </ng-container>
   <ng-container *ngIf="(isAuthenticated) === false">
     Welcome to AngbandOS.  You must login to play.

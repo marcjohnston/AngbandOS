@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+@import '../../theme.scss';
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -23,4 +26,5 @@ a.navbar-brand {
 
 #logo {
   font-size: 4pt;
+  color: mat-color($primary, text);
 }
