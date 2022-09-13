@@ -29,15 +29,6 @@ export class WatchComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  public charSize(): number | undefined {
-    return this._htmlConsole?.charSize;
-  }
-
-  private check() {
-    if (this.connection !== undefined && this.gameGuid !== null) {
-    }
-  }
-
   ngOnInit() {
     if (this.canvasRef !== undefined) {
       this._htmlConsole = new HtmlConsole(this.canvasRef);

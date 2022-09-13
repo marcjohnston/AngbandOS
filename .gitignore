@@ -33,3 +33,13 @@ bin/
 /AngbandOS.Core/bin/Debug/net6.0/AngbandOS.Core.dll
 /AngbandOS.Core/bin/Debug/net6.0/AngbandOS.Core.pdb
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.csproj.AssemblyReference.cache
+/AngbandOS.Core/bin/Release/net6.0/AngbandOS.Core.dll
+/AngbandOS.Core/bin/Release/net6.0/AngbandOS.Core.pdb
+/AngbandOS.Core/bin/Release/net6.0/AngbandOS.Interface.dll
+/AngbandOS.Core/bin/Release/net6.0/AngbandOS.Interface.pdb
+/AngbandOS.FileSystemPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.FileSystem.assets.cache
+/AngbandOS.FileSystemPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.FileSystem.csproj.AssemblyReference.cache
+/AngbandOS.FileSystemPersistentStorage/obj/Release/net6.0/AngbandOS.PersistentStorage.FileSystem.assets.cache
+/AngbandOS.FileSystemPersistentStorage/obj/Release/net6.0/AngbandOS.PersistentStorage.FileSystem.GeneratedMSBuildEditorConfig.editorconfig
+/AngbandOS.Interface/obj/Release/net6.0/ref/AngbandOS.Interface.dll
+/AngbandOS.Interface/bin/Release/net6.0/AngbandOS.Interface.dll

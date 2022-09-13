@@ -25,67 +25,67 @@ export class UiComponent implements OnInit {
   }
 
   public get charSize(): number {
-    return this._htmlConsole!.charSize;
+    return this._htmlConsole!.configuration.charSize;
   }
 
   public get xSpacing(): number {
-    return this._htmlConsole!.xSpacing;
+    return this._htmlConsole!.configuration.xSpacing;
   }
 
   public get ySpacing(): number {
-    return this._htmlConsole!.ySpacing;
+    return this._htmlConsole!.configuration.ySpacing;
   }
 
   public get windowWidth(): number {
-    return this._htmlConsole!.width;
+    return this._htmlConsole!.configuration.width;
   }
 
   public get windowHeight(): number {
-    return this._htmlConsole!.height;
+    return this._htmlConsole!.configuration.height;
   }
 
   public getColor(index: number): string {
-    return this._htmlConsole!.colours[index];
+    return this._htmlConsole!.configuration.colours[index];
   }
 
   public setColor(index: number, color: string) {
-    if (this._htmlConsole !== undefined && this._htmlConsole.colours !== undefined) {
-      this._htmlConsole!.colours[index] = color;
+    if (this._htmlConsole !== undefined && this._htmlConsole.configuration.colours !== undefined) {
+      this._htmlConsole!.configuration.colours[index] = color;
       this.refresh();
     }
   }
 
   public setCharSize(value: number | null) {
     if (value !== null) {
-      this._htmlConsole!.charSize = value;
+      this._htmlConsole!.configuration.charSize = value;
       this.refresh();
     }
   }
 
   public setXSpacing(value: number | null) {
     if (value !== null) {
-      this._htmlConsole!.xSpacing = value;
+      this._htmlConsole!.configuration.xSpacing = value;
       this.refresh();
     }
   }
 
   public setYSpacing(value: number | null) {
     if (value !== null) {
-      this._htmlConsole!.ySpacing = value;
+      this._htmlConsole!.configuration.ySpacing = value;
       this.refresh();
     }
   }
 
   public setWindowWidth(value: number | null) {
     if (value !== null) {
-      this._htmlConsole!.width = value;
+      this._htmlConsole!.configuration.width = value;
       this.refresh();
     }
   }
 
   public setWindowHeight(value: number | null) {
     if (value !== null) {
-      this._htmlConsole!.height = value;
+      this._htmlConsole!.configuration.height = value;
       this.refresh();
     }
   }

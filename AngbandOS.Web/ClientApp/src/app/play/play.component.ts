@@ -90,10 +90,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
-  public get charSize(): number | undefined {
-    return this._htmlConsole?.charSize;
-  }
-
   private check() {
     if (this.connection !== undefined && this.gameGuid !== undefined) {
       this.connection.start().then(() => {

@@ -2,16 +2,18 @@ import { ElementRef, Renderer2 } from "@angular/core";
 import { ColourEnum } from "../colour-enum/colour-enum.module";
 import { ColoursMap } from "../colours-map/colours-map.module";
 import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
+import { ConsoleConfiguration } from "./console-configuration";
 
 export class HtmlConsole {
-  public charSize = 16;
-  public xSpacing = 10;
-  public ySpacing = 15;
-  public width = 80;
-  public height = 45;
+  //public charSize = 16;
+  //public xSpacing = 10;
+  //public ySpacing = 15;
+  //public width = 80;
+  //public height = 45;
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
-  public colours = ColoursMap.getColoursMap();
+  //public colours = ColoursMap.getColoursMap();
   private context: CanvasRenderingContext2D | undefined;
+  public configuration = new ConsoleConfiguration();
 
   constructor(
     private canvasRef: ElementRef,
@@ -32,11 +34,11 @@ export class HtmlConsole {
   }
 
   public get canvasWidth(): number {
-    return this.width * this.xSpacing;
+    return this.configuration.width * this.configuration.xSpacing;
   }
 
   public get canvasHeight(): number {
-    return this.height * this.ySpacing;
+    return this.configuration.height * this.configuration.ySpacing;
   }
 
   public clear() {
@@ -66,24 +68,25 @@ export class HtmlConsole {
     // The text alignments need to be set every call.  Something changes them.
     this.context!.textBaseline = 'top';
     this.context!.textAlign = 'left';
-    this.context!.font = `bold ${this.charSize}px Courier`;
+    this.context!.font = `bold ${this.configuration.charSize}px Courier`;
 
     // Fill the background.
+    const rowY = row * this.configuration.ySpacing;
     this.context!.fillStyle = `${backColor}`;
-    this.context!.fillRect(col * this.xSpacing, row * this.ySpacing, text.length * this.xSpacing, this.ySpacing);
+    this.context!.fillRect(col * this.configuration.xSpacing, rowY, text.length * this.configuration.xSpacing, this.configuration.ySpacing);
 
     // Draw the text.
     this.context!.fillStyle = `${foreColor}`;
     for (var i: number = 0; i < text.length; i++) {
       const c = text[i];
-      this.context!.fillText(c, col * this.xSpacing, row * this.ySpacing);
+      this.context!.fillText(c, col * this.configuration.xSpacing, rowY);
       col++;
     }
   }
 
   public print(row: number, col: number, text: string, foreColourEnum: ColourEnum, backColourEnum: ColourEnum) {
-    const backColour = this.colours[backColourEnum];
-    const foreColour = this.colours[foreColourEnum];
+    const backColour = this.configuration.colours[backColourEnum];
+    const foreColour = this.configuration.colours[foreColourEnum];
     this.printUnmappedColor(row, col, text, foreColour, backColour);
   }
 }
