@@ -29,7 +29,7 @@ export class ChangePasswordComponent {
         newPassword: this.formGroup.newPassword.value
       };
 
-      this._httpClient.put(`/api/accounts/${this._authenticationService.currentUser.value.email}/password`, changePasswordRequest).toPromise().then(() => {
+      this._httpClient.put(`/apiv1/accounts/password`, changePasswordRequest).toPromise().then(() => {
         this._zone.run(() => { this.messages = ["Password updated."] });
         this.formGroup.reset();
       }, (_errorResponse: HttpErrorResponse) => {

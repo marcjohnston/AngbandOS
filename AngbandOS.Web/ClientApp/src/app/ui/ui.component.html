@@ -1,51 +1,83 @@
 <div id="container">
   <div id="horizontal-panes">
     <div id="left-pane">
-      <div class="property">
-        <span>Character Size</span>
-        <mat-slider [min]="1"
-                    [max]="32"
-                    [value]="charSize"
-                    (input)="setCharSize($event.value)">
-        </mat-slider>
-        <label>{{charSize}}</label>
-      </div>
-      <div class="property">
-        <span>Horizontal Spacing</span>
-        <mat-slider [min]="1"
-                    [max]="32"
-                    [value]="xSpacing"
-                    (input)="setXSpacing($event.value)">
-        </mat-slider>
-        <label>{{xSpacing}}</label>
-      </div>
-      <div class="property">
-        <span>Vertical Spacing</span>
-        <mat-slider [min]="1"
-                    [max]="32"
-                    [value]="ySpacing"
-                    (input)="setYSpacing($event.value)">
-        </mat-slider>
-        <label>{{ySpacing}}</label>
-      </div>
-      <div class="property">
-        <span>Window Width</span>
-        <mat-slider [min]="30"
-                    [max]="200"
-                    [value]="windowWidth"
-                    (input)="setWindowWidth($event.value)">
-        </mat-slider>
-        <label>{{windowWidth}}</label>
-      </div>
-      <div class="property">
-        <span>Window Height</span>
-        <mat-slider [min]="20"
-                    [max]="100"
-                    [value]="windowHeight"
-                    (input)="setWindowHeight($event.value)">
-        </mat-slider>
-        <label>{{windowHeight}}</label>
-      </div>
+      <table>
+        <tr>
+          <td>
+            Character Size
+          </td>
+          <td>
+            <mat-slider [min]="1"
+                        [max]="32"
+                        [value]="charSize"
+                        (input)="setCharSize($event.value)">
+            </mat-slider>
+            <label>{{charSize}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Horizontal Spacing
+          </td>
+          <td>
+            <mat-slider [min]="1"
+                        [max]="32"
+                        [value]="xSpacing"
+                        (input)="setXSpacing($event.value)">
+            </mat-slider>
+            <label>{{xSpacing}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Vertical Spacing
+          </td>
+          <td>
+            <mat-slider [min]="1"
+                        [max]="32"
+                        [value]="ySpacing"
+                        (input)="setYSpacing($event.value)">
+            </mat-slider>
+            <label>{{ySpacing}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Window Width
+          </td>
+          <td>
+            <mat-slider [min]="30"
+                        [max]="200"
+                        [value]="windowWidth"
+                        (input)="setWindowWidth($event.value)">
+            </mat-slider>
+            <label>{{windowWidth}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Window Height
+          </td>
+          <td>
+            <mat-slider [min]="20"
+                        [max]="100"
+                        [value]="windowHeight"
+                        (input)="setWindowHeight($event.value)">
+            </mat-slider>
+            <label>{{windowHeight}}</label>
+          </td>
+        </tr>
+        <ng-container *ngFor="let color of colours; let i = index">
+          <tr>
+            <td>
+              {{color}}
+            </td>
+            <td>
+              <input class="color-picker" [cpPosition]="'right'" [cpPositionOffset]="'40'" (colorPickerChange)="setColor(i, $event)" [colorPicker]="getColor(i)" [style.background]="getColor(i)" />
+            </td>
+          </tr>
+        </ng-container>
+      </table>
     </div>
     <div #canvasContainer id="canvas-pane">
       <canvas #console></canvas>

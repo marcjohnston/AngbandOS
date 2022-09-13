@@ -5,10 +5,8 @@
   flex-direction: column;
 
   & #horizontal-panes {
-    height: 100%;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
   }
 
   & #left-pane {
@@ -16,14 +14,22 @@
     min-width: 300px;
     border: 1px solid white;
 
-    & .property {
+    & mat-slider {
       height: 20px;
+      margin-top: -30px;
+    }
+
+    & .color-picker {
+      width: 100px;
+      height: 20px;
+      position: absolute;
+      margin-top: -11px;
     }
   }
 
   & #canvas-pane {
     display: flex;
-    justify-content: center;
+    overflow: hidden;
 
     & canvas {
       background-color: black;

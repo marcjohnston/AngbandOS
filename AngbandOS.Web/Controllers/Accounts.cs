@@ -74,7 +74,7 @@ namespace AngbandOS.Web.Controllers
         public async Task<ActionResult<string[]>> RegisterAsync([FromBody] PostAccount postUser)
         {
             if (postUser == null)
-                return BadRequest("The user to post was not supplied or parse correctly.");
+                return BadRequest("The user to post was not supplied or did not parse correctly.");
 
             if (postUser.Username.Length < 5 || postUser.Username.Length > 15 || !char.IsLetter(postUser.Username[0]) || !postUser.Username.Substring(1).All(char.IsLetterOrDigit))
                 return BadRequest("Invalid username.");
@@ -136,7 +136,7 @@ namespace AngbandOS.Web.Controllers
         public async Task<ActionResult<LoginResponse>> LoginAsync([FromRoute] string emailAddress, [FromBody] PostAuthentication postAuthentication)
         {
             if (postAuthentication == null)
-                return BadRequest("The authentication request to post was not supplied or parse correctly.");
+                return BadRequest("The authentication request to post was not supplied or did not parse correctly.");
 
             if (postAuthentication.Password != null)
             {
@@ -192,7 +192,7 @@ namespace AngbandOS.Web.Controllers
         public async Task<ActionResult<string[]?>> VerifyAccountAsync([FromBody] VerifyAccount verifyAccount)
         {
             if (verifyAccount == null)
-                return BadRequest("The user verification to put was not supplied or parse correctly.");
+                return BadRequest("The user verification to put was not supplied or did not parse correctly.");
 
             // Ensure the user performing the confirmation is the currently logged on user.
             if (User == null)
@@ -248,7 +248,7 @@ namespace AngbandOS.Web.Controllers
         public async Task<ActionResult> ResetPassword([FromRoute] string emailAddress, [FromBody] ResetPassword resetPasswordRequest)
         {
             if (resetPasswordRequest == null)
-                return BadRequest("The password reset request to post was not supplied or parsed correctly.");
+                return BadRequest("The password reset request to post was not supplied or did not parsed correctly.");
             else
             {
                 ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
@@ -259,6 +259,65 @@ namespace AngbandOS.Web.Controllers
                         return Ok();
                 }
                 return base.StatusCode((int)HttpStatusCode.Forbidden);
+            }
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("password")]
+        [Produces("application/json")]
+        public async Task<ActionResult> ChangePassword([FromBody] ChangePassword changePasswordRequest)
+        {
+            if (changePasswordRequest == null)
+                return BadRequest("The change password request to put was not supplied or did not parse correctly.");
+            else
+            {
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
+
+                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                IdentityResult result = await UserManager.ChangePasswordAsync(appUser, changePasswordRequest.CurrentPassword, changePasswordRequest.NewPassword);
+                if (result.Succeeded)
+                    return Ok();
+                else
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+            }
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("profile")]
+        [Produces("application/json")]
+        public async Task<ActionResult> UpdateAccount([FromBody] UpdateAccount updateAccountRequest)
+        {
+            if (updateAccountRequest == null)
+                return BadRequest("The update account request to put was not supplied or did not parse correctly.");
+            else
+            {
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
+
+                ApplicationUser? currentUser = await UserManager.FindByEmailAsync(emailAddress);
+                IdentityResult result = await UserManager.SetUserNameAsync(currentUser, updateAccountRequest.Username);
+                if (updateAccountRequest.EmailAddress != currentUser.Email)
+                {
+                    // Create an email confirmation token and send it to the user.
+                    string token = await UserManager.GenerateChangeEmailTokenAsync(currentUser, updateAccountRequest.EmailAddress);
+
+                    // Create an email to send to the user.
+                    string confirmationLink = $"{Request.Scheme}://{Request.Host}/accounts/confirm?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
+                    Dictionary<string, string> macros = new Dictionary<string, string>();
+                    macros.Add("email-confirmation-url", confirmationLink);
+                    string htmlDocument = TemplateProcessor.GenerateContent("ConfirmEmail", macros);
+
+                    await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
+                }
+                if (result.Succeeded)
+                    return Ok();
+                else
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
             }
         }
     }

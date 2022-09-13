@@ -3,7 +3,7 @@ import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
 import { ColoursMap } from '../modules/colours-map/colours-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
-import { UiConfiguration } from './ui-configuration';
+//import { UiConfiguration } from './ui-configuration';
 
 @Component({
   selector: 'app-ui',
@@ -12,12 +12,17 @@ import { UiConfiguration } from './ui-configuration';
 })
 export class UiComponent implements OnInit {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
-  private uiConfiguration = new UiConfiguration();
+  //private uiConfiguration = new UiConfiguration();
   private _htmlConsole: HtmlConsole | undefined = undefined;
+  public color: string = "#FFFFFF";
+  public colours: string[];
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef
-  ) { }
+  ) {
+    const allColours = Object.values(ColourEnum).filter((_enum) => typeof (_enum) === "string") as string[];
+    this.colours = allColours.splice(1);
+  }
 
   public get charSize(): number {
     return this._htmlConsole!.charSize;
@@ -37,6 +42,17 @@ export class UiComponent implements OnInit {
 
   public get windowHeight(): number {
     return this._htmlConsole!.height;
+  }
+
+  public getColor(index: number): string {
+    return this._htmlConsole!.colours[index];
+  }
+
+  public setColor(index: number, color: string) {
+    if (this._htmlConsole !== undefined && this._htmlConsole.colours !== undefined) {
+      this._htmlConsole!.colours[index] = color;
+      this.refresh();
+    }
   }
 
   public setCharSize(value: number | null) {
@@ -103,8 +119,8 @@ export class UiComponent implements OnInit {
 
       const colours: string[] = ColoursMap.getColoursMap();
       for (var colour: number = 1; colour < colours.length; colour++) {
-        this._htmlConsole.printUnmappedColor(12 + colour, 3, colour.toString(), "#FFFFFF", "#000000");
-        this._htmlConsole.print(12 + colour, 6, ColourEnum[colour], colour, ColourEnum.Background);
+        this._htmlConsole.printUnmappedColor(12 + colour, 30, colour.toString(), "#FFFFFF", "#000000");
+        this._htmlConsole.print(12 + colour, 33, ColourEnum[colour], colour, ColourEnum.Background);
       }
     }
   }

@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayComponent } from './play/play.component';
 import { WatchComponent } from './watch/watch.component';
+import { UiComponent } from './ui/ui.component';
+
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
@@ -30,6 +33,7 @@ import { ProfileComponent } from './accounts/profile/profile.component';
 import { LogoutComponent } from './accounts/logout/logout.component';
 import { UnauthorizedInterceptorService } from './accounts/unauthorized-interceptor/unauthorized-interceptor.service';
 import { AccountConfirmationComponent } from './accounts/account-confirmation/account-confirmation.component';
+import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 
 import { AbilityScoresComponent } from './manual/ability-scores/ability-scores.component';
 import { ChannelerComponent } from './manual/channeler/channeler.component';
@@ -82,7 +86,6 @@ import { WarriorMageComponent } from './manual/warrior-mage/warrior-mage.compone
 import { WhatsNewComponent } from './manual/whats-new/whats-new.component';
 import { WisdomComponent } from './manual/wisdom/wisdom.component';
 import { TableOfContentsComponent } from './manual/table-of-contents/table-of-contents.component';
-import { UiComponent } from './ui/ui.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +103,7 @@ import { UiComponent } from './ui/ui.component';
     AccountConfirmationComponent,
     LogoutComponent,
     ResetPasswordComponent,
+    ChangePasswordComponent,
 
     AbilityScoresComponent,
     ChannelerComponent,
@@ -164,6 +168,8 @@ import { UiComponent } from './ui/ui.component';
     MatButtonModule,
     MatSliderModule,
 
+    ColorPickerModule,
+
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -183,6 +189,7 @@ import { UiComponent } from './ui/ui.component';
       { path: 'accounts/register', component: RegistrationComponent },
       { path: 'accounts/forgot-password', component: ForgotPasswordComponent },
       { path: 'accounts/reset-password', component: ResetPasswordComponent },
+      { path: 'accounts/change-password', component: ChangePasswordComponent },
 
       { path: 'manual/table-of-contents', component: TableOfContentsComponent },
       { path: 'manual/ability-scores', component: AbilityScoresComponent },

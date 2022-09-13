@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { ProfileFormGroup } from './profile-form-group';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
+import { UpdateAccountRequest } from '../change-password/update-account-request';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private _httpClient: HttpClient,
     private _activatedRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
+    private _zone: NgZone,
     private _authenticationService: AuthenticationService
   ) { }
 
@@ -60,12 +62,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.messages = ["Sending confirmation email ..."];
       const emailAddress: string = this._authenticationService.currentUser.value.email;
       this._httpClient.get(`/apiv1/accounts/verification`).toPromise().then(() => {
-        this.messages = [`Confirmation email sent.`, `Please click on the link in your email to confirm your email address.`];
+        this._zone.run(() => {
+          this.messages = [`Confirmation email sent.`, `Please click on the link in your email to confirm your email address.`];
+        });
       }, (_errorResponse: HttpErrorResponse) => {
         this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
           duration: 5000
         });
-        this.messages = [_errorResponse.error];
+        this._zone.run(() => {
+          this.messages = [_errorResponse.error];
+        });
       });
     }
   }
@@ -76,6 +82,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public onSaveClick() {
     this.formGroup.disable();
+
+    if (this.formGroup.valid && this._authenticationService.currentUser.value !== null) {
+      const changePasswordRequest: UpdateAccountRequest = {
+        username: this.formGroup.username.value,
+        emailAddress: this.formGroup.emailAddress.value
+      };
+
+      this._httpClient.put(`/apiv1/account`, changePasswordRequest).toPromise().then(() => {
+        this._zone.run(() => {
+          this.messages = ["Updated.  If you updated your email address, you must confirm the update from your inbox."]
+        });
+        this.formGroup.reset();
+      }, (_errorResponse: HttpErrorResponse) => {
+        this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+          duration: 5000
+        });
+        this._zone.run(() => {
+          this.messages = ["Update failed."]
+        });
+      });
+    }
   }
 
   public onCancelClick() {

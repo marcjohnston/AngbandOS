@@ -10,7 +10,7 @@ export class HtmlConsole {
   public width = 80;
   public height = 45;
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
-  private _colours = ColoursMap.getColoursMap();
+  public colours = ColoursMap.getColoursMap();
   private context: CanvasRenderingContext2D | undefined;
 
   constructor(
@@ -82,8 +82,8 @@ export class HtmlConsole {
   }
 
   public print(row: number, col: number, text: string, foreColourEnum: ColourEnum, backColourEnum: ColourEnum) {
-    const backColour = this._colours[backColourEnum];
-    const foreColour = this._colours[foreColourEnum];
+    const backColour = this.colours[backColourEnum];
+    const foreColour = this.colours[foreColourEnum];
     this.printUnmappedColor(row, col, text, foreColour, backColour);
   }
 }

@@ -14,7 +14,7 @@
 <ng-template ngFor [ngForOf]="messages" let-message>
   <div class="mat-error">{{message}}</div>
 </ng-template>
-<button mat-flat-button [routerLink]="['/change-password']" *ngIf="formGroup.disabled">Change Password</button>
+<button mat-flat-button [routerLink]="['/accounts/change-password']" *ngIf="formGroup.disabled">Change Password</button>
 <button mat-flat-button (click)="onEditClick()" *ngIf="formGroup.disabled">Edit</button>
 <button mat-flat-button (click)="onSaveClick()" *ngIf="formGroup.enabled">Save</button>
 <button mat-flat-button (click)="onCancelClick()" *ngIf="formGroup.enabled">Cancel</button>

@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
     <None Remove="ClientApp\src\app\manual\manual.css" />
@@ -67,6 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\active-game-details.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
