@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
@@ -81,6 +82,7 @@ import { WarriorMageComponent } from './manual/warrior-mage/warrior-mage.compone
 import { WhatsNewComponent } from './manual/whats-new/whats-new.component';
 import { WisdomComponent } from './manual/wisdom/wisdom.component';
 import { TableOfContentsComponent } from './manual/table-of-contents/table-of-contents.component';
+import { UiComponent } from './ui/ui.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +151,8 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     WarriorMageComponent,
     WhatsNewComponent,
     WisdomComponent,
-    TableOfContentsComponent
+    TableOfContentsComponent,
+    UiComponent
   ],
   imports: [
     MatTableModule,
@@ -159,6 +162,7 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
+    MatSliderModule,
 
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -169,6 +173,8 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
       { path: 'play', component: PlayComponent },
       { path: 'play/:guid', component: PlayComponent },
       { path: 'watch/:guid', component: WatchComponent },
+
+      { path: 'ui', component: UiComponent },
 
       { path: 'accounts/login', component: LoginComponent },
       { path: 'accounts/logout', component: LogoutComponent },
@@ -182,7 +188,6 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
       { path: 'manual/ability-scores', component: AbilityScoresComponent },
       { path: 'manual/channeler', component: ChannelerComponent },
       { path: 'manual/chaos-spells', component: ChaosSpellsComponent },
-
       { path: 'manual/charisma', component: CharismaComponent },
       { path: 'manual/chosen-one', component: ChosenOneComponent },
       { path: 'manual/combat', component: CombatComponent },

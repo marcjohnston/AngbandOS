@@ -8,39 +8,28 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
   }
 
   & #left-pane {
     width: 300px;
+    min-width: 300px;
     border: 1px solid white;
-  }
 
-  & #right-pane {
-    width: 650px;
-    border: 1px solid white;
+    & .property {
+      height: 20px;
+    }
   }
 
   & #canvas-pane {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
 
     & canvas {
       background-color: black;
-      width: 100%;
-      height: 100%;
       object-fit: none;
       object-position: left top;
+      border: 1px solid white;
     }
-  }
-
-  & #footer {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    font-size: 8pt;
-    color: white;
-    border-top: 1px solid darkgray;
   }
 }

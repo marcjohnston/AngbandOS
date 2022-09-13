@@ -1,6 +1,10 @@
 <div id="container">
-  <div #canvasContainer id="canvas-container" (keydown)="onKeyDown($event)">
-    <canvas #console></canvas>
+  <div id="horizontal-panes">
+    <div id="left-pane"></div>
+    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)">
+      <canvas #console></canvas>
+    </div>
+    <div id="right-pane"></div>
   </div>
   <div id="footer">
     ConnectionId: {{connectionId}} | Game Guid: {{gameGuid}} | Size: {{charSize}}<br />

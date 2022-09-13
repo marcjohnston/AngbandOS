@@ -30,3 +30,6 @@ bin/
 /AngbandOS.Web/ClientApp/.angular/cache/13.3.4
 /AngbandOS.Interface/obj/Debug/net6.0/AngbandOS.Interface.assets.cache
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.assets.cache
+/AngbandOS.Core/bin/Debug/net6.0/AngbandOS.Core.dll
+/AngbandOS.Core/bin/Debug/net6.0/AngbandOS.Core.pdb
+/AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.csproj.AssemblyReference.cache

@@ -1,12 +1,12 @@
-import { ElementRef } from "@angular/core";
+import { ElementRef, Renderer2 } from "@angular/core";
 import { ColourEnum } from "../colour-enum/colour-enum.module";
 import { ColoursMap } from "../colours-map/colours-map.module";
 import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
 
 export class HtmlConsole {
   public charSize = 16;
-  public xSpacing = 16;
-  public ySpacing = 16;
+  public xSpacing = 10;
+  public ySpacing = 15;
   public width = 80;
   public height = 45;
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
@@ -14,20 +14,33 @@ export class HtmlConsole {
   private context: CanvasRenderingContext2D | undefined;
 
   constructor(
-    private canvasRef: ElementRef
+    private canvasRef: ElementRef,
   ) {
     const canvas = this.canvasRef.nativeElement;
     this.context = CanvasRenderingContext2D = canvas.getContext('2d');
-    canvas.width = this.width * this.charSize;
-    canvas.height = this.height * this.charSize;
+    this.resizeCanvas();
+  }
+
+  public resizeCanvas() {
+    const canvas = this.canvasRef.nativeElement;
+    canvas.width = this.canvasWidth;
+    canvas.height = this.canvasHeight;
     canvas.style.minWidth = canvas.width + "px";
     canvas.style.maxWidth = canvas.width + "px";
     canvas.style.minHeight = canvas.height + "px";
     canvas.style.maxHeight = canvas.height + "px";
   }
 
+  public get canvasWidth(): number {
+    return this.width * this.xSpacing;
+  }
+
+  public get canvasHeight(): number {
+    return this.height * this.ySpacing;
+  }
+
   public clear() {
-    this.context?.clearRect(0, 0, this.width * this.xSpacing, this.height * this.ySpacing);
+    this.context?.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
 
   public playSound(sound: number) {
@@ -49,24 +62,28 @@ export class HtmlConsole {
     }
   }
 
-  public print(row: number, col: number, text: string, foreColor: ColourEnum, backColour: ColourEnum) {
+  public printUnmappedColor(row: number, col: number, text: string, foreColor: string, backColor: string) {
     // The text alignments need to be set every call.  Something changes them.
     this.context!.textBaseline = 'top';
     this.context!.textAlign = 'left';
     this.context!.font = `bold ${this.charSize}px Courier`;
 
     // Fill the background.
-    const rgbBackColor = this._colours[backColour];
-    this.context!.fillStyle = `${rgbBackColor}`;
+    this.context!.fillStyle = `${backColor}`;
     this.context!.fillRect(col * this.xSpacing, row * this.ySpacing, text.length * this.xSpacing, this.ySpacing);
 
     // Draw the text.
-    const rgbForeColor = this._colours[foreColor];
-    this.context!.fillStyle = `${rgbForeColor}`;
+    this.context!.fillStyle = `${foreColor}`;
     for (var i: number = 0; i < text.length; i++) {
       const c = text[i];
       this.context!.fillText(c, col * this.xSpacing, row * this.ySpacing);
       col++;
     }
+  }
+
+  public print(row: number, col: number, text: string, foreColourEnum: ColourEnum, backColourEnum: ColourEnum) {
+    const backColour = this._colours[backColourEnum];
+    const foreColour = this._colours[foreColourEnum];
+    this.printUnmappedColor(row, col, text, foreColour, backColour);
   }
 }

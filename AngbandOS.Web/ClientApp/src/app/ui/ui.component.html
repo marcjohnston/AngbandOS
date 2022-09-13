@@ -1,0 +1,54 @@
+<div id="container">
+  <div id="horizontal-panes">
+    <div id="left-pane">
+      <div class="property">
+        <span>Character Size</span>
+        <mat-slider [min]="1"
+                    [max]="32"
+                    [value]="charSize"
+                    (input)="setCharSize($event.value)">
+        </mat-slider>
+        <label>{{charSize}}</label>
+      </div>
+      <div class="property">
+        <span>Horizontal Spacing</span>
+        <mat-slider [min]="1"
+                    [max]="32"
+                    [value]="xSpacing"
+                    (input)="setXSpacing($event.value)">
+        </mat-slider>
+        <label>{{xSpacing}}</label>
+      </div>
+      <div class="property">
+        <span>Vertical Spacing</span>
+        <mat-slider [min]="1"
+                    [max]="32"
+                    [value]="ySpacing"
+                    (input)="setYSpacing($event.value)">
+        </mat-slider>
+        <label>{{ySpacing}}</label>
+      </div>
+      <div class="property">
+        <span>Window Width</span>
+        <mat-slider [min]="30"
+                    [max]="200"
+                    [value]="windowWidth"
+                    (input)="setWindowWidth($event.value)">
+        </mat-slider>
+        <label>{{windowWidth}}</label>
+      </div>
+      <div class="property">
+        <span>Window Height</span>
+        <mat-slider [min]="20"
+                    [max]="100"
+                    [value]="windowHeight"
+                    (input)="setWindowHeight($event.value)">
+        </mat-slider>
+        <label>{{windowHeight}}</label>
+      </div>
+    </div>
+    <div #canvasContainer id="canvas-pane">
+      <canvas #console></canvas>
+    </div>
+  </div>
+</div>
