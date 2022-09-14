@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Interface
+﻿namespace AngbandOS.Core.Interface
 {
     /// <summary>
     /// Represents an interface for a game to invoke notifications for in-game updates.

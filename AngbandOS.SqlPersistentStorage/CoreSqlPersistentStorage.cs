@@ -1,4 +1,4 @@
-﻿using AngbandOS.Interface;
+﻿using AngbandOS.Core.Interface;
 using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +8,7 @@ namespace AngbandOS.PersistentStorage
     /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
-    public class SqlPersistentStorage : IPersistentStorage
+    public class CoreSqlPersistentStorage : ICorePersistentStorage
     {
         /// <summary>
         /// Returns the connection string to the database.
@@ -25,7 +25,7 @@ namespace AngbandOS.PersistentStorage
         /// </summary>
         protected string GameGuid { get; }
 
-        public SqlPersistentStorage(string connectionString, string username, string guid)
+        public CoreSqlPersistentStorage(string connectionString, string username, string guid)
         {
             ConnectionString = connectionString;
             Username = username;    

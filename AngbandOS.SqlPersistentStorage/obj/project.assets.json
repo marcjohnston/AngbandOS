@@ -771,14 +771,24 @@
           }
         }
       },
-      "AngbandOS.Interface/1.0.0": {
+      "AngbandOS.Core.Interface/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
-          "bin/placeholder/AngbandOS.Interface.dll": {}
+          "bin/placeholder/AngbandOS.Core.Interface.dll": {}
         },
         "runtime": {
-          "bin/placeholder/AngbandOS.Interface.dll": {}
+          "bin/placeholder/AngbandOS.Core.Interface.dll": {}
+        }
+      },
+      "AngbandOS.Web.Interface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/AngbandOS.Web.Interface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AngbandOS.Web.Interface.dll": {}
         }
       }
     }
@@ -1977,15 +1987,21 @@
         "version.txt"
       ]
     },
-    "AngbandOS.Interface/1.0.0": {
+    "AngbandOS.Core.Interface/1.0.0": {
       "type": "project",
-      "path": "../AngbandOS.Interface/AngbandOS.Interface.csproj",
-      "msbuildProject": "../AngbandOS.Interface/AngbandOS.Interface.csproj"
+      "path": "../AngbandOS.Interface/AngbandOS.Core.Interface.csproj",
+      "msbuildProject": "../AngbandOS.Interface/AngbandOS.Core.Interface.csproj"
+    },
+    "AngbandOS.Web.Interface/1.0.0": {
+      "type": "project",
+      "path": "../AngbandOS.Web.Interface/AngbandOS.Web.Interface.csproj",
+      "msbuildProject": "../AngbandOS.Web.Interface/AngbandOS.Web.Interface.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AngbandOS.Interface >= 1.0.0",
+      "AngbandOS.Core.Interface >= 1.0.0",
+      "AngbandOS.Web.Interface >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.8"
     ]
@@ -2023,8 +2039,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj": {
-              "projectPath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Interface.csproj"
+            "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Core.Interface.csproj": {
+              "projectPath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Interface\\AngbandOS.Core.Interface.csproj"
+            },
+            "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Web.Interface\\AngbandOS.Web.Interface.csproj": {
+              "projectPath": "C:\\Users\\Marc\\Source\\repos\\AngbandOS\\AngbandOS.Web.Interface\\AngbandOS.Web.Interface.csproj"
             }
           }
         }

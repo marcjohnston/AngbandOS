@@ -1,13 +1,9 @@
-﻿using Cthangband;
-using Microsoft.AspNetCore.SignalR;
-using AngbandOS.PersistentStorage.Sql.Entities;
-using AngbandOS.Interface;
+﻿using Microsoft.AspNetCore.SignalR;
+using AngbandOS.Core.Interface;
 using AngbandOS.Web.Models;
 using AngbandOS.PersistentStorage;
-using Microsoft.AspNetCore.Identity;
-using System.Net.Mail;
 using System.Collections.Concurrent;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using AngbandOS.Web.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -26,7 +22,7 @@ namespace AngbandOS.Web.Hubs
         private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
         private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
         private readonly IConfiguration Config;
-        private IUpdateNotifier UpdateNotifier;
+        private readonly IUpdateNotifier UpdateNotifier;
 
         public GameService(
             IConfiguration config,
@@ -123,7 +119,7 @@ namespace AngbandOS.Web.Hubs
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
             string ConnectionString = Config["ConnectionString"];
-            IPersistentStorage persistentStorage = new SqlPersistentStorage(ConnectionString, userId, guid);
+            ICorePersistentStorage persistentStorage = new CoreSqlPersistentStorage(ConnectionString, userId, guid);
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
             SignalRConsole console = new SignalRConsole(gameHub, persistentStorage, userId, username, UpdateNotifier);

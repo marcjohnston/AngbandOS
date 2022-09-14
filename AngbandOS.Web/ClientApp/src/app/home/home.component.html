@@ -76,8 +76,17 @@
           </th>
           <td mat-cell *matCellDef="let savedGame">{{savedGame.comments}}</td>
         </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="right-most-column">
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let savedGame" class="right-most-column">
+            <mat-icon aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)">delete</mat-icon>
+            <mat-icon aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" (click)="onSavedGameRowClick(savedGame)">slideshow</mat-icon>
+          </td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns"></tr>
-        <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" (click)="onSavedGameRowClick(savedGame)" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
+        <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
       </table>
     </ng-container>
     <button mat-flat-button (click)="onNewGame()">Play New Game</button>

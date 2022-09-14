@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
@@ -167,6 +168,7 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     MatInputModule,
     MatButtonModule,
     MatSliderModule,
+    MatIconModule,
 
     ColorPickerModule,
 

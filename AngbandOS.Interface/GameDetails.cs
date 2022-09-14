@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Interface;
+﻿namespace AngbandOS.Core.Interface;
 
 /// <summary>
 /// Represents additional game details that can be saved alongside the game data.

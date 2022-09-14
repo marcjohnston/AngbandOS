@@ -6,10 +6,11 @@ using AngbandOS.Web.Hubs;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AngbandOS.Web;
 using AngbandOS.Web.TemplateProcessing;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AngbandOS.Web.Interface;
+using AngbandOS.PersistentStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
 builder.Services.AddScoped(typeof(TemplateProcessor), typeof(TemplateProcessor)); // Template macro processor
+builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(WebSqlPersistentStorage)); // Persistent storage driver
 builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
 
 // Add services to the container.

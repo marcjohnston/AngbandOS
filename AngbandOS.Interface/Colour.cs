@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Interface;
+﻿namespace AngbandOS.Core.Interface;
 
 //The possible colours in which to display things
 public enum Colour

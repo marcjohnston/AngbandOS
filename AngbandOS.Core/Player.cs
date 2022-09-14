@@ -13,7 +13,7 @@ using Cthangband.StaticData;
 using Cthangband.UI;
 using Cthangband.Pantheon;
 using System;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
 
 namespace Cthangband
 {

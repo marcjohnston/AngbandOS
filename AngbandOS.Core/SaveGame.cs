@@ -6,7 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface;
 using Cthangband.ActivationPowers;
 using Cthangband.Commands;
 using Cthangband.Debug;
@@ -86,7 +87,7 @@ namespace Cthangband
         public const int HurtChance = 16;
 
         [NonSerialized]
-        private IPersistentStorage PersistentStorage;
+        private ICorePersistentStorage PersistentStorage;
 
         [NonSerialized]
         private IUpdateNotifier _updateNotifier;
@@ -1136,7 +1137,7 @@ namespace Cthangband
             oPtr.BecomeKnown();
         }
 
-        public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotification)
+        public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
             _console = console;

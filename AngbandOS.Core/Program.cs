@@ -10,7 +10,7 @@ using Cthangband.Enumerations;
 using Cthangband.StaticData;
 using Cthangband.UI;
 using System.Runtime.Serialization.Formatters.Binary;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 

@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "AngbandOS.Core/1.0.0": {
         "dependencies": {
-          "AngbandOS.Interface": "1.0.0",
+          "AngbandOS.Core.Interface": "1.0.0",
           "System.Text.Json": "5.0.1"
         },
         "runtime": {
@@ -16,9 +16,9 @@
         }
       },
       "System.Text.Json/5.0.1": {},
-      "AngbandOS.Interface/1.0.0": {
+      "AngbandOS.Core.Interface/1.0.0": {
         "runtime": {
-          "AngbandOS.Interface.dll": {}
+          "AngbandOS.Core.Interface.dll": {}
         }
       }
     }
@@ -36,7 +36,7 @@
       "path": "system.text.json/5.0.1",
       "hashPath": "system.text.json.5.0.1.nupkg.sha512"
     },
-    "AngbandOS.Interface/1.0.0": {
+    "AngbandOS.Core.Interface/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

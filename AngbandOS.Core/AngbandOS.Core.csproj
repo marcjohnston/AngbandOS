@@ -67,7 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
   <ItemGroup>

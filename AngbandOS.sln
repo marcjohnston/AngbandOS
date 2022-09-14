@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Web", "AngbandOS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.PersistentStorage.Sql", "AngbandOS.SqlPersistentStorage\AngbandOS.PersistentStorage.Sql.csproj", "{662F352C-2DF7-49CC-A1E8-FD5E9E1106A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Interface", "AngbandOS.Interface\AngbandOS.Interface.csproj", "{4BD191CF-F987-4CB4-B620-1E2DAEF1587A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Core.Interface", "AngbandOS.Interface\AngbandOS.Core.Interface.csproj", "{4BD191CF-F987-4CB4-B620-1E2DAEF1587A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.PersistentStorage.FileSystem", "AngbandOS.FileSystemPersistentStorage\AngbandOS.PersistentStorage.FileSystem.csproj", "{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Web.Interface", "AngbandOS.Web.Interface\AngbandOS.Web.Interface.csproj", "{F71E778D-7043-4676-AACF-B323425A04F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +53,14 @@ Global
 		{4BD191CF-F987-4CB4-B620-1E2DAEF1587A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BD191CF-F987-4CB4-B620-1E2DAEF1587A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4BD191CF-F987-4CB4-B620-1E2DAEF1587A}.Release|x86.Build.0 = Release|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Debug|x86.Build.0 = Debug|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Release|x86.ActiveCfg = Release|Any CPU
-		{9B5CEDDB-EE0F-43DC-A016-9F38BE16583D}.Release|x86.Build.0 = Release|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{F71E778D-7043-4676-AACF-B323425A04F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using AngbandOS.Interface;
+﻿using AngbandOS.Core.Interface;
 using Cthangband.Enumerations;
 using Cthangband.Projection;
 using Cthangband.StaticData;

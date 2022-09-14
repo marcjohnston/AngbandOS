@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Interface;
+﻿namespace AngbandOS.Core.Interface;
 
 public enum MusicTrack
 {

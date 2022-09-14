@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using Cthangband.Enumerations;
 using Cthangband.StaticData;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
 namespace Cthangband.Projection
 {
     internal class ProjectMakeTrap : Projectile

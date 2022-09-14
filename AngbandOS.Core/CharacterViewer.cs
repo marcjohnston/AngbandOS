@@ -8,7 +8,7 @@
 using Cthangband.Enumerations;
 using Cthangband.Spells;
 using Cthangband.StaticData;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
 
 namespace Cthangband
 {

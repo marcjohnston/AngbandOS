@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace AngbandOS.Interface;
+﻿namespace AngbandOS.Core.Interface;
 
 public interface IConsole
 {

@@ -1,11 +1,7 @@
 ﻿using Cthangband;
-using Microsoft.AspNetCore.SignalR;
-using static System.Net.Mime.MediaTypeNames;
-using System.Drawing;
 using System.ComponentModel;
-using System;
 using System.Collections.Concurrent;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -18,13 +14,13 @@ namespace AngbandOS.Web.Hubs
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
         private readonly IGameHub _consoleGameHub;
         private readonly List<IGameHub> _spectators = new List<IGameHub>();
-        private readonly IPersistentStorage PersistentStorage;
+        private readonly ICorePersistentStorage PersistentStorage;
         private GameServer _gameServer; // This is the actual game.
         public readonly string UserId;
         public readonly string Username;
         private readonly IUpdateNotifier _updateNotifier;
 
-        public SignalRConsole(IGameHub gameHub, IPersistentStorage persistentStorage, string userId, string username, IUpdateNotifier updateNotifier)
+        public SignalRConsole(IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, IUpdateNotifier updateNotifier)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;

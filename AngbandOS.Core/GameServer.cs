@@ -1,4 +1,4 @@
-﻿using AngbandOS.Interface;
+﻿using AngbandOS.Core.Interface;
 using Cthangband.StaticData;
 using Cthangband.UI;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -63,7 +63,7 @@ namespace Cthangband
             saveGame.Refresh(console);
         }
 
-        public void Play(IConsole console, IPersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
+        public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
         {
             // Retrieve the game from the persistent storage.
             byte[] data = persistentStorage.ReadGame();

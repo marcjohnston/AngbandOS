@@ -1,4 +1,5 @@
-﻿using AngbandOS.Interface;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface;
 using Cthangband.UI;
 using System;
 

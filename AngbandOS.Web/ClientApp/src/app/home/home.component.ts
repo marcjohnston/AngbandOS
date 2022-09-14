@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public readonly serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
   public savedGames: SavedGameDetails[] | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
-  public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved"];
+  public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
   public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level"];
   public selectedActiveGame: ActiveGameDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
@@ -69,7 +69,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       if (this.isAuthenticated) {
         this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
-          this.savedGames = _savedGames;
+          this._ngZone.run(() => {
+            this.savedGames = _savedGames;
+          });
         }, (_errorResponse: HttpErrorResponse) => {
           this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
             duration: 5000
@@ -98,5 +100,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public onNewGame() {
     this._router.navigate(['/play']);
+  }
+
+  public deleteSavedGame(savedGame: SavedGameDetails) {
+    this._httpClient.delete<SavedGameDetails[]>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_savedGames) => {
+      this._ngZone.run(() => {
+        this.savedGames = _savedGames;
+      });
+    }, (_errorResponse: HttpErrorResponse) => {
+      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+        duration: 5000
+      });
+    });
   }
 }

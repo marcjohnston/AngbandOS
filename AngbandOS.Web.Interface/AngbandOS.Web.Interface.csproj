@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
-  </ItemGroup>
-
 </Project>

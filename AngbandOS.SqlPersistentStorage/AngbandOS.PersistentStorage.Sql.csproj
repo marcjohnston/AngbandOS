@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.Web.Interface\AngbandOS.Web.Interface.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using AngbandOS.Interface;
+﻿using AngbandOS.Core.Interface;
 
 namespace AngbandOS.Web.Hubs;
 

@@ -12,7 +12,8 @@ using Cthangband.Spells;
 using Cthangband.StaticData;
 using Cthangband.StoreCommands;
 using Cthangband.Stores;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface;
 
 namespace Cthangband
 {

@@ -1,5 +1,6 @@
 ﻿using Cthangband.Commands;
-using AngbandOS.Interface;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface;
 
 namespace Cthangband.StoreCommands
 {

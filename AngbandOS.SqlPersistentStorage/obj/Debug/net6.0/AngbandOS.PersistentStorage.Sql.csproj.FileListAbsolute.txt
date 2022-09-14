@@ -2,8 +2,6 @@ C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\ne
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.PersistentStorage.Sql.runtimeconfig.json
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.PersistentStorage.Sql.dll
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.PersistentStorage.Sql.pdb
-C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Interface.dll
-C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Interface.pdb
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.PersistentStorage.Sql.csproj.AssemblyReference.cache
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.PersistentStorage.Sql.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.PersistentStorage.Sql.AssemblyInfoInputs.cache
@@ -15,3 +13,7 @@ C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\ne
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.PersistentStorage.Sql.pdb
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\AngbandOS.PersistentStorage.Sql.genruntimeconfig.cache
 C:\Users\Marc\source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\obj\Debug\net6.0\ref\AngbandOS.PersistentStorage.Sql.dll
+C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Core.Interface.dll
+C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Web.Interface.dll
+C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Core.Interface.pdb
+C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.SqlPersistentStorage\bin\Debug\net6.0\AngbandOS.Web.Interface.pdb
