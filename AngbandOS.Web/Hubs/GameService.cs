@@ -8,44 +8,45 @@ using AngbandOS.Web.Interface;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a singleton game service that maintains a GameServer object of all concurrent active games.
+    /// Represents a singleton game service that maintains all concurrent active games.
     /// </summary>
     public class GameService
     {
-        /// <summary>
-        /// The instance of the in-memory GameServer which manages all of the active games.
-        /// </summary>
-        private readonly IHubContext<GameHub, IGameHub> GameHub;
-        private readonly IHubContext<ServiceHub, IServiceHub> _serviceHub;
-        private readonly IHubContext<SpectatorsHub, IGameHub> _spectatorsHub;
-
         private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
         private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
+
+        private readonly IHubContext<GameHub, IGameHub> GameHub;
+        private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
+        private readonly IHubContext<SpectatorsHub, ISpectatorsHub> SpectatorsHub;
         private readonly IConfiguration Config;
-        private readonly IUpdateNotifier UpdateNotifier;
+        private readonly IUpdateNotifier UpdateNotifier; // Receives in-game updates from all games and send updates to all clients.
+        private readonly string ConnectionString;
 
         public GameService(
             IConfiguration config,
             IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
-            IHubContext<SpectatorsHub, IGameHub> spectatorsHub
+            IHubContext<SpectatorsHub, ISpectatorsHub> spectatorsHub
         )
         {
             Config = config;
             GameHub = gameHub;
-            _serviceHub = serviceHub;
-            _spectatorsHub = spectatorsHub;
+            ServiceHub = serviceHub;
+            SpectatorsHub = spectatorsHub;
+            ConnectionString = Config["ConnectionString"];
+
+            // Construct a new update notifier that is used when the game notifies us that interesting event happen in the game.
             UpdateNotifier = new SignalRActiveGamesUpdateNotifier(() =>
             {
                 // When updates are received from the game, notify all clients.
-                _serviceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+                ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
             });
         }
 
         /// <summary>
         /// Handles game signal-r disconnections.
         /// </summary>
-        /// <param name="gameHub"></param>
+        /// <param name="connectionId"></param>
         public void GameDisconnected(string connectionId)
         {
             // Get the console running the game.
@@ -62,7 +63,7 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Handles spectator signal-r disconnections.
         /// </summary>
-        /// <param name="gameHub"></param>
+        /// <param name="connectionId"></param>
         public void SpectatorDisconnected(string connectionId)
         {
 
@@ -93,7 +94,7 @@ namespace AngbandOS.Web.Hubs
             if (Consoles.TryGetValue(watchingConnectionId, out SignalRConsole? console))
             {
                 // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-                IGameHub spectatorHub = _spectatorsHub.Clients.Client(watcherConnectionId);
+                ISpectatorsHub spectatorHub = SpectatorsHub.Clients.Client(watcherConnectionId);
 
                 console.AddWatcher(spectatorHub);
             }
@@ -118,7 +119,6 @@ namespace AngbandOS.Web.Hubs
             }
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            string ConnectionString = Config["ConnectionString"];
             ICorePersistentStorage persistentStorage = new CoreSqlPersistentStorage(ConnectionString, userId, guid);
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.

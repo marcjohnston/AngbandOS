@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
@@ -87,6 +88,7 @@ import { WarriorMageComponent } from './manual/warrior-mage/warrior-mage.compone
 import { WhatsNewComponent } from './manual/whats-new/whats-new.component';
 import { WisdomComponent } from './manual/wisdom/wisdom.component';
 import { TableOfContentsComponent } from './manual/table-of-contents/table-of-contents.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -157,7 +159,8 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     WhatsNewComponent,
     WisdomComponent,
     TableOfContentsComponent,
-    UiComponent
+    UiComponent,
+    ChatComponent
   ],
   imports: [
     MatTableModule,
@@ -169,6 +172,7 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
     MatButtonModule,
     MatSliderModule,
     MatIconModule,
+    MatCardModule,
 
     ColorPickerModule,
 

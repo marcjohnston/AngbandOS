@@ -13,7 +13,7 @@ namespace AngbandOS.Web.Hubs
     {
         public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
         private readonly IGameHub _consoleGameHub;
-        private readonly List<IGameHub> _spectators = new List<IGameHub>();
+        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>();
         private readonly ICorePersistentStorage PersistentStorage;
         private GameServer _gameServer; // This is the actual game.
         public readonly string UserId;
@@ -29,7 +29,7 @@ namespace AngbandOS.Web.Hubs
             _updateNotifier = updateNotifier;
         }
 
-        public void AddWatcher(IGameHub watcherHub)
+        public void AddWatcher(ISpectatorsHub watcherHub)
         {
             _spectators.Add(watcherHub);
 
@@ -37,7 +37,7 @@ namespace AngbandOS.Web.Hubs
             _gameServer.Refresh(new SpectatorConsole(watcherHub));
         }
 
-        public void RemoveWatcher(IGameHub watcherHub)
+        public void RemoveWatcher(ISpectatorsHub watcherHub)
         {
             _spectators.Remove(watcherHub);
         }

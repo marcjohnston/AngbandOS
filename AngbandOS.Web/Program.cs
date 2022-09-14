@@ -19,6 +19,7 @@ var connectionString = builder.Configuration["ConnectionString"]; // Connection 
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
+builder.Services.AddSingleton(typeof(ChatService), typeof(ChatService)); // Maintains chat messaging system.  Interface excluded.
 builder.Services.AddScoped(typeof(TemplateProcessor), typeof(TemplateProcessor)); // Template macro processor
 builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(WebSqlPersistentStorage)); // Persistent storage driver
 builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
@@ -99,9 +100,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<GameHub>("/apiv1/game-hub");
-app.MapHub<ServiceHub>("/apiv1/service-hub");
-app.MapHub<SpectatorsHub>("/apiv1/spectators-hub");
+app.MapHub<GameHub>("/apiv1/game-hub"); // Processes actual game play
+app.MapHub<ServiceHub>("/apiv1/service-hub"); // Processes active game list
+app.MapHub<SpectatorsHub>("/apiv1/spectators-hub"); // Processes spectating games
+app.MapHub<ChatHub>("/apiv1/chat-hub"); // Processes the chat messaging system
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

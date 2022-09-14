@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents the signal-r hub singleton service to process incoming and outgoing signal-r game messages.
+    /// Represents the signal-r hub singleton service for the home screen that monitors active games.
     /// </summary>
     public class ServiceHub : Hub<IServiceHub>
     {
@@ -20,6 +20,10 @@ namespace AngbandOS.Web.Hubs
         {
             _serviceHub = serviceHub;
             GameService = gameService;
+        }
+
+        public void SendMessage(string toUsername, string message)
+        {
         }
 
         public void Refresh()

@@ -3,7 +3,8 @@
 namespace AngbandOS.Web.Hubs;
 
 /// <summary>
-/// Represents an interface that defines the outgoing methods that the game can send through the Signal-R connection.
+/// Represents an interface that defines the outgoing signal-r methods that the game can send.  This interface is
+/// used for both playing games.
 /// </summary>
 public interface IGameHub
 {
@@ -12,16 +13,6 @@ public interface IGameHub
     /// </summary>
     /// <returns></returns>
     Task GameOver();
-
-    /// <summary>
-    /// Outgoing message to a web client to set the background color for a screen position.
-    /// </summary>
-    /// <param name="row"></param>
-    /// <param name="col"></param>
-    /// <param name="color"></param>
-    /// <returns></returns>
-    Task SetCellBackground(int row, int col, char c, Colour color);
-    Task UnsetCellBackground(int row, int col, char c, Colour color);
 
     /// <summary>
     /// Outgoing message to a web client to clear the screen.

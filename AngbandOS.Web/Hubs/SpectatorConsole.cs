@@ -4,9 +4,9 @@ namespace AngbandOS.Web.Hubs;
 
 public class SpectatorConsole : IConsole
 {
-    private readonly IGameHub _gameHub;
+    private readonly ISpectatorsHub _gameHub;
 
-    public SpectatorConsole(IGameHub gameHub)
+    public SpectatorConsole(ISpectatorsHub gameHub)
     {
         _gameHub = gameHub;
     }

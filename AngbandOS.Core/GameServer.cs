@@ -6,8 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Cthangband
 {
     /// <summary>
-    /// Represents a wrapper for a saved gamed, exposing various functionality.  A SaveGame object is internal and cannot be made public unless
-    /// all child objects are also public.  This Game object acts as a wrapper around that.
+    /// Represents an encapsulating  wrapper for a saved gamed that publically exposes various functionality.
+    /// SaveGame objects are internal.
     /// </summary>
     public class GameServer
     {

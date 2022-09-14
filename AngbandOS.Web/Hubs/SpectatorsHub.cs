@@ -10,7 +10,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents the signal-r hub singleton service to process incoming and outgoing signal-r spectating messages.
     /// This hub is identical to the game-hub, except it allows anonymous requests.
     /// </summary>
-    public class SpectatorsHub : Hub<IGameHub>
+    public class SpectatorsHub : Hub<ISpectatorsHub>
     {
         private readonly GameService GameService;
         private readonly UserManager<ApplicationUser> UserManager;

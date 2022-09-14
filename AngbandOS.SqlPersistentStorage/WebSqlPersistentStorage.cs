@@ -51,5 +51,15 @@ namespace AngbandOS.PersistentStorage
                 return savedGames;
             }
         }
+
+        public bool WriteMessage(string fromId, string toId, string message, DateTime sentDateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Message[] GetMessages(string userId, int? mostRecentMessageId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

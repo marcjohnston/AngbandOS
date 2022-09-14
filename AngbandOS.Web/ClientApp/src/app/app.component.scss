@@ -5,8 +5,14 @@
   flex-direction: column;
 
   & #component-window {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 100%;
     padding: 0 25px 25px 25px;
+
+    & #router-outlet-container {
+      width: 100%;
+    }
   }
 }
