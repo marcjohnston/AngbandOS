@@ -12,5 +12,14 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <returns></returns>
         Task ActiveGamesUpdated(ActiveGameDetails[] activeGames);
+
+        /// <summary>
+        /// Outgoing message to a web client that the chat history has changed.  This signature must be identical to the same method on the IChatHub.
+        /// </summary>
+        /// <returns></returns>
+        Task ChatRefreshed(ChatMessage[] history);
+
+        Task ChatUpdated(ChatMessage message);
+
     }
 }

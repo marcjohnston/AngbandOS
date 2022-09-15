@@ -1,0 +1,20 @@
+<div id="container">
+  <div #scrollDiv id="history-area">
+    <div id="history-scroll-area">
+      <ng-container *ngFor="let card of history">
+        <mat-card>
+          <mat-card-subtitle>
+            <div class="card-subtitle">
+              <span>{{card.fromUsername}}</span>
+              <span>{{formatDate(card.sentDateTime)}}</span>
+            </div>
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{card.message}}
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+  </div>
+  <textarea [placeholder]="isAuthenticated ? 'Type a new message' : 'Login to chat'" (input)="input($event)" [disabled]="!isAuthenticated"></textarea>
+</div>

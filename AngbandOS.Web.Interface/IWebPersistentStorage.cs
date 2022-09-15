@@ -11,16 +11,32 @@
         /// <param name="id"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        bool Delete(string id, string username);
+        Task<bool> DeleteAsync(string id, string username);
 
         /// <summary>
         /// Retrieve details about all saved games for a particular user.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        SavedGameDetails[] List(string username);
+        Task<SavedGameDetails[]> ListAsync(string username);
 
-        bool WriteMessage(string fromId, string toId, string message, DateTime sentDateTime);
-        Message[] GetMessages(string userId, int? mostRecentMessageId);
+        /// <summary>
+        /// Write a chat message to the database.
+        /// </summary>
+        /// <param name="fromId"></param>
+        /// <param name="toId"></param>
+        /// <param name="message"></param>
+        /// <param name="sentDateTime"></param>
+        /// <param name="type"></param>
+        /// <returns>The unique ID for the message or null, if the message fails to save.</returns>
+        Task<int?> WriteMessageAsync(string fromId, string? toId, string message, DateTime sentDateTime, MessageTypeEnum type);
+
+        /// <summary>
+        /// Retrieve chat messages from the database.
+        /// </summary>
+        /// <param name="userId">The ID of the user for which to retrieve chat messages for; null, for public viewing.</param>
+        /// <param name="mostRecentMessageId">The ID of the most recent message to retrieve; null, for the most recent messages.  When specified, the system will return older messages.</param>
+        /// <returns></returns>
+        Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId);
     }
 }

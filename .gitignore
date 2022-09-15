@@ -48,3 +48,10 @@ bin/
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.csproj.CoreCompileInputs.cache
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.dll
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.pdb
+/AngbandOS.Interface/obj/project.assets.json
+/AngbandOS.Interface/obj/project.nuget.cache
+/AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/ref/AngbandOS.PersistentStorage.Sql.dll
+/AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/refint/AngbandOS.PersistentStorage.Sql.dll
+/AngbandOS.SqlPersistentStorage/obj/AngbandOS.PersistentStorage.Sql.csproj.nuget.dgspec.json
+/AngbandOS.SqlPersistentStorage/obj/project.assets.json
+/AngbandOS.SqlPersistentStorage/obj/project.nuget.cache

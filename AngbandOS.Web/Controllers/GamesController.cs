@@ -60,7 +60,8 @@ namespace AngbandOS.Web.Controllers
             ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
             if (user == null)
                 return Unauthorized();
-            return Ok(PersistentStorage.List(user.Id));
+            SavedGameDetails[] updatedSavedGameList = await PersistentStorage.ListAsync(user.Id);
+            return Ok(updatedSavedGameList);
         }
 
         [HttpDelete]
@@ -77,9 +78,9 @@ namespace AngbandOS.Web.Controllers
             if (user == null)
                 return Unauthorized();
 
-            if (PersistentStorage.Delete(id, user.Id))
+            if (await PersistentStorage.DeleteAsync(id, user.Id))
             {
-                SavedGameDetails[] savedGames = PersistentStorage.List(user.Id);
+                SavedGameDetails[] savedGames = await PersistentStorage.ListAsync(user.Id);
                 return Ok(savedGames);
             }
             else

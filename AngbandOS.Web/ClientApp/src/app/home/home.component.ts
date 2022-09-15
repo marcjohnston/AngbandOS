@@ -23,7 +23,7 @@ export class PostNewGame {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
-  public readonly serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
+  private readonly serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
   public savedGames: SavedGameDetails[] | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.activeGames = _activeGames;
           })
         });
-        this.serviceConnection.send("Refresh");
+        this.serviceConnection.send("RefreshActiveGames");
       }
     });
 

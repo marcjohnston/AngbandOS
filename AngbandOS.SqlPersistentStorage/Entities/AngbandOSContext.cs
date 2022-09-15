@@ -25,6 +25,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<DeviceCode> DeviceCodes { get; set; } = null!;
         public virtual DbSet<Key> Keys { get; set; } = null!;
+        public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
@@ -171,6 +172,21 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.Algorithm).HasMaxLength(100);
 
                 entity.Property(e => e.IsX509certificate).HasColumnName("IsX509Certificate");
+            });
+
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.Property(e => e.Content).IsUnicode(false);
+
+                entity.Property(e => e.FromUserId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SentDateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.ToUserId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<PersistedGrant>(entity =>

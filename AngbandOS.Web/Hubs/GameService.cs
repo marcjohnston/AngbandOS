@@ -3,7 +3,6 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Web.Models;
 using AngbandOS.PersistentStorage;
 using System.Collections.Concurrent;
-using AngbandOS.Web.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
