@@ -118,6 +118,11 @@ namespace AngbandOS.Web.Controllers
             claims.Add(new Claim("email", userInfo.Email));
             claims.Add(new Claim("email_verified", userInfo.EmailConfirmed ? "true" : "false"));
             claims.Add(new Claim("username", userInfo.UserName));
+            if (userInfo.Email == Configuration["administrator"])
+            {
+                string customRoleClaimType = Configuration["CustomRoleClaimType"];
+                claims.Add(new Claim(customRoleClaimType, "administrator"));
+            }
 
             var token = new JwtSecurityToken(Configuration["Jwt:Issuer"],
               Configuration["Jwt:Issuer"],

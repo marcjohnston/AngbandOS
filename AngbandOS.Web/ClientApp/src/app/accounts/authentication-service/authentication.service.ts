@@ -83,9 +83,11 @@ export class AuthenticationService {
         if (_loginResponse !== undefined && _loginResponse.jwtToken !== null) {
           const jwtToken: string = _loginResponse.jwtToken as string;
           // Convert the payload into an object.  The jwt properties are always strings.
-          const jwtClaims: JwtClaims | null = this.parseJwt(jwtToken) as JwtClaims | null;
+          const jwtClaims: any = this.parseJwt(jwtToken);
 
           if (jwtClaims !== null) {
+            const roles: string[] = jwtClaims['https://angbandos.skarstech.com/roles'];
+
             // Now manually convert the claims into a user details with the correct data-types.
             const userDetails: UserDetails = {
               aud: jwtClaims.aud,
@@ -93,6 +95,7 @@ export class AuthenticationService {
               emailVerified: (jwtClaims.email_verified === "true"),
               exp: new Date(Number(jwtClaims.exp) * 1000), // Convert the seconds since epoch to milliseconds since epoch.
               iss: jwtClaims.iss,
+              isAdmin: roles.includes("administrator"),
               jwt: _loginResponse.jwtToken,
               username: jwtClaims.username
             };

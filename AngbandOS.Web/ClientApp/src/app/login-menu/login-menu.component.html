@@ -8,6 +8,9 @@
   <li class="nav-item">
     <button mat-button [routerLink]='["/ui"]'>UI Designer</button>
   </li>
+  <li class="nav-item" *ngIf="isAdministrator">
+    <button mat-button [routerLink]='["/dashboard"]'>Dashboard</button>
+  </li>
   <li class="nav-item" *ngIf="isAuthenticated">
     <button mat-button [routerLink]='["/accounts/logout"]' [state]='{ local: true }'>Logout</button>
   </li>

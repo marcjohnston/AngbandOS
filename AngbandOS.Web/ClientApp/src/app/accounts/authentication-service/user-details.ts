@@ -9,5 +9,6 @@ export class UserDetails {
   public email: string | undefined;
   public emailVerified: boolean | undefined;
   public jwt: string | undefined;
+  public isAdmin: boolean | undefined;
   public username: string | undefined;
 }

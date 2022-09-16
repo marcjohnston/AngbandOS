@@ -12,6 +12,7 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
   public username: string | null = null;
   private _initSubscriptions = new Subscription();
   public isAuthenticated: boolean = false;
+  public isAdministrator: boolean = false;
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -25,6 +26,7 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
       } else {
         this.username = _userDetails.username;
         this.isAuthenticated = true;
+        this.isAdministrator = (_userDetails.isAdmin === true);
       }
     }));
   }
