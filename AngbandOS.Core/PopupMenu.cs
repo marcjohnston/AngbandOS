@@ -8,7 +8,7 @@
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 
-namespace AngbandOS.UI
+namespace AngbandOS.Core
 {
     internal class PopupMenu
     {
@@ -49,7 +49,7 @@ namespace AngbandOS.UI
             {
                 saveGame.Print(Colour.White, leftRightBorder, top + i + 1, left);
             }
-            saveGame.Print(Colour.White, topBottomBorder, top + (_items.Count + _text.Count) + 1, left);
+            saveGame.Print(Colour.White, topBottomBorder, top + _items.Count + _text.Count + 1, left);
             for (int i = 0; i < _text.Count; i++)
             {
                 saveGame.Print(Colour.White, _text[i], top + i + 1, left + 1);
@@ -69,7 +69,7 @@ namespace AngbandOS.UI
                 }
                 saveGame.HideCursorOnFullScreenInkey = true;
                 char k = saveGame.Inkey();
-                
+
                 switch (k)
                 {
                     case '\x1b':
