@@ -16,7 +16,6 @@ using Cthangband.Mutations;
 using Cthangband.Patrons;
 using Cthangband.Projection;
 using Cthangband.StaticData;
-using Cthangband.UI;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -122,7 +121,24 @@ namespace Cthangband
 
         public bool InPopupMenu;
         public char QueuedCommand;
-        private Display _display;
+        /// DISPLAY
+        public Colour AttrBlank;
+        public char CharBlank;
+        public int Height;
+        public char[] KeyQueue;
+        public int KeySize;
+        public Screen Old;
+        public Screen Scr;
+        public int Width;
+        public int[] X1;
+        public int[] X2;
+        public int KeyHead = 0;
+        public int KeyTail = 0;
+        public Screen Mem;
+        public bool TotalErase;
+        public int Y1;
+        public int Y2;
+        /// DISPLAY
 
         /// <summary>
         /// A buffer of artificial keypresses
@@ -1133,13 +1149,35 @@ namespace Cthangband
             oPtr.BecomeKnown();
         }
 
+        private void InitializeDisplay(int w, int h, int k)
+        {
+            KeySize = k;
+            KeyQueue = new char[k];
+            Width = w;
+            Height = h;
+            X1 = new int[h];
+            X2 = new int[h];
+            Old = new Screen(w, h);
+            Scr = new Screen(w, h);
+            for (int y = 0; y < h; y++)
+            {
+                X1[y] = 0;
+                X2[y] = w - 1;
+            }
+            Y1 = 0;
+            Y2 = h - 1;
+            TotalErase = true;
+            AttrBlank = 0;
+            CharBlank = ' ';
+        }
+
         public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
             _console = console;
             PersistentStorage = persistentStorage;
             UpdateNotifier = updateNotification;
-            _display = new Display(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
+            InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
             MapMovementKeys();
             InitializeColorData();
 
@@ -19008,8 +19046,8 @@ namespace Cthangband
         /// </summary>
         public bool CursorVisible
         {
-            get => _display.Scr.CursorVisible;
-            set => _display.Scr.CursorVisible = value;
+            get => Scr.CursorVisible;
+            set => Scr.CursorVisible = value;
         }
 
         /// <summary>
@@ -19090,7 +19128,7 @@ namespace Cthangband
         /// <param name="row"> The first row to clear </param>
         public void Clear(int row)
         {
-            for (int y = row; y < _display.Height; y++)
+            for (int y = row; y < Height; y++)
             {
                 Erase(y, 0, 255);
             }
@@ -19101,28 +19139,28 @@ namespace Cthangband
         /// </summary>
         public void Clear()
         {
-            int w = _display.Width;
-            int h = _display.Height;
-            Colour na = _display.AttrBlank;
-            char nc = _display.CharBlank;
-            _display.Scr.Cu = false;
-            _display.Scr.Cx = 0;
-            _display.Scr.Cy = 0;
+            int w = Width;
+            int h = Height;
+            Colour na = AttrBlank;
+            char nc = CharBlank;
+            Scr.Cu = false;
+            Scr.Cx = 0;
+            Scr.Cy = 0;
             for (int y = 0; y < h; y++)
             {
-                int scrAa = _display.Scr.A[y];
-                int scrCc = _display.Scr.C[y];
+                int scrAa = Scr.A[y];
+                int scrCc = Scr.C[y];
                 for (int x = 0; x < w; x++)
                 {
-                    _display.Scr.Va[scrAa + x] = na;
-                    _display.Scr.Vc[scrCc + x] = nc;
+                    Scr.Va[scrAa + x] = na;
+                    Scr.Vc[scrCc + x] = nc;
                 }
-                _display.X1[y] = 0;
-                _display.X2[y] = w - 1;
+                X1[y] = 0;
+                X2[y] = w - 1;
             }
-            _display.Y1 = 0;
-            _display.Y2 = h - 1;
-            _display.TotalErase = true;
+            Y1 = 0;
+            Y2 = h - 1;
+            TotalErase = true;
         }
 
         /// <summary>
@@ -19133,28 +19171,28 @@ namespace Cthangband
         /// <param name="length"> The number of characters to erase </param>
         public void Erase(int row, int col, int length)
         {
-            int w = _display.Width;
+            int w = Width;
             int x1 = -1;
             int x2 = -1;
-            Colour na = _display.AttrBlank;
-            char nc = _display.CharBlank;
+            Colour na = AttrBlank;
+            char nc = CharBlank;
             Goto(row, col);
             if (col + length > w)
             {
                 length = w - col;
             }
-            int scrAa = _display.Scr.A[row];
-            int scrCc = _display.Scr.C[row];
+            int scrAa = Scr.A[row];
+            int scrCc = Scr.C[row];
             for (int i = 0; i < length; i++, col++)
             {
-                Colour oa = _display.Scr.Va[scrAa + col];
-                int oc = _display.Scr.Vc[scrCc + col];
+                Colour oa = Scr.Va[scrAa + col];
+                int oc = Scr.Vc[scrCc + col];
                 if (oa == na && oc == nc)
                 {
                     continue;
                 }
-                _display.Scr.Va[scrAa + col] = na;
-                _display.Scr.Vc[scrCc + col] = nc;
+                Scr.Va[scrAa + col] = na;
+                Scr.Vc[scrCc + col] = nc;
                 if (x1 < 0)
                 {
                     x1 = col;
@@ -19163,21 +19201,21 @@ namespace Cthangband
             }
             if (x1 >= 0)
             {
-                if (row < _display.Y1)
+                if (row < Y1)
                 {
-                    _display.Y1 = row;
+                    Y1 = row;
                 }
-                if (row > _display.Y2)
+                if (row > Y2)
                 {
-                    _display.Y2 = row;
+                    Y2 = row;
                 }
-                if (x1 < _display.X1[row])
+                if (x1 < X1[row])
                 {
-                    _display.X1[row] = x1;
+                    X1[row] = x1;
                 }
-                if (x2 > _display.X2[row])
+                if (x2 > X2[row])
                 {
-                    _display.X2[row] = x2;
+                    X2[row] = x2;
                 }
             }
         }
@@ -19316,8 +19354,8 @@ namespace Cthangband
         /// <param name="col"> The column at which to print </param>
         public void Goto(int row, int col)
         {
-            int w = _display.Width;
-            int h = _display.Height;
+            int w = Width;
+            int h = Height;
             if (col < 0 || col >= w)
             {
                 return;
@@ -19326,9 +19364,9 @@ namespace Cthangband
             {
                 return;
             }
-            _display.Scr.Cx = col;
-            _display.Scr.Cy = row;
-            _display.Scr.Cu = false;
+            Scr.Cx = col;
+            Scr.Cy = row;
+            Scr.Cu = false;
         }
 
         /// <summary>
@@ -19399,20 +19437,20 @@ namespace Cthangband
         /// </summary>
         public void Load()
         {
-            int w = _display.Width;
-            int h = _display.Height;
-            if (_display.Mem == null)
+            int w = Width;
+            int h = Height;
+            if (Mem == null)
             {
-                _display.Mem = new Screen(w, h);
+                Mem = new Screen(w, h);
             }
-            _display.Scr.Copy(_display.Mem, w, h);
+            Scr.Copy(Mem, w, h);
             for (int y = 0; y < h; y++)
             {
-                _display.X1[y] = 0;
-                _display.X2[y] = w - 1;
+                X1[y] = 0;
+                X2[y] = w - 1;
             }
-            _display.Y1 = 0;
-            _display.Y2 = h - 1;
+            Y1 = 0;
+            Y2 = h - 1;
         }
 
         /// <summary>
@@ -19433,8 +19471,8 @@ namespace Cthangband
         /// <param name="col"> The column at which to place the character </param>
         public void Place(Colour attr, char ch, int row, int col)
         {
-            int w = _display.Width;
-            int h = _display.Height;
+            int w = Width;
+            int h = Height;
             if (col < 0 || col >= w)
             {
                 return;
@@ -19466,8 +19504,8 @@ namespace Cthangband
         /// <param name="ch"> The character to print </param>
         public void Print(Colour attr, char ch)
         {
-            int w = _display.Width;
-            if (_display.Scr.Cu)
+            int w = Width;
+            if (Scr.Cu)
             {
                 return;
             }
@@ -19475,13 +19513,13 @@ namespace Cthangband
             {
                 return;
             }
-            QueueCharacter(_display.Scr.Cx, _display.Scr.Cy, attr, ch);
-            _display.Scr.Cx++;
-            if (_display.Scr.Cx < w)
+            QueueCharacter(Scr.Cx, Scr.Cy, attr, ch);
+            Scr.Cx++;
+            if (Scr.Cx < w)
             {
                 return;
             }
-            _display.Scr.Cu = true;
+            Scr.Cu = true;
         }
 
         /// <summary>
@@ -19509,10 +19547,10 @@ namespace Cthangband
             {
                 return;
             }
-            int w = _display.Width;
+            int w = Width;
             int res = 0;
             int len = str.Length;
-            if (_display.Scr.Cu)
+            if (Scr.Cu)
             {
                 return;
             }
@@ -19520,16 +19558,16 @@ namespace Cthangband
             for (length = 0; length < k && length < len; length++)
             {
             }
-            if (_display.Scr.Cx + length >= w)
+            if (Scr.Cx + length >= w)
             {
-                res = w - _display.Scr.Cx;
-                length = w - _display.Scr.Cx;
+                res = w - Scr.Cx;
+                length = w - Scr.Cx;
             }
-            QueueCharacters(_display.Scr.Cx, _display.Scr.Cy, length, attr, str);
-            _display.Scr.Cx += length;
+            QueueCharacters(Scr.Cx, Scr.Cy, length, attr, str);
+            Scr.Cx += length;
             if (res != 0)
             {
-                _display.Scr.Cu = true;
+                Scr.Cu = true;
             }
         }
 
@@ -19653,7 +19691,7 @@ namespace Cthangband
         /// </summary>
         public void Redraw()
         {
-            _display.TotalErase = true;
+            TotalErase = true;
             UpdateScreen();
         }
 
@@ -19667,22 +19705,22 @@ namespace Cthangband
         /// </summary>
         public void UpdateScreen()
         {
-            Screen scr = _display.Scr; // This will always be the game screen contents.
-            Screen old = _display.Old;
+            Screen scr = Scr; // This will always be the game screen contents.
+            Screen old = Old;
             int y;
-            int w = _display.Width;
-            int h = _display.Height;
-            int y1 = _display.Y1;
-            int y2 = _display.Y2;
+            int w = Width;
+            int h = Height;
+            int y1 = Y1;
+            int y2 = Y2;
 
             // Check to see if any updates are needed.
-            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !_display.TotalErase)
+            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !TotalErase)
             {
                 // No updates are needed.
                 return;
             }
 
-            if (_display.TotalErase)
+            if (TotalErase)
             {
                 // Clear the "old" screen 
                 _console.Clear();
@@ -19699,21 +19737,21 @@ namespace Cthangband
                     int cc = old.C[y];
                     for (int x = 0; x < w; x++)
                     {
-                        old.Va[aa++] = _display.AttrBlank; // Background color
-                        old.Vc[cc++] = _display.CharBlank; // Space
+                        old.Va[aa++] = AttrBlank; // Background color
+                        old.Vc[cc++] = CharBlank; // Space
                     }
                 }
                 // Reset the size of the display to be full height.
-                _display.Y1 = y1 = 0;
-                _display.Y2 = y2 = h - 1;
+                Y1 = y1 = 0;
+                Y2 = y2 = h - 1;
 
                 // Reset the width of the display for each row to be full width.
                 for (y = 0; y < h; y++)
                 {
-                    _display.X1[y] = 0;
-                    _display.X2[y] = w - 1;
+                    X1[y] = 0;
+                    X2[y] = w - 1;
                 }
-                _display.TotalErase = false;
+                TotalErase = false;
             }
             if (scr.Cu || !scr.CursorVisible)
             {
@@ -19724,8 +19762,8 @@ namespace Cthangband
             // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
             for (y = y1; y <= y2; ++y)
             {
-                int x1 = _display.X1[y];
-                int x2 = _display.X2[y];
+                int x1 = X1[y];
+                int x2 = X2[y];
                 if (x1 <= x2)
                 {
                     //RefreshTextRow(y, x1, x2);
@@ -19736,7 +19774,7 @@ namespace Cthangband
                     int scrCc = scr.C[y];
                     int fn = 0;
                     int fx = 0;
-                    Colour fa = _display.AttrBlank;
+                    Colour fa = AttrBlank;
                     for (int x = x1; x <= x2; x++)
                     {
                         Colour oa = old.Va[oldAa + x];
@@ -19774,12 +19812,12 @@ namespace Cthangband
                     }
 
                     /////// end RefreshTextRow
-                    _display.X1[y] = w;
-                    _display.X2[y] = 0;
+                    X1[y] = w;
+                    X2[y] = 0;
                 }
             }
-            _display.Y1 = h;
-            _display.Y2 = 0;
+            Y1 = h;
+            Y2 = 0;
 
             if (scr.Cu)
             {
@@ -19809,24 +19847,24 @@ namespace Cthangband
         /// </summary>
         public void Refresh(IConsole console)
         {
-            Screen scr = _display.Scr; // This will always be the game screen contents.
+            Screen scr = Scr; // This will always be the game screen contents.
             int y;
-            int w = _display.Width;
-            int h = _display.Height;
-            int y1 = _display.Y1;
-            int y2 = _display.Y2;
+            int w = Width;
+            int h = Height;
+            int y1 = Y1;
+            int y2 = Y2;
 
             console.Clear();
 
             // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
-            for (y = 0; y < _display.Height; ++y)
+            for (y = 0; y < Height; ++y)
             {
                 int scrAa = scr.A[y];
                 int scrCc = scr.C[y];
                 int fn = 0;
                 int fx = 0;
-                Colour currentColor = _display.AttrBlank;
-                for (int x = 0; x < _display.Width; x++)
+                Colour currentColor = AttrBlank;
+                for (int x = 0; x < Width; x++)
                 {
                     Colour na = scr.Va[scrAa + x];
                     char nc = scr.Vc[scrCc + x];
@@ -19963,9 +20001,9 @@ namespace Cthangband
         /// </summary>
         public void Save()
         {
-            int w = _display.Width;
-            int h = _display.Height;
-            (_display.Mem ?? (_display.Mem = new Screen(w, h))).Copy(_display.Scr, w, h);
+            int w = Width;
+            int h = Height;
+            (Mem ?? (Mem = new Screen(w, h))).Copy(Scr, w, h);
         }
 
         public void ShowManual() // TODO: Needs to be deleted
@@ -19987,10 +20025,10 @@ namespace Cthangband
             {
                 return;
             }
-            _display.KeyQueue[_display.KeyHead++] = k;
-            if (_display.KeyHead == _display.KeySize)
+            KeyQueue[KeyHead++] = k;
+            if (KeyHead == KeySize)
             {
-                _display.KeyHead = 0;
+                KeyHead = 0;
             }
         }
 
@@ -20007,19 +20045,19 @@ namespace Cthangband
             if (wait)
             {
                 UpdateScreen();
-                while (_display.KeyHead == _display.KeyTail)
+                while (KeyHead == KeyTail)
                 {
                     EnqueueKey(_console.WaitForKey());
                 }
             }
-            if (_display.KeyHead == _display.KeyTail)
+            if (KeyHead == KeyTail)
             {
                 return false;
             }
-            ch = _display.KeyQueue[_display.KeyTail];
-            if (take && ++_display.KeyTail == _display.KeySize)
+            ch = KeyQueue[KeyTail];
+            if (take && ++KeyTail == KeySize)
             {
-                _display.KeyTail = 0;
+                KeyTail = 0;
             }
             return true;
         }
@@ -20031,8 +20069,8 @@ namespace Cthangband
         /// <param name="h"> The height of the display </param>
         private void GetSize(out int w, out int h)
         {
-            w = _display.Width;
-            h = _display.Height;
+            w = Width;
+            h = Height;
         }
 
         /// <summary>
@@ -20042,8 +20080,8 @@ namespace Cthangband
         /// <param name="col"> The column of the cursor </param>
         private void Locate(out int row, out int col)
         {
-            col = _display.Scr.Cx;
-            row = _display.Scr.Cy;
+            col = Scr.Cx;
+            row = Scr.Cy;
         }
 
         private void MapMovementKeys()
@@ -20077,31 +20115,31 @@ namespace Cthangband
         /// <param name="c"> The character to display </param>
         private void QueueCharacter(int x, int y, Colour a, char c)
         {
-            int scrAa = _display.Scr.A[y];
-            int scrCc = _display.Scr.C[y];
-            Colour oa = _display.Scr.Va[scrAa + x];
-            int oc = _display.Scr.Vc[scrCc + x];
+            int scrAa = Scr.A[y];
+            int scrCc = Scr.C[y];
+            Colour oa = Scr.Va[scrAa + x];
+            int oc = Scr.Vc[scrCc + x];
             if (oa == a && oc == c)
             {
                 return;
             }
-            _display.Scr.Va[scrAa + x] = a;
-            _display.Scr.Vc[scrCc + x] = c;
-            if (y < _display.Y1)
+            Scr.Va[scrAa + x] = a;
+            Scr.Vc[scrCc + x] = c;
+            if (y < Y1)
             {
-                _display.Y1 = y;
+                Y1 = y;
             }
-            if (y > _display.Y2)
+            if (y > Y2)
             {
-                _display.Y2 = y;
+                Y2 = y;
             }
-            if (x < _display.X1[y])
+            if (x < X1[y])
             {
-                _display.X1[y] = x;
+                X1[y] = x;
             }
-            if (x > _display.X2[y])
+            if (x > X2[y])
             {
-                _display.X2[y] = x;
+                X2[y] = x;
             }
         }
 
@@ -20117,21 +20155,21 @@ namespace Cthangband
         {
             int x1 = -1;
             int x2 = -1;
-            int scrAa = _display.Scr.A[y];
-            int scrCc = _display.Scr.C[y];
+            int scrAa = Scr.A[y];
+            int scrCc = Scr.C[y];
             int index = 0;
             for (; n != 0 && index < s.Length; n--)
             {
-                Colour oa = _display.Scr.Va[scrAa + x];
-                int oc = _display.Scr.Vc[scrCc + x];
+                Colour oa = Scr.Va[scrAa + x];
+                int oc = Scr.Vc[scrCc + x];
                 if (oa == a && oc == s[index])
                 {
                     x++;
                     index++;
                     continue;
                 }
-                _display.Scr.Va[scrAa + x] = a;
-                _display.Scr.Vc[scrCc + x] = s[index];
+                Scr.Va[scrAa + x] = a;
+                Scr.Vc[scrCc + x] = s[index];
                 if (x1 < 0)
                 {
                     x1 = x;
@@ -20142,21 +20180,21 @@ namespace Cthangband
             }
             if (x1 >= 0)
             {
-                if (y < _display.Y1)
+                if (y < Y1)
                 {
-                    _display.Y1 = y;
+                    Y1 = y;
                 }
-                if (y > _display.Y2)
+                if (y > Y2)
                 {
-                    _display.Y2 = y;
+                    Y2 = y;
                 }
-                if (x1 < _display.X1[y])
+                if (x1 < X1[y])
                 {
-                    _display.X1[y] = x1;
+                    X1[y] = x1;
                 }
-                if (x2 > _display.X2[y])
+                if (x2 > X2[y])
                 {
-                    _display.X2[y] = x2;
+                    X2[y] = x2;
                 }
             }
         }

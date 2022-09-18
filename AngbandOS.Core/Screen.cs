@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.UI
+namespace AngbandOS.Core
 {
     [Serializable]
     internal class Screen
