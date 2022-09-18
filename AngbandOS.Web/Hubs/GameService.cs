@@ -43,7 +43,7 @@ namespace AngbandOS.Web.Hubs
             ConnectionString = Configuration["ConnectionString"];
         }
 
-        public bool KillGameAsync(string connectionId)
+        public bool KillGame(string connectionId)
         {
             // Retrieve the console for the game to be killed.
             if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
@@ -59,7 +59,7 @@ namespace AngbandOS.Web.Hubs
         /// Handles game signal-r disconnections.
         /// </summary>
         /// <param name="connectionId"></param>
-        public async Task GameDisconnected(string connectionId)
+        public async Task GameDisconnectedAsync(string connectionId)
         {
             // Get the console running the game.
             if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
@@ -135,7 +135,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user id of the connected user.</param>
         /// <param name="guid">The guid for the game to play.  Null, to start a new game.</param>
         /// <param name="connectionId"></param>
-        public async Task Play(string userId, string? guid, string connectionId, string username)
+        public async Task PlayAsync(HubCallerContext context, string userId, string? guid, string connectionId, string username)
         {
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IGameHub gameHub = GameHub.Clients.Client(connectionId);
@@ -170,7 +170,7 @@ namespace AngbandOS.Web.Hubs
             };
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console = new SignalRConsole(gameHub, persistentStorage, userId, username, gameUpdateNotifier);
+            SignalRConsole console = new SignalRConsole(context, gameHub, persistentStorage, userId, username, gameUpdateNotifier);
 
             // We need to track this game.
             if (!Consoles.TryAdd(connectionId, console))
@@ -199,7 +199,7 @@ namespace AngbandOS.Web.Hubs
             SignalRConsole console = (SignalRConsole)sender;
             string connectionId = ConnectionIds[console];
 
-            GameDisconnected(connectionId);
+            GameDisconnectedAsync(connectionId);
         }
 
         /// <summary>

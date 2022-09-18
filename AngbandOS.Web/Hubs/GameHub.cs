@@ -44,7 +44,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                await GameService.Play(user.Id, guid, Context.ConnectionId, user.UserName);
+                await GameService.PlayAsync(Context, user.Id, guid, Context.ConnectionId, user.UserName);
             }
         }
 
@@ -67,7 +67,7 @@ namespace AngbandOS.Web.Hubs
 
         public override Task OnDisconnectedAsync(Exception? exception)
         {
-            GameService.GameDisconnected(Context.ConnectionId);
+            GameService.GameDisconnectedAsync(Context.ConnectionId);
             return base.OnDisconnectedAsync(exception);
         }
     }

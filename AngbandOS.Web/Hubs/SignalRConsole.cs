@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.Concurrent;
 using AngbandOS.Core.Interface;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -19,20 +20,21 @@ namespace AngbandOS.Web.Hubs
         public readonly string UserId;
         public readonly string Username;
         private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction;
-        private bool killed = false;
+        private readonly HubCallerContext Context; // Used to abort the signal-r connection and terminate the game instantly.
 
-        public SignalRConsole(IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
+        public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
             NotificationAction = notificationAction;
+            Context = context;
         }
 
         public void Kill()
         {
-            killed = true;
+            Context.Abort();
         }
 
         public void AddWatcher(ISpectatorsHub watcherHub)
@@ -167,13 +169,10 @@ namespace AngbandOS.Web.Hubs
             char c;
 
             // Wait until there is a key from the client.
-            while (!KeyQueue.TryDequeue(out c) && !killed)
+            while (!KeyQueue.TryDequeue(out c))
             {
                 Thread.Sleep(5); // TODO: Use a wait event
             }
-            if (killed)
-                return '\xFF'; // This is being used as the kill char.
-
             // Return the key.
             return c;
         }

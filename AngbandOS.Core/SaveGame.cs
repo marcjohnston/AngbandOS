@@ -104,7 +104,8 @@ namespace Cthangband
         public char CurrentCommand;
 
         /// <summary>
-        /// Set to skip waiting for a keypress in the Inkey() function
+        /// Set to skip waiting for a keypress in the Inkey() function.  Set to true when running which disturbs the player when a keystroke is found
+        /// and also set to true, during wizard play with object statistics command.
         /// </summary>
         public bool DoNotWaitOnInkey;
 

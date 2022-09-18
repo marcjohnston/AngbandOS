@@ -91,14 +91,14 @@ namespace AngbandOS.Web.Controllers
         [Route("games/{connectionId}")]
         [Produces("application/json")]
         [Authorize]
-        public async Task<ActionResult> DeleteActiveGame([FromRoute] string connectionId)
+        public ActionResult KillActiveGame([FromRoute] string connectionId)
         {
             string customRoleClaimType = Configuration["CustomRoleClaimType"];
             bool isAdministrator = User == null ? false : User.HasClaim(customRoleClaimType, "administrator");
             if (!isAdministrator)
                 return Unauthorized();
 
-            if (GameService.KillGameAsync(connectionId))
+            if (GameService.KillGame(connectionId))
                 return Ok();
             else
                 return Conflict();
