@@ -6,11 +6,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
-using Cthangband.Debug;
-using Cthangband.UI;
+using AngbandOS.Debug;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.StaticData
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal class Animation : EntityType

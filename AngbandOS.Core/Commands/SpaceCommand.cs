@@ -1,4 +1,4 @@
-﻿namespace Cthangband.Commands
+﻿namespace AngbandOS.Commands
 {
     internal class SpaceCommand : ICommand
     {

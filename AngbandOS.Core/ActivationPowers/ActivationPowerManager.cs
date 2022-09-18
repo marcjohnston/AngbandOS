@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     internal static class ActivationPowerManager
     {

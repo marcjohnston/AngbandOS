@@ -1,6 +1,6 @@
-﻿using Cthangband.Commands;
+﻿using AngbandOS.Commands;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     internal class CarriageReturnStoreCommand : IStoreCommand
     {

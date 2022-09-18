@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband.Mutations.PassiveMutations
+namespace AngbandOS.Mutations.PassiveMutations
 {
     [Serializable]
     internal class MutationMagicRes : Mutation

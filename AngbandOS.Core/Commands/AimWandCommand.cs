@@ -1,9 +1,9 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.Projection;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.Projection;
+using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Aim a wand from your inventory

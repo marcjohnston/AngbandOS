@@ -1,7 +1,7 @@
-﻿using Cthangband.UI;
+﻿using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Attempt to disarm a trap on a door or chest

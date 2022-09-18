@@ -1,7 +1,7 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Go up a staircase

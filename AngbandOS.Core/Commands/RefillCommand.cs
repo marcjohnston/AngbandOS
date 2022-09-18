@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Refill a light source with fuel

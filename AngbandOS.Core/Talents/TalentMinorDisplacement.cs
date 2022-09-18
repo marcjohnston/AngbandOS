@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband.Talents
+namespace AngbandOS.Talents
 {
     [Serializable]
     internal class TalentMinorDisplacement : Talent

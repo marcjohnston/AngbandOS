@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Fire the missile weapon we have in our hand

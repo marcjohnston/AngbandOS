@@ -7,12 +7,12 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
-using Cthangband.Pantheon;
-using Cthangband.Spells;
-using Cthangband.StaticData;
+using AngbandOS.Enumerations;
+using AngbandOS.Pantheon;
+using AngbandOS.Spells;
+using AngbandOS.StaticData;
 
-namespace Cthangband
+namespace AngbandOS
 {
     internal class PlayerFactory
     {

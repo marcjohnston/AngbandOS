@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// An allocation entry for selecting monsters and items

@@ -5,19 +5,19 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Enumerations;
-using Cthangband.Spells.Chaos;
-using Cthangband.Spells.Corporeal;
-using Cthangband.Spells.Death;
-using Cthangband.Spells.Folk;
-using Cthangband.Spells.Life;
-using Cthangband.Spells.Nature;
-using Cthangband.Spells.Sorcery;
-using Cthangband.Spells.Tarot;
+using AngbandOS.Enumerations;
+using AngbandOS.Spells.Chaos;
+using AngbandOS.Spells.Corporeal;
+using AngbandOS.Spells.Death;
+using AngbandOS.Spells.Folk;
+using AngbandOS.Spells.Life;
+using AngbandOS.Spells.Nature;
+using AngbandOS.Spells.Sorcery;
+using AngbandOS.Spells.Tarot;
 using System;
 using System.Collections.Generic;
 
-namespace Cthangband.Spells
+namespace AngbandOS.Spells
 {
     /// <summary>
     /// A set of four spell books from a single realm, containing a total of thirty two spells

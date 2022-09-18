@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// A matrix of possible moves that can be made by a monster

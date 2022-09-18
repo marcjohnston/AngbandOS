@@ -4,7 +4,7 @@ using AngbandOS.Web.Data;
 using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
 using AngbandOS.Web.Models;
-using Cthangband;
+using AngbandOS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

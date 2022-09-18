@@ -1,8 +1,8 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.UI;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.UI;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     internal class ViewRacialHeroesStoreCommand : IStoreCommand
     {

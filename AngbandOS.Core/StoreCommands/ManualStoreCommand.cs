@@ -1,8 +1,8 @@
-﻿using Cthangband.Commands;
-using Cthangband.UI;
+﻿using AngbandOS.Commands;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the game manual

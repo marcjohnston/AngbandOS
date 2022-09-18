@@ -1,8 +1,8 @@
-﻿using Cthangband.Commands;
-using Cthangband.StaticData;
+﻿using AngbandOS.Commands;
+using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Examine an item from the player's inventory

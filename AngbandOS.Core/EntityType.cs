@@ -10,7 +10,7 @@ using AngbandOS.Core.Interface;
 using System;
 using System.ComponentModel;
 
-namespace Cthangband.Debug
+namespace AngbandOS.Debug
 {
     /// <summary>
     /// A serialisable graphical entity on which other classes can be based

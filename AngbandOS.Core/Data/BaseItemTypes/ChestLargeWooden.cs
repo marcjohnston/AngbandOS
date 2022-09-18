@@ -1,6 +1,6 @@
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal class ChestLargeWooden : ChestItemCategory

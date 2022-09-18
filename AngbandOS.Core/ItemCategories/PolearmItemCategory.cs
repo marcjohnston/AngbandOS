@@ -1,8 +1,8 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
+using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal abstract class PolearmItemCategory : WeaponItemCategory

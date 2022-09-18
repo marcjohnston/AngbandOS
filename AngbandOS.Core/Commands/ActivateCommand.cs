@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
-using Cthangband.Projection;
-using Cthangband.StaticData;
+using AngbandOS.Enumerations;
+using AngbandOS.Projection;
+using AngbandOS.StaticData;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Activate an artifact or similar

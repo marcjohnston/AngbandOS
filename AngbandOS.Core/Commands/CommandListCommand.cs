@@ -1,7 +1,7 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Display a list of all the keyboard commands

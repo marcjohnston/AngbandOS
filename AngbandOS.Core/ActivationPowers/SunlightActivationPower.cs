@@ -1,7 +1,7 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Aim a line of light in a direction of the player's choice

@@ -1,7 +1,7 @@
-﻿using Cthangband.ActivationPowers;
-using Cthangband.Enumerations;
+﻿using AngbandOS.ActivationPowers;
+using AngbandOS.Enumerations;
 
-namespace Cthangband.ArtifactBiases
+namespace AngbandOS.ArtifactBiases
 {
     internal class FireArtifactBias : ArtifactBias
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     internal static class CommandManager
     {

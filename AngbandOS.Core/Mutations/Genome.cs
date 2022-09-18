@@ -5,15 +5,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Enumerations;
-using Cthangband.Mutations.ActiveMutations;
-using Cthangband.Mutations.PassiveMutations;
-using Cthangband.Mutations.RandomMutations;
-using Cthangband.StaticData;
+using AngbandOS.Enumerations;
+using AngbandOS.Mutations.ActiveMutations;
+using AngbandOS.Mutations.PassiveMutations;
+using AngbandOS.Mutations.RandomMutations;
+using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
 
-namespace Cthangband.Mutations
+namespace AngbandOS.Mutations
 {
     [Serializable]
     internal class Genome

@@ -1,4 +1,4 @@
-﻿using Cthangband;
+﻿using AngbandOS;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.SignalR;

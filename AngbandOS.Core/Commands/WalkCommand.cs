@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.UI;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     [Serializable]
     internal class WalkWithoutPickupCommand : ICommand

@@ -1,6 +1,6 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Enumerations;
 
-namespace Cthangband.ArtifactBiases
+namespace AngbandOS.ArtifactBiases
 {
     internal class StrengthArtifactBias : ArtifactBias
     {

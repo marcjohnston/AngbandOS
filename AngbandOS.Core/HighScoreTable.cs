@@ -8,7 +8,7 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband
+namespace AngbandOS
 {
     internal class HighScoreTable // TODO: Reconnect back to the splash screen
     {

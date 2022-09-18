@@ -1,4 +1,4 @@
-﻿using Cthangband;
+﻿using AngbandOS;
 using System.ComponentModel;
 using System.Collections.Concurrent;
 using AngbandOS.Core.Interface;

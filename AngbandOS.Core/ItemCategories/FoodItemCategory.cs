@@ -1,10 +1,10 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
-using Cthangband.StaticData;
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
-using static Cthangband.Extensions;
+using static AngbandOS.Extensions;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal abstract class FoodItemCategory : BaseItemCategory

@@ -1,7 +1,7 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Turn an item to gold.

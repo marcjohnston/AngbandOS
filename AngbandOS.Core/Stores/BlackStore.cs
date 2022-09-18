@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.Stores
+namespace AngbandOS.Stores
 {
     [Serializable]
     internal class BlackStore : Store

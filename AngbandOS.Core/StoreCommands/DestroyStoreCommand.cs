@@ -1,10 +1,10 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.StaticData;
-using Cthangband.UI;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Destroy a single item

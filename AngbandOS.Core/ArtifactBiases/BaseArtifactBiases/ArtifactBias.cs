@@ -1,6 +1,6 @@
-﻿using Cthangband.ActivationPowers;
+﻿using AngbandOS.ActivationPowers;
 
-namespace Cthangband.ArtifactBiases
+namespace AngbandOS.ArtifactBiases
 {
     /// <summary>
     /// Represents the bias used when applying special abilities to an artifact.

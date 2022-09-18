@@ -8,7 +8,7 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal class TileFeature

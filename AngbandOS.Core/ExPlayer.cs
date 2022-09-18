@@ -5,10 +5,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Enumerations;
+using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// A dead player character, holding just the bare bones needed for the high score table and

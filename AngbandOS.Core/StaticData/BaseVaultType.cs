@@ -1,6 +1,6 @@
-﻿using Cthangband.Debug;
+﻿using AngbandOS.Debug;
 
-namespace Cthangband.StaticData
+namespace AngbandOS.StaticData
 {
     internal class BaseVaultType : EntityType
     {

@@ -1,8 +1,8 @@
-﻿using Cthangband.StaticData;
+﻿using AngbandOS.StaticData;
 using System;
 using System.Reflection;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Print the version number and build info of the game

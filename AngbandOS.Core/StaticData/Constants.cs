@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Cthangband.StaticData
+namespace AngbandOS.StaticData
 {
     internal static class Constants
     {

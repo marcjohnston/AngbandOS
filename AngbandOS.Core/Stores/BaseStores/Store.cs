@@ -5,17 +5,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.Pantheon;
-using Cthangband.Spells;
-using Cthangband.StaticData;
-using Cthangband.StoreCommands;
-using Cthangband.Stores;
+using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.Pantheon;
+using AngbandOS.Spells;
+using AngbandOS.StaticData;
+using AngbandOS.StoreCommands;
+using AngbandOS.Stores;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal abstract class Store : IStore

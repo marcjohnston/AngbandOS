@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal abstract class BookItemCategory : BaseItemCategory

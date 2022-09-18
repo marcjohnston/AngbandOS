@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// A simple co-ordinate, stored in a reference type so it can be passed from function to

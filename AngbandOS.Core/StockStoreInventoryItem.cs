@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     internal class StockStoreInventoryItem
     {

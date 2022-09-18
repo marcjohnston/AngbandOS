@@ -1,11 +1,11 @@
-﻿using Cthangband.ActivationPowers;
-using Cthangband.Enumerations;
-using Cthangband.Projection;
-using Cthangband.StaticData;
+﻿using AngbandOS.ActivationPowers;
+using AngbandOS.Enumerations;
+using AngbandOS.Projection;
+using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     [Serializable]
     internal class WizardCommand : ICommand

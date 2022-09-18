@@ -1,8 +1,8 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.ArtifactBiases;
-using Cthangband.Enumerations;
+using AngbandOS.ArtifactBiases;
+using AngbandOS.Enumerations;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     internal interface IItemCategory
     {

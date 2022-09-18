@@ -1,9 +1,9 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.StoreCommands;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.StoreCommands;
 using System;
 
-namespace Cthangband.Stores
+namespace AngbandOS.Stores
 {
     [Serializable]
     internal class HallStore : Store

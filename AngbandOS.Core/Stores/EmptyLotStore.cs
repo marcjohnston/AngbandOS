@@ -1,7 +1,7 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.Stores
+namespace AngbandOS.Stores
 {
     [Serializable]
     internal class EmptyLotStore : Store

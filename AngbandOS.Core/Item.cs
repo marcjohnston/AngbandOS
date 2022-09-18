@@ -6,17 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
-using Cthangband.ActivationPowers;
-using Cthangband.ArtifactBiases;
-using Cthangband.Enumerations;
-using Cthangband.ItemCategories;
-using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.ActivationPowers;
+using AngbandOS.ArtifactBiases;
+using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 using System.IO;
-using static Cthangband.Extensions;
+using static AngbandOS.Extensions;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal class Item

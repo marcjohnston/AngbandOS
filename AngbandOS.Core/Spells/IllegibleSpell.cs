@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband.Spells
+namespace AngbandOS.Spells
 {
     [Serializable]
     internal class IllegibleSpell : Spell

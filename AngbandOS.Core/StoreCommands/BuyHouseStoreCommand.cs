@@ -1,10 +1,10 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.Stores;
-using Cthangband.UI;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.Stores;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     internal class BuyHouseStoreCommand : IStoreCommand
 

@@ -1,8 +1,8 @@
-﻿using Cthangband.UI;
+﻿using AngbandOS.UI;
 using System;
 using System.Collections.Generic;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Fire the popup menu for quitting and changing options

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     [Serializable]
     /// <summary>

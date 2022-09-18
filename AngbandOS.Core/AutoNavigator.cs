@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// Class for automatically navigating when the player is running

@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.Projection;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot a frost bolt that does 6d8 damage.

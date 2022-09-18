@@ -1,4 +1,4 @@
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal class AmuletResistance : AmuletItemCategory

@@ -1,9 +1,9 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
-using Cthangband.UI;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Use a mutant or racial power

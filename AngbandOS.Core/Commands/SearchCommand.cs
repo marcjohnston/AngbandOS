@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Spend a turn searching for traps and secret doors

@@ -1,10 +1,10 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
-using Cthangband.ItemCategories;
-using Cthangband.StoreCommands;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
+using AngbandOS.StoreCommands;
 using System;
 
-namespace Cthangband.Stores
+namespace AngbandOS.Stores
 {
     [Serializable]
     internal class LibraryStore : Store

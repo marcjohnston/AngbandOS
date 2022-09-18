@@ -1,7 +1,7 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal class SorceryBookUnaussprechlichenKulten : SorceryBookItemCategory

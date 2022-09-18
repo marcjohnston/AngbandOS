@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Cthangband
+namespace AngbandOS
 {
     /// <summary>
     /// Represents an encapsulating  wrapper for a saved gamed that publically exposes various functionality.

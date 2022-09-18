@@ -7,20 +7,19 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Core.Interface;
-using Cthangband.ActivationPowers;
-using Cthangband.Commands;
-using Cthangband.Debug;
-using Cthangband.Enumerations;
-using Cthangband.Mutations;
-using Cthangband.Patrons;
-using Cthangband.Projection;
-using Cthangband.StaticData;
+using AngbandOS.ActivationPowers;
+using AngbandOS.Commands;
+using AngbandOS.Debug;
+using AngbandOS.Enumerations;
+using AngbandOS.Mutations;
+using AngbandOS.Patrons;
+using AngbandOS.Projection;
+using AngbandOS.StaticData;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal class SaveGame

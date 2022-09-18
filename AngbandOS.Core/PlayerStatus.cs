@@ -6,13 +6,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
-using Cthangband.Spells;
-using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.Enumerations;
+using AngbandOS.Spells;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband
+namespace AngbandOS
 {
     internal class PlayerStatus
     {

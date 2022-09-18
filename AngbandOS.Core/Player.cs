@@ -5,17 +5,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Enumerations;
-using Cthangband.Mutations;
-using Cthangband.Patrons;
-using Cthangband.Spells;
-using Cthangband.StaticData;
-using Cthangband.UI;
-using Cthangband.Pantheon;
+using AngbandOS.Enumerations;
+using AngbandOS.Mutations;
+using AngbandOS.Patrons;
+using AngbandOS.Spells;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
+using AngbandOS.Pantheon;
 using System;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal class Player

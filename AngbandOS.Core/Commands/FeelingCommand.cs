@@ -1,7 +1,7 @@
-﻿using Cthangband.StaticData;
+﻿using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Repeat the level feeling for the player and also say where we are

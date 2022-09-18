@@ -5,12 +5,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Debug;
-using Cthangband.Enumerations;
-using Cthangband.Projection;
+using AngbandOS.Debug;
+using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System.Reflection;
 
-namespace Cthangband.StaticData
+namespace AngbandOS.StaticData
 {
     /// <summary>
     /// Singleton class containing objects loaded from an embedded resource

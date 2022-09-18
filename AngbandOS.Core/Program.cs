@@ -5,16 +5,16 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using Cthangband.Debug;
-using Cthangband.Enumerations;
-using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.Debug;
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using AngbandOS.Core.Interface;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace Cthangband
+namespace AngbandOS
 {
     internal static class Program
     {

@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.Projection;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
-namespace Cthangband.ActivationPowers
+namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot an arrow that does 150 damage.

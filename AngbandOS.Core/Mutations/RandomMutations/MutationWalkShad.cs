@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband.Mutations.RandomMutations
+namespace AngbandOS.Mutations.RandomMutations
 {
     [Serializable]
     internal class MutationWalkShad : Mutation

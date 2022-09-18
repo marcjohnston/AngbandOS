@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Tunnel into the wall (or whatever is in front of us

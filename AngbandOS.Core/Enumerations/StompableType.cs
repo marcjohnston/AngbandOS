@@ -1,4 +1,4 @@
-﻿namespace Cthangband.Enumerations
+﻿namespace AngbandOS.Enumerations
 {
     internal class StompableType
     {

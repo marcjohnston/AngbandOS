@@ -1,6 +1,6 @@
-﻿using Cthangband.ActivationPowers;
+﻿using AngbandOS.ActivationPowers;
 
-namespace Cthangband.ArtifactBiases
+namespace AngbandOS.ArtifactBiases
 {
     /// <summary>
     /// Represents the interface for the bias used when giving random powers to an artifact.

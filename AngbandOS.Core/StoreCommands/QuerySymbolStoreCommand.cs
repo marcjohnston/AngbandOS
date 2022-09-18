@@ -1,9 +1,9 @@
-﻿using Cthangband.Commands;
-using Cthangband.StaticData;
-using Cthangband.UI;
+﻿using AngbandOS.Commands;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the player what a particular symbol represents

@@ -1,4 +1,4 @@
-﻿namespace Cthangband.Stores
+﻿namespace AngbandOS.Stores
 {
     internal enum StoreInventoryDisplayTypeEnum
     {

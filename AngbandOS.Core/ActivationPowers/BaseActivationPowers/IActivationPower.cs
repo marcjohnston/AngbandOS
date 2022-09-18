@@ -1,4 +1,4 @@
-﻿namespace Cthangband.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     internal interface IActivationPower
     {

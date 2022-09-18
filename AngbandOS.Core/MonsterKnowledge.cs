@@ -6,13 +6,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
-using Cthangband.Enumerations;
-using Cthangband.StaticData;
-using Cthangband.UI;
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 using System.Text;
 
-namespace Cthangband
+namespace AngbandOS
 {
     [Serializable]
     internal class MonsterKnowledge

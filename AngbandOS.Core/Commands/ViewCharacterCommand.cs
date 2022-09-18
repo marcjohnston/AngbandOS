@@ -1,7 +1,7 @@
-﻿using Cthangband.StoreCommands;
+﻿using AngbandOS.StoreCommands;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// View the character sheet

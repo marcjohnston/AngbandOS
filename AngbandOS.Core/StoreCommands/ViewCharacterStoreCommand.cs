@@ -1,8 +1,8 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// View the character sheet

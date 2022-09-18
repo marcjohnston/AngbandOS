@@ -1,7 +1,7 @@
-﻿using Cthangband.Commands;
-using Cthangband.Enumerations;
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     internal class SacrificeStoreCommand : IStoreCommand
     {

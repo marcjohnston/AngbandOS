@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
-using Cthangband.UI;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Display a map of the area on screen

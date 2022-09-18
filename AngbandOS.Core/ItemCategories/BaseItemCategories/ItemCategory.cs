@@ -1,13 +1,13 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StaticData;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
-using static Cthangband.Extensions;
-using Cthangband.ArtifactBiases;
+using static AngbandOS.Extensions;
+using AngbandOS.ArtifactBiases;
 using System.IO;
 using System.ComponentModel;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
 

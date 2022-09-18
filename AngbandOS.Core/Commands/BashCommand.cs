@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Bash a door to open it

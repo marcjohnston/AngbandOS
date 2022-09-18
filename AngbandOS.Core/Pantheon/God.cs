@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System;
 
-namespace Cthangband.Pantheon
+namespace AngbandOS.Pantheon
 {
     [Serializable]
     internal class God

@@ -1,7 +1,7 @@
-﻿using Cthangband.StaticData;
+﻿using AngbandOS.StaticData;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Select a target in advance for attacks. Note that this does not cost any in-game time

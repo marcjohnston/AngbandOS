@@ -1,7 +1,7 @@
-﻿using Cthangband.Commands;
+﻿using AngbandOS.Commands;
 using System;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons

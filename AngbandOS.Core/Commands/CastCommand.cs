@@ -1,11 +1,11 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.Projection;
-using Cthangband.Spells;
-using Cthangband.StaticData;
-using Cthangband.UI;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.Projection;
+using AngbandOS.Spells;
+using AngbandOS.StaticData;
+using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     internal class CastCommand : ICommand
     {

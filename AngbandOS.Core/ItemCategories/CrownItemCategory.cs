@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
-using Cthangband.ArtifactBiases;
-using Cthangband.Enumerations;
+using AngbandOS.ArtifactBiases;
+using AngbandOS.Enumerations;
 using System;
 
-namespace Cthangband.ItemCategories
+namespace AngbandOS.ItemCategories
 {
     [Serializable]
     internal abstract class CrownItemCategory : ArmourItemCategory

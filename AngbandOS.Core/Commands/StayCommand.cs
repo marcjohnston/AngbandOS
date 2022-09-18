@@ -1,7 +1,7 @@
-﻿using Cthangband.UI;
+﻿using AngbandOS.UI;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Stand still for a turn and pick up any items

@@ -1,8 +1,8 @@
-﻿using Cthangband.Enumerations;
-using Cthangband.StoreCommands;
+﻿using AngbandOS.Enumerations;
+using AngbandOS.StoreCommands;
 using System;
 
-namespace Cthangband.Commands
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Destroy all worthless items in your pack

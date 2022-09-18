@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cthangband.Pantheon
+namespace AngbandOS.Pantheon
 {
     [Serializable]
     internal class Religion

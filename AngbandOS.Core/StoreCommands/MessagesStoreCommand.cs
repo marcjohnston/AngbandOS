@@ -1,8 +1,8 @@
-﻿using Cthangband.Commands;
+﻿using AngbandOS.Commands;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 
-namespace Cthangband.StoreCommands
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Let the player scroll through previous messages
