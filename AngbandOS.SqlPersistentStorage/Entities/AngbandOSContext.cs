@@ -182,6 +182,10 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
+                entity.Property(e => e.GameId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.SentDateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.ToUserId)

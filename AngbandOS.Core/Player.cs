@@ -58,7 +58,7 @@ namespace Cthangband
             set
             {
                 _gold = value;
-                SaveGame.NotifyNow();
+                SaveGame.UpdateNotifier.GoldUpdated(_gold);
             }
         }
         public Patron GooPatron;
@@ -134,7 +134,7 @@ namespace Cthangband
             set
             {
                 _level = value;
-                SaveGame.NotifyNow();
+                SaveGame.UpdateNotifier.LevelChanged(_level);
             }
         }
 
@@ -158,7 +158,7 @@ namespace Cthangband
             set
             {
                 _name = value;
-                SaveGame.NotifyNow();
+                SaveGame.UpdateNotifier.CharacterRenamed(_name);
             }
         }
         public uint NoticeFlags;

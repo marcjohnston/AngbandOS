@@ -27,11 +27,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   public savedGames: SavedGameDetails[] | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
-  public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level"];
+  public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level", "actions"];
   public selectedActiveGame: ActiveGameDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
   private _initSubscriptions = new Subscription();
+  public isAdministrator: boolean = false;
 
   constructor(
     private _httpClient: HttpClient,
@@ -56,9 +57,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
-      this.isAuthenticated = (_userDetails !== null && _userDetails.username !== null);
-
-      if (this.isAuthenticated) {
+      if (_userDetails !== null && _userDetails.username !== null) {
+        this.isAuthenticated = true;
+        this.isAdministrator = (_userDetails.isAdmin === true);
         this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
           this._ngZone.run(() => {
             this.savedGames = _savedGames;
@@ -69,9 +70,24 @@ export class HomeComponent implements OnInit, OnDestroy {
           });
         });
       } else {
+        this.isAuthenticated = false;
         this._authenticationService.autoLogin();
       }
     }));
+  }
+
+  public killActiveGame(activeGame: ActiveGameDetails) {
+    this._httpClient.delete(`/apiv1/games/${activeGame.connectionId}`).toPromise().then((_savedGames) => {
+      this._ngZone.run(() => {
+        this._snackBar.open("Game killed.", "", {
+          duration: 5000
+        });
+      });
+    }, (_errorResponse: HttpErrorResponse) => {
+      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+        duration: 5000
+      });
+    });   
   }
 
   ngOnDestroy() {

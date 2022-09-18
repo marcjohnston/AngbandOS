@@ -5,9 +5,16 @@
     /// </summary>
     public interface IUpdateNotifier
     {
-        /// <summary>
-        /// Called when a notifyable action occurs in the game.  Gold, level and character name changes are notifyable actions.
-        /// </summary>
-        public void NotifyAllNow();
+        public void PlayerDied(string name, string diedFrom, int level);
+
+        public void GoldUpdated(int gold);
+
+        public void CharacterRenamed(string name);
+
+        public void LevelChanged(int level);
+
+        public void GameStarted();
+
+        public void GameStopped();
     }
 }

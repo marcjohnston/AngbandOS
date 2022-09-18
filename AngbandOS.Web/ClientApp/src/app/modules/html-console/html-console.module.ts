@@ -70,7 +70,7 @@ export class HtmlConsole {
     this.context!.textAlign = 'left';
     this.context!.font = `bold ${this.configuration.charSize}px Courier`;
 
-    // Fill the background.
+    // Fill/erase the background.
     const rowY = row * this.configuration.ySpacing;
     this.context!.fillStyle = `${backColor}`;
     this.context!.fillRect(col * this.configuration.xSpacing, rowY, text.length * this.configuration.xSpacing, this.configuration.ySpacing);
@@ -79,7 +79,7 @@ export class HtmlConsole {
     this.context!.fillStyle = `${foreColor}`;
     for (var i: number = 0; i < text.length; i++) {
       const c = text[i];
-      this.context!.fillText(c, col * this.configuration.xSpacing, rowY);
+      this.context!.fillText(c, col * this.configuration.xSpacing + this.configuration.xOffset, rowY + this.configuration.yOffset);
       col++;
     }
   }

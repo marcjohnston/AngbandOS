@@ -21,8 +21,10 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       if (_userDetails == null || _userDetails.username == null) {
+        // User is not logged in.
         this.username = null;
         this.isAuthenticated = false;
+        this.isAdministrator = false;
       } else {
         this.username = _userDetails.username;
         this.isAuthenticated = true;

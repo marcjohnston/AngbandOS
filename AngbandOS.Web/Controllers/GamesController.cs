@@ -20,12 +20,12 @@ namespace AngbandOS.Web.Controllers
     public class GamesController : ControllerBase
     {
         private readonly GameService GameService;
-        private readonly string ConnectionString;
         private readonly IWebPersistentStorage PersistentStorage;
         private readonly UserManager<ApplicationUser> UserManager;
+        private readonly IConfiguration Configuration;
 
         public GamesController(
-            IConfiguration config,
+            IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
             IWebPersistentStorage persistentStorage,
             GameService gameService
@@ -34,7 +34,7 @@ namespace AngbandOS.Web.Controllers
             GameService = gameService;
             PersistentStorage = persistentStorage;
             UserManager = userManager;
-            ConnectionString = config["ConnectionString"];
+            Configuration = configuration;
         }
 
         [HttpGet]
@@ -85,6 +85,23 @@ namespace AngbandOS.Web.Controllers
             }
             else
                 return NotFound();
+        }
+
+        [HttpDelete]
+        [Route("games/{connectionId}")]
+        [Produces("application/json")]
+        [Authorize]
+        public async Task<ActionResult> DeleteActiveGame([FromRoute] string connectionId)
+        {
+            string customRoleClaimType = Configuration["CustomRoleClaimType"];
+            bool isAdministrator = User == null ? false : User.HasClaim(customRoleClaimType, "administrator");
+            if (!isAdministrator)
+                return Unauthorized();
+
+            if (GameService.KillGameAsync(connectionId))
+                return Ok();
+            else
+                return Conflict();
         }
     }
 }

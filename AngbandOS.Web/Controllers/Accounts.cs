@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using AngbandOS.Web.TemplateProcessing;
 using System.Net;
+using AngbandOS.Web.Interface;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -24,6 +25,7 @@ namespace AngbandOS.Web.Controllers
         private readonly SignInManager<ApplicationUser> SignInManager;
         private readonly IEmailSender EmailSender;
         private readonly TemplateProcessor TemplateProcessor;
+        private readonly IWebPersistentStorage WebPersistentStorage;
 
         /// <summary>
         /// Creates a new instance of the controller.
@@ -42,12 +44,14 @@ namespace AngbandOS.Web.Controllers
           UserManager<ApplicationUser> userManager,
           TemplateProcessor templateProcessor,
           SignInManager<ApplicationUser> signInManager,
+          IWebPersistentStorage webPersistentStorage,
           IEmailSender emailSender)
         {
             Configuration = config;
             UserManager = userManager;
             TemplateProcessor = templateProcessor;
             SignInManager = signInManager;
+            WebPersistentStorage = webPersistentStorage;
             EmailSender = emailSender;
         }
 
@@ -153,6 +157,7 @@ namespace AngbandOS.Web.Controllers
                     if (result.Succeeded)
                     {
                         string tokenString = GenerateJSONWebToken(appUser);
+                        await WebPersistentStorage.WriteMessageAsync(appUser.Id, null, "User logged in.", MessageTypeEnum.Login, null);
                         return Ok(new LoginResponse()
                         {
                             JwtToken = tokenString

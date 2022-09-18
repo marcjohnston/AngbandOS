@@ -21,16 +21,22 @@ namespace AngbandOS.Web.Hubs
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IWebPersistentStorage WebPersistentStorage;
         private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
+        private readonly IConfiguration Configuration;
+        private readonly GameService GameService;
 
         public ChatHub(
+            IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
-            IWebPersistentStorage webPersistentStorage
+            IWebPersistentStorage webPersistentStorage,
+            GameService gameService
         )
         {
+            GameService = gameService;
             WebPersistentStorage = webPersistentStorage;
             UserManager = userManager;
             ServiceHub = serviceHub;
+            Configuration = configuration;
         }
 
         public async Task SendMessage(string? toUsername, string message)
@@ -63,9 +69,8 @@ namespace AngbandOS.Web.Hubs
                 toId = toUser.Id;
             }
 
-            DateTime now = DateTime.Now;
-            int? id = await WebPersistentStorage.WriteMessageAsync(fromUser.Id, toId, message, now, MessageTypeEnum.UserMessage);
-            if (id == null)
+            MessageDetails? messageWritten = await WebPersistentStorage.WriteMessageAsync(fromUser.Id, toId, message, MessageTypeEnum.UserMessage, null);
+            if (messageWritten == null)
             {
                 await Clients.Client(Context.ConnectionId).MessageFailed();
                 return;
@@ -74,9 +79,10 @@ namespace AngbandOS.Web.Hubs
             // Now send an update to all of the client.
             ChatMessage chatMessage = new ChatMessage
             {
-                fromUsername = fromUser.UserName,
-                message = message,
-                sentDateTime = now
+                Id = messageWritten.Id,
+                FromUsername = fromUser.UserName,
+                Message = message,
+                SentDateTime = messageWritten.SentDateTime
             };
 
             // Send the update to all of the chat hub clients.
@@ -86,31 +92,9 @@ namespace AngbandOS.Web.Hubs
             await ServiceHub.Clients.All.ChatUpdated(chatMessage);
         }
 
-        private async Task<string> GetUsernameAsync(string userId)
-        {
-            ApplicationUser? appUser = await UserManager.FindByIdAsync(userId);
-            if (appUser != null)
-                return appUser.UserName;
-            else
-                return "unknown";
-        }
-
         public async Task RefreshChat(int? endingId)
         {
-            // Retrieve the messages from the database.
-            MessageDetails[] messages = await WebPersistentStorage.GetMessagesAsync(null, endingId);
-
-            // Convert the messages into chat format that they can be sent to the client.
-            List<ChatMessage> chatMessages = new List<ChatMessage>();
-            foreach (MessageDetails message in messages)
-            {
-                chatMessages.Add(new ChatMessage
-                {
-                    fromUsername = await GetUsernameAsync(message.FromId),
-                    message = message.Message,
-                    sentDateTime = message.SentDateTime
-                });
-            }
+            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.User, endingId);
 
             // Get the hub for the currently connected client.
             IChatHub chatHub = Clients.Client(Context.ConnectionId);

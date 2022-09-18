@@ -18,15 +18,21 @@ namespace AngbandOS.Web.Hubs
         private GameServer _gameServer; // This is the actual game.
         public readonly string UserId;
         public readonly string Username;
-        private readonly IUpdateNotifier _updateNotifier;
+        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction;
+        private bool killed = false;
 
-        public SignalRConsole(IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, IUpdateNotifier updateNotifier)
+        public SignalRConsole(IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
-            _updateNotifier = updateNotifier;
+            NotificationAction = notificationAction;
+        }
+
+        public void Kill()
+        {
+            killed = true;
         }
 
         public void AddWatcher(ISpectatorsHub watcherHub)
@@ -75,7 +81,7 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            _gameServer.Play(this, PersistentStorage, _updateNotifier);
+            _gameServer.Play(this, PersistentStorage, new UpdateNotifier(this, NotificationAction));
 
             // The game is over.  Let the client know.
             GameOver();
@@ -159,11 +165,14 @@ namespace AngbandOS.Web.Hubs
         public char WaitForKey()
         {
             char c;
+
             // Wait until there is a key from the client.
-            while (!KeyQueue.TryDequeue(out c))
+            while (!KeyQueue.TryDequeue(out c) && !killed)
             {
                 Thread.Sleep(5); // TODO: Use a wait event
             }
+            if (killed)
+                return '\xFF'; // This is being used as the kill char.
 
             // Return the key.
             return c;

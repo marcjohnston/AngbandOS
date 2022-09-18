@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using static Humanizer.In;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -13,21 +15,21 @@ namespace AngbandOS.Web.Hubs
     public class ServiceHub : Hub<IServiceHub>
     {
         private readonly GameService GameService;
-//        private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
         private readonly IWebPersistentStorage WebPersistentStorage;
         private readonly UserManager<ApplicationUser> UserManager; // We need to be able to retrieve usernames and accounts
+        private readonly IConfiguration Configuration;
 
         public ServiceHub(
-            IHubContext<ServiceHub, IServiceHub> serviceHub,
+            IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
             IWebPersistentStorage webPersistentStorage,
             GameService gameService
         )
         {
-//            ServiceHub = serviceHub;
             GameService = gameService;
             WebPersistentStorage = webPersistentStorage;
             UserManager = userManager;
+            Configuration = configuration;
         }
 
         public void RefreshActiveGames()
@@ -38,31 +40,9 @@ namespace AngbandOS.Web.Hubs
             serviceHub.ActiveGamesUpdated(activeGames);
         }
 
-        private async Task<string> GetUsernameAsync(string userId)
-        {
-            ApplicationUser? appUser = await UserManager.FindByIdAsync(userId);
-            if (appUser != null)
-                return appUser.UserName;
-            else
-                return "unknown";
-        }
-
         public async Task RefreshChat(int? endingId)
         {
-            // Retrieve the messages from the database.
-            MessageDetails[] messages = await WebPersistentStorage.GetMessagesAsync(null, endingId);
-
-            // Convert the messages into chat format that they can be sent to the client.
-            List<ChatMessage> chatMessages = new List<ChatMessage>();
-            foreach (MessageDetails message in messages)
-            {
-                chatMessages.Add(new ChatMessage
-                {
-                    fromUsername = await GetUsernameAsync(message.FromId),
-                    message = message.Message,
-                    sentDateTime = message.SentDateTime
-                });
-            }
+            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.User, endingId);
 
             // Get the hub for the currently connected client.
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);

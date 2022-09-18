@@ -44,7 +44,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                GameService.Play(user.Id, guid, Context.ConnectionId, user.UserName);
+                await GameService.Play(user.Id, guid, Context.ConnectionId, user.UserName);
             }
         }
 

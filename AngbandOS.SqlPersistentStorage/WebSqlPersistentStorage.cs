@@ -60,7 +60,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public async Task<int?> WriteMessageAsync(string fromId, string? toId, string content, DateTime sentDateTime, MessageTypeEnum type)
+        public async Task<MessageDetails?> WriteMessageAsync(string fromId, string? toId, string content, MessageTypeEnum type, string? gameId)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
@@ -68,8 +68,9 @@ namespace AngbandOS.PersistentStorage
                 {
                     FromUserId = fromId,
                     Content = content,
-                    SentDateTime = sentDateTime,
+                    SentDateTime = DateTime.Now,
                     ToUserId = toId,
+                    GameId = gameId,
                     Type = (int)type
                 };
                 context.Messages.Add(newMessage);
@@ -77,8 +78,16 @@ namespace AngbandOS.PersistentStorage
                 {
                     await context.SaveChangesAsync(true);
 
-                    // Return the unique ID for the message.
-                    return newMessage.Id;
+                    // Return the message details.
+                    MessageDetails message = new MessageDetails
+                    {
+                        FromId = newMessage.FromUserId,
+                        Id = newMessage.Id,
+                        Message = newMessage.Content,
+                        SentDateTime = newMessage.SentDateTime,
+                        Type = (MessageTypeEnum)newMessage.Type
+                    };
+                    return message;
                 }
                 catch (Exception)
                 {
@@ -87,12 +96,19 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId)
+        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                return await context.Messages
-                    .Where(_message => _message.ToUserId == userId)
+                IQueryable<Message> messagesQuery = context.Messages;
+                if (types == null)
+                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == userId);
+                else
+                {
+                    int[] intTypes = types.Select(_type => (int)_type).ToArray();
+                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == userId && intTypes.Contains(_message.Type));
+                }
+                IQueryable<MessageDetails> messageDetailsQuery = messagesQuery
                     .OrderByDescending(_message => _message.Id) // We will use the clustered index for sorting.
                     .Take(50) // We are only providing 50 messages.  The user will need to scroll for more.
                     .Select(_message => new MessageDetails // We need to build MessageDetails objects to be returned.
@@ -103,8 +119,8 @@ namespace AngbandOS.PersistentStorage
                         SentDateTime = _message.SentDateTime,
                         Type = (MessageTypeEnum)_message.Type
                     })
-                    .Reverse() // The list needs to be reverse for rendering.
-                    .ToArrayAsync();
+                    .Reverse(); // The list needs to be reverse for rendering.
+                return await messageDetailsQuery.ToArrayAsync();
             }
         }
     }

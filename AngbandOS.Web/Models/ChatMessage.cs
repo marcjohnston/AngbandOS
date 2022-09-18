@@ -2,8 +2,9 @@
 {
     public class ChatMessage
     {
-        public DateTime sentDateTime { get; set; }
-        public string message { get; set; }
-        public string fromUsername { get; set; }
+        public int Id { get; set; }
+        public DateTime SentDateTime { get; set; }
+        public string Message { get; set; }
+        public string FromUsername { get; set; }
     }
 }

@@ -90,7 +90,7 @@ namespace Cthangband
         private ICorePersistentStorage PersistentStorage;
 
         [NonSerialized]
-        private IUpdateNotifier _updateNotifier;
+        public IUpdateNotifier UpdateNotifier;
 
         /// GUI
         [NonSerialized]
@@ -182,11 +182,6 @@ namespace Cthangband
             ColorData.Add(Colour.BrightPurple, Color.Violet);
             ColorData.Add(Colour.Pink, Color.DeepPink);
             ColorData.Add(Colour.BrightPink, Color.HotPink);
-        }
-
-        public void NotifyNow()
-        {
-            _updateNotifier.NotifyAllNow();
         }
 
         public void Quit(string reason)
@@ -1142,7 +1137,7 @@ namespace Cthangband
             LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
             _console = console;
             PersistentStorage = persistentStorage;
-            _updateNotifier = updateNotification;
+            UpdateNotifier = updateNotification;
             _display = new Display(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
             MapMovementKeys();
             InitializeColorData();
@@ -1193,7 +1188,7 @@ namespace Cthangband
                 Player.WildernessY = CurTown.Y;
                 CameFrom = LevelStart.StartRandom;
             }
-            NotifyNow();
+            UpdateNotifier.GameStarted();
             MsgFlag = false;
             MsgPrint(null);
             UpdateScreen();
@@ -1241,6 +1236,8 @@ namespace Cthangband
                 MsgPrint(null);
                 if (Player.IsDead)
                 {
+                    UpdateNotifier.PlayerDied(Player.Name, DiedFrom, Player.Level);
+
                     // Store the player info
                     ExPlayer = new ExPlayer(Player);
                     break;
@@ -1250,6 +1247,7 @@ namespace Cthangband
                 factory.GenerateNewLevel();
                 Level.ReplacePets(Player.MapY, Player.MapX, _petList);
             }
+            UpdateNotifier.GameStopped();
             CloseGame();
         }
 

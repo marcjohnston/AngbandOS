@@ -11,5 +11,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public string Content { get; set; } = null!;
         public DateTime SentDateTime { get; set; }
         public int Type { get; set; }
+        public string? GameId { get; set; }
     }
 }
