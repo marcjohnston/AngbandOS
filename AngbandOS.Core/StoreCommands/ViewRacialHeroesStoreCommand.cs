@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Enumerations;
-using AngbandOS.UI;
 
 namespace AngbandOS.StoreCommands
 {

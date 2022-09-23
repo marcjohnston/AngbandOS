@@ -3,6 +3,7 @@ import { ColourEnum } from "../colour-enum/colour-enum.module";
 import { ColoursMap } from "../colours-map/colours-map.module";
 import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
 import { ConsoleConfiguration } from "./console-configuration";
+import { PrintLine } from "./print-line";
 
 export class HtmlConsole {
   //public charSize = 16;
@@ -88,5 +89,12 @@ export class HtmlConsole {
     const backColour = this.configuration.colours[backColourEnum];
     const foreColour = this.configuration.colours[foreColourEnum];
     this.printUnmappedColor(row, col, text, foreColour, backColour);
+  }
+
+  public batchPrint(printLines: PrintLine[]) {
+    for (let i = 0; i < printLines.length; i++) {
+      const printLine = printLines[i];
+      this.print(printLine.row!, printLine.col!, printLine.text!, printLine.foreColour!, printLine.backColour!);
+    }
   }
 }

@@ -1,8 +1,8 @@
 <div id="container">
-  <div #scrollDiv id="history-area">
+  <div #scrollDiv id="history-area" title="{{connectionId}}">
     <div id="history-scroll-area">
       <ng-container *ngFor="let card of history">
-        <mat-card>
+        <mat-card title="{{isAdministrator ? 'ID: ' + card.id : ''}}">
           <mat-card-subtitle>
             <div class="card-subtitle">
               <span>{{card.fromUsername}}</span>

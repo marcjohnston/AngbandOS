@@ -17,7 +17,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   public history: ChatMessage[] | undefined;
   private subscriptions = new Subscription();
   public isAuthenticated: boolean = false;
+  public isAdministrator = false;
   private scrollToBottomOfChatAfterViewChecked = false;
+  public connectionId: string | null = null;
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -79,14 +81,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
 
     // Check to see if we are authenticated.
-    if (this._authenticationService.currentUser.value?.jwt === undefined) {
+    if (this._authenticationService.currentUser.value == null || this._authenticationService.currentUser.value?.jwt === undefined) {
       // Connect to the anonymous service-hub.
       this.isAuthenticated = false;
-      this.chatConnection = new SignalR.HubConnectionBuilder()
-        .withUrl("/apiv1/service-hub").build();
+      this.chatConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
     } else {
       // Connect to the authorized chat-hub.
       this.isAuthenticated = true;
+      this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
       this.chatConnection = new SignalR.HubConnectionBuilder()
         .withUrl("/apiv1/chat-hub", {
           accessTokenFactory: () => this._authenticationService.currentUser.value?.jwt as string
@@ -95,6 +97,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.history = undefined;
 
     this.chatConnection.start().then(() => {
+      this.connectionId = this.chatConnection?.connectionId!;
       if (this.chatConnection !== undefined) {
         this.chatConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
           this._ngZone.run(() => {
@@ -130,8 +133,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
     if (this.chatConnection !== undefined) {
-      this.chatConnection.off("Refresh");
+      this.chatConnection.off("ChatUpdated");
       this.chatConnection.off("MessageFailed");
+      this.chatConnection.off("ChatRefreshed");
       this.chatConnection.stop();
     }
   }

@@ -42,20 +42,28 @@ namespace AngbandOS.Web.Hubs
 
         public async Task RefreshChat(int? endingId)
         {
-            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.User, endingId);
+            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.ConnectionId, endingId);
 
             // Get the hub for the currently connected client.
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
 
             // Send the response.
-            await serviceHub.ChatRefreshed(chatMessages.ToArray());
+            await serviceHub.ChatRefreshed(chatMessages);
         }
 
         public override Task OnConnectedAsync()
         {
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
             HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
+            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            GameService.ChatConnected(Context.ConnectionId, new AnonymousChatRecipient(serviceHub));           
             return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            GameService.ChatDisconnected(Context.ConnectionId);
+            return base.OnDisconnectedAsync(exception);
         }
     }
 }

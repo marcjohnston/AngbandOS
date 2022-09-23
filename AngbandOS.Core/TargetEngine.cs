@@ -8,7 +8,6 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using System.Collections.Generic;
 
 namespace AngbandOS

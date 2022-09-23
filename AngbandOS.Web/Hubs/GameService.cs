@@ -4,10 +4,7 @@ using AngbandOS.Web.Models;
 using AngbandOS.PersistentStorage;
 using System.Collections.Concurrent;
 using AngbandOS.Web.Interface;
-using System;
-using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity;
 
 namespace AngbandOS.Web.Hubs
@@ -19,9 +16,11 @@ namespace AngbandOS.Web.Hubs
     {
         private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
         private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
+        private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>(); // Track chat recipient capabilities by email address.
 
         private readonly IHubContext<GameHub, IGameHub> GameHub;
         private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
+        private readonly IHubContext<ChatHub, IChatHub> ChatHub;
         private readonly IHubContext<SpectatorsHub, ISpectatorsHub> SpectatorsHub;
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
@@ -31,6 +30,7 @@ namespace AngbandOS.Web.Hubs
             IConfiguration config,
             IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
+            IHubContext<ChatHub, IChatHub> chatHub,
             IServiceScopeFactory serviceScopeFactory,
             IHubContext<SpectatorsHub, ISpectatorsHub> spectatorsHub
         )
@@ -38,9 +38,20 @@ namespace AngbandOS.Web.Hubs
             Configuration = config;
             GameHub = gameHub;
             ServiceHub = serviceHub;
+            ChatHub = chatHub;
             SpectatorsHub = spectatorsHub;
             ServiceScopeFactory = serviceScopeFactory;
             ConnectionString = Configuration["ConnectionString"];
+        }
+
+        public void ChatConnected(string connectionId, ChatRecipient chatRecipient)
+        {
+            ChatRecipients.TryAdd(connectionId, chatRecipient);
+        }
+
+        public void ChatDisconnected(string connectionId)
+        {
+            ChatRecipients.Remove(connectionId, out _);
         }
 
         public bool KillGame(string connectionId)
@@ -112,20 +123,102 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        /// <summary>
-        /// Writes a message to the messages database.
-        /// </summary>
-        /// <param name="fromId"></param>
-        /// <param name="toId"></param>
-        /// <param name="message"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private async Task WriteMessageAsync(string fromId, string? toId, string message, MessageTypeEnum type, string? gameId)
+        private async Task<ChatMessage> GetChatMessageAsync(MessageDetails message)
         {
+            string fromUsername = await GetUsernameAsync(message.FromId);
+            string toUsername = await GetUsernameAsync(message.ToId);
+            return new ChatMessage
+            {
+                FromUsername = fromUsername,
+                Message = message.Message,
+                SentDateTime = message.SentDateTime,
+                Id = message.Id
+            };
+        }
+
+        /// <summary>
+        /// Retrieves chat messages from the database for a user.
+        /// </summary>
+        /// <param name="endingId"></param>
+        /// <returns></returns>
+        public async Task<ChatMessage[]> GetChatMessages(string connectionId, int? endingId)
+        {
+            // Determine if the current user is an administrator.
+            ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
+
+            // Retrieve the messages from the database.
             using (IServiceScope scope = ServiceScopeFactory.CreateScope())
             {
                 IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                await webPersistentStorage.WriteMessageAsync(fromId, toId, message, type, gameId);
+                MessageDetails[] messages = await chatRecipient.GetMessagesAsync(webPersistentStorage, endingId);
+
+                // Convert the messages into chat format that they can be sent to the client.
+                List<ChatMessage> chatMessages = new List<ChatMessage>();
+                foreach (MessageDetails message in messages)
+                    chatMessages.Add(await GetChatMessageAsync(message));
+                return chatMessages.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Writes a message to the messages database, if needed and sends out proper responses to all clients, if needed.
+        /// </summary>
+        /// <param name="fromId"></param>
+        /// <param name="toUsername"></param>
+        /// <param name="message"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public async Task<bool> WriteMessageAsync(ClaimsPrincipal fromUser, string? toUsername, string message, MessageTypeEnum type, string? gameId)
+        {
+            // Get the details of the user sending the message and who the message is being sent to.
+            string? fromEmailAddress = fromUser.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? fromAppUser = null;
+            ApplicationUser? toAppUser = null; // Sent to the general public.
+
+            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
+            {
+                UserManager<ApplicationUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                fromAppUser = await userManager.FindByEmailAsync(fromEmailAddress);
+
+                // Validate the user the message is from.
+                if (fromAppUser == null)
+                    return false;
+
+                // Get the details of the user for which the message is to be sent to.
+                if (toUsername != null)
+                {
+                    toAppUser = await userManager.FindByNameAsync(toUsername);
+                    if (toAppUser == null)
+                        return false;
+
+                    // Set the Id of the user it was sent to.
+                    toUsername = toAppUser.Id;
+                }
+            }
+
+            // Write the message to the database.
+            try
+            {
+                using (IServiceScope scope = ServiceScopeFactory.CreateScope())
+                {
+                    IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
+                    MessageDetails? messageWritten = await webPersistentStorage.WriteMessageAsync(fromAppUser.Id, toAppUser?.Id, message, type, gameId);
+                    if (messageWritten == null)
+                        return false;
+
+                    // Relay the message to all clients.
+                    foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
+                    {
+                        ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
+                        ChatMessage chatMessage = await GetChatMessageAsync(messageWritten);
+                        await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
+                    }
+                    return true;
+                }
+            } 
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -146,7 +239,7 @@ namespace AngbandOS.Web.Hubs
                 // It is, create a new guid for the game.
                 guid = Guid.NewGuid().ToString();
 
-                await WriteMessageAsync(userId, null, "Game created." , MessageTypeEnum.GameCreated, guid);
+                await WriteMessageAsync(context.User, null, "Game created." , MessageTypeEnum.GameCreated, guid);
             }
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
@@ -155,16 +248,28 @@ namespace AngbandOS.Web.Hubs
             // Construct an update notifier that is used when the game notifies us that interesting event happen in the game.
             Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateNotifier = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
             {
-                // When updates are received from the game, notify all clients.
+                // Update all clients that the active games has been updated.
                 await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
-                
-                // Check to see if the character has died.
+
+                // When updates are received from the game check to see we save the update as a message that is relayed.
                 switch (gameUpdateNotification)
                 {
                     case GameUpdateNotificationEnum.PlayerDied:
-                    case GameUpdateNotificationEnum.GameStarted:
+                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.CharacterDied, guid);
+                        break;
                     case GameUpdateNotificationEnum.GameStopped:
-                        await WriteMessageAsync(userId, null, message, MessageTypeEnum.CharacterDied, guid);
+                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameStopped, guid);
+                        break;
+                    case GameUpdateNotificationEnum.GameStarted:
+                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameStarted, guid);
+                        break;
+                    case GameUpdateNotificationEnum.LevelChanged:
+                    case GameUpdateNotificationEnum.CharacterRenamed:
+                    case GameUpdateNotificationEnum.GoldUpdated:
+                        break;
+                    case GameUpdateNotificationEnum.SaveGameIncompatibile:
+                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.SaveGameIncompatible, guid);
+                        signalRConsole.GameIncompatible();
                         break;
                 }
             };
@@ -209,10 +314,15 @@ namespace AngbandOS.Web.Hubs
         /// <param name="keys">The key that was pressed.</param>
         public void Keypressed(string connectionId, string keys)
         {
-            SignalRConsole console = Consoles[connectionId];
-            console.Keypressed(keys);
+            if (Consoles.TryGetValue(connectionId, out SignalRConsole console))
+                console.Keypressed(keys);
         }
 
+        /// <summary>
+        /// Returns the username from a users' ID.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         private async Task<string> GetUsernameAsync(string userId)
         {
             using (IServiceScope scope = ServiceScopeFactory.CreateScope())
@@ -223,52 +333,6 @@ namespace AngbandOS.Web.Hubs
                     return appUser.UserName;
                 else
                     return "unknown";
-            }
-        }
-
-        /// <summary>
-        /// Retrieves chat messages for a user.
-        /// </summary>
-        /// <param name="endingId"></param>
-        /// <returns></returns>
-        public async Task<ChatMessage[]> GetChatMessages(ClaimsPrincipal? user, int? endingId)
-        {
-            // Determine if the current user is an administrator.
-            string customRoleClaimType = Configuration["CustomRoleClaimType"];
-            bool isAdministrator = user == null ? false : user.HasClaim(customRoleClaimType, "administrator");
-
-            // Administrators see all messages.  Non-administrators only see user messages and player deaths.
-            MessageTypeEnum[]? types = isAdministrator ? null : new MessageTypeEnum[] { MessageTypeEnum.UserMessage, MessageTypeEnum.CharacterDied };
-
-            // Retrieve the messages from the database.
-            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-            {
-                IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                MessageDetails[] messages = await webPersistentStorage.GetMessagesAsync(null, endingId, types);
-
-                // Convert the messages into chat format that they can be sent to the client.
-                List<ChatMessage> chatMessages = new List<ChatMessage>();
-                foreach (MessageDetails message in messages)
-                {
-                    string fromUsername = await GetUsernameAsync(message.FromId);
-                    //string messageText = "";
-                    //switch (message.Type)
-                    //{
-                    //    case MessageTypeEnum.UserMessage:
-                    //        messageText = message.Message;
-                    //        break;
-                    //    case MessageTypeEnum.CharacterDied:
-                    //        messageText = $"{fromUsername} 
-
-                    //}
-                    chatMessages.Add(new ChatMessage
-                    {
-                        FromUsername = fromUsername,
-                        Message = message.Message,
-                        SentDateTime = message.SentDateTime
-                    });
-                }
-                return chatMessages.ToArray();
             }
         }
     }

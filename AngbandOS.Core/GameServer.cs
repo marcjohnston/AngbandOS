@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS
@@ -63,7 +62,14 @@ namespace AngbandOS
             saveGame.Refresh(console);
         }
 
-        public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
+        /// <summary>
+        /// Plays a game and returns false, if the game cannot be played, true when the game is over.
+        /// </summary>
+        /// <param name="console"></param>
+        /// <param name="persistentStorage"></param>
+        /// <param name="updateNotifier"></param>
+        /// <returns></returns>
+        public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
         {
             // Retrieve the game from the persistent storage.
             byte[] data = persistentStorage.ReadGame();
@@ -78,10 +84,18 @@ namespace AngbandOS
                 // Deserialize the game.
                 BinaryFormatter formatter = new BinaryFormatter();
                 MemoryStream memoryStream = new MemoryStream(data);
-                saveGame = (SaveGame)formatter.Deserialize(memoryStream);
+                try
+                {
+                    saveGame = (SaveGame)formatter.Deserialize(memoryStream);
+                }
+                catch (Exception)
+                {
+                    updateNotifier.SaveGameIncompatible();
+                    return false;
+                }
             }
-
             saveGame.Play(console, persistentStorage, updateNotifier);
+            return true;
         }
     }
 }

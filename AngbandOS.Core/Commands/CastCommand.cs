@@ -2,7 +2,6 @@
 using AngbandOS.Projection;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using System;
 
 namespace AngbandOS.Commands

@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 using AngbandOS.Debug;
-using AngbandOS.UI;
 using System;
 
 namespace AngbandOS.StaticData

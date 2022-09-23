@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Enumerations;
-using AngbandOS.UI;
 using System;
 
 namespace AngbandOS.Commands

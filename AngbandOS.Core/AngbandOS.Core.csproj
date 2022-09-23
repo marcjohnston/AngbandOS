@@ -78,6 +78,7 @@
     <Folder Include="Data\BasePotionFlavours\" />
     <Folder Include="Data\BaseAmuletFlavours\" />
     <Folder Include="Data\BaseMushroomFlavours\" />
+    <Folder Include="UI\" />
   </ItemGroup>
 
 </Project>

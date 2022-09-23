@@ -36,13 +36,18 @@ namespace AngbandOS.Web.Hubs
         }
         public void GameStopped()
         {
-            Action(SignalRConsole, GameUpdateNotificationEnum.GameStopped, "Game s");
+            Action(SignalRConsole, GameUpdateNotificationEnum.GameStopped, "Game stopped.");
         }
 
         public void PlayerDied(string name, string diedFrom, int level)
         {
-            string message = $"{name} was just killed by a {diedFrom} on level {level}.";
+            string message = $"{name.Trim()} was just killed by {diedFrom} on level {level}.";
             Action(SignalRConsole, GameUpdateNotificationEnum.PlayerDied, message);
+        }
+
+        public void SaveGameIncompatible()
+        {
+            Action(SignalRConsole, GameUpdateNotificationEnum.SaveGameIncompatibile, "Saved game cannot be played because it is incompatible!");
         }
     }
 }

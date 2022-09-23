@@ -9,7 +9,6 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using System;
 
 namespace AngbandOS

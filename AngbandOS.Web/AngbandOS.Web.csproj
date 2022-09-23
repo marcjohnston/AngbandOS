@@ -40,6 +40,7 @@
     <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
     <None Remove="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
     <None Remove="ClientApp\src\app\modules\html-console\html-console.module.ts" />
+    <None Remove="ClientApp\src\app\modules\html-console\print-line.ts" />
     <None Remove="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
     <None Remove="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
     <None Remove="ClientApp\src\app\ui\ui-configuration.ts" />
@@ -79,6 +80,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\html-console.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\print-line.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\console-configuration.ts" />

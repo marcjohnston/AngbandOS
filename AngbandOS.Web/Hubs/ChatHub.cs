@@ -2,11 +2,14 @@
 using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -41,60 +44,18 @@ namespace AngbandOS.Web.Hubs
 
         public async Task SendMessage(string? toUsername, string message)
         {
-            if (message.Length == 0)
+            // Ensure there is a user and that the message is not empty.
+            if (message.Length == 0 || Context.User == null)
                 return;
-            
-            // We need to ensure the user is authenticated.
-            string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
-            ApplicationUser? fromUser = await UserManager.FindByEmailAsync(emailAddress);
-            if (fromUser == null)
-            {
+
+            bool success = await GameService.WriteMessageAsync(Context.User, toUsername, message, MessageTypeEnum.UserMessage, null);
+            if (!success)
                 await Clients.Client(Context.ConnectionId).MessageFailed();
-                return;
-            }
-
-            string? toId = null; // Sent to the general public.
-
-            // Check to see if the message was sent privately.
-            if (toUsername != null)
-            {
-                ApplicationUser? toUser = await UserManager.FindByNameAsync(toUsername);
-                if (toUser == null)
-                {
-                    await Clients.Client(Context.ConnectionId).MessageFailed();
-                    return;
-                }
-
-                // Set the Id of the user it was sent to.
-                toId = toUser.Id;
-            }
-
-            MessageDetails? messageWritten = await WebPersistentStorage.WriteMessageAsync(fromUser.Id, toId, message, MessageTypeEnum.UserMessage, null);
-            if (messageWritten == null)
-            {
-                await Clients.Client(Context.ConnectionId).MessageFailed();
-                return;
-            }
-
-            // Now send an update to all of the client.
-            ChatMessage chatMessage = new ChatMessage
-            {
-                Id = messageWritten.Id,
-                FromUsername = fromUser.UserName,
-                Message = message,
-                SentDateTime = messageWritten.SentDateTime
-            };
-
-            // Send the update to all of the chat hub clients.
-            await Clients.All.ChatUpdated(chatMessage);
-
-            // And send the update to all of the service hub clients.
-            await ServiceHub.Clients.All.ChatUpdated(chatMessage);
         }
 
         public async Task RefreshChat(int? endingId)
         {
-            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.User, endingId);
+            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.ConnectionId, endingId);
 
             // Get the hub for the currently connected client.
             IChatHub chatHub = Clients.Client(Context.ConnectionId);
@@ -104,17 +65,24 @@ namespace AngbandOS.Web.Hubs
         }
 
 
-        public override Task OnConnectedAsync()
+        public async override Task OnConnectedAsync()
         {
-            // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
-            HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
-            return base.OnConnectedAsync();
+            IChatHub chatHub = Clients.Client(Context.ConnectionId);
+            string? emailAddress = Context.User.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+            string customRoleClaimType = Configuration["CustomRoleClaimType"];
+            if (Context.User.HasClaim(customRoleClaimType, "administrator"))
+                GameService.ChatConnected(Context.ConnectionId, new AdministatorChatRecipient(chatHub, appUser.Id));
+            else
+                GameService.ChatConnected(Context.ConnectionId, new UserChatRecipient(chatHub, appUser.Id));
+
+            await base.OnConnectedAsync();
         }
 
-        public override Task OnDisconnectedAsync(Exception? exception)
+        public async override Task OnDisconnectedAsync(Exception? exception)
         {
-            //ChatService.ChatDisconnected(Context.ConnectionId);
-            return base.OnDisconnectedAsync(exception);
+            GameService.ChatDisconnected(Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

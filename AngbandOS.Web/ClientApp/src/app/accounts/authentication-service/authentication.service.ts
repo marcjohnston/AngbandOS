@@ -95,7 +95,7 @@ export class AuthenticationService {
               emailVerified: (jwtClaims.email_verified === "true"),
               exp: new Date(Number(jwtClaims.exp) * 1000), // Convert the seconds since epoch to milliseconds since epoch.
               iss: jwtClaims.iss,
-              isAdmin: roles.includes("administrator"),
+              isAdmin: roles === undefined ? false : roles.includes("administrator"),
               jwt: _loginResponse.jwtToken,
               username: jwtClaims.username
             };

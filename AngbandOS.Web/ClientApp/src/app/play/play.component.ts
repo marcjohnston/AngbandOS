@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
@@ -6,11 +5,8 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
-import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
-import { SoundEffectsEnum } from '../modules/sound-effects-enum/sound-effects-enum.module';
-import { ColoursMap } from '../modules/colours-map/colours-map.module';
-import { SoundEffectsMap } from '../modules/sound-effects-map/sound-effects-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
+import { PrintLine } from '../modules/html-console/print-line';
 
 const charSize = 16;
 
@@ -101,13 +97,30 @@ export class PlayComponent implements OnInit, OnDestroy {
               this._htmlConsole?.clear();
             });
           });
-          this.connection.on("Print", (row: number, col: number, text: string, foreColor: ColourEnum, backColour: ColourEnum) => {
+          this.connection.on("BatchPrint", (printLines: PrintLine[]) => {
             this._zone.run(() => {
-              this._htmlConsole?.print(row, col, text, foreColor, backColour);
+              this._htmlConsole?.batchPrint(printLines);
             });
           });
           this.connection.on("SetBackground", (backgroundImage: number) => {
             this._zone.run(() => {
+            });
+          });
+          this.connection.on("SendMessage", (message: string) => {
+            this._zone.run(() => {
+              this._snackBar.open(message, undefined, {
+                duration: 2000,
+              });
+            });
+          });
+          this.connection.on("GameIncompatible", () => {
+            this._zone.run(() => {
+              const snackBarRef = this._snackBar.open("Game cannot be played because it is incompatible.", undefined, {
+                duration: 2000,                
+              });
+              this._initSubscriptions.add(snackBarRef.afterDismissed().subscribe(() => {
+                this._router.navigate(['/']);
+              }));
             });
           });
           this.connection.on("PlaySound", (sound: number) => {
@@ -170,11 +183,13 @@ export class PlayComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.connection) {
       this.connection.off("Clear");
-      this.connection.off("Print");
+      this.connection.off("BatchPrint");
       this.connection.off("SetBackground");
       this.connection.off("PlaySound");
       this.connection.off("PlayMusic");
       this.connection.off("GameOver");
+      this.connection.off("SendMessage");
+      this.connection.off("GameIncompatible");
       this.connection.stop();
       this._initSubscriptions.unsubscribe();
     }

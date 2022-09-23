@@ -96,17 +96,26 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
+        /// <summary>
+        /// Returns messages from the database for any specific user.
+        /// </summary>
+        /// <param name="userId">The id of the user requesting the messages or Null for an anonymous user.</param>
+        /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
+        /// <param name="types">List of message types that the user should receive or null for ALL.</param>
+        /// <returns></returns>
         public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
                 IQueryable<Message> messagesQuery = context.Messages;
-                if (types == null)
-                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == userId);
+                if (userId == null)
+                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null);
                 else
+                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null || _message.ToUserId == userId);
+                if (types != null)
                 {
                     int[] intTypes = types.Select(_type => (int)_type).ToArray();
-                    messagesQuery = messagesQuery.Where(_message => _message.ToUserId == userId && intTypes.Contains(_message.Type));
+                    messagesQuery = messagesQuery.Where(_message => intTypes.Contains(_message.Type));
                 }
                 IQueryable<MessageDetails> messageDetailsQuery = messagesQuery
                     .OrderByDescending(_message => _message.Id) // We will use the clustered index for sorting.
@@ -120,7 +129,8 @@ namespace AngbandOS.PersistentStorage
                         Type = (MessageTypeEnum)_message.Type
                     })
                     .Reverse(); // The list needs to be reverse for rendering.
-                return await messageDetailsQuery.ToArrayAsync();
+                MessageDetails[] messages = await messageDetailsQuery.ToArrayAsync();
+                return messages;
             }
         }
     }
