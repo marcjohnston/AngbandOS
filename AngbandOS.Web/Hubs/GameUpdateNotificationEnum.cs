@@ -7,6 +7,7 @@
         CharacterRenamed = 2,
         PlayerDied = 3,
         GameStarted = 4,
-        GameStopped = 5
+        GameStopped = 5,
+        SaveGameIncompatibile = 6
     }
 }

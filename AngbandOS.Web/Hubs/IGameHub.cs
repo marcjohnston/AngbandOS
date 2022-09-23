@@ -9,6 +9,20 @@ namespace AngbandOS.Web.Hubs;
 public interface IGameHub
 {
     /// <summary>
+    /// Sends a generic message to the client.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    Task SendMessage(string message);
+
+    /// <summary>
+    /// Sends a message to the client that the game cannot be played because it is incompatible.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    Task GameIncompatible();
+
+    /// <summary>
     /// Outgoing message to a web client that the game is over.
     /// </summary>
     /// <returns></returns>
@@ -28,7 +42,7 @@ public interface IGameHub
     /// <param name="text"></param>
     /// <param name="colour"></param>
     /// <returns></returns>
-    Task Print(int row, int col, string text, Colour foreColor, Colour backColour);
+    Task BatchPrint(PrintLine[] printLines);
 
     /// <summary>
     /// Outgoing message to a web client to set a background image.

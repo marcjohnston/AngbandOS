@@ -26,9 +26,9 @@ public class SpectatorConsole : IConsole
         _gameHub.PlaySound(sound);
     }
 
-    public void Print(int row, int col, string text, Colour foreColour, Colour backColour)
+    public void BatchPrint(PrintLine[] printLines)
     {
-        _gameHub.Print(row, col, text, foreColour, backColour);
+        _gameHub.BatchPrint(printLines);
     }
 
     public void SetBackground(BackgroundImage image)

@@ -19704,6 +19704,7 @@ namespace AngbandOS
         /// </summary>
         public void UpdateScreen()
         {
+            List<PrintLine> batchPrintLines = new List<PrintLine>();
             Screen scr = Scr; // This will always be the game screen contents.
             Screen old = Old;
             int y;
@@ -19755,7 +19756,7 @@ namespace AngbandOS
             if (scr.Cu || !scr.CursorVisible)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background);
+                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
             }
 
             // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
@@ -19784,7 +19785,7 @@ namespace AngbandOS
                         {
                             if (fn != 0)
                             {
-                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             continue;
@@ -19795,7 +19796,7 @@ namespace AngbandOS
                         {
                             if (fn != 0)
                             {
-                                _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             fa = na;
@@ -19807,7 +19808,7 @@ namespace AngbandOS
                     }
                     if (fn != 0)
                     {
-                        _console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background);
+                        batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                     }
 
                     /////// end RefreshTextRow
@@ -19821,24 +19822,27 @@ namespace AngbandOS
             if (scr.Cu)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background); // Was unset
+                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
             }
             else if (!scr.CursorVisible)
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background); // Was unset
+                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
             }
             else
             {
                 int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                _console.Print(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background);
+                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
                 scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                _console.Print(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple);
+                batchPrintLines.Add(new PrintLine(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple));
             }
             old.Cu = scr.Cu;
             old.CursorVisible = scr.CursorVisible;
             old.Cx = scr.Cx;
             old.Cy = scr.Cy;
+
+            if (batchPrintLines.Count > 0)
+                _console.BatchPrint(batchPrintLines.ToArray());
         }
 
         /// <summary>
@@ -19846,6 +19850,7 @@ namespace AngbandOS
         /// </summary>
         public void Refresh(IConsole console)
         {
+            List<PrintLine> batchPrintLines = new List<PrintLine>();
             Screen scr = Scr; // This will always be the game screen contents.
             int y;
             int w = Width;
@@ -19871,7 +19876,7 @@ namespace AngbandOS
                     {
                         if (fn != 0)
                         {
-                            console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background);
+                            batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                             fn = 0;
                         }
                         currentColor = na;
@@ -19883,15 +19888,18 @@ namespace AngbandOS
                 }
                 if (fn != 0)
                 {
-                    console.Print(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background);
+                    batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                 }
             }
 
             if (scr.CursorVisible)
             {
                 int scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                console.Print(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple);
+                batchPrintLines.Add(new PrintLine(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple));
             }
+
+            if (batchPrintLines.Count > 0)
+                _console.BatchPrint(batchPrintLines.ToArray());
         }
 
         public void PlayMusic(MusicTrack musicTrack)

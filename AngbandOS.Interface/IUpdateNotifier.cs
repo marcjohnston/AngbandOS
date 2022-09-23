@@ -16,5 +16,6 @@
         public void GameStarted();
 
         public void GameStopped();
+        public void SaveGameIncompatible();
     }
 }

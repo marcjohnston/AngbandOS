@@ -83,19 +83,46 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            _gameServer.Play(this, PersistentStorage, new UpdateNotifier(this, NotificationAction));
-
-            // The game is over.  Let the client know.
-            GameOver();
+            if (_gameServer.Play(this, PersistentStorage, new UpdateNotifier(this, NotificationAction)))
+            {
+                // The game is over.  Let the client know.
+                GameOver();
+            }
+            DisconnectSpectators();
         }
 
+        private void DisconnectSpectators()
+        {
+            // These messages are relayed to all spectators.
+            foreach (IGameHub gameHub in _spectators)
+                gameHub.GameOver();
+        }
+
+        /// <summary>
+        /// Sends a message from the game to the console client and all spectators that the game is over.
+        /// </summary>
         private void GameOver()
         {
             _consoleGameHub.GameOver();
+            DisconnectSpectators();
+        }
 
-            // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
-              gameHub.GameOver();
+        /// <summary>
+        /// Sends a generic message to the console.
+        /// </summary>
+        /// <param name="message"></param>
+        public void SendConsoleMessage(string message)
+        {
+            _consoleGameHub.SendMessage(message);
+        }
+
+        /// <summary>
+        /// Sends a message to the console that the game cannot be played because it is incompatible.
+        /// </summary>
+        /// <param name="message"></param>
+        public void GameIncompatible()
+        {
+            _consoleGameHub.GameIncompatible();
         }
 
         public void Clear()
@@ -128,14 +155,14 @@ namespace AngbandOS.Web.Hubs
               gameHub.PlaySound(sound);
         }
 
-        public void Print(int row, int col, string text, Colour foreColour, Colour backColour)
+        public void BatchPrint(PrintLine[] printLines)
         {
             // Forward the print command from the game to the signal-r hub.
-            _consoleGameHub.Print(row, col, text, foreColour, backColour);
+            _consoleGameHub.BatchPrint(printLines);
 
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
-              gameHub.Print(row, col, text, foreColour, backColour);  
+            foreach (ISpectatorsHub spectatorHub in _spectators)
+                spectatorHub.BatchPrint(printLines);
         }
 
         public void SetBackground(BackgroundImage image)

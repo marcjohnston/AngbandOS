@@ -11,7 +11,6 @@ using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using System;
 using System.IO;
 using static AngbandOS.Extensions;

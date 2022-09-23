@@ -28,7 +28,7 @@ public interface ISpectatorsHub
     /// <param name="text"></param>
     /// <param name="colour"></param>
     /// <returns></returns>
-    Task Print(int row, int col, string text, Colour foreColor, Colour backColour);
+    Task BatchPrint(PrintLine[] printLines);
 
     /// <summary>
     /// Outgoing message to a web client to set a background image.

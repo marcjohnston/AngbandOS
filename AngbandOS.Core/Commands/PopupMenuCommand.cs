@@ -1,6 +1,6 @@
-﻿using AngbandOS.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using AngbandOS.Core;
 
 namespace AngbandOS.Commands
 {

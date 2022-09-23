@@ -1,5 +1,4 @@
-﻿using AngbandOS.UI;
-using System;
+﻿using System;
 
 namespace AngbandOS.Commands
 {

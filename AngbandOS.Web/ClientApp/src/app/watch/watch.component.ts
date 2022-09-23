@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
 import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
+import { PrintLine } from '../modules/html-console/print-line';
 
 @Component({
   selector: 'app-watch',
@@ -51,9 +52,9 @@ export class WatchComponent implements OnInit, OnDestroy {
                 this._htmlConsole?.clear();
               });
             });
-            this.connection.on("Print", (row: number, col: number, text: string, foreColor: ColourEnum, backColour: ColourEnum) => {
+            this.connection.on("BatchPrint", (printLines: PrintLine[]) => {
               this._zone.run(() => {
-                this._htmlConsole?.print(row, col, text, foreColor, backColour);
+                this._htmlConsole?.batchPrint(printLines);
               });
             });
             this.connection.on("SetBackground", (backgroundImage: number) => {
@@ -88,7 +89,7 @@ export class WatchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.connection) {
       this.connection.off("Clear");
-      this.connection.off("Print");
+      this.connection.off("BatchPrint");
       this.connection.off("SetBackground");
       this.connection.off("PlaySound");
       this.connection.off("PlayMusic");

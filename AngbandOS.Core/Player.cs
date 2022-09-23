@@ -10,7 +10,6 @@ using AngbandOS.Mutations;
 using AngbandOS.Patrons;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
-using AngbandOS.UI;
 using AngbandOS.Pantheon;
 using System;
 using AngbandOS.Core.Interface;

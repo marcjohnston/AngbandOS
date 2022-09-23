@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
-using AngbandOS.UI;
 using System;
 
 namespace AngbandOS.Commands
