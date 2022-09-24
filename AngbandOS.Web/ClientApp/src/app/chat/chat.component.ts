@@ -89,9 +89,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       // Connect to the authorized chat-hub.
       this.isAuthenticated = true;
       this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
+      const accessToken = this._authenticationService.currentUser.value.jwt;
       this.chatConnection = new SignalR.HubConnectionBuilder()
         .withUrl("/apiv1/chat-hub", {
-          accessTokenFactory: () => this._authenticationService.currentUser.value?.jwt as string
+          accessTokenFactory: () => accessToken
         }).build();
     }
     this.history = undefined;

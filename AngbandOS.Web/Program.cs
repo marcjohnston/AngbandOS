@@ -45,6 +45,30 @@ builder.Services.AddAuthentication(x =>
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
+    // We have to hook the OnMessageReceived event in order to
+    // allow the JWT authentication handler to read the access
+    // token from the query string when a WebSocket or 
+    // Server-Sent Events request comes in.
+    jwtBearerOptions.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var authToken = context.Request.Headers["Authorization"].ToString();
+
+            var token = !string.IsNullOrEmpty(accessToken) ? accessToken.ToString() : !string.IsNullOrEmpty(authToken) ? authToken.Substring(7) : String.Empty;
+
+            var path = context.HttpContext.Request.Path;
+
+            // If the request is for our hub...
+            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/apiv1/chat-hub") || path.StartsWithSegments("/apiv1/service-hub") || path.StartsWithSegments("/apiv1/game-hub") || path.StartsWithSegments("/apiv1/spectators-hub")))
+            {
+                // Read the token out of the query string
+                context.Token = token;
+            }
+            return Task.CompletedTask;
+        }
+    };
 });
 
 builder.Services.AddAuthorization();
