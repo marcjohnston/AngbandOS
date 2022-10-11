@@ -21,5 +21,7 @@ namespace AngbandOS.Web.Hubs
 
         Task ChatUpdated(ChatMessage message);
 
+        Task ActiveUsersRefreshed(ActiveUserDetails[] users);
+
     }
 }

@@ -89,6 +89,7 @@ import { WhatsNewComponent } from './manual/whats-new/whats-new.component';
 import { WisdomComponent } from './manual/wisdom/wisdom.component';
 import { TableOfContentsComponent } from './manual/table-of-contents/table-of-contents.component';
 import { ChatComponent } from './chat/chat.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { ChatComponent } from './chat/chat.component';
     WisdomComponent,
     TableOfContentsComponent,
     UiComponent,
-    ChatComponent
+    ChatComponent,
+    DashboardComponent
   ],
   imports: [
     MatTableModule,
@@ -187,6 +189,7 @@ import { ChatComponent } from './chat/chat.component';
       { path: 'watch/:guid', component: WatchComponent },
 
       { path: 'ui', component: UiComponent },
+      { path: 'dashboard', component: DashboardComponent },
 
       { path: 'accounts/login', component: LoginComponent },
       { path: 'accounts/logout', component: LogoutComponent },

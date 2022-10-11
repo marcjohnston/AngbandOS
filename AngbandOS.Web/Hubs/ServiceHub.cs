@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using static Humanizer.In;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -40,6 +42,14 @@ namespace AngbandOS.Web.Hubs
             serviceHub.ActiveGamesUpdated(activeGames);
         }
 
+        public void RefreshActiveUsers()
+        {
+            //// Immediately send a seeding list of active games to the client.
+            ActiveUserDetails[] activeUsers = GameService.GetChatUsers();
+            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            serviceHub.ActiveUsersRefreshed(activeUsers);
+        }
+
         public async Task RefreshChat(int? endingId)
         {
             ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.ConnectionId, endingId);
@@ -56,12 +66,14 @@ namespace AngbandOS.Web.Hubs
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
             HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            GameService.ServiceHubConnected(Context.ConnectionId);
             GameService.ChatConnected(Context.ConnectionId, new AnonymousChatRecipient(serviceHub));           
             return base.OnConnectedAsync();
         }
 
         public override Task OnDisconnectedAsync(Exception? exception)
         {
+            GameService.ServiceHubDisconnected(Context.ConnectionId);
             GameService.ChatDisconnected(Context.ConnectionId);
             return base.OnDisconnectedAsync(exception);
         }

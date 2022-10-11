@@ -35,6 +35,7 @@
     <None Remove="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <None Remove="ClientApp\src\app\chat\chat-message.ts" />
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
+    <None Remove="ClientApp\src\app\home\active-user-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
     <None Remove="ClientApp\src\app\manual\manual.css" />
     <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
@@ -73,6 +74,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\chat\chat-message.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\active-user-details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\home\active-game-details.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

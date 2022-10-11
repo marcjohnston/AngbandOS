@@ -58,17 +58,18 @@ namespace AngbandOS.Web.Hubs
             GameService.Keypressed(Context.ConnectionId, keys);
         }
 
-        public override Task OnConnectedAsync()
+        public async override Task OnConnectedAsync()
         {
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
             HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
-            return base.OnConnectedAsync();
+            string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
+            await GameService.GameHubConnectedAsync(Context.ConnectionId, user.UserName);
         }
 
-        public override Task OnDisconnectedAsync(Exception? exception)
+        public async override Task OnDisconnectedAsync(Exception? exception)
         {
-            GameService.GameDisconnectedAsync(Context.ConnectionId);
-            return base.OnDisconnectedAsync(exception);
+            await GameService.GameHubDisconnectedAsync(Context.ConnectionId);
         }
     }
 }

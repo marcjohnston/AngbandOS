@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using AngbandOS.Web.Interface;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -16,9 +17,16 @@ namespace AngbandOS.Web.Hubs
     {
         private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
         private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
-        private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>(); // Track chat recipient capabilities by email address.
+        private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>(); // Track chat recipient capabilities by connection ID.
+
+        private readonly HubConnectionsMonitor gameHubConnections = new HubConnectionsMonitor();
+        private readonly HubConnectionsMonitor chatHubConnections = new HubConnectionsMonitor();
+        private readonly HubConnectionsMonitor spectatorsHubConnections = new HubConnectionsMonitor();
+        private readonly HubConnectionsMonitor serviceHubConnections = new HubConnectionsMonitor();
+        private readonly HubConnectionsMonitor adminHubConnections = new HubConnectionsMonitor();
 
         private readonly IHubContext<GameHub, IGameHub> GameHub;
+        private readonly IHubContext<AdminHub, IAdminHub> AdminHub;
         private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
         private readonly IHubContext<ChatHub, IChatHub> ChatHub;
         private readonly IHubContext<SpectatorsHub, ISpectatorsHub> SpectatorsHub;
@@ -27,31 +35,145 @@ namespace AngbandOS.Web.Hubs
         private readonly IServiceScopeFactory ServiceScopeFactory;
 
         public GameService(
-            IConfiguration config,
             IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
             IHubContext<ChatHub, IChatHub> chatHub,
-            IServiceScopeFactory serviceScopeFactory,
-            IHubContext<SpectatorsHub, ISpectatorsHub> spectatorsHub
+            IHubContext<AdminHub, IAdminHub> adminHub,
+            IHubContext<SpectatorsHub, ISpectatorsHub> spectatorsHub,
+            IConfiguration config,
+            IServiceScopeFactory serviceScopeFactory
         )
         {
             Configuration = config;
             GameHub = gameHub;
             ServiceHub = serviceHub;
             ChatHub = chatHub;
+            AdminHub = adminHub;
             SpectatorsHub = spectatorsHub;
             ServiceScopeFactory = serviceScopeFactory;
             ConnectionString = Configuration["ConnectionString"];
         }
 
+        /// <summary>
+        /// Adds a user to the chat system.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        /// <param name="chatRecipient"></param>
         public void ChatConnected(string connectionId, ChatRecipient chatRecipient)
         {
             ChatRecipients.TryAdd(connectionId, chatRecipient);
+            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
         }
 
+        /// <summary>
+        /// Removes a user from the chat system.
+        /// </summary>
+        /// <param name="connectionId"></param>
         public void ChatDisconnected(string connectionId)
         {
             ChatRecipients.Remove(connectionId, out _);
+            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
+        }
+
+        public async Task GameHubConnectedAsync(string connectionId, string username)
+        {
+            gameHubConnections.Connected(connectionId, username);
+
+            // Run the update notifications.
+            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles game signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public async Task GameHubDisconnectedAsync(string connectionId)
+        {
+            gameHubConnections.Disconnected(connectionId);
+
+            // Get the console running the game.
+            if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
+            {
+                ConnectionIds.Remove(console, out _);
+                Consoles.Remove(connectionId, out _);
+            }
+
+            // Run the update notifications.
+            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+            SendHubConnectionsUpdate();
+        }
+
+        public void ChatHubConnected(string connectionId, string username)
+        {
+            chatHubConnections.Connected(connectionId, username);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ChatHubDisconnected(string connectionId)
+        {
+            chatHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        public void SpectatorsHubConnected(string connectionId)
+        {
+            spectatorsHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void SpectatorsHubDisconnected(string connectionId)
+        {
+            spectatorsHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        public void ServiceHubConnected(string connectionId)
+        {
+            serviceHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ServiceHubDisconnected(string connectionId)
+        {
+            serviceHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        public void AdminHubConnected(string connectionId, string username)
+        {
+            adminHubConnections.Connected(connectionId, username);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void AdminHubDisconnected(string connectionId)
+        {
+            adminHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Sends an update to the admin hub, when a connection or disconnection to any hub is made.
+        /// </summary>
+        private void SendHubConnectionsUpdate()
+        {
+            AdminHub.Clients.All.HubConnectionsUpdated(GetConnections());
         }
 
         public bool KillGame(string connectionId)
@@ -66,30 +188,26 @@ namespace AngbandOS.Web.Hubs
                 return false;
         }
 
-        /// <summary>
-        /// Handles game signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public async Task GameDisconnectedAsync(string connectionId)
+        public HubConnections GetConnections()
         {
-            // Get the console running the game.
-            if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
+            return new HubConnections()
             {
-                ConnectionIds.Remove(console, out _);
-                Consoles.Remove(connectionId, out _);
-            }
-
-            // Run the update notifications.
-            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+                AdminHubConnections = adminHubConnections.GetAll(),
+                ChatHubConnections = chatHubConnections.GetAll(),
+                GameHubConnections = gameHubConnections.GetAll(),
+                ServiceHubConnections = serviceHubConnections.GetAll(),
+                SpectatorsHubConnections = spectatorsHubConnections.GetAll()
+            };
         }
 
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void SpectatorDisconnected(string connectionId)
+        public ActiveUserDetails[] GetChatUsers()
         {
-
+            return ChatRecipients.Select(_connectionIdAndChatRecipient => new ActiveUserDetails()
+            {
+                Username = _connectionIdAndChatRecipient.Value.Username,
+                ConnectionId = _connectionIdAndChatRecipient.Key,
+                DateTime = _connectionIdAndChatRecipient.Value.DateTime
+            }).ToArray();
         }
 
         public ActiveGameDetails[] GetActiveGames()
@@ -304,7 +422,7 @@ namespace AngbandOS.Web.Hubs
             SignalRConsole console = (SignalRConsole)sender;
             string connectionId = ConnectionIds[console];
 
-            GameDisconnectedAsync(connectionId);
+            GameHubDisconnectedAsync(connectionId);
         }
 
         /// <summary>

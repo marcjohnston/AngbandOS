@@ -72,16 +72,17 @@ namespace AngbandOS.Web.Hubs
             ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
             string customRoleClaimType = Configuration["CustomRoleClaimType"];
             if (Context.User.HasClaim(customRoleClaimType, "administrator"))
-                GameService.ChatConnected(Context.ConnectionId, new AdministatorChatRecipient(chatHub, appUser.Id));
+                GameService.ChatConnected(Context.ConnectionId, new AdministatorChatRecipient(chatHub, appUser.Id, appUser.UserName));
             else
-                GameService.ChatConnected(Context.ConnectionId, new UserChatRecipient(chatHub, appUser.Id));
-
+                GameService.ChatConnected(Context.ConnectionId, new UserChatRecipient(chatHub, appUser.Id, appUser.UserName));
+            GameService.ChatHubConnected(Context.ConnectionId, appUser.UserName);
             await base.OnConnectedAsync();
         }
 
         public async override Task OnDisconnectedAsync(Exception? exception)
         {
             GameService.ChatDisconnected(Context.ConnectionId);
+            GameService.ChatHubDisconnected(Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
     }

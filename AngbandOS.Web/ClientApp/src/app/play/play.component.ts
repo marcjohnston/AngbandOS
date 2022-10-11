@@ -22,6 +22,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
   private _htmlConsole: HtmlConsole | undefined = undefined;
+  private _accessToken: string | undefined = undefined;
 
   constructor(
     private _router: Router,
@@ -155,18 +156,24 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       // Wait for the authentication.  Games can only be played with authenticated.
       this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
-        if (_currentUser !== null) {
+        if (_currentUser === null) {
+          this._accessToken = undefined;
+        } else {
           // Get the access token for this user.  We need it for the signal-r hub authorization.
-          const accessToken = _currentUser.jwt;
+          this._accessToken = _currentUser.jwt;
+        }
 
-          // Ensure there is an access token and that the connection has been established already.
-          if (accessToken !== null && accessToken !== undefined && this.connection == undefined) {
-            // Create the signal-r connection object.
-            this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
-              accessTokenFactory: () => accessToken,
-            }).build();
-            this.check();
-          }
+        if (this.connection !== undefined) {
+          this.connection.stop();
+        }
+
+        // Ensure there is an access token and that the connection has been established already.
+        if (this._accessToken !== undefined) {
+          // Create the signal-r connection object.
+          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+            accessTokenFactory: () => this._accessToken as string,
+          }).build();
+          this.check();
         }
       }));
 

@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(x =>
             var path = context.HttpContext.Request.Path;
 
             // If the request is for our hub...
-            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/apiv1/chat-hub") || path.StartsWithSegments("/apiv1/service-hub") || path.StartsWithSegments("/apiv1/game-hub") || path.StartsWithSegments("/apiv1/spectators-hub")))
+            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/apiv1/chat-hub") || path.StartsWithSegments("/apiv1/service-hub") || path.StartsWithSegments("/apiv1/game-hub") || path.StartsWithSegments("/apiv1/spectators-hub") || path.StartsWithSegments("/apiv1/admin-hub")))
             {
                 // Read the token out of the query string
                 context.Token = token;
@@ -121,6 +121,7 @@ app.MapHub<GameHub>("/apiv1/game-hub"); // Processes actual game play
 app.MapHub<ServiceHub>("/apiv1/service-hub"); // Processes active game list
 app.MapHub<SpectatorsHub>("/apiv1/spectators-hub"); // Processes spectating games
 app.MapHub<ChatHub>("/apiv1/chat-hub"); // Processes the chat messaging system
+app.MapHub<AdminHub>("/apiv1/admin-hub"); // Processes the chat messaging system
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

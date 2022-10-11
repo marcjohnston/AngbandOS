@@ -151,7 +151,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.PlaySound(sound);
 
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
+            foreach (ISpectatorsHub gameHub in _spectators)
               gameHub.PlaySound(sound);
         }
 

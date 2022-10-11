@@ -1,13 +1,9 @@
 <div id="container">
   <div id="horizontal-panes">
     <div id="left-pane"></div>
-    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)">
+    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}}\nGame Guid: {{gameGuid}}">
       <canvas #console></canvas>
     </div>
     <div id="right-pane"></div>
-  </div>
-  <div id="footer">
-    ConnectionId: {{connectionId}} | Game Guid: {{gameGuid}}<br />
-    AngbandOS v0.1
   </div>
 </div>

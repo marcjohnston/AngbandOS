@@ -10,10 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { ActiveGameDetails } from './active-game-details';
 
-export class PostNewGame {
-  public username: string = "";
-}
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -28,7 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
   public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level", "actions"];
+  public activeUsersDisplayedColumns: string[] = ["username", "connectionId", "actions"];
   public selectedActiveGame: ActiveGameDetails | null = null;
+  public selectedActiveUser: UserDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
   private _initSubscriptions = new Subscription();

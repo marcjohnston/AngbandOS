@@ -14,6 +14,7 @@ import { ChatMessage } from './chat-message';
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollDiv', { static: true }) private scrollDivRef: ElementRef | undefined;
   private chatConnection: SignalR.HubConnection | undefined;
+  private serviceConnection: SignalR.HubConnection | undefined;
   public history: ChatMessage[] | undefined;
   private subscriptions = new Subscription();
   public isAuthenticated: boolean = false;
@@ -74,31 +75,34 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
-  private connectChat() {
-    // If we are already connected to a hub, stop the service.
-    if (this.chatConnection !== undefined) {
-      this.chatConnection.stop();
-    }
+  private connectServiceHub() {
+    this.serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
+    this.serviceConnection.start().then(() => {
+      this.connectionId = `Service: ${this.serviceConnection?.connectionId!}`;
+      if (this.serviceConnection !== undefined) {
+        this.serviceConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
+          this._ngZone.run(() => {
+            this.history = _history;
+            this.scrollToBottomOfChatAfterViewChecked = true;
+          })
+        });
+        this.serviceConnection.on("ChatUpdated", (_message: ChatMessage) => {
+          this._ngZone.run(() => {
+            this.history?.push(_message);
+            this.scrollToBottomOfChatAfterViewChecked = true;
+          })
+        });
+        this.serviceConnection.send("RefreshChat", null);
+      }
+    });
+  }
 
-    // Check to see if we are authenticated.
-    if (this._authenticationService.currentUser.value == null || this._authenticationService.currentUser.value?.jwt === undefined) {
-      // Connect to the anonymous service-hub.
-      this.isAuthenticated = false;
-      this.chatConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
-    } else {
-      // Connect to the authorized chat-hub.
-      this.isAuthenticated = true;
-      this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
-      const accessToken = this._authenticationService.currentUser.value.jwt;
-      this.chatConnection = new SignalR.HubConnectionBuilder()
-        .withUrl("/apiv1/chat-hub", {
-          accessTokenFactory: () => accessToken
-        }).build();
-    }
-    this.history = undefined;
-
+  private connectChatHub(accessToken: string) {
+    this.chatConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/chat-hub", {
+      accessTokenFactory: () => accessToken
+    }).build();
     this.chatConnection.start().then(() => {
-      this.connectionId = this.chatConnection?.connectionId!;
+      this.connectionId = `Chat: ${this.chatConnection?.connectionId!}`;
       if (this.chatConnection !== undefined) {
         this.chatConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
           this._ngZone.run(() => {
@@ -124,20 +128,49 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
   }
 
+  private handleAuthenticationChange() {
+    this.disconnectChatHub();
+    this.disconnectServiceHub();
+
+    // Check to see if we are authenticated.
+    if (this._authenticationService.currentUser.value == null || this._authenticationService.currentUser.value?.jwt === undefined) {
+      // Connect to the anonymous service-hub.
+      this.isAuthenticated = false;
+      this.connectServiceHub();
+    } else {
+      this.isAuthenticated = true;
+      this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
+      const accessToken = this._authenticationService.currentUser.value.jwt;
+      this.connectChatHub(accessToken);
+    }
+  }
+
   ngOnInit(): void {
     this.subscriptions.add(this._authenticationService.currentUser.subscribe((_user: UserDetails | null) => {
-      // Connect to the applicable hub for the chat history.
-      this.connectChat();
+      this.handleAuthenticationChange();
     }));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+  private disconnectServiceHub() {
+    if (this.serviceConnection !== undefined) {
+      this.serviceConnection.off("ChatUpdated");
+      this.serviceConnection.off("ChatRefreshed");
+      this.serviceConnection.stop();
+    }
+  }
+
+  private disconnectChatHub() {
     if (this.chatConnection !== undefined) {
       this.chatConnection.off("ChatUpdated");
       this.chatConnection.off("MessageFailed");
       this.chatConnection.off("ChatRefreshed");
       this.chatConnection.stop();
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+    this.disconnectServiceHub();
+    this.disconnectChatHub();
   }
 }

@@ -7,7 +7,7 @@ namespace AngbandOS.Web.Hubs
     {
         private readonly IServiceHub ServiceHub;
 
-        public AnonymousChatRecipient(IServiceHub serviceHub)
+        public AnonymousChatRecipient(IServiceHub serviceHub) : base("Anonymous")
         {
             ServiceHub = serviceHub;
         }
