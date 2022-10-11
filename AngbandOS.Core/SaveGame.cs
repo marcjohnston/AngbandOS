@@ -94,9 +94,6 @@ namespace AngbandOS
         [NonSerialized]
         private IConsole _console;
 
-        [NonSerialized]
-        public Dictionary<Colour, Color> ColorData;
-
         public int CommandArgument;
         public int CommandDirection;
         public char CurrentCommand;
@@ -161,43 +158,6 @@ namespace AngbandOS
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
-        }
-
-        private void InitializeColorData()
-        {
-            ColorData = new Dictionary<Colour, Color>();
-            ColorData.Add(Colour.Background, Color.Black);
-            ColorData.Add(Colour.Black, Color.DarkSlateGray);
-            ColorData.Add(Colour.Grey, Color.DimGray);
-            ColorData.Add(Colour.BrightGrey, Color.DarkGray);
-            ColorData.Add(Colour.Silver, Color.LightSlateGray);
-            ColorData.Add(Colour.Beige, Color.Moccasin);
-            ColorData.Add(Colour.BrightBeige, Color.Beige);
-            ColorData.Add(Colour.White, Color.LightGray);
-            ColorData.Add(Colour.BrightWhite, Color.White);
-            ColorData.Add(Colour.Red, Color.DarkRed);
-            ColorData.Add(Colour.BrightRed, Color.Red);
-            ColorData.Add(Colour.Copper, Color.Chocolate);
-            ColorData.Add(Colour.Orange, Color.OrangeRed);
-            ColorData.Add(Colour.BrightOrange, Color.Orange);
-            ColorData.Add(Colour.Brown, Color.SaddleBrown);
-            ColorData.Add(Colour.BrightBrown, Color.BurlyWood);
-            ColorData.Add(Colour.Gold, Color.Gold);
-            ColorData.Add(Colour.Yellow, Color.Khaki);
-            ColorData.Add(Colour.BrightYellow, Color.Yellow);
-            ColorData.Add(Colour.Chartreuse, Color.YellowGreen);
-            ColorData.Add(Colour.BrightChartreuse, Color.Chartreuse);
-            ColorData.Add(Colour.Green, Color.DarkGreen);
-            ColorData.Add(Colour.BrightGreen, Color.LimeGreen);
-            ColorData.Add(Colour.Turquoise, Color.DarkTurquoise);
-            ColorData.Add(Colour.BrightTurquoise, Color.Cyan);
-            ColorData.Add(Colour.Blue, Color.MediumBlue);
-            ColorData.Add(Colour.BrightBlue, Color.DeepSkyBlue);
-            ColorData.Add(Colour.Diamond, Color.LightCyan);
-            ColorData.Add(Colour.Purple, Color.Purple);
-            ColorData.Add(Colour.BrightPurple, Color.Violet);
-            ColorData.Add(Colour.Pink, Color.DeepPink);
-            ColorData.Add(Colour.BrightPink, Color.HotPink);
         }
 
         public void Quit(string reason)
@@ -1178,7 +1138,6 @@ namespace AngbandOS
             UpdateNotifier = updateNotification;
             InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
             MapMovementKeys();
-            InitializeColorData();
 
             FullScreenOverlay = true;
             SetBackground(BackgroundImage.Normal);
