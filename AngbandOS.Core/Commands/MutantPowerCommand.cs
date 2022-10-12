@@ -252,7 +252,7 @@ namespace AngbandOS.Commands
                         int y = 1, x = 13;
                         int ctr = 0;
                         redraw = true;
-                        saveGame.Save();
+                        saveGame.SaveScreen();
                         saveGame.PrintLine("", y++, x);
                         while (ctr < num)
                         {

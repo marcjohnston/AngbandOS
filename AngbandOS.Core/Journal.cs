@@ -29,7 +29,7 @@ namespace AngbandOS
         public void ShowMenu()
         {
             SaveGame.FullScreenOverlay = true;
-            SaveGame.Save();
+            SaveGame.SaveScreen();
             SaveGame.SetBackground(BackgroundImage.Paper);
             while (true)
             {

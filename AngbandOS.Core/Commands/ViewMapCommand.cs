@@ -21,7 +21,7 @@ namespace AngbandOS.Commands
             int cy = -1;
             int cx = -1;
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.Clear();
             // If we're on the surface, display the island map
             if (saveGame.CurrentDepth == 0)

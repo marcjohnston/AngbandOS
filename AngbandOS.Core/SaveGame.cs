@@ -676,7 +676,7 @@ namespace AngbandOS
             }
             if (ViewingItemList)
             {
-                Save();
+                SaveScreen();
             }
             while (!done)
             {
@@ -757,7 +757,7 @@ namespace AngbandOS
                         {
                             if (!ViewingItemList)
                             {
-                                Save();
+                                SaveScreen();
                                 ViewingItemList = true;
                             }
                             else
@@ -776,7 +776,7 @@ namespace AngbandOS
                             if (ViewingItemList)
                             {
                                 Load();
-                                Save();
+                                SaveScreen();
                             }
                             ViewingEquipment = !ViewingEquipment;
                             break;
@@ -5493,7 +5493,7 @@ namespace AngbandOS
                 info2[i] = ReportMagicsAux(Player.TimedPoisonResistance);
                 info[i++] = "You are resistant to poison";
             }
-            Save();
+            SaveScreen();
             for (k = 1; k < 24; k++)
             {
                 PrintLine("", k, 13);
@@ -6166,7 +6166,7 @@ namespace AngbandOS
                     info[i++] = "Your weapon is a great bane of dragons.";
                 }
             }
-            Save();
+            SaveScreen();
             for (k = 1; k < 24; k++)
             {
                 PrintLine("", k, 13);
@@ -19965,7 +19965,7 @@ namespace AngbandOS
         /// <summary>
         /// Save the screen to memory for later re-loading
         /// </summary>
-        public void Save()
+        public void SaveScreen()
         {
             int w = Width;
             int h = Height;

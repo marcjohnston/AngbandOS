@@ -29,7 +29,7 @@ namespace AngbandOS.StoreCommands
             int index = 0;
             int horizontalOffset = 0;
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
             while (true)

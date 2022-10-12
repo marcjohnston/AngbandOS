@@ -18,7 +18,7 @@ namespace AngbandOS.Commands
         public void Execute(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.UpdateScreen();
             saveGame.Clear();
             saveGame.SetBackground(BackgroundImage.Normal);

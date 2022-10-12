@@ -27,7 +27,7 @@ namespace AngbandOS.StoreCommands
         {
             // We're viewing equipment
             saveGame.ViewingEquipment = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             // We're interested in seeing everything
             saveGame.ItemFilterAll = true;
             saveGame.Player.Inventory.ShowEquip();

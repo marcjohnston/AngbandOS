@@ -82,7 +82,7 @@ namespace AngbandOS.Commands
                     if (!redraw)
                     {
                         redraw = true;
-                        saveGame.Save();
+                        saveGame.SaveScreen();
                         player.PrintSpells(spells, num, 1, 20, useRealm);
                     }
                     else
@@ -352,7 +352,7 @@ namespace AngbandOS.Commands
                     if (!redraw)
                     {
                         redraw = true;
-                        saveGame.Save();
+                        saveGame.SaveScreen();
                         saveGame.PrintLine("", y, x);
                         saveGame.Print("Name", y, x + 5);
                         saveGame.Print("Lv Mana Fail Info", y, x + 35);

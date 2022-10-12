@@ -13,7 +13,7 @@ namespace AngbandOS.StoreCommands
 
         public void Execute(SaveGame saveGame, Store store)
         {
-            saveGame.Save();
+            saveGame.SaveScreen();
             //Program.HiScores.RaceFilter = saveGame.Player.RaceIndex;
             //Program.HiScores.DisplayScores(new HighScore(saveGame));
             //Program.HiScores.RaceFilter = -1;

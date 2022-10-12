@@ -560,7 +560,7 @@ namespace AngbandOS
                         {
                             if (recall)
                             {
-                                SaveGame.Save();
+                                SaveGame.SaveScreen();
                                 rPtr.Knowledge.Display();
                                 SaveGame.Print(Colour.White, $"  [r,{info}]", -1);
                                 query = SaveGame.Inkey();

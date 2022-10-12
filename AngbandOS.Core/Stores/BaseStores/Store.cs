@@ -525,7 +525,7 @@ namespace AngbandOS
                     spells[num++] = spell;
                 }
             }
-            SaveGame.Save();
+            SaveGame.SaveScreen();
             SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseCategory.SpellBookToToRealm);
             SaveGame.PrintLine("", 0, 0);
             SaveGame.Print("[Press any key to continue]", 0, 23);
@@ -535,7 +535,7 @@ namespace AngbandOS
 
         private Town GetEscortDestination(Dictionary<char, Town> towns)
         {
-            SaveGame.Save();
+            SaveGame.SaveScreen();
             var keys = towns.Keys.ToList();
             keys.Sort();
             string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
@@ -562,7 +562,7 @@ namespace AngbandOS
 
         private GodName GetSacrificeTarget()
         {
-            SaveGame.Save();
+            SaveGame.SaveScreen();
             var deities = _player.Religion.GetAllDeities();
             var names = new List<string>();
             var keys = new List<char>();

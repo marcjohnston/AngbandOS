@@ -27,7 +27,7 @@ namespace AngbandOS.StoreCommands
         {
             // Save the current screen
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(saveGame, saveGame.Player);

@@ -14,7 +14,7 @@ namespace AngbandOS.StoreCommands
 
         public void Execute(SaveGame saveGame, Store store)
         {
-            saveGame.Save();
+            saveGame.SaveScreen();
             //Program.HiScores.ClassFilter = saveGame.Player.ProfessionIndex;
             //Program.HiScores.DisplayScores(new HighScore(saveGame));
             //Program.HiScores.ClassFilter = -1;

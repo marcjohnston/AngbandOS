@@ -220,7 +220,7 @@ namespace AngbandOS.Commands
         private void DoCmdWizActivatePower(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Normal);
 
             saveGame.Clear();
@@ -405,7 +405,7 @@ namespace AngbandOS.Commands
         private void DoCmdWizHelp(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.UpdateScreen();
             saveGame.Clear();
             saveGame.SetBackground(BackgroundImage.Normal);
@@ -550,7 +550,7 @@ namespace AngbandOS.Commands
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             bool changed;
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             Item qPtr = new Item(saveGame, oPtr);
             while (true)
             {
@@ -654,7 +654,7 @@ namespace AngbandOS.Commands
         private void WizCreateItem(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Normal);
             int kIdx = WizCreateItemtype(saveGame);
             saveGame.Load();

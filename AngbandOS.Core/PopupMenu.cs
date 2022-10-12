@@ -102,7 +102,7 @@ namespace AngbandOS.Core
         {
             saveGame.InPopupMenu = true;
             saveGame.FullScreenOverlay = true;
-            saveGame.Save();
+            saveGame.SaveScreen();
             var result = DisplayMenu(saveGame);
             saveGame.Load();
             saveGame.InPopupMenu = false;

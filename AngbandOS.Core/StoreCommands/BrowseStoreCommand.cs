@@ -66,7 +66,7 @@ namespace AngbandOS.StoreCommands
                 }
             }
             // Save the screen and overprint the spells in the book
-            saveGame.Save();
+            saveGame.SaveScreen();
             saveGame.Player.PrintSpells(spells, spellIndex, 1, 20, item.ItemType.BaseCategory.SpellBookToToRealm);
             saveGame.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen

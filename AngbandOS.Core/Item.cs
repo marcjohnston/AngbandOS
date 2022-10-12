@@ -2109,7 +2109,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            SaveGame.Save();
+            SaveGame.SaveScreen();
             for (k = 1; k < 24; k++)
             {
                 SaveGame.PrintLine("", k, 13);
