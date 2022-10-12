@@ -81,7 +81,6 @@
     <Folder Include="Data\BaseAmuletFlavours\" />
     <Folder Include="Data\BaseMushroomFlavours\" />
     <Folder Include="Data\BaseProjectileGraphics\" />
-    <Folder Include="UI\" />
   </ItemGroup>
 
 </Project>
