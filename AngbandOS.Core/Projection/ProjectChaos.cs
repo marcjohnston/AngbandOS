@@ -15,10 +15,13 @@ namespace AngbandOS.Projection
     {
         public ProjectChaos(SaveGame saveGame) : base(saveGame)
         {
-            BoltGraphic = "PurpleBullet";
-            ImpactGraphic = "PurpleSplat";
-            EffectAnimation = "PinkPurpleFlash";
         }
+
+        protected override string BoltGraphic => "PurpleBullet";
+
+        protected override string ImpactGraphic => "PurpleSplat";
+
+        protected override string EffectAnimation => "PinkPurpleFlash";
 
         protected override bool AffectFloor(int y, int x)
         {
@@ -27,7 +30,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectItem(int who, int y, int x)
         {
-            GridTile cPtr = Level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             int nextOIdx;
             bool obvious = false;
             FlagSet f1 = new FlagSet();
@@ -39,7 +42,7 @@ namespace AngbandOS.Projection
                 bool isArt = false;
                 bool ignore = false;
                 bool plural = false;
-                Item oPtr = Level.Items[thisOIdx];
+                Item oPtr = SaveGame.Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
                 oPtr.GetMergedFlags(f1, f2, f3);
                 if (oPtr.Count > 1)
@@ -76,12 +79,12 @@ namespace AngbandOS.Projection
                     }
                     int oSval = oPtr.ItemSubCategory;
                     bool isPotion = oPtr.ItemType.Category == ItemCategory.Potion;
-                    Level.DeleteObjectIdx(thisOIdx);
+                    SaveGame.Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
                         SaveGame.PotionSmashEffect(who, y, x, oSval);
                     }
-                    Level.RedrawSingleLocation(y, x);
+                    SaveGame.Level.RedrawSingleLocation(y, x);
                 }
             }
             return obvious;
@@ -90,8 +93,8 @@ namespace AngbandOS.Projection
         protected override bool AffectMonster(int who, int r, int y, int x, int dam)
         {
             int tmp;
-            GridTile cPtr = Level.Grid[y][x];
-            Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
+            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
@@ -167,10 +170,10 @@ namespace AngbandOS.Projection
                 {
                     note = " changes!";
                     dam = 0;
-                    Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     MonsterRace race = SaveGame.MonsterRaces[tmp];
-                    Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
-                    mPtr = Level.Monsters[cPtr.MonsterIndex];
+                    SaveGame.Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
+                    mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                 }
             }
             else if (doConf != 0 && (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) == 0 &&
@@ -192,7 +195,7 @@ namespace AngbandOS.Projection
             {
                 if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
                 {
-                    Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                    SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
                 }
                 mPtr.SleepLevel = 0;
                 mPtr.Health -= dam;
@@ -200,7 +203,7 @@ namespace AngbandOS.Projection
                 {
                     bool sad = (mPtr.Mind & Constants.SmFriendly) != 0 && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
                         SaveGame.MsgPrint($"{mName}{note}");
@@ -218,13 +221,13 @@ namespace AngbandOS.Projection
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                 }
             }
             else
             {
-                if (Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
                 {
                 }
                 else
@@ -235,7 +238,7 @@ namespace AngbandOS.Projection
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                     if (fear && mPtr.IsVisible)
                     {
@@ -244,8 +247,8 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            Level.RedrawSingleLocation(y, x);
+            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            SaveGame.Level.RedrawSingleLocation(y, x);
             ProjectMn++;
             ProjectMx = x;
             ProjectMy = y;
@@ -254,9 +257,9 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness != 0;
             bool fuzzy = false;
-            if (x != Player.MapX || y != Player.MapY)
+            if (x != SaveGame.Player.MapX || y != SaveGame.Player.MapY)
             {
                 return false;
             }
@@ -264,7 +267,7 @@ namespace AngbandOS.Projection
             {
                 return false;
             }
-            if (Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
+            if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
                 int tY;
                 int tX;
@@ -272,14 +275,14 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
-                    tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
-                    tX = Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
+                    tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
+                    tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
                     maxAttempts--;
-                } while (maxAttempts > 0 && Level.InBounds2(tY, tX) && !Level.PlayerHasLosBold(tY, tX));
+                } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
                 if (maxAttempts < 1)
                 {
-                    tY = Level.Monsters[who].MapY;
-                    tX = Level.Monsters[who].MapX;
+                    tY = SaveGame.Level.Monsters[who].MapY;
+                    tX = SaveGame.Level.Monsters[who].MapX;
                 }
                 Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
                 SaveGame.Disturb(true);
@@ -294,57 +297,57 @@ namespace AngbandOS.Projection
             {
                 fuzzy = true;
             }
-            Monster mPtr = Level.Monsters[who];
+            Monster mPtr = SaveGame.Level.Monsters[who];
             string killer = mPtr.MonsterDesc(0x88);
             if (fuzzy)
             {
                 SaveGame.MsgPrint("You are hit by a wave of anarchy!");
             }
-            if (Player.HasChaosResistance)
+            if (SaveGame.Player.HasChaosResistance)
             {
                 dam *= 6;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            if (!Player.HasConfusionResistance)
+            if (!SaveGame.Player.HasConfusionResistance)
             {
-                Player.SetTimedConfusion(Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 10);
+                SaveGame.Player.SetTimedConfusion(SaveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 10);
             }
-            if (!Player.HasChaosResistance)
+            if (!SaveGame.Player.HasChaosResistance)
             {
-                Player.SetTimedHallucinations(Player.TimedHallucinations + Program.Rng.DieRoll(10));
+                SaveGame.Player.SetTimedHallucinations(SaveGame.Player.TimedHallucinations + Program.Rng.DieRoll(10));
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     SaveGame.MsgPrint("Your body is twisted by chaos!");
-                    Player.Dna.GainMutation(SaveGame);
+                    SaveGame.Player.Dna.GainMutation(SaveGame);
                 }
             }
-            if (!Player.HasNetherResistance && !Player.HasChaosResistance)
+            if (!SaveGame.Player.HasNetherResistance && !SaveGame.Player.HasChaosResistance)
             {
-                if (Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
+                if (SaveGame.Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
                 {
                     SaveGame.MsgPrint("You keep hold of your life force!");
                 }
-                else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                else if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
                     SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
-                else if (Player.HasHoldLife)
+                else if (SaveGame.Player.HasHoldLife)
                 {
                     SaveGame.MsgPrint("You feel your life slipping away!");
-                    Player.LoseExperience(500 + (Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
+                    SaveGame.Player.LoseExperience(500 + (SaveGame.Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
                 }
                 else
                 {
                     SaveGame.MsgPrint("You feel your life draining away!");
-                    Player.LoseExperience(5000 + (Player.ExperiencePoints / 100 * Constants.MonDrainLife));
+                    SaveGame.Player.LoseExperience(5000 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                 }
             }
-            if (!Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
+            if (!SaveGame.Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
             {
-                Player.Inventory.InvenDamage(SaveGame.SetElecDestroy, 2);
-                Player.Inventory.InvenDamage(SaveGame.SetFireDestroy, 2);
+                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetElecDestroy, 2);
+                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetFireDestroy, 2);
             }
-            Player.TakeHit(dam, killer);
+            SaveGame.Player.TakeHit(dam, killer);
             SaveGame.Disturb(true);
             return true;
         }

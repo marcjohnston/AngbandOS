@@ -20206,8 +20206,8 @@ namespace AngbandOS
         /// <summary>
         /// Graphics for projectiles
         /// </summary>
-        [NonSerialized]
-        public Dictionary<string, ProjectileGraphic> BaseProjectileGraphics;
+        //[NonSerialized]
+        //public Dictionary<string, ProjectileGraphic> BaseProjectileGraphics;
 
         //[NonSerialized]
         //public Dictionary<string, RingFlavour> BaseRingFlavours;
@@ -20236,7 +20236,7 @@ namespace AngbandOS
             BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
             BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
             BaseAnimations = ReadEntitiesFromCsv(new Animation());
-            BaseProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic());
+            //BaseProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic(), "BaseProjectileGraphic");
             //BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour(), "BaseAmuletFlavour");
             //BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour(), "BaseMushroomFlavour");
             //BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour(), "BasePotionFlavour");
@@ -20449,6 +20449,14 @@ namespace AngbandOS
                     ////string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
                     //string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
                     //className = className.Replace("-", "") + "WandFlavor";
+                    try
+                    {
+                        File.Delete($"{path}{Path.DirectorySeparatorChar}{className}.cs");
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                     File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
                 }
             }

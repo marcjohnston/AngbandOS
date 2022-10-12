@@ -88,6 +88,6 @@ namespace AngbandOS.Stores
                     return false;
             }
         }
-        protected override IStoreCommand AdvertisedStoreCommand4 => new EnchantWeaponStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand4 => new EnchantArmorStoreCommand();
     }
 }

@@ -213,16 +213,16 @@ namespace AngbandOS
             return val.ToString().PadLeft(6);
         }
 
-        /// <summary>
-        /// Strips characters from a string that would clash with viewing the string as
-        /// comma-separated text
-        /// </summary>
-        /// <param name="s"> The original string </param>
-        /// <returns> The csv-file friendly version of the string </returns>
-        public static string ToCsvFriendly(this string s)
-        {
-            return s.Replace('"', '£').Replace(',', '§');
-        }
+        ///// <summary>
+        ///// Strips characters from a string that would clash with viewing the string as
+        ///// comma-separated text
+        ///// </summary>
+        ///// <param name="s"> The original string </param>
+        ///// <returns> The csv-file friendly version of the string </returns>
+        //public static string ToCsvFriendly(this string s)
+        //{
+        //    return s.Replace('"', '£').Replace(',', '§');
+        //}
 
         /// <summary>
         /// Try to parse the string to an integer, returning 0 rather than an error if it can't be parsed

@@ -15,10 +15,11 @@ namespace AngbandOS.Projection
     {
         public ProjectDispDemon(SaveGame saveGame) : base(saveGame)
         {
-            BoltGraphic = "BrightRedSplat";
-            ImpactGraphic = "";
-            EffectAnimation = "BrightRedExpand";
         }
+
+        protected override string BoltGraphic => "BrightRedSplat";
+
+        protected override string EffectAnimation => "BrightRedExpand";
 
         protected override bool AffectFloor(int y, int x)
         {
@@ -32,8 +33,8 @@ namespace AngbandOS.Projection
 
         protected override bool AffectMonster(int who, int r, int y, int x, int dam)
         {
-            GridTile cPtr = Level.Grid[y][x];
-            Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
+            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
@@ -97,7 +98,7 @@ namespace AngbandOS.Projection
             {
                 if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
                 {
-                    Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                    SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
                 }
                 mPtr.SleepLevel = 0;
                 mPtr.Health -= dam;
@@ -105,7 +106,7 @@ namespace AngbandOS.Projection
                 {
                     bool sad = (mPtr.Mind & Constants.SmFriendly) != 0 && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
                         SaveGame.MsgPrint($"{mName}{note}");
@@ -123,13 +124,13 @@ namespace AngbandOS.Projection
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                 }
             }
             else
             {
-                if (Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
                 {
                 }
                 else
@@ -140,7 +141,7 @@ namespace AngbandOS.Projection
                     }
                     else if (dam > 0)
                     {
-                        Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
                     }
                     if (fear && mPtr.IsVisible)
                     {
@@ -149,8 +150,8 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            Level.RedrawSingleLocation(y, x);
+            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            SaveGame.Level.RedrawSingleLocation(y, x);
             ProjectMn++;
             ProjectMx = x;
             ProjectMy = y;
@@ -159,8 +160,8 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = Player.TimedBlindness != 0;
-            if (x != Player.MapX || y != Player.MapY)
+            bool blind = SaveGame.Player.TimedBlindness != 0;
+            if (x != SaveGame.Player.MapX || y != SaveGame.Player.MapY)
             {
                 return false;
             }
@@ -168,7 +169,7 @@ namespace AngbandOS.Projection
             {
                 return false;
             }
-            if (Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
+            if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
                 int tY;
                 int tX;
@@ -176,14 +177,14 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
-                    tY = Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
-                    tX = Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
+                    tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
+                    tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
                     maxAttempts--;
-                } while (maxAttempts > 0 && Level.InBounds2(tY, tX) && !Level.PlayerHasLosBold(tY, tX));
+                } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
                 if (maxAttempts < 1)
                 {
-                    tY = Level.Monsters[who].MapY;
-                    tX = Level.Monsters[who].MapX;
+                    tY = SaveGame.Level.Monsters[who].MapY;
+                    tX = SaveGame.Level.Monsters[who].MapX;
                 }
                 Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
                 SaveGame.Disturb(true);

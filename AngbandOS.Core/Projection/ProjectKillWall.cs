@@ -15,10 +15,11 @@ namespace AngbandOS.Projection
     {
         public ProjectKillWall(SaveGame saveGame) : base(saveGame)
         {
-            BoltGraphic = "";
-            ImpactGraphic = "";
-            EffectAnimation = "BrownSwirl";
         }
+
+        protected override string BoltGraphic => "";
+
+        protected override string EffectAnimation => "BrownSwirl";
 
         protected override bool AffectFloor(int y, int x)
         {

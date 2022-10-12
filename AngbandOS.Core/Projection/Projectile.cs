@@ -5,6 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Commands;
+using AngbandOS.Core;
 using AngbandOS.Enumerations;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
@@ -14,11 +16,6 @@ namespace AngbandOS.Projection
     internal abstract class Projectile
     {
         protected readonly SaveGame SaveGame;
-        protected readonly Level Level; // TODO: Should be deleted.
-        protected readonly Player Player; // TODO: Should be deleted.
-        protected string BoltGraphic = "WhiteBolt";
-        protected string EffectAnimation = string.Empty;
-        protected string ImpactGraphic = "WhiteSplat";
         protected int ProjectMn;
         protected int ProjectMx;
         protected int ProjectMy;
@@ -26,9 +23,13 @@ namespace AngbandOS.Projection
         public Projectile(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            Level = SaveGame.Level;
-            Player = SaveGame.Player;
         }
+
+        protected abstract string BoltGraphic { get; }
+
+        protected virtual string EffectAnimation { get; } = "";
+
+        protected virtual string ImpactGraphic { get; } = "";
 
         /// <summary>
         /// Returns true, if the projectile actally hits and affects a monster.
@@ -56,8 +57,8 @@ namespace AngbandOS.Projection
             int[] gy = new int[256];
             int[] gm = new int[32];
             int gmRad = rad;
-            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : SaveGame.BaseProjectileGraphics[BoltGraphic];
-            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : SaveGame.BaseProjectileGraphics[ImpactGraphic];
+            BaseProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : CommandManager.BaseProjectileGraphics[BoltGraphic];
+            BaseProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : CommandManager.BaseProjectileGraphics[ImpactGraphic];
             Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : SaveGame.BaseAnimations[EffectAnimation];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
@@ -452,13 +453,6 @@ namespace AngbandOS.Projection
                 }
             }
             return notice;
-        }
-
-        public void OverrideGraphics(string boltGraphic, string impactGraphic, string effectAnimation)
-        {
-            BoltGraphic = boltGraphic;
-            ImpactGraphic = impactGraphic;
-            EffectAnimation = effectAnimation;
         }
 
         protected abstract bool AffectFloor(int y, int x);

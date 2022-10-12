@@ -15,10 +15,11 @@ namespace AngbandOS.Projection
     {
         public ProjectIce(SaveGame saveGame) : base(saveGame)
         {
-            BoltGraphic = "DiamondBolt";
-            ImpactGraphic = "DiamondSplat";
-            EffectAnimation = "";
         }
+
+        protected override string BoltGraphic => "DiamondBolt";
+
+        protected override string ImpactGraphic => "DiamondSplat";
 
         protected override bool AffectFloor(int y, int x)
         {

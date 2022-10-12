@@ -5,32 +5,26 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Debug;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-using System.Reflection;
+using AngbandOS.Core.Interface;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core
 {
-    /// <summary>
-    /// Singleton class containing objects loaded from an embedded resource
-    /// </summary>
     [Serializable]
-    internal sealed class StaticResources
+    internal abstract class BaseProjectileGraphic
     {
-        public StaticResources()
-        {
-
-        }
+        /// <summary>
+        /// The column from which to take the graphical tile.
+        /// </summary>
+        public abstract char Character { get; }
 
         /// <summary>
-        /// The singleton instance
+        /// The row from which to take the graphical tile
         /// </summary>
-        public static StaticResources Instance
-        {
-            get;
-            private set;
-        }
+        public virtual Colour Colour => Colour.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
 
+        /// <summary>
+        /// A unique identifier for the entity.  
+        /// </summary>
+        public abstract string Name { get; } // TODO: Are we actually using this?
     }
 }

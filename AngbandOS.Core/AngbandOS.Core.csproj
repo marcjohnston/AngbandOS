@@ -24,6 +24,7 @@
     <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
     <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
+    <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
     <None Remove="Data\ScaffoldTemplates\BaseRingFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseRodFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseScrollFlavour.template" />
@@ -48,6 +49,7 @@
     <EmbeddedResource Include="Data\ProjectileGraphics.csv" />
     <EmbeddedResource Include="Data\RingFlavours.csv" />
     <EmbeddedResource Include="Data\RodFlavours.csv" />
+    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseRingFlavour.template" />
@@ -78,6 +80,7 @@
     <Folder Include="Data\BasePotionFlavours\" />
     <Folder Include="Data\BaseAmuletFlavours\" />
     <Folder Include="Data\BaseMushroomFlavours\" />
+    <Folder Include="Data\BaseProjectileGraphics\" />
     <Folder Include="UI\" />
   </ItemGroup>
 

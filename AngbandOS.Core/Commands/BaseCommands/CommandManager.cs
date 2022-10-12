@@ -17,6 +17,7 @@ namespace AngbandOS.Commands
         public static List<BaseScrollFlavour> BaseScrollFlavours = new List<BaseScrollFlavour>();
         public static List<BaseStaffFlavour> BaseStaffFlavours = new List<BaseStaffFlavour>();
         public static List<BaseWandFlavour> BaseWandFlavours = new List<BaseWandFlavour>();
+        public static Dictionary<string, BaseProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, BaseProjectileGraphic>();
 
         static CommandManager()
         {
@@ -101,6 +102,14 @@ namespace AngbandOS.Commands
                     // Load the command.
                     BaseWandFlavour wandFlavour = (BaseWandFlavour)Activator.CreateInstance(type);
                     BaseWandFlavours.Add(wandFlavour);
+                }
+
+                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                if (!type.IsAbstract && typeof(BaseProjectileGraphic).IsAssignableFrom(type))
+                {
+                    // Load the command.
+                    BaseProjectileGraphic projectileGraphic = (BaseProjectileGraphic)Activator.CreateInstance(type);
+                    BaseProjectileGraphics.Add(projectileGraphic.Name, projectileGraphic);
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿using Cthangband.Enumerations;
+﻿using AngbandOS.Core.Interface;
 
 namespace AngbandOS.Core;
 

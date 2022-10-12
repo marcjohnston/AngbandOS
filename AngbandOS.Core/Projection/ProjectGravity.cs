@@ -15,10 +15,11 @@ namespace AngbandOS.Projection
     {
         public ProjectGravity(SaveGame saveGame) : base(saveGame)
         {
-            BoltGraphic = "TurquoiseBolt";
-            ImpactGraphic = "TurquoiseSplat";
-            EffectAnimation = "";
         }
+
+        protected override string BoltGraphic => "TurquoiseBolt";
+
+        protected override string ImpactGraphic => "TurquoiseSplat";
 
         protected override bool AffectFloor(int y, int x)
         {
