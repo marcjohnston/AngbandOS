@@ -71,30 +71,16 @@ namespace AngbandOS
         /// <returns></returns>
         public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
         {
-            // Retrieve the game from the persistent storage.
-            byte[] data = persistentStorage.ReadGame();
-
-            // The game doesn't exist.  Start a new one.
-            if (data == null)
+            try
             {
-                saveGame = new SaveGame();
-            } 
-            else
-            {
-                // Deserialize the game.
-                BinaryFormatter formatter = new BinaryFormatter();
-                MemoryStream memoryStream = new MemoryStream(data);
-                try
-                {
-                    saveGame = (SaveGame)formatter.Deserialize(memoryStream);
-                }
-                catch (Exception)
-                {
-                    updateNotifier.SaveGameIncompatible();
-                    return false;
-                }
+                SaveGame saveGame = SaveGame.Initialize(persistentStorage);
+                saveGame.Play(console, persistentStorage, updateNotifier);
             }
-            saveGame.Play(console, persistentStorage, updateNotifier);
+            catch (Exception)
+            {
+                updateNotifier.SaveGameIncompatible();
+                return false;
+            }
             return true;
         }
     }

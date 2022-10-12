@@ -194,6 +194,141 @@ namespace AngbandOS
             PersistentStorage.WriteGame(gameDetails, memoryStream.ToArray());
         }
 
+        public static SaveGame Initialize(ICorePersistentStorage persistentStorage)
+        {
+            // Retrieve the game from the persistent storage.
+            byte[] data = persistentStorage.ReadGame();
+
+            // The game doesn't exist.  Start a new one.
+            if (data == null)
+                return new SaveGame();
+            else
+            {
+                // Deserialize the game.
+                BinaryFormatter formatter = new BinaryFormatter();
+                MemoryStream memoryStream = new MemoryStream(data);
+                return (SaveGame)formatter.Deserialize(memoryStream);
+            }
+        }
+
+        public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
+        {
+            LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
+            _console = console;
+            PersistentStorage = persistentStorage;
+            UpdateNotifier = updateNotification;
+            InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
+            MapMovementKeys();
+
+            FullScreenOverlay = true;
+            SetBackground(BackgroundImage.Normal);
+            CursorVisible = false;
+            if (Program.Rng.UseFixed)
+            {
+                Program.Rng.UseFixed = false;
+            }
+            if (Player == null)
+            {
+                PlayerFactory factory = new PlayerFactory(this);
+                Player newPlayer = factory.CharacterGeneration(this, ExPlayer);
+                if (newPlayer == null)
+                {
+                    return;
+                }
+                Player = newPlayer;
+                foreach (Town town in Towns)
+                {
+                    foreach (Store store in town.Stores)
+                    {
+                        store.StoreInit();
+                        store.StoreMaint();
+                    }
+                }
+                Level = null;
+                _seedFlavor = Program.Rng.RandomLessThan(int.MaxValue);
+                CreateWorld();
+                foreach (var dungeon in Dungeons)
+                {
+                    dungeon.RandomiseOffset();
+                }
+                ItemTypes.ResetStompability();
+                CurrentDepth = 0;
+                CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                while (CurTown.Char == 'K' || CurTown.Char == 'N')
+                {
+                    CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                }
+                CurDungeon = Dungeons[CurTown.Index];
+                RecallDungeon = CurDungeon.Index;
+                Player.MaxDlv[RecallDungeon] = 1;
+                DungeonDifficulty = 0;
+                Player.WildernessX = CurTown.X;
+                Player.WildernessY = CurTown.Y;
+                CameFrom = LevelStart.StartRandom;
+            }
+            UpdateNotifier.GameStarted();
+            MsgFlag = false;
+            MsgPrint(null);
+            UpdateScreen();
+            FlavorInit();
+            ApplyFlavourVisuals();
+            if (Level == null)
+            {
+                Level = new Level(this);
+                LevelFactory factory = new LevelFactory(this);
+                factory.GenerateNewLevel();
+            }
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImage.Overhead);
+            Playing = true;
+            if (Player.Health < 0)
+            {
+                Player.IsDead = true;
+            }
+            while (true)
+            {
+                DungeonLoop();
+                if (Player.NoticeFlags != 0)
+                {
+                    NoticeStuff();
+                }
+                if (Player.UpdatesNeeded.IsSet())
+                {
+                    UpdateStuff();
+                }
+                if (Player.RedrawNeeded.IsSet())
+                {
+                    RedrawStuff();
+                }
+                TargetWho = 0;
+                HealthTrack(0);
+                Level.ForgetLight();
+                Level.ForgetView();
+                if (!Playing && !Player.IsDead)
+                {
+                    break;
+                }
+                Level.WipeOList();
+                _petList = Level.Monsters.GetPets();
+                Level.Monsters.WipeMList();
+                MsgPrint(null);
+                if (Player.IsDead)
+                {
+                    UpdateNotifier.PlayerDied(Player.Name, DiedFrom, Player.Level);
+
+                    // Store the player info
+                    ExPlayer = new ExPlayer(Player);
+                    break;
+                }
+                Level = new Level(this);
+                LevelFactory factory = new LevelFactory(this);
+                factory.GenerateNewLevel();
+                Level.ReplacePets(Player.MapY, Player.MapX, _petList);
+            }
+            UpdateNotifier.GameStopped();
+            CloseGame();
+        }
+
         internal delegate bool ItemFilterDelegate(Item item);
 
         // PROFILE MESSAGING START
@@ -1128,124 +1263,6 @@ namespace AngbandOS
             TotalErase = true;
             AttrBlank = 0;
             CharBlank = ' ';
-        }
-
-        public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
-        {
-            LoadOrCreateStaticResources(); // TODO: If this game was deserialized, this is the first time this is getting run.  If this is a new game, it is the second time.  We did confirm that it doesn't double the number of items though.
-            _console = console;
-            PersistentStorage = persistentStorage;
-            UpdateNotifier = updateNotification;
-            InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
-            MapMovementKeys();
-
-            FullScreenOverlay = true;
-            SetBackground(BackgroundImage.Normal);
-            CursorVisible = false;
-            if (Program.Rng.UseFixed)
-            {
-                Program.Rng.UseFixed = false;
-            }
-            if (Player == null)
-            {
-                PlayerFactory factory = new PlayerFactory(this);
-                Player newPlayer = factory.CharacterGeneration(this, ExPlayer);
-                if (newPlayer == null)
-                {
-                    return;
-                }
-                Player = newPlayer;
-                foreach (Town town in Towns)
-                {
-                    foreach (Store store in town.Stores)
-                    {
-                        store.StoreInit();
-                        store.StoreMaint();
-                    }
-                }
-                Level = null;
-                _seedFlavor = Program.Rng.RandomLessThan(int.MaxValue);
-                CreateWorld();
-                foreach (var dungeon in Dungeons)
-                {
-                    dungeon.RandomiseOffset();
-                }
-                ItemTypes.ResetStompability();
-                CurrentDepth = 0;
-                CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
-                while (CurTown.Char == 'K' || CurTown.Char == 'N')
-                {
-                    CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
-                }
-                CurDungeon = Dungeons[CurTown.Index];
-                RecallDungeon = CurDungeon.Index;
-                Player.MaxDlv[RecallDungeon] = 1;
-                DungeonDifficulty = 0;
-                Player.WildernessX = CurTown.X;
-                Player.WildernessY = CurTown.Y;
-                CameFrom = LevelStart.StartRandom;
-            }
-            UpdateNotifier.GameStarted();
-            MsgFlag = false;
-            MsgPrint(null);
-            UpdateScreen();
-            FlavorInit();
-            ApplyFlavourVisuals();
-            if (Level == null)
-            {
-                Level = new Level(this);
-                LevelFactory factory = new LevelFactory(this);
-                factory.GenerateNewLevel();
-            }
-            FullScreenOverlay = false;
-            SetBackground(BackgroundImage.Overhead);
-            Playing = true;
-            if (Player.Health < 0)
-            {
-                Player.IsDead = true;
-            }
-            while (true)
-            {
-                DungeonLoop();
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
-                TargetWho = 0;
-                HealthTrack(0);
-                Level.ForgetLight();
-                Level.ForgetView();
-                if (!Playing && !Player.IsDead)
-                {
-                    break;
-                }
-                Level.WipeOList();
-                _petList = Level.Monsters.GetPets();
-                Level.Monsters.WipeMList();
-                MsgPrint(null);
-                if (Player.IsDead)
-                {
-                    UpdateNotifier.PlayerDied(Player.Name, DiedFrom, Player.Level);
-
-                    // Store the player info
-                    ExPlayer = new ExPlayer(Player);
-                    break;
-                }
-                Level = new Level(this);
-                LevelFactory factory = new LevelFactory(this);
-                factory.GenerateNewLevel();
-                Level.ReplacePets(Player.MapY, Player.MapX, _petList);
-            }
-            UpdateNotifier.GameStopped();
-            CloseGame();
         }
 
         public void UpdateStuff()
