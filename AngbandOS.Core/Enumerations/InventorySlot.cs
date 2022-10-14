@@ -18,11 +18,11 @@ namespace AngbandOS.Enumerations
         public const int Head = 37;
         public const int LeftHand = 30;
         public const int Lightsource = 33;
-        public const int MeleeWeapon = 27;
+        public const int MeleeWeapon = 27; // This is start inventory slot where the equipment items are stored.
         public const int Neck = 32;
-        public const int Pack = 26;
+        public const int Pack = 26; // This is the last pack item slot.
         public const int RangedWeapon = 28;
         public const int RightHand = 31;
-        public const int Total = 40;
+        public const int Total = 40; // This is the end of the inventory slots.  This slot is not used.
     }
 }

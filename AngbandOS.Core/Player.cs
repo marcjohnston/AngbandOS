@@ -26,7 +26,7 @@ namespace AngbandOS
         public readonly int[] MaxDlv = new int[Constants.MaxCaves];
         public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
         public int Age;
-        public ItemCategory AmmunitionItemCategory;
+        public ItemCategory AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
         public int ArmourClassBonus;
         public int AttackBonus;
         public int BaseArmourClass;

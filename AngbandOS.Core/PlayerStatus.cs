@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
 using System;
@@ -1079,26 +1080,9 @@ namespace AngbandOS
             }
             if (oPtr.ItemType != null && !SaveGame.Player.HasHeavyBow)
             {
-                switch (oPtr.ItemSubCategory)
-                {
-                    case BowType.SvSling:
-                        {
-                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Shot;
-                            break;
-                        }
-                    case BowType.SvShortBow:
-                    case BowType.SvLongBow:
-                        {
-                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Arrow;
-                            break;
-                        }
-                    case BowType.SvLightXbow:
-                    case BowType.SvHeavyXbow:
-                        {
-                            SaveGame.Player.AmmunitionItemCategory = ItemCategory.Bolt;
-                            break;
-                        }
-                }
+                // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
+                MissileWeaponItemCategory missileWeaponItemCategory = (MissileWeaponItemCategory)oPtr.ItemType.BaseCategory;
+                SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
                 if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemCategory.Arrow)
                 {
                     if (SaveGame.Player.Level >= 20)

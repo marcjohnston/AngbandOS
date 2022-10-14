@@ -86,7 +86,7 @@ namespace AngbandOS.Stores
                 case ShotItemCategory _:
                 case BoltItemCategory _:
                 case ArrowItemCategory _:
-                case BowItemCategory _:
+                case MissileWeaponItemCategory _:
                 case DiggingItemCategory _:
                 case HaftedItemCategory _:
                 case PolearmItemCategory _:

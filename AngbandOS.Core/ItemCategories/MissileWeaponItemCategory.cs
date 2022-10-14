@@ -7,8 +7,16 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class BowItemCategory : WeaponItemCategory
+    internal abstract class MissileWeaponItemCategory : WeaponItemCategory
     {
+        /// <summary>
+        /// Returns a damage multiplier when the missile weapon is used.
+        /// </summary>
+        public virtual int MissileDamageMultiplier => 1;
+        public override int? SubCategory => null; // The subcategory for all bows have been resolved.
+
+        public abstract ItemCategory AmmunitionItemCategory { get; }
+
         public override ItemCategory CategoryEnum => ItemCategory.Bow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

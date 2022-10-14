@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Commands
 {
@@ -62,40 +63,12 @@ namespace AngbandOS.Commands
             Colour missileColour = individualAmmunition.ItemType.Colour;
             char missileCharacter = individualAmmunition.ItemType.Character;
             int shotSpeed = saveGame.Player.MissileAttacksPerRound;
-            int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage +
-                       missileWeapon.BonusDamage;
+            int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = saveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = saveGame.Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            int damageMultiplier = 1;
-            switch (missileWeapon.ItemSubCategory)
-            {
-                case BowType.SvSling:
-                    {
-                        damageMultiplier = 2;
-                        break;
-                    }
-                case BowType.SvShortBow:
-                    {
-                        damageMultiplier = 2;
-                        break;
-                    }
-                case BowType.SvLongBow:
-                    {
-                        damageMultiplier = 3;
-                        break;
-                    }
-                case BowType.SvLightXbow:
-                    {
-                        damageMultiplier = 3;
-                        break;
-                    }
-                case BowType.SvHeavyXbow:
-                    {
-                        damageMultiplier = 4;
-                        break;
-                    }
-            }
+            MissileWeaponItemCategory missileWeaponItemCategory = (MissileWeaponItemCategory)missileWeapon.ItemType.BaseCategory;
+            int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (saveGame.Player.HasExtraMight)
             {
