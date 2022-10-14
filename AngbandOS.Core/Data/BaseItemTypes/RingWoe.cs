@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingWoe : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Woe";
+        public override string Name => "Woe";
 
         public override bool Cha => true;
         public override int Chance1 => 1;

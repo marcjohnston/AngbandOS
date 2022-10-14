@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffTreasureLocation : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Treasure Location";
+        public override string Name => "Treasure Location";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

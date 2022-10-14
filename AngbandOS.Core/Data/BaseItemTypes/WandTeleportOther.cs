@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandTeleportOther : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Teleport Other";
+        public override string Name => "Teleport Other";
 
         public override int Chance1 => 1;
         public override int Cost => 350;

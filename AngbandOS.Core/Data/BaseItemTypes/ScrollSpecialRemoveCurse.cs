@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollSpecialRemoveCurse : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:*Remove Curse*";
+        public override string Name => "*Remove Curse*";
 
         public override int Chance1 => 2;
         public override int Chance2 => 2;

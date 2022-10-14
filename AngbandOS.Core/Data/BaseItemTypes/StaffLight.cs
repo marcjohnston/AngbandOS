@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffLight : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Light";
+        public override string Name => "Light";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionResistCold : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Resist Cold";
+        public override string Name => "Resist Cold";
 
         public override int Chance1 => 1;
         public override int Cost => 30;

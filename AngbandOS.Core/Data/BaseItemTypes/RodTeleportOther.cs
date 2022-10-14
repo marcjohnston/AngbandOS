@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodTeleportOther : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Teleport Other";
+        public override string Name => "Teleport Other";
 
         public override int Chance1 => 2;
         public override int Cost => 1400;

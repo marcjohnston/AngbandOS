@@ -6,7 +6,7 @@ namespace AngbandOS.ItemCategories
     internal class AmuletAntiTheft : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:Anti-Theft";
+        public override string Name => "Anti-Theft";
 
         public override bool AntiTheft => true;
         public override int Chance1 => 1;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class FoodUnhealth : FoodItemCategory
     {
         public override char Character => ',';
-        public override string Name => "Food:Unhealth";
+        public override string Name => "Unhealth";
 
         public override int Chance1 => 1;
         public override int Cost => 50;

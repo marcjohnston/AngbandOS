@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingShardResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Shard Resistance";
+        public override string Name => "Shard Resistance";
 
         public override int Chance1 => 2;
         public override int Cost => 3000;

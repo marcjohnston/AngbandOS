@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodSpeed : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Speed";
+        public override string Name => "Speed";
 
         public override int Chance1 => 16;
         public override int Cost => 50000;

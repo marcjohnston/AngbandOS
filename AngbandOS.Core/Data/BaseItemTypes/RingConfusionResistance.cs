@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingConfusionResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Confusion Resistance";
+        public override string Name => "Confusion Resistance";
 
         public override int Chance1 => 2;
         public override int Cost => 3000;

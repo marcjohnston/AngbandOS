@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionSelfKnowledge : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Self Knowledge";
+        public override string Name => "Self Knowledge";
 
         public override int Chance1 => 1;
         public override int Cost => 2000;

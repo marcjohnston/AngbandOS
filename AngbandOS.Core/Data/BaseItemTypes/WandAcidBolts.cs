@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandAcidBolts : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Acid Bolts";
+        public override string Name => "Acid Bolts";
 
         public override int Chance1 => 1;
         public override int Cost => 950;

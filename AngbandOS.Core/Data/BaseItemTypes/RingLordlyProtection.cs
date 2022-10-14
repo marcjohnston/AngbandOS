@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingLordlyProtection : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Lordly Protection";
+        public override string Name => "Lordly Protection";
 
         public override int Chance1 => 5;
         public override int Cost => 100000;

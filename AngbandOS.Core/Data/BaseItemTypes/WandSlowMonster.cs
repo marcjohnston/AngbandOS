@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandSlowMonster : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Slow Monster";
+        public override string Name => "Slow Monster";
 
         public override int Chance1 => 1;
         public override int Cost => 500;

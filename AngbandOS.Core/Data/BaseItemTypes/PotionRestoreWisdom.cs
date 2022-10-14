@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionRestoreWisdom : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Restore Wisdom";
+        public override string Name => "Restore Wisdom";
 
         public override int Chance1 => 1;
         public override int Cost => 300;

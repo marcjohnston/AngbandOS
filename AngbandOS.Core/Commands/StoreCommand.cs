@@ -43,7 +43,7 @@ namespace AngbandOS.Commands
             saveGame.CommandArgument = 0;
             //            CommandRepeat = 0; TODO: Confirm this is not needed
             saveGame.QueuedCommand = '\0';
-            which.EnterStore(saveGame.Player);
+            which.EnterStore();
         }
     }
 }

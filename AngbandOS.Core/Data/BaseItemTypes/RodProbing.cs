@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodProbing : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Probing";
+        public override string Name => "Probing";
 
         public override int Chance1 => 4;
         public override int Cost => 4000;

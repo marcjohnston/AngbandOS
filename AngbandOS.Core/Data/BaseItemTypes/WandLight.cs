@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandLight : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Light";
+        public override string Name => "Light";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

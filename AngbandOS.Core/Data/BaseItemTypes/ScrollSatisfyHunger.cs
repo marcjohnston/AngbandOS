@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollSatisfyHunger : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Satisfy Hunger";
+        public override string Name => "Satisfy Hunger";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingAggravateMonster : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Aggravate Monster";
+        public override string Name => "Aggravate Monster";
 
         public override bool Aggravate => true;
         public override int Chance1 => 1;

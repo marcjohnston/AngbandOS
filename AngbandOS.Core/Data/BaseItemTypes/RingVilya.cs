@@ -7,10 +7,10 @@ namespace AngbandOS.ItemCategories
     internal class RingVilya : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Ring****";
+        public override string Name => "Vilya";
 
         public override int Cost => 300000;
-        public override string FriendlyName => "& Ring~";
+        public override string FriendlyName => "& Ring~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 100;
         public override int? SubCategory => 36;

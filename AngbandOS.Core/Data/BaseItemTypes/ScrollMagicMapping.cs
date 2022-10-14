@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollMagicMapping : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Magic Mapping";
+        public override string Name => "Magic Mapping";
 
         public override int Chance1 => 1;
         public override int Cost => 40;

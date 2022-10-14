@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingResistCold : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Resist Cold";
+        public override string Name => "Resist Cold";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

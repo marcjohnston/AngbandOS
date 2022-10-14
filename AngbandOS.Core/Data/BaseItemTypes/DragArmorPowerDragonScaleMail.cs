@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '[';
         public override Colour Colour => Colour.Yellow;
-        public override string Name => "DragArmor:Power Dragon Scale Mail";
+        public override string Name => "Power Dragon Scale Mail";
 
         public override int Ac => 40;
         public override bool Activate => true;

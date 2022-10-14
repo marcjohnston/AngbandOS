@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffSlowMonsters : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Slow Monsters";
+        public override string Name => "Slow Monsters";
 
         public override int Chance1 => 1;
         public override int Cost => 800;

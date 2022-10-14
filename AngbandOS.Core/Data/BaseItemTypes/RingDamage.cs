@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingDamage : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Damage";
+        public override string Name => "Damage";
 
         public override int Chance1 => 1;
         public override int Cost => 500;

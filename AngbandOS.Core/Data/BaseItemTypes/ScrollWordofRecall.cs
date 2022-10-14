@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollWordOfRecall : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Word of Recall";
+        public override string Name => "Word of Recall";
 
         public override int Chance1 => 1;
         public override int Cost => 150;

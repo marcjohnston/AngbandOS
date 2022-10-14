@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionSlowness : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Slowness";
+        public override string Name => "Slowness";
 
         public override int Chance1 => 1;
         public override int Dd => 1;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollCurseWeapon : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Curse Weapon";
+        public override string Name => "Curse Weapon";
 
         public override int Chance1 => 1;
         public override string FriendlyName => "Curse Weapon";

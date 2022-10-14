@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '/';
         public override Colour Colour => Colour.Red;
-        public override string Name => "Polearm:Scythe of Slicing";
+        public override string Name => "Scythe of Slicing";
 
         public override int Chance1 => 4;
         public override int Cost => 3500;

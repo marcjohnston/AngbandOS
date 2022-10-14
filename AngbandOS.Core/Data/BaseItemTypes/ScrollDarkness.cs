@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollDarkness : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Darkness";
+        public override string Name => "Darkness";
 
         public override int Chance1 => 1;
         public override string FriendlyName => "Darkness";

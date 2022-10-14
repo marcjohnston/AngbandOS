@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodSleepMonster : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Sleep Monster";
+        public override string Name => "Sleep Monster";
 
         public override int Chance1 => 1;
         public override int Cost => 1500;

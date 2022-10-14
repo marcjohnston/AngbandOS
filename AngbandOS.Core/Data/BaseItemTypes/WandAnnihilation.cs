@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandAnnihilation : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Annihilation";
+        public override string Name => "Annihilation";
 
         public override int Chance1 => 4;
         public override int Cost => 3000;

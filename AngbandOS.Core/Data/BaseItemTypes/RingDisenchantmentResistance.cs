@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingDisenchantmentResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Disenchantment Resistance";
+        public override string Name => "Disenchantment Resistance";
 
         public override int Chance1 => 10;
         public override int Cost => 15000;

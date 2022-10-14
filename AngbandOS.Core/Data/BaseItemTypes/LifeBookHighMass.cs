@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class LifeBookHighMass : LifeBookItemCategory
     {
         public override char Character => '?';
-        public override string Name => "LifeBook:[High Mass]";
+        public override string Name => "[High Mass]";
 
         public override int Chance1 => 1;
         public override int Cost => 1000;

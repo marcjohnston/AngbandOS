@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionHealing : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Healing";
+        public override string Name => "Healing";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

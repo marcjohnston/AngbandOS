@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollFire : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Fire";
+        public override string Name => "Fire";
 
         public override int Chance1 => 4;
         public override int Cost => 1000;

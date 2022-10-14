@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollArtifactCreation : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Artifact Creation";
+        public override string Name => "Artifact Creation";
 
         public override int Chance1 => 16;
         public override int Cost => 200000;

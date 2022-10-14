@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingSlowDigestion : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Slow Digestion";
+        public override string Name => "Slow Digestion";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandFrostBolts : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Frost Bolts";
+        public override string Name => "Frost Bolts";
 
         public override int Chance1 => 1;
         public override int Cost => 800;

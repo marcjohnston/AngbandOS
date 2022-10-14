@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionLoseMemories : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Lose Memories";
+        public override string Name => "Lose Memories";
 
         public override int Chance1 => 1;
         public override int Dd => 1;

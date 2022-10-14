@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffRemoveCurse : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Remove Curse";
+        public override string Name => "Remove Curse";
 
         public override int Chance1 => 1;
         public override int Cost => 500;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollTreasureDetection : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Treasure Detection";
+        public override string Name => "Treasure Detection";
 
         public override int Chance1 => 1;
         public override int Cost => 15;

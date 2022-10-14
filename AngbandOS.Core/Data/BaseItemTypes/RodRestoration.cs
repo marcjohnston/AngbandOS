@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodRestoration : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Restoration";
+        public override string Name => "Restoration";
 
         public override int Chance1 => 16;
         public override int Cost => 25000;

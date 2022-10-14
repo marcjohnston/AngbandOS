@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodFireBalls : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Fire Balls";
+        public override string Name => "Fire Balls";
 
         public override int Chance1 => 1;
         public override int Cost => 5000;

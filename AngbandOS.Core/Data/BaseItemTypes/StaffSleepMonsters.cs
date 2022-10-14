@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffSleepMonsters : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Sleep Monsters";
+        public override string Name => "Sleep Monsters";
 
         public override int Chance1 => 1;
         public override int Cost => 700;

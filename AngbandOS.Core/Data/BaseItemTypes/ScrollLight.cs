@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollLight : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Light";
+        public override string Name => "Light";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

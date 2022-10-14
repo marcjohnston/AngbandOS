@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class DragArmorWhiteDragonScaleMail : DragArmorItemCategory
     {
         public override char Character => '[';
-        public override string Name => "DragArmor:White Dragon Scale Mail";
+        public override string Name => "White Dragon Scale Mail";
 
         public override int Ac => 30;
         public override bool Activate => true;

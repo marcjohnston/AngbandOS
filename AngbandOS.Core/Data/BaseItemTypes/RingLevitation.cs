@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingLevitation : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Levitation";
+        public override string Name => "Levitation";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

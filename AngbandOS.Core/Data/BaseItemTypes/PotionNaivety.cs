@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionNaivety : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Naivety";
+        public override string Name => "Naivety";
 
         public override int Chance1 => 1;
         public override int Dd => 1;

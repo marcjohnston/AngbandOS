@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffDispelEvil : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Dispel Evil";
+        public override string Name => "Dispel Evil";
 
         public override int Chance1 => 1;
         public override int Cost => 1200;

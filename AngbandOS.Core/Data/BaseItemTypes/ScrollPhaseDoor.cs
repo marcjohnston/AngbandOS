@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollPhaseDoor : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Phase Door";
+        public override string Name => "Phase Door";
 
         public override int Chance1 => 1;
         public override int Cost => 15;

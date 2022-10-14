@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingResistFire : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Resist Fire";
+        public override string Name => "Resist Fire";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

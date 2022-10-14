@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => ',';
         public override Colour Colour => Colour.Yellow;
-        public override string Name => "Food:Pint of Fine Ale";
+        public override string Name => "Pint of Fine Ale";
 
         public override int Cost => 1;
         public override string FriendlyName => "& Pint~ of Fine Ale";

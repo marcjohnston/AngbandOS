@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollProtectionFromEvil : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Protection from Evil";
+        public override string Name => "Protection from Evil";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

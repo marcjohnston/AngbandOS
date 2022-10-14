@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollSummonMonster : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Summon Monster";
+        public override string Name => "Summon Monster";
 
         public override int Chance1 => 1;
         public override string FriendlyName => "Summon Monster";

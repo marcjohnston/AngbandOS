@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollTeleportLevel : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Teleport Level";
+        public override string Name => "Teleport Level";
 
         public override int Chance1 => 1;
         public override int Cost => 50;

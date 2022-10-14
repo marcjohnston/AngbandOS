@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollRuneofProtection : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Rune of Protection";
+        public override string Name => "Rune of Protection";
 
         public override int Chance1 => 2;
         public override int Chance2 => 4;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollTrapDoorDestruction : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Trap/Door Destruction";
+        public override string Name => "Trap/Door Destruction";
 
         public override int Chance1 => 1;
         public override int Cost => 50;

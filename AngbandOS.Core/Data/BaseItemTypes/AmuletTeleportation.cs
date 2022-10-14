@@ -6,7 +6,7 @@ namespace AngbandOS.ItemCategories
     internal class AmuletTeleportation : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:Teleportation";
+        public override string Name => "Teleportation";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

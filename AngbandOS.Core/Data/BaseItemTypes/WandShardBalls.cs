@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandShardBalls : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Shard Balls";
+        public override string Name => "Shard Balls";
 
         public override int Chance1 => 4;
         public override int Cost => 95000;

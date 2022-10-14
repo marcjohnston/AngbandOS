@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodRecall : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Recall";
+        public override string Name => "Recall";
 
         public override int Chance1 => 4;
         public override int Cost => 4000;

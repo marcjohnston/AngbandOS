@@ -6,10 +6,10 @@ namespace AngbandOS.ItemCategories
     internal class AmuletCarlammas : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:Amulet";
+        public override string Name => "Carlammas";
 
         public override int Cost => 60000;
-        public override string FriendlyName => "& Amulet~";
+        public override string FriendlyName => "& Amulet~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 50;
         public override int? SubCategory => AmuletType.Carlammas;

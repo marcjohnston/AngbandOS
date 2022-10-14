@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollDoorStairLocation : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Door/Stair Location";
+        public override string Name => "Door/Stair Location";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

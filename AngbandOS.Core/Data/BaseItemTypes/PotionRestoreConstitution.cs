@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionRestoreConstitution : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Restore Constitution";
+        public override string Name => "Restore Constitution";
 
         public override int Chance1 => 1;
         public override int Cost => 300;

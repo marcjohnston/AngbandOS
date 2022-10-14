@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandHealMonster : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Heal Monster";
+        public override string Name => "Heal Monster";
 
         public override int Chance1 => 1;
         public override int Dd => 1;

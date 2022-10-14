@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class PotionDetectInvisible : PotionItemCategory
     {
         public override char Character => '!';
-        public override string Name => "Potion:Detect Invisible";
+        public override string Name => "Detect Invisible";
 
         public override int Chance1 => 1;
         public override int Cost => 50;

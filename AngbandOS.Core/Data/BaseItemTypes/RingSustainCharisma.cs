@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingSustainCharisma : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Sustain Charisma";
+        public override string Name => "Sustain Charisma";
 
         public override int Chance1 => 1;
         public override int Cost => 500;

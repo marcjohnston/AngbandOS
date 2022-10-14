@@ -704,20 +704,18 @@ namespace AngbandOS.Commands
             ItemCategory tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
             saveGame.Clear();
-            for (num = 0, i = 1; num < 60 && i < saveGame.ItemTypes.Count; i++)
+            const int maxLetters = 26;
+            const int maxNumbers = 10;
+            const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
+            for (num = 0, i = 1; num < maxCount && i < saveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
-                    // TODO: Instant artifacts do not have a name.  So we do not allow the user to select it.  Argh
-                    //if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
-                    //{
-                    //    continue;
-                    //}
-                    row = 2 + (num % 20);
-                    col = 30 * (num / 20);
-                    ch = (char)(_head[num / 20] + (char)(num % 20));
-                    string itemName = kPtr.BaseCategory.GetType().Name.Trim().Replace("$", "").Replace("~", ""); // TODO: The GetType functionality should convert to using the Name property.
+                    row = 2 + (num % maxLetters);
+                    col = 30 * (num / maxLetters);
+                    ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
+                    string itemName = kPtr.BaseCategory.Name.Trim().Replace("$", "").Replace("~", ""); 
 
                     saveGame.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
@@ -729,17 +727,17 @@ namespace AngbandOS.Commands
                 return 0;
             }
             num = -1;
-            if (ch >= _head[0] && ch < _head[0] + 20)
+            if (ch >= _head[0] && ch < _head[0] + maxLetters)
             {
                 num = ch - _head[0];
             }
-            if (ch >= _head[1] && ch < _head[1] + 20)
+            if (ch >= _head[1] && ch < _head[1] + maxLetters)
             {
-                num = ch - _head[1] + 20;
+                num = ch - _head[1] + maxLetters;
             }
-            if (ch >= _head[2] && ch < _head[2] + 10)
+            if (ch >= _head[2] && ch < _head[2] + maxNumbers)
             {
-                num = ch - _head[2] + 40;
+                num = ch - _head[2] + maxLetters;
             }
             if (num < 0 || num >= maxNum)
             {

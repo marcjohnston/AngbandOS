@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '\\';
         public override Colour Colour => Colour.Black;
-        public override string Name => "Hafted:Lead-Filled Mace";
+        public override string Name => "Lead-Filled Mace";
 
         public override int Chance1 => 1;
         public override int Cost => 502;

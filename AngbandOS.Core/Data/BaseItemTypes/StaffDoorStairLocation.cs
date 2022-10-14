@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffDoorStairLocation : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Door/Stair Location";
+        public override string Name => "Door/Stair Location";
 
         public override int Chance1 => 1;
         public override int Cost => 350;

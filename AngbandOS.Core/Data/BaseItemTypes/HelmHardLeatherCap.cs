@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => ']';
         public override Colour Colour => Colour.Brown;
-        public override string Name => "Helm:Hard Leather Cap";
+        public override string Name => "Hard Leather Cap";
 
         public override int Ac => 2;
         public override int Chance1 => 1;

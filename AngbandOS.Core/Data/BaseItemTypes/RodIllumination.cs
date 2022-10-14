@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodIllumination : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Illumination";
+        public override string Name => "Illumination";
 
         public override int Chance1 => 1;
         public override int Cost => 1000;

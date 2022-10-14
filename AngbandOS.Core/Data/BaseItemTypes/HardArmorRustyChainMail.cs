@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '[';
         public override Colour Colour => Colour.Red;
-        public override string Name => "HardArmor:Rusty Chain Mail";
+        public override string Name => "Rusty Chain Mail";
 
         public override int Ac => 14;
         public override int Chance1 => 1;

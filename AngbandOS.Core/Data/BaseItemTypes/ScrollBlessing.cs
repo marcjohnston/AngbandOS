@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollBlessing : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Blessing";
+        public override string Name => "Blessing";
 
         public override int Chance1 => 1;
         public override int Cost => 15;

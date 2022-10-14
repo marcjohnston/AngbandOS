@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodHavoc : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Havoc";
+        public override string Name => "Havoc";
 
         public override int Chance1 => 16;
         public override int Cost => 150000;

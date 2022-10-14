@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollObjectDetection : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Object Detection";
+        public override string Name => "Object Detection";
 
         public override int Chance1 => 1;
         public override int Cost => 15;

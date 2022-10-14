@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollAggravateMonster : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Aggravate Monster";
+        public override string Name => "Aggravate Monster";
 
         public override int Chance1 => 1;
         public override string FriendlyName => "Aggravate Monster";

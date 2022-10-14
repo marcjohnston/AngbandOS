@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollInvocation : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Invocation";
+        public override string Name => "Invocation";
 
         public override int Chance1 => 1;
         public override int Chance2 => 2;

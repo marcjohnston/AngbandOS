@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodDrainLife : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Drain Life";
+        public override string Name => "Drain Life";
 
         public override int Chance1 => 4;
         public override int Cost => 3600;

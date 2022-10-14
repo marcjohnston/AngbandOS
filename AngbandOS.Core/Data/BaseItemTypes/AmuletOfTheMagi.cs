@@ -6,7 +6,7 @@ namespace AngbandOS.ItemCategories
     internal class AmuletOfTheMagi : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:the Magi";
+        public override string Name => "the Magi";
 
         public override int Chance1 => 4;
         public override int Chance2 => 3;

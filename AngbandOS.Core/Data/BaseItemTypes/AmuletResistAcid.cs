@@ -6,7 +6,7 @@ namespace AngbandOS.ItemCategories
     internal class AmuletResistAcid : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:Resist Acid";
+        public override string Name => "Resist Acid";
 
         public override int Chance1 => 1;
         public override int Cost => 300;

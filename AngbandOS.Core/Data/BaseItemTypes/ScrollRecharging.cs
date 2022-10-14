@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollRecharging : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Recharging";
+        public override string Name => "Recharging";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

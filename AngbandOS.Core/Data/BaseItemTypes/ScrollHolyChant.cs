@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollHolyChant : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Holy Chant";
+        public override string Name => "Holy Chant";
 
         public override int Chance1 => 1;
         public override int Cost => 40;

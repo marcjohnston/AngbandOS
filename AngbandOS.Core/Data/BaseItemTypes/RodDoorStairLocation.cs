@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodDoorStairLocation : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Door/Stair Location";
+        public override string Name => "Door/Stair Location";
 
         public override int Chance1 => 1;
         public override int Cost => 1000;

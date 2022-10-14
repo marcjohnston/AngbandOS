@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollDestruction : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:*Destruction*";
+        public override string Name => "*Destruction*";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

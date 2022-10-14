@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollDispelUndead : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Dispel Undead";
+        public override string Name => "Dispel Undead";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

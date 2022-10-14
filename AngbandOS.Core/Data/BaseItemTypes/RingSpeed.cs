@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingSpeed : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Speed";
+        public override string Name => "Speed";
 
         public override int Chance1 => 1;
         public override int Cost => 100000;

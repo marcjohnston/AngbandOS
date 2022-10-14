@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollSpecialAcquirement : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:*Acquirement*";
+        public override string Name => "*Acquirement*";
 
         public override int Chance1 => 16;
         public override int Cost => 200000;

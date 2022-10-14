@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '?';
         public override Colour Colour => Colour.Background;
-        public override string Name => "Scroll:*Enchant Weapon*";
+        public override string Name => "*Enchant Weapon*";
 
         public override int Chance1 => 1;
         public override int Cost => 500;

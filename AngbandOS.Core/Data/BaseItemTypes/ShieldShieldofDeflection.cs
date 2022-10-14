@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '[';
         public override Colour Colour => Colour.BrightBlue;
-        public override string Name => "Shield:Shield of Deflection";
+        public override string Name => "Shield of Deflection";
 
         public override int Ac => 10;
         public override int Chance1 => 8;

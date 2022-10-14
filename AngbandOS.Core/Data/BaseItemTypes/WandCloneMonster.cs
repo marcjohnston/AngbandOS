@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandCloneMonster : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Clone Monster";
+        public override string Name => "Clone Monster";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

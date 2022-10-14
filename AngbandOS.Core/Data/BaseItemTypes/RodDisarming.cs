@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodDisarming : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Disarming";
+        public override string Name => "Disarming";
 
         public override int Chance1 => 1;
         public override int Cost => 2100;

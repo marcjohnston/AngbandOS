@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingSearching : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Searching";
+        public override string Name => "Searching";
 
         public override int Chance1 => 1;
         public override int Cost => 250;

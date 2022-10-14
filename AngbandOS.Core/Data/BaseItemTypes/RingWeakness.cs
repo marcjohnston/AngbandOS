@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingWeakness : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Weakness";
+        public override string Name => "Weakness";
 
         public override int Chance1 => 1;
         public override bool Cursed => true;

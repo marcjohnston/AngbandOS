@@ -11,7 +11,7 @@
     {
         string FeatureType { get; }
 
-        void EnterStore(Player player);
+        void EnterStore();
 
         void StoreInit();
 

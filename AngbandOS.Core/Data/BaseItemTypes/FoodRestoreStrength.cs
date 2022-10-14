@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class FoodRestoreStrength : FoodItemCategory
     {
         public override char Character => ',';
-        public override string Name => "Food:Restore Strength";
+        public override string Name => "Restore Strength";
 
         public override int Chance1 => 1;
         public override int Cost => 350;

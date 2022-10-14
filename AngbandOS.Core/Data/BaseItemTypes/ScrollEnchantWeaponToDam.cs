@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollEnchantWeaponToDam : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Enchant Weapon To-Dam";
+        public override string Name => "Enchant Weapon To-Dam";
 
         public override int Chance1 => 1;
         public override int Cost => 125;

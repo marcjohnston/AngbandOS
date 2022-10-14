@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandStonetoMud : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Stone to Mud";
+        public override string Name => "Stone to Mud";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

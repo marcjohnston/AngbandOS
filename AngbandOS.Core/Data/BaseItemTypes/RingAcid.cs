@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingAcid : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Acid";
+        public override string Name => "Acid";
 
         public override bool Activate => true;
         public override int Chance1 => 1;

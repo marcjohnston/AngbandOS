@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingExtraAttacks : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Extra Attacks";
+        public override string Name => "Extra Attacks";
 
         public override bool Blows => true;
         public override int Chance1 => 2;

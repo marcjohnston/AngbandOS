@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollIdentify : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Identify";
+        public override string Name => "Identify";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollIce : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Ice";
+        public override string Name => "Ice";
 
         public override int Chance1 => 6;
         public override int Cost => 5000;

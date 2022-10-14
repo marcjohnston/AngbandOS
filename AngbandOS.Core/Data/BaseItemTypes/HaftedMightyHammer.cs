@@ -8,12 +8,12 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => '\\';
         public override Colour Colour => Colour.Black;
-        public override string Name => "Hafted:Mighty Hammer";
+        public override string Name => "Mighty Hammer";
 
         public override int Cost => 1000;
         public override int Dd => 3;
         public override int Ds => 9;
-        public override string FriendlyName => "& Mighty Hammer~";
+        public override string FriendlyName => "& Mighty Hammer~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 15;
         public override bool ShowMods => true;

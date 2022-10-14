@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RingSoundResistance : RingItemCategory
     {
         public override char Character => '=';
-        public override string Name => "Ring:Sound Resistance";
+        public override string Name => "Sound Resistance";
 
         public override int Chance1 => 2;
         public override int Cost => 3000;

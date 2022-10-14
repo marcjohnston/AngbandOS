@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollDetectInvisible : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Detect Invisible";
+        public override string Name => "Detect Invisible";
 
         public override int Chance1 => 1;
         public override int Cost => 15;

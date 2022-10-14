@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class RodPolymorph : RodItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Rod:Polymorph";
+        public override string Name => "Polymorph";
 
         public override int Chance1 => 1;
         public override int Cost => 1200;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class WandStinkingCloud : WandItemCategory
     {
         public override char Character => '-';
-        public override string Name => "Wand:Stinking Cloud";
+        public override string Name => "Stinking Cloud";
 
         public override int Chance1 => 1;
         public override int Cost => 400;

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class StaffTeleportation : StaffItemCategory
     {
         public override char Character => '_';
-        public override string Name => "Staff:Teleportation";
+        public override string Name => "Teleportation";
 
         public override int Chance1 => 1;
         public override int Cost => 2000;

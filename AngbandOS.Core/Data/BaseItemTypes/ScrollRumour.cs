@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class ScrollRumour : ScrollItemCategory
     {
         public override char Character => '?';
-        public override string Name => "Scroll:Rumour";
+        public override string Name => "Rumour";
 
         public override int Chance1 => 1;
         public override int Cost => 10;

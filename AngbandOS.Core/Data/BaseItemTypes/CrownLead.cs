@@ -8,12 +8,12 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => ']';
         public override Colour Colour => Colour.Black;
-        public override string Name => "Crown:Lead Crown";
+        public override string Name => "Lead Crown";
 
         public override int Cost => 1000;
         public override int Dd => 1;
         public override int Ds => 1;
-        public override string FriendlyName => "& Lead Crown~";
+        public override string FriendlyName => "& Lead Crown~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 44;
         public override int? SubCategory => 50;

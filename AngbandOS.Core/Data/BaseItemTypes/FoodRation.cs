@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBrown;
-        public override string Name => "Food:Ration of Food";
+        public override string Name => "Ration of Food";
 
         public override int Chance1 => 1;
         public override int Chance2 => 1;

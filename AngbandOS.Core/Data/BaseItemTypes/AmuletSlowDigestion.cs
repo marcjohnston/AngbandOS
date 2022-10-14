@@ -6,7 +6,7 @@ namespace AngbandOS.ItemCategories
     internal class AmuletSlowDigestion : AmuletItemCategory
     {
         public override char Character => '"';
-        public override string Name => "Amulet:Slow Digestion";
+        public override string Name => "Slow Digestion";
 
         public override int Chance1 => 1;
         public override int Cost => 200;

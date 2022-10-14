@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     internal class FoodParalysis : FoodItemCategory
     {
         public override char Character => ',';
-        public override string Name => "Food:Paralysis";
+        public override string Name => "Paralysis";
 
         public override int Chance1 => 1;
         public override string FriendlyName => "Paralysis";
