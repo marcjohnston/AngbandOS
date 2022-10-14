@@ -21,7 +21,6 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 50;
         public override int Pval => -5;
         public override bool Str => true;
-        public override int? SubCategory => AmuletType.Doom;
         public override int Weight => 3;
         public override bool Wis => true;
 

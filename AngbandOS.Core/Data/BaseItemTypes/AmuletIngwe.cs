@@ -12,7 +12,6 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Amulet~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 60;
-        public override int? SubCategory => AmuletType.Ingwe;
         public override int Weight => 3;
     }
 }

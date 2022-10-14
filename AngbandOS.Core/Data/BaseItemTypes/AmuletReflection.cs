@@ -19,7 +19,6 @@ namespace AngbandOS.ItemCategories
         public override int Level => 60;
         public override int Locale1 => 60;
         public override bool Reflect => true;
-        public override int? SubCategory => AmuletType.Reflection;
         public override int Weight => 3;
     }
 }

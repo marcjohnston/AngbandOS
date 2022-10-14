@@ -19,7 +19,6 @@ namespace AngbandOS.ItemCategories
         public override int Level => 30;
         public override int Locale1 => 30;
         public override bool NoTele => true;
-        public override int? SubCategory => AmuletType.NoTele;
         public override int Weight => 3;
 
         public override void ApplyMagic(Item item, int level, int power)

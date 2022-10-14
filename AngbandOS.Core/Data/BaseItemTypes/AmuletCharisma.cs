@@ -16,7 +16,6 @@ namespace AngbandOS.ItemCategories
         public override bool HideType => true;
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int? SubCategory => AmuletType.Charisma;
         public override int Weight => 3;
 
         public override void ApplyMagic(Item item, int level, int power)
