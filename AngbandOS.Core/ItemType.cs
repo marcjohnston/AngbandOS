@@ -57,7 +57,11 @@ namespace AngbandOS
         public readonly int Level;
         public readonly string Name;
         public readonly int Pval;
-        public readonly int SubCategory;
+
+        /// <summary>
+        /// Represents the subcategory enumeration for the item.  As items are scaffolded, this property should be eliminated.  Return null, when not in use.
+        /// </summary>
+        public readonly int? SubCategory;
         public readonly int ToA;
         public readonly int ToD;
         public readonly int ToH;
