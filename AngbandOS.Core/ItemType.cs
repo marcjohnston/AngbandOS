@@ -185,62 +185,7 @@ namespace AngbandOS
 
         public static bool KindIsGood(ItemType kPtr)
         {
-            switch (kPtr.Category)
-            {
-                case ItemCategory.HardArmor:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.DragArmor:
-                case ItemCategory.Shield:
-                case ItemCategory.Cloak:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Helm:
-                case ItemCategory.Crown:
-                    return kPtr.ToA >= 0;
-
-                case ItemCategory.Bow:
-                case ItemCategory.Sword:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Digging:
-                    if (kPtr.ToH < 0)
-                    {
-                        return false;
-                    }
-                    if (kPtr.ToD < 0)
-                    {
-                        return false;
-                    }
-                    return true;
-
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                    return true;
-
-                case ItemCategory.LifeBook:
-                case ItemCategory.SorceryBook:
-                case ItemCategory.NatureBook:
-                case ItemCategory.ChaosBook:
-                case ItemCategory.DeathBook:
-                case ItemCategory.TarotBook:
-                case ItemCategory.CorporealBook:
-                    return kPtr.SubCategory >= ItemSubCategory.SvBookMinGood;
-
-                case ItemCategory.Ring:
-                    return kPtr.SubCategory == RingType.Speed;
-
-                case ItemCategory.Amulet:
-                    if (kPtr.SubCategory == AmuletType.TheMagi)
-                    {
-                        return true;
-                    }
-                    if (kPtr.SubCategory == AmuletType.Resistance)
-                    {
-                        return true;
-                    }
-                    return false;
-            }
-            return false;
+            return kPtr.BaseCategory.KindIsGood;
         }
 
         public static ItemType RandomItemType(SaveGame saveGame, int level)

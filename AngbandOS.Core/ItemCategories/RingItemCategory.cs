@@ -30,6 +30,8 @@ namespace AngbandOS.ItemCategories
         public override bool HatesElectricity => true;
         public override Colour Colour => Colour.Gold;
 
+        public override bool KindIsGood => (SubCategory == RingType.Speed);
+
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)

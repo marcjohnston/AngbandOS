@@ -25,6 +25,22 @@ namespace AngbandOS.ItemCategories
         public override int BaseValue => 45;
         public override Colour Colour => Colour.Orange;
 
+        public override bool KindIsGood
+        {
+            get
+            {
+                if (SubCategory == AmuletType.TheMagi)
+                {
+                    return true;
+                }
+                if (SubCategory == AmuletType.Resistance)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)

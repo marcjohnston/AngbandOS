@@ -270,6 +270,7 @@ namespace AngbandOS.ItemCategories
         bool InstaArt { get; }
         bool Int { get; }
         bool KillDragon { get; }
+        bool KindIsGood { get; }
         int Level { get; }
         bool Lightsource { get; }
         int Locale1 { get; }

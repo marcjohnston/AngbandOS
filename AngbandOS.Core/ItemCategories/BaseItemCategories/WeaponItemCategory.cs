@@ -20,6 +20,22 @@ namespace AngbandOS.ItemCategories
 
         public override bool CanApplyBonusArmourClassMiscPower => true;
 
+        public override bool KindIsGood
+        {
+            get
+            {
+                if (ToH < 0)
+                {
+                    return false;
+                }
+                if (ToD < 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

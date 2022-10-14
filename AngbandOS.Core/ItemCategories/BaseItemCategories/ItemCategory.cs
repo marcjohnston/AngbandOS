@@ -73,6 +73,7 @@ namespace AngbandOS.ItemCategories
         public virtual bool InstaArt => false;
         public virtual bool Int => false;
         public virtual bool KillDragon => false;
+        public virtual bool KindIsGood => false;
         public virtual int Level => 0;
         public virtual bool Lightsource => false;
         public virtual int Locale1 => 0;

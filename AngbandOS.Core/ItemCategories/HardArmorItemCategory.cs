@@ -13,6 +13,7 @@ namespace AngbandOS.ItemCategories
 
         public override Colour Colour => Colour.Grey;
 
+
         //public override void ApplyMagic(Item item, int level, int power)
         //{
         //    if (power != 0)

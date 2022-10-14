@@ -36,6 +36,8 @@ namespace AngbandOS.ItemCategories
             return 0;
         }
 
+        public override bool KindIsGood => (ToA >= 0);
+
         public override int GetBonusRealValue(Item item, int value)
         {
             int bonusValue = 0;

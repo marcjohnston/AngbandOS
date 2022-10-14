@@ -20,6 +20,9 @@ namespace AngbandOS.ItemCategories
             bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
             return bonusValue;
         }
+
+        public override bool KindIsGood => true;
+
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();
