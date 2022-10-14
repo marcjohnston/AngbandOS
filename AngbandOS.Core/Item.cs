@@ -908,7 +908,7 @@ namespace AngbandOS
                 {
                     switch (GlobalData.ChestTraps[TypeSpecificValue])
                     {
-                        case 0:
+                        case ChestTrap.ChestNotTrapped:
                             {
                                 t += " (Locked)";
                                 break;

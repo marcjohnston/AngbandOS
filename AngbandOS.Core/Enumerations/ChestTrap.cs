@@ -9,6 +9,7 @@ namespace AngbandOS.Enumerations
 {
     internal static class ChestTrap
     {
+        public const int ChestNotTrapped = 0x00;
         public const int ChestExplode = 0x10;
         public const int ChestLoseCon = 0x02;
         public const int ChestLoseStr = 0x01;
