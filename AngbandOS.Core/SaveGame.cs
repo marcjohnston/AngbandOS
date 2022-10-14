@@ -19681,8 +19681,6 @@ namespace AngbandOS
         public void UpdateScreen()
         {
             List<PrintLine> batchPrintLines = new List<PrintLine>();
-            Screen scr = Scr; // This will always be the game screen contents.
-            Screen old = Old;
             int y;
             int w = Width;
             int h = Height;
@@ -19690,7 +19688,7 @@ namespace AngbandOS
             int y2 = Y2;
 
             // Check to see if any updates are needed.
-            if (y1 > y2 && scr.Cu == old.Cu && scr.CursorVisible == old.CursorVisible && scr.Cx == old.Cx && scr.Cy == old.Cy && !TotalErase)
+            if (y1 > y2 && Scr.Cu == Old.Cu && Scr.CursorVisible == Old.CursorVisible && Scr.Cx == Old.Cx && Scr.Cy == Old.Cy && !TotalErase)
             {
                 // No updates are needed.
                 return;
@@ -19700,21 +19698,21 @@ namespace AngbandOS
             {
                 // Clear the "old" screen 
                 _console.Clear();
-                old.CursorVisible = false;
-                old.Cu = false;
-                old.Cx = 0;
-                old.Cy = 0;
+                Old.CursorVisible = false;
+                Old.Cu = false;
+                Old.Cx = 0;
+                Old.Cy = 0;
 
                 // For each row
                 for (y = 0; y < h; y++)
                 {
                     // aa and cc point to the same index reference into Va and Vc.
-                    int aa = old.A[y];
-                    int cc = old.C[y];
+                    int aa = Old.A[y];
+                    int cc = Old.C[y];
                     for (int x = 0; x < w; x++)
                     {
-                        old.Va[aa++] = AttrBlank; // Background color
-                        old.Vc[cc++] = CharBlank; // Space
+                        Old.Va[aa++] = AttrBlank; // Background color
+                        Old.Vc[cc++] = CharBlank; // Space
                     }
                 }
                 // Reset the size of the display to be full height.
@@ -19729,10 +19727,10 @@ namespace AngbandOS
                 }
                 TotalErase = false;
             }
-            if (scr.Cu || !scr.CursorVisible)
+            if (Scr.Cu || !Scr.CursorVisible)
             {
-                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
+                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
             }
 
             // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
@@ -19744,35 +19742,35 @@ namespace AngbandOS
                 {
                     //RefreshTextRow(y, x1, x2);
                     /////// Start RefreshTextRow
-                    int oldAa = old.A[y];
-                    int oldCc = old.C[y];
-                    int scrAa = scr.A[y];
-                    int scrCc = scr.C[y];
+                    int oldAa = Old.A[y];
+                    int oldCc = Old.C[y];
+                    int scrAa = Scr.A[y];
+                    int scrCc = Scr.C[y];
                     int fn = 0;
                     int fx = 0;
                     Colour fa = AttrBlank;
                     for (int x = x1; x <= x2; x++)
                     {
-                        Colour oa = old.Va[oldAa + x];
-                        char oc = old.Vc[oldCc + x];
-                        Colour na = scr.Va[scrAa + x];
-                        char nc = scr.Vc[scrCc + x];
+                        Colour oa = Old.Va[oldAa + x];
+                        char oc = Old.Vc[oldCc + x];
+                        Colour na = Scr.Va[scrAa + x];
+                        char nc = Scr.Vc[scrCc + x];
                         if (na == oa && nc == oc)
                         {
                             if (fn != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             continue;
                         }
-                        old.Va[oldAa + x] = na;
-                        old.Vc[oldCc + x] = nc;
+                        Old.Va[oldAa + x] = na;
+                        Old.Vc[oldCc + x] = nc;
                         if (fa != na)
                         {
                             if (fn != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             fa = na;
@@ -19784,7 +19782,7 @@ namespace AngbandOS
                     }
                     if (fn != 0)
                     {
-                        batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                        batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
                     }
 
                     /////// end RefreshTextRow
@@ -19795,27 +19793,27 @@ namespace AngbandOS
             Y1 = h;
             Y2 = 0;
 
-            if (scr.Cu)
+            if (Scr.Cu)
             {
-                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
+                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
             }
-            else if (!scr.CursorVisible)
+            else if (!Scr.CursorVisible)
             {
-                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
+                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
             }
             else
             {
-                int scrCc = old.C[old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(old.Cy, old.Cx, old.Vc[scrCc + old.Cx].ToString(), old.Va[scrCc + old.Cx], Colour.Background));
-                scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple));
+                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
+                scrCc = Scr.C[Scr.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Scr.Cy, Scr.Cx, Scr.Vc[scrCc + Scr.Cx].ToString(), Scr.Va[scrCc + Scr.Cx], Colour.Purple));
             }
-            old.Cu = scr.Cu;
-            old.CursorVisible = scr.CursorVisible;
-            old.Cx = scr.Cx;
-            old.Cy = scr.Cy;
+            Old.Cu = Scr.Cu;
+            Old.CursorVisible = Scr.CursorVisible;
+            Old.Cx = Scr.Cx;
+            Old.Cy = Scr.Cy;
 
             if (batchPrintLines.Count > 0)
                 _console.BatchPrint(batchPrintLines.ToArray());
