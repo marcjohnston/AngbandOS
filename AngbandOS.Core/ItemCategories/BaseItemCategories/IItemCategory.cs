@@ -318,9 +318,9 @@ namespace AngbandOS.ItemCategories
         bool Str { get; }
 
         /// <summary>
-        /// Returns the subcategory enumeration of the original scaffolded base item type.  This property will be deleted.
+        /// Returns the subcategory enumeration of the original scaffolded base item type.  This property will be deleted.  Return null, when not in use.
         /// </summary>
-        int SubCategory { get; }
+        int? SubCategory { get; }
         bool SustCha { get; }
         bool SustCon { get; }
         bool SustDex { get; }

@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Lead Crown~";
         public override bool InstaArt => true;
         public override int Level => 44;
-        public override int SubCategory => 50;
+        public override int? SubCategory => 50;
         public override int Weight => 20;
     }
 }

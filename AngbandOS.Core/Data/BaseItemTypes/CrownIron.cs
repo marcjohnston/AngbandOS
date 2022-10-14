@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Iron Crown~";
         public override int Level => 45;
         public override int Locale1 => 45;
-        public override int SubCategory => 10;
+        public override int? SubCategory => 10;
         public override int Weight => 20;
     }
 }

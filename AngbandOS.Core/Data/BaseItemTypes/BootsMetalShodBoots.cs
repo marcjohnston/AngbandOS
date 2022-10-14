@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Pair~ of Metal Shod Boots";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int SubCategory => 6;
+        public override int? SubCategory => 6;
         public override int Weight => 80;
     }
 }

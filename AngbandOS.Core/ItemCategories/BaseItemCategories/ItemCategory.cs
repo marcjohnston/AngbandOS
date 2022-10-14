@@ -194,7 +194,11 @@ namespace AngbandOS.ItemCategories
         /// </summary>
         public virtual bool Str => false;
 
-        public virtual int SubCategory => 0;
+        /// <summary>
+        /// Returns the subcategory enumeration that the item belongs to.  This property is to be deleted.  Returns null, when not in use.
+        /// </summary>
+        public abstract int? SubCategory { get; }
+
         public virtual bool SustCha => false;
         public virtual bool SustCon => false;
         public virtual bool SustDex => false;

@@ -20,7 +20,7 @@ namespace AngbandOS.ItemCategories
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
             if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
             {
-                flavour = "Plain Gold";
+                flavour = "Plain Gold ";
             }
             string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
             string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";

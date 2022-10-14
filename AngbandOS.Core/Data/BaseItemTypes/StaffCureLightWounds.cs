@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Cure Light Wounds";
         public override int Level => 5;
         public override int Locale1 => 5;
-        public override int SubCategory => 16;
+        public override int? SubCategory => 16;
         public override int Weight => 50;
     }
 }

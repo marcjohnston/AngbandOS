@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Large steel chest~";
         public override int Level => 55;
         public override int Locale1 => 55;
-        public override int SubCategory => 7;
+        public override int? SubCategory => 7;
         public override int Weight => 1000;
     }
 }

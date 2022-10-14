@@ -100,7 +100,7 @@ namespace Cthangband.ItemCategories
         public override bool Speed => \Speed\;
         public override bool Stealth => \Stealth\;
         public override bool Str => \Str\;
-        public override int SubCategory => \SubCategory\;
+        public override int? SubCategory => \SubCategory\;
         public override bool SustCha => \SustCha\;
         public override bool SustCon => \SustCon\;
         public override bool SustDex => \SustDex\;

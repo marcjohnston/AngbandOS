@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Set~ of Gauntlets";
         public override int Level => 10;
         public override int Locale1 => 10;
-        public override int SubCategory => 2;
+        public override int? SubCategory => 2;
         public override int Weight => 25;
     }
 }

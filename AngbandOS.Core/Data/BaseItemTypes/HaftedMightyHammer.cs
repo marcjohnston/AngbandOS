@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override bool InstaArt => true;
         public override int Level => 15;
         public override bool ShowMods => true;
-        public override int SubCategory => 50;
+        public override int? SubCategory => 50;
         public override int Weight => 200;
     }
 }

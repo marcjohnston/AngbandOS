@@ -13,7 +13,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Ring~";
         public override bool InstaArt => true;
         public override int Level => 80;
-        public override int SubCategory => 34;
+        public override int? SubCategory => 34;
         public override int Weight => 2;
     }
 }

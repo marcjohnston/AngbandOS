@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Protection from Evil";
         public override int Level => 30;
         public override int Locale1 => 30;
-        public override int SubCategory => 37;
+        public override int? SubCategory => 37;
         public override int Weight => 5;
     }
 }

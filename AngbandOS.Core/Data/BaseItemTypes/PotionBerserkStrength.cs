@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Berserk Strength";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int SubCategory => 33;
+        public override int? SubCategory => 33;
         public override int Weight => 4;
     }
 }

@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Slow Monster";
         public override int Level => 5;
         public override int Locale1 => 2;
-        public override int SubCategory => 9;
+        public override int? SubCategory => 9;
         public override int Weight => 10;
     }
 }

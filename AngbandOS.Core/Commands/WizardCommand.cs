@@ -645,12 +645,6 @@ namespace AngbandOS.Commands
             }
         }
 
-        private string StripName(SaveGame saveGame, int kIdx)
-        {
-            ItemType kPtr = saveGame.ItemTypes[kIdx];
-            return kPtr.Name.Trim().Replace("$", "").Replace("~", "");
-        }
-
         private void WizCreateItem(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
@@ -715,6 +709,7 @@ namespace AngbandOS.Commands
                 ItemType kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Category == tval)
                 {
+                    // TODO: Instant artifacts do not have a name.  So we do not allow the user to select it.  Argh
                     //if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
                     //{
                     //    continue;
@@ -722,8 +717,9 @@ namespace AngbandOS.Commands
                     row = 2 + (num % 20);
                     col = 30 * (num / 20);
                     ch = (char)(_head[num / 20] + (char)(num % 20));
-                    string buf = StripName(saveGame, i);
-                    saveGame.PrintLine($"[{ch}] {buf}", row, col);
+                    string itemName = kPtr.BaseCategory.GetType().Name.Trim().Replace("$", "").Replace("~", ""); // TODO: The GetType functionality should convert to using the Name property.
+
+                    saveGame.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
                 }
             }

@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Polymorph";
         public override int Level => 35;
         public override int Locale1 => 35;
-        public override int SubCategory => 19;
+        public override int? SubCategory => 19;
         public override int Weight => 15;
     }
 }

@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreFire => true;
         public override int Level => 70;
         public override int Locale1 => 80;
-        public override int SubCategory => 6;
+        public override int? SubCategory => 6;
         public override int ToA => 10;
         public override int Weight => 100;
     }

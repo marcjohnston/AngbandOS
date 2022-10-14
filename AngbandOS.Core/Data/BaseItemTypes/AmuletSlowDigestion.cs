@@ -15,7 +15,7 @@ namespace AngbandOS.ItemCategories
         public override int Level => 15;
         public override int Locale1 => 15;
         public override bool SlowDigest => true;
-        public override int SubCategory => AmuletType.SlowDigest;
+        public override int? SubCategory => AmuletType.SlowDigest;
         public override int Weight => 3;
     }
 }

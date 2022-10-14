@@ -19,7 +19,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 70;
         public override bool ResChaos => true;
         public override bool ShowMods => true;
-        public override int SubCategory => 30;
+        public override int? SubCategory => 30;
         public override int Weight => 180;
     }
 }

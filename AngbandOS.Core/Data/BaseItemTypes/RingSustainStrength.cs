@@ -15,7 +15,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Sustain Strength";
         public override int Level => 30;
         public override int Locale1 => 30;
-        public override int SubCategory => 10;
+        public override int? SubCategory => 10;
         public override bool SustStr => true;
         public override int Weight => 2;
     }

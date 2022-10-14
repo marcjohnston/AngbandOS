@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 30;
         public override bool Search => true;
         public override bool Stealth => true;
-        public override int SubCategory => 2;
+        public override int? SubCategory => 2;
         public override int ToA => 4;
         public override int Weight => 5;
     }

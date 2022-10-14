@@ -15,6 +15,7 @@ namespace AngbandOS.ItemCategories
         public override int Ds => 1;
         public override string FriendlyName => "Water";
         public override int Pval => 200;
+        public override int? SubCategory => 0;
         public override int Weight => 4;
     }
 }

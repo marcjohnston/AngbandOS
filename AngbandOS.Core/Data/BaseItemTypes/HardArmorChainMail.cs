@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Chain Mail~";
         public override int Level => 25;
         public override int Locale1 => 25;
-        public override int SubCategory => 4;
+        public override int? SubCategory => 4;
         public override int ToH => -2;
         public override int Weight => 220;
     }

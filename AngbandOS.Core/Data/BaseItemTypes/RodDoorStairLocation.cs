@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Door/Stair Location";
         public override int Level => 15;
         public override int Locale1 => 15;
-        public override int SubCategory => 1;
+        public override int? SubCategory => 1;
         public override int Weight => 15;
     }
 }

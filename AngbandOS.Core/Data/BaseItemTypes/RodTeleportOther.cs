@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Teleport Other";
         public override int Level => 45;
         public override int Locale1 => 45;
-        public override int SubCategory => 13;
+        public override int? SubCategory => 13;
         public override int Weight => 15;
     }
 }

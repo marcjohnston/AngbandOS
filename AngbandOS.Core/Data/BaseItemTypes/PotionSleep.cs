@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override int Ds => 1;
         public override string FriendlyName => "Sleep";
         public override int Pval => 100;
-        public override int SubCategory => 11;
+        public override int? SubCategory => 11;
         public override int Weight => 4;
     }
 }

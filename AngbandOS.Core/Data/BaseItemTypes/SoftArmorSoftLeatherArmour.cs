@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Soft Leather Armour~";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int SubCategory => 4;
+        public override int? SubCategory => 4;
         public override int Weight => 80;
     }
 }

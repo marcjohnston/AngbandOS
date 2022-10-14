@@ -13,6 +13,6 @@ namespace AngbandOS.ItemCategories
         public override int Cost => 14;
         public override string FriendlyName => "gold";
         public override int Level => 1;
-        public override int SubCategory => 10;
+        public override int? SubCategory => 10;
     }
 }

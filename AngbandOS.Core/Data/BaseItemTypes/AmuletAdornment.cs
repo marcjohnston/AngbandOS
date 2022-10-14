@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Adornment";
         public override int Level => 15;
         public override int Locale1 => 15;
-        public override int SubCategory => AmuletType.Adornment;
+        public override int? SubCategory => AmuletType.Adornment;
         public override int Weight => 3;
     }
 }

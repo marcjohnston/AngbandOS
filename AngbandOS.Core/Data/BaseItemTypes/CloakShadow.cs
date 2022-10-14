@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 75;
         public override bool ResDark => true;
         public override bool ResLight => true;
-        public override int SubCategory => 6;
+        public override int? SubCategory => 6;
         public override int ToA => 4;
         public override int Weight => 5;
     }

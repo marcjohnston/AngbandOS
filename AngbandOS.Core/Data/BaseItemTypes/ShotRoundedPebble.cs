@@ -16,6 +16,7 @@ namespace AngbandOS.ItemCategories
         public override int Ds => 2;
         public override string FriendlyName => "& Rounded Pebble~";
         public override bool ShowMods => true;
+        public override int? SubCategory => 0;
         public override int Weight => 4;
     }
 }

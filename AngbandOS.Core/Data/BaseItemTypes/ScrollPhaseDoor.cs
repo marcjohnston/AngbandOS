@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Phase Door";
         public override int Level => 1;
         public override int Locale1 => 1;
-        public override int SubCategory => 8;
+        public override int? SubCategory => 8;
         public override int Weight => 5;
     }
 }

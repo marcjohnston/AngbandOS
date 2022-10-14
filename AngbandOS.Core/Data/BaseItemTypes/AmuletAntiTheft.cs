@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreFire => true;
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int SubCategory => AmuletType.AntiTheft;
+        public override int? SubCategory => AmuletType.AntiTheft;
         public override int Weight => 3;
     }
 }

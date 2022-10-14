@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Large Metal Shield~";
         public override int Level => 30;
         public override int Locale1 => 30;
-        public override int SubCategory => 5;
+        public override int? SubCategory => 5;
         public override int Weight => 120;
     }
 }

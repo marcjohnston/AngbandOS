@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Leather Scale Mail~";
         public override int Level => 15;
         public override int Locale1 => 15;
-        public override int SubCategory => 11;
+        public override int? SubCategory => 11;
         public override int ToH => -1;
         public override int Weight => 140;
     }

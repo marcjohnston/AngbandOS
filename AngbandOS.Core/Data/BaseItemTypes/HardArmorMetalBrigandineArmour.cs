@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Metal Brigandine Armour~";
         public override int Level => 35;
         public override int Locale1 => 35;
-        public override int SubCategory => 9;
+        public override int? SubCategory => 9;
         public override int ToH => -3;
         public override int Weight => 290;
     }

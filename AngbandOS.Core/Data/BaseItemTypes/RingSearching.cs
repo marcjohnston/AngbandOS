@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override int Level => 5;
         public override int Locale1 => 5;
         public override bool Search => true;
-        public override int SubCategory => 23;
+        public override int? SubCategory => 23;
         public override int Weight => 2;
     }
 }

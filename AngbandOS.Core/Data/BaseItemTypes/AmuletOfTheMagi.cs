@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale2 => 80;
         public override bool Search => true;
         public override bool SeeInvis => true;
-        public override int SubCategory => AmuletType.TheMagi;
+        public override int? SubCategory => AmuletType.TheMagi;
         public override int ToA => 3;
         public override int Weight => 3;
 

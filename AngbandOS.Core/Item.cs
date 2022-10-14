@@ -348,7 +348,7 @@ namespace AngbandOS
             ItemType kPtr = kIdx;
             ItemType = kIdx;
 //            BaseCategory = BaseItemCategory.CreateFromEnum(kPtr.Category);
-            ItemSubCategory = kPtr.SubCategory;
+            ItemSubCategory = kPtr.SubCategory ?? 0;
             TypeSpecificValue = kPtr.Pval;
             Count = 1;
             Weight = kPtr.Weight;

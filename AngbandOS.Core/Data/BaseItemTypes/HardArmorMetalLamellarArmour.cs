@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Metal Lamellar Armour~";
         public override int Level => 45;
         public override int Locale1 => 45;
-        public override int SubCategory => 13;
+        public override int? SubCategory => 13;
         public override int ToH => -3;
         public override int Weight => 340;
     }

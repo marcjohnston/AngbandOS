@@ -1351,7 +1351,7 @@ namespace AngbandOS
                 ItemType kPtr = ItemTypes[i];
                 if (kPtr.HasFlavor)
                 {
-                    int indexx = kPtr.SubCategory;
+                    int indexx = kPtr.SubCategory ?? 0;
                     switch (kPtr.Category)
                     {
                         case ItemCategory.Food:

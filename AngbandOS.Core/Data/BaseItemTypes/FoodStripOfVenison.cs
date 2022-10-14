@@ -13,7 +13,7 @@ namespace AngbandOS.ItemCategories
         public override int Cost => 2;
         public override string FriendlyName => "& Strip~ of Venison";
         public override int Pval => 1500;
-        public override int SubCategory => 33;
+        public override int? SubCategory => 33;
         public override int Weight => 2;
     }
 }

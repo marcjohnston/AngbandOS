@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Steel Helm~";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int SubCategory => 6;
+        public override int? SubCategory => 6;
         public override int Weight => 60;
     }
 }

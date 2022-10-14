@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Self Knowledge";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int SubCategory => 58;
+        public override int? SubCategory => 58;
         public override int Weight => 4;
     }
 }

@@ -19,7 +19,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale2 => 30;
         public override int Locale3 => 40;
         public override int Pval => 500;
-        public override int SubCategory => 19;
+        public override int? SubCategory => 19;
         public override int Weight => 1;
     }
 }

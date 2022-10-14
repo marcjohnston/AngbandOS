@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreAcid => true;
         public override int Level => 45;
         public override int Locale1 => 45;
-        public override int SubCategory => 11;
+        public override int? SubCategory => 11;
         public override int Weight => 30;
     }
 }

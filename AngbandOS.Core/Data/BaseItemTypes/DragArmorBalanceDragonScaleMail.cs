@@ -27,7 +27,7 @@ namespace AngbandOS.ItemCategories
         public override bool ResDisen => true;
         public override bool ResShards => true;
         public override bool ResSound => true;
-        public override int SubCategory => 20;
+        public override int? SubCategory => 20;
         public override int ToA => 10;
         public override int ToH => -2;
         public override int Weight => 200;

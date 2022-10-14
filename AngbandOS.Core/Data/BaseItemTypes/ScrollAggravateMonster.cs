@@ -13,7 +13,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Aggravate Monster";
         public override int Level => 5;
         public override int Locale1 => 5;
-        public override int SubCategory => 1;
+        public override int? SubCategory => 1;
         public override int Weight => 5;
     }
 }

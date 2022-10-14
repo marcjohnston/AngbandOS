@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
         public override bool ResCold => true;
         public override bool ResElec => true;
         public override bool ResFire => true;
-        public override int SubCategory => AmuletType.Resistance;
+        public override int? SubCategory => AmuletType.Resistance;
         public override int Weight => 3;
 
         public override void ApplyMagic(Item item, int level, int power)

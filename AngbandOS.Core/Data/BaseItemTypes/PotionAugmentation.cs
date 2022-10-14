@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Augmentation";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int SubCategory => 55;
+        public override int? SubCategory => 55;
         public override int Weight => 4;
     }
 }

@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Gemstone~";
         public override bool InstaArt => true;
         public override int Level => 60;
-        public override int SubCategory => 6;
+        public override int? SubCategory => 6;
         public override int Weight => 5;
     }
 }

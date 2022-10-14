@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& piece~ of Warpstone";
         public override int Level => 30;
         public override int Locale1 => 50;
-        public override int SubCategory => 40;
+        public override int? SubCategory => 40;
         public override int Weight => 1;
     }
 }

@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override int Dd => 1;
         public override int Ds => 1;
         public override string FriendlyName => "& Shard~ of Pottery";
-        public override int SubCategory => 3;
+        public override int? SubCategory => 3;
         public override int Weight => 5;
     }
 }

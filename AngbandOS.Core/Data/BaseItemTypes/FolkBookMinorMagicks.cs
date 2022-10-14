@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "[Minor Magicks]";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int SubCategory => 1;
+        public override int? SubCategory => 1;
         public override int Weight => 30;
     }
 }

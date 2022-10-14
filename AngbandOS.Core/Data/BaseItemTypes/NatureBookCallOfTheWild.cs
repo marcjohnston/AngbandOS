@@ -17,6 +17,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "[Call of the Wild]";
         public override int Level => 10;
         public override int Locale1 => 10;
+        public override int? SubCategory => 0;
         public override int Weight => 30;
     }
 }

@@ -59,7 +59,7 @@ namespace AngbandOS
         public readonly int Pval;
 
         /// <summary>
-        /// Represents the subcategory enumeration for the item.  As items are scaffolded, this property should be eliminated.  Return null, when not in use.
+        /// Represents the subcategory enumeration for the item.  As items are scaffolded, this property should be eliminated.  Return null, when not in use.  Null values are converted to 0 for items.
         /// </summary>
         public readonly int? SubCategory;
         public readonly int ToA;

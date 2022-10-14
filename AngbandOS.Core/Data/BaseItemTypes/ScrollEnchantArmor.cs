@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Enchant Armor";
         public override int Level => 15;
         public override int Locale1 => 15;
-        public override int SubCategory => 16;
+        public override int? SubCategory => 16;
         public override int Weight => 5;
     }
 }

@@ -14,7 +14,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Magic Mapping";
         public override int Level => 5;
         public override int Locale1 => 5;
-        public override int SubCategory => 25;
+        public override int? SubCategory => 25;
         public override int Weight => 5;
     }
 }
