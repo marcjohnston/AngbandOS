@@ -1,3 +1,5 @@
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -10,7 +12,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "& Necklace~";
         public override bool InstaArt => true;
         public override int Level => 70;
-        public override int SubCategory => 12;
+        public override int SubCategory => AmuletType.Dwarves;
         public override int Weight => 3;
     }
 }

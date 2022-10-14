@@ -1,3 +1,5 @@
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -14,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override int Level => 20;
         public override int Locale1 => 20;
         public override bool ResAcid => true;
-        public override int SubCategory => 4;
+        public override int SubCategory => AmuletType.ResistAcid;
         public override int Weight => 3;
     }
 }

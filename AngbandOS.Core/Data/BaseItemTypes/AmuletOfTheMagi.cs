@@ -1,3 +1,5 @@
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -20,8 +22,24 @@ namespace AngbandOS.ItemCategories
         public override int Locale2 => 80;
         public override bool Search => true;
         public override bool SeeInvis => true;
-        public override int SubCategory => 8;
+        public override int SubCategory => AmuletType.TheMagi;
         public override int ToA => 3;
         public override int Weight => 3;
+
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+            item.BonusArmourClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+            if (Program.Rng.DieRoll(3) == 1)
+            {
+                item.RandartFlags3.Set(ItemFlag3.SlowDigest);
+            }
+            if (item.SaveGame.Level != null)
+            {
+                item.SaveGame.Level.TreasureRating += 25;
+            }
+        }
+
+        public override bool KindIsGood => true;
     }
 }

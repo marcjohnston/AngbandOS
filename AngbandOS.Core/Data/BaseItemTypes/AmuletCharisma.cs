@@ -1,3 +1,6 @@
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -13,7 +16,18 @@ namespace AngbandOS.ItemCategories
         public override bool HideType => true;
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int SubCategory => 7;
+        public override int SubCategory => AmuletType.Charisma;
         public override int Weight => 3;
+
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = 1 + GetBonusValue(5, level);
+            if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
+            {
+                item.IdentifyFlags.Set(Constants.IdentBroken);
+                item.IdentifyFlags.Set(Constants.IdentCursed);
+                item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+            }
+        }
     }
 }

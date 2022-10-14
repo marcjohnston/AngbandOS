@@ -10,6 +10,8 @@ namespace AngbandOS.Enumerations
     internal static class AmuletType
     {
         public const int Adornment = 2;
+        public const int AntiTheft = 16;
+        public const int Brilliance = 6;
         public const int Carlammas = 10;
         public const int Charisma = 7;
         public const int Doom = 0;

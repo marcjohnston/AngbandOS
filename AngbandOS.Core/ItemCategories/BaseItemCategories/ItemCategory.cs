@@ -33,22 +33,62 @@ namespace AngbandOS.ItemCategories
         public virtual bool Aggravate => false;
         public virtual bool AntiTheft => false;
         public virtual bool Blessed => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the blows delivered by the player when being worn.
+        /// </summary>
         public virtual bool Blows => false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from acid when being wielded.
+        /// </summary>
         public virtual bool BrandAcid => false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from frost when being wielded.
+        /// </summary>
         public virtual bool BrandCold => false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from electricity when being wielded.
+        /// </summary>
         public virtual bool BrandElec => false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from fire when being wielded.
+        /// </summary>
         public virtual bool BrandFire => false;
+
+        /// <summary>
+        /// Returns whether or not the item poisons foes when being wielded.
+        /// </summary>
         public virtual bool BrandPois => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the charisma of the player when being worn.
+        /// </summary>
         public virtual bool Cha => false;
         public virtual int Chance1 => 0;
         public virtual int Chance2 => 0;
         public virtual int Chance3 => 0;
         public virtual int Chance4 => 0;
+
+        /// <summary>
+        /// Returns whether or not the item produced chaotic effects when being wielded.
+        /// </summary>
         public virtual bool Chaotic => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the constitution of the player when being worn.
+        /// </summary>
         public virtual bool Con => false;
         public virtual int Cost => 0;
         public virtual bool Cursed => false;
         public virtual int Dd => 0;
+
+        /// <summary>
+        /// Returns whether or not the item affects the dexterity of the player when being worn.
+        /// </summary>
         public virtual bool Dex => false;
         public virtual bool DrainExp => false;
         public virtual bool DreadCurse => false;
@@ -68,11 +108,28 @@ namespace AngbandOS.ItemCategories
         public virtual bool ImCold => false;
         public virtual bool ImElec => false;
         public virtual bool ImFire => false;
+
+        /// <summary>
+        /// Returns whether or not the item causes earthquakes of the player when being worn.
+        /// </summary>
         public virtual bool Impact => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the infravision of the player when being worn.
+        /// </summary>
         public virtual bool Infra => false;
         public virtual bool InstaArt => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the intelligence of the player when being worn.
+        /// </summary>
         public virtual bool Int => false;
+
+        /// <summary>
+        /// Returns whether or not the item is a great bane of dragons.
+        /// </summary>
         public virtual bool KillDragon => false;
+
         public virtual bool KindIsGood => false;
         public virtual int Level => 0;
         public virtual bool Lightsource => false;
@@ -102,7 +159,12 @@ namespace AngbandOS.ItemCategories
         public virtual bool ResPois => false;
         public virtual bool ResShards => false;
         public virtual bool ResSound => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the search capabilities of the player when being worn.
+        /// </summary>
         public virtual bool Search => false;
+
         public virtual bool SeeInvis => false;
         public virtual bool ShElec => false;
         public virtual bool ShFire => false;
@@ -116,9 +178,22 @@ namespace AngbandOS.ItemCategories
         public virtual bool SlayTroll => false;
         public virtual bool SlayUndead => false;
         public virtual bool SlowDigest => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the attack speed of the player when being worn.
+        /// </summary>
         public virtual bool Speed => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the stealth of the player when being worn.
+        /// </summary>
         public virtual bool Stealth => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the strength of the player when being worn.
+        /// </summary>
         public virtual bool Str => false;
+
         public virtual int SubCategory => 0;
         public virtual bool SustCha => false;
         public virtual bool SustCon => false;
@@ -132,10 +207,24 @@ namespace AngbandOS.ItemCategories
         public virtual int ToD => 0;
         public virtual int ToH => 0;
         public virtual bool Tried => false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the tunnelling capabilities of the player when being worn.
+        /// </summary>
         public virtual bool Tunnel => false;
+
         public virtual bool Vampiric => false;
+
+        /// <summary>
+        /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
+        /// </summary>
         public virtual bool Vorpal => false;
+
         public virtual int Weight => 0;
+
+        /// <summary>
+        /// Returns whether or not the item affects the wisdom of the player when being worn.
+        /// </summary>
         public virtual bool Wis => false;
         public virtual bool Wraith => false;
         public virtual bool XtraMight => false;

@@ -1,3 +1,6 @@
+using AngbandOS.ArtifactBiases;
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -19,7 +22,22 @@ namespace AngbandOS.ItemCategories
         public override bool ResCold => true;
         public override bool ResElec => true;
         public override bool ResFire => true;
-        public override int SubCategory => 15;
+        public override int SubCategory => AmuletType.Resistance;
         public override int Weight => 3;
+
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            if (Program.Rng.DieRoll(3) == 1)
+            {
+                IArtifactBias? artifactBias = null;
+                item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+            }
+            if (Program.Rng.DieRoll(5) == 1)
+            {
+                item.RandartFlags2.Set(ItemFlag2.ResPois);
+            }
+        }
+
+        public override bool KindIsGood => true;
     }
 }

@@ -1,3 +1,6 @@
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -16,7 +19,15 @@ namespace AngbandOS.ItemCategories
         public override int Level => 30;
         public override int Locale1 => 30;
         public override bool NoTele => true;
-        public override int SubCategory => 14;
+        public override int SubCategory => AmuletType.NoTele;
         public override int Weight => 3;
+
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
+            {
+                item.IdentifyFlags.Set(Constants.IdentCursed);
+            }
+        }
     }
 }

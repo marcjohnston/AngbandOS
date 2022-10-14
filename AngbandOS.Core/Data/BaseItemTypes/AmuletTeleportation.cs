@@ -1,3 +1,5 @@
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
@@ -13,7 +15,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Teleportation";
         public override int Level => 15;
         public override int Locale1 => 15;
-        public override int SubCategory => 1;
+        public override int SubCategory => AmuletType.Teleport;
         public override bool Teleport => true;
         public override int Weight => 3;
     }
