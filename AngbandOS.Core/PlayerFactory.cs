@@ -2063,6 +2063,7 @@ namespace AngbandOS
             {
                 ItemCategory tv = _playerInit[_player.ProfessionIndex][i].Category;
                 int sv = _playerInit[_player.ProfessionIndex][i].SubCategory;
+
                 if (tv == ItemCategory.SorceryBook)
                 {
                     tv = _player.Realm1.ToSpellBookItemCategory();

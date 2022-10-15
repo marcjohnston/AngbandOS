@@ -22,5 +22,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale3 => 80;
         public override int? SubCategory => WandType.StoneToMud;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            return saveGame.WallToMud(dir);
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(8) + 3;
+        }
     }
 }

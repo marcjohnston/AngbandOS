@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -18,5 +19,15 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 3;
         public override int? SubCategory => WandType.Light;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            saveGame.MsgPrint("A line of blue shimmering light appears.");
+            saveGame.LightLine(dir);
+            return true;
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(10) + 6;
+        }
     }
 }

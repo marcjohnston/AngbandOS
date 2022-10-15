@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -17,5 +18,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 2;
         public override int? SubCategory => WandType.HealMonster;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            return saveGame.HealMonster(dir);
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(20) + 8;
+        }
     }
 }

@@ -1,5 +1,7 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -22,5 +24,33 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 60;
         public override int? SubCategory => WandType.DragonBreath;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            switch (Program.Rng.RandomLessThan(5))
+            {
+                case 0:
+                    saveGame.FireBall(new ProjectAcid(saveGame), dir, 100, -3);
+                    break;
+                case 1:
+                    saveGame.FireBall(new ProjectElec(saveGame), dir, 80, -3);
+                    break;
+                case 2:
+                    saveGame.FireBall(new ProjectFire(saveGame), dir, 100, -3);
+                    break;
+                case 3:
+                    saveGame.FireBall(new ProjectCold(saveGame), dir, 80, -3);
+                    break;
+                case 4:
+                    saveGame.FireBall(new ProjectPois(saveGame), dir, 60, -3);
+                    break;
+                default:
+                    throw new Exception("Internal error.");
+            }
+            return true;
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(3) + 1;
+        }
     }
 }

@@ -1,5 +1,7 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -22,5 +24,15 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 75;
         public override int? SubCategory => WandType.Shard;
         public override int Weight => 10;
+
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            saveGame.FireBall(new ProjectShard(saveGame), dir, 75 + Program.Rng.DieRoll(50), 2);
+            return true;
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(2) + 1;
+        }
     }
 }

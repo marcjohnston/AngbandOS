@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

@@ -22,5 +22,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 60;
         public override int? SubCategory => WandType.Annihilation;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            return saveGame.DrainLife(dir, 125);
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(2) + 1;
+        }
     }
 }

@@ -18,5 +18,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 5;
         public override int? SubCategory => WandType.SleepMonster;
         public override int Weight => 10;
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            return saveGame.SleepMonster(dir);
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
+        }
     }
 }
