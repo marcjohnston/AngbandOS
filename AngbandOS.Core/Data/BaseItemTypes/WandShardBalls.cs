@@ -20,7 +20,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreFire => true;
         public override int Level => 75;
         public override int Locale1 => 75;
-        public override int? SubCategory => 29;
+        public override int? SubCategory => WandType.Shard;
         public override int Weight => 10;
     }
 }

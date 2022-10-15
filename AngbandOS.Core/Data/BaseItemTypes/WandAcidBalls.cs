@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreAcid => true;
         public override int Level => 50;
         public override int Locale1 => 50;
-        public override int? SubCategory => 20;
+        public override int? SubCategory => WandType.AcidBall;
         public override int Weight => 10;
     }
 }

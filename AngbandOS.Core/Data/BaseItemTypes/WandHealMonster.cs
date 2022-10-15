@@ -15,7 +15,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Heal Monster";
         public override int Level => 2;
         public override int Locale1 => 2;
-        public override int? SubCategory => 0;
+        public override int? SubCategory => WandType.HealMonster;
         public override int Weight => 10;
     }
 }

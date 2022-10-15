@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override int Level => 15;
         public override int Locale1 => 15;
         public override int Locale2 => 50;
-        public override int? SubCategory => 2;
+        public override int? SubCategory => WandType.CloneMonster;
         public override int Weight => 10;
     }
 }

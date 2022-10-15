@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreCold => true;
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int? SubCategory => 23;
+        public override int? SubCategory => WandType.ColdBall;
         public override int Weight => 10;
     }
 }

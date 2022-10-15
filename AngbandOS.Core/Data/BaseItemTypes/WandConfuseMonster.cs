@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Confuse Monster";
         public override int Level => 5;
         public override int Locale1 => 3;
-        public override int? SubCategory => 10;
+        public override int? SubCategory => WandType.ConfuseMonster;
         public override int Weight => 10;
     }
 }

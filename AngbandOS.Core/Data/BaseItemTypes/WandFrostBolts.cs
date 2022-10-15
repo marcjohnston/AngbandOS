@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Frost Bolts";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int? SubCategory => 19;
+        public override int? SubCategory => WandType.ColdBolt;
         public override int Weight => 10;
     }
 }

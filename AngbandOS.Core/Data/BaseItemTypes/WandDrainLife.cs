@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Drain Life";
         public override int Level => 50;
         public override int Locale1 => 50;
-        public override int? SubCategory => 12;
+        public override int? SubCategory => WandType.DrainLife;
         public override int Weight => 10;
     }
 }

@@ -20,7 +20,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 10;
         public override int Locale2 => 40;
         public override int Locale3 => 80;
-        public override int? SubCategory => 6;
+        public override int? SubCategory => WandType.StoneToMud;
         public override int Weight => 10;
     }
 }
