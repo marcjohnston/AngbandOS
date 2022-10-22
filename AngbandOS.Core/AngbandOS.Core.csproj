@@ -7,22 +7,13 @@
   </PropertyGroup>
 	
   <ItemGroup>
-    <None Remove="Data\AmuletFlavours.csv" />
     <None Remove="Data\Animations.csv" />
     <None Remove="Data\BaseFixedartifacts.csv" />
-    <None Remove="Data\BaseItemTypes.csv" />
-    <None Remove="Data\BaseMonsterRaces.csv" />
     <None Remove="Data\BaseRareItemTypes.csv" />
     <None Remove="Data\BaseVaultTypes.csv" />
     <None Remove="Data\FloorTileTypes.csv" />
-    <None Remove="Data\MushroomFlavours.csv" />
-    <None Remove="Data\PotionFlavours.csv" />
-    <None Remove="Data\ProjectileGraphics.csv" />
-    <None Remove="Data\RingFlavours.csv" />
-    <None Remove="Data\RodFlavours.csv" />
     <None Remove="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
@@ -31,26 +22,14 @@
     <None Remove="Data\ScaffoldTemplates\BaseScrollFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseStaffFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseWandFlavour.template" />
-    <None Remove="Data\ScrollFlavours.csv" />
-    <None Remove="Data\StaffFlavours.csv" />
-    <None Remove="Data\WandFlavours.csv" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\AmuletFlavours.csv" />
     <EmbeddedResource Include="Data\Animations.csv" />
     <EmbeddedResource Include="Data\BaseFixedartifacts.csv" />
-    <EmbeddedResource Include="Data\BaseItemTypes.csv" />
-    <EmbeddedResource Include="Data\BaseMonsterRaces.csv" />
     <EmbeddedResource Include="Data\BaseRareItemTypes.csv" />
     <EmbeddedResource Include="Data\BaseVaultTypes.csv" />
     <EmbeddedResource Include="Data\FloorTileTypes.csv" />
-    <EmbeddedResource Include="Data\MushroomFlavours.csv" />
-    <EmbeddedResource Include="Data\PotionFlavours.csv" />
-    <EmbeddedResource Include="Data\ProjectileGraphics.csv" />
-    <EmbeddedResource Include="Data\RingFlavours.csv" />
-    <EmbeddedResource Include="Data\RodFlavours.csv" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
@@ -61,9 +40,6 @@
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseStaffFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseWandFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseItemType.template" />
-    <EmbeddedResource Include="Data\ScrollFlavours.csv" />
-    <EmbeddedResource Include="Data\StaffFlavours.csv" />
-    <EmbeddedResource Include="Data\WandFlavours.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,17 +48,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\BaseWandFlavours\" />
-    <Folder Include="Data\BaseStaffFlavours\" />
-    <Folder Include="Data\BaseRingFlavours\" />
-    <Folder Include="Data\BaseRodFlavours\" />
-    <Folder Include="Data\BasePotionFlavours\" />
-    <Folder Include="Data\BaseAmuletFlavours\" />
-    <Folder Include="Data\BaseMushroomFlavours\" />
-    <Folder Include="Data\BaseProjectileGraphics\" />
   </ItemGroup>
 
 </Project>
