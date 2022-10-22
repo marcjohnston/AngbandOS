@@ -108,6 +108,6 @@ namespace AngbandOS.Stores
                     return false;
             }
         }
-        protected override IStoreCommand AdvertisedStoreCommand4 => new ResearchSpellStoreCommand();
+        protected override IStoreCommand AdvertisedStoreCommand4 => new ResearchItemStoreCommand();
     }
 }
