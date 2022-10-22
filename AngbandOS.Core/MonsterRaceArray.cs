@@ -6,38 +6,48 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AngbandOS
 {
     [Serializable]
     internal class MonsterRaceArray : List<MonsterRace>
     {
+        private readonly SaveGame SaveGame;
         public MonsterRaceArray(SaveGame saveGame)
         {
-            Dictionary<string, BaseMonsterRace> baseRaces = saveGame.BaseMonsterRaces;
+            SaveGame = saveGame;
+            Assembly assembly = Assembly.GetExecutingAssembly();
             int index = 0;
             for (int level = -1; level < 128; level++)
             {
-                foreach (KeyValuePair<string, BaseMonsterRace> baseMonsterRace in baseRaces)
+                foreach (Type type in assembly.GetTypes())
                 {
-                    if (baseMonsterRace.Value.Level != level)
+                    // Check to see if the type implements the MonsterRace interface and is not an abstract class.
+                    if (!type.IsAbstract && typeof(Base2MonsterRace).IsAssignableFrom(type))
                     {
-                        continue;
+                        // Load the monster.
+                        Base2MonsterRace monsterRace = (Base2MonsterRace)Activator.CreateInstance(type);
+
+                        if (monsterRace.Level == level)
+                        {
+                            Add(new MonsterRace(monsterRace, index));
+                            index++;
+                        }
                     }
-                    Add(new MonsterRace(baseMonsterRace.Value, index));
-                    index++;
                 }
             }
         }
 
-        public void AddKnowledge(SaveGame saveGame)
+        public void AddKnowledge()
         {
             foreach (MonsterRace monsterType in this)
             {
-                monsterType.Knowledge = new MonsterKnowledge(saveGame, monsterType);
+                monsterType.Knowledge = new MonsterKnowledge(SaveGame, monsterType);
             }
         }
 

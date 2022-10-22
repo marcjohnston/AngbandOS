@@ -18,6 +18,7 @@ using AngbandOS.StaticData;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.CompilerServices;
 
 namespace AngbandOS
 {
@@ -20197,8 +20198,8 @@ namespace AngbandOS
         //[NonSerialized]
         //public Dictionary<string, BaseItemType> BaseItemTypes;
 
-        [NonSerialized]
-        public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
+        //[NonSerialized]
+        //public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
 
         [NonSerialized]
         public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
@@ -20244,8 +20245,8 @@ namespace AngbandOS
         /// </summary>
         public void LoadOrCreateStaticResources()
         {
-            BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace());
-            // BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
+            //BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace(), "BaseMonsterRace");
+            //BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
             BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
@@ -20260,6 +20261,34 @@ namespace AngbandOS
             //BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour(), "BaseStaffFlavour");
             //BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour(), "BaseRingFlavour");
             //BaseRodFlavours = ReadEntitiesFromCsv(new RodFlavour(), "BaseRodFlavour");
+        }
+
+        private string MakeIdentifier(string s)
+        {
+            s = s.Replace("2", "Two");
+            s = s.Replace("4", "Four");
+            s = s.Replace("9", "Nine");
+            s = s.Replace("11", "Eleven");
+            string newS = "";
+            int i = 0;
+            while (i < s.Length)
+            {
+                if (s[i] == ' ' || s[i] == '-')
+                {
+                    char c = s[i + 1];
+                    string newC = $"{c}".ToUpper();
+                    newS = $"{newS}{s[i]}{newC}";
+                    i++;
+                }
+                else
+                    newS = $"{newS}{s[i]}";
+                i++;
+            }
+            newS = newS.Replace("-", "");
+            newS = newS.Replace(",", "");
+            newS = newS.Replace("'", "");
+            newS = newS.Replace(" ", "");
+            return newS;
         }
 
         private Dictionary<string, T> ReadEntitiesFromCsv<T>(T sample, string scaffoldTemplateName = null) where T : EntityType, new()
@@ -20406,7 +20435,10 @@ namespace AngbandOS
                                 identifier = true;
                                 propertyName = propertyName.Substring(1);
                             }
-                            PropertyInfo desiredProperty = entityProperties.Single(property => property.Name == propertyName);
+                            PropertyInfo? desiredProperty = entityProperties.SingleOrDefault(property => property.Name == propertyName);
+                            if (desiredProperty == null)
+                                throw new Exception($"The property {propertyName} was not found in the object in the template line of {templateLine}.");
+
                             switch (desiredProperty.PropertyType.Name)
                             {
                                 case "Boolean":
@@ -20427,7 +20459,7 @@ namespace AngbandOS
                                     {
                                         int value = (int)desiredProperty.GetValue(entity);
                                         tokens[index] = value.ToString();
-                                        include = (value != 0); // Provided by the base class no need to override
+                                        include = true; //  (value != 0); // Provided by the base class no need to override
                                         break;
                                     }
                                 case "ItemCategory":
@@ -20443,9 +20475,24 @@ namespace AngbandOS
                                     }
                                 case "String":
                                     {
-                                        tokens[index] = desiredProperty.GetValue(entity).ToString();
+                                        string s = desiredProperty.GetValue(entity).ToString();
                                         if (identifier)
-                                            tokens[index] = tokens[index].Replace("-", "").Replace(" ", "");
+                                            s = MakeIdentifier(s);
+                                        tokens[index] = s;
+                                        break;
+                                    }
+                                case "AttackType":
+                                    {
+                                        AttackType value = (AttackType)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"AttackType.{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "AttackEffect":
+                                    {
+                                        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"AttackEffect.{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
                                         break;
                                     }
                                 default:
@@ -20464,15 +20511,16 @@ namespace AngbandOS
                     ////string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
                     //string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
                     //className = className.Replace("-", "") + "WandFlavor";
+                    string filename = $"{path}{Path.DirectorySeparatorChar}{className}.cs";
                     try
                     {
-                        File.Delete($"{path}{Path.DirectorySeparatorChar}{className}.cs");
+                        File.Delete(filename);
                     }
                     catch (Exception)
                     {
 
                     }
-                    File.WriteAllLines($"{path}{Path.DirectorySeparatorChar}{className}.cs", scaffoldedOutput);
+                    File.WriteAllLines(filename, scaffoldedOutput);
                 }
             }
             return dictionary;

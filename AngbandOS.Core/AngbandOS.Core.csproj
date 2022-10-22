@@ -22,6 +22,7 @@
     <None Remove="Data\RodFlavours.csv" />
     <None Remove="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
+    <None Remove="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
@@ -49,6 +50,7 @@
     <EmbeddedResource Include="Data\ProjectileGraphics.csv" />
     <EmbeddedResource Include="Data\RingFlavours.csv" />
     <EmbeddedResource Include="Data\RodFlavours.csv" />
+    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />

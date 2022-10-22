@@ -1,0 +1,60 @@
+using AngbandOS.Enumerations;
+using AngbandOS.Core.Interface;
+
+namespace AngbandOS.StaticData
+{
+    internal class SmeagolMonsterRace : Base2MonsterRace
+    {
+        public override char Character => 'h';
+        public override Colour Colour => Colour.Beige;
+        public override string Name => "Smeagol";
+
+        public override int ArmourClass => 12;
+        public override int Attack1DDice => 0;
+        public override int Attack1DSides => 0;
+        public override AttackEffect Attack1Effect => AttackEffect.EatGold;
+        public override AttackType Attack1Type => AttackType.Touch;
+        public override int Attack2DDice => 0;
+        public override int Attack2DSides => 0;
+        public override AttackEffect Attack2Effect => AttackEffect.Nothing;
+        public override AttackType Attack2Type => AttackType.Nothing;
+        public override int Attack3DDice => 0;
+        public override int Attack3DSides => 0;
+        public override AttackEffect Attack3Effect => AttackEffect.Nothing;
+        public override AttackType Attack3Type => AttackType.Nothing;
+        public override int Attack4DDice => 0;
+        public override int Attack4DSides => 0;
+        public override AttackEffect Attack4Effect => AttackEffect.Nothing;
+        public override AttackType Attack4Type => AttackType.Nothing;
+        public override bool BashDoor => true;
+        public override string Description => "He's been sneaking, and he wants his 'precious.'";
+        public override bool Drop90 => true;
+        public override bool DropGood => true;
+        public override bool DropGreat => true;
+        public override bool Evil => true;
+        public override bool ForceMaxHp => true;
+        public override int FreqInate => 0;
+        public override int FreqSpell => 0;
+        public override string FriendlyName => "Smeagol";
+        public override int Hdice => 10;
+        public override int Hside => 20;
+        public override bool Invisible => true;
+        public override int Level => 3;
+        public override bool Male => true;
+        public override int Mexp => 16;
+        public override int NoticeRange => 20;
+        public override bool OnlyDropItem => true;
+        public override bool OpenDoor => true;
+        public override bool RandomMove25 => true;
+        public override bool RandomMove50 => true;
+        public override int Rarity => 2;
+        public override int Sleep => 5;
+        public override bool Smart => true;
+        public override int Speed => 130;
+        public override string SplitName1 => "            ";
+        public override string SplitName2 => "            ";
+        public override string SplitName3 => "  Smeagol   ";
+        public override bool TakeItem => true;
+        public override bool Unique => true;
+    }
+}

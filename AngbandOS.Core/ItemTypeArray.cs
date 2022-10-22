@@ -25,10 +25,10 @@ namespace AngbandOS
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
-                // Check to see if the type implements the IArtifactPower interface and is not an abstract class.
+                // Check to see if the type implements the IItemCategory interface and is not an abstract class.
                 if (!type.IsAbstract && typeof(IItemCategory).IsAssignableFrom(type))
                 {
-                    // Load the command.
+                    // Load the item.
                     IItemCategory itemCategory = (IItemCategory)Activator.CreateInstance(type);
                     Add(new ItemType(itemCategory));
                 }
