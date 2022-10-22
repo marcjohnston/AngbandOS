@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Restore Constitution";
         public override int Level => 25;
         public override int Locale1 => 25;
-        public override int? SubCategory => 46;
+        public override int? SubCategory => (int)PotionType.ResCon;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Restore constitution restores your constitution
+            return saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        }
     }
 }

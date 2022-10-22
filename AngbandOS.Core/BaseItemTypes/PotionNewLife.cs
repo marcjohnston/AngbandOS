@@ -21,7 +21,27 @@ namespace AngbandOS.ItemCategories
         public override int Locale2 => 100;
         public override int Locale3 => 120;
         public override int Pval => 100;
-        public override int? SubCategory => 63;
+        public override int? SubCategory => (int)PotionType.NewLife;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // New life rerolls your health, cures all mutations, and restores you to your birth race
+            saveGame.Player.RerollHitPoints();
+            if (saveGame.Player.Dna.HasMutations)
+            {
+                saveGame.MsgPrint("You are cured of all mutations.");
+                saveGame.Player.Dna.LoseAllMutations();
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.HandleStuff();
+            }
+            if (saveGame.Player.RaceIndex != saveGame.Player.RaceIndexAtBirth)
+            {
+                var oldRaceName = Race.RaceInfo[saveGame.Player.RaceIndexAtBirth].Title;
+                saveGame.MsgPrint($"You feel more {oldRaceName} again.");
+                saveGame.Player.ChangeRace(saveGame.Player.RaceIndexAtBirth);
+                saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);
+            }
+            return true;
+        }
     }
 }

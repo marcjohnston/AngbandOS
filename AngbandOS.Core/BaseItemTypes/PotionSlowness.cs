@@ -16,7 +16,13 @@ namespace AngbandOS.ItemCategories
         public override int Level => 1;
         public override int Locale1 => 1;
         public override int Pval => 50;
-        public override int? SubCategory => 4;
+        public override int? SubCategory => (int)PotionType.Slowness;
         public override int Weight => 4;
+
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Slowness slows you down.
+            return saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(25) + 15);
+        }
     }
 }

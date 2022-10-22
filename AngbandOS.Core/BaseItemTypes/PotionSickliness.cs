@@ -15,7 +15,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Sickliness";
         public override int Level => 10;
         public override int Locale1 => 10;
-        public override int? SubCategory => 20;
+        public override int? SubCategory => (int)PotionType.DecCon;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Sickliness tries to reduce your constitution
+            return saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
+        }
     }
 }

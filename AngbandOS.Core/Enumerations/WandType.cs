@@ -7,10 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Enumerations
 {
-    /// <summary>
-    /// TODO: Cannot be removed until the default magic missile provided to a new player is converted to objects
-    /// </summary>
-    internal static class WandType
+    internal static class WandType // TODO: Cannot be removed until the default magic missile provided to a new player is converted to objects
     {
         public const int AcidBall = 20;
         public const int AcidBolt = 16;

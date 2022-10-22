@@ -16,7 +16,16 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Detonations";
         public override int Level => 60;
         public override int Locale1 => 60;
-        public override int? SubCategory => 22;
+        public override int? SubCategory => (int)PotionType.Detonations;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
+            saveGame.MsgPrint("Massive explosions rupture your body!");
+            saveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
+            saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + 75);
+            saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + 5000);
+            return true;
+        }
     }
 }

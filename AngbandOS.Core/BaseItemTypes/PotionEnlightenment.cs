@@ -20,7 +20,14 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 25;
         public override int Locale2 => 50;
         public override int Locale3 => 100;
-        public override int? SubCategory => 56;
+        public override int? SubCategory => (int)PotionType.Enlightenment;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Enlightenment shows you the whole level
+            saveGame.MsgPrint("An image of your surroundings forms in your mind...");
+            saveGame.Level.WizLight();
+            return true;
+        }
     }
 }

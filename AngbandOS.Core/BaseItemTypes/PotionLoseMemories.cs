@@ -15,7 +15,18 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Lose Memories";
         public override int Level => 10;
         public override int Locale1 => 10;
-        public override int? SubCategory => 13;
+        public override int? SubCategory => (int)PotionType.LoseMemories;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Lose Memories reduces your experience
+            if (!saveGame.Player.HasHoldLife && saveGame.Player.ExperiencePoints > 0)
+            {
+                saveGame.MsgPrint("You feel your memories fade.");
+                saveGame.Player.LoseExperience(saveGame.Player.ExperiencePoints / 4);
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -85,7 +85,7 @@ namespace AngbandOS.Projection
                     SaveGame.Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        SaveGame.PotionSmashEffect(who, y, x, oSval);
+                        SaveGame.PotionSmashEffect(who, y, x, (PotionType)oSval);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);
                 }

@@ -20,7 +20,23 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 1;
         public override int Locale2 => 40;
         public override int Locale3 => 60;
-        public override int? SubCategory => 29;
+        public override int? SubCategory => (int)PotionType.Speed;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Speed temporarily hastes you
+            if (saveGame.Player.TimedHaste == 0)
+            {
+                if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(25) + 15))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
+            }
+            return false;
+        }
     }
 }

@@ -18,7 +18,12 @@ namespace AngbandOS.ItemCategories
         public override int Level => 20;
         public override int Locale1 => 20;
         public override int Locale2 => 25;
-        public override int? SubCategory => 53;
+        public override int? SubCategory => (int)PotionType.IncCha;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Charisma increases your charisma
+            return saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma);
+        }
     }
 }

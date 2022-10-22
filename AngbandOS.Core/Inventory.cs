@@ -331,8 +331,7 @@ namespace AngbandOS
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
-                            SaveGame.PotionSmashEffect(0, _player.MapY, _player.MapX,
-                                oPtr.ItemSubCategory);
+                            SaveGame.PotionSmashEffect(0, _player.MapY, _player.MapX, (PotionType)oPtr.ItemSubCategory);
                         }
                         InvenItemIncrease(i, -amt);
                         InvenItemOptimize(i);

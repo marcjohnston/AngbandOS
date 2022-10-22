@@ -16,7 +16,20 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Restore Mana";
         public override int Level => 25;
         public override int Locale1 => 25;
-        public override int? SubCategory => 40;
+        public override int? SubCategory => (int)PotionType.RestoreMana;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Restore mana restores your to maximum mana
+            if (saveGame.Player.Mana < saveGame.Player.MaxMana)
+            {
+                saveGame.Player.Mana = saveGame.Player.MaxMana;
+                saveGame.Player.FractionalMana = 0;
+                saveGame.MsgPrint("Your feel your head clear.");
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                return true;
+            }
+            return false;
+        }
     }
 }

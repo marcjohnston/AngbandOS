@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Boldness";
         public override int Level => 1;
         public override int Locale1 => 1;
-        public override int? SubCategory => 28;
+        public override int? SubCategory => (int)PotionType.Boldness;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Boldness stops you being afraid
+            return saveGame.Player.SetTimedFear(0);
+        }
     }
 }

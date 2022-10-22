@@ -16,7 +16,39 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Augmentation";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int? SubCategory => 55;
+        public override int? SubCategory => (int)PotionType.Augmentation;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            bool identified = false;
+
+            // Augmentation increases all ability scores
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Strength))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Constitution))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma))
+            {
+                identified = true;
+            }
+
+            return identified;
+        }
     }
 }

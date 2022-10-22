@@ -16,7 +16,25 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Heroism";
         public override int Level => 1;
         public override int Locale1 => 1;
-        public override int? SubCategory => 32;
+        public override int? SubCategory => (int)PotionType.Heroism;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            bool identified = false;
+            // Heroism removes fear, cures 10 health, and gives you timed heroism
+            if (saveGame.Player.SetTimedFear(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.RestoreHealth(10))
+            {
+                identified = true;
+            }
+            return identified;
+        }
     }
 }

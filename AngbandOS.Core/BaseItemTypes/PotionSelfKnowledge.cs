@@ -16,7 +16,15 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Self Knowledge";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int? SubCategory => 58;
+        public override int? SubCategory => (int)PotionType.SelfKnowledge;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Self knowledge gives you information about yourself
+            saveGame.MsgPrint("You begin to know yourself a little better...");
+            saveGame.MsgPrint(null);
+            saveGame.SelfKnowledge();
+            return true;
+        }
     }
 }

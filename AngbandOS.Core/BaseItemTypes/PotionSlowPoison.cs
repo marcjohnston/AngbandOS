@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Slow Poison";
         public override int Level => 1;
         public override int Locale1 => 1;
-        public override int? SubCategory => 26;
+        public override int? SubCategory => (int)PotionType.SlowPoison;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Slow poison halves the remaining duration of any poison you have
+            return saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison / 2);
+        }
     }
 }

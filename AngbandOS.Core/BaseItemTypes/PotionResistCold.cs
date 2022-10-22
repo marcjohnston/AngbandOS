@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Resist Cold";
         public override int Level => 1;
         public override int Locale1 => 1;
-        public override int? SubCategory => 31;
+        public override int? SubCategory => (int)PotionType.ResistCold;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Resist cold gives you timed frost resistance
+            return saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(10) + 10);
+        }
     }
 }

@@ -15,7 +15,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Naivety";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int? SubCategory => 18;
+        public override int? SubCategory => (int)PotionType.DecWis;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Naivety tries to reduce your wisdom
+            return saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+        }
     }
 }

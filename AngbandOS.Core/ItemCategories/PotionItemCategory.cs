@@ -9,6 +9,12 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class PotionItemCategory : BaseItemCategory
     {
+        /// <summary>
+        /// Have a potion affect the player.  Activates the potion effect.
+        /// </summary>
+        /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
+        public abstract bool Quaff(SaveGame saveGame);
+
         public override ItemCategory CategoryEnum => ItemCategory.Potion;
         public override bool CanAbsorb(Item item, Item other)
         {

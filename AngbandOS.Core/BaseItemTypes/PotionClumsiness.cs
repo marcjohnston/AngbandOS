@@ -15,7 +15,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Clumsiness";
         public override int Level => 5;
         public override int Locale1 => 5;
-        public override int? SubCategory => 19;
+        public override int? SubCategory => (int)PotionType.DecDex;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Clumsiness tries to reduce your dexterity
+            return saveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity);
+        }
     }
 }

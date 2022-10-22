@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Commands
 {
@@ -48,12 +49,14 @@ namespace AngbandOS.Commands
             saveGame.EnergyUse = 100;
             int itemLevel = item.ItemType.Level;
             // Do the actual potion effect
-            bool identified = saveGame.PotionEffect(item.ItemSubCategory);
+            PotionItemCategory potion = (PotionItemCategory)item.ItemType.BaseCategory; // The item will be a potion.
+            bool identified = potion.Quaff(saveGame);
+            //bool identified = saveGame.PotionEffect((PotionType)item.ItemSubCategory);
             // Skeletons are messy drinkers
             if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
                 saveGame.MsgPrint("Some of the fluid falls through your jaws!");
-                saveGame.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, item.ItemSubCategory);
+                saveGame.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, (PotionType)item.ItemSubCategory);
             }
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type

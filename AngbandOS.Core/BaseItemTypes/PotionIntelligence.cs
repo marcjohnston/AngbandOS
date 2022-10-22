@@ -20,7 +20,12 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 20;
         public override int Locale2 => 25;
         public override int Locale3 => 30;
-        public override int? SubCategory => 49;
+        public override int? SubCategory => (int)PotionType.IncInt;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Intelligence increases your intelligence
+            return saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
+        }
     }
 }

@@ -15,7 +15,21 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Ruination";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int? SubCategory => 15;
+        public override int? SubCategory => (int)PotionType.Ruination;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Ruination does 10d10 damage and reduces all your ability scores, bypassing
+            // sustains and divine protection
+            saveGame.MsgPrint("Your nerves and muscles feel weak and lifeless!");
+            saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "a potion of Ruination");
+            saveGame.Player.DecreaseAbilityScore(Ability.Dexterity, 25, true);
+            saveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 25, true);
+            saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 25, true);
+            saveGame.Player.DecreaseAbilityScore(Ability.Strength, 25, true);
+            saveGame.Player.DecreaseAbilityScore(Ability.Charisma, 25, true);
+            saveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 25, true);
+            return true;
+        }
     }
 }

@@ -15,7 +15,13 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Ugliness";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int? SubCategory => 21;
+        public override int? SubCategory => (int)PotionType.DecCha;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Ugliness tries to reduce your charisma
+            return saveGame.Player.TryDecreasingAbilityScore(Ability.Charisma);
+        }
+
     }
 }

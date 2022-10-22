@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Detect Invisible";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int? SubCategory => 25;
+        public override int? SubCategory => (int)PotionType.DetectInvis;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Detect invisible gives you times see invisibility
+            return saveGame.Player.SetTimedSeeInvisibility(saveGame.Player.TimedSeeInvisibility + 12 + Program.Rng.DieRoll(12));
+        }
     }
 }

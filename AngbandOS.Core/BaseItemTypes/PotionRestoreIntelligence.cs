@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Restore Intelligence";
         public override int Level => 25;
         public override int Locale1 => 25;
-        public override int? SubCategory => 43;
+        public override int? SubCategory => (int)PotionType.ResInt;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Restore intelligence restores your intelligence
+            return saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+        }
     }
 }

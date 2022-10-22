@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Infra-vision";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int? SubCategory => 24;
+        public override int? SubCategory => (int)PotionType.Infravision;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Infravision gives you timed infravision
+            return saveGame.Player.SetTimedInfravision(saveGame.Player.TimedInfravision + 100 + Program.Rng.DieRoll(100));
+        }
     }
 }

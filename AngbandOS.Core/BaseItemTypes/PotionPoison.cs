@@ -15,7 +15,25 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Poison";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int? SubCategory => 6;
+        public override int? SubCategory => (int)PotionType.Poison;
         public override int Weight => 4;
+
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Poison simply poisons you
+            if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance != 0))
+            {
+                // Hagarg Ryonis can protect you against poison
+                if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                {
+                    saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                }
+                else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + Program.Rng.RandomLessThan(15) + 10))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

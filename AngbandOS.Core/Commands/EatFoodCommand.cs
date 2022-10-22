@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Commands
 {
@@ -267,7 +268,8 @@ namespace AngbandOS.Commands
                     }
                 case FoodType.SlimeMold:
                     {
-                        saveGame.PotionEffect(PotionType.SlimeMold);
+                        PotionItemCategory slimeMold = new PotionSlimeMoldJuice();
+                        slimeMold.Quaff(saveGame);
                         ident = true;
                         break;
                     }

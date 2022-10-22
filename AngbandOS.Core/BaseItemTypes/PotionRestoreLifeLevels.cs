@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Restore Life Levels";
         public override int Level => 40;
         public override int Locale1 => 40;
-        public override int? SubCategory => 41;
+        public override int? SubCategory => (int)PotionType.RestoreExp;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Restore life levels restores any lost experience
+            return saveGame.Player.RestoreLevel();
+        }
     }
 }

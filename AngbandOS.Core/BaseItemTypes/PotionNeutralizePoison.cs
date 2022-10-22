@@ -16,7 +16,12 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Neutralize Poison";
         public override int Level => 5;
         public override int Locale1 => 5;
-        public override int? SubCategory => 27;
+        public override int? SubCategory => (int)PotionType.CurePoison;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Cure poison removes any poison you have
+            return saveGame.Player.SetTimedPoison(0);
+        }
     }
 }

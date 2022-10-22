@@ -27,7 +27,17 @@ namespace AngbandOS.ItemCategories
         public override int Locale3 => 80;
         public override int Locale4 => 100;
         public override int Pval => 100;
-        public override int? SubCategory => 60;
+        public override int? SubCategory => (int)PotionType.Resistance;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Resistance gives you all timed resistances
+            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
+            return true;
+        }
     }
 }

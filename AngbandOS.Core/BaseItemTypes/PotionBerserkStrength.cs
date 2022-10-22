@@ -16,7 +16,26 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Berserk Strength";
         public override int Level => 3;
         public override int Locale1 => 3;
-        public override int? SubCategory => 33;
+        public override int? SubCategory => (int)PotionType.BeserkStrength;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            bool identified = false;
+
+            // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
+            if (saveGame.Player.SetTimedFear(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.RestoreHealth(30))
+            {
+                identified = true;
+            }
+            return identified;
+        }
     }
 }

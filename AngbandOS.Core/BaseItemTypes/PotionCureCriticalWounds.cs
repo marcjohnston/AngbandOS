@@ -17,7 +17,40 @@ namespace AngbandOS.ItemCategories
         public override int Level => 5;
         public override int Locale1 => 5;
         public override int Pval => 100;
-        public override int? SubCategory => 36;
+        public override int? SubCategory => (int)PotionType.CureCritical;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            bool identified = false;
+
+            // Cure critical wounds heals you 6d8 health, and cures blindness, confusion, stun,
+            // poison, and bleeding
+            if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(6, 8)))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedBlindness(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedConfusion(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedPoison(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedStun(0))
+            {
+                identified = true;
+            }
+            if (saveGame.Player.SetTimedBleeding(0))
+            {
+                identified = true;
+            }
+
+            return identified;
+        }
     }
 }

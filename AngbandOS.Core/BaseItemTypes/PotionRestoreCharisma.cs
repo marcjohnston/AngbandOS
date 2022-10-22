@@ -16,7 +16,13 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Restore Charisma";
         public override int Level => 20;
         public override int Locale1 => 20;
-        public override int? SubCategory => 47;
+        public override int? SubCategory => (int)PotionType.ResCha;
         public override int Weight => 4;
+
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Restore charisma restores your charisma
+            return saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        }
     }
 }

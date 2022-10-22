@@ -89,13 +89,13 @@ namespace AngbandOS
             new[]
             {
                 new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Potion, PotionType.Healing),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             },
             new[]
             {
                 new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
-                new ItemIdentifier(ItemCategory.Potion, PotionType.RestoreMana),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.RestoreMana),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             },
             new[]
@@ -125,13 +125,13 @@ namespace AngbandOS
             new[]
             {
                 new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
-                new ItemIdentifier(ItemCategory.Potion, PotionType.Healing),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             },
             new[]
             {
                 new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis),
-                new ItemIdentifier(ItemCategory.Potion, PotionType.Healing),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
                 new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
             }
         };
@@ -2059,6 +2059,8 @@ namespace AngbandOS
                 _player.Inventory[InventorySlot.Lightsource] = carried;
                 _player.WeightCarried += carried.Weight;
             }
+            // professions = Warrior = 0
+            // warrior-mage = 6
             for (int i = 0; i < 3; i++)
             {
                 ItemCategory tv = _playerInit[_player.ProfessionIndex][i].Category;

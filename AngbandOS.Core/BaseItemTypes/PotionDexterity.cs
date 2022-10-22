@@ -20,7 +20,12 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 20;
         public override int Locale2 => 25;
         public override int Locale3 => 30;
-        public override int? SubCategory => 51;
+        public override int? SubCategory => (int)PotionType.IncDex;
         public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Dexterity increases your dexterity
+            return saveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity);
+        }
     }
 }
