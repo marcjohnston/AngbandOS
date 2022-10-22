@@ -1,0 +1,61 @@
+using AngbandOS.Enumerations;
+using AngbandOS.Core.Interface;
+
+namespace AngbandOS.StaticData
+{
+    internal class GreaterTitanMonsterRace : Base2MonsterRace
+    {
+        public override char Character => 'P';
+        public override Colour Colour => Colour.BrightYellow;
+        public override string Name => "Greater titan";
+
+        public override int ArmourClass => 125;
+        public override int Attack1DDice => 12;
+        public override int Attack1DSides => 12;
+        public override AttackEffect Attack1Effect => AttackEffect.Confuse;
+        public override AttackType Attack1Type => AttackType.Hit;
+        public override int Attack2DDice => 12;
+        public override int Attack2DSides => 12;
+        public override AttackEffect Attack2Effect => AttackEffect.Confuse;
+        public override AttackType Attack2Type => AttackType.Hit;
+        public override int Attack3DDice => 12;
+        public override int Attack3DSides => 12;
+        public override AttackEffect Attack3Effect => AttackEffect.Confuse;
+        public override AttackType Attack3Type => AttackType.Hit;
+        public override int Attack4DDice => 12;
+        public override int Attack4DSides => 12;
+        public override AttackEffect Attack4Effect => AttackEffect.Confuse;
+        public override AttackType Attack4Type => AttackType.Hit;
+        public override bool BashDoor => true;
+        public override string Description => "A forty foot tall humanoid that shakes the ground as it walks. The power radiating from its frame shakes your courage, its hatred inspired by your defiance.";
+        public override bool Drop_4D2 => true;
+        public override bool DropGood => true;
+        public override bool Evil => true;
+        public override bool ForceMaxHp => true;
+        public override bool ForceSleep => true;
+        public override int FreqInate => 3;
+        public override int FreqSpell => 3;
+        public override string FriendlyName => "Greater titan";
+        public override bool Giant => true;
+        public override int Hdice => 38;
+        public override bool Heal => true;
+        public override int Hside => 100;
+        public override int Level => 46;
+        public override bool Male => true;
+        public override int Mexp => 13500;
+        public override bool MoveBody => true;
+        public override int NoticeRange => 30;
+        public override bool OnlyDropItem => true;
+        public override bool OpenDoor => true;
+        public override int Rarity => 3;
+        public override int Sleep => 15;
+        public override bool Smart => true;
+        public override int Speed => 120;
+        public override string SplitName1 => "            ";
+        public override string SplitName2 => "  Greater   ";
+        public override string SplitName3 => "   titan    ";
+        public override bool SummonMonsters => true;
+        public override bool TakeItem => true;
+        public override bool TeleportTo => true;
+    }
+}

@@ -49,7 +49,7 @@ namespace AngbandOS
         {
         }
 
-        public MonsterRace(BaseMonsterRace original, int index)
+        public MonsterRace(Base2MonsterRace original, int index)
         {
             Name = original.FriendlyName;
             SplitName1 = original.SplitName1;

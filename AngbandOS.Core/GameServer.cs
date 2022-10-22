@@ -76,7 +76,7 @@ namespace AngbandOS
                 SaveGame saveGame = SaveGame.Initialize(persistentStorage);
                 saveGame.Play(console, persistentStorage, updateNotifier);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 updateNotifier.SaveGameIncompatible();
                 return false;

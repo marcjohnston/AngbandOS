@@ -1,0 +1,65 @@
+using AngbandOS.Enumerations;
+using AngbandOS.Core.Interface;
+
+namespace AngbandOS.StaticData
+{
+    internal class BaphometTheMinotaurLordMonsterRace : Base2MonsterRace
+    {
+        public override char Character => 'H';
+        public override Colour Colour => Colour.Red;
+        public override string Name => "Baphomet, the Minotaur Lord";
+
+        public override int ArmourClass => 120;
+        public override bool Arrow7D6 => true;
+        public override int Attack1DDice => 12;
+        public override int Attack1DSides => 13;
+        public override AttackEffect Attack1Effect => AttackEffect.Hurt;
+        public override AttackType Attack1Type => AttackType.Butt;
+        public override int Attack2DDice => 12;
+        public override int Attack2DSides => 13;
+        public override AttackEffect Attack2Effect => AttackEffect.Hurt;
+        public override AttackType Attack2Type => AttackType.Butt;
+        public override int Attack3DDice => 10;
+        public override int Attack3DSides => 10;
+        public override AttackEffect Attack3Effect => AttackEffect.Hurt;
+        public override AttackType Attack3Type => AttackType.Hit;
+        public override int Attack4DDice => 10;
+        public override int Attack4DSides => 10;
+        public override AttackEffect Attack4Effect => AttackEffect.Hurt;
+        public override AttackType Attack4Type => AttackType.Hit;
+        public override bool BashDoor => true;
+        public override bool BreatheForce => true;
+        public override string Description => "A fearsome bull-headed demon, Baphomet swings a mighty axe as he curses all that defy him.";
+        public override bool Drop_1D2 => true;
+        public override bool Drop_4D2 => true;
+        public override bool DropGood => true;
+        public override bool Evil => true;
+        public override bool ForceMaxHp => true;
+        public override bool ForceSleep => true;
+        public override int FreqInate => 6;
+        public override int FreqSpell => 6;
+        public override string FriendlyName => "Baphomet, the Minotaur Lord";
+        public override int Hdice => 35;
+        public override int Hside => 100;
+        public override bool ImmuneConfusion => true;
+        public override bool ImmuneFire => true;
+        public override bool ImmunePoison => true;
+        public override bool ImmuneSleep => true;
+        public override int Level => 51;
+        public override bool LightningBall => true;
+        public override bool Male => true;
+        public override bool ManaBolt => true;
+        public override int Mexp => 18000;
+        public override int NoticeRange => 30;
+        public override bool OnlyDropItem => true;
+        public override bool PlasmaBolt => true;
+        public override int Rarity => 4;
+        public override int Sleep => 30;
+        public override bool Slow => true;
+        public override int Speed => 130;
+        public override string SplitName1 => "            ";
+        public override string SplitName2 => "            ";
+        public override string SplitName3 => "  Baphomet  ";
+        public override bool Unique => true;
+    }
+}
