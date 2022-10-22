@@ -1,0 +1,75 @@
+﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+using AngbandOS.Projection;
+
+namespace AngbandOS.Enumerations
+{
+    [Serializable]
+    internal class EatItemAttackEffect : BaseAttackEffect
+    {
+        public override int Power => 5;
+        public override string Description => "steal items";
+        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        {
+            // Steal an item
+            saveGame.Player.TakeHit(damage, monsterDescription);
+            if ((saveGame.Player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) < saveGame.Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.Player.Level) || saveGame.Player.HasAntiTheft)
+            {
+                saveGame.MsgPrint("You grab hold of your backpack!");
+                blinked = true;
+                obvious = true;
+                return;
+            }
+            // Have ten tries at picking a suitable item to steal
+            for (int k = 0; k < 10; k++)
+            {
+                int i = Program.Rng.RandomLessThan(InventorySlot.Pack);
+                Item item = saveGame.Player.Inventory[i];
+                if (item.ItemType == null)
+                {
+                    continue;
+                }
+                if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
+                {
+                    continue;
+                }
+                string itemName = item.Description(false, 3);
+                string y = item.Count > 1 ? "One of y" : "Y";
+                saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
+                int nextObjectIndex = saveGame.Level.OPop();
+                if (nextObjectIndex != 0)
+                {
+                    // Give the item to the thief so it can later drop it
+                    Item stolenItem = new Item(saveGame, item);
+                    saveGame.Level.Items[nextObjectIndex] = stolenItem;
+                    stolenItem.Count = 1;
+                    stolenItem.Marked = false;
+                    stolenItem.HoldingMonsterIndex = monsterIndex;
+                    stolenItem.NextInStack = monster.FirstHeldItemIndex;
+                    monster.FirstHeldItemIndex = nextObjectIndex;
+                }
+                saveGame.Player.Inventory.InvenItemIncrease(i, -1);
+                saveGame.Player.Inventory.InvenItemOptimize(i);
+                obvious = true;
+                blinked = true;
+                return;
+            }
+        }
+        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+        {
+            // Monsters don't actually steal from other monsters
+            pt = null;
+            damage = 0;
+            if (Program.Rng.DieRoll(2) == 1)
+            {
+                blinked = true;
+            }
+        }
+    }
+}

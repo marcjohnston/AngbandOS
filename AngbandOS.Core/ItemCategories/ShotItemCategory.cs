@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class ShotItemCategory : WeaponItemCategory
+    internal abstract class ShotItemCategory : AmmunitionItemCategory
     {
         public override ItemCategory CategoryEnum => ItemCategory.Shot;
         public override Colour Colour => Colour.BrightBrown;
@@ -39,13 +39,6 @@ namespace AngbandOS.ItemCategories
             return 0;
         }
 
-        //public override void ApplyMagic(Item item, int level, int power)
-        //{
-        //    if (power != 0)
-        //    {
-        //        ApplyMagicToWeapon(item, level, power);
-        //    }
-        //}
         public override bool CanAbsorb(Item item, Item other)
         {
             if (!item.StatsAreSame(other))

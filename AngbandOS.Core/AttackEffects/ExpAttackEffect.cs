@@ -1,0 +1,52 @@
+﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+using AngbandOS.Projection;
+using AngbandOS.StaticData;
+
+namespace AngbandOS.Enumerations
+{
+    [Serializable]
+    internal abstract class ExpAttackEffect : BaseAttackEffect
+    {
+        protected abstract int HoldLifePercentChange { get; }
+        protected abstract int DiceCount { get; }
+
+        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        {
+            obvious = true;
+            saveGame.Player.TakeHit(damage, monsterDescription);
+            if (saveGame.Player.HasHoldLife && Program.Rng.RandomLessThan(100) < HoldLifePercentChange)
+            {
+                saveGame.MsgPrint("You keep hold of your life force!");
+            }
+            else if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            {
+                // Hagarg Ryonis can protect us from experience loss
+                saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+            }
+            else
+            {
+                int d = Program.Rng.DiceRoll(10, 6) + (saveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife);
+                if (saveGame.Player.HasHoldLife)
+                {
+                    saveGame.MsgPrint("You feel your life slipping away!");
+                    saveGame.Player.LoseExperience(d / 10);
+                }
+                else
+                {
+                    saveGame.MsgPrint("You feel your life draining away!");
+                    saveGame.Player.LoseExperience(d);
+                }
+            }
+        }
+        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+        {
+            pt = new ProjectNether(saveGame);
+        }
+    }
+}

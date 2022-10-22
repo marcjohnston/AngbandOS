@@ -63,7 +63,19 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The number of times per round the monster attacks.
         /// </summary>
-        public MonsterAttack Attack1 = new MonsterAttack();
+        public MonsterAttack Attack1
+        {
+            get
+            {
+                return new MonsterAttack()
+                {
+                    DDice = Attack1DDice,
+                    DSide = Attack1DSides,
+                    Effect = Attack1Effect,
+                    Method = Attack1Type
+                };
+            }
+        }
 
         /// <summary>
         /// The attack's number of damage dice.
@@ -78,7 +90,7 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The attack's effect.
         /// </summary>
-        public abstract AttackEffect Attack1Effect { get; }
+        public abstract BaseAttackEffect? Attack1Effect { get; }
 
         /// <summary>
         /// The attack's described method.
@@ -88,7 +100,20 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The number of times per round the monster attacks.
         /// </summary>
-        public MonsterAttack Attack2 = new MonsterAttack();
+        public MonsterAttack Attack2
+        {
+            get
+            {
+                return new MonsterAttack()
+                {
+                    DDice = Attack2DDice,
+                    DSide = Attack2DSides,
+                    Effect = Attack2Effect,
+                    Method = Attack2Type
+                };
+            }
+        }
+
 
         /// <summary>
         /// The attack's number of damage dice.
@@ -103,7 +128,7 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The attack's effect.
         /// </summary>
-        public abstract AttackEffect Attack2Effect { get; }
+        public abstract BaseAttackEffect? Attack2Effect { get; }
 
         /// <summary>
         /// The attack's described method
@@ -113,7 +138,20 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The number of times per round the monster attacks.
         /// </summary>
-        public MonsterAttack Attack3 = new MonsterAttack();
+        public MonsterAttack Attack3
+        {
+            get
+            {
+                return new MonsterAttack()
+                {
+                    DDice = Attack3DDice,
+                    DSide = Attack3DSides,
+                    Effect = Attack3Effect,
+                    Method = Attack3Type
+                };
+            }
+        }
+
 
         /// <summary>
         /// The attack's number of damage dice.
@@ -128,7 +166,7 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The attack's effect.
         /// </summary>
-        public abstract AttackEffect Attack3Effect { get; }
+        public abstract BaseAttackEffect? Attack3Effect { get; }
 
         /// <summary>
         /// The attack's described method.
@@ -138,7 +176,20 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The number of times per round the monster attacks.
         /// </summary>
-        public MonsterAttack Attack4 = new MonsterAttack();
+        public MonsterAttack Attack4
+        {
+            get
+            {
+                return new MonsterAttack()
+                {
+                    DDice = Attack4DDice,
+                    DSide = Attack4DSides,
+                    Effect = Attack4Effect,
+                    Method = Attack4Type
+                };
+            }
+        }
+
 
         /// <summary>
         /// The attack's number of damage dice.
@@ -153,7 +204,7 @@ namespace AngbandOS.StaticData
         /// <summary>
         /// The attack's effect.
         /// </summary>
-        public abstract AttackEffect Attack4Effect { get; }
+        public abstract BaseAttackEffect? Attack4Effect { get; }
 
         /// <summary>
         /// The attack's described method.

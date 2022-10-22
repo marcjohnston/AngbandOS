@@ -5,41 +5,16 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.StaticData;
+
 namespace AngbandOS.Enumerations
 {
-    /// <summary>
-    /// The effect that a monster attack has when it hits
-    /// </summary>
-    internal enum AttackEffect
+    [Serializable]
+    internal class Exp20AttackEffect : ExpAttackEffect
     {
-        Nothing,
-        Hurt,
-        Poison,
-        UnBonus,
-        UnPower,
-        EatGold,
-        EatItem,
-        EatFood,
-        EatLight,
-        Acid,
-        Electricity,
-        Fire,
-        Cold,
-        Blind,
-        Confuse,
-        Terrify,
-        Paralyze,
-        LoseStr,
-        LoseInt,
-        LoseWis,
-        LoseDex,
-        LoseCon,
-        LoseCha,
-        LoseAll,
-        Exp10,
-        Exp20,
-        Exp40,
-        Exp80,
-        Shatter,
+        public override int Power => 5;
+        public override string Description => "lower experience (by 20d6+)";
+        protected override int HoldLifePercentChange => 90;
+        protected override int DiceCount => 20;
     }
 }

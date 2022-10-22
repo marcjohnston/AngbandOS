@@ -15,7 +15,7 @@ namespace AngbandOS
     {
         public int DDice;
         public int DSide;
-        public AttackEffect Effect;
+        public BaseAttackEffect? Effect;
         public AttackType Method;
 
         public MonsterAttack()

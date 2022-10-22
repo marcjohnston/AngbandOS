@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class HaftedItemCategory : WeaponItemCategory
+    internal abstract class HaftedItemCategory : MeleeWeaponItemCategory
     {
         public override ItemCategory CategoryEnum => ItemCategory.Hafted;
         public override bool HatesFire => true;
@@ -13,13 +13,7 @@ namespace AngbandOS.ItemCategories
 
         public override Colour Colour => Colour.BrightWhite;
 
-        //public override void ApplyMagic(Item item, int level, int power)
-        //{
-        //    if (power != 0)
-        //    {
-        //        ApplyMagicToWeapon(item, level, power);
-        //    }
-        //}
+        protected override bool CanBeWeaponOfLaw => true; 
 
         public override bool GetsDamageMultiplier => true;
     }

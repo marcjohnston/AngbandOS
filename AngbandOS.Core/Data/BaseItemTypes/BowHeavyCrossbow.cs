@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class BowHeavyCrossbow : MissileWeaponItemCategory
+    internal class BowHeavyCrossbow : BowWeaponItemCategory
     {
         public override char Character => '}';
         public override Colour Colour => Colour.Grey;

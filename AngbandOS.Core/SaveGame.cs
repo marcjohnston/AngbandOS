@@ -7233,9 +7233,7 @@ namespace AngbandOS
         /// <param name="monsterIndex"> The index of the monster making the attack </param>
         public void MonsterAttackPlayer(int monsterIndex)
         {
-            Player player = Player;
-            Level level = Level;
-            Monster monster = level.Monsters[monsterIndex];
+            Monster monster = Level.Monsters[monsterIndex];
             MonsterRace race = monster.Race;
             int attackNumber;
             bool touched = false;
@@ -7252,7 +7250,7 @@ namespace AngbandOS
                 return;
             }
 
-            int armourClass = player.BaseArmourClass + player.ArmourClassBonus;
+            int armourClass = Player.BaseArmourClass + Player.ArmourClassBonus;
             int monsterLevel = race.Level >= 1 ? race.Level : 1;
             string monsterName = monster.MonsterDesc(0);
             string monsterDescription = monster.MonsterDesc(0x88);
@@ -7265,7 +7263,7 @@ namespace AngbandOS
                 int power = 0;
                 int damage = 0;
                 string act = null;
-                AttackEffect effect = race.Attack[attackNumber].Effect;
+                BaseAttackEffect? effect = race.Attack[attackNumber].Effect;
                 AttackType method = race.Attack[attackNumber].Method;
                 int damageDice = race.Attack[attackNumber].DDice;
                 int damageSides = race.Attack[attackNumber].DSide;
@@ -7275,7 +7273,7 @@ namespace AngbandOS
                     break;
                 }
                 // Stop if player is dead or gone
-                if (!alive || player.IsDead || NewLevelFlag)
+                if (!alive || Player.IsDead || NewLevelFlag)
                 {
                     break;
                 }
@@ -7284,127 +7282,129 @@ namespace AngbandOS
                     visible = true;
                 }
                 // Get the basic attack power from the attack type
-                switch (effect)
-                {
-                    case AttackEffect.Hurt:
-                        power = 60;
-                        break;
+                if (effect != null)
+                    power = effect.Power;
+                //switch (effect)
+                //{
+                //    case AttackEffect.Hurt:
+                //        power = 60;
+                //        break;
 
-                    case AttackEffect.Poison:
-                        power = 5;
-                        break;
+                //    case AttackEffect.Poison:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.UnBonus:
-                        power = 20;
-                        break;
+                //    case AttackEffect.UnBonus:
+                //        power = 20;
+                //        break;
 
-                    case AttackEffect.UnPower:
-                        power = 15;
-                        break;
+                //    case AttackEffect.UnPower:
+                //        power = 15;
+                //        break;
 
-                    case AttackEffect.EatGold:
-                        power = 5;
-                        break;
+                //    case AttackEffect.EatGold:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.EatItem:
-                        power = 5;
-                        break;
+                //    case AttackEffect.EatItem:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.EatFood:
-                        power = 5;
-                        break;
+                //    case AttackEffect.EatFood:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.EatLight:
-                        power = 5;
-                        break;
+                //    case AttackEffect.EatLight:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.Acid:
-                        power = 0;
-                        break;
+                //    case AttackEffect.Acid:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.Electricity:
-                        power = 10;
-                        break;
+                //    case AttackEffect.Electricity:
+                //        power = 10;
+                //        break;
 
-                    case AttackEffect.Fire:
-                        power = 10;
-                        break;
+                //    case AttackEffect.Fire:
+                //        power = 10;
+                //        break;
 
-                    case AttackEffect.Cold:
-                        power = 10;
-                        break;
+                //    case AttackEffect.Cold:
+                //        power = 10;
+                //        break;
 
-                    case AttackEffect.Blind:
-                        power = 2;
-                        break;
+                //    case AttackEffect.Blind:
+                //        power = 2;
+                //        break;
 
-                    case AttackEffect.Confuse:
-                        power = 10;
-                        break;
+                //    case AttackEffect.Confuse:
+                //        power = 10;
+                //        break;
 
-                    case AttackEffect.Terrify:
-                        power = 10;
-                        break;
+                //    case AttackEffect.Terrify:
+                //        power = 10;
+                //        break;
 
-                    case AttackEffect.Paralyze:
-                        power = 2;
-                        break;
+                //    case AttackEffect.Paralyze:
+                //        power = 2;
+                //        break;
 
-                    case AttackEffect.LoseStr:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseStr:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseDex:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseDex:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseCon:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseCon:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseInt:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseInt:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseWis:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseWis:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseCha:
-                        power = 0;
-                        break;
+                //    case AttackEffect.LoseCha:
+                //        power = 0;
+                //        break;
 
-                    case AttackEffect.LoseAll:
-                        power = 2;
-                        break;
+                //    case AttackEffect.LoseAll:
+                //        power = 2;
+                //        break;
 
-                    case AttackEffect.Shatter:
-                        power = 60;
-                        break;
+                //    case AttackEffect.Shatter:
+                //        power = 60;
+                //        break;
 
-                    case AttackEffect.Exp10:
-                        power = 5;
-                        break;
+                //    case AttackEffect.Exp10:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.Exp20:
-                        power = 5;
-                        break;
+                //    case AttackEffect.Exp20:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.Exp40:
-                        power = 5;
-                        break;
+                //    case AttackEffect.Exp40:
+                //        power = 5;
+                //        break;
 
-                    case AttackEffect.Exp80:
-                        power = 5;
-                        break;
-                }
+                //    case AttackEffect.Exp80:
+                //        power = 5;
+                //        break;
+                //}
                 // Check if the monster actually hits us
-                if (effect == 0 || MonsterCheckHitOnPlayer(power, monsterLevel))
+                if (effect == null || MonsterCheckHitOnPlayer(power, monsterLevel))
                 {
                     Disturb(true);
                     // Protection From Evil might repel the attack
-                    if (player.TimedProtectionFromEvil > 0 && (race.Flags3 & MonsterFlag3.Evil) != 0 && player.Level >= monsterLevel &&
-                        Program.Rng.RandomLessThan(100) + player.Level > 50)
+                    if (Player.TimedProtectionFromEvil > 0 && (race.Flags3 & MonsterFlag3.Evil) != 0 && Player.Level >= monsterLevel &&
+                        Program.Rng.RandomLessThan(100) + Player.Level > 50)
                     {
                         if (monster.IsVisible)
                         {
@@ -7563,565 +7563,15 @@ namespace AngbandOS
                     obvious = true;
                     // Work out base damage done by the attack
                     damage = Program.Rng.DiceRoll(damageDice, damageSides);
-                    int i;
-                    int k;
-                    Item item;
-                    string itemName;
                     // Apply any modifiers to the damage
-                    switch (effect)
+                    if (effect == null)
                     {
-                        case 0:
-                            {
-                                obvious = true;
-                                damage = 0;
-                                break;
-                            }
-                        case AttackEffect.Hurt:
-                            {
-                                // Normal damage is reduced by armour
-                                obvious = true;
-                                damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-                                player.TakeHit(damage, monsterDescription);
-                                break;
-                            }
-                        case AttackEffect.Poison:
-                            {
-                                // Poison does additional damage
-                                player.TakeHit(damage, monsterDescription);
-                                if (!(player.HasPoisonResistance || player.TimedPoisonResistance != 0))
-                                {
-                                    // Hagarg Ryonis might save us from the additional damage
-                                    if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                                    {
-                                        MsgPrint("Hagarg Ryonis's favour protects you!");
-                                    }
-                                    else if (player.SetTimedPoison(player.TimedPoison + Program.Rng.DieRoll(monsterLevel) + 5))
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsPois);
-                                break;
-                            }
-                        case AttackEffect.UnBonus:
-                            {
-                                // Disenchantment might ruin our items
-                                player.TakeHit(damage, monsterDescription);
-                                if (!player.HasDisenchantResistance)
-                                {
-                                    if (ApplyDisenchant())
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsDisen);
-                                break;
-                            }
-                        case AttackEffect.UnPower:
-                            {
-                                // Unpower might drain charges from our items
-                                player.TakeHit(damage, monsterDescription);
-                                for (k = 0; k < 10; k++)
-                                {
-                                    i = Program.Rng.RandomLessThan(InventorySlot.Pack);
-                                    item = player.Inventory[i];
-                                    if (item.ItemType != null)
-                                    {
-                                        continue;
-                                    }
-                                    if ((item.Category == ItemCategory.Staff ||
-                                         item.Category == ItemCategory.Wand) && item.TypeSpecificValue != 0)
-                                    {
-                                        MsgPrint("Energy drains from your pack!");
-                                        obvious = true;
-                                        int j = monsterLevel;
-                                        monster.Health += j * item.TypeSpecificValue * item.Count;
-                                        if (monster.Health > monster.MaxHealth)
-                                        {
-                                            monster.Health = monster.MaxHealth;
-                                        }
-                                        if (TrackedMonsterIndex == monsterIndex)
-                                        {
-                                            player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-                                        }
-                                        item.TypeSpecificValue = 0;
-                                        player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        case AttackEffect.EatGold:
-                            {
-                                // Steal some money
-                                player.TakeHit(damage, monsterDescription);
-                                obvious = true;
-                                if ((player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) <
-                                    player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + player.Level) || player.HasAntiTheft)
-                                {
-                                    MsgPrint("You quickly protect your money pouch!");
-                                    if (Program.Rng.RandomLessThan(3) != 0)
-                                    {
-                                        blinked = true;
-                                    }
-                                }
-                                else
-                                {
-                                    // The amount of gold taken depends on how much you're carrying
-                                    int gold = (player.Gold / 10) + Program.Rng.DieRoll(25);
-                                    if (gold < 2)
-                                    {
-                                        gold = 2;
-                                    }
-                                    if (gold > 5000)
-                                    {
-                                        gold = (player.Gold / 20) + Program.Rng.DieRoll(3000);
-                                    }
-                                    if (gold > player.Gold)
-                                    {
-                                        gold = player.Gold;
-                                    }
-                                    player.Gold -= gold;
-                                    // The monster gets the gold it stole, in case you kill it
-                                    // before leaving the level
-                                    monster.StolenGold += gold;
-                                    // Inform the player what happened
-                                    if (gold <= 0)
-                                    {
-                                        MsgPrint("Nothing was stolen.");
-                                    }
-                                    else if (player.Gold != 0)
-                                    {
-                                        MsgPrint("Your purse feels lighter.");
-                                        MsgPrint($"{gold} coins were stolen!");
-                                    }
-                                    else
-                                    {
-                                        MsgPrint("Your purse feels lighter.");
-                                        MsgPrint("All of your coins were stolen!");
-                                    }
-                                    player.RedrawNeeded.Set(RedrawFlag.PrGold);
-                                    blinked = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.EatItem:
-                            {
-                                // Steal an item
-                                player.TakeHit(damage, monsterDescription);
-                                if ((player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) <
-                                    player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + player.Level) || player.HasAntiTheft)
-                                {
-                                    MsgPrint("You grab hold of your backpack!");
-                                    blinked = true;
-                                    obvious = true;
-                                    break;
-                                }
-                                // Have ten tries at picking a suitable item to steal
-                                for (k = 0; k < 10; k++)
-                                {
-                                    i = Program.Rng.RandomLessThan(InventorySlot.Pack);
-                                    item = player.Inventory[i];
-                                    if (item.ItemType == null)
-                                    {
-                                        continue;
-                                    }
-                                    if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
-                                    {
-                                        continue;
-                                    }
-                                    itemName = item.Description(false, 3);
-                                    string y = item.Count > 1 ? "One of y" : "Y";
-                                    MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
-                                    int nextObjectIndex = Level.OPop();
-                                    if (nextObjectIndex != 0)
-                                    {
-                                        // Give the item to the thief so it can later drop it
-                                        Item stolenItem = new Item(this, item);
-                                        level.Items[nextObjectIndex] = stolenItem;
-                                        stolenItem.Count = 1;
-                                        stolenItem.Marked = false;
-                                        stolenItem.HoldingMonsterIndex = monsterIndex;
-                                        stolenItem.NextInStack = monster.FirstHeldItemIndex;
-                                        monster.FirstHeldItemIndex = nextObjectIndex;
-                                    }
-                                    player.Inventory.InvenItemIncrease(i, -1);
-                                    player.Inventory.InvenItemOptimize(i);
-                                    obvious = true;
-                                    blinked = true;
-                                    break;
-                                }
-                                break;
-                            }
-                        case AttackEffect.EatFood:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                // Have ten tries at grabbing a food item from the player
-                                for (k = 0; k < 10; k++)
-                                {
-                                    i = Program.Rng.RandomLessThan(InventorySlot.Pack);
-                                    item = player.Inventory[i];
-                                    if (item.ItemType != null)
-                                    {
-                                        continue;
-                                    }
-                                    if (item.Category != ItemCategory.Food)
-                                    {
-                                        continue;
-                                    }
-                                    // Note that the monster doesn't actually get the food item -
-                                    // it's gone
-                                    itemName = item.Description(false, 0);
-                                    string y = item.Count > 1 ? "One of y" : "Y";
-                                    MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                                    player.Inventory.InvenItemIncrease(i, -1);
-                                    player.Inventory.InvenItemOptimize(i);
-                                    obvious = true;
-                                    break;
-                                }
-                                break;
-                            }
-                        case AttackEffect.EatLight:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                item = player.Inventory[InventorySlot.Lightsource];
-                                // Only dim lights that consume fuel
-                                if (item.TypeSpecificValue > 0 && !item.IsFixedArtifact())
-                                {
-                                    item.TypeSpecificValue -= 250 + Program.Rng.DieRoll(250);
-                                    if (item.TypeSpecificValue < 1)
-                                    {
-                                        item.TypeSpecificValue = 1;
-                                    }
-                                    if (player.TimedBlindness == 0)
-                                    {
-                                        MsgPrint("Your light dims.");
-                                        obvious = true;
-                                    }
-                                }
-                                break;
-                            }
-                        case AttackEffect.Acid:
-                            {
-                                obvious = true;
-                                MsgPrint("You are covered in acid!");
-                                AcidDam(damage, monsterDescription);
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
-                                break;
-                            }
-                        case AttackEffect.Electricity:
-                            {
-                                obvious = true;
-                                MsgPrint("You are struck by electricity!");
-                                ElecDam(damage, monsterDescription);
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
-                                break;
-                            }
-                        case AttackEffect.Fire:
-                            {
-                                obvious = true;
-                                MsgPrint("You are enveloped in flames!");
-                                FireDam(damage, monsterDescription);
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
-                                break;
-                            }
-                        case AttackEffect.Cold:
-                            {
-                                obvious = true;
-                                MsgPrint("You are covered with frost!");
-                                ColdDam(damage, monsterDescription);
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsCold);
-                                break;
-                            }
-                        case AttackEffect.Blind:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (!player.HasBlindnessResistance)
-                                {
-                                    if (player.SetTimedBlindness(player.TimedBlindness + 10 + Program.Rng.DieRoll(monsterLevel)))
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsBlind);
-                                break;
-                            }
-                        case AttackEffect.Confuse:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (!player.HasConfusionResistance)
-                                {
-                                    if (player.SetTimedConfusion(player.TimedConfusion + 3 + Program.Rng.DieRoll(monsterLevel)))
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsConf);
-                                break;
-                            }
-                        case AttackEffect.Terrify:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasFearResistance)
-                                {
-                                    MsgPrint("You stand your ground!");
-                                    obvious = true;
-                                }
-                                else if (Program.Rng.RandomLessThan(100) < player.SkillSavingThrow)
-                                {
-                                    MsgPrint("You stand your ground!");
-                                    obvious = true;
-                                }
-                                else
-                                {
-                                    if (player.SetTimedFear(player.TimedFear + 3 + Program.Rng.DieRoll(monsterLevel)))
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFear);
-                                break;
-                            }
-                        case AttackEffect.Paralyze:
-                            {
-                                if (damage == 0)
-                                {
-                                    damage = 1;
-                                }
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasFreeAction)
-                                {
-                                    MsgPrint("You are unaffected!");
-                                    obvious = true;
-                                }
-                                else if (Program.Rng.RandomLessThan(100) < player.SkillSavingThrow)
-                                {
-                                    MsgPrint("You resist the effects!");
-                                    obvious = true;
-                                }
-                                else
-                                {
-                                    if (player.SetTimedParalysis(player.TimedParalysis + 3 + Program.Rng.DieRoll(monsterLevel)))
-                                    {
-                                        obvious = true;
-                                    }
-                                }
-                                level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFree);
-                                break;
-                            }
-                        case AttackEffect.LoseStr:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Strength))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseInt:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Intelligence))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseWis:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Wisdom))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseDex:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Dexterity))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseCon:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Constitution))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseCha:
-                            {
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Charisma))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.LoseAll:
-                            {
-                                // Try to decrease all six ability scores
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.TryDecreasingAbilityScore(Ability.Strength))
-                                {
-                                    obvious = true;
-                                }
-                                if (player.TryDecreasingAbilityScore(Ability.Dexterity))
-                                {
-                                    obvious = true;
-                                }
-                                if (player.TryDecreasingAbilityScore(Ability.Constitution))
-                                {
-                                    obvious = true;
-                                }
-                                if (player.TryDecreasingAbilityScore(Ability.Intelligence))
-                                {
-                                    obvious = true;
-                                }
-                                if (player.TryDecreasingAbilityScore(Ability.Wisdom))
-                                {
-                                    obvious = true;
-                                }
-                                if (player.TryDecreasingAbilityScore(Ability.Charisma))
-                                {
-                                    obvious = true;
-                                }
-                                break;
-                            }
-                        case AttackEffect.Shatter:
-                            {
-                                obvious = true;
-                                damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-                                player.TakeHit(damage, monsterDescription);
-                                // Do an earthquake only if we did enough damage on the hit
-                                if (damage > 23)
-                                {
-                                    Earthquake(monster.MapY, monster.MapX, 8);
-                                }
-                                break;
-                            }
-                        case AttackEffect.Exp10:
-                            {
-                                obvious = true;
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 95)
-                                {
-                                    MsgPrint("You keep hold of your life force!");
-                                }
-                                else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                                {
-                                    // Hagarg Ryonis can protect us from experience loss
-                                    MsgPrint("Hagarg Ryonis's favour protects you!");
-                                }
-                                else
-                                {
-                                    int d = Program.Rng.DiceRoll(10, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
-                                    if (player.HasHoldLife)
-                                    {
-                                        MsgPrint("You feel your life slipping away!");
-                                        player.LoseExperience(d / 10);
-                                    }
-                                    else
-                                    {
-                                        MsgPrint("You feel your life draining away!");
-                                        player.LoseExperience(d);
-                                    }
-                                }
-                                break;
-                            }
-                        case AttackEffect.Exp20:
-                            {
-                                obvious = true;
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 90)
-                                {
-                                    MsgPrint("You keep hold of your life force!");
-                                }
-                                else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                                {
-                                    // Hagarg Ryonis can protect us from experience loss
-                                    MsgPrint("Hagarg Ryonis's favour protects you!");
-                                }
-                                else
-                                {
-                                    int d = Program.Rng.DiceRoll(20, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
-                                    if (player.HasHoldLife)
-                                    {
-                                        MsgPrint("You feel your life slipping away!");
-                                        player.LoseExperience(d / 10);
-                                    }
-                                    else
-                                    {
-                                        MsgPrint("You feel your life draining away!");
-                                        player.LoseExperience(d);
-                                    }
-                                }
-                                break;
-                            }
-                        case AttackEffect.Exp40:
-                            {
-                                obvious = true;
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
-                                {
-                                    MsgPrint("You keep hold of your life force!");
-                                }
-                                else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                                {
-                                    // Hagarg Ryonis can protect us from experience loss
-                                    MsgPrint("Hagarg Ryonis's favour protects you!");
-                                }
-                                else
-                                {
-                                    int d = Program.Rng.DiceRoll(40, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
-                                    if (player.HasHoldLife)
-                                    {
-                                        MsgPrint("You feel your life slipping away!");
-                                        player.LoseExperience(d / 10);
-                                    }
-                                    else
-                                    {
-                                        MsgPrint("You feel your life draining away!");
-                                        player.LoseExperience(d);
-                                    }
-                                }
-                                break;
-                            }
-                        case AttackEffect.Exp80:
-                            {
-                                obvious = true;
-                                player.TakeHit(damage, monsterDescription);
-                                if (player.HasHoldLife && Program.Rng.RandomLessThan(100) < 50)
-                                {
-                                    MsgPrint("You keep hold of your life force!");
-                                }
-                                else if (Program.Rng.DieRoll(10) <= player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                                {
-                                    // Hagarg Ryonis can protect us from experience loss
-                                    MsgPrint("Hagarg Ryonis's favour protects you!");
-                                }
-                                else
-                                {
-                                    int d = Program.Rng.DiceRoll(80, 6) + (player.ExperiencePoints / 100 * Constants.MonDrainLife);
-                                    if (player.HasHoldLife)
-                                    {
-                                        MsgPrint("You feel your life slipping away!");
-                                        player.LoseExperience(d / 10);
-                                    }
-                                    else
-                                    {
-                                        MsgPrint("You feel your life draining away!");
-                                        player.LoseExperience(d);
-                                    }
-                                }
-                                break;
-                            }
+                        obvious = true;
+                        damage = 0;
                     }
+                    else
+                        effect.ApplyToPlayer(this, monsterLevel, monsterIndex, armourClass, monsterDescription, monster, ref obvious, ref damage, ref blinked);
+
                     // Be nice and don't let us be both stunned and cut by the same blow
                     if (doCut && doStun)
                     {
@@ -8139,6 +7589,7 @@ namespace AngbandOS
                     {
                         // Get how bad the hit was based on the actual damage out of the possible damage
                         critLevel = MonsterCritical(damageDice, damageSides, damage);
+                        int k;
                         switch (critLevel)
                         {
                             case 0:
@@ -8175,13 +7626,14 @@ namespace AngbandOS
                         }
                         if (k != 0)
                         {
-                            player.SetTimedBleeding(player.TimedBleeding + k);
+                            Player.SetTimedBleeding(Player.TimedBleeding + k);
                         }
                     }
                     if (doStun)
                     {
                         // Get how bad the hit was based on the actual damage out of the possible damage
                         critLevel = MonsterCritical(damageDice, damageSides, damage);
+                        int k;
                         switch (critLevel)
                         {
                             case 0:
@@ -8218,18 +7670,18 @@ namespace AngbandOS
                         }
                         if (k != 0)
                         {
-                            player.SetTimedStun(player.TimedStun + k);
+                            Player.SetTimedStun(Player.TimedStun + k);
                         }
                     }
                     // If the monster touched us then it may take damage from our defensive abilities
                     if (touched)
                     {
-                        if (player.HasFireShield && alive)
+                        if (Player.HasFireShield && alive)
                         {
                             if ((race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
                             {
                                 MsgPrint($"{monsterName} is suddenly very hot!");
-                                if (level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
+                                if (Level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of ash."))
                                 {
                                     blinked = false;
@@ -8245,12 +7697,12 @@ namespace AngbandOS
                                 }
                             }
                         }
-                        if (player.HasLightningShield && alive)
+                        if (Player.HasLightningShield && alive)
                         {
                             if ((race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
                             {
                                 MsgPrint($"{monsterName} gets zapped!");
-                                if (level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
+                                if (Level.Monsters.DamageMonster(monsterIndex, Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of cinder."))
                                 {
                                     blinked = false;
@@ -8312,7 +7764,7 @@ namespace AngbandOS
             }
             // If the attack just killed the player, let future generations remember what killed
             // their ancestor
-            if (player.IsDead && race.Knowledge.RDeaths < Constants.MaxShort)
+            if (Player.IsDead && race.Knowledge.RDeaths < Constants.MaxShort)
             {
                 race.Knowledge.RDeaths++;
             }
@@ -12887,7 +12339,7 @@ namespace AngbandOS
                 int power = 0;
                 int damage = 0;
                 string act = null;
-                AttackEffect effect = race.Attack[attackNumber].Effect;
+                BaseAttackEffect effect = race.Attack[attackNumber].Effect;
                 AttackType method = race.Attack[attackNumber].Method;
                 int dDice = race.Attack[attackNumber].DDice;
                 int dSide = race.Attack[attackNumber].DSide;
@@ -12916,122 +12368,10 @@ namespace AngbandOS
                     visible = true;
                 }
                 // Get the power of the attack based on the attack type
-                switch (effect)
-                {
-                    case AttackEffect.Hurt:
-                        power = 60;
-                        break;
-
-                    case AttackEffect.Poison:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.UnBonus:
-                        power = 20;
-                        break;
-
-                    case AttackEffect.UnPower:
-                        power = 15;
-                        break;
-
-                    case AttackEffect.EatGold:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.EatItem:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.EatFood:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.EatLight:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.Acid:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.Electricity:
-                        power = 10;
-                        break;
-
-                    case AttackEffect.Fire:
-                        power = 10;
-                        break;
-
-                    case AttackEffect.Cold:
-                        power = 10;
-                        break;
-
-                    case AttackEffect.Blind:
-                        power = 2;
-                        break;
-
-                    case AttackEffect.Confuse:
-                        power = 10;
-                        break;
-
-                    case AttackEffect.Terrify:
-                        power = 10;
-                        break;
-
-                    case AttackEffect.Paralyze:
-                        power = 2;
-                        break;
-
-                    case AttackEffect.LoseStr:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseDex:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseCon:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseInt:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseWis:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseCha:
-                        power = 0;
-                        break;
-
-                    case AttackEffect.LoseAll:
-                        power = 2;
-                        break;
-
-                    case AttackEffect.Shatter:
-                        power = 60;
-                        break;
-
-                    case AttackEffect.Exp10:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.Exp20:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.Exp40:
-                        power = 5;
-                        break;
-
-                    case AttackEffect.Exp80:
-                        power = 5;
-                        break;
-                }
+                power = effect.Power;
+                
                 // If we hit the monster, describe the type of hit
-                if (effect == 0 || CheckHitMonsterVersusMonster(power, monsterLevel, armourClass))
+                if (effect == null || CheckHitMonsterVersusMonster(power, monsterLevel, armourClass))
                 {
                     Disturb(true);
                     switch (method)
@@ -13165,102 +12505,14 @@ namespace AngbandOS
                     Projectile pt = new ProjectMissile(this);
                     // Choose the correct type of attack to display, as well as any other special
                     // effects for the attack
-                    switch (effect)
+                    if (effect == null)
                     {
-                        case 0:
-                            damage = 0;
-                            pt = null;
-                            break;
-
-                        case AttackEffect.Hurt:
-                            damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-                            break;
-
-                        case AttackEffect.Poison:
-                            pt = new ProjectPois(this);
-                            break;
-
-                        case AttackEffect.UnBonus:
-                        case AttackEffect.UnPower:
-                            pt = new ProjectDisenchant(this);
-                            break;
-
-                        case AttackEffect.EatFood:
-                        case AttackEffect.EatLight:
-                            pt = null;
-                            damage = 0;
-                            break;
-
-                        case AttackEffect.EatItem:
-                        case AttackEffect.EatGold:
-                            // Monsters don't actually steal from other monsters
-                            pt = null;
-                            damage = 0;
-                            if (Program.Rng.DieRoll(2) == 1)
-                            {
-                                blinked = true;
-                            }
-                            break;
-
-                        case AttackEffect.Acid:
-                            pt = new ProjectAcid(this);
-                            break;
-
-                        case AttackEffect.Electricity:
-                            pt = new ProjectElec(this);
-                            break;
-
-                        case AttackEffect.Fire:
-                            pt = new ProjectFire(this);
-                            break;
-
-                        case AttackEffect.Cold:
-                            pt = new ProjectCold(this);
-                            break;
-
-                        case AttackEffect.Blind:
-                            break;
-
-                        case AttackEffect.Confuse:
-                            pt = new ProjectConfusion(this);
-                            break;
-
-                        case AttackEffect.Terrify:
-                            pt = new ProjectTurnAll(this);
-                            break;
-
-                        case AttackEffect.Paralyze:
-                            pt = new ProjectOldSleep(this);
-                            damage = race.Level;
-                            break;
-
-                        case AttackEffect.LoseStr:
-                        case AttackEffect.LoseInt:
-                        case AttackEffect.LoseWis:
-                        case AttackEffect.LoseDex:
-                        case AttackEffect.LoseCon:
-                        case AttackEffect.LoseCha:
-                        case AttackEffect.LoseAll:
-                            break;
-
-                        case AttackEffect.Shatter:
-                            if (damage > 23)
-                            {
-                                Earthquake(monster.MapY, monster.MapX, 8);
-                            }
-                            break;
-
-                        case AttackEffect.Exp10:
-                        case AttackEffect.Exp20:
-                        case AttackEffect.Exp40:
-                        case AttackEffect.Exp80:
-                            pt = new ProjectNether(this);
-                            break;
-
-                        default:
-                            pt = null;
-                            break;
+                        damage = 0;
+                        pt = null;
                     }
+                    else
+                        effect.ApplyToMonster(this, monster, armourClass, ref damage, ref pt, ref blinked);
+
                     // Implement the attack as a projectile
                     if (pt != null)
                     {
@@ -20182,10 +19434,6 @@ namespace AngbandOS
         }
         /// GUI
 
-        /// Static Resources
-        //[NonSerialized]
-        //public Dictionary<string, AmuletFlavour> BaseAmuletFlavours;
-
         /// <summary>
         /// Animations for spells and effects
         /// </summary>
@@ -20194,12 +19442,6 @@ namespace AngbandOS
 
         [NonSerialized]
         public Dictionary<string, BaseFixedArtifact> BaseFixedArtifacts;
-
-        //[NonSerialized]
-        //public Dictionary<string, BaseItemType> BaseItemTypes;
-
-        //[NonSerialized]
-        //public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
 
         [NonSerialized]
         public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
@@ -20213,54 +19455,16 @@ namespace AngbandOS
         [NonSerialized]
         public Dictionary<string, FloorTileType> BaseFloorTileTypes;
 
-        //[NonSerialized]
-        //public Dictionary<string, MushroomFlavour> BaseMushroomFlavours;
-
-        //[NonSerialized]
-        //public Dictionary<string, PotionFlavour> BasePotionFlavours;
-
-        /// <summary>
-        /// Graphics for projectiles
-        /// </summary>
-        //[NonSerialized]
-        //public Dictionary<string, ProjectileGraphic> BaseProjectileGraphics;
-
-        //[NonSerialized]
-        //public Dictionary<string, RingFlavour> BaseRingFlavours;
-
-        //[NonSerialized]
-        //public Dictionary<string, RodFlavour> BaseRodFlavours;
-
-        //[NonSerialized]
-        //public Dictionary<string, ScrollFlavour> BaseScrollFlavours;
-
-        //[NonSerialized]
-        //public Dictionary<string, StaffFlavour> BaseStaffFlavours;
-
-        //[NonSerialized]
-        //public Dictionary<string, WandFlavour> BaseWandFlavours;
-
         /// <summary>
         /// Load the dictionaries from the binary resource file
         /// </summary>
         public void LoadOrCreateStaticResources()
         {
-            //BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace(), "BaseMonsterRace");
-            //BaseItemTypes = ReadEntitiesFromCsv(new BaseItemType(), "BaseItemType"); // Uncomment to scaffold
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
             BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
             BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
             BaseAnimations = ReadEntitiesFromCsv(new Animation());
-            //BaseProjectileGraphics = ReadEntitiesFromCsv(new ProjectileGraphic(), "BaseProjectileGraphic");
-            //BaseAmuletFlavours = ReadEntitiesFromCsv(new AmuletFlavour(), "BaseAmuletFlavour");
-            //BaseMushroomFlavours = ReadEntitiesFromCsv(new MushroomFlavour(), "BaseMushroomFlavour");
-            //BasePotionFlavours = ReadEntitiesFromCsv(new PotionFlavour(), "BasePotionFlavour");
-            //BaseWandFlavours = ReadEntitiesFromCsv(new WandFlavour(), "BaseWandFlavour");
-            //BaseScrollFlavours = ReadEntitiesFromCsv(new ScrollFlavour(), "BaseScrollFlavour");
-            //BaseStaffFlavours = ReadEntitiesFromCsv(new StaffFlavour(), "BaseStaffFlavour");
-            //BaseRingFlavours = ReadEntitiesFromCsv(new RingFlavour(), "BaseRingFlavour");
-            //BaseRodFlavours = ReadEntitiesFromCsv(new RodFlavour(), "BaseRodFlavour");
         }
 
         private string MakeIdentifier(string s)
@@ -20345,10 +19549,6 @@ namespace AngbandOS
 
                                                 case "String":
                                                     p.SetValue(entity, stringValue);
-                                                    break;
-
-                                                case "AttackEffect":
-                                                    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
                                                     break;
 
                                                 case "FloorTileAlterAction":
@@ -20488,13 +19688,6 @@ namespace AngbandOS
                                         include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
                                         break;
                                     }
-                                case "AttackEffect":
-                                    {
-                                        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
-                                        tokens[index] = $"AttackEffect.{value.ToString()}";
-                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
-                                        break;
-                                    }
                                 default:
                                     throw new Exception("Scaffolding data type not supported.");
                             }
@@ -20508,9 +19701,6 @@ namespace AngbandOS
                         if (tokens.Length > 1)
                             className = tokens[1];
                     }
-                    ////string className = (string)entityProperties.Single(property => property.Name == "ClassName").GetValue(entity); USE THIS FOR ITEMS
-                    //string className = (string)entityProperties.Single(property => property.Name == "Name").GetValue(entity);
-                    //className = className.Replace("-", "") + "WandFlavor";
                     string filename = $"{path}{Path.DirectorySeparatorChar}{className}.cs";
                     try
                     {

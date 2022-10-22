@@ -67,7 +67,7 @@ namespace AngbandOS
                 knowledge = new MonsterKnowledge(SaveGame, _monsterType);
                 for (m = 0; m < 4; m++)
                 {
-                    if (_monsterType.Attack[m].Effect != 0 || _monsterType.Attack[m].Method != 0)
+                    if (_monsterType.Attack[m].Effect != null || _monsterType.Attack[m].Method != 0)
                     {
                         knowledge.RBlows[m] = Constants.MaxUchar;
                     }
@@ -283,8 +283,8 @@ namespace AngbandOS
             {
                 _description.Append(". ");
             }
-            string q;
-            string p;
+            string? q;
+            string? p;
             if (knowledge.RTkills != 0 || knowledge.RProbed)
             {
                 _description.Append((flags1 & MonsterFlag1.Unique) != 0 ? "Killing this" : "A kill of this");
@@ -1274,7 +1274,7 @@ namespace AngbandOS
                     continue;
                 }
                 AttackType method = _monsterType.Attack[m].Method;
-                AttackEffect effect = _monsterType.Attack[m].Effect;
+                BaseAttackEffect? effect = _monsterType.Attack[m].Effect;
                 int d1 = _monsterType.Attack[m].DDice;
                 int d2 = _monsterType.Attack[m].DSide;
                 p = null;
@@ -1368,121 +1368,11 @@ namespace AngbandOS
                         p = "sing";
                         break;
                 }
-                q = null;
-                switch (effect)
-                {
-                    case AttackEffect.Hurt:
-                        q = "attack";
-                        break;
-
-                    case AttackEffect.Poison:
-                        q = "poison";
-                        break;
-
-                    case AttackEffect.UnBonus:
-                        q = "disenchant";
-                        break;
-
-                    case AttackEffect.UnPower:
-                        q = "drain charges";
-                        break;
-
-                    case AttackEffect.EatGold:
-                        q = "steal gold";
-                        break;
-
-                    case AttackEffect.EatItem:
-                        q = "steal items";
-                        break;
-
-                    case AttackEffect.EatFood:
-                        q = "eat your food";
-                        break;
-
-                    case AttackEffect.EatLight:
-                        q = "absorb light";
-                        break;
-
-                    case AttackEffect.Acid:
-                        q = "shoot acid";
-                        break;
-
-                    case AttackEffect.Electricity:
-                        q = "electrocute";
-                        break;
-
-                    case AttackEffect.Fire:
-                        q = "burn";
-                        break;
-
-                    case AttackEffect.Cold:
-                        q = "freeze";
-                        break;
-
-                    case AttackEffect.Blind:
-                        q = "blind";
-                        break;
-
-                    case AttackEffect.Confuse:
-                        q = "confuse";
-                        break;
-
-                    case AttackEffect.Terrify:
-                        q = "terrify";
-                        break;
-
-                    case AttackEffect.Paralyze:
-                        q = "paralyze";
-                        break;
-
-                    case AttackEffect.LoseStr:
-                        q = "reduce strength";
-                        break;
-
-                    case AttackEffect.LoseInt:
-                        q = "reduce intelligence";
-                        break;
-
-                    case AttackEffect.LoseWis:
-                        q = "reduce wisdom";
-                        break;
-
-                    case AttackEffect.LoseDex:
-                        q = "reduce dexterity";
-                        break;
-
-                    case AttackEffect.LoseCon:
-                        q = "reduce constitution";
-                        break;
-
-                    case AttackEffect.LoseCha:
-                        q = "reduce charisma";
-                        break;
-
-                    case AttackEffect.LoseAll:
-                        q = "reduce all stats";
-                        break;
-
-                    case AttackEffect.Shatter:
-                        q = "shatter";
-                        break;
-
-                    case AttackEffect.Exp10:
-                        q = "lower experience (by 10d6+)";
-                        break;
-
-                    case AttackEffect.Exp20:
-                        q = "lower experience (by 20d6+)";
-                        break;
-
-                    case AttackEffect.Exp40:
-                        q = "lower experience (by 40d6+)";
-                        break;
-
-                    case AttackEffect.Exp80:
-                        q = "lower experience (by 80d6+)";
-                        break;
-                }
+                if (effect == null)
+                    q = null;
+                else
+                    q = effect.Description;
+                
                 if (r == 0)
                 {
                     _description.Append(_wdHeCap[msex]).Append(" can ");

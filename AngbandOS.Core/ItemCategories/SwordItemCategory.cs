@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class SwordItemCategory : WeaponItemCategory
+    internal abstract class SwordItemCategory : MeleeWeaponItemCategory
     {
         public override ItemCategory CategoryEnum => ItemCategory.Sword;
         public override bool HatesAcid => true;
@@ -14,13 +14,9 @@ namespace AngbandOS.ItemCategories
 
         public override bool CanVorpalSlay => true;
 
-        //public override void ApplyMagic(Item item, int level, int power)
-        //{
-        //    if (power != 0)
-        //    {
-        //        ApplyMagicToWeapon(item, level, power);
-        //    }
-        //}
+        protected override bool CanBeWeaponOfLaw => true;
+        protected override bool CanBeWeaponOfSharpness => true;
+        protected override bool CapableOfVorpalSlaying => true;
 
         public override bool GetsDamageMultiplier => true;
     }
