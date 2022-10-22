@@ -22,5 +22,9 @@ namespace AngbandOS.ItemCategories
             // Sickliness tries to reduce your constitution
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

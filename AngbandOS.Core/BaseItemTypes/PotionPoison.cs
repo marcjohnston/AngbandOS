@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -34,6 +35,12 @@ namespace AngbandOS.ItemCategories
                 }
             }
             return false;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 2, y, x, 3, new ProjectPois(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -23,6 +24,12 @@ namespace AngbandOS.ItemCategories
         {
             // Slowness slows you down.
             return saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(25) + 15);
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 2, y, x, 5, new ProjectOldSlow(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            return true;
         }
     }
 }

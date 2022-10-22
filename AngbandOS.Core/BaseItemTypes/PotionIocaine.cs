@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -22,6 +23,12 @@ namespace AngbandOS.ItemCategories
             // Iocaine simply does 5000 damage
             saveGame.MsgPrint("A feeling of Death flows through your body.");
             saveGame.Player.TakeHit(5000, "a potion of Death");
+            return true;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 1, y, x, 0, new ProjectDeathRay(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
     }

@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -29,6 +30,12 @@ namespace AngbandOS.ItemCategories
             saveGame.Player.DecreaseAbilityScore(Ability.Strength, 25, true);
             saveGame.Player.DecreaseAbilityScore(Ability.Charisma, 25, true);
             saveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 25, true);
+            return true;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(25, 25), new ProjectExplode(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
     }

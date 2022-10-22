@@ -22,5 +22,9 @@ namespace AngbandOS.ItemCategories
             // Clumsiness tries to reduce your dexterity
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

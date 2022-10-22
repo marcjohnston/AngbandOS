@@ -25,6 +25,10 @@ namespace AngbandOS.ItemCategories
             potion.Quaff(saveGame);
             return true;
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
 
         /// <summary>
         /// Pick a random potion to use from a selection that won't kill us

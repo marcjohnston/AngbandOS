@@ -23,5 +23,9 @@ namespace AngbandOS.ItemCategories
             saveGame.MsgPrint("You feel less thirsty.");
             return true;
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

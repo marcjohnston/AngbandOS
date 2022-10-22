@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using AngbandOS.StaticData;
 using System;
 using static AngbandOS.Extensions;
@@ -14,6 +15,19 @@ namespace AngbandOS.ItemCategories
         /// </summary>
         /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
         public abstract bool Quaff(SaveGame saveGame);
+
+        /// <summary>
+        /// Perform a smash effect for the potion.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="who"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns>Returns whether or not the action causes pets to become angry and turn against their owner.  Returns false, by default.</returns>
+        public virtual bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return false;
+        }
 
         public override ItemCategory CategoryEnum => ItemCategory.Potion;
         public override bool CanAbsorb(Item item, Item other)

@@ -22,5 +22,9 @@ namespace AngbandOS.ItemCategories
             // Stupidity tries to reduce your intelligence
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

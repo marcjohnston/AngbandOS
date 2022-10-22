@@ -22,5 +22,9 @@ namespace AngbandOS.ItemCategories
             // Naivety tries to reduce your wisdom
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

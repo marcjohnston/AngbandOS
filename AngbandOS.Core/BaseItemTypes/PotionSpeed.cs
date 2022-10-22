@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -36,6 +37,12 @@ namespace AngbandOS.ItemCategories
             {
                 saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
             }
+            return false;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 2, y, x, 0, new ProjectOldSpeed(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
     }

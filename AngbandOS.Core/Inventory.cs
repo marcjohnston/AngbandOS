@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.StaticData;
 using System;
 
@@ -331,7 +332,8 @@ namespace AngbandOS
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
-                            SaveGame.PotionSmashEffect(0, _player.MapY, _player.MapX, (PotionType)oPtr.ItemSubCategory);
+                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseCategory;
+                            potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
                         }
                         InvenItemIncrease(i, -amt);
                         InvenItemOptimize(i);

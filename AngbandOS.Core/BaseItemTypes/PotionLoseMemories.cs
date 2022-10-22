@@ -28,5 +28,9 @@ namespace AngbandOS.ItemCategories
             }
             return false;
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

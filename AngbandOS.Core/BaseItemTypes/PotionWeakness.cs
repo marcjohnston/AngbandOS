@@ -22,5 +22,9 @@ namespace AngbandOS.ItemCategories
             // Weakness tries to reduce your strength
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

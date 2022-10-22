@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -29,6 +30,12 @@ namespace AngbandOS.ItemCategories
                 saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                 return true;
             }
+            return false;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(10, 10), new ProjectMana(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
     }

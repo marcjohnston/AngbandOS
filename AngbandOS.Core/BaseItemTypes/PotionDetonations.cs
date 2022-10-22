@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -25,6 +26,12 @@ namespace AngbandOS.ItemCategories
             saveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
             saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + 75);
             saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + 5000);
+            return true;
+        }
+
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(25, 25), new ProjectExplode(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
     }

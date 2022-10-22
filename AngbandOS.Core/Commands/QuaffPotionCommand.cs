@@ -51,12 +51,12 @@ namespace AngbandOS.Commands
             // Do the actual potion effect
             PotionItemCategory potion = (PotionItemCategory)item.ItemType.BaseCategory; // The item will be a potion.
             bool identified = potion.Quaff(saveGame);
-            //bool identified = saveGame.PotionEffect((PotionType)item.ItemSubCategory);
+
             // Skeletons are messy drinkers
             if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
             {
                 saveGame.MsgPrint("Some of the fluid falls through your jaws!");
-                saveGame.PotionSmashEffect(0, saveGame.Player.MapY, saveGame.Player.MapX, (PotionType)item.ItemSubCategory);
+                potion.Smash(saveGame, 0, saveGame.Player.MapY, saveGame.Player.MapX);
             }
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type

@@ -25,5 +25,9 @@ namespace AngbandOS.ItemCategories
             // Charisma increases your charisma
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma);
         }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
     }
 }

@@ -8,6 +8,7 @@
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Projection
 {
@@ -98,7 +99,8 @@ namespace AngbandOS.Projection
                         SaveGame.Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            SaveGame.PotionSmashEffect(who, y, x, (PotionType)oSval);
+                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseCategory;
+                            potion.Smash(SaveGame, who, y, x);
                         }
                         SaveGame.Level.RedrawSingleLocation(y, x);
                     }

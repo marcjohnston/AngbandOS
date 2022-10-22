@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Commands
 {
@@ -187,11 +188,11 @@ namespace AngbandOS.Commands
             {
                 if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
+                    PotionItemCategory potion = (PotionItemCategory)missile.ItemType.BaseCategory;
                     saveGame.MsgPrint($"The {missileName} shatters!");
-                    if (saveGame.PotionSmashEffect(1, y, x, (PotionType)missile.ItemSubCategory))
+                    if (potion.Smash(saveGame, 1, y, x))
                     {
-                        if (saveGame.Level.Grid[y][x].MonsterIndex != 0 &&
-                            (saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
+                        if (saveGame.Level.Grid[y][x].MonsterIndex != 0 && (saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
                         {
                             string mName = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].MonsterDesc(0);
                             saveGame.MsgPrint($"{mName} gets angry!");
