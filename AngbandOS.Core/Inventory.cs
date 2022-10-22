@@ -791,6 +791,11 @@ namespace AngbandOS
             SaveGame.ItemDisplayColumn = col;
         }
 
+        /// <summary>
+        /// Returns the index of the slot for which an item should be placed into when wielding a item.  Returns -1, if the item cannot be wielded.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
         public int WieldSlot(Item oPtr)
         {
             switch (oPtr.Category)
