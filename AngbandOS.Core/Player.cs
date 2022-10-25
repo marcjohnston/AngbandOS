@@ -57,7 +57,7 @@ namespace AngbandOS
             set
             {
                 _gold = value;
-                SaveGame.UpdateNotifier.GoldUpdated(_gold);
+                SaveGame.UpdateNotifier?.GoldUpdated(_gold);
             }
         }
         public Patron GooPatron;
@@ -133,7 +133,7 @@ namespace AngbandOS
             set
             {
                 _level = value;
-                SaveGame.UpdateNotifier.LevelChanged(_level);
+                SaveGame.UpdateNotifier?.LevelChanged(_level);
             }
         }
 
@@ -157,7 +157,7 @@ namespace AngbandOS
             set
             {
                 _name = value;
-                SaveGame.UpdateNotifier.CharacterRenamed(_name);
+                SaveGame.UpdateNotifier?.CharacterRenamed(_name);
             }
         }
         public uint NoticeFlags;

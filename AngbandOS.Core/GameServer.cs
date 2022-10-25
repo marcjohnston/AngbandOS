@@ -78,7 +78,7 @@ namespace AngbandOS
             }
             catch (Exception ex)
             {
-                updateNotifier.SaveGameIncompatible();
+                updateNotifier?.SaveGameIncompatible();
                 return false;
             }
             return true;

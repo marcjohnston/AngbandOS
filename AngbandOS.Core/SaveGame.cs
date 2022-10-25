@@ -192,13 +192,16 @@ namespace AngbandOS
                 IsAlive = Player != null, // If the player is dead, then the savegame Player will be null.
                 Comments = ""
             };
-            PersistentStorage.WriteGame(gameDetails, memoryStream.ToArray());
+            PersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
         }
 
         public static SaveGame Initialize(ICorePersistentStorage persistentStorage)
         {
+            byte[] data = null;
+
             // Retrieve the game from the persistent storage.
-            byte[] data = persistentStorage.ReadGame();
+            if (persistentStorage != null)
+                data = persistentStorage.ReadGame();
 
             // The game doesn't exist.  Start a new one.
             if (data == null)
@@ -267,7 +270,7 @@ namespace AngbandOS
                 Player.WildernessY = CurTown.Y;
                 CameFrom = LevelStart.StartRandom;
             }
-            UpdateNotifier.GameStarted();
+            UpdateNotifier?.GameStarted();
             MsgFlag = false;
             MsgPrint(null);
             UpdateScreen();
@@ -315,7 +318,7 @@ namespace AngbandOS
                 MsgPrint(null);
                 if (Player.IsDead)
                 {
-                    UpdateNotifier.PlayerDied(Player.Name, DiedFrom, Player.Level);
+                    UpdateNotifier?.PlayerDied(Player.Name, DiedFrom, Player.Level);
 
                     // Store the player info
                     ExPlayer = new ExPlayer(Player);
@@ -326,7 +329,7 @@ namespace AngbandOS
                 factory.GenerateNewLevel();
                 Level.ReplacePets(Player.MapY, Player.MapX, _petList);
             }
-            UpdateNotifier.GameStopped();
+            UpdateNotifier?.GameStopped();
             CloseGame();
         }
 

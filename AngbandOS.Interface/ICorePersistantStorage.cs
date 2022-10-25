@@ -9,7 +9,7 @@ public interface ICorePersistentStorage
     /// Reads and returns a saved game from the persistent storage.
     /// </summary>
     /// <returns></returns>
-    byte[] ReadGame();
+    byte[]? ReadGame();
 
     /// <summary>
     /// Writes a saved game to the persistent storage.

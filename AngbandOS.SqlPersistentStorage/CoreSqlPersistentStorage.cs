@@ -32,7 +32,7 @@ namespace AngbandOS.PersistentStorage
             GameGuid = guid;    
         }
 
-        public byte[] ReadGame()
+        public byte[]? ReadGame()
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
