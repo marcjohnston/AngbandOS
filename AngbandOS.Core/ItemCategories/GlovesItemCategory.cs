@@ -14,6 +14,7 @@ namespace AngbandOS.ItemCategories
 
         public override Colour Colour => Colour.BrightBrown;
 
+        public override int? SubCategory => null; // No longer being used
         //public override void ApplyMagic(Item item, int level, int power)
         //{
         //    if (power != 0)
