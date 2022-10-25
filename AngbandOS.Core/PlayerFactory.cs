@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.Pantheon;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
@@ -34,106 +35,6 @@ namespace AngbandOS
         };
 
         private readonly string[] _menuItem = new string[32];
-
-        private readonly ItemIdentifier[][] _playerInit =
-        {
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.Ring, RingType.ResFear), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
-                new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvChainMail)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
-                new ItemIdentifier(ItemCategory.DeathBook, 0)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvMace),
-                new ItemIdentifier(ItemCategory.DeathBook, 0)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
-                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.NatureBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
-                new ItemIdentifier(ItemCategory.DeathBook, 0)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
-                new ItemIdentifier(ItemCategory.Scroll, ScrollType.ProtectionFromEvil)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvShortSword),
-                new ItemIdentifier(ItemCategory.DeathBook, 0)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
-                new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvMetalScaleMail)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
-                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
-                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.RestoreMana),
-                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
-                new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvQuarterstaff),
-                new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.SorceryBook, 0), 
-                new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt),
-                new ItemIdentifier(ItemCategory.DeathBook, 0)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.Wand, WandType.MagicMissile), 
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
-                new ItemIdentifier(ItemCategory.Ring, RingType.SustainCha)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
-                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
-                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
-            },
-            new[]
-            {
-                new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis),
-                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
-                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
-            }
-        };
 
         private readonly MenuItem[] _raceMenu =
         {
@@ -2058,8 +1959,119 @@ namespace AngbandOS
                 _player.Inventory[InventorySlot.Lightsource] = carried;
                 _player.WeightCarried += carried.Weight;
             }
-            // professions = Warrior = 0
-            // warrior-mage = 6
+
+            //BaseItemCategory[][] _playerInit2 = new BaseItemCategory[16][];
+            //_playerInit2[CharacterClass.Warrior] = new[]
+            //{
+            //    (BaseItemCategory)new RingFearResistance(),
+            //    (BaseItemCategory)new SwordBroadSword(),
+            //    (BaseItemCategory)new HardArmorChainMail()
+            //};
+            //_playerInit2[CharacterClass.Mage] = new[]
+            //{
+            //    new ItemIdentifier(ItemCategory.SorceryBook, 0),
+            //    new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+            //    new ItemIdentifier(ItemCategory.DeathBook, 0)
+            //};
+
+            ItemIdentifier[][] _playerInit = new ItemIdentifier[16][];
+            _playerInit[CharacterClass.Warrior] = new[]
+            {
+                new ItemIdentifier(ItemCategory.Ring, RingType.ResFear),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvChainMail)
+            };
+            _playerInit[CharacterClass.Mage] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.DeathBook, 0)
+            };
+            _playerInit[CharacterClass.Priest] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvMace),
+                new ItemIdentifier(ItemCategory.DeathBook, 0)
+            };
+            _playerInit[CharacterClass.Rogue] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
+            };
+            _playerInit[CharacterClass.Ranger] = new[]
+            {
+                new ItemIdentifier(ItemCategory.NatureBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.DeathBook, 0)
+            };
+            _playerInit[CharacterClass.Paladin] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.Scroll, ScrollType.ProtectionFromEvil)
+            };
+            _playerInit[CharacterClass.WarriorMage] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvShortSword),
+                new ItemIdentifier(ItemCategory.DeathBook, 0)
+            };
+            _playerInit[CharacterClass.Fanatic] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvBroadSword),
+                new ItemIdentifier(ItemCategory.HardArmor, HardArmourType.SvMetalScaleMail)
+            };
+            _playerInit[CharacterClass.Monk] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
+                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
+            };
+            _playerInit[CharacterClass.Mindcrafter] = new[]
+            {
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.RestoreMana),
+                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
+            };
+            _playerInit[CharacterClass.HighMage] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt)
+            };
+            _playerInit[CharacterClass.Druid] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Hafted, HaftedType.SvQuarterstaff),
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis)
+            };
+            _playerInit[CharacterClass.Cultist] = new[]
+            {
+                new ItemIdentifier(ItemCategory.SorceryBook, 0),
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainInt),
+                new ItemIdentifier(ItemCategory.DeathBook, 0)
+            };
+            _playerInit[CharacterClass.Channeler] = new[]
+            {
+                new ItemIdentifier(ItemCategory.Wand, WandType.MagicMissile),
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvDagger),
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainCha)
+            };
+            _playerInit[CharacterClass.ChosenOne] = new[]
+            {
+                new ItemIdentifier(ItemCategory.Sword, SwordType.SvSmallSword),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
+                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
+            };
+            _playerInit[CharacterClass.Mystic] = new[]
+            {
+                new ItemIdentifier(ItemCategory.Ring, RingType.SustainWis),
+                new ItemIdentifier(ItemCategory.Potion, (int)PotionType.Healing),
+                new ItemIdentifier(ItemCategory.SoftArmor, SoftArmourType.SvSoftLeatherArmor)
+            };
+
             for (int i = 0; i < 3; i++)
             {
                 ItemCategory tv = _playerInit[_player.ProfessionIndex][i].Category;
