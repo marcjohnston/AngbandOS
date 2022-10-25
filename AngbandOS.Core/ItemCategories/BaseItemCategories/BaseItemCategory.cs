@@ -14,6 +14,11 @@ namespace AngbandOS.ItemCategories
     internal abstract class BaseItemCategory : IItemCategory
     {
         /// <summary>
+        /// Returns true, if the object type has flavors.  Returns false, by default.
+        /// </summary>
+        public virtual bool ObjectHasFlavor => false;
+
+        /// <summary>
         /// The column from which to take the graphical tile.
         /// </summary>
         public abstract char Character { get; }
@@ -234,6 +239,9 @@ namespace AngbandOS.ItemCategories
         public virtual bool XtraMight => false;
         public virtual bool XtraShots => false;
 
+        /// <summary>
+        /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
+        /// </summary>
         public virtual ItemCategory CategoryEnum { get; }
 
         public BaseItemCategory()

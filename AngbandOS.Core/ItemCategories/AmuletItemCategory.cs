@@ -25,5 +25,6 @@ namespace AngbandOS.ItemCategories
         public override int BaseValue => 45;
         public override Colour Colour => Colour.Orange;
         public override int? SubCategory => null; // All amulet subcategories have been refactored.
+        public override bool ObjectHasFlavor => true;
     }
 }

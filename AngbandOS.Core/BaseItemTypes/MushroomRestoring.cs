@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class FoodRestoring : FoodItemCategory
+    internal class MushroomRestoring : MushroomFoodItemCategory
     {
         public override char Character => ',';
         public override string Name => "Restoring";

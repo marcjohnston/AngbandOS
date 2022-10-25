@@ -26,10 +26,10 @@ namespace AngbandOS
             foreach (Type type in assembly.GetTypes())
             {
                 // Check to see if the type implements the IItemCategory interface and is not an abstract class.
-                if (!type.IsAbstract && typeof(IItemCategory).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(BaseItemCategory).IsAssignableFrom(type))
                 {
                     // Load the item.
-                    IItemCategory itemCategory = (IItemCategory)Activator.CreateInstance(type);
+                    BaseItemCategory itemCategory = (BaseItemCategory)Activator.CreateInstance(type);
                     Add(new ItemType(itemCategory));
                 }
             }

@@ -40,7 +40,7 @@ namespace AngbandOS
         /// <summary>
         /// Returns the readonly scaffolded base item type.
         /// </summary>
-        public IItemCategory BaseCategory = null;
+        public BaseItemCategory? BaseCategory = null;
 
         public char Character;
         public Colour Colour;
@@ -68,7 +68,7 @@ namespace AngbandOS
         public bool Tried;
         public readonly int Weight;
 
-        public ItemType(IItemCategory baseItem)
+        public ItemType(BaseItemCategory baseItem)
         {
             Character = baseItem.Character;
             Colour = baseItem.Colour;

@@ -4,18 +4,17 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class FoodCureConfusion : FoodItemCategory
+    internal class MushroomHallucination : MushroomFoodItemCategory
     {
         public override char Character => ',';
-        public override string Name => "Cure Confusion";
+        public override string Name => "Hallucination";
 
         public override int Chance1 => 1;
-        public override int Cost => 50;
-        public override string FriendlyName => "Cure Confusion";
+        public override string FriendlyName => "Hallucination";
         public override int Level => 10;
         public override int Locale1 => 10;
         public override int Pval => 500;
-        public override int? SubCategory => 15;
+        public override int? SubCategory => 4;
         public override int Weight => 1;
     }
 }

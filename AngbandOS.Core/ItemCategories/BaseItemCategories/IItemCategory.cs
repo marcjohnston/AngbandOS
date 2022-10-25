@@ -7,11 +7,6 @@ namespace AngbandOS.ItemCategories
     internal interface IItemCategory
     {
         /// <summary>
-        /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
-        /// </summary>
-        ItemCategory CategoryEnum { get; }
-
-        /// <summary>
         /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armour returns double the default.
         /// </summary>
         int RandartActivationChance { get; }

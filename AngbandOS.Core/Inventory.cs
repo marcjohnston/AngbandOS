@@ -76,22 +76,7 @@ namespace AngbandOS
 
         public static bool ObjectHasFlavor(ItemType i)
         {
-            ItemType kPtr = i;
-            switch (kPtr.Category)
-            {
-                case ItemCategory.Amulet:
-                case ItemCategory.Ring:
-                case ItemCategory.Staff:
-                case ItemCategory.Wand:
-                case ItemCategory.Scroll:
-                case ItemCategory.Potion:
-                case ItemCategory.Rod:
-                    return true;
-
-                case ItemCategory.Food:
-                    return kPtr.SubCategory < FoodType.MinFood;
-            }
-            return false;
+            return i.BaseCategory.ObjectHasFlavor;
         }
 
         public void CombinePack()

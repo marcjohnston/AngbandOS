@@ -9,6 +9,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class StaffItemCategory : BaseItemCategory
     {
+        public override bool ObjectHasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
