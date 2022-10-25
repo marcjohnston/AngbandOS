@@ -2199,75 +2199,75 @@ namespace AngbandOS
             switch (i)
             {
                 case 0:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperLow);
+                    kPtr = new ItemType(new GoldCopper());
                     break;
 
                 case 1:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperMed);
+                    kPtr = new ItemType(new GoldCopper1());
                     break;
 
                 case 2:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.CopperHi);
+                    kPtr = new ItemType(new GoldCopper2());
                     break;
 
                 case 3:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverLow);
+                    kPtr = new ItemType(new GoldSilver());
                     break;
 
                 case 4:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverMed);
+                    kPtr = new ItemType(new GoldSilver1());
                     break;
 
                 case 5:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.SilverHi);
+                    kPtr = new ItemType(new GoldSilver2());
                     break;
 
                 case 6:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsLow);
+                    kPtr = new ItemType(new GoldGarnets());
                     break;
 
                 case 7:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GarnetsHi);
+                    kPtr = new ItemType(new GoldGarnets1());
                     break;
 
                 case 8:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldLow);
+                    kPtr = new ItemType(new GoldGold());
                     break;
 
                 case 9:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldMed);
+                    kPtr = new ItemType(new GoldGold1());
                     break;
 
                 case 10:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.GoldHigh);
+                    kPtr = new ItemType(new GoldGold2());
                     break;
 
                 case 11:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Opals);
+                    kPtr = new ItemType(new GoldOpals());
                     break;
 
                 case 12:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Sapphires);
+                    kPtr = new ItemType(new GoldSapphires());
                     break;
 
                 case 13:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Rubies);
+                    kPtr = new ItemType(new GoldRubies());
                     break;
 
                 case 14:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Diamonds);
+                    kPtr = new ItemType(new GoldDiamonds());
                     break;
 
                 case 15:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Emeralds);
+                    kPtr = new ItemType(new GoldEmeralds());
                     break;
 
                 case 16:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Mithril);
+                    kPtr = new ItemType(new GoldMithril());
                     break;
 
                 case 17:
-                    kPtr = SaveGame.ItemTypes.LookupKind(ItemCategory.Gold, Enumerations.MoneyType.Adamantite);
+                    kPtr = new ItemType(new GoldAdamantite());
                     break;
             }
             if (kPtr == null)

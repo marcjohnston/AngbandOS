@@ -8,6 +8,7 @@ namespace AngbandOS.ItemCategories
     {
         public override ItemCategory CategoryEnum => ItemCategory.Gold;
         //public override bool IgnoredByMonsters => true;
+        public override int? SubCategory => null; // No longer used by gold.
     }
 
 }
