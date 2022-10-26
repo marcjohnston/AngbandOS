@@ -20,7 +20,7 @@ namespace AngbandOS.Enumerations
             obvious = true;
             saveGame.MsgPrint("You are enveloped in flames!");
             saveGame.FireDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFire);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsFire);
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

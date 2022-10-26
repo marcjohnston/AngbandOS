@@ -20,7 +20,7 @@ namespace AngbandOS.Enumerations
             obvious = true;
             saveGame.MsgPrint("You are struck by electricity!");
             saveGame.ElecDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsElec);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsElec);
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

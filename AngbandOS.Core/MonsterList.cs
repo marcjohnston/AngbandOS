@@ -43,6 +43,21 @@ namespace AngbandOS
 
         public Monster this[int index] => _monsters[index];
 
+        /// <summary>
+        /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
+        /// </summary>
+        /// <param name="monster"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int GetMonsterIndex(Monster monster) // TODO: Needs to be removed.
+        {
+            for (int i = 0; i < _monsters.Length; i++)
+            {
+                if (_monsters[i] == monster)
+                    return i;
+            }
+            throw new Exception("Internal error monster not found for get monster index.");
+        }
         public bool AllocHorde(int y, int x)
         {
             MonsterRace rPtr = null;
@@ -674,9 +689,8 @@ namespace AngbandOS
             }
         }
 
-        public bool MultiplyMonster(int mIdx, bool charm, bool clone)
+        public bool MultiplyMonster(Monster mPtr, bool charm, bool clone)
         {
-            Monster mPtr = _monsters[mIdx];
             bool result = false;
             for (int i = 0; i < 18; i++)
             {
@@ -1079,11 +1093,10 @@ namespace AngbandOS
             }
         }
 
-        public void UpdateSmartLearn(int mIdx, int what)
+        public void UpdateSmartLearn(Monster monster, int what)
         {
             Player player = SaveGame.Player;
-            Monster mPtr = _monsters[mIdx];
-            MonsterRace rPtr = mPtr.Race;
+            MonsterRace rPtr = monster.Race;
             if (rPtr == null)
             {
                 return;
@@ -1101,169 +1114,169 @@ namespace AngbandOS
                 case Constants.DrsAcid:
                     if (player.HasAcidResistance)
                     {
-                        mPtr.Mind |= Constants.SmResAcid;
+                        monster.Mind |= Constants.SmResAcid;
                     }
                     if (player.TimedAcidResistance != 0)
                     {
-                        mPtr.Mind |= Constants.SmOppAcid;
+                        monster.Mind |= Constants.SmOppAcid;
                     }
                     if (player.HasAcidImmunity)
                     {
-                        mPtr.Mind |= Constants.SmImmAcid;
+                        monster.Mind |= Constants.SmImmAcid;
                     }
                     break;
 
                 case Constants.DrsElec:
                     if (player.HasLightningResistance)
                     {
-                        mPtr.Mind |= Constants.SmResElec;
+                        monster.Mind |= Constants.SmResElec;
                     }
                     if (player.TimedLightningResistance != 0)
                     {
-                        mPtr.Mind |= Constants.SmOppElec;
+                        monster.Mind |= Constants.SmOppElec;
                     }
                     if (player.HasLightningImmunity)
                     {
-                        mPtr.Mind |= Constants.SmImmElec;
+                        monster.Mind |= Constants.SmImmElec;
                     }
                     break;
 
                 case Constants.DrsFire:
                     if (player.HasFireResistance)
                     {
-                        mPtr.Mind |= Constants.SmResFire;
+                        monster.Mind |= Constants.SmResFire;
                     }
                     if (player.TimedFireResistance != 0)
                     {
-                        mPtr.Mind |= Constants.SmOppFire;
+                        monster.Mind |= Constants.SmOppFire;
                     }
                     if (player.HasFireImmunity)
                     {
-                        mPtr.Mind |= Constants.SmImmFire;
+                        monster.Mind |= Constants.SmImmFire;
                     }
                     break;
 
                 case Constants.DrsCold:
                     if (player.HasColdResistance)
                     {
-                        mPtr.Mind |= Constants.SmResCold;
+                        monster.Mind |= Constants.SmResCold;
                     }
                     if (player.TimedColdResistance != 0)
                     {
-                        mPtr.Mind |= Constants.SmOppCold;
+                        monster.Mind |= Constants.SmOppCold;
                     }
                     if (player.HasColdImmunity)
                     {
-                        mPtr.Mind |= Constants.SmImmCold;
+                        monster.Mind |= Constants.SmImmCold;
                     }
                     break;
 
                 case Constants.DrsPois:
                     if (player.HasPoisonResistance)
                     {
-                        mPtr.Mind |= Constants.SmResPois;
+                        monster.Mind |= Constants.SmResPois;
                     }
                     if (player.TimedPoisonResistance != 0)
                     {
-                        mPtr.Mind |= Constants.SmOppPois;
+                        monster.Mind |= Constants.SmOppPois;
                     }
                     break;
 
                 case Constants.DrsNeth:
                     if (player.HasNetherResistance)
                     {
-                        mPtr.Mind |= Constants.SmResNeth;
+                        monster.Mind |= Constants.SmResNeth;
                     }
                     break;
 
                 case Constants.DrsLight:
                     if (player.HasLightResistance)
                     {
-                        mPtr.Mind |= Constants.SmResLight;
+                        monster.Mind |= Constants.SmResLight;
                     }
                     break;
 
                 case Constants.DrsDark:
                     if (player.HasDarkResistance)
                     {
-                        mPtr.Mind |= Constants.SmResDark;
+                        monster.Mind |= Constants.SmResDark;
                     }
                     break;
 
                 case Constants.DrsFear:
                     if (player.HasFearResistance)
                     {
-                        mPtr.Mind |= Constants.SmResFear;
+                        monster.Mind |= Constants.SmResFear;
                     }
                     break;
 
                 case Constants.DrsConf:
                     if (player.HasConfusionResistance)
                     {
-                        mPtr.Mind |= Constants.SmResConf;
+                        monster.Mind |= Constants.SmResConf;
                     }
                     break;
 
                 case Constants.DrsChaos:
                     if (player.HasChaosResistance)
                     {
-                        mPtr.Mind |= Constants.SmResChaos;
+                        monster.Mind |= Constants.SmResChaos;
                     }
                     break;
 
                 case Constants.DrsDisen:
                     if (player.HasDisenchantResistance)
                     {
-                        mPtr.Mind |= Constants.SmResDisen;
+                        monster.Mind |= Constants.SmResDisen;
                     }
                     break;
 
                 case Constants.DrsBlind:
                     if (player.HasBlindnessResistance)
                     {
-                        mPtr.Mind |= Constants.SmResBlind;
+                        monster.Mind |= Constants.SmResBlind;
                     }
                     break;
 
                 case Constants.DrsNexus:
                     if (player.HasNexusResistance)
                     {
-                        mPtr.Mind |= Constants.SmResNexus;
+                        monster.Mind |= Constants.SmResNexus;
                     }
                     break;
 
                 case Constants.DrsSound:
                     if (player.HasSoundResistance)
                     {
-                        mPtr.Mind |= Constants.SmResSound;
+                        monster.Mind |= Constants.SmResSound;
                     }
                     break;
 
                 case Constants.DrsShard:
                     if (player.HasShardResistance)
                     {
-                        mPtr.Mind |= Constants.SmResShard;
+                        monster.Mind |= Constants.SmResShard;
                     }
                     break;
 
                 case Constants.DrsFree:
                     if (player.HasFreeAction)
                     {
-                        mPtr.Mind |= Constants.SmImmFree;
+                        monster.Mind |= Constants.SmImmFree;
                     }
                     break;
 
                 case Constants.DrsMana:
                     if (player.MaxMana == 0)
                     {
-                        mPtr.Mind |= Constants.SmImmMana;
+                        monster.Mind |= Constants.SmImmMana;
                     }
                     break;
 
                 case Constants.DrsReflect:
                     if (player.HasReflection)
                     {
-                        mPtr.Mind |= Constants.SmImmReflect;
+                        monster.Mind |= Constants.SmImmReflect;
                     }
                     break;
             }

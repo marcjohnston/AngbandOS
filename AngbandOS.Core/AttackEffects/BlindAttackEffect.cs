@@ -24,7 +24,7 @@ namespace AngbandOS.Enumerations
                     obvious = true;
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsBlind);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsBlind);
         }
     }
 }

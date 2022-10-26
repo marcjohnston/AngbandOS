@@ -148,7 +148,8 @@ namespace AngbandOS.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                SaveGame.TeleportAway(cPtr.MonsterIndex, doDist);
+                Monster targetMonster = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+                targetMonster.TeleportAway(SaveGame, doDist);
                 y = mPtr.MapY;
                 x = mPtr.MapX;
                 cPtr = SaveGame.Level.Grid[y][x];

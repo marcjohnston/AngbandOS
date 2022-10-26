@@ -35,7 +35,7 @@ namespace AngbandOS.Enumerations
                     obvious = true;
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsFear);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsFear);
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

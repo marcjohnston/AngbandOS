@@ -78,7 +78,8 @@ namespace AngbandOS.Projection
             {
                 mPtr.Speed += 10;
             }
-            if (SaveGame.Level.Monsters.MultiplyMonster(cPtr.MonsterIndex, isFriend, true))
+            Monster targetMonster = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+            if (SaveGame.Level.Monsters.MultiplyMonster(targetMonster, isFriend, true))
             {
                 note = " spawns!";
             }

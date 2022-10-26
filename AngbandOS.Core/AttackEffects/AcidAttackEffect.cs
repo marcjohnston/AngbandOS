@@ -20,7 +20,7 @@ namespace AngbandOS.Enumerations
             obvious = true;
             saveGame.MsgPrint("You are covered in acid!");
             saveGame.AcidDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monsterIndex, Constants.DrsAcid);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsAcid);
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

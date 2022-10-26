@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.StaticData
 {
