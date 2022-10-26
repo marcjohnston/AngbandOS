@@ -1151,260 +1151,263 @@ namespace AngbandOS
                 saveGame.MsgPrint("You hear noise.");
             }
             // We have up to four attacks
-            for (int attackNumber = 0; attackNumber < 4; attackNumber++)
+            if (Race.Attacks != null)
             {
-                bool visible = false;
-                bool obvious = false;
-                int power = 0;
-                int damage = 0;
-                string act = null;
-                BaseAttackEffect effect = Race.Attack[attackNumber].Effect;
-                AttackType method = Race.Attack[attackNumber].Method;
-                int dDice = Race.Attack[attackNumber].DDice;
-                int dSide = Race.Attack[attackNumber].DSide;
-                // Can't attack ourselves
-                if (target == this)
+                for (int attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
                 {
-                    break;
-                }
-                // If the target has moved, abort
-                if (target.MapX != xSaver || target.MapY != ySaver)
-                {
-                    break;
-                }
-                // If we don't have an attack in this attack slot, abort
-                if (method == 0)
-                {
-                    break;
-                }
-                // If we blinked away after stealing on a previous attack, abort
-                if (blinked)
-                {
-                    break;
-                }
-                if (IsVisible)
-                {
-                    visible = true;
-                }
-                // Get the power of the attack based on the attack type
-                power = effect.Power;
-
-                // If we hit the monster, describe the type of hit
-                if (effect == null || CheckHitMonsterVersusMonster(power, monsterLevel, armourClass))
-                {
-                    saveGame.Disturb(true);
-                    switch (method)
+                    bool visible = false;
+                    bool obvious = false;
+                    int power = 0;
+                    int damage = 0;
+                    string act = null;
+                    BaseAttackEffect effect = Race.Attacks[attackNumber].Effect;
+                    AttackType method = Race.Attacks[attackNumber].Method;
+                    int dDice = Race.Attacks[attackNumber].DDice;
+                    int dSide = Race.Attacks[attackNumber].DSide;
+                    // Can't attack ourselves
+                    if (target == this)
                     {
-                        case AttackType.Hit:
-                            act = "hits {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Touch:
-                            act = "touches {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Punch:
-                            act = "punches {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Kick:
-                            act = "kicks {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Claw:
-                            act = "claws {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Bite:
-                            act = "bites {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Sting:
-                            act = "stings {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Butt:
-                            act = "butts {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Crush:
-                            act = "crushes {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Engulf:
-                            act = "engulfs {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Charge:
-                            act = "charges {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Crawl:
-                            act = "crawls on {0}.";
-                            touched = true;
-                            break;
-
-                        case AttackType.Drool:
-                            act = "drools on {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Spit:
-                            act = "spits on {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Gaze:
-                            act = "gazes at {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Wail:
-                            act = "wails at {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Spore:
-                            act = "releases spores at {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Worship:
-                            act = "hero worships {0}.";
-                            touched = false;
-                            break;
-
-                        case AttackType.Beg:
-                            act = "begs {0} for money.";
-                            touched = false;
-                            target.SleepLevel = 0;
-                            break;
-
-                        case AttackType.Insult:
-                            act = "insults {0}.";
-                            touched = false;
-                            target.SleepLevel = 0;
-                            break;
-
-                        case AttackType.Moan:
-                            act = "moans at {0}.";
-                            touched = false;
-                            target.SleepLevel = 0;
-                            break;
-
-                        case AttackType.Show:
-                            act = "sings to {0}.";
-                            touched = false;
-                            target.SleepLevel = 0;
-                            break;
+                        break;
                     }
-                    // Display the attack description
-                    if (!string.IsNullOrEmpty(act))
+                    // If the target has moved, abort
+                    if (target.MapX != xSaver || target.MapY != ySaver)
                     {
-                        string temp = string.Format(act, targetName);
-                        if (IsVisible || target.IsVisible)
+                        break;
+                    }
+                    // If we don't have an attack in this attack slot, abort
+                    if (method == 0)
+                    {
+                        break;
+                    }
+                    // If we blinked away after stealing on a previous attack, abort
+                    if (blinked)
+                    {
+                        break;
+                    }
+                    if (IsVisible)
+                    {
+                        visible = true;
+                    }
+                    // Get the power of the attack based on the attack type
+                    power = effect.Power;
+
+                    // If we hit the monster, describe the type of hit
+                    if (effect == null || CheckHitMonsterVersusMonster(power, monsterLevel, armourClass))
+                    {
+                        saveGame.Disturb(true);
+                        switch (method)
                         {
-                            saveGame.MsgPrint($"{monsterName} {temp}");
+                            case AttackType.Hit:
+                                act = "hits {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Touch:
+                                act = "touches {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Punch:
+                                act = "punches {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Kick:
+                                act = "kicks {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Claw:
+                                act = "claws {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Bite:
+                                act = "bites {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Sting:
+                                act = "stings {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Butt:
+                                act = "butts {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Crush:
+                                act = "crushes {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Engulf:
+                                act = "engulfs {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Charge:
+                                act = "charges {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Crawl:
+                                act = "crawls on {0}.";
+                                touched = true;
+                                break;
+
+                            case AttackType.Drool:
+                                act = "drools on {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Spit:
+                                act = "spits on {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Gaze:
+                                act = "gazes at {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Wail:
+                                act = "wails at {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Spore:
+                                act = "releases spores at {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Worship:
+                                act = "hero worships {0}.";
+                                touched = false;
+                                break;
+
+                            case AttackType.Beg:
+                                act = "begs {0} for money.";
+                                touched = false;
+                                target.SleepLevel = 0;
+                                break;
+
+                            case AttackType.Insult:
+                                act = "insults {0}.";
+                                touched = false;
+                                target.SleepLevel = 0;
+                                break;
+
+                            case AttackType.Moan:
+                                act = "moans at {0}.";
+                                touched = false;
+                                target.SleepLevel = 0;
+                                break;
+
+                            case AttackType.Show:
+                                act = "sings to {0}.";
+                                touched = false;
+                                target.SleepLevel = 0;
+                                break;
                         }
-                    }
-                    obvious = true;
-                    damage = Program.Rng.DiceRoll(dDice, dSide);
-                    // Default to a missile attack
-                    Projectile pt = new ProjectMissile(saveGame);
-                    // Choose the correct type of attack to display, as well as any other special
-                    // effects for the attack
-                    if (effect == null)
-                    {
-                        damage = 0;
-                        pt = null;
+                        // Display the attack description
+                        if (!string.IsNullOrEmpty(act))
+                        {
+                            string temp = string.Format(act, targetName);
+                            if (IsVisible || target.IsVisible)
+                            {
+                                saveGame.MsgPrint($"{monsterName} {temp}");
+                            }
+                        }
+                        obvious = true;
+                        damage = Program.Rng.DiceRoll(dDice, dSide);
+                        // Default to a missile attack
+                        Projectile pt = new ProjectMissile(saveGame);
+                        // Choose the correct type of attack to display, as well as any other special
+                        // effects for the attack
+                        if (effect == null)
+                        {
+                            damage = 0;
+                            pt = null;
+                        }
+                        else
+                            effect.ApplyToMonster(saveGame, this, armourClass, ref damage, ref pt, ref blinked);
+
+                        // Implement the attack as a projectile
+                        if (pt != null)
+                        {
+                            saveGame.Project(GetMonsterIndex(saveGame), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            // If we touched the target we might get burned or zapped
+                            if (touched)
+                            {
+                                if ((targetRace.Flags2 & MonsterFlag2.FireAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
+                                {
+                                    if (IsVisible || target.IsVisible)
+                                    {
+                                        // Auras prevent us blinking away
+                                        blinked = false;
+                                        // The player may see and learn that the target has the aura
+                                        saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                                        if (target.IsVisible)
+                                        {
+                                            targetRace.Knowledge.RFlags2 |= MonsterFlag2.FireAura;
+                                        }
+                                    }
+                                    saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new ProjectFire(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                }
+                                if ((targetRace.Flags2 & MonsterFlag2.LightningAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
+                                {
+                                    if (IsVisible || target.IsVisible)
+                                    {
+                                        // Auras prevent us blinking away
+                                        blinked = false;
+                                        // The player may see and learn that the target has the aura
+                                        saveGame.MsgPrint($"{monsterName} gets zapped!");
+                                        if (target.IsVisible)
+                                        {
+                                            targetRace.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
+                                        }
+                                    }
+                                    saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
+                                        new ProjectElec(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                }
+                            }
+                        }
                     }
                     else
-                        effect.ApplyToMonster(saveGame, this, armourClass, ref damage, ref pt, ref blinked);
-
-                    // Implement the attack as a projectile
-                    if (pt != null)
                     {
-                        saveGame.Project(GetMonsterIndex(saveGame), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                        // If we touched the target we might get burned or zapped
-                        if (touched)
+                        // We didn't hit, so just let the player know that if we are visible
+                        switch (method)
                         {
-                            if ((targetRace.Flags2 & MonsterFlag2.FireAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
-                            {
-                                if (IsVisible || target.IsVisible)
+                            case AttackType.Hit:
+                            case AttackType.Touch:
+                            case AttackType.Punch:
+                            case AttackType.Kick:
+                            case AttackType.Claw:
+                            case AttackType.Bite:
+                            case AttackType.Sting:
+                            case AttackType.Butt:
+                            case AttackType.Crush:
+                            case AttackType.Engulf:
+                            case AttackType.Charge:
+                                if (IsVisible)
                                 {
-                                    // Auras prevent us blinking away
-                                    blinked = false;
-                                    // The player may see and learn that the target has the aura
-                                    saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                    if (target.IsVisible)
-                                    {
-                                        targetRace.Knowledge.RFlags2 |= MonsterFlag2.FireAura;
-                                    }
+                                    saveGame.Disturb(false);
+                                    saveGame.MsgPrint($"{monsterName} misses {targetName}.");
                                 }
-                                saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new ProjectFire(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                            }
-                            if ((targetRace.Flags2 & MonsterFlag2.LightningAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
-                            {
-                                if (IsVisible || target.IsVisible)
-                                {
-                                    // Auras prevent us blinking away
-                                    blinked = false;
-                                    // The player may see and learn that the target has the aura
-                                    saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                    if (target.IsVisible)
-                                    {
-                                        targetRace.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
-                                    }
-                                }
-                                saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    new ProjectElec(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                            }
+                                break;
                         }
                     }
-                }
-                else
-                {
-                    // We didn't hit, so just let the player know that if we are visible
-                    switch (method)
+                    // If the player saw what happened, they know more abouyt what attacks we have
+                    if (visible)
                     {
-                        case AttackType.Hit:
-                        case AttackType.Touch:
-                        case AttackType.Punch:
-                        case AttackType.Kick:
-                        case AttackType.Claw:
-                        case AttackType.Bite:
-                        case AttackType.Sting:
-                        case AttackType.Butt:
-                        case AttackType.Crush:
-                        case AttackType.Engulf:
-                        case AttackType.Charge:
-                            if (IsVisible)
-                            {
-                                saveGame.Disturb(false);
-                                saveGame.MsgPrint($"{monsterName} misses {targetName}.");
-                            }
-                            break;
-                    }
-                }
-                // If the player saw what happened, they know more abouyt what attacks we have
-                if (visible)
-                {
-                    if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
-                    {
-                        if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                        if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
                         {
-                            Race.Knowledge.RBlows[attackNumber]++;
+                            if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                            {
+                                Race.Knowledge.RBlows[attackNumber]++;
+                            }
                         }
                     }
                 }
@@ -5705,386 +5708,389 @@ namespace AngbandOS
             string monsterDescription = MonsterDesc(0x88);
             bool blinked = false;
             // Monsters get up to four attacks
-            for (attackNumber = 0; attackNumber < 4; attackNumber++)
+            if (Race.Attacks != null)
             {
-                bool visible = false;
-                bool obvious = false;
-                int power = 0;
-                int damage = 0;
-                string act = null;
-                BaseAttackEffect? effect = Race.Attack[attackNumber].Effect;
-                AttackType method = Race.Attack[attackNumber].Method;
-                int damageDice = Race.Attack[attackNumber].DDice;
-                int damageSides = Race.Attack[attackNumber].DSide;
-                // If the monster doesn't have an attack in this slot, stop looping
-                if (method == AttackType.Nothing)
+                for (attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
                 {
-                    break;
-                }
-                // Stop if player is dead or gone
-                if (!alive || saveGame.Player.IsDead || saveGame.NewLevelFlag)
-                {
-                    break;
-                }
-                if (IsVisible)
-                {
-                    visible = true;
-                }
-                // Get the basic attack power from the attack type
-                if (effect != null)
-                    power = effect.Power;
-
-                // Check if the monster actually hits us
-                if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
-                {
-                    saveGame.Disturb(true);
-                    // Protection From Evil might repel the attack
-                    if (saveGame.Player.TimedProtectionFromEvil > 0 && (Race.Flags3 & MonsterFlag3.Evil) != 0 && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
+                    bool visible = false;
+                    bool obvious = false;
+                    int power = 0;
+                    int damage = 0;
+                    string act = null;
+                    BaseAttackEffect? effect = Race.Attacks[attackNumber].Effect;
+                    AttackType method = Race.Attacks[attackNumber].Method;
+                    int damageDice = Race.Attacks[attackNumber].DDice;
+                    int damageSides = Race.Attacks[attackNumber].DSide;
+                    // If the monster doesn't have an attack in this slot, stop looping
+                    if (method == AttackType.Nothing)
                     {
-                        if (IsVisible)
-                        {
-                            // If it does, then they player knows the monster is evil
-                            Race.Knowledge.RFlags3 |= MonsterFlag3.Evil;
-                        }
-                        saveGame.MsgPrint($"{monsterName} is repelled.");
-                        continue;
+                        break;
                     }
-                    bool doCut = false;
-                    bool doStun = false;
-                    // Give a description and remember the possible extras based on the attack method
-                    switch (method)
+                    // Stop if player is dead or gone
+                    if (!alive || saveGame.Player.IsDead || saveGame.NewLevelFlag)
                     {
-                        case AttackType.Hit:
-                            {
-                                act = "hits you.";
-                                doCut = true;
-                                doStun = true;
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Touch:
-                            {
-                                act = "touches you.";
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Punch:
-                            {
-                                act = "punches you.";
-                                touched = true;
-                                doStun = true;
-                                break;
-                            }
-                        case AttackType.Kick:
-                            {
-                                act = "kicks you.";
-                                touched = true;
-                                doStun = true;
-                                break;
-                            }
-                        case AttackType.Claw:
-                            {
-                                act = "claws you.";
-                                touched = true;
-                                doCut = true;
-                                break;
-                            }
-                        case AttackType.Bite:
-                            {
-                                act = "bites you.";
-                                doCut = true;
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Sting:
-                            {
-                                act = "stings you.";
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Butt:
-                            {
-                                act = "butts you.";
-                                doStun = true;
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Crush:
-                            {
-                                act = "crushes you.";
-                                doStun = true;
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Engulf:
-                            {
-                                act = "engulfs you.";
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Charge:
-                            {
-                                act = "charges you.";
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Crawl:
-                            {
-                                act = "crawls on you.";
-                                touched = true;
-                                break;
-                            }
-                        case AttackType.Drool:
-                            {
-                                act = "drools on you.";
-                                break;
-                            }
-                        case AttackType.Spit:
-                            {
-                                act = "spits on you.";
-                                break;
-                            }
-                        case AttackType.Gaze:
-                            {
-                                act = "gazes at you.";
-                                break;
-                            }
-                        case AttackType.Wail:
-                            {
-                                act = "wails at you.";
-                                break;
-                            }
-                        case AttackType.Spore:
-                            {
-                                act = "releases spores at you.";
-                                break;
-                            }
-                        case AttackType.Worship:
-                            {
-                                string[] worships = { "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!", "dances around you!", "tugs at your clothing!", "asks if you will adopt him!" };
-                                act = worships[Program.Rng.RandomLessThan(8)];
-                                break;
-                            }
-                        case AttackType.Beg:
-                            {
-                                act = "begs you for money.";
-                                break;
-                            }
-                        case AttackType.Insult:
-                            {
-                                string[] insults = { "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!", "dances around you!", "makes obscene gestures!", "moons you!" };
-                                act = insults[Program.Rng.RandomLessThan(8)];
-                                break;
-                            }
-                        case AttackType.Moan:
-                            {
-                                string[] moans = { "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms." };
-                                act = moans[Program.Rng.RandomLessThan(4)];
-                                break;
-                            }
-                        case AttackType.Show:
-                            {
-                                act = Program.Rng.DieRoll(3) == 1 ? "sings 'We are a happy family.'" : "sings 'I love you, you love me.'";
-                                break;
-                            }
+                        break;
                     }
-                    // Print the message
-                    if (!string.IsNullOrEmpty(act))
+                    if (IsVisible)
                     {
-                        saveGame.MsgPrint($"{monsterName} {act}");
+                        visible = true;
                     }
-                    obvious = true;
-                    // Work out base damage done by the attack
-                    damage = Program.Rng.DiceRoll(damageDice, damageSides);
-                    // Apply any modifiers to the damage
-                    if (effect == null)
+                    // Get the basic attack power from the attack type
+                    if (effect != null)
+                        power = effect.Power;
+
+                    // Check if the monster actually hits us
+                    if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
                     {
-                        obvious = true;
-                        damage = 0;
-                    }
-                    else
-                        effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(saveGame), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
-
-                    // Be nice and don't let us be both stunned and cut by the same blow
-                    if (doCut && doStun)
-                    {
-                        if (Program.Rng.RandomLessThan(100) < 50)
+                        saveGame.Disturb(true);
+                        // Protection From Evil might repel the attack
+                        if (saveGame.Player.TimedProtectionFromEvil > 0 && (Race.Flags3 & MonsterFlag3.Evil) != 0 && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
                         {
-                            doCut = false;
-                        }
-                        else
-                        {
-                            doStun = false;
-                        }
-                    }
-                    int critLevel;
-                    if (doCut)
-                    {
-                        // Get how bad the hit was based on the actual damage out of the possible damage
-                        critLevel = MonsterCritical(damageDice, damageSides, damage);
-                        int k;
-                        switch (critLevel)
-                        {
-                            case 0:
-                                k = 0;
-                                break;
-
-                            case 1:
-                                k = Program.Rng.DieRoll(5);
-                                break;
-
-                            case 2:
-                                k = Program.Rng.DieRoll(5) + 5;
-                                break;
-
-                            case 3:
-                                k = Program.Rng.DieRoll(20) + 20;
-                                break;
-
-                            case 4:
-                                k = Program.Rng.DieRoll(50) + 50;
-                                break;
-
-                            case 5:
-                                k = Program.Rng.DieRoll(100) + 100;
-                                break;
-
-                            case 6:
-                                k = 300;
-                                break;
-
-                            default:
-                                k = 500;
-                                break;
-                        }
-                        if (k != 0)
-                        {
-                            saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + k);
-                        }
-                    }
-                    if (doStun)
-                    {
-                        // Get how bad the hit was based on the actual damage out of the possible damage
-                        critLevel = MonsterCritical(damageDice, damageSides, damage);
-                        int k;
-                        switch (critLevel)
-                        {
-                            case 0:
-                                k = 0;
-                                break;
-
-                            case 1:
-                                k = Program.Rng.DieRoll(5);
-                                break;
-
-                            case 2:
-                                k = Program.Rng.DieRoll(10) + 10;
-                                break;
-
-                            case 3:
-                                k = Program.Rng.DieRoll(20) + 20;
-                                break;
-
-                            case 4:
-                                k = Program.Rng.DieRoll(30) + 30;
-                                break;
-
-                            case 5:
-                                k = Program.Rng.DieRoll(40) + 40;
-                                break;
-
-                            case 6:
-                                k = 100;
-                                break;
-
-                            default:
-                                k = 200;
-                                break;
-                        }
-                        if (k != 0)
-                        {
-                            saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + k);
-                        }
-                    }
-                    // If the monster touched us then it may take damage from our defensive abilities
-                    if (touched)
-                    {
-                        if (saveGame.Player.HasFireShield && alive)
-                        {
-                            if ((Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
-                            {
-                                saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
-                                    " turns into a pile of ash."))
-                                {
-                                    blinked = false;
-                                    alive = false;
-                                }
-                            }
-                            else
-                            {
-                                // The player noticed that the monster took no fire damage
-                                if (IsVisible)
-                                {
-                                    Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
-                                }
-                            }
-                        }
-                        if (saveGame.Player.HasLightningShield && alive)
-                        {
-                            if ((Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
-                            {
-                                saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
-                                    " turns into a pile of cinder."))
-                                {
-                                    blinked = false;
-                                    alive = false;
-                                }
-                            }
-                            else
-                            {
-                                // The player noticed that the monster took no lightning damage
-                                if (IsVisible)
-                                {
-                                    Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    // It missed us, so give us the appropriate message
-                    switch (method)
-                    {
-                        case AttackType.Hit:
-                        case AttackType.Touch:
-                        case AttackType.Punch:
-                        case AttackType.Kick:
-                        case AttackType.Claw:
-                        case AttackType.Bite:
-                        case AttackType.Sting:
-                        case AttackType.Butt:
-                        case AttackType.Crush:
-                        case AttackType.Engulf:
-                        case AttackType.Charge:
                             if (IsVisible)
                             {
-                                saveGame.Disturb(true);
-                                saveGame.MsgPrint($"{monsterName} misses you.");
+                                // If it does, then they player knows the monster is evil
+                                Race.Knowledge.RFlags3 |= MonsterFlag3.Evil;
                             }
-                            break;
-                    }
-                }
-                // If the player saw the monster, they now know more about what attacks it can do
-                if (visible)
-                {
-                    if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
-                    {
-                        if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                            saveGame.MsgPrint($"{monsterName} is repelled.");
+                            continue;
+                        }
+                        bool doCut = false;
+                        bool doStun = false;
+                        // Give a description and remember the possible extras based on the attack method
+                        switch (method)
                         {
-                            Race.Knowledge.RBlows[attackNumber]++;
+                            case AttackType.Hit:
+                                {
+                                    act = "hits you.";
+                                    doCut = true;
+                                    doStun = true;
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Touch:
+                                {
+                                    act = "touches you.";
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Punch:
+                                {
+                                    act = "punches you.";
+                                    touched = true;
+                                    doStun = true;
+                                    break;
+                                }
+                            case AttackType.Kick:
+                                {
+                                    act = "kicks you.";
+                                    touched = true;
+                                    doStun = true;
+                                    break;
+                                }
+                            case AttackType.Claw:
+                                {
+                                    act = "claws you.";
+                                    touched = true;
+                                    doCut = true;
+                                    break;
+                                }
+                            case AttackType.Bite:
+                                {
+                                    act = "bites you.";
+                                    doCut = true;
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Sting:
+                                {
+                                    act = "stings you.";
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Butt:
+                                {
+                                    act = "butts you.";
+                                    doStun = true;
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Crush:
+                                {
+                                    act = "crushes you.";
+                                    doStun = true;
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Engulf:
+                                {
+                                    act = "engulfs you.";
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Charge:
+                                {
+                                    act = "charges you.";
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Crawl:
+                                {
+                                    act = "crawls on you.";
+                                    touched = true;
+                                    break;
+                                }
+                            case AttackType.Drool:
+                                {
+                                    act = "drools on you.";
+                                    break;
+                                }
+                            case AttackType.Spit:
+                                {
+                                    act = "spits on you.";
+                                    break;
+                                }
+                            case AttackType.Gaze:
+                                {
+                                    act = "gazes at you.";
+                                    break;
+                                }
+                            case AttackType.Wail:
+                                {
+                                    act = "wails at you.";
+                                    break;
+                                }
+                            case AttackType.Spore:
+                                {
+                                    act = "releases spores at you.";
+                                    break;
+                                }
+                            case AttackType.Worship:
+                                {
+                                    string[] worships = { "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!", "dances around you!", "tugs at your clothing!", "asks if you will adopt him!" };
+                                    act = worships[Program.Rng.RandomLessThan(8)];
+                                    break;
+                                }
+                            case AttackType.Beg:
+                                {
+                                    act = "begs you for money.";
+                                    break;
+                                }
+                            case AttackType.Insult:
+                                {
+                                    string[] insults = { "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!", "dances around you!", "makes obscene gestures!", "moons you!" };
+                                    act = insults[Program.Rng.RandomLessThan(8)];
+                                    break;
+                                }
+                            case AttackType.Moan:
+                                {
+                                    string[] moans = { "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms." };
+                                    act = moans[Program.Rng.RandomLessThan(4)];
+                                    break;
+                                }
+                            case AttackType.Show:
+                                {
+                                    act = Program.Rng.DieRoll(3) == 1 ? "sings 'We are a happy family.'" : "sings 'I love you, you love me.'";
+                                    break;
+                                }
+                        }
+                        // Print the message
+                        if (!string.IsNullOrEmpty(act))
+                        {
+                            saveGame.MsgPrint($"{monsterName} {act}");
+                        }
+                        obvious = true;
+                        // Work out base damage done by the attack
+                        damage = Program.Rng.DiceRoll(damageDice, damageSides);
+                        // Apply any modifiers to the damage
+                        if (effect == null)
+                        {
+                            obvious = true;
+                            damage = 0;
+                        }
+                        else
+                            effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(saveGame), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+
+                        // Be nice and don't let us be both stunned and cut by the same blow
+                        if (doCut && doStun)
+                        {
+                            if (Program.Rng.RandomLessThan(100) < 50)
+                            {
+                                doCut = false;
+                            }
+                            else
+                            {
+                                doStun = false;
+                            }
+                        }
+                        int critLevel;
+                        if (doCut)
+                        {
+                            // Get how bad the hit was based on the actual damage out of the possible damage
+                            critLevel = MonsterCritical(damageDice, damageSides, damage);
+                            int k;
+                            switch (critLevel)
+                            {
+                                case 0:
+                                    k = 0;
+                                    break;
+
+                                case 1:
+                                    k = Program.Rng.DieRoll(5);
+                                    break;
+
+                                case 2:
+                                    k = Program.Rng.DieRoll(5) + 5;
+                                    break;
+
+                                case 3:
+                                    k = Program.Rng.DieRoll(20) + 20;
+                                    break;
+
+                                case 4:
+                                    k = Program.Rng.DieRoll(50) + 50;
+                                    break;
+
+                                case 5:
+                                    k = Program.Rng.DieRoll(100) + 100;
+                                    break;
+
+                                case 6:
+                                    k = 300;
+                                    break;
+
+                                default:
+                                    k = 500;
+                                    break;
+                            }
+                            if (k != 0)
+                            {
+                                saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + k);
+                            }
+                        }
+                        if (doStun)
+                        {
+                            // Get how bad the hit was based on the actual damage out of the possible damage
+                            critLevel = MonsterCritical(damageDice, damageSides, damage);
+                            int k;
+                            switch (critLevel)
+                            {
+                                case 0:
+                                    k = 0;
+                                    break;
+
+                                case 1:
+                                    k = Program.Rng.DieRoll(5);
+                                    break;
+
+                                case 2:
+                                    k = Program.Rng.DieRoll(10) + 10;
+                                    break;
+
+                                case 3:
+                                    k = Program.Rng.DieRoll(20) + 20;
+                                    break;
+
+                                case 4:
+                                    k = Program.Rng.DieRoll(30) + 30;
+                                    break;
+
+                                case 5:
+                                    k = Program.Rng.DieRoll(40) + 40;
+                                    break;
+
+                                case 6:
+                                    k = 100;
+                                    break;
+
+                                default:
+                                    k = 200;
+                                    break;
+                            }
+                            if (k != 0)
+                            {
+                                saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + k);
+                            }
+                        }
+                        // If the monster touched us then it may take damage from our defensive abilities
+                        if (touched)
+                        {
+                            if (saveGame.Player.HasFireShield && alive)
+                            {
+                                if ((Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
+                                {
+                                    saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
+                                        " turns into a pile of ash."))
+                                    {
+                                        blinked = false;
+                                        alive = false;
+                                    }
+                                }
+                                else
+                                {
+                                    // The player noticed that the monster took no fire damage
+                                    if (IsVisible)
+                                    {
+                                        Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
+                                    }
+                                }
+                            }
+                            if (saveGame.Player.HasLightningShield && alive)
+                            {
+                                if ((Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
+                                {
+                                    saveGame.MsgPrint($"{monsterName} gets zapped!");
+                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
+                                        " turns into a pile of cinder."))
+                                    {
+                                        blinked = false;
+                                        alive = false;
+                                    }
+                                }
+                                else
+                                {
+                                    // The player noticed that the monster took no lightning damage
+                                    if (IsVisible)
+                                    {
+                                        Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // It missed us, so give us the appropriate message
+                        switch (method)
+                        {
+                            case AttackType.Hit:
+                            case AttackType.Touch:
+                            case AttackType.Punch:
+                            case AttackType.Kick:
+                            case AttackType.Claw:
+                            case AttackType.Bite:
+                            case AttackType.Sting:
+                            case AttackType.Butt:
+                            case AttackType.Crush:
+                            case AttackType.Engulf:
+                            case AttackType.Charge:
+                                if (IsVisible)
+                                {
+                                    saveGame.Disturb(true);
+                                    saveGame.MsgPrint($"{monsterName} misses you.");
+                                }
+                                break;
+                        }
+                    }
+                    // If the player saw the monster, they now know more about what attacks it can do
+                    if (visible)
+                    {
+                        if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                        {
+                            if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                            {
+                                Race.Knowledge.RBlows[attackNumber]++;
+                            }
                         }
                     }
                 }

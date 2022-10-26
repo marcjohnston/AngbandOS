@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Green naga";
 
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Spit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(AttackType.Spit, new AcidAttackEffect(), 2, 6),
+        };
         public override bool BashDoor => true;
         public override string Description => "A large green serpent with a female's torso. Her green skin glistens with acid.";
         public override bool Drop60 => true;

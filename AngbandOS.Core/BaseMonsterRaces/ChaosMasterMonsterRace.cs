@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Chaos master";
 
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 10;
-        public override int Attack1DSides => 2;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 10;
-        public override int Attack2DSides => 2;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Kick;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Punch;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 2;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Kick;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 2),
+            new MonsterAttack(AttackType.Kick, new HurtAttackEffect(), 10, 2),
+            new MonsterAttack(AttackType.Punch, new HurtAttackEffect(), 10, 2),
+            new MonsterAttack(AttackType.Kick, new HurtAttackEffect(), 10, 2)
+        };
         public override bool AttrAny => true;
         public override bool BashDoor => true;
         public override bool ChaosBall => true;

@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new Exp20AttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crawl;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new PoisonAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new Exp20AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Crawl, new AcidAttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6)
+        };
         public override bool BashDoor => true;
         public override string Description => "A huge wormlike shape dripping acid, twisted by evil sorcery into a foul monster that breeds on death.";
         public override bool Evil => true;

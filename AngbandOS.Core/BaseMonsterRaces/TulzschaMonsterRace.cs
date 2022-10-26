@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Tulzscha";
 
         public override int ArmourClass => 170;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new Exp80AttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 10;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new BlindAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Engulf;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new Exp80AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Hit, new BlindAttackEffect(), 10, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 10, 10)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool Blink => true;

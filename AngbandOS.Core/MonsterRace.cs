@@ -16,7 +16,7 @@ namespace AngbandOS
     internal class MonsterRace
     {
         public readonly int ArmourClass;
-        public readonly MonsterAttack[] Attack = new MonsterAttack[4];
+        public readonly MonsterAttack[]? Attacks;
         public char Character;
         public Colour Colour;
         public int CurNum;
@@ -45,10 +45,6 @@ namespace AngbandOS
         public string SplitName2;
         public string SplitName3;
 
-        public MonsterRace()
-        {
-        }
-
         public MonsterRace(Base2MonsterRace original, int index)
         {
             Name = original.FriendlyName;
@@ -68,11 +64,7 @@ namespace AngbandOS
             Mexp = original.Mexp;
             FreqInate = original.FreqInate == 0 ? 0 : 100 / original.FreqInate;
             FreqSpell = original.FreqSpell == 0 ? 0 : 100 / original.FreqSpell;
-            Attack = new MonsterAttack[4];
-            Attack[0] = original.Attack1;
-            Attack[1] = original.Attack2;
-            Attack[2] = original.Attack3;
-            Attack[3] = original.Attack4;
+            Attacks = original.Attacks;
             Level = original.Level;
             if (Level < 0)
             {

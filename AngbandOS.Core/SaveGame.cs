@@ -11770,11 +11770,15 @@ namespace AngbandOS
         [NonSerialized]
         public Dictionary<string, FloorTileType> BaseFloorTileTypes;
 
+        [NonSerialized]
+        public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
+
         /// <summary>
         /// Load the dictionaries from the binary resource file
         /// </summary>
         public void LoadOrCreateStaticResources()
         {
+            //BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace(), "BaseMonsterRace");
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
             BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
             BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
@@ -11890,6 +11894,10 @@ namespace AngbandOS
                                                     p.SetValue(entity, Enum.Parse(typeof(AttackType), stringValue));
                                                     break;
 
+                                                case "AttackEffect":
+                                                    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
+                                                    break;
+
                                                 case "Int32":
                                                     p.SetValue(entity, Convert.ToInt32(stringValue));
                                                     break;
@@ -12003,11 +12011,22 @@ namespace AngbandOS
                                         include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
                                         break;
                                     }
+
+                                case "AttackEffect":
+                                    {
+                                        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+
                                 default:
                                     throw new Exception("Scaffolding data type not supported.");
                             }
                         }
                         string output = String.Join("", tokens);
+                        if (output.Contains("new MonsterAttack(AttackType.Nothing, null, 0, 0)"))
+                            include = false;
                         if (include)
                         {
                             scaffoldedOutput.Add(output.Replace("~", ""));

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Gothmog, the High Captain of Balrogs";
 
         public override int ArmourClass => 140;
-        public override int Attack1DDice => 9;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new FireAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 9;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 8;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new UnPowerAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12),
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BreatheDisintegration => true;

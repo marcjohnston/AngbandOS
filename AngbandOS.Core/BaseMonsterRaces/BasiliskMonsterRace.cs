@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 90;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 12;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12)
+        };
         public override bool BashDoor => true;
         public override bool BreathePoison => true;
         public override string Description => "An evil reptile whose eyes stare deeply at you and your soul starts to wilt!";

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Hastur the Unspeakable";
 
         public override int ArmourClass => 150;
-        public override int Attack1DDice => 14;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 14;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 6;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new Exp80AttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 6;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new Exp80AttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 14, 8),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 14, 8),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 6, 6)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BrainSmash => true;

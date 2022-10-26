@@ -9,22 +9,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Ice elemental";
 
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 3;
-        public override BaseAttackEffect? Attack1Effect => new ColdAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 3;
-        public override BaseAttackEffect? Attack3Effect => new ColdAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 1, 3),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 1, 3),
+        };
         public override bool BashDoor => true;
         public override bool ColdBall => true;
         public override bool ColdBlood => true;

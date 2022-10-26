@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Golfimbul, the Hill Orc Chief";
 
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10)
+        };
         public override bool BashDoor => true;
         public override string Description => "A leader of a band of raiding orcs, he picks on hobbits.";
         public override bool Drop_2D2 => true;

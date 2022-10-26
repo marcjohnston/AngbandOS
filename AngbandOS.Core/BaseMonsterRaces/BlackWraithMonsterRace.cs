@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Black wraith";
 
         public override int ArmourClass => 55;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new Exp40AttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new Exp40AttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool CauseCriticalWounds => true;

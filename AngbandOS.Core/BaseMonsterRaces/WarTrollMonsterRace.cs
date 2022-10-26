@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "War troll";
 
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
+        };
         public override bool BashDoor => true;
         public override string Description => "A massive troll, equipped with a scimitar and heavy armour.";
         public override bool Drop90 => true;

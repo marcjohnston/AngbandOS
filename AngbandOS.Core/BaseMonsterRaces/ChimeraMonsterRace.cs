@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Chimera";
 
         public override int ArmourClass => 15;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 3;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 3;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Butt;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 1, 3),
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 1, 3),
+        };
         public override bool BashDoor => true;
         public override bool BreatheFire => true;
         public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";

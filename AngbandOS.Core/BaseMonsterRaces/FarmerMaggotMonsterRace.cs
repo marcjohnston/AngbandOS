@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Farmer Maggot";
 
         public override int ArmourClass => 10;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => null;
-        public override AttackType Attack1Type => AttackType.Moan;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Moan;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Moan, null, 0, 0),
+            new MonsterAttack(AttackType.Moan, null, 0, 0),
+        };
         public override bool BashDoor => true;
         public override string Description => "He's lost his dogs. He's had his mushrooms stolen. He's not a happy hobbit!";
         public override bool Drop90 => true;

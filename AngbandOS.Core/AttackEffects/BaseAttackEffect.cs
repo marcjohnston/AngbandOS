@@ -8,7 +8,7 @@
 
 using AngbandOS.Projection;
 
-namespace AngbandOS.Enumerations
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal abstract class BaseAttackEffect

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Shoggoth";
 
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 5;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 5;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 6;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 5, 6),
+            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 5, 6),
+            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 5, 6),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 6, 6)
+        };
         public override bool BashDoor => true;
         public override bool Cthuloid => true;
         public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";

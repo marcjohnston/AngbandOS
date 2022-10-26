@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
 
         public override bool AcidBolt => true;
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 10;
-        public override int Attack1DSides => 15;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 10;
-        public override int Attack2DSides => 15;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 15;
-        public override BaseAttackEffect? Attack3Effect => new LoseConAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 15),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 15),
+            new MonsterAttack(AttackType.Hit, new LoseConAttackEffect(), 10, 15),
+        };
         public override bool BashDoor => true;
         public override bool BrainSmash => true;
         public override bool CauseCriticalWounds => true;

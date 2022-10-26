@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Lasha, Mistress of Water";
 
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 5;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 5;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 5;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5)
+        };
         public override bool BashDoor => true;
         public override bool ColdBall => true;
         public override string Description => "With the body of a beautiful mermaid, she hides her cruelnature well, until it is too late.";

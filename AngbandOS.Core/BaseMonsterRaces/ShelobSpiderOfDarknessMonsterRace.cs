@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new PoisonAttackEffect();
-        public override AttackType Attack2Type => AttackType.Sting;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new LoseStrAttackEffect();
-        public override AttackType Attack3Type => AttackType.Sting;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new PoisonAttackEffect();
-        public override AttackType Attack4Type => AttackType.Sting;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 10),
+            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 2, 5),
+            new MonsterAttack(AttackType.Sting, new LoseStrAttackEffect(), 1, 4),
+            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 2, 5)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BreatheDark => true;

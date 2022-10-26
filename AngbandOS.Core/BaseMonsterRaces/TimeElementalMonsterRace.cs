@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Time elemental";
 
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new LoseAllAttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new Exp40AttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new LoseAllAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 4;
-        public override BaseAttackEffect? Attack4Effect => new Exp40AttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new LoseAllAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Touch, new LoseAllAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 3, 4)
+        };
         public override bool BreatheTime => true;
         public override string Description => "You have not seen it yet.";
         public override bool EmptyMind => true;

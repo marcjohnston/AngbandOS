@@ -9,22 +9,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Ghost";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new TerrifyAttackEffect();
-        public override AttackType Attack1Type => AttackType.Wail;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new Exp20AttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new LoseIntAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new LoseWisAttackEffect();
-        public override AttackType Attack4Type => AttackType.Claw;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Wail, new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new Exp20AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Claw, new LoseIntAttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Claw, new LoseWisAttackEffect(), 1, 6)
+        };
         public override bool Blindness => true;
         public override bool ColdBlood => true;
         public override string Description => "You don't believe in them.";

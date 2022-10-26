@@ -11,22 +11,10 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Sting;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 2;
-        public override BaseAttackEffect? Attack2Effect => new LoseStrAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 1, 4),
+            new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 1, 2),
+        };
         public override bool ColdBlood => true;
         public override bool Confuse => true;
         public override bool Cthuloid => true;

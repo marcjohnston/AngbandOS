@@ -11,22 +11,11 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 8;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 8;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 12;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new ElectricityAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Hit, new ElectricityAttackEffect(), 12, 12),
+        };
         public override bool BashDoor => true;
         public override string Description => "A vast legendary bird, its iron talons rake the most impenetrable of surfaces and its screech echoes through the many winding dungeon corridors.";
         public override int FreqInate => 0;

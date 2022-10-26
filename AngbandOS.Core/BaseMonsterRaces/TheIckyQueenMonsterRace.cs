@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "The Icky Queen";
 
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crawl;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new EatFoodAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crawl;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crawl, new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Crawl, new EatFoodAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 3, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool Confuse => true;

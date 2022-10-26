@@ -10,22 +10,9 @@ namespace AngbandOS.StaticData
         public override string Name => "Dimensional shambler";
 
         public override int ArmourClass => 68;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool Blink => true;

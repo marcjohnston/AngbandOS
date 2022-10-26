@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Brigand";
 
         public override int ArmourClass => 32;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new EatGoldAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new EatItemAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0),
+        };
         public override bool BashDoor => true;
         public override string Description => "He is eyeing your purse suspiciously.";
         public override bool Drop_1D2 => true;

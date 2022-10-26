@@ -492,11 +492,14 @@ namespace AngbandOS
             Monster mPtr = _monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
             var knowledge = rPtr.Knowledge;
-            for (var m = 0; m < 4; m++)
+            if (rPtr.Attacks != null)
             {
-                if (rPtr.Attack[m].Effect != null || rPtr.Attack[m].Method != 0)
+                for (var m = 0; m < rPtr.Attacks.Length; m++)
                 {
-                    knowledge.RBlows[m] = Constants.MaxUchar;
+                    if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != 0)
+                    {
+                        knowledge.RBlows[m] = Constants.MaxUchar;
+                    }
                 }
             }
             knowledge.RProbed = true;

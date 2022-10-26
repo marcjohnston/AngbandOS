@@ -11,22 +11,11 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 64;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Spit;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Engulf;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 8;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Spit, new AcidAttackEffect(), 1, 8),
+            new MonsterAttack(AttackType.Engulf, new AcidAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 4, 8),
+        };
         public override bool BreatheAcid => true;
         public override bool Cthuloid => true;
         public override string Description => "A gigantic worm dripping with acid.";

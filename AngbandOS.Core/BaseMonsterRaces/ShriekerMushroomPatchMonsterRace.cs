@@ -10,22 +10,7 @@ namespace AngbandOS.StaticData
         public override string Name => "Shrieker mushroom patch";
 
         public override int ArmourClass => 1;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => null;
-        public override AttackType Attack1Type => AttackType.Nothing;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => null;
         public override string Description => "Yum! These look quite tasty.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

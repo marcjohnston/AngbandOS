@@ -11,22 +11,10 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 55;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 12),
+        };
         public override bool BashDoor => true;
         public override string Description => "It is a giant beetle with vicious claws.";
         public override int FreqInate => 0;

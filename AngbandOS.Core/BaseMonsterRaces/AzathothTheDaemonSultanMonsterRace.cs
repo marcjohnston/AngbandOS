@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Azathoth, The Daemon Sultan";
 
         public override int ArmourClass => 175;
-        public override int Attack1DDice => 22;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new ShatterAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 20;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new ShatterAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new LoseAllAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new UnPowerAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 22, 10),
+            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 20, 10),
+            new MonsterAttack(AttackType.Touch, new LoseAllAttackEffect(), 10, 12),
+            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0)
+        };
         public override bool BrainSmash => true;
         public override bool BreatheChaos => true;
         public override bool BreatheDisintegration => true;

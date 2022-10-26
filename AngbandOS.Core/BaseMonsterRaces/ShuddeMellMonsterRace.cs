@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Shudde M'ell";
 
         public override int ArmourClass => 90;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 11;
-        public override BaseAttackEffect? Attack1Effect => new ShatterAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 11;
-        public override BaseAttackEffect? Attack2Effect => new ShatterAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new LoseConAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 2;
-        public override BaseAttackEffect? Attack4Effect => new LoseConAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 3, 11),
+            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 3, 11),
+            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 1, 2),
+            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 1, 2)
+        };
         public override bool BrainSmash => true;
         public override bool Confuse => true;
         public override bool Cthuloid => true;

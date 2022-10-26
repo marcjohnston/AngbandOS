@@ -6,7 +6,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Enumerations
+using AngbandOS.Enumerations;
+
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal class LoseChaAttackEffect : BaseAttackEffect

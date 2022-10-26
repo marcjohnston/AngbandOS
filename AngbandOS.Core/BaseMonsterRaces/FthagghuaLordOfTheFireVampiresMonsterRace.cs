@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Fthagghua, Lord of the fire vampires";
 
         public override int ArmourClass => 160;
-        public override int Attack1DDice => 9;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new FireAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new FireAttackEffect();
-        public override AttackType Attack3Type => AttackType.Engulf;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Engulf;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12),
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Engulf, new FireAttackEffect(), 10, 10),
+            new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 10, 10)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BreatheFire => true;

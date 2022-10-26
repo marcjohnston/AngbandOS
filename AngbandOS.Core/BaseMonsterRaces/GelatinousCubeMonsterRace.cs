@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Gelatinous cube";
 
         public override int ArmourClass => 18;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+        };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a strange, vast gelatinous structure that assumes cubic proportions as it lines all four walls of the corridors it patrols. Through its transparent jelly structure you can see treasures it has engulfed, and a few corpses as well.";

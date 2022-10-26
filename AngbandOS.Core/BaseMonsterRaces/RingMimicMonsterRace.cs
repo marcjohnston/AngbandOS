@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool AcidBolt => true;
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new PoisonAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new PoisonAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 4;
-        public override BaseAttackEffect? Attack4Effect => new PoisonAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4)
+        };
         public override bool Blindness => true;
         public override bool CauseSeriousWounds => true;
         public override bool CharMulti => true;

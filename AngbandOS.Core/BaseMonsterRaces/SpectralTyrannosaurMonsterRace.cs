@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 120;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 13;
-        public override BaseAttackEffect? Attack1Effect => new Exp40AttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 13;
-        public override BaseAttackEffect? Attack2Effect => new Exp40AttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 5;
-        public override int Attack3DSides => 8;
-        public override BaseAttackEffect? Attack3Effect => new LoseStrAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new TerrifyAttackEffect();
-        public override AttackType Attack4Type => AttackType.Gaze;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new Exp40AttackEffect(), 2, 13),
+            new MonsterAttack(AttackType.Bite, new Exp40AttackEffect(), 2, 13),
+            new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 5, 8),
+            new MonsterAttack(AttackType.Gaze, new TerrifyAttackEffect(), 0, 0)
+        };
         public override bool BashDoor => true;
         public override bool BreatheNether => true;
         public override bool BreatheNexus => true;

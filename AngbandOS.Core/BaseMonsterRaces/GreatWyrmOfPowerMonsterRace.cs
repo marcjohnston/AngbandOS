@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Great Wyrm of Power";
 
         public override int ArmourClass => 111;
-        public override int Attack1DDice => 8;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 8;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 8;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new ElectricityAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 18;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new PoisonAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Crush, new FireAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Crush, new ElectricityAttackEffect(), 8, 12),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 10, 18)
+        };
         public override bool BashDoor => true;
         public override bool BreatheAcid => true;
         public override bool BreatheChaos => true;

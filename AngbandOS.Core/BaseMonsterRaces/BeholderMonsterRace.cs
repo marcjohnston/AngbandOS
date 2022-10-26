@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool AcidBolt => true;
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new Exp20AttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack2Type => AttackType.Gaze;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new LoseIntAttackEffect();
-        public override AttackType Attack3Type => AttackType.Gaze;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new UnPowerAttackEffect();
-        public override AttackType Attack4Type => AttackType.Gaze;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new Exp20AttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Gaze, new LoseIntAttackEffect(), 2, 6),
+            new MonsterAttack(AttackType.Gaze, new UnPowerAttackEffect(), 2, 6)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool ColdBolt => true;

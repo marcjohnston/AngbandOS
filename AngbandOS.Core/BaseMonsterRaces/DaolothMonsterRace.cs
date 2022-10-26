@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Daoloth";
 
         public override int ArmourClass => 180;
-        public override int Attack1DDice => 6;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new UnBonusAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 6, 8),
+            new MonsterAttack(AttackType.Hit, new AcidAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override string Description => "'Not shapeless, but so complex that the eye could recognise no discernable shape.' J.Ramsey Campbell - 'The Render of the Veils'.";

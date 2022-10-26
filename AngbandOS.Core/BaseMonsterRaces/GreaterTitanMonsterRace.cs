@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Greater titan";
 
         public override int ArmourClass => 125;
-        public override int Attack1DDice => 12;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new ConfuseAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 12;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new ConfuseAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 12;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new ConfuseAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 12;
-        public override int Attack4DSides => 12;
-        public override BaseAttackEffect? Attack4Effect => new ConfuseAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12)
+        };
         public override bool BashDoor => true;
         public override string Description => "A forty foot tall humanoid that shakes the ground as it walks. The power radiating from its frame shakes your courage, its hatred inspired by your defiance.";
         public override bool Drop_4D2 => true;

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Law ghost";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new Exp80AttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new Exp40AttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new LoseIntAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new LoseWisAttackEffect();
-        public override AttackType Attack4Type => AttackType.Claw;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new Exp80AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Claw, new LoseIntAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Claw, new LoseWisAttackEffect(), 1, 10)
+        };
         public override bool ColdBlood => true;
         public override string Description => "An almost life-like creature which is nothing more than a phantom created by the law.";
         public override bool Drop_1D2 => true;

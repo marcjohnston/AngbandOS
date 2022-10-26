@@ -6,9 +6,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Projection;
-using AngbandOS.StaticData;
+using AngbandOS.Enumerations;
 
-namespace AngbandOS.Enumerations
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal class UnPowerAttackEffect : BaseAttackEffect

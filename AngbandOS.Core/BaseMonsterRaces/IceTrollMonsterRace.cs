@@ -9,22 +9,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Ice troll";
 
         public override int ArmourClass => 56;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new ColdAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 3, 6),
+        };
         public override bool BashDoor => true;
         public override string Description => "He is a white troll with powerfully clawed hands.";
         public override bool Drop60 => true;

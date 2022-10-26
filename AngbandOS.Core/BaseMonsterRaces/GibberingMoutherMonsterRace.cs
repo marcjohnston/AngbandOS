@@ -10,22 +10,9 @@ namespace AngbandOS.StaticData
         public override string Name => "Gibbering mouther";
 
         public override int ArmourClass => 20;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crawl;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crawl, new PoisonAttackEffect(), 1, 4),
+        };
         public override bool BreatheLight => true;
         public override bool Confuse => true;
         public override string Description => "A chaotic mass of pulsating flesh, mouths and eyes.";

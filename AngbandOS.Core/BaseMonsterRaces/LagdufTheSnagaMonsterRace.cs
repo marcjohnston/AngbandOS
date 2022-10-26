@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Lagduf, the Snaga";
 
         public override int ArmourClass => 32;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 9;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 9;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9)
+        };
         public override bool BashDoor => true;
         public override string Description => "A captain of a regiment of weaker orcs, Lagduf keeps his troop in order with displays of excessive violence.";
         public override bool Drop_1D2 => true;

@@ -9,7 +9,7 @@
 using AngbandOS.Projection;
 using System.Threading;
 
-namespace AngbandOS.Enumerations
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal class ShatterAttackEffect : BaseAttackEffect

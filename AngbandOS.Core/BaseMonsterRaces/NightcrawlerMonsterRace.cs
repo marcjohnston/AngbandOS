@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Nightcrawler";
 
         public override int ArmourClass => 160;
-        public override int Attack1DDice => 8;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new LoseConAttackEffect();
-        public override AttackType Attack1Type => AttackType.Sting;
-        public override int Attack2DDice => 8;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new LoseConAttackEffect();
-        public override AttackType Attack2Type => AttackType.Sting;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new AcidAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Sting, new LoseConAttackEffect(), 8, 8),
+            new MonsterAttack(AttackType.Sting, new LoseConAttackEffect(), 8, 8),
+            new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 10, 10),
+            new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 10, 10)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BrainSmash => true;

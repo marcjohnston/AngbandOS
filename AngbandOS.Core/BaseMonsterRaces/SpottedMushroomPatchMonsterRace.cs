@@ -10,22 +10,9 @@ namespace AngbandOS.StaticData
         public override string Name => "Spotted mushroom patch";
 
         public override int ArmourClass => 1;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Spore;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Spore, new PoisonAttackEffect(), 2, 4),
+        };
         public override string Description => "Yum! It looks quite tasty.";
         public override bool EmptyMind => true;
         public override int FreqInate => 0;

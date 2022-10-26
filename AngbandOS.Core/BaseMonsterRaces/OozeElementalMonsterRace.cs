@@ -12,22 +12,11 @@ namespace AngbandOS.StaticData
         public override bool AcidBall => true;
         public override bool AcidBolt => true;
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),
+        };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a towering mass of filth, an eyesore of ooze.";

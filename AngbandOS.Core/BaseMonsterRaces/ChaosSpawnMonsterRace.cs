@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Chaos spawn";
 
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new UnBonusAttackEffect();
-        public override AttackType Attack2Type => AttackType.Gaze;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new Exp40AttackEffect();
-        public override AttackType Attack3Type => AttackType.Gaze;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Gaze;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Gaze, new UnBonusAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Gaze, new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Gaze, new HurtAttackEffect(), 10, 6)
+        };
         public override bool BashDoor => true;
         public override string Description => "It has two eyestalks and a large central eye. Its gaze can kill.";
         public override bool Evil => true;

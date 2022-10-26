@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Nazgul";
 
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 6;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new TerrifyAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 6;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new TerrifyAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new Exp80AttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 4;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new Exp80AttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new TerrifyAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Hit, new TerrifyAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Hit, new Exp80AttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Hit, new Exp80AttackEffect(), 4, 6)
+        };
         public override bool BashDoor => true;
         public override bool BreatheNether => true;
         public override bool ColdBlood => true;

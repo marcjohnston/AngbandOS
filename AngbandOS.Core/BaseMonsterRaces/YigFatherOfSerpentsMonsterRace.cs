@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Yig, Father of Serpents";
 
         public override int ArmourClass => 185;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 5;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new PoisonAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 20;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 5;
-        public override int Attack4DSides => 12;
-        public override BaseAttackEffect? Attack4Effect => new UnBonusAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 5, 10),
+            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 5, 10),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 20, 10),
+            new MonsterAttack(AttackType.Crush, new UnBonusAttackEffect(), 5, 12)
+        };
         public override bool BashDoor => true;
         public override bool BreatheAcid => true;
         public override bool BreatheDisenchant => true;

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Abhoth, Source of Uncleanness";
 
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 30;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new LoseConAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 30;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new LoseStrAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 50;
-        public override BaseAttackEffect? Attack3Effect => new LoseIntAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 50;
-        public override BaseAttackEffect? Attack4Effect => new LoseWisAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crawl;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new LoseConAttackEffect(), 30, 4),
+            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 30, 4),
+            new MonsterAttack(AttackType.Touch, new LoseIntAttackEffect(), 1, 50),
+            new MonsterAttack(AttackType.Crawl, new LoseWisAttackEffect(), 1, 50)
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;

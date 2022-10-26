@@ -9,11 +9,13 @@
   <ItemGroup>
     <None Remove="Data\Animations.csv" />
     <None Remove="Data\BaseFixedartifacts.csv" />
+    <None Remove="Data\BaseMonsterRaces.csv" />
     <None Remove="Data\BaseRareItemTypes.csv" />
     <None Remove="Data\BaseVaultTypes.csv" />
     <None Remove="Data\FloorTileTypes.csv" />
     <None Remove="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
+    <None Remove="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
@@ -23,6 +25,10 @@
     <None Remove="Data\ScaffoldTemplates\BaseStaffFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseWandFlavour.template" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="Data\BaseMonsterRaces.csv" />
+  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Data\Animations.csv" />
@@ -30,6 +36,7 @@
     <EmbeddedResource Include="Data\BaseRareItemTypes.csv" />
     <EmbeddedResource Include="Data\BaseVaultTypes.csv" />
     <EmbeddedResource Include="Data\FloorTileTypes.csv" />
+    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMonsterRace.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
@@ -48,6 +55,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\BaseMonsterRaces\" />
   </ItemGroup>
 
 </Project>

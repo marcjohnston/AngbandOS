@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new ConfuseAttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new ConfuseAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6)
+        };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
         public override string Description => "This bizarre creature has glaring eyes and large mandibles capable of slicing through rock.";

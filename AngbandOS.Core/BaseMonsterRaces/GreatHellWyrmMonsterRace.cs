@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Great hell wyrm";
 
         public override int ArmourClass => 170;
-        public override int Attack1DDice => 4;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 5;
-        public override int Attack4DSides => 14;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 5, 14)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BreatheFire => true;

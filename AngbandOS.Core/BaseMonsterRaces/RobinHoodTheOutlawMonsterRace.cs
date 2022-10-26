@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override int ArmourClass => 30;
         public override bool Arrow3D6 => true;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new EatGoldAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new EatItemAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0)
+        };
         public override bool BashDoor => true;
         public override bool CreateTraps => true;
         public override string Description => "The legendary archer steals from the rich (you qualify). ";

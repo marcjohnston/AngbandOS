@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Vampire lord";
 
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new Exp80AttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new Exp80AttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 1, 6),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 1, 6)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BrainSmash => true;

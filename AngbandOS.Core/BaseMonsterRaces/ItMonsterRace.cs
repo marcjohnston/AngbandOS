@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "It";
 
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 8;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new BlindAttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new TerrifyAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new Exp40AttackEffect();
-        public override AttackType Attack3Type => AttackType.Gaze;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new EatItemAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new BlindAttackEffect(), 8, 8),
+            new MonsterAttack(AttackType.Touch, new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Gaze, new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0)
+        };
         public override bool AttrClear => true;
         public override bool Blindness => true;
         public override bool Blink => true;

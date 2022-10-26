@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Mephistopheles, Lord of Hell";
 
         public override int ArmourClass => 150;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new Exp80AttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new TerrifyAttackEffect();
-        public override AttackType Attack2Type => AttackType.Gaze;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new FireAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 4;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new UnPowerAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new Exp80AttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Gaze, new TerrifyAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Touch, new FireAttackEffect(), 4, 5),
+            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 4, 5)
+        };
         public override bool BashDoor => true;
         public override bool BrainSmash => true;
         public override bool BreatheFire => true;

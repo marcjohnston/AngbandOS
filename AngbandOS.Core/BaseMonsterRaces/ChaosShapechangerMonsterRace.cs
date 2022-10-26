@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Chaos shapechanger";
 
         public override int ArmourClass => 14;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 3;
-        public override BaseAttackEffect? Attack3Effect => new ConfuseAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 1, 3),
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool ColdBolt => true;

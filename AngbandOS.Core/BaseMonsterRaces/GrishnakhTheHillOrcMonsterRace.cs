@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Grishnakh, the Hill Orc";
 
         public override int ArmourClass => 20;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10)
+        };
         public override bool BashDoor => true;
         public override string Description => "He is a cunning and devious orc with a chaotic nature.";
         public override bool Drop_1D2 => true;

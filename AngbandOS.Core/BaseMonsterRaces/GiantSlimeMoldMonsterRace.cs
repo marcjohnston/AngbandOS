@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Giant slime mold";
 
         public override int ArmourClass => 16;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
+        };
         public override bool BashDoor => true;
         public override string Description => "A pile of rotting vegetation that slides towards you with a disgusting stench, waking all it nears.";
         public override bool Drop90 => true;

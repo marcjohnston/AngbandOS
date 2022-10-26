@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Nyogtha, the Thing that Should not Be";
 
         public override int ArmourClass => 120;
-        public override int Attack1DDice => 10;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 10;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new ColdAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 16;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 10, 6),
+            new MonsterAttack(AttackType.Crush, new ColdAttackEffect(), 10, 6),
+            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 10, 6),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 16, 6)
+        };
         public override bool BashDoor => true;
         public override bool BrainSmash => true;
         public override bool BreatheAcid => true;

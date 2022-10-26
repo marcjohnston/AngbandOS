@@ -8,7 +8,7 @@
 using AngbandOS.Projection;
 using AngbandOS.StaticData;
 
-namespace AngbandOS.Enumerations
+namespace AngbandOS.StaticData
 {
     [Serializable]
     internal class AcidAttackEffect : BaseAttackEffect

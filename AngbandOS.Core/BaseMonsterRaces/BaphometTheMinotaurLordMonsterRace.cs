@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override int ArmourClass => 120;
         public override bool Arrow7D6 => true;
-        public override int Attack1DDice => 12;
-        public override int Attack1DSides => 13;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Butt;
-        public override int Attack2DDice => 12;
-        public override int Attack2DSides => 13;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Butt;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 12, 13),
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 12, 13),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10)
+        };
         public override bool BashDoor => true;
         public override bool BreatheForce => true;
         public override string Description => "A fearsome bull-headed demon, Baphomet swings a mighty axe as he curses all that defy him.";

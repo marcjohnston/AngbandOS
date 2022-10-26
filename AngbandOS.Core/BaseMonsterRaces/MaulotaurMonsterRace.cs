@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Maulotaur";
 
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 4;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Butt;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Butt;
-        public override int Attack3DDice => 5;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect Attack3Effect => new ShatterAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 5;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect Attack4Effect => new ShatterAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Hit, new ShatterAttackEffect(), 5, 6),
+            new MonsterAttack(AttackType.Hit, new ShatterAttackEffect(), 5, 6)
+        };
         public override bool BashDoor => true;
         public override string Description => "It is a belligrent minotaur with some destructive magical arsenal, armed with a hammer.";
         public override bool Drop60 => true;

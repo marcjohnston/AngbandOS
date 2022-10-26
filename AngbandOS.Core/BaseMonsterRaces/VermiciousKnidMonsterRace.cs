@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Vermicious Knid";
 
         public override int ArmourClass => 55;
-        public override int Attack1DDice => 4;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new TerrifyAttackEffect();
-        public override AttackType Attack1Type => AttackType.Touch;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crawl;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Engulf;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Touch, new TerrifyAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Crawl, new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 4, 6),
+        };
         public override bool ColdBlood => true;
         public override string Description => "An amorphous shape that looks like wet grey clay with two pale eyes. It is totally silent as it oozes towards you.";
         public override bool Drop_2D2 => true;

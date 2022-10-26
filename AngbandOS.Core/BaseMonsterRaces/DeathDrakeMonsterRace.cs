@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Death drake";
 
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 4;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new Exp80AttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new Exp80AttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 3, 6),
+            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 3, 6)
+        };
         public override bool BreatheNether => true;
         public override bool Confuse => true;
         public override string Description => "It is a dragon-like form wrapped in darkness. You cannot make out its true form but you sense its evil.";

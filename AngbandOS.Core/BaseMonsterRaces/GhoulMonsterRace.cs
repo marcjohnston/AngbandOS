@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Ghoul";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new PoisonAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 1, 4),
+            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 4),
+            new MonsterAttack(AttackType.Bite, new ParalyzeAttackEffect(), 1, 5),
+        };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
         public override string Description => "Flesh is falling off in chunks from this decaying abomination.";

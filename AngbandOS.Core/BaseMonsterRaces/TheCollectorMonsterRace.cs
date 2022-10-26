@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "The Collector";
 
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new LoseChaAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new EatItemAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 1;
-        public override BaseAttackEffect? Attack3Effect => new LoseAllAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new EatGoldAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new LoseChaAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new LoseAllAttackEffect(), 10, 1),
+            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0)
+        };
         public override bool Blindness => true;
         public override bool BrainSmash => true;
         public override bool CauseMortalWounds => true;

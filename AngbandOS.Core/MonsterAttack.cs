@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
 using System;
 
 namespace AngbandOS
@@ -28,6 +29,14 @@ namespace AngbandOS
             Effect = original.Effect;
             DDice = original.DDice;
             DSide = original.DSide;
+        }
+
+        public MonsterAttack(AttackType method, BaseAttackEffect? effect, int dice, int sides)
+        {
+            Method = method;
+            Effect = effect;
+            DDice = dice;
+            DSide = sides;
         }
 
         public override string ToString()

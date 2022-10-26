@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Baron of hell";
 
         public override int ArmourClass => 130;
-        public override int Attack1DDice => 11;
-        public override int Attack1DSides => 2;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 11;
-        public override int Attack2DSides => 2;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 11;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 11, 2),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 11, 2),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 11, 2),
+        };
         public override bool BashDoor => true;
         public override bool Demon => true;
         public override string Description => "A minor demon lord with a goat's head, tough to kill.";

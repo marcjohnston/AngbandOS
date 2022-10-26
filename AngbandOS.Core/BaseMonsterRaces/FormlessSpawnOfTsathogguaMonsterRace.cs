@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool AcidBolt => true;
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new AcidAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 6;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new AcidAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new AcidAttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Hit, new AcidAttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 6, 6)
+        };
         public override bool BashDoor => true;
         public override bool Cthuloid => true;
         public override bool Darkness => true;

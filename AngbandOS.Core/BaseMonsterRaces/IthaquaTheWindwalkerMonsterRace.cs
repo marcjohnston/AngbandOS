@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Ithaqua the Windwalker";
 
         public override int ArmourClass => 125;
-        public override int Attack1DDice => 12;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new ColdAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 12;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new ColdAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 12;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Crush;
-        public override int Attack4DDice => 12;
-        public override int Attack4DSides => 12;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new ColdAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Claw, new ColdAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 12, 12)
+        };
         public override bool BashDoor => true;
         public override bool BreatheCold => true;
         public override bool CauseMortalWounds => true;

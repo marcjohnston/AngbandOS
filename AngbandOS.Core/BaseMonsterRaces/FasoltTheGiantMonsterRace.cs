@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Fasolt the Giant";
 
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new EatGoldAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 10),
+            new MonsterAttack(AttackType.Hit, new EatGoldAttackEffect(), 2, 2),
+        };
         public override bool BashDoor => true;
         public override string Description => "Big, brawny, powerful and with a greed for gold.";
         public override bool Drop_1D2 => true;

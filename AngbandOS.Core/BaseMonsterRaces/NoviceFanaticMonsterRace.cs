@@ -9,22 +9,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Novice fanatic";
 
         public override int ArmourClass => 16;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 7;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 7;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 7),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 7),
+        };
         public override bool BashDoor => true;
         public override bool CauseLightWounds => true;
         public override string Description => "He thinks you are an agent of the devil. ";

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Master thief";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 4;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new EatGoldAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 4;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new EatItemAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new EatGoldAttackEffect(), 4, 4),
+            new MonsterAttack(AttackType.Hit, new EatItemAttackEffect(), 4, 5)
+        };
         public override bool BashDoor => true;
         public override string Description => "Cool and confident, fast and lithe; protect your possessions quickly!";
         public override bool Drop_2D2 => true;

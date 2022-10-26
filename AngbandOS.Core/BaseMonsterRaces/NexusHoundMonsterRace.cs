@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 3;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 3;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Claw;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+        };
         public override bool BashDoor => true;
         public override bool BreatheNexus => true;
         public override string Description => "A locus of conflicting points coalesce to form the vague shape of a huge hound. Or is it just your imagination?";

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Shub-Niggurath, Black Goat of the Woods";
 
         public override int ArmourClass => 100;
-        public override int Attack1DDice => 20;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new LoseWisAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 20;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new LoseIntAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new LoseStrAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 10;
-        public override int Attack4DSides => 2;
-        public override BaseAttackEffect? Attack4Effect => new LoseConAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new LoseWisAttackEffect(), 20, 5),
+            new MonsterAttack(AttackType.Crush, new LoseIntAttackEffect(), 20, 5),
+            new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 10, 2),
+            new MonsterAttack(AttackType.Bite, new LoseConAttackEffect(), 10, 2)
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;

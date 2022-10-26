@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Great Cthulhu";
 
         public override int ArmourClass => 140;
-        public override int Attack1DDice => 50;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 15;
-        public override int Attack2DSides => 2;
-        public override BaseAttackEffect? Attack2Effect => new UnPowerAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 15;
-        public override int Attack3DSides => 2;
-        public override BaseAttackEffect? Attack3Effect => new UnBonusAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 100;
-        public override BaseAttackEffect? Attack4Effect => new PoisonAttackEffect();
-        public override AttackType Attack4Type => AttackType.Touch;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 50, 4),
+            new MonsterAttack(AttackType.Claw, new UnPowerAttackEffect(), 15, 2),
+            new MonsterAttack(AttackType.Claw, new UnBonusAttackEffect(), 15, 2),
+            new MonsterAttack(AttackType.Touch, new PoisonAttackEffect(), 1, 100)
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool BrainSmash => true;

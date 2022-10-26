@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Lesser titan";
 
         public override int ArmourClass => 80;
-        public override int Attack1DDice => 6;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new ConfuseAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 6;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new ConfuseAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 6;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new ConfuseAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 6;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new ConfuseAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 6, 6)
+        };
         public override bool BashDoor => true;
         public override string Description => "It is a humanoid figure thirty feet tall that gives off an aura of power and hate.";
         public override bool Drop_2D2 => true;

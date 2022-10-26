@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Stairway to hell";
 
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new UnBonusAttackEffect();
-        public override AttackType Attack1Type => AttackType.Wail;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new Exp20AttackEffect();
-        public override AttackType Attack2Type => AttackType.Wail;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new EatGoldAttackEffect();
-        public override AttackType Attack3Type => AttackType.Wail;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new EatItemAttackEffect();
-        public override AttackType Attack4Type => AttackType.Wail;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Wail, new UnBonusAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Wail, new Exp20AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Wail, new EatGoldAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Wail, new EatItemAttackEffect(), 0, 0)
+        };
         public override bool CharMulti => true;
         public override bool ColdBlood => true;
         public override string Description => "Often found in graveyards.";

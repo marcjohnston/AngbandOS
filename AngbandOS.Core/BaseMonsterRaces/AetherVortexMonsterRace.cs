@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Aether vortex";
 
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new ElectricityAttackEffect();
-        public override AttackType Attack1Type => AttackType.Engulf;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 3;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Engulf;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 3;
-        public override BaseAttackEffect? Attack3Effect => new AcidAttackEffect();
-        public override AttackType Attack3Type => AttackType.Engulf;
-        public override int Attack4DDice => 3;
-        public override int Attack4DSides => 3;
-        public override BaseAttackEffect? Attack4Effect => new ColdAttackEffect();
-        public override AttackType Attack4Type => AttackType.Engulf;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Engulf, new ElectricityAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Engulf, new FireAttackEffect(), 3, 3),
+            new MonsterAttack(AttackType.Engulf, new AcidAttackEffect(), 3, 3),
+            new MonsterAttack(AttackType.Engulf, new ColdAttackEffect(), 3, 3)
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;

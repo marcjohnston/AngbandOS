@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Gorgimera";
 
         public override int ArmourClass => 55;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 3;
-        public override BaseAttackEffect? Attack1Effect => new FireAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack3Type => AttackType.Gaze;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 3;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Butt;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 1, 3),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 2, 4),
+            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 1, 3)
+        };
         public override bool BashDoor => true;
         public override bool BreatheFire => true;
         public override string Description => "It has 3 heads - gorgon, goat and dragon - all attached to a lion's body.";

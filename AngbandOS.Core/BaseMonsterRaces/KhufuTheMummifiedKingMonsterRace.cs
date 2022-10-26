@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Khufu the mummified King";
 
         public override int ArmourClass => 40;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new TerrifyAttackEffect();
-        public override AttackType Attack1Type => AttackType.Gaze;
-        public override int Attack2DDice => 6;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new PoisonAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => new LoseConAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => new LoseConAttackEffect();
-        public override AttackType Attack4Type => AttackType.Claw;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Gaze, new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 6, 6),
+            new MonsterAttack(AttackType.Claw, new LoseConAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Claw, new LoseConAttackEffect(), 0, 0)
+        };
         public override bool BashDoor => true;
         public override bool CauseCriticalWounds => true;
         public override bool ColdBlood => true;

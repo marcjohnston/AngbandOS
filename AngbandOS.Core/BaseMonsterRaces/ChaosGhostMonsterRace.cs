@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Chaos ghost";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 0;
-        public override int Attack1DSides => 0;
-        public override BaseAttackEffect? Attack1Effect => new TerrifyAttackEffect();
-        public override AttackType Attack1Type => AttackType.Wail;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => new Exp40AttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new LoseIntAttackEffect();
-        public override AttackType Attack3Type => AttackType.Claw;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Wail, new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(AttackType.Claw, new LoseIntAttackEffect(), 1, 10),
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool Blindness => true;

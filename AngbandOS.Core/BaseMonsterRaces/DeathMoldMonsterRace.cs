@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Death mold";
 
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 7;
-        public override int Attack1DSides => 7;
-        public override BaseAttackEffect? Attack1Effect => new UnBonusAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 7;
-        public override int Attack2DSides => 7;
-        public override BaseAttackEffect? Attack2Effect => new UnBonusAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 7;
-        public override int Attack3DSides => 7;
-        public override BaseAttackEffect? Attack3Effect => new UnBonusAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 5;
-        public override int Attack4DSides => 5;
-        public override BaseAttackEffect? Attack4Effect => new Exp80AttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 7, 7),
+            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 7, 7),
+            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 7, 7),
+            new MonsterAttack(AttackType.Hit, new Exp80AttackEffect(), 5, 5)
+        };
         public override string Description => "It is the epitome of all that is evil, in a mold. Its lifeless form draws power from sucking the souls of those that approach it, a nimbus of pure evil surrounds it. Luckily for you, it can't move.";
         public override bool Evil => true;
         public override bool ForceSleep => true;

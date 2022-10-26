@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Kavlax the Many-Headed";
 
         public override int ArmourClass => 85;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Bite;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 12;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 12;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12)
+        };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;

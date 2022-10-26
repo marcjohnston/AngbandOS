@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Fire elemental";
 
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 4;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new FireAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 4;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new FireAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 4, 6),
+            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 4, 6),
+        };
         public override bool BashDoor => true;
         public override string Description => "It is a towering inferno of flames.";
         public override bool EmptyMind => true;

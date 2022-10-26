@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Phantom warrior";
 
         public override int ArmourClass => 10;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 11;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 11;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 11),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 11),
+        };
         public override bool ColdBlood => true;
         public override string Description => "Creatures that are half real, half illusion.";
         public override bool EmptyMind => true;

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Bast, Goddess of Cats";
 
         public override int ArmourClass => 200;
-        public override int Attack1DDice => 12;
-        public override int Attack1DSides => 12;
-        public override BaseAttackEffect? Attack1Effect => new ConfuseAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 12;
-        public override BaseAttackEffect? Attack2Effect => new LoseDexAttackEffect();
-        public override AttackType Attack2Type => AttackType.Touch;
-        public override int Attack3DDice => 10;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new BlindAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 15;
-        public override int Attack4DSides => 1;
-        public override BaseAttackEffect? Attack4Effect => new ParalyzeAttackEffect();
-        public override AttackType Attack4Type => AttackType.Hit;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(AttackType.Touch, new LoseDexAttackEffect(), 2, 12),
+            new MonsterAttack(AttackType.Hit, new BlindAttackEffect(), 10, 5),
+            new MonsterAttack(AttackType.Hit, new ParalyzeAttackEffect(), 15, 1)
+        };
         public override bool BashDoor => true;
         public override string Description => "She looks like a mortal female with a cat's head.";
         public override bool Drop_4D2 => true;

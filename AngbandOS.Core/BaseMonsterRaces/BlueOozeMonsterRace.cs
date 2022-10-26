@@ -10,22 +10,9 @@ namespace AngbandOS.StaticData
         public override string Name => "Blue ooze";
 
         public override int ArmourClass => 16;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new ColdAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crawl;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crawl, new ColdAttackEffect(), 1, 4),
+        };
         public override string Description => "It's blue and it's oozing.";
         public override bool Drop60 => true;
         public override bool EmptyMind => true;

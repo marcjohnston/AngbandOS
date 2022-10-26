@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Black knight";
 
         public override int ArmourClass => 70;
-        public override int Attack1DDice => 5;
-        public override int Attack1DSides => 5;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 5;
-        public override int Attack2DSides => 5;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 5;
-        public override int Attack3DSides => 5;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
+        };
         public override bool BashDoor => true;
         public override bool Blindness => true;
         public override bool CauseCriticalWounds => true;

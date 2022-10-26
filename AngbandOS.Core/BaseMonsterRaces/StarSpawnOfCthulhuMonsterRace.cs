@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Star-spawn of Cthulhu";
 
         public override int ArmourClass => 90;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 30;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 30;
-        public override BaseAttackEffect? Attack2Effect => new AcidAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new UnPowerAttackEffect();
-        public override AttackType Attack3Type => AttackType.Touch;
-        public override int Attack4DDice => 2;
-        public override int Attack4DSides => 33;
-        public override BaseAttackEffect? Attack4Effect => new UnBonusAttackEffect();
-        public override AttackType Attack4Type => AttackType.Crush;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 1, 30),
+            new MonsterAttack(AttackType.Claw, new AcidAttackEffect(), 1, 30),
+            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Crush, new UnBonusAttackEffect(), 2, 33)
+        };
         public override bool BashDoor => true;
         public override bool BrainSmash => true;
         public override bool BreatheAcid => true;

@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 65;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 6;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Bite;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 6;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 2;
-        public override int Attack3DSides => 6;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 6;
-        public override BaseAttackEffect? Attack4Effect => new PoisonAttackEffect();
-        public override AttackType Attack4Type => AttackType.Sting;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 1, 6)
+        };
         public override bool BashDoor => true;
         public override string Description => "A fast-moving and deadly dragonian animal. Beware its poisonous sting!";
         public override bool Dragon => true;

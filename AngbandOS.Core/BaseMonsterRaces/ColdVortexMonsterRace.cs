@@ -10,22 +10,9 @@ namespace AngbandOS.StaticData
         public override string Name => "Cold vortex";
 
         public override int ArmourClass => 30;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 3;
-        public override BaseAttackEffect? Attack1Effect => new ColdAttackEffect();
-        public override AttackType Attack1Type => AttackType.Engulf;
-        public override int Attack2DDice => 0;
-        public override int Attack2DSides => 0;
-        public override BaseAttackEffect? Attack2Effect => null;
-        public override AttackType Attack2Type => AttackType.Nothing;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect? Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Engulf, new ColdAttackEffect(), 3, 3),
+        };
         public override bool BashDoor => true;
         public override bool BreatheCold => true;
         public override string Description => "A twisting whirlpool of frost.";

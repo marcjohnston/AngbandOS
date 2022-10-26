@@ -10,22 +10,11 @@ namespace AngbandOS.StaticData
         public override string Name => "Nightblade";
 
         public override int ArmourClass => 60;
-        public override int Attack1DDice => 3;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect? Attack1Effect => new PoisonAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 3;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 3;
-        public override int Attack3DSides => 4;
-        public override BaseAttackEffect? Attack3Effect => new LoseConAttackEffect();
-        public override AttackType Attack3Type => AttackType.Hit;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect? Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 4),
+            new MonsterAttack(AttackType.Hit, new LoseConAttackEffect(), 3, 4),
+        };
         public override bool BashDoor => true;
         public override string Description => "A dark elf so stealthy that he is almost impossible to see.";
         public override bool Drop_1D2 => true;

@@ -11,22 +11,12 @@ namespace AngbandOS.StaticData
 
         public override bool Animal => true;
         public override int ArmourClass => 50;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 10;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Claw;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 10;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Claw;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 10;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 10;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10)
+        };
         public override bool BashDoor => true;
         public override string Description => "A fierce and dangerous cat, its huge tusks and sharp claws would lacerate even the strongest armour.";
         public override int FreqInate => 0;

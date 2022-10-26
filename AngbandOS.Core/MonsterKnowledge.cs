@@ -65,11 +65,14 @@ namespace AngbandOS
             if (SaveGame.Player.IsWizard)
             {
                 knowledge = new MonsterKnowledge(SaveGame, _monsterType);
-                for (m = 0; m < 4; m++)
+                if (_monsterType.Attacks != null)
                 {
-                    if (_monsterType.Attack[m].Effect != null || _monsterType.Attack[m].Method != 0)
+                    for (m = 0; m < _monsterType.Attacks.Length; m++)
                     {
-                        knowledge.RBlows[m] = Constants.MaxUchar;
+                        if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != 0)
+                        {
+                            knowledge.RBlows[m] = Constants.MaxUchar;
+                        }
                     }
                 }
                 knowledge.RProbed = true;
@@ -1251,155 +1254,162 @@ namespace AngbandOS
                 }
                 _description.Append(". ");
             }
-            for (n = 0, m = 0; m < 4; m++)
+            n = 0;
+            if (_monsterType.Attacks != null)
             {
-                if (_monsterType.Attack[m].Method == 0)
+                for (m = 0; m < _monsterType.Attacks.Length; m++)
                 {
-                    continue;
-                }
-                if (knowledge.RBlows[m] != 0)
-                {
-                    n++;
-                }
-            }
-            int r;
-            for (r = 0, m = 0; m < 4; m++)
-            {
-                if (_monsterType.Attack[m].Method == 0)
-                {
-                    continue;
-                }
-                if (knowledge.RBlows[m] == 0)
-                {
-                    continue;
-                }
-                AttackType method = _monsterType.Attack[m].Method;
-                BaseAttackEffect? effect = _monsterType.Attack[m].Effect;
-                int d1 = _monsterType.Attack[m].DDice;
-                int d2 = _monsterType.Attack[m].DSide;
-                p = null;
-                switch (method)
-                {
-                    case AttackType.Hit:
-                        p = "hit";
-                        break;
-
-                    case AttackType.Touch:
-                        p = "touch";
-                        break;
-
-                    case AttackType.Punch:
-                        p = "punch";
-                        break;
-
-                    case AttackType.Kick:
-                        p = "kick";
-                        break;
-
-                    case AttackType.Claw:
-                        p = "claw";
-                        break;
-
-                    case AttackType.Bite:
-                        p = "bite";
-                        break;
-
-                    case AttackType.Sting:
-                        p = "sting";
-                        break;
-
-                    case AttackType.Butt:
-                        p = "butt";
-                        break;
-
-                    case AttackType.Crush:
-                        p = "crush";
-                        break;
-
-                    case AttackType.Engulf:
-                        p = "engulf";
-                        break;
-
-                    case AttackType.Charge:
-                        p = "charge";
-                        break;
-
-                    case AttackType.Crawl:
-                        p = "crawl on you";
-                        break;
-
-                    case AttackType.Drool:
-                        p = "drool on you";
-                        break;
-
-                    case AttackType.Spit:
-                        p = "spit";
-                        break;
-
-                    case AttackType.Gaze:
-                        p = "gaze";
-                        break;
-
-                    case AttackType.Wail:
-                        p = "wail";
-                        break;
-
-                    case AttackType.Spore:
-                        p = "release spores";
-                        break;
-
-                    case AttackType.Worship:
-                        p = "hero worship";
-                        break;
-
-                    case AttackType.Beg:
-                        p = "beg";
-                        break;
-
-                    case AttackType.Insult:
-                        p = "insult";
-                        break;
-
-                    case AttackType.Moan:
-                        p = "moan";
-                        break;
-
-                    case AttackType.Show:
-                        p = "sing";
-                        break;
-                }
-                if (effect == null)
-                    q = null;
-                else
-                    q = effect.Description;
-                
-                if (r == 0)
-                {
-                    _description.Append(_wdHeCap[msex]).Append(" can ");
-                }
-                else if (r < n - 1)
-                {
-                    _description.Append(", ");
-                }
-                else
-                {
-                    _description.Append(", and ");
-                }
-                if (string.IsNullOrEmpty(p))
-                {
-                    p = "do something weird";
-                }
-                _description.Append(p);
-                if (!string.IsNullOrEmpty(q))
-                {
-                    _description.Append(" to ");
-                    _description.Append(q);
-                    if (d1 != 0 && d2 != 0 && KnowDamage(_monsterType, knowledge, m))
+                    if (_monsterType.Attacks[m].Method == 0)
                     {
-                        _description.Append(" for ").Append(d1).Append('d').Append(d2).Append(" damage");
+                        continue;
+                    }
+                    if (knowledge.RBlows[m] != 0)
+                    {
+                        n++;
                     }
                 }
-                r++;
+            }
+            int r = 0;
+            if (_monsterType.Attacks != null)
+            {
+                for (m = 0; m < _monsterType.Attacks.Length; m++)
+                {
+                    if (_monsterType.Attacks[m].Method == 0)
+                    {
+                        continue;
+                    }
+                    if (knowledge.RBlows[m] == 0)
+                    {
+                        continue;
+                    }
+                    AttackType method = _monsterType.Attacks[m].Method;
+                    BaseAttackEffect? effect = _monsterType.Attacks[m].Effect;
+                    int d1 = _monsterType.Attacks[m].DDice;
+                    int d2 = _monsterType.Attacks[m].DSide;
+                    p = null;
+                    switch (method)
+                    {
+                        case AttackType.Hit:
+                            p = "hit";
+                            break;
+
+                        case AttackType.Touch:
+                            p = "touch";
+                            break;
+
+                        case AttackType.Punch:
+                            p = "punch";
+                            break;
+
+                        case AttackType.Kick:
+                            p = "kick";
+                            break;
+
+                        case AttackType.Claw:
+                            p = "claw";
+                            break;
+
+                        case AttackType.Bite:
+                            p = "bite";
+                            break;
+
+                        case AttackType.Sting:
+                            p = "sting";
+                            break;
+
+                        case AttackType.Butt:
+                            p = "butt";
+                            break;
+
+                        case AttackType.Crush:
+                            p = "crush";
+                            break;
+
+                        case AttackType.Engulf:
+                            p = "engulf";
+                            break;
+
+                        case AttackType.Charge:
+                            p = "charge";
+                            break;
+
+                        case AttackType.Crawl:
+                            p = "crawl on you";
+                            break;
+
+                        case AttackType.Drool:
+                            p = "drool on you";
+                            break;
+
+                        case AttackType.Spit:
+                            p = "spit";
+                            break;
+
+                        case AttackType.Gaze:
+                            p = "gaze";
+                            break;
+
+                        case AttackType.Wail:
+                            p = "wail";
+                            break;
+
+                        case AttackType.Spore:
+                            p = "release spores";
+                            break;
+
+                        case AttackType.Worship:
+                            p = "hero worship";
+                            break;
+
+                        case AttackType.Beg:
+                            p = "beg";
+                            break;
+
+                        case AttackType.Insult:
+                            p = "insult";
+                            break;
+
+                        case AttackType.Moan:
+                            p = "moan";
+                            break;
+
+                        case AttackType.Show:
+                            p = "sing";
+                            break;
+                    }
+                    if (effect == null)
+                        q = null;
+                    else
+                        q = effect.Description;
+
+                    if (r == 0)
+                    {
+                        _description.Append(_wdHeCap[msex]).Append(" can ");
+                    }
+                    else if (r < n - 1)
+                    {
+                        _description.Append(", ");
+                    }
+                    else
+                    {
+                        _description.Append(", and ");
+                    }
+                    if (string.IsNullOrEmpty(p))
+                    {
+                        p = "do something weird";
+                    }
+                    _description.Append(p);
+                    if (!string.IsNullOrEmpty(q))
+                    {
+                        _description.Append(" to ");
+                        _description.Append(q);
+                        if (d1 != 0 && d2 != 0 && KnowDamage(_monsterType, knowledge, m))
+                        {
+                            _description.Append(" for ").Append(d1).Append('d').Append(d2).Append(" damage");
+                        }
+                    }
+                    r++;
+                }
             }
             if (r != 0)
             {
@@ -1509,8 +1519,8 @@ namespace AngbandOS
         private bool KnowDamage(MonsterRace monsterType, MonsterKnowledge knowledge, int i)
         {
             int a = knowledge.RBlows[i];
-            int d1 = monsterType.Attack[i].DDice;
-            int d2 = monsterType.Attack[i].DSide;
+            int d1 = monsterType.Attacks[i].DDice;
+            int d2 = monsterType.Attacks[i].DSide;
             int d = d1 * d2;
             if ((4 + monsterType.Level) * a > 80 * d)
             {

@@ -10,22 +10,10 @@ namespace AngbandOS.StaticData
         public override string Name => "Memory moss";
 
         public override int ArmourClass => 1;
-        public override int Attack1DDice => 1;
-        public override int Attack1DSides => 4;
-        public override BaseAttackEffect Attack1Effect => new ConfuseAttackEffect();
-        public override AttackType Attack1Type => AttackType.Hit;
-        public override int Attack2DDice => 1;
-        public override int Attack2DSides => 4;
-        public override BaseAttackEffect Attack2Effect => new ConfuseAttackEffect();
-        public override AttackType Attack2Type => AttackType.Hit;
-        public override int Attack3DDice => 0;
-        public override int Attack3DSides => 0;
-        public override BaseAttackEffect Attack3Effect => null;
-        public override AttackType Attack3Type => AttackType.Nothing;
-        public override int Attack4DDice => 0;
-        public override int Attack4DSides => 0;
-        public override BaseAttackEffect Attack4Effect => null;
-        public override AttackType Attack4Type => AttackType.Nothing;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 1, 4),
+            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 1, 4),
+        };
         public override string Description => "A mass of green vegetation. You don't remember seeing anything like it before.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

@@ -10,22 +10,12 @@ namespace AngbandOS.StaticData
         public override string Name => "Spirit naga";
 
         public override int ArmourClass => 75;
-        public override int Attack1DDice => 2;
-        public override int Attack1DSides => 8;
-        public override BaseAttackEffect? Attack1Effect => new HurtAttackEffect();
-        public override AttackType Attack1Type => AttackType.Crush;
-        public override int Attack2DDice => 2;
-        public override int Attack2DSides => 8;
-        public override BaseAttackEffect? Attack2Effect => new HurtAttackEffect();
-        public override AttackType Attack2Type => AttackType.Crush;
-        public override int Attack3DDice => 1;
-        public override int Attack3DSides => 8;
-        public override BaseAttackEffect? Attack3Effect => new HurtAttackEffect();
-        public override AttackType Attack3Type => AttackType.Bite;
-        public override int Attack4DDice => 1;
-        public override int Attack4DSides => 8;
-        public override BaseAttackEffect? Attack4Effect => new HurtAttackEffect();
-        public override AttackType Attack4Type => AttackType.Bite;
+        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8)
+        };
         public override bool AttrClear => true;
         public override bool BashDoor => true;
         public override bool Blindness => true;
