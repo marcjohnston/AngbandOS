@@ -11770,8 +11770,8 @@ namespace AngbandOS
         [NonSerialized]
         public Dictionary<string, FloorTileType> BaseFloorTileTypes;
 
-        [NonSerialized]
-        public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
+        //[NonSerialized]
+        //public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
 
         /// <summary>
         /// Load the dictionaries from the binary resource file
@@ -11894,9 +11894,9 @@ namespace AngbandOS
                                                     p.SetValue(entity, Enum.Parse(typeof(AttackType), stringValue));
                                                     break;
 
-                                                case "AttackEffect":
-                                                    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
-                                                    break;
+                                                //case "AttackEffect":
+                                                //    p.SetValue(entity, Enum.Parse(typeof(AttackEffect), stringValue));
+                                                //    break;
 
                                                 case "Int32":
                                                     p.SetValue(entity, Convert.ToInt32(stringValue));
@@ -12012,13 +12012,13 @@ namespace AngbandOS
                                         break;
                                     }
 
-                                case "AttackEffect":
-                                    {
-                                        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
-                                        tokens[index] = $"{value.ToString()}";
-                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
-                                        break;
-                                    }
+                                //case "AttackEffect":
+                                //    {
+                                //        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
+                                //        tokens[index] = $"{value.ToString()}";
+                                //        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                //        break;
+                                //    }
 
                                 default:
                                     throw new Exception("Scaffolding data type not supported.");
