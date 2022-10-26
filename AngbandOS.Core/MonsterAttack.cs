@@ -19,18 +19,6 @@ namespace AngbandOS
         public BaseAttackEffect? Effect;
         public AttackType Method;
 
-        public MonsterAttack()
-        {
-        }
-
-        public MonsterAttack(MonsterAttack original)
-        {
-            Method = original.Method;
-            Effect = original.Effect;
-            DDice = original.DDice;
-            DSide = original.DSide;
-        }
-
         public MonsterAttack(AttackType method, BaseAttackEffect? effect, int dice, int sides)
         {
             Method = method;
