@@ -400,10 +400,6 @@
       <Project>{DBC6B77F-57A9-4CD6-ACB7-7A720D6AE106}</Project>
       <Name>byMarc.Net2.Library.Collections.CaseInsensitiveDictionary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\byMarc.Net2.Library.Tokens\byMarc.Net2.Library.Tokens.csproj">
-      <Project>{92B8B17C-3A5A-0B10-0CAB-85C3B96B70D9}</Project>
-      <Name>byMarc.Net2.Library.Tokens</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="cloudservice.ico" />
