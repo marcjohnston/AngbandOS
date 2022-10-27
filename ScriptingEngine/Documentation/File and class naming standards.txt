@@ -1,8 +1,0 @@
-﻿Big 6 Search
-  - Classes will kept in file with the same name.  Only one class per file is allowed.
-  - Nested classes are highly discouraged.  Assemblies and namespaces should be used to achieve the same effect.
-  - The name of the file will always be the same as the class.
-  - Classes that inherit from other class should have a suffix the indicates the inherited class.
-
-Scripting Engine
-  - Parsers, DataType and DataValue classes will always have a suffix denoting such.

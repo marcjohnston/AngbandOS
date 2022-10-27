@@ -24,7 +24,7 @@ namespace AngbandOS.ActivationPowers
 
         public override int RechargeTime(Player player) => 250 + Program.Rng.DieRoll(250);
 
-        public override int Value => 10000; // TODO: This value was not present in the original source and needs to be synched once updated.
+        public override int Value => 3000;
 
         public override string Description => "banish evil every 250+d250 turns";
 

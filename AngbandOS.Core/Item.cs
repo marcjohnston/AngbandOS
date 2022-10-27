@@ -1092,12 +1092,16 @@ namespace AngbandOS
                     t += " (charging)";
                 }
             }
-            else if (Category == ItemCategory.Light &&
-                     (ItemSubCategory == Enumerations.LightType.Torch || ItemSubCategory == Enumerations.LightType.Lantern))
+            else if (Category == ItemCategory.Light && (ItemSubCategory == Enumerations.LightType.Torch || ItemSubCategory == Enumerations.LightType.Lantern))
             {
-                t += " (with ";
-                t += TypeSpecificValue;
-                t += " turns of light)";
+                if (TypeSpecificValue == 1)
+                {
+                    t += $" (with 1 turn of light)";
+                }
+                else
+                {
+                    t += $" (with {TypeSpecificValue} turns of light)";
+                }
             }
             if (known && f1.IsSet(ItemFlag1.PvalMask))
             {
