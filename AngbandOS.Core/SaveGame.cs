@@ -12025,7 +12025,7 @@ namespace AngbandOS
                             }
                         }
                         string output = String.Join("", tokens);
-                        if (output.Contains("new MonsterAttack(AttackType.Nothing, null, 0, 0)"))
+                        if (output.Contains("new MonsterAttack(AttackType.Nothing, new NothingMonsterEffect(), 0, 0)"))
                             include = false;
                         if (include)
                         {
