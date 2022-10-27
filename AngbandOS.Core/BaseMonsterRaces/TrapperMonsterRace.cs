@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class TrapperMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class TrapperMonsterRace : MonsterRace
     {
         public override char Character => '·';
         public override string Name => "Trapper";
@@ -30,7 +31,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneFear => true;
         public override bool ImmuneSleep => true;
         public override bool Invisible => true;
-        public override int Level => 36;
+        public override int LevelFound => 36;
         public override int Mexp => 580;
         public override bool NeverMove => true;
         public override int NoticeRange => 30;

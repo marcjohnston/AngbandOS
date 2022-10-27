@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class JabberwockMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class JabberwockMonsterRace : MonsterRace
     {
         public override char Character => 'H';
         public override Colour Colour => Colour.BrightRed;
@@ -31,7 +32,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Jabberwock";
         public override int Hdice => 32;
         public override int Hside => 100;
-        public override int Level => 65;
+        public override int LevelFound => 65;
         public override int Mexp => 19000;
         public override int NoticeRange => 35;
         public override bool OnlyDropItem => true;

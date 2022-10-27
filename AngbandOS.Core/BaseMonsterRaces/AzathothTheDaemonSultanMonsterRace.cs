@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class AzathothTheDaemonSultanMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
     {
         public override char Character => 'X';
         public override Colour Colour => Colour.Pink;
@@ -55,7 +56,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneStun => true;
         public override bool KillBody => true;
         public override bool KillWall => true;
-        public override int Level => 100;
+        public override int LevelFound => 100;
         public override bool LightningAura => true;
         public override int Mexp => 66666;
         public override bool Nonliving => true;

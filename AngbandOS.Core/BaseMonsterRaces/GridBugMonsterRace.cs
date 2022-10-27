@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GridBugMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GridBugMonsterRace : MonsterRace
     {
         public override char Character => 'I';
         public override Colour Colour => Colour.BrightPurple;
@@ -23,7 +24,7 @@ namespace AngbandOS.StaticData
         public override int Hside => 4;
         public override bool ImmuneFear => true;
         public override bool ImmuneLightning => true;
-        public override int Level => 1;
+        public override int LevelFound => 1;
         public override int Mexp => 2;
         public override int NoticeRange => 10;
         public override bool RandomMove25 => true;

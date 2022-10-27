@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class SpottedMushroomPatchMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class SpottedMushroomPatchMonsterRace : MonsterRace
     {
         public override char Character => ',';
         public override Colour Colour => Colour.Orange;
@@ -24,7 +25,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneFear => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 3;
+        public override int LevelFound => 3;
         public override int Mexp => 3;
         public override bool NeverMove => true;
         public override int NoticeRange => 2;

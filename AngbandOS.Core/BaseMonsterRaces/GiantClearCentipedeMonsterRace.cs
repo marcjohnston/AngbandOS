@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GiantClearCentipedeMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GiantClearCentipedeMonsterRace : MonsterRace
     {
         public override char Character => 'c';
         public override Colour Colour => Colour.Diamond;
@@ -24,7 +25,7 @@ namespace AngbandOS.StaticData
         public override int Hdice => 5;
         public override int Hside => 8;
         public override bool Invisible => true;
-        public override int Level => 15;
+        public override int LevelFound => 15;
         public override int Mexp => 30;
         public override int NoticeRange => 12;
         public override int Rarity => 2;

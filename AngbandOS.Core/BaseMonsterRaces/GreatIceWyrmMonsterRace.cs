@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GreatIceWyrmMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GreatIceWyrmMonsterRace : MonsterRace
     {
         public override char Character => 'D';
         public override string Name => "Great ice wyrm";
@@ -35,7 +36,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 54;
+        public override int LevelFound => 54;
         public override int Mexp => 20000;
         public override bool MoveBody => true;
         public override int NoticeRange => 30;

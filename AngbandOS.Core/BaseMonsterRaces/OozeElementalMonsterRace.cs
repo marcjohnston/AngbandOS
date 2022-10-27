@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class OozeElementalMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class OozeElementalMonsterRace : MonsterRace
     {
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightBrown;
@@ -38,7 +39,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneSleep => true;
         public override bool KillBody => true;
         public override bool KillItem => true;
-        public override int Level => 35;
+        public override int LevelFound => 35;
         public override int Mexp => 300;
         public override int NoticeRange => 10;
         public override bool Powerful => true;

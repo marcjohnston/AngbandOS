@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class PotionMimicMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class PotionMimicMonsterRace : MonsterRace
     {
         public override char Character => '!';
         public override string Name => "Potion mimic";
@@ -31,7 +32,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 18;
+        public override int LevelFound => 18;
         public override int Mexp => 60;
         public override bool NeverMove => true;
         public override int NoticeRange => 25;

@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class LivingstoneMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class LivingstoneMonsterRace : MonsterRace
     {
         public override char Character => '#';
         public override string Name => "Livingstone";
@@ -31,7 +32,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneLightning => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 20;
+        public override int LevelFound => 20;
         public override int Mexp => 56;
         public override bool Multiply => true;
         public override bool NeverMove => true;

@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class ShelobSpiderOfDarknessMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
     {
         public override char Character => 'S';
         public override Colour Colour => Colour.Black;
@@ -43,7 +44,7 @@ namespace AngbandOS.StaticData
         public override bool HurtByLight => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 32;
+        public override int LevelFound => 32;
         public override int Mexp => 1200;
         public override int NoticeRange => 8;
         public override bool OnlyDropItem => true;

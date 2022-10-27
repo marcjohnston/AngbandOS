@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GapingMawMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GapingMawMonsterRace : MonsterRace
     {
         public override char Character => '·';
         public override string Name => "Gaping Maw";
@@ -21,7 +22,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneAcid => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 8;
+        public override int LevelFound => 8;
         public override int Mexp => 28;
         public override bool Nonliving => true;
         public override int NoticeRange => 30;

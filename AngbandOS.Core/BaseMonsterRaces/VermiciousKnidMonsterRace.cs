@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class VermiciousKnidMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class VermiciousKnidMonsterRace : MonsterRace
     {
         public override char Character => 'A';
         public override Colour Colour => Colour.Brown;
@@ -28,7 +29,7 @@ namespace AngbandOS.StaticData
         public override bool HurtByRock => true;
         public override bool ImmuneCold => true;
         public override bool ImmuneFear => true;
-        public override int Level => 43;
+        public override int LevelFound => 43;
         public override int Mexp => 2100;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;

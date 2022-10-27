@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GremlinMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GremlinMonsterRace : MonsterRace
     {
         public override char Character => 'u';
         public override Colour Colour => Colour.BrightChartreuse;
@@ -25,7 +26,7 @@ namespace AngbandOS.StaticData
         public override int Hside => 5;
         public override bool HurtByLight => true;
         public override bool ImmunePoison => true;
-        public override int Level => 8;
+        public override int LevelFound => 8;
         public override int Mexp => 6;
         public override bool Multiply => true;
         public override int NoticeRange => 30;

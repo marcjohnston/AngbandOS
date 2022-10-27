@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class ServitorOfTheOuterGodsMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
     {
         public override char Character => 'A';
         public override Colour Colour => Colour.BrightGreen;
@@ -36,7 +37,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneFire => true;
         public override bool ImmuneLightning => true;
         public override bool ImmunePoison => true;
-        public override int Level => 41;
+        public override int LevelFound => 41;
         public override bool ManaBolt => true;
         public override int Mexp => 15000;
         public override bool MoveBody => true;

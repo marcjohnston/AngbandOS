@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GiantYellowScorpionMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GiantYellowScorpionMonsterRace : MonsterRace
     {
         public override char Character => 'S';
         public override Colour Colour => Colour.Yellow;
@@ -22,7 +23,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Giant yellow scorpion";
         public override int Hdice => 12;
         public override int Hside => 8;
-        public override int Level => 22;
+        public override int LevelFound => 22;
         public override int Mexp => 60;
         public override int NoticeRange => 12;
         public override int Rarity => 1;

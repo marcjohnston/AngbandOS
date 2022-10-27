@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class IpsissimusMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class IpsissimusMonsterRace : MonsterRace
     {
         public override char Character => 'p';
         public override Colour Colour => Colour.Red;
@@ -30,7 +31,7 @@ namespace AngbandOS.StaticData
         public override int Hdice => 28;
         public override bool Hold => true;
         public override int Hside => 10;
-        public override int Level => 36;
+        public override int LevelFound => 36;
         public override bool Male => true;
         public override int Mexp => 666;
         public override bool MindBlast => true;

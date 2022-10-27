@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class ChaosSpawnMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class ChaosSpawnMonsterRace : MonsterRace
     {
         public override char Character => 'e';
         public override Colour Colour => Colour.Purple;
@@ -25,7 +26,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Chaos spawn";
         public override int Hdice => 20;
         public override int Hside => 18;
-        public override int Level => 36;
+        public override int LevelFound => 36;
         public override int Mexp => 600;
         public override int NoticeRange => 20;
         public override int Rarity => 2;

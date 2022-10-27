@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GothmogTheHighCaptainOfBalrogsMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
     {
         public override char Character => 'U';
         public override Colour Colour => Colour.Red;
@@ -44,7 +45,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneLightning => true;
         public override bool ImmuneSleep => true;
         public override bool KillWall => true;
-        public override int Level => 95;
+        public override int LevelFound => 95;
         public override bool Male => true;
         public override int Mexp => 43000;
         public override bool MoveBody => true;

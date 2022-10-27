@@ -864,7 +864,7 @@ namespace AngbandOS
             if (breath || magic)
             {
                 m = knowledge.RCastInate + knowledge.RCastSpell;
-                n = (_monsterType.FreqInate + _monsterType.FreqSpell) / 2;
+                n = _monsterType.FrequencyChance;
                 if (m > 100)
                 {
                     _description.Append("; 1 time in ").Append(100 / n);

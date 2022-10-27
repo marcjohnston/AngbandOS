@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class TheEmissaryMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class TheEmissaryMonsterRace : MonsterRace
     {
         public override char Character => 'p';
         public override Colour Colour => Colour.Orange;
@@ -29,7 +30,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "The Emissary";
         public override int Hdice => 34;
         public override int Hside => 10;
-        public override int Level => 16;
+        public override int LevelFound => 16;
         public override int Mexp => 200;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;

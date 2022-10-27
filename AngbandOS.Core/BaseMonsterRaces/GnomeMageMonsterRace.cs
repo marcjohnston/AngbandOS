@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GnomeMageMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GnomeMageMonsterRace : MonsterRace
     {
         public override char Character => 'h';
         public override Colour Colour => Colour.BrightRed;
@@ -27,7 +28,7 @@ namespace AngbandOS.StaticData
         public override bool Friends => true;
         public override int Hdice => 7;
         public override int Hside => 8;
-        public override int Level => 15;
+        public override int LevelFound => 15;
         public override bool Male => true;
         public override int Mexp => 40;
         public override int NoticeRange => 20;

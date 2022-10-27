@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class UnmakerMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class UnmakerMonsterRace : MonsterRace
     {
         public override char Character => 'E';
         public override Colour Colour => Colour.Purple;
@@ -40,7 +41,7 @@ namespace AngbandOS.StaticData
         public override bool KillBody => true;
         public override bool KillItem => true;
         public override bool KillWall => true;
-        public override int Level => 77;
+        public override int LevelFound => 77;
         public override bool LightningAura => true;
         public override int Mexp => 10000;
         public override bool Multiply => true;

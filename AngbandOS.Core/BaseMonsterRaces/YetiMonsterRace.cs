@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class YetiMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class YetiMonsterRace : MonsterRace
     {
         public override char Character => 'Y';
         public override string Name => "Yeti";
@@ -23,7 +24,7 @@ namespace AngbandOS.StaticData
         public override int Hdice => 11;
         public override int Hside => 9;
         public override bool ImmuneCold => true;
-        public override int Level => 9;
+        public override int LevelFound => 9;
         public override int Mexp => 30;
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;

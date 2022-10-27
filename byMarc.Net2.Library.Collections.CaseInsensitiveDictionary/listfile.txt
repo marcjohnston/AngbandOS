@@ -1,0 +1,4 @@
+﻿My Project\
+byMarc.Net2.Library.Collections.CaseInsensitiveDictionary.vbproj
+byMarc.pfx
+CaseInsensitiveDictionary.vb

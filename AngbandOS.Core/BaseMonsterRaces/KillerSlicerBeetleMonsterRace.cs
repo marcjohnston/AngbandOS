@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class KillerSlicerBeetleMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class KillerSlicerBeetleMonsterRace : MonsterRace
     {
         public override char Character => 'K';
         public override Colour Colour => Colour.Orange;
@@ -22,7 +23,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Killer slicer beetle";
         public override int Hdice => 22;
         public override int Hside => 10;
-        public override int Level => 30;
+        public override int LevelFound => 30;
         public override int Mexp => 200;
         public override int NoticeRange => 14;
         public override int Rarity => 2;

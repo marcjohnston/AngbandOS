@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class NightwingMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class NightwingMonsterRace : MonsterRace
     {
         public override char Character => 'z';
         public override Colour Colour => Colour.Black;
@@ -36,7 +37,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 50;
+        public override int LevelFound => 50;
         public override bool ManaBolt => true;
         public override int Mexp => 6000;
         public override bool NetherBall => true;

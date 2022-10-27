@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class SmaugTheGoldenMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class SmaugTheGoldenMonsterRace : MonsterRace
     {
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightRed;
@@ -36,7 +37,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFire => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 45;
+        public override int LevelFound => 45;
         public override bool Male => true;
         public override int Mexp => 19000;
         public override bool MoveBody => true;

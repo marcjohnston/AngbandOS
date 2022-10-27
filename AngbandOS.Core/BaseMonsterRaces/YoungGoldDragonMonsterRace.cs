@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class YoungGoldDragonMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class YoungGoldDragonMonsterRace : MonsterRace
     {
         public override char Character => 'd';
         public override Colour Colour => Colour.Yellow;
@@ -29,7 +30,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Young gold dragon";
         public override int Hdice => 30;
         public override int Hside => 10;
-        public override int Level => 36;
+        public override int LevelFound => 36;
         public override int Mexp => 950;
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;

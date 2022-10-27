@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class DarkElvenDemonologistMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class DarkElvenDemonologistMonsterRace : MonsterRace
     {
         public override char Character => 'h';
         public override Colour Colour => Colour.Red;
@@ -31,7 +32,7 @@ namespace AngbandOS.StaticData
         public override bool Heal => true;
         public override int Hside => 10;
         public override bool HurtByLight => true;
-        public override int Level => 12;
+        public override int LevelFound => 12;
         public override bool MagicMissile => true;
         public override int Mexp => 50;
         public override int NoticeRange => 20;

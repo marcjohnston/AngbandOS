@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class QuiverSlotMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class QuiverSlotMonsterRace : MonsterRace
     {
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBrown;
@@ -25,7 +26,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 10;
+        public override int LevelFound => 10;
         public override int Mexp => 3;
         public override bool Multiply => true;
         public override bool NeverMove => true;

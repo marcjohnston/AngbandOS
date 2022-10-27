@@ -1454,7 +1454,7 @@ namespace AngbandOS
                 return false;
             }
             // We aren't guaranteed to cast a spell even if we can
-            int chance = (Race.FreqInate + Race.FreqSpell) / 2;
+            int chance = Race.FrequencyChance;
             if (chance == 0)
             {
                 return false;
@@ -2766,7 +2766,7 @@ namespace AngbandOS
                 return false;
             }
             // We have a chance to cast a spell based on our race
-            int chance = (Race.FreqInate + Race.FreqSpell) / 2;
+            int chance = Race.FrequencyChance;
             if (chance == 0)
             {
                 return false;

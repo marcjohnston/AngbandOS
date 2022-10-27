@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class AimlessLookingMerchantMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class AimlessLookingMerchantMonsterRace : MonsterRace
     {
         public override char Character => 't';
         public override Colour Colour => Colour.Orange;
@@ -21,7 +22,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Aimless looking merchant";
         public override int Hdice => 3;
         public override int Hside => 3;
-        public override int Level => 0;
+        public override int LevelFound => 0;
         public override bool Male => true;
         public override int Mexp => 0;
         public override int NoticeRange => 10;

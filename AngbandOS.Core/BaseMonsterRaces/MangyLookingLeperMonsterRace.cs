@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class MangyLookingLeperMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class MangyLookingLeperMonsterRace : MonsterRace
     {
         public override char Character => 't';
         public override Colour Colour => Colour.Brown;
@@ -20,7 +21,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Mangy looking leper";
         public override int Hdice => 1;
         public override int Hside => 1;
-        public override int Level => 0;
+        public override int LevelFound => 0;
         public override bool Male => true;
         public override int Mexp => 0;
         public override int NoticeRange => 10;

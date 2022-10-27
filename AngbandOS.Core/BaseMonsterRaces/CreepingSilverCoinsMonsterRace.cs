@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class CreepingSilverCoinsMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class CreepingSilverCoinsMonsterRace : MonsterRace
     {
         public override char Character => '$';
         public override Colour Colour => Colour.Silver;
@@ -28,7 +29,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 6;
+        public override int LevelFound => 6;
         public override int Mexp => 18;
         public override int NoticeRange => 4;
         public override bool OnlyDropGold => true;

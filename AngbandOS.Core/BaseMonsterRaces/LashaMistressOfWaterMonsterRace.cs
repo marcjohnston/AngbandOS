@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class LashaMistressOfWaterMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class LashaMistressOfWaterMonsterRace : MonsterRace
     {
         public override char Character => 'E';
         public override Colour Colour => Colour.Blue;
@@ -35,7 +36,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneSleep => true;
         public override bool KillBody => true;
         public override bool KillItem => true;
-        public override int Level => 39;
+        public override int LevelFound => 39;
         public override int Mexp => 3250;
         public override int NoticeRange => 12;
         public override bool Powerful => true;

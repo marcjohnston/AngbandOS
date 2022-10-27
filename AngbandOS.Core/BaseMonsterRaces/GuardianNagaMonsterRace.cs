@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GuardianNagaMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GuardianNagaMonsterRace : MonsterRace
     {
         public override char Character => 'n';
         public override Colour Colour => Colour.Pink;
@@ -26,7 +27,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Guardian naga";
         public override int Hdice => 24;
         public override int Hside => 11;
-        public override int Level => 15;
+        public override int LevelFound => 15;
         public override int Mexp => 80;
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;

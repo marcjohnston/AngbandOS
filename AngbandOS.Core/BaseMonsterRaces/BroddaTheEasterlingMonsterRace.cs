@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class BroddaTheEasterlingMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class BroddaTheEasterlingMonsterRace : MonsterRace
     {
         public override char Character => 'p';
         public override Colour Colour => Colour.Orange;
@@ -27,7 +28,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Brodda, the Easterling";
         public override int Hdice => 21;
         public override int Hside => 10;
-        public override int Level => 9;
+        public override int LevelFound => 9;
         public override bool Male => true;
         public override int Mexp => 100;
         public override int NoticeRange => 20;

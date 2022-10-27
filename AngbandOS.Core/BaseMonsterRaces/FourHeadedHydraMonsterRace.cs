@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class FourHeadedHydraMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class FourHeadedHydraMonsterRace : MonsterRace
     {
         public override char Character => 'M';
         public override Colour Colour => Colour.Chartreuse;
@@ -26,7 +27,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "4-headed hydra";
         public override int Hdice => 100;
         public override int Hside => 6;
-        public override int Level => 24;
+        public override int LevelFound => 24;
         public override int Mexp => 350;
         public override bool MoveBody => true;
         public override int NoticeRange => 20;

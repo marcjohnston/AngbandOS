@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class NobodyTheUndefinedGhostMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
     {
         public override char Character => 'G';
         public override string Name => "Nobody, the Undefined Ghost";
@@ -16,7 +17,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Nobody, the Undefined Ghost";
         public override int Hdice => 1;
         public override int Hside => 1;
-        public override int Level => 127;
+        public override int LevelFound => 127;
         public override int Mexp => 1;
         public override bool NeverAttack => true;
         public override bool NeverMove => true;

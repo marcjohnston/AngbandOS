@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class ChaosShapechangerMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class ChaosShapechangerMonsterRace : MonsterRace
     {
         public override char Character => 'H';
         public override Colour Colour => Colour.Purple;
@@ -28,7 +29,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Chaos shapechanger";
         public override int Hdice => 20;
         public override int Hside => 9;
-        public override int Level => 11;
+        public override int LevelFound => 11;
         public override int Mexp => 38;
         public override int NoticeRange => 10;
         public override int Rarity => 2;

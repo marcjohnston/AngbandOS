@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class HippogriffMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class HippogriffMonsterRace : MonsterRace
     {
         public override char Character => 'H';
         public override Colour Colour => Colour.BrightGrey;
@@ -22,7 +23,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Hippogriff";
         public override int Hdice => 20;
         public override int Hside => 9;
-        public override int Level => 11;
+        public override int LevelFound => 11;
         public override int Mexp => 30;
         public override int NoticeRange => 12;
         public override int Rarity => 1;

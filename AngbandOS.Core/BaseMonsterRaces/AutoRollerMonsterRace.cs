@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class AutoRollerMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class AutoRollerMonsterRace : MonsterRace
     {
         public override char Character => 'g';
         public override string Name => "Auto-roller";
@@ -32,7 +33,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneLightning => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 22;
+        public override int LevelFound => 22;
         public override int Mexp => 230;
         public override bool Nonliving => true;
         public override int NoticeRange => 10;

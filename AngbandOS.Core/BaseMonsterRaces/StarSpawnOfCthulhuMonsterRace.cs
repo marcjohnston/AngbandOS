@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class StarSpawnOfCthulhuMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
     {
         public override char Character => 'U';
         public override Colour Colour => Colour.BrightGreen;
@@ -44,7 +45,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneLightning => true;
         public override bool ImmunePoison => true;
         public override bool KillItem => true;
-        public override int Level => 86;
+        public override int LevelFound => 86;
         public override int Mexp => 44000;
         public override bool MindBlast => true;
         public override bool Nonliving => true;

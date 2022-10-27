@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class MetallicBlueCentipedeMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class MetallicBlueCentipedeMonsterRace : MonsterRace
     {
         public override char Character => 'c';
         public override Colour Colour => Colour.BrightBlue;
@@ -21,7 +22,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Metallic blue centipede";
         public override int Hdice => 4;
         public override int Hside => 5;
-        public override int Level => 3;
+        public override int LevelFound => 3;
         public override int Mexp => 7;
         public override int NoticeRange => 6;
         public override bool RandomMove50 => true;

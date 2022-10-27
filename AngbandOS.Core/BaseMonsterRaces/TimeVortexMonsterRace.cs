@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class TimeVortexMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class TimeVortexMonsterRace : MonsterRace
     {
         public override char Character => 'v';
         public override Colour Colour => Colour.BrightGreen;
@@ -26,7 +27,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 38;
+        public override int LevelFound => 38;
         public override int Mexp => 900;
         public override bool Nonliving => true;
         public override int NoticeRange => 100;

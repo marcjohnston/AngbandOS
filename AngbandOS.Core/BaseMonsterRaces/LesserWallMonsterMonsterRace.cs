@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class LesserWallMonsterMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class LesserWallMonsterMonsterRace : MonsterRace
     {
         public override char Character => '#';
         public override string Name => "Lesser wall monster";
@@ -34,7 +35,7 @@ namespace AngbandOS.StaticData
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
         public override bool KillWall => true;
-        public override int Level => 28;
+        public override int LevelFound => 28;
         public override int Mexp => 600;
         public override bool Multiply => true;
         public override bool Nonliving => true;

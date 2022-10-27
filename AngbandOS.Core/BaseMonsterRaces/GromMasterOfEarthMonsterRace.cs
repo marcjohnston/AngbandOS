@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class GromMasterOfEarthMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class GromMasterOfEarthMonsterRace : MonsterRace
     {
         public override char Character => 'E';
         public override Colour Colour => Colour.Brown;
@@ -40,7 +41,7 @@ namespace AngbandOS.StaticData
         public override bool KillBody => true;
         public override bool KillItem => true;
         public override bool KillWall => true;
-        public override int Level => 43;
+        public override int LevelFound => 43;
         public override bool Male => true;
         public override int Mexp => 6000;
         public override int NoticeRange => 10;

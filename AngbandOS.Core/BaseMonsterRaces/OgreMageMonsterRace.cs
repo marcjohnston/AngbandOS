@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class OgreMageMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class OgreMageMonsterRace : MonsterRace
     {
         public override char Character => 'O';
         public override Colour Colour => Colour.Orange;
@@ -31,7 +32,7 @@ namespace AngbandOS.StaticData
         public override bool Heal => true;
         public override bool Hold => true;
         public override int Hside => 12;
-        public override int Level => 27;
+        public override int LevelFound => 27;
         public override int Mexp => 300;
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;

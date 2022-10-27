@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class TyrannosaurMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class TyrannosaurMonsterRace : MonsterRace
     {
         public override char Character => 'R';
         public override Colour Colour => Colour.Green;
@@ -25,7 +26,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Tyrannosaur";
         public override int Hdice => 200;
         public override int Hside => 3;
-        public override int Level => 24;
+        public override int LevelFound => 24;
         public override int Mexp => 350;
         public override bool MoveBody => true;
         public override int NoticeRange => 20;

@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class FormlessSpawnOfTsathogguaMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
     {
         public override char Character => 'A';
         public override Colour Colour => Colour.Grey;
@@ -36,7 +37,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneConfusion => true;
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 41;
+        public override int LevelFound => 41;
         public override int Mexp => 1850;
         public override bool MindBlast => true;
         public override bool Nonliving => true;

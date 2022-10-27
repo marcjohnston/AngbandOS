@@ -28,14 +28,15 @@ namespace AngbandOS
                 foreach (Type type in assembly.GetTypes())
                 {
                     // Check to see if the type implements the MonsterRace interface and is not an abstract class.
-                    if (!type.IsAbstract && typeof(Base2MonsterRace).IsAssignableFrom(type))
+                    if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
                     {
                         // Load the monster.
-                        Base2MonsterRace monsterRace = (Base2MonsterRace)Activator.CreateInstance(type);
+                        MonsterRace monsterRace = (MonsterRace)Activator.CreateInstance(type);
 
-                        if (monsterRace.Level == level)
+                        if (monsterRace.LevelFound == level)
                         {
-                            Add(new MonsterRace(monsterRace, index));
+                            monsterRace.Index = index;
+                            Add(monsterRace);
                             index++;
                         }
                     }

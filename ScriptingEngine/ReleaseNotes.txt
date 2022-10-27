@@ -1,0 +1,4 @@
+﻿7/1/2012
+1. Added Break command.
+2. Added InStr function.
+3. All symbols now attach debug symbols.

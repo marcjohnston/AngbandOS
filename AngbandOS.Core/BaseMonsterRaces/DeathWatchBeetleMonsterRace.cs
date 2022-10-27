@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class DeathWatchBeetleMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class DeathWatchBeetleMonsterRace : MonsterRace
     {
         public override char Character => 'K';
         public override Colour Colour => Colour.BrightBrown;
@@ -22,7 +23,7 @@ namespace AngbandOS.StaticData
         public override string FriendlyName => "Death watch beetle";
         public override int Hdice => 25;
         public override int Hside => 12;
-        public override int Level => 31;
+        public override int LevelFound => 31;
         public override int Mexp => 190;
         public override int NoticeRange => 16;
         public override int Rarity => 3;

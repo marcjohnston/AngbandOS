@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class EarthHoundMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class EarthHoundMonsterRace : MonsterRace
     {
         public override char Character => 'Z';
         public override Colour Colour => Colour.Brown;
@@ -27,7 +28,7 @@ namespace AngbandOS.StaticData
         public override bool Friends => true;
         public override int Hdice => 15;
         public override int Hside => 8;
-        public override int Level => 20;
+        public override int LevelFound => 20;
         public override int Mexp => 200;
         public override int NoticeRange => 30;
         public override int Rarity => 1;

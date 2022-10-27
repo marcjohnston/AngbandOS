@@ -3,7 +3,8 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.StaticData
 {
-    internal class MatureWhiteDragonMonsterRace : Base2MonsterRace
+    [Serializable]
+    internal class MatureWhiteDragonMonsterRace : MonsterRace
     {
         public override char Character => 'd';
         public override string Name => "Mature white dragon";
@@ -30,7 +31,7 @@ namespace AngbandOS.StaticData
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
-        public override int Level => 35;
+        public override int LevelFound => 35;
         public override int Mexp => 1000;
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
