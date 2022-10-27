@@ -1490,8 +1490,7 @@ namespace AngbandOS
             }
             // If we're smart and badly injured, we may want to prioritise spells that disable the
             // player, summon help, or let us escape over spells that do direct damage
-            if ((Race.Flags2 & MonsterFlag2.Smart) != 0 && Health < MaxHealth / 10 &&
-                Program.Rng.RandomLessThan(100) < 50)
+            if ((Race.Flags2 & MonsterFlag2.Smart) != 0 && Health < MaxHealth / 10 && Program.Rng.RandomLessThan(100) < 50)
             {
                 f4 &= MonsterFlag4.IntMask;
                 f5 &= MonsterFlag5.IntMask;
@@ -6298,9 +6297,7 @@ namespace AngbandOS
         /// Chooses a spell for the monster to attack the player with
         /// </summary>
         /// <param name="monsterIndex"> The index of the monster casting the spell </param>
-        /// <param name="spells">
-        /// A list of the 'magic numbers' of the spells the monster can cast
-        /// </param>
+        /// <param name="spells">A list of the 'magic numbers' of the spells the monster can cast</param>
         /// <param name="listSize"> The number of spells in the spell list </param>
         /// <returns> The 'magic number' of the spell the monster will cast </returns>
         private int ChooseSpellAgainstPlayer(SaveGame saveGame, int[] spells, int listSize)
