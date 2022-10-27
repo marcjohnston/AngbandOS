@@ -1,0 +1,27 @@
+using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal class PotionResistHeat : PotionItemCategory
+    {
+        public override char Character => '!';
+        public override string Name => "Resist Heat";
+
+        public override int Chance1 => 1;
+        public override int Cost => 30;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Resist Heat";
+        public override int Level => 1;
+        public override int Locale1 => 1;
+        public override int? SubCategory => (int)PotionType.ResistHeat;
+        public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Resist heat gives you timed fire resistance
+            return saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(10) + 10);
+        }
+    }
+}

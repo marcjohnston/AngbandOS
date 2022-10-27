@@ -1,0 +1,118 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <SpaProxyServerUrl>https://localhost:44409</SpaProxyServerUrl>
+    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <UserSecretsId>c2144372-5392-4374-ba7e-4a6a4b85ab7f</UserSecretsId>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" ExcludeAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
+    <None Remove="ClientApp\src\app\chat\chat-message.ts" />
+    <None Remove="ClientApp\src\app\home\active-game-details.ts" />
+    <None Remove="ClientApp\src\app\home\active-user-details.ts" />
+    <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
+    <None Remove="ClientApp\src\app\manual\manual.css" />
+    <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
+    <None Remove="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
+    <None Remove="ClientApp\src\app\modules\html-console\html-console.module.ts" />
+    <None Remove="ClientApp\src\app\modules\html-console\print-line.ts" />
+    <None Remove="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
+    <None Remove="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
+    <None Remove="ClientApp\src\app\ui\ui-configuration.ts" />
+    <None Remove="TemplateProcessing\ConfirmEmail.html" />
+    <None Remove="TemplateProcessing\ResetPassword.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\app\manual\manual.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TemplateProcessing\ResetPassword.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateProcessing\ConfirmEmail.html">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.SqlPersistentStorage\AngbandOS.PersistentStorage.Sql.csproj" />
+    <ProjectReference Include="..\AngbandOS.Web.Interface\AngbandOS.Web.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\accounts\change-password\update-account-request.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\chat\chat-message.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\active-user-details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\home\active-game-details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\home\saved-game-details.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\html-console.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\print-line.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\console-configuration.ts" />
+  </ItemGroup>
+
+    <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+  
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>

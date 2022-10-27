@@ -1,0 +1,21 @@
+﻿using AngbandOS.Commands;
+using AngbandOS.Enumerations;
+
+namespace AngbandOS.StoreCommands
+{
+    internal class GetStoreCommand : IStoreCommand
+    {
+        public char Key => 'g';
+
+        public bool RequiresRerendering => false;
+
+        public string Description => "Get an item";
+
+        public void Execute(SaveGame saveGame, Store store)
+        {
+            store.StorePurchase();
+        }
+
+        public bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
+    }
+}

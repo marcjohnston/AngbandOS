@@ -1,0 +1,127 @@
+<div id="container">
+  <h6 id="active-games-span">Chat Hub Connections {{chatHubConnections === undefined ? 0 : chatHubConnections.length}}</h6>
+  <ng-container *ngIf="chatHubConnections !== undefined">
+    <table mat-table [dataSource]="chatHubConnections">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let chatHubConnection">{{chatHubConnection.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="connectionId">
+        <th mat-header-cell *matHeaderCellDef>
+          Connection ID
+        </th>
+        <td mat-cell *matCellDef="let chatHubConnection">{{chatHubConnection.connectionId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef>
+          Connected Since
+        </th>
+        <td mat-cell *matCellDef="let chatHubConnection">{{chatHubConnection.dateTime}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let chatHubConnection; columns: displayColumns"></tr>
+    </table>
+  </ng-container>
+  <h6 id="active-games-span">Admin Hub Connections {{adminHubConnections === undefined ? 0 : adminHubConnections.length}}</h6>
+  <ng-container *ngIf="adminHubConnections !== undefined">
+    <table mat-table [dataSource]="adminHubConnections">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let adminHubConnection">{{adminHubConnection.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="connectionId">
+        <th mat-header-cell *matHeaderCellDef>
+          Connection ID
+        </th>
+        <td mat-cell *matCellDef="let adminHubConnection">{{adminHubConnection.connectionId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef>
+          Connected Since
+        </th>
+        <td mat-cell *matCellDef="let adminHubConnection">{{adminHubConnection.dateTime}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let adminHubConnection; columns: displayColumns"></tr>
+    </table>
+  </ng-container>
+  <h6 id="active-games-span">Games Hub Connections {{gameHubConnections === undefined ? 0 : gameHubConnections.length}}</h6>
+  <ng-container *ngIf="gameHubConnections !== undefined">
+    <table mat-table [dataSource]="gameHubConnections">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let gameHubConnections">{{gameHubConnections.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="connectionId">
+        <th mat-header-cell *matHeaderCellDef>
+          Connection ID
+        </th>
+        <td mat-cell *matCellDef="let gameHubConnections">{{gameHubConnections.connectionId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef>
+          Connected Since
+        </th>
+        <td mat-cell *matCellDef="let gameHubConnections">{{gameHubConnections.dateTime}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let gameHubConnections; columns: displayColumns"></tr>
+    </table>
+  </ng-container>
+  <h6 id="active-games-span">Service Hub Connections {{serviceHubConnections === undefined ? 0 : serviceHubConnections.length}}</h6>
+  <ng-container *ngIf="serviceHubConnections !== undefined">
+    <table mat-table [dataSource]="serviceHubConnections">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let serviceHubConnection">{{serviceHubConnection.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="connectionId">
+        <th mat-header-cell *matHeaderCellDef>
+          Connection ID
+        </th>
+        <td mat-cell *matCellDef="let serviceHubConnection">{{serviceHubConnection.connectionId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef>
+          Connected Since
+        </th>
+        <td mat-cell *matCellDef="let serviceHubConnection">{{serviceHubConnection.dateTime}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let serviceHubConnection; columns: displayColumns"></tr>
+    </table>
+  </ng-container>
+  <h6 id="active-games-span">Spectators Hub Connections {{spectatorsHubConnections === undefined ? 0 : spectatorsHubConnections.length}}</h6>
+  <ng-container *ngIf="spectatorsHubConnections !== undefined">
+    <table mat-table [dataSource]="spectatorsHubConnections">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>
+          Username
+        </th>
+        <td mat-cell *matCellDef="let spectatorHubConnection">{{spectatorHubConnection.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="connectionId">
+        <th mat-header-cell *matHeaderCellDef>
+          Connection ID
+        </th>
+        <td mat-cell *matCellDef="let spectatorHubConnection">{{spectatorHubConnection.connectionId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef>
+          Connected Since
+        </th>
+        <td mat-cell *matCellDef="let spectatorHubConnection">{{spectatorHubConnection.dateTime}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let spectatorHubConnection; columns: displayColumns"></tr>
+    </table>
+  </ng-container>
+</div>

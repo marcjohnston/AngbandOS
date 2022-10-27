@@ -1,0 +1,15 @@
+﻿using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal abstract class BottleItemCategory : BaseItemCategory
+    {
+        public override ItemCategory CategoryEnum => ItemCategory.Bottle;
+        public override bool HatesCold => true;
+        public override bool HatesAcid => true;
+
+        public override int PercentageBreakageChance => 100;
+    }
+}

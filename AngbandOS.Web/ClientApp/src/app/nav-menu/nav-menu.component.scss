@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+@import '../../theme.scss';
+
+nav {
+    margin: 0 !important; // Override the margins for the nav to allow the logo to consume and become the margin space
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.container {
+  display: flex;
+  margin: 0 15px 0 15px; // We need left and right margins
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+#logo {
+  font-size: 6pt;
+  color: mat-color($primary, 100);
+  font-weight: bold;
+  white-space: nowrap;
+}

@@ -1,0 +1,38 @@
+using AngbandOS.Enumerations;
+using AngbandOS.Projection;
+using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal class WandShardBalls : WandItemCategory
+    {
+        public override char Character => '-';
+        public override string Name => "Shard Balls";
+
+        public override int Chance1 => 4;
+        public override int Cost => 95000;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Shard Balls";
+        public override bool IgnoreAcid => true;
+        public override bool IgnoreCold => true;
+        public override bool IgnoreElec => true;
+        public override bool IgnoreFire => true;
+        public override int Level => 75;
+        public override int Locale1 => 75;
+        public override int? SubCategory => WandType.Shard;
+        public override int Weight => 10;
+
+        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        {
+            saveGame.FireBall(new ProjectShard(saveGame), dir, 75 + Program.Rng.DieRoll(50), 2);
+            return true;
+        }
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            item.TypeSpecificValue = Program.Rng.DieRoll(2) + 1;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+form {
+  & div {
+    font-size: 1.5rem;
+    font-family: Roboto;
+    height: 2rem;
+    padding: 0.5rem 0;
+  }
+
+  & mat-form-field {
+    width: 250px;
+  }
+}
+
+button {
+  margin-right: 1rem;
+}

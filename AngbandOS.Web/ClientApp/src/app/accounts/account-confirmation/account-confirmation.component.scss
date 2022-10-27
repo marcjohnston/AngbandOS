@@ -1,0 +1,13 @@
+form {
+  display: flex; // Use flex to render the form-fields.
+  flex-direction: column; // Arrange the form-fields straight down.
+
+  & div {
+    height: 2rem;
+  }
+
+  & mat-form-field, & mat-checkbox {
+    display: block;
+    width: 250px;
+  }
+}

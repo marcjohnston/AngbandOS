@@ -1,0 +1,34 @@
+﻿using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ActivationPowers
+{
+    /// <summary>
+    /// Give temporary telepathy.
+    /// </summary>
+    [Serializable]
+    internal class EspActivationPower : ActivationPower
+    {
+        public override int RandomChance => 85;
+
+        public override string PreActivationMessage => "";
+
+        public override bool Activate(SaveGame saveGame)
+        {
+            saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
+            return true;
+        }
+
+        public override int RechargeTime(Player player) => 200;
+
+        public override int Value => 1500;
+
+        public override string Description => "temporary ESP (dur 25+d30) every 200 turns";
+
+        public override uint SpecialSustainFlag => ItemFlag2.SustInt;
+
+        public override uint SpecialPowerFlag => ItemFlag2.ResShards;
+
+        public override uint SpecialAbilityFlag => ItemFlag3.Telepathy;
+    }
+}

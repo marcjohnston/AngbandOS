@@ -1,0 +1,29 @@
+.hide {
+  display: none;
+}
+
+form {
+  display: flex; // Use flex to render the form-fields.
+  flex-direction: column; // Arrange the form-fields straight down.
+
+  & #email-address, & #password {
+    width: 250px;
+  }
+
+  & mat-form-field, & mat-checkbox {
+    display: block;
+  }
+
+  & span {
+    color: red;
+    margin-top: 10px;
+  }
+
+  & button {
+    width: 70px;
+  }
+
+  & a {
+    margin-top: 10px;
+  }
+}

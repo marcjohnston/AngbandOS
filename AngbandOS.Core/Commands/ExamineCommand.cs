@@ -1,0 +1,23 @@
+﻿using AngbandOS.StoreCommands;
+using System;
+
+namespace AngbandOS.Commands
+{
+    /// <summary>
+    /// Examine an item
+    /// </summary>
+    [Serializable]
+    internal class ExamineCommand : ICommand
+    {
+        public char Key => 'x';
+
+        public int? Repeat => 0;
+
+        public bool IsEnabled => true;
+
+        public void Execute(SaveGame saveGame)
+        {
+            ExamineInventoryStoreCommand.DoCmdExamine(saveGame);
+        }
+    }
+}

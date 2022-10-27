@@ -1,0 +1,30 @@
+using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal class PotionNaivety : PotionItemCategory
+    {
+        public override char Character => '!';
+        public override string Name => "Naivety";
+
+        public override int Chance1 => 1;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Naivety";
+        public override int Level => 20;
+        public override int Locale1 => 20;
+        public override int? SubCategory => (int)PotionType.DecWis;
+        public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Naivety tries to reduce your wisdom
+            return saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+        }
+        public override bool Smash(SaveGame saveGame, int who, int y, int x)
+        {
+            return true;
+        }
+    }
+}

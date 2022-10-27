@@ -1,0 +1,100 @@
+﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+using AngbandOS.Enumerations;
+using AngbandOS.StaticData;
+using System;
+
+namespace AngbandOS.Spells.Tarot
+{
+    [Serializable]
+    internal class TarotSpellConjureElemental : Spell
+    {
+        public override void Cast(SaveGame saveGame)
+        {
+            if (Program.Rng.DieRoll(6) > 3)
+            {
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental,
+                    false))
+                {
+                    saveGame.MsgPrint("No-one ever turns up.");
+                }
+            }
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental))
+            {
+                saveGame.MsgPrint("You fail to control the elemental creature!");
+            }
+            else
+            {
+                saveGame.MsgPrint("No-one ever turns up.");
+            }
+        }
+
+        public override void Initialise(int characterClass)
+        {
+            Name = "Conjure Elemental";
+            switch (characterClass)
+            {
+                case CharacterClass.Mage:
+                    Level = 33;
+                    ManaCost = 28;
+                    BaseFailure = 80;
+                    FirstCastExperience = 12;
+                    break;
+
+                case CharacterClass.Priest:
+                case CharacterClass.Monk:
+                    Level = 35;
+                    ManaCost = 30;
+                    BaseFailure = 80;
+                    FirstCastExperience = 12;
+                    break;
+
+                case CharacterClass.Rogue:
+                    Level = 40;
+                    ManaCost = 35;
+                    BaseFailure = 80;
+                    FirstCastExperience = 12;
+                    break;
+
+                case CharacterClass.Ranger:
+                    Level = 38;
+                    ManaCost = 33;
+                    BaseFailure = 80;
+                    FirstCastExperience = 12;
+                    break;
+
+                case CharacterClass.WarriorMage:
+                case CharacterClass.Cultist:
+                    Level = 38;
+                    ManaCost = 32;
+                    BaseFailure = 80;
+                    FirstCastExperience = 12;
+                    break;
+
+                case CharacterClass.HighMage:
+                    Level = 28;
+                    ManaCost = 26;
+                    BaseFailure = 70;
+                    FirstCastExperience = 12;
+                    break;
+
+                default:
+                    Level = 99;
+                    ManaCost = 0;
+                    BaseFailure = 0;
+                    FirstCastExperience = 0;
+                    break;
+            }
+        }
+
+        protected override string Comment(Player player)
+        {
+            return "control 50%";
+        }
+    }
+}

@@ -1,0 +1,44 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #horizontal-panes {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  & #left-pane {
+    width: 0px;
+  }
+
+  & #right-pane {
+    width: 0px;
+  }
+
+  & #canvas-pane {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    & canvas {
+      background-color: black;
+      width: 100%;
+      height: 100%;
+      object-fit: none;
+      object-position: left top;
+    }
+  }
+
+  & #footer {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 8pt;
+    color: white;
+    border-top: 1px solid darkgray;
+  }
+}

@@ -1,0 +1,30 @@
+using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal class PotionSelfKnowledge : PotionItemCategory
+    {
+        public override char Character => '!';
+        public override string Name => "Self Knowledge";
+
+        public override int Chance1 => 1;
+        public override int Cost => 2000;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Self Knowledge";
+        public override int Level => 40;
+        public override int Locale1 => 40;
+        public override int? SubCategory => (int)PotionType.SelfKnowledge;
+        public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Self knowledge gives you information about yourself
+            saveGame.MsgPrint("You begin to know yourself a little better...");
+            saveGame.MsgPrint(null);
+            saveGame.SelfKnowledge();
+            return true;
+        }
+    }
+}

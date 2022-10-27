@@ -1,0 +1,26 @@
+<ng-container *ngIf="!isAuthenticated">
+  <form [formGroup]="formGroup" (submit)="onLoginClick()">
+    <h2>Login</h2>
+    <mat-form-field id="email-address">
+      <input matInput
+              formControlName="emailAddress"
+              placeholder="Email Address" />
+    </mat-form-field>
+    <mat-form-field id="password">
+      <input matInput
+              type="password"
+              formControlName="password"
+              placeholder="Password" />
+    </mat-form-field>
+    <mat-checkbox formControlName="rememberMe">Remember me!</mat-checkbox>
+    <mat-checkbox formControlName="keepLoggedIn">Keep me logged in.</mat-checkbox>
+    <input type="submit" value="Save" hidden>
+    <span>{{message}}</span>
+    <button mat-flat-button>Login</button>
+    <a href="#" [routerLink]='["/accounts/forgot-password"]'>Forgot password!</a>
+  </form>
+</ng-container>
+<ng-container *ngIf="isAuthenticated">
+  <p>Login successful.</p>
+  <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
+</ng-container>

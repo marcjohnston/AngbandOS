@@ -1,0 +1,20 @@
+using AngbandOS.Enumerations;
+using System;
+
+namespace AngbandOS.ItemCategories
+{
+    [Serializable]
+    internal class ScrollRecharging : ScrollItemCategory
+    {
+        public override char Character => '?';
+        public override string Name => "Recharging";
+
+        public override int Chance1 => 1;
+        public override int Cost => 200;
+        public override string FriendlyName => "Recharging";
+        public override int Level => 40;
+        public override int Locale1 => 40;
+        public override int? SubCategory => 22;
+        public override int Weight => 5;
+    }
+}

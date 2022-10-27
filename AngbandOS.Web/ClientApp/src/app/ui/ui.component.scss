@@ -1,0 +1,41 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #horizontal-panes {
+    display: flex;
+    flex-direction: row;
+  }
+
+  & #left-pane {
+    width: 300px;
+    min-width: 300px;
+    border: 1px solid white;
+
+    & mat-slider {
+      height: 20px;
+      margin-top: -30px;
+    }
+
+    & .color-picker {
+      width: 100px;
+      height: 20px;
+      position: absolute;
+      margin-top: -11px;
+    }
+  }
+
+  & #canvas-pane {
+    display: flex;
+    overflow: hidden;
+
+    & canvas {
+      background-color: black;
+      object-fit: none;
+      object-position: left top;
+      border: 1px solid white;
+    }
+  }
+}
