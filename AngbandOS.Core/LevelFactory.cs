@@ -2428,11 +2428,11 @@ namespace AngbandOS
             switch (typ)
             {
                 case 8:
-                    vaultFactory.BuildType8(y, x);
+                    vaultFactory.BuildCategory8Vault(y, x);
                     break;
 
                 case 7:
-                    vaultFactory.BuildType7(y, x);
+                    vaultFactory.BuildCategory7Vault(y, x);
                     break;
 
                 case 6:

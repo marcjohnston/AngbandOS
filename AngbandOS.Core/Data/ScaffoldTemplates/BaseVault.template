@@ -1,0 +1,16 @@
+﻿using AngbandOS.Core.Interface;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class ~\_Name\VaultType~ : Base2VaultType
+{
+    public override char Character => '\Character\';
+    public override Colour Colour => Colour.\Colour\;
+    public override string Name => "\Name\";
+    public override int Category => \Category\;
+    public override int Height => \Height\;
+    public override int Rating => \Rating\;
+    public override string Text => "\Text\";
+    public override int Width => \Width\;
+}

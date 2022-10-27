@@ -19,98 +19,103 @@ namespace AngbandOS.Commands
         public static List<BaseStaffFlavour> BaseStaffFlavours = new List<BaseStaffFlavour>();
         public static List<BaseWandFlavour> BaseWandFlavours = new List<BaseWandFlavour>();
         public static Dictionary<string, BaseProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, BaseProjectileGraphic>();
+        public static Dictionary<string, BaseAnimation> BaseAnimations = new Dictionary<string, BaseAnimation>();
+        public static Dictionary<string, BaseVaultType> Base2VaultTypes = new Dictionary<string, BaseVaultType>();
 
         static CommandManager()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
-                // Check to see if the type implements the IStoreCommand interface and is not an abstract class.
+                // Load StoreCommands.
                 if (!type.IsAbstract && typeof(IStoreCommand).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     IStoreCommand command = (IStoreCommand)Activator.CreateInstance(type);
                     StoreCommands.Add(command);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load Commands.
                 if (!type.IsAbstract && typeof(ICommand).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     ICommand command = (ICommand)Activator.CreateInstance(type);
                     GameCommands.Add(command);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load AmuletFlavours.
                 if (!type.IsAbstract && typeof(BaseAmuletFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseAmuletFlavour baseAmuletFlavour = (BaseAmuletFlavour)Activator.CreateInstance(type);
                     BaseAmuletFlavours.Add(baseAmuletFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load MushroomFlavours.
                 if (!type.IsAbstract && typeof(BaseMushroomFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseMushroomFlavour baseMushroomFlavour = (BaseMushroomFlavour)Activator.CreateInstance(type);
                     BaseMushroomFlavours.Add(baseMushroomFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load PotionFlavours.
                 if (!type.IsAbstract && typeof(BasePotionFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BasePotionFlavour basePotionFlavour = (BasePotionFlavour)Activator.CreateInstance(type);
                     BasePotionFlavours.Add(basePotionFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load RingFlavours.
                 if (!type.IsAbstract && typeof(BaseRingFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseRingFlavour baseRingFlavour = (BaseRingFlavour)Activator.CreateInstance(type);
                     BaseRingFlavours.Add(baseRingFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load RodFlavours.
                 if (!type.IsAbstract && typeof(BaseRodFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseRodFlavour baseRodFlavour = (BaseRodFlavour)Activator.CreateInstance(type);
                     BaseRodFlavours.Add(baseRodFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load ScrollFlavours.
                 if (!type.IsAbstract && typeof(BaseScrollFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseScrollFlavour baseScrollFlavour = (BaseScrollFlavour)Activator.CreateInstance(type);
                     BaseScrollFlavours.Add(baseScrollFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load StaffFlavours.
                 if (!type.IsAbstract && typeof(BaseStaffFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseStaffFlavour baseStaffFlavour = (BaseStaffFlavour)Activator.CreateInstance(type);
                     BaseStaffFlavours.Add(baseStaffFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load WandFlavours.
                 if (!type.IsAbstract && typeof(BaseWandFlavour).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseWandFlavour wandFlavour = (BaseWandFlavour)Activator.CreateInstance(type);
                     BaseWandFlavours.Add(wandFlavour);
                 }
 
-                // Check to see if the type implements the ICommand interface and is not an abstract class.
+                // Load ProjectileGraphics.
                 if (!type.IsAbstract && typeof(BaseProjectileGraphic).IsAssignableFrom(type))
                 {
-                    // Load the command.
                     BaseProjectileGraphic projectileGraphic = (BaseProjectileGraphic)Activator.CreateInstance(type);
                     BaseProjectileGraphics.Add(projectileGraphic.Name, projectileGraphic);
+                }
+
+                // Load Animations.
+                if (!type.IsAbstract && typeof(BaseAnimation).IsAssignableFrom(type))
+                {
+                    BaseAnimation animation = (BaseAnimation)Activator.CreateInstance(type);
+                    BaseAnimations.Add(animation.Name, animation);
+                }
+
+                // Load Vault Types.
+                if (!type.IsAbstract && typeof(BaseVaultType).IsAssignableFrom(type))
+                {
+                    BaseVaultType vaultType = (BaseVaultType)Activator.CreateInstance(type);
+                    Base2VaultTypes.Add(vaultType.Name, vaultType);
                 }
             }
         }

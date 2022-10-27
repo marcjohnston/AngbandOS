@@ -5,6 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Commands;
+using AngbandOS.Core;
 using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace AngbandOS
     {
         public VaultTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseVaultType> baseType in saveGame.BaseVaultTypes)
+            foreach (KeyValuePair<string, BaseVaultType> baseType in CommandManager.Base2VaultTypes)
             {
                 Add(new VaultType(baseType.Value));
             }

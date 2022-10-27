@@ -1027,7 +1027,7 @@ namespace AngbandOS
             _level.Monsters.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
         }
 
-        public void BuildType7(int yval, int xval)
+        public void BuildCategory7Vault(int yval, int xval)
         {
             VaultType vPtr = SaveGame.VaultTypes[0];
             int dummy = 0;
@@ -1061,7 +1061,7 @@ namespace AngbandOS
             BuildVault(yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
         }
 
-        public void BuildType8(int yval, int xval)
+        public void BuildCategory8Vault(int yval, int xval)
         {
             VaultType vPtr = SaveGame.VaultTypes[0];
             int dummy = 0;
@@ -1086,9 +1086,7 @@ namespace AngbandOS
                 return;
             }
             _level.DangerRating += vPtr.Rating;
-            if (SaveGame.Difficulty <= 50 ||
-                Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) <
-                400)
+            if (SaveGame.Difficulty <= 50 || Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
             {
                 _level.SpecialDanger = true;
             }

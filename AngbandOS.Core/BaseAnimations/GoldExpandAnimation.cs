@@ -1,0 +1,13 @@
+using AngbandOS.Core.Interface;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class GoldExpandAnimation : BaseAnimation
+{
+    public override char Character => '*';
+    public override Colour Colour => Colour.Gold;
+    public override string Name => "GoldExpand";
+    public override Colour AlternateColour => Colour.Gold;
+    public override string Sequence => @"·oO";
+}

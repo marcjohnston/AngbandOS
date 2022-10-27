@@ -1,0 +1,13 @@
+using AngbandOS.Core.Interface;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class BrightBlueSwirlAnimation : BaseAnimation
+{
+    public override char Character => '*';
+    public override Colour Colour => Colour.BrightBlue;
+    public override string Name => "BrightBlueSwirl";
+    public override Colour AlternateColour => Colour.BrightBlue;
+    public override string Sequence => @"|/-\|/-\|/-\|/-\";
+}

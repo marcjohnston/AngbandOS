@@ -11752,8 +11752,8 @@ namespace AngbandOS
         /// <summary>
         /// Animations for spells and effects
         /// </summary>
-        [NonSerialized]
-        public Dictionary<string, Animation> BaseAnimations;
+        //[NonSerialized]
+        //public Dictionary<string, Animation> BaseAnimations;
 
         [NonSerialized]
         public Dictionary<string, BaseFixedArtifact> BaseFixedArtifacts;
@@ -11761,8 +11761,8 @@ namespace AngbandOS
         [NonSerialized]
         public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
 
-        [NonSerialized]
-        public Dictionary<string, BaseVaultType> BaseVaultTypes;
+        //[NonSerialized]
+        //public Dictionary<string, BaseVaultType> BaseVaultTypes;
 
         /// <summary>
         /// Types of floor tile
@@ -11779,24 +11779,24 @@ namespace AngbandOS
         public void LoadOrCreateStaticResources()
         {
             //BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace(), "BaseMonsterRace");
+            //BaseAnimations = ReadEntitiesFromCsv(new Animation(), "BaseAnimation");
+            //BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType(), "BaseVault");
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
             BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
-            BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType());
             BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
-            BaseAnimations = ReadEntitiesFromCsv(new Animation());
         }
 
         private string MakeIdentifier(string s)
         {
-            s = s.Replace("2", "Two");
-            s = s.Replace("4", "Four");
-            s = s.Replace("9", "Nine");
-            s = s.Replace("11", "Eleven");
+            //s = s.Replace("2", "Two");
+            //s = s.Replace("4", "Four");
+            //s = s.Replace("9", "Nine");
+            //s = s.Replace("11", "Eleven");
             string newS = "";
             int i = 0;
             while (i < s.Length)
             {
-                if (s[i] == ' ' || s[i] == '-')
+                if (s[i] == ' ' || s[i] == '-' || s[i] == '(')
                 {
                     char c = s[i + 1];
                     string newC = $"{c}".ToUpper();
@@ -11807,6 +11807,10 @@ namespace AngbandOS
                     newS = $"{newS}{s[i]}";
                 i++;
             }
+            newS = newS.Replace("#", "");
+            newS = newS.Replace("*", "");
+            newS = newS.Replace("(", "");
+            newS = newS.Replace(")", "");
             newS = newS.Replace("-", "");
             newS = newS.Replace(",", "");
             newS = newS.Replace("'", "");
