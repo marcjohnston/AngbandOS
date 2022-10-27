@@ -13,6 +13,10 @@ namespace AngbandOS.StaticData
 
         public readonly uint Flags2;
         public readonly uint Flags3;
+
+        /// <summary>
+        /// Represents innate abilities.  Monsters that do not have innate abilities cannot use these flags.
+        /// </summary>
         public readonly uint Flags4;
         public readonly uint Flags5;
         public readonly uint Flags6;
@@ -536,6 +540,10 @@ namespace AngbandOS.StaticData
 
         public virtual bool Slow => false;
 
+        /// <summary>
+        /// Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the
+        /// player, summon help, or let it escape over spells that do direct damage.
+        /// </summary>
         public virtual bool Smart => false;
 
         /// <summary>
@@ -800,10 +808,18 @@ namespace AngbandOS.StaticData
         }
 
         /// <summary>
-        /// Represents a percentage chance that the race performs casting.
+        /// Represents a percentage chance (0-100) of successfully casting as spell.
         /// </summary>
         public int FrequencyChance { get; }
+
+        /// <summary>
+        /// Returns the level at which the monster will appear.  This is typically same as LevelFound but Player and the NobodyGhost are moved to the town level.
+        /// </summary>
         public int Level { get; }
+
+        /// <summary>
+        /// Returns the index into the monster race array where the monster is.  Set just after construction.
+        /// </summary>
         public int Index;
 
         public int GetCoinType()
