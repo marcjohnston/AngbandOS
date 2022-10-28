@@ -73,12 +73,12 @@ namespace AngbandOS
         {
             try
             {
-                SaveGame saveGame = SaveGame.Initialize(persistentStorage);
+                saveGame = SaveGame.Initialize(persistentStorage);
                 saveGame.Play(console, persistentStorage, updateNotifier);
             }
             catch (Exception ex)
             {
-                updateNotifier?.SaveGameIncompatible();
+                updateNotifier?.GameExceptionThrown(ex.Message);
                 return false;
             }
             return true;

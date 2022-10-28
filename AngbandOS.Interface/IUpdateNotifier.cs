@@ -16,6 +16,6 @@
         public void GameStarted();
 
         public void GameStopped();
-        public void SaveGameIncompatible();
+        public void GameExceptionThrown(string message);
     }
 }

@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
@@ -48,6 +48,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
    ;
     }
   }
+
+  //@HostListener('window:keydown', ['$event'])
+  //public onKeyDown(event: KeyboardEvent) {
+  //  event.stopImmediatePropagation();
+  //  event.preventDefault();
+  //}
 
   public input(event: Event) {
     if (this.chatConnection !== undefined) {

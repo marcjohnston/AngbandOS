@@ -229,6 +229,11 @@ namespace AngbandOS.Web.Hubs
             return activeGames.ToArray();
         }
 
+        /// <summary>
+        /// Process a request from the watcherConnectionId to watch the game hosted by the watchingConnectionId.
+        /// </summary>
+        /// <param name="watcherConnectionId"></param>
+        /// <param name="watchingConnectionId"></param>
         public void Watch(string watcherConnectionId, string watchingConnectionId)
         {
             // Get the console belonging to the game.
@@ -385,8 +390,8 @@ namespace AngbandOS.Web.Hubs
                     case GameUpdateNotificationEnum.CharacterRenamed:
                     case GameUpdateNotificationEnum.GoldUpdated:
                         break;
-                    case GameUpdateNotificationEnum.SaveGameIncompatibile:
-                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.SaveGameIncompatible, guid);
+                    case GameUpdateNotificationEnum.GameExceptionThrown:
+                        await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameExceptionThrown, guid);
                         signalRConsole.GameIncompatible();
                         break;
                 }

@@ -10,6 +10,6 @@
         GameCreated = 5,
         GameStopped = 6,
         CharacterDied = 7,
-        SaveGameIncompatible = 8
+        GameExceptionThrown = 8
     }
 }

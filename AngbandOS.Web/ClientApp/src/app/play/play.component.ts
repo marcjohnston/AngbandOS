@@ -35,52 +35,66 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent) {
-    if (this.connection) {
-      const shift: string = (event.shiftKey ? "." : "");
-      switch (event.key) {
-        case "ArrowLeft":
-          this.connection.send("keypressed", `${shift}4`);
-          break;
-        case "ArrowRight":
-          this.connection.send("keypressed", `${shift}6`);
-          break;
-        case "ArrowUp":
-          this.connection.send("keypressed", `${shift}8`);
-          break;
-        case "ArrowDown":
-          this.connection.send("keypressed", `${shift}2`);
-          break;
-        case "Home":
-          this.connection.send("keypressed", `${shift}7`);
-          break;
-        case "End":
-          this.connection.send("keypressed", `${shift}1`);
-          break;
-        case "PageUp":
-          this.connection.send("keypressed", `${shift}9`);
-          break;
-        case "PageDown":
-          this.connection.send("keypressed", `${shift}3`);
-          break;
-        case "Enter":
-          this.connection.send("keypressed", '\x0D');
-          break;
-        case "Tab":
-          this.connection.send("keypressed", '\x09');
-          break;
-        case "Escape":
-          this.connection.send("keypressed", '\x1B');
-          break;
-        case "Backspace":
-          this.connection.send("keypressed", '\x08');
-          break;
-        case "Control":
-        case "Alt":
-        case "Shift":
-          break;
-        default:
-          this.connection.send("keypressed", event.key);
-          break;
+    if (document.activeElement !== null && document.activeElement.id !== "chat-box") {
+      if (this.connection) {
+        const shift: string = (event.shiftKey ? "." : "");
+        switch (event.key) {
+          case "ArrowLeft":
+            this.connection.send("keypressed", `${shift}4`);
+            break;
+          case "ArrowRight":
+            this.connection.send("keypressed", `${shift}6`);
+            break;
+          case "ArrowUp":
+            this.connection.send("keypressed", `${shift}8`);
+            break;
+          case "ArrowDown":
+            this.connection.send("keypressed", `${shift}2`);
+            break;
+          case "Home":
+            this.connection.send("keypressed", `${shift}7`);
+            break;
+          case "End":
+            this.connection.send("keypressed", `${shift}1`);
+            break;
+          case "PageUp":
+            this.connection.send("keypressed", `${shift}9`);
+            break;
+          case "PageDown":
+            this.connection.send("keypressed", `${shift}3`);
+            break;
+          case "Enter":
+            this.connection.send("keypressed", '\x0D');
+            break;
+          case "Tab":
+            this.connection.send("keypressed", '\x09');
+            break;
+          case "Escape":
+            this.connection.send("keypressed", '\x1B');
+            break;
+          case "Backspace":
+            this.connection.send("keypressed", '\x08');
+            break;
+          case "Control":
+          case "Alt":
+          case "Shift":
+          case "F1":
+          case "F2":
+          case "F3":
+          case "F4":
+          case "F5":
+          case "F6":
+          case "F7":
+          case "F8":
+          case "F9":
+          case "F10":
+          case "F11":
+          case "F12":
+            break;
+          default:
+            this.connection.send("keypressed", event.key);
+            break;
+        }
       }
     }
   }

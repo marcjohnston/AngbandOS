@@ -31,6 +31,7 @@ namespace AngbandOS.Web.Hubs
         /// <returns></returns>
         public void Watch(string watchingConnectionId)
         {
+            // Forward the request to the game service.
             GameService.Watch(Context.ConnectionId, watchingConnectionId);
         }
 
