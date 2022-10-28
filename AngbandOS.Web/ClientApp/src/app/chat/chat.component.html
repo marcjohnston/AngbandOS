@@ -16,5 +16,5 @@
       </ng-container>
     </div>
   </div>
-  <textarea [placeholder]="isAuthenticated ? 'Type a new message' : 'Login to chat'" (input)="input($event)" [disabled]="!isAuthenticated"></textarea>
+  <textarea id="chat-box" [placeholder]="isAuthenticated ? 'Type a new message' : 'Login to chat'" (input)="input($event)" [disabled]="!isAuthenticated"></textarea>
 </div>

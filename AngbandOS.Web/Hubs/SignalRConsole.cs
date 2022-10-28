@@ -94,7 +94,7 @@ namespace AngbandOS.Web.Hubs
         private void DisconnectSpectators()
         {
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
+            foreach (ISpectatorsHub gameHub in _spectators)
                 gameHub.GameOver();
         }
 
@@ -131,7 +131,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.Clear();
 
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
+            foreach (ISpectatorsHub gameHub in _spectators)
               gameHub.Clear();
         }
 
@@ -141,7 +141,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.PlayMusic(music);
 
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
+            foreach (ISpectatorsHub gameHub in _spectators)
               gameHub.PlayMusic(music);
         }
 
@@ -171,7 +171,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.SetBackground(image);
 
             // These messages are relayed to all spectators.
-            foreach (IGameHub gameHub in _spectators)
+            foreach (ISpectatorsHub gameHub in _spectators)
               gameHub.SetBackground(image);
         }
 

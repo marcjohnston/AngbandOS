@@ -45,9 +45,9 @@ namespace AngbandOS.Web.Hubs
             Action(SignalRConsole, GameUpdateNotificationEnum.PlayerDied, message);
         }
 
-        public void SaveGameIncompatible()
+        public void GameExceptionThrown(string message)
         {
-            Action(SignalRConsole, GameUpdateNotificationEnum.SaveGameIncompatibile, "Saved game cannot be played because it is incompatible!");
+            Action(SignalRConsole, GameUpdateNotificationEnum.GameExceptionThrown, message);
         }
     }
 }

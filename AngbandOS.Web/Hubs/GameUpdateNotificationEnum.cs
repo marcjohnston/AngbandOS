@@ -8,6 +8,6 @@
         PlayerDied = 3,
         GameStarted = 4,
         GameStopped = 5,
-        SaveGameIncompatibile = 6
+        GameExceptionThrown = 6
     }
 }
