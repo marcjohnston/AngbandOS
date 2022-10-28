@@ -8,6 +8,8 @@
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.Commands;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {
@@ -107,13 +109,13 @@ namespace AngbandOS
         public void CaveSetBackground(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.BackgroundFeature = SaveGame.BaseFloorTileTypes[feat];
+            cPtr.BackgroundFeature = CommandManager.BaseFloorTileTypes[feat];
         }
 
         public void CaveSetFeat(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.FeatureType = SaveGame.BaseFloorTileTypes[feat];
+            cPtr.FeatureType = CommandManager.BaseFloorTileTypes[feat];
             NoteSpot(y, x);
             RedrawSingleLocation(y, x);
         }
@@ -2239,7 +2241,7 @@ namespace AngbandOS
             Colour a;
             char c;
             GridTile cPtr = Grid[y][x];
-            FloorTileType feat = cPtr.FeatureType;
+            BaseFloorTileType feat = cPtr.FeatureType;
             if (feat.IsOpenFloor)
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
@@ -2297,8 +2299,8 @@ namespace AngbandOS
                 }
                 else
                 {
-                    a = SaveGame.BaseFloorTileTypes["Nothing"].Colour;
-                    c = SaveGame.BaseFloorTileTypes["Nothing"].Character;
+                    a = CommandManager.BaseFloorTileTypes["Nothing"].Colour;
+                    c = CommandManager.BaseFloorTileTypes["Nothing"].Character;
                 }
             }
             else
@@ -2306,8 +2308,8 @@ namespace AngbandOS
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
                     feat = string.IsNullOrEmpty(feat.AppearAs)
-                        ? SaveGame.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs]
-                        : SaveGame.BaseFloorTileTypes[feat.AppearAs];
+                        ? CommandManager.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs]
+                        : CommandManager.BaseFloorTileTypes[feat.AppearAs];
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
@@ -2347,8 +2349,8 @@ namespace AngbandOS
                 }
                 else
                 {
-                    a = SaveGame.BaseFloorTileTypes["Nothing"].Colour;
-                    c = SaveGame.BaseFloorTileTypes["Nothing"].Character;
+                    a = CommandManager.BaseFloorTileTypes["Nothing"].Colour;
+                    c = CommandManager.BaseFloorTileTypes["Nothing"].Character;
                 }
             }
             if (_player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))

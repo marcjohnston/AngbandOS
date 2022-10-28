@@ -11764,11 +11764,11 @@ namespace AngbandOS
         //[NonSerialized]
         //public Dictionary<string, BaseVaultType> BaseVaultTypes;
 
-        /// <summary>
-        /// Types of floor tile
-        /// </summary>
-        [NonSerialized]
-        public Dictionary<string, FloorTileType> BaseFloorTileTypes;
+        ///// <summary>
+        ///// Types of floor tile
+        ///// </summary>
+        //[NonSerialized]
+        //public Dictionary<string, FloorTileType> BaseFloorTileTypes;
 
         //[NonSerialized]
         //public Dictionary<string, BaseMonsterRace> BaseMonsterRaces;
@@ -11781,9 +11781,9 @@ namespace AngbandOS
             //BaseMonsterRaces = ReadEntitiesFromCsv(new BaseMonsterRace(), "BaseMonsterRace");
             //BaseAnimations = ReadEntitiesFromCsv(new Animation(), "BaseAnimation");
             //BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType(), "BaseVault");
+            //BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType(), "BaseFloorTileType");
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
             BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
-            BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType());
         }
 
         private string MakeIdentifier(string s)
@@ -12012,6 +12012,20 @@ namespace AngbandOS
                                     {
                                         AttackType value = (AttackType)desiredProperty.GetValue(entity);
                                         tokens[index] = $"AttackType.{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "FloorTileAlterAction":
+                                    {
+                                        FloorTileAlterAction value = (FloorTileAlterAction)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"FloorTileAlterAction.{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+                                case "FloorTileTypeCategory":
+                                    {
+                                        FloorTileTypeCategory value = (FloorTileTypeCategory)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"FloorTileTypeCategory.{value.ToString()}";
                                         include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
                                         break;
                                     }

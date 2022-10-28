@@ -5,6 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Commands;
+using AngbandOS.Core;
 using AngbandOS.StaticData;
 using System;
 
@@ -20,8 +22,8 @@ namespace AngbandOS
         public GridTile(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            BackgroundFeature = SaveGame.BaseFloorTileTypes["Nothing"];
-            FeatureType = SaveGame.BaseFloorTileTypes["Nothing"];
+            BackgroundFeature = CommandManager.BaseFloorTileTypes["Nothing"];
+            FeatureType = CommandManager.BaseFloorTileTypes["Nothing"];
         }
 
         /// <summary>
@@ -77,12 +79,12 @@ namespace AngbandOS
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public FloorTileType BackgroundFeature;
+        public BaseFloorTileType BackgroundFeature;
 
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public FloorTileType FeatureType;
+        public BaseFloorTileType FeatureType;
 
         /// <summary>
         /// The index of the first item that is in this grid tile
@@ -111,7 +113,7 @@ namespace AngbandOS
 
         public void SetBackgroundFeature(string name)
         {
-            BackgroundFeature = SaveGame.BaseFloorTileTypes[name];
+            BackgroundFeature = CommandManager.BaseFloorTileTypes[name];
         }
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace AngbandOS
         /// <param name="name"> </param>
         public void SetFeature(string name)
         {
-            FeatureType = SaveGame.BaseFloorTileTypes[name];
+            FeatureType = CommandManager.BaseFloorTileTypes[name];
         }
 
         public override string ToString()

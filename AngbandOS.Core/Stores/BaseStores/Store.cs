@@ -468,7 +468,7 @@ namespace AngbandOS
         {
             get
             {
-                string storeName = SaveGame.BaseFloorTileTypes[FeatureType].Description;
+                string storeName = CommandManager.BaseFloorTileTypes[FeatureType].Description;
                 return $"{storeName} ({_owner.MaxCost})";
             }
         }

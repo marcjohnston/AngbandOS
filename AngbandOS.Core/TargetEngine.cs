@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Commands;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
@@ -658,8 +659,8 @@ namespace AngbandOS
                     break;
                 }
                 string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
-                    ? SaveGame.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
-                    : SaveGame.BaseFloorTileTypes[cPtr.FeatureType.AppearAs].Name;
+                    ? CommandManager.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
+                    : CommandManager.BaseFloorTileTypes[cPtr.FeatureType.AppearAs].Name;
                 if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !_level.PlayerCanSeeBold(y, x))
                 {
                     feat = string.Empty;
@@ -669,7 +670,7 @@ namespace AngbandOS
                     string name = "unknown grid";
                     if (feat != string.Empty)
                     {
-                        name = SaveGame.BaseFloorTileTypes[feat].Description;
+                        name = CommandManager.BaseFloorTileTypes[feat].Description;
                         if (s2 != "" && cPtr.FeatureType.BlocksLos)
                         {
                             s2 = "in ";

@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Commands
 { 
-    internal interface ICommand
+    internal interface ICommand // TODO: Convert this to a class
     {
         char Key { get; }
 

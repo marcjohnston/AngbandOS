@@ -1,0 +1,30 @@
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Enumerations;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class ~\_Name\FloorTileType~ : BaseFloorTileType
+{
+    public override char Character => '\Character\';
+    public override Colour Colour => Colour.\Colour\;
+    public override string Name => "\Name\";
+    public override FloorTileAlterAction AlterAction => \AlterAction\;
+    public override string AppearAs => "\AppearAs\";
+    public override bool BlocksLos => \BlocksLos\;
+    public override FloorTileTypeCategory Category => \Category\;
+    public override string Description => "\Description\";
+    public override bool DimsOutsideLOS => \DimsOutsideLOS\;
+    public override bool IsBasicWall => \IsBasicWall\;
+    public override bool IsClosedDoor => \IsClosedDoor\;
+    public override bool IsInteresting => \IsInteresting\;
+    public override bool IsOpenFloor => \IsOpenFloor\;
+    public override bool IsPassable => \IsPassable\;
+    public override bool IsPermanent => \IsPermanent\;
+    public override bool IsShop => \IsShop\;
+    public override bool IsTrap => \IsTrap\;
+    public override bool IsWall => \IsWall\;
+    public override int MapPriority => \MapPriority\;
+    public override bool RunPast => \RunPast\;
+    public override bool YellowInTorchlight => \YellowInTorchlight\;
+}
