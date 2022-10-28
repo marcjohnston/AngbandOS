@@ -49,6 +49,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
+  //@HostListener('window:keydown', ['$event'])
+  //public onKeyDown(event: KeyboardEvent) {
+  //  event.stopImmediatePropagation();
+  //  event.preventDefault();
+  //}
+
   public input(event: Event) {
     if (this.chatConnection !== undefined) {
       const inputElement: HTMLTextAreaElement = event.currentTarget as HTMLTextAreaElement;
