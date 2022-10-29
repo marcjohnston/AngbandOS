@@ -22,6 +22,7 @@ namespace AngbandOS.Commands
         public static Dictionary<string, BaseAnimation> BaseAnimations = new Dictionary<string, BaseAnimation>();
         public static Dictionary<string, BaseVaultType> Base2VaultTypes = new Dictionary<string, BaseVaultType>();
         public static Dictionary<string, BaseFloorTileType> BaseFloorTileTypes = new Dictionary<string, BaseFloorTileType>();
+        public static Dictionary<string, Base2RareItemType> Base2RareItemTypes = new Dictionary<string, Base2RareItemType>();
 
         static CommandManager()
         {
@@ -124,6 +125,13 @@ namespace AngbandOS.Commands
                 {
                     BaseFloorTileType floorTileType = (BaseFloorTileType)Activator.CreateInstance(type);
                     BaseFloorTileTypes.Add(floorTileType.Name, floorTileType);
+                }
+
+                // Load Rare Item Type.
+                if (!type.IsAbstract && typeof(Base2RareItemType).IsAssignableFrom(type))
+                {
+                    Base2RareItemType rareItemType = (Base2RareItemType)Activator.CreateInstance(type);
+                    Base2RareItemTypes.Add(rareItemType.Name, rareItemType);
                 }
             }
         }

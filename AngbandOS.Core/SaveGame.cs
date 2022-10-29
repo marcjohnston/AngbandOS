@@ -11758,8 +11758,8 @@ namespace AngbandOS
         [NonSerialized]
         public Dictionary<string, BaseFixedArtifact> BaseFixedArtifacts;
 
-        [NonSerialized]
-        public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
+        //[NonSerialized]
+        //public Dictionary<string, BaseRareItemType> BaseRareItemTypes;
 
         //[NonSerialized]
         //public Dictionary<string, BaseVaultType> BaseVaultTypes;
@@ -11782,8 +11782,8 @@ namespace AngbandOS
             //BaseAnimations = ReadEntitiesFromCsv(new Animation(), "BaseAnimation");
             //BaseVaultTypes = ReadEntitiesFromCsv(new BaseVaultType(), "BaseVault");
             //BaseFloorTileTypes = ReadEntitiesFromCsv(new FloorTileType(), "BaseFloorTileType");
+            //BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType(), "BaseRareItemType");
             BaseFixedArtifacts = ReadEntitiesFromCsv(new BaseFixedArtifact());
-            BaseRareItemTypes = ReadEntitiesFromCsv(new BaseRareItemType());
         }
 
         private string MakeIdentifier(string s)
@@ -12030,6 +12030,14 @@ namespace AngbandOS
                                         break;
                                     }
 
+                                case "RareItemType":
+                                    {
+                                        Enumerations.RareItemType value = (Enumerations.RareItemType)desiredProperty.GetValue(entity);
+                                        tokens[index] = $"{value.ToString()}";
+                                        include = true; // (value != Colour.White && value != Colour.Background); // Provided by the base class no need to override
+                                        break;
+                                    }
+
                                 //case "AttackEffect":
                                 //    {
                                 //        AttackEffect value = (AttackEffect)desiredProperty.GetValue(entity);
@@ -12047,7 +12055,7 @@ namespace AngbandOS
                             include = false;
                         if (include)
                         {
-                            scaffoldedOutput.Add(output.Replace("~", ""));
+                            scaffoldedOutput.Add(output.Replace("~", "").Replace('Z', '~'));
                         }
                         tokens = output.Split("~");
                         if (tokens.Length > 1)

@@ -9,6 +9,8 @@ using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using AngbandOS.Commands;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {
@@ -17,7 +19,7 @@ namespace AngbandOS
     {
         public RareItemTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseRareItemType> pair in saveGame.BaseRareItemTypes)
+            foreach (KeyValuePair<string, Base2RareItemType> pair in CommandManager.Base2RareItemTypes)
             {
                 Add(pair.Value.RareItemType, new RareItemType(pair.Value));
             }

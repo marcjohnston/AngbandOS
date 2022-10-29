@@ -23,6 +23,7 @@
     <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
+    <None Remove="Data\ScaffoldTemplates\BaseRareItemType.template" />
     <None Remove="Data\ScaffoldTemplates\BaseRingFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseRodFlavour.template" />
     <None Remove="Data\ScaffoldTemplates\BaseScrollFlavour.template" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\BaseFixedartifacts.csv" />
     <EmbeddedResource Include="Data\BaseRareItemTypes.csv" />
+    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseRareItemType.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseFloorTileType.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseVault.template" />
     <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAnimation.template" />
@@ -56,6 +58,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\BaseRareItemTypes\" />
   </ItemGroup>
 
 </Project>
