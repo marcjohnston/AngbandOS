@@ -7,61 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\BaseMonsterRaces\**" />
-    <EmbeddedResource Remove="Data\BaseMonsterRaces\**" />
-    <None Remove="Data\BaseMonsterRaces\**" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <None Remove="Data\BaseFixedartifacts.csv" />
-    <None Remove="Data\BaseRareItemTypes.csv" />
-    <None Remove="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseAnimation.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseFloorTileType.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseItemType.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseMonsterRace.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BasePotionFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseRareItemType.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseRingFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseRodFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseScrollFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseStaffFlavour.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseVault.template" />
-    <None Remove="Data\ScaffoldTemplates\BaseWandFlavour.template" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Data\BaseFixedartifacts.csv" />
-    <EmbeddedResource Include="Data\BaseRareItemTypes.csv" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseRareItemType.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseFloorTileType.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseVault.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAnimation.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMonsterRace.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseProjectileGraphic.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseAmuletFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseMushroomFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseRingFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BasePotionFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseRodFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseScrollFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseStaffFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseWandFlavour.template" />
-    <EmbeddedResource Include="Data\ScaffoldTemplates\BaseItemType.template" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\BaseRareItemTypes\" />
   </ItemGroup>
 
 </Project>

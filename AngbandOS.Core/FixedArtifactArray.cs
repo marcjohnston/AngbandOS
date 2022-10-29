@@ -10,6 +10,8 @@ using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using AngbandOS.Commands;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {
@@ -18,7 +20,7 @@ namespace AngbandOS
     {
         public FixedArtifactArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseFixedArtifact> pair in saveGame.BaseFixedArtifacts)
+            foreach (KeyValuePair<string, Base2FixedArtifact> pair in CommandManager.Base2FixedArtifacts)
             {
                 Add(pair.Value.FixedArtifactID, new FixedArtifact(pair.Value));
             }

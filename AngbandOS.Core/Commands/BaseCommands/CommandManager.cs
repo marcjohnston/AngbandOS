@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.ItemCategories;
+using AngbandOS.StaticData;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -23,6 +24,7 @@ namespace AngbandOS.Commands
         public static Dictionary<string, BaseVaultType> Base2VaultTypes = new Dictionary<string, BaseVaultType>();
         public static Dictionary<string, BaseFloorTileType> BaseFloorTileTypes = new Dictionary<string, BaseFloorTileType>();
         public static Dictionary<string, Base2RareItemType> Base2RareItemTypes = new Dictionary<string, Base2RareItemType>();
+        public static Dictionary<string, Base2FixedArtifact> Base2FixedArtifacts = new Dictionary<string, Base2FixedArtifact>();
 
         static CommandManager()
         {
@@ -132,6 +134,13 @@ namespace AngbandOS.Commands
                 {
                     Base2RareItemType rareItemType = (Base2RareItemType)Activator.CreateInstance(type);
                     Base2RareItemTypes.Add(rareItemType.Name, rareItemType);
+                }
+
+                // Load Fixed Artifacts.
+                if (!type.IsAbstract && typeof(Base2FixedArtifact).IsAssignableFrom(type))
+                {
+                    Base2FixedArtifact fixedArtifact = (Base2FixedArtifact)Activator.CreateInstance(type);
+                    Base2FixedArtifacts.Add(fixedArtifact.Name, fixedArtifact);
                 }
             }
         }

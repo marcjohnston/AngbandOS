@@ -8,6 +8,7 @@
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using System;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {
@@ -38,7 +39,7 @@ namespace AngbandOS
         {
         }
 
-        public FixedArtifact(BaseFixedArtifact baseItem)
+        public FixedArtifact(Base2FixedArtifact baseItem)
         {
             Flags1 = new FlagSet();
             Flags2 = new FlagSet();
