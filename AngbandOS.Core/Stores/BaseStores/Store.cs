@@ -9,10 +9,10 @@ using AngbandOS.Commands;
 using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
 using AngbandOS.Spells;
-using AngbandOS.StaticData;
 using AngbandOS.StoreCommands;
 using AngbandOS.Stores;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {

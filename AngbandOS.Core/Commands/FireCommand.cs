@@ -2,6 +2,7 @@
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core;
 
 namespace AngbandOS.Commands
 {

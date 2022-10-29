@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Projection;
 using AngbandOS.Enumerations;
+using AngbandOS.Core;
 
 namespace AngbandOS.StaticData
 {

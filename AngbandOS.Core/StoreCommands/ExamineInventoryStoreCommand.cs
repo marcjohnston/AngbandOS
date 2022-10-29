@@ -1,5 +1,5 @@
 ﻿using AngbandOS.Commands;
-using AngbandOS.StaticData;
+using AngbandOS.Core;
 using System;
 
 namespace AngbandOS.StoreCommands

@@ -1,5 +1,5 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
+﻿using AngbandOS.Core;
+using AngbandOS.Enumerations;
 using System;
 
 namespace AngbandOS.ActivationPowers

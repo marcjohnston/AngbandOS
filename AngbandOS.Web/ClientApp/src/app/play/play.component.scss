@@ -4,10 +4,21 @@
   display: flex;
   flex-direction: column;
 
-  & #horizontal-panes {
-    height: 100%;
+  & #vertical-panes {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-self: center;
+
+    & #macros-div {
+      display: flex;
+      flex-direction: row;
+
+      & .macro {
+        flex-grow: 1;
+        height: 2rem;
+        margin-bottom: 5px;
+      }
+    }
   }
 
   & #left-pane {
@@ -22,7 +33,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
 
     & canvas {
       background-color: black;

@@ -1,11 +1,11 @@
 ﻿using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
 using System;
 using static AngbandOS.Extensions;
 using AngbandOS.ArtifactBiases;
 using System.IO;
 using System.ComponentModel;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core;
 
 namespace AngbandOS.ItemCategories
 {

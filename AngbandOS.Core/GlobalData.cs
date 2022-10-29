@@ -8,7 +8,7 @@
 using AngbandOS.Enumerations;
 using System.Collections.Generic;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core
 {
     internal static class GlobalData
     {

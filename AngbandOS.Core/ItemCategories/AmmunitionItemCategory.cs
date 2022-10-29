@@ -1,4 +1,4 @@
-﻿using AngbandOS.StaticData;
+﻿using AngbandOS.Core;
 
 namespace AngbandOS.ItemCategories
 {

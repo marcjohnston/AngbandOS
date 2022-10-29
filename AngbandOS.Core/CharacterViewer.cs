@@ -7,8 +7,8 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
 using AngbandOS.Spells;
-using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {

@@ -1,6 +1,6 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core;
+using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
 using System;
 using static AngbandOS.Extensions;
 

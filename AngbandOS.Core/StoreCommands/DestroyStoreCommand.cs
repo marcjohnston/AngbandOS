@@ -1,6 +1,6 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
 using System;
 
 namespace AngbandOS.StoreCommands

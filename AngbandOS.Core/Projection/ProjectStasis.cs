@@ -8,6 +8,7 @@
 using AngbandOS.Enumerations;
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core;
 
 namespace AngbandOS.Projection
 {

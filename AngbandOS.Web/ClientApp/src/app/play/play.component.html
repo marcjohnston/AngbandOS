@@ -1,9 +1,21 @@
 <div id="container">
-  <div id="horizontal-panes">
-    <div id="left-pane"></div>
-    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
-      <canvas #console></canvas>
-    </div>
-    <div id="right-pane"></div>
+    <div id="vertical-panes">
+      <div id="macros-div">
+        <button class="macro">F1</button>
+        <button class="macro">F2</button>
+        <button class="macro">F3</button>
+        <button class="macro">F4</button>
+        <button class="macro">F5</button>
+        <button class="macro">F6</button>
+        <button class="macro">F7</button>
+        <button class="macro">F8</button>
+        <button class="macro">F9</button>
+        <button class="macro">F10</button>
+        <button class="macro">F11</button>
+        <button class="macro">F12</button>
+      </div>
+      <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
+        <canvas #console></canvas>
+      </div>
   </div>
 </div>

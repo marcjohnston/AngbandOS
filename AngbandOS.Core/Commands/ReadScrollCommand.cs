@@ -1,6 +1,6 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core;
+using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using AngbandOS.StaticData;
 using System;
 
 namespace AngbandOS.Commands

@@ -13,6 +13,7 @@ using AngbandOS.StaticData;
 using AngbandOS.Pantheon;
 using System;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core;
 
 namespace AngbandOS
 {

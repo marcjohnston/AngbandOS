@@ -1,8 +1,8 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core;
 
 namespace AngbandOS.Commands
 {

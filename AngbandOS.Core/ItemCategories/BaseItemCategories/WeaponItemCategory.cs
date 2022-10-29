@@ -1,6 +1,6 @@
 ﻿using AngbandOS.ArtifactBiases;
+using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
 using System;
 using System.Reflection.Emit;
 using static AngbandOS.Extensions;

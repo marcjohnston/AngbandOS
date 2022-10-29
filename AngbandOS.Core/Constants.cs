@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core
 {
     internal static class Constants
     {
@@ -218,7 +218,7 @@ namespace AngbandOS.StaticData
         public const int TextWLowSize = 98;
         public const int TextWMedSize = 106;
         public const int TurnsInADay = 108000;
-        public const int TurnsInAHalfDay = (TurnsInADay / 2);
+        public const int TurnsInAHalfDay = TurnsInADay / 2;
         public const int UseDevice = 3;
         public const int ViewMax = 1536;
         public const int WeirdLuck = 12;

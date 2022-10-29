@@ -1,5 +1,5 @@
+using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
 
 namespace AngbandOS.ItemCategories
 {
