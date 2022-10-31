@@ -16,5 +16,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 1;
         public override int? SubCategory => 51;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            eventArgs.SaveGame.MsgPrint("There is message on the scroll. It says:");
+            eventArgs.SaveGame.MsgPrint(null);
+            eventArgs.SaveGame.GetRumour();
+            eventArgs.Identified = true;
+        }
     }
 }

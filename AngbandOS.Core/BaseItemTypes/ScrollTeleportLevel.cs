@@ -16,5 +16,10 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 20;
         public override int? SubCategory => 10;
         public override int Weight => 5;
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            eventArgs.SaveGame.TeleportPlayerLevel();
+            eventArgs.Identified = true;
+        }
     }
 }

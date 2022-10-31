@@ -211,15 +211,5 @@ namespace AngbandOS.Core
             "with significant treasure.", "there's not much of value here.",
             "with nothing of worth.", "what meagre pickings..."
         };
-
-        public static void PopulateNewProfile(SaveGame saveGame)
-        {
-            saveGame.FixedArtifacts = new FixedArtifactArray(saveGame);
-            saveGame.MonsterRaces = new MonsterRaceArray(saveGame);
-            saveGame.MonsterRaces.AddKnowledge();
-            saveGame.RareItemTypes = new RareItemTypeArray(saveGame);
-            saveGame.ItemTypes = new ItemTypeArray(saveGame);
-            saveGame.VaultTypes = new VaultTypeArray(saveGame);
-        }
     }
 }

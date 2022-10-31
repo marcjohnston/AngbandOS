@@ -41,5 +41,7 @@ namespace AngbandOS.ItemCategories
             }
             return 0;
         }
+
+        public abstract void Read(ReadScrollEvent eventArgs);
     }
 }

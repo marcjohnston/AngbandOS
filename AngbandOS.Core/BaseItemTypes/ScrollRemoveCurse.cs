@@ -20,5 +20,14 @@ namespace AngbandOS.ItemCategories
         public override int Locale3 => 40;
         public override int? SubCategory => 14;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.RemoveCurse())
+            {
+                eventArgs.SaveGame.MsgPrint("You feel as if someone is watching over you.");
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

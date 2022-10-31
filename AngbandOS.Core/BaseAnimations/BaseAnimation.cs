@@ -18,36 +18,6 @@ namespace AngbandOS.Core
         public abstract Colour AlternateColour { get; }
         public abstract string Sequence { get; }
 
-        public void Animate(SaveGame saveGame, Level level, int y, int x)
-        {
-            int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
-            bool drawn = false;
-            bool oddFrame = true;
-            foreach (char character in Sequence)
-            {
-                if (level.PlayerHasLosBold(y, x) && level.PanelContains(y, x))
-                {
-                    Colour colour = oddFrame ? Colour : AlternateColour;
-                    level.PrintCharacterAtMapLocation(character, colour, y, x);
-                    drawn = true;
-                }
-                if (drawn)
-                {
-                    saveGame.UpdateScreen();
-                    saveGame.Pause(msec);
-                }
-                oddFrame = !oddFrame;
-            }
-            if (drawn)
-            {
-                if (level.PlayerHasLosBold(y, x) && level.PanelContains(y, x))
-                {
-                    level.RedrawSingleLocation(y, x);
-                }
-                saveGame.UpdateScreen();
-            }
-        }
-
         public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
         {
             int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;

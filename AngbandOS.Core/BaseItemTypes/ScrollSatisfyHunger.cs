@@ -1,3 +1,4 @@
+using AngbandOS.Core;
 using AngbandOS.Enumerations;
 using System;
 
@@ -22,5 +23,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale4 => 75;
         public override int? SubCategory => 32;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.Player.SetFood(Constants.PyFoodMax - 1))
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

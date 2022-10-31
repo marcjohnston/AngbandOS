@@ -11,7 +11,7 @@ namespace AngbandOS.ItemCategories
 {
     [Serializable]
 
-    internal abstract class BaseItemCategory : IItemCategory
+    internal abstract class BaseItemCategory
     {
         /// <summary>
         /// Returns true, if the object type has flavors.  Returns false, by default.
@@ -244,14 +244,23 @@ namespace AngbandOS.ItemCategories
         /// </summary>
         public virtual ItemCategory CategoryEnum { get; }
 
-        public BaseItemCategory()
-        {
-        }
-
+        /// <summary>
+        /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
+        /// </summary>
         public virtual bool CanVorpalSlay => false;
 
+        /// <summary>
+        /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual bool CanApplySlayingBonus => false;
 
+        /// <summary>
+        /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual bool IsStompable(Item item)
         {
             if (item.ItemType.HasQuality())
@@ -285,6 +294,11 @@ namespace AngbandOS.ItemCategories
 
         //    public virtual bool CanSlay => false;
 
+        /// <summary>
+        /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual int GetAdditionalMassProduceCount(Item item) => 0;
 
         protected int MassRoll(int num, int max)
@@ -453,12 +467,24 @@ namespace AngbandOS.ItemCategories
             }
         }
 
+        /// <summary>
+        /// Returns a description for the item.  Returns a macro processed description, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
+        /// occur when the count is not included.</param>
+        /// <returns></returns>
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
             string pluralizedName = ApplyPlurizationMacro(item.ItemType.Name, item.Count);
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual string GetDetailedDescription(Item item)
         {
             string s = "";
@@ -495,6 +521,12 @@ namespace AngbandOS.ItemCategories
             return s;
         }
 
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the detailed description, when needed.  
+        /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual string GetVerboseDescription(Item item)
         {
             string s = "";
@@ -548,6 +580,12 @@ namespace AngbandOS.ItemCategories
             return s;
         }
 
+        /// <summary>
+        /// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  
+        /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual string GetFullDescription(Item item)
         {
             string tmpVal2 = "";
@@ -579,6 +617,11 @@ namespace AngbandOS.ItemCategories
             return tmpVal2;
         }
 
+        /// <summary>
+        /// Gets an additional bonus gold real value associated with the item.  Returns a type specific value by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual int GetBonusRealValue(Item item, int value) => 0;
 
         protected int GetTypeSpecificValue(Item item, int value)
@@ -644,20 +687,49 @@ namespace AngbandOS.ItemCategories
             return bonusValue;
         }
 
+        /// <summary>
+        /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
+        /// </summary>
         public virtual bool IsWorthless(Item item) => false;
 
+        /// <summary>
+        /// Returns a description of the items' activation.  Returns null by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual string DescribeActivationEffect(Item item)
         {
             return null;
         }
 
+        /// <summary>
+        /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
+        /// </summary>
         public virtual string Identify(Item item) => null;
 
+        /// <summary>
+        /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
+        /// </summary>
         public virtual int BaseValue => 0;
+
+        /// <summary>
+        /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
+        /// </summary>
         public virtual bool HatesElectricity => false;
+
+        /// <summary>
+        /// Returns true, if the item is susceptible to fire.  Returns false, by default.
+        /// </summary>
         public virtual bool HatesFire => false;
+
+        /// <summary>
+        /// Returns true, if the item is susceptible to acid.  Returns false, by default.
+        /// </summary>
         public virtual bool HatesAcid => false;
 
+        /// <summary>
+        /// Returns true, if the item is susceptible to cold.  Returns false, by default.
+        /// </summary>
         public virtual bool HatesCold => false;
 
         //    public virtual bool IgnoredByMonsters => false;
@@ -666,12 +738,24 @@ namespace AngbandOS.ItemCategories
 
         //    public virtual bool CanBeConsumed => false;
 
+        /// <summary>
+        /// Returns the realm a spellbook belongs to.  Returns Realm.None by default for non-book objects.
+        /// </summary>
         public virtual Realm SpellBookToToRealm => Realm.None;
 
+        /// <summary>
+        /// Applies magic to the item.  Does nothing, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
         public virtual void ApplyMagic(Item item, int level, int power)
         {
         }
 
+        /// <summary>
+        /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
+        /// </summary>
         public virtual bool CanAbsorb(Item item, Item other)
         {
             if (!item.IsKnown() || !other.IsKnown())
@@ -681,27 +765,63 @@ namespace AngbandOS.ItemCategories
             return true;
         }
 
+        /// <summary>
+        /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.
+        /// </summary>
         public virtual bool CanProvideSheathOfElectricity => false;
 
+        /// <summary>
+        /// Returns true, if the item can provide a sheath of fire.  Returns false, by default.  Cloaks, soft and hard armor return true.
+        /// </summary>
         public virtual bool CanProvideSheathOfFire => false;
 
+        /// <summary>
+        /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
+        /// </summary>
         public virtual bool CanReflectBoltsAndArrows => false;
 
+        /// <summary>
+        /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armour returns double the default.
+        /// </summary>
         public virtual int RandartActivationChance => Constants.ActivationChance;
 
+        /// <summary>
+        /// Applies an additional bonus to random artifacts.  Does nothing by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public virtual void ApplyRandartBonus(Item item)
         {
         }
 
+        /// <summary>
+        /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
+        /// </summary>
         public virtual int MakeObjectCount => 1;
 
+        /// <summary>
+        /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
+        /// </summary>
         public virtual bool GetsDamageMultiplier => false;
 
+        /// <summary>
+        /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
+        /// </summary>
         public virtual int PercentageBreakageChance => 10;
 
+        /// <summary>
+        /// Returns true, if the item can apply a bonus armour class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+        /// </summary>
         public virtual bool CanApplyBonusArmourClassMiscPower => false;
 
+        /// <summary>
+        /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
+        /// </summary>
         public virtual bool CanApplyBlowsBonus => false;
+
+        /// <summary>
+        /// Returns true, if the item can apply a tunnel bonus.  Only weapons, return true.  Returns false, by default.
+        /// </summary>
         public virtual bool CanApplyTunnelBonus => false;
 
         protected int GetBonusValue(int max, int level)

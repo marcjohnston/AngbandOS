@@ -14,5 +14,13 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Object Detection";
         public override int? SubCategory => 27;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.DetectObjectsNormal())
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

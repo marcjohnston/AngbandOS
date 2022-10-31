@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -17,5 +18,15 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 75;
         public override int? SubCategory => 49;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            eventArgs.SaveGame.FireBall(new ProjectIce(eventArgs.SaveGame), 0, 175, 4);
+            if (!(eventArgs.SaveGame.Player.TimedColdResistance != 0 || eventArgs.SaveGame.Player.HasColdResistance || eventArgs.SaveGame.Player.HasColdImmunity))
+            {
+                eventArgs.SaveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
+            }
+            eventArgs.Identified = true;
+        }
     }
 }

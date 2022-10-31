@@ -20,5 +20,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale3 => 40;
         public override int? SubCategory => 6;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            var patron = eventArgs.SaveGame.PatronList[Program.Rng.DieRoll(eventArgs.SaveGame.PatronList.Length) - 1];
+            eventArgs.SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
+            patron.GetReward(eventArgs.SaveGame);
+            eventArgs.Identified = true;
+        }
     }
 }

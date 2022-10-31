@@ -16,5 +16,15 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 5;
         public override int? SubCategory => 36;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (!eventArgs.SaveGame.Player.HasConfusingTouch)
+            {
+                eventArgs.SaveGame.MsgPrint("Your hands begin to glow.");
+                eventArgs.SaveGame.Player.HasConfusingTouch = true;
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

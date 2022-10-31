@@ -16,5 +16,13 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 10;
         public override int? SubCategory => 39;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.DestroyDoorsTouch())
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

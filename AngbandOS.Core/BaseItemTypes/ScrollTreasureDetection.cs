@@ -14,5 +14,17 @@ namespace AngbandOS.ItemCategories
         public override string FriendlyName => "Treasure Detection";
         public override int? SubCategory => 26;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.DetectTreasure())
+            {
+                eventArgs.Identified = true;
+            }
+            if (eventArgs.SaveGame.DetectObjectsGold())
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

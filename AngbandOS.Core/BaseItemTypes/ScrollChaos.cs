@@ -1,4 +1,5 @@
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System;
 
 namespace AngbandOS.ItemCategories
@@ -20,5 +21,15 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 100;
         public override int? SubCategory => 50;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            eventArgs.SaveGame.FireBall(new ProjectChaos(eventArgs.SaveGame), 0, 222, 4);
+            if (!eventArgs.SaveGame.Player.HasChaosResistance)
+            {
+                eventArgs.SaveGame.Player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");
+            }
+            eventArgs.Identified = true;
+        }
     }
 }

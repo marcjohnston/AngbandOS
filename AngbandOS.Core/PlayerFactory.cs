@@ -1918,8 +1918,7 @@ namespace AngbandOS
             if (_player.RaceIndex == RaceId.Golem || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Zombie ||
                 _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
             {
-                item.AssignItemType(
-                    SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
+                item.AssignItemType(SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.SatisfyHunger));
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -1939,8 +1938,7 @@ namespace AngbandOS
             if (_player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre ||
                 _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
-                item.AssignItemType(
-                    SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
+                item.AssignItemType(SaveGame.ItemTypes.LookupKind(ItemCategory.Scroll, ScrollType.Light));
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();

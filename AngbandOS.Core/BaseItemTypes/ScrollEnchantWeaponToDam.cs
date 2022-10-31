@@ -16,5 +16,14 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 15;
         public override int? SubCategory => 18;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            if (!eventArgs.SaveGame.EnchantSpell(0, 1, 0))
+            {
+                eventArgs.UsedUp = false;
+            }
+            eventArgs.Identified = true;
+        }
     }
 }

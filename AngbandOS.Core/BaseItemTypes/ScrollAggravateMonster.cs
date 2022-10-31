@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Diagnostics.Tracing;
 
 namespace AngbandOS.ItemCategories
 {
@@ -15,5 +16,12 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 5;
         public override int? SubCategory => 1;
         public override int Weight => 5;
+
+        public override void Read(ReadScrollEvent eventArgs)
+        {
+            eventArgs.SaveGame.MsgPrint("There is a high pitched humming noise.");
+            eventArgs.SaveGame.AggravateMonsters(1);
+            eventArgs.Identified = true;
+        }
     }
 }

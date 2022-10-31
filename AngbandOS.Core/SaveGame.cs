@@ -145,7 +145,17 @@ namespace AngbandOS
         private string[][] _keymapAct;
         private string _requestCommandBuffer;
         /// GUI
-        
+
+        private void PopulateNewProfile()
+        {
+            FixedArtifacts = new FixedArtifactArray(this);
+            MonsterRaces = new MonsterRaceArray(this);
+            MonsterRaces.AddKnowledge();
+            RareItemTypes = new RareItemTypeArray(this);
+            ItemTypes = new ItemTypeArray(this);
+            VaultTypes = new VaultTypeArray(this);
+        }
+
         /// <summary>
         /// Creates a new game.
         /// </summary>
@@ -153,7 +163,7 @@ namespace AngbandOS
         {
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
-            GlobalData.PopulateNewProfile(this);
+            PopulateNewProfile();
             Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
