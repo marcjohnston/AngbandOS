@@ -20,7 +20,5 @@ namespace AngbandOS.ItemCategories
             }
             return 0;
         }
-
-        public override bool KindIsGood => (SubCategory >= ItemSubCategory.SvBookMinGood);
     }
 }
