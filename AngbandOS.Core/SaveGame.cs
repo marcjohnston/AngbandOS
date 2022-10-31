@@ -19,6 +19,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.CompilerServices;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS
 {
@@ -1222,8 +1223,9 @@ namespace AngbandOS
         public void OpenChest(int y, int x, int oIdx)
         {
             Item oPtr = Level.Items[oIdx];
-            bool small = oPtr.ItemSubCategory < ItemSubCategory.SvChestMinLarge;
-            int number = oPtr.ItemSubCategory % ItemSubCategory.SvChestMinLarge * 2;
+            ChestItemCategory chest = (ChestItemCategory)oPtr.ItemType.BaseCategory;
+            bool small = chest.IsSmall;
+            int number = chest.NumberOfItemsContained;
             if (oPtr.TypeSpecificValue == 0)
             {
                 number = 0;

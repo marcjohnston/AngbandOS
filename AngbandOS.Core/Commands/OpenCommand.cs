@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AngbandOS.ItemCategories;
+using System;
 
 namespace AngbandOS.Commands
 {
@@ -66,6 +67,5 @@ namespace AngbandOS.Commands
                 saveGame.Disturb(false);
             }
         }
-
     }
 }
