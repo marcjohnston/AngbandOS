@@ -42,7 +42,7 @@ namespace AngbandOS.ItemCategories
             {
                 switch (GlobalData.ChestTraps[item.TypeSpecificValue])
                 {
-                    case 0:
+                    case ChestTrap.ChestNotTrapped:
                         {
                             return item.ItemType.Stompable[StompableType.Good];
                         }
@@ -66,7 +66,7 @@ namespace AngbandOS.ItemCategories
             }
             else if (item.TypeSpecificValue < 0)
             {
-                if (GlobalData.ChestTraps[-item.TypeSpecificValue] != 0)
+                if (GlobalData.ChestTraps[-item.TypeSpecificValue] != ChestTrap.ChestNotTrapped)
                 {
                     s += " (disarmed)";
                 }
@@ -79,7 +79,7 @@ namespace AngbandOS.ItemCategories
             {
                 switch (GlobalData.ChestTraps[item.TypeSpecificValue])
                 {
-                    case 0:
+                    case ChestTrap.ChestNotTrapped:
                         {
                             s += " (Locked)";
                             break;
@@ -126,6 +126,12 @@ namespace AngbandOS.ItemCategories
             return s;
         }
 
+        /// <summary>
+        /// Assigns the TypeSpecificValue for this chest.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (item.ItemType.Level > 0)
@@ -133,7 +139,7 @@ namespace AngbandOS.ItemCategories
                 item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.Level);
                 if (item.TypeSpecificValue > 55)
                 {
-                    item.TypeSpecificValue = (short)(55 + Program.Rng.RandomLessThan(5));
+                    item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(5));
                 }
             }
         }

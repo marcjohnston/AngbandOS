@@ -966,7 +966,7 @@ namespace AngbandOS.Commands
                         saveGame.UpdateScreen();
                     }
                     Item qPtr = new Item(saveGame);
-                    qPtr.MakeObject(good, great);
+                    qPtr.MakeObject(good, great, false);
                     if (qPtr.IsFixedArtifact())
                     {
                         saveGame.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;

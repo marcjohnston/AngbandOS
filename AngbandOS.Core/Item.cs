@@ -343,26 +343,24 @@ namespace AngbandOS
             ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
-        public void AssignItemType(ItemType kIdx)
+        public void AssignItemType(ItemType itemType)
         {
-            ItemType kPtr = kIdx;
-            ItemType = kIdx;
-//            BaseCategory = BaseItemCategory.CreateFromEnum(kPtr.Category);
-            ItemSubCategory = kPtr.SubCategory ?? 0;
-            TypeSpecificValue = kPtr.Pval;
+            ItemType = itemType;
+            ItemSubCategory = itemType.SubCategory ?? 0;
+            TypeSpecificValue = itemType.Pval;
             Count = 1;
-            Weight = kPtr.Weight;
-            BonusToHit = kPtr.ToH;
-            BonusDamage = kPtr.ToD;
-            BonusArmourClass = kPtr.ToA;
-            BaseArmourClass = kPtr.Ac;
-            DamageDice = kPtr.Dd;
-            DamageDiceSides = kPtr.Ds;
-            if (kPtr.Cost <= 0)
+            Weight = itemType.Weight;
+            BonusToHit = itemType.ToH;
+            BonusDamage = itemType.ToD;
+            BonusArmourClass = itemType.ToA;
+            BaseArmourClass = itemType.Ac;
+            DamageDice = itemType.Dd;
+            DamageDiceSides = itemType.Ds;
+            if (itemType.Cost <= 0)
             {
                 IdentifyFlags.Set(Constants.IdentBroken);
             }
-            if (kPtr.Flags3.IsSet(ItemFlag3.Cursed))
+            if (itemType.Flags3.IsSet(ItemFlag3.Cursed))
             {
                 IdentifyFlags.Set(Constants.IdentCursed);
             }
@@ -895,7 +893,7 @@ namespace AngbandOS
                 }
                 else if (TypeSpecificValue < 0)
                 {
-                    if (GlobalData.ChestTraps[-TypeSpecificValue] != 0)
+                    if (GlobalData.ChestTraps[-TypeSpecificValue] != ChestTrap.ChestNotTrapped)
                     {
                         t += " (disarmed)";
                     }
@@ -3614,7 +3612,7 @@ namespace AngbandOS
             }
         }
 
-        public bool MakeObject(bool good, bool great)
+        public bool MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
         {
             int prob = good ? 10 : 1000;
             int baselevel = good ? SaveGame.Level.ObjectLevel + 10 : SaveGame.Level.ObjectLevel;
@@ -3624,7 +3622,7 @@ namespace AngbandOS
                 {
                     PrepareAllocationTable(ItemType.KindIsGood);
                 }
-                ItemType kIdx = ItemType.RandomItemType(SaveGame, baselevel);
+                ItemType kIdx = ItemType.RandomItemType(SaveGame, baselevel, doNotAllowChestToBeCreated);
                 if (good)
                 {
                     PrepareAllocationTable(null);

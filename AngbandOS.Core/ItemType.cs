@@ -31,7 +31,9 @@ namespace AngbandOS
         /// Use StompableType enum to address each index.
         /// </summary>
         public readonly bool[] Stompable = new bool[4];
+
         public readonly int Ac;
+
         /// <summary>
         /// Provided for backwards compatability.  Will be deleted.  Provides access to the ItemCategory enumerable.
         /// </summary>
@@ -56,6 +58,10 @@ namespace AngbandOS
         public bool HasFlavor;
         public readonly int Level;
         public readonly string Name;
+
+        /// <summary>
+        /// This Pval value is copied into the TypeSpecificValue for the item.  This may be the default value ... maybe 0.
+        /// </summary>
         public readonly int Pval;
 
         /// <summary>
@@ -192,7 +198,7 @@ namespace AngbandOS
             return kPtr.BaseCategory.KindIsGood;
         }
 
-        public static ItemType RandomItemType(SaveGame saveGame, int level)
+        public static ItemType RandomItemType(SaveGame saveGame, int level, bool doNotAllowChestToBeCreated)
         {
             int i;
             int j;
@@ -214,8 +220,7 @@ namespace AngbandOS
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
                 ItemType kPtr = saveGame.ItemTypes[kIdx];
-                if (saveGame.Level?.OpeningChest == true &&
-                    kPtr.Category == ItemCategory.Chest)
+                if (doNotAllowChestToBeCreated && kPtr.Category == ItemCategory.Chest)
                 {
                     continue;
                 }
@@ -273,6 +278,10 @@ namespace AngbandOS
             return saveGame.ItemTypes[table[i].Index];
         }
 
+        /// <summary>
+        /// Returns true, for item categories that are good.  Armour, weapons and orbs of light return true.  All others types return false.
+        /// </summary>
+        /// <returns></returns>
         public bool HasQuality()
         {
             switch (Category)

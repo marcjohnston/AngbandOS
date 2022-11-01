@@ -1145,14 +1145,14 @@ namespace AngbandOS
                 {
                     if (!quest || j > 1)
                     {
-                        if (!qPtr.MakeObject(good, great))
+                        if (!qPtr.MakeObject(good, great, false))
                         {
                             continue;
                         }
                     }
                     else
                     {
-                        if (!qPtr.MakeObject(true, true))
+                        if (!qPtr.MakeObject(true, true, false))
                         {
                             continue;
                         }
@@ -1230,7 +1230,6 @@ namespace AngbandOS
             {
                 number = 0;
             }
-            Level.OpeningChest = true;
             Level.ObjectLevel = Math.Abs(oPtr.TypeSpecificValue) + 10;
             for (; number > 0; --number)
             {
@@ -1244,7 +1243,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    if (!qPtr.MakeObject(false, false))
+                    if (!qPtr.MakeObject(false, false, true))
                     {
                         continue;
                     }
@@ -1252,7 +1251,6 @@ namespace AngbandOS
                 Level.DropNear(qPtr, -1, y, x);
             }
             Level.ObjectLevel = Difficulty;
-            Level.OpeningChest = false;
             oPtr.TypeSpecificValue = 0;
             oPtr.BecomeKnown();
         }
@@ -7382,7 +7380,7 @@ namespace AngbandOS
                     continue;
                 }
                 // If we're only interested in trapped chests, skip those that aren't
-                if (trappedOnly && (!item.IsKnown() || GlobalData.ChestTraps[item.TypeSpecificValue] == 0))
+                if (trappedOnly && (!item.IsKnown() || GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped))
                 {
                     continue;
                 }
@@ -7664,7 +7662,7 @@ namespace AngbandOS
                 MsgPrint("The chest is not trapped.");
             }
             // If it has a null trap then there's nothing to disarm
-            else if (GlobalData.ChestTraps[item.TypeSpecificValue] == 0)
+            else if (GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped)
             {
                 MsgPrint("The chest is not trapped.");
             }
@@ -9118,7 +9116,7 @@ namespace AngbandOS
                             {
                                 continue;
                             }
-                            if (GlobalData.ChestTraps[item.TypeSpecificValue] == 0)
+                            if (GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped)
                             {
                                 continue;
                             }

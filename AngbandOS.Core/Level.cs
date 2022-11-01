@@ -40,7 +40,7 @@ namespace AngbandOS
         public int ObjectLevel;
         public int OCnt;
         public int OMax = 1;
-        public bool OpeningChest;
+
         public int PanelCol;
         public int PanelColMax;
         public int PanelColMin;
@@ -98,7 +98,7 @@ namespace AngbandOS
             while (num-- != 0)
             {
                 Item qPtr = new Item(SaveGame);
-                if (!qPtr.MakeObject(true, great))
+                if (!qPtr.MakeObject(true, great, false))
                 {
                     continue;
                 }
@@ -1180,7 +1180,7 @@ namespace AngbandOS
                 return;
             }
             Item qPtr = new Item(SaveGame);
-            if (!qPtr.MakeObject(good, great))
+            if (!qPtr.MakeObject(good, great, false))
             {
                 return;
             }
