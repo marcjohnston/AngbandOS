@@ -75,9 +75,13 @@ export class PlayComponent implements OnInit, OnDestroy {
           case "Backspace":
             this.connection.send("keypressed", '\x08');
             break;
+
+          // The following keys are stubbed so that they do not emit undesired characters into the game.
           case "Control":
           case "Alt":
           case "Shift":
+          case "Delete":
+          case "Insert":
           case "F1":
           case "F2":
           case "F3":
@@ -161,11 +165,13 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Ensure the canvas element is available.
     if (this.canvasRef === undefined) {
       // If there is no canvas defined, log an error.
       console.log("Cannot play game.  Canvas missing!");
       this._router.navigate(['/']);
     } else {
+      // Create an HTML console module to handle all of the interaction.
       this._htmlConsole = new HtmlConsole(this.canvasRef);
 
       // Wait for the authentication.  Games can only be played with authenticated.
@@ -189,6 +195,8 @@ export class PlayComponent implements OnInit, OnDestroy {
           }).build();
           this.check();
         }
+
+        // Grab a copy of the users preferences.
       }));
 
       // Retrieve the game guid from the query.

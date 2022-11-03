@@ -57,6 +57,32 @@ namespace AngbandOS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public TimeSpan? ElapsedGameTime
+        {
+            get
+            {
+                if (saveGame?.Player?.GameTime == null)
+                    return null;
+                return saveGame.Player.GameTime.ElapsedGameTime;
+            }
+        }
+
+        /// <summary>
+        /// Returns the date and time when the last input was received from the user.  Returns null, until the game is started.
+        /// </summary>
+        public DateTime? LastInputReceived
+        {
+            get
+            {
+                if (saveGame?.LastInputReceived == null)
+                    return null;
+                return saveGame.LastInputReceived;
+            }
+        }
+
         public void Refresh(IConsole console)
         {
             saveGame.Refresh(console);

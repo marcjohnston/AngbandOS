@@ -891,15 +891,9 @@ namespace AngbandOS
         private void GetAhw()
         {
             _player.Age = _player.Race.BaseAge + Program.Rng.DieRoll(_player.Race.AgeRange);
-            if (_player.RaceIndex == RaceId.Spectre || _player.RaceIndex == RaceId.Zombie ||
-            _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Vampire)
-            {
-                _player.GameTime = new GameTime(Program.Rng.DieRoll(365), true);
-            }
-            else
-            {
-                _player.GameTime = new GameTime(Program.Rng.DieRoll(365), false);
-            }
+            bool startAtDusk = (_player.RaceIndex == RaceId.Spectre || _player.RaceIndex == RaceId.Zombie || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Vampire);
+            _player.GameTime = new GameTime(SaveGame, Program.Rng.DieRoll(365), startAtDusk);
+
             if (_player.GenderIndex == Constants.SexMale)
             {
                 _player.Height = Program.Rng.RandomNormal(_player.Race.MaleBaseHeight, _player.Race.MaleHeightRange);

@@ -28,6 +28,16 @@
         public int? Gold { get; set; }
 
         /// <summary>
+        /// Returns the amount of game time that has elapsed.
+        /// </summary>
+        public TimeSpan? ElapsedGameTime { get; set; }
+
+        /// <summary>
+        /// Returns the date and time that input was last received by the player.  Null, before the game has started.
+        /// </summary>
+        public DateTime? LastInputReceived { get; set; }
+
+        /// <summary>
         /// Returns the character name of the player or null, if the player is dead.
         /// </summary>
         public string? CharacterName { get; set; }

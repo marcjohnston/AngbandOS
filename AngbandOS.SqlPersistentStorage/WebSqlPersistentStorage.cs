@@ -2,6 +2,7 @@
 using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace AngbandOS.PersistentStorage
 {
@@ -21,6 +22,80 @@ namespace AngbandOS.PersistentStorage
             ConnectionString = configuration["ConnectionString"];
         }
 
+        public async Task<UserSettingsDetails?> GetPreferences(string userId)
+        {
+            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            {
+                UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
+                if (userSetting == null)
+                    return null;
+                return new UserSettingsDetails
+                {
+                    FontName = userSetting.FontName,
+                    FontSize = userSetting.FontSize,
+                    F1Macro = userSetting.F1macro,
+                    F2Macro = userSetting.F2macro,
+                    F3Macro = userSetting.F3macro,
+                    F4Macro = userSetting.F4macro,
+                    F5Macro = userSetting.F5macro,
+                    F6Macro = userSetting.F6macro,
+                    F7Macro = userSetting.F7macro,
+                    F8Macro = userSetting.F8macro,
+                    F9Macro = userSetting.F9macro,
+                    F10Macro = userSetting.F10macro,
+                    F11Macro = userSetting.F11macro,
+                    F12Macro = userSetting.F12macro
+                };
+            }
+        }
+
+        public async Task<UserSettingsDetails> WritePreferences(string userId, UserSettingsDetails userSettingsDetails)
+        {
+            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            {
+                UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
+                if (userSetting == null)
+                {
+                    userSetting = new UserSetting();
+                    context.UserSettings.Add(userSetting);
+                }
+                userSetting.FontName = userSettingsDetails.FontName;
+                userSetting.FontSize = userSettingsDetails.FontSize;
+                userSetting.F1macro = userSettingsDetails.F1Macro;
+                userSetting.F2macro = userSettingsDetails.F2Macro;
+                userSetting.F3macro = userSettingsDetails.F3Macro;
+                userSetting.F4macro = userSettingsDetails.F4Macro;
+                userSetting.F5macro = userSettingsDetails.F5Macro;
+                userSetting.F6macro = userSettingsDetails.F6Macro;
+                userSetting.F7macro = userSettingsDetails.F7Macro;
+                userSetting.F8macro = userSettingsDetails.F8Macro;
+                userSetting.F9macro = userSettingsDetails.F9Macro;
+                userSetting.F10macro = userSettingsDetails.F10Macro;
+                userSetting.F11macro = userSettingsDetails.F11Macro;
+                userSetting.F12macro = userSettingsDetails.F12Macro;
+
+                await context.SaveChangesAsync();
+                return new UserSettingsDetails
+                {
+                    FontName = userSetting.FontName,
+                    FontSize = userSetting.FontSize,
+                    F1Macro = userSetting.F1macro,
+                    F2Macro = userSetting.F2macro,
+                    F3Macro = userSetting.F3macro,
+                    F4Macro = userSetting.F4macro,
+                    F5Macro = userSetting.F5macro,
+                    F6Macro = userSetting.F6macro,
+                    F7Macro = userSetting.F7macro,
+                    F8Macro = userSetting.F8macro,
+                    F9Macro = userSetting.F9macro,
+                    F10Macro = userSetting.F10macro,
+                    F11Macro = userSetting.F11macro,
+                    F12Macro = userSetting.F12macro
+                };
+            }
+        }
+
+        /// <inheritdoc/>
         public async Task<bool> DeleteAsync(string id, string username)
         {
             Guid guid = Guid.Parse(id);
@@ -39,6 +114,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
+        /// <inheritdoc/>
         public async Task<SavedGameDetails[]> ListAsync(string username)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
@@ -60,6 +136,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
+        /// <inheritdoc/>
         public async Task<MessageDetails?> WriteMessageAsync(string fromId, string? toId, string content, MessageTypeEnum type, string? gameId)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
@@ -96,13 +173,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        /// <summary>
-        /// Returns messages from the database for any specific user.
-        /// </summary>
-        /// <param name="userId">The id of the user requesting the messages or Null for an anonymous user.</param>
-        /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
-        /// <param name="types">List of message types that the user should receive or null for ALL.</param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))

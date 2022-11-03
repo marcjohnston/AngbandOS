@@ -140,17 +140,23 @@ namespace AngbandOS
             return true;
         }
 
+        /// <summary>
+        /// Checks the stack of items at a grid coordinate for a chest and returns the index number of the chest item. 
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public int ChestCheck(int y, int x)
         {
             GridTile cPtr = Grid[y][x];
             int nextOIdx;
-            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            for (int objectItemIndex = cPtr.ItemIndex; objectItemIndex != 0; objectItemIndex = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
+                Item oPtr = Items[objectItemIndex];
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Category == ItemCategory.Chest)
                 {
-                    return thisOIdx;
+                    return objectItemIndex;
                 }
             }
             return 0;

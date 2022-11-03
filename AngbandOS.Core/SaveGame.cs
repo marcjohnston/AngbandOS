@@ -32,6 +32,11 @@ namespace AngbandOS
         private const int _maxVampiricDrain = 100;
         private AutoNavigator _autoNavigator;
 
+        /// <summary>
+        /// Returns the date and time when the last player input was received or the game was initially started.  Null, until the game is started.
+        /// </summary>
+        public DateTime? LastInputReceived = null;
+
         public int CommandRepeat;
         public readonly Dungeon[] Dungeons;
         public readonly Patron[] PatronList;
@@ -89,10 +94,15 @@ namespace AngbandOS
         [NonSerialized]
         private ICorePersistentStorage PersistentStorage;
 
+        /// <summary>
+        /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not present an update notififying object.
+        /// </summary>
         [NonSerialized]
-        public IUpdateNotifier UpdateNotifier;
+        public IUpdateNotifier? UpdateNotifier;
 
-        /// GUI
+        /// <summary>
+        /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
+        /// </summary>
         [NonSerialized]
         private IConsole _console;
 
@@ -228,6 +238,7 @@ namespace AngbandOS
         public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             _console = console;
+            LastInputReceived = DateTime.Now;
             PersistentStorage = persistentStorage;
             UpdateNotifier = updateNotification;
             InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
@@ -1226,6 +1237,8 @@ namespace AngbandOS
             ChestItemCategory chest = (ChestItemCategory)oPtr.ItemType.BaseCategory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
+
+            // Check to see if there is anything in the chest.  A chest trap will set this to zero, if it explodes.
             if (oPtr.TypeSpecificValue == 0)
             {
                 number = 0;
@@ -1735,6 +1748,7 @@ namespace AngbandOS
                     Level.CompactObjects(0);
                 }
                 ProcessPlayer();
+
                 if (Player.NoticeFlags != 0)
                 {
                     NoticeStuff();
@@ -7627,10 +7641,10 @@ namespace AngbandOS
         /// <param name="y"> The y coordinate of the location </param>
         /// <param name="x"> The x coordinate of the location </param>
         /// <param name="itemIndex"> The index of the chest item </param>
-        /// <returns> True if the player should be disturbed by the aciton </returns>
+        /// <returns> True, if the player is allowed to another attempt to disarm the trap.</returns>
         public bool DisarmChest(int y, int x, int itemIndex)
         {
-            bool more = false;
+            bool allowAdditionalDisarmAttempts = false;
             Item item = Level.Items[itemIndex];
             // Disarming a chest takes a turn
             EnergyUse = 100;
@@ -7676,7 +7690,7 @@ namespace AngbandOS
             // If we failed to disarm it there's a chance it goes off
             else if (i > 5 && Program.Rng.DieRoll(i) > 5)
             {
-                more = true;
+                allowAdditionalDisarmAttempts = true;
                 MsgPrint("You failed to disarm the chest.");
             }
             else
@@ -7684,7 +7698,7 @@ namespace AngbandOS
                 MsgPrint("You set off a trap!");
                 ChestTrap(y, x, itemIndex);
             }
-            return more;
+            return allowAdditionalDisarmAttempts;
         }
 
         /// <summary>
@@ -8293,63 +8307,6 @@ namespace AngbandOS
             }
         }
 
-        /// <summary>
-        /// Open a chest at a given location
-        /// </summary>
-        /// <param name="y"> The y coordinate of the location </param>
-        /// <param name="x"> The x coordinate of the location </param>
-        /// <param name="itemIndex"> The index of the chest item </param>
-        /// <returns> Whether or not the player should be disturbed by the action </returns>
-        public bool OpenChestAtGivenLocation(int y, int x, int itemIndex)
-        {
-            bool openedSuccessfully = true;
-            bool more = false;
-            Item item = Level.Items[itemIndex];
-            // Opening a chest takes an action
-            EnergyUse = 100;
-            // If the chest is locked, we may need to pick it
-            if (item.TypeSpecificValue > 0)
-            {
-                openedSuccessfully = false;
-                // Our disable traps skill also doubles up as a lockpicking skill
-                int i = Player.SkillDisarmTraps;
-                // Hard to pick locks in the dark
-                if (Player.TimedBlindness != 0 || Level.NoLight())
-                {
-                    i /= 10;
-                }
-                // Hard to pick locks when you're confused or hallucinating
-                if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
-                {
-                    i /= 10;
-                }
-                // Some locks are harder to pick than others
-                int j = i - item.TypeSpecificValue;
-                if (j < 2)
-                {
-                    j = 2;
-                }
-                // See if we succeeded
-                if (Program.Rng.RandomLessThan(100) < j)
-                {
-                    MsgPrint("You have picked the lock.");
-                    Player.GainExperience(1);
-                    openedSuccessfully = true;
-                }
-                else
-                {
-                    more = true;
-                    MsgPrint("You failed to pick the lock.");
-                }
-            }
-            // If we successfully opened it, set of any traps and then actually open the chest
-            if (openedSuccessfully)
-            {
-                ChestTrap(y, x, itemIndex);
-                OpenChest(y, x, itemIndex);
-            }
-            return more;
-        }
 
         /// <summary>
         /// Open a door at a given location
@@ -11605,6 +11562,8 @@ namespace AngbandOS
                 while (KeyHead == KeyTail)
                 {
                     EnqueueKey(_console.WaitForKey());
+                    LastInputReceived = DateTime.Now;
+                    UpdateNotifier?.InputReceived();
                 }
             }
             if (KeyHead == KeyTail)

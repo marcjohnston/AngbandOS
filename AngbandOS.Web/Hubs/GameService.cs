@@ -220,6 +220,8 @@ namespace AngbandOS.Web.Hubs
                     CharacterName = console.Value.CharacterName,
                     Gold = console.Value.Gold,
                     Level = console.Value.Level,
+                    ElapsedGameTime = console.Value.ElapsedGameTime,
+                    LastInputReceived = console.Value.LastInputReceived,
                     ConnectionId = console.Key,
                     UserId = console.Value.UserId,
                     Username = console.Value.Username,                    
@@ -377,22 +379,30 @@ namespace AngbandOS.Web.Hubs
                 // When updates are received from the game check to see we save the update as a message that is relayed.
                 switch (gameUpdateNotification)
                 {
+                    // These events will write an event to the database and ultimately the chat window.
                     case GameUpdateNotificationEnum.PlayerDied:
                         await WriteMessageAsync(context.User, null, message, MessageTypeEnum.CharacterDied, guid);
                         break;
+
                     case GameUpdateNotificationEnum.GameStopped:
                         await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameStopped, guid);
                         break;
+
                     case GameUpdateNotificationEnum.GameStarted:
                         await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameStarted, guid);
                         break;
-                    case GameUpdateNotificationEnum.LevelChanged:
-                    case GameUpdateNotificationEnum.CharacterRenamed:
-                    case GameUpdateNotificationEnum.GoldUpdated:
-                        break;
+
                     case GameUpdateNotificationEnum.GameExceptionThrown:
                         await WriteMessageAsync(context.User, null, message, MessageTypeEnum.GameExceptionThrown, guid);
                         signalRConsole.GameIncompatible();
+                        break;
+
+                    // These events will not write a message to the database.
+                    case GameUpdateNotificationEnum.LevelChanged:
+                    case GameUpdateNotificationEnum.CharacterRenamed:
+                    case GameUpdateNotificationEnum.GameTimeElapsed:
+                    case GameUpdateNotificationEnum.InputReceived:
+                    case GameUpdateNotificationEnum.GoldUpdated:
                         break;
                 }
             };

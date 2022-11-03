@@ -29,6 +29,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
+        public virtual DbSet<UserSetting> UserSettings { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -191,6 +192,17 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.ToUserId)
                     .HasMaxLength(36)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.FromUser)
+                    .WithMany(p => p.MessageFromUsers)
+                    .HasForeignKey(d => d.FromUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Messages_AspNetUsers");
+
+                entity.HasOne(d => d.ToUser)
+                    .WithMany(p => p.MessageToUsers)
+                    .HasForeignKey(d => d.ToUserId)
+                    .HasConstraintName("FK_Messages_AspNetUsers1");
             });
 
             modelBuilder.Entity<PersistedGrant>(entity =>
@@ -241,6 +253,79 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                     .HasForeignKey(d => d.SavedGameContentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SavedGames_SavedGameContents");
+            });
+
+            modelBuilder.Entity<UserSetting>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.F10macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F10Macro");
+
+                entity.Property(e => e.F11macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F11Macro");
+
+                entity.Property(e => e.F12macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F12Macro");
+
+                entity.Property(e => e.F1macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F1Macro");
+
+                entity.Property(e => e.F2macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F2Macro");
+
+                entity.Property(e => e.F3macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F3Macro");
+
+                entity.Property(e => e.F4macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F4Macro");
+
+                entity.Property(e => e.F5macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F5Macro");
+
+                entity.Property(e => e.F6macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F6Macro");
+
+                entity.Property(e => e.F7macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F7Macro");
+
+                entity.Property(e => e.F8macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F8Macro");
+
+                entity.Property(e => e.F9macro)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("F9Macro");
+
+                entity.Property(e => e.FontName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

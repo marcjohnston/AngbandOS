@@ -55,7 +55,7 @@ namespace AngbandOS.Commands
                 // Open the chest or door
                 else if (itemIndex != 0)
                 {
-                    disturb = saveGame.OpenChestAtGivenLocation(y, x, itemIndex);
+                    disturb = OpenChestAtGivenLocation(saveGame, y, x, itemIndex);
                 }
                 else
                 {
@@ -66,6 +66,64 @@ namespace AngbandOS.Commands
             {
                 saveGame.Disturb(false);
             }
+        }
+
+        /// <summary>
+        /// Open a chest at a given location
+        /// </summary>
+        /// <param name="y"> The y coordinate of the location </param>
+        /// <param name="x"> The x coordinate of the location </param>
+        /// <param name="itemIndex"> The index of the chest item </param>
+        /// <returns> Whether or not the player should be disturbed by the action </returns>
+        private bool OpenChestAtGivenLocation(SaveGame saveGame, int y, int x, int itemIndex)
+        {
+            bool openedSuccessfully = true;
+            bool more = false;
+            Item item = saveGame.Level.Items[itemIndex];
+            // Opening a chest takes an action
+            saveGame.EnergyUse = 100;
+            // If the chest is locked, we may need to pick it
+            if (item.TypeSpecificValue > 0)
+            {
+                openedSuccessfully = false;
+                // Our disable traps skill also doubles up as a lockpicking skill
+                int i = saveGame.Player.SkillDisarmTraps;
+                // Hard to pick locks in the dark
+                if (saveGame.Player.TimedBlindness != 0 || saveGame.Level.NoLight())
+                {
+                    i /= 10;
+                }
+                // Hard to pick locks when you're confused or hallucinating
+                if (saveGame.Player.TimedConfusion != 0 || saveGame.Player.TimedHallucinations != 0)
+                {
+                    i /= 10;
+                }
+                // Some locks are harder to pick than others
+                int j = i - item.TypeSpecificValue;
+                if (j < 2)
+                {
+                    j = 2;
+                }
+                // See if we succeeded
+                if (Program.Rng.RandomLessThan(100) < j)
+                {
+                    saveGame.MsgPrint("You have picked the lock.");
+                    saveGame.Player.GainExperience(1);
+                    openedSuccessfully = true;
+                }
+                else
+                {
+                    more = true;
+                    saveGame.MsgPrint("You failed to pick the lock.");
+                }
+            }
+            // If we successfully opened it, set of any traps and then actually open the chest
+            if (openedSuccessfully)
+            {
+                saveGame.ChestTrap(y, x, itemIndex);
+                saveGame.OpenChest(y, x, itemIndex);
+            }
+            return more;
         }
     }
 }

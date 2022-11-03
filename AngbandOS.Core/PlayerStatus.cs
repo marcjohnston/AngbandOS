@@ -2023,8 +2023,7 @@ namespace AngbandOS
         {
             PrtField(SaveGame.Player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
             PrtField(SaveGame.Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-            PrtField(Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), ScreenLocation.RowClass,
-                ScreenLocation.ColClass);
+            PrtField(Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
             PrtTitle();
             PrtLevel();
             PrtExp();

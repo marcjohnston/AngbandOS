@@ -40,6 +40,10 @@ namespace AngbandOS
         public int ItemSubCategory;
         public ItemType ItemType;
         public bool Marked;
+
+        /// <summary>
+        /// Returns the index of the next item, if this item is part of a stack of items.
+        /// </summary>
         public int NextInStack;
         public string RandartName = "";
         public Enumerations.RareItemType RareItemTypeIndex;

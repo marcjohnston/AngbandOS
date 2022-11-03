@@ -5,38 +5,43 @@
     /// </summary>
     public interface IWebPersistentStorage
     {
+        Task<UserSettingsDetails?> GetPreferences(string userId);
+
+        Task<UserSettingsDetails> WritePreferences(string userId, UserSettingsDetails userSettingsDetails);
+
         /// <summary>
-        /// Delete a saved game.
+        /// Deletes a game from the database.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The ID (guid) of the game to be deleted.</param>
         /// <param name="username"></param>
         /// <returns></returns>
         Task<bool> DeleteAsync(string id, string username);
 
         /// <summary>
-        /// Retrieve details about all saved games for a particular user.
+        /// Returns details about the saved games associated to a user.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         Task<SavedGameDetails[]> ListAsync(string username);
 
         /// <summary>
-        /// Write a chat message to the database.
+        /// Writes a message record to the database.
         /// </summary>
-        /// <param name="fromId"></param>
-        /// <param name="toId"></param>
-        /// <param name="message"></param>
-        /// <param name="sentDateTime"></param>
-        /// <param name="type"></param>
+        /// <param name="fromId">The ID (guid) of the user from which the message is from.</param>
+        /// <param name="toId">The ID (guid) of the user the message is intended for.  Null, if the message is not intended for a recipient.</param>
+        /// <param name="content">The content of the message.</param>
+        /// <param name="type">The type of message being sent/written.</param>
+        /// <param name="gameId">A ID (guid) of the game the message is related to.  Null, if the message is not related to a game.</param>
         /// <returns>The unique ID for the message or null, if the message fails to save.</returns>
         Task<MessageDetails?> WriteMessageAsync(string fromId, string? toId, string message, MessageTypeEnum type, string? gameId);
 
         /// <summary>
-        /// Retrieve chat messages from the database.
+        /// Returns messages from the database for any specific user.
         /// </summary>
-        /// <param name="userId">The ID of the user for which to retrieve chat messages for; null, for public viewing.</param>
-        /// <param name="mostRecentMessageId">The ID of the most recent message to retrieve; null, for the most recent messages.  When specified, the system will return older messages.</param>
-        /// <returns></returns>-n
+        /// <param name="userId">The id of the user requesting the messages or Null for an anonymous user.</param>
+        /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
+        /// <param name="types">List of message types that the user should receive or null for ALL.</param>
+        /// <returns></returns>
         Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types);
     }
 }

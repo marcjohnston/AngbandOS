@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.ChestTraps;
 using AngbandOS.Enumerations;
 using System.Collections.Generic;
 
@@ -21,7 +22,83 @@ namespace AngbandOS.Core
         public static readonly uint[] BookSpellFlags = { 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000 };
 
         /// <summary>
-        /// Returns an array of 55 types of trapped chests.
+        /// Returns an array of 63 layers of trapped chests.
+        /// </summary>
+        public static readonly BaseChestTrap?[] BaseChestTraps =
+        {
+            null,
+            new PoisonChestTrap(),
+            new LoseStrChestTrap(),
+            new LoseConChestTrap(),
+            new LoseStrChestTrap(),
+            new LoseConChestTrap(),
+            null,
+            new PoisonChestTrap(),
+            new PoisonChestTrap(),
+            new LoseStrChestTrap(),
+
+            new LoseConChestTrap(),
+            new PoisonChestTrap(),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new SummonChestTrap(),
+            null,
+            new LoseStrChestTrap(),
+            new LoseConChestTrap(new ParalyzeChestTrap()),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+
+            new SummonChestTrap(),
+            new ParalyzeChestTrap(),
+            new LoseStrChestTrap(),
+            new LoseConChestTrap(),
+            new ExplodeChestTrap(),
+            null,
+            new PoisonChestTrap(new LoseStrChestTrap()),
+            new PoisonChestTrap(new LoseConChestTrap()),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+
+            new ParalyzeChestTrap(),
+            new PoisonChestTrap(new SummonChestTrap()),
+            new SummonChestTrap(),
+            new ExplodeChestTrap(),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            null,
+            new SummonChestTrap(),
+            new ExplodeChestTrap(),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+
+            new PoisonChestTrap(new ParalyzeChestTrap()),
+            new ExplodeChestTrap(),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new PoisonChestTrap(new ParalyzeChestTrap()),
+            null,
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new LoseStrChestTrap(new LoseConChestTrap()),
+            new PoisonChestTrap(new ParalyzeChestTrap(new LoseStrChestTrap())),
+            new PoisonChestTrap(new ParalyzeChestTrap(new LoseConChestTrap())),
+
+            new PoisonChestTrap(new LoseStrChestTrap(new LoseConChestTrap())),
+            new PoisonChestTrap(new LoseStrChestTrap(new LoseConChestTrap())),
+            new PoisonChestTrap(new ParalyzeChestTrap(new LoseStrChestTrap(new LoseConChestTrap()))),
+            new PoisonChestTrap(new ParalyzeChestTrap()),
+            new PoisonChestTrap(new ParalyzeChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap()),
+            new ExplodeChestTrap(new SummonChestTrap())
+        };
+
+        /// <summary>
+        /// Deprecated.  Returns an array of 63 types of trapped chests.
         /// </summary>
         public static readonly int[] ChestTraps =
                 {
@@ -35,6 +112,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestPoison,  
             ChestTrap.ChestPoison,  
             ChestTrap.ChestLoseStr,
+
             ChestTrap.ChestLoseCon,    
             ChestTrap.ChestPoison,     
             ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon,
@@ -45,6 +123,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestLoseStr, 
             ChestTrap.ChestLoseCon, ChestTrap.ChestParalyze,
             ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon, 
+
             ChestTrap.ChestSummon,
             ChestTrap.ChestParalyze,
             ChestTrap.ChestLoseStr,
@@ -55,6 +134,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestPoison | ChestTrap.ChestLoseCon,
             ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon, 
             ChestTrap.ChestExplode | ChestTrap.ChestSummon,
+
             ChestTrap.ChestParalyze, 
             ChestTrap.ChestPoison | ChestTrap.ChestSummon,
             ChestTrap.ChestSummon,
@@ -65,6 +145,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestExplode,
             ChestTrap.ChestExplode | ChestTrap.ChestSummon,
             ChestTrap.ChestExplode | ChestTrap.ChestSummon, 
+
             ChestTrap.ChestPoison | ChestTrap.ChestParalyze,
             ChestTrap.ChestExplode,
             ChestTrap.ChestExplode | ChestTrap.ChestSummon,
@@ -75,6 +156,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon,
             ChestTrap.ChestPoison | ChestTrap.ChestParalyze | ChestTrap.ChestLoseStr,
             ChestTrap.ChestPoison | ChestTrap.ChestParalyze | ChestTrap.ChestLoseCon,
+
             ChestTrap.ChestPoison | ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon,
             ChestTrap.ChestPoison | ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon,
             ChestTrap.ChestPoison | ChestTrap.ChestParalyze | ChestTrap.ChestLoseStr | ChestTrap.ChestLoseCon,
@@ -85,6 +167,7 @@ namespace AngbandOS.Core
             ChestTrap.ChestExplode | ChestTrap.ChestSummon, 
             ChestTrap.ChestExplode | ChestTrap.ChestSummon,
             ChestTrap.ChestExplode | ChestTrap.ChestSummon, 
+
             ChestTrap.ChestExplode | ChestTrap.ChestSummon,
             ChestTrap.ChestExplode | ChestTrap.ChestSummon, 
             ChestTrap.ChestExplode | ChestTrap.ChestSummon

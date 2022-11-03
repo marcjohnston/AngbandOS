@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface;
 using System;
 
 namespace AngbandOS
@@ -30,9 +31,11 @@ namespace AngbandOS
         private DateTime _gameStartDateTime;
         private int _levelEntryTurn;
         private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
+        private readonly SaveGame SaveGame;
 
-        public GameTime(int startDate, bool startAtDusk)
+        public GameTime(SaveGame saveGame, int startDate, bool startAtDusk)
         {
+            SaveGame = saveGame;
             _currentGameDateTime = new DateTime(1297, 1, 1, 0, 0, 0, 0);
             _currentGameDateTime = _currentGameDateTime.AddDays(startDate - 1);
             _birthday = startDate;
@@ -47,6 +50,14 @@ namespace AngbandOS
             }
             _currentGameDateTime = _gameStartDateTime;
             Tick();
+        }
+
+        public TimeSpan ElapsedGameTime
+        {
+            get
+            {
+                return _currentGameDateTime - _gameStartDateTime;
+            }
         }
 
         public string BirthdayText
@@ -166,6 +177,9 @@ namespace AngbandOS
             {
                 _currentGameDateTime = _currentGameDateTime.AddYears(1297 - year);
             }
+
+            // Send an update to the calling application, that the game time has changed.
+            SaveGame.UpdateNotifier?.GameTimeElapsed();
         }
 
         public void ToNextDawn()

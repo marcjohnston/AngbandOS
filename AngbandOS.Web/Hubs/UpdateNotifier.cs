@@ -3,6 +3,10 @@ using System.Xml.Linq;
 
 namespace AngbandOS.Web.Hubs
 {
+    /// <summary>
+    /// Represents an object that implements the IUpdateNotifier interface so that the SignalRConsole can receive interesting updates from the game.
+    /// This notifier object converts the game notifications into meaningful messages that the game service can process.
+    /// </summary>
     public class UpdateNotifier : IUpdateNotifier
     {
         private readonly SignalRConsole SignalRConsole;
@@ -16,7 +20,7 @@ namespace AngbandOS.Web.Hubs
 
         public void CharacterRenamed(string name)
         {
-            string message = $"{name} was just born.";
+            string message = $"{name} was just birthed.";
             Action(SignalRConsole, GameUpdateNotificationEnum.CharacterRenamed, message);
         }
 
@@ -48,6 +52,16 @@ namespace AngbandOS.Web.Hubs
         public void GameExceptionThrown(string message)
         {
             Action(SignalRConsole, GameUpdateNotificationEnum.GameExceptionThrown, message);
+        }
+
+        public void GameTimeElapsed()
+        {
+            Action(SignalRConsole, GameUpdateNotificationEnum.GameTimeElapsed, "Game time elapsed.");
+        }
+
+        public void InputReceived()
+        {
+            Action(SignalRConsole, GameUpdateNotificationEnum.InputReceived, "Game input received.");
         }
     }
 }

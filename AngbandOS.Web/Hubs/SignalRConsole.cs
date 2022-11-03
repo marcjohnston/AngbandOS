@@ -76,6 +76,22 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
+        public DateTime? LastInputReceived
+        {
+            get
+            {
+                return _gameServer?.LastInputReceived;
+            }
+        }
+
+        public TimeSpan? ElapsedGameTime
+        {
+            get
+            {
+                return _gameServer?.ElapsedGameTime;
+            }
+        }
+
         protected override void OnDoWork(DoWorkEventArgs e)
         {
             // Create a game server to play the game.  

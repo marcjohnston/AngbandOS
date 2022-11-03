@@ -12,5 +12,8 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public DateTime SentDateTime { get; set; }
         public int Type { get; set; }
         public string? GameId { get; set; }
+
+        public virtual AspNetUser FromUser { get; set; } = null!;
+        public virtual AspNetUser? ToUser { get; set; }
     }
 }

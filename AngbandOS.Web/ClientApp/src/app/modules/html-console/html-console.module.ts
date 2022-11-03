@@ -1,18 +1,11 @@
-import { ElementRef, Renderer2 } from "@angular/core";
+import { ElementRef } from "@angular/core";
 import { ColourEnum } from "../colour-enum/colour-enum.module";
-import { ColoursMap } from "../colours-map/colours-map.module";
 import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
 import { ConsoleConfiguration } from "./console-configuration";
 import { PrintLine } from "./print-line";
 
 export class HtmlConsole {
-  //public charSize = 16;
-  //public xSpacing = 10;
-  //public ySpacing = 15;
-  //public width = 80;
-  //public height = 45;
   private _sounds = SoundEffectsMap.getSoundEffectsMap();
-  //public colours = ColoursMap.getColoursMap();
   private context: CanvasRenderingContext2D | undefined;
   public configuration = new ConsoleConfiguration();
 

@@ -24,6 +24,10 @@
       padding-bottom: 10px;
     }
 
+    & .idle-time-span, .game-time-span {
+        min-width: 100px;
+    }
+
     & .highlight {
       background-color: lightgray;
     }
