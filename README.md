@@ -1,4 +1,4 @@
-# Cthangband
+# AngbandOS
 This is the Cthangband roguelike game. It's a 'classic' roguelike in that it uses ASCII characters rather than graphics.
 ![Cthangband](https://user-images.githubusercontent.com/99888526/158896436-0872cd7f-840c-41a7-87af-c0c875a72540.png)
 
