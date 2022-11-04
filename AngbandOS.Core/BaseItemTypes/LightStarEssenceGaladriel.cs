@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class LightStarEssenceGaladriel : LightItemCategory
+    internal class LightStarEssenceGaladriel : LightSourceItemCategory
     {
         public override char Character => '*';
         public override Colour Colour => Colour.Yellow;

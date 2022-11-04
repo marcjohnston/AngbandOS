@@ -13,6 +13,8 @@ namespace AngbandOS.ItemCategories
     /// </summary>
     internal abstract class WeaponItemCategory : BaseItemCategory
     {
+        public override bool HasQuality => true;
+
         public override void ApplyRandartBonus(Item item)
         {
             item.BonusToHit += Program.Rng.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);
@@ -21,6 +23,9 @@ namespace AngbandOS.ItemCategories
 
         public override bool CanApplyBonusArmourClassMiscPower => true;
 
+        /// <summary>
+        /// Returns true, for all weapons where both the hit (ToH) and damage (ToD) are equal to or greater than zero.  False, for all weapons with either stat less than 0.
+        /// </summary>
         public override bool KindIsGood
         {
             get

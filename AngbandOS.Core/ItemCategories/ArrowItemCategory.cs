@@ -21,6 +21,10 @@ namespace AngbandOS.ItemCategories
             bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
             return bonusValue;
         }
+
+        /// <summary>
+        /// Returns true, for all arrows.
+        /// </summary>
         public override bool KindIsGood => true;
 
         public override int GetAdditionalMassProduceCount(Item item)

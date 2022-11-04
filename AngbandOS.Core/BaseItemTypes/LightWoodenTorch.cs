@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class LightWoodenTorch : LightItemCategory
+    internal class LightWoodenTorch : LightSourceItemCategory
     {
         public override char Character => '~';
         public override Colour Colour => Colour.Brown;

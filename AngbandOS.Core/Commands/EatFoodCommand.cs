@@ -338,8 +338,7 @@ namespace AngbandOS.Commands
                     // Spawn a new food item on the floor to make up for the one that will be destroyed
                     Item floorItem = new Item(saveGame);
                     saveGame.MsgPrint("The food falls through your jaws!");
-                    floorItem.AssignItemType(
-                        saveGame.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
+                    floorItem.AssignItemType(saveGame.ItemTypes.LookupKind(item.Category, item.ItemSubCategory));
                     saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 }
                 else

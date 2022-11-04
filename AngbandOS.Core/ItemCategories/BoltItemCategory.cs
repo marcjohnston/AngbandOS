@@ -21,6 +21,9 @@ namespace AngbandOS.ItemCategories
             return bonusValue;
         }
 
+        /// <summary>
+        /// Returns true for all bolts.
+        /// </summary>
         public override bool KindIsGood => true;
 
         public override int GetAdditionalMassProduceCount(Item item)

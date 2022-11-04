@@ -7,6 +7,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Enumerations
 {
+    /// <summary>
+    /// Represents 30 flags.
+    /// </summary>
     internal static class ItemFlag1
     {
         public const uint Blows = 0x00002000;
@@ -40,7 +43,15 @@ namespace AngbandOS.Enumerations
         public const uint Vampiric = 0x00008000;
         public const uint Vorpal = 0x02000000;
         public const uint Wis = 0x00000004;
+
+        /// <summary>
+        /// Unused flag ... currently flag based cost is 0.
+        /// </summary>
         public const uint Xxx1 = 0x00000080;
+
+        /// <summary>
+        /// Unused flag ... currently flag based cost is 0.
+        /// </summary>
         public const uint Xxx2 = 0x00000040;
     }
 }

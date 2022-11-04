@@ -1368,7 +1368,7 @@ namespace AngbandOS
             }
         }
 
-        private void ApplyFlavourVisuals()
+        private void ApplyFlavourVisuals() // TODO: This is run just once
         {
             int i;
             for (i = 0; i < ItemTypes.Count; i++)

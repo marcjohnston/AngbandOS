@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class LightGemstone : LightItemCategory
+    internal class LightGemstone : LightSourceItemCategory
     {
         public override char Character => '*';
         public override Colour Colour => Colour.Diamond;

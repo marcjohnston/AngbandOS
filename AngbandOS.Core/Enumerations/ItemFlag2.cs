@@ -7,6 +7,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Enumerations
 {
+    /// <summary>
+    /// Represents 29 flags.
+    /// </summary>
     internal static class ItemFlag2
     {
         public const uint FreeAct = 0x00004000;
@@ -38,8 +41,20 @@ namespace AngbandOS.Enumerations
         public const uint SustInt = 0x00000002;
         public const uint SustStr = 0x00000001;
         public const uint SustWis = 0x00000004;
+
+        /// <summary>
+        /// Unused flag ... currently flag based cost is 0.
+        /// </summary>
         public const uint Xxx1 = 0x00000040;
+
+        /// <summary>
+        /// Unused flag ... currently flag based cost is 0.
+        /// </summary>
         public const uint Xxx2 = 0x00000080;
+
+        /// <summary>
+        /// Unused flag ... currently flag based cost is 0.
+        /// </summary>
         public const uint Xxx3 = 0x00001000;
     }
 }

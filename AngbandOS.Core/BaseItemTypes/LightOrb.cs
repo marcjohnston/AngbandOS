@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class LightOrb : LightItemCategory
+    internal class LightOrb : LightSourceItemCategory
     {
         public override char Character => '~';
         public override Colour Colour => Colour.BrightYellow;
@@ -19,5 +19,7 @@ namespace AngbandOS.ItemCategories
         public override int Locale1 => 10;
         public override int? SubCategory => 7;
         public override int Weight => 50;
+
+        public override bool HasQuality => true;
     }
 }

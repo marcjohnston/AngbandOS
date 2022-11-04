@@ -12,6 +12,8 @@ namespace AngbandOS.ItemCategories
     /// </summary>
     internal abstract class ArmourItemCategory : BaseItemCategory
     {
+        public override bool HasQuality => true;
+
         public override void ApplyRandartBonus(Item item)
         {
             item.BonusArmourClass += Program.Rng.DieRoll(item.BonusArmourClass > 19 ? 1 : 20 - item.BonusArmourClass);
@@ -36,6 +38,9 @@ namespace AngbandOS.ItemCategories
             return 0;
         }
 
+        /// <summary>
+        /// Returns true, for all armour where the armour class (ToA) is greater than or equal to zero.
+        /// </summary>
         public override bool KindIsGood => (ToA >= 0);
 
         public override int GetBonusRealValue(Item item, int value)
