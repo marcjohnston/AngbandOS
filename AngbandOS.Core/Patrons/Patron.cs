@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.Projection;
 using System;
 
@@ -130,92 +131,91 @@ namespace AngbandOS.Patrons
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
                     Item qPtr = new Item(saveGame);
-                    int dummy2;
+                    BaseItemCategory reward;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
                     {
                         case 1:
                         case 2:
-                        case 0:
-                            dummy2 = SwordType.SvDagger;
+                            reward = new SwordDagger();
                             break;
 
                         case 3:
                         case 4:
-                            dummy2 = SwordType.SvMainGauche;
+                            reward = new SwordMainGauche();
                             break;
 
                         case 5:
                         case 6:
-                            dummy2 = SwordType.SvRapier;
+                            reward = new SwordRapier();
                             break;
 
                         case 7:
                         case 8:
-                            dummy2 = SwordType.SvSmallSword;
+                            reward = new SwordSmallSword();
                             break;
 
                         case 9:
                         case 10:
-                            dummy2 = SwordType.SvShortSword;
+                            reward = new SwordShortSword();
                             break;
 
                         case 11:
                         case 12:
                         case 13:
-                            dummy2 = SwordType.SvSabre;
+                            reward = new SwordSabre();
                             break;
 
                         case 14:
                         case 15:
                         case 16:
-                            dummy2 = SwordType.SvCutlass;
+                            reward = new SwordCutlass();
                             break;
 
                         case 17:
-                            dummy2 = SwordType.SvTulwar;
+                            reward = new SwordTulwar();
                             break;
 
                         case 18:
                         case 19:
                         case 20:
-                            dummy2 = SwordType.SvBroadSword;
+                            reward = new SwordBroadSword();
                             break;
 
                         case 21:
                         case 22:
                         case 23:
-                            dummy2 = SwordType.SvLongSword;
+                            reward = new SwordLongSword();
                             break;
 
                         case 24:
                         case 25:
                         case 26:
-                            dummy2 = SwordType.SvScimitar;
+                            reward = new SwordScimitar();
                             break;
 
                         case 27:
-                            dummy2 = SwordType.SvKatana;
+                            reward = new SwordKatana();
                             break;
 
                         case 28:
                         case 29:
-                            dummy2 = SwordType.SvBastardSword;
+                            reward = new SwordBastardSword();
                             break;
 
                         case 30:
                         case 31:
-                            dummy2 = SwordType.SvTwoHandedSword;
+                            reward = new SwordTwoHandedSword();
                             break;
 
                         case 32:
-                            dummy2 = SwordType.SvExecutionersSword;
+                            reward = new SwordExecutionersSword();
                             break;
 
                         default:
-                            dummy2 = SwordType.SvBladeOfChaos;
+                            reward = new SwordBladeofChaos();
                             break;
                     }
-                    qPtr.AssignItemType(saveGame.ItemTypes.LookupKind(ItemCategory.Sword, dummy2));
+                    qPtr.AssignItemType(new ItemType(reward));
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);

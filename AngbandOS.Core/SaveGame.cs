@@ -9351,7 +9351,7 @@ namespace AngbandOS
                     if (CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
                     {
                         Item item = new Item(this);
-                        item.AssignItemType(ItemTypes.LookupKind(ItemCategory.Food, FoodType.Ration));
+                        item.AssignItemType(new ItemType(new FoodRation()));
                         Level.DropNear(item, -1, Player.MapY, Player.MapX);
                         MsgPrint("You cook some food.");
                     }

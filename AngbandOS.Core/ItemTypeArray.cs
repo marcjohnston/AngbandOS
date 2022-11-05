@@ -35,20 +35,6 @@ namespace AngbandOS
             }
         }
 
-        public ItemType LookupKind(ItemCategory tval, int sval) // TODO: Known to fail now that items are scaffolded.
-        {
-            for (int k = 1; k < Count; k++)
-            {
-                ItemType kPtr = this[k];
-                if (kPtr.Category == tval && kPtr.SubCategory == sval)
-                {
-                    return kPtr;
-                }
-            }
-            SaveGame.MsgPrint($"No object ({tval},{sval})");
-            return null;
-        }
-
         public void ResetStompability()
         {
             foreach (ItemType itemType in this)
