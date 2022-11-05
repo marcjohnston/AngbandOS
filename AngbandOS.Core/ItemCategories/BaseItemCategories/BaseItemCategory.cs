@@ -9,14 +9,48 @@ using AngbandOS.Core;
 
 namespace AngbandOS.ItemCategories
 {
+    /// <summary>
+    /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
+    /// properties are modifyable.
+    /// </summary>
     [Serializable]
 
     internal abstract class BaseItemCategory
     {
         /// <summary>
-        /// Returns whether or not an object is easy to know.  Returns false, by default.
+        /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
+        /// Use StompableType enum to address each index.
         /// </summary>
-        public virtual bool ObjectEasyKnow => false;
+        public readonly bool[] Stompable = new bool[4];
+
+        /// <summary>
+        /// The special flavor of the item has been identified. (e.g. of "seeing")
+        /// </summary>
+        public bool FlavourAware;
+
+        /// <summary>
+        /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories
+        /// that have flavor may override this character and replace it with a different character from the flavor.
+        /// </summary>
+        public char FlavorCharacter;
+
+        /// <summary>
+        /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
+        /// that have flavor may override this color and replace it with a different color from the flavor.
+        /// </summary>
+        public Colour FlavorColour;
+
+        /// <summary>
+        /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasAnyPvalMask
+        {
+            get
+            {
+                return Str || Int || Wis || Dex || Con || Cha || Stealth || Search || Infra || Tunnel || Speed || Blows;
+            }
+        }
 
         /// <summary>
         /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.
@@ -26,15 +60,22 @@ namespace AngbandOS.ItemCategories
         /// <summary>
         /// Returns true, if the object type has flavors.  Returns false, by default.
         /// </summary>
-        public virtual bool ObjectHasFlavor => false;
+        public virtual bool HasFlavor => false;
 
         /// <summary>
-        /// The column from which to take the graphical tile.
+        /// Returns true, if the player has attempted/tried the item.
+        /// </summary>
+        public bool Tried;
+
+        /// <summary>
+        /// Returns the character to be used when displaying items of this category.  This character will be initially used to set the FlavorCharacter and item
+        /// categories that have flavor may change the FlavorCharacter based on the flavor.
         /// </summary>
         public abstract char Character { get; }
 
         /// <summary>
-        /// The row from which to take the graphical tile
+        /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories
+        /// that have flavor may change the FlavorColor based on the flavor.
         /// </summary>
         public virtual Colour Colour => Colour.White;
 
@@ -220,7 +261,6 @@ namespace AngbandOS.ItemCategories
         public virtual int ToA => 0;
         public virtual int ToD => 0;
         public virtual int ToH => 0;
-        public virtual bool Tried => false;
 
         /// <summary>
         /// Returns whether or not the item affects the tunnelling capabilities of the player when being worn.
@@ -276,16 +316,16 @@ namespace AngbandOS.ItemCategories
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return item.ItemType.Stompable[StompableType.Broken];
+                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
 
                     case "average":
-                        return item.ItemType.Stompable[StompableType.Average];
+                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Average];
 
                     case "good":
-                        return item.ItemType.Stompable[StompableType.Good];
+                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return item.ItemType.Stompable[StompableType.Excellent];
+                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -294,7 +334,7 @@ namespace AngbandOS.ItemCategories
                         throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
                 }
             }
-            return item.ItemType.Stompable[StompableType.Broken];
+            return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
         }
 
         //    public virtual bool CanSlay => false;
@@ -540,7 +580,7 @@ namespace AngbandOS.ItemCategories
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             item.GetMergedFlags(f1, f2, f3);
-            if (item.IsKnown() && f1.IsSet(ItemFlag1.PvalMask))
+            if (item.IsKnown() && HasAnyPvalMask)
             {
                 s += $" ({GetSignedValue(item.TypeSpecificValue)}";
                 if (f3.IsSet(ItemFlag3.HideType))
@@ -606,7 +646,7 @@ namespace AngbandOS.ItemCategories
             {
                 tmpVal2 = "empty";
             }
-            else if (!item.IsFlavourAware() && item.ItemType.Tried)
+            else if (!item.IsFlavourAware() && item.ItemType.BaseItemCategory.Tried)
             {
                 tmpVal2 = "tried";
             }

@@ -42,8 +42,8 @@ namespace AngbandOS
                 // Only print items that exist
                 if (item.ItemType != null)
                 {
-                    colour = item.ItemType.Colour;
-                    character = item.ItemType.Character;
+                    colour = item.ItemType.BaseItemCategory.FlavorColour;
+                    character = item.ItemType.BaseItemCategory.FlavorCharacter;
                 }
                 saveGame.Print(colour, character, screenRow, screenCol + i - InventorySlot.MeleeWeapon);
             }

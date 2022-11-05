@@ -41,17 +41,17 @@ namespace AngbandOS
             {
                 if (itemType.HasQuality())
                 {
-                    itemType.Stompable[0] = true;
-                    itemType.Stompable[1] = false;
-                    itemType.Stompable[2] = false;
-                    itemType.Stompable[3] = false;
+                    itemType.BaseItemCategory.Stompable[0] = true;
+                    itemType.BaseItemCategory.Stompable[1] = false;
+                    itemType.BaseItemCategory.Stompable[2] = false;
+                    itemType.BaseItemCategory.Stompable[3] = false;
                 }
                 else
                 {
-                    itemType.Stompable[0] = itemType.BaseItemCategory.Cost <= 0;
-                    itemType.Stompable[1] = false;
-                    itemType.Stompable[2] = false;
-                    itemType.Stompable[3] = false;
+                    itemType.BaseItemCategory.Stompable[0] = itemType.BaseItemCategory.Cost <= 0;
+                    itemType.BaseItemCategory.Stompable[1] = false;
+                    itemType.BaseItemCategory.Stompable[2] = false;
+                    itemType.BaseItemCategory.Stompable[3] = false;
                 }
             }
         }

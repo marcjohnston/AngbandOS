@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
         public abstract bool Quaff(SaveGame saveGame);
 
-        public override bool ObjectHasFlavor => true;
+        public override bool HasFlavor => true;
         /// <summary>
         /// Perform a smash effect for the potion.
         /// </summary>

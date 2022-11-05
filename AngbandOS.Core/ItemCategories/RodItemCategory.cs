@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class RodItemCategory : BaseItemCategory
     {
         public override bool EasyKnow => true;
-        public override bool ObjectHasFlavor => true;
+        public override bool HasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Rod;
         public override bool CanAbsorb(Item item, Item other)
         {

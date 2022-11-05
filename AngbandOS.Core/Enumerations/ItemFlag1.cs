@@ -26,7 +26,6 @@ namespace AngbandOS.Enumerations
         public const uint Infra = 0x00000400;
         public const uint Int = 0x00000002;
         public const uint KillDragon = 0x01000000;
-        public const uint PvalMask = Str | Int | Wis | Dex | Con | Cha | Stealth | Search | Infra | Tunnel | Speed | Blows;
         public const uint Search = 0x00000200;
         public const uint SlayAnimal = 0x00010000;
         public const uint SlayDemon = 0x00080000;

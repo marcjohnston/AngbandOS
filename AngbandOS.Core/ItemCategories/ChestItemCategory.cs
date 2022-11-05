@@ -32,11 +32,11 @@ namespace AngbandOS.ItemCategories
             }
             else if (item.TypeSpecificValue == 0)
             {
-                return item.ItemType.Stompable[StompableType.Broken];
+                return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
             }
             else if (item.TypeSpecificValue < 0)
             {
-                return item.ItemType.Stompable[StompableType.Average];
+                return item.ItemType.BaseItemCategory.Stompable[StompableType.Average];
             }
             else
             {
@@ -44,11 +44,11 @@ namespace AngbandOS.ItemCategories
                 {
                     case ChestTrap.ChestNotTrapped:
                         {
-                            return item.ItemType.Stompable[StompableType.Good];
+                            return item.ItemType.BaseItemCategory.Stompable[StompableType.Good];
                         }
                     default:
                         {
-                            return item.ItemType.Stompable[StompableType.Excellent];
+                            return item.ItemType.BaseItemCategory.Stompable[StompableType.Excellent];
                         }
                 }
             }

@@ -2225,8 +2225,8 @@ namespace AngbandOS
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].Character;
-            ap = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].Colour;
+            cp = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].BaseItemCategory.FlavorCharacter;
+            ap = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].BaseItemCategory.FlavorColour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)
@@ -2374,8 +2374,8 @@ namespace AngbandOS
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Marked)
                 {
-                    cp = oPtr.ItemType.Character;
-                    ap = oPtr.ItemType.Colour;
+                    cp = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
+                    ap = oPtr.ItemType.BaseItemCategory.FlavorColour;
                     if (_player.TimedHallucinations != 0)
                     {
                         ImageObject(out ap, out cp);

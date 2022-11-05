@@ -393,8 +393,8 @@ namespace AngbandOS
             int i = pos % 26;
             string outVal = $"{i.IndexToLetter()}) ";
             SaveGame.PrintLine(outVal, i + 6, 0);
-            Colour a = oPtr.ItemType.Colour;
-            char c = oPtr.ItemType.Character;
+            Colour a = oPtr.ItemType.BaseItemCategory.FlavorColour;
+            char c = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
             SaveGame.Place(a, c, i + 6, 3);
             oName = GetItemDescription(oPtr);
             if (maxwid < oName.Length)

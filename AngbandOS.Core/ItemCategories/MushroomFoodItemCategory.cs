@@ -3,7 +3,7 @@
     [Serializable]
     internal abstract class MushroomFoodItemCategory : FoodItemCategory
     {
-        public override bool ObjectHasFlavor => true;
+        public override bool HasFlavor => true;
 
     }
 }

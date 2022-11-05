@@ -248,8 +248,8 @@ namespace AngbandOS
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = SaveGame.ItemTypes[i];
-                kPtr.Tried = false;
-                kPtr.FlavourAware = false;
+                kPtr.BaseItemCategory.Tried = false;
+                kPtr.BaseItemCategory.FlavourAware = false;
             }
             for (int i = 1; i < SaveGame.MonsterRaces.Count; i++)
             {

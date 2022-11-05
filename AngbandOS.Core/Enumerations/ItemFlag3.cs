@@ -22,6 +22,10 @@ namespace AngbandOS.Enumerations
         public const uint EasyKnow = 0x00000100;
         public const uint Feather = 0x00001000;
         public const uint HeavyCurse = 0x40000000;
+
+        /// <summary>
+        /// Hide any speed, blow, stealth, search, infra-vision and/or tunnel bonus in the item description.
+        /// </summary>
         public const uint HideType = 0x00000200;
         public const uint IgnoreAcid = 0x00100000;
         public const uint IgnoreCold = 0x00800000;

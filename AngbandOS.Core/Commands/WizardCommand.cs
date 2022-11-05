@@ -490,7 +490,7 @@ namespace AngbandOS.Commands
                 ItemType kPtr = saveGame.ItemTypes[i];
                 if (kPtr.BaseItemCategory.Level <= saveGame.CommandArgument)
                 {
-                    kPtr.FlavourAware = true;
+                    kPtr.BaseItemCategory.FlavourAware = true;
                 }
             }
         }

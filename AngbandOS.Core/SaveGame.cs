@@ -1374,49 +1374,49 @@ namespace AngbandOS
             for (i = 0; i < ItemTypes.Count; i++)
             {
                 ItemType kPtr = ItemTypes[i];
-                if (kPtr.HasFlavor)
+                if (kPtr.BaseItemCategory.HasFlavor)
                 {
                     int indexx = kPtr.BaseItemCategory.SubCategory ?? 0;
                     switch (kPtr.BaseItemCategory.CategoryEnum)
                     {
                         case ItemCategory.Food:
-                            kPtr.Character = MushroomFlavours[indexx].Character;
-                            kPtr.Colour = MushroomFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = MushroomFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = MushroomFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Potion:
-                            kPtr.Character = PotionFlavours[indexx].Character;
-                            kPtr.Colour = PotionFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = PotionFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = PotionFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Scroll:
-                            kPtr.Character = ScrollFlavours[indexx].Character;
-                            kPtr.Colour = ScrollFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = ScrollFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = ScrollFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Amulet:
-                            kPtr.Character = AmuletFlavours[indexx].Character;
-                            kPtr.Colour = AmuletFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = AmuletFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = AmuletFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Ring:
-                            kPtr.Character = RingFlavours[indexx].Character;
-                            kPtr.Colour = RingFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = RingFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = RingFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Staff:
-                            kPtr.Character = StaffFlavours[indexx].Character;
-                            kPtr.Colour = StaffFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = StaffFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = StaffFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Wand:
-                            kPtr.Character = WandFlavours[indexx].Character;
-                            kPtr.Colour = WandFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = WandFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = WandFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Rod:
-                            kPtr.Character = RodFlavours[indexx].Character;
-                            kPtr.Colour = RodFlavours[indexx].Colour;
+                            kPtr.BaseItemCategory.FlavorCharacter = RodFlavours[indexx].Character;
+                            kPtr.BaseItemCategory.FlavorColour = RodFlavours[indexx].Colour;
                             break;
                     }
                 }
@@ -1978,12 +1978,10 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                kPtr.HasFlavor = kPtr.BaseItemCategory.ObjectHasFlavor;
-                if (!kPtr.HasFlavor)
+                if (!kPtr.BaseItemCategory.HasFlavor)
                 {
-                    kPtr.FlavourAware = true;
+                    kPtr.BaseItemCategory.FlavourAware = true;
                 }
-                kPtr.EasyKnow = kPtr.BaseItemCategory.EasyKnow;
             }
         }
 

@@ -20,44 +20,30 @@ namespace AngbandOS
     [Serializable]
     internal class ItemType
     {
+        /// <summary>
+        /// The group of flags (Flags1, Flags2 and Flags3) return a flags based value for numerous properties of the item categories.
+        /// </summary>
         public readonly FlagSet Flags1 = new FlagSet();
-        public readonly FlagSet Flags2 = new FlagSet();
-        public readonly FlagSet Flags3 = new FlagSet();
 
         /// <summary>
-        /// Returns true, if the item is stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
-        /// Use StompableType enum to address each index.
+        /// The group of flags (Flags1, Flags2 and Flags3) return a flags based value for numerous properties of the item categories.
         /// </summary>
-        public readonly bool[] Stompable = new bool[4];
+        public readonly FlagSet Flags2 = new FlagSet();
+
+        /// <summary>
+        /// The group of flags (Flags1, Flags2 and Flags3) return a flags based value for numerous properties of the item categories.
+        /// </summary>
+        public readonly FlagSet Flags3 = new FlagSet();
 
         /// <summary>
         /// Returns the readonly scaffolded base item type.
         /// </summary>
         public BaseItemCategory BaseItemCategory;
 
-        public char Character;
-        public Colour Colour;
-
-        /// <summary>
-        /// Returns whether or not items of this type auto-identify their flavours.
-        /// </summary>
-        public bool EasyKnow;
-
-        /// <summary>
-        /// The special flavor of the item has been identified. (e.g. of "seeing")
-        /// </summary>
-        public bool FlavourAware;
-        public bool HasFlavor;
-
-        public bool Tried;
-
         public ItemType(BaseItemCategory baseItemCategory)
         {
             BaseItemCategory = baseItemCategory; // Instantiate the ItemCategory that this ItemType is based from.
 
-            Character = baseItemCategory.Character;
-            Colour = baseItemCategory.Colour;
-            Tried = baseItemCategory.Tried;
             Flags1.Set(baseItemCategory.Blows ? ItemFlag1.Blows : 0);
             Flags1.Set(baseItemCategory.BrandAcid ? ItemFlag1.BrandAcid : 0);
             Flags1.Set(baseItemCategory.BrandCold ? ItemFlag1.BrandCold : 0);

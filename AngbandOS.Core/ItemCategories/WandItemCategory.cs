@@ -9,7 +9,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class WandItemCategory : BaseItemCategory
     {
-        public override bool ObjectHasFlavor => true;
+        public override bool HasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Wand;
         public abstract bool ExecuteActivation(SaveGame saveGame, int dir);
         public override string GetDescription(Item item, bool includeCountPrefix)

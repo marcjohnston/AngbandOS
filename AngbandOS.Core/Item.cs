@@ -14,6 +14,7 @@ using AngbandOS.StaticData;
 using System;
 using System.IO;
 using static AngbandOS.Extensions;
+using AngbandOS.Spells;
 
 namespace AngbandOS
 {
@@ -372,7 +373,7 @@ namespace AngbandOS
 
         public void BecomeFlavourAware()
         {
-            ItemType.FlavourAware = true;
+            ItemType.BaseItemCategory.FlavourAware = true;
         }
 
         public void BecomeKnown()
@@ -1105,7 +1106,8 @@ namespace AngbandOS
                     t += $" (with {TypeSpecificValue} turns of light)";
                 }
             }
-            if (known && f1.IsSet(ItemFlag1.PvalMask))
+
+            if (known && ItemType.BaseItemCategory.HasAnyPvalMask)
             {
                 t += ' ';
                 t += p1;
@@ -2161,7 +2163,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            return ItemType.FlavourAware;
+            return ItemType.BaseItemCategory.FlavourAware;
         }
 
         public bool IsKnown()
@@ -2174,7 +2176,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (ItemType.EasyKnow && ItemType.FlavourAware)
+            if (ItemType.BaseItemCategory.EasyKnow && ItemType.BaseItemCategory.FlavourAware)
             {
                 return true;
             }
@@ -2300,7 +2302,7 @@ namespace AngbandOS
 
         public void ObjectTried()
         {
-            ItemType.Tried = true;
+            ItemType.BaseItemCategory.Tried = true;
         }
 
         public int OriginalRealValue()
@@ -2559,11 +2561,11 @@ namespace AngbandOS
         {
             if (!IsKnown())
             {
-                if (ItemType.BaseItemCategory.ObjectHasFlavor)
+                if (ItemType.BaseItemCategory.HasFlavor)
                 {
                     if (IsFlavourAware())
                     {
-                        return ItemType.Stompable[StompableType.Broken];
+                        return ItemType.BaseItemCategory.Stompable[StompableType.Broken];
                     }
                 }
                 if (IdentifyFlags.IsClear(Constants.IdentSense))
@@ -2576,12 +2578,12 @@ namespace AngbandOS
 
         public string StoreDescription(bool pref, int mode)
         {
-            bool hackAware = ItemType.FlavourAware;
+            bool hackAware = ItemType.BaseItemCategory.FlavourAware;
             bool hackKnown = IdentifyFlags.IsSet(Constants.IdentKnown);
             IdentifyFlags.Set(Constants.IdentKnown);
-            ItemType.FlavourAware = true;
+            ItemType.BaseItemCategory.FlavourAware = true;
             string buf = Description(pref, mode);
-            ItemType.FlavourAware = hackAware;
+            ItemType.BaseItemCategory.FlavourAware = hackAware;
             if (!hackKnown)
             {
                 IdentifyFlags.Clear(Constants.IdentKnown);
@@ -2888,7 +2890,7 @@ namespace AngbandOS
 
         private bool IsTried()
         {
-            return ItemType.Tried;
+            return ItemType.BaseItemCategory.Tried;
         }
 
         private delegate bool GetObjNumHookDelegate(ItemType kPtr);

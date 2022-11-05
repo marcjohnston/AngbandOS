@@ -61,8 +61,8 @@ namespace AngbandOS.Commands
             saveGame.PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
-            Colour missileColour = individualAmmunition.ItemType.Colour;
-            char missileCharacter = individualAmmunition.ItemType.Character;
+            Colour missileColour = individualAmmunition.ItemType.BaseItemCategory.FlavorColour;
+            char missileCharacter = individualAmmunition.ItemType.BaseItemCategory.FlavorCharacter;
             int shotSpeed = saveGame.Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = saveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
