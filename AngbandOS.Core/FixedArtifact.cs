@@ -46,9 +46,6 @@ namespace AngbandOS
         {
             BaseItemCategory = baseFixedArtifact.BaseItemCategory;
 
-            Flags1 = new FlagSet();
-            Flags2 = new FlagSet();
-            Flags3 = new FlagSet();
             Ac = baseFixedArtifact.Ac;
             Cost = baseFixedArtifact.Cost;
             CurNum = 0;
