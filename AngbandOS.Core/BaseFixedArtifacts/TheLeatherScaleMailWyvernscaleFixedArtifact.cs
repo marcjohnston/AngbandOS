@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLeatherScaleMailWyvernscaleFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SoftArmorLeatherScaleMail();
+
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
@@ -26,10 +29,8 @@ internal class TheLeatherScaleMailWyvernscaleFixedArtifact : Base2FixedArtifact
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResShards => true;
-    public override int Sval => 11;
     public override int ToA => 25;
     public override int ToD => 0;
     public override int ToH => -1;
-    public override ItemCategory Tval => ItemCategory.SoftArmor;
     public override int Weight => 60;
 }

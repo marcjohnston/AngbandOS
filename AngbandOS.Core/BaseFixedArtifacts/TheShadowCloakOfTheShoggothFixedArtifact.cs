@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheShadowCloakOfTheShoggothFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new CloakShadow();
+
     public override char Character => '(';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Shadow Cloak of the Shoggoth";
@@ -26,10 +29,8 @@ internal class TheShadowCloakOfTheShoggothFixedArtifact : Base2FixedArtifact
     public override int Rarity => 40;
     public override bool SeeInvis => true;
     public override bool Stealth => true;
-    public override int Sval => 6;
     public override int ToA => 12;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Cloak;
     public override int Weight => 5;
 }

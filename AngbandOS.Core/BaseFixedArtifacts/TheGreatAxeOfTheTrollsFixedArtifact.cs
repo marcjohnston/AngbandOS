@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheGreatAxeOfTheTrollsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmGreatAxe();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Great Axe of the Trolls";
@@ -38,11 +41,9 @@ internal class TheGreatAxeOfTheTrollsFixedArtifact : Base2FixedArtifact
     public override bool SlayOrc => true;
     public override bool SlayUndead => true;
     public override bool Str => true;
-    public override int Sval => 25;
     public override int ToA => 8;
     public override int ToD => 18;
     public override int ToH => 15;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 230;
     public override bool Wis => true;
 }

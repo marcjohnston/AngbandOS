@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheDragonHelmOfPowerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HelmDragonHelm();
+
     public override char Character => ']';
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "The Dragon Helm of Power";
@@ -35,11 +38,9 @@ internal class TheDragonHelmOfPowerFixedArtifact : Base2FixedArtifact
     public override bool ResLight => true;
     public override bool SeeInvis => true;
     public override bool Str => true;
-    public override int Sval => 7;
     public override bool Telepathy => true;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Helm;
     public override int Weight => 75;
 }

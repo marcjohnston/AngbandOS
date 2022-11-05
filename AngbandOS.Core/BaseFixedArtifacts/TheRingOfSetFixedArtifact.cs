@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheRingOfSetFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new RingPower();
+
     public override char Character => '=';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Ring of Set";
@@ -50,11 +53,9 @@ internal class TheRingOfSetFixedArtifact : Base2FixedArtifact
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
-    public override int Sval => 37;
     public override int ToA => 0;
     public override int ToD => 15;
     public override int ToH => 15;
-    public override ItemCategory Tval => ItemCategory.Ring;
     public override int Weight => 2;
     public override bool Wis => true;
 }

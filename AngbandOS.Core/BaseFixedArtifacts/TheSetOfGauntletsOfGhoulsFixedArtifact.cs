@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSetOfGauntletsOfGhoulsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new GlovesSetOfGauntlets();
+
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";
@@ -27,10 +30,8 @@ internal class TheSetOfGauntletsOfGhoulsFixedArtifact : Base2FixedArtifact
     public override bool Regen => true;
     public override bool ResCold => true;
     public override bool SustCon => true;
-    public override int Sval => 2;
     public override int ToA => 15;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Gloves;
     public override int Weight => 25;
 }

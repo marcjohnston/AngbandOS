@@ -1,11 +1,13 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheIronHelmTerrorMaskFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HelmIronHelm();
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
@@ -36,12 +38,10 @@ internal class TheIronHelmTerrorMaskFixedArtifact : Base2FixedArtifact
     public override bool Search => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override int Sval => 5;
     public override bool Teleport => true;
     public override int ToA => 10;
     public override int ToD => 25;
     public override int ToH => 25;
-    public override ItemCategory Tval => ItemCategory.Helm;
     public override int Weight => 75;
     public override bool Wis => true;
 }

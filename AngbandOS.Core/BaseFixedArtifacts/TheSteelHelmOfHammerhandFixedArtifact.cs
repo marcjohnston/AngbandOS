@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSteelHelmOfHammerhandFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HelmSteelHelm();
+
     public override char Character => ']';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Steel Helm of Hammerhand";
@@ -28,10 +31,8 @@ internal class TheSteelHelmOfHammerhandFixedArtifact : Base2FixedArtifact
     public override bool ResAcid => true;
     public override bool ResNexus => true;
     public override bool Str => true;
-    public override int Sval => 6;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Helm;
     public override int Weight => 60;
 }

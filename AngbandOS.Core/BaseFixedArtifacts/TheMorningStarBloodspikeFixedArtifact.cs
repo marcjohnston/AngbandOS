@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMorningStarBloodspikeFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedMorningStar();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Morning Star 'Bloodspike'";
@@ -30,10 +33,8 @@ internal class TheMorningStarBloodspikeFixedArtifact : Base2FixedArtifact
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool Str => true;
-    public override int Sval => 12;
     public override int ToA => 0;
     public override int ToD => 22;
     public override int ToH => 8;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 150;
 }

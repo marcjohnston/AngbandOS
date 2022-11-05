@@ -189,7 +189,7 @@ namespace AngbandOS.Commands
             {
                 if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemCategory potion = (PotionItemCategory)missile.ItemType.BaseCategory;
+                    PotionItemCategory potion = (PotionItemCategory)missile.ItemType.BaseItemCategory;
                     saveGame.MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(saveGame, 1, y, x))
                     {

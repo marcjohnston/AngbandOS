@@ -1234,7 +1234,7 @@ namespace AngbandOS
         public void OpenChest(int y, int x, int oIdx)
         {
             Item oPtr = Level.Items[oIdx];
-            ChestItemCategory chest = (ChestItemCategory)oPtr.ItemType.BaseCategory;
+            ChestItemCategory chest = (ChestItemCategory)oPtr.ItemType.BaseItemCategory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLongSwordOfKarakalFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordLongSword();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Long Sword of Karakal";
@@ -47,10 +50,8 @@ internal class TheLongSwordOfKarakalFixedArtifact : Base2FixedArtifact
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
-    public override int Sval => 17;
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 8;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 130;
 }

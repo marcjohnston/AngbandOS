@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLongBowOfSerpentsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new BowLong();
+
     public override char Character => '}';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Long Bow of Serpents";
@@ -26,11 +29,9 @@ internal class TheLongBowOfSerpentsFixedArtifact : Base2FixedArtifact
     public override int Pval => 3;
     public override int Rarity => 20;
     public override bool ShowMods => true;
-    public override int Sval => 13;
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 17;
-    public override ItemCategory Tval => ItemCategory.Bow;
     public override int Weight => 40;
     public override bool XtraMight => true;
 }

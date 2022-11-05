@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheGemstoneShiningTrapezodedronFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new LightGemstone();
+
     public override char Character => '*';
     public override Colour Colour => Colour.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";
@@ -30,11 +33,9 @@ internal class TheGemstoneShiningTrapezodedronFixedArtifact : Base2FixedArtifact
     public override bool ResChaos => true;
     public override bool SeeInvis => true;
     public override bool Speed => true;
-    public override int Sval => 6;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Light;
     public override int Weight => 5;
     public override bool Wis => true;
 }

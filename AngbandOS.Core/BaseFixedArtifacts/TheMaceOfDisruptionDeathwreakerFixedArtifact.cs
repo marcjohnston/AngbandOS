@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMaceOfDisruptionDeathwreakerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedMace();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Purple;
     public override string Name => "The Mace of Disruption 'Deathwreaker'";
@@ -38,12 +41,10 @@ internal class TheMaceOfDisruptionDeathwreakerFixedArtifact : Base2FixedArtifact
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool Str => true;
-    public override int Sval => 20;
     public override int ToA => 0;
     public override int ToD => 18;
     public override int ToH => 18;
     public override bool Tunnel => true;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override bool Vampiric => true;
     public override int Weight => 400;
 }

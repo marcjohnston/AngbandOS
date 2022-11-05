@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLightCrossbowOfDeathFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new BowLightCrossbow();
+
     public override char Character => '}';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Light Crossbow of Death";
@@ -26,11 +29,9 @@ internal class TheLightCrossbowOfDeathFixedArtifact : Base2FixedArtifact
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override bool Speed => true;
-    public override int Sval => 23;
     public override int ToA => 0;
     public override int ToD => 14;
     public override int ToH => 10;
-    public override ItemCategory Tval => ItemCategory.Bow;
     public override int Weight => 110;
     public override bool XtraMight => true;
 }

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheIronCrownOfMiseryFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new CrownIron();
+
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Crown of Misery";
@@ -29,11 +32,9 @@ internal class TheIronCrownOfMiseryFixedArtifact : Base2FixedArtifact
     public override int Rarity => 12;
     public override bool SeeInvis => true;
     public override bool Str => true;
-    public override int Sval => 10;
     public override bool Telepathy => true;
     public override int ToA => 25;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Crown;
     public override int Weight => 20;
 }

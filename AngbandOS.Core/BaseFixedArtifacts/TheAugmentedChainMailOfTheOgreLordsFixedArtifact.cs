@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheAugmentedChainMailOfTheOgreLordsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new AmuletBrilliance();
+
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
@@ -29,11 +32,9 @@ internal class TheAugmentedChainMailOfTheOgreLordsFixedArtifact : Base2FixedArti
     public override bool ResAcid => true;
     public override bool ResConf => true;
     public override bool ResPois => true;
-    public override int Sval => 6;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => -2;
-    public override ItemCategory Tval => ItemCategory.HardArmor;
     public override int Weight => 270;
     public override bool Wis => true;
 }

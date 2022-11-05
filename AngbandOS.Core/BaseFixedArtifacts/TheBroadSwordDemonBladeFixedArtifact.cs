@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheBroadSwordDemonBladeFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordBroadSword();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Broad Sword 'Demon Blade'";
@@ -33,11 +36,9 @@ internal class TheBroadSwordDemonBladeFixedArtifact : Base2FixedArtifact
     public override bool SlayTroll => true;
     public override bool Speed => true;
     public override bool Stealth => true;
-    public override int Sval => 16;
     public override int ToA => 0;
     public override int ToD => 7;
     public override int ToH => -30;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override bool Vorpal => true;
     public override int Weight => 130;
 }

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMithrilChainMailOfTheVampireHunterFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HardArmorMithrilChainMail();
+
     public override char Character => '[';
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
@@ -35,11 +38,9 @@ internal class TheMithrilChainMailOfTheVampireHunterFixedArtifact : Base2FixedAr
     public override bool ResPois => true;
     public override bool SeeInvis => true;
     public override bool Stealth => true;
-    public override int Sval => 20;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => -1;
-    public override ItemCategory Tval => ItemCategory.HardArmor;
     public override int Weight => 150;
     public override bool Wis => true;
 }

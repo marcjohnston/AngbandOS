@@ -102,7 +102,7 @@ namespace AngbandOS.Projection
                     SaveGame.Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseCategory;
+                        PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseItemCategory;
                         potion.Smash(SaveGame, who, y, x);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);

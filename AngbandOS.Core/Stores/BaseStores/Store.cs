@@ -100,7 +100,7 @@ namespace AngbandOS
                 for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                 {
                     ItemType itemType = SaveGame.ItemTypes[i];
-                    if (itemType.BaseCategory.GetType().IsAssignableFrom(master[k].ItemType))
+                    if (itemType.BaseItemCategory.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
                         break;
@@ -401,7 +401,7 @@ namespace AngbandOS
             {
                 oName = oName.Substring(0, maxwid);
             }
-            SaveGame.Print(oPtr.ItemType.BaseCategory.Colour, oName, i + 6, 5);
+            SaveGame.Print(oPtr.ItemType.BaseItemCategory.Colour, oName, i + 6, 5);
             int wgt = oPtr.Weight;
             outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
             SaveGame.Print(outVal, i + 6, 61);
@@ -523,7 +523,7 @@ namespace AngbandOS
                 }
             }
             SaveGame.SaveScreen();
-            SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseCategory.SpellBookToToRealm);
+            SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseItemCategory.SpellBookToToRealm);
             SaveGame.PrintLine("", 0, 0);
             SaveGame.Print("[Press any key to continue]", 0, 23);
             SaveGame.Inkey();
@@ -785,7 +785,7 @@ namespace AngbandOS
             int size = 1;
             int discount = 0;
             int cost = oPtr.Value();
-            size += oPtr.ItemType.BaseCategory.GetAdditionalMassProduceCount(oPtr);
+            size += oPtr.ItemType.BaseItemCategory.GetAdditionalMassProduceCount(oPtr);
             if (cost < 5)
             {
                 discount = 0;

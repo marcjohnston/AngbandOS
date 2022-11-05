@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMainGaucheOfDefenceFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordMainGauche();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Main Gauche of Defence";
@@ -31,10 +34,8 @@ internal class TheMainGaucheOfDefenceFixedArtifact : Base2FixedArtifact
     public override bool SlayGiant => true;
     public override bool SlayTroll => true;
     public override bool Speed => true;
-    public override int Sval => 5;
     public override int ToA => 0;
     public override int ToD => 15;
     public override int ToH => 12;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 30;
 }

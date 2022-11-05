@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLeadCrownOfTheUniverseFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new CrownLead();
+
     public override char Character => ']';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Lead Crown of the Universe";
@@ -45,12 +48,10 @@ internal class TheLeadCrownOfTheUniverseFixedArtifact : Base2FixedArtifact
     public override bool ResPois => true;
     public override bool SeeInvis => true;
     public override bool Str => true;
-    public override int Sval => 50;
     public override bool Telepathy => true;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Crown;
     public override int Weight => 20;
     public override bool Wis => true;
 }

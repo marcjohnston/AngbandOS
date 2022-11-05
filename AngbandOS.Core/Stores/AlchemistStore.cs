@@ -70,7 +70,7 @@ namespace AngbandOS.Stores
 
         protected override bool StoreWillBuy(Item item)
         {
-            switch (item.ItemType.BaseCategory)
+            switch (item.ItemType.BaseItemCategory)
             {
                 case ScrollItemCategory _:
                 case PotionItemCategory _:

@@ -68,7 +68,7 @@ namespace AngbandOS.Commands
             //bool identified = false;
             //bool usedUp = true;
 
-            ScrollItemCategory scrollItem = (ScrollItemCategory)item.ItemType.BaseCategory;
+            ScrollItemCategory scrollItem = (ScrollItemCategory)item.ItemType.BaseItemCategory;
             ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(saveGame);
             scrollItem.Read(readScrollEventArgs);
 

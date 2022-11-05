@@ -35,7 +35,7 @@ namespace AngbandOS
             }
         }
 
-        public ItemType LookupKind(ItemCategory tval, int sval)
+        public ItemType LookupKind(ItemCategory tval, int sval) // TODO: Known to fail now that items are scaffolded.
         {
             for (int k = 1; k < Count; k++)
             {

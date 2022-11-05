@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheScytheOfGharneFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmScythe();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Scythe of G'harne";
@@ -35,10 +38,8 @@ internal class TheScytheOfGharneFixedArtifact : Base2FixedArtifact
     public override bool ResLight => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override int Sval => 17;
     public override int ToA => 10;
     public override int ToD => 8;
     public override int ToH => 8;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 250;
 }

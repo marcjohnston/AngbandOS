@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLongBowSureshotFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new BowLong();
+
     public override char Character => '}';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Long Bow 'Sureshot'";
@@ -27,11 +30,9 @@ internal class TheLongBowSureshotFixedArtifact : Base2FixedArtifact
     public override bool ResDisen => true;
     public override bool ShowMods => true;
     public override bool Stealth => true;
-    public override int Sval => 13;
     public override int ToA => 0;
     public override int ToD => 22;
     public override int ToH => 20;
-    public override ItemCategory Tval => ItemCategory.Bow;
     public override int Weight => 40;
     public override bool XtraShots => true;
 }

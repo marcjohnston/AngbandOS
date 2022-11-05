@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMetalScaleMailOfTheOrcsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HardArmorMetalScaleMail();
+
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";
@@ -32,10 +35,8 @@ internal class TheMetalScaleMailOfTheOrcsFixedArtifact : Base2FixedArtifact
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool Str => true;
-    public override int Sval => 3;
     public override int ToA => 40;
     public override int ToD => 0;
     public override int ToH => -2;
-    public override ItemCategory Tval => ItemCategory.HardArmor;
     public override int Weight => 250;
 }

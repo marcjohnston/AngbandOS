@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMetalCapOfHolinessFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HelmMetalCap();
+
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Metal Cap of Holiness";
@@ -24,11 +27,9 @@ internal class TheMetalCapOfHolinessFixedArtifact : Base2FixedArtifact
     public override int Level => 10;
     public override int Pval => 3;
     public override int Rarity => 2;
-    public override int Sval => 3;
     public override int ToA => 12;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Helm;
     public override int Weight => 20;
     public override bool Wis => true;
 }

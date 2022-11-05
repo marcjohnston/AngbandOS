@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheHalberdArmourbaneFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmHalberd();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Halberd 'Armourbane'";
@@ -33,10 +36,8 @@ internal class TheHalberdArmourbaneFixedArtifact : Base2FixedArtifact
     public override bool ShowMods => true;
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;
-    public override int Sval => 15;
     public override int ToA => 0;
     public override int ToD => 9;
     public override int ToH => 6;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 190;
 }

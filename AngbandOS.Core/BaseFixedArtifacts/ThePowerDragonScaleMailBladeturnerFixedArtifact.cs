@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class ThePowerDragonScaleMailBladeturnerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new DragArmorPowerDragonScaleMail();
+
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
@@ -41,10 +44,8 @@ internal class ThePowerDragonScaleMailBladeturnerFixedArtifact : Base2FixedArtif
     public override bool ResPois => true;
     public override bool ResShards => true;
     public override bool ResSound => true;
-    public override int Sval => 30;
     public override int ToA => 35;
     public override int ToD => 0;
     public override int ToH => -8;
-    public override ItemCategory Tval => ItemCategory.DragArmor;
     public override int Weight => 600;
 }

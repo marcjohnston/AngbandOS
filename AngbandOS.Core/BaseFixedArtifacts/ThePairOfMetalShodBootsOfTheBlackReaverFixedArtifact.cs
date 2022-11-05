@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class ThePairOfMetalShodBootsOfTheBlackReaverFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new BootsMetalShodBoots();
+
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Pair of Metal Shod Boots of the Black Reaver";
@@ -27,10 +30,8 @@ internal class ThePairOfMetalShodBootsOfTheBlackReaverFixedArtifact : Base2Fixed
     public override int Rarity => 25;
     public override bool Speed => true;
     public override bool Str => true;
-    public override int Sval => 6;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Boots;
     public override int Weight => 80;
 }

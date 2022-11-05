@@ -49,7 +49,7 @@ namespace AngbandOS.Commands
             saveGame.EnergyUse = 100;
             int itemLevel = item.ItemType.Level;
             // Do the actual potion effect
-            PotionItemCategory potion = (PotionItemCategory)item.ItemType.BaseCategory; // The item will be a potion.
+            PotionItemCategory potion = (PotionItemCategory)item.ItemType.BaseItemCategory; // The item will be a potion.
             bool identified = potion.Quaff(saveGame);
 
             // Skeletons are messy drinkers

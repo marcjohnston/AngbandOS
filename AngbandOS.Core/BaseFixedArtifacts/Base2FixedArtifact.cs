@@ -8,12 +8,15 @@
 using AngbandOS.Debug;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core
 {
     [Serializable]
     internal abstract class Base2FixedArtifact
     {
+        public abstract BaseItemCategory BaseItemCategory { get; }
+
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
         public abstract string Name { get; }
@@ -198,8 +201,6 @@ namespace AngbandOS.Core
 
         public virtual bool SustWis => false;
 
-        public abstract int Sval { get; }
-
         public virtual bool Telepathy => false;
 
         public virtual bool Teleport => false;
@@ -211,8 +212,6 @@ namespace AngbandOS.Core
         public abstract int ToH { get; }
 
         public virtual bool Tunnel => false;
-
-        public abstract ItemCategory Tval { get; }
 
         public virtual bool Vampiric => false;
 

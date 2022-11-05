@@ -715,7 +715,7 @@ namespace AngbandOS.Commands
                     row = 2 + (num % maxLetters);
                     col = 30 * (num / maxLetters);
                     ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-                    string itemName = kPtr.BaseCategory.Name.Trim().Replace("$", "").Replace("~", ""); 
+                    string itemName = kPtr.BaseItemCategory.Name.Trim().Replace("$", "").Replace("~", ""); 
 
                     saveGame.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
@@ -758,11 +758,7 @@ namespace AngbandOS.Commands
             {
                 return;
             }
-            ItemType i = saveGame.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
-            if (i == null)
-            {
-                return;
-            }
+            ItemType i = new ItemType(aPtr.BaseItemCategory);
             qPtr.AssignItemType(i);
             qPtr.FixedArtifactIndex = aIdx;
             qPtr.TypeSpecificValue = aPtr.Pval;

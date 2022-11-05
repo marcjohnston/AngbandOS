@@ -14,6 +14,11 @@ namespace AngbandOS.ItemCategories
     internal abstract class BaseItemCategory
     {
         /// <summary>
+        /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.
+        /// </summary>
+        public virtual bool HasQuality => false;
+
+        /// <summary>
         /// Returns true, if the object type has flavors.  Returns false, by default.
         /// </summary>
         public virtual bool ObjectHasFlavor => false;

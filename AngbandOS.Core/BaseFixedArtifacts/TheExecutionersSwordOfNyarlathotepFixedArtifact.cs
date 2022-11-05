@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheExecutionersSwordOfNyarlathotepFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordExecutionersSword();
+
     public override char Character => '|';
     public override Colour Colour => Colour.Red;
     public override string Name => "The Executioner's Sword of Nyarlathotep";
@@ -31,11 +34,9 @@ internal class TheExecutionersSwordOfNyarlathotepFixedArtifact : Base2FixedArtif
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
-    public override int Sval => 28;
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 18;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override bool Vorpal => true;
     public override int Weight => 260;
 }

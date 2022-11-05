@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMultiHuedDragonScaleMailRazorbackFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new DragArmorMultiHuedDragonScaleMail();
+
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
@@ -33,10 +36,8 @@ internal class TheMultiHuedDragonScaleMailRazorbackFixedArtifact : Base2FixedArt
     public override bool ResLight => true;
     public override bool ResPois => true;
     public override bool SeeInvis => true;
-    public override int Sval => 6;
     public override int ToA => 25;
     public override int ToD => 0;
     public override int ToH => -4;
-    public override ItemCategory Tval => ItemCategory.DragArmor;
     public override int Weight => 500;
 }

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheStarEssenceOfXothFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new LightStarEssenceElendil();
+
     public override char Character => '*';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Star Essence of Xoth";
@@ -28,10 +31,8 @@ internal class TheStarEssenceOfXothFixedArtifact : Base2FixedArtifact
     public override int Rarity => 25;
     public override bool SeeInvis => true;
     public override bool Speed => true;
-    public override int Sval => 5;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Light;
     public override int Weight => 5;
 }

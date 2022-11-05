@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheNecklaceOfTheDwarvesFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new AmuletNecklace();
+
     public override char Character => '"';
     public override string Name => "The Necklace of the Dwarves";
     public override int Ac => 0;
@@ -31,10 +34,8 @@ internal class TheNecklaceOfTheDwarvesFixedArtifact : Base2FixedArtifact
     public override bool Regen => true;
     public override bool SeeInvis => true;
     public override bool Str => true;
-    public override int Sval => 12;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Amulet;
     public override int Weight => 3;
 }

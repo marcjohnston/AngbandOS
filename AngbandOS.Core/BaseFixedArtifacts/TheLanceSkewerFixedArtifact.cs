@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLanceSkewerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmLance();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Lance 'Skewer'";
@@ -29,10 +32,8 @@ internal class TheLanceSkewerFixedArtifact : Base2FixedArtifact
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override int Sval => 20;
     public override int ToA => 0;
     public override int ToD => 21;
     public override int ToH => 3;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 360;
 }

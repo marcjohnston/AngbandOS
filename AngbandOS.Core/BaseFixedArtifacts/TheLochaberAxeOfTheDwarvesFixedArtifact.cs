@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLochaberAxeOfTheDwarvesFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmLochaberAxe();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Lochaber Axe of the Dwarves";
@@ -32,11 +35,9 @@ internal class TheLochaberAxeOfTheDwarvesFixedArtifact : Base2FixedArtifact
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
-    public override int Sval => 28;
     public override int ToA => 0;
     public override int ToD => 17;
     public override int ToH => 12;
     public override bool Tunnel => true;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 250;
 }

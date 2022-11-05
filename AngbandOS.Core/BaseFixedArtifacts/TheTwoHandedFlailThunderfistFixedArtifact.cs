@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheTwoHandedFlailThunderfistFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedTwoHandedFlail();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Two-Handed Flail 'Thunderfist'";
@@ -34,10 +37,8 @@ internal class TheTwoHandedFlailThunderfistFixedArtifact : Base2FixedArtifact
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool Str => true;
-    public override int Sval => 18;
     public override int ToA => 0;
     public override int ToD => 18;
     public override int ToH => 5;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 300;
 }

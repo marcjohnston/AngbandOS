@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheRingOfElementalPowerStormFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new RingVilya();
+
     public override char Character => '=';
     public override string Name => "The Ring of Elemental Power (Storm)";
     public override int Ac => 0;
@@ -42,11 +45,9 @@ internal class TheRingOfElementalPowerStormFixedArtifact : Base2FixedArtifact
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
-    public override int Sval => 36;
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 12;
-    public override ItemCategory Tval => ItemCategory.Ring;
     public override int Weight => 2;
     public override bool Wis => true;
 }

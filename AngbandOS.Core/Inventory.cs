@@ -76,7 +76,7 @@ namespace AngbandOS
 
         public static bool ObjectHasFlavor(ItemType i)
         {
-            return i.BaseCategory.ObjectHasFlavor;
+            return i.BaseItemCategory.ObjectHasFlavor;
         }
 
         public void CombinePack()
@@ -173,19 +173,19 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
+                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
+                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
+                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
+                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -317,7 +317,7 @@ namespace AngbandOS
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.ItemType.Category == ItemCategory.Potion)
                         {
-                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseCategory;
+                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseItemCategory;
                             potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
                         }
                         InvenItemIncrease(i, -amt);
@@ -537,19 +537,19 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
+                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm1)
+                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
+                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseCategory.SpellBookToToRealm != _player.Realm2)
+                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -665,7 +665,7 @@ namespace AngbandOS
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.ItemType == null ? Colour.White : oPtr.ItemType.BaseCategory.Colour;
+                outColour[k] = oPtr.ItemType == null ? Colour.White : oPtr.ItemType.BaseItemCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 16;
@@ -743,7 +743,7 @@ namespace AngbandOS
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.ItemType.BaseCategory.Colour;
+                outColour[k] = oPtr.ItemType.BaseItemCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 9;

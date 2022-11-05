@@ -147,7 +147,7 @@ namespace AngbandOS
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3);
-            if (ItemType.BaseCategory.GetsDamageMultiplier)
+            if (ItemType.BaseItemCategory.GetsDamageMultiplier)
             {
                 if (f1.IsSet(ItemFlag1.SlayAnimal) && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
                 {
@@ -393,7 +393,7 @@ namespace AngbandOS
 
         public int BreakageChance()
         {
-            return ItemType.BaseCategory.PercentageBreakageChance;
+            return ItemType.BaseItemCategory.PercentageBreakageChance;
         }
 
         public bool StatsAreSame(Item other)
@@ -460,7 +460,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (!ItemType.BaseCategory.CanAbsorb(this, other))
+            if (!ItemType.BaseItemCategory.CanAbsorb(this, other))
             {
                 return false;
             }    
@@ -503,11 +503,11 @@ namespace AngbandOS
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3);
-            if (ItemType == null || ItemType.BaseCategory == null)
+            if (ItemType == null || ItemType.BaseItemCategory == null)
             {
                 return "(nothing)";
             }
-            string basenm = ItemType.BaseCategory.GetDescription(this, includeCountPrefix);
+            string basenm = ItemType.BaseItemCategory.GetDescription(this, includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -534,13 +534,13 @@ namespace AngbandOS
             }
 
             // This is the detailed description.
-            basenm += ItemType.BaseCategory.GetDetailedDescription(this);
+            basenm += ItemType.BaseItemCategory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += ItemType.BaseCategory.GetVerboseDescription(this);
+            basenm += ItemType.BaseItemCategory.GetVerboseDescription(this);
 
             // This is the verbose description.
             if (mode < 3)
@@ -549,7 +549,7 @@ namespace AngbandOS
             }
 
             // This is the full description.
-            basenm += ItemType.BaseCategory.GetFullDescription(this);
+            basenm += ItemType.BaseItemCategory.GetFullDescription(this);
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -1735,22 +1735,22 @@ namespace AngbandOS
 
         public bool HatesAcid()
         {
-            return ItemType.BaseCategory.HatesAcid;
+            return ItemType.BaseItemCategory.HatesAcid;
         }
 
         public bool HatesCold()
         {
-            return ItemType.BaseCategory.HatesCold;
+            return ItemType.BaseItemCategory.HatesCold;
         }
 
         public bool HatesElec()
         {
-            return ItemType.BaseCategory.HatesElectricity;
+            return ItemType.BaseItemCategory.HatesElectricity;
         }
 
         public bool HatesFire()
         {
-            return ItemType.BaseCategory.HatesFire;
+            return ItemType.BaseItemCategory.HatesFire;
         }
 
         public bool IdentifyFully()
@@ -1767,7 +1767,7 @@ namespace AngbandOS
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = ItemType.BaseCategory.Identify(this);
+            string categoryIdentity = ItemType.BaseItemCategory.Identify(this);
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -2532,11 +2532,11 @@ namespace AngbandOS
                 }
                 value += ePtr.Cost;
             }
-            if (ItemType.BaseCategory.IsWorthless(this))
+            if (ItemType.BaseItemCategory.IsWorthless(this))
             {
                 return 0;
             }
-            value += ItemType.BaseCategory.GetBonusRealValue(this, value);
+            value += ItemType.BaseItemCategory.GetBonusRealValue(this, value);
             return value;
         }
 
@@ -2571,7 +2571,7 @@ namespace AngbandOS
                     return false;
                 }
             }
-            return ItemType.BaseCategory.IsStompable(this);
+            return ItemType.BaseItemCategory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
@@ -2634,7 +2634,7 @@ namespace AngbandOS
             {
                 return ItemType.Cost;
             }
-            return ItemType.BaseCategory.BaseValue;
+            return ItemType.BaseItemCategory.BaseValue;
         }
 
         private string DescribeActivationEffect()
@@ -2883,7 +2883,7 @@ namespace AngbandOS
             {
                 return "teleport every 50+d50 turns";
             }
-            return ItemType.BaseCategory.DescribeActivationEffect(this);
+            return ItemType.BaseItemCategory.DescribeActivationEffect(this);
         }
 
         private bool IsTried()
@@ -2977,7 +2977,7 @@ namespace AngbandOS
                 }
                 return;
             }
-            ItemType.BaseCategory.ApplyMagic(this, lev, power);
+            ItemType.BaseItemCategory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -3303,7 +3303,7 @@ namespace AngbandOS
                     break;
 
                 case 39:
-                    if (ItemType.BaseCategory.CanProvideSheathOfElectricity)
+                    if (ItemType.BaseItemCategory.CanProvideSheathOfElectricity)
                     {
                         RandartFlags3.Set(ItemFlag3.ShElec);
                     }
@@ -3318,7 +3318,7 @@ namespace AngbandOS
                     break;
 
                 case 40:
-                    if (ItemType.BaseCategory.CanProvideSheathOfFire)
+                    if (ItemType.BaseItemCategory.CanProvideSheathOfFire)
                     {
                         RandartFlags3.Set(ItemFlag3.ShFire);
                     }
@@ -3333,7 +3333,7 @@ namespace AngbandOS
                     break;
 
                 case 41:
-                    if (ItemType.BaseCategory.CanReflectBoltsAndArrows)
+                    if (ItemType.BaseItemCategory.CanReflectBoltsAndArrows)
                     {
                         RandartFlags2.Set(ItemFlag2.Reflect);
                     }
@@ -3434,7 +3434,7 @@ namespace AngbandOS
             }
             while (powers-- != 0)
             {
-                int maxType = (ItemType.BaseCategory.CanApplySlayingBonus ? 7 : 5);
+                int maxType = (ItemType.BaseItemCategory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -3481,14 +3481,14 @@ namespace AngbandOS
                     TypeSpecificValue = 4;
                 }
             }
-            ItemType.BaseCategory.ApplyRandartBonus(this);
+            ItemType.BaseItemCategory.ApplyRandartBonus(this);
             RandartFlags3.Set(ItemFlag3.IgnoreAcid | ItemFlag3.IgnoreElec | ItemFlag3.IgnoreFire | ItemFlag3.IgnoreCold);
             int totalFlags = FlagBasedCost(TypeSpecificValue);
             if (aCursed)
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(ItemType.BaseCategory.RandartActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(ItemType.BaseItemCategory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -3638,7 +3638,7 @@ namespace AngbandOS
                 AssignItemType(kIdx);
             }
             ApplyMagic(SaveGame.Level.ObjectLevel, true, good, great);
-            Count = ItemType.BaseCategory.MakeObjectCount;
+            Count = ItemType.BaseItemCategory.MakeObjectCount;
             if (!IsCursed() && !IsBroken() && ItemType.Level > SaveGame.Difficulty)
             {
                 if (SaveGame.Level != null)
@@ -3656,22 +3656,21 @@ namespace AngbandOS
             {
                 return false;
             }
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (aPtr.HasOwnType)
                 {
                     continue;
                 }
+
+                // Do not create another, if there is already one in the game.
                 if (aPtr.CurNum != 0)
                 {
                     continue;
                 }
-                if (aPtr.Tval != Category)
-                {
-                    continue;
-                }
-                if (aPtr.Sval != ItemSubCategory)
+
+                if (aPtr.BaseItemCategory != ItemType.BaseItemCategory)
                 {
                     continue;
                 }
@@ -3812,7 +3811,7 @@ namespace AngbandOS
 
                 case 20:
                 case 21:
-                    if (!ItemType.BaseCategory.CanApplyTunnelBonus)
+                    if (!ItemType.BaseItemCategory.CanApplyTunnelBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3824,7 +3823,7 @@ namespace AngbandOS
 
                 case 22:
                 case 23:
-                    if (!ItemType.BaseCategory.CanApplyBlowsBonus)
+                    if (!ItemType.BaseItemCategory.CanApplyBlowsBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3955,7 +3954,7 @@ namespace AngbandOS
                 case 24:
                 case 25:
                 case 26:
-                    if (!ItemType.BaseCategory.CanApplyBonusArmourClassMiscPower)
+                    if (!ItemType.BaseItemCategory.CanApplyBonusArmourClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }
@@ -3993,7 +3992,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            ItemType.BaseCategory.ApplyRandomSlaying(ref artifactBias, this);
+            ItemType.BaseItemCategory.ApplyRandomSlaying(ref artifactBias, this);
         }
 
         private void CurseRandart()
@@ -4099,7 +4098,7 @@ namespace AngbandOS
 
         private bool MakeFixedArtifact()
         {
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (!aPtr.HasOwnType)
@@ -4122,7 +4121,7 @@ namespace AngbandOS
                 {
                     return false;
                 }
-                ItemType kIdx = SaveGame.ItemTypes.LookupKind(aPtr.Tval, aPtr.Sval);
+                ItemType kIdx = new ItemType(aPtr.BaseItemCategory);
                 if (kIdx.Level > SaveGame.Level.ObjectLevel)
                 {
                     int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;

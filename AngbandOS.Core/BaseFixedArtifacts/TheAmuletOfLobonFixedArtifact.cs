@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheAmuletOfLobonFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new AmuletCarlammas();
+
     public override char Character => '"';
     public override string Name => "The Amulet of Lobon";
     public override int Ac => 0;
@@ -27,10 +30,8 @@ internal class TheAmuletOfLobonFixedArtifact : Base2FixedArtifact
     public override int Pval => 2;
     public override int Rarity => 10;
     public override bool ResFire => true;
-    public override int Sval => 10;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Amulet;
     public override int Weight => 3;
 }

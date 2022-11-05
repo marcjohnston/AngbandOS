@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheAmuletOfAbdulAlhazredFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new AmuletIngwe();
+
     public override char Character => '"';
     public override string Name => "The Amulet of Abdul Alhazred";
     public override int Ac => 0;
@@ -32,11 +35,9 @@ internal class TheAmuletOfAbdulAlhazredFixedArtifact : Base2FixedArtifact
     public override bool ResCold => true;
     public override bool ResElec => true;
     public override bool SeeInvis => true;
-    public override int Sval => 11;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Amulet;
     public override int Weight => 3;
     public override bool Wis => true;
 }

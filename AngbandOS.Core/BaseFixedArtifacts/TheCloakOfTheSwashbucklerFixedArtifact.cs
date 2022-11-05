@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheCloakOfTheSwashbucklerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new Cloak();
+
     public override char Character => '(';
     public override Colour Colour => Colour.Green;
     public override string Name => "The Cloak of the Swashbuckler";
@@ -30,10 +33,8 @@ internal class TheCloakOfTheSwashbucklerFixedArtifact : Base2FixedArtifact
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResFire => true;
-    public override int Sval => 1;
     public override int ToA => 18;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Cloak;
     public override int Weight => 10;
 }

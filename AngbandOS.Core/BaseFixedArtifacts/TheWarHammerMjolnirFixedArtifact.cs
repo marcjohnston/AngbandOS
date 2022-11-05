@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheWarHammerMjolnirFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedWarHammer();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;
     public override string Name => "The War Hammer 'Mjolnir'";
@@ -36,11 +39,9 @@ internal class TheWarHammerMjolnirFixedArtifact : Base2FixedArtifact
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override int Sval => 8;
     public override int ToA => 5;
     public override int ToD => 21;
     public override int ToH => 19;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 120;
     public override bool Wis => true;
 }

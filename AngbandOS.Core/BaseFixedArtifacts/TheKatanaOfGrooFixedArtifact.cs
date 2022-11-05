@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheKatanaOfGrooFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordKatana();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Katana of Groo";
@@ -28,11 +31,9 @@ internal class TheKatanaOfGrooFixedArtifact : Base2FixedArtifact
     public override bool ShowMods => true;
     public override bool Speed => true;
     public override bool SustDex => true;
-    public override int Sval => 20;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override bool Vorpal => true;
     public override int Weight => 50;
 }

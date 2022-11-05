@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheBattleAxeSpleenSlicerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmBattleAxe();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";
@@ -29,10 +32,8 @@ internal class TheBattleAxeSpleenSlicerFixedArtifact : Base2FixedArtifact
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool Str => true;
-    public override int Sval => 22;
     public override int ToA => 0;
     public override int ToD => 3;
     public override int ToH => 4;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 170;
 }

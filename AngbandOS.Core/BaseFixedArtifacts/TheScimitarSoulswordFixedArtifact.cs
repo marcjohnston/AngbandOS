@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheScimitarSoulswordFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordScimitar();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Scimitar 'Soulsword'";
@@ -37,11 +40,9 @@ internal class TheScimitarSoulswordFixedArtifact : Base2FixedArtifact
     public override bool SlayDragon => true;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
-    public override int Sval => 18;
     public override int ToA => 0;
     public override int ToD => 11;
     public override int ToH => 9;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 130;
     public override bool Wis => true;
 }

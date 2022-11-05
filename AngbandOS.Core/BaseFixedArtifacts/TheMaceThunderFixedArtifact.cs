@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMaceThunderFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedMace();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Mace 'Thunder'";
@@ -27,10 +30,8 @@ internal class TheMaceThunderFixedArtifact : Base2FixedArtifact
     public override int Pval => 0;
     public override int Rarity => 15;
     public override bool ShowMods => true;
-    public override int Sval => 5;
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 12;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 200;
 }

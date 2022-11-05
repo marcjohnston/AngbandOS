@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMorningStarFirestarterFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedMorningStar();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Morning Star 'Firestarter'";
@@ -27,10 +30,8 @@ internal class TheMorningStarFirestarterFixedArtifact : Base2FixedArtifact
     public override int Rarity => 15;
     public override bool ResFire => true;
     public override bool ShowMods => true;
-    public override int Sval => 12;
     public override int ToA => 2;
     public override int ToD => 7;
     public override int ToH => 5;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 150;
 }

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheGlaiveOfPainFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmGlaive();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Glaive of Pain";
@@ -23,10 +26,8 @@ internal class TheGlaiveOfPainFixedArtifact : Base2FixedArtifact
     public override int Pval => 0;
     public override int Rarity => 25;
     public override bool ShowMods => true;
-    public override int Sval => 13;
     public override int ToA => 0;
     public override int ToD => 30;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 190;
 }

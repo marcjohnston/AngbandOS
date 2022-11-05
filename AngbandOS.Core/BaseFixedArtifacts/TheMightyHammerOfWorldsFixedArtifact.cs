@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheMightyHammerOfWorldsFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedMightyHammer();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;
     public override string Name => "The Mighty Hammer of Worlds";
@@ -39,11 +42,9 @@ internal class TheMightyHammerOfWorldsFixedArtifact : Base2FixedArtifact
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
-    public override int Sval => 50;
     public override bool Telepathy => true;
     public override int ToA => 10;
     public override int ToD => 25;
     public override int ToH => 5;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 1000;
 }

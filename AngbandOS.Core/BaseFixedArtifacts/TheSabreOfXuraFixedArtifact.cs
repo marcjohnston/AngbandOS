@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSabreOfXuraFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordSabre();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Sabre of Xura";
@@ -44,10 +47,8 @@ internal class TheSabreOfXuraFixedArtifact : Base2FixedArtifact
     public override bool Str => true;
     public override bool SustCon => true;
     public override bool SustStr => true;
-    public override int Sval => 11;
     public override int ToA => 0;
     public override int ToD => 12;
     public override int ToH => 20;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 50;
 }

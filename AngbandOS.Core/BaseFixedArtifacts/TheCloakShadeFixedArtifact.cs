@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheCloakShadeFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new Cloak();
+
     public override char Character => '(';
     public override Colour Colour => Colour.Green;
     public override string Name => "The Cloak 'Shade'";
@@ -25,10 +28,8 @@ internal class TheCloakShadeFixedArtifact : Base2FixedArtifact
     public override int Rarity => 20;
     public override bool ResAcid => true;
     public override bool SeeInvis => true;
-    public override int Sval => 1;
     public override int ToA => 10;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Cloak;
     public override int Weight => 10;
 }

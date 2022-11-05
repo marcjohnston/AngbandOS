@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class ThePairOfSoftLeatherBootsOfDancingFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new BootsSoftLeatherBoots();
+
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Pair of Soft Leather Boots of Dancing";
@@ -31,10 +34,8 @@ internal class ThePairOfSoftLeatherBootsOfDancingFixedArtifact : Base2FixedArtif
     public override bool ResNether => true;
     public override bool SustCha => true;
     public override bool SustCon => true;
-    public override int Sval => 2;
     public override int ToA => 15;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Boots;
     public override int Weight => 20;
 }

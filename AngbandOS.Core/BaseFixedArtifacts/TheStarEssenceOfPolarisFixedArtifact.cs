@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheStarEssenceOfPolarisFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new LightStarEssenceGaladriel();
+
     public override char Character => '*';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Star Essence of Polaris";
@@ -26,10 +29,8 @@ internal class TheStarEssenceOfPolarisFixedArtifact : Base2FixedArtifact
     public override int Pval => 1;
     public override int Rarity => 1;
     public override bool Search => true;
-    public override int Sval => 4;
     public override int ToA => 0;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Light;
     public override int Weight => 10;
 }

@@ -1909,6 +1909,7 @@ namespace AngbandOS
         private void PlayerOutfit(SaveGame saveGame)
         {
             Item item = new Item(saveGame);
+            
             if (_player.RaceIndex == RaceId.Golem || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Zombie ||
                 _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
             {

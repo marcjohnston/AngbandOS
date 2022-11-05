@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheIronHelmSkullkeeperFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HelmIronHelm();
+
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";
@@ -28,11 +31,9 @@ internal class TheIronHelmSkullkeeperFixedArtifact : Base2FixedArtifact
     public override bool ResBlind => true;
     public override bool Search => true;
     public override bool SeeInvis => true;
-    public override int Sval => 5;
     public override int ToA => 10;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Helm;
     public override int Weight => 75;
     public override bool Wis => true;
 }

@@ -1,11 +1,15 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheAdamantitePlateMailSoulkeeperFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HardArmorAdamantitePlateMail();
+
     public override char Character => '[';
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
@@ -32,10 +36,8 @@ internal class TheAdamantitePlateMailSoulkeeperFixedArtifact : Base2FixedArtifac
     public override bool ResNether => true;
     public override bool ResNexus => true;
     public override bool SustCon => true;
-    public override int Sval => 30;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => -4;
-    public override ItemCategory Tval => ItemCategory.HardArmor;
     public override int Weight => 420;
 }

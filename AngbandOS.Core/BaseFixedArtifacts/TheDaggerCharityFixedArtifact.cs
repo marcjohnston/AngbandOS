@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheDaggerCharityFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordDagger();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
@@ -26,10 +29,8 @@ internal class TheDaggerCharityFixedArtifact : Base2FixedArtifact
     public override int Rarity => 10;
     public override bool ResElec => true;
     public override bool ShowMods => true;
-    public override int Sval => 4;
     public override int ToA => 0;
     public override int ToD => 6;
     public override int ToH => 4;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 12;
 }

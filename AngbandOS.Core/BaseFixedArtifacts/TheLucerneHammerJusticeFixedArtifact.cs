@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheLucerneHammerJusticeFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedLucerneHammer();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
@@ -32,11 +35,9 @@ internal class TheLucerneHammerJusticeFixedArtifact : Base2FixedArtifact
     public override bool ResLight => true;
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
-    public override int Sval => 10;
     public override int ToA => 8;
     public override int ToD => 6;
     public override int ToH => 10;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 120;
     public override bool Wis => true;
 }

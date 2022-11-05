@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class ThePikeOfTepesFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmPike();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Pike of Tepes";
@@ -35,10 +38,8 @@ internal class ThePikeOfTepesFixedArtifact : Base2FixedArtifact
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
     public override bool SustInt => true;
-    public override int Sval => 8;
     public override int ToA => 10;
     public override int ToD => 12;
     public override int ToH => 10;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 160;
 }

@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheTwoHandedSwordFiretongueFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordTwoHandedSword();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Firetongue'";
@@ -42,11 +45,9 @@ internal class TheTwoHandedSwordFiretongueFixedArtifact : Base2FixedArtifact
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
     public override bool Str => true;
-    public override int Sval => 25;
     public override int ToA => 0;
     public override int ToD => 21;
     public override int ToH => 19;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override bool Vorpal => true;
     public override int Weight => 250;
 }

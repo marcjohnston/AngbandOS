@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheTridentOfWrathFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmTrident();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Trident of Wrath";
@@ -33,10 +36,8 @@ internal class TheTridentOfWrathFixedArtifact : Base2FixedArtifact
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool Str => true;
-    public override int Sval => 5;
     public override int ToA => 0;
     public override int ToD => 18;
     public override int ToH => 16;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 300;
 }

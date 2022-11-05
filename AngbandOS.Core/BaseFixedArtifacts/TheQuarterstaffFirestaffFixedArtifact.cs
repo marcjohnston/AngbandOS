@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheQuarterstaffFirestaffFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new HaftedQuarterstaff();
+
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Quarterstaff 'Firestaff'";
@@ -29,10 +32,8 @@ internal class TheQuarterstaffFirestaffFixedArtifact : Base2FixedArtifact
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
-    public override int Sval => 3;
     public override int ToA => 0;
     public override int ToD => 20;
     public override int ToH => 10;
-    public override ItemCategory Tval => ItemCategory.Hafted;
     public override int Weight => 150;
 }

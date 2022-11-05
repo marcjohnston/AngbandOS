@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSmallMetalShieldVitriolFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new ShieldSmallMetalShield();
+
     public override char Character => ')';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Small Metal Shield 'Vitriol'";
@@ -29,10 +32,8 @@ internal class TheSmallMetalShieldVitriolFixedArtifact : Base2FixedArtifact
     public override bool ResChaos => true;
     public override bool ResSound => true;
     public override bool Str => true;
-    public override int Sval => 3;
     public override int ToA => 25;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.Shield;
     public override int Weight => 65;
 }

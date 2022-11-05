@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheTwoHandedSwordDragonslayerFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordTwoHandedSword();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
@@ -30,10 +33,8 @@ internal class TheTwoHandedSwordDragonslayerFixedArtifact : Base2FixedArtifact
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
     public override bool Str => true;
-    public override int Sval => 25;
     public override int ToA => 0;
     public override int ToD => 17;
     public override int ToH => 13;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 200;
 }

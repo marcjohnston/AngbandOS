@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSoftLeatherArmourOfTheKoboldChiefFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SoftArmorSoftLeatherArmour();
+
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Soft Leather Armour of the Kobold Chief";
@@ -28,10 +31,8 @@ internal class TheSoftLeatherArmourOfTheKoboldChiefFixedArtifact : Base2FixedArt
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool Stealth => true;
-    public override int Sval => 4;
     public override int ToA => 20;
     public override int ToD => 0;
     public override int ToH => 0;
-    public override ItemCategory Tval => ItemCategory.SoftArmor;
     public override int Weight => 80;
 }

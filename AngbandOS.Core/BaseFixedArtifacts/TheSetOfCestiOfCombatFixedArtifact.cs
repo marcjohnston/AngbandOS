@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheSetOfCestiOfCombatFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new GlovesSetOfCesti();
+
     public override char Character => ']';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";
@@ -28,10 +31,8 @@ internal class TheSetOfCestiOfCombatFixedArtifact : Base2FixedArtifact
     public override int Rarity => 15;
     public override bool ResAcid => true;
     public override bool ShowMods => true;
-    public override int Sval => 5;
     public override int ToA => 20;
     public override int ToD => 10;
     public override int ToH => 10;
-    public override ItemCategory Tval => ItemCategory.Gloves;
     public override int Weight => 40;
 }

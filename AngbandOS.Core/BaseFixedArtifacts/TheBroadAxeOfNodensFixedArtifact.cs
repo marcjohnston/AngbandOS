@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheBroadAxeOfNodensFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new PolearmBroadAxe();
+
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Broad Axe of Nodens";
@@ -30,10 +33,8 @@ internal class TheBroadAxeOfNodensFixedArtifact : Base2FixedArtifact
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override int Sval => 11;
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 13;
-    public override ItemCategory Tval => ItemCategory.Polearm;
     public override int Weight => 160;
 }

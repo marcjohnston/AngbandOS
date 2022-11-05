@@ -1,11 +1,14 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class TheRapierOfMontoyaFixedArtifact : Base2FixedArtifact
 {
+    public override BaseItemCategory BaseItemCategory => new SwordRapier();
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Rapier of Montoya";
@@ -28,10 +31,8 @@ internal class TheRapierOfMontoyaFixedArtifact : Base2FixedArtifact
     public override bool ResLight => true;
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
-    public override int Sval => 7;
     public override int ToA => 0;
     public override int ToD => 19;
     public override int ToH => 12;
-    public override ItemCategory Tval => ItemCategory.Sword;
     public override int Weight => 40;
 }
