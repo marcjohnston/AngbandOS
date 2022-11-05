@@ -81,10 +81,6 @@ namespace AngbandOS.ItemCategories
             s += $" ({item.DamageDice}d{item.DamageDiceSides})";
             if (item.IsKnown())
             {
-                FlagSet f1 = new FlagSet();
-                FlagSet f2 = new FlagSet();
-                FlagSet f3 = new FlagSet();
-                item.GetMergedFlags(f1, f2, f3);
                 s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
 
                 if (item.BaseArmourClass != 0)

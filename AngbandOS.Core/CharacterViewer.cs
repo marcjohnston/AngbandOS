@@ -217,10 +217,6 @@ namespace AngbandOS
         private void DisplayPlayerAbilityScoresWithModifiers()
         {
             int i;
-            int stat;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             Colour a;
             char c;
             const int statCol = 1;
@@ -275,12 +271,15 @@ namespace AngbandOS
             int col = statCol + 44;
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
             SaveGame.Print(Colour.Blue, "Modifications", row + 6, col);
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item item = _player.Inventory[i];
                 // Only extract known bonuses, not full bonuses
                 item.ObjectFlagsKnown(f1, f2, f3);
-                for (stat = 0; stat < 6; stat++)
+                for (int stat = 0; stat < 6; stat++) // TODO: These stats need to be enumerated.
                 {
                     a = Colour.Grey;
                     c = '.';
@@ -315,7 +314,7 @@ namespace AngbandOS
             }
             // Fake a set of item flags for our character to show along with those of the real items
             _player.GetAbilitiesAsItemFlags(f1, f2, f3);
-            for (stat = 0; stat < 6; stat++)
+            for (int stat = 0; stat < 6; stat++) // TODO: These stats need to be enumerated.
             {
                 a = Colour.Grey;
                 c = '.';

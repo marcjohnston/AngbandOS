@@ -33,9 +33,6 @@ namespace AngbandOS.Projection
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             int nextOIdx;
             bool obvious = false;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             string oName = "";
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
@@ -46,7 +43,7 @@ namespace AngbandOS.Projection
                 string noteKill = null;
                 Item oPtr = SaveGame.Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
-                oPtr.GetMergedFlags(f1, f2, f3);
+                oPtr.RefreshFlagBasedProperties();
                 if (oPtr.Count > 1)
                 {
                     plural = true;
@@ -59,7 +56,7 @@ namespace AngbandOS.Projection
                 {
                     doKill = true;
                     noteKill = plural ? " burn up!" : " burns up!";
-                    if (f3.IsSet(ItemFlag3.IgnoreFire))
+                    if (oPtr.IgnoreFire)
                     {
                         ignore = true;
                     }

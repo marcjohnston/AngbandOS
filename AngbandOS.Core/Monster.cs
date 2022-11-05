@@ -966,55 +966,50 @@ namespace AngbandOS
                             continue;
                         }
                         // If we pick up or stomp on items, check the item type
-                        if (((Race.Flags2 & MonsterFlag2.TakeItem) != 0 ||
-                             (Race.Flags2 & MonsterFlag2.KillItem) != 0) && (Mind & Constants.SmFriendly) == 0)
+                        if (((Race.Flags2 & MonsterFlag2.TakeItem) != 0 || (Race.Flags2 & MonsterFlag2.KillItem) != 0) && (Mind & Constants.SmFriendly) == 0)
                         {
-                            FlagSet f1 = new FlagSet();
-                            FlagSet f2 = new FlagSet();
-                            FlagSet f3 = new FlagSet();
                             uint flg3 = 0;
-                            item.GetMergedFlags(f1, f2, f3);
+                            item.RefreshFlagBasedProperties();
                             string itemName = item.Description(true, 3);
                             string monsterName = MonsterDesc(0x04);
-                            if (f1.IsSet(ItemFlag1.KillDragon))
+                            if (item.KillDragon)
                             {
                                 flg3 |= MonsterFlag3.Dragon;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayDragon))
+                            if (item.SlayDragon)
                             {
                                 flg3 |= MonsterFlag3.Dragon;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayTroll))
+                            if (item.SlayTroll)
                             {
                                 flg3 |= MonsterFlag3.Troll;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayGiant))
+                            if (item.SlayGiant)
                             {
                                 flg3 |= MonsterFlag3.Giant;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayOrc))
+                            if (item.SlayOrc)
                             {
                                 flg3 |= MonsterFlag3.Orc;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayDemon))
+                            if (item.SlayDemon)
                             {
                                 flg3 |= MonsterFlag3.Demon;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayUndead))
+                            if (item.SlayUndead)
                             {
                                 flg3 |= MonsterFlag3.Undead;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayAnimal))
+                            if (item.SlayAnimal)
                             {
                                 flg3 |= MonsterFlag3.Animal;
                             }
-                            if (f1.IsSet(ItemFlag1.SlayEvil))
+                            if (item.SlayEvil)
                             {
                                 flg3 |= MonsterFlag3.Evil;
                             }
                             // Monsters won't pick up artifacts or items that hurt them
-                            if (item.IsFixedArtifact() || (Race.Flags3 & flg3) != 0 ||
-                                !string.IsNullOrEmpty(item.RandartName))
+                            if (item.IsFixedArtifact() || (Race.Flags3 & flg3) != 0 || !string.IsNullOrEmpty(item.RandartName))
                             {
                                 if ((Race.Flags2 & MonsterFlag2.TakeItem) != 0)
                                 {

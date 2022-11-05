@@ -12,6 +12,13 @@ namespace AngbandOS.Enumerations
     /// </summary>
     internal static class ItemFlag2
     {
+        public const uint SustStr = 0x00000001;
+        public const uint SustInt = 0x00000002;
+        public const uint SustWis = 0x00000004;
+        public const uint SustDex = 0x00000008;
+        public const uint SustCon = 0x00000010;
+        public const uint SustCha = 0x00000020;
+
         public const uint FreeAct = 0x00004000;
         public const uint HoldLife = 0x00008000;
         public const uint ImAcid = 0x00000100;
@@ -35,26 +42,5 @@ namespace AngbandOS.Enumerations
         public const uint ResPois = 0x00100000;
         public const uint ResShards = 0x08000000;
         public const uint ResSound = 0x04000000;
-        public const uint SustCha = 0x00000020;
-        public const uint SustCon = 0x00000010;
-        public const uint SustDex = 0x00000008;
-        public const uint SustInt = 0x00000002;
-        public const uint SustStr = 0x00000001;
-        public const uint SustWis = 0x00000004;
-
-        /// <summary>
-        /// Unused flag ... currently flag based cost is 0.
-        /// </summary>
-        public const uint Xxx1 = 0x00000040;
-
-        /// <summary>
-        /// Unused flag ... currently flag based cost is 0.
-        /// </summary>
-        public const uint Xxx2 = 0x00000080;
-
-        /// <summary>
-        /// Unused flag ... currently flag based cost is 0.
-        /// </summary>
-        public const uint Xxx3 = 0x00001000;
     }
 }

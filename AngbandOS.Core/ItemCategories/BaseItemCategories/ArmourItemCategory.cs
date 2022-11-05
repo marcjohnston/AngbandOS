@@ -691,11 +691,8 @@ namespace AngbandOS.ItemCategories
             string s = "";
             if (item.IsKnown())
             {
-                FlagSet f1 = new FlagSet();
-                FlagSet f2 = new FlagSet();
-                FlagSet f3 = new FlagSet();
-                item.GetMergedFlags(f1, f2, f3);
-                if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                item.RefreshFlagBasedProperties();
+                if (ShowMods || (item.BonusToHit != 0 && item.BonusDamage != 0))
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }

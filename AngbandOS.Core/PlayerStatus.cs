@@ -44,9 +44,6 @@ namespace AngbandOS
             int i;
             int extraShots;
             Item oPtr;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             int oldSpeed = SaveGame.Player.Speed;
             bool oldTelepathy = SaveGame.Player.HasTelepathy;
             bool oldSeeInv = SaveGame.Player.HasSeeInvisibility;
@@ -570,248 +567,248 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                oPtr.GetMergedFlags(f1, f2, f3);
-                if (f1.IsSet(ItemFlag1.Str))
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.Str)
                 {
                     SaveGame.Player.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Int))
+                if (oPtr.Int)
                 {
                     SaveGame.Player.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Wis))
+                if (oPtr.Wis)
                 {
                     SaveGame.Player.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Dex))
+                if (oPtr.Dex)
                 {
                     SaveGame.Player.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Con))
+                if (oPtr.Con)
                 {
                     SaveGame.Player.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Cha))
+                if (oPtr.Cha)
                 {
                     SaveGame.Player.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Stealth))
+                if (oPtr.Stealth)
                 {
                     SaveGame.Player.SkillStealth += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Search))
+                if (oPtr.Search)
                 {
                     SaveGame.Player.SkillSearching += oPtr.TypeSpecificValue * 5;
                 }
-                if (f1.IsSet(ItemFlag1.Search))
+                if (oPtr.Search)
                 {
                     SaveGame.Player.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
                 }
-                if (f1.IsSet(ItemFlag1.Infra))
+                if (oPtr.Infra)
                 {
                     SaveGame.Player.InfravisionRange += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Tunnel))
+                if (oPtr.Tunnel)
                 {
                     SaveGame.Player.SkillDigging += oPtr.TypeSpecificValue * 20;
                 }
-                if (f1.IsSet(ItemFlag1.Speed))
+                if (oPtr.Speed)
                 {
                     SaveGame.Player.Speed += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Blows))
+                if (oPtr.Blows)
                 {
                     extraBlows += oPtr.TypeSpecificValue;
                 }
-                if (f1.IsSet(ItemFlag1.Impact))
+                if (oPtr.Impact)
                 {
                     SaveGame.Player.HasQuakeWeapon = true;
                 }
-                if (f3.IsSet(ItemFlag3.AntiTheft))
+                if (oPtr.AntiTheft)
                 {
                     SaveGame.Player.HasAntiTheft = true;
                 }
-                if (f3.IsSet(ItemFlag3.XtraShots))
+                if (oPtr.XtraShots)
                 {
                     extraShots++;
                 }
-                if (f3.IsSet(ItemFlag3.Aggravate))
+                if (oPtr.Aggravate)
                 {
                     SaveGame.Player.HasAggravation = true;
                 }
-                if (f3.IsSet(ItemFlag3.Teleport))
+                if (oPtr.Teleport)
                 {
                     SaveGame.Player.HasRandomTeleport = true;
                 }
-                if (f3.IsSet(ItemFlag3.DrainExp))
+                if (oPtr.DrainExp)
                 {
                     SaveGame.Player.HasExperienceDrain = true;
                 }
-                if (f3.IsSet(ItemFlag3.Blessed))
+                if (oPtr.Blessed)
                 {
                     SaveGame.Player.HasBlessedBlade = true;
                 }
-                if (f3.IsSet(ItemFlag3.XtraMight))
+                if (oPtr.XtraMight)
                 {
                     SaveGame.Player.HasExtraMight = true;
                 }
-                if (f3.IsSet(ItemFlag3.SlowDigest))
+                if (oPtr.SlowDigest)
                 {
                     SaveGame.Player.HasSlowDigestion = true;
                 }
-                if (f3.IsSet(ItemFlag3.Regen))
+                if (oPtr.Regen)
                 {
                     SaveGame.Player.HasRegeneration = true;
                 }
-                if (f3.IsSet(ItemFlag3.Telepathy))
+                if (oPtr.Telepathy)
                 {
                     SaveGame.Player.HasTelepathy = true;
                 }
-                if (f3.IsSet(ItemFlag3.Lightsource))
+                if (oPtr.Lightsource)
                 {
                     SaveGame.Player.HasGlow = true;
                 }
-                if (f3.IsSet(ItemFlag3.SeeInvis))
+                if (oPtr.SeeInvis)
                 {
                     SaveGame.Player.HasSeeInvisibility = true;
                 }
-                if (f3.IsSet(ItemFlag3.Feather))
+                if (oPtr.Feather)
                 {
                     SaveGame.Player.HasFeatherFall = true;
                 }
-                if (f2.IsSet(ItemFlag2.FreeAct))
+                if (oPtr.FreeAct)
                 {
                     SaveGame.Player.HasFreeAction = true;
                 }
-                if (f2.IsSet(ItemFlag2.HoldLife))
+                if (oPtr.HoldLife)
                 {
                     SaveGame.Player.HasHoldLife = true;
                 }
-                if (f3.IsSet(ItemFlag3.Wraith))
+                if (oPtr.Wraith)
                 {
                     SaveGame.Player.TimedEtherealness = Math.Max(SaveGame.Player.TimedEtherealness, 20);
                 }
-                if (f2.IsSet(ItemFlag2.ImFire))
+                if (oPtr.ImFire)
                 {
                     SaveGame.Player.HasFireImmunity = true;
                 }
-                if (f2.IsSet(ItemFlag2.ImAcid))
+                if (oPtr.ImAcid)
                 {
                     SaveGame.Player.HasAcidImmunity = true;
                 }
-                if (f2.IsSet(ItemFlag2.ImCold))
+                if (oPtr.ImCold)
                 {
                     SaveGame.Player.HasColdImmunity = true;
                 }
-                if (f2.IsSet(ItemFlag2.ImElec))
+                if (oPtr.ImElec)
                 {
                     SaveGame.Player.HasLightningImmunity = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResAcid))
+                if (oPtr.ResAcid)
                 {
                     SaveGame.Player.HasAcidResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResElec))
+                if (oPtr.ResElec)
                 {
                     SaveGame.Player.HasLightningResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResFire))
+                if (oPtr.ResFire)
                 {
                     SaveGame.Player.HasFireResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResCold))
+                if (oPtr.ResCold)
                 {
                     SaveGame.Player.HasColdResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResPois))
+                if (oPtr.ResPois)
                 {
                     SaveGame.Player.HasPoisonResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResFear))
+                if (oPtr.ResFear)
                 {
                     SaveGame.Player.HasFearResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResConf))
+                if (oPtr.ResConf)
                 {
                     SaveGame.Player.HasConfusionResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResSound))
+                if (oPtr.ResSound)
                 {
                     SaveGame.Player.HasSoundResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResLight))
+                if (oPtr.ResLight)
                 {
                     SaveGame.Player.HasLightResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResDark))
+                if (oPtr.ResDark)
                 {
                     SaveGame.Player.HasDarkResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResChaos))
+                if (oPtr.ResChaos)
                 {
                     SaveGame.Player.HasChaosResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResDisen))
+                if (oPtr.ResDisen)
                 {
                     SaveGame.Player.HasDisenchantResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResShards))
+                if (oPtr.ResShards)
                 {
                     SaveGame.Player.HasShardResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResNexus))
+                if (oPtr.ResNexus)
                 {
                     SaveGame.Player.HasNexusResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResBlind))
+                if (oPtr.ResBlind)
                 {
                     SaveGame.Player.HasBlindnessResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.ResNether))
+                if (oPtr.ResNether)
                 {
                     SaveGame.Player.HasNetherResistance = true;
                 }
-                if (f2.IsSet(ItemFlag2.Reflect))
+                if (oPtr.Reflect)
                 {
                     SaveGame.Player.HasReflection = true;
                 }
-                if (f3.IsSet(ItemFlag3.ShFire))
+                if (oPtr.ShFire)
                 {
                     SaveGame.Player.HasFireShield = true;
                 }
-                if (f3.IsSet(ItemFlag3.ShElec))
+                if (oPtr.ShElec)
                 {
                     SaveGame.Player.HasLightningShield = true;
                 }
-                if (f3.IsSet(ItemFlag3.NoMagic))
+                if (oPtr.NoMagic)
                 {
                     SaveGame.Player.HasAntiMagic = true;
                 }
-                if (f3.IsSet(ItemFlag3.NoTele))
+                if (oPtr.NoTele)
                 {
                     SaveGame.Player.HasAntiTeleport = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustStr))
+                if (oPtr.SustStr)
                 {
                     SaveGame.Player.HasSustainStrength = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustInt))
+                if (oPtr.SustInt)
                 {
                     SaveGame.Player.HasSustainIntelligence = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustWis))
+                if (oPtr.SustWis)
                 {
                     SaveGame.Player.HasSustainWisdom = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustDex))
+                if (oPtr.SustDex)
                 {
                     SaveGame.Player.HasSustainDexterity = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustCon))
+                if (oPtr.SustCon)
                 {
                     SaveGame.Player.HasSustainConstitution = true;
                 }
-                if (f2.IsSet(ItemFlag2.SustCha))
+                if (oPtr.SustCha)
                 {
                     SaveGame.Player.HasSustainCharisma = true;
                 }
@@ -1280,8 +1277,8 @@ namespace AngbandOS
                 SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null &&
                 (oPtr.Category != ItemCategory.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
             {
-                oPtr.GetMergedFlags(f1, f2, f3);
-                if (f1.IsClear(ItemFlag1.Chaotic))
+                oPtr.RefreshFlagBasedProperties();
+                if (!oPtr.Chaotic)
                 {
                     SaveGame.Player.AttackBonus -= 10;
                     SaveGame.Player.DamageBonus -= 10;
@@ -1458,14 +1455,10 @@ namespace AngbandOS
             }
             if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
             {
-                FlagSet f1 = new FlagSet();
-                FlagSet f2 = new FlagSet();
-                FlagSet f3 = new FlagSet();
                 SaveGame.Player.HasRestrictingGloves = false;
                 Item oPtr = SaveGame.Player.Inventory[InventorySlot.Hands];
-                oPtr.GetMergedFlags(f1, f2, f3);
-                if (oPtr.ItemType != null && f2.IsClear(ItemFlag2.FreeAct) && f1.IsClear(ItemFlag1.Dex) &&
-                    oPtr.TypeSpecificValue > 0)
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.ItemType != null && !oPtr.FreeAct && !oPtr.Dex && oPtr.TypeSpecificValue > 0)
                 {
                     SaveGame.Player.HasRestrictingGloves = true;
                     msp = 3 * msp / 4;
@@ -1701,9 +1694,6 @@ namespace AngbandOS
 
         public void CalcTorch()
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             SaveGame.Player.LightLevel = 0;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
@@ -1737,8 +1727,8 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    oPtr.GetMergedFlags(f1, f2, f3);
-                    if (f3.IsSet(ItemFlag3.Lightsource))
+                    oPtr.RefreshFlagBasedProperties();
+                    if (oPtr.Lightsource)
                     {
                         SaveGame.Player.LightLevel++;
                     }

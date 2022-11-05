@@ -384,9 +384,6 @@ namespace AngbandOS
         public void CurseEquipment(int chance, int heavyChance)
         {
             bool changed = false;
-            FlagSet o1 = new FlagSet();
-            FlagSet o2 = new FlagSet();
-            FlagSet o3 = new FlagSet();
             Item oPtr = Inventory[InventorySlot.MeleeWeapon - 1 + Program.Rng.DieRoll(12)];
             if (Program.Rng.DieRoll(100) > chance)
             {
@@ -396,8 +393,8 @@ namespace AngbandOS
             {
                 return;
             }
-            oPtr.GetMergedFlags(o1, o2, o3);
-            if (o3.IsSet(ItemFlag3.Blessed) && Program.Rng.DieRoll(888) > chance)
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.Blessed && Program.Rng.DieRoll(888) > chance)
             {
                 string oName = oPtr.Description(false, 0);
                 string s = oPtr.Count > 1 ? "" : "s";
@@ -408,7 +405,7 @@ namespace AngbandOS
                 (oPtr.FixedArtifactIndex != 0 || oPtr.RareItemTypeIndex != 0 ||
                  !string.IsNullOrEmpty(oPtr.RandartName)))
             {
-                if (o3.IsClear(ItemFlag3.HeavyCurse))
+                if (!oPtr.HeavyCurse)
                 {
                     changed = true;
                 }

@@ -11,10 +11,6 @@ using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StaticData;
-using System;
-using System.IO;
-using static AngbandOS.Extensions;
-using AngbandOS.Spells;
 
 namespace AngbandOS
 {
@@ -39,13 +35,19 @@ namespace AngbandOS
         public int HoldingMonsterIndex;
         public string Inscription = "";
         public int ItemSubCategory;
-        public ItemType ItemType;
+
+        /// <summary>
+        /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
+        /// </summary>
+        public ItemType? ItemType = null;
+
         public bool Marked;
 
         /// <summary>
         /// Returns the index of the next item, if this item is part of a stack of items.
         /// </summary>
         public int NextInStack;
+
         public string RandartName = "";
         public Enumerations.RareItemType RareItemTypeIndex;
         public int RechargeTimeLeft;
@@ -55,22 +57,13 @@ namespace AngbandOS
         public int Y;
         public readonly SaveGame SaveGame; // TODO: ItemCategories need access
 
+        /// <summary>
+        /// Creates a new (nothing) item.
+        /// </summary>
+        /// <param name="saveGame"></param>
         public Item(SaveGame saveGame)
         {
             SaveGame = saveGame;
-        }
-
-        public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
-
-        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
-
-        public bool IsBlessed()
-        {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3);
-            return f3.IsSet(ItemFlag3.Blessed);
         }
 
         public Item(SaveGame saveGame, Item original)
@@ -105,6 +98,10 @@ namespace AngbandOS
             BonusPowerType = original.BonusPowerType;
             BonusPowerSubType = original.BonusPowerSubType;
         }
+
+        public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
+
+        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)
         {
@@ -144,13 +141,10 @@ namespace AngbandOS
         {
             int mult = 1;
             MonsterRace rPtr = mPtr.Race;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3);
+            RefreshFlagBasedProperties();
             if (ItemType.BaseItemCategory.GetsDamageMultiplier)
             {
-                if (f1.IsSet(ItemFlag1.SlayAnimal) && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
+                if (SlayAnimal && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -161,7 +155,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayEvil) && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+                if (SlayEvil && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -172,7 +166,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayUndead) && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+                if (SlayUndead && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -183,7 +177,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayDemon) && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+                if (SlayDemon && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -194,7 +188,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayOrc) && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
+                if (SlayOrc && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -205,7 +199,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayTroll) && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
+                if (SlayTroll && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -216,7 +210,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayGiant) && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
+                if (SlayGiant && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -227,7 +221,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.SlayDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (SlayDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -238,7 +232,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.KillDragon) && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (KillDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -253,7 +247,7 @@ namespace AngbandOS
                         mult *= 3;
                     }
                 }
-                if (f1.IsSet(ItemFlag1.BrandAcid))
+                if (BrandAcid)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneAcid) != 0)
                     {
@@ -270,7 +264,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (f1.IsSet(ItemFlag1.BrandElec))
+                if (BrandElec)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneLightning) != 0)
                     {
@@ -287,7 +281,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (f1.IsSet(ItemFlag1.BrandFire))
+                if (BrandFire)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
                     {
@@ -304,7 +298,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (f1.IsSet(ItemFlag1.BrandCold))
+                if (BrandCold)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneCold) != 0)
                     {
@@ -321,7 +315,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (f1.IsSet(ItemFlag1.BrandPois))
+                if (BrandPois)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
                     {
@@ -500,10 +494,6 @@ namespace AngbandOS
         /// <returns></returns>
         private string NewDescription(bool includeCountPrefix, int mode)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3);
             if (ItemType == null || ItemType.BaseItemCategory == null)
             {
                 return "(nothing)";
@@ -584,7 +574,7 @@ namespace AngbandOS
             {
                 return "(nothing)";
             }
-            GetMergedFlags(f1, f2, f3);
+            GetMergedFlags(f1, f2, f3); // DO NOT REFACTOR THIS
             if (IsFlavourAware())
             {
                 aware = true;
@@ -1212,371 +1202,344 @@ namespace AngbandOS
         public int FlagBasedCost(int plusses)
         {
             int total = 0;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3);
-            if (f1.IsSet(ItemFlag1.Str))
+            RefreshFlagBasedProperties();
+            if (Str)
             {
                 total += 1000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Int))
+            if (Int)
             {
                 total += 1000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Wis))
+            if (Wis)
             {
                 total += 1000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Dex))
+            if (Dex)
             {
                 total += 1000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Con))
+            if (Con)
             {
                 total += 1000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Cha))
+            if (Cha)
             {
                 total += 250 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Chaotic))
+            if (Chaotic)
             {
                 total += 10000;
             }
-            if (f1.IsSet(ItemFlag1.Vampiric))
+            if (Vampiric)
             {
                 total += 13000;
             }
-            if (f1.IsSet(ItemFlag1.Stealth))
+            if (Stealth)
             {
                 total += 250 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Search))
+            if (Search)
             {
                 total += 100 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Infra))
+            if (Infra)
             {
                 total += 150 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Tunnel))
+            if (Tunnel)
             {
                 total += 175 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Speed) && plusses > 0)
+            if (Speed && plusses > 0)
             {
                 total += 30000 * plusses;
             }
-            if (f1.IsSet(ItemFlag1.Blows) && plusses > 0)
+            if (Blows && plusses > 0)
             {
                 total += 2000 * plusses;
             }
-            if (f1.IsSet(ItemFlag3.AntiTheft))
+            if (AntiTheft)
             {
                 total += 0;
             }
-            if (f1.IsSet(ItemFlag1.Xxx2))
-            {
-                total += 0;
-            }
-            if (f1.IsSet(ItemFlag1.SlayAnimal))
+            if (SlayAnimal)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.SlayEvil))
+            if (SlayEvil)
             {
                 total += 4500;
             }
-            if (f1.IsSet(ItemFlag1.SlayUndead))
+            if (SlayUndead)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.SlayDemon))
+            if (SlayDemon)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.SlayOrc))
+            if (SlayOrc)
             {
                 total += 3000;
             }
-            if (f1.IsSet(ItemFlag1.SlayTroll))
+            if (SlayTroll)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.SlayGiant))
+            if (SlayGiant)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.SlayDragon))
+            if (SlayDragon)
             {
                 total += 3500;
             }
-            if (f1.IsSet(ItemFlag1.KillDragon))
+            if (KillDragon)
             {
                 total += 5500;
             }
-            if (f1.IsSet(ItemFlag1.Vorpal))
+            if (Vorpal)
             {
                 total += 5000;
             }
-            if (f1.IsSet(ItemFlag1.Impact))
+            if (Impact)
             {
                 total += 5000;
             }
-            if (f1.IsSet(ItemFlag1.BrandPois))
+            if (BrandPois)
             {
                 total += 7500;
             }
-            if (f1.IsSet(ItemFlag1.BrandAcid))
+            if (BrandAcid)
             {
                 total += 7500;
             }
-            if (f1.IsSet(ItemFlag1.BrandElec))
+            if (BrandElec)
             {
                 total += 7500;
             }
-            if (f1.IsSet(ItemFlag1.BrandFire))
+            if (BrandFire)
             {
                 total += 5000;
             }
-            if (f1.IsSet(ItemFlag1.BrandCold))
+            if (BrandCold)
             {
                 total += 5000;
             }
-            if (f2.IsSet(ItemFlag2.SustStr))
+            if (SustStr)
             {
                 total += 850;
             }
-            if (f2.IsSet(ItemFlag2.SustInt))
+            if (SustInt)
             {
                 total += 850;
             }
-            if (f2.IsSet(ItemFlag2.SustWis))
+            if (SustWis)
             {
                 total += 850;
             }
-            if (f2.IsSet(ItemFlag2.SustDex))
+            if (SustDex)
             {
                 total += 850;
             }
-            if (f2.IsSet(ItemFlag2.SustCon))
+            if (SustCon)
             {
                 total += 850;
             }
-            if (f2.IsSet(ItemFlag2.SustCha))
+            if (SustCha)
             {
                 total += 250;
             }
-            if (f2.IsSet(ItemFlag2.Xxx1))
-            {
-                total += 0;
-            }
-            if (f2.IsSet(ItemFlag2.Xxx2))
-            {
-                total += 0;
-            }
-            if (f2.IsSet(ItemFlag2.ImAcid))
+            if (ImAcid)
             {
                 total += 10000;
             }
-            if (f2.IsSet(ItemFlag2.ImElec))
+            if (ImElec)
             {
                 total += 10000;
             }
-            if (f2.IsSet(ItemFlag2.ImFire))
+            if (ImFire)
             {
                 total += 10000;
             }
-            if (f2.IsSet(ItemFlag2.ImCold))
+            if (ImCold)
             {
                 total += 10000;
             }
-            if (f2.IsSet(ItemFlag2.Xxx3))
-            {
-                total += 0;
-            }
-            if (f2.IsSet(ItemFlag2.Reflect))
+            if (Reflect)
             {
                 total += 10000;
             }
-            if (f2.IsSet(ItemFlag2.FreeAct))
+            if (FreeAct)
             {
                 total += 4500;
             }
-            if (f2.IsSet(ItemFlag2.HoldLife))
+            if (HoldLife)
             {
                 total += 8500;
             }
-            if (f2.IsSet(ItemFlag2.ResAcid))
+            if (ResAcid)
             {
                 total += 1250;
             }
-            if (f2.IsSet(ItemFlag2.ResElec))
+            if (ResElec)
             {
                 total += 1250;
             }
-            if (f2.IsSet(ItemFlag2.ResFire))
+            if (ResFire)
             {
                 total += 1250;
             }
-            if (f2.IsSet(ItemFlag2.ResCold))
+            if (ResCold)
             {
                 total += 1250;
             }
-            if (f2.IsSet(ItemFlag2.ResPois))
+            if (ResPois)
             {
                 total += 2500;
             }
-            if (f2.IsSet(ItemFlag2.ResFear))
+            if (ResFear)
             {
                 total += 2500;
             }
-            if (f2.IsSet(ItemFlag2.ResLight))
+            if (ResLight)
             {
                 total += 1750;
             }
-            if (f2.IsSet(ItemFlag2.ResDark))
+            if (ResDark)
             {
                 total += 1750;
             }
-            if (f2.IsSet(ItemFlag2.ResBlind))
+            if (ResBlind)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResConf))
+            if (ResConf)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResSound))
+            if (ResSound)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResShards))
+            if (ResShards)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResNether))
+            if (ResNether)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResNexus))
+            if (ResNexus)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResChaos))
+            if (ResChaos)
             {
                 total += 2000;
             }
-            if (f2.IsSet(ItemFlag2.ResDisen))
+            if (ResDisen)
             {
                 total += 10000;
             }
-            if (f3.IsSet(ItemFlag3.ShFire))
+            if (ShFire)
             {
                 total += 5000;
             }
-            if (f3.IsSet(ItemFlag3.ShElec))
+            if (ShElec)
             {
                 total += 5000;
             }
-            if (f3.IsSet(ItemFlag3.Xxx3))
-            {
-                total += 0;
-            }
-            if (f3.IsSet(ItemFlag1.Xxx1))
-            {
-                total += 0;
-            }
-            if (f3.IsSet(ItemFlag3.NoTele))
+            if (NoTele)
             {
                 total += 2500;
             }
-            if (f3.IsSet(ItemFlag3.NoMagic))
+            if (NoMagic)
             {
                 total += 2500;
             }
-            if (f3.IsSet(ItemFlag3.Wraith))
+            if (Wraith)
             {
                 total += 250000;
             }
-            if (f3.IsSet(ItemFlag3.DreadCurse))
+            if (DreadCurse)
             {
                 total -= 15000;
             }
-            if (f3.IsSet(ItemFlag3.EasyKnow))
+            if (EasyKnow)
             {
                 total += 0;
             }
-            if (f3.IsSet(ItemFlag3.HideType))
+            if (HideType)
             {
                 total += 0;
             }
-            if (f3.IsSet(ItemFlag3.ShowMods))
+            if (ShowMods)
             {
                 total += 0;
             }
-            if (f3.IsSet(ItemFlag3.InstaArt))
+            if (InstaArt)
             {
                 total += 0;
             }
-            if (f3.IsSet(ItemFlag3.Feather))
+            if (Feather)
             {
                 total += 1250;
             }
-            if (f3.IsSet(ItemFlag3.Lightsource))
+            if (Lightsource)
             {
                 total += 1250;
             }
-            if (f3.IsSet(ItemFlag3.SeeInvis))
+            if (SeeInvis)
             {
                 total += 2000;
             }
-            if (f3.IsSet(ItemFlag3.Telepathy))
+            if (Telepathy)
             {
                 total += 12500;
             }
-            if (f3.IsSet(ItemFlag3.SlowDigest))
+            if (SlowDigest)
             {
                 total += 750;
             }
-            if (f3.IsSet(ItemFlag3.Regen))
+            if (Regen)
             {
                 total += 2500;
             }
-            if (f3.IsSet(ItemFlag3.XtraMight))
+            if (XtraMight)
             {
                 total += 2250;
             }
-            if (f3.IsSet(ItemFlag3.XtraShots))
+            if (XtraShots)
             {
                 total += 10000;
             }
-            if (f3.IsSet(ItemFlag3.IgnoreAcid))
+            if (IgnoreAcid)
             {
                 total += 100;
             }
-            if (f3.IsSet(ItemFlag3.IgnoreElec))
+            if (IgnoreElec)
             {
                 total += 100;
             }
-            if (f3.IsSet(ItemFlag3.IgnoreFire))
+            if (IgnoreFire)
             {
                 total += 100;
             }
-            if (f3.IsSet(ItemFlag3.IgnoreCold))
+            if (IgnoreCold)
             {
                 total += 100;
             }
-            if (f3.IsSet(ItemFlag3.Activate))
+            if (Activate)
             {
                 total += 100;
             }
-            if (f3.IsSet(ItemFlag3.DrainExp))
+            if (DrainExp)
             {
                 total -= 12500;
             }
-            if (f3.IsSet(ItemFlag3.Teleport))
+            if (Teleport)
             {
                 if (IdentifyFlags.IsSet(Constants.IdentCursed))
                 {
@@ -1587,23 +1550,23 @@ namespace AngbandOS
                     total += 250;
                 }
             }
-            if (f3.IsSet(ItemFlag3.Aggravate))
+            if (Aggravate)
             {
                 total -= 10000;
             }
-            if (f3.IsSet(ItemFlag3.Blessed))
+            if (Blessed)
             {
                 total += 750;
             }
-            if (f3.IsSet(ItemFlag3.Cursed))
+            if (Cursed)
             {
                 total -= 5000;
             }
-            if (f3.IsSet(ItemFlag3.HeavyCurse))
+            if (HeavyCurse)
             {
                 total -= 12500;
             }
-            if (f3.IsSet(ItemFlag3.PermaCurse))
+            if (PermaCurse)
             {
                 total -= 15000;
             }
@@ -1651,7 +1614,126 @@ namespace AngbandOS
             return "average";
         }
 
-        public void GetMergedFlags(FlagSet f1, FlagSet f2, FlagSet f3)
+        /// <summary>
+        /// Returns whether or not the item affects the blows delivered by the player when being worn.  Returns true, when the base item category,
+        /// fixed artifact or rare item type this item is based on is true.  Returns false, when the item is (nothing) and the base item category, fixed
+        /// artifact and rare item type that the item is based on are all false.  This property is a replacement for the flag-based merged properties.
+        /// </summary>
+        public bool Blows { get; private set; }
+
+        public bool BrandAcid { get; private set; }
+        public bool BrandCold { get; private set; }
+        public bool BrandElec { get; private set; }
+        public bool BrandFire { get; private set; }
+        public bool BrandPois { get; private set; }
+        public bool Cha { get; private set; }
+        public bool Chaotic { get; private set; }
+        public bool Con { get; private set; }
+        public bool Dex { get; private set; }
+        public bool Impact { get; private set; }
+        public bool Infra { get; private set; }
+        public bool Int { get; private set; }
+        public bool KillDragon { get; private set; }
+        public bool Search { get; private set; }
+        public bool SlayAnimal { get; private set; }
+        public bool SlayDemon { get; private set; }
+        public bool SlayDragon { get; private set; }
+        public bool SlayEvil { get; private set; }
+        public bool SlayGiant { get; private set; }
+        public bool SlayOrc { get; private set; }
+        public bool SlayTroll { get; private set; }
+        public bool SlayUndead { get; private set; }
+        public bool Speed { get; private set; }
+        public bool Stealth { get; private set; }
+        public bool Str { get; private set; }
+        public bool Tunnel { get; private set; }
+        public bool Vampiric { get; private set; }
+        public bool Vorpal { get; private set; }
+        public bool Wis { get; private set; }
+        public bool FreeAct { get; private set; }
+        public bool HoldLife { get; private set; }
+        public bool ImAcid { get; private set; }
+        public bool ImCold { get; private set; }
+        public bool ImElec { get; private set; }
+        public bool ImFire { get; private set; }
+        public bool Reflect { get; private set; }
+        public bool ResAcid { get; private set; }
+        public bool ResBlind { get; private set; }
+        public bool ResChaos { get; private set; }
+        public bool ResCold { get; private set; }
+        public bool ResConf { get; private set; }
+        public bool ResDark { get; private set; }
+        public bool ResDisen { get; private set; }
+        public bool ResElec { get; private set; }
+        public bool ResFear { get; private set; }
+        public bool ResFire { get; private set; }
+        public bool ResLight { get; private set; }
+        public bool ResNether { get; private set; }
+        public bool ResNexus { get; private set; }
+        public bool ResPois { get; private set; }
+        public bool ResShards { get; private set; }
+        public bool ResSound { get; private set; }
+        public bool SustCha { get; private set; }
+        public bool SustCon { get; private set; }
+        public bool SustDex { get; private set; }
+        public bool SustInt { get; private set; }
+        public bool SustStr { get; private set; }
+        public bool SustWis { get; private set; }
+        public bool AntiTheft { get; private set; }
+        public bool Activate { get; private set; }
+        public bool Aggravate { get; private set; }
+        public bool Blessed { get; private set; }
+        public bool Cursed { get; private set; }
+        public bool DrainExp { get; private set; }
+        public bool DreadCurse { get; private set; }
+        public bool EasyKnow { get; private set; }
+        public bool Feather { get; private set; }
+        public bool HeavyCurse { get; private set; }
+        public bool HideType { get; private set; }
+        public bool IgnoreAcid { get; private set; }
+        public bool IgnoreCold { get; private set; }
+        public bool IgnoreElec { get; private set; }
+        public bool IgnoreFire { get; private set; }
+        public bool InstaArt { get; private set; }
+        public bool Lightsource { get; private set; }
+        public bool NoMagic { get; private set; }
+        public bool NoTele { get; private set; }
+        public bool PermaCurse { get; private set; }
+        public bool Regen { get; private set; }
+        public bool SeeInvis { get; private set; }
+        public bool ShElec { get; private set; }
+        public bool ShFire { get; private set; }
+        public bool ShowMods { get; private set; }
+        public bool SlowDigest { get; private set; }
+        public bool Telepathy { get; private set; }
+        public bool Teleport { get; private set; }
+        public bool Wraith { get; private set; }
+        public bool XtraMight { get; private set; }
+        public bool XtraShots { get; private set; }
+
+        /// <summary>
+        /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
+        /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
+        /// the flag-based properties.
+        /// </summary>
+        public void RefreshFlagBasedProperties()
+        {
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
+            GetMergedFlags(f1, f2, f3); // NO NEED TO REFACTOR THIS CALL
+        }
+        /// <summary>
+        /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
+        /// instead of GetMergedFlags and then use any of the flag-based properties as replacement functionality.
+        /// 
+        /// Combines all of the boolean properties from the item category, the fixed artifact, the rare item type and the random artifact the item is based on.
+        /// If the item is a random artifact it will also add the special sustain, power and ability flags from the bonus power type.  
+        /// </summary>
+        /// <param name="f1"></param>
+        /// <param name="f2"></param>
+        /// <param name="f3"></param>
+        public void GetMergedFlags(FlagSet f1, FlagSet f2, FlagSet f3) // TODO: Refactor remaining calls into RefreshFlagBasedProperties
         {
             f1.Clear();
             f2.Clear();
@@ -1704,6 +1786,97 @@ namespace AngbandOS
                         }
                 }
             }
+
+            Blows = f1.IsSet(ItemFlag1.Blows);
+            BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
+            BrandCold = f1.IsSet(ItemFlag1.BrandCold);
+            BrandElec = f1.IsSet(ItemFlag1.BrandElec);
+            BrandFire = f1.IsSet(ItemFlag1.BrandFire);
+            BrandPois = f1.IsSet(ItemFlag1.BrandPois);
+            Cha = f1.IsSet(ItemFlag1.Cha);
+            Chaotic = f1.IsSet(ItemFlag1.Chaotic);
+            Con = f1.IsSet(ItemFlag1.Con);
+            Dex = f1.IsSet(ItemFlag1.Dex);
+            Impact = f1.IsSet(ItemFlag1.Impact);
+            Infra = f1.IsSet(ItemFlag1.Infra);
+            Int = f1.IsSet(ItemFlag1.Int);
+            KillDragon = f1.IsSet(ItemFlag1.KillDragon);
+            Search = f1.IsSet(ItemFlag1.Search);
+            SlayAnimal = f1.IsSet(ItemFlag1.SlayAnimal);
+            SlayDemon = f1.IsSet(ItemFlag1.SlayDemon);
+            SlayDragon = f1.IsSet(ItemFlag1.SlayDragon);
+            SlayEvil = f1.IsSet(ItemFlag1.SlayEvil);
+            SlayGiant = f1.IsSet(ItemFlag1.SlayGiant);
+            SlayOrc = f1.IsSet(ItemFlag1.SlayOrc);
+            SlayTroll = f1.IsSet(ItemFlag1.SlayTroll);
+            SlayUndead = f1.IsSet(ItemFlag1.SlayUndead);
+            Speed = f1.IsSet(ItemFlag1.Speed);
+            Stealth = f1.IsSet(ItemFlag1.Stealth);
+            Str = f1.IsSet(ItemFlag1.Str);
+            Tunnel = f1.IsSet(ItemFlag1.Tunnel);
+            Vampiric = f1.IsSet(ItemFlag1.Vampiric);
+            Vorpal = f1.IsSet(ItemFlag1.Vorpal);
+            Wis = f1.IsSet(ItemFlag1.Wis);
+            FreeAct = f2.IsSet(ItemFlag2.FreeAct);
+            HoldLife = f2.IsSet(ItemFlag2.HoldLife);
+            ImAcid = f2.IsSet(ItemFlag2.ImAcid);
+            ImCold = f2.IsSet(ItemFlag2.ImCold);
+            ImElec = f2.IsSet(ItemFlag2.ImElec);
+            ImFire = f2.IsSet(ItemFlag2.ImFire);
+            Reflect = f2.IsSet(ItemFlag2.Reflect);
+            ResAcid = f2.IsSet(ItemFlag2.ResAcid);
+            ResBlind = f2.IsSet(ItemFlag2.ResBlind);
+            ResChaos = f2.IsSet(ItemFlag2.ResChaos);
+            ResCold = f2.IsSet(ItemFlag2.ResCold);
+            ResConf = f2.IsSet(ItemFlag2.ResConf);
+            ResDark = f2.IsSet(ItemFlag2.ResDark);
+            ResDisen = f2.IsSet(ItemFlag2.ResDisen);
+            ResElec = f2.IsSet(ItemFlag2.ResElec);
+            ResFear = f2.IsSet(ItemFlag2.ResFear);
+            ResFire = f2.IsSet(ItemFlag2.ResFire);
+            ResLight = f2.IsSet(ItemFlag2.ResLight);
+            ResNether = f2.IsSet(ItemFlag2.ResNether);
+            ResNexus = f2.IsSet(ItemFlag2.ResNexus);
+            ResPois = f2.IsSet(ItemFlag2.ResPois);
+            ResShards = f2.IsSet(ItemFlag2.ResShards);
+            ResSound = f2.IsSet(ItemFlag2.ResSound);
+            SustCha = f2.IsSet(ItemFlag2.SustCha);
+            SustCon = f2.IsSet(ItemFlag2.SustCon);
+            SustDex = f2.IsSet(ItemFlag2.SustDex);
+            SustInt = f2.IsSet(ItemFlag2.SustInt);
+            SustStr = f2.IsSet(ItemFlag2.SustStr);
+            SustWis = f2.IsSet(ItemFlag2.SustWis);
+            AntiTheft = f3.IsSet(ItemFlag3.AntiTheft);
+            Activate = f3.IsSet(ItemFlag3.Activate);
+            Aggravate = f3.IsSet(ItemFlag3.Aggravate);
+            Blessed = f3.IsSet(ItemFlag3.Blessed);
+            Cursed = f3.IsSet(ItemFlag3.Cursed);
+            DrainExp = f3.IsSet(ItemFlag3.DrainExp);
+            DreadCurse = f3.IsSet(ItemFlag3.DreadCurse);
+            EasyKnow = f3.IsSet(ItemFlag3.EasyKnow);
+            Feather = f3.IsSet(ItemFlag3.Feather);
+            HeavyCurse = f3.IsSet(ItemFlag3.HeavyCurse);
+            HideType = f3.IsSet(ItemFlag3.HideType);
+            IgnoreAcid = f3.IsSet(ItemFlag3.IgnoreAcid);
+            IgnoreCold = f3.IsSet(ItemFlag3.IgnoreCold);
+            IgnoreElec = f3.IsSet(ItemFlag3.IgnoreElec);
+            IgnoreFire = f3.IsSet(ItemFlag3.IgnoreFire);
+            InstaArt = f3.IsSet(ItemFlag3.InstaArt);
+            Lightsource = f3.IsSet(ItemFlag3.Lightsource);
+            NoMagic = f3.IsSet(ItemFlag3.NoMagic);
+            NoTele = f3.IsSet(ItemFlag3.NoTele);
+            PermaCurse = f3.IsSet(ItemFlag3.PermaCurse);
+            Regen = f3.IsSet(ItemFlag3.Regen);
+            SeeInvis = f3.IsSet(ItemFlag3.SeeInvis);
+            ShElec = f3.IsSet(ItemFlag3.ShElec);
+            ShFire = f3.IsSet(ItemFlag3.ShFire);
+            ShowMods = f3.IsSet(ItemFlag3.ShowMods);
+            SlowDigest = f3.IsSet(ItemFlag3.SlowDigest);
+            Telepathy = f3.IsSet(ItemFlag3.Telepathy);
+            Teleport = f3.IsSet(ItemFlag3.Teleport);
+            Wraith = f3.IsSet(ItemFlag3.Wraith);
+            XtraMight = f3.IsSet(ItemFlag3.XtraMight);
+            XtraShots = f3.IsSet(ItemFlag3.XtraShots);
         }
 
         public string GetVagueFeeling()
@@ -1758,12 +1931,9 @@ namespace AngbandOS
         public bool IdentifyFully()
         {
             int i = 0, j, k;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             string[] info = new string[128];
-            GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.Activate))
+            RefreshFlagBasedProperties();
+            if (Activate)
             {
                 info[i++] = "It can be activated for...";
                 info[i++] = DescribeActivationEffect();
@@ -1774,317 +1944,317 @@ namespace AngbandOS
             {
                 info[i++] = categoryIdentity;
             }
-            if (f1.IsSet(ItemFlag1.Str))
+            if (Str)
             {
                 info[i++] = "It affects your strength.";
             }
-            if (f1.IsSet(ItemFlag1.Int))
+            if (Int)
             {
                 info[i++] = "It affects your intelligence.";
             }
-            if (f1.IsSet(ItemFlag1.Wis))
+            if (Wis)
             {
                 info[i++] = "It affects your wisdom.";
             }
-            if (f1.IsSet(ItemFlag1.Dex))
+            if (Dex)
             {
                 info[i++] = "It affects your dexterity.";
             }
-            if (f1.IsSet(ItemFlag1.Con))
+            if (Con)
             {
                 info[i++] = "It affects your constitution.";
             }
-            if (f1.IsSet(ItemFlag1.Cha))
+            if (Cha)
             {
                 info[i++] = "It affects your charisma.";
             }
-            if (f1.IsSet(ItemFlag1.Stealth))
+            if (Stealth)
             {
                 info[i++] = "It affects your stealth.";
             }
-            if (f1.IsSet(ItemFlag1.Search))
+            if (Search)
             {
                 info[i++] = "It affects your searching.";
             }
-            if (f1.IsSet(ItemFlag1.Infra))
+            if (Infra)
             {
                 info[i++] = "It affects your infravision.";
             }
-            if (f1.IsSet(ItemFlag1.Tunnel))
+            if (Tunnel)
             {
                 info[i++] = "It affects your ability to tunnel.";
             }
-            if (f1.IsSet(ItemFlag1.Speed))
+            if (Speed)
             {
                 info[i++] = "It affects your movement speed.";
             }
-            if (f1.IsSet(ItemFlag1.Blows))
+            if (Blows)
             {
                 info[i++] = "It affects your attack speed.";
             }
-            if (f1.IsSet(ItemFlag1.BrandAcid))
+            if (BrandAcid)
             {
                 info[i++] = "It does extra damage from acid.";
             }
-            if (f1.IsSet(ItemFlag1.BrandElec))
+            if (BrandElec)
             {
                 info[i++] = "It does extra damage from electricity.";
             }
-            if (f1.IsSet(ItemFlag1.BrandFire))
+            if (BrandFire)
             {
                 info[i++] = "It does extra damage from fire.";
             }
-            if (f1.IsSet(ItemFlag1.BrandCold))
+            if (BrandCold)
             {
                 info[i++] = "It does extra damage from frost.";
             }
-            if (f1.IsSet(ItemFlag1.BrandPois))
+            if (BrandPois)
             {
                 info[i++] = "It poisons your foes.";
             }
-            if (f1.IsSet(ItemFlag1.Chaotic))
+            if (Chaotic)
             {
                 info[i++] = "It produces chaotic effects.";
             }
-            if (f1.IsSet(ItemFlag1.Vampiric))
+            if (Vampiric)
             {
                 info[i++] = "It drains life from your foes.";
             }
-            if (f1.IsSet(ItemFlag1.Impact))
+            if (Impact)
             {
                 info[i++] = "It can cause earthquakes.";
             }
-            if (f1.IsSet(ItemFlag1.Vorpal))
+            if (Vorpal)
             {
                 info[i++] = "It is very sharp and can cut your foes.";
             }
-            if (f1.IsSet(ItemFlag1.KillDragon))
+            if (KillDragon)
             {
                 info[i++] = "It is a great bane of dragons.";
             }
-            else if (f1.IsSet(ItemFlag1.SlayDragon))
+            else if (SlayDragon)
             {
                 info[i++] = "It is especially deadly against dragons.";
             }
-            if (f1.IsSet(ItemFlag1.SlayOrc))
+            if (SlayOrc)
             {
                 info[i++] = "It is especially deadly against orcs.";
             }
-            if (f1.IsSet(ItemFlag1.SlayTroll))
+            if (SlayTroll)
             {
                 info[i++] = "It is especially deadly against trolls.";
             }
-            if (f1.IsSet(ItemFlag1.SlayGiant))
+            if (SlayGiant)
             {
                 info[i++] = "It is especially deadly against giants.";
             }
-            if (f1.IsSet(ItemFlag1.SlayDemon))
+            if (SlayDemon)
             {
                 info[i++] = "It strikes at demons with holy wrath.";
             }
-            if (f1.IsSet(ItemFlag1.SlayUndead))
+            if (SlayUndead)
             {
                 info[i++] = "It strikes at undead with holy wrath.";
             }
-            if (f1.IsSet(ItemFlag1.SlayEvil))
+            if (SlayEvil)
             {
                 info[i++] = "It fights against evil with holy fury.";
             }
-            if (f1.IsSet(ItemFlag1.SlayAnimal))
+            if (SlayAnimal)
             {
                 info[i++] = "It is especially deadly against natural creatures.";
             }
-            if (f2.IsSet(ItemFlag2.SustStr))
+            if (SustStr)
             {
                 info[i++] = "It sustains your strength.";
             }
-            if (f2.IsSet(ItemFlag2.SustInt))
+            if (SustInt)
             {
                 info[i++] = "It sustains your intelligence.";
             }
-            if (f2.IsSet(ItemFlag2.SustWis))
+            if (SustWis)
             {
                 info[i++] = "It sustains your wisdom.";
             }
-            if (f2.IsSet(ItemFlag2.SustDex))
+            if (SustDex)
             {
                 info[i++] = "It sustains your dexterity.";
             }
-            if (f2.IsSet(ItemFlag2.SustCon))
+            if (SustCon)
             {
                 info[i++] = "It sustains your constitution.";
             }
-            if (f2.IsSet(ItemFlag2.SustCha))
+            if (SustCha)
             {
                 info[i++] = "It sustains your charisma.";
             }
-            if (f2.IsSet(ItemFlag2.ImAcid))
+            if (ImAcid)
             {
                 info[i++] = "It provides immunity to acid.";
             }
-            if (f2.IsSet(ItemFlag2.ImElec))
+            if (ImElec)
             {
                 info[i++] = "It provides immunity to electricity.";
             }
-            if (f2.IsSet(ItemFlag2.ImFire))
+            if (ImFire)
             {
                 info[i++] = "It provides immunity to fire.";
             }
-            if (f2.IsSet(ItemFlag2.ImCold))
+            if (ImCold)
             {
                 info[i++] = "It provides immunity to cold.";
             }
-            if (f2.IsSet(ItemFlag2.FreeAct))
+            if (FreeAct)
             {
                 info[i++] = "It provides immunity to paralysis.";
             }
-            if (f2.IsSet(ItemFlag2.HoldLife))
+            if (HoldLife)
             {
                 info[i++] = "It provides resistance to life draining.";
             }
-            if (f2.IsSet(ItemFlag2.ResFear))
+            if (ResFear)
             {
                 info[i++] = "It makes you completely fearless.";
             }
-            if (f2.IsSet(ItemFlag2.ResAcid))
+            if (ResAcid)
             {
                 info[i++] = "It provides resistance to acid.";
             }
-            if (f2.IsSet(ItemFlag2.ResElec))
+            if (ResElec)
             {
                 info[i++] = "It provides resistance to electricity.";
             }
-            if (f2.IsSet(ItemFlag2.ResFire))
+            if (ResFire)
             {
                 info[i++] = "It provides resistance to fire.";
             }
-            if (f2.IsSet(ItemFlag2.ResCold))
+            if (ResCold)
             {
                 info[i++] = "It provides resistance to cold.";
             }
-            if (f2.IsSet(ItemFlag2.ResPois))
+            if (ResPois)
             {
                 info[i++] = "It provides resistance to poison.";
             }
-            if (f2.IsSet(ItemFlag2.ResLight))
+            if (ResLight)
             {
                 info[i++] = "It provides resistance to light.";
             }
-            if (f2.IsSet(ItemFlag2.ResDark))
+            if (ResDark)
             {
                 info[i++] = "It provides resistance to dark.";
             }
-            if (f2.IsSet(ItemFlag2.ResBlind))
+            if (ResBlind)
             {
                 info[i++] = "It provides resistance to blindness.";
             }
-            if (f2.IsSet(ItemFlag2.ResConf))
+            if (ResConf)
             {
                 info[i++] = "It provides resistance to confusion.";
             }
-            if (f2.IsSet(ItemFlag2.ResSound))
+            if (ResSound)
             {
                 info[i++] = "It provides resistance to sound.";
             }
-            if (f2.IsSet(ItemFlag2.ResShards))
+            if (ResShards)
             {
                 info[i++] = "It provides resistance to shards.";
             }
-            if (f2.IsSet(ItemFlag2.ResNether))
+            if (ResNether)
             {
                 info[i++] = "It provides resistance to nether.";
             }
-            if (f2.IsSet(ItemFlag2.ResNexus))
+            if (ResNexus)
             {
                 info[i++] = "It provides resistance to nexus.";
             }
-            if (f2.IsSet(ItemFlag2.ResChaos))
+            if (ResChaos)
             {
                 info[i++] = "It provides resistance to chaos.";
             }
-            if (f2.IsSet(ItemFlag2.ResDisen))
+            if (ResDisen)
             {
                 info[i++] = "It provides resistance to disenchantment.";
             }
-            if (f3.IsSet(ItemFlag3.Wraith))
+            if (Wraith)
             {
                 info[i++] = "It renders you incorporeal.";
             }
-            if (f3.IsSet(ItemFlag3.Feather))
+            if (Feather)
             {
                 info[i++] = "It allows you to levitate.";
             }
-            if (f3.IsSet(ItemFlag3.Lightsource))
+            if (Lightsource)
             {
                 info[i++] = "It provides permanent light.";
             }
-            if (f3.IsSet(ItemFlag3.SeeInvis))
+            if (SeeInvis)
             {
                 info[i++] = "It allows you to see invisible monsters.";
             }
-            if (f3.IsSet(ItemFlag3.Telepathy))
+            if (Telepathy)
             {
                 info[i++] = "It gives telepathic powers.";
             }
-            if (f3.IsSet(ItemFlag3.SlowDigest))
+            if (SlowDigest)
             {
                 info[i++] = "It slows your metabolism.";
             }
-            if (f3.IsSet(ItemFlag3.Regen))
+            if (Regen)
             {
                 info[i++] = "It speeds your regenerative powers.";
             }
-            if (f2.IsSet(ItemFlag2.Reflect))
+            if (Reflect)
             {
                 info[i++] = "It reflects bolts and arrows.";
             }
-            if (f3.IsSet(ItemFlag3.ShFire))
+            if (ShFire)
             {
                 info[i++] = "It produces a fiery sheath.";
             }
-            if (f3.IsSet(ItemFlag3.ShElec))
+            if (ShElec)
             {
                 info[i++] = "It produces an electric sheath.";
             }
-            if (f3.IsSet(ItemFlag3.NoMagic))
+            if (NoMagic)
             {
                 info[i++] = "It produces an anti-magic shell.";
             }
-            if (f3.IsSet(ItemFlag3.NoTele))
+            if (NoTele)
             {
                 info[i++] = "It prevents teleportation.";
             }
-            if (f3.IsSet(ItemFlag3.XtraMight))
+            if (XtraMight)
             {
                 info[i++] = "It fires missiles with extra might.";
             }
-            if (f3.IsSet(ItemFlag3.XtraShots))
+            if (XtraShots)
             {
                 info[i++] = "It fires missiles excessively fast.";
             }
-            if (f3.IsSet(ItemFlag3.DrainExp))
+            if (DrainExp)
             {
                 info[i++] = "It drains experience.";
             }
-            if (f3.IsSet(ItemFlag3.Teleport))
+            if (Teleport)
             {
                 info[i++] = "It induces random teleportation.";
             }
-            if (f3.IsSet(ItemFlag3.Aggravate))
+            if (Aggravate)
             {
                 info[i++] = "It aggravates nearby creatures.";
             }
-            if (f3.IsSet(ItemFlag3.Blessed))
+            if (Blessed)
             {
                 info[i++] = "It has been blessed by the gods.";
             }
             if (IsCursed())
             {
-                if (f3.IsSet(ItemFlag3.PermaCurse))
+                if (PermaCurse)
                 {
                     info[i++] = "It is permanently cursed.";
                 }
-                else if (f3.IsSet(ItemFlag3.HeavyCurse))
+                else if (HeavyCurse)
                 {
                     info[i++] = "It is heavily cursed.";
                 }
@@ -2093,23 +2263,23 @@ namespace AngbandOS
                     info[i++] = "It is cursed.";
                 }
             }
-            if (f3.IsSet(ItemFlag3.DreadCurse))
+            if (DreadCurse)
             {
                 info[i++] = "It carries an ancient foul curse.";
             }
-            if (f3.IsSet(ItemFlag3.IgnoreAcid))
+            if (IgnoreAcid)
             {
                 info[i++] = "It cannot be harmed by acid.";
             }
-            if (f3.IsSet(ItemFlag3.IgnoreElec))
+            if (IgnoreElec)
             {
                 info[i++] = "It cannot be harmed by electricity.";
             }
-            if (f3.IsSet(ItemFlag3.IgnoreFire))
+            if (IgnoreFire)
             {
                 info[i++] = "It cannot be harmed by fire.";
             }
-            if (f3.IsSet(ItemFlag3.IgnoreCold))
+            if (IgnoreCold)
             {
                 info[i++] = "It cannot be harmed by cold.";
             }
@@ -2297,7 +2467,7 @@ namespace AngbandOS
             {
                 return;
             }
-            GetMergedFlags(f1, f2, f3);
+            GetMergedFlags(f1, f2, f3); // THIS IS A MONKEY WRENCH WHERE THE FLAG-BASED PROPERTIES ARE SET TO FALSE -- THE CALLING LOGIC NEEDS TO BE UPDATED
         }
 
         public void ObjectTried()
@@ -2316,7 +2486,7 @@ namespace AngbandOS
                 return 0;
             }
             int value = kPtr.BaseItemCategory.Cost;
-            GetMergedFlags(f1, f2, f3);
+            GetMergedFlags(f1, f2, f3); // DO NOT REFACTOR THIS CALL
             if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -2502,16 +2672,12 @@ namespace AngbandOS
 
         public int NewRealValue()
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             ItemType kPtr = ItemType;
             if (kPtr.BaseItemCategory.Cost == 0)
             {
                 return 0;
             }
             int value = kPtr.BaseItemCategory.Cost;
-            GetMergedFlags(f1, f2, f3);
             if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -2641,11 +2807,8 @@ namespace AngbandOS
 
         private string DescribeActivationEffect()
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3);
-            if (f3.IsClear(ItemFlag3.Activate))
+            RefreshFlagBasedProperties();
+            if (!Activate)
             {
                 return null;
             }

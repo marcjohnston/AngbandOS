@@ -2752,12 +2752,12 @@ namespace AngbandOS
             for (j = 0, i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 oPtr = Player.Inventory[i];
-                oPtr.GetMergedFlags(f1, f2, f3);
-                if (f3.IsSet(ItemFlag3.DreadCurse) && Program.Rng.DieRoll(100) == 1)
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.DreadCurse && Program.Rng.DieRoll(100) == 1)
                 {
                     ActivateDreadCurse();
                 }
-                if (f3.IsSet(ItemFlag3.Teleport) && Program.Rng.RandomLessThan(100) < 1)
+                if (oPtr.Teleport && Program.Rng.RandomLessThan(100) < 1)
                 {
                     if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed) && !Player.HasAntiTeleport)
                     {
@@ -3534,9 +3534,6 @@ namespace AngbandOS
 
         public void BlessWeapon()
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             ItemFilter = ItemTesterHookWeapon;
             if (!GetItem(out int item, "Bless which weapon? ", true, true, true))
             {
@@ -3548,12 +3545,11 @@ namespace AngbandOS
             }
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             string oName = oPtr.Description(false, 0);
-            oPtr.GetMergedFlags(f1, f2, f3);
+            oPtr.RefreshFlagBasedProperties();
             if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed))
             {
                 string your;
-                if ((f3.IsSet(ItemFlag3.HeavyCurse) && Program.Rng.DieRoll(100) < 33) ||
-                    f3.IsSet(ItemFlag3.PermaCurse))
+                if ((oPtr.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.PermaCurse)
                 {
                     your = item >= 0 ? "your" : "the";
                     MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
@@ -3566,7 +3562,7 @@ namespace AngbandOS
                 oPtr.Inscription = "uncursed";
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             }
-            if (f3.IsSet(ItemFlag3.Blessed))
+            if (oPtr.Blessed)
             {
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "were" : "was";
@@ -4615,13 +4611,9 @@ namespace AngbandOS
         {
             bool res = false;
             bool a = oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            oPtr.GetMergedFlags(f1, f2, f3);
+            oPtr.RefreshFlagBasedProperties();
             int prob = oPtr.Count * 100;
-            if (oPtr.Category == ItemCategory.Bolt || oPtr.Category == ItemCategory.Arrow ||
-                oPtr.Category == ItemCategory.Shot)
+            if (oPtr.Category == ItemCategory.Bolt || oPtr.Category == ItemCategory.Arrow || oPtr.Category == ItemCategory.Shot)
             {
                 prob /= 20;
             }
@@ -4650,8 +4642,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusToHit++;
                         res = true;
-                        if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusToHit >= 0 &&
-                            Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusToHit >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
@@ -4686,8 +4677,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusDamage++;
                         res = true;
-                        if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusDamage >= 0 &&
-                            Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusDamage >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
@@ -4722,7 +4712,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusArmourClass++;
                         res = true;
-                        if (oPtr.IsCursed() && f3.IsClear(ItemFlag3.PermaCurse) && oPtr.BonusArmourClass >= 0 &&
+                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusArmourClass >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
@@ -5442,7 +5432,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                oPtr.GetMergedFlags(t1, t2, t3);
+                oPtr.GetMergedFlags(t1, t2, t3); // THIS IS ANOTHER MONKEY WRENCH ... WE MERGE ALL MELEE WEAPONS
                 f1.Set(t1);
                 f2.Set(t2);
                 f3.Set(t3);
@@ -6096,15 +6086,12 @@ namespace AngbandOS
 
         public bool SetAcidDestroy(Item oPtr)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (!oPtr.HatesAcid())
             {
                 return false;
             }
-            oPtr.GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.IgnoreAcid))
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.IgnoreAcid)
             {
                 return false;
             }
@@ -6113,15 +6100,12 @@ namespace AngbandOS
 
         public bool SetColdDestroy(Item oPtr)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (!oPtr.HatesCold())
             {
                 return false;
             }
-            oPtr.GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.IgnoreCold))
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.IgnoreCold)
             {
                 return false;
             }
@@ -6130,15 +6114,12 @@ namespace AngbandOS
 
         public bool SetElecDestroy(Item oPtr)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (!oPtr.HatesElec())
             {
                 return false;
             }
-            oPtr.GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.IgnoreElec))
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.IgnoreElec)
             {
                 return false;
             }
@@ -6147,15 +6128,12 @@ namespace AngbandOS
 
         public bool SetFireDestroy(Item oPtr)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (!oPtr.HatesFire())
             {
                 return false;
             }
-            oPtr.GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.IgnoreFire))
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.IgnoreFire)
             {
                 return false;
             }
@@ -6764,9 +6742,6 @@ namespace AngbandOS
         private bool MinusAc()
         {
             Item oPtr = null;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             switch (Program.Rng.DieRoll(6))
             {
                 case 1:
@@ -6806,8 +6781,8 @@ namespace AngbandOS
                 return false;
             }
             string oName = oPtr.Description(false, 0);
-            oPtr.GetMergedFlags(f1, f2, f3);
-            if (f3.IsSet(ItemFlag3.IgnoreAcid))
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.IgnoreAcid)
             {
                 MsgPrint($"Your {oName} is unaffected!");
                 return true;
@@ -6848,9 +6823,6 @@ namespace AngbandOS
             int cnt = 0;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                FlagSet f1 = new FlagSet();
-                FlagSet f2 = new FlagSet();
-                FlagSet f3 = new FlagSet();
                 Item oPtr = Player.Inventory[i];
                 if (oPtr.ItemType == null)
                 {
@@ -6860,12 +6832,12 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                oPtr.GetMergedFlags(f1, f2, f3);
-                if (!all && f3.IsSet(ItemFlag3.HeavyCurse))
+                oPtr.RefreshFlagBasedProperties();
+                if (!all && oPtr.HeavyCurse)
                 {
                     continue;
                 }
-                if (f3.IsSet(ItemFlag3.PermaCurse))
+                if (oPtr.PermaCurse)
                 {
                     continue;
                 }
@@ -7561,11 +7533,9 @@ namespace AngbandOS
             }
             // Artifacts can't be cursed, and normal armour has a chance to save
             string itemName = item.Description(false, 3);
-            if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) &&
-                Program.Rng.RandomLessThan(100) < 50)
+            if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) && Program.Rng.RandomLessThan(100) < 50)
             {
-                MsgPrint(
-                    $"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
+                MsgPrint($"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
             }
             else
             {
@@ -7927,15 +7897,12 @@ namespace AngbandOS
         /// <returns> True if the item can be activated </returns>
         public bool ItemFilterActivatable(Item item)
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (!item.IsKnown())
             {
                 return false;
             }
-            item.GetMergedFlags(f1, f2, f3);
-            return f3.IsSet(ItemFlag3.Activate);
+            item.RefreshFlagBasedProperties();
+            return item.Activate;
         }
 
         /// <summary>
@@ -8443,9 +8410,6 @@ namespace AngbandOS
             const bool drainMsg = true;
             int drainResult = 0;
             const int drainLeft = _maxVampiricDrain;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             bool noExtra = false;
             Disturb(false);
             // If we're a rogue then we can backstab monsters
@@ -8517,9 +8481,9 @@ namespace AngbandOS
                     // Default to 1 damage for an unarmed hit
                     int totalDamage = 1;
                     // Get our weapon's flags to see if we need to do anything special
-                    item.GetMergedFlags(f1, f2, f3);
-                    bool chaosEffect = f1.IsSet(ItemFlag1.Chaotic) && Program.Rng.DieRoll(2) == 1;
-                    if (f1.IsSet(ItemFlag1.Vampiric) || (chaosEffect && Program.Rng.DieRoll(5) < 3))
+                    item.RefreshFlagBasedProperties();
+                    bool chaosEffect = item.Chaotic && Program.Rng.DieRoll(2) == 1;
+                    if (item.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -8533,7 +8497,7 @@ namespace AngbandOS
                         }
                     }
                     // Vorpal weapons have a chance of a deep cut
-                    bool vorpalCut = f1.IsSet(ItemFlag1.Vorpal) && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
+                    bool vorpalCut = item.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
                     if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands())
                     {

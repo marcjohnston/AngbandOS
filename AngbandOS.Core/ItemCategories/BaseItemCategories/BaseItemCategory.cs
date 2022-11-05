@@ -535,11 +535,8 @@ namespace AngbandOS.ItemCategories
             string s = "";
             if (item.IsKnown())
             {
-                FlagSet f1 = new FlagSet();
-                FlagSet f2 = new FlagSet();
-                FlagSet f3 = new FlagSet();
-                item.GetMergedFlags(f1, f2, f3);
-                if (f3.IsSet(ItemFlag3.ShowMods) || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                item.RefreshFlagBasedProperties();
+                if (ShowMods || (item.BonusToHit != 0 && item.BonusDamage != 0))
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }
@@ -575,22 +572,18 @@ namespace AngbandOS.ItemCategories
         public virtual string GetVerboseDescription(Item item)
         {
             string s = "";
-
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            item.GetMergedFlags(f1, f2, f3);
+            item.RefreshFlagBasedProperties();
             if (item.IsKnown() && HasAnyPvalMask)
             {
                 s += $" ({GetSignedValue(item.TypeSpecificValue)}";
-                if (f3.IsSet(ItemFlag3.HideType))
+                if (HideType)
                 {
                 }
-                else if (f1.IsSet(ItemFlag1.Speed))
+                else if (Speed)
                 {
                     s += " speed";
                 }
-                else if (f1.IsSet(ItemFlag1.Blows))
+                else if (Blows)
                 {
                     if (item.TypeSpecificValue > 1)
                     {
@@ -601,19 +594,19 @@ namespace AngbandOS.ItemCategories
                         s += " attack";
                     }
                 }
-                else if (f1.IsSet(ItemFlag1.Stealth))
+                else if (Stealth)
                 {
                     s += " stealth";
                 }
-                else if (f1.IsSet(ItemFlag1.Search))
+                else if (Search)
                 {
                     s += " searching";
                 }
-                else if (f1.IsSet(ItemFlag1.Infra))
+                else if (Infra)
                 {
                     s += " infravision";
                 }
-                else if (f1.IsSet(ItemFlag1.Tunnel))
+                else if (Tunnel)
                 {
                 }
                 s += ")";
@@ -677,55 +670,52 @@ namespace AngbandOS.ItemCategories
             }
 
             int bonusValue = 0;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            item.GetMergedFlags(f1, f2, f3);
-            if (f1.IsSet(ItemFlag1.Str))
+            item.RefreshFlagBasedProperties();
+            if (Str)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Int))
+            if (Int)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Wis))
+            if (Wis)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Dex))
+            if (Dex)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Con))
+            if (Con)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Cha))
+            if (Cha)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (f1.IsSet(ItemFlag1.Stealth))
+            if (Stealth)
             {
                 bonusValue += item.TypeSpecificValue * 100;
             }
-            if (f1.IsSet(ItemFlag1.Search))
+            if (Search)
             {
                 bonusValue += item.TypeSpecificValue * 100;
             }
-            if (f1.IsSet(ItemFlag1.Infra))
+            if (Infra)
             {
                 bonusValue += item.TypeSpecificValue * 50;
             }
-            if (f1.IsSet(ItemFlag1.Tunnel))
+            if (Tunnel)
             {
                 bonusValue += item.TypeSpecificValue * 50;
             }
-            if (f1.IsSet(ItemFlag1.Blows))
+            if (Blows)
             {
                 bonusValue += item.TypeSpecificValue * 5000;
             }
-            if (f1.IsSet(ItemFlag1.Speed))
+            if (Speed)
             {
                 bonusValue += item.TypeSpecificValue * 3000;
             }

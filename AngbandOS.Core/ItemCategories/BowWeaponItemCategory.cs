@@ -23,12 +23,9 @@ namespace AngbandOS.ItemCategories
         public override string GetDetailedDescription(Item item)
         {
             string basenm = "";
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            item.GetMergedFlags(f1, f2, f3);
+            item.RefreshFlagBasedProperties();
             int power = item.ItemSubCategory % 10;
-            if (f3.IsSet(ItemFlag3.XtraMight))
+            if (XtraMight)
             {
                 power++;
             }

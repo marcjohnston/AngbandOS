@@ -48,14 +48,10 @@ namespace AngbandOS.Projection
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             int nextOIdx;
             bool obvious = false;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
                 Item oPtr = SaveGame.Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
-                oPtr.GetMergedFlags(f1, f2, f3);
                 if (oPtr.Count > 1)
                 {
                 }
