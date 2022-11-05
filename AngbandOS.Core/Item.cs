@@ -61,7 +61,7 @@ namespace AngbandOS
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
-        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.Category; // Provided for backwards compatability.  Will be deleted.
+        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public bool IsBlessed()
         {
@@ -350,17 +350,17 @@ namespace AngbandOS
         public void AssignItemType(ItemType itemType)
         {
             ItemType = itemType;
-            ItemSubCategory = itemType.SubCategory ?? 0;
-            TypeSpecificValue = itemType.Pval;
+            ItemSubCategory = itemType.BaseItemCategory.SubCategory ?? 0;
+            TypeSpecificValue = itemType.BaseItemCategory.Pval;
             Count = 1;
-            Weight = itemType.Weight;
-            BonusToHit = itemType.ToH;
-            BonusDamage = itemType.ToD;
-            BonusArmourClass = itemType.ToA;
-            BaseArmourClass = itemType.Ac;
-            DamageDice = itemType.Dd;
-            DamageDiceSides = itemType.Ds;
-            if (itemType.Cost <= 0)
+            Weight = itemType.BaseItemCategory.Weight;
+            BonusToHit = itemType.BaseItemCategory.ToH;
+            BonusDamage = itemType.BaseItemCategory.ToD;
+            BonusArmourClass = itemType.BaseItemCategory.ToA;
+            BaseArmourClass = itemType.BaseItemCategory.Ac;
+            DamageDice = itemType.BaseItemCategory.Dd;
+            DamageDiceSides = itemType.BaseItemCategory.Ds;
+            if (itemType.BaseItemCategory.Cost <= 0)
             {
                 IdentifyFlags.Set(Constants.IdentBroken);
             }
@@ -593,7 +593,7 @@ namespace AngbandOS
                 known = true;
             }
             int indexx = ItemSubCategory;
-            string basenm = kPtr.Name;
+            string basenm = kPtr.BaseItemCategory.FriendlyName;
             string modstr = "";
             switch (Category)
             {
@@ -860,7 +860,7 @@ namespace AngbandOS
             if (appendName)
             {
                 t += " of ";
-                t += kPtr.Name;
+                t += kPtr.BaseItemCategory.FriendlyName;
             }
             if (known)
             {
@@ -2281,7 +2281,7 @@ namespace AngbandOS
                 return false;
             }
             AssignItemType(kPtr);
-            int bbase = kPtr.Cost;
+            int bbase = kPtr.BaseItemCategory.Cost;
             TypeSpecificValue = bbase + (8 * Program.Rng.DieRoll(bbase)) + Program.Rng.DieRoll(8);
             return true;
         }
@@ -2309,11 +2309,11 @@ namespace AngbandOS
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             ItemType kPtr = ItemType;
-            if (kPtr.Cost == 0)
+            if (kPtr.BaseItemCategory.Cost == 0)
             {
                 return 0;
             }
-            int value = kPtr.Cost;
+            int value = kPtr.BaseItemCategory.Cost;
             GetMergedFlags(f1, f2, f3);
             if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
             {
@@ -2473,9 +2473,9 @@ namespace AngbandOS
                             return 0;
                         }
                         value += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
-                        if (DamageDice > kPtr.Dd && DamageDiceSides == kPtr.Ds)
+                        if (DamageDice > kPtr.BaseItemCategory.Dd && DamageDiceSides == kPtr.BaseItemCategory.Ds)
                         {
-                            value += (DamageDice - kPtr.Dd) * DamageDiceSides * 100;
+                            value += (DamageDice - kPtr.BaseItemCategory.Dd) * DamageDiceSides * 100;
                         }
                         break;
                     }
@@ -2488,9 +2488,9 @@ namespace AngbandOS
                             return 0;
                         }
                         value += (BonusToHit + BonusDamage) * 5;
-                        if (DamageDice > kPtr.Dd && DamageDiceSides == kPtr.Ds)
+                        if (DamageDice > kPtr.BaseItemCategory.Dd && DamageDiceSides == kPtr.BaseItemCategory.Ds)
                         {
-                            value += (DamageDice - kPtr.Dd) * DamageDiceSides * 5;
+                            value += (DamageDice - kPtr.BaseItemCategory.Dd) * DamageDiceSides * 5;
                         }
                         break;
                     }
@@ -2504,11 +2504,11 @@ namespace AngbandOS
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             ItemType kPtr = ItemType;
-            if (kPtr.Cost == 0)
+            if (kPtr.BaseItemCategory.Cost == 0)
             {
                 return 0;
             }
-            int value = kPtr.Cost;
+            int value = kPtr.BaseItemCategory.Cost;
             GetMergedFlags(f1, f2, f3);
             if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
             {
@@ -2632,7 +2632,7 @@ namespace AngbandOS
         {
             if (IsFlavourAware())
             {
-                return ItemType.Cost;
+                return ItemType.BaseItemCategory.Cost;
             }
             return ItemType.BaseItemCategory.BaseValue;
         }
@@ -3093,7 +3093,7 @@ namespace AngbandOS
             if (ItemType != null)
             {
                 ItemType kPtr = ItemType;
-                if (kPtr.Cost == 0)
+                if (kPtr.BaseItemCategory.Cost == 0)
                 {
                     IdentifyFlags.Set(Constants.IdentBroken);
                 }
@@ -3639,12 +3639,12 @@ namespace AngbandOS
             }
             ApplyMagic(SaveGame.Level.ObjectLevel, true, good, great);
             Count = ItemType.BaseItemCategory.MakeObjectCount;
-            if (!IsCursed() && !IsBroken() && ItemType.Level > SaveGame.Difficulty)
+            if (!IsCursed() && !IsBroken() && ItemType.BaseItemCategory.Level > SaveGame.Difficulty)
             {
                 if (SaveGame.Level != null)
                 {
                     SaveGame.Level.TreasureRating +=
-                        ItemType.Level - SaveGame.Difficulty;
+                        ItemType.BaseItemCategory.Level - SaveGame.Difficulty;
                 }
             }
             return true;
@@ -4122,9 +4122,9 @@ namespace AngbandOS
                     return false;
                 }
                 ItemType kIdx = new ItemType(aPtr.BaseItemCategory);
-                if (kIdx.Level > SaveGame.Level.ObjectLevel)
+                if (kIdx.BaseItemCategory.Level > SaveGame.Level.ObjectLevel)
                 {
-                    int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
+                    int d = (kIdx.BaseItemCategory.Level - SaveGame.Level.ObjectLevel) * 5;
                     if (Program.Rng.RandomLessThan(d) != 0)
                     {
                         continue;

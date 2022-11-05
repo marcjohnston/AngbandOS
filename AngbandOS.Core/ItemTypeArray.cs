@@ -48,7 +48,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    itemType.Stompable[0] = itemType.Cost <= 0;
+                    itemType.Stompable[0] = itemType.BaseItemCategory.Cost <= 0;
                     itemType.Stompable[1] = false;
                     itemType.Stompable[2] = false;
                     itemType.Stompable[3] = false;

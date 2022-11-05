@@ -9,17 +9,13 @@ namespace AngbandOS.ItemCategories
         public override char Character => '-';
         public override string Name => "Stone to Mud";
 
-        public override int Chance1 => 1;
-        public override int Chance2 => 1;
-        public override int Chance3 => 1;
+        public override int[] Chance => new int[] { 1, 1, 1, 0 };
         public override int Cost => 300;
         public override int Dd => 1;
         public override int Ds => 1;
         public override string FriendlyName => "Stone to Mud";
         public override int Level => 10;
-        public override int Locale1 => 10;
-        public override int Locale2 => 40;
-        public override int Locale3 => 80;
+        public override int[] Locale => new int[] { 10, 40, 80, 0 };
         public override int? SubCategory => WandType.StoneToMud;
         public override int Weight => 10;
         public override bool ExecuteActivation(SaveGame saveGame, int dir)

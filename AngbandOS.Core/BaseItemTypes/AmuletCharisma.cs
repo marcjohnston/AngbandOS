@@ -10,12 +10,12 @@ namespace AngbandOS.ItemCategories
         public override string Name => "Charisma";
 
         public override bool Cha => true;
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 500;
         public override string FriendlyName => "Charisma";
         public override bool HideType => true;
         public override int Level => 20;
-        public override int Locale1 => 20;
+        public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int Weight => 3;
 
         public override void ApplyMagic(Item item, int level, int power)

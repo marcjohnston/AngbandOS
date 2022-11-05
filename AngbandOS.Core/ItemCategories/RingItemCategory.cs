@@ -10,7 +10,6 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class RingItemCategory : JewelleryItemCategory
     {
-        public override bool EasyKnow => EasyKnow;
         public override bool ObjectHasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)
@@ -24,7 +23,7 @@ namespace AngbandOS.ItemCategories
             {
                 flavour = "Plain Gold ";
             }
-            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.Name}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.BaseItemCategory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

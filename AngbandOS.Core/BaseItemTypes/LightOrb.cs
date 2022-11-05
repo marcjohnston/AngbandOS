@@ -10,13 +10,13 @@ namespace AngbandOS.ItemCategories
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "Orb";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 1000;
         public override int Dd => 1;
         public override int Ds => 1;
         public override string FriendlyName => "& Orb~";
         public override int Level => 10;
-        public override int Locale1 => 10;
+        public override int[] Locale => new int[] { 10, 0, 0, 0 };
         public override int? SubCategory => 7;
         public override int Weight => 50;
 

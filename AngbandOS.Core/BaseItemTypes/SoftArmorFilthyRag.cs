@@ -11,7 +11,7 @@ namespace AngbandOS.ItemCategories
         public override string Name => "Filthy Rag";
 
         public override int Ac => 1;
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 1;
         public override string FriendlyName => "& Filthy Rag~";
         public override int? SubCategory => 1;

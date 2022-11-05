@@ -278,7 +278,7 @@ namespace AngbandOS
                             : "Y";
                         string w = amt > 1 ? "were" : "was";
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                        if (oPtr.ItemType.Category == ItemCategory.Potion)
+                        if (oPtr.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
                         {
                             PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseItemCategory;
                             potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);

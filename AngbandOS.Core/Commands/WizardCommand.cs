@@ -488,7 +488,7 @@ namespace AngbandOS.Commands
             for (int i = 1; i < saveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = saveGame.ItemTypes[i];
-                if (kPtr.Level <= saveGame.CommandArgument)
+                if (kPtr.BaseItemCategory.Level <= saveGame.CommandArgument)
                 {
                     kPtr.FlavourAware = true;
                 }
@@ -710,7 +710,7 @@ namespace AngbandOS.Commands
             for (num = 0, i = 1; num < maxCount && i < saveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = saveGame.ItemTypes[i];
-                if (kPtr.Category == tval)
+                if (kPtr.BaseItemCategory.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);
                     col = 30 * (num / maxLetters);
@@ -791,18 +791,10 @@ namespace AngbandOS.Commands
             }
             string buf = oPtr.StoreDescription(true, 3);
             saveGame.PrintLine(buf, 2, j);
-            saveGame.PrintLine(
-                $"kind = {oPtr.ItemType,5}  level = {oPtr.ItemType.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}",
-                4, j);
-            saveGame.PrintLine(
-                $"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}",
-                5, j);
-            saveGame.PrintLine(
-                $"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}",
-                6, j);
-            saveGame.PrintLine(
-                $"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}",
-                7, j);
+            saveGame.PrintLine($"kind = {oPtr.ItemType,5}  level = {oPtr.ItemType.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            saveGame.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
+            saveGame.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
+            saveGame.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
             saveGame.PrintLine($"IdentifyFlags = {oPtr.IdentifyFlags:x4}  timeout = {oPtr.RechargeTimeLeft}", 8, j);
             saveGame.PrintLine("+------------FLAGS1------------+", 10, j);
             saveGame.PrintLine("AFFECT........SLAY........BRAND.", 11, j);

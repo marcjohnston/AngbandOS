@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
         public override Colour Colour => Colour.Grey;
         public override string Name => "Rounded Pebble";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 1;
         public override int Dd => 1;
         public override int Ds => 2;

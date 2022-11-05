@@ -10,12 +10,12 @@ namespace AngbandOS.ItemCategories
         public override char Character => '!';
         public override string Name => "Iocaine";
 
-        public override int Chance1 => 4;
+        public override int[] Chance => new int[] { 4, 0, 0, 0 };
         public override int Dd => 20;
         public override int Ds => 20;
         public override string FriendlyName => "Iocaine";
         public override int Level => 55;
-        public override int Locale1 => 55;
+        public override int[] Locale => new int[] { 55, 0, 0, 0 };
         public override int? SubCategory => (int)PotionType.Death;
         public override int Weight => 4;
         public override bool Quaff(SaveGame saveGame)

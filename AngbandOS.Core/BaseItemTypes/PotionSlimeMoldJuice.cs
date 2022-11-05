@@ -9,7 +9,7 @@ namespace AngbandOS.ItemCategories
         public override char Character => '!';
         public override string Name => "Slime Mold Juice";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 2;
         public override int Dd => 1;
         public override int Ds => 1;

@@ -13,9 +13,9 @@ namespace AngbandOS.ItemCategories
         {
             int bonusValue = 0;
             bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.ItemType.Dd && item.DamageDiceSides == item.ItemType.Ds)
+            if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
             {
-                bonusValue += (item.DamageDice - item.ItemType.Dd) * item.DamageDiceSides * 5;
+                bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
             }
             bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
             return bonusValue;

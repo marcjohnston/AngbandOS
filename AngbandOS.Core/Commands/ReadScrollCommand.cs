@@ -476,7 +476,7 @@ namespace AngbandOS.Commands
             if (readScrollEventArgs.Identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                int itemLevel = item.ItemType.Level;
+                int itemLevel = item.ItemType.BaseItemCategory.Level;
                 saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
             bool channeled = false;

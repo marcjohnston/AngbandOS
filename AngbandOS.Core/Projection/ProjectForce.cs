@@ -81,7 +81,7 @@ namespace AngbandOS.Projection
                             SaveGame.MsgPrint($"The {oName}{noteKill}");
                         }
                         int oSval = oPtr.ItemSubCategory;
-                        bool isPotion = oPtr.ItemType.Category == ItemCategory.Potion;
+                        bool isPotion = oPtr.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion;
                         SaveGame.Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {

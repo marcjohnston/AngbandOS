@@ -9,10 +9,10 @@ namespace AngbandOS.ItemCategories
         public override char Character => '?';
         public override string Name => "Darkness";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override string FriendlyName => "Darkness";
         public override int Level => 1;
-        public override int Locale1 => 1;
+        public override int[] Locale => new int[] { 1, 0, 0, 0 };
         public override int? SubCategory => 0;
         public override int Weight => 5;
 

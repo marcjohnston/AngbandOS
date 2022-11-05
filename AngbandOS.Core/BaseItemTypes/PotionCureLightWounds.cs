@@ -10,15 +10,12 @@ namespace AngbandOS.ItemCategories
         public override char Character => '!';
         public override string Name => "Cure Light Wounds";
 
-        public override int Chance1 => 1;
-        public override int Chance2 => 1;
-        public override int Chance3 => 1;
+        public override int[] Chance => new int[] { 1, 1, 1, 0 };
         public override int Cost => 15;
         public override int Dd => 1;
         public override int Ds => 1;
         public override string FriendlyName => "Cure Light Wounds";
-        public override int Locale2 => 1;
-        public override int Locale3 => 3;
+        public override int[] Locale => new int[] { 0, 1, 3, 0 };
         public override int Pval => 50;
         public override int? SubCategory => (int)PotionType.CureLight;
         public override int Weight => 4;

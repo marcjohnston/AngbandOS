@@ -52,7 +52,7 @@ namespace AngbandOS.Commands
             // Activating an item uses 100 energy
             saveGame.EnergyUse = 100;
             // Get the level of the item
-            int itemLevel = item.ItemType.Level;
+            int itemLevel = item.ItemType.BaseItemCategory.Level;
             if (item.IsFixedArtifact())
             {
                 itemLevel = saveGame.FixedArtifacts[item.FixedArtifactIndex].Level;

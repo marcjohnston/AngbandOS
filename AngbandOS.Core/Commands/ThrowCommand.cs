@@ -165,7 +165,7 @@ namespace AngbandOS.Commands
                             // Let the player know what happens to the monster
                             saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, damage);
                             if ((monster.Mind & Constants.SmFriendly) != 0 &&
-                                missile.ItemType.Category != ItemCategory.Potion)
+                                missile.ItemType.BaseItemCategory.CategoryEnum != ItemCategory.Potion)
                             {
                                 string mName = monster.MonsterDesc(0);
                                 saveGame.MsgPrint($"{mName} gets angry!");
@@ -185,7 +185,7 @@ namespace AngbandOS.Commands
             // There's a chance of breakage if we hit a creature
             int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
             // If we hit with a potion, the potion might affect the creature
-            if (missile.ItemType.Category == ItemCategory.Potion)
+            if (missile.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
             {
                 if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {

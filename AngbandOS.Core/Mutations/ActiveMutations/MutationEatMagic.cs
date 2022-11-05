@@ -26,7 +26,7 @@ namespace AngbandOS.Mutations.ActiveMutations
                 return;
             }
             Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
-            int lev = oPtr.ItemType.Level;
+            int lev = oPtr.ItemType.BaseItemCategory.Level;
             if (oPtr.Category == ItemCategory.Rod)
             {
                 if (oPtr.TypeSpecificValue > 0)

@@ -83,10 +83,8 @@ namespace AngbandOS.ItemCategories
         /// Returns whether or not the item affects the charisma of the player when being worn.
         /// </summary>
         public virtual bool Cha => false;
-        public virtual int Chance1 => 0;
-        public virtual int Chance2 => 0;
-        public virtual int Chance3 => 0;
-        public virtual int Chance4 => 0;
+
+        public virtual int[] Chance => new int[] { 0, 0, 0, 0 };
 
         /// <summary>
         /// Returns whether or not the item produced chaotic effects when being wielded.
@@ -148,10 +146,7 @@ namespace AngbandOS.ItemCategories
         public virtual bool KindIsGood => false;
         public virtual int Level => 0;
         public virtual bool Lightsource => false;
-        public virtual int Locale1 => 0;
-        public virtual int Locale2 => 0;
-        public virtual int Locale3 => 0;
-        public virtual int Locale4 => 0;
+        public virtual int[] Locale => new int[] { 0, 0, 0, 0 };
         public virtual bool NoMagic => false;
         public virtual bool NoTele => false;
         public virtual bool PermaCurse => false;
@@ -486,7 +481,7 @@ namespace AngbandOS.ItemCategories
         /// <returns></returns>
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
-            string pluralizedName = ApplyPlurizationMacro(item.ItemType.Name, item.Count);
+            string pluralizedName = ApplyPlurizationMacro(item.ItemType.BaseItemCategory.FriendlyName, item.Count);
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 

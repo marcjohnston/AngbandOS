@@ -1061,14 +1061,14 @@ namespace AngbandOS
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
                 ItemType kPtr = SaveGame.ItemTypes[i];
-                if (kPtr.Category == tval)
+                if (kPtr.BaseItemCategory.CategoryEnum == tval)
                 {
                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
                     {
                         continue;
                     }
-                    _menuItem[_menuLength] = StripDownName(kPtr.Name);
-                    if (kPtr.HasQuality() || kPtr.Category == ItemCategory.Chest)
+                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
+                    if (kPtr.HasQuality() || kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
                     {
                         _menuColours[_menuLength] = Colour.Blue;
                     }
@@ -1108,13 +1108,13 @@ namespace AngbandOS
                             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
-                                if (kPtr.Category == tval)
+                                if (kPtr.BaseItemCategory.CategoryEnum == tval)
                                 {
                                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
                                     {
                                         continue;
                                     }
-                                    _menuItem[_menuLength] = StripDownName(kPtr.Name);
+                                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
                                     if (kPtr.HasQuality())
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
@@ -1128,21 +1128,21 @@ namespace AngbandOS
                                 }
                             }
                         }
-                        else if (kPtr.Category == ItemCategory.Chest)
+                        else if (kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
                             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
-                                if (kPtr.Category == tval)
+                                if (kPtr.BaseItemCategory.CategoryEnum == tval)
                                 {
                                     if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
                                     {
                                         continue;
                                     }
-                                    _menuItem[_menuLength] = StripDownName(kPtr.Name);
-                                    if (kPtr.Category == ItemCategory.Chest)
+                                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
+                                    if (kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
                                     }

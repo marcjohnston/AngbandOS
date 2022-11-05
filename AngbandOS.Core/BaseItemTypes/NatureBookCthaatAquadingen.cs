@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
         public override Colour Colour => Colour.Green;
         public override string Name => "[Cthaat Aquadingen]";
 
-        public override int Chance1 => 2;
+        public override int[] Chance => new int[] { 2, 0, 0, 0 };
         public override int Cost => 100000;
         public override int Dd => 1;
         public override int Ds => 1;
@@ -20,7 +20,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreElec => true;
         public override bool IgnoreFire => true;
         public override int Level => 80;
-        public override int Locale1 => 80;
+        public override int[] Locale => new int[] { 80, 0, 0, 0 };
         public override int? SubCategory => 3;
         public override int Weight => 30;
         public override bool KindIsGood => true;

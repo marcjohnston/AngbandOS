@@ -12,7 +12,7 @@ namespace AngbandOS.ItemCategories
 
         public override int Ac => 30;
         public override bool Activate => true;
-        public override int Chance1 => 16;
+        public override int[] Chance => new int[] { 16, 0, 0, 0 };
         public override int Cost => 80000;
         public override int Dd => 2;
         public override int Ds => 4;
@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreElec => true;
         public override bool IgnoreFire => true;
         public override int Level => 80;
-        public override int Locale1 => 80;
+        public override int[] Locale => new int[] { 80, 0, 0, 0 };
         public override bool ResShards => true;
         public override bool ResSound => true;
         public override int? SubCategory => 12;

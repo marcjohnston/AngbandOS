@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
         public override string Name => "DOOM";
 
         public override bool Cha => true;
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override bool Con => true;
         public override bool Cursed => true;
         public override bool Dex => true;
@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
         public override bool HideType => true;
         public override bool Int => true;
         public override int Level => 50;
-        public override int Locale1 => 50;
+        public override int[] Locale => new int[] { 50, 0, 0, 0 };
         public override int Pval => -5;
         public override bool Str => true;
         public override int Weight => 3;

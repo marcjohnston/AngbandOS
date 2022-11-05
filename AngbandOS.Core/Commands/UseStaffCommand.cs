@@ -53,7 +53,7 @@ namespace AngbandOS.Commands
             // Using a staff costs a full turn
             saveGame.EnergyUse = 100;
             bool identified = false;
-            int itemLevel = item.ItemType.Level;
+            int itemLevel = item.ItemType.BaseItemCategory.Level;
             // We have a chance of the device working equal to skill (halved if confused) - item
             // level (capped at 50)
             int chance = saveGame.Player.SkillUseDevice;

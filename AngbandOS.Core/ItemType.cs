@@ -20,24 +20,15 @@ namespace AngbandOS
     [Serializable]
     internal class ItemType
     {
-        public readonly int[] Chance = new int[4];
         public readonly FlagSet Flags1 = new FlagSet();
         public readonly FlagSet Flags2 = new FlagSet();
         public readonly FlagSet Flags3 = new FlagSet();
-        public readonly int[] Locale = new int[4];
 
         /// <summary>
         /// Returns true, if the item is stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
         /// Use StompableType enum to address each index.
         /// </summary>
         public readonly bool[] Stompable = new bool[4];
-
-        public readonly int Ac;
-
-        /// <summary>
-        /// Provided for backwards compatability.  Will be deleted.  Provides access to the ItemCategory enumerable.
-        /// </summary>
-        public readonly ItemCategory Category; 
 
         /// <summary>
         /// Returns the readonly scaffolded base item type.
@@ -46,9 +37,6 @@ namespace AngbandOS
 
         public char Character;
         public Colour Colour;
-        public readonly int Cost;
-        public readonly int Dd;
-        public readonly int Ds;
 
         /// <summary>
         /// Returns whether or not items of this type auto-identify their flavours.
@@ -60,23 +48,8 @@ namespace AngbandOS
         /// </summary>
         public bool FlavourAware;
         public bool HasFlavor;
-        public readonly int Level;
-        public readonly string Name;
 
-        /// <summary>
-        /// This Pval value is copied into the TypeSpecificValue for the item.  This may be the default value ... maybe 0.
-        /// </summary>
-        public readonly int Pval;
-
-        /// <summary>
-        /// Represents the subcategory enumeration for the item.  As items are scaffolded, this property should be eliminated.  Return null, when not in use.  Null values are converted to 0 for items.
-        /// </summary>
-        public readonly int? SubCategory;
-        public readonly int ToA;
-        public readonly int ToD;
-        public readonly int ToH;
         public bool Tried;
-        public readonly int Weight;
 
         public ItemType(BaseItemCategory baseItemCategory)
         {
@@ -84,28 +57,7 @@ namespace AngbandOS
 
             Character = baseItemCategory.Character;
             Colour = baseItemCategory.Colour;
-            Name = baseItemCategory.FriendlyName;
-            Ac = baseItemCategory.Ac;
-            Category = baseItemCategory.CategoryEnum; // We need a copy of this category enum for backwards compatability at this time.
-            Chance[0] = baseItemCategory.Chance1;
-            Chance[1] = baseItemCategory.Chance2;
-            Chance[2] = baseItemCategory.Chance3;
-            Chance[3] = baseItemCategory.Chance4;
-            Cost = baseItemCategory.Cost;
-            Dd = baseItemCategory.Dd;
-            Ds = baseItemCategory.Ds;
-            Level = baseItemCategory.Level;
-            Locale[0] = baseItemCategory.Locale1;
-            Locale[1] = baseItemCategory.Locale2;
-            Locale[2] = baseItemCategory.Locale3;
-            Locale[3] = baseItemCategory.Locale4;
-            Pval = baseItemCategory.Pval;
-            SubCategory = baseItemCategory.SubCategory;
-            ToA = baseItemCategory.ToA;
-            ToD = baseItemCategory.ToD;
-            ToH = baseItemCategory.ToH;
             Tried = baseItemCategory.Tried;
-            Weight = baseItemCategory.Weight;
             Flags1.Set(baseItemCategory.Blows ? ItemFlag1.Blows : 0);
             Flags1.Set(baseItemCategory.BrandAcid ? ItemFlag1.BrandAcid : 0);
             Flags1.Set(baseItemCategory.BrandCold ? ItemFlag1.BrandCold : 0);
@@ -225,7 +177,7 @@ namespace AngbandOS
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
                 ItemType kPtr = saveGame.ItemTypes[kIdx];
-                if (doNotAllowChestToBeCreated && kPtr.Category == ItemCategory.Chest)
+                if (doNotAllowChestToBeCreated && kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
                 {
                     continue;
                 }
@@ -289,38 +241,7 @@ namespace AngbandOS
         /// <returns></returns>
         public bool HasQuality()
         {
-            switch (Category)
-            {
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Boots:
-                case ItemCategory.Bow:
-                case ItemCategory.Cloak:
-                case ItemCategory.Crown:
-                case ItemCategory.Digging:
-                case ItemCategory.DragArmor:
-                case ItemCategory.Gloves:
-                case ItemCategory.Hafted:
-                case ItemCategory.HardArmor:
-                case ItemCategory.Helm:
-                case ItemCategory.Polearm:
-                case ItemCategory.Shield:
-                case ItemCategory.Shot:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.Sword:
-                    return true;
-
-                case ItemCategory.Light:
-                    return SubCategory == LightType.Orb;
-
-                default:
-                    return false;
-            }
-        }
-
-        public override string ToString()
-        {
-            return Name;
+            return BaseItemCategory.HasQuality;
         }
     }
 }

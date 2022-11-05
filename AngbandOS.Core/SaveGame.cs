@@ -1376,8 +1376,8 @@ namespace AngbandOS
                 ItemType kPtr = ItemTypes[i];
                 if (kPtr.HasFlavor)
                 {
-                    int indexx = kPtr.SubCategory ?? 0;
-                    switch (kPtr.Category)
+                    int indexx = kPtr.BaseItemCategory.SubCategory ?? 0;
+                    switch (kPtr.BaseItemCategory.CategoryEnum)
                     {
                         case ItemCategory.Food:
                             kPtr.Character = MushroomFlavours[indexx].Character;
@@ -1974,7 +1974,7 @@ namespace AngbandOS
             for (i = 1; i < ItemTypes.Count; i++)
             {
                 ItemType kPtr = ItemTypes[i];
-                if (string.IsNullOrEmpty(kPtr.Name))
+                if (string.IsNullOrEmpty(kPtr.BaseItemCategory.FriendlyName))
                 {
                     continue;
                 }
@@ -2000,10 +2000,10 @@ namespace AngbandOS
                 kPtr = ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
-                    if (kPtr.Chance[j] != 0)
+                    if (kPtr.BaseItemCategory.Chance[j] != 0)
                     {
                         AllocKindSize++;
-                        num[kPtr.Locale[j]]++;
+                        num[kPtr.BaseItemCategory.Locale[j]]++;
                     }
                 }
             }
@@ -2026,10 +2026,10 @@ namespace AngbandOS
                 kPtr = ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
-                    if (kPtr.Chance[j] != 0)
+                    if (kPtr.BaseItemCategory.Chance[j] != 0)
                     {
-                        int x = kPtr.Locale[j];
-                        int p = 100 / kPtr.Chance[j];
+                        int x = kPtr.BaseItemCategory.Locale[j];
+                        int p = 100 / kPtr.BaseItemCategory.Chance[j];
                         int y = x > 0 ? num[x - 1] : 0;
                         int z = y + aux[x];
                         table[z].Index = i;
@@ -5222,7 +5222,7 @@ namespace AngbandOS
                 return false;
             }
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
-            int lev = oPtr.ItemType.Level;
+            int lev = oPtr.ItemType.BaseItemCategory.Level;
             if (oPtr.Category == ItemCategory.Rod)
             {
                 i = (100 - lev + num) / 5;
@@ -7763,7 +7763,7 @@ namespace AngbandOS
         public bool DoCmdChannel(Item item)
         {
             int cost;
-            int price = item.ItemType.Cost;
+            int price = item.ItemType.BaseItemCategory.Cost;
             // Never channel worthless items
             if (price <= 0)
             {

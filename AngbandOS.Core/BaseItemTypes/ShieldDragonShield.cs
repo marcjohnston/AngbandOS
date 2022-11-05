@@ -11,7 +11,7 @@ namespace AngbandOS.ItemCategories
         public override string Name => "Dragon Shield";
 
         public override int Ac => 8;
-        public override int Chance1 => 4;
+        public override int[] Chance => new int[] { 4, 0, 0, 0 };
         public override int Cost => 10000;
         public override int Dd => 1;
         public override int Ds => 3;
@@ -21,7 +21,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreElec => true;
         public override bool IgnoreFire => true;
         public override int Level => 70;
-        public override int Locale1 => 80;
+        public override int[] Locale => new int[] { 80, 0, 0, 0 };
         public override int? SubCategory => 6;
         public override int ToA => 10;
         public override int Weight => 100;

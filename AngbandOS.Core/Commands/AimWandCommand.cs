@@ -60,7 +60,7 @@ namespace AngbandOS.Commands
             // Using a wand takes 100 energy
             saveGame.EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.ItemType.Level;
+            int itemLevel = item.ItemType.BaseItemCategory.Level;
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
             int chance = saveGame.Player.SkillUseDevice;

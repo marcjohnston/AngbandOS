@@ -9,7 +9,7 @@ namespace AngbandOS.ItemCategories
         public override char Character => '"';
         public override string Name => "Resistance";
 
-        public override int Chance1 => 4;
+        public override int[] Chance => new int[] { 4, 0, 0, 0 };
         public override int Cost => 25000;
         public override string FriendlyName => "Resistance";
         public override bool IgnoreAcid => true;
@@ -17,7 +17,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreElec => true;
         public override bool IgnoreFire => true;
         public override int Level => 50;
-        public override int Locale1 => 50;
+        public override int[] Locale => new int[] { 50, 0, 0, 0 };
         public override bool ResAcid => true;
         public override bool ResCold => true;
         public override bool ResElec => true;

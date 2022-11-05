@@ -8,8 +8,7 @@ namespace AngbandOS.ItemCategories
         public override char Character => '"';
         public override string Name => "the Magi";
 
-        public override int Chance1 => 4;
-        public override int Chance2 => 3;
+        public override int[] Chance => new int[] { 4, 3, 0, 0 };
         public override int Cost => 30000;
         public override bool FreeAct => true;
         public override string FriendlyName => "the Magi";
@@ -18,8 +17,7 @@ namespace AngbandOS.ItemCategories
         public override bool IgnoreElec => true;
         public override bool IgnoreFire => true;
         public override int Level => 50;
-        public override int Locale1 => 50;
-        public override int Locale2 => 80;
+        public override int[] Locale => new int[] { 50, 80, 0, 0 };
         public override bool Search => true;
         public override bool SeeInvis => true;
         public override int ToA => 3;

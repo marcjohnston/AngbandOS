@@ -11,11 +11,11 @@ namespace AngbandOS.ItemCategories
         public override Colour Colour => Colour.Brown;
         public override string Name => "Sling";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 5;
         public override string FriendlyName => "& Sling~";
         public override int Level => 1;
-        public override int Locale1 => 1;
+        public override int[] Locale => new int[] { 1, 0, 0, 0 };
         public override bool ShowMods => true;
         public override int Weight => 5;
         public override int MissileDamageMultiplier => 2;

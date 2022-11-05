@@ -9,12 +9,12 @@ namespace AngbandOS.ItemCategories
         public override char Character => '=';
         public override string Name => "Weakness";
 
-        public override int Chance1 => 1;
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override bool Cursed => true;
         public override string FriendlyName => "Weakness";
         public override bool HideType => true;
         public override int Level => 5;
-        public override int Locale1 => 5;
+        public override int[] Locale => new int[] { 5, 0, 0, 0 };
         public override int Pval => -5;
         public override bool Str => true;
         public override int? SubCategory => 2;

@@ -183,7 +183,7 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    if (kPtr.Level > curLev)
+                    if (kPtr.BaseItemCategory.Level > curLev)
                     {
                         continue;
                     }

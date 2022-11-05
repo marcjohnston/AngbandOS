@@ -139,9 +139,9 @@ namespace AngbandOS.ItemCategories
         /// </remarks>
         public override void ApplyMagic(Item item, int level, int power)
         {
-            if (item.ItemType.Level > 0)
+            if (item.ItemType.BaseItemCategory.Level > 0)
             {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.Level);
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.BaseItemCategory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
                     item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(5));

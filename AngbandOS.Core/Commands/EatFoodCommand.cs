@@ -52,7 +52,7 @@ namespace AngbandOS.Commands
             // Eating costs 100 energy
             saveGame.EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.ItemType.Level;
+            int itemLevel = item.ItemType.BaseItemCategory.Level;
             switch (item.ItemSubCategory)
             {
                 case FoodType.Poison:
