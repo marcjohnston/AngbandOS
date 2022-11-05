@@ -9,6 +9,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class ScrollItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         public override bool ObjectHasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Scroll;
         public override bool CanAbsorb(Item item, Item other)

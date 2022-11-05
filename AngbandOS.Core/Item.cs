@@ -2559,7 +2559,7 @@ namespace AngbandOS
         {
             if (!IsKnown())
             {
-                if (Inventory.ObjectHasFlavor(ItemType))
+                if (ItemType.BaseItemCategory.ObjectHasFlavor)
                 {
                     if (IsFlavourAware())
                     {

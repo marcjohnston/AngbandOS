@@ -10,6 +10,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class RingItemCategory : JewelleryItemCategory
     {
+        public override bool EasyKnow => EasyKnow;
         public override bool ObjectHasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)

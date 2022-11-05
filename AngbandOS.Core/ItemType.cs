@@ -49,6 +49,10 @@ namespace AngbandOS
         public readonly int Cost;
         public readonly int Dd;
         public readonly int Ds;
+
+        /// <summary>
+        /// Returns whether or not items of this type auto-identify their flavours.
+        /// </summary>
         public bool EasyKnow;
 
         /// <summary>

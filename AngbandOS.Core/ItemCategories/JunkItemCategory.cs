@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class JunkItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Junk;
         public override bool HatesAcid => true;
 

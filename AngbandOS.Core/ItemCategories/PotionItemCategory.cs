@@ -10,6 +10,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class PotionItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         /// <summary>
         /// Have a potion affect the player.  Activates the potion effect.
         /// </summary>

@@ -9,6 +9,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class FoodItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Food;
         public override bool CanAbsorb(Item item, Item other)
         {

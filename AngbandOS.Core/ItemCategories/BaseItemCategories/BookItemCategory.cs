@@ -7,6 +7,11 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class BookItemCategory : BaseItemCategory
     {
+        /// <summary>
+        /// Returns true for all books.
+        /// </summary>
+        public override bool EasyKnow => true;
+
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

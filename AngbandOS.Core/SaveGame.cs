@@ -1978,12 +1978,12 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                kPtr.HasFlavor = Inventory.ObjectHasFlavor(kPtr);
+                kPtr.HasFlavor = kPtr.BaseItemCategory.ObjectHasFlavor;
                 if (!kPtr.HasFlavor)
                 {
                     kPtr.FlavourAware = true;
                 }
-                kPtr.EasyKnow = Inventory.ObjectEasyKnow(this, i);
+                kPtr.EasyKnow = kPtr.BaseItemCategory.EasyKnow;
             }
         }
 

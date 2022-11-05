@@ -7,6 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class FlaskItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Flask;
         public override bool HatesCold => true;
         public override Colour Colour => Colour.Yellow;

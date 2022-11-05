@@ -7,6 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class SkeletonItemCategory : BaseItemCategory
     {
+        public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Skeleton;
         public override bool HatesAcid => true;
 

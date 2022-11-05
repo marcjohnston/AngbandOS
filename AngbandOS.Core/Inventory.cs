@@ -42,43 +42,6 @@ namespace AngbandOS
             set => _items[index] = value;
         }
 
-        public static bool ObjectEasyKnow(SaveGame saveGame, int i)
-        {
-            ItemType kPtr = saveGame.ItemTypes[i];
-            switch (kPtr.Category)
-            {
-                case ItemCategory.LifeBook:
-                case ItemCategory.SorceryBook:
-                case ItemCategory.NatureBook:
-                case ItemCategory.ChaosBook:
-                case ItemCategory.DeathBook:
-                case ItemCategory.TarotBook:
-                case ItemCategory.FolkBook:
-                case ItemCategory.CorporealBook:
-                case ItemCategory.Flask:
-                case ItemCategory.Junk:
-                case ItemCategory.Bottle:
-                case ItemCategory.Skeleton:
-                case ItemCategory.Spike:
-                case ItemCategory.Food:
-                case ItemCategory.Potion:
-                case ItemCategory.Scroll:
-                case ItemCategory.Rod:
-                    return true;
-
-                case ItemCategory.Ring:
-                case ItemCategory.Amulet:
-                case ItemCategory.Light:
-                    return kPtr.Flags3.IsSet(ItemFlag3.EasyKnow);
-            }
-            return false;
-        }
-
-        public static bool ObjectHasFlavor(ItemType i)
-        {
-            return i.BaseItemCategory.ObjectHasFlavor;
-        }
-
         public void CombinePack()
         {
             bool flag = false;
