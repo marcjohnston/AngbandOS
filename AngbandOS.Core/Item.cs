@@ -1620,7 +1620,6 @@ namespace AngbandOS
         /// artifact and rare item type that the item is based on are all false.  This property is a replacement for the flag-based merged properties.
         /// </summary>
         public bool Blows { get; private set; }
-
         public bool BrandAcid { get; private set; }
         public bool BrandCold { get; private set; }
         public bool BrandElec { get; private set; }
@@ -1722,70 +1721,6 @@ namespace AngbandOS
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3); // NO NEED TO REFACTOR THIS CALL
-        }
-        /// <summary>
-        /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
-        /// instead of GetMergedFlags and then use any of the flag-based properties as replacement functionality.
-        /// 
-        /// Combines all of the boolean properties from the item category, the fixed artifact, the rare item type and the random artifact the item is based on.
-        /// If the item is a random artifact it will also add the special sustain, power and ability flags from the bonus power type.  
-        /// </summary>
-        /// <param name="f1"></param>
-        /// <param name="f2"></param>
-        /// <param name="f3"></param>
-        public void GetMergedFlags(FlagSet f1, FlagSet f2, FlagSet f3) // TODO: Refactor remaining calls into RefreshFlagBasedProperties
-        {
-            f1.Clear();
-            f2.Clear();
-            f3.Clear();
-            if (ItemType == null)
-            {
-                return;
-            }
-            f1.Set(ItemType.Flags1);
-            f2.Set(ItemType.Flags2);
-            f3.Set(ItemType.Flags3);
-            if (FixedArtifactIndex != 0)
-            {
-                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
-                f1.Set(aPtr.Flags1);
-                f2.Set(aPtr.Flags2);
-                f3.Set(aPtr.Flags3);
-            }
-            if (RareItemTypeIndex != Enumerations.RareItemType.None)
-            {
-                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-                f1.Set(ePtr.Flags1);
-                f2.Set(ePtr.Flags2);
-                f3.Set(ePtr.Flags3);
-            }
-            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
-            {
-                f1.Set(RandartFlags1);
-                f2.Set(RandartFlags2);
-                f3.Set(RandartFlags3);
-            }
-            if (!string.IsNullOrEmpty(RandartName))
-            {
-                switch (BonusPowerType)
-                {
-                    case Enumerations.RareItemType.SpecialSustain:
-                        {
-                            f2.Set(BonusPowerSubType.SpecialSustainFlag);
-                            break;
-                        }
-                    case Enumerations.RareItemType.SpecialPower:
-                        {
-                            f2.Set(BonusPowerSubType.SpecialPowerFlag);
-                            break;
-                        }
-                    case Enumerations.RareItemType.SpecialAbility:
-                        {
-                            f2.Set(BonusPowerSubType.SpecialAbilityFlag);
-                            break;
-                        }
-                }
-            }
 
             Blows = f1.IsSet(ItemFlag1.Blows);
             BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
@@ -1877,6 +1812,70 @@ namespace AngbandOS
             Wraith = f3.IsSet(ItemFlag3.Wraith);
             XtraMight = f3.IsSet(ItemFlag3.XtraMight);
             XtraShots = f3.IsSet(ItemFlag3.XtraShots);
+        }
+        /// <summary>
+        /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
+        /// instead of GetMergedFlags and then use any of the flag-based properties as replacement functionality.
+        /// 
+        /// Combines all of the boolean properties from the item category, the fixed artifact, the rare item type and the random artifact the item is based on.
+        /// If the item is a random artifact it will also add the special sustain, power and ability flags from the bonus power type.  
+        /// </summary>
+        /// <param name="f1"></param>
+        /// <param name="f2"></param>
+        /// <param name="f3"></param>
+        public void GetMergedFlags(FlagSet f1, FlagSet f2, FlagSet f3) // TODO: Refactor remaining calls into RefreshFlagBasedProperties
+        {
+            f1.Clear();
+            f2.Clear();
+            f3.Clear();
+            if (ItemType == null)
+            {
+                return;
+            }
+            f1.Set(ItemType.Flags1);
+            f2.Set(ItemType.Flags2);
+            f3.Set(ItemType.Flags3);
+            if (FixedArtifactIndex != 0)
+            {
+                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+                f1.Set(aPtr.Flags1);
+                f2.Set(aPtr.Flags2);
+                f3.Set(aPtr.Flags3);
+            }
+            if (RareItemTypeIndex != Enumerations.RareItemType.None)
+            {
+                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
+                f1.Set(ePtr.Flags1);
+                f2.Set(ePtr.Flags2);
+                f3.Set(ePtr.Flags3);
+            }
+            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
+            {
+                f1.Set(RandartFlags1);
+                f2.Set(RandartFlags2);
+                f3.Set(RandartFlags3);
+            }
+            if (!string.IsNullOrEmpty(RandartName))
+            {
+                switch (BonusPowerType)
+                {
+                    case Enumerations.RareItemType.SpecialSustain:
+                        {
+                            f2.Set(BonusPowerSubType.SpecialSustainFlag);
+                            break;
+                        }
+                    case Enumerations.RareItemType.SpecialPower:
+                        {
+                            f2.Set(BonusPowerSubType.SpecialPowerFlag);
+                            break;
+                        }
+                    case Enumerations.RareItemType.SpecialAbility:
+                        {
+                            f2.Set(BonusPowerSubType.SpecialAbilityFlag);
+                            break;
+                        }
+                }
+            }
         }
 
         public string GetVagueFeeling()
@@ -3789,12 +3788,12 @@ namespace AngbandOS
             {
                 if (good)
                 {
-                    PrepareAllocationTable(ItemType.KindIsGood);
+                    PrepareAllocationTableForGoodObjects();
                 }
-                ItemType kIdx = ItemType.RandomItemType(SaveGame, baselevel, doNotAllowChestToBeCreated);
+                ItemType kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
                 if (good)
                 {
-                    PrepareAllocationTable(null);
+                    PrepareAllocationTable();
                 }
                 if (kIdx == null)
                 {
@@ -4302,12 +4301,21 @@ namespace AngbandOS
             return false;
         }
 
-        private void PrepareAllocationTable(GetObjNumHookDelegate getObjNumHook)
+        private void PrepareAllocationTable()
         {
             AllocationEntry[] table = SaveGame.AllocKindTable;
             for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
-                if (getObjNumHook == null || getObjNumHook(SaveGame.ItemTypes[table[i].Index]))
+                table[i].FilteredProbabiity = table[i].BaseProbability;
+            }
+        }
+
+        private void PrepareAllocationTableForGoodObjects()
+        {
+            AllocationEntry[] table = SaveGame.AllocKindTable;
+            for (int i = 0; i < SaveGame.AllocKindSize; i++)
+            {
+                if (SaveGame.ItemTypes[table[i].Index].BaseItemCategory.KindIsGood)
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }

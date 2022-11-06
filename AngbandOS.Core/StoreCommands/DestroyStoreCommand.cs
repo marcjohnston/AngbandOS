@@ -62,7 +62,7 @@ namespace AngbandOS.StoreCommands
                         return;
                     }
                     // If it was something we might want to destroy again, ask
-                    if (!item.ItemType.HasQuality() && item.ItemType.BaseItemCategory.CategoryEnum != ItemCategory.Chest)
+                    if (!item.ItemType.BaseItemCategory.HasQuality && item.ItemType.BaseItemCategory.CategoryEnum != ItemCategory.Chest)
                     {
                         if (item.IsKnown())
                         {

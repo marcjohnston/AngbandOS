@@ -189,6 +189,87 @@ namespace AngbandOS
             }
         }
 
+
+        public ItemType RandomItemType(int level, bool doNotAllowChestToBeCreated)
+        {
+            int i;
+            int j;
+            AllocationEntry[] table = AllocKindTable;
+            if (level > 0)
+            {
+                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+                {
+                    level = 1 + (level * Constants.MaxDepth / Program.Rng.DieRoll(Constants.MaxDepth));
+                }
+            }
+            int total = 0;
+            for (i = 0; i < AllocKindSize; i++)
+            {
+                if (table[i].Level > level)
+                {
+                    break;
+                }
+                table[i].FinalProbability = 0;
+                int kIdx = table[i].Index;
+                ItemType kPtr = ItemTypes[kIdx];
+                if (doNotAllowChestToBeCreated && kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                {
+                    continue;
+                }
+                table[i].FinalProbability = table[i].FilteredProbabiity;
+                total += table[i].FinalProbability;
+            }
+            if (total <= 0)
+            {
+                return null;
+            }
+            long value = Program.Rng.RandomLessThan(total);
+            for (i = 0; i < AllocKindSize; i++)
+            {
+                if (value < table[i].FinalProbability)
+                {
+                    break;
+                }
+                value -= table[i].FinalProbability;
+            }
+            int p = Program.Rng.RandomLessThan(100);
+            if (p < 60)
+            {
+                j = i;
+                value = Program.Rng.RandomLessThan(total);
+                for (i = 0; i < AllocKindSize; i++)
+                {
+                    if (value < table[i].FinalProbability)
+                    {
+                        break;
+                    }
+                    value -= table[i].FinalProbability;
+                }
+                if (table[i].Level < table[j].Level)
+                {
+                    i = j;
+                }
+            }
+            if (p < 10)
+            {
+                j = i;
+                value = Program.Rng.RandomLessThan(total);
+                for (i = 0; i < AllocKindSize; i++)
+                {
+                    if (value < table[i].FinalProbability)
+                    {
+                        break;
+                    }
+                    value -= table[i].FinalProbability;
+                }
+                if (table[i].Level < table[j].Level)
+                {
+                    i = j;
+                }
+            }
+            return ItemTypes[table[i].Index];
+        }
+
         public void MessageBoxShow(string message)
         {
             // MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
