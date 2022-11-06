@@ -3789,12 +3789,12 @@ namespace AngbandOS
             {
                 if (good)
                 {
-                    PrepareAllocationTable(ItemType.KindIsGood);
+                    PrepareAllocationTableForGoodObjects();
                 }
-                ItemType kIdx = ItemType.RandomItemType(SaveGame, baselevel, doNotAllowChestToBeCreated);
+                ItemType kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
                 if (good)
                 {
-                    PrepareAllocationTable(null);
+                    PrepareAllocationTable();
                 }
                 if (kIdx == null)
                 {
@@ -4302,12 +4302,21 @@ namespace AngbandOS
             return false;
         }
 
-        private void PrepareAllocationTable(GetObjNumHookDelegate getObjNumHook)
+        private void PrepareAllocationTable()
         {
             AllocationEntry[] table = SaveGame.AllocKindTable;
             for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
-                if (getObjNumHook == null || getObjNumHook(SaveGame.ItemTypes[table[i].Index]))
+                table[i].FilteredProbabiity = table[i].BaseProbability;
+            }
+        }
+
+        private void PrepareAllocationTableForGoodObjects()
+        {
+            AllocationEntry[] table = SaveGame.AllocKindTable;
+            for (int i = 0; i < SaveGame.AllocKindSize; i++)
+            {
+                if (SaveGame.ItemTypes[table[i].Index].BaseItemCategory.KindIsGood)
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }

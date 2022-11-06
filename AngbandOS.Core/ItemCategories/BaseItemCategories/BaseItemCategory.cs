@@ -53,7 +53,7 @@ namespace AngbandOS.ItemCategories
         }
 
         /// <summary>
-        /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.
+        /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.  All others types return false.
         /// </summary>
         public virtual bool HasQuality => false;
 
@@ -308,7 +308,7 @@ namespace AngbandOS.ItemCategories
         /// <returns></returns>
         public virtual bool IsStompable(Item item)
         {
-            if (item.ItemType.HasQuality())
+            if (item.ItemType.BaseItemCategory.HasQuality)
             {
                 switch (item.GetDetailedFeeling())
                 {

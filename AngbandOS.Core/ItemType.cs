@@ -36,6 +36,7 @@ namespace AngbandOS
         public readonly FlagSet Flags3 = new FlagSet();
 
         /// <summary>
+        /// Deprecated.  This ItemType object will be refactored into the BaseItemCategory object.
         /// Returns the readonly scaffolded base item type.
         /// </summary>
         public BaseItemCategory BaseItemCategory;
@@ -134,100 +135,6 @@ namespace AngbandOS
             Flags3.Set(baseItemCategory.Wraith ? ItemFlag3.Wraith : 0);
             Flags3.Set(baseItemCategory.XtraMight ? ItemFlag3.XtraMight : 0);
             Flags3.Set(baseItemCategory.XtraShots ? ItemFlag3.XtraShots : 0);
-        }
-
-        public static bool KindIsGood(ItemType kPtr)
-        {
-            return kPtr.BaseItemCategory.KindIsGood;
-        }
-
-        public static ItemType RandomItemType(SaveGame saveGame, int level, bool doNotAllowChestToBeCreated)
-        {
-            int i;
-            int j;
-            AllocationEntry[] table = saveGame.AllocKindTable;
-            if (level > 0)
-            {
-                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
-                {
-                    level = 1 + (level * Constants.MaxDepth / Program.Rng.DieRoll(Constants.MaxDepth));
-                }
-            }
-            int total = 0;
-            for (i = 0; i < saveGame.AllocKindSize; i++)
-            {
-                if (table[i].Level > level)
-                {
-                    break;
-                }
-                table[i].FinalProbability = 0;
-                int kIdx = table[i].Index;
-                ItemType kPtr = saveGame.ItemTypes[kIdx];
-                if (doNotAllowChestToBeCreated && kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
-                {
-                    continue;
-                }
-                table[i].FinalProbability = table[i].FilteredProbabiity;
-                total += table[i].FinalProbability;
-            }
-            if (total <= 0)
-            {
-                return null;
-            }
-            long value = Program.Rng.RandomLessThan(total);
-            for (i = 0; i < saveGame.AllocKindSize; i++)
-            {
-                if (value < table[i].FinalProbability)
-                {
-                    break;
-                }
-                value -= table[i].FinalProbability;
-            }
-            int p = Program.Rng.RandomLessThan(100);
-            if (p < 60)
-            {
-                j = i;
-                value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < saveGame.AllocKindSize; i++)
-                {
-                    if (value < table[i].FinalProbability)
-                    {
-                        break;
-                    }
-                    value -= table[i].FinalProbability;
-                }
-                if (table[i].Level < table[j].Level)
-                {
-                    i = j;
-                }
-            }
-            if (p < 10)
-            {
-                j = i;
-                value = Program.Rng.RandomLessThan(total);
-                for (i = 0; i < saveGame.AllocKindSize; i++)
-                {
-                    if (value < table[i].FinalProbability)
-                    {
-                        break;
-                    }
-                    value -= table[i].FinalProbability;
-                }
-                if (table[i].Level < table[j].Level)
-                {
-                    i = j;
-                }
-            }
-            return saveGame.ItemTypes[table[i].Index];
-        }
-
-        /// <summary>
-        /// Returns true, for item categories that are good.  Armour, weapons and orbs of light return true.  All others types return false.
-        /// </summary>
-        /// <returns></returns>
-        public bool HasQuality()
-        {
-            return BaseItemCategory.HasQuality;
         }
     }
 }

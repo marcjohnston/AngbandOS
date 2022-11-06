@@ -39,7 +39,7 @@ namespace AngbandOS
         {
             foreach (ItemType itemType in this)
             {
-                if (itemType.HasQuality())
+                if (itemType.BaseItemCategory.HasQuality)
                 {
                     itemType.BaseItemCategory.Stompable[0] = true;
                     itemType.BaseItemCategory.Stompable[1] = false;

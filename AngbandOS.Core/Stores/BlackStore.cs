@@ -64,7 +64,7 @@ namespace AngbandOS.Stores
             int level;
             ItemType itemType;
             level = 35 + Program.Rng.RandomLessThan(35);
-            itemType = ItemType.RandomItemType(SaveGame, level, false);
+            itemType = SaveGame.RandomItemType(level, false);
             if (itemType == null)
             {
                 return null; ;

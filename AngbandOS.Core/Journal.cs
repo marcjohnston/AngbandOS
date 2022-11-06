@@ -1068,7 +1068,7 @@ namespace AngbandOS
                         continue;
                     }
                     _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
-                    if (kPtr.HasQuality() || kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                    if (kPtr.BaseItemCategory.HasQuality || kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
                     {
                         _menuColours[_menuLength] = Colour.Blue;
                     }
@@ -1101,7 +1101,7 @@ namespace AngbandOS
                     if (c == '6')
                     {
                         ItemType kPtr = SaveGame.ItemTypes[_menuIndices[menu]];
-                        if (kPtr.HasQuality())
+                        if (kPtr.BaseItemCategory.HasQuality)
                         {
                             WorthlessItemQualitySelection(kPtr);
                             _menuLength = 0;
@@ -1115,7 +1115,7 @@ namespace AngbandOS
                                         continue;
                                     }
                                     _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
-                                    if (kPtr.HasQuality())
+                                    if (kPtr.BaseItemCategory.HasQuality)
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
                                     }
