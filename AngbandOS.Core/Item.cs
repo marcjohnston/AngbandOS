@@ -2129,7 +2129,7 @@ namespace AngbandOS
                 {
                     IdentifyFlags.Set(Constants.IdentBroken);
                 }
-                if (aPtr.Flags3.IsSet(ItemFlag3.Cursed))
+                if (aPtr.FixedArtifactItemCharacteristics.Cursed)
                 {
                     IdentifyFlags.Set(Constants.IdentCursed);
                 }

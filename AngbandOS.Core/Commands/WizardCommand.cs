@@ -782,7 +782,7 @@ namespace AngbandOS.Commands
             qPtr.BonusToHit = aPtr.ToH;
             qPtr.BonusDamage = aPtr.ToD;
             qPtr.Weight = aPtr.Weight;
-            if (aPtr.Flags3.IsSet(ItemFlag3.Cursed))
+            if (aPtr.FixedArtifactItemCharacteristics.Cursed)
             {
                 qPtr.IdentifyFlags.Set(Constants.IdentCursed);
             }
