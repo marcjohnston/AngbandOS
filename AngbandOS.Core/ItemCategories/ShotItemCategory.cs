@@ -9,18 +9,6 @@ namespace AngbandOS.ItemCategories
     {
         public override ItemCategory CategoryEnum => ItemCategory.Shot;
         public override Colour Colour => Colour.BrightBrown;
-        public override int GetBonusRealValue(Item item, int value)
-        {
-            int bonusValue = 0;
-            bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
-            {
-                bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
-            }
-            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
-            return bonusValue;
-        }
-
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

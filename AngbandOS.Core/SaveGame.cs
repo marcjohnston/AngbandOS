@@ -2834,11 +2834,11 @@ namespace AngbandOS
             {
                 oPtr = Player.Inventory[i];
                 oPtr.RefreshFlagBasedProperties();
-                if (oPtr.DreadCurse && Program.Rng.DieRoll(100) == 1)
+                if (oPtr.Characteristics.DreadCurse && Program.Rng.DieRoll(100) == 1)
                 {
                     ActivateDreadCurse();
                 }
-                if (oPtr.Teleport && Program.Rng.RandomLessThan(100) < 1)
+                if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
                 {
                     if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed) && !Player.HasAntiTeleport)
                     {
@@ -3630,7 +3630,7 @@ namespace AngbandOS
             if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed))
             {
                 string your;
-                if ((oPtr.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.PermaCurse)
+                if ((oPtr.Characteristics.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
                 {
                     your = item >= 0 ? "your" : "the";
                     MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
@@ -3643,7 +3643,7 @@ namespace AngbandOS
                 oPtr.Inscription = "uncursed";
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             }
-            if (oPtr.Blessed)
+            if (oPtr.Characteristics.Blessed)
             {
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "were" : "was";
@@ -4723,7 +4723,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusToHit++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusToHit >= 0 && Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusToHit >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
@@ -4758,7 +4758,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusDamage++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusDamage >= 0 && Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusDamage >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
@@ -4793,7 +4793,7 @@ namespace AngbandOS
                     {
                         oPtr.BonusArmourClass++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.PermaCurse && oPtr.BonusArmourClass >= 0 &&
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusArmourClass >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
@@ -6172,7 +6172,7 @@ namespace AngbandOS
                 return false;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IgnoreAcid)
+            if (oPtr.Characteristics.IgnoreAcid)
             {
                 return false;
             }
@@ -6186,7 +6186,7 @@ namespace AngbandOS
                 return false;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IgnoreCold)
+            if (oPtr.Characteristics.IgnoreCold)
             {
                 return false;
             }
@@ -6200,7 +6200,7 @@ namespace AngbandOS
                 return false;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IgnoreElec)
+            if (oPtr.Characteristics.IgnoreElec)
             {
                 return false;
             }
@@ -6214,7 +6214,7 @@ namespace AngbandOS
                 return false;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IgnoreFire)
+            if (oPtr.Characteristics.IgnoreFire)
             {
                 return false;
             }
@@ -6863,7 +6863,7 @@ namespace AngbandOS
             }
             string oName = oPtr.Description(false, 0);
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IgnoreAcid)
+            if (oPtr.Characteristics.IgnoreAcid)
             {
                 MsgPrint($"Your {oName} is unaffected!");
                 return true;
@@ -6914,11 +6914,11 @@ namespace AngbandOS
                     continue;
                 }
                 oPtr.RefreshFlagBasedProperties();
-                if (!all && oPtr.HeavyCurse)
+                if (!all && oPtr.Characteristics.HeavyCurse)
                 {
                     continue;
                 }
-                if (oPtr.PermaCurse)
+                if (oPtr.Characteristics.PermaCurse)
                 {
                     continue;
                 }
@@ -7983,7 +7983,7 @@ namespace AngbandOS
                 return false;
             }
             item.RefreshFlagBasedProperties();
-            return item.Activate;
+            return item.Characteristics.Activate;
         }
 
         /// <summary>
@@ -8563,8 +8563,8 @@ namespace AngbandOS
                     int totalDamage = 1;
                     // Get our weapon's flags to see if we need to do anything special
                     item.RefreshFlagBasedProperties();
-                    bool chaosEffect = item.Chaotic && Program.Rng.DieRoll(2) == 1;
-                    if (item.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
+                    bool chaosEffect = item.Characteristics.Chaotic && Program.Rng.DieRoll(2) == 1;
+                    if (item.Characteristics.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -8578,7 +8578,7 @@ namespace AngbandOS
                         }
                     }
                     // Vorpal weapons have a chance of a deep cut
-                    bool vorpalCut = item.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
+                    bool vorpalCut = item.Characteristics.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
                     if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands())
                     {

@@ -104,17 +104,24 @@ namespace AngbandOS.ItemCategories
         public override bool CanApplyTunnelBonus => true;
         public override bool CanApplyBlowsBonus => true;
 
-        public override int GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(Item item, int value)
         {
+            if (item.BonusToHit + item.BonusDamage < 0)
+                return null;
+
             int bonusValue = 0;
             bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
             if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
             {
                 bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 100;
             }
-            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
             return bonusValue;
         }
+        public override int? GetTypeSpecificRealValue(Item item, int value)
+        {
+            return ComputeTypeSpecificRealValue(item, value);
+        }
+
         public override bool IsWorthless(Item item)
         {
             if (item.TypeSpecificValue < 0)

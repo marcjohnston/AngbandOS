@@ -972,39 +972,39 @@ namespace AngbandOS
                             item.RefreshFlagBasedProperties();
                             string itemName = item.Description(true, 3);
                             string monsterName = MonsterDesc(0x04);
-                            if (item.KillDragon)
+                            if (item.Characteristics.KillDragon)
                             {
                                 flg3 |= MonsterFlag3.Dragon;
                             }
-                            if (item.SlayDragon)
+                            if (item.Characteristics.SlayDragon)
                             {
                                 flg3 |= MonsterFlag3.Dragon;
                             }
-                            if (item.SlayTroll)
+                            if (item.Characteristics.SlayTroll)
                             {
                                 flg3 |= MonsterFlag3.Troll;
                             }
-                            if (item.SlayGiant)
+                            if (item.Characteristics.SlayGiant)
                             {
                                 flg3 |= MonsterFlag3.Giant;
                             }
-                            if (item.SlayOrc)
+                            if (item.Characteristics.SlayOrc)
                             {
                                 flg3 |= MonsterFlag3.Orc;
                             }
-                            if (item.SlayDemon)
+                            if (item.Characteristics.SlayDemon)
                             {
                                 flg3 |= MonsterFlag3.Demon;
                             }
-                            if (item.SlayUndead)
+                            if (item.Characteristics.SlayUndead)
                             {
                                 flg3 |= MonsterFlag3.Undead;
                             }
-                            if (item.SlayAnimal)
+                            if (item.Characteristics.SlayAnimal)
                             {
                                 flg3 |= MonsterFlag3.Animal;
                             }
-                            if (item.SlayEvil)
+                            if (item.Characteristics.SlayEvil)
                             {
                                 flg3 |= MonsterFlag3.Evil;
                             }

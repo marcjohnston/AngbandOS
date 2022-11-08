@@ -394,7 +394,7 @@ namespace AngbandOS
                 return;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.Blessed && Program.Rng.DieRoll(888) > chance)
+            if (oPtr.Characteristics.Blessed && Program.Rng.DieRoll(888) > chance)
             {
                 string oName = oPtr.Description(false, 0);
                 string s = oPtr.Count > 1 ? "" : "s";
@@ -405,7 +405,7 @@ namespace AngbandOS
                 (oPtr.FixedArtifactIndex != 0 || oPtr.RareItemTypeIndex != 0 ||
                  !string.IsNullOrEmpty(oPtr.RandartName)))
             {
-                if (!oPtr.HeavyCurse)
+                if (!oPtr.Characteristics.HeavyCurse)
                 {
                     changed = true;
                 }

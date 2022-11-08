@@ -56,7 +56,7 @@ namespace AngbandOS.Projection
                 {
                     doKill = true;
                     noteKill = plural ? " are destroyed!" : " is destroyed!";
-                    if (oPtr.IgnoreElec)
+                    if (oPtr.Characteristics.IgnoreElec)
                     {
                         ignore = true;
                     }

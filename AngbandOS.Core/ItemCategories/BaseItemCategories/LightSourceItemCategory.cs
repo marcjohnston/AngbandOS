@@ -8,17 +8,16 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class LightSourceItemCategory : BaseItemCategory
     {
-        public override int GetBonusRealValue(Item item, int value)
-        {
-            int bonusValue = 0;
-            bonusValue += base.GetTypeSpecificValue(item, value); // Apply type specific values;
-            return bonusValue;
-        }
         public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
         public override ItemCategory CategoryEnum => ItemCategory.Light;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
+
+        public override int? GetTypeSpecificRealValue(Item item, int value)
+        {
+            return ComputeTypeSpecificRealValue(item, value);
+        }
 
         public override bool CanAbsorb(Item item, Item other)
         {

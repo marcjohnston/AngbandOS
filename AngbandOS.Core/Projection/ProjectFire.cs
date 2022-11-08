@@ -56,7 +56,7 @@ namespace AngbandOS.Projection
                 {
                     doKill = true;
                     noteKill = plural ? " burn up!" : " burns up!";
-                    if (oPtr.IgnoreFire)
+                    if (oPtr.Characteristics.IgnoreFire)
                     {
                         ignore = true;
                     }

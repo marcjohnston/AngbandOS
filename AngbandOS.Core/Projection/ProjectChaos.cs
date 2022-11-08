@@ -53,7 +53,7 @@ namespace AngbandOS.Projection
                     isArt = true;
                 }
                 string noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (oPtr.ResChaos)
+                if (oPtr.Characteristics.ResChaos)
                 {
                     ignore = true;
                 }

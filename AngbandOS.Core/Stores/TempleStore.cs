@@ -79,7 +79,7 @@ namespace AngbandOS.Stores
                 case PolearmItemCategory _:
                 case SwordItemCategory _:
                     item.RefreshFlagBasedProperties();
-                    if (item.Blessed)
+                    if (item.Characteristics.Blessed)
                         return item.Value() > 0;
                     else
                         return false;

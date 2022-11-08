@@ -38,11 +38,9 @@ namespace AngbandOS.ItemCategories
 
         //public override bool IsCharged => true;
         public override Colour Colour => Colour.Purple;
-        public override int GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(Item item, int value)
         {
-            int bonusValue = 0;
-            bonusValue += value / 20 * item.TypeSpecificValue;
-            return bonusValue;
+            return value / 20 * item.TypeSpecificValue;
         }
         public override string GetVerboseDescription(Item item)
         {

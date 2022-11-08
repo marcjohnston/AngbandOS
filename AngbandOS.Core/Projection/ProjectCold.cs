@@ -56,7 +56,7 @@ namespace AngbandOS.Projection
                 {
                     noteKill = plural ? " shatter!" : " shatters!";
                     doKill = true;
-                    if (oPtr.IgnoreCold)
+                    if (oPtr.Characteristics.IgnoreCold)
                     {
                         ignore = true;
                     }

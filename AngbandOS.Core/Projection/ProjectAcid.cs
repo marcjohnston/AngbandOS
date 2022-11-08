@@ -56,7 +56,7 @@ namespace AngbandOS.Projection
                 {
                     doKill = true;
                     noteKill = plural ? " melt!" : " melts!";
-                    if (oPtr.IgnoreAcid)
+                    if (oPtr.Characteristics.IgnoreAcid)
                     {
                         ignore = true;
                     }

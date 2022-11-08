@@ -6,6 +6,7 @@ using System.IO;
 using System.ComponentModel;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using System.Reflection.PortableExecutable;
 
 namespace AngbandOS.ItemCategories
 {
@@ -662,14 +663,27 @@ namespace AngbandOS.ItemCategories
         }
 
         /// <summary>
-        /// Gets an additional bonus gold real value associated with the item.  Returns a type specific value by default.
+        /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public virtual int GetBonusRealValue(Item item, int value) => 0;
+        public virtual int? GetBonusRealValue(Item item, int value) => 0;
+        public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
-        protected int GetTypeSpecificValue(Item item, int value)
+        /// <summary>
+        /// Provides base functionality for the type specific real value.  Returns a real value for the type specific characteristics of the item.  Returns
+        /// null, if the item is worthless.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected int? ComputeTypeSpecificRealValue(Item item, int value)
         {
+            if (item.TypeSpecificValue < 0)
+            {
+                return null; // Worthless
+            }
+
             if (item.TypeSpecificValue == 0)
             {
                 return 0;
@@ -677,51 +691,51 @@ namespace AngbandOS.ItemCategories
 
             int bonusValue = 0;
             item.RefreshFlagBasedProperties();
-            if (Str)
+            if (item.Characteristics.Str)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Int)
+            if (item.Characteristics.Int)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Wis)
+            if (item.Characteristics.Wis)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Dex)
+            if (item.Characteristics.Dex)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Con)
+            if (item.Characteristics.Con)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Cha)
+            if (item.Characteristics.Cha)
             {
                 bonusValue += item.TypeSpecificValue * 200;
             }
-            if (Stealth)
+            if (item.Characteristics.Stealth)
             {
                 bonusValue += item.TypeSpecificValue * 100;
             }
-            if (Search)
+            if (item.Characteristics.Search)
             {
                 bonusValue += item.TypeSpecificValue * 100;
             }
-            if (Infra)
+            if (item.Characteristics.Infra)
             {
                 bonusValue += item.TypeSpecificValue * 50;
             }
-            if (Tunnel)
+            if (item.Characteristics.Tunnel)
             {
                 bonusValue += item.TypeSpecificValue * 50;
             }
-            if (Blows)
+            if (item.Characteristics.Blows)
             {
                 bonusValue += item.TypeSpecificValue * 5000;
             }
-            if (Speed)
+            if (item.Characteristics.Speed)
             {
                 bonusValue += item.TypeSpecificValue * 3000;
             }

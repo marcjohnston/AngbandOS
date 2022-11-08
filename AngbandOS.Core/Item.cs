@@ -55,7 +55,8 @@ namespace AngbandOS
         public int Weight;
         public int X;
         public int Y;
-        public readonly SaveGame SaveGame; // TODO: ItemCategories need access
+        public readonly SaveGame SaveGame;
+        public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
         /// <summary>
         /// Creates a new (nothing) item.
@@ -144,7 +145,7 @@ namespace AngbandOS
             RefreshFlagBasedProperties();
             if (ItemType.BaseItemCategory.GetsDamageMultiplier)
             {
-                if (SlayAnimal && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
+                if (Characteristics.SlayAnimal && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -155,7 +156,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (SlayEvil && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+                if (Characteristics.SlayEvil && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -166,7 +167,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (SlayUndead && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+                if (Characteristics.SlayUndead && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -177,7 +178,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (SlayDemon && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+                if (Characteristics.SlayDemon && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -188,7 +189,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (SlayOrc && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
+                if (Characteristics.SlayOrc && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -199,7 +200,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (SlayTroll && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
+                if (Characteristics.SlayTroll && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -210,7 +211,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (SlayGiant && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
+                if (Characteristics.SlayGiant && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -221,7 +222,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (SlayDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (Characteristics.SlayDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -232,7 +233,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (KillDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (Characteristics.KillDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -247,7 +248,7 @@ namespace AngbandOS
                         mult *= 3;
                     }
                 }
-                if (BrandAcid)
+                if (Characteristics.BrandAcid)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneAcid) != 0)
                     {
@@ -264,7 +265,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (BrandElec)
+                if (Characteristics.BrandElec)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneLightning) != 0)
                     {
@@ -281,7 +282,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (BrandFire)
+                if (Characteristics.BrandFire)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
                     {
@@ -298,7 +299,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (BrandCold)
+                if (Characteristics.BrandCold)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmuneCold) != 0)
                     {
@@ -315,7 +316,7 @@ namespace AngbandOS
                         }
                     }
                 }
-                if (BrandPois)
+                if (Characteristics.BrandPois)
                 {
                     if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
                     {
@@ -1203,343 +1204,343 @@ namespace AngbandOS
         {
             int total = 0;
             RefreshFlagBasedProperties();
-            if (Str)
+            if (Characteristics.Str)
             {
                 total += 1000 * plusses;
             }
-            if (Int)
+            if (Characteristics.Int)
             {
                 total += 1000 * plusses;
             }
-            if (Wis)
+            if (Characteristics.Wis)
             {
                 total += 1000 * plusses;
             }
-            if (Dex)
+            if (Characteristics.Dex)
             {
                 total += 1000 * plusses;
             }
-            if (Con)
+            if (Characteristics.Con)
             {
                 total += 1000 * plusses;
             }
-            if (Cha)
+            if (Characteristics.Cha)
             {
                 total += 250 * plusses;
             }
-            if (Chaotic)
+            if (Characteristics.Chaotic)
             {
                 total += 10000;
             }
-            if (Vampiric)
+            if (Characteristics.Vampiric)
             {
                 total += 13000;
             }
-            if (Stealth)
+            if (Characteristics.Stealth)
             {
                 total += 250 * plusses;
             }
-            if (Search)
+            if (Characteristics.Search)
             {
                 total += 100 * plusses;
             }
-            if (Infra)
+            if (Characteristics.Infra)
             {
                 total += 150 * plusses;
             }
-            if (Tunnel)
+            if (Characteristics.Tunnel)
             {
                 total += 175 * plusses;
             }
-            if (Speed && plusses > 0)
+            if (Characteristics.Speed && plusses > 0)
             {
                 total += 30000 * plusses;
             }
-            if (Blows && plusses > 0)
+            if (Characteristics.Blows && plusses > 0)
             {
                 total += 2000 * plusses;
             }
-            if (AntiTheft)
+            if (Characteristics.AntiTheft)
             {
                 total += 0;
             }
-            if (SlayAnimal)
+            if (Characteristics.SlayAnimal)
             {
                 total += 3500;
             }
-            if (SlayEvil)
+            if (Characteristics.SlayEvil)
             {
                 total += 4500;
             }
-            if (SlayUndead)
+            if (Characteristics.SlayUndead)
             {
                 total += 3500;
             }
-            if (SlayDemon)
+            if (Characteristics.SlayDemon)
             {
                 total += 3500;
             }
-            if (SlayOrc)
+            if (Characteristics.SlayOrc)
             {
                 total += 3000;
             }
-            if (SlayTroll)
+            if (Characteristics.SlayTroll)
             {
                 total += 3500;
             }
-            if (SlayGiant)
+            if (Characteristics.SlayGiant)
             {
                 total += 3500;
             }
-            if (SlayDragon)
+            if (Characteristics.SlayDragon)
             {
                 total += 3500;
             }
-            if (KillDragon)
+            if (Characteristics.KillDragon)
             {
                 total += 5500;
             }
-            if (Vorpal)
+            if (Characteristics.Vorpal)
             {
                 total += 5000;
             }
-            if (Impact)
+            if (Characteristics.Impact)
             {
                 total += 5000;
             }
-            if (BrandPois)
+            if (Characteristics.BrandPois)
             {
                 total += 7500;
             }
-            if (BrandAcid)
+            if (Characteristics.BrandAcid)
             {
                 total += 7500;
             }
-            if (BrandElec)
+            if (Characteristics.BrandElec)
             {
                 total += 7500;
             }
-            if (BrandFire)
+            if (Characteristics.BrandFire)
             {
                 total += 5000;
             }
-            if (BrandCold)
+            if (Characteristics.BrandCold)
             {
                 total += 5000;
             }
-            if (SustStr)
+            if (Characteristics.SustStr)
             {
                 total += 850;
             }
-            if (SustInt)
+            if (Characteristics.SustInt)
             {
                 total += 850;
             }
-            if (SustWis)
+            if (Characteristics.SustWis)
             {
                 total += 850;
             }
-            if (SustDex)
+            if (Characteristics.SustDex)
             {
                 total += 850;
             }
-            if (SustCon)
+            if (Characteristics.SustCon)
             {
                 total += 850;
             }
-            if (SustCha)
+            if (Characteristics.SustCha)
             {
                 total += 250;
             }
-            if (ImAcid)
+            if (Characteristics.ImAcid)
             {
                 total += 10000;
             }
-            if (ImElec)
+            if (Characteristics.ImElec)
             {
                 total += 10000;
             }
-            if (ImFire)
+            if (Characteristics.ImFire)
             {
                 total += 10000;
             }
-            if (ImCold)
+            if (Characteristics.ImCold)
             {
                 total += 10000;
             }
-            if (Reflect)
+            if (Characteristics.Reflect)
             {
                 total += 10000;
             }
-            if (FreeAct)
+            if (Characteristics.FreeAct)
             {
                 total += 4500;
             }
-            if (HoldLife)
+            if (Characteristics.HoldLife)
             {
                 total += 8500;
             }
-            if (ResAcid)
+            if (Characteristics.ResAcid)
             {
                 total += 1250;
             }
-            if (ResElec)
+            if (Characteristics.ResElec)
             {
                 total += 1250;
             }
-            if (ResFire)
+            if (Characteristics.ResFire)
             {
                 total += 1250;
             }
-            if (ResCold)
+            if (Characteristics.ResCold)
             {
                 total += 1250;
             }
-            if (ResPois)
+            if (Characteristics.ResPois)
             {
                 total += 2500;
             }
-            if (ResFear)
+            if (Characteristics.ResFear)
             {
                 total += 2500;
             }
-            if (ResLight)
+            if (Characteristics.ResLight)
             {
                 total += 1750;
             }
-            if (ResDark)
+            if (Characteristics.ResDark)
             {
                 total += 1750;
             }
-            if (ResBlind)
+            if (Characteristics.ResBlind)
             {
                 total += 2000;
             }
-            if (ResConf)
+            if (Characteristics.ResConf)
             {
                 total += 2000;
             }
-            if (ResSound)
+            if (Characteristics.ResSound)
             {
                 total += 2000;
             }
-            if (ResShards)
+            if (Characteristics.ResShards)
             {
                 total += 2000;
             }
-            if (ResNether)
+            if (Characteristics.ResNether)
             {
                 total += 2000;
             }
-            if (ResNexus)
+            if (Characteristics.ResNexus)
             {
                 total += 2000;
             }
-            if (ResChaos)
+            if (Characteristics.ResChaos)
             {
                 total += 2000;
             }
-            if (ResDisen)
+            if (Characteristics.ResDisen)
             {
                 total += 10000;
             }
-            if (ShFire)
+            if (Characteristics.ShFire)
             {
                 total += 5000;
             }
-            if (ShElec)
+            if (Characteristics.ShElec)
             {
                 total += 5000;
             }
-            if (NoTele)
+            if (Characteristics.NoTele)
             {
                 total += 2500;
             }
-            if (NoMagic)
+            if (Characteristics.NoMagic)
             {
                 total += 2500;
             }
-            if (Wraith)
+            if (Characteristics.Wraith)
             {
                 total += 250000;
             }
-            if (DreadCurse)
+            if (Characteristics.DreadCurse)
             {
                 total -= 15000;
             }
-            if (EasyKnow)
+            if (Characteristics.EasyKnow)
             {
                 total += 0;
             }
-            if (HideType)
+            if (Characteristics.HideType)
             {
                 total += 0;
             }
-            if (ShowMods)
+            if (Characteristics.ShowMods)
             {
                 total += 0;
             }
-            if (InstaArt)
+            if (Characteristics.InstaArt)
             {
                 total += 0;
             }
-            if (Feather)
+            if (Characteristics.Feather)
             {
                 total += 1250;
             }
-            if (Lightsource)
+            if (Characteristics.Lightsource)
             {
                 total += 1250;
             }
-            if (SeeInvis)
+            if (Characteristics.SeeInvis)
             {
                 total += 2000;
             }
-            if (Telepathy)
+            if (Characteristics.Telepathy)
             {
                 total += 12500;
             }
-            if (SlowDigest)
+            if (Characteristics.SlowDigest)
             {
                 total += 750;
             }
-            if (Regen)
+            if (Characteristics.Regen)
             {
                 total += 2500;
             }
-            if (XtraMight)
+            if (Characteristics.XtraMight)
             {
                 total += 2250;
             }
-            if (XtraShots)
+            if (Characteristics.XtraShots)
             {
                 total += 10000;
             }
-            if (IgnoreAcid)
+            if (Characteristics.IgnoreAcid)
             {
                 total += 100;
             }
-            if (IgnoreElec)
+            if (Characteristics.IgnoreElec)
             {
                 total += 100;
             }
-            if (IgnoreFire)
+            if (Characteristics.IgnoreFire)
             {
                 total += 100;
             }
-            if (IgnoreCold)
+            if (Characteristics.IgnoreCold)
             {
                 total += 100;
             }
-            if (Activate)
+            if (Characteristics.Activate)
             {
                 total += 100;
             }
-            if (DrainExp)
+            if (Characteristics.DrainExp)
             {
                 total -= 12500;
             }
-            if (Teleport)
+            if (Characteristics.Teleport)
             {
                 if (IdentifyFlags.IsSet(Constants.IdentCursed))
                 {
@@ -1550,23 +1551,23 @@ namespace AngbandOS
                     total += 250;
                 }
             }
-            if (Aggravate)
+            if (Characteristics.Aggravate)
             {
                 total -= 10000;
             }
-            if (Blessed)
+            if (Characteristics.Blessed)
             {
                 total += 750;
             }
-            if (Cursed)
+            if (Characteristics.Cursed)
             {
                 total -= 5000;
             }
-            if (HeavyCurse)
+            if (Characteristics.HeavyCurse)
             {
                 total -= 12500;
             }
-            if (PermaCurse)
+            if (Characteristics.PermaCurse)
             {
                 total -= 15000;
             }
@@ -1615,102 +1616,6 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Returns whether or not the item affects the blows delivered by the player when being worn.  Returns true, when the base item category,
-        /// fixed artifact or rare item type this item is based on is true.  Returns false, when the item is (nothing) and the base item category, fixed
-        /// artifact and rare item type that the item is based on are all false.  This property is a replacement for the flag-based merged properties.
-        /// </summary>
-        public bool Blows { get; private set; }
-        public bool BrandAcid { get; private set; }
-        public bool BrandCold { get; private set; }
-        public bool BrandElec { get; private set; }
-        public bool BrandFire { get; private set; }
-        public bool BrandPois { get; private set; }
-        public bool Cha { get; private set; }
-        public bool Chaotic { get; private set; }
-        public bool Con { get; private set; }
-        public bool Dex { get; private set; }
-        public bool Impact { get; private set; }
-        public bool Infra { get; private set; }
-        public bool Int { get; private set; }
-        public bool KillDragon { get; private set; }
-        public bool Search { get; private set; }
-        public bool SlayAnimal { get; private set; }
-        public bool SlayDemon { get; private set; }
-        public bool SlayDragon { get; private set; }
-        public bool SlayEvil { get; private set; }
-        public bool SlayGiant { get; private set; }
-        public bool SlayOrc { get; private set; }
-        public bool SlayTroll { get; private set; }
-        public bool SlayUndead { get; private set; }
-        public bool Speed { get; private set; }
-        public bool Stealth { get; private set; }
-        public bool Str { get; private set; }
-        public bool Tunnel { get; private set; }
-        public bool Vampiric { get; private set; }
-        public bool Vorpal { get; private set; }
-        public bool Wis { get; private set; }
-        public bool FreeAct { get; private set; }
-        public bool HoldLife { get; private set; }
-        public bool ImAcid { get; private set; }
-        public bool ImCold { get; private set; }
-        public bool ImElec { get; private set; }
-        public bool ImFire { get; private set; }
-        public bool Reflect { get; private set; }
-        public bool ResAcid { get; private set; }
-        public bool ResBlind { get; private set; }
-        public bool ResChaos { get; private set; }
-        public bool ResCold { get; private set; }
-        public bool ResConf { get; private set; }
-        public bool ResDark { get; private set; }
-        public bool ResDisen { get; private set; }
-        public bool ResElec { get; private set; }
-        public bool ResFear { get; private set; }
-        public bool ResFire { get; private set; }
-        public bool ResLight { get; private set; }
-        public bool ResNether { get; private set; }
-        public bool ResNexus { get; private set; }
-        public bool ResPois { get; private set; }
-        public bool ResShards { get; private set; }
-        public bool ResSound { get; private set; }
-        public bool SustCha { get; private set; }
-        public bool SustCon { get; private set; }
-        public bool SustDex { get; private set; }
-        public bool SustInt { get; private set; }
-        public bool SustStr { get; private set; }
-        public bool SustWis { get; private set; }
-        public bool AntiTheft { get; private set; }
-        public bool Activate { get; private set; }
-        public bool Aggravate { get; private set; }
-        public bool Blessed { get; private set; }
-        public bool Cursed { get; private set; }
-        public bool DrainExp { get; private set; }
-        public bool DreadCurse { get; private set; }
-        public bool EasyKnow { get; private set; }
-        public bool Feather { get; private set; }
-        public bool HeavyCurse { get; private set; }
-        public bool HideType { get; private set; }
-        public bool IgnoreAcid { get; private set; }
-        public bool IgnoreCold { get; private set; }
-        public bool IgnoreElec { get; private set; }
-        public bool IgnoreFire { get; private set; }
-        public bool InstaArt { get; private set; }
-        public bool Lightsource { get; private set; }
-        public bool NoMagic { get; private set; }
-        public bool NoTele { get; private set; }
-        public bool PermaCurse { get; private set; }
-        public bool Regen { get; private set; }
-        public bool SeeInvis { get; private set; }
-        public bool ShElec { get; private set; }
-        public bool ShFire { get; private set; }
-        public bool ShowMods { get; private set; }
-        public bool SlowDigest { get; private set; }
-        public bool Telepathy { get; private set; }
-        public bool Teleport { get; private set; }
-        public bool Wraith { get; private set; }
-        public bool XtraMight { get; private set; }
-        public bool XtraShots { get; private set; }
-
-        /// <summary>
         /// Refreshes all of the flag-based properties.  This is an interim method that replaces the deprecated GetMergedFlags(f1, f2, f3).  This method will
         /// be deprecated once all of the flag-based properties are maintained when the FixedArtifactIndex, RareItemType and RandartFlags automatically update
         /// the flag-based properties.
@@ -1722,96 +1627,99 @@ namespace AngbandOS
             FlagSet f3 = new FlagSet();
             GetMergedFlags(f1, f2, f3); // NO NEED TO REFACTOR THIS CALL
 
-            Blows = f1.IsSet(ItemFlag1.Blows);
-            BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
-            BrandCold = f1.IsSet(ItemFlag1.BrandCold);
-            BrandElec = f1.IsSet(ItemFlag1.BrandElec);
-            BrandFire = f1.IsSet(ItemFlag1.BrandFire);
-            BrandPois = f1.IsSet(ItemFlag1.BrandPois);
-            Cha = f1.IsSet(ItemFlag1.Cha);
-            Chaotic = f1.IsSet(ItemFlag1.Chaotic);
-            Con = f1.IsSet(ItemFlag1.Con);
-            Dex = f1.IsSet(ItemFlag1.Dex);
-            Impact = f1.IsSet(ItemFlag1.Impact);
-            Infra = f1.IsSet(ItemFlag1.Infra);
-            Int = f1.IsSet(ItemFlag1.Int);
-            KillDragon = f1.IsSet(ItemFlag1.KillDragon);
-            Search = f1.IsSet(ItemFlag1.Search);
-            SlayAnimal = f1.IsSet(ItemFlag1.SlayAnimal);
-            SlayDemon = f1.IsSet(ItemFlag1.SlayDemon);
-            SlayDragon = f1.IsSet(ItemFlag1.SlayDragon);
-            SlayEvil = f1.IsSet(ItemFlag1.SlayEvil);
-            SlayGiant = f1.IsSet(ItemFlag1.SlayGiant);
-            SlayOrc = f1.IsSet(ItemFlag1.SlayOrc);
-            SlayTroll = f1.IsSet(ItemFlag1.SlayTroll);
-            SlayUndead = f1.IsSet(ItemFlag1.SlayUndead);
-            Speed = f1.IsSet(ItemFlag1.Speed);
-            Stealth = f1.IsSet(ItemFlag1.Stealth);
-            Str = f1.IsSet(ItemFlag1.Str);
-            Tunnel = f1.IsSet(ItemFlag1.Tunnel);
-            Vampiric = f1.IsSet(ItemFlag1.Vampiric);
-            Vorpal = f1.IsSet(ItemFlag1.Vorpal);
-            Wis = f1.IsSet(ItemFlag1.Wis);
-            FreeAct = f2.IsSet(ItemFlag2.FreeAct);
-            HoldLife = f2.IsSet(ItemFlag2.HoldLife);
-            ImAcid = f2.IsSet(ItemFlag2.ImAcid);
-            ImCold = f2.IsSet(ItemFlag2.ImCold);
-            ImElec = f2.IsSet(ItemFlag2.ImElec);
-            ImFire = f2.IsSet(ItemFlag2.ImFire);
-            Reflect = f2.IsSet(ItemFlag2.Reflect);
-            ResAcid = f2.IsSet(ItemFlag2.ResAcid);
-            ResBlind = f2.IsSet(ItemFlag2.ResBlind);
-            ResChaos = f2.IsSet(ItemFlag2.ResChaos);
-            ResCold = f2.IsSet(ItemFlag2.ResCold);
-            ResConf = f2.IsSet(ItemFlag2.ResConf);
-            ResDark = f2.IsSet(ItemFlag2.ResDark);
-            ResDisen = f2.IsSet(ItemFlag2.ResDisen);
-            ResElec = f2.IsSet(ItemFlag2.ResElec);
-            ResFear = f2.IsSet(ItemFlag2.ResFear);
-            ResFire = f2.IsSet(ItemFlag2.ResFire);
-            ResLight = f2.IsSet(ItemFlag2.ResLight);
-            ResNether = f2.IsSet(ItemFlag2.ResNether);
-            ResNexus = f2.IsSet(ItemFlag2.ResNexus);
-            ResPois = f2.IsSet(ItemFlag2.ResPois);
-            ResShards = f2.IsSet(ItemFlag2.ResShards);
-            ResSound = f2.IsSet(ItemFlag2.ResSound);
-            SustCha = f2.IsSet(ItemFlag2.SustCha);
-            SustCon = f2.IsSet(ItemFlag2.SustCon);
-            SustDex = f2.IsSet(ItemFlag2.SustDex);
-            SustInt = f2.IsSet(ItemFlag2.SustInt);
-            SustStr = f2.IsSet(ItemFlag2.SustStr);
-            SustWis = f2.IsSet(ItemFlag2.SustWis);
-            AntiTheft = f3.IsSet(ItemFlag3.AntiTheft);
-            Activate = f3.IsSet(ItemFlag3.Activate);
-            Aggravate = f3.IsSet(ItemFlag3.Aggravate);
-            Blessed = f3.IsSet(ItemFlag3.Blessed);
-            Cursed = f3.IsSet(ItemFlag3.Cursed);
-            DrainExp = f3.IsSet(ItemFlag3.DrainExp);
-            DreadCurse = f3.IsSet(ItemFlag3.DreadCurse);
-            EasyKnow = f3.IsSet(ItemFlag3.EasyKnow);
-            Feather = f3.IsSet(ItemFlag3.Feather);
-            HeavyCurse = f3.IsSet(ItemFlag3.HeavyCurse);
-            HideType = f3.IsSet(ItemFlag3.HideType);
-            IgnoreAcid = f3.IsSet(ItemFlag3.IgnoreAcid);
-            IgnoreCold = f3.IsSet(ItemFlag3.IgnoreCold);
-            IgnoreElec = f3.IsSet(ItemFlag3.IgnoreElec);
-            IgnoreFire = f3.IsSet(ItemFlag3.IgnoreFire);
-            InstaArt = f3.IsSet(ItemFlag3.InstaArt);
-            Lightsource = f3.IsSet(ItemFlag3.Lightsource);
-            NoMagic = f3.IsSet(ItemFlag3.NoMagic);
-            NoTele = f3.IsSet(ItemFlag3.NoTele);
-            PermaCurse = f3.IsSet(ItemFlag3.PermaCurse);
-            Regen = f3.IsSet(ItemFlag3.Regen);
-            SeeInvis = f3.IsSet(ItemFlag3.SeeInvis);
-            ShElec = f3.IsSet(ItemFlag3.ShElec);
-            ShFire = f3.IsSet(ItemFlag3.ShFire);
-            ShowMods = f3.IsSet(ItemFlag3.ShowMods);
-            SlowDigest = f3.IsSet(ItemFlag3.SlowDigest);
-            Telepathy = f3.IsSet(ItemFlag3.Telepathy);
-            Teleport = f3.IsSet(ItemFlag3.Teleport);
-            Wraith = f3.IsSet(ItemFlag3.Wraith);
-            XtraMight = f3.IsSet(ItemFlag3.XtraMight);
-            XtraShots = f3.IsSet(ItemFlag3.XtraShots);
+          //  Characteristics = new ItemCharacteristics();
+            Characteristics.Blows = f1.IsSet(ItemFlag1.Blows);
+            Characteristics.BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
+            Characteristics.BrandCold = f1.IsSet(ItemFlag1.BrandCold);
+            Characteristics.BrandElec = f1.IsSet(ItemFlag1.BrandElec);
+            Characteristics.BrandFire = f1.IsSet(ItemFlag1.BrandFire);
+            Characteristics.BrandPois = f1.IsSet(ItemFlag1.BrandPois);
+            Characteristics.Cha = f1.IsSet(ItemFlag1.Cha);
+            Characteristics.Chaotic = f1.IsSet(ItemFlag1.Chaotic);
+            Characteristics.Con = f1.IsSet(ItemFlag1.Con);
+            Characteristics.Dex = f1.IsSet(ItemFlag1.Dex);
+            Characteristics.Impact = f1.IsSet(ItemFlag1.Impact);
+            Characteristics.Infra = f1.IsSet(ItemFlag1.Infra);
+            Characteristics.Int = f1.IsSet(ItemFlag1.Int);
+            Characteristics.KillDragon = f1.IsSet(ItemFlag1.KillDragon);
+            Characteristics.Search = f1.IsSet(ItemFlag1.Search);
+            Characteristics.SlayAnimal = f1.IsSet(ItemFlag1.SlayAnimal);
+            Characteristics.SlayDemon = f1.IsSet(ItemFlag1.SlayDemon);
+            Characteristics.SlayDragon = f1.IsSet(ItemFlag1.SlayDragon);
+            Characteristics.SlayEvil = f1.IsSet(ItemFlag1.SlayEvil);
+            Characteristics.SlayGiant = f1.IsSet(ItemFlag1.SlayGiant);
+            Characteristics.SlayOrc = f1.IsSet(ItemFlag1.SlayOrc);
+            Characteristics.SlayTroll = f1.IsSet(ItemFlag1.SlayTroll);
+            Characteristics.SlayUndead = f1.IsSet(ItemFlag1.SlayUndead);
+            Characteristics.Speed = f1.IsSet(ItemFlag1.Speed);
+            Characteristics.Stealth = f1.IsSet(ItemFlag1.Stealth);
+            Characteristics.Str = f1.IsSet(ItemFlag1.Str);
+            Characteristics.Tunnel = f1.IsSet(ItemFlag1.Tunnel);
+            Characteristics.Vampiric = f1.IsSet(ItemFlag1.Vampiric);
+            Characteristics.Vorpal = f1.IsSet(ItemFlag1.Vorpal);
+            Characteristics.Wis = f1.IsSet(ItemFlag1.Wis);
+
+            Characteristics.FreeAct = f2.IsSet(ItemFlag2.FreeAct);
+            Characteristics.HoldLife = f2.IsSet(ItemFlag2.HoldLife);
+            Characteristics.ImAcid = f2.IsSet(ItemFlag2.ImAcid);
+            Characteristics.ImCold = f2.IsSet(ItemFlag2.ImCold);
+            Characteristics.ImElec = f2.IsSet(ItemFlag2.ImElec);
+            Characteristics.ImFire = f2.IsSet(ItemFlag2.ImFire);
+            Characteristics.Reflect = f2.IsSet(ItemFlag2.Reflect);
+            Characteristics.ResAcid = f2.IsSet(ItemFlag2.ResAcid);
+            Characteristics.ResBlind = f2.IsSet(ItemFlag2.ResBlind);
+            Characteristics.ResChaos = f2.IsSet(ItemFlag2.ResChaos);
+            Characteristics.ResCold = f2.IsSet(ItemFlag2.ResCold);
+            Characteristics.ResConf = f2.IsSet(ItemFlag2.ResConf);
+            Characteristics.ResDark = f2.IsSet(ItemFlag2.ResDark);
+            Characteristics.ResDisen = f2.IsSet(ItemFlag2.ResDisen);
+            Characteristics.ResElec = f2.IsSet(ItemFlag2.ResElec);
+            Characteristics.ResFear = f2.IsSet(ItemFlag2.ResFear);
+            Characteristics.ResFire = f2.IsSet(ItemFlag2.ResFire);
+            Characteristics.ResLight = f2.IsSet(ItemFlag2.ResLight);
+            Characteristics.ResNether = f2.IsSet(ItemFlag2.ResNether);
+            Characteristics.ResNexus = f2.IsSet(ItemFlag2.ResNexus);
+            Characteristics.ResPois = f2.IsSet(ItemFlag2.ResPois);
+            Characteristics.ResShards = f2.IsSet(ItemFlag2.ResShards);
+            Characteristics.ResSound = f2.IsSet(ItemFlag2.ResSound);
+            Characteristics.SustCha = f2.IsSet(ItemFlag2.SustCha);
+            Characteristics.SustCon = f2.IsSet(ItemFlag2.SustCon);
+            Characteristics.SustDex = f2.IsSet(ItemFlag2.SustDex);
+            Characteristics.SustInt = f2.IsSet(ItemFlag2.SustInt);
+            Characteristics.SustStr = f2.IsSet(ItemFlag2.SustStr);
+            Characteristics.SustWis = f2.IsSet(ItemFlag2.SustWis);
+
+            Characteristics.AntiTheft = f3.IsSet(ItemFlag3.AntiTheft);
+            Characteristics.Activate = f3.IsSet(ItemFlag3.Activate);
+            Characteristics.Aggravate = f3.IsSet(ItemFlag3.Aggravate);
+            Characteristics.Blessed = f3.IsSet(ItemFlag3.Blessed);
+            Characteristics.Cursed = f3.IsSet(ItemFlag3.Cursed);
+            Characteristics.DrainExp = f3.IsSet(ItemFlag3.DrainExp);
+            Characteristics.DreadCurse = f3.IsSet(ItemFlag3.DreadCurse);
+            Characteristics.EasyKnow = f3.IsSet(ItemFlag3.EasyKnow);
+            Characteristics.Feather = f3.IsSet(ItemFlag3.Feather);
+            Characteristics.HeavyCurse = f3.IsSet(ItemFlag3.HeavyCurse);
+            Characteristics.HideType = f3.IsSet(ItemFlag3.HideType);
+            Characteristics.IgnoreAcid = f3.IsSet(ItemFlag3.IgnoreAcid);
+            Characteristics.IgnoreCold = f3.IsSet(ItemFlag3.IgnoreCold);
+            Characteristics.IgnoreElec = f3.IsSet(ItemFlag3.IgnoreElec);
+            Characteristics.IgnoreFire = f3.IsSet(ItemFlag3.IgnoreFire);
+            Characteristics.InstaArt = f3.IsSet(ItemFlag3.InstaArt);
+            Characteristics.Lightsource = f3.IsSet(ItemFlag3.Lightsource);
+            Characteristics.NoMagic = f3.IsSet(ItemFlag3.NoMagic);
+            Characteristics.NoTele = f3.IsSet(ItemFlag3.NoTele);
+            Characteristics.PermaCurse = f3.IsSet(ItemFlag3.PermaCurse);
+            Characteristics.Regen = f3.IsSet(ItemFlag3.Regen);
+            Characteristics.SeeInvis = f3.IsSet(ItemFlag3.SeeInvis);
+            Characteristics.ShElec = f3.IsSet(ItemFlag3.ShElec);
+            Characteristics.ShFire = f3.IsSet(ItemFlag3.ShFire);
+            Characteristics.ShowMods = f3.IsSet(ItemFlag3.ShowMods);
+            Characteristics.SlowDigest = f3.IsSet(ItemFlag3.SlowDigest);
+            Characteristics.Telepathy = f3.IsSet(ItemFlag3.Telepathy);
+            Characteristics.Teleport = f3.IsSet(ItemFlag3.Teleport);
+            Characteristics.Wraith = f3.IsSet(ItemFlag3.Wraith);
+            Characteristics.XtraMight = f3.IsSet(ItemFlag3.XtraMight);
+            Characteristics.XtraShots = f3.IsSet(ItemFlag3.XtraShots);
         }
         /// <summary>
         /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
@@ -1932,7 +1840,7 @@ namespace AngbandOS
             int i = 0, j, k;
             string[] info = new string[128];
             RefreshFlagBasedProperties();
-            if (Activate)
+            if (Characteristics.Activate)
             {
                 info[i++] = "It can be activated for...";
                 info[i++] = DescribeActivationEffect();
@@ -1943,317 +1851,317 @@ namespace AngbandOS
             {
                 info[i++] = categoryIdentity;
             }
-            if (Str)
+            if (Characteristics.Str)
             {
                 info[i++] = "It affects your strength.";
             }
-            if (Int)
+            if (Characteristics.Int)
             {
                 info[i++] = "It affects your intelligence.";
             }
-            if (Wis)
+            if (Characteristics.Wis)
             {
                 info[i++] = "It affects your wisdom.";
             }
-            if (Dex)
+            if (Characteristics.Dex)
             {
                 info[i++] = "It affects your dexterity.";
             }
-            if (Con)
+            if (Characteristics.Con)
             {
                 info[i++] = "It affects your constitution.";
             }
-            if (Cha)
+            if (Characteristics.Cha)
             {
                 info[i++] = "It affects your charisma.";
             }
-            if (Stealth)
+            if (Characteristics.Stealth)
             {
                 info[i++] = "It affects your stealth.";
             }
-            if (Search)
+            if (Characteristics.Search)
             {
                 info[i++] = "It affects your searching.";
             }
-            if (Infra)
+            if (Characteristics.Infra)
             {
                 info[i++] = "It affects your infravision.";
             }
-            if (Tunnel)
+            if (Characteristics.Tunnel)
             {
                 info[i++] = "It affects your ability to tunnel.";
             }
-            if (Speed)
+            if (Characteristics.Speed)
             {
                 info[i++] = "It affects your movement speed.";
             }
-            if (Blows)
+            if (Characteristics.Blows)
             {
                 info[i++] = "It affects your attack speed.";
             }
-            if (BrandAcid)
+            if (Characteristics.BrandAcid)
             {
                 info[i++] = "It does extra damage from acid.";
             }
-            if (BrandElec)
+            if (Characteristics.BrandElec)
             {
                 info[i++] = "It does extra damage from electricity.";
             }
-            if (BrandFire)
+            if (Characteristics.BrandFire)
             {
                 info[i++] = "It does extra damage from fire.";
             }
-            if (BrandCold)
+            if (Characteristics.BrandCold)
             {
                 info[i++] = "It does extra damage from frost.";
             }
-            if (BrandPois)
+            if (Characteristics.BrandPois)
             {
                 info[i++] = "It poisons your foes.";
             }
-            if (Chaotic)
+            if (Characteristics.Chaotic)
             {
                 info[i++] = "It produces chaotic effects.";
             }
-            if (Vampiric)
+            if (Characteristics.Vampiric)
             {
                 info[i++] = "It drains life from your foes.";
             }
-            if (Impact)
+            if (Characteristics.Impact)
             {
                 info[i++] = "It can cause earthquakes.";
             }
-            if (Vorpal)
+            if (Characteristics.Vorpal)
             {
                 info[i++] = "It is very sharp and can cut your foes.";
             }
-            if (KillDragon)
+            if (Characteristics.KillDragon)
             {
                 info[i++] = "It is a great bane of dragons.";
             }
-            else if (SlayDragon)
+            else if (Characteristics.SlayDragon)
             {
                 info[i++] = "It is especially deadly against dragons.";
             }
-            if (SlayOrc)
+            if (Characteristics.SlayOrc)
             {
                 info[i++] = "It is especially deadly against orcs.";
             }
-            if (SlayTroll)
+            if (Characteristics.SlayTroll)
             {
                 info[i++] = "It is especially deadly against trolls.";
             }
-            if (SlayGiant)
+            if (Characteristics.SlayGiant)
             {
                 info[i++] = "It is especially deadly against giants.";
             }
-            if (SlayDemon)
+            if (Characteristics.SlayDemon)
             {
                 info[i++] = "It strikes at demons with holy wrath.";
             }
-            if (SlayUndead)
+            if (Characteristics.SlayUndead)
             {
                 info[i++] = "It strikes at undead with holy wrath.";
             }
-            if (SlayEvil)
+            if (Characteristics.SlayEvil)
             {
                 info[i++] = "It fights against evil with holy fury.";
             }
-            if (SlayAnimal)
+            if (Characteristics.SlayAnimal)
             {
                 info[i++] = "It is especially deadly against natural creatures.";
             }
-            if (SustStr)
+            if (Characteristics.SustStr)
             {
                 info[i++] = "It sustains your strength.";
             }
-            if (SustInt)
+            if (Characteristics.SustInt)
             {
                 info[i++] = "It sustains your intelligence.";
             }
-            if (SustWis)
+            if (Characteristics.SustWis)
             {
                 info[i++] = "It sustains your wisdom.";
             }
-            if (SustDex)
+            if (Characteristics.SustDex)
             {
                 info[i++] = "It sustains your dexterity.";
             }
-            if (SustCon)
+            if (Characteristics.SustCon)
             {
                 info[i++] = "It sustains your constitution.";
             }
-            if (SustCha)
+            if (Characteristics.SustCha)
             {
                 info[i++] = "It sustains your charisma.";
             }
-            if (ImAcid)
+            if (Characteristics.ImAcid)
             {
                 info[i++] = "It provides immunity to acid.";
             }
-            if (ImElec)
+            if (Characteristics.ImElec)
             {
                 info[i++] = "It provides immunity to electricity.";
             }
-            if (ImFire)
+            if (Characteristics.ImFire)
             {
                 info[i++] = "It provides immunity to fire.";
             }
-            if (ImCold)
+            if (Characteristics.ImCold)
             {
                 info[i++] = "It provides immunity to cold.";
             }
-            if (FreeAct)
+            if (Characteristics.FreeAct)
             {
                 info[i++] = "It provides immunity to paralysis.";
             }
-            if (HoldLife)
+            if (Characteristics.HoldLife)
             {
                 info[i++] = "It provides resistance to life draining.";
             }
-            if (ResFear)
+            if (Characteristics.ResFear)
             {
                 info[i++] = "It makes you completely fearless.";
             }
-            if (ResAcid)
+            if (Characteristics.ResAcid)
             {
                 info[i++] = "It provides resistance to acid.";
             }
-            if (ResElec)
+            if (Characteristics.ResElec)
             {
                 info[i++] = "It provides resistance to electricity.";
             }
-            if (ResFire)
+            if (Characteristics.ResFire)
             {
                 info[i++] = "It provides resistance to fire.";
             }
-            if (ResCold)
+            if (Characteristics.ResCold)
             {
                 info[i++] = "It provides resistance to cold.";
             }
-            if (ResPois)
+            if (Characteristics.ResPois)
             {
                 info[i++] = "It provides resistance to poison.";
             }
-            if (ResLight)
+            if (Characteristics.ResLight)
             {
                 info[i++] = "It provides resistance to light.";
             }
-            if (ResDark)
+            if (Characteristics.ResDark)
             {
                 info[i++] = "It provides resistance to dark.";
             }
-            if (ResBlind)
+            if (Characteristics.ResBlind)
             {
                 info[i++] = "It provides resistance to blindness.";
             }
-            if (ResConf)
+            if (Characteristics.ResConf)
             {
                 info[i++] = "It provides resistance to confusion.";
             }
-            if (ResSound)
+            if (Characteristics.ResSound)
             {
                 info[i++] = "It provides resistance to sound.";
             }
-            if (ResShards)
+            if (Characteristics.ResShards)
             {
                 info[i++] = "It provides resistance to shards.";
             }
-            if (ResNether)
+            if (Characteristics.ResNether)
             {
                 info[i++] = "It provides resistance to nether.";
             }
-            if (ResNexus)
+            if (Characteristics.ResNexus)
             {
                 info[i++] = "It provides resistance to nexus.";
             }
-            if (ResChaos)
+            if (Characteristics.ResChaos)
             {
                 info[i++] = "It provides resistance to chaos.";
             }
-            if (ResDisen)
+            if (Characteristics.ResDisen)
             {
                 info[i++] = "It provides resistance to disenchantment.";
             }
-            if (Wraith)
+            if (Characteristics.Wraith)
             {
                 info[i++] = "It renders you incorporeal.";
             }
-            if (Feather)
+            if (Characteristics.Feather)
             {
                 info[i++] = "It allows you to levitate.";
             }
-            if (Lightsource)
+            if (Characteristics.Lightsource)
             {
                 info[i++] = "It provides permanent light.";
             }
-            if (SeeInvis)
+            if (Characteristics.SeeInvis)
             {
                 info[i++] = "It allows you to see invisible monsters.";
             }
-            if (Telepathy)
+            if (Characteristics.Telepathy)
             {
                 info[i++] = "It gives telepathic powers.";
             }
-            if (SlowDigest)
+            if (Characteristics.SlowDigest)
             {
                 info[i++] = "It slows your metabolism.";
             }
-            if (Regen)
+            if (Characteristics.Regen)
             {
                 info[i++] = "It speeds your regenerative powers.";
             }
-            if (Reflect)
+            if (Characteristics.Reflect)
             {
                 info[i++] = "It reflects bolts and arrows.";
             }
-            if (ShFire)
+            if (Characteristics.ShFire)
             {
                 info[i++] = "It produces a fiery sheath.";
             }
-            if (ShElec)
+            if (Characteristics.ShElec)
             {
                 info[i++] = "It produces an electric sheath.";
             }
-            if (NoMagic)
+            if (Characteristics.NoMagic)
             {
                 info[i++] = "It produces an anti-magic shell.";
             }
-            if (NoTele)
+            if (Characteristics.NoTele)
             {
                 info[i++] = "It prevents teleportation.";
             }
-            if (XtraMight)
+            if (Characteristics.XtraMight)
             {
                 info[i++] = "It fires missiles with extra might.";
             }
-            if (XtraShots)
+            if (Characteristics.XtraShots)
             {
                 info[i++] = "It fires missiles excessively fast.";
             }
-            if (DrainExp)
+            if (Characteristics.DrainExp)
             {
                 info[i++] = "It drains experience.";
             }
-            if (Teleport)
+            if (Characteristics.Teleport)
             {
                 info[i++] = "It induces random teleportation.";
             }
-            if (Aggravate)
+            if (Characteristics.Aggravate)
             {
                 info[i++] = "It aggravates nearby creatures.";
             }
-            if (Blessed)
+            if (Characteristics.Blessed)
             {
                 info[i++] = "It has been blessed by the gods.";
             }
             if (IsCursed())
             {
-                if (PermaCurse)
+                if (Characteristics.PermaCurse)
                 {
                     info[i++] = "It is permanently cursed.";
                 }
-                else if (HeavyCurse)
+                else if (Characteristics.HeavyCurse)
                 {
                     info[i++] = "It is heavily cursed.";
                 }
@@ -2262,23 +2170,23 @@ namespace AngbandOS
                     info[i++] = "It is cursed.";
                 }
             }
-            if (DreadCurse)
+            if (Characteristics.DreadCurse)
             {
                 info[i++] = "It carries an ancient foul curse.";
             }
-            if (IgnoreAcid)
+            if (Characteristics.IgnoreAcid)
             {
                 info[i++] = "It cannot be harmed by acid.";
             }
-            if (IgnoreElec)
+            if (Characteristics.IgnoreElec)
             {
                 info[i++] = "It cannot be harmed by electricity.";
             }
-            if (IgnoreFire)
+            if (Characteristics.IgnoreFire)
             {
                 info[i++] = "It cannot be harmed by fire.";
             }
-            if (IgnoreCold)
+            if (Characteristics.IgnoreCold)
             {
                 info[i++] = "It cannot be harmed by cold.";
             }
@@ -2703,7 +2611,16 @@ namespace AngbandOS
             {
                 return 0;
             }
-            value += ItemType.BaseItemCategory.GetBonusRealValue(this, value);
+            int? typeSpecificValue = ItemType.BaseItemCategory.GetTypeSpecificRealValue(this, value);
+            if (typeSpecificValue == null)
+                return 0;
+            value += typeSpecificValue.Value;
+
+            int? bonusValue = ItemType.BaseItemCategory.GetBonusRealValue(this, value);
+            if (bonusValue == null)
+                return 0;
+
+            value += bonusValue.Value;
             return value;
         }
 
@@ -2808,7 +2725,7 @@ namespace AngbandOS
         private string DescribeActivationEffect()
         {
             RefreshFlagBasedProperties();
-            if (!Activate)
+            if (!Characteristics.Activate)
             {
                 return null;
             }

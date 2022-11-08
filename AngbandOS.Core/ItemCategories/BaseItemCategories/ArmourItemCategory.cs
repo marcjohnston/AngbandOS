@@ -43,12 +43,17 @@ namespace AngbandOS.ItemCategories
         /// </summary>
         public override bool KindIsGood => (ToA >= 0);
 
-        public override int GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(Item item, int value)
         {
-            int bonusValue = 0;
-            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
-            return bonusValue;
+            if (item.BonusArmourClass < 0)
+                return null;
+
+            return (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+        }
+
+        public override int? GetTypeSpecificRealValue(Item item, int value)
+        {
+            return ComputeTypeSpecificRealValue(item, value);
         }
 
         public override bool CanAbsorb(Item item, Item other)

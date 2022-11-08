@@ -5,6 +5,25 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class AmmunitionItemCategory : WeaponItemCategory
     {
+        public override int? GetBonusRealValue(Item item, int value)
+        {
+            if (item.BonusToHit + item.BonusDamage < 0)
+                return null;
+
+            int bonusValue = 0;
+            bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
+            if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
+            {
+                bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
+            }
+            return bonusValue;
+        }
+
+        public override int? GetTypeSpecificRealValue(Item item, int value)
+        {
+            return ComputeTypeSpecificRealValue(item, value);
+        }
+
         public override void ApplyMagic(Item item, int level, int power)
         {
             base.ApplyMagic(item, level, power);

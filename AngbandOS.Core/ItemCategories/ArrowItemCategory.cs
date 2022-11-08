@@ -10,18 +10,6 @@ namespace AngbandOS.ItemCategories
         public override ItemCategory CategoryEnum => ItemCategory.Arrow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
-        public override int GetBonusRealValue(Item item, int value)
-        {
-            int bonusValue = 0;
-            bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
-            {
-                bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
-            }
-            bonusValue += GetTypeSpecificValue(item, value); // Apply type specific values;
-            return bonusValue;
-        }
-
         /// <summary>
         /// Returns true, for all arrows.
         /// </summary>
