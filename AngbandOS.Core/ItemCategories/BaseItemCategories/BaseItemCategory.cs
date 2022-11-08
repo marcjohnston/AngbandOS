@@ -52,6 +52,12 @@ namespace AngbandOS.ItemCategories
             }
         }
 
+        public BaseItemCategory()
+        {
+            FlavorCharacter = Character;
+            FlavorColour = Colour;
+        }
+
         /// <summary>
         /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.  All others types return false.
         /// </summary>

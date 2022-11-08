@@ -2717,6 +2717,7 @@ namespace AngbandOS
             }
             else
             {
+                
                 SaveGame.MsgPrint("REAL VALUE FAILED!");
             }
             return newValue;
