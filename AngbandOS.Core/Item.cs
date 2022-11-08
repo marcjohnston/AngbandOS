@@ -2365,16 +2365,13 @@ namespace AngbandOS
             return true;
         }
 
-        public void ObjectFlagsKnown(FlagSet f1, FlagSet f2, FlagSet f3)
+        public ItemCharacteristics ObjectFlagsKnown()
         {
-            f1.Clear();
-            f2.Clear();
-            f3.Clear();
             if (!IsKnown())
             {
-                return;
+                return new ItemCharacteristics();
             }
-            GetMergedFlags(f1, f2, f3); // THIS IS A MONKEY WRENCH WHERE THE FLAG-BASED PROPERTIES ARE SET TO FALSE -- THE CALLING LOGIC NEEDS TO BE UPDATED
+            return Characteristics;
         }
 
         public void ObjectTried()

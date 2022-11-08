@@ -5496,27 +5496,20 @@ namespace AngbandOS
         public void SelfKnowledge()
         {
             int i = 0, j, k;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             Item oPtr;
             string[] info = new string[128];
             int plev = Player.Level;
             string dummy = "";
+            ItemCharacteristics inventoryCharacteristics = new ItemCharacteristics();
             for (k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
             {
-                FlagSet t1 = new FlagSet();
-                FlagSet t2 = new FlagSet();
-                FlagSet t3 = new FlagSet();
                 oPtr = Player.Inventory[k];
                 if (oPtr.ItemType != null)
                 {
                     continue;
                 }
-                oPtr.GetMergedFlags(t1, t2, t3); // THIS IS ANOTHER MONKEY WRENCH ... WE MERGE ALL MELEE WEAPONS
-                f1.Set(t1);
-                f2.Set(t2);
-                f3.Set(t3);
+                oPtr.RefreshFlagBasedProperties();
+                inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
             switch (Player.RaceIndex)
             {
@@ -6013,130 +6006,131 @@ namespace AngbandOS
             {
                 info[i++] = "Your charisma is sustained.";
             }
-            if (f1.IsSet(ItemFlag1.Str))
+            if (inventoryCharacteristics.Str)
             {
                 info[i++] = "Your strength is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Int))
+            if (inventoryCharacteristics.Int)
             {
                 info[i++] = "Your intelligence is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Wis))
+            if (inventoryCharacteristics.Wis)
             {
                 info[i++] = "Your wisdom is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Dex))
+            if (inventoryCharacteristics.Dex)
             {
                 info[i++] = "Your dexterity is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Con))
+            if (inventoryCharacteristics.Con)
             {
                 info[i++] = "Your constitution is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Cha))
+            if (inventoryCharacteristics.Cha)
             {
                 info[i++] = "Your charisma is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Stealth))
+            if (inventoryCharacteristics.Stealth)
             {
                 info[i++] = "Your stealth is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Search))
+            if (inventoryCharacteristics.Search)
             {
                 info[i++] = "Your searching ability is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Infra))
+            if (inventoryCharacteristics.Infra)
             {
                 info[i++] = "Your infravision is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Tunnel))
+            if (inventoryCharacteristics.Tunnel)
             {
                 info[i++] = "Your digging ability is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Speed))
+            if (inventoryCharacteristics.Speed)
             {
                 info[i++] = "Your speed is affected by your equipment.";
             }
-            if (f1.IsSet(ItemFlag1.Blows))
+            if (inventoryCharacteristics.Blows)
             {
                 info[i++] = "Your attack speed is affected by your equipment.";
             }
             oPtr = Player.Inventory[InventorySlot.MeleeWeapon];
+            oPtr.RefreshFlagBasedProperties();
             if (oPtr.ItemType != null)
             {
-                if (f3.IsSet(ItemFlag3.Blessed))
+                if (oPtr.Characteristics.Blessed)
                 {
                     info[i++] = "Your weapon has been blessed by the gods.";
                 }
-                if (f1.IsSet(ItemFlag1.Chaotic))
+                if (oPtr.Characteristics.Chaotic)
                 {
                     info[i++] = "Your weapon is branded with the Yellow Sign.";
                 }
-                if (f1.IsSet(ItemFlag1.Impact))
+                if (oPtr.Characteristics.Impact)
                 {
                     info[i++] = "The impact of your weapon can cause earthquakes.";
                 }
-                if (f1.IsSet(ItemFlag1.Vorpal))
+                if (oPtr.Characteristics.Vorpal)
                 {
                     info[i++] = "Your weapon is very sharp.";
                 }
-                if (f1.IsSet(ItemFlag1.Vampiric))
+                if (oPtr.Characteristics.Vampiric)
                 {
                     info[i++] = "Your weapon drains life from your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.BrandAcid))
+                if (oPtr.Characteristics.BrandAcid)
                 {
                     info[i++] = "Your weapon melts your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.BrandElec))
+                if (oPtr.Characteristics.BrandElec)
                 {
                     info[i++] = "Your weapon shocks your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.BrandFire))
+                if (oPtr.Characteristics.BrandFire)
                 {
                     info[i++] = "Your weapon burns your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.BrandCold))
+                if (oPtr.Characteristics.BrandCold)
                 {
                     info[i++] = "Your weapon freezes your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.BrandPois))
+                if (oPtr.Characteristics.BrandPois)
                 {
                     info[i++] = "Your weapon poisons your foes.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayAnimal))
+                if (oPtr.Characteristics.SlayAnimal)
                 {
                     info[i++] = "Your weapon strikes at animals with extra force.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayEvil))
+                if (oPtr.Characteristics.SlayEvil)
                 {
                     info[i++] = "Your weapon strikes at evil with extra force.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayUndead))
+                if (oPtr.Characteristics.SlayUndead)
                 {
                     info[i++] = "Your weapon strikes at undead with holy wrath.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayDemon))
+                if (oPtr.Characteristics.SlayDemon)
                 {
                     info[i++] = "Your weapon strikes at demons with holy wrath.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayOrc))
+                if (oPtr.Characteristics.SlayOrc)
                 {
                     info[i++] = "Your weapon is especially deadly against orcs.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayTroll))
+                if (oPtr.Characteristics.SlayTroll)
                 {
                     info[i++] = "Your weapon is especially deadly against trolls.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayGiant))
+                if (oPtr.Characteristics.SlayGiant)
                 {
                     info[i++] = "Your weapon is especially deadly against giants.";
                 }
-                if (f1.IsSet(ItemFlag1.SlayDragon))
+                if (oPtr.Characteristics.SlayDragon)
                 {
                     info[i++] = "Your weapon is especially deadly against dragons.";
                 }
-                if (f1.IsSet(ItemFlag1.KillDragon))
+                if (oPtr.Characteristics.KillDragon)
                 {
                     info[i++] = "Your weapon is a great bane of dragons.";
                 }

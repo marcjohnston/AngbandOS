@@ -297,6 +297,100 @@ namespace AngbandOS.Enumerations
             XtraShots = itemCharacteristics.XtraShots;
         }
 
+        public void Merge(IItemCharacteristics itemCharacteristics)
+        {
+            Blows = Blows || itemCharacteristics.Blows;
+            BrandAcid = BrandAcid || itemCharacteristics.BrandAcid;
+            BrandCold = BrandCold || itemCharacteristics.BrandCold;
+            BrandElec = BrandElec || itemCharacteristics.BrandElec;
+            BrandFire = BrandFire || itemCharacteristics.BrandFire;
+            BrandPois = BrandPois || itemCharacteristics.BrandPois;
+            Cha = Cha || itemCharacteristics.Cha;
+            Chaotic = Chaotic || itemCharacteristics.Chaotic;
+            Con = Con || itemCharacteristics.Con;
+            Dex = Dex || itemCharacteristics.Dex;
+            Impact = Impact || itemCharacteristics.Impact;
+            Infra = Infra || itemCharacteristics.Infra;
+            Int = Int || itemCharacteristics.Int;
+            KillDragon = KillDragon || itemCharacteristics.KillDragon;
+            Search = Search || itemCharacteristics.Search;
+            SlayAnimal = SlayAnimal || itemCharacteristics.SlayAnimal;
+            SlayDemon = SlayDemon || itemCharacteristics.SlayDemon;
+            SlayDragon = SlayDragon || itemCharacteristics.SlayDragon;
+            SlayEvil = SlayEvil || itemCharacteristics.SlayEvil;
+            SlayGiant = SlayGiant || itemCharacteristics.SlayGiant;
+            SlayOrc = SlayOrc || itemCharacteristics.SlayOrc;
+            SlayTroll = SlayTroll || itemCharacteristics.SlayTroll;
+            SlayUndead = SlayUndead || itemCharacteristics.SlayUndead;
+            Speed = Speed || itemCharacteristics.Speed;
+            Stealth = Stealth || itemCharacteristics.Stealth;
+            Str = Str || itemCharacteristics.Str;
+            Tunnel = Tunnel || itemCharacteristics.Tunnel;
+            Vampiric = Vampiric || itemCharacteristics.Vampiric;
+            Vorpal = Vorpal || itemCharacteristics.Vorpal;
+            Wis = Wis || itemCharacteristics.Wis;
+            FreeAct = FreeAct || itemCharacteristics.FreeAct;
+            HoldLife = HoldLife || itemCharacteristics.HoldLife;
+            ImAcid = ImAcid || itemCharacteristics.ImAcid;
+            ImCold = ImCold || itemCharacteristics.ImCold;
+            ImElec = ImElec || itemCharacteristics.ImElec;
+            ImFire = ImFire || itemCharacteristics.ImFire;
+            Reflect = Reflect || itemCharacteristics.Reflect;
+            ResAcid = ResAcid || itemCharacteristics.ResAcid;
+            ResBlind = ResBlind || itemCharacteristics.ResBlind;
+            ResChaos = ResChaos || itemCharacteristics.ResChaos;
+            ResCold = ResCold || itemCharacteristics.ResCold;
+            ResConf = ResConf || itemCharacteristics.ResConf;
+            ResDark = ResDark || itemCharacteristics.ResDark;
+            ResDisen = ResDisen || itemCharacteristics.ResDisen;
+            ResElec = ResElec || itemCharacteristics.ResElec;
+            ResFear = ResFear || itemCharacteristics.ResFear;
+            ResFire = ResFire || itemCharacteristics.ResFire;
+            ResLight = ResLight || itemCharacteristics.ResLight;
+            ResNether = ResNether || itemCharacteristics.ResNether;
+            ResNexus = ResNexus || itemCharacteristics.ResNexus;
+            ResPois = ResPois || itemCharacteristics.ResPois;
+            ResShards = ResShards || itemCharacteristics.ResShards;
+            ResSound = ResSound || itemCharacteristics.ResSound;
+            SustCha = SustCha || itemCharacteristics.SustCha;
+            SustCon = SustCon || itemCharacteristics.SustCon;
+            SustDex = SustDex || itemCharacteristics.SustDex;
+            SustInt = SustInt || itemCharacteristics.SustInt;
+            SustStr = SustStr || itemCharacteristics.SustStr;
+            SustWis = SustWis || itemCharacteristics.SustWis;
+            AntiTheft = AntiTheft || itemCharacteristics.AntiTheft;
+            Activate = Activate || itemCharacteristics.Activate;
+            Aggravate = Aggravate || itemCharacteristics.Aggravate;
+            Blessed = Blessed || itemCharacteristics.Blessed;
+            Cursed = Cursed || itemCharacteristics.Cursed;
+            DrainExp = DrainExp || itemCharacteristics.DrainExp;
+            DreadCurse = DreadCurse || itemCharacteristics.DreadCurse;
+            EasyKnow = EasyKnow || itemCharacteristics.EasyKnow;
+            Feather = Feather || itemCharacteristics.Feather;
+            HeavyCurse = HeavyCurse || itemCharacteristics.HeavyCurse;
+            HideType = HideType || itemCharacteristics.HideType;
+            IgnoreAcid = IgnoreAcid || itemCharacteristics.IgnoreAcid;
+            IgnoreCold = IgnoreCold || itemCharacteristics.IgnoreCold;
+            IgnoreElec = IgnoreElec || itemCharacteristics.IgnoreElec;
+            IgnoreFire = IgnoreFire || itemCharacteristics.IgnoreFire;
+            InstaArt = InstaArt || itemCharacteristics.InstaArt;
+            Lightsource = Lightsource || itemCharacteristics.Lightsource;
+            NoMagic = NoMagic || itemCharacteristics.NoMagic;
+            NoTele = NoTele || itemCharacteristics.NoTele;
+            PermaCurse = PermaCurse || itemCharacteristics.PermaCurse;
+            Regen = Regen || itemCharacteristics.Regen;
+            SeeInvis = SeeInvis || itemCharacteristics.SeeInvis;
+            ShElec = ShElec || itemCharacteristics.ShElec;
+            ShFire = ShFire || itemCharacteristics.ShFire;
+            ShowMods = ShowMods || itemCharacteristics.ShowMods;
+            SlowDigest = SlowDigest || itemCharacteristics.SlowDigest;
+            Telepathy = Telepathy || itemCharacteristics.Telepathy;
+            Teleport = Teleport || itemCharacteristics.Teleport;
+            Wraith = Wraith || itemCharacteristics.Wraith;
+            XtraMight = XtraMight || itemCharacteristics.XtraMight;
+            XtraShots = XtraShots || itemCharacteristics.XtraShots;
+        }
+
         /// <summary>
         /// Creates a new set of ItemCharacteristics by performing a set "OR" operation on two ItemCharacteristics objects provided.
         /// </summary>
@@ -394,6 +488,101 @@ namespace AngbandOS.Enumerations
             Wraith = itemCharacteristicsA.Wraith || itemCharacteristicsB.Wraith;
             XtraMight = itemCharacteristicsA.XtraMight || itemCharacteristicsB.XtraMight;
             XtraShots = itemCharacteristicsA.XtraShots || itemCharacteristicsB.XtraShots;
+        }
+
+        public bool Compare(FlagSet f1, FlagSet f2, FlagSet f3)
+        {
+            if (Blows != f1.IsSet(ItemFlag1.Blows)) return false;
+            if (BrandAcid != f1.IsSet(ItemFlag1.BrandAcid)) return false;
+            if (BrandCold != f1.IsSet(ItemFlag1.BrandCold)) return false;
+            if (BrandElec != f1.IsSet(ItemFlag1.BrandElec)) return false;
+            if (BrandFire != f1.IsSet(ItemFlag1.BrandFire)) return false;
+            if (BrandPois != f1.IsSet(ItemFlag1.BrandPois)) return false;
+            if (Cha != f1.IsSet(ItemFlag1.Cha)) return false;
+            if (Chaotic != f1.IsSet(ItemFlag1.Chaotic)) return false;
+            if (Con != f1.IsSet(ItemFlag1.Con)) return false;
+            if (Dex != f1.IsSet(ItemFlag1.Dex)) return false;
+            if (Impact != f1.IsSet(ItemFlag1.Impact)) return false;
+            if (Infra != f1.IsSet(ItemFlag1.Infra)) return false;
+            if (Int != f1.IsSet(ItemFlag1.Int)) return false;
+            if (KillDragon != f1.IsSet(ItemFlag1.KillDragon)) return false;
+            if (Search != f1.IsSet(ItemFlag1.Search)) return false;
+            if (SlayAnimal != f1.IsSet(ItemFlag1.SlayAnimal)) return false;
+            if (SlayDemon != f1.IsSet(ItemFlag1.SlayDemon)) return false;
+            if (SlayDragon != f1.IsSet(ItemFlag1.SlayDragon)) return false;
+            if (SlayEvil != f1.IsSet(ItemFlag1.SlayEvil)) return false;
+            if (SlayGiant != f1.IsSet(ItemFlag1.SlayGiant)) return false;
+            if (SlayOrc != f1.IsSet(ItemFlag1.SlayOrc)) return false;
+            if (SlayTroll != f1.IsSet(ItemFlag1.SlayTroll)) return false;
+            if (SlayUndead != f1.IsSet(ItemFlag1.SlayUndead)) return false;
+            if (Speed != f1.IsSet(ItemFlag1.Speed)) return false;
+            if (Stealth != f1.IsSet(ItemFlag1.Stealth)) return false;
+            if (Str != f1.IsSet(ItemFlag1.Str)) return false;
+            if (Tunnel != f1.IsSet(ItemFlag1.Tunnel)) return false;
+            if (Vampiric != f1.IsSet(ItemFlag1.Vampiric)) return false;
+            if (Vorpal != f1.IsSet(ItemFlag1.Vorpal)) return false;
+            if (Wis != f1.IsSet(ItemFlag1.Wis)) return false;
+            if (FreeAct != f2.IsSet(ItemFlag2.FreeAct)) return false;
+            if (HoldLife != f2.IsSet(ItemFlag2.HoldLife)) return false;
+            if (ImAcid != f2.IsSet(ItemFlag2.ImAcid)) return false;
+            if (ImCold != f2.IsSet(ItemFlag2.ImCold)) return false;
+            if (ImElec != f2.IsSet(ItemFlag2.ImElec)) return false;
+            if (ImFire != f2.IsSet(ItemFlag2.ImFire)) return false;
+            if (Reflect != f2.IsSet(ItemFlag2.Reflect)) return false;
+            if (ResAcid != f2.IsSet(ItemFlag2.ResAcid)) return false;
+            if (ResBlind != f2.IsSet(ItemFlag2.ResBlind)) return false;
+            if (ResChaos != f2.IsSet(ItemFlag2.ResChaos)) return false;
+            if (ResCold != f2.IsSet(ItemFlag2.ResCold)) return false;
+            if (ResConf != f2.IsSet(ItemFlag2.ResConf)) return false;
+            if (ResDark != f2.IsSet(ItemFlag2.ResDark)) return false;
+            if (ResDisen != f2.IsSet(ItemFlag2.ResDisen)) return false;
+            if (ResElec != f2.IsSet(ItemFlag2.ResElec)) return false;
+            if (ResFear != f2.IsSet(ItemFlag2.ResFear)) return false;
+            if (ResFire != f2.IsSet(ItemFlag2.ResFire)) return false;
+            if (ResLight != f2.IsSet(ItemFlag2.ResLight)) return false;
+            if (ResNether != f2.IsSet(ItemFlag2.ResNether)) return false;
+            if (ResNexus != f2.IsSet(ItemFlag2.ResNexus)) return false;
+            if (ResPois != f2.IsSet(ItemFlag2.ResPois)) return false;
+            if (ResShards != f2.IsSet(ItemFlag2.ResShards)) return false;
+            if (ResSound != f2.IsSet(ItemFlag2.ResSound)) return false;
+            if (SustCha != f2.IsSet(ItemFlag2.SustCha)) return false;
+            if (SustCon != f2.IsSet(ItemFlag2.SustCon)) return false;
+            if (SustDex != f2.IsSet(ItemFlag2.SustDex)) return false;
+            if (SustInt != f2.IsSet(ItemFlag2.SustInt)) return false;
+            if (SustStr != f2.IsSet(ItemFlag2.SustStr)) return false;
+            if (SustWis != f2.IsSet(ItemFlag2.SustWis)) return false;
+            if (AntiTheft != f3.IsSet(ItemFlag3.AntiTheft)) return false;
+            if (Activate != f3.IsSet(ItemFlag3.Activate)) return false;
+            if (Aggravate != f3.IsSet(ItemFlag3.Aggravate)) return false;
+            if (Blessed != f3.IsSet(ItemFlag3.Blessed)) return false;
+            if (Cursed != f3.IsSet(ItemFlag3.Cursed)) return false;
+            if (DrainExp != f3.IsSet(ItemFlag3.DrainExp)) return false;
+            if (DreadCurse != f3.IsSet(ItemFlag3.DreadCurse)) return false;
+            if (EasyKnow != f3.IsSet(ItemFlag3.EasyKnow)) return false;
+            if (Feather != f3.IsSet(ItemFlag3.Feather)) return false;
+            if (HeavyCurse != f3.IsSet(ItemFlag3.HeavyCurse)) return false;
+            if (HideType != f3.IsSet(ItemFlag3.HideType)) return false;
+            if (IgnoreAcid != f3.IsSet(ItemFlag3.IgnoreAcid)) return false;
+            if (IgnoreCold != f3.IsSet(ItemFlag3.IgnoreCold)) return false;
+            if (IgnoreElec != f3.IsSet(ItemFlag3.IgnoreElec)) return false;
+            if (IgnoreFire != f3.IsSet(ItemFlag3.IgnoreFire)) return false;
+            if (InstaArt != f3.IsSet(ItemFlag3.InstaArt)) return false;
+            if (Lightsource != f3.IsSet(ItemFlag3.Lightsource)) return false;
+            if (NoMagic != f3.IsSet(ItemFlag3.NoMagic)) return false;
+            if (NoTele != f3.IsSet(ItemFlag3.NoTele)) return false;
+            if (PermaCurse != f3.IsSet(ItemFlag3.PermaCurse)) return false;
+            if (Regen != f3.IsSet(ItemFlag3.Regen)) return false;
+            if (SeeInvis != f3.IsSet(ItemFlag3.SeeInvis)) return false;
+            if (ShElec != f3.IsSet(ItemFlag3.ShElec)) return false;
+            if (ShFire != f3.IsSet(ItemFlag3.ShFire)) return false;
+            if (ShowMods != f3.IsSet(ItemFlag3.ShowMods)) return false;
+            if (SlowDigest != f3.IsSet(ItemFlag3.SlowDigest)) return false;
+            if (Telepathy != f3.IsSet(ItemFlag3.Telepathy)) return false;
+            if (Teleport != f3.IsSet(ItemFlag3.Teleport)) return false;
+            if (Wraith != f3.IsSet(ItemFlag3.Wraith)) return false;
+            if (XtraMight != f3.IsSet(ItemFlag3.XtraMight)) return false;
+            if (XtraShots != f3.IsSet(ItemFlag3.XtraShots)) return false;
+            return true;
         }
 
         /// <summary>
@@ -542,29 +731,34 @@ namespace AngbandOS.Enumerations
         public const uint Con = 0x00000010;
         public const uint Cha = 0x00000020;
 
-        public const uint Blows = 0x00002000;
-        public const uint BrandAcid = 0x10000000;
-        public const uint BrandCold = 0x80000000;
-        public const uint BrandElec = 0x20000000;
-        public const uint BrandFire = 0x40000000;
-        public const uint BrandPois = 0x08000000;
-        public const uint Chaotic = 0x00004000;
-        public const uint Impact = 0x04000000;
-        public const uint Infra = 0x00000400;
-        public const uint KillDragon = 0x01000000;
+        public const uint Stealth = 0x00000100;
         public const uint Search = 0x00000200;
+        public const uint Infra = 0x00000400;
+        public const uint Tunnel = 0x00000800;
+
+        public const uint Speed = 0x00001000;
+        public const uint Blows = 0x00002000;
+        public const uint Chaotic = 0x00004000;
+        public const uint Vampiric = 0x00008000;
+
         public const uint SlayAnimal = 0x00010000;
-        public const uint SlayDemon = 0x00080000;
-        public const uint SlayDragon = 0x00800000;
         public const uint SlayEvil = 0x00020000;
-        public const uint SlayGiant = 0x00400000;
+        public const uint SlayUndead = 0x00040000;
+        public const uint SlayDemon = 0x00080000;
+
         public const uint SlayOrc = 0x00100000;
         public const uint SlayTroll = 0x00200000;
-        public const uint SlayUndead = 0x00040000;
-        public const uint Speed = 0x00001000;
-        public const uint Stealth = 0x00000100;
-        public const uint Tunnel = 0x00000800;
-        public const uint Vampiric = 0x00008000;
+        public const uint SlayGiant = 0x00400000;
+        public const uint SlayDragon = 0x00800000;
+
+        public const uint KillDragon = 0x01000000;
         public const uint Vorpal = 0x02000000;
+        public const uint Impact = 0x04000000;
+        public const uint BrandPois = 0x08000000;
+
+        public const uint BrandAcid = 0x10000000;
+        public const uint BrandElec = 0x20000000;
+        public const uint BrandFire = 0x40000000;
+        public const uint BrandCold = 0x80000000;
     }
 }

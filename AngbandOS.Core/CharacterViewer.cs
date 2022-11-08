@@ -211,6 +211,44 @@ namespace AngbandOS
             }
         }
 
+        private void ShowBonus(bool hasSustain, bool hasStat, int typeSpecificValue, int row, int col)
+        {
+            if (hasSustain)
+            {
+                // Sustains show a green 's'
+                SaveGame.Print(Colour.Green, "s", row, col);
+            }
+            else if (hasStat)
+            {
+                // Show stat
+                if (typeSpecificValue <= -10)
+                {
+                    // Max display for negative value
+                    SaveGame.Print(Colour.Red, "*", row, col);
+                }
+                else if (typeSpecificValue < 0)
+                {
+                    // Display negative value
+                    SaveGame.Print(Colour.Red, (char)('0' - (char)typeSpecificValue), row, col);
+                }
+                else if (typeSpecificValue >= 10)
+                {
+                    // Display max 
+                    SaveGame.Print(Colour.Green, "*", row, col);
+                }
+                else if (typeSpecificValue > 0)
+                {
+                    // Display positive value
+                    SaveGame.Print(Colour.Green, (char)('0' + (char)typeSpecificValue), row, col);
+                }
+            }
+            else
+            {
+                // Display neutral
+                SaveGame.Print(Colour.Grey, ".", row, col);
+            }
+        }
+
         /// <summary>
         /// Display the ability scores including details of any modifiers to them
         /// </summary>
@@ -267,52 +305,28 @@ namespace AngbandOS
                     SaveGame.Print(Colour.Red, buf, row + i, statCol + 35);
                 }
             }
-            // Printe the bonuses for each score and each item we have
+
+            // Print the bonuses for each score and each item we have
             int col = statCol + 44;
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
             SaveGame.Print(Colour.Blue, "Modifications", row + 6, col);
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item item = _player.Inventory[i];
                 // Only extract known bonuses, not full bonuses
-                item.ObjectFlagsKnown(f1, f2, f3);
-                for (int stat = 0; stat < 6; stat++) // TODO: These stats need to be enumerated.
-                {
-                    a = Colour.Grey;
-                    c = '.';
-                    if (f1.IsSet(1u << stat))
-                    {
-                        c = '*';
-                        if (item.TypeSpecificValue > 0)
-                        {
-                            a = Colour.Green;
-                            if (item.TypeSpecificValue < 10)
-                            {
-                                c = (char)('0' + (char)item.TypeSpecificValue);
-                            }
-                        }
-                        if (item.TypeSpecificValue < 0)
-                        {
-                            a = Colour.Red;
-                            if (item.TypeSpecificValue < 10)
-                            {
-                                c = (char)('0' - (char)item.TypeSpecificValue);
-                            }
-                        }
-                    }
-                    if (f2.IsSet(1u << stat))
-                    {
-                        a = Colour.Green;
-                        c = 's';
-                    }
-                    SaveGame.Print(a, c, row + stat, col);
-                }
+                ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Dex, item.TypeSpecificValue, row + 3, col);
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Con, item.TypeSpecificValue, row + 4, col);
+                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
                 col++;
             }
             // Fake a set of item flags for our character to show along with those of the real items
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
             _player.GetAbilitiesAsItemFlags(f1, f2, f3);
             for (int stat = 0; stat < 6; stat++) // TODO: These stats need to be enumerated.
             {

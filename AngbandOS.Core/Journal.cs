@@ -116,9 +116,6 @@ namespace AngbandOS
         {
             int n;
             int top = 20 * mode;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             FlagSet[][] b = new FlagSet[14][];
             for (int i = 0; i < 14; i++)
             {
@@ -132,15 +129,107 @@ namespace AngbandOS
             {
                 n = i - InventorySlot.MeleeWeapon;
                 Item oPtr = SaveGame.Player.Inventory[i];
-                oPtr.ObjectFlagsKnown(f1, f2, f3);
-                b[n][0].Set(f1.LowOrder);
-                b[n][1].Set(f1.HighOrder);
-                b[n][2].Set(f2.LowOrder);
-                b[n][3].Set(f2.HighOrder);
-                b[n][4].Set(f3.LowOrder);
-                b[n][5].Set(f3.HighOrder);
+                ItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                if (itemCharacteristics.Str) b[n][0].Set(ItemFlag1.Str);
+                if (itemCharacteristics.Int) b[n][0].Set(ItemFlag1.Int);
+                if (itemCharacteristics.Wis) b[n][0].Set(ItemFlag1.Wis);
+                if (itemCharacteristics.Dex) b[n][0].Set(ItemFlag1.Dex);
+                if (itemCharacteristics.Con) b[n][0].Set(ItemFlag1.Con);
+                if (itemCharacteristics.Cha) b[n][0].Set(ItemFlag1.Cha);
+                if (itemCharacteristics.Stealth) b[n][0].Set(ItemFlag1.Stealth);
+                if (itemCharacteristics.Search) b[n][0].Set(ItemFlag1.Search);
+                if (itemCharacteristics.Infra) b[n][0].Set(ItemFlag1.Infra);
+                if (itemCharacteristics.Tunnel) b[n][0].Set(ItemFlag1.Tunnel);
+                if (itemCharacteristics.Speed) b[n][0].Set(ItemFlag1.Speed);
+                if (itemCharacteristics.Blows) b[n][0].Set(ItemFlag1.Blows);
+                if (itemCharacteristics.Chaotic) b[n][0].Set(ItemFlag1.Chaotic);
+                if (itemCharacteristics.Vampiric) b[n][0].Set(ItemFlag1.Vampiric);
+
+                if (itemCharacteristics.SlayAnimal) b[n][1].Set(ItemFlag1.SlayAnimal);
+                if (itemCharacteristics.SlayEvil) b[n][1].Set(ItemFlag1.SlayEvil);
+                if (itemCharacteristics.SlayUndead) b[n][1].Set(ItemFlag1.SlayUndead);
+                if (itemCharacteristics.SlayDemon) b[n][1].Set(ItemFlag1.SlayDemon);
+                if (itemCharacteristics.SlayOrc) b[n][1].Set(ItemFlag1.SlayOrc);
+                if (itemCharacteristics.SlayTroll) b[n][1].Set(ItemFlag1.SlayTroll);
+                if (itemCharacteristics.SlayGiant) b[n][1].Set(ItemFlag1.SlayGiant);
+                if (itemCharacteristics.SlayDragon) b[n][1].Set(ItemFlag1.SlayDragon);
+                if (itemCharacteristics.KillDragon) b[n][1].Set(ItemFlag1.KillDragon);
+                if (itemCharacteristics.Vorpal) b[n][1].Set(ItemFlag1.Vorpal);
+                if (itemCharacteristics.Impact) b[n][1].Set(ItemFlag1.Impact);
+                if (itemCharacteristics.BrandPois) b[n][1].Set(ItemFlag1.BrandPois);
+                if (itemCharacteristics.BrandAcid) b[n][1].Set(ItemFlag1.BrandAcid);
+                if (itemCharacteristics.BrandElec) b[n][1].Set(ItemFlag1.BrandElec);
+                if (itemCharacteristics.BrandFire) b[n][1].Set(ItemFlag1.BrandFire);
+                if (itemCharacteristics.BrandCold) b[n][1].Set(ItemFlag1.BrandCold);
+
+                if (itemCharacteristics.SustStr) b[n][2].Set(ItemFlag2.SustStr);
+                if (itemCharacteristics.SustInt) b[n][2].Set(ItemFlag2.SustInt);
+                if (itemCharacteristics.SustWis) b[n][2].Set(ItemFlag2.SustWis);
+                if (itemCharacteristics.SustDex) b[n][2].Set(ItemFlag2.SustDex);
+                if (itemCharacteristics.SustCon) b[n][2].Set(ItemFlag2.SustCon);
+                if (itemCharacteristics.SustCha) b[n][2].Set(ItemFlag2.SustCha);
+                if (itemCharacteristics.ImAcid) b[n][2].Set(ItemFlag2.ImAcid);
+                if (itemCharacteristics.ImElec) b[n][2].Set(ItemFlag2.ImElec);
+                if (itemCharacteristics.ImFire) b[n][2].Set(ItemFlag2.ImFire);
+                if (itemCharacteristics.ImCold) b[n][2].Set(ItemFlag2.ImCold);
+                if (itemCharacteristics.Reflect) b[n][2].Set(ItemFlag2.Reflect);
+                if (itemCharacteristics.FreeAct) b[n][2].Set(ItemFlag2.FreeAct);
+                if (itemCharacteristics.HoldLife) b[n][2].Set(ItemFlag2.HoldLife);
+
+                if (itemCharacteristics.ResAcid) b[n][3].Set(ItemFlag2.ResAcid);
+                if (itemCharacteristics.ResElec) b[n][3].Set(ItemFlag2.ResElec);
+                if (itemCharacteristics.ResFire) b[n][3].Set(ItemFlag2.ResFire);
+                if (itemCharacteristics.ResCold) b[n][3].Set(ItemFlag2.ResCold);
+                if (itemCharacteristics.ResPois) b[n][3].Set(ItemFlag2.ResPois);
+                if (itemCharacteristics.ResFear) b[n][3].Set(ItemFlag2.ResFear);
+                if (itemCharacteristics.ResLight) b[n][3].Set(ItemFlag2.ResLight);
+                if (itemCharacteristics.ResDark) b[n][3].Set(ItemFlag2.ResDark);
+                if (itemCharacteristics.ResBlind) b[n][3].Set(ItemFlag2.ResBlind);
+                if (itemCharacteristics.ResConf) b[n][3].Set(ItemFlag2.ResConf);
+                if (itemCharacteristics.ResSound) b[n][3].Set(ItemFlag2.ResSound);
+                if (itemCharacteristics.ResShards) b[n][3].Set(ItemFlag2.ResShards);
+                if (itemCharacteristics.ResNether) b[n][3].Set(ItemFlag2.ResNether);
+                if (itemCharacteristics.ResNexus) b[n][3].Set(ItemFlag2.ResNexus);
+                if (itemCharacteristics.ResChaos) b[n][3].Set(ItemFlag2.ResChaos);
+                if (itemCharacteristics.ResDisen) b[n][3].Set(ItemFlag2.ResDisen);
+
+                if (itemCharacteristics.ShFire) b[n][4].Set(ItemFlag3.ShFire);
+                if (itemCharacteristics.ShElec) b[n][4].Set(ItemFlag3.ShElec);
+                if (itemCharacteristics.AntiTheft) b[n][4].Set(ItemFlag3.AntiTheft);
+                if (itemCharacteristics.NoTele) b[n][4].Set(ItemFlag3.NoTele);
+                if (itemCharacteristics.NoMagic) b[n][4].Set(ItemFlag3.NoMagic);
+                if (itemCharacteristics.Wraith) b[n][4].Set(ItemFlag3.Wraith);
+                if (itemCharacteristics.DreadCurse) b[n][4].Set(ItemFlag3.DreadCurse);
+                if (itemCharacteristics.EasyKnow) b[n][4].Set(ItemFlag3.EasyKnow);
+                if (itemCharacteristics.HideType) b[n][4].Set(ItemFlag3.HideType);
+                if (itemCharacteristics.ShowMods) b[n][4].Set(ItemFlag3.ShowMods);
+                if (itemCharacteristics.InstaArt) b[n][4].Set(ItemFlag3.InstaArt);
+                if (itemCharacteristics.Feather) b[n][4].Set(ItemFlag3.Feather);
+                if (itemCharacteristics.Lightsource) b[n][4].Set(ItemFlag3.Lightsource);
+                if (itemCharacteristics.SeeInvis) b[n][4].Set(ItemFlag3.SeeInvis);
+                if (itemCharacteristics.Telepathy) b[n][4].Set(ItemFlag3.Telepathy);
+
+                if (itemCharacteristics.SlowDigest) b[n][5].Set(ItemFlag3.SlowDigest);
+                if (itemCharacteristics.Regen) b[n][5].Set(ItemFlag3.Regen);
+                if (itemCharacteristics.XtraMight) b[n][5].Set(ItemFlag3.XtraMight);
+                if (itemCharacteristics.XtraShots) b[n][5].Set(ItemFlag3.XtraShots);
+                if (itemCharacteristics.IgnoreAcid) b[n][5].Set(ItemFlag3.IgnoreAcid);
+                if (itemCharacteristics.IgnoreElec) b[n][5].Set(ItemFlag3.IgnoreElec);
+                if (itemCharacteristics.IgnoreFire) b[n][5].Set(ItemFlag3.IgnoreFire);
+                if (itemCharacteristics.IgnoreCold) b[n][5].Set(ItemFlag3.IgnoreCold);
+                if (itemCharacteristics.Activate) b[n][5].Set(ItemFlag3.Activate);
+                if (itemCharacteristics.DrainExp) b[n][5].Set(ItemFlag3.DrainExp);
+                if (itemCharacteristics.Teleport) b[n][5].Set(ItemFlag3.Teleport);
+                if (itemCharacteristics.Aggravate) b[n][5].Set(ItemFlag3.Aggravate);
+                if (itemCharacteristics.Blessed) b[n][5].Set(ItemFlag3.Blessed);
+                if (itemCharacteristics.Cursed) b[n][5].Set(ItemFlag3.Cursed);
+                if (itemCharacteristics.HeavyCurse) b[n][5].Set(ItemFlag3.HeavyCurse);
+                if (itemCharacteristics.PermaCurse) b[n][5].Set(ItemFlag3.PermaCurse);
             }
             n = 13;
+            FlagSet f1 = new FlagSet();
+            FlagSet f2 = new FlagSet();
+            FlagSet f3 = new FlagSet();
             SaveGame.Player.GetAbilitiesAsItemFlags(f1, f2, f3);
             b[n][0].Set(f1.LowOrder);
             b[n][1].Set(f1.HighOrder);
