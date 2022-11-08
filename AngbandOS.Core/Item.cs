@@ -1622,6 +1622,54 @@ namespace AngbandOS
         /// </summary>
         public void RefreshFlagBasedProperties()
         {
+            //// All characteristics are set to false.
+            //Characteristics = new ItemCharacteristics();
+            //if (ItemType == null)
+            //{
+            //    return;
+            //}
+
+            //// Merge the characteristics from the base item category.
+            //Characteristics.Merge(ItemType.BaseItemCategory);
+
+            //// Now merge the characteristics from the fixed artifact, if there is one.
+            //if (FixedArtifactIndex != 0)
+            //{
+            //    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+            //    Characteristics.Merge(aPtr.FixedArtifactItemCharacteristics);
+            //}
+
+            //// Now merge the characteristics from the rare item type, if there is one.
+            //if (RareItemTypeIndex != Enumerations.RareItemType.None)
+            //{
+            //    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
+            //    Characteristics = new ItemCharacteristics(Characteristics, ePtr.RareItemCharacteristics);
+            //}
+
+            //Characteristics = new ItemCharacteristics(Characteristics, RandartFlags);
+
+            //if (!string.IsNullOrEmpty(RandartName))
+            //{
+            //    switch (BonusPowerType)
+            //    {
+            //        case Enumerations.RareItemType.SpecialSustain:
+            //            {
+            //                f2.Set(BonusPowerSubType.SpecialSustainFlag);
+            //                break;
+            //            }
+            //        case Enumerations.RareItemType.SpecialPower:
+            //            {
+            //                f2.Set(BonusPowerSubType.SpecialPowerFlag);
+            //                break;
+            //            }
+            //        case Enumerations.RareItemType.SpecialAbility:
+            //            {
+            //                f2.Set(BonusPowerSubType.SpecialAbilityFlag);
+            //                break;
+            //            }
+            //    }
+            //}
+
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
@@ -1720,6 +1768,7 @@ namespace AngbandOS
             Characteristics.XtraMight = f3.IsSet(ItemFlag3.XtraMight);
             Characteristics.XtraShots = f3.IsSet(ItemFlag3.XtraShots);
         }
+
         /// <summary>
         /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
         /// instead of GetMergedFlags and then use any of the flag-based properties as replacement functionality.

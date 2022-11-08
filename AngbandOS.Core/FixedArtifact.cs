@@ -19,6 +19,7 @@ namespace AngbandOS
         public readonly FlagSet Flags1 = new FlagSet();
         public readonly FlagSet Flags2 = new FlagSet();
         public readonly FlagSet Flags3 = new FlagSet();
+        public readonly ItemCharacteristics FixedArtifactItemCharacteristics = new ItemCharacteristics();
         public int Ac;
         public int Cost;
 
@@ -60,6 +61,8 @@ namespace AngbandOS
             ToH = baseFixedArtifact.ToH;
             Weight = baseFixedArtifact.Weight;
             HasOwnType = baseFixedArtifact.HasOwnType;
+
+            FixedArtifactItemCharacteristics.Merge(baseFixedArtifact);
             Flags1.Set(baseFixedArtifact.Blows ? ItemFlag1.Blows : 0);
             Flags1.Set(baseFixedArtifact.BrandAcid ? ItemFlag1.BrandAcid : 0);
             Flags1.Set(baseFixedArtifact.BrandCold ? ItemFlag1.BrandCold : 0);

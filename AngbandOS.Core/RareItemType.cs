@@ -18,7 +18,7 @@ namespace AngbandOS
         public readonly FlagSet Flags1 = new FlagSet();
         public readonly FlagSet Flags2 = new FlagSet();
         public readonly FlagSet Flags3 = new FlagSet();
-        public readonly ItemCharacteristics RareItemCharacteristcs = new ItemCharacteristics();
+        public readonly ItemCharacteristics RareItemCharacteristics = new ItemCharacteristics();
         public int Cost;
         public int Level;
         public int MaxPval;
@@ -47,7 +47,7 @@ namespace AngbandOS
             Rarity = baseRareItemType.Rarity;
             Rating = baseRareItemType.Rating;
             Slot = baseRareItemType.Slot;
-            RareItemCharacteristcs.Merge(baseRareItemType);
+            RareItemCharacteristics.Merge(baseRareItemType);
             Flags1.Set(baseRareItemType.Blows ? ItemFlag1.Blows : 0);
             Flags1.Set(baseRareItemType.BrandAcid ? ItemFlag1.BrandAcid : 0);
             Flags1.Set(baseRareItemType.BrandCold ? ItemFlag1.BrandCold : 0);
