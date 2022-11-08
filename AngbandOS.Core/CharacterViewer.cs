@@ -40,10 +40,10 @@ namespace AngbandOS
                 Colour colour = Colour.Background;
                 char character = ' ';
                 // Only print items that exist
-                if (item.ItemType != null)
+                if (item.BaseItemCategory != null)
                 {
-                    colour = item.ItemType.BaseItemCategory.FlavorColour;
-                    character = item.ItemType.BaseItemCategory.FlavorCharacter;
+                    colour = item.BaseItemCategory.FlavorColour;
+                    character = item.BaseItemCategory.FlavorCharacter;
                 }
                 saveGame.Print(colour, character, screenRow, screenCol + i - InventorySlot.MeleeWeapon);
             }

@@ -62,13 +62,13 @@ namespace AngbandOS.StoreCommands
                         return;
                     }
                     // If it was something we might want to destroy again, ask
-                    if (!item.ItemType.BaseItemCategory.HasQuality && item.ItemType.BaseItemCategory.CategoryEnum != ItemCategory.Chest)
+                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemCategory.Chest)
                     {
                         if (item.IsKnown())
                         {
                             if (saveGame.GetCheck($"Always destroy {itemName}?"))
                             {
-                                item.ItemType.BaseItemCategory.Stompable[0] = true;
+                                item.BaseItemCategory.Stompable[0] = true;
                             }
                         }
                     }

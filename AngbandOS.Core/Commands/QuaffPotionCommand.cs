@@ -47,9 +47,9 @@ namespace AngbandOS.Commands
             saveGame.PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
             saveGame.EnergyUse = 100;
-            int itemLevel = item.ItemType.BaseItemCategory.Level;
+            int itemLevel = item.BaseItemCategory.Level;
             // Do the actual potion effect
-            PotionItemCategory potion = (PotionItemCategory)item.ItemType.BaseItemCategory; // The item will be a potion.
+            PotionItemCategory potion = (PotionItemCategory)item.BaseItemCategory; // The item will be a potion.
             bool identified = potion.Quaff(saveGame);
 
             // Skeletons are messy drinkers

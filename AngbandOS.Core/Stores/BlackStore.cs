@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 using AngbandOS.StaticData;
 using System;
 
@@ -62,9 +63,8 @@ namespace AngbandOS.Stores
         protected override Item CreateItem()
         {
             int level;
-            ItemType itemType;
             level = 35 + Program.Rng.RandomLessThan(35);
-            itemType = SaveGame.RandomItemType(level, false);
+            BaseItemCategory itemType = SaveGame.RandomItemType(level, false);
             if (itemType == null)
             {
                 return null; ;

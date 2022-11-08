@@ -54,8 +54,8 @@ namespace AngbandOS.Commands
                 saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
             string missileName = missile.Description(false, 3);
-            Colour missileColour = missile.ItemType.BaseItemCategory.FlavorColour;
-            char missileCharacter = missile.ItemType.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = missile.BaseItemCategory.FlavorColour;
+            char missileCharacter = missile.BaseItemCategory.FlavorCharacter;
             // Thrown distance is based on the weight of the missile
             int multiplier = 10 + (2 * (damageMultiplier - 1));
             int divider = missile.Weight > 10 ? missile.Weight : 10;
@@ -165,7 +165,7 @@ namespace AngbandOS.Commands
                             // Let the player know what happens to the monster
                             saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, damage);
                             if ((monster.Mind & Constants.SmFriendly) != 0 &&
-                                missile.ItemType.BaseItemCategory.CategoryEnum != ItemCategory.Potion)
+                                missile.BaseItemCategory.CategoryEnum != ItemCategory.Potion)
                             {
                                 string mName = monster.MonsterDesc(0);
                                 saveGame.MsgPrint($"{mName} gets angry!");
@@ -185,11 +185,11 @@ namespace AngbandOS.Commands
             // There's a chance of breakage if we hit a creature
             int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
             // If we hit with a potion, the potion might affect the creature
-            if (missile.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
+            if (missile.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
             {
                 if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemCategory potion = (PotionItemCategory)missile.ItemType.BaseItemCategory;
+                    PotionItemCategory potion = (PotionItemCategory)missile.BaseItemCategory;
                     saveGame.MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(saveGame, 1, y, x))
                     {

@@ -215,7 +215,7 @@ namespace AngbandOS.Patrons
                             reward = new SwordBladeofChaos();
                             break;
                     }
-                    qPtr.AssignItemType(new ItemType(reward));
+                    qPtr.AssignItemType(reward);
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);

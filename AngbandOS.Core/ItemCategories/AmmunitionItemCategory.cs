@@ -12,9 +12,9 @@ namespace AngbandOS.ItemCategories
 
             int bonusValue = 0;
             bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.ItemType.BaseItemCategory.Dd && item.DamageDiceSides == item.ItemType.BaseItemCategory.Ds)
+            if (item.DamageDice > item.BaseItemCategory.Dd && item.DamageDiceSides == item.BaseItemCategory.Ds)
             {
-                bonusValue += (item.DamageDice - item.ItemType.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
+                bonusValue += (item.DamageDice - item.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
             }
             return bonusValue;
         }

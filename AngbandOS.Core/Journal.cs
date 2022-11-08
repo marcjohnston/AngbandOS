@@ -11,6 +11,7 @@ using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS
 {
@@ -1060,14 +1061,14 @@ namespace AngbandOS
             return val.Trim();
         }
 
-        private void WorthlessItemChestSelection(ItemType kPtr)
+        private void WorthlessItemChestSelection(BaseItemCategory kPtr)
         {
             string[] qualityText = new[] { "Empty", "Unlocked", "Locked", "Trapped" };
             _menuLength = 0;
             for (int i = 0; i < 4; i++)
             {
                 _menuItem[i] = qualityText[i];
-                _menuColours[i] = kPtr.BaseItemCategory.Stompable[i] ? Colour.Red : Colour.Green;
+                _menuColours[i] = kPtr.Stompable[i] ? Colour.Red : Colour.Green;
             }
             _menuLength = 4;
             int menu = 1;
@@ -1090,8 +1091,8 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        kPtr.BaseItemCategory.Stompable[menu] = !kPtr.BaseItemCategory.Stompable[menu];
-                        _menuColours[menu] = kPtr.BaseItemCategory.Stompable[menu] ? Colour.Red : Colour.Green;
+                        kPtr.Stompable[menu] = !kPtr.Stompable[menu];
+                        _menuColours[menu] = kPtr.Stompable[menu] ? Colour.Red : Colour.Green;
                         break;
                     }
                     if (c == '4')
@@ -1102,14 +1103,14 @@ namespace AngbandOS
             }
         }
 
-        private void WorthlessItemQualitySelection(ItemType kPtr)
+        private void WorthlessItemQualitySelection(BaseItemCategory kPtr)
         {
             string[] qualityText = new[] { "Bad", "Average", "Good", "Excellent" };
             _menuLength = 0;
             for (int i = 0; i < 4; i++)
             {
                 _menuItem[i] = qualityText[i];
-                _menuColours[i] = kPtr.BaseItemCategory.Stompable[i] ? Colour.Red : Colour.Green;
+                _menuColours[i] = kPtr.Stompable[i] ? Colour.Red : Colour.Green;
             }
             _menuLength = 4;
             int menu = 1;
@@ -1132,8 +1133,8 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        kPtr.BaseItemCategory.Stompable[menu] = !kPtr.BaseItemCategory.Stompable[menu];
-                        _menuColours[menu] = kPtr.BaseItemCategory.Stompable[menu] ? Colour.Red : Colour.Green;
+                        kPtr.Stompable[menu] = !kPtr.Stompable[menu];
+                        _menuColours[menu] = kPtr.Stompable[menu] ? Colour.Red : Colour.Green;
                         break;
                     }
                     if (c == '4')
@@ -1149,21 +1150,21 @@ namespace AngbandOS
             _menuLength = 0;
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = SaveGame.ItemTypes[i];
-                if (kPtr.BaseItemCategory.CategoryEnum == tval)
+                BaseItemCategory kPtr = SaveGame.ItemTypes[i];
+                if (kPtr.CategoryEnum == tval)
                 {
-                    if (kPtr.BaseItemCategory.InstaArt)
+                    if (kPtr.InstaArt)
                     {
                         continue;
                     }
-                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
-                    if (kPtr.BaseItemCategory.HasQuality || kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                    _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
+                    if (kPtr.HasQuality || kPtr.CategoryEnum == ItemCategory.Chest)
                     {
                         _menuColours[_menuLength] = Colour.Blue;
                     }
                     else
                     {
-                        _menuColours[_menuLength] = kPtr.BaseItemCategory.Stompable[0] ? Colour.Red : Colour.Green;
+                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                     }
                     _menuIndices[_menuLength] = i;
                     _menuLength++;
@@ -1189,55 +1190,55 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        ItemType kPtr = SaveGame.ItemTypes[_menuIndices[menu]];
-                        if (kPtr.BaseItemCategory.HasQuality)
+                        BaseItemCategory kPtr = SaveGame.ItemTypes[_menuIndices[menu]];
+                        if (kPtr.HasQuality)
                         {
                             WorthlessItemQualitySelection(kPtr);
                             _menuLength = 0;
                             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
-                                if (kPtr.BaseItemCategory.CategoryEnum == tval)
+                                if (kPtr.CategoryEnum == tval)
                                 {
-                                    if (kPtr.BaseItemCategory.InstaArt)
+                                    if (kPtr.InstaArt)
                                     {
                                         continue;
                                     }
-                                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
-                                    if (kPtr.BaseItemCategory.HasQuality)
+                                    _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
+                                    if (kPtr.HasQuality)
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
                                     }
                                     else
                                     {
-                                        _menuColours[_menuLength] = kPtr.BaseItemCategory.Stompable[0] ? Colour.Red : Colour.Green;
+                                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                                     }
                                     _menuIndices[_menuLength] = i;
                                     _menuLength++;
                                 }
                             }
                         }
-                        else if (kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                        else if (kPtr.CategoryEnum == ItemCategory.Chest)
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
                             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
-                                if (kPtr.BaseItemCategory.CategoryEnum == tval)
+                                if (kPtr.CategoryEnum == tval)
                                 {
-                                    if (kPtr.BaseItemCategory.InstaArt)
+                                    if (kPtr.InstaArt)
                                     {
                                         continue;
                                     }
-                                    _menuItem[_menuLength] = StripDownName(kPtr.BaseItemCategory.FriendlyName);
-                                    if (kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                                    _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
+                                    if (kPtr.CategoryEnum == ItemCategory.Chest)
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
                                     }
                                     else
                                     {
-                                        _menuColours[_menuLength] = kPtr.BaseItemCategory.Stompable[0] ? Colour.Red : Colour.Green;
+                                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                                     }
                                     _menuIndices[_menuLength] = i;
                                     _menuLength++;
@@ -1246,8 +1247,8 @@ namespace AngbandOS
                         }
                         else
                         {
-                            kPtr.BaseItemCategory.Stompable[0] = !kPtr.BaseItemCategory.Stompable[0];
-                            _menuColours[menu] = kPtr.BaseItemCategory.Stompable[0] ? Colour.Red : Colour.Green;
+                            kPtr.Stompable[0] = !kPtr.Stompable[0];
+                            _menuColours[menu] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                         }
                         break;
                     }

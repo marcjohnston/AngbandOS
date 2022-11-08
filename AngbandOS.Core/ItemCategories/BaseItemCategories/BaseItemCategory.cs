@@ -315,7 +315,7 @@ namespace AngbandOS.ItemCategories
         /// <returns></returns>
         public virtual bool IsStompable(Item item)
         {
-            if (item.ItemType.BaseItemCategory.HasQuality)
+            if (item.BaseItemCategory.HasQuality)
             {
                 switch (item.GetDetailedFeeling())
                 {
@@ -323,16 +323,16 @@ namespace AngbandOS.ItemCategories
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
+                        return item.BaseItemCategory.Stompable[StompableType.Broken];
 
                     case "average":
-                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Average];
+                        return item.BaseItemCategory.Stompable[StompableType.Average];
 
                     case "good":
-                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Good];
+                        return item.BaseItemCategory.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return item.ItemType.BaseItemCategory.Stompable[StompableType.Excellent];
+                        return item.BaseItemCategory.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -341,7 +341,7 @@ namespace AngbandOS.ItemCategories
                         throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
                 }
             }
-            return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
+            return item.BaseItemCategory.Stompable[StompableType.Broken];
         }
 
         //    public virtual bool CanSlay => false;
@@ -528,7 +528,7 @@ namespace AngbandOS.ItemCategories
         /// <returns></returns>
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
-            string pluralizedName = ApplyPlurizationMacro(item.ItemType.BaseItemCategory.FriendlyName, item.Count);
+            string pluralizedName = ApplyPlurizationMacro(item.BaseItemCategory.FriendlyName, item.Count);
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 
@@ -646,7 +646,7 @@ namespace AngbandOS.ItemCategories
             {
                 tmpVal2 = "empty";
             }
-            else if (!item.IsFlavourAware() && item.ItemType.BaseItemCategory.Tried)
+            else if (!item.IsFlavourAware() && item.BaseItemCategory.Tried)
             {
                 tmpVal2 = "tried";
             }

@@ -563,7 +563,7 @@ namespace AngbandOS
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 oPtr = SaveGame.Player.Inventory[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -840,32 +840,32 @@ namespace AngbandOS
             }
             if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
             {
-                if (SaveGame.Player.Inventory[InventorySlot.Body].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Body].BaseItemCategory == null)
                 {
                     SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level * 3 / 2;
                     SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level * 3 / 2;
                 }
-                if (SaveGame.Player.Inventory[InventorySlot.Cloak].ItemType == null && SaveGame.Player.Level > 15)
+                if (SaveGame.Player.Inventory[InventorySlot.Cloak].BaseItemCategory == null && SaveGame.Player.Level > 15)
                 {
                     SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
                     SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
                 }
-                if (SaveGame.Player.Inventory[InventorySlot.Arm].ItemType == null && SaveGame.Player.Level > 10)
+                if (SaveGame.Player.Inventory[InventorySlot.Arm].BaseItemCategory == null && SaveGame.Player.Level > 10)
                 {
                     SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
                     SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
                 }
-                if (SaveGame.Player.Inventory[InventorySlot.Head].ItemType == null && SaveGame.Player.Level > 4)
+                if (SaveGame.Player.Inventory[InventorySlot.Head].BaseItemCategory == null && SaveGame.Player.Level > 4)
                 {
                     SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
                     SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
                 }
-                if (SaveGame.Player.Inventory[InventorySlot.Hands].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Hands].BaseItemCategory == null)
                 {
                     SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 2;
                     SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 2;
                 }
-                if (SaveGame.Player.Inventory[InventorySlot.Feet].ItemType == null)
+                if (SaveGame.Player.Inventory[InventorySlot.Feet].BaseItemCategory == null)
                 {
                     SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 3;
                     SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 3;
@@ -1075,10 +1075,10 @@ namespace AngbandOS
                 SaveGame.Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
                 SaveGame.Player.HasHeavyBow = true;
             }
-            if (oPtr.ItemType != null && !SaveGame.Player.HasHeavyBow)
+            if (oPtr.BaseItemCategory != null && !SaveGame.Player.HasHeavyBow)
             {
                 // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)oPtr.ItemType.BaseItemCategory;
+                BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)oPtr.BaseItemCategory;
                 SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
                 if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemCategory.Arrow)
                 {
@@ -1117,7 +1117,7 @@ namespace AngbandOS
                 SaveGame.Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
                 SaveGame.Player.HasHeavyWeapon = true;
             }
-            if (oPtr.ItemType != null && !SaveGame.Player.HasHeavyWeapon)
+            if (oPtr.BaseItemCategory != null && !SaveGame.Player.HasHeavyWeapon)
             {
                 int num = 0, wgt = 0, mul = 0;
                 switch (SaveGame.Player.ProfessionIndex)
@@ -1274,7 +1274,7 @@ namespace AngbandOS
                 SaveGame.Player.HasUnpriestlyWeapon = true;
             }
             if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist &&
-                SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null &&
+                SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
                 (oPtr.Category != ItemCategory.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
             {
                 oPtr.RefreshFlagBasedProperties();
@@ -1332,7 +1332,7 @@ namespace AngbandOS
                 {
                     SaveGame.MsgPrint("You have trouble wielding such a heavy bow.");
                 }
-                else if (SaveGame.Player.Inventory[InventorySlot.RangedWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.RangedWeapon].BaseItemCategory != null)
                 {
                     SaveGame.MsgPrint("You have no trouble wielding your bow.");
                 }
@@ -1348,7 +1348,7 @@ namespace AngbandOS
                 {
                     SaveGame.MsgPrint("You have trouble wielding such a heavy weapon.");
                 }
-                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
                 {
                     SaveGame.MsgPrint("You have no trouble wielding your weapon.");
                 }
@@ -1366,7 +1366,7 @@ namespace AngbandOS
                         ? "Your weapon restricts the flow of chaos through you."
                         : "You do not feel comfortable with your weapon.");
                 }
-                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType != null)
+                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
                 {
                     SaveGame.MsgPrint("You feel comfortable with your weapon.");
                 }
@@ -1458,7 +1458,7 @@ namespace AngbandOS
                 SaveGame.Player.HasRestrictingGloves = false;
                 Item oPtr = SaveGame.Player.Inventory[InventorySlot.Hands];
                 oPtr.RefreshFlagBasedProperties();
-                if (oPtr.ItemType != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
+                if (oPtr.BaseItemCategory != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
                 {
                     SaveGame.Player.HasRestrictingGloves = true;
                     msp = 3 * msp / 4;
@@ -1698,7 +1698,7 @@ namespace AngbandOS
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item oPtr = SaveGame.Player.Inventory[i];
-                if (i == InventorySlot.Lightsource && oPtr.ItemType != null &&
+                if (i == InventorySlot.Lightsource && oPtr.BaseItemCategory != null &&
                     oPtr.Category == ItemCategory.Light)
                 {
                     if (oPtr.ItemSubCategory == LightType.Torch && oPtr.TypeSpecificValue > 0)
@@ -1723,7 +1723,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    if (oPtr.ItemType == null)
+                    if (oPtr.BaseItemCategory == null)
                     {
                         continue;
                     }
@@ -1823,7 +1823,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            return SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].ItemType == null;
+            return SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory == null;
         }
 
         public bool MartialArtistHeavyArmour()

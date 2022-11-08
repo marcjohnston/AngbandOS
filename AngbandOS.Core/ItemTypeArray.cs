@@ -15,7 +15,7 @@ using System.Linq;
 namespace AngbandOS
 {
     [Serializable]
-    internal class ItemTypeArray : List<ItemType>
+    internal class ItemTypeArray : List<BaseItemCategory>
     {
         private readonly SaveGame SaveGame;
 
@@ -30,28 +30,28 @@ namespace AngbandOS
                 {
                     // Load the item.
                     BaseItemCategory itemCategory = (BaseItemCategory)Activator.CreateInstance(type);
-                    Add(new ItemType(itemCategory));
+                    Add(itemCategory);
                 }
             }
         }
 
         public void ResetStompability()
         {
-            foreach (ItemType itemType in this)
+            foreach (BaseItemCategory itemType in this)
             {
-                if (itemType.BaseItemCategory.HasQuality)
+                if (itemType.HasQuality)
                 {
-                    itemType.BaseItemCategory.Stompable[0] = true;
-                    itemType.BaseItemCategory.Stompable[1] = false;
-                    itemType.BaseItemCategory.Stompable[2] = false;
-                    itemType.BaseItemCategory.Stompable[3] = false;
+                    itemType.Stompable[0] = true;
+                    itemType.Stompable[1] = false;
+                    itemType.Stompable[2] = false;
+                    itemType.Stompable[3] = false;
                 }
                 else
                 {
-                    itemType.BaseItemCategory.Stompable[0] = itemType.BaseItemCategory.Cost <= 0;
-                    itemType.BaseItemCategory.Stompable[1] = false;
-                    itemType.BaseItemCategory.Stompable[2] = false;
-                    itemType.BaseItemCategory.Stompable[3] = false;
+                    itemType.Stompable[0] = itemType.Cost <= 0;
+                    itemType.Stompable[1] = false;
+                    itemType.Stompable[2] = false;
+                    itemType.Stompable[3] = false;
                 }
             }
         }

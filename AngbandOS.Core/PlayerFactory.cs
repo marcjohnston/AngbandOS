@@ -1913,7 +1913,7 @@ namespace AngbandOS
             if (_player.RaceIndex == RaceId.Golem || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Zombie ||
                 _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
             {
-                item.AssignItemType(new ItemType(new ScrollSatisfyHunger()));
+                item.AssignItemType(new ScrollSatisfyHunger());
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -1923,7 +1923,7 @@ namespace AngbandOS
             }
             else
             {
-                item.AssignItemType(new ItemType(new FoodRation()));
+                item.AssignItemType(new FoodRation());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -1933,7 +1933,7 @@ namespace AngbandOS
             if (_player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre ||
                 _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
-                item.AssignItemType(new ItemType(new ScrollLight()));
+                item.AssignItemType(new ScrollLight());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -1942,7 +1942,7 @@ namespace AngbandOS
             }
             else
             {
-                item.AssignItemType(new ItemType(new LightWoodenTorch()));
+                item.AssignItemType(new LightWoodenTorch());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
@@ -2061,7 +2061,7 @@ namespace AngbandOS
                     baseItemCategory = new RingSustainStrength();
                 }
                 item = new Item(saveGame);
-                item.AssignItemType(new ItemType(baseItemCategory));
+                item.AssignItemType(baseItemCategory);
                 if (baseItemCategory.CategoryEnum == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;

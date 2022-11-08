@@ -32,7 +32,7 @@ namespace AngbandOS.Mutations.RandomMutations
             saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
             saveGame.MsgPrint(null);
             Item oPtr = saveGame.Player.Inventory[InventorySlot.MeleeWeapon];
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return;
             }

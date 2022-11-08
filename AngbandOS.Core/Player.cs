@@ -14,6 +14,7 @@ using AngbandOS.Pantheon;
 using System;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS
 {
@@ -247,9 +248,9 @@ namespace AngbandOS
             }
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = SaveGame.ItemTypes[i];
-                kPtr.BaseItemCategory.Tried = false;
-                kPtr.BaseItemCategory.FlavourAware = false;
+                BaseItemCategory kPtr = SaveGame.ItemTypes[i];
+                kPtr.Tried = false;
+                kPtr.FlavourAware = false;
             }
             for (int i = 1; i < SaveGame.MonsterRaces.Count; i++)
             {
@@ -389,7 +390,7 @@ namespace AngbandOS
             {
                 return;
             }
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return;
             }
@@ -1508,7 +1509,7 @@ namespace AngbandOS
             {
                 bool okay = false;
                 Item item = Inventory[i];
-                if (item.ItemType == null)
+                if (item.BaseItemCategory == null)
                 {
                     continue;
                 }

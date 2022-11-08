@@ -48,14 +48,14 @@ namespace AngbandOS
             for (int i = InventorySlot.Pack; i > 0; i--)
             {
                 Item oPtr = _items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
                 for (int j = 0; j < i; j++)
                 {
                     Item jPtr = _items[j];
-                    if (jPtr.ItemType == null)
+                    if (jPtr.BaseItemCategory == null)
                     {
                         continue;
                     }
@@ -99,7 +99,7 @@ namespace AngbandOS
                 for (j = 0; j < InventorySlot.Pack; j++)
                 {
                     jPtr = _items[j];
-                    if (jPtr.ItemType == null)
+                    if (jPtr.BaseItemCategory == null)
                     {
                         continue;
                     }
@@ -120,7 +120,7 @@ namespace AngbandOS
             for (j = 0; j <= InventorySlot.Pack; j++)
             {
                 jPtr = _items[j];
-                if (jPtr.ItemType == null)
+                if (jPtr.BaseItemCategory == null)
                 {
                     break;
                 }
@@ -132,23 +132,23 @@ namespace AngbandOS
                 for (j = 0; j < InventorySlot.Pack; j++)
                 {
                     jPtr = _items[j];
-                    if (jPtr.ItemType == null)
+                    if (jPtr.BaseItemCategory == null)
                     {
                         break;
                     }
-                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -233,7 +233,7 @@ namespace AngbandOS
             for (int j = 0; j < InventorySlot.Pack; j++)
             {
                 Item jPtr = _items[j];
-                if (jPtr.ItemType == null)
+                if (jPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -251,7 +251,7 @@ namespace AngbandOS
             for (int i = 0; i < InventorySlot.Pack; i++)
             {
                 Item oPtr = _items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -278,9 +278,9 @@ namespace AngbandOS
                             : "Y";
                         string w = amt > 1 ? "were" : "was";
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                        if (oPtr.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
+                        if (oPtr.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
                         {
-                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseItemCategory;
+                            PotionItemCategory potion = (PotionItemCategory)oPtr.BaseItemCategory;
                             potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
                         }
                         InvenItemIncrease(i, -amt);
@@ -350,7 +350,7 @@ namespace AngbandOS
         public void InvenItemOptimize(int item)
         {
             Item oPtr = _items[item];
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return;
             }
@@ -420,7 +420,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (item.ItemType == null)
+            if (item.BaseItemCategory == null)
             {
                 return false;
             }
@@ -456,7 +456,7 @@ namespace AngbandOS
             {
                 return -1;
             }
-            if (_items[i].ItemType == null)
+            if (_items[i].BaseItemCategory == null)
             {
                 return -1;
             }
@@ -470,7 +470,7 @@ namespace AngbandOS
             {
                 return -1;
             }
-            if (_items[i].ItemType == null)
+            if (_items[i].BaseItemCategory == null)
             {
                 return -1;
             }
@@ -487,7 +487,7 @@ namespace AngbandOS
                     break;
                 }
                 Item oPtr = _items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -496,23 +496,23 @@ namespace AngbandOS
                 for (j = 0; j < InventorySlot.Pack; j++)
                 {
                     Item jPtr = _items[j];
-                    if (jPtr.ItemType == null)
+                    if (jPtr.BaseItemCategory == null)
                     {
                         break;
                     }
-                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.ItemType.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.ItemType.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -628,7 +628,7 @@ namespace AngbandOS
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.ItemType == null ? Colour.White : oPtr.ItemType.BaseItemCategory.Colour;
+                outColour[k] = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 16;
@@ -648,10 +648,10 @@ namespace AngbandOS
                 SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
                 string tmpVal = $"{i.IndexToLabel()})";
                 SaveGame.Print(tmpVal, j + 1, col);
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
-                    Colour a = oPtr.ItemType.BaseItemCategory.FlavorColour;
-                    char c = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
+                    Colour a = oPtr.BaseItemCategory.FlavorColour;
+                    char c = oPtr.BaseItemCategory.FlavorCharacter;
                     SaveGame.Place(a, c, j + 1, col + 3);
                 }
                 else
@@ -687,7 +687,7 @@ namespace AngbandOS
             for (i = 0; i < InventorySlot.Pack; i++)
             {
                 oPtr = _items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -706,7 +706,7 @@ namespace AngbandOS
                     oName = oName.Substring(0, lim);
                 }
                 outIndex[k] = i;
-                outColour[k] = oPtr.ItemType.BaseItemCategory.Colour;
+                outColour[k] = oPtr.BaseItemCategory.Colour;
                 outDesc[k] = oName;
                 int l = outDesc[k].Length + 5;
                 l += 9;
@@ -725,8 +725,8 @@ namespace AngbandOS
                 SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
                 string tmpVal = $"{i.IndexToLabel()})";
                 SaveGame.Print(tmpVal, j + 1, col);
-                Colour a = oPtr.ItemType.BaseItemCategory.FlavorColour;
-                char c = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
+                Colour a = oPtr.BaseItemCategory.FlavorColour;
+                char c = oPtr.BaseItemCategory.FlavorCharacter;
                 SaveGame.Place(a, c, j + 1, col + 3);
                 SaveGame.Print(outColour[j], outDesc[j], j + 1, col + 5);
                 int wgt = oPtr.Weight * oPtr.Count;
@@ -761,7 +761,7 @@ namespace AngbandOS
                     return InventorySlot.RangedWeapon;
 
                 case ItemCategory.Ring:
-                    if (_player.Inventory[InventorySlot.RightHand].ItemType == null)
+                    if (_player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
                     {
                         return InventorySlot.RightHand;
                     }

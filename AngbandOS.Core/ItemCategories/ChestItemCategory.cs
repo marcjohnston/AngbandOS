@@ -32,11 +32,11 @@ namespace AngbandOS.ItemCategories
             }
             else if (item.TypeSpecificValue == 0)
             {
-                return item.ItemType.BaseItemCategory.Stompable[StompableType.Broken];
+                return item.BaseItemCategory.Stompable[StompableType.Broken];
             }
             else if (item.TypeSpecificValue < 0)
             {
-                return item.ItemType.BaseItemCategory.Stompable[StompableType.Average];
+                return item.BaseItemCategory.Stompable[StompableType.Average];
             }
             else
             {
@@ -44,11 +44,11 @@ namespace AngbandOS.ItemCategories
                 {
                     case ChestTrap.ChestNotTrapped:
                         {
-                            return item.ItemType.BaseItemCategory.Stompable[StompableType.Good];
+                            return item.BaseItemCategory.Stompable[StompableType.Good];
                         }
                     default:
                         {
-                            return item.ItemType.BaseItemCategory.Stompable[StompableType.Excellent];
+                            return item.BaseItemCategory.Stompable[StompableType.Excellent];
                         }
                 }
             }
@@ -139,9 +139,9 @@ namespace AngbandOS.ItemCategories
         /// </remarks>
         public override void ApplyMagic(Item item, int level, int power)
         {
-            if (item.ItemType.BaseItemCategory.Level > 0)
+            if (item.BaseItemCategory.Level > 0)
             {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemType.BaseItemCategory.Level);
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.BaseItemCategory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
                     item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(5));

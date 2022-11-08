@@ -65,7 +65,7 @@ namespace AngbandOS.Commands
             // Using a rod takes a whole turn
             saveGame.EnergyUse = 100;
             bool identified = false;
-            int itemLevel = item.ItemType.BaseItemCategory.Level;
+            int itemLevel = item.BaseItemCategory.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
             int chance = saveGame.Player.SkillUseDevice;
             if (saveGame.Player.TimedConfusion != 0)

@@ -10,6 +10,7 @@ using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS
 {
@@ -178,12 +179,12 @@ namespace AngbandOS
                 for (i = 1; i < OMax; i++)
                 {
                     Item oPtr = Items[i];
-                    ItemType kPtr = oPtr.ItemType;
-                    if (oPtr.ItemType == null)
+                    BaseItemCategory? kPtr = oPtr.BaseItemCategory;
+                    if (oPtr.BaseItemCategory == null)
                     {
                         continue;
                     }
-                    if (kPtr.BaseItemCategory.Level > curLev)
+                    if (kPtr.Level > curLev)
                     {
                         continue;
                     }
@@ -224,7 +225,7 @@ namespace AngbandOS
             for (i = OMax - 1; i >= 1; i--)
             {
                 Item oPtr = Items[i];
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
                     continue;
                 }
@@ -644,7 +645,7 @@ namespace AngbandOS
         public void FloorItemOptimize(int item)
         {
             Item oPtr = Items[item];
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return;
             }
@@ -1044,7 +1045,7 @@ namespace AngbandOS
             for (i = 1; i < OMax; i++)
             {
                 Item oPtr = Items[i];
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
                     continue;
                 }
@@ -2007,7 +2008,7 @@ namespace AngbandOS
             for (int i = 1; i < OMax; i++)
             {
                 Item oPtr = Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -2042,7 +2043,7 @@ namespace AngbandOS
             for (int i = 1; i < OMax; i++)
             {
                 Item oPtr = Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -2064,7 +2065,7 @@ namespace AngbandOS
             for (i = 1; i < OMax; i++)
             {
                 Item oPtr = Items[i];
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
                     continue;
                 }
@@ -2126,7 +2127,7 @@ namespace AngbandOS
             for (int i = 1; i < OMax; i++)
             {
                 oPtr = Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -2225,8 +2226,8 @@ namespace AngbandOS
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].BaseItemCategory.FlavorCharacter;
-            ap = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].BaseItemCategory.FlavorColour;
+            cp = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].FlavorCharacter;
+            ap = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].FlavorColour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)
@@ -2374,8 +2375,8 @@ namespace AngbandOS
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Marked)
                 {
-                    cp = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
-                    ap = oPtr.ItemType.BaseItemCategory.FlavorColour;
+                    cp = oPtr.BaseItemCategory.FlavorCharacter;
+                    ap = oPtr.BaseItemCategory.FlavorColour;
                     if (_player.TimedHallucinations != 0)
                     {
                         ImageObject(out ap, out cp);

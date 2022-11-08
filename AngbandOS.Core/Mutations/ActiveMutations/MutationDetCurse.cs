@@ -22,7 +22,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             for (int i = 0; i < InventorySlot.Total; i++)
             {
                 Item oPtr = player.Inventory[i];
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
                     continue;
                 }

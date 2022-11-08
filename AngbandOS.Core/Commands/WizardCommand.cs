@@ -4,6 +4,7 @@ using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Commands
 {
@@ -487,10 +488,10 @@ namespace AngbandOS.Commands
         {
             for (int i = 1; i < saveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = saveGame.ItemTypes[i];
-                if (kPtr.BaseItemCategory.Level <= saveGame.CommandArgument)
+                BaseItemCategory kPtr = saveGame.ItemTypes[i];
+                if (kPtr.Level <= saveGame.CommandArgument)
                 {
-                    kPtr.BaseItemCategory.FlavourAware = true;
+                    kPtr.FlavourAware = true;
                 }
             }
         }
@@ -721,13 +722,13 @@ namespace AngbandOS.Commands
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
             for (num = 0, i = 1; num < maxCount && i < saveGame.ItemTypes.Count; i++)
             {
-                ItemType kPtr = saveGame.ItemTypes[i];
-                if (kPtr.BaseItemCategory.CategoryEnum == tval)
+                BaseItemCategory kPtr = saveGame.ItemTypes[i];
+                if (kPtr.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);
                     col = 30 * (num / maxLetters);
                     ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-                    string itemName = kPtr.BaseItemCategory.Name.Trim().Replace("$", "").Replace("~", ""); 
+                    string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", ""); 
 
                     saveGame.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
@@ -770,7 +771,7 @@ namespace AngbandOS.Commands
             {
                 return;
             }
-            ItemType i = new ItemType(aPtr.BaseItemCategory);
+            BaseItemCategory i = aPtr.BaseItemCategory;
             qPtr.AssignItemType(i);
             qPtr.FixedArtifactIndex = aIdx;
             qPtr.TypeSpecificValue = aPtr.Pval;
@@ -800,7 +801,7 @@ namespace AngbandOS.Commands
             }
             string buf = oPtr.StoreDescription(true, 3);
             saveGame.PrintLine(buf, 2, j);
-            saveGame.PrintLine($"kind = {oPtr.ItemType,5}  level = {oPtr.ItemType.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            saveGame.PrintLine($"kind = {oPtr.BaseItemCategory, 5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
             saveGame.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             saveGame.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             saveGame.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
@@ -996,17 +997,17 @@ namespace AngbandOS.Commands
                 }
                 if (ch == 'n' || ch == 'N')
                 {
-                    qPtr.AssignItemType(oPtr.ItemType);
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
                     qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
-                    qPtr.AssignItemType(oPtr.ItemType);
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
                     qPtr.ApplyMagic(saveGame.Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
-                    qPtr.AssignItemType(oPtr.ItemType);
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
                     qPtr.ApplyMagic(saveGame.Difficulty, false, true, true);
                 }
             }

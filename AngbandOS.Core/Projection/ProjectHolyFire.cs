@@ -77,11 +77,11 @@ namespace AngbandOS.Projection
                             SaveGame.MsgPrint($"The {oName}{noteKill}");
                         }
                         int oSval = oPtr.ItemSubCategory;
-                        bool isPotion = oPtr.ItemType.BaseItemCategory.CategoryEnum == ItemCategory.Potion;
+                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemCategory.Potion;
                         SaveGame.Level.DeleteObjectIdx(thisOIdx);
                         if (isPotion)
                         {
-                            PotionItemCategory potion = (PotionItemCategory)oPtr.ItemType.BaseItemCategory;
+                            PotionItemCategory potion = (PotionItemCategory)oPtr.BaseItemCategory;
                             potion.Smash(SaveGame, who, y, x);
                         }
                         SaveGame.Level.RedrawSingleLocation(y, x);

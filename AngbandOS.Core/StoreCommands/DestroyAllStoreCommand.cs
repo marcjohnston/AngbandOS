@@ -31,7 +31,7 @@ namespace AngbandOS.StoreCommands
             for (int i = InventorySlot.Pack - 1; i >= 0; i--)
             {
                 Item item = saveGame.Player.Inventory[i];
-                if (item.ItemType == null)
+                if (item.BaseItemCategory == null)
                 {
                     continue;
                 }

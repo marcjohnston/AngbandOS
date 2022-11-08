@@ -52,7 +52,7 @@ namespace AngbandOS.Commands
             // Eating costs 100 energy
             saveGame.EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.ItemType.BaseItemCategory.Level;
+            int itemLevel = item.BaseItemCategory.Level;
             switch (item.ItemSubCategory)
             {
                 case FoodType.Poison:
@@ -338,7 +338,7 @@ namespace AngbandOS.Commands
                     // Spawn a new food item on the floor to make up for the one that will be destroyed
                     Item floorItem = new Item(saveGame);
                     saveGame.MsgPrint("The food falls through your jaws!");
-                    floorItem.AssignItemType(item.ItemType);
+                    floorItem.AssignItemType(item.BaseItemCategory);
                     saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 }
                 else

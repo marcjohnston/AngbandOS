@@ -19,7 +19,7 @@ namespace AngbandOS.ItemCategories
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $" titled \"{item.SaveGame.ScrollFlavours[item.ItemSubCategory].Name}\"";
-            string ofName = item.IsFlavourAware() ? $" of {item.ItemType.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{Pluralize("Scroll", item.Count)}{flavour}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

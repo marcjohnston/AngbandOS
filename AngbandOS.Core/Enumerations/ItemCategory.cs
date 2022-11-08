@@ -9,11 +9,6 @@ using System;
 
 namespace AngbandOS.Enumerations
 {
-    [Serializable]
-    internal class TempItemCategory
-    {
-    }
-
     /// <summary>
     /// The category of an item
     /// </summary>

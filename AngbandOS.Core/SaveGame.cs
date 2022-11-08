@@ -190,7 +190,7 @@ namespace AngbandOS
         }
 
 
-        public ItemType RandomItemType(int level, bool doNotAllowChestToBeCreated)
+        public BaseItemCategory RandomItemType(int level, bool doNotAllowChestToBeCreated)
         {
             int i;
             int j;
@@ -211,8 +211,8 @@ namespace AngbandOS
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemType kPtr = ItemTypes[kIdx];
-                if (doNotAllowChestToBeCreated && kPtr.BaseItemCategory.CategoryEnum == ItemCategory.Chest)
+                BaseItemCategory kPtr = ItemTypes[kIdx];
+                if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemCategory.Chest)
                 {
                     continue;
                 }
@@ -1315,7 +1315,7 @@ namespace AngbandOS
         public void OpenChest(int y, int x, int oIdx)
         {
             Item oPtr = Level.Items[oIdx];
-            ChestItemCategory chest = (ChestItemCategory)oPtr.ItemType.BaseItemCategory;
+            ChestItemCategory chest = (ChestItemCategory)oPtr.BaseItemCategory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 
@@ -1454,50 +1454,50 @@ namespace AngbandOS
             int i;
             for (i = 0; i < ItemTypes.Count; i++)
             {
-                ItemType kPtr = ItemTypes[i];
-                if (kPtr.BaseItemCategory.HasFlavor)
+                BaseItemCategory kPtr = ItemTypes[i];
+                if (kPtr.HasFlavor)
                 {
-                    int indexx = kPtr.BaseItemCategory.SubCategory ?? 0;
-                    switch (kPtr.BaseItemCategory.CategoryEnum)
+                    int indexx = kPtr.SubCategory ?? 0;
+                    switch (kPtr.CategoryEnum)
                     {
                         case ItemCategory.Food:
-                            kPtr.BaseItemCategory.FlavorCharacter = MushroomFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = MushroomFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = MushroomFlavours[indexx].Character;
+                            kPtr.FlavorColour = MushroomFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Potion:
-                            kPtr.BaseItemCategory.FlavorCharacter = PotionFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = PotionFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = PotionFlavours[indexx].Character;
+                            kPtr.FlavorColour = PotionFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Scroll:
-                            kPtr.BaseItemCategory.FlavorCharacter = ScrollFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = ScrollFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = ScrollFlavours[indexx].Character;
+                            kPtr.FlavorColour = ScrollFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Amulet:
-                            kPtr.BaseItemCategory.FlavorCharacter = AmuletFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = AmuletFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = AmuletFlavours[indexx].Character;
+                            kPtr.FlavorColour = AmuletFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Ring:
-                            kPtr.BaseItemCategory.FlavorCharacter = RingFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = RingFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = RingFlavours[indexx].Character;
+                            kPtr.FlavorColour = RingFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Staff:
-                            kPtr.BaseItemCategory.FlavorCharacter = StaffFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = StaffFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = StaffFlavours[indexx].Character;
+                            kPtr.FlavorColour = StaffFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Wand:
-                            kPtr.BaseItemCategory.FlavorCharacter = WandFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = WandFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = WandFlavours[indexx].Character;
+                            kPtr.FlavorColour = WandFlavours[indexx].Colour;
                             break;
 
                         case ItemCategory.Rod:
-                            kPtr.BaseItemCategory.FlavorCharacter = RodFlavours[indexx].Character;
-                            kPtr.BaseItemCategory.FlavorColour = RodFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = RodFlavours[indexx].Character;
+                            kPtr.FlavorColour = RodFlavours[indexx].Colour;
                             break;
                     }
                 }
@@ -2054,14 +2054,14 @@ namespace AngbandOS
             Program.Rng.UseFixed = false;
             for (i = 1; i < ItemTypes.Count; i++)
             {
-                ItemType kPtr = ItemTypes[i];
-                if (string.IsNullOrEmpty(kPtr.BaseItemCategory.FriendlyName))
+                BaseItemCategory kPtr = ItemTypes[i];
+                if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
                     continue;
                 }
-                if (!kPtr.BaseItemCategory.HasFlavor)
+                if (!kPtr.HasFlavor)
                 {
-                    kPtr.BaseItemCategory.FlavourAware = true;
+                    kPtr.FlavourAware = true;
                 }
             }
         }
@@ -2069,7 +2069,7 @@ namespace AngbandOS
         private void InitializeAllocationTables()
         {
             int i, j;
-            ItemType kPtr;
+            BaseItemCategory kPtr;
             MonsterRace rPtr;
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
@@ -2079,10 +2079,10 @@ namespace AngbandOS
                 kPtr = ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
-                    if (kPtr.BaseItemCategory.Chance[j] != 0)
+                    if (kPtr.Chance[j] != 0)
                     {
                         AllocKindSize++;
-                        num[kPtr.BaseItemCategory.Locale[j]]++;
+                        num[kPtr.Locale[j]]++;
                     }
                 }
             }
@@ -2105,10 +2105,10 @@ namespace AngbandOS
                 kPtr = ItemTypes[i];
                 for (j = 0; j < 4; j++)
                 {
-                    if (kPtr.BaseItemCategory.Chance[j] != 0)
+                    if (kPtr.Chance[j] != 0)
                     {
-                        int x = kPtr.BaseItemCategory.Locale[j];
-                        int p = 100 / kPtr.BaseItemCategory.Chance[j];
+                        int x = kPtr.Locale[j];
+                        int p = 100 / kPtr.Chance[j];
                         int y = x > 0 ? num[x - 1] : 0;
                         int z = y + aux[x];
                         table[z].Index = i;
@@ -2269,7 +2269,7 @@ namespace AngbandOS
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 UpdateScreen();
-                if (Player.Inventory[InventorySlot.Pack].ItemType != null)
+                if (Player.Inventory[InventorySlot.Pack].BaseItemCategory != null)
                 {
                     const int item = InventorySlot.Pack;
                     Item oPtr = Player.Inventory[item];
@@ -2855,7 +2855,7 @@ namespace AngbandOS
                     }
                 }
                 Player.Dna.OnProcessWorld(this, Player, Level);
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -2871,7 +2871,7 @@ namespace AngbandOS
             for (j = 0, i = 0; i < InventorySlot.Pack; i++)
             {
                 oPtr = Player.Inventory[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -2892,7 +2892,7 @@ namespace AngbandOS
             for (i = 1; i < Level.OMax; i++)
             {
                 oPtr = Level.Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -3467,7 +3467,7 @@ namespace AngbandOS
                     break;
             }
             Item oPtr = Player.Inventory[t];
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return false;
             }
@@ -4137,7 +4137,7 @@ namespace AngbandOS
             for (int i = 1; i < Level.OMax; i++)
             {
                 Item oPtr = Level.Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -4175,7 +4175,7 @@ namespace AngbandOS
             for (int i = 1; i < Level.OMax; i++)
             {
                 Item oPtr = Level.Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -4215,7 +4215,7 @@ namespace AngbandOS
             for (int i = 1; i < Level.OMax; i++)
             {
                 Item oPtr = Level.Items[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -5047,7 +5047,7 @@ namespace AngbandOS
             for (int i = 0; i < InventorySlot.Total; i++)
             {
                 Item oPtr = Player.Inventory[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -5125,7 +5125,7 @@ namespace AngbandOS
             for (int i = 0; i < InventorySlot.Total; i++)
             {
                 Item oPtr = Player.Inventory[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -5291,7 +5291,7 @@ namespace AngbandOS
                 return false;
             }
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
-            int lev = oPtr.ItemType.BaseItemCategory.Level;
+            int lev = oPtr.BaseItemCategory.Level;
             if (oPtr.Category == ItemCategory.Rod)
             {
                 i = (100 - lev + num) / 5;
@@ -5504,7 +5504,7 @@ namespace AngbandOS
             for (k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
             {
                 oPtr = Player.Inventory[k];
-                if (oPtr.ItemType != null)
+                if (oPtr.BaseItemCategory != null)
                 {
                     continue;
                 }
@@ -6056,7 +6056,7 @@ namespace AngbandOS
             }
             oPtr = Player.Inventory[InventorySlot.MeleeWeapon];
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.ItemType != null)
+            if (oPtr.BaseItemCategory != null)
             {
                 if (oPtr.Characteristics.Blessed)
                 {
@@ -6847,7 +6847,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return false;
             }
@@ -6899,7 +6899,7 @@ namespace AngbandOS
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item oPtr = Player.Inventory[i];
-                if (oPtr.ItemType == null)
+                if (oPtr.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -7203,7 +7203,7 @@ namespace AngbandOS
         {
             Item item = Player.Inventory[InventorySlot.MeleeWeapon];
             // We must have a non-rare, non-artifact weapon that isn't cursed
-            if (item.ItemType != null && !item.IsFixedArtifact() && !item.IsRare() &&
+            if (item.BaseItemCategory != null && !item.IsFixedArtifact() && !item.IsRare() &&
                 string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
             {
                 string act;
@@ -7602,7 +7602,7 @@ namespace AngbandOS
         {
             Item item = Player.Inventory[InventorySlot.Body];
             // If we're not wearing armour then nothing can happen
-            if (item.ItemType == null)
+            if (item.BaseItemCategory == null)
             {
                 return false;
             }
@@ -7641,7 +7641,7 @@ namespace AngbandOS
         {
             Item item = Player.Inventory[InventorySlot.MeleeWeapon];
             // If we don't have a weapon then nothing happens
-            if (item.ItemType == null)
+            if (item.BaseItemCategory == null)
             {
                 return false;
             }
@@ -7802,7 +7802,7 @@ namespace AngbandOS
         public bool DoCmdChannel(Item item)
         {
             int cost;
-            int price = item.ItemType.BaseItemCategory.Cost;
+            int price = item.BaseItemCategory.Cost;
             // Never channel worthless items
             if (price <= 0)
             {
@@ -7945,7 +7945,7 @@ namespace AngbandOS
             for (int i = 0; i < InventorySlot.Pack; i++)
             {
                 Item item = Player.Inventory[i];
-                if (item.ItemType == null)
+                if (item.BaseItemCategory == null)
                 {
                     continue;
                 }
@@ -8684,7 +8684,7 @@ namespace AngbandOS
                         }
                     }
                     // We have a weapon
-                    else if (item.ItemType != null)
+                    else if (item.BaseItemCategory != null)
                     {
                         // Roll damage for the weapon
                         totalDamage = Program.Rng.DiceRoll(item.DamageDice, item.DamageDiceSides);
@@ -9384,7 +9384,7 @@ namespace AngbandOS
                     if (CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
                     {
                         Item item = new Item(this);
-                        item.AssignItemType(new ItemType(new FoodRation()));
+                        item.AssignItemType(new FoodRation());
                         Level.DropNear(item, -1, Player.MapY, Player.MapX);
                         MsgPrint("You cook some food.");
                     }

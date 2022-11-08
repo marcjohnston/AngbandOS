@@ -13,6 +13,7 @@ using AngbandOS.StoreCommands;
 using AngbandOS.Stores;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS
 {
@@ -99,8 +100,8 @@ namespace AngbandOS
                 int kIdx = -1;
                 for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                 {
-                    ItemType itemType = SaveGame.ItemTypes[i];
-                    if (itemType.BaseItemCategory.GetType().IsAssignableFrom(master[k].ItemType))
+                    BaseItemCategory itemType = SaveGame.ItemTypes[i];
+                    if (itemType.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
                         break;
@@ -199,7 +200,7 @@ namespace AngbandOS
                 SaveGame.FullScreenOverlay = true;
                 SaveGame.NoticeStuff();
                 SaveGame.HandleStuff();
-                if (SaveGame.Player.Inventory[InventorySlot.Pack].ItemType != null)
+                if (SaveGame.Player.Inventory[InventorySlot.Pack].BaseItemCategory != null)
                 {
                     const int item = InventorySlot.Pack;
                     Item oPtr = SaveGame.Player.Inventory[item];
@@ -393,15 +394,15 @@ namespace AngbandOS
             int i = pos % 26;
             string outVal = $"{i.IndexToLetter()}) ";
             SaveGame.PrintLine(outVal, i + 6, 0);
-            Colour a = oPtr.ItemType.BaseItemCategory.FlavorColour;
-            char c = oPtr.ItemType.BaseItemCategory.FlavorCharacter;
+            Colour a = oPtr.BaseItemCategory.FlavorColour;
+            char c = oPtr.BaseItemCategory.FlavorCharacter;
             SaveGame.Place(a, c, i + 6, 3);
             oName = GetItemDescription(oPtr);
             if (maxwid < oName.Length)
             {
                 oName = oName.Substring(0, maxwid);
             }
-            SaveGame.Print(oPtr.ItemType.BaseItemCategory.Colour, oName, i + 6, 5);
+            SaveGame.Print(oPtr.BaseItemCategory.Colour, oName, i + 6, 5);
             int wgt = oPtr.Weight;
             outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
             SaveGame.Print(outVal, i + 6, 61);
@@ -523,7 +524,7 @@ namespace AngbandOS
                 }
             }
             SaveGame.SaveScreen();
-            SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.ItemType.BaseItemCategory.SpellBookToToRealm);
+            SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.BaseItemCategory.SpellBookToToRealm);
             SaveGame.PrintLine("", 0, 0);
             SaveGame.Print("[Press any key to continue]", 0, 23);
             SaveGame.Inkey();
@@ -785,7 +786,7 @@ namespace AngbandOS
             int size = 1;
             int discount = 0;
             int cost = oPtr.Value();
-            size += oPtr.ItemType.BaseItemCategory.GetAdditionalMassProduceCount(oPtr);
+            size += oPtr.BaseItemCategory.GetAdditionalMassProduceCount(oPtr);
             if (cost < 5)
             {
                 discount = 0;
@@ -1098,7 +1099,7 @@ namespace AngbandOS
         protected virtual Item CreateItem()
         {
             int level;
-            ItemType itemType;
+            BaseItemCategory itemType;
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
             itemType = SaveGame.ItemTypes[i];
@@ -1294,7 +1295,7 @@ namespace AngbandOS
         {
             int j;
             Item oPtr = _stock[item];
-            if (oPtr.ItemType == null)
+            if (oPtr.BaseItemCategory == null)
             {
                 return;
             }
@@ -1322,7 +1323,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (oPtr.ItemType != jPtr.ItemType)
+            if (oPtr.BaseItemCategory != jPtr.BaseItemCategory)
             {
                 return false;
             }

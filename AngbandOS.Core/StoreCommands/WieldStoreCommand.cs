@@ -75,7 +75,7 @@ namespace AngbandOS.StoreCommands
             }
             // Take off the old item
             item = saveGame.Player.Inventory[slot];
-            if (item.ItemType != null)
+            if (item.BaseItemCategory != null)
             {
                 saveGame.Player.Inventory.InvenTakeoff(slot, 255);
             }

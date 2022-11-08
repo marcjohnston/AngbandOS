@@ -61,14 +61,14 @@ namespace AngbandOS.Commands
             saveGame.PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
-            Colour missileColour = individualAmmunition.ItemType.BaseItemCategory.FlavorColour;
-            char missileCharacter = individualAmmunition.ItemType.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = individualAmmunition.BaseItemCategory.FlavorColour;
+            char missileCharacter = individualAmmunition.BaseItemCategory.FlavorCharacter;
             int shotSpeed = saveGame.Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = saveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = saveGame.Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)missileWeapon.ItemType.BaseItemCategory;
+            BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)missileWeapon.BaseItemCategory;
             int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (saveGame.Player.HasExtraMight)

@@ -37,7 +37,8 @@ namespace AngbandOS
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
-        public ItemType? ItemType = null;
+        //public ItemType? ItemType = null;
+        public BaseItemCategory? BaseItemCategory = null;
 
         public bool Marked;
 
@@ -78,7 +79,7 @@ namespace AngbandOS
             IdentifyFlags.Copy(original.IdentifyFlags);
             X = original.X;
             Y = original.Y;
-            ItemType = original.ItemType;
+            BaseItemCategory = original.BaseItemCategory;
             Marked = original.Marked;
             FixedArtifactIndex = original.FixedArtifactIndex;
             RareItemTypeIndex = original.RareItemTypeIndex;
@@ -98,7 +99,7 @@ namespace AngbandOS
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
-        public ItemCategory Category => ItemType == null ? ItemCategory.None : ItemType.BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+        public ItemCategory Category => BaseItemCategory == null ? ItemCategory.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)
         {
@@ -139,7 +140,7 @@ namespace AngbandOS
             int mult = 1;
             MonsterRace rPtr = mPtr.Race;
             RefreshFlagBasedProperties();
-            if (ItemType.BaseItemCategory.GetsDamageMultiplier)
+            if (BaseItemCategory.GetsDamageMultiplier)
             {
                 if (Characteristics.SlayAnimal && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
                 {
@@ -339,24 +340,24 @@ namespace AngbandOS
             ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
-        public void AssignItemType(ItemType itemType)
+        public void AssignItemType(BaseItemCategory baseItemCategory)
         {
-            ItemType = itemType;
-            ItemSubCategory = itemType.BaseItemCategory.SubCategory ?? 0;
-            TypeSpecificValue = itemType.BaseItemCategory.Pval;
+            BaseItemCategory = baseItemCategory;
+            ItemSubCategory = BaseItemCategory.SubCategory ?? 0;
+            TypeSpecificValue = BaseItemCategory.Pval;
             Count = 1;
-            Weight = itemType.BaseItemCategory.Weight;
-            BonusToHit = itemType.BaseItemCategory.ToH;
-            BonusDamage = itemType.BaseItemCategory.ToD;
-            BonusArmourClass = itemType.BaseItemCategory.ToA;
-            BaseArmourClass = itemType.BaseItemCategory.Ac;
-            DamageDice = itemType.BaseItemCategory.Dd;
-            DamageDiceSides = itemType.BaseItemCategory.Ds;
-            if (itemType.BaseItemCategory.Cost <= 0)
+            Weight = BaseItemCategory.Weight;
+            BonusToHit = BaseItemCategory.ToH;
+            BonusDamage = BaseItemCategory.ToD;
+            BonusArmourClass = BaseItemCategory.ToA;
+            BaseArmourClass = BaseItemCategory.Ac;
+            DamageDice = BaseItemCategory.Dd;
+            DamageDiceSides = BaseItemCategory.Ds;
+            if (BaseItemCategory.Cost <= 0)
             {
                 IdentifyFlags.Set(Constants.IdentBroken);
             }
-            if (itemType.BaseItemCategory.Cursed)
+            if (BaseItemCategory.Cursed)
             {
                 IdentifyFlags.Set(Constants.IdentCursed);
             }
@@ -364,7 +365,7 @@ namespace AngbandOS
 
         public void BecomeFlavourAware()
         {
-            ItemType.BaseItemCategory.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
         }
 
         public void BecomeKnown()
@@ -385,7 +386,7 @@ namespace AngbandOS
 
         public int BreakageChance()
         {
-            return ItemType.BaseItemCategory.PercentageBreakageChance;
+            return BaseItemCategory.PercentageBreakageChance;
         }
 
         public bool StatsAreSame(Item other)
@@ -448,11 +449,11 @@ namespace AngbandOS
         public bool CanAbsorb(Item other)
         {
             int total = Count + other.Count;
-            if (ItemType != other.ItemType)
+            if (BaseItemCategory != other.BaseItemCategory)
             {
                 return false;
             }
-            if (!ItemType.BaseItemCategory.CanAbsorb(this, other))
+            if (!BaseItemCategory.CanAbsorb(this, other))
             {
                 return false;
             }    
@@ -490,11 +491,11 @@ namespace AngbandOS
         /// <returns></returns>
         public string Description(bool includeCountPrefix, int mode)
         {
-            if (ItemType == null || ItemType.BaseItemCategory == null)
+            if (BaseItemCategory == null)
             {
                 return "(nothing)";
             }
-            string basenm = ItemType.BaseItemCategory.GetDescription(this, includeCountPrefix);
+            string basenm = BaseItemCategory.GetDescription(this, includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -521,13 +522,13 @@ namespace AngbandOS
             }
 
             // This is the detailed description.
-            basenm += ItemType.BaseItemCategory.GetDetailedDescription(this);
+            basenm += BaseItemCategory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += ItemType.BaseItemCategory.GetVerboseDescription(this);
+            basenm += BaseItemCategory.GetVerboseDescription(this);
 
             // This is the verbose description.
             if (mode < 3)
@@ -536,7 +537,7 @@ namespace AngbandOS
             }
 
             // This is the full description.
-            basenm += ItemType.BaseItemCategory.GetFullDescription(this);
+            basenm += BaseItemCategory.GetFullDescription(this);
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -970,13 +971,13 @@ namespace AngbandOS
         {
             // All characteristics are set to false.
             Characteristics = new ItemCharacteristics();
-            if (ItemType == null)
+            if (BaseItemCategory == null)
             {
                 return;
             }
 
             // Merge the characteristics from the base item category.
-            Characteristics.Merge(ItemType.BaseItemCategory);
+            Characteristics.Merge(BaseItemCategory);
 
             // Now merge the characteristics from the fixed artifact, if there is one.
             if (FixedArtifactIndex != 0)
@@ -1118,22 +1119,22 @@ namespace AngbandOS
 
         public bool HatesAcid()
         {
-            return ItemType.BaseItemCategory.HatesAcid;
+            return BaseItemCategory.HatesAcid;
         }
 
         public bool HatesCold()
         {
-            return ItemType.BaseItemCategory.HatesCold;
+            return BaseItemCategory.HatesCold;
         }
 
         public bool HatesElec()
         {
-            return ItemType.BaseItemCategory.HatesElectricity;
+            return BaseItemCategory.HatesElectricity;
         }
 
         public bool HatesFire()
         {
-            return ItemType.BaseItemCategory.HatesFire;
+            return BaseItemCategory.HatesFire;
         }
 
         public bool IdentifyFully()
@@ -1147,7 +1148,7 @@ namespace AngbandOS
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = ItemType.BaseItemCategory.Identify(this);
+            string categoryIdentity = BaseItemCategory.Identify(this);
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -1537,16 +1538,16 @@ namespace AngbandOS
 
         public bool IsFlavourAware()
         {
-            if (ItemType == null)
+            if (BaseItemCategory == null)
             {
                 return false;
             }
-            return ItemType.BaseItemCategory.FlavourAware;
+            return BaseItemCategory.FlavourAware;
         }
 
         public bool IsKnown()
         {
-            if (ItemType == null)
+            if (BaseItemCategory == null)
             {
                 return false;
             }
@@ -1554,7 +1555,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (ItemType.BaseItemCategory.EasyKnow && ItemType.BaseItemCategory.FlavourAware)
+            if (BaseItemCategory.EasyKnow && BaseItemCategory.FlavourAware)
             {
                 return true;
             }
@@ -1581,79 +1582,79 @@ namespace AngbandOS
             {
                 i = Constants.MaxGold - 1;
             }
-            ItemType kPtr = null;
+            BaseItemCategory? kPtr = null;
             switch (i)
             {
                 case 0:
-                    kPtr = new ItemType(new GoldCopper());
+                    kPtr = new GoldCopper();
                     break;
 
                 case 1:
-                    kPtr = new ItemType(new GoldCopper1());
+                    kPtr = new GoldCopper1();
                     break;
 
                 case 2:
-                    kPtr = new ItemType(new GoldCopper2());
+                    kPtr = new GoldCopper2();
                     break;
 
                 case 3:
-                    kPtr = new ItemType(new GoldSilver());
+                    kPtr = new GoldSilver();
                     break;
 
                 case 4:
-                    kPtr = new ItemType(new GoldSilver1());
+                    kPtr = new GoldSilver1();
                     break;
 
                 case 5:
-                    kPtr = new ItemType(new GoldSilver2());
+                    kPtr = new GoldSilver2();
                     break;
 
                 case 6:
-                    kPtr = new ItemType(new GoldGarnets());
+                    kPtr = new GoldGarnets();
                     break;
 
                 case 7:
-                    kPtr = new ItemType(new GoldGarnets1());
+                    kPtr = new GoldGarnets1();
                     break;
 
                 case 8:
-                    kPtr = new ItemType(new GoldGold());
+                    kPtr = new GoldGold();
                     break;
 
                 case 9:
-                    kPtr = new ItemType(new GoldGold1());
+                    kPtr = new GoldGold1();
                     break;
 
                 case 10:
-                    kPtr = new ItemType(new GoldGold2());
+                    kPtr = new GoldGold2();
                     break;
 
                 case 11:
-                    kPtr = new ItemType(new GoldOpals());
+                    kPtr = new GoldOpals();
                     break;
 
                 case 12:
-                    kPtr = new ItemType(new GoldSapphires());
+                    kPtr = new GoldSapphires();
                     break;
 
                 case 13:
-                    kPtr = new ItemType(new GoldRubies());
+                    kPtr = new GoldRubies();
                     break;
 
                 case 14:
-                    kPtr = new ItemType(new GoldDiamonds());
+                    kPtr = new GoldDiamonds();
                     break;
 
                 case 15:
-                    kPtr = new ItemType(new GoldEmeralds());
+                    kPtr = new GoldEmeralds();
                     break;
 
                 case 16:
-                    kPtr = new ItemType(new GoldMithril());
+                    kPtr = new GoldMithril();
                     break;
 
                 case 17:
-                    kPtr = new ItemType(new GoldAdamantite());
+                    kPtr = new GoldAdamantite();
                     break;
             }
             if (kPtr == null)
@@ -1661,7 +1662,7 @@ namespace AngbandOS
                 return false;
             }
             AssignItemType(kPtr);
-            int bbase = kPtr.BaseItemCategory.Cost;
+            int bbase = kPtr.Cost;
             TypeSpecificValue = bbase + (8 * Program.Rng.DieRoll(bbase)) + Program.Rng.DieRoll(8);
             return true;
         }
@@ -1677,17 +1678,16 @@ namespace AngbandOS
 
         public void ObjectTried()
         {
-            ItemType.BaseItemCategory.Tried = true;
+            BaseItemCategory.Tried = true;
         }
 
         public int RealValue()
         {
-            ItemType kPtr = ItemType;
-            if (kPtr.BaseItemCategory.Cost == 0)
+            if (BaseItemCategory.Cost == 0)
             {
                 return 0;
             }
-            int value = kPtr.BaseItemCategory.Cost;
+            int value = BaseItemCategory.Cost;
             if (RandartItemCharacteristics.IsSet)
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -1710,16 +1710,16 @@ namespace AngbandOS
                 }
                 value += ePtr.Cost;
             }
-            if (ItemType.BaseItemCategory.IsWorthless(this))
+            if (BaseItemCategory.IsWorthless(this))
             {
                 return 0;
             }
-            int? typeSpecificValue = ItemType.BaseItemCategory.GetTypeSpecificRealValue(this, value);
+            int? typeSpecificValue = BaseItemCategory.GetTypeSpecificRealValue(this, value);
             if (typeSpecificValue == null)
                 return 0;
             value += typeSpecificValue.Value;
 
-            int? bonusValue = ItemType.BaseItemCategory.GetBonusRealValue(this, value);
+            int? bonusValue = BaseItemCategory.GetBonusRealValue(this, value);
             if (bonusValue == null)
                 return 0;
 
@@ -1731,11 +1731,11 @@ namespace AngbandOS
         {
             if (!IsKnown())
             {
-                if (ItemType.BaseItemCategory.HasFlavor)
+                if (BaseItemCategory.HasFlavor)
                 {
                     if (IsFlavourAware())
                     {
-                        return ItemType.BaseItemCategory.Stompable[StompableType.Broken];
+                        return BaseItemCategory.Stompable[StompableType.Broken];
                     }
                 }
                 if (IdentifyFlags.IsClear(Constants.IdentSense))
@@ -1743,17 +1743,17 @@ namespace AngbandOS
                     return false;
                 }
             }
-            return ItemType.BaseItemCategory.IsStompable(this);
+            return BaseItemCategory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
         {
-            bool hackAware = ItemType.BaseItemCategory.FlavourAware;
+            bool hackAware = BaseItemCategory.FlavourAware;
             bool hackKnown = IdentifyFlags.IsSet(Constants.IdentKnown);
             IdentifyFlags.Set(Constants.IdentKnown);
-            ItemType.BaseItemCategory.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
             string buf = Description(pref, mode);
-            ItemType.BaseItemCategory.FlavourAware = hackAware;
+            BaseItemCategory.FlavourAware = hackAware;
             if (!hackKnown)
             {
                 IdentifyFlags.Clear(Constants.IdentKnown);
@@ -1804,9 +1804,9 @@ namespace AngbandOS
         {
             if (IsFlavourAware())
             {
-                return ItemType.BaseItemCategory.Cost;
+                return BaseItemCategory.Cost;
             }
-            return ItemType.BaseItemCategory.BaseValue;
+            return BaseItemCategory.BaseValue;
         }
 
         private string DescribeActivationEffect()
@@ -2052,15 +2052,13 @@ namespace AngbandOS
             {
                 return "teleport every 50+d50 turns";
             }
-            return ItemType.BaseItemCategory.DescribeActivationEffect(this);
+            return BaseItemCategory.DescribeActivationEffect(this);
         }
 
         private bool IsTried()
         {
-            return ItemType.BaseItemCategory.Tried;
+            return BaseItemCategory.Tried;
         }
-
-        private delegate bool GetObjNumHookDelegate(ItemType kPtr);
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
         {
@@ -2146,7 +2144,7 @@ namespace AngbandOS
                 }
                 return;
             }
-            ItemType.BaseItemCategory.ApplyMagic(this, lev, power);
+            BaseItemCategory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -2259,14 +2257,13 @@ namespace AngbandOS
                 }
                 return;
             }
-            if (ItemType != null)
+            if (BaseItemCategory != null)
             {
-                ItemType kPtr = ItemType;
-                if (kPtr.BaseItemCategory.Cost == 0)
+                if (BaseItemCategory.Cost == 0)
                 {
                     IdentifyFlags.Set(Constants.IdentBroken);
                 }
-                if (kPtr.BaseItemCategory.Cursed)
+                if (BaseItemCategory.Cursed)
                 {
                     IdentifyFlags.Set(Constants.IdentCursed);
                 }
@@ -2472,7 +2469,7 @@ namespace AngbandOS
                     break;
 
                 case 39:
-                    if (ItemType.BaseItemCategory.CanProvideSheathOfElectricity)
+                    if (BaseItemCategory.CanProvideSheathOfElectricity)
                     {
                         RandartItemCharacteristics.ShElec = true;
                     }
@@ -2487,7 +2484,7 @@ namespace AngbandOS
                     break;
 
                 case 40:
-                    if (ItemType.BaseItemCategory.CanProvideSheathOfFire)
+                    if (BaseItemCategory.CanProvideSheathOfFire)
                     {
                         RandartItemCharacteristics.ShFire = true;
                     }
@@ -2502,7 +2499,7 @@ namespace AngbandOS
                     break;
 
                 case 41:
-                    if (ItemType.BaseItemCategory.CanReflectBoltsAndArrows)
+                    if (BaseItemCategory.CanReflectBoltsAndArrows)
                     {
                         RandartItemCharacteristics.Reflect = true;
                     }
@@ -2603,7 +2600,7 @@ namespace AngbandOS
             }
             while (powers-- != 0)
             {
-                int maxType = (ItemType.BaseItemCategory.CanApplySlayingBonus ? 7 : 5);
+                int maxType = (BaseItemCategory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -2650,7 +2647,7 @@ namespace AngbandOS
                     TypeSpecificValue = 4;
                 }
             }
-            ItemType.BaseItemCategory.ApplyRandartBonus(this);
+            BaseItemCategory.ApplyRandartBonus(this);
             RandartItemCharacteristics.IgnoreAcid = true;
             RandartItemCharacteristics.IgnoreElec = true;
             RandartItemCharacteristics.IgnoreFire = true;
@@ -2660,7 +2657,7 @@ namespace AngbandOS
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(ItemType.BaseItemCategory.RandartActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(BaseItemCategory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -2800,7 +2797,7 @@ namespace AngbandOS
                 {
                     PrepareAllocationTableForGoodObjects();
                 }
-                ItemType kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
+                BaseItemCategory kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
                 if (good)
                 {
                     PrepareAllocationTable();
@@ -2812,13 +2809,12 @@ namespace AngbandOS
                 AssignItemType(kIdx);
             }
             ApplyMagic(SaveGame.Level.ObjectLevel, true, good, great);
-            Count = ItemType.BaseItemCategory.MakeObjectCount;
-            if (!IsCursed() && !IsBroken() && ItemType.BaseItemCategory.Level > SaveGame.Difficulty)
+            Count = BaseItemCategory.MakeObjectCount;
+            if (!IsCursed() && !IsBroken() && BaseItemCategory.Level > SaveGame.Difficulty)
             {
                 if (SaveGame.Level != null)
                 {
-                    SaveGame.Level.TreasureRating +=
-                        ItemType.BaseItemCategory.Level - SaveGame.Difficulty;
+                    SaveGame.Level.TreasureRating += BaseItemCategory.Level - SaveGame.Difficulty;
                 }
             }
             return true;
@@ -2844,7 +2840,7 @@ namespace AngbandOS
                     continue;
                 }
 
-                if (aPtr.BaseItemCategory != ItemType.BaseItemCategory)
+                if (aPtr.BaseItemCategory != BaseItemCategory)
                 {
                     continue;
                 }
@@ -2985,7 +2981,7 @@ namespace AngbandOS
 
                 case 20:
                 case 21:
-                    if (!ItemType.BaseItemCategory.CanApplyTunnelBonus)
+                    if (!BaseItemCategory.CanApplyTunnelBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -2997,7 +2993,7 @@ namespace AngbandOS
 
                 case 22:
                 case 23:
-                    if (!ItemType.BaseItemCategory.CanApplyBlowsBonus)
+                    if (!BaseItemCategory.CanApplyBlowsBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3128,7 +3124,7 @@ namespace AngbandOS
                 case 24:
                 case 25:
                 case 26:
-                    if (!ItemType.BaseItemCategory.CanApplyBonusArmourClassMiscPower)
+                    if (!BaseItemCategory.CanApplyBonusArmourClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }
@@ -3166,7 +3162,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            ItemType.BaseItemCategory.ApplyRandomSlaying(ref artifactBias, this);
+            BaseItemCategory.ApplyRandomSlaying(ref artifactBias, this);
         }
 
         private void CurseRandart()
@@ -3296,10 +3292,10 @@ namespace AngbandOS
                 {
                     return false;
                 }
-                ItemType kIdx = new ItemType(aPtr.BaseItemCategory);
-                if (kIdx.BaseItemCategory.Level > SaveGame.Level.ObjectLevel)
+                BaseItemCategory kIdx = aPtr.BaseItemCategory;
+                if (kIdx.Level > SaveGame.Level.ObjectLevel)
                 {
-                    int d = (kIdx.BaseItemCategory.Level - SaveGame.Level.ObjectLevel) * 5;
+                    int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
                     if (Program.Rng.RandomLessThan(d) != 0)
                     {
                         continue;
@@ -3326,7 +3322,7 @@ namespace AngbandOS
             AllocationEntry[] table = SaveGame.AllocKindTable;
             for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
-                if (SaveGame.ItemTypes[table[i].Index].BaseItemCategory.KindIsGood)
+                if (SaveGame.ItemTypes[table[i].Index].KindIsGood)
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }

@@ -32,7 +32,7 @@ namespace AngbandOS.StaticData
             {
                 int i = Program.Rng.RandomLessThan(InventorySlot.Pack);
                 Item item = saveGame.Player.Inventory[i];
-                if (item.ItemType == null)
+                if (item.BaseItemCategory == null)
                 {
                     continue;
                 }
