@@ -635,9 +635,7 @@ namespace AngbandOS
             f1.Clear();
             f2.Clear();
             f3.Clear();
-            if ((ProfessionIndex == CharacterClass.Warrior && Level > 29) ||
-                (ProfessionIndex == CharacterClass.Paladin && Level > 39) ||
-                (ProfessionIndex == CharacterClass.Fanatic && Level > 39))
+            if ((ProfessionIndex == CharacterClass.Warrior && Level > 29) || (ProfessionIndex == CharacterClass.Paladin && Level > 39) || (ProfessionIndex == CharacterClass.Fanatic && Level > 39))
             {
                 f2.Set(ItemFlag2.ResFear);
             }
@@ -649,13 +647,11 @@ namespace AngbandOS
             {
                 f2.Set(ItemFlag2.ResChaos);
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 9 &&
-                !playerStatus.MartialArtistHeavyArmour())
+            if (ProfessionIndex == CharacterClass.Monk && Level > 9 && !playerStatus.MartialArtistHeavyArmour())
             {
                 f1.Set(ItemFlag1.Speed);
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 24 &&
-                !playerStatus.MartialArtistHeavyArmour())
+            if (ProfessionIndex == CharacterClass.Monk && Level > 24 && !playerStatus.MartialArtistHeavyArmour())
             {
                 f2.Set(ItemFlag2.FreeAct);
             }
