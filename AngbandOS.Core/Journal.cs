@@ -1152,7 +1152,7 @@ namespace AngbandOS
                 ItemType kPtr = SaveGame.ItemTypes[i];
                 if (kPtr.BaseItemCategory.CategoryEnum == tval)
                 {
-                    if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
+                    if (kPtr.BaseItemCategory.InstaArt)
                     {
                         continue;
                     }
@@ -1199,7 +1199,7 @@ namespace AngbandOS
                                 kPtr = SaveGame.ItemTypes[i];
                                 if (kPtr.BaseItemCategory.CategoryEnum == tval)
                                 {
-                                    if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
+                                    if (kPtr.BaseItemCategory.InstaArt)
                                     {
                                         continue;
                                     }
@@ -1226,7 +1226,7 @@ namespace AngbandOS
                                 kPtr = SaveGame.ItemTypes[i];
                                 if (kPtr.BaseItemCategory.CategoryEnum == tval)
                                 {
-                                    if (kPtr.Flags3.IsSet(ItemFlag3.InstaArt))
+                                    if (kPtr.BaseItemCategory.InstaArt)
                                     {
                                         continue;
                                     }

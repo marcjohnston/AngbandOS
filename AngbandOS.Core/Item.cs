@@ -360,7 +360,7 @@ namespace AngbandOS
             {
                 IdentifyFlags.Set(Constants.IdentBroken);
             }
-            if (itemType.Flags3.IsSet(ItemFlag3.Cursed))
+            if (itemType.BaseItemCategory.Cursed)
             {
                 IdentifyFlags.Set(Constants.IdentCursed);
             }
@@ -575,7 +575,7 @@ namespace AngbandOS
             {
                 return "(nothing)";
             }
-            GetMergedFlags(f1, f2, f3); // DO NOT REFACTOR THIS
+            GetMergedFlags(f1, f2, f3); // ORIGINAL DESCRIPTION DO NOT REFACTOR THIS
             if (IsFlavourAware())
             {
                 aware = true;
@@ -1625,9 +1625,8 @@ namespace AngbandOS
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3); // NO NEED TO REFACTOR THIS CALL
+            GetMergedFlags(f1, f2, f3); // NEEDS TO BE REFACTORED
 
-          //  Characteristics = new ItemCharacteristics();
             Characteristics.Blows = f1.IsSet(ItemFlag1.Blows);
             Characteristics.BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
             Characteristics.BrandCold = f1.IsSet(ItemFlag1.BrandCold);
@@ -2390,7 +2389,7 @@ namespace AngbandOS
                 return 0;
             }
             int value = kPtr.BaseItemCategory.Cost;
-            GetMergedFlags(f1, f2, f3); // DO NOT REFACTOR THIS CALL
+            GetMergedFlags(f1, f2, f3); // ORIGINAL REAL VALUE DO NOT REFACTOR THIS CALL
             if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -3176,7 +3175,7 @@ namespace AngbandOS
                 {
                     IdentifyFlags.Set(Constants.IdentBroken);
                 }
-                if (kPtr.Flags3.IsSet(ItemFlag3.Cursed))
+                if (kPtr.BaseItemCategory.Cursed)
                 {
                     IdentifyFlags.Set(Constants.IdentCursed);
                 }

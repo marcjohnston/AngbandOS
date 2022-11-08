@@ -784,7 +784,7 @@ namespace AngbandOS.Commands
             FlagSet f1 = new FlagSet();
             FlagSet f2 = new FlagSet();
             FlagSet f3 = new FlagSet();
-            oPtr.GetMergedFlags(f1, f2, f3);
+            oPtr.GetMergedFlags(f1, f2, f3); // NEEDS TO BE REFACTORED
             for (int i = 1; i <= 23; i++)
             {
                 saveGame.PrintLine("", i, j - 2);
