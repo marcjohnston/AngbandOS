@@ -2209,7 +2209,7 @@ namespace AngbandOS
                 {
                     IdentifyFlags.Set(Constants.IdentBroken);
                 }
-                if (ePtr.Flags3.IsSet(ItemFlag3.Cursed))
+                if (ePtr.RareItemCharacteristics.Cursed)
                 {
                     IdentifyFlags.Set(Constants.IdentCursed);
                 }
