@@ -7,9 +7,9 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Wis))
+            if (!item.RandartItemCharacteristics.Wis)
             {
-                item.RandartFlags1.Set(ItemFlag1.Wis);
+                item.RandartItemCharacteristics.Wis = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -20,9 +20,9 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplySlaying(Item item)
         {
-            if ((item.Category == ItemCategory.Sword || item.Category == ItemCategory.Polearm) && item.RandartFlags3.IsClear(ItemFlag3.Blessed))
+            if ((item.Category == ItemCategory.Sword || item.Category == ItemCategory.Polearm) && !item.RandartItemCharacteristics.Blessed)
             {
-                item.RandartFlags3.Set(ItemFlag3.Blessed);
+                item.RandartItemCharacteristics.Blessed = true;
             }
             return false;
         }

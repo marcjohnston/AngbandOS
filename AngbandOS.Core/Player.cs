@@ -409,8 +409,8 @@ namespace AngbandOS
                 {
                     changed = true;
                 }
-                oPtr.RandartFlags3.Set(ItemFlag3.HeavyCurse);
-                oPtr.RandartFlags3.Set(ItemFlag3.Cursed);
+                oPtr.RandartItemCharacteristics.HeavyCurse = true;
+                oPtr.RandartItemCharacteristics.Cursed = true;
                 oPtr.IdentifyFlags.Set(Constants.IdentCursed);
             }
             else
@@ -419,7 +419,7 @@ namespace AngbandOS
                 {
                     changed = true;
                 }
-                oPtr.RandartFlags3.Set(ItemFlag3.Cursed);
+                oPtr.RandartItemCharacteristics.Cursed = true;
                 oPtr.IdentifyFlags.Set(Constants.IdentCursed);
             }
             if (changed)

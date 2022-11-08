@@ -7,25 +7,25 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Con))
+            if (!item.RandartItemCharacteristics.Con)
             {
-                item.RandartFlags1.Set(ItemFlag1.Con);
+                item.RandartItemCharacteristics.Con = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            else if (item.RandartFlags1.IsClear(ItemFlag1.Dex))
+            else if (!item.RandartItemCharacteristics.Dex)
             {
-                item.RandartFlags1.Set(ItemFlag1.Dex);
+                item.RandartItemCharacteristics.Dex = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            else if (item.RandartFlags1.IsClear(ItemFlag1.Str))
+            else if (!item.RandartItemCharacteristics.Str)
             {
-                item.RandartFlags1.Set(ItemFlag1.Str);
+                item.RandartItemCharacteristics.Str = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -36,9 +36,9 @@ namespace AngbandOS.ArtifactBiases
         }
         public override bool ApplyMiscPowers(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.SustCon))
+            if (!item.RandartItemCharacteristics.SustCon)
             {
-                item.RandartFlags2.Set(ItemFlag2.SustCon);
+                item.RandartItemCharacteristics.SustCon = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -50,9 +50,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.SlayAnimal))
+                if (!item.RandartItemCharacteristics.SlayAnimal)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.SlayAnimal);
+                    item.RandartItemCharacteristics.SlayAnimal = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

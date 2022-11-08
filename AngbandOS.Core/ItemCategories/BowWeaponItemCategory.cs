@@ -63,7 +63,7 @@ namespace AngbandOS.ItemCategories
                 case 1:
                 case 2:
                 case 3:
-                    item.RandartFlags3.Set(ItemFlag3.XtraMight);
+                    item.RandartItemCharacteristics.XtraMight = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new RangerArtifactBias();
@@ -71,7 +71,7 @@ namespace AngbandOS.ItemCategories
                     break;
 
                 default:
-                    item.RandartFlags3.Set(ItemFlag3.XtraShots);
+                    item.RandartItemCharacteristics.XtraShots = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new RangerArtifactBias();

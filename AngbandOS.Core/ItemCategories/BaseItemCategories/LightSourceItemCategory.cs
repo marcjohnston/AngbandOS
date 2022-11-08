@@ -175,91 +175,91 @@ namespace AngbandOS.ItemCategories
                     {
                         case 1:
                         case 2:
-                            item.RandartFlags2.Set(ItemFlag2.ResDark);
+                            item.RandartItemCharacteristics.ResDark = true;
                             break;
                         case 3:
-                            item.RandartFlags2.Set(ItemFlag2.ResLight);
+                            item.RandartItemCharacteristics.ResLight = true;
                             break;
                         case 4:
-                            item.RandartFlags2.Set(ItemFlag2.ResBlind);
+                            item.RandartItemCharacteristics.ResBlind = true;
                             break;
                         case 5:
-                            item.RandartFlags2.Set(ItemFlag2.ResFear);
+                            item.RandartItemCharacteristics.ResFear = true;
                             break;
                         case 6:
-                            item.RandartFlags2.Set(ItemFlag2.ResAcid);
+                            item.RandartItemCharacteristics.ResAcid = true;
                             break;
                         case 7:
-                            item.RandartFlags2.Set(ItemFlag2.ResElec);
+                            item.RandartItemCharacteristics.ResElec = true;
                             break;
                         case 8:
-                            item.RandartFlags2.Set(ItemFlag2.ResFire);
+                            item.RandartItemCharacteristics.ResFire = true;
                             break;
                         case 9:
-                            item.RandartFlags2.Set(ItemFlag2.ResCold);
+                            item.RandartItemCharacteristics.ResCold = true;
                             break;
                         case 10:
-                            item.RandartFlags2.Set(ItemFlag2.ResPois);
+                            item.RandartItemCharacteristics.ResPois = true;
                             break;
                         case 11:
-                            item.RandartFlags2.Set(ItemFlag2.ResConf);
+                            item.RandartItemCharacteristics.ResConf = true;
                             break;
                         case 12:
-                            item.RandartFlags2.Set(ItemFlag2.ResSound);
+                            item.RandartItemCharacteristics.ResSound = true;
                             break;
                         case 13:
-                            item.RandartFlags2.Set(ItemFlag2.ResShards);
+                            item.RandartItemCharacteristics.ResShards = true;
                             break;
                         case 14:
-                            item.RandartFlags2.Set(ItemFlag2.ResNether);
+                            item.RandartItemCharacteristics.ResNether = true;
                             break;
                         case 15:
-                            item.RandartFlags2.Set(ItemFlag2.ResNexus);
+                            item.RandartItemCharacteristics.ResNexus = true;
                             break;
                         case 16:
-                            item.RandartFlags2.Set(ItemFlag2.ResChaos);
+                            item.RandartItemCharacteristics.ResChaos = true;
                             break;
                         case 17:
-                            item.RandartFlags2.Set(ItemFlag2.ResDisen);
+                            item.RandartItemCharacteristics.ResDisen = true;
                             break;
                         case 18:
-                            item.RandartFlags2.Set(ItemFlag2.FreeAct);
+                            item.RandartItemCharacteristics.FreeAct = true;
                             break;
                         case 19:
-                            item.RandartFlags2.Set(ItemFlag2.HoldLife);
+                            item.RandartItemCharacteristics.HoldLife = true;
                             break;
                         case 20:
-                            item.RandartFlags2.Set(ItemFlag2.SustStr);
+                            item.RandartItemCharacteristics.SustStr = true;
                             break;
                         case 21:
-                            item.RandartFlags2.Set(ItemFlag2.SustInt);
+                            item.RandartItemCharacteristics.SustInt = true;
                             break;
                         case 22:
-                            item.RandartFlags2.Set(ItemFlag2.SustWis);
+                            item.RandartItemCharacteristics.SustWis = true;
                             break;
                         case 23:
-                            item.RandartFlags2.Set(ItemFlag2.SustDex);
+                            item.RandartItemCharacteristics.SustDex = true;
                             break;
                         case 24:
-                            item.RandartFlags2.Set(ItemFlag2.SustCon);
+                            item.RandartItemCharacteristics.SustCon = true;
                             break;
                         case 25:
-                            item.RandartFlags2.Set(ItemFlag2.SustCha);
+                            item.RandartItemCharacteristics.SustCha = true;
                             break;
                         case 26:
-                            item.RandartFlags3.Set(ItemFlag3.Feather);
+                            item.RandartItemCharacteristics.Feather = true;
                             break;
                         case 27:
-                            item.RandartFlags3.Set(ItemFlag3.SeeInvis);
+                            item.RandartItemCharacteristics.SeeInvis = true;
                             break;
                         case 28:
-                            item.RandartFlags3.Set(ItemFlag3.Telepathy);
+                            item.RandartItemCharacteristics.Telepathy = true;
                             break;
                         case 29:
-                            item.RandartFlags3.Set(ItemFlag3.SlowDigest);
+                            item.RandartItemCharacteristics.SlowDigest = true;
                             break;
                         case 30:
-                            item.RandartFlags3.Set(ItemFlag3.Regen);
+                            item.RandartItemCharacteristics.Regen = true;
                             break;
                     }
                 }

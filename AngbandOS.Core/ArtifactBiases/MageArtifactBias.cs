@@ -7,9 +7,9 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Int))
+            if (!item.RandartItemCharacteristics.Int)
             {
-                item.RandartFlags1.Set(ItemFlag1.Int);
+                item.RandartItemCharacteristics.Int = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;

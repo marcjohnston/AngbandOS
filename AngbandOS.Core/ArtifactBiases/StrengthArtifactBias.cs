@@ -6,9 +6,9 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Str))
+            if (!item.RandartItemCharacteristics.Str)
             {
-                item.RandartFlags1.Set(ItemFlag1.Str);
+                item.RandartItemCharacteristics.Str = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -18,9 +18,9 @@ namespace AngbandOS.ArtifactBiases
         }
         public override bool ApplyMiscPowers(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.SustStr))
+            if (!item.RandartItemCharacteristics.SustStr)
             {
-                item.RandartFlags2.Set(ItemFlag2.SustStr);
+                item.RandartItemCharacteristics.SustStr = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;

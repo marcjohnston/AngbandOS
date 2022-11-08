@@ -7,27 +7,25 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyRandomResistances(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResFire))
+            if (!item.RandartItemCharacteristics.ResFire)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResFire);
+                item.RandartItemCharacteristics.ResFire = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (item.Category >= ItemCategory.Cloak &&
-                item.Category <= ItemCategory.HardArmor &&
-                item.RandartFlags3.IsClear(ItemFlag3.ShFire))
+            if (item.Category >= ItemCategory.Cloak && item.Category <= ItemCategory.HardArmor && !item.RandartItemCharacteristics.ShFire)
             {
-                item.RandartFlags3.Set(ItemFlag3.ShFire);
+                item.RandartItemCharacteristics.ShFire = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImFire))
+            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImFire)
             {
-                item.RandartFlags2.Set(ItemFlag2.ImFire);
+                item.RandartItemCharacteristics.ImFire = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -38,9 +36,9 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplyMiscPowers(Item item)
         {
-            if (item.RandartFlags3.IsClear(ItemFlag3.Lightsource))
+            if (!item.RandartItemCharacteristics.Lightsource)
             {
-                item.RandartFlags3.Set(ItemFlag3.Lightsource);
+                item.RandartItemCharacteristics.Lightsource = true;
             }
             return false;
         }
@@ -49,9 +47,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandFire))
+                if (!item.RandartItemCharacteristics.BrandFire)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandFire);
+                    item.RandartItemCharacteristics.BrandFire = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

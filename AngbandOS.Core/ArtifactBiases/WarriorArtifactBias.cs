@@ -7,25 +7,25 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Str))
+            if (!item.RandartItemCharacteristics.Str)
             {
-                item.RandartFlags1.Set(ItemFlag1.Str);
+                item.RandartItemCharacteristics.Str = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            else if (item.RandartFlags1.IsClear(ItemFlag1.Con))
+            else if (!item.RandartItemCharacteristics.Con)
             {
-                item.RandartFlags1.Set(ItemFlag1.Con);
+                item.RandartItemCharacteristics.Con = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            else if (item.RandartFlags1.IsClear(ItemFlag1.Dex))
+            else if (!item.RandartItemCharacteristics.Dex)
             {
-                item.RandartFlags1.Set(ItemFlag1.Dex);
+                item.RandartItemCharacteristics.Dex = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -36,17 +36,17 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplyRandomResistances(Item item)
         {
-            if (Program.Rng.DieRoll(3) != 1 && item.RandartFlags2.IsClear(ItemFlag2.ResFear))
+            if (Program.Rng.DieRoll(3) != 1 && !item.RandartItemCharacteristics.ResFear)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResFear);
+                item.RandartItemCharacteristics.ResFear = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(3) == 1 && item.RandartFlags3.IsClear(ItemFlag3.NoMagic))
+            if (Program.Rng.DieRoll(3) == 1 && !item.RandartItemCharacteristics.NoMagic)
             {
-                item.RandartFlags3.Set(ItemFlag3.NoMagic);
+                item.RandartItemCharacteristics.NoMagic = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;

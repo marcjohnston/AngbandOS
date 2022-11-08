@@ -6,17 +6,17 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyRandomResistances(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResAcid))
+            if (!item.RandartItemCharacteristics.ResAcid)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResAcid);
+                item.RandartItemCharacteristics.ResAcid = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImAcid))
+            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImAcid)
             {
-                item.RandartFlags2.Set(ItemFlag2.ImAcid);
+                item.RandartItemCharacteristics.ImAcid = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -29,9 +29,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandAcid))
+                if (!item.RandartItemCharacteristics.BrandAcid)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandAcid);
+                    item.RandartItemCharacteristics.BrandAcid = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

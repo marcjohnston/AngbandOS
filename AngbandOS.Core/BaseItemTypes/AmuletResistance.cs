@@ -33,7 +33,7 @@ namespace AngbandOS.ItemCategories
             }
             if (Program.Rng.DieRoll(5) == 1)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResPois);
+                item.RandartItemCharacteristics.ResPois = true;
             }
         }
 

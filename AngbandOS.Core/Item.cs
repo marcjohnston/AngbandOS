@@ -18,9 +18,7 @@ namespace AngbandOS
     internal class Item
     {
         public readonly FlagSet IdentifyFlags = new FlagSet();
-        public readonly FlagSet RandartFlags1 = new FlagSet();
-        public readonly FlagSet RandartFlags2 = new FlagSet();
-        public readonly FlagSet RandartFlags3 = new FlagSet();
+        public readonly ItemCharacteristics RandartItemCharacteristics = new ItemCharacteristics();
         public int BaseArmourClass;
         public int BonusArmourClass;
         public int BonusDamage;
@@ -71,9 +69,7 @@ namespace AngbandOS
         {
             SaveGame = saveGame;
             BaseArmourClass = original.BaseArmourClass;
-            RandartFlags1.Copy(original.RandartFlags1);
-            RandartFlags2.Copy(original.RandartFlags2);
-            RandartFlags3.Copy(original.RandartFlags3);
+            RandartItemCharacteristics.Copy(original.RandartItemCharacteristics);
             RandartName = original.RandartName;
             DamageDice = original.DamageDice;
             Discount = original.Discount;
@@ -461,8 +457,7 @@ namespace AngbandOS
                 return false;
             }    
 
-            if (RandartFlags1.Value != other.RandartFlags1.Value || RandartFlags2.Value != other.RandartFlags2.Value ||
-                RandartFlags3.Value != other.RandartFlags3.Value)
+            if (RandartItemCharacteristics != other.RandartItemCharacteristics)
             {
                 return false;
             }
@@ -493,7 +488,7 @@ namespace AngbandOS
         /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
         /// <param name="mode"></param>
         /// <returns></returns>
-        private string NewDescription(bool includeCountPrefix, int mode)
+        public string Description(bool includeCountPrefix, int mode)
         {
             if (ItemType == null || ItemType.BaseItemCategory == null)
             {
@@ -549,655 +544,6 @@ namespace AngbandOS
                 basenm = basenm.Substring(0, 75);
             }
             return basenm;
-        }
-
-        private string OriginalDescription(bool pref, int mode)
-        {
-            bool aware = false;
-            bool known = false;
-            bool appendName = false;
-            bool showWeapon = false;
-            bool showArmour = false;
-            string s;
-            const char p1 = '(';
-            const char p2 = ')';
-            const char b1 = '[';
-            const char b2 = ']';
-            const char c1 = '{';
-            const char c2 = '}';
-            const string tmpVal = "";
-            string tmpVal2 = "";
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            ItemType kPtr = ItemType;
-            if (kPtr == null)
-            {
-                return "(nothing)";
-            }
-            GetMergedFlags(f1, f2, f3); // ORIGINAL DESCRIPTION DO NOT REFACTOR THIS
-            if (IsFlavourAware())
-            {
-                aware = true;
-            }
-            if (IsKnown())
-            {
-                known = true;
-            }
-            int indexx = ItemSubCategory;
-            string basenm = kPtr.BaseItemCategory.FriendlyName;
-            string modstr = "";
-            switch (Category)
-            {
-                case ItemCategory.Skeleton:
-                case ItemCategory.Bottle:
-                case ItemCategory.Junk:
-                case ItemCategory.Spike:
-                case ItemCategory.Flask:
-                case ItemCategory.Chest:
-                    break;
-
-                case ItemCategory.Shot:
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bow:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Digging:
-                    showWeapon = true;
-                    break;
-
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Cloak:
-                case ItemCategory.Crown:
-                case ItemCategory.Helm:
-                case ItemCategory.Shield:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
-                    showArmour = true;
-                    break;
-
-                case ItemCategory.Light:
-                    break;
-
-                case ItemCategory.Amulet:
-                    if (IsFixedArtifact() && aware)
-                    {
-                        break;
-                    }
-                    modstr = SaveGame.AmuletFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Amulet~" : "& # Amulet~";
-                    break;
-
-                case ItemCategory.Ring:
-                    if (IsFixedArtifact() && aware)
-                    {
-                        break;
-                    }
-                    modstr = SaveGame.RingFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Ring~" : "& # Ring~";
-                    if (!aware && ItemSubCategory == Enumerations.RingType.Power)
-                    {
-                        modstr = "Plain Gold";
-                    }
-                    break;
-
-                case ItemCategory.Staff:
-                    modstr = SaveGame.StaffFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Staff~" : "& # Staff~";
-                    break;
-
-                case ItemCategory.Wand:
-                    modstr = SaveGame.WandFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Wand~" : "& # Wand~";
-                    break;
-
-                case ItemCategory.Rod:
-                    modstr = SaveGame.RodFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Rod~" : "& # Rod~";
-                    break;
-
-                case ItemCategory.Scroll:
-                    modstr = SaveGame.ScrollFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Scroll~" : "& Scroll~ titled \"#\"";
-                    break;
-
-                case ItemCategory.Potion:
-                    modstr = SaveGame.PotionFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Potion~" : "& # Potion~";
-                    break;
-
-                case ItemCategory.Food:
-                    if (ItemSubCategory >= Enumerations.FoodType.MinFood)
-                    {
-                        break;
-                    }
-                    modstr = SaveGame.MushroomFlavours[indexx].Name;
-                    if (aware)
-                    {
-                        appendName = true;
-                    }
-                    basenm = IdentifyFlags.IsSet(Constants.IdentStoreb) ? "& Mushroom~" : "& # Mushroom~";
-                    break;
-
-                case ItemCategory.LifeBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Life Magic #"
-                        : "& Life Spellbook~ #";
-                    break;
-
-                case ItemCategory.SorceryBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Sorcery #"
-                        : "& Sorcery Spellbook~ #";
-                    break;
-
-                case ItemCategory.NatureBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Nature Magic #"
-                        : "& Nature Spellbook~ #";
-                    break;
-
-                case ItemCategory.ChaosBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Chaos Magic #"
-                        : "& Chaos Spellbook~ #";
-                    break;
-
-                case ItemCategory.DeathBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Death Magic #"
-                        : "& Death Spellbook~ #";
-                    break;
-
-                case ItemCategory.TarotBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Tarot Magic #"
-                        : "& Tarot Spellbook~ #";
-                    break;
-
-                case ItemCategory.FolkBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Folk Magic #"
-                        : "& Folk Spellbook~ #";
-                    break;
-
-                case ItemCategory.CorporealBook:
-                    modstr = basenm;
-                    basenm = SaveGame.Player.Spellcasting.Type == CastingType.Divine
-                        ? "& Book~ of Corporeal Magic #"
-                        : "& Corporeal Spellbook~ #";
-                    break;
-
-                case ItemCategory.Gold:
-                    return basenm;
-
-                default:
-                    return "(nothing)";
-            }
-            string t = tmpVal;
-            if (basenm[0] == '&')
-            {
-                s = basenm.Substring(2);
-                if (!pref)
-                {
-                }
-                else if (Count <= 0)
-                {
-                    t += "no more ";
-                }
-                else if (Count > 1)
-                {
-                    t += Count;
-                    t += ' ';
-                }
-                else if (known && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName)))
-                {
-                    t += "The ";
-                }
-                else if (s.StartsWith("#") && modstr[0].IsVowel())
-                {
-                    t += "an ";
-                }
-                else if (s[0].IsVowel())
-                {
-                    t += "an ";
-                }
-                else
-                {
-                    t += "a ";
-                }
-            }
-            else
-            {
-                s = basenm;
-                if (!pref)
-                {
-                }
-                else if (Count <= 0)
-                {
-                    t += "no more ";
-                }
-                else if (Count > 1)
-                {
-                    t += Count;
-                    t += ' ';
-                }
-                else if (known && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName)))
-                {
-                    t += "The ";
-                }
-            }
-            foreach (char ch in s)
-            {
-                if (ch == '~')
-                {
-                    if (Count != 1)
-                    {
-                        char k = t[t.Length - 1];
-                        if (k == 's' || k == 'h')
-                        {
-                            t += 'e';
-                        }
-                        t += 's';
-                    }
-                }
-                else if (ch == '#')
-                {
-                    t += modstr;
-                }
-                else
-                {
-                    t += ch;
-                }
-            }
-            if (appendName)
-            {
-                t += " of ";
-                t += kPtr.BaseItemCategory.FriendlyName;
-            }
-            if (known)
-            {
-                if (!string.IsNullOrEmpty(RandartName))
-                {
-                    t += ' ';
-                    t += RandartName;
-                }
-                else if (FixedArtifactIndex != 0)
-                {
-                    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
-                    t += ' ';
-                    t += aPtr.Name;
-                }
-                else if (RareItemTypeIndex != Enumerations.RareItemType.None)
-                {
-                    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-                    t += ' ';
-                    t += ePtr.Name;
-                }
-            }
-            if (mode < 1)
-            {
-                return t;
-            }
-            if (Category == ItemCategory.Chest)
-            {
-                if (!known)
-                {
-                }
-                else if (TypeSpecificValue == 0)
-                {
-                    t += " (empty)";
-                }
-                else if (TypeSpecificValue < 0)
-                {
-                    if (GlobalData.ChestTraps[-TypeSpecificValue] != ChestTrap.ChestNotTrapped)
-                    {
-                        t += " (disarmed)";
-                    }
-                    else
-                    {
-                        t += " (unlocked)";
-                    }
-                }
-                else
-                {
-                    switch (GlobalData.ChestTraps[TypeSpecificValue])
-                    {
-                        case ChestTrap.ChestNotTrapped:
-                            {
-                                t += " (Locked)";
-                                break;
-                            }
-                        case ChestTrap.ChestLoseStr:
-                            {
-                                t += " (Poison Needle)";
-                                break;
-                            }
-                        case ChestTrap.ChestLoseCon:
-                            {
-                                t += " (Poison Needle)";
-                                break;
-                            }
-                        case ChestTrap.ChestPoison:
-                            {
-                                t += " (Gas Trap)";
-                                break;
-                            }
-                        case ChestTrap.ChestParalyze:
-                            {
-                                t += " (Gas Trap)";
-                                break;
-                            }
-                        case ChestTrap.ChestExplode:
-                            {
-                                t += " (Explosion Device)";
-                                break;
-                            }
-                        case ChestTrap.ChestSummon:
-                            {
-                                t += " (Summoning Runes)";
-                                break;
-                            }
-                        default:
-                            {
-                                t += " (Multiple Traps)";
-                                break;
-                            }
-                    }
-                }
-            }
-            if (f3.IsSet(ItemFlag3.ShowMods))
-            {
-                showWeapon = true;
-            }
-            if (BonusToHit != 0 && BonusDamage != 0)
-            {
-                showWeapon = true;
-            }
-            if (BaseArmourClass != 0)
-            {
-                showArmour = true;
-            }
-            switch (Category)
-            {
-                case ItemCategory.Shot:
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Digging:
-                    t += ' ';
-                    t += p1;
-                    t += DamageDice;
-                    t += 'd';
-                    t += DamageDiceSides;
-                    t += p2;
-                    break;
-
-                case ItemCategory.Bow:
-                    int power = ItemSubCategory % 10;
-                    if (f3.IsSet(ItemFlag3.XtraMight))
-                    {
-                        power++;
-                    }
-                    t += ' ';
-                    t += p1;
-                    t += 'x';
-                    t += power;
-                    t += p2;
-                    break;
-            }
-            if (known)
-            {
-                if (showWeapon)
-                {
-                    t += ' ';
-                    t += p1;
-                    if (BonusToHit >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusToHit;
-                    t += ',';
-                    if (BonusDamage >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusDamage;
-                    t += p2;
-                }
-                else if (BonusToHit != 0)
-                {
-                    t += ' ';
-                    t += p1;
-                    if (BonusToHit >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusToHit;
-                    t += p2;
-                }
-                else if (BonusDamage != 0)
-                {
-                    t += ' ';
-                    t += p1;
-                    if (BonusDamage >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusDamage;
-                    t += p2;
-                }
-            }
-            if (known)
-            {
-                if (showArmour)
-                {
-                    t += ' ';
-                    t += b1;
-                    t += BaseArmourClass;
-                    t += ',';
-                    if (BonusArmourClass >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusArmourClass;
-                    t += b2;
-                }
-                else if (BonusArmourClass != 0)
-                {
-                    t += ' ';
-                    t += b1;
-                    if (BonusArmourClass >= 0)
-                    {
-                        t += "+";
-                    }
-                    t += BonusArmourClass;
-                    t += b2;
-                }
-            }
-            else if (showArmour)
-            {
-                t += ' ';
-                t += b1;
-                t += BaseArmourClass;
-                t += b2;
-            }
-            if (mode < 2)
-            {
-                return t;
-            }
-            if (known && (Category == ItemCategory.Staff || Category == ItemCategory.Wand))
-            {
-                t += ' ';
-                t += p1;
-                t += TypeSpecificValue;
-                t += " charge";
-                if (TypeSpecificValue != 1)
-                {
-                    t += 's';
-                }
-                t += p2;
-            }
-            else if (known && Category == ItemCategory.Rod)
-            {
-                if (TypeSpecificValue != 0)
-                {
-                    t += " (charging)";
-                }
-            }
-            else if (Category == ItemCategory.Light && (ItemSubCategory == Enumerations.LightType.Torch || ItemSubCategory == Enumerations.LightType.Lantern))
-            {
-                if (TypeSpecificValue == 1)
-                {
-                    t += $" (with 1 turn of light)";
-                }
-                else
-                {
-                    t += $" (with {TypeSpecificValue} turns of light)";
-                }
-            }
-
-            if (known && ItemType.BaseItemCategory.HasAnyPvalMask)
-            {
-                t += ' ';
-                t += p1;
-                if (TypeSpecificValue >= 0)
-                {
-                    t += "+";
-                }
-                t += TypeSpecificValue;
-                if (f3.IsSet(ItemFlag3.HideType))
-                {
-                }
-                else if (f1.IsSet(ItemFlag1.Speed))
-                {
-                    t += " speed";
-                }
-                else if (f1.IsSet(ItemFlag1.Blows))
-                {
-                    if (TypeSpecificValue > 1)
-                    {
-                        t += " attacks";
-                    }
-                    else
-                    {
-                        t += " attack";
-                    }
-                }
-                else if (f1.IsSet(ItemFlag1.Stealth))
-                {
-                    t += " stealth";
-                }
-                else if (f1.IsSet(ItemFlag1.Search))
-                {
-                    t += " searching";
-                }
-                else if (f1.IsSet(ItemFlag1.Infra))
-                {
-                    t += " infravision";
-                }
-                else if (f1.IsSet(ItemFlag1.Tunnel))
-                {
-                }
-                t += p2;
-            }
-            if (known && RechargeTimeLeft != 0)
-            {
-                t += " (charging)";
-            }
-            if (mode < 3)
-            {
-                return t;
-            }
-            if (!string.IsNullOrEmpty(Inscription))
-            {
-                tmpVal2 = Inscription;
-            }
-            else if (IsCursed() && (known || IdentifyFlags.IsSet(Constants.IdentSense)))
-            {
-                tmpVal2 = "cursed";
-            }
-            else if (!known && IdentifyFlags.IsSet(Constants.IdentEmpty))
-            {
-                tmpVal2 = "empty";
-            }
-            else if (!aware && IsTried())
-            {
-                tmpVal2 = "tried";
-            }
-            else if (Discount != 0)
-            {
-                tmpVal2 = Discount.ToString();
-                tmpVal2 += "% off";
-            }
-            if (!string.IsNullOrEmpty(tmpVal2))
-            {
-                t += ' ';
-                t += c1;
-                t += tmpVal2;
-                t += c2;
-            }
-            if (t.Length > 75)
-            {
-                t = t.Substring(0, 75);
-            }
-            return t;
-        }
-
-        public string Description(bool pref, int mode)
-        {
-            string originalDescription = OriginalDescription(pref, mode);
-            string newDescription = NewDescription(pref, mode);
-            if (originalDescription == newDescription)
-            {
-                //SaveGame.MsgPrint("Inventory descriptions confirmed.");
-            }
-            else
-            {
-                SaveGame.MsgPrint("DESCRIPTION FAILED!");
-            }
-            return newDescription;
         }
 
         public int FlagBasedCost(int plusses)
@@ -1571,7 +917,7 @@ namespace AngbandOS
             {
                 total -= 15000;
             }
-            if (!string.IsNullOrEmpty(RandartName) && RandartFlags3.IsSet(ItemFlag3.Activate))
+            if (!string.IsNullOrEmpty(RandartName) && RandartItemCharacteristics.Activate)
             {
                 total += BonusPowerSubType.Value;
             }
@@ -1622,216 +968,123 @@ namespace AngbandOS
         /// </summary>
         public void RefreshFlagBasedProperties()
         {
-            //// All characteristics are set to false.
-            //Characteristics = new ItemCharacteristics();
-            //if (ItemType == null)
-            //{
-            //    return;
-            //}
-
-            //// Merge the characteristics from the base item category.
-            //Characteristics.Merge(ItemType.BaseItemCategory);
-
-            //// Now merge the characteristics from the fixed artifact, if there is one.
-            //if (FixedArtifactIndex != 0)
-            //{
-            //    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
-            //    Characteristics.Merge(aPtr.FixedArtifactItemCharacteristics);
-            //}
-
-            //// Now merge the characteristics from the rare item type, if there is one.
-            //if (RareItemTypeIndex != Enumerations.RareItemType.None)
-            //{
-            //    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-            //    Characteristics = new ItemCharacteristics(Characteristics, ePtr.RareItemCharacteristics);
-            //}
-
-            //Characteristics = new ItemCharacteristics(Characteristics, RandartFlags);
-
-            //if (!string.IsNullOrEmpty(RandartName))
-            //{
-            //    switch (BonusPowerType)
-            //    {
-            //        case Enumerations.RareItemType.SpecialSustain:
-            //            {
-            //                f2.Set(BonusPowerSubType.SpecialSustainFlag);
-            //                break;
-            //            }
-            //        case Enumerations.RareItemType.SpecialPower:
-            //            {
-            //                f2.Set(BonusPowerSubType.SpecialPowerFlag);
-            //                break;
-            //            }
-            //        case Enumerations.RareItemType.SpecialAbility:
-            //            {
-            //                f2.Set(BonusPowerSubType.SpecialAbilityFlag);
-            //                break;
-            //            }
-            //    }
-            //}
-
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            GetMergedFlags(f1, f2, f3); // NEEDS TO BE REFACTORED
-
-            Characteristics.Blows = f1.IsSet(ItemFlag1.Blows);
-            Characteristics.BrandAcid = f1.IsSet(ItemFlag1.BrandAcid);
-            Characteristics.BrandCold = f1.IsSet(ItemFlag1.BrandCold);
-            Characteristics.BrandElec = f1.IsSet(ItemFlag1.BrandElec);
-            Characteristics.BrandFire = f1.IsSet(ItemFlag1.BrandFire);
-            Characteristics.BrandPois = f1.IsSet(ItemFlag1.BrandPois);
-            Characteristics.Cha = f1.IsSet(ItemFlag1.Cha);
-            Characteristics.Chaotic = f1.IsSet(ItemFlag1.Chaotic);
-            Characteristics.Con = f1.IsSet(ItemFlag1.Con);
-            Characteristics.Dex = f1.IsSet(ItemFlag1.Dex);
-            Characteristics.Impact = f1.IsSet(ItemFlag1.Impact);
-            Characteristics.Infra = f1.IsSet(ItemFlag1.Infra);
-            Characteristics.Int = f1.IsSet(ItemFlag1.Int);
-            Characteristics.KillDragon = f1.IsSet(ItemFlag1.KillDragon);
-            Characteristics.Search = f1.IsSet(ItemFlag1.Search);
-            Characteristics.SlayAnimal = f1.IsSet(ItemFlag1.SlayAnimal);
-            Characteristics.SlayDemon = f1.IsSet(ItemFlag1.SlayDemon);
-            Characteristics.SlayDragon = f1.IsSet(ItemFlag1.SlayDragon);
-            Characteristics.SlayEvil = f1.IsSet(ItemFlag1.SlayEvil);
-            Characteristics.SlayGiant = f1.IsSet(ItemFlag1.SlayGiant);
-            Characteristics.SlayOrc = f1.IsSet(ItemFlag1.SlayOrc);
-            Characteristics.SlayTroll = f1.IsSet(ItemFlag1.SlayTroll);
-            Characteristics.SlayUndead = f1.IsSet(ItemFlag1.SlayUndead);
-            Characteristics.Speed = f1.IsSet(ItemFlag1.Speed);
-            Characteristics.Stealth = f1.IsSet(ItemFlag1.Stealth);
-            Characteristics.Str = f1.IsSet(ItemFlag1.Str);
-            Characteristics.Tunnel = f1.IsSet(ItemFlag1.Tunnel);
-            Characteristics.Vampiric = f1.IsSet(ItemFlag1.Vampiric);
-            Characteristics.Vorpal = f1.IsSet(ItemFlag1.Vorpal);
-            Characteristics.Wis = f1.IsSet(ItemFlag1.Wis);
-
-            Characteristics.FreeAct = f2.IsSet(ItemFlag2.FreeAct);
-            Characteristics.HoldLife = f2.IsSet(ItemFlag2.HoldLife);
-            Characteristics.ImAcid = f2.IsSet(ItemFlag2.ImAcid);
-            Characteristics.ImCold = f2.IsSet(ItemFlag2.ImCold);
-            Characteristics.ImElec = f2.IsSet(ItemFlag2.ImElec);
-            Characteristics.ImFire = f2.IsSet(ItemFlag2.ImFire);
-            Characteristics.Reflect = f2.IsSet(ItemFlag2.Reflect);
-            Characteristics.ResAcid = f2.IsSet(ItemFlag2.ResAcid);
-            Characteristics.ResBlind = f2.IsSet(ItemFlag2.ResBlind);
-            Characteristics.ResChaos = f2.IsSet(ItemFlag2.ResChaos);
-            Characteristics.ResCold = f2.IsSet(ItemFlag2.ResCold);
-            Characteristics.ResConf = f2.IsSet(ItemFlag2.ResConf);
-            Characteristics.ResDark = f2.IsSet(ItemFlag2.ResDark);
-            Characteristics.ResDisen = f2.IsSet(ItemFlag2.ResDisen);
-            Characteristics.ResElec = f2.IsSet(ItemFlag2.ResElec);
-            Characteristics.ResFear = f2.IsSet(ItemFlag2.ResFear);
-            Characteristics.ResFire = f2.IsSet(ItemFlag2.ResFire);
-            Characteristics.ResLight = f2.IsSet(ItemFlag2.ResLight);
-            Characteristics.ResNether = f2.IsSet(ItemFlag2.ResNether);
-            Characteristics.ResNexus = f2.IsSet(ItemFlag2.ResNexus);
-            Characteristics.ResPois = f2.IsSet(ItemFlag2.ResPois);
-            Characteristics.ResShards = f2.IsSet(ItemFlag2.ResShards);
-            Characteristics.ResSound = f2.IsSet(ItemFlag2.ResSound);
-            Characteristics.SustCha = f2.IsSet(ItemFlag2.SustCha);
-            Characteristics.SustCon = f2.IsSet(ItemFlag2.SustCon);
-            Characteristics.SustDex = f2.IsSet(ItemFlag2.SustDex);
-            Characteristics.SustInt = f2.IsSet(ItemFlag2.SustInt);
-            Characteristics.SustStr = f2.IsSet(ItemFlag2.SustStr);
-            Characteristics.SustWis = f2.IsSet(ItemFlag2.SustWis);
-
-            Characteristics.AntiTheft = f3.IsSet(ItemFlag3.AntiTheft);
-            Characteristics.Activate = f3.IsSet(ItemFlag3.Activate);
-            Characteristics.Aggravate = f3.IsSet(ItemFlag3.Aggravate);
-            Characteristics.Blessed = f3.IsSet(ItemFlag3.Blessed);
-            Characteristics.Cursed = f3.IsSet(ItemFlag3.Cursed);
-            Characteristics.DrainExp = f3.IsSet(ItemFlag3.DrainExp);
-            Characteristics.DreadCurse = f3.IsSet(ItemFlag3.DreadCurse);
-            Characteristics.EasyKnow = f3.IsSet(ItemFlag3.EasyKnow);
-            Characteristics.Feather = f3.IsSet(ItemFlag3.Feather);
-            Characteristics.HeavyCurse = f3.IsSet(ItemFlag3.HeavyCurse);
-            Characteristics.HideType = f3.IsSet(ItemFlag3.HideType);
-            Characteristics.IgnoreAcid = f3.IsSet(ItemFlag3.IgnoreAcid);
-            Characteristics.IgnoreCold = f3.IsSet(ItemFlag3.IgnoreCold);
-            Characteristics.IgnoreElec = f3.IsSet(ItemFlag3.IgnoreElec);
-            Characteristics.IgnoreFire = f3.IsSet(ItemFlag3.IgnoreFire);
-            Characteristics.InstaArt = f3.IsSet(ItemFlag3.InstaArt);
-            Characteristics.Lightsource = f3.IsSet(ItemFlag3.Lightsource);
-            Characteristics.NoMagic = f3.IsSet(ItemFlag3.NoMagic);
-            Characteristics.NoTele = f3.IsSet(ItemFlag3.NoTele);
-            Characteristics.PermaCurse = f3.IsSet(ItemFlag3.PermaCurse);
-            Characteristics.Regen = f3.IsSet(ItemFlag3.Regen);
-            Characteristics.SeeInvis = f3.IsSet(ItemFlag3.SeeInvis);
-            Characteristics.ShElec = f3.IsSet(ItemFlag3.ShElec);
-            Characteristics.ShFire = f3.IsSet(ItemFlag3.ShFire);
-            Characteristics.ShowMods = f3.IsSet(ItemFlag3.ShowMods);
-            Characteristics.SlowDigest = f3.IsSet(ItemFlag3.SlowDigest);
-            Characteristics.Telepathy = f3.IsSet(ItemFlag3.Telepathy);
-            Characteristics.Teleport = f3.IsSet(ItemFlag3.Teleport);
-            Characteristics.Wraith = f3.IsSet(ItemFlag3.Wraith);
-            Characteristics.XtraMight = f3.IsSet(ItemFlag3.XtraMight);
-            Characteristics.XtraShots = f3.IsSet(ItemFlag3.XtraShots);
-        }
-
-        /// <summary>
-        /// This method is deprecated as the flag based properties is being refactored into boolean based properties.  Call the RefreshFlagBasedProperties method
-        /// instead of GetMergedFlags and then use any of the flag-based properties as replacement functionality.
-        /// 
-        /// Combines all of the boolean properties from the item category, the fixed artifact, the rare item type and the random artifact the item is based on.
-        /// If the item is a random artifact it will also add the special sustain, power and ability flags from the bonus power type.  
-        /// </summary>
-        /// <param name="f1"></param>
-        /// <param name="f2"></param>
-        /// <param name="f3"></param>
-        public void GetMergedFlags(FlagSet f1, FlagSet f2, FlagSet f3) // TODO: Refactor remaining calls into RefreshFlagBasedProperties
-        {
-            f1.Clear();
-            f2.Clear();
-            f3.Clear();
+            // All characteristics are set to false.
+            Characteristics = new ItemCharacteristics();
             if (ItemType == null)
             {
                 return;
             }
-            f1.Set(ItemType.Flags1);
-            f2.Set(ItemType.Flags2);
-            f3.Set(ItemType.Flags3);
+
+            // Merge the characteristics from the base item category.
+            Characteristics.Merge(ItemType.BaseItemCategory);
+
+            // Now merge the characteristics from the fixed artifact, if there is one.
             if (FixedArtifactIndex != 0)
             {
                 FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
-                f1.Set(aPtr.Flags1);
-                f2.Set(aPtr.Flags2);
-                f3.Set(aPtr.Flags3);
+                Characteristics.Merge(aPtr.FixedArtifactItemCharacteristics);
             }
+
+            // Now merge the characteristics from the rare item type, if there is one.
             if (RareItemTypeIndex != Enumerations.RareItemType.None)
             {
                 RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-                f1.Set(ePtr.Flags1);
-                f2.Set(ePtr.Flags2);
-                f3.Set(ePtr.Flags3);
+                Characteristics.Merge(ePtr.RareItemCharacteristics);
             }
-            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
-            {
-                f1.Set(RandartFlags1);
-                f2.Set(RandartFlags2);
-                f3.Set(RandartFlags3);
-            }
+
+            Characteristics.Merge(RandartItemCharacteristics);
+
             if (!string.IsNullOrEmpty(RandartName))
             {
                 switch (BonusPowerType)
                 {
                     case Enumerations.RareItemType.SpecialSustain:
+                        switch(BonusPowerSubType.SpecialSustainFlag)
                         {
-                            f2.Set(BonusPowerSubType.SpecialSustainFlag);
-                            break;
+                            case ItemFlag2.SustStr:
+                                Characteristics.SustStr = true;
+                                break;
+                            case ItemFlag2.SustInt:
+                                Characteristics.SustInt = true;
+                                break;
+                            case ItemFlag2.SustWis:
+                                Characteristics.SustWis = true;
+                                break;
+                            case ItemFlag2.SustDex:
+                                Characteristics.SustDex = true;
+                                break;
+                            case ItemFlag2.SustCon:
+                                Characteristics.SustCon = true;
+                                break;
+                            case ItemFlag2.SustCha:
+                                Characteristics.SustCha = true;
+                                break;
                         }
+                        break;
                     case Enumerations.RareItemType.SpecialPower:
+                        switch (BonusPowerSubType.SpecialPowerFlag)
                         {
-                            f2.Set(BonusPowerSubType.SpecialPowerFlag);
-                            break;
+                            case ItemFlag2.ResSound:
+                                Characteristics.ResSound = true;
+                                break;
+                            case ItemFlag2.ResPois:
+                                Characteristics.ResPois = true;
+                                break;
+                            case ItemFlag2.ResBlind:
+                                Characteristics.ResBlind = true;
+                                break;
+                            case ItemFlag2.ResChaos:
+                                Characteristics.ResChaos = true;
+                                break;
+                            case ItemFlag2.ResConf:
+                                Characteristics.ResConf = true;
+                                break;
+                            case ItemFlag2.ResDisen:
+                                Characteristics.ResDisen = true;
+                                break;
+                            case ItemFlag2.ResDark:
+                                Characteristics.ResDark = true;
+                                break;
+                            case ItemFlag2.ResNexus:
+                                Characteristics.ResNexus = true;
+                                break;
+                            case ItemFlag2.ResShards:
+                                Characteristics.ResShards = true;
+                                break;
+                            case ItemFlag2.ResNether:
+                                Characteristics.ResNether = true;
+                                break;
+                            case ItemFlag2.ResLight:
+                                Characteristics.ResLight = true;
+                                break;
                         }
+                        break;
                     case Enumerations.RareItemType.SpecialAbility:
+                        switch (BonusPowerSubType.SpecialAbilityFlag)
                         {
-                            f2.Set(BonusPowerSubType.SpecialAbilityFlag);
-                            break;
+                            case ItemFlag3.Telepathy:
+                                Characteristics.Telepathy = true;
+                                break;
+                            case ItemFlag3.Feather:
+                                Characteristics.Feather = true;
+                                break;
+                            case ItemFlag3.Lightsource:
+                                Characteristics.Lightsource = true;
+                                break;
+                            case ItemFlag3.SlowDigest:
+                                Characteristics.SlowDigest = true;
+                                break;
+                            case ItemFlag3.SeeInvis:
+                                Characteristics.SeeInvis = true;
+                                break;
+                            case ItemFlag3.Regen:
+                                Characteristics.Regen = true;
+                                break;
                         }
+                        break;
                 }
             }
+
         }
 
         public string GetVagueFeeling()
@@ -2427,202 +1680,7 @@ namespace AngbandOS
             ItemType.BaseItemCategory.Tried = true;
         }
 
-        public int OriginalRealValue()
-        {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            ItemType kPtr = ItemType;
-            if (kPtr.BaseItemCategory.Cost == 0)
-            {
-                return 0;
-            }
-            int value = kPtr.BaseItemCategory.Cost;
-            GetMergedFlags(f1, f2, f3); // ORIGINAL REAL VALUE DO NOT REFACTOR THIS CALL
-            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
-            {
-                value += FlagBasedCost(TypeSpecificValue);
-            }
-            else if (FixedArtifactIndex != 0)
-            {
-                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
-                if (aPtr.Cost == 0)
-                {
-                    return 0;
-                }
-                value = aPtr.Cost;
-            }
-            else if (RareItemTypeIndex != Enumerations.RareItemType.None)
-            {
-                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-                if (ePtr.Cost == 0)
-                {
-                    return 0;
-                }
-                value += ePtr.Cost;
-            }
-            switch (Category)
-            {
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Bow:
-                case ItemCategory.Digging:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Helm:
-                case ItemCategory.Crown:
-                case ItemCategory.Shield:
-                case ItemCategory.Cloak:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
-                case ItemCategory.Light:
-                case ItemCategory.Amulet:
-                case ItemCategory.Ring:
-                    {
-                        if (TypeSpecificValue < 0)
-                        {
-                            return 0;
-                        }
-                        if (TypeSpecificValue == 0)
-                        {
-                            break;
-                        }
-                        if (f1.IsSet(ItemFlag1.Str))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Int))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Wis))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Dex))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Con))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Cha))
-                        {
-                            value += TypeSpecificValue * 200;
-                        }
-                        if (f1.IsSet(ItemFlag1.Stealth))
-                        {
-                            value += TypeSpecificValue * 100;
-                        }
-                        if (f1.IsSet(ItemFlag1.Search))
-                        {
-                            value += TypeSpecificValue * 100;
-                        }
-                        if (f1.IsSet(ItemFlag1.Infra))
-                        {
-                            value += TypeSpecificValue * 50;
-                        }
-                        if (f1.IsSet(ItemFlag1.Tunnel))
-                        {
-                            value += TypeSpecificValue * 50;
-                        }
-                        if (f1.IsSet(ItemFlag1.Blows))
-                        {
-                            value += TypeSpecificValue * 5000;
-                        }
-                        if (f1.IsSet(ItemFlag1.Speed))
-                        {
-                            value += TypeSpecificValue * 3000;
-                        }
-                        break;
-                    }
-            }
-            switch (Category)
-            {
-                case ItemCategory.Wand:
-                case ItemCategory.Staff:
-                    {
-                        value += value / 20 * TypeSpecificValue;
-                        break;
-                    }
-                case ItemCategory.Ring:
-                case ItemCategory.Amulet:
-                    {
-                        if (BonusArmourClass < 0)
-                        {
-                            return 0;
-                        }
-                        if (BonusToHit < 0)
-                        {
-                            return 0;
-                        }
-                        if (BonusDamage < 0)
-                        {
-                            return 0;
-                        }
-                        value += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
-                        break;
-                    }
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                case ItemCategory.Cloak:
-                case ItemCategory.Crown:
-                case ItemCategory.Helm:
-                case ItemCategory.Shield:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.DragArmor:
-                    {
-                        if (BonusArmourClass < 0)
-                        {
-                            return 0;
-                        }
-                        value += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
-                        break;
-                    }
-                case ItemCategory.Bow:
-                case ItemCategory.Digging:
-                case ItemCategory.Hafted:
-                case ItemCategory.Sword:
-                case ItemCategory.Polearm:
-                    {
-                        if (BonusToHit + BonusDamage < 0)
-                        {
-                            return 0;
-                        }
-                        value += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
-                        if (DamageDice > kPtr.BaseItemCategory.Dd && DamageDiceSides == kPtr.BaseItemCategory.Ds)
-                        {
-                            value += (DamageDice - kPtr.BaseItemCategory.Dd) * DamageDiceSides * 100;
-                        }
-                        break;
-                    }
-                case ItemCategory.Shot:
-                case ItemCategory.Arrow:
-                case ItemCategory.Bolt:
-                    {
-                        if (BonusToHit + BonusDamage < 0)
-                        {
-                            return 0;
-                        }
-                        value += (BonusToHit + BonusDamage) * 5;
-                        if (DamageDice > kPtr.BaseItemCategory.Dd && DamageDiceSides == kPtr.BaseItemCategory.Ds)
-                        {
-                            value += (DamageDice - kPtr.BaseItemCategory.Dd) * DamageDiceSides * 5;
-                        }
-                        break;
-                    }
-            }
-            return value;
-        }
-
-        public int NewRealValue()
+        public int RealValue()
         {
             ItemType kPtr = ItemType;
             if (kPtr.BaseItemCategory.Cost == 0)
@@ -2630,7 +1688,7 @@ namespace AngbandOS
                 return 0;
             }
             int value = kPtr.BaseItemCategory.Cost;
-            if (RandartFlags1.IsSet() || RandartFlags2.IsSet() || RandartFlags3.IsSet())
+            if (RandartItemCharacteristics.IsSet)
             {
                 value += FlagBasedCost(TypeSpecificValue);
             }
@@ -2667,22 +1725,6 @@ namespace AngbandOS
 
             value += bonusValue.Value;
             return value;
-        }
-
-        public int RealValue()
-        {
-            int originalValue = OriginalRealValue();
-            int newValue = NewRealValue();
-            if (originalValue == newValue)
-            {
-                //SaveGame.MsgPrint("Inventory descriptions confirmed.");
-            }
-            else
-            {
-                
-                SaveGame.MsgPrint("REAL VALUE FAILED!");
-            }
-            return newValue;
         }
 
         public bool Stompable()
@@ -3250,7 +2292,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags2.Set(ItemFlag2.ImAcid);
+                        RandartItemCharacteristics.ImAcid = true;
                         if (artifactBias == null)
                         {
                             artifactBias = new AcidArtifactBias();
@@ -3265,7 +2307,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags2.Set(ItemFlag2.ImElec);
+                        RandartItemCharacteristics.ImElec = true;
                         if (artifactBias == null)
                         {
                             artifactBias = new ElectricityArtifactBias();
@@ -3280,7 +2322,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags2.Set(ItemFlag2.ImCold);
+                        RandartItemCharacteristics.ImCold = true;
                         if (artifactBias == null)
                         {
                             artifactBias = new ColdArtifactBias();
@@ -3295,7 +2337,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags2.Set(ItemFlag2.ImFire);
+                        RandartItemCharacteristics.ImFire = true;
                         if (artifactBias == null)
                         {
                             artifactBias = new FireArtifactBias();
@@ -3306,7 +2348,7 @@ namespace AngbandOS
                 case 5:
                 case 6:
                 case 13:
-                    RandartFlags2.Set(ItemFlag2.ResAcid);
+                    RandartItemCharacteristics.ResAcid = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new AcidArtifactBias();
@@ -3316,7 +2358,7 @@ namespace AngbandOS
                 case 7:
                 case 8:
                 case 14:
-                    RandartFlags2.Set(ItemFlag2.ResElec);
+                    RandartItemCharacteristics.ResElec = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ElectricityArtifactBias();
@@ -3326,7 +2368,7 @@ namespace AngbandOS
                 case 9:
                 case 10:
                 case 15:
-                    RandartFlags2.Set(ItemFlag2.ResFire);
+                    RandartItemCharacteristics.ResFire = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new FireArtifactBias();
@@ -3336,7 +2378,7 @@ namespace AngbandOS
                 case 11:
                 case 12:
                 case 16:
-                    RandartFlags2.Set(ItemFlag2.ResCold);
+                    RandartItemCharacteristics.ResCold = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ColdArtifactBias();
@@ -3345,7 +2387,7 @@ namespace AngbandOS
 
                 case 17:
                 case 18:
-                    RandartFlags2.Set(ItemFlag2.ResPois);
+                    RandartItemCharacteristics.ResPois = true;
                     if (artifactBias == null && Program.Rng.DieRoll(4) != 1)
                     {
                         artifactBias = new PoisonArtifactBias();
@@ -3362,7 +2404,7 @@ namespace AngbandOS
 
                 case 19:
                 case 20:
-                    RandartFlags2.Set(ItemFlag2.ResFear);
+                    RandartItemCharacteristics.ResFear = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
                         artifactBias = new WarriorArtifactBias();
@@ -3370,21 +2412,21 @@ namespace AngbandOS
                     break;
 
                 case 21:
-                    RandartFlags2.Set(ItemFlag2.ResLight);
+                    RandartItemCharacteristics.ResLight = true;
                     break;
 
                 case 22:
-                    RandartFlags2.Set(ItemFlag2.ResDark);
+                    RandartItemCharacteristics.ResDark = true;
                     break;
 
                 case 23:
                 case 24:
-                    RandartFlags2.Set(ItemFlag2.ResBlind);
+                    RandartItemCharacteristics.ResBlind = true;
                     break;
 
                 case 25:
                 case 26:
-                    RandartFlags2.Set(ItemFlag2.ResConf);
+                    RandartItemCharacteristics.ResConf = true;
                     if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
                     {
                         artifactBias = new ChaosArtifactBias();
@@ -3393,17 +2435,17 @@ namespace AngbandOS
 
                 case 27:
                 case 28:
-                    RandartFlags2.Set(ItemFlag2.ResSound);
+                    RandartItemCharacteristics.ResSound = true;
                     break;
 
                 case 29:
                 case 30:
-                    RandartFlags2.Set(ItemFlag2.ResShards);
+                    RandartItemCharacteristics.ResShards = true;
                     break;
 
                 case 31:
                 case 32:
-                    RandartFlags2.Set(ItemFlag2.ResNether);
+                    RandartItemCharacteristics.ResNether = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
                         artifactBias = new NecromanticArtifactBias();
@@ -3412,12 +2454,12 @@ namespace AngbandOS
 
                 case 33:
                 case 34:
-                    RandartFlags2.Set(ItemFlag2.ResNexus);
+                    RandartItemCharacteristics.ResNexus = true;
                     break;
 
                 case 35:
                 case 36:
-                    RandartFlags2.Set(ItemFlag2.ResChaos);
+                    RandartItemCharacteristics.ResChaos = true;
                     if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
                         artifactBias = new ChaosArtifactBias();
@@ -3426,13 +2468,13 @@ namespace AngbandOS
 
                 case 37:
                 case 38:
-                    RandartFlags2.Set(ItemFlag2.ResDisen);
+                    RandartItemCharacteristics.ResDisen = true;
                     break;
 
                 case 39:
                     if (ItemType.BaseItemCategory.CanProvideSheathOfElectricity)
                     {
-                        RandartFlags3.Set(ItemFlag3.ShElec);
+                        RandartItemCharacteristics.ShElec = true;
                     }
                     else
                     {
@@ -3447,7 +2489,7 @@ namespace AngbandOS
                 case 40:
                     if (ItemType.BaseItemCategory.CanProvideSheathOfFire)
                     {
-                        RandartFlags3.Set(ItemFlag3.ShFire);
+                        RandartItemCharacteristics.ShFire = true;
                     }
                     else
                     {
@@ -3462,7 +2504,7 @@ namespace AngbandOS
                 case 41:
                     if (ItemType.BaseItemCategory.CanReflectBoltsAndArrows)
                     {
-                        RandartFlags2.Set(ItemFlag2.Reflect);
+                        RandartItemCharacteristics.Reflect = true;
                     }
                     else
                     {
@@ -3591,7 +2633,7 @@ namespace AngbandOS
             }
             if (hasPval)
             {
-                if (RandartFlags1.IsSet(ItemFlag1.Blows))
+                if (RandartItemCharacteristics.Blows)
                 {
                     TypeSpecificValue = Program.Rng.DieRoll(2) + 1;
                 }
@@ -3609,7 +2651,10 @@ namespace AngbandOS
                 }
             }
             ItemType.BaseItemCategory.ApplyRandartBonus(this);
-            RandartFlags3.Set(ItemFlag3.IgnoreAcid | ItemFlag3.IgnoreElec | ItemFlag3.IgnoreFire | ItemFlag3.IgnoreCold);
+            RandartItemCharacteristics.IgnoreAcid = true;
+            RandartItemCharacteristics.IgnoreElec = true;
+            RandartItemCharacteristics.IgnoreFire = true;
+            RandartItemCharacteristics.IgnoreCold = true;
             int totalFlags = FlagBasedCost(TypeSpecificValue);
             if (aCursed)
             {
@@ -3656,8 +2701,10 @@ namespace AngbandOS
                 }
                 else
                 {
-                    RandartFlags3.Set(ItemFlag3.Cursed | ItemFlag3.HeavyCurse | ItemFlag3.Aggravate |
-                                            ItemFlag3.DreadCurse);
+                    RandartItemCharacteristics.Cursed = true;
+                    RandartItemCharacteristics.HeavyCurse = true;
+                    RandartItemCharacteristics.Aggravate = true;
+                    RandartItemCharacteristics.DreadCurse = true;
                     IdentifyFlags.Set(Constants.IdentCursed);
                     return;
                 }
@@ -3833,7 +2880,7 @@ namespace AngbandOS
             {
                 case 1:
                 case 2:
-                    RandartFlags1.Set(ItemFlag1.Str);
+                    RandartItemCharacteristics.Str = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new StrengthArtifactBias();
@@ -3846,7 +2893,7 @@ namespace AngbandOS
 
                 case 3:
                 case 4:
-                    RandartFlags1.Set(ItemFlag1.Int);
+                    RandartItemCharacteristics.Int = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new IntelligenceArtifactBias();
@@ -3859,7 +2906,7 @@ namespace AngbandOS
 
                 case 5:
                 case 6:
-                    RandartFlags1.Set(ItemFlag1.Wis);
+                    RandartItemCharacteristics.Wis = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new WisdomArtifactBias();
@@ -3872,7 +2919,7 @@ namespace AngbandOS
 
                 case 7:
                 case 8:
-                    RandartFlags1.Set(ItemFlag1.Dex);
+                    RandartItemCharacteristics.Dex = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new DexterityArtifactBias();
@@ -3885,7 +2932,7 @@ namespace AngbandOS
 
                 case 9:
                 case 10:
-                    RandartFlags1.Set(ItemFlag1.Con);
+                    RandartItemCharacteristics.Con = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new ConstitutionArtifactBias();
@@ -3898,7 +2945,7 @@ namespace AngbandOS
 
                 case 11:
                 case 12:
-                    RandartFlags1.Set(ItemFlag1.Cha);
+                    RandartItemCharacteristics.Cha = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
                         artifactBias = new CharismaArtifactBias();
@@ -3907,7 +2954,7 @@ namespace AngbandOS
 
                 case 13:
                 case 14:
-                    RandartFlags1.Set(ItemFlag1.Stealth);
+                    RandartItemCharacteristics.Stealth = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
                         artifactBias = new RogueArtifactBias();
@@ -3916,7 +2963,7 @@ namespace AngbandOS
 
                 case 15:
                 case 16:
-                    RandartFlags1.Set(ItemFlag1.Search);
+                    RandartItemCharacteristics.Search = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new RangerArtifactBias();
@@ -3925,11 +2972,11 @@ namespace AngbandOS
 
                 case 17:
                 case 18:
-                    RandartFlags1.Set(ItemFlag1.Infra);
+                    RandartItemCharacteristics.Infra = true;
                     break;
 
                 case 19:
-                    RandartFlags1.Set(ItemFlag1.Speed);
+                    RandartItemCharacteristics.Speed = true;
                     if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
                     {
                         artifactBias = new RogueArtifactBias();
@@ -3944,7 +2991,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags1.Set(ItemFlag1.Tunnel);
+                        RandartItemCharacteristics.Tunnel = true;
                     }
                     break;
 
@@ -3956,7 +3003,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags1.Set(ItemFlag1.Blows);
+                        RandartItemCharacteristics.Blows = true;
                         if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
                         {
                             artifactBias = new WarriorArtifactBias();
@@ -3975,7 +3022,7 @@ namespace AngbandOS
             switch (Program.Rng.DieRoll(31))
             {
                 case 1:
-                    RandartFlags2.Set(ItemFlag2.SustStr);
+                    RandartItemCharacteristics.SustStr = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new StrengthArtifactBias();
@@ -3983,7 +3030,7 @@ namespace AngbandOS
                     break;
 
                 case 2:
-                    RandartFlags2.Set(ItemFlag2.SustInt);
+                    RandartItemCharacteristics.SustInt = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new IntelligenceArtifactBias();
@@ -3991,7 +3038,7 @@ namespace AngbandOS
                     break;
 
                 case 3:
-                    RandartFlags2.Set(ItemFlag2.SustWis);
+                    RandartItemCharacteristics.SustWis = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new WisdomArtifactBias();
@@ -3999,7 +3046,7 @@ namespace AngbandOS
                     break;
 
                 case 4:
-                    RandartFlags2.Set(ItemFlag2.SustDex);
+                    RandartItemCharacteristics.SustDex = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new DexterityArtifactBias();
@@ -4007,7 +3054,7 @@ namespace AngbandOS
                     break;
 
                 case 5:
-                    RandartFlags2.Set(ItemFlag2.SustCon);
+                    RandartItemCharacteristics.SustCon = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ConstitutionArtifactBias();
@@ -4015,7 +3062,7 @@ namespace AngbandOS
                     break;
 
                 case 6:
-                    RandartFlags2.Set(ItemFlag2.SustCha);
+                    RandartItemCharacteristics.SustCha = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new CharismaArtifactBias();
@@ -4025,11 +3072,11 @@ namespace AngbandOS
                 case 7:
                 case 8:
                 case 14:
-                    RandartFlags2.Set(ItemFlag2.FreeAct);
+                    RandartItemCharacteristics.FreeAct = true;
                     break;
 
                 case 9:
-                    RandartFlags2.Set(ItemFlag2.HoldLife);
+                    RandartItemCharacteristics.HoldLife = true;
                     if (artifactBias == null && Program.Rng.DieRoll(5) == 1)
                     {
                         artifactBias = new PriestlyArtifactBias();
@@ -4042,22 +3089,22 @@ namespace AngbandOS
 
                 case 10:
                 case 11:
-                    RandartFlags3.Set(ItemFlag3.Lightsource);
+                    RandartItemCharacteristics.Lightsource = true;
                     break;
 
                 case 12:
                 case 13:
-                    RandartFlags3.Set(ItemFlag3.Feather);
+                    RandartItemCharacteristics.Feather = true;
                     break;
 
                 case 15:
                 case 16:
                 case 17:
-                    RandartFlags3.Set(ItemFlag3.SeeInvis);
+                    RandartItemCharacteristics.SeeInvis = true;
                     break;
 
                 case 18:
-                    RandartFlags3.Set(ItemFlag3.Telepathy);
+                    RandartItemCharacteristics.Telepathy = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new MageArtifactBias();
@@ -4066,16 +3113,16 @@ namespace AngbandOS
 
                 case 19:
                 case 20:
-                    RandartFlags3.Set(ItemFlag3.SlowDigest);
+                    RandartItemCharacteristics.SlowDigest = true;
                     break;
 
                 case 21:
                 case 22:
-                    RandartFlags3.Set(ItemFlag3.Regen);
+                    RandartItemCharacteristics.Regen = true;
                     break;
 
                 case 23:
-                    RandartFlags3.Set(ItemFlag3.Teleport);
+                    RandartItemCharacteristics.Teleport = true;
                     break;
 
                 case 24:
@@ -4087,7 +3134,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        RandartFlags3.Set(ItemFlag3.ShowMods);
+                        RandartItemCharacteristics.ShowMods = true;
                         BonusArmourClass = 4 + Program.Rng.DieRoll(11);
                     }
                     break;
@@ -4095,17 +3142,17 @@ namespace AngbandOS
                 case 27:
                 case 28:
                 case 29:
-                    RandartFlags3.Set(ItemFlag3.ShowMods);
+                    RandartItemCharacteristics.ShowMods = true;
                     BonusToHit += 4 + Program.Rng.DieRoll(11);
                     BonusDamage += 4 + Program.Rng.DieRoll(11);
                     break;
 
                 case 30:
-                    RandartFlags3.Set(ItemFlag3.NoMagic);
+                    RandartItemCharacteristics.NoMagic = true;
                     break;
 
                 case 31:
-                    RandartFlags3.Set(ItemFlag3.NoTele);
+                    RandartItemCharacteristics.NoTele = true;
                     break;
             }
         }
@@ -4140,34 +3187,35 @@ namespace AngbandOS
             {
                 BonusDamage = 0 - (BonusDamage + Program.Rng.DieRoll(4));
             }
-            RandartFlags3.Set(ItemFlag3.HeavyCurse | ItemFlag3.Cursed);
+            RandartItemCharacteristics.HeavyCurse = true;
+            RandartItemCharacteristics.Cursed = true;
             if (Program.Rng.DieRoll(4) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.PermaCurse);
+                RandartItemCharacteristics.PermaCurse = true;
             }
             if (Program.Rng.DieRoll(3) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.DreadCurse);
+                RandartItemCharacteristics.DreadCurse = true;
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.Aggravate);
+                RandartItemCharacteristics.Aggravate = true;
             }
             if (Program.Rng.DieRoll(3) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.DrainExp);
+                RandartItemCharacteristics.DrainExp = true;
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.Teleport);
+                RandartItemCharacteristics.Teleport = true;
             }
             else if (Program.Rng.DieRoll(3) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.NoTele);
+                RandartItemCharacteristics.NoTele = true;
             }
             if (SaveGame.Player.ProfessionIndex != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
             {
-                RandartFlags3.Set(ItemFlag3.NoMagic);
+                RandartItemCharacteristics.NoMagic = true;
             }
             IdentifyFlags.Set(Constants.IdentCursed);
         }
@@ -4219,7 +3267,7 @@ namespace AngbandOS
                 }
             }
             BonusPowerSubType = type;
-            RandartFlags3.Set(ItemFlag3.Activate);
+            RandartItemCharacteristics.Activate = true;
             RechargeTimeLeft = 0;
         }
 

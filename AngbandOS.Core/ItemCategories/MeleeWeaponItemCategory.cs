@@ -22,7 +22,7 @@ namespace AngbandOS.ItemCategories
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponElderSign;
                         if (Program.Rng.DieRoll(4) == 1)
                         {
-                            item.RandartFlags1.Set(ItemFlag1.Blows);
+                            item.RandartItemCharacteristics.Blows = true;
                             if (item.TypeSpecificValue > 2)
                             {
                                 item.TypeSpecificValue -= Program.Rng.DieRoll(2);
@@ -33,7 +33,7 @@ namespace AngbandOS.ItemCategories
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponDefender;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.ResPois);
+                            item.RandartItemCharacteristics.ResPois = true;
                         }
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                         break;
@@ -65,7 +65,7 @@ namespace AngbandOS.ItemCategories
                         {
                             if (Program.Rng.DieRoll(3) == 1)
                             {
-                                item.RandartFlags2.Set(ItemFlag2.ResPois);
+                                item.RandartItemCharacteristics.ResPois = true;
                             }
                             item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(14) + 4);
                             item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfDragonBane;
@@ -76,18 +76,18 @@ namespace AngbandOS.ItemCategories
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayEvil;
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.ResFear);
-                            item.RandartFlags3.Set(ItemFlag3.Blessed);
+                            item.RandartItemCharacteristics.ResFear = true;
+                            item.RandartItemCharacteristics.Blessed = true;
                             item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfEvilBane;
                         }
                         break;
                     case 13:
                     case 14:
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayUndead;
-                        item.RandartFlags2.Set(ItemFlag2.HoldLife);
+                        item.RandartItemCharacteristics.HoldLife = true;
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.ResNether);
+                            item.RandartItemCharacteristics.ResNether = true;
                             item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfUndeadBane;
                         }
                         break;
@@ -115,7 +115,7 @@ namespace AngbandOS.ItemCategories
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfKadath;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.ResFear);
+                            item.RandartItemCharacteristics.ResFear = true;
                         }
                         break;
                     case 28:
@@ -159,11 +159,11 @@ namespace AngbandOS.ItemCategories
                         }
                         if (Program.Rng.DieRoll(5) == 1)
                         {
-                            item.RandartFlags1.Set(ItemFlag1.BrandPois);
+                            item.RandartItemCharacteristics.BrandPois = true;
                         }
                         if (CapableOfVorpalSlaying && Program.Rng.DieRoll(3) == 1)
                         {
-                            item.RandartFlags1.Set(ItemFlag1.Vorpal);
+                            item.RandartItemCharacteristics.Vorpal = true;
                         }
                         break;
                     case 38:
@@ -172,22 +172,22 @@ namespace AngbandOS.ItemCategories
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                         if (Program.Rng.DieRoll(5) == 1)
                         {
-                            item.RandartFlags1.Set(ItemFlag1.SlayDemon);
+                            item.RandartItemCharacteristics.SlayDemon = true;
                         }
                         break;
                     case 40:
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfLaw;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.HoldLife);
+                            item.RandartItemCharacteristics.HoldLife = true;
                         }
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            item.RandartFlags1.Set(ItemFlag1.Dex);
+                            item.RandartItemCharacteristics.Dex = true;
                         }
                         if (Program.Rng.DieRoll(5) == 1)
                         {
-                            item.RandartFlags2.Set(ItemFlag2.ResFear);
+                            item.RandartItemCharacteristics.ResFear = true;
                         }
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                         break;
@@ -203,7 +203,7 @@ namespace AngbandOS.ItemCategories
                             item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfEarthquakes;
                             if (Program.Rng.DieRoll(3) == 1)
                             {
-                                item.RandartFlags1.Set(ItemFlag1.Blows);
+                                item.RandartItemCharacteristics.Blows = true;
                             }
                             item.TypeSpecificValue = GetBonusValue(3, level);
                         }
@@ -225,7 +225,7 @@ namespace AngbandOS.ItemCategories
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfLeng;
                     if (Program.Rng.DieRoll(6) == 1)
                     {
-                        item.RandartFlags3.Set(ItemFlag3.DreadCurse);
+                        item.RandartItemCharacteristics.DreadCurse = true;
                     }
                 }
             }

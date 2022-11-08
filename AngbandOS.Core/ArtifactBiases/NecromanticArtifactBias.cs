@@ -7,25 +7,25 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyRandomResistances(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResNether))
+            if (!item.RandartItemCharacteristics.ResNether)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResNether);
+                item.RandartItemCharacteristics.ResNether = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResPois))
+            if (!item.RandartItemCharacteristics.ResPois)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResPois);
+                item.RandartItemCharacteristics.ResPois = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResDark))
+            if (!item.RandartItemCharacteristics.ResDark)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResDark);
+                item.RandartItemCharacteristics.ResDark = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -38,17 +38,17 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.Vampiric))
+                if (!item.RandartItemCharacteristics.Vampiric)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.Vampiric);
+                    item.RandartItemCharacteristics.Vampiric = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;
                     }
                 }
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandPois) && Program.Rng.DieRoll(2) == 1)
+                if (!item.RandartItemCharacteristics.BrandPois && Program.Rng.DieRoll(2) == 1)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandPois);
+                    item.RandartItemCharacteristics.BrandPois = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

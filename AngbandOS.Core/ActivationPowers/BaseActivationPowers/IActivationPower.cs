@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿using AngbandOS.Enumerations;
+
+namespace AngbandOS.ActivationPowers
 {
     internal interface IActivationPower
     {

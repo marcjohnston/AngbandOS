@@ -29,7 +29,7 @@ namespace AngbandOS.ItemCategories
             item.BonusArmourClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
             if (Program.Rng.DieRoll(3) == 1)
             {
-                item.RandartFlags3.Set(ItemFlag3.SlowDigest);
+                item.RandartItemCharacteristics.SlowDigest = true;
             }
             if (item.SaveGame.Level != null)
             {

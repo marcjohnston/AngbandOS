@@ -189,7 +189,7 @@ namespace AngbandOS.ItemCategories
                                             item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistance;
                                             if (Program.Rng.DieRoll(4) == 1)
                                             {
-                                                item.RandartFlags2.Set(ItemFlag2.ResPois);
+                                                item.RandartItemCharacteristics.ResPois = true;
                                             }
                                             item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                                             break;
@@ -265,7 +265,7 @@ namespace AngbandOS.ItemCategories
                                                 item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
                                                 if (Program.Rng.DieRoll(4) == 1)
                                                 {
-                                                    item.RandartFlags2.Set(ItemFlag2.ResPois);
+                                                    item.RandartItemCharacteristics.ResPois = true;
                                                 }
                                                 item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistance;
                                                 break;
@@ -464,7 +464,7 @@ namespace AngbandOS.ItemCategories
                                                 item.RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
                                                 if (Program.Rng.DieRoll(3) == 1)
                                                 {
-                                                    item.RandartFlags3.Set(ItemFlag3.Telepathy);
+                                                    item.RandartItemCharacteristics.Telepathy = true;
                                                 }
                                                 break;
                                             }
@@ -552,7 +552,7 @@ namespace AngbandOS.ItemCategories
                                                     item.RareItemTypeIndex = Enumerations.RareItemType.HatOfSeeing;
                                                     if (Program.Rng.DieRoll(7) == 1)
                                                     {
-                                                        item.RandartFlags3.Set(ItemFlag3.Telepathy);
+                                                        item.RandartItemCharacteristics.Telepathy = true;
                                                     }
                                                     break;
                                                 }

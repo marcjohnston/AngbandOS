@@ -9,25 +9,25 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.SlayEvil))
+                if (!item.RandartItemCharacteristics.SlayEvil)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.SlayEvil);
+                    item.RandartItemCharacteristics.SlayEvil = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;
                     }
                 }
-                if (item.RandartFlags1.IsClear(ItemFlag1.SlayUndead))
+                if (!item.RandartItemCharacteristics.SlayUndead)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.SlayUndead);
+                    item.RandartItemCharacteristics.SlayUndead = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;
                     }
                 }
-                if (item.RandartFlags1.IsClear(ItemFlag1.SlayDemon))
+                if (!item.RandartItemCharacteristics.SlayDemon)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.SlayDemon);
+                    item.RandartItemCharacteristics.SlayDemon = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

@@ -7,9 +7,9 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyBonuses(Item item)
         {
-            if (item.RandartFlags1.IsClear(ItemFlag1.Stealth))
+            if (!item.RandartItemCharacteristics.Stealth)
             {
-                item.RandartFlags1.Set(ItemFlag1.Stealth);
+                item.RandartItemCharacteristics.Stealth = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -22,9 +22,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandPois))
+                if (!item.RandartItemCharacteristics.BrandPois)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandPois);
+                    item.RandartItemCharacteristics.BrandPois = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

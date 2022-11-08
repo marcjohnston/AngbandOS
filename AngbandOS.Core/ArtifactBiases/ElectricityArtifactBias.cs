@@ -7,27 +7,25 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyRandomResistances(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResElec))
+            if (!item.RandartItemCharacteristics.ResElec)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResElec);
+                item.RandartItemCharacteristics.ResElec = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (item.Category >= ItemCategory.Cloak &&
-                item.Category <= ItemCategory.HardArmor &&
-                item.RandartFlags3.IsClear(ItemFlag3.ShElec))
+            if (item.Category >= ItemCategory.Cloak && item.Category <= ItemCategory.HardArmor && !item.RandartItemCharacteristics.ShElec)
             {
-                item.RandartFlags3.Set(ItemFlag3.ShElec);
+                item.RandartItemCharacteristics.ShElec = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImElec))
+            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImElec)
             {
-                item.RandartFlags2.Set(ItemFlag2.ImElec);
+                item.RandartItemCharacteristics.ImElec = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -40,9 +38,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandElec))
+                if (!item.RandartItemCharacteristics.BrandElec)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandElec);
+                    item.RandartItemCharacteristics.BrandElec = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

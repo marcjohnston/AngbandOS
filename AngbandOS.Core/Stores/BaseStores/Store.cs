@@ -1354,9 +1354,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (oPtr.RandartFlags1.Value != jPtr.RandartFlags1.Value ||
-                oPtr.RandartFlags2.Value != jPtr.RandartFlags2.Value ||
-                oPtr.RandartFlags3.Value != jPtr.RandartFlags3.Value)
+            if (oPtr.RandartItemCharacteristics != jPtr.RandartItemCharacteristics)
             {
                 return false;
             }

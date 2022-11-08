@@ -369,12 +369,12 @@ namespace AngbandOS.ItemCategories
             {
                 case 1:
                 case 2:
-                    item.RandartFlags1.Set(ItemFlag1.SlayAnimal);
+                    item.RandartItemCharacteristics.SlayAnimal = true;
                     break;
 
                 case 3:
                 case 4:
-                    item.RandartFlags1.Set(ItemFlag1.SlayEvil);
+                    item.RandartItemCharacteristics.SlayEvil = true;
                     if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
                         artifactBias = new LawArtifactBias();
@@ -387,7 +387,7 @@ namespace AngbandOS.ItemCategories
 
                 case 5:
                 case 6:
-                    item.RandartFlags1.Set(ItemFlag1.SlayUndead);
+                    item.RandartItemCharacteristics.SlayUndead = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new PriestlyArtifactBias();
@@ -396,7 +396,7 @@ namespace AngbandOS.ItemCategories
 
                 case 7:
                 case 8:
-                    item.RandartFlags1.Set(ItemFlag1.SlayDemon);
+                    item.RandartItemCharacteristics.SlayDemon = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = new PriestlyArtifactBias();
@@ -405,33 +405,33 @@ namespace AngbandOS.ItemCategories
 
                 case 9:
                 case 10:
-                    item.RandartFlags1.Set(ItemFlag1.SlayOrc);
+                    item.RandartItemCharacteristics.SlayOrc = true;
                     break;
 
                 case 11:
                 case 12:
-                    item.RandartFlags1.Set(ItemFlag1.SlayTroll);
+                    item.RandartItemCharacteristics.SlayTroll = true;
                     break;
 
                 case 13:
                 case 14:
-                    item.RandartFlags1.Set(ItemFlag1.SlayGiant);
+                    item.RandartItemCharacteristics.SlayGiant = true;
                     break;
 
                 case 15:
                 case 16:
-                    item.RandartFlags1.Set(ItemFlag1.SlayDragon);
+                    item.RandartItemCharacteristics.SlayDragon = true;
                     break;
 
                 case 17:
-                    item.RandartFlags1.Set(ItemFlag1.KillDragon);
+                    item.RandartItemCharacteristics.KillDragon = true;
                     break;
 
                 case 18:
                 case 19:
                     if (CanVorpalSlay)
                     {
-                        item.RandartFlags1.Set(ItemFlag1.Vorpal);
+                        item.RandartItemCharacteristics.Vorpal = true;
                         if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                         {
                             artifactBias = new WarriorArtifactBias();
@@ -444,12 +444,12 @@ namespace AngbandOS.ItemCategories
                     break;
 
                 case 20:
-                    item.RandartFlags1.Set(ItemFlag1.Impact);
+                    item.RandartItemCharacteristics.Impact = true;
                     break;
 
                 case 21:
                 case 22:
-                    item.RandartFlags1.Set(ItemFlag1.BrandFire);
+                    item.RandartItemCharacteristics.BrandFire = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new FireArtifactBias();
@@ -458,7 +458,7 @@ namespace AngbandOS.ItemCategories
 
                 case 23:
                 case 24:
-                    item.RandartFlags1.Set(ItemFlag1.BrandCold);
+                    item.RandartItemCharacteristics.BrandCold = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ColdArtifactBias();
@@ -467,7 +467,7 @@ namespace AngbandOS.ItemCategories
 
                 case 25:
                 case 26:
-                    item.RandartFlags1.Set(ItemFlag1.BrandElec);
+                    item.RandartItemCharacteristics.BrandElec = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ElectricityArtifactBias();
@@ -476,7 +476,7 @@ namespace AngbandOS.ItemCategories
 
                 case 27:
                 case 28:
-                    item.RandartFlags1.Set(ItemFlag1.BrandAcid);
+                    item.RandartItemCharacteristics.BrandAcid = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new AcidArtifactBias();
@@ -485,7 +485,7 @@ namespace AngbandOS.ItemCategories
 
                 case 29:
                 case 30:
-                    item.RandartFlags1.Set(ItemFlag1.BrandPois);
+                    item.RandartItemCharacteristics.BrandPois = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
                     {
                         artifactBias = new PoisonArtifactBias();
@@ -502,7 +502,7 @@ namespace AngbandOS.ItemCategories
 
                 case 31:
                 case 32:
-                    item.RandartFlags1.Set(ItemFlag1.Vampiric);
+                    item.RandartItemCharacteristics.Vampiric = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new NecromanticArtifactBias();
@@ -510,7 +510,7 @@ namespace AngbandOS.ItemCategories
                     break;
 
                 default:
-                    item.RandartFlags1.Set(ItemFlag1.Chaotic);
+                    item.RandartItemCharacteristics.Chaotic = true;
                     if (artifactBias == null)
                     {
                         artifactBias = new ChaosArtifactBias();

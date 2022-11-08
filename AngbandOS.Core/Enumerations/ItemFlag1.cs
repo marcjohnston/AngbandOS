@@ -7,6 +7,16 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Enumerations
 {
+    /// <summary>
+    /// Represents the interface an object needs to implement to be considered having all 90+ ItemCharacteristics.  This interface allows existing objects to denote
+    /// that they implement the same ItemCharacteristics.
+    /// </summary>
+    /// <remarks>
+    /// It would have been nice if we could have made this interface immutable but there are numerous places where the we set the properties one at a time.  This
+    /// is mostly present in the Randart.  Due to that implementation, we will will take quite care not to make this into a hybrid of storing state and using
+    /// instantiation.  As a result, we will instantiate instances of this class as readonly and manipulate only the properties.  Therefore, the associated methods
+    /// will reflect such.
+    /// </remarks>
     internal interface IItemCharacteristics
     {
         bool Blows { get; set; }
@@ -199,11 +209,11 @@ namespace AngbandOS.Enumerations
         public bool XtraShots { get; set; } = false;
 
         /// <summary>
-        /// Creates a new set of ItemCharacteristics by copying the ItemCharacteristics.
+        /// Imports the characteristics of another item.
         /// </summary>
         /// <param name="itemCharacteristicsA"></param>
         /// <param name="itemCharacteristicsB"></param>
-        private ItemCharacteristics(ItemCharacteristics itemCharacteristics)
+        public void Copy(IItemCharacteristics itemCharacteristics)
         {
             Blows = itemCharacteristics.Blows;
             BrandAcid = itemCharacteristics.BrandAcid;
@@ -297,6 +307,10 @@ namespace AngbandOS.Enumerations
             XtraShots = itemCharacteristics.XtraShots;
         }
 
+        /// <summary>
+        /// Merge the characteristics of another item using the an OR operation.
+        /// </summary>
+        /// <param name="itemCharacteristics"></param>
         public void Merge(IItemCharacteristics itemCharacteristics)
         {
             Blows = Blows || itemCharacteristics.Blows;
@@ -392,102 +406,100 @@ namespace AngbandOS.Enumerations
         }
 
         /// <summary>
-        /// Creates a new set of ItemCharacteristics by performing a set "OR" operation on two ItemCharacteristics objects provided.
+        /// Resets all of the characteristics to false.
         /// </summary>
-        /// <param name="itemCharacteristicsA"></param>
-        /// <param name="itemCharacteristicsB"></param>
-        private ItemCharacteristics(IItemCharacteristics itemCharacteristicsA, IItemCharacteristics itemCharacteristicsB)
+        public void Clear()
         {
-            Blows = itemCharacteristicsA.Blows || itemCharacteristicsB.Blows;
-            BrandAcid = itemCharacteristicsA.BrandAcid || itemCharacteristicsB.BrandAcid;
-            BrandCold = itemCharacteristicsA.BrandCold || itemCharacteristicsB.BrandCold;
-            BrandElec = itemCharacteristicsA.BrandElec || itemCharacteristicsB.BrandElec;
-            BrandFire = itemCharacteristicsA.BrandFire || itemCharacteristicsB.BrandFire;
-            BrandPois = itemCharacteristicsA.BrandPois || itemCharacteristicsB.BrandPois;
-            Cha = itemCharacteristicsA.Cha || itemCharacteristicsB.Cha;
-            Chaotic = itemCharacteristicsA.Chaotic || itemCharacteristicsB.Chaotic;
-            Con = itemCharacteristicsA.Con || itemCharacteristicsB.Con;
-            Dex = itemCharacteristicsA.Dex || itemCharacteristicsB.Dex;
-            Impact = itemCharacteristicsA.Impact || itemCharacteristicsB.Impact;
-            Infra = itemCharacteristicsA.Infra || itemCharacteristicsB.Infra;
-            Int = itemCharacteristicsA.Int || itemCharacteristicsB.Int;
-            KillDragon = itemCharacteristicsA.KillDragon || itemCharacteristicsB.KillDragon;
-            Search = itemCharacteristicsA.Search || itemCharacteristicsB.Search;
-            SlayAnimal = itemCharacteristicsA.SlayAnimal || itemCharacteristicsB.SlayAnimal;
-            SlayDemon = itemCharacteristicsA.SlayDemon || itemCharacteristicsB.SlayDemon;
-            SlayDragon = itemCharacteristicsA.SlayDragon || itemCharacteristicsB.SlayDragon;
-            SlayEvil = itemCharacteristicsA.SlayEvil || itemCharacteristicsB.SlayEvil;
-            SlayGiant = itemCharacteristicsA.SlayGiant || itemCharacteristicsB.SlayGiant;
-            SlayOrc = itemCharacteristicsA.SlayOrc || itemCharacteristicsB.SlayOrc;
-            SlayTroll = itemCharacteristicsA.SlayTroll || itemCharacteristicsB.SlayTroll;
-            SlayUndead = itemCharacteristicsA.SlayUndead || itemCharacteristicsB.SlayUndead;
-            Speed = itemCharacteristicsA.Speed || itemCharacteristicsB.Speed;
-            Stealth = itemCharacteristicsA.Stealth || itemCharacteristicsB.Stealth;
-            Str = itemCharacteristicsA.Str || itemCharacteristicsB.Str;
-            Tunnel = itemCharacteristicsA.Tunnel || itemCharacteristicsB.Tunnel;
-            Vampiric = itemCharacteristicsA.Vampiric || itemCharacteristicsB.Vampiric;
-            Vorpal = itemCharacteristicsA.Vorpal || itemCharacteristicsB.Vorpal;
-            Wis = itemCharacteristicsA.Wis || itemCharacteristicsB.Wis;
-            FreeAct = itemCharacteristicsA.FreeAct || itemCharacteristicsB.FreeAct;
-            HoldLife = itemCharacteristicsA.HoldLife || itemCharacteristicsB.HoldLife;
-            ImAcid = itemCharacteristicsA.ImAcid || itemCharacteristicsB.ImAcid;
-            ImCold = itemCharacteristicsA.ImCold || itemCharacteristicsB.ImCold;
-            ImElec = itemCharacteristicsA.ImElec || itemCharacteristicsB.ImElec;
-            ImFire = itemCharacteristicsA.ImFire || itemCharacteristicsB.ImFire;
-            Reflect = itemCharacteristicsA.Reflect || itemCharacteristicsB.Reflect;
-            ResAcid = itemCharacteristicsA.ResAcid || itemCharacteristicsB.ResAcid;
-            ResBlind = itemCharacteristicsA.ResBlind || itemCharacteristicsB.ResBlind;
-            ResChaos = itemCharacteristicsA.ResChaos || itemCharacteristicsB.ResChaos;
-            ResCold = itemCharacteristicsA.ResCold || itemCharacteristicsB.ResCold;
-            ResConf = itemCharacteristicsA.ResConf || itemCharacteristicsB.ResConf;
-            ResDark = itemCharacteristicsA.ResDark || itemCharacteristicsB.ResDark;
-            ResDisen = itemCharacteristicsA.ResDisen || itemCharacteristicsB.ResDisen;
-            ResElec = itemCharacteristicsA.ResElec || itemCharacteristicsB.ResElec;
-            ResFear = itemCharacteristicsA.ResFear || itemCharacteristicsB.ResFear;
-            ResFire = itemCharacteristicsA.ResFire || itemCharacteristicsB.ResFire;
-            ResLight = itemCharacteristicsA.ResLight || itemCharacteristicsB.ResLight;
-            ResNether = itemCharacteristicsA.ResNether || itemCharacteristicsB.ResNether;
-            ResNexus = itemCharacteristicsA.ResNexus || itemCharacteristicsB.ResNexus;
-            ResPois = itemCharacteristicsA.ResPois || itemCharacteristicsB.ResPois;
-            ResShards = itemCharacteristicsA.ResShards || itemCharacteristicsB.ResShards;
-            ResSound = itemCharacteristicsA.ResSound || itemCharacteristicsB.ResSound;
-            SustCha = itemCharacteristicsA.SustCha || itemCharacteristicsB.SustCha;
-            SustCon = itemCharacteristicsA.SustCon || itemCharacteristicsB.SustCon;
-            SustDex = itemCharacteristicsA.SustDex || itemCharacteristicsB.SustDex;
-            SustInt = itemCharacteristicsA.SustInt || itemCharacteristicsB.SustInt;
-            SustStr = itemCharacteristicsA.SustStr || itemCharacteristicsB.SustStr;
-            SustWis = itemCharacteristicsA.SustWis || itemCharacteristicsB.SustWis;
-            AntiTheft = itemCharacteristicsA.AntiTheft || itemCharacteristicsB.AntiTheft;
-            Activate = itemCharacteristicsA.Activate || itemCharacteristicsB.Activate;
-            Aggravate = itemCharacteristicsA.Aggravate || itemCharacteristicsB.Aggravate;
-            Blessed = itemCharacteristicsA.Blessed || itemCharacteristicsB.Blessed;
-            Cursed = itemCharacteristicsA.Cursed || itemCharacteristicsB.Cursed;
-            DrainExp = itemCharacteristicsA.DrainExp || itemCharacteristicsB.DrainExp;
-            DreadCurse = itemCharacteristicsA.DreadCurse || itemCharacteristicsB.DreadCurse;
-            EasyKnow = itemCharacteristicsA.EasyKnow || itemCharacteristicsB.EasyKnow;
-            Feather = itemCharacteristicsA.Feather || itemCharacteristicsB.Feather;
-            HeavyCurse = itemCharacteristicsA.HeavyCurse || itemCharacteristicsB.HeavyCurse;
-            HideType = itemCharacteristicsA.HideType || itemCharacteristicsB.HideType;
-            IgnoreAcid = itemCharacteristicsA.IgnoreAcid || itemCharacteristicsB.IgnoreAcid;
-            IgnoreCold = itemCharacteristicsA.IgnoreCold || itemCharacteristicsB.IgnoreCold;
-            IgnoreElec = itemCharacteristicsA.IgnoreElec || itemCharacteristicsB.IgnoreElec;
-            IgnoreFire = itemCharacteristicsA.IgnoreFire || itemCharacteristicsB.IgnoreFire;
-            InstaArt = itemCharacteristicsA.InstaArt || itemCharacteristicsB.InstaArt;
-            Lightsource = itemCharacteristicsA.Lightsource || itemCharacteristicsB.Lightsource;
-            NoMagic = itemCharacteristicsA.NoMagic || itemCharacteristicsB.NoMagic;
-            NoTele = itemCharacteristicsA.NoTele || itemCharacteristicsB.NoTele;
-            PermaCurse = itemCharacteristicsA.PermaCurse || itemCharacteristicsB.PermaCurse;
-            Regen = itemCharacteristicsA.Regen || itemCharacteristicsB.Regen;
-            SeeInvis = itemCharacteristicsA.SeeInvis || itemCharacteristicsB.SeeInvis;
-            ShElec = itemCharacteristicsA.ShElec || itemCharacteristicsB.ShElec;
-            ShFire = itemCharacteristicsA.ShFire || itemCharacteristicsB.ShFire;
-            ShowMods = itemCharacteristicsA.ShowMods || itemCharacteristicsB.ShowMods;
-            SlowDigest = itemCharacteristicsA.SlowDigest || itemCharacteristicsB.SlowDigest;
-            Telepathy = itemCharacteristicsA.Telepathy || itemCharacteristicsB.Telepathy;
-            Teleport = itemCharacteristicsA.Teleport || itemCharacteristicsB.Teleport;
-            Wraith = itemCharacteristicsA.Wraith || itemCharacteristicsB.Wraith;
-            XtraMight = itemCharacteristicsA.XtraMight || itemCharacteristicsB.XtraMight;
-            XtraShots = itemCharacteristicsA.XtraShots || itemCharacteristicsB.XtraShots;
+            Blows = false;
+            BrandAcid = false;
+            BrandCold = false;
+            BrandElec = false;
+            BrandFire = false;
+            BrandPois = false;
+            Cha = false;
+            Chaotic = false;
+            Con = false;
+            Dex = false;
+            Impact = false;
+            Infra = false;
+            Int = false;
+            KillDragon = false;
+            Search = false;
+            SlayAnimal = false;
+            SlayDemon = false;
+            SlayDragon = false;
+            SlayEvil = false;
+            SlayGiant = false;
+            SlayOrc = false;
+            SlayTroll = false;
+            SlayUndead = false;
+            Speed = false;
+            Stealth = false;
+            Str = false;
+            Tunnel = false;
+            Vampiric = false;
+            Vorpal = false;
+            Wis = false;
+            FreeAct = false;
+            HoldLife = false;
+            ImAcid = false;
+            ImCold = false;
+            ImElec = false;
+            ImFire = false;
+            Reflect = false;
+            ResAcid = false;
+            ResBlind = false;
+            ResChaos = false;
+            ResCold = false;
+            ResConf = false;
+            ResDark = false;
+            ResDisen = false;
+            ResElec = false;
+            ResFear = false;
+            ResFire = false;
+            ResLight = false;
+            ResNether = false;
+            ResNexus = false;
+            ResPois = false;
+            ResShards = false;
+            ResSound = false;
+            SustCha = false;
+            SustCon = false;
+            SustDex = false;
+            SustInt = false;
+            SustStr = false;
+            SustWis = false;
+            AntiTheft = false;
+            Activate = false;
+            Aggravate = false;
+            Blessed = false;
+            Cursed = false;
+            DrainExp = false;
+            DreadCurse = false;
+            EasyKnow = false;
+            Feather = false;
+            HeavyCurse = false;
+            HideType = false;
+            IgnoreAcid = false;
+            IgnoreCold = false;
+            IgnoreElec = false;
+            IgnoreFire = false;
+            InstaArt = false;
+            Lightsource = false;
+            NoMagic = false;
+            NoTele = false;
+            PermaCurse = false;
+            Regen = false;
+            SeeInvis = false;
+            ShElec = false;
+            ShFire = false;
+            ShowMods = false;
+            SlowDigest = false;
+            Telepathy = false;
+            Teleport = false;
+            Wraith = false;
+            XtraMight = false;
+            XtraShots = false;
         }
 
         public bool Compare(FlagSet f1, FlagSet f2, FlagSet f3)
@@ -586,24 +598,126 @@ namespace AngbandOS.Enumerations
         }
 
         /// <summary>
+        /// Returns true, if any characteristic is set.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSet
+        {
+            get
+            {
+                if (Blows) return true;
+                if (BrandAcid) return true;
+                if (BrandCold) return true;
+                if (BrandElec) return true;
+                if (BrandFire) return true;
+                if (BrandPois) return true;
+                if (Cha) return true;
+                if (Chaotic) return true;
+                if (Con) return true;
+                if (Dex) return true;
+                if (Impact) return true;
+                if (Infra) return true;
+                if (Int) return true;
+                if (KillDragon) return true;
+                if (Search) return true;
+                if (SlayAnimal) return true;
+                if (SlayDemon) return true;
+                if (SlayDragon) return true;
+                if (SlayEvil) return true;
+                if (SlayGiant) return true;
+                if (SlayOrc) return true;
+                if (SlayTroll) return true;
+                if (SlayUndead) return true;
+                if (Speed) return true;
+                if (Stealth) return true;
+                if (Str) return true;
+                if (Tunnel) return true;
+                if (Vampiric) return true;
+                if (Vorpal) return true;
+                if (Wis) return true;
+                if (FreeAct) return true;
+                if (HoldLife) return true;
+                if (ImAcid) return true;
+                if (ImCold) return true;
+                if (ImElec) return true;
+                if (ImFire) return true;
+                if (Reflect) return true;
+                if (ResAcid) return true;
+                if (ResBlind) return true;
+                if (ResChaos) return true;
+                if (ResCold) return true;
+                if (ResConf) return true;
+                if (ResDark) return true;
+                if (ResDisen) return true;
+                if (ResElec) return true;
+                if (ResFear) return true;
+                if (ResFire) return true;
+                if (ResLight) return true;
+                if (ResNether) return true;
+                if (ResNexus) return true;
+                if (ResPois) return true;
+                if (ResShards) return true;
+                if (ResSound) return true;
+                if (SustCha) return true;
+                if (SustCon) return true;
+                if (SustDex) return true;
+                if (SustInt) return true;
+                if (SustStr) return true;
+                if (SustWis) return true;
+                if (AntiTheft) return true;
+                if (Activate) return true;
+                if (Aggravate) return true;
+                if (Blessed) return true;
+                if (Cursed) return true;
+                if (DrainExp) return true;
+                if (DreadCurse) return true;
+                if (EasyKnow) return true;
+                if (Feather) return true;
+                if (HeavyCurse) return true;
+                if (HideType) return true;
+                if (IgnoreAcid) return true;
+                if (IgnoreCold) return true;
+                if (IgnoreElec) return true;
+                if (IgnoreFire) return true;
+                if (InstaArt) return true;
+                if (Lightsource) return true;
+                if (NoMagic) return true;
+                if (NoTele) return true;
+                if (PermaCurse) return true;
+                if (Regen) return true;
+                if (SeeInvis) return true;
+                if (ShElec) return true;
+                if (ShFire) return true;
+                if (ShowMods) return true;
+                if (SlowDigest) return true;
+                if (Telepathy) return true;
+                if (Teleport) return true;
+                if (Wraith) return true;
+                if (XtraMight) return true;
+                if (XtraShots) return true;
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Creates a new set of ItemCharacteristics with all false values.
         /// </summary>
         public ItemCharacteristics()
         {
         }
 
-        /// <summary>
-        /// Creates a new set of ItemCharacteristics by performing a set "OR" operation on all of the ItemCharacteristics objects provided.
-        /// </summary>
-        /// <param name="mergeItemCharacteristics"></param>
-        public ItemCharacteristics(params IItemCharacteristics[] mergeItemCharacteristics)
-        {
-            ItemCharacteristics tempItemCharacteristics = new ItemCharacteristics();
-            foreach (ItemCharacteristics itemCharacteristics in mergeItemCharacteristics)
-            {
-                tempItemCharacteristics = new ItemCharacteristics(tempItemCharacteristics, itemCharacteristics);
-            }
-        }
+        ///// <summary>
+        ///// Creates a new set of ItemCharacteristics by performing a set "OR" operation on all of the ItemCharacteristics objects provided.
+        ///// </summary>
+        ///// <param name="mergeItemCharacteristics"></param>
+        //public ItemCharacteristics(params IItemCharacteristics[] mergeItemCharacteristics)
+        //{
+        //    ItemCharacteristics tempItemCharacteristics = new ItemCharacteristics();
+        //    foreach (ItemCharacteristics itemCharacteristics in mergeItemCharacteristics)
+        //    {
+        //        tempItemCharacteristics = new ItemCharacteristics(tempItemCharacteristics, itemCharacteristics);
+        //    }
+        //}
 
         public override bool Equals(object? obj)
         {

@@ -3656,7 +3656,7 @@ namespace AngbandOS
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "" : "s";
                 MsgPrint($"{your} {oName} shine{s}!");
-                oPtr.RandartFlags3.Set(ItemFlag3.Blessed);
+                oPtr.RandartItemCharacteristics.Blessed = true;
             }
             else
             {
@@ -4728,13 +4728,13 @@ namespace AngbandOS
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
+                            if (oPtr.RandartItemCharacteristics.Cursed)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.Cursed);
+                                oPtr.RandartItemCharacteristics.Cursed = false;
                             }
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.HeavyCurse))
+                            if (oPtr.RandartItemCharacteristics.HeavyCurse)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.HeavyCurse);
+                                oPtr.RandartItemCharacteristics.HeavyCurse = false;
                             }
                             oPtr.Inscription = "uncursed";
                         }
@@ -4763,13 +4763,13 @@ namespace AngbandOS
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
+                            if (oPtr.RandartItemCharacteristics.Cursed)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.Cursed);
+                                oPtr.RandartItemCharacteristics.Cursed = false;
                             }
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.HeavyCurse))
+                            if (oPtr.RandartItemCharacteristics.HeavyCurse)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.HeavyCurse);
+                                oPtr.RandartItemCharacteristics.HeavyCurse = false;
                             }
                             oPtr.Inscription = "uncursed";
                         }
@@ -4799,13 +4799,13 @@ namespace AngbandOS
                             MsgPrint("The curse is broken!");
                             oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                             oPtr.IdentifyFlags.Set(Constants.IdentSense);
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
+                            if (oPtr.RandartItemCharacteristics.Cursed)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.Cursed);
+                                oPtr.RandartItemCharacteristics.Cursed = false;
                             }
-                            if (oPtr.RandartFlags3.IsSet(ItemFlag3.HeavyCurse))
+                            if (oPtr.RandartItemCharacteristics.HeavyCurse)
                             {
-                                oPtr.RandartFlags3.Clear(ItemFlag3.HeavyCurse);
+                                oPtr.RandartItemCharacteristics.HeavyCurse = false;
                             }
                             oPtr.Inscription = "uncursed";
                         }
@@ -6918,13 +6918,13 @@ namespace AngbandOS
                 }
                 oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
                 oPtr.IdentifyFlags.Set(Constants.IdentSense);
-                if (oPtr.RandartFlags3.IsSet(ItemFlag3.Cursed))
+                if (oPtr.RandartItemCharacteristics.Cursed)
                 {
-                    oPtr.RandartFlags3.Clear(ItemFlag3.Cursed);
+                    oPtr.RandartItemCharacteristics.Cursed = false;
                 }
-                if (oPtr.RandartFlags3.IsSet(ItemFlag3.HeavyCurse))
+                if (oPtr.RandartItemCharacteristics.HeavyCurse)
                 {
-                    oPtr.RandartFlags3.Clear(ItemFlag3.HeavyCurse);
+                    oPtr.RandartItemCharacteristics.HeavyCurse = false;
                 }
                 oPtr.Inscription = "uncursed";
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
@@ -7624,9 +7624,7 @@ namespace AngbandOS
                 item.BaseArmourClass = 0;
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
-                item.RandartFlags1.Clear();
-                item.RandartFlags2.Clear();
-                item.RandartFlags3.Clear();
+                item.RandartItemCharacteristics.Clear();
                 item.IdentifyFlags.Set(Constants.IdentCursed);
                 item.IdentifyFlags.Set(Constants.IdentBroken);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
@@ -7667,9 +7665,7 @@ namespace AngbandOS
                 item.BaseArmourClass = 0;
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
-                item.RandartFlags1.Clear();
-                item.RandartFlags2.Clear();
-                item.RandartFlags3.Clear();
+                item.RandartItemCharacteristics.Clear();
                 item.IdentifyFlags.Set(Constants.IdentCursed);
                 item.IdentifyFlags.Set(Constants.IdentBroken);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
@@ -9037,7 +9033,7 @@ namespace AngbandOS
             Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
             string itenName = item.Description(false, 0);
             // Set the ignore acid flag
-            item.RandartFlags3.Set(ItemFlag3.IgnoreAcid);
+            item.RandartItemCharacteristics.IgnoreAcid = true;
             // Make sure the grammar of the message is correct
             string your;
             string s;

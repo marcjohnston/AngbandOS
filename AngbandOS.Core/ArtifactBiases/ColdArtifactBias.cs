@@ -7,17 +7,17 @@ namespace AngbandOS.ArtifactBiases
     {
         public override bool ApplyRandomResistances(Item item)
         {
-            if (item.RandartFlags2.IsClear(ItemFlag2.ResCold))
+            if (!item.RandartItemCharacteristics.ResCold)
             {
-                item.RandartFlags2.Set(ItemFlag2.ResCold);
+                item.RandartItemCharacteristics.ResCold = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && item.RandartFlags2.IsClear(ItemFlag2.ImCold))
+            if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImCold)
             {
-                item.RandartFlags2.Set(ItemFlag2.ImCold);
+                item.RandartItemCharacteristics.ImCold = true;
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     return true;
@@ -30,9 +30,9 @@ namespace AngbandOS.ArtifactBiases
         {
             if (item.Category != ItemCategory.Bow)
             {
-                if (item.RandartFlags1.IsClear(ItemFlag1.BrandCold))
+                if (!item.RandartItemCharacteristics.BrandCold)
                 {
-                    item.RandartFlags1.Set(ItemFlag1.BrandCold);
+                    item.RandartItemCharacteristics.BrandCold = true;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         return true;

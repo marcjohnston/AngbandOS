@@ -645,6 +645,18 @@ namespace AngbandOS.Commands
             }
         }
 
+        private void PrtBinary(SaveGame saveGame, bool isSet, int row, int col)
+        {
+            if (isSet)
+            {
+                saveGame.Print(Colour.Blue, '*', row, col);
+            }
+            else
+            {
+                saveGame.Print(Colour.White, '-', row, col);
+            }
+        }
+
         private void WizCreateItem(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
@@ -781,10 +793,7 @@ namespace AngbandOS.Commands
         private void WizDisplayItem(SaveGame saveGame, Item oPtr)
         {
             const int j = 13;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            oPtr.GetMergedFlags(f1, f2, f3); // NEEDS TO BE REFACTORED
+            oPtr.RefreshFlagBasedProperties();
             for (int i = 1; i <= 23; i++)
             {
                 saveGame.PrintLine("", i, j - 2);
@@ -802,14 +811,92 @@ namespace AngbandOS.Commands
             saveGame.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
             saveGame.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
             saveGame.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
-            PrtBinary(saveGame, f1, 16, j);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Str, 16, j + 0);
+            PrtBinary(saveGame, oPtr.Characteristics.Int, 16, j + 1);
+            PrtBinary(saveGame, oPtr.Characteristics.Wis, 16, j + 2);
+            PrtBinary(saveGame, oPtr.Characteristics.Dex, 16, j + 3);
+            PrtBinary(saveGame, oPtr.Characteristics.Con, 16, j + 4);
+            PrtBinary(saveGame, oPtr.Characteristics.Cha, 16, j + 5);
+            PrtBinary(saveGame, false, 16, j + 6);
+            PrtBinary(saveGame, false, 16, j + 7);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Stealth, 16, j + 8);
+            PrtBinary(saveGame, oPtr.Characteristics.Search, 16, j + 9);
+            PrtBinary(saveGame, oPtr.Characteristics.Infra, 16, j + 10);
+            PrtBinary(saveGame, oPtr.Characteristics.Tunnel, 16, j + 11);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Speed, 16, j + 12);
+            PrtBinary(saveGame, oPtr.Characteristics.Blows, 16, j + 13);
+            PrtBinary(saveGame, oPtr.Characteristics.Chaotic, 16, j + 14);
+            PrtBinary(saveGame, oPtr.Characteristics.Vampiric, 16, j + 15);
+
+            PrtBinary(saveGame, oPtr.Characteristics.SlayAnimal, 16, j + 16);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayEvil, 16, j + 17);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayUndead, 16, j + 18);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayDemon, 16, j + 19);
+
+            PrtBinary(saveGame, oPtr.Characteristics.SlayOrc, 16, j + 20);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayTroll, 16, j + 21);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayGiant, 16, j + 22);
+            PrtBinary(saveGame, oPtr.Characteristics.SlayDragon, 16, j + 23);
+
+            PrtBinary(saveGame, oPtr.Characteristics.KillDragon, 16, j + 24);
+            PrtBinary(saveGame, oPtr.Characteristics.Vorpal, 16, j + 25);
+            PrtBinary(saveGame, oPtr.Characteristics.Impact, 16, j + 26);
+            PrtBinary(saveGame, oPtr.Characteristics.BrandPois, 16, j + 27);
+
+            PrtBinary(saveGame, oPtr.Characteristics.BrandAcid, 16, j + 28);
+            PrtBinary(saveGame, oPtr.Characteristics.BrandElec, 16, j + 29);
+            PrtBinary(saveGame, oPtr.Characteristics.BrandFire, 16, j + 30);
+            PrtBinary(saveGame, oPtr.Characteristics.BrandCold, 16, j + 31);
+
             saveGame.PrintLine("+------------FLAGS2------------+", 17, j);
             saveGame.PrintLine("SUST....IMMUN.RESIST............", 18, j);
             saveGame.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
             saveGame.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
             saveGame.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
             saveGame.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
-            PrtBinary(saveGame, f2, 23, j);
+
+            PrtBinary(saveGame, oPtr.Characteristics.SustStr, 23, j + 0);
+            PrtBinary(saveGame, oPtr.Characteristics.SustInt, 23, j + 1);
+            PrtBinary(saveGame, oPtr.Characteristics.SustWis, 23, j + 2);
+            PrtBinary(saveGame, oPtr.Characteristics.SustDex, 23, j + 3);
+            PrtBinary(saveGame, oPtr.Characteristics.SustCon, 23, j + 4);
+            PrtBinary(saveGame, oPtr.Characteristics.SustCha, 23, j + 5);
+            PrtBinary(saveGame, false, 23, j + 6);
+            PrtBinary(saveGame, false, 23, j + 7);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ImAcid, 23, j + 8);
+            PrtBinary(saveGame, oPtr.Characteristics.ImElec, 23, j + 9);
+            PrtBinary(saveGame, oPtr.Characteristics.ImFire, 23, j + 10);
+            PrtBinary(saveGame, oPtr.Characteristics.ImCold, 23, j + 11);
+
+            PrtBinary(saveGame, false, 23, j + 12);
+            PrtBinary(saveGame, oPtr.Characteristics.Reflect, 23, j + 13);
+            PrtBinary(saveGame, oPtr.Characteristics.FreeAct, 23, j + 14);
+            PrtBinary(saveGame, oPtr.Characteristics.HoldLife, 23, j + 15);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ResAcid, 23, j + 16);
+            PrtBinary(saveGame, oPtr.Characteristics.ResElec, 23, j + 17);
+            PrtBinary(saveGame, oPtr.Characteristics.ResFire, 23, j + 18);
+            PrtBinary(saveGame, oPtr.Characteristics.ResCold, 23, j + 19);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ResPois, 23, j + 20);
+            PrtBinary(saveGame, oPtr.Characteristics.ResFear, 23, j + 21);
+            PrtBinary(saveGame, oPtr.Characteristics.ResLight, 23, j + 22);
+            PrtBinary(saveGame, oPtr.Characteristics.ResDark, 23, j + 23);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ResBlind, 23, j + 24);
+            PrtBinary(saveGame, oPtr.Characteristics.ResConf, 23, j + 25);
+            PrtBinary(saveGame, oPtr.Characteristics.ResSound, 23, j + 26);
+            PrtBinary(saveGame, oPtr.Characteristics.ResShards, 23, j + 27);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ResNether, 23, j + 28);
+            PrtBinary(saveGame, oPtr.Characteristics.ResNexus, 23, j + 29);
+            PrtBinary(saveGame, oPtr.Characteristics.ResChaos, 23, j + 30);
+            PrtBinary(saveGame, oPtr.Characteristics.ResDisen, 23, j + 31);
+
             saveGame.PrintLine("+------------FLAGS3------------+", 10, j + 32);
             saveGame.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
             saveGame.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
@@ -819,7 +906,46 @@ namespace AngbandOS.Commands
             saveGame.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
             saveGame.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
             saveGame.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
-            PrtBinary(saveGame, f3, 19, j + 32);
+
+            PrtBinary(saveGame, oPtr.Characteristics.ShFire, 19, j + 32 + 0);
+            PrtBinary(saveGame, oPtr.Characteristics.ShElec, 19, j + 32 + 1);
+            PrtBinary(saveGame, false, 19, j + 32 + 2);
+            PrtBinary(saveGame, oPtr.Characteristics.AntiTheft, 19, j + 32 + 3);
+
+            PrtBinary(saveGame, oPtr.Characteristics.NoTele, 19, j + 32 + 4);
+            PrtBinary(saveGame, oPtr.Characteristics.NoMagic, 19, j + 32 + 5);
+            PrtBinary(saveGame, oPtr.Characteristics.Wraith, 19, j + 32 + 6);
+            PrtBinary(saveGame, oPtr.Characteristics.DreadCurse, 19, j + 32 + 7);
+
+            PrtBinary(saveGame, oPtr.Characteristics.EasyKnow, 19, j + 32 + 8);
+            PrtBinary(saveGame, oPtr.Characteristics.HideType, 19, j + 32 + 9);
+            PrtBinary(saveGame, oPtr.Characteristics.ShowMods, 19, j + 32 + 10);
+            PrtBinary(saveGame, oPtr.Characteristics.InstaArt, 19, j + 32 + 11);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Feather, 19, j + 12);
+            PrtBinary(saveGame, oPtr.Characteristics.Lightsource, 19, j + 32 + 13);
+            PrtBinary(saveGame, oPtr.Characteristics.SeeInvis, 19, j + 32 + 14);
+            PrtBinary(saveGame, oPtr.Characteristics.Telepathy, 19, j + 32 + 15);
+
+            PrtBinary(saveGame, oPtr.Characteristics.SlowDigest, 19, j + 32 + 16);
+            PrtBinary(saveGame, oPtr.Characteristics.Regen, 19, j + 32 + 17);
+            PrtBinary(saveGame, oPtr.Characteristics.XtraMight, 19, j + 32 + 18);
+            PrtBinary(saveGame, oPtr.Characteristics.XtraShots, 19, j + 32 + 19);
+
+            PrtBinary(saveGame, oPtr.Characteristics.IgnoreAcid, 19, j + 32 + 20);
+            PrtBinary(saveGame, oPtr.Characteristics.IgnoreElec, 19, j + 32 + 21);
+            PrtBinary(saveGame, oPtr.Characteristics.IgnoreFire, 19, j + 32 + 22);
+            PrtBinary(saveGame, oPtr.Characteristics.IgnoreCold, 19, j + 32 + 23);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Activate, 19, j + 32 + 24);
+            PrtBinary(saveGame, oPtr.Characteristics.DrainExp, 19, j + 32 + 25);
+            PrtBinary(saveGame, oPtr.Characteristics.Teleport, 19, j + 32 + 26);
+            PrtBinary(saveGame, oPtr.Characteristics.Aggravate, 19, j + 32 + 27);
+
+            PrtBinary(saveGame, oPtr.Characteristics.Blessed, 19, j + 32 + 28);
+            PrtBinary(saveGame, oPtr.Characteristics.Cursed, 19, j + 32 + 29);
+            PrtBinary(saveGame, oPtr.Characteristics.HeavyCurse, 19, j + 32 + 30);
+            PrtBinary(saveGame, oPtr.Characteristics.PermaCurse, 19, j + 32 + 31);
         }
 
         private void WizQuantityItem(SaveGame saveGame, Item oPtr)
