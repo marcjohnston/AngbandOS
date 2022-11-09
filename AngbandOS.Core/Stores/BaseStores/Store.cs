@@ -469,7 +469,7 @@ namespace AngbandOS
         {
             get
             {
-                string storeName = CommandManager.BaseFloorTileTypes[FeatureType].Description;
+                string storeName = ObjectRepository.FloorTileTypes[FeatureType].Description;
                 return $"{storeName} ({_owner.MaxCost})";
             }
         }
@@ -1515,7 +1515,7 @@ namespace AngbandOS
                 bool matchingCommandFound = false;
 
                 // Process commands
-                foreach (IStoreCommand command in CommandManager.StoreCommands)
+                foreach (IStoreCommand command in ObjectRepository.StoreCommands)
                 {
                     // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                     // attached for improved performance.

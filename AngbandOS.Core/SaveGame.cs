@@ -1906,7 +1906,7 @@ namespace AngbandOS
             PotionFlavours.Add(new ClearPotionFlavour());
             PotionFlavours.Add(new LightBrownPotionFlavour());
             PotionFlavours.Add(new IckyGreenPotionFlavour());
-            foreach (PotionFlavour potionFlavour in CommandManager.BasePotionFlavours)
+            foreach (PotionFlavour potionFlavour in ObjectRepository.PotionFlavours)
             {
                 if (potionFlavour is ClearPotionFlavour)
                 {
@@ -1930,7 +1930,7 @@ namespace AngbandOS
             } while (tempPotions.Count > 0);
             MushroomFlavours = new List<MushroomFlavour>();
             List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
-            foreach (MushroomFlavour mushroomFlavour in CommandManager.BaseMushroomFlavours)
+            foreach (MushroomFlavour mushroomFlavour in ObjectRepository.MushroomFlavours)
             {
                 tempMushrooms.Add(mushroomFlavour);
             }
@@ -1942,7 +1942,7 @@ namespace AngbandOS
             } while (tempMushrooms.Count > 0);
             AmuletFlavours = new List<AmuletFlavour>();
             List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (AmuletFlavour amuletFlavour in CommandManager.BaseAmuletFlavours)
+            foreach (AmuletFlavour amuletFlavour in ObjectRepository.AmuletFlavours)
             {
                 tempAmulets.Add(amuletFlavour);
             }
@@ -1954,7 +1954,7 @@ namespace AngbandOS
             } while (tempAmulets.Count > 0);
             WandFlavours = new List<WandFlavour>();
             List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (WandFlavour wandFlavour in CommandManager.BaseWandFlavours)
+            foreach (WandFlavour wandFlavour in ObjectRepository.WandFlavours)
             {
                 tempWands.Add(wandFlavour);
             }
@@ -1966,7 +1966,7 @@ namespace AngbandOS
             } while (tempWands.Count > 0);
             RingFlavours = new List<RingFlavour>();
             List<RingFlavour> tempRings = new List<RingFlavour>();
-            foreach (RingFlavour ringFlavour in CommandManager.BaseRingFlavours)
+            foreach (RingFlavour ringFlavour in ObjectRepository.RingFlavours)
             {
                 tempRings.Add(ringFlavour);
             }
@@ -1978,7 +1978,7 @@ namespace AngbandOS
             } while (tempRings.Count > 0);
             RodFlavours = new List<RodFlavour>();
             List<RodFlavour> tempRods = new List<RodFlavour>();
-            foreach (RodFlavour rodFlavour in CommandManager.BaseRodFlavours)
+            foreach (RodFlavour rodFlavour in ObjectRepository.RodFlavours)
             {
                 tempRods.Add(rodFlavour);
             }
@@ -1990,7 +1990,7 @@ namespace AngbandOS
             } while (tempRods.Count > 0);
             StaffFlavours = new List<StaffFlavour>();
             List<StaffFlavour> tempStaffs = new List<StaffFlavour>();
-            foreach (StaffFlavour staffFlavour in CommandManager.BaseStaffFlavours)
+            foreach (StaffFlavour staffFlavour in ObjectRepository.StaffFlavours)
             {
                 tempStaffs.Add(staffFlavour);
             }
@@ -2002,7 +2002,7 @@ namespace AngbandOS
             } while (tempStaffs.Count > 0);
             ScrollFlavours = new List<ScrollFlavour>();
             List<BaseScrollFlavour> tempScrolls = new List<BaseScrollFlavour>();
-            foreach (BaseScrollFlavour scrollFlavour in CommandManager.BaseScrollFlavours)
+            foreach (BaseScrollFlavour scrollFlavour in ObjectRepository.ScrollFlavours)
             {
                 tempScrolls.Add(scrollFlavour);
             }
@@ -7063,7 +7063,7 @@ namespace AngbandOS
             char c = CurrentCommand;
 
             // Process commands
-            foreach (ICommand command in CommandManager.GameCommands)
+            foreach (ICommand command in ObjectRepository.GameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.

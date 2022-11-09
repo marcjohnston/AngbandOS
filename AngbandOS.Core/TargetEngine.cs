@@ -660,8 +660,8 @@ namespace AngbandOS
                     break;
                 }
                 string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
-                    ? CommandManager.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
-                    : CommandManager.BaseFloorTileTypes[cPtr.FeatureType.AppearAs].Name;
+                    ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
+                    : ObjectRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
                 if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !_level.PlayerCanSeeBold(y, x))
                 {
                     feat = string.Empty;
@@ -671,7 +671,7 @@ namespace AngbandOS
                     string name = "unknown grid";
                     if (feat != string.Empty)
                     {
-                        name = CommandManager.BaseFloorTileTypes[feat].Description;
+                        name = ObjectRepository.FloorTileTypes[feat].Description;
                         if (s2 != "" && cPtr.FeatureType.BlocksLos)
                         {
                             s2 = "in ";

@@ -22,8 +22,8 @@ namespace AngbandOS
         public GridTile(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            BackgroundFeature = CommandManager.BaseFloorTileTypes["Nothing"];
-            FeatureType = CommandManager.BaseFloorTileTypes["Nothing"];
+            BackgroundFeature = ObjectRepository.FloorTileTypes["Nothing"];
+            FeatureType = ObjectRepository.FloorTileTypes["Nothing"];
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace AngbandOS
 
         public void SetBackgroundFeature(string name)
         {
-            BackgroundFeature = CommandManager.BaseFloorTileTypes[name];
+            BackgroundFeature = ObjectRepository.FloorTileTypes[name];
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace AngbandOS
         /// <param name="name"> </param>
         public void SetFeature(string name)
         {
-            FeatureType = CommandManager.BaseFloorTileTypes[name];
+            FeatureType = ObjectRepository.FloorTileTypes[name];
         }
 
         public override string ToString()

@@ -19,7 +19,7 @@ namespace AngbandOS
     {
         public RareItemTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, Base2RareItemType> pair in CommandManager.Base2RareItemTypes)
+            foreach (KeyValuePair<string, Base2RareItemType> pair in ObjectRepository.RareItemTypes)
             {
                 Add(pair.Value.RareItemType, new RareItemType(pair.Value));
             }

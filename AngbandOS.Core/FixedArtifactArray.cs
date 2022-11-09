@@ -20,7 +20,7 @@ namespace AngbandOS
     {
         public FixedArtifactArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, Base2FixedArtifact> pair in CommandManager.Base2FixedArtifacts)
+            foreach (KeyValuePair<string, Base2FixedArtifact> pair in ObjectRepository.FixedArtifacts)
             {
                 Add(pair.Value.FixedArtifactID, new FixedArtifact(pair.Value));
             }

@@ -110,13 +110,13 @@ namespace AngbandOS
         public void CaveSetBackground(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.BackgroundFeature = CommandManager.BaseFloorTileTypes[feat];
+            cPtr.BackgroundFeature = ObjectRepository.FloorTileTypes[feat];
         }
 
         public void CaveSetFeat(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.FeatureType = CommandManager.BaseFloorTileTypes[feat];
+            cPtr.FeatureType = ObjectRepository.FloorTileTypes[feat];
             NoteSpot(y, x);
             RedrawSingleLocation(y, x);
         }
@@ -2306,8 +2306,8 @@ namespace AngbandOS
                 }
                 else
                 {
-                    a = CommandManager.BaseFloorTileTypes["Nothing"].Colour;
-                    c = CommandManager.BaseFloorTileTypes["Nothing"].Character;
+                    a = ObjectRepository.FloorTileTypes["Nothing"].Colour;
+                    c = ObjectRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
             else
@@ -2315,8 +2315,8 @@ namespace AngbandOS
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
                     feat = string.IsNullOrEmpty(feat.AppearAs)
-                        ? CommandManager.BaseFloorTileTypes[cPtr.BackgroundFeature.AppearAs]
-                        : CommandManager.BaseFloorTileTypes[feat.AppearAs];
+                        ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
+                        : ObjectRepository.FloorTileTypes[feat.AppearAs];
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
@@ -2356,8 +2356,8 @@ namespace AngbandOS
                 }
                 else
                 {
-                    a = CommandManager.BaseFloorTileTypes["Nothing"].Colour;
-                    c = CommandManager.BaseFloorTileTypes["Nothing"].Character;
+                    a = ObjectRepository.FloorTileTypes["Nothing"].Colour;
+                    c = ObjectRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
             if (_player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
