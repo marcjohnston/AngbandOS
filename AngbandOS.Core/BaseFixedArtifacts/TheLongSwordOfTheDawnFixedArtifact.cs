@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLongSwordOfTheDawnFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordLongSword();
+    public override ItemClass BaseItemCategory => new SwordLongSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

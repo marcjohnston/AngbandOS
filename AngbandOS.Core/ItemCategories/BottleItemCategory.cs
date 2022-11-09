@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class BottleItemCategory : BaseItemCategory
+    internal abstract class BottleItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Bottle;

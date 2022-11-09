@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheHardLeatherCapOfTheMindcrafterFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HelmHardLeatherCap();
+    public override ItemClass BaseItemCategory => new HelmHardLeatherCap();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Brown;

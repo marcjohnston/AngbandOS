@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheShortSwordOfMerlinFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordShortSword();
+    public override ItemClass BaseItemCategory => new SwordShortSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

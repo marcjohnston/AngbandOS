@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSmallMetalShieldVitriolFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new ShieldSmallMetalShield();
+    public override ItemClass BaseItemCategory => new ShieldSmallMetalShield();
 
     public override char Character => ')';
     public override Colour Colour => Colour.Grey;

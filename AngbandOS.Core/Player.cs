@@ -248,7 +248,7 @@ namespace AngbandOS
             }
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = SaveGame.ItemTypes[i];
+                ItemClass kPtr = SaveGame.ItemTypes[i];
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;
             }

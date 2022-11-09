@@ -16,7 +16,7 @@ namespace AngbandOS.ItemCategories
     /// </summary>
     [Serializable]
 
-    internal abstract class BaseItemCategory : IItemCharacteristics
+    internal abstract class ItemClass : IItemCharacteristics
     {
         /// <summary>
         /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
@@ -53,7 +53,7 @@ namespace AngbandOS.ItemCategories
             }
         }
 
-        public BaseItemCategory()
+        public ItemClass()
         {
             FlavorCharacter = Character;
             FlavorColour = Colour;

@@ -7,7 +7,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class WandItemCategory : BaseItemCategory
+    internal abstract class WandItemCategory : ItemClass
     {
         public override bool HasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Wand;

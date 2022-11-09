@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheRingOfElementalPowerFireFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new RingNarya();
+    public override ItemClass BaseItemCategory => new RingNarya();
 
     public override char Character => '=';
     public override string Name => "The Ring of Elemental Power (Fire)";

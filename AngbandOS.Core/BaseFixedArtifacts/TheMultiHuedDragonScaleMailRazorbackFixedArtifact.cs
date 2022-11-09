@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMultiHuedDragonScaleMailRazorbackFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new DragArmorMultiHuedDragonScaleMail();
+    public override ItemClass BaseItemCategory => new DragArmorMultiHuedDragonScaleMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;

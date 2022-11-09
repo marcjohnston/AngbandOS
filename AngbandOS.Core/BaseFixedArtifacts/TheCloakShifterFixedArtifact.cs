@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheCloakShifterFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new Cloak();
+    public override ItemClass BaseItemCategory => new Cloak();
 
     public override char Character => '(';
     public override Colour Colour => Colour.Green;

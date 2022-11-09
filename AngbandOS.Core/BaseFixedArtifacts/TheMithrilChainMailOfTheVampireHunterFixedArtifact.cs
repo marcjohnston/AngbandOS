@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMithrilChainMailOfTheVampireHunterFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HardArmorMithrilChainMail();
+    public override ItemClass BaseItemCategory => new HardArmorMithrilChainMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightBlue;

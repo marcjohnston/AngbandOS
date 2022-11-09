@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheAdamantitePlateMailSoulkeeperFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HardArmorAdamantitePlateMail();
+    public override ItemClass BaseItemCategory => new HardArmorAdamantitePlateMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightGreen;

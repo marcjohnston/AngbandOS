@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLargeMetalShieldOfStabilityFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new ShieldLargeMetalShield();
+    public override ItemClass BaseItemCategory => new ShieldLargeMetalShield();
 
     public override char Character => ')';
     public override Colour Colour => Colour.Grey;

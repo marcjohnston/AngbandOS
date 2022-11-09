@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheStarEssenceOfXothFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new LightStarEssenceElendil();
+    public override ItemClass BaseItemCategory => new LightStarEssenceElendil();
 
     public override char Character => '*';
     public override Colour Colour => Colour.Yellow;

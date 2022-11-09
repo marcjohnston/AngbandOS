@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheScytheOfGharneFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmScythe();
+    public override ItemClass BaseItemCategory => new PolearmScythe();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

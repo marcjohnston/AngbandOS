@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheCutlassOfBlackbeardFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordCutlass();
+    public override ItemClass BaseItemCategory => new SwordCutlass();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

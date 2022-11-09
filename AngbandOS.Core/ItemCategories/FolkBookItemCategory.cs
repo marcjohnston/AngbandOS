@@ -6,7 +6,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class FolkBookItemCategory : BookItemCategory
+    internal abstract class FolkBookItemCategory : BookItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.FolkBook;
         public override string GetDescription(Item item, bool includeCountPrefix)

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheGlaiveOfPainFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmGlaive();
+    public override ItemClass BaseItemCategory => new PolearmGlaive();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

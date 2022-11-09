@@ -131,7 +131,7 @@ namespace AngbandOS.Patrons
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
                     Item qPtr = new Item(saveGame);
-                    BaseItemCategory reward;
+                    ItemClass reward;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
                     {
                         case 1:

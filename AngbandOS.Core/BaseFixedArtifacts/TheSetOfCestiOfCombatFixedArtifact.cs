@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSetOfCestiOfCombatFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new GlovesSetOfCesti();
+    public override ItemClass BaseItemCategory => new GlovesSetOfCesti();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightWhite;

@@ -64,7 +64,7 @@ namespace AngbandOS.Stores
         {
             int level;
             level = 35 + Program.Rng.RandomLessThan(35);
-            BaseItemCategory itemType = SaveGame.RandomItemType(level, false);
+            ItemClass itemType = SaveGame.RandomItemType(level, false);
             if (itemType == null)
             {
                 return null; ;

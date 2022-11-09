@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMetalCapOfHolinessFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HelmMetalCap();
+    public override ItemClass BaseItemCategory => new HelmMetalCap();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

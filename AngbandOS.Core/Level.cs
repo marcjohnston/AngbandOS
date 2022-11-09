@@ -179,7 +179,7 @@ namespace AngbandOS
                 for (i = 1; i < OMax; i++)
                 {
                     Item oPtr = Items[i];
-                    BaseItemCategory? kPtr = oPtr.BaseItemCategory;
+                    ItemClass? kPtr = oPtr.BaseItemCategory;
                     if (oPtr.BaseItemCategory == null)
                     {
                         continue;

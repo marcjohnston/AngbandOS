@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLargeLeatherShieldRawhideFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new ShieldLargeLeatherShield();
+    public override ItemClass BaseItemCategory => new ShieldLargeLeatherShield();
 
     public override char Character => ')';
     public override Colour Colour => Colour.BrightBrown;

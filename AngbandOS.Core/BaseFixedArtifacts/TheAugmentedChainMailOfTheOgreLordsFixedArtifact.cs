@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheAugmentedChainMailOfTheOgreLordsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new AmuletBrilliance();
+    public override ItemClass BaseItemCategory => new AmuletBrilliance();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

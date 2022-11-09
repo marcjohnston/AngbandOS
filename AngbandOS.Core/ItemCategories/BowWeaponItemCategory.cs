@@ -7,7 +7,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class BowWeaponItemCategory : WeaponItemCategory
+    internal abstract class BowWeaponItemCategory : WeaponItemClass
     {
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.

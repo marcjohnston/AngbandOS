@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLanceSkewerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmLance();
+    public override ItemClass BaseItemCategory => new PolearmLance();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheKatanaOfGrooFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordKatana();
+    public override ItemClass BaseItemCategory => new SwordKatana();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

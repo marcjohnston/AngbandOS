@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSetOfLeatherGlovesCalfskinFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new GlovesSetOfLeatherGloves();
+    public override ItemClass BaseItemCategory => new GlovesSetOfLeatherGloves();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

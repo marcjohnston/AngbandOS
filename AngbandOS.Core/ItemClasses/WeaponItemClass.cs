@@ -11,7 +11,7 @@ namespace AngbandOS.ItemCategories
     /// <summary>
     /// Represents weapon items.  Arrow, bolt, bow, digging, hafted, polearm, shot and swords are all weapon classes.
     /// </summary>
-    internal abstract class WeaponItemCategory : BaseItemCategory
+    internal abstract class WeaponItemClass : ItemClass
     {
         public override bool HasQuality => true;
 

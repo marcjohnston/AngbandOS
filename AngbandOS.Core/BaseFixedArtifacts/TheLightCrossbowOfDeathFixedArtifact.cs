@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLightCrossbowOfDeathFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new BowLightCrossbow();
+    public override ItemClass BaseItemCategory => new BowLightCrossbow();
 
     public override char Character => '}';
     public override Colour Colour => Colour.Grey;

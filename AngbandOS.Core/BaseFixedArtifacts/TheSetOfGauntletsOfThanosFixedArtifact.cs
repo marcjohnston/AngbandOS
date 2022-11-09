@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSetOfGauntletsOfThanosFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new GlovesSetOfGauntlets();
+    public override ItemClass BaseItemCategory => new GlovesSetOfGauntlets();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

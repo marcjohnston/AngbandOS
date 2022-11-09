@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheHalberdArmourbaneFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmHalberd();
+    public override ItemClass BaseItemCategory => new PolearmHalberd();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

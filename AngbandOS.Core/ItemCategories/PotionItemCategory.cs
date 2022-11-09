@@ -8,7 +8,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class PotionItemCategory : BaseItemCategory
+    internal abstract class PotionItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         /// <summary>

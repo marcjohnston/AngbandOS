@@ -15,7 +15,7 @@ using System.Linq;
 namespace AngbandOS
 {
     [Serializable]
-    internal class ItemTypeArray : List<BaseItemCategory>
+    internal class ItemTypeArray : List<ItemClass>
     {
         private readonly SaveGame SaveGame;
 
@@ -26,10 +26,10 @@ namespace AngbandOS
             foreach (Type type in assembly.GetTypes())
             {
                 // Check to see if the type implements the IItemCategory interface and is not an abstract class.
-                if (!type.IsAbstract && typeof(BaseItemCategory).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(ItemClass).IsAssignableFrom(type))
                 {
                     // Load the item.
-                    BaseItemCategory itemCategory = (BaseItemCategory)Activator.CreateInstance(type);
+                    ItemClass itemCategory = (ItemClass)Activator.CreateInstance(type);
                     Add(itemCategory);
                 }
             }
@@ -37,7 +37,7 @@ namespace AngbandOS
 
         public void ResetStompability()
         {
-            foreach (BaseItemCategory itemType in this)
+            foreach (ItemClass itemType in this)
             {
                 if (itemType.HasQuality)
                 {

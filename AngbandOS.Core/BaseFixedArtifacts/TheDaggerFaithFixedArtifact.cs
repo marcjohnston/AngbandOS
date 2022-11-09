@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheDaggerFaithFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordDagger();
+    public override ItemClass BaseItemCategory => new SwordDagger();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheBroadAxeOfNodensFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmBroadAxe();
+    public override ItemClass BaseItemCategory => new PolearmBroadAxe();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

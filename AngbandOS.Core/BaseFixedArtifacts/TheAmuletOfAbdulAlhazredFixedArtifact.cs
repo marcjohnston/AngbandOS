@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheAmuletOfAbdulAlhazredFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new AmuletIngwe();
+    public override ItemClass BaseItemCategory => new AmuletIngwe();
 
     public override char Character => '"';
     public override string Name => "The Amulet of Abdul Alhazred";

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ThePairOfSoftLeatherBootsOfDancingFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new BootsSoftLeatherBoots();
+    public override ItemClass BaseItemCategory => new BootsSoftLeatherBoots();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

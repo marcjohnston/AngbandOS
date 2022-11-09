@@ -38,7 +38,7 @@ namespace AngbandOS
         public int ToH;
 
         public int Weight;
-        public readonly BaseItemCategory BaseItemCategory;
+        public readonly ItemClass BaseItemCategory;
 
         public FixedArtifact(Base2FixedArtifact baseFixedArtifact)
         {

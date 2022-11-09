@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheChainMailHeartguardFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HardArmorChainMail();
+    public override ItemClass BaseItemCategory => new HardArmorChainMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

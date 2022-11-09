@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheIronHelmSkullkeeperFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HelmIronHelm();
+    public override ItemClass BaseItemCategory => new HelmIronHelm();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

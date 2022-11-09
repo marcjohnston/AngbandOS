@@ -190,7 +190,7 @@ namespace AngbandOS
         }
 
 
-        public BaseItemCategory RandomItemType(int level, bool doNotAllowChestToBeCreated)
+        public ItemClass RandomItemType(int level, bool doNotAllowChestToBeCreated)
         {
             int i;
             int j;
@@ -211,7 +211,7 @@ namespace AngbandOS
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                BaseItemCategory kPtr = ItemTypes[kIdx];
+                ItemClass kPtr = ItemTypes[kIdx];
                 if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemCategory.Chest)
                 {
                     continue;
@@ -1454,7 +1454,7 @@ namespace AngbandOS
             int i;
             for (i = 0; i < ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = ItemTypes[i];
+                ItemClass kPtr = ItemTypes[i];
                 if (kPtr.HasFlavor)
                 {
                     int indexx = kPtr.SubCategory ?? 0;
@@ -2054,7 +2054,7 @@ namespace AngbandOS
             Program.Rng.UseFixed = false;
             for (i = 1; i < ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = ItemTypes[i];
+                ItemClass kPtr = ItemTypes[i];
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
                     continue;
@@ -2069,7 +2069,7 @@ namespace AngbandOS
         private void InitializeAllocationTables()
         {
             int i, j;
-            BaseItemCategory kPtr;
+            ItemClass kPtr;
             MonsterRace rPtr;
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];

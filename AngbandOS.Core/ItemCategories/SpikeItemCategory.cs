@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class SpikeItemCategory : BaseItemCategory
+    internal abstract class SpikeItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Spike;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheBeakedAxeOfTheodenFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmBeakedAxe();
+    public override ItemClass BaseItemCategory => new PolearmBeakedAxe();
 
 
     public override char Character => '/';

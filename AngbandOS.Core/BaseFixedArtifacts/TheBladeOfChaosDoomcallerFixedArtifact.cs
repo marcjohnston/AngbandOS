@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheBladeOfChaosDoomcallerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordBladeofChaos();
+    public override ItemClass BaseItemCategory => new SwordBladeofChaos();
 
     public override char Character => '|';
     public override Colour Colour => Colour.Purple;

@@ -100,7 +100,7 @@ namespace AngbandOS
                 int kIdx = -1;
                 for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                 {
-                    BaseItemCategory itemType = SaveGame.ItemTypes[i];
+                    ItemClass itemType = SaveGame.ItemTypes[i];
                     if (itemType.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
@@ -1099,7 +1099,7 @@ namespace AngbandOS
         protected virtual Item CreateItem()
         {
             int level;
-            BaseItemCategory itemType;
+            ItemClass itemType;
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
             itemType = SaveGame.ItemTypes[i];

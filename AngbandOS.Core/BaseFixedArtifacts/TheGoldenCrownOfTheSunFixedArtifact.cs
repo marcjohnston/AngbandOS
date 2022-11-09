@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheGoldenCrownOfTheSunFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new CrownGolden();
+    public override ItemClass BaseItemCategory => new CrownGolden();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Yellow;

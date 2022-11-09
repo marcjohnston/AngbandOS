@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSteelHelmOfHammerhandFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HelmSteelHelm();
+    public override ItemClass BaseItemCategory => new HelmSteelHelm();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightWhite;

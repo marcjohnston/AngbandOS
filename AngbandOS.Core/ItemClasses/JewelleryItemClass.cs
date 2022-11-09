@@ -9,7 +9,7 @@ namespace AngbandOS.ItemCategories
     /// <summary>
     /// Represents jewellery items.  Amulets and rings are both armour classes.
     /// </summary>
-    internal abstract class JewelleryItemCategory : BaseItemCategory
+    internal abstract class JewelleryItemClass : ItemClass
     {
         public override bool IsStompable(Item item)
         {

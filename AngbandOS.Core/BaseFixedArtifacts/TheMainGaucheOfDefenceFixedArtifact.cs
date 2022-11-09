@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMainGaucheOfDefenceFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordMainGauche();
+    public override ItemClass BaseItemCategory => new SwordMainGauche();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

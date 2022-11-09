@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheQuarterstaffOfAtalFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedQuarterstaff();
+    public override ItemClass BaseItemCategory => new HaftedQuarterstaff();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBrown;

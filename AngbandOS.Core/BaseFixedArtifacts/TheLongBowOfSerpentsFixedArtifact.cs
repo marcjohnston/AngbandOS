@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLongBowOfSerpentsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new BowLong();
+    public override ItemClass BaseItemCategory => new BowLong();
 
     public override char Character => '}';
     public override Colour Colour => Colour.BrightBrown;

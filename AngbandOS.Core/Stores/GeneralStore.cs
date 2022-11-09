@@ -75,7 +75,7 @@ namespace AngbandOS.Stores
             switch (item.BaseItemCategory)
             {
                 case FoodItemCategory _:
-                case LightSourceItemCategory _:
+                case LightSourceItemClass _:
                 case FlaskItemCategory _:
                 case SpikeItemCategory _:
                 case ShotItemCategory _:

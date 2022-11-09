@@ -8,7 +8,7 @@ using AngbandOS.Core;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class AmuletItemCategory : JewelleryItemCategory
+    internal abstract class AmuletItemCategory : JewelleryItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)

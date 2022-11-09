@@ -6,7 +6,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class LightSourceItemCategory : BaseItemCategory
+    internal abstract class LightSourceItemClass : ItemClass
     {
         public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 

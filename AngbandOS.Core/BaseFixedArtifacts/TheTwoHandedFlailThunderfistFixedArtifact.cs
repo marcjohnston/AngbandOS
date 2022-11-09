@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheTwoHandedFlailThunderfistFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedTwoHandedFlail();
+    public override ItemClass BaseItemCategory => new HaftedTwoHandedFlail();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Yellow;

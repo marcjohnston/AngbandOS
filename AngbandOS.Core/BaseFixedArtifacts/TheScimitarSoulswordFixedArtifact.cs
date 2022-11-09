@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheScimitarSoulswordFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordScimitar();
+    public override ItemClass BaseItemCategory => new SwordScimitar();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

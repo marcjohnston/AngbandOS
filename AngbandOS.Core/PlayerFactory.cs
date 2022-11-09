@@ -1953,108 +1953,108 @@ namespace AngbandOS
                 _player.WeightCarried += carried.Weight;
             }
 
-            BaseItemCategory[][] _playerInit = new BaseItemCategory[16][];
-            _playerInit[CharacterClass.Warrior] = new BaseItemCategory[]
+            ItemClass[][] _playerInit = new ItemClass[16][];
+            _playerInit[CharacterClass.Warrior] = new ItemClass[]
             {
                 new RingFearResistance(),
                 new SwordBroadSword(),
                 new HardArmorChainMail()
             };
-            _playerInit[CharacterClass.Mage] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Mage] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordDagger(),
                 new DeathBookBlackPrayers()
             };
-            _playerInit[CharacterClass.Priest] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Priest] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new HaftedMace(),
                 new DeathBookBlackPrayers()
             };
-            _playerInit[CharacterClass.Rogue] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Rogue] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordDagger(),
                 new SoftArmorSoftLeatherArmour()
             };
-            _playerInit[CharacterClass.Ranger] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Ranger] = new ItemClass[]
             {
                 new NatureBookCallOfTheWild(),
                 new SwordBroadSword(),
                 new DeathBookBlackPrayers()
             };
-            _playerInit[CharacterClass.Paladin] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Paladin] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordBroadSword(),
                 new ScrollProtectionFromEvil()
             };
-            _playerInit[CharacterClass.WarriorMage] = new BaseItemCategory[]
+            _playerInit[CharacterClass.WarriorMage] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordShortSword(),
                 new DeathBookBlackPrayers()
             };
-            _playerInit[CharacterClass.Fanatic] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Fanatic] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordBroadSword(),
                 new HardArmorMetalScaleMail()
             };
-            _playerInit[CharacterClass.Monk] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Monk] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new PotionHealing(),
                 new SoftArmorSoftLeatherArmour()
             };
-            _playerInit[CharacterClass.Mindcrafter] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Mindcrafter] = new ItemClass[]
             {
                 new SwordSmallSword(),
                 new PotionRestoreMana(),
                 new SoftArmorSoftLeatherArmour()
             };
-            _playerInit[CharacterClass.HighMage] = new BaseItemCategory[]
+            _playerInit[CharacterClass.HighMage] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new SwordDagger(),
                 new RingSustainIntelligence()
             };
-            _playerInit[CharacterClass.Druid] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Druid] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new HaftedQuarterstaff(),
                 new RingSustainWisdom()
             };
-            _playerInit[CharacterClass.Cultist] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Cultist] = new ItemClass[]
             {
                 new SorceryBookBeginnersHandbook(),
                 new RingSustainIntelligence(),
                 new DeathBookBlackPrayers()
             };
-            _playerInit[CharacterClass.Channeler] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Channeler] = new ItemClass[]
             {
                 new WandMagicMissile(),
                 new SwordDagger(),
                 new RingSustainCharisma()
             };
-            _playerInit[CharacterClass.ChosenOne] = new BaseItemCategory[]
+            _playerInit[CharacterClass.ChosenOne] = new ItemClass[]
             {
                 new SwordSmallSword(),
                 new PotionHealing(),
                 new SoftArmorSoftLeatherArmour()
             };
-            _playerInit[CharacterClass.Mystic] = new BaseItemCategory[]
+            _playerInit[CharacterClass.Mystic] = new ItemClass[]
             {
                 new RingSustainWisdom(),
                 new PotionHealing(),
                 new SoftArmorSoftLeatherArmour()
             };
 
-            BaseItemCategory[] startingItems = _playerInit[_player.ProfessionIndex];
+            ItemClass[] startingItems = _playerInit[_player.ProfessionIndex];
             for (int i = 0; i < startingItems.Length; i++)
             {
-                BaseItemCategory baseItemCategory = startingItems[i];
+                ItemClass baseItemCategory = startingItems[i];
 
                 if (baseItemCategory.GetType().Name == "RingFearResistance" && _player.RaceIndex == RaceId.TchoTcho)
                 {

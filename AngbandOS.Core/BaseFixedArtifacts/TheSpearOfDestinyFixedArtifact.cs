@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSpearOfDestinyFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmSpear();
+    public override ItemClass BaseItemCategory => new PolearmSpear();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

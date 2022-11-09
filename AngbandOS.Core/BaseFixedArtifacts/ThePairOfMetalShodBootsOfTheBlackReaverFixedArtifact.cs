@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ThePairOfMetalShodBootsOfTheBlackReaverFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new BootsMetalShodBoots();
+    public override ItemClass BaseItemCategory => new BootsMetalShodBoots();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

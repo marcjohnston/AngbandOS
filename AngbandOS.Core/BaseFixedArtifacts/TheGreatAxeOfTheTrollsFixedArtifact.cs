@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheGreatAxeOfTheTrollsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmGreatAxe();
+    public override ItemClass BaseItemCategory => new PolearmGreatAxe();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

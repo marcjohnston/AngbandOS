@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheBroadSwordLightningFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordBroadSword();
+    public override ItemClass BaseItemCategory => new SwordBroadSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

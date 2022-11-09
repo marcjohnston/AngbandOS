@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheTwoHandedSwordTwilightFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordTwoHandedSword();
+    public override ItemClass BaseItemCategory => new SwordTwoHandedSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

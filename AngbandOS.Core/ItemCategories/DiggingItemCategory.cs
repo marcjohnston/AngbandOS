@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class DiggingItemCategory : WeaponItemCategory
+    internal abstract class DiggingItemCategory : WeaponItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.Digging;
         public override Colour Colour => Colour.Grey;

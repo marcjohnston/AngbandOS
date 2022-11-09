@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheBastardSwordSelfslayerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordBastardSword();
+    public override ItemClass BaseItemCategory => new SwordBastardSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

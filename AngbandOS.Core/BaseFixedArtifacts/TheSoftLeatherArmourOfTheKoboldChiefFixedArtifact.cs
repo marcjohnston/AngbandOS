@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSoftLeatherArmourOfTheKoboldChiefFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SoftArmorSoftLeatherArmour();
+    public override ItemClass BaseItemCategory => new SoftArmorSoftLeatherArmour();
 
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;

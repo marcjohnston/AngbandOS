@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheGemstoneShiningTrapezodedronFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new LightGemstone();
+    public override ItemClass BaseItemCategory => new LightGemstone();
 
     public override char Character => '*';
     public override Colour Colour => Colour.Red;

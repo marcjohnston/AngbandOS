@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class FlaskItemCategory : BaseItemCategory
+    internal abstract class FlaskItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Flask;

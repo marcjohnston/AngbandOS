@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLucerneHammerJusticeFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedLucerneHammer();
+    public override ItemClass BaseItemCategory => new HaftedLucerneHammer();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBlue;

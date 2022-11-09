@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheWarHammerMjolnirFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedWarHammer();
+    public override ItemClass BaseItemCategory => new HaftedWarHammer();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

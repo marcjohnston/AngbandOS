@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class JunkItemCategory : BaseItemCategory
+    internal abstract class JunkItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         public override ItemCategory CategoryEnum => ItemCategory.Junk;

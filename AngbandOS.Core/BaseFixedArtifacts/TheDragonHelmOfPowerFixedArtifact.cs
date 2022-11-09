@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheDragonHelmOfPowerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HelmDragonHelm();
+    public override ItemClass BaseItemCategory => new HelmDragonHelm();
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightGreen;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheFlailTotilaFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedFlail();
+    public override ItemClass BaseItemCategory => new HaftedFlail();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

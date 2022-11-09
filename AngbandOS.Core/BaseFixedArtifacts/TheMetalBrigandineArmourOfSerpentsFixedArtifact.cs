@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMetalBrigandineArmourOfSerpentsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HardArmorMetalBrigandineArmour();
+    public override ItemClass BaseItemCategory => new HardArmorMetalBrigandineArmour();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMaceOfDisruptionDeathwreakerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedMace();
+    public override ItemClass BaseItemCategory => new HaftedMace();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Purple;

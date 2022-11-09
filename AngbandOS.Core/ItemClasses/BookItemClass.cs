@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class BookItemCategory : BaseItemCategory
+    internal abstract class BookItemClass : ItemClass
     {
         /// <summary>
         /// Returns true for all books.

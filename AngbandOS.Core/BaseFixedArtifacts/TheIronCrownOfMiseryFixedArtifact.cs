@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheIronCrownOfMiseryFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new CrownIron();
+    public override ItemClass BaseItemCategory => new CrownIron();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

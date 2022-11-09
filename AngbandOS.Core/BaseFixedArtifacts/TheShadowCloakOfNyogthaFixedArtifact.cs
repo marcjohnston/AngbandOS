@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheShadowCloakOfNyogthaFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new CloakShadow();
+    public override ItemClass BaseItemCategory => new CloakShadow();
 
     public override char Character => '(';
     public override Colour Colour => Colour.Black;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheExecutionersSwordOfNyarlathotepFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordExecutionersSword();
+    public override ItemClass BaseItemCategory => new SwordExecutionersSword();
 
     public override char Character => '|';
     public override Colour Colour => Colour.Red;

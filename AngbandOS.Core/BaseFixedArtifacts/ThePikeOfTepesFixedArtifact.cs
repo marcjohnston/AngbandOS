@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ThePikeOfTepesFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmPike();
+    public override ItemClass BaseItemCategory => new PolearmPike();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

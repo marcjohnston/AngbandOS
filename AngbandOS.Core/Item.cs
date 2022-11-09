@@ -77,7 +77,7 @@ namespace AngbandOS
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
         //public ItemType? ItemType = null;
-        public BaseItemCategory? BaseItemCategory = null;
+        public ItemClass? BaseItemCategory = null;
 
         public bool Marked;
 
@@ -388,7 +388,7 @@ namespace AngbandOS
             ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
-        public void AssignItemType(BaseItemCategory baseItemCategory)
+        public void AssignItemType(ItemClass baseItemCategory)
         {
             BaseItemCategory = baseItemCategory;
             ItemSubCategory = BaseItemCategory.SubCategory ?? 0;
@@ -1555,7 +1555,7 @@ namespace AngbandOS
             {
                 i = Constants.MaxGold - 1;
             }
-            BaseItemCategory? kPtr = null;
+            ItemClass? kPtr = null;
             switch (i)
             {
                 case 0:
@@ -2770,7 +2770,7 @@ namespace AngbandOS
                 {
                     PrepareAllocationTableForGoodObjects();
                 }
-                BaseItemCategory kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
+                ItemClass kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
                 if (good)
                 {
                     PrepareAllocationTable();
@@ -3265,7 +3265,7 @@ namespace AngbandOS
                 {
                     return false;
                 }
-                BaseItemCategory kIdx = aPtr.BaseItemCategory;
+                ItemClass kIdx = aPtr.BaseItemCategory;
                 if (kIdx.Level > SaveGame.Level.ObjectLevel)
                 {
                     int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;

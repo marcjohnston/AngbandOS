@@ -15,7 +15,7 @@ namespace AngbandOS.Core
     [Serializable]
     internal abstract class Base2FixedArtifact : IItemCharacteristics
     {
-        public abstract BaseItemCategory BaseItemCategory { get; }
+        public abstract ItemClass BaseItemCategory { get; }
 
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;

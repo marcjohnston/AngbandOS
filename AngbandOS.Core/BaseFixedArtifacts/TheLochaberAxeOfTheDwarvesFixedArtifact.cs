@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLochaberAxeOfTheDwarvesFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new PolearmLochaberAxe();
+    public override ItemClass BaseItemCategory => new PolearmLochaberAxe();
 
     public override char Character => '/';
     public override Colour Colour => Colour.Black;

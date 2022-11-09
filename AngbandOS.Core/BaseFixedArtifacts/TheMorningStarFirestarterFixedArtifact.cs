@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMorningStarFirestarterFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedMorningStar();
+    public override ItemClass BaseItemCategory => new HaftedMorningStar();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

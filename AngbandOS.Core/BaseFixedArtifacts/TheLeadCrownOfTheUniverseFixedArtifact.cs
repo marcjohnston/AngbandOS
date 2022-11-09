@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheLeadCrownOfTheUniverseFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new CrownLead();
+    public override ItemClass BaseItemCategory => new CrownLead();
 
     public override char Character => ']';
     public override Colour Colour => Colour.Black;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheSabreOfBluebeardFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new SwordSabre();
+    public override ItemClass BaseItemCategory => new SwordSabre();
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

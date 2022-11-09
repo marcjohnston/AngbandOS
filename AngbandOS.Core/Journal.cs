@@ -1054,7 +1054,7 @@ namespace AngbandOS
             return val.Trim();
         }
 
-        private void WorthlessItemChestSelection(BaseItemCategory kPtr)
+        private void WorthlessItemChestSelection(ItemClass kPtr)
         {
             string[] qualityText = new[] { "Empty", "Unlocked", "Locked", "Trapped" };
             _menuLength = 0;
@@ -1096,7 +1096,7 @@ namespace AngbandOS
             }
         }
 
-        private void WorthlessItemQualitySelection(BaseItemCategory kPtr)
+        private void WorthlessItemQualitySelection(ItemClass kPtr)
         {
             string[] qualityText = new[] { "Bad", "Average", "Good", "Excellent" };
             _menuLength = 0;
@@ -1143,7 +1143,7 @@ namespace AngbandOS
             _menuLength = 0;
             for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = SaveGame.ItemTypes[i];
+                ItemClass kPtr = SaveGame.ItemTypes[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     if (kPtr.InstaArt)
@@ -1183,7 +1183,7 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        BaseItemCategory kPtr = SaveGame.ItemTypes[_menuIndices[menu]];
+                        ItemClass kPtr = SaveGame.ItemTypes[_menuIndices[menu]];
                         if (kPtr.HasQuality)
                         {
                             WorthlessItemQualitySelection(kPtr);

@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
     /// <summary>
     /// Represents armour items.  Boots, clocks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
     /// </summary>
-    internal abstract class ArmourItemCategory : BaseItemCategory
+    internal abstract class ArmourItemClass : ItemClass
     {
         public override bool HasQuality => true;
 

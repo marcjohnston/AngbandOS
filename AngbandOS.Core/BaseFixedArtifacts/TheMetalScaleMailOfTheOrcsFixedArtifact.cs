@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMetalScaleMailOfTheOrcsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HardArmorMetalScaleMail();
+    public override ItemClass BaseItemCategory => new HardArmorMetalScaleMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

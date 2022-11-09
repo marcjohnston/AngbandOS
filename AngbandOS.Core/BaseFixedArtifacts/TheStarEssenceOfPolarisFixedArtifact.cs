@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheStarEssenceOfPolarisFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new LightStarEssenceGaladriel();
+    public override ItemClass BaseItemCategory => new LightStarEssenceGaladriel();
 
     public override char Character => '*';
     public override Colour Colour => Colour.Yellow;

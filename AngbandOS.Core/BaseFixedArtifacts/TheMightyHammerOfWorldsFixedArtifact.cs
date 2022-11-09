@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheMightyHammerOfWorldsFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new HaftedMightyHammer();
+    public override ItemClass BaseItemCategory => new HaftedMightyHammer();
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

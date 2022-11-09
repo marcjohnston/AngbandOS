@@ -5,7 +5,7 @@ using AngbandOS.Enumerations;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class MeleeWeaponItemCategory : WeaponItemCategory
+    internal abstract class MeleeWeaponItemCategory : WeaponItemClass
     {
         protected virtual bool CanBeWeaponOfLaw => false;
         protected virtual bool CapableOfVorpalSlaying => false;

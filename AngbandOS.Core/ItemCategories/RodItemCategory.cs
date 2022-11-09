@@ -7,7 +7,7 @@ using static AngbandOS.Extensions;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class RodItemCategory : BaseItemCategory
+    internal abstract class RodItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;

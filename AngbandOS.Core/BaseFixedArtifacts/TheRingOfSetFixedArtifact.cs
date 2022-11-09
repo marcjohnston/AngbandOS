@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheRingOfSetFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new RingPower();
+    public override ItemClass BaseItemCategory => new RingPower();
 
     public override char Character => '=';
     public override Colour Colour => Colour.Yellow;

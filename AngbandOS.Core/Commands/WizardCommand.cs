@@ -488,7 +488,7 @@ namespace AngbandOS.Commands
         {
             for (int i = 1; i < saveGame.ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = saveGame.ItemTypes[i];
+                ItemClass kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Level <= saveGame.CommandArgument)
                 {
                     kPtr.FlavourAware = true;
@@ -705,7 +705,7 @@ namespace AngbandOS.Commands
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
             for (num = 0, i = 1; num < maxCount && i < saveGame.ItemTypes.Count; i++)
             {
-                BaseItemCategory kPtr = saveGame.ItemTypes[i];
+                ItemClass kPtr = saveGame.ItemTypes[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);
@@ -754,7 +754,7 @@ namespace AngbandOS.Commands
             {
                 return;
             }
-            BaseItemCategory i = aPtr.BaseItemCategory;
+            ItemClass i = aPtr.BaseItemCategory;
             qPtr.AssignItemType(i);
             qPtr.FixedArtifactIndex = aIdx;
             qPtr.TypeSpecificValue = aPtr.Pval;

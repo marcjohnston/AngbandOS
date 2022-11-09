@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ThePowerDragonScaleMailBladeturnerFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new DragArmorPowerDragonScaleMail();
+    public override ItemClass BaseItemCategory => new DragArmorPowerDragonScaleMail();
 
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;

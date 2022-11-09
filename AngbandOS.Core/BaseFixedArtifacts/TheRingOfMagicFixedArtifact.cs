@@ -7,7 +7,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TheRingOfMagicFixedArtifact : Base2FixedArtifact
 {
-    public override BaseItemCategory BaseItemCategory => new RingBarahir();
+    public override ItemClass BaseItemCategory => new RingBarahir();
 
     public override char Character => '=';
     public override string Name => "The Ring of Magic";

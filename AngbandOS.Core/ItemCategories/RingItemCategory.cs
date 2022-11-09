@@ -8,7 +8,7 @@ using AngbandOS.Core;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class RingItemCategory : JewelleryItemCategory
+    internal abstract class RingItemCategory : JewelleryItemClass
     {
         public override bool HasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Ring;

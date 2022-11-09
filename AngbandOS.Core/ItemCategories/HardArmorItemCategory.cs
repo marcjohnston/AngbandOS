@@ -6,7 +6,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class HardArmorItemCategory : ArmourItemCategory
+    internal abstract class HardArmorItemCategory : ArmourItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.HardArmor;
         public override bool HatesAcid => true;

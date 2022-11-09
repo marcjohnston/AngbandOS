@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class GoldItemCategory : BaseItemCategory
+    internal abstract class GoldItemCategory : ItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.Gold;
         //public override bool IgnoredByMonsters => true;

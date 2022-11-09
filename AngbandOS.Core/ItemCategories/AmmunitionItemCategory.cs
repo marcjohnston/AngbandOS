@@ -3,7 +3,7 @@
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class AmmunitionItemCategory : WeaponItemCategory
+    internal abstract class AmmunitionItemCategory : WeaponItemClass
     {
         public override int? GetBonusRealValue(Item item, int value)
         {

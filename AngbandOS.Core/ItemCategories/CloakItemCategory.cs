@@ -5,7 +5,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal abstract class CloakItemCategory : ArmourItemCategory
+    internal abstract class CloakItemCategory : ArmourItemClass
     {
         public override ItemCategory CategoryEnum => ItemCategory.Cloak;
         public override bool HatesFire => true;
