@@ -629,23 +629,6 @@ namespace AngbandOS.Commands
             }
         }
 
-        private void PrtBinary(SaveGame saveGame, FlagSet flags, int row, int col)
-        {
-            uint bitmask = 1u;
-            for (int i = 1; i <= 32; i++)
-            {
-                if (flags.IsSet(bitmask))
-                {
-                    saveGame.Print(Colour.Blue, '*', row, col++);
-                }
-                else
-                {
-                    saveGame.Print(Colour.White, '-', row, col++);
-                }
-                bitmask *= 2;
-            }
-        }
-
         private void PrtBinary(SaveGame saveGame, bool isSet, int row, int col)
         {
             if (isSet)
