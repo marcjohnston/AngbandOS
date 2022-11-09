@@ -21,7 +21,7 @@ namespace AngbandOS.Commands
         public static List<WandFlavour> BaseWandFlavours = new List<WandFlavour>();
         public static Dictionary<string, BaseProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, BaseProjectileGraphic>();
         public static Dictionary<string, BaseAnimation> BaseAnimations = new Dictionary<string, BaseAnimation>();
-        public static Dictionary<string, BaseVaultType> Base2VaultTypes = new Dictionary<string, BaseVaultType>();
+        public static Dictionary<string, Vault> Base2VaultTypes = new Dictionary<string, Vault>();
         public static Dictionary<string, BaseFloorTileType> BaseFloorTileTypes = new Dictionary<string, BaseFloorTileType>();
         public static Dictionary<string, Base2RareItemType> Base2RareItemTypes = new Dictionary<string, Base2RareItemType>();
         public static Dictionary<string, Base2FixedArtifact> Base2FixedArtifacts = new Dictionary<string, Base2FixedArtifact>();
@@ -116,9 +116,9 @@ namespace AngbandOS.Commands
                 }
 
                 // Load Vault Types.
-                if (!type.IsAbstract && typeof(BaseVaultType).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(Vault).IsAssignableFrom(type))
                 {
-                    BaseVaultType vaultType = (BaseVaultType)Activator.CreateInstance(type);
+                    Vault vaultType = (Vault)Activator.CreateInstance(type);
                     Base2VaultTypes.Add(vaultType.Name, vaultType);
                 }
 

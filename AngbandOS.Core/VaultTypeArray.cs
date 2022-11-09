@@ -18,7 +18,7 @@ namespace AngbandOS
     {
         public VaultTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, BaseVaultType> baseType in CommandManager.Base2VaultTypes)
+            foreach (KeyValuePair<string, Vault> baseType in CommandManager.Base2VaultTypes)
             {
                 Add(new VaultType(baseType.Value));
             }

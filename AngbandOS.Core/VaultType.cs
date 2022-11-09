@@ -35,7 +35,7 @@ namespace AngbandOS
             Width = original.Width;
         }
 
-        public VaultType(BaseVaultType original)
+        public VaultType(Vault original)
         {
             Height = original.Height;
             Name = original.Name;
