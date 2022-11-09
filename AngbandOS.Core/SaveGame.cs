@@ -70,11 +70,11 @@ namespace AngbandOS
         public int RecallDungeon;
         public int Resting;
         public int Running;
-        public List<BaseAmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
-        public List<BaseMushroomFlavour> MushroomFlavours;
-        public List<BasePotionFlavour> PotionFlavours;
-        public List<BaseRingFlavour> RingFlavours;
-        public List<BaseRodFlavour> RodFlavours;
+        public List<AmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
+        public List<MushroomFlavour> MushroomFlavours;
+        public List<PotionFlavour> PotionFlavours;
+        public List<RingFlavour> RingFlavours;
+        public List<RodFlavour> RodFlavours;
         public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
         public List<StaffFlavour> StaffFlavours;
         public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
@@ -1902,12 +1902,12 @@ namespace AngbandOS
             int i, j;
             Program.Rng.UseFixed = true;
             Program.Rng.FixedSeed = _seedFlavor;
-            PotionFlavours = new List<BasePotionFlavour>();
-            List<BasePotionFlavour> tempPotions = new List<BasePotionFlavour>();
+            PotionFlavours = new List<PotionFlavour>();
+            List<PotionFlavour> tempPotions = new List<PotionFlavour>();
             PotionFlavours.Add(new ClearPotionFlavour());
             PotionFlavours.Add(new LightBrownPotionFlavour());
             PotionFlavours.Add(new IckyGreenPotionFlavour());
-            foreach (BasePotionFlavour potionFlavour in CommandManager.BasePotionFlavours)
+            foreach (PotionFlavour potionFlavour in CommandManager.BasePotionFlavours)
             {
                 if (potionFlavour is ClearPotionFlavour)
                 {
@@ -1929,9 +1929,9 @@ namespace AngbandOS
                 PotionFlavours.Add(tempPotions[index]);
                 tempPotions.RemoveAt(index);
             } while (tempPotions.Count > 0);
-            MushroomFlavours = new List<BaseMushroomFlavour>();
-            List<BaseMushroomFlavour> tempMushrooms = new List<BaseMushroomFlavour>();
-            foreach (BaseMushroomFlavour mushroomFlavour in CommandManager.BaseMushroomFlavours)
+            MushroomFlavours = new List<MushroomFlavour>();
+            List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
+            foreach (MushroomFlavour mushroomFlavour in CommandManager.BaseMushroomFlavours)
             {
                 tempMushrooms.Add(mushroomFlavour);
             }
@@ -1941,9 +1941,9 @@ namespace AngbandOS
                 MushroomFlavours.Add(tempMushrooms[index]);
                 tempMushrooms.RemoveAt(index);
             } while (tempMushrooms.Count > 0);
-            AmuletFlavours = new List<BaseAmuletFlavour>();
-            List<BaseAmuletFlavour> tempAmulets = new List<BaseAmuletFlavour>();
-            foreach (BaseAmuletFlavour amuletFlavour in CommandManager.BaseAmuletFlavours)
+            AmuletFlavours = new List<AmuletFlavour>();
+            List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
+            foreach (AmuletFlavour amuletFlavour in CommandManager.BaseAmuletFlavours)
             {
                 tempAmulets.Add(amuletFlavour);
             }
@@ -1965,9 +1965,9 @@ namespace AngbandOS
                 WandFlavours.Add(tempWands[index]);
                 tempWands.RemoveAt(index);
             } while (tempWands.Count > 0);
-            RingFlavours = new List<BaseRingFlavour>();
-            List<BaseRingFlavour> tempRings = new List<BaseRingFlavour>();
-            foreach (BaseRingFlavour ringFlavour in CommandManager.BaseRingFlavours)
+            RingFlavours = new List<RingFlavour>();
+            List<RingFlavour> tempRings = new List<RingFlavour>();
+            foreach (RingFlavour ringFlavour in CommandManager.BaseRingFlavours)
             {
                 tempRings.Add(ringFlavour);
             }
@@ -1977,9 +1977,9 @@ namespace AngbandOS
                 RingFlavours.Add(tempRings[index]);
                 tempRings.RemoveAt(index);
             } while (tempRings.Count > 0);
-            RodFlavours = new List<BaseRodFlavour>();
-            List<BaseRodFlavour> tempRods = new List<BaseRodFlavour>();
-            foreach (BaseRodFlavour rodFlavour in CommandManager.BaseRodFlavours)
+            RodFlavours = new List<RodFlavour>();
+            List<RodFlavour> tempRods = new List<RodFlavour>();
+            foreach (RodFlavour rodFlavour in CommandManager.BaseRodFlavours)
             {
                 tempRods.Add(rodFlavour);
             }

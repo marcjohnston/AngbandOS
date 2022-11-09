@@ -57,9 +57,9 @@ namespace AngbandOS.Projection
             int[] gy = new int[256];
             int[] gm = new int[32];
             int gmRad = rad;
-            BaseProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : CommandManager.BaseProjectileGraphics[BoltGraphic];
-            BaseProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : CommandManager.BaseProjectileGraphics[ImpactGraphic];
-            BaseAnimation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : CommandManager.BaseAnimations[EffectAnimation];
+            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : CommandManager.BaseProjectileGraphics[BoltGraphic];
+            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : CommandManager.BaseProjectileGraphics[ImpactGraphic];
+            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : CommandManager.BaseAnimations[EffectAnimation];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
                 x1 = x;

@@ -2248,7 +2248,7 @@ namespace AngbandOS
             Colour a;
             char c;
             GridTile cPtr = Grid[y][x];
-            BaseFloorTileType feat = cPtr.FeatureType;
+            FloorTileType feat = cPtr.FeatureType;
             if (feat.IsOpenFloor)
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||

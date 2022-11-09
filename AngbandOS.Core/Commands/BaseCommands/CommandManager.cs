@@ -11,18 +11,18 @@ namespace AngbandOS.Commands
     {
         public static List<ICommand> GameCommands = new List<ICommand>();
         public static List<IStoreCommand> StoreCommands = new List<IStoreCommand>();
-        public static List<BaseAmuletFlavour> BaseAmuletFlavours = new List<BaseAmuletFlavour>();
-        public static List<BaseMushroomFlavour> BaseMushroomFlavours = new List<BaseMushroomFlavour>();
-        public static List<BasePotionFlavour> BasePotionFlavours = new List<BasePotionFlavour>();
-        public static List<BaseRingFlavour> BaseRingFlavours = new List<BaseRingFlavour>();
-        public static List<BaseRodFlavour> BaseRodFlavours = new List<BaseRodFlavour>();
+        public static List<AmuletFlavour> BaseAmuletFlavours = new List<AmuletFlavour>();
+        public static List<MushroomFlavour> BaseMushroomFlavours = new List<MushroomFlavour>();
+        public static List<PotionFlavour> BasePotionFlavours = new List<PotionFlavour>();
+        public static List<RingFlavour> BaseRingFlavours = new List<RingFlavour>();
+        public static List<RodFlavour> BaseRodFlavours = new List<RodFlavour>();
         public static List<BaseScrollFlavour> BaseScrollFlavours = new List<BaseScrollFlavour>();
         public static List<StaffFlavour> BaseStaffFlavours = new List<StaffFlavour>();
         public static List<WandFlavour> BaseWandFlavours = new List<WandFlavour>();
-        public static Dictionary<string, BaseProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, BaseProjectileGraphic>();
-        public static Dictionary<string, BaseAnimation> BaseAnimations = new Dictionary<string, BaseAnimation>();
+        public static Dictionary<string, ProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, ProjectileGraphic>();
+        public static Dictionary<string, Animation> BaseAnimations = new Dictionary<string, Animation>();
         public static Dictionary<string, Vault> Base2VaultTypes = new Dictionary<string, Vault>();
-        public static Dictionary<string, BaseFloorTileType> BaseFloorTileTypes = new Dictionary<string, BaseFloorTileType>();
+        public static Dictionary<string, FloorTileType> BaseFloorTileTypes = new Dictionary<string, FloorTileType>();
         public static Dictionary<string, Base2RareItemType> Base2RareItemTypes = new Dictionary<string, Base2RareItemType>();
         public static Dictionary<string, Base2FixedArtifact> Base2FixedArtifacts = new Dictionary<string, Base2FixedArtifact>();
 
@@ -46,37 +46,37 @@ namespace AngbandOS.Commands
                 }
 
                 // Load AmuletFlavours.
-                if (!type.IsAbstract && typeof(BaseAmuletFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(AmuletFlavour).IsAssignableFrom(type))
                 {
-                    BaseAmuletFlavour baseAmuletFlavour = (BaseAmuletFlavour)Activator.CreateInstance(type);
+                    AmuletFlavour baseAmuletFlavour = (AmuletFlavour)Activator.CreateInstance(type);
                     BaseAmuletFlavours.Add(baseAmuletFlavour);
                 }
 
                 // Load MushroomFlavours.
-                if (!type.IsAbstract && typeof(BaseMushroomFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(MushroomFlavour).IsAssignableFrom(type))
                 {
-                    BaseMushroomFlavour baseMushroomFlavour = (BaseMushroomFlavour)Activator.CreateInstance(type);
+                    MushroomFlavour baseMushroomFlavour = (MushroomFlavour)Activator.CreateInstance(type);
                     BaseMushroomFlavours.Add(baseMushroomFlavour);
                 }
 
                 // Load PotionFlavours.
-                if (!type.IsAbstract && typeof(BasePotionFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(PotionFlavour).IsAssignableFrom(type))
                 {
-                    BasePotionFlavour basePotionFlavour = (BasePotionFlavour)Activator.CreateInstance(type);
+                    PotionFlavour basePotionFlavour = (PotionFlavour)Activator.CreateInstance(type);
                     BasePotionFlavours.Add(basePotionFlavour);
                 }
 
                 // Load RingFlavours.
-                if (!type.IsAbstract && typeof(BaseRingFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(RingFlavour).IsAssignableFrom(type))
                 {
-                    BaseRingFlavour baseRingFlavour = (BaseRingFlavour)Activator.CreateInstance(type);
+                    RingFlavour baseRingFlavour = (RingFlavour)Activator.CreateInstance(type);
                     BaseRingFlavours.Add(baseRingFlavour);
                 }
 
                 // Load RodFlavours.
-                if (!type.IsAbstract && typeof(BaseRodFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(RodFlavour).IsAssignableFrom(type))
                 {
-                    BaseRodFlavour baseRodFlavour = (BaseRodFlavour)Activator.CreateInstance(type);
+                    RodFlavour baseRodFlavour = (RodFlavour)Activator.CreateInstance(type);
                     BaseRodFlavours.Add(baseRodFlavour);
                 }
 
@@ -102,16 +102,16 @@ namespace AngbandOS.Commands
                 }
 
                 // Load ProjectileGraphics.
-                if (!type.IsAbstract && typeof(BaseProjectileGraphic).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(ProjectileGraphic).IsAssignableFrom(type))
                 {
-                    BaseProjectileGraphic projectileGraphic = (BaseProjectileGraphic)Activator.CreateInstance(type);
+                    ProjectileGraphic projectileGraphic = (ProjectileGraphic)Activator.CreateInstance(type);
                     BaseProjectileGraphics.Add(projectileGraphic.Name, projectileGraphic);
                 }
 
                 // Load Animations.
-                if (!type.IsAbstract && typeof(BaseAnimation).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(Animation).IsAssignableFrom(type))
                 {
-                    BaseAnimation animation = (BaseAnimation)Activator.CreateInstance(type);
+                    Animation animation = (Animation)Activator.CreateInstance(type);
                     BaseAnimations.Add(animation.Name, animation);
                 }
 
@@ -123,9 +123,9 @@ namespace AngbandOS.Commands
                 }
 
                 // Load Floor Tile Type.
-                if (!type.IsAbstract && typeof(BaseFloorTileType).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(FloorTileType).IsAssignableFrom(type))
                 {
-                    BaseFloorTileType floorTileType = (BaseFloorTileType)Activator.CreateInstance(type);
+                    FloorTileType floorTileType = (FloorTileType)Activator.CreateInstance(type);
                     BaseFloorTileTypes.Add(floorTileType.Name, floorTileType);
                 }
 

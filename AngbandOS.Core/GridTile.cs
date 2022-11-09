@@ -79,12 +79,12 @@ namespace AngbandOS
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public BaseFloorTileType BackgroundFeature;
+        public FloorTileType BackgroundFeature;
 
         /// <summary>
         /// The type of feature in this grid tile
         /// </summary>
-        public BaseFloorTileType FeatureType;
+        public FloorTileType FeatureType;
 
         /// <summary>
         /// The index of the first item that is in this grid tile
