@@ -1627,7 +1627,7 @@ namespace AngbandOS
                     break;
 
                 case 17:
-                    kPtr = new GoldAdamantite();
+                    kPtr = new GoldAdamantite2();
                     break;
             }
             if (kPtr == null)
