@@ -6,8 +6,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
-using AngbandOS.StaticData;
-using System;
 
 namespace AngbandOS
 {
@@ -20,20 +18,6 @@ namespace AngbandOS
         public int Rating;
         public string Text;
         public int Width;
-
-        public VaultType()
-        {
-        }
-
-        public VaultType(VaultType original)
-        {
-            Height = original.Height;
-            Name = original.Name;
-            Rating = original.Rating;
-            Text = original.Text;
-            Category = original.Category;
-            Width = original.Width;
-        }
 
         public VaultType(Vault original)
         {
