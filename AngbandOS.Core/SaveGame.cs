@@ -315,6 +315,27 @@ namespace AngbandOS
             }
         }
 
+        private void ResetStompability()
+        {
+            foreach (ItemClass item in ItemTypes)
+            {
+                if (item.HasQuality)
+                {
+                    item.Stompable[0] = true;
+                    item.Stompable[1] = false;
+                    item.Stompable[2] = false;
+                    item.Stompable[3] = false;
+                }
+                else
+                {
+                    item.Stompable[0] = item.Cost <= 0;
+                    item.Stompable[1] = false;
+                    item.Stompable[2] = false;
+                    item.Stompable[3] = false;
+                }
+            }
+        }
+
         public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             _console = console;
@@ -355,7 +376,7 @@ namespace AngbandOS
                 {
                     dungeon.RandomiseOffset();
                 }
-                ItemTypes.ResetStompability();
+                ResetStompability();
                 CurrentDepth = 0;
                 CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')

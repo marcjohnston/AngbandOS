@@ -34,26 +34,5 @@ namespace AngbandOS
                 }
             }
         }
-
-        public void ResetStompability()
-        {
-            foreach (ItemClass itemType in this)
-            {
-                if (itemType.HasQuality)
-                {
-                    itemType.Stompable[0] = true;
-                    itemType.Stompable[1] = false;
-                    itemType.Stompable[2] = false;
-                    itemType.Stompable[3] = false;
-                }
-                else
-                {
-                    itemType.Stompable[0] = itemType.Cost <= 0;
-                    itemType.Stompable[1] = false;
-                    itemType.Stompable[2] = false;
-                    itemType.Stompable[3] = false;
-                }
-            }
-        }
     }
 }
