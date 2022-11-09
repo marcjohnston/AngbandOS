@@ -486,9 +486,8 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizLearn(SaveGame saveGame)
         {
-            for (int i = 1; i < saveGame.ItemTypes.Count; i++)
+            foreach (ItemClass kPtr in saveGame.ItemTypes)
             {
-                ItemClass kPtr = saveGame.ItemTypes[i];
                 if (kPtr.Level <= saveGame.CommandArgument)
                 {
                     kPtr.FlavourAware = true;

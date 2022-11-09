@@ -1450,10 +1450,8 @@ namespace AngbandOS
 
         private void ApplyFlavourVisuals() // TODO: This is run just once
         {
-            int i;
-            for (i = 0; i < ItemTypes.Count; i++)
+            foreach (ItemClass kPtr in ItemTypes)
             {
-                ItemClass kPtr = ItemTypes[i];
                 if (kPtr.HasFlavor)
                 {
                     int indexx = kPtr.SubCategory ?? 0;
@@ -2051,9 +2049,8 @@ namespace AngbandOS
                 }
             }
             Program.Rng.UseFixed = false;
-            for (i = 1; i < ItemTypes.Count; i++)
+            foreach (ItemClass kPtr in ItemTypes)
             {
-                ItemClass kPtr = ItemTypes[i];
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
                     continue;

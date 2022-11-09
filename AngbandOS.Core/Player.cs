@@ -246,9 +246,8 @@ namespace AngbandOS
                 FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;
             }
-            for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
+            foreach (ItemClass kPtr in SaveGame.ItemTypes)
             {
-                ItemClass kPtr = SaveGame.ItemTypes[i];
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;
             }

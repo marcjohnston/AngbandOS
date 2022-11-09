@@ -1141,7 +1141,7 @@ namespace AngbandOS
         private void WorthlessItemTypeSelection(ItemCategory tval)
         {
             _menuLength = 0;
-            for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
+            for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
             {
                 ItemClass kPtr = SaveGame.ItemTypes[i];
                 if (kPtr.CategoryEnum == tval)
@@ -1188,7 +1188,7 @@ namespace AngbandOS
                         {
                             WorthlessItemQualitySelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
+                            for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
                                 if (kPtr.CategoryEnum == tval)
@@ -1215,7 +1215,7 @@ namespace AngbandOS
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 1; i < SaveGame.ItemTypes.Count; i++)
+                            for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
                             {
                                 kPtr = SaveGame.ItemTypes[i];
                                 if (kPtr.CategoryEnum == tval)
