@@ -4,7 +4,7 @@ using System;
 namespace AngbandOS.ItemCategories
 {
     [Serializable]
-    internal class GoldAdamantite2 : GoldItemCategory
+    internal class GoldAdamantite : GoldItemCategory
     {
         public override char Character => '$';
         public override Colour Colour => Colour.Chartreuse;
