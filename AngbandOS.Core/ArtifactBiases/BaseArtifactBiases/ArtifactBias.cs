@@ -35,7 +35,7 @@ namespace AngbandOS.ArtifactBiases
         }
 
         /// <inheritdoc/>
-        public virtual IActivationPower GetActivationPowerType(Item item)
+        public virtual ActivationPower GetActivationPowerType(Item item)
         {
             return null;
         }

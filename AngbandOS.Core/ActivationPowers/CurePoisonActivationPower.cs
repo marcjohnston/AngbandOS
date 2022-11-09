@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "remove fear and cure poison every 5 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCha;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCha = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResChaos;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResChaos = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Telepathy;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy = true;
     }
 }

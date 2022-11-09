@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "ball of lightning (100) every 500 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustStr;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResConf;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResConf = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SlowDigest;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest = true;
     }
 }

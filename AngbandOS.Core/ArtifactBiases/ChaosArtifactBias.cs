@@ -64,7 +64,7 @@ namespace AngbandOS.ArtifactBiases
 
         public override int ActivationPowerChance => 50;
 
-        public override IActivationPower GetActivationPowerType(Item item)
+        public override ActivationPower GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(6) == 1)
             {

@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "elemental breath (300) every 500 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustStr;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResSound;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResSound = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Feather;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather = true;
     }
 }

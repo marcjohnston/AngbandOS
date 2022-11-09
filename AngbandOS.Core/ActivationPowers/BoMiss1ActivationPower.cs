@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "magic missile (2d6) every 2 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResSound;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResSound = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis = true;
     }
 }

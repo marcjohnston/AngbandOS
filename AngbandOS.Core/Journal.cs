@@ -12,6 +12,7 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.ItemCategories;
+using System.Xml.Linq;
 
 namespace AngbandOS
 {
@@ -113,165 +114,44 @@ namespace AngbandOS
             SaveGame.FullScreenOverlay = false;
         }
 
-        private void DisplayFlags(int mode)
+        private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)
         {
-            int n;
-            int top = 20 * mode;
-            FlagSet[][] b = new FlagSet[14][];
-            for (int i = 0; i < 14; i++)
-            {
-                b[i] = new FlagSet[6];
-                for (int j = 0; j < 6; j++)
-                {
-                    b[i][j] = new FlagSet();
-                }
-            }
+            // Determine if the stat is granted via any equipment.
+            bool hasStat = false;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                n = i - InventorySlot.MeleeWeapon;
                 Item oPtr = SaveGame.Player.Inventory[i];
-                ItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
-                if (itemCharacteristics.Str) b[n][0].Set(ItemFlag1.Str);
-                if (itemCharacteristics.Int) b[n][0].Set(ItemFlag1.Int);
-                if (itemCharacteristics.Wis) b[n][0].Set(ItemFlag1.Wis);
-                if (itemCharacteristics.Dex) b[n][0].Set(ItemFlag1.Dex);
-                if (itemCharacteristics.Con) b[n][0].Set(ItemFlag1.Con);
-                if (itemCharacteristics.Cha) b[n][0].Set(ItemFlag1.Cha);
-                if (itemCharacteristics.Stealth) b[n][0].Set(ItemFlag1.Stealth);
-                if (itemCharacteristics.Search) b[n][0].Set(ItemFlag1.Search);
-                if (itemCharacteristics.Infra) b[n][0].Set(ItemFlag1.Infra);
-                if (itemCharacteristics.Tunnel) b[n][0].Set(ItemFlag1.Tunnel);
-                if (itemCharacteristics.Speed) b[n][0].Set(ItemFlag1.Speed);
-                if (itemCharacteristics.Blows) b[n][0].Set(ItemFlag1.Blows);
-                if (itemCharacteristics.Chaotic) b[n][0].Set(ItemFlag1.Chaotic);
-                if (itemCharacteristics.Vampiric) b[n][0].Set(ItemFlag1.Vampiric);
-
-                if (itemCharacteristics.SlayAnimal) b[n][1].Set(ItemFlag1.SlayAnimal);
-                if (itemCharacteristics.SlayEvil) b[n][1].Set(ItemFlag1.SlayEvil);
-                if (itemCharacteristics.SlayUndead) b[n][1].Set(ItemFlag1.SlayUndead);
-                if (itemCharacteristics.SlayDemon) b[n][1].Set(ItemFlag1.SlayDemon);
-                if (itemCharacteristics.SlayOrc) b[n][1].Set(ItemFlag1.SlayOrc);
-                if (itemCharacteristics.SlayTroll) b[n][1].Set(ItemFlag1.SlayTroll);
-                if (itemCharacteristics.SlayGiant) b[n][1].Set(ItemFlag1.SlayGiant);
-                if (itemCharacteristics.SlayDragon) b[n][1].Set(ItemFlag1.SlayDragon);
-                if (itemCharacteristics.KillDragon) b[n][1].Set(ItemFlag1.KillDragon);
-                if (itemCharacteristics.Vorpal) b[n][1].Set(ItemFlag1.Vorpal);
-                if (itemCharacteristics.Impact) b[n][1].Set(ItemFlag1.Impact);
-                if (itemCharacteristics.BrandPois) b[n][1].Set(ItemFlag1.BrandPois);
-                if (itemCharacteristics.BrandAcid) b[n][1].Set(ItemFlag1.BrandAcid);
-                if (itemCharacteristics.BrandElec) b[n][1].Set(ItemFlag1.BrandElec);
-                if (itemCharacteristics.BrandFire) b[n][1].Set(ItemFlag1.BrandFire);
-                if (itemCharacteristics.BrandCold) b[n][1].Set(ItemFlag1.BrandCold);
-
-                if (itemCharacteristics.SustStr) b[n][2].Set(ItemFlag2.SustStr);
-                if (itemCharacteristics.SustInt) b[n][2].Set(ItemFlag2.SustInt);
-                if (itemCharacteristics.SustWis) b[n][2].Set(ItemFlag2.SustWis);
-                if (itemCharacteristics.SustDex) b[n][2].Set(ItemFlag2.SustDex);
-                if (itemCharacteristics.SustCon) b[n][2].Set(ItemFlag2.SustCon);
-                if (itemCharacteristics.SustCha) b[n][2].Set(ItemFlag2.SustCha);
-                if (itemCharacteristics.ImAcid) b[n][2].Set(ItemFlag2.ImAcid);
-                if (itemCharacteristics.ImElec) b[n][2].Set(ItemFlag2.ImElec);
-                if (itemCharacteristics.ImFire) b[n][2].Set(ItemFlag2.ImFire);
-                if (itemCharacteristics.ImCold) b[n][2].Set(ItemFlag2.ImCold);
-                if (itemCharacteristics.Reflect) b[n][2].Set(ItemFlag2.Reflect);
-                if (itemCharacteristics.FreeAct) b[n][2].Set(ItemFlag2.FreeAct);
-                if (itemCharacteristics.HoldLife) b[n][2].Set(ItemFlag2.HoldLife);
-
-                if (itemCharacteristics.ResAcid) b[n][3].Set(ItemFlag2.ResAcid);
-                if (itemCharacteristics.ResElec) b[n][3].Set(ItemFlag2.ResElec);
-                if (itemCharacteristics.ResFire) b[n][3].Set(ItemFlag2.ResFire);
-                if (itemCharacteristics.ResCold) b[n][3].Set(ItemFlag2.ResCold);
-                if (itemCharacteristics.ResPois) b[n][3].Set(ItemFlag2.ResPois);
-                if (itemCharacteristics.ResFear) b[n][3].Set(ItemFlag2.ResFear);
-                if (itemCharacteristics.ResLight) b[n][3].Set(ItemFlag2.ResLight);
-                if (itemCharacteristics.ResDark) b[n][3].Set(ItemFlag2.ResDark);
-                if (itemCharacteristics.ResBlind) b[n][3].Set(ItemFlag2.ResBlind);
-                if (itemCharacteristics.ResConf) b[n][3].Set(ItemFlag2.ResConf);
-                if (itemCharacteristics.ResSound) b[n][3].Set(ItemFlag2.ResSound);
-                if (itemCharacteristics.ResShards) b[n][3].Set(ItemFlag2.ResShards);
-                if (itemCharacteristics.ResNether) b[n][3].Set(ItemFlag2.ResNether);
-                if (itemCharacteristics.ResNexus) b[n][3].Set(ItemFlag2.ResNexus);
-                if (itemCharacteristics.ResChaos) b[n][3].Set(ItemFlag2.ResChaos);
-                if (itemCharacteristics.ResDisen) b[n][3].Set(ItemFlag2.ResDisen);
-
-                if (itemCharacteristics.ShFire) b[n][4].Set(ItemFlag3.ShFire);
-                if (itemCharacteristics.ShElec) b[n][4].Set(ItemFlag3.ShElec);
-                if (itemCharacteristics.AntiTheft) b[n][4].Set(ItemFlag3.AntiTheft);
-                if (itemCharacteristics.NoTele) b[n][4].Set(ItemFlag3.NoTele);
-                if (itemCharacteristics.NoMagic) b[n][4].Set(ItemFlag3.NoMagic);
-                if (itemCharacteristics.Wraith) b[n][4].Set(ItemFlag3.Wraith);
-                if (itemCharacteristics.DreadCurse) b[n][4].Set(ItemFlag3.DreadCurse);
-                if (itemCharacteristics.EasyKnow) b[n][4].Set(ItemFlag3.EasyKnow);
-                if (itemCharacteristics.HideType) b[n][4].Set(ItemFlag3.HideType);
-                if (itemCharacteristics.ShowMods) b[n][4].Set(ItemFlag3.ShowMods);
-                if (itemCharacteristics.InstaArt) b[n][4].Set(ItemFlag3.InstaArt);
-                if (itemCharacteristics.Feather) b[n][4].Set(ItemFlag3.Feather);
-                if (itemCharacteristics.Lightsource) b[n][4].Set(ItemFlag3.Lightsource);
-                if (itemCharacteristics.SeeInvis) b[n][4].Set(ItemFlag3.SeeInvis);
-                if (itemCharacteristics.Telepathy) b[n][4].Set(ItemFlag3.Telepathy);
-
-                if (itemCharacteristics.SlowDigest) b[n][5].Set(ItemFlag3.SlowDigest);
-                if (itemCharacteristics.Regen) b[n][5].Set(ItemFlag3.Regen);
-                if (itemCharacteristics.XtraMight) b[n][5].Set(ItemFlag3.XtraMight);
-                if (itemCharacteristics.XtraShots) b[n][5].Set(ItemFlag3.XtraShots);
-                if (itemCharacteristics.IgnoreAcid) b[n][5].Set(ItemFlag3.IgnoreAcid);
-                if (itemCharacteristics.IgnoreElec) b[n][5].Set(ItemFlag3.IgnoreElec);
-                if (itemCharacteristics.IgnoreFire) b[n][5].Set(ItemFlag3.IgnoreFire);
-                if (itemCharacteristics.IgnoreCold) b[n][5].Set(ItemFlag3.IgnoreCold);
-                if (itemCharacteristics.Activate) b[n][5].Set(ItemFlag3.Activate);
-                if (itemCharacteristics.DrainExp) b[n][5].Set(ItemFlag3.DrainExp);
-                if (itemCharacteristics.Teleport) b[n][5].Set(ItemFlag3.Teleport);
-                if (itemCharacteristics.Aggravate) b[n][5].Set(ItemFlag3.Aggravate);
-                if (itemCharacteristics.Blessed) b[n][5].Set(ItemFlag3.Blessed);
-                if (itemCharacteristics.Cursed) b[n][5].Set(ItemFlag3.Cursed);
-                if (itemCharacteristics.HeavyCurse) b[n][5].Set(ItemFlag3.HeavyCurse);
-                if (itemCharacteristics.PermaCurse) b[n][5].Set(ItemFlag3.PermaCurse);
+                IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                if (getStat(itemCharacteristics))
+                    hasStat = true;
             }
-            n = 13;
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            SaveGame.Player.GetAbilitiesAsItemFlags(f1, f2, f3);
-            b[n][0].Set(f1.LowOrder);
-            b[n][1].Set(f1.HighOrder);
-            b[n][2].Set(f2.LowOrder);
-            b[n][3].Set(f2.HighOrder);
-            b[n][4].Set(f3.LowOrder);
-            b[n][5].Set(f3.HighOrder);
-            for (int x = 0; x < 3; x++)
+
+            Colour baseColour = hasStat ? Colour.Green : Colour.Blue; // Blue default color for missing stat, green when stat is possessed.
+            SaveGame.Print(baseColour, title, row, col);
+            SaveGame.Print(baseColour, ':', row, col + 10); // Right aligned
+            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, top + 2, (x * 26) + 12);
-                SaveGame.Print(Colour.Blue, "abcdefghijklm@", top + 3, (x * 26) + 12);
-                for (int y = 0; y < 16; y++)
+                Item oPtr = SaveGame.Player.Inventory[i];
+                IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                if (getStat(itemCharacteristics))
                 {
-                    string name = GlobalData.ObjectFlagNames[(48 * mode) + (16 * x) + y];
-                    if (string.IsNullOrEmpty(name))
-                    {
-                        continue;
-                    }
-                    var baseColour = Colour.Blue;
-                    for (n = 0; n < 14; n++)
-                    {
-                        if (b[n][(3 * mode) + x].IsSet(1u << y))
-                        {
-                            baseColour = Colour.Green;
-                        }
-                    }
-                    SaveGame.Print(baseColour, name, top + y + 4, (x * 26) + 1);
-                    SaveGame.Print(baseColour, ':', top + y + 4, (x * 26) + 11);
-                    for (n = 0; n < 14; n++)
-                    {
-                        Colour a = Colour.Grey;
-                        char c = '.';
-                        if (b[n][(3 * mode) + x].IsSet(1u << y))
-                        {
-                            a = baseColour;
-                            c = '+';
-                        }
-                        SaveGame.Print(a, c, top + y + 4, (x * 26) + 12 + n);
-                    }
+                    SaveGame.Print(baseColour, "+", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
+                }
+                else
+                {
+                    SaveGame.Print(Colour.Grey, ".", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
                 }
             }
+            ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
+            if (getStat(playerCharacteristics))
+            {
+                SaveGame.Print(baseColour, "+", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+            }
+                else
+            {
+                SaveGame.Print(Colour.Grey, ".", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+            }
+
         }
 
         private void DisplayMonster(int rIdx, int num, int of)
@@ -310,8 +190,121 @@ namespace AngbandOS
         private void JournalAbilities()
         {
             SaveGame.Clear();
-            DisplayFlags(0);
-            DisplayFlags(1);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 0 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 0 + 11);
+            DisplayStat("Add Str", 2, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Str);
+            DisplayStat("Add Int", 3, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Int);
+            DisplayStat("Add Wis", 4, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Wis);
+            DisplayStat("Add Dex", 5, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Dex);
+            DisplayStat("Add Con", 6, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Con);
+            DisplayStat("Add Cha", 7, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Cha);
+
+
+            DisplayStat("Add Stea.", 10, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Stealth);
+            DisplayStat("Add Sear.", 11, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Search);
+            DisplayStat("Add Infra", 12, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Infra);
+            DisplayStat("Add Tun..", 13, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Tunnel);
+            DisplayStat("Add Speed", 14, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Speed);
+            DisplayStat("Add Blows", 15, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Blows);
+            DisplayStat("Chaotic", 16, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Chaotic);
+            DisplayStat("Vampiric", 17, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Vampiric);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 26 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 26 + 11);
+            DisplayStat("Slay Anim.", 2, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayAnimal);
+            DisplayStat("Slay Evil", 3, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayEvil);
+            DisplayStat("Slay Und.", 4, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayUndead);
+            DisplayStat("Slay Demon", 5, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayDemon);
+            DisplayStat("Slay Orc", 6, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayOrc);
+            DisplayStat("Slay Troll", 7, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayTroll);
+            DisplayStat("Slay Giant", 8, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayGiant);
+            DisplayStat("Slay Drag.", 9, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayDragon);
+            DisplayStat("Kill Drag.", 10, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.KillDragon);
+            DisplayStat("Sharpness", 11, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Vorpal);
+            DisplayStat("Impact", 12, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Impact);
+            DisplayStat("Poison Brd", 13, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandPois);
+            DisplayStat("Acid Brand", 14, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandAcid);
+            DisplayStat("Elec Brand", 15, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandElec);
+            DisplayStat("Fire Brand", 16, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandFire);
+            DisplayStat("Cold Brand", 17, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandCold);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 52 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 52 + 11);
+            DisplayStat("Sust Str", 2, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr);
+            DisplayStat("Sust Int", 3, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt);
+            DisplayStat("Sust Wis", 4, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis);
+            DisplayStat("Sust Dex", 5, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustDex);
+            DisplayStat("Sust Con", 6, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon);
+            DisplayStat("Sust Cha", 7, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCha);
+
+
+            DisplayStat("Imm Acid", 10, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImAcid);
+            DisplayStat("Imm Elec", 11, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImElec);
+            DisplayStat("Imm Fire", 12, 52,(IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImFire);
+            DisplayStat("Imm Cold", 13, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImCold);
+
+            DisplayStat("Reflect", 15, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Reflect);
+            DisplayStat("Free Act", 16, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.FreeAct);
+            DisplayStat("Hold Life", 17, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 0 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 0 + 11);
+            DisplayStat("Res Acid", 22, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResAcid);
+            DisplayStat("Res Elec", 23, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResElec);
+            DisplayStat("Res Fire", 24, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResFire);
+            DisplayStat("Res Cold", 25, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResCold);
+            DisplayStat("Res Pois", 26, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResPois);
+            DisplayStat("Res Fear", 27, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResFear);
+            DisplayStat("Res Light", 28, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResLight);
+            DisplayStat("Res Dark", 29, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDark);
+            DisplayStat("Res Blind", 30, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResBlind);
+            DisplayStat("Res Conf", 31, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResConf);
+            DisplayStat("Res Sound", 32, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResSound);
+            DisplayStat("Res Shard", 33, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResShards);
+            DisplayStat("Res Neth", 34, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether);
+            DisplayStat("Res Nexus", 35, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNexus);
+            DisplayStat("Res Chaos", 36, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResChaos);
+            DisplayStat("Res Disen", 37, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 26 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 26 + 11);
+            DisplayStat("Aura Fire", 22, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShFire);
+            DisplayStat("Aura Elec", 23, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShElec);
+
+            DisplayStat("Anti-Theft", 25, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.AntiTheft);
+            DisplayStat("Anti-Tele", 26, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.NoTele);
+            DisplayStat("Anti-Magic", 27, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.NoMagic);
+            DisplayStat("WraithForm", 28, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Wraith);
+            DisplayStat("EvilCurse", 29, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.DreadCurse);
+            DisplayStat("Easy Know", 30, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.EasyKnow);
+            DisplayStat("Hide Type", 31, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HideType);
+            DisplayStat("Show Mods", 32, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShowMods);
+            DisplayStat("Insta Art", 33, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.InstaArt);
+            DisplayStat("Levitate", 34, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather);
+            DisplayStat("Light", 35, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Lightsource);
+            DisplayStat("See Invis", 36, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis);
+            DisplayStat("Telepathy", 37, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy);
+
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 52 + 11);
+            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 52 + 11);
+            DisplayStat("Digestion", 22, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest);
+            DisplayStat("Regen", 23, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen);
+            DisplayStat("Xtra Might", 24, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.XtraMight);
+            DisplayStat("Xtra Shots", 25, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.XtraShots);
+            DisplayStat("Ign Acid", 26, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreAcid);
+            DisplayStat("Ign Elec", 27, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreElec);
+            DisplayStat("Ign Fire", 28, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreFire);
+            DisplayStat("Ign Cold", 29, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.IgnoreCold);
+            DisplayStat("Activate", 30, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Activate);
+            DisplayStat("Drain Exp", 31, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.DrainExp);
+            DisplayStat("Teleport", 32, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Teleport);
+            DisplayStat("Aggravate", 33, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Aggravate);
+            DisplayStat("Blessed", 34, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Blessed);
+            DisplayStat("Cursed", 35, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Cursed);
+            DisplayStat("Hvy Curse", 36, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HeavyCurse);
+            DisplayStat("Prm Curse", 37, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.PermaCurse);
+
             SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
         }

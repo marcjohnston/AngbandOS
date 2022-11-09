@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "ball of cold (100) every 300 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCha;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCha = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResBlind;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResBlind = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Telepathy;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy = true;
     }
 }

@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "heroism and berserk (dur 50+d50) every 100+d100 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNether;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SlowDigest;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest = true;
     }
 }

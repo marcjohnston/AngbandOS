@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "protect evil (dur level*3 + d25) every 225+d225 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustDex;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustDex = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNexus;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNexus = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Regen;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen = true;
     }
 }

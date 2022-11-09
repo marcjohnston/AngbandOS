@@ -323,74 +323,46 @@ namespace AngbandOS
                 ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
                 col++;
             }
-            // Fake a set of item flags for our character to show along with those of the real items
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
-            _player.GetAbilitiesAsItemFlags(f1, f2, f3);
-            for (int stat = 0; stat < 6; stat++) // TODO: These stats need to be enumerated.
+
+            ItemCharacteristics playerCharacteristics = _player.GetAbilitiesAsItemFlags();
+            DisplayPlayerStatWithModification(_player.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
+            DisplayPlayerStatWithModification(_player.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
+            DisplayPlayerStatWithModification(_player.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
+            DisplayPlayerStatWithModification(_player.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
+            DisplayPlayerStatWithModification(_player.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
+            DisplayPlayerStatWithModification(_player.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
+        }
+
+        private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)
+        {
+            Colour a = Colour.Grey;
+            char c = '.';
+            if (extraModifier != 0)
             {
-                a = Colour.Grey;
-                c = '.';
-                int extraModifier = 0;
-                // We may have extra bonuses or penalties from mutations
-                switch (stat)
-                {
-                    case Ability.Strength:
-                        extraModifier += _player.Dna.StrengthBonus;
-                        break;
-
-                    case Ability.Intelligence:
-                        extraModifier += _player.Dna.IntelligenceBonus;
-                        break;
-
-                    case Ability.Wisdom:
-                        extraModifier += _player.Dna.WisdomBonus;
-                        break;
-
-                    case Ability.Dexterity:
-                        extraModifier += _player.Dna.DexterityBonus;
-                        break;
-
-                    case Ability.Constitution:
-                        extraModifier += _player.Dna.ConstitutionBonus;
-                        break;
-
-                    case Ability.Charisma:
-                        extraModifier = _player.Dna.CharismaBonus;
-                        if (_player.Dna.CharismaOverride)
-                        {
-                            extraModifier = 0;
-                        }
-                        break;
-                }
-                if (extraModifier != 0)
-                {
-                    c = '*';
-                    if (extraModifier > 0)
-                    {
-                        a = Colour.Green;
-                        if (extraModifier < 10)
-                        {
-                            c = (char)('0' + (char)extraModifier);
-                        }
-                    }
-                    if (extraModifier < 0)
-                    {
-                        a = Colour.Red;
-                        if (extraModifier < 10)
-                        {
-                            c = (char)('0' - (char)extraModifier);
-                        }
-                    }
-                }
-                if (f2.IsSet(1u << stat))
+                c = '*';
+                if (extraModifier > 0)
                 {
                     a = Colour.Green;
-                    c = 's';
+                    if (extraModifier < 10)
+                    {
+                        c = (char)('0' + (char)extraModifier);
+                    }
                 }
-                SaveGame.Print(a, c, row + stat, col);
+                if (extraModifier < 0)
+                {
+                    a = Colour.Red;
+                    if (extraModifier < 10)
+                    {
+                        c = (char)('0' - (char)extraModifier);
+                    }
+                }
             }
+            if (isSet)
+            {
+                a = Colour.Green;
+                c = 's';
+            }
+            SaveGame.Print(a, c, row, col);
         }
 
         /// <summary>

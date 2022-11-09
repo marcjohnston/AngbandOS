@@ -27,10 +27,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "charm monster every 400 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustInt;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResConf;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResConf = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Telepathy;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy = true;
     }
 }

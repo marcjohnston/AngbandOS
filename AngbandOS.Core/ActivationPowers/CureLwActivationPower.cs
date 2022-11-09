@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "remove fear & heal 30 hp every 10 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustDex;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustDex = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNether;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Lightsource;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Lightsource = true;
     }
 }

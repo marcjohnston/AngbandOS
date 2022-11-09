@@ -62,7 +62,7 @@ namespace AngbandOS.ArtifactBiases
             return false;
         }
 
-        public override IActivationPower GetActivationPowerType(Item item)
+        public override ActivationPower GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(20) == 1)
             {

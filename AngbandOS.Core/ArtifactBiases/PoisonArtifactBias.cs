@@ -34,7 +34,7 @@ namespace AngbandOS.ArtifactBiases
             return false;
         }
 
-        public override IActivationPower GetActivationPowerType(Item item)
+        public override ActivationPower GetActivationPowerType(Item item)
         {
             return ActivationPowerManager.FindByType(typeof(BaPois1ActivationPower));
         }

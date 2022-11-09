@@ -32,10 +32,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "speed (dur 20+d20) every 250 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCha;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCha = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResDisen;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag2.HoldLife;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife = true;
     }
 }

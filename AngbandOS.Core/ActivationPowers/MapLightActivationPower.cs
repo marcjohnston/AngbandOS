@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "light (dam 2d15) & map area every 50+d50 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResSound;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResSound = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Feather;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather = true;
     }
 }

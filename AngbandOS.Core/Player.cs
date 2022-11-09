@@ -629,457 +629,456 @@ namespace AngbandOS
             GooPatron.GetReward(SaveGame);
         }
 
-        public void GetAbilitiesAsItemFlags(FlagSet f1, FlagSet f2, FlagSet f3)
+        public ItemCharacteristics GetAbilitiesAsItemFlags()
         {
+            ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
             PlayerStatus playerStatus = new PlayerStatus(SaveGame);
-            f1.Clear();
-            f2.Clear();
-            f3.Clear();
             if ((ProfessionIndex == CharacterClass.Warrior && Level > 29) || (ProfessionIndex == CharacterClass.Paladin && Level > 39) || (ProfessionIndex == CharacterClass.Fanatic && Level > 39))
             {
-                f2.Set(ItemFlag2.ResFear);
+                itemCharacteristics.ResFear = true;
             }
             if (ProfessionIndex == CharacterClass.Fanatic && Level > 29)
             {
-                f2.Set(ItemFlag2.ResChaos);
+                itemCharacteristics.ResChaos = true;
             }
             if (ProfessionIndex == CharacterClass.Cultist && Level > 19)
             {
-                f2.Set(ItemFlag2.ResChaos);
+                itemCharacteristics.ResChaos = true;
             }
             if (ProfessionIndex == CharacterClass.Monk && Level > 9 && !playerStatus.MartialArtistHeavyArmour())
             {
-                f1.Set(ItemFlag1.Speed);
+                itemCharacteristics.Speed = true;
             }
             if (ProfessionIndex == CharacterClass.Monk && Level > 24 && !playerStatus.MartialArtistHeavyArmour())
             {
-                f2.Set(ItemFlag2.FreeAct);
+                itemCharacteristics.FreeAct = true;
             }
             if (ProfessionIndex == CharacterClass.Mindcrafter)
             {
                 if (Level > 9)
                 {
-                    f2.Set(ItemFlag2.ResFear);
+                    itemCharacteristics.ResFear = true;
                 }
                 if (Level > 19)
                 {
-                    f2.Set(ItemFlag2.SustWis);
+                    itemCharacteristics.SustWis = true;
                 }
                 if (Level > 29)
                 {
-                    f2.Set(ItemFlag2.ResConf);
+                    itemCharacteristics.ResConf = true;
                 }
                 if (Level > 39)
                 {
-                    f3.Set(ItemFlag3.Telepathy);
+                    itemCharacteristics.Telepathy = true;
                 }
             }
             if (ProfessionIndex == CharacterClass.Mystic)
             {
                 if (Level > 9)
                 {
-                    f2.Set(ItemFlag2.ResConf);
+                    itemCharacteristics.ResConf = true;
                 }
                 if (Level > 9 && !playerStatus.MartialArtistHeavyArmour())
                 {
-                    f1.Set(ItemFlag1.Speed);
+                    itemCharacteristics.Speed = true;
                 }
                 if (Level > 24)
                 {
-                    f2.Set(ItemFlag2.ResFear);
+                    itemCharacteristics.ResFear = true;
                 }
                 if (Level > 29 && !playerStatus.MartialArtistHeavyArmour())
                 {
-                    f2.Set(ItemFlag2.FreeAct);
+                    itemCharacteristics.FreeAct = true;
                 }
                 if (Level > 39)
                 {
-                    f3.Set(ItemFlag3.Telepathy);
+                    itemCharacteristics.Telepathy = true;
                 }
             }
             if (ProfessionIndex == CharacterClass.ChosenOne)
             {
-                f3.Set(ItemFlag3.Lightsource);
+                itemCharacteristics.Lightsource = true;
                 if (Level >= 2)
                 {
-                    f2.Set(ItemFlag2.ResConf);
+                    itemCharacteristics.ResConf = true;
                 }
                 if (Level >= 4)
                 {
-                    f2.Set(ItemFlag2.ResFear);
+                    itemCharacteristics.ResFear = true;
                 }
                 if (Level >= 6)
                 {
-                    f2.Set(ItemFlag2.ResBlind);
+                    itemCharacteristics.ResBlind = true;
                 }
                 if (Level >= 8)
                 {
-                    f3.Set(ItemFlag3.Feather);
+                    itemCharacteristics.Feather = true;
                 }
                 if (Level >= 10)
                 {
-                    f3.Set(ItemFlag3.SeeInvis);
+                    itemCharacteristics.SeeInvis = true;
                 }
                 if (Level >= 12)
                 {
-                    f3.Set(ItemFlag3.SlowDigest);
+                    itemCharacteristics.SlowDigest = true;
                 }
                 if (Level >= 14)
                 {
-                    f2.Set(ItemFlag2.SustCon);
+                    itemCharacteristics.SustCon = true;
                 }
                 if (Level >= 16)
                 {
-                    f2.Set(ItemFlag2.ResPois);
+                    itemCharacteristics.ResPois = true;
                 }
                 if (Level >= 18)
                 {
-                    f2.Set(ItemFlag2.SustDex);
+                    itemCharacteristics.SustDex = true;
                 }
                 if (Level >= 20)
                 {
-                    f2.Set(ItemFlag2.SustStr);
+                    itemCharacteristics.SustStr = true;
                 }
                 if (Level >= 22)
                 {
-                    f2.Set(ItemFlag2.HoldLife);
+                    itemCharacteristics.HoldLife = true;
                 }
                 if (Level >= 24)
                 {
-                    f2.Set(ItemFlag2.FreeAct);
+                    itemCharacteristics.FreeAct = true;
                 }
                 if (Level >= 26)
                 {
-                    f3.Set(ItemFlag3.Telepathy);
+                    itemCharacteristics.Telepathy = true;
                 }
                 if (Level >= 28)
                 {
-                    f2.Set(ItemFlag2.ResDark);
+                    itemCharacteristics.ResDark = true;
                 }
                 if (Level >= 30)
                 {
-                    f2.Set(ItemFlag2.ResLight);
+                    itemCharacteristics.ResLight = true;
                 }
                 if (Level >= 32)
                 {
-                    f2.Set(ItemFlag2.SustCha);
+                    itemCharacteristics.SustCha = true;
                 }
                 if (Level >= 34)
                 {
-                    f2.Set(ItemFlag2.ResSound);
+                    itemCharacteristics.ResSound = true;
                 }
                 if (Level >= 36)
                 {
-                    f2.Set(ItemFlag2.ResDisen);
+                    itemCharacteristics.ResDisen = true;
                 }
                 if (Level >= 38)
                 {
-                    f3.Set(ItemFlag3.Regen);
+                    itemCharacteristics.Regen = true;
                 }
                 if (Level >= 40)
                 {
-                    f2.Set(ItemFlag2.SustInt);
+                    itemCharacteristics.SustInt = true;
                 }
                 if (Level >= 42)
                 {
-                    f2.Set(ItemFlag2.ResChaos);
+                    itemCharacteristics.ResChaos = true;
                 }
                 if (Level >= 44)
                 {
-                    f2.Set(ItemFlag2.SustWis);
+                    itemCharacteristics.SustWis = true;
                 }
                 if (Level >= 46)
                 {
-                    f2.Set(ItemFlag2.ResNexus);
+                    itemCharacteristics.ResNexus = true;
                 }
                 if (Level >= 48)
                 {
-                    f2.Set(ItemFlag2.ResShards);
+                    itemCharacteristics.ResShards = true;
                 }
                 if (Level >= 50)
                 {
-                    f2.Set(ItemFlag2.ResNether);
+                    itemCharacteristics.ResNether = true;
                 }
             }
             if (RaceIndex == RaceId.Elf)
             {
-                f2.Set(ItemFlag2.ResLight);
+                itemCharacteristics.ResLight = true;
             }
             if (RaceIndex == RaceId.Hobbit)
             {
-                f2.Set(ItemFlag2.SustDex);
+                itemCharacteristics.SustDex = true;
             }
             if (RaceIndex == RaceId.Gnome)
             {
-                f2.Set(ItemFlag2.FreeAct);
+                itemCharacteristics.FreeAct = true;
             }
             if (RaceIndex == RaceId.Dwarf)
             {
-                f2.Set(ItemFlag2.ResBlind);
+                itemCharacteristics.ResBlind = true;
             }
             if (RaceIndex == RaceId.HalfOrc)
             {
-                f2.Set(ItemFlag2.ResDark);
+                itemCharacteristics.ResDark = true;
             }
             if (RaceIndex == RaceId.HalfTroll)
             {
-                f2.Set(ItemFlag2.SustStr);
+                itemCharacteristics.SustStr = true;
                 if (Level > 14)
                 {
-                    f3.Set(ItemFlag3.Regen);
-                    f3.Set(ItemFlag3.SlowDigest);
+                    itemCharacteristics.Regen = true;
+                    itemCharacteristics.SlowDigest = true;
                 }
             }
             if (RaceIndex == RaceId.Great)
             {
-                f2.Set(ItemFlag2.SustCon);
-                f3.Set(ItemFlag3.Regen);
+                itemCharacteristics.SustCon = true;
+                itemCharacteristics.Regen = true;
             }
             if (RaceIndex == RaceId.HighElf)
             {
-                f2.Set(ItemFlag2.ResLight);
+                itemCharacteristics.ResLight = true;
             }
             if (RaceIndex == RaceId.HighElf)
             {
-                f3.Set(ItemFlag3.SeeInvis);
+                itemCharacteristics.SeeInvis = true;
             }
             if (RaceIndex == RaceId.TchoTcho)
             {
-                f2.Set(ItemFlag2.ResFear);
+                itemCharacteristics.ResFear = true;
             }
             else if (RaceIndex == RaceId.HalfOgre)
             {
-                f2.Set(ItemFlag2.SustStr);
-                f2.Set(ItemFlag2.ResDark);
+                itemCharacteristics.SustStr = true;
+                itemCharacteristics.ResDark = true;
             }
             else if (RaceIndex == RaceId.HalfGiant)
             {
-                f2.Set(ItemFlag2.ResShards);
-                f2.Set(ItemFlag2.SustStr);
+                itemCharacteristics.ResShards = true;
+                itemCharacteristics.SustStr = true;
             }
             else if (RaceIndex == RaceId.HalfTitan)
             {
-                f2.Set(ItemFlag2.ResChaos);
+                itemCharacteristics.ResChaos = true;
             }
             else if (RaceIndex == RaceId.Cyclops)
             {
-                f2.Set(ItemFlag2.ResSound);
+                itemCharacteristics.ResSound = true;
             }
             else if (RaceIndex == RaceId.Yeek)
             {
-                f2.Set(ItemFlag2.ResAcid);
+                itemCharacteristics.ResAcid = true;
                 if (Level > 19)
                 {
-                    f2.Set(ItemFlag2.ImAcid);
+                    itemCharacteristics.ImAcid = true;
                 }
             }
             else if (RaceIndex == RaceId.Klackon)
             {
                 if (Level > 9)
                 {
-                    f1.Set(ItemFlag1.Speed);
+                    itemCharacteristics.Speed = true;
                 }
-                f2.Set(ItemFlag2.ResConf);
-                f2.Set(ItemFlag2.ResAcid);
+                itemCharacteristics.ResConf = true;
+                itemCharacteristics.ResAcid = true;
             }
             else if (RaceIndex == RaceId.Kobold)
             {
-                f2.Set(ItemFlag2.ResPois);
+                itemCharacteristics.ResPois = true;
             }
             else if (RaceIndex == RaceId.Nibelung)
             {
-                f2.Set(ItemFlag2.ResDisen);
-                f2.Set(ItemFlag2.ResDark);
+                itemCharacteristics.ResDisen = true;
+                itemCharacteristics.ResDark = true;
             }
             else if (RaceIndex == RaceId.DarkElf)
             {
-                f2.Set(ItemFlag2.ResDark);
+                itemCharacteristics.ResDark = true;
                 if (Level > 19)
                 {
-                    f3.Set(ItemFlag3.SeeInvis);
+                    itemCharacteristics.SeeInvis = true;
                 }
             }
             else if (RaceIndex == RaceId.Draconian)
             {
-                f3.Set(ItemFlag3.Feather);
+                itemCharacteristics.Feather = true;
                 if (Level > 4)
                 {
-                    f2.Set(ItemFlag2.ResFire);
+                    itemCharacteristics.ResFire = true;
                 }
                 if (Level > 9)
                 {
-                    f2.Set(ItemFlag2.ResCold);
+                    itemCharacteristics.ResCold = true;
                 }
                 if (Level > 14)
                 {
-                    f2.Set(ItemFlag2.ResAcid);
+                    itemCharacteristics.ResAcid = true;
                 }
                 if (Level > 19)
                 {
-                    f2.Set(ItemFlag2.ResElec);
+                    itemCharacteristics.ResElec = true;
                 }
                 if (Level > 34)
                 {
-                    f2.Set(ItemFlag2.ResPois);
+                    itemCharacteristics.ResPois = true;
                 }
             }
             else if (RaceIndex == RaceId.MindFlayer)
             {
-                f2.Set(ItemFlag2.SustInt);
-                f2.Set(ItemFlag2.SustWis);
+                itemCharacteristics.SustInt = true;
+                itemCharacteristics.SustWis = true;
                 if (Level > 14)
                 {
-                    f3.Set(ItemFlag3.SeeInvis);
+                    itemCharacteristics.SeeInvis = true;
                 }
                 if (Level > 29)
                 {
-                    f3.Set(ItemFlag3.Telepathy);
+                    itemCharacteristics.Telepathy = true;
                 }
             }
             else if (RaceIndex == RaceId.Imp)
             {
-                f2.Set(ItemFlag2.ResFire);
+                itemCharacteristics.ResFire = true;
                 if (Level > 9)
                 {
-                    f3.Set(ItemFlag3.SeeInvis);
+                    itemCharacteristics.SeeInvis = true;
                 }
                 if (Level > 19)
                 {
-                    f2.Set(ItemFlag2.ImFire);
+                    itemCharacteristics.ImFire = true;
                 }
             }
             else if (RaceIndex == RaceId.Golem)
             {
-                f3.Set(ItemFlag3.SeeInvis);
-                f2.Set(ItemFlag2.FreeAct);
-                f2.Set(ItemFlag2.ResPois);
-                f3.Set(ItemFlag3.SlowDigest);
+                itemCharacteristics.SeeInvis = true;
+                itemCharacteristics.FreeAct = true;
+                itemCharacteristics.ResPois = true;
+                itemCharacteristics.SlowDigest = true;
                 if (Level > 34)
                 {
-                    f2.Set(ItemFlag2.HoldLife);
+                    itemCharacteristics.HoldLife = true;
                 }
             }
             else if (RaceIndex == RaceId.Skeleton)
             {
-                f3.Set(ItemFlag3.SeeInvis);
-                f2.Set(ItemFlag2.ResShards);
-                f2.Set(ItemFlag2.HoldLife);
-                f2.Set(ItemFlag2.ResPois);
+                itemCharacteristics.SeeInvis = true;
+                itemCharacteristics.ResShards = true;
+                itemCharacteristics.HoldLife = true;
+                itemCharacteristics.ResPois = true;
                 if (Level > 9)
                 {
-                    f2.Set(ItemFlag2.ResCold);
+                    itemCharacteristics.ResCold = true;
                 }
             }
             else if (RaceIndex == RaceId.Zombie)
             {
-                f3.Set(ItemFlag3.SeeInvis);
-                f2.Set(ItemFlag2.HoldLife);
-                f2.Set(ItemFlag2.ResNether);
-                f2.Set(ItemFlag2.ResPois);
-                f3.Set(ItemFlag3.SlowDigest);
+                itemCharacteristics.SeeInvis = true;
+                itemCharacteristics.HoldLife = true;
+                itemCharacteristics.ResNether = true;
+                itemCharacteristics.ResPois = true;
+                itemCharacteristics.SlowDigest = true;
                 if (Level > 4)
                 {
-                    f2.Set(ItemFlag2.ResCold);
+                    itemCharacteristics.ResCold = true;
                 }
             }
             else if (RaceIndex == RaceId.Vampire)
             {
-                f2.Set(ItemFlag2.HoldLife);
-                f2.Set(ItemFlag2.ResDark);
-                f2.Set(ItemFlag2.ResNether);
-                f3.Set(ItemFlag3.Lightsource);
-                f2.Set(ItemFlag2.ResPois);
-                f2.Set(ItemFlag2.ResCold);
+                itemCharacteristics.HoldLife = true;
+                itemCharacteristics.ResDark = true;
+                itemCharacteristics.ResNether = true;
+                itemCharacteristics.Lightsource = true;
+                itemCharacteristics.ResPois = true;
+                itemCharacteristics.ResCold = true;
             }
             else if (RaceIndex == RaceId.Spectre)
             {
-                f2.Set(ItemFlag2.ResCold);
-                f3.Set(ItemFlag3.SeeInvis);
-                f2.Set(ItemFlag2.HoldLife);
-                f2.Set(ItemFlag2.ResNether);
-                f2.Set(ItemFlag2.ResPois);
-                f3.Set(ItemFlag3.SlowDigest);
-                f3.Set(ItemFlag3.Lightsource);
+                itemCharacteristics.ResCold = true;
+                itemCharacteristics.SeeInvis = true;
+                itemCharacteristics.HoldLife = true;
+                itemCharacteristics.ResNether = true;
+                itemCharacteristics.ResPois = true;
+                itemCharacteristics.SlowDigest = true;
+                itemCharacteristics.Lightsource = true;
                 if (Level > 34)
                 {
-                    f3.Set(ItemFlag3.Telepathy);
+                    itemCharacteristics.Telepathy = true;
                 }
             }
             else if (RaceIndex == RaceId.Sprite)
             {
-                f2.Set(ItemFlag2.ResLight);
-                f3.Set(ItemFlag3.Feather);
+                itemCharacteristics.ResLight = true;
+                itemCharacteristics.Feather = true;
                 if (Level > 9)
                 {
-                    f1.Set(ItemFlag1.Speed);
+                    itemCharacteristics.Speed = true;
                 }
             }
             else if (RaceIndex == RaceId.MiriNigri)
             {
-                f2.Set(ItemFlag2.ResSound);
-                f2.Set(ItemFlag2.ResConf);
+                itemCharacteristics.ResSound = true;
+                itemCharacteristics.ResConf = true;
             }
             if (Dna.Regen)
             {
-                f3.Set(ItemFlag3.Regen);
+                itemCharacteristics.Regen = true;
             }
             if (Dna.SuppressRegen)
             {
-                f3.Clear(ItemFlag3.Regen);
+                itemCharacteristics.Regen = false;
             }
             if (Dna.SpeedBonus != 0)
             {
-                f1.Set(ItemFlag1.Speed);
+                itemCharacteristics.Speed = true;
             }
             if (Dna.ElecHit)
             {
-                f3.Set(ItemFlag3.ShElec);
+                itemCharacteristics.ShElec = true;
             }
             if (Dna.FireHit)
             {
-                f3.Set(ItemFlag3.ShFire);
-                f3.Set(ItemFlag3.Lightsource);
+                itemCharacteristics.ShFire = true;
+                itemCharacteristics.Lightsource = true;
             }
             if (Dna.FeatherFall)
             {
-                f3.Set(ItemFlag3.Feather);
+                itemCharacteristics.Feather = true;
             }
             if (Dna.ResFear)
             {
-                f2.Set(ItemFlag2.ResFear);
+                itemCharacteristics.ResFear = true;
             }
             if (Dna.Esp)
             {
-                f3.Set(ItemFlag3.Telepathy);
+                itemCharacteristics.Telepathy = true;
             }
             if (Dna.FreeAction)
             {
-                f2.Set(ItemFlag2.FreeAct);
+                itemCharacteristics.FreeAct = true;
             }
             if (Dna.SustainAll)
             {
-                f2.Set(ItemFlag2.SustCon);
+                itemCharacteristics.SustCon = true;
                 if (Level > 9)
                 {
-                    f2.Set(ItemFlag2.SustStr);
+                    itemCharacteristics.SustStr = true;
                 }
                 if (Level > 19)
                 {
-                    f2.Set(ItemFlag2.SustDex);
+                    itemCharacteristics.SustDex = true;
                 }
                 if (Level > 29)
                 {
-                    f2.Set(ItemFlag2.SustWis);
+                    itemCharacteristics.SustWis = true;
                 }
                 if (Level > 39)
                 {
-                    f2.Set(ItemFlag2.SustInt);
+                    itemCharacteristics.SustInt = true;
                 }
                 if (Level > 49)
                 {
-                    f2.Set(ItemFlag2.SustCha);
+                    itemCharacteristics.SustCha = true;
                 }
             }
+            return itemCharacteristics;
         }
 
         public int GetScore(SaveGame saveGame)

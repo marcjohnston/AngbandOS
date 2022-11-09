@@ -22,7 +22,7 @@ namespace AngbandOS
         public int BaseArmourClass;
         public int BonusArmourClass;
         public int BonusDamage;
-        public IActivationPower BonusPowerSubType;
+        public ActivationPower BonusPowerSubType;
         public Enumerations.RareItemType BonusPowerType;
         public int BonusToHit;
         public int Count;
@@ -1000,88 +1000,13 @@ namespace AngbandOS
                 switch (BonusPowerType)
                 {
                     case Enumerations.RareItemType.SpecialSustain:
-                        switch(BonusPowerSubType.SpecialSustainFlag)
-                        {
-                            case ItemFlag2.SustStr:
-                                Characteristics.SustStr = true;
-                                break;
-                            case ItemFlag2.SustInt:
-                                Characteristics.SustInt = true;
-                                break;
-                            case ItemFlag2.SustWis:
-                                Characteristics.SustWis = true;
-                                break;
-                            case ItemFlag2.SustDex:
-                                Characteristics.SustDex = true;
-                                break;
-                            case ItemFlag2.SustCon:
-                                Characteristics.SustCon = true;
-                                break;
-                            case ItemFlag2.SustCha:
-                                Characteristics.SustCha = true;
-                                break;
-                        }
+                        BonusPowerSubType.ActivateSpecialSustain(Characteristics);
                         break;
                     case Enumerations.RareItemType.SpecialPower:
-                        switch (BonusPowerSubType.SpecialPowerFlag)
-                        {
-                            case ItemFlag2.ResSound:
-                                Characteristics.ResSound = true;
-                                break;
-                            case ItemFlag2.ResPois:
-                                Characteristics.ResPois = true;
-                                break;
-                            case ItemFlag2.ResBlind:
-                                Characteristics.ResBlind = true;
-                                break;
-                            case ItemFlag2.ResChaos:
-                                Characteristics.ResChaos = true;
-                                break;
-                            case ItemFlag2.ResConf:
-                                Characteristics.ResConf = true;
-                                break;
-                            case ItemFlag2.ResDisen:
-                                Characteristics.ResDisen = true;
-                                break;
-                            case ItemFlag2.ResDark:
-                                Characteristics.ResDark = true;
-                                break;
-                            case ItemFlag2.ResNexus:
-                                Characteristics.ResNexus = true;
-                                break;
-                            case ItemFlag2.ResShards:
-                                Characteristics.ResShards = true;
-                                break;
-                            case ItemFlag2.ResNether:
-                                Characteristics.ResNether = true;
-                                break;
-                            case ItemFlag2.ResLight:
-                                Characteristics.ResLight = true;
-                                break;
-                        }
+                        BonusPowerSubType.ActivateSpecialPower(Characteristics);
                         break;
                     case Enumerations.RareItemType.SpecialAbility:
-                        switch (BonusPowerSubType.SpecialAbilityFlag)
-                        {
-                            case ItemFlag3.Telepathy:
-                                Characteristics.Telepathy = true;
-                                break;
-                            case ItemFlag3.Feather:
-                                Characteristics.Feather = true;
-                                break;
-                            case ItemFlag3.Lightsource:
-                                Characteristics.Lightsource = true;
-                                break;
-                            case ItemFlag3.SlowDigest:
-                                Characteristics.SlowDigest = true;
-                                break;
-                            case ItemFlag3.SeeInvis:
-                                Characteristics.SeeInvis = true;
-                                break;
-                            case ItemFlag3.Regen:
-                                Characteristics.Regen = true;
-                                break;
-                        }
+                        BonusPowerSubType.ActivateSpecialAbility(Characteristics);
                         break;
                 }
             }
@@ -3245,7 +3170,7 @@ namespace AngbandOS
 
         private void GiveActivationPower(ref IArtifactBias artifactBias)
         {
-            IActivationPower type = null;
+            ActivationPower type = null;
             if (artifactBias != null)
             {
                 if (Program.Rng.DieRoll(100) < artifactBias.ActivationPowerChance)

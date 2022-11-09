@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "ball of cold (48) every 400 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResPois;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResPois = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Feather;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather = true;
     }
 }

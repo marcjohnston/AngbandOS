@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "arrows (150) every 90+d90 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustDex;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustDex = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNether;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag2.HoldLife;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife = true;
     }
 }

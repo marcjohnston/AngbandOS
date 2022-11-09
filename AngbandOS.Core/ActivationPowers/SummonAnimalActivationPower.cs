@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "summon animal every 200+d300 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNether;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag2.FreeAct;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.FreeAct = true;
     }
 }

@@ -45,7 +45,7 @@ namespace AngbandOS.ArtifactBiases
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        IActivationPower GetActivationPowerType(Item item);
+        ActivationPower GetActivationPowerType(Item item);
 
         /// <summary>
         /// Returns the chance that an activation power is assigned.  A value greater than 100 (e.g. 101) guarantees activation power will be assigned.

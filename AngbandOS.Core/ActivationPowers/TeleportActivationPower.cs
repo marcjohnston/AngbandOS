@@ -25,10 +25,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "teleport (range 100) every 45 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCha;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCha = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNether;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNether = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Regen;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen = true;
     }
 }

@@ -226,7 +226,7 @@ namespace AngbandOS.Commands
 
             saveGame.Clear();
             int index = 0;
-            foreach (IActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+            foreach (ActivationPower activationPower in ActivationPowerManager.ActivationPowers)
             {
                 int row = 2 + (index % 40);
                 int col = 30 * (index / 40);

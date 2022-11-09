@@ -25,10 +25,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "invulnerability (dur 8+d8) every 1000 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResLight;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResLight = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis = true;
     }
 }

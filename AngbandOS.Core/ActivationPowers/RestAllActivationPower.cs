@@ -31,10 +31,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "restore stats and life levels every 750 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustInt;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResPois;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResPois = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Regen;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen = true;
     }
 }

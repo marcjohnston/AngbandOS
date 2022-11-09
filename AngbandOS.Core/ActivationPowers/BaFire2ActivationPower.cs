@@ -28,10 +28,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "fire ball (120) every 225+d225 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResNexus;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResNexus = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.Feather;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Feather = true;
     }
 }

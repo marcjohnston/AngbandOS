@@ -25,10 +25,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "mass carnage every 1000 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResShards;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResShards = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis = true;
     }
 }

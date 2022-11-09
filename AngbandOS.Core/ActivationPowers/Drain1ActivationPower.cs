@@ -26,10 +26,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "drain life (100) every 100+d100 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustCon;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustCon = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResLight;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResLight = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag3.SeeInvis;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis = true;
     }
 }

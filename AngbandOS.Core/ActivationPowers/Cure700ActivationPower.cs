@@ -27,10 +27,10 @@ namespace AngbandOS.ActivationPowers
 
         public override string Description => "heal 700 hit points every 250 turns";
 
-        public override uint SpecialSustainFlag => ItemFlag2.SustWis;
+        public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis = true;
 
-        public override uint SpecialPowerFlag => ItemFlag2.ResDark;
+        public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDark = true;
 
-        public override uint SpecialAbilityFlag => ItemFlag2.FreeAct;
+        public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.FreeAct = true;
     }
 }

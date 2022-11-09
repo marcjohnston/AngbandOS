@@ -250,22 +250,6 @@ namespace AngbandOS.Core
             { 1, "I" },
         };
 
-        public static readonly string[] ObjectFlagNames =
-        {
-            "Add Str", "Add Int", "Add Wis", "Add Dex", "Add Con", "Add Cha", null, null, "Add Stea.", "Add Sear.",
-            "Add Infra", "Add Tun..", "Add Speed", "Add Blows", "Chaotic", "Vampiric", "Slay Anim.", "Slay Evil",
-            "Slay Und.", "Slay Demon", "Slay Orc", "Slay Troll", "Slay Giant", "Slay Drag.", "Kill Drag.", "Sharpness",
-            "Impact", "Poison Brd", "Acid Brand", "Elec Brand", "Fire Brand", "Cold Brand", "Sust Str", "Sust Int",
-            "Sust Wis", "Sust Dex", "Sust Con", "Sust Cha", null, null, "Imm Acid", "Imm Elec", "Imm Fire", "Imm Cold",
-            null, "Reflect", "Free Act", "Hold Life", "Res Acid", "Res Elec", "Res Fire", "Res Cold", "Res Pois",
-            "Res Fear", "Res Light", "Res Dark", "Res Blind", "Res Conf", "Res Sound", "Res Shard", "Res Neth",
-            "Res Nexus", "Res Chaos", "Res Disen", "Aura Fire", "Aura Elec", null, "Anti-Theft", "Anti-Tele", "Anti-Magic",
-            "WraithForm", "EvilCurse", "Easy Know", "Hide Type", "Show Mods", "Insta Art", "Levitate", "Light",
-            "See Invis", "Telepathy", "Digestion", "Regen", "Xtra Might", "Xtra Shots", "Ign Acid", "Ign Elec",
-            "Ign Fire", "Ign Cold", "Activate", "Drain Exp", "Teleport", "Aggravate", "Blessed", "Cursed", "Hvy Curse",
-            "Prm Curse"
-        };
-
         public static readonly int[] PlayerExp =
         {
             10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,

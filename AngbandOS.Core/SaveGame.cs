@@ -7109,7 +7109,7 @@ namespace AngbandOS
             {
                 return;
             }
-            IActivationPower artifactPower = item.BonusPowerSubType;
+            ActivationPower artifactPower = item.BonusPowerSubType;
 
             if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
             {
