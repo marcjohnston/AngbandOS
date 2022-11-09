@@ -18,7 +18,7 @@ namespace AngbandOS.Commands
         public static List<BaseRodFlavour> BaseRodFlavours = new List<BaseRodFlavour>();
         public static List<BaseScrollFlavour> BaseScrollFlavours = new List<BaseScrollFlavour>();
         public static List<BaseStaffFlavour> BaseStaffFlavours = new List<BaseStaffFlavour>();
-        public static List<BaseWandFlavour> BaseWandFlavours = new List<BaseWandFlavour>();
+        public static List<WandFlavour> BaseWandFlavours = new List<WandFlavour>();
         public static Dictionary<string, BaseProjectileGraphic> BaseProjectileGraphics = new Dictionary<string, BaseProjectileGraphic>();
         public static Dictionary<string, BaseAnimation> BaseAnimations = new Dictionary<string, BaseAnimation>();
         public static Dictionary<string, BaseVaultType> Base2VaultTypes = new Dictionary<string, BaseVaultType>();
@@ -95,9 +95,9 @@ namespace AngbandOS.Commands
                 }
 
                 // Load WandFlavours.
-                if (!type.IsAbstract && typeof(BaseWandFlavour).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(WandFlavour).IsAssignableFrom(type))
                 {
-                    BaseWandFlavour wandFlavour = (BaseWandFlavour)Activator.CreateInstance(type);
+                    WandFlavour wandFlavour = (WandFlavour)Activator.CreateInstance(type);
                     BaseWandFlavours.Add(wandFlavour);
                 }
 

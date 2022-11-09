@@ -77,7 +77,7 @@ namespace AngbandOS
         public List<BaseRodFlavour> RodFlavours;
         public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
         public List<BaseStaffFlavour> StaffFlavours;
-        public List<BaseWandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
+        public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
         public int TargetCol;
         public int TargetRow;
         public int TargetWho;
@@ -1953,9 +1953,9 @@ namespace AngbandOS
                 AmuletFlavours.Add(tempAmulets[index]);
                 tempAmulets.RemoveAt(index);
             } while (tempAmulets.Count > 0);
-            WandFlavours = new List<BaseWandFlavour>();
-            List<BaseWandFlavour> tempWands = new List<BaseWandFlavour>();
-            foreach (BaseWandFlavour wandFlavour in CommandManager.BaseWandFlavours)
+            WandFlavours = new List<WandFlavour>();
+            List<WandFlavour> tempWands = new List<WandFlavour>();
+            foreach (WandFlavour wandFlavour in CommandManager.BaseWandFlavours)
             {
                 tempWands.Add(wandFlavour);
             }
