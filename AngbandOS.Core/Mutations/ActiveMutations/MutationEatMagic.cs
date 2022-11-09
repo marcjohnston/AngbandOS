@@ -50,7 +50,7 @@ namespace AngbandOS.Mutations.ActiveMutations
                 {
                     saveGame.MsgPrint("There's no energy there to absorb!");
                 }
-                oPtr.IdentifyFlags.Set(Constants.IdentEmpty);
+                oPtr.IdentEmpty = true;
             }
             if (player.Mana > player.MaxMana)
             {

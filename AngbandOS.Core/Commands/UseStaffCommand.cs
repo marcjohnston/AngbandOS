@@ -77,7 +77,7 @@ namespace AngbandOS.Commands
             if (item.TypeSpecificValue <= 0)
             {
                 saveGame.MsgPrint("The staff has no charges left.");
-                item.IdentifyFlags.Set(Constants.IdentEmpty);
+                item.IdentEmpty = true;
                 return;
             }
             saveGame.PlaySound(SoundEffect.UseStaff);

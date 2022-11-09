@@ -25,7 +25,7 @@ namespace AngbandOS.ItemCategories
         {
             if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
             {
-                item.IdentifyFlags.Set(Constants.IdentCursed);
+                item.IdentCursed = true;
             }
         }
     }

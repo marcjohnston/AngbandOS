@@ -83,7 +83,7 @@ namespace AngbandOS.Commands
             if (item.TypeSpecificValue <= 0)
             {
                 saveGame.MsgPrint("The wand has no charges left.");
-                item.IdentifyFlags.Set(Constants.IdentEmpty);
+                item.IdentEmpty = true;
                 return;
             }
             saveGame.PlaySound(SoundEffect.ZapRod);

@@ -361,7 +361,7 @@ namespace AngbandOS
                 {
                     oPtr.Discount = 50;
                 }
-                oPtr.IdentifyFlags.Clear(Constants.IdentFixed);
+                oPtr.IdentFixed = false;
                 oPtr.Inscription = "on sale";
             }
         }
@@ -410,7 +410,7 @@ namespace AngbandOS
             if (ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
             {
                 int x;
-                if (oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
+                if (oPtr.IdentFixed)
                 {
                     x = PriceItem(oPtr, _owner.MinInflate, false);
                     outVal = $"{x,9} F";
@@ -630,7 +630,7 @@ namespace AngbandOS
             }
             if (StoreIdentifiesItems)
             {
-                oPtr.IdentifyFlags.Set(Constants.IdentMental);
+                oPtr.IdentMental = true;
                 oPtr.Inscription = "";
             }
             for (slot = 0; slot < _stockNum; slot++)
@@ -1137,7 +1137,7 @@ namespace AngbandOS
                     }
                 }
                 qPtr.BecomeKnown();
-                qPtr.IdentifyFlags.Set(Constants.IdentStoreb);
+                qPtr.IdentStoreb = true;
                 if (qPtr.Category == ItemCategory.Chest)
                 {
                     continue;
@@ -1262,7 +1262,7 @@ namespace AngbandOS
                 SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
                 return;
             }
-            if (oPtr.IdentifyFlags.IsClear(Constants.IdentMental))
+            if (!oPtr.IdentMental)
             {
                 SaveGame.MsgPrint("You have no special knowledge about that item.");
                 return;
@@ -1834,7 +1834,7 @@ namespace AngbandOS
             int best = PriceItem(jPtr, _owner.MinInflate, false);
             if (oPtr.Count > 1)
             {
-                if (StoreSellsItems && oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
+                if (StoreSellsItems && oPtr.IdentFixed)
                 {
                     SaveGame.MsgPrint($"That costs {best} gold per item.");
                 }
@@ -1862,7 +1862,7 @@ namespace AngbandOS
             {
                 bool choice;
                 int price;
-                if (oPtr.IdentifyFlags.IsSet(Constants.IdentFixed))
+                if (oPtr.IdentFixed)
                 {
                     choice = false;
                     price = best * jPtr.Count;
@@ -1886,7 +1886,7 @@ namespace AngbandOS
                         {
                             jPtr.BecomeFlavourAware();
                         }
-                        jPtr.IdentifyFlags.Clear(Constants.IdentFixed);
+                        jPtr.IdentFixed = false;
                         oName = jPtr.Description(true, 3);
                         SaveGame.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";

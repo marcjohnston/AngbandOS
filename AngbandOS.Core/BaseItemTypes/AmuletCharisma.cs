@@ -23,8 +23,8 @@ namespace AngbandOS.ItemCategories
             item.TypeSpecificValue = 1 + GetBonusValue(5, level);
             if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
             {
-                item.IdentifyFlags.Set(Constants.IdentBroken);
-                item.IdentifyFlags.Set(Constants.IdentCursed);
+                item.IdentBroken = true;
+                item.IdentCursed = true;
                 item.TypeSpecificValue = 0 - item.TypeSpecificValue;
             }
         }

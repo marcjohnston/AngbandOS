@@ -49,7 +49,7 @@ namespace AngbandOS.Talents
                 return;
             }
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
-            if (oPtr.IsKnown() || oPtr.IdentifyFlags.IsSet(Constants.IdentSense))
+            if (oPtr.IsKnown() || oPtr.IdentSense)
             {
                 saveGame.MsgPrint("You cannot find out anything more about that.");
                 return;
@@ -63,7 +63,7 @@ namespace AngbandOS.Talents
             }
             string s = oPtr.Count == 1 ? "is" : "are";
             saveGame.MsgPrint($"You feel that the {oName} {s} {feel}...");
-            oPtr.IdentifyFlags.Set(Constants.IdentSense);
+            oPtr.IdentSense = true;
             if (string.IsNullOrEmpty(oPtr.Inscription))
             {
                 oPtr.Inscription = feel;

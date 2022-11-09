@@ -17,7 +17,46 @@ namespace AngbandOS
     [Serializable]
     internal class Item
     {
-        public readonly FlagSet IdentifyFlags = new FlagSet();
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentSense;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentFixed;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentEmpty;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.  The item has been identified.  
+        /// </summary>
+        public bool IdentKnown;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentStoreb;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.  Do we know anything about the item.
+        /// </summary>
+        public bool IdentMental;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentCursed;
+
+        /// <summary>
+        /// This property used to be a flag in the IdentifyFlags.
+        /// </summary>
+        public bool IdentBroken;
+
         public readonly ItemCharacteristics RandartItemCharacteristics = new ItemCharacteristics();
         public int BaseArmourClass;
         public int BonusArmourClass;
@@ -76,7 +115,16 @@ namespace AngbandOS
             Discount = original.Discount;
             DamageDiceSides = original.DamageDiceSides;
             HoldingMonsterIndex = original.HoldingMonsterIndex;
-            IdentifyFlags.Copy(original.IdentifyFlags);
+
+            IdentSense = original.IdentSense;
+            IdentFixed = original.IdentFixed;
+            IdentEmpty = original.IdentEmpty;
+            IdentKnown = original.IdentKnown;
+            IdentStoreb = original.IdentStoreb;
+            IdentMental = original.IdentMental;
+            IdentCursed = original.IdentCursed;
+            IdentBroken = original.IdentBroken;
+
             X = original.X;
             Y = original.Y;
             BaseItemCategory = original.BaseItemCategory;
@@ -109,21 +157,21 @@ namespace AngbandOS
             {
                 BecomeKnown();
             }
-            if (IdentifyFlags.IsSet(Constants.IdentStoreb) || (other.IdentifyFlags.IsSet(Constants.IdentStoreb) &&
-                !(IdentifyFlags.IsSet(Constants.IdentStoreb) && other.IdentifyFlags.IsSet(Constants.IdentStoreb))))
+            if (IdentStoreb || (other.IdentStoreb &&
+                !(IdentStoreb && other.IdentStoreb)))
             {
-                if (other.IdentifyFlags.IsSet(Constants.IdentStoreb))
+                if (other.IdentStoreb)
                 {
-                    other.IdentifyFlags.Clear(Constants.IdentStoreb);
+                    other.IdentStoreb = false;
                 }
-                if (IdentifyFlags.IsSet(Constants.IdentStoreb))
+                if (IdentStoreb)
                 {
-                    IdentifyFlags.Clear(Constants.IdentStoreb);
+                    IdentStoreb = false;
                 }
             }
-            if (other.IdentifyFlags.IsSet(Constants.IdentMental))
+            if (other.IdentMental)
             {
-                IdentifyFlags.Set(Constants.IdentMental);
+                IdentMental = true;
             }
             if (!string.IsNullOrEmpty(other.Inscription))
             {
@@ -355,11 +403,11 @@ namespace AngbandOS
             DamageDiceSides = BaseItemCategory.Ds;
             if (BaseItemCategory.Cost <= 0)
             {
-                IdentifyFlags.Set(Constants.IdentBroken);
+                IdentBroken = true;
             }
             if (BaseItemCategory.Cursed)
             {
-                IdentifyFlags.Set(Constants.IdentCursed);
+                IdentCursed = true;
             }
         }
 
@@ -370,7 +418,7 @@ namespace AngbandOS
 
         public void BecomeKnown()
         {
-            if (!string.IsNullOrEmpty(Inscription) && IdentifyFlags.IsSet(Constants.IdentSense))
+            if (!string.IsNullOrEmpty(Inscription) && IdentSense)
             {
                 string q = Inscription;
                 if (q == "cursed" || q == "broken" || q == "good" || q == "average" || q == "excellent" ||
@@ -379,9 +427,9 @@ namespace AngbandOS
                     Inscription = string.Empty;
                 }
             }
-            IdentifyFlags.Clear(Constants.IdentSense);
-            IdentifyFlags.Clear(Constants.IdentEmpty);
-            IdentifyFlags.Set(Constants.IdentKnown);
+            IdentSense = false;
+            IdentEmpty = false;
+            IdentKnown = true;
         }
 
         public int BreakageChance()
@@ -462,11 +510,11 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (!IdentifyFlags.Matches(other.IdentifyFlags, Constants.IdentCursed))
+            if (IdentCursed != other.IdentCursed)
             {
                 return false;
             }
-            if (!IdentifyFlags.Matches(other.IdentifyFlags, Constants.IdentBroken))
+            if (IdentBroken != other.IdentBroken)
             {
                 return false;
             }
@@ -889,7 +937,7 @@ namespace AngbandOS
             }
             if (Characteristics.Teleport)
             {
-                if (IdentifyFlags.IsSet(Constants.IdentCursed))
+                if (IdentCursed)
                 {
                     total -= 7500;
                 }
@@ -1448,12 +1496,12 @@ namespace AngbandOS
 
         public bool IsBroken()
         {
-            return IdentifyFlags.IsSet(Constants.IdentBroken);
+            return IdentBroken;
         }
 
         public bool IsCursed()
         {
-            return IdentifyFlags.IsSet(Constants.IdentCursed);
+            return IdentCursed;
         }
 
         public bool IsFixedArtifact()
@@ -1476,7 +1524,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (IdentifyFlags.IsSet(Constants.IdentKnown))
+            if (IdentKnown)
             {
                 return true;
             }
@@ -1663,7 +1711,7 @@ namespace AngbandOS
                         return BaseItemCategory.Stompable[StompableType.Broken];
                     }
                 }
-                if (IdentifyFlags.IsClear(Constants.IdentSense))
+                if (!IdentSense)
                 {
                     return false;
                 }
@@ -1674,14 +1722,14 @@ namespace AngbandOS
         public string StoreDescription(bool pref, int mode)
         {
             bool hackAware = BaseItemCategory.FlavourAware;
-            bool hackKnown = IdentifyFlags.IsSet(Constants.IdentKnown);
-            IdentifyFlags.Set(Constants.IdentKnown);
+            bool hackKnown = IdentKnown;
+            IdentKnown = true;
             BaseItemCategory.FlavourAware = true;
             string buf = Description(pref, mode);
             BaseItemCategory.FlavourAware = hackAware;
             if (!hackKnown)
             {
-                IdentifyFlags.Clear(Constants.IdentKnown);
+                IdentKnown = false;
             }
             return buf;
         }
@@ -1708,11 +1756,11 @@ namespace AngbandOS
             }
             else
             {
-                if (IdentifyFlags.IsSet(Constants.IdentSense) && IsBroken())
+                if (IdentSense && IsBroken())
                 {
                     return 0;
                 }
-                if (IdentifyFlags.IsSet(Constants.IdentSense) && IsCursed())
+                if (IdentSense && IsCursed())
                 {
                     return 0;
                 }
@@ -2052,11 +2100,11 @@ namespace AngbandOS
                 Weight = aPtr.Weight;
                 if (aPtr.Cost == 0)
                 {
-                    IdentifyFlags.Set(Constants.IdentBroken);
+                    IdentBroken = true;
                 }
                 if (aPtr.FixedArtifactItemCharacteristics.Cursed)
                 {
-                    IdentifyFlags.Set(Constants.IdentCursed);
+                    IdentCursed = true;
                 }
                 if (SaveGame.Level != null)
                 {
@@ -2132,11 +2180,11 @@ namespace AngbandOS
                 }
                 if (ePtr.Cost == 0)
                 {
-                    IdentifyFlags.Set(Constants.IdentBroken);
+                    IdentBroken = true;
                 }
                 if (ePtr.RareItemCharacteristics.Cursed)
                 {
-                    IdentifyFlags.Set(Constants.IdentCursed);
+                    IdentCursed = true;
                 }
                 if (IsCursed() || IsBroken())
                 {
@@ -2186,11 +2234,11 @@ namespace AngbandOS
             {
                 if (BaseItemCategory.Cost == 0)
                 {
-                    IdentifyFlags.Set(Constants.IdentBroken);
+                    IdentBroken = true;
                 }
                 if (BaseItemCategory.Cursed)
                 {
-                    IdentifyFlags.Set(Constants.IdentCursed);
+                    IdentCursed = true;
                 }
             }
         }
@@ -2590,7 +2638,7 @@ namespace AngbandOS
             if (fromScroll)
             {
                 IdentifyFully();
-                IdentifyFlags.Set(Constants.IdentStoreb);
+                IdentStoreb = true;
                 if (!SaveGame.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
                 {
                     newName = "(a DIY artifact)";
@@ -2601,7 +2649,7 @@ namespace AngbandOS
                 }
                 BecomeFlavourAware();
                 BecomeKnown();
-                IdentifyFlags.Set(Constants.IdentMental);
+                IdentMental = true;
             }
             else
             {
@@ -2627,7 +2675,7 @@ namespace AngbandOS
                     RandartItemCharacteristics.HeavyCurse = true;
                     RandartItemCharacteristics.Aggravate = true;
                     RandartItemCharacteristics.DreadCurse = true;
-                    IdentifyFlags.Set(Constants.IdentCursed);
+                    IdentCursed = true;
                     return;
                 }
             }
@@ -3138,7 +3186,7 @@ namespace AngbandOS
             {
                 RandartItemCharacteristics.NoMagic = true;
             }
-            IdentifyFlags.Set(Constants.IdentCursed);
+            IdentCursed = true;
         }
 
         private string GetRndLineInternal(string[] list)

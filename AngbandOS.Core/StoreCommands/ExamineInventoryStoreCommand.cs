@@ -36,7 +36,7 @@ namespace AngbandOS.StoreCommands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Do we know anything about it?
-            if (item.IdentifyFlags.IsClear(Constants.IdentMental))
+            if (!item.IdentMental)
             {
                 saveGame.MsgPrint("You have no special knowledge about that item.");
                 return;

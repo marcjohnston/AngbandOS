@@ -767,7 +767,7 @@ namespace AngbandOS.Commands
             qPtr.Weight = aPtr.Weight;
             if (aPtr.FixedArtifactItemCharacteristics.Cursed)
             {
-                qPtr.IdentifyFlags.Set(Constants.IdentCursed);
+                qPtr.IdentCursed = true;
             }
             qPtr.GetFixedArtifactResistances();
             saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
@@ -788,7 +788,9 @@ namespace AngbandOS.Commands
             saveGame.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             saveGame.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             saveGame.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
-            saveGame.PrintLine($"IdentifyFlags = {oPtr.IdentifyFlags:x4}  timeout = {oPtr.RechargeTimeLeft}", 8, j);
+            saveGame.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
+            saveGame.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
+            saveGame.PrintLine($"IdentCursed = {oPtr.IdentCursed} IdentBroken = {oPtr.IdentBroken} timeout = {oPtr.RechargeTimeLeft}", 8, j);
             saveGame.PrintLine("+------------FLAGS1------------+", 10, j);
             saveGame.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
             saveGame.PrintLine("              cvae      xsqpaefc", 12, j);

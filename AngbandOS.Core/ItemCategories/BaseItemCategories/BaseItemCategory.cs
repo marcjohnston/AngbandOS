@@ -638,11 +638,11 @@ namespace AngbandOS.ItemCategories
             {
                 tmpVal2 = item.Inscription;
             }
-            else if (item.IsCursed() && (item.IsKnown() || item.IdentifyFlags.IsSet(Constants.IdentSense)))
+            else if (item.IsCursed() && (item.IsKnown() || item.IdentSense))
             {
                 tmpVal2 = "cursed";
             }
-            else if (!item.IsKnown() && item.IdentifyFlags.IsSet(Constants.IdentEmpty))
+            else if (!item.IsKnown() && item.IdentEmpty)
             {
                 tmpVal2 = "empty";
             }

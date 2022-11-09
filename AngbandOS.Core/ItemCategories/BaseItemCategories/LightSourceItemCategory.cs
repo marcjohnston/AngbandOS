@@ -57,15 +57,15 @@ namespace AngbandOS.ItemCategories
                     case 1:
                         {
                             item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfIrritation;
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             break;
                         }
                     case 2:
                         {
                             item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfInstability;
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             break;
                         }
                 }

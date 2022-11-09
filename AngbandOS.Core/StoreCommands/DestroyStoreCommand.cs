@@ -87,7 +87,7 @@ namespace AngbandOS.StoreCommands
                     feel = "terrible";
                 }
                 item.Inscription = feel;
-                item.IdentifyFlags.Set(Constants.IdentSense);
+                item.IdentSense = true;
                 saveGame.Player.NoticeFlags |= Constants.PnCombine;
                 saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
                 return;

@@ -125,7 +125,7 @@ namespace AngbandOS.ItemCategories
                     }
                     if (item.BonusArmourClass < 0)
                     {
-                        item.IdentifyFlags.Set(Constants.IdentCursed);
+                        item.IdentCursed = true;
                     }
                 }
                 switch (item.Category)

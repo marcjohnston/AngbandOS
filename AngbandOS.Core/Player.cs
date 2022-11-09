@@ -412,16 +412,16 @@ namespace AngbandOS
                 }
                 oPtr.RandartItemCharacteristics.HeavyCurse = true;
                 oPtr.RandartItemCharacteristics.Cursed = true;
-                oPtr.IdentifyFlags.Set(Constants.IdentCursed);
+                oPtr.IdentCursed = true;
             }
             else
             {
-                if (oPtr.IdentifyFlags.IsClear(Constants.IdentCursed))
+                if (!oPtr.IdentCursed)
                 {
                     changed = true;
                 }
                 oPtr.RandartItemCharacteristics.Cursed = true;
-                oPtr.IdentifyFlags.Set(Constants.IdentCursed);
+                oPtr.IdentCursed = true;
             }
             if (changed)
             {
@@ -1544,7 +1544,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (item.IdentifyFlags.IsSet(Constants.IdentSense))
+                if (item.IdentSense)
                 {
                     continue;
                 }
@@ -1574,7 +1574,7 @@ namespace AngbandOS
                     SaveGame.MsgPrint(
                         $"You feel the {oName} ({i.IndexToLabel()}) in your pack {isare} {feel}...");
                 }
-                item.IdentifyFlags.Set(Constants.IdentSense);
+                item.IdentSense = true;
                 if (string.IsNullOrEmpty(item.Inscription))
                 {
                     item.Inscription = feel;

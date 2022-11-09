@@ -18,7 +18,7 @@ namespace AngbandOS.ItemCategories
             {
                 return base.GetDescription(item, includeCountPrefix);
             }
-            string flavour = item.IdentifyFlags.IsSet(Constants.IdentStoreb) ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
             if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
             {
                 flavour = "Plain Gold ";
@@ -51,8 +51,8 @@ namespace AngbandOS.ItemCategories
                         }
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
                         }
                         break;
@@ -65,8 +65,8 @@ namespace AngbandOS.ItemCategories
                         item.TypeSpecificValue = 1 + GetBonusValue(5, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
                         }
                         break;
@@ -80,8 +80,8 @@ namespace AngbandOS.ItemCategories
                         }
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
                             break;
                         }
@@ -110,8 +110,8 @@ namespace AngbandOS.ItemCategories
                         item.TypeSpecificValue = 1 + GetBonusValue(5, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
                         }
                         break;
@@ -126,15 +126,15 @@ namespace AngbandOS.ItemCategories
                 case RingType.Weakness:
                 case RingType.Stupidity:
                     {
-                        item.IdentifyFlags.Set(Constants.IdentBroken);
-                        item.IdentifyFlags.Set(Constants.IdentCursed);
+                        item.IdentBroken = true;
+                        item.IdentCursed = true;
                         item.TypeSpecificValue = 0 - (1 + GetBonusValue(5, level));
                         break;
                     }
                 case RingType.Woe:
                     {
-                        item.IdentifyFlags.Set(Constants.IdentBroken);
-                        item.IdentifyFlags.Set(Constants.IdentCursed);
+                        item.IdentBroken = true;
+                        item.IdentCursed = true;
                         item.BonusArmourClass = 0 - (5 + GetBonusValue(10, level));
                         item.TypeSpecificValue = 0 - (1 + GetBonusValue(5, level));
                         break;
@@ -144,8 +144,8 @@ namespace AngbandOS.ItemCategories
                         item.BonusDamage = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.BonusDamage = 0 - item.BonusDamage;
                         }
                         break;
@@ -155,8 +155,8 @@ namespace AngbandOS.ItemCategories
                         item.BonusToHit = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.BonusToHit = 0 - item.BonusToHit;
                         }
                         break;
@@ -166,8 +166,8 @@ namespace AngbandOS.ItemCategories
                         item.BonusArmourClass = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.BonusArmourClass = 0 - item.BonusArmourClass;
                         }
                         break;
@@ -178,8 +178,8 @@ namespace AngbandOS.ItemCategories
                         item.BonusToHit = Program.Rng.DieRoll(7) + GetBonusValue(10, level);
                         if (power < 0)
                         {
-                            item.IdentifyFlags.Set(Constants.IdentBroken);
-                            item.IdentifyFlags.Set(Constants.IdentCursed);
+                            item.IdentBroken = true;
+                            item.IdentCursed = true;
                             item.BonusToHit = 0 - item.BonusToHit;
                             item.BonusDamage = 0 - item.BonusDamage;
                         }

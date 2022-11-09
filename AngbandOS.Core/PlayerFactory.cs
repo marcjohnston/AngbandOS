@@ -1917,7 +1917,7 @@ namespace AngbandOS
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                item.IdentifyFlags.Set(Constants.IdentStoreb);
+                item.IdentStoreb = true;
                 _player.Inventory.InvenCarry(item, false);
                 item = new Item(saveGame);
             }
@@ -1937,7 +1937,7 @@ namespace AngbandOS
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                item.IdentifyFlags.Set(Constants.IdentStoreb);
+                item.IdentStoreb = true;
                 _player.Inventory.InvenCarry(item, false);
             }
             else
@@ -2070,7 +2070,7 @@ namespace AngbandOS
                 {
                     item.TypeSpecificValue = 1;
                 }
-                item.IdentifyFlags.Set(Constants.IdentStoreb);
+                item.IdentStoreb = true;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 int slot = _player.Inventory.WieldSlot(item);

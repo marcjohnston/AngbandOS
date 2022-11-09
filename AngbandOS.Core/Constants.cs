@@ -42,22 +42,7 @@ namespace AngbandOS.Core
         public const int GenerateReplay = 2;
         public const int GreatObj = 20; // This is a 1-in-chance of getting great gold or a great object.
         public const int GroupMax = 32;
-        public const int IdentBroken = 0x80;
-        public const int IdentCursed = 0x40;
-        public const int IdentEmpty = 0x04;
-        public const int IdentFixed = 0x02;
 
-        /// <summary>
-        /// The item has been identified.  
-        /// </summary>
-        public const int IdentKnown = 0x08;
-
-        /// <summary>
-        /// Do we know anything about the item.
-        /// </summary>
-        public const int IdentMental = 0x20;
-        public const int IdentSense = 0x01;
-        public const int IdentStoreb = 0x10;
         public const int KeymapModeOrig = 0;
         public const int KeymapModeRogue = 1;
         public const int KeymapModes = 2;

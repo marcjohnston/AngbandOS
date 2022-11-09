@@ -167,7 +167,7 @@ namespace AngbandOS.ItemCategories
                 }
                 if (item.BonusToHit + item.BonusDamage < 0)
                 {
-                    item.IdentifyFlags.Set(Constants.IdentCursed);
+                    item.IdentCursed = true;
                 }
             }
         }

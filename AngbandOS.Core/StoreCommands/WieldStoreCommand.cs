@@ -49,7 +49,7 @@ namespace AngbandOS.StoreCommands
                 return;
             }
             // If we know the item to be cursed, confirm its wearing
-            if (item.IsCursed() && (item.IsKnown() || item.IdentifyFlags.IsSet(Constants.IdentSense)))
+            if (item.IsCursed() && (item.IsKnown() || item.IdentSense))
             {
                 itemName = item.Description(false, 0);
                 string dummy = $"Really use the {itemName} {{cursed}}? ";
@@ -110,7 +110,7 @@ namespace AngbandOS.StoreCommands
             if (wornItem.IsCursed())
             {
                 saveGame.MsgPrint("Oops! It feels deathly cold!");
-                wornItem.IdentifyFlags.Set(Constants.IdentSense);
+                wornItem.IdentSense = true;
             }
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);

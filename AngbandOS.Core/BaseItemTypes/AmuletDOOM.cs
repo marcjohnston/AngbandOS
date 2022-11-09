@@ -26,8 +26,8 @@ namespace AngbandOS.ItemCategories
 
         public override void ApplyMagic(Item item, int level, int power)
         {
-            item.IdentifyFlags.Set(Constants.IdentBroken);
-            item.IdentifyFlags.Set(Constants.IdentCursed);
+            item.IdentBroken = true;
+            item.IdentCursed = true;
             item.TypeSpecificValue = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
             item.BonusArmourClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
         }

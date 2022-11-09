@@ -2395,9 +2395,6 @@ namespace AngbandOS
 
         private void ProcessWorld()
         {
-            FlagSet f1 = new FlagSet();
-            FlagSet f2 = new FlagSet();
-            FlagSet f3 = new FlagSet();
             if (Player.GameTime.IsBirthday)
             {
                 MsgPrint("Happy Birthday!");
@@ -2840,7 +2837,7 @@ namespace AngbandOS
                 }
                 if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
                 {
-                    if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed) && !Player.HasAntiTeleport)
+                    if (oPtr.IdentCursed && !Player.HasAntiTeleport)
                     {
                         Disturb(true);
                         TeleportPlayer(40);
@@ -3383,7 +3380,7 @@ namespace AngbandOS
                     feel = "terrible";
                 }
                 oPtr.Inscription = feel;
-                oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                oPtr.IdentSense = true;
                 Player.NoticeFlags |= Constants.PnCombine;
                 return;
             }
@@ -3627,7 +3624,7 @@ namespace AngbandOS
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             string oName = oPtr.Description(false, 0);
             oPtr.RefreshFlagBasedProperties();
-            if (oPtr.IdentifyFlags.IsSet(Constants.IdentCursed))
+            if (oPtr.IdentCursed)
             {
                 string your;
                 if ((oPtr.Characteristics.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
@@ -3638,8 +3635,8 @@ namespace AngbandOS
                 }
                 your = item >= 0 ? "your" : "the";
                 MsgPrint($"A malignant aura leaves {your} {oName}.");
-                oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
-                oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                oPtr.IdentCursed = false;
+                oPtr.IdentSense = true;
                 oPtr.Inscription = "uncursed";
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             }
@@ -4726,8 +4723,8 @@ namespace AngbandOS
                         if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusToHit >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
-                            oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
-                            oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                            oPtr.IdentCursed = false;
+                            oPtr.IdentSense = true;
                             if (oPtr.RandartItemCharacteristics.Cursed)
                             {
                                 oPtr.RandartItemCharacteristics.Cursed = false;
@@ -4761,8 +4758,8 @@ namespace AngbandOS
                         if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusDamage >= 0 && Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
-                            oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
-                            oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                            oPtr.IdentCursed = false;
+                            oPtr.IdentSense = true;
                             if (oPtr.RandartItemCharacteristics.Cursed)
                             {
                                 oPtr.RandartItemCharacteristics.Cursed = false;
@@ -4797,8 +4794,8 @@ namespace AngbandOS
                             Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
-                            oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
-                            oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                            oPtr.IdentCursed = false;
+                            oPtr.IdentSense = true;
                             if (oPtr.RandartItemCharacteristics.Cursed)
                             {
                                 oPtr.RandartItemCharacteristics.Cursed = false;
@@ -4961,7 +4958,7 @@ namespace AngbandOS
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
-            oPtr.IdentifyFlags.Set(Constants.IdentMental);
+            oPtr.IdentMental = true;
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             HandleStuff();
@@ -5129,11 +5126,11 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.IdentifyFlags.IsSet(Constants.IdentMental))
+                if (oPtr.IdentMental)
                 {
                     continue;
                 }
-                if (string.IsNullOrEmpty(oPtr.Inscription) == false && oPtr.IdentifyFlags.IsSet(Constants.IdentSense))
+                if (string.IsNullOrEmpty(oPtr.Inscription) == false && oPtr.IdentSense)
                 {
                     string q = oPtr.Inscription;
                     if (q == "cursed" || q == "broken" || q == "good" || q == "average" || q == "excellent" ||
@@ -5142,9 +5139,9 @@ namespace AngbandOS
                         oPtr.Inscription = string.Empty;
                     }
                 }
-                oPtr.IdentifyFlags.Clear(Constants.IdentEmpty);
-                oPtr.IdentifyFlags.Clear(Constants.IdentKnown);
-                oPtr.IdentifyFlags.Clear(Constants.IdentSense);
+                oPtr.IdentEmpty = false;
+                oPtr.IdentKnown = false;
+                oPtr.IdentSense = false;
             }
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
@@ -5350,8 +5347,8 @@ namespace AngbandOS
                     {
                         oPtr.TypeSpecificValue += 2 + Program.Rng.DieRoll(t);
                     }
-                    oPtr.IdentifyFlags.Clear(Constants.IdentKnown);
-                    oPtr.IdentifyFlags.Clear(Constants.IdentEmpty);
+                    oPtr.IdentKnown = false;
+                    oPtr.IdentEmpty = false;
                 }
             }
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
@@ -6916,8 +6913,8 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                oPtr.IdentifyFlags.Clear(Constants.IdentCursed);
-                oPtr.IdentifyFlags.Set(Constants.IdentSense);
+                oPtr.IdentCursed = false;
+                oPtr.IdentSense = true;
                 if (oPtr.RandartItemCharacteristics.Cursed)
                 {
                     oPtr.RandartItemCharacteristics.Cursed = false;
@@ -7625,8 +7622,8 @@ namespace AngbandOS
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
                 item.RandartItemCharacteristics.Clear();
-                item.IdentifyFlags.Set(Constants.IdentCursed);
-                item.IdentifyFlags.Set(Constants.IdentBroken);
+                item.IdentCursed = true;
+                item.IdentBroken = true;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
             }
@@ -7666,8 +7663,8 @@ namespace AngbandOS
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
                 item.RandartItemCharacteristics.Clear();
-                item.IdentifyFlags.Set(Constants.IdentCursed);
-                item.IdentifyFlags.Set(Constants.IdentBroken);
+                item.IdentCursed = true;
+                item.IdentBroken = true;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
             }
@@ -9037,7 +9034,7 @@ namespace AngbandOS
             // Make sure the grammar of the message is correct
             string your;
             string s;
-            if (item.BonusArmourClass < 0 && item.IdentifyFlags.IsClear(Constants.IdentCursed))
+            if (item.BonusArmourClass < 0 && !item.IdentCursed)
             {
                 your = itemIndex > 0 ? "Your" : "The";
                 s = item.Count > 1 ? "" : "s";
