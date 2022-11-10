@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
+            saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + saveGame.Rng.DieRoll(30) + 25);
         }
 
         public override void Initialise(int characterClass)

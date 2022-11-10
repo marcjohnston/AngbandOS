@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
+            saveGame.LightArea(saveGame.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
         }
 
         public override void Initialise(int characterClass)

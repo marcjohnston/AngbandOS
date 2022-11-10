@@ -26,6 +26,8 @@ namespace AngbandOS
     [Serializable]
     internal class SaveGame
     {
+        public readonly Rng Rng = new Rng();
+
         /// <summary>
         /// Maximum amount of health that can be drained from an opponent in one turn
         /// </summary>
@@ -195,9 +197,9 @@ namespace AngbandOS
             AllocationEntry[] table = AllocKindTable;
             if (level > 0)
             {
-                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+                if (Rng.RandomLessThan(Constants.GreatObj) == 0)
                 {
-                    level = 1 + (level * Constants.MaxDepth / Program.Rng.DieRoll(Constants.MaxDepth));
+                    level = 1 + (level * Constants.MaxDepth / Rng.DieRoll(Constants.MaxDepth));
                 }
             }
             int total = 0;
@@ -221,7 +223,7 @@ namespace AngbandOS
             {
                 return null;
             }
-            long value = Program.Rng.RandomLessThan(total);
+            long value = Rng.RandomLessThan(total);
             for (i = 0; i < AllocKindSize; i++)
             {
                 if (value < table[i].FinalProbability)
@@ -230,11 +232,11 @@ namespace AngbandOS
                 }
                 value -= table[i].FinalProbability;
             }
-            int p = Program.Rng.RandomLessThan(100);
+            int p = Rng.RandomLessThan(100);
             if (p < 60)
             {
                 j = i;
-                value = Program.Rng.RandomLessThan(total);
+                value = Rng.RandomLessThan(total);
                 for (i = 0; i < AllocKindSize; i++)
                 {
                     if (value < table[i].FinalProbability)
@@ -251,7 +253,7 @@ namespace AngbandOS
             if (p < 10)
             {
                 j = i;
-                value = Program.Rng.RandomLessThan(total);
+                value = Rng.RandomLessThan(total);
                 for (i = 0; i < AllocKindSize; i++)
                 {
                     if (value < table[i].FinalProbability)
@@ -347,9 +349,9 @@ namespace AngbandOS
             FullScreenOverlay = true;
             SetBackground(BackgroundImage.Normal);
             CursorVisible = false;
-            if (Program.Rng.UseFixed)
+            if (Rng.UseFixed)
             {
-                Program.Rng.UseFixed = false;
+                Rng.UseFixed = false;
             }
             if (Player == null)
             {
@@ -369,7 +371,7 @@ namespace AngbandOS
                     }
                 }
                 Level = null;
-                _seedFlavor = Program.Rng.RandomLessThan(int.MaxValue);
+                _seedFlavor = Rng.RandomLessThan(int.MaxValue);
                 CreateWorld();
                 foreach (var dungeon in Dungeons)
                 {
@@ -377,10 +379,10 @@ namespace AngbandOS
                 }
                 ResetStompability();
                 CurrentDepth = 0;
-                CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                CurTown = Towns[Rng.RandomLessThan(Towns.Length)];
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
                 {
-                    CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                    CurTown = Towns[Rng.RandomLessThan(Towns.Length)];
                 }
                 CurDungeon = Dungeons[CurTown.Index];
                 RecallDungeon = CurDungeon.Index;
@@ -587,7 +589,7 @@ namespace AngbandOS
             int i = 0;
             do
             {
-                switch (Program.Rng.DieRoll(27))
+                switch (Rng.DieRoll(27))
                 {
                     case 1:
                     case 2:
@@ -622,16 +624,16 @@ namespace AngbandOS
                     case 15:
                     case 19:
                     case 20:
-                        if (!Player.HasFreeAction || Program.Rng.DieRoll(100) >= Player.SkillSavingThrow)
+                        if (!Player.HasFreeAction || Rng.DieRoll(100) >= Player.SkillSavingThrow)
                         {
                             MsgPrint("You feel like a statue!");
                             if (Player.HasFreeAction)
                             {
-                                Player.SetTimedParalysis(Player.TimedParalysis + Program.Rng.DieRoll(3));
+                                Player.SetTimedParalysis(Player.TimedParalysis + Rng.DieRoll(3));
                             }
                             else
                             {
-                                Player.SetTimedParalysis(Player.TimedParalysis + Program.Rng.DieRoll(13));
+                                Player.SetTimedParalysis(Player.TimedParalysis + Rng.DieRoll(13));
                             }
                         }
                         break;
@@ -639,7 +641,7 @@ namespace AngbandOS
                     case 21:
                     case 22:
                     case 23:
-                        Player.TryDecreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
+                        Player.TryDecreasingAbilityScore(Rng.DieRoll(6) - 1);
                         break;
 
                     case 24:
@@ -657,12 +659,12 @@ namespace AngbandOS
                             do
                             {
                                 Player.TryDecreasingAbilityScore(i);
-                            } while (Program.Rng.DieRoll(2) == 1);
+                            } while (Rng.DieRoll(2) == 1);
                             i++;
                         }
                         break;
                 }
-            } while (Program.Rng.DieRoll(3) == 1);
+            } while (Rng.DieRoll(3) == 1);
         }
 
         public void ChestTrap(int y, int x, int oIdx)
@@ -676,13 +678,13 @@ namespace AngbandOS
             if ((trap & Enumerations.ChestTrap.ChestLoseStr) != 0)
             {
                 MsgPrint("A small needle has pricked you!");
-                Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
+                Player.TakeHit(Rng.DiceRoll(1, 4), "a poison needle");
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
             if ((trap & Enumerations.ChestTrap.ChestLoseCon) != 0)
             {
                 MsgPrint("A small needle has pricked you!");
-                Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
+                Player.TakeHit(Rng.DiceRoll(1, 4), "a poison needle");
                 Player.TryDecreasingAbilityScore(Ability.Constitution);
             }
             if ((trap & Enumerations.ChestTrap.ChestPoison) != 0)
@@ -690,13 +692,13 @@ namespace AngbandOS
                 MsgPrint("A puff of green gas surrounds you!");
                 if (!(Player.HasPoisonResistance || Player.TimedPoisonResistance != 0))
                 {
-                    if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                    if (Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                     {
                         MsgPrint("Hagarg Ryonis's favour protects you!");
                     }
                     else
                     {
-                        Player.SetTimedPoison(Player.TimedPoison + 10 + Program.Rng.DieRoll(20));
+                        Player.SetTimedPoison(Player.TimedPoison + 10 + Rng.DieRoll(20));
                     }
                 }
             }
@@ -705,16 +707,16 @@ namespace AngbandOS
                 MsgPrint("A puff of yellow gas surrounds you!");
                 if (!Player.HasFreeAction)
                 {
-                    Player.SetTimedParalysis(Player.TimedParalysis + 10 + Program.Rng.DieRoll(20));
+                    Player.SetTimedParalysis(Player.TimedParalysis + 10 + Rng.DieRoll(20));
                 }
             }
             if ((trap & Enumerations.ChestTrap.ChestSummon) != 0)
             {
-                int num = 2 + Program.Rng.DieRoll(3);
+                int num = 2 + Rng.DieRoll(3);
                 MsgPrint("You are enveloped in a cloud of smoke!");
                 for (int i = 0; i < num; i++)
                 {
-                    if (Program.Rng.DieRoll(100) < Difficulty)
+                    if (Rng.DieRoll(100) < Difficulty)
                     {
                         ActivateHiSummon();
                     }
@@ -729,7 +731,7 @@ namespace AngbandOS
                 MsgPrint("There is a sudden explosion!");
                 MsgPrint("Everything inside the chest is destroyed!");
                 oPtr.TypeSpecificValue = 0;
-                Player.TakeHit(Program.Rng.DiceRoll(5, 8), "an exploding chest");
+                Player.TakeHit(Rng.DiceRoll(5, 8), "an exploding chest");
             }
         }
 
@@ -1194,29 +1196,29 @@ namespace AngbandOS
                 Level.DropNear(oPtr, -1, y, x);
             }
             mPtr.FirstHeldItemIndex = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Drop60) != 0 && Program.Rng.RandomLessThan(100) < 60)
+            if ((rPtr.Flags1 & MonsterFlag1.Drop60) != 0 && Rng.RandomLessThan(100) < 60)
             {
                 number++;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop90) != 0 && Program.Rng.RandomLessThan(100) < 90)
+            if ((rPtr.Flags1 & MonsterFlag1.Drop90) != 0 && Rng.RandomLessThan(100) < 90)
             {
                 number++;
             }
             if ((rPtr.Flags1 & MonsterFlag1.Drop_1D2) != 0)
             {
-                number += Program.Rng.DiceRoll(1, 2);
+                number += Rng.DiceRoll(1, 2);
             }
             if ((rPtr.Flags1 & MonsterFlag1.Drop_2D2) != 0)
             {
-                number += Program.Rng.DiceRoll(2, 2);
+                number += Rng.DiceRoll(2, 2);
             }
             if ((rPtr.Flags1 & MonsterFlag1.Drop_3D2) != 0)
             {
-                number += Program.Rng.DiceRoll(3, 2);
+                number += Rng.DiceRoll(3, 2);
             }
             if ((rPtr.Flags1 & MonsterFlag1.Drop_4D2) != 0)
             {
-                number += Program.Rng.DiceRoll(4, 2);
+                number += Rng.DiceRoll(4, 2);
             }
             if (cloned)
             {
@@ -1240,7 +1242,7 @@ namespace AngbandOS
             for (int j = 0; j < number; j++)
             {
                 qPtr = new Item(this);
-                if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
+                if (doGold && (!doItem || Rng.RandomLessThan(100) < 50))
                 {
                     if (!qPtr.MakeGold(forceCoin))
                     {
@@ -1343,7 +1345,7 @@ namespace AngbandOS
             for (; number > 0; --number)
             {
                 Item qPtr = new Item(this);
-                if (small && Program.Rng.RandomLessThan(100) < 75)
+                if (small && Rng.RandomLessThan(100) < 75)
                 {
                     if (!qPtr.MakeGold(0))
                     {
@@ -1562,7 +1564,7 @@ namespace AngbandOS
             {
                 for (j = 0; j < 12; j++)
                 {
-                    Wilderness[i][j].Seed = Program.Rng.RandomLessThan(int.MaxValue);
+                    Wilderness[i][j].Seed = Rng.RandomLessThan(int.MaxValue);
                     Wilderness[i][j].Dungeon = null;
                     Wilderness[i][j].Town = null;
                     Wilderness[i][j].RoadMap = 0;
@@ -1570,7 +1572,7 @@ namespace AngbandOS
             }
             for (i = 0; i < Towns.Length; i++)
             {
-                Towns[i].Seed = Program.Rng.RandomLessThan(int.MaxValue);
+                Towns[i].Seed = Rng.RandomLessThan(int.MaxValue);
                 Towns[i].Visited = false;
                 Towns[i].X = 0;
                 Towns[i].Y = 0;
@@ -1591,8 +1593,8 @@ namespace AngbandOS
                     j = 0;
                     while (j == 0)
                     {
-                        x = Program.Rng.RandomBetween(2, 9);
-                        y = Program.Rng.RandomBetween(2, 9);
+                        x = Rng.RandomBetween(2, 9);
+                        y = Rng.RandomBetween(2, 9);
                         j = 1;
                         if (Wilderness[y][x].Dungeon != null || Wilderness[y - 1][x].Dungeon != null ||
                             Wilderness[y + 1][x].Dungeon != null || Wilderness[y][x - 1].Dungeon != null ||
@@ -1609,8 +1611,8 @@ namespace AngbandOS
                     j = 0;
                     while (j == 0)
                     {
-                        x = Program.Rng.RandomBetween(2, 9);
-                        y = Program.Rng.RandomBetween(2, 9);
+                        x = Rng.RandomBetween(2, 9);
+                        y = Rng.RandomBetween(2, 9);
                         j = 1;
                         if (Wilderness[y][x].Dungeon != null)
                         {
@@ -1913,8 +1915,8 @@ namespace AngbandOS
         private void FlavorInit()
         {
             int i, j;
-            Program.Rng.UseFixed = true;
-            Program.Rng.FixedSeed = _seedFlavor;
+            Rng.UseFixed = true;
+            Rng.FixedSeed = _seedFlavor;
             PotionFlavours = new List<PotionFlavour>();
             List<PotionFlavour> tempPotions = new List<PotionFlavour>();
             PotionFlavours.Add(new ClearPotionFlavour());
@@ -1938,7 +1940,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempPotions.Count);
+                int index = Rng.RandomLessThan(tempPotions.Count);
                 PotionFlavours.Add(tempPotions[index]);
                 tempPotions.RemoveAt(index);
             } while (tempPotions.Count > 0);
@@ -1950,7 +1952,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempMushrooms.Count);
+                int index = Rng.RandomLessThan(tempMushrooms.Count);
                 MushroomFlavours.Add(tempMushrooms[index]);
                 tempMushrooms.RemoveAt(index);
             } while (tempMushrooms.Count > 0);
@@ -1962,7 +1964,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempAmulets.Count);
+                int index = Rng.RandomLessThan(tempAmulets.Count);
                 AmuletFlavours.Add(tempAmulets[index]);
                 tempAmulets.RemoveAt(index);
             } while (tempAmulets.Count > 0);
@@ -1974,7 +1976,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempWands.Count);
+                int index = Rng.RandomLessThan(tempWands.Count);
                 WandFlavours.Add(tempWands[index]);
                 tempWands.RemoveAt(index);
             } while (tempWands.Count > 0);
@@ -1986,7 +1988,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempRings.Count);
+                int index = Rng.RandomLessThan(tempRings.Count);
                 RingFlavours.Add(tempRings[index]);
                 tempRings.RemoveAt(index);
             } while (tempRings.Count > 0);
@@ -1998,7 +2000,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempRods.Count);
+                int index = Rng.RandomLessThan(tempRods.Count);
                 RodFlavours.Add(tempRods[index]);
                 tempRods.RemoveAt(index);
             } while (tempRods.Count > 0);
@@ -2010,7 +2012,7 @@ namespace AngbandOS
             }
             do
             {
-                int index = Program.Rng.RandomLessThan(tempStaffs.Count);
+                int index = Rng.RandomLessThan(tempStaffs.Count);
                 StaffFlavours.Add(tempStaffs[index]);
                 tempStaffs.RemoveAt(index);
             } while (tempStaffs.Count > 0);
@@ -2024,7 +2026,7 @@ namespace AngbandOS
             {
                 ScrollFlavour flavour = new ScrollFlavour();
                 ScrollFlavours.Add(flavour);
-                int index = Program.Rng.RandomLessThan(tempScrolls.Count);
+                int index = Rng.RandomLessThan(tempScrolls.Count);
                 flavour.Character = tempScrolls[index].Character;
                 flavour.Colour = tempScrolls[index].Colour;
                 while (true)
@@ -2033,10 +2035,10 @@ namespace AngbandOS
                     while (true)
                     {
                         string tmp = "";
-                        int s = Program.Rng.RandomLessThan(100) < 30 ? 1 : 2;
+                        int s = Rng.RandomLessThan(100) < 30 ? 1 : 2;
                         for (int q = 0; q < s; q++)
                         {
-                            tmp += BaseScrollFlavour.Syllables[Program.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
+                            tmp += BaseScrollFlavour.Syllables[Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
                         }
                         if (buf.Length + tmp.Length > 14)
                         {
@@ -2064,7 +2066,7 @@ namespace AngbandOS
                     }
                 }
             }
-            Program.Rng.UseFixed = false;
+            Rng.UseFixed = false;
             foreach (ItemClass kPtr in ItemTypes)
             {
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
@@ -2410,13 +2412,13 @@ namespace AngbandOS
             if (Player.GameTime.IsBirthday)
             {
                 MsgPrint("Happy Birthday!");
-                Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
+                Level.Acquirement(Player.MapY, Player.MapX, Rng.DieRoll(2) + 1, true);
                 Player.Age++;
             }
             if (Player.GameTime.IsNewYear)
             {
                 MsgPrint("Happy New Year!");
-                Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
+                Level.Acquirement(Player.MapY, Player.MapX, Rng.DieRoll(2) + 1, true);
             }
             if (Player.GameTime.IsHalloween)
             {
@@ -2475,10 +2477,10 @@ namespace AngbandOS
                         store.StoreMaint();
                     }
                 }
-                if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
+                if (Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                 {
-                    int town = Program.Rng.RandomLessThan(Towns.Length);
-                    int store = Program.Rng.RandomLessThan(12);
+                    int town = Rng.RandomLessThan(Towns.Length);
+                    int store = Rng.RandomLessThan(12);
                     Towns[town].Stores[store].StoreShuffle();
                 }
             }
@@ -2486,7 +2488,7 @@ namespace AngbandOS
             {
                 return;
             }
-            if (Program.Rng.RandomLessThan(Constants.MaxMAllocChance) == 0)
+            if (Rng.RandomLessThan(Constants.MaxMAllocChance) == 0)
             {
                 Level.Monsters.AllocMonster(Constants.MaxSight + 5, false);
             }
@@ -2615,11 +2617,11 @@ namespace AngbandOS
                 }
                 if (Player.Food < Constants.PyFoodFaint)
                 {
-                    if (Player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) < 10)
+                    if (Player.TimedParalysis == 0 && Rng.RandomLessThan(100) < 10)
                     {
                         MsgPrint("You faint from the lack of food.");
                         Disturb(true);
-                        Player.SetTimedParalysis(Player.TimedParalysis + 1 + Program.Rng.RandomLessThan(5));
+                        Player.SetTimedParalysis(Player.TimedParalysis + 1 + Rng.RandomLessThan(5));
                     }
                 }
             }
@@ -2822,14 +2824,14 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
             if (Player.HasExperienceDrain)
             {
-                if (Program.Rng.RandomLessThan(100) < 10 && Player.ExperiencePoints > 0)
+                if (Rng.RandomLessThan(100) < 10 && Player.ExperiencePoints > 0)
                 {
                     Player.ExperiencePoints--;
                     Player.MaxExperienceGained--;
                     Player.CheckExperience();
                 }
             }
-            if (Program.Rng.DieRoll(999) == 1 && !Player.HasAntiMagic)
+            if (Rng.DieRoll(999) == 1 && !Player.HasAntiMagic)
             {
                 if (Player.Inventory[InventorySlot.Lightsource].Category != 0 && Player.TimedInvulnerability == 0 &&
                     Player.Inventory[InventorySlot.Lightsource].ItemSubCategory == LightType.Thrain)
@@ -2843,11 +2845,11 @@ namespace AngbandOS
             {
                 oPtr = Player.Inventory[i];
                 oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Characteristics.DreadCurse && Program.Rng.DieRoll(100) == 1)
+                if (oPtr.Characteristics.DreadCurse && Rng.DieRoll(100) == 1)
                 {
                     ActivateDreadCurse();
                 }
-                if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
+                if (oPtr.Characteristics.Teleport && Rng.RandomLessThan(100) < 1)
                 {
                     if (oPtr.IdentCursed && !Player.HasAntiTeleport)
                     {
@@ -3194,7 +3196,7 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedAcidResistance != 0 || Player.HasAcidResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedAcidResistance != 0 || Player.HasAcidResistance) && Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Charisma);
             }
@@ -3212,9 +3214,9 @@ namespace AngbandOS
         public void ActivateHiSummon()
         {
             int i;
-            for (i = 0; i < Program.Rng.DieRoll(9) + (Difficulty / 40); i++)
+            for (i = 0; i < Rng.DieRoll(9) + (Difficulty / 40); i++)
             {
-                switch (Program.Rng.DieRoll(26) + (Difficulty / 20))
+                switch (Rng.DieRoll(26) + (Difficulty / 20))
                 {
                     case 1:
                     case 2:
@@ -3330,7 +3332,7 @@ namespace AngbandOS
                     }
                     if ((mPtr.Mind & Constants.SmFriendly) != 0)
                     {
-                        if (Program.Rng.DieRoll(2) == 1)
+                        if (Rng.DieRoll(2) == 1)
                         {
                             mPtr.Mind &= ~Constants.SmFriendly;
                         }
@@ -3441,7 +3443,7 @@ namespace AngbandOS
         public bool ApplyDisenchant()
         {
             int t = 0;
-            switch (Program.Rng.DieRoll(8))
+            switch (Rng.DieRoll(8))
             {
                 case 1:
                     t = InventorySlot.MeleeWeapon;
@@ -3487,7 +3489,7 @@ namespace AngbandOS
             string oName = oPtr.Description(false, 0);
             string s;
             if ((oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false) &&
-                Program.Rng.RandomLessThan(100) < 71)
+                Rng.RandomLessThan(100) < 71)
             {
                 s = oPtr.Count != 1 ? "" : "s";
                 MsgPrint($"Your {oName} ({t.IndexToLabel()}) resist{s} disenchantment!");
@@ -3497,7 +3499,7 @@ namespace AngbandOS
             {
                 oPtr.BonusToHit--;
             }
-            if (oPtr.BonusToHit > 5 && Program.Rng.RandomLessThan(100) < 20)
+            if (oPtr.BonusToHit > 5 && Rng.RandomLessThan(100) < 20)
             {
                 oPtr.BonusToHit--;
             }
@@ -3505,7 +3507,7 @@ namespace AngbandOS
             {
                 oPtr.BonusDamage--;
             }
-            if (oPtr.BonusDamage > 5 && Program.Rng.RandomLessThan(100) < 20)
+            if (oPtr.BonusDamage > 5 && Rng.RandomLessThan(100) < 20)
             {
                 oPtr.BonusDamage--;
             }
@@ -3513,7 +3515,7 @@ namespace AngbandOS
             {
                 oPtr.BonusArmourClass--;
             }
-            if (oPtr.BonusArmourClass > 5 && Program.Rng.RandomLessThan(100) < 20)
+            if (oPtr.BonusArmourClass > 5 && Rng.RandomLessThan(100) < 20)
             {
                 oPtr.BonusArmourClass--;
             }
@@ -3525,7 +3527,7 @@ namespace AngbandOS
 
         public void ApplyNexus(Monster mPtr)
         {
-            switch (Program.Rng.DieRoll(7))
+            switch (Rng.DieRoll(7))
             {
                 case 1:
                 case 2:
@@ -3542,7 +3544,7 @@ namespace AngbandOS
                     }
                 case 6:
                     {
-                        if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
+                        if (Rng.RandomLessThan(100) < Player.SkillSavingThrow)
                         {
                             MsgPrint("You resist the effects!");
                             break;
@@ -3552,7 +3554,7 @@ namespace AngbandOS
                     }
                 case 7:
                     {
-                        if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
+                        if (Rng.RandomLessThan(100) < Player.SkillSavingThrow)
                         {
                             MsgPrint("You resist the effects!");
                             break;
@@ -3637,7 +3639,7 @@ namespace AngbandOS
             if (oPtr.IdentCursed)
             {
                 string your;
-                if ((oPtr.Characteristics.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
+                if ((oPtr.Characteristics.HeavyCurse && Rng.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
                 {
                     your = item >= 0 ? "your" : "the";
                     MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
@@ -3658,7 +3660,7 @@ namespace AngbandOS
                 return;
             }
             if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifactIndex != 0) ||
-                Program.Rng.DieRoll(3) == 1)
+                Rng.DieRoll(3) == 1)
             {
                 string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "" : "s";
@@ -3674,7 +3676,7 @@ namespace AngbandOS
                     oPtr.BonusToHit--;
                     disHappened = true;
                 }
-                if (oPtr.BonusToHit > 5 && Program.Rng.RandomLessThan(100) < 33)
+                if (oPtr.BonusToHit > 5 && Rng.RandomLessThan(100) < 33)
                 {
                     oPtr.BonusToHit--;
                 }
@@ -3683,7 +3685,7 @@ namespace AngbandOS
                     oPtr.BonusDamage--;
                     disHappened = true;
                 }
-                if (oPtr.BonusDamage > 5 && Program.Rng.RandomLessThan(100) < 33)
+                if (oPtr.BonusDamage > 5 && Rng.RandomLessThan(100) < 33)
                 {
                     oPtr.BonusDamage--;
                 }
@@ -3692,7 +3694,7 @@ namespace AngbandOS
                     oPtr.BonusArmourClass--;
                     disHappened = true;
                 }
-                if (oPtr.BonusArmourClass > 5 && Program.Rng.RandomLessThan(100) < 33)
+                if (oPtr.BonusArmourClass > 5 && Rng.RandomLessThan(100) < 33)
                 {
                     oPtr.BonusArmourClass--;
                 }
@@ -3723,12 +3725,12 @@ namespace AngbandOS
                 new ProjectTime(this), new ProjectGravity(this), new ProjectShard(this), new ProjectNuke(this),
                 new ProjectHellFire(this), new ProjectDisintegrate(this)
             };
-            Projectile chaosType = hurtTypes[Program.Rng.DieRoll(30) - 1];
-            if (Program.Rng.DieRoll(4) == 1)
+            Projectile chaosType = hurtTypes[Rng.DieRoll(30) - 1];
+            if (Rng.DieRoll(4) == 1)
             {
                 lineChaos = true;
             }
-            if (Program.Rng.DieRoll(6) == 1)
+            if (Rng.DieRoll(6) == 1)
             {
                 for (int dummy = 1; dummy < 10; dummy++)
                 {
@@ -3745,7 +3747,7 @@ namespace AngbandOS
                     }
                 }
             }
-            else if (Program.Rng.DieRoll(3) == 1)
+            else if (Rng.DieRoll(3) == 1)
             {
                 FireBall(chaosType, 0, 300, 8);
             }
@@ -3793,7 +3795,7 @@ namespace AngbandOS
                 Level.Monsters.DeleteMonsterByIndex(i, true);
                 if (playerCast)
                 {
-                    Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
+                    Player.TakeHit(Rng.DieRoll(4), "the strain of casting Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
@@ -3850,7 +3852,7 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedColdResistance != 0 || Player.HasColdResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedColdResistance != 0 || Player.HasColdResistance) && Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
@@ -3917,7 +3919,7 @@ namespace AngbandOS
                     if (Level.CaveValidBold(y, x))
                     {
                         Level.DeleteObject(y, x);
-                        int t = Program.Rng.RandomLessThan(200);
+                        int t = Rng.RandomLessThan(200);
                         if (t < 20)
                         {
                             cPtr.SetFeature("WallBasic");
@@ -3942,7 +3944,7 @@ namespace AngbandOS
                 MsgPrint("There is a searing blast of light!");
                 if (!Player.HasBlindnessResistance && !Player.HasLightResistance)
                 {
-                    Player.SetTimedBlindness(Player.TimedBlindness + 10 + Program.Rng.DieRoll(10));
+                    Player.SetTimedBlindness(Player.TimedBlindness + 10 + Rng.DieRoll(10));
                 }
             }
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
@@ -4433,7 +4435,7 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    if (Program.Rng.RandomLessThan(100) < 85)
+                    if (Rng.RandomLessThan(100) < 85)
                     {
                         continue;
                     }
@@ -4459,14 +4461,14 @@ namespace AngbandOS
                         continue;
                     }
                     sn++;
-                    if (Program.Rng.RandomLessThan(sn) > 0)
+                    if (Rng.RandomLessThan(sn) > 0)
                     {
                         continue;
                     }
                     sy = y;
                     sx = x;
                 }
-                switch (Program.Rng.DieRoll(3))
+                switch (Rng.DieRoll(3))
                 {
                     case 1:
                         {
@@ -4491,7 +4493,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    switch (Program.Rng.DieRoll(3))
+                    switch (Rng.DieRoll(3))
                     {
                         case 1:
                             {
@@ -4502,15 +4504,15 @@ namespace AngbandOS
                         case 2:
                             {
                                 MsgPrint("You are bashed by rubble!");
-                                damage = Program.Rng.DiceRoll(10, 4);
-                                Player.SetTimedStun(Player.TimedStun + Program.Rng.DieRoll(50));
+                                damage = Rng.DiceRoll(10, 4);
+                                Player.SetTimedStun(Player.TimedStun + Rng.DieRoll(50));
                                 break;
                             }
                         case 3:
                             {
                                 MsgPrint("You are crushed between the floor and ceiling!");
-                                damage = Program.Rng.DiceRoll(10, 4);
-                                Player.SetTimedStun(Player.TimedStun + Program.Rng.DieRoll(50));
+                                damage = Rng.DiceRoll(10, 4);
+                                Player.SetTimedStun(Player.TimedStun + Rng.DieRoll(50));
                                 break;
                             }
                     }
@@ -4569,7 +4571,7 @@ namespace AngbandOS
                                         continue;
                                     }
                                     sn++;
-                                    if (Program.Rng.RandomLessThan(sn) > 0)
+                                    if (Rng.RandomLessThan(sn) > 0)
                                     {
                                         continue;
                                     }
@@ -4579,7 +4581,7 @@ namespace AngbandOS
                             }
                             string mName = mPtr.MonsterDesc(0);
                             MsgPrint($"{mName} wails out in pain!");
-                            damage = sn != 0 ? Program.Rng.DiceRoll(4, 8) : 200;
+                            damage = sn != 0 ? Rng.DiceRoll(4, 8) : 200;
                             mPtr.SleepLevel = 0;
                             mPtr.Health -= damage;
                             if (mPtr.Health < 0)
@@ -4622,7 +4624,7 @@ namespace AngbandOS
                     {
                         bool floor = Level.GridPassable(yy, xx);
                         Level.DeleteObject(yy, xx);
-                        int t = floor ? Program.Rng.RandomLessThan(100) : 200;
+                        int t = floor ? Rng.RandomLessThan(100) : 200;
                         if (t < 20)
                         {
                             cPtr.SetFeature("WallBasic");
@@ -4684,7 +4686,7 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedLightningResistance != 0 || Player.HasLightningResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedLightningResistance != 0 || Player.HasLightningResistance) && Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Dexterity);
             }
@@ -4707,7 +4709,7 @@ namespace AngbandOS
             }
             for (int i = 0; i < n; i++)
             {
-                if (Program.Rng.RandomLessThan(prob) >= 100)
+                if (Rng.RandomLessThan(prob) >= 100)
                 {
                     continue;
                 }
@@ -4726,11 +4728,11 @@ namespace AngbandOS
                     {
                         chance = GlobalData.EnchantTable[oPtr.BonusToHit];
                     }
-                    if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
+                    if (Rng.DieRoll(1000) > chance && (!a || Rng.RandomLessThan(100) < 50))
                     {
                         oPtr.BonusToHit++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusToHit >= 0 && Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusToHit >= 0 && Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentCursed = false;
@@ -4761,11 +4763,11 @@ namespace AngbandOS
                     {
                         chance = GlobalData.EnchantTable[oPtr.BonusDamage];
                     }
-                    if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
+                    if (Rng.DieRoll(1000) > chance && (!a || Rng.RandomLessThan(100) < 50))
                     {
                         oPtr.BonusDamage++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusDamage >= 0 && Program.Rng.RandomLessThan(100) < 25)
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusDamage >= 0 && Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentCursed = false;
@@ -4796,12 +4798,12 @@ namespace AngbandOS
                     {
                         chance = GlobalData.EnchantTable[oPtr.BonusArmourClass];
                     }
-                    if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
+                    if (Rng.DieRoll(1000) > chance && (!a || Rng.RandomLessThan(100) < 50))
                     {
                         oPtr.BonusArmourClass++;
                         res = true;
                         if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusArmourClass >= 0 &&
-                            Program.Rng.RandomLessThan(100) < 25)
+                            Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
                             oPtr.IdentCursed = false;
@@ -4899,7 +4901,7 @@ namespace AngbandOS
 
         public void FireBoltOrBeam(int prob, Projectile projectile, int dir, int dam)
         {
-            if (Program.Rng.RandomLessThan(100) < prob)
+            if (Rng.RandomLessThan(100) < prob)
             {
                 FireBeam(projectile, dir, dam);
             }
@@ -4928,7 +4930,7 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedFireResistance != 0 || Player.HasFireResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedFireResistance != 0 || Player.HasFireResistance) && Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
@@ -4947,7 +4949,7 @@ namespace AngbandOS
         public bool HealMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldHeal(this), dir, Program.Rng.DiceRoll(4, 6), flg);
+            return TargetedProject(new ProjectOldHeal(this), dir, Rng.DiceRoll(4, 6), flg);
         }
 
         public bool IdentifyFully()
@@ -5082,7 +5084,7 @@ namespace AngbandOS
         public void LightLine(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectLightWeak(this), dir, Program.Rng.DiceRoll(6, 8), flg);
+            TargetedProject(new ProjectLightWeak(this), dir, Rng.DiceRoll(6, 8), flg);
         }
 
         public bool LoseAllInfo()
@@ -5143,7 +5145,7 @@ namespace AngbandOS
                 Level.Monsters.DeleteMonsterByIndex(i, true);
                 if (playerCast)
                 {
-                    Player.TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
+                    Player.TakeHit(Rng.DieRoll(3), "the strain of casting Mass Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 Player.RedrawNeeded.Set(RedrawFlag.PrHp);
@@ -5171,8 +5173,8 @@ namespace AngbandOS
             {
                 return rPtr.Index;
             }
-            int lev1 = rPtr.Level - ((Program.Rng.DieRoll(20) / Program.Rng.DieRoll(9)) + 1);
-            int lev2 = rPtr.Level + (Program.Rng.DieRoll(20) / Program.Rng.DieRoll(9)) + 1;
+            int lev1 = rPtr.Level - ((Rng.DieRoll(20) / Rng.DieRoll(9)) + 1);
+            int lev2 = rPtr.Level + (Rng.DieRoll(20) / Rng.DieRoll(9)) + 1;
             for (int i = 0; i < 1000; i++)
             {
                 int r = Level.Monsters.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5);
@@ -5263,7 +5265,7 @@ namespace AngbandOS
                 {
                     i = 1;
                 }
-                if (Program.Rng.RandomLessThan(i) == 0)
+                if (Rng.RandomLessThan(i) == 0)
                 {
                     MsgPrint("The recharge backfires, draining the rod further!");
                     if (oPtr.TypeSpecificValue < 10000)
@@ -5273,7 +5275,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    t = num * Program.Rng.DiceRoll(2, 4);
+                    t = num * Rng.DiceRoll(2, 4);
                     if (oPtr.TypeSpecificValue > t)
                     {
                         oPtr.TypeSpecificValue -= t;
@@ -5291,7 +5293,7 @@ namespace AngbandOS
                 {
                     i = 1;
                 }
-                if (Program.Rng.RandomLessThan(i) == 0)
+                if (Rng.RandomLessThan(i) == 0)
                 {
                     MsgPrint("There is a bright flash of light.");
                     if (item >= 0)
@@ -5312,7 +5314,7 @@ namespace AngbandOS
                     t = (num / (lev + 2)) + 1;
                     if (t > 0)
                     {
-                        oPtr.TypeSpecificValue += 2 + Program.Rng.DieRoll(t);
+                        oPtr.TypeSpecificValue += 2 + Rng.DieRoll(t);
                     }
                     oPtr.IdentKnown = false;
                     oPtr.IdentEmpty = false;
@@ -6231,7 +6233,7 @@ namespace AngbandOS
                 Level.CaveSetFeat(Player.MapY, Player.MapX,
                     CurDungeon.Tower ? "DownStair" : "UpStair");
             }
-            else if (Program.Rng.RandomLessThan(100) < 50)
+            else if (Rng.RandomLessThan(100) < 50)
             {
                 Level.CaveSetFeat(Player.MapY, Player.MapX, "DownStair");
             }
@@ -6266,7 +6268,7 @@ namespace AngbandOS
         public void SummonReaver()
         {
             int i;
-            int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
+            int maxReaver = (Difficulty / 50) + Rng.DieRoll(6);
             for (i = 0; i < maxReaver; i++)
             {
                 Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, Constants.SummonReaver);
@@ -6304,8 +6306,8 @@ namespace AngbandOS
                 {
                     while (true)
                     {
-                        y = Program.Rng.RandomSpread(Player.MapY, dis);
-                        x = Program.Rng.RandomSpread(Player.MapX, dis);
+                        y = Rng.RandomSpread(Player.MapY, dis);
+                        x = Rng.RandomSpread(Player.MapX, dis);
                         int d = Level.Distance(Player.MapY, Player.MapX, y, x);
                         if (d >= min && d <= dis)
                         {
@@ -6396,7 +6398,7 @@ namespace AngbandOS
                 CurrentDepth--;
                 NewLevelFlag = true;
             }
-            else if (Program.Rng.RandomLessThan(100) < 50)
+            else if (Rng.RandomLessThan(100) < 50)
             {
                 MsgPrint(upDesc);
                 DoCmdSaveGame(true);
@@ -6429,8 +6431,8 @@ namespace AngbandOS
             {
                 while (true)
                 {
-                    y = Program.Rng.RandomSpread(ny, dis);
-                    x = Program.Rng.RandomSpread(nx, dis);
+                    y = Rng.RandomSpread(ny, dis);
+                    x = Rng.RandomSpread(nx, dis);
                     if (Level.InBounds(y, x))
                     {
                         break;
@@ -6563,15 +6565,15 @@ namespace AngbandOS
         public void WallBreaker()
         {
             int dummy;
-            if (Program.Rng.DieRoll(80 + Player.Level) < 70)
+            if (Rng.DieRoll(80 + Player.Level) < 70)
             {
                 do
                 {
-                    dummy = Program.Rng.DieRoll(9);
+                    dummy = Rng.DieRoll(9);
                 } while (dummy == 5 || dummy == 0);
                 WallToMud(dummy);
             }
-            else if (Program.Rng.DieRoll(100) > 30)
+            else if (Rng.DieRoll(100) > 30)
             {
                 Earthquake(Player.MapY, Player.MapX, 1);
             }
@@ -6600,14 +6602,14 @@ namespace AngbandOS
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectKillWall(this), dir, 20 + Program.Rng.DieRoll(30), flg);
+            return TargetedProject(new ProjectKillWall(this), dir, 20 + Rng.DieRoll(30), flg);
         }
 
         public void WizardLock(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectJamDoor(this), dir, 20 + Program.Rng.DieRoll(30), flg);
+            TargetedProject(new ProjectJamDoor(this), dir, 20 + Rng.DieRoll(30), flg);
         }
 
         public void YellowSign()
@@ -6664,7 +6666,7 @@ namespace AngbandOS
                     {
                         chance = 100;
                     }
-                    if (mPtr.SleepLevel != 0 && Program.Rng.RandomLessThan(100) < chance)
+                    if (mPtr.SleepLevel != 0 && Rng.RandomLessThan(100) < chance)
                     {
                         mPtr.SleepLevel = 0;
                         if (mPtr.IsVisible)
@@ -6762,7 +6764,7 @@ namespace AngbandOS
         private bool MinusAc()
         {
             Item oPtr = null;
-            switch (Program.Rng.DieRoll(6))
+            switch (Rng.DieRoll(6))
             {
                 case 1:
                     oPtr = Player.Inventory[InventorySlot.Body];
@@ -6941,7 +6943,7 @@ namespace AngbandOS
             {
                 return;
             }
-            if (Program.Rng.DieRoll(100) > mPtr.Race.Level)
+            if (Rng.DieRoll(100) > mPtr.Race.Level)
             {
                 return;
             }
@@ -6958,8 +6960,8 @@ namespace AngbandOS
                 {
                     while (true)
                     {
-                        ny = Program.Rng.RandomSpread(Player.MapY, dis);
-                        nx = Program.Rng.RandomSpread(Player.MapX, dis);
+                        ny = Rng.RandomSpread(Player.MapY, dis);
+                        nx = Rng.RandomSpread(Player.MapX, dis);
                         int d = Level.Distance(Player.MapY, Player.MapX, ny, nx);
                         if (d >= min && d <= dis)
                         {
@@ -7079,16 +7081,16 @@ namespace AngbandOS
             {
                 temp = 1;
             }
-            if (Program.Rng.RandomLessThan(100) < temp)
+            if (Rng.RandomLessThan(100) < temp)
             {
                 MsgPrint("The door crashes open!");
-                Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
+                Level.CaveSetFeat(y, x, Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
                 PlaySound(SoundEffect.OpenDoor);
                 MovePlayer(dir, false);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             }
-            else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.Level)
+            else if (Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.Level)
             {
                 MsgPrint("The door holds firm.");
                 more = true;
@@ -7096,7 +7098,7 @@ namespace AngbandOS
             else
             {
                 MsgPrint("You are off-balance.");
-                Player.SetTimedParalysis(Player.TimedParalysis + 2 + Program.Rng.RandomLessThan(2));
+                Player.SetTimedParalysis(Player.TimedParalysis + 2 + Rng.RandomLessThan(2));
             }
             return more;
         }
@@ -7124,14 +7126,14 @@ namespace AngbandOS
                     continue;
                 }
                 // Only a 25% chance of success per set of bolts
-                if (Program.Rng.RandomLessThan(100) < 75)
+                if (Rng.RandomLessThan(100) < 75)
                 {
                     continue;
                 }
                 // Make the bolts into bolts of flame
                 MsgPrint("Your bolts are covered in a fiery aura!");
                 item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfFlame;
-                Enchant(item, Program.Rng.RandomLessThan(3) + 4,
+                Enchant(item, Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
                 // Quit after the first bolts have been upgraded
                 return;
@@ -7159,7 +7161,7 @@ namespace AngbandOS
                         // Make it a planar weapon
                         act = "seems very unstable now.";
                         item.RareItemTypeIndex = Enumerations.RareItemType.WeaponPlanarWeapon;
-                        item.TypeSpecificValue = Program.Rng.DieRoll(2);
+                        item.TypeSpecificValue = Rng.DieRoll(2);
                         break;
 
                     case 3:
@@ -7182,7 +7184,7 @@ namespace AngbandOS
 
                     default:
                         // Make it a fire or ice weapon
-                        if (Program.Rng.RandomLessThan(100) < 25)
+                        if (Rng.RandomLessThan(100) < 25)
                         {
                             act = "is covered in a fiery shield!";
                             item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfBurning;
@@ -7196,7 +7198,7 @@ namespace AngbandOS
                 }
                 // Let the player know what happened
                 MsgPrint($"Your {itemName} {act}");
-                Enchant(item, Program.Rng.RandomLessThan(3) + 4,
+                Enchant(item, Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
             }
             else
@@ -7249,7 +7251,7 @@ namespace AngbandOS
                 MsgPrint("There is a loud explosion!");
                 DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
                 MsgPrint("The dungeon collapses...");
-                Player.TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
+                Player.TakeHit(100 + Rng.DieRoll(150), "a suicidal Call the Void");
             }
         }
 
@@ -7313,18 +7315,18 @@ namespace AngbandOS
             // Reduce our health or mana
             if (useHealth)
             {
-                Player.TakeHit((cost / 2) + Program.Rng.DieRoll(cost / 2), "concentrating too hard");
+                Player.TakeHit((cost / 2) + Rng.DieRoll(cost / 2), "concentrating too hard");
             }
             else
             {
-                Player.Mana -= (cost / 2) + Program.Rng.DieRoll(cost / 2);
+                Player.Mana -= (cost / 2) + Rng.DieRoll(cost / 2);
             }
             // We'll need to redraw
             Player.RedrawNeeded.Set(RedrawFlag.PrHp);
             Player.RedrawNeeded.Set(RedrawFlag.PrMana);
             // Check to see if we were successful
-            if (Program.Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
-                (difficulty / 2) + Program.Rng.DieRoll(difficulty / 2))
+            if (Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
+                (difficulty / 2) + Rng.DieRoll(difficulty / 2))
             {
                 return true;
             }
@@ -7553,7 +7555,7 @@ namespace AngbandOS
             }
             // Artifacts can't be cursed, and normal armour has a chance to save
             string itemName = item.Description(false, 3);
-            if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) && Program.Rng.RandomLessThan(100) < 50)
+            if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) && Rng.RandomLessThan(100) < 50)
             {
                 MsgPrint($"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
             }
@@ -7563,7 +7565,7 @@ namespace AngbandOS
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifactIndex = 0;
                 item.RareItemTypeIndex = Enumerations.RareItemType.ArmourBlasted;
-                item.BonusArmourClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
+                item.BonusArmourClass = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
                 item.BonusToHit = 0;
                 item.BonusDamage = 0;
                 item.BaseArmourClass = 0;
@@ -7593,7 +7595,7 @@ namespace AngbandOS
             string itemName = item.Description(false, 3);
             // Artifacts can't be cursed, and other items have a chance to resist
             if ((item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName)) &&
-                Program.Rng.RandomLessThan(100) < 50)
+                Rng.RandomLessThan(100) < 50)
             {
                 MsgPrint(
                     $"A terrible black aura tries to surround your weapon, but your {itemName} resists the effects!");
@@ -7604,8 +7606,8 @@ namespace AngbandOS
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifactIndex = 0;
                 item.RareItemTypeIndex = Enumerations.RareItemType.WeaponShattered;
-                item.BonusToHit = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
-                item.BonusDamage = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
+                item.BonusToHit = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
+                item.BonusDamage = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
                 item.BonusArmourClass = 0;
                 item.BaseArmourClass = 0;
                 item.DamageDice = 0;
@@ -7665,14 +7667,14 @@ namespace AngbandOS
                 MsgPrint("The chest is not trapped.");
             }
             // If we made the skill roll then we disarmed it
-            else if (Program.Rng.RandomLessThan(100) < j)
+            else if (Rng.RandomLessThan(100) < j)
             {
                 MsgPrint("You have disarmed the chest.");
                 Player.GainExperience(item.TypeSpecificValue);
                 item.TypeSpecificValue = 0 - item.TypeSpecificValue;
             }
             // If we failed to disarm it there's a chance it goes off
-            else if (i > 5 && Program.Rng.DieRoll(i) > 5)
+            else if (i > 5 && Rng.DieRoll(i) > 5)
             {
                 allowAdditionalDisarmAttempts = true;
                 MsgPrint("You failed to disarm the chest.");
@@ -7717,7 +7719,7 @@ namespace AngbandOS
                 j = 2;
             }
             // Check the modified disarm skill
-            if (Program.Rng.RandomLessThan(100) < j)
+            if (Rng.RandomLessThan(100) < j)
             {
                 MsgPrint($"You have disarmed the {trapName}.");
                 Player.GainExperience(power);
@@ -7726,7 +7728,7 @@ namespace AngbandOS
                 MovePlayer(dir, true);
             }
             // We might set the trap off if we failed to disarm it
-            else if (i > 5 && Program.Rng.DieRoll(i) > 5)
+            else if (i > 5 && Rng.DieRoll(i) > 5)
             {
                 MsgPrint($"You failed to disarm the {trapName}.");
                 more = true;
@@ -7795,7 +7797,7 @@ namespace AngbandOS
             }
             // Use some mana in the attempt, even if we failed
             MsgPrint("You mana is insufficient to power the effect.");
-            Player.Mana -= Program.Rng.RandomLessThan(Player.Mana / 2);
+            Player.Mana -= Rng.RandomLessThan(Player.Mana / 2);
             Player.RedrawNeeded.Set(RedrawFlag.PrMana);
             return false;
         }
@@ -7850,7 +7852,7 @@ namespace AngbandOS
                 }
             }
             // Pick a random rumour from the list
-            int choice = Program.Rng.RandomLessThan(maxRumor);
+            int choice = Rng.RandomLessThan(maxRumor);
             char type = rumorType[choice];
             int index = rumorIndex[choice];
             // Give us the appropriate information based on the rumour's type
@@ -8217,7 +8219,7 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             Player.RedrawNeeded.Set(RedrawFlag.PrMap);
             // If we're not actively searching, then have a chance of doing it passively
-            if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
+            if (Player.SkillSearchFrequency >= 50 || 0 == Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
             {
                 Search();
             }
@@ -8291,7 +8293,7 @@ namespace AngbandOS
                     j = 2;
                 }
                 // Check if we succeeded in opening it
-                if (Program.Rng.RandomLessThan(100) < j)
+                if (Rng.RandomLessThan(100) < j)
                 {
                     MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
@@ -8460,8 +8462,8 @@ namespace AngbandOS
                     int totalDamage = 1;
                     // Get our weapon's flags to see if we need to do anything special
                     item.RefreshFlagBasedProperties();
-                    bool chaosEffect = item.Characteristics.Chaotic && Program.Rng.DieRoll(2) == 1;
-                    if (item.Characteristics.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
+                    bool chaosEffect = item.Characteristics.Chaotic && Rng.DieRoll(2) == 1;
+                    if (item.Characteristics.Vampiric || (chaosEffect && Rng.DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -8475,7 +8477,7 @@ namespace AngbandOS
                         }
                     }
                     // Vorpal weapons have a chance of a deep cut
-                    bool vorpalCut = item.Characteristics.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
+                    bool vorpalCut = item.Characteristics.Vorpal && Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
                     if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands())
                     {
@@ -8509,8 +8511,8 @@ namespace AngbandOS
                             // high level or we fail a chance roll
                             do
                             {
-                                martialArtsAttack = GlobalData.MaBlows[Program.Rng.DieRoll(Constants.MaxMa) - 1];
-                            } while (martialArtsAttack.MinLevel > Player.Level || Program.Rng.DieRoll(Player.Level) < martialArtsAttack.Chance);
+                                martialArtsAttack = GlobalData.MaBlows[Rng.DieRoll(Constants.MaxMa) - 1];
+                            } while (martialArtsAttack.MinLevel > Player.Level || Rng.DieRoll(Player.Level) < martialArtsAttack.Chance);
                             // We've chosen an attack, use it if it's better than the previous
                             // choice (unless we're stunned or confused in which case we're stuck
                             // with the weakest attack type
@@ -8524,7 +8526,7 @@ namespace AngbandOS
                             }
                         }
                         // Get damage from the martial arts attack
-                        totalDamage = Program.Rng.DiceRoll(martialArtsAttack.Dd, martialArtsAttack.Ds);
+                        totalDamage = Rng.DiceRoll(martialArtsAttack.Dd, martialArtsAttack.Ds);
                         // If it was a knee attack and the monster is male, hit it in the groin
                         if (martialArtsAttack.Effect == Constants.MaKnee)
                         {
@@ -8557,23 +8559,23 @@ namespace AngbandOS
                         {
                             if (martialArtsAttack.Effect != 0)
                             {
-                                stunEffect = (martialArtsAttack.Effect / 2) + Program.Rng.DieRoll(martialArtsAttack.Effect / 2);
+                                stunEffect = (martialArtsAttack.Effect / 2) + Rng.DieRoll(martialArtsAttack.Effect / 2);
                             }
                             MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                         }
                         // It might be a critical hit
-                        totalDamage = PlayerCriticalMelee(Player.Level * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
+                        totalDamage = PlayerCriticalMelee(Player.Level * Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                         // Make a groin attack into a stunning attack
                         if (specialEffect == Constants.MaKnee && totalDamage + Player.DamageBonus < monster.Health)
                         {
                             MsgPrint($"{monsterName} moans in agony!");
-                            stunEffect = 7 + Program.Rng.DieRoll(13);
+                            stunEffect = 7 + Rng.DieRoll(13);
                             resistStun /= 3;
                         }
                         // Slow if we had a knee attack
                         else if (specialEffect == Constants.MaSlow && totalDamage + Player.DamageBonus < monster.Health)
                         {
-                            if ((race.Flags1 & MonsterFlag1.Unique) == 0 && Program.Rng.DieRoll(Player.Level) > race.Level &&
+                            if ((race.Flags1 & MonsterFlag1.Unique) == 0 && Rng.DieRoll(Player.Level) > race.Level &&
                                 monster.Speed > 60)
                             {
                                 MsgPrint($"{monsterName} starts limping slower.");
@@ -8583,7 +8585,7 @@ namespace AngbandOS
                         // Stun if we had a stunning attack
                         if (stunEffect != 0 && totalDamage + Player.DamageBonus < monster.Health)
                         {
-                            if (Player.Level > Program.Rng.DieRoll(race.Level + resistStun + 10))
+                            if (Player.Level > Rng.DieRoll(race.Level + resistStun + 10))
                             {
                                 MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
                                 monster.StunLevel += stunEffect;
@@ -8594,7 +8596,7 @@ namespace AngbandOS
                     else if (item.BaseItemCategory != null)
                     {
                         // Roll damage for the weapon
-                        totalDamage = Program.Rng.DiceRoll(item.DamageDice, item.DamageDiceSides);
+                        totalDamage = Rng.DiceRoll(item.DamageDice, item.DamageDiceSides);
                         totalDamage = item.AdjustDamageForMonsterType(totalDamage, monster);
                         // Extra damage for backstabbing
                         if (backstab)
@@ -8606,8 +8608,8 @@ namespace AngbandOS
                             totalDamage = 3 * totalDamage / 2;
                         }
                         // We might need to do an earthquake
-                        if ((Player.HasQuakeWeapon && (totalDamage > 50 || Program.Rng.DieRoll(7) == 1)) ||
-                            (chaosEffect && Program.Rng.DieRoll(250) == 1))
+                        if ((Player.HasQuakeWeapon && (totalDamage > 50 || Rng.DieRoll(7) == 1)) ||
+                            (chaosEffect && Rng.DieRoll(250) == 1))
                         {
                             doQuake = true;
                             chaosEffect = false;
@@ -8622,7 +8624,7 @@ namespace AngbandOS
                             do
                             {
                                 totalDamage += stepK;
-                            } while (Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade
+                            } while (Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade
                                          ? 2
                                          : 4) == 1);
                         }
@@ -8660,7 +8662,7 @@ namespace AngbandOS
                         if (drainResult > 0)
                         {
                             // Draining heals us
-                            int drainHeal = Program.Rng.DiceRoll(4, drainResult / 6);
+                            int drainHeal = Rng.DiceRoll(4, drainResult / 6);
                             // We have a maximum drain per round to prevent it from getting out of
                             // hand if we have multiple attacks
                             if (drainLeft != 0)
@@ -8678,7 +8680,7 @@ namespace AngbandOS
                         }
                     }
                     // We might have a confusing touch (or have this effect from a chaos blade)
-                    if (Player.HasConfusingTouch || (chaosEffect && Program.Rng.DieRoll(10) != 1))
+                    if (Player.HasConfusingTouch || (chaosEffect && Rng.DieRoll(10) != 1))
                     {
                         // If it wasn't from a chaos blade, cancel the confusing touch and let us know
                         Player.HasConfusingTouch = false;
@@ -8696,7 +8698,7 @@ namespace AngbandOS
                             MsgPrint($"{monsterName} is unaffected.");
                         }
                         // Even if not immune, the monster might resist
-                        else if (Program.Rng.RandomLessThan(100) < race.Level)
+                        else if (Rng.RandomLessThan(100) < race.Level)
                         {
                             MsgPrint($"{monsterName} is unaffected.");
                         }
@@ -8704,11 +8706,11 @@ namespace AngbandOS
                         else
                         {
                             MsgPrint($"{monsterName} appears confused.");
-                            monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(Player.Level) / 5);
+                            monster.ConfusionLevel += 10 + (Rng.RandomLessThan(Player.Level) / 5);
                         }
                     }
                     // A chaos blade might teleport the monster away
-                    else if (chaosEffect && Program.Rng.DieRoll(2) == 1)
+                    else if (chaosEffect && Rng.DieRoll(2) == 1)
                     {
                         MsgPrint($"{monsterName} disappears!");
                         monster.TeleportAway(this, 50);
@@ -8717,7 +8719,7 @@ namespace AngbandOS
                         break;
                     }
                     // a chaos blade might polymorph the monsterf
-                    else if (chaosEffect && Level.GridPassable(y, x) && Program.Rng.DieRoll(90) > race.Level)
+                    else if (chaosEffect && Level.GridPassable(y, x) && Rng.DieRoll(90) > race.Level)
                     {
                         // Can't polymorph a unique or a guardian
                         if (!((race.Flags1 & MonsterFlag1.Unique) != 0 || (race.Flags4 & MonsterFlag4.BreatheChaos) != 0 ||
@@ -8777,7 +8779,7 @@ namespace AngbandOS
         /// <returns> True if the player hit the monster, false otherwise </returns>
         public bool PlayerCheckRangedHitOnMonster(int attackBonus, int armourClass, bool monsterIsVisible)
         {
-            int k = Program.Rng.RandomLessThan(100);
+            int k = Rng.RandomLessThan(100);
             // Always a 5% chance to hit and a 5% chance to miss
             if (k < 10)
             {
@@ -8794,7 +8796,7 @@ namespace AngbandOS
                 attackBonus = (attackBonus + 1) / 2;
             }
             // Return the hit or miss
-            return Program.Rng.RandomLessThan(attackBonus) >= armourClass * 3 / 4;
+            return Rng.RandomLessThan(attackBonus) >= armourClass * 3 / 4;
         }
 
         /// <summary>
@@ -8808,9 +8810,9 @@ namespace AngbandOS
         {
             // Chance of a critical is based on weight, level, and plusses
             int i = weight + ((Player.AttackBonus + plus) * 4) + (Player.Level * 2);
-            if (Program.Rng.DieRoll(5000) <= i)
+            if (Rng.DieRoll(5000) <= i)
             {
-                int k = weight + Program.Rng.DieRoll(500);
+                int k = weight + Rng.DieRoll(500);
                 if (k < 500)
                 {
                     MsgPrint("It was a good hit!");
@@ -8836,7 +8838,7 @@ namespace AngbandOS
         /// <param name="direction"> The direction the player is aiming </param>
         public void RingOfSetPower(int direction)
         {
-            switch (Program.Rng.DieRoll(10))
+            switch (Rng.DieRoll(10))
             {
                 case 1:
                 case 2:
@@ -8978,7 +8980,7 @@ namespace AngbandOS
                 for (int x = Player.MapX - 1; x <= Player.MapX + 1; x++)
                 {
                     // Check if we succeed
-                    if (Program.Rng.RandomLessThan(100) < chance)
+                    if (Rng.RandomLessThan(100) < chance)
                     {
                         // If there's a trap, then find it
                         GridTile tile = Level.Grid[y][x];
@@ -9116,7 +9118,7 @@ namespace AngbandOS
             // Trees are easy to chop down
             if (tile.FeatureType.Category == FloorTileTypeCategory.Tree)
             {
-                if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
+                if (Player.SkillDigging > 40 + Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
                 {
                     MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
                 }
@@ -9129,7 +9131,7 @@ namespace AngbandOS
             // Pillars are a bit easier than walls
             else if (tile.FeatureType.Name == "Pillar")
             {
-                if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
+                if (Player.SkillDigging > 40 + Rng.RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
                 {
                     MsgPrint("You have broken down the pillar.");
                 }
@@ -9152,7 +9154,7 @@ namespace AngbandOS
             // It's a wall, so we tunnel normally
             else if (tile.FeatureType.Name.Contains("Wall"))
             {
-                if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
+                if (Player.SkillDigging > 40 + Rng.RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
                 {
                     MsgPrint("You have finished the tunnel.");
                 }
@@ -9179,11 +9181,11 @@ namespace AngbandOS
                 // Magma needs a higher tunneling skill than quartz
                 if (isMagma)
                 {
-                    okay = Player.SkillDigging > 20 + Program.Rng.RandomLessThan(800);
+                    okay = Player.SkillDigging > 20 + Rng.RandomLessThan(800);
                 }
                 else
                 {
-                    okay = Player.SkillDigging > 10 + Program.Rng.RandomLessThan(400);
+                    okay = Player.SkillDigging > 10 + Rng.RandomLessThan(400);
                 }
                 // Do the actual tunnelling
                 if (okay && RemoveTileViaTunnelling(y, x))
@@ -9213,11 +9215,11 @@ namespace AngbandOS
             // Rubble is easy to tunnel through
             else if (tile.FeatureType.Name == "Rubble")
             {
-                if (Player.SkillDigging > Program.Rng.RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
+                if (Player.SkillDigging > Rng.RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
                 {
                     MsgPrint("You have removed the rubble.");
                     // 10% chance of finding something
-                    if (Program.Rng.RandomLessThan(100) < 10)
+                    if (Rng.RandomLessThan(100) < 10)
                     {
                         Level.PlaceObject(y, x, false, false);
                         if (Level.PlayerCanSeeBold(y, x))
@@ -9261,7 +9263,7 @@ namespace AngbandOS
             Projectile projectile;
             string projectileDescription;
             // Default to being randomly fire (66% chance) or cold (33% chance)
-            if (Program.Rng.DieRoll(3) == 1)
+            if (Rng.DieRoll(3) == 1)
             {
                 projectile = new ProjectCold(this);
                 projectileDescription = "cold";
@@ -9317,7 +9319,7 @@ namespace AngbandOS
                     {
                         MsgPrint("RAAAGH!");
                         Player.SetTimedFear(0);
-                        Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(playerLevel));
+                        Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Rng.DieRoll(playerLevel));
                         Player.RestoreHealth(30);
                     }
                     break;
@@ -9387,7 +9389,7 @@ namespace AngbandOS
                     {
                         MsgPrint("Raaagh!");
                         Player.SetTimedFear(0);
-                        Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(playerLevel));
+                        Player.SetTimedSuperheroism(Player.TimedSuperheroism + 10 + Rng.DieRoll(playerLevel));
                         Player.RestoreHealth(30);
                     }
                     break;
@@ -9488,13 +9490,13 @@ namespace AngbandOS
                         }
                         MsgPrint("You cast a magic missile.");
                         FireBoltOrBeam(10, new ProjectMissile(this),
-                            direction, Program.Rng.DiceRoll(3 + ((playerLevel - 1) / 5), 4));
+                            direction, Rng.DiceRoll(3 + ((playerLevel - 1) / 5), 4));
                     }
                     break;
                 // Draconians can breathe an element based on their class and level
                 case RaceId.Draconian:
                     // Chance of replacing the default fire/cold element with a special one
-                    if (Program.Rng.DieRoll(100) < Player.Level)
+                    if (Rng.DieRoll(100) < Player.Level)
                     {
                         switch (Player.ProfessionIndex)
                         {
@@ -9502,7 +9504,7 @@ namespace AngbandOS
                             case CharacterClass.Ranger:
                             case CharacterClass.Druid:
                             case CharacterClass.ChosenOne:
-                                if (Program.Rng.DieRoll(3) == 1)
+                                if (Rng.DieRoll(3) == 1)
                                 {
                                     projectile = new ProjectMissile(this);
                                     projectileDescription = "the elements";
@@ -9518,7 +9520,7 @@ namespace AngbandOS
                             case CharacterClass.WarriorMage:
                             case CharacterClass.HighMage:
                             case CharacterClass.Channeler:
-                                if (Program.Rng.DieRoll(3) == 1)
+                                if (Rng.DieRoll(3) == 1)
                                 {
                                     projectile = new ProjectMana(this);
                                     projectileDescription = "mana";
@@ -9532,7 +9534,7 @@ namespace AngbandOS
 
                             case CharacterClass.Fanatic:
                             case CharacterClass.Cultist:
-                                if (Program.Rng.DieRoll(3) != 1)
+                                if (Rng.DieRoll(3) != 1)
                                 {
                                     projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
@@ -9545,7 +9547,7 @@ namespace AngbandOS
                                 break;
 
                             case CharacterClass.Monk:
-                                if (Program.Rng.DieRoll(3) != 1)
+                                if (Rng.DieRoll(3) != 1)
                                 {
                                     projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
@@ -9559,7 +9561,7 @@ namespace AngbandOS
 
                             case CharacterClass.Mindcrafter:
                             case CharacterClass.Mystic:
-                                if (Program.Rng.DieRoll(3) != 1)
+                                if (Rng.DieRoll(3) != 1)
                                 {
                                     projectile = new ProjectConfusion(this);
                                     projectileDescription = "confusion";
@@ -9573,7 +9575,7 @@ namespace AngbandOS
 
                             case CharacterClass.Priest:
                             case CharacterClass.Paladin:
-                                if (Program.Rng.DieRoll(3) == 1)
+                                if (Rng.DieRoll(3) == 1)
                                 {
                                     projectile = new ProjectHellFire(this);
                                     projectileDescription = "hellfire";
@@ -9586,7 +9588,7 @@ namespace AngbandOS
                                 break;
 
                             case CharacterClass.Rogue:
-                                if (Program.Rng.DieRoll(3) == 1)
+                                if (Rng.DieRoll(3) == 1)
                                 {
                                     projectile = new ProjectDark(this);
                                     projectileDescription = "darkness";
@@ -9646,7 +9648,7 @@ namespace AngbandOS
                 case RaceId.Golem:
                     if (CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
                     {
-                        Player.SetTimedStoneskin(Player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
+                        Player.SetTimedStoneskin(Player.TimedStoneskin + Rng.DieRoll(20) + 30);
                     }
                     break;
                 // Skeletons and zombies can restore their life energy
@@ -9675,7 +9677,7 @@ namespace AngbandOS
                             break;
                         }
                         MsgPrint("You grin and bare your fangs...");
-                        int dummy = playerLevel + (Program.Rng.DieRoll(playerLevel) * Math.Max(1, playerLevel / 10));
+                        int dummy = playerLevel + (Rng.DieRoll(playerLevel) * Math.Max(1, playerLevel / 10));
                         if (DrainLife(direction, dummy))
                         {
                             if (Player.Food < Constants.PyFoodFull)
@@ -9774,7 +9776,7 @@ namespace AngbandOS
                     chance = 2;
                 }
                 // See if we succeed
-                if (Program.Rng.RandomLessThan(100) < chance)
+                if (Rng.RandomLessThan(100) < chance)
                 {
                     MsgPrint("You have picked the lock.");
                     Level.CaveSetFeat(y, x, "OpenDoor");
@@ -9808,7 +9810,7 @@ namespace AngbandOS
         private bool PlayerCheckHitOnMonster(int power, int armourClass, bool isVisible)
         {
             // Always have a 5% chance to hit or miss
-            int roll = Program.Rng.RandomLessThan(100);
+            int roll = Rng.RandomLessThan(100);
             if (roll < 10)
             {
                 return roll < 5;
@@ -9823,7 +9825,7 @@ namespace AngbandOS
                 power = (power + 1) / 2;
             }
             // Work out whether we hit or not
-            return Program.Rng.RandomLessThan(power) >= armourClass * 3 / 4;
+            return Rng.RandomLessThan(power) >= armourClass * 3 / 4;
         }
 
         /// <summary>
@@ -9836,9 +9838,9 @@ namespace AngbandOS
         private int PlayerCriticalMelee(int weight, int plus, int damage)
         {
             int i = weight + ((Player.AttackBonus + plus) * 5) + (Player.Level * 3);
-            if (Program.Rng.DieRoll(5000) <= i)
+            if (Rng.DieRoll(5000) <= i)
             {
-                int k = weight + Program.Rng.DieRoll(650);
+                int k = weight + Rng.DieRoll(650);
                 if (k < 400)
                 {
                     MsgPrint("It was a good hit!");
@@ -9895,7 +9897,7 @@ namespace AngbandOS
                 PlaySound(SoundEffect.MeleeHit);
                 MsgPrint($"You hit {monsterName} with your {attackDescription}.");
                 // Roll the damage, with possible critical damage
-                int damage = Program.Rng.DiceRoll(damageDice, damageSides);
+                int damage = Rng.DiceRoll(damageDice, damageSides);
                 damage = PlayerCriticalMelee(effectiveWeight, Player.AttackBonus, damage);
                 damage += Player.DamageBonus;
                 // Can't have negative damage
@@ -9981,7 +9983,7 @@ namespace AngbandOS
                         {
                             MsgPrint("You fell through a trap door!");
                             // Trap doors do 2d8 fall damage
-                            damage = Program.Rng.DiceRoll(2, 8);
+                            damage = Rng.DiceRoll(2, 8);
                             name = "a trap door";
                             Player.TakeHit(damage, name);
                             // Even if we survived, we need a new level
@@ -10014,7 +10016,7 @@ namespace AngbandOS
                         {
                             MsgPrint("You fell into a pit!");
                             // Pits do 2d6 fall damage
-                            damage = Program.Rng.DiceRoll(2, 6);
+                            damage = Rng.DiceRoll(2, 6);
                             name = "a pit trap";
                             Player.TakeHit(damage, name);
                         }
@@ -10032,14 +10034,14 @@ namespace AngbandOS
                             MsgPrint("You fall into a spiked pit!");
                             name = "a pit trap";
                             // A pit does 2d6 fall damage
-                            damage = Program.Rng.DiceRoll(2, 6);
+                            damage = Rng.DiceRoll(2, 6);
                             // 50% chance of doing double damage plus bleeding
-                            if (Program.Rng.RandomLessThan(100) < 50)
+                            if (Rng.RandomLessThan(100) < 50)
                             {
                                 MsgPrint("You are impaled!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
+                                Player.SetTimedBleeding(Player.TimedBleeding + Rng.DieRoll(damage));
                             }
                             Player.TakeHit(damage, name);
                         }
@@ -10056,28 +10058,28 @@ namespace AngbandOS
                         {
                             MsgPrint("You fall into a spiked pit!");
                             // A pit does 2d6 fall damage
-                            damage = Program.Rng.DiceRoll(2, 6);
+                            damage = Rng.DiceRoll(2, 6);
                             name = "a pit trap";
                             // 50% chance of doing double damage plus bleeding plus poison
-                            if (Program.Rng.RandomLessThan(100) < 50)
+                            if (Rng.RandomLessThan(100) < 50)
                             {
                                 MsgPrint("You are impaled on poisonous spikes!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
+                                Player.SetTimedBleeding(Player.TimedBleeding + Rng.DieRoll(damage));
                                 // Hagarg Ryonis can save us from the poison
                                 if (Player.HasPoisonResistance || Player.TimedPoisonResistance != 0)
                                 {
                                     MsgPrint("The poison does not affect you!");
                                 }
-                                else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                                else if (Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
                                 else
                                 {
                                     damage *= 2;
-                                    Player.SetTimedPoison(Player.TimedPoison + Program.Rng.DieRoll(damage));
+                                    Player.SetTimedPoison(Player.TimedPoison + Rng.DieRoll(damage));
                                 }
                             }
                             Player.TakeHit(damage, name);
@@ -10091,18 +10093,18 @@ namespace AngbandOS
                         tile.TileFlags.Clear(GridTile.PlayerMemorised);
                         Level.RevertTileToBackground(Player.MapY, Player.MapX);
                         // Summon 1d3+2 monsters
-                        int num = 2 + Program.Rng.DieRoll(3);
+                        int num = 2 + Rng.DieRoll(3);
                         for (int i = 0; i < num; i++)
                         {
                             Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, 0);
                         }
                         // Have a chance of also cursing the player
-                        if (Difficulty > Program.Rng.DieRoll(100))
+                        if (Difficulty > Rng.DieRoll(100))
                         {
                             do
                             {
                                 ActivateDreadCurse();
-                            } while (Program.Rng.DieRoll(6) == 1);
+                            } while (Rng.DieRoll(6) == 1);
                         }
                         break;
                     }
@@ -10117,7 +10119,7 @@ namespace AngbandOS
                     {
                         // Do 4d6 fire damage
                         MsgPrint("You are enveloped in flames!");
-                        damage = Program.Rng.DiceRoll(4, 6);
+                        damage = Rng.DiceRoll(4, 6);
                         FireDam(damage, "a fire trap");
                         break;
                     }
@@ -10125,7 +10127,7 @@ namespace AngbandOS
                     {
                         // Do 4d6 acid damage
                         MsgPrint("You are splashed with acid!");
-                        damage = Program.Rng.DiceRoll(4, 6);
+                        damage = Rng.DiceRoll(4, 6);
                         AcidDam(damage, "an acid trap");
                         break;
                     }
@@ -10136,9 +10138,9 @@ namespace AngbandOS
                         {
                             MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus slow
-                            damage = Program.Rng.DiceRoll(1, 4);
+                            damage = Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, name);
-                            Player.SetTimedSlow(Player.TimedSlow + Program.Rng.RandomLessThan(20) + 20);
+                            Player.SetTimedSlow(Player.TimedSlow + Rng.RandomLessThan(20) + 20);
                         }
                         else
                         {
@@ -10153,7 +10155,7 @@ namespace AngbandOS
                         {
                             MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus strength drain
-                            damage = Program.Rng.DiceRoll(1, 4);
+                            damage = Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
                             Player.TryDecreasingAbilityScore(Ability.Strength);
                         }
@@ -10170,7 +10172,7 @@ namespace AngbandOS
                         {
                             MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus dexterity drain
-                            damage = Program.Rng.DiceRoll(1, 4);
+                            damage = Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
                             Player.TryDecreasingAbilityScore(Ability.Dexterity);
                         }
@@ -10187,7 +10189,7 @@ namespace AngbandOS
                         {
                             MsgPrint("A small dart hits you!");
                             // Do 1d4 damage plus constitution drain
-                            damage = Program.Rng.DiceRoll(1, 4);
+                            damage = Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, "a dart trap");
                             Player.TryDecreasingAbilityScore(Ability.Constitution);
                         }
@@ -10203,7 +10205,7 @@ namespace AngbandOS
                         MsgPrint("A black gas surrounds you!");
                         if (!Player.HasBlindnessResistance)
                         {
-                            Player.SetTimedBlindness(Player.TimedBlindness + Program.Rng.RandomLessThan(50) + 25);
+                            Player.SetTimedBlindness(Player.TimedBlindness + Rng.RandomLessThan(50) + 25);
                         }
                         break;
                     }
@@ -10213,7 +10215,7 @@ namespace AngbandOS
                         MsgPrint("A gas of scintillating colours surrounds you!");
                         if (!Player.HasConfusionResistance)
                         {
-                            Player.SetTimedConfusion(Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 10);
+                            Player.SetTimedConfusion(Player.TimedConfusion + Rng.RandomLessThan(20) + 10);
                         }
                         break;
                     }
@@ -10224,13 +10226,13 @@ namespace AngbandOS
                         if (!Player.HasPoisonResistance && Player.TimedPoisonResistance == 0)
                         {
                             // Hagarg Ryonis may save you from the poison
-                            if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                            if (Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
                                 MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else
                             {
-                                Player.SetTimedPoison(Player.TimedPoison + Program.Rng.RandomLessThan(20) + 10);
+                                Player.SetTimedPoison(Player.TimedPoison + Rng.RandomLessThan(20) + 10);
                             }
                         }
                         break;
@@ -10241,7 +10243,7 @@ namespace AngbandOS
                         MsgPrint("A strange white mist surrounds you!");
                         if (!Player.HasFreeAction)
                         {
-                            Player.SetTimedParalysis(Player.TimedParalysis + Program.Rng.RandomLessThan(10) + 5);
+                            Player.SetTimedParalysis(Player.TimedParalysis + Rng.RandomLessThan(10) + 5);
                         }
                         break;
                     }
@@ -10261,7 +10263,7 @@ namespace AngbandOS
             {
                 if (!Player.HasFireImmunity)
                 {
-                    auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
+                    auraDamage = Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                     string auraDam = monster.MonsterDesc(0x88);
                     MsgPrint("You are suddenly very hot!");
                     if (Player.TimedFireResistance != 0)
@@ -10280,7 +10282,7 @@ namespace AngbandOS
             // If we have a lightning aura, apply it
             if ((race.Flags2 & MonsterFlag2.LightningAura) != 0 && !Player.HasLightningImmunity)
             {
-                auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
+                auraDamage = Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.MonsterDesc(0x88);
                 if (Player.TimedLightningResistance != 0)
                 {
@@ -10305,7 +10307,7 @@ namespace AngbandOS
         private bool TrapCheckHitOnPlayer(int attackStrength)
         {
             // Always a 5% chance to hit and 5% chance to miss
-            int k = Program.Rng.RandomLessThan(100);
+            int k = Rng.RandomLessThan(100);
             if (k < 10)
             {
                 return k < 5;
@@ -10317,7 +10319,7 @@ namespace AngbandOS
             }
             // Roll for the attack
             int armourClass = Player.BaseArmourClass + Player.ArmourClassBonus;
-            return Program.Rng.DieRoll(attackStrength) > armourClass * 3 / 4;
+            return Rng.DieRoll(attackStrength) > armourClass * 3 / 4;
         }
 
         // Artificial Intelligence

@@ -20,7 +20,7 @@ namespace AngbandOS.Spells.Tarot
             saveGame.MsgPrint("You concentrate on several images at once...");
             for (int dummy = 0; dummy < 3 + (saveGame.Player.Level / 10); dummy++)
             {
-                if (Program.Rng.DieRoll(10) > 3)
+                if (saveGame.Rng.DieRoll(10) > 3)
                 {
                     if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level,
                         Constants.SummonNoUniques, false))

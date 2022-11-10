@@ -17,7 +17,7 @@ namespace AngbandOS.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You concentrate on the image of a hound...");
-            if (Program.Rng.DieRoll(5) > 2)
+            if (saveGame.Rng.DieRoll(5) > 2)
             {
                 if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonHound,
                     true))

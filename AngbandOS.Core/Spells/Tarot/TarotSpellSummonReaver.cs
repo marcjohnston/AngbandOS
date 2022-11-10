@@ -17,7 +17,7 @@ namespace AngbandOS.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You concentrate on the image of a Black Reaver...");
-            if (Program.Rng.DieRoll(10) > 3)
+            if (saveGame.Rng.DieRoll(10) > 3)
             {
                 if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonReaver,
                     true))

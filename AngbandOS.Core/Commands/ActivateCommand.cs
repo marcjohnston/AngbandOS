@@ -63,12 +63,12 @@ namespace AngbandOS.Commands
             }
             chance -= itemLevel > 50 ? 50 : itemLevel;
             // Always give a slight chance of success
-            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            if (chance < Constants.UseDevice && saveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
             {
                 chance = Constants.UseDevice;
             }
             // If we fail our use item roll just tell us and quit
-            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+            if (chance < Constants.UseDevice || saveGame.Rng.DieRoll(chance) < Constants.UseDevice)
             {
                 saveGame.MsgPrint("You failed to activate it properly.");
                 return;
@@ -97,8 +97,8 @@ namespace AngbandOS.Commands
                     case FixedArtifactId.StarEssenceOfPolaris:
                         {
                             saveGame.MsgPrint("The essence wells with clear light...");
-                            saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(10) + 10;
+                            saveGame.LightArea(saveGame.Rng.DiceRoll(2, 15), 3);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(10) + 10;
                             break;
                         }
                     // Star essence of Xoth lights and maps the area
@@ -106,8 +106,8 @@ namespace AngbandOS.Commands
                         {
                             saveGame.MsgPrint("The essence shines brightly...");
                             saveGame.Level.MapArea();
-                            saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            saveGame.LightArea(saveGame.Rng.DiceRoll(2, 15), 3);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     // Shining Trapezohedron lights the entire level and recalls us, but drains
@@ -117,7 +117,7 @@ namespace AngbandOS.Commands
                             saveGame.MsgPrint("The gemstone flashes bright red!");
                             saveGame.Level.WizLight();
                             saveGame.MsgPrint("The gemstone drains your vitality...");
-                            saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+                            saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
                             saveGame.DetectTraps();
                             saveGame.DetectDoors();
                             saveGame.DetectStairs();
@@ -125,7 +125,7 @@ namespace AngbandOS.Commands
                             {
                                 saveGame.Player.ToggleRecall();
                             }
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(20) + 20;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(20) + 20;
                             break;
                         }
                     // Amulet of Lobon protects us from evil
@@ -133,8 +133,8 @@ namespace AngbandOS.Commands
                         {
                             saveGame.MsgPrint("The amulet lets out a shrill wail...");
                             int k = 3 * saveGame.Player.Level;
-                            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+                            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + saveGame.Rng.DieRoll(25) + k);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(225) + 225;
                             break;
                         }
                     // Amulet of Abdul Alhazred dispels evil
@@ -142,7 +142,7 @@ namespace AngbandOS.Commands
                         {
                             saveGame.MsgPrint("The amulet floods the area with goodness...");
                             saveGame.DispelEvil(saveGame.Player.Level * 5);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     // Ring of Magic has a djinn in it that drains life from an opponent
@@ -155,7 +155,7 @@ namespace AngbandOS.Commands
                             }
                             if (saveGame.DrainLife(dir, 100))
                             {
-                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
+                                item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(100) + 100;
                             }
                             break;
                         }
@@ -165,13 +165,13 @@ namespace AngbandOS.Commands
                             saveGame.MsgPrint("The ring glows brightly...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
-                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
+                                saveGame.Player.SetTimedHaste(saveGame.Rng.DieRoll(75) + 75);
                             }
                             else
                             {
                                 saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                             }
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(150) + 150;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(150) + 150;
                             break;
                         }
                     // Ring of Elemental Fire casts a fireball
@@ -183,7 +183,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBall(new ProjectFire(saveGame), dir, 120, 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(225) + 225;
                             break;
                         }
                     // Ring of Elemental Ice casts a coldball
@@ -195,7 +195,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBall(new ProjectCold(saveGame), dir, 200, 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(325) + 325;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(325) + 325;
                             break;
                         }
                     // Ring of Elemental Lightning casts a lightning ball
@@ -207,7 +207,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBall(new ProjectElec(saveGame), dir, 250, 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(425) + 425;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(425) + 425;
                             break;
                         }
                     // Ring of Set has a random effect
@@ -219,7 +219,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.RingOfSetPower(dir);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     // Razorback gives you a point-blank lightning ball
@@ -244,14 +244,14 @@ namespace AngbandOS.Commands
                             saveGame.FireBall(new ProjectMissile(saveGame), dir, 300, 4);
                             saveGame.MsgPrint("Your armor glows many colors...");
                             saveGame.Player.SetTimedFear(0);
-                            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + saveGame.Rng.DieRoll(50) + 50);
                             saveGame.Player.RestoreHealth(30);
-                            saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + Program.Rng.DieRoll(50) + 50);
-                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(50) + 50);
-                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(50) + 50);
-                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(50) + 50);
-                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(50) + 50);
-                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + saveGame.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + saveGame.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + saveGame.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + saveGame.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + saveGame.Rng.DieRoll(50) + 50);
+                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + saveGame.Rng.DieRoll(50) + 50);
                             item.RechargeTimeLeft = 400;
                             break;
                         }
@@ -274,7 +274,7 @@ namespace AngbandOS.Commands
                             saveGame.Player.SetTimedStun(0);
                             saveGame.Player.SetTimedConfusion(0);
                             saveGame.Player.SetTimedBlindness(0);
-                            saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
+                            saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + saveGame.Rng.DieRoll(25) + 25);
                             saveGame.Player.RestoreHealth(777);
                             item.RechargeTimeLeft = 300;
                             break;
@@ -309,7 +309,7 @@ namespace AngbandOS.Commands
                             saveGame.MsgPrint("Your helm glows bright white...");
                             saveGame.MsgPrint("An image forms in your mind...");
                             saveGame.DetectAll();
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(55) + 55;
                             break;
                         }
                     // Sun Crown heals
@@ -326,11 +326,11 @@ namespace AngbandOS.Commands
                     case FixedArtifactId.CloakOfBarzai:
                         {
                             saveGame.MsgPrint("Your cloak glows many colours...");
-                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
-                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
-                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
-                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
-                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + saveGame.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + saveGame.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + saveGame.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + saveGame.Rng.DieRoll(20) + 20);
+                            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + saveGame.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = 111;
                             break;
                         }
@@ -375,7 +375,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBolt(new ProjectMissile(saveGame), dir,
-                                Program.Rng.DiceRoll(2, 6));
+                                saveGame.Rng.DiceRoll(2, 6));
                             item.RechargeTimeLeft = 2;
                             break;
                         }
@@ -387,8 +387,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectFire(saveGame), dir, Program.Rng.DiceRoll(9, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
+                            saveGame.FireBolt(new ProjectFire(saveGame), dir, saveGame.Rng.DiceRoll(9, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(8) + 8;
                             break;
                         }
                     // Ghouls shoot cold bolts
@@ -399,8 +399,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectCold(saveGame), dir, Program.Rng.DiceRoll(6, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
+                            saveGame.FireBolt(new ProjectCold(saveGame), dir, saveGame.Rng.DiceRoll(6, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(7) + 7;
                             break;
                         }
                     // White Spark shoot lightning bolts
@@ -411,8 +411,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(4, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
+                            saveGame.FireBolt(new ProjectElec(saveGame), dir, saveGame.Rng.DiceRoll(4, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(6) + 6;
                             break;
                         }
                     // The Dead shoot acid bolts
@@ -423,8 +423,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectAcid(saveGame), dir, Program.Rng.DiceRoll(5, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
+                            saveGame.FireBolt(new ProjectAcid(saveGame), dir, saveGame.Rng.DiceRoll(5, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(5) + 5;
                             break;
                         }
                     // Cesti shoot arrows
@@ -436,7 +436,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBolt(new ProjectArrow(saveGame), dir, 150);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(90) + 90;
                             break;
                         }
                     // Boots haste you
@@ -445,7 +445,7 @@ namespace AngbandOS.Commands
                             saveGame.MsgPrint("A wind swirls around your boots...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
-                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
+                                saveGame.Player.SetTimedHaste(saveGame.Rng.DieRoll(20) + 20);
                             }
                             else
                             {
@@ -471,8 +471,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectFire(saveGame), dir, Program.Rng.DiceRoll(9, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
+                            saveGame.FireBolt(new ProjectFire(saveGame), dir, saveGame.Rng.DiceRoll(9, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(8) + 8;
                             break;
                         }
                     // Hope shoots a frost bolt
@@ -483,8 +483,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectCold(saveGame), dir, Program.Rng.DiceRoll(6, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
+                            saveGame.FireBolt(new ProjectCold(saveGame), dir, saveGame.Rng.DiceRoll(6, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(7) + 7;
                             break;
                         }
                     // Charity shoots a lightning bolt
@@ -495,8 +495,8 @@ namespace AngbandOS.Commands
                             {
                                 return;
                             }
-                            saveGame.FireBolt(new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(4, 8));
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
+                            saveGame.FireBolt(new ProjectElec(saveGame), dir, saveGame.Rng.DiceRoll(4, 8));
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(6) + 6;
                             break;
                         }
                     // Thoth shoots a poison ball
@@ -508,7 +508,7 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBall(new ProjectPois(saveGame), dir, 12, 3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(4) + 4;
                             break;
                         }
                     // Icicle shoots a cold ball
@@ -520,13 +520,13 @@ namespace AngbandOS.Commands
                                 return;
                             }
                             saveGame.FireBall(new ProjectCold(saveGame), dir, 48, 2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(5) + 5;
                             break;
                         }
                     // Karakal teleports you randomly
                     case FixedArtifactId.SwordOfKarakal:
                         {
-                            switch (Program.Rng.DieRoll(13))
+                            switch (saveGame.Rng.DieRoll(13))
                             {
                                 case 1:
                                 case 2:
@@ -580,7 +580,7 @@ namespace AngbandOS.Commands
                         {
                             saveGame.MsgPrint("Your sword flickers black for a moment...");
                             saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonReaver, true);
-                            item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
+                            item.RechargeTimeLeft = 500 + saveGame.Rng.DieRoll(500);
                             break;
                         }
                     // Everflame shoots a fire ball
@@ -643,9 +643,9 @@ namespace AngbandOS.Commands
                     case FixedArtifactId.AxeSpleenSlicer:
                         {
                             saveGame.MsgPrint("Your battle axe radiates deep purple...");
-                            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+                            saveGame.Player.RestoreHealth(saveGame.Rng.DiceRoll(4, 8));
                             saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(3) + 3;
                             break;
                         }
                     // Gnorri teleports monsters away
@@ -698,13 +698,13 @@ namespace AngbandOS.Commands
                             saveGame.MsgPrint("Your mace glows bright green...");
                             if (saveGame.Player.TimedHaste == 0)
                             {
-                                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20) + 20);
+                                saveGame.Player.SetTimedHaste(saveGame.Rng.DieRoll(20) + 20);
                             }
                             else
                             {
                                 saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
                             }
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(100) + 100;
                             break;
                         }
                     // Ereril does identify
@@ -756,7 +756,7 @@ namespace AngbandOS.Commands
             if (item.RareItemTypeIndex == Enumerations.RareItemType.WeaponPlanarWeapon)
             {
                 saveGame.TeleportPlayer(100);
-                item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
+                item.RechargeTimeLeft = 50 + saveGame.Rng.DieRoll(50);
                 return;
             }
             // Dragon armour gives you a ball of the relevant damage type
@@ -772,40 +772,40 @@ namespace AngbandOS.Commands
                         {
                             saveGame.MsgPrint("You breathe lightning.");
                             saveGame.FireBall(new ProjectElec(saveGame), dir, 100, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
                             saveGame.MsgPrint("You breathe frost.");
                             saveGame.FireBall(new ProjectCold(saveGame), dir, 110, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
                             saveGame.MsgPrint("You breathe acid.");
                             saveGame.FireBall(new ProjectAcid(saveGame), dir, 130, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
                             saveGame.MsgPrint("You breathe poison gas.");
                             saveGame.FireBall(new ProjectPois(saveGame), dir, 150, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
                             saveGame.MsgPrint("You breathe fire.");
                             saveGame.FireBall(new ProjectFire(saveGame), dir, 200, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonMultihued:
                         {
-                            chance = Program.Rng.RandomLessThan(5);
+                            chance = saveGame.Rng.RandomLessThan(5);
                             string element = chance == 1
                                 ? "lightning"
                                 : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
@@ -837,46 +837,46 @@ namespace AngbandOS.Commands
                                         dir, 250, -2);
                                     break;
                             }
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(225) + 225;
                             break;
                         }
                     case DragonArmour.SvDragonBronze:
                         {
                             saveGame.MsgPrint("You breathe confusion.");
                             saveGame.FireBall(new ProjectConfusion(saveGame), dir, 120, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
                             saveGame.MsgPrint("You breathe sound.");
                             saveGame.FireBall(new ProjectSound(saveGame), dir, 130, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonChaos:
                         {
-                            chance = Program.Rng.RandomLessThan(2);
+                            chance = saveGame.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "chaos" : "disenchantment";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
                                 projectile: chance == 1 ? (Projectile)new ProjectChaos(saveGame) : new ProjectDisenchant(saveGame), dir: dir, dam: 220, rad: -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonLaw:
                         {
-                            chance = Program.Rng.RandomLessThan(2);
+                            chance = saveGame.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "sound" : "shards";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
                                 chance == 1 ? (Projectile)new ProjectSound(saveGame) : new ProjectExplode(saveGame), dir, 230, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonBalance:
                         {
-                            chance = Program.Rng.RandomLessThan(4);
+                            chance = saveGame.Rng.RandomLessThan(4);
                             string element = chance == 1
                                 ? "chaos"
                                 : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
@@ -887,24 +887,24 @@ namespace AngbandOS.Commands
                                     : (chance == 2
                                         ? new ProjectDisenchant(saveGame)
                                         : (chance == 3 ? (Projectile)new ProjectSound(saveGame) : new ProjectExplode(saveGame))), dir, 250, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonShining:
                         {
-                            chance = Program.Rng.RandomLessThan(2);
+                            chance = saveGame.Rng.RandomLessThan(2);
                             string element = chance == 0 ? "light" : "darkness";
                             saveGame.MsgPrint($"You breathe {element}.");
                             saveGame.FireBall(
                                 chance == 0 ? (Projectile)new ProjectLight(saveGame) : new ProjectDark(saveGame), dir, 200, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonPower:
                         {
                             saveGame.MsgPrint("You breathe the elements.");
                             saveGame.FireBall(new ProjectMissile(saveGame), dir, 300, -3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                 }
@@ -922,22 +922,22 @@ namespace AngbandOS.Commands
                     case RingType.Acid:
                         {
                             saveGame.FireBall(new ProjectAcid(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + saveGame.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
                             saveGame.FireBall(new ProjectCold(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + saveGame.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
                             saveGame.FireBall(new ProjectFire(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + saveGame.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = saveGame.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                 }

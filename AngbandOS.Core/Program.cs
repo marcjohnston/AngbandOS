@@ -16,6 +16,9 @@ namespace AngbandOS
 {
     internal static class Program
     {
+        /// <summary>
+        /// TODO: Deprecated.  Use SaveGame.Rng.
+        /// </summary>
         public static readonly Rng Rng = new Rng();
     }
 }

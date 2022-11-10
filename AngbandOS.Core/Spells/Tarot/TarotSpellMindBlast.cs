@@ -36,8 +36,7 @@ namespace AngbandOS.Spells.Tarot
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam - 10, new ProjectPsi(saveGame), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectPsi(saveGame), dir, saveGame.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
         public override void Initialise(int characterClass)
