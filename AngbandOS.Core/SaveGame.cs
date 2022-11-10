@@ -15,9 +15,7 @@ using AngbandOS.Patrons;
 using AngbandOS.Projection;
 using AngbandOS.StaticData;
 using System.Drawing;
-using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.CompilerServices;
 using AngbandOS.ItemCategories;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Spells;
@@ -90,6 +88,17 @@ namespace AngbandOS
         private List<Monster> _petList = new List<Monster>();
         private int _seedFlavor;
         public const int HurtChance = 16;
+
+        public ExPlayer ExPlayer;
+        public FixedArtifactArray FixedArtifacts;
+        public ItemTypeArray ItemTypes;
+        public MonsterRaceArray MonsterRaces;
+        public RareItemTypeArray RareItemTypes;
+        public VaultTypeArray VaultTypes;
+        private readonly List<string> _messageBuf = new List<string>();
+        private readonly List<int> _messageCounts = new List<int>();
+        private int _msgPrintP;
+        public bool MsgFlag;
 
         [NonSerialized]
         private ICorePersistentStorage PersistentStorage;
@@ -188,7 +197,6 @@ namespace AngbandOS
                 MessageBoxShow(reason);
             }
         }
-
 
         public ItemClass RandomItemType(int level, bool doNotAllowChestToBeCreated)
         {
@@ -455,17 +463,6 @@ namespace AngbandOS
         }
 
         // PROFILE MESSAGING START
-        public ExPlayer ExPlayer;
-        public FixedArtifactArray FixedArtifacts;
-        public ItemTypeArray ItemTypes;
-        public MonsterRaceArray MonsterRaces;
-        public RareItemTypeArray RareItemTypes;
-        public VaultTypeArray VaultTypes;
-        private readonly List<string> _messageBuf = new List<string>();
-        private readonly List<int> _messageCounts = new List<int>();
-        private int _msgPrintP;
-        public bool MsgFlag;
-
         public void MessageAdd(string str)
         {
             // simple case - list is empty
@@ -1465,7 +1462,7 @@ namespace AngbandOS
             }
         }
 
-        private void ApplyFlavourVisuals() // TODO: This is run just once
+        private void ApplyFlavourVisuals()
         {
             foreach (ItemClass kPtr in ItemTypes)
             {
@@ -3224,44 +3221,37 @@ namespace AngbandOS
 
                     case 3:
                     case 4:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonSpider);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonSpider);
                         break;
 
                     case 5:
                     case 6:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonHound);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHound);
                         break;
 
                     case 7:
                     case 8:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonHydra);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHydra);
                         break;
 
                     case 9:
                     case 10:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonCthuloid);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonCthuloid);
                         break;
 
                     case 11:
                     case 12:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonUndead);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUndead);
                         break;
 
                     case 13:
                     case 14:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonDragon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonDragon);
                         break;
 
                     case 15:
                     case 16:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonDemon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonDemon);
                         break;
 
                     case 17:
@@ -3270,20 +3260,17 @@ namespace AngbandOS
 
                     case 18:
                     case 19:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonUnique);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUnique);
                         break;
 
                     case 20:
                     case 21:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonHiUndead);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHiUndead);
                         break;
 
                     case 22:
                     case 23:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty,
-                            Constants.SummonHiDragon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHiDragon);
                         break;
 
                     case 24:
