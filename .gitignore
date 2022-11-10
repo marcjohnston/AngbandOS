@@ -68,3 +68,4 @@ bin/
 /AngbandOS.SqlPersistentStorage/obj/Release/net6.0/AngbandOS.PersistentStorage.Sql.dll
 /AngbandOS.SqlPersistentStorage/obj/Release/net6.0/AngbandOS.PersistentStorage.Sql.pdb
 /AngbandOS.Core/bin/Release/net6.0/AngbandOS.Core.deps.json
+/AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.GeneratedMSBuildEditorConfig.editorconfig
