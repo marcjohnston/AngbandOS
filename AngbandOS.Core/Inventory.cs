@@ -414,10 +414,6 @@ namespace AngbandOS
 
         public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
         {
-            if (SaveGame.ItemFilterAll)
-            {
-                return true;
-            }
             if (item.BaseItemCategory == null)
             {
                 return false;
