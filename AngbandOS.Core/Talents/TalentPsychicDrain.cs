@@ -28,10 +28,10 @@ namespace AngbandOS.Talents
             {
                 return;
             }
-            int i = saveGame.Rng.DiceRoll(saveGame.Player.Level / 2, 6);
+            int i = Program.Rng.DiceRoll(saveGame.Player.Level / 2, 6);
             if (saveGame.FireBall(new ProjectPsiDrain(saveGame), dir, i, 0 + ((saveGame.Player.Level - 25) / 10)))
             {
-                saveGame.Player.Energy -= saveGame.Rng.DieRoll(150);
+                saveGame.Player.Energy -= Program.Rng.DieRoll(150);
             }
         }
 

@@ -63,7 +63,7 @@ namespace AngbandOS.Stores
         protected override Item CreateItem()
         {
             int level;
-            level = 35 + SaveGame.Rng.RandomLessThan(35);
+            level = 35 + Program.Rng.RandomLessThan(35);
             ItemClass itemType = SaveGame.RandomItemType(level, false);
             if (itemType == null)
             {

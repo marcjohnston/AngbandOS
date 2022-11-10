@@ -181,25 +181,25 @@ namespace AngbandOS.Commands
                 }
             }
             int chance = sPtr.FailureChance(saveGame.Player);
-            if (saveGame.Rng.RandomLessThan(100) < chance)
+            if (Program.Rng.RandomLessThan(100) < chance)
             {
                 saveGame.MsgPrint($"You failed to get the {prayer} off!");
-                if (oPtr.Category == ItemCategory.ChaosBook && saveGame.Rng.DieRoll(100) < spell)
+                if (oPtr.Category == ItemCategory.ChaosBook && Program.Rng.DieRoll(100) < spell)
                 {
                     saveGame.MsgPrint("You produce a chaotic effect!");
                     WildMagic(spell, saveGame);
                 }
-                else if (oPtr.Category == ItemCategory.DeathBook && saveGame.Rng.DieRoll(100) < spell)
+                else if (oPtr.Category == ItemCategory.DeathBook && Program.Rng.DieRoll(100) < spell)
                 {
-                    if (sval == 3 && saveGame.Rng.DieRoll(2) == 1)
+                    if (sval == 3 && Program.Rng.DieRoll(2) == 1)
                     {
                         saveGame.Level.Monsters[0].SanityBlast(saveGame, true);
                     }
                     else
                     {
                         saveGame.MsgPrint("It hurts!");
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
-                        if (spell > 15 && saveGame.Rng.DieRoll(6) == 1 && !saveGame.Player.HasHoldLife)
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
+                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !saveGame.Player.HasHoldLife)
                         {
                             saveGame.Player.LoseExperience(spell * 250);
                         }
@@ -227,12 +227,12 @@ namespace AngbandOS.Commands
                 saveGame.Player.Mana = 0;
                 saveGame.Player.FractionalMana = 0;
                 saveGame.MsgPrint("You faint from the effort!");
-                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + saveGame.Rng.DieRoll((5 * oops) + 1));
-                if (saveGame.Rng.RandomLessThan(100) < 50)
+                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                if (Program.Rng.RandomLessThan(100) < 50)
                 {
-                    bool perm = saveGame.Rng.RandomLessThan(100) < 25;
+                    bool perm = Program.Rng.RandomLessThan(100) < 25;
                     saveGame.MsgPrint("You have damaged your health!");
-                    saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + saveGame.Rng.DieRoll(10), perm);
+                    saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
@@ -260,12 +260,12 @@ namespace AngbandOS.Commands
                 }
             }
             int chance = talent.FailureChance(saveGame.Player);
-            if (saveGame.Rng.RandomLessThan(100) < chance)
+            if (Program.Rng.RandomLessThan(100) < chance)
             {
                 saveGame.MsgPrint("You failed to concentrate hard enough!");
-                if (saveGame.Rng.DieRoll(100) < chance / 2)
+                if (Program.Rng.DieRoll(100) < chance / 2)
                 {
-                    int i = saveGame.Rng.DieRoll(100);
+                    int i = Program.Rng.DieRoll(100);
                     if (i < 5)
                     {
                         saveGame.MsgPrint("Oh, no! Your mind has gone blank!");
@@ -274,16 +274,16 @@ namespace AngbandOS.Commands
                     else if (i < 15)
                     {
                         saveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                        saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + 5 + saveGame.Rng.DieRoll(10));
+                        saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + 5 + Program.Rng.DieRoll(10));
                     }
                     else if (i < 45)
                     {
                         saveGame.MsgPrint("Your brain is addled!");
-                        saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + saveGame.Rng.DieRoll(8));
+                        saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.DieRoll(8));
                     }
                     else if (i < 90)
                     {
-                        saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + saveGame.Rng.DieRoll(8));
+                        saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + Program.Rng.DieRoll(8));
                     }
                     else
                     {
@@ -311,12 +311,12 @@ namespace AngbandOS.Commands
                 saveGame.Player.Mana = 0;
                 saveGame.Player.FractionalMana = 0;
                 saveGame.MsgPrint("You faint from the effort!");
-                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + saveGame.Rng.DieRoll((5 * oops) + 1));
-                if (saveGame.Rng.RandomLessThan(100) < 50)
+                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                if (Program.Rng.RandomLessThan(100) < 50)
                 {
-                    bool perm = saveGame.Rng.RandomLessThan(100) < 25;
+                    bool perm = Program.Rng.RandomLessThan(100) < 25;
                     saveGame.MsgPrint("You have damaged your mind!");
-                    saveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 15 + saveGame.Rng.DieRoll(10), perm);
+                    saveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
@@ -407,7 +407,7 @@ namespace AngbandOS.Commands
         private void WildMagic(int spell, SaveGame saveGame)
         {
             int counter = 0;
-            int type = Constants.SummonBizarre1 - 1 + saveGame.Rng.DieRoll(6);
+            int type = Constants.SummonBizarre1 - 1 + Program.Rng.DieRoll(6);
             if (type < Constants.SummonBizarre1)
             {
                 type = Constants.SummonBizarre1;
@@ -416,7 +416,7 @@ namespace AngbandOS.Commands
             {
                 type = Constants.SummonBizarre6;
             }
-            switch (saveGame.Rng.DieRoll(spell) + saveGame.Rng.DieRoll(8) + 1)
+            switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1)
             {
                 case 1:
                 case 2:
@@ -444,7 +444,7 @@ namespace AngbandOS.Commands
                 case 12:
                 case 13:
                 case 14:
-                    saveGame.LightArea(saveGame.Rng.DiceRoll(2, 3), 2);
+                    saveGame.LightArea(Program.Rng.DiceRoll(2, 3), 2);
                     break;
 
                 case 15:

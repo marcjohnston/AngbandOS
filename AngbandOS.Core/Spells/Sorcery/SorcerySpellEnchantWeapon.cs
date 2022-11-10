@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.EnchantSpell(saveGame.Rng.RandomLessThan(4) + 1, saveGame.Rng.RandomLessThan(4) + 1, 0);
+            saveGame.EnchantSpell(Program.Rng.RandomLessThan(4) + 1, Program.Rng.RandomLessThan(4) + 1, 0);
         }
 
         public override void Initialise(int characterClass)

@@ -38,7 +38,7 @@ namespace AngbandOS.Talents
                 if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
                     saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
                     saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
-                    saveGame.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
+                    Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
                 {
                     saveGame.MsgPrint("Something disrupts your concentration!");
                     saveGame.Player.Energy -= 100;

@@ -28,11 +28,11 @@ namespace AngbandOS
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
-            int y1 = yval - SaveGame.Rng.DieRoll(4);
-            int y2 = yval + SaveGame.Rng.DieRoll(3);
-            int x1 = xval - SaveGame.Rng.DieRoll(11);
-            int x2 = xval + SaveGame.Rng.DieRoll(11);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
+            int y1 = yval - Program.Rng.DieRoll(4);
+            int y2 = yval + Program.Rng.DieRoll(3);
+            int x1 = xval - Program.Rng.DieRoll(11);
+            int x2 = xval + Program.Rng.DieRoll(11);
             for (y = y1 - 1; y <= y2 + 1; y++)
             {
                 for (x = x1 - 1; x <= x2 + 1; x++)
@@ -60,7 +60,7 @@ namespace AngbandOS
                 cPtr = _level.Grid[y2 + 1][x];
                 cPtr.SetFeature("WallOuter");
             }
-            if (SaveGame.Rng.RandomLessThan(20) == 0)
+            if (Program.Rng.RandomLessThan(20) == 0)
             {
                 for (y = y1; y <= y2; y += 2)
                 {
@@ -71,7 +71,7 @@ namespace AngbandOS
                     }
                 }
             }
-            else if (SaveGame.Rng.RandomLessThan(50) == 0)
+            else if (Program.Rng.RandomLessThan(50) == 0)
             {
                 for (y = y1 + 2; y <= y2 - 2; y += 2)
                 {
@@ -94,15 +94,15 @@ namespace AngbandOS
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
-            int y1A = yval - SaveGame.Rng.DieRoll(4);
-            int y2A = yval + SaveGame.Rng.DieRoll(3);
-            int x1A = xval - SaveGame.Rng.DieRoll(11);
-            int x2A = xval + SaveGame.Rng.DieRoll(10);
-            int y1B = yval - SaveGame.Rng.DieRoll(3);
-            int y2B = yval + SaveGame.Rng.DieRoll(4);
-            int x1B = xval - SaveGame.Rng.DieRoll(10);
-            int x2B = xval + SaveGame.Rng.DieRoll(11);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
+            int y1A = yval - Program.Rng.DieRoll(4);
+            int y2A = yval + Program.Rng.DieRoll(3);
+            int x1A = xval - Program.Rng.DieRoll(11);
+            int x2A = xval + Program.Rng.DieRoll(10);
+            int y1B = yval - Program.Rng.DieRoll(3);
+            int y2B = yval + Program.Rng.DieRoll(4);
+            int x1B = xval - Program.Rng.DieRoll(10);
+            int x2B = xval + Program.Rng.DieRoll(11);
             for (y = y1A - 1; y <= y2A + 1; y++)
             {
                 for (x = x1A - 1; x <= x2A + 1; x++)
@@ -179,10 +179,10 @@ namespace AngbandOS
         {
             int y, x, wy;
             GridTile cPtr;
-            bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int wx = wy = 1;
-            int dy = SaveGame.Rng.RandomBetween(3, 4);
-            int dx = SaveGame.Rng.RandomBetween(3, 11);
+            int dy = Program.Rng.RandomBetween(3, 4);
+            int dx = Program.Rng.RandomBetween(3, 11);
             int y1A = yval - dy;
             int y2A = yval + dy;
             int x1A = xval - wx;
@@ -261,7 +261,7 @@ namespace AngbandOS
                     cPtr.RevertToBackground();
                 }
             }
-            switch (SaveGame.Rng.RandomLessThan(4))
+            switch (Program.Rng.RandomLessThan(4))
             {
                 case 1:
                     {
@@ -291,7 +291,7 @@ namespace AngbandOS
                             cPtr = _level.Grid[y2B][x];
                             cPtr.SetFeature("WallInner");
                         }
-                        switch (SaveGame.Rng.RandomLessThan(4))
+                        switch (Program.Rng.RandomLessThan(4))
                         {
                             case 0:
                                 PlaceSecretDoor(y1B, xval);
@@ -310,13 +310,13 @@ namespace AngbandOS
                                 break;
                         }
                         _level.PlaceObject(yval, xval, false, false);
-                        VaultMonsters(yval, xval, SaveGame.Rng.RandomLessThan(2) + 3);
-                        VaultTraps(yval, xval, 4, 4, SaveGame.Rng.RandomLessThan(3) + 2);
+                        VaultMonsters(yval, xval, Program.Rng.RandomLessThan(2) + 3);
+                        VaultTraps(yval, xval, 4, 4, Program.Rng.RandomLessThan(3) + 2);
                         break;
                     }
                 case 3:
                     {
-                        if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        if (Program.Rng.RandomLessThan(3) == 0)
                         {
                             for (y = y1B; y <= y2B; y++)
                             {
@@ -340,7 +340,7 @@ namespace AngbandOS
                                 cPtr = _level.Grid[y2B + 1][x];
                                 cPtr.SetFeature("WallInner");
                             }
-                            if (SaveGame.Rng.RandomLessThan(3) == 0)
+                            if (Program.Rng.RandomLessThan(3) == 0)
                             {
                                 PlaceSecretDoor(yval, x1A - 1);
                                 PlaceSecretDoor(yval, x2A + 1);
@@ -348,7 +348,7 @@ namespace AngbandOS
                                 PlaceSecretDoor(y2B + 1, xval);
                             }
                         }
-                        else if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        else if (Program.Rng.RandomLessThan(3) == 0)
                         {
                             cPtr = _level.Grid[yval][xval];
                             cPtr.SetFeature("WallInner");
@@ -361,7 +361,7 @@ namespace AngbandOS
                             cPtr = _level.Grid[yval][x2A];
                             cPtr.SetFeature("WallInner");
                         }
-                        else if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        else if (Program.Rng.RandomLessThan(3) == 0)
                         {
                             cPtr = _level.Grid[yval][xval];
                             cPtr.SetFeature("Pillar");
@@ -375,7 +375,7 @@ namespace AngbandOS
         {
             int y, x;
             GridTile cPtr;
-            bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
+            bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
             int y1 = yval - 4;
             int y2 = yval + 4;
             int x1 = xval - 11;
@@ -425,10 +425,10 @@ namespace AngbandOS
                 cPtr = _level.Grid[y2 + 1][x];
                 cPtr.SetFeature("WallInner");
             }
-            switch (SaveGame.Rng.DieRoll(5))
+            switch (Program.Rng.DieRoll(5))
             {
                 case 1:
-                    switch (SaveGame.Rng.DieRoll(4))
+                    switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
                             PlaceSecretDoor(y1 - 1, xval);
@@ -450,7 +450,7 @@ namespace AngbandOS
                     break;
 
                 case 2:
-                    switch (SaveGame.Rng.DieRoll(4))
+                    switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
                             PlaceSecretDoor(y1 - 1, xval);
@@ -480,7 +480,7 @@ namespace AngbandOS
                             cPtr.SetFeature("WallInner");
                         }
                     }
-                    switch (SaveGame.Rng.DieRoll(4))
+                    switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
                             PlaceLockedDoor(yval - 1, xval);
@@ -498,8 +498,8 @@ namespace AngbandOS
                             PlaceLockedDoor(yval, xval + 1);
                             break;
                     }
-                    VaultMonsters(yval, xval, SaveGame.Rng.DieRoll(3) + 2);
-                    if (SaveGame.Rng.RandomLessThan(100) < 80)
+                    VaultMonsters(yval, xval, Program.Rng.DieRoll(3) + 2);
+                    if (Program.Rng.RandomLessThan(100) < 80)
                     {
                         _level.PlaceObject(yval, xval, false, false);
                     }
@@ -507,11 +507,11 @@ namespace AngbandOS
                     {
                         PlaceRandomStairs(yval, xval);
                     }
-                    VaultTraps(yval, xval, 4, 10, 2 + SaveGame.Rng.DieRoll(3));
+                    VaultTraps(yval, xval, 4, 10, 2 + Program.Rng.DieRoll(3));
                     break;
 
                 case 3:
-                    switch (SaveGame.Rng.DieRoll(4))
+                    switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
                             PlaceSecretDoor(y1 - 1, xval);
@@ -537,9 +537,9 @@ namespace AngbandOS
                             cPtr.SetFeature("WallInner");
                         }
                     }
-                    if (SaveGame.Rng.RandomLessThan(2) == 0)
+                    if (Program.Rng.RandomLessThan(2) == 0)
                     {
-                        int tmp = SaveGame.Rng.DieRoll(2);
+                        int tmp = Program.Rng.DieRoll(2);
                         for (y = yval - 1; y <= yval + 1; y++)
                         {
                             for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
@@ -554,7 +554,7 @@ namespace AngbandOS
                             }
                         }
                     }
-                    if (SaveGame.Rng.RandomLessThan(3) == 0)
+                    if (Program.Rng.RandomLessThan(3) == 0)
                     {
                         for (x = xval - 5; x <= xval + 5; x++)
                         {
@@ -567,15 +567,15 @@ namespace AngbandOS
                         cPtr.SetFeature("WallInner");
                         cPtr = _level.Grid[yval][xval + 5];
                         cPtr.SetFeature("WallInner");
-                        PlaceSecretDoor(yval - 3 + (SaveGame.Rng.DieRoll(2) * 2), xval - 3);
-                        PlaceSecretDoor(yval - 3 + (SaveGame.Rng.DieRoll(2) * 2), xval + 3);
-                        VaultMonsters(yval, xval - 2, SaveGame.Rng.DieRoll(2));
-                        VaultMonsters(yval, xval + 2, SaveGame.Rng.DieRoll(2));
-                        if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval - 3);
+                        PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval + 3);
+                        VaultMonsters(yval, xval - 2, Program.Rng.DieRoll(2));
+                        VaultMonsters(yval, xval + 2, Program.Rng.DieRoll(2));
+                        if (Program.Rng.RandomLessThan(3) == 0)
                         {
                             _level.PlaceObject(yval, xval - 2, false, false);
                         }
-                        if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        if (Program.Rng.RandomLessThan(3) == 0)
                         {
                             _level.PlaceObject(yval, xval + 2, false, false);
                         }
@@ -583,7 +583,7 @@ namespace AngbandOS
                     break;
 
                 case 4:
-                    switch (SaveGame.Rng.DieRoll(4))
+                    switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
                             PlaceSecretDoor(y1 - 1, xval);
@@ -612,10 +612,10 @@ namespace AngbandOS
                             }
                         }
                     }
-                    VaultMonsters(yval, xval - 5, SaveGame.Rng.DieRoll(3));
-                    VaultMonsters(yval, xval + 5, SaveGame.Rng.DieRoll(3));
-                    VaultTraps(yval, xval - 3, 2, 8, SaveGame.Rng.DieRoll(3));
-                    VaultTraps(yval, xval + 3, 2, 8, SaveGame.Rng.DieRoll(3));
+                    VaultMonsters(yval, xval - 5, Program.Rng.DieRoll(3));
+                    VaultMonsters(yval, xval + 5, Program.Rng.DieRoll(3));
+                    VaultTraps(yval, xval - 3, 2, 8, Program.Rng.DieRoll(3));
+                    VaultTraps(yval, xval + 3, 2, 8, Program.Rng.DieRoll(3));
                     VaultObjects(yval, xval, 3);
                     break;
 
@@ -630,9 +630,9 @@ namespace AngbandOS
                         cPtr = _level.Grid[yval][x];
                         cPtr.SetFeature("WallInner");
                     }
-                    if (SaveGame.Rng.RandomLessThan(100) < 50)
+                    if (Program.Rng.RandomLessThan(100) < 50)
                     {
-                        int i = SaveGame.Rng.DieRoll(10);
+                        int i = Program.Rng.DieRoll(10);
                         PlaceSecretDoor(y1 - 1, xval - i);
                         PlaceSecretDoor(y1 - 1, xval + i);
                         PlaceSecretDoor(y2 + 1, xval - i);
@@ -640,17 +640,17 @@ namespace AngbandOS
                     }
                     else
                     {
-                        int i = SaveGame.Rng.DieRoll(3);
+                        int i = Program.Rng.DieRoll(3);
                         PlaceSecretDoor(yval + i, x1 - 1);
                         PlaceSecretDoor(yval - i, x1 - 1);
                         PlaceSecretDoor(yval + i, x2 + 1);
                         PlaceSecretDoor(yval - i, x2 + 1);
                     }
-                    VaultObjects(yval, xval, 2 + SaveGame.Rng.DieRoll(2));
-                    VaultMonsters(yval + 1, xval - 4, SaveGame.Rng.DieRoll(4));
-                    VaultMonsters(yval + 1, xval + 4, SaveGame.Rng.DieRoll(4));
-                    VaultMonsters(yval - 1, xval - 4, SaveGame.Rng.DieRoll(4));
-                    VaultMonsters(yval - 1, xval + 4, SaveGame.Rng.DieRoll(4));
+                    VaultObjects(yval, xval, 2 + Program.Rng.DieRoll(2));
+                    VaultMonsters(yval + 1, xval - 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval + 1, xval + 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval - 1, xval - 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval - 1, xval + 4, Program.Rng.DieRoll(4));
                     break;
             }
         }
@@ -707,7 +707,7 @@ namespace AngbandOS
                 cPtr = _level.Grid[y2 + 1][x];
                 cPtr.SetFeature("WallInner");
             }
-            switch (SaveGame.Rng.DieRoll(4))
+            switch (Program.Rng.DieRoll(4))
             {
                 case 1:
                     PlaceSecretDoor(y1 - 1, xval);
@@ -725,16 +725,16 @@ namespace AngbandOS
                     PlaceSecretDoor(yval, x2 + 1);
                     break;
             }
-            int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
-            if (tmp < 25 && SaveGame.Rng.DieRoll(2) != 1)
+            int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
+            if (tmp < 25 && Program.Rng.DieRoll(2) != 1)
             {
                 do
                 {
-                    _templateRace = SaveGame.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
+                    _templateRace = Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
                 } while ((SaveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                         SaveGame.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
-                         SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
-                if (SaveGame.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + SaveGame.Rng.DieRoll(15))
+                         SaveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                         SaveGame.Difficulty + Program.Rng.DieRoll(5));
+                if (Program.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
                     getMonNumHook = VaultAuxSymbol;
                 }
@@ -753,7 +753,7 @@ namespace AngbandOS
             }
             else if (tmp < 65)
             {
-                if (SaveGame.Rng.DieRoll(3) == 1)
+                if (Program.Rng.DieRoll(3) == 1)
                 {
                     getMonNumHook  = VaultAuxKennel;
                 }
@@ -764,7 +764,7 @@ namespace AngbandOS
             }
             else
             {
-                if (SaveGame.Rng.DieRoll(3) == 1)
+                if (Program.Rng.DieRoll(3) == 1)
                 {
                     getMonNumHook = VaultAuxChapel;
                 }
@@ -789,7 +789,7 @@ namespace AngbandOS
             }
             _level.DangerRating += 10;
             if (SaveGame.Difficulty <= 40 &&
-                SaveGame.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+                Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
             {
                 _level.SpecialDanger = true;
             }
@@ -797,7 +797,7 @@ namespace AngbandOS
             {
                 for (x = xval - 9; x <= xval + 9; x++)
                 {
-                    int rIdx = what[SaveGame.Rng.RandomLessThan(64)];
+                    int rIdx = what[Program.Rng.RandomLessThan(64)];
                     MonsterRace race = SaveGame.MonsterRaces[rIdx];
                     _level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
                 }
@@ -856,7 +856,7 @@ namespace AngbandOS
                 cPtr = _level.Grid[y2 + 1][x];
                 cPtr.SetFeature("WallInner");
             }
-            switch (SaveGame.Rng.DieRoll(4))
+            switch (Program.Rng.DieRoll(4))
             {
                 case 1:
                     PlaceSecretDoor(y1 - 1, xval);
@@ -874,7 +874,7 @@ namespace AngbandOS
                     PlaceSecretDoor(yval, x2 + 1);
                     break;
             }
-            int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
+            int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
             if (tmp < 20)
             {
                 getMonNumHook = VaultAuxOrc;
@@ -889,19 +889,19 @@ namespace AngbandOS
             }
             else if (tmp < 70)
             {
-                if (SaveGame.Rng.DieRoll(4) != 1)
+                if (Program.Rng.DieRoll(4) != 1)
                 {
                     do
                     {
-                        _templateRace = SaveGame.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
+                        _templateRace = Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2);
                     } while ((SaveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
-                             SaveGame.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
-                             SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
+                             SaveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                             SaveGame.Difficulty + Program.Rng.DieRoll(5));
                     getMonNumHook = VaultAuxSymbol;
                 }
                 else
                 {
-                    if (SaveGame.Rng.DieRoll(2) == 1)
+                    if (Program.Rng.DieRoll(2) == 1)
                     {
                         getMonNumHook = VaultAuxCult;
                     }
@@ -913,7 +913,7 @@ namespace AngbandOS
             }
             else if (tmp < 80)
             {
-                switch (SaveGame.Rng.RandomLessThan(6))
+                switch (Program.Rng.RandomLessThan(6))
                 {
                     case 0:
                         {
@@ -989,7 +989,7 @@ namespace AngbandOS
             }
             _level.DangerRating += 10;
             if (SaveGame.Difficulty <= 40 &&
-                SaveGame.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+                Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
             {
                 _level.SpecialDanger = true;
             }
@@ -1034,7 +1034,7 @@ namespace AngbandOS
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = SaveGame.VaultTypes[SaveGame.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
+                vPtr = SaveGame.VaultTypes[Program.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
                 if (vPtr.Category == 7)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1053,7 +1053,7 @@ namespace AngbandOS
             }
             _level.DangerRating += vPtr.Rating;
             if (SaveGame.Difficulty <= 50 ||
-                SaveGame.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) <
+                Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) <
                 400)
             {
                 _level.SpecialDanger = true;
@@ -1068,7 +1068,7 @@ namespace AngbandOS
             while (dummy < LevelFactory.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = SaveGame.VaultTypes[SaveGame.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
+                vPtr = SaveGame.VaultTypes[Program.Rng.RandomLessThan(SaveGame.VaultTypes.Count)];
                 if (vPtr.Category == 8)
                 {
                     var minX = xval - (vPtr.Width / 2);
@@ -1086,7 +1086,7 @@ namespace AngbandOS
                 return;
             }
             _level.DangerRating += vPtr.Rating;
-            if (SaveGame.Difficulty <= 50 || SaveGame.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
+            if (SaveGame.Difficulty <= 50 || Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
             {
                 _level.SpecialDanger = true;
             }
@@ -1128,7 +1128,7 @@ namespace AngbandOS
                             break;
 
                         case '*':
-                            if (SaveGame.Rng.RandomLessThan(100) < 75)
+                            if (Program.Rng.RandomLessThan(100) < 75)
                             {
                                 _level.PlaceObject(y, x, false, false);
                             }
@@ -1199,13 +1199,13 @@ namespace AngbandOS
                             }
                         case ',':
                             {
-                                if (SaveGame.Rng.RandomLessThan(100) < 50)
+                                if (Program.Rng.RandomLessThan(100) < 50)
                                 {
                                     _level.MonsterLevel = SaveGame.Difficulty + 3;
                                     _level.Monsters.PlaceMonster(y, x, true, true);
                                     _level.MonsterLevel = SaveGame.Difficulty;
                                 }
-                                if (SaveGame.Rng.RandomLessThan(100) < 50)
+                                if (Program.Rng.RandomLessThan(100) < 50)
                                 {
                                     _level.ObjectLevel = SaveGame.Difficulty + 7;
                                     _level.PlaceObject(y, x, false, false);
@@ -1234,7 +1234,7 @@ namespace AngbandOS
         private void PlaceLockedDoor(int y, int x)
         {
             GridTile cPtr = _level.Grid[y][x];
-            cPtr.SetFeature($"LockedDoor{SaveGame.Rng.DieRoll(7)}");
+            cPtr.SetFeature($"LockedDoor{Program.Rng.DieRoll(7)}");
         }
 
         private void PlaceRandomStairs(int y, int x)
@@ -1258,7 +1258,7 @@ namespace AngbandOS
                     PlaceUpStairs(y, x);
                 }
             }
-            else if (SaveGame.Rng.RandomLessThan(100) < 50)
+            else if (Program.Rng.RandomLessThan(100) < 50)
             {
                 PlaceDownStairs(y, x);
             }
@@ -1494,8 +1494,8 @@ namespace AngbandOS
                 {
                     while (dummy < LevelFactory.SafeMaxAttempts)
                     {
-                        j = SaveGame.Rng.RandomSpread(y, 2);
-                        k = SaveGame.Rng.RandomSpread(x, 3);
+                        j = Program.Rng.RandomSpread(y, 2);
+                        k = Program.Rng.RandomSpread(x, 3);
                         dummy++;
                         if (!_level.InBounds(j, k))
                         {
@@ -1507,7 +1507,7 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    if (SaveGame.Rng.RandomLessThan(100) < 75)
+                    if (Program.Rng.RandomLessThan(100) < 75)
                     {
                         _level.PlaceObject(j, k, false, false);
                     }
@@ -1528,8 +1528,8 @@ namespace AngbandOS
             {
                 while (dummy < LevelFactory.SafeMaxAttempts)
                 {
-                    y1 = SaveGame.Rng.RandomSpread(y, yd);
-                    x1 = SaveGame.Rng.RandomSpread(x, xd);
+                    y1 = Program.Rng.RandomSpread(y, yd);
+                    x1 = Program.Rng.RandomSpread(x, xd);
                     dummy++;
                     if (!_level.InBounds(y1, x1))
                     {

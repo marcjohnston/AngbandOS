@@ -19,16 +19,16 @@ namespace AngbandOS.Spells.Tarot
         {
             TargetEngine targetEngine = new TargetEngine(saveGame);
             bool noneCame = false;
-            int die = saveGame.Rng.DieRoll(120);
+            int die = Program.Rng.DieRoll(120);
             if (saveGame.Player.ProfessionIndex == CharacterClass.Rogue || saveGame.Player.ProfessionIndex == CharacterClass.HighMage)
             {
-                die = saveGame.Rng.DieRoll(110) + (saveGame.Player.Level / 5);
+                die = Program.Rng.DieRoll(110) + (saveGame.Player.Level / 5);
             }
             saveGame.MsgPrint("You shuffle your Tarot deck and draw a card...");
             if (die < 7)
             {
                 saveGame.MsgPrint("Oh no! It's the Blasted Tower!");
-                for (int dummy = 0; dummy < saveGame.Rng.DieRoll(3); dummy++)
+                for (int dummy = 0; dummy < Program.Rng.DieRoll(3); dummy++)
                 {
                     saveGame.ActivateHiSummon();
                 }
@@ -58,7 +58,8 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 30)
             {
                 saveGame.MsgPrint("It's a picture of a strange monster.");
-                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, 32 + saveGame.Rng.DieRoll(6)))
+                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
+                    32 + Program.Rng.DieRoll(6)))
                 {
                     noneCame = true;
                 }
@@ -71,7 +72,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 38)
             {
                 saveGame.MsgPrint("It's the Wheel of Fortune.");
-                WildMagic(saveGame, saveGame.Rng.DieRoll(32) - 1);
+                WildMagic(saveGame, Program.Rng.DieRoll(32) - 1);
             }
             else if (die < 40)
             {
@@ -261,7 +262,7 @@ namespace AngbandOS.Spells.Tarot
         private void WildMagic(SaveGame saveGame, int spell)
         {
             int counter = 0;
-            int type = Constants.SummonBizarre1 - 1 + saveGame.Rng.DieRoll(6);
+            int type = Constants.SummonBizarre1 - 1 + Program.Rng.DieRoll(6);
             if (type < Constants.SummonBizarre1)
             {
                 type = Constants.SummonBizarre1;
@@ -270,7 +271,7 @@ namespace AngbandOS.Spells.Tarot
             {
                 type = Constants.SummonBizarre6;
             }
-            switch (saveGame.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1)
+            switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1)
             {
                 case 1:
                 case 2:
@@ -298,7 +299,7 @@ namespace AngbandOS.Spells.Tarot
                 case 12:
                 case 13:
                 case 14:
-                    saveGame.LightArea(saveGame.Rng.DiceRoll(2, 3), 2);
+                    saveGame.LightArea(Program.Rng.DiceRoll(2, 3), 2);
                     break;
 
                 case 15:

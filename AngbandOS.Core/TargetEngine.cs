@@ -50,9 +50,9 @@ namespace AngbandOS
             SaveGame.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
-                if (SaveGame.Rng.RandomLessThan(100) < 75)
+                if (Program.Rng.RandomLessThan(100) < 75)
                 {
-                    dir = _level.OrderedDirection[SaveGame.Rng.RandomLessThan(8)];
+                    dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
                 }
             }
             if (SaveGame.CommandDirection != dir)
@@ -113,7 +113,7 @@ namespace AngbandOS
             SaveGame.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
-                dir = _level.OrderedDirection[SaveGame.Rng.RandomLessThan(8)];
+                dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
             if (SaveGame.CommandDirection != dir)
             {
@@ -176,7 +176,7 @@ namespace AngbandOS
             SaveGame.CommandDirection = dir;
             if (_player.TimedConfusion != 0)
             {
-                dir = _level.OrderedDirection[SaveGame.Rng.RandomLessThan(8)];
+                dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
             if (SaveGame.CommandDirection != dir)
             {

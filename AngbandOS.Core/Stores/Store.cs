@@ -294,7 +294,7 @@ namespace AngbandOS
                 return;
             }
             int j = _stockNum;
-            j -= SaveGame.Rng.DieRoll(StoreTurnover);
+            j -= Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
                 j = StoreMaxKeep;
@@ -312,7 +312,7 @@ namespace AngbandOS
                 StoreDelete();
             }
             j = _stockNum;
-            j += SaveGame.Rng.DieRoll(StoreTurnover);
+            j += Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
                 j = StoreMaxKeep;
@@ -345,7 +345,7 @@ namespace AngbandOS
 
         private StoreOwner GetRandomOwner()
         {
-            return StoreOwners[SaveGame.Rng.RandomLessThan(StoreOwners.Length)];
+            return StoreOwners[Program.Rng.RandomLessThan(StoreOwners.Length)];
         }
 
         public virtual void StoreShuffle()
@@ -792,19 +792,19 @@ namespace AngbandOS
             {
                 discount = 0;
             }
-            else if (SaveGame.Rng.RandomLessThan(25) == 0)
+            else if (Program.Rng.RandomLessThan(25) == 0)
             {
                 discount = 25;
             }
-            else if (SaveGame.Rng.RandomLessThan(150) == 0)
+            else if (Program.Rng.RandomLessThan(150) == 0)
             {
                 discount = 50;
             }
-            else if (SaveGame.Rng.RandomLessThan(300) == 0)
+            else if (Program.Rng.RandomLessThan(300) == 0)
             {
                 discount = 75;
             }
-            else if (SaveGame.Rng.RandomLessThan(500) == 0)
+            else if (Program.Rng.RandomLessThan(500) == 0)
             {
                 discount = 90;
             }
@@ -860,22 +860,22 @@ namespace AngbandOS
         {
             if (value <= 0 && price > value)
             {
-                SaveGame.MsgPrint(_comment_7A[SaveGame.Rng.RandomLessThan(_comment_7A.Length)]);
+                SaveGame.MsgPrint(_comment_7A[Program.Rng.RandomLessThan(_comment_7A.Length)]);
                 SaveGame.PlaySound(SoundEffect.StoreSoldWorthless);
             }
             else if (value < guess && price > value)
             {
-                SaveGame.MsgPrint(_comment_7B[SaveGame.Rng.RandomLessThan(_comment_7B.Length)]);
+                SaveGame.MsgPrint(_comment_7B[Program.Rng.RandomLessThan(_comment_7B.Length)]);
                 SaveGame.PlaySound(SoundEffect.StoreSoldBargain);
             }
             else if (value > guess && value < 4 * guess && price < value)
             {
-                SaveGame.MsgPrint(_comment_7C[SaveGame.Rng.RandomLessThan(_comment_7C.Length)]);
+                SaveGame.MsgPrint(_comment_7C[Program.Rng.RandomLessThan(_comment_7C.Length)]);
                 SaveGame.PlaySound(SoundEffect.StoreSoldCheaply);
             }
             else if (value > guess && price < value)
             {
-                SaveGame.MsgPrint(_comment_7D[SaveGame.Rng.RandomLessThan(_comment_7D.Length)]);
+                SaveGame.MsgPrint(_comment_7D[Program.Rng.RandomLessThan(_comment_7D.Length)]);
                 SaveGame.PlaySound(SoundEffect.StoreSoldExtraCheaply);
             }
         }
@@ -1035,7 +1035,7 @@ namespace AngbandOS
 
         protected void SayComment_1()
         {
-            SaveGame.MsgPrint(_comment1[SaveGame.Rng.RandomLessThan(_comment1.Length)]);
+            SaveGame.MsgPrint(_comment1[Program.Rng.RandomLessThan(_comment1.Length)]);
         }
 
         private bool SellHaggle(Item oPtr, out int price)
@@ -1100,8 +1100,8 @@ namespace AngbandOS
         {
             int level;
             ItemClass itemType;
-            int i = _table[SaveGame.Rng.RandomLessThan(_table.Length)];
-            level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
+            int i = _table[Program.Rng.RandomLessThan(_table.Length)];
+            level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
             itemType = SaveGame.ItemTypes[i];
             Item qPtr = new Item(SaveGame);
             qPtr.AssignItemType(itemType);
@@ -1154,13 +1154,13 @@ namespace AngbandOS
 
         private void StoreDelete()
         {
-            int what = SaveGame.Rng.RandomLessThan(_stockNum);
+            int what = Program.Rng.RandomLessThan(_stockNum);
             int num = _stock[what].Count;
-            if (SaveGame.Rng.RandomLessThan(100) < 50)
+            if (Program.Rng.RandomLessThan(100) < 50)
             {
                 num = (num + 1) / 2;
             }
-            if (SaveGame.Rng.RandomLessThan(100) < 50)
+            if (Program.Rng.RandomLessThan(100) < 50)
             {
                 num = 1;
             }
@@ -1457,7 +1457,7 @@ namespace AngbandOS
                             continue;
                         }
                         k++;
-                        if (SaveGame.Rng.RandomLessThan(k) == 0)
+                        if (Program.Rng.RandomLessThan(k) == 0)
                         {
                             gift = spellIndex;
                         }
@@ -1898,7 +1898,7 @@ namespace AngbandOS
                         {
                             if (MaintainsStockLevels)
                             {
-                                if (SaveGame.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
+                                if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                                 {
                                     SaveGame.MsgPrint("The shopkeeper retires.");
                                     StoreShuffle();

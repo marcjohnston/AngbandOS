@@ -15,9 +15,9 @@ namespace AngbandOS.Spells.Nature
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + saveGame.Rng.DieRoll(20) + 20);
-            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + saveGame.Rng.DieRoll(20) + 20);
-            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + saveGame.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.SetTimedLightningResistance(saveGame.Player.TimedLightningResistance + Program.Rng.DieRoll(20) + 20);
         }
 
         public override void Initialise(int characterClass)

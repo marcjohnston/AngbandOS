@@ -24,7 +24,7 @@ namespace AngbandOS.Spells.Tarot
             saveGame.Player.Energy -= 60 - saveGame.Player.Level;
             if (!saveGame.Level.GridPassableNoCreature(ij, ii) || saveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
                 saveGame.Level.Distance(ij, ii, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
-                saveGame.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
+                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
             {
                 saveGame.MsgPrint("You fail to exit the astral plane correctly!");
                 saveGame.Player.Energy -= 100;

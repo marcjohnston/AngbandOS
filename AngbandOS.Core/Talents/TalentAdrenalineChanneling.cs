@@ -25,7 +25,7 @@ namespace AngbandOS.Talents
             saveGame.Player.SetTimedFear(0);
             saveGame.Player.SetTimedStun(0);
             saveGame.Player.RestoreHealth(saveGame.Player.Level);
-            int i = 10 + saveGame.Rng.DieRoll(saveGame.Player.Level * 3 / 2);
+            int i = 10 + Program.Rng.DieRoll(saveGame.Player.Level * 3 / 2);
             if (saveGame.Player.Level < 35)
             {
                 saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + i);

@@ -17,11 +17,11 @@ namespace AngbandOS.Spells.Sorcery
         {
             if (saveGame.Player.TimedHaste == 0)
             {
-                saveGame.Player.SetTimedHaste(saveGame.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
+                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + saveGame.Rng.DieRoll(5));
+                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
             }
         }
 

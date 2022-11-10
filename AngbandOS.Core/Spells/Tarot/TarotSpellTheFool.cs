@@ -18,7 +18,7 @@ namespace AngbandOS.Spells.Tarot
         {
             int dummy = 0;
             saveGame.MsgPrint("You concentrate on the Fool card...");
-            switch (saveGame.Rng.DieRoll(4))
+            switch (Program.Rng.DieRoll(4))
             {
                 case 1:
                     dummy = Constants.SummonBizarre1;
@@ -36,7 +36,7 @@ namespace AngbandOS.Spells.Tarot
                     dummy = Constants.SummonBizarre5;
                     break;
             }
-            if (saveGame.Rng.DieRoll(2) == 1)
+            if (Program.Rng.DieRoll(2) == 1)
             {
                 saveGame.MsgPrint(saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, dummy)
                     ? "The summoned creature gets angry!"

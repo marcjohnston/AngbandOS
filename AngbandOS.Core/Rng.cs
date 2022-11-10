@@ -15,6 +15,12 @@ namespace AngbandOS
     [Serializable]
     internal class Rng
     {
+       // [NonSerialized]
+        private Random _mainSequence = new Random();
+
+      //  [NonSerialized]
+        private Random _fixed = new Random();
+
         /// <summary>
         /// Set true to use the fixed seed, and false to use the generic randomiser
         /// </summary>
@@ -22,7 +28,6 @@ namespace AngbandOS
 
         private const int _randnorNum = 256;
         private const int _randnorStd = 64;
-        private readonly Random _mainSequence = new Random();
 
         private readonly int[] _randnorTable =
         {
@@ -45,7 +50,6 @@ namespace AngbandOS
             32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
         };
 
-        private Random _fixed = new Random();
         private int _fixedSeed;
 
         public int FixedSeed

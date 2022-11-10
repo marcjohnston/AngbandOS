@@ -57,11 +57,11 @@ namespace AngbandOS.Commands
                         if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance != 0))
                         {
                             // Hagarg Ryonis may protect us from poison
-                            if (saveGame.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
                                 saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
-                            else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + saveGame.Rng.RandomLessThan(10) + 10))
+                            else if (saveGame.Player.SetTimedPoison(saveGame.Player.TimedPoison + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -72,7 +72,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasBlindnessResistance)
                         {
-                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + saveGame.Rng.RandomLessThan(200) + 200))
+                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + Program.Rng.RandomLessThan(200) + 200))
                             {
                                 ident = true;
                             }
@@ -83,7 +83,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasFearResistance)
                         {
-                            if (saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + saveGame.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -94,7 +94,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasConfusionResistance)
                         {
-                            if (saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + saveGame.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -105,7 +105,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasChaosResistance)
                         {
-                            if (saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + saveGame.Rng.RandomLessThan(250) + 250))
+                            if (saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 250))
                             {
                                 ident = true;
                             }
@@ -116,7 +116,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasFreeAction)
                         {
-                            if (saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + saveGame.Rng.RandomLessThan(10) + 10))
+                            if (saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(10) + 10))
                             {
                                 ident = true;
                             }
@@ -125,42 +125,42 @@ namespace AngbandOS.Commands
                     }
                 case FoodType.Weakness:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(6, 6), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
                         ident = true;
                         break;
                     }
                 case FoodType.Sickness:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(6, 6), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
                         ident = true;
                         break;
                     }
                 case FoodType.Stupidity:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(8, 8), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
                         ident = true;
                         break;
                     }
                 case FoodType.Naivety:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(8, 8), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
                         ident = true;
                         break;
                     }
                 case FoodType.Unhealth:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(10, 10), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
                         ident = true;
                         break;
                     }
                 case FoodType.Disease:
                     {
-                        saveGame.Player.TakeHit(saveGame.Rng.DiceRoll(10, 10), "poisonous food.");
+                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
                         saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
                         ident = true;
                         break;
@@ -199,7 +199,7 @@ namespace AngbandOS.Commands
                     }
                 case FoodType.CureSerious:
                     {
-                        if (saveGame.Player.RestoreHealth(saveGame.Rng.DiceRoll(4, 8)))
+                        if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
                         {
                             ident = true;
                         }
@@ -274,7 +274,7 @@ namespace AngbandOS.Commands
                     {
                         saveGame.MsgPrint("That tastes good.");
                         saveGame.Player.SetTimedPoison(0);
-                        saveGame.Player.RestoreHealth(saveGame.Rng.DiceRoll(4, 8));
+                        saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
                         ident = true;
                         break;
                     }
@@ -289,11 +289,11 @@ namespace AngbandOS.Commands
                     {
                         saveGame.MsgPrint("That tastes... funky.");
                         saveGame.Player.Dna.GainMutation(saveGame);
-                        if (saveGame.Rng.DieRoll(3) == 1)
+                        if (Program.Rng.DieRoll(3) == 1)
                         {
                             saveGame.Player.Dna.GainMutation(saveGame);
                         }
-                        if (saveGame.Rng.DieRoll(3) == 1)
+                        if (Program.Rng.DieRoll(3) == 1)
                         {
                             saveGame.Player.Dna.GainMutation(saveGame);
                         }

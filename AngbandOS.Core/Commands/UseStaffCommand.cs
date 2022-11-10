@@ -60,12 +60,12 @@ namespace AngbandOS.Commands
             }
             chance -= itemLevel > 50 ? 50 : itemLevel;
             // Always a small chance of it working
-            if (chance < Constants.UseDevice && saveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
             {
                 chance = Constants.UseDevice;
             }
             // Check to see if we use it properly
-            if (chance < Constants.UseDevice || saveGame.Rng.DieRoll(chance) < Constants.UseDevice)
+            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
                 saveGame.MsgPrint("You failed to use the staff properly.");
                 return;
@@ -87,7 +87,7 @@ namespace AngbandOS.Commands
                     {
                         if (!saveGame.Player.HasBlindnessResistance && !saveGame.Player.HasDarkResistance)
                         {
-                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 3 + saveGame.Rng.DieRoll(5)))
+                            if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 3 + Program.Rng.DieRoll(5)))
                             {
                                 identified = true;
                             }
@@ -100,7 +100,7 @@ namespace AngbandOS.Commands
                     }
                 case StaffType.Slowness:
                     {
-                        if (saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + saveGame.Rng.DieRoll(30) + 15))
+                        if (saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(30) + 15))
                         {
                             identified = true;
                         }
@@ -116,7 +116,7 @@ namespace AngbandOS.Commands
                     }
                 case StaffType.Summoning:
                     {
-                        for (k = 0; k < saveGame.Rng.DieRoll(4); k++)
+                        for (k = 0; k < Program.Rng.DieRoll(4); k++)
                         {
                             if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0))
                             {
@@ -167,7 +167,7 @@ namespace AngbandOS.Commands
                     }
                 case StaffType.Light:
                     {
-                        if (saveGame.LightArea(saveGame.Rng.DiceRoll(2, 8), 2))
+                        if (saveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
                         {
                             identified = true;
                         }
@@ -237,7 +237,7 @@ namespace AngbandOS.Commands
                     }
                 case StaffType.CureLight:
                     {
-                        if (saveGame.Player.RestoreHealth(saveGame.Rng.DieRoll(8)))
+                        if (saveGame.Player.RestoreHealth(Program.Rng.DieRoll(8)))
                         {
                             identified = true;
                         }
@@ -323,7 +323,7 @@ namespace AngbandOS.Commands
                     {
                         if (saveGame.Player.TimedHaste == 0)
                         {
-                            if (saveGame.Player.SetTimedHaste(saveGame.Rng.DieRoll(30) + 15))
+                            if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
                             {
                                 identified = true;
                             }
@@ -363,7 +363,7 @@ namespace AngbandOS.Commands
                             identified = true;
                         }
                         k = 3 * saveGame.Player.Level;
-                        if (saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + saveGame.Rng.DieRoll(25) + k))
+                        if (saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k))
                         {
                             identified = true;
                         }
