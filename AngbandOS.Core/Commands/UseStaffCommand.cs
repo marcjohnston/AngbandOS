@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS.Commands
 {
@@ -22,10 +23,9 @@ namespace AngbandOS.Commands
             int itemIndex = -999;
 
             // Get an item if we weren't passed one
-            Inventory.ItemFilterCategory = ItemCategory.Staff;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Use which staff? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemCategory.Staff)))
                 {
                     if (itemIndex == -2)
                     {
@@ -36,14 +36,11 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a staff
-            Inventory.ItemFilterCategory = ItemCategory.Staff;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Staff)))
             {
                 saveGame.MsgPrint("That is not a staff!");
-                Inventory.ItemFilterCategory = 0;
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             // We can't use a staff from the floor
             if (itemIndex < 0 && item.Count > 1)
             {

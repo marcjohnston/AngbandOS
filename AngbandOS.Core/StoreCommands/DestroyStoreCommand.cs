@@ -29,7 +29,7 @@ namespace AngbandOS.StoreCommands
             int amount = 1;
             bool force = saveGame.CommandArgument > 0;
             // Get an item to destroy
-            if (!saveGame.GetItem(out int itemIndex, "Destroy which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Destroy which item? ", false, true, true, null))
             {
                 if (itemIndex == -2)
                 {

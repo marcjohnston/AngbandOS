@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.Projection;
@@ -41,10 +42,9 @@ namespace AngbandOS.Commands
                 return;
             }
             // If we weren't passed in an item, prompt for one
-            Inventory.ItemFilterCategory = ItemCategory.Scroll;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Read which scroll? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Read which scroll? ", true, true, true, new ItemCategoryItemFilter(ItemCategory.Scroll)))
                 {
                     if (itemIndex == -2)
                     {
@@ -55,14 +55,11 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a scroll
-            Inventory.ItemFilterCategory = ItemCategory.Scroll;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Scroll)))
             {
                 saveGame.MsgPrint("That is not a scroll!");
-                Inventory.ItemFilterCategory = 0;
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             // Scrolls use a full turn
             saveGame.EnergyUse = 100;
             //bool identified = false;

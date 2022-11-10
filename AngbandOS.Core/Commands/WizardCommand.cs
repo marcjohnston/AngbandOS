@@ -539,7 +539,7 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizPlay(SaveGame saveGame)
         {
-            if (!saveGame.GetItem(out int item, "Play with which object? ", true, true, true))
+            if (!saveGame.GetItem(out int item, "Play with which object? ", true, true, true, null))
             {
                 if (item == -2)
                 {

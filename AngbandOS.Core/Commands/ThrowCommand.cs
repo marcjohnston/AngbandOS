@@ -26,7 +26,7 @@ namespace AngbandOS.Commands
         public static void DoCmdThrow(SaveGame saveGame, int damageMultiplier)
         {
             // Get an item to throw
-            if (!saveGame.GetItem(out int itemIndex, "Throw which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Throw which item? ", false, true, true, null))
             {
                 if (itemIndex == -2)
                 {

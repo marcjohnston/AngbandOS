@@ -3,6 +3,7 @@ using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS.Commands
 {
@@ -25,8 +26,7 @@ namespace AngbandOS.Commands
             if (itemIndex == -999)
             {
                 // Prompt for an item, showing only wands
-                Inventory.ItemFilterCategory = ItemCategory.Wand;
-                if (!saveGame.GetItem(out itemIndex, "Aim which wand? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemCategory.Wand)))
                 {
                     if (itemIndex == -2)
                     {
@@ -37,14 +37,11 @@ namespace AngbandOS.Commands
             }
             // Get the item and check if it is really a wand
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            Inventory.ItemFilterCategory = ItemCategory.Wand;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Wand)))
             {
                 saveGame.MsgPrint("That is not a wand!");
-                Inventory.ItemFilterCategory = 0;
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             // We can't use wands directly from the floor, since we need to aim them
             if (itemIndex < 0 && item.Count > 1)
             {

@@ -2,6 +2,7 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS.Commands
 {
@@ -23,10 +24,9 @@ namespace AngbandOS.Commands
             int itemIndex = -999;
 
             // Get an item if we didn't already have one
-            Inventory.ItemFilterCategory = ItemCategory.Potion;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Quaff which potion? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemCategory.Potion)))
                 {
                     if (itemIndex == -2)
                     {
@@ -37,13 +37,11 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is a potion
-            Inventory.ItemFilterCategory = ItemCategory.Potion;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Potion)))
             {
                 saveGame.MsgPrint("That is not a potion!");
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             saveGame.PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
             saveGame.EnergyUse = 100;

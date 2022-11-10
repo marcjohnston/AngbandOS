@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using System;
 
@@ -30,7 +31,7 @@ namespace AngbandOS.StoreCommands
             saveGame.SaveScreen();
             // We're interested in seeing everything
             saveGame.ItemFilterAll = true;
-            saveGame.Player.Inventory.ShowEquip();
+            saveGame.Player.Inventory.ShowEquip(null);
             saveGame.ItemFilterAll = false;
             // Get a command
             string outVal =

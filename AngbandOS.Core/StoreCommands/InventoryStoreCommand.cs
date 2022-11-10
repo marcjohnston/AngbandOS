@@ -30,7 +30,7 @@ namespace AngbandOS.StoreCommands
             saveGame.SaveScreen();
             // We want to see everything
             saveGame.ItemFilterAll = true;
-            saveGame.Player.Inventory.ShowInven();
+            saveGame.Player.Inventory.ShowInven(null);
             saveGame.ItemFilterAll = false;
             // Get a new command
             string outVal =

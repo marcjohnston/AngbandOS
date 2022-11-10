@@ -965,7 +965,7 @@ namespace AngbandOS
             var deity = SaveGame.Player.Religion.GetNamedDeity(godName);
             string pmt = "Sacrifice which item? ";
             SaveGame.ItemFilter = null;
-            if (!SaveGame.GetItem(out int item, pmt, true, true, false))
+            if (!SaveGame.GetItem(out int item, pmt, true, true, false, null))
             {
                 if (item == -2)
                 {
@@ -1421,7 +1421,7 @@ namespace AngbandOS
             SaveGame.MsgPrint(null);
             // Get the spell books we have
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true))
+            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true, null))
             {
                 if (itemIndex == -2)
                 {
@@ -1992,7 +1992,7 @@ namespace AngbandOS
         {
             int itemPos;
             SaveGame.ItemFilter = StoreWillBuy;
-            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false))
+            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false, null))
             {
                 if (item == -2)
                 {

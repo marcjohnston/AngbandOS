@@ -30,7 +30,7 @@ namespace AngbandOS.StoreCommands
             string itemName;
             // Only interested in wearable items
             saveGame.ItemFilter = saveGame.ItemFilterWearable;
-            if (!saveGame.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, null))
             {
                 if (itemIndex == -2)
                 {

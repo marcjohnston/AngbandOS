@@ -26,7 +26,7 @@ namespace AngbandOS.StoreCommands
         public static void DoCmdTakeOff(SaveGame saveGame)
         {
             // Get the item to take off
-            if (!saveGame.GetItem(out int itemIndex, "Take off which item? ", true, false, false))
+            if (!saveGame.GetItem(out int itemIndex, "Take off which item? ", true, false, false, null))
             {
                 if (itemIndex == -2)
                 {

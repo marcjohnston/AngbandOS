@@ -150,7 +150,7 @@ namespace AngbandOS.Commands
                 return;
             }
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true))
+            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true, null))
             {
                 if (item == -2)
                 {

@@ -36,7 +36,7 @@ namespace AngbandOS.StoreCommands
             }
             // Get a book to read if we don't already have one
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.GetItem(out int itemIndex, "Browse which book? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Browse which book? ", false, true, true, null))
             {
                 if (itemIndex == -2)
                 {
@@ -48,7 +48,7 @@ namespace AngbandOS.StoreCommands
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Check that the book is useable by the player
             Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, null))
             {
                 saveGame.MsgPrint("You can't read that.");
                 Inventory.ItemFilterUseableSpellBook = false;

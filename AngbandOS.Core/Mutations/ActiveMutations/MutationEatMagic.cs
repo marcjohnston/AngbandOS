@@ -21,7 +21,7 @@ namespace AngbandOS.Mutations.ActiveMutations
                 return;
             }
             saveGame.ItemFilter = saveGame.ItemTesterHookRecharge;
-            if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true))
+            if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true, null))
             {
                 return;
             }

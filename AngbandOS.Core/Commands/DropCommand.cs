@@ -19,7 +19,7 @@ namespace AngbandOS.Commands
         {
             int amount = 1;
             // Get an item from the inventory/equipment
-            if (!saveGame.GetItem(out int itemIndex, "Drop which item? ", true, true, false))
+            if (!saveGame.GetItem(out int itemIndex, "Drop which item? ", true, true, false, null))
             {
                 if (itemIndex == -2)
                 {

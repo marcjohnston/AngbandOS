@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using System;
@@ -16,7 +17,7 @@ namespace AngbandOS
     [Serializable]
     internal class Inventory
     {
-        public static ItemCategory ItemFilterCategory;
+        //public static ItemCategory ItemFilterCategory;
         public static bool ItemFilterUseableSpellBook;
 
         private readonly Item[] _items;
@@ -80,13 +81,13 @@ namespace AngbandOS
             }
         }
 
-        public bool GetItemOkay(int i)
+        public bool GetItemOkay(int i, ItemFilter? itemFilter)
         {
             if (i < 0 || i >= InventorySlot.Total)
             {
                 return false;
             }
-            return ItemMatchesFilter(_items[i]);
+            return ItemMatchesFilter(_items[i], itemFilter);
         }
 
         public int InvenCarry(Item oPtr, bool final)
@@ -414,7 +415,7 @@ namespace AngbandOS
             return slot;
         }
 
-        public bool ItemMatchesFilter(Item item)
+        public bool ItemMatchesFilter(Item item, ItemFilter? itemFilter)
         {
             if (SaveGame.ItemFilterAll)
             {
@@ -432,9 +433,9 @@ namespace AngbandOS
             {
                 return CheckBookRealm(item.Category);
             }
-            if (ItemFilterCategory != 0)
+            if (itemFilter != null)
             {
-                if (ItemFilterCategory != item.Category)
+                if (!itemFilter.Matches(item))
                 {
                     return false;
                 }
@@ -602,7 +603,7 @@ namespace AngbandOS
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
-        public void ShowEquip()
+        public void ShowEquip(ItemFilter? itemFilter)
         {
             int i, j, k;
             Item oPtr;
@@ -618,7 +619,7 @@ namespace AngbandOS
             for (k = 0, i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 oPtr = _items[i];
-                if (!ItemMatchesFilter(oPtr))
+                if (!ItemMatchesFilter(oPtr, itemFilter))
                 {
                     continue;
                 }
@@ -672,7 +673,7 @@ namespace AngbandOS
             SaveGame.ItemDisplayColumn = col;
         }
 
-        public void ShowInven()
+        public void ShowInven(ItemFilter? itemFilter)
         {
             int i, j, k, z = 0;
             Item oPtr;
@@ -696,7 +697,7 @@ namespace AngbandOS
             for (k = 0, i = 0; i < z; i++)
             {
                 oPtr = _items[i];
-                if (!ItemMatchesFilter(oPtr))
+                if (!ItemMatchesFilter(oPtr, itemFilter))
                 {
                     continue;
                 }

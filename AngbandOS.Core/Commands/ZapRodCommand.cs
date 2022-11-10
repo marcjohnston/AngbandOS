@@ -2,6 +2,7 @@
 using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS.Commands
 {
@@ -23,10 +24,9 @@ namespace AngbandOS.Commands
             int itemIndex = -999;
 
             // Get the item if we weren't passed it
-            Inventory.ItemFilterCategory = ItemCategory.Rod;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Zap which rod? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemCategory.Rod)))
                 {
                     if (itemIndex == -2)
                     {
@@ -37,14 +37,11 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a rod
-            Inventory.ItemFilterCategory = ItemCategory.Rod;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Rod)))
             {
                 saveGame.MsgPrint("That is not a rod!");
-                Inventory.ItemFilterCategory = 0;
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             // Rods can't be used from the floor
             if (itemIndex < 0 && item.Count > 1)
             {

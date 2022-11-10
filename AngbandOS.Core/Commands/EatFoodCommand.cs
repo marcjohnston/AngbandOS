@@ -2,6 +2,7 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS.Commands
 {
@@ -22,10 +23,9 @@ namespace AngbandOS.Commands
         {
             int itemIndex = -999;
             // Get a food item from the inventory if one wasn't already specified
-            Inventory.ItemFilterCategory = ItemCategory.Food;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Eat which item? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemCategory.Food)))
                 {
                     if (itemIndex == -2)
                     {
@@ -36,14 +36,11 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is edible
-            Inventory.ItemFilterCategory = ItemCategory.Food;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Food)))
             {
                 saveGame.MsgPrint("You can't eat that!");
-                Inventory.ItemFilterCategory = 0;
                 return;
             }
-            Inventory.ItemFilterCategory = 0;
             // We don't actually eat dwarf bread
             if (item.ItemSubCategory != FoodType.Dwarfbread)
             {

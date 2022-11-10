@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using System;
 
@@ -50,7 +51,7 @@ namespace AngbandOS.Commands
             saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Refill with which flask? ", true, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Refill with which flask? ", true, true, true, null))
                 {
                     if (itemIndex == -2)
                     {
@@ -62,7 +63,7 @@ namespace AngbandOS.Commands
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure our item is suitable fuel
             saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, null))
             {
                 saveGame.MsgPrint("You can't refill a lantern from that!");
                 saveGame.ItemFilter = null;
@@ -107,7 +108,7 @@ namespace AngbandOS.Commands
             saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true))
+                if (!saveGame.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true, null))
                 {
                     if (itemIndex == -2)
                     {
@@ -119,7 +120,7 @@ namespace AngbandOS.Commands
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check that our fuel is suitable
             saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, null))
             {
                 saveGame.MsgPrint("You can't refill a torch with that!");
                 saveGame.ItemFilter = null;

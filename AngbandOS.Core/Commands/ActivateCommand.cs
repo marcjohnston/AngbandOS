@@ -29,7 +29,7 @@ namespace AngbandOS.Commands
             {
                 // No item passed in, so get one; filtering to activatable items only
                 saveGame.ItemFilter = saveGame.ItemFilterActivatable;
-                if (!saveGame.GetItem(out itemIndex, "Activate which item? ", true, false, false))
+                if (!saveGame.GetItem(out itemIndex, "Activate which item? ", true, false, false, null))
                 {
                     if (itemIndex == -2)
                     {
@@ -42,7 +42,7 @@ namespace AngbandOS.Commands
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check if the item is activatable
             saveGame.ItemFilter = saveGame.ItemFilterActivatable;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, null))
             {
                 saveGame.MsgPrint("You can't activate that!");
                 saveGame.ItemFilter = null;

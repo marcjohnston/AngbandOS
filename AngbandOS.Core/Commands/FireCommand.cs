@@ -2,6 +2,7 @@
 using AngbandOS.StaticData;
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Core;
 
 namespace AngbandOS.Commands
@@ -28,8 +29,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Get the ammunition to fire
-            Inventory.ItemFilterCategory = saveGame.Player.AmmunitionItemCategory;
-            if (!saveGame.GetItem(out int itemIndex, "Fire which item? ", false, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(saveGame.Player.AmmunitionItemCategory)))
             {
                 if (itemIndex == -2)
                 {

@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.CompilerServices;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS
 {
@@ -854,7 +855,7 @@ namespace AngbandOS
             DiedFrom = "(alive and well)";
         }
 
-        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor)
+        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, ItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
             Inventory inventory = Player.Inventory;
@@ -871,11 +872,11 @@ namespace AngbandOS
             {
                 i2 = -1;
             }
-            while (i1 <= i2 && !inventory.GetItemOkay(i1))
+            while (i1 <= i2 && !inventory.GetItemOkay(i1, itemFilter))
             {
                 i1++;
             }
-            while (i1 <= i2 && !inventory.GetItemOkay(i2))
+            while (i1 <= i2 && !inventory.GetItemOkay(i2, itemFilter))
             {
                 i2--;
             }
@@ -885,11 +886,11 @@ namespace AngbandOS
             {
                 e2 = -1;
             }
-            while (e1 <= e2 && !inventory.GetItemOkay(e1))
+            while (e1 <= e2 && !inventory.GetItemOkay(e1, itemFilter))
             {
                 e1++;
             }
-            while (e1 <= e2 && !inventory.GetItemOkay(e2))
+            while (e1 <= e2 && !inventory.GetItemOkay(e2, itemFilter))
             {
                 e2--;
             }
@@ -899,7 +900,7 @@ namespace AngbandOS
                 {
                     Item oPtr = Level.Items[currentItemIndex];
                     nextItemIndex = oPtr.NextInStack;
-                    if (inventory.ItemMatchesFilter(oPtr))
+                    if (inventory.ItemMatchesFilter(oPtr, itemFilter))
                     {
                         allowFloor = true;
                     }
@@ -946,7 +947,7 @@ namespace AngbandOS
                     i2.IndexToLetter();
                     if (ViewingItemList)
                     {
-                        Player.Inventory.ShowInven();
+                        Player.Inventory.ShowInven(itemFilter);
                     }
                 }
                 else
@@ -955,7 +956,7 @@ namespace AngbandOS
                     (e2 - InventorySlot.MeleeWeapon).IndexToLetter();
                     if (ViewingItemList)
                     {
-                        Player.Inventory.ShowEquip();
+                        Player.Inventory.ShowEquip(itemFilter);
                     }
                 }
                 string tmpVal;
@@ -1049,7 +1050,7 @@ namespace AngbandOS
                                 {
                                     Item oPtr = Level.Items[currentItemIndex];
                                     nextItemIndex = oPtr.NextInStack;
-                                    if (!inventory.ItemMatchesFilter(oPtr))
+                                    if (!inventory.ItemMatchesFilter(oPtr, itemFilter))
                                     {
                                         continue;
                                     }
@@ -1075,7 +1076,7 @@ namespace AngbandOS
                             {
                                 k = e1 == e2 ? e1 : -1;
                             }
-                            if (!inventory.GetItemOkay(k))
+                            if (!inventory.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }
@@ -1092,7 +1093,7 @@ namespace AngbandOS
                                 which = char.ToLower(which);
                             }
                             k = !ViewingEquipment ? Player.Inventory.LabelToInven(which) : Player.Inventory.LabelToEquip(which);
-                            if (!inventory.GetItemOkay(k))
+                            if (!inventory.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }
@@ -1113,7 +1114,6 @@ namespace AngbandOS
                 Load();
             }
             ViewingItemList = false;
-            Inventory.ItemFilterCategory = 0;
             ItemFilter = null;
             PrintLine("", 0, 0);
             return item;
@@ -3356,7 +3356,7 @@ namespace AngbandOS
         {
             int amt = 1;
             bool force = CommandArgument > 0;
-            if (!GetItem(out int item, "Turn which item to gold? ", false, true, true))
+            if (!GetItem(out int item, "Turn which item to gold? ", false, true, true, null))
             {
                 if (item == -2)
                 {
@@ -3573,7 +3573,7 @@ namespace AngbandOS
         {
             bool okay;
             ItemFilter = ItemTesterHookWeapon;
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true))
+            if (!GetItem(out int item, "Enchant which item? ", true, true, true, null))
             {
                 if (item == -2)
                 {
@@ -3630,7 +3630,7 @@ namespace AngbandOS
         public void BlessWeapon()
         {
             ItemFilter = ItemTesterHookWeapon;
-            if (!GetItem(out int item, "Bless which weapon? ", true, true, true))
+            if (!GetItem(out int item, "Bless which weapon? ", true, true, true, null))
             {
                 if (item == -2)
                 {
@@ -4843,7 +4843,7 @@ namespace AngbandOS
             {
                 ItemFilter = ItemTesterHookArmour;
             }
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true))
+            if (!GetItem(out int item, "Enchant which item? ", true, true, true, null))
             {
                 if (item == -2)
                 {
@@ -4964,7 +4964,7 @@ namespace AngbandOS
 
         public bool IdentifyFully()
         {
-            if (!GetItem(out int item, "Identify which item? ", true, true, true))
+            if (!GetItem(out int item, "Identify which item? ", true, true, true, null))
             {
                 if (item == -2)
                 {
@@ -5013,7 +5013,7 @@ namespace AngbandOS
 
         public bool IdentifyItem()
         {
-            if (!GetItem(out int item, "Identify which item? ", true, true, true))
+            if (!GetItem(out int item, "Identify which item? ", true, true, true, null))
             {
                 if (item == -2)
                 {
@@ -5296,7 +5296,7 @@ namespace AngbandOS
         {
             int i, t;
             ItemFilter = ItemTesterHookRecharge;
-            if (!GetItem(out int item, "Recharge which item? ", false, true, true))
+            if (!GetItem(out int item, "Recharge which item? ", false, true, true, null))
             {
                 if (item == -2)
                 {
@@ -9036,7 +9036,7 @@ namespace AngbandOS
         {
             // Get a piece of armour
             ItemFilter = ItemTesterHookArmour;
-            if (!GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true))
+            if (!GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true, null))
             {
                 if (itemIndex == -2)
                 {

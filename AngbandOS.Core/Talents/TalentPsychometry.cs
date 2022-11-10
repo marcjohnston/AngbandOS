@@ -40,7 +40,7 @@ namespace AngbandOS.Talents
 
         private void Psychometry(SaveGame saveGame)
         {
-            if (!saveGame.GetItem(out int item, "Meditate on which item? ", true, true, true))
+            if (!saveGame.GetItem(out int item, "Meditate on which item? ", true, true, true, null))
             {
                 if (item == -2)
                 {

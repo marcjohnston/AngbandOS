@@ -26,7 +26,7 @@ namespace AngbandOS.StoreCommands
         public static void DoCmdExamine(SaveGame saveGame)
         {
             // Get the item to examine
-            if (!saveGame.GetItem(out int itemIndex, "Examine which item? ", true, true, true))
+            if (!saveGame.GetItem(out int itemIndex, "Examine which item? ", true, true, true, null))
             {
                 if (itemIndex == -2)
                 {
