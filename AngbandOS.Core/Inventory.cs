@@ -17,9 +17,6 @@ namespace AngbandOS
     [Serializable]
     internal class Inventory
     {
-        //public static ItemCategory ItemFilterCategory;
-        public static bool ItemFilterUseableSpellBook;
-
         private readonly Item[] _items;
         private readonly Player _player;
         private int _invenCnt;
@@ -429,10 +426,6 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (ItemFilterUseableSpellBook)
-            {
-                return CheckBookRealm(item.Category);
-            }
             if (itemFilter != null)
             {
                 if (!itemFilter.Matches(item))
@@ -798,10 +791,10 @@ namespace AngbandOS
             return -1;
         }
 
-        private bool CheckBookRealm(ItemCategory bookTval)
-        {
-            return _player.Realm1.ToSpellBookItemCategory() == bookTval || _player.Realm2.ToSpellBookItemCategory() == bookTval;
-        }
+        //private bool CheckBookRealm(ItemCategory bookTval)
+        //{
+        //    return _player.Realm1.ToSpellBookItemCategory() == bookTval || _player.Realm2.ToSpellBookItemCategory() == bookTval;
+        //}
 
         private string MentionUse(int i)
         {

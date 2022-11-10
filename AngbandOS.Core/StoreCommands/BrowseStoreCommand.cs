@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using System;
 
 namespace AngbandOS.StoreCommands
@@ -35,26 +36,21 @@ namespace AngbandOS.StoreCommands
                 return;
             }
             // Get a book to read if we don't already have one
-            Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.GetItem(out int itemIndex, "Browse which book? ", false, true, true, null))
+            if (!saveGame.GetItem(out int itemIndex, "Browse which book? ", false, true, true, new UsableSpellBookItemFilter(saveGame)))
             {
                 if (itemIndex == -2)
                 {
                     saveGame.MsgPrint("You have no books that you can read.");
                 }
-                Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Check that the book is useable by the player
-            Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, null))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new UsableSpellBookItemFilter(saveGame)))
             {
                 saveGame.MsgPrint("You can't read that.");
-                Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
-            Inventory.ItemFilterUseableSpellBook = false;
             int bookSubCategory = item.ItemSubCategory;
             saveGame.HandleStuff();
             // Find all spells in the book and add them to the array

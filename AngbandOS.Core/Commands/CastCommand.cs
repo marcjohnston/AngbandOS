@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using AngbandOS.Spells;
@@ -149,23 +150,19 @@ namespace AngbandOS.Commands
                 saveGame.MsgPrint("You are too confused!");
                 return;
             }
-            Inventory.ItemFilterUseableSpellBook = true;
-            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true, null))
+            if (!saveGame.GetItem(out int item, "Use which book? ", false, true, true, new UsableSpellBookItemFilter(saveGame)))
             {
                 if (item == -2)
                 {
                     saveGame.MsgPrint($"You have no {prayer} books!");
                 }
-                Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
-            Inventory.ItemFilterUseableSpellBook = false;
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             int sval = oPtr.ItemSubCategory;
             bool useSetTwo = oPtr.Category == saveGame.Player.Realm2.ToSpellBookItemCategory();
             saveGame.HandleStuff();
-            if (!GetSpell(saveGame, out int spell, saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval,
-                true, useSetTwo, saveGame.Player))
+            if (!GetSpell(saveGame, out int spell, saveGame.Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval, true, useSetTwo, saveGame.Player))
             {
                 if (spell == -2)
                 {

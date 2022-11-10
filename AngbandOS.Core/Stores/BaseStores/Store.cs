@@ -14,6 +14,7 @@ using AngbandOS.Stores;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemFilters;
 
 namespace AngbandOS
 {
@@ -1420,17 +1421,14 @@ namespace AngbandOS
             SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} new {spellType}{plural}.");
             SaveGame.MsgPrint(null);
             // Get the spell books we have
-            Inventory.ItemFilterUseableSpellBook = true;
-            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true, null))
+            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
             {
                 if (itemIndex == -2)
                 {
                     SaveGame.MsgPrint("You have no books that you can read.");
                 }
-                Inventory.ItemFilterUseableSpellBook = false;
                 return;
             }
-            Inventory.ItemFilterUseableSpellBook = false;
             // Check each book
             Item item = itemIndex >= 0 ? SaveGame.Player.Inventory[itemIndex] : SaveGame.Level.Items[0 - itemIndex];
             int itemSubCategory = item.ItemSubCategory;

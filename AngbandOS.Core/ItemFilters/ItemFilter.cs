@@ -18,20 +18,35 @@ namespace AngbandOS.Core.ItemFilters
     }
 
     /// <summary>
-    /// Represents an ItemFilter object that returns true, if an Item is of a specific ItemCategory.
+    /// Represents an ItemFilter object that returns true, if an Item is of any specific ItemCategory.
     /// </summary>
     internal class ItemCategoryItemFilter : ItemFilter
     {
         public override bool Matches(Item item)
         {
-            return item.Category == ItemCategory;
+            foreach (ItemCategory itemCategory in ItemCategories)
+            {
+                if (item.Category == itemCategory)
+                    return true;
+            }
+            return false;
         }
 
-        private ItemCategory ItemCategory { get; }
+        private ItemCategory[] ItemCategories { get; }
 
-        public ItemCategoryItemFilter(ItemCategory itemCategory)
+        public ItemCategoryItemFilter(params ItemCategory[] itemCategories)
         {
-            ItemCategory = itemCategory;
+            ItemCategories = itemCategories;
+        }
+    }
+
+    /// <summary>
+    /// Represents an ItemFilter that filters out all items that are not of either chosen player Realm.
+    /// </summary>
+    internal class UsableSpellBookItemFilter : ItemCategoryItemFilter
+    {
+        public UsableSpellBookItemFilter(SaveGame saveGame) : base(saveGame.Player.Realm1.ToSpellBookItemCategory(), saveGame.Player.Realm2.ToSpellBookItemCategory())
+        {
         }
     }
 }
