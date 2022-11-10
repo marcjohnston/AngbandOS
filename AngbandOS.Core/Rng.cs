@@ -15,10 +15,8 @@ namespace AngbandOS
     [Serializable]
     internal class Rng
     {
-       // [NonSerialized]
         private Random _mainSequence = new Random();
 
-      //  [NonSerialized]
         private Random _fixed = new Random();
 
         /// <summary>
