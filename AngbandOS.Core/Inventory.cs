@@ -414,7 +414,7 @@ namespace AngbandOS
 
         public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
         {
-            if (SaveGame.ItemFilterAll)
+            if (itemFilter == null) // TODO: Do we really need this
             {
                 return true;
             }

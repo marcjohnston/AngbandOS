@@ -59,7 +59,6 @@ namespace AngbandOS
         public int EnergyUse;
         public bool HackMind;
         public int ItemDisplayColumn = 50;
-        public bool ItemFilterAll;
         public Level Level;
         public bool MartialArtistArmourAux;
         public bool MartialArtistNotifyAux;

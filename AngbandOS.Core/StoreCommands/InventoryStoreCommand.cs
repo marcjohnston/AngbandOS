@@ -29,9 +29,7 @@ namespace AngbandOS.StoreCommands
             saveGame.ViewingEquipment = false;
             saveGame.SaveScreen();
             // We want to see everything
-            saveGame.ItemFilterAll = true;
             saveGame.Player.Inventory.ShowInven(null);
-            saveGame.ItemFilterAll = false;
             // Get a new command
             string outVal =
                 $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
