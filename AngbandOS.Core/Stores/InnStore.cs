@@ -47,7 +47,7 @@ namespace AngbandOS.Stores
 
         public override string FeatureType => "Inn";
 
-        protected override bool StoreWillBuy(Item item)
+        public override bool ItemMatches(Item item)
         {
             return false;
         }

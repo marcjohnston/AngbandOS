@@ -19,7 +19,7 @@ using AngbandOS.Core.ItemFilters;
 namespace AngbandOS
 {
     [Serializable]
-    internal abstract class Store : IStore
+    internal abstract class Store : IStore, IItemFilter
     {
         protected readonly SaveGame SaveGame;
         public readonly StoreType StoreType;
@@ -965,7 +965,6 @@ namespace AngbandOS
             }
             var deity = SaveGame.Player.Religion.GetNamedDeity(godName);
             string pmt = "Sacrifice which item? ";
-            SaveGame.ItemFilter = null;
             if (!SaveGame.GetItem(out int item, pmt, true, true, false, null))
             {
                 if (item == -2)
@@ -1989,8 +1988,7 @@ namespace AngbandOS
         public void StoreSell()
         {
             int itemPos;
-            SaveGame.ItemFilter = StoreWillBuy;
-            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false, null))
+            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false, this)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
             {
                 if (item == -2)
                 {
@@ -2081,6 +2079,6 @@ namespace AngbandOS
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected abstract bool StoreWillBuy(Item item);
+        public abstract bool ItemMatches(Item item);
     }
 }

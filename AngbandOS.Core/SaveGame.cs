@@ -59,7 +59,6 @@ namespace AngbandOS
         public int EnergyUse;
         public bool HackMind;
         public int ItemDisplayColumn = 50;
-        public ItemFilterDelegate ItemFilter;
         public bool ItemFilterAll;
         public Level Level;
         public bool MartialArtistArmourAux;
@@ -454,8 +453,6 @@ namespace AngbandOS
             UpdateNotifier?.GameStopped();
             CloseGame();
         }
-
-        internal delegate bool ItemFilterDelegate(Item item);
 
         // PROFILE MESSAGING START
         public ExPlayer ExPlayer;
@@ -855,7 +852,7 @@ namespace AngbandOS
             DiedFrom = "(alive and well)";
         }
 
-        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, ItemFilter? itemFilter)
+        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
             Inventory inventory = Player.Inventory;
@@ -1114,7 +1111,6 @@ namespace AngbandOS
                 Load();
             }
             ViewingItemList = false;
-            ItemFilter = null;
             PrintLine("", 0, 0);
             return item;
         }
@@ -3572,8 +3568,7 @@ namespace AngbandOS
         public void ArtifactScroll()
         {
             bool okay;
-            ItemFilter = ItemTesterHookWeapon;
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true, null))
+            if (!GetItem(out int item, "Enchant which item? ", true, true, true, new WeaponItemFilter()))
             {
                 if (item == -2)
                 {
@@ -3629,8 +3624,7 @@ namespace AngbandOS
 
         public void BlessWeapon()
         {
-            ItemFilter = ItemTesterHookWeapon;
-            if (!GetItem(out int item, "Bless which weapon? ", true, true, true, null))
+            if (!GetItem(out int item, "Bless which weapon? ", true, true, true, new WeaponItemFilter()))
             {
                 if (item == -2)
                 {
@@ -4838,12 +4832,7 @@ namespace AngbandOS
         public bool EnchantSpell(int numHit, int numDam, int numAc)
         {
             bool okay = false;
-            ItemFilter = ItemTesterHookWeapon;
-            if (numAc != 0)
-            {
-                ItemFilter = ItemTesterHookArmour;
-            }
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true, null))
+            if (!GetItem(out int item, "Enchant which item? ", true, true, true, numAc != 0 ? new ArmourItemFilter() : new WeaponItemFilter()))
             {
                 if (item == -2)
                 {
@@ -5079,43 +5068,6 @@ namespace AngbandOS
             }
         }
 
-        public bool ItemTesterHookArmour(Item oPtr)
-        {
-            switch (oPtr.Category)
-            {
-                case ItemCategory.DragArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.SoftArmor:
-                case ItemCategory.Shield:
-                case ItemCategory.Cloak:
-                case ItemCategory.Crown:
-                case ItemCategory.Helm:
-                case ItemCategory.Boots:
-                case ItemCategory.Gloves:
-                    {
-                        return true;
-                    }
-            }
-            return false;
-        }
-
-        public bool ItemTesterHookRecharge(Item oPtr)
-        {
-            if (oPtr.Category == ItemCategory.Staff)
-            {
-                return true;
-            }
-            if (oPtr.Category == ItemCategory.Wand)
-            {
-                return true;
-            }
-            if (oPtr.Category == ItemCategory.Rod)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public bool LightArea(int dam, int rad)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
@@ -5295,8 +5247,7 @@ namespace AngbandOS
         public bool Recharge(int num)
         {
             int i, t;
-            ItemFilter = ItemTesterHookRecharge;
-            if (!GetItem(out int item, "Recharge which item? ", false, true, true, null))
+            if (!GetItem(out int item, "Recharge which item? ", false, true, true, new RechargableItemFilter()))
             {
                 if (item == -2)
                 {
@@ -6786,25 +6737,6 @@ namespace AngbandOS
             return flag;
         }
 
-        private bool ItemTesterHookWeapon(Item oPtr)
-        {
-            switch (oPtr.Category)
-            {
-                case ItemCategory.Sword:
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Digging:
-                case ItemCategory.Bow:
-                case ItemCategory.Bolt:
-                case ItemCategory.Arrow:
-                case ItemCategory.Shot:
-                    {
-                        return true;
-                    }
-            }
-            return false;
-        }
-
         private void LightRoom(int y1, int x1)
         {
             CaveTempRoomAux(y1, x1);
@@ -8007,44 +7939,6 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Return whether or not an item can fuel a lantern
-        /// </summary>
-        /// <param name="item"> The item to check </param>
-        /// <returns> True if the item can fuel a lantern </returns>
-        public bool ItemFilterLanternFuel(Item item)
-        {
-            if (item.Category == ItemCategory.Flask)
-            {
-                return true;
-            }
-            if (item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Lantern)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Return whether or not an item can fuel a torch
-        /// </summary>
-        /// <param name="item"> The item to check </param>
-        /// <returns> True if the item can fuel a torch </returns>
-        public bool ItemFilterTorchFuel(Item item)
-        {
-            return item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Torch;
-        }
-
-        /// <summary>
-        /// Return whether or not an item can be worn or wielded
-        /// </summary>
-        /// <param name="item"> The item to check </param>
-        /// <returns> True if the item can be worn or wielded </returns>
-        public bool ItemFilterWearable(Item item)
-        {
-            return Player.Inventory.WieldSlot(item) >= InventorySlot.MeleeWeapon;
-        }
-
-        /// <summary>
         /// Attempt to move the player in the given direction
         /// </summary>
         /// <param name="direction"> The direction in which to move </param>
@@ -9035,8 +8929,7 @@ namespace AngbandOS
         public void Rustproof()
         {
             // Get a piece of armour
-            ItemFilter = ItemTesterHookArmour;
-            if (!GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true, null))
+            if (!GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true, new ArmourItemFilter()))
             {
                 if (itemIndex == -2)
                 {

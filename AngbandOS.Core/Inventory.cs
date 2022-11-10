@@ -78,7 +78,7 @@ namespace AngbandOS
             }
         }
 
-        public bool GetItemOkay(int i, ItemFilter? itemFilter)
+        public bool GetItemOkay(int i, IItemFilter? itemFilter)
         {
             if (i < 0 || i >= InventorySlot.Total)
             {
@@ -412,7 +412,7 @@ namespace AngbandOS
             return slot;
         }
 
-        public bool ItemMatchesFilter(Item item, ItemFilter? itemFilter)
+        public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
         {
             if (SaveGame.ItemFilterAll)
             {
@@ -428,14 +428,7 @@ namespace AngbandOS
             }
             if (itemFilter != null)
             {
-                if (!itemFilter.Matches(item))
-                {
-                    return false;
-                }
-            }
-            if (SaveGame.ItemFilter != null)
-            {
-                if (!SaveGame.ItemFilter(item))
+                if (!itemFilter.ItemMatches(item))
                 {
                     return false;
                 }
@@ -596,7 +589,7 @@ namespace AngbandOS
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
-        public void ShowEquip(ItemFilter? itemFilter)
+        public void ShowEquip(IItemFilter? itemFilter)
         {
             int i, j, k;
             Item oPtr;
@@ -666,7 +659,7 @@ namespace AngbandOS
             SaveGame.ItemDisplayColumn = col;
         }
 
-        public void ShowInven(ItemFilter? itemFilter)
+        public void ShowInven(IItemFilter? itemFilter)
         {
             int i, j, k, z = 0;
             Item oPtr;
@@ -790,11 +783,6 @@ namespace AngbandOS
             }
             return -1;
         }
-
-        //private bool CheckBookRealm(ItemCategory bookTval)
-        //{
-        //    return _player.Realm1.ToSpellBookItemCategory() == bookTval || _player.Realm2.ToSpellBookItemCategory() == bookTval;
-        //}
 
         private string MentionUse(int i)
         {

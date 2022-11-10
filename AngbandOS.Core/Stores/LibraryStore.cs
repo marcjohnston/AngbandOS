@@ -68,7 +68,7 @@ namespace AngbandOS.Stores
             };
         }
 
-        protected override bool StoreWillBuy(Item item)
+        public override bool ItemMatches(Item item)
         {
             switch (item.BaseItemCategory)
             {

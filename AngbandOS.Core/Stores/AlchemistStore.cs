@@ -1,8 +1,8 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StoreCommands;
-using System;
 
 namespace AngbandOS.Stores
 {
@@ -68,7 +68,7 @@ namespace AngbandOS.Stores
             };
         }
 
-        protected override bool StoreWillBuy(Item item)
+        public override bool ItemMatches(Item item)
         {
             switch (item.BaseItemCategory)
             {

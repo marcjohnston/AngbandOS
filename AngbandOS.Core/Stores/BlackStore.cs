@@ -43,7 +43,7 @@ namespace AngbandOS.Stores
             return null;
         }
 
-        protected override bool StoreWillBuy(Item item)
+        public override bool ItemMatches(Item item)
         {
             return item.Value() > 0;
         }

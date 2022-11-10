@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using System;
 
@@ -20,8 +21,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.ItemFilter = saveGame.ItemTesterHookRecharge;
-            if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true, null))
+            if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true, new RechargableItemFilter()))
             {
                 return;
             }

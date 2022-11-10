@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 
@@ -28,8 +29,7 @@ namespace AngbandOS.Commands
             if (itemIndex == -999)
             {
                 // No item passed in, so get one; filtering to activatable items only
-                saveGame.ItemFilter = saveGame.ItemFilterActivatable;
-                if (!saveGame.GetItem(out itemIndex, "Activate which item? ", true, false, false, null))
+                if (!saveGame.GetItem(out itemIndex, "Activate which item? ", true, false, false, new ActivatableItemFilter()))
                 {
                     if (itemIndex == -2)
                     {
@@ -41,14 +41,11 @@ namespace AngbandOS.Commands
             // Get the item from the index
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check if the item is activatable
-            saveGame.ItemFilter = saveGame.ItemFilterActivatable;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, null))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ActivatableItemFilter()))
             {
                 saveGame.MsgPrint("You can't activate that!");
-                saveGame.ItemFilter = null;
                 return;
             }
-            saveGame.ItemFilter = null;
             // Activating an item uses 100 energy
             saveGame.EnergyUse = 100;
             // Get the level of the item

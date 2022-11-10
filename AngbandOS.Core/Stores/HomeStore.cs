@@ -19,7 +19,7 @@ namespace AngbandOS.Stores
 
         public override string FeatureType => "Home";
 
-        protected override bool StoreWillBuy(Item item)
+        public override bool ItemMatches(Item item)
         {
             return true;
         }

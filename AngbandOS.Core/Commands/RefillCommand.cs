@@ -48,10 +48,9 @@ namespace AngbandOS.Commands
         private void RefillLamp(int itemIndex, SaveGame saveGame)
         {
             // Get an item if we don't already have one
-            saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Refill with which flask? ", true, true, true, null))
+                if (!saveGame.GetItem(out itemIndex, "Refill with which flask? ", true, true, true, new LanternFuelItemFilter()))
                 {
                     if (itemIndex == -2)
                     {
@@ -62,14 +61,11 @@ namespace AngbandOS.Commands
             }
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure our item is suitable fuel
-            saveGame.ItemFilter = saveGame.ItemFilterLanternFuel;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, null))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
             {
                 saveGame.MsgPrint("You can't refill a lantern from that!");
-                saveGame.ItemFilter = null;
                 return;
             }
-            saveGame.ItemFilter = null;
             // Refilling takes half a turn
             saveGame.EnergyUse = 50;
             Item lamp = saveGame.Player.Inventory[InventorySlot.Lightsource];
@@ -105,10 +101,9 @@ namespace AngbandOS.Commands
         private void RefillTorch(int itemIndex, SaveGame saveGame)
         {
             // Get an item if we don't already have one
-            saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true, null))
+                if (!saveGame.GetItem(out itemIndex, "Refuel with which torch? ", false, true, true, new TorchFuelItemFilter()))
                 {
                     if (itemIndex == -2)
                     {
@@ -119,14 +114,11 @@ namespace AngbandOS.Commands
             }
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check that our fuel is suitable
-            saveGame.ItemFilter = saveGame.ItemFilterTorchFuel;
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, null))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
             {
                 saveGame.MsgPrint("You can't refill a torch with that!");
-                saveGame.ItemFilter = null;
                 return;
             }
-            saveGame.ItemFilter = null;
             // Refueling takes half a turn
             saveGame.EnergyUse = 50;
             Item torch = saveGame.Player.Inventory[InventorySlot.Lightsource];

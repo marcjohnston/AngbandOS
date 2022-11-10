@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using System;
 
@@ -29,8 +30,7 @@ namespace AngbandOS.StoreCommands
             string weildPhrase;
             string itemName;
             // Only interested in wearable items
-            saveGame.ItemFilter = saveGame.ItemFilterWearable;
-            if (!saveGame.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, null))
+            if (!saveGame.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
             {
                 if (itemIndex == -2)
                 {
