@@ -25,10 +25,5 @@ namespace AngbandOS
                 Add(pair.Value.FixedArtifactID, new FixedArtifact(pair.Value));
             }
         }
-
-        public FixedArtifactArray(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            // Needed for serialising a dictionary
-        }
     }
 }
