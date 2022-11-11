@@ -24,5 +24,10 @@ namespace AngbandOS
                 Add(pair.Value.RareItemType, new RareItemType(pair.Value));
             }
         }
+
+        public RareItemTypeArray(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            // Needed for serialising a dictionary
+        }
     }
 }
