@@ -10,15 +10,15 @@ using System;
 namespace AngbandOS
 {
     [Serializable]
-    internal class MenuItem
+    internal class MenuItem<T>
     {
-        public readonly int Index;
+        public readonly T Item;
         public readonly string Text;
 
-        public MenuItem(string text, int index)
+        public MenuItem(string text, T item)
         {
             Text = text;
-            Index = index;
+            Item = item;
         }
     }
 }

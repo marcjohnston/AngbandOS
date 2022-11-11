@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -31,5 +32,6 @@ namespace AngbandOS.Core.Races
         public override uint Choice => 0xC89D;
         public override int Index => RaceId.TchoTcho;
 
+        public override string Description => "Tcho-Tchos are hairless cannibalistic near-humans who dwell\nin isolated parts of the world away from more civilised\nplaces where their dark rituals and sacrifices go unseen.\nTcho-Tchos are immune to fear, and can also learn to create\nThe Yellow Sign (at lvl 35).";
     }
 }

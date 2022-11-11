@@ -30,6 +30,7 @@ namespace AngbandOS.Core.Races
         public override int Infravision => 0;
         public override uint Choice => 0xFFFF;
         public override int Index => RaceId.Human;
+        public override string Description => "Hopefully you know all about humans already because you\nare one! In game terms, humans are the average around which\nthe other races are measured. As such, humans get no\nspecial abilities, but they increase in level quicker than\nany other race. Humans are recommended for new players.";
 
     }
 }

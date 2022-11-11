@@ -30,6 +30,7 @@ namespace AngbandOS.Core.Races
         public override int Infravision => 3;
         public override uint Choice => 0x0C07;
         public override int Index => RaceId.HalfOgre;
+        public override string Description => "Half-Ogres are both strong and naturally magical, although\nthey don't usually have the intelligence to make the most\nof their magic. They resist darkness and can't have their\nstrength reduced. They can also can enter a berserk\nrage (at lvl 8).";
 
     }
 }

@@ -11882,37 +11882,19 @@ namespace AngbandOS
         /// </summary>
         private static readonly string[] _yeekSyllable3 = { "k", "k", "k", "ek", "eek", "ek" };
 
-        private readonly MenuItem[] _classMenu =
+        private readonly MenuItem<int>[] _classMenu =
         {
-            new MenuItem("Channeler", CharacterClass.Channeler), new MenuItem("Chosen One", CharacterClass.ChosenOne),
-            new MenuItem("Cultist", CharacterClass.Cultist), new MenuItem("Druid", CharacterClass.Druid),
-            new MenuItem("Fanatic", CharacterClass.Fanatic), new MenuItem("High Mage", CharacterClass.HighMage),
-            new MenuItem("Mage", CharacterClass.Mage), new MenuItem("Monk", CharacterClass.Monk),
-            new MenuItem("Mindcrafter", CharacterClass.Mindcrafter), new MenuItem("Mystic", CharacterClass.Mystic),
-            new MenuItem("Paladin", CharacterClass.Paladin), new MenuItem("Priest", CharacterClass.Priest),
-            new MenuItem("Ranger", CharacterClass.Ranger), new MenuItem("Rogue", CharacterClass.Rogue),
-            new MenuItem("Warrior", CharacterClass.Warrior), new MenuItem("Warrior Mage", CharacterClass.WarriorMage)
+            new MenuItem<int>("Channeler", CharacterClass.Channeler), new MenuItem<int>("Chosen One", CharacterClass.ChosenOne),
+            new MenuItem<int>("Cultist", CharacterClass.Cultist), new MenuItem<int>("Druid", CharacterClass.Druid),
+            new MenuItem<int>("Fanatic", CharacterClass.Fanatic), new MenuItem<int>("High Mage", CharacterClass.HighMage),
+            new MenuItem<int>("Mage", CharacterClass.Mage), new MenuItem<int>("Monk", CharacterClass.Monk),
+            new MenuItem<int>("Mindcrafter", CharacterClass.Mindcrafter), new MenuItem<int>("Mystic", CharacterClass.Mystic),
+            new MenuItem<int>("Paladin", CharacterClass.Paladin), new MenuItem<int>("Priest", CharacterClass.Priest),
+            new MenuItem<int>("Ranger", CharacterClass.Ranger), new MenuItem<int>("Rogue", CharacterClass.Rogue),
+            new MenuItem<int>("Warrior", CharacterClass.Warrior), new MenuItem<int>("Warrior Mage", CharacterClass.WarriorMage)
         };
 
         private readonly string[] _menuItem = new string[32];
-
-        private readonly MenuItem[] _raceMenu =
-        {
-            new MenuItem("Cyclops", RaceId.Cyclops), new MenuItem("Dark-Elf", RaceId.DarkElf),
-            new MenuItem("Draconian", RaceId.Draconian), new MenuItem("Dwarf", RaceId.Dwarf),
-            new MenuItem("Elf", RaceId.Elf), new MenuItem("Gnome", RaceId.Gnome), new MenuItem("Golem", RaceId.Golem),
-            new MenuItem("Great One", RaceId.Great), new MenuItem("Half Elf", RaceId.HalfElf),
-            new MenuItem("Half Giant", RaceId.HalfGiant), new MenuItem("Half Ogre", RaceId.HalfOgre),
-            new MenuItem("Half Orc", RaceId.HalfOrc), new MenuItem("Half Titan", RaceId.HalfTitan),
-            new MenuItem("Half Troll", RaceId.HalfTroll), new MenuItem("High Elf", RaceId.HighElf),
-            new MenuItem("Hobbit", RaceId.Hobbit), new MenuItem("Human", RaceId.Human), new MenuItem("Imp", RaceId.Imp),
-            new MenuItem("Klackon", RaceId.Klackon), new MenuItem("Kobold", RaceId.Kobold),
-            new MenuItem("Mind Flayer", RaceId.MindFlayer), new MenuItem("Miri Nigri", RaceId.MiriNigri),
-            new MenuItem("Nibelung", RaceId.Nibelung), new MenuItem("Skeleton", RaceId.Skeleton),
-            new MenuItem("Spectre", RaceId.Spectre), new MenuItem("Sprite", RaceId.Sprite),
-            new MenuItem("Tcho-Tcho", RaceId.TchoTcho), new MenuItem("Vampire", RaceId.Vampire),
-            new MenuItem("Yeek", RaceId.Yeek), new MenuItem("Zombie", RaceId.Zombie)
-        };
 
         private readonly int[] _realmChoices =
         {
@@ -12368,7 +12350,7 @@ namespace AngbandOS
             }
         }
 
-        private void DisplayRaceInfo(int race)
+        private void DisplayRaceInfo(Race race)
         {
             Print(Colour.Purple, "STR:", 36, 21);
             Print(Colour.Purple, "INT:", 37, 21);
@@ -12378,7 +12360,7 @@ namespace AngbandOS
             Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = Races[race].AbilityBonus[i] + Profession.ClassInfo[_player.ProfessionIndex].AbilityBonus[i];
+                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[_player.ProfessionIndex].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -12392,276 +12374,33 @@ namespace AngbandOS
             Print(Colour.Purple, "Infravision :", 38, 31);
             Print(Colour.Purple, "Searching   :", 39, 31);
             Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[_player.ProfessionIndex].BaseDisarmBonus + Races[race].BaseDisarmBonus, Profession.ClassInfo[_player.ProfessionIndex].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[_player.ProfessionIndex].BaseDeviceBonus + Races[race].BaseDeviceBonus, Profession.ClassInfo[_player.ProfessionIndex].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[_player.ProfessionIndex].BaseSaveBonus + Races[race].BaseSaveBonus, Profession.ClassInfo[_player.ProfessionIndex].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Profession.ClassInfo[_player.ProfessionIndex].BaseStealthBonus * 4) + (Races[race].BaseStealthBonus * 4), Profession.ClassInfo[_player.ProfessionIndex].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[_player.ProfessionIndex].BaseMeleeAttackBonus + Races[race].BaseMeleeAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[_player.ProfessionIndex].BaseRangedAttackBonus + Races[race].BaseRangedAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].RangedAttackBonusPerLevel);
-            string buf = Races[race].ExperienceFactor + Profession.ClassInfo[_player.ProfessionIndex].ExperienceFactor + "%";
-            Print(Colour.Black, buf, 36, 45);
-            buf = "1d" + (Races[race].HitDieBonus + Profession.ClassInfo[_player.ProfessionIndex].HitDieBonus);
-            Print(Colour.Black, buf, 37, 45);
-            if (Races[race].Infravision == 0)
+            DisplayAPlusB(67, 36, Profession.ClassInfo[_player.ProfessionIndex].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[_player.ProfessionIndex].DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, Profession.ClassInfo[_player.ProfessionIndex].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[_player.ProfessionIndex].DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, Profession.ClassInfo[_player.ProfessionIndex].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[_player.ProfessionIndex].SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, (Profession.ClassInfo[_player.ProfessionIndex].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[_player.ProfessionIndex].StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, Profession.ClassInfo[_player.ProfessionIndex].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, Profession.ClassInfo[_player.ProfessionIndex].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].RangedAttackBonusPerLevel);
+            Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[_player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
+            Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[_player.ProfessionIndex].HitDieBonus), 37, 45);
+            if (race.Infravision == 0)
             {
                 Print(Colour.Black, "nil", 38, 45);
             }
             else
             {
-                buf = Races[race].Infravision + "0 feet";
-                Print(Colour.Green, buf, 38, 45);
+                Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
             }
-            buf = $"{Races[race].BaseSearchBonus + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchBonus:00}%";
-            Print(Colour.Black, buf, 39, 45);
-            buf = $"{Races[race].BaseSearchFrequency + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchFrequency:00}%";
-            Print(Colour.Black, buf, 40, 45);
-            switch (race)
+            Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
+            Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
+
+            // Retrieve the description for the race and split the description into lines.
+            string[] description = race.Description.Split("\n");
+
+            // Render the description, center justified into row 32.
+            int descriptionRow = 32 - (int)Math.Floor((double)description.Length / 2);
+            foreach (string descriptionLine in description)
             {
-                case RaceId.TchoTcho:
-                    Print(Colour.Purple, "Tcho-Tchos are hairless cannibalistic near-humans who dwell", 30, 20);
-                    Print(Colour.Purple, "in isolated parts of the world away from more civilised", 31, 20);
-                    Print(Colour.Purple, "places where their dark rituals and sacrifices go unseen.", 32, 20);
-                    Print(Colour.Purple, "Tcho-Tchos are immune to fear, and can also learn to create", 33, 20);
-                    Print(Colour.Purple, "The Yellow Sign (at lvl 35).", 34, 20);
-                    break;
-
-                case RaceId.MiriNigri:
-                    Print(Colour.Purple, "Miri-Nigri are squat, toad-like chaos beasts. Their", 29, 20);
-                    Print(Colour.Purple, "close ties to chaos render them resistant to sound and", 30, 20);
-                    Print(Colour.Purple, "immune to confusion. However, their chaotic nature also", 31, 20);
-                    Print(Colour.Purple, "makes them prone to random mutation. Also, the outer gods", 32, 20);
-                    Print(Colour.Purple, "pay special attention to miri-nigri servants and they", 33, 20);
-                    Print(Colour.Purple, "are more likely to interfere with them for good or ill.", 34, 20);
-                    break;
-
-                case RaceId.Cyclops:
-                    Print(Colour.Purple, "Cyclopes are one eyed giants, often seen as freaks by the", 30, 20);
-                    Print(Colour.Purple, "other races. They can learn to throw boulders (at lvl 20)", 31, 20);
-                    Print(Colour.Purple, "and although they have weak eyesight their hearing is very", 32, 20);
-                    Print(Colour.Purple, "keen and hard to damage, so they are resistant to sound", 33, 20);
-                    Print(Colour.Purple, "based attacks.", 34, 20);
-                    break;
-
-                case RaceId.DarkElf:
-                    Print(Colour.Purple, "Dark elves are underground elves who have a kinship with", 29, 20);
-                    Print(Colour.Purple, "fungi the way that surface elves have a kinship with trees.", 30, 20);
-                    Print(Colour.Purple, "The innately magical nature of dark elves lets them learn", 31, 20);
-                    Print(Colour.Purple, "to fire magical missiles at their opponents (at lvl 2).", 32, 20);
-                    Print(Colour.Purple, "They also resist dark-based attacks and can learn to see", 33, 20);
-                    Print(Colour.Purple, "invisible creatures (at lvl 20).", 34, 20);
-                    break;
-
-                case RaceId.Draconian:
-                    Print(Colour.Purple, "Draconians are related to dragons and this shows both in", 29, 20);
-                    Print(Colour.Purple, "their physical superiority and their legendary arrogance.", 30, 20);
-                    Print(Colour.Purple, "As well as having a breath weapon, their wings let them", 31, 20);
-                    Print(Colour.Purple, "avoid falling damage, and they can learn to resist fire", 32, 20);
-                    Print(Colour.Purple, "(at lvl 5), cold (at lvl 10), acid (at lvl 15), lightning", 33, 20);
-                    Print(Colour.Purple, "(at lvl 20), and poison (at lvl 35).", 34, 20);
-                    break;
-
-                case RaceId.Dwarf:
-                    Print(Colour.Purple, "Dwarves are short and stocky, and although not noted for", 29, 20);
-                    Print(Colour.Purple, "their intelligence or subtlety they are generally very", 30, 20);
-                    Print(Colour.Purple, "pious. They are also rather resistant to spells. As natural", 31, 20);
-                    Print(Colour.Purple, "miners, used to feeling their way around in the dark,", 32, 20);
-                    Print(Colour.Purple, "dwarves are immune to all forms of blindness and can learn", 33, 20);
-                    Print(Colour.Purple, "to detect secret doors and traps (at lvl 5).", 34, 20);
-                    break;
-
-                case RaceId.Elf:
-                    Print(Colour.Purple, "Elves are creatures of the woods, and cultivate a symbiotic", 30, 20);
-                    Print(Colour.Purple, "relationship with trees. While not the sturdiest of races,", 31, 20);
-                    Print(Colour.Purple, "they are dextrous and have excellent mental faculties.", 32, 20);
-                    Print(Colour.Purple, "Because they are partially photosynthetic, elves are able", 33, 20);
-                    Print(Colour.Purple, "to resist light based attacks.", 34, 20);
-                    break;
-
-                case RaceId.Gnome:
-                    Print(Colour.Purple, "Gnomes are small, playful, and talented at magic. However,", 29, 20);
-                    Print(Colour.Purple, "they are almost chronically incapable of taking anything", 30, 20);
-                    Print(Colour.Purple, "seriously. Gnomes are constantly fidgeting and always on", 31, 20);
-                    Print(Colour.Purple, "the move, and this makes them impossible to paralyse or", 32, 20);
-                    Print(Colour.Purple, "magically slow. Gnomes are even able to learn how to ", 33, 20);
-                    Print(Colour.Purple, "teleport short distances (at lvl 5).", 34, 20);
-                    break;
-
-                case RaceId.Golem:
-                    Print(Colour.Purple, "Golems are animated statues. Their inorganic bodies make it", 29, 20);
-                    Print(Colour.Purple, "hard for them to digest food properly, but they have innate", 30, 20);
-                    Print(Colour.Purple, "natural armour and can't be stunned or made to bleed. They", 31, 20);
-                    Print(Colour.Purple, "also resist poison and can see invisible creatures. Golems", 32, 20);
-                    Print(Colour.Purple, "can learn to use their armour more efficiently (at lvl 20)", 33, 20);
-                    Print(Colour.Purple, "and avoid having their life force drained (at lvl 35).", 34, 20);
-                    break;
-
-                case RaceId.Great:
-                    Print(Colour.Purple, "Great-Ones are the offspring of the petty gods that rule", 30, 20);
-                    Print(Colour.Purple, "Dreamlands. As such they are somewhat more than human.", 31, 20);
-                    Print(Colour.Purple, "Their constitution cannot be reduced, and they heal", 32, 20);
-                    Print(Colour.Purple, "quickly. They can also learn to travel through dreams", 33, 20);
-                    Print(Colour.Purple, "(at lvl 30) and restore their health (at lvl 40).", 34, 20);
-                    break;
-
-                case RaceId.HalfElf:
-                    Print(Colour.Purple, "Half-Elves inherit better ability scores and skills from", 30, 20);
-                    Print(Colour.Purple, "their elven parent, but none of that parent's special", 31, 20);
-                    Print(Colour.Purple, "abilities. However, a half elf will advance in level more", 32, 20);
-                    Print(Colour.Purple, "quickly than a full elf.", 33, 20);
-                    break;
-
-                case RaceId.HalfGiant:
-                    Print(Colour.Purple, "Half-Giants are immensely strong and tough, and their skin", 30, 20);
-                    Print(Colour.Purple, "is stony. They can't have their strength reduced, and they", 31, 20);
-                    Print(Colour.Purple, "resist damage from explosions that throw out shards of", 32, 20);
-                    Print(Colour.Purple, "stone and metal. They can learn to soften rock into mud", 33, 20);
-                    Print(Colour.Purple, "(at lvl 10).", 34, 20);
-                    break;
-
-                case RaceId.HalfOgre:
-                    Print(Colour.Purple, "Half-Ogres are both strong and naturally magical, although", 30, 20);
-                    Print(Colour.Purple, "they don't usually have the intelligence to make the most", 31, 20);
-                    Print(Colour.Purple, "of their magic. They resist darkness and can't have their", 32, 20);
-                    Print(Colour.Purple, "strength reduced. They can also can enter a berserk", 33, 20);
-                    Print(Colour.Purple, "rage (at lvl 8).", 34, 20);
-                    break;
-
-                case RaceId.HalfOrc:
-                    Print(Colour.Purple, "Half-Orcs are stronger than humans, and less dimwitted", 30, 20);
-                    Print(Colour.Purple, "their orcish parentage would lead you to assume.", 31, 20);
-                    Print(Colour.Purple, "Half-Orcs are born of darkness and are resistant to that", 32, 20);
-                    Print(Colour.Purple, "form of attack. They are also able to learn to shrug off", 33, 20);
-                    Print(Colour.Purple, "magical fear (at lvl 5).", 34, 20);
-                    break;
-
-                case RaceId.HalfTitan:
-                    Print(Colour.Purple, "Half-Titans are massively strong, being descended from the", 30, 20);
-                    Print(Colour.Purple, "predecessors of the gods that grew from primal chaos. This", 31, 20);
-                    Print(Colour.Purple, "legacy lets them resist damage from chaos, and half-titans", 32, 20);
-                    Print(Colour.Purple, "can learn to magically probe their foes to find out their", 33, 20);
-                    Print(Colour.Purple, "strengths and weaknesses (at lvl 35).", 34, 20);
-                    break;
-
-                case RaceId.HalfTroll:
-                    Print(Colour.Purple, "Half-Trolls make up for their stupidity by being almost", 29, 20);
-                    Print(Colour.Purple, "pure muscle, as strong as creatures much larger than they.", 30, 20);
-                    Print(Colour.Purple, "They can't have their strength reduced, and as they grow", 31, 20);
-                    Print(Colour.Purple, "stronger they can go into a berserk rage (at lvl 10),", 32, 20);
-                    Print(Colour.Purple, "regenerate wounds (at lvl 15), and survive on less food", 33, 20);
-                    Print(Colour.Purple, "(at lvl 15).", 34, 20);
-                    break;
-
-                case RaceId.HighElf:
-                    Print(Colour.Purple, "High-Elves are the leaders of the elven race. They are", 30, 20);
-                    Print(Colour.Purple, "more magical than their lesser cousins, but retain their", 31, 20);
-                    Print(Colour.Purple, "affinity with nature. High-elves resist light based attacks", 32, 20);
-                    Print(Colour.Purple, "and their acute senses are able to see invisible creatures.", 33, 20);
-                    break;
-
-                case RaceId.Hobbit:
-                    Print(Colour.Purple, "Hobbits are small and surprisingly dextrous given their", 30, 20);
-                    Print(Colour.Purple, "propensity for plumpness. They make excellent burglars", 31, 20);
-                    Print(Colour.Purple, "and are adept at spell casting too. Hobbits can't have", 32, 20);
-                    Print(Colour.Purple, "their dexterity reduced, and they can learn to put together", 33, 20);
-                    Print(Colour.Purple, "nourishing meals from the barest scraps (at lvl 15).", 34, 20);
-                    break;
-
-                case RaceId.Human:
-                    Print(Colour.Purple, "Hopefully you know all about humans already because you", 30, 20);
-                    Print(Colour.Purple, "are one! In game terms, humans are the average around which", 31, 20);
-                    Print(Colour.Purple, "the other races are measured. As such, humans get no", 32, 20);
-                    Print(Colour.Purple, "special abilities, but they increase in level quicker than", 33, 20);
-                    Print(Colour.Purple, "any other race. Humans are recommended for new players.", 34, 20);
-                    break;
-
-                case RaceId.Imp:
-                    Print(Colour.Purple, "Imps are minor demons that have escaped their binding and", 30, 20);
-                    Print(Colour.Purple, "are able to run free in the world. Imps naturally resist", 31, 20);
-                    Print(Colour.Purple, "fire, and can learn to throw bolt of flame (at lvl 10),", 32, 20);
-                    Print(Colour.Purple, "see invisible creatures (at lvl 10), become completely", 33, 20);
-                    Print(Colour.Purple, "immune to fire (at lvl 20), and cast fireballs (at lvl 30).", 34, 20);
-                    break;
-
-                case RaceId.Klackon:
-                    Print(Colour.Purple, "Klackons are humanoid insects. Although most stay safe in", 29, 20);
-                    Print(Colour.Purple, "their hive cities, a small number venture forth in search", 30, 20);
-                    Print(Colour.Purple, "of adventure. The chitin of a klackon resists acid, and", 31, 20);
-                    Print(Colour.Purple, "their ordered minds cannot be confused. They can learn to", 32, 20);
-                    Print(Colour.Purple, "spit acid (at lvl 9) and they get progressively faster if", 33, 20);
-                    Print(Colour.Purple, "unencumbered by armour.", 34, 20);
-                    break;
-
-                case RaceId.Kobold:
-                    Print(Colour.Purple, "Kobolds are small reptillian creatures whose claims to be", 30, 20);
-                    Print(Colour.Purple, "related to dragons are generally not taken seriously. They", 31, 20);
-                    Print(Colour.Purple, "are resistant to poison, and can learn to throw poison", 32, 20);
-                    Print(Colour.Purple, "darts (at lvl 9).", 33, 20);
-                    break;
-
-                case RaceId.MindFlayer:
-                    Print(Colour.Purple, "Mind-Flayers are slimy humanoids with squid-like tentacles", 30, 20);
-                    Print(Colour.Purple, "around their mouths. They are all psychic, and neither", 31, 20);
-                    Print(Colour.Purple, "their intelligence nor their wisdom can be reduced. They", 32, 20);
-                    Print(Colour.Purple, "can learn to see invisible (at lvl 15), blast people's", 33, 20);
-                    Print(Colour.Purple, "minds (at lvl 15), and gain telepathy (at lvl 30).", 34, 20);
-                    break;
-
-                case RaceId.Nibelung:
-                    Print(Colour.Purple, "Nibelungen are also known as dark dwarves and are famous", 30, 20);
-                    Print(Colour.Purple, "as the makers of (often cursed) magical items. They can", 31, 20);
-                    Print(Colour.Purple, "resist darkness and protect the items they are carrying", 32, 20);
-                    Print(Colour.Purple, "from disenchantment. They can also learn to detect traps,", 33, 20);
-                    Print(Colour.Purple, "stairs, and secret doors (at lvl 5).", 34, 20);
-                    break;
-
-                case RaceId.Skeleton:
-                    Print(Colour.Purple, "Skeletons are undead creatures. Being without eyes, they", 30, 20);
-                    Print(Colour.Purple, "use magical sight which can see invisible creatures. Their", 31, 20);
-                    Print(Colour.Purple, "lack of flesh means that they resist poison and shards, and", 32, 20);
-                    Print(Colour.Purple, "their life force is hard to drain. They can learn to resist", 33, 20);
-                    Print(Colour.Purple, "cold (at lvl 10), and restore their life force (at lvl 30).", 34, 20);
-                    break;
-
-                case RaceId.Spectre:
-                    Print(Colour.Purple, "Spectres are ethereal and they can pass through walls and", 29, 20);
-                    Print(Colour.Purple, "other obstacles. They resist nether, attacks, poison, and", 30, 20);
-                    Print(Colour.Purple, "cold; and they need little food. They also resist having", 31, 20);
-                    Print(Colour.Purple, "their life force drained and can see invisible creatures.", 32, 20);
-                    Print(Colour.Purple, "Finally, they glow with their own light, can learn to", 33, 20);
-                    Print(Colour.Purple, "scare monsters (at lvl 4) and gain telepathy (at lvl 35).", 34, 20);
-                    break;
-
-                case RaceId.Sprite:
-                    Print(Colour.Purple, "Sprites are tiny fairies, distantly related to elves. They", 29, 20);
-                    Print(Colour.Purple, "share their relatives' resistance to light based attacks,", 30, 20);
-                    Print(Colour.Purple, "and their wings both protect them from falling damage and", 31, 20);
-                    Print(Colour.Purple, "allow them to move progressively faster if unencumbered.", 32, 20);
-                    Print(Colour.Purple, "Sprites glow in the dark and can learn to throw fairy dust", 33, 20);
-                    Print(Colour.Purple, "to send their enemies to sleep (at lvl 12).", 34, 20);
-                    break;
-
-                case RaceId.Vampire:
-                    Print(Colour.Purple, "Vampires are powerful undead. They resist darkness, nether,", 30, 20);
-                    Print(Colour.Purple, "cold, poison, and having their life force drained. Vampires", 31, 20);
-                    Print(Colour.Purple, "produce their own ethereal light in the dark, but are hurt", 32, 20);
-                    Print(Colour.Purple, "by direct sunlight. They can learn to drain the life force", 33, 20);
-                    Print(Colour.Purple, "from their foes (at lvl 2).", 34, 20);
-                    break;
-
-                case RaceId.Yeek:
-                    Print(Colour.Purple, "Yeeks are long-eared furry creatures that look vaguely", 30, 20);
-                    Print(Colour.Purple, "like humanoid rabbits. Although physically weak, they make", 31, 20);
-                    Print(Colour.Purple, "passable spell casters. They are resistant to acid, and can", 32, 20);
-                    Print(Colour.Purple, "learn to scream to terrify their foes (at lvl 15) and", 33, 20);
-                    Print(Colour.Purple, "become completely immune to acid (at lvl 20).", 34, 20);
-                    break;
-
-                case RaceId.Zombie:
-                    Print(Colour.Purple, "Zombies are undead creatures. Their decayed flesh resists", 30, 20);
-                    Print(Colour.Purple, "nether and poison, and having their life force drained.", 31, 20);
-                    Print(Colour.Purple, "Zombies digest food slowly, and can see invisible monsters.", 32, 20);
-                    Print(Colour.Purple, "They can learn to restore their life force (at lvl 30).", 33, 20);
-                    break;
+                Print(Colour.Purple, descriptionLine, descriptionRow++, 20);
             }
         }
 
@@ -13211,7 +12950,7 @@ namespace AngbandOS
                             menu[stage] = 0;
                         }
                         MenuDisplay(menu[stage]);
-                        DisplayClassInfo(_classMenu[menu[stage]].Index);
+                        DisplayClassInfo(_classMenu[menu[stage]].Item);
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true)
@@ -13254,7 +12993,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.ClassSelection)
                         {
-                            _player.ProfessionIndex = _classMenu[menu[BirthStage.ClassSelection]].Index;
+                            _player.ProfessionIndex = _classMenu[menu[BirthStage.ClassSelection]].Item;
                             _player.Profession = Profession.ClassInfo[_player.ProfessionIndex];
                         }
                         break;
@@ -13285,6 +13024,11 @@ namespace AngbandOS
                         }
                         autoChose[stage] = false;
                         _menuLength = Constants.MaxRaces;
+
+                        // Create the menu for the races.
+                        Race[] racesArray = Races.Values.ToArray();
+                        MenuItem<Race>[] _raceMenu = racesArray.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
+
                         for (i = 0; i < Constants.MaxRaces; i++)
                         {
                             _menuItem[i] = _raceMenu[i].Text;
@@ -13295,9 +13039,9 @@ namespace AngbandOS
                             menu[stage] = 0;
                         }
                         MenuDisplay(menu[stage]);
-                        DisplayRaceInfo(_raceMenu[menu[stage]].Index);
-                        Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+
+                        DisplayRaceInfo(_raceMenu[menu[stage]].Item);
+                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true)
                         {
                             c = Inkey();
@@ -13338,7 +13082,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RaceSelection)
                         {
-                            _player.RaceIndex = _raceMenu[menu[BirthStage.RaceSelection]].Index;
+                            _player.RaceIndex = _raceMenu[menu[BirthStage.RaceSelection]].Item.Index;
                             _player.Race = Races[_player.RaceIndex];
                             _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
                         }

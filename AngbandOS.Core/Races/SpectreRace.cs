@@ -31,5 +31,6 @@ namespace AngbandOS.Core.Races
         public override uint Choice => 0x5F4E;
         public override int Index => RaceId.Spectre;
 
+        public override string Description => "Spectres are ethereal and they can pass through walls and\nother obstacles. They resist nether, attacks, poison, and\ncold; and they need little food. They also resist having\ntheir life force drained and can see invisible creatures.\nFinally, they glow with their own light, can learn to\nscare monsters (at lvl 4) and gain telepathy (at lvl 35).";
     }
 }

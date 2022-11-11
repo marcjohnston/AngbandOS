@@ -30,6 +30,7 @@ namespace AngbandOS.Core.Races
         public override int Infravision => 2;
         public override uint Choice => 0xDE0F;
         public override int Index => RaceId.Yeek;
+        public override string Description => "Yeeks are long-eared furry creatures that look vaguely\nlike humanoid rabbits. Although physically weak, they make\npassable spell casters. They are resistant to acid, and can\nlearn to scream to terrify their foes (at lvl 15) and\nbecome completely immune to acid (at lvl 20).";
 
     }
 }

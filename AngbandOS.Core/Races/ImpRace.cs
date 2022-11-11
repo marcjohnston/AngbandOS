@@ -31,6 +31,7 @@ namespace AngbandOS.Core.Races
         public override uint Choice => 0x97CB;
 
         public override int Index => RaceId.Imp;
+        public override string Description => "Imps are minor demons that have escaped their binding and\nare able to run free in the world. Imps naturally resist\nfire, and can learn to throw bolt of flame (at lvl 10),\nsee invisible creatures (at lvl 10), become completely\nimmune to fire (at lvl 20), and cast fireballs (at lvl 30).";
 
     }
 }
