@@ -37,5 +37,8 @@ namespace AngbandOS.Core.Races
         /// Tcho-Tcho 138->139->140->141->142->End 
         /// </summary>
         public override int Chart => 138;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 8 ? "berserk            (racial, unusable until level 8)" : "berserk            (racial, cost 10, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

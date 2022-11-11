@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Half-Giant 75->20->2->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 75;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone to mud       (racial, unusable until level 20)" : "stone to mud       (racial, cost 10, STR based)";
+        public override bool HasRacialPowers => true;
     }
 }

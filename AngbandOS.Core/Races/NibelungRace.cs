@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Nibelung 87->88->18->57->58->59->60->61->End
         /// </summary>
         public override int Chart => 87;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, WIS based, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

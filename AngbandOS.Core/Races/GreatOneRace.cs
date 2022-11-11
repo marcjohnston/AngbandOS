@@ -38,5 +38,8 @@ namespace AngbandOS.Core.Races
         /// Great One 67->68->50->51->52->53->End 
         /// </summary>
         public override int Chart => 67;
+
+        public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
+        public override bool HasRacialPowers => true;
     }
 }

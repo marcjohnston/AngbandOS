@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Yeek 78->79->80->81->135->136->137->End
         /// </summary>
         public override int Chart => 78;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 15 ? "scare monster      (racial, unusable until level 15)" : "scare monster      (racial, cost 15, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

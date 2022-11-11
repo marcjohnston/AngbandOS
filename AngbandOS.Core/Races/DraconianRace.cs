@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Draconian 89->90->91->End
         /// </summary>
         public override int Chart => 89;
+
+        public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
+        public override bool HasRacialPowers => true;
     }
 }

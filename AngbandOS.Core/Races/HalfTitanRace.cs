@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Half-Titan 75->20->2->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 76;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 35 ? "probing            (racial, unusable until level 35)" : "probing            (racial, cost 20, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

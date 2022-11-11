@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Sprite 124->125->126->127->128->End
         /// </summary>
         public override int Chart => 124;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 12 ? "sleeping dust      (racial, unusable until level 12)" : "sleeping dust      (racial, cost 12, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

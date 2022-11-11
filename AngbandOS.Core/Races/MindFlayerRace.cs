@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Mind-Flayer 93->93->End
         /// </summary>
         public override int Chart => 92;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 15 ? "mind blast         (racial, unusable until level 15)" : "mind blast         (racial, cost 12, dam lvl, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

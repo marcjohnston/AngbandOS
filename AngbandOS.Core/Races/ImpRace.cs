@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Imp 94->95->96->97->End
         /// </summary>
         public override int Chart => 94;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 9 ? "fire bolt/ball     (racial, unusable until level 9/30)" : "fire bolt/ball(30) (racial, cost 15, dam lvl, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

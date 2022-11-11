@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Klackon 84->85->86->End
         /// </summary>
         public override int Chart => 84;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
+        public override bool HasRacialPowers => true;
     }
 }

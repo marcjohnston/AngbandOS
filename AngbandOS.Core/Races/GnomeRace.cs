@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Gnome 13->14->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 13;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 5 ? "teleport           (racial, unusable until level 5)" : "teleport           (racial, cost 5 + lvl/5, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

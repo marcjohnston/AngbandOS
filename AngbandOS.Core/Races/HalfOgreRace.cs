@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Half-Ogre 74->20->2->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 74;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 25 ? "Yellow Sign     (racial, unusable until level 25)" : "Yellow Sign     (racial, cost 35, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

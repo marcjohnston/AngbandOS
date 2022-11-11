@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Cyclops 77->109->110->111->112->End
         /// </summary>
         public override int Chart => 77;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 20 ? "throw boulder      (racial, unusable until level 20)" : "throw boulder      (racial, cost 15, dam 3*lvl, STR based)";
+        public override bool HasRacialPowers => true;
     }
 }

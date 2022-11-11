@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Dark-Elf 68->70->71->72->73->End
         /// </summary>
         public override int Chart => 69;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 2 ? "magic missile      (racial, unusable until level 2)" : "magic missile      (racial, cost 2, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Spectre 118->119->134->120->121->122->123->End
         /// </summary>
         public override int Chart => 118;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 4 ? "scare monster      (racial, unusable until level 4)" : "scare monster      (racial, cost 3, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }

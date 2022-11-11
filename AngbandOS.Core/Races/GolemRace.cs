@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Golem 98->99->100->101->End
         /// </summary>
         public override int Chart => 98;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone skin         (racial, unusable until level 20)" : "stone skin         (racial, cost 15, dur 30+d20, CON based)";
+        public override bool HasRacialPowers => true;
     }
 }

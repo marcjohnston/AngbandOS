@@ -36,5 +36,7 @@ namespace AngbandOS.Core.Races
         /// Skeleton 102->103->104->105->106->End
         /// </summary>
         public override int Chart => 102;
+        public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

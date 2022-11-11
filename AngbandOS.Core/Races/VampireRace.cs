@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Vampire 113->114->115->116->117->End
         /// </summary>
         public override int Chart => 113;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 2 ? "drain life         (racial, unusable until level 2)" : "drain life         (racial, cost 1 + lvl/3, based)";
+        public override bool HasRacialPowers => true;
     }
 }

@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Kobold 82->83->24->25->26->End
         /// </summary>
         public override int Chart => 82;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 12 ? "poison dart        (racial, unusable until level 12)" : "poison dart        (racial, cost 8, dam lvl, DEX based)";
+        public override bool HasRacialPowers => true;
     }
 }

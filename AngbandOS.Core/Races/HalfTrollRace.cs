@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Half-Troll 22->23->62->63->64->65->66->End
         /// </summary>
         public override int Chart => 22;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

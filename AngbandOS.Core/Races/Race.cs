@@ -42,8 +42,21 @@ namespace AngbandOS.Core.Races
         public abstract string Description { get; }
 
         /// <summary>
-        /// Returns the PlayerHistory (SaveGame._backgroundTable) group used to produce the backstory fragments that are joined together on character generation.
+        /// Returns the PlayerHistory (SaveGame._backgroundTable) group used to produce the backstory fragments that are joined together on character generation.  Returns
+        /// default argument values for races that do not have mutant powers.
         /// </summary>
         public abstract int Chart { get; }
+
+        /// <summary>
+        /// Returns a description of the racial powers, if the race has racial powers (HasRacialPowers == true).  Returns (none), by default.
+        /// </summary>
+        /// <param name="lvl"></param>
+        /// <returns></returns>
+        public virtual string RacialPowersDescription(int lvl) => "(none)";
+
+        /// <summary>
+        /// Returns true, if the race has mutant powers.  Returns false, by default.
+        /// </summary>
+        public virtual bool HasRacialPowers => false;
     }
 }

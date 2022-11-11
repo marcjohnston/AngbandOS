@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Half-Orc 19->20->2->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 19;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
+        public override bool HasRacialPowers => true;
     }
 }

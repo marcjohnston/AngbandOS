@@ -36,5 +36,8 @@ namespace AngbandOS.Core.Races
         /// Hobbit 10->11->3->50->51->52->53->End
         /// </summary>
         public override int Chart => 10;
+
+        public override string RacialPowersDescription(int lvl) => lvl < 15 ? "create food        (racial, unusable until level 15)" : "create food        (racial, cost 10, INT based)";
+        public override bool HasRacialPowers => true;
     }
 }
