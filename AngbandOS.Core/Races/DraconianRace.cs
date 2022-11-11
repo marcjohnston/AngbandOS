@@ -31,5 +31,10 @@ namespace AngbandOS.Core.Races
         public override uint Choice => 0xDF57;
         public override int Index => RaceId.Draconian;
         public override string Description => "Draconians are related to dragons and this shows both in\ntheir physical superiority and their legendary arrogance.\nAs well as having a breath weapon, their wings let them\navoid falling damage, and they can learn to resist fire\n(at lvl 5), cold (at lvl 10), acid (at lvl 15), lightning\n(at lvl 20), and poison (at lvl 35).";
+
+        /// <summary>
+        /// Draconian 89->90->91->End
+        /// </summary>
+        public override int Chart => 89;
     }
 }

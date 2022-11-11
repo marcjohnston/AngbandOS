@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.Vampire;
         public override string Description => "Vampires are powerful undead. They resist darkness, nether,\ncold, poison, and having their life force drained. Vampires\nproduce their own ethereal light in the dark, but are hurt\nby direct sunlight. They can learn to drain the life force\nfrom their foes (at lvl 2).";
 
+        /// <summary>
+        /// Vampire 113->114->115->116->117->End
+        /// </summary>
+        public override int Chart => 113;
     }
 }

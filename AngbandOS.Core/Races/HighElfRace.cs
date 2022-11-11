@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.HighElf;
         public override string Description => "High-Elves are the leaders of the elven race. They are\nmore magical than their lesser cousins, but retain their\naffinity with nature. High-elves resist light based attacks\nand their acute senses are able to see invisible creatures.";
 
+        /// <summary>
+        /// High-Elf 7->8->9->54->55->56->End 
+        /// </summary>
+        public override int Chart => 7;
     }
 }

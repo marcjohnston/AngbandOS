@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.Dwarf;
         public override string Description => "Dwarves are short and stocky, and although not noted for\ntheir intelligence or subtlety they are generally very\npious. They are also rather resistant to spells. As natural\nminers, used to feeling their way around in the dark,\ndwarves are immune to all forms of blindness and can learn\nto detect secret doors and traps (at lvl 5).";
 
+        /// <summary>
+        /// Dwarf 16->17->18->57->58->59->60->61->End
+        /// </summary>
+        public override int Chart => 16;
     }
 }

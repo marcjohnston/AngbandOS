@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.Golem;
         public override string Description => "Golems are animated statues. Their inorganic bodies make it\nhard for them to digest food properly, but they have innate\nnatural armour and can't be stunned or made to bleed. They\nalso resist poison and can see invisible creatures. Golems\ncan learn to use their armour more efficiently (at lvl 20)\nand avoid having their life force drained (at lvl 35).";
 
+        /// <summary>
+        /// Golem 98->99->100->101->End
+        /// </summary>
+        public override int Chart => 98;
     }
 }

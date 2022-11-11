@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.MiriNigri;
         public override string Description => "Miri-Nigri are squat, toad-like chaos beasts. Their\nclose ties to chaos render them resistant to sound and\nimmune to confusion. However, their chaotic nature also\nmakes them prone to random mutation. Also, the outer gods\npay special attention to miri-nigri servants and they\nare more likely to interfere with them for good or ill.";
 
+        /// <summary>
+        /// Miri-Nigri 129->130->131->132->133->End
+        /// </summary>
+        public override int Chart => 129;
     }
 }

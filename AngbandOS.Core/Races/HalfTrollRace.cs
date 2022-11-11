@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.HalfTroll;
         public override string Description => "Half-Trolls make up for their stupidity by being almost\npure muscle, as strong as creatures much larger than they.\nThey can't have their strength reduced, and as they grow\nstronger they can go into a berserk rage (at lvl 10),\nregenerate wounds (at lvl 15), and survive on less food\n(at lvl 15).";
 
+        /// <summary>
+        /// Half-Troll 22->23->62->63->64->65->66->End
+        /// </summary>
+        public override int Chart => 22;
     }
 }

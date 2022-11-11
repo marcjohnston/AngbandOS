@@ -12400,7 +12400,7 @@ namespace AngbandOS
             int descriptionRow = 32 - (int)Math.Floor((double)description.Length / 2);
             foreach (string descriptionLine in description)
             {
-                Print(Colour.Purple, descriptionLine, descriptionRow++, 20);
+                Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
             }
         }
 
@@ -14334,7 +14334,6 @@ namespace AngbandOS
         private void GetHistory(Player player)
         {
             int i;
-            int chart;
             for (i = 0; i < 4; i++)
             {
                 player.History[i] = string.Empty;
@@ -14342,190 +14341,8 @@ namespace AngbandOS
             string fullHistory = string.Empty;
             int socialClass = Program.Rng.DieRoll(4);
             // Start on a chart based on the character's race
-            switch (player.RaceIndex)
-            {
-                case RaceId.Great:
-                    {
-                        // Great One 67->68->50->51->52->53->End
-                        chart = 67;
-                        break;
-                    }
-                case RaceId.Human:
-                    {
-                        // Human 1->2->3->50->51->52->53->End
-                        chart = 1;
-                        break;
-                    }
-                case RaceId.TchoTcho:
-                    {
-                        // Tcho-Tcho 138->139->140->141->142->End
-                        chart = 138;
-                        break;
-                    }
-                case RaceId.HalfElf:
-                    {
-                        // Half-Elf 4->1->2->3->50->51->52->53->End
-                        chart = 4;
-                        break;
-                    }
-                case RaceId.Elf:
-                case RaceId.HighElf:
-                    {
-                        // Elf/High-Elf 7->8->9->54->55->56->End
-                        chart = 7;
-                        break;
-                    }
-                case RaceId.Hobbit:
-                    {
-                        // Hobbit 10->11->3->50->51->52->53->End
-                        chart = 10;
-                        break;
-                    }
-                case RaceId.Gnome:
-                    {
-                        // Gnome 13->14->3->50->51->52->53->End
-                        chart = 13;
-                        break;
-                    }
-                case RaceId.Dwarf:
-                    {
-                        // Dwarf 16->17->18->57->58->59->60->61->End
-                        chart = 16;
-                        break;
-                    }
-                case RaceId.HalfOrc:
-                    {
-                        // Half-Orc 19->20->2->3->50->51->52->53->End
-                        chart = 19;
-                        break;
-                    }
-                case RaceId.HalfTroll:
-                    {
-                        // Half-Troll 22->23->62->63->64->65->66->End
-                        chart = 22;
-                        break;
-                    }
-                case RaceId.DarkElf:
-                    {
-                        // Dark-Elf 68->70->71->72->73->End
-                        chart = 69;
-                        break;
-                    }
-                case RaceId.HalfOgre:
-                    {
-                        // Half-Ogre 74->20->2->3->50->51->52->53->End
-                        chart = 74;
-                        break;
-                    }
-                case RaceId.HalfGiant:
-                    {
-                        // Half-Giant 75->20->2->3->50->51->52->53->End
-                        chart = 75;
-                        break;
-                    }
-                case RaceId.HalfTitan:
-                    {
-                        // Half-Titan 75->20->2->3->50->51->52->53->End
-                        chart = 76;
-                        break;
-                    }
-                case RaceId.Cyclops:
-                    {
-                        // Cyclops 77->109->110->111->112->End
-                        chart = 77;
-                        break;
-                    }
-                case RaceId.Yeek:
-                    {
-                        // Yeek 78->79->80->81->135->136->137->End
-                        chart = 78;
-                        break;
-                    }
-                case RaceId.Kobold:
-                    {
-                        // Kobold 82->83->24->25->26->End
-                        chart = 82;
-                        break;
-                    }
-                case RaceId.Klackon:
-                    {
-                        // Klackon 84->85->86->End
-                        chart = 84;
-                        break;
-                    }
-                case RaceId.Nibelung:
-                    {
-                        // Nibelung 87->88->18->57->58->59->60->61->End
-                        chart = 87;
-                        break;
-                    }
-                case RaceId.Draconian:
-                    {
-                        // Draconian 89->90->91->End
-                        chart = 89;
-                        break;
-                    }
-                case RaceId.MindFlayer:
-                    {
-                        // Mind-Flayer 93->93->End
-                        chart = 92;
-                        break;
-                    }
-                case RaceId.Imp:
-                    {
-                        // Imp 94->95->96->97->End
-                        chart = 94;
-                        break;
-                    }
-                case RaceId.Golem:
-                    {
-                        // Golem 98->99->100->101->End
-                        chart = 98;
-                        break;
-                    }
-                case RaceId.Skeleton:
-                    {
-                        // Skeleton 102->103->104->105->106->End
-                        chart = 102;
-                        break;
-                    }
-                case RaceId.Zombie:
-                    {
-                        // Zombie 107->108->62->63->64->65->66->End
-                        chart = 107;
-                        break;
-                    }
-                case RaceId.Vampire:
-                    {
-                        // Vampire 113->114->115->116->117->End
-                        chart = 113;
-                        break;
-                    }
-                case RaceId.Spectre:
-                    {
-                        // Spectre 118->119->134->120->121->122->123->End
-                        chart = 118;
-                        break;
-                    }
-                case RaceId.Sprite:
-                    {
-                        // Sprite 124->125->126->127->128->End
-                        chart = 124;
-                        break;
-                    }
-                case RaceId.MiriNigri:
-                    {
-                        // Miri-Nigri 129->130->131->132->133->End
-                        chart = 129;
-                        break;
-                    }
-                default:
-                    {
-                        // Unrecognised race gets no history
-                        chart = 0;
-                        break;
-                    }
-            }
+            int chart = player.Race.Chart;
+
             // Keep going till we get to an end
             while (chart != 0)
             {

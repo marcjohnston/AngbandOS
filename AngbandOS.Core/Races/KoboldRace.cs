@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.Kobold;
         public override string Description => "Kobolds are small reptillian creatures whose claims to be\nrelated to dragons are generally not taken seriously. They\nare resistant to poison, and can learn to throw poison\ndarts (at lvl 9).";
 
+        /// <summary>
+        /// Kobold 82->83->24->25->26->End
+        /// </summary>
+        public override int Chart => 82;
     }
 }

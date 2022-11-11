@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.Hobbit;
         public override string Description => "Hobbits are small and surprisingly dextrous given their\npropensity for plumpness. They make excellent burglars\nand are adept at spell casting too. Hobbits can't have\ntheir dexterity reduced, and they can learn to put together\nnourishing meals from the barest scraps (at lvl 15).";
 
+        /// <summary>
+        /// Hobbit 10->11->3->50->51->52->53->End
+        /// </summary>
+        public override int Chart => 10;
     }
 }

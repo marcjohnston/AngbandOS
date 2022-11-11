@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.MindFlayer;
         public override string Description => "Mind-Flayers are slimy humanoids with squid-like tentacles\naround their mouths. They are all psychic, and neither\ntheir intelligence nor their wisdom can be reduced. They\ncan learn to see invisible (at lvl 15), blast people's\nminds (at lvl 15), and gain telepathy (at lvl 30).";
 
+        /// <summary>
+        /// Mind-Flayer 93->93->End
+        /// </summary>
+        public override int Chart => 92;
     }
 }

@@ -40,5 +40,10 @@ namespace AngbandOS.Core.Races
         /// Returns the description for the race.  The description is multi-line and has word-breaking macros \n built-in.  The description supports up to 6 lines.
         /// </summary>
         public abstract string Description { get; }
+
+        /// <summary>
+        /// Returns the PlayerHistory (SaveGame._backgroundTable) group used to produce the backstory fragments that are joined together on character generation.
+        /// </summary>
+        public abstract int Chart { get; }
     }
 }

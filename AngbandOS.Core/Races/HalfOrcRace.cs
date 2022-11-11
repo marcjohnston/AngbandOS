@@ -32,5 +32,9 @@ namespace AngbandOS.Core.Races
         public override int Index => RaceId.HalfOrc;
         public override string Description => "Half-Orcs are stronger than humans, and less dimwitted\ntheir orcish parentage would lead you to assume.\nHalf-Orcs are born of darkness and are resistant to that\nform of attack. They are also able to learn to shrug off\nmagical fear (at lvl 5).";
 
+        /// <summary>
+        /// Half-Orc 19->20->2->3->50->51->52->53->End
+        /// </summary>
+        public override int Chart => 19;
     }
 }

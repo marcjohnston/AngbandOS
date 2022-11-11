@@ -31,5 +31,10 @@ namespace AngbandOS.Core.Races
         public override uint Choice => 0x0001;
         public override int Index => RaceId.Zombie;
         public override string Description => "Zombies are undead creatures. Their decayed flesh resists\nnether and poison, and having their life force drained.\nZombies digest food slowly, and can see invisible monsters.\nThey can learn to restore their life force (at lvl 30).";
+
+        /// <summary>
+        /// Zombie 107->108->62->63->64->65->66->End
+        /// </summary>
+        public override int Chart => 107;
     }
 }
