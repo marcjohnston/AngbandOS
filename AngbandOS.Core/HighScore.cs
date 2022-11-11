@@ -40,7 +40,7 @@ namespace AngbandOS
                 How = "nobody (yet!)";
             }
             Who =
-                $"{saveGame.Player.Name.Trim()}{saveGame.Player.Generation.ToRoman(true)} the level {saveGame.Player.Level} {Race.RaceInfo[saveGame.Player.RaceIndex].Title} {Profession.ClassSubName(saveGame.Player.ProfessionIndex, saveGame.Player.Realm1)}";
+                $"{saveGame.Player.Name.Trim()}{saveGame.Player.Generation.ToRoman(true)} the level {saveGame.Player.Level} {saveGame.Races[saveGame.Player.RaceIndex].Title} {Profession.ClassSubName(saveGame.Player.ProfessionIndex, saveGame.Player.Realm1)}";
             if (saveGame.CurrentDepth > 0)
             {
                 Where = $"on level {saveGame.CurrentDepth} of {saveGame.CurDungeon.Name}";

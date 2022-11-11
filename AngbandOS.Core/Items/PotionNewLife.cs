@@ -32,7 +32,7 @@ namespace AngbandOS.ItemCategories
             }
             if (saveGame.Player.RaceIndex != saveGame.Player.RaceIndexAtBirth)
             {
-                var oldRaceName = Race.RaceInfo[saveGame.Player.RaceIndexAtBirth].Title;
+                var oldRaceName = saveGame.Races[saveGame.Player.RaceIndexAtBirth].Title;
                 saveGame.MsgPrint($"You feel more {oldRaceName} again.");
                 saveGame.Player.ChangeRace(saveGame.Player.RaceIndexAtBirth);
                 saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);

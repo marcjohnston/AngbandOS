@@ -458,7 +458,7 @@ namespace AngbandOS
             get
             {
                 string ownerName = _owner.OwnerName;
-                string raceName = Race.RaceInfo[_owner.OwnerRace].Title;
+                string raceName = SaveGame.Races[_owner.OwnerRace].Title;
                 return $"{ownerName} ({raceName})";
             }
         }

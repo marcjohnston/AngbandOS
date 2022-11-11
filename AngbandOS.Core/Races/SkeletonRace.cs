@@ -1,0 +1,35 @@
+﻿using AngbandOS.Enumerations;
+
+namespace AngbandOS.Core.Races
+{
+    [Serializable]
+    internal class SkeletonRace : Race
+    {
+        public override string Title => "Skeleton";
+        public override int[] AbilityBonus => new int[] { 0, -2, -2, 0, 1, -4 };
+        public override int BaseDisarmBonus => -5;
+        public override int BaseDeviceBonus => -5;
+        public override int BaseSaveBonus => 5;
+        public override int BaseStealthBonus => -1;
+        public override int BaseSearchBonus => -1;
+        public override int BaseSearchFrequency => 8;
+        public override int BaseMeleeAttackBonus => 10;
+        public override int BaseRangedAttackBonus => 0;
+        public override int HitDieBonus => 10;
+        public override int ExperienceFactor => 145;
+        public override int BaseAge => 100;
+        public override int AgeRange => 35;
+        public override int MaleBaseHeight => 72;
+        public override int MaleHeightRange => 6;
+        public override int MaleBaseWeight => 50;
+        public override int MaleWeightRange => 5;
+        public override int FemaleBaseHeight => 66;
+        public override int FemaleHeightRange => 4;
+        public override int FemaleBaseWeight => 50;
+        public override int FemaleWeightRange => 5;
+        public override int Infravision => 2;
+        public override uint Choice => 0x5F0F;
+        public override int Index => RaceId.Skeleton;
+
+    }
+}

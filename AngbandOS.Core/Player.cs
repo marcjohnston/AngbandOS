@@ -11,10 +11,10 @@ using AngbandOS.Patrons;
 using AngbandOS.Spells;
 using AngbandOS.StaticData;
 using AngbandOS.Pantheon;
-using System;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.ItemCategories;
+using AngbandOS.Core.Races;
 
 namespace AngbandOS
 {
@@ -172,7 +172,7 @@ namespace AngbandOS
         public bool OldUnpriestlyWeapon;
         public Profession Profession = new Profession();
         public int ProfessionIndex;
-        public Race Race = new Race();
+        public Race? Race = null; // new Race();
         public int RaceIndex;
         public int RaceIndexAtBirth;
         public Realm Realm1;
@@ -273,7 +273,7 @@ namespace AngbandOS
         public void ChangeRace(int newRace)
         {
             RaceIndex = newRace;
-            Race = Race.RaceInfo[RaceIndex];
+            Race = SaveGame.Races[RaceIndex];
             ExperienceMultiplier = Race.ExperienceFactor + Profession.ExperienceFactor;
             if (GenderIndex == Constants.SexMale)
             {
@@ -1183,7 +1183,7 @@ namespace AngbandOS
                                 newRace = Program.Rng.DieRoll(Constants.MaxRaces) - 1;
                             } while (newRace == RaceIndex);
                             string n = newRace == RaceId.Elf || newRace == RaceId.Imp ? "n" : "";
-                            SaveGame.MsgPrint($"You turn into a{n} {Race.RaceInfo[newRace].Title}!");
+                            SaveGame.MsgPrint($"You turn into a{n} {SaveGame.Races[newRace].Title}!");
                             ChangeRace(newRace);
                         }
                         SaveGame.Level.RedrawSingleLocation(MapY, MapX);

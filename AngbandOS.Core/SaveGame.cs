@@ -20,6 +20,8 @@ using AngbandOS.ItemCategories;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Spells;
 using AngbandOS.Pantheon;
+using AngbandOS.Core.Races;
+using System.Reflection;
 
 namespace AngbandOS
 {
@@ -164,7 +166,38 @@ namespace AngbandOS
 
         private string[][] _keymapAct;
         private string _requestCommandBuffer;
+
+        public readonly Dictionary<int, Race> Races = new Dictionary<int, Race>();
         /// GUI
+
+        /// <summary>
+        /// Creates a new game.
+        /// </summary>
+        public SaveGame()
+        {
+            LoadAllTypes();
+            _autoNavigator = new AutoNavigator(this);
+            Quests = new QuestArray(this);
+            PopulateNewProfile();
+            Towns = Town.NewTownList(this);
+            Dungeons = Dungeon.NewDungeonList();
+            PatronList = Patron.NewPatronList(this);
+            InitializeAllocationTables();
+        }
+
+        private void LoadAllTypes()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            foreach (Type type in assembly.GetTypes())
+            {
+                // Load Races.
+                if (!type.IsAbstract && typeof(Race).IsAssignableFrom(type))
+                {
+                    Race race = (Race)Activator.CreateInstance(type);
+                    Races.Add(race.Index, race);
+                }
+            }
+        }
 
         private void PopulateNewProfile()
         {
@@ -174,20 +207,6 @@ namespace AngbandOS
             RareItemTypes = new RareItemTypeArray(this);
             ItemTypes = new ItemTypeArray(this);
             VaultTypes = new VaultTypeArray(this);
-        }
-
-        /// <summary>
-        /// Creates a new game.
-        /// </summary>
-        public SaveGame()
-        {
-            _autoNavigator = new AutoNavigator(this);
-            Quests = new QuestArray(this);
-            PopulateNewProfile();
-            Towns = Town.NewTownList(this);
-            Dungeons = Dungeon.NewDungeonList();
-            PatronList = Patron.NewPatronList(this);
-            InitializeAllocationTables();
         }
 
         public void Quit(string reason)
@@ -12200,7 +12219,7 @@ namespace AngbandOS
             Print(Colour.Blue, "Race        :", 4, 1);
             if (stage == 0)
             {
-                _player.Race = Race.RaceInfo[_prevRace];
+                _player.Race = Races[_prevRace];
                 str = _player.Race.Title;
             }
             else if (stage < 3)
@@ -12209,7 +12228,7 @@ namespace AngbandOS
             }
             else
             {
-                _player.Race = Race.RaceInfo[_player.RaceIndex];
+                _player.Race = Races[_player.RaceIndex];
                 str = _player.Race.Title;
             }
             Print(Colour.Brown, str, 4, 15);
@@ -12359,7 +12378,7 @@ namespace AngbandOS
             Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = Race.RaceInfo[race].AbilityBonus[i] + Profession.ClassInfo[_player.ProfessionIndex].AbilityBonus[i];
+                int bonus = Races[race].AbilityBonus[i] + Profession.ClassInfo[_player.ProfessionIndex].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -12373,28 +12392,28 @@ namespace AngbandOS
             Print(Colour.Purple, "Infravision :", 38, 31);
             Print(Colour.Purple, "Searching   :", 39, 31);
             Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[_player.ProfessionIndex].BaseDisarmBonus + Race.RaceInfo[race].BaseDisarmBonus, Profession.ClassInfo[_player.ProfessionIndex].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[_player.ProfessionIndex].BaseDeviceBonus + Race.RaceInfo[race].BaseDeviceBonus, Profession.ClassInfo[_player.ProfessionIndex].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[_player.ProfessionIndex].BaseSaveBonus + Race.RaceInfo[race].BaseSaveBonus, Profession.ClassInfo[_player.ProfessionIndex].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Profession.ClassInfo[_player.ProfessionIndex].BaseStealthBonus * 4) + (Race.RaceInfo[race].BaseStealthBonus * 4), Profession.ClassInfo[_player.ProfessionIndex].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[_player.ProfessionIndex].BaseMeleeAttackBonus + Race.RaceInfo[race].BaseMeleeAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[_player.ProfessionIndex].BaseRangedAttackBonus + Race.RaceInfo[race].BaseRangedAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].RangedAttackBonusPerLevel);
-            string buf = Race.RaceInfo[race].ExperienceFactor + Profession.ClassInfo[_player.ProfessionIndex].ExperienceFactor + "%";
+            DisplayAPlusB(67, 36, Profession.ClassInfo[_player.ProfessionIndex].BaseDisarmBonus + Races[race].BaseDisarmBonus, Profession.ClassInfo[_player.ProfessionIndex].DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, Profession.ClassInfo[_player.ProfessionIndex].BaseDeviceBonus + Races[race].BaseDeviceBonus, Profession.ClassInfo[_player.ProfessionIndex].DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, Profession.ClassInfo[_player.ProfessionIndex].BaseSaveBonus + Races[race].BaseSaveBonus, Profession.ClassInfo[_player.ProfessionIndex].SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, (Profession.ClassInfo[_player.ProfessionIndex].BaseStealthBonus * 4) + (Races[race].BaseStealthBonus * 4), Profession.ClassInfo[_player.ProfessionIndex].StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, Profession.ClassInfo[_player.ProfessionIndex].BaseMeleeAttackBonus + Races[race].BaseMeleeAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, Profession.ClassInfo[_player.ProfessionIndex].BaseRangedAttackBonus + Races[race].BaseRangedAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].RangedAttackBonusPerLevel);
+            string buf = Races[race].ExperienceFactor + Profession.ClassInfo[_player.ProfessionIndex].ExperienceFactor + "%";
             Print(Colour.Black, buf, 36, 45);
-            buf = "1d" + (Race.RaceInfo[race].HitDieBonus + Profession.ClassInfo[_player.ProfessionIndex].HitDieBonus);
+            buf = "1d" + (Races[race].HitDieBonus + Profession.ClassInfo[_player.ProfessionIndex].HitDieBonus);
             Print(Colour.Black, buf, 37, 45);
-            if (Race.RaceInfo[race].Infravision == 0)
+            if (Races[race].Infravision == 0)
             {
                 Print(Colour.Black, "nil", 38, 45);
             }
             else
             {
-                buf = Race.RaceInfo[race].Infravision + "0 feet";
+                buf = Races[race].Infravision + "0 feet";
                 Print(Colour.Green, buf, 38, 45);
             }
-            buf = $"{Race.RaceInfo[race].BaseSearchBonus + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchBonus:00}%";
+            buf = $"{Races[race].BaseSearchBonus + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchBonus:00}%";
             Print(Colour.Black, buf, 39, 45);
-            buf = $"{Race.RaceInfo[race].BaseSearchFrequency + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchFrequency:00}%";
+            buf = $"{Races[race].BaseSearchFrequency + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchFrequency:00}%";
             Print(Colour.Black, buf, 40, 45);
             switch (race)
             {
@@ -13246,7 +13265,7 @@ namespace AngbandOS
                             autoChose[stage] = true;
                             _player.RaceIndex = _prevRace;
                             _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
-                            _player.Race = Race.RaceInfo[_player.RaceIndex];
+                            _player.Race = Races[_player.RaceIndex];
                             stage++;
                             break;
                         }
@@ -13258,7 +13277,7 @@ namespace AngbandOS
                                 int k = Program.Rng.RandomLessThan(Constants.MaxRaces);
                                 _player.GetFirstLevelMutation = k == RaceId.MiriNigri;
                                 _player.RaceIndex = k;
-                                _player.Race = Race.RaceInfo[_player.RaceIndex];
+                                _player.Race = Races[_player.RaceIndex];
                             }
                             while ((_player.Race.Choice & (1L << _player.ProfessionIndex)) == 0);
                             stage++;
@@ -13320,7 +13339,7 @@ namespace AngbandOS
                         if (stage > BirthStage.RaceSelection)
                         {
                             _player.RaceIndex = _raceMenu[menu[BirthStage.RaceSelection]].Index;
-                            _player.Race = Race.RaceInfo[_player.RaceIndex];
+                            _player.Race = Races[_player.RaceIndex];
                             _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
                         }
                         break;
