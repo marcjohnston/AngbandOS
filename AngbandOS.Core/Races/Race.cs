@@ -98,5 +98,10 @@ namespace AngbandOS.Core.Races
         public virtual void CalcBonuses(SaveGame saveGame)
         {
         }
+
+        /// <summary>
+        /// Returns true, if the race rests until dusk instead of dawn.  Vampires, zombies, spectres and skeletons return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool RestsTillDuskInsteadOfDawn => false;
     }
 }

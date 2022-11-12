@@ -311,8 +311,7 @@ namespace AngbandOS
                 }
                 if (player.TimedHallucinations != 0)
                 {
-                    SaveGame.MsgPrint(
-                        $"You behold the {_funnyDesc[Program.Rng.DieRoll(Constants.MaxFunny) - 1]} visage of {mName}!");
+                    SaveGame.MsgPrint($"You behold the {_funnyDesc[Program.Rng.DieRoll(Constants.MaxFunny) - 1]} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
                         SaveGame.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
@@ -320,15 +319,13 @@ namespace AngbandOS
                     }
                     return;
                 }
-                SaveGame.MsgPrint(
-                    $"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
+                SaveGame.MsgPrint($"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
                 Race.Knowledge.RFlags2 |= MonsterFlag2.EldritchHorror;
                 if (player.RaceIndex == RaceId.Imp || player.RaceIndex == RaceId.MindFlayer)
                 {
                     return;
                 }
-                if (player.RaceIndex == RaceId.Skeleton || player.RaceIndex == RaceId.Zombie ||
-                    player.RaceIndex == RaceId.Vampire || player.RaceIndex == RaceId.Spectre)
+                if (player.RaceIndex == RaceId.Skeleton || player.RaceIndex == RaceId.Zombie ||  player.RaceIndex == RaceId.Vampire || player.RaceIndex == RaceId.Spectre)
                 {
                     if (Program.Rng.DieRoll(100) < 25 + player.Level)
                     {

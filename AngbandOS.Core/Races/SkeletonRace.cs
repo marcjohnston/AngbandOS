@@ -70,5 +70,6 @@ namespace AngbandOS.Core.Races
                 saveGame.Player.HasColdResistance = true;
             }
         }
+        public override bool RestsTillDuskInsteadOfDawn => true;
     }
 }

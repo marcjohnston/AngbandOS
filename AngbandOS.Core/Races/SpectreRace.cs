@@ -79,5 +79,6 @@ namespace AngbandOS.Core.Races
                 saveGame.Player.HasTelepathy = true;
             }
         }
+        public override bool RestsTillDuskInsteadOfDawn => true;
     }
 }
