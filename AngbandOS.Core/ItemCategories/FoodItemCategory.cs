@@ -45,5 +45,7 @@ namespace AngbandOS.ItemCategories
             }
             return 0;
         }
+
+        public abstract bool Eat(SaveGame saveGame);
     }
 }

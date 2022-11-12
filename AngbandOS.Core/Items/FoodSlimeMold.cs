@@ -1,5 +1,6 @@
 using AngbandOS.Core.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -18,5 +19,11 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 3000;
         public override int? SubCategory => 36;
         public override int Weight => 5;
+        public override bool Eat(SaveGame saveGame)
+        {
+            PotionItemCategory slimeMold = new PotionSlimeMoldJuice();
+            slimeMold.Quaff(saveGame);
+            return true;
+        }
     }
 }

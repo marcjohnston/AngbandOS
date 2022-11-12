@@ -1,5 +1,6 @@
 using AngbandOS.Core.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -18,5 +19,12 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 7500;
         public override int? SubCategory => 37;
         public override int Weight => 3;
+        public override bool Eat(SaveGame saveGame)
+        {
+            saveGame.MsgPrint("That tastes good.");
+            saveGame.Player.SetTimedPoison(0);
+            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+            return true;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -17,5 +18,13 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 16;
         public override int Weight => 2;
+        public override bool Eat(SaveGame saveGame)
+        {
+            if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

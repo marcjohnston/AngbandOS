@@ -15,5 +15,10 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 32;
         public override int Weight => 2;
+        public override bool Eat(SaveGame saveGame)
+        {
+            saveGame.MsgPrint("That tastes good.");
+            return true;
+        }
     }
 }

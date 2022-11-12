@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -19,5 +20,11 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 11;
         public override int Weight => 1;
+        public override bool Eat(SaveGame saveGame)
+        {
+            saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "poisonous food.");
+            saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
+            return true;
+        }
     }
 }

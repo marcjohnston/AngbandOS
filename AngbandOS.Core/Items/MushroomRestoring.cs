@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -17,5 +18,34 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 19;
         public override int Weight => 1;
+        public override bool Eat(SaveGame saveGame)
+        {
+            bool ident = false;
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Strength))
+            {
+                ident = true;
+            }
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+            {
+                ident = true;
+            }
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
+            {
+                ident = true;
+            }
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
+            {
+                ident = true;
+            }
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+            {
+                ident = true;
+            }
+            if (saveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
+            {
+                ident = true;
+            }
+            return ident;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using AngbandOS.Enumerations;
 using System;
+using System.Collections.Generic;
 
 namespace AngbandOS.ItemCategories
 {
@@ -17,5 +18,14 @@ namespace AngbandOS.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 13;
         public override int Weight => 1;
+
+        public override bool Eat(SaveGame saveGame)
+        {
+            if (saveGame.Player.SetTimedBlindness(0))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
