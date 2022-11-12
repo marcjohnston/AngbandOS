@@ -91,5 +91,6 @@ namespace AngbandOS.Core.Races
                 saveGame.Player.SetTimedStoneskin(saveGame.Player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
             }
         }
+        public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     }
 }

@@ -109,5 +109,6 @@ namespace AngbandOS.Core.Races
                 saveGame.Player.RestoreLevel();
             }
         }
+        public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     }
 }

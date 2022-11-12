@@ -105,5 +105,6 @@ namespace AngbandOS.Core.Races
                 }
             }
         }
+        public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     }
 }

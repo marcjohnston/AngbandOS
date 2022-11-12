@@ -12595,8 +12595,7 @@ namespace AngbandOS
         {
             Item item = new Item(saveGame);
 
-            if (_player.RaceIndex == RaceId.Golem || _player.RaceIndex == RaceId.Skeleton || _player.RaceIndex == RaceId.Zombie ||
-                _player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre)
+            if (_player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
                 item.AssignItemType(new ScrollSatisfyHunger());
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);

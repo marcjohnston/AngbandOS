@@ -170,5 +170,11 @@ namespace AngbandOS.Core.Races
             saveGame.MsgPrint("This race has no bonus power.");
             saveGame.EnergyUse = 0;
         }
+
+        /// <summary>
+        /// Returns true, if characters are automatically outfitted with scrolls of satisfy hunger.  Golems, skeletons, zombies, vampires and spectres return 
+        /// true.  Returns false by default.
+        /// </summary>
+        public virtual bool OutfitsWithScrollsOfSatisfyHunger => false;
     }
 }
