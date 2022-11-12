@@ -5,7 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
+using AngbandOS.Core.Races;
 
 namespace AngbandOS
 {
@@ -15,9 +15,13 @@ namespace AngbandOS
         public readonly int MaxCost;
         public readonly int MinInflate;
         public readonly string OwnerName;
-        public readonly int OwnerRace;
 
-        public StoreOwner(string ownerName, int maxCost, int minInflate, int ownerRace)
+        /// <summary>
+        /// Returns the race of the store owner.  Null, if there is no store owner.
+        /// </summary>
+        public readonly Race? OwnerRace;
+
+        public StoreOwner(string ownerName, int maxCost, int minInflate, Race? ownerRace)
         {
             OwnerName = ownerName;
             MaxCost = maxCost;

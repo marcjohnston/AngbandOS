@@ -451,15 +451,17 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Returns the name of the owner.  By default, the name of the owner and their race is returned.
+        /// Returns the name of the owner.  By default, the name of the owner and their race is returned.  If there is no owner race, just the owner name is returned.
         /// </summary>
         protected virtual string OwnerName
         {
             get
             {
                 string ownerName = _owner.OwnerName;
-                string raceName = SaveGame.Races[_owner.OwnerRace].Title;
-                return $"{ownerName} ({raceName})";
+                if (_owner.OwnerRace == null)
+                    return $"{ownerName}";
+                else
+                    return $"{ownerName} ({_owner.OwnerRace.Title})";
             }
         }
 

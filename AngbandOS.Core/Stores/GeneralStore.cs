@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StoreCommands;
@@ -15,34 +16,34 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Falilmawen the Friendly", 250, 108, RaceId.Hobbit),
-            new StoreOwner("Voirin the Cowardly", 500, 108, RaceId.Human),
-            new StoreOwner("Erashnak the Midget", 750, 107, RaceId.MiriNigri),
-            new StoreOwner("Grug the Comely", 1000, 107, RaceId.HalfTitan),
-            new StoreOwner("Forovir the Cheap", 250, 108, RaceId.Human),
-            new StoreOwner("Ellis the Fool", 500, 108, RaceId.Human),
-            new StoreOwner("Filbert the Hungry", 750, 107, RaceId.Vampire),
-            new StoreOwner("Fthnargl Psathiggua", 1000, 107, RaceId.MindFlayer),
-            new StoreOwner("Eloise Long-Dead", 250, 108, RaceId.Spectre),
-            new StoreOwner("Fundi the Slow", 500, 108, RaceId.Zombie),
-            new StoreOwner("Granthus", 750, 107, RaceId.Skeleton),
-            new StoreOwner("Lorax the Suave", 1000, 107, RaceId.Vampire),
-            new StoreOwner("Butch", 250, 108, RaceId.HalfOrc),
-            new StoreOwner("Elbereth the Beautiful", 500, 108, RaceId.HighElf),
-            new StoreOwner("Sarleth the Sneaky", 750, 107, RaceId.Gnome),
-            new StoreOwner("Narlock", 1000, 107, RaceId.Dwarf),
-            new StoreOwner("Haneka the Small", 250, 108, RaceId.Gnome),
-            new StoreOwner("Loirin the Mad", 500, 108, RaceId.HalfGiant),
-            new StoreOwner("Wuto Poisonbreath", 750, 107, RaceId.Draconian),
-            new StoreOwner("Araaka the Rotund", 1000, 107, RaceId.Draconian),
-            new StoreOwner("Poogor the Dumb", 250, 108, RaceId.MiriNigri),
-            new StoreOwner("Felorfiliand", 500, 108, RaceId.Elf),
-            new StoreOwner("Maroka the Aged", 750, 107, RaceId.Gnome),
-            new StoreOwner("Sasin the Bold", 1000, 107, RaceId.HalfGiant),
-            new StoreOwner("Abiemar the Peasant", 250, 108, RaceId.Human),
-            new StoreOwner("Hurk the Poor", 500, 108, RaceId.HalfOrc),
-            new StoreOwner("Soalin the Wretched", 750, 107, RaceId.Zombie),
-            new StoreOwner("Merulla the Humble", 1000, 107, RaceId.Elf)
+            new StoreOwner("Falilmawen the Friendly", 250, 108, new HobbitRace()),
+            new StoreOwner("Voirin the Cowardly", 500, 108, new HumanRace()),
+            new StoreOwner("Erashnak the Midget", 750, 107, new MiriNigriRace()),
+            new StoreOwner("Grug the Comely", 1000, 107, new HalfTitanRace()),
+            new StoreOwner("Forovir the Cheap", 250, 108, new HumanRace()),
+            new StoreOwner("Ellis the Fool", 500, 108, new HumanRace()),
+            new StoreOwner("Filbert the Hungry", 750, 107, new VampireRace()),
+            new StoreOwner("Fthnargl Psathiggua", 1000, 107, new MindFlayerRace()),
+            new StoreOwner("Eloise Long-Dead", 250, 108, new SpectreRace()),
+            new StoreOwner("Fundi the Slow", 500, 108, new ZombieRace()),
+            new StoreOwner("Granthus", 750, 107, new SkeletonRace()),
+            new StoreOwner("Lorax the Suave", 1000, 107, new VampireRace()),
+            new StoreOwner("Butch", 250, 108, new HalfOrcRace()),
+            new StoreOwner("Elbereth the Beautiful", 500, 108, new HighElfRace()),
+            new StoreOwner("Sarleth the Sneaky", 750, 107, new GnomeRace()),
+            new StoreOwner("Narlock", 1000, 107, new DwarfRace()),
+            new StoreOwner("Haneka the Small", 250, 108, new GnomeRace()),
+            new StoreOwner("Loirin the Mad", 500, 108, new HalfGiantRace()),
+            new StoreOwner("Wuto Poisonbreath", 750, 107, new DraconianRace()),
+            new StoreOwner("Araaka the Rotund", 1000, 107, new DraconianRace()),
+            new StoreOwner("Poogor the Dumb", 250, 108, new MiriNigriRace()),
+            new StoreOwner("Felorfiliand", 500, 108, new ElfRace()),
+            new StoreOwner("Maroka the Aged", 750, 107, new GnomeRace()),
+            new StoreOwner("Sasin the Bold", 1000, 107, new HalfGiantRace()),
+            new StoreOwner("Abiemar the Peasant", 250, 108, new HumanRace()),
+            new StoreOwner("Hurk the Poor", 500, 108, new HalfOrcRace()),
+            new StoreOwner("Soalin the Wretched", 750, 107, new ZombieRace()),
+            new StoreOwner("Merulla the Humble", 1000, 107, new ElfRace())
         };
 
         public override string FeatureType => "GeneralStore";

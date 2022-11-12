@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StoreCommands;
@@ -15,29 +16,30 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Kon-Dar the Ugly", 10000, 115, RaceId.HalfOrc),
-            new StoreOwner("Darg-Low the Grim", 15000, 111, RaceId.Human),
-            new StoreOwner("Decado the Handsome", 25000, 112, RaceId.Great),
-            new StoreOwner("Elo Dragonscale", 30000, 112, RaceId.Elf),
-            new StoreOwner("Delicatus", 10000, 115, RaceId.Sprite),
-            new StoreOwner("Gruce the Huge", 15000, 111, RaceId.HalfGiant),
-            new StoreOwner("Animus", 25000, 112, RaceId.Golem), new StoreOwner("Malvus", 30000, 112, RaceId.HalfTitan),
-            new StoreOwner("Selaxis", 10000, 115, RaceId.Zombie),
-            new StoreOwner("Deathchill", 15000, 111, RaceId.Spectre),
-            new StoreOwner("Drios the Faint", 25000, 112, RaceId.Spectre),
-            new StoreOwner("Bathric the Cold", 30000, 112, RaceId.Vampire),
-            new StoreOwner("Vengella the Cruel", 10000, 115, RaceId.HalfTroll),
-            new StoreOwner("Wyrana the Mighty", 15000, 111, RaceId.Human),
-            new StoreOwner("Yojo II", 25000, 112, RaceId.Dwarf),
-            new StoreOwner("Ranalar the Sweet", 30000, 112, RaceId.Great),
-            new StoreOwner("Horbag the Unclean", 10000, 115, RaceId.HalfOrc),
-            new StoreOwner("Elelen the Telepath", 15000, 111, RaceId.DarkElf),
-            new StoreOwner("Isedrelias", 25000, 112, RaceId.Sprite),
-            new StoreOwner("Vegnar One-eye", 30000, 112, RaceId.Cyclops),
-            new StoreOwner("Rodish the Chaotic", 10000, 115, RaceId.MiriNigri),
-            new StoreOwner("Hesin Swordmaster", 15000, 111, RaceId.Nibelung),
-            new StoreOwner("Elvererith the Cheat", 25000, 112, RaceId.DarkElf),
-            new StoreOwner("Zzathath the Imp", 30000, 112, RaceId.Imp)
+            new StoreOwner("Kon-Dar the Ugly", 10000, 115, new HalfOrcRace()),
+            new StoreOwner("Darg-Low the Grim", 15000, 111, new HumanRace()),
+            new StoreOwner("Decado the Handsome", 25000, 112, new GreatOneRace()),
+            new StoreOwner("Elo Dragonscale", 30000, 112, new ElfRace()),
+            new StoreOwner("Delicatus", 10000, 115, new SpriteRace()),
+            new StoreOwner("Gruce the Huge", 15000, 111, new HalfGiantRace()),
+            new StoreOwner("Animus", 25000, 112, new GolemRace()), 
+            new StoreOwner("Malvus", 30000, 112, new HalfTitanRace()),
+            new StoreOwner("Selaxis", 10000, 115, new ZombieRace()),
+            new StoreOwner("Deathchill", 15000, 111, new SpectreRace()),
+            new StoreOwner("Drios the Faint", 25000, 112, new SpectreRace()),
+            new StoreOwner("Bathric the Cold", 30000, 112, new VampireRace()),
+            new StoreOwner("Vengella the Cruel", 10000, 115, new HalfTrollRace()),
+            new StoreOwner("Wyrana the Mighty", 15000, 111, new HumanRace()),
+            new StoreOwner("Yojo II", 25000, 112, new DwarfRace()),
+            new StoreOwner("Ranalar the Sweet", 30000, 112, new GreatOneRace()),
+            new StoreOwner("Horbag the Unclean", 10000, 115, new HalfOrcRace()),
+            new StoreOwner("Elelen the Telepath", 15000, 111, new DarkElfRace()),
+            new StoreOwner("Isedrelias", 25000, 112, new SpriteRace()),
+            new StoreOwner("Vegnar One-eye", 30000, 112, new CyclopsRace()),
+            new StoreOwner("Rodish the Chaotic", 10000, 115, new MiriNigriRace()),
+            new StoreOwner("Hesin Swordmaster", 15000, 111, new NibelungRace()),
+            new StoreOwner("Elvererith the Cheat", 25000, 112, new DarkElfRace()),
+            new StoreOwner("Zzathath the Imp", 30000, 112, new ImpRace())
         };
 
         public override string FeatureType => "Armoury";

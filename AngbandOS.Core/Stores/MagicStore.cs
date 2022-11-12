@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StoreCommands;
@@ -15,30 +16,30 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Skidney the Sorcerer", 15000, 110, RaceId.HalfElf),
-            new StoreOwner("Buggerby the Great", 20000, 113, RaceId.Gnome),
-            new StoreOwner("Kyria the Illusionist", 30000, 110, RaceId.Human),
-            new StoreOwner("Nikki the Necromancer", 30000, 110, RaceId.DarkElf),
-            new StoreOwner("Solostoran", 15000, 110, RaceId.Sprite),
-            new StoreOwner("Achshe the Tentacled", 20000, 113, RaceId.MindFlayer),
-            new StoreOwner("Kaza the Noble", 30000, 110, RaceId.HighElf),
-            new StoreOwner("Fazzil the Dark", 30000, 110, RaceId.DarkElf),
-            new StoreOwner("Angel", 20000, 150, RaceId.Vampire),
-            new StoreOwner("Flotsam the Bloated", 20000, 150, RaceId.Zombie),
-            new StoreOwner("Nieval", 30000, 150, RaceId.Vampire),
-            new StoreOwner("Anastasia the Luminous", 30000, 150, RaceId.Spectre),
-            new StoreOwner("Keldorn the Grand", 15000, 110, RaceId.Dwarf),
-            new StoreOwner("Philanthropus", 20000, 113, RaceId.Hobbit),
-            new StoreOwner("Agnar the Enchantress", 30000, 110, RaceId.Human),
-            new StoreOwner("Buliance the Necromancer", 30000, 110, RaceId.MiriNigri),
-            new StoreOwner("Vuirak the High-Mage", 15000, 110, RaceId.MiriNigri),
-            new StoreOwner("Madish the Smart", 20000, 113, RaceId.MiriNigri),
-            new StoreOwner("Falebrimbor", 30000, 110, RaceId.HighElf),
-            new StoreOwner("Felil-Gand the Subtle", 30000, 110, RaceId.DarkElf),
-            new StoreOwner("Thalegord the Shaman", 15000, 110, RaceId.TchoTcho),
-            new StoreOwner("Cthoaloth the Mystic", 20000, 113, RaceId.MindFlayer),
-            new StoreOwner("Ibeli the Illusionist", 30000, 110, RaceId.Skeleton),
-            new StoreOwner("Heto the Necromancer", 30000, 110, RaceId.Yeek)
+            new StoreOwner("Skidney the Sorcerer", 15000, 110, new HalfElfRace()),
+            new StoreOwner("Buggerby the Great", 20000, 113, new GnomeRace()),
+            new StoreOwner("Kyria the Illusionist", 30000, 110, new HumanRace()),
+            new StoreOwner("Nikki the Necromancer", 30000, 110, new DarkElfRace()),
+            new StoreOwner("Solostoran", 15000, 110, new SpriteRace()),
+            new StoreOwner("Achshe the Tentacled", 20000, 113, new MindFlayerRace()),
+            new StoreOwner("Kaza the Noble", 30000, 110, new HighElfRace()),
+            new StoreOwner("Fazzil the Dark", 30000, 110, new DarkElfRace()),
+            new StoreOwner("Angel", 20000, 150, new VampireRace()),
+            new StoreOwner("Flotsam the Bloated", 20000, 150, new ZombieRace()),
+            new StoreOwner("Nieval", 30000, 150, new VampireRace()),
+            new StoreOwner("Anastasia the Luminous", 30000, 150, new SpectreRace()),
+            new StoreOwner("Keldorn the Grand", 15000, 110, new DwarfRace()),
+            new StoreOwner("Philanthropus", 20000, 113, new HobbitRace()),
+            new StoreOwner("Agnar the Enchantress", 30000, 110, new HumanRace()),
+            new StoreOwner("Buliance the Necromancer", 30000, 110, new MiriNigriRace()),
+            new StoreOwner("Vuirak the High-Mage", 15000, 110, new MiriNigriRace()),
+            new StoreOwner("Madish the Smart", 20000, 113, new MiriNigriRace()),
+            new StoreOwner("Falebrimbor", 30000, 110, new HighElfRace()),
+            new StoreOwner("Felil-Gand the Subtle", 30000, 110, new DarkElfRace()),
+            new StoreOwner("Thalegord the Shaman", 15000, 110, new TchoTchoRace()),
+            new StoreOwner("Cthoaloth the Mystic", 20000, 113, new MindFlayerRace()),
+            new StoreOwner("Ibeli the Illusionist", 30000, 110, new SkeletonRace()),
+            new StoreOwner("Heto the Necromancer", 30000, 110, new YeekRace())
         };
 
         public override string FeatureType => "MagicShop";

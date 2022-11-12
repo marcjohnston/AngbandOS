@@ -1,9 +1,8 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
-using AngbandOS.Patrons;
 using AngbandOS.StoreCommands;
-using System;
 
 namespace AngbandOS.Stores
 {
@@ -18,25 +17,26 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Ludwig the Humble", 10000, 109, RaceId.Dwarf),
-            new StoreOwner("Gunnar the Paladin", 15000, 110, RaceId.HalfTroll),
-            new StoreOwner("Sir Parsival the Pure", 25000, 107, RaceId.HighElf),
-            new StoreOwner("Asenath the Holy", 30000, 109, RaceId.Human),
-            new StoreOwner("McKinnon", 10000, 109, RaceId.Human),
-            new StoreOwner("Mistress Chastity", 15000, 110, RaceId.HighElf),
-            new StoreOwner("Hashnik the Druid", 25000, 107, RaceId.Hobbit),
-            new StoreOwner("Finak", 30000, 109, RaceId.Yeek), new StoreOwner("Krikkik", 10000, 109, RaceId.Klackon),
-            new StoreOwner("Morival the Wild", 15000, 110, RaceId.Elf),
-            new StoreOwner("Hoshak the Dark", 25000, 107, RaceId.Imp),
-            new StoreOwner("Atal the Wise", 30000, 109, RaceId.Human),
-            new StoreOwner("Ibenidd the Chaste", 10000, 109, RaceId.Human),
-            new StoreOwner("Eridish", 15000, 110, RaceId.HalfTroll),
-            new StoreOwner("Vrudush the Shaman", 25000, 107, RaceId.HalfOgre),
-            new StoreOwner("Haob the Berserker", 30000, 109, RaceId.TchoTcho),
-            new StoreOwner("Proogdish the Youthfull", 10000, 109, RaceId.HalfOgre),
-            new StoreOwner("Lumwise the Mad", 15000, 110, RaceId.Yeek),
-            new StoreOwner("Muirt the Virtuous", 25000, 107, RaceId.Kobold),
-            new StoreOwner("Dardobard the Weak", 30000, 109, RaceId.Spectre)
+            new StoreOwner("Ludwig the Humble", 10000, 109, new DwarfRace()),
+            new StoreOwner("Gunnar the Paladin", 15000, 110, new HalfTrollRace()),
+            new StoreOwner("Sir Parsival the Pure", 25000, 107, new HighElfRace()),
+            new StoreOwner("Asenath the Holy", 30000, 109, new HumanRace()),
+            new StoreOwner("McKinnon", 10000, 109, new HumanRace()),
+            new StoreOwner("Mistress Chastity", 15000, 110, new HighElfRace()),
+            new StoreOwner("Hashnik the Druid", 25000, 107, new HobbitRace()),
+            new StoreOwner("Finak", 30000, 109, new YeekRace()), 
+            new StoreOwner("Krikkik", 10000, 109, new KlackonRace()),
+            new StoreOwner("Morival the Wild", 15000, 110, new ElfRace()),
+            new StoreOwner("Hoshak the Dark", 25000, 107, new ImpRace()),
+            new StoreOwner("Atal the Wise", 30000, 109, new HumanRace()),
+            new StoreOwner("Ibenidd the Chaste", 10000, 109, new HumanRace()),
+            new StoreOwner("Eridish", 15000, 110, new HalfTrollRace()),
+            new StoreOwner("Vrudush the Shaman", 25000, 107, new HalfOgreRace()),
+            new StoreOwner("Haob the Berserker", 30000, 109, new TchoTchoRace()),
+            new StoreOwner("Proogdish the Youthfull", 10000, 109, new HalfOgreRace()),
+            new StoreOwner("Lumwise the Mad", 15000, 110, new YeekRace()),
+            new StoreOwner("Muirt the Virtuous", 25000, 107, new KoboldRace()),
+            new StoreOwner("Dardobard the Weak", 30000, 109, new SpectreRace())
         };
 
         protected override StockStoreInventoryItem[] GetStoreTable()

@@ -1,7 +1,6 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Races;
+using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
-using AngbandOS.StaticData;
-using System;
 
 namespace AngbandOS.Stores
 {
@@ -16,26 +15,26 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Vhassa the Dead", 20000, 150, RaceId.Zombie),
-            new StoreOwner("Kyn the Treacherous", 20000, 150, RaceId.Vampire),
-            new StoreOwner("Batrachian Belle", 30000, 150, RaceId.MiriNigri),
-            new StoreOwner("Corpselight", 30000, 150, RaceId.Spectre),
-            new StoreOwner("Parrish the Bloodthirsty", 20000, 150, RaceId.Vampire),
-            new StoreOwner("Vile", 20000, 150, RaceId.Skeleton),
-            new StoreOwner("Prentice the Trusted", 30000, 150, RaceId.Skeleton),
-            new StoreOwner("Griella Humanslayer", 30000, 150, RaceId.Imp),
-            new StoreOwner("Charity the Necromancer", 20000, 150, RaceId.DarkElf),
-            new StoreOwner("Pugnacious the Pugilist", 20000, 150, RaceId.HalfOrc),
-            new StoreOwner("Footsore the Lucky", 30000, 150, RaceId.MiriNigri),
-            new StoreOwner("Sidria Lighfingered", 30000, 150, RaceId.Human),
-            new StoreOwner("Riatho the Juggler", 20000, 150, RaceId.Hobbit),
-            new StoreOwner("Janaaka the Shifty", 20000, 150, RaceId.Gnome),
-            new StoreOwner("Cina the Rogue", 30000, 150, RaceId.Gnome),
-            new StoreOwner("Arunikki Greatclaw", 30000, 150, RaceId.Draconian),
-            new StoreOwner("Chaeand the Poor", 20000, 150, RaceId.Human),
-            new StoreOwner("Afardorf the Brigand", 20000, 150, RaceId.TchoTcho),
-            new StoreOwner("Lathaxl the Greedy", 30000, 150, RaceId.MindFlayer),
-            new StoreOwner("Falarewyn", 30000, 150, RaceId.Sprite)
+            new StoreOwner("Vhassa the Dead", 20000, 150, new ZombieRace()),
+            new StoreOwner("Kyn the Treacherous", 20000, 150, new VampireRace()),
+            new StoreOwner("Batrachian Belle", 30000, 150, new MiriNigriRace()),
+            new StoreOwner("Corpselight", 30000, 150, new SpectreRace()),
+            new StoreOwner("Parrish the Bloodthirsty", 20000, 150, new VampireRace()),
+            new StoreOwner("Vile", 20000, 150, new SkeletonRace()),
+            new StoreOwner("Prentice the Trusted", 30000, 150, new SkeletonRace()),
+            new StoreOwner("Griella Humanslayer", 30000, 150, new ImpRace()),
+            new StoreOwner("Charity the Necromancer", 20000, 150, new DarkElfRace()),
+            new StoreOwner("Pugnacious the Pugilist", 20000, 150, new HalfOrcRace()),
+            new StoreOwner("Footsore the Lucky", 30000, 150, new MiriNigriRace()),
+            new StoreOwner("Sidria Lighfingered", 30000, 150, new HumanRace()),
+            new StoreOwner("Riatho the Juggler", 20000, 150, new HobbitRace()),
+            new StoreOwner("Janaaka the Shifty", 20000, 150, new GnomeRace()),
+            new StoreOwner("Cina the Rogue", 30000, 150, new GnomeRace()),
+            new StoreOwner("Arunikki Greatclaw", 30000, 150, new DraconianRace()),
+            new StoreOwner("Chaeand the Poor", 20000, 150, new HumanRace()),
+            new StoreOwner("Afardorf the Brigand", 20000, 150, new TchoTchoRace()),
+            new StoreOwner("Lathaxl the Greedy", 30000, 150, new MindFlayerRace()),
+            new StoreOwner("Falarewyn", 30000, 150, new SpriteRace())
         };
 
         protected override StockStoreInventoryItem[] GetStoreTable()

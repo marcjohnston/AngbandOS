@@ -14,7 +14,7 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Hall of Records", 0, 100, 99)
+            new StoreOwner("Hall of Records", 0, 100, null)
         };
 
         public override string FeatureType => "HallOfRecords";

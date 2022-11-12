@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.StoreCommands;
 
@@ -13,25 +14,26 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Magd the Ruthless", 2000, 100, RaceId.Human),
-            new StoreOwner("Drako Fairdeal", 4000, 100, RaceId.Draconian),
-            new StoreOwner("Featherwing", 5000, 100, RaceId.Sprite),
-            new StoreOwner("Xochinaggua", 10000, 100, RaceId.MindFlayer),
-            new StoreOwner("Od the Penniless", 2000, 100, RaceId.Elf), new StoreOwner("Xax", 4000, 100, RaceId.Golem),
-            new StoreOwner("Jake Small", 5000, 100, RaceId.HalfGiant),
-            new StoreOwner("Helga the Lost", 10000, 100, RaceId.Human),
-            new StoreOwner("Gloom the Phlegmatic", 2000, 100, RaceId.Zombie),
-            new StoreOwner("Quick-Arm Vollaire", 4000, 100, RaceId.Vampire),
-            new StoreOwner("Asenath", 5000, 100, RaceId.Zombie),
-            new StoreOwner("Lord Filbert", 10000, 100, RaceId.Vampire),
-            new StoreOwner("Herranyth the Ruthless", 2000, 100, RaceId.Human),
-            new StoreOwner("Gagrin Moneylender", 4000, 100, RaceId.Yeek),
-            new StoreOwner("Thrambor the Grubby", 5000, 100, RaceId.HalfElf),
-            new StoreOwner("Derigrin the Honest", 10000, 100, RaceId.Hobbit),
-            new StoreOwner("Munk the Barterer", 2000, 100, RaceId.HalfOgre),
-            new StoreOwner("Gadrialdur the Fair", 4000, 100, RaceId.HalfElf),
-            new StoreOwner("Ninar the Stooped", 5000, 100, RaceId.Dwarf),
-            new StoreOwner("Adirath the Unmagical", 10000, 100, RaceId.TchoTcho)
+            new StoreOwner("Magd the Ruthless", 2000, 100, new HumanRace()),
+            new StoreOwner("Drako Fairdeal", 4000, 100, new DraconianRace()),
+            new StoreOwner("Featherwing", 5000, 100, new SpriteRace()),
+            new StoreOwner("Xochinaggua", 10000, 100, new MindFlayerRace()),
+            new StoreOwner("Od the Penniless", 2000, 100, new ElfRace()),
+            new StoreOwner("Xax", 4000, 100, new GolemRace()),
+            new StoreOwner("Jake Small", 5000, 100, new HalfGiantRace()),
+            new StoreOwner("Helga the Lost", 10000, 100, new HumanRace()),
+            new StoreOwner("Gloom the Phlegmatic", 2000, 100, new ZombieRace()),
+            new StoreOwner("Quick-Arm Vollaire", 4000, 100, new VampireRace()),
+            new StoreOwner("Asenath", 5000, 100, new ZombieRace()),
+            new StoreOwner("Lord Filbert", 10000, 100, new VampireRace()),
+            new StoreOwner("Herranyth the Ruthless", 2000, 100, new HumanRace()),
+            new StoreOwner("Gagrin Moneylender", 4000, 100, new YeekRace()),
+            new StoreOwner("Thrambor the Grubby", 5000, 100, new HalfElfRace()),
+            new StoreOwner("Derigrin the Honest", 10000, 100, new HobbitRace()),
+            new StoreOwner("Munk the Barterer", 2000, 100, new HalfOgreRace()),
+            new StoreOwner("Gadrialdur the Fair", 4000, 100, new HalfElfRace()),
+            new StoreOwner("Ninar the Stooped", 5000, 100, new DwarfRace()),
+            new StoreOwner("Adirath the Unmagical", 10000, 100, new TchoTchoRace())
         };
 
         public override string FeatureType => "Pawnbrokers";

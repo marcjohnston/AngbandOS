@@ -1,8 +1,8 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.ItemCategories;
 using AngbandOS.StoreCommands;
-using System;
 
 namespace AngbandOS.Stores
 {
@@ -15,30 +15,30 @@ namespace AngbandOS.Stores
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Randolph Carter", 15000, 108, RaceId.Human),
-            new StoreOwner("Odnar the Sage", 20000, 105, RaceId.HighElf),
-            new StoreOwner("Gandar the Neutral", 25000, 110, RaceId.Vampire),
-            new StoreOwner("Ro-sha the Patient", 30000, 105, RaceId.Golem),
-            new StoreOwner("Sarai the Swift", 15000, 108, RaceId.Human),
-            new StoreOwner("Bodril the Seer", 20000, 105, RaceId.HighElf),
-            new StoreOwner("Veloin the Quiet", 25000, 110, RaceId.Zombie),
-            new StoreOwner("Vanthylas the Learned", 30000, 105, RaceId.MindFlayer),
-            new StoreOwner("Ossein the Literate", 15000, 108, RaceId.Skeleton),
-            new StoreOwner("Olvar Bookworm", 20000, 105, RaceId.Vampire),
-            new StoreOwner("Shallowgrave", 25000, 110, RaceId.Zombie),
-            new StoreOwner("Death Mask", 30000, 105, RaceId.Zombie),
-            new StoreOwner("Porcina the Obese", 15000, 108, RaceId.HalfOrc),
-            new StoreOwner("Glaruna Brandybreath", 20000, 105, RaceId.Dwarf),
-            new StoreOwner("Furface Yeek", 25000, 110, RaceId.Yeek),
-            new StoreOwner("Bald Oggin", 30000, 105, RaceId.Gnome),
-            new StoreOwner("Asuunu the Learned", 15000, 108, RaceId.MindFlayer),
-            new StoreOwner("Prirand the Dead", 20000, 105, RaceId.Zombie),
-            new StoreOwner("Ronar the Iron", 25000, 110, RaceId.Golem),
-            new StoreOwner("Galil-Gamir", 30000, 105, RaceId.Elf),
-            new StoreOwner("Rorbag Book-Eater", 15000, 108, RaceId.Kobold),
-            new StoreOwner("Kiriarikirk", 20000, 105, RaceId.Klackon),
-            new StoreOwner("Rilin the Quiet", 25000, 110, RaceId.Dwarf),
-            new StoreOwner("Isung the Lord", 30000, 105, RaceId.HighElf)
+            new StoreOwner("Randolph Carter", 15000, 108, new HumanRace()),
+            new StoreOwner("Odnar the Sage", 20000, 105, new HighElfRace()),
+            new StoreOwner("Gandar the Neutral", 25000, 110, new VampireRace()),
+            new StoreOwner("Ro-sha the Patient", 30000, 105, new GolemRace()),
+            new StoreOwner("Sarai the Swift", 15000, 108, new HumanRace()),
+            new StoreOwner("Bodril the Seer", 20000, 105, new HighElfRace()),
+            new StoreOwner("Veloin the Quiet", 25000, 110, new ZombieRace()),
+            new StoreOwner("Vanthylas the Learned", 30000, 105, new MindFlayerRace()),
+            new StoreOwner("Ossein the Literate", 15000, 108, new SkeletonRace()),
+            new StoreOwner("Olvar Bookworm", 20000, 105, new VampireRace()),
+            new StoreOwner("Shallowgrave", 25000, 110, new ZombieRace()),
+            new StoreOwner("Death Mask", 30000, 105, new ZombieRace()),
+            new StoreOwner("Porcina the Obese", 15000, 108, new HalfOrcRace()),
+            new StoreOwner("Glaruna Brandybreath", 20000, 105, new DwarfRace()),
+            new StoreOwner("Furface Yeek", 25000, 110, new YeekRace()),
+            new StoreOwner("Bald Oggin", 30000, 105, new GnomeRace()),
+            new StoreOwner("Asuunu the Learned", 15000, 108, new MindFlayerRace()),
+            new StoreOwner("Prirand the Dead", 20000, 105, new ZombieRace()),
+            new StoreOwner("Ronar the Iron", 25000, 110, new GolemRace()),
+            new StoreOwner("Galil-Gamir", 30000, 105, new ElfRace()),
+            new StoreOwner("Rorbag Book-Eater", 15000, 108, new KoboldRace()),
+            new StoreOwner("Kiriarikirk", 20000, 105, new KlackonRace()),
+            new StoreOwner("Rilin the Quiet", 25000, 110, new DwarfRace()),
+            new StoreOwner("Isung the Lord", 30000, 105, new HighElfRace())
         };
 
         public override string FeatureType => "Bookstore";
