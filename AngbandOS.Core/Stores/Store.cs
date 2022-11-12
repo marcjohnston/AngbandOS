@@ -1587,15 +1587,7 @@ namespace AngbandOS
                         SayComment_1();
                         SaveGame.PlaySound(SoundEffect.StoreTransaction);
                         StorePrtGold();
-                        if (SaveGame.Player.RaceIndex == RaceId.Spectre || SaveGame.Player.RaceIndex == RaceId.Zombie ||
-                            SaveGame.Player.RaceIndex == RaceId.Skeleton || SaveGame.Player.RaceIndex == RaceId.Vampire)
-                        {
-                            RoomRest(true);
-                        }
-                        else
-                        {
-                            RoomRest(false);
-                        }
+                        RoomRest(SaveGame.Player.Race.RestsTillDuskInsteadOfDawn);
                     }
                 }
             }

@@ -68,5 +68,6 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasPoisonResistance = true;
             saveGame.Player.HasGlow = true;
         }
+        public override bool RestsTillDuskInsteadOfDawn => true;
     }
 }
