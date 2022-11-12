@@ -11028,7 +11028,13 @@ namespace AngbandOS
         private int _prevClass;
         private int _prevGeneration;
         private string _prevName;
-        private int _prevRace;
+
+        /// <summary>
+        /// Returns the race of the previous character.  Used as a default during the birthing process.  Set to HumanRace if there is no previous character.  Returns
+        /// null, before the birthing process is started.
+        /// </summary>
+        private Race? _prevRace = null;
+
         private Realm _prevRealm1;
         private Realm _prevRealm2;
         private int _prevSex;
@@ -11287,7 +11293,7 @@ namespace AngbandOS
             Print(Colour.Blue, "Race        :", 4, 1);
             if (stage == 0)
             {
-                _player.Race = Races[_prevRace];
+                _player.Race = _prevRace;
                 str = _player.Race.Title;
             }
             else if (stage < 3)
@@ -11788,7 +11794,7 @@ namespace AngbandOS
             if (ex == null)
             {
                 _prevSex = Constants.SexFemale;
-                _prevRace = RaceId.Human;
+                _prevRace = new HumanRace();
                 _prevClass = CharacterClass.Warrior;
                 _prevRealm1 = Realm.None;
                 _prevRealm2 = Realm.None;
@@ -11798,7 +11804,7 @@ namespace AngbandOS
             else
             {
                 _prevSex = ex.GenderIndex;
-                _prevRace = ex.RaceIndexAtBirth;
+                _prevRace = Races[ex.RaceIndexAtBirth];
                 _prevClass = ex.ProfessionIndex;
                 _prevRealm1 = ex.Realm1;
                 _prevRealm2 = ex.Realm2;
@@ -11992,7 +11998,7 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.RaceIndex = _prevRace;
+                            _player.RaceIndex = _prevRace.Index;
                             _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
                             _player.Race = Races[_player.RaceIndex];
                             stage++;
