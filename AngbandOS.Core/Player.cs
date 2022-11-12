@@ -173,8 +173,8 @@ namespace AngbandOS
         public Profession Profession = new Profession();
         public int ProfessionIndex;
         public Race? Race = null; // new Race();
-        public int RaceIndex;
-        public int RaceIndexAtBirth;
+        public int RaceIndex; // TODO: Deprecated.  Need to use Race.
+        public int RaceIndexAtBirth; // TODO: Deprecated.  Need to convert to Race.
         public Realm Realm1;
         public Realm Realm2;
         public FlagSet RedrawNeeded = new FlagSet();
