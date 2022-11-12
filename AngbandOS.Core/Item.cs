@@ -71,7 +71,7 @@ namespace AngbandOS
         public FixedArtifactId FixedArtifactIndex;
         public int HoldingMonsterIndex;
         public string Inscription = "";
-        public int ItemSubCategory;
+        public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
 
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
