@@ -46,5 +46,13 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResPois = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 11)
+            {
+                return new string[] { $"You can throw a dart of poison, dam. {level} (cost 8)." };
+            }
+            return null;
+        }
     }
 }

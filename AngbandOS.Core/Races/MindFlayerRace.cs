@@ -55,5 +55,13 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 14)
+            {
+                return new string[] { $"You can mind blast your enemies, dam {level} (cost 12)." };
+            }
+            return null;
+        }
     }
 }

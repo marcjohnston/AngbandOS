@@ -46,5 +46,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResDark = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 2)
+            {
+                return new string[] { "You can remove fear (cost 5)." };
+            }
+            return null;
+        }
     }
 }

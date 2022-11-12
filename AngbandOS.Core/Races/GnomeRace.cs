@@ -46,5 +46,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.FreeAct = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 4)
+            {
+                return new string[] { $"You can teleport, range {1 + level} (cost {5 + (level / 5)})." };
+            }
+            return null;
+        }
     }
 }

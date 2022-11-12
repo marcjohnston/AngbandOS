@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using System.Windows.Markup;
 
 namespace AngbandOS.Core.Races
 {
@@ -53,5 +54,20 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new AngelicSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            List<string> values = new List<string>();
+            if (level > 29)
+            {
+                values.Add($"You can cast a Fire Ball, dam. {level} (cost 15).");
+            }
+            else if (level > 8)
+            {
+                values.Add($"You can cast a Fire Bolt, dam. {level} (cost 15).");
+            }
+            if (values.Count == 0)
+                return null;
+            return values.ToArray();
+        }
     }
 }

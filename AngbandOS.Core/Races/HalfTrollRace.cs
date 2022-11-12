@@ -51,5 +51,14 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 9)
+            {
+                return new string[] { "You enter berserk fury (cost 12)."};
+            }
+            return null;
+        }
     }
 }

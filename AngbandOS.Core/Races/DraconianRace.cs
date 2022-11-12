@@ -66,5 +66,9 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
+        }
     }
 }

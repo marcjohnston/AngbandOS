@@ -47,5 +47,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResDark = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 4)
+            {
+                return new string[] { "You can find traps, doors and stairs (cost 5)." };
+            }
+            return null;
+        }
     }
 }

@@ -49,5 +49,21 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.Regen = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            List<string> values = new List<string>();
+            if (level > 29)
+            {
+                values.Add("You can dream travel (cost 50).");
+            }
+            if (level > 39)
+            {
+                values.Add("You can dream a better self (cost 75).");
+            }
+            if (values.Count == 0)
+                return null;
+            return values.ToArray();
+        }
     }
 }

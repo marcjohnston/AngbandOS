@@ -53,5 +53,14 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 29)
+            {
+                return new string[] { "You can restore lost life forces (cost 30)." };
+            }
+            return null;
+        }
     }
 }

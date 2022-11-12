@@ -50,5 +50,14 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 11)
+            {
+                return new string[] { "You can throw magic dust which induces sleep (cost 12)." };
+            }
+            return null;
+        }
     }
 }

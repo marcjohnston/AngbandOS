@@ -53,5 +53,14 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 19)
+            {
+                return new string[] { "You can turn your skin to stone, dur d20+30 (cost 15)." };
+            }
+            return null;
+        }
     }
 }

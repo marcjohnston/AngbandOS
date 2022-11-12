@@ -46,5 +46,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResChaos = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 34)
+            {
+                return new string[] { "You can probe monsters (cost 20)." };
+            }
+            return null;
+        }
     }
 }

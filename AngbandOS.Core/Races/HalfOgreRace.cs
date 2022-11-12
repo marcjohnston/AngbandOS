@@ -47,5 +47,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResDark = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 24)
+            {
+                return new string[] { "You can set an Yellow Sign (cost 35)." };
+            }
+            return null;
+        }
     }
 }

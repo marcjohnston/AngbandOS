@@ -45,5 +45,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResDark = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 1)
+            {
+                return new string[] { $"You can cast a Magic Missile, dam {3 + ((level - 1) / 5)} (cost 2)." };
+            }
+            return null;
+        }
     }
 }

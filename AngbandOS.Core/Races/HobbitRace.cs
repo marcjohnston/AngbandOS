@@ -46,5 +46,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.SustDex = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 14)
+            {
+                return new string[] { "You can produce food (cost 10)." };
+            }
+            return null;
+        }
     }
 }

@@ -87,5 +87,12 @@ namespace AngbandOS.Core.Races
         /// Returns a random name for a player of this race.
         /// </summary>
         public abstract string CreateRandomName();
+
+        /// <summary>
+        /// Returns one or two lines of self knowledge or null, if the race has no additional self knowledge.  Return null, by default.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public virtual string[]? SelfKnowledge(int level) => null;
     }
 }

@@ -47,5 +47,13 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResFear = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 7)
+            {
+                return new string[] { "You can enter berserk fury (cost 10)." };
+            }
+            return null;
+        }
     }
 }

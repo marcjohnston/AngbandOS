@@ -50,5 +50,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResCold = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 1)
+            {
+                return new string[] { $"You can steal life from a foe, dam. {level + Math.Max(1, level / 10)}-{level + (level * Math.Max(1, level / 10))} (cost {1 + (level / 3)})." };
+            }
+            return null;
+        }
     }
 }

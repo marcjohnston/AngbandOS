@@ -50,5 +50,13 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResAcid = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new KlackonSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 8)
+            {
+                return new string[] { $"You can spit acid, dam. {level} (cost 9)." };
+            }
+            return null;
+        }
     }
 }

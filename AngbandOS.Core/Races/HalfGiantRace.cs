@@ -46,5 +46,14 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.SustStr = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
+
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 19)
+            {
+                return new string[] { "You can break stone walls (cost 10)." };
+            }
+            return null;
+        }
     }
 }

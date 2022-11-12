@@ -49,5 +49,13 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new YeekishSyllables());
+        public override string[]? SelfKnowledge(int level)
+        {
+            if (level > 14)
+            {
+                return new string[] { "You can make a terrifying scream (cost 15)." };
+            }
+            return null;
+        }
     }
 }
