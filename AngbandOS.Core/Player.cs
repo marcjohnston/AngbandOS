@@ -172,9 +172,16 @@ namespace AngbandOS
         public bool OldUnpriestlyWeapon;
         public Profession Profession = new Profession();
         public int ProfessionIndex;
-        public Race? Race = null; // new Race();
-        public int RaceIndex; // TODO: Deprecated.  Need to use Race.
-        public int RaceIndexAtBirth; // TODO: Deprecated.  Need to convert to Race.
+
+        /// <summary>
+        /// Returns the current race of the character.  Will be null before the player is birthed.
+        /// </summary>
+        public Race? Race = null;
+
+        /// <summary>
+        /// Returns the race the character was first assigned at birth.
+        /// </summary>
+        public Race RaceAtBirth;
         public Realm Realm1;
         public Realm Realm2;
         public FlagSet RedrawNeeded = new FlagSet();
@@ -270,10 +277,9 @@ namespace AngbandOS
             Generation = 1;
         }
 
-        public void ChangeRace(int newRace)
+        public void ChangeRace(Race newRace)
         {
-            RaceIndex = newRace;
-            Race = SaveGame.Races[RaceIndex];
+            Race = newRace;
             ExperienceMultiplier = Race.ExperienceFactor + Profession.ExperienceFactor;
             if (GenderIndex == Constants.SexMale)
             {
@@ -961,12 +967,14 @@ namespace AngbandOS
 
                     case 7:
                         {
-                            int newRace;
+                            int newRaceIndex;
+                            Race newRace;
                             do
                             {
-                                newRace = Program.Rng.DieRoll(Constants.MaxRaces) - 1;
-                            } while (newRace == RaceIndex);
-                            SaveGame.MsgPrint($"You turn into {SaveGame.Races[newRace].IndefiniteArticleForTitle} {SaveGame.Races[newRace].Title}!");
+                                newRaceIndex = Program.Rng.RandomLessThan(SaveGame.Races.Count);
+                                newRace = SaveGame.Races[newRaceIndex];
+                            } while (newRace is Race);
+                            SaveGame.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                             ChangeRace(newRace);
                         }
                         SaveGame.Level.RedrawSingleLocation(MapY, MapX);

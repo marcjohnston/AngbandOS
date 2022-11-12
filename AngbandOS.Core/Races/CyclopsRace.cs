@@ -31,7 +31,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 60;
         public override int Infravision => 1;
         public override uint Choice => 0x0005;
-        public override int Index => RaceId.Cyclops;
         public override string Description => "Cyclopes are one eyed giants, often seen as freaks by the\nother races. They can learn to throw boulders (at lvl 20)\nand although they have weak eyesight their hearing is very\nkeen and hard to damage, so they are resistant to sound\nbased attacks.";
 
         /// <summary>

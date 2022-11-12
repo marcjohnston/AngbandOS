@@ -67,7 +67,6 @@ namespace AngbandOS.Core
         public const int MaxOIdx = 256;
         public const int MaxOwners = 4;
         public const int MaxPatron = 16;
-        public const int MaxRaces = 30;
         public const int MaxRange = 18;
         public const int MaxRealm = 8;
         public const int MaxRepro = 100;

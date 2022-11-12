@@ -31,7 +31,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 5;
         public override int Infravision => 2;
         public override uint Choice => 0x5F0F;
-        public override int Index => RaceId.Skeleton;
         public override string Description => "Skeletons are undead creatures. Being without eyes, they\nuse magical sight which can see invisible creatures. Their\nlack of flesh means that they resist poison and shards, and\ntheir life force is hard to drain. They can learn to resist\ncold (at lvl 10), and restore their life force (at lvl 30).";
 
         /// <summary>

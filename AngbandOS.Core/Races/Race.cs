@@ -42,11 +42,6 @@ namespace AngbandOS.Core.Races
         }
 
         /// <summary>
-        /// Returns the RaceId enumeration index for this race.  Deprecated.  Should be removed once all refactored.
-        /// </summary>
-        public abstract int Index { get; }
-
-        /// <summary>
         /// Returns the description for the race.  The description is multi-line and has word-breaking macros \n built-in.  The description supports up to 6 lines.
         /// </summary>
         public abstract string Description { get; }

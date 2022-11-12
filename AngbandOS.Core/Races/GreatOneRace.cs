@@ -32,7 +32,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 15;
         public override int Infravision => 0;
         public override uint Choice => 0xFFFF;
-        public override int Index => RaceId.Great;
         public override string Description => "Great-Ones are the offspring of the petty gods that rule\nDreamlands. As such they are somewhat more than human.\nTheir constitution cannot be reduced, and they heal\nquickly. They can also learn to travel through dreams\n(at lvl 30) and restore their health (at lvl 40).";
 
         /// <summary>

@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 6;
         public override int Infravision => 3;
         public override uint Choice => 0xFF5F;
-        public override int Index => RaceId.Elf;
         public override string Description => "Elves are creatures of the woods, and cultivate a symbiotic\nrelationship with trees. While not the sturdiest of races,\nthey are dextrous and have excellent mental faculties.\nBecause they are partially photosynthetic, elves are able\nto resist light based attacks.";
 
         /// <summary>

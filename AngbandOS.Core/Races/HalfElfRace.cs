@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 10;
         public override int Infravision => 2;
         public override uint Choice => 0xFFFF;
-        public override int Index => RaceId.HalfElf;
         public override string Description => "Half-Elves inherit better ability scores and skills from\ntheir elven parent, but none of that parent's special\nabilities. However, a half elf will advance in level more\nquickly than a full elf.";
 
         /// <summary>

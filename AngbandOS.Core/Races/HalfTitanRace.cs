@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 86;
         public override int Infravision => 0;
         public override uint Choice => 0x1F27;
-        public override int Index => RaceId.HalfTitan;
         public override string Description => "Half-Titans are massively strong, being descended from the\npredecessors of the gods that grew from primal chaos. This\nlegacy lets them resist damage from chaos, and half-titans\ncan learn to magically probe their foes to find out their\nstrengths and weaknesses (at lvl 35).";
 
         /// <summary>

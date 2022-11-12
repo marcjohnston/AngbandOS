@@ -1,3 +1,4 @@
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using System;
 
@@ -30,11 +31,11 @@ namespace AngbandOS.ItemCategories
                 saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 saveGame.HandleStuff();
             }
-            if (saveGame.Player.RaceIndex != saveGame.Player.RaceIndexAtBirth)
+            if (!(saveGame.Player.Race.GetType() == saveGame.Player.RaceAtBirth.GetType()))
             {
-                var oldRaceName = saveGame.Races[saveGame.Player.RaceIndexAtBirth].Title;
+                var oldRaceName = saveGame.Player.RaceAtBirth.Title;
                 saveGame.MsgPrint($"You feel more {oldRaceName} again.");
-                saveGame.Player.ChangeRace(saveGame.Player.RaceIndexAtBirth);
+                saveGame.Player.ChangeRace(saveGame.Player.RaceAtBirth);
                 saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);
             }
             return true;

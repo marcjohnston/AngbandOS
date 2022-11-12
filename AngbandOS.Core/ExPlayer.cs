@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using System;
 
@@ -45,12 +46,12 @@ namespace AngbandOS
         /// <summary>
         /// The race of the character
         /// </summary>
-        public readonly int RaceIndex;
+        public readonly Race Race;
 
         /// <summary>
         /// The race the character was born with (they might have been polymorphed or mutated)
         /// </summary>
-        public readonly int RaceIndexAtBirth;
+        public readonly Race RaceAtBirth;
 
         /// <summary>
         /// The character's first realm of magic (if any)
@@ -69,8 +70,8 @@ namespace AngbandOS
         public ExPlayer(Player player)
         {
             GenderIndex = player.GenderIndex;
-            RaceIndex = player.RaceIndex;
-            RaceIndexAtBirth = player.RaceIndexAtBirth;
+            Race = player.Race;
+            RaceAtBirth = player.RaceAtBirth;
             ProfessionIndex = player.ProfessionIndex;
             Realm1 = player.Realm1;
             Realm2 = player.Realm2;

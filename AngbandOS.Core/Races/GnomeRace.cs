@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 3;
         public override int Infravision => 4;
         public override uint Choice => 0x1E0F;
-        public override int Index => RaceId.Gnome;
         public override string Description => "Gnomes are small, playful, and talented at magic. However,\nthey are almost chronically incapable of taking anything\nseriously. Gnomes are constantly fidgeting and always on\nthe move, and this makes them impossible to paralyse or\nmagically slow. Gnomes are even able to learn how to \nteleport short distances (at lvl 5).";
 
         /// <summary>

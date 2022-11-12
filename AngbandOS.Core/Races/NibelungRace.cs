@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 3;
         public override int Infravision => 5;
         public override uint Choice => 0xDC0F;
-        public override int Index => RaceId.Nibelung;
         public override string Description => "Nibelungen are also known as dark dwarves and are famous\nas the makers of (often cursed) magical items. They can\nresist darkness and protect the items they are carrying\nfrom disenchantment. They can also learn to detect traps,\nstairs, and secret doors (at lvl 5).";
 
         /// <summary>

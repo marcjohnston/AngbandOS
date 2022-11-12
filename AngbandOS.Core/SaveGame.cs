@@ -167,7 +167,7 @@ namespace AngbandOS
         private string[][] _keymapAct;
         private string _requestCommandBuffer;
 
-        public readonly Dictionary<int, Race> Races = new Dictionary<int, Race>();
+        public readonly List<Race> Races = new List<Race>();
         /// GUI
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace AngbandOS
                 if (!type.IsAbstract && typeof(Race).IsAssignableFrom(type))
                 {
                     Race race = (Race)Activator.CreateInstance(type);
-                    Races.Add(race.Index, race);
+                    Races.Add(race);
                 }
             }
         }
@@ -1546,7 +1546,7 @@ namespace AngbandOS
                     Kingly();
                 }
                 Player corpse = Player;
-                HighScore score = new HighScore(this);
+                //HighScore score = new HighScore(this);
                 Player = null;
                 SavePlayer(corpse);
                 PrintTomb(corpse);
@@ -11302,7 +11302,6 @@ namespace AngbandOS
             }
             else
             {
-                _player.Race = Races[_player.RaceIndex];
                 str = _player.Race.Title;
             }
             Print(Colour.Brown, str, 4, 15);
@@ -11804,7 +11803,7 @@ namespace AngbandOS
             else
             {
                 _prevSex = ex.GenderIndex;
-                _prevRace = Races[ex.RaceIndexAtBirth];
+                _prevRace = ex.RaceAtBirth;
                 _prevClass = ex.ProfessionIndex;
                 _prevRealm1 = ex.Realm1;
                 _prevRealm2 = ex.Realm2;
@@ -11815,7 +11814,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            _player.RaceIndexAtBirth = _player.RaceIndex;
+            _player.RaceAtBirth = _player.Race;
             Quests.PlayerBirthQuests();
             MessageAdd(" ");
             MessageAdd("  ");
@@ -11998,9 +11997,8 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.RaceIndex = _prevRace.Index;
+                            _player.Race = _prevRace;
                             _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
-                            _player.Race = Races[_player.RaceIndex];
                             stage++;
                             break;
                         }
@@ -12009,8 +12007,8 @@ namespace AngbandOS
                             autoChose[stage] = true;
                             do
                             {
-                                _player.RaceIndex = Program.Rng.RandomLessThan(Constants.MaxRaces);
-                                _player.Race = Races[_player.RaceIndex];
+                                int raceIndex = Program.Rng.RandomLessThan(Races.Count);
+                                _player.Race = Races[raceIndex];
                                 _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             }
                             while ((_player.Race.Choice & (1L << _player.ProfessionIndex)) == 0);
@@ -12018,13 +12016,12 @@ namespace AngbandOS
                             break;
                         }
                         autoChose[stage] = false;
-                        _menuLength = Constants.MaxRaces;
+                        _menuLength = Races.Count;
 
                         // Create the menu for the races.
-                        Race[] racesArray = Races.Values.ToArray();
-                        MenuItem<Race>[] _raceMenu = racesArray.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
+                        MenuItem<Race>[] _raceMenu = Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
 
-                        for (i = 0; i < Constants.MaxRaces; i++)
+                        for (i = 0; i < Races.Count; i++)
                         {
                             _menuItem[i] = _raceMenu[i].Text;
                         }
@@ -12077,8 +12074,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RaceSelection)
                         {
-                            _player.RaceIndex = _raceMenu[menu[BirthStage.RaceSelection]].Item.Index;
-                            _player.Race = Races[_player.RaceIndex];
+                            _player.Race = _raceMenu[menu[BirthStage.RaceSelection]].Item;
                             _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                         }
                         break;

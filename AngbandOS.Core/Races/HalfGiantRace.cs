@@ -30,7 +30,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 64;
         public override int Infravision => 3;
         public override uint Choice => 0x0011;
-        public override int Index => RaceId.HalfGiant;
         public override string Description => "Half-Giants are immensely strong and tough, and their skin\nis stony. They can't have their strength reduced, and they\nresist damage from explosions that throw out shards of\nstone and metal. They can learn to soften rock into mud\n(at lvl 10).";
 
         /// <summary>

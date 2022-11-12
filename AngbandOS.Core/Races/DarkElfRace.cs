@@ -31,7 +31,6 @@ namespace AngbandOS.Core.Races
         public override int FemaleWeightRange => 6;
         public override int Infravision => 5;
         public override uint Choice => 0xBFDF;
-        public override int Index => RaceId.DarkElf;
         public override string Description => "Dark elves are underground elves who have a kinship with\nfungi the way that surface elves have a kinship with trees.\nThe innately magical nature of dark elves lets them learn\nto fire magical missiles at their opponents (at lvl 2).\nThey also resist dark-based attacks and can learn to see\ninvisible creatures (at lvl 20).";
 
         /// <summary>
