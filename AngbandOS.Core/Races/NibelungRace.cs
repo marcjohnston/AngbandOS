@@ -62,5 +62,17 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasDisenchantResistance = true;
             saveGame.Player.HasDarkResistance = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Nibelungen can detect traps, doors, and stairs
+            if (saveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
+            {
+                saveGame.MsgPrint("You examine your surroundings.");
+                saveGame.DetectTraps();
+                saveGame.DetectDoors();
+                saveGame.DetectStairs();
+            }
+        }
     }
 }

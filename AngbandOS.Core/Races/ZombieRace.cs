@@ -75,4 +75,22 @@ namespace AngbandOS.Core.Races
             }
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
+        public override void Eat(SaveGame saveGame, Item item)
+        {
+            // This race only gets 1/20th of the food value
+            saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
+            saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
+        }
+        public override bool CanBleed(int level) => (level > 11);
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Skeletons and zombies can restore their life energy
+            if (saveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+            {
+                saveGame.MsgPrint("You attempt to restore your lost energies.");
+                saveGame.Player.RestoreLevel();
+            }
+        }
     }
+}

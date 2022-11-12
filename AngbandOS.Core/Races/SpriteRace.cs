@@ -65,5 +65,22 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasGlow = true;
             saveGame.Player.HasLightResistance = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Sprites can sleep monsters
+            if (saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
+            {
+                saveGame.MsgPrint("You throw some magic dust...");
+                if (saveGame.Player.Level < 25)
+                {
+                    saveGame.SleepMonstersTouch();
+                }
+                else
+                {
+                    saveGame.SleepMonsters();
+                }
+            }
+        }
     }
 }

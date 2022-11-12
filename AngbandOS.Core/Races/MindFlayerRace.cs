@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {
@@ -74,6 +75,20 @@ namespace AngbandOS.Core.Races
             if (saveGame.Player.Level > 29)
             {
                 saveGame.Player.HasTelepathy = true;
+            }
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Mind Flayers can shoot psychic bolts
+            if (saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.MsgPrint("You concentrate and your eyes glow red...");
+                    saveGame.FireBolt(new ProjectPsi(saveGame), direction, saveGame.Player.Level);
+                }
             }
         }
     }

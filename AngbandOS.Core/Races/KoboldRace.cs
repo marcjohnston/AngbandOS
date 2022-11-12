@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {
@@ -57,6 +58,20 @@ namespace AngbandOS.Core.Races
         public override void CalcBonuses(SaveGame saveGame)
         {
             saveGame.Player.HasPoisonResistance = true;
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Kobolds can throw poison darts
+            if (saveGame.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.MsgPrint("You throw a dart of poison.");
+                    saveGame.FireBolt(new ProjectPois(saveGame), direction, saveGame.Player.Level);
+                }
+            }
         }
     }
 }

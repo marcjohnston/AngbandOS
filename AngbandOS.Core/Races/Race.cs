@@ -2,6 +2,7 @@
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Syllables;
 using System.Diagnostics;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core.Races
 {
@@ -84,7 +85,7 @@ namespace AngbandOS.Core.Races
         }
 
         /// <summary>
-        /// Returns a random name for a player of this race.
+        /// Create a random name for a character based on their race.
         /// </summary>
         public abstract string CreateRandomName();
 
@@ -103,5 +104,64 @@ namespace AngbandOS.Core.Races
         /// Returns true, if the race rests until dusk instead of dawn.  Vampires, zombies, spectres and skeletons return true.  Returns false, by default.
         /// </summary>
         public virtual bool RestsTillDuskInsteadOfDawn => false;
+
+        /// <summary>
+        /// Returns true, if the race is burned by sunlight.  Only vampires return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool IsBurnedBySunlight => false;
+
+        /// <summary>
+        /// Returns true, if the race is damaged by darkness.  Returns true, by default.  Only vampires return false.
+        /// </summary>
+        public virtual bool IsDamagedByDarkness => true;
+
+        /// <summary>
+        /// Allow the race to consume food.  The full value of the food item is gained, by default.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="item"></param>
+        public virtual void Eat(SaveGame saveGame, Item item)
+        {
+            // Everyone else gets the full value
+            saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
+        }
+
+        /// <summary>
+        /// Allow the race to quaff a potion.  Does nothing by default.  Skeletons are messy drinkers.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="item"></param>
+        public virtual void Quaff(SaveGame saveGame, PotionItemCategory potion)
+        {
+        }
+
+        /// <summary>
+        /// Returns true, if the race can bleed.  Golems, skeletons and spectres cannot bleed.  Level 12 or greater zombies also do not bleed.  Returns true, by default.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public virtual bool CanBleed(int level) => true;
+
+        /// <summary>
+        /// Returns true, if the race is susceptible to nether where resistance to nether is mostly negated.  Returns false, by default.  Only spectres return true.
+        /// </summary>
+        public virtual bool NegatesNetherResistance => false;
+
+        /// <summary>
+        /// Returns true, if the race gets a health boost, when projecting nether.  Returns false, by default.  Only spectres return true.
+        /// </summary>
+        public virtual bool ProjectingNetherRestoresHealth => false;
+
+        /// <summary>
+        /// Returns true, if the race is erthereal (can pass through walls).  Only spectres return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool IsEthereal => false;
+
+        public virtual void UseRacialPower(SaveGame saveGame)
+        {
+            // Other races don't have powers
+            saveGame.MsgPrint("This race has no bonus power.");
+            saveGame.EnergyUse = 0;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core.Races
 {
@@ -71,5 +72,42 @@ namespace AngbandOS.Core.Races
             }
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
+
+        public override void Eat(SaveGame saveGame, Item item)
+        {
+            // Skeletons get no food sustenance
+            if (!(item.ItemSubCategory == FoodType.Waybread || item.ItemSubCategory == FoodType.Warpstone || item.ItemSubCategory < FoodType.Biscuit))
+            {
+                // Spawn a new food item on the floor to make up for the one that will be destroyed
+                Item floorItem = new Item(saveGame);
+                saveGame.MsgPrint("The food falls through your jaws!");
+                floorItem.AssignItemType(item.BaseItemCategory);
+                saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+            }
+            else
+            {
+                // But some magical types work anyway and then vanish
+                saveGame.MsgPrint("The food falls through your jaws and vanishes!");
+            }
+        }
+
+        public override void Quaff(SaveGame saveGame, PotionItemCategory potion)
+        {
+            if (Program.Rng.DieRoll(12) == 1)
+            {
+                saveGame.MsgPrint("Some of the fluid falls through your jaws!");
+                potion.Smash(saveGame, 0, saveGame.Player.MapY, saveGame.Player.MapX);
+            }
+        }
+        public override bool CanBleed(int level) => false;
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Skeletons and zombies can restore their life energy
+            if (saveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+            {
+                saveGame.MsgPrint("You attempt to restore your lost energies.");
+                saveGame.Player.RestoreLevel();
+            }
+        }
     }
 }

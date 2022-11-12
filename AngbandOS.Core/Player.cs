@@ -1517,11 +1517,7 @@ namespace AngbandOS
             int oldAux, newAux;
             bool notice = false;
             v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (RaceIndex == RaceId.Golem || RaceIndex == RaceId.Skeleton || RaceIndex == RaceId.Spectre)
-            {
-                v = 0;
-            }
-            else if (RaceIndex == RaceId.Zombie && Level > 11)
+            if (!Race.CanBleed(Level))
             {
                 v = 0;
             }

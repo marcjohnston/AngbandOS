@@ -16,7 +16,7 @@ namespace AngbandOS.Spells.Nature
         public override void Cast(SaveGame saveGame)
         {
             saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
-            if (saveGame.Player.RaceIndex != RaceId.Vampire || saveGame.Player.HasLightResistance)
+            if (!saveGame.Player.Race.IsBurnedBySunlight || saveGame.Player.HasLightResistance)
             {
                 return;
             }

@@ -73,5 +73,23 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasSeeInvisibility = true;
             saveGame.Player.HasPoisonResistance = true;
         }
+
+        public override void Eat(SaveGame saveGame, Item item)
+        {
+            // This race only gets 1/20th of the food value
+            saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
+            saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
+        }
+
+        public override bool CanBleed(int level) => false;
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Golems can harden their skin
+            if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
+            {
+                saveGame.Player.SetTimedStoneskin(saveGame.Player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
+            }
+        }
     }
 }

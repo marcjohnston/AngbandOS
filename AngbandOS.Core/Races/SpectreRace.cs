@@ -80,5 +80,30 @@ namespace AngbandOS.Core.Races
             }
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
+        public override void Eat(SaveGame saveGame, Item item)
+        {
+            // This race only gets 1/20th of the food value
+            saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
+            saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
+        }
+        public override bool CanBleed(int level) => false;
+
+        public override bool NegatesNetherResistance => true;
+
+        public override bool ProjectingNetherRestoresHealth => true;
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Spectres can howl
+            if (saveGame.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
+            {
+                saveGame.MsgPrint("You emit an eldritch howl!");
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.FearMonster(direction, saveGame.Player.Level);
+                }
+            }
+        }
     }
 }

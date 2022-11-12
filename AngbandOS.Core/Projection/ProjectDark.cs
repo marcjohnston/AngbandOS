@@ -224,7 +224,7 @@ namespace AngbandOS.Projection
             {
                 dam *= 4;
                 dam /= Program.Rng.DieRoll(6) + 6;
-                if (SaveGame.Player.RaceIndex == RaceId.Vampire)
+                if (!SaveGame.Player.Race.IsDamagedByDarkness)
                 {
                     dam = 0;
                 }

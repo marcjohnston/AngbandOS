@@ -235,7 +235,7 @@ namespace AngbandOS.Projection
             {
                 SaveGame.Player.SetTimedBlindness(SaveGame.Player.TimedBlindness + Program.Rng.DieRoll(5) + 2);
             }
-            if (SaveGame.Player.RaceIndex == RaceId.Vampire)
+            if (SaveGame.Player.Race.IsBurnedBySunlight)
             {
                 SaveGame.MsgPrint("The light scorches your flesh!");
                 dam *= 2;

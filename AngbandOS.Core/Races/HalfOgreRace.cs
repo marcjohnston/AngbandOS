@@ -62,5 +62,17 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasDarkResistance = true;
             saveGame.Player.HasSustainStrength = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Half-Ogres can go berserk
+            if (saveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, saveGame.Player.ProfessionIndex == CharacterClass.Warrior ? 6 : 12))
+            {
+                saveGame.MsgPrint("Raaagh!");
+                saveGame.Player.SetTimedFear(0);
+                saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(saveGame.Player.Level));
+                saveGame.Player.RestoreHealth(30);
+            }
+        }
     }
 }
