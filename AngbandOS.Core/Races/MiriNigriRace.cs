@@ -44,5 +44,10 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResConf = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasConfusionResistance = true;
+            saveGame.Player.HasSoundResistance = true;
+        }
     }
 }

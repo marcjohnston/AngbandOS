@@ -58,5 +58,10 @@ namespace AngbandOS.Core.Races
             }
             return null;
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasConfusionResistance = true;
+            saveGame.Player.HasAcidResistance = true;
+        }
     }
 }

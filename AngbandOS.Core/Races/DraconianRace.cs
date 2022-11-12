@@ -70,5 +70,29 @@ namespace AngbandOS.Core.Races
         {
             return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasFeatherFall = true;
+            if (saveGame.Player.Level > 4)
+            {
+                saveGame.Player.HasFireResistance = true;
+            }
+            if (saveGame.Player.Level > 9)
+            {
+                saveGame.Player.HasColdResistance = true;
+            }
+            if (saveGame.Player.Level > 14)
+            {
+                saveGame.Player.HasAcidResistance = true;
+            }
+            if (saveGame.Player.Level > 19)
+            {
+                saveGame.Player.HasLightningResistance = true;
+            }
+            if (saveGame.Player.Level > 34)
+            {
+                saveGame.Player.HasPoisonResistance = true;
+            }
+        }
     }
 }

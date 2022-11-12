@@ -65,5 +65,11 @@ namespace AngbandOS.Core.Races
                 return null;
             return values.ToArray();
         }
+
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasSustainConstitution = true;
+            saveGame.Player.HasRegeneration = true;
+        }
     }
 }

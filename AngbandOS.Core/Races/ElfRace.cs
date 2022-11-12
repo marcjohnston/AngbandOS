@@ -43,5 +43,10 @@ namespace AngbandOS.Core.Races
             itemCharacteristics.ResLight = true;
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasLightResistance = true;
+        }
     }
 }

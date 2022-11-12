@@ -59,5 +59,11 @@ namespace AngbandOS.Core.Races
             }
             return null;
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasFeatherFall = true;
+            saveGame.Player.HasGlow = true;
+            saveGame.Player.HasLightResistance = true;
+        }
     }
 }

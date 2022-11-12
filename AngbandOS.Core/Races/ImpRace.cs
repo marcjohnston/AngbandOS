@@ -69,5 +69,17 @@ namespace AngbandOS.Core.Races
                 return null;
             return values.ToArray();
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasFireResistance = true;
+            if (saveGame.Player.Level > 9)
+            {
+                saveGame.Player.HasSeeInvisibility = true;
+            }
+            if (saveGame.Player.Level > 19)
+            {
+                saveGame.Player.HasFireImmunity = true;
+            }
+        }
     }
 }

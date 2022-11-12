@@ -45,5 +45,9 @@ namespace AngbandOS.Core.Races
             }
         }
         public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasSeeInvisibility = true;
+        }
     }
 }

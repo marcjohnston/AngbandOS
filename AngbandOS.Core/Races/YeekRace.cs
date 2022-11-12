@@ -57,5 +57,13 @@ namespace AngbandOS.Core.Races
             }
             return null;
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasAcidResistance = true;
+            if (saveGame.Player.Level > 19)
+            {
+                saveGame.Player.HasAcidImmunity = true;
+            }
+        }
     }
 }

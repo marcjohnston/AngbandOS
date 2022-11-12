@@ -94,5 +94,9 @@ namespace AngbandOS.Core.Races
         /// <param name="level"></param>
         /// <returns></returns>
         public virtual string[]? SelfKnowledge(int level) => null;
+
+        public virtual void CalcBonuses(SaveGame saveGame)
+        {
+        }
     }
 }

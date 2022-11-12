@@ -54,5 +54,13 @@ namespace AngbandOS.Core.Races
             }
             return null;
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasDarkResistance = true;
+            if (saveGame.Player.Level > 19)
+            {
+                saveGame.Player.HasSeeInvisibility = true;
+            }
+        }
     }
 }

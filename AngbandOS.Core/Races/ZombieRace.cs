@@ -62,5 +62,17 @@ namespace AngbandOS.Core.Races
             }
             return null;
         }
+        public override void CalcBonuses(SaveGame saveGame)
+        {
+            saveGame.Player.HasNetherResistance = true;
+            saveGame.Player.HasHoldLife = true;
+            saveGame.Player.HasSeeInvisibility = true;
+            saveGame.Player.HasPoisonResistance = true;
+            saveGame.Player.HasSlowDigestion = true;
+            if (saveGame.Player.Level > 4)
+            {
+                saveGame.Player.HasColdResistance = true;
+            }
+        }
     }
 }
