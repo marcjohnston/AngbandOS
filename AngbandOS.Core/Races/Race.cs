@@ -33,6 +33,13 @@ namespace AngbandOS.Core.Races
         public abstract int MaleHeightRange { get; }
         public abstract int MaleWeightRange { get; }
         public abstract string Title { get; }
+        public virtual string IndefiniteArticleForTitle 
+        { 
+            get 
+            {
+                return "aeiouAEIOU".Contains(Title[0]) ? "an" : "a";
+            } 
+        }
 
         /// <summary>
         /// Returns the RaceId enumeration index for this race.  Deprecated.  Should be removed once all refactored.

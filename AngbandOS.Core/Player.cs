@@ -966,8 +966,7 @@ namespace AngbandOS
                             {
                                 newRace = Program.Rng.DieRoll(Constants.MaxRaces) - 1;
                             } while (newRace == RaceIndex);
-                            string n = newRace == RaceId.Elf || newRace == RaceId.Imp ? "n" : "";
-                            SaveGame.MsgPrint($"You turn into a{n} {SaveGame.Races[newRace].Title}!");
+                            SaveGame.MsgPrint($"You turn into {SaveGame.Races[newRace].IndefiniteArticleForTitle} {SaveGame.Races[newRace].Title}!");
                             ChangeRace(newRace);
                         }
                         SaveGame.Level.RedrawSingleLocation(MapY, MapX);
