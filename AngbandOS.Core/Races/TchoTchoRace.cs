@@ -59,5 +59,15 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasFearResistance = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Tcho-Tcho can create The Yellow Sign
+            if (saveGame.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
+            {
+                saveGame.MsgPrint("You carefully draw The Yellow Sign...");
+                saveGame.YellowSign();
+            }
+        }
     }
 }

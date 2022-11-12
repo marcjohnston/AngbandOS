@@ -51,11 +51,7 @@ namespace AngbandOS.Commands
             bool identified = potion.Quaff(saveGame);
 
             // Skeletons are messy drinkers
-            if (saveGame.Player.RaceIndex == RaceId.Skeleton && Program.Rng.DieRoll(12) == 1)
-            {
-                saveGame.MsgPrint("Some of the fluid falls through your jaws!");
-                potion.Smash(saveGame, 0, saveGame.Player.MapY, saveGame.Player.MapX);
-            }
+            saveGame.Player.Race.Quaff(saveGame, potion);
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We may now know the potion's type
             item.ObjectTried();

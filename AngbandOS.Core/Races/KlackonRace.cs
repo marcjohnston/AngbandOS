@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {
@@ -62,6 +63,26 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasConfusionResistance = true;
             saveGame.Player.HasAcidResistance = true;
+        }
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Klackons can spit acid
+            if (saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.MsgPrint("You spit acid.");
+                    if (saveGame.Player.Level < 25)
+                    {
+                        saveGame.FireBolt(new ProjectAcid(saveGame), direction, saveGame.Player.Level);
+                    }
+                    else
+                    {
+                        saveGame.FireBall(new ProjectAcid(saveGame), direction, saveGame.Player.Level, 2);
+                    }
+                }
+            }
         }
     }
 }

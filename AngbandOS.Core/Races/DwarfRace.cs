@@ -58,5 +58,16 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasBlindnessResistance = true;
         }
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Dwarves can detect traps, doors, and stairs
+            if (saveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
+            {
+                saveGame.MsgPrint("You examine your surroundings.");
+                saveGame.DetectTraps();
+                saveGame.DetectDoors();
+                saveGame.DetectStairs();
+            }
+        }
     }
 }

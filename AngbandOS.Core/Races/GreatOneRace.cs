@@ -71,5 +71,59 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasSustainConstitution = true;
             saveGame.Player.HasRegeneration = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Great ones can heal themselves or swap to a new level
+            int dreamPower;
+            while (true)
+            {
+                if (!saveGame.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
+                {
+                    dreamPower = 0;
+                    break;
+                }
+                if (ch == 'D' || ch == 'd')
+                {
+                    dreamPower = 1;
+                    break;
+                }
+                if (ch == 'T' || ch == 't')
+                {
+                    dreamPower = 2;
+                    break;
+                }
+            }
+            if (dreamPower == 1)
+            {
+                if (saveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
+                {
+                    saveGame.MsgPrint("You dream of a time of health and peace...");
+                    saveGame.Player.SetTimedPoison(0);
+                    saveGame.Player.SetTimedHallucinations(0);
+                    saveGame.Player.SetTimedStun(0);
+                    saveGame.Player.SetTimedBleeding(0);
+                    saveGame.Player.SetTimedBlindness(0);
+                    saveGame.Player.SetTimedFear(0);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+                    saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+                    saveGame.Player.RestoreLevel();
+                }
+            }
+            else if (dreamPower == 2)
+            {
+                if (saveGame.CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
+                {
+                    saveGame.MsgPrint("You start walking around. Your surroundings change.");
+                    saveGame.DoCmdSaveGame(true);
+                    saveGame.NewLevelFlag = true;
+                    saveGame.CameFrom = LevelStart.StartRandom;
+                }
+            }
+        }
     }
 }

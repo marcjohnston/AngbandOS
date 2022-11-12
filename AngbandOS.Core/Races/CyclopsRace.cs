@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {
@@ -59,6 +60,20 @@ namespace AngbandOS.Core.Races
         public override void CalcBonuses(SaveGame saveGame)
         {
             saveGame.Player.HasSoundResistance = true;
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Cyclopes can throw boulders
+            if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.MsgPrint("You throw a huge boulder.");
+                    saveGame.FireBolt(new ProjectMissile(saveGame), direction, 3 * saveGame.Player.Level / 2);
+                }
+            }
         }
     }
 }

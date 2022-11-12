@@ -70,5 +70,17 @@ namespace AngbandOS.Core.Races
                 saveGame.Player.HasSlowDigestion = true;
             }
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Half-trolls can go berserk, which also heals them
+            if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, saveGame.Player.ProfessionIndex == CharacterClass.Warrior ? 6 : 12))
+            {
+                saveGame.MsgPrint("RAAAGH!");
+                saveGame.Player.SetTimedFear(0);
+                saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(saveGame.Player.Level));
+                saveGame.Player.RestoreHealth(30);
+            }
+        }
     }
 }

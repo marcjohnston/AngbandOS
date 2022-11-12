@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 using System.Windows.Markup;
 
 namespace AngbandOS.Core.Races
@@ -79,6 +80,29 @@ namespace AngbandOS.Core.Races
             if (saveGame.Player.Level > 19)
             {
                 saveGame.Player.HasFireImmunity = true;
+            }
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Imps can cast fire bolt/ball
+            if (saveGame.CheckIfRacialPowerWorks(9, 15, Ability.Wisdom, 15))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    if (saveGame.Player.Level >= 30)
+                    {
+                        saveGame.MsgPrint("You cast a ball of fire.");
+                        saveGame.FireBall(new ProjectFire(saveGame), direction, saveGame.Player.Level,
+                            2);
+                    }
+                    else
+                    {
+                        saveGame.MsgPrint("You cast a bolt of fire.");
+                        saveGame.FireBolt(new ProjectFire(saveGame), direction, saveGame.Player.Level);
+                    }
+                }
             }
         }
     }

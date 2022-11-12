@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core.Races
 {
@@ -59,6 +60,18 @@ namespace AngbandOS.Core.Races
         public override void CalcBonuses(SaveGame saveGame)
         {
             saveGame.Player.HasSustainDexterity = true;
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Hobbits can cook food
+            if (saveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
+            {
+                Item item = new Item(saveGame);
+                item.AssignItemType(new FoodRation());
+                saveGame.Level.DropNear(item, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+                saveGame.MsgPrint("You cook some food.");
+            }
         }
     }
 }

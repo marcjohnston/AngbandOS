@@ -59,5 +59,15 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasChaosResistance = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Half-Titans can probe enemies
+            if (saveGame.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
+            {
+                saveGame.MsgPrint("You examine your foes...");
+                saveGame.Probing();
+            }
+        }
     }
 }

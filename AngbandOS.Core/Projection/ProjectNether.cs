@@ -229,7 +229,7 @@ namespace AngbandOS.Projection
             }
             if (SaveGame.Player.HasNetherResistance)
             {
-                if (SaveGame.Player.RaceIndex != RaceId.Spectre)
+                if (SaveGame.Player.Race.NegatesNetherResistance)
                 {
                     dam *= 6;
                 }
@@ -256,7 +256,7 @@ namespace AngbandOS.Projection
                     SaveGame.Player.LoseExperience(200 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
                 }
             }
-            if (SaveGame.Player.RaceIndex == RaceId.Spectre)
+            if (SaveGame.Player.Race.ProjectingNetherRestoresHealth)
             {
                 SaveGame.MsgPrint("You feel invigorated!");
                 SaveGame.Player.RestoreHealth(dam / 4);

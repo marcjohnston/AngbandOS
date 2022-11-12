@@ -18,7 +18,7 @@ namespace AngbandOS.Spells.Nature
         {
             saveGame.FireBall(new ProjectLight(saveGame), 0, 150, 8);
             saveGame.Level.WizLight();
-            if (saveGame.Player.RaceIndex != RaceId.Vampire || saveGame.Player.HasLightResistance)
+            if (!saveGame.Player.Race.IsBurnedBySunlight || saveGame.Player.HasLightResistance)
             {
                 return;
             }

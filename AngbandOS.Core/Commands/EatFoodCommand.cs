@@ -51,7 +51,10 @@ namespace AngbandOS.Commands
             bool ident = false;
             int itemLevel = item.BaseItemCategory.Level;
             FoodItemCategory foodItem = (FoodItemCategory)item.BaseItemCategory;
+
+            // Allow the food item to process the consumption.
             foodItem.Eat(saveGame);           
+
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We've tried this type of object
             item.ObjectTried();
@@ -67,45 +70,10 @@ namespace AngbandOS.Commands
                 saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
                 return;
             }
-            // Vampires only get 1/10th of the food value
-            if (saveGame.Player.RaceIndex == RaceId.Vampire)
-            {
-                _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
-                saveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-                if (saveGame.Player.Food < Constants.PyFoodAlert)
-                {
-                    saveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
-                }
-            }
-            // Skeletons get no food sustenance
-            else if (saveGame.Player.RaceIndex == RaceId.Skeleton)
-            {
-                if (!(item.ItemSubCategory == FoodType.Waybread || item.ItemSubCategory == FoodType.Warpstone ||
-                      item.ItemSubCategory < FoodType.Biscuit))
-                {
-                    // Spawn a new food item on the floor to make up for the one that will be destroyed
-                    Item floorItem = new Item(saveGame);
-                    saveGame.MsgPrint("The food falls through your jaws!");
-                    floorItem.AssignItemType(item.BaseItemCategory);
-                    saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
-                }
-                else
-                {
-                    // But some magical types work anyway and then vanish
-                    saveGame.MsgPrint("The food falls through your jaws and vanishes!");
-                }
-            }
-            // Golems, zombies, and spectres get only 1/20th of the food value
-            else if (saveGame.Player.RaceIndex == RaceId.Golem || saveGame.Player.RaceIndex == RaceId.Zombie || saveGame.Player.RaceIndex == RaceId.Spectre)
-            {
-                saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-                saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
-            }
-            // Everyone else gets the full value
-            else
-            {
-                saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
-            }
+
+            // Now races process the sustenance.
+            saveGame.Player.Race.Eat(saveGame, item);
+
             // Use up the item (if it fell to the floor this will have already been dealt with)
             if (itemIndex >= 0)
             {

@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {
@@ -92,6 +93,141 @@ namespace AngbandOS.Core.Races
             if (saveGame.Player.Level > 34)
             {
                 saveGame.Player.HasPoisonResistance = true;
+            }
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Draconians can breathe an element based on their class and level
+            Projectile projectile;
+            string projectileDescription;
+
+            // Default to being randomly fire (66% chance) or cold (33% chance)
+            if (Program.Rng.DieRoll(3) == 1)
+            {
+                projectile = new ProjectCold(saveGame);
+                projectileDescription = "cold";
+            }
+            else
+            {
+                projectile = new ProjectFire(saveGame);
+                projectileDescription = "fire";
+            }
+
+            // Chance of replacing the default fire/cold element with a special one
+            if (Program.Rng.DieRoll(100) < saveGame.Player.Level)
+            {
+                switch (saveGame.Player.ProfessionIndex)
+                {
+                    case CharacterClass.Warrior:
+                    case CharacterClass.Ranger:
+                    case CharacterClass.Druid:
+                    case CharacterClass.ChosenOne:
+                        if (Program.Rng.DieRoll(3) == 1)
+                        {
+                            projectile = new ProjectMissile(saveGame);
+                            projectileDescription = "the elements";
+                        }
+                        else
+                        {
+                            projectile = new ProjectExplode(saveGame);
+                            projectileDescription = "shards";
+                        }
+                        break;
+
+                    case CharacterClass.Mage:
+                    case CharacterClass.WarriorMage:
+                    case CharacterClass.HighMage:
+                    case CharacterClass.Channeler:
+                        if (Program.Rng.DieRoll(3) == 1)
+                        {
+                            projectile = new ProjectMana(saveGame);
+                            projectileDescription = "mana";
+                        }
+                        else
+                        {
+                            projectile = new ProjectDisenchant(saveGame);
+                            projectileDescription = "disenchantment";
+                        }
+                        break;
+
+                    case CharacterClass.Fanatic:
+                    case CharacterClass.Cultist:
+                        if (Program.Rng.DieRoll(3) != 1)
+                        {
+                            projectile = new ProjectConfusion(saveGame);
+                            projectileDescription = "confusion";
+                        }
+                        else
+                        {
+                            projectile = new ProjectChaos(saveGame);
+                            projectileDescription = "chaos";
+                        }
+                        break;
+
+                    case CharacterClass.Monk:
+                        if (Program.Rng.DieRoll(3) != 1)
+                        {
+                            projectile = new ProjectConfusion(saveGame);
+                            projectileDescription = "confusion";
+                        }
+                        else
+                        {
+                            projectile = new ProjectSound(saveGame);
+                            projectileDescription = "sound";
+                        }
+                        break;
+
+                    case CharacterClass.Mindcrafter:
+                    case CharacterClass.Mystic:
+                        if (Program.Rng.DieRoll(3) != 1)
+                        {
+                            projectile = new ProjectConfusion(saveGame);
+                            projectileDescription = "confusion";
+                        }
+                        else
+                        {
+                            projectile = new ProjectPsi(saveGame);
+                            projectileDescription = "mental energy";
+                        }
+                        break;
+
+                    case CharacterClass.Priest:
+                    case CharacterClass.Paladin:
+                        if (Program.Rng.DieRoll(3) == 1)
+                        {
+                            projectile = new ProjectHellFire(saveGame);
+                            projectileDescription = "hellfire";
+                        }
+                        else
+                        {
+                            projectile = new ProjectHolyFire(saveGame);
+                            projectileDescription = "holy fire";
+                        }
+                        break;
+
+                    case CharacterClass.Rogue:
+                        if (Program.Rng.DieRoll(3) == 1)
+                        {
+                            projectile = new ProjectDark(saveGame);
+                            projectileDescription = "darkness";
+                        }
+                        else
+                        {
+                            projectile = new ProjectPois(saveGame);
+                            projectileDescription = "poison";
+                        }
+                        break;
+                }
+            }
+            if (saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Constitution, 12))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionWithAim(out int direction))
+                {
+                    saveGame.MsgPrint($"You breathe {projectileDescription}.");
+                    saveGame.FireBall(projectile, direction, saveGame.Player.Level * 2, -(saveGame.Player.Level / 15) + 1);
+                }
             }
         }
     }

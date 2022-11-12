@@ -60,5 +60,15 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasFreeAction = true;
         }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Gnomes can do a short-range teleport
+            if (saveGame.CheckIfRacialPowerWorks(5, 5 + (saveGame.Player.Level / 5), Ability.Intelligence, 12))
+            {
+                saveGame.MsgPrint("Blink!");
+                saveGame.TeleportPlayer(10 + saveGame.Player.Level);
+            }
+        }
     }
 }

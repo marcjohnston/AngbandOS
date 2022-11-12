@@ -69,5 +69,64 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasGlow = true;
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
+
+        public override bool IsBurnedBySunlight => true;
+
+        public override bool IsDamagedByDarkness => false;
+
+        public override void Eat(SaveGame saveGame, Item item)
+        {
+            // Vampires only get 1/10th of the food value
+            _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
+            saveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
+            if (saveGame.Player.Food < Constants.PyFoodAlert)
+            {
+                saveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
+            }
+        }
+
+        public override void UseRacialPower(SaveGame saveGame)
+        {
+            // Vampires can drain health
+            if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.Player.Level / 3), Ability.Constitution, 9))
+            {
+                TargetEngine targetEngine = new TargetEngine(saveGame);
+                if (targetEngine.GetDirectionNoAim(out int direction))
+                {
+                    int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
+                    int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[direction];
+                    GridTile tile = saveGame.Level.Grid[y][x];
+                    if (tile.MonsterIndex == 0)
+                    {
+                        saveGame.MsgPrint("You bite into thin air!");
+                    }
+                    else
+                    {
+                        saveGame.MsgPrint("You grin and bare your fangs...");
+                        int dummy = saveGame.Player.Level + (Program.Rng.DieRoll(saveGame.Player.Level) * Math.Max(1, saveGame.Player.Level / 10));
+                        if (saveGame.DrainLife(direction, dummy))
+                        {
+                            if (saveGame.Player.Food < Constants.PyFoodFull)
+                            {
+                                saveGame.Player.RestoreHealth(dummy);
+                            }
+                            else
+                            {
+                                saveGame.MsgPrint("You were not hungry.");
+                            }
+                            dummy = saveGame.Player.Food + Math.Min(5000, 100 * dummy);
+                            if (saveGame.Player.Food < Constants.PyFoodMax)
+                            {
+                                saveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+                            }
+                        }
+                        else
+                        {
+                            saveGame.MsgPrint("Yechh. That tastes foul.");
+                        }
+                    }
+                }
+            }
+        }
     }
 }
