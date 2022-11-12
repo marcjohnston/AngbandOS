@@ -13,7 +13,7 @@ using AngbandOS.Enumerations;
 using AngbandOS.Mutations;
 using AngbandOS.Patrons;
 using AngbandOS.Projection;
-using AngbandOS.StaticData;
+
 using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
 using AngbandOS.ItemCategories;
@@ -22,6 +22,7 @@ using AngbandOS.Spells;
 using AngbandOS.Pantheon;
 using AngbandOS.Core.Races;
 using System.Reflection;
+using AngbandOS.Core.MonsterRaces;
 
 namespace AngbandOS
 {

@@ -8,8 +8,9 @@
 using AngbandOS.Commands;
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
+
 using System.Collections.Generic;
 
 namespace AngbandOS

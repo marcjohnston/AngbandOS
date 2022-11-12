@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Commands;
 using AngbandOS.Core;
-using AngbandOS.StaticData;
+
 using System;
 using System.Collections.Generic;
 

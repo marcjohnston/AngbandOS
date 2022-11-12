@@ -9,7 +9,7 @@ using AngbandOS.Enumerations;
 using AngbandOS.Mutations.ActiveMutations;
 using AngbandOS.Mutations.PassiveMutations;
 using AngbandOS.Mutations.RandomMutations;
-using AngbandOS.StaticData;
+
 using System;
 using System.Collections.Generic;
 

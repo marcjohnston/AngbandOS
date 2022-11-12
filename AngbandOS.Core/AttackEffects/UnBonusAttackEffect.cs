@@ -9,7 +9,7 @@ using AngbandOS.Projection;
 using AngbandOS.Enumerations;
 using AngbandOS.Core;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class UnBonusAttackEffect : BaseAttackEffect

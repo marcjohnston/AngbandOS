@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
+
 using AngbandOS.Core.Interface;
 using AngbandOS.ItemCategories;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterRaces;
 
 namespace AngbandOS.Commands
 {

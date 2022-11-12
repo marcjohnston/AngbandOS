@@ -9,7 +9,7 @@
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class EatLightAttackEffect : BaseAttackEffect

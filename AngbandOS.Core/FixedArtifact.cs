@@ -6,7 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
+
 using System;
 using AngbandOS.Core;
 using AngbandOS.ItemCategories;

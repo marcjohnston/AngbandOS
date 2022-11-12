@@ -9,7 +9,7 @@
 using AngbandOS.Projection;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class HurtAttackEffect : BaseAttackEffect

@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class BlindAttackEffect : BaseAttackEffect

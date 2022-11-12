@@ -9,7 +9,7 @@ using AngbandOS.Core;
 using AngbandOS.Projection;
 using System.Diagnostics;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class ParalyzeAttackEffect : BaseAttackEffect

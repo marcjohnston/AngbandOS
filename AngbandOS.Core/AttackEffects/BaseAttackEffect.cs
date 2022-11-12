@@ -8,7 +8,7 @@
 
 using AngbandOS.Projection;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal abstract class BaseAttackEffect

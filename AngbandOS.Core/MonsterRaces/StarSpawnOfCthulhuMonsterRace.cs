@@ -1,7 +1,9 @@
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
-namespace AngbandOS.StaticData
+using AngbandOS.Core.AttackEffects;
+
+namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]
     internal class StarSpawnOfCthulhuMonsterRace : MonsterRace

@@ -8,7 +8,7 @@
 using AngbandOS.Core;
 using AngbandOS.Projection;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class ColdAttackEffect : BaseAttackEffect

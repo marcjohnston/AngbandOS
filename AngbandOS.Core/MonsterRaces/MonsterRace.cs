@@ -1,7 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.StaticData
+using AngbandOS.Core.AttackEffects;
+
+namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]
     internal abstract class MonsterRace

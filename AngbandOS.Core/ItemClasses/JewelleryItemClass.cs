@@ -1,6 +1,6 @@
 ﻿using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
-using AngbandOS.StaticData;
+
 using System;
 
 namespace AngbandOS.ItemCategories

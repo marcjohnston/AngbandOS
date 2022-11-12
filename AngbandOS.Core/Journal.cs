@@ -7,12 +7,13 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
-using AngbandOS.StaticData;
+
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.ItemCategories;
 using System.Xml.Linq;
+using AngbandOS.Core.MonsterRaces;
 
 namespace AngbandOS
 {

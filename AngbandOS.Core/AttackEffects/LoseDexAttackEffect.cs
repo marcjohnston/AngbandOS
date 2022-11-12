@@ -8,7 +8,7 @@
 
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.StaticData
+namespace AngbandOS.Core.AttackEffects
 {
     [Serializable]
     internal class LoseDexAttackEffect : BaseAttackEffect

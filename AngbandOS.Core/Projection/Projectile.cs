@@ -7,9 +7,10 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
 using AngbandOS.Spells;
-using AngbandOS.StaticData;
+
 
 namespace AngbandOS.Projection
 {
