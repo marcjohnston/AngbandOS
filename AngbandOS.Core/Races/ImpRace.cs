@@ -105,5 +105,7 @@ namespace AngbandOS.Core.Races
                 }
             }
         }
+
+        public override int ChanceOfSanityBlastImmunity(int level) => 100;
     }
 }

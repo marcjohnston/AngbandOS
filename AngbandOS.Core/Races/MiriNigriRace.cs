@@ -49,5 +49,7 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasConfusionResistance = true;
             saveGame.Player.HasSoundResistance = true;
         }
+
+        public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;
     }
 }

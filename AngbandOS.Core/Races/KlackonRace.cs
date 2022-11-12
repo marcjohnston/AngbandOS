@@ -63,6 +63,7 @@ namespace AngbandOS.Core.Races
         {
             saveGame.Player.HasConfusionResistance = true;
             saveGame.Player.HasAcidResistance = true;
+            saveGame.Player.Speed += saveGame.Player.Level / 10;
         }
         public override void UseRacialPower(SaveGame saveGame)
         {

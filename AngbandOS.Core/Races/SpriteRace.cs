@@ -64,6 +64,7 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasFeatherFall = true;
             saveGame.Player.HasGlow = true;
             saveGame.Player.HasLightResistance = true;
+            saveGame.Player.Speed += saveGame.Player.Level / 10;
         }
 
         public override void UseRacialPower(SaveGame saveGame)

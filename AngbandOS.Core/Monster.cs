@@ -321,16 +321,11 @@ namespace AngbandOS
                 }
                 SaveGame.MsgPrint($"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
                 Race.Knowledge.RFlags2 |= MonsterFlag2.EldritchHorror;
-                if (player.RaceIndex == RaceId.Imp || player.RaceIndex == RaceId.MindFlayer)
+
+                // Allow the race to resist.
+                if (Program.Rng.DieRoll(100) < player.Race.ChanceOfSanityBlastImmunity(player.Level))
                 {
                     return;
-                }
-                if (player.RaceIndex == RaceId.Skeleton || player.RaceIndex == RaceId.Zombie ||  player.RaceIndex == RaceId.Vampire || player.RaceIndex == RaceId.Spectre)
-                {
-                    if (Program.Rng.DieRoll(100) < 25 + player.Level)
-                    {
-                        return;
-                    }
                 }
             }
             if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)

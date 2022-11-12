@@ -354,7 +354,7 @@ namespace AngbandOS
                     {
                         levelReward = true;
                     }
-                    if (RaceIndex == RaceId.MiriNigri)
+                    if (Race.AutomaticallyGainsFirstLevelMutationAtBirth)
                     {
                         if (Program.Rng.DieRoll(5) == 1)
                         {
@@ -2288,7 +2288,7 @@ namespace AngbandOS
             int oldAux, newAux;
             bool notice = false;
             v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (RaceIndex == RaceId.Golem)
+            if (!Race.CanBeStunned)
             {
                 v = 0;
             }

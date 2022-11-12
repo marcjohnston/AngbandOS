@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
+using AngbandOS.ItemCategories;
 
 namespace AngbandOS.Core.Races
 {
@@ -68,6 +69,15 @@ namespace AngbandOS.Core.Races
                 saveGame.MsgPrint("You carefully draw The Yellow Sign...");
                 saveGame.YellowSign();
             }
+        }
+
+        public override ItemClass OutfitItem(ItemClass itemClass)
+        {
+            if (itemClass is RingFearResistance)
+            {
+                return new RingSustainStrength();
+            }
+            return itemClass;
         }
     }
 }

@@ -11999,7 +11999,7 @@ namespace AngbandOS
                         {
                             autoChose[stage] = true;
                             _player.RaceIndex = _prevRace.Index;
-                            _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
+                            _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             _player.Race = Races[_player.RaceIndex];
                             stage++;
                             break;
@@ -12009,10 +12009,9 @@ namespace AngbandOS
                             autoChose[stage] = true;
                             do
                             {
-                                int k = Program.Rng.RandomLessThan(Constants.MaxRaces);
-                                _player.GetFirstLevelMutation = k == RaceId.MiriNigri;
-                                _player.RaceIndex = k;
+                                _player.RaceIndex = Program.Rng.RandomLessThan(Constants.MaxRaces);
                                 _player.Race = Races[_player.RaceIndex];
+                                _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             }
                             while ((_player.Race.Choice & (1L << _player.ProfessionIndex)) == 0);
                             stage++;
@@ -12080,7 +12079,7 @@ namespace AngbandOS
                         {
                             _player.RaceIndex = _raceMenu[menu[BirthStage.RaceSelection]].Item.Index;
                             _player.Race = Races[_player.RaceIndex];
-                            _player.GetFirstLevelMutation = _player.RaceIndex == RaceId.MiriNigri;
+                            _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                         }
                         break;
 
@@ -12614,8 +12613,7 @@ namespace AngbandOS
                 _player.Inventory.InvenCarry(item, false);
                 item = new Item(saveGame);
             }
-            if (_player.RaceIndex == RaceId.Vampire || _player.RaceIndex == RaceId.Spectre ||
-                _player.ProfessionIndex == CharacterClass.ChosenOne)
+            if (_player.Race.OutfitsWithScrollsOfLight || _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
                 item.AssignItemType(new ScrollLight());
                 item.Count = Program.Rng.RandomBetween(3, 7);
@@ -12738,19 +12736,16 @@ namespace AngbandOS
             ItemClass[] startingItems = _playerInit[_player.ProfessionIndex];
             for (int i = 0; i < startingItems.Length; i++)
             {
-                ItemClass baseItemCategory = startingItems[i];
+                ItemClass itemClass = startingItems[i];
 
-                if (baseItemCategory.GetType().Name == "RingFearResistance" && _player.RaceIndex == RaceId.TchoTcho)
-                {
-                    baseItemCategory = new RingSustainStrength();
-                }
+                itemClass = _player.Race.OutfitItem(itemClass);
                 item = new Item(saveGame);
-                item.AssignItemType(baseItemCategory);
-                if (baseItemCategory.CategoryEnum == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
+                item.AssignItemType(itemClass);
+                if (itemClass.CategoryEnum == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
                 }
-                if (baseItemCategory.CategoryEnum == ItemCategory.Wand)
+                if (itemClass.CategoryEnum == ItemCategory.Wand)
                 {
                     item.TypeSpecificValue = 1;
                 }

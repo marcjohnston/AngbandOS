@@ -176,5 +176,37 @@ namespace AngbandOS.Core.Races
         /// true.  Returns false by default.
         /// </summary>
         public virtual bool OutfitsWithScrollsOfSatisfyHunger => false;
+
+        /// <summary>
+        /// Returns true, if characters are automatically outfitted with scrolls of light.  Vampires and spectres return 
+        /// true.  Returns false by default.
+        /// </summary>
+        public virtual bool OutfitsWithScrollsOfLight => false;
+
+        /// <summary>
+        /// Return true, if the race automatically gains the first level mutation upon birth.  Only MiriNigri races return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool AutomaticallyGainsFirstLevelMutationAtBirth => false;
+
+        /// <summary>
+        /// Returns a chance (0-100) of the race being immune to a sanity blast.  A chance of 100, means the race is not affected by the sanity blast.  Imps
+        /// and mind flayers return 100. Skeletons, zombies, vampires and spectres all return a chance of the players' level + 25.  Returns 0, by default.
+        /// </summary>
+        public virtual int ChanceOfSanityBlastImmunity(int level) => 0;
+
+        /// <summary>
+        /// Returns true, if the race can be stunned.  Returns false, by default.  Only golems return false.
+        /// </summary>
+        public virtual bool CanBeStunned => true;
+
+        /// <summary>
+        /// Allows the race to modify an item class when the character is being outfitted.  Returns the original item class, by default.  Only the tcho-tcho
+        /// race upgrades a ring of resist fear to a ring of sustain strength.
+        /// </summary>
+        /// <param name="item"></param>
+        public virtual ItemClass OutfitItem(ItemClass item)
+        {
+            return item;
+        }
     }
 }

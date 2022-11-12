@@ -72,6 +72,8 @@ namespace AngbandOS.Core.Races
             saveGame.Player.HasFreeAction = true;
             saveGame.Player.HasSeeInvisibility = true;
             saveGame.Player.HasPoisonResistance = true;
+            saveGame.Player.ArmourClassBonus += 20 + (saveGame.Player.Level / 5);
+            saveGame.Player.DisplayedArmourClassBonus += 20 + (saveGame.Player.Level / 5);
         }
 
         public override void Eat(SaveGame saveGame, Item item)
@@ -92,5 +94,7 @@ namespace AngbandOS.Core.Races
             }
         }
         public override bool OutfitsWithScrollsOfSatisfyHunger => true;
+
+        public override bool CanBeStunned => false;
     }
 }

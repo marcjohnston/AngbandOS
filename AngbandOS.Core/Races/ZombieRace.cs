@@ -94,5 +94,6 @@ namespace AngbandOS.Core.Races
         }
 
         public override bool OutfitsWithScrollsOfSatisfyHunger => true;
+        public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
     }
 }

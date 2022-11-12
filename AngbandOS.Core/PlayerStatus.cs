@@ -664,11 +664,6 @@ namespace AngbandOS
             {
                 SaveGame.Player.HasGlow = true;
             }
-            if (SaveGame.Player.RaceIndex == RaceId.Golem)
-            {
-                SaveGame.Player.ArmourClassBonus += 20 + (SaveGame.Player.Level / 5);
-                SaveGame.Player.DisplayedArmourClassBonus += 20 + (SaveGame.Player.Level / 5);
-            }
             for (i = 0; i < 6; i++)
             {
                 int ind;
@@ -792,8 +787,7 @@ namespace AngbandOS
             {
                 SaveGame.Player.Speed -= 10;
             }
-            if (SaveGame.Player.RaceIndex == RaceId.Klackon || SaveGame.Player.RaceIndex == RaceId.Sprite ||
-                ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour()))
+            if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
             {
                 SaveGame.Player.Speed += SaveGame.Player.Level / 10;
             }
