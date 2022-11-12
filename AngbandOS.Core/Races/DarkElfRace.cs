@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,10 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 2 ? "magic missile      (racial, unusable until level 2)" : "magic missile      (racial, cost 2, INT based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResDark = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
     }
 }

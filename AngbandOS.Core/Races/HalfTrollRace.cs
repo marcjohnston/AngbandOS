@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,16 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.SustStr = true;
+            if (level > 14)
+            {
+                itemCharacteristics.Regen = true;
+                itemCharacteristics.SlowDigest = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new OrcishSyllables());
     }
 }

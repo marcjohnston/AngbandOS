@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,11 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 12 ? "poison dart        (racial, unusable until level 12)" : "poison dart        (racial, cost 8, dam lvl, DEX based)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResPois = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new HobbitSyllables());
     }
 }

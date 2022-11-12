@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,11 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone to mud       (racial, unusable until level 20)" : "stone to mud       (racial, cost 10, STR based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResShards = true;
+            itemCharacteristics.SustStr = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
     }
 }

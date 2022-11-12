@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -38,5 +39,11 @@ namespace AngbandOS.Core.Races
         public override int Chart => 16;
         public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResBlind = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
     }
 }

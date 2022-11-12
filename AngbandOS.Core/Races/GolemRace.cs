@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,18 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone skin         (racial, unusable until level 20)" : "stone skin         (racial, cost 15, dur 30+d20, CON based)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.FreeAct = true;
+            itemCharacteristics.ResPois = true;
+            itemCharacteristics.SlowDigest = true;
+            if (level > 34)
+            {
+                itemCharacteristics.HoldLife = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new DwarvenSyllables());
     }
 }

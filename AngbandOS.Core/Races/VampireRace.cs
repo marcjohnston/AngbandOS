@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,15 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 2 ? "drain life         (racial, unusable until level 2)" : "drain life         (racial, cost 1 + lvl/3, based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.HoldLife = true;
+            itemCharacteristics.ResDark = true;
+            itemCharacteristics.ResNether = true;
+            itemCharacteristics.Lightsource = true;
+            itemCharacteristics.ResPois = true;
+            itemCharacteristics.ResCold = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
     }
 }

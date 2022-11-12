@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,31 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.Feather = true;
+            if (level > 4)
+            {
+                itemCharacteristics.ResFire = true;
+            }
+            if (level > 9)
+            {
+                itemCharacteristics.ResCold = true;
+            }
+            if (level > 14)
+            {
+                itemCharacteristics.ResAcid = true;
+            }
+            if (level > 19)
+            {
+                itemCharacteristics.ResElec = true;
+            }
+            if (level > 34)
+            {
+                itemCharacteristics.ResPois = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new GnomishSyllables());
     }
 }

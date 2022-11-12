@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,15 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            if (level > 9)
+            {
+                itemCharacteristics.Speed = true;
+            }
+            itemCharacteristics.ResConf = true;
+            itemCharacteristics.ResAcid = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new KlackonSyllables());
     }
 }

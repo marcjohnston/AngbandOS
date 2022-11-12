@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,20 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 4 ? "scare monster      (racial, unusable until level 4)" : "scare monster      (racial, cost 3, INT based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResCold = true;
+            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.HoldLife = true;
+            itemCharacteristics.ResNether = true;
+            itemCharacteristics.ResPois = true;
+            itemCharacteristics.SlowDigest = true;
+            itemCharacteristics.Lightsource = true;
+            if (level > 34)
+            {
+                itemCharacteristics.Telepathy = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
     }
 }

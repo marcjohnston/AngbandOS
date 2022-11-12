@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -36,5 +37,12 @@ namespace AngbandOS.Core.Races
         /// Miri-Nigri 129->130->131->132->133->End
         /// </summary>
         public override int Chart => 129;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResSound = true;
+            itemCharacteristics.ResConf = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
     }
 }

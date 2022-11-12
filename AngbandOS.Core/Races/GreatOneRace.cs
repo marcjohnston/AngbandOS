@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
 using System.Runtime.CompilerServices;
 
@@ -41,5 +42,12 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
         public override bool HasRacialPowers => true;
+
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.SustCon = true;
+            itemCharacteristics.Regen = true;
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new HumanSyllables());
     }
 }

@@ -1,5 +1,7 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.Syllables;
+using System.Diagnostics;
 
 namespace AngbandOS.Core.Races
 {
@@ -58,5 +60,32 @@ namespace AngbandOS.Core.Races
         /// Returns true, if the race has mutant powers.  Returns false, by default.
         /// </summary>
         public virtual bool HasRacialPowers => false;
+
+        /// <summary>
+        /// Applies additional characteristics to a player based on the player level.  No characteristics are applied, by default.  Only humans, have no modifications.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="itemCharacteristics"></param>
+        public virtual void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+        }
+
+        protected string CreateRandomNameFromSyllables(RaceNamingSyllables syllables)
+        {
+            string name = "";
+            do
+            {
+                name = syllables.BeginningSyllables[Program.Rng.RandomLessThan(syllables.BeginningSyllables.Length)];
+                name += syllables.MiddleSyllables[Program.Rng.RandomLessThan(syllables.MiddleSyllables.Length)];
+                name += syllables.EndingSyllables[Program.Rng.RandomLessThan(syllables.EndingSyllables.Length)];
+            } while (name.Length > 12);
+
+            return name;
+        }
+
+        /// <summary>
+        /// Returns a random name for a player of this race.
+        /// </summary>
+        public abstract string CreateRandomName();
     }
 }

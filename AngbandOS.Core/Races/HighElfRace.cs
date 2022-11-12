@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -36,5 +37,13 @@ namespace AngbandOS.Core.Races
         /// High-Elf 7->8->9->54->55->56->End 
         /// </summary>
         public override int Chart => 7;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            if (level > 19)
+            {
+                itemCharacteristics.SeeInvis = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
     }
 }

@@ -1,4 +1,5 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -39,5 +40,18 @@ namespace AngbandOS.Core.Races
 
         public override string RacialPowersDescription(int lvl) => lvl < 9 ? "fire bolt/ball     (racial, unusable until level 9/30)" : "fire bolt/ball(30) (racial, cost 15, dam lvl, WIS based)";
         public override bool HasRacialPowers => true;
+        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
+        {
+            itemCharacteristics.ResFire = true;
+            if (level > 9)
+            {
+                itemCharacteristics.SeeInvis = true;
+            }
+            if (level > 19)
+            {
+                itemCharacteristics.ImFire = true;
+            }
+        }
+        public override string CreateRandomName() => CreateRandomNameFromSyllables(new AngelicSyllables());
     }
 }
