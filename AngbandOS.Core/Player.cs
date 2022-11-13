@@ -29,7 +29,7 @@ namespace AngbandOS
         public readonly int[] MaxDlv = new int[Constants.MaxCaves];
         public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
         public int Age;
-        public ItemCategory AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
+        public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
         public int ArmourClassBonus;
         public int AttackBonus;
         public int BaseArmourClass;
@@ -1301,28 +1301,28 @@ namespace AngbandOS
                 }
                 switch (item.Category)
                 {
-                    case ItemCategory.Shot:
-                    case ItemCategory.Arrow:
-                    case ItemCategory.Bolt:
-                    case ItemCategory.Bow:
-                    case ItemCategory.Digging:
-                    case ItemCategory.Hafted:
-                    case ItemCategory.Polearm:
-                    case ItemCategory.Sword:
-                    case ItemCategory.Boots:
-                    case ItemCategory.Gloves:
-                    case ItemCategory.Helm:
-                    case ItemCategory.Crown:
-                    case ItemCategory.Shield:
-                    case ItemCategory.Cloak:
-                    case ItemCategory.SoftArmor:
-                    case ItemCategory.HardArmor:
-                    case ItemCategory.DragArmor:
+                    case ItemTypeEnum.Shot:
+                    case ItemTypeEnum.Arrow:
+                    case ItemTypeEnum.Bolt:
+                    case ItemTypeEnum.Bow:
+                    case ItemTypeEnum.Digging:
+                    case ItemTypeEnum.Hafted:
+                    case ItemTypeEnum.Polearm:
+                    case ItemTypeEnum.Sword:
+                    case ItemTypeEnum.Boots:
+                    case ItemTypeEnum.Gloves:
+                    case ItemTypeEnum.Helm:
+                    case ItemTypeEnum.Crown:
+                    case ItemTypeEnum.Shield:
+                    case ItemTypeEnum.Cloak:
+                    case ItemTypeEnum.SoftArmor:
+                    case ItemTypeEnum.HardArmor:
+                    case ItemTypeEnum.DragArmor:
                         {
                             okay = true;
                             break;
                         }
-                    case ItemCategory.Light: // Only orbs
+                    case ItemTypeEnum.Light: // Only orbs
                         {
                             if (item.ItemSubCategory == LightType.Orb)
                             {

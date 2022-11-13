@@ -65,7 +65,7 @@ namespace AngbandOS.Projection
                 if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
                 {
                 }
-                if (oPtr.Category == ItemCategory.Chest)
+                if (oPtr.Category == ItemTypeEnum.Chest)
                 {
                     if (oPtr.TypeSpecificValue > 0)
                     {

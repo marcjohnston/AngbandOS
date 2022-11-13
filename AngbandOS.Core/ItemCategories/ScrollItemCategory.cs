@@ -11,7 +11,7 @@ namespace AngbandOS.ItemCategories
     {
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Scroll;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

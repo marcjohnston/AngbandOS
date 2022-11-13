@@ -9,7 +9,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class RingItemCategory : JewelleryItemClass
     {
         public override bool HasFlavor => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Ring;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             if (item.IsFixedArtifact() && item.IsFlavourAware())

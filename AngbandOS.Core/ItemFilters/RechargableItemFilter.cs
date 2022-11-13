@@ -4,7 +4,7 @@ namespace AngbandOS.Core.ItemFilters
 {
     internal class RechargableItemFilter : ItemCategoryItemFilter
     {
-        public RechargableItemFilter() : base(ItemCategory.Staff, ItemCategory.Wand, ItemCategory.Rod)
+        public RechargableItemFilter() : base(ItemTypeEnum.Staff, ItemTypeEnum.Wand, ItemTypeEnum.Rod)
         {
         }
     }

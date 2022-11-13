@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemFilters
     {
         public override bool ItemMatches(Item item)
         {
-            foreach (ItemCategory itemCategory in ItemCategories)
+            foreach (ItemTypeEnum itemCategory in ItemCategories)
             {
                 if (item.Category == itemCategory)
                     return true;
@@ -17,9 +17,9 @@ namespace AngbandOS.Core.ItemFilters
             return false;
         }
 
-        private ItemCategory[] ItemCategories { get; }
+        private ItemTypeEnum[] ItemCategories { get; }
 
-        public ItemCategoryItemFilter(params ItemCategory[] itemCategories)
+        public ItemCategoryItemFilter(params ItemTypeEnum[] itemCategories)
         {
             ItemCategories = itemCategories;
         }

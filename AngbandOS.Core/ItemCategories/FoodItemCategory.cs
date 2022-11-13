@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class FoodItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Food;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

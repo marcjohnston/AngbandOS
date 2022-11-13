@@ -23,7 +23,7 @@ namespace AngbandOS.Commands
 
             // Make sure we actually have a light source to refuel
             Item lightSource = saveGame.Player.Inventory[InventorySlot.Lightsource];
-            if (lightSource.Category != ItemCategory.Light)
+            if (lightSource.Category != ItemTypeEnum.Light)
             {
                 saveGame.MsgPrint("You are not wielding a light.");
             }

@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class SpikeItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Spike;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
         public override Colour Colour => Colour.Grey;
         public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
 

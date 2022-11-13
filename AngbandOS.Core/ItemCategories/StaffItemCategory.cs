@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class StaffItemCategory : ItemClass
     {
         public override bool HasFlavor => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Staff;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.StaffFlavours[item.ItemSubCategory].Name} ";

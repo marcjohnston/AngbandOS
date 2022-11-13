@@ -12,7 +12,7 @@ namespace AngbandOS.Enumerations
     /// <summary>
     /// The category of an item
     /// </summary>
-    internal enum ItemCategory
+    internal enum ItemTypeEnum
     {
         None = 0,
         Skeleton = 1,

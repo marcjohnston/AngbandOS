@@ -62,7 +62,7 @@ namespace AngbandOS.StoreCommands
                         return;
                     }
                     // If it was something we might want to destroy again, ask
-                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemCategory.Chest)
+                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemTypeEnum.Chest)
                     {
                         if (item.IsKnown())
                         {
@@ -105,14 +105,14 @@ namespace AngbandOS.StoreCommands
                 {
                     if (saveGame.Player.Realm1 == Realm.Life)
                     {
-                        if (item.Category == ItemCategory.DeathBook)
+                        if (item.Category == ItemTypeEnum.DeathBook)
                         {
                             gainExpr = true;
                         }
                     }
                     else
                     {
-                        if (item.Category == ItemCategory.LifeBook)
+                        if (item.Category == ItemTypeEnum.LifeBook)
                         {
                             gainExpr = true;
                         }

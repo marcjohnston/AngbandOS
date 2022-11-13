@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class ShieldItemCategory : ArmourItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Shield;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBrown;

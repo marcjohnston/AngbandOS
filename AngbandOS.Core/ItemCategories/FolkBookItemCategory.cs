@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class FolkBookItemCategory : BookItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.FolkBook;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = item.SaveGame.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Folk Magic" : $"Folk {Pluralize("Spellbook", item.Count)}";

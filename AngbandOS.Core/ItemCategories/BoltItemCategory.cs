@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class BoltItemCategory : AmmunitionItemCategory
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Bolt;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
         public override Colour Colour => Colour.BrightBrown;
 
         /// <summary>

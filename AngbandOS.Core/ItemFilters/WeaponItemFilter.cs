@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemFilters
     /// </summary>
     internal class WeaponItemFilter : ItemCategoryItemFilter
     {
-        public WeaponItemFilter() : base(ItemCategory.Sword, ItemCategory.Hafted, ItemCategory.Polearm, ItemCategory.Digging, ItemCategory.Bow, ItemCategory.Bolt, ItemCategory.Arrow, ItemCategory.Shot)
+        public WeaponItemFilter() : base(ItemTypeEnum.Sword, ItemTypeEnum.Hafted, ItemTypeEnum.Polearm, ItemTypeEnum.Digging, ItemTypeEnum.Bow, ItemTypeEnum.Bolt, ItemTypeEnum.Arrow, ItemTypeEnum.Shot)
         {
         }
     }

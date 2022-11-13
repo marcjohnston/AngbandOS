@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemFilters
     {
         public override bool ItemMatches(Item item)
         {
-            return item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Torch;
+            return item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch;
         }
     }
 }

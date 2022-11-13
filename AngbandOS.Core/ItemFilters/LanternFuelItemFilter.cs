@@ -9,11 +9,11 @@ namespace AngbandOS.Core.ItemFilters
     {
         public override bool ItemMatches(Item item)
         {
-            if (item.Category == ItemCategory.Flask)
+            if (item.Category == ItemTypeEnum.Flask)
             {
                 return true;
             }
-            if (item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Lantern)
+            if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
             {
                 return true;
             }

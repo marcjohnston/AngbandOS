@@ -15,7 +15,7 @@ namespace AngbandOS.ArtifactBiases
                     return true;
                 }
             }
-            if (item.Category >= ItemCategory.Cloak && item.Category <= ItemCategory.HardArmor && !item.RandartItemCharacteristics.ShElec)
+            if (item.Category >= ItemTypeEnum.Cloak && item.Category <= ItemTypeEnum.HardArmor && !item.RandartItemCharacteristics.ShElec)
             {
                 item.RandartItemCharacteristics.ShElec = true;
                 if (Program.Rng.DieRoll(2) == 1)
@@ -36,7 +36,7 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplySlaying(Item item)
         {
-            if (item.Category != ItemCategory.Bow)
+            if (item.Category != ItemTypeEnum.Bow)
             {
                 if (!item.RandartItemCharacteristics.BrandElec)
                 {

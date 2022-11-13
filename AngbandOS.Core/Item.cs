@@ -147,7 +147,7 @@ namespace AngbandOS
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
 
-        public ItemCategory Category => BaseItemCategory == null ? ItemCategory.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+        public ItemTypeEnum Category => BaseItemCategory == null ? ItemTypeEnum.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)
         {

@@ -20,7 +20,7 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplySlaying(Item item)
         {
-            if ((item.Category == ItemCategory.Sword || item.Category == ItemCategory.Polearm) && !item.RandartItemCharacteristics.Blessed)
+            if ((item.Category == ItemTypeEnum.Sword || item.Category == ItemTypeEnum.Polearm) && !item.RandartItemCharacteristics.Blessed)
             {
                 item.RandartItemCharacteristics.Blessed = true;
             }

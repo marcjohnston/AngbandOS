@@ -27,7 +27,7 @@ namespace AngbandOS.ArtifactBiases
 
         public override bool ApplySlaying(Item item)
         {
-            if (item.Category != ItemCategory.Bow)
+            if (item.Category != ItemTypeEnum.Bow)
             {
                 if (!item.RandartItemCharacteristics.BrandAcid)
                 {

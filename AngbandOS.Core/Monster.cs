@@ -954,7 +954,7 @@ namespace AngbandOS
                         Item item = saveGame.Level.Items[thisItemIndex];
                         nextItemIndex = item.NextInStack;
                         // We ignore gold
-                        if (item.Category == ItemCategory.Gold)
+                        if (item.Category == ItemTypeEnum.Gold)
                         {
                             continue;
                         }

@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class HaftedItemCategory : MeleeWeaponItemCategory
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Hafted;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Hafted;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

@@ -27,7 +27,7 @@ namespace AngbandOS.Commands
             // Get the item if we weren't passed it
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemCategory.Rod)))
+                if (!saveGame.GetItem(out itemIndex, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
                 {
                     if (itemIndex == -2)
                     {
@@ -38,7 +38,7 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a rod
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Rod)))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
             {
                 saveGame.MsgPrint("That is not a rod!");
                 return;

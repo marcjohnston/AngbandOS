@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class DiggingItemCategory : WeaponItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Digging;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
         public override Colour Colour => Colour.Grey;
 
         public override void ApplyMagic(Item item, int level, int power)

@@ -668,7 +668,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.Category == ItemCategory.Rod)
+                if (oPtr.Category == ItemTypeEnum.Rod)
                 {
                     if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
                     {
@@ -755,7 +755,7 @@ namespace AngbandOS
                 {
                     break;
                 }
-                if (oPtr.Category == ItemCategory.Rod)
+                if (oPtr.Category == ItemTypeEnum.Rod)
                 {
                     if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
                     {
@@ -1127,7 +1127,7 @@ namespace AngbandOS
                     continue;
                 }
 
-                if (qPtr.Category == ItemCategory.Light)
+                if (qPtr.Category == ItemTypeEnum.Light)
                 {
                     if (qPtr.ItemSubCategory == LightType.Torch)
                     {
@@ -1140,7 +1140,7 @@ namespace AngbandOS
                 }
                 qPtr.BecomeKnown();
                 qPtr.IdentStoreb = true;
-                if (qPtr.Category == ItemCategory.Chest)
+                if (qPtr.Category == ItemTypeEnum.Chest)
                 {
                     continue;
                 }
@@ -1189,15 +1189,15 @@ namespace AngbandOS
             }
             item += _storeTop;
             Item oPtr = _stock[item];
-            if (oPtr.Category == ItemCategory.LifeBook || oPtr.Category == ItemCategory.SorceryBook ||
-                oPtr.Category == ItemCategory.NatureBook || oPtr.Category == ItemCategory.ChaosBook ||
-                oPtr.Category == ItemCategory.DeathBook ||
-                oPtr.Category == ItemCategory.CorporealBook ||
-                oPtr.Category == ItemCategory.TarotBook || oPtr.Category == ItemCategory.FolkBook)
+            if (oPtr.Category == ItemTypeEnum.LifeBook || oPtr.Category == ItemTypeEnum.SorceryBook ||
+                oPtr.Category == ItemTypeEnum.NatureBook || oPtr.Category == ItemTypeEnum.ChaosBook ||
+                oPtr.Category == ItemTypeEnum.DeathBook ||
+                oPtr.Category == ItemTypeEnum.CorporealBook ||
+                oPtr.Category == ItemTypeEnum.TarotBook || oPtr.Category == ItemTypeEnum.FolkBook)
             {
                 switch (oPtr.Category)
                 {
-                    case ItemCategory.LifeBook:
+                    case ItemTypeEnum.LifeBook:
                         if (SaveGame.Player.Realm1 == Realm.Life || SaveGame.Player.Realm2 == Realm.Life)
                         {
                             DoStoreBrowse(oPtr);
@@ -1205,7 +1205,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.SorceryBook:
+                    case ItemTypeEnum.SorceryBook:
                         if (SaveGame.Player.Realm1 == Realm.Sorcery || SaveGame.Player.Realm2 == Realm.Sorcery)
                         {
                             DoStoreBrowse(oPtr);
@@ -1213,7 +1213,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.NatureBook:
+                    case ItemTypeEnum.NatureBook:
                         if (SaveGame.Player.Realm1 == Realm.Nature || SaveGame.Player.Realm2 == Realm.Nature)
                         {
                             DoStoreBrowse(oPtr);
@@ -1221,7 +1221,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.ChaosBook:
+                    case ItemTypeEnum.ChaosBook:
                         if (SaveGame.Player.Realm1 == Realm.Chaos || SaveGame.Player.Realm2 == Realm.Chaos)
                         {
                             DoStoreBrowse(oPtr);
@@ -1229,7 +1229,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.DeathBook:
+                    case ItemTypeEnum.DeathBook:
                         if (SaveGame.Player.Realm1 == Realm.Death || SaveGame.Player.Realm2 == Realm.Death)
                         {
                             DoStoreBrowse(oPtr);
@@ -1237,7 +1237,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.CorporealBook:
+                    case ItemTypeEnum.CorporealBook:
                         if (SaveGame.Player.Realm1 == Realm.Corporeal || SaveGame.Player.Realm2 == Realm.Corporeal)
                         {
                             DoStoreBrowse(oPtr);
@@ -1245,7 +1245,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.TarotBook:
+                    case ItemTypeEnum.TarotBook:
                         if (SaveGame.Player.Realm1 == Realm.Tarot || SaveGame.Player.Realm2 == Realm.Tarot)
                         {
                             DoStoreBrowse(oPtr);
@@ -1253,7 +1253,7 @@ namespace AngbandOS
                         }
                         break;
 
-                    case ItemCategory.FolkBook:
+                    case ItemTypeEnum.FolkBook:
                         if (SaveGame.Player.Realm1 == Realm.Folk || SaveGame.Player.Realm2 == Realm.Folk)
                         {
                             DoStoreBrowse(oPtr);
@@ -1381,7 +1381,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (oPtr.Category == ItemCategory.Chest)
+            if (oPtr.Category == ItemTypeEnum.Chest)
             {
                 return false;
             }

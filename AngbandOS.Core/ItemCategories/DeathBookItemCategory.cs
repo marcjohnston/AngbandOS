@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class DeathBookItemCategory : BookItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.DeathBook;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = item.SaveGame.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Death Magic" : $"Death {Pluralize("Spellbook", item.Count)}";

@@ -28,7 +28,7 @@ namespace AngbandOS.Core.AttackEffects
                 {
                     continue;
                 }
-                if ((item.Category == ItemCategory.Staff || item.Category == ItemCategory.Wand) && item.TypeSpecificValue != 0)
+                if ((item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
                 {
                     saveGame.MsgPrint("Energy drains from your pack!");
                     obvious = true;

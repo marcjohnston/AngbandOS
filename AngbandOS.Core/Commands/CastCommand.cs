@@ -184,12 +184,12 @@ namespace AngbandOS.Commands
             if (Program.Rng.RandomLessThan(100) < chance)
             {
                 saveGame.MsgPrint($"You failed to get the {prayer} off!");
-                if (oPtr.Category == ItemCategory.ChaosBook && Program.Rng.DieRoll(100) < spell)
+                if (oPtr.Category == ItemTypeEnum.ChaosBook && Program.Rng.DieRoll(100) < spell)
                 {
                     saveGame.MsgPrint("You produce a chaotic effect!");
                     WildMagic(spell, saveGame);
                 }
-                else if (oPtr.Category == ItemCategory.DeathBook && Program.Rng.DieRoll(100) < spell)
+                else if (oPtr.Category == ItemTypeEnum.DeathBook && Program.Rng.DieRoll(100) < spell)
                 {
                     if (sval == 3 && Program.Rng.DieRoll(2) == 1)
                     {

@@ -101,9 +101,9 @@ namespace AngbandOS.ItemCategories
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (power != 0 ||
-                (item.Category == ItemCategory.Helm && item.ItemSubCategory == HelmType.SvDragonHelm) ||
-                (item.Category == ItemCategory.Shield && item.ItemSubCategory == ShieldType.SvDragonShield) ||
-                (item.Category == ItemCategory.Cloak && item.ItemSubCategory == CloakType.SvElvenCloak))
+                (item.Category == ItemTypeEnum.Helm && item.ItemSubCategory == HelmType.SvDragonHelm) ||
+                (item.Category == ItemTypeEnum.Shield && item.ItemSubCategory == ShieldType.SvDragonShield) ||
+                (item.Category == ItemTypeEnum.Cloak && item.ItemSubCategory == CloakType.SvElvenCloak))
             {
                 int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
                 int toac2 = GetBonusValue(10, level);
@@ -130,7 +130,7 @@ namespace AngbandOS.ItemCategories
                 }
                 switch (item.Category)
                 {
-                    case ItemCategory.DragArmor:
+                    case ItemTypeEnum.DragArmor:
                         {
                             if (item.SaveGame.Level != null)
                             {
@@ -138,12 +138,12 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.HardArmor:
-                    case ItemCategory.SoftArmor:
+                    case ItemTypeEnum.HardArmor:
+                    case ItemTypeEnum.SoftArmor:
                         {
                             if (power > 1)
                             {
-                                if (item.Category == ItemCategory.SoftArmor &&
+                                if (item.Category == ItemTypeEnum.SoftArmor &&
                                     item.ItemSubCategory == SoftArmourType.SvRobe && Program.Rng.RandomLessThan(100) < 10)
                                 {
                                     item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfPermanence;
@@ -209,7 +209,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Shield:
+                    case ItemTypeEnum.Shield:
                         {
                             if (item.ItemSubCategory == ShieldType.SvDragonShield)
                             {
@@ -286,7 +286,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Gloves:
+                    case ItemTypeEnum.Gloves:
                         {
                             if (power > 1)
                             {
@@ -346,7 +346,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Boots:
+                    case ItemTypeEnum.Boots:
                         {
                             if (power > 1)
                             {
@@ -418,7 +418,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Crown:
+                    case ItemTypeEnum.Crown:
                         {
                             if (power > 1)
                             {
@@ -506,7 +506,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Helm:
+                    case ItemTypeEnum.Helm:
                         {
                             if (item.ItemSubCategory == HelmType.SvDragonHelm)
                             {
@@ -606,7 +606,7 @@ namespace AngbandOS.ItemCategories
                             }
                             break;
                         }
-                    case ItemCategory.Cloak:
+                    case ItemTypeEnum.Cloak:
                         {
                             if (item.ItemSubCategory == CloakType.SvElvenCloak)
                             {

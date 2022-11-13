@@ -10,7 +10,7 @@ namespace AngbandOS.ItemCategories
     {
         public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
-        public override ItemCategory CategoryEnum => ItemCategory.Light;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 

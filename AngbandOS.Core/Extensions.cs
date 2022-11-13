@@ -279,36 +279,36 @@ namespace AngbandOS
         /// </summary>
         /// <param name="realm"> The realm of magic </param>
         /// <returns> The spell book item category </returns>
-        public static ItemCategory ToSpellBookItemCategory(this Realm realm)
+        public static ItemTypeEnum ToSpellBookItemCategory(this Realm realm)
         {
             switch (realm)
             {
                 case Realm.Life:
-                    return ItemCategory.LifeBook;
+                    return ItemTypeEnum.LifeBook;
 
                 case Realm.Sorcery:
-                    return ItemCategory.SorceryBook;
+                    return ItemTypeEnum.SorceryBook;
 
                 case Realm.Nature:
-                    return ItemCategory.NatureBook;
+                    return ItemTypeEnum.NatureBook;
 
                 case Realm.Chaos:
-                    return ItemCategory.ChaosBook;
+                    return ItemTypeEnum.ChaosBook;
 
                 case Realm.Death:
-                    return ItemCategory.DeathBook;
+                    return ItemTypeEnum.DeathBook;
 
                 case Realm.Tarot:
-                    return ItemCategory.TarotBook;
+                    return ItemTypeEnum.TarotBook;
 
                 case Realm.Folk:
-                    return ItemCategory.FolkBook;
+                    return ItemTypeEnum.FolkBook;
 
                 case Realm.Corporeal:
-                    return ItemCategory.CorporealBook;
+                    return ItemTypeEnum.CorporealBook;
 
                 default:
-                    return ItemCategory.None;
+                    return ItemTypeEnum.None;
             }
         }
 

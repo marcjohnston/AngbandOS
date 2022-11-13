@@ -240,7 +240,7 @@ namespace AngbandOS
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
                 ItemClass kPtr = ItemTypes[kIdx];
-                if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemCategory.Chest)
+                if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
                 {
                     continue;
                 }
@@ -1491,42 +1491,42 @@ namespace AngbandOS
                     int indexx = kPtr.SubCategory ?? 0;
                     switch (kPtr.CategoryEnum)
                     {
-                        case ItemCategory.Food:
+                        case ItemTypeEnum.Food:
                             kPtr.FlavorCharacter = MushroomFlavours[indexx].Character;
                             kPtr.FlavorColour = MushroomFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Potion:
+                        case ItemTypeEnum.Potion:
                             kPtr.FlavorCharacter = PotionFlavours[indexx].Character;
                             kPtr.FlavorColour = PotionFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Scroll:
+                        case ItemTypeEnum.Scroll:
                             kPtr.FlavorCharacter = ScrollFlavours[indexx].Character;
                             kPtr.FlavorColour = ScrollFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Amulet:
+                        case ItemTypeEnum.Amulet:
                             kPtr.FlavorCharacter = AmuletFlavours[indexx].Character;
                             kPtr.FlavorColour = AmuletFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Ring:
+                        case ItemTypeEnum.Ring:
                             kPtr.FlavorCharacter = RingFlavours[indexx].Character;
                             kPtr.FlavorColour = RingFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Staff:
+                        case ItemTypeEnum.Staff:
                             kPtr.FlavorCharacter = StaffFlavours[indexx].Character;
                             kPtr.FlavorColour = StaffFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Wand:
+                        case ItemTypeEnum.Wand:
                             kPtr.FlavorCharacter = WandFlavours[indexx].Character;
                             kPtr.FlavorColour = WandFlavours[indexx].Colour;
                             break;
 
-                        case ItemCategory.Rod:
+                        case ItemTypeEnum.Rod:
                             kPtr.FlavorCharacter = RodFlavours[indexx].Character;
                             kPtr.FlavorColour = RodFlavours[indexx].Colour;
                             break;
@@ -2812,7 +2812,7 @@ namespace AngbandOS
                 Player.SetTimedBleeding(Player.TimedBleeding - adjust);
             }
             oPtr = Player.Inventory[InventorySlot.Lightsource];
-            if (oPtr.Category == ItemCategory.Light)
+            if (oPtr.Category == ItemTypeEnum.Light)
             {
                 if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
                 {
@@ -2900,7 +2900,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.Category == ItemCategory.Rod && oPtr.TypeSpecificValue != 0)
+                if (oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
                 {
                     oPtr.TypeSpecificValue--;
                     if (oPtr.TypeSpecificValue == 0)
@@ -2921,7 +2921,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.Category == ItemCategory.Rod && oPtr.TypeSpecificValue != 0)
+                if (oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
                 {
                     oPtr.TypeSpecificValue--;
                 }
@@ -4164,7 +4164,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.Category == ItemCategory.Gold)
+                if (oPtr.Category == ItemTypeEnum.Gold)
                 {
                     oPtr.Marked = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4202,13 +4202,13 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                ItemCategory tv = oPtr.Category;
+                ItemTypeEnum tv = oPtr.Category;
                 if (oPtr.IsFixedArtifact() || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
-                    tv == ItemCategory.Amulet || tv == ItemCategory.Ring || tv == ItemCategory.Staff ||
-                    tv == ItemCategory.Wand || tv == ItemCategory.Rod || tv == ItemCategory.Scroll ||
-                    tv == ItemCategory.Potion || tv == ItemCategory.LifeBook || tv == ItemCategory.SorceryBook ||
-                    tv == ItemCategory.NatureBook || tv == ItemCategory.ChaosBook || tv == ItemCategory.DeathBook ||
-                    tv == ItemCategory.CorporealBook || tv == ItemCategory.TarotBook || tv == ItemCategory.FolkBook ||
+                    tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
+                    tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
+                    tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
+                    tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
+                    tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
                     oPtr.BonusArmourClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
                 {
                     oPtr.Marked = true;
@@ -4242,7 +4242,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (oPtr.Category != ItemCategory.Gold)
+                if (oPtr.Category != ItemTypeEnum.Gold)
                 {
                     oPtr.Marked = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4707,7 +4707,7 @@ namespace AngbandOS
             bool a = oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false;
             oPtr.RefreshFlagBasedProperties();
             int prob = oPtr.Count * 100;
-            if (oPtr.Category == ItemCategory.Bolt || oPtr.Category == ItemCategory.Arrow || oPtr.Category == ItemCategory.Shot)
+            if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
             {
                 prob /= 20;
             }
@@ -5262,7 +5262,7 @@ namespace AngbandOS
             }
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             int lev = oPtr.BaseItemCategory.Level;
-            if (oPtr.Category == ItemCategory.Rod)
+            if (oPtr.Category == ItemTypeEnum.Rod)
             {
                 i = (100 - lev + num) / 5;
                 if (i < 1)
@@ -6897,7 +6897,7 @@ namespace AngbandOS
             {
                 // Find a set of non-artifact bolts in our inventory
                 Item item = Player.Inventory[i];
-                if (item.Category != ItemCategory.Bolt)
+                if (item.Category != ItemTypeEnum.Bolt)
                 {
                     continue;
                 }
@@ -7293,11 +7293,11 @@ namespace AngbandOS
             int maxPhlogiston;
             Item item = Player.Inventory[InventorySlot.Lightsource];
             // Maximum phlogiston is the capacity of the light source
-            if (item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Lantern)
+            if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
             {
                 maxPhlogiston = Constants.FuelLamp;
             }
-            else if (item.Category == ItemCategory.Light && item.ItemSubCategory == LightType.Torch)
+            else if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch)
             {
                 maxPhlogiston = Constants.FuelTorch;
             }
@@ -7543,23 +7543,23 @@ namespace AngbandOS
             // Cost to channel is based on how much the item is worth and what type
             switch (item.Category)
             {
-                case ItemCategory.Wand:
+                case ItemTypeEnum.Wand:
                     cost = price / 150;
                     break;
 
-                case ItemCategory.Scroll:
+                case ItemTypeEnum.Scroll:
                     cost = price / 10;
                     break;
 
-                case ItemCategory.Potion:
+                case ItemTypeEnum.Potion:
                     cost = price / 20;
                     break;
 
-                case ItemCategory.Rod:
+                case ItemTypeEnum.Rod:
                     cost = price / 250;
                     break;
 
-                case ItemCategory.Staff:
+                case ItemTypeEnum.Staff:
                     cost = price / 100;
                     break;
 
@@ -7682,7 +7682,7 @@ namespace AngbandOS
                     continue;
                 }
                 // If the item is a spike, return it
-                if (item.Category == ItemCategory.Spike)
+                if (item.Category == ItemTypeEnum.Spike)
                 {
                     inventoryIndex = i;
                     return true;
@@ -7715,9 +7715,9 @@ namespace AngbandOS
         /// <returns> True if the item is a high level book </returns>
         public bool ItemFilterHighLevelBook(Item item)
         {
-            if (item.Category == ItemCategory.LifeBook || item.Category == ItemCategory.SorceryBook ||
-                item.Category == ItemCategory.NatureBook || item.Category == ItemCategory.ChaosBook ||
-                item.Category == ItemCategory.DeathBook || item.Category == ItemCategory.TarotBook)
+            if (item.Category == ItemTypeEnum.LifeBook || item.Category == ItemTypeEnum.SorceryBook ||
+                item.Category == ItemTypeEnum.NatureBook || item.Category == ItemTypeEnum.ChaosBook ||
+                item.Category == ItemTypeEnum.DeathBook || item.Category == ItemTypeEnum.TarotBook)
             {
                 return item.ItemSubCategory > 1;
             }
@@ -8120,7 +8120,7 @@ namespace AngbandOS
                 nextItemIndex = item.NextInStack;
                 Disturb(false);
                 // We always pick up gold
-                if (item.Category == ItemCategory.Gold)
+                if (item.Category == ItemTypeEnum.Gold)
                 {
                     MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                     Player.Gold += item.TypeSpecificValue;
@@ -8791,7 +8791,7 @@ namespace AngbandOS
                             Item item = Level.Items[itemIndex];
                             nextItemIndex = item.NextInStack;
                             // If one of them is a chest, determine if it is trapped
-                            if (item.Category != ItemCategory.Chest)
+                            if (item.Category != ItemTypeEnum.Chest)
                             {
                                 continue;
                             }
@@ -12738,11 +12738,11 @@ namespace AngbandOS
                 itemClass = _player.Race.OutfitItem(itemClass);
                 item = new Item(saveGame);
                 item.AssignItemType(itemClass);
-                if (itemClass.CategoryEnum == ItemCategory.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
+                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
                 }
-                if (itemClass.CategoryEnum == ItemCategory.Wand)
+                if (itemClass.CategoryEnum == ItemTypeEnum.Wand)
                 {
                     item.TypeSpecificValue = 1;
                 }

@@ -26,7 +26,7 @@ namespace AngbandOS.Commands
             // Get an item if we didn't already have one
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemCategory.Potion)))
+                if (!saveGame.GetItem(out itemIndex, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
                 {
                     if (itemIndex == -2)
                     {
@@ -37,7 +37,7 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is a potion
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Potion)))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
             {
                 saveGame.MsgPrint("That is not a potion!");
                 return;

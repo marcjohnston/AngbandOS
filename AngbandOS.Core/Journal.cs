@@ -1139,7 +1139,7 @@ namespace AngbandOS
             }
         }
 
-        private void WorthlessItemTypeSelection(ItemCategory tval)
+        private void WorthlessItemTypeSelection(ItemTypeEnum tval)
         {
             _menuLength = 0;
             for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
@@ -1152,7 +1152,7 @@ namespace AngbandOS
                         continue;
                     }
                     _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
-                    if (kPtr.HasQuality || kPtr.CategoryEnum == ItemCategory.Chest)
+                    if (kPtr.HasQuality || kPtr.CategoryEnum == ItemTypeEnum.Chest)
                     {
                         _menuColours[_menuLength] = Colour.Blue;
                     }
@@ -1212,7 +1212,7 @@ namespace AngbandOS
                                 }
                             }
                         }
-                        else if (kPtr.CategoryEnum == ItemCategory.Chest)
+                        else if (kPtr.CategoryEnum == ItemTypeEnum.Chest)
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
@@ -1226,7 +1226,7 @@ namespace AngbandOS
                                         continue;
                                     }
                                     _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
-                                    if (kPtr.CategoryEnum == ItemCategory.Chest)
+                                    if (kPtr.CategoryEnum == ItemTypeEnum.Chest)
                                     {
                                         _menuColours[_menuLength] = Colour.Blue;
                                     }

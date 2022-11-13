@@ -863,7 +863,7 @@ namespace AngbandOS
                 // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
                 BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)oPtr.BaseItemCategory;
                 SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
-                if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemCategory.Arrow)
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
                 {
                     if (SaveGame.Player.Level >= 20)
                     {
@@ -874,8 +874,8 @@ namespace AngbandOS
                         SaveGame.Player.MissileAttacksPerRound++;
                     }
                 }
-                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemCategory.Bolt &&
-                    SaveGame.Player.AmmunitionItemCategory >= ItemCategory.Shot)
+                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
+                    SaveGame.Player.AmmunitionItemCategory >= ItemTypeEnum.Shot)
                 {
                     if (SaveGame.Player.Level >= 25)
                     {
@@ -1047,8 +1047,8 @@ namespace AngbandOS
                 SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 5;
             }
             if ((SaveGame.Player.ProfessionIndex == CharacterClass.Priest || SaveGame.Player.ProfessionIndex == CharacterClass.Druid) &&
-                !SaveGame.Player.HasBlessedBlade && (oPtr.Category == ItemCategory.Sword ||
-                                        oPtr.Category == ItemCategory.Polearm))
+                !SaveGame.Player.HasBlessedBlade && (oPtr.Category == ItemTypeEnum.Sword ||
+                                        oPtr.Category == ItemTypeEnum.Polearm))
             {
                 SaveGame.Player.AttackBonus -= 2;
                 SaveGame.Player.DamageBonus -= 2;
@@ -1058,7 +1058,7 @@ namespace AngbandOS
             }
             if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist &&
                 SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
-                (oPtr.Category != ItemCategory.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
+                (oPtr.Category != ItemTypeEnum.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
             {
                 oPtr.RefreshFlagBasedProperties();
                 if (!oPtr.Characteristics.Chaotic)
@@ -1482,7 +1482,7 @@ namespace AngbandOS
             {
                 Item oPtr = SaveGame.Player.Inventory[i];
                 if (i == InventorySlot.Lightsource && oPtr.BaseItemCategory != null &&
-                    oPtr.Category == ItemCategory.Light)
+                    oPtr.Category == ItemTypeEnum.Light)
                 {
                     if (oPtr.ItemSubCategory == LightType.Torch && oPtr.TypeSpecificValue > 0)
                     {

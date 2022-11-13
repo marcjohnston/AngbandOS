@@ -696,7 +696,7 @@ namespace AngbandOS.Commands
             {
                 return 0;
             }
-            ItemCategory tval = TvalDescriptionPair.Tvals[num].Tval;
+            ItemTypeEnum tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
             saveGame.Clear();
             const int maxLetters = 26;

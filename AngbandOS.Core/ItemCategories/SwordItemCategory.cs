@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class SwordItemCategory : MeleeWeaponItemCategory
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Sword;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightWhite;

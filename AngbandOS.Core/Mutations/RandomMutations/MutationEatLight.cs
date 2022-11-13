@@ -34,7 +34,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 saveGame.Player.RestoreHealth(10);
             }
             Item oPtr = saveGame.Player.Inventory[InventorySlot.Lightsource];
-            if (oPtr.Category == ItemCategory.Light)
+            if (oPtr.Category == ItemTypeEnum.Light)
             {
                 if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) &&
                     oPtr.TypeSpecificValue > 0)

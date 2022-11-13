@@ -15,9 +15,9 @@ namespace AngbandOS.ItemCategories
         public virtual int MissileDamageMultiplier => 1;
         public override int? SubCategory => null; // The subcategory for all bows have been resolved.
 
-        public abstract ItemCategory AmmunitionItemCategory { get; }
+        public abstract ItemTypeEnum AmmunitionItemCategory { get; }
 
-        public override ItemCategory CategoryEnum => ItemCategory.Bow;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         public override string GetDetailedDescription(Item item)

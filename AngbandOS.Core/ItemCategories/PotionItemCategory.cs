@@ -31,7 +31,7 @@ namespace AngbandOS.ItemCategories
             return false;
         }
 
-        public override ItemCategory CategoryEnum => ItemCategory.Potion;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Potion;
         public override bool CanAbsorb(Item item, Item other)
         {
             return true;

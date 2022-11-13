@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class SorceryBookItemCategory : BookItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.SorceryBook;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = item.SaveGame.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Sorcery" : $"Sorcery {Pluralize("Spellbook", item.Count)}";

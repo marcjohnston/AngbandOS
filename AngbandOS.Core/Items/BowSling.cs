@@ -19,6 +19,6 @@ namespace AngbandOS.ItemCategories
         public override bool ShowMods => true;
         public override int Weight => 5;
         public override int MissileDamageMultiplier => 2;
-        public override ItemCategory AmmunitionItemCategory => ItemCategory.Shot;
+        public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Shot;
     }
 }

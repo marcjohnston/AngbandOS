@@ -25,7 +25,7 @@ namespace AngbandOS.Commands
             // Get a food item from the inventory if one wasn't already specified
             if (itemIndex == -999)
             {
-                if (!saveGame.GetItem(out itemIndex, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemCategory.Food)))
+                if (!saveGame.GetItem(out itemIndex, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
                 {
                     if (itemIndex == -2)
                     {
@@ -36,7 +36,7 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is edible
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Food)))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
             {
                 saveGame.MsgPrint("You can't eat that!");
                 return;

@@ -26,7 +26,7 @@ namespace AngbandOS.Commands
             if (itemIndex == -999)
             {
                 // Prompt for an item, showing only wands
-                if (!saveGame.GetItem(out itemIndex, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemCategory.Wand)))
+                if (!saveGame.GetItem(out itemIndex, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
                 {
                     if (itemIndex == -2)
                     {
@@ -37,7 +37,7 @@ namespace AngbandOS.Commands
             }
             // Get the item and check if it is really a wand
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemCategory.Wand)))
+            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
             {
                 saveGame.MsgPrint("That is not a wand!");
                 return;

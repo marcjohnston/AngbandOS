@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
    internal abstract class ChestItemCategory : ItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Chest;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

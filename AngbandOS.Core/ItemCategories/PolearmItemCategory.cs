@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class PolearmItemCategory : MeleeWeaponItemCategory
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Polearm;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Polearm;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

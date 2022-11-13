@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class GlovesItemCategory : ArmourItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Gloves;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
 

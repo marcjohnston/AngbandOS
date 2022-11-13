@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     internal abstract class SkeletonItemCategory : ItemClass
     {
         public override bool EasyKnow => true;
-        public override ItemCategory CategoryEnum => ItemCategory.Skeleton;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Beige;

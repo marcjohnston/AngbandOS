@@ -7,7 +7,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class ShotItemCategory : AmmunitionItemCategory
     {
-        public override ItemCategory CategoryEnum => ItemCategory.Shot;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
         public override Colour Colour => Colour.BrightBrown;
         public override int GetAdditionalMassProduceCount(Item item)
         {

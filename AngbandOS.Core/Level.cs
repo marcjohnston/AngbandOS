@@ -156,7 +156,7 @@ namespace AngbandOS
             {
                 Item oPtr = Items[objectItemIndex];
                 nextOIdx = oPtr.NextInStack;
-                if (oPtr.Category == ItemCategory.Chest)
+                if (oPtr.Category == ItemTypeEnum.Chest)
                 {
                     return objectItemIndex;
                 }
@@ -1396,7 +1396,7 @@ namespace AngbandOS
         public void ReportChargeUsageFromFloor(int item)
         {
             Item oPtr = Items[item];
-            if (oPtr.Category != ItemCategory.Staff && oPtr.Category != ItemCategory.Wand)
+            if (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand)
             {
                 return;
             }

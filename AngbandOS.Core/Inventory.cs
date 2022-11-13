@@ -182,7 +182,7 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.Category == ItemCategory.Rod)
+                    if (oPtr.Category == ItemTypeEnum.Rod)
                     {
                         if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
                         {
@@ -276,7 +276,7 @@ namespace AngbandOS
                             : "Y";
                         string w = amt > 1 ? "were" : "was";
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                        if (oPtr.BaseItemCategory.CategoryEnum == ItemCategory.Potion)
+                        if (oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
                         {
                             PotionItemCategory potion = (PotionItemCategory)oPtr.BaseItemCategory;
                             potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
@@ -418,7 +418,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (item.Category == ItemCategory.Gold)
+            if (item.Category == ItemTypeEnum.Gold)
             {
                 return false;
             }
@@ -531,7 +531,7 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.Category == ItemCategory.Rod)
+                    if (oPtr.Category == ItemTypeEnum.Rod)
                     {
                         if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
                         {
@@ -572,7 +572,7 @@ namespace AngbandOS
         public void ReportChargeUsageFromInventory(int item)
         {
             Item oPtr = _items[item];
-            if (oPtr.Category != ItemCategory.Staff && oPtr.Category != ItemCategory.Wand)
+            if (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand)
             {
                 return;
             }
@@ -732,49 +732,49 @@ namespace AngbandOS
         {
             switch (oPtr.Category)
             {
-                case ItemCategory.Digging:
+                case ItemTypeEnum.Digging:
                     return InventorySlot.Digger;
 
-                case ItemCategory.Hafted:
-                case ItemCategory.Polearm:
-                case ItemCategory.Sword:
+                case ItemTypeEnum.Hafted:
+                case ItemTypeEnum.Polearm:
+                case ItemTypeEnum.Sword:
                     return InventorySlot.MeleeWeapon;
 
-                case ItemCategory.Bow:
+                case ItemTypeEnum.Bow:
                     return InventorySlot.RangedWeapon;
 
-                case ItemCategory.Ring:
+                case ItemTypeEnum.Ring:
                     if (_player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
                     {
                         return InventorySlot.RightHand;
                     }
                     return InventorySlot.LeftHand;
 
-                case ItemCategory.Amulet:
+                case ItemTypeEnum.Amulet:
                     return InventorySlot.Neck;
 
-                case ItemCategory.Light:
+                case ItemTypeEnum.Light:
                     return InventorySlot.Lightsource;
 
-                case ItemCategory.DragArmor:
-                case ItemCategory.HardArmor:
-                case ItemCategory.SoftArmor:
+                case ItemTypeEnum.DragArmor:
+                case ItemTypeEnum.HardArmor:
+                case ItemTypeEnum.SoftArmor:
                     return InventorySlot.Body;
 
-                case ItemCategory.Cloak:
+                case ItemTypeEnum.Cloak:
                     return InventorySlot.Cloak;
 
-                case ItemCategory.Shield:
+                case ItemTypeEnum.Shield:
                     return InventorySlot.Arm;
 
-                case ItemCategory.Crown:
-                case ItemCategory.Helm:
+                case ItemTypeEnum.Crown:
+                case ItemTypeEnum.Helm:
                     return InventorySlot.Head;
 
-                case ItemCategory.Gloves:
+                case ItemTypeEnum.Gloves:
                     return InventorySlot.Hands;
 
-                case ItemCategory.Boots:
+                case ItemTypeEnum.Boots:
                     return InventorySlot.Feet;
             }
             return -1;

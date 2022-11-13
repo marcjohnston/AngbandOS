@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemFilters
     /// </summary>
     internal class ArmourItemFilter : ItemCategoryItemFilter
     {
-        public ArmourItemFilter() : base(ItemCategory.DragArmor, ItemCategory.HardArmor, ItemCategory.SoftArmor, ItemCategory.Shield, ItemCategory.Cloak, ItemCategory.Crown, ItemCategory.Helm, ItemCategory.Boots, ItemCategory.Gloves)
+        public ArmourItemFilter() : base(ItemTypeEnum.DragArmor, ItemTypeEnum.HardArmor, ItemTypeEnum.SoftArmor, ItemTypeEnum.Shield, ItemTypeEnum.Cloak, ItemTypeEnum.Crown, ItemTypeEnum.Helm, ItemTypeEnum.Boots, ItemTypeEnum.Gloves)
         {
         }
     }

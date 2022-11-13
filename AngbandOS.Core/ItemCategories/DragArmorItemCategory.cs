@@ -8,7 +8,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class DragArmorItemCategory : ArmourItemClass
     {
-        public override ItemCategory CategoryEnum => ItemCategory.DragArmor;
+        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Grey;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemFilters
     /// </summary>
     internal class WearableItemFilter : ItemCategoryItemFilter
     {
-        public WearableItemFilter() : base(ItemCategory.DragArmor, ItemCategory.HardArmor, ItemCategory.SoftArmor, ItemCategory.Shield, ItemCategory.Cloak, ItemCategory.Crown, ItemCategory.Helm, ItemCategory.Boots, ItemCategory.Gloves, ItemCategory.Sword, ItemCategory.Hafted, ItemCategory.Polearm, ItemCategory.Digging, ItemCategory.Bow, ItemCategory.Ring, ItemCategory.Amulet, ItemCategory.Light)
+        public WearableItemFilter() : base(ItemTypeEnum.DragArmor, ItemTypeEnum.HardArmor, ItemTypeEnum.SoftArmor, ItemTypeEnum.Shield, ItemTypeEnum.Cloak, ItemTypeEnum.Crown, ItemTypeEnum.Helm, ItemTypeEnum.Boots, ItemTypeEnum.Gloves, ItemTypeEnum.Sword, ItemTypeEnum.Hafted, ItemTypeEnum.Polearm, ItemTypeEnum.Digging, ItemTypeEnum.Bow, ItemTypeEnum.Ring, ItemTypeEnum.Amulet, ItemTypeEnum.Light)
         {
         }
     }

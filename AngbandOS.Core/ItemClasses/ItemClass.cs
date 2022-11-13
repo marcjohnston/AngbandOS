@@ -294,7 +294,7 @@ namespace AngbandOS.ItemCategories
         /// <summary>
         /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
         /// </summary>
-        public virtual ItemCategory CategoryEnum { get; }
+        public virtual ItemTypeEnum CategoryEnum { get; }
 
         /// <summary>
         /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.

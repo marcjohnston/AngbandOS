@@ -28,7 +28,7 @@ namespace AngbandOS.Core.AttackEffects
                 {
                     continue;
                 }
-                if (item.Category != ItemCategory.Food)
+                if (item.Category != ItemTypeEnum.Food)
                 {
                     continue;
                 }

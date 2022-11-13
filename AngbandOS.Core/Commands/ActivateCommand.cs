@@ -760,7 +760,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Dragon armour gives you a ball of the relevant damage type
-            if (item.Category == ItemCategory.DragArmor)
+            if (item.Category == ItemTypeEnum.DragArmor)
             {
                 if (!targetEngine.GetDirectionWithAim(out dir))
                 {
@@ -911,7 +911,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Elemental rings give you a ball of the appropriate element
-            if (item.Category == ItemCategory.Ring)
+            if (item.Category == ItemTypeEnum.Ring)
             {
                 if (!targetEngine.GetDirectionWithAim(out dir))
                 {
