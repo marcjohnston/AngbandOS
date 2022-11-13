@@ -1,9 +1,7 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
-using System;
 using static AngbandOS.Extensions;
-using AngbandOS.Core;
 
 namespace AngbandOS.ItemCategories
 {
@@ -19,10 +17,6 @@ namespace AngbandOS.ItemCategories
                 return base.GetDescription(item, includeCountPrefix);
             }
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
-            if (!item.IsFlavourAware() && item.ItemSubCategory == RingType.Power)
-            {
-                flavour = "Plain Gold ";
-            }
             string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
