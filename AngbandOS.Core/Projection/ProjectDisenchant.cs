@@ -173,7 +173,6 @@ namespace AngbandOS.Projection
                 SaveGame.ApplyDisenchant();
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

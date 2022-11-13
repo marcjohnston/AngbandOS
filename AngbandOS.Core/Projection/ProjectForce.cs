@@ -249,7 +249,6 @@ namespace AngbandOS.Projection
                 SaveGame.Player.SetTimedStun(SaveGame.Player.TimedStun + Program.Rng.DieRoll(20));
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

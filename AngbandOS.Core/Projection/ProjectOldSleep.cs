@@ -187,7 +187,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You fall asleep!");
             }
             SaveGame.Player.SetTimedParalysis(SaveGame.Player.TimedParalysis + dam);
-            SaveGame.Disturb(true);
             return true;
         }
     }

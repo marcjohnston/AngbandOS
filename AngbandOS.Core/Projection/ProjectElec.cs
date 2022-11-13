@@ -236,7 +236,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by lightning!");
             }
             SaveGame.ElecDam(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

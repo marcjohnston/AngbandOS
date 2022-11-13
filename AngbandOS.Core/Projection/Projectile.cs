@@ -457,6 +457,9 @@ namespace AngbandOS.Projection
                             // Allow the projectile to perform any effects on the player.
                             if (AffectPlayer(who, dist, y, x, dam, rad))
                             {
+                                // Disturb the player.
+                                SaveGame.Disturb(true);
+                                
                                 // The effects were noticed.
                                 notice = true;
                             }
@@ -515,7 +518,7 @@ namespace AngbandOS.Projection
         protected abstract bool AffectMonster(int who, int r, int y, int x, int dam);
 
         /// <summary>
-        /// Perform any effect needed on the player and returns true, if the effect was noticed.
+        /// Perform any effect needed on the player and returns true, if the effect was noticed.  Disturbs the player and returns true, by default.
         /// </summary>
         /// <param name="who"></param>
         /// <param name="r"></param>
@@ -524,7 +527,10 @@ namespace AngbandOS.Projection
         /// <param name="dam"></param>
         /// <param name="aRad"></param>
         /// <returns></returns>
-        protected abstract bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad);
+        protected virtual bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+        {
+            return true;
+        }
 
         private char BoltChar(int y, int x, int ny, int nx)
         {

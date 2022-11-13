@@ -127,11 +127,5 @@ namespace AngbandOS.Projection
             ProjectMy = y;
             return obvious;
         }
-
-        protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-        {
-            SaveGame.Disturb(true);
-            return true;
-        }
     }
 }

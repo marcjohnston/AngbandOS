@@ -165,7 +165,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by something slow!");
             }
             SaveGame.Player.SetTimedSlow(SaveGame.Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
-            SaveGame.Disturb(true);
             return true;
         }
     }

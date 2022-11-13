@@ -146,7 +146,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by something!");
             }
             SaveGame.Player.SetTimedHaste(SaveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
-            SaveGame.Disturb(true);
             return true;
         }
     }

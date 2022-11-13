@@ -246,7 +246,6 @@ namespace AngbandOS.Projection
                 }
                 SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 2);
             }
-            SaveGame.Disturb(true);
             return true;
         }
     }

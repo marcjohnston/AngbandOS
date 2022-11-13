@@ -180,7 +180,6 @@ namespace AngbandOS.Projection
             }
             SaveGame.Player.SetTimedSlow(SaveGame.Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

@@ -192,7 +192,6 @@ namespace AngbandOS.Projection
                     SaveGame.Player.SetTimedPoison(SaveGame.Player.TimedPoison + Program.Rng.RandomLessThan(dam) + 10);
                 }
             }
-            SaveGame.Disturb(true);
             return true;
         }
     }

@@ -213,7 +213,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by an aura of magic!");
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

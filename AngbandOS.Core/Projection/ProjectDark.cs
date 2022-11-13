@@ -203,7 +203,6 @@ namespace AngbandOS.Projection
             {
                 SaveGame.Player.TakeHit(dam, killer);
             }
-            SaveGame.Disturb(true);
             return true;
         }
     }

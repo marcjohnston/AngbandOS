@@ -255,7 +255,6 @@ namespace AngbandOS.Projection
                 dam *= 2;
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

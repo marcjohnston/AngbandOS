@@ -185,7 +185,6 @@ namespace AngbandOS.Projection
                 SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 3);
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

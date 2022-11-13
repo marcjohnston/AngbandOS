@@ -228,7 +228,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by pure energy!");
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

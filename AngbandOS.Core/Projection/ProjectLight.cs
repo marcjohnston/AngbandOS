@@ -210,7 +210,6 @@ namespace AngbandOS.Projection
                 SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             }
-            SaveGame.Disturb(true);
             return true;
         }
     }

@@ -157,7 +157,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by something!");
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

@@ -176,7 +176,6 @@ namespace AngbandOS.Projection
                 SaveGame.ApplyNexus(mPtr);
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

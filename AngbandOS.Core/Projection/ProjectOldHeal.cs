@@ -161,7 +161,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by something invigorating!");
             }
             SaveGame.Player.RestoreHealth(dam);
-            SaveGame.Disturb(true);
             return true;
         }
     }

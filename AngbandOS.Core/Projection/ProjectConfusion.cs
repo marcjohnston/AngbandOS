@@ -191,7 +191,6 @@ namespace AngbandOS.Projection
                 SaveGame.Player.SetTimedConfusion(SaveGame.Player.TimedConfusion + Program.Rng.DieRoll(20) + 10);
             }
             SaveGame.Player.TakeHit(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

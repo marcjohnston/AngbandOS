@@ -237,7 +237,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by fire!");
             }
             SaveGame.FireDam(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

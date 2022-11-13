@@ -234,7 +234,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by acid!");
             }
             SaveGame.AcidDam(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }

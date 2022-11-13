@@ -234,7 +234,6 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint("You are hit by cold!");
             }
             SaveGame.ColdDam(dam, killer);
-            SaveGame.Disturb(true);
             return true;
         }
     }
