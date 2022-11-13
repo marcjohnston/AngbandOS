@@ -451,16 +451,48 @@ namespace AngbandOS.Projection
                     // Check to see if the projectile can affect the player.
                     if (x == SaveGame.Player.MapX && y == SaveGame.Player.MapY && who != 0)
                     {
-                        // Allow the projectile to perform any effects on the player.
-                        if (AffectPlayer(who, dist, y, x, dam, rad))
+                        // Check to see if the projectile attack bounces off the player.
+                        if (!CheckBounceOffPlayer(who, dam, rad))
                         {
-                            // The effects were noticed.
-                            notice = true;
+                            // Allow the projectile to perform any effects on the player.
+                            if (AffectPlayer(who, dist, y, x, dam, rad))
+                            {
+                                // The effects were noticed.
+                                notice = true;
+                            }
                         }
                     }
                 }
             }
             return notice;
+        }
+
+        protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
+        {
+            if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
+            {
+                bool blind = SaveGame.Player.TimedBlindness != 0;
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+
+                int tY;
+                int tX;
+                int maxAttempts = 10;
+                do
+                {
+                    tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
+                    tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
+                    maxAttempts--;
+                } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
+                if (maxAttempts < 1)
+                {
+                    tY = SaveGame.Level.Monsters[who].MapY;
+                    tX = SaveGame.Level.Monsters[who].MapX;
+                }
+                Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
+                SaveGame.Disturb(true);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
