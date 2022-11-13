@@ -411,14 +411,6 @@ namespace AngbandOS
             {
                 vp[vn++] = "shriek for help";
             }
-            if ((flags4 & MonsterFlag4.Xxx2) != 0)
-            {
-                vp[vn++] = "do something";
-            }
-            if ((flags4 & MonsterFlag4.Xxx3) != 0)
-            {
-                vp[vn++] = "do something";
-            }
             if ((flags4 & MonsterFlag4.ShardBall) != 0)
             {
                 vp[vn++] = "produce shard balls";
@@ -721,10 +713,6 @@ namespace AngbandOS
             {
                 vp[vn++] = "heal-self";
             }
-            if ((flags6 & MonsterFlag6.Xxx2) != 0)
-            {
-                vp[vn++] = "do something";
-            }
             if ((flags6 & MonsterFlag6.Blink) != 0)
             {
                 vp[vn++] = "blink-self";
@@ -732,14 +720,6 @@ namespace AngbandOS
             if ((flags6 & MonsterFlag6.TeleportSelf) != 0)
             {
                 vp[vn++] = "teleport-self";
-            }
-            if ((flags6 & MonsterFlag6.Xxx3) != 0)
-            {
-                vp[vn++] = "do something";
-            }
-            if ((flags6 & MonsterFlag6.Xxx4) != 0)
-            {
-                vp[vn++] = "do something";
             }
             if ((flags6 & MonsterFlag6.TeleportTo) != 0)
             {
@@ -753,10 +733,6 @@ namespace AngbandOS
             {
                 vp[vn++] = "teleport level";
             }
-            if ((flags6 & MonsterFlag6.Xxx5) != 0)
-            {
-                vp[vn++] = "do something";
-            }
             if ((flags6 & MonsterFlag6.Darkness) != 0)
             {
                 vp[vn++] = "create darkness";
@@ -768,10 +744,6 @@ namespace AngbandOS
             if ((flags6 & MonsterFlag6.Forget) != 0)
             {
                 vp[vn++] = "cause amnesia";
-            }
-            if ((flags6 & MonsterFlag6.Xxx6) != 0)
-            {
-                vp[vn++] = "do something";
             }
             if ((flags6 & MonsterFlag6.SummonMonster) != 0)
             {

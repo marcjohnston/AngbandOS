@@ -32,14 +32,5 @@ namespace AngbandOS.Enumerations
         public const uint Stupid = 0x00000001;
         public const uint TakeItem = 0x00400000;
         public const uint WeirdMind = 0x00000080;
-        public const uint Xxx1 = 0x01000000;
-        public const uint Xxx2 = 0x02000000;
-        public const uint Xxx3 = 0x04000000;
-        public const uint Xxx4 = 0x08000000;
-        public const uint Xxx5 = 0x10000000;
-        public const uint Xxx6 = 0x20000000;
-        public const uint Xxx7 = 0x40000000;
-        public const uint Xxx8 = 0x80000000;
-        public const uint Xxx9 = 0x00000004;
     }
 }

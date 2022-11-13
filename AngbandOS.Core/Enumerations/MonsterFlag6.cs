@@ -48,10 +48,5 @@ namespace AngbandOS.Enumerations
         public const uint TeleportLevel = 0x00000400;
         public const uint TeleportSelf = 0x00000020;
         public const uint TeleportTo = 0x00000100;
-        public const uint Xxx2 = 0x00000008;
-        public const uint Xxx3 = 0x00000040;
-        public const uint Xxx4 = 0x00000080;
-        public const uint Xxx5 = 0x00000800;
-        public const uint Xxx6 = 0x00008000;
     }
 }

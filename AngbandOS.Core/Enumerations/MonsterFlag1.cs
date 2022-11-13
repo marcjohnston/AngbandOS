@@ -37,9 +37,5 @@ namespace AngbandOS.Enumerations
         public const uint RandomMove25 = 0x00040000;
         public const uint RandomMove50 = 0x00080000;
         public const uint Unique = 0x00000001;
-        public const uint Xxx1 = 0x00000800;
-        public const uint Xxx2 = 0x40000000;
-        public const uint Xxx3 = 0x80000000;
-        public const uint Xxx4 = 0x00001000;
     }
 }

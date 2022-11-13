@@ -40,6 +40,5 @@ namespace AngbandOS.Enumerations
         public const uint ResistWater = 0x00800000;
         public const uint Troll = 0x00000002;
         public const uint Undead = 0x00000020;
-        public const uint Xxx3 = 0x00000400;
     }
 }

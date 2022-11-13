@@ -42,7 +42,5 @@ namespace AngbandOS.Enumerations
         public const uint ShardBall = 0x00000008;
         public const uint Shriek = 0x00000001;
         public const uint SummonMask = 0;
-        public const uint Xxx2 = 0x00000002;
-        public const uint Xxx3 = 0x00000004;
     }
 }
