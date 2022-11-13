@@ -470,6 +470,25 @@ namespace AngbandOS.Projection
             return notice;
         }
 
+        protected string NoteDies(MonsterRace rPtr)
+        {
+            string noteDies = " dies.";
+            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
+                (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
+                (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
+            {
+                noteDies = " is destroyed.";
+            }
+            return noteDies;
+        }
+
+        /// <summary>
+        /// Performs a reflection test of the projectile on the player and returns true, if the projectile is reflected.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="dam"></param>
+        /// <param name="aRad"></param>
+        /// <returns></returns>
         protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
         {
             if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
