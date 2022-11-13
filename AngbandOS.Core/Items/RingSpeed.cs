@@ -18,5 +18,7 @@ namespace AngbandOS.ItemCategories
         public override bool Speed => true;
         public override int? SubCategory => 31;
         public override int Weight => 2;
+
+        public override bool KindIsGood => true;
     }
 }
