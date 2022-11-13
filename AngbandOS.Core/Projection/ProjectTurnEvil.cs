@@ -176,14 +176,6 @@ namespace AngbandOS.Projection
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
             bool blind = SaveGame.Player.TimedBlindness != 0;
-            if (x != SaveGame.Player.MapX || y != SaveGame.Player.MapY)
-            {
-                return false;
-            }
-            if (who == 0)
-            {
-                return false;
-            }
             if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
                 int tY;

@@ -223,14 +223,6 @@ namespace AngbandOS.Projection
         {
             bool blind = SaveGame.Player.TimedBlindness != 0;
             bool fuzzy = false;
-            if (x != SaveGame.Player.MapX || y != SaveGame.Player.MapY)
-            {
-                return false;
-            }
-            if (who == 0)
-            {
-                return false;
-            }
             if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
                 int tY;

@@ -447,9 +447,16 @@ namespace AngbandOS.Projection
                     }
                     y = gy[i];
                     x = gx[i];
-                    if (AffectPlayer(who, dist, y, x, dam, rad))
+
+                    // Check to see if the projectile can affect the player.
+                    if (x == SaveGame.Player.MapX && y == SaveGame.Player.MapY && who != 0)
                     {
-                        notice = true;
+                        // Allow the projectile to perform any effects on the player.
+                        if (AffectPlayer(who, dist, y, x, dam, rad))
+                        {
+                            // The effects were noticed.
+                            notice = true;
+                        }
                     }
                 }
             }
@@ -475,6 +482,16 @@ namespace AngbandOS.Projection
 
         protected abstract bool AffectMonster(int who, int r, int y, int x, int dam);
 
+        /// <summary>
+        /// Perform any effect needed on the player and returns true, if the effect was noticed.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="r"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <param name="dam"></param>
+        /// <param name="aRad"></param>
+        /// <returns></returns>
         protected abstract bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad);
 
         private char BoltChar(int y, int x, int ny, int nx)
