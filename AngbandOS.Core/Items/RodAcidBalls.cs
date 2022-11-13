@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodAcidBalls : RodItemCategory
     {
+        public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Acid Balls";
 

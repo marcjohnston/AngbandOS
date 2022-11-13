@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodProbing : RodItemCategory
     {
+        public override bool RequiresAiming => false;
         public override char Character => '-';
         public override string Name => "Probing";
 

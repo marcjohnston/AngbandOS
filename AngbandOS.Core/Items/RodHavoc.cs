@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodHavoc : RodItemCategory
     {
+        public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Havoc";
 

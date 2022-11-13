@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodTrapLocation : RodItemCategory
     {
+        public override bool RequiresAiming => false;
         public override char Character => '-';
         public override string Name => "Trap Location";
 

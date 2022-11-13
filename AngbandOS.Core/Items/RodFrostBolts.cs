@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodFrostBolts : RodItemCategory
     {
+        public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Frost Bolts";
 

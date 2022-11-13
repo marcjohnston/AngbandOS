@@ -6,6 +6,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal class RodDisarming : RodItemCategory
     {
+        public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Disarming";
 

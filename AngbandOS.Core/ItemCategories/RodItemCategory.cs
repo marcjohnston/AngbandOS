@@ -9,6 +9,7 @@ namespace AngbandOS.ItemCategories
     [Serializable]
     internal abstract class RodItemCategory : ItemClass
     {
+        public abstract bool RequiresAiming { get; }
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;
         public override ItemCategory CategoryEnum => ItemCategory.Rod;
