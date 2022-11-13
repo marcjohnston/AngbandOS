@@ -47,11 +47,6 @@ namespace AngbandOS.Projection
             return obvious;
         }
 
-        protected override bool AffectItem(int who, int y, int x)
-        {
-            return false;
-        }
-
         protected override bool AffectMonster(int who, int r, int y, int x, int dam)
         {
             GridTile cPtr = SaveGame.Level.Grid[y][x];

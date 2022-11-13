@@ -457,14 +457,21 @@ namespace AngbandOS.Projection
         }
 
         /// <summary>
-        /// Perform any affect needed on the floor and returns true, if the floor was changed.  Does nothing and returns false, by default.
+        /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
         /// </summary>
         /// <param name="y"></param>
         /// <param name="x"></param>
         /// <returns></returns>
         protected virtual bool AffectFloor(int y, int x) => false;
 
-        protected abstract bool AffectItem(int who, int y, int x);
+        /// <summary>
+        /// Perform any effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        protected virtual bool AffectItem(int who, int y, int x) => false;
 
         protected abstract bool AffectMonster(int who, int r, int y, int x, int dam);
 
