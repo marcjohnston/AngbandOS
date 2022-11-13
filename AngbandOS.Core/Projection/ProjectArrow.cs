@@ -21,11 +21,6 @@ namespace AngbandOS.Projection
 
         protected override string BoltGraphic => "BrightBrownBolt";
 
-        protected override bool AffectFloor(int y, int x)
-        {
-            return false;
-        }
-
         protected override bool AffectItem(int who, int y, int x)
         {
             return false;
