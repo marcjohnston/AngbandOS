@@ -5,7 +5,7 @@ using System;
 using System.Reflection.Emit;
 using static AngbandOS.Extensions;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     /// <summary>
@@ -73,7 +73,7 @@ namespace AngbandOS.ItemCategories
             return true;
         }
 
-        public override bool CanApplySlayingBonus => true; 
+        public override bool CanApplySlayingBonus => true;
 
         public override string GetDetailedDescription(Item item)
         {

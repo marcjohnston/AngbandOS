@@ -1,9 +1,11 @@
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using System.Reflection.Metadata.Ecma335;
 
-namespace AngbandOS.Core;
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
 internal class TheAdamantitePlateMailSoulkeeperFixedArtifact : Base2FixedArtifact

@@ -1,10 +1,13 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollInvocation : ScrollItemCategory
+    internal class ScrollInvocation : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Invocation";

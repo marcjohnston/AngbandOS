@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Enumerations;
 
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -190,7 +191,7 @@ namespace AngbandOS.Commands
             {
                 if (hitBody || !saveGame.Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemCategory potion = (PotionItemCategory)missile.BaseItemCategory;
+                    PotionItemClass potion = (PotionItemClass)missile.BaseItemCategory;
                     saveGame.MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(saveGame, 1, y, x))
                     {

@@ -7,9 +7,11 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 
-namespace AngbandOS.Core
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.FixedArtifacts
 {
     [Serializable]
     internal abstract class Base2FixedArtifact : IItemCharacteristics

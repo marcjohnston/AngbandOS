@@ -8,9 +8,10 @@
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Spells;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -861,7 +862,7 @@ namespace AngbandOS
             if (oPtr.BaseItemCategory != null && !SaveGame.Player.HasHeavyBow)
             {
                 // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)oPtr.BaseItemCategory;
+                BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)oPtr.BaseItemCategory;
                 SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
                 if (SaveGame.Player.ProfessionIndex == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
                 {

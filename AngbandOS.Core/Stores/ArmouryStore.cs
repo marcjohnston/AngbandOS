@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -76,15 +77,15 @@ namespace AngbandOS.Stores
         {
             switch (item.BaseItemCategory)
             {
-                case BootsItemCategory _:
-                case GlovesItemCategory _:
-                case CrownItemCategory _:
-                case HelmItemCategory _:
-                case ShieldItemCategory _:
-                case CloakItemCategory _:
-                case SoftArmorItemCategory _:
-                case HardArmorItemCategory _:
-                case DragArmorItemCategory _:
+                case BootsItemClass _:
+                case GlovesItemClass _:
+                case CrownItemClass _:
+                case HelmItemClass _:
+                case ShieldItemClass _:
+                case CloakItemClass _:
+                case SoftArmorItemClass _:
+                case HardArmorItemClass _:
+                case DragArmorItemClass _:
                     return item.Value() > 0;
                 default:
                     return false;

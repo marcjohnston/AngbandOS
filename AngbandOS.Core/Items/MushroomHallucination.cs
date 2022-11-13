@@ -2,10 +2,12 @@ using AngbandOS.Enumerations;
 using System;
 using System.Collections.Generic;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class MushroomHallucination : MushroomFoodItemCategory
+    internal class MushroomHallucination : MushroomFoodItemClass
     {
         public override char Character => ',';
         public override string Name => "Hallucination";

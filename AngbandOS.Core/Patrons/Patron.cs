@@ -7,9 +7,10 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Projection;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Patrons
 {

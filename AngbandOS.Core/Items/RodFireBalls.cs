@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RodFireBalls : RodItemCategory
+    internal class RodFireBalls : RodItemClass
     {
         public override bool RequiresAiming => true;
         public override char Character => '-';

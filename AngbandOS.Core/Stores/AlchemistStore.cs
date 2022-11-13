@@ -1,8 +1,9 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -73,8 +74,8 @@ namespace AngbandOS.Stores
         {
             switch (item.BaseItemCategory)
             {
-                case ScrollItemCategory _:
-                case PotionItemCategory _:
+                case ScrollItemClass _:
+                case PotionItemClass _:
                     return item.Value() > 0;
                 default:
                     return false;

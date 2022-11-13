@@ -13,9 +13,10 @@ using AngbandOS.Spells;
 using AngbandOS.Pantheon;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.Races;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

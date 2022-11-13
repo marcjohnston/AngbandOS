@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingTulkas : RingItemCategory
+    internal class RingTulkas : RingItemClass
     {
         public override char Character => '=';
         public override string Name => "Tulkas";

@@ -2,7 +2,7 @@
 
 using System;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class BookItemClass : ItemClass

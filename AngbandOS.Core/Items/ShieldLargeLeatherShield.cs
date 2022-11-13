@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ShieldLargeLeatherShield : ShieldItemCategory
+    internal class ShieldLargeLeatherShield : ShieldItemClass
     {
         public override char Character => ')';
         public override Colour Colour => Colour.BrightBrown;

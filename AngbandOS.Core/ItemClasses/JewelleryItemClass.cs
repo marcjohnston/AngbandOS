@@ -3,7 +3,7 @@ using AngbandOS.Enumerations;
 
 using System;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     /// <summary>

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.Core.FixedArtifacts;
 
 namespace AngbandOS
 {

@@ -1,8 +1,9 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -71,13 +72,13 @@ namespace AngbandOS.Stores
         {
             switch (item.BaseItemCategory)
             {
-                case LifeBookItemCategory _:
-                case ScrollItemCategory _:
-                case PotionItemCategory _:
-                case HaftedItemCategory _:
+                case LifeBookItemClass _:
+                case ScrollItemClass _:
+                case PotionItemClass _:
+                case HaftedItemClass _:
                     return item.Value() > 0;
-                case PolearmItemCategory _:
-                case SwordItemCategory _:
+                case PolearmItemClass _:
+                case SwordItemClass _:
                     item.RefreshFlagBasedProperties();
                     if (item.Characteristics.Blessed)
                         return item.Value() > 0;

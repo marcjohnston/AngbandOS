@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -90,20 +91,20 @@ namespace AngbandOS.Stores
         {
             switch (item.BaseItemCategory)
             {
-                case SorceryBookItemCategory _:
-                case NatureBookItemCategory _:
-                case ChaosBookItemCategory _:
-                case DeathBookItemCategory _:
-                case TarotBookItemCategory _:
-                case FolkBookItemCategory _:
-                case CorporealBookItemCategory _:
-                case AmuletItemCategory _:
-                case RingItemCategory _:
-                case StaffItemCategory _:
-                case WandItemCategory _:
-                case RodItemCategory _:
-                case ScrollItemCategory _:
-                case PotionItemCategory _:
+                case SorceryBookItemClass _:
+                case NatureBookItemClass _:
+                case ChaosBookItemClass _:
+                case DeathBookItemClass _:
+                case TarotBookItemClass _:
+                case FolkBookItemClass _:
+                case CorporealBookItemClass _:
+                case AmuletItemClass _:
+                case RingItemClass _:
+                case StaffItemClass _:
+                case WandItemClass _:
+                case RodItemClass _:
+                case ScrollItemClass _:
+                case PotionItemClass _:
                     return item.Value() > 0;
                 default:
                     return false;

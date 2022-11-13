@@ -1,10 +1,13 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollArtifactCreation : ScrollItemCategory
+    internal class ScrollArtifactCreation : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Artifact Creation";

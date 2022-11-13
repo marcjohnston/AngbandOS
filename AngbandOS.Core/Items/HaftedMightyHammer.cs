@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class HaftedMightyHammer : HaftedItemCategory
+    internal class HaftedMightyHammer : HaftedItemClass
     {
         public override char Character => '\\';
         public override Colour Colour => Colour.Black;

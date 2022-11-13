@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class SwordBroadSword : SwordItemCategory
+    internal class SwordBroadSword : SwordItemClass
     {
         public override char Character => '|';
         public override Colour Colour => Colour.BrightWhite;

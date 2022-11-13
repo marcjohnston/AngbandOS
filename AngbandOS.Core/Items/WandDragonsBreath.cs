@@ -3,10 +3,12 @@ using AngbandOS.Projection;
 using System;
 using System.Collections.Generic;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class WandDragonsBreath : WandItemCategory
+    internal class WandDragonsBreath : WandItemClass
     {
         public override char Character => '-';
         public override string Name => "Dragon's Breath";

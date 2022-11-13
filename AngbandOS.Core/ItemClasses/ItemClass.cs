@@ -8,7 +8,7 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using System.Reflection.PortableExecutable;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     /// <summary>
     /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
@@ -543,7 +543,7 @@ namespace AngbandOS.ItemCategories
             if (item.IsKnown())
             {
                 item.RefreshFlagBasedProperties();
-                if (ShowMods || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }

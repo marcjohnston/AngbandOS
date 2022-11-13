@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class HelmIronHelm : HelmItemCategory
+    internal class HelmIronHelm : HelmItemClass
     {
         public override char Character => ']';
         public override Colour Colour => Colour.Grey;

@@ -2,10 +2,12 @@ using AngbandOS.Core;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class PotionExperience : PotionItemCategory
+    internal class PotionExperience : PotionItemClass
     {
         public override char Character => '!';
         public override string Name => "Experience";

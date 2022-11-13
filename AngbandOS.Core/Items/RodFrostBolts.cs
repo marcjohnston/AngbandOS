@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RodFrostBolts : RodItemCategory
+    internal class RodFrostBolts : RodItemClass
     {
         public override bool RequiresAiming => true;
         public override char Character => '-';

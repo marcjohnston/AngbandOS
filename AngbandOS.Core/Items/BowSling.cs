@@ -2,10 +2,12 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class BowSling : BowWeaponItemCategory
+    internal class BowSling : BowWeaponItemClass
     {
         public override char Character => '}';
         public override Colour Colour => Colour.Brown;

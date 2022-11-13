@@ -1,11 +1,14 @@
 using AngbandOS.Core;
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollSummonUndead : ScrollItemCategory
+    internal class ScrollSummonUndead : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Summon Undead";

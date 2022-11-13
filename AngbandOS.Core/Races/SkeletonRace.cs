@@ -1,6 +1,7 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.Races
 {
@@ -90,7 +91,7 @@ namespace AngbandOS.Core.Races
             }
         }
 
-        public override void Quaff(SaveGame saveGame, PotionItemCategory potion)
+        public override void Quaff(SaveGame saveGame, PotionItemClass potion)
         {
             if (Program.Rng.DieRoll(12) == 1)
             {

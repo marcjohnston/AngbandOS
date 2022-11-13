@@ -1,10 +1,13 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollObjectDetection : ScrollItemCategory
+    internal class ScrollObjectDetection : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Object Detection";

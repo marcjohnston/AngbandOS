@@ -8,9 +8,10 @@
 using AngbandOS.Enumerations;
 
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Projection
 {
@@ -91,7 +92,7 @@ namespace AngbandOS.Projection
                     SaveGame.Level.DeleteObjectIdx(thisOIdx);
                     if (isPotion)
                     {
-                        PotionItemCategory potion = (PotionItemCategory)oPtr.BaseItemCategory;
+                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
                         potion.Smash(SaveGame, who, y, x);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);

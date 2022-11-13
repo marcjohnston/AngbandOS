@@ -3,10 +3,12 @@ using AngbandOS.Enumerations;
 using System;
 using static AngbandOS.Extensions;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingPower : RingItemCategory
+    internal class RingPower : RingItemClass
     {
         public override char Character => '=';
         public override Colour Colour => Colour.Yellow;

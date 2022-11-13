@@ -1,9 +1,11 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Projection;
 using System;
+using AngbandOS.Core.EventArgs;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -65,7 +67,7 @@ namespace AngbandOS.Commands
             //bool identified = false;
             //bool usedUp = true;
 
-            ScrollItemCategory scrollItem = (ScrollItemCategory)item.BaseItemCategory;
+            ScrollItemClass scrollItem = (ScrollItemClass)item.BaseItemCategory;
             ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(saveGame);
             scrollItem.Read(readScrollEventArgs);
 

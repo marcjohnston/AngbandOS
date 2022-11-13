@@ -4,7 +4,7 @@ using AngbandOS.Enumerations;
 using System;
 using static AngbandOS.Extensions;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     /// <summary>
@@ -41,7 +41,7 @@ namespace AngbandOS.ItemCategories
         /// <summary>
         /// Returns true, for all armour where the armour class (ToA) is greater than or equal to zero.
         /// </summary>
-        public override bool KindIsGood => (ToA >= 0);
+        public override bool KindIsGood => ToA >= 0;
 
         public override int? GetBonusRealValue(Item item, int value)
         {
@@ -101,9 +101,9 @@ namespace AngbandOS.ItemCategories
         public override void ApplyMagic(Item item, int level, int power)
         {
             if (power != 0 ||
-                (item.Category == ItemTypeEnum.Helm && item.ItemSubCategory == HelmType.SvDragonHelm) ||
-                (item.Category == ItemTypeEnum.Shield && item.ItemSubCategory == ShieldType.SvDragonShield) ||
-                (item.Category == ItemTypeEnum.Cloak && item.ItemSubCategory == CloakType.SvElvenCloak))
+                item.Category == ItemTypeEnum.Helm && item.ItemSubCategory == HelmType.SvDragonHelm ||
+                item.Category == ItemTypeEnum.Shield && item.ItemSubCategory == ShieldType.SvDragonShield ||
+                item.Category == ItemTypeEnum.Cloak && item.ItemSubCategory == CloakType.SvElvenCloak)
             {
                 int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
                 int toac2 = GetBonusValue(10, level);
@@ -697,7 +697,7 @@ namespace AngbandOS.ItemCategories
             if (item.IsKnown())
             {
                 item.RefreshFlagBasedProperties();
-                if (ShowMods || (item.BonusToHit != 0 && item.BonusDamage != 0))
+                if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }

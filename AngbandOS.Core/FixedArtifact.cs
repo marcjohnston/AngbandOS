@@ -9,7 +9,9 @@ using AngbandOS.Enumerations;
 
 using System;
 using AngbandOS.Core;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.FixedArtifacts;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

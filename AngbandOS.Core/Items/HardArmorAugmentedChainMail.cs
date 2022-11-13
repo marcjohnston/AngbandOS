@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class HardArmorAugmentedChainMail : HardArmorItemCategory
+    internal class HardArmorAugmentedChainMail : HardArmorItemClass
     {
         public override char Character => '[';
         public override Colour Colour => Colour.Grey;

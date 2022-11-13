@@ -2,10 +2,12 @@ using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class PotionRestoreMana : PotionItemCategory
+    internal class PotionRestoreMana : PotionItemClass
     {
         public override char Character => '!';
         public override string Name => "Restore Mana";

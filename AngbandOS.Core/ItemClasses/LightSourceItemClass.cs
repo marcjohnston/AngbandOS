@@ -3,7 +3,7 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using static AngbandOS.Extensions;
 
-namespace AngbandOS.ItemCategories
+namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class LightSourceItemClass : ItemClass

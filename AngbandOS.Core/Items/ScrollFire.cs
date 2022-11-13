@@ -1,11 +1,14 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollFire : ScrollItemCategory
+    internal class ScrollFire : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Fire";

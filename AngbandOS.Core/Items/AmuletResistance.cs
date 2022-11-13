@@ -1,10 +1,12 @@
 using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class AmuletResistance : AmuletItemCategory
+    internal class AmuletResistance : AmuletItemClass
     {
         public override char Character => '"';
         public override string Name => "Resistance";

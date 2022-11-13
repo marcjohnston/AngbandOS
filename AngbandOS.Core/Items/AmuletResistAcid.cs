@@ -1,9 +1,11 @@
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class AmuletResistAcid : AmuletItemCategory
+    internal class AmuletResistAcid : AmuletItemClass
     {
         public override char Character => '"';
         public override string Name => "Resist Acid";

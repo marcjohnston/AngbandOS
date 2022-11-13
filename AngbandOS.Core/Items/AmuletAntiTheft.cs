@@ -1,9 +1,11 @@
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class AmuletAntiTheft : AmuletItemCategory
+    internal class AmuletAntiTheft : AmuletItemClass
     {
         public override char Character => '"';
         public override string Name => "Anti-Theft";

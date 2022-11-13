@@ -1,10 +1,13 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollWordOfRecall : ScrollItemCategory
+    internal class ScrollWordOfRecall : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Word of Recall";

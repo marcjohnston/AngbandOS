@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingSoundResistance : RingItemCategory
+    internal class RingSoundResistance : RingItemClass
     {
         public override char Character => '=';
         public override string Name => "Sound Resistance";

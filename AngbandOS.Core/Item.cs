@@ -9,8 +9,9 @@ using AngbandOS.Core;
 using AngbandOS.ActivationPowers;
 using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

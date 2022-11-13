@@ -2,10 +2,12 @@ using AngbandOS.Core.Interface;
 using System;
 using System.Collections.Generic;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class FoodPieceOfWarpstone : FoodItemCategory
+    internal class FoodPieceOfWarpstone : FoodItemClass
     {
         public override char Character => '*';
         public override Colour Colour => Colour.Purple;

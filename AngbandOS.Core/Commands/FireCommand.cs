@@ -1,10 +1,11 @@
 ﻿using AngbandOS.Enumerations;
 
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -69,7 +70,7 @@ namespace AngbandOS.Commands
             int attackBonus = saveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = saveGame.Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            BowWeaponItemCategory missileWeaponItemCategory = (BowWeaponItemCategory)missileWeapon.BaseItemCategory;
+            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.BaseItemCategory;
             int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (saveGame.Player.HasExtraMight)

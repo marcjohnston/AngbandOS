@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class FoodHardBiscuit : FoodItemCategory
+    internal class FoodHardBiscuit : FoodItemClass
     {
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBrown;

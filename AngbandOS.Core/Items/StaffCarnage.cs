@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class StaffCarnage : StaffItemCategory
+    internal class StaffCarnage : StaffItemClass
     {
         public override char Character => '_';
         public override string Name => "Carnage";

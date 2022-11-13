@@ -1,10 +1,12 @@
 using AngbandOS.Core.Interface;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class FlaskOfOil : FlaskItemCategory
+    internal class FlaskOfOil : FlaskItemClass
     {
         public override char Character => '!';
         public override Colour Colour => Colour.Yellow;

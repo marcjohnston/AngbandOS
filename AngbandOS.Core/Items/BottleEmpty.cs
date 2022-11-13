@@ -1,7 +1,9 @@
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class BottleEmpty : BottleItemCategory
+    internal class BottleEmpty : BottleItemClass
     {
         public override char Character => '!';
         public override string Name => "Empty Bottle";

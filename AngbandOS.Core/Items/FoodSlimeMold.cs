@@ -2,10 +2,12 @@ using AngbandOS.Core.Interface;
 using System;
 using System.Collections.Generic;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class FoodSlimeMold : FoodItemCategory
+    internal class FoodSlimeMold : FoodItemClass
     {
         public override char Character => ',';
         public override Colour Colour => Colour.Green;
@@ -21,7 +23,7 @@ namespace AngbandOS.ItemCategories
         public override int Weight => 5;
         public override bool Eat(SaveGame saveGame)
         {
-            PotionItemCategory slimeMold = new PotionSlimeMoldJuice();
+            PotionItemClass slimeMold = new PotionSlimeMoldJuice();
             slimeMold.Quaff(saveGame);
             return true;
         }

@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -75,16 +76,16 @@ namespace AngbandOS.Stores
         {
             switch (item.BaseItemCategory)
             {
-                case FoodItemCategory _:
+                case FoodItemClass _:
                 case LightSourceItemClass _:
-                case FlaskItemCategory _:
-                case SpikeItemCategory _:
-                case ShotItemCategory _:
-                case ArrowItemCategory _:
-                case BoltItemCategory _:
-                case DiggingItemCategory _:
-                case CloakItemCategory _:
-                case BottleItemCategory _:
+                case FlaskItemClass _:
+                case SpikeItemClass _:
+                case ShotItemClass _:
+                case ArrowItemClass _:
+                case BoltItemClass _:
+                case DiggingItemClass _:
+                case CloakItemClass _:
+                case BottleItemClass _:
                     return item.Value() > 0;
                 default:
                     return false;

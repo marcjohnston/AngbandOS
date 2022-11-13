@@ -1,11 +1,14 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Enumerations;
 using System;
 using System.Diagnostics.Tracing;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ScrollAggravateMonster : ScrollItemCategory
+    internal class ScrollAggravateMonster : ScrollItemClass
     {
         public override char Character => '?';
         public override string Name => "Aggravate Monster";

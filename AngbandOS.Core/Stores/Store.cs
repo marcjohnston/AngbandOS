@@ -13,8 +13,9 @@ using AngbandOS.StoreCommands;
 using AngbandOS.Stores;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemFilters;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

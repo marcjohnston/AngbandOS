@@ -1,9 +1,11 @@
 using AngbandOS.Core.Interface;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ChestLargeWooden : ChestItemCategory
+    internal class ChestLargeWooden : ChestItemClass
     {
         public override char Character => '~';
         public override Colour Colour => Colour.Grey;

@@ -1,4 +1,4 @@
-﻿using AngbandOS.ItemCategories;
+﻿using AngbandOS.Core.ItemCategories;
 using System;
 
 namespace AngbandOS.Commands

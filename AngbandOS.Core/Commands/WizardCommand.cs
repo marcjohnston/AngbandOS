@@ -4,7 +4,8 @@ using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {

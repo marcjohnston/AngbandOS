@@ -2,7 +2,8 @@
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Syllables;
 using System.Diagnostics;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.Races
 {
@@ -133,7 +134,7 @@ namespace AngbandOS.Core.Races
         /// </summary>
         /// <param name="saveGame"></param>
         /// <param name="item"></param>
-        public virtual void Quaff(SaveGame saveGame, PotionItemCategory potion)
+        public virtual void Quaff(SaveGame saveGame, PotionItemClass potion)
         {
         }
 

@@ -1,8 +1,9 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -50,7 +51,7 @@ namespace AngbandOS.Commands
             saveGame.EnergyUse = 100;
             bool ident = false;
             int itemLevel = item.BaseItemCategory.Level;
-            FoodItemCategory foodItem = (FoodItemCategory)item.BaseItemCategory;
+            FoodItemClass foodItem = (FoodItemClass)item.BaseItemCategory;
 
             // Allow the food item to process the consumption.
             foodItem.Eat(saveGame);           

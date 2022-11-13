@@ -1,9 +1,10 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -85,7 +86,7 @@ namespace AngbandOS.Commands
             }
             saveGame.PlaySound(SoundEffect.ZapRod);
             int subCategory = item.ItemSubCategory;
-            WandItemCategory activateableItem = (WandItemCategory)item.BaseItemCategory;
+            WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
             if (activateableItem.ExecuteActivation(saveGame, dir))
                 ident = true;
 

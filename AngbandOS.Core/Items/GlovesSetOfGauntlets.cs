@@ -2,10 +2,12 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class GlovesSetOfGauntlets : GlovesItemCategory
+    internal class GlovesSetOfGauntlets : GlovesItemClass
     {
         public override char Character => ']';
         public override Colour Colour => Colour.BrightBrown;

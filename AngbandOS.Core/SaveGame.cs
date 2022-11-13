@@ -16,13 +16,14 @@ using AngbandOS.Projection;
 
 using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Spells;
 using AngbandOS.Pantheon;
 using AngbandOS.Core.Races;
 using System.Reflection;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -1348,7 +1349,7 @@ namespace AngbandOS
         public void OpenChest(int y, int x, int oIdx)
         {
             Item oPtr = Level.Items[oIdx];
-            ChestItemCategory chest = (ChestItemCategory)oPtr.BaseItemCategory;
+            ChestItemClass chest = (ChestItemClass)oPtr.BaseItemCategory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 

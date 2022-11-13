@@ -1,8 +1,9 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -47,7 +48,7 @@ namespace AngbandOS.Commands
             saveGame.EnergyUse = 100;
             int itemLevel = item.BaseItemCategory.Level;
             // Do the actual potion effect
-            PotionItemCategory potion = (PotionItemCategory)item.BaseItemCategory; // The item will be a potion.
+            PotionItemClass potion = (PotionItemClass)item.BaseItemCategory; // The item will be a potion.
             bool identified = potion.Quaff(saveGame);
 
             // Skeletons are messy drinkers

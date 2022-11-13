@@ -1,10 +1,12 @@
 using AngbandOS.Core;
 using AngbandOS.Enumerations;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class AmuletAntiTeleportation : AmuletItemCategory
+    internal class AmuletAntiTeleportation : AmuletItemClass
     {
         public override char Character => '"';
         public override string Name => "Anti-Teleportation";

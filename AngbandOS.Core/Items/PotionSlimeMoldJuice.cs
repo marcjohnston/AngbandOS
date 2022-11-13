@@ -1,10 +1,12 @@
 using AngbandOS.Enumerations;
 using System;
 
-namespace AngbandOS.ItemCategories
+using AngbandOS.Core.ItemClasses;
+
+namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class PotionSlimeMoldJuice : PotionItemCategory
+    internal class PotionSlimeMoldJuice : PotionItemClass
     {
         public override char Character => '!';
         public override string Name => "Slime Mold Juice";
@@ -21,7 +23,7 @@ namespace AngbandOS.ItemCategories
         {
             // Slime mold juice has a random effect (calling this function again recusively)
             saveGame.MsgPrint("That tastes awful.");
-            PotionItemCategory potion = RandomPotion();
+            PotionItemClass potion = RandomPotion();
             potion.Quaff(saveGame);
             return true;
         }
@@ -34,7 +36,7 @@ namespace AngbandOS.ItemCategories
         /// Pick a random potion to use from a selection that won't kill us
         /// </summary>
         /// <returns> The item sub-category of the potion to use </returns>
-        private PotionItemCategory RandomPotion()
+        private PotionItemClass RandomPotion()
         {
             // The following potions are not selected as random.  SlimeMold is the potion causing the random.
             //Death = 23,

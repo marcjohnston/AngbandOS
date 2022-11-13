@@ -11,9 +11,10 @@ using AngbandOS.Pantheon;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using System.Xml.Linq;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

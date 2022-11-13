@@ -9,8 +9,9 @@ using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
 using System;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -278,7 +279,7 @@ namespace AngbandOS
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
                         {
-                            PotionItemCategory potion = (PotionItemCategory)oPtr.BaseItemCategory;
+                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
                             potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
                         }
                         InvenItemIncrease(i, -amt);

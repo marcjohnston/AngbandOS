@@ -3,7 +3,8 @@ using AngbandOS.Projection;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
-using AngbandOS.ItemCategories;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -50,7 +51,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // We may need to aim the rod
-            RodItemCategory rodItemCategory = (RodItemCategory)item.BaseItemCategory;
+            RodItemClass rodItemCategory = (RodItemClass)item.BaseItemCategory;
             int dir = 5;
             if (rodItemCategory.RequiresAiming || !item.IsFlavourAware())
             {
