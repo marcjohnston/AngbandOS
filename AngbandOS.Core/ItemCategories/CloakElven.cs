@@ -27,5 +27,28 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 2;
         public override int ToA => 4;
         public override int Weight => 5;
+
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            // Apply the standard armour characteristics.
+            base.ApplyMagic(item, level, power);
+
+            item.TypeSpecificValue = Program.Rng.DieRoll(4);
+            if (power > 1)
+            {
+                if (Program.Rng.DieRoll(20) == 1)
+                {
+                    item.CreateRandart(false);
+                }
+                else
+                {
+                    ApplyRandomGoodRareCharacteristics(item);
+                }
+            }
+            else if (power < -1)
+            {
+                ApplyRandomPoorRareCharacteristics(item);
+            }
+        }
     }
 }

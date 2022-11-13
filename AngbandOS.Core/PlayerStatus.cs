@@ -1057,9 +1057,12 @@ namespace AngbandOS
                 SaveGame.Player.DisplayedDamageBonus -= 2;
                 SaveGame.Player.HasUnpriestlyWeapon = true;
             }
+            
+            // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
+            // todo: this should by characterclass
             if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist &&
                 SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
-                (oPtr.Category != ItemTypeEnum.Sword || oPtr.ItemSubCategory != SwordType.SvBladeOfChaos))
+                !typeof(SwordBladeofChaos).IsAssignableFrom(oPtr.BaseItemCategory.GetType()))
             {
                 oPtr.RefreshFlagBasedProperties();
                 if (!oPtr.Characteristics.Chaotic)

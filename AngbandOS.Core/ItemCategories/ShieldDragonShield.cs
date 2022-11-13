@@ -27,5 +27,23 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 6;
         public override int ToA => 10;
         public override int Weight => 100;
+
+        /// <summary>
+        /// Applies special magic to this dragon shield.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            // Apply the standard armour characteristics, regardless of the power level.
+            base.ApplyMagic(item, level, power);
+
+            if (item.SaveGame.Level != null)
+            {
+                item.SaveGame.Level.TreasureRating += 5;
+            }
+            ApplyDragonscaleResistance(item);
+        }
     }
 }
