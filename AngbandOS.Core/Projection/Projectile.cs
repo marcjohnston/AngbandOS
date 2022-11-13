@@ -469,13 +469,14 @@ namespace AngbandOS.Projection
 
         protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness != 0;
             if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
+                bool blind = SaveGame.Player.TimedBlindness != 0;
+                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
+
                 int tY;
                 int tX;
                 int maxAttempts = 10;
-                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
                 do
                 {
                     tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);

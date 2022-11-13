@@ -236,40 +236,14 @@ namespace AngbandOS.Projection
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
             bool blind = SaveGame.Player.TimedBlindness != 0;
-            bool fuzzy = false;
-            if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
-            {
-                int tY;
-                int tX;
-                int maxAttempts = 10;
-                SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
-                do
-                {
-                    tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
-                    tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
-                    maxAttempts--;
-                } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
-                if (maxAttempts < 1)
-                {
-                    tY = SaveGame.Level.Monsters[who].MapY;
-                    tX = SaveGame.Level.Monsters[who].MapX;
-                }
-                Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
-                SaveGame.Disturb(true);
-                return true;
-            }
             if (dam > 1600)
             {
                 dam = 1600;
             }
             dam = (dam + r) / (r + 1);
-            if (blind)
-            {
-                fuzzy = true;
-            }
             Monster mPtr = SaveGame.Level.Monsters[who];
             string killer = mPtr.MonsterDesc(0x88);
-            if (fuzzy)
+            if (blind)
             {
                 SaveGame.MsgPrint("You are hit by something sharp and cold!");
             }
