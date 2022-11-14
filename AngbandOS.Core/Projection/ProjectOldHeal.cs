@@ -23,6 +23,11 @@ namespace AngbandOS.Projection
 
         protected override string EffectAnimation => "WhiteSparkle";
 
+        protected override bool ProjectileAngersMonster(Monster mPtr)
+        {
+            return false;
+        }
+
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
             GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
@@ -31,9 +36,6 @@ namespace AngbandOS.Projection
             bool obvious = false;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-            {
-            }
             if (seen)
             {
                 obvious = true;

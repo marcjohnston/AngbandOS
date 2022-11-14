@@ -10,6 +10,7 @@ using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
 using AngbandOS.Spells;
+using System.Xml.Linq;
 
 
 namespace AngbandOS.Projection
@@ -558,8 +559,20 @@ namespace AngbandOS.Projection
                 return false;
             }
 
+            // Get a reference to the monster in question.
             Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+
+            // Modify the damage based on the distance from the attacker.
             dam = (dam + r) / (r + 1);
+
+            // Attempt to turn friendly monsters against their owner, if the owner attacks them.
+            bool isFriendly = (mPtr.Mind & Constants.SmFriendly) != 0;
+            if (who == 0 && isFriendly && ProjectileAngersMonster(mPtr))
+            {
+                string mName = mPtr.MonsterDesc(0);
+                SaveGame.MsgPrint($"{mName} gets angry!");
+                mPtr.Mind &= ~Constants.SmFriendly;
+            }
 
             bool notice = AffectMonster(who, mPtr, dam, r);
 
@@ -573,6 +586,26 @@ namespace AngbandOS.Projection
             return notice;
         }
 
+        /// <summary>
+        /// Returns true, if the projectile angers a monster and will turn it from being friendly to attacking the player.  Returns true, by default, in
+        /// that all friends will be affected and turn against the player. Return false, to disable the functionality of friends turning against the
+        /// player for all attacks with the projectile.
+        /// </summary>
+        /// <param name="mPtr"></param>
+        /// <returns></returns>
+        protected virtual bool ProjectileAngersMonster(Monster mPtr)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Perform any effect needed on a monster and returns true, if the effect was noticed.
+        /// </summary>
+        /// <param name="who">Represents who performed the attack.  A value of 0, means the player.  Otherwise, who represents the MonsterIndex.</param>
+        /// <param name="dam">Represents the amount of damage to inflict.  This damage value is automatically decreased with the distance from the attacker.</param>
+        /// <param name="mPtr">Represents the monster to affect.</param>
+        /// <param name="r">Represents the distance from the attacker.</param>
+        /// <returns></returns>
         protected abstract bool AffectMonster(int who, Monster mPtr, int dam, int r);
 
         /// <summary>

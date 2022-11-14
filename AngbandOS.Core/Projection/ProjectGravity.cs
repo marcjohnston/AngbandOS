@@ -33,14 +33,6 @@ namespace AngbandOS.Projection
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-            {
-                if (who == 0)
-                {
-                    SaveGame.MsgPrint($"{mName} gets angry!");
-                    mPtr.Mind &= ~Constants.SmFriendly;
-                }
-            }
             bool resistTele = false;
             if (seen)
             {

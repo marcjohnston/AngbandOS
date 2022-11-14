@@ -23,6 +23,12 @@ namespace AngbandOS.Projection
 
         protected override string EffectAnimation => "CopperExpand";
 
+        protected override bool ProjectileAngersMonster(Monster mPtr)
+        {
+            // The attack will turn friends 1 in 8 times.
+            return (Program.Rng.DieRoll(8) == 1);
+        }
+
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
             GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
@@ -32,15 +38,6 @@ namespace AngbandOS.Projection
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-            {
-                bool getAngry = Program.Rng.DieRoll(8) == 1;
-                if (getAngry && who == 0)
-                {
-                    SaveGame.MsgPrint($"{mName} gets angry!");
-                    mPtr.Mind &= ~Constants.SmFriendly;
-                }
-            }
             bool isFriend = false;
             if (seen)
             {

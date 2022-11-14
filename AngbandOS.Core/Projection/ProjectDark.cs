@@ -41,6 +41,12 @@ namespace AngbandOS.Projection
             return obvious;
         }
 
+        protected override bool ProjectileAngersMonster(Monster mPtr)
+        {
+            // Invisible friends are not affected by darkness.
+            return mPtr.IsVisible;
+        }
+
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
             GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
@@ -50,14 +56,6 @@ namespace AngbandOS.Projection
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (seen)
-            {
-                if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-                {
-                    SaveGame.MsgPrint($"{mName} gets angry!");
-                    mPtr.Mind &= ~Constants.SmFriendly;
-                }
-            }
 
             if (seen)
             {

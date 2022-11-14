@@ -32,14 +32,6 @@ namespace AngbandOS.Projection
             int doSleep = 0;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-            {
-                if (who == 0)
-                {
-                    SaveGame.MsgPrint($"{mName} gets angry!");
-                    mPtr.Mind &= ~Constants.SmFriendly;
-                }
-            }
             if (seen)
             {
                 obvious = true;

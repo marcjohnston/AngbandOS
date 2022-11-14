@@ -100,6 +100,13 @@ namespace AngbandOS.Projection
             return obvious;
         }
 
+        protected override bool ProjectileAngersMonster(Monster mPtr)
+        {
+            // Only friends that are hurt by rock are affected.
+            MonsterRace rPtr = mPtr.Race;
+            return (rPtr.Flags3 & MonsterFlag3.HurtByRock) != 0;
+        }
+
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
             GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
@@ -109,15 +116,6 @@ namespace AngbandOS.Projection
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
-            {
-                bool getAngry = (rPtr.Flags3 & MonsterFlag3.HurtByRock) != 0;
-                if (getAngry && who == 0)
-                {
-                    SaveGame.MsgPrint($"{mName} gets angry!");
-                    mPtr.Mind &= ~Constants.SmFriendly;
-                }
-            }
             if ((rPtr.Flags3 & MonsterFlag3.HurtByRock) != 0)
             {
                 if (seen)
