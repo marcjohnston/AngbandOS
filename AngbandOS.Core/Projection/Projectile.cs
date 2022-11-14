@@ -470,7 +470,15 @@ namespace AngbandOS.Projection
             return notice;
         }
 
-        protected string NoteDies(MonsterRace rPtr)
+        /// <summary>
+        /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
+        /// or not the monster is already dead.  If it is already dead, a 'destroyed' message is returned and it 'dies'
+        /// is returned for all living monsters.  Other variations are that dispel projectiles will dissolve and
+        /// PSI will "collapses, a mindless husk".
+        /// </summary>
+        /// <param name="rPtr"></param>
+        /// <returns></returns>
+        protected string NoteDiesOrIsDestroyed(MonsterRace rPtr)
         {
             string noteDies = " dies.";
             if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||

@@ -40,7 +40,7 @@ namespace AngbandOS.Projection
             }
             dam = (dam + r) / (r + 1);
             string mName = mPtr.MonsterDesc(0);
-            string noteDies;
+            string noteDies = " dissolves!";
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
                 bool getAngry = (rPtr.Flags3 & MonsterFlag3.Demon) != 0;
@@ -62,7 +62,6 @@ namespace AngbandOS.Projection
                     obvious = true;
                 }
                 note = " shudders.";
-                noteDies = " dissolves!";
             }
             else
             {

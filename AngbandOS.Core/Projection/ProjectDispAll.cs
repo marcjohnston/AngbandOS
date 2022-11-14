@@ -30,6 +30,7 @@ namespace AngbandOS.Projection
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
+            string noteDies = " dissolves!";
             if (cPtr.MonsterIndex == 0)
             {
                 return false;
@@ -45,7 +46,6 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             string note = " shudders.";
-            string noteDies = " dissolves!";
             if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
             {
                 if (who != 0 && dam > mPtr.Health)

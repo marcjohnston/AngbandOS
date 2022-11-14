@@ -50,7 +50,7 @@ namespace AngbandOS.Projection
                 }
             }
             string note;
-            string noteDies;
+            string noteDies = " dissolves!";
             if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
             {
                 if (seen)
@@ -62,7 +62,6 @@ namespace AngbandOS.Projection
                     obvious = true;
                 }
                 note = " shudders.";
-                noteDies = " dissolves!";
             }
             else
             {

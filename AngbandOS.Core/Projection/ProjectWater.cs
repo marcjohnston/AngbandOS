@@ -29,7 +29,6 @@ namespace AngbandOS.Projection
             Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             bool obvious = false;
             string note = null;
-            string noteDies = " dies.";
             if (cPtr.MonsterIndex == 0)
             {
                 return false;
@@ -40,15 +39,10 @@ namespace AngbandOS.Projection
             }
             dam = (dam + r) / (r + 1);
             MonsterRace rPtr = mPtr.Race;
+            string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string name = rPtr.Name;
             bool seen = mPtr.IsVisible;
             string mName = mPtr.MonsterDesc(0);
-            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
-            {
-                noteDies = " is destroyed.";
-            }
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
                 if (who == 0)

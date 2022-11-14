@@ -33,7 +33,7 @@ namespace AngbandOS.Projection
             bool skipped = false;
             int doFear = 0;
             string note = null;
-            string noteDies = " dies.";
+            string noteDies = NoteDiesOrIsDestroyed(rPtr);
             if (cPtr.MonsterIndex == 0)
             {
                 return false;
@@ -44,12 +44,6 @@ namespace AngbandOS.Projection
             }
             dam = (dam + r) / (r + 1);
             string mName = mPtr.MonsterDesc(0);
-            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
-            {
-                noteDies = " is destroyed.";
-            }
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
                 bool getAngry = (rPtr.Flags3 & MonsterFlag3.Undead) != 0;
