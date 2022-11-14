@@ -146,8 +146,7 @@ namespace AngbandOS
                 if (SaveGame.Dungeons[i].FirstGuardian != "")
                 {
                     this[index].Level = SaveGame.Dungeons[i].FirstLevel;
-                    this[index].RIdx =
-                        SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].FirstGuardian);
+                    this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].FirstGuardian);
                     SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
