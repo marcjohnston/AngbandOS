@@ -389,8 +389,7 @@ namespace AngbandOS.Projection
                             continue;
                         }
                         MonsterRace refPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex].Race;
-                        if ((refPtr.Flags2 & MonsterFlag2.Reflecting) != 0 && Program.Rng.DieRoll(10) != 1 &&
-                            distHack > 1 && GetType().Name != "ProjectWizardBolt")
+                        if ((refPtr.Flags2 & MonsterFlag2.Reflecting) != 0 && Program.Rng.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                         {
                             int tY, tX;
                             int maxAttempts = 10;

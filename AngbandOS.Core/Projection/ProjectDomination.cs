@@ -25,7 +25,6 @@ namespace AngbandOS.Projection
 
         protected override bool AffectMonster(int who, int r, int y, int x, int dam)
         {
-            int tmp;
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
@@ -159,6 +158,7 @@ namespace AngbandOS.Projection
                     dam = mPtr.Health;
                 }
             }
+            int tmp;
             if (dam > mPtr.Health)
             {
                 note = noteDies;
