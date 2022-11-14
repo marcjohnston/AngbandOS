@@ -23,22 +23,13 @@ namespace AngbandOS.Projection
 
         protected override string EffectAnimation => "BrightBlueSwirl";
 
-        protected override bool AffectMonster(int who, int r, int y, int x, int dam)
+        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            if (who != 0 && cPtr.MonsterIndex == who)
-            {
-                return false;
-            }
             string mName = mPtr.MonsterDesc(0);
             if (seen)
             {
@@ -124,11 +115,6 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            ProjectMn++;
-            ProjectMx = x;
-            ProjectMy = y;
             return obvious;
         }
 

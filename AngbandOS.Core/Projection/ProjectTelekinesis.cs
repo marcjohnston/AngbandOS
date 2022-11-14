@@ -23,24 +23,14 @@ namespace AngbandOS.Projection
 
         protected override string EffectAnimation => "TurquoiseSwirl";
 
-        protected override bool AffectMonster(int who, int r, int y, int x, int dam)
+        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            if (who != 0 && cPtr.MonsterIndex == who)
-            {
-                return false;
-            }
-            dam = (dam + r) / (r + 1);
             string mName = mPtr.MonsterDesc(0);
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
@@ -86,11 +76,8 @@ namespace AngbandOS.Projection
                     obvious = true;
                 }
                 note = " disappears!";
-                Monster targetMonster = SaveGame.Level.Monsters[cPtr.MonsterIndex];
-                targetMonster.TeleportAway(SaveGame, doDist);
-                y = mPtr.MapY;
-                x = mPtr.MapX;
-                cPtr = SaveGame.Level.Grid[y][x];
+                mPtr.TeleportAway(SaveGame, doDist);
+                cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             }
             else if (doStun != 0 && (rPtr.Flags4 & MonsterFlag4.BreatheSound) == 0 &&
                      (rPtr.Flags4 & MonsterFlag4.BreatheForce) == 0)
@@ -168,11 +155,6 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            ProjectMn++;
-            ProjectMx = x;
-            ProjectMy = y;
             return obvious;
         }
     }

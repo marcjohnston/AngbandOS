@@ -88,25 +88,15 @@ namespace AngbandOS.Projection
             return obvious;
         }
 
-        protected override bool AffectMonster(int who, int r, int y, int x, int dam)
+        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
+            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             int tmp;
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            if (who != 0 && cPtr.MonsterIndex == who)
-            {
-                return false;
-            }
-            dam = (dam + r) / (r + 1);
             string mName = mPtr.MonsterDesc(0);
             if (who == 0 && (mPtr.Mind & Constants.SmFriendly) != 0)
             {
@@ -164,7 +154,7 @@ namespace AngbandOS.Projection
                     dam = 0;
                     SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     MonsterRace race = SaveGame.MonsterRaces[tmp];
-                    SaveGame.Level.Monsters.PlaceMonsterAux(y, x, race, false, false, charm);
+                    SaveGame.Level.Monsters.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
                     mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                 }
             }
@@ -239,11 +229,6 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            ProjectMn++;
-            ProjectMx = x;
-            ProjectMy = y;
             return obvious;
         }
 

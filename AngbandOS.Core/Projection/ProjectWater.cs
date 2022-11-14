@@ -23,21 +23,11 @@ namespace AngbandOS.Projection
 
         protected override string ImpactGraphic => "BlueSplat";
 
-        protected override bool AffectMonster(int who, int r, int y, int x, int dam)
+        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             bool obvious = false;
             string note = null;
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            if (who != 0 && cPtr.MonsterIndex == who)
-            {
-                return false;
-            }
-            dam = (dam + r) / (r + 1);
             MonsterRace rPtr = mPtr.Race;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string name = rPtr.Name;
@@ -144,11 +134,6 @@ namespace AngbandOS.Projection
                     }
                 }
             }
-            SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            ProjectMn++;
-            ProjectMx = x;
-            ProjectMy = y;
             return obvious;
         }
 

@@ -541,7 +541,39 @@ namespace AngbandOS.Projection
         /// <returns></returns>
         protected virtual bool AffectItem(int who, int y, int x) => false;
 
-        protected abstract bool AffectMonster(int who, int r, int y, int x, int dam);
+        protected bool AffectMonster(int who, int r, int y, int x, int dam)
+        {
+            // Get the grid tile for the location in question.
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
+
+            // Check to see if there is a monster at this location.
+            if (cPtr.MonsterIndex == 0)
+            {
+                return false;
+            }
+
+            // Check to see if the monster/player is the monster/player performing the action.
+            if (who != 0 && cPtr.MonsterIndex == who)
+            {
+                return false;
+            }
+
+            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+            dam = (dam + r) / (r + 1);
+
+            bool notice = AffectMonster(who, mPtr, dam, r);
+
+            GridTile newGridTile = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+            SaveGame.Level.Monsters.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
+            SaveGame.Level.RedrawSingleLocation(y, x);
+            ProjectMn++;
+            ProjectMx = mPtr.MapX;
+            ProjectMy = mPtr.MapY;
+
+            return notice;
+        }
+
+        protected abstract bool AffectMonster(int who, Monster mPtr, int dam, int r);
 
         /// <summary>
         /// Perform any effect needed on the player and returns true, if the effect was noticed.  Disturbs the player and returns true, by default.
