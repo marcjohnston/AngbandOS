@@ -1,21 +1,24 @@
 <div id="container">
-    <div id="vertical-panes">
-      <div id="macros-div">
-        <button class="macro">F1</button>
-        <button class="macro">F2</button>
-        <button class="macro">F3</button>
-        <button class="macro">F4</button>
-        <button class="macro">F5</button>
-        <button class="macro">F6</button>
-        <button class="macro">F7</button>
-        <button class="macro">F8</button>
-        <button class="macro">F9</button>
-        <button class="macro">F10</button>
-        <button class="macro">F11</button>
-        <button class="macro">F12</button>
-      </div>
-      <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
-        <canvas #console></canvas>
-      </div>
+  <div id="links-pane">
+    <a (click)="onEditPreferencesClick()" *ngIf="preferences !== undefined">Edit Preferences</a>
+  </div>
+  <div id="vertical-panes">
+    <div id="macros-div" *ngIf="preferences !== undefined">
+      <button (click)="macroClicked('F1')">ALT-F1<br />{{preferences.f1Macro}}</button>
+      <button (click)="macroClicked('F2')">ALT-F2<br />{{preferences.f2Macro}}</button>
+      <button (click)="macroClicked('F3')">ALT-F3<br />{{preferences.f3Macro}}</button>
+      <button (click)="macroClicked('F4')">ALT-F4<br />{{preferences.f4Macro}}</button>
+      <button (click)="macroClicked('F5')">ALT-F5<br />{{preferences.f5Macro}}</button>
+      <button (click)="macroClicked('F6')">ALT-F6<br />{{preferences.f6Macro}}</button>
+      <button (click)="macroClicked('F7')">ALT-F7<br />{{preferences.f7Macro}}</button>
+      <button (click)="macroClicked('F8')">ALT-F8<br />{{preferences.f8Macro}}</button>
+      <button (click)="macroClicked('F9')">ALT-F9<br />{{preferences.f9Macro}}</button>
+      <button (click)="macroClicked('F10')">ALT-F10<br />{{preferences.f10Macro}}</button>
+      <button (click)="macroClicked('F11')">ALT-F11<br />{{preferences.f11Macro}}</button>
+      <button (click)="macroClicked('F12')">ALT-F12<br />{{preferences.f12Macro}}</button>
+    </div>
+    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
+      <canvas #console></canvas>
+    </div>
   </div>
 </div>

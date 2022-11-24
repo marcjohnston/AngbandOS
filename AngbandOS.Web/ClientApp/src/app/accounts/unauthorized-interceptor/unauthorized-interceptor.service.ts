@@ -27,11 +27,6 @@ export class UnauthorizedInterceptorService implements HttpInterceptor {
         if (error && error.status === 401 && request.url !== "/api/accounts") {
           return new Observable<HttpEvent<any>>((subscriber: Subscriber<any>) => {
             this._authenticationService.autoLogin().then(() => {
-              this._zone.run(() => {
-                this._snackBar.open(`JWT Updated`, "", {
-                  duration: 5000
-                });
-              });
               const token = this._authenticationService.currentUser.value?.jwt;
               next.handle(request.clone({
                 setHeaders: {

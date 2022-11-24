@@ -31,7 +31,7 @@ namespace AngbandOS.StoreCommands
             saveGame.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(saveGame, saveGame.Player);
-            while (true)
+            while (true && !saveGame.Shutdown)
             {
                 characterViewer.DisplayPlayer();
                 saveGame.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);

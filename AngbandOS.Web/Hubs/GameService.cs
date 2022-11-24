@@ -11,7 +11,8 @@ using System;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a singleton service that maintains all concurrent active games and all other active state.
+    /// Represents a singleton service that maintains all concurrent active games and all other active state.  This singleton provides
+    /// access to the database.
     /// </summary>
     public class GameService
     {
@@ -85,18 +86,22 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Handles game signal-r disconnections.
+        /// Handles game signal-r disconnections.  We attempt to shut down any game that is associated with the connection.
         /// </summary>
         /// <param name="connectionId"></param>
         public async Task GameHubDisconnectedAsync(string connectionId)
         {
+            // Remove the hub connections monitors so administrators watching the game hub connections gets an update.
             gameHubConnections.Disconnected(connectionId);
 
-            // Get the console running the game.
+            // Get the console running the game.  It may still be active.
             if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
             {
-                ConnectionIds.Remove(console, out _);
+                // Remove the connection from the consoles.
                 Consoles.Remove(connectionId, out _);
+
+                // Force a shutdown the console thread.
+                console.Shutdown();
             }
 
             // Run the update notifications.
@@ -266,7 +271,7 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="endingId"></param>
         /// <returns></returns>
-        public async Task<ChatMessage[]> GetChatMessages(string connectionId, int? endingId)
+        public async Task<ChatMessage[]> GetChatMessagesAsync(string connectionId, int? endingId)
         {
             // Determine if the current user is an administrator.
             ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
@@ -410,6 +415,8 @@ namespace AngbandOS.Web.Hubs
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
             SignalRConsole console = new SignalRConsole(context, gameHub, persistentStorage, userId, username, gameUpdateNotifier);
 
+            console.ThreadName = $"Game: {userId}/{guid}";
+
             // We need to track this game.
             if (!Consoles.TryAdd(connectionId, console))
             {
@@ -431,13 +438,25 @@ namespace AngbandOS.Web.Hubs
             await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
         }
 
+        /// <summary>
+        /// Handles the game over.  This method is called when the thread completes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Console_RunWorkerCompleted(object? sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             // A game is over.  Remove it from the active games.
             SignalRConsole console = (SignalRConsole)sender;
-            string connectionId = ConnectionIds[console];
 
-            GameHubDisconnectedAsync(connectionId);
+            // Remove the console from the connections.
+            ConnectionIds.Remove(console, out _);
+
+            // Check to see if there is a connection still associated with this console.
+            if (ConnectionIds.TryGetValue(console, out string connectionId))
+            { 
+                // Force the disconnect.
+                GameHubDisconnectedAsync(connectionId);
+            }
         }
 
         /// <summary>

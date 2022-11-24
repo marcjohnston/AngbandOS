@@ -7,7 +7,7 @@
     {
         Task<UserSettingsDetails?> GetPreferences(string userId);
 
-        Task<UserSettingsDetails> WritePreferences(string userId, UserSettingsDetails userSettingsDetails);
+        Task<UserSettingsDetails> WritePreferencesAsync(string userId, UserSettingsDetails userSettingsDetails);
 
         /// <summary>
         /// Deletes a game from the database.

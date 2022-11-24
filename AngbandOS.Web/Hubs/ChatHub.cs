@@ -55,7 +55,7 @@ namespace AngbandOS.Web.Hubs
 
         public async Task RefreshChat(int? endingId)
         {
-            ChatMessage[] chatMessages = await GameService.GetChatMessages(Context.ConnectionId, endingId);
+            ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
 
             // Get the hub for the currently connected client.
             IChatHub chatHub = Clients.Client(Context.ConnectionId);

@@ -170,6 +170,12 @@ namespace AngbandOS
         private string _requestCommandBuffer;
 
         public readonly List<Race> Races = new List<Race>();
+
+        /// <summary>
+        /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
+        /// </summary>
+        public bool Shutdown = false;
+
         /// GUI
 
         /// <summary>
@@ -439,9 +445,14 @@ namespace AngbandOS
             {
                 Player.IsDead = true;
             }
-            while (true)
+
+            // Repeat the dungeon loop until normal game ends or the shutdown flag is raised.
+            while (!Shutdown)
             {
+                // Play the current dungeon level.
                 DungeonLoop();
+
+                // The dungeon level is changing.
                 if (Player.NoticeFlags != 0)
                 {
                     NoticeStuff();
@@ -590,7 +601,7 @@ namespace AngbandOS
         {
             const Colour a = Colour.BrightBlue;
             Print(a, "-more-", 0, x);
-            while (true)
+            while (true && !Shutdown)
             {
                 Inkey();
                 break;
@@ -954,7 +965,7 @@ namespace AngbandOS
             {
                 SaveScreen();
             }
-            while (!done)
+            while (!done && !Shutdown)
             {
                 if (!ViewingEquipment)
                 {
@@ -1842,7 +1853,7 @@ namespace AngbandOS
                     PlayMusic(MusicTrack.Dungeon);
                 }
             }
-            while (true)
+            while (!Shutdown)
             {
                 if (Level.MCnt + 32 > Constants.MaxMIdx)
                 {
@@ -2283,7 +2294,7 @@ namespace AngbandOS
                     MsgPrint("Cancelled.");
                 }
             }
-            while (Player.Energy >= 100)
+            while (Player.Energy >= 100 && !Shutdown)
             {
                 Player.RedrawNeeded.Set(RedrawFlag.PrDtrap);
                 if (Player.NoticeFlags != 0)
@@ -9845,7 +9856,7 @@ namespace AngbandOS
             }
             Erase(y, x, len);
             Print(Colour.Grey, buf, y, x);
-            while (!done)
+            while (!done && !Shutdown)
             {
                 Goto(y, x + k);
                 i = Inkey();
@@ -9984,11 +9995,11 @@ namespace AngbandOS
 
         public bool GetCheck(string prompt)
         {
-            int i;
+            int i = 0;
             MsgPrint(null);
             string buf = $"{prompt}[Y/n]";
             PrintLine(buf, 0, 0);
-            while (true)
+            while (true && !Shutdown)
             {
                 i = Inkey();
                 switch (i)
@@ -10157,7 +10168,7 @@ namespace AngbandOS
             {
                 CursorVisible = false;
             }
-            while (ch == 0)
+            while (ch == 0 && !Shutdown)
             {
                 if (DoNotWaitOnInkey && GetKeypress(out char kk, false, false))
                 {
@@ -10674,7 +10685,7 @@ namespace AngbandOS
             CurrentCommand = (char)0;
             CommandArgument = 0;
             CommandDirection = 0;
-            while (true)
+            while (true && !Shutdown)
             {
                 char cmd;
                 if (QueuedCommand != 0)
@@ -10695,7 +10706,7 @@ namespace AngbandOS
                     int oldArg = CommandArgument;
                     CommandArgument = 0;
                     PrintLine("Count: ", 0, 0);
-                    while (true)
+                    while (true && !Shutdown)
                     {
                         cmd = Inkey();
                         if (cmd == 0x7F || cmd == 0x08)
@@ -10813,7 +10824,7 @@ namespace AngbandOS
             if (wait)
             {
                 UpdateScreen();
-                while (KeyHead == KeyTail)
+                while (KeyHead == KeyTail && !Shutdown)
                 {
                     EnqueueKey(_console.WaitForKey());
                     LastInputReceived = DateTime.Now;
@@ -11843,7 +11854,7 @@ namespace AngbandOS
             menu[BirthStage.RaceSelection] = 16;
             Clear();
             int viewMode = 1;
-            while (true)
+            while (true && !Shutdown)
             {
                 char c;
                 switch (stage)
@@ -11882,7 +11893,7 @@ namespace AngbandOS
                         }
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true & !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -11950,7 +11961,7 @@ namespace AngbandOS
                         DisplayClassInfo(_classMenu[menu[stage]].Item);
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -12036,7 +12047,7 @@ namespace AngbandOS
 
                         DisplayRaceInfo(_raceMenu[menu[stage]].Item);
                         Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -12181,7 +12192,7 @@ namespace AngbandOS
                         DisplayRealmInfo(realmChoice[menu[stage]]);
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -12358,7 +12369,7 @@ namespace AngbandOS
                         DisplayRealmInfo(realmChoice[menu[stage]]);
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -12467,7 +12478,7 @@ namespace AngbandOS
                         Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
                         Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             c = Inkey();
                             if (c == '8')
@@ -12538,7 +12549,7 @@ namespace AngbandOS
                         _player.Mana = _player.MaxMana;
                         _player.Energy = 150;
                         CharacterViewer characterViewer = new CharacterViewer(this, _player);
-                        while (true)
+                        while (true && !Shutdown)
                         {
                             characterViewer.DisplayPlayer();
                             Print(Colour.Orange,
@@ -12586,6 +12597,7 @@ namespace AngbandOS
                         return true;
                 }
             }
+            return false;
         }
 
         private void PlayerOutfit(SaveGame saveGame)

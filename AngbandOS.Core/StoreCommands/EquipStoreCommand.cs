@@ -32,8 +32,7 @@ namespace AngbandOS.StoreCommands
             // We're interested in seeing everything
             saveGame.Player.Inventory.ShowEquip(null);
             // Get a command
-            string outVal =
-                $"Equipment: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+            string outVal = $"Equipment: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             saveGame.PrintLine(outVal, 0, 0);
             saveGame.QueuedCommand = saveGame.Inkey();
             saveGame.Load();

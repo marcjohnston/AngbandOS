@@ -1,0 +1,75 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div id="container">
+    <div id="title-bar" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+      <img class="icon" src="/assets/material-icons/zoom_out_map-24px.svg" cdkDragHandle />
+      <span>
+        Macro Settings
+      </span>
+      <span></span>
+    </div>
+    <div id="macro-instructions">
+      Specify the keystrokes to assign for each of the function keys.
+      You must hold the ALT key down to run a macro.
+      Keystrokes can also be specified specify the ASCII hexadecimal value using the format \xFF where FF is an 8-bit hexadecimal value.
+      <br /><br />
+      \x0D Enter Key
+    </div>
+    <div id="dialog-div">
+      <div id="dialog-wrap-div">
+        <div class="preference-row">
+          <span>F1:</span>
+          <input formControlName="f1Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F2:</span>
+          <input formControlName="f2Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F3:</span>
+          <input formControlName="f3Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F4:</span>
+          <input formControlName="f4Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F5:</span>
+          <input formControlName="f5Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F6:</span>
+          <input formControlName="f6Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F7:</span>
+          <input formControlName="f7Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F8:</span>
+          <input formControlName="f8Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F9:</span>
+          <input formControlName="f9Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F10:</span>
+          <input formControlName="f10Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F11:</span>
+          <input formControlName="f11Macro" />
+        </div>
+        <div class="preference-row">
+          <span>F12:</span>
+          <input formControlName="f12Macro" />
+        </div>
+      </div>
+    </div>
+    <div id="buttons-bar">
+      <span></span>
+      <button mat-button type="submit" id="save-button">Save</button>
+      <button mat-button [mat-dialog-close]>Cancel</button>
+    </div>
+  </div>
+</form>

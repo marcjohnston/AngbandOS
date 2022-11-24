@@ -88,6 +88,12 @@ namespace AngbandOS
             saveGame.Refresh(console);
         }
 
+        public void InitiateShutDown()
+        {
+            if (saveGame != null)
+                saveGame.Shutdown = true;
+        }
+
         /// <summary>
         /// Plays a game and returns false, if the game cannot be played, true when the game is over.
         /// </summary>

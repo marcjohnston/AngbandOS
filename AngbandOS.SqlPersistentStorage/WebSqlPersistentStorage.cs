@@ -49,7 +49,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public async Task<UserSettingsDetails> WritePreferences(string userId, UserSettingsDetails userSettingsDetails)
+        public async Task<UserSettingsDetails> WritePreferencesAsync(string userId, UserSettingsDetails userSettingsDetails)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
@@ -57,6 +57,7 @@ namespace AngbandOS.PersistentStorage
                 if (userSetting == null)
                 {
                     userSetting = new UserSetting();
+                    userSetting.UserId = userId;
                     context.UserSettings.Add(userSetting);
                 }
                 userSetting.FontName = userSettingsDetails.FontName;
@@ -75,6 +76,8 @@ namespace AngbandOS.PersistentStorage
                 userSetting.F12macro = userSettingsDetails.F12Macro;
 
                 await context.SaveChangesAsync();
+
+                // Return the user settings with the values stored in the database.
                 return new UserSettingsDetails
                 {
                     FontName = userSetting.FontName,

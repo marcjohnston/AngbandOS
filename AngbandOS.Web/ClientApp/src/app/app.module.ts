@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
@@ -90,6 +91,7 @@ import { WisdomComponent } from './manual/wisdom/wisdom.component';
 import { TableOfContentsComponent } from './manual/table-of-contents/table-of-contents.component';
 import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PreferencesDialogComponent } from './preferences-dialog/preferences-dialog.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +164,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     TableOfContentsComponent,
     UiComponent,
     ChatComponent,
-    DashboardComponent
+    DashboardComponent,
+    PreferencesDialogComponent
   ],
   imports: [
     MatTableModule,
@@ -175,6 +178,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatSliderModule,
     MatIconModule,
     MatCardModule,
+    DragDropModule,
 
     ColorPickerModule,
 

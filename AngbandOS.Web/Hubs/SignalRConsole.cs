@@ -12,15 +12,16 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
     {
-        public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
-        private readonly IGameHub _consoleGameHub;
-        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>();
-        private readonly ICorePersistentStorage PersistentStorage;
+        public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>(); // This is the queue of keystrokes provided by the player.
+        private readonly IGameHub _consoleGameHub; // This is the signal-r hub that the console is communicating on.
+        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>(); // This is the list of people watching the game.
+        private readonly ICorePersistentStorage PersistentStorage; // This is the game persistence.
         private GameServer _gameServer; // This is the actual game.
-        public readonly string UserId;
-        public readonly string Username;
-        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction;
+        public readonly string UserId; // This is the ID of the player.
+        public readonly string Username; // This is the username of the player.
+        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction; // This is the notification channel.
         private readonly HubCallerContext Context; // Used to abort the signal-r connection and terminate the game instantly.
+        private bool ShuttingDown = false;
 
         public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
@@ -32,9 +33,20 @@ namespace AngbandOS.Web.Hubs
             Context = context;
         }
 
+        public void Shutdown()
+        {
+            // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
+            if (_gameServer != null)
+                _gameServer.InitiateShutDown();
+
+            // Set the flag to force the input queue to shut down.  This will bypass the keystrokes.
+            ShuttingDown = true;
+
+        }
+
         public void Kill()
         {
-            Context.Abort();
+            Shutdown();
         }
 
         public void AddWatcher(ISpectatorsHub watcherHub)
@@ -92,10 +104,14 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
+        public string? ThreadName { get; set; } = null;
+
         protected override void OnDoWork(DoWorkEventArgs e)
         {
+            Thread.CurrentThread.Name = ThreadName;
+
             // Create a game server to play the game.  
-            _gameServer = new GameServer(); // TODO: This should be simply a game object; not a game "server".
+            _gameServer = new GameServer();
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
@@ -105,6 +121,9 @@ namespace AngbandOS.Web.Hubs
                 GameOver();
             }
             DisconnectSpectators();
+
+            // Abort the context.  This will throw the signal-r disconnect?
+            Context.Abort();
         }
 
         private void DisconnectSpectators()
@@ -197,9 +216,12 @@ namespace AngbandOS.Web.Hubs
         /// <param name="c"></param>
         public void Keypressed(string keys)
         {
-            foreach (char c in keys)
+            if (keys != null)
             {
-                KeyQueue.Enqueue(c);
+                foreach (char c in keys)
+                {
+                    KeyQueue.Enqueue(c);
+                }
             }
         }
 
@@ -212,7 +234,7 @@ namespace AngbandOS.Web.Hubs
             char c;
 
             // Wait until there is a key from the client.
-            while (!KeyQueue.TryDequeue(out c))
+            while (!KeyQueue.TryDequeue(out c) && !ShuttingDown)
             {
                 Thread.Sleep(5); // TODO: Use a wait event
             }

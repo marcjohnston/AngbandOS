@@ -370,7 +370,7 @@ namespace AngbandOS
             bool cv = SaveGame.CursorVisible;
             SaveGame.CursorVisible = true;
             SaveGame.MsgPrint("Select a point and press space.");
-            while (ch != 27 && ch != ' ')
+            while (ch != 27 && ch != ' ' && !SaveGame.Shutdown)
             {
                 _level.MoveCursorRelative(y, x);
                 ch = SaveGame.Inkey();
@@ -540,6 +540,11 @@ namespace AngbandOS
                     SaveGame.PrintLine(outVal, 0, 0);
                     _level.MoveCursorRelative(y, x);
                     query = SaveGame.Inkey();
+                    if (!SaveGame.Shutdown)
+                    {
+                        break;
+                    }
+
                     if (query != '\r' && query != '\n')
                     {
                         break;
@@ -559,7 +564,7 @@ namespace AngbandOS
                         string mName = mPtr.MonsterDesc(0x08);
                         SaveGame.HealthTrack(cPtr.MonsterIndex);
                         SaveGame.HandleStuff();
-                        while (true)
+                        while (true && !SaveGame.Shutdown)
                         {
                             if (recall)
                             {

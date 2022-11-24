@@ -53,7 +53,7 @@ namespace AngbandOS.Core
             {
                 saveGame.Print(Colour.White, _text[i], top + i + 1, left + 1);
             }
-            while (true)
+            while (true && !saveGame.Shutdown)
             {
                 for (int i = 0; i < _items.Count; i++)
                 {
@@ -95,6 +95,7 @@ namespace AngbandOS.Core
                         break;
                 }
             }
+            return -1;
         }
 
         public int Show(SaveGame saveGame)

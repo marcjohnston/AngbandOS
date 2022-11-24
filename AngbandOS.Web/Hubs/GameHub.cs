@@ -12,10 +12,7 @@ namespace AngbandOS.Web.Hubs
 {
     [Authorize]
     /// <summary>
-    /// Represents the signal-r hub to process the following incoming and outgoing signal-r game messages:
-    /// - Play a game
-    /// - Keypressed from client
-    /// - Outgoing print, clear, sound, background and game-over messages.
+    /// Represents the signal-r hub to process the in-game messages.  This hub interfaces with the GameService to fulfill requests.
     /// </summary>
     public class GameHub : Hub<IGameHub>
     {

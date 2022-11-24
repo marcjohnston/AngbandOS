@@ -330,5 +330,91 @@ namespace AngbandOS.Web.Controllers
                     return base.StatusCode((int)HttpStatusCode.Forbidden);
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("preferences")]
+        [Produces("application/json")]
+        public async Task<ActionResult<GetUserPreferences>> GetUserPreferences()
+        {
+            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+            if (emailAddress == null)
+                return Unauthorized();
+
+            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+            if (appUser == null)
+                return base.StatusCode((int)HttpStatusCode.Forbidden);
+
+            UserSettingsDetails? userSettings = await WebPersistentStorage.GetPreferences(appUser.Id);
+            return new GetUserPreferences()
+            {
+                FontName = userSettings == null ? null : userSettings.FontName,
+                FontSize = userSettings == null ? null : userSettings.FontSize,
+                F1Macro = userSettings == null ? null : userSettings.F1Macro,
+                F2Macro = userSettings == null ? null : userSettings.F2Macro,
+                F3Macro = userSettings == null ? null : userSettings.F3Macro,
+                F4Macro = userSettings == null ? null : userSettings.F4Macro,
+                F5Macro = userSettings == null ? null : userSettings.F5Macro,
+                F6Macro = userSettings == null ? null : userSettings.F6Macro,
+                F7Macro = userSettings == null ? null : userSettings.F7Macro,
+                F8Macro = userSettings == null ? null : userSettings.F8Macro,
+                F9Macro = userSettings == null ? null : userSettings.F9Macro,
+                F10Macro = userSettings == null ? null : userSettings.F10Macro,
+                F11Macro = userSettings == null ? null : userSettings.F11Macro,
+                F12Macro = userSettings == null ? null : userSettings.F12Macro
+            };
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("preferences")]
+        [Produces("application/json")]
+        public async Task<ActionResult<GetUserPreferences>> PutUserPreferences([FromBody] PutUserPreferences userSettings)
+        {
+            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+            if (emailAddress == null)
+                return Unauthorized();
+
+            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+            if (appUser == null)
+                return base.StatusCode((int)HttpStatusCode.Forbidden);
+
+            UserSettingsDetails userSettingsDetails = new UserSettingsDetails()
+            {
+                FontName = userSettings.FontName,
+                FontSize = userSettings.FontSize,
+                F1Macro = userSettings.F1Macro,
+                F2Macro = userSettings.F2Macro,
+                F3Macro = userSettings.F3Macro,
+                F4Macro = userSettings.F4Macro,
+                F5Macro = userSettings.F5Macro,
+                F6Macro = userSettings.F6Macro,
+                F7Macro = userSettings.F7Macro,
+                F8Macro = userSettings.F8Macro,
+                F9Macro = userSettings.F9Macro,
+                F10Macro = userSettings.F10Macro,
+                F11Macro = userSettings.F11Macro,
+                F12Macro = userSettings.F12Macro
+            };
+
+            UserSettingsDetails? updatedUserSettings = await WebPersistentStorage.WritePreferencesAsync(appUser.Id, userSettingsDetails);
+            return  new GetUserPreferences()
+            {
+                FontName = userSettings.FontName,
+                FontSize = userSettings.FontSize,
+                F1Macro = userSettings.F1Macro,
+                F2Macro = userSettings.F2Macro,
+                F3Macro = userSettings.F3Macro,
+                F4Macro = userSettings.F4Macro,
+                F5Macro = userSettings.F5Macro,
+                F6Macro = userSettings.F6Macro,
+                F7Macro = userSettings.F7Macro,
+                F8Macro = userSettings.F8Macro,
+                F9Macro = userSettings.F9Macro,
+                F10Macro = userSettings.F10Macro,
+                F11Macro = userSettings.F11Macro,
+                F12Macro = userSettings.F12Macro
+            };
+        }
     }
 }

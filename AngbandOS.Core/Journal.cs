@@ -36,7 +36,7 @@ namespace AngbandOS
             SaveGame.FullScreenOverlay = true;
             SaveGame.SaveScreen();
             SaveGame.SetBackground(BackgroundImage.Paper);
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 SaveGame.UpdateScreen();
                 SaveGame.Clear();
@@ -484,7 +484,7 @@ namespace AngbandOS
                 }
             }
             int first = 0;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 string buf;
                 SaveGame.Clear();
@@ -614,8 +614,8 @@ namespace AngbandOS
                 {
                     currentIndex = maxFiltered - 1;
                 }
-                char c;
-                while (true)
+                char c = '\x00';
+                while (true && !SaveGame.Shutdown)
                 {
                     SaveGame.Clear();
                     SaveGame.Print(Colour.Blue, "Monsters Seen", 0, 1);
@@ -700,7 +700,7 @@ namespace AngbandOS
             string[] features = SaveGame.Player.Dna.GetMutationList();
             int maxFeature = features.Length;
             int first = 0;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 SaveGame.Clear();
                 SaveGame.Print(Colour.Blue, "Mutations", 0, 1);
@@ -764,7 +764,7 @@ namespace AngbandOS
                 pets++;
             }
             int first = 0;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 SaveGame.Clear();
                 SaveGame.Print(Colour.Blue, "Pets", 0, 1);
@@ -906,7 +906,7 @@ namespace AngbandOS
                 }
             }
             int first = 0;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 SaveGame.Clear();
                 SaveGame.Print(Colour.Blue, "Unique Foes", 0, 1);
@@ -972,7 +972,7 @@ namespace AngbandOS
             }
             _menuLength = TvalDescriptionPair.Tvals.Length - 1;
             int menu = _menuLength / 2;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
                 SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
@@ -1067,7 +1067,7 @@ namespace AngbandOS
             }
             _menuLength = 4;
             int menu = 1;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
                 SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
@@ -1109,7 +1109,7 @@ namespace AngbandOS
             }
             _menuLength = 4;
             int menu = 1;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
                 SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
@@ -1166,7 +1166,7 @@ namespace AngbandOS
                 }
             }
             int menu = _menuLength / 2;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
                 SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);

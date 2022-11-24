@@ -44,9 +44,18 @@
     <None Remove="ClientApp\src\app\modules\html-console\print-line.ts" />
     <None Remove="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
     <None Remove="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
+    <None Remove="ClientApp\src\app\play\get-user-preferences.ts" />
+    <None Remove="ClientApp\src\app\play\preferences.ts" />
+    <None Remove="ClientApp\src\app\play\put-user-preferences.ts" />
+    <None Remove="ClientApp\src\app\preferences-dialog\preferences-dialog-data.ts" />
+    <None Remove="ClientApp\src\app\preferences-dialog\preferences-dialog-form-group.ts" />
     <None Remove="ClientApp\src\app\ui\ui-configuration.ts" />
     <None Remove="TemplateProcessing\ConfirmEmail.html" />
     <None Remove="TemplateProcessing\ResetPassword.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\play\get-user-preferences.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +97,10 @@
     <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-enum\sound-effects-enum.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\sound-effects-map\sound-effects-map.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modules\html-console\console-configuration.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\play\preferences.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\play\put-user-preferences.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\preferences-dialog\preferences-dialog-form-group.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\preferences-dialog\preferences-dialog-data.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

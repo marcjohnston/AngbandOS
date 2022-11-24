@@ -32,7 +32,7 @@ namespace AngbandOS.StoreCommands
             saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
-            while (true)
+            while (true && !saveGame.Shutdown)
             {
                 // Clear the screen
                 saveGame.Clear();
