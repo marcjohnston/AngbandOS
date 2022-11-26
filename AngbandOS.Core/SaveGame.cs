@@ -24,6 +24,7 @@ using AngbandOS.Core.Races;
 using System.Reflection;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.ItemClasses;
+using static AngbandOS.MonsterList;
 
 namespace AngbandOS
 {
@@ -177,6 +178,66 @@ namespace AngbandOS
         public bool Shutdown = false;
 
         /// GUI
+        public const int CentMax = 100;
+        public const int DoorMax = 200;
+        public const int MaxRoomsCol = Level.MaxWid / _blockWid;
+        public const int MaxRoomsRow = Level.MaxHgt / _blockHgt;
+        public const int SafeMaxAttempts = 5000;
+        public const int TunnMax = 900;
+        public const int WallMax = 500;
+
+        private const int _allocSetBoth = 3;
+        private const int _allocSetCorr = 1;
+        private const int _allocSetRoom = 2;
+        private const int _allocTypGold = 4;
+        private const int _allocTypObject = 5;
+        private const int _allocTypRubble = 1;
+        private const int _allocTypTrap = 3;
+        private const int _blockHgt = 21;
+        private const int _blockWid = 11;
+        private const int _darkEmpty = 5;
+        private const int _dunAmtGold = 3;
+        private const int _dunAmtItem = 3;
+        private const int _dunAmtRoom = 9;
+        private const int _dunDest = 18;
+        private const int _dunRooms = 50;
+        private const int _dunStrDen = 5;
+        private const int _dunStrMag = 3;
+        private const int _dunStrMc = 90;
+        private const int _dunStrQc = 40;
+        private const int _dunStrQua = 2;
+        private const int _dunStrRng = 2;
+        private const int _dunTunChg = 30;
+        private const int _dunTunCon = 15;
+        private const int _dunTunJct = 90;
+        private const int _dunTunPen = 25;
+        private const int _dunTunRnd = 10;
+        private const int _dunUnusual = 194;
+        private const int _emptyLevel = 15;
+        private const int _smallLevel = 3;
+
+        private readonly Room[] _room =
+        {
+            new Room(0, 0, 0, 0, 0), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 3),
+            new Room(0, 0, -1, 1, 3), new Room(0, 0, -1, 1, 5), new Room(0, 0, -1, 1, 5), new Room(0, 1, -1, 1, 5),
+            new Room(-1, 2, -2, 3, 10), new Room(0, 1, -1, 1, 1)
+        };
+
+        private MapCoordinate[] Cent;
+        private MapCoordinate[] Door;
+        private bool[][] RoomMap;
+        private MapCoordinate[] Tunn;
+        private MapCoordinate[] Wall;
+        private int CentN;
+        private int ColRooms;
+        private bool Crowded;
+        private int DoorN;
+        private int RowRooms;
+        private int TunnN;
+        private int WallN;
+
+        private int _templateRace;
+        private uint _vaultAuxDragonMask4;
 
         /// <summary>
         /// Creates a new game.
@@ -435,8 +496,7 @@ namespace AngbandOS
             if (Level == null)
             {
                 Level = new Level(this);
-                LevelFactory factory = new LevelFactory(this);
-                factory.GenerateNewLevel();
+                GenerateNewLevel();
             }
             FullScreenOverlay = false;
             SetBackground(BackgroundImage.Overhead);
@@ -486,8 +546,7 @@ namespace AngbandOS
                     break;
                 }
                 Level = new Level(this);
-                LevelFactory factory = new LevelFactory(this);
-                factory.GenerateNewLevel();
+                GenerateNewLevel();
                 Level.ReplacePets(Player.MapY, Player.MapX, _petList);
             }
             UpdateNotifier?.GameStopped();
@@ -13389,5 +13448,4213 @@ namespace AngbandOS
             }
         }
         ////////////////// PLAYER FACTORY
+
+        /// LEVEL FACTORY
+
+        public void GenerateNewLevel()
+        {
+            for (int num = 0; ; num++)
+            {
+                bool okay = true;
+                Level.OMax = 1;
+                int i;
+                for (i = 0; i < Level.MaxHgt; i++)
+                {
+                    Level.Grid[i] = new GridTile[Level.MaxWid];
+                    for (int j = 0; j < Level.MaxWid; j++)
+                    {
+                        Level.Grid[i][j] = new GridTile(this);
+                        if (CurrentDepth == 0)
+                        {
+                            Level.Grid[i][j].SetBackgroundFeature("Grass");
+                        }
+                        else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Tower)
+                        {
+                            Level.Grid[i][j].SetBackgroundFeature("TowerFloor");
+                        }
+                        else
+                        {
+                            Level.Grid[i][j].SetBackgroundFeature("DungeonFloor");
+                        }
+                    }
+                }
+                Level.PanelRowMin = 0;
+                Level.PanelRowMax = 0;
+                Level.PanelColMin = 0;
+                Level.PanelColMax = 0;
+                if (CurrentDepth == 0)
+                {
+                    if (Wilderness[Player.WildernessY][Player.WildernessX]
+                            .Town != null)
+                    {
+                        CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                        DungeonDifficulty = 0;
+                        Level.Monsters.DunBias = 0;
+                        if (Wilderness[Player.WildernessY][Player.WildernessX].Town.Char == 'K')
+                        {
+                            DungeonDifficulty = 35;
+                            Level.Monsters.DunBias = Constants.SummonCthuloid;
+                        }
+                    }
+                    else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
+                    {
+                        DungeonDifficulty =
+                            Wilderness[Player.WildernessY][Player.WildernessX]
+                                .Dungeon.Offset / 2;
+                        if (DungeonDifficulty < 4)
+                        {
+                            DungeonDifficulty = 4;
+                        }
+                        Level.Monsters.DunBias = Wilderness[Player.WildernessY][Player.WildernessX]
+                                .Dungeon.Bias;
+                    }
+                    else
+                    {
+                        DungeonDifficulty = 2;
+                        Level.Monsters.DunBias = Constants.SummonAnimal;
+                    }
+                }
+                else
+                {
+                    DungeonDifficulty = CurDungeon.Offset;
+                    Level.Monsters.DunBias = CurDungeon.Bias;
+                }
+                Level.MonsterLevel = Difficulty;
+                Level.ObjectLevel = Difficulty;
+                Level.SpecialTreasure = false;
+                Level.SpecialDanger = false;
+                Level.TreasureRating = 0;
+                Level.DangerRating = 0;
+                if (CurrentDepth == 0)
+                {
+                    Level.CurHgt = Constants.ScreenHgt;
+                    Level.CurWid = Constants.ScreenWid;
+                    Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
+                    Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                    Level.PanelRow = Level.MaxPanelRows;
+                    Level.PanelCol = Level.MaxPanelCols;
+                    if (Wilderness[Player.WildernessY][Player.WildernessX]
+                            .Town != null)
+                    {
+                        TownGen();
+                    }
+                    else
+                    {
+                        WildernessGen();
+                    }
+                }
+                else
+                {
+                    if (CurDungeon.Tower)
+                    {
+                        Level.CurHgt = Constants.ScreenHgt;
+                        Level.CurWid = Constants.ScreenWid;
+                        Level.MaxPanelRows = 0;
+                        Level.MaxPanelCols = 0;
+                        Level.PanelRow = 0;
+                        Level.PanelCol = 0;
+                    }
+                    else
+                    {
+                        if (Program.Rng.DieRoll(_smallLevel) == 1)
+                        {
+                            int tester1 = Program.Rng.DieRoll(Level.MaxHgt / Constants.ScreenHgt);
+                            int tester2 = Program.Rng.DieRoll(Level.MaxWid / Constants.ScreenWid);
+                            Level.CurHgt = tester1 * Constants.ScreenHgt;
+                            Level.CurWid = tester2 * Constants.ScreenWid;
+                            Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
+                            Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                            Level.PanelRow = Level.MaxPanelRows;
+                            Level.PanelCol = Level.MaxPanelCols;
+                        }
+                        else
+                        {
+                            Level.CurHgt = Level.MaxHgt;
+                            Level.CurWid = Level.MaxWid;
+                            Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
+                            Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                            Level.PanelRow = Level.MaxPanelRows;
+                            Level.PanelCol = Level.MaxPanelCols;
+                        }
+                    }
+                    if (!UndergroundGen())
+                    {
+                        okay = false;
+                    }
+                }
+                if (Level.TreasureRating > 100)
+                {
+                    Level.TreasureFeeling = 2;
+                }
+                else if (Level.TreasureRating > 80)
+                {
+                    Level.TreasureFeeling = 3;
+                }
+                else if (Level.TreasureRating > 60)
+                {
+                    Level.TreasureFeeling = 4;
+                }
+                else if (Level.TreasureRating > 40)
+                {
+                    Level.TreasureFeeling = 5;
+                }
+                else if (Level.TreasureRating > 30)
+                {
+                    Level.TreasureFeeling = 6;
+                }
+                else if (Level.TreasureRating > 20)
+                {
+                    Level.TreasureFeeling = 7;
+                }
+                else if (Level.TreasureRating > 10)
+                {
+                    Level.TreasureFeeling = 8;
+                }
+                else if (Level.TreasureRating > 0)
+                {
+                    Level.TreasureFeeling = 9;
+                }
+                else
+                {
+                    Level.TreasureFeeling = 10;
+                }
+                if (Level.SpecialTreasure)
+                {
+                    Level.TreasureRating = 1;
+                }
+                if (Level.DangerRating > 100)
+                {
+                    Level.DangerFeeling = 2;
+                }
+                else if (Level.DangerRating > 80)
+                {
+                    Level.DangerFeeling = 3;
+                }
+                else if (Level.DangerRating > 60)
+                {
+                    Level.DangerFeeling = 4;
+                }
+                else if (Level.DangerRating > 40)
+                {
+                    Level.DangerFeeling = 5;
+                }
+                else if (Level.DangerRating > 30)
+                {
+                    Level.DangerFeeling = 6;
+                }
+                else if (Level.DangerRating > 20)
+                {
+                    Level.DangerFeeling = 7;
+                }
+                else if (Level.DangerRating > 10)
+                {
+                    Level.DangerFeeling = 8;
+                }
+                else if (Level.DangerRating > 0)
+                {
+                    Level.DangerFeeling = 9;
+                }
+                else
+                {
+                    Level.DangerFeeling = 10;
+                }
+                if (Level.SpecialDanger)
+                {
+                    Level.DangerFeeling = 1;
+                }
+                if (CurrentDepth <= 0)
+                {
+                    Level.TreasureFeeling = 0;
+                    Level.DangerFeeling = 0;
+                }
+                if (Level.OMax >= Constants.MaxOIdx)
+                {
+                    okay = false;
+                }
+                if (Level.MMax >= Constants.MaxMIdx)
+                {
+                    okay = false;
+                }
+                if (num < 100)
+                {
+                    int totalFeeling = Level.TreasureFeeling + Level.DangerFeeling;
+                    if (totalFeeling > 18 ||
+                        (Difficulty >= 5 && totalFeeling > 16) ||
+                        (Difficulty >= 10 && totalFeeling > 14) ||
+                        (Difficulty >= 20 && totalFeeling > 12) ||
+                        (Difficulty >= 40 && totalFeeling > 10))
+                    {
+                        okay = false;
+                    }
+                }
+                if (okay)
+                {
+                    break;
+                }
+                Level.WipeOList();
+                Level.Monsters.WipeMList();
+            }
+            Player.GameTime.MarkLevelEntry();
+        }
+
+        private void AllocObject(int set, int typ, int num)
+        {
+            int y = 0;
+            int x = 0;
+            int dummy = 0;
+            for (int k = 0; k < num; k++)
+            {
+                while (dummy < SafeMaxAttempts)
+                {
+                    dummy++;
+                    y = Program.Rng.RandomLessThan(Level.CurHgt);
+                    x = Program.Rng.RandomLessThan(Level.CurWid);
+                    if (!Level.GridOpenNoItemOrCreature(y, x))
+                    {
+                        continue;
+                    }
+                    bool isRoom = Level.Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
+                    if (set == _allocSetCorr && isRoom)
+                    {
+                        continue;
+                    }
+                    if (set == _allocSetRoom && !isRoom)
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                if (dummy >= SafeMaxAttempts)
+                {
+                    return;
+                }
+                switch (typ)
+                {
+                    case _allocTypRubble:
+                        {
+                            PlaceRubble(y, x);
+                            break;
+                        }
+                    case _allocTypTrap:
+                        {
+                            Level.PlaceTrap(y, x);
+                            break;
+                        }
+                    case _allocTypGold:
+                        {
+                            Level.PlaceGold(y, x);
+                            break;
+                        }
+                    case _allocTypObject:
+                        {
+                            Level.PlaceObject(y, x, false, false);
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void AllocStairs(string feat, int num, int walls)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                for (bool flag = false; !flag;)
+                {
+                    for (int j = 0; !flag && j <= 3000; j++)
+                    {
+                        int y = Program.Rng.RandomLessThan(Level.CurHgt);
+                        int x = Program.Rng.RandomLessThan(Level.CurWid);
+                        if (!Level.GridOpenNoItemOrCreature(y, x))
+                        {
+                            continue;
+                        }
+                        if (NextToWalls(y, x) < walls)
+                        {
+                            continue;
+                        }
+                        GridTile cPtr = Level.Grid[y][x];
+                        if (CurrentDepth <= 0)
+                        {
+                            cPtr.SetFeature("DownStair");
+                        }
+                        else if (Quests.IsQuest(CurrentDepth) ||
+                                 CurrentDepth == CurDungeon.MaxLevel)
+                        {
+                            cPtr.SetFeature(CurDungeon.Tower ? "DownStair" : "UpStair");
+                        }
+                        else
+                        {
+                            cPtr.SetFeature(feat);
+                        }
+                        flag = true;
+                    }
+                    if (walls != 0)
+                    {
+                        walls--;
+                    }
+                }
+            }
+        }
+
+        private void BuildField(int yy, int xx)
+        {
+            int y0 = (yy * 9) + 8;
+            int x0 = (xx * 15) + 10;
+            int y1 = y0 - Program.Rng.DieRoll(2) - 1;
+            int y2 = y0 + Program.Rng.DieRoll(2) + 1;
+            int x1 = x0 - Program.Rng.DieRoll(3) - 2;
+            int x2 = x0 + Program.Rng.DieRoll(3) + 2;
+            const string feature = "Field";
+            for (int x = x1; x < x2; x++)
+            {
+                for (int y = y1; y < y2; y++)
+                {
+                    Level.Grid[y][x].SetFeature(feature);
+                    Level.Grid[y][x].SetBackgroundFeature(feature);
+                }
+            }
+            if (Program.Rng.DieRoll(5) == 4)
+            {
+                int x = Program.Rng.RandomBetween(x1, x2);
+                int y = Program.Rng.RandomBetween(y1, y2);
+                Level.Grid[y][x].SetFeature("Scarecrow");
+            }
+        }
+
+        private void BuildGraveyard(int yy, int xx)
+        {
+            int y0 = (yy * 9) + 8;
+            int x0 = (xx * 15) + 10;
+            int y1 = y0 - Program.Rng.DieRoll(2) - 1;
+            int y2 = y0 + Program.Rng.DieRoll(2) + 1;
+            int x1 = x0 - Program.Rng.DieRoll(3) - 2;
+            int x2 = x0 + Program.Rng.DieRoll(3) + 2;
+            for (int i = 0; i < Program.Rng.RandomBetween(10, 20); i++)
+            {
+                int x = (Program.Rng.RandomBetween(x1, x2) / 2 * 2) + 1;
+                int y = (Program.Rng.RandomBetween(y1, y2) / 2 * 2) + 1;
+                Level.Grid[y][x].SetFeature("Grave");
+            }
+        }
+
+        private void BuildStore(Store store, int yy, int xx)
+        {
+            int y, x;
+            GridTile cPtr;
+            if (CurTown.Char != 'K')
+            {
+                if (store.StoreType == StoreType.StoreEmptyLot)
+                {
+                    switch (Program.Rng.DieRoll(10))
+                    {
+                        case 3:
+                        case 7:
+                        case 9:
+                            break;
+
+                        case 6:
+                            BuildGraveyard(yy, xx);
+                            break;
+
+                        default:
+                            BuildField(yy, xx);
+                            break;
+                    }
+                    return;
+                }
+            }
+            int y0 = (yy * 9) + 6;
+            int x0 = (xx * 15) + 10;
+            int y1 = y0 - Program.Rng.DieRoll(2);
+            int y2 = y0 + Program.Rng.DieRoll(2) + 1;
+            int x1 = x0 - Program.Rng.DieRoll(3) - 2;
+            int x2 = x0 + Program.Rng.DieRoll(3) + 2;
+            if ((y2 - y1) % 2 == 0)
+            {
+                y2++;
+            }
+            for (y = y1; y <= y2; y++)
+            {
+                for (x = x1; x <= x2; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    if (CurTown.Char == 'K')
+                    {
+                        switch (Program.Rng.DieRoll(6))
+                        {
+                            case 1:
+                                cPtr.SetFeature("WallInner");
+                                break;
+
+                            case 2:
+                            case 3:
+                            case 4:
+                                cPtr.SetFeature("Rubble");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        if (y == y2)
+                        {
+                            cPtr.SetFeature("WallPermBuilding");
+                        }
+                        else
+                        {
+                            cPtr.SetFeature("Roof");
+                        }
+                    }
+                    cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                }
+            }
+            y = y2;
+            x = Program.Rng.RandomBetween(x1 + 1, x2 - 2);
+            cPtr = Level.Grid[y][x];
+            if (CurTown.Char == 'K')
+            {
+                if (Program.Rng.DieRoll(8) == 6)
+                {
+                    PlaceRandomDoor(y, x);
+                }
+            }
+            else
+            {
+                cPtr.SetFeature(store.FeatureType);
+            }
+            store.SetLocation(x, y);
+            for (++y; y < y0 + 7; y++)
+            {
+                cPtr = Level.Grid[y][x];
+                cPtr.SetFeature("PathBase");
+            }
+            y--;
+            int dX = Math.Sign((Level.CurWid / 2) - x);
+            for (x += dX; x != Level.CurWid / 2; x += dX)
+            {
+                cPtr = Level.Grid[y][x];
+                cPtr.SetFeature("PathBase");
+            }
+        }
+
+        private void BuildStreamer(string feat, int chance)
+        {
+            int dummy = 0;
+            int y = Program.Rng.RandomSpread(Level.CurHgt / 2, 10);
+            int x = Program.Rng.RandomSpread(Level.CurWid / 2, 15);
+            int dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+            while (dummy < SafeMaxAttempts)
+            {
+                dummy++;
+                for (int i = 0; i < _dunStrDen; i++)
+                {
+                    const int d = _dunStrRng;
+                    int tx;
+                    int ty;
+                    while (true)
+                    {
+                        ty = Program.Rng.RandomSpread(y, d);
+                        tx = Program.Rng.RandomSpread(x, d);
+                        if (!Level.InBounds2(ty, tx))
+                        {
+                            continue;
+                        }
+                        break;
+                    }
+                    GridTile cPtr = Level.Grid[ty][tx];
+
+                    if (!cPtr.FeatureType.IsBasicWall)
+                    {
+                        continue;
+                    }
+                    cPtr.SetFeature(feat);
+                    if (Program.Rng.RandomLessThan(chance) == 0)
+                    {
+                        cPtr.SetFeature(cPtr.FeatureType.Name + "VisTreas");
+                    }
+                }
+                if (dummy >= SafeMaxAttempts)
+                {
+                    return;
+                }
+                y += Level.KeypadDirectionYOffset[dir];
+                x += Level.KeypadDirectionXOffset[dir];
+                if (!Level.InBounds(y, x))
+                {
+                    break;
+                }
+            }
+        }
+
+        private void BuildTunnel(int row1, int col1, int row2, int col2)
+        {
+            int i, y, x;
+            int mainLoopCount = 0;
+            bool doorFlag = false;
+            GridTile cPtr;
+            TunnN = 0;
+            WallN = 0;
+            int startRow = row1;
+            int startCol = col1;
+            CorrectDir(out int rowDir, out int colDir, row1, col1, row2, col2);
+            while (row1 != row2 || col1 != col2)
+            {
+                if (mainLoopCount++ > 2000)
+                {
+                    break;
+                }
+                if (Program.Rng.RandomLessThan(100) < _dunTunChg)
+                {
+                    CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
+                    if (Program.Rng.RandomLessThan(100) < _dunTunRnd)
+                    {
+                        RandDir(out rowDir, out colDir);
+                    }
+                }
+                int tmpRow = row1 + rowDir;
+                int tmpCol = col1 + colDir;
+                while (!Level.InBounds(tmpRow, tmpCol))
+                {
+                    CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
+                    if (Program.Rng.RandomLessThan(100) < _dunTunRnd)
+                    {
+                        RandDir(out rowDir, out colDir);
+                    }
+                    tmpRow = row1 + rowDir;
+                    tmpCol = col1 + colDir;
+                }
+                cPtr = Level.Grid[tmpRow][tmpCol];
+                if (cPtr.FeatureType.Name == "WallPermSolid")
+                {
+                    continue;
+                }
+                if (cPtr.FeatureType.Name == "WallPermOuter")
+                {
+                    continue;
+                }
+                if (cPtr.FeatureType.Name == "WallSolid")
+                {
+                    continue;
+                }
+                if (cPtr.FeatureType.Name == "WallOuter")
+                {
+                    y = tmpRow + rowDir;
+                    x = tmpCol + colDir;
+                    if (Level.Grid[y][x].FeatureType.Name == "WallPermSolid")
+                    {
+                        continue;
+                    }
+                    if (Level.Grid[y][x].FeatureType.Name == "WallPermOuter")
+                    {
+                        continue;
+                    }
+                    if (Level.Grid[y][x].FeatureType.Name == "WallOuter")
+                    {
+                        continue;
+                    }
+                    if (Level.Grid[y][x].FeatureType.Name == "WallSolid")
+                    {
+                        continue;
+                    }
+                    row1 = tmpRow;
+                    col1 = tmpCol;
+                    if (WallN < WallMax)
+                    {
+                        Wall[WallN].Y = row1;
+                        Wall[WallN].X = col1;
+                        WallN++;
+                    }
+                    for (y = row1 - 1; y <= row1 + 1; y++)
+                    {
+                        for (x = col1 - 1; x <= col1 + 1; x++)
+                        {
+                            if (Level.Grid[y][x].FeatureType.Name == "WallOuter")
+                            {
+                                Level.Grid[y][x].SetFeature("WallSolid");
+                            }
+                        }
+                    }
+                }
+                else if (cPtr.TileFlags.IsSet(GridTile.InRoom))
+                {
+                    row1 = tmpRow;
+                    col1 = tmpCol;
+                }
+                else if (cPtr.FeatureType.IsWall)
+                {
+                    row1 = tmpRow;
+                    col1 = tmpCol;
+                    if (TunnN < TunnMax)
+                    {
+                        Tunn[TunnN].Y = row1;
+                        Tunn[TunnN].X = col1;
+                        TunnN++;
+                    }
+                    doorFlag = false;
+                }
+                else
+                {
+                    row1 = tmpRow;
+                    col1 = tmpCol;
+                    if (!doorFlag)
+                    {
+                        if (DoorN < DoorMax)
+                        {
+                            Door[DoorN].Y = row1;
+                            Door[DoorN].X = col1;
+                            DoorN++;
+                        }
+                        doorFlag = true;
+                    }
+                    if (Program.Rng.RandomLessThan(100) >= _dunTunCon)
+                    {
+                        tmpRow = row1 - startRow;
+                        if (tmpRow < 0)
+                        {
+                            tmpRow = -tmpRow;
+                        }
+                        tmpCol = col1 - startCol;
+                        if (tmpCol < 0)
+                        {
+                            tmpCol = -tmpCol;
+                        }
+                        if (tmpRow > 10 || tmpCol > 10)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            for (i = 0; i < TunnN; i++)
+            {
+                y = Tunn[i].Y;
+                x = Tunn[i].X;
+                cPtr = Level.Grid[y][x];
+                cPtr.RevertToBackground();
+            }
+            for (i = 0; i < WallN; i++)
+            {
+                y = Wall[i].Y;
+                x = Wall[i].X;
+                cPtr = Level.Grid[y][x];
+                cPtr.RevertToBackground();
+                if (Program.Rng.RandomLessThan(100) < _dunTunPen)
+                {
+                    PlaceRandomDoor(y, x);
+                }
+            }
+        }
+
+        private void CorrectDir(out int rdir, out int cdir, int y1, int x1, int y2, int x2)
+        {
+            rdir = y1 == y2 ? 0 : y1 < y2 ? 1 : -1;
+            cdir = x1 == x2 ? 0 : x1 < x2 ? 1 : -1;
+            if (rdir != 0 && cdir != 0)
+            {
+                if (Program.Rng.RandomLessThan(100) < 50)
+                {
+                    rdir = 0;
+                }
+                else
+                {
+                    cdir = 0;
+                }
+            }
+        }
+
+        private void DestroyLevel()
+        {
+            for (int n = 0; n < Program.Rng.DieRoll(5); n++)
+            {
+                int x1 = Program.Rng.RandomBetween(5, Level.CurWid - 1 - 5);
+                int y1 = Program.Rng.RandomBetween(5, Level.CurHgt - 1 - 5);
+                int y;
+                for (y = y1 - 15; y <= y1 + 15; y++)
+                {
+                    int x;
+                    for (x = x1 - 15; x <= x1 + 15; x++)
+                    {
+                        if (!Level.InBounds(y, x))
+                        {
+                            continue;
+                        }
+                        int k = Level.Distance(y1, x1, y, x);
+                        if (k >= 16)
+                        {
+                            continue;
+                        }
+                        Level.DeleteMonster(y, x);
+                        if (Level.CaveValidBold(y, x))
+                        {
+                            Level.DeleteObject(y, x);
+                            GridTile cPtr = Level.Grid[y][x];
+                            int t = Program.Rng.RandomLessThan(200);
+                            if (t < 20)
+                            {
+                                cPtr.SetFeature("WallBasic");
+                            }
+                            else if (t < 70)
+                            {
+                                cPtr.SetFeature("Quartz");
+                            }
+                            else if (t < 100)
+                            {
+                                cPtr.SetFeature("Magma");
+                            }
+                            else
+                            {
+                                cPtr.RevertToBackground();
+                            }
+                            cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
+                            cPtr.TileFlags.Clear(GridTile.PlayerMemorised | GridTile.SelfLit);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MakeCavernLevel()
+        {
+            PerlinNoise perlinNoise = new PerlinNoise(Program.Rng.RandomBetween(0, int.MaxValue - 1));
+            double widthDivisor = 1 / (double)Level.CurWid;
+            double heightDivisor = 1 / (double)Level.CurHgt;
+            for (int y = 0; y < Level.CurHgt; y++)
+            {
+                for (int x = 0; x < Level.CurWid; x++)
+                {
+                    GridTile cPtr = Level.Grid[y][x];
+                    double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
+                    v = (v + 1) / 2;
+                    double dX = Math.Abs(x - (Level.CurWid / 2)) * widthDivisor;
+                    double dY = Math.Abs(y - (Level.CurHgt / 2)) * heightDivisor;
+                    double d = Math.Max(dX, dY);
+                    const double elevation = 0.05;
+                    const double steepness = 6.0;
+                    const double dropoff = 50.0;
+                    v += elevation - (dropoff * Math.Pow(d, steepness));
+                    v = Math.Min(1, Math.Max(0, v));
+                    int rounded = (int)(v * 10);
+                    if (rounded < 2 || rounded > 5)
+                    {
+                        cPtr.SetFeature("WallBasic");
+                    }
+                    else
+                    {
+                        cPtr.SetFeature("DungeonFloor");
+                    }
+                }
+            }
+            for (int i = 0; i < _dunStrMag; i++)
+            {
+                BuildStreamer("Magma", _dunStrMc);
+            }
+            for (int i = 0; i < _dunStrQua; i++)
+            {
+                BuildStreamer("Quartz", _dunStrQc);
+            }
+            for (int x = 0; x < Level.CurWid; x++)
+            {
+                GridTile cPtr = Level.Grid[0][x];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (int x = 0; x < Level.CurWid; x++)
+            {
+                GridTile cPtr = Level.Grid[Level.CurHgt - 1][x];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (int y = 0; y < Level.CurHgt; y++)
+            {
+                GridTile cPtr = Level.Grid[y][0];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (int y = 0; y < Level.CurHgt; y++)
+            {
+                GridTile cPtr = Level.Grid[y][Level.CurWid - 1];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            if (Program.Rng.DieRoll(_darkEmpty) != 1 || Program.Rng.DieRoll(100) > Difficulty)
+            {
+                Level.WizLight();
+            }
+        }
+
+        private void MakeCornerTowers(int wildX, int wildY)
+        {
+            Island wilderness = Wilderness;
+            int height = Level.CurHgt;
+            int width = Level.CurWid;
+            if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY - 1][wildX].Town != null) ||
+                (wilderness[wildY][wildX - 1].Town != null) || (wilderness[wildY - 1][wildX - 1].Town != null))
+            {
+                Level.Grid[0][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][0].RevertToBackground();
+                Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][0].SetFeature("TownWall");
+                Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][1].SetFeature("TownWall");
+                Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][1].SetFeature("TownWall");
+                Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY - 1][wildX].Town != null) ||
+                (wilderness[wildY][wildX + 1].Town != null) || (wilderness[wildY - 1][wildX + 1].Town != null))
+            {
+                Level.Grid[0][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][width - 1].RevertToBackground();
+                Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][width - 1].SetFeature("TownWall");
+                Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][width - 2].SetFeature("TownWall");
+                Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][width - 2].SetFeature("TownWall");
+                Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY + 1][wildX].Town != null) ||
+                (wilderness[wildY][wildX + 1].Town != null) || (wilderness[wildY + 1][wildX + 1].Town != null))
+            {
+                Level.Grid[height - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][width - 1].RevertToBackground();
+                Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][width - 1].SetFeature("TownWall");
+                Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][width - 2].SetFeature("TownWall");
+                Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][width - 2].SetFeature("TownWall");
+                Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY + 1][wildX].Town != null) ||
+                (wilderness[wildY][wildX - 1].Town != null) || (wilderness[wildY + 1][wildX - 1].Town != null))
+            {
+                Level.Grid[height - 1][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][0].RevertToBackground();
+                Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][0].SetFeature("TownWall");
+                Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][1].SetFeature("TownWall");
+                Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][1].SetFeature("TownWall");
+                Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+        }
+
+        private void MakeDungeonEntrance(int left, int top, int width, int height, out int stairX, out int stairY)
+        {
+            int dummy = 0;
+            int x = 1;
+            int y = 1;
+            while (dummy < SafeMaxAttempts)
+            {
+                dummy++;
+                y = Program.Rng.RandomBetween(top, top + height);
+                x = Program.Rng.RandomBetween(left, left + width);
+                if (Level.GridOpenNoItemOrCreature(y, x))
+                {
+                    break;
+                }
+            }
+            Level.Grid[y - 2][x].RevertToBackground();
+            Level.Grid[y - 1][x - 1].RevertToBackground();
+            Level.Grid[y - 1][x].RevertToBackground();
+            Level.Grid[y - 1][x + 1].RevertToBackground();
+            Level.Grid[y][x - 2].RevertToBackground();
+            Level.Grid[y][x - 1].RevertToBackground();
+            Level.Grid[y][x].SetFeature("DownStair");
+            stairX = x;
+            stairY = y;
+            Level.Grid[y][x + 1].RevertToBackground();
+            Level.Grid[y][x + 2].RevertToBackground();
+            Level.Grid[y + 1][x - 1].RevertToBackground();
+            Level.Grid[y + 1][x].RevertToBackground();
+            Level.Grid[y + 1][x + 1].RevertToBackground();
+            Level.Grid[y + 2][x].RevertToBackground();
+        }
+
+        private void MakeDungeonLevel()
+        {
+            int k;
+            int y;
+            int x;
+            int maxVaultOk = 2;
+            bool destroyed = false;
+            bool emptyLevel = false;
+
+            Cent = new MapCoordinate[SaveGame.CentMax];
+            for (int i = 0; i < SaveGame.CentMax; i++)
+            {
+                Cent[i] = new MapCoordinate();
+            }
+            Door = new MapCoordinate[SaveGame.DoorMax];
+            for (int i = 0; i < SaveGame.DoorMax; i++)
+            {
+                Door[i] = new MapCoordinate();
+            }
+            Wall = new MapCoordinate[SaveGame.WallMax];
+            for (int i = 0; i < SaveGame.WallMax; i++)
+            {
+                Wall[i] = new MapCoordinate();
+            }
+            Tunn = new MapCoordinate[SaveGame.TunnMax];
+            for (int i = 0; i < SaveGame.TunnMax; i++)
+            {
+                Tunn[i] = new MapCoordinate();
+            }
+            RoomMap = new bool[SaveGame.MaxRoomsRow][];
+            for (int i = 0; i < SaveGame.MaxRoomsRow; i++)
+            {
+                RoomMap[i] = new bool[SaveGame.MaxRoomsCol];
+            }
+
+            if (Level.MaxPanelRows == 0)
+            {
+                maxVaultOk--;
+            }
+            if (Level.MaxPanelCols == 0)
+            {
+                maxVaultOk--;
+            }
+            if (Program.Rng.DieRoll(_emptyLevel) == 1)
+            {
+                emptyLevel = true;
+            }
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                for (x = 0; x < Level.CurWid; x++)
+                {
+                    GridTile cPtr = Level.Grid[y][x];
+                    if (emptyLevel)
+                    {
+                        cPtr.RevertToBackground();
+                    }
+                    else
+                    {
+                        cPtr.SetFeature("WallBasic");
+                    }
+                }
+            }
+            if (Difficulty > 10 && Program.Rng.RandomLessThan(_dunDest) == 0)
+            {
+                destroyed = true;
+            }
+            if (Quests.IsQuest(CurrentDepth))
+            {
+                destroyed = false;
+            }
+            RowRooms = Level.CurHgt / _blockHgt;
+            ColRooms = Level.CurWid / _blockWid;
+            for (y = 0; y < RowRooms; y++)
+            {
+                for (x = 0; x < ColRooms; x++)
+                {
+                    RoomMap[y][x] = false;
+                }
+            }
+            Crowded = false;
+            CentN = 0;
+            for (int i = 0; i < _dunRooms; i++)
+            {
+                y = Program.Rng.RandomLessThan(RowRooms);
+                x = Program.Rng.RandomLessThan(ColRooms);
+                if (x % 3 == 0)
+                {
+                    x++;
+                }
+                if (x % 3 == 2)
+                {
+                    x--;
+                }
+                if (destroyed)
+                {
+                    if (RoomBuild(y, x, 1))
+                    {
+                    }
+                    continue;
+                }
+                if (Program.Rng.RandomLessThan(_dunUnusual) < Difficulty)
+                {
+                    k = Program.Rng.RandomLessThan(100);
+                    if (Program.Rng.RandomLessThan(_dunUnusual) < Difficulty)
+                    {
+                        if (k < 10)
+                        {
+                            if (maxVaultOk > 1)
+                            {
+                                if (RoomBuild(y, x, 8))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+                        if (k < 25)
+                        {
+                            if (maxVaultOk > 0)
+                            {
+                                if (RoomBuild(y, x, 7))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+                        if (k < 40 && RoomBuild(y, x, 5))
+                        {
+                            continue;
+                        }
+                        if (k < 55 && RoomBuild(y, x, 6))
+                        {
+                            continue;
+                        }
+                    }
+                    if (k < 25 && RoomBuild(y, x, 4))
+                    {
+                        continue;
+                    }
+                    if (k < 50 && RoomBuild(y, x, 3))
+                    {
+                        continue;
+                    }
+                    if (k < 100 && RoomBuild(y, x, 2))
+                    {
+                        continue;
+                    }
+                }
+                if (RoomBuild(y, x, 1))
+                {
+                }
+            }
+            for (x = 0; x < Level.CurWid; x++)
+            {
+                GridTile cPtr = Level.Grid[0][x];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (x = 0; x < Level.CurWid; x++)
+            {
+                GridTile cPtr = Level.Grid[Level.CurHgt - 1][x];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                GridTile cPtr = Level.Grid[y][0];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                GridTile cPtr = Level.Grid[y][Level.CurWid - 1];
+                cPtr.SetFeature("WallPermSolid");
+            }
+            for (int i = 0; i < CentN; i++)
+            {
+                int pick1 = Program.Rng.RandomLessThan(CentN);
+                int pick2 = Program.Rng.RandomLessThan(CentN);
+                int y1 = Cent[pick1].Y;
+                int x1 = Cent[pick1].X;
+                Cent[pick1].Y = Cent[pick2].Y;
+                Cent[pick1].X = Cent[pick2].X;
+                Cent[pick2].Y = y1;
+                Cent[pick2].X = x1;
+            }
+            DoorN = 0;
+            y = Cent[CentN - 1].Y;
+            x = Cent[CentN - 1].X;
+            for (int i = 0; i < CentN; i++)
+            {
+                BuildTunnel(Cent[i].Y, Cent[i].X, y, x);
+                y = Cent[i].Y;
+                x = Cent[i].X;
+            }
+            for (int i = 0; i < DoorN; i++)
+            {
+                y = Door[i].Y;
+                x = Door[i].X;
+                TryDoor(y, x - 1);
+                TryDoor(y, x + 1);
+                TryDoor(y - 1, x);
+                TryDoor(y + 1, x);
+            }
+            for (int i = 0; i < _dunStrMag; i++)
+            {
+                BuildStreamer("Magma", _dunStrMc);
+            }
+            for (int i = 0; i < _dunStrQua; i++)
+            {
+                BuildStreamer("Quartz", _dunStrQc);
+            }
+            if (destroyed)
+            {
+                DestroyLevel();
+            }
+            if (emptyLevel && (Program.Rng.DieRoll(_darkEmpty) != 1 ||
+                               Program.Rng.DieRoll(100) > Difficulty))
+            {
+                Level.WizLight();
+            }
+        }
+
+        private void MakeHenge(int left, int top, int width, int height)
+        {
+            int midX = left + (width / 2);
+            int midY = top + (height / 2);
+            for (int y = midY - 3; y < midY + 3; y++)
+            {
+                Level.Grid[y][midX - 7].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 7].SetFeature("Grass");
+            }
+            for (int y = midY - 5; y < midY + 5; y++)
+            {
+                Level.Grid[y][midX - 6].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 6].SetFeature("Grass");
+            }
+            for (int y = midY - 6; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX - 5].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 5].SetFeature("Grass");
+            }
+            for (int y = midY - 6; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX - 4].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 4].SetFeature("Grass");
+            }
+            for (int y = midY - 7; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX - 3].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 3].SetFeature("Grass");
+            }
+            for (int y = midY - 7; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX - 2].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 2].SetFeature("Grass");
+            }
+            for (int y = midY - 6; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX - 1].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX - 1].SetFeature("Grass");
+            }
+            for (int y = midY - 7; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX].SetFeature("Grass");
+            }
+            for (int y = midY - 7; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX + 1].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 1].SetFeature("Grass");
+            }
+            for (int y = midY - 6; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX + 2].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 2].SetFeature("Grass");
+            }
+            for (int y = midY - 7; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX + 3].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 3].SetFeature("Grass");
+            }
+            for (int y = midY - 6; y < midY + 6; y++)
+            {
+                Level.Grid[y][midX + 4].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 4].SetFeature("Grass");
+            }
+            for (int y = midY - 5; y < midY + 5; y++)
+            {
+                Level.Grid[y][midX + 5].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 5].SetFeature("Grass");
+            }
+            for (int y = midY - 3; y < midY + 3; y++)
+            {
+                Level.Grid[y][midX + 6].SetBackgroundFeature("Grass");
+                Level.Grid[y][midX + 6].SetFeature("Grass");
+            }
+            Level.Grid[midY - 6][midX].SetFeature("Rock");
+            Level.Grid[midY - 6][midX - 1].SetFeature("Rock");
+            Level.Grid[midY - 5][midX - 4].SetFeature("Rock");
+            Level.Grid[midY - 4][midX - 5].SetFeature("Rock");
+            Level.Grid[midY - 1][midX - 6].SetFeature("Rock");
+            Level.Grid[midY][midX - 6].SetFeature("Rock");
+            Level.Grid[midY + 3][midX - 5].SetFeature("Rock");
+            Level.Grid[midY + 4][midX - 4].SetFeature("Rock");
+            Level.Grid[midY + 5][midX - 1].SetFeature("Rock");
+            Level.Grid[midY + 5][midX].SetFeature("Rock");
+            Level.Grid[midY + 4][midX + 3].SetFeature("Rock");
+            Level.Grid[midY + 3][midX + 4].SetFeature("Rock");
+            Level.Grid[midY][midX + 5].SetFeature("Rock");
+            Level.Grid[midY - 1][midX + 5].SetFeature("Rock");
+            Level.Grid[midY - 4][midX + 4].SetFeature("Rock");
+            Level.Grid[midY - 5][midX + 3].SetFeature("Rock");
+        }
+
+        private void MakeLake(int minX, int minY, int width, int height)
+        {
+            PerlinNoise perlinNoise = new PerlinNoise(Program.Rng.RandomBetween(0, int.MaxValue - 1));
+            double widthDivisor = 1 / (double)width;
+            double heightDivisor = 1 / (double)height;
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    GridTile cPtr = Level.Grid[minY + y][minX + x];
+                    double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
+                    v = (v + 1) / 2;
+                    double dX = Math.Abs(x - (width / 2)) * widthDivisor;
+                    double dY = Math.Abs(y - (height / 2)) * heightDivisor;
+                    double d = Math.Max(dX, dY);
+                    const double elevation = 0.05;
+                    const double steepness = 6.0;
+                    const double dropoff = 50.0;
+                    v += elevation - (dropoff * Math.Pow(d, steepness));
+                    v = Math.Min(1, Math.Max(0, v));
+                    int rounded = (int)(v * 10);
+                    if (rounded > 3)
+                    {
+                        cPtr.SetBackgroundFeature("Water");
+                        cPtr.SetFeature("Water");
+                    }
+                    else if (rounded == 3)
+                    {
+                        cPtr.SetBackgroundFeature("Grass");
+                        cPtr.SetFeature("Grass");
+                    }
+                }
+            }
+        }
+
+        private void MakeTower(int left, int top, int width, int height, out int stairX, out int stairY)
+        {
+            int i;
+            int y = top + height;
+            int x = left + (width / 2);
+            stairX = x;
+            stairY = y;
+            for (i = -2; i < 3; i++)
+            {
+                Level.Grid[y][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -4; i < 5; i++)
+            {
+                Level.Grid[y - 1][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 1][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -5; i < 6; i++)
+            {
+                Level.Grid[y - 2][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 2][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -6; i < 7; i++)
+            {
+                Level.Grid[y - 3][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 3][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -6; i < 7; i++)
+            {
+                Level.Grid[y - 4][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 4][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -7; i < 8; i++)
+            {
+                Level.Grid[y - 5][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 5][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -7; i < 8; i++)
+            {
+                Level.Grid[y - 6][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 6][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -7; i < 8; i++)
+            {
+                Level.Grid[y - 7][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 7][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -7; i < 8; i++)
+            {
+                Level.Grid[y - 8][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 8][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -7; i < 8; i++)
+            {
+                Level.Grid[y - 9][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 9][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -6; i < 7; i++)
+            {
+                Level.Grid[y - 10][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 10][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -6; i < 7; i++)
+            {
+                Level.Grid[y - 11][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 11][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -5; i < 6; i++)
+            {
+                Level.Grid[y - 12][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 12][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -4; i < 5; i++)
+            {
+                Level.Grid[y - 13][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 13][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            for (i = -2; i < 4; i++)
+            {
+                Level.Grid[y - 14][x + i].SetFeature("WallPermBuilding");
+                Level.Grid[y - 14][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            }
+            Level.Grid[y][x].SetFeature("UpStair");
+            Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            for (i = -3; i < 4; i++)
+            {
+                if (Level.Grid[y + 1][x + i].FeatureType.Category == FloorTileTypeCategory.Tree)
+                {
+                    Level.Grid[y + 1][x + i].RevertToBackground();
+                }
+            }
+            for (i = -2; i < 3; i++)
+            {
+                if (Level.Grid[y + 2][x + i].FeatureType.Category == FloorTileTypeCategory.Tree)
+                {
+                    Level.Grid[y + 2][x + i].RevertToBackground();
+                }
+            }
+        }
+
+        private void MakeTownCentre()
+        {
+            int xx = Level.CurWid / 2;
+            int yy = Level.CurHgt / 2;
+            switch (Program.Rng.DieRoll(12))
+            {
+                case 1:
+                case 3:
+                    Level.Grid[yy - 1][xx - 1].SetFeature("PathBase");
+                    Level.Grid[yy][xx - 1].SetFeature("PathBase");
+                    Level.Grid[yy + 1][xx - 1].SetFeature("PathBase");
+                    Level.Grid[yy - 1][xx].SetFeature("PathBase");
+                    Level.Grid[yy + 1][xx].SetFeature("PathBase");
+                    Level.Grid[yy - 1][xx + 1].SetFeature("PathBase");
+                    Level.Grid[yy][xx + 1].SetFeature("PathBase");
+                    Level.Grid[yy + 1][xx + 1].SetFeature("PathBase");
+                    switch (Program.Rng.DieRoll(6))
+                    {
+                        case 4:
+                        case 1:
+                            Level.Grid[yy][xx].RevertToBackground();
+                            break;
+
+                        case 2:
+                            Level.Grid[yy][xx].SetFeature("Statue");
+                            break;
+
+                        default:
+                            Level.Grid[yy][xx].SetFeature("Fountain");
+                            break;
+                    }
+                    return;
+
+                case 2:
+                case 8:
+                case 9:
+                case 12:
+                    int x = xx - 1;
+                    if (Program.Rng.DieRoll(2) == 1)
+                    {
+                        x = xx + 1;
+                    }
+                    int y = yy - 1;
+                    if (Program.Rng.DieRoll(2) == 1)
+                    {
+                        y = yy + 1;
+                    }
+                    Level.Grid[y][x].SetFeature("Signpost");
+                    break;
+
+                default:
+                    return;
+            }
+        }
+
+        private void MakeTownContents()
+        {
+            int x, n;
+            int dummy = 0;
+            GridTile cPtr;
+            int[] rooms = new int[12];
+            Program.Rng.UseFixed = true;
+            Program.Rng.FixedSeed = CurTown.Seed;
+            for (n = 0; n < 12; n++)
+            {
+                rooms[n] = n;
+            }
+            int y = Level.CurHgt / 2;
+            for (x = 1; x < Level.CurWid - 1; x++)
+            {
+                Level.Grid[y][x].SetFeature("PathBase");
+            }
+            x = Level.CurWid / 2;
+            for (y = 1; y < Level.CurHgt - 1; y++)
+            {
+                Level.Grid[y][x].SetFeature("PathBase");
+            }
+            for (y = 0; y < 4; y++)
+            {
+                for (x = 0; x < 4; x++)
+                {
+                    if (x == 1 || x == 2 || y == 1 || y == 2)
+                    {
+                        int k = Program.Rng.RandomLessThan(n);
+                        BuildStore(CurTown.Stores[rooms[k]], y, x);
+                        rooms[k] = rooms[--n];
+                    }
+                    else
+                    {
+                        switch (Program.Rng.DieRoll(10))
+                        {
+                            case 3:
+                            case 7:
+                            case 9:
+                                break;
+
+                            default:
+                                if (CurTown.Char == 'K')
+                                {
+                                    BuildGraveyard(y, x);
+                                }
+                                else
+                                {
+                                    BuildField(y, x);
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            for (n = 0; n < Program.Rng.RandomBetween(1, 10) - 6; n++)
+            {
+                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                cPtr = Level.Grid[y][x];
+                if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+                {
+                    cPtr.SetFeature("Rock");
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                }
+            }
+            for (n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
+            {
+                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                cPtr = Level.Grid[y][x];
+                if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+                {
+                    cPtr.SetFeature("Tree");
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                }
+            }
+            for (n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
+            {
+                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                cPtr = Level.Grid[y][x];
+                if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+                {
+                    cPtr.SetFeature("Bush");
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                }
+            }
+            MakeTownCentre();
+            x = Level.CurWid / 2;
+            cPtr = Level.Grid[0][x];
+            cPtr.SetFeature("PathBorderNS");
+            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            x = Level.CurWid - 2;
+            y = Level.CurHgt / 2;
+            cPtr = Level.Grid[y][x + 1];
+            cPtr.SetFeature("PathBorderEW");
+            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            x = Level.CurWid / 2;
+            y = Level.CurHgt - 2;
+            cPtr = Level.Grid[y + 1][x];
+            cPtr.SetFeature("PathBorderNS");
+            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            x = 1;
+            y = Level.CurHgt / 2;
+            cPtr = Level.Grid[y][0];
+            cPtr.SetFeature("PathBorderEW");
+            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            while (dummy < SafeMaxAttempts)
+            {
+                dummy++;
+                y = Program.Rng.RandomBetween(12, 29);
+                x = Program.Rng.RandomBetween(17, 46);
+                if (Level.GridOpenNoItemOrCreature(y, x))
+                {
+                    break;
+                }
+            }
+            cPtr = Level.Grid[y][x];
+            cPtr.SetFeature("DownStair");
+            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            Program.Rng.UseFixed = false;
+            switch (CameFrom)
+            {
+                case LevelStart.StartRandom:
+                    NewPlayerSpot();
+                    break;
+
+                case LevelStart.StartStairs:
+                    Player.MapY = y;
+                    Player.MapX = x;
+                    break;
+
+                case LevelStart.StartWalk:
+                    break;
+
+                case LevelStart.StartHouse:
+                    foreach (Store store in CurTown.Stores)
+                    {
+                        if (store.StoreType != StoreType.StoreHome)
+                        {
+                            continue;
+                        }
+                        Player.MapY = store.Y;
+                        Player.MapX = store.X;
+                    }
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void MakeTownWalls()
+        {
+            int x;
+            int y;
+            GridTile cPtr;
+            for (x = 0; x < Level.CurWid; x++)
+            {
+                cPtr = Level.Grid[0][x];
+                cPtr.SetFeature("TownWall");
+                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                cPtr = Level.Grid[Level.CurHgt - 1][x];
+                cPtr.SetFeature("TownWall");
+                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                cPtr = Level.Grid[y][0];
+                cPtr.SetFeature("TownWall");
+                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                cPtr = Level.Grid[y][Level.CurWid - 1];
+                cPtr.SetFeature("TownWall");
+                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            Level.Grid[0][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) - 2].SetFeature("TownWall");
+            Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) - 1].SetFeature("TownWall");
+            Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][Level.CurWid / 2].SetFeature("PathBorderNS");
+            Level.Grid[0][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) + 1].SetFeature("TownWall");
+            Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(Level.CurWid / 2) + 2].SetFeature("TownWall");
+            Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
+            Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
+            Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][Level.CurWid / 2].SetFeature("PathBase");
+            Level.Grid[1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
+            Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
+            Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].SetFeature("PathBorderNS");
+            Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].SetFeature("PathBase");
+            Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetFeature("TownWall");
+            Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][0].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][0].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt / 2][0].SetFeature("PathBorderEW");
+            Level.Grid[Level.CurHgt / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][0].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][0].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt / 2][1].SetFeature("PathBase");
+            Level.Grid[Level.CurHgt / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].SetFeature("PathBorderEW");
+            Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].SetFeature("PathBase");
+            Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetFeature("TownWall");
+            Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        }
+
+        private void MakeWildernessFeatures(int wildx, int wildy, out int stairX, out int stairY)
+        {
+            stairX = Level.CurWid / 2;
+            stairY = Level.CurHgt / 2;
+            if (wildx == 1 || wildx == 10 || wildy == 1 || wildy == 10)
+            {
+                return;
+            }
+            int dungeonX = 0;
+            int dungeonY = 0;
+            switch (Program.Rng.DieRoll(4))
+            {
+                case 1:
+                    dungeonX = 0;
+                    dungeonY = 0;
+                    break;
+
+                case 2:
+                    dungeonX = Level.CurWid / 2;
+                    dungeonY = 0;
+                    break;
+
+                case 3:
+                    dungeonX = 0;
+                    dungeonY = Level.CurHgt / 2;
+                    break;
+
+                case 4:
+                    dungeonX = Level.CurWid / 2;
+                    dungeonY = Level.CurHgt / 2;
+                    break;
+            }
+            for (int offsetX = 0; offsetX < Level.CurWid - 1; offsetX += Level.CurWid / 2)
+            {
+                for (int offsetY = 0; offsetY < Level.CurHgt - 1; offsetY += Level.CurHgt / 2)
+                {
+                    if (offsetX == dungeonX && offsetY == dungeonY)
+                    {
+                        if (Wilderness[wildy][wildx].Dungeon != null)
+                        {
+                            if (Wilderness[wildy][wildx].Dungeon.Tower)
+                            {
+                                MakeTower(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8, out int x, out int y);
+                                stairX = x;
+                                stairY = y;
+                            }
+                            else
+                            {
+                                MakeDungeonEntrance(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8, out int x, out int y);
+                                stairX = x;
+                                stairY = y;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        switch (Program.Rng.DieRoll(30))
+                        {
+                            case 7:
+                            case 22:
+                                MakeLake(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8);
+                                break;
+
+                            case 15:
+                                MakeHenge(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MakeWildernessPaths(int wildx, int wildy)
+        {
+            int x;
+            int y;
+
+            int midX = Level.CurWid / 2;
+            int midY = Level.CurHgt / 2;
+            if (Wilderness[wildy][wildx].RoadMap == 0)
+            {
+                return;
+            }
+            Level.Grid[midY - 1][midX - 1].SetFeature("Grass");
+            Level.Grid[midY - 1][midX].SetFeature("Grass");
+            Level.Grid[midY - 1][midX + 1].SetFeature("Grass");
+            Level.Grid[midY][midX - 1].SetFeature("Grass");
+            Level.Grid[midY][midX].SetFeature("PathBase");
+            Level.Grid[midY][midX + 1].SetFeature("Grass");
+            Level.Grid[midY + 1][midX - 1].SetFeature("Grass");
+            Level.Grid[midY + 1][midX].SetFeature("Grass");
+            Level.Grid[midY + 1][midX + 1].SetFeature("Grass");
+            if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadUp) != 0)
+            {
+                x = 0;
+                Level.Grid[0][midX].SetFeature("PathBorderNS");
+                Level.Grid[1][midX].SetFeature("PathBase");
+                Level.Grid[midY - 1][midX].SetFeature("PathBase");
+                for (y = 2; y < midY - 1; y++)
+                {
+                    x += Program.Rng.RandomBetween(-2, 2) / 2;
+                    if (x > midY - 1 - y)
+                    {
+                        x = midY - 1 - y;
+                    }
+                    if (x < -(midY - 1 - y))
+                    {
+                        x = -(midY - 1 - y);
+                    }
+                    if (!Level.Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[y][midX - 1 + x].SetFeature("Grass");
+                    }
+                    Level.Grid[y][midX + x].SetFeature("WildPathNS");
+                    if (!Level.Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[y][midX + 1 + x].SetFeature("Grass");
+                    }
+                }
+            }
+            if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadDown) != 0)
+            {
+                x = 0;
+                Level.Grid[Level.CurHgt - 1][midX].SetFeature("PathBorderNS");
+                Level.Grid[Level.CurHgt - 2][midX].SetFeature("PathBase");
+                Level.Grid[midY + 1][midX].SetFeature("PathBase");
+                for (y = Level.CurHgt - 3; y > midY + 1; y--)
+                {
+                    x += Program.Rng.RandomBetween(-2, 2) / 2;
+                    if (x > y - (midY + 1))
+                    {
+                        x = y - (midY + 1);
+                    }
+                    if (x < -(y - (midY + 1)))
+                    {
+                        x = -(y - (midY + 1));
+                    }
+                    if (!Level.Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[y][midX - 1 + x].SetFeature("Grass");
+                    }
+                    Level.Grid[y][midX + x].SetFeature("WildPathNS");
+                    if (!Level.Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[y][midX + 1 + x].SetFeature("Grass");
+                    }
+                }
+            }
+            if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadLeft) != 0)
+            {
+                y = 0;
+                Level.Grid[midY][0].SetFeature("PathBorderEW");
+                Level.Grid[midY][1].SetFeature("PathBase");
+                Level.Grid[midY][midX - 1].SetFeature("PathBase");
+                for (x = 2; x < midX - 1; x++)
+                {
+                    y += Program.Rng.RandomBetween(-2, 2) / 2;
+                    if (y > midX - 1 - x)
+                    {
+                        y = midX - 1 - x;
+                    }
+                    if (y < -(midX - 1 - x))
+                    {
+                        y = -(midX - 1 - x);
+                    }
+                    if (!Level.Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[midY - 1 + y][x].SetFeature("Grass");
+                    }
+                    Level.Grid[midY + y][x].SetFeature("WildPathEW");
+                    if (!Level.Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[midY + 1 + y][x].SetFeature("Grass");
+                    }
+                }
+            }
+            if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadRight) != 0)
+            {
+                y = 0;
+                Level.Grid[midY][Level.CurWid - 1].SetFeature("PathBorderEW");
+                Level.Grid[midY][Level.CurWid - 2].SetFeature("PathBase");
+                Level.Grid[midY][midX + 1].SetFeature("PathBase");
+                for (x = Level.CurWid - 3; x > midX + 1; x--)
+                {
+                    y += Program.Rng.RandomBetween(-2, 2) / 2;
+                    if (y > x - (midX + 1))
+                    {
+                        y = x - (midX + 1);
+                    }
+                    if (y < -(x - (midX + 1)))
+                    {
+                        y = -(x - (midX + 1));
+                    }
+                    if (!Level.Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[midY - 1 + y][x].SetFeature("Grass");
+                    }
+                    Level.Grid[midY + y][x].SetFeature("WildPathEW");
+                    if (!Level.Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                    {
+                        Level.Grid[midY + 1 + y][x].SetFeature("Grass");
+                    }
+                }
+            }
+        }
+
+        private void MakeWildernessWalls(int wildX, int wildY)
+        {
+            Island wilderness = Wilderness;
+            int height = Level.CurHgt;
+            int width = Level.CurWid;
+            if (wilderness[wildY - 1][wildX].Town != null)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Level.Grid[0][x].SetFeature("TownWall");
+                    Level.Grid[0][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                }
+                Level.Grid[0][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) - 2].SetFeature("TownWall");
+                Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) - 1].SetFeature("TownWall");
+                Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][width / 2].SetFeature("PathBorderNS");
+                Level.Grid[0][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) + 1].SetFeature("TownWall");
+                Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][(width / 2) + 2].SetFeature("TownWall");
+                Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) - 2].SetFeature("TownWall");
+                Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) - 1].SetFeature("TownWall");
+                Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][width / 2].SetFeature("PathBase");
+                Level.Grid[1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) + 1].SetFeature("TownWall");
+                Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[1][(width / 2) + 2].SetFeature("TownWall");
+                Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if (wilderness[wildY + 1][wildX].Town != null)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Level.Grid[height - 1][x].SetFeature("TownWall");
+                    Level.Grid[height - 1][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                }
+                Level.Grid[height - 1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) - 2].SetFeature("TownWall");
+                Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) - 1].SetFeature("TownWall");
+                Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][width / 2].SetFeature("PathBorderNS");
+                Level.Grid[height - 1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) + 1].SetFeature("TownWall");
+                Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][(width / 2) + 2].SetFeature("TownWall");
+                Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) - 2].SetFeature("TownWall");
+                Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) - 1].SetFeature("TownWall");
+                Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][width / 2].SetFeature("PathBase");
+                Level.Grid[height - 2][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) + 1].SetFeature("TownWall");
+                Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 2][(width / 2) + 2].SetFeature("TownWall");
+                Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if (wilderness[wildY][wildX - 1].Town != null)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Level.Grid[y][0].SetFeature("TownWall");
+                    Level.Grid[y][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                }
+                Level.Grid[(height / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][0].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][0].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height / 2][0].SetFeature("PathBorderEW");
+                Level.Grid[height / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][0].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][0].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][1].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][1].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height / 2][1].SetFeature("PathBase");
+                Level.Grid[height / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][1].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][1].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+            if (wilderness[wildY][wildX + 1].Town != null)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Level.Grid[y][width - 1].SetFeature("TownWall");
+                    Level.Grid[y][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                }
+                Level.Grid[(height / 2) - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+                Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][width - 1].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][width - 1].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height / 2][width - 1].SetFeature("PathBorderEW");
+                Level.Grid[height / 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][width - 1].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][width - 1].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 2][width - 2].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) - 1][width - 2].SetFeature("TownWall");
+                Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height / 2][width - 2].SetFeature("PathBase");
+                Level.Grid[height / 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 1][width - 2].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[(height / 2) + 2][width - 2].SetFeature("TownWall");
+                Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            }
+        }
+
+        private bool NewPlayerSpot()
+        {
+            int y = 0;
+            int x = 0;
+            int maxAttempts = 5000;
+            while (maxAttempts-- != 0)
+            {
+                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                if (!Level.GridOpenNoItemOrCreature(y, x))
+                {
+                    continue;
+                }
+                if (Level.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
+                {
+                    continue;
+                }
+                break;
+            }
+            if (maxAttempts < 1)
+            {
+                return false;
+            }
+            Player.MapY = y;
+            Player.MapX = x;
+            return true;
+        }
+
+        private int NextToCorr(int y1, int x1)
+        {
+            int k = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                int y = y1 + Level.OrderedDirectionYOffset[i];
+                int x = x1 + Level.OrderedDirectionXOffset[i];
+                if (!Level.GridPassable(y, x))
+                {
+                    continue;
+                }
+                GridTile cPtr = Level.Grid[y][x];
+                if (!cPtr.FeatureType.IsOpenFloor)
+                {
+                    continue;
+                }
+                if (cPtr.TileFlags.IsSet(GridTile.InRoom))
+                {
+                    continue;
+                }
+                k++;
+            }
+            return k;
+        }
+
+        private int NextToWalls(int y, int x)
+        {
+            int k = 0;
+            if (Level.Grid[y + 1][x].FeatureType.IsWall)
+            {
+                k++;
+            }
+            if (Level.Grid[y - 1][x].FeatureType.IsWall)
+            {
+                k++;
+            }
+            if (Level.Grid[y][x + 1].FeatureType.IsWall)
+            {
+                k++;
+            }
+            if (Level.Grid[y][x - 1].FeatureType.IsWall)
+            {
+                k++;
+            }
+            return k;
+        }
+
+        private void PlaceRandomDoor(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            int tmp = Program.Rng.RandomLessThan(1000);
+            if (tmp < 300)
+            {
+                cPtr.SetFeature("OpenDoor");
+            }
+            else if (tmp < 400)
+            {
+                cPtr.SetFeature("BrokenDoor");
+            }
+            else if (tmp < 600)
+            {
+                cPtr.SetFeature("SecretDoor");
+            }
+            else if (tmp < 900)
+            {
+                cPtr.SetFeature("LockedDoor0");
+            }
+            else if (tmp < 999)
+            {
+                cPtr.SetFeature($"LockedDoor{Program.Rng.DieRoll(7)}");
+            }
+            else
+            {
+                cPtr.SetFeature($"JammedDoor{Program.Rng.RandomLessThan(8)}");
+            }
+        }
+
+        private void PlaceRubble(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            cPtr.SetFeature("Rubble");
+        }
+
+        private bool PossibleDoorway(int y, int x)
+        {
+            if (NextToCorr(y, x) >= 2)
+            {
+                if (Level.Grid[y - 1][x].FeatureType.IsWall &&
+                    Level.Grid[y + 1][x].FeatureType.IsWall)
+                {
+                    return true;
+                }
+                if (Level.Grid[y][x - 1].FeatureType.IsWall &&
+                    Level.Grid[y][x + 1].FeatureType.IsWall)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void RandDir(out int rdir, out int cdir)
+        {
+            int i = Program.Rng.RandomLessThan(4);
+            rdir = Level.OrderedDirectionYOffset[i];
+            cdir = Level.OrderedDirectionXOffset[i];
+        }
+
+        private void ResolvePaths()
+        {
+            for (int x = 1; x < Level.CurWid - 1; x++)
+            {
+                for (int y = 1; y < Level.CurHgt - 1; y++)
+                {
+                    if (Level.Grid[y][x].FeatureType.Name != "PathBase")
+                    {
+                        continue;
+                    }
+                    int map = 0;
+                    if (Level.Grid[y - 1][x].FeatureType.Name.StartsWith("Path"))
+                    {
+                        map++;
+                    }
+                    if (Level.Grid[y][x + 1].FeatureType.Name.StartsWith("Path"))
+                    {
+                        map += 2;
+                    }
+                    if (Level.Grid[y + 1][x].FeatureType.Name.StartsWith("Path"))
+                    {
+                        map += 4;
+                    }
+                    if (Level.Grid[y][x - 1].FeatureType.Name.StartsWith("Path"))
+                    {
+                        map += 8;
+                    }
+                    switch (map)
+                    {
+                        case 1:
+                        case 4:
+                        case 5:
+                            Level.Grid[y][x].SetFeature("PathNS");
+                            break;
+
+                        case 2:
+                        case 8:
+                        case 10:
+                            Level.Grid[y][x].SetFeature("PathEW");
+                            break;
+
+                        default:
+                            Level.Grid[y][x].SetFeature("PathJunction");
+                            break;
+                    }
+                }
+            }
+        }
+
+        private bool RoomBuild(int y0, int x0, int typ)
+        {
+            if (Difficulty < _room[typ].Level)
+            {
+                return false;
+            }
+            if (Crowded && (typ == 5 || typ == 6))
+            {
+                return false;
+            }
+            int y1 = y0 + _room[typ].Dy1;
+            int y2 = y0 + _room[typ].Dy2;
+            int x1 = x0 + _room[typ].Dx1;
+            int x2 = x0 + _room[typ].Dx2;
+            if (y1 < 0 || y2 >= RowRooms)
+            {
+                return false;
+            }
+            if (x1 < 0 || x2 >= ColRooms)
+            {
+                return false;
+            }
+            int y;
+            int x;
+            for (y = y1; y <= y2; y++)
+            {
+                for (x = x1; x <= x2; x++)
+                {
+                    if (RoomMap[y][x])
+                    {
+                        return false;
+                    }
+                }
+            }
+            y = (y1 + y2 + 1) * _blockHgt / 2;
+            x = (x1 + x2 + 1) * _blockWid / 2;
+            switch (typ)
+            {
+                case 8:
+                    BuildCategory8Vault(y, x);
+                    break;
+
+                case 7:
+                    BuildCategory7Vault(y, x);
+                    break;
+
+                case 6:
+                    BuildType6(y, x);
+                    break;
+
+                case 5:
+                    BuildType5(y, x);
+                    break;
+
+                case 4:
+                    BuildType4(y, x);
+                    break;
+
+                case 3:
+                    BuildType3(y, x);
+                    break;
+
+                case 2:
+                    BuildType2(y, x);
+                    break;
+
+                case 1:
+                    BuildType1(y, x);
+                    break;
+
+                default:
+                    return false;
+            }
+            if (CentN < CentMax)
+            {
+                Cent[CentN].Y = y;
+                Cent[CentN].X = x;
+                CentN++;
+            }
+            for (y = y1; y <= y2; y++)
+            {
+                for (x = x1; x <= x2; x++)
+                {
+                    RoomMap[y][x] = true;
+                }
+            }
+            if (typ == 5 || typ == 6)
+            {
+                Crowded = true;
+            }
+            return true;
+        }
+
+        private void TownGen()
+        {
+            int i, y, x;
+            GridTile cPtr;
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                for (x = 0; x < Level.CurWid; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                }
+            }
+            MakeTownWalls();
+            MakeCornerTowers(Player.WildernessX, Player.WildernessY);
+            MakeTownContents();
+            ResolvePaths();
+            if (Player.GameTime.IsLight)
+            {
+                for (y = 0; y < Level.CurHgt; y++)
+                {
+                    for (x = 0; x < Level.CurWid; x++)
+                    {
+                        cPtr = Level.Grid[y][x];
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    }
+                }
+                for (i = 0; i < Constants.MinMAllocTd; i++)
+                {
+                    Level.Monsters.AllocMonster(3, true);
+                }
+            }
+            else
+            {
+                for (i = 0; i < Constants.MinMAllocTn; i++)
+                {
+                    Level.Monsters.AllocMonster(3, true);
+                }
+            }
+        }
+
+        private void TryDoor(int y, int x)
+        {
+            if (!Level.InBounds(y, x))
+            {
+                return;
+            }
+            if (Level.Grid[y][x].FeatureType.IsWall)
+            {
+                return;
+            }
+            if (Level.Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
+            {
+                return;
+            }
+            if (Program.Rng.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
+            {
+                PlaceRandomDoor(y, x);
+            }
+        }
+
+        private bool UndergroundGen()
+        {
+            int i;
+            int k;
+            MonsterRaces.ResetGuardians();
+            if (Quests.IsQuest(CurrentDepth))
+            {
+                MonsterRaces[Quests.GetQuestMonster()].Flags1 |=
+                    MonsterFlag1.Guardian;
+            }
+            if (Program.Rng.PercentileRoll(4) && !CurDungeon.Tower)
+            {
+                MakeCavernLevel();
+            }
+            else
+            {
+                MakeDungeonLevel();
+            }
+            AllocStairs("DownStair", Program.Rng.RandomBetween(3, 4), 3);
+            AllocStairs("UpStair", Program.Rng.RandomBetween(1, 2), 3);
+            if (!NewPlayerSpot())
+            {
+                return false;
+            }
+            k = Difficulty / 3;
+            if (k > 10)
+            {
+                k = 10;
+            }
+            if (k < 2)
+            {
+                k = 2;
+            }
+            if (Quests.IsQuest(CurrentDepth))
+            {
+                int rIdx = Quests.GetQuestMonster();
+                int qIdx = Quests.GetQuestNumber();
+                while (MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
+                {
+                    Level.PutQuestMonster(Quests[qIdx].RIdx);
+                }
+            }
+            i = Constants.MinMAllocLevel;
+            if (Level.CurHgt < Level.MaxHgt || Level.CurWid < Level.MaxWid)
+            {
+                int smallTester = i;
+                i = i * Level.CurHgt / Level.MaxHgt;
+                i = i * Level.CurWid / Level.MaxWid;
+                i++;
+                if (i > smallTester)
+                {
+                    i = smallTester;
+                }
+            }
+            i += Program.Rng.DieRoll(8);
+            for (i += k; i > 0; i--)
+            {
+                Level.Monsters.AllocMonster(0, true);
+            }
+            AllocObject(_allocSetBoth, _allocTypTrap, Program.Rng.DieRoll(k));
+            AllocObject(_allocSetCorr, _allocTypRubble, Program.Rng.DieRoll(k));
+            AllocObject(_allocSetRoom, _allocTypObject, Program.Rng.RandomNormal(_dunAmtRoom, 3));
+            AllocObject(_allocSetBoth, _allocTypObject, Program.Rng.RandomNormal(_dunAmtItem, 3));
+            AllocObject(_allocSetBoth, _allocTypGold, Program.Rng.RandomNormal(_dunAmtGold, 3));
+            return true;
+        }
+
+        private void WildernessGen()
+        {
+            Program.Rng.UseFixed = true;
+            Program.Rng.FixedSeed = Wilderness[Player.WildernessY][Player.WildernessX].Seed;
+            Island island = Wilderness;
+            Player player = Player;
+            int x;
+            int y;
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                for (x = 0; x < Level.CurWid; x++)
+                {
+                    byte elevation = island.Elevation(player.WildernessY, player.WildernessX, y, x);
+                    string floorName = "Water";
+                    string featureName = "Water";
+                    if (elevation > 0)
+                    {
+                        floorName = "Grass";
+                        if (Program.Rng.DieRoll(10) < elevation)
+                        {
+                            if (Program.Rng.DieRoll(10) < elevation)
+                            {
+                                featureName = "Tree";
+                            }
+                            else
+                            {
+                                featureName = "Bush";
+                            }
+                        }
+                        else
+                        {
+                            featureName = "Grass";
+                        }
+                    }
+                    Level.Grid[y][x].SetFeature(featureName);
+                    Level.Grid[y][x].SetBackgroundFeature(floorName);
+                }
+            }
+            for (x = 0; x < Level.CurWid; x++)
+            {
+                GridTile cPtr = Level.Grid[0][x];
+                cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
+                cPtr = Level.Grid[Level.CurHgt - 1][x];
+                cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
+            }
+            for (y = 0; y < Level.CurHgt; y++)
+            {
+                GridTile cPtr = Level.Grid[y][0];
+                cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
+                cPtr = Level.Grid[y][Level.CurWid - 1];
+                cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
+            }
+            MakeWildernessWalls(Player.WildernessX, Player.WildernessY);
+            MakeCornerTowers(Player.WildernessX, Player.WildernessY);
+            MakeWildernessPaths(Player.WildernessX, Player.WildernessY);
+            MakeWildernessFeatures(Player.WildernessX, Player.WildernessY, out int stairX, out int stairY);
+            int rocks = Program.Rng.RandomBetween(1, 10);
+            for (int i = 0; i < rocks; i++)
+            {
+                x = Program.Rng.DieRoll(Level.CurWid - 2);
+                y = Program.Rng.DieRoll(Level.CurHgt - 2);
+                if (Level.Grid[y][x].FeatureType.Name != "Grass")
+                {
+                    continue;
+                }
+                Level.Grid[y][x].SetFeature("Rock");
+            }
+            Program.Rng.UseFixed = false;
+            if (CameFrom == LevelStart.StartRandom)
+            {
+                NewPlayerSpot();
+            }
+            else if (CameFrom == LevelStart.StartStairs)
+            {
+                Player.MapY = stairY;
+                Player.MapX = stairX;
+            }
+            else if (CameFrom == LevelStart.StartWalk)
+            {
+                if (Level.Grid[Player.MapY][Player.MapX].FeatureType.Category == FloorTileTypeCategory.Tree ||
+                    Level.Grid[Player.MapY][Player.MapX].FeatureType.Name == "Water")
+                {
+                    Level.Grid[Player.MapY][Player.MapX].RevertToBackground();
+                }
+            }
+            ResolvePaths();
+            for (y = 1; y < Level.CurHgt - 1; y++)
+            {
+                for (x = 1; x < Level.CurWid - 1; x++)
+                {
+                    if (Level.Grid[y][x].FeatureType.IsOpenFloor)
+                    {
+                        Level.Grid[y][x].TileFlags.Set(GridTile.InRoom);
+                    }
+                }
+            }
+            if (Player.GameTime.IsLight)
+            {
+                for (y = 0; y < Level.CurHgt; y++)
+                {
+                    for (x = 0; x < Level.CurWid; x++)
+                    {
+                        Level.Grid[y][x].TileFlags.Set(GridTile.SelfLit);
+                        Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorised);
+                    }
+                }
+            }
+            for (x = 0; x < Constants.MinMAllocLevel; x++)
+            {
+                Level.Monsters.AllocMonster(3, true);
+            }
+            ///LEVEL FACTORY
+        }
+        public void BuildType1(int yval, int xval)
+        {
+            int y, x;
+            GridTile cPtr;
+            bool light = Difficulty <= Program.Rng.DieRoll(25);
+            int y1 = yval - Program.Rng.DieRoll(4);
+            int y2 = yval + Program.Rng.DieRoll(3);
+            int x1 = xval - Program.Rng.DieRoll(11);
+            int x2 = xval + Program.Rng.DieRoll(11);
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                for (x = x1 - 1; x <= x2 + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            if (Program.Rng.RandomLessThan(20) == 0)
+            {
+                for (y = y1; y <= y2; y += 2)
+                {
+                    for (x = x1; x <= x2; x += 2)
+                    {
+                        cPtr = Level.Grid[y][x];
+                        cPtr.SetFeature("Pillar");
+                    }
+                }
+            }
+            else if (Program.Rng.RandomLessThan(50) == 0)
+            {
+                for (y = y1 + 2; y <= y2 - 2; y += 2)
+                {
+                    cPtr = Level.Grid[y][x1];
+                    cPtr.SetFeature("Pillar");
+                    cPtr = Level.Grid[y][x2];
+                    cPtr.SetFeature("Pillar");
+                }
+                for (x = x1 + 2; x <= x2 - 2; x += 2)
+                {
+                    cPtr = Level.Grid[y1][x];
+                    cPtr.SetFeature("Pillar");
+                    cPtr = Level.Grid[y2][x];
+                    cPtr.SetFeature("Pillar");
+                }
+            }
+        }
+
+        public void BuildType2(int yval, int xval)
+        {
+            int y, x;
+            GridTile cPtr;
+            bool light = Difficulty <= Program.Rng.DieRoll(25);
+            int y1A = yval - Program.Rng.DieRoll(4);
+            int y2A = yval + Program.Rng.DieRoll(3);
+            int x1A = xval - Program.Rng.DieRoll(11);
+            int x2A = xval + Program.Rng.DieRoll(10);
+            int y1B = yval - Program.Rng.DieRoll(3);
+            int y2B = yval + Program.Rng.DieRoll(4);
+            int x1B = xval - Program.Rng.DieRoll(10);
+            int x2B = xval + Program.Rng.DieRoll(11);
+            for (y = y1A - 1; y <= y2A + 1; y++)
+            {
+                for (x = x1A - 1; x <= x2A + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1B - 1; y <= y2B + 1; y++)
+            {
+                for (x = x1B - 1; x <= x2B + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1A - 1; y <= y2A + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1A - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2A + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1A - 1; x <= x2A + 1; x++)
+            {
+                cPtr = Level.Grid[y1A - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2A + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (y = y1B - 1; y <= y2B + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1B - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2B + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1B - 1; x <= x2B + 1; x++)
+            {
+                cPtr = Level.Grid[y1B - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2B + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (y = y1A; y <= y2A; y++)
+            {
+                for (x = x1A; x <= x2A; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                }
+            }
+            for (y = y1B; y <= y2B; y++)
+            {
+                for (x = x1B; x <= x2B; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                }
+            }
+        }
+
+        public void BuildType3(int yval, int xval)
+        {
+            int y, x, wy;
+            GridTile cPtr;
+            bool light = Difficulty <= Program.Rng.DieRoll(25);
+            int wx = wy = 1;
+            int dy = Program.Rng.RandomBetween(3, 4);
+            int dx = Program.Rng.RandomBetween(3, 11);
+            int y1A = yval - dy;
+            int y2A = yval + dy;
+            int x1A = xval - wx;
+            int x2A = xval + wx;
+            int y1B = yval - wy;
+            int y2B = yval + wy;
+            int x1B = xval - dx;
+            int x2B = xval + dx;
+            for (y = y1A - 1; y <= y2A + 1; y++)
+            {
+                for (x = x1A - 1; x <= x2A + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1B - 1; y <= y2B + 1; y++)
+            {
+                for (x = x1B - 1; x <= x2B + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1A - 1; y <= y2A + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1A - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2A + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1A - 1; x <= x2A + 1; x++)
+            {
+                cPtr = Level.Grid[y1A - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2A + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (y = y1B - 1; y <= y2B + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1B - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2B + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1B - 1; x <= x2B + 1; x++)
+            {
+                cPtr = Level.Grid[y1B - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2B + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (y = y1A; y <= y2A; y++)
+            {
+                for (x = x1A; x <= x2A; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                }
+            }
+            for (y = y1B; y <= y2B; y++)
+            {
+                for (x = x1B; x <= x2B; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                }
+            }
+            switch (Program.Rng.RandomLessThan(4))
+            {
+                case 1:
+                    {
+                        for (y = y1B; y <= y2B; y++)
+                        {
+                            for (x = x1A; x <= x2A; x++)
+                            {
+                                cPtr = Level.Grid[y][x];
+                                cPtr.SetFeature("WallInner");
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        for (y = y1B; y <= y2B; y++)
+                        {
+                            cPtr = Level.Grid[y][x1A];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[y][x2A];
+                            cPtr.SetFeature("WallInner");
+                        }
+                        for (x = x1A; x <= x2A; x++)
+                        {
+                            cPtr = Level.Grid[y1B][x];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[y2B][x];
+                            cPtr.SetFeature("WallInner");
+                        }
+                        switch (Program.Rng.RandomLessThan(4))
+                        {
+                            case 0:
+                                PlaceSecretDoor(y1B, xval);
+                                break;
+
+                            case 1:
+                                PlaceSecretDoor(y2B, xval);
+                                break;
+
+                            case 2:
+                                PlaceSecretDoor(yval, x1A);
+                                break;
+
+                            case 3:
+                                PlaceSecretDoor(yval, x2A);
+                                break;
+                        }
+                        Level.PlaceObject(yval, xval, false, false);
+                        VaultMonsters(yval, xval, Program.Rng.RandomLessThan(2) + 3);
+                        VaultTraps(yval, xval, 4, 4, Program.Rng.RandomLessThan(3) + 2);
+                        break;
+                    }
+                case 3:
+                    {
+                        if (Program.Rng.RandomLessThan(3) == 0)
+                        {
+                            for (y = y1B; y <= y2B; y++)
+                            {
+                                if (y == yval)
+                                {
+                                    continue;
+                                }
+                                cPtr = Level.Grid[y][x1A - 1];
+                                cPtr.SetFeature("WallInner");
+                                cPtr = Level.Grid[y][x2A + 1];
+                                cPtr.SetFeature("WallInner");
+                            }
+                            for (x = x1A; x <= x2A; x++)
+                            {
+                                if (x == xval)
+                                {
+                                    continue;
+                                }
+                                cPtr = Level.Grid[y1B - 1][x];
+                                cPtr.SetFeature("WallInner");
+                                cPtr = Level.Grid[y2B + 1][x];
+                                cPtr.SetFeature("WallInner");
+                            }
+                            if (Program.Rng.RandomLessThan(3) == 0)
+                            {
+                                PlaceSecretDoor(yval, x1A - 1);
+                                PlaceSecretDoor(yval, x2A + 1);
+                                PlaceSecretDoor(y1B - 1, xval);
+                                PlaceSecretDoor(y2B + 1, xval);
+                            }
+                        }
+                        else if (Program.Rng.RandomLessThan(3) == 0)
+                        {
+                            cPtr = Level.Grid[yval][xval];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[y1B][xval];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[y2B][xval];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[yval][x1A];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[yval][x2A];
+                            cPtr.SetFeature("WallInner");
+                        }
+                        else if (Program.Rng.RandomLessThan(3) == 0)
+                        {
+                            cPtr = Level.Grid[yval][xval];
+                            cPtr.SetFeature("Pillar");
+                        }
+                        break;
+                    }
+            }
+        }
+
+        public void BuildType4(int yval, int xval)
+        {
+            int y, x;
+            GridTile cPtr;
+            bool light = Difficulty <= Program.Rng.DieRoll(25);
+            int y1 = yval - 4;
+            int y2 = yval + 4;
+            int x1 = xval - 11;
+            int x2 = xval + 11;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                for (x = x1 - 1; x <= x2 + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                    if (light)
+                    {
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                    }
+                }
+            }
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            y1 += 2;
+            y2 -= 2;
+            x1 += 2;
+            x2 -= 2;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallInner");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallInner");
+            }
+            switch (Program.Rng.DieRoll(5))
+            {
+                case 1:
+                    switch (Program.Rng.DieRoll(4))
+                    {
+                        case 1:
+                            PlaceSecretDoor(y1 - 1, xval);
+                            break;
+
+                        case 2:
+                            PlaceSecretDoor(y2 + 1, xval);
+                            break;
+
+                        case 3:
+                            PlaceSecretDoor(yval, x1 - 1);
+                            break;
+
+                        case 4:
+                            PlaceSecretDoor(yval, x2 + 1);
+                            break;
+                    }
+                    VaultMonsters(yval, xval, 1);
+                    break;
+
+                case 2:
+                    switch (Program.Rng.DieRoll(4))
+                    {
+                        case 1:
+                            PlaceSecretDoor(y1 - 1, xval);
+                            break;
+
+                        case 2:
+                            PlaceSecretDoor(y2 + 1, xval);
+                            break;
+
+                        case 3:
+                            PlaceSecretDoor(yval, x1 - 1);
+                            break;
+
+                        case 4:
+                            PlaceSecretDoor(yval, x2 + 1);
+                            break;
+                    }
+                    for (y = yval - 1; y <= yval + 1; y++)
+                    {
+                        for (x = xval - 1; x <= xval + 1; x++)
+                        {
+                            if (x == xval && y == yval)
+                            {
+                                continue;
+                            }
+                            cPtr = Level.Grid[y][x];
+                            cPtr.SetFeature("WallInner");
+                        }
+                    }
+                    switch (Program.Rng.DieRoll(4))
+                    {
+                        case 1:
+                            PlaceLockedDoor(yval - 1, xval);
+                            break;
+
+                        case 2:
+                            PlaceLockedDoor(yval + 1, xval);
+                            break;
+
+                        case 3:
+                            PlaceLockedDoor(yval, xval - 1);
+                            break;
+
+                        case 4:
+                            PlaceLockedDoor(yval, xval + 1);
+                            break;
+                    }
+                    VaultMonsters(yval, xval, Program.Rng.DieRoll(3) + 2);
+                    if (Program.Rng.RandomLessThan(100) < 80)
+                    {
+                        Level.PlaceObject(yval, xval, false, false);
+                    }
+                    else
+                    {
+                        PlaceRandomStairs(yval, xval);
+                    }
+                    VaultTraps(yval, xval, 4, 10, 2 + Program.Rng.DieRoll(3));
+                    break;
+
+                case 3:
+                    switch (Program.Rng.DieRoll(4))
+                    {
+                        case 1:
+                            PlaceSecretDoor(y1 - 1, xval);
+                            break;
+
+                        case 2:
+                            PlaceSecretDoor(y2 + 1, xval);
+                            break;
+
+                        case 3:
+                            PlaceSecretDoor(yval, x1 - 1);
+                            break;
+
+                        case 4:
+                            PlaceSecretDoor(yval, x2 + 1);
+                            break;
+                    }
+                    for (y = yval - 1; y <= yval + 1; y++)
+                    {
+                        for (x = xval - 1; x <= xval + 1; x++)
+                        {
+                            cPtr = Level.Grid[y][x];
+                            cPtr.SetFeature("WallInner");
+                        }
+                    }
+                    if (Program.Rng.RandomLessThan(2) == 0)
+                    {
+                        int tmp = Program.Rng.DieRoll(2);
+                        for (y = yval - 1; y <= yval + 1; y++)
+                        {
+                            for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
+                            {
+                                cPtr = Level.Grid[y][x];
+                                cPtr.SetFeature("WallInner");
+                            }
+                            for (x = xval + 3 + tmp; x <= xval + 5 + tmp; x++)
+                            {
+                                cPtr = Level.Grid[y][x];
+                                cPtr.SetFeature("WallInner");
+                            }
+                        }
+                    }
+                    if (Program.Rng.RandomLessThan(3) == 0)
+                    {
+                        for (x = xval - 5; x <= xval + 5; x++)
+                        {
+                            cPtr = Level.Grid[yval - 1][x];
+                            cPtr.SetFeature("WallInner");
+                            cPtr = Level.Grid[yval + 1][x];
+                            cPtr.SetFeature("WallInner");
+                        }
+                        cPtr = Level.Grid[yval][xval - 5];
+                        cPtr.SetFeature("WallInner");
+                        cPtr = Level.Grid[yval][xval + 5];
+                        cPtr.SetFeature("WallInner");
+                        PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval - 3);
+                        PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval + 3);
+                        VaultMonsters(yval, xval - 2, Program.Rng.DieRoll(2));
+                        VaultMonsters(yval, xval + 2, Program.Rng.DieRoll(2));
+                        if (Program.Rng.RandomLessThan(3) == 0)
+                        {
+                            Level.PlaceObject(yval, xval - 2, false, false);
+                        }
+                        if (Program.Rng.RandomLessThan(3) == 0)
+                        {
+                            Level.PlaceObject(yval, xval + 2, false, false);
+                        }
+                    }
+                    break;
+
+                case 4:
+                    switch (Program.Rng.DieRoll(4))
+                    {
+                        case 1:
+                            PlaceSecretDoor(y1 - 1, xval);
+                            break;
+
+                        case 2:
+                            PlaceSecretDoor(y2 + 1, xval);
+                            break;
+
+                        case 3:
+                            PlaceSecretDoor(yval, x1 - 1);
+                            break;
+
+                        case 4:
+                            PlaceSecretDoor(yval, x2 + 1);
+                            break;
+                    }
+                    for (y = y1; y <= y2; y++)
+                    {
+                        for (x = x1; x <= x2; x++)
+                        {
+                            if ((1 & (x + y)) != 0)
+                            {
+                                cPtr = Level.Grid[y][x];
+                                cPtr.SetFeature("WallInner");
+                            }
+                        }
+                    }
+                    VaultMonsters(yval, xval - 5, Program.Rng.DieRoll(3));
+                    VaultMonsters(yval, xval + 5, Program.Rng.DieRoll(3));
+                    VaultTraps(yval, xval - 3, 2, 8, Program.Rng.DieRoll(3));
+                    VaultTraps(yval, xval + 3, 2, 8, Program.Rng.DieRoll(3));
+                    VaultObjects(yval, xval, 3);
+                    break;
+
+                case 5:
+                    for (y = y1; y <= y2; y++)
+                    {
+                        cPtr = Level.Grid[y][xval];
+                        cPtr.SetFeature("WallInner");
+                    }
+                    for (x = x1; x <= x2; x++)
+                    {
+                        cPtr = Level.Grid[yval][x];
+                        cPtr.SetFeature("WallInner");
+                    }
+                    if (Program.Rng.RandomLessThan(100) < 50)
+                    {
+                        int i = Program.Rng.DieRoll(10);
+                        PlaceSecretDoor(y1 - 1, xval - i);
+                        PlaceSecretDoor(y1 - 1, xval + i);
+                        PlaceSecretDoor(y2 + 1, xval - i);
+                        PlaceSecretDoor(y2 + 1, xval + i);
+                    }
+                    else
+                    {
+                        int i = Program.Rng.DieRoll(3);
+                        PlaceSecretDoor(yval + i, x1 - 1);
+                        PlaceSecretDoor(yval - i, x1 - 1);
+                        PlaceSecretDoor(yval + i, x2 + 1);
+                        PlaceSecretDoor(yval - i, x2 + 1);
+                    }
+                    VaultObjects(yval, xval, 2 + Program.Rng.DieRoll(2));
+                    VaultMonsters(yval + 1, xval - 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval + 1, xval + 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval - 1, xval - 4, Program.Rng.DieRoll(4));
+                    VaultMonsters(yval - 1, xval + 4, Program.Rng.DieRoll(4));
+                    break;
+            }
+        }
+
+        public void BuildType5(int yval, int xval)
+        {
+            int y, x;
+            int[] what = new int[64];
+            GridTile cPtr;
+            bool empty = false;
+            int y1 = yval - 4;
+            int y2 = yval + 4;
+            int x1 = xval - 11;
+            int x2 = xval + 11;
+            GetMonNumHookDelegate getMonNumHook;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                for (x = x1 - 1; x <= x2 + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                }
+            }
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            y1 += 2;
+            y2 -= 2;
+            x1 += 2;
+            x2 -= 2;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallInner");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallInner");
+            }
+            switch (Program.Rng.DieRoll(4))
+            {
+                case 1:
+                    PlaceSecretDoor(y1 - 1, xval);
+                    break;
+
+                case 2:
+                    PlaceSecretDoor(y2 + 1, xval);
+                    break;
+
+                case 3:
+                    PlaceSecretDoor(yval, x1 - 1);
+                    break;
+
+                case 4:
+                    PlaceSecretDoor(yval, x2 + 1);
+                    break;
+            }
+            int tmp = Program.Rng.DieRoll(Difficulty);
+            if (tmp < 25 && Program.Rng.DieRoll(2) != 1)
+            {
+                do
+                {
+                    _templateRace = Program.Rng.DieRoll(MonsterRaces.Count - 2);
+                } while ((MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                         MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                         Difficulty + Program.Rng.DieRoll(5));
+                if (Program.Rng.DieRoll(2) != 1 && Difficulty >= 25 + Program.Rng.DieRoll(15))
+                {
+                    getMonNumHook = VaultAuxSymbol;
+                }
+                else
+                {
+                    getMonNumHook = VaultAuxClone;
+                }
+            }
+            else if (tmp < 25)
+            {
+                getMonNumHook = VaultAuxJelly;
+            }
+            else if (tmp < 50)
+            {
+                getMonNumHook = VaultAuxTreasure;
+            }
+            else if (tmp < 65)
+            {
+                if (Program.Rng.DieRoll(3) == 1)
+                {
+                    getMonNumHook = VaultAuxKennel;
+                }
+                else
+                {
+                    getMonNumHook = VaultAuxAnimal;
+                }
+            }
+            else
+            {
+                if (Program.Rng.DieRoll(3) == 1)
+                {
+                    getMonNumHook = VaultAuxChapel;
+                }
+                else
+                {
+                    getMonNumHook = VaultAuxUndead;
+                }
+            }
+            Level.Monsters.GetMonNumPrep(getMonNumHook);
+            for (int i = 0; i < 64; i++)
+            {
+                what[i] = Level.Monsters.GetMonNum(Difficulty + 10);
+                if (what[i] == 0)
+                {
+                    empty = true;
+                }
+            }
+            Level.Monsters.GetMonNumPrep(null);
+            if (empty)
+            {
+                return;
+            }
+            Level.DangerRating += 10;
+            if (Difficulty <= 40 &&
+                Program.Rng.DieRoll((Difficulty * Difficulty) + 50) < 300)
+            {
+                Level.SpecialDanger = true;
+            }
+            for (y = yval - 2; y <= yval + 2; y++)
+            {
+                for (x = xval - 9; x <= xval + 9; x++)
+                {
+                    int rIdx = what[Program.Rng.RandomLessThan(64)];
+                    MonsterRace race = MonsterRaces[rIdx];
+                    Level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
+                }
+            }
+        }
+
+        public void BuildType6(int yval, int xval)
+        {
+            int[] what = new int[16];
+            int i, y, x;
+            bool empty = false;
+            GridTile cPtr;
+            int y1 = yval - 4;
+            int y2 = yval + 4;
+            int x1 = xval - 11;
+            int x2 = xval + 11;
+            GetMonNumHookDelegate getMonNumHook;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                for (x = x1 - 1; x <= x2 + 1; x++)
+                {
+                    cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom);
+                }
+            }
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallOuter");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallOuter");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallOuter");
+            }
+            y1 += 2;
+            y2 -= 2;
+            x1 += 2;
+            x2 -= 2;
+            for (y = y1 - 1; y <= y2 + 1; y++)
+            {
+                cPtr = Level.Grid[y][x1 - 1];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y][x2 + 1];
+                cPtr.SetFeature("WallInner");
+            }
+            for (x = x1 - 1; x <= x2 + 1; x++)
+            {
+                cPtr = Level.Grid[y1 - 1][x];
+                cPtr.SetFeature("WallInner");
+                cPtr = Level.Grid[y2 + 1][x];
+                cPtr.SetFeature("WallInner");
+            }
+            switch (Program.Rng.DieRoll(4))
+            {
+                case 1:
+                    PlaceSecretDoor(y1 - 1, xval);
+                    break;
+
+                case 2:
+                    PlaceSecretDoor(y2 + 1, xval);
+                    break;
+
+                case 3:
+                    PlaceSecretDoor(yval, x1 - 1);
+                    break;
+
+                case 4:
+                    PlaceSecretDoor(yval, x2 + 1);
+                    break;
+            }
+            int tmp = Program.Rng.DieRoll(Difficulty);
+            if (tmp < 20)
+            {
+                getMonNumHook = VaultAuxOrc;
+            }
+            else if (tmp < 40)
+            {
+                getMonNumHook = VaultAuxTroll;
+            }
+            else if (tmp < 55)
+            {
+                getMonNumHook = VaultAuxGiant;
+            }
+            else if (tmp < 70)
+            {
+                if (Program.Rng.DieRoll(4) != 1)
+                {
+                    do
+                    {
+                        _templateRace = Program.Rng.DieRoll(MonsterRaces.Count - 2);
+                    } while ((MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                             MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                             Difficulty + Program.Rng.DieRoll(5));
+                    getMonNumHook = VaultAuxSymbol;
+                }
+                else
+                {
+                    if (Program.Rng.DieRoll(2) == 1)
+                    {
+                        getMonNumHook = VaultAuxCult;
+                    }
+                    else
+                    {
+                        getMonNumHook = VaultAuxChapel;
+                    }
+                }
+            }
+            else if (tmp < 80)
+            {
+                switch (Program.Rng.RandomLessThan(6))
+                {
+                    case 0:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheAcid;
+                            break;
+                        }
+                    case 1:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheLightning;
+                            break;
+                        }
+                    case 2:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheFire;
+                            break;
+                        }
+                    case 3:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheCold;
+                            break;
+                        }
+                    case 4:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreathePoison;
+                            break;
+                        }
+                    default:
+                        {
+                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheAcid | MonsterFlag4.BreatheLightning |
+                                                   MonsterFlag4.BreatheFire | MonsterFlag4.BreatheCold | MonsterFlag4.BreathePoison;
+                            break;
+                        }
+                }
+                getMonNumHook = VaultAuxDragon;
+            }
+            else
+            {
+                getMonNumHook = VaultAuxDemon;
+            }
+            Level.Monsters.GetMonNumPrep(getMonNumHook);
+            for (i = 0; i < 16; i++)
+            {
+                what[i] = Level.Monsters.GetMonNum(Difficulty + 10);
+                if (what[i] == 0)
+                {
+                    empty = true;
+                }
+            }
+            Level.Monsters.GetMonNumPrep(null);
+            if (empty)
+            {
+                return;
+            }
+            for (i = 0; i < 16 - 1; i++)
+            {
+                for (int j = 0; j < 16 - 1; j++)
+                {
+                    int i1 = j;
+                    int i2 = j + 1;
+                    int p1 = MonsterRaces[what[i1]].Level;
+                    int p2 = MonsterRaces[what[i2]].Level;
+                    if (p1 > p2)
+                    {
+                        tmp = what[i1];
+                        what[i1] = what[i2];
+                        what[i2] = tmp;
+                    }
+                }
+            }
+            for (i = 0; i < 8; i++)
+            {
+                what[i] = what[i * 2];
+            }
+            Level.DangerRating += 10;
+            if (Difficulty <= 40 &&
+                Program.Rng.DieRoll((Difficulty * Difficulty) + 50) < 300)
+            {
+                Level.SpecialDanger = true;
+            }
+            for (x = xval - 9; x <= xval + 9; x++)
+            {
+                Level.Monsters.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
+            }
+            for (y = yval - 1; y <= yval + 1; y++)
+            {
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
+            }
+            for (x = xval - 1; x <= xval + 1; x++)
+            {
+                Level.Monsters.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
+                Level.Monsters.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
+            }
+            Level.Monsters.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
+            Level.Monsters.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
+            Level.Monsters.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
+        }
+
+        public void BuildCategory7Vault(int yval, int xval)
+        {
+            VaultType vPtr = VaultTypes[0];
+            int dummy = 0;
+            while (dummy < SaveGame.SafeMaxAttempts)
+            {
+                dummy++;
+                vPtr = VaultTypes[Program.Rng.RandomLessThan(VaultTypes.Count)];
+                if (vPtr.Category == 7)
+                {
+                    var minX = xval - (vPtr.Width / 2);
+                    var maxX = xval + (vPtr.Width / 2);
+                    var minY = yval - (vPtr.Height / 2);
+                    var maxY = yval + (vPtr.Height / 2);
+                    if (minX >= 1 && minY >= 1 && maxX < Level.CurWid - 1 && maxY < Level.CurHgt - 1)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (dummy >= SaveGame.SafeMaxAttempts)
+            {
+                return;
+            }
+            Level.DangerRating += vPtr.Rating;
+            if (Difficulty <= 50 ||
+                Program.Rng.DieRoll(((Difficulty - 40) * (Difficulty - 40)) + 50) <
+                400)
+            {
+                Level.SpecialDanger = true;
+            }
+            BuildVault(yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
+        }
+
+        public void BuildCategory8Vault(int yval, int xval)
+        {
+            VaultType vPtr = VaultTypes[0];
+            int dummy = 0;
+            while (dummy < SaveGame.SafeMaxAttempts)
+            {
+                dummy++;
+                vPtr = VaultTypes[Program.Rng.RandomLessThan(VaultTypes.Count)];
+                if (vPtr.Category == 8)
+                {
+                    var minX = xval - (vPtr.Width / 2);
+                    var maxX = xval + (vPtr.Width / 2);
+                    var minY = yval - (vPtr.Height / 2);
+                    var maxY = yval + (vPtr.Height / 2);
+                    if (minX >= 1 && minY >= 1 && maxX < Level.CurWid - 1 && maxY < Level.CurHgt - 1)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (dummy >= SaveGame.SafeMaxAttempts)
+            {
+                return;
+            }
+            Level.DangerRating += vPtr.Rating;
+            if (Difficulty <= 50 || Program.Rng.DieRoll(((Difficulty - 40) * (Difficulty - 40)) + 50) < 400)
+            {
+                Level.SpecialDanger = true;
+            }
+            BuildVault(yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
+        }
+
+        private void BuildVault(int yval, int xval, int ymax, int xmax, string data)
+        {
+            int dx, dy, x, y;
+            char t;
+            int index = 0;
+            for (dy = 0; dy < ymax; dy++)
+            {
+                for (dx = 0; dx < xmax; dx++)
+                {
+                    t = data[index];
+                    index++;
+                    x = xval - (xmax / 2) + dx;
+                    y = yval - (ymax / 2) + dy;
+                    if (t == ' ')
+                    {
+                        continue;
+                    }
+                    GridTile cPtr = Level.Grid[y][x];
+                    cPtr.RevertToBackground();
+                    cPtr.TileFlags.Set(GridTile.InRoom | GridTile.InVault);
+                    switch (t)
+                    {
+                        case '%':
+                            cPtr.SetFeature("WallOuter");
+                            break;
+
+                        case '#':
+                            cPtr.SetFeature("WallInner");
+                            break;
+
+                        case 'X':
+                            cPtr.SetFeature("WallPermInner");
+                            break;
+
+                        case '*':
+                            if (Program.Rng.RandomLessThan(100) < 75)
+                            {
+                                Level.PlaceObject(y, x, false, false);
+                            }
+                            else
+                            {
+                                Level.PlaceTrap(y, x);
+                            }
+                            break;
+
+                        case '+':
+                            PlaceSecretDoor(y, x);
+                            break;
+
+                        case '^':
+                            Level.PlaceTrap(y, x);
+                            break;
+                    }
+                }
+            }
+            index = 0;
+            for (dy = 0; dy < ymax; dy++)
+            {
+                for (dx = 0; dx < xmax; dx++)
+                {
+                    t = data[index];
+                    index++;
+                    x = xval - (xmax / 2) + dx;
+                    y = yval - (ymax / 2) + dy;
+                    if (t == ' ')
+                    {
+                        continue;
+                    }
+                    switch (t)
+                    {
+                        case '&':
+                            {
+                                Level.MonsterLevel = Difficulty + 5;
+                                Level.Monsters.PlaceMonster(y, x, true, true);
+                                Level.MonsterLevel = Difficulty;
+                                break;
+                            }
+                        case '@':
+                            {
+                                Level.MonsterLevel = Difficulty + 11;
+                                Level.Monsters.PlaceMonster(y, x, true, true);
+                                Level.MonsterLevel = Difficulty;
+                                break;
+                            }
+                        case '9':
+                            {
+                                Level.MonsterLevel = Difficulty + 9;
+                                Level.Monsters.PlaceMonster(y, x, true, true);
+                                Level.MonsterLevel = Difficulty;
+                                Level.ObjectLevel = Difficulty + 7;
+                                Level.PlaceObject(y, x, true, false);
+                                Level.ObjectLevel = Difficulty;
+                                break;
+                            }
+                        case '8':
+                            {
+                                Level.MonsterLevel = Difficulty + 40;
+                                Level.Monsters.PlaceMonster(y, x, true, true);
+                                Level.MonsterLevel = Difficulty;
+                                Level.ObjectLevel = Difficulty + 20;
+                                Level.PlaceObject(y, x, true, true);
+                                Level.ObjectLevel = Difficulty;
+                                break;
+                            }
+                        case ',':
+                            {
+                                if (Program.Rng.RandomLessThan(100) < 50)
+                                {
+                                    Level.MonsterLevel = Difficulty + 3;
+                                    Level.Monsters.PlaceMonster(y, x, true, true);
+                                    Level.MonsterLevel = Difficulty;
+                                }
+                                if (Program.Rng.RandomLessThan(100) < 50)
+                                {
+                                    Level.ObjectLevel = Difficulty + 7;
+                                    Level.PlaceObject(y, x, false, false);
+                                    Level.ObjectLevel = Difficulty;
+                                }
+                                break;
+                            }
+                        case 'A':
+                            {
+                                Level.ObjectLevel = Difficulty + 12;
+                                Level.PlaceObject(y, x, true, false);
+                                Level.ObjectLevel = Difficulty;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void PlaceDownStairs(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            cPtr.SetFeature("DownStair");
+        }
+
+        private void PlaceLockedDoor(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            cPtr.SetFeature($"LockedDoor{Program.Rng.DieRoll(7)}");
+        }
+
+        private void PlaceRandomStairs(int y, int x)
+        {
+            if (!Level.GridOpenNoItem(y, x))
+            {
+                return;
+            }
+            if (CurrentDepth <= 0)
+            {
+            }
+            if (Quests.IsQuest(CurrentDepth) ||
+                CurrentDepth == CurDungeon.MaxLevel)
+            {
+                if (CurDungeon.Tower)
+                {
+                    PlaceDownStairs(y, x);
+                }
+                else
+                {
+                    PlaceUpStairs(y, x);
+                }
+            }
+            else if (Program.Rng.RandomLessThan(100) < 50)
+            {
+                PlaceDownStairs(y, x);
+            }
+            else
+            {
+                PlaceUpStairs(y, x);
+            }
+        }
+
+        private void PlaceSecretDoor(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            cPtr.SetFeature("SecretDoor");
+        }
+
+        private void PlaceUpStairs(int y, int x)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            cPtr.SetFeature("UpStair");
+        }
+
+        private bool VaultAuxAnimal(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if ((rPtr.Flags3 & MonsterFlag3.Animal) == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxChapel(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (!rPtr.Name.Contains("haman"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxClone(int rIdx)
+        {
+            return rIdx == _templateRace;
+        }
+
+        private bool VaultAuxCult(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (!rPtr.Name.Contains("Cult"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxDemon(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (rPtr.Character != 'U')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxDragon(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (!"Dd".Contains(rPtr.Character.ToString()))
+            {
+                return false;
+            }
+            if (rPtr.Flags4 != _vaultAuxDragonMask4)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxGiant(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (rPtr.Character != 'P')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxJelly(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            {
+                return false;
+            }
+            if (!"ijm,".Contains(rPtr.Character.ToString()))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxKennel(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            return rPtr.Character == 'Z' || rPtr.Character == 'C';
+        }
+
+        private bool VaultAuxOrc(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (rPtr.Character != 'o')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxSymbol(int rIdx)
+        {
+            return MonsterRaces[rIdx].Character == MonsterRaces[_templateRace].Character &&
+                   (MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
+        }
+
+        private bool VaultAuxTreasure(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (!(rPtr.Character == '!' || rPtr.Character == '|' || rPtr.Character == '$' || rPtr.Character == '?' ||
+                  rPtr.Character == '='))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxTroll(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if (rPtr.Character != 'T')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool VaultAuxUndead(int rIdx)
+        {
+            MonsterRace rPtr = MonsterRaces[rIdx];
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            {
+                return false;
+            }
+            if ((rPtr.Flags3 & MonsterFlag3.Undead) == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void VaultMonsters(int y1, int x1, int num)
+        {
+            for (int k = 0; k < num; k++)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    const int d = 1;
+                    Level.Scatter(out int y, out int x, y1, x1, d);
+                    if (!Level.GridPassableNoCreature(y, x))
+                    {
+                        continue;
+                    }
+                    Level.MonsterLevel = Difficulty + 2;
+                    Level.Monsters.PlaceMonster(y, x, true, true);
+                    Level.MonsterLevel = Difficulty;
+                }
+            }
+        }
+
+        private void VaultObjects(int y, int x, int num)
+        {
+            int dummy = 0;
+            int j = y, k = x;
+            for (; num > 0; --num)
+            {
+                int i;
+                for (i = 0; i < 11; ++i)
+                {
+                    while (dummy < SaveGame.SafeMaxAttempts)
+                    {
+                        j = Program.Rng.RandomSpread(y, 2);
+                        k = Program.Rng.RandomSpread(x, 3);
+                        dummy++;
+                        if (!Level.InBounds(j, k))
+                        {
+                            continue;
+                        }
+                        break;
+                    }
+                    if (!Level.GridOpenNoItem(j, k))
+                    {
+                        continue;
+                    }
+                    if (Program.Rng.RandomLessThan(100) < 75)
+                    {
+                        Level.PlaceObject(j, k, false, false);
+                    }
+                    else
+                    {
+                        Level.PlaceGold(j, k);
+                    }
+                    break;
+                }
+            }
+        }
+
+        private void VaultTrapAux(int y, int x, int yd, int xd)
+        {
+            int count, y1 = y, x1 = x;
+            int dummy = 0;
+            for (count = 0; count <= 5; count++)
+            {
+                while (dummy < SaveGame.SafeMaxAttempts)
+                {
+                    y1 = Program.Rng.RandomSpread(y, yd);
+                    x1 = Program.Rng.RandomSpread(x, xd);
+                    dummy++;
+                    if (!Level.InBounds(y1, x1))
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                if (!Level.GridOpenNoItemOrCreature(y1, x1))
+                {
+                    continue;
+                }
+                Level.PlaceTrap(y1, x1);
+                break;
+            }
+        }
+
+        private void VaultTraps(int y, int x, int yd, int xd, int num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                VaultTrapAux(y, x, yd, xd);
+            }
+        }
     }
 }
