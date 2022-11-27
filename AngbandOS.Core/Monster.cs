@@ -2415,10 +2415,9 @@ namespace AngbandOS
                         string kin = (Race.Flags1 & MonsterFlag1.Unique) != 0 ? "minions" : "kin";
                         saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
                     }
-                    saveGame.Level.Monsters.SummonKinType = Race.Character;
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonKin))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonKin, Race.Character))
                         {
                             count++;
                         }
@@ -3876,12 +3875,11 @@ namespace AngbandOS
                             string kin = (Race.Flags1 & MonsterFlag1.Unique) != 0 ? "minions" : "kin";
                             saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
                         }
-                        saveGame.Level.Monsters.SummonKinType = Race.Character;
                         for (k = 0; k < 6; k++)
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonKin, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonKin, true, Race.Character))
                                 {
                                     count++;
                                 }

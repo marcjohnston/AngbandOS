@@ -506,8 +506,7 @@ namespace AngbandOS.Commands
                 case 35:
                     while (counter++ < 8)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                            type);
+                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, type);
                     }
                     break;
 

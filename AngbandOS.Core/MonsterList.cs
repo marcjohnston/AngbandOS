@@ -10,6 +10,7 @@ using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.MonsterSelectors;
 
 namespace AngbandOS
 {
@@ -21,13 +22,10 @@ namespace AngbandOS
         public int NumRepro;
         public bool RepairMonsters;
         public bool ShimmerMonsters;
-        public char SummonKinType;
 
         private readonly Level _level;
         private readonly Monster[] _monsters;
         private int _hackMIdxIi;
-        private int _placeMonsterIdx;
-        private int _summonSpecificType;
         private readonly SaveGame SaveGame;
 
         public MonsterList(SaveGame saveGame, Level level)
@@ -40,8 +38,6 @@ namespace AngbandOS
                 _monsters[j] = new Monster(saveGame);
             }
         }
-
-        internal delegate bool GetMonNumHookDelegate(int rIdx);
 
         public Monster this[int index] => _monsters[index];
 
@@ -94,10 +90,9 @@ namespace AngbandOS
                 return false;
             }
             Monster mPtr = _monsters[_hackMIdxIi];
-            SummonKinType = rPtr.Character;
             for (attempts = Program.Rng.DieRoll(10) + 5; attempts != 0; attempts--)
             {
-                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, Constants.SummonKin);
+                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, Constants.SummonKin, rPtr.Character);
             }
             return true;
         }
@@ -371,7 +366,13 @@ namespace AngbandOS
             }
         }
 
-        public int GetMonNum(int level, GetMonNumHookDelegate? getMonNumHook)
+        /// <summary>
+        /// Returns the index of a monster.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="getMonNumHook"></param>
+        /// <returns></returns>
+        public int GetMonNum(int level, MonsterSelector? getMonNumHook)
         {
             int i, j;
             AllocationEntry[] table = SaveGame.AllocRaceTable;
@@ -407,7 +408,7 @@ namespace AngbandOS
                     continue;
                 }
 
-                if (getMonNumHook == null || getMonNumHook(table[i].Index))
+                if (getMonNumHook == null || getMonNumHook.Matches(SaveGame, table[i].Index))
                 {
                     table[i].FinalProbability = table[i].BaseProbability;
                 }
@@ -740,8 +741,7 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    _placeMonsterIdx = rPtr.Index;
-                    int z = GetMonNum(rPtr.Level, PlaceMonsterOkay);
+                    int z = GetMonNum(rPtr.Level, new PlaceMonsterOkayMonsterSelector(rPtr.Index));
                     if (z == 0)
                     {
                         break;
@@ -816,7 +816,7 @@ namespace AngbandOS
             }
         }
 
-        public bool SummonSpecific(int y1, int x1, int lev, int type)
+        public bool SummonSpecific(int y1, int x1, int lev, int type, char? summonKinType = null)
         {
             int i;
             int x = x1;
@@ -840,8 +840,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            _summonSpecificType = type;
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, SummonSpecificOkay);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, new SummonSpecificOkayMonsterSelector(type, summonKinType));
             if (rIdx == 0)
             {
                 return false;
@@ -858,7 +857,7 @@ namespace AngbandOS
             return true;
         }
 
-        public bool SummonSpecificFriendly(int y1, int x1, int lev, int type, bool groupOk)
+        public bool SummonSpecificFriendly(int y1, int x1, int lev, int type, bool groupOk, char? summonKinType = null)
         {
             int i;
             int x = 0;
@@ -885,8 +884,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            _summonSpecificType = type;
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, SummonSpecificOkay);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, new SummonSpecificOkayMonsterSelector(type, summonKinType));
             if (rIdx == 0)
             {
                 return false;
@@ -1409,29 +1407,6 @@ namespace AngbandOS
             _level.DangerRating = old;
         }
 
-        private bool PlaceMonsterOkay(int rIdx)
-        {
-            MonsterRace rPtr = SaveGame.MonsterRaces[_placeMonsterIdx];
-            MonsterRace zPtr = SaveGame.MonsterRaces[rIdx];
-            if (zPtr.Character != rPtr.Character)
-            {
-                return false;
-            }
-            if (zPtr.Level > rPtr.Level)
-            {
-                return false;
-            }
-            if ((zPtr.Flags1 & MonsterFlag1.Unique) != 0)
-            {
-                return false;
-            }
-            if (_placeMonsterIdx == rIdx)
-            {
-                return false;
-            }
-            return true;
-        }
-
         private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool charm)
         {
             if (rPtr == null)
@@ -1552,122 +1527,6 @@ namespace AngbandOS
                 ShimmerMonsters = true;
             }
             return true;
-        }
-
-        private bool SummonSpecificOkay(int rIdx)
-        {
-            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
-            bool okay = false;
-            switch (_summonSpecificType)
-            {
-                case 0:
-                    okay = true;
-                    break;
-                case Constants.SummonAnt:
-                    okay = rPtr.Character == 'a' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonSpider:
-                    okay = rPtr.Character == 'S' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHound:
-                    okay = (rPtr.Character == 'C' || rPtr.Character == 'Z') && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHydra:
-                    okay = rPtr.Character == 'M' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonCthuloid:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonDemon:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Demon) != 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonUndead:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Undead) != 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonDragon:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Dragon) != 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHiUndead:
-                    okay = rPtr.Character == 'L' || rPtr.Character == 'V' || rPtr.Character == 'W';
-                    break;
-                case Constants.SummonHiDragon:
-                    okay = rPtr.Character == 'D';
-                    break;
-                case Constants.SummonGoo:
-                    okay = (rPtr.Flags3 & MonsterFlag3.GreatOldOne) != 0;
-                    break;
-                case Constants.SummonUnique:
-                    okay = (rPtr.Flags1 & MonsterFlag1.Unique) != 0;
-                    break;
-                case Constants.SummonOrc:
-                    okay = rPtr.Character == 'o' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonKobold:
-                    okay = rPtr.Character == 'k' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonYeek:
-                    okay = rPtr.Character == 'y' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHuman:
-                    okay = rPtr.Character == 'p' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre1:
-                    okay = rPtr.Character == 'm' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre2:
-                    okay = rPtr.Character == 'b' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre3:
-                    okay = rPtr.Character == 'Q' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre4:
-                    okay = rPtr.Character == 'v' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre5:
-                    okay = rPtr.Character == '$' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonBizarre6:
-                    okay = (rPtr.Character == '!' || rPtr.Character == '?' || rPtr.Character == '=' || rPtr.Character == '$' ||
-                            rPtr.Character == '|') && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonReaver:
-                    okay = rPtr.Name == "Black reaver" && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonKin:
-                    okay = rPtr.Character == SummonKinType && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonAvatar:
-                    okay = rPtr.Name == "Avatar of Nyarlathotep" && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonAnimal:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Animal) != 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonAnimalRanger:
-                    okay = (rPtr.Flags3 & MonsterFlag3.Animal) != 0 &&
-                            "abcflqrwBCIJKMRS".Contains(rPtr.Character.ToString()) &&
-                            (rPtr.Flags3 & MonsterFlag3.Dragon) == 0 && (rPtr.Flags3 & MonsterFlag3.Evil) == 0 &&
-                            (rPtr.Flags3 & MonsterFlag3.Undead) == 0 && (rPtr.Flags3 & MonsterFlag3.Demon) == 0 &&
-                            (rPtr.Flags3 & MonsterFlag3.Cthuloid) == 0 && rPtr.Flags4 == 0 && rPtr.Flags5 == 0 &&
-                            rPtr.Flags6 == 0 && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHiUndeadNoUniques:
-                    okay = (rPtr.Character == 'L' || rPtr.Character == 'V' || rPtr.Character == 'W') &&
-                            (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonHiDragonNoUniques:
-                    okay = rPtr.Character == 'D' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonNoUniques:
-                    okay = (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonPhantom:
-                    okay = rPtr.Name.Contains("Phantom") && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-                case Constants.SummonElemental:
-                    okay = rPtr.Name.Contains("lemental") && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
-                    break;
-            }
-            return okay;
         }
     }
 }
