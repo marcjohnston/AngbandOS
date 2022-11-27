@@ -90,11 +90,11 @@ namespace AngbandOS.Core.RoomTypes
                          saveGame.Difficulty + Program.Rng.DieRoll(5));
                 if (Program.Rng.DieRoll(2) != 1 && saveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
-                    getMonNumHook = new SymbolMonsterSelector(_templateRace);
+                    getMonNumHook = new SymbolMonsterSelector(saveGame.MonsterRaces[_templateRace].Character);
                 }
                 else
                 {
-                    getMonNumHook = new CloneMonsterSelector(_templateRace);
+                    getMonNumHook = new CloneMonsterSelector(saveGame.MonsterRaces[_templateRace]);
                 }
             }
             else if (tmp < 25)

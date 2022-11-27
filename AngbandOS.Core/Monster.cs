@@ -9,6 +9,7 @@ using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
@@ -2417,7 +2418,7 @@ namespace AngbandOS
                     }
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonKin, Race.Character))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new KinMonsterSelector(Race.Character)))
                         {
                             count++;
                         }
@@ -2447,7 +2448,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons help!");
                     for (k = 0; k < 1; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, 0))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, null))
                         {
                             count++;
                         }
@@ -2464,7 +2465,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons monsters!");
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, 0))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, null))
                         {
                             count++;
                         }
@@ -2481,7 +2482,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons ants.");
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonAnt))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new AntMonsterSelector()))
                         {
                             count++;
                         }
@@ -2498,7 +2499,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons spiders.");
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonSpider))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new SpiderMonsterSelector()))
                         {
                             count++;
                         }
@@ -2515,7 +2516,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons hounds.");
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonHound))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HoundMonsterSelector()))
                         {
                             count++;
                         }
@@ -2532,7 +2533,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons hydras.");
                     for (k = 0; k < 6; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonHydra))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HydraMonsterSelector()))
                         {
                             count++;
                         }
@@ -2551,7 +2552,7 @@ namespace AngbandOS
                         : $"{monsterName} magically summons a Cthuloid entity!");
                     for (k = 0; k < 1; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonCthuloid))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new CthuloidMonsterSelector()))
                         {
                             count++;
                         }
@@ -2568,7 +2569,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons a demon!");
                     for (k = 0; k < 1; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonDemon))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new DemonMonsterSelector()))
                         {
                             count++;
                         }
@@ -2587,7 +2588,7 @@ namespace AngbandOS
                         : $"{monsterName} magically summons an undead adversary!");
                     for (k = 0; k < 1; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonUndead))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new UndeadMonsterSelector()))
                         {
                             count++;
                         }
@@ -2604,7 +2605,7 @@ namespace AngbandOS
                     saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons a dragon!");
                     for (k = 0; k < 1; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonDragon))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new DragonMonsterSelector()))
                         {
                             count++;
                         }
@@ -2622,7 +2623,7 @@ namespace AngbandOS
                         playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons greater undead!");
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonHiUndead))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiUndeadMonsterSelector()))
                         {
                             count++;
                         }
@@ -2641,7 +2642,7 @@ namespace AngbandOS
                         : $"{monsterName} magically summons ancient dragons!");
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonHiDragon))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiDragonMonsterSelector()))
                         {
                             count++;
                         }
@@ -2659,7 +2660,7 @@ namespace AngbandOS
                         playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons Great Old Ones!");
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonGoo))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new GooMonsterSelector()))
                         {
                             count++;
                         }
@@ -2678,14 +2679,14 @@ namespace AngbandOS
                         : $"{monsterName} magically summons special opponents!");
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonUnique))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new UniqueMonsterSelector()))
                         {
                             count++;
                         }
                     }
                     for (k = 0; k < 8; k++)
                     {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, Constants.SummonHiUndead))
+                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiUndeadMonsterSelector()))
                         {
                             count++;
                         }
@@ -3879,14 +3880,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonKin, true, Race.Character))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new KinMonsterSelector(Race.Character), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonKin))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new KinMonsterSelector(Race.Character)))
                                 {
                                     count++;
                                 }
@@ -3915,7 +3916,7 @@ namespace AngbandOS
                         }
                         if (friendly)
                         {
-                            saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonReaver, true);
+                            saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new ReaverMonsterSelector(), true);
                         }
                         else
                         {
@@ -3938,14 +3939,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonNoUniques, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new NoUniquesMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, 0))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, null))
                                 {
                                     count++;
                                 }
@@ -3972,14 +3973,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonNoUniques, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new NoUniquesMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, 0))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, null))
                                 {
                                     count++;
                                 }
@@ -4006,14 +4007,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonAnt, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new AntMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonAnt))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new AntMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4040,14 +4041,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonSpider, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new SpiderMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonSpider))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new SpiderMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4074,14 +4075,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonHound, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HoundMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonHound))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HoundMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4108,14 +4109,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonHydra, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HydraMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonHydra))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HydraMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4142,14 +4143,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonCthuloid, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new CthuloidMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonCthuloid))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new CthuloidMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4176,14 +4177,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonDemon, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new DemonMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonDemon))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new DemonMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4210,14 +4211,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonUndead, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new UndeadMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonUndead))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new UndeadMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4244,14 +4245,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, Constants.SummonDragon, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new DragonMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonDragon))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new DragonMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4278,15 +4279,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev,
-                                    Constants.SummonHiUndeadNoUniques, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiUndeadNoUniquesMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonHiUndead))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiUndeadMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4313,15 +4313,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev,
-                                    Constants.SummonHiDragonNoUniques, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiDragonNoUniquesMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonHiDragon))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiDragonMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4346,7 +4345,7 @@ namespace AngbandOS
                         }
                         for (k = 0; k < 8; k++)
                         {
-                            if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonGoo))
+                            if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new GooMonsterSelector()))
                             {
                                 count++;
                             }
@@ -4372,7 +4371,7 @@ namespace AngbandOS
                         {
                             if (!friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonUnique))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new UniqueMonsterSelector()))
                                 {
                                     count++;
                                 }
@@ -4382,15 +4381,14 @@ namespace AngbandOS
                         {
                             if (friendly)
                             {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev,
-                                    Constants.SummonHiUndeadNoUniques, true))
+                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiUndeadNoUniquesMonsterSelector(), true))
                                 {
                                     count++;
                                 }
                             }
                             else
                             {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, Constants.SummonHiUndead))
+                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiUndeadMonsterSelector()))
                                 {
                                     count++;
                                 }

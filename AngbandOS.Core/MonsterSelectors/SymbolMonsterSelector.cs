@@ -1,19 +1,21 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
+    [Serializable]
     internal class SymbolMonsterSelector : MonsterSelector
     {
-        private int _templateRace;
+        private char _character;
 
-        public SymbolMonsterSelector(int templateRace)
+        public SymbolMonsterSelector(char character)
         {
-            _templateRace = templateRace;
+            character = _character;
         }
 
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return saveGame.MonsterRaces[rIdx].Character == saveGame.MonsterRaces[_templateRace].Character && (saveGame.MonsterRaces[rIdx].Flags1 & MonsterFlag1.Unique) == 0;
+            return rPtr.Character == _character && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
         }
     }
 }

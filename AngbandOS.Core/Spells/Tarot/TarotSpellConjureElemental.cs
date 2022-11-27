@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -18,13 +19,12 @@ namespace AngbandOS.Spells.Tarot
         {
             if (Program.Rng.DieRoll(6) > 3)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental,
-                    false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector(), false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonElemental))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector()))
             {
                 saveGame.MsgPrint("You fail to control the elemental creature!");
             }

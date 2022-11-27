@@ -1,17 +1,20 @@
-﻿namespace AngbandOS.Core.MonsterSelectors
+﻿using AngbandOS.Core.MonsterRaces;
+
+namespace AngbandOS.Core.MonsterSelectors
 {
+    [Serializable]
     internal class CloneMonsterSelector : MonsterSelector
     {
-        private int _templateRace;
+        private MonsterRace _race;
 
-        public CloneMonsterSelector(int templateRace)
+        public CloneMonsterSelector(MonsterRace race)
         {
-            _templateRace = templateRace;
+            _race = race;
         }
 
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return rIdx == _templateRace;
+            return rPtr.Index == _race.Index;
         }
     }
 }

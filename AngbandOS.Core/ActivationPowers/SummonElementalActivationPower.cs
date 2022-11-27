@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -18,7 +19,7 @@ namespace AngbandOS.ActivationPowers
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), new ElementalMonsterSelector()))
                 {
                     saveGame.MsgPrint("An elemental materializes...");
                     saveGame.MsgPrint("You fail to control it!");
@@ -26,7 +27,7 @@ namespace AngbandOS.ActivationPowers
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonElemental, saveGame.Player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), new ElementalMonsterSelector(), saveGame.Player.Level == 50))
                 {
                     saveGame.MsgPrint("An elemental materializes...");
                     saveGame.MsgPrint("It seems obedient to you.");

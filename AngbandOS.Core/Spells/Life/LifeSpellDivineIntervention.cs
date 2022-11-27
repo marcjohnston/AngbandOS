@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
@@ -25,7 +26,7 @@ namespace AngbandOS.Spells.Life
             saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
             saveGame.TurnMonsters(saveGame.Player.Level * 4);
             saveGame.StasisMonsters(saveGame.Player.Level * 4);
-            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonCthuloid, true);
+            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new CthuloidMonsterSelector(), true);
             saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(300);
             if (saveGame.Player.TimedHaste == 0)

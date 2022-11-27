@@ -3,6 +3,7 @@ using AngbandOS.Enumerations;
 using AngbandOS.Core.ItemCategories;
 
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterSelectors;
 
 namespace AngbandOS.Core.FixedArtifacts;
 
@@ -13,7 +14,7 @@ internal class LongSwordOfTheDawnFixedArtifact : BaseFixedArtifact, IActivatible
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your sword flickers black for a moment...");
-        saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonReaver, true);
+        saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new ReaverMonsterSelector(), true);
         item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
     }
     public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";

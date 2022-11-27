@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -22,8 +23,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             }
             for (int i = 0; i < 8; i++)
             {
-                level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, Constants.SummonBizarre1,
-                    false);
+                level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, new Bizarre1MonsterSelector(), false);
             }
         }
 

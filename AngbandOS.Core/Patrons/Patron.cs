@@ -11,6 +11,7 @@ using AngbandOS.Core.ItemCategories;
 using AngbandOS.Projection;
 using System;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterSelectors;
 
 namespace AngbandOS.Patrons
 {
@@ -247,7 +248,7 @@ namespace AngbandOS.Patrons
                     saveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
                     for (dummy = 0; dummy < Program.Rng.DieRoll(5) + 1; dummy++)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0);
+                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, null);
                     }
                     break;
 
@@ -431,8 +432,7 @@ namespace AngbandOS.Patrons
 
                 case Reward.SerDemo:
                     saveGame.MsgPrint($"{ShortName} rewards you with a demonic servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                        Constants.SummonDemon, false))
+                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }
@@ -440,8 +440,7 @@ namespace AngbandOS.Patrons
 
                 case Reward.SerMons:
                     saveGame.MsgPrint($"{ShortName} rewards you with a servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                        Constants.SummonNoUniques, false))
+                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new NoUniquesMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }
@@ -449,8 +448,7 @@ namespace AngbandOS.Patrons
 
                 case Reward.SerUnde:
                     saveGame.MsgPrint($"{ShortName} rewards you with an undead servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                        Constants.SummonUndead, false))
+                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }

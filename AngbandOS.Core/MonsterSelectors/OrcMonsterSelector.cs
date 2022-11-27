@@ -3,20 +3,12 @@ using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
+    [Serializable]
     internal class OrcMonsterSelector : MonsterSelector
     {
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            MonsterRace rPtr = saveGame.MonsterRaces[rIdx];
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
-            {
-                return false;
-            }
-            if (rPtr.Character != 'o')
-            {
-                return false;
-            }
-            return true;
+            return rPtr.Character == 'o' && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
         }
     }
 }

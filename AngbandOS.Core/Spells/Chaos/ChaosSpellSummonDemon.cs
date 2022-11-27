@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -18,7 +19,7 @@ namespace AngbandOS.Spells.Chaos
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, Constants.SummonDemon))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector()))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -30,8 +31,7 @@ namespace AngbandOS.Spells.Chaos
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
-                    Constants.SummonDemon, saveGame.Player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector(), saveGame.Player.Level == 50))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'What is thy bidding... Master?'");

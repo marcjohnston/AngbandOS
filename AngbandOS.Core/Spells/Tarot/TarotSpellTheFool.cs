@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -16,24 +17,24 @@ namespace AngbandOS.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame)
         {
-            int summonType = 0;
+            MonsterSelector? summonType = null;
             saveGame.MsgPrint("You concentrate on the Fool card...");
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    summonType = Constants.SummonBizarre1;
+                    summonType = new Bizarre1MonsterSelector();
                     break;
 
                 case 2:
-                    summonType = Constants.SummonBizarre2;
+                    summonType = new Bizarre2MonsterSelector();
                     break;
 
                 case 3:
-                    summonType = Constants.SummonBizarre4;
+                    summonType = new Bizarre4MonsterSelector();
                     break;
 
                 case 4:
-                    summonType = Constants.SummonBizarre5;
+                    summonType = new Bizarre5MonsterSelector();
                     break;
             }
             if (Program.Rng.DieRoll(2) == 1)

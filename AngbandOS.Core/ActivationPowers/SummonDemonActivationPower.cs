@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -18,7 +19,7 @@ namespace AngbandOS.ActivationPowers
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), new DemonMonsterSelector()))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -26,7 +27,7 @@ namespace AngbandOS.ActivationPowers
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), Constants.SummonDemon, saveGame.Player.Level == 50))
+                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), new DemonMonsterSelector(), saveGame.Player.Level == 50))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'What is thy bidding... Master?'");

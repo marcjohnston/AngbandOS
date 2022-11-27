@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -19,13 +20,12 @@ namespace AngbandOS.Spells.Tarot
             saveGame.MsgPrint("You concentrate on the image of a monster...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonNoUniques,
-                    false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new NoUniquesMonsterSelector(), false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, 0))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, null))
             {
                 saveGame.MsgPrint("The summoned creature gets angry!");
             }

@@ -3,11 +3,11 @@ using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
+    [Serializable]
     internal class UndeadMonsterSelector : MonsterSelector
     {
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            MonsterRace rPtr = saveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;

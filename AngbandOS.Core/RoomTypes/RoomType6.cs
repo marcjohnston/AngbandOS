@@ -100,7 +100,7 @@ namespace AngbandOS.Core.RoomTypes
                     } while ((saveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
                              saveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                              saveGame.Difficulty + Program.Rng.DieRoll(5));
-                    getMonNumHook = new SymbolMonsterSelector(_templateRace);
+                    getMonNumHook = new SymbolMonsterSelector(saveGame.MonsterRaces[_templateRace].Character);
                 }
                 else
                 {
@@ -151,11 +151,11 @@ namespace AngbandOS.Core.RoomTypes
                             break;
                         }
                 }
-                getMonNumHook = new DragonMonsterSelector(_vaultAuxDragonMask4);
+                getMonNumHook = new DragonAuxMonsterSelector(_vaultAuxDragonMask4);
             }
             else
             {
-                getMonNumHook = new DemonMonsterSelector();
+                getMonNumHook = new SymbolMonsterSelector('U');
             }
             for (i = 0; i < 16; i++)
             {

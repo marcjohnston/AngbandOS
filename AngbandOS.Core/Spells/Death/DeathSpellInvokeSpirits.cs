@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
@@ -45,7 +46,7 @@ namespace AngbandOS.Spells.Death
             if (die < 8)
             {
                 saveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonUndead);
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector());
             }
             if (die < 14)
             {

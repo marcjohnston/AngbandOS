@@ -18,7 +18,7 @@ namespace AngbandOS
     internal class MonsterList
     {
         public int CurrentlyActingMonster;
-        public int DunBias = 0;
+        public MonsterSelector? DunBias = null; // The dungeon does not have a bias for monsters.
         public int NumRepro;
         public bool RepairMonsters;
         public bool ShimmerMonsters;
@@ -92,7 +92,7 @@ namespace AngbandOS
             Monster mPtr = _monsters[_hackMIdxIi];
             for (attempts = Program.Rng.DieRoll(10) + 5; attempts != 0; attempts--)
             {
-                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, Constants.SummonKin, rPtr.Character);
+                SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, new KinMonsterSelector(rPtr.Character));
             }
             return true;
         }
@@ -128,7 +128,7 @@ namespace AngbandOS
             }
             else
             {
-                if (DunBias > 0 && Program.Rng.RandomBetween(1, 10) > 6)
+                if (DunBias != null && Program.Rng.RandomBetween(1, 10) > 6)
                 {
                     if (SummonSpecific(y, x, SaveGame.Difficulty, DunBias))
                     {
@@ -403,12 +403,14 @@ namespace AngbandOS
                 }
                 int rIdx = table[i].Index;
                 MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
+
+                // Do not allow more than 1 unique of this type to be created.
                 if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
                 {
                     continue;
                 }
 
-                if (getMonNumHook == null || getMonNumHook.Matches(SaveGame, table[i].Index))
+                if (getMonNumHook == null || getMonNumHook.Matches(SaveGame, rPtr))
                 {
                     table[i].FinalProbability = table[i].BaseProbability;
                 }
@@ -816,12 +818,11 @@ namespace AngbandOS
             }
         }
 
-        public bool SummonSpecific(int y1, int x1, int lev, int type, char? summonKinType = null)
+        public bool SummonSpecific(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk = true)
         {
             int i;
             int x = x1;
             int y = y1;
-            bool groupOk = true;
             for (i = 0; i < 20; ++i)
             {
                 int d = (i / 15) + 1;
@@ -840,16 +841,12 @@ namespace AngbandOS
             {
                 return false;
             }
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, new SummonSpecificOkayMonsterSelector(type, summonKinType));
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, monsterSelector);
             if (rIdx == 0)
             {
                 return false;
             }
             MonsterRace race = SaveGame.MonsterRaces[rIdx];
-            if (type == Constants.SummonAvatar)
-            {
-                groupOk = false;
-            }
             if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
             {
                 return false;
@@ -857,7 +854,7 @@ namespace AngbandOS
             return true;
         }
 
-        public bool SummonSpecificFriendly(int y1, int x1, int lev, int type, bool groupOk, char? summonKinType = null)
+        public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterSelector monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
         {
             int i;
             int x = 0;
@@ -884,7 +881,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, new SummonSpecificOkayMonsterSelector(type, summonKinType));
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, monsterSelector);
             if (rIdx == 0)
             {
                 return false;

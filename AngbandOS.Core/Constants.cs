@@ -154,38 +154,6 @@ namespace AngbandOS.Core
         public const int StoreObjLevel = 5;
         public const int StoreShuffle = 21;
         public const int StoreTurns = 1000;
-        public const int SummonAnimal = 42;
-        public const int SummonAnimalRanger = 43;
-        public const int SummonAnt = 11;
-        public const int SummonAvatar = 41;
-        public const int SummonBizarre1 = 33;
-        public const int SummonBizarre2 = 34;
-        public const int SummonBizarre3 = 35;
-        public const int SummonBizarre4 = 36;
-        public const int SummonBizarre5 = 37;
-        public const int SummonBizarre6 = 38;
-        public const int SummonCthuloid = 15;
-        public const int SummonDemon = 16;
-        public const int SummonDragon = 18;
-        public const int SummonElemental = 48;
-        public const int SummonGoo = 31;
-        public const int SummonHiDragon = 22;
-        public const int SummonHiDragonNoUniques = 45;
-        public const int SummonHiUndead = 21;
-        public const int SummonHiUndeadNoUniques = 44;
-        public const int SummonHound = 13;
-        public const int SummonHuman = 51;
-        public const int SummonHydra = 14;
-        public const int SummonKin = 40;
-        public const int SummonKobold = 52;
-        public const int SummonNoUniques = 46;
-        public const int SummonOrc = 49;
-        public const int SummonPhantom = 47;
-        public const int SummonReaver = 39;
-        public const int SummonSpider = 12;
-        public const int SummonUndead = 17;
-        public const int SummonUnique = 32;
-        public const int SummonYeek = 50;
         public const int TableName = 45;
         public const int TargetGrid = 0x08;
         public const int TargetKill = 0x01;
@@ -209,10 +177,7 @@ namespace AngbandOS.Core
         public const int WildernessHeight = 44;
         public const int WildernessWidth = 66;
 
-        public static readonly DateTime CompileTime = new DateTime(2000, 1, 1)
-            .AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build)
-            .AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
-
+        public static readonly DateTime CompileTime = new DateTime(2000, 1, 1).AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
         public static readonly int VersionMajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
         public static readonly int VersionMinor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
         public static readonly string VersionName = Assembly.GetExecutingAssembly().GetName().Name;

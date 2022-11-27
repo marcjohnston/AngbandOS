@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -16,7 +17,7 @@ namespace AngbandOS.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonAnimalRanger, true);
+            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true);
             return true;
         }
 

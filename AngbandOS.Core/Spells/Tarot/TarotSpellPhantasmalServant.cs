@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -17,8 +18,7 @@ namespace AngbandOS.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint(
-                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, Constants.SummonPhantom,
-                    false)
+                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new PhantomMonsterSelector(), false)
                     ? "'Your wish, master?'"
                     : "No-one ever turns up.");
         }

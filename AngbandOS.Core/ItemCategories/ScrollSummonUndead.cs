@@ -4,6 +4,7 @@ using AngbandOS.Enumerations;
 using System;
 
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterSelectors;
 
 namespace AngbandOS.Core.ItemCategories
 {
@@ -24,7 +25,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             for (int i = 0; i < Program.Rng.DieRoll(3); i++)
             {
-                if (eventArgs.SaveGame.Level.Monsters.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, Constants.SummonUndead))
+                if (eventArgs.SaveGame.Level.Monsters.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, new UndeadMonsterSelector()))
                 {
                     eventArgs.Identified = true;
                 }

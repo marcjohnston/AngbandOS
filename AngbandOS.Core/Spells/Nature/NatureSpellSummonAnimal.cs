@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -16,8 +17,7 @@ namespace AngbandOS.Spells.Nature
     {
         public override void Cast(SaveGame saveGame)
         {
-            if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonAnimalRanger,
-                true))
+            if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true))
             {
                 saveGame.MsgPrint("No-one ever turns up.");
             }

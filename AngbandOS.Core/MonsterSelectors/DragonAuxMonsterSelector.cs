@@ -3,17 +3,17 @@ using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
-    internal class DragonMonsterSelector : MonsterSelector
+    [Serializable]
+    internal class DragonAuxMonsterSelector : MonsterSelector
     {
         private uint _vaultAuxDragonMask4;
-        public DragonMonsterSelector(uint vaultAuxDragonMask4)
+        public DragonAuxMonsterSelector(uint vaultAuxDragonMask4)
         {
             _vaultAuxDragonMask4 = vaultAuxDragonMask4;
         }
 
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            MonsterRace rPtr = saveGame.MonsterRaces[rIdx];
             if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;

@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -19,13 +20,12 @@ namespace AngbandOS.Spells.Tarot
             saveGame.MsgPrint("You concentrate on the image of a Black Reaver...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonReaver,
-                    true))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ReaverMonsterSelector(), true))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, Constants.SummonReaver))
+            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ReaverMonsterSelector()))
             {
                 saveGame.MsgPrint("The summoned Black Reaver gets angry!");
             }

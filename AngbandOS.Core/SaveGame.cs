@@ -695,7 +695,7 @@ namespace AngbandOS
                     case 8:
                     case 9:
                     case 18:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, 0);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
                         break;
 
                     case 10:
@@ -808,7 +808,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Level.Monsters.SummonSpecific(y, x, Difficulty, 0);
+                        Level.Monsters.SummonSpecific(y, x, Difficulty, null);
                     }
                 }
             }
@@ -2508,7 +2508,7 @@ namespace AngbandOS
             if (Player.GameTime.IsHalloween)
             {
                 MsgPrint("All Hallows Eve and the ghouls come out to play...");
-                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUndead);
+                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
             }
             if (CurrentDepth <= 0)
             {
@@ -3303,70 +3303,70 @@ namespace AngbandOS
                 {
                     case 1:
                     case 2:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonAnt);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new AntMonsterSelector());
                         break;
 
                     case 3:
                     case 4:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonSpider);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new SpiderMonsterSelector());
                         break;
 
                     case 5:
                     case 6:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHound);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HoundMonsterSelector());
                         break;
 
                     case 7:
                     case 8:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHydra);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HydraMonsterSelector());
                         break;
 
                     case 9:
                     case 10:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonCthuloid);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new CthuloidMonsterSelector());
                         break;
 
                     case 11:
                     case 12:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUndead);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
                         break;
 
                     case 13:
                     case 14:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonDragon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DragonMonsterSelector());
                         break;
 
                     case 15:
                     case 16:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonDemon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DemonMonsterSelector());
                         break;
 
                     case 17:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonGoo);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new GooMonsterSelector());
                         break;
 
                     case 18:
                     case 19:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonUnique);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UniqueMonsterSelector());
                         break;
 
                     case 20:
                     case 21:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHiUndead);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiUndeadMonsterSelector());
                         break;
 
                     case 22:
                     case 23:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, Constants.SummonHiDragon);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiDragonMonsterSelector());
                         break;
 
                     case 24:
                     case 25:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, Constants.SummonReaver);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
                         break;
 
                     default:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, (Difficulty * 3 / 2) + 5, 0);
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, (Difficulty * 3 / 2) + 5, null);
                         break;
                 }
             }
@@ -6121,7 +6121,7 @@ namespace AngbandOS
             int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
             for (i = 0; i < maxReaver; i++)
             {
-                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, Constants.SummonReaver);
+                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
             }
         }
 
@@ -9465,7 +9465,7 @@ namespace AngbandOS
                         int num = 2 + Program.Rng.DieRoll(3);
                         for (int i = 0; i < num; i++)
                         {
-                            Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, 0);
+                            Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
                         }
                         // Have a chance of also cursing the player
                         if (Difficulty > Program.Rng.DieRoll(100))
@@ -13475,11 +13475,11 @@ namespace AngbandOS
                     {
                         CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
                         DungeonDifficulty = 0;
-                        Level.Monsters.DunBias = 0;
+                        Level.Monsters.DunBias = null;
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town.Char == 'K')
                         {
                             DungeonDifficulty = 35;
-                            Level.Monsters.DunBias = Constants.SummonCthuloid;
+                            Level.Monsters.DunBias = new CthuloidMonsterSelector();
                         }
                     }
                     else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
@@ -13496,7 +13496,7 @@ namespace AngbandOS
                     else
                     {
                         DungeonDifficulty = 2;
-                        Level.Monsters.DunBias = Constants.SummonAnimal;
+                        Level.Monsters.DunBias = new AnimalMonsterSelector();
                     }
                 }
                 else

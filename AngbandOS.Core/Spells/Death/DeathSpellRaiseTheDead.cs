@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using System;
 
@@ -18,7 +19,7 @@ namespace AngbandOS.Spells.Death
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, saveGame.Player.Level > 47 ? Constants.SummonHiUndead : Constants.SummonUndead))
+                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
                 {
                     saveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
@@ -32,8 +33,7 @@ namespace AngbandOS.Spells.Death
             else
             {
                 if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
-                    saveGame.Player.Level > 47 ? Constants.SummonHiUndeadNoUniques : Constants.SummonUndead,
-                    saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
+                    saveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
                     saveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");

@@ -607,7 +607,7 @@ namespace AngbandOS.Commands
         {
             for (int i = 0; i < num; i++)
             {
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0);
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, null);
             }
         }
 

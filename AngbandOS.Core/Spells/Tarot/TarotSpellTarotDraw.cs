@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using System;
@@ -35,7 +36,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 14)
             {
                 saveGame.MsgPrint("Oh no! It's the Devil!");
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonDemon);
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector());
             }
             else if (die < 18)
             {
@@ -56,7 +57,8 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 30)
             {
                 saveGame.MsgPrint("It's a picture of a strange monster.");
-                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, 32 + Program.Rng.DieRoll(6)))
+
+                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
                 {
                     noneCame = true;
                 }
@@ -109,8 +111,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 82)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                    Constants.SummonBizarre1, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -118,8 +119,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 84)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                    Constants.SummonBizarre2, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -127,8 +127,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 86)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                    Constants.SummonBizarre4, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -136,8 +135,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 88)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                    Constants.SummonBizarre5, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -258,16 +256,6 @@ namespace AngbandOS.Spells.Tarot
 
         private void WildMagic(SaveGame saveGame, int spell)
         {
-            int counter = 0;
-            int type = Constants.SummonBizarre1 - 1 + Program.Rng.DieRoll(6);
-            if (type < Constants.SummonBizarre1)
-            {
-                type = Constants.SummonBizarre1;
-            }
-            else if (type > Constants.SummonBizarre6)
-            {
-                type = Constants.SummonBizarre6;
-            }
             switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1)
             {
                 case 1:
@@ -356,9 +344,10 @@ namespace AngbandOS.Spells.Tarot
 
                 case 34:
                 case 35:
+                    int counter = 0;
                     while (counter++ < 8)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, type);
+                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                     }
                     break;
 

@@ -3,6 +3,7 @@ using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
+    [Serializable]
     internal class PlaceMonsterOkayMonsterSelector : MonsterSelector
     {
         private int _placeMonsterIdx;
@@ -11,23 +12,22 @@ namespace AngbandOS.Core.MonsterSelectors
             _placeMonsterIdx = placeMonsterIdx;
         }
 
-        public override bool Matches(SaveGame saveGame, int rIdx)
+        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            MonsterRace rPtr = saveGame.MonsterRaces[_placeMonsterIdx];
-            MonsterRace zPtr = saveGame.MonsterRaces[rIdx];
-            if (zPtr.Character != rPtr.Character)
+            MonsterRace pPtr = saveGame.MonsterRaces[_placeMonsterIdx];
+            if (rPtr.Character != pPtr.Character)
             {
                 return false;
             }
-            if (zPtr.Level > rPtr.Level)
+            if (rPtr.Level > pPtr.Level)
             {
                 return false;
             }
-            if ((zPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
             {
                 return false;
             }
-            if (_placeMonsterIdx == rIdx)
+            if (_placeMonsterIdx == rPtr.Index)
             {
                 return false;
             }

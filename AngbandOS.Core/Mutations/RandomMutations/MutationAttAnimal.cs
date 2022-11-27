@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
+using AngbandOS.Core.MonsterSelectors;
 using System;
 
 namespace AngbandOS.Mutations.RandomMutations
@@ -30,13 +31,11 @@ namespace AngbandOS.Mutations.RandomMutations
             bool aSummon;
             if (Program.Rng.DieRoll(3) == 1)
             {
-                aSummon = saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                    Constants.SummonAnimal, true);
+                aSummon = saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
             }
             else
             {
-                aSummon = saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                    Constants.SummonAnimal);
+                aSummon = saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
             }
             if (!aSummon)
             {

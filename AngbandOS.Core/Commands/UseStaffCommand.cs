@@ -118,7 +118,7 @@ namespace AngbandOS.Commands
                     {
                         for (k = 0; k < Program.Rng.DieRoll(4); k++)
                         {
-                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, 0))
+                            if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, null))
                             {
                                 identified = true;
                             }
