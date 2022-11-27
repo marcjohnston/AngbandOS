@@ -16,35 +16,35 @@ namespace AngbandOS.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame)
         {
-            int dummy = 0;
+            int summonType = 0;
             saveGame.MsgPrint("You concentrate on the Fool card...");
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    dummy = Constants.SummonBizarre1;
+                    summonType = Constants.SummonBizarre1;
                     break;
 
                 case 2:
-                    dummy = Constants.SummonBizarre2;
+                    summonType = Constants.SummonBizarre2;
                     break;
 
                 case 3:
-                    dummy = Constants.SummonBizarre4;
+                    summonType = Constants.SummonBizarre4;
                     break;
 
                 case 4:
-                    dummy = Constants.SummonBizarre5;
+                    summonType = Constants.SummonBizarre5;
                     break;
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                saveGame.MsgPrint(saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, dummy)
+                saveGame.MsgPrint(saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType)
                     ? "The summoned creature gets angry!"
                     : "No-one ever turns up.");
             }
             else
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, dummy, false))
+                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType, false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }

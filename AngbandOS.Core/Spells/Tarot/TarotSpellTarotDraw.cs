@@ -35,8 +35,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 14)
             {
                 saveGame.MsgPrint("Oh no! It's the Devil!");
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty,
-                    Constants.SummonDemon);
+                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, Constants.SummonDemon);
             }
             else if (die < 18)
             {

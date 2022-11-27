@@ -406,16 +406,6 @@ namespace AngbandOS.Commands
 
         private void WildMagic(int spell, SaveGame saveGame)
         {
-            int counter = 0;
-            int type = Constants.SummonBizarre1 - 1 + Program.Rng.DieRoll(6);
-            if (type < Constants.SummonBizarre1)
-            {
-                type = Constants.SummonBizarre1;
-            }
-            else if (type > Constants.SummonBizarre6)
-            {
-                type = Constants.SummonBizarre6;
-            }
             switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1)
             {
                 case 1:
@@ -504,9 +494,33 @@ namespace AngbandOS.Commands
 
                 case 34:
                 case 35:
+                    int counter = 0;
+                    int summonType;
+                    switch (Program.Rng.DieRoll(6))
+                    {
+                        case 1:
+                            summonType = Constants.SummonBizarre1;
+                            break;
+                        case 2:
+                            summonType = Constants.SummonBizarre2;
+                            break;
+                        case 3:
+                            summonType = Constants.SummonBizarre3;
+                            break;
+                        case 4:
+                            summonType = Constants.SummonBizarre4;
+                            break;
+                        case 5:
+                            summonType = Constants.SummonBizarre5;
+                            break;
+                        case 6:
+                            summonType = Constants.SummonBizarre6;
+                            break;
+                    }
+
                     while (counter++ < 8)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, type);
+                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, summonType);
                     }
                     break;
 
