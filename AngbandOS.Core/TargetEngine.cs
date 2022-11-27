@@ -17,15 +17,11 @@ namespace AngbandOS
 {
     internal class TargetEngine
     {
-        private readonly Level _level;
-        private readonly Player _player;
         private readonly SaveGame SaveGame;
 
         public TargetEngine(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            _player = SaveGame.Player;
-            _level = SaveGame.Level;
         }
 
         public bool GetDirectionNoAim(out int dp)
@@ -49,11 +45,11 @@ namespace AngbandOS
                 return false;
             }
             SaveGame.CommandDirection = dir;
-            if (_player.TimedConfusion != 0)
+            if (SaveGame.Player.TimedConfusion != 0)
             {
                 if (Program.Rng.RandomLessThan(100) < 75)
                 {
-                    dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                    dir = SaveGame.Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
                 }
             }
             if (SaveGame.CommandDirection != dir)
@@ -112,9 +108,9 @@ namespace AngbandOS
                 return;
             }
             SaveGame.CommandDirection = dir;
-            if (_player.TimedConfusion != 0)
+            if (SaveGame.Player.TimedConfusion != 0)
             {
-                dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                dir = SaveGame.Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
             if (SaveGame.CommandDirection != dir)
             {
@@ -175,9 +171,9 @@ namespace AngbandOS
                 return false;
             }
             SaveGame.CommandDirection = dir;
-            if (_player.TimedConfusion != 0)
+            if (SaveGame.Player.TimedConfusion != 0)
             {
-                dir = _level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                dir = SaveGame.Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
             if (SaveGame.CommandDirection != dir)
             {
@@ -187,32 +183,22 @@ namespace AngbandOS
             return true;
         }
 
-        public void PanelBounds()
-        {
-            _level.PanelRowMin = _level.PanelRow * (Constants.ScreenHgt / 2);
-            _level.PanelRowMax = _level.PanelRowMin + Constants.ScreenHgt - 1;
-            _level.PanelRowPrt = _level.PanelRowMin - 1;
-            _level.PanelColMin = _level.PanelCol * (Constants.ScreenWid / 2);
-            _level.PanelColMax = _level.PanelColMin + Constants.ScreenWid - 1;
-            _level.PanelColPrt = _level.PanelColMin - 13;
-        }
-
         public void PanelBoundsCenter()
         {
-            _level.PanelRow = _level.PanelRowMin / (Constants.ScreenHgt / 2);
-            _level.PanelRowMax = _level.PanelRowMin + Constants.ScreenHgt - 1;
-            _level.PanelRowPrt = _level.PanelRowMin - 1;
-            _level.PanelCol = _level.PanelColMin / (Constants.ScreenWid / 2);
-            _level.PanelColMax = _level.PanelColMin + Constants.ScreenWid - 1;
-            _level.PanelColPrt = _level.PanelColMin - 13;
+            SaveGame.Level.PanelRow = SaveGame.Level.PanelRowMin / (Constants.ScreenHgt / 2);
+            SaveGame.Level.PanelRowMax = SaveGame.Level.PanelRowMin + Constants.ScreenHgt - 1;
+            SaveGame.Level.PanelRowPrt = SaveGame.Level.PanelRowMin - 1;
+            SaveGame.Level.PanelCol = SaveGame.Level.PanelColMin / (Constants.ScreenWid / 2);
+            SaveGame.Level.PanelColMax = SaveGame.Level.PanelColMin + Constants.ScreenWid - 1;
+            SaveGame.Level.PanelColPrt = SaveGame.Level.PanelColMin - 13;
         }
 
         public void RecenterScreenAroundPlayer()
         {
-            int y = _player.MapY;
-            int x = _player.MapX;
-            int maxProwMin = _level.MaxPanelRows * (Constants.ScreenHgt / 2);
-            int maxPcolMin = _level.MaxPanelCols * (Constants.ScreenWid / 2);
+            int y = SaveGame.Player.MapY;
+            int x = SaveGame.Player.MapX;
+            int maxProwMin = SaveGame.Level.MaxPanelRows * (Constants.ScreenHgt / 2);
+            int maxPcolMin = SaveGame.Level.MaxPanelCols * (Constants.ScreenWid / 2);
             int prowMin = y - (Constants.ScreenHgt / 2);
             if (prowMin > maxProwMin)
             {
@@ -231,15 +217,15 @@ namespace AngbandOS
             {
                 pcolMin = 0;
             }
-            if (prowMin == _level.PanelRowMin && pcolMin == _level.PanelColMin)
+            if (prowMin == SaveGame.Level.PanelRowMin && pcolMin == SaveGame.Level.PanelColMin)
             {
                 return;
             }
-            _level.PanelRowMin = prowMin;
-            _level.PanelColMin = pcolMin;
+            SaveGame.Level.PanelRowMin = prowMin;
+            SaveGame.Level.PanelColMin = pcolMin;
             PanelBoundsCenter();
-            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            _player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
         }
 
         public bool TargetOkay()
@@ -256,7 +242,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            Monster mPtr = _level.Monsters[SaveGame.TargetWho];
+            Monster mPtr = SaveGame.Level.Monsters[SaveGame.TargetWho];
             SaveGame.TargetRow = mPtr.MapY;
             SaveGame.TargetCol = mPtr.MapX;
             return true;
@@ -264,20 +250,20 @@ namespace AngbandOS
 
         public bool TargetSet(int mode)
         {
-            int y = _player.MapY;
-            int x = _player.MapX;
+            int y = SaveGame.Player.MapY;
+            int x = SaveGame.Player.MapX;
             bool done = false;
             SaveGame.TargetWho = 0;
             TargetSetPrepare(mode);
             int m = 0;
-            if (_level.TempN != 0)
+            if (SaveGame.Level.TempN != 0)
             {
-                y = _level.TempY[m];
-                x = _level.TempX[m];
+                y = SaveGame.Level.TempY[m];
+                x = SaveGame.Level.TempX[m];
             }
             while (!done)
             {
-                GridTile cPtr = _level.Grid[y][x];
+                GridTile cPtr = SaveGame.Level.Grid[y][x];
                 string info = TargetAble(cPtr.MonsterIndex) ? "t,T,*" : "T,*";
                 char query = TargetSetAux(y, x, mode | Constants.TargetLook, info);
                 switch (query)
@@ -308,23 +294,23 @@ namespace AngbandOS
 
                     case '*':
                         {
-                            if (x == _level.TempX[m] && y == _level.TempY[m])
+                            if (x == SaveGame.Level.TempX[m] && y == SaveGame.Level.TempY[m])
                             {
-                                if (++m >= _level.TempN)
+                                if (++m >= SaveGame.Level.TempN)
                                 {
                                     m = 0;
                                     done = true;
                                 }
                                 else
                                 {
-                                    y = _level.TempY[m];
-                                    x = _level.TempX[m];
+                                    y = SaveGame.Level.TempY[m];
+                                    x = SaveGame.Level.TempX[m];
                                 }
                             }
                             else
                             {
-                                y = _level.TempY[m];
-                                x = _level.TempX[m];
+                                y = SaveGame.Level.TempY[m];
+                                x = SaveGame.Level.TempX[m];
                             }
                             break;
                         }
@@ -333,21 +319,21 @@ namespace AngbandOS
                             int d = SaveGame.GetKeymapDir(query);
                             if (d != 0)
                             {
-                                x += _level.KeypadDirectionXOffset[d];
-                                y += _level.KeypadDirectionYOffset[d];
-                                if (x >= _level.CurWid - 1 || x > _level.PanelColMax)
+                                x += SaveGame.Level.KeypadDirectionXOffset[d];
+                                y += SaveGame.Level.KeypadDirectionYOffset[d];
+                                if (x >= SaveGame.Level.CurWid - 1 || x > SaveGame.Level.PanelColMax)
                                 {
                                     x--;
                                 }
-                                else if (x <= 0 || x < _level.PanelColMin)
+                                else if (x <= 0 || x < SaveGame.Level.PanelColMin)
                                 {
                                     x++;
                                 }
-                                if (y >= _level.CurHgt - 1 || y > _level.PanelRowMax)
+                                if (y >= SaveGame.Level.CurHgt - 1 || y > SaveGame.Level.PanelRowMax)
                                 {
                                     y--;
                                 }
-                                else if (y <= 0 || y < _level.PanelRowMin)
+                                else if (y <= 0 || y < SaveGame.Level.PanelRowMin)
                                 {
                                     y++;
                                 }
@@ -356,7 +342,7 @@ namespace AngbandOS
                         }
                 }
             }
-            _level.TempN = 0;
+            SaveGame.Level.TempN = 0;
             SaveGame.PrintLine("", 0, 0);
             return SaveGame.TargetWho != 0;
         }
@@ -365,14 +351,14 @@ namespace AngbandOS
         {
             char ch = '\0';
             bool success = false;
-            x = _player.MapX;
-            y = _player.MapY;
+            x = SaveGame.Player.MapX;
+            y = SaveGame.Player.MapY;
             bool cv = SaveGame.CursorVisible;
             SaveGame.CursorVisible = true;
             SaveGame.MsgPrint("Select a point and press space.");
             while (ch != 27 && ch != ' ' && !SaveGame.Shutdown)
             {
-                _level.MoveCursorRelative(y, x);
+                SaveGame.Level.MoveCursorRelative(y, x);
                 ch = SaveGame.Inkey();
                 switch (ch)
                 {
@@ -390,21 +376,21 @@ namespace AngbandOS
                             {
                                 break;
                             }
-                            x += _level.KeypadDirectionXOffset[d];
-                            y += _level.KeypadDirectionYOffset[d];
-                            if (x >= _level.CurWid - 1 || x >= _level.PanelColMin + Constants.ScreenWid)
+                            x += SaveGame.Level.KeypadDirectionXOffset[d];
+                            y += SaveGame.Level.KeypadDirectionYOffset[d];
+                            if (x >= SaveGame.Level.CurWid - 1 || x >= SaveGame.Level.PanelColMin + Constants.ScreenWid)
                             {
                                 x--;
                             }
-                            else if (x <= 0 || x <= _level.PanelColMin)
+                            else if (x <= 0 || x <= SaveGame.Level.PanelColMin)
                             {
                                 x++;
                             }
-                            if (y >= _level.CurHgt - 1 || y >= _level.PanelRowMin + Constants.ScreenHgt)
+                            if (y >= SaveGame.Level.CurHgt - 1 || y >= SaveGame.Level.PanelRowMin + Constants.ScreenHgt)
                             {
                                 y--;
                             }
-                            else if (y <= 0 || y <= _level.PanelRowMin)
+                            else if (y <= 0 || y <= SaveGame.Level.PanelRowMin)
                             {
                                 y++;
                             }
@@ -419,7 +405,7 @@ namespace AngbandOS
 
         private string LookMonDesc(int mIdx)
         {
-            Monster mPtr = _level.Monsters[mIdx];
+            Monster mPtr = SaveGame.Level.Monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
             bool living = (rPtr.Flags3 & MonsterFlag3.Undead) == 0;
             if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0)
@@ -460,7 +446,7 @@ namespace AngbandOS
 
         private bool TargetAble(int mIdx)
         {
-            Monster mPtr = _level.Monsters[mIdx];
+            Monster mPtr = SaveGame.Level.Monsters[mIdx];
             if (mPtr.Race == null)
             {
                 return false;
@@ -469,11 +455,11 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (!_level.Projectable(_player.MapY, _player.MapX, mPtr.MapY, mPtr.MapX))
+            if (!SaveGame.Level.Projectable(SaveGame.Player.MapY, SaveGame.Player.MapX, mPtr.MapY, mPtr.MapX))
             {
                 return false;
             }
-            if (_player.TimedHallucinations != 0)
+            if (SaveGame.Player.TimedHallucinations != 0)
             {
                 return false;
             }
@@ -483,18 +469,18 @@ namespace AngbandOS
         private bool TargetSetAccept(int y, int x)
         {
             int nextOIdx;
-            if (y == _player.MapY && x == _player.MapX)
+            if (y == SaveGame.Player.MapY && x == SaveGame.Player.MapX)
             {
                 return true;
             }
-            if (_player.TimedHallucinations != 0)
+            if (SaveGame.Player.TimedHallucinations != 0)
             {
                 return false;
             }
-            GridTile cPtr = _level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             if (cPtr.MonsterIndex != 0)
             {
-                Monster mPtr = _level.Monsters[cPtr.MonsterIndex];
+                Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                 if (mPtr.IsVisible)
                 {
                     return true;
@@ -502,7 +488,7 @@ namespace AngbandOS
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = _level.Items[thisOIdx];
+                Item oPtr = SaveGame.Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Marked)
                 {
@@ -518,7 +504,7 @@ namespace AngbandOS
 
         private char TargetSetAux(int y, int x, int mode, string info)
         {
-            GridTile cPtr = _level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             char query;
             do
             {
@@ -527,18 +513,18 @@ namespace AngbandOS
                 string s1 = "You see ";
                 string s2 = "";
                 string s3 = "";
-                if (y == _player.MapY && x == _player.MapX)
+                if (y == SaveGame.Player.MapY && x == SaveGame.Player.MapX)
                 {
                     s1 = "You are ";
                     s2 = "on ";
                 }
                 string outVal;
-                if (_player.TimedHallucinations != 0)
+                if (SaveGame.Player.TimedHallucinations != 0)
                 {
                     const string name = "something strange";
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
                     SaveGame.PrintLine(outVal, 0, 0);
-                    _level.MoveCursorRelative(y, x);
+                    SaveGame.Level.MoveCursorRelative(y, x);
                     query = SaveGame.Inkey();
                     if (!SaveGame.Shutdown)
                     {
@@ -555,7 +541,7 @@ namespace AngbandOS
                 int nextOIdx;
                 if (cPtr.MonsterIndex != 0)
                 {
-                    Monster mPtr = _level.Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                     MonsterRace rPtr = mPtr.Race;
                     if (mPtr.IsVisible)
                     {
@@ -580,7 +566,7 @@ namespace AngbandOS
                                 string a = (mPtr.Mind & Constants.SmFriendly) != 0 ? " (allied) " : " ";
                                 outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                                 SaveGame.PrintLine(outVal, 0, 0);
-                                _level.MoveCursorRelative(y, x);
+                                SaveGame.Level.MoveCursorRelative(y, x);
                                 query = SaveGame.Inkey();
                             }
                             if (query != 'r')
@@ -609,12 +595,12 @@ namespace AngbandOS
                         s2 = "carrying ";
                         for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                         {
-                            Item oPtr = _level.Items[thisOIdx];
+                            Item oPtr = SaveGame.Level.Items[thisOIdx];
                             nextOIdx = oPtr.NextInStack;
                             string oName = oPtr.Description(true, 3);
                             outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                             SaveGame.PrintLine(outVal, 0, 0);
-                            _level.MoveCursorRelative(y, x);
+                            SaveGame.Level.MoveCursorRelative(y, x);
                             query = SaveGame.Inkey();
                             if (query != '\r' && query != '\n' && query != ' ')
                             {
@@ -635,7 +621,7 @@ namespace AngbandOS
                 }
                 for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                 {
-                    Item oPtr = _level.Items[thisOIdx];
+                    Item oPtr = SaveGame.Level.Items[thisOIdx];
                     nextOIdx = oPtr.NextInStack;
                     if (oPtr.Marked)
                     {
@@ -643,7 +629,7 @@ namespace AngbandOS
                         string oName = oPtr.Description(true, 3);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         SaveGame.PrintLine(outVal, 0, 0);
-                        _level.MoveCursorRelative(y, x);
+                        SaveGame.Level.MoveCursorRelative(y, x);
                         query = SaveGame.Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
@@ -668,7 +654,7 @@ namespace AngbandOS
                 string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
                     ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
                     : ObjectRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
-                if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !_level.PlayerCanSeeBold(y, x))
+                if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !SaveGame.Level.PlayerCanSeeBold(y, x))
                 {
                     feat = string.Empty;
                 }
@@ -690,7 +676,7 @@ namespace AngbandOS
                     }
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
                     SaveGame.PrintLine(outVal, 0, 0);
-                    _level.MoveCursorRelative(y, x);
+                    SaveGame.Level.MoveCursorRelative(y, x);
                     query = SaveGame.Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
@@ -705,14 +691,14 @@ namespace AngbandOS
         private void TargetSetPrepare(int mode)
         {
             int y;
-            _level.TempN = 0;
-            for (y = _level.PanelRowMin; y <= _level.PanelRowMax; y++)
+            SaveGame.Level.TempN = 0;
+            for (y = SaveGame.Level.PanelRowMin; y <= SaveGame.Level.PanelRowMax; y++)
             {
                 int x;
-                for (x = _level.PanelColMin; x <= _level.PanelColMax; x++)
+                for (x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
                 {
-                    GridTile cPtr = _level.Grid[y][x];
-                    if (!_level.PlayerHasLosBold(y, x))
+                    GridTile cPtr = SaveGame.Level.Grid[y][x];
+                    if (!SaveGame.Level.PlayerHasLosBold(y, x))
                     {
                         continue;
                     }
@@ -724,22 +710,22 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    _level.TempX[_level.TempN] = x;
-                    _level.TempY[_level.TempN] = y;
-                    _level.TempN++;
+                    SaveGame.Level.TempX[SaveGame.Level.TempN] = x;
+                    SaveGame.Level.TempY[SaveGame.Level.TempN] = y;
+                    SaveGame.Level.TempN++;
                 }
             }
             List<TargetLocation> list = new List<TargetLocation>();
-            for (int i = 0; i < _level.TempN; i++)
+            for (int i = 0; i < SaveGame.Level.TempN; i++)
             {
-                list.Add(new TargetLocation(_level.TempY[i], _level.TempX[i],
-                    _level.Distance(_level.TempY[i], _level.TempX[i], _player.MapY, _player.MapX)));
+                list.Add(new TargetLocation(SaveGame.Level.TempY[i], SaveGame.Level.TempX[i],
+                    SaveGame.Level.Distance(SaveGame.Level.TempY[i], SaveGame.Level.TempX[i], SaveGame.Player.MapY, SaveGame.Player.MapX)));
             }
             list.Sort();
-            for (int i = 0; i < _level.TempN; i++)
+            for (int i = 0; i < SaveGame.Level.TempN; i++)
             {
-                _level.TempX[i] = list[i].X;
-                _level.TempY[i] = list[i].Y;
+                SaveGame.Level.TempX[i] = list[i].X;
+                SaveGame.Level.TempY[i] = list[i].Y;
             }
         }
     }

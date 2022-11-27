@@ -250,7 +250,7 @@ namespace AngbandOS
             }
             WeightCarried = 0;
             Inventory = new Inventory(SaveGame, this);
-            foreach (System.Collections.Generic.KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;

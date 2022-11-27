@@ -12,6 +12,7 @@ using AngbandOS.Enumerations;
 using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.FixedArtifacts;
 
 namespace AngbandOS
 {
@@ -69,7 +70,14 @@ namespace AngbandOS
         public int DamageDice;
         public int DamageDiceSides;
         public int Discount;
-        public FixedArtifactId FixedArtifactIndex;
+        public FixedArtifactId FixedArtifactIndex
+        {
+            get
+            {
+                return FixedArtifact == null ? FixedArtifactId.None : FixedArtifact.BaseFixedArtifact.FixedArtifactID;
+            }
+        }
+        public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
         public int HoldingMonsterIndex;
         public string Inscription = "";
         public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
@@ -130,7 +138,7 @@ namespace AngbandOS
             Y = original.Y;
             BaseItemCategory = original.BaseItemCategory;
             Marked = original.Marked;
-            FixedArtifactIndex = original.FixedArtifactIndex;
+            FixedArtifact = original.FixedArtifact;
             RareItemTypeIndex = original.RareItemTypeIndex;
             NextInStack = original.NextInStack;
             Inscription = original.Inscription;
@@ -1794,233 +1802,11 @@ namespace AngbandOS
             {
                 return BonusPowerSubType.Description;
             }
-            switch (FixedArtifactIndex)
+
+            if (FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(FixedArtifact.BaseFixedArtifact.GetType()))
             {
-                case FixedArtifactId.DaggerOfFaith:
-                    {
-                        return "fire bolt (9d8) every 8+d8 turns";
-                    }
-                case FixedArtifactId.DaggerOfHope:
-                    {
-                        return "frost bolt (6d8) every 7+d7 turns";
-                    }
-                case FixedArtifactId.DaggerOfCharity:
-                    {
-                        return "lightning bolt (4d8) every 6+d6 turns";
-                    }
-                case FixedArtifactId.DaggerOfThoth:
-                    {
-                        return "stinking cloud (12) every 4+d4 turns";
-                    }
-                case FixedArtifactId.DaggerIcicle:
-                    {
-                        return "frost ball (48) every 5+d5 turns";
-                    }
-                case FixedArtifactId.BootsOfDancing:
-                    {
-                        return "remove fear and cure poison every 5 turns";
-                    }
-                case FixedArtifactId.SwordExcalibur:
-                    {
-                        return "frost ball (100) every 300 turns";
-                    }
-                case FixedArtifactId.SwordOfTheDawn:
-                    {
-                        return "summon a Black Reaver every 500+d500 turns";
-                    }
-                case FixedArtifactId.SwordOfEverflame:
-                    {
-                        return "fire ball (72) every 400 turns";
-                    }
-                case FixedArtifactId.MorningStarFirestarter:
-                    {
-                        return "large fire ball (72) every 100 turns";
-                    }
-                case FixedArtifactId.BootsOfIthaqua:
-                    {
-                        return "haste self (20+d20 turns) every 200 turns";
-                    }
-                case FixedArtifactId.AxeOfTheoden:
-                    {
-                        return "drain life (120) every 400 turns";
-                    }
-                case FixedArtifactId.HammerJustice:
-                    {
-                        return "drain life (90) every 70 turns";
-                    }
-                case FixedArtifactId.ArmourOfTheOgreLords:
-                    {
-                        return "door and trap destruction every 10 turns";
-                    }
-                case FixedArtifactId.ScytheOfGharne:
-                    {
-                        return "word of recall every 200 turns";
-                    }
-                case FixedArtifactId.MaceThunder:
-                    {
-                        return "haste self (20+d20 turns) every 100+d100 turns";
-                    }
-                case FixedArtifactId.QuarterstaffEriril:
-                    {
-                        return "identify every 10 turns";
-                    }
-                case FixedArtifactId.QuarterstaffOfAtal:
-                    {
-                        return "probing, detection and full id  every 1000 turns";
-                    }
-                case FixedArtifactId.AxeOfTheTrolls:
-                    {
-                        return "mass carnage every 1000 turns";
-                    }
-                case FixedArtifactId.AxeSpleenSlicer:
-                    {
-                        return "cure wounds (4d7) every 3+d3 turns";
-                    }
-                case FixedArtifactId.CrossbowOfDeath:
-                    {
-                        return "fire branding of bolts every 999 turns";
-                    }
-                case FixedArtifactId.SwordOfKarakal:
-                    {
-                        return "a getaway every 35 turns";
-                    }
-                case FixedArtifactId.SpearGungnir:
-                    {
-                        return "lightning ball (100) every 500 turns";
-                    }
-                case FixedArtifactId.SpearOfDestiny:
-                    {
-                        return "stone to mud every 5 turns";
-                    }
-                case FixedArtifactId.PlateMailSoulkeeper:
-                    {
-                        return "heal (1000) every 888 turns";
-                    }
-                case FixedArtifactId.ArmourOfTheVampireHunter:
-                    {
-                        return "heal (777), curing and heroism every 300 turns";
-                    }
-                case FixedArtifactId.ArmourOfTheOrcs:
-                    {
-                        return "carnage every 500 turns";
-                    }
-                case FixedArtifactId.ShadowCloakOfNyogtha:
-                    {
-                        return "restore life levels every 450 turns";
-                    }
-                case FixedArtifactId.TridentOfTheGnorri:
-                    {
-                        return "teleport away every 150 turns";
-                    }
-                case FixedArtifactId.CloakOfBarzai:
-                    {
-                        return "resistance (20+d20 turns) every 111 turns";
-                    }
-                case FixedArtifactId.CloakDarkness:
-                    {
-                        return "Sleep II every 55 turns";
-                    }
-                case FixedArtifactId.CloakOfTheSwashbuckler:
-                    {
-                        return "recharge item I every 70 turns";
-                    }
-                case FixedArtifactId.CloakShifter:
-                    {
-                        return "teleport every 45 turns";
-                    }
-                case FixedArtifactId.FlailTotila:
-                    {
-                        return "confuse monster every 15 turns";
-                    }
-                case FixedArtifactId.GlovesOfLight:
-                    {
-                        return "magic missile (2d6) every 2 turns";
-                    }
-                case FixedArtifactId.GauntletIronfist:
-                    {
-                        return "fire bolt (9d8) every 8+d8 turns";
-                    }
-                case FixedArtifactId.GauntletsOfGhouls:
-                    {
-                        return "frost bolt (6d8) every 7+d7 turns";
-                    }
-                case FixedArtifactId.GauntletsWhiteSpark:
-                    {
-                        return "lightning bolt (4d8) every 6+d6 turns";
-                    }
-                case FixedArtifactId.GauntletsOfTheDead:
-                    {
-                        return "acid bolt (5d8) every 5+d5 turns";
-                    }
-                case FixedArtifactId.CestiOfCombat:
-                    {
-                        return "a magical arrow (150) every 90+d90 turns";
-                    }
-                case FixedArtifactId.HelmSkullkeeper:
-                    {
-                        return "detection every 55+d55 turns";
-                    }
-                case FixedArtifactId.CrownOfTheSun:
-                    {
-                        return "heal (700) every 250 turns";
-                    }
-                case FixedArtifactId.DragonScaleRazorback:
-                    {
-                        return "star ball (150) every 1000 turns";
-                    }
-                case FixedArtifactId.DragonScaleBladeturner:
-                    {
-                        return "breathe elements (300), berserk rage, bless, and resistance";
-                    }
-                case FixedArtifactId.StarEssenceOfPolaris:
-                    {
-                        return "illumination every 10+d10 turns";
-                    }
-                case FixedArtifactId.StarEssenceOfXoth:
-                    {
-                        return "magic mapping and light every 50+d50 turns";
-                    }
-                case FixedArtifactId.ShiningTrapezohedron:
-                    {
-                        return "clairvoyance and recall, draining you";
-                    }
-                case FixedArtifactId.AmuletOfAbdulAlhazred:
-                    {
-                        return "dispel evil (x5) every 300+d300 turns";
-                    }
-                case FixedArtifactId.AmuletOfLobon:
-                    {
-                        return "protection from evil every 225+d225 turns";
-                    }
-                case FixedArtifactId.RingOfMagic:
-                    {
-                        return "a strangling attack (100) every 100+d100 turns";
-                    }
-                case FixedArtifactId.RingOfBast:
-                    {
-                        return "haste self (75+d75 turns) every 150+d150 turns";
-                    }
-                case FixedArtifactId.RingOfElementalPowerFire:
-                    {
-                        return "large fire ball (120) every 225+d225 turns";
-                    }
-                case FixedArtifactId.RingOfElementalPowerIce:
-                    {
-                        return "large frost ball (200) every 325+d325 turns";
-                    }
-                case FixedArtifactId.RingOfElementalPowerStorm:
-                    {
-                        return "large lightning ball (250) every 425+d425 turns";
-                    }
-                case FixedArtifactId.RingOfSet:
-                    {
-                        return "bizarre things every 450+d450 turns";
-                    }
-                case FixedArtifactId.DragonHelmOfPower:
-                case FixedArtifactId.HelmTerrorMask:
-                    {
-                        return "rays of fear in every direction";
-                    }
+                IActivatible activatibleFixedArtifact = (IActivatible)FixedArtifact.BaseFixedArtifact;
+                return activatibleFixedArtifact.DescribeActivationEffect();
             }
             if (RareItemTypeIndex == Enumerations.RareItemType.WeaponPlanarWeapon)
             {
@@ -2662,102 +2448,9 @@ namespace AngbandOS
 
         public void GetFixedArtifactResistances()
         {
-            bool giveResistance = false, givePower = false;
-            if (FixedArtifactIndex == FixedArtifactId.HelmTerrorMask)
+            if (FixedArtifact != null)
             {
-                if (SaveGame.Player.ProfessionIndex == CharacterClass.Warrior)
-                {
-                    givePower = true;
-                    giveResistance = true;
-                }
-                else
-                {
-                    RandartItemCharacteristics.Cursed = true;
-                    RandartItemCharacteristics.HeavyCurse = true;
-                    RandartItemCharacteristics.Aggravate = true;
-                    RandartItemCharacteristics.DreadCurse = true;
-                    IdentCursed = true;
-                    return;
-                }
-            }
-            switch (FixedArtifactIndex)
-            {
-                case FixedArtifactId.ArmourOfTheOrcs:
-                case FixedArtifactId.ChainMailHeartguard:
-                case FixedArtifactId.ArmourOfTheOgreLords:
-                case FixedArtifactId.ArmourOfTheKoboldChief:
-                case FixedArtifactId.ArmourOfSerpents:
-                case FixedArtifactId.ShieldRawhide:
-                case FixedArtifactId.ShieldOfStability:
-                case FixedArtifactId.CapOfTheMindcrafter:
-                case FixedArtifactId.ShadowCloakOfNyogtha:
-                case FixedArtifactId.BootsOfTheBlackReaver:
-                case FixedArtifactId.ShieldVitriol:
-                case FixedArtifactId.DaggerOfHope:
-                case FixedArtifactId.DaggerOfCharity:
-                case FixedArtifactId.DaggerOfFaith:
-                case FixedArtifactId.SmallSwordSting:
-                case FixedArtifactId.HammerJustice:
-                case FixedArtifactId.ScaleMailWyvernscale:
-                    {
-                        giveResistance = true;
-                    }
-                    break;
-
-                case FixedArtifactId.MainGaucheOfDefence:
-                case FixedArtifactId.SwordBrightblade:
-                case FixedArtifactId.SwordBlackIce:
-                case FixedArtifactId.SwordOfEverflame:
-                case FixedArtifactId.SwordFiretongue:
-                case FixedArtifactId.SwordDragonSlayer:
-                case FixedArtifactId.ScimitarSoulsword:
-                case FixedArtifactId.BowOfSerpents:
-                case FixedArtifactId.CrossbowOfDeath:
-                    {
-                        if (Program.Rng.DieRoll(2) == 1)
-                        {
-                            giveResistance = true;
-                        }
-                        else
-                        {
-                            givePower = true;
-                        }
-                    }
-                    break;
-
-                case FixedArtifactId.RingOfElementalPowerIce:
-                case FixedArtifactId.RingOfElementalPowerStorm:
-                case FixedArtifactId.CrownOfMisery:
-                case FixedArtifactId.CestiOfCombat:
-                case FixedArtifactId.CloakOfTheSwashbuckler:
-                case FixedArtifactId.TridentOfTheGnorri:
-                case FixedArtifactId.QuarterstaffOfAtal:
-                    {
-                        givePower = true;
-                    }
-                    break;
-
-                case FixedArtifactId.RingOfSet:
-                case FixedArtifactId.CrownOfTheSun:
-                case FixedArtifactId.HammerMjolnir:
-                    {
-                        givePower = true;
-                        giveResistance = true;
-                    }
-                    break;
-            }
-            if (givePower)
-            {
-                BonusPowerType = Enumerations.RareItemType.SpecialAbility;
-                if (BonusPowerType != 0)
-                {
-                    BonusPowerSubType = ActivationPowerManager.GetRandom();
-                }
-            }
-            IArtifactBias artifactBias = null;
-            if (giveResistance)
-            {
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                FixedArtifact.BaseFixedArtifact.ApplyResistances(SaveGame, this);
             }
         }
 
@@ -2830,7 +2523,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                FixedArtifactIndex = pair.Key;
+                FixedArtifact = pair.Value;
                 GetFixedArtifactResistances();
                 return true;
             }
@@ -3276,7 +2969,7 @@ namespace AngbandOS
                     }
                 }
                 AssignItemType(kIdx);
-                FixedArtifactIndex = pair.Key;
+                FixedArtifact = pair.Value;
                 return true;
             }
             return false;

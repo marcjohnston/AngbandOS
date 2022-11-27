@@ -41,9 +41,11 @@ namespace AngbandOS
 
         public int Weight;
         public readonly ItemClass BaseItemCategory;
+        public readonly BaseFixedArtifact BaseFixedArtifact;
 
-        public FixedArtifact(Base2FixedArtifact baseFixedArtifact)
+        public FixedArtifact(BaseFixedArtifact baseFixedArtifact)
         {
+            BaseFixedArtifact = baseFixedArtifact;
             BaseItemCategory = baseFixedArtifact.BaseItemCategory;
 
             Ac = baseFixedArtifact.Ac;

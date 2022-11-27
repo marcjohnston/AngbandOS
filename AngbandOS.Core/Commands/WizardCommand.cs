@@ -744,7 +744,7 @@ namespace AngbandOS.Commands
 
         private void WizCreateNamedArt(SaveGame saveGame, FixedArtifactId aIdx)
         {
-            if (aIdx == FixedArtifactId.None)
+            if ((int)aIdx >= saveGame.FixedArtifacts.Count)
             {
                 return;
             }
@@ -756,7 +756,7 @@ namespace AngbandOS.Commands
             }
             ItemClass i = aPtr.BaseItemCategory;
             qPtr.AssignItemType(i);
-            qPtr.FixedArtifactIndex = aIdx;
+            qPtr.FixedArtifact = saveGame.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
             qPtr.BaseArmourClass = aPtr.Ac;
             qPtr.DamageDice = aPtr.Dd;

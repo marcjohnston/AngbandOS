@@ -82,7 +82,7 @@ namespace AngbandOS.Stores
         protected override bool StoreAnalyzesPurchases => false;
         protected override bool PerformsMaintenanceWhenResting => false;
         protected override int CarryItem(Item qPtr) => HomeCarry(qPtr);
-        protected virtual string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
+        protected override string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
 
     }
 }

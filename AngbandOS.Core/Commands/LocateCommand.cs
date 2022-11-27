@@ -76,7 +76,7 @@ namespace AngbandOS.Commands
                 {
                     saveGame.Level.PanelRow = currentRow;
                     saveGame.Level.PanelCol = currentCol;
-                    targetEngine.PanelBounds();
+                    saveGame.Level.PanelBounds();
                     saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
                     saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
                     saveGame.HandleStuff();

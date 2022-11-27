@@ -73,7 +73,7 @@ namespace AngbandOS.Enumerations
         public bool SustStr { get; set; } = false;
         public bool SustWis { get; set; } = false;
         public bool AntiTheft { get; set; } = false;
-        public bool Activate { get; set; } = false;
+        public bool Activate { get; set; } = false; // TODO: This should be IActivatible.IsAssignableFrom
         public bool Aggravate { get; set; } = false;
         public bool Blessed { get; set; } = false;
         public bool Cursed { get; set; } = false;

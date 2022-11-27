@@ -7419,7 +7419,7 @@ namespace AngbandOS
             {
                 // Completely remake the armour into a set of blasted armour
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
-                item.FixedArtifactIndex = 0;
+                item.FixedArtifact = null;
                 item.RareItemTypeIndex = Enumerations.RareItemType.ArmourBlasted;
                 item.BonusArmourClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusToHit = 0;
@@ -7460,7 +7460,7 @@ namespace AngbandOS
             {
                 // Completely remake the item into a shattered weapon
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
-                item.FixedArtifactIndex = 0;
+                item.FixedArtifact = null;
                 item.RareItemTypeIndex = Enumerations.RareItemType.WeaponShattered;
                 item.BonusToHit = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusDamage = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
@@ -8480,9 +8480,7 @@ namespace AngbandOS
                             do
                             {
                                 totalDamage += stepK;
-                            } while (Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade
-                                         ? 2
-                                         : 4) == 1);
+                            } while (Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 2 : 4) == 1);
                         }
                         // Add bonus damage for the weapon
                         totalDamage += item.BonusDamage;
