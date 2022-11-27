@@ -16,9 +16,7 @@ namespace AngbandOS.Spells.Chaos
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("The world changes!");
-            {
-                saveGame.DoCmdSaveGame(true);
-            }
+            saveGame.DoCmdSaveGame(true);
             saveGame.NewLevelFlag = true;
             saveGame.CameFrom = LevelStart.StartRandom;
         }
