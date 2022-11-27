@@ -25,6 +25,7 @@ using System.Reflection;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.ItemClasses;
 using static AngbandOS.MonsterList;
+using AngbandOS.Core.RoomTypes;
 
 namespace AngbandOS
 {
@@ -14478,7 +14479,7 @@ namespace AngbandOS
                 }
                 if (destroyed)
                 {
-                    if (RoomBuild(y, x, 1))
+                    if (RoomBuild(y, x, new RoomType1()))
                     {
                     }
                     continue;
@@ -14492,7 +14493,7 @@ namespace AngbandOS
                         {
                             if (maxVaultOk > 1)
                             {
-                                if (RoomBuild(y, x, 8))
+                                if (RoomBuild(y, x, new RoomType8()))
                                 {
                                     continue;
                                 }
@@ -14502,35 +14503,35 @@ namespace AngbandOS
                         {
                             if (maxVaultOk > 0)
                             {
-                                if (RoomBuild(y, x, 7))
+                                if (RoomBuild(y, x, new RoomType7()))
                                 {
                                     continue;
                                 }
                             }
                         }
-                        if (k < 40 && RoomBuild(y, x, 5))
+                        if (k < 40 && RoomBuild(y, x, new RoomType5()))
                         {
                             continue;
                         }
-                        if (k < 55 && RoomBuild(y, x, 6))
+                        if (k < 55 && RoomBuild(y, x, new RoomType6()))
                         {
                             continue;
                         }
                     }
-                    if (k < 25 && RoomBuild(y, x, 4))
+                    if (k < 25 && RoomBuild(y, x, new RoomType4()))
                     {
                         continue;
                     }
-                    if (k < 50 && RoomBuild(y, x, 3))
+                    if (k < 50 && RoomBuild(y, x, new RoomType3()))
                     {
                         continue;
                     }
-                    if (k < 100 && RoomBuild(y, x, 2))
+                    if (k < 100 && RoomBuild(y, x, new RoomType2()))
                     {
                         continue;
                     }
                 }
-                if (RoomBuild(y, x, 1))
+                if (RoomBuild(y, x, new RoomType1()))
                 {
                 }
             }
@@ -15780,20 +15781,20 @@ namespace AngbandOS
             }
         }
 
-        private bool RoomBuild(int y0, int x0, int typ)
+        private bool RoomBuild(int y0, int x0, RoomType roomType)
         {
-            if (Difficulty < _room[typ].Level)
+            if (Difficulty < _room[roomType.Type].Level)
             {
                 return false;
             }
-            if (Crowded && (typ == 5 || typ == 6))
+            if (Crowded && (roomType.Type == 5 || roomType.Type == 6))
             {
                 return false;
             }
-            int y1 = y0 + _room[typ].Dy1;
-            int y2 = y0 + _room[typ].Dy2;
-            int x1 = x0 + _room[typ].Dx1;
-            int x2 = x0 + _room[typ].Dx2;
+            int y1 = y0 + _room[roomType.Type].Dy1;
+            int y2 = y0 + _room[roomType.Type].Dy2;
+            int x1 = x0 + _room[roomType.Type].Dx1;
+            int x2 = x0 + _room[roomType.Type].Dx2;
             if (y1 < 0 || y2 >= RowRooms)
             {
                 return false;
@@ -15816,7 +15817,7 @@ namespace AngbandOS
             }
             y = (y1 + y2 + 1) * _blockHgt / 2;
             x = (x1 + x2 + 1) * _blockWid / 2;
-            switch (typ)
+            switch (roomType.Type)
             {
                 case 8:
                     BuildCategory8Vault(y, x);
@@ -15866,7 +15867,7 @@ namespace AngbandOS
                     RoomMap[y][x] = true;
                 }
             }
-            if (typ == 5 || typ == 6)
+            if (roomType.Type == 5 || roomType.Type == 6)
             {
                 Crowded = true;
             }
