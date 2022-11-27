@@ -15,9 +15,8 @@ namespace AngbandOS.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("You focus your Chi. Choose a destination.");
-            if (!targetEngine.TgtPt(out int ii, out int ij))
+            if (!saveGame.TgtPt(out int ii, out int ij))
             {
                 return;
             }

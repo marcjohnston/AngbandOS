@@ -21,7 +21,6 @@ namespace AngbandOS.Commands
             int startCol = saveGame.Level.PanelCol;
             int currentRow = startRow;
             int currentCol = startCol;
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Enter a loop so the player can browse the level
             while (true)
             {
@@ -83,7 +82,7 @@ namespace AngbandOS.Commands
                 }
             }
             // We've finished, so snap back to the player's location
-            targetEngine.RecenterScreenAroundPlayer();
+            saveGame.Player.RecenterScreenAroundPlayer();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
             saveGame.HandleStuff();

@@ -66,8 +66,7 @@ namespace AngbandOS.Core.Races
             // Cyclopes can throw boulders
             if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You throw a huge boulder.");
                     saveGame.FireBolt(new ProjectMissile(saveGame), direction, 3 * saveGame.Player.Level / 2);

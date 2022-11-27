@@ -82,8 +82,7 @@ namespace AngbandOS.Core.Races
             // Mind Flayers can shoot psychic bolts
             if (saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You concentrate and your eyes glow red...");
                     saveGame.FireBolt(new ProjectPsi(saveGame), direction, saveGame.Player.Level);

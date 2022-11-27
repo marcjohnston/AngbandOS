@@ -14,8 +14,7 @@ internal class DaggerIcicleFixedArtifact : BaseFixedArtifact, IActivatible
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your dagger is covered in frost...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

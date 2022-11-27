@@ -37,8 +37,7 @@ namespace AngbandOS.Commands
                 return;
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
@@ -76,7 +75,7 @@ namespace AngbandOS.Commands
             int x = saveGame.Player.MapX;
             int targetX = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
             int targetY = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && saveGame.TargetOkay())
             {
                 targetX = saveGame.TargetCol;
                 targetY = saveGame.TargetRow;

@@ -16,8 +16,7 @@ namespace AngbandOS.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int direction))
+            if (!saveGame.GetDirectionWithAim(out int direction))
             {
                 return false;
             }

@@ -70,8 +70,7 @@ namespace AngbandOS.Core.Races
             // Yeeks can scream
             if (saveGame.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You make a horrible scream!");
                     saveGame.FearMonster(direction, saveGame.Player.Level);

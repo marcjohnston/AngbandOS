@@ -22,7 +22,6 @@ namespace AngbandOS.Talents
 
         public override void Use(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             if (saveGame.Player.Level < 25)
             {
                 saveGame.TeleportPlayer(10);
@@ -30,7 +29,7 @@ namespace AngbandOS.Talents
             else
             {
                 saveGame.MsgPrint("Choose a destination.");
-                if (!targetEngine.TgtPt(out int i, out int j))
+                if (!saveGame.TgtPt(out int i, out int j))
                 {
                     return;
                 }

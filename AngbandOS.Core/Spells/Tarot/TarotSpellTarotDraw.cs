@@ -17,7 +17,6 @@ namespace AngbandOS.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             bool noneCame = false;
             int die = Program.Rng.DieRoll(120);
             if (saveGame.Player.ProfessionIndex == CharacterClass.Rogue || saveGame.Player.ProfessionIndex == CharacterClass.HighMage)
@@ -58,8 +57,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 30)
             {
                 saveGame.MsgPrint("It's a picture of a strange monster.");
-                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2,
-                    32 + Program.Rng.DieRoll(6)))
+                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, 32 + Program.Rng.DieRoll(6)))
                 {
                     noneCame = true;
                 }
@@ -148,7 +146,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 96)
             {
                 saveGame.MsgPrint("It's the Lovers.");
-                if (!targetEngine.GetDirectionWithAim(out int dir))
+                if (!saveGame.GetDirectionWithAim(out int dir))
                 {
                     return;
                 }

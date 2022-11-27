@@ -105,8 +105,7 @@ namespace AngbandOS.Commands
             // Dragon armour gives you a ball of the relevant damage type
             if (item.Category == ItemTypeEnum.DragArmor)
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (!targetEngine.GetDirectionWithAim(out int dir))
+                if (!saveGame.GetDirectionWithAim(out int dir))
                 {
                     return;
                 }
@@ -257,8 +256,7 @@ namespace AngbandOS.Commands
             // Elemental rings give you a ball of the appropriate element
             if (item.Category == ItemTypeEnum.Ring)
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (!targetEngine.GetDirectionWithAim(out int dir))
+                if (!saveGame.GetDirectionWithAim(out int dir))
                 {
                     return;
                 }

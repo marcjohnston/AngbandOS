@@ -31,8 +31,7 @@ namespace AngbandOS.Spells.Nature
                     beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }

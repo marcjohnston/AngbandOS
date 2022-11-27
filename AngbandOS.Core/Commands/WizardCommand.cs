@@ -287,16 +287,14 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizardBolt(SaveGame saveGame)
         {
-            ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
-                      ProjectionFlag.ProjectKill;
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
             int tx = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
             int ty = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && saveGame.TargetOkay())
             {
                 flg &= ~ProjectionFlag.ProjectStop;
                 tx = saveGame.TargetCol;

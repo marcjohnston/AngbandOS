@@ -16,11 +16,9 @@ namespace AngbandOS.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             bool disturb = false;
             MapCoordinate coord = new MapCoordinate();
-            int numTraps =
-                saveGame.CountKnownTraps(coord);
+            int numTraps = saveGame.CountKnownTraps(coord);
             int numChests = saveGame.CountChests(coord, true);
             // Count the possible traps and chests we might want to disarm
             if (numTraps != 0 || numChests != 0)
@@ -33,7 +31,7 @@ namespace AngbandOS.Commands
                 }
             }
             // Get a direction if we don't already have one
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];

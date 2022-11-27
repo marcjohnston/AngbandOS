@@ -221,8 +221,7 @@ namespace AngbandOS.Core.Races
             }
             if (saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Constitution, 12))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint($"You breathe {projectileDescription}.");
                     saveGame.FireBall(projectile, direction, saveGame.Player.Level * 2, -(saveGame.Player.Level / 15) + 1);

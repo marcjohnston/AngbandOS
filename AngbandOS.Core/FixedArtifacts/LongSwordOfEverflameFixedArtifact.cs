@@ -16,8 +16,7 @@ internal class LongSwordOfEverflameFixedArtifact : BaseFixedArtifact, IActivatib
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your sword glows an intense red...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

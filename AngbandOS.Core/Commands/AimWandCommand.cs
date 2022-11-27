@@ -50,8 +50,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Aim the wand
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }

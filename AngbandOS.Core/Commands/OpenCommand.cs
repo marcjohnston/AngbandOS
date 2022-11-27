@@ -32,8 +32,7 @@ namespace AngbandOS.Commands
                 }
             }
             // If we don't already have a direction, prompt for one
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];

@@ -27,11 +27,10 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.Disturb(false);
             saveGame.MsgPrint("Magical energy flows through you! You must release it!");
             saveGame.MsgPrint(null);
-            targetEngine.GetDirectionNoAutoAim(out int dire);
+            saveGame.GetDirectionNoAutoAim(out int dire);
             saveGame.FireBall(new ProjectMana(saveGame), dire, saveGame.Player.Level * 2, 3);
         }
     }

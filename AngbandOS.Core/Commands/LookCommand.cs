@@ -18,8 +18,7 @@ namespace AngbandOS.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (targetEngine.TargetSet(Constants.TargetLook))
+            if (saveGame.TargetSet(Constants.TargetLook))
             {
                 saveGame.MsgPrint(saveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
             }

@@ -16,10 +16,9 @@ namespace AngbandOS.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             bool disturb = false;
             // Get the direction in which we wish to tunnel
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 // Pick up the tile that the player wishes to tunnel through
                 int tileY = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];

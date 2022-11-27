@@ -20,14 +20,12 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("You concentrate...");
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBolt(new ProjectPsi(saveGame), dir,
-                Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
+            saveGame.FireBolt(new ProjectPsi(saveGame), dir, Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
         }
 
         public override string ActivationSummary(int lvl)

@@ -20,8 +20,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionNoAim(out int dir))
+            if (!saveGame.GetDirectionNoAim(out int dir))
             {
                 return;
             }
@@ -68,7 +67,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             player.MapX = x;
             level.RedrawSingleLocation(player.MapY, player.MapX);
             level.RedrawSingleLocation(oy, ox);
-            targetEngine.RecenterScreenAroundPlayer();
+            player.RecenterScreenAroundPlayer();
             player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
         }

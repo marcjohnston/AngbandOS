@@ -14,8 +14,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : BaseFixedArtifact, IActiv
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your gauntlets are covered in sparks...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

@@ -69,8 +69,7 @@ namespace AngbandOS.Core.Races
             // Klackons can spit acid
             if (saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You spit acid.");
                     if (saveGame.Player.Level < 25)

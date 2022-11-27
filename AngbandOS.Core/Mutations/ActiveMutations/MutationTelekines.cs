@@ -19,9 +19,8 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("You concentrate...");
-            if (targetEngine.GetDirectionWithAim(out int dir))
+            if (saveGame.GetDirectionWithAim(out int dir))
             {
                 saveGame.SummonItem(dir, player.Level * 10, true);
             }

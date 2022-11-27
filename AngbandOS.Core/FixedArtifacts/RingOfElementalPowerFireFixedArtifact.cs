@@ -14,8 +14,7 @@ internal class RingOfElementalPowerFireFixedArtifact : BaseFixedArtifact, IActiv
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The ring glows deep red...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

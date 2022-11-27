@@ -20,9 +20,8 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("You breathe fire...");
-            if (targetEngine.GetDirectionWithAim(out int dir))
+            if (saveGame.GetDirectionWithAim(out int dir))
             {
                 saveGame.FireBall(new ProjectFire(saveGame), dir, player.Level * 2, -(1 + (player.Level / 20)));
             }

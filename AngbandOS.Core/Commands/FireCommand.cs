@@ -40,9 +40,8 @@ namespace AngbandOS.Commands
                 return;
             }
             Item ammunitionStack = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Find out where we're aiming at
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
@@ -87,7 +86,7 @@ namespace AngbandOS.Commands
             int targetX = saveGame.Player.MapX + (99 * saveGame.Level.KeypadDirectionXOffset[dir]);
             int targetY = saveGame.Player.MapY + (99 * saveGame.Level.KeypadDirectionYOffset[dir]);
             // Special case for if we're hitting our own square
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && saveGame.TargetOkay())
             {
                 targetX = saveGame.TargetCol;
                 targetY = saveGame.TargetRow;

@@ -20,10 +20,9 @@ namespace AngbandOS.Commands
         {
             // Assume we won't disturb the player
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame);
 
             // Get the direction in which to alter something
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];

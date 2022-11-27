@@ -13,8 +13,7 @@ internal class RingOfElementalPowerIceFixedArtifact : BaseFixedArtifact, IActiva
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The ring glows bright white...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

@@ -87,8 +87,7 @@ namespace AngbandOS.Core.Races
             // Imps can cast fire bolt/ball
             if (saveGame.CheckIfRacialPowerWorks(9, 15, Ability.Wisdom, 15))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     if (saveGame.Player.Level >= 30)
                     {

@@ -12,8 +12,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : BaseFixedArtifact,
     // Bladeturner heals you and gives you timed resistances
     public void ActivateItem(SaveGame saveGame, Item item)
     {
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }

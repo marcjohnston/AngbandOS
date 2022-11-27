@@ -17,7 +17,6 @@ namespace AngbandOS.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction
@@ -26,7 +25,7 @@ namespace AngbandOS.Commands
                 saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
             }
             // Get the location to close
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];

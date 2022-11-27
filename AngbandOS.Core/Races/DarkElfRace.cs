@@ -68,8 +68,7 @@ namespace AngbandOS.Core.Races
             // Dark elves can cast magic missile
             if (saveGame.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You cast a magic missile.");
                     saveGame.FireBoltOrBeam(10, new ProjectMissile(saveGame), direction, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));

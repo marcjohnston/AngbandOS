@@ -1806,7 +1806,6 @@ namespace AngbandOS
 
         private void DungeonLoop()
         {
-            TargetEngine targetEngine = new TargetEngine(this);
             NewLevelFlag = false;
             HackMind = false;
             CurrentCommand = (char)0;
@@ -1854,8 +1853,8 @@ namespace AngbandOS
                 CreateDownStair = false;
                 CreateUpStair = false;
             }
-            targetEngine.RecenterScreenAroundPlayer();
-            targetEngine.PanelBoundsCenter();
+            Player.RecenterScreenAroundPlayer();
+            Level.PanelBoundsCenter();
             MsgPrint(null);
             CharacterXtra = true;
             Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrEquippy);
@@ -3786,7 +3785,6 @@ namespace AngbandOS
 
         public void CallChaos()
         {
-            TargetEngine targetEngine = new TargetEngine(this);
             int plev = Player.Level;
             bool lineChaos = false;
             Projectile[] hurtTypes =
@@ -3828,7 +3826,7 @@ namespace AngbandOS
             }
             else
             {
-                if (!targetEngine.GetDirectionWithAim(out int dir))
+                if (!GetDirectionWithAim(out int dir))
                 {
                     return;
                 }
@@ -4467,7 +4465,6 @@ namespace AngbandOS
 
         public void Earthquake(int cy, int cx, int r)
         {
-            TargetEngine targetEngine = new TargetEngine(this);
             int i, y, x, yy, xx, dy, dx;
             int damage = 0;
             int sn = 0, sy = 0, sx = 0;
@@ -4597,7 +4594,7 @@ namespace AngbandOS
                     Player.MapX = sx;
                     Level.RedrawSingleLocation(oy, ox);
                     Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-                    targetEngine.RecenterScreenAroundPlayer();
+                    Player.RecenterScreenAroundPlayer();
                 }
                 map[16 + Player.MapY - cy][16 + Player.MapX - cx] = false;
                 if (damage != 0)
@@ -4948,12 +4945,10 @@ namespace AngbandOS
 
         public bool FireBall(Projectile projectile, int dir, int dam, int rad)
         {
-            TargetEngine targetEngine = new TargetEngine(this);
-            ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
-                      ProjectionFlag.ProjectKill;
+            ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
             int tx = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
             int ty = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && TargetOkay())
             {
                 flg &= ~ProjectionFlag.ProjectStop;
                 tx = TargetCol;
@@ -6223,8 +6218,7 @@ namespace AngbandOS
                 xx++;
             }
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-            TargetEngine targetEngine = new TargetEngine(this);
-            targetEngine.RecenterScreenAroundPlayer();
+            Player.RecenterScreenAroundPlayer();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             HandleStuff();
@@ -6311,8 +6305,7 @@ namespace AngbandOS
             Player.MapX = x;
             Level.RedrawSingleLocation(oy, ox);
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-            TargetEngine targetEngine = new TargetEngine(this);
-            targetEngine.RecenterScreenAroundPlayer();
+            Player.RecenterScreenAroundPlayer();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             HandleStuff();
@@ -6320,9 +6313,8 @@ namespace AngbandOS
 
         public void TeleportSwap(int dir)
         {
-            TargetEngine targetEngine = new TargetEngine(this);
             int tx, ty;
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && TargetOkay())
             {
                 tx = TargetCol;
                 ty = TargetRow;
@@ -6359,7 +6351,7 @@ namespace AngbandOS
                     Level.Monsters.UpdateMonsterVisibility(Level.Grid[ty][tx].MonsterIndex, true);
                     Level.RedrawSingleLocation(ty, tx);
                     Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-                    targetEngine.RecenterScreenAroundPlayer();
+                    Player.RecenterScreenAroundPlayer();
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
                     HandleStuff();
@@ -6775,11 +6767,10 @@ namespace AngbandOS
         /// <returns></returns>
         private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
         {
-            TargetEngine targetEngine = new TargetEngine(this);
             flg |= ProjectionFlag.ProjectThru;
             int tx = Player.MapX + Level.KeypadDirectionXOffset[dir];
             int ty = Player.MapY + Level.KeypadDirectionYOffset[dir];
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && TargetOkay())
             {
                 tx = TargetCol;
                 ty = TargetRow;
@@ -8068,8 +8059,7 @@ namespace AngbandOS
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
             Level.RedrawSingleLocation(oldY, oldX);
             // Recenter the screen if we have to
-            TargetEngine targetEngine = new TargetEngine(this);
-            targetEngine.RecenterScreenAroundPlayer();
+            Player.RecenterScreenAroundPlayer();
             // We'll need to update and redraw various things
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
@@ -8902,9 +8892,8 @@ namespace AngbandOS
                 MsgPrint("You can't fetch when you're already standing on something.");
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(this);
             // If we didn't have a direction, we might have an existing target
-            if (dir == 5 && targetEngine.TargetOkay())
+            if (dir == 5 && TargetOkay())
             {
                 targetX = TargetCol;
                 targetY = TargetRow;
@@ -17652,6 +17641,666 @@ namespace AngbandOS
             for (int i = 0; i < num; i++)
             {
                 VaultTrapAux(y, x, yd, xd);
+            }
+        }
+
+        public bool GetDirectionNoAim(out int dp)
+        {
+            dp = 0;
+            int dir = CommandDirection;
+            while (dir == 0)
+            {
+                if (!GetCom("Direction (Escape to cancel)? ", out char ch))
+                {
+                    break;
+                }
+                dir = GetKeymapDir(ch);
+            }
+            if (dir == 5)
+            {
+                dir = 0;
+            }
+            if (dir == 0)
+            {
+                return false;
+            }
+            CommandDirection = dir;
+            if (Player.TimedConfusion != 0)
+            {
+                if (Program.Rng.RandomLessThan(100) < 75)
+                {
+                    dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                }
+            }
+            if (CommandDirection != dir)
+            {
+                MsgPrint("You are confused.");
+            }
+            dp = dir;
+            return true;
+        }
+
+        public void GetDirectionNoAutoAim(out int dp)
+        {
+            dp = 0;
+            int dir = 0;
+            while (dir == 0)
+            {
+                string p = !TargetOkay()
+                    ? "Direction ('*' to choose a target, Escape to cancel)? "
+                    : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+                if (!GetCom(p, out char command))
+                {
+                    break;
+                }
+                switch (command)
+                {
+                    case 'T':
+                    case 't':
+                    case '.':
+                    case '5':
+                    case '0':
+                        {
+                            dir = 5;
+                            break;
+                        }
+                    case '*':
+                        {
+                            if (TargetSet(Constants.TargetKill))
+                            {
+                                dir = 5;
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            dir = GetKeymapDir(command);
+                            break;
+                        }
+                }
+                if (dir == 5 && !TargetOkay())
+                {
+                    dir = 0;
+                }
+            }
+            if (dir == 0)
+            {
+                return;
+            }
+            CommandDirection = dir;
+            if (Player.TimedConfusion != 0)
+            {
+                dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+            }
+            if (CommandDirection != dir)
+            {
+                MsgPrint("You are confused.");
+            }
+            dp = dir;
+        }
+
+        public bool GetDirectionWithAim(out int dp)
+        {
+            dp = 0;
+            int dir = CommandDirection;
+            if (TargetOkay())
+            {
+                dir = 5;
+            }
+            while (dir == 0)
+            {
+                string p = !TargetOkay()
+                    ? "Direction ('*' to choose a target, Escape to cancel)? "
+                    : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+                if (!GetCom(p, out char command))
+                {
+                    break;
+                }
+                switch (command)
+                {
+                    case 'T':
+                    case 't':
+                    case '.':
+                    case '5':
+                    case '0':
+                        {
+                            dir = 5;
+                            break;
+                        }
+                    case '*':
+                        {
+                            if (TargetSet(Constants.TargetKill))
+                            {
+                                dir = 5;
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            dir = GetKeymapDir(command);
+                            break;
+                        }
+                }
+                if (dir == 5 && !TargetOkay())
+                {
+                    dir = 0;
+                }
+            }
+            if (dir == 0)
+            {
+                return false;
+            }
+            CommandDirection = dir;
+            if (Player.TimedConfusion != 0)
+            {
+                dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+            }
+            if (CommandDirection != dir)
+            {
+                MsgPrint("You are confused.");
+            }
+            dp = dir;
+            return true;
+        }
+
+        public bool TargetOkay()
+        {
+            if (TargetWho < 0)
+            {
+                return true;
+            }
+            if (TargetWho <= 0)
+            {
+                return false;
+            }
+            if (!TargetAble(TargetWho))
+            {
+                return false;
+            }
+            Monster mPtr = Level.Monsters[TargetWho];
+            TargetRow = mPtr.MapY;
+            TargetCol = mPtr.MapX;
+            return true;
+        }
+
+        public bool TargetSet(int mode)
+        {
+            int y = Player.MapY;
+            int x = Player.MapX;
+            bool done = false;
+            TargetWho = 0;
+            TargetSetPrepare(mode);
+            int m = 0;
+            if (Level.TempN != 0)
+            {
+                y = Level.TempY[m];
+                x = Level.TempX[m];
+            }
+            while (!done)
+            {
+                GridTile cPtr = Level.Grid[y][x];
+                string info = TargetAble(cPtr.MonsterIndex) ? "t,T,*" : "T,*";
+                char query = TargetSetAux(y, x, mode | Constants.TargetLook, info);
+                switch (query)
+                {
+                    case '\x1b':
+                        {
+                            done = true;
+                            break;
+                        }
+                    case 't':
+                        {
+                            if (TargetAble(cPtr.MonsterIndex))
+                            {
+                                HealthTrack(cPtr.MonsterIndex);
+                                TargetWho = cPtr.MonsterIndex;
+                                TargetRow = y;
+                                TargetCol = x;
+                                done = true;
+                            }
+                            break;
+                        }
+                    case 'T':
+                        TargetWho = -1;
+                        TargetRow = y;
+                        TargetCol = x;
+                        done = true;
+                        break;
+
+                    case '*':
+                        {
+                            if (x == Level.TempX[m] && y == Level.TempY[m])
+                            {
+                                if (++m >= Level.TempN)
+                                {
+                                    m = 0;
+                                    done = true;
+                                }
+                                else
+                                {
+                                    y = Level.TempY[m];
+                                    x = Level.TempX[m];
+                                }
+                            }
+                            else
+                            {
+                                y = Level.TempY[m];
+                                x = Level.TempX[m];
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            int d = GetKeymapDir(query);
+                            if (d != 0)
+                            {
+                                x += Level.KeypadDirectionXOffset[d];
+                                y += Level.KeypadDirectionYOffset[d];
+                                if (x >= Level.CurWid - 1 || x > Level.PanelColMax)
+                                {
+                                    x--;
+                                }
+                                else if (x <= 0 || x < Level.PanelColMin)
+                                {
+                                    x++;
+                                }
+                                if (y >= Level.CurHgt - 1 || y > Level.PanelRowMax)
+                                {
+                                    y--;
+                                }
+                                else if (y <= 0 || y < Level.PanelRowMin)
+                                {
+                                    y++;
+                                }
+                            }
+                            break;
+                        }
+                }
+            }
+            Level.TempN = 0;
+            PrintLine("", 0, 0);
+            return TargetWho != 0;
+        }
+
+        public bool TgtPt(out int x, out int y)
+        {
+            char ch = '\0';
+            bool success = false;
+            x = Player.MapX;
+            y = Player.MapY;
+            bool cv = CursorVisible;
+            CursorVisible = true;
+            MsgPrint("Select a point and press space.");
+            while (ch != 27 && ch != ' ' && !Shutdown)
+            {
+                Level.MoveCursorRelative(y, x);
+                ch = Inkey();
+                switch (ch)
+                {
+                    case '\x1b':
+                        break;
+
+                    case ' ':
+                        success = true;
+                        break;
+
+                    default:
+                        {
+                            int d = GetKeymapDir(ch);
+                            if (d == 0)
+                            {
+                                break;
+                            }
+                            x += Level.KeypadDirectionXOffset[d];
+                            y += Level.KeypadDirectionYOffset[d];
+                            if (x >= Level.CurWid - 1 || x >= Level.PanelColMin + Constants.ScreenWid)
+                            {
+                                x--;
+                            }
+                            else if (x <= 0 || x <= Level.PanelColMin)
+                            {
+                                x++;
+                            }
+                            if (y >= Level.CurHgt - 1 || y >= Level.PanelRowMin + Constants.ScreenHgt)
+                            {
+                                y--;
+                            }
+                            else if (y <= 0 || y <= Level.PanelRowMin)
+                            {
+                                y++;
+                            }
+                            break;
+                        }
+                }
+            }
+            CursorVisible = cv;
+            UpdateScreen();
+            return success;
+        }
+
+        private string LookMonDesc(int mIdx)
+        {
+            Monster mPtr = Level.Monsters[mIdx];
+            MonsterRace rPtr = mPtr.Race;
+            bool living = (rPtr.Flags3 & MonsterFlag3.Undead) == 0;
+            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+            {
+                living = false;
+            }
+            if ((rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0)
+            {
+                living = false;
+            }
+            if ((rPtr.Flags3 & MonsterFlag3.Nonliving) != 0)
+            {
+                living = false;
+            }
+            if ("Egv".Contains(rPtr.Character.ToString()))
+            {
+                living = false;
+            }
+            if (mPtr.Health >= mPtr.MaxHealth)
+            {
+                return living ? "unhurt" : "undamaged";
+            }
+            int perc = 100 * mPtr.Health / mPtr.MaxHealth;
+            if (perc >= 60)
+            {
+                return living ? "somewhat wounded" : "somewhat damaged";
+            }
+            if (perc >= 25)
+            {
+                return living ? "wounded" : "damaged";
+            }
+            if (perc >= 10)
+            {
+                return living ? "badly wounded" : "badly damaged";
+            }
+            return living ? "almost dead" : "almost destroyed";
+        }
+
+        private bool TargetAble(int mIdx)
+        {
+            Monster mPtr = Level.Monsters[mIdx];
+            if (mPtr.Race == null)
+            {
+                return false;
+            }
+            if (!mPtr.IsVisible)
+            {
+                return false;
+            }
+            if (!Level.Projectable(Player.MapY, Player.MapX, mPtr.MapY, mPtr.MapX))
+            {
+                return false;
+            }
+            if (Player.TimedHallucinations != 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool TargetSetAccept(int y, int x)
+        {
+            int nextOIdx;
+            if (y == Player.MapY && x == Player.MapX)
+            {
+                return true;
+            }
+            if (Player.TimedHallucinations != 0)
+            {
+                return false;
+            }
+            GridTile cPtr = Level.Grid[y][x];
+            if (cPtr.MonsterIndex != 0)
+            {
+                Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                if (mPtr.IsVisible)
+                {
+                    return true;
+                }
+            }
+            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            {
+                Item oPtr = Level.Items[thisOIdx];
+                nextOIdx = oPtr.NextInStack;
+                if (oPtr.Marked)
+                {
+                    return true;
+                }
+            }
+            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
+            {
+                return cPtr.FeatureType.IsInteresting;
+            }
+            return false;
+        }
+
+        private char TargetSetAux(int y, int x, int mode, string info)
+        {
+            GridTile cPtr = Level.Grid[y][x];
+            char query;
+            do
+            {
+                query = ' ';
+                bool boring = true;
+                string s1 = "You see ";
+                string s2 = "";
+                string s3 = "";
+                if (y == Player.MapY && x == Player.MapX)
+                {
+                    s1 = "You are ";
+                    s2 = "on ";
+                }
+                string outVal;
+                if (Player.TimedHallucinations != 0)
+                {
+                    const string name = "something strange";
+                    outVal = $"{s1}{s2}{s3}{name} [{info}]";
+                    PrintLine(outVal, 0, 0);
+                    Level.MoveCursorRelative(y, x);
+                    query = Inkey();
+                    if (!Shutdown)
+                    {
+                        break;
+                    }
+
+                    if (query != '\r' && query != '\n')
+                    {
+                        break;
+                    }
+                    continue;
+                }
+                int thisOIdx;
+                int nextOIdx;
+                if (cPtr.MonsterIndex != 0)
+                {
+                    Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                    MonsterRace rPtr = mPtr.Race;
+                    if (mPtr.IsVisible)
+                    {
+                        bool recall = false;
+                        boring = false;
+                        string mName = mPtr.MonsterDesc(0x08);
+                        HealthTrack(cPtr.MonsterIndex);
+                        HandleStuff();
+                        while (true && !Shutdown)
+                        {
+                            if (recall)
+                            {
+                                SaveScreen();
+                                rPtr.Knowledge.Display();
+                                Print(Colour.White, $"  [r,{info}]", -1);
+                                query = Inkey();
+                                Load();
+                            }
+                            else
+                            {
+                                string c = (mPtr.Mind & Constants.SmCloned) != 0 ? " (clone)" : "";
+                                string a = (mPtr.Mind & Constants.SmFriendly) != 0 ? " (allied) " : " ";
+                                outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
+                                PrintLine(outVal, 0, 0);
+                                Level.MoveCursorRelative(y, x);
+                                query = Inkey();
+                            }
+                            if (query != 'r')
+                            {
+                                break;
+                            }
+                            recall = !recall;
+                        }
+                        if (query != '\r' && query != '\n' && query != ' ')
+                        {
+                            break;
+                        }
+                        if (query == ' ' && (mode & Constants.TargetLook) == 0)
+                        {
+                            break;
+                        }
+                        s1 = "It is ";
+                        if ((rPtr.Flags1 & MonsterFlag1.Female) != 0)
+                        {
+                            s1 = "She is ";
+                        }
+                        else if ((rPtr.Flags1 & MonsterFlag1.Male) != 0)
+                        {
+                            s1 = "He is ";
+                        }
+                        s2 = "carrying ";
+                        for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                        {
+                            Item oPtr = Level.Items[thisOIdx];
+                            nextOIdx = oPtr.NextInStack;
+                            string oName = oPtr.Description(true, 3);
+                            outVal = $"{s1}{s2}{s3}{oName} [{info}]";
+                            PrintLine(outVal, 0, 0);
+                            Level.MoveCursorRelative(y, x);
+                            query = Inkey();
+                            if (query != '\r' && query != '\n' && query != ' ')
+                            {
+                                break;
+                            }
+                            if (query == ' ' && (mode & Constants.TargetLook) == 0)
+                            {
+                                break;
+                            }
+                            s2 = "also carrying ";
+                        }
+                        if (thisOIdx != 0)
+                        {
+                            break;
+                        }
+                        s2 = "on ";
+                    }
+                }
+                for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                {
+                    Item oPtr = Level.Items[thisOIdx];
+                    nextOIdx = oPtr.NextInStack;
+                    if (oPtr.Marked)
+                    {
+                        boring = false;
+                        string oName = oPtr.Description(true, 3);
+                        outVal = $"{s1}{s2}{s3}{oName} [{info}]";
+                        PrintLine(outVal, 0, 0);
+                        Level.MoveCursorRelative(y, x);
+                        query = Inkey();
+                        if (query != '\r' && query != '\n' && query != ' ')
+                        {
+                            break;
+                        }
+                        if (query == ' ' && (mode & Constants.TargetLook) == 0)
+                        {
+                            break;
+                        }
+                        s1 = "It is ";
+                        if (oPtr.Count != 1)
+                        {
+                            s1 = "They are ";
+                        }
+                        s2 = "on ";
+                    }
+                }
+                if (thisOIdx != 0)
+                {
+                    break;
+                }
+                string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
+                    ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
+                    : ObjectRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
+                if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !Level.PlayerCanSeeBold(y, x))
+                {
+                    feat = string.Empty;
+                }
+                if (boring || (!cPtr.FeatureType.IsOpenFloor))
+                {
+                    string name = "unknown grid";
+                    if (feat != string.Empty)
+                    {
+                        name = ObjectRepository.FloorTileTypes[feat].Description;
+                        if (s2 != "" && cPtr.FeatureType.BlocksLos)
+                        {
+                            s2 = "in ";
+                        }
+                    }
+                    s3 = name[0].IsVowel() ? "an " : "a ";
+                    if (cPtr.FeatureType.IsShop)
+                    {
+                        s3 = name[0].IsVowel() ? "the entrance to an " : "the entrance to a ";
+                    }
+                    outVal = $"{s1}{s2}{s3}{name} [{info}]";
+                    PrintLine(outVal, 0, 0);
+                    Level.MoveCursorRelative(y, x);
+                    query = Inkey();
+                    if (query != '\r' && query != '\n' && query != ' ')
+                    {
+                        break;
+                    }
+                }
+            }
+            while (query == '\r' || query == '\n');
+            return query;
+        }
+
+        private void TargetSetPrepare(int mode)
+        {
+            int y;
+            Level.TempN = 0;
+            for (y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+            {
+                int x;
+                for (x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+                {
+                    GridTile cPtr = Level.Grid[y][x];
+                    if (!Level.PlayerHasLosBold(y, x))
+                    {
+                        continue;
+                    }
+                    if (!TargetSetAccept(y, x))
+                    {
+                        continue;
+                    }
+                    if ((mode & Constants.TargetKill) != 0 && !TargetAble(cPtr.MonsterIndex))
+                    {
+                        continue;
+                    }
+                    Level.TempX[Level.TempN] = x;
+                    Level.TempY[Level.TempN] = y;
+                    Level.TempN++;
+                }
+            }
+            List<TargetLocation> list = new List<TargetLocation>();
+            for (int i = 0; i < Level.TempN; i++)
+            {
+                list.Add(new TargetLocation(Level.TempY[i], Level.TempX[i],
+                    Level.Distance(Level.TempY[i], Level.TempX[i], Player.MapY, Player.MapX)));
+            }
+            list.Sort();
+            for (int i = 0; i < Level.TempN; i++)
+            {
+                Level.TempX[i] = list[i].X;
+                Level.TempY[i] = list[i].Y;
             }
         }
     }

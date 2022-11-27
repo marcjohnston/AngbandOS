@@ -16,7 +16,6 @@ namespace AngbandOS.Commands
 
         public void Execute(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             // Can't run if we're confused
             if (saveGame.Player.TimedConfusion != 0)
             {
@@ -24,7 +23,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Get a direction if we don't already have one
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 // If we don't have a distance, assume we'll run for 1,000 steps
                 saveGame.Running = saveGame.CommandArgument != 0 ? saveGame.CommandArgument : 1000;

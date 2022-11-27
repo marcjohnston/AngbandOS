@@ -55,8 +55,7 @@ namespace AngbandOS.Commands
             int dir = 5;
             if (rodItemCategory.RequiresAiming || !item.IsFlavourAware())
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (!targetEngine.GetDirectionWithAim(out dir))
+                if (!saveGame.GetDirectionWithAim(out dir))
                 {
                     return;
                 }

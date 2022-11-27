@@ -64,8 +64,7 @@ namespace AngbandOS.Core.Races
             // Kobolds can throw poison darts
             if (saveGame.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You throw a dart of poison.");
                     saveGame.FireBolt(new ProjectPois(saveGame), direction, saveGame.Player.Level);

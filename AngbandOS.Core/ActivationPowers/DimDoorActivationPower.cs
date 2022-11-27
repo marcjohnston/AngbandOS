@@ -15,8 +15,7 @@ namespace AngbandOS.ActivationPowers
 
         public override bool Activate(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.TgtPt(out int ii, out int ij))
+            if (!saveGame.TgtPt(out int ii, out int ij))
             {
                 return false;
             }

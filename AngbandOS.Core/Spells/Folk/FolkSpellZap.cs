@@ -31,13 +31,11 @@ namespace AngbandOS.Spells.Folk
                     beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(saveGame), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
+            saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
         public override void Initialise(int characterClass)

@@ -18,10 +18,9 @@ namespace AngbandOS.Commands
         {
             // Assume it won't disturb us
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame);
 
             // Get the direction to bash
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
                 int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];

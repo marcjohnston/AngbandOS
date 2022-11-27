@@ -66,8 +66,7 @@ namespace AngbandOS.Core.Races
             // Half-giants can bash through stone walls
             if (saveGame.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You bash at a stone wall.");
                     saveGame.WallToMud(direction);

@@ -97,8 +97,7 @@ namespace AngbandOS.Core.Races
             if (saveGame.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
             {
                 saveGame.MsgPrint("You emit an eldritch howl!");
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionWithAim(out int direction))
+                if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.FearMonster(direction, saveGame.Player.Level);
                 }

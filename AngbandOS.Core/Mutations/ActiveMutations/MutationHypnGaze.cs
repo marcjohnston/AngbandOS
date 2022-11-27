@@ -19,9 +19,8 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("Your eyes look mesmerizing...");
-            if (targetEngine.GetDirectionWithAim(out int dir))
+            if (saveGame.GetDirectionWithAim(out int dir))
             {
                 saveGame.CharmMonster(dir, player.Level);
             }

@@ -89,8 +89,7 @@ namespace AngbandOS.Core.Races
             // Vampires can drain health
             if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.Player.Level / 3), Ability.Constitution, 9))
             {
-                TargetEngine targetEngine = new TargetEngine(saveGame);
-                if (targetEngine.GetDirectionNoAim(out int direction))
+                if (saveGame.GetDirectionNoAim(out int direction))
                 {
                     int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
                     int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[direction];

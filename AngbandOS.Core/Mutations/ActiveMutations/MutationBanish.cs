@@ -21,8 +21,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionNoAim(out int dir))
+            if (!saveGame.GetDirectionNoAim(out int dir))
             {
                 return;
             }

@@ -65,9 +65,8 @@ namespace AngbandOS.Commands
         public static void DoCmdWalk(SaveGame saveGame, bool dontPickup)
         { 
             bool disturb = false;
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             // If we don't already have a direction, get one
-            if (targetEngine.GetDirectionNoAim(out int dir))
+            if (saveGame.GetDirectionNoAim(out int dir))
             {
                 // Walking takes a full turn
                 saveGame.EnergyUse = 100;

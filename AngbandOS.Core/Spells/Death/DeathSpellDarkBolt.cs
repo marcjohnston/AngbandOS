@@ -31,13 +31,11 @@ namespace AngbandOS.Spells.Death
                     beam = saveGame.Player.Level / 2;
                     break;
             }
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam, new ProjectDark(saveGame), dir,
-                Program.Rng.DiceRoll(4 + ((saveGame.Player.Level - 5) / 4), 8));
+            saveGame.FireBoltOrBeam(beam, new ProjectDark(saveGame), dir, Program.Rng.DiceRoll(4 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
         public override void Initialise(int characterClass)

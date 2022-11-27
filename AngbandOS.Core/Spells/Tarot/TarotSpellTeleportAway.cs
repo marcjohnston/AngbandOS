@@ -16,8 +16,7 @@ namespace AngbandOS.Spells.Tarot
     {
         public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
-            if (!targetEngine.GetDirectionWithAim(out int dir))
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }

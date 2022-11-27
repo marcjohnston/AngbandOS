@@ -279,6 +279,41 @@ namespace AngbandOS
             Generation = 1;
         }
 
+        public void RecenterScreenAroundPlayer()
+        {
+            int y = MapY;
+            int x = MapX;
+            int maxProwMin = SaveGame.Level.MaxPanelRows * (Constants.ScreenHgt / 2);
+            int maxPcolMin = SaveGame.Level.MaxPanelCols * (Constants.ScreenWid / 2);
+            int prowMin = y - (Constants.ScreenHgt / 2);
+            if (prowMin > maxProwMin)
+            {
+                prowMin = maxProwMin;
+            }
+            else if (prowMin < 0)
+            {
+                prowMin = 0;
+            }
+            int pcolMin = x - (Constants.ScreenWid / 2);
+            if (pcolMin > maxPcolMin)
+            {
+                pcolMin = maxPcolMin;
+            }
+            else if (pcolMin < 0)
+            {
+                pcolMin = 0;
+            }
+            if (prowMin == SaveGame.Level.PanelRowMin && pcolMin == SaveGame.Level.PanelColMin)
+            {
+                return;
+            }
+            SaveGame.Level.PanelRowMin = prowMin;
+            SaveGame.Level.PanelColMin = pcolMin;
+            SaveGame.Level.PanelBoundsCenter();
+            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            RedrawNeeded.Set(RedrawFlag.PrMap);
+        }
+
         public void ChangeRace(Race newRace)
         {
             Race = newRace;

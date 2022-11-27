@@ -15,9 +15,8 @@ namespace AngbandOS.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            TargetEngine targetEngine = new TargetEngine(saveGame);
             saveGame.MsgPrint("You open a dimensional gate. Choose a destination.");
-            if (!targetEngine.TgtPt(out int ii, out int ij))
+            if (!saveGame.TgtPt(out int ii, out int ij))
             {
                 return;
             }

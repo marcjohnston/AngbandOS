@@ -106,6 +106,16 @@ namespace AngbandOS
             PanelColPrt = PanelColMin - 13;
         }
 
+        public void PanelBoundsCenter()
+        {
+            PanelRow = PanelRowMin / (Constants.ScreenHgt / 2);
+            PanelRowMax = PanelRowMin + Constants.ScreenHgt - 1;
+            PanelRowPrt = PanelRowMin - 1;
+            PanelCol = PanelColMin / (Constants.ScreenWid / 2);
+            PanelColMax = PanelColMin + Constants.ScreenWid - 1;
+            PanelColPrt = PanelColMin - 13;
+        }
+
         public void Acquirement(int y1, int x1, int num, bool great)
         {
             while (num-- != 0)

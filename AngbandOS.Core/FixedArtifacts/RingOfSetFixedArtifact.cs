@@ -15,8 +15,7 @@ internal class RingOfSetFixedArtifact : BaseFixedArtifact, IActivatible
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The ring glows intensely black...");
-        TargetEngine targetEngine = new TargetEngine(saveGame);
-        if (!targetEngine.GetDirectionWithAim(out int dir))
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
