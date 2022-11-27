@@ -5247,7 +5247,7 @@ namespace AngbandOS
             int lev2 = rPtr.Level + (Program.Rng.DieRoll(20) / Program.Rng.DieRoll(9)) + 1;
             for (int i = 0; i < 1000; i++)
             {
-                int r = Level.Monsters.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5);
+                int r = Level.Monsters.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
                 if (r == 0)
                 {
                     break;
@@ -16863,16 +16863,14 @@ namespace AngbandOS
                     getMonNumHook = VaultAuxUndead;
                 }
             }
-            Level.Monsters.GetMonNumPrep(getMonNumHook);
             for (int i = 0; i < 64; i++)
             {
-                what[i] = Level.Monsters.GetMonNum(Difficulty + 10);
+                what[i] = Level.Monsters.GetMonNum(Difficulty + 10, getMonNumHook);
                 if (what[i] == 0)
                 {
                     empty = true;
                 }
             }
-            Level.Monsters.GetMonNumPrep(null);
             if (empty)
             {
                 return;
@@ -17043,16 +17041,14 @@ namespace AngbandOS
             {
                 getMonNumHook = VaultAuxDemon;
             }
-            Level.Monsters.GetMonNumPrep(getMonNumHook);
             for (i = 0; i < 16; i++)
             {
-                what[i] = Level.Monsters.GetMonNum(Difficulty + 10);
+                what[i] = Level.Monsters.GetMonNum(Difficulty + 10, getMonNumHook);
                 if (what[i] == 0)
                 {
                     empty = true;
                 }
             }
-            Level.Monsters.GetMonNumPrep(null);
             if (empty)
             {
                 return;

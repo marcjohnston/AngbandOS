@@ -66,7 +66,7 @@ namespace AngbandOS
             int attempts = 1000;
             while (--attempts != 0)
             {
-                int rIdx = GetMonNum(_level.MonsterLevel);
+                int rIdx = GetMonNum(_level.MonsterLevel, null);
                 if (rIdx == 0)
                 {
                     return false;
@@ -371,7 +371,7 @@ namespace AngbandOS
             }
         }
 
-        public int GetMonNum(int level)
+        public int GetMonNum(int level, GetMonNumHookDelegate? getMonNumHook)
         {
             int i, j;
             AllocationEntry[] table = SaveGame.AllocRaceTable;
@@ -406,7 +406,16 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                table[i].FinalProbability = table[i].FilteredProbabiity;
+
+                if (getMonNumHook == null || getMonNumHook(table[i].Index))
+                {
+                    table[i].FinalProbability = table[i].BaseProbability;
+                }
+                else
+                {
+                    table[i].FinalProbability = 0;
+                }
+
                 total += table[i].FinalProbability;
             }
             if (total <= 0)
@@ -458,22 +467,6 @@ namespace AngbandOS
                 }
             }
             return table[i].Index;
-        }
-
-        public void GetMonNumPrep(GetMonNumHookDelegate getMonNumHook)
-        {
-            for (int i = 0; i < SaveGame.AllocRaceSize; i++)
-            {
-                AllocationEntry entry = SaveGame.AllocRaceTable[i];
-                if (getMonNumHook == null || getMonNumHook(entry.Index))
-                {
-                    entry.FilteredProbabiity = entry.BaseProbability;
-                }
-                else
-                {
-                    entry.FilteredProbabiity = 0;
-                }
-            }
         }
 
         public List<Monster> GetPets()
@@ -719,7 +712,7 @@ namespace AngbandOS
 
         public bool PlaceMonster(int y, int x, bool slp, bool grp)
         {
-            int rIdx = GetMonNum(_level.MonsterLevel);
+            int rIdx = GetMonNum(_level.MonsterLevel, null);
             if (rIdx == 0)
             {
                 return false;
@@ -748,9 +741,7 @@ namespace AngbandOS
                         continue;
                     }
                     _placeMonsterIdx = rPtr.Index;
-                    GetMonNumPrep(PlaceMonsterOkay);
-                    int z = GetMonNum(rPtr.Level);
-                    GetMonNumPrep(null);
+                    int z = GetMonNum(rPtr.Level, PlaceMonsterOkay);
                     if (z == 0)
                     {
                         break;
@@ -850,9 +841,7 @@ namespace AngbandOS
                 return false;
             }
             _summonSpecificType = type;
-            GetMonNumPrep(SummonSpecificOkay);
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5);
-            GetMonNumPrep(null);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, SummonSpecificOkay);
             if (rIdx == 0)
             {
                 return false;
@@ -897,9 +886,7 @@ namespace AngbandOS
                 return false;
             }
             _summonSpecificType = type;
-            GetMonNumPrep(SummonSpecificOkay);
-            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5);
-            GetMonNumPrep(null);
+            int rIdx = GetMonNum(((SaveGame.Difficulty + lev) / 2) + 5, SummonSpecificOkay);
             if (rIdx == 0)
             {
                 return false;
