@@ -9,7 +9,7 @@ namespace AngbandOS.Commands
     /// </summary>
     [Serializable]
     internal class VersionCommand : ICommand
-    {
+    {    
         public char Key => 'V';
 
         public int? Repeat => 0;
@@ -20,8 +20,9 @@ namespace AngbandOS.Commands
         {
             AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
             Version version = assembly.Version;
+            DateTime CompileTime = new DateTime(2000, 1, 1).AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
             saveGame.MsgPrint($"You are playing {Constants.VersionName} {version}.");
-            saveGame.MsgPrint($"(Build time: {Constants.CompileTime})");
+            saveGame.MsgPrint($"(Build time: {CompileTime})");
         }
 
     }

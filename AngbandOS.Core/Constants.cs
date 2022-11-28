@@ -177,7 +177,6 @@ namespace AngbandOS.Core
         public const int WildernessHeight = 44;
         public const int WildernessWidth = 66;
 
-        public static readonly DateTime CompileTime = new DateTime(2000, 1, 1).AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
         public static readonly int VersionMajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
         public static readonly int VersionMinor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
         public static readonly string VersionName = Assembly.GetExecutingAssembly().GetName().Name;

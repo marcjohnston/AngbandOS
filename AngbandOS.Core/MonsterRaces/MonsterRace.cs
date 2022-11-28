@@ -5,9 +5,203 @@ using AngbandOS.Core.AttackEffects;
 
 namespace AngbandOS.Core.MonsterRaces
 {
+    //internal class MonsterCharacteristics
+    //{
+    //    public bool AttrClear { get; }
+    //    public bool AttrMulti { get; }
+    //    public bool CharClear { get; }
+    //    public bool CharMulti { get; }
+    //    public bool Drop_1D2 { get; }
+    //    public bool Drop_2D2 { get; }
+    //    public bool Drop_3D2 { get; }
+    //    public bool Drop_4D2 { get; }
+    //    public bool Drop60 { get; }
+    //    public bool Drop90 { get; }
+    //    public bool DropGood { get; }
+    //    public bool DropGreat { get; }
+    //    public bool Escorted { get; }
+    //    public bool EscortsGroup { get; }
+    //    public bool Female { get; }
+    //    public bool ForceMaxHp { get; }
+    //    public bool ForceSleep { get; }
+    //    public bool Friends { get; }
+    //    public bool Guardian { get; }
+    //    public bool Male { get; }
+    //    public bool NeverAttack { get; }
+    //    public bool NeverMove { get; }
+    //    public bool OnlyDropGold { get; }
+    //    public bool OnlyDropItem { get; }
+    //    public bool OnlyGuardian { get; }
+    //    public bool RandomMove25 { get; }
+    //    public bool RandomMove50 { get; }
+    //    public bool Unique { get; }
+
+    //    public bool AttrAny { get; }
+    //    public bool BashDoor { get; }
+    //    public bool ColdBlood { get; }
+    //    public bool EldritchHorror { get; }
+    //    public bool EmptyMind { get; }
+    //    public bool FireAura { get; }
+    //    public bool Invisible { get; }
+    //    public bool KillBody { get; }
+    //    public bool KillItem { get; }
+    //    public bool KillWall { get; }
+    //    public bool LightningAura { get; }
+    //    public bool MoveBody { get; }
+    //    public bool Multiply { get; }
+    //    public bool OpenDoor { get; }
+    //    public bool PassWall { get; }
+    //    public bool Powerful { get; }
+    //    public bool Reflecting { get; }
+    //    public bool Regenerate { get; }
+    //    public bool Shapechanger { get; }
+    //    public bool Smart { get; }
+    //    public bool Stupid { get; }
+    //    public bool TakeItem { get; }
+    //    public bool WeirdMind { get; }
+
+    //    public bool Animal { get; }
+    //    public bool Cthuloid { get; }
+    //    public bool Demon { get; }
+    //    public bool Dragon { get; }
+    //    public bool Evil { get; }
+    //    public bool Giant { get; }
+    //    public bool Good { get; }
+    //    public bool GreatOldOne { get; }
+    //    public bool HurtByCold { get; }
+    //    public bool HurtByFire { get; }
+    //    public bool HurtByLight { get; }
+    //    public bool HurtByRock { get; }
+    //    public bool ImmuneAcid { get; }
+    //    public bool ImmuneCold { get; }
+    //    public bool ImmuneConfusion { get; }
+    //    public bool ImmuneFear { get; }
+    //    public bool ImmuneFire { get; }
+    //    public bool ImmuneLightning { get; }
+    //    public bool ImmunePoison { get; }
+    //    public bool ImmuneSleep { get; }
+    //    public bool ImmuneStun { get; }
+    //    public bool Nonliving { get; }
+    //    public bool Orc { get; }
+    //    public bool ResistDisenchant { get; }
+    //    public bool ResistNether { get; }
+    //    public bool ResistNexus { get; }
+    //    public bool ResistPlasma { get; }
+    //    public bool ResistTeleport { get; }
+    //    public bool ResistWater { get; }
+    //    public bool Troll { get; }
+    //    public bool Undead { get; }
+
+    //    public bool Arrow1D6 { get; }
+    //    public bool Arrow3D6 { get; }
+    //    public bool Arrow5D6 { get; }
+    //    public bool Arrow7D6 { get; }
+    //    public bool BoltMask => Arrow1D6 || Arrow3D6 || Arrow5D6 || Arrow7D6 || AcidBolt || LightningBolt || FireBolt || ColdBolt || PoisonBolt || NetherBolt ||
+    //                                    WaterBolt || ManaBolt || PlasmaBolt || IceBolt || MagicMissile;
+    //    public bool BreatheAcid { get; }
+    //    public bool BreatheChaos { get; }
+    //    public bool BreatheCold { get; }
+    //    public bool BreatheConfusion { get; }
+    //    public bool BreatheDark { get; }
+    //    public bool BreatheDisenchant { get; }
+    //    public bool BreatheDisintegration { get; }
+    //    public bool BreatheFire { get; }
+    //    public bool BreatheForce { get; }
+    //    public bool BreatheGravity { get; }
+    //    public bool BreatheInertia { get; }
+    //    public bool BreatheLight { get; }
+    //    public bool BreatheLightning { get; }
+    //    public bool BreatheMana { get; }
+    //    public bool BreatheNether { get; }
+    //    public bool BreatheNexus { get; }
+    //    public bool BreathePlasma { get; }
+    //    public bool BreathePoison { get; }
+    //    public bool BreatheRadiation { get; }
+    //    public bool BreatheShards { get; }
+    //    public bool BreatheSound { get; }
+    //    public bool BreatheTime { get; }
+    //    public bool ChaosBall { get; }
+    //    public bool RadiationBall { get; }
+    //    public bool ShardBall { get; }
+    //    public bool Shriek { get; }
+
+    //    public bool AcidBall { get; }
+    //    public bool AcidBolt { get; }
+    //    public bool Blindness { get; }
+    //    public bool BrainSmash { get; }
+    //    public bool CauseCriticalWounds { get; }
+    //    public bool CauseLightWounds { get; }
+    //    public bool CauseMortalWounds { get; }
+    //    public bool CauseSeriousWounds { get; }
+    //    public bool ColdBall { get; }
+    //    public bool ColdBolt { get; }
+    //    public bool Confuse { get; }
+    //    public bool DarkBall { get; }
+    //    public bool DrainMana { get; }
+    //    public bool FireBall { get; }
+    //    public bool FireBolt { get; }
+    //    public bool Hold { get; }
+    //    public bool IceBolt { get; }
+    //    public bool IntMask => Hold || Slow || Confuse || Blindness || Scare | Blink || TeleportSelf || TeleportLevel || TeleportAway || Heal || Haste ||
+    //                            CreateTraps || SummonKin || SummonReaver || SummonMonster || SummonMonsters || SummonAnt ||
+    //                            SummonSpider || SummonHound || SummonHydra || SummonCthuloid || SummonDragon || SummonUndead ||
+    //                            SummonDemon || SummonHiDragon || SummonHiUndead || SummonGreatOldOne || SummonUnique;
+    //    public bool LightningBall { get; }
+    //    public bool LightningBolt { get; }
+    //    public bool MagicMissile { get; }
+    //    public bool ManaBall { get; }
+    //    public bool ManaBolt { get; }
+    //    public bool MindBlast { get; }
+    //    public bool NetherBall { get; }
+    //    public bool NetherBolt { get; }
+    //    public bool PlasmaBolt { get; }
+    //    public bool PoisonBall { get; }
+    //    public bool PoisonBolt { get; }
+    //    public bool Scare { get; }
+    //    public bool Slow { get; }
+    //    public bool WaterBall { get; }
+    //    public bool WaterBolt { get; }
+
+    //    public bool Blink { get; }
+    //    public bool CreateTraps { get; }
+    //    public bool Darkness { get; }
+    //    public bool DreadCurse { get; }
+    //    public bool Forget { get; }
+    //    public bool Haste { get; }
+    //    public bool Heal { get; }
+
+    //    public bool SummonAnt { get; }
+    //    public bool SummonCthuloid { get; }
+    //    public bool SummonDemon { get; }
+    //    public bool SummonDragon { get; }
+    //    public bool SummonGreatOldOne { get; }
+    //    public bool SummonHiDragon { get; }
+    //    public bool SummonHiUndead { get; }
+    //    public bool SummonHound { get; }
+    //    public bool SummonHydra { get; }
+    //    public bool SummonKin { get; }
+
+    //    public bool SummonMask => SummonKin || SummonReaver || SummonMonster || SummonMonsters || SummonAnt || SummonSpider ||
+    //                                      SummonHound || SummonHydra || SummonCthuloid || SummonDemon || SummonUndead || SummonDragon ||
+    //                                      SummonHiUndead || SummonHiDragon || SummonGreatOldOne || SummonUnique;
+
+    //    public bool SummonMonster { get; }
+    //    public bool SummonMonsters { get; }
+    //    public bool SummonReaver { get; }
+    //    public bool SummonSpider { get; }
+    //    public bool SummonUndead { get; }
+    //    public bool SummonUnique { get; }
+    //    public bool TeleportAway { get; }
+    //    public bool TeleportLevel { get; }
+    //    public bool TeleportSelf { get; }
+    //    public bool TeleportTo { get; }
+    //}
+
     [Serializable]
     internal abstract class MonsterRace
     {
+        //public MonsterCharacteristics Flags = new MonsterCharacteristics();
+
         public int CurNum;
         public uint Flags1;
         public int MaxNum;
@@ -664,17 +858,18 @@ namespace AngbandOS.Core.MonsterRaces
             Flags1 |= RandomMove25 ? MonsterFlag1.RandomMove25 : 0;
             Flags1 |= RandomMove50 ? MonsterFlag1.RandomMove50 : 0;
             Flags1 |= Unique ? MonsterFlag1.Unique : 0;
+
             Flags2 |= AttrAny ? MonsterFlag2.AttrAny : 0;
-            Flags2 |= LightningAura ? MonsterFlag2.LightningAura : 0;
-            Flags2 |= FireAura ? MonsterFlag2.FireAura : 0;
             Flags2 |= BashDoor ? MonsterFlag2.BashDoor : 0;
             Flags2 |= ColdBlood ? MonsterFlag2.ColdBlood : 0;
-            Flags2 |= ColdBlood ? MonsterFlag2.ColdBlood : 0;
+            Flags2 |= EldritchHorror ? MonsterFlag2.EldritchHorror : 0;
             Flags2 |= EmptyMind ? MonsterFlag2.EmptyMind : 0;
+            Flags2 |= FireAura ? MonsterFlag2.FireAura : 0;
             Flags2 |= Invisible ? MonsterFlag2.Invisible : 0;
             Flags2 |= KillBody ? MonsterFlag2.KillBody : 0;
             Flags2 |= KillItem ? MonsterFlag2.KillItem : 0;
             Flags2 |= KillWall ? MonsterFlag2.KillWall : 0;
+            Flags2 |= LightningAura ? MonsterFlag2.LightningAura : 0;
             Flags2 |= MoveBody ? MonsterFlag2.MoveBody : 0;
             Flags2 |= Multiply ? MonsterFlag2.Multiply : 0;
             Flags2 |= OpenDoor ? MonsterFlag2.OpenDoor : 0;
@@ -687,6 +882,7 @@ namespace AngbandOS.Core.MonsterRaces
             Flags2 |= Stupid ? MonsterFlag2.Stupid : 0;
             Flags2 |= TakeItem ? MonsterFlag2.TakeItem : 0;
             Flags2 |= WeirdMind ? MonsterFlag2.WeirdMind : 0;
+
             Flags3 |= Animal ? MonsterFlag3.Animal : 0;
             Flags3 |= Cthuloid ? MonsterFlag3.Cthuloid : 0;
             Flags3 |= Demon ? MonsterFlag3.Demon : 0;
@@ -701,14 +897,14 @@ namespace AngbandOS.Core.MonsterRaces
             Flags3 |= HurtByRock ? MonsterFlag3.HurtByRock : 0;
             Flags3 |= ImmuneAcid ? MonsterFlag3.ImmuneAcid : 0;
             Flags3 |= ImmuneCold ? MonsterFlag3.ImmuneCold : 0;
-            Flags3 |= ImmuneLightning ? MonsterFlag3.ImmuneLightning : 0;
-            Flags3 |= ImmuneFire ? MonsterFlag3.ImmuneFire : 0;
-            Flags3 |= ImmunePoison ? MonsterFlag3.ImmunePoison : 0;
             Flags3 |= ImmuneConfusion ? MonsterFlag3.ImmuneConfusion : 0;
             Flags3 |= ImmuneFear ? MonsterFlag3.ImmuneFear : 0;
-            Flags3 |= Nonliving ? MonsterFlag3.Nonliving : 0;
+            Flags3 |= ImmuneFire ? MonsterFlag3.ImmuneFire : 0;
+            Flags3 |= ImmuneLightning ? MonsterFlag3.ImmuneLightning : 0;
+            Flags3 |= ImmunePoison ? MonsterFlag3.ImmunePoison : 0;
             Flags3 |= ImmuneSleep ? MonsterFlag3.ImmuneSleep : 0;
             Flags3 |= ImmuneStun ? MonsterFlag3.ImmuneStun : 0;
+            Flags3 |= Nonliving ? MonsterFlag3.Nonliving : 0;
             Flags3 |= Orc ? MonsterFlag3.Orc : 0;
             Flags3 |= ResistDisenchant ? MonsterFlag3.ResistDisenchant : 0;
             Flags3 |= ResistNether ? MonsterFlag3.ResistNether : 0;
@@ -718,12 +914,11 @@ namespace AngbandOS.Core.MonsterRaces
             Flags3 |= ResistWater ? MonsterFlag3.ResistWater : 0;
             Flags3 |= Troll ? MonsterFlag3.Troll : 0;
             Flags3 |= Undead ? MonsterFlag3.Undead : 0;
+
             Flags4 |= Arrow1D6 ? MonsterFlag4.Arrow1D6 : 0;
             Flags4 |= Arrow3D6 ? MonsterFlag4.Arrow3D6 : 0;
             Flags4 |= Arrow5D6 ? MonsterFlag4.Arrow5D6 : 0;
             Flags4 |= Arrow7D6 ? MonsterFlag4.Arrow7D6 : 0;
-            Flags4 |= ChaosBall ? MonsterFlag4.ChaosBall : 0;
-            Flags4 |= RadiationBall ? MonsterFlag4.RadiationBall : 0;
             Flags4 |= BreatheAcid ? MonsterFlag4.BreatheAcid : 0;
             Flags4 |= BreatheChaos ? MonsterFlag4.BreatheChaos : 0;
             Flags4 |= BreatheCold ? MonsterFlag4.BreatheCold : 0;
@@ -733,54 +928,59 @@ namespace AngbandOS.Core.MonsterRaces
             Flags4 |= BreatheDisintegration ? MonsterFlag4.BreatheDisintegration : 0;
             Flags4 |= BreatheLightning ? MonsterFlag4.BreatheLightning : 0;
             Flags4 |= BreatheFire ? MonsterFlag4.BreatheFire : 0;
+            Flags4 |= BreatheForce ? MonsterFlag4.BreatheForce : 0;
             Flags4 |= BreatheGravity ? MonsterFlag4.BreatheGravity : 0;
             Flags4 |= BreatheInertia ? MonsterFlag4.BreatheInertia : 0;
             Flags4 |= BreatheLight ? MonsterFlag4.BreatheLight : 0;
             Flags4 |= BreatheMana ? MonsterFlag4.BreatheMana : 0;
             Flags4 |= BreatheNether ? MonsterFlag4.BreatheNether : 0;
             Flags4 |= BreatheNexus ? MonsterFlag4.BreatheNexus : 0;
-            Flags4 |= BreatheRadiation ? MonsterFlag4.BreatheRadiation : 0;
             Flags4 |= BreathePlasma ? MonsterFlag4.BreathePlasma : 0;
             Flags4 |= BreathePoison ? MonsterFlag4.BreathePoison : 0;
+            Flags4 |= BreatheRadiation ? MonsterFlag4.BreatheRadiation : 0;
             Flags4 |= BreatheShards ? MonsterFlag4.BreatheShards : 0;
             Flags4 |= BreatheSound ? MonsterFlag4.BreatheSound : 0;
             Flags4 |= BreatheTime ? MonsterFlag4.BreatheTime : 0;
-            Flags4 |= BreatheForce ? MonsterFlag4.BreatheForce : 0;
+            Flags4 |= ChaosBall ? MonsterFlag4.ChaosBall : 0;
+            Flags4 |= RadiationBall ? MonsterFlag4.RadiationBall : 0;
             Flags4 |= ShardBall ? MonsterFlag4.ShardBall : 0;
             Flags4 |= Shriek ? MonsterFlag4.Shriek : 0;
+
             Flags5 |= AcidBall ? MonsterFlag5.AcidBall : 0;
-            Flags5 |= ColdBall ? MonsterFlag5.ColdBall : 0;
-            Flags5 |= DarkBall ? MonsterFlag5.DarkBall : 0;
-            Flags5 |= LightningBall ? MonsterFlag5.LightningBall : 0;
-            Flags5 |= FireBall ? MonsterFlag5.FireBall : 0;
-            Flags5 |= ManaBall ? MonsterFlag5.ManaBall : 0;
-            Flags5 |= NetherBall ? MonsterFlag5.NetherBall : 0;
-            Flags5 |= PoisonBall ? MonsterFlag5.PoisonBall : 0;
-            Flags5 |= WaterBall ? MonsterFlag5.WaterBall : 0;
-            Flags5 |= Blindness ? MonsterFlag5.Blindness : 0;
             Flags5 |= AcidBolt ? MonsterFlag5.AcidBolt : 0;
-            Flags5 |= ColdBolt ? MonsterFlag5.ColdBolt : 0;
-            Flags5 |= LightningBolt ? MonsterFlag5.LightningBolt : 0;
-            Flags5 |= FireBolt ? MonsterFlag5.FireBolt : 0;
-            Flags5 |= IceBolt ? MonsterFlag5.IceBolt : 0;
-            Flags5 |= ManaBolt ? MonsterFlag5.ManaBolt : 0;
-            Flags5 |= NetherBolt ? MonsterFlag5.NetherBolt : 0;
-            Flags5 |= PlasmaBolt ? MonsterFlag5.PlasmaBolt : 0;
-            Flags5 |= PoisonBolt ? MonsterFlag5.PoisonBolt : 0;
-            Flags5 |= WaterBolt ? MonsterFlag5.WaterBolt : 0;
+            Flags5 |= Blindness ? MonsterFlag5.Blindness : 0;
             Flags5 |= BrainSmash ? MonsterFlag5.BrainSmash : 0;
+            Flags5 |= CauseCriticalWounds ? MonsterFlag5.CauseCriticalWounds : 0;
             Flags5 |= CauseLightWounds ? MonsterFlag5.CauseLightWounds : 0;
             Flags5 |= CauseSeriousWounds ? MonsterFlag5.CauseSeriousWounds : 0;
-            Flags5 |= CauseCriticalWounds ? MonsterFlag5.CauseCriticalWounds : 0;
             Flags5 |= CauseMortalWounds ? MonsterFlag5.CauseMortalWounds : 0;
+            Flags5 |= ColdBall ? MonsterFlag5.ColdBall : 0;
+            Flags5 |= ColdBolt ? MonsterFlag5.ColdBolt : 0;
             Flags5 |= Confuse ? MonsterFlag5.Confuse : 0;
+            Flags5 |= DarkBall ? MonsterFlag5.DarkBall : 0;
             Flags5 |= DrainMana ? MonsterFlag5.DrainMana : 0;
+            Flags5 |= FireBall ? MonsterFlag5.FireBall : 0;
+            Flags5 |= FireBolt ? MonsterFlag5.FireBolt : 0;
             Flags5 |= Hold ? MonsterFlag5.Hold : 0;
-            Flags5 |= MindBlast ? MonsterFlag5.MindBlast : 0;
+            Flags5 |= IceBolt ? MonsterFlag5.IceBolt : 0;
+            Flags5 |= LightningBall ? MonsterFlag5.LightningBall : 0;
+            Flags5 |= LightningBolt ? MonsterFlag5.LightningBolt : 0;
             Flags5 |= MagicMissile ? MonsterFlag5.MagicMissile : 0;
+            Flags5 |= ManaBall ? MonsterFlag5.ManaBall : 0;
+            Flags5 |= ManaBolt ? MonsterFlag5.ManaBolt : 0;
+            Flags5 |= MindBlast ? MonsterFlag5.MindBlast : 0;
+            Flags5 |= NetherBall ? MonsterFlag5.NetherBall : 0;
+            Flags5 |= NetherBolt ? MonsterFlag5.NetherBolt : 0;
+            Flags5 |= PlasmaBolt ? MonsterFlag5.PlasmaBolt : 0;
+            Flags5 |= PoisonBall ? MonsterFlag5.PoisonBall : 0;
+            Flags5 |= PoisonBolt ? MonsterFlag5.PoisonBolt : 0;
             Flags5 |= Scare ? MonsterFlag5.Scare : 0;
             Flags5 |= Slow ? MonsterFlag5.Slow : 0;
+            Flags5 |= WaterBall ? MonsterFlag5.WaterBall : 0;
+            Flags5 |= WaterBolt ? MonsterFlag5.WaterBolt : 0;
+
             Flags6 |= Blink ? MonsterFlag6.Blink : 0;
+            Flags6 |= CreateTraps ? MonsterFlag6.CreateTraps : 0;
             Flags6 |= Darkness ? MonsterFlag6.Darkness : 0;
             Flags6 |= DreadCurse ? MonsterFlag6.DreadCurse : 0;
             Flags6 |= Forget ? MonsterFlag6.Forget : 0;
@@ -806,7 +1006,6 @@ namespace AngbandOS.Core.MonsterRaces
             Flags6 |= TeleportLevel ? MonsterFlag6.TeleportLevel : 0;
             Flags6 |= TeleportTo ? MonsterFlag6.TeleportTo : 0;
             Flags6 |= TeleportSelf ? MonsterFlag6.TeleportSelf : 0;
-            Flags6 |= CreateTraps ? MonsterFlag6.CreateTraps : 0;
         }
 
         /// <summary>
