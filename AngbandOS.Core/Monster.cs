@@ -962,48 +962,48 @@ namespace AngbandOS
                         // If we pick up or stomp on items, check the item type
                         if (((Race.Flags2 & MonsterFlag2.TakeItem) != 0 || (Race.Flags2 & MonsterFlag2.KillItem) != 0) && (Mind & Constants.SmFriendly) == 0)
                         {
-                            uint flg3 = 0;
+                            bool willHurt = false;
                             item.RefreshFlagBasedProperties();
                             string itemName = item.Description(true, 3);
                             string monsterName = MonsterDesc(0x04);
-                            if (item.Characteristics.KillDragon)
+                            if (item.Characteristics.KillDragon && Race.Dragon)
                             {
-                                flg3 |= MonsterFlag3.Dragon;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayDragon)
+                            if (item.Characteristics.SlayDragon && Race.Dragon)
                             {
-                                flg3 |= MonsterFlag3.Dragon;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayTroll)
+                            if (item.Characteristics.SlayTroll && Race.Troll)
                             {
-                                flg3 |= MonsterFlag3.Troll;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayGiant)
+                            if (item.Characteristics.SlayGiant && Race.Giant)
                             {
-                                flg3 |= MonsterFlag3.Giant;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayOrc)
+                            if (item.Characteristics.SlayOrc && Race.Orc)
                             {
-                                flg3 |= MonsterFlag3.Orc;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayDemon)
+                            if (item.Characteristics.SlayDemon && Race.Demon)
                             {
-                                flg3 |= MonsterFlag3.Demon;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayUndead)
+                            if (item.Characteristics.SlayUndead && Race.Undead)
                             {
-                                flg3 |= MonsterFlag3.Undead;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayAnimal)
+                            if (item.Characteristics.SlayAnimal && Race.Animal)
                             {
-                                flg3 |= MonsterFlag3.Animal;
+                                willHurt = true;
                             }
-                            if (item.Characteristics.SlayEvil)
+                            if (item.Characteristics.SlayEvil && Race.Evil)
                             {
-                                flg3 |= MonsterFlag3.Evil;
+                                willHurt = true;
                             }
                             // Monsters won't pick up artifacts or items that hurt them
-                            if (item.IsFixedArtifact() || (Race.Flags3 & flg3) != 0 || !string.IsNullOrEmpty(item.RandartName))
+                            if (item.IsFixedArtifact() || willHurt || !string.IsNullOrEmpty(item.RandartName))
                             {
                                 if ((Race.Flags2 & MonsterFlag2.TakeItem) != 0)
                                 {
