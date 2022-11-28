@@ -175,7 +175,7 @@ namespace AngbandOS
             MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
             char c1 = rPtr.Character;
             Colour a1 = rPtr.Colour;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0)
+            if (!rPtr.Unique)
             {
                 SaveGame.Print(Colour.Brown, "The ", -1);
             }
@@ -436,7 +436,7 @@ namespace AngbandOS
             for (int i = 0; i < SaveGame.MonsterRaces.Count - 1; i++)
             {
                 MonsterRace monster = SaveGame.MonsterRaces[i];
-                if ((monster.Flags1 & MonsterFlag1.Unique) != 0)
+                if (monster.Unique)
                 {
                     bool dead = monster.MaxNum == 0;
                     if (dead)
@@ -892,7 +892,7 @@ namespace AngbandOS
             for (int i = 0; i < SaveGame.MonsterRaces.Count - 1; i++)
             {
                 MonsterRace monster = SaveGame.MonsterRaces[i];
-                if ((monster.Flags1 & MonsterFlag1.Unique) != 0 &&
+                if (monster.Unique &&
                     (monster.Knowledge.RSights > 0 || SaveGame.Player.IsWizard))
                 {
                     names[maxCount] = monster.Name;

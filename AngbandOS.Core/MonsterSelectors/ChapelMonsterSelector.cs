@@ -13,7 +13,7 @@ namespace AngbandOS.Core.MonsterSelectors
         /// <returns></returns>
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            if (rPtr.Unique)
             {
                 return false;
             }

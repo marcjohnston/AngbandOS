@@ -36,7 +36,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+            if (rPtr.Undead)
             {
                 note = " is immune.";
                 dam = 0;
@@ -45,7 +45,7 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
                 }
             }
-            else if ((rPtr.Flags3 & MonsterFlag3.ResistNether) != 0)
+            else if (rPtr.ResistNether)
             {
                 note = " resists.";
                 dam *= 3;
@@ -55,7 +55,7 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistNether;
                 }
             }
-            else if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            else if (rPtr.Evil)
             {
                 dam /= 2;
                 note = " resists somewhat.";
@@ -64,14 +64,14 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

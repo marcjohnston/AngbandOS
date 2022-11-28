@@ -2414,9 +2414,9 @@ namespace AngbandOS
                     MonsterRace rPtr = mPtr.Race;
                     a = rPtr.Colour;
                     c = rPtr.Character;
-                    if ((rPtr.Flags1 & MonsterFlag1.AttrMulti) != 0)
+                    if (rPtr.AttrMulti)
                     {
-                        if ((rPtr.Flags2 & MonsterFlag2.Shapechanger) != 0)
+                        if (rPtr.Shapechanger)
                         {
                             cp = Program.Rng.DieRoll(25) == 1
                                 ? _imageObjectHack[Program.Rng.RandomLessThan(_imageObjectHack.Length)]
@@ -2426,7 +2426,7 @@ namespace AngbandOS
                         {
                             cp = c;
                         }
-                        if ((rPtr.Flags2 & MonsterFlag2.AttrAny) != 0)
+                        if (rPtr.AttrAny)
                         {
                             ap = (Colour)Program.Rng.DieRoll(15);
                         }
@@ -2464,18 +2464,18 @@ namespace AngbandOS
                             }
                         }
                     }
-                    else if ((rPtr.Flags1 & (MonsterFlag1.AttrClear | MonsterFlag1.CharClear)) == 0)
+                    else if (!rPtr.AttrClear && !rPtr.CharClear)
                     {
                         cp = c;
                         ap = a;
                     }
                     else
                     {
-                        if ((rPtr.Flags1 & MonsterFlag1.CharClear) == 0)
+                        if (!rPtr.CharClear)
                         {
                             cp = c;
                         }
-                        else if ((rPtr.Flags1 & MonsterFlag1.AttrClear) == 0)
+                        else if (!rPtr.AttrClear)
                         {
                             ap = a;
                         }

@@ -8,7 +8,7 @@ namespace AngbandOS.Core.MonsterSelectors
     {
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return (rPtr.Character == 'L' || rPtr.Character == 'V' || rPtr.Character == 'W') && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
+            return (rPtr.Character == 'L' || rPtr.Character == 'V' || rPtr.Character == 'W') && !rPtr.Unique;
         }
     }
 }

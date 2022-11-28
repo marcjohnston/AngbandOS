@@ -5,205 +5,13 @@ using AngbandOS.Core.AttackEffects;
 
 namespace AngbandOS.Core.MonsterRaces
 {
-    //internal class MonsterCharacteristics
-    //{
-    //    public bool AttrClear { get; }
-    //    public bool AttrMulti { get; }
-    //    public bool CharClear { get; }
-    //    public bool CharMulti { get; }
-    //    public bool Drop_1D2 { get; }
-    //    public bool Drop_2D2 { get; }
-    //    public bool Drop_3D2 { get; }
-    //    public bool Drop_4D2 { get; }
-    //    public bool Drop60 { get; }
-    //    public bool Drop90 { get; }
-    //    public bool DropGood { get; }
-    //    public bool DropGreat { get; }
-    //    public bool Escorted { get; }
-    //    public bool EscortsGroup { get; }
-    //    public bool Female { get; }
-    //    public bool ForceMaxHp { get; }
-    //    public bool ForceSleep { get; }
-    //    public bool Friends { get; }
-    //    public bool Guardian { get; }
-    //    public bool Male { get; }
-    //    public bool NeverAttack { get; }
-    //    public bool NeverMove { get; }
-    //    public bool OnlyDropGold { get; }
-    //    public bool OnlyDropItem { get; }
-    //    public bool OnlyGuardian { get; }
-    //    public bool RandomMove25 { get; }
-    //    public bool RandomMove50 { get; }
-    //    public bool Unique { get; }
-
-    //    public bool AttrAny { get; }
-    //    public bool BashDoor { get; }
-    //    public bool ColdBlood { get; }
-    //    public bool EldritchHorror { get; }
-    //    public bool EmptyMind { get; }
-    //    public bool FireAura { get; }
-    //    public bool Invisible { get; }
-    //    public bool KillBody { get; }
-    //    public bool KillItem { get; }
-    //    public bool KillWall { get; }
-    //    public bool LightningAura { get; }
-    //    public bool MoveBody { get; }
-    //    public bool Multiply { get; }
-    //    public bool OpenDoor { get; }
-    //    public bool PassWall { get; }
-    //    public bool Powerful { get; }
-    //    public bool Reflecting { get; }
-    //    public bool Regenerate { get; }
-    //    public bool Shapechanger { get; }
-    //    public bool Smart { get; }
-    //    public bool Stupid { get; }
-    //    public bool TakeItem { get; }
-    //    public bool WeirdMind { get; }
-
-    //    public bool Animal { get; }
-    //    public bool Cthuloid { get; }
-    //    public bool Demon { get; }
-    //    public bool Dragon { get; }
-    //    public bool Evil { get; }
-    //    public bool Giant { get; }
-    //    public bool Good { get; }
-    //    public bool GreatOldOne { get; }
-    //    public bool HurtByCold { get; }
-    //    public bool HurtByFire { get; }
-    //    public bool HurtByLight { get; }
-    //    public bool HurtByRock { get; }
-    //    public bool ImmuneAcid { get; }
-    //    public bool ImmuneCold { get; }
-    //    public bool ImmuneConfusion { get; }
-    //    public bool ImmuneFear { get; }
-    //    public bool ImmuneFire { get; }
-    //    public bool ImmuneLightning { get; }
-    //    public bool ImmunePoison { get; }
-    //    public bool ImmuneSleep { get; }
-    //    public bool ImmuneStun { get; }
-    //    public bool Nonliving { get; }
-    //    public bool Orc { get; }
-    //    public bool ResistDisenchant { get; }
-    //    public bool ResistNether { get; }
-    //    public bool ResistNexus { get; }
-    //    public bool ResistPlasma { get; }
-    //    public bool ResistTeleport { get; }
-    //    public bool ResistWater { get; }
-    //    public bool Troll { get; }
-    //    public bool Undead { get; }
-
-    //    public bool Arrow1D6 { get; }
-    //    public bool Arrow3D6 { get; }
-    //    public bool Arrow5D6 { get; }
-    //    public bool Arrow7D6 { get; }
-    //    public bool BoltMask => Arrow1D6 || Arrow3D6 || Arrow5D6 || Arrow7D6 || AcidBolt || LightningBolt || FireBolt || ColdBolt || PoisonBolt || NetherBolt ||
-    //                                    WaterBolt || ManaBolt || PlasmaBolt || IceBolt || MagicMissile;
-    //    public bool BreatheAcid { get; }
-    //    public bool BreatheChaos { get; }
-    //    public bool BreatheCold { get; }
-    //    public bool BreatheConfusion { get; }
-    //    public bool BreatheDark { get; }
-    //    public bool BreatheDisenchant { get; }
-    //    public bool BreatheDisintegration { get; }
-    //    public bool BreatheFire { get; }
-    //    public bool BreatheForce { get; }
-    //    public bool BreatheGravity { get; }
-    //    public bool BreatheInertia { get; }
-    //    public bool BreatheLight { get; }
-    //    public bool BreatheLightning { get; }
-    //    public bool BreatheMana { get; }
-    //    public bool BreatheNether { get; }
-    //    public bool BreatheNexus { get; }
-    //    public bool BreathePlasma { get; }
-    //    public bool BreathePoison { get; }
-    //    public bool BreatheRadiation { get; }
-    //    public bool BreatheShards { get; }
-    //    public bool BreatheSound { get; }
-    //    public bool BreatheTime { get; }
-    //    public bool ChaosBall { get; }
-    //    public bool RadiationBall { get; }
-    //    public bool ShardBall { get; }
-    //    public bool Shriek { get; }
-
-    //    public bool AcidBall { get; }
-    //    public bool AcidBolt { get; }
-    //    public bool Blindness { get; }
-    //    public bool BrainSmash { get; }
-    //    public bool CauseCriticalWounds { get; }
-    //    public bool CauseLightWounds { get; }
-    //    public bool CauseMortalWounds { get; }
-    //    public bool CauseSeriousWounds { get; }
-    //    public bool ColdBall { get; }
-    //    public bool ColdBolt { get; }
-    //    public bool Confuse { get; }
-    //    public bool DarkBall { get; }
-    //    public bool DrainMana { get; }
-    //    public bool FireBall { get; }
-    //    public bool FireBolt { get; }
-    //    public bool Hold { get; }
-    //    public bool IceBolt { get; }
-    //    public bool IntMask => Hold || Slow || Confuse || Blindness || Scare | Blink || TeleportSelf || TeleportLevel || TeleportAway || Heal || Haste ||
-    //                            CreateTraps || SummonKin || SummonReaver || SummonMonster || SummonMonsters || SummonAnt ||
-    //                            SummonSpider || SummonHound || SummonHydra || SummonCthuloid || SummonDragon || SummonUndead ||
-    //                            SummonDemon || SummonHiDragon || SummonHiUndead || SummonGreatOldOne || SummonUnique;
-    //    public bool LightningBall { get; }
-    //    public bool LightningBolt { get; }
-    //    public bool MagicMissile { get; }
-    //    public bool ManaBall { get; }
-    //    public bool ManaBolt { get; }
-    //    public bool MindBlast { get; }
-    //    public bool NetherBall { get; }
-    //    public bool NetherBolt { get; }
-    //    public bool PlasmaBolt { get; }
-    //    public bool PoisonBall { get; }
-    //    public bool PoisonBolt { get; }
-    //    public bool Scare { get; }
-    //    public bool Slow { get; }
-    //    public bool WaterBall { get; }
-    //    public bool WaterBolt { get; }
-
-    //    public bool Blink { get; }
-    //    public bool CreateTraps { get; }
-    //    public bool Darkness { get; }
-    //    public bool DreadCurse { get; }
-    //    public bool Forget { get; }
-    //    public bool Haste { get; }
-    //    public bool Heal { get; }
-
-    //    public bool SummonAnt { get; }
-    //    public bool SummonCthuloid { get; }
-    //    public bool SummonDemon { get; }
-    //    public bool SummonDragon { get; }
-    //    public bool SummonGreatOldOne { get; }
-    //    public bool SummonHiDragon { get; }
-    //    public bool SummonHiUndead { get; }
-    //    public bool SummonHound { get; }
-    //    public bool SummonHydra { get; }
-    //    public bool SummonKin { get; }
-
-    //    public bool SummonMask => SummonKin || SummonReaver || SummonMonster || SummonMonsters || SummonAnt || SummonSpider ||
-    //                                      SummonHound || SummonHydra || SummonCthuloid || SummonDemon || SummonUndead || SummonDragon ||
-    //                                      SummonHiUndead || SummonHiDragon || SummonGreatOldOne || SummonUnique;
-
-    //    public bool SummonMonster { get; }
-    //    public bool SummonMonsters { get; }
-    //    public bool SummonReaver { get; }
-    //    public bool SummonSpider { get; }
-    //    public bool SummonUndead { get; }
-    //    public bool SummonUnique { get; }
-    //    public bool TeleportAway { get; }
-    //    public bool TeleportLevel { get; }
-    //    public bool TeleportSelf { get; }
-    //    public bool TeleportTo { get; }
-    //}
-
     [Serializable]
     internal abstract class MonsterRace
     {
-        //public MonsterCharacteristics Flags = new MonsterCharacteristics();
-
         public int CurNum;
         public uint Flags1;
+        public bool Guardian;
+        public bool OnlyGuardian;
         public int MaxNum;
         public MonsterKnowledge Knowledge;
 
@@ -218,12 +26,12 @@ namespace AngbandOS.Core.MonsterRaces
         public readonly uint Flags6;
 
         /// <summary>
-        /// The column from which to take the graphical tile.
+        /// The character to render the monster as.
         /// </summary>
         public abstract char Character { get; }
 
         /// <summary>
-        /// The row from which to take the graphical tile
+        /// The color to display the monster as.
         /// </summary>
         public virtual Colour Colour => Colour.White;
 

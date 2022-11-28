@@ -102,20 +102,20 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheShards) != 0)
+            if (rPtr.BreatheShards)
             {
                 note = " resists.";
                 dam *= 3;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

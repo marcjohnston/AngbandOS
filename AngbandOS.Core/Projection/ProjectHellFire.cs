@@ -102,7 +102,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            if (rPtr.Evil)
             {
                 dam *= 2;
                 note = " is hit hard.";
@@ -111,14 +111,14 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -35,7 +35,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             }
             Monster mPtr = level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
-            if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            if (rPtr.Evil)
             {
                 level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 saveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");

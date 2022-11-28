@@ -85,7 +85,7 @@ namespace AngbandOS.Core.RoomTypes
                 do
                 {
                     _templateRace = Program.Rng.DieRoll(saveGame.MonsterRaces.Count - 2);
-                } while ((saveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                } while (saveGame.MonsterRaces[_templateRace].Unique ||
                          saveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                          saveGame.Difficulty + Program.Rng.DieRoll(5));
                 if (Program.Rng.DieRoll(2) != 1 && saveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))

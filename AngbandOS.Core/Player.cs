@@ -265,7 +265,7 @@ namespace AngbandOS
                 MonsterRace rPtr = SaveGame.MonsterRaces[i];
                 rPtr.CurNum = 0;
                 rPtr.MaxNum = 100;
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     rPtr.MaxNum = 1;
                 }

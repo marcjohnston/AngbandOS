@@ -41,14 +41,14 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             string note = " shudders.";
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

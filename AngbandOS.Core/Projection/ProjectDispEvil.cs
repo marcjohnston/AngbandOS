@@ -27,7 +27,7 @@ namespace AngbandOS.Projection
         {
             // Only evil friends are affected.
             MonsterRace rPtr = mPtr.Race;
-            return (rPtr.Flags3 & MonsterFlag3.Evil) != 0;
+            return rPtr.Evil;
         }
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -39,7 +39,7 @@ namespace AngbandOS.Projection
             string mName = mPtr.MonsterDesc(0);
             string note;
             string noteDies = " dissolves!";
-            if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            if (rPtr.Evil)
             {
                 if (seen)
                 {
@@ -55,14 +55,14 @@ namespace AngbandOS.Projection
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

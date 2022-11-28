@@ -38,9 +38,9 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.ResistTeleport) != 0)
+            if (rPtr.ResistTeleport)
             {
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     if (seen)
                     {
@@ -60,7 +60,7 @@ namespace AngbandOS.Projection
                 }
             }
             int doDist = resistTele ? 0 : 10;
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheGravity) != 0)
+            if (rPtr.BreatheGravity)
             {
                 note = " resists.";
                 dam *= 3;
@@ -69,7 +69,7 @@ namespace AngbandOS.Projection
             }
             else
             {
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 ||
+                if (rPtr.Unique ||
                     rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
                 {
                     obvious = false;
@@ -83,7 +83,7 @@ namespace AngbandOS.Projection
                     note = " starts moving slower.";
                 }
                 doStun = Program.Rng.DiceRoll((SaveGame.Player.Level / 10) + 3, dam) + 1;
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 ||
+                if (rPtr.Unique ||
                     rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
                 {
                     doStun = 0;
@@ -91,14 +91,14 @@ namespace AngbandOS.Projection
                     obvious = false;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -119,8 +119,8 @@ namespace AngbandOS.Projection
                 mPtr.TeleportAway(SaveGame, doDist);
                 cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             }
-            else if (doStun != 0 && (rPtr.Flags4 & MonsterFlag4.BreatheSound) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheForce) == 0)
+            else if (doStun != 0 && !rPtr.BreatheSound &&
+                     !rPtr.BreatheForce)
             {
                 if (seen)
                 {

@@ -1,14 +1,13 @@
 ﻿using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
     [Serializable]
-    internal class KoboldMonsterSelector : MonsterSelector
+    internal class AcidBreathingDragonMonsterSelector : MonsterSelector
     {
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return rPtr.Character == 'k' && !rPtr.Unique;
+            return !rPtr.Unique && "Dd".Contains(rPtr.Character.ToString()) && rPtr.BreatheAcid;
         }
     }
 }

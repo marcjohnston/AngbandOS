@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterSelectors
 
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return rPtr.Character == _character && (rPtr.Flags1 & MonsterFlag1.Unique) == 0;
+            return rPtr.Character == _character && !rPtr.Unique;
         }
     }
 }

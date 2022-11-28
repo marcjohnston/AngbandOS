@@ -103,20 +103,20 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             int doStun = (10 + Program.Rng.DieRoll(15) + r) / (r + 1);
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheSound) != 0)
+            if (rPtr.BreatheSound)
             {
                 note = " resists.";
                 dam *= 2;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -127,8 +127,8 @@ namespace AngbandOS.Projection
             {
                 note = noteDies;
             }
-            else if (doStun != 0 && (rPtr.Flags4 & MonsterFlag4.BreatheSound) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheForce) == 0)
+            else if (doStun != 0 && !rPtr.BreatheSound &&
+                     !rPtr.BreatheForce)
             {
                 int tmp;
                 if (mPtr.StunLevel != 0)

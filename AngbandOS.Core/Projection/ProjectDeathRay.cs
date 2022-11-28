@@ -36,9 +36,9 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Undead) != 0 || (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0)
+            if (rPtr.Undead || rPtr.Nonliving)
             {
-                if ((rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+                if (rPtr.Undead)
                 {
                     if (seen)
                     {
@@ -49,7 +49,7 @@ namespace AngbandOS.Projection
                 obvious = false;
                 dam = 0;
             }
-            else if (((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && Program.Rng.DieRoll(888) != 666) ||
+            else if ((rPtr.Unique && Program.Rng.DieRoll(888) != 666) ||
                      (rPtr.Level + Program.Rng.DieRoll(20) >
                      Program.Rng.DieRoll(dam + Program.Rng.DieRoll(10)) && Program.Rng.DieRoll(100) != 66))
             {
@@ -61,14 +61,14 @@ namespace AngbandOS.Projection
             {
                 dam = SaveGame.Player.Level * 200;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

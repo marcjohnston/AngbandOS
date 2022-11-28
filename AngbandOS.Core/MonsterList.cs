@@ -68,7 +68,7 @@ namespace AngbandOS
                     return false;
                 }
                 rPtr = SaveGame.MonsterRaces[rIdx];
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0 && (rPtr.Flags1 & MonsterFlag1.EscortsGroup) == 0)
+                if (!rPtr.Unique && !rPtr.EscortsGroup)
                 {
                     break;
                 }
@@ -171,11 +171,11 @@ namespace AngbandOS
                         continue;
                     }
                     int chance = 90;
-                    if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                    if (rPtr.Unique)
                     {
                         chance = 99;
                     }
-                    if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0 && cnt < 1000)
+                    if (rPtr.Guardian && cnt < 1000)
                     {
                         chance = 100;
                     }
@@ -213,7 +213,7 @@ namespace AngbandOS
             if (mPtr.Health < 0)
             {
                 string mName = mPtr.MonsterDesc(0);
-                if ((rPtr.Flags3 & MonsterFlag3.GreatOldOne) != 0 && Program.Rng.DieRoll(2) == 1)
+                if (rPtr.GreatOldOne && Program.Rng.DieRoll(2) == 1)
                 {
                     SaveGame.MsgPrint($"{mName} retreats into another dimension!");
                     if (Program.Rng.DieRoll(5) == 1)
@@ -236,9 +236,9 @@ namespace AngbandOS
                 {
                     SaveGame.MsgPrint($"You have killed {mName}.");
                 }
-                else if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
-                         (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
-                         (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
+                else if (rPtr.Demon || rPtr.Undead ||
+                         rPtr.Cthuloid || rPtr.Stupid ||
+                         rPtr.Nonliving || "Evg".Contains(rPtr.Character.ToString()))
                 {
                     SaveGame.MsgPrint($"You have destroyed {mName}.");
                 }
@@ -280,11 +280,11 @@ namespace AngbandOS
                 }
                 SaveGame.Player.GainExperience(newExp);
                 SaveGame.MonsterDeath(mIdx);
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     rPtr.MaxNum = 0;
                 }
-                if (mPtr.IsVisible || (rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (mPtr.IsVisible || rPtr.Unique)
                 {
                     if (rPtr.Knowledge.RPkills < int.MaxValue)
                     {
@@ -312,7 +312,7 @@ namespace AngbandOS
                     fear = false;
                 }
             }
-            if (mPtr.FearLevel == 0 && (rPtr.Flags3 & MonsterFlag3.ImmuneFear) == 0)
+            if (mPtr.FearLevel == 0 && !rPtr.ImmuneFear)
             {
                 int percentage = 100 * mPtr.Health / mPtr.MaxHealth;
                 if ((percentage <= 10 && Program.Rng.RandomLessThan(10) < percentage) ||
@@ -338,7 +338,7 @@ namespace AngbandOS
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             rPtr.CurNum--;
-            if ((rPtr.Flags2 & MonsterFlag2.Multiply) != 0)
+            if (rPtr.Multiply)
             {
                 NumRepro--;
             }
@@ -405,7 +405,7 @@ namespace AngbandOS
                 MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
 
                 // Do not allow more than 1 unique of this type to be created.
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
+                if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
                 {
                     continue;
                 }
@@ -503,18 +503,18 @@ namespace AngbandOS
             knowledge.RProbed = true;
             knowledge.RWake = Constants.MaxUchar;
             knowledge.RIgnore = Constants.MaxUchar;
-            knowledge.RDropItem = ((rPtr.Flags1 & MonsterFlag1.Drop_4D2) != 0 ? 8 : 0) +
-                                  ((rPtr.Flags1 & MonsterFlag1.Drop_3D2) != 0 ? 6 : 0) +
-                                  ((rPtr.Flags1 & MonsterFlag1.Drop_2D2) != 0 ? 4 : 0) +
-                                  ((rPtr.Flags1 & MonsterFlag1.Drop_1D2) != 0 ? 2 : 0) +
-                                  ((rPtr.Flags1 & MonsterFlag1.Drop90) != 0 ? 1 : 0) +
-                                  ((rPtr.Flags1 & MonsterFlag1.Drop60) != 0 ? 1 : 0);
+            knowledge.RDropItem = (rPtr.Drop_4D2 ? 8 : 0) +
+                                  (rPtr.Drop_3D2 ? 6 : 0) +
+                                  (rPtr.Drop_2D2 ? 4 : 0) +
+                                  (rPtr.Drop_1D2 ? 2 : 0) +
+                                  (rPtr.Drop90 ? 1 : 0) +
+                                  (rPtr.Drop60 ? 1 : 0);
             knowledge.RDropGold = knowledge.RDropItem;
-            if ((rPtr.Flags1 & MonsterFlag1.OnlyDropGold) != 0)
+            if (rPtr.OnlyDropGold)
             {
                 knowledge.RDropItem = 0;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.OnlyDropItem) != 0)
+            if (rPtr.OnlyDropItem)
             {
                 knowledge.RDropGold = 0;
             }
@@ -540,11 +540,11 @@ namespace AngbandOS
             {
                 rPtr.Knowledge.RDropGold = numGold;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.DropGood) != 0)
+            if (rPtr.DropGood)
             {
                 rPtr.Knowledge.RFlags1 |= MonsterFlag1.DropGood;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.DropGreat) != 0)
+            if (rPtr.DropGreat)
             {
                 rPtr.Knowledge.RFlags1 |= MonsterFlag1.DropGreat;
             }
@@ -733,7 +733,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Escorted) != 0)
+            if (rPtr.Escorted)
             {
                 for (int i = 0; i < 50; i++)
                 {
@@ -750,8 +750,8 @@ namespace AngbandOS
                     }
                     MonsterRace race = SaveGame.MonsterRaces[z];
                     PlaceMonsterOne(ny, nx, race, slp, charm);
-                    if ((race.Flags1 & MonsterFlag1.Friends) != 0 ||
-                        (rPtr.Flags1 & MonsterFlag1.EscortsGroup) != 0)
+                    if (race.Friends ||
+                        rPtr.EscortsGroup)
                     {
                         PlaceMonsterGroup(ny, nx, z, slp, charm);
                     }
@@ -761,7 +761,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Friends) != 0)
+            if (rPtr.Friends)
             {
                 PlaceMonsterGroup(y, x, rPtr.Index, slp, charm);
             }
@@ -808,11 +808,11 @@ namespace AngbandOS
             monster.MapY = y;
             monster.MapX = x;
             MonsterRace rPtr = monster.Race;
-            if ((rPtr.Flags2 & MonsterFlag2.Multiply) != 0)
+            if (rPtr.Multiply)
             {
                 NumRepro++;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.AttrMulti) != 0)
+            if (rPtr.AttrMulti)
             {
                 ShimmerMonsters = true;
             }
@@ -941,7 +941,7 @@ namespace AngbandOS
                 {
                     if (mPtr.DistanceFromPlayer <= SaveGame.Player.InfravisionRange)
                     {
-                        if ((rPtr.Flags2 & MonsterFlag2.ColdBlood) != 0)
+                        if (rPtr.ColdBlood)
                         {
                             doColdBlood = true;
                         }
@@ -953,7 +953,7 @@ namespace AngbandOS
                     }
                     if (cPtr.TileFlags.IsSet(GridTile.PlayerLit | GridTile.SelfLit))
                     {
-                        if ((rPtr.Flags2 & MonsterFlag2.Invisible) != 0)
+                        if (rPtr.Invisible)
                         {
                             doInvisible = true;
                         }
@@ -966,11 +966,11 @@ namespace AngbandOS
                 }
                 if (SaveGame.Player.HasTelepathy)
                 {
-                    if ((rPtr.Flags2 & MonsterFlag2.EmptyMind) != 0)
+                    if (rPtr.EmptyMind)
                     {
                         doEmptyMind = true;
                     }
-                    else if ((rPtr.Flags2 & MonsterFlag2.WeirdMind) != 0)
+                    else if (rPtr.WeirdMind)
                     {
                         doWeirdMind = true;
                         if (Program.Rng.RandomLessThan(100) < 10)
@@ -1011,11 +1011,11 @@ namespace AngbandOS
                 }
                 if (hard)
                 {
-                    if ((rPtr.Flags2 & MonsterFlag2.Smart) != 0)
+                    if (rPtr.Smart)
                     {
                         rPtr.Knowledge.RFlags2 |= MonsterFlag2.Smart;
                     }
-                    if ((rPtr.Flags2 & MonsterFlag2.Stupid) != 0)
+                    if (rPtr.Stupid)
                     {
                         rPtr.Knowledge.RFlags2 |= MonsterFlag2.Stupid;
                     }
@@ -1053,7 +1053,7 @@ namespace AngbandOS
             {
                 if (mPtr.IsVisible != oldMl)
                 {
-                    if ((rPtr.Flags2 & MonsterFlag2.EldritchHorror) != 0)
+                    if (rPtr.EldritchHorror)
                     {
                         mPtr.SanityBlast(SaveGame, false);
                     }
@@ -1088,11 +1088,11 @@ namespace AngbandOS
             {
                 return;
             }
-            if ((rPtr.Flags2 & MonsterFlag2.Stupid) != 0)
+            if (rPtr.Stupid)
             {
                 return;
             }
-            if ((rPtr.Flags2 & MonsterFlag2.Smart) == 0 && Program.Rng.RandomLessThan(100) < 50)
+            if (!rPtr.Smart && Program.Rng.RandomLessThan(100) < 50)
             {
                 return;
             }
@@ -1431,11 +1431,11 @@ namespace AngbandOS
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 && rPtr.CurNum >= rPtr.MaxNum)
+            if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.OnlyGuardian) != 0 || (rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.OnlyGuardian || rPtr.Guardian)
             {
                 int qIdx = SaveGame.Quests.GetQuestNumber();
                 if (qIdx < 0)
@@ -1453,7 +1453,7 @@ namespace AngbandOS
             }
             if (rPtr.Level > SaveGame.Difficulty)
             {
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     _level.DangerRating += (rPtr.Level - SaveGame.Difficulty) * 2;
                 }
@@ -1490,12 +1490,12 @@ namespace AngbandOS
             mPtr.DistanceFromPlayer = 0;
             mPtr.IndividualMonsterFlags = 0;
             mPtr.IsVisible = false;
-            mPtr.MaxHealth = (rPtr.Flags1 & MonsterFlag1.ForceMaxHp) != 0
+            mPtr.MaxHealth = rPtr.ForceMaxHp
                 ? Program.Rng.DiceRollMax(rPtr.Hdice, rPtr.Hside)
                 : Program.Rng.DiceRoll(rPtr.Hdice, rPtr.Hside);
             mPtr.Health = mPtr.MaxHealth;
             mPtr.Speed = rPtr.Speed;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) == 0)
+            if (!rPtr.Unique)
             {
                 int i = GlobalData.ExtractEnergy[rPtr.Speed] / 10;
                 if (i != 0)
@@ -1504,7 +1504,7 @@ namespace AngbandOS
                 }
             }
             mPtr.Energy = Program.Rng.RandomLessThan(100);
-            if ((rPtr.Flags1 & MonsterFlag1.ForceSleep) != 0)
+            if (rPtr.ForceSleep)
             {
                 mPtr.IndividualMonsterFlags |= Constants.MflagNice;
                 RepairMonsters = true;
@@ -1515,11 +1515,11 @@ namespace AngbandOS
             }
             UpdateMonsterVisibility(cPtr.MonsterIndex, true);
             rPtr.CurNum++;
-            if ((rPtr.Flags2 & MonsterFlag2.Multiply) != 0)
+            if (rPtr.Multiply)
             {
                 NumRepro++;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.AttrMulti) != 0)
+            if (rPtr.AttrMulti)
             {
                 ShimmerMonsters = true;
             }

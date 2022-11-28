@@ -41,9 +41,9 @@ namespace AngbandOS.Projection
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
             bool resistsTele = false;
-            if ((rPtr.Flags3 & MonsterFlag3.ResistTeleport) != 0)
+            if (rPtr.ResistTeleport)
             {
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     if (seen)
                     {
@@ -71,14 +71,14 @@ namespace AngbandOS.Projection
                 doDist = dam;
             }
             dam = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -107,7 +107,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
+            if (rPtr.ImmuneFire)
             {
                 note = " resists a lot.";
                 dam /= 9;
@@ -116,14 +116,14 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -92,7 +92,7 @@ namespace AngbandOS.Projection
         {
             // Only good friends are affected.
             MonsterRace rPtr = mPtr.Race;
-            return (rPtr.Flags3 & MonsterFlag3.Good) != 0;
+            return rPtr.Good;
         }
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -108,7 +108,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Good) != 0)
+            if (rPtr.Good)
             {
                 dam = 0;
                 note = " is immune.";
@@ -117,7 +117,7 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.Good;
                 }
             }
-            else if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+            else if (rPtr.Evil)
             {
                 dam *= 2;
                 note = " is hit hard.";
@@ -132,14 +132,14 @@ namespace AngbandOS.Projection
                 dam *= 3;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

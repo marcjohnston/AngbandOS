@@ -1251,11 +1251,11 @@ namespace AngbandOS
             {
                 return;
             }
-            bool visible = mPtr.IsVisible || (rPtr.Flags1 & MonsterFlag1.Unique) != 0;
-            bool good = (rPtr.Flags1 & MonsterFlag1.DropGood) != 0;
-            bool great = (rPtr.Flags1 & MonsterFlag1.DropGreat) != 0;
-            bool doGold = (rPtr.Flags1 & MonsterFlag1.OnlyDropItem) == 0;
-            bool doItem = (rPtr.Flags1 & MonsterFlag1.OnlyDropGold) == 0;
+            bool visible = mPtr.IsVisible || rPtr.Unique;
+            bool good = rPtr.DropGood;
+            bool great = rPtr.DropGreat;
+            bool doGold = !rPtr.OnlyDropItem;
+            bool doItem = !rPtr.OnlyDropGold;
             bool cloned = false;
             int forceCoin = rPtr.GetCoinType();
             Item qPtr;
@@ -1282,27 +1282,27 @@ namespace AngbandOS
                 Level.DropNear(oPtr, -1, y, x);
             }
             mPtr.FirstHeldItemIndex = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Drop60) != 0 && Program.Rng.RandomLessThan(100) < 60)
+            if (rPtr.Drop60 && Program.Rng.RandomLessThan(100) < 60)
             {
                 number++;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop90) != 0 && Program.Rng.RandomLessThan(100) < 90)
+            if (rPtr.Drop90 && Program.Rng.RandomLessThan(100) < 90)
             {
                 number++;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop_1D2) != 0)
+            if (rPtr.Drop_1D2)
             {
                 number += Program.Rng.DiceRoll(1, 2);
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop_2D2) != 0)
+            if (rPtr.Drop_2D2)
             {
                 number += Program.Rng.DiceRoll(2, 2);
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop_3D2) != 0)
+            if (rPtr.Drop_3D2)
             {
                 number += Program.Rng.DiceRoll(3, 2);
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Drop_4D2) != 0)
+            if (rPtr.Drop_4D2)
             {
                 number += Program.Rng.DiceRoll(4, 2);
             }
@@ -1310,7 +1310,7 @@ namespace AngbandOS
             {
                 number = 0;
             }
-            if (Quests.IsQuest(CurrentDepth) && (rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (Quests.IsQuest(CurrentDepth) && rPtr.Guardian)
             {
                 qIdx = Quests.GetQuestNumber();
                 Quests[qIdx].Killed++;
@@ -1361,7 +1361,7 @@ namespace AngbandOS
             {
                 Level.Monsters.LoreTreasure(mIdx, dumpItem, dumpGold);
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) == 0)
+            if (!rPtr.Guardian)
             {
                 return;
             }
@@ -1369,7 +1369,7 @@ namespace AngbandOS
             {
                 return;
             }
-            rPtr.Flags1 ^= MonsterFlag1.Guardian;
+            rPtr.Guardian = !rPtr.Guardian;
             if (Quests.ActiveQuests == 0)
             {
                 Player.IsWinner = true;
@@ -2445,7 +2445,7 @@ namespace AngbandOS
                                 continue;
                             }
                             MonsterRace rPtr = mPtr.Race;
-                            if ((rPtr.Flags1 & MonsterFlag1.AttrMulti) == 0)
+                            if (!rPtr.AttrMulti)
                             {
                                 continue;
                             }
@@ -3233,7 +3233,7 @@ namespace AngbandOS
                     {
                         frac = 1;
                     }
-                    if ((rPtr.Flags2 & MonsterFlag2.Regenerate) != 0)
+                    if (rPtr.Regenerate)
                     {
                         frac *= 2;
                     }
@@ -3852,7 +3852,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     continue;
                 }
@@ -3860,7 +3860,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+                if (rPtr.Guardian)
                 {
                     continue;
                 }
@@ -4095,7 +4095,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+                if (rPtr.Evil)
                 {
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
                     Level.Monsters.RepairMonsters = true;
@@ -4129,7 +4129,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags2 & MonsterFlag2.Invisible) != 0)
+                if (rPtr.Invisible)
                 {
                     rPtr.Knowledge.RFlags2 |= MonsterFlag2.Invisible;
                     Level.Monsters.RepairMonsters = true;
@@ -4163,8 +4163,8 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
-                    (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+                if (rPtr.Nonliving || rPtr.Undead ||
+                    rPtr.Cthuloid || rPtr.Demon)
                 {
                     Level.Monsters.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
@@ -4196,7 +4196,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags2 & MonsterFlag2.Invisible) == 0 || Player.HasSeeInvisibility || Player.TimedSeeInvisibility != 0)
+                if (!rPtr.Invisible || Player.HasSeeInvisibility || Player.TimedSeeInvisibility != 0)
                 {
                     Level.Monsters.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
@@ -4616,10 +4616,10 @@ namespace AngbandOS
                     {
                         Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
                         MonsterRace rPtr = mPtr.Race;
-                        if ((rPtr.Flags2 & MonsterFlag2.KillWall) == 0 && (rPtr.Flags2 & MonsterFlag2.PassWall) == 0)
+                        if (!rPtr.KillWall && !rPtr.PassWall)
                         {
                             sn = 0;
-                            if ((rPtr.Flags1 & MonsterFlag1.NeverMove) == 0)
+                            if (!rPtr.NeverMove)
                             {
                                 for (i = 0; i < 8; i++)
                                 {
@@ -5199,11 +5199,11 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+                if (rPtr.Guardian)
                 {
                     continue;
                 }
@@ -5238,7 +5238,7 @@ namespace AngbandOS
         public int PolymorphMonster(MonsterRace rPtr)
         {
             int index = rPtr.Index;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 || (rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Unique || rPtr.Guardian)
             {
                 return rPtr.Index;
             }
@@ -5252,7 +5252,7 @@ namespace AngbandOS
                     break;
                 }
                 rPtr = MonsterRaces[r];
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     continue;
                 }
@@ -6200,10 +6200,8 @@ namespace AngbandOS
                     {
                         if (Level.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                         {
-                            if ((Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.Flags6 &
-                                 MonsterFlag6.TeleportSelf) != 0 &&
-                                (Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.Flags3 &
-                                 MonsterFlag3.ResistTeleport) == 0)
+                            if (Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
+                                !Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                             {
                                 if (Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                                 {
@@ -6332,7 +6330,7 @@ namespace AngbandOS
             {
                 Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
                 MonsterRace rPtr = mPtr.Race;
-                if ((rPtr.Flags3 & MonsterFlag3.ResistTeleport) != 0)
+                if (rPtr.ResistTeleport)
                 {
                     MsgPrint("Your teleportation is blocked!");
                 }
@@ -6505,11 +6503,11 @@ namespace AngbandOS
                     Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
                     MonsterRace rPtr = mPtr.Race;
                     Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-                    if ((rPtr.Flags2 & MonsterFlag2.Stupid) != 0)
+                    if (rPtr.Stupid)
                     {
                         chance = 10;
                     }
-                    if ((rPtr.Flags2 & MonsterFlag2.Smart) != 0)
+                    if (rPtr.Smart)
                     {
                         chance = 100;
                     }
@@ -7825,8 +7823,7 @@ namespace AngbandOS
                         HealthTrack(tile.MonsterIndex);
                     }
                     // If we can't see it then let us push past it and tell us what happened
-                    else if (Level.GridPassable(Player.MapY, Player.MapX) ||
-                             (monster.Race.Flags2 & MonsterFlag2.PassWall) != 0)
+                    else if (Level.GridPassable(Player.MapY, Player.MapX) || monster.Race.PassWall)
                     {
                         MsgPrint($"You push past {monsterName}.");
                         monster.MapY = Player.MapY;
@@ -8312,7 +8309,7 @@ namespace AngbandOS
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
-                        if (!((race.Flags3 & MonsterFlag3.Undead) != 0 || (race.Flags3 & MonsterFlag3.Nonliving) != 0))
+                        if (!(race.Undead || race.Nonliving))
                         {
                             drainResult = monster.Health;
                         }
@@ -8333,19 +8330,19 @@ namespace AngbandOS
                         MartialArtsAttack oldMartialArtsAttack = GlobalData.MaBlows[0];
                         // Monsters of various types resist being stunned by martial arts
                         int resistStun = 0;
-                        if ((race.Flags1 & MonsterFlag1.Unique) != 0)
+                        if (race.Unique)
                         {
                             resistStun += 88;
                         }
-                        if ((race.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+                        if (race.ImmuneConfusion)
                         {
                             resistStun += 44;
                         }
-                        if ((race.Flags3 & MonsterFlag3.ImmuneSleep) != 0)
+                        if (race.ImmuneSleep)
                         {
                             resistStun += 44;
                         }
-                        if ((race.Flags3 & MonsterFlag3.Undead) != 0 || (race.Flags3 & MonsterFlag3.Nonliving) != 0)
+                        if (race.Undead || race.Nonliving)
                         {
                             resistStun += 88;
                         }
@@ -8375,7 +8372,7 @@ namespace AngbandOS
                         // If it was a knee attack and the monster is male, hit it in the groin
                         if (martialArtsAttack.Effect == Constants.MaKnee)
                         {
-                            if ((race.Flags1 & MonsterFlag1.Male) != 0)
+                            if (race.Male)
                             {
                                 MsgPrint($"You hit {monsterName} in the groin with your knee!");
                                 specialEffect = Constants.MaKnee;
@@ -8388,7 +8385,7 @@ namespace AngbandOS
                         // If it was an ankle kick and the monster has legs, slow it
                         else if (martialArtsAttack.Effect == Constants.MaSlow)
                         {
-                            if ((race.Flags1 & MonsterFlag1.NeverMove) == 0 ||
+                            if (!race.NeverMove ||
                                 "UjmeEv$,DdsbBFIJQSXclnw!=?".Contains(race.Character.ToString()))
                             {
                                 MsgPrint($"You kick {monsterName} in the ankle.");
@@ -8420,7 +8417,7 @@ namespace AngbandOS
                         // Slow if we had a knee attack
                         else if (specialEffect == Constants.MaSlow && totalDamage + Player.DamageBonus < monster.Health)
                         {
-                            if ((race.Flags1 & MonsterFlag1.Unique) == 0 && Program.Rng.DieRoll(Player.Level) > race.Level &&
+                            if (!race.Unique && Program.Rng.DieRoll(Player.Level) > race.Level &&
                                 monster.Speed > 60)
                             {
                                 MsgPrint($"{monsterName} starts limping slower.");
@@ -8532,7 +8529,7 @@ namespace AngbandOS
                             MsgPrint("Your hands stop glowing.");
                         }
                         // Some monsters are immune
-                        if ((race.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+                        if (race.ImmuneConfusion)
                         {
                             if (monster.IsVisible)
                             {
@@ -8565,8 +8562,8 @@ namespace AngbandOS
                     else if (chaosEffect && Level.GridPassable(y, x) && Program.Rng.DieRoll(90) > race.Level)
                     {
                         // Can't polymorph a unique or a guardian
-                        if (!((race.Flags1 & MonsterFlag1.Unique) != 0 || (race.Flags4 & MonsterFlag4.BreatheChaos) != 0 ||
-                              (race.Flags1 & MonsterFlag1.Guardian) != 0))
+                        if (!(race.Unique || race.BreatheChaos ||
+                              race.Guardian))
                         {
                             int newRaceIndex = PolymorphMonster(monster.Race);
                             if (newRaceIndex != monster.Race.Index)
@@ -9628,7 +9625,7 @@ namespace AngbandOS
             int auraDamage;
             MonsterRace race = monster.Race;
             // If we have a fire aura, apply it
-            if ((race.Flags2 & MonsterFlag2.FireAura) != 0)
+            if (race.FireAura)
             {
                 if (!Player.HasFireImmunity)
                 {
@@ -9649,7 +9646,7 @@ namespace AngbandOS
                 }
             }
             // If we have a lightning aura, apply it
-            if ((race.Flags2 & MonsterFlag2.LightningAura) != 0 && !Player.HasLightningImmunity)
+            if (race.LightningAura && !Player.HasLightningImmunity)
             {
                 auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.MonsterDesc(0x88);
@@ -15903,8 +15900,7 @@ namespace AngbandOS
             MonsterRaces.ResetGuardians();
             if (Quests.IsQuest(CurrentDepth))
             {
-                MonsterRaces[Quests.GetQuestMonster()].Flags1 |=
-                    MonsterFlag1.Guardian;
+                MonsterRaces[Quests.GetQuestMonster()].Guardian = true;
             }
             if (Program.Rng.PercentileRoll(4) && !CurDungeon.Tower)
             {
@@ -16415,16 +16411,16 @@ namespace AngbandOS
         {
             Monster mPtr = Level.Monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
-            bool living = (rPtr.Flags3 & MonsterFlag3.Undead) == 0;
-            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+            bool living = !rPtr.Undead;
+            if (rPtr.Demon)
             {
                 living = false;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0)
+            if (rPtr.Cthuloid)
             {
                 living = false;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.Nonliving) != 0)
+            if (rPtr.Nonliving)
             {
                 living = false;
             }
@@ -16592,11 +16588,11 @@ namespace AngbandOS
                             break;
                         }
                         s1 = "It is ";
-                        if ((rPtr.Flags1 & MonsterFlag1.Female) != 0)
+                        if (rPtr.Female)
                         {
                             s1 = "She is ";
                         }
-                        else if ((rPtr.Flags1 & MonsterFlag1.Male) != 0)
+                        else if (rPtr.Male)
                         {
                             s1 = "He is ";
                         }

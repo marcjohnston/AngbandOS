@@ -147,7 +147,7 @@ namespace AngbandOS
                 {
                     this[index].Level = SaveGame.Dungeons[i].FirstLevel;
                     this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].FirstGuardian);
-                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                    SaveGame.MonsterRaces[this[index].RIdx].OnlyGuardian = true;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
                     this[index].Killed = 0;
@@ -157,7 +157,7 @@ namespace AngbandOS
                 {
                     this[index].Level = SaveGame.Dungeons[i].SecondLevel;
                     this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].SecondGuardian);
-                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                    SaveGame.MonsterRaces[this[index].RIdx].OnlyGuardian = true;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
                     this[index].Killed = 0;
@@ -186,9 +186,9 @@ namespace AngbandOS
                         }
                     }
                 } while (sameLevel);
-                if ((SaveGame.MonsterRaces[this[index].RIdx].Flags1 & MonsterFlag1.Unique) != 0)
+                if (SaveGame.MonsterRaces[this[index].RIdx].Unique)
                 {
-                    SaveGame.MonsterRaces[this[index].RIdx].Flags1 |= MonsterFlag1.OnlyGuardian;
+                    SaveGame.MonsterRaces[this[index].RIdx].OnlyGuardian = true;
                 }
                 j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
                 while (this[index].Level <= SaveGame.Dungeons[j].Offset ||
@@ -251,12 +251,11 @@ namespace AngbandOS
 
         private int GetNumberMonster(int i)
         {
-            if ((SaveGame.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Unique) != 0 ||
-                (SaveGame.MonsterRaces[this[i].RIdx].Flags2 & MonsterFlag2.Multiply) != 0)
+            if (SaveGame.MonsterRaces[this[i].RIdx].Unique || SaveGame.MonsterRaces[this[i].RIdx].Multiply)
             {
                 return 1;
             }
-            int num = (SaveGame.MonsterRaces[this[i].RIdx].Flags1 & MonsterFlag1.Friends) != 0 ? 10 : 5;
+            int num = SaveGame.MonsterRaces[this[i].RIdx].Friends ? 10 : 5;
             num += Program.Rng.RandomBetween(1, (this[i].Level / 3) + 5);
             return num;
         }
@@ -311,7 +310,7 @@ namespace AngbandOS
                     rIdx = Program.Rng.RandomBetween(87, 573);
                     break;
             }
-            if ((SaveGame.MonsterRaces[rIdx].Flags2 & MonsterFlag2.Multiply) != 0)
+            if (SaveGame.MonsterRaces[rIdx].Multiply)
             {
                 return 0;
             }

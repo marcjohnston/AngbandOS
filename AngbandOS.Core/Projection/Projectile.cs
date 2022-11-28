@@ -390,7 +390,7 @@ namespace AngbandOS.Projection
                             continue;
                         }
                         MonsterRace refPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex].Race;
-                        if ((refPtr.Flags2 & MonsterFlag2.Reflecting) != 0 && Program.Rng.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
+                        if (refPtr.Reflecting && Program.Rng.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                         {
                             int tY, tX;
                             int maxAttempts = 10;
@@ -481,9 +481,9 @@ namespace AngbandOS.Projection
         protected string NoteDiesOrIsDestroyed(MonsterRace rPtr)
         {
             string noteDies = " dies.";
-            if ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 || (rPtr.Flags3 & MonsterFlag3.Undead) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Cthuloid) != 0 || (rPtr.Flags2 & MonsterFlag2.Stupid) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(rPtr.Character.ToString()))
+            if (rPtr.Demon || rPtr.Undead ||
+                rPtr.Cthuloid || rPtr.Stupid ||
+                rPtr.Nonliving || "Evg".Contains(rPtr.Character.ToString()))
             {
                 noteDies = " is destroyed.";
             }

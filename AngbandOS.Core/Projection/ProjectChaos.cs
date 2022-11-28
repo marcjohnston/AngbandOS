@@ -104,30 +104,30 @@ namespace AngbandOS.Projection
             }
             bool doPoly = true;
             int doConf = (5 + Program.Rng.DieRoll(11) + r) / (r + 1);
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheChaos) != 0 ||
-                ((rPtr.Flags3 & MonsterFlag3.Demon) != 0 && Program.Rng.DieRoll(3) == 1))
+            if (rPtr.BreatheChaos ||
+                (rPtr.Demon && Program.Rng.DieRoll(3) == 1))
             {
                 note = " resists.";
                 dam *= 3;
                 dam /= Program.Rng.DieRoll(6) + 6;
                 doPoly = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            if (rPtr.Unique)
             {
                 doPoly = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 doPoly = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -153,8 +153,8 @@ namespace AngbandOS.Projection
                     mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                 }
             }
-            else if (doConf != 0 && (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheConfusion) == 0 && (rPtr.Flags4 & MonsterFlag4.BreatheChaos) == 0)
+            else if (doConf != 0 && !rPtr.ImmuneConfusion &&
+                     !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
             {
                 if (mPtr.ConfusionLevel != 0)
                 {

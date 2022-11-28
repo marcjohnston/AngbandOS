@@ -27,11 +27,11 @@ namespace AngbandOS.Spells.Death
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+                if (rPtr.Unique)
                 {
                     continue;
                 }
-                if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+                if (rPtr.Guardian)
                 {
                     continue;
                 }

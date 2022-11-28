@@ -25,6 +25,8 @@ namespace AngbandOS
         public int RDeaths;
         public int RDropGold;
         public int RDropItem;
+        public bool Guardian;
+        public bool OnlyGuardian;
         public uint RFlags1;
         public uint RFlags2;
         public uint RFlags3;
@@ -81,18 +83,18 @@ namespace AngbandOS
                 knowledge.RProbed = true;
                 knowledge.RWake = Constants.MaxUchar;
                 knowledge.RIgnore = Constants.MaxUchar;
-                knowledge.RDropItem = ((_monsterType.Flags1 & MonsterFlag1.Drop_4D2) != 0 ? 8 : 0) +
-                                      ((_monsterType.Flags1 & MonsterFlag1.Drop_3D2) != 0 ? 6 : 0) +
-                                      ((_monsterType.Flags1 & MonsterFlag1.Drop_2D2) != 0 ? 4 : 0) +
-                                      ((_monsterType.Flags1 & MonsterFlag1.Drop_1D2) != 0 ? 2 : 0) +
-                                      ((_monsterType.Flags1 & MonsterFlag1.Drop90) != 0 ? 1 : 0) +
-                                      ((_monsterType.Flags1 & MonsterFlag1.Drop60) != 0 ? 1 : 0);
+                knowledge.RDropItem = (_monsterType.Drop_4D2 ? 8 : 0) +
+                                      (_monsterType.Drop_3D2 ? 6 : 0) +
+                                      (_monsterType.Drop_2D2 ? 4 : 0) +
+                                      (_monsterType.Drop_1D2 ? 2 : 0) +
+                                      (_monsterType.Drop90 ? 1 : 0) +
+                                      (_monsterType.Drop60 ? 1 : 0);
                 knowledge.RDropGold = knowledge.RDropItem;
-                if ((_monsterType.Flags1 & MonsterFlag1.OnlyDropGold) != 0)
+                if (_monsterType.OnlyDropGold)
                 {
                     knowledge.RDropItem = 0;
                 }
-                if ((_monsterType.Flags1 & MonsterFlag1.OnlyDropItem) != 0)
+                if (_monsterType.OnlyDropItem)
                 {
                     knowledge.RDropGold = 0;
                 }
@@ -105,11 +107,11 @@ namespace AngbandOS
                 knowledge.RFlags5 = _monsterType.Flags5;
                 knowledge.RFlags6 = _monsterType.Flags6;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Female) != 0)
+            if (_monsterType.Female)
             {
                 msex = 2;
             }
-            else if ((_monsterType.Flags1 & MonsterFlag1.Male) != 0)
+            else if (_monsterType.Male)
             {
                 msex = 1;
             }
@@ -119,81 +121,81 @@ namespace AngbandOS
             uint flags4 = _monsterType.Flags4 & knowledge.RFlags4;
             uint flags5 = _monsterType.Flags5 & knowledge.RFlags5;
             uint flags6 = _monsterType.Flags6 & knowledge.RFlags6;
-            if ((_monsterType.Flags1 & MonsterFlag1.Unique) != 0)
+            if (_monsterType.Unique)
             {
                 flags1 |= MonsterFlag1.Unique;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (_monsterType.Guardian)
             {
-                flags1 |= MonsterFlag1.Guardian;
+                Guardian = true;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Male) != 0)
+            if (_monsterType.Male)
             {
                 flags1 |= MonsterFlag1.Male;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Female) != 0)
+            if (_monsterType.Female)
             {
                 flags1 |= MonsterFlag1.Female;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Friends) != 0)
+            if (_monsterType.Friends)
             {
                 flags1 |= MonsterFlag1.Friends;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.Escorted) != 0)
+            if (_monsterType.Escorted)
             {
                 flags1 |= MonsterFlag1.Escorted;
             }
-            if ((_monsterType.Flags1 & MonsterFlag1.EscortsGroup) != 0)
+            if (_monsterType.EscortsGroup)
             {
                 flags1 |= MonsterFlag1.EscortsGroup;
             }
             if (knowledge.RTkills != 0 || knowledge.RProbed)
             {
-                if ((_monsterType.Flags3 & MonsterFlag3.Orc) != 0)
+                if (_monsterType.Orc)
                 {
                     flags3 |= MonsterFlag3.Orc;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Troll) != 0)
+                if (_monsterType.Troll)
                 {
                     flags3 |= MonsterFlag3.Troll;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Giant) != 0)
+                if (_monsterType.Giant)
                 {
                     flags3 |= MonsterFlag3.Giant;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (_monsterType.Dragon)
                 {
                     flags3 |= MonsterFlag3.Dragon;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Demon) != 0)
+                if (_monsterType.Demon)
                 {
                     flags3 |= MonsterFlag3.Demon;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Cthuloid) != 0)
+                if (_monsterType.Cthuloid)
                 {
                     flags3 |= MonsterFlag3.Cthuloid;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Undead) != 0)
+                if (_monsterType.Undead)
                 {
                     flags3 |= MonsterFlag3.Undead;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Evil) != 0)
+                if (_monsterType.Evil)
                 {
                     flags3 |= MonsterFlag3.Evil;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Good) != 0)
+                if (_monsterType.Good)
                 {
                     flags3 |= MonsterFlag3.Good;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.Animal) != 0)
+                if (_monsterType.Animal)
                 {
                     flags3 |= MonsterFlag3.Animal;
                 }
-                if ((_monsterType.Flags3 & MonsterFlag3.GreatOldOne) != 0)
+                if (_monsterType.GreatOldOne)
                 {
                     flags3 |= MonsterFlag3.GreatOldOne;
                 }
-                if ((_monsterType.Flags1 & MonsterFlag1.ForceMaxHp) != 0)
+                if (_monsterType.ForceMaxHp)
                 {
                     flags1 |= MonsterFlag1.ForceMaxHp;
                 }
@@ -1454,7 +1456,7 @@ namespace AngbandOS
                     _description.Append("No battles to the death are recalled. ");
                 }
             }
-            if ((flags1 & MonsterFlag1.Guardian) != 0)
+            if (Guardian)
             {
                 _description.Append("You feel an intense desire to kill this monster... ");
             }
@@ -1467,7 +1469,7 @@ namespace AngbandOS
             Colour a1 = _monsterType.Colour;
             SaveGame.Erase(0, 0, 255);
             SaveGame.Goto(0, 0);
-            if ((_monsterType.Flags1 & MonsterFlag1.Unique) == 0)
+            if (!_monsterType.Unique)
             {
                 SaveGame.Print(Colour.White, "The ", -1);
             }
@@ -1484,7 +1486,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if ((monsterType.Flags1 & MonsterFlag1.Unique) == 0)
+            if (!monsterType.Unique)
             {
                 return false;
             }
@@ -1501,7 +1503,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if ((monsterType.Flags1 & MonsterFlag1.Unique) == 0)
+            if (!monsterType.Unique)
             {
                 return false;
             }

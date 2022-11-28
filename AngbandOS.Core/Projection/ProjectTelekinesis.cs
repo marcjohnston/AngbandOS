@@ -38,19 +38,19 @@ namespace AngbandOS.Projection
             }
             int doDist = 7;
             int doStun = Program.Rng.DiceRoll((SaveGame.Player.Level / 10) + 3, dam) + 1;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 || rPtr.Level > 5 + Program.Rng.DieRoll(dam))
+            if (rPtr.Unique || rPtr.Level > 5 + Program.Rng.DieRoll(dam))
             {
                 doStun = 0;
                 obvious = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -71,8 +71,8 @@ namespace AngbandOS.Projection
                 mPtr.TeleportAway(SaveGame, doDist);
                 cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             }
-            else if (doStun != 0 && (rPtr.Flags4 & MonsterFlag4.BreatheSound) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheForce) == 0)
+            else if (doStun != 0 && !rPtr.BreatheSound &&
+                     !rPtr.BreatheForce)
             {
                 if (seen)
                 {

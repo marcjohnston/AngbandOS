@@ -42,7 +42,7 @@ namespace AngbandOS.Projection
                 note = " is immune.";
                 dam = 0;
             }
-            else if ((rPtr.Flags3 & MonsterFlag3.ResistWater) != 0)
+            else if (rPtr.ResistWater)
             {
                 note = " resists.";
                 dam *= 3;
@@ -52,14 +52,14 @@ namespace AngbandOS.Projection
                     rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistWater;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

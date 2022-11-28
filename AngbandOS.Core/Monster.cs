@@ -106,7 +106,7 @@ namespace AngbandOS
                 do
                 {
                     halluRace = SaveGame.MonsterRaces[Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2)];
-                } while ((halluRace.Flags1 & MonsterFlag1.Unique) != 0);
+                } while (halluRace.Unique);
                 string sillyName = halluRace.Name;
                 name = sillyName;
             }
@@ -115,11 +115,11 @@ namespace AngbandOS
             if (!seen || pron)
             {
                 int kind = 0x00;
-                if ((Race.Flags1 & MonsterFlag1.Female) != 0)
+                if (Race.Female)
                 {
                     kind = 0x20;
                 }
-                else if ((Race.Flags1 & MonsterFlag1.Male) != 0)
+                else if (Race.Male)
                 {
                     kind = 0x10;
                 }
@@ -230,11 +230,11 @@ namespace AngbandOS
             }
             else if ((mode & 0x02) != 0 && (mode & 0x01) != 0)
             {
-                if ((Race.Flags1 & MonsterFlag1.Female) != 0)
+                if (Race.Female)
                 {
                     desc = "herself";
                 }
-                else if ((Race.Flags1 & MonsterFlag1.Male) != 0)
+                else if (Race.Male)
                 {
                     desc = "himself";
                 }
@@ -245,7 +245,7 @@ namespace AngbandOS
             }
             else
             {
-                if ((Race.Flags1 & MonsterFlag1.Unique) != 0 && SaveGame.Player.TimedHallucinations == 0)
+                if (Race.Unique && SaveGame.Player.TimedHallucinations == 0)
                 {
                     desc = name;
                 }
@@ -280,13 +280,13 @@ namespace AngbandOS
             {
                 power = Race.Level + 10;
                 string mName = MonsterDesc(0);
-                if ((Race.Flags1 & MonsterFlag1.Unique) != 0)
+                if (Race.Unique)
                 {
                     power *= 2;
                 }
                 else
                 {
-                    if ((Race.Flags1 & MonsterFlag1.Friends) != 0)
+                    if (Race.Friends)
                     {
                         power /= 2;
                     }
@@ -299,7 +299,7 @@ namespace AngbandOS
                 {
                     return;
                 }
-                if ((Race.Flags2 & MonsterFlag2.EldritchHorror) == 0)
+                if (!Race.EldritchHorror)
                 {
                     return;
                 }
@@ -522,7 +522,7 @@ namespace AngbandOS
                 getsAngry = true;
             }
             // If we're unique, don't stay friendly
-            if ((Mind & Constants.SmFriendly) != 0 && !saveGame.Player.IsWizard && (Race.Flags1 & MonsterFlag1.Unique) != 0)
+            if ((Mind & Constants.SmFriendly) != 0 && !saveGame.Player.IsWizard && Race.Unique)
             {
                 getsAngry = true;
             }
@@ -557,7 +557,7 @@ namespace AngbandOS
             int oldY = MapY;
             int oldX = MapX;
             // If it's suitable for us to reproduce
-            if ((Race.Flags2 & MonsterFlag2.Multiply) != 0 && saveGame.Level.Monsters.NumRepro < Constants.MaxRepro && Generation < 10)
+            if (Race.Multiply && saveGame.Level.Monsters.NumRepro < Constants.MaxRepro && Generation < 10)
             {
                 // Find how many spaces we've got near us
                 int k;
@@ -619,7 +619,7 @@ namespace AngbandOS
             }
             // If we move randomly most of the time, have a high chance of putting four random moves
             // in the matrix
-            else if ((Race.Flags1 & MonsterFlag1.RandomMove50) != 0 && (Race.Flags1 & MonsterFlag1.RandomMove25) != 0 && Program.Rng.RandomLessThan(100) < 75)
+            else if (Race.RandomMove50 && Race.RandomMove25 && Program.Rng.RandomLessThan(100) < 75)
             {
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
@@ -633,7 +633,7 @@ namespace AngbandOS
                 potentialMoves[3] = 5;
             }
             // If we have a moderate chance of moving randomly, maybe put four random moves in our matrix
-            else if ((Race.Flags1 & MonsterFlag1.RandomMove50) != 0 && Program.Rng.RandomLessThan(100) < 50)
+            else if (Race.RandomMove50 && Program.Rng.RandomLessThan(100) < 50)
             {
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
@@ -646,7 +646,7 @@ namespace AngbandOS
                 potentialMoves[3] = 5;
             }
             // If we have a low chance of moving randomly, maybe put four random moves in our matrix
-            else if ((Race.Flags1 & MonsterFlag1.RandomMove25) != 0 && Program.Rng.RandomLessThan(100) < 25)
+            else if (Race.RandomMove25 && Program.Rng.RandomLessThan(100) < 25)
             {
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
@@ -736,13 +736,13 @@ namespace AngbandOS
                 {
                 }
                 // If we can phase through walls then they don't block us
-                else if ((Race.Flags2 & MonsterFlag2.PassWall) != 0)
+                else if (Race.PassWall)
                 {
                     doMove = true;
                     didPassWall = true;
                 }
                 // If we can tunnel through walls then they don't block us
-                else if ((Race.Flags2 & MonsterFlag2.KillWall) != 0)
+                else if (Race.KillWall)
                 {
                     doMove = true;
                     didKillWall = true;
@@ -766,7 +766,7 @@ namespace AngbandOS
                     bool mayBash = true;
                     doTurn = true;
                     // If we can open the door then try to do so
-                    if ((Race.Flags2 & MonsterFlag2.OpenDoor) != 0)
+                    if (Race.OpenDoor)
                     {
                         // We can always open unlocked doors
                         if (tile.FeatureType.Name == "LockedDoor0" || tile.FeatureType.Name == "SecretDoor")
@@ -786,7 +786,7 @@ namespace AngbandOS
                         }
                     }
                     // If we can't open doors (or failed to unlock the door), then we can bash it down
-                    if (mayBash && (Race.Flags2 & MonsterFlag2.BashDoor) != 0)
+                    if (mayBash && Race.BashDoor)
                     {
                         int k = int.Parse(tile.FeatureType.Name.Substring(10));
                         // If we succeeded, let the player hear it
@@ -817,7 +817,7 @@ namespace AngbandOS
                     }
                 }
                 // If we're going to move onto an Elder Sign and we're capable of doing attacks
-                if (doMove && tile.FeatureType.Name == "ElderSign" && (Race.Flags1 & MonsterFlag1.NeverAttack) == 0)
+                if (doMove && tile.FeatureType.Name == "ElderSign" && !Race.NeverAttack)
                 {
                     // Assume we're not moving
                     doMove = false;
@@ -837,7 +837,7 @@ namespace AngbandOS
                 }
                 // If we're going to move onto a Yellow Sign and we can attack
                 else if (doMove && tile.FeatureType.Name == "YellowSign" &&
-                         (Race.Flags1 & MonsterFlag1.NeverAttack) == 0)
+                         !Race.NeverAttack)
                 {
                     // Assume we're not moving
                     doMove = false;
@@ -865,7 +865,7 @@ namespace AngbandOS
                     }
                 }
                 // If we're going to attack the player, but our race never attacks, then cancel the move
-                if (doMove && newY == saveGame.Player.MapY && newX == saveGame.Player.MapX && (Race.Flags1 & MonsterFlag1.NeverAttack) != 0)
+                if (doMove && newY == saveGame.Player.MapY && newX == saveGame.Player.MapX && Race.NeverAttack)
                 {
                     doMove = false;
                 }
@@ -884,7 +884,7 @@ namespace AngbandOS
                     doMove = false;
                     // If we can trample other monsters on our team and we're tougher than the one
                     // that's in our way...
-                    if ((Race.Flags2 & MonsterFlag2.KillBody) != 0 && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && !((Mind & Constants.SmFriendly) != 0 && (monsterInTargetTile.Mind & Constants.SmFriendly) != 0))
+                    if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && !((Mind & Constants.SmFriendly) != 0 && (monsterInTargetTile.Mind & Constants.SmFriendly) != 0))
                     {
                         // Remove the other monster and replace it
                         doMove = true;
@@ -907,14 +907,14 @@ namespace AngbandOS
                     }
                     // If the other monster is on our team and we can't trample it, maybe we can
                     // push past
-                    else if ((Race.Flags2 & MonsterFlag2.MoveBody) != 0 && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && saveGame.Level.GridPassable(MapY, MapX))
+                    else if (Race.MoveBody && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && saveGame.Level.GridPassable(MapY, MapX))
                     {
                         doMove = true;
                         didMoveBody = true;
                     }
                 }
                 // If we're going to do a move but we can't move, cancel it
-                if (doMove && (Race.Flags1 & MonsterFlag1.NeverMove) != 0)
+                if (doMove && Race.NeverMove)
                 {
                     doMove = false;
                 }
@@ -960,7 +960,7 @@ namespace AngbandOS
                             continue;
                         }
                         // If we pick up or stomp on items, check the item type
-                        if (((Race.Flags2 & MonsterFlag2.TakeItem) != 0 || (Race.Flags2 & MonsterFlag2.KillItem) != 0) && (Mind & Constants.SmFriendly) == 0)
+                        if ((Race.TakeItem || Race.KillItem) && (Mind & Constants.SmFriendly) == 0)
                         {
                             bool willHurt = false;
                             item.RefreshFlagBasedProperties();
@@ -1005,7 +1005,7 @@ namespace AngbandOS
                             // Monsters won't pick up artifacts or items that hurt them
                             if (item.IsFixedArtifact() || willHurt || !string.IsNullOrEmpty(item.RandartName))
                             {
-                                if ((Race.Flags2 & MonsterFlag2.TakeItem) != 0)
+                                if (Race.TakeItem)
                                 {
                                     didTakeItem = true;
                                     if (IsVisible && saveGame.Level.PlayerHasLosBold(newY, newX))
@@ -1015,7 +1015,7 @@ namespace AngbandOS
                                 }
                             }
                             // If we picked up the item and the player saw, let them know
-                            else if ((Race.Flags2 & MonsterFlag2.TakeItem) != 0)
+                            else if (Race.TakeItem)
                             {
                                 didTakeItem = true;
                                 if (saveGame.Level.PlayerHasLosBold(newY, newX))
@@ -1125,7 +1125,7 @@ namespace AngbandOS
             int ySaver = target.MapY;
             int xSaver = target.MapX;
             // If we never attack then we shouldn't this time
-            if ((Race.Flags1 & MonsterFlag1.NeverAttack) != 0)
+            if (Race.NeverAttack)
             {
                 return false;
             }
@@ -1331,7 +1331,7 @@ namespace AngbandOS
                             // If we touched the target we might get burned or zapped
                             if (touched)
                             {
-                                if ((targetRace.Flags2 & MonsterFlag2.FireAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
+                                if (targetRace.FireAura && !Race.ImmuneFire)
                                 {
                                     if (IsVisible || target.IsVisible)
                                     {
@@ -1346,7 +1346,7 @@ namespace AngbandOS
                                     }
                                     saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new ProjectFire(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                                 }
-                                if ((targetRace.Flags2 & MonsterFlag2.LightningAura) != 0 && (Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
+                                if (targetRace.LightningAura && !Race.ImmuneLightning)
                                 {
                                     if (IsVisible || target.IsVisible)
                                     {
@@ -1480,7 +1480,7 @@ namespace AngbandOS
             }
             // If we're smart and badly injured, we may want to prioritise spells that disable the
             // player, summon help, or let us escape over spells that do direct damage
-            if ((Race.Flags2 & MonsterFlag2.Smart) != 0 && Health < MaxHealth / 10 && Program.Rng.RandomLessThan(100) < 50)
+            if (Race.Smart && Health < MaxHealth / 10 && Program.Rng.RandomLessThan(100) < 50)
             {
                 f4 &= MonsterFlag4.IntMask;
                 f5 &= MonsterFlag5.IntMask;
@@ -1499,7 +1499,7 @@ namespace AngbandOS
                 return false;
             }
             // If we don't have a clean shot, and we're stupid, remove bolt spells
-            if (((f4 & MonsterFlag4.BoltMask) != 0 || (f5 & MonsterFlag5.BoltMask) != 0 || (f6 & MonsterFlag6.BoltMask) != 0) && (Race.Flags2 & MonsterFlag2.Stupid) == 0 && !saveGame.CleanShot(MapY, MapX, saveGame.Player.MapY, saveGame.Player.MapX))
+            if (((f4 & MonsterFlag4.BoltMask) != 0 || (f5 & MonsterFlag5.BoltMask) != 0 || (f6 & MonsterFlag6.BoltMask) != 0) && !Race.Stupid && !saveGame.CleanShot(MapY, MapX, saveGame.Player.MapY, saveGame.Player.MapX))
             {
                 f4 &= ~MonsterFlag4.BoltMask;
                 f5 &= ~MonsterFlag5.BoltMask;
@@ -1507,7 +1507,7 @@ namespace AngbandOS
             }
             // If there's nowhere around the player to put a summoned creature, then remove
             // summoning spells
-            if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && (Race.Flags2 & MonsterFlag2.Stupid) == 0 && !saveGame.SummonPossible(saveGame.Player.MapY, saveGame.Player.MapX))
+            if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && !Race.Stupid && !saveGame.SummonPossible(saveGame.Player.MapY, saveGame.Player.MapX))
             {
                 f4 &= ~MonsterFlag4.SummonMask;
                 f5 &= ~MonsterFlag5.SummonMask;
@@ -1565,7 +1565,7 @@ namespace AngbandOS
             }
             // Stupid monsters may fail spells
             int failrate = 25 - ((monsterLevel + 3) / 4);
-            if ((Race.Flags2 & MonsterFlag2.Stupid) != 0)
+            if (Race.Stupid)
             {
                 failrate = 0;
             }
@@ -2413,7 +2413,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        string kin = (Race.Flags1 & MonsterFlag1.Unique) != 0 ? "minions" : "kin";
+                        string kin = Race.Unique ? "minions" : "kin";
                         saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
                     }
                     for (k = 0; k < 6; k++)
@@ -2802,7 +2802,7 @@ namespace AngbandOS
                 uint f6 = Race.Flags6;
                 // If we're smart and badly injured, we may want to prioritise spells that disable
                 // the target, summon help, or let us escape over spells that do direct damage
-                if ((Race.Flags2 & MonsterFlag2.Smart) != 0 && Health < MaxHealth / 10 &&
+                if (Race.Smart && Health < MaxHealth / 10 &&
                     Program.Rng.RandomLessThan(100) < 50)
                 {
                     f4 &= MonsterFlag4.IntMask;
@@ -2816,7 +2816,7 @@ namespace AngbandOS
                 }
                 // If there's nowhere around the target to put a summoned creature, then remove
                 // summoning spells
-                if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && (Race.Flags2 & MonsterFlag2.Stupid) == 0 && !saveGame.SummonPossible(target.MapY, target.MapX))
+                if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && !Race.Stupid && !saveGame.SummonPossible(target.MapY, target.MapX))
                 {
                     f4 &= ~MonsterFlag4.SummonMask;
                     f5 &= ~MonsterFlag5.SummonMask;
@@ -3204,10 +3204,10 @@ namespace AngbandOS
                         {
                             saveGame.MsgPrint($"{monsterName} gazes intently at {targetName}");
                         }
-                        if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0 || (targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0 ||
+                        if (targetRace.Unique || targetRace.ImmuneConfusion ||
                             targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
                         {
-                            if ((targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0 && seen)
+                            if (targetRace.ImmuneConfusion && seen)
                             {
                                 targetRace.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
                             }
@@ -3232,10 +3232,10 @@ namespace AngbandOS
                         {
                             saveGame.MsgPrint($"{monsterName} gazes intently at {targetName}");
                         }
-                        if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0 || (targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0 ||
+                        if (targetRace.Unique || targetRace.ImmuneConfusion ||
                             targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
                         {
-                            if ((targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0 && seen)
+                            if (targetRace.ImmuneConfusion && seen)
                             {
                                 targetRace.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
                             }
@@ -3513,7 +3513,7 @@ namespace AngbandOS
                         {
                             saveGame.MsgPrint($"{monsterName} casts a fearful illusion at {targetName}");
                         }
-                        if ((targetRace.Flags3 & MonsterFlag3.ImmuneFear) != 0)
+                        if (targetRace.ImmuneFear)
                         {
                             if (seeTarget)
                             {
@@ -3550,7 +3550,7 @@ namespace AngbandOS
                             string it = targetName != "it" ? "s" : "'s";
                             saveGame.MsgPrint($"{monsterName} casts a spell, burning {targetName}{it} eyes.");
                         }
-                        if ((targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+                        if (targetRace.ImmuneConfusion)
                         {
                             if (seeTarget)
                             {
@@ -3586,7 +3586,7 @@ namespace AngbandOS
                         {
                             saveGame.MsgPrint($"{monsterName} creates a mesmerising illusion in front of {targetName}");
                         }
-                        if ((targetRace.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+                        if (targetRace.ImmuneConfusion)
                         {
                             if (seeTarget)
                             {
@@ -3619,7 +3619,7 @@ namespace AngbandOS
                             string it = targetName == "it" ? "s" : "'s";
                             saveGame.MsgPrint($"{monsterName} drains power from {targetName}{it} muscles.");
                         }
-                        if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0)
+                        if (targetRace.Unique)
                         {
                             if (seeTarget)
                             {
@@ -3651,7 +3651,7 @@ namespace AngbandOS
                         {
                             saveGame.MsgPrint($"{monsterName} stares intently at {targetName}");
                         }
-                        if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0 || (targetRace.Flags3 & MonsterFlag3.ImmuneStun) != 0)
+                        if (targetRace.Unique || targetRace.ImmuneStun)
                         {
                             if (seeTarget)
                             {
@@ -3711,7 +3711,7 @@ namespace AngbandOS
                         saveGame.MsgPrint(!seeMonster
                             ? "You hear someone invoke the Dread Curse of Azathoth!"
                             : $"{monsterName} invokes the Dread Curse of Azathoth on {targetName}");
-                        if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0)
+                        if (targetRace.Unique)
                         {
                             if (!blind && seeTarget)
                             {
@@ -3811,9 +3811,9 @@ namespace AngbandOS
                         bool resistsTele = false;
                         saveGame.Disturb(true);
                         saveGame.MsgPrint($"{monsterName} teleports {targetName} away.");
-                        if ((targetRace.Flags3 & MonsterFlag3.ResistTeleport) != 0)
+                        if (targetRace.ResistTeleport)
                         {
-                            if ((targetRace.Flags1 & MonsterFlag1.Unique) != 0)
+                            if (targetRace.Unique)
                             {
                                 if (seeTarget)
                                 {
@@ -3873,7 +3873,7 @@ namespace AngbandOS
                         }
                         else
                         {
-                            string kin = (Race.Flags1 & MonsterFlag1.Unique) != 0 ? "minions" : "kin";
+                            string kin = Race.Unique ? "minions" : "kin";
                             saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
                         }
                         for (k = 0; k < 6; k++)
@@ -4459,7 +4459,7 @@ namespace AngbandOS
             // Radius 0 means use the default radius
             if (radius < 1)
             {
-                radius = (Race.Flags2 & MonsterFlag2.Powerful) != 0 ? 3 : 2;
+                radius = Race.Powerful ? 3 : 2;
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
@@ -4478,7 +4478,7 @@ namespace AngbandOS
             const ProjectionFlag projectionFlag = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
             if (radius < 1)
             {
-                radius = (Race.Flags2 & MonsterFlag2.Powerful) != 0 ? 3 : 2;
+                radius = Race.Powerful ? 3 : 2;
             }
             saveGame.Project(GetMonsterIndex(saveGame), radius, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlag);
         }
@@ -4498,7 +4498,7 @@ namespace AngbandOS
             // Radius 0 means use the default radius
             if (radius < 1)
             {
-                radius = (Race.Flags2 & MonsterFlag2.Powerful) != 0 ? 3 : 2;
+                radius = Race.Powerful ? 3 : 2;
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
@@ -4541,7 +4541,7 @@ namespace AngbandOS
             if (Health < 0)
             {
                 // Uniques and guardians can never be killed by other monsters
-                if ((Race.Flags1 & MonsterFlag1.Unique) != 0 || (Race.Flags1 & MonsterFlag1.Guardian) != 0)
+                if (Race.Unique || Race.Guardian)
                 {
                     Health = 1;
                 }
@@ -4560,9 +4560,9 @@ namespace AngbandOS
                     {
                     }
                     // Some non-living things are destroyed rather than dying
-                    else if ((Race.Flags3 & MonsterFlag3.Demon) != 0 || (Race.Flags3 & MonsterFlag3.Undead) != 0 ||
-                             (Race.Flags3 & MonsterFlag3.Cthuloid) != 0 || (Race.Flags2 & MonsterFlag2.Stupid) != 0 ||
-                             (Race.Flags3 & MonsterFlag3.Nonliving) != 0 || "Evg".Contains(Race.Character.ToString()))
+                    else if (Race.Demon || Race.Undead ||
+                             Race.Cthuloid || Race.Stupid ||
+                             Race.Nonliving || "Evg".Contains(Race.Character.ToString()))
                     {
                         saveGame.MsgPrint($"{monsterName} is destroyed.");
                     }
@@ -4594,7 +4594,7 @@ namespace AngbandOS
                 }
             }
             // If we weren't already afraid, this attack might make us afraid
-            if (FearLevel == 0 && (Race.Flags3 & MonsterFlag3.ImmuneFear) == 0)
+            if (FearLevel == 0 && !Race.ImmuneFear)
             {
                 int percentage = 100 * Health / MaxHealth;
                 if ((percentage <= 10 && Program.Rng.RandomLessThan(10) < percentage) || (damage >= Health && Program.Rng.RandomLessThan(100) < 80))
@@ -4636,7 +4636,7 @@ namespace AngbandOS
             modifiedFlags5 = initialFlags5;
             modifiedFlags6 = initialFlags6;
             // If we're stupid, we won't realise how ineffective things are
-            if ((Race.Flags2 & MonsterFlag2.Stupid) != 0)
+            if (Race.Stupid)
             {
                 return;
             }
@@ -5115,7 +5115,7 @@ namespace AngbandOS
         /// <returns> True if it should happen, or false if it should not </returns>
         private bool RealiseSpellIsUseless(int percentage)
         {
-            if ((Race.Flags2 & MonsterFlag2.Smart) == 0)
+            if (!Race.Smart)
             {
                 percentage /= 2;
             }
@@ -5145,8 +5145,8 @@ namespace AngbandOS
             if ((Mind & Constants.SmFriendly) == 0)
             {
                 // If we're a pack animal that can't go through walls
-                if ((Race.Flags1 & MonsterFlag1.Friends) != 0 && (Race.Flags3 & MonsterFlag3.Animal) != 0 &&
-                    (Race.Flags2 & MonsterFlag2.PassWall) == 0 && (Race.Flags2 & MonsterFlag2.KillWall) == 0)
+                if (Race.Friends && Race.Animal &&
+                    !Race.PassWall && !Race.KillWall)
                 {
                     int room = 0;
                     // Check if the player is in a room by counting the room tiles around them
@@ -5169,7 +5169,7 @@ namespace AngbandOS
                 }
                 // If we're not done and we have friends make our movement slightly depend on our
                 // index so we spread out and don't block each other
-                if (!done && (Race.Flags1 & MonsterFlag1.Friends) != 0)
+                if (!done && Race.Friends)
                 {
                     for (int i = 0; i < 8; i++)
                     {
@@ -5481,11 +5481,11 @@ namespace AngbandOS
         private void TrackPlayerByScent(SaveGame saveGame, MapCoordinate target)
         {
             // If we can move through walls then we don't need to adjust anything
-            if ((Race.Flags2 & MonsterFlag2.PassWall) != 0)
+            if (Race.PassWall)
             {
                 return;
             }
-            if ((Race.Flags2 & MonsterFlag2.KillWall) != 0)
+            if (Race.KillWall)
             {
                 return;
             }
@@ -5676,7 +5676,7 @@ namespace AngbandOS
             bool fear = false;
             bool alive = true;
             // If the monster never attacks, then it shouldn't be attacking us now
-            if ((Race.Flags1 & MonsterFlag1.NeverAttack) != 0)
+            if (Race.NeverAttack)
             {
                 return;
             }
@@ -5728,7 +5728,7 @@ namespace AngbandOS
                     {
                         saveGame.Disturb(true);
                         // Protection From Evil might repel the attack
-                        if (saveGame.Player.TimedProtectionFromEvil > 0 && (Race.Flags3 & MonsterFlag3.Evil) != 0 && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
+                        if (saveGame.Player.TimedProtectionFromEvil > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
                         {
                             if (IsVisible)
                             {
@@ -6000,7 +6000,7 @@ namespace AngbandOS
                         {
                             if (saveGame.Player.HasFireShield && alive)
                             {
-                                if ((Race.Flags3 & MonsterFlag3.ImmuneFire) == 0)
+                                if (!Race.ImmuneFire)
                                 {
                                     saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
                                     if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
@@ -6021,7 +6021,7 @@ namespace AngbandOS
                             }
                             if (saveGame.Player.HasLightningShield && alive)
                             {
-                                if ((Race.Flags3 & MonsterFlag3.ImmuneLightning) == 0)
+                                if (!Race.ImmuneLightning)
                                 {
                                     saveGame.MsgPrint($"{monsterName} gets zapped!");
                                     if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
@@ -6288,7 +6288,7 @@ namespace AngbandOS
         private int ChooseSpellAgainstPlayer(SaveGame saveGame, int[] spells, int listSize)
         {
             // If the monster is stupid, cast a random spell
-            if ((Race.Flags2 & MonsterFlag2.Stupid) != 0)
+            if (Race.Stupid)
             {
                 return spells[Program.Rng.RandomLessThan(listSize)];
             }

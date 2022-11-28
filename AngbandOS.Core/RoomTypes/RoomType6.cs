@@ -97,7 +97,7 @@ namespace AngbandOS.Core.RoomTypes
                     do
                     {
                         _templateRace = Program.Rng.DieRoll(saveGame.MonsterRaces.Count - 2);
-                    } while ((saveGame.MonsterRaces[_templateRace].Flags1 & MonsterFlag1.Unique) != 0 ||
+                    } while (saveGame.MonsterRaces[_templateRace].Unique ||
                              saveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                              saveGame.Difficulty + Program.Rng.DieRoll(5));
                     getMonNumHook = new SymbolMonsterSelector(saveGame.MonsterRaces[_templateRace].Character);
@@ -121,37 +121,35 @@ namespace AngbandOS.Core.RoomTypes
                 {
                     case 0:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheAcid;
+                            getMonNumHook = new AcidBreathingDragonMonsterSelector();
                             break;
                         }
                     case 1:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheLightning;
+                            getMonNumHook = new LightningBreathingDragonMonsterSelector();
                             break;
                         }
                     case 2:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheFire;
+                            getMonNumHook = new FireBreathingDragonMonsterSelector();
                             break;
                         }
                     case 3:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheCold;
+                            getMonNumHook = new ColdBreathingDragonMonsterSelector();
                             break;
                         }
                     case 4:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreathePoison;
+                            getMonNumHook = new PoisonBreathingDragonMonsterSelector();
                             break;
                         }
                     default:
                         {
-                            _vaultAuxDragonMask4 = MonsterFlag4.BreatheAcid | MonsterFlag4.BreatheLightning |
-                                                   MonsterFlag4.BreatheFire | MonsterFlag4.BreatheCold | MonsterFlag4.BreathePoison;
+                            getMonNumHook = new AnyBreathingDragonMonsterSelector();
                             break;
                         }
                 }
-                getMonNumHook = new DragonAuxMonsterSelector(_vaultAuxDragonMask4);
             }
             else
             {

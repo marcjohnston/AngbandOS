@@ -49,14 +49,14 @@ namespace AngbandOS.Projection
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
             string mName = mPtr.MonsterDesc(0);
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -26,7 +26,7 @@ namespace AngbandOS.Projection
         protected override bool ProjectileAngersMonster(Monster mPtr)
         {
             MonsterRace rPtr = mPtr.Race;
-            return (rPtr.Flags3 & MonsterFlag3.Undead) == 0 && (rPtr.Flags3 & MonsterFlag3.Nonliving) == 0;
+            return !rPtr.Undead && !rPtr.Nonliving;
         }
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -57,14 +57,14 @@ namespace AngbandOS.Projection
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -199,7 +199,7 @@ namespace AngbandOS
             RefreshFlagBasedProperties();
             if (BaseItemCategory.GetsDamageMultiplier)
             {
-                if (Characteristics.SlayAnimal && (rPtr.Flags3 & MonsterFlag3.Animal) != 0)
+                if (Characteristics.SlayAnimal && rPtr.Animal)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -210,7 +210,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (Characteristics.SlayEvil && (rPtr.Flags3 & MonsterFlag3.Evil) != 0)
+                if (Characteristics.SlayEvil && rPtr.Evil)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -221,7 +221,7 @@ namespace AngbandOS
                         mult = 2;
                     }
                 }
-                if (Characteristics.SlayUndead && (rPtr.Flags3 & MonsterFlag3.Undead) != 0)
+                if (Characteristics.SlayUndead && rPtr.Undead)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -232,7 +232,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.SlayDemon && (rPtr.Flags3 & MonsterFlag3.Demon) != 0)
+                if (Characteristics.SlayDemon && rPtr.Demon)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -243,7 +243,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.SlayOrc && (rPtr.Flags3 & MonsterFlag3.Orc) != 0)
+                if (Characteristics.SlayOrc && rPtr.Orc)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -254,7 +254,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.SlayTroll && (rPtr.Flags3 & MonsterFlag3.Troll) != 0)
+                if (Characteristics.SlayTroll && rPtr.Troll)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -265,7 +265,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.SlayGiant && (rPtr.Flags3 & MonsterFlag3.Giant) != 0)
+                if (Characteristics.SlayGiant && rPtr.Giant)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -276,7 +276,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.SlayDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (Characteristics.SlayDragon && rPtr.Dragon)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -287,7 +287,7 @@ namespace AngbandOS
                         mult = 3;
                     }
                 }
-                if (Characteristics.KillDragon && (rPtr.Flags3 & MonsterFlag3.Dragon) != 0)
+                if (Characteristics.KillDragon && rPtr.Dragon)
                 {
                     if (mPtr.IsVisible)
                     {
@@ -304,7 +304,7 @@ namespace AngbandOS
                 }
                 if (Characteristics.BrandAcid)
                 {
-                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneAcid) != 0)
+                    if (rPtr.ImmuneAcid)
                     {
                         if (mPtr.IsVisible)
                         {
@@ -321,7 +321,7 @@ namespace AngbandOS
                 }
                 if (Characteristics.BrandElec)
                 {
-                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneLightning) != 0)
+                    if (rPtr.ImmuneLightning)
                     {
                         if (mPtr.IsVisible)
                         {
@@ -338,7 +338,7 @@ namespace AngbandOS
                 }
                 if (Characteristics.BrandFire)
                 {
-                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneFire) != 0)
+                    if (rPtr.ImmuneFire)
                     {
                         if (mPtr.IsVisible)
                         {
@@ -355,7 +355,7 @@ namespace AngbandOS
                 }
                 if (Characteristics.BrandCold)
                 {
-                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneCold) != 0)
+                    if (rPtr.ImmuneCold)
                     {
                         if (mPtr.IsVisible)
                         {
@@ -372,7 +372,7 @@ namespace AngbandOS
                 }
                 if (Characteristics.BrandPois)
                 {
-                    if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
+                    if (rPtr.ImmunePoison)
                     {
                         if (mPtr.IsVisible)
                         {

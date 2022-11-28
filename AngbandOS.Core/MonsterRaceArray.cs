@@ -69,7 +69,7 @@ namespace AngbandOS
         {
             foreach (MonsterRace race in this)
             {
-                race.Flags1 &= ~MonsterFlag1.Guardian;
+                race.Guardian = false;
             }
         }
 
@@ -77,7 +77,7 @@ namespace AngbandOS
         {
             foreach (MonsterRace race in this)
             {
-                race.Flags1 &= ~MonsterFlag1.OnlyGuardian;
+                race.OnlyGuardian = false;
             }
         }
     }

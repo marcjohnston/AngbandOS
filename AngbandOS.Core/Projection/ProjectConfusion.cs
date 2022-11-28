@@ -37,25 +37,25 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             int doConf = (10 + Program.Rng.DieRoll(15) + r) / (r + 1);
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheConfusion) != 0)
+            if (rPtr.BreatheConfusion)
             {
                 note = " resists.";
                 dam *= 2;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            else if ((rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+            else if (rPtr.ImmuneConfusion)
             {
                 note = " resists somewhat.";
                 dam /= 2;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -66,8 +66,8 @@ namespace AngbandOS.Projection
             {
                 note = noteDies;
             }
-            else if (doConf != 0 && (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheConfusion) == 0 && (rPtr.Flags4 & MonsterFlag4.BreatheChaos) == 0)
+            else if (doConf != 0 && !rPtr.ImmuneConfusion &&
+                     !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
             {
                 int tmp;
                 if (mPtr.ConfusionLevel != 0)

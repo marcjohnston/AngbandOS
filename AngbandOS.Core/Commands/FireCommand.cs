@@ -139,8 +139,8 @@ namespace AngbandOS.Commands
                     if (saveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
-                        if ((race.Flags3 & MonsterFlag3.Demon) != 0 || (race.Flags3 & MonsterFlag3.Undead) != 0 ||
-                            (race.Flags3 & MonsterFlag3.Cthuloid) != 0 || (race.Flags2 & MonsterFlag2.Stupid) != 0 ||
+                        if (race.Demon || race.Undead ||
+                            race.Cthuloid || race.Stupid ||
                             "Evg".Contains(race.Character.ToString()))
                         {
                             noteDies = " is destroyed.";

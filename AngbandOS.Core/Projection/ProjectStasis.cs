@@ -37,7 +37,7 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             string note;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 ||
+            if (rPtr.Unique ||
                 rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 note = " is unaffected!";
@@ -49,14 +49,14 @@ namespace AngbandOS.Projection
                 doSleep = 500;
             }
             dam = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

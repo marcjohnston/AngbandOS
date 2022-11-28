@@ -37,7 +37,7 @@ namespace AngbandOS.Projection
                 obvious = true;
             }
             int doFear = Program.Rng.DiceRoll(3, dam / 2) + 1;
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 || (rPtr.Flags3 & MonsterFlag3.ImmuneFear) != 0 ||
+            if (rPtr.Unique || rPtr.ImmuneFear ||
                 rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 note = " is unaffected!";
@@ -45,14 +45,14 @@ namespace AngbandOS.Projection
                 doFear = 0;
             }
             dam = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

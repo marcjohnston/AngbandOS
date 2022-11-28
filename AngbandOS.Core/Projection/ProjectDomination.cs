@@ -27,7 +27,7 @@ namespace AngbandOS.Projection
         {
             // Only evil friends are affected.
             MonsterRace rPtr = mPtr.Race;
-            return (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) != 0;
+            return rPtr.ImmuneConfusion;
         }
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -46,10 +46,10 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0 || (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) != 0 ||
+            if (rPtr.Unique || rPtr.ImmuneConfusion ||
                 rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
-                if ((rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+                if (rPtr.ImmuneConfusion)
                 {
                     if (seen)
                     {
@@ -57,7 +57,7 @@ namespace AngbandOS.Projection
                     }
                 }
                 doConf = 0;
-                if (((rPtr.Flags3 & MonsterFlag3.Undead) != 0 || (rPtr.Flags3 & MonsterFlag3.Demon) != 0) &&
+                if ((rPtr.Undead || rPtr.Demon) &&
                     rPtr.Level > SaveGame.Player.Level / 2 && Program.Rng.DieRoll(2) == 1)
                 {
                     string s = seen ? "'s" : "s";
@@ -80,7 +80,7 @@ namespace AngbandOS.Projection
 
                             default:
                                 {
-                                    if ((rPtr.Flags3 & MonsterFlag3.ImmuneFear) != 0)
+                                    if (rPtr.ImmuneFear)
                                     {
                                         note = " is unaffected.";
                                     }
@@ -101,7 +101,7 @@ namespace AngbandOS.Projection
             }
             else
             {
-                if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+                if (rPtr.Guardian)
                 {
                     note = " hates you too much!";
                 }
@@ -132,14 +132,14 @@ namespace AngbandOS.Projection
                 }
             }
             dam = 0;
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {
@@ -151,8 +151,8 @@ namespace AngbandOS.Projection
             {
                 note = noteDies;
             }
-            else if (doStun != 0 && (rPtr.Flags4 & MonsterFlag4.BreatheSound) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheForce) == 0)
+            else if (doStun != 0 && !rPtr.BreatheSound &&
+                     !rPtr.BreatheForce)
             {
                 if (seen)
                 {
@@ -170,8 +170,8 @@ namespace AngbandOS.Projection
                 }
                 mPtr.StunLevel = tmp < 200 ? tmp : 200;
             }
-            else if (doConf != 0 && (rPtr.Flags3 & MonsterFlag3.ImmuneConfusion) == 0 &&
-                     (rPtr.Flags4 & MonsterFlag4.BreatheConfusion) == 0 && (rPtr.Flags4 & MonsterFlag4.BreatheChaos) == 0)
+            else if (doConf != 0 && !rPtr.ImmuneConfusion &&
+                     !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
             {
                 if (seen)
                 {

@@ -61,21 +61,21 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags4 & MonsterFlag4.BreatheDark) != 0 || (rPtr.Flags3 & MonsterFlag3.Orc) != 0 ||
-                (rPtr.Flags3 & MonsterFlag3.HurtByLight) != 0)
+            if (rPtr.BreatheDark || rPtr.Orc ||
+                rPtr.HurtByLight)
             {
                 note = " resists.";
                 dam *= 2;
                 dam /= Program.Rng.DieRoll(6) + 6;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

@@ -37,7 +37,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if ((rPtr.Flags3 & MonsterFlag3.ImmunePoison) != 0)
+            if (rPtr.ImmunePoison)
             {
                 note = " resists.";
                 dam *= 3;
@@ -51,22 +51,22 @@ namespace AngbandOS.Projection
             {
                 doPoly = true;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            if (rPtr.Unique)
             {
                 doPoly = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 doPoly = false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)
                 {
                     dam = mPtr.Health;
                 }
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Guardian) != 0)
+            if (rPtr.Guardian)
             {
                 if (who > 0 && dam > mPtr.Health)
                 {

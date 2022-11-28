@@ -23,7 +23,7 @@ namespace AngbandOS.Core.MonsterSelectors
             {
                 return false;
             }
-            if ((rPtr.Flags1 & MonsterFlag1.Unique) != 0)
+            if (rPtr.Unique)
             {
                 return false;
             }
