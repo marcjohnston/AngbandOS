@@ -742,7 +742,7 @@ namespace AngbandOS.Commands
 
         private void WizCreateNamedArt(SaveGame saveGame, FixedArtifactId aIdx)
         {
-            if ((int)aIdx >= saveGame.FixedArtifacts.Count)
+            if (aIdx == FixedArtifactId.None || (int)aIdx >= saveGame.FixedArtifacts.Count)
             {
                 return;
             }
