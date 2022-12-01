@@ -70,3 +70,4 @@ bin/
 /AngbandOS.Core/bin/Release/net6.0/AngbandOS.Core.deps.json
 /AngbandOS.SqlPersistentStorage/obj/Debug/net6.0/AngbandOS.PersistentStorage.Sql.GeneratedMSBuildEditorConfig.editorconfig
 /AngbandOS.SqlPersistentStorage/obj/AngbandOS.PersistentStorage.Sql.csproj.nuget.g.props
+/AngbandOS.Core/.idea
