@@ -21,7 +21,7 @@ namespace AngbandOS.Mutations.ActiveMutations
                 return;
             }
             saveGame.FireBall(new ProjectSound(saveGame), 0, 4 * player.Level, 8);
-            saveGame.AggravateMonsters(0);
+            saveGame.AggravateMonsters();
         }
 
         public override string ActivationSummary(int lvl)

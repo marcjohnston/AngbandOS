@@ -23,7 +23,7 @@ namespace AngbandOS.Core.ItemCategories
         public override void Read(ReadScrollEvent eventArgs)
         {
             eventArgs.SaveGame.MsgPrint("There is a high pitched humming noise.");
-            eventArgs.SaveGame.AggravateMonsters(1);
+            eventArgs.SaveGame.AggravateMonsters();
             eventArgs.Identified = true;
         }
     }

@@ -464,7 +464,7 @@ namespace AngbandOS.Commands
                 case 23:
                 case 24:
                 case 25:
-                    saveGame.AggravateMonsters(1);
+                    saveGame.AggravateMonsters();
                     break;
 
                 case 26:

@@ -46,7 +46,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 22)
             {
                 saveGame.MsgPrint("It's the swords of discord.");
-                saveGame.AggravateMonsters(1);
+                saveGame.AggravateMonsters();
             }
             else if (die < 26)
             {
@@ -313,7 +313,7 @@ namespace AngbandOS.Spells.Tarot
                 case 23:
                 case 24:
                 case 25:
-                    saveGame.AggravateMonsters(1);
+                    saveGame.AggravateMonsters();
                     break;
 
                 case 26:

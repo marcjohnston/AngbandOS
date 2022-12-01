@@ -1582,7 +1582,7 @@ namespace AngbandOS
                 case 96 + 0:
                     saveGame.Disturb(true);
                     saveGame.MsgPrint($"{monsterName} makes a high pitched shriek.");
-                    saveGame.AggravateMonsters(GetMonsterIndex(saveGame));
+                    saveGame.AggravateMonsters(this);
                     break;
 
                 // MonsterFlag4.Xxx2

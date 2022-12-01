@@ -682,7 +682,7 @@ namespace AngbandOS
                     case 3:
                     case 16:
                     case 17:
-                        AggravateMonsters(1);
+                        AggravateMonsters();
                         break;
 
                     case 4:
@@ -3372,11 +3372,11 @@ namespace AngbandOS
             }
         }
 
-        public void AggravateMonsters(int indexOfMonsterToNotAggravateOrZeroForNone) // TODO: Monster[0] is skipped?
+        public void AggravateMonsters(Monster? excludeMonster = null)
         {
             bool sleep = false;
             bool speed = false;
-            for (int i = 1; i < Level.MMax; i++)
+            for (int i = 0; i < Level.MMax; i++)
             {
                 Monster mPtr = Level.Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
@@ -3384,7 +3384,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (i == indexOfMonsterToNotAggravateOrZeroForNone)
+                if (excludeMonster != null && mPtr == excludeMonster)
                 {
                     continue;
                 }
