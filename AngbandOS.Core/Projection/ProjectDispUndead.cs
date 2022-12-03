@@ -39,7 +39,7 @@ namespace AngbandOS.Projection
             bool skipped = false;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (rPtr.Undead)
             {
                 if (seen)

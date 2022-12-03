@@ -42,7 +42,7 @@ namespace AngbandOS.Projection
             int doSleep = 0;
             int doFear = 0;
             string note = null;
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;
@@ -69,7 +69,7 @@ namespace AngbandOS.Projection
                     }
                     else
                     {
-                        string killer = mPtr.MonsterDesc(0x88);
+                        string killer = mPtr.IndefiniteVisibleName;
                         SaveGame.Player.TakeHit(dam, killer);
                         if (Program.Rng.DieRoll(4) == 1)
                         {

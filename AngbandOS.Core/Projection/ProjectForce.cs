@@ -96,7 +96,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;
@@ -210,7 +210,7 @@ namespace AngbandOS.Projection
             }
             dam = (dam + r) / (r + 1);
             Monster mPtr = SaveGame.Level.Monsters[who];
-            string killer = mPtr.MonsterDesc(0x88);
+            string killer = mPtr.IndefiniteVisibleName;
             if (blind)
             {
                 SaveGame.MsgPrint("You are hit by kinetic force!");

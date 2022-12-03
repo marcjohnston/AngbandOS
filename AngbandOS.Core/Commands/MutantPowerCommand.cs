@@ -156,7 +156,7 @@ namespace AngbandOS.Commands
                         }
                         else
                         {
-                            string friendName = monster.MonsterDesc(0x80);
+                            string friendName = monster.VisibleName;
                             string checkFriend = $"Dismiss {friendName}? ";
                             if (saveGame.GetCheck(checkFriend))
                             {

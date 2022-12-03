@@ -569,7 +569,7 @@ namespace AngbandOS.Projection
             bool isFriendly = (mPtr.Mind & Constants.SmFriendly) != 0;
             if (who == 0 && isFriendly && ProjectileAngersMonster(mPtr))
             {
-                string mName = mPtr.MonsterDesc(0);
+                string mName = mPtr.Name;
                 SaveGame.MsgPrint($"{mName} gets angry!");
                 mPtr.Mind &= ~Constants.SmFriendly;
             }

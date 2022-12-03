@@ -1,10 +1,10 @@
-// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+// Cthangband: ï¿½ 1997 - 2022 Dean Anderson; Based on Angband: ï¿½ 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: ï¿½ 1985 Robert Alan Koeneke and Umoria: ï¿½ 1989 James E.Wilson
 //
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// This game is released under the ï¿½Angband Licenseï¿½, defined as: ï¿½ï¿½ 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
+// copies. Other copyrights may also apply.ï¿½
 using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
@@ -73,10 +73,40 @@ namespace AngbandOS
         };
 
         /// <summary>
+        /// Returns the name of the monster.
+        /// </summary>
+        public string Name => MonsterDescription(0x00);
+
+        /// <summary>
+        /// Returns a possessive or reflexive name for the monster.
+        /// </summary>
+        public string PossessiveName => MonsterDescription(0x22);
+
+        /// <summary>
+        /// Returns the  indefinite name for the monster, assuming the monster is visible.
+        /// </summary>
+        public string IndefiniteVisibleName => MonsterDescription(0x88);
+
+        /// <summary>
+        /// Returns the indefinite name for the monster, when the monster is hidden.
+        /// </summary>
+        public string IndefiniteWhenHiddenName => MonsterDescription(0x04);
+
+        /// <summary>
+        /// Return the name of the monster, assuming the monster is visible.
+        /// </summary>
+        public string VisibleName => MonsterDescription(0x80);
+
+        /// <summary>
+        /// Returns the indefinite name fo the monster, when the monster is visible.
+        /// </summary>
+        public string IndefinitionWhenVisibleName => MonsterDescription(0x08);
+
+        /// <summary>
         /// </summary>
         /// <param name="mode"> </param>
         /// <returns> </returns>
-        public string MonsterDesc(int mode)
+        private string MonsterDescription(int mode)
         {
             // * Mode Flags:
             // *   0x01 --&gt; Objective(or Reflexive)
@@ -279,7 +309,7 @@ namespace AngbandOS
             else
             {
                 power = Race.Level + 10;
-                string mName = MonsterDesc(0);
+                string mName = Name;
                 if (Race.Unique)
                 {
                     power *= 2;
@@ -448,7 +478,7 @@ namespace AngbandOS
                         // If the player sees us wake up, let them know
                         if (IsVisible)
                         {
-                            string monsterName = MonsterDesc(0);
+                            string monsterName = Name;
                             saveGame.MsgPrint($"{monsterName} wakes up.");
                             // And let the player notice how easily we wake
                             if (Race.Knowledge.RWake < Constants.MaxUchar)
@@ -485,7 +515,7 @@ namespace AngbandOS
                     // If the player sees us, let them know we're no longer stunned
                     if (IsVisible)
                     {
-                        string monsterName = MonsterDesc(0);
+                        string monsterName = Name;
                         saveGame.MsgPrint($"{monsterName} is no longer stunned.");
                     }
                 }
@@ -510,7 +540,7 @@ namespace AngbandOS
                     ConfusionLevel = 0;
                     if (IsVisible)
                     {
-                        string monsterName = MonsterDesc(0);
+                        string monsterName = Name;
                         saveGame.MsgPrint($"{monsterName} is no longer confused.");
                     }
                 }
@@ -529,7 +559,7 @@ namespace AngbandOS
             // If we got angry, let the player see that
             if (getsAngry)
             {
-                string monsterName = MonsterDesc(0);
+                string monsterName = Name;
                 saveGame.MsgPrint($"{monsterName} suddenly becomes hostile!");
                 Mind &= ~Constants.SmFriendly;
             }
@@ -548,8 +578,8 @@ namespace AngbandOS
                     // If the player can see us, they can see we're no longer afraid
                     if (IsVisible)
                     {
-                        string monsterName = MonsterDesc(0);
-                        string monsterPossessive = MonsterDesc(0x22);
+                        string monsterName = Name;
+                        string monsterPossessive = PossessiveName;
                         saveGame.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
                     }
                 }
@@ -965,7 +995,7 @@ namespace AngbandOS
                             bool willHurt = false;
                             item.RefreshFlagBasedProperties();
                             string itemName = item.Description(true, 3);
-                            string monsterName = MonsterDesc(0x04);
+                            string monsterName = IndefiniteWhenHiddenName;
                             if (item.Characteristics.KillDragon && Race.Dragon)
                             {
                                 willHurt = true;
@@ -1106,7 +1136,7 @@ namespace AngbandOS
                 FearLevel = 0;
                 if (IsVisible)
                 {
-                    string monsterName = MonsterDesc(0);
+                    string monsterName = Name;
                     saveGame.MsgPrint($"{monsterName} turns to fight!");
                 }
             }
@@ -1131,9 +1161,9 @@ namespace AngbandOS
             }
             int armourClass = targetRace.ArmourClass;
             int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
-            string monsterName = MonsterDesc(0);
-            string targetName = target.MonsterDesc(0);
-            MonsterDesc(0x88);
+            string monsterName = Name;
+            string targetName = target.Name;
+
             bool blinked = false;
             // If the player can't see either monster, they just hear noise
             if (!(IsVisible || target.IsVisible))
@@ -1553,9 +1583,9 @@ namespace AngbandOS
             {
                 return false;
             }
-            string monsterName = MonsterDesc(0x00);
-            string monsterPossessive = MonsterDesc(0x22);
-            string monsterDescription = MonsterDesc(0x88);
+            string monsterName = Name;
+            string monsterPossessive = PossessiveName;
+            string monsterDescription = IndefiniteVisibleName;
             // Pick one of our spells to cast, based on our priorities
             int thrownSpell = ChooseSpellAgainstPlayer(saveGame, spell, num);
             // If we decided not to cast, don't
@@ -2861,10 +2891,10 @@ namespace AngbandOS
                 {
                     return false;
                 }
-                string monsterName = MonsterDesc(0x00);
-                string monsterPossessive = MonsterDesc(0x22);
-                string targetName = target.MonsterDesc(0x00);
-                MonsterDesc(0x88);
+                string monsterName = Name;
+                string monsterPossessive = PossessiveName;
+                string targetName = target.Name;
+                
                 // Against other monsters we pick spells randomly
                 int thrownSpell = spell[Program.Rng.RandomLessThan(num)];
                 bool seeMonster = seen;
@@ -4548,7 +4578,7 @@ namespace AngbandOS
                 else
                 {
                     // Construct a message telling the player what happened
-                    string monsterName = MonsterDesc(0);
+                    string monsterName = Name;
                     saveGame.PlaySound(SoundEffect.MonsterDies);
                     // Append the note if there is one
                     if (!string.IsNullOrEmpty(note))
@@ -5688,8 +5718,8 @@ namespace AngbandOS
 
             int armourClass = saveGame.Player.BaseArmourClass + saveGame.Player.ArmourClassBonus;
             int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
-            string monsterName = MonsterDesc(0);
-            string monsterDescription = MonsterDesc(0x88);
+            string monsterName = Name;
+            string monsterDescription = IndefiniteVisibleName;
             bool blinked = false;
             // Monsters get up to four attacks
             if (Race.Attacks != null)

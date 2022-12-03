@@ -4650,7 +4650,7 @@ namespace AngbandOS
                                     sx = x;
                                 }
                             }
-                            string mName = mPtr.MonsterDesc(0);
+                            string mName = mPtr.Name;
                             MsgPrint($"{mName} wails out in pain!");
                             damage = sn != 0 ? Program.Rng.DiceRoll(4, 8) : 200;
                             mPtr.SleepLevel = 0;
@@ -5286,7 +5286,7 @@ namespace AngbandOS
                     {
                         MsgPrint("Probing...");
                     }
-                    string mName = mPtr.MonsterDesc(0x04);
+                    string mName = mPtr.IndefiniteWhenHiddenName;
                     MsgPrint($"{mName} has {mPtr.Health} hit points.");
                     Level.Monsters.LoreDoProbe(i);
                     probe = true;
@@ -6516,7 +6516,7 @@ namespace AngbandOS
                         mPtr.SleepLevel = 0;
                         if (mPtr.IsVisible)
                         {
-                            string mName = mPtr.MonsterDesc(0);
+                            string mName = mPtr.Name;
                             MsgPrint($"{mName} wakes up.");
                         }
                     }
@@ -7816,7 +7816,7 @@ namespace AngbandOS
                 {
                     // Wake up the monster, and track it
                     monster.SleepLevel = 0;
-                    string monsterName = monster.MonsterDesc(0);
+                    string monsterName = monster.Name;
                     // If we can see it, no need to mention it
                     if (monster.IsVisible)
                     {
@@ -8249,7 +8249,7 @@ namespace AngbandOS
             Disturb(true);
             // Being attacked always wakes a monster
             monster.SleepLevel = 0;
-            string monsterName = monster.MonsterDesc(0);
+            string monsterName = monster.Name;
             // If we can see the monster, track its health
             if (monster.IsVisible)
             {
@@ -8573,7 +8573,7 @@ namespace AngbandOS
                                 MonsterRace newRace = MonsterRaces[newRaceIndex];
                                 Level.Monsters.PlaceMonsterAux(y, x, newRace, false, false, false);
                                 monster = Level.Monsters[tile.MonsterIndex];
-                                monsterName = monster.MonsterDesc(0);
+                                monsterName = monster.Name;
                                 fear = false;
                             }
                         }
@@ -9253,7 +9253,7 @@ namespace AngbandOS
             int damageDice = mutation.DamageDiceNumber;
             int effectiveWeight = mutation.EquivalentWeaponWeight;
             string attackDescription = mutation.AttackDescription;
-            string monsterName = monster.MonsterDesc(0);
+            string monsterName = monster.Name;
             // See if the player hit the monster
             int bonus = Player.AttackBonus;
             int chance = Player.SkillMelee + (bonus * Constants.BthPlusAdj);
@@ -9630,7 +9630,7 @@ namespace AngbandOS
                 if (!Player.HasFireImmunity)
                 {
                     auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
-                    string auraDam = monster.MonsterDesc(0x88);
+                    string auraDam = monster.IndefiniteVisibleName;
                     MsgPrint("You are suddenly very hot!");
                     if (Player.TimedFireResistance != 0)
                     {
@@ -9649,7 +9649,7 @@ namespace AngbandOS
             if (race.LightningAura && !Player.HasLightningImmunity)
             {
                 auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
-                string auraDam = monster.MonsterDesc(0x88);
+                string auraDam = monster.IndefiniteVisibleName;
                 if (Player.TimedLightningResistance != 0)
                 {
                     auraDamage = (auraDamage + 2) / 3;
@@ -16551,7 +16551,7 @@ namespace AngbandOS
                     {
                         bool recall = false;
                         boring = false;
-                        string mName = mPtr.MonsterDesc(0x08);
+                        string mName = mPtr.IndefinitionWhenVisibleName;
                         HealthTrack(cPtr.MonsterIndex);
                         HandleStuff();
                         while (true && !Shutdown)

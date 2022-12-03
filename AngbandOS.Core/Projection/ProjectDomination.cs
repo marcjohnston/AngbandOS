@@ -41,7 +41,7 @@ namespace AngbandOS.Projection
             int doFear = 0;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;

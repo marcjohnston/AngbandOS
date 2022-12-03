@@ -1,10 +1,10 @@
-// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+// Cthangband: ï¿½ 1997 - 2022 Dean Anderson; Based on Angband: ï¿½ 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: ï¿½ 1985 Robert Alan Koeneke and Umoria: ï¿½ 1989 James E.Wilson
 //
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// This game is released under the ï¿½Angband Licenseï¿½, defined as: ï¿½ï¿½ 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
+// copies. Other copyrights may also apply.ï¿½
 using AngbandOS.Enumerations;
 
 using AngbandOS.Core.Interface;
@@ -212,7 +212,7 @@ namespace AngbandOS
             mPtr.Health -= dam;
             if (mPtr.Health < 0)
             {
-                string mName = mPtr.MonsterDesc(0);
+                string mName = mPtr.Name;
                 if (rPtr.GreatOldOne && Program.Rng.DieRoll(2) == 1)
                 {
                     SaveGame.MsgPrint($"{mName} retreats into another dimension!");
@@ -554,7 +554,7 @@ namespace AngbandOS
         {
             Monster mPtr = _monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (dam == 0)
             {
                 SaveGame.MsgPrint($"{mName} is unharmed.");
@@ -794,14 +794,14 @@ namespace AngbandOS
             }
             if (i == 20)
             {
-                SaveGame.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.MsgPrint($"You lose sight of {monster.Name}.");
                 return;
             }
             GridTile cPtr = _level.Grid[y][x];
             cPtr.MonsterIndex = MPop();
             if (cPtr.MonsterIndex == 0)
             {
-                SaveGame.MsgPrint($"You lose sight of {monster.MonsterDesc(0)}.");
+                SaveGame.MsgPrint($"You lose sight of {monster.Name}.");
                 return;
             }
             _monsters[cPtr.MonsterIndex] = monster;

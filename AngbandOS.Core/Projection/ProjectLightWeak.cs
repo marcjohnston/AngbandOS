@@ -56,7 +56,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (rPtr.HurtByLight)
             {
                 if (seen)

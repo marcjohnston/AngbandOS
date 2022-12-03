@@ -40,7 +40,7 @@ namespace AngbandOS.Projection
             bool seen = mPtr.IsVisible;
             string note = null;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (rPtr.Guardian)
             {
                 if (who != 0 && dam > mPtr.Health)

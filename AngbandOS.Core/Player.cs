@@ -1,10 +1,10 @@
-// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+// Cthangband: ï¿½ 1997 - 2022 Dean Anderson; Based on Angband: ï¿½ 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: ï¿½ 1985 Robert Alan Koeneke and Umoria: ï¿½ 1989 James E.Wilson
 //
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// This game is released under the ï¿½Angband Licenseï¿½, defined as: ï¿½ï¿½ 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
+// copies. Other copyrights may also apply.ï¿½
 using AngbandOS.Enumerations;
 using AngbandOS.Mutations;
 using AngbandOS.Patrons;
@@ -444,9 +444,7 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"Your {oName} resist{s} cursing!");
                 return;
             }
-            if (Program.Rng.DieRoll(100) <= heavyChance &&
-                (oPtr.FixedArtifactIndex != 0 || oPtr.RareItemTypeIndex != 0 ||
-                 !string.IsNullOrEmpty(oPtr.RandartName)))
+            if (Program.Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifactIndex != 0 || oPtr.RareItemTypeIndex != 0 || !string.IsNullOrEmpty(oPtr.RandartName)))
             {
                 if (!oPtr.Characteristics.HeavyCurse)
                 {

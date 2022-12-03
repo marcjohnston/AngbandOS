@@ -31,7 +31,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             int doSleep = 0;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;

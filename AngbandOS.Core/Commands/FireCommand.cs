@@ -151,7 +151,7 @@ namespace AngbandOS.Commands
                         }
                         else
                         {
-                            string monsterName = monster.MonsterDesc(0);
+                            string monsterName = monster.Name;
                             saveGame.MsgPrint($"The {missileName} hits {monsterName}.");
                             if (monster.IsVisible)
                             {
@@ -160,7 +160,7 @@ namespace AngbandOS.Commands
                             // Note that pets only get angry if they see us and we see them
                             if ((monster.Mind & Constants.SmFriendly) != 0)
                             {
-                                monsterName = monster.MonsterDesc(0);
+                                monsterName = monster.Name;
                                 saveGame.MsgPrint($"{monsterName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
@@ -182,7 +182,7 @@ namespace AngbandOS.Commands
                             if (fear && monster.IsVisible)
                             {
                                 saveGame.PlaySound(SoundEffect.MonsterFlees);
-                                string mName = monster.MonsterDesc(0);
+                                string mName = monster.Name;
                                 saveGame.MsgPrint($"{mName} flees in terror!");
                             }
                         }

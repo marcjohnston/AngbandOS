@@ -35,7 +35,7 @@ namespace AngbandOS.Projection
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             string noteDies = NoteDiesOrIsDestroyed(rPtr);
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;

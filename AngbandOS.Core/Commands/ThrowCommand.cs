@@ -143,7 +143,7 @@ namespace AngbandOS.Commands
                         }
                         else
                         {
-                            string mName = monster.MonsterDesc(0);
+                            string mName = monster.Name;
                             saveGame.MsgPrint($"The {missileName} hits {mName}.");
                             if (monster.IsVisible)
                             {
@@ -168,14 +168,14 @@ namespace AngbandOS.Commands
                             if ((monster.Mind & Constants.SmFriendly) != 0 &&
                                 missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
                             {
-                                string mName = monster.MonsterDesc(0);
+                                string mName = monster.Name;
                                 saveGame.MsgPrint($"{mName} gets angry!");
                                 monster.Mind &= ~Constants.SmFriendly;
                             }
                             if (fear && monster.IsVisible)
                             {
                                 saveGame.PlaySound(SoundEffect.MonsterFlees);
-                                string mName = monster.MonsterDesc(0);
+                                string mName = monster.Name;
                                 saveGame.MsgPrint($"{mName} flees in terror!");
                             }
                         }
@@ -196,7 +196,7 @@ namespace AngbandOS.Commands
                     {
                         if (saveGame.Level.Grid[y][x].MonsterIndex != 0 && (saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
                         {
-                            string mName = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].MonsterDesc(0);
+                            string mName = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Name;
                             saveGame.MsgPrint($"{mName} gets angry!");
                             saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind &= ~Constants.SmFriendly;
                         }

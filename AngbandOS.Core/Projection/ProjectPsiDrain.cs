@@ -37,7 +37,7 @@ namespace AngbandOS.Projection
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             string note = null;
-            string mName = mPtr.MonsterDesc(0);
+            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;
@@ -64,7 +64,7 @@ namespace AngbandOS.Projection
                     }
                     else
                     {
-                        string killer = mPtr.MonsterDesc(0x88);
+                        string killer = mPtr.IndefiniteVisibleName;
                         SaveGame.MsgPrint("Your psychic energy is drained!");
                         SaveGame.Player.Mana = Math.Max(0, SaveGame.Player.Mana - (Program.Rng.DiceRoll(5, dam) / 2));
                         SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
