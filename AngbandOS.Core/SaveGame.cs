@@ -6117,9 +6117,8 @@ namespace AngbandOS
 
         public void SummonReaver()
         {
-            int i;
             int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
-            for (i = 0; i < maxReaver; i++)
+            for (int i = 0; i < maxReaver; i++)
             {
                 Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
             }

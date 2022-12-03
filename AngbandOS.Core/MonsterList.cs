@@ -854,7 +854,7 @@ namespace AngbandOS
             return true;
         }
 
-        public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterSelector monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
+        public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
         {
             int i;
             int x = 0;

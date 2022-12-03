@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterSelectors
 {
@@ -8,7 +7,7 @@ namespace AngbandOS.Core.MonsterSelectors
     {
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            return rPtr.Name == "Black reaver" && !rPtr.Unique;
+            return rPtr is BlackReaverMonsterRace && !rPtr.Unique;
         }
     }
 }
