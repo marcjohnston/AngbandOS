@@ -27,13 +27,11 @@ namespace AngbandOS.Enumerations
         public const uint ForceMaxHp = 0x00000200;
         public const uint ForceSleep = 0x00000400;
         public const uint Friends = 0x00002000;
-        //public const uint Guardian = 0x00000002;
         public const uint Male = 0x00000004;
         public const uint NeverAttack = 0x00010000;
         public const uint NeverMove = 0x00020000;
         public const uint OnlyDropGold = 0x00100000;
         public const uint OnlyDropItem = 0x00200000;
-        //public const uint OnlyGuardian = 0x00000100;
         public const uint RandomMove25 = 0x00040000;
         public const uint RandomMove50 = 0x00080000;
         public const uint Unique = 0x00000001;

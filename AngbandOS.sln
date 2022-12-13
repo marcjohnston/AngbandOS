@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Core.Interface", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Web.Interface", "AngbandOS.Web.Interface\AngbandOS.Web.Interface.csproj", "{F71E778D-7043-4676-AACF-B323425A04F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.WpfNet6", "AngbandOS.WpfNet6\AngbandOS.WpfNet6.csproj", "{9DE73C31-7410-4588-9758-C6B8AF036B03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cthangband", "AngbandOS.WpfNet6\Cthangband.csproj", "{9DE73C31-7410-4588-9758-C6B8AF036B03}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.PersistentStorage.FileSystem", "AngbandOS.PersistentStorage.FileSystem\AngbandOS.PersistentStorage.FileSystem.csproj", "{BC3E66FE-4A4B-419E-BDB6-A83EF3F5898B}"
 EndProject
