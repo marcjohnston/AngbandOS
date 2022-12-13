@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,32 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreatWyrmOfPowerMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheChaosMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheConfusionMonsterSpell(),
+            new BreatheDarkMonsterSpell(),
+            new BreatheDisenchantMonsterSpell(),
+            new BreatheDisintegrationMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreatheForceMonsterSpell(),
+            new BreatheGravityMonsterSpell(),
+            new BreatheInertiaMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new BreatheManaMonsterSpell(),
+            new BreatheNetherMonsterSpell(),
+            new BreatheNexusMonsterSpell(),
+            new BreathePlasmaMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BreatheRadiationMonsterSpell(),
+            new BreatheShardsMonsterSpell(),
+            new BreatheSoundMonsterSpell(),
+            new BreatheTimeMonsterSpell(),
+            new SummonDragonMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new SummonKinMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Great Wyrm of Power";
@@ -20,28 +47,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 10, 18)
         };
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheChaos => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheConfusion => true;
-        public override bool BreatheDark => true;
-        public override bool BreatheDisenchant => true;
-        public override bool BreatheDisintegration => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheForce => true;
-        public override bool BreatheGravity => true;
-        public override bool BreatheInertia => true;
-        public override bool BreatheLight => true;
-        public override bool BreatheLightning => true;
-        public override bool BreatheMana => true;
-        public override bool BreatheNether => true;
-        public override bool BreatheNexus => true;
-        public override bool BreathePlasma => true;
-        public override bool BreathePoison => true;
-        public override bool BreatheRadiation => true;
-        public override bool BreatheShards => true;
-        public override bool BreatheSound => true;
-        public override bool BreatheTime => true;
         public override string Description => "The mightiest of all dragonkind, a great wyrm of power is seldom encountered in our world. It can crush stars with its might.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -84,8 +89,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "   Great    ";
         public override string SplitName2 => "  Wyrm of   ";
         public override string SplitName3 => "   Power    ";
-        public override bool SummonDragon => true;
-        public override bool SummonHiDragon => true;
-        public override bool SummonKin => true;
     }
 }

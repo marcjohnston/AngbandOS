@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GrapeJellyMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'j';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Grape jelly";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new Exp10AttackEffect(), 0, 0),
         };
         public override string Description => "It is a pulsing mound of glowing flesh.";
-        public override bool DrainMana => true;
         public override bool EmptyMind => true;
         public override int FreqInate => 11;
         public override int FreqSpell => 11;

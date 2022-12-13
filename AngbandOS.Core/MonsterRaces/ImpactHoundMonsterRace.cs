@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ImpactHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheForceMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Impact hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheForce => true;
         public override string Description => "A deep brown shape is visible before you, its canine form strikes you with an almost physical force. The dungeon floor buckles as if struck by a powerful Attack as it stalks towards you.";
         public override bool ForceSleep => true;
         public override int FreqInate => 8;

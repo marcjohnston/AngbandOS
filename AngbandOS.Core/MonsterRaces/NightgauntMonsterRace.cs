@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NightgauntMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new FireBoltMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Nightgaunt";
@@ -18,14 +23,11 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new ParalyzeAttackEffect(), 3, 4),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "It is a black, horned humanoid with wings.";
         public override bool Drop60 => true;
         public override bool EldritchHorror => true;
         public override bool Evil => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 7;

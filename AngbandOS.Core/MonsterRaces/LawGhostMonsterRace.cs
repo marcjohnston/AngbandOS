@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LawGhostMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new MindBlastMonsterSpell(),
+            new ForgetMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Silver;
         public override string Name => "Law ghost";
@@ -24,7 +28,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 5;
         public override int FreqSpell => 5;
         public override string FriendlyName => "Law ghost";
@@ -37,7 +40,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Invisible => true;
         public override int LevelFound => 36;
         public override int Mexp => 400;
-        public override bool MindBlast => true;
         public override int NoticeRange => 30;
         public override bool OnlyDropItem => true;
         public override bool PassWall => true;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GiantSlimeMoldMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ShriekMonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.Green;
         public override string Name => "Giant slime mold";
@@ -36,7 +39,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropGold => true;
         public override bool OpenDoor => true;
         public override int Rarity => 2;
-        public override bool Shriek => true;
         public override int Sleep => 40;
         public override int Speed => 110;
         public override string SplitName1 => "   Giant    ";

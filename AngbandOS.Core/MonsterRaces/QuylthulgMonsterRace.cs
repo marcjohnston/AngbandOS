@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,13 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class QuylthulgMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new SummonMonsterMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "Quylthulg";
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blink => true;
         public override string Description => "It is a strange pulsing mound of flesh.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -38,6 +41,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => " Quylthulg  ";
-        public override bool SummonMonster => true;
     }
 }

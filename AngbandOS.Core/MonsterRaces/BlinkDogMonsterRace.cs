@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlinkDogMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'C';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Blink dog";
@@ -18,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
         public override string Description => "A strange magical member of the canine race, its form seems to shimmer and fade in front of your very eyes.";
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
@@ -37,6 +40,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Blink    ";
         public override string SplitName3 => "    dog     ";
-        public override bool TeleportTo => true;
     }
 }

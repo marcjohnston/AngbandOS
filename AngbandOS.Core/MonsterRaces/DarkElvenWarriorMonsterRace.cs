@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DarkElvenWarriorMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new MagicMissileMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.Black;
         public override string Name => "Dark elven warrior";
@@ -28,7 +31,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Hside => 11;
         public override bool HurtByLight => true;
         public override int LevelFound => 10;
-        public override bool MagicMissile => true;
         public override bool Male => true;
         public override int Mexp => 50;
         public override int NoticeRange => 20;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WhiteWraithMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseSeriousWoundsMonsterSpell(),
+            new ScareMonsterSpell(),
+            new DarknessMonsterSpell());
         public override char Character => 'W';
         public override string Name => "White wraith";
 
@@ -18,9 +23,7 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new Exp20AttackEffect(), 0, 0),
         };
         public override bool BashDoor => true;
-        public override bool CauseSeriousWounds => true;
         public override bool ColdBlood => true;
-        public override bool Darkness => true;
         public override string Description => "It is a tangible but ghostly form made of white fog.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -40,7 +43,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

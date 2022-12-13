@@ -1,29 +1,39 @@
 ﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
-
-using AngbandOS.Core.AttackEffects;
 
 namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]
     internal abstract class MonsterRace
     {
+        public virtual MonsterSpellList Spells => new MonsterSpellList();
+
+        public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
+        public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));
+        public bool BreatheFire => Spells.Contains(typeof(BreatheFireMonsterSpell));
+        public bool BreatheLightning => Spells.Contains(typeof(BreatheLightningMonsterSpell));
+        public bool BreathePoison => Spells.Contains(typeof(BreathePoisonMonsterSpell));
+        public bool BreatheChaos => Spells.Contains(typeof(BreatheChaosMonsterSpell));
+        public bool BreatheConfusion => Spells.Contains(typeof(BreatheConfusionMonsterSpell));
+        public bool BreatheDark => Spells.Contains(typeof(BreatheDarkMonsterSpell));
+        public bool BreatheSound => Spells.Contains(typeof(BreatheSoundMonsterSpell));
+        public bool BreatheForce => Spells.Contains(typeof(BreatheForceMonsterSpell));
+        public bool BreatheShards => Spells.Contains(typeof(BreatheShardsMonsterSpell));
+        public bool BreatheGravity => Spells.Contains(typeof(BreatheGravityMonsterSpell));
+        public bool BreatheInertia => Spells.Contains(typeof(BreatheInertiaMonsterSpell));
+        public bool BreatheTime => Spells.Contains(typeof(BreatheTimeMonsterSpell));
+        public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
+
         public int CurNum;
-        public uint Flags1;
         public bool Guardian;
         public bool OnlyGuardian;
         public int MaxNum;
         public MonsterKnowledge Knowledge;
 
+        public uint Flags1;
         public readonly uint Flags2;
         public readonly uint Flags3;
-
-        /// <summary>
-        /// Represents innate abilities.  Monsters that do not have innate abilities cannot use these flags.
-        /// </summary>
-        public readonly uint Flags4;
-        public readonly uint Flags5;
-        public readonly uint Flags6;
 
         /// <summary>
         /// The character to render the monster as.
@@ -41,16 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public abstract string Name { get; }
 
         /// <summary>
-        /// The monster can cast acid balls.
-        /// </summary>
-        public virtual bool AcidBall => false;
-
-        /// <summary>
-        /// The monster can cast acid bolts
-        /// </summary>
-        public virtual bool AcidBolt => false;
-
-        /// <summary>
         /// The monster is an animal.
         /// </summary>
         public virtual bool Animal => false;
@@ -59,26 +59,6 @@ namespace AngbandOS.Core.MonsterRaces
         /// The monsters armour class.
         /// </summary>
         public abstract int ArmourClass { get; }
-
-        /// <summary>
-        /// The monster shoots arrows for 1d6 damage.
-        /// </summary>
-        public virtual bool Arrow1D6 => false;
-
-        /// <summary>
-        /// The monster shoots arrows for 3d6 damage.
-        /// </summary>
-        public virtual bool Arrow3D6 => false;
-
-        /// <summary>
-        /// The monster shoots missiles for 5d6 damage.
-        /// </summary>
-        public virtual bool Arrow5D6 => false;
-
-        /// <summary>
-        /// The monster shoots missiles for 7d6 damage.
-        /// </summary>
-        public virtual bool Arrow7D6 => false;
 
         /// <summary>
         /// Returns all of the attacks that the monster can perform in a single round.
@@ -106,75 +86,6 @@ namespace AngbandOS.Core.MonsterRaces
         public virtual bool BashDoor => false;
 
         /// <summary>
-        /// The monster can cast blindness.
-        /// </summary>
-        public virtual bool Blindness => false;
-
-        /// <summary>
-        /// The monster can cast blink.
-        /// </summary>
-        public virtual bool Blink => false;
-
-        public virtual bool BrainSmash => false;
-
-        public virtual bool BreatheAcid => false;
-
-        public virtual bool BreatheChaos => false;
-
-        public virtual bool BreatheCold => false;
-
-        public virtual bool BreatheConfusion => false;
-
-        public virtual bool BreatheDark => false;
-
-        public virtual bool BreatheDisenchant => false;
-
-        public virtual bool BreatheDisintegration => false;
-
-        public virtual bool BreatheFire => false;
-
-        public virtual bool BreatheForce => false;
-
-        public virtual bool BreatheGravity => false;
-
-        public virtual bool BreatheInertia => false;
-
-        public virtual bool BreatheLight => false;
-
-        public virtual bool BreatheLightning => false;
-
-        public virtual bool BreatheMana => false;
-
-        public virtual bool BreatheNether => false;
-
-        public virtual bool BreatheNexus => false;
-
-        public virtual bool BreathePlasma => false;
-
-        public virtual bool BreathePoison => false;
-
-        public virtual bool BreatheRadiation => false;
-
-        public virtual bool BreatheShards => false;
-
-        public virtual bool BreatheSound => false;
-
-        public virtual bool BreatheTime => false;
-
-        public virtual bool CauseCriticalWounds => false;
-
-        public virtual bool CauseLightWounds => false;
-
-        public virtual bool CauseMortalWounds => false;
-
-        public virtual bool CauseSeriousWounds => false;
-
-        /// <summary>
-        /// The monster can cast chaos balls.
-        /// </summary>
-        public virtual bool ChaosBall => false;
-
-        /// <summary>
         /// The monster is never seen, even with see invisible.
         /// </summary>
         public virtual bool CharClear => false;
@@ -184,30 +95,10 @@ namespace AngbandOS.Core.MonsterRaces
         /// </summary>
         public virtual bool CharMulti => false;
 
-        /// <summary>
-        /// The monster can cast cold balls.
-        /// </summary>
-        public virtual bool ColdBall => false;
-
         public virtual bool ColdBlood => false;
-
-        /// <summary>
-        /// The monster can cast cold bolts.
-        /// </summary>
-        public virtual bool ColdBolt => false;
-
-        public virtual bool Confuse => false;
-
-        public virtual bool CreateTraps => false;
 
         public virtual bool Cthuloid => false;
 
-        /// <summary>
-        /// The monster can cast dark balls.
-        /// </summary>
-        public virtual bool DarkBall => false;
-
-        public virtual bool Darkness => false;
 
         public virtual bool Demon => false;
 
@@ -217,10 +108,6 @@ namespace AngbandOS.Core.MonsterRaces
         public abstract string Description { get; }
 
         public virtual bool Dragon => false;
-
-        public virtual bool DrainMana => false;
-
-        public virtual bool DreadCurse => false;
 
         /// <summary>
         /// The monster drops 1d2 items.
@@ -288,17 +175,6 @@ namespace AngbandOS.Core.MonsterRaces
         /// </summary>
         public virtual bool FireAura => false;
 
-        /// <summary>
-        /// The monster can cast fire balls.
-        /// </summary>
-        public virtual bool FireBall => false;
-
-        /// <summary>
-        /// The monster can cast fire bolts.
-        /// </summary>
-        public virtual bool FireBolt => false;
-
-        /// <summary>
         /// The monster has maximum hit points.
         /// </summary>
         public virtual bool ForceMaxHp => false;
@@ -307,8 +183,6 @@ namespace AngbandOS.Core.MonsterRaces
         /// The monster always starts asleep.
         /// </summary>
         public virtual bool ForceSleep => false;
-
-        public virtual bool Forget => false;
 
         /// <summary>
         /// The 1-in-X frequency with which the monster uses special abilities.
@@ -336,14 +210,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public virtual bool GreatOldOne => false;
 
-        public virtual bool Haste => false;
-
         /// <summary>
         /// The number of hit dice the monster has.
         /// </summary>
         public abstract int Hdice { get; }
-
-        public virtual bool Heal => false;
 
         /// <summary>
         /// The number of hit points the monster has (click to update).
@@ -360,8 +230,6 @@ namespace AngbandOS.Core.MonsterRaces
             }
         }
 
-        public virtual bool Hold => false;
-
         /// <summary>
         /// The number of sides of the monster's hit dice.
         /// </summary>
@@ -374,11 +242,6 @@ namespace AngbandOS.Core.MonsterRaces
         public virtual bool HurtByLight => false;
 
         public virtual bool HurtByRock => false;
-
-        /// <summary>
-        /// The monster can cast ice bolts.
-        /// </summary>
-        public virtual bool IceBolt => false;
 
         public virtual bool ImmuneAcid => false;
 
@@ -416,51 +279,17 @@ namespace AngbandOS.Core.MonsterRaces
         /// </summary>
         public virtual bool LightningAura => false;
 
-        /// <summary>
-        /// The monster can cast electricity balls.
-        /// </summary>
-        public virtual bool LightningBall => false;
-
-        /// <summary>
-        /// The monster can cast lightning bolts.
-        /// </summary>
-        public virtual bool LightningBolt => false;
-
-        public virtual bool MagicMissile => false;
 
         public virtual bool Male => false;
-
-        /// <summary>
-        /// The monster can cast mana balls.
-        /// </summary>
-        public virtual bool ManaBall => false;
-
-        /// <summary>
-        /// The monster can cast mana bolts.
-        /// </summary>
-        public virtual bool ManaBolt => false;
 
         /// <summary>
         /// The experience value for killing one of these.
         /// </summary>
         public abstract int Mexp { get; }
 
-        public virtual bool MindBlast => false;
-
         public virtual bool MoveBody => false;
 
         public virtual bool Multiply => false;
-
-        /// <summary>
-        /// The monster can cast nether balls.
-        /// </summary>
-        public virtual bool NetherBall => false;
-
-        /// <summary>
-        /// The monster can cast nether bolts.
-        /// </summary>
-        public virtual bool NetherBolt => false;
-
         public virtual bool NeverAttack => false;
 
         public virtual bool NeverMove => false;
@@ -482,27 +311,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public virtual bool PassWall => false;
 
-        /// <summary>
-        /// The monster can cast plasma bolts.
-        /// </summary>
-        public virtual bool PlasmaBolt => false;
-
-        /// <summary>
-        /// The monster can cast poison balls.
-        /// </summary>
-        public virtual bool PoisonBall => false;
-
-        /// <summary>
-        /// The monster can cast poison bolts.
-        /// </summary>
-        public virtual bool PoisonBolt => false;
-
         public virtual bool Powerful => false;
-
-        /// <summary>
-        /// The monster can cast nuke balls.
-        /// </summary>
-        public virtual bool RadiationBall => false;
 
         public virtual bool RandomMove25 => false;
 
@@ -529,20 +338,12 @@ namespace AngbandOS.Core.MonsterRaces
 
         public virtual bool ResistWater => false;
 
-        public virtual bool Scare => false;
-
         public virtual bool Shapechanger => false;
-
-        public virtual bool ShardBall => false;
-
-        public virtual bool Shriek => false;
 
         /// <summary>
         /// How deeply the monster sleeps.
         /// </summary>
         public abstract int Sleep { get; }
-
-        public virtual bool Slow => false;
 
         /// <summary>
         /// Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the
@@ -572,63 +373,13 @@ namespace AngbandOS.Core.MonsterRaces
 
         public virtual bool Stupid => false;
 
-        public virtual bool SummonAnt => false;
-
-        public virtual bool SummonCthuloid => false;
-
-        public virtual bool SummonDemon => false;
-
-        public virtual bool SummonDragon => false;
-
-        public virtual bool SummonGreatOldOne => false;
-
-        public virtual bool SummonHiDragon => false;
-
-        public virtual bool SummonHiUndead => false;
-
-        public virtual bool SummonHound => false;
-
-        public virtual bool SummonHydra => false;
-
-        public virtual bool SummonKin => false;
-
-        public virtual bool SummonMonster => false;
-
-        public virtual bool SummonMonsters => false;
-
-        public virtual bool SummonReaver => false;
-
-        public virtual bool SummonSpider => false;
-
-        public virtual bool SummonUndead => false;
-
-        public virtual bool SummonUnique => false;
-
         public virtual bool TakeItem => false;
-
-        public virtual bool TeleportAway => false;
-
-        public virtual bool TeleportLevel => false;
-
-        public virtual bool TeleportSelf => false;
-
-        public virtual bool TeleportTo => false;
 
         public virtual bool Troll => false;
 
         public virtual bool Undead => false;
 
         public virtual bool Unique => false;
-
-        /// <summary>
-        /// The monster can cast water balls.
-        /// </summary>
-        public virtual bool WaterBall => false;
-
-        /// <summary>
-        /// The monster can cast water bolts.
-        /// </summary>
-        public virtual bool WaterBolt => false;
 
         public virtual bool WeirdMind => false;
 
@@ -721,99 +472,7 @@ namespace AngbandOS.Core.MonsterRaces
             Flags3 |= ResistTeleport ? MonsterFlag3.ResistTeleport : 0;
             Flags3 |= ResistWater ? MonsterFlag3.ResistWater : 0;
             Flags3 |= Troll ? MonsterFlag3.Troll : 0;
-            Flags3 |= Undead ? MonsterFlag3.Undead : 0;
-
-            Flags4 |= Arrow1D6 ? MonsterFlag4.Arrow1D6 : 0;
-            Flags4 |= Arrow3D6 ? MonsterFlag4.Arrow3D6 : 0;
-            Flags4 |= Arrow5D6 ? MonsterFlag4.Arrow5D6 : 0;
-            Flags4 |= Arrow7D6 ? MonsterFlag4.Arrow7D6 : 0;
-            Flags4 |= BreatheAcid ? MonsterFlag4.BreatheAcid : 0;
-            Flags4 |= BreatheChaos ? MonsterFlag4.BreatheChaos : 0;
-            Flags4 |= BreatheCold ? MonsterFlag4.BreatheCold : 0;
-            Flags4 |= BreatheConfusion ? MonsterFlag4.BreatheConfusion : 0;
-            Flags4 |= BreatheDark ? MonsterFlag4.BreatheDark : 0;
-            Flags4 |= BreatheDisenchant ? MonsterFlag4.BreatheDisenchant : 0;
-            Flags4 |= BreatheDisintegration ? MonsterFlag4.BreatheDisintegration : 0;
-            Flags4 |= BreatheLightning ? MonsterFlag4.BreatheLightning : 0;
-            Flags4 |= BreatheFire ? MonsterFlag4.BreatheFire : 0;
-            Flags4 |= BreatheForce ? MonsterFlag4.BreatheForce : 0;
-            Flags4 |= BreatheGravity ? MonsterFlag4.BreatheGravity : 0;
-            Flags4 |= BreatheInertia ? MonsterFlag4.BreatheInertia : 0;
-            Flags4 |= BreatheLight ? MonsterFlag4.BreatheLight : 0;
-            Flags4 |= BreatheMana ? MonsterFlag4.BreatheMana : 0;
-            Flags4 |= BreatheNether ? MonsterFlag4.BreatheNether : 0;
-            Flags4 |= BreatheNexus ? MonsterFlag4.BreatheNexus : 0;
-            Flags4 |= BreathePlasma ? MonsterFlag4.BreathePlasma : 0;
-            Flags4 |= BreathePoison ? MonsterFlag4.BreathePoison : 0;
-            Flags4 |= BreatheRadiation ? MonsterFlag4.BreatheRadiation : 0;
-            Flags4 |= BreatheShards ? MonsterFlag4.BreatheShards : 0;
-            Flags4 |= BreatheSound ? MonsterFlag4.BreatheSound : 0;
-            Flags4 |= BreatheTime ? MonsterFlag4.BreatheTime : 0;
-            Flags4 |= ChaosBall ? MonsterFlag4.ChaosBall : 0;
-            Flags4 |= RadiationBall ? MonsterFlag4.RadiationBall : 0;
-            Flags4 |= ShardBall ? MonsterFlag4.ShardBall : 0;
-            Flags4 |= Shriek ? MonsterFlag4.Shriek : 0;
-
-            Flags5 |= AcidBall ? MonsterFlag5.AcidBall : 0;
-            Flags5 |= AcidBolt ? MonsterFlag5.AcidBolt : 0;
-            Flags5 |= Blindness ? MonsterFlag5.Blindness : 0;
-            Flags5 |= BrainSmash ? MonsterFlag5.BrainSmash : 0;
-            Flags5 |= CauseCriticalWounds ? MonsterFlag5.CauseCriticalWounds : 0;
-            Flags5 |= CauseLightWounds ? MonsterFlag5.CauseLightWounds : 0;
-            Flags5 |= CauseSeriousWounds ? MonsterFlag5.CauseSeriousWounds : 0;
-            Flags5 |= CauseMortalWounds ? MonsterFlag5.CauseMortalWounds : 0;
-            Flags5 |= ColdBall ? MonsterFlag5.ColdBall : 0;
-            Flags5 |= ColdBolt ? MonsterFlag5.ColdBolt : 0;
-            Flags5 |= Confuse ? MonsterFlag5.Confuse : 0;
-            Flags5 |= DarkBall ? MonsterFlag5.DarkBall : 0;
-            Flags5 |= DrainMana ? MonsterFlag5.DrainMana : 0;
-            Flags5 |= FireBall ? MonsterFlag5.FireBall : 0;
-            Flags5 |= FireBolt ? MonsterFlag5.FireBolt : 0;
-            Flags5 |= Hold ? MonsterFlag5.Hold : 0;
-            Flags5 |= IceBolt ? MonsterFlag5.IceBolt : 0;
-            Flags5 |= LightningBall ? MonsterFlag5.LightningBall : 0;
-            Flags5 |= LightningBolt ? MonsterFlag5.LightningBolt : 0;
-            Flags5 |= MagicMissile ? MonsterFlag5.MagicMissile : 0;
-            Flags5 |= ManaBall ? MonsterFlag5.ManaBall : 0;
-            Flags5 |= ManaBolt ? MonsterFlag5.ManaBolt : 0;
-            Flags5 |= MindBlast ? MonsterFlag5.MindBlast : 0;
-            Flags5 |= NetherBall ? MonsterFlag5.NetherBall : 0;
-            Flags5 |= NetherBolt ? MonsterFlag5.NetherBolt : 0;
-            Flags5 |= PlasmaBolt ? MonsterFlag5.PlasmaBolt : 0;
-            Flags5 |= PoisonBall ? MonsterFlag5.PoisonBall : 0;
-            Flags5 |= PoisonBolt ? MonsterFlag5.PoisonBolt : 0;
-            Flags5 |= Scare ? MonsterFlag5.Scare : 0;
-            Flags5 |= Slow ? MonsterFlag5.Slow : 0;
-            Flags5 |= WaterBall ? MonsterFlag5.WaterBall : 0;
-            Flags5 |= WaterBolt ? MonsterFlag5.WaterBolt : 0;
-
-            Flags6 |= Blink ? MonsterFlag6.Blink : 0;
-            Flags6 |= CreateTraps ? MonsterFlag6.CreateTraps : 0;
-            Flags6 |= Darkness ? MonsterFlag6.Darkness : 0;
-            Flags6 |= DreadCurse ? MonsterFlag6.DreadCurse : 0;
-            Flags6 |= Forget ? MonsterFlag6.Forget : 0;
-            Flags6 |= Haste ? MonsterFlag6.Haste : 0;
-            Flags6 |= Heal ? MonsterFlag6.Heal : 0;
-            Flags6 |= SummonAnt ? MonsterFlag6.SummonAnt : 0;
-            Flags6 |= SummonCthuloid ? MonsterFlag6.SummonCthuloid : 0;
-            Flags6 |= SummonDemon ? MonsterFlag6.SummonDemon : 0;
-            Flags6 |= SummonDragon ? MonsterFlag6.SummonDragon : 0;
-            Flags6 |= SummonGreatOldOne ? MonsterFlag6.SummonGreatOldOne : 0;
-            Flags6 |= SummonHiDragon ? MonsterFlag6.SummonHiDragon : 0;
-            Flags6 |= SummonHiUndead ? MonsterFlag6.SummonHiUndead : 0;
-            Flags6 |= SummonHound ? MonsterFlag6.SummonHound : 0;
-            Flags6 |= SummonHydra ? MonsterFlag6.SummonHydra : 0;
-            Flags6 |= SummonKin ? MonsterFlag6.SummonKin : 0;
-            Flags6 |= SummonMonster ? MonsterFlag6.SummonMonster : 0;
-            Flags6 |= SummonMonsters ? MonsterFlag6.SummonMonsters : 0;
-            Flags6 |= SummonReaver ? MonsterFlag6.SummonReaver : 0;
-            Flags6 |= SummonSpider ? MonsterFlag6.SummonSpider : 0;
-            Flags6 |= SummonUndead ? MonsterFlag6.SummonUndead : 0;
-            Flags6 |= SummonUnique ? MonsterFlag6.SummonUnique : 0;
-            Flags6 |= TeleportAway ? MonsterFlag6.TeleportAway : 0;
-            Flags6 |= TeleportLevel ? MonsterFlag6.TeleportLevel : 0;
-            Flags6 |= TeleportTo ? MonsterFlag6.TeleportTo : 0;
-            Flags6 |= TeleportSelf ? MonsterFlag6.TeleportSelf : 0;
+            Flags3 |= Undead ? MonsterFlag3.Undead : 0;               
         }
 
         /// <summary>

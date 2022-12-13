@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CultLeaderMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new HoldMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.BrightTurquoise;
         public override string Name => "Cult leader";
@@ -19,9 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override string Description => "An evil priest, dressed all in black. Deadly spells hit you at an alarming rate as his black spiked mace rains down Attack after Attack on your pitiful frame.";
         public override bool Drop_2D2 => true;
         public override bool Drop90 => true;
@@ -32,8 +39,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 2;
         public override string FriendlyName => "Cult leader";
         public override int Hdice => 52;
-        public override bool Heal => true;
-        public override bool Hold => true;
         public override int Hside => 10;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
@@ -50,8 +55,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Cult    ";
         public override string SplitName3 => "   leader   ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonMonster => true;
-        public override bool SummonUndead => true;
     }
 }

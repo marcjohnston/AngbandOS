@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,16 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDisintegrationMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new SummonReaverMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.Red;
         public override string Name => "Gothmog, the High Captain of Balrogs";
@@ -20,10 +31,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheDisintegration => true;
-        public override bool BreatheFire => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "Gothmog is the Chief Balrog in Morgoth's personal guard. He is renowned for slaying Ecthelion the Warder of the Gates and he has never been defeated in combat. With his whip of flame and awesome fiery breath he saved his master from Ungoliant's rage.";
         public override bool Drop_2D2 => true;
@@ -57,16 +64,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool Powerful => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 0;
         public override int Speed => 130;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Gothmog   ";
-        public override bool SummonDemon => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonKin => true;
-        public override bool SummonReaver => true;
         public override bool Unique => true;
     }
 }

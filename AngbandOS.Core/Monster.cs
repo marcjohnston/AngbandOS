@@ -9,11 +9,9 @@ using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Core.MonsterSelectors;
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using System;
-using System.Threading;
 
 namespace AngbandOS
 {
@@ -1449,15 +1447,8 @@ namespace AngbandOS
         /// <returns> True if a spell was cast, false if not </returns>
         private bool TryCastingASpellAgainstPlayer(SaveGame saveGame)
         {
-            int k;
-            int[] spell = new int[96];
-            int num = 0;
             bool noInnate = false;
-            int playerX = saveGame.Player.MapX;
-            int playerY = saveGame.Player.MapY;
-            int count = 0;
-            bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
-            bool seenByPlayer = !playerIsBlind && IsVisible;
+
             // No spells if we're confused
             if (ConfusionLevel != 0)
             {
@@ -1483,101 +1474,77 @@ namespace AngbandOS
             {
                 return false;
             }
+
             // Innate abilities are inherently less likely than actual spells
             if (Program.Rng.RandomLessThan(100) >= chance * 2)
             {
                 noInnate = true;
             }
+
             // If we're too far from the player don't cast a spell
             if (DistanceFromPlayer > Constants.MaxRange)
             {
                 return false;
             }
+
             // If we have no line of sight to the player, don't cast a spell
             if (!saveGame.Level.Projectable(MapY, MapX, saveGame.Player.MapY, saveGame.Player.MapX))
             {
                 return false;
             }
+
             // Gather together the abilities we have
             int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
-            uint f4 = Race.Flags4;
-            uint f5 = Race.Flags5;
-            uint f6 = Race.Flags6;
+            MonsterSpellList spells = Race.Spells;
+
             // If we're not allowed innate abilities, then things on Flags4 can't be used
             if (noInnate)
             {
-                f4 = 0;
+                spells = spells.Remove((_spell) => _spell.IsInnate);
             }
+
             // If we're smart and badly injured, we may want to prioritise spells that disable the
             // player, summon help, or let us escape over spells that do direct damage
             if (Race.Smart && Health < MaxHealth / 10 && Program.Rng.RandomLessThan(100) < 50)
             {
-                f4 &= MonsterFlag4.IntMask;
-                f5 &= MonsterFlag5.IntMask;
-                f6 &= MonsterFlag6.IntMask;
+
+                spells = spells.Where((_spell) => _spell.IsIntelligent);
+
                 // If we just got rid of all our spells then don't cast
-                if (f4 == 0 && f5 == 0 && f6 == 0)
+                if (spells.Count == 0)
                 {
                     return false;
-                }
+                }    
             }
+
             // Ditch any spells that we've seen the player resist before so we know they'll be ineffective
-            RemoveIneffectiveSpells(saveGame, out f4, f4, out f5, f5, out f6, f6);
+            spells = RemoveIneffectiveSpells(saveGame, spells);
+
             // If we just got rid of all our spells then don't cast
-            if (f4 == 0 && f5 == 0 && f6 == 0)
+            if (spells.Count == 0)
             {
                 return false;
             }
+
             // If we don't have a clean shot, and we're stupid, remove bolt spells
-            if (((f4 & MonsterFlag4.BoltMask) != 0 || (f5 & MonsterFlag5.BoltMask) != 0 || (f6 & MonsterFlag6.BoltMask) != 0) && !Race.Stupid && !saveGame.CleanShot(MapY, MapX, saveGame.Player.MapY, saveGame.Player.MapX))
+            if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !saveGame.CleanShot(MapY, MapX, saveGame.Player.MapY, saveGame.Player.MapX))
             {
-                f4 &= ~MonsterFlag4.BoltMask;
-                f5 &= ~MonsterFlag5.BoltMask;
-                f6 &= ~MonsterFlag6.BoltMask;
+                spells = spells.Remove((_spell) => _spell.CanBeReflected);
             }
+
             // If there's nowhere around the player to put a summoned creature, then remove
             // summoning spells
-            if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && !Race.Stupid && !saveGame.SummonPossible(saveGame.Player.MapY, saveGame.Player.MapX))
+            if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !saveGame.SummonPossible(saveGame.Player.MapY, saveGame.Player.MapX))
             {
-                f4 &= ~MonsterFlag4.SummonMask;
-                f5 &= ~MonsterFlag5.SummonMask;
-                f6 &= ~MonsterFlag6.SummonMask;
+                spells = spells.Remove((_spell) => _spell.SummonsHelp);
             }
+
             // If we've removed all our spells, don't cast anything
-            if (f4 == 0 && f5 == 0 && f6 == 0)
+            if (spells.Count == 0)
             {
                 return false;
             }
-            // Gather up all the spells that are left and put them in an array Flags4 spells are 96
-            // + bit number (0-31)
-            for (k = 0; k < 32; k++)
-            {
-                if ((f4 & (1u << k)) != 0)
-                {
-                    spell[num++] = k + (32 * 3);
-                }
-            }
-            // Flags5 spells are 128 + bit number (0-31)
-            for (k = 0; k < 32; k++)
-            {
-                if ((f5 & (1u << k)) != 0)
-                {
-                    spell[num++] = k + (32 * 4);
-                }
-            }
-            // Flags6 spells are 160 + bit number (0-31)
-            for (k = 0; k < 32; k++)
-            {
-                if ((f6 & (1 << k)) != 0)
-                {
-                    spell[num++] = k + (32 * 5);
-                }
-            }
-            // If we ended up with no spells, don't cast
-            if (num == 0)
-            {
-                return false;
-            }
+
             // If the player's already dead or off the saveGame.Level, don't cast
             if (!saveGame.Playing || saveGame.Player.IsDead || saveGame.NewLevelFlag)
             {
@@ -1586,1173 +1553,62 @@ namespace AngbandOS
             string monsterName = Name;
             string monsterPossessive = PossessiveName;
             string monsterDescription = IndefiniteVisibleName;
+
             // Pick one of our spells to cast, based on our priorities
-            int thrownSpell = ChooseSpellAgainstPlayer(saveGame, spell, num);
+            MonsterSpell? thrownSpell = ChooseSpellAgainstPlayer(saveGame, spells);
+
             // If we decided not to cast, don't
-            if (thrownSpell == 0)
+            if (thrownSpell == null)
             {
                 return false;
             }
+
             // Stupid monsters may fail spells
             int failrate = 25 - ((monsterLevel + 3) / 4);
             if (Race.Stupid)
             {
                 failrate = 0;
             }
+
             // Only check for actual spells - nothing is so stupid it fails to breathe
-            if (thrownSpell >= 128 && Program.Rng.RandomLessThan(100) < failrate)
+            if (!thrownSpell.UsesBreathe && Program.Rng.RandomLessThan(100) < failrate)
             {
                 saveGame.MsgPrint($"{monsterName} tries to cast a spell, but fails.");
                 return true;
             }
-            // Now do whatever the actual spell does
-            switch (thrownSpell)
+
+            // Any action on the player automatically disturbs the player.
+            saveGame.Disturb(true);
+
+            // Render a message to the player.
+            bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
+            string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
+            if (message != null)
             {
-                // MonsterFlag4.Shriek
-                case 96 + 0:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} makes a high pitched shriek.");
-                    saveGame.AggravateMonsters(this);
-                    break;
-
-                // MonsterFlag4.Xxx2
-                case 96 + 1:
-                // MonsterFlag4.Xxx3
-                case 96 + 2:
-                    break;
-
-                // MonsterFlag4.ShardBall
-                case 96 + 3:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles something." : $"{monsterName} fires a shard ball.");
-                    FireBallAtPlayer(saveGame, new ProjectShard(saveGame), Health / 4 > 800 ? 800 : Health / 4, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsShard);
-                    break;
-
-                // MonsterFlag4.Arrow1D6
-                case 96 + 4:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow.");
-                    FireBoltAtPlayer(saveGame, new ProjectArrow(saveGame), Program.Rng.DiceRoll(1, 6));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag4.Arrow3D6
-                case 96 + 5:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires an arrow!");
-                    FireBoltAtPlayer(saveGame, new ProjectArrow(saveGame), Program.Rng.DiceRoll(3, 6));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag4.Arrow5D6
-                case 96 + 6:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName}s makes a strange noise." : $"{monsterName} fires a missile.");
-                    FireBoltAtPlayer(saveGame, new ProjectArrow(saveGame), Program.Rng.DiceRoll(5, 6));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag4.Arrow7D6
-                case 96 + 7:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires a missile!");
-                    FireBoltAtPlayer(saveGame, new ProjectArrow(saveGame), Program.Rng.DiceRoll(7, 6));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag4.BreatheAcid
-                case 96 + 8:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes acid.");
-                    BreatheAtPlayer(saveGame, new ProjectAcid(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsAcid);
-                    break;
-
-                // MonsterFlag4.BreatheLightning
-                case 96 + 9:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes lightning.");
-                    BreatheAtPlayer(saveGame, new ProjectElec(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsElec);
-                    break;
-
-                // MonsterFlag4.BreatheFire
-                case 96 + 10:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes fire.");
-                    BreatheAtPlayer(saveGame, new ProjectFire(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFire);
-                    break;
-
-                // MonsterFlag4.BreatheCold
-                case 96 + 11:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes frost.");
-                    BreatheAtPlayer(saveGame, new ProjectCold(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsCold);
-                    break;
-
-                // MonsterFlag4.BreathePoison
-                case 96 + 12:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gas.");
-                    BreatheAtPlayer(saveGame, new ProjectPois(saveGame), Health / 3 > 800 ? 800 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsPois);
-                    break;
-
-                // MonsterFlag4.BreatheNether
-                case 96 + 13:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nether.");
-                    BreatheAtPlayer(saveGame, new ProjectNether(saveGame), Health / 6 > 550 ? 550 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsNeth);
-                    break;
-
-                // MonsterFlag4.BreatheLight
-                case 96 + 14:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes light.");
-                    BreatheAtPlayer(saveGame, new ProjectLight(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsLight);
-                    break;
-
-                // MonsterFlag4.BreatheDark
-                case 96 + 15:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes darkness.");
-                    BreatheAtPlayer(saveGame, new ProjectDark(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsDark);
-                    break;
-
-                // MonsterFlag4.BreatheConfusion
-                case 96 + 16:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes confusion.");
-                    BreatheAtPlayer(saveGame, new ProjectConfusion(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsConf);
-                    break;
-
-                // MonsterFlag4.BreatheSound
-                case 96 + 17:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes sound.");
-                    BreatheAtPlayer(saveGame, new ProjectSound(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsSound);
-                    break;
-
-                // MonsterFlag4.BreatheChaos
-                case 96 + 18:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes chaos.");
-                    BreatheAtPlayer(saveGame, new ProjectChaos(saveGame), Health / 6 > 600 ? 600 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsChaos);
-                    break;
-
-                // MonsterFlag4.BreatheDisenchant
-                case 96 + 19:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disenchantment.");
-                    BreatheAtPlayer(saveGame, new ProjectDisenchant(saveGame), Health / 6 > 500 ? 500 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsDisen);
-                    break;
-
-                // MonsterFlag4.BreatheNexus
-                case 96 + 20:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes nexus.");
-                    BreatheAtPlayer(saveGame, new ProjectNexus(saveGame), Health / 3 > 250 ? 250 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsNexus);
-                    break;
-
-                // MonsterFlag4.BreatheTime
-                case 96 + 21:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes time.");
-                    BreatheAtPlayer(saveGame, new ProjectTime(saveGame), Health / 3 > 150 ? 150 : Health / 3, 0);
-                    break;
-
-                // MonsterFlag4.BreatheInertia
-                case 96 + 22:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes inertia.");
-                    BreatheAtPlayer(saveGame, new ProjectInertia(saveGame), Health / 6 > 200 ? 200 : Health / 6, 0);
-                    break;
-
-                // MonsterFlag4.BreatheGravity
-                case 96 + 23:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes gravity.");
-                    BreatheAtPlayer(saveGame, new ProjectGravity(saveGame), Health / 3 > 200 ? 200 : Health / 3, 0);
-                    break;
-
-                // MonsterFlag4.BreatheShards
-                case 96 + 24:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes shards.");
-                    BreatheAtPlayer(saveGame, new ProjectExplode(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsShard);
-                    break;
-
-                // MonsterFlag4.BreathePlasma
-                case 96 + 25:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes plasma.");
-                    BreatheAtPlayer(saveGame, new ProjectPlasma(saveGame), Health / 6 > 150 ? 150 : Health / 6, 0);
-                    break;
-
-                // MonsterFlag4.BreatheForce
-                case 96 + 26:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes force.");
-                    BreatheAtPlayer(saveGame, new ProjectForce(saveGame), Health / 6 > 200 ? 200 : Health / 6, 0);
-                    break;
-
-                // MonsterFlag4.BreatheMana
-                case 96 + 27:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes magical energy.");
-                    BreatheAtPlayer(saveGame, new ProjectMana(saveGame), Health / 3 > 250 ? 250 : Health / 3, 0);
-                    break;
-
-                // MonsterFlag4.RadiationBall
-                case 96 + 28:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a ball of radiation.");
-                    FireBallAtPlayer(saveGame, new ProjectNuke(saveGame), monsterLevel + Program.Rng.DiceRoll(10, 6), 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsPois);
-                    break;
-
-                // MonsterFlag4.BreatheRadiation
-                case 96 + 29:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes toxic waste.");
-                    BreatheAtPlayer(saveGame, new ProjectNuke(saveGame), Health / 3 > 800 ? 800 : Health / 3, 0);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsPois);
-                    break;
-
-                // MonsterFlag4.ChaosBall
-                case 96 + 30:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles frighteningly." : $"{monsterName} invokes raw chaos.");
-                    FireBallAtPlayer(saveGame, new ProjectChaos(saveGame), (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10), 4);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsChaos);
-                    break;
-
-                // MonsterFlag4.BreatheDisintegration
-                case 96 + 31:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} breathes." : $"{monsterName} breathes disintegration.");
-                    BreatheAtPlayer(saveGame, new ProjectDisintegrate(saveGame), Health / 3 > 300 ? 300 : Health / 3, 0);
-                    break;
-
-                // MonsterFlag5.AcidBall
-                case 128 + 0:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an acid ball.");
-                    FireBallAtPlayer(saveGame, new ProjectAcid(saveGame), Program.Rng.DieRoll(monsterLevel * 3) + 15, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsAcid);
-                    break;
-
-                // MonsterFlag5.LightningBall
-                case 128 + 1:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning ball.");
-                    FireBallAtPlayer(saveGame, new ProjectElec(saveGame), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsElec);
-                    break;
-
-                // MonsterFlag5.FireBall
-                case 128 + 2:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire ball.");
-                    FireBallAtPlayer(saveGame, new ProjectFire(saveGame), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 10, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFire);
-                    break;
-
-                // MonsterFlag5.ColdBall
-                case 128 + 3:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost ball.");
-                    FireBallAtPlayer(saveGame, new ProjectCold(saveGame), Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsCold);
-                    break;
-
-                // MonsterFlag5.PoisonBall
-                case 128 + 4:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a stinking cloud.");
-                    FireBallAtPlayer(saveGame, new ProjectPois(saveGame), Program.Rng.DiceRoll(12, 2), 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsPois);
-                    break;
-
-                // MonsterFlag5.NetherBall
-                case 128 + 5:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether ball.");
-                    FireBallAtPlayer(saveGame, new ProjectNether(saveGame), 50 + Program.Rng.DiceRoll(10, 10) + monsterLevel, 2);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsNeth);
-                    break;
-
-                // MonsterFlag5.WaterBall
-                case 128 + 6:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} gestures fluidly.");
-                    saveGame.MsgPrint("You are engulfed in a whirlpool.");
-                    FireBallAtPlayer(saveGame, new ProjectWater(saveGame), Program.Rng.DieRoll(monsterLevel * 5 / 2) + 50, 4);
-                    break;
-
-                // MonsterFlag5.ManaBall
-                case 128 + 7:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles powerfully." : $"{monsterName} invokes a mana storm.");
-                    FireBallAtPlayer(saveGame, new ProjectMana(saveGame), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
-                    break;
-
-                // MonsterFlag5.DarkBall
-                case 128 + 8:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles powerfully." : $"{monsterName} invokes a darkness storm.");
-                    FireBallAtPlayer(saveGame, new ProjectDark(saveGame), (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10), 4);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsDark);
-                    break;
-
-                // MonsterFlag5.DrainMana
-                case 128 + 9:
-                    if (saveGame.Player.Mana != 0)
-                    {
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint($"{monsterName} draws psychic energy from you!");
-                        int r1 = (Program.Rng.DieRoll(monsterLevel) / 2) + 1;
-                        if (r1 >= saveGame.Player.Mana)
-                        {
-                            r1 = saveGame.Player.Mana;
-                            saveGame.Player.Mana = 0;
-                            saveGame.Player.FractionalMana = 0;
-                        }
-                        else
-                        {
-                            saveGame.Player.Mana -= r1;
-                        }
-                        saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
-                        if (Health < MaxHealth)
-                        {
-                            Health += 6 * r1;
-                            if (Health > MaxHealth)
-                            {
-                                Health = MaxHealth;
-                            }
-                            if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
-                            {
-                                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-                            }
-                            if (seenByPlayer)
-                            {
-                                saveGame.MsgPrint($"{monsterName} appears healthier.");
-                            }
-                        }
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsMana);
-                    break;
-
-                // MonsterFlag5.MindBlast
-                case 128 + 10:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(!seenByPlayer
-                        ? "You feel something focusing on your mind."
-                        : $"{monsterName} gazes deep into your eyes.");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.MsgPrint("Your mind is blasted by psionic energy.");
-                        if (!saveGame.Player.HasConfusionResistance)
-                        {
-                            saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
-                        }
-                        if (!saveGame.Player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
-                        {
-                            saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 150);
-                        }
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), monsterDescription);
-                    }
-                    break;
-
-                // MonsterFlag5.BrainSmash
-                case 128 + 11:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(!seenByPlayer
-                        ? "You feel something focusing on your mind."
-                        : $"{monsterName} looks deep into your eyes.");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.MsgPrint("Your mind is blasted by psionic energy.");
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(12, 15), monsterDescription);
-                        if (!saveGame.Player.HasBlindnessResistance)
-                        {
-                            saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 8 + Program.Rng.RandomLessThan(8));
-                        }
-                        if (!saveGame.Player.HasConfusionResistance)
-                        {
-                            saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
-                        }
-                        if (!saveGame.Player.HasFreeAction)
-                        {
-                            saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(4) + 4);
-                        }
-                        saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
-                        while (Program.Rng.RandomLessThan(100) > saveGame.Player.SkillSavingThrow)
-                        {
-                            saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
-                        }
-                        while (Program.Rng.RandomLessThan(100) > saveGame.Player.SkillSavingThrow)
-                        {
-                            saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
-                        }
-                        if (!saveGame.Player.HasChaosResistance)
-                        {
-                            saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 150);
-                        }
-                    }
-                    break;
-
-                // MonsterFlag5.CauseLightWounds
-                case 128 + 12:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} points at you and curses.");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.CurseEquipment(33, 0);
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), monsterDescription);
-                    }
-                    break;
-
-                // MonsterFlag5.CauseSeriousWounds
-                case 128 + 13:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} points at you and curses horribly.");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.CurseEquipment(50, 5);
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), monsterDescription);
-                    }
-                    break;
-
-                // MonsterFlag5.CauseCriticalWounds
-                case 128 + 14:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles loudly."
-                        : $"{monsterName} points at you, incanting terribly!");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.CurseEquipment(80, 15);
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 15), monsterDescription);
-                    }
-                    break;
-
-                // MonsterFlag5.CauseMortalWounds
-                case 128 + 15:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} screams the word 'DIE!'"
-                        : $"{monsterName} points at you, screaming the word DIE!");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.TakeHit(Program.Rng.DiceRoll(15, 15), monsterDescription);
-                        saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + Program.Rng.DiceRoll(10, 10));
-                    }
-                    break;
-
-                // MonsterFlag5.AcidBolt
-                case 128 + 16:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a acid bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectAcid(saveGame), Program.Rng.DiceRoll(7, 8) + (monsterLevel / 3));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsAcid);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.LightningBolt
-                case 128 + 17:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a lightning bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectElec(saveGame), Program.Rng.DiceRoll(4, 8) + (monsterLevel / 3));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsElec);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.FireBolt
-                case 128 + 18:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a fire bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectFire(saveGame), Program.Rng.DiceRoll(9, 8) + (monsterLevel / 3));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFire);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.ColdBolt
-                case 128 + 19:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a frost bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectCold(saveGame), Program.Rng.DiceRoll(6, 8) + (monsterLevel / 3));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsCold);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.PoisonBolt
-                case 128 + 20:
-                    break;
-
-                // MonsterFlag5.NetherBolt
-                case 128 + 21:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a nether bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectNether(saveGame), 30 + Program.Rng.DiceRoll(5, 5) + (monsterLevel * 3 / 2));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsNeth);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.WaterBolt
-                case 128 + 22:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a water bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectWater(saveGame), Program.Rng.DiceRoll(10, 10) + monsterLevel);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.ManaBolt
-                case 128 + 23:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a mana bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectMana(saveGame), Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.PlasmaBolt
-                case 128 + 24:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a plasma bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectPlasma(saveGame), 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.IceBolt
-                case 128 + 25:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts an ice bolt.");
-                    FireBoltAtPlayer(saveGame, new ProjectIce(saveGame), Program.Rng.DiceRoll(6, 6) + monsterLevel);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsCold);
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.MagicMissile
-                case 128 + 26:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a magic missile.");
-                    FireBoltAtPlayer(saveGame, new ProjectMissile(saveGame), Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3));
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsReflect);
-                    break;
-
-                // MonsterFlag5.Scare
-                case 128 + 27:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles, and you hear scary noises."
-                        : $"{monsterName} casts a fearful illusion.");
-                    if (saveGame.Player.HasFearResistance)
-                    {
-                        saveGame.MsgPrint("You refuse to be frightened.");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You refuse to be frightened.");
-                    }
-                    else
-                    {
-                        saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.RandomLessThan(4) + 4);
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFear);
-                    break;
-
-                // MonsterFlag5.Blindness
-                case 128 + 28:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} casts a spell, burning your eyes!");
-                    if (saveGame.Player.HasBlindnessResistance)
-                    {
-                        saveGame.MsgPrint("You are unaffected!");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.SetTimedBlindness(12 + Program.Rng.RandomLessThan(4));
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsBlind);
-                    break;
-
-                // MonsterFlag5.Confuse
-                case 128 + 29:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles, and you hear puzzling noises." : $"{monsterName} creates a mesmerising illusion.");
-                    if (saveGame.Player.HasConfusionResistance)
-                    {
-                        saveGame.MsgPrint("You disbelieve the feeble spell.");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You disbelieve the feeble spell.");
-                    }
-                    else
-                    {
-                        saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsConf);
-                    break;
-
-                // MonsterFlag5.Slow
-                case 128 + 30:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} drains power from your muscles!");
-                    if (saveGame.Player.HasFreeAction)
-                    {
-                        saveGame.MsgPrint("You are unaffected!");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFree);
-                    break;
-
-                // MonsterFlag5.Hold
-                case 128 + 31:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} stares deep into your eyes!");
-                    if (saveGame.Player.HasFreeAction)
-                    {
-                        saveGame.MsgPrint("You are unaffected!");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(4) + 4);
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsFree);
-                    break;
-
-                // MonsterFlag6.Haste
-                case 160 + 0:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} concentrates on {monsterPossessive} body.");
-                    if (Speed < Race.Speed + 10)
-                    {
-                        saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                        Speed += 10;
-                    }
-                    else if (Speed < Race.Speed + 20)
-                    {
-                        saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                        Speed += 2;
-                    }
-                    break;
-
-                // MonsterFlag6.DreadCurse
-                case 160 + 1:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} invokes the Dread Curse of Azathoth!");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        int dummy = (65 + Program.Rng.DieRoll(25)) * saveGame.Player.Health / 100;
-                        saveGame.MsgPrint("Your feel your life fade away!");
-                        saveGame.Player.TakeHit(dummy, monsterName);
-                        saveGame.Player.CurseEquipment(100, 20);
-                        if (saveGame.Player.Health < 1)
-                        {
-                            saveGame.Player.Health = 1;
-                        }
-                    }
-                    break;
-
-                // MonsterFlag6.Heal
-                case 160 + 2:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} concentrates on {monsterPossessive} wounds.");
-                    Health += monsterLevel * 6;
-                    if (Health >= MaxHealth)
-                    {
-                        Health = MaxHealth;
-                        saveGame.MsgPrint(seenByPlayer
-                            ? $"{monsterName} looks completely healed!"
-                            : $"{monsterName} sounds completely healed!");
-                    }
-                    else
-                    {
-                        saveGame.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
-                    }
-                    if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
-                    {
-                        saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-                    }
-                    if (FearLevel != 0)
-                    {
-                        FearLevel = 0;
-                        saveGame.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
-                    }
-                    break;
-
-                // MonsterFlag6.Xxx2
-                case 160 + 3:
-                    break;
-
-                // MonsterFlag6.Blink
-                case 160 + 4:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} blinks away.");
-                    TeleportAway(saveGame, 10);
-                    break;
-
-                // MonsterFlag6.TeleportSelf
-                case 160 + 5:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} teleports away.");
-                    TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
-                    break;
-
-                // MonsterFlag6.Xxx3
-                case 160 + 6:
-                // MonsterFlag6.Xxx4
-                case 160 + 7:
-                    break;
-
-                // MonsterFlag6.TeleportTo
-                case 160 + 8:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} commands you to return.");
-                    saveGame.TeleportPlayerTo(MapY, MapX);
-                    break;
-
-                // MonsterFlag6.TeleportAway
-                case 160 + 9:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} teleports you away.");
-                    saveGame.TeleportPlayer(100);
-                    break;
-
-                // MonsterFlag6.TeleportLevel
-                case 160 + 10:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles strangely."
-                        : $"{monsterName} gestures at your feet.");
-                    if (saveGame.Player.HasNexusResistance)
-                    {
-                        saveGame.MsgPrint("You are unaffected!");
-                    }
-                    else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else
-                    {
-                        saveGame.TeleportPlayerLevel();
-                    }
-                    saveGame.Level.Monsters.UpdateSmartLearn(this, Constants.DrsNexus);
-                    break;
-
-                // MonsterFlag6.Xxx5
-                case 160 + 11:
-                    break;
-
-                // MonsterFlag6.Darkness
-                case 160 + 12:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} gestures in shadow.");
-                    saveGame.UnlightArea(0, 3);
-                    break;
-
-                // MonsterFlag6.CreateTraps
-                case 160 + 13:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles, and then cackles evilly."
-                        : $"{monsterName} casts a spell and cackles evilly.");
-                    saveGame.TrapCreation();
-                    break;
-
-                // MonsterFlag6.Forget
-                case 160 + 14:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} tries to blank your mind.");
-                    if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-                    {
-                        saveGame.MsgPrint("You resist the effects!");
-                    }
-                    else if (saveGame.LoseAllInfo())
-                    {
-                        saveGame.MsgPrint("Your memories fade away.");
-                    }
-                    break;
-
-                // MonsterFlag6.Xxx6
-                case 160 + 15:
-                    break;
-
-                // MonsterFlag6.SummonKin
-                case 160 + 16:
-                    saveGame.Disturb(true);
-                    if (playerIsBlind)
-                    {
-                        saveGame.MsgPrint($"{monsterName} mumbles.");
-                    }
-                    else
-                    {
-                        string kin = Race.Unique ? "minions" : "kin";
-                        saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
-                    }
-                    for (k = 0; k < 6; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new KinMonsterSelector(Race.Character)))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonReaver
-                case 160 + 17:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles."
-                        : $"{monsterName} magically summons Black Reavers!");
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear heavy steps nearby.");
-                    }
-                    saveGame.SummonReaver();
-                    break;
-
-                // MonsterFlag6.SummonMonster
-                case 160 + 18:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons help!");
-                    for (k = 0; k < 1; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, null))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear something appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonMonsters
-                case 160 + 19:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons monsters!");
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, null))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonAnt
-                case 160 + 20:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons ants.");
-                    for (k = 0; k < 6; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new AntMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonSpider
-                case 160 + 21:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons spiders.");
-                    for (k = 0; k < 6; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new SpiderMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonHound
-                case 160 + 22:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons hounds.");
-                    for (k = 0; k < 6; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HoundMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonHydra
-                case 160 + 23:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons hydras.");
-                    for (k = 0; k < 6; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HydraMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonCthuloid
-                case 160 + 24:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles."
-                        : $"{monsterName} magically summons a Cthuloid entity!");
-                    for (k = 0; k < 1; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new CthuloidMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear something appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonDemon
-                case 160 + 25:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons a demon!");
-                    for (k = 0; k < 1; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new DemonMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear something appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonUndead
-                case 160 + 26:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles."
-                        : $"{monsterName} magically summons an undead adversary!");
-                    for (k = 0; k < 1; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new UndeadMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear something appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonDragon
-                case 160 + 27:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons a dragon!");
-                    for (k = 0; k < 1; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new DragonMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear something appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonHiUndead
-                case 160 + 28:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(
-                        playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons greater undead!");
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiUndeadMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many creepy things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonHiDragon
-                case 160 + 29:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles."
-                        : $"{monsterName} magically summons ancient dragons!");
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiDragonMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many powerful things appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonGreatOldOne
-                case 160 + 30:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(
-                        playerIsBlind ? $"{monsterName} mumbles." : $"{monsterName} magically summons Great Old Ones!");
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new GooMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear immortal beings appear nearby.");
-                    }
-                    break;
-
-                // MonsterFlag6.SummonUnique
-                case 160 + 31:
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint(playerIsBlind
-                        ? $"{monsterName} mumbles."
-                        : $"{monsterName} magically summons special opponents!");
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new UniqueMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    for (k = 0; k < 8; k++)
-                    {
-                        if (saveGame.Level.Monsters.SummonSpecific(playerY, playerX, monsterLevel, new HiUndeadMonsterSelector()))
-                        {
-                            count++;
-                        }
-                    }
-                    if (playerIsBlind && count != 0)
-                    {
-                        saveGame.MsgPrint("You hear many powerful things appear nearby.");
-                    }
-                    break;
+                saveGame.MsgPrint(message);
             }
+
+            // Execute the spell.
+            thrownSpell.ExecuteOnPlayer(saveGame, this);
+
+            // Learn from the spell.
+            foreach (int smartLearn in thrownSpell.SmartLearn)
+            {
+                saveGame.Level.Monsters.UpdateSmartLearn(this, smartLearn);
+            }
+
             // If the player saw us cast the spell, let them learn we can do that
+            bool seenByPlayer = !playerIsBlind && IsVisible;
             if (seenByPlayer)
             {
-                if (thrownSpell < 32 * 4)
+                Race.Knowledge.RSpells.Add(thrownSpell);
+                if (thrownSpell.IsInnate)
                 {
-                    Race.Knowledge.RFlags4 |= 1u << (thrownSpell - (32 * 3));
-                    if (Race.Knowledge.RCastInate < Constants.MaxUchar)
-                    {
-                        Race.Knowledge.RCastInate++;
-                    }
+                    Race.Knowledge.RCastInate++;
                 }
-                else if (thrownSpell < 32 * 5)
+                else
                 {
-                    Race.Knowledge.RFlags5 |= 1u << (thrownSpell - (32 * 4));
-                    if (Race.Knowledge.RCastSpell < Constants.MaxUchar)
-                    {
-                        Race.Knowledge.RCastSpell++;
-                    }
-                }
-                else if (thrownSpell < 32 * 6)
-                {
-                    Race.Knowledge.RFlags6 |= 1u << (thrownSpell - (32 * 5));
-                    if (Race.Knowledge.RCastSpell < Constants.MaxUchar)
-                    {
-                        Race.Knowledge.RCastSpell++;
-                    }
+                    Race.Knowledge.RCastSpell++;
                 }
             }
             // If we killed the player, let their descendants remember that
@@ -2771,18 +1627,14 @@ namespace AngbandOS
         /// <returns> True if we cast a spell, false otherwise </returns>
         private bool TryCastingASpellAgainstAnotherMonster(SaveGame saveGame)
         {
-            int count = 0;
-            int[] spell = new int[96];
-            int num = 0;
-            bool wakeUp = false;
-            bool blind = saveGame.Player.TimedBlindness != 0;
-            bool seen = !blind && IsVisible;
             bool friendly = (Mind & Constants.SmFriendly) != 0;
+
             // Can't cast a spell if we're confused
             if (ConfusionLevel != 0)
             {
                 return false;
             }
+
             // We have a chance to cast a spell based on our race
             int chance = Race.FrequencyChance;
             if (chance == 0)
@@ -2793,1674 +1645,126 @@ namespace AngbandOS
             {
                 return false;
             }
+
+            MonsterSpellList monsterSpells = Race.Spells;
+
             // Look through the monster list to find a potential target
             for (int i = 1; i < saveGame.Level.MMax; i++)
             {
                 int targetIndex = i;
                 Monster target = saveGame.Level.Monsters[targetIndex];
                 MonsterRace targetRace = target.Race;
+
                 // Can't cast spells on ourself
                 if (target == this)
                 {
                     continue;
                 }
+
                 // Can't cast spells on empty monster slots
                 if (target.Race == null)
                 {
                     continue;
                 }
+
                 // Don't cast spells on monsters from the same team
                 if ((Mind & Constants.SmFriendly) == (target.Mind & Constants.SmFriendly))
                 {
                     continue;
                 }
+
                 // If the target is too far away from the player, don't cast a spell
                 if (target.DistanceFromPlayer > Constants.MaxRange)
                 {
                     continue;
                 }
+
                 // If we don't have line of sight to the target, don't cast a spell
                 if (!saveGame.Level.Projectable(MapY, MapX, target.MapY, target.MapX))
                 {
                     continue;
                 }
-                int y = target.MapY;
-                int x = target.MapX;
-                int rlev = Race.Level >= 1 ? Race.Level : 1;
-                uint f4 = Race.Flags4;
-                uint f5 = Race.Flags5;
-                uint f6 = Race.Flags6;
+
                 // If we're smart and badly injured, we may want to prioritise spells that disable
                 // the target, summon help, or let us escape over spells that do direct damage
-                if (Race.Smart && Health < MaxHealth / 10 &&
-                    Program.Rng.RandomLessThan(100) < 50)
+                if (Race.Smart && Health < MaxHealth / 10 && Program.Rng.RandomLessThan(100) < 50)
                 {
-                    f4 &= MonsterFlag4.IntMask;
-                    f5 &= MonsterFlag5.IntMask;
-                    f6 &= MonsterFlag6.IntMask;
+                    monsterSpells = monsterSpells.Where((MonsterSpell _monsterSpell) => _monsterSpell.IsIntelligent);
+
                     // If we just got rid of all our spells then abort
-                    if (f4 == 0 && f5 == 0 && f6 == 0)
+                    if (monsterSpells.Count == 0)
                     {
                         return false;
                     }
                 }
                 // If there's nowhere around the target to put a summoned creature, then remove
                 // summoning spells
-                if (((f4 & MonsterFlag4.SummonMask) != 0 || (f5 & MonsterFlag5.SummonMask) != 0 || (f6 & MonsterFlag6.SummonMask) != 0) && !Race.Stupid && !saveGame.SummonPossible(target.MapY, target.MapX))
+                if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !saveGame.SummonPossible(target.MapY, target.MapX))
                 {
-                    f4 &= ~MonsterFlag4.SummonMask;
-                    f5 &= ~MonsterFlag5.SummonMask;
-                    f6 &= ~MonsterFlag6.SummonMask;
+                    monsterSpells = monsterSpells.Remove((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp);
                 }
+
                 // If we've removed all our spells, don't cast anything
-                if (f4 == 0 && f5 == 0 && f6 == 0)
+                if (monsterSpells.Count == 0)
                 {
                     return false;
                 }
-                // Gather up all the spells that are left and put them in an array Flags4 spells are 96
-                // + bit number (0-31)
-                int k;
-                for (k = 0; k < 32; k++)
-                {
-                    if ((f4 & (1u << k)) != 0)
-                    {
-                        spell[num++] = k + (32 * 3);
-                    }
-                }
-                for (k = 0; k < 32; k++)
-                {
-                    if ((f5 & (1u << k)) != 0)
-                    {
-                        spell[num++] = k + (32 * 4);
-                    }
-                }
-                for (k = 0; k < 32; k++)
-                {
-                    if ((f6 & (1u << k)) != 0)
-                    {
-                        spell[num++] = k + (32 * 5);
-                    }
-                }
-                // If we ended up with no spells, don't cast
-                if (num == 0)
-                {
-                    return false;
-                }
+
                 // If the player's already dead or off the level, don't cast
                 if (!saveGame.Playing || saveGame.Player.IsDead || saveGame.NewLevelFlag)
                 {
                     return false;
-                }
-                string monsterName = Name;
-                string monsterPossessive = PossessiveName;
-                string targetName = target.Name;
-                
+                }               
+
                 // Against other monsters we pick spells randomly
-                int thrownSpell = spell[Program.Rng.RandomLessThan(num)];
-                bool seeMonster = seen;
+                MonsterSpell thrownSpell = Race.Spells.ChooseRandom();
+                bool blind = saveGame.Player.TimedBlindness != 0;
                 bool seeTarget = !blind && target.IsVisible;
-                bool seeEither = seeMonster || seeTarget;
-                bool seeBoth = seeMonster && seeTarget;
-                // If we decided not to cast, don't
-                switch (thrownSpell)
+                bool seen = !blind && IsVisible;
+                bool seeEither = seen || seeTarget;
+
+                // If the player can see either monster, disturb the player.
+                if (seeEither)
                 {
-                    // MonsterFlag4.Shriek
-                    case 96 + 0:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeMonster ? "You hear a shriek." : $"{monsterName} shrieks at {targetName}.");
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag4.Xxx2
-                    case 96 + 1:
-                    // MonsterFlag4.Xxx3
-                    case 96 + 2:
-                        break;
-
-                    // MonsterFlag4.ShardBall
-                    case 96 + 3:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a shard ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectShard(saveGame), Health / 4 > 800 ? 800 : Health / 4, 2);
-                        break;
-
-                    // MonsterFlag4.Arrow1D6
-                    case 96 + 4:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear a strange noise." : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(saveGame, y, x, new ProjectArrow(saveGame), Program.Rng.DiceRoll(1, 6));
-                        break;
-
-                    // MonsterFlag4.Arrow3D6
-                    case 96 + 5:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear a strange noise." : $"{monsterName} fires an arrow at {targetName}");
-                        FireBoltAtMonster(saveGame, y, x, new ProjectArrow(saveGame), Program.Rng.DiceRoll(3, 6));
-                        break;
-
-                    // MonsterFlag4.Arrow5D6
-                    case 96 + 6:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear a strange noise." : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(saveGame, y, x, new ProjectArrow(saveGame), Program.Rng.DiceRoll(5, 6));
-                        break;
-
-                    // MonsterFlag4.Arrow7D6
-                    case 96 + 7:
-                        if (!seeEither)
-                        {
-                            saveGame.MsgPrint("You hear a strange noise.");
-                        }
-                        else
-                        {
-                            saveGame.Disturb(true);
-                        }
-                        saveGame.MsgPrint(blind ? $"{monsterName} makes a strange noise." : $"{monsterName} fires a missile at {targetName}");
-                        FireBoltAtMonster(saveGame, y, x, new ProjectArrow(saveGame), Program.Rng.DiceRoll(7, 6));
-                        break;
-
-                    // MonsterFlag4.BreatheAcid
-                    case 96 + 8:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes acid at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectAcid(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheLightning
-                    case 96 + 9:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes lightning at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectElec(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheFire
-                    case 96 + 10:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes fire at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectFire(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheCold
-                    case 96 + 11:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes frost at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectCold(saveGame), Health / 3 > 1600 ? 1600 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreathePoison
-                    case 96 + 12:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes gas at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectPois(saveGame), Health / 3 > 800 ? 800 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheNether
-                    case 96 + 13:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes nether at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectNether(saveGame), Health / 6 > 550 ? 550 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheLight
-                    case 96 + 14:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes light at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectLight(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheDark
-                    case 96 + 15:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes darkness at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectDark(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheConfusion
-                    case 96 + 16:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes confusion at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectConfusion(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheSound
-                    case 96 + 17:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes sound at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectSound(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheChaos
-                    case 96 + 18:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes chaos at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectChaos(saveGame), Health / 6 > 600 ? 600 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheDisenchant
-                    case 96 + 19:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes disenchantment at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectDisenchant(saveGame), Health / 6 > 500 ? 500 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheNexus
-                    case 96 + 20:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes nexus at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectNexus(saveGame), Health / 3 > 250 ? 250 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheTime
-                    case 96 + 21:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes time at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectTime(saveGame), Health / 3 > 150 ? 150 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheInertia
-                    case 96 + 22:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes inertia at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectInertia(saveGame), Health / 6 > 200 ? 200 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheGravity
-                    case 96 + 23:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes gravity at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectGravity(saveGame), Health / 3 > 200 ? 200 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheShards
-                    case 96 + 24:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes shards at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectExplode(saveGame), Health / 6 > 400 ? 400 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreathePlasma
-                    case 96 + 25:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes plasma at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectPlasma(saveGame), Health / 6 > 150 ? 150 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheForce
-                    case 96 + 26:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes force at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectForce(saveGame), Health / 6 > 200 ? 200 : Health / 6, 0);
-                        break;
-
-                    // MonsterFlag4.BreatheMana
-                    case 96 + 27:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes magical energy at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectMana(saveGame), Health / 3 > 250 ? 250 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.RadiationBall
-                    case 96 + 28:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a ball of radiation at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectNuke(saveGame), rlev + Program.Rng.DiceRoll(10, 6), 2);
-                        break;
-
-                    // MonsterFlag4.BreatheRadiation
-                    case 96 + 29:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes toxic waste at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectNuke(saveGame), Health / 3 > 800 ? 800 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag4.ChaosBall
-                    case 96 + 30:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble frighteningly." : $"{monsterName} invokes raw chaos upon {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectChaos(saveGame), (rlev * 2) + Program.Rng.DiceRoll(10, 10), 4);
-                        break;
-
-                    // MonsterFlag4.BreatheDisintegration
-                    case 96 + 31:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear breathing noise." : $"{monsterName} breathes disintegration at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectDisintegrate(saveGame), Health / 3 > 300 ? 300 : Health / 3, 0);
-                        break;
-
-                    // MonsterFlag5.AcidBall
-                    case 128 + 0:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts an acid ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectAcid(saveGame), Program.Rng.DieRoll(rlev * 3) + 15, 2);
-                        break;
-
-                    // MonsterFlag5.LightningBall
-                    case 128 + 1:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a lightning ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectElec(saveGame), Program.Rng.DieRoll(rlev * 3 / 2) + 8, 2);
-                        break;
-
-                    // MonsterFlag5.FireBall
-                    case 128 + 2:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a fire ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectFire(saveGame), Program.Rng.DieRoll(rlev * 7 / 2) + 10, 2);
-                        break;
-
-                    // MonsterFlag5.ColdBall
-                    case 128 + 3:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a frost ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectCold(saveGame), Program.Rng.DieRoll(rlev * 3 / 2) + 10, 2);
-                        break;
-
-                    // MonsterFlag5.PoisonBall
-                    case 128 + 4:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a stinking cloud at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectPois(saveGame), Program.Rng.DiceRoll(12, 2), 2);
-                        break;
-
-                    // MonsterFlag5.NetherBall
-                    case 128 + 5:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} casts a nether ball at {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectNether(saveGame), 50 + Program.Rng.DiceRoll(10, 10) + rlev, 2);
-                        break;
-
-                    // MonsterFlag5.WaterBall
-                    case 128 + 6:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble." : $"{monsterName} gestures fluidly at {targetName}");
-                        saveGame.MsgPrint($"{targetName} is engulfed in a whirlpool.");
-                        BreatheAtMonster(saveGame, y, x, new ProjectWater(saveGame), Program.Rng.DieRoll(rlev * 5 / 2) + 50, 4);
-                        break;
-
-                    // MonsterFlag5.ManaBall
-                    case 128 + 7:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble powerfully." : $"{monsterName} invokes a mana storm upon {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectMana(saveGame), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
-                        break;
-
-                    // MonsterFlag5.DarkBall
-                    case 128 + 8:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(!seeEither ? "You hear someone mumble powerfully." : $"{monsterName} invokes a darkness storm upon {targetName}");
-                        BreatheAtMonster(saveGame, y, x, new ProjectDark(saveGame), (rlev * 5) + Program.Rng.DiceRoll(10, 10), 4);
-                        break;
-
-                    // MonsterFlag5.DrainMana
-                    case 128 + 9:
-                        int r1 = (Program.Rng.DieRoll(rlev) / 2) + 1;
-                        if (seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} draws psychic energy from {targetName}");
-                        }
-                        if (Health < MaxHealth)
-                        {
-                            if (!(targetRace.Flags4 != 0 || targetRace.Flags5 != 0 || targetRace.Flags6 != 0))
-                            {
-                                if (seeBoth)
-                                {
-                                    saveGame.MsgPrint($"{targetName} is unaffected!");
-                                }
-                            }
-                            else
-                            {
-                                Health += 6 * r1;
-                                if (Health > MaxHealth)
-                                {
-                                    Health = MaxHealth;
-                                }
-                                if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
-                                {
-                                    saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-                                }
-                                if (seen)
-                                {
-                                    saveGame.MsgPrint($"{monsterName} appears healthier.");
-                                }
-                            }
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.MindBlast
-                    case 128 + 10:
-                        saveGame.Disturb(true);
-                        if (seen)
-                        {
-                            saveGame.MsgPrint($"{monsterName} gazes intently at {targetName}");
-                        }
-                        if (targetRace.Unique || targetRace.ImmuneConfusion ||
-                            targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (targetRace.ImmuneConfusion && seen)
-                            {
-                                targetRace.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
-                            }
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected!");
-                            }
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{targetName} is blasted by psionic energy.");
-                            target.ConfusionLevel += Program.Rng.RandomLessThan(4) + 4;
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(8, 8), out _, " collapses, a mindless husk.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.BrainSmash
-                    case 128 + 11:
-                        saveGame.Disturb(true);
-                        if (seen)
-                        {
-                            saveGame.MsgPrint($"{monsterName} gazes intently at {targetName}");
-                        }
-                        if (targetRace.Unique || targetRace.ImmuneConfusion ||
-                            targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (targetRace.ImmuneConfusion && seen)
-                            {
-                                targetRace.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
-                            }
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected!");
-                            }
-                        }
-                        else
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is blasted by psionic energy.");
-                            }
-                            target.ConfusionLevel += Program.Rng.RandomLessThan(4) + 4;
-                            target.Speed -= Program.Rng.RandomLessThan(4) + 4;
-                            target.StunLevel += Program.Rng.RandomLessThan(4) + 4;
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(12, 15), out _, " collapses, a mindless husk.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.CauseLightWounds
-                    case 128 + 12:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} points at {targetName} and curses.");
-                        }
-                        if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} resists!");
-                            }
-                        }
-                        else
-                        {
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(3, 8), out _, " is destroyed.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.CauseSeriousWounds
-                    case 128 + 13:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} points at {targetName} and curses horribly.");
-                        }
-                        if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} resists!");
-                            }
-                        }
-                        else
-                        {
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(8, 8), out _, " is destroyed.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.CauseCriticalWounds
-                    case 128 + 14:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} points at {targetName}, incanting terribly!");
-                        }
-                        if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} resists!");
-                            }
-                        }
-                        else
-                        {
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(10, 15), out _, " is destroyed.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.CauseMortalWounds
-                    case 128 + 15:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} points at {targetName}, screaming the word 'DIE!'");
-                        }
-                        if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} resists!");
-                            }
-                        }
-                        else
-                        {
-                            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(15, 15), out _, " is destroyed.");
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.AcidBolt
-                    case 128 + 16:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a acid bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectAcid(saveGame), Program.Rng.DiceRoll(7, 8) + (rlev / 3));
-                        break;
-
-                    // MonsterFlag5.LightningBolt
-                    case 128 + 17:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a lightning bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectElec(saveGame), Program.Rng.DiceRoll(4, 8) + (rlev / 3));
-                        break;
-
-                    // MonsterFlag5.FireBolt
-                    case 128 + 18:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a fire bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectFire(saveGame), Program.Rng.DiceRoll(9, 8) + (rlev / 3));
-                        break;
-
-                    // MonsterFlag5.ColdBolt
-                    case 128 + 19:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a frost bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectCold(saveGame), Program.Rng.DiceRoll(6, 8) + (rlev / 3));
-                        break;
-
-                    // MonsterFlag5.PoisonBolt
-                    case 128 + 20:
-                        break;
-
-                    // MonsterFlag5.NetherBolt
-                    case 128 + 21:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a nether bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectNether(saveGame), 30 + Program.Rng.DiceRoll(5, 5) + (rlev * 3 / 2));
-                        break;
-
-                    // MonsterFlag5.WaterBolt
-                    case 128 + 22:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a water bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectWater(saveGame), Program.Rng.DiceRoll(10, 10) + rlev);
-                        break;
-
-                    // MonsterFlag5.ManaBolt
-                    case 128 + 23:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a mana bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectMana(saveGame), Program.Rng.DieRoll(rlev * 7 / 2) + 50);
-                        break;
-
-                    // MonsterFlag5.PlasmaBolt
-                    case 128 + 24:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a plasma bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectPlasma(saveGame), 10 + Program.Rng.DiceRoll(8, 7) + rlev);
-                        break;
-
-                    // MonsterFlag5.IceBolt
-                    case 128 + 25:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts an ice bolt at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectIce(saveGame), Program.Rng.DiceRoll(6, 6) + rlev);
-                        break;
-
-                    // MonsterFlag5.MagicMissile
-                    case 128 + 26:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a magic missile at {targetName}");
-                        }
-                        FireBoltAtMonster(saveGame, y, x, new ProjectMissile(saveGame), Program.Rng.DiceRoll(2, 6) + (rlev / 3));
-                        break;
-
-                    // MonsterFlag5.Scare
-                    case 128 + 27:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles, and you hear scary noises.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} casts a fearful illusion at {targetName}");
-                        }
-                        if (targetRace.ImmuneFear)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} refuses to be frightened.");
-                            }
-                        }
-                        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} refuses to be frightened.");
-                            }
-                        }
-                        else
-                        {
-                            if (target.FearLevel == 0 && seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} flees in terror!");
-                            }
-                            target.FearLevel += Program.Rng.RandomLessThan(4) + 4;
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.Blindness
-                    case 128 + 28:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            string it = targetName != "it" ? "s" : "'s";
-                            saveGame.MsgPrint($"{monsterName} casts a spell, burning {targetName}{it} eyes.");
-                        }
-                        if (targetRace.ImmuneConfusion)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is blinded!");
-                            }
-                            target.ConfusionLevel += 12 + Program.Rng.RandomLessThan(4);
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.Confuse
-                    case 128 + 29:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles, and you hear puzzling noises.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} creates a mesmerising illusion in front of {targetName}");
-                        }
-                        if (targetRace.ImmuneConfusion)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
-                            }
-                        }
-                        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
-                            }
-                        }
-                        else
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} seems confused.");
-                            }
-                            target.ConfusionLevel += 12 + Program.Rng.RandomLessThan(4);
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.Slow
-                    case 128 + 30:
-                        saveGame.Disturb(true);
-                        if (!blind && seeEither)
-                        {
-                            string it = targetName == "it" ? "s" : "'s";
-                            saveGame.MsgPrint($"{monsterName} drains power from {targetName}{it} muscles.");
-                        }
-                        if (targetRace.Unique)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else
-                        {
-                            target.Speed -= 10;
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} starts moving slower.");
-                            }
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag5.Hold
-                    case 128 + 31:
-                        saveGame.Disturb(true);
-                        if (!blind && seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} stares intently at {targetName}");
-                        }
-                        if (targetRace.Unique || targetRace.ImmuneStun)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
-                        {
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected.");
-                            }
-                        }
-                        else
-                        {
-                            target.StunLevel += Program.Rng.DieRoll(4) + 4;
-                            if (seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is paralyzed!");
-                            }
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag6.Haste
-                    case 160 + 0:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} concentrates on {monsterPossessive} body.");
-                        }
-                        if (Speed < Race.Speed + 10)
-                        {
-                            if (seeMonster)
-                            {
-                                saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                            }
-                            Speed += 10;
-                        }
-                        else if (Speed < Race.Speed + 20)
-                        {
-                            if (seeMonster)
-                            {
-                                saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                            }
-                            Speed += 2;
-                        }
-                        break;
-
-                    // MonsterFlag6.DreadCurse
-                    case 160 + 1:
-                        saveGame.Disturb(false);
-                        saveGame.MsgPrint(!seeMonster
-                            ? "You hear someone invoke the Dread Curse of Azathoth!"
-                            : $"{monsterName} invokes the Dread Curse of Azathoth on {targetName}");
-                        if (targetRace.Unique)
-                        {
-                            if (!blind && seeTarget)
-                            {
-                                saveGame.MsgPrint($"{targetName} is unaffected!");
-                            }
-                        }
-                        else
-                        {
-                            if (Race.Level + Program.Rng.DieRoll(20) > targetRace.Level + 10 + Program.Rng.DieRoll(20))
-                            {
-                                target.Health -= (65 + Program.Rng.DieRoll(25)) * target.Health / 100;
-                                if (target.Health < 1)
-                                {
-                                    target.Health = 1;
-                                }
-                            }
-                            else
-                            {
-                                if (seeTarget)
-                                {
-                                    saveGame.MsgPrint($"{targetName} resists!");
-                                }
-                            }
-                        }
-                        wakeUp = true;
-                        break;
-
-                    // MonsterFlag6.Heal
-                    case 160 + 2:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} concentrates on {monsterPossessive} wounds.");
-                        }
-                        Health += rlev * 6;
-                        if (Health >= MaxHealth)
-                        {
-                            Health = MaxHealth;
-                            saveGame.MsgPrint(seen ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
-                        }
-                        if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
-                        {
-                            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-                        }
-                        if (FearLevel != 0)
-                        {
-                            FearLevel = 0;
-                            if (seeMonster)
-                            {
-                                saveGame.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
-                            }
-                        }
-                        break;
-
-                    // MonsterFlag6.Xxx2
-                    case 160 + 3:
-                        break;
-
-                    // MonsterFlag6.Blink
-                    case 160 + 4:
-                        saveGame.Disturb(true);
-                        if (seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} blinks away.");
-                        }
-                        TeleportAway(saveGame, 10);
-                        break;
-
-                    // MonsterFlag6.TeleportSelf
-                    case 160 + 5:
-                        saveGame.Disturb(true);
-                        if (seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} teleports away.");
-                        }
-                        TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
-                        break;
-
-                    // MonsterFlag6.Xxx3
-                    case 160 + 6:
-                    // MonsterFlag6.Xxx4
-                    case 160 + 7:
-                    // MonsterFlag6.TeleportTo
-                    case 160 + 8:
-                        break;
-
-                    // MonsterFlag6.TeleportAway
-                    case 160 + 9:
-                        bool resistsTele = false;
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint($"{monsterName} teleports {targetName} away.");
-                        if (targetRace.ResistTeleport)
-                        {
-                            if (targetRace.Unique)
-                            {
-                                if (seeTarget)
-                                {
-                                    targetRace.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
-                                    saveGame.MsgPrint($"{targetName} is unaffected!");
-                                }
-                                resistsTele = true;
-                            }
-                            else if (targetRace.Level > Program.Rng.DieRoll(100))
-                            {
-                                if (seeTarget)
-                                {
-                                    targetRace.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
-                                    saveGame.MsgPrint($"{targetName} resists!");
-                                }
-                                resistsTele = true;
-                            }
-                        }
-                        if (!resistsTele)
-                        {
-                            target.TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
-                        }
-                        break;
-
-                    // MonsterFlag6.TeleportLevel
-                    case 160 + 10:
-                    // MonsterFlag6.Xxx5
-                    case 160 + 11:
-                        break;
-
-                    // MonsterFlag6.Darkness
-                    case 160 + 12:
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint(blind ? $"{monsterName} mumbles." : $"{monsterName} gestures in shadow.");
-                        if (seen)
-                        {
-                            saveGame.MsgPrint($"{targetName} is surrounded by darkness.");
-                        }
-                        saveGame.Project(GetMonsterIndex(saveGame), 3, y, x, 0, new ProjectDarkWeak(saveGame), ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill);
-                        saveGame.UnlightRoom(y, x);
-                        break;
-
-                    // MonsterFlag6.CreateTraps
-                    case 160 + 13:
-                    // MonsterFlag6.Forget
-                    case 160 + 14:
-                    // MonsterFlag6.Xxx6
-                    case 160 + 15:
-                        break;
-
-                    // MonsterFlag6.SummonKin
-                    case 160 + 16:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            string kin = Race.Unique ? "minions" : "kin";
-                            saveGame.MsgPrint($"{monsterName} magically summons {monsterPossessive} {kin}.");
-                        }
-                        for (k = 0; k < 6; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new KinMonsterSelector(Race.Character), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new KinMonsterSelector(Race.Character)))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonReaver
-                    case 160 + 17:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons Black Reavers!");
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear heavy steps nearby.");
-                        }
-                        if (friendly)
-                        {
-                            saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new ReaverMonsterSelector(), true);
-                        }
-                        else
-                        {
-                            saveGame.SummonReaver();
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonMonster
-                    case 160 + 18:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons help!");
-                        }
-                        for (k = 0; k < 1; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new NoUniquesMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, null))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear something appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonMonsters
-                    case 160 + 19:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons monsters!");
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new NoUniquesMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, null))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonAnt
-                    case 160 + 20:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons ants.");
-                        }
-                        for (k = 0; k < 6; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new AntMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new AntMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonSpider
-                    case 160 + 21:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons spiders.");
-                        }
-                        for (k = 0; k < 6; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new SpiderMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new SpiderMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonHound
-                    case 160 + 22:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons hounds.");
-                        }
-                        for (k = 0; k < 6; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HoundMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HoundMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonHydra
-                    case 160 + 23:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons hydras.");
-                        }
-                        for (k = 0; k < 6; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HydraMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HydraMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonCthuloid
-                    case 160 + 24:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons a Cthuloid entity!");
-                        }
-                        for (k = 0; k < 1; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new CthuloidMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new CthuloidMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear something appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonDemon
-                    case 160 + 25:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons a demon!");
-                        }
-                        for (k = 0; k < 1; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new DemonMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new DemonMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear something appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonUndead
-                    case 160 + 26:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons an undead adversary!");
-                        }
-                        for (k = 0; k < 1; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new UndeadMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new UndeadMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear something appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonDragon
-                    case 160 + 27:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons a dragon!");
-                        }
-                        for (k = 0; k < 1; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new DragonMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new DragonMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear something appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonHiUndead
-                    case 160 + 28:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons greater undead!");
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiUndeadNoUniquesMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiUndeadMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many creepy things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonHiDragon
-                    case 160 + 29:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons ancient dragons!");
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiDragonNoUniquesMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiDragonMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many powerful things appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonGreatOldOne
-                    case 160 + 30:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons Great Old Ones!");
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new GooMonsterSelector()))
-                            {
-                                count++;
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear immortal beings appear nearby.");
-                        }
-                        break;
-
-                    // MonsterFlag6.SummonUnique
-                    case 160 + 31:
-                        saveGame.Disturb(true);
-                        if (blind || !seeMonster)
-                        {
-                            saveGame.MsgPrint($"{monsterName} mumbles.");
-                        }
-                        else
-                        {
-                            saveGame.MsgPrint($"{monsterName} magically summons special opponents!");
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (!friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new UniqueMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        for (k = 0; k < 8; k++)
-                        {
-                            if (friendly)
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecificFriendly(y, x, rlev, new HiUndeadNoUniquesMonsterSelector(), true))
-                                {
-                                    count++;
-                                }
-                            }
-                            else
-                            {
-                                if (saveGame.Level.Monsters.SummonSpecific(y, x, rlev, new HiUndeadMonsterSelector()))
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                        if (blind && count != 0)
-                        {
-                            saveGame.MsgPrint("You hear many powerful things appear nearby.");
-                        }
-                        break;
+                    saveGame.Disturb(true);
                 }
-                // Most spells will wake up the target if it's asleep
-                if (wakeUp)
+
+                // Render a message to the player.
+                string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage(this, target);
+                if (message != null)
+                {
+                    saveGame.MsgPrint(message);
+                }
+
+                // Execute the action on the monster.
+                thrownSpell.ExecuteOnMonster(saveGame, this, target);
+
+                // Spells will wake up the target if it's asleep
+                if (thrownSpell.WakesSleepingMonsters)
                 {
                     target.SleepLevel = 0;
                 }
+        
                 // If the player saw us cast the spell, let them learn we can do that
                 if (seen)
                 {
-                    if (thrownSpell < 32 * 4)
+                    Race.Knowledge.RSpells = Race.Knowledge.RSpells.Add(thrownSpell);
+
+                    // Check to see if the spell was an innate ability.
+                    if (thrownSpell.IsInnate)
                     {
-                        Race.Knowledge.RFlags4 |= 1u << (thrownSpell - (32 * 3));
-                        if (Race.Knowledge.RCastInate < Constants.MaxUchar)
+                        // Increase the innate ability cast count.
+                        if (Race.Knowledge.RCastInate < Constants.MaxUchar) // TODO: The MaxUChar is wrong for an INT
                         {
                             Race.Knowledge.RCastInate++;
                         }
+
                     }
-                    else if (thrownSpell < 32 * 5)
+
+                    // Increase the counter for the number of spells casted.
+                    if (Race.Knowledge.RCastSpell < Constants.MaxUchar) // TODO: The MaxUChar is wrong for an INT
                     {
-                        Race.Knowledge.RFlags5 |= 1u << (thrownSpell - (32 * 4));
-                        if (Race.Knowledge.RCastSpell < Constants.MaxUchar)
-                        {
-                            Race.Knowledge.RCastSpell++;
-                        }
-                    }
-                    else if (thrownSpell < 32 * 6)
-                    {
-                        Race.Knowledge.RFlags6 |= 1u << (thrownSpell - (32 * 5));
-                        if (Race.Knowledge.RCastSpell < Constants.MaxUchar)
-                        {
-                            Race.Knowledge.RCastSpell++;
-                        }
+                        Race.Knowledge.RCastSpell++;
                     }
                 }
                 // If we killed the player, let their descendants remember that
@@ -4483,7 +1787,7 @@ namespace AngbandOS
         /// <param name="projectile"> The type of breath being used </param>
         /// <param name="damage"> The damage the breath will do </param>
         /// <param name="radius"> The radius of the attack, or zero for the default radius </param>
-        private void BreatheAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage, int radius)
+        public void BreatheAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage, int radius)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
             // Radius 0 means use the default radius
@@ -4503,7 +1807,7 @@ namespace AngbandOS
         /// <param name="projectile"> The type of effect the ball has </param>
         /// <param name="damage"> The damage done by the ball </param>
         /// <param name="radius"> The radius of the ball, or zero to use the default radius </param>
-        private void FireBallAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
+        public void FireBallAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
         {
             const ProjectionFlag projectionFlag = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
             if (radius < 1)
@@ -4522,7 +1826,7 @@ namespace AngbandOS
         /// <param name="radius">
         /// The (positive) radius of the breath weapon, or zero for the default radius
         /// </param>
-        private void BreatheAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
+        public void BreatheAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
             // Radius 0 means use the default radius
@@ -4543,7 +1847,7 @@ namespace AngbandOS
         /// <param name="targetX"> The x coordinate of the target </param>
         /// <param name="projectile"> The projectile to be fired </param>
         /// <param name="damage"> The damage the projectile should do </param>
-        private void FireBoltAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage)
+        public void FireBoltAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
             saveGame.Project(GetMonsterIndex(saveGame), 0, targetY, targetX, damage, projectile, projectionFlags);
@@ -4556,7 +1860,7 @@ namespace AngbandOS
         /// <param name="damage"> The damage taken </param>
         /// <param name="fear"> Whether the damage makes us afraid </param>
         /// <param name="note"> A special descriptive note that replaces the normal death message </param>
-        private void TakeDamageFromAnotherMonster(SaveGame saveGame, int damage, out bool fear, string note)
+        public void TakeDamageFromAnotherMonster(SaveGame saveGame, int damage, out bool fear, string note)
         {
             fear = false;
             // Track the monster that has just taken damage
@@ -4641,7 +1945,7 @@ namespace AngbandOS
         /// <param name="monsterIndex"> The index of the monster casting the bolt </param>
         /// <param name="projectile"> The projectile being used for the bolt </param>
         /// <param name="damage"> The damage that the bolt will do </param>
-        private void FireBoltAtPlayer(SaveGame saveGame, Projectile projectile, int damage)
+        public void FireBoltAtPlayer(SaveGame saveGame, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
             saveGame.Project(GetMonsterIndex(saveGame), 0, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlags);
@@ -4650,490 +1954,200 @@ namespace AngbandOS
         /// <summary>
         /// Remove flags for ineffective spells from the monster's flags and return them.
         /// </summary>
-        /// <param name="monsterIndex"> The index of the monster </param>
-        /// <param name="modifiedFlags4"> Flags4 after having spells removed </param>
-        /// <param name="initialFlags4"> Flags4 before having spells removed </param>
-        /// <param name="modifiedFlags5"> Flags5 after having spells removed </param>
-        /// <param name="initialFlags5"> Flags5 before having spells removed </param>
-        /// <param name="modifiedFlags6"> Flags6 after having spells removed </param>
-        /// <param name="initialFlags6"> Flags6 before having spells removed </param>
-        private void RemoveIneffectiveSpells(SaveGame saveGame, out uint modifiedFlags4, uint initialFlags4, out uint modifiedFlags5, uint initialFlags5, out uint modifiedFlags6, uint initialFlags6)
+        private MonsterSpellList RemoveIneffectiveSpells(SaveGame saveGame, MonsterSpellList spells)
         {
-            uint flags4 = initialFlags4;
-            uint flags5 = initialFlags5;
-            uint flags6 = initialFlags6;
-            modifiedFlags4 = initialFlags4;
-            modifiedFlags5 = initialFlags5;
-            modifiedFlags6 = initialFlags6;
             // If we're stupid, we won't realise how ineffective things are
             if (Race.Stupid)
             {
-                return;
+                return spells;
             }
-            // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally
-            // and clone
+
+            // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally and clone
             if (Mind != 0 && Program.Rng.RandomLessThan(100) < 1)
             {
                 Mind &= (Constants.SmFriendly | Constants.SmCloned);
             }
+
             uint mindFlags = Mind;
             // If we're not aware of any of the player's resistances, don't bother going through them
             if (mindFlags == 0)
             {
-                return;
+                return spells;
             }
             // If we know the player is immune to acid, don't do acid spells
             if ((mindFlags & Constants.SmImmAcid) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheAcid;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBall;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists acid both temporarily and permanently, probably don't
             // do acid spells
             else if ((mindFlags & Constants.SmOppAcid) != 0 && (mindFlags & Constants.SmResAcid) != 0)
             {
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheAcid;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBall;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(80));
             }
+
             // If we know the player resists acid at all, maybe don't do acid spells
             else if ((mindFlags & Constants.SmOppAcid) != 0 || (mindFlags & Constants.SmResAcid) != 0)
             {
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheAcid;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBall;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(30));
             }
+
             // If we know the player is immune to lightning, don't do lightning spells
             if ((mindFlags & Constants.SmImmElec) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheLightning;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBall;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists lightning both temporarily and permanently, probably
             // don't do lightning spells
             else if ((mindFlags & Constants.SmOppElec) != 0 && (mindFlags & Constants.SmResElec) != 0)
             {
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheLightning;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBall;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(80));
             }
+
             // If we know the player resists lightning at all, maybe don't do lightning spells
             else if ((mindFlags & Constants.SmOppElec) != 0 || (mindFlags & Constants.SmResElec) != 0)
             {
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheLightning;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBall;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(30));
             }
+
             // If we know the player is immune to fire, don't do fire spells
             if ((mindFlags & Constants.SmImmFire) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheFire;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.FireBall;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.FireBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists fire both temporarily and permanently, probably don't
             // do fire spells
             else if ((mindFlags & Constants.SmOppFire) != 0 && (mindFlags & Constants.SmResFire) != 0)
             {
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheFire;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.FireBall;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.FireBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(80));
             }
+
             // If we know the player resists fire at all, maybe don't do fire spells
             else if ((mindFlags & Constants.SmOppFire) != 0 || (mindFlags & Constants.SmResFire) != 0)
             {
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheFire;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.FireBall;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.FireBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(30));
             }
+
             // If we know the player is immune to cold, don't do fire spells
             if ((mindFlags & Constants.SmImmCold) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheCold;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBall;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.IceBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(100));
             }
-            // If we know the player resists cold both temporarily and permanently, probably don't
-            // do cold spells
+
+            // If we know the player resists cold both temporarily and permanently, probably don't do cold spells
             else if ((mindFlags & Constants.SmOppCold) != 0 && (mindFlags & Constants.SmResCold) != 0)
             {
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheCold;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBall;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBolt;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.IceBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(80));
             }
+
             // If we know the player resists cold at all, maybe don't do cold spells
             else if ((mindFlags & Constants.SmOppCold) != 0 || (mindFlags & Constants.SmResCold) != 0)
             {
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheCold;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBall;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBolt;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.IceBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(30));
             }
+
             // If we know the player resists poison both temporarily and permanently, probably don't
             // do poison spells
             if ((mindFlags & Constants.SmOppPois) != 0 && (mindFlags & Constants.SmResPois) != 0)
             {
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags4 &= ~MonsterFlag4.BreathePoison;
-                }
-                if (RealiseSpellIsUseless(80))
-                {
-                    flags5 &= ~MonsterFlag5.PoisonBall;
-                }
-                if (RealiseSpellIsUseless(40))
-                {
-                    flags4 &= ~MonsterFlag4.RadiationBall;
-                }
-                if (RealiseSpellIsUseless(40))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheRadiation;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(80));
+                spells = spells.Remove((_spell) => _spell.UsesRadiation && RealiseSpellIsUseless(40));
             }
+
             // If we know the player resists poison at all, maybe don't do cold spells
             else if ((mindFlags & Constants.SmOppPois) != 0 || (mindFlags & Constants.SmResPois) != 0)
             {
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags4 &= ~MonsterFlag4.BreathePoison;
-                }
-                if (RealiseSpellIsUseless(30))
-                {
-                    flags5 &= ~MonsterFlag5.PoisonBall;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(30));
             }
+
             // If we know the player resists nether, maybe don't do nether spells
             if ((mindFlags & Constants.SmResNeth) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheNether;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags5 &= ~MonsterFlag5.NetherBall;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags5 &= ~MonsterFlag5.NetherBolt;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists light, maybe don't do light spells
             if ((mindFlags & Constants.SmResLight) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheLight;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesLight && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists darkness, maybe don't do darkness spells
             if ((mindFlags & Constants.SmResDark) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheDark;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags5 &= ~MonsterFlag5.DarkBall;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesDarkness && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists fear, don't do fear spells
             if ((mindFlags & Constants.SmResFear) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Scare;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesFear && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists confiusion, maybe don't do confusion spells
             if ((mindFlags & Constants.SmResConf) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Confuse;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheConfusion;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
             }
+
             // If we know the player resists chaos, maybe don't do chaos or confusion spells
             if ((mindFlags & Constants.SmResChaos) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Confuse;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheConfusion;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheChaos;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.ChaosBall;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
+                spells = spells.Remove((_spell) => _spell.UsesChaos && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists disenchantment, don't do disenchantment spells
             if ((mindFlags & Constants.SmResDisen) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheDisenchant;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesDisenchantment && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists blindness, don't do blindness spells
             if ((mindFlags & Constants.SmResBlind) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Blindness;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesBlindness && RealiseSpellIsUseless(100));
             }
+
             // If we know the player resists nexus, maybe don't do nexus or teleport spells
             if ((mindFlags & Constants.SmResNexus) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheNexus;
-                }
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags6 &= ~MonsterFlag6.TeleportLevel;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesNexus && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists sound, maybe don't do sound spells
             if ((mindFlags & Constants.SmResSound) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheSound;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesSound && RealiseSpellIsUseless(50));
             }
+
             // If we know the player resists shards, maybe don't do shard spells
             if ((mindFlags & Constants.SmResShard) != 0)
             {
-                if (RealiseSpellIsUseless(50))
-                {
-                    flags4 &= ~MonsterFlag4.BreatheShards;
-                }
-                if (RealiseSpellIsUseless(20))
-                {
-                    flags4 &= ~MonsterFlag4.ShardBall;
-                }
+                spells = spells.Remove((_spell) => _spell.UsesShards && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
             }
+
             // If we know the player reflects bolts, don't do bolt spells
             if ((mindFlags & Constants.SmImmReflect) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.ColdBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.FireBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.AcidBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.LightningBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.PoisonBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.NetherBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.WaterBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.ManaBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.PlasmaBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.IceBolt;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.MagicMissile;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.Arrow1D6;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.Arrow3D6;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.Arrow5D6;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags4 &= ~MonsterFlag4.Arrow7D6;
-                }
+                spells = spells.Remove((_spell) => _spell.CanBeReflected && RealiseSpellIsUseless(100));
             }
+
             // If we know the player has free action, don't do slow or hold spells
             if ((mindFlags & Constants.SmImmFree) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Hold;
-                }
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.Slow;
-                }
+                spells = spells.Remove((_spell) => _spell.RestrictsFreeAction && RealiseSpellIsUseless(100));
             }
+
             // If we know the player has no mana, don't do mana drain
             if ((mindFlags & Constants.SmImmMana) != 0)
             {
-                if (RealiseSpellIsUseless(100))
-                {
-                    flags5 &= ~MonsterFlag5.DrainMana;
-                }
+                spells = spells.Remove((_spell) => _spell.DrainsMana && RealiseSpellIsUseless(100));
             }
-            modifiedFlags4 = flags4;
-            modifiedFlags5 = flags5;
-            modifiedFlags6 = flags6;
+            return spells;
         }
 
         /// <summary>
@@ -5690,7 +2704,7 @@ namespace AngbandOS
         /// <summary>
         /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
         /// </summary>
-        private int GetMonsterIndex(SaveGame saveGame) // TODO: Needs to be removed.
+        public int GetMonsterIndex(SaveGame saveGame) // TODO: Needs to be removed.
         {
             return saveGame.Level.Monsters.GetMonsterIndex(this);
         }
@@ -6315,271 +3329,88 @@ namespace AngbandOS
         /// <param name="spells">A list of the 'magic numbers' of the spells the monster can cast</param>
         /// <param name="listSize"> The number of spells in the spell list </param>
         /// <returns> The 'magic number' of the spell the monster will cast </returns>
-        private int ChooseSpellAgainstPlayer(SaveGame saveGame, int[] spells, int listSize)
+        private MonsterSpell ChooseSpellAgainstPlayer(SaveGame saveGame, MonsterSpellList spells) // int[] spells, int listSize)
         {
             // If the monster is stupid, cast a random spell
             if (Race.Stupid)
             {
-                return spells[Program.Rng.RandomLessThan(listSize)];
+                return spells.ChooseRandom();
             }
-            // Deposit the spells into a number of buckets based on what they are used for
-            int[] escape = new int[96];
-            int escapeNum = 0;
-            int[] attack = new int[96];
-            int attackNum = 0;
-            int[] summon = new int[96];
-            int summonNum = 0;
-            int[] tactic = new int[96];
-            int tacticNum = 0;
-            int[] annoy = new int[96];
-            int annoyNum = 0;
-            int[] haste = new int[96];
-            int hasteNum = 0;
-            int[] heal = new int[96];
-            int healNum = 0;
-            for (int i = 0; i < listSize; i++)
-            {
-                if (SpellIsForEscape(spells[i]))
-                {
-                    escape[escapeNum++] = spells[i];
-                }
-                if (SpellIsForAttack(spells[i]))
-                {
-                    attack[attackNum++] = spells[i];
-                }
-                if (SpellIsForSummoning(spells[i]))
-                {
-                    summon[summonNum++] = spells[i];
-                }
-                if (SpellIsTactical(spells[i]))
-                {
-                    tactic[tacticNum++] = spells[i];
-                }
-                if (SpellIsForAnnoyance(spells[i]))
-                {
-                    annoy[annoyNum++] = spells[i];
-                }
-                if (SpellIsForHaste(spells[i]))
-                {
-                    haste[hasteNum++] = spells[i];
-                }
-                if (SpellIsForHealing(spells[i]))
-                {
-                    heal[healNum++] = spells[i];
-                }
-            }
+
             // Priority One: If we're afraid or hurt, always use a random escape spell if we have one
             if (Health < MaxHealth / 3 || FearLevel != 0)
             {
-                if (escapeNum != 0)
+                MonsterSpellList escapeSpells = spells.Where((_spell) => _spell.ProvidesEscape);
+                if (escapeSpells.Count >  0)
                 {
-                    return escape[Program.Rng.RandomLessThan(escapeNum)];
+                    return escapeSpells.ChooseRandom();
                 }
             }
             // Priority Two: If we're hurt, always use a random healing spell if we have one
             if (Health < MaxHealth / 3)
             {
-                if (healNum != 0)
+                MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
+                if (healingSpells.Count > 0)
                 {
-                    return heal[Program.Rng.RandomLessThan(healNum)];
+                    return healingSpells.ChooseRandom();
                 }
             }
             // Priority Three: If we're near the player and have no attack spells, probably use a
             // tactical spell
-            if (saveGame.Level.Distance(saveGame.Player.MapY, saveGame.Player.MapX, MapY, MapX) < 4 && attackNum != 0 &&
-                Program.Rng.RandomLessThan(100) < 75)
+            MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
+            MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
+            if (saveGame.Level.Distance(saveGame.Player.MapY, saveGame.Player.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 75)
             {
-                if (tacticNum != 0)
+                if (tacticalSpells.Count > 0)
                 {
-                    return tactic[Program.Rng.RandomLessThan(tacticNum)];
+                    return tacticalSpells.ChooseRandom();
                 }
             }
+
             // Priority Four: If we're at less than full health, probably use a healing spell
             if (Health < MaxHealth * 3 / 4 && Program.Rng.RandomLessThan(100) < 75)
             {
-                if (healNum != 0)
+                MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
+                if (healingSpells.Count > 0)
                 {
-                    return heal[Program.Rng.RandomLessThan(healNum)];
+                    return healingSpells.ChooseRandom();
                 }
             }
             // Priority Five: If we have a summoning spell, maybe use it
-            if (summonNum != 0 && Program.Rng.RandomLessThan(100) < 50)
+            MonsterSpellList summonSpells = spells.Where((_spell) => _spell.SummonsHelp);
+            if (summonSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 50)
             {
-                return summon[Program.Rng.RandomLessThan(summonNum)];
+                return summonSpells.ChooseRandom();
             }
+
             // Priority Six: If we have a direct attack spell, probably use it
-            if (attackNum != 0 && Program.Rng.RandomLessThan(100) < 85)
+            if (attackSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 85)
             {
-                return attack[Program.Rng.RandomLessThan(attackNum)];
+                return attackSpells.ChooseRandom();
             }
+
             // Priority Seven: If we have a tactical spell, maybe use it
-            if (tacticNum != 0 && Program.Rng.RandomLessThan(100) < 50)
+            if (tacticalSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 50)
             {
-                return tactic[Program.Rng.RandomLessThan(tacticNum)];
+                return tacticalSpells.ChooseRandom();
             }
+
             // Priority Eight: If we have a haste spell, maybe use it
-            if (hasteNum != 0 && Program.Rng.RandomLessThan(100) < 20 + Race.Speed - Speed)
+            MonsterSpellList hasteSpells = spells.Where((_spell) => _spell.Hastens);
+            if (hasteSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 20 + Race.Speed - Speed)
             {
-                return haste[Program.Rng.RandomLessThan(hasteNum)];
+                return hasteSpells.ChooseRandom();
             }
+
             // Priority Nine: If we have an annoying spell, probably use it
-            if (annoyNum != 0 && Program.Rng.RandomLessThan(100) < 85)
+            MonsterSpellList annoyanceSpells = spells.Where((_spell) => _spell.Annoys);
+            if (annoyanceSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 85)
             {
-                return annoy[Program.Rng.RandomLessThan(annoyNum)];
+                return annoyanceSpells.ChooseRandom();
             }
+
             // Priority Ten: Give up on using a spell
-            return 0;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell is suitable for annoying the player
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is annoying, false otherwise </returns>
-        private bool SpellIsForAnnoyance(int spell)
-        {
-            // MonsterFlag4.Shriek
-            if (spell == 96 + 0)
-            {
-                return true;
-            }
-            // MonsterFlag5.DrainMana MonsterFlag5.MindBlast MonsterFlag5.BrainSmash
-            // MonsterFlag5.CauseLightWounds MonsterFlag5.CauseSeriousWounds MonsterFlag5.CauseCriticalWounds
-            if (spell >= 128 + 9 && spell <= 128 + 14)
-            {
-                return true;
-            }
-            // MonsterFlag5.Scare MonsterFlag5.Blindness MonsterFlag5.Confuse MonsterFlag5.Slow MonsterFlag5.Hold
-            if (spell >= 128 + 27 && spell <= 128 + 31)
-            {
-                return true;
-            }
-            // MonsterFlag6.TeleportTo
-            if (spell == 160 + 8)
-            {
-                return true;
-            }
-            // MonsterFlag6.Darkness MonsterFlag6.CreateTraps MonsterFlag6.Forget
-            if (spell >= 160 + 12 && spell <= 160 + 14)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Return whether a spell is primarily an attack spell
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is an attack spell, false otherwise </returns>
-        private bool SpellIsForAttack(int spell)
-        {
-            // MonsterFlag4.ShardBall MonsterFlag4.Arrow1D6 MonsterFlag4.Arrow3D6
-            // MonsterFlag4.Arrow5D6 MonsterFlag4.Arrow7D6 MonsterFlag4.BreatheAcid
-            // MonsterFlag4.BreatheLightning MonsterFlag4.BreatheFire MonsterFlag4.BreatheCold
-            // MonsterFlag4.BreathePoison MonsterFlag4.BreatheNether MonsterFlag4.BreatheLight
-            // MonsterFlag4.BreatheDark MonsterFlag4.BreatheConfusion MonsterFlag4.BreatheSound
-            // MonsterFlag4.BreatheChaos MonsterFlag4.BreatheDisenchant MonsterFlag4.BreatheNexus
-            // MonsterFlag4.BreatheTime MonsterFlag4.BreatheInertia MonsterFlag4.BreatheGravity
-            // MonsterFlag4.BreatheShards MonsterFlag4.BreathePlasma MonsterFlag4.BreatheForce
-            // MonsterFlag4.BreatheMana MonsterFlag4.RadiationBall MonsterFlag4.BreatheRadiation
-            // MonsterFlag4.ChaosBall MonsterFlag4.BreatheDisintegration
-            if (spell < 128 && spell > 96)
-            {
-                return true;
-            }
-            // MonsterFlag5.AcidBall MonsterFlag5.LightningBall MonsterFlag5.FireBall
-            // MonsterFlag5.ColdBall MonsterFlag5.PoisonBall MonsterFlag5.NetherBall
-            // MonsterFlag5.WaterBall MonsterFlag5.ManaBall MonsterFlag5.DarkBall
-            if (spell >= 128 && spell <= 128 + 8)
-            {
-                return true;
-            }
-            // MonsterFlag5.CauseLightWounds MonsterFlag5.CauseSeriousWounds
-            // MonsterFlag5.CauseCriticalWounds MonsterFlag5.CauseMortalWounds MonsterFlag5.AcidBolt
-            // MonsterFlag5.LightningBolt MonsterFlag5.FireBolt MonsterFlag5.ColdBolt
-            // MonsterFlag5.PoisonBolt MonsterFlag5.NetherBolt MonsterFlag5.WaterBolt
-            // MonsterFlag5.ManaBolt MonsterFlag5.PlasmaBolt MonsterFlag5.IceBolt
-            // MonsterFlag5.MagicMissile MonsterFlag5.Scare
-            if (spell >= 128 + 12 && spell <= 128 + 27)
-            {
-                return true;
-            }
-            // MonsterFlag6.DreadCurse
-            if (spell == 160 + 1)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell is suitable for escaping the player
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is good for escaping, false otherwise </returns>
-        private bool SpellIsForEscape(int spell)
-        {
-            // MonsterFlag6.Blink MonsterFlag6.TeleportSelf
-            if (spell == 160 + 4 || spell == 160 + 5)
-            {
-                return true;
-            }
-            // MonsterFlag6.TeleportAway MonsterFlag6.TeleportLevel
-            if (spell == 160 + 9 || spell == 160 + 10)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell is suitable for hasting oneself
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is good for hasting, false otherwise </returns>
-        private bool SpellIsForHaste(int spell)
-        {
-            // MonsterFlag6.Haste
-            return spell == 160 + 0;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell is suitable for healing oneself
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is good for healing, false otherwise </returns>
-        private bool SpellIsForHealing(int spell)
-        {
-            // MonsterFlag6.Heal
-            return spell == 160 + 2;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell is a summoning spell
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell is a summoning spell, false otherwise </returns>
-        private bool SpellIsForSummoning(int spell)
-        {
-            // MonsterFlag6.SummonKin MonsterFlag6.SummonReaver MonsterFlag6.SummonMonster
-            // MonsterFlag6.SummonMonsters MonsterFlag6.SummonAnt MonsterFlag6.SummonSpider
-            // MonsterFlag6.SummonHound MonsterFlag6.SummonHydra MonsterFlag6.SummonCthuloid
-            // MonsterFlag6.SummonDemon MonsterFlag6.SummonUndead MonsterFlag6.SummonDragon
-            // MonsterFlag6.SummonHiUndead MonsterFlag6.SummonHiDragon
-            // MonsterFlag6.SummonGreatOldOne MonsterFlag6.SummonUnique
-            return spell >= 160 + 16;
-        }
-
-        /// <summary>
-        /// Return whether or not a spell gives a tactical advantage
-        /// </summary>
-        /// <param name="spell"> The spell's number (32*flags + bit in flag) </param>
-        /// <returns> True if the spell gives a tactical advantage, false otherwise </returns>
-        private bool SpellIsTactical(int spell)
-        {
-            // MonsterFlag6.Blink
-            return spell == 160 + 4;
+            return null;
         }
 
         /// <summary>

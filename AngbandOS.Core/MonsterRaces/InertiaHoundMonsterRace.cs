@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class InertiaHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheInertiaMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Inertia hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheInertia => true;
         public override string Description => "Bizarrely, this hound seems to be hardly moving at all, yet it approaches you with deadly menace. It makes you tired just to look at it.";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,14 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MagicMushroomPatchMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new DarknessMonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Magic mushroom patch";
 
         public override int ArmourClass => 10;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blink => true;
-        public override bool Darkness => true;
         public override string Description => "Yum! It looks quite tasty. It seems to glow with an unusual light.";
         public override bool ForceSleep => true;
         public override int FreqInate => 1;
@@ -34,9 +38,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 40;
         public override int Rarity => 2;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 0;
-        public override bool Slow => true;
         public override int Speed => 130;
         public override string SplitName1 => "   Magic    ";
         public override string SplitName2 => "  mushroom  ";

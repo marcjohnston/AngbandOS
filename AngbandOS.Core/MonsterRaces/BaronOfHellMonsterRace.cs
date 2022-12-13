@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BaronOfHellMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new PlasmaBoltMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Baron of hell";
@@ -38,7 +41,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Nonliving => true;
         public override int NoticeRange => 10;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
         public override int Rarity => 3;
         public override bool ResistPlasma => true;
         public override bool ResistTeleport => true;

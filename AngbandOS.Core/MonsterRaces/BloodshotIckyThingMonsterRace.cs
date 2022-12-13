@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BloodshotIckyThingMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'i';
         public override Colour Colour => Colour.Red;
         public override string Name => "Bloodshot icky thing";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crawl, new AcidAttackEffect(), 2, 4),
         };
         public override string Description => "It is a strange, slimy, icky creature.";
-        public override bool DrainMana => true;
         public override bool EmptyMind => true;
         public override int FreqInate => 11;
         public override int FreqSpell => 11;

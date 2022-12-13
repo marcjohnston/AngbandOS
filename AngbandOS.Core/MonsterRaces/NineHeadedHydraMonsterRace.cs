@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NineHeadedHydraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'M';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "9-headed hydra";
@@ -21,11 +26,9 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 6)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "A strange reptilian hybrid with nine smouldering heads.";
         public override bool Drop_2D2 => true;
         public override bool Drop_4D2 => true;
-        public override bool FireBolt => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
@@ -40,7 +43,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropGold => true;
         public override bool OpenDoor => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

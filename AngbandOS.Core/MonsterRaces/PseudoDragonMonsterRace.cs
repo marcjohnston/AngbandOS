@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PseudoDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDarkMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.BrightPink;
         public override string Name => "Pseudo dragon";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheDark => true;
-        public override bool BreatheLight => true;
-        public override bool Confuse => true;
         public override string Description => "A small relative of the dragon that inhabits dark caves.";
         public override bool Dragon => true;
         public override bool Drop60 => true;
@@ -36,7 +39,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Mexp => 150;
         public override int NoticeRange => 20;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 40;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BodakMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new SummonDemonMonsterSpell());
         public override char Character => 'u';
         public override Colour Colour => Colour.Black;
         public override string Name => "Bodak";
@@ -23,8 +28,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string Description => "It is a humanoid form composed of flames and hatred.";
         public override bool Evil => true;
         public override bool FireAura => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
@@ -46,7 +49,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Bodak    ";
-        public override bool SummonDemon => true;
         public override bool TakeItem => true;
     }
 }

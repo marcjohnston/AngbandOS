@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BansheeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Banshee";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool ColdBlood => true;
         public override string Description => "It is a ghostly woman's form that wails mournfully.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
         public override bool Female => true;
@@ -45,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Banshee   ";
         public override bool TakeItem => true;
-        public override bool TeleportSelf => true;
         public override bool Undead => true;
     }
 }

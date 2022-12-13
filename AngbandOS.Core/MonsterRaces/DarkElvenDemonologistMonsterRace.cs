@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DarkElvenDemonologistMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseSeriousWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new MagicMissileMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new HealMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.Red;
         public override string Name => "Dark elven demonologist";
@@ -18,10 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseSeriousWounds => true;
-        public override bool Confuse => true;
-        public override bool Darkness => true;
         public override string Description => "A dark elven figure, dressed all in black, chanting curses and waiting to deliver your soul to hell.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -31,11 +35,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 5;
         public override string FriendlyName => "Dark elven demonologist";
         public override int Hdice => 7;
-        public override bool Heal => true;
         public override int Hside => 10;
         public override bool HurtByLight => true;
         public override int LevelFound => 12;
-        public override bool MagicMissile => true;
         public override int Mexp => 50;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;

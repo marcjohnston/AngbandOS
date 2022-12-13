@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GiantGreenDragonFlyMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreathePoisonMonsterSpell());
         public override char Character => 'F';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Giant green dragon fly";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool BreathePoison => true;
         public override string Description => "A vast, foul-smelling dragonfly.";
         public override bool ForceSleep => true;
         public override int FreqInate => 10;

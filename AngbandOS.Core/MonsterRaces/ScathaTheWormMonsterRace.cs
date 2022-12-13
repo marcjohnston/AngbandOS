@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ScathaTheWormMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheColdMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightPink;
         public override string Name => "Scatha the Worm";
@@ -20,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 6, 14)
         };
         public override bool BashDoor => true;
-        public override bool BreatheCold => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override string Description => "An ancient and wise Dragon. Scatha has grown clever over the long years. His scales are covered with frost, and his breath sends a shower of ice into the air.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;

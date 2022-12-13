@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EtherealDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheConfusionMonsterSpell(),
+            new BreatheDarkMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Ethereal dragon";
@@ -18,11 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 6, 12),
         };
-        public override bool Blindness => true;
-        public override bool BreatheConfusion => true;
-        public override bool BreatheDark => true;
-        public override bool BreatheLight => true;
-        public override bool Confuse => true;
         public override string Description => "A huge dragon emanating from the elemental plains, the ethereal dragon is a master of light and dark. Its form disappears from sight as it cloaks itself in unearthly shadows.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;

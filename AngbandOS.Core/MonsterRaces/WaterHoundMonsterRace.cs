@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WaterHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Water hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
         public override string Description => "Liquid footprints follow this hound as it pads around the dungeon. An acrid smell of acid rises from the dog's pelt.";
         public override bool ForceSleep => true;
         public override int FreqInate => 10;

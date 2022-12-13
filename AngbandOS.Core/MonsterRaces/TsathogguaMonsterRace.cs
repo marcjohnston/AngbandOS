@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TsathogguaMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheChaosMonsterSpell(),
+            new BreatheDisenchantMonsterSpell(),
+            new BreatheDisintegrationMonsterSpell(),
+            new BreatheManaMonsterSpell(),
+            new WaterBallMonsterSpell(),
+            new SummonCthuloidMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Tsathoggua";
@@ -22,10 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheChaos => true;
-        public override bool BreatheDisenchant => true;
-        public override bool BreatheDisintegration => true;
-        public override bool BreatheMana => true;
         public override bool Demon => true;
         public override string Description => "Toad shaped and sleepy, don't let his inoffensive appearance fool you. He still bears all the power of a Great Old One.";
         public override bool Drop_4D2 => true;
@@ -70,8 +74,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => "            ";
         public override string SplitName3 => " Tsathoggua ";
         public override bool Stupid => true;
-        public override bool SummonCthuloid => true;
         public override bool Unique => true;
-        public override bool WaterBall => true;
     }
 }

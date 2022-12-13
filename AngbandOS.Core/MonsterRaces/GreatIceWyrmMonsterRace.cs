@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreatIceWyrmMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheColdMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override string Name => "Great ice wyrm";
 
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 5, 14)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheCold => true;
-        public override bool Confuse => true;
         public override string Description => "An immense dragon capable of awesome destruction. You have never felt such extreme cold, or witnessed such an icy stare. Begone quickly or feel its wrath!";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -45,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropItem => true;
         public override bool Powerful => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 80;
         public override int Speed => 120;
         public override string SplitName1 => "   Great    ";

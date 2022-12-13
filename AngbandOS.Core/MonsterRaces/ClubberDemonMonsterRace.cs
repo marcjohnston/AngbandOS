@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ClubberDemonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Clubber demon";
@@ -19,8 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 8, 12),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "It is a demon swinging wildly with two clubs. Not even remotely subtle.";
         public override bool Drop60 => true;

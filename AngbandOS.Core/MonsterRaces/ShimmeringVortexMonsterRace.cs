@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShimmeringVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightMonsterSpell(),
+            new ShriekMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Shimmering vortex";
@@ -16,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => null;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheLight => true;
         public override string Description => "A strange pillar of shining light that hurts your eyes. Its shape changes constantly as it cuts through the air towards you. It is like a beacon, waking monsters from their slumber.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -38,7 +41,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool RandomMove50 => true;
         public override int Rarity => 4;
         public override bool ResistTeleport => true;
-        public override bool Shriek => true;
         public override int Sleep => 0;
         public override int Speed => 140;
         public override string SplitName1 => "            ";

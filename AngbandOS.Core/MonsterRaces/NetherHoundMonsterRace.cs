@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NetherHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNetherMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Black;
         public override string Name => "Nether hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheNether => true;
         public override string Description => "You feel a soul-tearing chill upon viewing this beast, a ghostly form of darkness in the shape of a large dog.";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

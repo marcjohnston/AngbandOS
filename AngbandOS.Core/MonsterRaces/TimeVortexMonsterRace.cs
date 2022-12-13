@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TimeVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheTimeMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Time vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheTime => true;
         public override string Description => "You haven't seen it yet.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

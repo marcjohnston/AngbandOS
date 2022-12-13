@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShadowDemonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new NetherBoltMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Black;
         public override string Name => "Shadow demon";
@@ -39,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Invisible => true;
         public override int LevelFound => 42;
         public override int Mexp => 425;
-        public override bool NetherBolt => true;
         public override int NoticeRange => 30;
         public override bool OnlyDropItem => true;
         public override bool PassWall => true;

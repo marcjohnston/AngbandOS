@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TimeHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheTimeMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Time hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheTime => true;
         public override string Description => "You get a terrible sense of deja vu, or is it a premonition? All at once you see a little puppy and a toothless old dog. Perhaps you should give up and go to bed.";
         public override bool ForceSleep => true;
         public override int FreqInate => 8;

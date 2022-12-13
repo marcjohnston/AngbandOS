@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MoaningSpiritMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ScareMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Moaning spirit";
@@ -38,13 +42,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool PassWall => true;
         public override bool RandomMove25 => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Moaning   ";
         public override string SplitName3 => "   spirit   ";
-        public override bool TeleportSelf => true;
         public override bool Undead => true;
     }
 }

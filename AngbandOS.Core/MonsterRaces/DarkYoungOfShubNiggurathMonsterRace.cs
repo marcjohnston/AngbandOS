@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseSeriousWoundsMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonCthuloidMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.Green;
         public override string Name => "Dark young of Shub-Niggurath";
@@ -20,8 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 1, 6)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseSeriousWounds => true;
         public override bool Cthuloid => true;
         public override string Description => "A black, ropy, slimy jelly tree-thing; an enormous writhing mass.";
         public override bool Drop_1D2 => true;
@@ -33,7 +37,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 9;
         public override string FriendlyName => "Dark young of Shub-Niggurath";
         public override int Hdice => 12;
-        public override bool Heal => true;
         public override int Hside => 100;
         public override bool HurtByLight => true;
         public override bool ImmuneConfusion => true;
@@ -53,6 +56,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    Dark    ";
         public override string SplitName2 => "  young of  ";
         public override string SplitName3 => "Shub-Niggura";
-        public override bool SummonCthuloid => true;
     }
 }

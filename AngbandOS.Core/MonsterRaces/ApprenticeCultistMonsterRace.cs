@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ApprenticeCultistMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseLightWoundsMonsterSpell(),
+            new ScareMonsterSpell(),
+            new HealMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Apprentice cultist";
@@ -17,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
         };
         public override bool BashDoor => true;
-        public override bool CauseLightWounds => true;
         public override string Description => "He is tripping over his fetishes.";
         public override bool Drop60 => true;
         public override bool ForceSleep => true;
@@ -26,7 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Apprentice cultist";
         public override bool Friends => true;
         public override int Hdice => 7;
-        public override bool Heal => true;
         public override int Hside => 4;
         public override int LevelFound => 6;
         public override bool Male => true;
@@ -34,7 +37,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 5;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

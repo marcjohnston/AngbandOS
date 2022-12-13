@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShamblerMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightningMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "Shambler";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12)
         };
         public override bool BashDoor => true;
-        public override bool BreatheLightning => true;
         public override string Description => "This elemental creature is power incarnate; it looks like a huge polar bear with a huge gaping maw instead of a head.";
         public override bool Drop_1D2 => true;
         public override bool DropGood => true;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TimeElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheTimeMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Time elemental";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new LoseAllAttackEffect(), 3, 4),
             new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 3, 4)
         };
-        public override bool BreatheTime => true;
         public override string Description => "You have not seen it yet.";
         public override bool EmptyMind => true;
         public override bool Evil => true;
@@ -42,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool RandomMove50 => true;
         public override int Rarity => 2;
         public override int Sleep => 10;
-        public override bool Slow => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Time    ";

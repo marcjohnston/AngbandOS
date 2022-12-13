@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SpiritNagaMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new HealMonsterSpell());
         public override char Character => 'n';
         public override Colour Colour => Colour.Turquoise;
         public override string Name => "Spirit naga";
@@ -21,8 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrClear => true;
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Darkness => true;
         public override string Description => "A wraithly snake-like form with the torso of a beautiful woman, it is the most powerful of its kind.";
         public override bool Drop_2D2 => true;
         public override bool Drop90 => true;
@@ -33,14 +37,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 4;
         public override string FriendlyName => "Spirit naga";
         public override int Hdice => 30;
-        public override bool Heal => true;
         public override int Hside => 15;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
         public override bool Invisible => true;
         public override int LevelFound => 28;
         public override int Mexp => 60;
-        public override bool MindBlast => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;

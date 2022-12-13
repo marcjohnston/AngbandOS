@@ -127,8 +127,7 @@ namespace AngbandOS.Projection
             {
                 note = noteDies;
             }
-            else if (doStun != 0 && !rPtr.BreatheSound &&
-                     !rPtr.BreatheForce)
+            else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
             {
                 int tmp;
                 if (mPtr.StunLevel != 0)

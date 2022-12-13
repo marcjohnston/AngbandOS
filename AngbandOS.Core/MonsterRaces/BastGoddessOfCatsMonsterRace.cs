@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BastGoddessOfCatsMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new HealMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'f';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Bast, Goddess of Cats";
@@ -32,7 +37,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 3;
         public override string FriendlyName => "Bast, Goddess of Cats";
         public override int Hdice => 48;
-        public override bool Heal => true;
         public override int Hside => 100;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
@@ -51,8 +55,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "    Bast    ";
-        public override bool SummonKin => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,11 +9,23 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SorcererMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBoltMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ColdBallMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new SummonDragonMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Gold;
         public override string Name => "Sorcerer";
 
-        public override bool AcidBolt => true;
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
@@ -20,17 +33,10 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool ColdBall => true;
-        public override bool Confuse => true;
-        public override bool CreateTraps => true;
         public override string Description => "A human figure in robes, he moves with magically improved speed, and his hands are ablur with spell casting.";
         public override bool Drop_4D2 => true;
         public override bool Drop90 => true;
         public override bool Evil => true;
-        public override bool FireBall => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 2;
@@ -52,9 +58,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Sorcerer  ";
-        public override bool SummonDragon => true;
-        public override bool SummonMonster => true;
-        public override bool SummonUndead => true;
-        public override bool TeleportTo => true;
     }
 }

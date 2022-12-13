@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosGhostMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ForgetMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos ghost";
@@ -20,20 +26,16 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
-        public override bool Blindness => true;
         public override bool ColdBlood => true;
         public override string Description => "An almost life-like creature which is nothing more than a phantom created by the chaos.";
-        public override bool DrainMana => true;
         public override bool Drop_2D2 => true;
         public override bool Drop90 => true;
         public override bool Evil => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 16;
         public override int FreqSpell => 16;
         public override string FriendlyName => "Chaos ghost";
         public override int Hdice => 14;
-        public override bool Hold => true;
         public override int Hside => 20;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;

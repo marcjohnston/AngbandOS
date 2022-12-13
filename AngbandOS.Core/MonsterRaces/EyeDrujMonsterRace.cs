@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EyeDrujMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ManaBoltMonsterSpell(),
+            new NetherBallMonsterSpell(),
+            new NetherBoltMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 's';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Eye druj";
@@ -34,10 +40,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
         public override int LevelFound => 55;
-        public override bool ManaBolt => true;
         public override int Mexp => 24000;
-        public override bool NetherBall => true;
-        public override bool NetherBolt => true;
         public override bool NeverMove => true;
         public override int NoticeRange => 20;
         public override int Rarity => 4;
@@ -48,7 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Eye     ";
         public override string SplitName3 => "    druj    ";
-        public override bool SummonUndead => true;
         public override bool Undead => true;
     }
 }

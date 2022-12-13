@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SangahyandoOfUmbarMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new SlowMonsterSpell(),
+            new ForgetMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Sangahyando of Umbar";
@@ -27,7 +31,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Evil => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
         public override string FriendlyName => "Sangahyando of Umbar";
@@ -45,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override int Rarity => 2;
         public override int Sleep => 25;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "Sangahyando ";
         public override string SplitName2 => "     of     ";

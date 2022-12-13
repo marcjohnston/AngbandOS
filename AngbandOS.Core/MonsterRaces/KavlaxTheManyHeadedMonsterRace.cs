@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,16 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheConfusionMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreatheGravityMonsterSpell(),
+            new BreatheNexusMonsterSpell(),
+            new BreatheShardsMonsterSpell(),
+            new BreatheSoundMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Kavlax the Many-Headed";
@@ -22,15 +33,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheConfusion => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheGravity => true;
-        public override bool BreatheLightning => true;
-        public override bool BreatheNexus => true;
-        public override bool BreatheShards => true;
-        public override bool BreatheSound => true;
         public override string Description => "A large dragon with a selection of heads, all shouting and arguing as they look for prey, but each with its own deadly breath weapon.";
         public override bool Dragon => true;
         public override bool Drop_4D2 => true;

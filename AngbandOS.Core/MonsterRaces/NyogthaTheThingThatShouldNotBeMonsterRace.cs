@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,19 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheDarkMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BreatheRadiationMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new HasteMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.Black;
         public override string Name => "Nyogtha, the Thing that Should not Be";
@@ -20,11 +34,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 16, 6)
         };
         public override bool BashDoor => true;
-        public override bool BrainSmash => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheDark => true;
-        public override bool BreathePoison => true;
-        public override bool BreatheRadiation => true;
         public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";
         public override bool Drop_1D2 => true;
         public override bool Drop_2D2 => true;
@@ -40,7 +49,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 5;
         public override string FriendlyName => "Nyogtha, the Thing that Should not Be";
         public override bool GreatOldOne => true;
-        public override bool Haste => true;
         public override int Hdice => 55;
         public override int Hside => 99;
         public override bool HurtByLight => true;
@@ -55,7 +63,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool KillItem => true;
         public override int LevelFound => 56;
         public override int Mexp => 20000;
-        public override bool MindBlast => true;
         public override bool Nonliving => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
@@ -71,11 +78,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Nyogtha   ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonKin => true;
-        public override bool SummonUndead => true;
-        public override bool TeleportSelf => true;
         public override bool Unique => true;
     }
 }

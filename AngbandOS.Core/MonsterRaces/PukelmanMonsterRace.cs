@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,11 +9,14 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PukelmanMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBoltMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Pukelman";
 
-        public override bool AcidBolt => true;
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 6),
@@ -20,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "A stumpy figure carved from stone, with glittering eyes.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -42,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 12;
         public override int Rarity => 3;
         public override int Sleep => 10;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";

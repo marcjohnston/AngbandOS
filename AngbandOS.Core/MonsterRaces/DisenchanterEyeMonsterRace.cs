@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DisenchanterEyeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'e';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Disenchanter eye";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override string Description => "A disembodied eye, crackling with magic.";
-        public override bool DrainMana => true;
         public override int FreqInate => 9;
         public override int FreqSpell => 9;
         public override string FriendlyName => "Disenchanter eye";

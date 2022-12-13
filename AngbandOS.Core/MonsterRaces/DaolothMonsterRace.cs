@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DaolothMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ManaBoltMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Daoloth";
@@ -20,7 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
         public override string Description => "'Not shapeless, but so complex that the eye could recognise no discernable shape.' J.Ramsey Campbell - 'The Render of the Veils'.";
         public override bool Drop_3D2 => true;
         public override bool Drop_4D2 => true;
@@ -43,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmunePoison => true;
         public override int LevelFound => 59;
         public override bool LightningAura => true;
-        public override bool ManaBolt => true;
         public override int Mexp => 35000;
         public override bool MoveBody => true;
         public override bool Nonliving => true;
@@ -60,9 +64,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Daoloth   ";
-        public override bool SummonKin => true;
         public override bool TakeItem => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

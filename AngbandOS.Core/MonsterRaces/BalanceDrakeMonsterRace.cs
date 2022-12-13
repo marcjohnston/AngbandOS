@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,14 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BalanceDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheChaosMonsterSpell(),
+            new BreatheDisenchantMonsterSpell(),
+            new BreatheShardsMonsterSpell(),
+            new BreatheSoundMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Balance drake";
@@ -21,11 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheChaos => true;
-        public override bool BreatheDisenchant => true;
-        public override bool BreatheShards => true;
-        public override bool BreatheSound => true;
-        public override bool Confuse => true;
         public override string Description => "A mighty dragon, the balance drake seeks to maintain the Cosmic Balance, and despises your feeble efforts to destroy evil.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -48,9 +52,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override int Rarity => 3;
         public override bool ResistDisenchant => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Balance   ";

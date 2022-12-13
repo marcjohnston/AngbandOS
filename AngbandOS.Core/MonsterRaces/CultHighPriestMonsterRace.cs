@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CultHighPriestMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new HoldMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonMonstersMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Diamond;
         public override string Name => "Cult high priest";
@@ -19,9 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BrainSmash => true;
-        public override bool CauseMortalWounds => true;
         public override string Description => "A dark priest of the highest order. Powerful and evil, beware his many spells.";
         public override bool Drop_4D2 => true;
         public override bool Drop90 => true;
@@ -32,8 +39,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 2;
         public override string FriendlyName => "Cult high priest";
         public override int Hdice => 80;
-        public override bool Heal => true;
-        public override bool Hold => true;
         public override int Hside => 10;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
@@ -50,8 +55,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    Cult    ";
         public override string SplitName2 => "    high    ";
         public override string SplitName3 => "   priest   ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonMonsters => true;
-        public override bool SummonUndead => true;
     }
 }

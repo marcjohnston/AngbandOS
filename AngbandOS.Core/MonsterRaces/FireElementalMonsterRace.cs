@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FireElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Red;
         public override string Name => "Fire elemental";
@@ -22,7 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool EmptyMind => true;
         public override bool Evil => true;
         public override bool FireAura => true;
-        public override bool FireBolt => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 6;
         public override int FreqSpell => 6;

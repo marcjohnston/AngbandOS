@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FireVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.Red;
         public override string Name => "Fire vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new FireAttackEffect(), 3, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "A whirling maelstrom of fire.";
         public override bool EmptyMind => true;
         public override bool FireAura => true;

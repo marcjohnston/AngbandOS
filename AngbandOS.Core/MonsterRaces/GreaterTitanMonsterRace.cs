@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreaterTitanMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new HealMonsterSpell(),
+            new SummonMonstersMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'P';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "Greater titan";
@@ -31,7 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Greater titan";
         public override bool Giant => true;
         public override int Hdice => 38;
-        public override bool Heal => true;
         public override int Hside => 100;
         public override int LevelFound => 46;
         public override bool Male => true;
@@ -47,8 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Greater   ";
         public override string SplitName3 => "   titan    ";
-        public override bool SummonMonsters => true;
         public override bool TakeItem => true;
-        public override bool TeleportTo => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheLerneanHydraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new PlasmaBoltMonsterSpell(),
+            new PoisonBallMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonHydraMonsterSpell());
         public override char Character => 'M';
         public override Colour Colour => Colour.BrightTurquoise;
         public override string Name => "The Lernean Hydra";
@@ -21,13 +31,9 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 12, 6)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool BreathePoison => true;
         public override string Description => "A massive legendary hydra. It has twelve powerful heads. Its many eyes stare at you as clouds of smoke and poisonous vapour rise from its seething form.";
         public override bool Drop_3D2 => true;
         public override bool Drop_4D2 => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 3;
@@ -45,18 +51,14 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OnlyDropGold => true;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
-        public override bool PoisonBall => true;
         public override bool Powerful => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override bool Smart => true;
         public override int Speed => 120;
         public override string SplitName1 => "    The     ";
         public override string SplitName2 => "  Lernean   ";
         public override string SplitName3 => "   Hydra    ";
-        public override bool SummonHydra => true;
         public override bool Unique => true;
     }
 }

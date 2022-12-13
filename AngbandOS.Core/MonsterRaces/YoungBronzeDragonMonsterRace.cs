@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class YoungBronzeDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheConfusionMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Young bronze dragon";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool BreatheConfusion => true;
         public override string Description => "It has a form that legends are made of. Its still-tender scales are a rich bronze hue, and its shape masks its true form.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -39,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 150;
         public override int Speed => 110;
         public override string SplitName1 => "   Young    ";

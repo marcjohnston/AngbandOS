@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DemonicQuylthulgMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Demonic quylthulg";
@@ -15,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blink => true;
         public override string Description => "A pile of pulsing flesh that glows with an inner hellish fire. The world itself seems to cry out against it.";
         public override bool EmptyMind => true;
         public override bool Evil => true;
@@ -41,7 +45,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Demonic   ";
         public override string SplitName3 => " quylthulg  ";
-        public override bool SummonDemon => true;
-        public override bool TeleportSelf => true;
     }
 }

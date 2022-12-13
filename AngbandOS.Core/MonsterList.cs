@@ -11,6 +11,7 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.MonsterSelectors;
+using AngbandOS.Core.MonsterSpells;
 
 namespace AngbandOS
 {
@@ -523,9 +524,7 @@ namespace AngbandOS
             knowledge.RFlags1 = rPtr.Flags1;
             knowledge.RFlags2 = rPtr.Flags2;
             knowledge.RFlags3 = rPtr.Flags3;
-            knowledge.RFlags4 = rPtr.Flags4;
-            knowledge.RFlags5 = rPtr.Flags5;
-            knowledge.RFlags6 = rPtr.Flags6;
+            knowledge.RSpells = rPtr.Spells;
         }
 
         public void LoreTreasure(int mIdx, int numItem, int numGold)

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FireVampireMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.Red;
         public override string Name => "Fire vampire";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new FireAttackEffect(), 1, 4),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
         public override bool Cthuloid => true;
         public override string Description => "A burning point of light, floating through the air and flickering with sinister purpose.";
         public override bool FireAura => true;

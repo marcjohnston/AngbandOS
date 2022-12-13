@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShadowHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDarkMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Black;
         public override string Name => "Shadow hound";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool BreatheDark => true;
         public override string Description => "A hole in the air in the shape of a huge hound. No light falls upon its form.";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

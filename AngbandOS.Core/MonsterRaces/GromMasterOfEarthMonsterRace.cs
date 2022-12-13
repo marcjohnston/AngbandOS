@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GromMasterOfEarthMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBallMonsterSpell(),
+            new AcidBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Grom, Master of Earth";
 
-        public override bool AcidBall => true;
-        public override bool AcidBolt => true;
         public override int ArmourClass => 97;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 6, 6),

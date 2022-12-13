@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TwoHeadedHydraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ScareMonsterSpell());
         public override char Character => 'M';
         public override Colour Colour => Colour.BrightChartreuse;
         public override string Name => "2-headed hydra";
@@ -33,7 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropGold => true;
         public override bool OpenDoor => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

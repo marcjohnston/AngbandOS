@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheQueenAntMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new SummonAntMonsterSpell());
         public override char Character => 'a';
         public override Colour Colour => Colour.Gold;
         public override string Name => "The Queen Ant";
@@ -48,7 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    The     ";
         public override string SplitName2 => "   Queen    ";
         public override string SplitName3 => "    Ant     ";
-        public override bool SummonAnt => true;
         public override bool Unique => true;
         public override bool WeirdMind => true;
     }

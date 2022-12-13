@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SnakeOfYigMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreathePoisonMonsterSpell());
         public override char Character => 'J';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Snake of Yig";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 3, 12),
         };
         public override bool BashDoor => true;
-        public override bool BreathePoison => true;
         public override string Description => "It is a giant snake that drips with poison.";
         public override bool Evil => true;
         public override bool FireAura => true;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AntiPaladinMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ScareMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new ForgetMonsterSpell(),
+            new HasteMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Anti-paladin";
@@ -19,20 +29,13 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool CreateTraps => true;
-        public override bool Darkness => true;
         public override string Description => "An embodiment of all the cardinal vices, he beholds you scornfully.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
-        public override bool Forget => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
         public override string FriendlyName => "Anti-paladin";
-        public override bool Haste => true;
         public override int Hdice => 30;
-        public override bool Hold => true;
         public override int Hside => 20;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
@@ -45,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 30;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

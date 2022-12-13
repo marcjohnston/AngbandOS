@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AirElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new LightningBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Air elemental";
@@ -40,7 +43,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool KillBody => true;
         public override bool KillItem => true;
         public override int LevelFound => 34;
-        public override bool LightningBolt => true;
         public override int Mexp => 390;
         public override int NoticeRange => 12;
         public override bool Powerful => true;

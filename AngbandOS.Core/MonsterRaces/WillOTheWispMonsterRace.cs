@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WillOTheWispMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseSeriousWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightTurquoise;
         public override string Name => "Will o' the wisp";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9)
         };
-        public override bool Blink => true;
-        public override bool CauseSeriousWounds => true;
-        public override bool Confuse => true;
         public override string Description => "A strange ball of glowing light. It disappears and reappears and seems to draw you to it. You seem somehow compelled to stand still and watch its strange dancing motion.";
         public override bool EmptyMind => true;
         public override bool ForceMaxHp => true;
@@ -54,6 +57,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    Will    ";
         public override string SplitName2 => "   o' the   ";
         public override string SplitName3 => "    wisp    ";
-        public override bool TeleportSelf => true;
     }
 }

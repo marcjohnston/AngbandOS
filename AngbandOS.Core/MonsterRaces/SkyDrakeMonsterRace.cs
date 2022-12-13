@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,14 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SkyDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightningMonsterSpell(),
+            new BreatheGravityMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonDragonMonsterSpell(),
+            new SummonHiDragonMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Sky Drake";
@@ -20,10 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new ElectricityAttackEffect(), 9, 15)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheGravity => true;
-        public override bool BreatheLight => true;
-        public override bool BreatheLightning => true;
         public override string Description => "The mightiest elemental dragon of air, it can destroy you with ease.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -50,13 +55,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Powerful => true;
         public override int Rarity => 4;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 255;
         public override int Speed => 130;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Sky     ";
         public override string SplitName3 => "   Drake    ";
-        public override bool SummonDragon => true;
-        public override bool SummonHiDragon => true;
     }
 }

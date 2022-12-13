@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChimeraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Chimera";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";
         public override bool ForceSleep => true;
         public override int FreqInate => 10;

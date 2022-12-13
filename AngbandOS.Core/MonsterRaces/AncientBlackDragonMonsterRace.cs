@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AncientBlackDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Black;
         public override string Name => "Ancient black dragon";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 5, 10),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheAcid => true;
-        public override bool Confuse => true;
         public override string Description => "A huge draconic form. Pools of acid melt the floor around it.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -43,7 +46,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool Powerful => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 70;
         public override bool Smart => true;
         public override int Speed => 120;

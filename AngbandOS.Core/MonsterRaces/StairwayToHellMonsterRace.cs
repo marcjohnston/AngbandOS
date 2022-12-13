@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class StairwayToHellMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ShriekMonsterSpell(),
+            new SummonDemonMonsterSpell());
         public override char Character => '>';
         public override Colour Colour => Colour.Red;
         public override string Name => "Stairway to hell";
@@ -43,13 +47,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Nonliving => true;
         public override int NoticeRange => 90;
         public override int Rarity => 5;
-        public override bool Shriek => true;
         public override int Sleep => 20;
         public override int Speed => 120;
         public override string SplitName1 => "  Stairway  ";
         public override string SplitName2 => "     to     ";
         public override string SplitName3 => "    hell    ";
-        public override bool SummonDemon => true;
         public override bool Undead => true;
     }
 }

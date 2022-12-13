@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FafnerTheDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Fafner the Dragon";
@@ -20,10 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 14, 6)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool BreathePoison => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override string Description => "The mighty dragon of the Norse myth, Fafner was a giant who slew his brother to win a treasure hoard, and then transformed himself into a dragon, greedily watching over his hoard.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -51,7 +54,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropItem => true;
         public override bool Powerful => true;
         public override int Rarity => 4;
-        public override bool Scare => true;
         public override int Sleep => 70;
         public override int Speed => 120;
         public override string SplitName1 => "   Fafner   ";

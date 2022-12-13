@@ -9,9 +9,8 @@ using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
-
-using System;
 using System.Text;
 
 namespace AngbandOS
@@ -20,7 +19,7 @@ namespace AngbandOS
     internal class MonsterKnowledge
     {
         public readonly int[] RBlows = new int[4];
-        public int RCastInate;
+        public int RCastInate; 
         public int RCastSpell;
         public int RDeaths;
         public int RDropGold;
@@ -30,6 +29,7 @@ namespace AngbandOS
         public uint RFlags1;
         public uint RFlags2;
         public uint RFlags3;
+        public MonsterSpellList RSpells = new MonsterSpellList();
         public uint RFlags4;
         public uint RFlags5;
         public uint RFlags6;
@@ -103,9 +103,7 @@ namespace AngbandOS
                 knowledge.RFlags1 = _monsterType.Flags1;
                 knowledge.RFlags2 = _monsterType.Flags2;
                 knowledge.RFlags3 = _monsterType.Flags3;
-                knowledge.RFlags4 = _monsterType.Flags4;
-                knowledge.RFlags5 = _monsterType.Flags5;
-                knowledge.RFlags6 = _monsterType.Flags6;
+                knowledge.RSpells = _monsterType.Spells;
             }
             if (_monsterType.Female)
             {
@@ -118,9 +116,7 @@ namespace AngbandOS
             uint flags1 = _monsterType.Flags1 & knowledge.RFlags1;
             uint flags2 = _monsterType.Flags2 & knowledge.RFlags2;
             uint flags3 = _monsterType.Flags3 & knowledge.RFlags3;
-            uint flags4 = _monsterType.Flags4 & knowledge.RFlags4;
-            uint flags5 = _monsterType.Flags5 & knowledge.RFlags5;
-            uint flags6 = _monsterType.Flags6 & knowledge.RFlags6;
+            MonsterSpellList combinedSpells = _monsterType.Spells.Add(knowledge.RSpells);
             if (_monsterType.Unique)
             {
                 flags1 |= MonsterFlag1.Unique;
@@ -409,27 +405,27 @@ namespace AngbandOS
                 _description.Append(_wdHeCap[msex]).Append(" usually appears in groups. ");
             }
             int vn = 0;
-            if ((flags4 & MonsterFlag4.Shriek) != 0)
+            if (combinedSpells.Contains(typeof(ShriekMonsterSpell)))
             {
                 vp[vn++] = "shriek for help";
             }
-            if ((flags4 & MonsterFlag4.ShardBall) != 0)
+            if (combinedSpells.Contains(typeof(ShardBallMonsterSpell)))
             {
                 vp[vn++] = "produce shard balls";
             }
-            if ((flags4 & MonsterFlag4.Arrow1D6) != 0)
+            if (combinedSpells.Contains(typeof(Arrow1D6MonsterSpell)))
             {
                 vp[vn++] = "fire an arrow";
             }
-            if ((flags4 & MonsterFlag4.Arrow3D6) != 0)
+            if (combinedSpells.Contains(typeof(Arrow3D6MonsterSpell)))
             {
                 vp[vn++] = "fire arrows";
             }
-            if ((flags4 & MonsterFlag4.Arrow5D6) != 0)
+            if (combinedSpells.Contains(typeof(Arrow5D6MonsterSpell)))
             {
                 vp[vn++] = "fire a missile";
             }
-            if ((flags4 & MonsterFlag4.Arrow7D6) != 0)
+            if (combinedSpells.Contains(typeof(Arrow7D6MonsterSpell)))
             {
                 vp[vn++] = "fire missiles";
             }
@@ -456,91 +452,91 @@ namespace AngbandOS
                 _description.Append(". ");
             }
             vn = 0;
-            if ((flags4 & MonsterFlag4.BreatheAcid) != 0)
+            if (combinedSpells.Contains(typeof(BreatheAcidMonsterSpell)))
             {
                 vp[vn++] = "acid";
             }
-            if ((flags4 & MonsterFlag4.BreatheLightning) != 0)
+            if (combinedSpells.Contains(typeof(BreatheLightningMonsterSpell)))
             {
                 vp[vn++] = "lightning";
             }
-            if ((flags4 & MonsterFlag4.BreatheFire) != 0)
+            if (combinedSpells.Contains(typeof(BreatheFireMonsterSpell)))
             {
                 vp[vn++] = "fire";
             }
-            if ((flags4 & MonsterFlag4.BreatheCold) != 0)
+            if (combinedSpells.Contains(typeof(BreatheColdMonsterSpell)))
             {
                 vp[vn++] = "frost";
             }
-            if ((flags4 & MonsterFlag4.BreathePoison) != 0)
+            if (combinedSpells.Contains(typeof(BreathePoisonMonsterSpell)))
             {
                 vp[vn++] = "poison";
             }
-            if ((flags4 & MonsterFlag4.BreatheNether) != 0)
+            if (combinedSpells.Contains(typeof(BreatheNetherMonsterSpell)))
             {
                 vp[vn++] = "nether";
             }
-            if ((flags4 & MonsterFlag4.BreatheLight) != 0)
+            if (combinedSpells.Contains(typeof(BreatheLightMonsterSpell)))
             {
                 vp[vn++] = "light";
             }
-            if ((flags4 & MonsterFlag4.BreatheDark) != 0)
+            if (combinedSpells.Contains(typeof(BreatheDarkMonsterSpell)))
             {
                 vp[vn++] = "darkness";
             }
-            if ((flags4 & MonsterFlag4.BreatheConfusion) != 0)
+            if (combinedSpells.Contains(typeof(BreatheConfusionMonsterSpell)))
             {
                 vp[vn++] = "confusion";
             }
-            if ((flags4 & MonsterFlag4.BreatheSound) != 0)
+            if (combinedSpells.Contains(typeof(BreatheSoundMonsterSpell)))
             {
                 vp[vn++] = "sound";
             }
-            if ((flags4 & MonsterFlag4.BreatheChaos) != 0)
+            if (combinedSpells.Contains(typeof(BreatheChaosMonsterSpell)))
             {
                 vp[vn++] = "chaos";
             }
-            if ((flags4 & MonsterFlag4.BreatheDisenchant) != 0)
+            if (combinedSpells.Contains(typeof(BreatheDisenchantMonsterSpell)))
             {
                 vp[vn++] = "disenchantment";
             }
-            if ((flags4 & MonsterFlag4.BreatheNexus) != 0)
+            if (combinedSpells.Contains(typeof(BreatheNexusMonsterSpell)))
             {
                 vp[vn++] = "nexus";
             }
-            if ((flags4 & MonsterFlag4.BreatheTime) != 0)
+            if (combinedSpells.Contains(typeof(BreatheTimeMonsterSpell)))
             {
                 vp[vn++] = "time";
             }
-            if ((flags4 & MonsterFlag4.BreatheInertia) != 0)
+            if (combinedSpells.Contains(typeof(BreatheInertiaMonsterSpell)))
             {
                 vp[vn++] = "inertia";
             }
-            if ((flags4 & MonsterFlag4.BreatheGravity) != 0)
+            if (combinedSpells.Contains(typeof(BreatheGravityMonsterSpell)))
             {
                 vp[vn++] = "gravity";
             }
-            if ((flags4 & MonsterFlag4.BreatheShards) != 0)
+            if (combinedSpells.Contains(typeof(BreatheShardsMonsterSpell)))
             {
                 vp[vn++] = "shards";
             }
-            if ((flags4 & MonsterFlag4.BreathePlasma) != 0)
+            if (combinedSpells.Contains(typeof(BreathePlasmaMonsterSpell)))
             {
                 vp[vn++] = "plasma";
             }
-            if ((flags4 & MonsterFlag4.BreatheForce) != 0)
+            if (combinedSpells.Contains(typeof(BreatheForceMonsterSpell)))
             {
                 vp[vn++] = "force";
             }
-            if ((flags4 & MonsterFlag4.BreatheMana) != 0)
+            if (combinedSpells.Contains(typeof(BreatheManaMonsterSpell)))
             {
                 vp[vn++] = "mana";
             }
-            if ((flags4 & MonsterFlag4.BreatheRadiation) != 0)
+            if (combinedSpells.Contains(typeof(BreatheRadiationMonsterSpell)))
             {
                 vp[vn++] = "toxic waste";
             }
-            if ((flags4 & MonsterFlag4.BreatheDisintegration) != 0)
+            if (combinedSpells.Contains(typeof(BreatheDisintegrationMonsterSpell)))
             {
                 vp[vn++] = "disintegration";
             }
@@ -567,247 +563,247 @@ namespace AngbandOS
                 }
             }
             vn = 0;
-            if ((flags5 & MonsterFlag5.AcidBall) != 0)
+            if (combinedSpells.Contains(typeof(AcidBallMonsterSpell)))
             {
                 vp[vn++] = "produce acid balls";
             }
-            if ((flags5 & MonsterFlag5.LightningBall) != 0)
+            if (combinedSpells.Contains(typeof(LightningBallMonsterSpell)))
             {
                 vp[vn++] = "produce lightning balls";
             }
-            if ((flags5 & MonsterFlag5.FireBall) != 0)
+            if (combinedSpells.Contains(typeof(FireBallMonsterSpell)))
             {
                 vp[vn++] = "produce fire balls";
             }
-            if ((flags5 & MonsterFlag5.ColdBall) != 0)
+            if (combinedSpells.Contains(typeof(ColdBallMonsterSpell)))
             {
                 vp[vn++] = "produce frost balls";
             }
-            if ((flags5 & MonsterFlag5.PoisonBall) != 0)
+            if (combinedSpells.Contains(typeof(PoisonBallMonsterSpell)))
             {
                 vp[vn++] = "produce poison balls";
             }
-            if ((flags5 & MonsterFlag5.NetherBall) != 0)
+            if (combinedSpells.Contains(typeof(NetherBallMonsterSpell)))
             {
                 vp[vn++] = "produce nether balls";
             }
-            if ((flags5 & MonsterFlag5.WaterBall) != 0)
+            if (combinedSpells.Contains(typeof(WaterBallMonsterSpell)))
             {
                 vp[vn++] = "produce water balls";
             }
-            if ((flags4 & MonsterFlag4.RadiationBall) != 0)
+            if (combinedSpells.Contains(typeof(RadiationBallMonsterSpell)))
             {
                 vp[vn++] = "produce balls of radiation";
             }
-            if ((flags5 & MonsterFlag5.ManaBall) != 0)
+            if (combinedSpells.Contains(typeof(ManaBallMonsterSpell)))
             {
                 vp[vn++] = "invoke mana storms";
             }
-            if ((flags5 & MonsterFlag5.DarkBall) != 0)
+            if (combinedSpells.Contains(typeof(DarkBallMonsterSpell)))
             {
                 vp[vn++] = "invoke darkness storms";
             }
-            if ((flags4 & MonsterFlag4.ChaosBall) != 0)
+            if (combinedSpells.Contains(typeof(ChaosBallMonsterSpell)))
             {
                 vp[vn++] = "invoke raw chaos";
             }
-            if ((flags6 & MonsterFlag6.DreadCurse) != 0)
+            if (combinedSpells.Contains(typeof(DreadCurseMonsterSpell)))
             {
                 vp[vn++] = "invoke the Dread Curse of Azathoth";
             }
-            if ((flags5 & MonsterFlag5.DrainMana) != 0)
+            if (combinedSpells.Contains(typeof(DrainManaMonsterSpell)))
             {
                 vp[vn++] = "drain mana";
             }
-            if ((flags5 & MonsterFlag5.MindBlast) != 0)
+            if (combinedSpells.Contains(typeof(MindBlastMonsterSpell)))
             {
                 vp[vn++] = "cause mind blasting";
             }
-            if ((flags5 & MonsterFlag5.BrainSmash) != 0)
+            if (combinedSpells.Contains(typeof(BrainSmashMonsterSpell)))
             {
                 vp[vn++] = "cause brain smashing";
             }
-            if ((flags5 & MonsterFlag5.CauseLightWounds) != 0)
+            if (combinedSpells.Contains(typeof(CauseLightWoundsMonsterSpell)))
             {
                 vp[vn++] = "cause light wounds and cursing";
             }
-            if ((flags5 & MonsterFlag5.CauseSeriousWounds) != 0)
+            if (combinedSpells.Contains(typeof(CauseSeriousWoundsMonsterSpell)))
             {
                 vp[vn++] = "cause serious wounds and cursing";
             }
-            if ((flags5 & MonsterFlag5.CauseCriticalWounds) != 0)
+            if (combinedSpells.Contains(typeof(CauseCriticalWoundsMonsterSpell)))
             {
                 vp[vn++] = "cause critical wounds and cursing";
             }
-            if ((flags5 & MonsterFlag5.CauseMortalWounds) != 0)
+            if (combinedSpells.Contains(typeof(CauseMortalWoundsMonsterSpell)))
             {
                 vp[vn++] = "cause mortal wounds";
             }
-            if ((flags5 & MonsterFlag5.AcidBolt) != 0)
+            if (combinedSpells.Contains(typeof(AcidBoltMonsterSpell)))
             {
                 vp[vn++] = "produce acid bolts";
             }
-            if ((flags5 & MonsterFlag5.LightningBolt) != 0)
+            if (combinedSpells.Contains(typeof(LightningBoltMonsterSpell)))
             {
                 vp[vn++] = "produce lightning bolts";
             }
-            if ((flags5 & MonsterFlag5.FireBolt) != 0)
+            if (combinedSpells.Contains(typeof(FireBoltMonsterSpell)))
             {
                 vp[vn++] = "produce fire bolts";
             }
-            if ((flags5 & MonsterFlag5.ColdBolt) != 0)
+            if (combinedSpells.Contains(typeof(ColdBoltMonsterSpell)))
             {
                 vp[vn++] = "produce frost bolts";
             }
-            if ((flags5 & MonsterFlag5.PoisonBolt) != 0)
+            if (combinedSpells.Contains(typeof(PoisonBoltMonsterSpell)))
             {
                 vp[vn++] = "produce poison bolts";
             }
-            if ((flags5 & MonsterFlag5.NetherBolt) != 0)
+            if (combinedSpells.Contains(typeof(NetherBoltMonsterSpell)))
             {
                 vp[vn++] = "produce nether bolts";
             }
-            if ((flags5 & MonsterFlag5.WaterBolt) != 0)
+            if (combinedSpells.Contains(typeof(WaterBoltMonsterSpell)))
             {
                 vp[vn++] = "produce water bolts";
             }
-            if ((flags5 & MonsterFlag5.ManaBolt) != 0)
+            if (combinedSpells.Contains(typeof(ManaBoltMonsterSpell)))
             {
                 vp[vn++] = "produce mana bolts";
             }
-            if ((flags5 & MonsterFlag5.PlasmaBolt) != 0)
+            if (combinedSpells.Contains(typeof(PlasmaBoltMonsterSpell)))
             {
                 vp[vn++] = "produce plasma bolts";
             }
-            if ((flags5 & MonsterFlag5.IceBolt) != 0)
+            if (combinedSpells.Contains(typeof(IceBoltMonsterSpell)))
             {
                 vp[vn++] = "produce ice bolts";
             }
-            if ((flags5 & MonsterFlag5.MagicMissile) != 0)
+            if (combinedSpells.Contains(typeof(MagicMissileMonsterSpell)))
             {
                 vp[vn++] = "produce magic missiles";
             }
-            if ((flags5 & MonsterFlag5.Scare) != 0)
+            if (combinedSpells.Contains(typeof(ScareMonsterSpell)))
             {
                 vp[vn++] = "terrify";
             }
-            if ((flags5 & MonsterFlag5.Blindness) != 0)
+            if (combinedSpells.Contains(typeof(BlindnessMonsterSpell)))
             {
                 vp[vn++] = "blind";
             }
-            if ((flags5 & MonsterFlag5.Confuse) != 0)
+            if (combinedSpells.Contains(typeof(ConfuseMonsterSpell)))
             {
                 vp[vn++] = "confuse";
             }
-            if ((flags5 & MonsterFlag5.Slow) != 0)
+            if (combinedSpells.Contains(typeof(SlowMonsterSpell)))
             {
                 vp[vn++] = "slow";
             }
-            if ((flags5 & MonsterFlag5.Hold) != 0)
+            if (combinedSpells.Contains(typeof(HoldMonsterSpell)))
             {
                 vp[vn++] = "paralyze";
             }
-            if ((flags6 & MonsterFlag6.Haste) != 0)
+            if (combinedSpells.Contains(typeof(HasteMonsterSpell)))
             {
                 vp[vn++] = "haste-self";
             }
-            if ((flags6 & MonsterFlag6.Heal) != 0)
+            if (combinedSpells.Contains(typeof(HealMonsterSpell)))
             {
                 vp[vn++] = "heal-self";
             }
-            if ((flags6 & MonsterFlag6.Blink) != 0)
+            if (combinedSpells.Contains(typeof(BlinkMonsterSpell)))
             {
                 vp[vn++] = "blink-self";
             }
-            if ((flags6 & MonsterFlag6.TeleportSelf) != 0)
+            if (combinedSpells.Contains(typeof(TeleportSelfMonsterSpell)))
             {
                 vp[vn++] = "teleport-self";
             }
-            if ((flags6 & MonsterFlag6.TeleportTo) != 0)
+            if (combinedSpells.Contains(typeof(TeleportToMonsterSpell)))
             {
                 vp[vn++] = "teleport to";
             }
-            if ((flags6 & MonsterFlag6.TeleportAway) != 0)
+            if (combinedSpells.Contains(typeof(TeleportAwayMonsterSpell)))
             {
                 vp[vn++] = "teleport away";
             }
-            if ((flags6 & MonsterFlag6.TeleportLevel) != 0)
+            if (combinedSpells.Contains(typeof(TeleportLevelMonsterSpell)))
             {
                 vp[vn++] = "teleport level";
             }
-            if ((flags6 & MonsterFlag6.Darkness) != 0)
+            if (combinedSpells.Contains(typeof(DarknessMonsterSpell)))
             {
                 vp[vn++] = "create darkness";
             }
-            if ((flags6 & MonsterFlag6.CreateTraps) != 0)
+            if (combinedSpells.Contains(typeof(CreateTrapsMonsterSpell)))
             {
                 vp[vn++] = "create traps";
             }
-            if ((flags6 & MonsterFlag6.Forget) != 0)
+            if (combinedSpells.Contains(typeof(ForgetMonsterSpell)))
             {
                 vp[vn++] = "cause amnesia";
             }
-            if ((flags6 & MonsterFlag6.SummonMonster) != 0)
+            if (combinedSpells.Contains(typeof(SummonMonsterMonsterSpell)))
             {
                 vp[vn++] = "summon a monster";
             }
-            if ((flags6 & MonsterFlag6.SummonMonsters) != 0)
+            if (combinedSpells.Contains(typeof(SummonMonstersMonsterSpell)))
             {
                 vp[vn++] = "summon monsters";
             }
-            if ((flags6 & MonsterFlag6.SummonKin) != 0)
+            if (combinedSpells.Contains(typeof(SummonKinMonsterSpell)))
             {
                 vp[vn++] = "summon aid";
             }
-            if ((flags6 & MonsterFlag6.SummonAnt) != 0)
+            if (combinedSpells.Contains(typeof(SummonAntMonsterSpell)))
             {
                 vp[vn++] = "summon ants";
             }
-            if ((flags6 & MonsterFlag6.SummonSpider) != 0)
+            if (combinedSpells.Contains(typeof(SummonSpiderMonsterSpell)))
             {
                 vp[vn++] = "summon spiders";
             }
-            if ((flags6 & MonsterFlag6.SummonHound) != 0)
+            if (combinedSpells.Contains(typeof(SummonHoundMonsterSpell)))
             {
                 vp[vn++] = "summon hounds";
             }
-            if ((flags6 & MonsterFlag6.SummonHydra) != 0)
+            if (combinedSpells.Contains(typeof(SummonHydraMonsterSpell)))
             {
                 vp[vn++] = "summon hydras";
             }
-            if ((flags6 & MonsterFlag6.SummonCthuloid) != 0)
+            if (combinedSpells.Contains(typeof(SummonCthuloidMonsterSpell)))
             {
                 vp[vn++] = "summon a Cthuloid entity";
             }
-            if ((flags6 & MonsterFlag6.SummonDemon) != 0)
+            if (combinedSpells.Contains(typeof(SummonDemonMonsterSpell)))
             {
                 vp[vn++] = "summon a demon";
             }
-            if ((flags6 & MonsterFlag6.SummonUndead) != 0)
+            if (combinedSpells.Contains(typeof(SummonUndeadMonsterSpell)))
             {
                 vp[vn++] = "summon an undead";
             }
-            if ((flags6 & MonsterFlag6.SummonDragon) != 0)
+            if (combinedSpells.Contains(typeof(SummonDragonMonsterSpell)))
             {
                 vp[vn++] = "summon a dragon";
             }
-            if ((flags6 & MonsterFlag6.SummonHiUndead) != 0)
+            if (combinedSpells.Contains(typeof(SummonHiUndeadMonsterSpell)))
             {
                 vp[vn++] = "summon Greater Undead";
             }
-            if ((flags6 & MonsterFlag6.SummonHiDragon) != 0)
+            if (combinedSpells.Contains(typeof(SummonHiDragonMonsterSpell)))
             {
                 vp[vn++] = "summon Ancient Dragons";
             }
-            if ((flags6 & MonsterFlag6.SummonReaver) != 0)
+            if (combinedSpells.Contains(typeof(SummonReaverMonsterSpell)))
             {
                 vp[vn++] = "summon Black Reavers";
             }
-            if ((flags6 & MonsterFlag6.SummonGreatOldOne) != 0)
+            if (combinedSpells.Contains(typeof(SummonGreatOldOneMonsterSpell)))
             {
                 vp[vn++] = "summon Great Old Ones";
             }
-            if ((flags6 & MonsterFlag6.SummonUnique) != 0)
+            if (combinedSpells.Contains(typeof(SummonUniqueMonsterSpell)))
             {
                 vp[vn++] = "summon Unique Monsters";
             }

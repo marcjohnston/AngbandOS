@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,22 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ItMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ShriekMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new ScareMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new ForgetMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonHydraMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportAwayMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => '·';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "It";
@@ -20,16 +37,10 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0)
         };
         public override bool AttrClear => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
         public override bool CharClear => true;
         public override bool CharMulti => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
-        public override bool CreateTraps => true;
-        public override bool Darkness => true;
         public override string Description => "Nobody has ever seen It.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Drop90 => true;
         public override bool DropGood => true;
@@ -37,12 +48,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool EmptyMind => true;
         public override bool Evil => true;
         public override bool ForceMaxHp => true;
-        public override bool Forget => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
         public override string FriendlyName => "It";
         public override int Hdice => 77;
-        public override bool Heal => true;
         public override int Hside => 9;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFire => true;
@@ -56,19 +65,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 3;
         public override bool Reflecting => true;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
-        public override bool Shriek => true;
         public override int Sleep => 25;
         public override bool Smart => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "     It     ";
-        public override bool SummonHydra => true;
-        public override bool SummonMonster => true;
-        public override bool SummonUndead => true;
-        public override bool TeleportAway => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

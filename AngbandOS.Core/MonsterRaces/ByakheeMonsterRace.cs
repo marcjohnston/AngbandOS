@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ByakheeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ConfuseMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new SummonDemonMonsterSpell());
         public override char Character => 'B';
         public override Colour Colour => Colour.Black;
         public override string Name => "Byakhee";
@@ -18,13 +23,11 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new Exp20AttackEffect(), 3, 4),
         };
         public override bool BashDoor => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "Hybrid demon birds: 'not altogether crows, nor moles, nor buzzards, nor ants, nor decomposed human beings...'";
         public override bool Drop_2D2 => true;
         public override bool EldritchHorror => true;
         public override bool Evil => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 9;
@@ -48,6 +51,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Byakhee   ";
-        public override bool SummonDemon => true;
     }
 }

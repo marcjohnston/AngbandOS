@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KarakalSpiritOfFireMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBallMonsterSpell(),
+            new PlasmaBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Red;
         public override string Name => "Karakal, Spirit of Fire";
@@ -24,7 +28,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool EmptyMind => true;
         public override bool Evil => true;
         public override bool FireAura => true;
-        public override bool FireBall => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 4;
@@ -42,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Male => true;
         public override int Mexp => 3000;
         public override int NoticeRange => 12;
-        public override bool PlasmaBolt => true;
         public override bool Powerful => true;
         public override bool RandomMove25 => true;
         public override int Rarity => 3;

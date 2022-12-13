@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class RedweedMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell());
         public override char Character => 'm';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Redweed";
@@ -16,7 +19,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Touch, new HurtAttackEffect(), 1, 1),
         };
-        public override bool Blink => true;
         public override string Description => "A strange fibrous growth springing up everywhere.";
         public override bool EmptyMind => true;
         public override int FreqInate => 20;

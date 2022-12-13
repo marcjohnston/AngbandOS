@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AncientGreenDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreathePoisonMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Green;
         public override string Name => "Ancient green dragon";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 5, 10),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreathePoison => true;
-        public override bool Confuse => true;
         public override string Description => "A huge draconic form enveloped in clouds of poisonous vapour.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -43,7 +46,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool Powerful => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 80;
         public override bool Smart => true;
         public override int Speed => 120;

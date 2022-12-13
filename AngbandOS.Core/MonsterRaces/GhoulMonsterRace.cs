@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GhoulMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new HoldMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'z';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Ghoul";
@@ -28,7 +32,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Ghoul";
         public override bool Friends => true;
         public override int Hdice => 15;
-        public override bool Hold => true;
         public override int Hside => 9;
         public override bool HurtByLight => true;
         public override bool ImmuneCold => true;
@@ -40,7 +43,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 30;
         public override bool OpenDoor => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

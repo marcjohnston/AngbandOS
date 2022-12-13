@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LichMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new TeleportAwayMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'L';
         public override Colour Colour => Colour.BrightBeige;
         public override string Name => "Lich";
@@ -20,13 +32,8 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new LoseDexAttackEffect(), 2, 8)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
-        public override bool BrainSmash => true;
-        public override bool CauseCriticalWounds => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a skeletal form dressed in robes. It radiates vastly evil power.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
         public override bool ForceMaxHp => true;
@@ -35,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 4;
         public override string FriendlyName => "Lich";
         public override int Hdice => 30;
-        public override bool Hold => true;
         public override int Hside => 10;
         public override bool HurtByLight => true;
         public override bool ImmuneCold => true;
@@ -47,16 +53,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 60;
-        public override bool Slow => true;
         public override bool Smart => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "    Lich    ";
-        public override bool TeleportAway => true;
-        public override bool TeleportTo => true;
         public override bool Undead => true;
     }
 }

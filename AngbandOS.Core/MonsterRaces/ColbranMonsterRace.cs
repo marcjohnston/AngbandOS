@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ColbranMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new LightningBoltMonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Colbran";
@@ -34,7 +37,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneSleep => true;
         public override int LevelFound => 27;
         public override bool LightningAura => true;
-        public override bool LightningBolt => true;
         public override int Mexp => 900;
         public override bool Nonliving => true;
         public override int NoticeRange => 12;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MaulotaurMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new PlasmaBoltMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Maulotaur";
@@ -24,8 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Drop60 => true;
         public override bool DropGood => true;
         public override bool Evil => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 5;
@@ -38,7 +41,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Mexp => 4500;
         public override int NoticeRange => 13;
         public override bool OnlyDropItem => true;
-        public override bool PlasmaBolt => true;
         public override int Rarity => 2;
         public override bool ResistTeleport => true;
         public override int Sleep => 10;

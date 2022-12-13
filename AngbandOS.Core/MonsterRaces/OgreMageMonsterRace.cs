@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OgreMageMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBallMonsterSpell(),
+            new HoldMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonMonsterMonsterSpell());
         public override char Character => 'O';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Ogre mage";
@@ -20,8 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 8)
         };
         public override bool BashDoor => true;
-        public override bool ColdBall => true;
-        public override bool CreateTraps => true;
         public override string Description => "A hideous ogre wrapped in black sorcerous robes.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -31,8 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Ogre mage";
         public override bool Giant => true;
         public override int Hdice => 30;
-        public override bool Heal => true;
-        public override bool Hold => true;
         public override int Hside => 12;
         public override int LevelFound => 27;
         public override int Mexp => 300;
@@ -44,6 +47,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Ogre    ";
         public override string SplitName3 => "    mage    ";
-        public override bool SummonMonster => true;
     }
 }

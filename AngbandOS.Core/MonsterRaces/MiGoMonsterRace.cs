@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MiGoMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ConfuseMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonMonsterMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.BrightPink;
         public override string Name => "Mi-Go";
@@ -19,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 1, 2),
         };
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override bool Cthuloid => true;
         public override string Description => "Five feet long pinkish insectoids with a multitude of antennae, with a buzzing voice.";
         public override bool Evil => true;
@@ -41,7 +45,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Mi-Go    ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonMonster => true;
     }
 }

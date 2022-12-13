@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new ManaBoltMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Fthagghua, Lord of the fire vampires";
@@ -20,16 +28,12 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 10, 10)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheFire => true;
         public override string Description => "A fiery serpentine entity, streaking through the air like a comet. The heat emanating from this creature is almost unbearable.";
         public override bool Drop_3D2 => true;
         public override bool Drop_4D2 => true;
         public override bool DropGood => true;
         public override bool EldritchHorror => true;
         public override bool FireAura => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 2;
@@ -45,7 +49,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneLightning => true;
         public override bool ImmunePoison => true;
         public override int LevelFound => 56;
-        public override bool ManaBolt => true;
         public override int Mexp => 25000;
         public override bool MoveBody => true;
         public override int NoticeRange => 40;
@@ -62,7 +65,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => "            ";
         public override string SplitName3 => " Fthagghua  ";
         public override bool TakeItem => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class RadiationEyeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'e';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Radiation eye";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Gaze, new LoseStrAttackEffect(), 1, 6),
         };
         public override string Description => "A disembodied eye, crackling with energy.";
-        public override bool DrainMana => true;
         public override int FreqInate => 11;
         public override int FreqSpell => 11;
         public override string FriendlyName => "Radiation eye";

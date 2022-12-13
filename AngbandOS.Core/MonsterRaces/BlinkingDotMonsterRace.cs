@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlinkingDotMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Blinking dot";
@@ -16,7 +19,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Spore, new ConfuseAttackEffect(), 1, 4),
         };
-        public override bool Blink => true;
         public override string Description => "Is it there or is it not?";
         public override bool EmptyMind => true;
         public override int FreqInate => 2;

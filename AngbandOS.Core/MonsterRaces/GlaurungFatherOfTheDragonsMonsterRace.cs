@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new SummonDragonMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Glaurung, Father of the Dragons";
@@ -20,9 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 8, 14)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override string Description => "Glaurung is the father of all dragons, and was for a long time the most powerful. Nevertheless, he still has full command over his brood and can command them to appear whenever he so wishes. He is the definition of dragonfire.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -52,7 +55,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Glaurung  ";
-        public override bool SummonDragon => true;
         public override bool Unique => true;
     }
 }

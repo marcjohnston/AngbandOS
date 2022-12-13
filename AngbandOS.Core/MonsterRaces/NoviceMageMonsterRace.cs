@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NoviceMageMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new MagicMissileMonsterSpell(),
+            new BlinkMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Novice mage";
@@ -17,9 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 4),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
-        public override bool Confuse => true;
         public override string Description => "He is leaving behind a trail of dropped spell components.";
         public override bool Drop60 => true;
         public override bool ForceSleep => true;
@@ -29,7 +32,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Hdice => 6;
         public override int Hside => 4;
         public override int LevelFound => 2;
-        public override bool MagicMissile => true;
         public override bool Male => true;
         public override int Mexp => 7;
         public override int NoticeRange => 20;

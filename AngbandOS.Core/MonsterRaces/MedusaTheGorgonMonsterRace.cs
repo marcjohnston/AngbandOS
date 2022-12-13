@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,14 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MedusaTheGorgonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseCriticalWoundsMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new HoldMonsterSpell(),
+            new PlasmaBoltMonsterSpell(),
+            new PoisonBallMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonHydraMonsterSpell());
         public override char Character => 'n';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Medusa, the Gorgon";
@@ -20,21 +29,18 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 8, 6)
         };
         public override bool BashDoor => true;
-        public override bool CauseCriticalWounds => true;
         public override string Description => "Her face could sink a thousand ships.";
         public override bool Drop_1D2 => true;
         public override bool Drop_2D2 => true;
         public override bool DropGood => true;
         public override bool Evil => true;
         public override bool Female => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 2;
         public override int FreqSpell => 2;
         public override string FriendlyName => "Medusa, the Gorgon";
         public override int Hdice => 24;
-        public override bool Hold => true;
         public override int Hside => 100;
         public override bool ImmuneAcid => true;
         public override bool ImmuneConfusion => true;
@@ -46,17 +52,13 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 30;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
-        public override bool PoisonBall => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 5;
         public override bool Smart => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Medusa   ";
-        public override bool SummonHydra => true;
         public override bool Unique => true;
     }
 }

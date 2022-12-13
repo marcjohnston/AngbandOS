@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EnergyVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightningMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Energy vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new ElectricityAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheLightning => true;
         public override string Description => "A shimmering tornado of air, sparks crackle along its length.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

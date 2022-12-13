@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CrystalDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheShardsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Diamond;
         public override string Name => "Crystal drake";
@@ -19,8 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheShards => true;
-        public override bool Confuse => true;
         public override string Description => "A dragon of strange crystalline form. Light shines through it, dazzling your eyes with spectrums of colour.";
         public override bool Dragon => true;
         public override bool Drop_4D2 => true;
@@ -43,9 +47,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override int Rarity => 2;
         public override bool Reflecting => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
-        public override bool Slow => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Crystal   ";

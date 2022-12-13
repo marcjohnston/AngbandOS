@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlackKnightMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ScareMonsterSpell(),
+            new DarknessMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Black knight";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Darkness => true;
         public override string Description => "He is a figure encased in deep black plate armour; he looks at you menacingly.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -37,7 +40,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

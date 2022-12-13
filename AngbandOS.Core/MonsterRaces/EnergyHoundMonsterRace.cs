@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EnergyHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightningMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "Energy hound";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new ElectricityAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheLightning => true;
         public override string Description => "Saint Elmo's Fire forms a ghostly halo around this hound, and sparks sting your fingers as energy builds up in the air around you.";
         public override bool ForceSleep => true;
         public override int FreqInate => 10;

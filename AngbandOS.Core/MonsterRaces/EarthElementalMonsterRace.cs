@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,11 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EarthElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Earth elemental";
 
-        public override bool AcidBolt => true;
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BloodshotEyeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'e';
         public override Colour Colour => Colour.Red;
         public override string Name => "Bloodshot eye";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Gaze, new BlindAttackEffect(), 2, 6),
         };
         public override string Description => "A disembodied eye, bloodshot and nasty.";
-        public override bool DrainMana => true;
         public override int FreqInate => 7;
         public override int FreqSpell => 7;
         public override string FriendlyName => "Bloodshot eye";

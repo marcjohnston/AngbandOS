@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DoomDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Beige;
         public override string Name => "Doom drake";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6),
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "Doom drakes are trained firedrakes, always moving in pairs, looking for a battle.";
         public override bool Dragon => true;
         public override bool Drop_1D2 => true;

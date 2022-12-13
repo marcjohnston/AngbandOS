@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class JabberwockMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheChaosMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Jabberwock";
@@ -22,8 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheChaos => true;
-        public override bool CauseMortalWounds => true;
         public override string Description => "'Beware the Jabberwock, my son!The jaws that bite, the claws that catch!'";
         public override bool Drop60 => true;
         public override bool Drop90 => true;

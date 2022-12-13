@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OrcShamanMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseLightWoundsMonsterSpell(),
+            new MagicMissileMonsterSpell(),
+            new BlinkMonsterSpell());
         public override char Character => 'o';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Orc shaman";
@@ -18,8 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
-        public override bool CauseLightWounds => true;
         public override string Description => "An orc dressed in skins who gestures wildly.";
         public override bool Drop90 => true;
         public override bool Evil => true;
@@ -31,7 +34,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Hside => 8;
         public override bool HurtByLight => true;
         public override int LevelFound => 9;
-        public override bool MagicMissile => true;
         public override bool Male => true;
         public override int Mexp => 30;
         public override int NoticeRange => 20;

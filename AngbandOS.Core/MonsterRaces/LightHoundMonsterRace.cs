@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LightHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "Light hound";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool BreatheLight => true;
         public override string Description => "A brilliant canine form whose light hurts your eyes, even at this distance.";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

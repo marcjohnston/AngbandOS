@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DholeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.Beige;
         public override string Name => "Dhole";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new AcidAttackEffect(), 2, 8),
             new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 4, 8),
         };
-        public override bool BreatheAcid => true;
         public override bool Cthuloid => true;
         public override string Description => "A gigantic worm dripping with acid.";
         public override bool EldritchHorror => true;

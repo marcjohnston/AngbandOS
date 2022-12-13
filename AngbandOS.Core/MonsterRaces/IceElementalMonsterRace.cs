@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class IceElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBallMonsterSpell(),
+            new IceBoltMonsterSpell());
         public override char Character => 'E';
         public override string Name => "Ice elemental";
 
@@ -18,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool ColdBall => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a towering glacier of ice.";
         public override bool EmptyMind => true;
@@ -29,7 +32,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Ice elemental";
         public override int Hdice => 35;
         public override int Hside => 10;
-        public override bool IceBolt => true;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;

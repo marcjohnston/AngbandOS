@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class YigFatherOfSerpentsMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheDisenchantMonsterSpell(),
+            new BreathePoisonMonsterSpell());
         public override char Character => 'J';
         public override Colour Colour => Colour.Green;
         public override string Name => "Yig, Father of Serpents";
@@ -20,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crush, new UnBonusAttackEffect(), 5, 12)
         };
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheDisenchant => true;
-        public override bool BreathePoison => true;
         public override string Description => "A humanoid snake, Yig is one of the most poisonous entities in existance.";
         public override bool Drop_2D2 => true;
         public override bool Drop_4D2 => true;

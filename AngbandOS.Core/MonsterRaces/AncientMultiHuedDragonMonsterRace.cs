@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AncientMultiHuedDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Ancient multi-hued dragon";
@@ -20,13 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheLightning => true;
-        public override bool BreathePoison => true;
-        public override bool Confuse => true;
         public override string Description => "A huge draconic form. Many colours ripple down its massive frame. Few live to see another.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -55,7 +58,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool Powerful => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 70;
         public override bool Smart => true;
         public override int Speed => 120;

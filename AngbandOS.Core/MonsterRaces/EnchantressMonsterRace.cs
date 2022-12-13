@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EnchantressMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new SummonDragonMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Enchantress";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
         public override string Description => "This elusive female spellcaster has a special affinity for dragons, whom she rarely fights without.";
         public override bool Drop_2D2 => true;
         public override bool DropGood => true;
@@ -45,6 +48,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "Enchantress ";
-        public override bool SummonDragon => true;
     }
 }

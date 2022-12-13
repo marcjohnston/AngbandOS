@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosMasterMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ChaosBallMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonSpiderMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos master";
@@ -21,7 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrAny => true;
         public override bool BashDoor => true;
-        public override bool ChaosBall => true;
         public override string Description => "An adept of chaos, feared for his skill of invoking raw chaos.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -31,7 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 6;
         public override string FriendlyName => "Chaos master";
         public override int Hdice => 30;
-        public override bool Heal => true;
         public override int Hside => 10;
         public override bool ImmuneAcid => true;
         public override bool ImmuneConfusion => true;
@@ -50,7 +54,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Chaos    ";
         public override string SplitName3 => "   master   ";
-        public override bool SummonDemon => true;
-        public override bool SummonSpider => true;
     }
 }

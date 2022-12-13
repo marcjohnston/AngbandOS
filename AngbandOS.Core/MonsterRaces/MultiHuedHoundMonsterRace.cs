@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MultiHuedHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Multi-hued hound";
@@ -22,11 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheLightning => true;
-        public override bool BreathePoison => true;
         public override string Description => "Shimmering in rainbow hues, this hound is beautiful and deadly. ";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

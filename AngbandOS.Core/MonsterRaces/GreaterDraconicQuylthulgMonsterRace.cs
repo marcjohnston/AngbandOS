@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreaterDraconicQuylthulgMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.Green;
         public override string Name => "Greater draconic quylthulg";
@@ -15,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blink => true;
         public override string Description => "A massive mound of scaled flesh, throbbing and pulsating with multi-hued light.";
         public override bool EmptyMind => true;
         public override bool Evil => true;
@@ -42,7 +46,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "  Greater   ";
         public override string SplitName2 => "  draconic  ";
         public override string SplitName3 => " quylthulg  ";
-        public override bool SummonHiDragon => true;
-        public override bool TeleportTo => true;
     }
 }

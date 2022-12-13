@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ThePhoenixMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new BreathePlasmaMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new PlasmaBoltMonsterSpell());
         public override char Character => 'B';
         public override Colour Colour => Colour.Red;
         public override string Name => "The Phoenix";
@@ -21,15 +29,10 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheLight => true;
-        public override bool BreathePlasma => true;
         public override string Description => "A massive glowing eagle bathed in flames. The searing heat chars your skin and melts your armour.";
         public override bool Drop_2D2 => true;
         public override bool DropGood => true;
         public override bool FireAura => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 3;
@@ -49,7 +52,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 60;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
         public override int Rarity => 3;
         public override bool ResistPlasma => true;
         public override int Sleep => 0;

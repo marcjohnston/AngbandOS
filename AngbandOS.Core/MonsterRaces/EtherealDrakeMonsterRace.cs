@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EtherealDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDarkMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Ethereal drake";
@@ -18,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6),
         };
-        public override bool BreatheDark => true;
-        public override bool BreatheLight => true;
-        public override bool Confuse => true;
         public override string Description => "A dragon of elemental power, with control over light and dark, the ethereal drake's eyes glare with white hatred from the shadows.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -41,9 +45,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropItem => true;
         public override bool PassWall => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 15;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Ethereal  ";

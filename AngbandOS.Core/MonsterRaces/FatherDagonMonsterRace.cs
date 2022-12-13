@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,16 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FatherDagonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new TeleportAwayMonsterSpell(),
+            new TeleportLevelMonsterSpell(),
+            new TeleportToMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.BrightChartreuse;
         public override string Name => "Father Dagon";
@@ -19,9 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 4),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
-        public override bool Confuse => true;
         public override bool Cthuloid => true;
         public override bool Demon => true;
         public override string Description => "A scale-skinned humanoid fish, the ruler of deep ones.";
@@ -48,17 +56,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool RandomMove25 => true;
         public override int Rarity => 5;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Father   ";
         public override string SplitName3 => "   Dagon    ";
-        public override bool SummonCthuloid => true;
-        public override bool TeleportAway => true;
-        public override bool TeleportLevel => true;
-        public override bool TeleportSelf => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

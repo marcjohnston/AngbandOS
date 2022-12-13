@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SmaugTheGoldenMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Smaug the Golden";
@@ -20,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 6, 14)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override string Description => "Smaug is one of the Uruloki that still survive, a fire-drake of immense cunning and intelligence. His speed through air is matched by few other dragons and his dragonfire is what legends are made of.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;

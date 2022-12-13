@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GhostMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell());
         public override char Character => 'G';
         public override string Name => "Ghost";
 
@@ -18,10 +23,8 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new LoseIntAttackEffect(), 1, 6),
             new MonsterAttack(AttackType.Claw, new LoseWisAttackEffect(), 1, 6)
         };
-        public override bool Blindness => true;
         public override bool ColdBlood => true;
         public override string Description => "You don't believe in them.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Drop60 => true;
         public override bool Evil => true;
@@ -30,7 +33,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 16;
         public override string FriendlyName => "Ghost";
         public override int Hdice => 13;
-        public override bool Hold => true;
         public override int Hside => 8;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;

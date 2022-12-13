@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosTileMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseSeriousWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new SummonMonsterMonsterSpell());
         public override char Character => '·';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos tile";
@@ -19,12 +27,8 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
-        public override bool Blindness => true;
-        public override bool Blink => true;
-        public override bool CauseSeriousWounds => true;
         public override bool CharMulti => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "It is a floor tile corrupted by chaos.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -42,12 +46,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool NeverMove => true;
         public override int NoticeRange => 30;
         public override int Rarity => 6;
-        public override bool Scare => true;
         public override int Sleep => 100;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Chaos    ";
         public override string SplitName3 => "    tile    ";
-        public override bool SummonMonster => true;
     }
 }

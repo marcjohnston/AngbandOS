@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosShapechangerMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBoltMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new FireBoltMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos shapechanger";
@@ -20,12 +25,9 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
-        public override bool ColdBolt => true;
-        public override bool Confuse => true;
         public override string Description => "A vaguely humanoid form constantly changing its appearance.";
         public override bool Drop60 => true;
         public override bool Evil => true;
-        public override bool FireBolt => true;
         public override int FreqInate => 5;
         public override int FreqSpell => 5;
         public override string FriendlyName => "Chaos shapechanger";

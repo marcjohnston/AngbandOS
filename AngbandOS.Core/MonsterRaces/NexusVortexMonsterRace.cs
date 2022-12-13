@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NexusVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNexusMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Nexus vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheNexus => true;
         public override string Description => "A maelstrom of potent magical energy.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

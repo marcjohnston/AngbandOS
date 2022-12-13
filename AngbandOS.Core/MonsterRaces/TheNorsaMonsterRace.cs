@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheNorsaMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new SummonMonstersMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "The Norsa";
@@ -21,13 +33,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheLightning => true;
-        public override bool BreathePoison => true;
-        public override bool Confuse => true;
         public override string Description => "An elephantine horror with five trunks, each capable of breathing destructive blasts of elements.";
         public override bool Drop_2D2 => true;
         public override bool Drop_3D2 => true;
@@ -60,14 +65,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool Powerful => true;
         public override int Rarity => 4;
-        public override bool Scare => true;
         public override int Sleep => 70;
         public override int Speed => 130;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    The     ";
         public override string SplitName3 => "   Norsa    ";
-        public override bool SummonHiDragon => true;
-        public override bool SummonMonsters => true;
         public override bool Unique => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LostSoulMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Lost soul";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool ColdBlood => true;
         public override string Description => "It is almost insubstantial.";
-        public override bool DrainMana => true;
         public override bool Drop60 => true;
         public override bool Drop90 => true;
         public override bool Evil => true;
@@ -44,7 +47,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => "    Lost    ";
         public override string SplitName3 => "    soul    ";
         public override bool TakeItem => true;
-        public override bool TeleportSelf => true;
         public override bool Undead => true;
     }
 }

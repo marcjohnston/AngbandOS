@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheEmperorQuylthulgMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BrainSmashMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new SummonHiUndeadMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.BrightPink;
         public override string Name => "The Emperor Quylthulg";
@@ -15,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => null;
-        public override bool BrainSmash => true;
         public override string Description => "A huge seething mass of flesh with a rudimentary intelligence, the Emperor Quylthulg changes colours in front of your eyes. Pulsating first one colour then the next, it knows only it must bring help to protect itself.";
         public override bool Drop_4D2 => true;
         public override bool Evil => true;
@@ -43,8 +47,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    The     ";
         public override string SplitName2 => "  Emperor   ";
         public override string SplitName3 => " Quylthulg  ";
-        public override bool SummonHiDragon => true;
-        public override bool SummonHiUndead => true;
         public override bool Unique => true;
     }
 }

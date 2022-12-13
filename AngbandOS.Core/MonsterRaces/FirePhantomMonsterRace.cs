@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FirePhantomMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new HoldMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Fire Phantom";
@@ -17,8 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool Confuse => true;
         public override string Description => "He's back from the grave for vengeance on those whoburnt him. He has no mercy for those in his way.";
         public override bool Drop_2D2 => true;
         public override bool DropGood => true;
@@ -27,21 +32,18 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 6;
         public override string FriendlyName => "Fire Phantom";
         public override int Hdice => 10;
-        public override bool Hold => true;
         public override int Hside => 100;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneSleep => true;
         public override int LevelFound => 34;
         public override bool Male => true;
         public override int Mexp => 1200;
-        public override bool MindBlast => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
         public override bool PassWall => true;
         public override int Rarity => 5;
         public override bool Regenerate => true;
-        public override bool Scare => true;
         public override int Sleep => 40;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

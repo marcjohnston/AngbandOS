@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BabyMultiHuedDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreathePoisonMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Baby multi-hued dragon";
@@ -20,11 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheLightning => true;
-        public override bool BreathePoison => true;
         public override string Description => "This hatchling dragon is still soft, its eyes unaccustomed to light and its scales shimmering with a hint of colour.";
         public override bool Dragon => true;
         public override bool Drop_1D2 => true;

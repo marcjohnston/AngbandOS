@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDarkMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonSpiderMonsterSpell());
         public override char Character => 'S';
         public override Colour Colour => Colour.Black;
         public override string Name => "Shelob, Spider of Darkness";
@@ -21,12 +33,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 2, 5)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheDark => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool CauseMortalWounds => true;
-        public override bool Confuse => true;
-        public override bool CreateTraps => true;
         public override string Description => "Shelob is an enormous bloated spider, rumoured to have been one of the brood of Ungoliant the Unlight. Her poison is legendary, as is her ego, which may be her downfall. She used to guard the pass through Cirith Ungol, but has not been seen there for many eons.";
         public override bool Drop_1D2 => true;
         public override bool Drop_2D2 => true;
@@ -41,7 +47,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 2;
         public override string FriendlyName => "Shelob, Spider of Darkness";
         public override int Hdice => 12;
-        public override bool Heal => true;
         public override int Hside => 100;
         public override bool HurtByLight => true;
         public override bool ImmuneConfusion => true;
@@ -51,15 +56,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 8;
         public override bool OnlyDropItem => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 80;
-        public override bool Slow => true;
         public override bool Smart => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Shelob   ";
-        public override bool SummonSpider => true;
         public override bool Unique => true;
     }
 }

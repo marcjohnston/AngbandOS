@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SpectatorMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseSeriousWoundsMonsterSpell(),
+            new HoldMonsterSpell(),
+            new SlowMonsterSpell(),
+            new ForgetMonsterSpell());
         public override char Character => 'e';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Spectator";
@@ -18,16 +24,13 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Gaze, new ConfuseAttackEffect(), 1, 4),
             new MonsterAttack(AttackType.Gaze, new UnBonusAttackEffect(), 0, 0),
         };
-        public override bool CauseSeriousWounds => true;
         public override string Description => "It has three small eyestalks and a large central eye.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 6;
         public override int FreqSpell => 6;
         public override string FriendlyName => "Spectator";
         public override int Hdice => 10;
-        public override bool Hold => true;
         public override int Hside => 13;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;
@@ -37,7 +40,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 30;
         public override int Rarity => 3;
         public override int Sleep => 5;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,11 +9,16 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBoltMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new SummonCthuloidMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Formless spawn of Tsathoggua";
 
-        public override bool AcidBolt => true;
         public override int ArmourClass => 40;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new AcidAttackEffect(), 2, 4),
@@ -22,12 +28,10 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool BashDoor => true;
         public override bool Cthuloid => true;
-        public override bool Darkness => true;
         public override string Description => "A black, protean being of amorphous slime.";
         public override bool Drop90 => true;
         public override bool EldritchHorror => true;
         public override bool Evil => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 9;
@@ -41,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneSleep => true;
         public override int LevelFound => 41;
         public override int Mexp => 1850;
-        public override bool MindBlast => true;
         public override bool Nonliving => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
@@ -55,6 +58,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "  Formless  ";
         public override string SplitName2 => "  spawn of  ";
         public override string SplitName3 => " Tsathoggua ";
-        public override bool SummonCthuloid => true;
     }
 }

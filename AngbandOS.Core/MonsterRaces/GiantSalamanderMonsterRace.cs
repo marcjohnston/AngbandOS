@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GiantSalamanderMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'R';
         public override Colour Colour => Colour.Red;
         public override string Name => "Giant salamander";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 6),
         };
-        public override bool BreatheFire => true;
         public override string Description => "A large black and yellow lizard. You'd better run away!";
         public override bool ForceSleep => true;
         public override int FreqInate => 9;

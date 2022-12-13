@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OrcCaptainMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new Arrow1D6MonsterSpell());
         public override char Character => 'o';
         public override Colour Colour => Colour.Green;
         public override string Name => "Orc captain";
 
         public override int ArmourClass => 59;
-        public override bool Arrow1D6 => true;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 4),
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 4),

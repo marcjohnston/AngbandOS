@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PotionMimicMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseSeriousWoundsMonsterSpell(),
+            new ColdBoltMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => '!';
         public override string Name => "Potion mimic";
 
@@ -17,12 +24,8 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 3),
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 3),
         };
-        public override bool Blindness => true;
-        public override bool CauseSeriousWounds => true;
         public override bool CharMulti => true;
         public override bool ColdBlood => true;
-        public override bool ColdBolt => true;
-        public override bool Confuse => true;
         public override string Description => "A strange creature that disguises itself as discarded objects to lure unsuspecting adventurers within reach of its venomous claws.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -39,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool NeverMove => true;
         public override int NoticeRange => 25;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 0;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

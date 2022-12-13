@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,18 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BoneGolemMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ManaBallMonsterSpell(),
+            new NetherBallMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.BrightBeige;
         public override string Name => "Bone golem";
@@ -20,14 +33,8 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 4, 6)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BrainSmash => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool CauseMortalWounds => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "A skeletal form, black as night, constructed from the bones of its previous victims and inhabited by the soul of a lich of great power.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Drop_2D2 => true;
         public override bool DropGood => true;
@@ -38,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 3;
         public override string FriendlyName => "Bone golem";
         public override int Hdice => 35;
-        public override bool Hold => true;
         public override int Hside => 100;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
@@ -47,9 +53,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneSleep => true;
         public override bool KillWall => true;
         public override int LevelFound => 71;
-        public override bool ManaBall => true;
         public override int Mexp => 23000;
-        public override bool NetherBall => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
@@ -61,8 +65,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Bone    ";
         public override string SplitName3 => "   golem    ";
-        public override bool SummonUndead => true;
-        public override bool TeleportTo => true;
         public override bool Undead => true;
     }
 }

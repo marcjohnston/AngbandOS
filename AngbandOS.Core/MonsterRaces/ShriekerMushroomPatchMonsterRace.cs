@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShriekerMushroomPatchMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ShriekMonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Shrieker mushroom patch";
@@ -32,7 +35,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool NeverMove => true;
         public override int NoticeRange => 4;
         public override int Rarity => 1;
-        public override bool Shriek => true;
         public override int Sleep => 0;
         public override int Speed => 110;
         public override string SplitName1 => "  Shrieker  ";

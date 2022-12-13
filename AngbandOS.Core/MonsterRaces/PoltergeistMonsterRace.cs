@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PoltergeistMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Poltergeist";
@@ -16,7 +19,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Touch, new TerrifyAttackEffect(), 0, 0),
         };
-        public override bool Blink => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a ghastly, ghostly form.";
         public override bool Drop60 => true;

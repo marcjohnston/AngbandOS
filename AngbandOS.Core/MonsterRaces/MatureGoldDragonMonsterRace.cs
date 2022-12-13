@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MatureGoldDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheSoundMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Mature gold dragon";
@@ -19,8 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
         };
         public override bool BashDoor => true;
-        public override bool BreatheSound => true;
-        public override bool Confuse => true;
         public override string Description => "A large dragon with scales of gleaming gold.";
         public override bool Dragon => true;
         public override bool Drop_1D2 => true;
@@ -38,7 +41,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Mexp => 1500;
         public override int NoticeRange => 20;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 150;
         public override int Speed => 110;
         public override string SplitName1 => "   Mature   ";

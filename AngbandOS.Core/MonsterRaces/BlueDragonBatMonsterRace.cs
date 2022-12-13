@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlueDragonBatMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightningMonsterSpell());
         public override char Character => 'b';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Blue dragon bat";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Sting, new ElectricityAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheLightning => true;
         public override string Description => "It is a glowing blue bat with a sharp tail.";
         public override bool ForceSleep => true;
         public override int FreqInate => 4;

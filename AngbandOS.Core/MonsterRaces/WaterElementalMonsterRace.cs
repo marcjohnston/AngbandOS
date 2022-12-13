@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WaterElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Water elemental";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
-        public override bool ColdBolt => true;
         public override string Description => "It is a towering tempest of water.";
         public override bool EmptyMind => true;
         public override bool Evil => true;

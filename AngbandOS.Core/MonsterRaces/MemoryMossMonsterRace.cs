@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MemoryMossMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ForgetMonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Memory moss";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string Description => "A mass of green vegetation. You don't remember seeing anything like it before.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 6;
         public override int FreqSpell => 6;
         public override string FriendlyName => "Memory moss";

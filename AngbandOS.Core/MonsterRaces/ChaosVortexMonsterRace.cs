@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheChaosMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheChaos => true;
         public override string Description => "Void, nothingness, spinning destructively.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;

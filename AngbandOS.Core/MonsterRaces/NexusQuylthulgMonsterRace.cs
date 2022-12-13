@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,13 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NexusQuylthulgMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new TeleportAwayMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Nexus quylthulg";
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blink => true;
         public override string Description => "It is a very unstable, strange pulsing mound of flesh.";
         public override bool EmptyMind => true;
         public override bool ForceSleep => true;
@@ -40,6 +43,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Nexus    ";
         public override string SplitName3 => " quylthulg  ";
-        public override bool TeleportAway => true;
     }
 }

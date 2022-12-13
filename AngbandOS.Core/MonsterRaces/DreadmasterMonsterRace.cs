@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DreadmasterMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell(),
+            new NetherBoltMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportLevelMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Dreadmaster";
@@ -19,12 +29,8 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 3, 4),
             new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 3, 4)
         };
-        public override bool Blindness => true;
-        public override bool CauseMortalWounds => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "It is an unlife of power almost unequaled. An affront to existence, its very touch abuses and disrupts the flow of life, and its unearthly limbs, of purest black, crush rock and flesh with ease.";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool Drop_4D2 => true;
         public override bool Evil => true;
@@ -34,7 +40,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 9;
         public override string FriendlyName => "Dreadmaster";
         public override int Hdice => 12;
-        public override bool Hold => true;
         public override int Hside => 100;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;
@@ -43,7 +48,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Invisible => true;
         public override int LevelFound => 44;
         public override int Mexp => 8000;
-        public override bool NetherBolt => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool PassWall => true;
@@ -55,9 +59,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "Dreadmaster ";
-        public override bool SummonUndead => true;
         public override bool TakeItem => true;
-        public override bool TeleportLevel => true;
         public override bool Undead => true;
     }
 }

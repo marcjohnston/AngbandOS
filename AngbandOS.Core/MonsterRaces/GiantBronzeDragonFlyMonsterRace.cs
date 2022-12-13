@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GiantBronzeDragonFlyMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheConfusionMonsterSpell());
         public override char Character => 'F';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Giant bronze dragon fly";
@@ -16,7 +19,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int ArmourClass => 20;
         public override MonsterAttack[]? Attacks => null;
         public override bool BashDoor => true;
-        public override bool BreatheConfusion => true;
         public override string Description => "This vast gleaming bronze fly has wings which beat mesmerically fast.";
         public override bool ForceSleep => true;
         public override int FreqInate => 9;

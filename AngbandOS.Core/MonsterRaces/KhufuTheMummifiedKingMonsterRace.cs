@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,14 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseCriticalWoundsMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell(),
+            new CreateTrapsMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 'z';
         public override Colour Colour => Colour.Gold;
         public override string Name => "Khufu the mummified King";
@@ -20,10 +29,7 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new LoseConAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool CauseCriticalWounds => true;
         public override bool ColdBlood => true;
-        public override bool CreateTraps => true;
-        public override bool Darkness => true;
         public override string Description => "He is out to have a revenge on you who have desecrated his tomb.";
         public override bool Drop90 => true;
         public override bool DropGood => true;
@@ -47,15 +53,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override int Rarity => 4;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 40;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => " Khufu the  ";
         public override string SplitName2 => " mummified  ";
         public override string SplitName3 => "    King    ";
-        public override bool SummonKin => true;
-        public override bool SummonUndead => true;
         public override bool Undead => true;
         public override bool Unique => true;
     }

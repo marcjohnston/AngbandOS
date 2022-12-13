@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class UnmakerMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheChaosMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Unmaker";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheChaos => true;
         public override bool ColdBlood => true;
         public override string Description => "Summoned from the planes of Chaos, it is a mass of semi-sentient chaos, spreading uncontrollably and destroying everything in its path.";
         public override bool Drop60 => true;

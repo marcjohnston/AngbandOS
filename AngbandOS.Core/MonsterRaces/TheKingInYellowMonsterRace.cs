@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,17 +9,21 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheKingInYellowMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheColdMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreatheNetherMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new AcidBoltMonsterSpell(),
+            new ManaBoltMonsterSpell(),
+            new PoisonBallMonsterSpell(),
+            new WaterBoltMonsterSpell());
         public override char Character => '?';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "The King in Yellow";
 
-        public override bool AcidBolt => true;
         public override int ArmourClass => 150;
         public override MonsterAttack[]? Attacks => null;
-        public override bool BreatheCold => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheNether => true;
-        public override bool BreathePoison => true;
         public override bool CharMulti => true;
         public override bool ColdBlood => true;
         public override string Description => "A sentient arcane tome casting spells with malevolent intent.";
@@ -42,12 +47,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmunePoison => true;
         public override bool ImmuneSleep => true;
         public override int LevelFound => 36;
-        public override bool ManaBolt => true;
         public override int Mexp => 1500;
         public override bool NeverAttack => true;
         public override bool NeverMove => true;
         public override int NoticeRange => 20;
-        public override bool PoisonBall => true;
         public override int Rarity => 4;
         public override bool ResistNether => true;
         public override bool ResistTeleport => true;
@@ -56,6 +59,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    The     ";
         public override string SplitName2 => "  King in   ";
         public override string SplitName3 => "   Yellow   ";
-        public override bool WaterBolt => true;
     }
 }

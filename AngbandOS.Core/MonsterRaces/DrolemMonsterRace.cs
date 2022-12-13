@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DrolemMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new Arrow5D6MonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.Green;
         public override string Name => "Drolem";
 
         public override int ArmourClass => 130;
-        public override bool Arrow5D6 => true;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 5, 8),
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 5, 8),
@@ -21,10 +27,7 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreathePoison => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "A constructed dragon, the drolem has massive strength. Powerful spells weaved during its creation make it a fearsome adversary. Its eyes show little intelligence, but it has been instructed to destroy all it meets.";
         public override bool Dragon => true;
         public override bool EmptyMind => true;
@@ -50,7 +53,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 3;
         public override bool ResistTeleport => true;
         public override int Sleep => 30;
-        public override bool Slow => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";

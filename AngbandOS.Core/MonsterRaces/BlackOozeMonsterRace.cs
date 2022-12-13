@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlackOozeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'j';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Black ooze";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool BashDoor => true;
         public override string Description => "It is a strangely moving puddle.";
-        public override bool DrainMana => true;
         public override bool Drop60 => true;
         public override bool EmptyMind => true;
         public override int FreqInate => 11;

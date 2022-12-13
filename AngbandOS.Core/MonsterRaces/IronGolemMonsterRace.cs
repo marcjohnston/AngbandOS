@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class IronGolemMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new SlowMonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Iron golem";
@@ -39,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 12;
         public override int Rarity => 2;
         public override int Sleep => 10;
-        public override bool Slow => true;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Iron    ";

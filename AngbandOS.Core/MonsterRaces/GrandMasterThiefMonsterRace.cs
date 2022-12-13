@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GrandMasterThiefMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CreateTrapsMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Black;
         public override string Name => "Grand master thief";
@@ -19,7 +22,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
-        public override bool CreateTraps => true;
         public override string Description => "A furtive figure who makes you want to hide all your valuables.";
         public override bool Drop_1D2 => true;
         public override bool Drop_4D2 => true;

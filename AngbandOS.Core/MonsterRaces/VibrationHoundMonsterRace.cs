@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class VibrationHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheSoundMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightOrange;
         public override string Name => "Vibration hound";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheSound => true;
         public override string Description => "A blurry canine form which seems to be moving as fast as the eye can follow. You can feel the earth resonating beneath your feet.";
         public override bool ForceSleep => true;
         public override int FreqInate => 5;

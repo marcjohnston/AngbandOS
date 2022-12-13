@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,18 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class YogSothothTheAllInOneMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDisintegrationMonsterSpell(),
+            new BreatheManaMonsterSpell(),
+            new ChaosBallMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new ManaBallMonsterSpell(),
+            new ManaBoltMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonHoundMonsterSpell(),
+            new SummonMonstersMonsterSpell(),
+            new SummonReaverMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Yog-Sothoth, the All-in-One";
@@ -21,10 +34,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BrainSmash => true;
-        public override bool BreatheDisintegration => true;
-        public override bool BreatheMana => true;
-        public override bool ChaosBall => true;
         public override bool ColdBlood => true;
         public override string Description => "An outer god whose form resembles a mass of great floating globes.";
         public override bool Drop_4D2 => true;
@@ -49,8 +58,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneSleep => true;
         public override int LevelFound => 90;
         public override bool LightningAura => true;
-        public override bool ManaBall => true;
-        public override bool ManaBolt => true;
         public override int Mexp => 45000;
         public override bool Nonliving => true;
         public override int NoticeRange => 100;
@@ -65,11 +72,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "Yog-Sothoth ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonHound => true;
-        public override bool SummonMonsters => true;
-        public override bool SummonReaver => true;
         public override bool Unique => true;
     }
 }

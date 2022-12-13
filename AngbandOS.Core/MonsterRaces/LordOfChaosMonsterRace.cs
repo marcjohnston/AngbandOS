@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LordOfChaosMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ChaosBallMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonHoundMonsterSpell(),
+            new SummonSpiderMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Lord of Chaos";
@@ -22,7 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool ChaosBall => true;
         public override string Description => "He is one of the few true masters of the art, being extremely skillful in all forms of unarmed combat and controlling the chaos with disdainful ease.";
         public override bool Drop_4D2 => true;
         public override bool Evil => true;
@@ -32,7 +39,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 2;
         public override string FriendlyName => "Lord of Chaos";
         public override int Hdice => 45;
-        public override bool Heal => true;
         public override int Hside => 55;
         public override bool ImmuneAcid => true;
         public override bool ImmuneCold => true;
@@ -45,7 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int LevelFound => 53;
         public override bool Male => true;
         public override int Mexp => 17500;
-        public override bool MindBlast => true;
         public override int NoticeRange => 30;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
@@ -58,8 +63,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "    Lord    ";
         public override string SplitName2 => "     of     ";
         public override string SplitName3 => "   Chaos    ";
-        public override bool SummonDemon => true;
-        public override bool SummonHound => true;
-        public override bool SummonSpider => true;
     }
 }

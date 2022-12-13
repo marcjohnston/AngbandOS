@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DracoliskMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BreatheNetherMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Dracolisk";
@@ -21,8 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheNether => true;
         public override string Description => "A mixture of dragon and basilisk, the dracolisk stares at you with deep piercing eyes, its evil breath burning the ground where it stands.";
         public override bool Dragon => true;
         public override bool Drop_4D2 => true;
@@ -34,7 +38,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 6;
         public override string FriendlyName => "Dracolisk";
         public override int Hdice => 35;
-        public override bool Hold => true;
         public override int Hside => 100;
         public override bool ImmuneAcid => true;
         public override bool ImmuneConfusion => true;
@@ -48,7 +51,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 3;
         public override bool ResistNether => true;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

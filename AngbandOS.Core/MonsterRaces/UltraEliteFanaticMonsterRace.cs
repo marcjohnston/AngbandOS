@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class UltraEliteFanaticMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new HealMonsterSpell());
         public override char Character => 'p';
         public override string Name => "Ultra-elite fanatic";
 
@@ -28,7 +31,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Friends => true;
         public override bool Good => true;
         public override int Hdice => 70;
-        public override bool Heal => true;
         public override int Hside => 10;
         public override bool ImmuneAcid => true;
         public override bool ImmuneCold => true;

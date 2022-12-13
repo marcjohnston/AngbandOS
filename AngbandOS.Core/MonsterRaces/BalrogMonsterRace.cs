@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,16 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BalrogMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new NetherBallMonsterSpell(),
+            new PlasmaBoltMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Balrog";
@@ -20,10 +31,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 6, 5)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BrainSmash => true;
-        public override bool BreatheFire => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "It is a massive humanoid demon wreathed in flames.";
         public override bool Drop_2D2 => true;
@@ -44,12 +51,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override int LevelFound => 50;
         public override int Mexp => 10000;
         public override bool MoveBody => true;
-        public override bool NetherBall => true;
         public override bool Nonliving => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
         public override bool Powerful => true;
         public override int Rarity => 3;
         public override int Sleep => 80;
@@ -58,8 +63,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Balrog   ";
-        public override bool SummonDemon => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonUndead => true;
     }
 }

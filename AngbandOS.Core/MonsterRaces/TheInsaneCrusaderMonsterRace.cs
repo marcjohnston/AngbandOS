@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheInsaneCrusaderMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ShriekMonsterSpell(),
+            new ScareMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "The Insane Crusader";
@@ -45,14 +50,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool RandomMove25 => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
-        public override bool Shriek => true;
         public override int Sleep => 10;
         public override int Speed => 120;
         public override string SplitName1 => "    The     ";
         public override string SplitName2 => "   Insane   ";
         public override string SplitName3 => "  Crusader  ";
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

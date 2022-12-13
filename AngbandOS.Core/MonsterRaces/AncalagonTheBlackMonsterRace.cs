@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AncalagonTheBlackMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonDragonMonsterSpell(),
+            new SummonHiDragonMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Black;
         public override string Name => "Ancalagon the Black";
@@ -20,9 +28,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 10, 14)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheAcid => true;
-        public override bool Confuse => true;
         public override string Description => "'Rushing Jaws' is his name, and death is his game. No dragon of the brood of Glaurung can match him.";
         public override bool Dragon => true;
         public override bool Drop_3D2 => true;
@@ -49,14 +54,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool Powerful => true;
         public override int Rarity => 3;
-        public override bool Scare => true;
         public override int Sleep => 70;
         public override int Speed => 120;
         public override string SplitName1 => " Ancalagon  ";
         public override string SplitName2 => "    the     ";
         public override string SplitName3 => "   Black    ";
-        public override bool SummonDragon => true;
-        public override bool SummonHiDragon => true;
         public override bool Unique => true;
     }
 }

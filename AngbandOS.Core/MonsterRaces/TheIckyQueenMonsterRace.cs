@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheIckyQueenMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'i';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "The Icky Queen";
@@ -20,10 +26,7 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Confuse => true;
         public override string Description => "And you thought her offspring were icky!";
-        public override bool DrainMana => true;
         public override bool Drop_1D2 => true;
         public override bool DropGood => true;
         public override bool Escorted => true;
@@ -47,7 +50,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
         public override int Rarity => 5;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override bool Smart => true;
         public override int Speed => 120;

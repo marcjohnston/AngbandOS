@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,29 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNexusMonsterSpell(),
+            new ChaosBallMonsterSpell(),
+            new BrainSmashMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new ManaBallMonsterSpell(),
+            new MindBlastMonsterSpell(),
+            new DreadCurseMonsterSpell(),
+            new HasteMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonHoundMonsterSpell(),
+            new SummonMonstersMonsterSpell(),
+            new SummonReaverMonsterSpell(),
+            new SummonSpiderMonsterSpell(),
+            new TeleportAwayMonsterSpell(),
+            new TeleportLevelMonsterSpell(),
+            new TeleportToMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'X';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Abhoth, Source of Uncleanness";
@@ -22,29 +46,21 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BrainSmash => true;
-        public override bool BreatheNexus => true;
-        public override bool CauseMortalWounds => true;
-        public override bool ChaosBall => true;
         public override bool Demon => true;
         public override string Description => "A greyish horrid mass, which quobbs and quivers spawning monstrosities.";
-        public override bool DreadCurse => true;
         public override bool Drop_4D2 => true;
         public override bool Drop90 => true;
         public override bool DropGood => true;
         public override bool DropGreat => true;
         public override bool EldritchHorror => true;
         public override bool Evil => true;
-        public override bool FireBall => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 3;
         public override int FreqSpell => 3;
         public override string FriendlyName => "Abhoth, Source of Uncleanness";
         public override bool GreatOldOne => true;
-        public override bool Haste => true;
         public override int Hdice => 90;
-        public override bool Heal => true;
         public override int Hside => 99;
         public override bool ImmuneAcid => true;
         public override bool ImmuneConfusion => true;
@@ -54,9 +70,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override int LevelFound => 93;
         public override bool LightningAura => true;
         public override bool Male => true;
-        public override bool ManaBall => true;
         public override int Mexp => 49000;
-        public override bool MindBlast => true;
         public override bool Nonliving => true;
         public override int NoticeRange => 100;
         public override bool OnlyDropItem => true;
@@ -72,18 +86,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Abhoth   ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonDemon => true;
-        public override bool SummonHiDragon => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonHound => true;
-        public override bool SummonMonsters => true;
-        public override bool SummonReaver => true;
-        public override bool SummonSpider => true;
-        public override bool TeleportAway => true;
-        public override bool TeleportLevel => true;
-        public override bool TeleportSelf => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

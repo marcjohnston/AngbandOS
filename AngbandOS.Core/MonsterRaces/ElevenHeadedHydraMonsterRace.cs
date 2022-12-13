@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ElevenHeadedHydraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell(),
+            new FireBallMonsterSpell(),
+            new FireBoltMonsterSpell(),
+            new PlasmaBoltMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'M';
         public override Colour Colour => Colour.Green;
         public override string Name => "11-headed hydra";
@@ -21,12 +28,9 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 12)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "A strange reptilian hybrid with eleven smouldering heads.";
         public override bool Drop_2D2 => true;
         public override bool Drop_4D2 => true;
-        public override bool FireBall => true;
-        public override bool FireBolt => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 4;
         public override int FreqSpell => 4;
@@ -40,9 +44,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OnlyDropGold => true;
         public override bool OpenDoor => true;
-        public override bool PlasmaBolt => true;
         public override int Rarity => 2;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

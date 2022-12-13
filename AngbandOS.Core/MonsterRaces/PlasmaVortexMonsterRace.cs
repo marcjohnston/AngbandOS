@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PlasmaVortexMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreathePlasmaMonsterSpell());
         public override char Character => 'v';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Plasma vortex";
@@ -17,7 +20,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Engulf, new FireAttackEffect(), 8, 8),
         };
         public override bool BashDoor => true;
-        public override bool BreathePlasma => true;
         public override string Description => "A whirlpool of intense flame, charring the stones at your feet.";
         public override bool EmptyMind => true;
         public override bool FireAura => true;

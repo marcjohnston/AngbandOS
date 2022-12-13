@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,26 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AetherHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheAcidMonsterSpell(),
+            new BreatheChaosMonsterSpell(),
+            new BreatheColdMonsterSpell(),
+            new BreatheConfusionMonsterSpell(),
+            new BreatheDarkMonsterSpell(),
+            new BreatheDisenchantMonsterSpell(),
+            new BreatheLightningMonsterSpell(),
+            new BreatheFireMonsterSpell(),
+            new BreatheForceMonsterSpell(),
+            new BreatheGravityMonsterSpell(),
+            new BreatheInertiaMonsterSpell(),
+            new BreatheLightMonsterSpell(),
+            new BreatheNetherMonsterSpell(),
+            new BreatheNexusMonsterSpell(),
+            new BreathePlasmaMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new BreatheShardsMonsterSpell(),
+            new BreatheSoundMonsterSpell(),
+            new BreatheTimeMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Aether hound";
@@ -23,25 +44,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool AttrAny => true;
         public override bool AttrMulti => true;
         public override bool BashDoor => true;
-        public override bool BreatheAcid => true;
-        public override bool BreatheChaos => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheConfusion => true;
-        public override bool BreatheDark => true;
-        public override bool BreatheDisenchant => true;
-        public override bool BreatheFire => true;
-        public override bool BreatheForce => true;
-        public override bool BreatheGravity => true;
-        public override bool BreatheInertia => true;
-        public override bool BreatheLight => true;
-        public override bool BreatheLightning => true;
-        public override bool BreatheNether => true;
-        public override bool BreatheNexus => true;
-        public override bool BreathePlasma => true;
-        public override bool BreathePoison => true;
-        public override bool BreatheShards => true;
-        public override bool BreatheSound => true;
-        public override bool BreatheTime => true;
         public override string Description => "A shifting, swirling form. It seems to be all colours and sizes and shapes, though the dominant form is that of a huge dog. You feel very uncertain all of a sudden.";
         public override bool FireAura => true;
         public override bool ForceSleep => true;

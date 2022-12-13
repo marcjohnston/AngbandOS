@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DarkElvenMageMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new MagicMissileMonsterSpell(),
+            new PoisonBallMonsterSpell(),
+            new DarknessMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Dark elven mage";
@@ -18,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool Confuse => true;
-        public override bool Darkness => true;
         public override string Description => "A dark elven figure, dressed all in black, hurling spells at you.";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;
@@ -34,12 +38,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool HurtByLight => true;
         public override bool ImmunePoison => true;
         public override int LevelFound => 10;
-        public override bool MagicMissile => true;
         public override int Mexp => 50;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
-        public override bool PoisonBall => true;
         public override int Rarity => 1;
         public override int Sleep => 20;
         public override int Speed => 120;

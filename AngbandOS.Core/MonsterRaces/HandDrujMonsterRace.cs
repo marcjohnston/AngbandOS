@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,22 +9,25 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HandDrujMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new ForgetMonsterSpell(),
+            new TeleportAwayMonsterSpell());
         public override char Character => 's';
         public override Colour Colour => Colour.BrightGrey;
         public override string Name => "Hand druj";
 
         public override int ArmourClass => 110;
         public override MonsterAttack[]? Attacks => null;
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
-        public override bool Darkness => true;
         public override string Description => "A skeletal hand floating in the air, motionless except for its flexing fingers.";
         public override bool Evil => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 1;
         public override int FreqSpell => 1;
         public override string FriendlyName => "Hand druj";
@@ -41,14 +45,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override int Rarity => 4;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override bool Smart => true;
         public override int Speed => 130;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "    Hand    ";
         public override string SplitName3 => "    druj    ";
-        public override bool TeleportAway => true;
         public override bool Undead => true;
     }
 }

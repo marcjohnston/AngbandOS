@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GibberingMoutherMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheLightMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'j';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Gibbering mouther";
@@ -16,8 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Crawl, new PoisonAttackEffect(), 1, 4),
         };
-        public override bool BreatheLight => true;
-        public override bool Confuse => true;
         public override string Description => "A chaotic mass of pulsating flesh, mouths and eyes.";
         public override bool EmptyMind => true;
         public override bool Evil => true;
@@ -34,7 +37,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool NeverMove => true;
         public override int NoticeRange => 15;
         public override int Rarity => 4;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ColossusMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new Arrow7D6MonsterSpell());
         public override char Character => 'g';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Colossus";
 
         public override int ArmourClass => 150;
-        public override bool Arrow7D6 => true;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),

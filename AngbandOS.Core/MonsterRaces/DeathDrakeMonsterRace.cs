@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DeathDrakeMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNetherMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SlowMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Death drake";
@@ -19,8 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 3, 6),
             new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 3, 6)
         };
-        public override bool BreatheNether => true;
-        public override bool Confuse => true;
         public override string Description => "It is a dragon-like form wrapped in darkness. You cannot make out its true form but you sense its evil.";
         public override bool Dragon => true;
         public override bool Drop_2D2 => true;
@@ -47,9 +51,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 2;
         public override bool ResistNether => true;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
-        public override bool Slow => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Death    ";

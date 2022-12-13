@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TenguMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new TeleportAwayMonsterSpell(),
+            new TeleportToMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'u';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Tengu";
@@ -17,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
         public override bool Demon => true;
         public override string Description => "It is a fast-moving demon that blinks quickly in and out of existence; no other demon matches its teleporting mastery.";
         public override bool Evil => true;
@@ -39,8 +44,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Tengu    ";
-        public override bool TeleportAway => true;
-        public override bool TeleportSelf => true;
-        public override bool TeleportTo => true;
     }
 }

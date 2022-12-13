@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MagmaElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBallMonsterSpell(),
+            new PlasmaBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Magma elemental";
@@ -22,7 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool EmptyMind => true;
         public override bool Evil => true;
         public override bool FireAura => true;
-        public override bool FireBall => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 7;
         public override int FreqSpell => 7;
@@ -41,7 +44,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Mexp => 950;
         public override int NoticeRange => 10;
         public override bool PassWall => true;
-        public override bool PlasmaBolt => true;
         public override bool Powerful => true;
         public override int Rarity => 2;
         public override int Sleep => 90;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CryptCreepMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseLightWoundsMonsterSpell(),
+            new SummonUndeadMonsterSpell());
         public override char Character => 's';
         public override Colour Colour => Colour.Black;
         public override string Name => "Crypt creep";
@@ -19,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool CauseLightWounds => true;
         public override bool ColdBlood => true;
         public override string Description => "Frightening skeletal figures in black robes. ";
         public override bool Evil => true;
@@ -44,7 +47,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Crypt    ";
         public override string SplitName3 => "   creep    ";
-        public override bool SummonUndead => true;
         public override bool Undead => true;
     }
 }

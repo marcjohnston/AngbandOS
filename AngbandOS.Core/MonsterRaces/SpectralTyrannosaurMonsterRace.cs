@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SpectralTyrannosaurMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNetherMonsterSpell(),
+            new BreatheNexusMonsterSpell(),
+            new BreathePoisonMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'R';
         public override Colour Colour => Colour.Turquoise;
         public override string Name => "Spectral tyrannosaur";
@@ -21,9 +28,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Gaze, new TerrifyAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool BreatheNether => true;
-        public override bool BreatheNexus => true;
-        public override bool BreathePoison => true;
         public override string Description => "A deadly undead horror which looks like a skeletal tyrannosaur surrounded by a sickly green glow.";
         public override bool Drop_4D2 => true;
         public override bool DropGood => true;
@@ -34,7 +38,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 6;
         public override string FriendlyName => "Spectral tyrannosaur";
         public override int Hdice => 70;
-        public override bool Hold => true;
         public override int Hside => 50;
         public override bool ImmuneAcid => true;
         public override bool ImmuneCold => true;
@@ -51,7 +54,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 3;
         public override bool ResistNexus => true;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

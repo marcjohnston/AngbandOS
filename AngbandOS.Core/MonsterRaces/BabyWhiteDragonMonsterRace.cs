@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BabyWhiteDragonMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheColdMonsterSpell());
         public override char Character => 'd';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "Baby white dragon";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 5),
         };
         public override bool BashDoor => true;
-        public override bool BreatheCold => true;
         public override string Description => "This hatchling dragon is still soft, its eyes unaccustomed to light and its scales a pale white.";
         public override bool Dragon => true;
         public override bool Drop_1D2 => true;

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HuntingHorrorMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheDarkMonsterSpell(),
+            new BlindnessMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new SummonCthuloidMonsterSpell());
         public override char Character => 'U';
         public override Colour Colour => Colour.Black;
         public override string Name => "Hunting horror";
@@ -19,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 9, 4),
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool BreatheDark => true;
-        public override bool Confuse => true;
         public override bool Cthuloid => true;
         public override string Description => "It is a winged serpent with a distorted head.";
         public override bool Drop_1D2 => true;
@@ -51,6 +54,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "  Hunting   ";
         public override string SplitName3 => "   horror   ";
-        public override bool SummonCthuloid => true;
     }
 }

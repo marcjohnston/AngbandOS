@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,22 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new SummonAntMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonDemonMonsterSpell(),
+            new SummonDragonMonsterSpell(),
+            new SummonGreatOldOneMonsterSpell(),
+            new SummonHiDragonMonsterSpell(),
+            new SummonHiUndeadMonsterSpell(),
+            new SummonHoundMonsterSpell(),
+            new SummonHydraMonsterSpell(),
+            new SummonKinMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new SummonMonstersMonsterSpell(),
+            new SummonSpiderMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new SummonUniqueMonsterSpell());
         public override char Character => 'Q';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Qlzqqlzuup, the Lord of Flesh";
@@ -43,21 +60,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => " Qlzqqlzuup ";
-        public override bool SummonAnt => true;
-        public override bool SummonCthuloid => true;
-        public override bool SummonDemon => true;
-        public override bool SummonDragon => true;
-        public override bool SummonGreatOldOne => true;
-        public override bool SummonHiDragon => true;
-        public override bool SummonHiUndead => true;
-        public override bool SummonHound => true;
-        public override bool SummonHydra => true;
-        public override bool SummonKin => true;
-        public override bool SummonMonster => true;
-        public override bool SummonMonsters => true;
-        public override bool SummonSpider => true;
-        public override bool SummonUndead => true;
-        public override bool SummonUnique => true;
         public override bool Unique => true;
     }
 }

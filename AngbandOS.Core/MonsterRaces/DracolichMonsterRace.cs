@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DracolichMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheColdMonsterSpell(),
+            new BreatheNetherMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'D';
         public override Colour Colour => Colour.BrightBeige;
         public override string Name => "Dracolich";
@@ -20,10 +26,7 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 3, 6)
         };
         public override bool BashDoor => true;
-        public override bool BreatheCold => true;
-        public override bool BreatheNether => true;
         public override bool ColdBlood => true;
-        public override bool Confuse => true;
         public override string Description => "The skeletal form of a once-great dragon, enchanted by magic most perilous. Its animated form strikes with speed and drains life from its prey to satisfy its hunger.";
         public override bool Dragon => true;
         public override bool Drop_4D2 => true;
@@ -49,7 +52,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Powerful => true;
         public override int Rarity => 2;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 30;
         public override int Speed => 120;
         public override string SplitName1 => "            ";

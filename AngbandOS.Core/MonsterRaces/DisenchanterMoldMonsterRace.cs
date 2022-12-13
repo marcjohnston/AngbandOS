@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DisenchanterMoldMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'm';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Disenchanter mold";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
         };
         public override bool AttrMulti => true;
         public override string Description => "It is a strange glowing growth on the dungeon floor.";
-        public override bool DrainMana => true;
         public override bool EmptyMind => true;
         public override int FreqInate => 11;
         public override int FreqSpell => 11;

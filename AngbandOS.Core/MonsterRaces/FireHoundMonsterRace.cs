@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FireHoundMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'Z';
         public override Colour Colour => Colour.Red;
         public override string Name => "Fire hound";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "Flames lick at its feet and its tongue is a blade of fire. You can feel a furnace heat radiating from the creature.";
         public override bool ForceSleep => true;
         public override int FreqInate => 10;

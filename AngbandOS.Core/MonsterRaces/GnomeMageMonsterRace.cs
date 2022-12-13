@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GnomeMageMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBoltMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new DarknessMonsterSpell(),
+            new SummonMonsterMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Gnome mage";
@@ -17,9 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 5),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
-        public override bool ColdBolt => true;
-        public override bool Darkness => true;
         public override string Description => "A mage of short stature.";
         public override bool Drop60 => true;
         public override bool Evil => true;
@@ -41,6 +44,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Gnome    ";
         public override string SplitName3 => "    mage    ";
-        public override bool SummonMonster => true;
     }
 }

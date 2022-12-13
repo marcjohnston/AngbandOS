@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,21 +9,23 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DriderMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new Arrow3D6MonsterSpell(),
+            new CauseLightWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new MagicMissileMonsterSpell(),
+            new DarknessMonsterSpell());
         public override char Character => 'S';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Drider";
 
         public override int ArmourClass => 30;
-        public override bool Arrow3D6 => true;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
             new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool CauseLightWounds => true;
-        public override bool Confuse => true;
-        public override bool Darkness => true;
         public override string Description => "A dark elven torso merged with the bloated form of a giant spider.";
         public override bool Evil => true;
         public override bool ForceSleep => true;
@@ -33,7 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Hside => 13;
         public override bool ImmunePoison => true;
         public override int LevelFound => 13;
-        public override bool MagicMissile => true;
         public override int Mexp => 55;
         public override int NoticeRange => 8;
         public override int Rarity => 2;

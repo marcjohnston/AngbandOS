@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,10 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HagenSonOfAlberichMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new FireBoltMonsterSpell(),
+            new HasteMonsterSpell(),
+            new HealMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Hagen, son of Alberich";
@@ -24,15 +29,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Drop_1D2 => true;
         public override bool DropGood => true;
         public override bool Evil => true;
-        public override bool FireBolt => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
         public override int FreqInate => 8;
         public override int FreqSpell => 8;
         public override string FriendlyName => "Hagen, son of Alberich";
-        public override bool Haste => true;
         public override int Hdice => 82;
-        public override bool Heal => true;
         public override int Hside => 10;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;

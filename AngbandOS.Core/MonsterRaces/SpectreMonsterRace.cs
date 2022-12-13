@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SpectreMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new DrainManaMonsterSpell(),
+            new HoldMonsterSpell(),
+            new ForgetMonsterSpell());
         public override char Character => 'G';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Spectre";
@@ -18,20 +24,16 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0),
             new MonsterAttack(AttackType.Claw, new LoseWisAttackEffect(), 5, 5),
         };
-        public override bool Blindness => true;
         public override bool ColdBlood => true;
         public override string Description => "A phantasmal shrieking spirit. Its wail drives the intense cold of pure evil deep within your body.";
-        public override bool DrainMana => true;
         public override bool Drop_2D2 => true;
         public override bool Drop90 => true;
         public override bool Evil => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 16;
         public override int FreqSpell => 16;
         public override string FriendlyName => "Spectre";
         public override int Hdice => 14;
-        public override bool Hold => true;
         public override int Hside => 20;
         public override bool ImmuneCold => true;
         public override bool ImmuneConfusion => true;

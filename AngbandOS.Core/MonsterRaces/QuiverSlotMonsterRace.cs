@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class QuiverSlotMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new Arrow1D6MonsterSpell());
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Quiver slot";
 
         public override int ArmourClass => 1;
-        public override bool Arrow1D6 => true;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Spore, new ConfuseAttackEffect(), 1, 1),
         };

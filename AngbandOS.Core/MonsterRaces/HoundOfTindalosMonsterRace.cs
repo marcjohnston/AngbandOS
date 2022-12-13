@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HoundOfTindalosMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheNetherMonsterSpell(),
+            new BreatheTimeMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'C';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Hound of Tindalos";
@@ -20,9 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new LoseWisAttackEffect(), 2, 12),
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
         };
-        public override bool Blink => true;
-        public override bool BreatheNether => true;
-        public override bool BreatheTime => true;
         public override bool Cthuloid => true;
         public override string Description => "'They are lean and athirst!'";
         public override bool Evil => true;
@@ -47,6 +50,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "   Hound    ";
         public override string SplitName2 => "     of     ";
         public override string SplitName3 => "  Tindalos  ";
-        public override bool TeleportTo => true;
     }
 }

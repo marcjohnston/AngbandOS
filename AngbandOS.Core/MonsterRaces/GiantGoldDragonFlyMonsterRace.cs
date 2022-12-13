@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GiantGoldDragonFlyMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheSoundMonsterSpell());
         public override char Character => 'F';
         public override Colour Colour => Colour.Gold;
         public override string Name => "Giant gold dragon fly";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
-        public override bool BreatheSound => true;
         public override string Description => "Large beating wings support this dazzling insect. A loud buzzing noise pervades the air.";
         public override bool ForceSleep => true;
         public override int FreqInate => 9;

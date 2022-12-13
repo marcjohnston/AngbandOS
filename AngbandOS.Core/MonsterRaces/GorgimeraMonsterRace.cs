@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GorgimeraMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreatheFireMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Gorgimera";
@@ -20,7 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 1, 3)
         };
         public override bool BashDoor => true;
-        public override bool BreatheFire => true;
         public override string Description => "It has 3 heads - gorgon, goat and dragon - all attached to a lion's body.";
         public override bool ForceSleep => true;
         public override int FreqInate => 8;

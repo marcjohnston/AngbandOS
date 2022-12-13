@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HeadlessMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ScareMonsterSpell());
         public override char Character => 'H';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Headless";
@@ -32,7 +35,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int NoticeRange => 20;
         public override bool OpenDoor => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 40;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

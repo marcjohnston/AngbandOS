@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OozeElementalMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBallMonsterSpell(),
+            new AcidBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Ooze elemental";
 
-        public override bool AcidBall => true;
-        public override bool AcidBolt => true;
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Touch, new AcidAttackEffect(), 1, 10),

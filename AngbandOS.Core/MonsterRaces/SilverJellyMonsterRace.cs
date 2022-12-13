@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class SilverJellyMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell());
         public override char Character => 'j';
         public override Colour Colour => Colour.Silver;
         public override string Name => "Silver jelly";
@@ -18,7 +21,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new EatLightAttackEffect(), 1, 3),
         };
         public override string Description => "It is a large pile of silver flesh that sucks all light from its surroundings.";
-        public override bool DrainMana => true;
         public override bool EmptyMind => true;
         public override int FreqInate => 16;
         public override int FreqSpell => 16;

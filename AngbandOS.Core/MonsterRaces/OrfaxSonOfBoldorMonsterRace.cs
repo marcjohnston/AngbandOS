@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ConfuseMonsterSpell(),
+            new SlowMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'y';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Orfax, Son of Boldor";
@@ -21,8 +29,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Insult, null, 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
-        public override bool Confuse => true;
         public override string Description => "He's just like daddy! He knows mighty spells, but fortunately he is a yeek.";
         public override bool Drop90 => true;
         public override bool DropGood => true;
@@ -35,7 +41,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 4;
         public override string FriendlyName => "Orfax, Son of Boldor";
         public override int Hdice => 12;
-        public override bool Heal => true;
         public override int Hside => 10;
         public override bool ImmuneAcid => true;
         public override int LevelFound => 10;
@@ -46,14 +51,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override int Rarity => 3;
         public override int Sleep => 10;
-        public override bool Slow => true;
         public override bool Smart => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Orfax    ";
-        public override bool SummonMonster => true;
-        public override bool TeleportTo => true;
         public override bool Unique => true;
     }
 }

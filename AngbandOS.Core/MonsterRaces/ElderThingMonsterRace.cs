@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,15 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ElderThingMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new RadiationBallMonsterSpell(),
+            new CauseMortalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new PoisonBallMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonCthuloidMonsterSpell(),
+            new SummonUndeadMonsterSpell(),
+            new TeleportAwayMonsterSpell());
         public override char Character => 'A';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Elder thing";
@@ -20,8 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new LoseWisAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool CauseMortalWounds => true;
-        public override bool Confuse => true;
         public override bool Cthuloid => true;
         public override bool Demon => true;
         public override string Description => "It is barrel-shaped, with horizontal arms and a starfish head.";
@@ -42,18 +50,12 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Nonliving => true;
         public override int NoticeRange => 10;
         public override bool OpenDoor => true;
-        public override bool PoisonBall => true;
-        public override bool RadiationBall => true;
         public override int Rarity => 3;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 50;
         public override int Speed => 110;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Elder    ";
         public override string SplitName3 => "   thing    ";
-        public override bool SummonCthuloid => true;
-        public override bool SummonUndead => true;
-        public override bool TeleportAway => true;
     }
 }

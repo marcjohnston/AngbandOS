@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PhaseSpiderMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlinkMonsterSpell(),
+            new TeleportToMonsterSpell());
         public override char Character => 'S';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Phase spider";
@@ -20,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
-        public override bool Blink => true;
         public override string Description => "A spider that never seems quite there. Everywhere you look it is just half-seen in the corner of one eye.";
         public override int FreqInate => 5;
         public override int FreqSpell => 5;
@@ -39,7 +42,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Phase    ";
         public override string SplitName3 => "   spider   ";
-        public override bool TeleportTo => true;
         public override bool WeirdMind => true;
     }
 }

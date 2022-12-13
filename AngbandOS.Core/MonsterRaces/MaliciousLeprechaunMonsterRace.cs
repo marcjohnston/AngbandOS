@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MaliciousLeprechaunMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new CauseLightWoundsMonsterSpell(),
+            new BlinkMonsterSpell(),
+            new TeleportToMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Malicious leprechaun";
@@ -17,8 +23,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0),
             new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0),
         };
-        public override bool Blink => true;
-        public override bool CauseLightWounds => true;
         public override bool ColdBlood => true;
         public override string Description => "This little creature has a fiendish gleam in its eyes.";
         public override bool Evil => true;
@@ -43,7 +47,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => " Malicious  ";
         public override string SplitName3 => " leprechaun ";
         public override bool TakeItem => true;
-        public override bool TeleportSelf => true;
-        public override bool TeleportTo => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BasiliskMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BreathePoisonMonsterSpell());
         public override char Character => 'R';
         public override Colour Colour => Colour.Black;
         public override string Name => "Basilisk";
@@ -21,7 +24,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12)
         };
         public override bool BashDoor => true;
-        public override bool BreathePoison => true;
         public override string Description => "An evil reptile whose eyes stare deeply at you and your soul starts to wilt!";
         public override bool Drop_1D2 => true;
         public override bool Evil => true;

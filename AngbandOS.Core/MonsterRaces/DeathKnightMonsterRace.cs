@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,12 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DeathKnightMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new NetherBoltMonsterSpell(),
+            new ScareMonsterSpell(),
+            new SummonMonstersMonsterSpell());
         public override char Character => 'p';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Death knight";
@@ -20,8 +27,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new Exp20AttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a humanoid form dressed in armour of an ancient form. From beneath its helmet, eyes glow a baleful red and seem to pierce you like lances of fire.";
         public override bool Drop_1D2 => true;
@@ -37,18 +42,15 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool ImmuneCold => true;
         public override int LevelFound => 38;
         public override int Mexp => 1111;
-        public override bool NetherBolt => true;
         public override int NoticeRange => 20;
         public override bool OnlyDropItem => true;
         public override bool OpenDoor => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 10;
         public override bool Smart => true;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Death    ";
         public override string SplitName3 => "   knight   ";
-        public override bool SummonMonsters => true;
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,11 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LashaMistressOfWaterMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new ColdBallMonsterSpell(),
+            new IceBoltMonsterSpell(),
+            new WaterBallMonsterSpell(),
+            new WaterBoltMonsterSpell());
         public override char Character => 'E';
         public override Colour Colour => Colour.Blue;
         public override string Name => "Lasha, Mistress of Water";
@@ -20,7 +26,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5)
         };
         public override bool BashDoor => true;
-        public override bool ColdBall => true;
         public override string Description => "With the body of a beautiful mermaid, she hides her cruelnature well, until it is too late.";
         public override bool Evil => true;
         public override bool Female => true;
@@ -31,7 +36,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override string FriendlyName => "Lasha, Mistress of Water";
         public override int Hdice => 20;
         public override int Hside => 100;
-        public override bool IceBolt => true;
         public override bool ImmuneConfusion => true;
         public override bool ImmuneFear => true;
         public override bool ImmunePoison => true;
@@ -50,7 +54,5 @@ namespace AngbandOS.Core.MonsterRaces
         public override string SplitName2 => "            ";
         public override string SplitName3 => "   Lasha    ";
         public override bool Unique => true;
-        public override bool WaterBall => true;
-        public override bool WaterBolt => true;
     }
 }

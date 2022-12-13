@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,9 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KoukoMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new DrainManaMonsterSpell(),
+            new ScareMonsterSpell());
         public override char Character => 'W';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Kouko";
@@ -21,7 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool BashDoor => true;
         public override bool ColdBlood => true;
         public override string Description => "It is a ghostly apparition with a humanoid form.";
-        public override bool DrainMana => true;
         public override bool Drop60 => true;
         public override bool Drop90 => true;
         public override bool Evil => true;
@@ -42,7 +45,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool OpenDoor => true;
         public override bool RandomMove25 => true;
         public override int Rarity => 1;
-        public override bool Scare => true;
         public override int Sleep => 30;
         public override int Speed => 110;
         public override string SplitName1 => "            ";

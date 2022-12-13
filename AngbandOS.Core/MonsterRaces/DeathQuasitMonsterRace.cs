@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,6 +9,13 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DeathQuasitMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new BlindnessMonsterSpell(),
+            new CauseCriticalWoundsMonsterSpell(),
+            new ConfuseMonsterSpell(),
+            new ScareMonsterSpell(),
+            new ForgetMonsterSpell(),
+            new SummonDemonMonsterSpell());
         public override char Character => 'u';
         public override string Name => "Death quasit";
 
@@ -17,9 +25,6 @@ namespace AngbandOS.Core.MonsterRaces
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
             new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
         };
-        public override bool Blindness => true;
-        public override bool CauseCriticalWounds => true;
-        public override bool Confuse => true;
         public override bool Demon => true;
         public override string Description => "It is a demon of small stature, but its armoured frame moves with lightning speed and its powers make it a tornado of death and destruction.";
         public override bool Drop_2D2 => true;
@@ -28,7 +33,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Evil => true;
         public override bool ForceMaxHp => true;
         public override bool ForceSleep => true;
-        public override bool Forget => true;
         public override int FreqInate => 10;
         public override int FreqSpell => 10;
         public override string FriendlyName => "Death quasit";
@@ -48,13 +52,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool PassWall => true;
         public override int Rarity => 3;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 0;
         public override bool Smart => true;
         public override int Speed => 130;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "   Death    ";
         public override string SplitName3 => "   quasit   ";
-        public override bool SummonDemon => true;
     }
 }

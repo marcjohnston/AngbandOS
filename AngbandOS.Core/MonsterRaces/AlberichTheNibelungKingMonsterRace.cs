@@ -1,3 +1,4 @@
+using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
 using AngbandOS.Core.Interface;
 
@@ -8,12 +9,17 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AlberichTheNibelungKingMonsterRace : MonsterRace
     {
+        public override MonsterSpellList Spells => new MonsterSpellList(
+            new AcidBallMonsterSpell(),
+            new AcidBoltMonsterSpell(),
+            new ScareMonsterSpell(),
+            new HealMonsterSpell(),
+            new SummonMonsterMonsterSpell(),
+            new TeleportSelfMonsterSpell());
         public override char Character => 'h';
         public override Colour Colour => Colour.Gold;
         public override string Name => "Alberich, the Nibelung King";
 
-        public override bool AcidBall => true;
-        public override bool AcidBolt => true;
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
             new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 3, 12),
@@ -32,7 +38,6 @@ namespace AngbandOS.Core.MonsterRaces
         public override int FreqSpell => 6;
         public override string FriendlyName => "Alberich, the Nibelung King";
         public override int Hdice => 80;
-        public override bool Heal => true;
         public override int Hside => 11;
         public override bool ImmuneAcid => true;
         public override bool ImmuneCold => true;
@@ -51,14 +56,11 @@ namespace AngbandOS.Core.MonsterRaces
         public override int Rarity => 4;
         public override bool ResistDisenchant => true;
         public override bool ResistTeleport => true;
-        public override bool Scare => true;
         public override int Sleep => 20;
         public override int Speed => 120;
         public override string SplitName1 => "            ";
         public override string SplitName2 => "            ";
         public override string SplitName3 => "  Alberich  ";
-        public override bool SummonMonster => true;
-        public override bool TeleportSelf => true;
         public override bool Unique => true;
     }
 }
