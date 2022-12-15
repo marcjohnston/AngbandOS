@@ -82,7 +82,6 @@ namespace AngbandOS.Commands
                 return;
             }
             saveGame.PlaySound(SoundEffect.ZapRod);
-            int subCategory = item.ItemSubCategory;
             WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
             if (activateableItem.ExecuteActivation(saveGame, dir))
                 ident = true;
