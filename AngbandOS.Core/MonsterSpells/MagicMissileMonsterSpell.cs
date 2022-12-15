@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -18,6 +19,6 @@ namespace AngbandOS.Core.MonsterSpells
 
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectMissile(saveGame);
 
-        public override int[] SmartLearn => new int[] { Constants.DrsReflect };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -65,7 +66,7 @@ namespace AngbandOS.Core.MonsterSpells
                     }
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsMana);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ManaSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

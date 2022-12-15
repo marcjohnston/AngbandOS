@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -9,6 +10,6 @@ namespace AngbandOS.Core.MonsterSpells
         protected override string ElementName => "toxic waste";
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectNuke(saveGame);
         protected override int Damage(Monster monster) => monster.Health / 3 > 800 ? 800 : monster.Health / 3;
-        public override int[] SmartLearn => new int[] { Constants.DrsPois };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new PoisSpellResistantDetection() };
     }
 }

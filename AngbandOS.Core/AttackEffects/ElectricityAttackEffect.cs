@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.AttackEffects
 {
@@ -19,7 +20,7 @@ namespace AngbandOS.Core.AttackEffects
             obvious = true;
             saveGame.MsgPrint("You are struck by electricity!");
             saveGame.ElecDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsElec);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ElecSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

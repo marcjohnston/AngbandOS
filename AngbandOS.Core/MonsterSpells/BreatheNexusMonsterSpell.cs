@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -9,6 +10,6 @@ namespace AngbandOS.Core.MonsterSpells
         protected override string ElementName => "nexus";
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectNexus(saveGame);
         protected override int Damage(Monster monster) => monster.Health / 3 > 250 ? 250 : monster.Health / 3;
-        public override int[] SmartLearn => new int[] { Constants.DrsNexus };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new NexusSpellResistantDetection() };
     }
 }

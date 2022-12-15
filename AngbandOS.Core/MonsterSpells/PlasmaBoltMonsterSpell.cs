@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -14,6 +15,6 @@ namespace AngbandOS.Core.MonsterSpells
             return 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel;
         }
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectPlasma(saveGame);
-        public override int[] SmartLearn => new int[] { Constants.DrsReflect };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

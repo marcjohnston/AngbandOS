@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -15,6 +16,6 @@ namespace AngbandOS.Core.MonsterSpells
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
             return monsterLevel + Program.Rng.DiceRoll(10, 6);
         }
-        public override int[] SmartLearn => new int[] { Constants.DrsPois };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new PoisSpellResistantDetection() };
     }
 }

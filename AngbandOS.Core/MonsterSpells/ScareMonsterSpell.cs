@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -30,7 +31,7 @@ namespace AngbandOS.Core.MonsterSpells
             {
                 saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsFear);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new FearSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
