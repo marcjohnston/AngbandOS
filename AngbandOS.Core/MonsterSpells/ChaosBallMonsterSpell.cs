@@ -1,4 +1,5 @@
-﻿using AngbandOS.Projection;
+﻿using AngbandOS.Core.SpellResistantDetections;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -23,6 +24,6 @@ namespace AngbandOS.Core.MonsterSpells
             return (monsterLevel * 2) + Program.Rng.DiceRoll(10, 10);
         }
         protected override int Radius => 4;
-        public override int[] SmartLearn => new int[] { Constants.DrsChaos };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ChaosSpellResistantDetection() };
     }
 }

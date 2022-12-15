@@ -1,4 +1,5 @@
-﻿using AngbandOS.Projection;
+﻿using AngbandOS.Core.SpellResistantDetections;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -16,6 +17,6 @@ namespace AngbandOS.Core.MonsterSpells
         public override string? VsPlayerBlindMessage => $"You hear a strange noise.";
         protected override string ActionName => "fires an arrow";
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectArrow(saveGame);
-        public override int[] SmartLearn => new int[] { Constants.DrsReflect };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

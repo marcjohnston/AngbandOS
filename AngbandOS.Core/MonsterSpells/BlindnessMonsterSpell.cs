@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -33,7 +34,7 @@ namespace AngbandOS.Core.MonsterSpells
             {
                 saveGame.Player.SetTimedBlindness(12 + Program.Rng.RandomLessThan(4));
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsBlind);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

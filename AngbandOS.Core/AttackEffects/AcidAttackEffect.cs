@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.SpellResistantDetections;
 using AngbandOS.Projection;
 
 namespace AngbandOS.Core.AttackEffects
@@ -19,7 +20,7 @@ namespace AngbandOS.Core.AttackEffects
             obvious = true;
             saveGame.MsgPrint("You are covered in acid!");
             saveGame.AcidDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsAcid);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new AcidSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

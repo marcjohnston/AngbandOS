@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.AttackEffects
 {
@@ -34,7 +35,7 @@ namespace AngbandOS.Core.AttackEffects
                     obvious = true;
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsFear);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new FearSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

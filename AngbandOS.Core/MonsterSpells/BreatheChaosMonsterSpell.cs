@@ -1,4 +1,5 @@
-﻿using AngbandOS.Projection;
+﻿using AngbandOS.Core.SpellResistantDetections;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -9,6 +10,6 @@ namespace AngbandOS.Core.MonsterSpells
         protected override string ElementName => "chaos";
         protected override Projectile Projectile(SaveGame saveGame) => new ProjectChaos(saveGame);
         protected override int Damage(Monster monster) => monster.Health / 6 > 600 ? 600 : monster.Health / 6;
-        public override int[] SmartLearn => new int[] { Constants.DrsChaos };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ChaosSpellResistantDetection() };
     }
 }

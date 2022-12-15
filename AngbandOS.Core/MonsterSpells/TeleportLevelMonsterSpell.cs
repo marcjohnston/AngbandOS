@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿using AngbandOS.Core.SpellResistantDetections;
+
+namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class TeleportLevelMonsterSpell : MonsterSpell
@@ -25,7 +27,7 @@
             {
                 saveGame.TeleportPlayerLevel();
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsNexus);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new NexusSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

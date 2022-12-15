@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿using AngbandOS.Core.SpellResistantDetections;
+
+namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal abstract class MonsterSpell
@@ -193,7 +195,7 @@
         /// <summary>
         /// Returns the characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.
         /// </summary>
-        public virtual int[] SmartLearn => new int[] { };
+        public virtual SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { };
 
         /// <summary>
         /// Returns true, if the attack on a sleeping monster, wakes the monster.  Returns true, by default.

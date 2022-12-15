@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -27,7 +28,7 @@ namespace AngbandOS.Core.MonsterSpells
             {
                 saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, Constants.DrsConf);
+            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

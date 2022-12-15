@@ -10,6 +10,7 @@ using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.MonsterSpells;
+using AngbandOS.Core.SpellResistantDetections;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 
@@ -1592,7 +1593,7 @@ namespace AngbandOS
             thrownSpell.ExecuteOnPlayer(saveGame, this);
 
             // Learn from the spell.
-            foreach (int smartLearn in thrownSpell.SmartLearn)
+            foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
             {
                 saveGame.Level.Monsters.UpdateSmartLearn(this, smartLearn);
             }

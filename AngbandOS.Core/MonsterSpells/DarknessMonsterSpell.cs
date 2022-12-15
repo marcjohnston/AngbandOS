@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Enumerations;
 using AngbandOS.Projection;
+using AngbandOS.Core.SpellResistantDetections;
 
 namespace AngbandOS.Core.MonsterSpells
 {
@@ -20,7 +21,7 @@ namespace AngbandOS.Core.MonsterSpells
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
             return Program.Rng.DieRoll(monsterLevel * 3) + 15;
         }
-        public override int[] SmartLearn => new int[] { Constants.DrsAcid };
+        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new AcidSpellResistantDetection() };
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
