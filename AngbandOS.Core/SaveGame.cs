@@ -1259,7 +1259,7 @@ namespace AngbandOS
             Item qPtr;
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if ((mPtr.Mind & Constants.SmCloned) != 0)
+            if (mPtr.SmCloned)
             {
                 cloned = true;
             }
@@ -3401,11 +3401,11 @@ namespace AngbandOS
                         mPtr.Speed = rPtr.Speed + 10;
                         speed = true;
                     }
-                    if ((mPtr.Mind & Constants.SmFriendly) != 0)
+                    if (mPtr.SmFriendly)
                     {
                         if (Program.Rng.DieRoll(2) == 1)
                         {
-                            mPtr.Mind &= ~Constants.SmFriendly;
+                            mPtr.SmFriendly = false;
                         }
                     }
                 }
@@ -7807,8 +7807,7 @@ namespace AngbandOS
             if (tile.MonsterIndex != 0 && (monster.IsVisible || Level.GridPassable(newY, newX) || canPassWalls))
             {
                 // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-                if ((monster.Mind & Constants.SmFriendly) != 0 &&
-                    !(Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible || Player.TimedStun != 0) &&
+                if (monster.SmFriendly && !(Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible || Player.TimedStun != 0) &&
                     (Level.GridPassable(newY, newX) || canPassWalls))
                 {
                     // Wake up the monster, and track it
@@ -8253,8 +8252,7 @@ namespace AngbandOS
                 HealthTrack(tile.MonsterIndex);
             }
             // if the monster is our friend and we're not confused, we can avoid hitting it
-            if ((monster.Mind & Constants.SmFriendly) != 0 &&
-                !(Player.TimedStun != 0 || Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible))
+            if (monster.SmFriendly && !(Player.TimedStun != 0 || Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible))
             {
                 MsgPrint($"You stop to avoid hitting {monsterName}.");
                 return;
@@ -8483,10 +8481,10 @@ namespace AngbandOS
                         break;
                     }
                     // Hitting a friend gets it angry
-                    if ((monster.Mind & Constants.SmFriendly) != 0)
+                    if (monster.SmFriendly)
                     {
                         MsgPrint($"{monsterName} gets angry!");
-                        monster.Mind &= ~Constants.SmFriendly;
+                        monster.SmFriendly = false;
                     }
                     // The monster might have an aura that hurts the player
                     TouchZapPlayer(monster);
@@ -9269,10 +9267,10 @@ namespace AngbandOS
                     damage = 0;
                 }
                 // If it's a friend, it will get angry
-                if ((monster.Mind & Constants.SmFriendly) != 0)
+                if (monster.SmFriendly)
                 {
                     MsgPrint($"{monsterName} gets angry!");
-                    monster.Mind &= ~Constants.SmFriendly;
+                    monster.SmFriendly = false;
                 }
                 // Apply damage of the correct type to the monster
                 switch (mutation.MutationAttackType)
@@ -9703,7 +9701,7 @@ namespace AngbandOS
                     continue;
                 }
                 // Keep count of how many are our friends
-                if ((monster.Mind & Constants.SmFriendly) != 0)
+                if (monster.SmFriendly)
                 {
                     TotalFriends++;
                     TotalFriendLevels += monster.Race.Level;
@@ -9790,7 +9788,7 @@ namespace AngbandOS
                 // If there's another monster in the way and it is friendly, give up
                 if (distance != 0 && Level.Grid[y][x].MonsterIndex > 0)
                 {
-                    if ((Level.Monsters[Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) == 0)
+                    if (!Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly)
                     {
                         break;
                     }
@@ -16563,8 +16561,8 @@ namespace AngbandOS
                             }
                             else
                             {
-                                string c = (mPtr.Mind & Constants.SmCloned) != 0 ? " (clone)" : "";
-                                string a = (mPtr.Mind & Constants.SmFriendly) != 0 ? " (allied) " : " ";
+                                string c = mPtr.SmCloned ? " (clone)" : "";
+                                string a = mPtr.SmFriendly ? " (allied) " : " ";
                                 outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                                 PrintLine(outVal, 0, 0);
                                 Level.MoveCursorRelative(y, x);

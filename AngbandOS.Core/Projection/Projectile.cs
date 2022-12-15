@@ -564,12 +564,12 @@ namespace AngbandOS.Projection
             dam = (dam + r) / (r + 1);
 
             // Attempt to turn friendly monsters against their owner, if the owner attacks them.
-            bool isFriendly = (mPtr.Mind & Constants.SmFriendly) != 0;
+            bool isFriendly = mPtr.SmFriendly;
             if (who == 0 && isFriendly && ProjectileAngersMonster(mPtr))
             {
                 string mName = mPtr.Name;
                 SaveGame.MsgPrint($"{mName} gets angry!");
-                mPtr.Mind &= ~Constants.SmFriendly;
+                mPtr.SmFriendly = false;
             }
 
             bool notice = AffectMonster(who, mPtr, dam, r);

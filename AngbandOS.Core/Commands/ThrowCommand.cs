@@ -163,12 +163,11 @@ namespace AngbandOS.Commands
                         {
                             // Let the player know what happens to the monster
                             saveGame.Level.Monsters.MessagePain(tile.MonsterIndex, damage);
-                            if ((monster.Mind & Constants.SmFriendly) != 0 &&
-                                missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
+                            if (monster.SmFriendly && missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
                             {
                                 string mName = monster.Name;
                                 saveGame.MsgPrint($"{mName} gets angry!");
-                                monster.Mind &= ~Constants.SmFriendly;
+                                monster.SmFriendly = false;
                             }
                             if (fear && monster.IsVisible)
                             {
@@ -192,11 +191,11 @@ namespace AngbandOS.Commands
                     saveGame.MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(saveGame, 1, y, x))
                     {
-                        if (saveGame.Level.Grid[y][x].MonsterIndex != 0 && (saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind & Constants.SmFriendly) != 0)
+                        if (saveGame.Level.Grid[y][x].MonsterIndex != 0 && saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].SmFriendly)
                         {
                             string mName = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Name;
                             saveGame.MsgPrint($"{mName} gets angry!");
-                            saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].Mind &= ~Constants.SmFriendly;
+                            saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex].SmFriendly = false;
                         }
                     }
                     return;

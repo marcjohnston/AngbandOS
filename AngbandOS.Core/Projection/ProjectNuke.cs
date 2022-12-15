@@ -79,7 +79,7 @@ namespace AngbandOS.Projection
             else if (doPoly && Program.Rng.DieRoll(90) > rPtr.Level)
             {
                 note = " is unaffected!";
-                bool charm = (mPtr.Mind & Constants.SmFriendly) != 0;
+                bool charm = mPtr.SmFriendly;
                 int tmp = SaveGame.PolymorphMonster(mPtr.Race);
                 if (tmp != mPtr.Race.Index)
                 {
@@ -101,7 +101,7 @@ namespace AngbandOS.Projection
                 mPtr.Health -= dam;
                 if (mPtr.Health < 0)
                 {
-                    bool sad = (mPtr.Mind & Constants.SmFriendly) != 0 && !mPtr.IsVisible;
+                    bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
                     SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)

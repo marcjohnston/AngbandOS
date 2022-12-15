@@ -6,11 +6,11 @@
         {
             if (saveGame.Player.HasPoisonResistance)
             {
-                monster.Mind |= Constants.SmResPois;
+                monster.SmResPois = true;
             }
             if (saveGame.Player.TimedPoisonResistance != 0)
             {
-                monster.Mind |= Constants.SmOppPois;
+                monster.SmOppPois = true;
             }
         }
     }

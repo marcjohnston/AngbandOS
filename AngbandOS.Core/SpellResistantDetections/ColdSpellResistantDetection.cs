@@ -6,15 +6,15 @@
         {
             if (saveGame.Player.HasColdResistance)
             {
-                monster.Mind |= Constants.SmResCold;
+                monster.SmResCold = true;
             }
             if (saveGame.Player.TimedColdResistance != 0)
             {
-                monster.Mind |= Constants.SmOppCold;
+                monster.SmOppCold = true;
             }
             if (saveGame.Player.HasColdImmunity)
             {
-                monster.Mind |= Constants.SmImmCold;
+                monster.SmImmCold = true;
             }
         }
     }

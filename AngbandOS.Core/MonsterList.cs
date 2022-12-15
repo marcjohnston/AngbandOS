@@ -477,7 +477,7 @@ namespace AngbandOS
             List<Monster> list = new List<Monster>();
             foreach (Monster monster in _monsters)
             {
-                if ((monster.Mind & Constants.SmFriendly) != 0)
+                if (monster.SmFriendly)
                 {
                     list.Add(monster);
                 }
@@ -702,7 +702,7 @@ namespace AngbandOS
             }
             if (clone && result)
             {
-                _monsters[_hackMIdxIi].Mind |= Constants.SmCloned;
+                _monsters[_hackMIdxIi].SmCloned = true;
             }
             mPtr.Generation++;
             _monsters[_hackMIdxIi].Generation = mPtr.Generation;
@@ -1057,7 +1057,7 @@ namespace AngbandOS
                 if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
                 {
                     mPtr.IndividualMonsterFlags |= Constants.MflagView;
-                    if ((mPtr.Mind & Constants.SmFriendly) == 0)
+                    if (!mPtr.SmFriendly)
                     {
                         SaveGame.Disturb(true);
                     }
@@ -1068,7 +1068,7 @@ namespace AngbandOS
                 if ((mPtr.IndividualMonsterFlags & Constants.MflagView) != 0)
                 {
                     mPtr.IndividualMonsterFlags &= ~Constants.MflagView;
-                    if ((mPtr.Mind & Constants.SmFriendly) == 0)
+                    if (!mPtr.SmFriendly)
                     {
                         SaveGame.Disturb(true);
                     }
@@ -1304,7 +1304,7 @@ namespace AngbandOS
             mPtr.FearLevel = 0;
             if (charm)
             {
-                mPtr.Mind |= Constants.SmFriendly;
+                mPtr.SmFriendly = true;
             }
             mPtr.SleepLevel = 0;
             if (slp && rPtr.Sleep != 0)

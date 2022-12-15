@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasFearResistance)
             {
-                monster.Mind |= Constants.SmResFear;
+                monster.SmResFear = true;
             }
         }
     }

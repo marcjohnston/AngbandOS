@@ -6,15 +6,15 @@
         {
             if (saveGame.Player.HasAcidResistance)
             {
-                monster.Mind |= Constants.SmResAcid;
+                monster.SmResAcid = true;
             }
             if (saveGame.Player.TimedAcidResistance != 0)
             {
-                monster.Mind |= Constants.SmOppAcid;
+                monster.SmOppAcid = true;
             }
             if (saveGame.Player.HasAcidImmunity)
             {
-                monster.Mind |= Constants.SmImmAcid;
+                monster.SmImmAcid = true;
             }
         }
     }

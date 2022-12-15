@@ -38,7 +38,40 @@ namespace AngbandOS
         public int MapX;
         public int MapY;
         public int MaxHealth;
-        public uint Mind;
+
+        public bool SmCloned = false;
+        public bool SmFriendly = false;
+        public bool SmImmAcid = false;
+        public bool SmImmCold = false;
+        public bool SmImmElec = false;
+        public bool SmImmFire = false;
+        public bool SmImmFree = false;
+        public bool SmImmMana = false;
+        public bool SmImmReflect = false;
+        public bool SmImmXxx5 = false;
+        public bool SmOppAcid = false;
+        public bool SmOppCold = false;
+        public bool SmOppElec = false;
+        public bool SmOppFire = false;
+        public bool SmOppPois = false;
+        public bool SmOppXXx1 = false;
+        public bool SmResAcid = false;
+        public bool SmResBlind = false;
+        public bool SmResChaos = false;
+        public bool SmResCold = false;
+        public bool SmResConf = false;
+        public bool SmResDark = false;
+        public bool SmResDisen = false;
+        public bool SmResElec = false;
+        public bool SmResFear = false;
+        public bool SmResFire = false;
+        public bool SmResLight = false;
+        public bool SmResNeth = false;
+        public bool SmResNexus = false;
+        public bool SmResPois = false;
+        public bool SmResShard = false;
+        public bool SmResSound = false;
+
         public MonsterRace Race;
 
         /// <summary>
@@ -285,7 +318,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    desc = (Mind & Constants.SmFriendly) != 0 ? "your " : "the ";
+                    desc = SmFriendly ? "your " : "the ";
                     desc += name;
                 }
                 if ((mode & 0x02) != 0)
@@ -332,7 +365,7 @@ namespace AngbandOS
                 {
                     return;
                 }
-                if ((Mind & Constants.SmFriendly) != 0 && Program.Rng.DieRoll(8) != 1)
+                if (SmFriendly && Program.Rng.DieRoll(8) != 1)
                 {
                     return;
                 }
@@ -546,12 +579,12 @@ namespace AngbandOS
             }
             // If we're curently friendly and the player aggravates, then stop being friendly
             bool getsAngry = false;
-            if ((Mind & Constants.SmFriendly) != 0 && saveGame.Player.HasAggravation)
+            if (SmFriendly && saveGame.Player.HasAggravation)
             {
                 getsAngry = true;
             }
             // If we're unique, don't stay friendly
-            if ((Mind & Constants.SmFriendly) != 0 && !saveGame.Player.IsWizard && Race.Unique)
+            if (SmFriendly && !saveGame.Player.IsWizard && Race.Unique)
             {
                 getsAngry = true;
             }
@@ -560,7 +593,7 @@ namespace AngbandOS
             {
                 string monsterName = Name;
                 saveGame.MsgPrint($"{monsterName} suddenly becomes hostile!");
-                Mind &= ~Constants.SmFriendly;
+                SmFriendly = false;
             }
             // Are we afraid?
             if (FearLevel != 0)
@@ -602,7 +635,7 @@ namespace AngbandOS
                     }
                 }
                 // If we're friendly, then our babies are friendly too
-                bool isFriend = (Mind & Constants.SmFriendly) != 0;
+                bool isFriend = SmFriendly;
                 // If there's lots of space, then pop out a baby
                 if (k < 4 && (k == 0 || Program.Rng.RandomLessThan(k * Constants.MonMultAdj) == 0))
                 {
@@ -688,7 +721,7 @@ namespace AngbandOS
                 potentialMoves[3] = 5;
             }
             // If we're the player's friend and we're too far away, add sensible moves to our matrix
-            else if ((Mind & Constants.SmFriendly) != 0)
+            else if (SmFriendly)
             {
                 if (DistanceFromPlayer > Constants.FollowDistance)
                 {
@@ -913,7 +946,7 @@ namespace AngbandOS
                     doMove = false;
                     // If we can trample other monsters on our team and we're tougher than the one
                     // that's in our way...
-                    if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && !((Mind & Constants.SmFriendly) != 0 && (monsterInTargetTile.Mind & Constants.SmFriendly) != 0))
+                    if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && saveGame.Level.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
                     {
                         // Remove the other monster and replace it
                         doMove = true;
@@ -922,7 +955,7 @@ namespace AngbandOS
                         monsterInTargetTile = saveGame.Level.Monsters[tile.MonsterIndex];
                     }
                     // If we're not on the same team as the other monster or we're confused
-                    else if ((Mind & Constants.SmFriendly) != (monsterInTargetTile.Mind & Constants.SmFriendly) || ConfusionLevel != 0)
+                    else if (SmFriendly != monsterInTargetTile.SmFriendly || ConfusionLevel != 0)
                     {
                         doMove = false;
                         // Attack the monster in the target tile
@@ -973,7 +1006,7 @@ namespace AngbandOS
                     // If we are hostile and the player saw us move, then saveGame.Disturb them
                     if (IsVisible && (IndividualMonsterFlags & Constants.MflagView) != 0)
                     {
-                        if ((Mind & Constants.SmFriendly) == 0)
+                        if (!SmFriendly)
                         {
                             saveGame.Disturb(false);
                         }
@@ -989,7 +1022,7 @@ namespace AngbandOS
                             continue;
                         }
                         // If we pick up or stomp on items, check the item type
-                        if ((Race.TakeItem || Race.KillItem) && (Mind & Constants.SmFriendly) == 0)
+                        if ((Race.TakeItem || Race.KillItem) && !SmFriendly)
                         {
                             bool willHurt = false;
                             item.RefreshFlagBasedProperties();
@@ -1081,7 +1114,7 @@ namespace AngbandOS
                 }
             }
             // If all our moves failed, have another go at casting a spell at the player
-            if (!doTurn && !doMove && FearLevel == 0 && (Mind & Constants.SmFriendly) == 0)
+            if (!doTurn && !doMove && FearLevel == 0 && !SmFriendly)
             {
                 if (TryCastingASpellAgainstPlayer(saveGame))
                 {
@@ -1461,7 +1494,7 @@ namespace AngbandOS
                 return false;
             }
             // No spells on the player if they're our friend
-            if ((Mind & Constants.SmFriendly) != 0)
+            if (SmFriendly)
             {
                 return false;
             }
@@ -1628,7 +1661,7 @@ namespace AngbandOS
         /// <returns> True if we cast a spell, false otherwise </returns>
         private bool TryCastingASpellAgainstAnotherMonster(SaveGame saveGame)
         {
-            bool friendly = (Mind & Constants.SmFriendly) != 0;
+            bool friendly = SmFriendly;
 
             // Can't cast a spell if we're confused
             if (ConfusionLevel != 0)
@@ -1669,7 +1702,7 @@ namespace AngbandOS
                 }
 
                 // Don't cast spells on monsters from the same team
-                if ((Mind & Constants.SmFriendly) == (target.Mind & Constants.SmFriendly))
+                if (SmFriendly == target.SmFriendly)
                 {
                     continue;
                 }
@@ -1953,6 +1986,43 @@ namespace AngbandOS
         }
 
         /// <summary>
+        /// Forget what the monster has seen, clearing all smart flags except for ally and clone
+        /// </summary>
+        public void ForgetSmartness()
+        {
+            SmImmAcid = false;
+            SmImmCold = false;
+            SmImmElec = false;
+            SmImmFire = false;
+            SmImmFree = false;
+            SmImmMana = false;
+            SmImmReflect = false;
+            SmImmXxx5 = false;
+            SmOppAcid = false;
+            SmOppCold = false;
+            SmOppElec = false;
+            SmOppFire = false;
+            SmOppPois = false;
+            SmOppXXx1 = false;
+            SmResAcid = false;
+            SmResBlind = false;
+            SmResChaos = false;
+            SmResCold = false;
+            SmResConf = false;
+            SmResDark = false;
+            SmResDisen = false;
+            SmResElec = false;
+            SmResFear = false;
+            SmResFire = false;
+            SmResLight = false;
+            SmResNeth = false;
+            SmResNexus = false;
+            SmResPois = false;
+            SmResShard = false;
+            SmResSound = false;
+        }
+
+        /// <summary>
         /// Remove flags for ineffective spells from the monster's flags and return them.
         /// </summary>
         private MonsterSpellList RemoveIneffectiveSpells(SaveGame saveGame, MonsterSpellList spells)
@@ -1964,187 +2034,181 @@ namespace AngbandOS
             }
 
             // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally and clone
-            if (Mind != 0 && Program.Rng.RandomLessThan(100) < 1)
+            if (Program.Rng.RandomLessThan(100) < 1)
             {
-                Mind &= (Constants.SmFriendly | Constants.SmCloned);
+                ForgetSmartness();
             }
 
-            uint mindFlags = Mind;
-            // If we're not aware of any of the player's resistances, don't bother going through them
-            if (mindFlags == 0)
-            {
-                return spells;
-            }
             // If we know the player is immune to acid, don't do acid spells
-            if ((mindFlags & Constants.SmImmAcid) != 0)
+            if (SmImmAcid)
             {
                 spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists acid both temporarily and permanently, probably don't
             // do acid spells
-            else if ((mindFlags & Constants.SmOppAcid) != 0 && (mindFlags & Constants.SmResAcid) != 0)
+            else if (SmOppAcid && SmResAcid)
             {
                 spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(80));
             }
 
             // If we know the player resists acid at all, maybe don't do acid spells
-            else if ((mindFlags & Constants.SmOppAcid) != 0 || (mindFlags & Constants.SmResAcid) != 0)
+            else if (SmOppAcid || SmResAcid)
             {
                 spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(30));
             }
 
             // If we know the player is immune to lightning, don't do lightning spells
-            if ((mindFlags & Constants.SmImmElec) != 0)
+            if (SmImmElec)
             {
                 spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists lightning both temporarily and permanently, probably
             // don't do lightning spells
-            else if ((mindFlags & Constants.SmOppElec) != 0 && (mindFlags & Constants.SmResElec) != 0)
+            else if (SmOppElec && SmResElec)
             {
                 spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(80));
             }
 
             // If we know the player resists lightning at all, maybe don't do lightning spells
-            else if ((mindFlags & Constants.SmOppElec) != 0 || (mindFlags & Constants.SmResElec) != 0)
+            else if (SmOppElec || SmResElec)
             {
                 spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(30));
             }
 
             // If we know the player is immune to fire, don't do fire spells
-            if ((mindFlags & Constants.SmImmFire) != 0)
+            if (SmImmFire)
             {
                 spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists fire both temporarily and permanently, probably don't
             // do fire spells
-            else if ((mindFlags & Constants.SmOppFire) != 0 && (mindFlags & Constants.SmResFire) != 0)
+            else if (SmOppFire && SmResFire)
             {
                 spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(80));
             }
 
             // If we know the player resists fire at all, maybe don't do fire spells
-            else if ((mindFlags & Constants.SmOppFire) != 0 || (mindFlags & Constants.SmResFire) != 0)
+            else if (SmOppFire || SmResFire)
             {
                 spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(30));
             }
 
             // If we know the player is immune to cold, don't do fire spells
-            if ((mindFlags & Constants.SmImmCold) != 0)
+            if (SmImmCold)
             {
                 spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists cold both temporarily and permanently, probably don't do cold spells
-            else if ((mindFlags & Constants.SmOppCold) != 0 && (mindFlags & Constants.SmResCold) != 0)
+            else if (SmOppCold && SmResCold)
             {
                 spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(80));
             }
 
             // If we know the player resists cold at all, maybe don't do cold spells
-            else if ((mindFlags & Constants.SmOppCold) != 0 || (mindFlags & Constants.SmResCold) != 0)
+            else if (SmOppCold || SmResCold)
             {
                 spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(30));
             }
 
             // If we know the player resists poison both temporarily and permanently, probably don't
             // do poison spells
-            if ((mindFlags & Constants.SmOppPois) != 0 && (mindFlags & Constants.SmResPois) != 0)
+            if (SmOppPois && SmResPois)
             {
                 spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(80));
                 spells = spells.Remove((_spell) => _spell.UsesRadiation && RealiseSpellIsUseless(40));
             }
 
             // If we know the player resists poison at all, maybe don't do cold spells
-            else if ((mindFlags & Constants.SmOppPois) != 0 || (mindFlags & Constants.SmResPois) != 0)
+            else if (SmOppPois || SmResPois)
             {
                 spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(30));
             }
 
             // If we know the player resists nether, maybe don't do nether spells
-            if ((mindFlags & Constants.SmResNeth) != 0)
+            if (SmResNeth)
             {
                 spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists light, maybe don't do light spells
-            if ((mindFlags & Constants.SmResLight) != 0)
+            if (SmResLight)
             {
                 spells = spells.Remove((_spell) => _spell.UsesLight && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists darkness, maybe don't do darkness spells
-            if ((mindFlags & Constants.SmResDark) != 0)
+            if (SmResDark)
             {
                 spells = spells.Remove((_spell) => _spell.UsesDarkness && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists fear, don't do fear spells
-            if ((mindFlags & Constants.SmResFear) != 0)
+            if (SmResFear)
             {
                 spells = spells.Remove((_spell) => _spell.UsesFear && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists confiusion, maybe don't do confusion spells
-            if ((mindFlags & Constants.SmResConf) != 0)
+            if (SmResConf)
             {
                 spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
             }
 
             // If we know the player resists chaos, maybe don't do chaos or confusion spells
-            if ((mindFlags & Constants.SmResChaos) != 0)
+            if (SmResChaos)
             {
                 spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
                 spells = spells.Remove((_spell) => _spell.UsesChaos && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists disenchantment, don't do disenchantment spells
-            if ((mindFlags & Constants.SmResDisen) != 0)
+            if (SmResDisen)
             {
                 spells = spells.Remove((_spell) => _spell.UsesDisenchantment && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists blindness, don't do blindness spells
-            if ((mindFlags & Constants.SmResBlind) != 0)
+            if (SmResBlind)
             {
                 spells = spells.Remove((_spell) => _spell.UsesBlindness && RealiseSpellIsUseless(100));
             }
 
             // If we know the player resists nexus, maybe don't do nexus or teleport spells
-            if ((mindFlags & Constants.SmResNexus) != 0)
+            if (SmResNexus)
             {
                 spells = spells.Remove((_spell) => _spell.UsesNexus && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists sound, maybe don't do sound spells
-            if ((mindFlags & Constants.SmResSound) != 0)
+            if (SmResSound)
             {
                 spells = spells.Remove((_spell) => _spell.UsesSound && RealiseSpellIsUseless(50));
             }
 
             // If we know the player resists shards, maybe don't do shard spells
-            if ((mindFlags & Constants.SmResShard) != 0)
+            if (SmResShard)
             {
                 spells = spells.Remove((_spell) => _spell.UsesShards && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
             }
 
             // If we know the player reflects bolts, don't do bolt spells
-            if ((mindFlags & Constants.SmImmReflect) != 0)
+            if (SmImmReflect)
             {
                 spells = spells.Remove((_spell) => _spell.CanBeReflected && RealiseSpellIsUseless(100));
             }
 
             // If we know the player has free action, don't do slow or hold spells
-            if ((mindFlags & Constants.SmImmFree) != 0)
+            if (SmImmFree)
             {
                 spells = spells.Remove((_spell) => _spell.RestrictsFreeAction && RealiseSpellIsUseless(100));
             }
 
             // If we know the player has no mana, don't do mana drain
-            if ((mindFlags & Constants.SmImmMana) != 0)
+            if (SmImmMana)
             {
                 spells = spells.Remove((_spell) => _spell.DrainsMana && RealiseSpellIsUseless(100));
             }
@@ -2187,7 +2251,7 @@ namespace AngbandOS
             MapCoordinate desiredRelativeMovement = new MapCoordinate();
             desiredRelativeMovement.Y = MapY - targetLocation.Y;
             desiredRelativeMovement.X = MapX - targetLocation.X;
-            if ((Mind & Constants.SmFriendly) == 0)
+            if (!SmFriendly)
             {
                 // If we're a pack animal that can't go through walls
                 if (Race.Friends && Race.Animal &&
@@ -2242,7 +2306,7 @@ namespace AngbandOS
                 }
             }
             // If we're an ally then check if we should retreat
-            if ((Mind & Constants.SmFriendly) != 0)
+            if (SmFriendly)
             {
                 if (MonsterShouldRetreat(saveGame))
                 {
@@ -2666,7 +2730,7 @@ namespace AngbandOS
                 return false;
             }
             // If we're the player's friend then don't move away from them
-            if ((Mind & Constants.SmFriendly) != 0)
+            if (SmFriendly)
             {
                 return false;
             }
@@ -2726,7 +2790,7 @@ namespace AngbandOS
                 return;
             }
             // Friends don't hit friends
-            if ((Mind & Constants.SmFriendly) != 0)
+            if (SmFriendly)
             {
                 return;
             }
@@ -3241,8 +3305,7 @@ namespace AngbandOS
                     {
                         Monster enemy = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex];
                         // Only go for monsters who are awake and on the opposing side
-                        if ((enemy.Mind & Constants.SmFriendly) != (Mind & Constants.SmFriendly) &&
-                            enemy.SleepLevel == 0)
+                        if (enemy.SmFriendly != SmFriendly && enemy.SleepLevel == 0)
                         {
                             // Add moves directly towards and either side of the enemy based on its
                             // relative location

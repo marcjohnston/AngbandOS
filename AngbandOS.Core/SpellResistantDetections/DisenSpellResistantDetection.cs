@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasDisenchantResistance)
             {
-                monster.Mind |= Constants.SmResDisen;
+                monster.SmResDisen = true;
             }
         }
     }

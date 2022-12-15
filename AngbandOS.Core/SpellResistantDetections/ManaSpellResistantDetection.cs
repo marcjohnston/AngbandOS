@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.MaxMana == 0)
             {
-                monster.Mind |= Constants.SmImmMana;
+                monster.SmImmMana = true;
             }
         }
     }

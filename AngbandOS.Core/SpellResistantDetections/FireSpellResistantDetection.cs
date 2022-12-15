@@ -6,15 +6,15 @@
         {
             if (saveGame.Player.HasFireResistance)
             {
-                monster.Mind |= Constants.SmResFire;
+                monster.SmResFire = true;
             }
             if (saveGame.Player.TimedFireResistance != 0)
             {
-                monster.Mind |= Constants.SmOppFire;
+                monster.SmOppFire = true;
             }
             if (saveGame.Player.HasFireImmunity)
             {
-                monster.Mind |= Constants.SmImmFire;
+                monster.SmImmFire = true;
             }
         }
     }

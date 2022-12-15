@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasNetherResistance)
             {
-                monster.Mind |= Constants.SmResNeth;
+                monster.SmResNeth = true;
             }
         }
     }

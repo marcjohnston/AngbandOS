@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasShardResistance)
             {
-                monster.Mind |= Constants.SmResShard;
+                monster.SmResShard = true;
             }
         }
     }

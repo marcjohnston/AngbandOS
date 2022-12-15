@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasDarkResistance)
             {
-                monster.Mind |= Constants.SmResDark;
+                monster.SmResDark = true;
             }
         }
     }

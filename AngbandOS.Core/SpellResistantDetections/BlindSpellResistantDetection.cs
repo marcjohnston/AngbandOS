@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasBlindnessResistance)
             {
-                monster.Mind |= Constants.SmResBlind;
+                monster.SmResBlind = true;
             }
         }
     }

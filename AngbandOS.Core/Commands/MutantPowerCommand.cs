@@ -42,7 +42,7 @@ namespace AngbandOS.Commands
             for (petCtr = saveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
             {
                 monster = saveGame.Level.Monsters[petCtr];
-                if ((monster.Mind & Constants.SmFriendly) != 0)
+                if (monster.SmFriendly)
                 {
                     pets++;
                 }
@@ -147,7 +147,7 @@ namespace AngbandOS.Commands
                 for (petCtr = saveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
                 {
                     monster = saveGame.Level.Monsters[petCtr];
-                    if ((monster.Mind & Constants.SmFriendly) != 0)
+                    if (monster.SmFriendly)
                     {
                         bool deleteThis = false;
                         if (allPets)

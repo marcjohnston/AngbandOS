@@ -752,7 +752,7 @@ namespace AngbandOS
             for (int petCtr = level.MMax - 1; petCtr >= 1; petCtr--)
             {
                 Monster mPtr = level.Monsters[petCtr];
-                if ((mPtr.Mind & Constants.SmFriendly) == 0)
+                if (!mPtr.SmFriendly)
                 {
                     continue;
                 }

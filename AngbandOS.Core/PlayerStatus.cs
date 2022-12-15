@@ -1589,7 +1589,7 @@ namespace AngbandOS
                     attr = Colour.Blue;
                     smb = "SLEEPING**";
                 }
-                if ((mPtr.Mind & Constants.SmFriendly) != 0)
+                if (mPtr.SmFriendly)
                 {
                     attr = Colour.BrightBrown;
                     smb = "FRIENDLY**";

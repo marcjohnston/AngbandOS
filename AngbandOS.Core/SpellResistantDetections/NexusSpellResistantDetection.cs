@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasNexusResistance)
             {
-                monster.Mind |= Constants.SmResNexus;
+                monster.SmResNexus = true;
             }
         }
     }

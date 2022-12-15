@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasFreeAction)
             {
-                monster.Mind |= Constants.SmImmFree;
+                monster.SmImmFree = true;
             }
         }
     }

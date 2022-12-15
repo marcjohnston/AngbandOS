@@ -6,15 +6,15 @@
         {
             if (saveGame.Player.HasLightningResistance)
             {
-                monster.Mind |= Constants.SmResElec;
+                monster.SmResElec = true;
             }
             if (saveGame.Player.TimedLightningResistance != 0)
             {
-                monster.Mind |= Constants.SmOppElec;
+                monster.SmOppElec = true;
             }
             if (saveGame.Player.HasLightningImmunity)
             {
-                monster.Mind |= Constants.SmImmElec;
+                monster.SmImmElec = true;
             }
         }
     }

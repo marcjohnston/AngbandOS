@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasChaosResistance)
             {
-                monster.Mind |= Constants.SmResChaos;
+                monster.SmResChaos = true;
             }
         }
     }

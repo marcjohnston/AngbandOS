@@ -122,7 +122,7 @@ namespace AngbandOS.Projection
                 mPtr.Health -= dam;
                 if (mPtr.Health < 0)
                 {
-                    bool sad = (mPtr.Mind & Constants.SmFriendly) != 0 && !mPtr.IsVisible;
+                    bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
                     SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)

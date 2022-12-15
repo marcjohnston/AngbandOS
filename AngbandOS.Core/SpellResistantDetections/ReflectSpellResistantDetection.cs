@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasReflection)
             {
-                monster.Mind |= Constants.SmImmReflect;
+                monster.SmImmReflect = true;
             }
         }
     }

@@ -81,7 +81,7 @@ namespace AngbandOS.Core.MonsterSpells
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
             bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
-            bool friendly = (monster.Mind & Constants.SmFriendly) != 0;
+            bool friendly = monster.SmFriendly;
             int count = 0;
 
             for (int k = 0; k < 8; k++)

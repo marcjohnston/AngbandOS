@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasConfusionResistance)
             {
-                monster.Mind |= Constants.SmResConf;
+                monster.SmResConf = true;
             }
         }
     }

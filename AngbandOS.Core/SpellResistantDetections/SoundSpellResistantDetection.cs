@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasSoundResistance)
             {
-                monster.Mind |= Constants.SmResSound;
+                monster.SmResSound = true;
             }
         }
     }

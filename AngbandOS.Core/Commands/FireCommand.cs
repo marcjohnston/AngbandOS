@@ -156,11 +156,11 @@ namespace AngbandOS.Commands
                                 saveGame.HealthTrack(tile.MonsterIndex);
                             }
                             // Note that pets only get angry if they see us and we see them
-                            if ((monster.Mind & Constants.SmFriendly) != 0)
+                            if (monster.SmFriendly)
                             {
                                 monsterName = monster.Name;
                                 saveGame.MsgPrint($"{monsterName} gets angry!");
-                                monster.Mind &= ~Constants.SmFriendly;
+                                monster.SmFriendly = false;
                             }
                         }
                         // Work out the damage done

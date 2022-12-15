@@ -6,7 +6,7 @@
         {
             if (saveGame.Player.HasLightResistance)
             {
-                monster.Mind |= Constants.SmResLight;
+                monster.SmResLight = true;
             }
         }
     }
