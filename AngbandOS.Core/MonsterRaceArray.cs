@@ -11,9 +11,19 @@ using System.Reflection;
 namespace AngbandOS
 {
     [Serializable]
-    internal class MonsterRaceArray : List<MonsterRace>
+    internal class MonsterRaceArray
     {
         private readonly SaveGame SaveGame;
+        private List<MonsterRace> monsterRaces = new List<MonsterRace>();
+
+        public int Count => monsterRaces.Count;
+
+        public MonsterRace this[int index]
+        {
+            get {
+                return monsterRaces[index];
+            }
+        }
         public MonsterRaceArray(SaveGame saveGame)
         {
             SaveGame = saveGame;
@@ -32,7 +42,7 @@ namespace AngbandOS
                         if (monsterRace.LevelFound == level)
                         {
                             monsterRace.Index = index;
-                            Add(monsterRace);
+                            monsterRaces.Add(monsterRace);
                             index++;
                         }
                     }
@@ -42,7 +52,7 @@ namespace AngbandOS
 
         public void AddKnowledge()
         {
-            foreach (MonsterRace monsterType in this)
+            foreach (MonsterRace monsterType in monsterRaces)
             {
                 monsterType.Knowledge = new MonsterKnowledge(SaveGame, monsterType);
             }
@@ -50,7 +60,7 @@ namespace AngbandOS
 
         public int IndexFromName(string name)
         {
-            foreach (MonsterRace race in this)
+            foreach (MonsterRace race in monsterRaces)
             {
                 if (race.Name == name)
                 {
@@ -62,7 +72,7 @@ namespace AngbandOS
 
         public void ResetGuardians()
         {
-            foreach (MonsterRace race in this)
+            foreach (MonsterRace race in monsterRaces)
             {
                 race.Guardian = false;
             }
@@ -70,7 +80,7 @@ namespace AngbandOS
 
         public void ResetUniqueOnlyGuardianStatus()
         {
-            foreach (MonsterRace race in this)
+            foreach (MonsterRace race in monsterRaces)
             {
                 race.OnlyGuardian = false;
             }
