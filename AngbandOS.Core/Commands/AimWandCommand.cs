@@ -84,7 +84,9 @@ namespace AngbandOS.Commands
             saveGame.PlaySound(SoundEffect.ZapRod);
             WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
             if (activateableItem.ExecuteActivation(saveGame, dir))
+            {
                 ident = true;
+            }
 
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // Mark the wand as having been tried
