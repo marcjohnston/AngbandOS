@@ -406,7 +406,7 @@ namespace AngbandOS.Projection
                             if (SaveGame.Level.Monsters[cPtr.MonsterIndex].IsVisible)
                             {
                                 SaveGame.MsgPrint("The attack bounces!");
-                                refPtr.Knowledge.RFlags2 |= MonsterFlag2.Reflecting;
+                                refPtr.Knowledge.Characteristics.Reflecting = true;
                             }
                             Fire(cPtr.MonsterIndex, 0, tY, tX, dam, flg);
                         }

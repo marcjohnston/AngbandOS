@@ -42,7 +42,7 @@ namespace AngbandOS.Projection
             {
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Demon;
+                    rPtr.Knowledge.Characteristics.Demon = true;
                     obvious = true;
                 }
                 note = " shudders.";

@@ -112,7 +112,7 @@ namespace AngbandOS.Projection
                 note = " is immune.";
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Good;
+                    rPtr.Knowledge.Characteristics.Good = true;
                 }
             }
             else if (rPtr.Evil)
@@ -121,7 +121,7 @@ namespace AngbandOS.Projection
                 note = " is hit hard.";
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    rPtr.Knowledge.Characteristics.Evil = true;
                 }
             }
             else

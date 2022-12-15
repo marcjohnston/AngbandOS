@@ -26,13 +26,8 @@ namespace AngbandOS
         public int RDropItem;
         public bool Guardian;
         public bool OnlyGuardian;
-        public uint RFlags1;
-        public uint RFlags2;
-        public uint RFlags3;
+        public MonsterCharacteristics Characteristics = new MonsterCharacteristics();
         public MonsterSpellList RSpells = new MonsterSpellList();
-        public uint RFlags4;
-        public uint RFlags5;
-        public uint RFlags6;
         public int RIgnore;
         public int RPkills;
         public bool RProbed;
@@ -100,9 +95,7 @@ namespace AngbandOS
                 }
                 knowledge.RCastInate = Constants.MaxUchar;
                 knowledge.RCastSpell = Constants.MaxUchar;
-                knowledge.RFlags1 = _monsterType.Flags1;
-                knowledge.RFlags2 = _monsterType.Flags2;
-                knowledge.RFlags3 = _monsterType.Flags3;
+                knowledge.Characteristics = new MonsterCharacteristics(_monsterType);
                 knowledge.RSpells = _monsterType.Spells;
             }
             if (_monsterType.Female)
@@ -113,13 +106,11 @@ namespace AngbandOS
             {
                 msex = 1;
             }
-            uint flags1 = _monsterType.Flags1 & knowledge.RFlags1;
-            uint flags2 = _monsterType.Flags2 & knowledge.RFlags2;
-            uint flags3 = _monsterType.Flags3 & knowledge.RFlags3;
+            MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterType, knowledge.Characteristics);
             MonsterSpellList combinedSpells = _monsterType.Spells.Add(knowledge.RSpells);
             if (_monsterType.Unique)
             {
-                flags1 |= MonsterFlag1.Unique;
+                characteristics.Unique = true;
             }
             if (_monsterType.Guardian)
             {
@@ -127,73 +118,73 @@ namespace AngbandOS
             }
             if (_monsterType.Male)
             {
-                flags1 |= MonsterFlag1.Male;
+                characteristics.Male = true;
             }
             if (_monsterType.Female)
             {
-                flags1 |= MonsterFlag1.Female;
+                characteristics.Female = true;
             }
             if (_monsterType.Friends)
             {
-                flags1 |= MonsterFlag1.Friends;
+                characteristics.Friends = true;
             }
             if (_monsterType.Escorted)
             {
-                flags1 |= MonsterFlag1.Escorted;
+                characteristics.Escorted = true;
             }
             if (_monsterType.EscortsGroup)
             {
-                flags1 |= MonsterFlag1.EscortsGroup;
+                characteristics.EscortsGroup = true;
             }
             if (knowledge.RTkills != 0 || knowledge.RProbed)
             {
                 if (_monsterType.Orc)
                 {
-                    flags3 |= MonsterFlag3.Orc;
+                    characteristics.Orc = true;
                 }
                 if (_monsterType.Troll)
                 {
-                    flags3 |= MonsterFlag3.Troll;
+                    characteristics.Troll = true;
                 }
                 if (_monsterType.Giant)
                 {
-                    flags3 |= MonsterFlag3.Giant;
+                    characteristics.Giant = true;
                 }
                 if (_monsterType.Dragon)
                 {
-                    flags3 |= MonsterFlag3.Dragon;
+                    characteristics.Dragon = true;
                 }
                 if (_monsterType.Demon)
                 {
-                    flags3 |= MonsterFlag3.Demon;
+                    characteristics.Demon = true;
                 }
                 if (_monsterType.Cthuloid)
                 {
-                    flags3 |= MonsterFlag3.Cthuloid;
+                    characteristics.Cthuloid = true;
                 }
                 if (_monsterType.Undead)
                 {
-                    flags3 |= MonsterFlag3.Undead;
+                    characteristics.Undead = true;
                 }
                 if (_monsterType.Evil)
                 {
-                    flags3 |= MonsterFlag3.Evil;
+                    characteristics.Evil = true;
                 }
                 if (_monsterType.Good)
                 {
-                    flags3 |= MonsterFlag3.Good;
+                    characteristics.Good = true;
                 }
                 if (_monsterType.Animal)
                 {
-                    flags3 |= MonsterFlag3.Animal;
+                    characteristics.Animal = true;
                 }
                 if (_monsterType.GreatOldOne)
                 {
-                    flags3 |= MonsterFlag3.GreatOldOne;
+                    characteristics.GreatOldOne = true;
                 }
                 if (_monsterType.ForceMaxHp)
                 {
-                    flags1 |= MonsterFlag1.ForceMaxHp;
+                    characteristics.ForceMaxHp = true;
                 }
             }
             string buf = _monsterType.Description;
@@ -220,17 +211,17 @@ namespace AngbandOS
                 old = true;
             }
             _description.Append("moves");
-            if ((flags1 & MonsterFlag1.RandomMove50) != 0 || (flags1 & MonsterFlag1.RandomMove25) != 0)
+            if (characteristics.RandomMove50 || characteristics.RandomMove25)
             {
-                if ((flags1 & MonsterFlag1.RandomMove50) != 0 && (flags1 & MonsterFlag1.RandomMove25) != 0)
+                if (characteristics.RandomMove50 && characteristics.RandomMove25)
                 {
                     _description.Append(" extremely");
                 }
-                else if ((flags1 & MonsterFlag1.RandomMove50) != 0)
+                else if (characteristics.RandomMove50)
                 {
                     _description.Append(" somewhat");
                 }
-                else if ((flags1 & MonsterFlag1.RandomMove25) != 0)
+                else if (characteristics.RandomMove25)
                 {
                     _description.Append(" a bit");
                 }
@@ -270,7 +261,7 @@ namespace AngbandOS
             {
                 _description.Append(" at normal speed");
             }
-            if ((flags1 & MonsterFlag1.NeverMove) != 0)
+            if (characteristics.NeverMove)
             {
                 if (old)
                 {
@@ -291,48 +282,48 @@ namespace AngbandOS
             string? p;
             if (knowledge.RTkills != 0 || knowledge.RProbed)
             {
-                _description.Append((flags1 & MonsterFlag1.Unique) != 0 ? "Killing this" : "A kill of this");
-                if ((flags2 & MonsterFlag2.EldritchHorror) != 0)
+                _description.Append(characteristics.Unique ? "Killing this" : "A kill of this");
+                if (characteristics.EldritchHorror)
                 {
                     _description.Append(" sanity-blasting");
                 }
-                if ((flags3 & MonsterFlag3.Animal) != 0)
+                if (characteristics.Animal)
                 {
                     _description.Append(" natural");
                 }
-                if ((flags3 & MonsterFlag3.Evil) != 0)
+                if (characteristics.Evil)
                 {
                     _description.Append(" evil");
                 }
-                if ((flags3 & MonsterFlag3.Good) != 0)
+                if (characteristics.Good)
                 {
                     _description.Append(" good");
                 }
-                if ((flags3 & MonsterFlag3.Undead) != 0)
+                if (characteristics.Undead)
                 {
                     _description.Append(" undead");
                 }
-                if ((flags3 & MonsterFlag3.Dragon) != 0)
+                if (characteristics.Dragon)
                 {
                     _description.Append(" dragon");
                 }
-                else if ((flags3 & MonsterFlag3.Demon) != 0)
+                else if (characteristics.Demon)
                 {
                     _description.Append(" demon");
                 }
-                else if ((flags3 & MonsterFlag3.Giant) != 0)
+                else if (characteristics.Giant)
                 {
                     _description.Append(" giant");
                 }
-                else if ((flags3 & MonsterFlag3.Troll) != 0)
+                else if (characteristics.Troll)
                 {
                     _description.Append(" troll");
                 }
-                else if ((flags3 & MonsterFlag3.Orc) != 0)
+                else if (characteristics.Orc)
                 {
                     _description.Append(" orc");
                 }
-                else if ((flags3 & MonsterFlag3.GreatOldOne) != 0)
+                else if (characteristics.GreatOldOne)
                 {
                     _description.Append(" Great Old One");
                 }
@@ -380,27 +371,27 @@ namespace AngbandOS
                 }
                 _description.Append(" for a").Append(q).Append(' ').Append(i).Append(p).Append(" level character. ");
             }
-            if ((flags2 & MonsterFlag2.FireAura) != 0 && (flags2 & MonsterFlag2.LightningAura) != 0)
+            if (characteristics.FireAura && characteristics.LightningAura)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is surrounded by flames and electricity. ");
             }
-            else if ((flags2 & MonsterFlag2.FireAura) != 0)
+            else if (characteristics.FireAura)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is surrounded by flames. ");
             }
-            else if ((flags2 & MonsterFlag2.LightningAura) != 0)
+            else if (characteristics.LightningAura)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is surrounded by electricity. ");
             }
-            if ((flags2 & MonsterFlag2.Reflecting) != 0)
+            if (characteristics.Reflecting)
             {
                 _description.Append(_wdHeCap[msex]).Append(" reflects bolt spells. ");
             }
-            if ((flags1 & MonsterFlag1.Escorted) != 0 || (flags1 & MonsterFlag1.EscortsGroup) != 0)
+            if (characteristics.Escorted || characteristics.EscortsGroup)
             {
                 _description.Append(_wdHeCap[msex]).Append(" usually appears with escorts. ");
             }
-            else if ((flags1 & MonsterFlag1.Friends) != 0)
+            else if (characteristics.Friends)
             {
                 _description.Append(_wdHeCap[msex]).Append(" usually appears in groups. ");
             }
@@ -813,7 +804,7 @@ namespace AngbandOS
                 magic = true;
                 _description.Append(breath ? ", and is also" : $"{_wdHeCap[msex]} is");
                 _description.Append(" magical, casting spells");
-                if ((flags2 & MonsterFlag2.Smart) != 0)
+                if (characteristics.Smart)
                 {
                     _description.Append(" intelligently");
                 }
@@ -858,41 +849,41 @@ namespace AngbandOS
                 }
                 else
                 {
-                    _description.Append((flags1 & MonsterFlag1.ForceMaxHp) != 0
+                    _description.Append(characteristics.ForceMaxHp
                         ? $" and has {_monsterType.Hdice * _monsterType.Hside:n0}hp. "
                         : $" and has {_monsterType.Hdice}d{_monsterType.Hside}hp. ");
                 }
             }
             vn = 0;
-            if ((flags2 & MonsterFlag2.OpenDoor) != 0)
+            if (characteristics.OpenDoor)
             {
                 vp[vn++] = "open doors";
             }
-            if ((flags2 & MonsterFlag2.BashDoor) != 0)
+            if (characteristics.BashDoor)
             {
                 vp[vn++] = "bash down doors";
             }
-            if ((flags2 & MonsterFlag2.PassWall) != 0)
+            if (characteristics.PassWall)
             {
                 vp[vn++] = "pass through walls";
             }
-            if ((flags2 & MonsterFlag2.KillWall) != 0)
+            if (characteristics.KillWall)
             {
                 vp[vn++] = "bore through walls";
             }
-            if ((flags2 & MonsterFlag2.MoveBody) != 0)
+            if (characteristics.MoveBody)
             {
                 vp[vn++] = "push past weaker monsters";
             }
-            if ((flags2 & MonsterFlag2.KillBody) != 0)
+            if (characteristics.KillBody)
             {
                 vp[vn++] = "destroy weaker monsters";
             }
-            if ((flags2 & MonsterFlag2.TakeItem) != 0)
+            if (characteristics.TakeItem)
             {
                 vp[vn++] = "pick up objects";
             }
-            if ((flags2 & MonsterFlag2.KillItem) != 0)
+            if (characteristics.KillItem)
             {
                 vp[vn++] = "destroy objects";
             }
@@ -917,44 +908,44 @@ namespace AngbandOS
                 }
                 _description.Append(". ");
             }
-            if ((flags2 & MonsterFlag2.Invisible) != 0)
+            if (characteristics.Invisible)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is invisible. ");
             }
-            if ((flags2 & MonsterFlag2.ColdBlood) != 0)
+            if (characteristics.ColdBlood)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is cold blooded. ");
             }
-            if ((flags2 & MonsterFlag2.EmptyMind) != 0)
+            if (characteristics.EmptyMind)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is not detected by telepathy. ");
             }
-            if ((flags2 & MonsterFlag2.WeirdMind) != 0)
+            if (characteristics.WeirdMind)
             {
                 _description.Append(_wdHeCap[msex]).Append(" is rarely detected by telepathy. ");
             }
-            if ((flags2 & MonsterFlag2.Multiply) != 0)
+            if (characteristics.Multiply)
             {
                 _description.Append(_wdHeCap[msex]).Append(" breeds explosively. ");
             }
-            if ((flags2 & MonsterFlag2.Regenerate) != 0)
+            if (characteristics.Regenerate)
             {
                 _description.Append(_wdHeCap[msex]).Append(" regenerates quickly. ");
             }
             vn = 0;
-            if ((flags3 & MonsterFlag3.HurtByRock) != 0)
+            if (characteristics.HurtByRock)
             {
                 vp[vn++] = "rock remover";
             }
-            if ((flags3 & MonsterFlag3.HurtByLight) != 0)
+            if (characteristics.HurtByLight)
             {
                 vp[vn++] = "bright light";
             }
-            if ((flags3 & MonsterFlag3.HurtByFire) != 0)
+            if (characteristics.HurtByFire)
             {
                 vp[vn++] = "fire";
             }
-            if ((flags3 & MonsterFlag3.HurtByCold) != 0)
+            if (characteristics.HurtByCold)
             {
                 vp[vn++] = "cold";
             }
@@ -980,23 +971,23 @@ namespace AngbandOS
                 _description.Append(". ");
             }
             vn = 0;
-            if ((flags3 & MonsterFlag3.ImmuneAcid) != 0)
+            if (characteristics.ImmuneAcid)
             {
                 vp[vn++] = "acid";
             }
-            if ((flags3 & MonsterFlag3.ImmuneLightning) != 0)
+            if (characteristics.ImmuneLightning)
             {
                 vp[vn++] = "lightning";
             }
-            if ((flags3 & MonsterFlag3.ImmuneFire) != 0)
+            if (characteristics.ImmuneFire)
             {
                 vp[vn++] = "fire";
             }
-            if ((flags3 & MonsterFlag3.ImmuneCold) != 0)
+            if (characteristics.ImmuneCold)
             {
                 vp[vn++] = "cold";
             }
-            if ((flags3 & MonsterFlag3.ImmunePoison) != 0)
+            if (characteristics.ImmunePoison)
             {
                 vp[vn++] = "poison";
             }
@@ -1022,27 +1013,27 @@ namespace AngbandOS
                 _description.Append(". ");
             }
             vn = 0;
-            if ((flags3 & MonsterFlag3.ResistNether) != 0)
+            if (characteristics.ResistNether)
             {
                 vp[vn++] = "nether";
             }
-            if ((flags3 & MonsterFlag3.ResistWater) != 0)
+            if (characteristics.ResistWater)
             {
                 vp[vn++] = "water";
             }
-            if ((flags3 & MonsterFlag3.ResistPlasma) != 0)
+            if (characteristics.ResistPlasma)
             {
                 vp[vn++] = "plasma";
             }
-            if ((flags3 & MonsterFlag3.ResistNexus) != 0)
+            if (characteristics.ResistNexus)
             {
                 vp[vn++] = "nexus";
             }
-            if ((flags3 & MonsterFlag3.ResistDisenchant) != 0)
+            if (characteristics.ResistDisenchant)
             {
                 vp[vn++] = "disenchantment";
             }
-            if ((flags3 & MonsterFlag3.ResistTeleport) != 0)
+            if (characteristics.ResistTeleport)
             {
                 vp[vn++] = "teleportation";
             }
@@ -1068,19 +1059,19 @@ namespace AngbandOS
                 _description.Append(". ");
             }
             vn = 0;
-            if ((flags3 & MonsterFlag3.ImmuneStun) != 0)
+            if (characteristics.ImmuneStun)
             {
                 vp[vn++] = "stunned";
             }
-            if ((flags3 & MonsterFlag3.ImmuneFear) != 0)
+            if (characteristics.ImmuneFear)
             {
                 vp[vn++] = "frightened";
             }
-            if ((flags3 & MonsterFlag3.ImmuneConfusion) != 0)
+            if (characteristics.ImmuneConfusion)
             {
                 vp[vn++] = "confused";
             }
-            if ((flags3 & MonsterFlag3.ImmuneSleep) != 0)
+            if (characteristics.ImmuneSleep)
             {
                 vp[vn++] = "slept";
             }
@@ -1174,11 +1165,11 @@ namespace AngbandOS
                 {
                     _description.Append(" up to ").Append(n);
                 }
-                if ((flags1 & MonsterFlag1.DropGreat) != 0)
+                if (characteristics.DropGreat)
                 {
                     p = " exceptional";
                 }
-                else if ((flags1 & MonsterFlag1.DropGood) != 0)
+                else if (characteristics.DropGood)
                 {
                     p = " good";
                     sin = false;
@@ -1388,7 +1379,7 @@ namespace AngbandOS
             {
                 _description.Append(". ");
             }
-            else if ((flags1 & MonsterFlag1.NeverAttack) != 0)
+            else if (characteristics.NeverAttack)
             {
                 _description.Append(_wdHeCap[msex]).Append(" has no physical attacks. ");
             }
@@ -1396,7 +1387,7 @@ namespace AngbandOS
             {
                 _description.Append("Nothing is known about ").Append(_wdHis[msex]).Append(" attack. ");
             }
-            if ((flags1 & MonsterFlag1.Unique) != 0)
+            if (characteristics.Unique)
             {
                 bool dead = _monsterType.MaxNum == 0;
                 if (knowledge.RDeaths != 0)

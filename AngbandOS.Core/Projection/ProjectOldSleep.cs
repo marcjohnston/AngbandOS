@@ -43,7 +43,7 @@ namespace AngbandOS.Projection
                 {
                     if (seen)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneSleep;
+                        rPtr.Knowledge.Characteristics.ImmuneSleep = true;
                     }
                 }
                 note = " is unaffected!";

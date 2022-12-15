@@ -34,7 +34,7 @@ namespace AngbandOS.Core.MonsterSpells
                 {
                     if (seeTarget)
                     {
-                        targetRace.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
+                        targetRace.Knowledge.Characteristics.ResistTeleport = true;
                         saveGame.MsgPrint($"{targetName} is unaffected!");
                     }
                     resistsTele = true;
@@ -43,7 +43,7 @@ namespace AngbandOS.Core.MonsterSpells
                 {
                     if (seeTarget)
                     {
-                        targetRace.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
+                        targetRace.Knowledge.Characteristics.ResistTeleport = true;
                         saveGame.MsgPrint($"{targetName} resists!");
                     }
                     resistsTele = true;

@@ -350,7 +350,7 @@ namespace AngbandOS
                     return;
                 }
                 SaveGame.MsgPrint($"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
-                Race.Knowledge.RFlags2 |= MonsterFlag2.EldritchHorror;
+                Race.Knowledge.Characteristics.EldritchHorror = true;
 
                 // Allow the race to resist.
                 if (Program.Rng.DieRoll(100) < player.Race.ChanceOfSanityBlastImmunity(player.Level))
@@ -610,7 +610,7 @@ namespace AngbandOS
                         // If the player saw this, they now know we can multiply
                         if (IsVisible)
                         {
-                            Race.Knowledge.RFlags2 |= MonsterFlag2.Multiply;
+                            Race.Knowledge.Characteristics.Multiply = true;
                         }
                         // Having a baby takes our entire turn
                         return;
@@ -652,8 +652,8 @@ namespace AngbandOS
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
                 {
-                    Race.Knowledge.RFlags1 |= MonsterFlag1.RandomMove50;
-                    Race.Knowledge.RFlags1 |= MonsterFlag1.RandomMove25;
+                    Race.Knowledge.Characteristics.RandomMove50 = true;
+                    Race.Knowledge.Characteristics.RandomMove25 = true;
                 }
                 potentialMoves[0] = 5;
                 potentialMoves[1] = 5;
@@ -666,7 +666,7 @@ namespace AngbandOS
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
                 {
-                    Race.Knowledge.RFlags1 |= MonsterFlag1.RandomMove50;
+                    Race.Knowledge.Characteristics.RandomMove50 = true;
                 }
                 potentialMoves[0] = 5;
                 potentialMoves[1] = 5;
@@ -679,7 +679,7 @@ namespace AngbandOS
                 // If the player sees us, then they learn about our random movement
                 if (IsVisible)
                 {
-                    Race.Knowledge.RFlags1 |= MonsterFlag1.RandomMove25;
+                    Race.Knowledge.Characteristics.RandomMove25 = true;
                 }
                 potentialMoves[0] = 5;
                 potentialMoves[1] = 5;
@@ -1097,35 +1097,35 @@ namespace AngbandOS
             {
                 if (didOpenDoor)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.OpenDoor;
+                    Race.Knowledge.Characteristics.OpenDoor = true;
                 }
                 if (didBashDoor)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.BashDoor;
+                    Race.Knowledge.Characteristics.BashDoor = true;
                 }
                 if (didTakeItem)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.TakeItem;
+                    Race.Knowledge.Characteristics.TakeItem = true;
                 }
                 if (didKillItem)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.KillItem;
+                    Race.Knowledge.Characteristics.KillItem = true;
                 }
                 if (didMoveBody)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.MoveBody;
+                    Race.Knowledge.Characteristics.MoveBody = true;
                 }
                 if (didKillBody)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.KillBody;
+                    Race.Knowledge.Characteristics.KillBody = true;
                 }
                 if (didPassWall)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.PassWall;
+                    Race.Knowledge.Characteristics.PassWall = true;
                 }
                 if (didKillWall)
                 {
-                    Race.Knowledge.RFlags2 |= MonsterFlag2.KillWall;
+                    Race.Knowledge.Characteristics.KillWall = true;
                 }
             }
             // If we couldn't do anything because we were afraid and cornered, lose our fear
@@ -1369,7 +1369,7 @@ namespace AngbandOS
                                         saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
                                         if (target.IsVisible)
                                         {
-                                            targetRace.Knowledge.RFlags2 |= MonsterFlag2.FireAura;
+                                            targetRace.Knowledge.Characteristics.FireAura = true;
                                         }
                                     }
                                     saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new ProjectFire(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
@@ -1384,7 +1384,7 @@ namespace AngbandOS
                                         saveGame.MsgPrint($"{monsterName} gets zapped!");
                                         if (target.IsVisible)
                                         {
-                                            targetRace.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
+                                            targetRace.Knowledge.Characteristics.LightningAura = true;
                                         }
                                     }
                                     saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
@@ -2777,7 +2777,7 @@ namespace AngbandOS
                             if (IsVisible)
                             {
                                 // If it does, then they player knows the monster is evil
-                                Race.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                                Race.Knowledge.Characteristics.Evil = true;
                             }
                             saveGame.MsgPrint($"{monsterName} is repelled.");
                             continue;
@@ -3059,7 +3059,7 @@ namespace AngbandOS
                                     // The player noticed that the monster took no fire damage
                                     if (IsVisible)
                                     {
-                                        Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
+                                        Race.Knowledge.Characteristics.ImmuneFire = true;
                                     }
                                 }
                             }
@@ -3080,7 +3080,7 @@ namespace AngbandOS
                                     // The player noticed that the monster took no lightning damage
                                     if (IsVisible)
                                     {
-                                        Race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
+                                        Race.Knowledge.Characteristics.ImmuneLightning = true;
                                     }
                                 }
                             }

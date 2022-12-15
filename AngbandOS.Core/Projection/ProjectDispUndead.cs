@@ -43,7 +43,7 @@ namespace AngbandOS.Projection
             {
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
+                    rPtr.Knowledge.Characteristics.Undead = true;
                 }
                 if (seen)
                 {

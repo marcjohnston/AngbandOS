@@ -42,7 +42,7 @@ namespace AngbandOS.Projection
                 dam /= Program.Rng.DieRoll(6) + 6;
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistNexus;
+                    rPtr.Knowledge.Characteristics.ResistNexus = true;
                 }
             }
             if (rPtr.Guardian)

@@ -203,7 +203,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Animal;
+                        rPtr.Knowledge.Characteristics.Animal = true;
                     }
                     if (mult < 2)
                     {
@@ -214,7 +214,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                        rPtr.Knowledge.Characteristics.Evil = true;
                     }
                     if (mult < 2)
                     {
@@ -225,7 +225,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
+                        rPtr.Knowledge.Characteristics.Undead = true;
                     }
                     if (mult < 3)
                     {
@@ -236,7 +236,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Demon;
+                        rPtr.Knowledge.Characteristics.Demon = true;
                     }
                     if (mult < 3)
                     {
@@ -247,7 +247,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Orc;
+                        rPtr.Knowledge.Characteristics.Orc = true;
                     }
                     if (mult < 3)
                     {
@@ -258,7 +258,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Troll;
+                        rPtr.Knowledge.Characteristics.Troll = true;
                     }
                     if (mult < 3)
                     {
@@ -269,7 +269,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Giant;
+                        rPtr.Knowledge.Characteristics.Giant = true;
                     }
                     if (mult < 3)
                     {
@@ -280,7 +280,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
+                        rPtr.Knowledge.Characteristics.Dragon = true;
                     }
                     if (mult < 3)
                     {
@@ -291,7 +291,7 @@ namespace AngbandOS
                 {
                     if (mPtr.IsVisible)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.Dragon;
+                        rPtr.Knowledge.Characteristics.Dragon = true;
                     }
                     if (mult < 5)
                     {
@@ -308,7 +308,7 @@ namespace AngbandOS
                     {
                         if (mPtr.IsVisible)
                         {
-                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneAcid;
+                            rPtr.Knowledge.Characteristics.ImmuneAcid = true;
                         }
                     }
                     else
@@ -325,7 +325,7 @@ namespace AngbandOS
                     {
                         if (mPtr.IsVisible)
                         {
-                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneLightning;
+                            rPtr.Knowledge.Characteristics.ImmuneLightning = true;
                         }
                     }
                     else
@@ -342,7 +342,7 @@ namespace AngbandOS
                     {
                         if (mPtr.IsVisible)
                         {
-                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneFire;
+                            rPtr.Knowledge.Characteristics.ImmuneFire = true;
                         }
                     }
                     else
@@ -359,7 +359,7 @@ namespace AngbandOS
                     {
                         if (mPtr.IsVisible)
                         {
-                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneCold;
+                            rPtr.Knowledge.Characteristics.ImmuneCold = true;
                         }
                     }
                     else
@@ -376,7 +376,7 @@ namespace AngbandOS
                     {
                         if (mPtr.IsVisible)
                         {
-                            rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmunePoison;
+                            rPtr.Knowledge.Characteristics.ImmunePoison = true;
                         }
                     }
                     else

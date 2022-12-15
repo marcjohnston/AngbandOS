@@ -71,7 +71,7 @@ namespace AngbandOS.Core.MonsterSpells
             {
                 if (targetRace.ImmuneConfusion && seen)
                 {
-                    targetRace.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
+                    targetRace.Knowledge.Characteristics.ImmuneConfusion = true;
                 }
                 if (seeTarget)
                 {

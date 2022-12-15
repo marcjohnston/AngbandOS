@@ -44,7 +44,7 @@ namespace AngbandOS.Projection
             {
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    rPtr.Knowledge.Characteristics.Evil = true;
                 }
                 if (seen)
                 {

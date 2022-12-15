@@ -519,9 +519,7 @@ namespace AngbandOS
             }
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
-            knowledge.RFlags1 = rPtr.Flags1;
-            knowledge.RFlags2 = rPtr.Flags2;
-            knowledge.RFlags3 = rPtr.Flags3;
+            knowledge.Characteristics = new MonsterCharacteristics(rPtr);
             knowledge.RSpells = rPtr.Spells;
         }
 
@@ -539,11 +537,11 @@ namespace AngbandOS
             }
             if (rPtr.DropGood)
             {
-                rPtr.Knowledge.RFlags1 |= MonsterFlag1.DropGood;
+                rPtr.Knowledge.Characteristics.DropGood = true;
             }
             if (rPtr.DropGreat)
             {
-                rPtr.Knowledge.RFlags1 |= MonsterFlag1.DropGreat;
+                rPtr.Knowledge.Characteristics.DropGreat = true;
             }
         }
 
@@ -1010,28 +1008,28 @@ namespace AngbandOS
                 {
                     if (rPtr.Smart)
                     {
-                        rPtr.Knowledge.RFlags2 |= MonsterFlag2.Smart;
+                        rPtr.Knowledge.Characteristics.Smart = true;
                     }
                     if (rPtr.Stupid)
                     {
-                        rPtr.Knowledge.RFlags2 |= MonsterFlag2.Stupid;
+                        rPtr.Knowledge.Characteristics.Stupid = true;
                     }
                 }
                 if (doEmptyMind)
                 {
-                    rPtr.Knowledge.RFlags2 |= MonsterFlag2.EmptyMind;
+                    rPtr.Knowledge.Characteristics.EmptyMind = true;
                 }
                 if (doWeirdMind)
                 {
-                    rPtr.Knowledge.RFlags2 |= MonsterFlag2.WeirdMind;
+                    rPtr.Knowledge.Characteristics.WeirdMind = true;
                 }
                 if (doColdBlood)
                 {
-                    rPtr.Knowledge.RFlags2 |= MonsterFlag2.ColdBlood;
+                    rPtr.Knowledge.Characteristics.ColdBlood = true;
                 }
                 if (doInvisible)
                 {
-                    rPtr.Knowledge.RFlags2 |= MonsterFlag2.Invisible;
+                    rPtr.Knowledge.Characteristics.Invisible = true;
                 }
             }
             else

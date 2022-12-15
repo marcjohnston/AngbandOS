@@ -43,7 +43,7 @@ namespace AngbandOS.Projection
                 {
                     if (seen)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
+                        rPtr.Knowledge.Characteristics.ImmuneConfusion = true;
                     }
                 }
                 doConf = 0;

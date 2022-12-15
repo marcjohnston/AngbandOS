@@ -123,7 +123,7 @@ namespace AngbandOS.Projection
                 }
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.HurtByRock;
+                    rPtr.Knowledge.Characteristics.HurtByRock = true;
                 }
                 note = " loses some skin!";
                 noteDies = " dissolves!";

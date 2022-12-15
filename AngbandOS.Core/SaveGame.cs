@@ -4095,7 +4095,7 @@ namespace AngbandOS
                 }
                 if (rPtr.Evil)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    rPtr.Knowledge.Characteristics.Evil = true;
                     Level.Monsters.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
@@ -4129,7 +4129,7 @@ namespace AngbandOS
                 }
                 if (rPtr.Invisible)
                 {
-                    rPtr.Knowledge.RFlags2 |= MonsterFlag2.Invisible;
+                    rPtr.Knowledge.Characteristics.Invisible = true;
                     Level.Monsters.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
@@ -8530,7 +8530,7 @@ namespace AngbandOS
                         {
                             if (monster.IsVisible)
                             {
-                                race.Knowledge.RFlags3 |= MonsterFlag3.ImmuneConfusion;
+                                race.Knowledge.Characteristics.ImmuneConfusion = true;
                             }
                             MsgPrint($"{monsterName} is unaffected.");
                         }
@@ -9638,7 +9638,7 @@ namespace AngbandOS
                         auraDamage = (auraDamage + 2) / 3;
                     }
                     Player.TakeHit(auraDamage, auraDam);
-                    race.Knowledge.RFlags2 |= MonsterFlag2.FireAura;
+                    race.Knowledge.Characteristics.FireAura = true;
                     HandleStuff();
                 }
             }
@@ -9657,7 +9657,7 @@ namespace AngbandOS
                 }
                 MsgPrint("You get zapped!");
                 Player.TakeHit(auraDamage, auraDam);
-                race.Knowledge.RFlags2 |= MonsterFlag2.LightningAura;
+                race.Knowledge.Characteristics.LightningAura = true;
                 HandleStuff();
             }
         }

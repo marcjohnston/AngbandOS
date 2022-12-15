@@ -5,7 +5,7 @@ using AngbandOS.Enumerations;
 namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]
-    internal abstract class MonsterRace
+    internal abstract class MonsterRace : IMonsterCharacteristics
     {
         public virtual MonsterSpellList Spells => new MonsterSpellList();
 
@@ -30,10 +30,6 @@ namespace AngbandOS.Core.MonsterRaces
         public bool OnlyGuardian;
         public int MaxNum;
         public MonsterKnowledge Knowledge;
-
-        public uint Flags1;
-        public readonly uint Flags2;
-        public readonly uint Flags3;
 
         /// <summary>
         /// The character to render the monster as.
@@ -390,89 +386,6 @@ namespace AngbandOS.Core.MonsterRaces
             FrequencyChance = (freqInate + freqSpell) / 2;
 
             Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound;
-
-            Flags1 |= AttrClear ? MonsterFlag1.AttrClear : 0;
-            Flags1 |= AttrMulti ? MonsterFlag1.AttrMulti : 0;
-            Flags1 |= CharClear ? MonsterFlag1.CharClear : 0;
-            Flags1 |= CharMulti ? MonsterFlag1.CharMulti : 0;
-            Flags1 |= Drop_1D2 ? MonsterFlag1.Drop_1D2 : 0;
-            Flags1 |= Drop_2D2 ? MonsterFlag1.Drop_2D2 : 0;
-            Flags1 |= Drop_3D2 ? MonsterFlag1.Drop_3D2 : 0;
-            Flags1 |= Drop_4D2 ? MonsterFlag1.Drop_4D2 : 0;
-            Flags1 |= Drop60 ? MonsterFlag1.Drop60 : 0;
-            Flags1 |= Drop90 ? MonsterFlag1.Drop90 : 0;
-            Flags1 |= DropGood ? MonsterFlag1.DropGood : 0;
-            Flags1 |= DropGreat ? MonsterFlag1.DropGreat : 0;
-            Flags1 |= Escorted ? MonsterFlag1.Escorted : 0;
-            Flags1 |= EscortsGroup ? MonsterFlag1.EscortsGroup : 0;
-            Flags1 |= Female ? MonsterFlag1.Female : 0;
-            Flags1 |= ForceMaxHp ? MonsterFlag1.ForceMaxHp : 0;
-            Flags1 |= ForceSleep ? MonsterFlag1.ForceSleep : 0;
-            Flags1 |= Friends ? MonsterFlag1.Friends : 0;
-            Flags1 |= Male ? MonsterFlag1.Male : 0;
-            Flags1 |= NeverAttack ? MonsterFlag1.NeverAttack : 0;
-            Flags1 |= NeverMove ? MonsterFlag1.NeverMove : 0;
-            Flags1 |= OnlyDropGold ? MonsterFlag1.OnlyDropGold : 0;
-            Flags1 |= OnlyDropItem ? MonsterFlag1.OnlyDropItem : 0;
-            Flags1 |= RandomMove25 ? MonsterFlag1.RandomMove25 : 0;
-            Flags1 |= RandomMove50 ? MonsterFlag1.RandomMove50 : 0;
-            Flags1 |= Unique ? MonsterFlag1.Unique : 0;
-
-            Flags2 |= AttrAny ? MonsterFlag2.AttrAny : 0;
-            Flags2 |= BashDoor ? MonsterFlag2.BashDoor : 0;
-            Flags2 |= ColdBlood ? MonsterFlag2.ColdBlood : 0;
-            Flags2 |= EldritchHorror ? MonsterFlag2.EldritchHorror : 0;
-            Flags2 |= EmptyMind ? MonsterFlag2.EmptyMind : 0;
-            Flags2 |= FireAura ? MonsterFlag2.FireAura : 0;
-            Flags2 |= Invisible ? MonsterFlag2.Invisible : 0;
-            Flags2 |= KillBody ? MonsterFlag2.KillBody : 0;
-            Flags2 |= KillItem ? MonsterFlag2.KillItem : 0;
-            Flags2 |= KillWall ? MonsterFlag2.KillWall : 0;
-            Flags2 |= LightningAura ? MonsterFlag2.LightningAura : 0;
-            Flags2 |= MoveBody ? MonsterFlag2.MoveBody : 0;
-            Flags2 |= Multiply ? MonsterFlag2.Multiply : 0;
-            Flags2 |= OpenDoor ? MonsterFlag2.OpenDoor : 0;
-            Flags2 |= PassWall ? MonsterFlag2.PassWall : 0;
-            Flags2 |= Powerful ? MonsterFlag2.Powerful : 0;
-            Flags2 |= Reflecting ? MonsterFlag2.Reflecting : 0;
-            Flags2 |= Regenerate ? MonsterFlag2.Regenerate : 0;
-            Flags2 |= Shapechanger ? MonsterFlag2.Shapechanger : 0;
-            Flags2 |= Smart ? MonsterFlag2.Smart : 0;
-            Flags2 |= Stupid ? MonsterFlag2.Stupid : 0;
-            Flags2 |= TakeItem ? MonsterFlag2.TakeItem : 0;
-            Flags2 |= WeirdMind ? MonsterFlag2.WeirdMind : 0;
-
-            Flags3 |= Animal ? MonsterFlag3.Animal : 0;
-            Flags3 |= Cthuloid ? MonsterFlag3.Cthuloid : 0;
-            Flags3 |= Demon ? MonsterFlag3.Demon : 0;
-            Flags3 |= Dragon ? MonsterFlag3.Dragon : 0;
-            Flags3 |= Evil ? MonsterFlag3.Evil : 0;
-            Flags3 |= Giant ? MonsterFlag3.Giant : 0;
-            Flags3 |= Good ? MonsterFlag3.Good : 0;
-            Flags3 |= GreatOldOne ? MonsterFlag3.GreatOldOne : 0;
-            Flags3 |= HurtByCold ? MonsterFlag3.HurtByCold : 0;
-            Flags3 |= HurtByFire ? MonsterFlag3.HurtByFire : 0;
-            Flags3 |= HurtByLight ? MonsterFlag3.HurtByLight : 0;
-            Flags3 |= HurtByRock ? MonsterFlag3.HurtByRock : 0;
-            Flags3 |= ImmuneAcid ? MonsterFlag3.ImmuneAcid : 0;
-            Flags3 |= ImmuneCold ? MonsterFlag3.ImmuneCold : 0;
-            Flags3 |= ImmuneConfusion ? MonsterFlag3.ImmuneConfusion : 0;
-            Flags3 |= ImmuneFear ? MonsterFlag3.ImmuneFear : 0;
-            Flags3 |= ImmuneFire ? MonsterFlag3.ImmuneFire : 0;
-            Flags3 |= ImmuneLightning ? MonsterFlag3.ImmuneLightning : 0;
-            Flags3 |= ImmunePoison ? MonsterFlag3.ImmunePoison : 0;
-            Flags3 |= ImmuneSleep ? MonsterFlag3.ImmuneSleep : 0;
-            Flags3 |= ImmuneStun ? MonsterFlag3.ImmuneStun : 0;
-            Flags3 |= Nonliving ? MonsterFlag3.Nonliving : 0;
-            Flags3 |= Orc ? MonsterFlag3.Orc : 0;
-            Flags3 |= ResistDisenchant ? MonsterFlag3.ResistDisenchant : 0;
-            Flags3 |= ResistNether ? MonsterFlag3.ResistNether : 0;
-            Flags3 |= ResistNexus ? MonsterFlag3.ResistNexus : 0;
-            Flags3 |= ResistPlasma ? MonsterFlag3.ResistPlasma : 0;
-            Flags3 |= ResistTeleport ? MonsterFlag3.ResistTeleport : 0;
-            Flags3 |= ResistWater ? MonsterFlag3.ResistWater : 0;
-            Flags3 |= Troll ? MonsterFlag3.Troll : 0;
-            Flags3 |= Undead ? MonsterFlag3.Undead : 0;
         }
 
         /// <summary>

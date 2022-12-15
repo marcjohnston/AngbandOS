@@ -64,7 +64,7 @@ namespace AngbandOS.Projection
                 }
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.HurtByLight;
+                    rPtr.Knowledge.Characteristics.HurtByLight = true;
                 }
                 note = " cringes from the light!";
                 noteDies = " shrivels away in the light!";

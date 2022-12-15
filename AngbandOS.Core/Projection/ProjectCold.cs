@@ -111,7 +111,7 @@ namespace AngbandOS.Projection
                 dam /= 9;
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmuneCold;
+                    rPtr.Knowledge.Characteristics.ImmuneCold = true;
                 }
             }
             if (rPtr.Guardian)

@@ -106,7 +106,7 @@ namespace AngbandOS.Projection
                 note = " is hit hard.";
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    rPtr.Knowledge.Characteristics.Evil = true;
                 }
             }
             if (rPtr.Guardian)

@@ -43,7 +43,7 @@ namespace AngbandOS.Projection
                 dam /= Program.Rng.DieRoll(6) + 6;
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ImmunePoison;
+                    rPtr.Knowledge.Characteristics.ImmunePoison = true;
                 }
             }
             else if (Program.Rng.DieRoll(3) == 1)

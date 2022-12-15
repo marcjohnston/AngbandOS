@@ -41,7 +41,7 @@ namespace AngbandOS.Projection
                 dam = 0;
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Undead;
+                    rPtr.Knowledge.Characteristics.Undead = true;
                 }
             }
             else if (rPtr.ResistNether)
@@ -51,7 +51,7 @@ namespace AngbandOS.Projection
                 dam /= Program.Rng.DieRoll(6) + 6;
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistNether;
+                    rPtr.Knowledge.Characteristics.ResistNether = true;
                 }
             }
             else if (rPtr.Evil)
@@ -60,7 +60,7 @@ namespace AngbandOS.Projection
                 note = " resists somewhat.";
                 if (seen)
                 {
-                    rPtr.Knowledge.RFlags3 |= MonsterFlag3.Evil;
+                    rPtr.Knowledge.Characteristics.Evil = true;
                 }
             }
             if (rPtr.Guardian)

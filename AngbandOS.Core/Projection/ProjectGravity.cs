@@ -43,7 +43,7 @@ namespace AngbandOS.Projection
                 {
                     if (seen)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
+                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
                     }
                     note = " is unaffected!";
                     resistTele = true;
@@ -52,7 +52,7 @@ namespace AngbandOS.Projection
                 {
                     if (seen)
                     {
-                        rPtr.Knowledge.RFlags3 |= MonsterFlag3.ResistTeleport;
+                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
                     }
                     note = " resists!";
                     resistTele = true;
