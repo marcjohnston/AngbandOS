@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.ActivationPowers
 {
@@ -28,7 +27,7 @@ namespace AngbandOS.ActivationPowers
         public override string Description => "enslave undead every 333 turns";
 
         public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr = true;
-            
+
         public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResBlind = true;
 
         public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis = true;

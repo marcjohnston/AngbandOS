@@ -8,8 +8,6 @@
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
 
-using System;
-
 namespace AngbandOS.Mutations.ActiveMutations
 {
     [Serializable]

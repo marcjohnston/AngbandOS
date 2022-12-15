@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core;
-using System;
 using System.Reflection;
 
 namespace AngbandOS.Commands
@@ -9,7 +8,7 @@ namespace AngbandOS.Commands
     /// </summary>
     [Serializable]
     internal class VersionCommand : ICommand
-    {    
+    {
         public char Key => 'V';
 
         public int? Repeat => 0;

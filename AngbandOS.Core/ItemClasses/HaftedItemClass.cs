@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Core.ItemClasses
 {
@@ -13,7 +12,7 @@ namespace AngbandOS.Core.ItemClasses
 
         public override Colour Colour => Colour.BrightWhite;
 
-        protected override bool CanBeWeaponOfLaw => true; 
+        protected override bool CanBeWeaponOfLaw => true;
 
         public override bool GetsDamageMultiplier => true;
     }

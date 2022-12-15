@@ -19,7 +19,7 @@ namespace AngbandOS
     internal class MonsterKnowledge
     {
         public readonly int[] RBlows = new int[4];
-        public int RCastInate; 
+        public int RCastInate;
         public int RCastSpell;
         public int RDeaths;
         public int RDropGold;

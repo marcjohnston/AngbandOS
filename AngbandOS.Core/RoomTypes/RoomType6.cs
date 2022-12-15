@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core.MonsterSelectors;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.RoomTypes
 {

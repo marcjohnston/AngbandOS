@@ -7,11 +7,10 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Enumerations;
 using AngbandOS.Core.ItemCategories;
-using AngbandOS.Spells;
-using System;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
+using AngbandOS.Spells;
 
 namespace AngbandOS
 {
@@ -282,7 +281,7 @@ namespace AngbandOS
                     SaveGame.Player.HasNetherResistance = true;
                 }
             }
-            SaveGame.Player.Race.CalcBonuses(SaveGame); 
+            SaveGame.Player.Race.CalcBonuses(SaveGame);
             SaveGame.Player.Speed = 110;
             SaveGame.Player.MeleeAttacksPerRound = 1;
             SaveGame.Player.MissileAttacksPerRound = 1;
@@ -1057,7 +1056,7 @@ namespace AngbandOS
                 SaveGame.Player.DisplayedDamageBonus -= 2;
                 SaveGame.Player.HasUnpriestlyWeapon = true;
             }
-            
+
             // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
             // todo: this should by characterclass
             if (SaveGame.Player.ProfessionIndex == CharacterClass.Cultist &&

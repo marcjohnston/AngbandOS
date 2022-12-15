@@ -1514,7 +1514,7 @@ namespace AngbandOS
                 if (spells.Count == 0)
                 {
                     return false;
-                }    
+                }
             }
 
             // Ditch any spells that we've seen the player resist before so we know they'll be ineffective
@@ -1714,7 +1714,7 @@ namespace AngbandOS
                 if (!saveGame.Playing || saveGame.Player.IsDead || saveGame.NewLevelFlag)
                 {
                     return false;
-                }               
+                }
 
                 // Against other monsters we pick spells randomly
                 MonsterSpell thrownSpell = Race.Spells.ChooseRandom();
@@ -1744,7 +1744,7 @@ namespace AngbandOS
                 {
                     target.SleepLevel = 0;
                 }
-        
+
                 // If the player saw us cast the spell, let them learn we can do that
                 if (seen)
                 {
@@ -3341,7 +3341,7 @@ namespace AngbandOS
             if (Health < MaxHealth / 3 || FearLevel != 0)
             {
                 MonsterSpellList escapeSpells = spells.Where((_spell) => _spell.ProvidesEscape);
-                if (escapeSpells.Count >  0)
+                if (escapeSpells.Count > 0)
                 {
                     return escapeSpells.ChooseRandom();
                 }

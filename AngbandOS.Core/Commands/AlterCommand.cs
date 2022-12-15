@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Commands
 {
@@ -13,7 +12,7 @@ namespace AngbandOS.Commands
         public char Key => '+';
 
         public int? Repeat => 99;
-        
+
         public bool IsEnabled => true;
 
         public void Execute(SaveGame saveGame)

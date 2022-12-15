@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -19,7 +19,7 @@ namespace AngbandOS.Stores
             new StoreOwner("Fanelath the Cautious", 10000, 111, new DwarfRace()),
             new StoreOwner("Runcie the Insane", 10000, 110, new HumanRace()),
             new StoreOwner("Grumbleworth", 15000, 116, new GnomeRace()),
-            new StoreOwner("Flitter", 15000, 111, new SpriteRace()), 
+            new StoreOwner("Flitter", 15000, 111, new SpriteRace()),
             new StoreOwner("Xarillus", 10000, 111, new HumanRace()),
             new StoreOwner("Egbert the Old", 10000, 110, new DwarfRace()),
             new StoreOwner("Valindra the Proud", 15000, 116, new HighElfRace()),

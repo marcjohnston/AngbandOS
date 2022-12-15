@@ -4,7 +4,6 @@ using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 using AngbandOS.Spells;
-using System;
 
 namespace AngbandOS.Commands
 {

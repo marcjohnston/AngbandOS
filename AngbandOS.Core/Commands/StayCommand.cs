@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Stand still for a turn and pick up any items

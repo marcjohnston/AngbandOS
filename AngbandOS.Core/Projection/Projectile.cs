@@ -9,8 +9,6 @@ using AngbandOS.Commands;
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
-using AngbandOS.Spells;
-using System.Xml.Linq;
 
 
 namespace AngbandOS.Projection
@@ -459,7 +457,7 @@ namespace AngbandOS.Projection
                             {
                                 // Disturb the player.
                                 SaveGame.Disturb(true);
-                                
+
                                 // The effects were noticed.
                                 notice = true;
                             }

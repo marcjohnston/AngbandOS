@@ -1,7 +1,5 @@
-﻿using AngbandOS.Core.Interface;
-using AngbandOS.Core.Syllables;
+﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
-using System.Runtime.CompilerServices;
 
 namespace AngbandOS.Core.Races
 {

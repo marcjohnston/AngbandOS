@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.ActivationPowers
 {
@@ -22,7 +21,7 @@ namespace AngbandOS.ActivationPowers
 
         public override int RechargeTime(Player player) => 5;
 
-        public override int Value => 1000; 
+        public override int Value => 1000;
 
         public override string Description => "remove fear and cure poison every 5 turns";
 

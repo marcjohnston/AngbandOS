@@ -1,5 +1,4 @@
 ﻿using AngbandOS.StoreCommands;
-using System;
 
 namespace AngbandOS.Commands
 {

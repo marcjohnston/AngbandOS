@@ -10,9 +10,6 @@ using AngbandOS.Mutations.ActiveMutations;
 using AngbandOS.Mutations.PassiveMutations;
 using AngbandOS.Mutations.RandomMutations;
 
-using System;
-using System.Collections.Generic;
-
 namespace AngbandOS.Mutations
 {
     [Serializable]

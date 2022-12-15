@@ -1,5 +1,3 @@
-using AngbandOS.Enumerations;
-
 namespace AngbandOS.Core;
 
 [Serializable]

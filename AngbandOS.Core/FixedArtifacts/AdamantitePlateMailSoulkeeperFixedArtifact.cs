@@ -1,9 +1,7 @@
 using AngbandOS.Core.Interface;
-using AngbandOS.Enumerations;
 using AngbandOS.Core.ItemCategories;
-using System.Reflection.Metadata.Ecma335;
-
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.FixedArtifacts;
 

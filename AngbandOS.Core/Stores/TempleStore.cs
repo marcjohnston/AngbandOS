@@ -1,9 +1,9 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -25,7 +25,7 @@ namespace AngbandOS.Stores
             new StoreOwner("McKinnon", 10000, 109, new HumanRace()),
             new StoreOwner("Mistress Chastity", 15000, 110, new HighElfRace()),
             new StoreOwner("Hashnik the Druid", 25000, 107, new HobbitRace()),
-            new StoreOwner("Finak", 30000, 109, new YeekRace()), 
+            new StoreOwner("Finak", 30000, 109, new YeekRace()),
             new StoreOwner("Krikkik", 10000, 109, new KlackonRace()),
             new StoreOwner("Morival the Wild", 15000, 110, new ElfRace()),
             new StoreOwner("Hoshak the Dark", 25000, 107, new ImpRace()),

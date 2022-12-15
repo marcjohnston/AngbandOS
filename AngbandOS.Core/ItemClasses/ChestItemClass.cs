@@ -1,12 +1,10 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-   internal abstract class ChestItemClass : ItemClass
+    internal abstract class ChestItemClass : ItemClass
     {
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
         public override bool HatesFire => true;

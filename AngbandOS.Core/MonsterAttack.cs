@@ -8,8 +8,6 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Enumerations;
 
-using System;
-
 namespace AngbandOS
 {
     [Serializable]

@@ -1,9 +1,6 @@
 ﻿using AngbandOS.Core.Interface;
-using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
-using System;
 using static AngbandOS.Extensions;
-using AngbandOS.Core;
 
 namespace AngbandOS.Core.ItemClasses
 {

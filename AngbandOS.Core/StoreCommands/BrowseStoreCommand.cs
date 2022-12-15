@@ -1,7 +1,6 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
-using System;
 
 namespace AngbandOS.StoreCommands
 {

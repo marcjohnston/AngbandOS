@@ -1,6 +1,4 @@
-﻿using AngbandOS.PersistentStorage;
-
-namespace AngbandOS.Web
+﻿namespace AngbandOS.Web
 {
     public class AngbandSqlPersistentStorage
     {

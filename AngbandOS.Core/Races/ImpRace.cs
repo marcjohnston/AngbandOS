@@ -1,7 +1,6 @@
 ﻿using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using System.Windows.Markup;
 
 namespace AngbandOS.Core.Races
 {

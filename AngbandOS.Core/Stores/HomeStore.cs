@@ -1,7 +1,7 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using AngbandOS.StoreCommands;
-using AngbandOS.Core.Interface;
 
 namespace AngbandOS.Stores
 {

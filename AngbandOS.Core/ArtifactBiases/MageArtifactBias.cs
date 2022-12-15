@@ -1,5 +1,4 @@
 ﻿using AngbandOS.ActivationPowers;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.ArtifactBiases
 {

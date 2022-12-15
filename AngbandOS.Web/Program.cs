@@ -1,16 +1,15 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
-using AngbandOS.Web.Data;
-using AngbandOS.Web.Models;
-using AngbandOS.Web.Hubs;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using AngbandOS.PersistentStorage;
 using AngbandOS.Web;
+using AngbandOS.Web.Data;
+using AngbandOS.Web.Hubs;
+using AngbandOS.Web.Interface;
+using AngbandOS.Web.Models;
 using AngbandOS.Web.TemplateProcessing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using AngbandOS.Web.Interface;
-using AngbandOS.PersistentStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -127,6 +126,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();

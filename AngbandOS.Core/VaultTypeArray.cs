@@ -8,9 +8,6 @@
 using AngbandOS.Commands;
 using AngbandOS.Core;
 
-using System;
-using System.Collections.Generic;
-
 namespace AngbandOS
 {
     [Serializable]

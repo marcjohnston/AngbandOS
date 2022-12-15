@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class ForgetMonsterSpell : MonsterSpell
@@ -12,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
             string monsterName = monster.Name;
- 
+
             if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
             {
                 saveGame.MsgPrint("You resist the effects!");

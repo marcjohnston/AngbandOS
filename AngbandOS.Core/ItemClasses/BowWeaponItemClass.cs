@@ -1,7 +1,6 @@
-﻿using AngbandOS.Core.Interface;
-using AngbandOS.ArtifactBiases;
+﻿using AngbandOS.ArtifactBiases;
+using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using System;
 using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
@@ -45,7 +44,7 @@ namespace AngbandOS.Core.ItemClasses
                     basenm += $" [{GetSignedValue(item.BonusArmourClass)}]";
                 }
             }
-            else if(item.BaseArmourClass != 0)
+            else if (item.BaseArmourClass != 0)
             {
                 basenm += $" [{item.BaseArmourClass}]";
             }

@@ -1,7 +1,7 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
 
 namespace AngbandOS.Stores

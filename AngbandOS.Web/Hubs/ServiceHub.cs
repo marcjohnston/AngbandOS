@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
-using static Humanizer.In;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -67,7 +63,7 @@ namespace AngbandOS.Web.Hubs
             HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
             GameService.ServiceHubConnected(Context.ConnectionId);
-            GameService.ChatConnected(Context.ConnectionId, new AnonymousChatRecipient(serviceHub));           
+            GameService.ChatConnected(Context.ConnectionId, new AnonymousChatRecipient(serviceHub));
             return base.OnConnectedAsync();
         }
 

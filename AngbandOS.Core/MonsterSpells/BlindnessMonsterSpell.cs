@@ -20,7 +20,7 @@ namespace AngbandOS.Core.MonsterSpells
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
- 
+
             if (saveGame.Player.HasBlindnessResistance)
             {
                 saveGame.MsgPrint("You are unaffected!");

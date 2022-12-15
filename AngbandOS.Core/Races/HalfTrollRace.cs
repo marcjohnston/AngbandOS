@@ -55,7 +55,7 @@ namespace AngbandOS.Core.Races
         {
             if (level > 9)
             {
-                return new string[] { "You enter berserk fury (cost 12)."};
+                return new string[] { "You enter berserk fury (cost 12)." };
             }
             return null;
         }

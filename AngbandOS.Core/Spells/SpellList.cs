@@ -14,8 +14,6 @@ using AngbandOS.Spells.Life;
 using AngbandOS.Spells.Nature;
 using AngbandOS.Spells.Sorcery;
 using AngbandOS.Spells.Tarot;
-using System;
-using System.Collections.Generic;
 
 namespace AngbandOS.Spells
 {

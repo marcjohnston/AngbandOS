@@ -5,12 +5,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -145,7 +145,7 @@ namespace AngbandOS
             {
                 SaveGame.Print(baseColour, "+", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
-                else
+            else
             {
                 SaveGame.Print(Colour.Grey, ".", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
@@ -239,7 +239,7 @@ namespace AngbandOS
 
             DisplayStat("Imm Acid", 10, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImAcid);
             DisplayStat("Imm Elec", 11, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImElec);
-            DisplayStat("Imm Fire", 12, 52,(IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImFire);
+            DisplayStat("Imm Fire", 12, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImFire);
             DisplayStat("Imm Cold", 13, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ImCold);
 
             DisplayStat("Reflect", 15, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Reflect);

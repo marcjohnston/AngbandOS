@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Web.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AngbandOS.Web.Hubs
 {

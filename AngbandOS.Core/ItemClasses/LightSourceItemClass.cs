@@ -1,5 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using static AngbandOS.Extensions;
 

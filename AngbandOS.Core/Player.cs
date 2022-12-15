@@ -5,18 +5,16 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.�
+using AngbandOS.Core;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
 using AngbandOS.Mutations;
+using AngbandOS.Pantheon;
 using AngbandOS.Patrons;
 using AngbandOS.Spells;
-
-using AngbandOS.Pantheon;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.Races;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -2677,7 +2675,7 @@ namespace AngbandOS
             }
             if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Lobon).AdjustedFavour)
             {
-                SaveGame.MsgPrint($"You feel { GlobalData.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
+                SaveGame.MsgPrint($"You feel {GlobalData.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
                 return true;
             }
             if (DecreaseAbilityScore(stat, 10, false))

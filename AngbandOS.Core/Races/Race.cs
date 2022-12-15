@@ -1,9 +1,6 @@
-﻿using AngbandOS.Core.Interface;
-using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Syllables;
-using System.Diagnostics;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {
@@ -34,12 +31,12 @@ namespace AngbandOS.Core.Races
         public abstract int MaleHeightRange { get; }
         public abstract int MaleWeightRange { get; }
         public abstract string Title { get; }
-        public virtual string IndefiniteArticleForTitle 
-        { 
-            get 
+        public virtual string IndefiniteArticleForTitle
+        {
+            get
             {
                 return "aeiouAEIOU".Contains(Title[0]) ? "an" : "a";
-            } 
+            }
         }
 
         /// <summary>

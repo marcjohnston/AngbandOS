@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class TeleportLevelMonsterSpell : MonsterSpell
@@ -14,7 +12,7 @@ namespace AngbandOS.Core.MonsterSpells
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
-   
+
             if (saveGame.Player.HasNexusResistance)
             {
                 saveGame.MsgPrint("You are unaffected!");

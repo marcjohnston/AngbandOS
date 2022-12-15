@@ -1,6 +1,3 @@
-using AngbandOS.Enumerations;
-using System;
-
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories

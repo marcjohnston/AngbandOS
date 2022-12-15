@@ -1,8 +1,7 @@
-﻿using AngbandOS;
-using System.ComponentModel;
-using System.Collections.Concurrent;
-using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface;
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+using System.ComponentModel;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -167,7 +166,7 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
-              gameHub.Clear();
+                gameHub.Clear();
         }
 
         public void PlayMusic(MusicTrack music)
@@ -177,7 +176,7 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
-              gameHub.PlayMusic(music);
+                gameHub.PlayMusic(music);
         }
 
         public void PlaySound(SoundEffect sound)
@@ -187,7 +186,7 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
-              gameHub.PlaySound(sound);
+                gameHub.PlaySound(sound);
         }
 
         public void BatchPrint(PrintLine[] printLines)
@@ -207,7 +206,7 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
-              gameHub.SetBackground(image);
+                gameHub.SetBackground(image);
         }
 
         /// <summary>

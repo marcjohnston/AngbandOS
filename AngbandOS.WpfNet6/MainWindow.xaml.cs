@@ -36,7 +36,8 @@ namespace WpfApp1
         /// <param name="val"> The sound to play </param>
         public void PlaySound(SoundEffect sound)
         {
-            Dispatcher.Invoke(new Action(() => {
+            Dispatcher.Invoke(new Action(() =>
+            {
                 if (Mixer.SoundVolume > 0)
                 {
                     Mixer.Play(sound);
@@ -46,14 +47,16 @@ namespace WpfApp1
 
         public void PlayMusic(MusicTrack musicTrack)
         {
-            Dispatcher.Invoke(new Action(() => {
+            Dispatcher.Invoke(new Action(() =>
+            {
                 Mixer.Play(musicTrack);
             }));
         }
 
         public void Clear()
         {
-            Dispatcher.Invoke(new Action(() => {
+            Dispatcher.Invoke(new Action(() =>
+            {
                 if (Mixer.SoundVolume > 0)
                 {
                     Color backColor = FromHex(coloursMap[(int)Colour.Background]);

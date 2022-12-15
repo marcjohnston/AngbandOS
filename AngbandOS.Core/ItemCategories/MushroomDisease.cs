@@ -1,8 +1,5 @@
-using AngbandOS.Enumerations;
-using System;
-using System.Collections.Generic;
-
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.ItemCategories
 {

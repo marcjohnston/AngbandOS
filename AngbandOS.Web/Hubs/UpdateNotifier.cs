@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Core.Interface;
-using System.Xml.Linq;
 
 namespace AngbandOS.Web.Hubs
 {

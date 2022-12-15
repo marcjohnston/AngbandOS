@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Projection;
-using System.Threading;
 
 namespace AngbandOS.Core.AttackEffects
 {

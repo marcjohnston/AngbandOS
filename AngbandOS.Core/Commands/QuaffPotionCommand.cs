@@ -1,9 +1,8 @@
-﻿using AngbandOS.Enumerations;
+﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemFilters;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.ItemFilters;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Commands
 {

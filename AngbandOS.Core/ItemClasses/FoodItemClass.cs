@@ -1,7 +1,5 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using System;
 using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses

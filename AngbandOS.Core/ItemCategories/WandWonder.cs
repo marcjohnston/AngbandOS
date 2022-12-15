@@ -1,8 +1,6 @@
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using System;
-
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
 {
@@ -29,7 +27,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             switch (Program.Rng.RandomLessThan(24))
             {
-                case 0: 
+                case 0:
                     // Acid ball
                     saveGame.FireBall(new ProjectAcid(saveGame), dir, 60, 2);
                     return true;

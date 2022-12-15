@@ -9,7 +9,6 @@ using AngbandOS.Core;
 using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using System;
 
 namespace AngbandOS.Spells.Tarot
 {

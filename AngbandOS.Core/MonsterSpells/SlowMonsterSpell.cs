@@ -22,7 +22,7 @@ namespace AngbandOS.Core.MonsterSpells
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
             string monsterName = monster.Name;
-  
+
             if (saveGame.Player.HasFreeAction)
             {
                 saveGame.MsgPrint("You are unaffected!");

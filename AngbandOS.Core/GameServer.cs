@@ -1,7 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 
-using System.Runtime.Serialization.Formatters.Binary;
-
 namespace AngbandOS
 {
     /// <summary>

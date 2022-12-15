@@ -4,5 +4,5 @@ namespace AngbandOS.Web.Models;
 
 public class ApplicationUser : IdentityUser
 {
-    
+
 }

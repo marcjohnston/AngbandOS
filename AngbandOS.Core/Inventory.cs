@@ -7,11 +7,9 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
-using System;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {

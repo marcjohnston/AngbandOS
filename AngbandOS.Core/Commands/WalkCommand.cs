@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using System;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     [Serializable]
     internal class WalkWithoutPickupCommand : ICommand
@@ -63,7 +60,7 @@ namespace AngbandOS.Commands
         }
 
         public static void DoCmdWalk(SaveGame saveGame, bool dontPickup)
-        { 
+        {
             bool disturb = false;
             // If we don't already have a direction, get one
             if (saveGame.GetDirectionNoAim(out int dir))

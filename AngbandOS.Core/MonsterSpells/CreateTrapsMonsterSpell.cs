@@ -1,5 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
+﻿using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 
 namespace AngbandOS.Core.MonsterSpells

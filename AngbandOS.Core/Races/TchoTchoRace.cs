@@ -1,8 +1,7 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Syllables;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.Races
 {

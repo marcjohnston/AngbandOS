@@ -1,15 +1,9 @@
-﻿using AngbandOS.Core.Interface;
-using AngbandOS.PersistentStorage;
-using AngbandOS.Web.Data;
-using AngbandOS.Web.Hubs;
+﻿using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
 using AngbandOS.Web.Models;
-using AngbandOS;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 
 namespace AngbandOS.Web.Controllers

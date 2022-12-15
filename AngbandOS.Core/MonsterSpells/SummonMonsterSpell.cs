@@ -16,7 +16,7 @@ namespace AngbandOS.Core.MonsterSpells
         public override bool SummonsHelp => true;
 
         public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} magically summons {SummonName(monster)}!";
-        
+
         /// <summary>
         /// Returns the name of what is being summoned.  This name is used to generate the messages rendered to the player.
         /// </summary>
@@ -58,7 +58,7 @@ namespace AngbandOS.Core.MonsterSpells
         {
             bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
             int count = 0;
-            
+
             for (int k = 0; k < MaximumSummonCount(saveGame); k++)
             {
                 if (Summon(saveGame, monster))
@@ -106,5 +106,5 @@ namespace AngbandOS.Core.MonsterSpells
                 saveGame.MsgPrint(BlindNonZeroSummonedMessage);
             }
         }
-   }
+    }
 }

@@ -7,8 +7,6 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Enumerations;
 
-using System;
-
 namespace AngbandOS.Mutations.ActiveMutations
 {
     [Serializable]

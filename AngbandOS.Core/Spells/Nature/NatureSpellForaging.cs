@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Spells.Nature
 {

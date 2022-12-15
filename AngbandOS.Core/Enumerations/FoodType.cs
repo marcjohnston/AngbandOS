@@ -9,7 +9,7 @@ namespace AngbandOS.Enumerations
 {
     internal static class FoodType
     {
-        public const int Biscuit = 32; 
+        public const int Biscuit = 32;
         public const int Blindness = 1; // Mushroom
         public const int Confusion = 3; // Mushroom
         public const int CureBlindness = 13; // Mushroom

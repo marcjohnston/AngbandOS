@@ -8,7 +8,6 @@
 using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Mutations.ActiveMutations
 {

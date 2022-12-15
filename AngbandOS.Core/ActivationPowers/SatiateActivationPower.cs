@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.ActivationPowers
 {

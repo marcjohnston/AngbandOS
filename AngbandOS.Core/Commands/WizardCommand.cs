@@ -1,11 +1,9 @@
 ﻿using AngbandOS.ActivationPowers;
+using AngbandOS.Core;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Commands
 {
@@ -709,7 +707,7 @@ namespace AngbandOS.Commands
                     row = 2 + (num % maxLetters);
                     col = 30 * (num / maxLetters);
                     ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-                    string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", ""); 
+                    string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", "");
 
                     saveGame.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
@@ -782,7 +780,7 @@ namespace AngbandOS.Commands
             }
             string buf = oPtr.StoreDescription(true, 3);
             saveGame.PrintLine(buf, 2, j);
-            saveGame.PrintLine($"kind = {oPtr.BaseItemCategory, 5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            saveGame.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
             saveGame.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             saveGame.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             saveGame.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);

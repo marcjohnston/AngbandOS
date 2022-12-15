@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.ItemCategories;
-using System;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Open a door or chest

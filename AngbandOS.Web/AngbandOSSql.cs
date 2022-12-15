@@ -1,6 +1,4 @@
-﻿using AngbandOS.PersistentStorage;
-
-namespace AngbandOS.Web.Hubs
+﻿namespace AngbandOS.Web.Hubs
 {
     /// <summary>
     /// Represents a class that encapsulates the SqlPersistentStorage and sends a configured connection string to the driver.

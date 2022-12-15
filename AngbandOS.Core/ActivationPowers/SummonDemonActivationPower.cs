@@ -1,7 +1,5 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.MonsterSelectors;
+﻿using AngbandOS.Core.MonsterSelectors;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.ActivationPowers
 {

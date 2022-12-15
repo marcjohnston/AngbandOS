@@ -1,8 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-using System;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class BookItemClass : ItemClass

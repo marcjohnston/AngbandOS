@@ -1,7 +1,7 @@
-﻿using AngbandOS.Enumerations;
-using static AngbandOS.Extensions;
-using AngbandOS.ArtifactBiases;
+﻿using AngbandOS.ArtifactBiases;
 using AngbandOS.Core.Interface;
+using AngbandOS.Enumerations;
+using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
 {

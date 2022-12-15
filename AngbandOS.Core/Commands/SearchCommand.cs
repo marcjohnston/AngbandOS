@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Spend a turn searching for traps and secret doors

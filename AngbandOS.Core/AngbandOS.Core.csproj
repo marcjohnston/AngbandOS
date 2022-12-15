@@ -14,4 +14,12 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.Core\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Marc\Source\repos\AngbandOS\AngbandOS.Core\.editorconfig" />
+  </ItemGroup>
+
 </Project>

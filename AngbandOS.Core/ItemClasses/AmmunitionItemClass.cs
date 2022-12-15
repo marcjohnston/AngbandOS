@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class AmmunitionItemClass : WeaponItemClass

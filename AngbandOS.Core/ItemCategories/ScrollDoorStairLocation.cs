@@ -1,6 +1,4 @@
 using AngbandOS.Core.EventArgs;
-using AngbandOS.Enumerations;
-using System;
 
 using AngbandOS.Core.ItemClasses;
 

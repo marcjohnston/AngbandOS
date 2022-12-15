@@ -1,9 +1,6 @@
 using AngbandOS.Core.EventArgs;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-using System;
-
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Core.ItemCategories
 {

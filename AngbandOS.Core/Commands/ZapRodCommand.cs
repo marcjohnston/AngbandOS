@@ -1,10 +1,9 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
+﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.ItemFilters;
+using AngbandOS.Enumerations;
+using AngbandOS.Projection;
 
 namespace AngbandOS.Commands
 {

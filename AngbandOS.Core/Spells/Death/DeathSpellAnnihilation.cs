@@ -9,8 +9,6 @@ using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
 
-using System;
-
 namespace AngbandOS.Spells.Death
 {
     [Serializable]

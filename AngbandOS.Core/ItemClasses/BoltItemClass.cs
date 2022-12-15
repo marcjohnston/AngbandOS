@@ -1,6 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Core.ItemClasses
 {

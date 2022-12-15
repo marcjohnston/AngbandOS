@@ -1,6 +1,4 @@
 using AngbandOS.Core.Interface;
-using System;
-using System.Collections.Generic;
 
 using AngbandOS.Core.ItemClasses;
 

@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.MonsterRaces;
-using System;
 
 namespace AngbandOS.Mutations.RandomMutations
 {

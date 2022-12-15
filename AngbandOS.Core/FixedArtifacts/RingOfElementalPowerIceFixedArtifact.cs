@@ -1,8 +1,8 @@
-using AngbandOS.Enumerations;
+using AngbandOS.ActivationPowers;
 using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
 using AngbandOS.Projection;
-using AngbandOS.ActivationPowers;
 
 namespace AngbandOS.Core.FixedArtifacts;
 

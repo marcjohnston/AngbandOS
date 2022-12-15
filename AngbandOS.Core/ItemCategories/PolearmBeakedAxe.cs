@@ -1,5 +1,4 @@
 using AngbandOS.Core.Interface;
-using System;
 
 using AngbandOS.Core.ItemClasses;
 

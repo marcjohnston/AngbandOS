@@ -5,14 +5,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core;
 using AngbandOS.ActivationPowers;
 using AngbandOS.ArtifactBiases;
-using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core;
 using AngbandOS.Core.FixedArtifacts;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterRaces;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS
 {
@@ -513,7 +513,7 @@ namespace AngbandOS
             if (!BaseItemCategory.CanAbsorb(this, other))
             {
                 return false;
-            }    
+            }
 
             if (RandartItemCharacteristics != other.RandartItemCharacteristics)
             {

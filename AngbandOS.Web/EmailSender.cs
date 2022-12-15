@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 
 namespace AngbandOS.Web
 {
@@ -30,7 +30,7 @@ namespace AngbandOS.Web
             {
                 Port = SmtpPort,
                 Host = SmtpHost,
-                EnableSsl = SmtpEnableSsl,                
+                EnableSsl = SmtpEnableSsl,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Credentials = new NetworkCredential(SmtpAccount, SmtpPassword)
             };

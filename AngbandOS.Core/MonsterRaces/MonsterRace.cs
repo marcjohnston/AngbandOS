@@ -472,7 +472,7 @@ namespace AngbandOS.Core.MonsterRaces
             Flags3 |= ResistTeleport ? MonsterFlag3.ResistTeleport : 0;
             Flags3 |= ResistWater ? MonsterFlag3.ResistWater : 0;
             Flags3 |= Troll ? MonsterFlag3.Troll : 0;
-            Flags3 |= Undead ? MonsterFlag3.Undead : 0;               
+            Flags3 |= Undead ? MonsterFlag3.Undead : 0;
         }
 
         /// <summary>

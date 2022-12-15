@@ -6,16 +6,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Commands;
+using AngbandOS.Core;
+using AngbandOS.Core.Interface;
+using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
 using AngbandOS.Spells;
 using AngbandOS.StoreCommands;
 using AngbandOS.Stores;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS
 {
@@ -921,7 +920,7 @@ namespace AngbandOS
                 foreach (Store store in town.Stores)
                 {
                     if (PerformsMaintenanceWhenResting)
-                    { 
+                    {
                         store.StoreMaint();
                     }
                 }
@@ -1546,7 +1545,7 @@ namespace AngbandOS
             }
         }
 
-        public void IdentifyAll()       
+        public void IdentifyAll()
         {
             int price;
             if (!ServiceHaggle(500, out price))

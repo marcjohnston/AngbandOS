@@ -1,8 +1,6 @@
 ﻿using AngbandOS.Commands;
-using AngbandOS.Core;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.StoreCommands
 {

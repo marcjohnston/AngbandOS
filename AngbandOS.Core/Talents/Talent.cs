@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AngbandOS.Talents
+﻿namespace AngbandOS.Talents
 {
     [Serializable]
     internal abstract class Talent

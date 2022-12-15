@@ -1,7 +1,4 @@
 using AngbandOS.Core.EventArgs;
-using AngbandOS.Enumerations;
-using System;
-using System.Diagnostics.Tracing;
 
 using AngbandOS.Core.ItemClasses;
 

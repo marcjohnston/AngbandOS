@@ -51,7 +51,7 @@ namespace AngbandOS.Core.Races
         public override string[]? SelfKnowledge(int level)
         {
             if (level > 19)
-            {                
+            {
                 return new string[] { $"You can throw a boulder, dam. {3 * level} (cost 15)." };
             }
             return null;

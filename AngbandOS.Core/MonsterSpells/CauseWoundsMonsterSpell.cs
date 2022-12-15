@@ -42,7 +42,7 @@ namespace AngbandOS.Core.MonsterSpells
             else
             {
                 string monsterDescription = monster.IndefiniteVisibleName;
-            
+
                 saveGame.Player.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
                 saveGame.Player.TakeHit(Damage, monsterDescription);
 

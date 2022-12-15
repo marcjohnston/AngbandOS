@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Projection;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AngbandOS.Core.AttackEffects
 {

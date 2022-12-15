@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using AngbandOS.Core.Interface;
-using AngbandOS.Web.Models;
+﻿using AngbandOS.Core.Interface;
 using AngbandOS.PersistentStorage;
-using System.Collections.Concurrent;
 using AngbandOS.Web.Interface;
-using System.Security.Claims;
+using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
+using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+using System.Security.Claims;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -229,7 +228,7 @@ namespace AngbandOS.Web.Hubs
                     LastInputReceived = console.Value.LastInputReceived,
                     ConnectionId = console.Key,
                     UserId = console.Value.UserId,
-                    Username = console.Value.Username,                    
+                    Username = console.Value.Username,
                 };
                 activeGames.Add(activeGameDetails);
             }
@@ -345,7 +344,7 @@ namespace AngbandOS.Web.Hubs
                     }
                     return true;
                 }
-            } 
+            }
             catch (Exception)
             {
                 return false;
@@ -369,7 +368,7 @@ namespace AngbandOS.Web.Hubs
                 // It is, create a new guid for the game.
                 guid = Guid.NewGuid().ToString();
 
-                await WriteMessageAsync(context.User, null, "Game created." , MessageTypeEnum.GameCreated, guid);
+                await WriteMessageAsync(context.User, null, "Game created.", MessageTypeEnum.GameCreated, guid);
             }
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
@@ -453,7 +452,7 @@ namespace AngbandOS.Web.Hubs
 
             // Check to see if there is a connection still associated with this console.
             if (ConnectionIds.TryGetValue(console, out string connectionId))
-            { 
+            {
                 // Force the disconnect.
                 GameHubDisconnectedAsync(connectionId);
             }

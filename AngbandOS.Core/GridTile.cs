@@ -8,8 +8,6 @@
 using AngbandOS.Commands;
 using AngbandOS.Core;
 
-using System;
-
 namespace AngbandOS
 {
     /// <summary>

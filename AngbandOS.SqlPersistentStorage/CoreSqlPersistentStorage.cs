@@ -28,8 +28,8 @@ namespace AngbandOS.PersistentStorage
         public CoreSqlPersistentStorage(string connectionString, string username, string guid)
         {
             ConnectionString = connectionString;
-            Username = username;    
-            GameGuid = guid;    
+            Username = username;
+            GameGuid = guid;
         }
 
         public byte[]? ReadGame()

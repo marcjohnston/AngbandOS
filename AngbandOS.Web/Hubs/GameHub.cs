@@ -1,12 +1,10 @@
-﻿using AngbandOS;
+﻿using AngbandOS.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using AngbandOS.Web.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
 
 namespace AngbandOS.Web.Hubs
 {

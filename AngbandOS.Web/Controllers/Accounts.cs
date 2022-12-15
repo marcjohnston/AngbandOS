@@ -1,16 +1,16 @@
-﻿using AngbandOS.Web.Models;
+﻿using AngbandOS.Web.Interface;
+using AngbandOS.Web.Models;
+using AngbandOS.Web.TemplateProcessing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using AngbandOS.Web.TemplateProcessing;
 using System.Net;
-using AngbandOS.Web.Interface;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Text;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -230,7 +230,7 @@ namespace AngbandOS.Web.Controllers
 
             // If the user does not exist, do not inform the client.  This is an anonymous call.
             if (appUser == null)
-              return Ok();
+                return Ok();
 
             string token = await UserManager.GeneratePasswordResetTokenAsync(appUser);
 
@@ -398,7 +398,7 @@ namespace AngbandOS.Web.Controllers
             };
 
             UserSettingsDetails? updatedUserSettings = await WebPersistentStorage.WritePreferencesAsync(appUser.Id, userSettingsDetails);
-            return  new GetUserPreferences()
+            return new GetUserPreferences()
             {
                 FontName = userSettings.FontName,
                 FontSize = userSettings.FontSize,

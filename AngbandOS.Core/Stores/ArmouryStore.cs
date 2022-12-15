@@ -1,10 +1,9 @@
 ﻿using AngbandOS.Commands;
+using AngbandOS.Core.ItemCategories;
+using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Races;
 using AngbandOS.Enumerations;
-using AngbandOS.Core.ItemCategories;
 using AngbandOS.StoreCommands;
-using System;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Stores
 {
@@ -23,7 +22,7 @@ namespace AngbandOS.Stores
             new StoreOwner("Elo Dragonscale", 30000, 112, new ElfRace()),
             new StoreOwner("Delicatus", 10000, 115, new SpriteRace()),
             new StoreOwner("Gruce the Huge", 15000, 111, new HalfGiantRace()),
-            new StoreOwner("Animus", 25000, 112, new GolemRace()), 
+            new StoreOwner("Animus", 25000, 112, new GolemRace()),
             new StoreOwner("Malvus", 30000, 112, new HalfTitanRace()),
             new StoreOwner("Selaxis", 10000, 115, new ZombieRace()),
             new StoreOwner("Deathchill", 15000, 111, new SpectreRace()),

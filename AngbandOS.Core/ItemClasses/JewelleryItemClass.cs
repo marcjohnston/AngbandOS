@@ -1,9 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-using AngbandOS.Enumerations;
-
-using System;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     /// <summary>

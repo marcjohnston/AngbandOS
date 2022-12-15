@@ -1,7 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
-using AngbandOS.ArtifactBiases;
 using AngbandOS.Enumerations;
-using System;
 
 namespace AngbandOS.Core.ItemClasses
 {
@@ -24,7 +22,7 @@ namespace AngbandOS.Core.ItemClasses
             if (power != 0)
             {
                 // Apply the standard armour characteristics.
-                base.ApplyMagic(item, level, power);    
+                base.ApplyMagic(item, level, power);
 
                 if (item.SaveGame.Level != null)
                 {

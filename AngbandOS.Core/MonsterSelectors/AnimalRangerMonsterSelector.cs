@@ -9,9 +9,9 @@ namespace AngbandOS.Core.MonsterSelectors
         {
             return rPtr.Animal &&
                     "abcflqrwBCIJKMRS".Contains(rPtr.Character.ToString()) &&
-                    !rPtr.Dragon && 
+                    !rPtr.Dragon &&
                     !rPtr.Evil &&
-                    !rPtr.Undead && 
+                    !rPtr.Undead &&
                     !rPtr.Demon &&
                     !rPtr.Cthuloid &&
                     !rPtr.Unique &&

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     [Serializable]
     /// <summary>

@@ -28,7 +28,7 @@ namespace AngbandOS.Core.MonsterSelectors
                 case 5:
                     return new Bizarre5MonsterSelector();
                 default:
-                    return  new Bizarre6MonsterSelector();
+                    return new Bizarre6MonsterSelector();
             }
         }
     }

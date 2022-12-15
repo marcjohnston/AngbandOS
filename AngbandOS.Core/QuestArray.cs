@@ -7,11 +7,6 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core;
 using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AngbandOS
 {
