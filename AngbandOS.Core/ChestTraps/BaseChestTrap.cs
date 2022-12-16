@@ -7,38 +7,10 @@
     internal abstract class BaseChestTrap
     {
         /// <summary>
-        /// Returns the next trap in the chain.  Returns null, when there are no more traps.
-        /// </summary>
-        private BaseChestTrap? NextTrap { get; }
-
-        /// <summary>
-        /// Represents the activation method the derived chest trap classes must implement.
+        /// Activate the trap.
         /// </summary>
         /// <param name="saveGame"></param>
-        protected abstract void Activate(ActivateChestTrapEventArgs eventArgs);
-
-        /// <summary>
-        /// Activate the trap and all sub-traps.  Non-overridable.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        public void Activate(SaveGame saveGame, int x, int y)
-        {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame, x, y);
-            Activate(eventArgs);
-
-            if (eventArgs.DestroysContents)
-            {
-
-            }
-            if (eventArgs.CancelRecursion)
-            {
-
-            }
-        }
-
-        public BaseChestTrap(BaseChestTrap? nextTrap)
-        {
-            NextTrap = nextTrap;
-        }
+        public abstract void Activate(ActivateChestTrapEventArgs eventArgs);
+        public abstract string Description { get; }
     }
 }

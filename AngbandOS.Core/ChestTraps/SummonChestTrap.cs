@@ -1,12 +1,10 @@
-﻿namespace AngbandOS.Core.ChestTraps
+﻿using System.Runtime.CompilerServices;
+
+namespace AngbandOS.Core.ChestTraps
 {
     internal class SummonChestTrap : BaseChestTrap
     {
-        public SummonChestTrap(BaseChestTrap? nextTrap = null) : base(nextTrap)
-        {
-        }
-
-        protected override void Activate(ActivateChestTrapEventArgs eventArgs)
+        public override void Activate(ActivateChestTrapEventArgs eventArgs)
         {
             int num = 2 + Program.Rng.DieRoll(3);
             eventArgs.SaveGame.MsgPrint("You are enveloped in a cloud of smoke!");
@@ -22,5 +20,7 @@
                 }
             }
         }
+
+        public override string Description => "(Summoning Runes)";
     }
 }

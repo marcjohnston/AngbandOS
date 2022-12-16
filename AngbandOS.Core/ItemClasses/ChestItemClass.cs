@@ -1,4 +1,5 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Commands;
+using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.ItemClasses
@@ -38,16 +39,13 @@ namespace AngbandOS.Core.ItemClasses
             }
             else
             {
-                switch (GlobalData.ChestTraps[item.TypeSpecificValue])
+                if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
                 {
-                    case ChestTrap.ChestNotTrapped:
-                        {
-                            return item.BaseItemCategory.Stompable[StompableType.Good];
-                        }
-                    default:
-                        {
-                            return item.BaseItemCategory.Stompable[StompableType.Excellent];
-                        }
+                      return item.BaseItemCategory.Stompable[StompableType.Good];
+                }
+                else
+                {
+                    return item.BaseItemCategory.Stompable[StompableType.Excellent];
                 }
             }
         }
@@ -64,7 +62,7 @@ namespace AngbandOS.Core.ItemClasses
             }
             else if (item.TypeSpecificValue < 0)
             {
-                if (GlobalData.ChestTraps[-item.TypeSpecificValue] != ChestTrap.ChestNotTrapped)
+                if (ObjectRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
                 {
                     s += " (disarmed)";
                 }
@@ -75,49 +73,7 @@ namespace AngbandOS.Core.ItemClasses
             }
             else
             {
-                switch (GlobalData.ChestTraps[item.TypeSpecificValue])
-                {
-                    case ChestTrap.ChestNotTrapped:
-                        {
-                            s += " (Locked)";
-                            break;
-                        }
-                    case ChestTrap.ChestLoseStr:
-                        {
-                            s += " (Poison Needle)";
-                            break;
-                        }
-                    case ChestTrap.ChestLoseCon:
-                        {
-                            s += " (Poison Needle)";
-                            break;
-                        }
-                    case ChestTrap.ChestPoison:
-                        {
-                            s += " (Gas Trap)";
-                            break;
-                        }
-                    case ChestTrap.ChestParalyze:
-                        {
-                            s += " (Gas Trap)";
-                            break;
-                        }
-                    case ChestTrap.ChestExplode:
-                        {
-                            s += " (Explosion Device)";
-                            break;
-                        }
-                    case ChestTrap.ChestSummon:
-                        {
-                            s += " (Summoning Runes)";
-                            break;
-                        }
-                    default:
-                        {
-                            s += " (Multiple Traps)";
-                            break;
-                        }
-                }
+                s += $" {ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
             }
 
             // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
@@ -142,7 +98,9 @@ namespace AngbandOS.Core.ItemClasses
                 item.TypeSpecificValue = Program.Rng.DieRoll(item.BaseItemCategory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
-                    item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(5));
+                    int chestTrapConfigurationCount = ObjectRepository.ChestTrapConfigurations.Count;
+                    int randomRemaining = chestTrapConfigurationCount - 55;
+                    item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(randomRemaining));
                 }
             }
         }

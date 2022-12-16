@@ -8,6 +8,8 @@
 using AngbandOS.ActivationPowers;
 using AngbandOS.Commands;
 using AngbandOS.Core;
+using AngbandOS.Core.ChestTrapConfigurations;
+using AngbandOS.Core.ChestTraps;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemClasses;
@@ -758,65 +760,8 @@ namespace AngbandOS
             {
                 return;
             }
-            int trap = GlobalData.ChestTraps[oPtr.TypeSpecificValue];
-            if ((trap & Enumerations.ChestTrap.ChestLoseStr) != 0)
-            {
-                MsgPrint("A small needle has pricked you!");
-                Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
-                Player.TryDecreasingAbilityScore(Ability.Strength);
-            }
-            if ((trap & Enumerations.ChestTrap.ChestLoseCon) != 0)
-            {
-                MsgPrint("A small needle has pricked you!");
-                Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
-                Player.TryDecreasingAbilityScore(Ability.Constitution);
-            }
-            if ((trap & Enumerations.ChestTrap.ChestPoison) != 0)
-            {
-                MsgPrint("A puff of green gas surrounds you!");
-                if (!(Player.HasPoisonResistance || Player.TimedPoisonResistance != 0))
-                {
-                    if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                    {
-                        MsgPrint("Hagarg Ryonis's favour protects you!");
-                    }
-                    else
-                    {
-                        Player.SetTimedPoison(Player.TimedPoison + 10 + Program.Rng.DieRoll(20));
-                    }
-                }
-            }
-            if ((trap & Enumerations.ChestTrap.ChestParalyze) != 0)
-            {
-                MsgPrint("A puff of yellow gas surrounds you!");
-                if (!Player.HasFreeAction)
-                {
-                    Player.SetTimedParalysis(Player.TimedParalysis + 10 + Program.Rng.DieRoll(20));
-                }
-            }
-            if ((trap & Enumerations.ChestTrap.ChestSummon) != 0)
-            {
-                int num = 2 + Program.Rng.DieRoll(3);
-                MsgPrint("You are enveloped in a cloud of smoke!");
-                for (int i = 0; i < num; i++)
-                {
-                    if (Program.Rng.DieRoll(100) < Difficulty)
-                    {
-                        ActivateHiSummon();
-                    }
-                    else
-                    {
-                        Level.Monsters.SummonSpecific(y, x, Difficulty, null);
-                    }
-                }
-            }
-            if ((trap & Enumerations.ChestTrap.ChestExplode) != 0)
-            {
-                MsgPrint("There is a sudden explosion!");
-                MsgPrint("Everything inside the chest is destroyed!");
-                oPtr.TypeSpecificValue = 0;
-                Player.TakeHit(Program.Rng.DiceRoll(5, 8), "an exploding chest");
-            }
+            ChestTrapConfiguration trap = ObjectRepository.ChestTrapConfigurations[oPtr.TypeSpecificValue];
+            trap.Activate(this, oPtr);
         }
 
         public void DisplayWildMap()
@@ -7227,7 +7172,7 @@ namespace AngbandOS
                     continue;
                 }
                 // If we're only interested in trapped chests, skip those that aren't
-                if (trappedOnly && (!item.IsKnown() || GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped))
+                if (trappedOnly && (!item.IsKnown() || ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped))
                 {
                     continue;
                 }
@@ -7503,7 +7448,7 @@ namespace AngbandOS
                 MsgPrint("The chest is not trapped.");
             }
             // If it has a null trap then there's nothing to disarm
-            else if (GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped)
+            else if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
             {
                 MsgPrint("The chest is not trapped.");
             }
@@ -8849,7 +8794,7 @@ namespace AngbandOS
                             {
                                 continue;
                             }
-                            if (GlobalData.ChestTraps[item.TypeSpecificValue] == Enumerations.ChestTrap.ChestNotTrapped)
+                            if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
                             {
                                 continue;
                             }

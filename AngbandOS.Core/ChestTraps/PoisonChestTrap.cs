@@ -2,11 +2,7 @@
 {
     internal class PoisonChestTrap : BaseChestTrap
     {
-        public PoisonChestTrap(BaseChestTrap? nextTrap = null) : base(nextTrap)
-        {
-        }
-
-        protected override void Activate(ActivateChestTrapEventArgs eventArgs)
+        public override void Activate(ActivateChestTrapEventArgs eventArgs)
         {
             eventArgs.SaveGame.MsgPrint("A puff of green gas surrounds you!");
             if (!(eventArgs.SaveGame.Player.HasPoisonResistance || eventArgs.SaveGame.Player.TimedPoisonResistance != 0))
@@ -21,5 +17,7 @@
                 }
             }
         }
+
+        public override string Description => "(Gas Trap)";
     }
 }

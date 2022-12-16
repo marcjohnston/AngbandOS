@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core;
+using AngbandOS.Core.ChestTrapConfigurations;
 using AngbandOS.Core.FixedArtifacts;
 using System.Reflection;
 
@@ -16,6 +17,7 @@ namespace AngbandOS.Commands
         public static List<BaseScrollFlavour> ScrollFlavours = new List<BaseScrollFlavour>();
         public static List<StaffFlavour> StaffFlavours = new List<StaffFlavour>();
         public static List<WandFlavour> WandFlavours = new List<WandFlavour>();
+        public static List<ChestTrapConfiguration> ChestTrapConfigurations = new List<ChestTrapConfiguration>();
         public static Dictionary<string, ProjectileGraphic> ProjectileGraphics = new Dictionary<string, ProjectileGraphic>();
         public static Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
         public static Dictionary<string, Vault> Vaults = new Dictionary<string, Vault>();
@@ -96,6 +98,13 @@ namespace AngbandOS.Commands
                 {
                     WandFlavour wandFlavour = (WandFlavour)Activator.CreateInstance(type);
                     WandFlavours.Add(wandFlavour);
+                }
+
+                // Load ChestTrapConfigurations.
+                if (!type.IsAbstract && typeof(ChestTrapConfiguration).IsAssignableFrom(type))
+                {
+                    ChestTrapConfiguration chestTrapConfiguration = (ChestTrapConfiguration)Activator.CreateInstance(type);
+                    ChestTrapConfigurations.Add(chestTrapConfiguration);
                 }
 
                 // Load ProjectileGraphics.

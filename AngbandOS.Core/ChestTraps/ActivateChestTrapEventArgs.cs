@@ -18,12 +18,6 @@
         public int Y { get; }
 
         /// <summary>
-        /// Returns whether or not the recursion should be cancelled.  Returns false, by default.  Set to true, to prevent the sub-traps
-        /// from activating.
-        /// </summary>
-        public bool CancelRecursion = false;
-
-        /// <summary>
         /// Returns whether or not the activation of the trap destroys the contents.  Returns false, by default.  Set to true, when the trap destroys the contents.
         /// </summary>
         public bool DestroysContents = false;
