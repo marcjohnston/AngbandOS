@@ -10,6 +10,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class RefillCommand : ICommand
     {
+        private RefillCommand() { } // This object is a singleton.
+
         public char Key => 'F';
 
         public int? Repeat => 0;

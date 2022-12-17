@@ -10,6 +10,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class WizardCommand : ICommand
     {
+        private WizardCommand() { } // This object is a singleton.
+
         public char Key => 'W';
 
         public int? Repeat => 0;

@@ -6,6 +6,8 @@
     [Serializable]
     internal class StayAndPickupCommand : ICommand
     {
+        private StayAndPickupCommand() { } // This object is a singleton.
+
         public char Key => ',';
 
         public int? Repeat => null;
@@ -24,6 +26,8 @@
     [Serializable]
     internal class StayCommand : ICommand
     {
+        private StayCommand() { } // This object is a singleton.
+
         public char Key => 'g';
 
         public int? Repeat => null;

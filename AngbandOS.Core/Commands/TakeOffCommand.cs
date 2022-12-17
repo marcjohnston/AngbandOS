@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class TakeOffCommand : ICommand
     {
+        private TakeOffCommand() { } // This object is a singleton.
+
         public char Key => 't';
 
         public int? Repeat => 0;

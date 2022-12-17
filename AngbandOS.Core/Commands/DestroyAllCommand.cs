@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class DestroyAllCommand : ICommand
     {
+        private DestroyAllCommand() { } // This object is a singleton.
+
         public char Key => 'K';
 
         public int? Repeat => 0;

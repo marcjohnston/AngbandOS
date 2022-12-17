@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class QuerySymbolCommand : ICommand
     {
+        private QuerySymbolCommand() { } // This object is a singleton.
+
         public char Key => '/';
 
         public int? Repeat => 0;

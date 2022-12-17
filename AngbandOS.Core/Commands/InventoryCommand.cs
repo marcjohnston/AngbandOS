@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class InventoryCommand : ICommand
     {
+        private InventoryCommand() { } // This object is a singleton.
+
         public char Key => 'i';
 
         public int? Repeat => 0;

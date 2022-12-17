@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ExamineCommand : ICommand
     {
+        private ExamineCommand() { } // This object is a singleton.
+
         public char Key => 'x';
 
         public int? Repeat => 0;

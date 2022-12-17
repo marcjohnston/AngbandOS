@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class JournalCommand : ICommand
     {
+        private JournalCommand() { } // This object is a singleton.
+
         public char Key => 'J';
 
         public int? Repeat => 0;

@@ -12,6 +12,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class UseStaffCommand : ICommand
     {
+        private UseStaffCommand() { } // This object is a singleton.
+
         public char Key => 'u';
 
         public int? Repeat => 0;

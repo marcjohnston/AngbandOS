@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class WieldCommand : ICommand
     {
+        private WieldCommand() { } // This object is a singleton.
+
         public char Key => 'w';
 
         public int? Repeat => 0;

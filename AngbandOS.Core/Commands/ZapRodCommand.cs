@@ -14,6 +14,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ZapRodCommand : ICommand
     {
+        private ZapRodCommand() { } // This object is a singleton.
+
         public char Key => 'z';
 
         public int? Repeat => 0;

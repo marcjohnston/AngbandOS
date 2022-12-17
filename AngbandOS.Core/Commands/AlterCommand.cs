@@ -9,6 +9,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class AlterCommand : ICommand
     {
+        private AlterCommand() { } // This object is a singleton.
+
         public char Key => '+';
 
         public int? Repeat => 99;

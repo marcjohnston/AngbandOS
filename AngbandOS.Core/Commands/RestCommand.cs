@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class RestCommand : ICommand
     {
+        private RestCommand() { } // This object is a singleton.
+
         public char Key => 'R';
 
         public int? Repeat => 0;

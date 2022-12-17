@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class PopupMenuCommand : ICommand
     {
+        private PopupMenuCommand() { } // This object is a singleton.
+
         public char Key => '\x1b';
 
         public int? Repeat => 0;

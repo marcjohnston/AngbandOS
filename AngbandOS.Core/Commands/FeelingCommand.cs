@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class FeelingAndLocationCommand : ICommand
     {
+        private FeelingAndLocationCommand() { } // This object is a singleton.
+
         public char Key => 'H';
 
         public int? Repeat => 0;

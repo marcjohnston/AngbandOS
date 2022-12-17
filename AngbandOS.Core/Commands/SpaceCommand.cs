@@ -2,6 +2,8 @@
 {
     internal class SpaceCommand : ICommand
     {
+        private SpaceCommand() { } // This object is a singleton.
+
         public char Key => ' ';
 
         public int? Repeat => 0;

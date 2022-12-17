@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ManualCommand : ICommand
     {
+        private ManualCommand() { } // This object is a singleton.
+
         public char Key => 'h';
 
         public int? Repeat => 0;

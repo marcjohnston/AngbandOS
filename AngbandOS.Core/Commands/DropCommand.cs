@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class DropCommand : ICommand
     {
+        private DropCommand() { } // This object is a singleton.
+
         public char Key => 'd';
 
         public int? Repeat => 0;

@@ -6,6 +6,8 @@
     [Serializable]
     internal class TunnelCommand : ICommand
     {
+        private TunnelCommand() { } // This object is a singleton.
+
         public char Key => 'T';
 
         public int? Repeat => 99;

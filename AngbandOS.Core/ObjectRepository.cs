@@ -7,7 +7,6 @@ namespace AngbandOS.Commands
 {
     internal static class ObjectRepository
     {
-        public static List<ICommand> GameCommands = new List<ICommand>();
         public static List<IStoreCommand> StoreCommands = new List<IStoreCommand>();
         public static List<AmuletFlavour> AmuletFlavours = new List<AmuletFlavour>();
         public static List<MushroomFlavour> MushroomFlavours = new List<MushroomFlavour>();
@@ -35,13 +34,6 @@ namespace AngbandOS.Commands
                 {
                     IStoreCommand command = (IStoreCommand)Activator.CreateInstance(type);
                     StoreCommands.Add(command);
-                }
-
-                // Load Commands.
-                if (!type.IsAbstract && typeof(ICommand).IsAssignableFrom(type))
-                {
-                    ICommand command = (ICommand)Activator.CreateInstance(type);
-                    GameCommands.Add(command);
                 }
 
                 // Load AmuletFlavours.

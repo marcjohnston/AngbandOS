@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class CloseCommand : ICommand
     {
+        private CloseCommand() { } // This object is a singleton.
+
         public char Key => 'c';
 
         public int? Repeat => 99;

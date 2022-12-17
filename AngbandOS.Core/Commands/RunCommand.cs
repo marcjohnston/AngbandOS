@@ -6,6 +6,8 @@
     [Serializable]
     internal class RunCommand : ICommand
     {
+        private RunCommand() { } // This object is a singleton.
+
         public char Key => '.';
 
         public int? Repeat => 0;

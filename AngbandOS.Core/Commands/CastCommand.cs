@@ -9,6 +9,8 @@ namespace AngbandOS.Commands
 {
     internal class CastCommand : ICommand
     {
+        private CastCommand() { } // This object is a singleton.
+
         public char Key => 'm';
 
         public int? Repeat => 0;

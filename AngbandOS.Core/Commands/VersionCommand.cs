@@ -9,6 +9,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class VersionCommand : ICommand
     {
+        private VersionCommand() { } // This object is a singleton.
+
         public char Key => 'V';
 
         public int? Repeat => 0;

@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class LocateCommand : ICommand
     {
+        private LocateCommand() { } // This object is a singleton.
+
         public char Key => 'L';
 
         public int? Repeat => 0;

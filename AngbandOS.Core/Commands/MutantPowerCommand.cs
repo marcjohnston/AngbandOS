@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class MutantPowerCommand : ICommand
     {
+        private MutantPowerCommand() { } // This object is a singleton.
+
         public char Key => 'p';
 
         public int? Repeat => 0;

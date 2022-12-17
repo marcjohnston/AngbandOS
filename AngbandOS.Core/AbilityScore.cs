@@ -47,7 +47,7 @@ namespace AngbandOS
         /// <summary>
         /// Price adjustment for charisma (as a percentage of normal price)
         /// </summary>
-        private static readonly int[] _adjChaPriceAdjustment =
+        private readonly int[] _adjChaPriceAdjustment =
                                                         {
             130, 125, 122, 120, 118, 116, 114, 112, 110, 108, 106, 104, 103, 102, 101, 100, 99, 98, 97, 96, 95, 94, 93,
             92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78
@@ -56,7 +56,7 @@ namespace AngbandOS
         /// <summary>
         /// Con bonus to health (per hit die), stored as double actual bonus
         /// </summary>
-        private static readonly int[] _adjConHealthBonus =
+        private readonly int[] _adjConHealthBonus =
         {
             -5, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0,
             0, 1, 1, 2, 3, 4, 4, 4, 4, 5, 6, 7,
@@ -67,7 +67,7 @@ namespace AngbandOS
         /// <summary>
         /// Con bonus to recovery from wounds and poison
         /// </summary>
-        private static readonly int[] _adjConRecoverySpeed =
+        private readonly int[] _adjConRecoverySpeed =
         {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 6, 7, 7, 8, 8, 8, 9,
             9, 9
@@ -76,7 +76,7 @@ namespace AngbandOS
         /// <summary>
         /// Dex bonus to armour class (stored as bonus)
         /// </summary>
-        private static readonly int[] _adjDexArmourClassBonus =
+        private readonly int[] _adjDexArmourClassBonus =
         {
             -4, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0,
             0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3,
@@ -87,8 +87,8 @@ namespace AngbandOS
         /// <summary>
         /// Dex bonus for attacks (stored as bonus)
         /// </summary>
-        private static readonly int[] _adjDexAttackBonus =
-                {
+        private readonly int[] _adjDexAttackBonus =
+        {
             -3, -2, -2, -1, -1, 0, 0, 0, 0, 0, 0,
             0, 0, 1, 2, 3, 3, 3, 3, 3, 4, 4, 4,
             4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13,
@@ -98,7 +98,7 @@ namespace AngbandOS
         /// <summary>
         /// Dex component put towards number of attacks
         /// </summary>
-        private static readonly int[] _adjDexAttackSpeedComponent =
+        private readonly int[] _adjDexAttackSpeedComponent =
         {
             0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16,
             18, 20, 20, 20
@@ -107,7 +107,7 @@ namespace AngbandOS
         /// <summary>
         /// Dex bonus for disarming traps
         /// </summary>
-        private static readonly int[] _adjDexDisarmBonus =
+        private readonly int[] _adjDexDisarmBonus =
         {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10,
             10, 10
@@ -116,7 +116,7 @@ namespace AngbandOS
         /// <summary>
         /// Dex-based chance to avoid theft
         /// </summary>
-        private static readonly int[] _adjDexTheftAvoidance =
+        private readonly int[] _adjDexTheftAvoidance =
         {
             0, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90,
             100, 100, 100, 100, 100, 100, 100, 100
@@ -125,7 +125,7 @@ namespace AngbandOS
         /// <summary>
         /// Number of half-spells per level
         /// </summary>
-        private static readonly int[] _adjHalfSpellsPerLevel =
+        private readonly int[] _adjHalfSpellsPerLevel =
                                 {
             0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5,
             6, 6
@@ -134,7 +134,7 @@ namespace AngbandOS
         /// <summary>
         /// Int bonus to disarm traps
         /// </summary>
-        private static readonly int[] _adjIntDisarmBonus =
+        private readonly int[] _adjIntDisarmBonus =
                 {
             0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 10, 11, 12, 13, 14, 15, 16,
             17, 18, 19, 19, 20
@@ -143,7 +143,7 @@ namespace AngbandOS
         /// <summary>
         /// Int bonus to using devices
         /// </summary>
-        private static readonly int[] _adjIntUseDeviceBonus =
+        private readonly int[] _adjIntUseDeviceBonus =
         {
             0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
             17, 18, 19, 20
@@ -152,8 +152,8 @@ namespace AngbandOS
         /// <summary>
         /// Bonus to mana per level, (stored as double actual bonus)
         /// </summary>
-        private static readonly int[] _adjManaBonus =
-                {
+        private readonly int[] _adjManaBonus =
+            {
             0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
             16, 17, 17, 18
         };
@@ -161,7 +161,7 @@ namespace AngbandOS
         /// <summary>
         /// Spell failure reduction
         /// </summary>
-        private static readonly int[] _adjSpellFailureReduction =
+        private readonly int[] _adjSpellFailureReduction =
                         {
             0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
             17, 18, 19, 20
@@ -170,7 +170,7 @@ namespace AngbandOS
         /// <summary>
         /// Minimum spell failure chance
         /// </summary>
-        private static readonly int[] _adjSpellMinFailChance =
+        private readonly int[] _adjSpellMinFailChance =
         {
             99, 99, 99, 99, 99, 50, 30, 20, 15, 12, 11, 10, 9, 8, 7, 6, 6, 5, 5, 5, 4, 4, 4, 4, 3, 3, 2, 2, 2, 2, 1, 1,
             1, 1, 1, 0, 0, 0
@@ -179,7 +179,7 @@ namespace AngbandOS
         /// <summary>
         /// Str bonus for attacks (stored as bonus)
         /// </summary>
-        private static readonly int[] _adjStrAttackBonus =
+        private readonly int[] _adjStrAttackBonus =
         {
             -3, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2,
@@ -190,7 +190,7 @@ namespace AngbandOS
         /// <summary>
         /// Str component put towards number of attacks
         /// </summary>
-        private static readonly int[] _adjStrAttackSpeedComponent =
+        private readonly int[] _adjStrAttackSpeedComponent =
         {
             3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,
             140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240
@@ -199,7 +199,7 @@ namespace AngbandOS
         /// <summary>
         /// Str-based carrying capacity (tenths of lb)
         /// </summary>
-        private static readonly int[] _adjStrCarryingCapacity =
+        private readonly int[] _adjStrCarryingCapacity =
         {
             5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 31, 31, 32, 32, 33, 33, 34,
             34, 35, 35, 36, 36, 37, 37, 38, 38, 39
@@ -208,7 +208,7 @@ namespace AngbandOS
         /// <summary>
         /// Str bonus to damage
         /// </summary>
-        private static readonly int[] _adjStrDamageBonus =
+        private readonly int[] _adjStrDamageBonus =
         {
             -2, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4,
@@ -219,7 +219,7 @@ namespace AngbandOS
         /// <summary>
         /// Str bonus to digging
         /// </summary>
-        private static readonly int[] _adjStrDiggingBonus =
+        private readonly int[] _adjStrDiggingBonus =
         {
             0, 0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
             80, 85, 90, 95, 100, 100, 100
@@ -228,7 +228,7 @@ namespace AngbandOS
         /// <summary>
         /// Str-based max weapon weight (tenths of lb)
         /// </summary>
-        private static readonly int[] _adjStrMaxWeaponWeight =
+        private readonly int[] _adjStrMaxWeaponWeight =
         {
             4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 30, 35, 40, 45, 50, 55, 60, 65, 70, 80, 80, 80,
             80, 80, 90, 90, 90, 90, 90, 100, 100, 100
@@ -237,7 +237,7 @@ namespace AngbandOS
         /// <summary>
         /// Wis bonus to saving throws
         /// </summary>
-        private static readonly int[] _adjWisSavingThrowBonus =
+        private readonly int[] _adjWisSavingThrowBonus =
         {
             0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
             16, 17, 18, 19

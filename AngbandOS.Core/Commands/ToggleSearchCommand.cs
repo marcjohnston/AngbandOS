@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ToggleSearchCommand : ICommand
     {
+        private ToggleSearchCommand() { } // This object is a singleton.
+
         public char Key => 'S';
 
         public int? Repeat => 0;

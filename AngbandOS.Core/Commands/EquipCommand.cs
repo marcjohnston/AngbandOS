@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class EquipCommand : ICommand
     {
+        private EquipCommand() { } // This object is a singleton.
+
         public char Key => 'e';
 
         public int? Repeat => 0;

@@ -6,6 +6,8 @@
     [Serializable]
     internal class OpenCommand : ICommand
     {
+        private OpenCommand() { } // This object is a singleton.
+
         public char Key => 'o';
 
         public int? Repeat => 99;

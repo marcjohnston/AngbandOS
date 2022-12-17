@@ -3,6 +3,8 @@
     [Serializable]
     internal class WalkWithoutPickupCommand : ICommand
     {
+        private WalkWithoutPickupCommand() { } // This object is a singleton.
+
         public char Key => '-';
 
         public int? Repeat => null;
@@ -48,6 +50,8 @@
     [Serializable]
     internal class WalkAndPickupCommand : ICommand
     {
+        private WalkAndPickupCommand() { } // This object is a singleton.
+
         public char Key => ';';
 
         public int? Repeat => null;

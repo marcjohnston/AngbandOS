@@ -9,6 +9,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class LookCommand : ICommand
     {
+        private LookCommand() { } // This object is a singleton.
+
         public char Key => 'l';
 
         public int? Repeat => 0;

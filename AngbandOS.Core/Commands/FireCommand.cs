@@ -13,6 +13,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class FireCommand : ICommand
     {
+        private FireCommand() { } // This object is a singleton.
+
         public char Key => 'f';
 
         public int? Repeat => 0;

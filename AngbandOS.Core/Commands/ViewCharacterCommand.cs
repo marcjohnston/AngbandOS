@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ViewCharacterCommand : ICommand
     {
+        private ViewCharacterCommand() { } // This object is a singleton.
+
         public char Key => 'C';
 
         public int? Repeat => 0;

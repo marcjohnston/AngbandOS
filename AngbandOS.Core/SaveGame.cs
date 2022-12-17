@@ -33,6 +33,8 @@ namespace AngbandOS
     [Serializable]
     internal class SaveGame
     {
+        public SingletonRepository SingletonRepository = new SingletonRepository();
+
         /// <summary>
         /// Maximum amount of health that can be drained from an opponent in one turn
         /// </summary>
@@ -243,6 +245,8 @@ namespace AngbandOS
         /// </summary>
         public SaveGame()
         {
+            ICommand throwCommand = SingletonRepository.GameCommands.Get<ThrowCommand>(); // TODO: TEST RETRIEVAL OF A SINGLETON ... DELETE
+
             LoadAllTypes();
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
@@ -6800,7 +6804,7 @@ namespace AngbandOS
             char c = CurrentCommand;
 
             // Process commands
-            foreach (ICommand command in ObjectRepository.GameCommands)
+            foreach (ICommand command in SingletonRepository.GameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.

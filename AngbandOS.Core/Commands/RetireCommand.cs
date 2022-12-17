@@ -6,6 +6,8 @@
     [Serializable]
     internal class RetireCommand : ICommand
     {
+        private RetireCommand() { } // This object is a singleton.
+
         public char Key => 'Q';
 
         public int? Repeat => 0;

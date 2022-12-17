@@ -16,6 +16,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ActivateCommand : ICommand
     {
+        private ActivateCommand() { } // This object is a singleton.
+
         public char Key => 'A';
 
         public int? Repeat => 0;

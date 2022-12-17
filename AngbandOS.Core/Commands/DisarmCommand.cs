@@ -6,6 +6,8 @@
     [Serializable]
     internal class DisarmCommand : ICommand
     {
+        private DisarmCommand() { } // This object is a singleton.
+
         public char Key => 'D';
 
         public int? Repeat => 99;

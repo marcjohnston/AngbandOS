@@ -8,6 +8,8 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class MessagesCommand : ICommand
     {
+        private MessagesCommand() { } // This object is a singleton.
+
         public char Key => 'P';
 
         public int? Repeat => 0;
