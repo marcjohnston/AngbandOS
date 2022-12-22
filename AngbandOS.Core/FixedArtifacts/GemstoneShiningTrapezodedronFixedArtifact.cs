@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GemstoneShiningTrapezodedronFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>();
+    }
+
     // Shining Trapezohedron lights the entire level and recalls us, but drains
     // health to do so
     public void ActivateItem(SaveGame saveGame, Item item)
@@ -26,7 +32,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : BaseFixedArtifact, IA
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(20) + 20;
     }
     public string DescribeActivationEffect() => "clairvoyance and recall, draining you";
-    public override ItemClass BaseItemCategory => new LightGemstone();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '*';
     public override Colour Colour => Colour.Red;

@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TwoHandedSwordTwilightFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new SwordTwoHandedSword();
+    private readonly ItemClass _baseItemCategory;
+    private TwoHandedSwordTwilightFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordTwoHandedSword>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

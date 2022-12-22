@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class EquipCommand : ICommand
     {
-        private EquipCommand() { } // This object is a singleton.
+        private EquipCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'e';
 

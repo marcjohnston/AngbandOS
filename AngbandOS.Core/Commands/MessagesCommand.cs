@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class MessagesCommand : ICommand
     {
-        private MessagesCommand() { } // This object is a singleton.
+        private MessagesCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'P';
 

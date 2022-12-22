@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class FullPlateArmourOfTheGodsFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new HardArmorFullPlateArmour();
+    private readonly ItemClass _baseItemCategory;
+    private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorFullPlateArmour>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightWhite;

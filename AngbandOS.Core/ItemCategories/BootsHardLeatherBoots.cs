@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class BootsHardLeatherBoots : BootsItemClass
     {
+        private BootsHardLeatherBoots(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => ']';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Pair of Hard Leather Boots";

@@ -6,7 +6,7 @@
     [Serializable]
     internal class TunnelCommand : ICommand
     {
-        private TunnelCommand() { } // This object is a singleton.
+        private TunnelCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'T';
 

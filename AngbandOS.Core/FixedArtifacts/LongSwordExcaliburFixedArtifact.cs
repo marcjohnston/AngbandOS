@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordExcaliburFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private LongSwordExcaliburFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+    }
+
     // Excalibur shoots a frost ball
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class LongSwordExcaliburFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "frost ball (100) every 300 turns";
-    public override ItemClass BaseItemCategory => new SwordLongSword();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

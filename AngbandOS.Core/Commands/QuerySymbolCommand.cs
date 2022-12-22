@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class QuerySymbolCommand : ICommand
     {
-        private QuerySymbolCommand() { } // This object is a singleton.
+        private QuerySymbolCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => '/';
 

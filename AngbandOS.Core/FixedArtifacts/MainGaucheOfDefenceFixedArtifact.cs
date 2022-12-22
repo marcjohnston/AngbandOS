@@ -10,7 +10,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MainGaucheOfDefenceFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new SwordMainGauche();
+    private readonly ItemClass _baseItemCategory;
+    private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordMainGauche>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {

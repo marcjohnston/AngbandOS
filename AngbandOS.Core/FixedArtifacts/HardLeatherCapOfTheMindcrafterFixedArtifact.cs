@@ -9,12 +9,18 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : BaseFixedArtifact
 {
+    private readonly ItemClass _baseItemCategory;
+    private HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmHardLeatherCap>();
+    }
+
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new HelmHardLeatherCap();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.Brown;

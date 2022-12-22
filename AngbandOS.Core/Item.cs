@@ -562,7 +562,7 @@ namespace AngbandOS
                 }
                 else if (FixedArtifactIndex != 0)
                 {
-                    FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+                    FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
                     basenm += ' ';
                     basenm += aPtr.Name;
                 }
@@ -1039,7 +1039,7 @@ namespace AngbandOS
             // Now merge the characteristics from the fixed artifact, if there is one.
             if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
                 Characteristics.Merge(aPtr.FixedArtifactItemCharacteristics);
             }
 
@@ -1568,75 +1568,75 @@ namespace AngbandOS
             switch (i)
             {
                 case 0:
-                    kPtr = new GoldCopper();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldCopper>();
                     break;
 
                 case 1:
-                    kPtr = new GoldCopper1();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldCopper1>();
                     break;
 
                 case 2:
-                    kPtr = new GoldCopper2();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldCopper2>();
                     break;
 
                 case 3:
-                    kPtr = new GoldSilver();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldSilver>();
                     break;
 
                 case 4:
-                    kPtr = new GoldSilver1();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldSilver1>();
                     break;
 
                 case 5:
-                    kPtr = new GoldSilver2();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldSilver2>();
                     break;
 
                 case 6:
-                    kPtr = new GoldGarnets();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldGarnets>();
                     break;
 
                 case 7:
-                    kPtr = new GoldGarnets1();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldGarnets1>();
                     break;
 
                 case 8:
-                    kPtr = new GoldGold();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldGold>();
                     break;
 
                 case 9:
-                    kPtr = new GoldGold1();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldGold1>();
                     break;
 
                 case 10:
-                    kPtr = new GoldGold2();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldGold2>();
                     break;
 
                 case 11:
-                    kPtr = new GoldOpals();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldOpals>();
                     break;
 
                 case 12:
-                    kPtr = new GoldSapphires();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldSapphires>();
                     break;
 
                 case 13:
-                    kPtr = new GoldRubies();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldRubies>();
                     break;
 
                 case 14:
-                    kPtr = new GoldDiamonds();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldDiamonds>();
                     break;
 
                 case 15:
-                    kPtr = new GoldEmeralds();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldEmeralds>();
                     break;
 
                 case 16:
-                    kPtr = new GoldMithril();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldMithril>();
                     break;
 
                 case 17:
-                    kPtr = new GoldAdamantite();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldAdamantite>();
                     break;
             }
             if (kPtr == null)
@@ -1676,7 +1676,7 @@ namespace AngbandOS
             }
             else if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
                 if (aPtr.Cost == 0)
                 {
                     return 0;
@@ -1875,7 +1875,7 @@ namespace AngbandOS
             }
             if (FixedArtifactIndex != 0)
             {
-                FixedArtifact aPtr = SaveGame.FixedArtifacts[FixedArtifactIndex];
+                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
                 aPtr.CurNum = 1;
                 TypeSpecificValue = aPtr.Pval;
                 BaseArmourClass = aPtr.Ac;
@@ -2493,7 +2493,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (aPtr.HasOwnType)
@@ -2936,7 +2936,7 @@ namespace AngbandOS
 
         private bool MakeFixedArtifact()
         {
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 if (!aPtr.HasOwnType)
@@ -2989,7 +2989,7 @@ namespace AngbandOS
             AllocationEntry[] table = SaveGame.AllocKindTable;
             for (int i = 0; i < SaveGame.AllocKindSize; i++)
             {
-                if (SaveGame.ItemTypes[table[i].Index].KindIsGood)
+                if (SaveGame.SingletonRepository.ItemCategories[table[i].Index].KindIsGood)
                 {
                     table[i].FilteredProbabiity = table[i].BaseProbability;
                 }

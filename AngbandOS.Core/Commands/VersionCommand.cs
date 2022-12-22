@@ -9,7 +9,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class VersionCommand : ICommand
     {
-        private VersionCommand() { } // This object is a singleton.
+        private VersionCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'V';
 

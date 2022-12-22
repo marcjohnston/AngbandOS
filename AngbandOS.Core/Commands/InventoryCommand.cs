@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class InventoryCommand : ICommand
     {
-        private InventoryCommand() { } // This object is a singleton.
+        private InventoryCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'i';
 

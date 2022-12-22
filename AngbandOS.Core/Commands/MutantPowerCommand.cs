@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class MutantPowerCommand : ICommand
     {
-        private MutantPowerCommand() { } // This object is a singleton.
+        private MutantPowerCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'p';
 

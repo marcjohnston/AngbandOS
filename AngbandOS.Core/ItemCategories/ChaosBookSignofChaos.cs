@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ChaosBookSignofChaos : ChaosBookItemClass
     {
+        private ChaosBookSignofChaos(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "[Sign of Chaos]";

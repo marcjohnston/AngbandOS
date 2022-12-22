@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SpearGungnirFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SpearGungnirFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
+    }
+
     // Grungnir shoots a lightning ball
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class SpearGungnirFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect() => "lightning ball (100) every 500 turns";
-    public override ItemClass BaseItemCategory => new PolearmSpear();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

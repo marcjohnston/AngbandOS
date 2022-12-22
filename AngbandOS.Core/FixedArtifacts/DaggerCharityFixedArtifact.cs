@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerCharityFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private DaggerCharityFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+    }
+
     // Charity shoots a lightning bolt
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -27,7 +33,7 @@ internal class DaggerCharityFixedArtifact : BaseFixedArtifact, IActivatible
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
-    public override ItemClass BaseItemCategory => new SwordDagger();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GoldenCrownOfTheSunFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CrownGolden>();
+    }
+
     // Sun Crown heals
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -28,7 +34,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : BaseFixedArtifact, IActivatibl
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new CrownGolden();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.Yellow;

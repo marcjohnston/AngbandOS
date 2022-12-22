@@ -22,7 +22,6 @@ namespace AngbandOS.Commands
         public static Dictionary<string, Vault> Vaults = new Dictionary<string, Vault>();
         public static Dictionary<string, FloorTileType> FloorTileTypes = new Dictionary<string, FloorTileType>();
         public static Dictionary<string, Base2RareItemType> RareItemTypes = new Dictionary<string, Base2RareItemType>();
-        public static Dictionary<string, BaseFixedArtifact> FixedArtifacts = new Dictionary<string, BaseFixedArtifact>();
 
         static ObjectRepository()
         {
@@ -132,13 +131,6 @@ namespace AngbandOS.Commands
                 {
                     Base2RareItemType rareItemType = (Base2RareItemType)Activator.CreateInstance(type);
                     RareItemTypes.Add(rareItemType.Name, rareItemType);
-                }
-
-                // Load Fixed Artifacts.
-                if (!type.IsAbstract && typeof(BaseFixedArtifact).IsAssignableFrom(type))
-                {
-                    BaseFixedArtifact fixedArtifact = (BaseFixedArtifact)Activator.CreateInstance(type);
-                    FixedArtifacts.Add(fixedArtifact.Name, fixedArtifact);
                 }
             }
         }

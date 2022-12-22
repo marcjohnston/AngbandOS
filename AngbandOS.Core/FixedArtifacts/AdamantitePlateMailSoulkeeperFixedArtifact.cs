@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorAdamantitePlateMail>();
+    }
+
     // Soulkeeper heals you a lot
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -18,7 +24,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : BaseFixedArtifact, I
         item.RechargeTimeLeft = 888;
     }
     public string DescribeActivationEffect() => "heal (1000) every 888 turns";
-    public override ItemClass BaseItemCategory => new HardArmorAdamantitePlateMail();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightGreen;

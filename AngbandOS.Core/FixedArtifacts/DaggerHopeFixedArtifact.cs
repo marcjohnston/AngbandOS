@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerHopeFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private DaggerHopeFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+    }
+
     // Hope shoots a frost bolt
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -27,7 +33,7 @@ internal class DaggerHopeFixedArtifact : BaseFixedArtifact, IActivatible
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new SwordDagger();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

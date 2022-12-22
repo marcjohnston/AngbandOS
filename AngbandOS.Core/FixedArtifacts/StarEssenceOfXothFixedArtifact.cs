@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class StarEssenceOfXothFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private StarEssenceOfXothFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightStarEssenceElendil>();
+    }
+
     // Star essence of Xoth lights and maps the area
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -17,7 +23,7 @@ internal class StarEssenceOfXothFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
     }
     public string DescribeActivationEffect() => "magic mapping and light every 50+d50 turns";
-    public override ItemClass BaseItemCategory => new LightStarEssenceElendil();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '*';
     public override Colour Colour => Colour.Yellow;

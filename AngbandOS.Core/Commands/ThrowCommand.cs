@@ -12,7 +12,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ThrowCommand : ICommand
     {
-        private ThrowCommand() { } // This object is a singleton.
+        private ThrowCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'v';
 

@@ -1,8 +1,9 @@
 ﻿namespace AngbandOS.Commands
 {
+    [Serializable]
     internal class CarriageReturnCommand : ICommand
     {
-        private CarriageReturnCommand() { } // This object is a singleton.
+        private CarriageReturnCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => '\r';
 

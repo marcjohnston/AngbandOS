@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerIcicleFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private DaggerIcicleFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+    }
+
     // Icicle shoots a cold ball
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class DaggerIcicleFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "frost ball (48) every 5+d5 turns";
-    public override ItemClass BaseItemCategory => new SwordDagger();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

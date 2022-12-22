@@ -11,6 +11,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordOfEverflameFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private LongSwordOfEverflameFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+    }
+
     // Everflame shoots a fire ball
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -36,7 +42,7 @@ internal class LongSwordOfEverflameFixedArtifact : BaseFixedArtifact, IActivatib
             item.BonusPowerSubType = ActivationPowerManager.GetRandom();
         }
     }
-    public override ItemClass BaseItemCategory => new SwordLongSword();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

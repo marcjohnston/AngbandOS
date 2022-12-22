@@ -99,9 +99,9 @@ namespace AngbandOS
             for (int k = 0; k < master.Length; k++)
             {
                 int kIdx = -1;
-                for (int i = 0; i < SaveGame.ItemTypes.Count; i++)
+                for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
                 {
-                    ItemClass itemType = SaveGame.ItemTypes[i];
+                    ItemClass itemType = SaveGame.SingletonRepository.ItemCategories[i];
                     if (itemType.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
@@ -1104,7 +1104,7 @@ namespace AngbandOS
             ItemClass itemType;
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
-            itemType = SaveGame.ItemTypes[i];
+            itemType = SaveGame.SingletonRepository.ItemCategories[i];
             Item qPtr = new Item(SaveGame);
             qPtr.AssignItemType(itemType);
             qPtr.ApplyMagic(level, false, false, false);

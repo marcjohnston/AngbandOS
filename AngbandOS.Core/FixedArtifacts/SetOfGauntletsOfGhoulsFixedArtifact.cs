@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsOfGhoulsFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+    }
+
     // Ghouls shoot cold bolts
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : BaseFixedArtifact, IActivat
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";
-    public override ItemClass BaseItemCategory => new GlovesSetOfGauntlets();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

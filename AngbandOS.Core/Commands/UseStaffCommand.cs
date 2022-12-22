@@ -12,7 +12,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class UseStaffCommand : ICommand
     {
-        private UseStaffCommand() { } // This object is a singleton.
+        private UseStaffCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'u';
 

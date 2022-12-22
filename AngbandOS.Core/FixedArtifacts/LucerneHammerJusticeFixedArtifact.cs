@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TheLucerneHammerJusticeFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedLucerneHammer>();
+    }
+
     // Justice drains life
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -26,7 +32,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : BaseFixedArtifact, IActiva
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new HaftedLucerneHammer();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBlue;

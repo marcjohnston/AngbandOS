@@ -6,7 +6,7 @@
     [Serializable]
     internal class BashCommand : ICommand
     {
-        private BashCommand() { } // This object is a singleton.
+        private BashCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'B';
 

@@ -6,6 +6,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandLight : WandItemClass
     {
+        private WandLight(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '-';
         public override string Name => "Light";
 

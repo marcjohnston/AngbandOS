@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class DestroyCommand : ICommand
     {
-        private DestroyCommand() { } // This object is a singleton.
+        private DestroyCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'k';
 

@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffOfAtalFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+    }
+
     // Atal does full identify
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -24,7 +30,7 @@ internal class QuarterstaffOfAtalFixedArtifact : BaseFixedArtifact, IActivatible
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";
-    public override ItemClass BaseItemCategory => new HaftedQuarterstaff();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBrown;

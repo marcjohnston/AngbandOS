@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ViewMapCommand : ICommand
     {
-        private ViewMapCommand() { } // This object is a singleton.
+        private ViewMapCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'M';
 

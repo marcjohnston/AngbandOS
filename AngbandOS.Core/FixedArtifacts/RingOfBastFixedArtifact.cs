@@ -7,6 +7,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfBastFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private RingOfBastFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingTulkas>();
+    }
+
     // Ring of Bast hastes you
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -22,7 +28,7 @@ internal class RingOfBastFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(150) + 150;
     }
     public string DescribeActivationEffect() => "haste self (75+d75 turns) every 150+d150 turns";
-    public override ItemClass BaseItemCategory => new RingTulkas();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '=';
     public override string Name => "The Ring of Bast";

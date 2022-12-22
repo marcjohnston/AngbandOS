@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronHelmSkullkeeperFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
+    }
+
     // Skull Keeper detects everything
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -17,7 +23,7 @@ internal class IronHelmSkullkeeperFixedArtifact : BaseFixedArtifact, IActivatibl
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
     }
     public string DescribeActivationEffect() => "detection every 55+d55 turns";
-    public override ItemClass BaseItemCategory => new HelmIronHelm();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

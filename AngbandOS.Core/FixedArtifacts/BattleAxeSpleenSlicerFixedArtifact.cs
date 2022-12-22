@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BattleAxeSpleenSlicerFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBattleAxe>();
+    }
+
     // Spleens Slicer heals you
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -17,7 +23,7 @@ internal class BattleAxeSpleenSlicerFixedArtifact : BaseFixedArtifact, IActivati
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
     }
     public string DescribeActivationEffect() => "cure wounds (4d7) every 3+d3 turns";
-    public override ItemClass BaseItemCategory => new PolearmBattleAxe();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

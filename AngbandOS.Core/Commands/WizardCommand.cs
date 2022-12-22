@@ -10,7 +10,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class WizardCommand : ICommand
     {
-        private WizardCommand() { } // This object is a singleton.
+        private WizardCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'W';
 
@@ -485,7 +485,7 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizLearn(SaveGame saveGame)
         {
-            foreach (ItemClass kPtr in saveGame.ItemTypes)
+            foreach (ItemClass kPtr in saveGame.SingletonRepository.ItemCategories)
             {
                 if (kPtr.Level <= saveGame.CommandArgument)
                 {
@@ -653,7 +653,7 @@ namespace AngbandOS.Commands
                 return;
             }
             Item qPtr = new Item(saveGame);
-            qPtr.AssignItemType(saveGame.ItemTypes[kIdx]);
+            qPtr.AssignItemType(saveGame.SingletonRepository.ItemCategories[kIdx]);
             qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
             saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
             saveGame.MsgPrint("Allocated.");
@@ -701,9 +701,9 @@ namespace AngbandOS.Commands
             const int maxLetters = 26;
             const int maxNumbers = 10;
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-            for (num = 0, i = 1; num < maxCount && i < saveGame.ItemTypes.Count; i++)
+            for (num = 0, i = 1; num < maxCount && i < saveGame.SingletonRepository.ItemCategories.Count; i++)
             {
-                ItemClass kPtr = saveGame.ItemTypes[i];
+                ItemClass kPtr = saveGame.SingletonRepository.ItemCategories[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);
@@ -742,11 +742,11 @@ namespace AngbandOS.Commands
 
         private void WizCreateNamedArt(SaveGame saveGame, FixedArtifactId aIdx)
         {
-            if (aIdx == FixedArtifactId.None || (int)aIdx >= saveGame.FixedArtifacts.Count)
+            if (aIdx == FixedArtifactId.None || (int)aIdx >= saveGame.SingletonRepository.FixedArtifacts.Count)
             {
                 return;
             }
-            FixedArtifact aPtr = saveGame.FixedArtifacts[aIdx];
+            FixedArtifact aPtr = saveGame.SingletonRepository.FixedArtifacts[aIdx];
             Item qPtr = new Item(saveGame);
             if (string.IsNullOrEmpty(aPtr.Name))
             {
@@ -754,7 +754,7 @@ namespace AngbandOS.Commands
             }
             ItemClass i = aPtr.BaseItemCategory;
             qPtr.AssignItemType(i);
-            qPtr.FixedArtifact = saveGame.FixedArtifacts[aIdx];
+            qPtr.FixedArtifact = saveGame.SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
             qPtr.BaseArmourClass = aPtr.Ac;
             qPtr.DamageDice = aPtr.Dd;
@@ -1008,7 +1008,7 @@ namespace AngbandOS.Commands
             const string q = "Rolls: {0}, Matches: {1}, Better: {2}, Worse: {3}, Other: {4}";
             if (oPtr.IsFixedArtifact())
             {
-                saveGame.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
+                saveGame.SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
             }
             while (true)
             {
@@ -1067,7 +1067,7 @@ namespace AngbandOS.Commands
                     qPtr.MakeObject(good, great, false);
                     if (qPtr.IsFixedArtifact())
                     {
-                        saveGame.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                        saveGame.SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
                     }
                     if (oPtr.Category != qPtr.Category)
                     {
@@ -1105,7 +1105,7 @@ namespace AngbandOS.Commands
             }
             if (oPtr.IsFixedArtifact())
             {
-                saveGame.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
+                saveGame.SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
             }
         }
 

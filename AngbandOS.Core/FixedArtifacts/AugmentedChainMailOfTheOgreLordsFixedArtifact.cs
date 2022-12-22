@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletBrilliance>();
+    }
+
     // Ogre Lords destroys doors
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -22,7 +28,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : BaseFixedArtifact
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new AmuletBrilliance();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

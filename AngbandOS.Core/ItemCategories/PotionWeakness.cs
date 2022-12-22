@@ -6,6 +6,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionWeakness : PotionItemClass
     {
+        private PotionWeakness(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '!';
         public override string Name => "Weakness";
 

@@ -13,7 +13,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class ReadScrollCommand : ICommand
     {
-        private ReadScrollCommand() { } // This object is a singleton.
+        private ReadScrollCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'r';
 

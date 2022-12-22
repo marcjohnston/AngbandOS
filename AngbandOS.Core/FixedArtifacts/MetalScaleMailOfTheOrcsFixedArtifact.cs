@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MetalScaleMailOfTheOrcsFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMetalScaleMail>();
+    }
+
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
@@ -24,7 +30,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : BaseFixedArtifact, IActiva
     }
     public string DescribeActivationEffect() => "carnage every 500 turns";
 
-    public override ItemClass BaseItemCategory => new HardArmorMetalScaleMail();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;

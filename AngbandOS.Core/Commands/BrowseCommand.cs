@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class BrowseCommand : ICommand
     {
-        private BrowseCommand() { } // This object is a singleton.
+        private BrowseCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'b';
 

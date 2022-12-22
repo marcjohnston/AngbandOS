@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LightCrossbowOfDeathFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BowLightCrossbow>();
+    }
+
     // Death brands your bolts
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -31,7 +37,7 @@ internal class LightCrossbowOfDeathFixedArtifact : BaseFixedArtifact, IActivatib
         }
     }
     public string DescribeActivationEffect() => "fire branding of bolts every 999 turns";
-    public override ItemClass BaseItemCategory => new BowLightCrossbow();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '}';
     public override Colour Colour => Colour.Grey;

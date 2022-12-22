@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MaceThunderFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private MaceThunderFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMace>();
+    }
+
     // Thunder does haste
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -23,7 +29,7 @@ internal class MaceThunderFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
     }
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 100+d100 turns";
-    public override ItemClass BaseItemCategory => new HaftedMace();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

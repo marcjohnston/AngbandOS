@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class CommandListCommand : ICommand
     {
-        private CommandListCommand() { } // This object is a singleton.
+        private CommandListCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => '?';
 

@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodColdBalls : RodItemClass
     {
+        private RodColdBalls(SaveGame saveGame) { } // This object is a singleton.
+
         public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Cold Balls";

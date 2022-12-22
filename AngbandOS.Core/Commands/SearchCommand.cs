@@ -6,7 +6,7 @@
     [Serializable]
     internal class SearchCommand : ICommand
     {
-        private SearchCommand() { } // This object is a singleton.
+        private SearchCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 's';
 

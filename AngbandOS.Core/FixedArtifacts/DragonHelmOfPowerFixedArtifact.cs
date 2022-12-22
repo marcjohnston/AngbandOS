@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DragonHelmOfPowerFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private DragonHelmOfPowerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmDragonHelm>();
+    }
+
     // Dragon Helm and Terror Mask cause fear
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -15,7 +21,7 @@ internal class DragonHelmOfPowerFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
     }
     public string DescribeActivationEffect() => "rays of fear in every direction";
-    public override ItemClass BaseItemCategory => new HelmDragonHelm();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightGreen;

@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollRecharging : ScrollItemClass
     {
+        private ScrollRecharging(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override string Name => "Recharging";
 

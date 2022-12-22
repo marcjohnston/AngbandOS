@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfLeatherGlovesCalfskinFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new GlovesSetOfLeatherGloves();
+    private readonly ItemClass _baseItemCategory;
+    private SetOfLeatherGlovesCalfskinFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfLeatherGloves>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

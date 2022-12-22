@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollIdentify : ScrollItemClass
     {
+        private ScrollIdentify(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override string Name => "Identify";
 

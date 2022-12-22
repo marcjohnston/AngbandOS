@@ -1,8 +1,9 @@
 ﻿namespace AngbandOS.Commands
 {
+    [Serializable]
     internal class SpaceCommand : ICommand
     {
-        private SpaceCommand() { } // This object is a singleton.
+        private SpaceCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => ' ';
 

@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SpearOfDestinyFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SpearOfDestinyFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
+    }
+
     // Destiny does rock to mud
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -20,7 +26,7 @@ internal class SpearOfDestinyFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 5;
     }
     public string DescribeActivationEffect() => "stone to mud every 5 turns";
-    public override ItemClass BaseItemCategory => new PolearmSpear();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

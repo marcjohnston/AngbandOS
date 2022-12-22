@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TridentOfWrathFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new PolearmTrident();
+    private readonly ItemClass _baseItemCategory;
+    private TridentOfWrathFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmTrident>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Yellow;

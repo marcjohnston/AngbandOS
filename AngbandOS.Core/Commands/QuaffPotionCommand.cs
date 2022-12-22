@@ -13,7 +13,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class QuaffPotionCommand : ICommand
     {
-        private QuaffPotionCommand() { } // This object is a singleton.
+        private QuaffPotionCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'q';
 

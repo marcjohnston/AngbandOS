@@ -3,7 +3,7 @@
     [Serializable]
     internal class WalkWithoutPickupCommand : ICommand
     {
-        private WalkWithoutPickupCommand() { } // This object is a singleton.
+        private WalkWithoutPickupCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => '-';
 
@@ -50,7 +50,7 @@
     [Serializable]
     internal class WalkAndPickupCommand : ICommand
     {
-        private WalkAndPickupCommand() { } // This object is a singleton.
+        private WalkAndPickupCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => ';';
 

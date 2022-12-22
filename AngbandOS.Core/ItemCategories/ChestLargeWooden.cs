@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ChestLargeWooden : ChestItemClass
     {
+        private ChestLargeWooden(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '~';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Large wooden chest";

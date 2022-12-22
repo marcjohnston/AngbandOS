@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsWhiteSparkFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+    }
+
     // White Spark shoot lightning bolts
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : BaseFixedArtifact, IActiv
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
-    public override ItemClass BaseItemCategory => new GlovesSetOfGauntlets();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

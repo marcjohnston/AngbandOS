@@ -248,12 +248,12 @@ namespace AngbandOS
             }
             WeightCarried = 0;
             Inventory = new Inventory(SaveGame, this);
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.FixedArtifacts)
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;
             }
-            foreach (ItemClass kPtr in SaveGame.ItemTypes)
+            foreach (ItemClass kPtr in SaveGame.SingletonRepository.ItemCategories)
             {
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;

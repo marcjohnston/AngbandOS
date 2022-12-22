@@ -9,7 +9,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class LookCommand : ICommand
     {
-        private LookCommand() { } // This object is a singleton.
+        private LookCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'l';
 

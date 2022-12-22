@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffDetectInvisible : StaffItemClass
     {
+        private StaffDetectInvisible(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '_';
         public override string Name => "Detect Invisible";
 

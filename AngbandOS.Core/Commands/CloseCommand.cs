@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class CloseCommand : ICommand
     {
-        private CloseCommand() { } // This object is a singleton.
+        private CloseCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'c';
 

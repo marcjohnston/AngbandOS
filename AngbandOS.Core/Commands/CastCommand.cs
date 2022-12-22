@@ -7,9 +7,10 @@ using AngbandOS.Spells;
 
 namespace AngbandOS.Commands
 {
+    [Serializable]
     internal class CastCommand : ICommand
     {
-        private CastCommand() { } // This object is a singleton.
+        private CastCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'm';
 

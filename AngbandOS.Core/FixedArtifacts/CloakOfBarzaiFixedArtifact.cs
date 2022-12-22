@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CloakOfBarzaiFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private CloakOfBarzaiFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+    }
+
     // Cloak of Barzai gives resistances
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -20,7 +26,7 @@ internal class CloakOfBarzaiFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 111;
     }
     public string DescribeActivationEffect() => "resistance (20+d20 turns) every 111 turns";
-    public override ItemClass BaseItemCategory => new Cloak();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '(';
     public override Colour Colour => Colour.Green;

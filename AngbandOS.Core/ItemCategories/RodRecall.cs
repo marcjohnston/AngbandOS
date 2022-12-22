@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodRecall : RodItemClass
     {
+        private RodRecall(SaveGame saveGame) { } // This object is a singleton.
+
         public override bool RequiresAiming => false;
         public override char Character => '-';
         public override string Name => "Recall";

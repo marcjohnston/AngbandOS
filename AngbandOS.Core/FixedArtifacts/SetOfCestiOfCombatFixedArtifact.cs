@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfCestiOfCombatFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfCesti>();
+    }
+
     // Cesti shoot arrows
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -27,7 +33,7 @@ internal class SetOfCestiOfCombatFixedArtifact : BaseFixedArtifact, IActivatible
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public string DescribeActivationEffect() => "a magical arrow (150) every 90+d90 turns";
-    public override ItemClass BaseItemCategory => new GlovesSetOfCesti();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightWhite;

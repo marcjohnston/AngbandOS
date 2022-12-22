@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordOfTheDawnFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private LongSwordOfTheDawnFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+    }
+
     // Dawn Sword summons a reaver
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -17,7 +23,7 @@ internal class LongSwordOfTheDawnFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
     }
     public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";
-    public override ItemClass BaseItemCategory => new SwordLongSword();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

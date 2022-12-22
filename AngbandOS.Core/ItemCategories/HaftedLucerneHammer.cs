@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HaftedLucerneHammer : HaftedItemClass
     {
+        private HaftedLucerneHammer(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '\\';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Lucerne Hammer";

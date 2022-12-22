@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class FoodSlimeMold : FoodItemClass
     {
+        private FoodSlimeMold(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => ',';
         public override Colour Colour => Colour.Green;
         public override string Name => "Slime Mold";
@@ -21,7 +23,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 5;
         public override bool Eat(SaveGame saveGame)
         {
-            PotionItemClass slimeMold = new PotionSlimeMoldJuice();
+            PotionItemClass slimeMold = (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSlimeMoldJuice>();
             slimeMold.Quaff(saveGame);
             return true;
         }

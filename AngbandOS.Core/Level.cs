@@ -559,7 +559,7 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"The {oName} disappear{p}.");
                 if (jPtr.FixedArtifactIndex != 0)
                 {
-                    SaveGame.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
+                    SaveGame.SingletonRepository.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
                 }
                 return;
             }
@@ -1228,7 +1228,7 @@ namespace AngbandOS
             {
                 if (qPtr.FixedArtifactIndex != 0)
                 {
-                    SaveGame.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                    SaveGame.SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
                 }
             }
         }
@@ -2246,8 +2246,8 @@ namespace AngbandOS
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].FlavorCharacter;
-            ap = SaveGame.ItemTypes[Program.Rng.DieRoll(SaveGame.ItemTypes.Count - 1)].FlavorColour;
+            cp = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorCharacter;
+            ap = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorColour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)

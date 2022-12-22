@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class StoreCommand : ICommand
     {
-        private StoreCommand() { } // This object is a singleton.
+        private StoreCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => '_';
 

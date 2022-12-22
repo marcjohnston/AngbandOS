@@ -7,6 +7,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AmuletOfLobonFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private AmuletOfLobonFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletCarlammas>();
+    }
+
     // Amulet of Lobon protects us from evil
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -16,7 +22,7 @@ internal class AmuletOfLobonFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "protection from evil every 225+d225 turns";
-    public override ItemClass BaseItemCategory => new AmuletCarlammas();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '"';
     public override string Name => "The Amulet of Lobon";

@@ -6,7 +6,7 @@
     [Serializable]
     internal class StayAndPickupCommand : ICommand
     {
-        private StayAndPickupCommand() { } // This object is a singleton.
+        private StayAndPickupCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => ',';
 
@@ -26,7 +26,7 @@
     [Serializable]
     internal class StayCommand : ICommand
     {
-        private StayCommand() { } // This object is a singleton.
+        private StayCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'g';
 

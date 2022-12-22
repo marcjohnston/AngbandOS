@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class WieldCommand : ICommand
     {
-        private WieldCommand() { } // This object is a singleton.
+        private WieldCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'w';
 

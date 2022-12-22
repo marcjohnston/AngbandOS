@@ -10,7 +10,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class WarHammerMjolnirFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new HaftedWarHammer();
+    private readonly ItemClass _baseItemCategory;
+    private WarHammerMjolnirFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedWarHammer>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {

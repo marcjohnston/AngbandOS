@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class AmuletOfTheMagi : AmuletItemClass
     {
+        private AmuletOfTheMagi(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '"';
         public override string Name => "the Magi";
 

@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffSpeed : StaffItemClass
     {
+        private StaffSpeed(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '_';
         public override string Name => "Speed";
 

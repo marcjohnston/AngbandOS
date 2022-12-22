@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TridentOfTheGnorriFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private TridentOfTheGnorriFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmTrident>();
+    }
+
     // Gnorri teleports monsters away
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -26,7 +32,7 @@ internal class TridentOfTheGnorriFixedArtifact : BaseFixedArtifact, IActivatible
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public string DescribeActivationEffect() => "teleport away every 150 turns";
-    public override ItemClass BaseItemCategory => new PolearmTrident();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Yellow;

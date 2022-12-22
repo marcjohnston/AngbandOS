@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CorporealBookYogicMastery : CorporealBookItemClass
     {
+        private CorporealBookYogicMastery(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "[Yogic Mastery]";

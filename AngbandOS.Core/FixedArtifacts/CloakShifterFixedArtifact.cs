@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CloakShifterFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private CloakShifterFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+    }
+
     // Shifter teleports you
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -16,7 +22,7 @@ internal class CloakShifterFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 45;
     }
     public string DescribeActivationEffect() => "teleport every 45 turns";
-    public override ItemClass BaseItemCategory => new Cloak();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '(';
     public override Colour Colour => Colour.Green;

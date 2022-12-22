@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollTeleportLevel : ScrollItemClass
     {
+        private ScrollTeleportLevel(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override string Name => "Teleport Level";
 

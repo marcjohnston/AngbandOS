@@ -70,11 +70,11 @@ namespace AngbandOS.Core.Races
             }
         }
 
-        public override ItemClass OutfitItem(ItemClass itemClass)
+        public override ItemClass OutfitItem(SaveGame saveGame, ItemClass itemClass)
         {
             if (itemClass is RingFearResistance)
             {
-                return new RingSustainStrength();
+                return saveGame.SingletonRepository.ItemCategories.Get<RingSustainStrength>();
             }
             return itemClass;
         }

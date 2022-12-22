@@ -9,12 +9,18 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SmallMetalShieldVitriolFixedArtifact : BaseFixedArtifact
 {
+    private readonly ItemClass _baseItemCategory;
+    private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldSmallMetalShield>();
+    }
+
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new ShieldSmallMetalShield();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ')';
     public override Colour Colour => Colour.Grey;

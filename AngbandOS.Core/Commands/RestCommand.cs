@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class RestCommand : ICommand
     {
-        private RestCommand() { } // This object is a singleton.
+        private RestCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'R';
 

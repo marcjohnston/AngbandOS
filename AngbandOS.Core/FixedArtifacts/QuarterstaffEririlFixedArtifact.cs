@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffEririlFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private QuarterstaffEririlFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+    }
+
     // Ereril does identify
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -19,7 +25,7 @@ internal class QuarterstaffEririlFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 10;
     }
     public string DescribeActivationEffect() => "identify every 10 turns";
-    public override ItemClass BaseItemCategory => new HaftedQuarterstaff();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBrown;

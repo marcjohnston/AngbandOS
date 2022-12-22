@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ShadowCloakOfNyogthaFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CloakShadow>();
+    }
+
     // Nyogtha restores experience
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -22,7 +28,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : BaseFixedArtifact, IActivatib
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => new CloakShadow();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '(';
     public override Colour Colour => Colour.Black;

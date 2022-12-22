@@ -99,8 +99,6 @@ namespace AngbandOS
         public const int HurtChance = 16;
 
         public ExPlayer ExPlayer;
-        public FixedArtifactArray FixedArtifacts;
-        public ItemTypeArray ItemTypes;
         public MonsterRaceArray MonsterRaces;
         public RareItemTypeArray RareItemTypes;
         public VaultTypeArray VaultTypes;
@@ -245,8 +243,7 @@ namespace AngbandOS
         /// </summary>
         public SaveGame()
         {
-            ICommand throwCommand = SingletonRepository.GameCommands.Get<ThrowCommand>(); // TODO: TEST RETRIEVAL OF A SINGLETON ... DELETE
-
+            SingletonRepository.Initialize(this);
             LoadAllTypes();
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
@@ -273,11 +270,9 @@ namespace AngbandOS
 
         private void PopulateNewProfile()
         {
-            FixedArtifacts = new FixedArtifactArray(this);
             MonsterRaces = new MonsterRaceArray(this);
             MonsterRaces.AddKnowledge();
             RareItemTypes = new RareItemTypeArray(this);
-            ItemTypes = new ItemTypeArray(this);
             VaultTypes = new VaultTypeArray(this);
         }
 
@@ -310,7 +305,7 @@ namespace AngbandOS
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemClass kPtr = ItemTypes[kIdx];
+                ItemClass kPtr = SingletonRepository.ItemCategories[kIdx];
                 if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
                 {
                     continue;
@@ -366,7 +361,7 @@ namespace AngbandOS
                     i = j;
                 }
             }
-            return ItemTypes[table[i].Index];
+            return SingletonRepository.ItemCategories[table[i].Index];
         }
 
         public void MessageBoxShow(string message)
@@ -417,7 +412,7 @@ namespace AngbandOS
 
         private void ResetStompability()
         {
-            foreach (ItemClass item in ItemTypes)
+            foreach (ItemClass item in SingletonRepository.ItemCategories)
             {
                 if (item.HasQuality)
                 {
@@ -1501,7 +1496,7 @@ namespace AngbandOS
 
         private void ApplyFlavourVisuals()
         {
-            foreach (ItemClass kPtr in ItemTypes)
+            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
             {
                 if (kPtr.HasFlavor)
                 {
@@ -2099,7 +2094,7 @@ namespace AngbandOS
                 }
             }
             Program.Rng.UseFixed = false;
-            foreach (ItemClass kPtr in ItemTypes)
+            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
             {
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
@@ -2120,9 +2115,9 @@ namespace AngbandOS
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
             AllocKindSize = 0;
-            for (i = 1; i < ItemTypes.Count; i++)
+            for (i = 1; i < SingletonRepository.ItemCategories.Count; i++)
             {
-                kPtr = ItemTypes[i];
+                kPtr = SingletonRepository.ItemCategories[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -2146,9 +2141,9 @@ namespace AngbandOS
                 AllocKindTable[k] = new AllocationEntry();
             }
             AllocationEntry[] table = AllocKindTable;
-            for (i = 1; i < ItemTypes.Count; i++)
+            for (i = 1; i < SingletonRepository.ItemCategories.Count; i++)
             {
-                kPtr = ItemTypes[i];
+                kPtr = SingletonRepository.ItemCategories[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -11821,7 +11816,7 @@ namespace AngbandOS
             MessageAdd("  ");
             MessageAdd(" ");
             _player.IsDead = false;
-            PlayerOutfit(this);
+            PlayerOutfit();
             return true;
         }
 
@@ -12586,32 +12581,32 @@ namespace AngbandOS
             return false;
         }
 
-        private void PlayerOutfit(SaveGame saveGame)
+        private void PlayerOutfit()
         {
-            Item item = new Item(saveGame);
+            Item item = new Item(this);
 
             if (_player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
-                item.AssignItemType(new ScrollSatisfyHunger());
+                item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>());
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
                 _player.Inventory.InvenCarry(item, false);
-                item = new Item(saveGame);
+                item = new Item(this);
             }
             else
             {
-                item.AssignItemType(new FoodRation());
+                item.AssignItemType(SingletonRepository.ItemCategories.Get<FoodRation>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 _player.Inventory.InvenCarry(item, false);
-                item = new Item(saveGame);
+                item = new Item(this);
             }
             if (_player.Race.OutfitsWithScrollsOfLight || _player.ProfessionIndex == CharacterClass.ChosenOne)
             {
-                item.AssignItemType(new ScrollLight());
+                item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollLight>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -12620,13 +12615,13 @@ namespace AngbandOS
             }
             else
             {
-                item.AssignItemType(new LightWoodenTorch());
+                item.AssignItemType(SingletonRepository.ItemCategories.Get<LightWoodenTorch>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 _player.Inventory.InvenCarry(item, false);
-                Item carried = new Item(saveGame, item) { Count = 1 };
+                Item carried = new Item(this, item) { Count = 1 };
                 _player.Inventory[InventorySlot.Lightsource] = carried;
                 _player.WeightCarried += carried.Weight;
             }
@@ -12634,99 +12629,99 @@ namespace AngbandOS
             ItemClass[][] _playerInit = new ItemClass[16][];
             _playerInit[CharacterClass.Warrior] = new ItemClass[]
             {
-                new RingFearResistance(),
-                new SwordBroadSword(),
-                new HardArmorChainMail()
+                SingletonRepository.ItemCategories.Get<RingFearResistance>(),
+                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+                SingletonRepository.ItemCategories.Get<HardArmorChainMail>()
             };
             _playerInit[CharacterClass.Mage] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordDagger(),
-                new DeathBookBlackPrayers()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordDagger>(),
+                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
             };
             _playerInit[CharacterClass.Priest] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new HaftedMace(),
-                new DeathBookBlackPrayers()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<HaftedMace>(),
+                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
             };
             _playerInit[CharacterClass.Rogue] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordDagger(),
-                new SoftArmorSoftLeatherArmour()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordDagger>(),
+                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
             _playerInit[CharacterClass.Ranger] = new ItemClass[]
             {
-                new NatureBookCallOfTheWild(),
-                new SwordBroadSword(),
-                new DeathBookBlackPrayers()
+                SingletonRepository.ItemCategories.Get<NatureBookCallOfTheWild>(),
+                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
             };
             _playerInit[CharacterClass.Paladin] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordBroadSword(),
-                new ScrollProtectionFromEvil()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+                SingletonRepository.ItemCategories.Get<ScrollProtectionFromEvil>()
             };
             _playerInit[CharacterClass.WarriorMage] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordShortSword(),
-                new DeathBookBlackPrayers()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordShortSword>(),
+                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
             };
             _playerInit[CharacterClass.Fanatic] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordBroadSword(),
-                new HardArmorMetalScaleMail()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+                SingletonRepository.ItemCategories.Get<HardArmorMetalScaleMail>()
             };
             _playerInit[CharacterClass.Monk] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new PotionHealing(),
-                new SoftArmorSoftLeatherArmour()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<PotionHealing>(),
+                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
             _playerInit[CharacterClass.Mindcrafter] = new ItemClass[]
             {
-                new SwordSmallSword(),
-                new PotionRestoreMana(),
-                new SoftArmorSoftLeatherArmour()
+                SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
+                SingletonRepository.ItemCategories.Get<PotionRestoreMana>(),
+                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
             _playerInit[CharacterClass.HighMage] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new SwordDagger(),
-                new RingSustainIntelligence()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<SwordDagger>(),
+                SingletonRepository.ItemCategories.Get<RingSustainIntelligence>()
             };
             _playerInit[CharacterClass.Druid] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new HaftedQuarterstaff(),
-                new RingSustainWisdom()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>(),
+                SingletonRepository.ItemCategories.Get<RingSustainWisdom>()
             };
             _playerInit[CharacterClass.Cultist] = new ItemClass[]
             {
-                new SorceryBookBeginnersHandbook(),
-                new RingSustainIntelligence(),
-                new DeathBookBlackPrayers()
+                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+                SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),
+                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
             };
             _playerInit[CharacterClass.Channeler] = new ItemClass[]
             {
-                new WandMagicMissile(),
-                new SwordDagger(),
-                new RingSustainCharisma()
+                SingletonRepository.ItemCategories.Get<WandMagicMissile>(),
+                SingletonRepository.ItemCategories.Get<SwordDagger>(),
+                SingletonRepository.ItemCategories.Get<RingSustainCharisma>()
             };
             _playerInit[CharacterClass.ChosenOne] = new ItemClass[]
             {
-                new SwordSmallSword(),
-                new PotionHealing(),
-                new SoftArmorSoftLeatherArmour()
+                SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
+                SingletonRepository.ItemCategories.Get<PotionHealing>(),
+                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
             _playerInit[CharacterClass.Mystic] = new ItemClass[]
             {
-                new RingSustainWisdom(),
-                new PotionHealing(),
-                new SoftArmorSoftLeatherArmour()
+                SingletonRepository.ItemCategories.Get<RingSustainWisdom>(),
+                SingletonRepository.ItemCategories.Get<PotionHealing>(),
+                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
 
             ItemClass[] startingItems = _playerInit[_player.ProfessionIndex];
@@ -12734,8 +12729,8 @@ namespace AngbandOS
             {
                 ItemClass itemClass = startingItems[i];
 
-                itemClass = _player.Race.OutfitItem(itemClass);
-                item = new Item(saveGame);
+                itemClass = _player.Race.OutfitItem(this, itemClass);
+                item = new Item(this);
                 item.AssignItemType(itemClass);
                 if (itemClass.CategoryEnum == ItemTypeEnum.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
                 {

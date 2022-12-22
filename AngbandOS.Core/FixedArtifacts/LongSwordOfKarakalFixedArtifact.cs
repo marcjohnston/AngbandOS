@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordOfKarakalFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private LongSwordOfKarakalFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+    }
+
     // Karakal teleports you randomly
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -48,7 +54,7 @@ internal class LongSwordOfKarakalFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 35;
     }
     public string DescribeActivationEffect() => "a getaway every 35 turns";
-    public override ItemClass BaseItemCategory => new SwordLongSword();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

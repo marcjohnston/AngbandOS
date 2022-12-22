@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CloakOfTheSwashbucklerFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+    }
+
     // Swashbuckler recharges items
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -22,7 +28,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : BaseFixedArtifact, IActivat
         item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
-    public override ItemClass BaseItemCategory => new Cloak();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '(';
     public override Colour Colour => Colour.Green;

@@ -8,7 +8,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class JournalCommand : ICommand
     {
-        private JournalCommand() { } // This object is a singleton.
+        private JournalCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'J';
 

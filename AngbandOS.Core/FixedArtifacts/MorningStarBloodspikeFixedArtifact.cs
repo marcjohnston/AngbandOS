@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MorningStarBloodspikeFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new HaftedMorningStar();
+    private readonly ItemClass _baseItemCategory;
+    private MorningStarBloodspikeFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMorningStar>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Black;

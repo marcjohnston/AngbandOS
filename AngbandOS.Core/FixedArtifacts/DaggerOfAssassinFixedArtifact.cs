@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerOfAssassinFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new SwordDagger();
+    private readonly ItemClass _baseItemCategory;
+    private DaggerOfAssassinFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

@@ -13,7 +13,7 @@ namespace AngbandOS.Commands
     [Serializable]
     internal class EatFoodCommand : ICommand
     {
-        private EatFoodCommand() { } // This object is a singleton.
+        private EatFoodCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'E';
 

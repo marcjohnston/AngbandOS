@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsIronfistFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SetOfGauntletsIronfistFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+    }
+
     // Iron Fist shoots fire bolts
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : BaseFixedArtifact, IActivat
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
-    public override ItemClass BaseItemCategory => new GlovesSetOfGauntlets();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

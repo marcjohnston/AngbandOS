@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfLeatherGlovesOfLightFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfLeatherGloves>();
+    }
+
     // Light shoots magic missiles
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -21,7 +27,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : BaseFixedArtifact, IActi
         item.RechargeTimeLeft = 2;
     }
     public string DescribeActivationEffect() => "magic missile (2d6) every 2 turns";
-    public override ItemClass BaseItemCategory => new GlovesSetOfLeatherGloves();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

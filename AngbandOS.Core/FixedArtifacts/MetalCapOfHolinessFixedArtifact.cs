@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MetalCapOfHolinessFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new HelmMetalCap();
+    private readonly ItemClass _baseItemCategory;
+    private MetalCapOfHolinessFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmMetalCap>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

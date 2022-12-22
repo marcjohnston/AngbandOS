@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorPowerDragonScaleMail>();
+    }
+
     // Bladeturner heals you and gives you timed resistances
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -31,7 +37,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : BaseFixedArtifact,
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";
-    public override ItemClass BaseItemCategory => new DragArmorPowerDragonScaleMail();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;

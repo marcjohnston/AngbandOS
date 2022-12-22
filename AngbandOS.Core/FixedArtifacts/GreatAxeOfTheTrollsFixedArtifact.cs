@@ -8,6 +8,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GreatAxeOfTheTrollsFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGreatAxe>();
+    }
+
     // Trolls does mass carnage
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -16,7 +22,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : BaseFixedArtifact, IActivatibl
         item.RechargeTimeLeft = 1000;
     }
     public string DescribeActivationEffect() => "mass carnage every 1000 turns";
-    public override ItemClass BaseItemCategory => new PolearmGreatAxe();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

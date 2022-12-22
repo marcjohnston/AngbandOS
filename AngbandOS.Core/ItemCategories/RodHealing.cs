@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodHealing : RodItemClass
     {
+        private RodHealing(SaveGame saveGame) { } // This object is a singleton.
+
         public override bool RequiresAiming => false;
         public override char Character => '-';
         public override string Name => "Healing";

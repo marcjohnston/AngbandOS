@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CrownGolden : CrownItemClass
     {
+        private CrownGolden(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => ']';
         public override Colour Colour => Colour.Gold;
         public override string Name => "Golden Crown";

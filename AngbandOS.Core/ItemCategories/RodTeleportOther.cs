@@ -5,6 +5,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodTeleportOther : RodItemClass
     {
+        private RodTeleportOther(SaveGame saveGame) { } // This object is a singleton.
+
         public override bool RequiresAiming => true;
         public override char Character => '-';
         public override string Name => "Teleport Other";

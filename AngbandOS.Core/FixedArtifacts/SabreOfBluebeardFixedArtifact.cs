@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SabreOfBluebeardFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new SwordSabre();
+    private readonly ItemClass _baseItemCategory;
+    private SabreOfBluebeardFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordSabre>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

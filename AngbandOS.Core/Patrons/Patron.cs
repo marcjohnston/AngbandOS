@@ -137,83 +137,83 @@ namespace AngbandOS.Patrons
                     {
                         case 1:
                         case 2:
-                            reward = new SwordDagger();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
                             break;
 
                         case 3:
                         case 4:
-                            reward = new SwordMainGauche();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordMainGauche>();
                             break;
 
                         case 5:
                         case 6:
-                            reward = new SwordRapier();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordRapier>();
                             break;
 
                         case 7:
                         case 8:
-                            reward = new SwordSmallSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordSmallSword>();
                             break;
 
                         case 9:
                         case 10:
-                            reward = new SwordShortSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>();
                             break;
 
                         case 11:
                         case 12:
                         case 13:
-                            reward = new SwordSabre();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordSabre>();
                             break;
 
                         case 14:
                         case 15:
                         case 16:
-                            reward = new SwordCutlass();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordCutlass>();
                             break;
 
                         case 17:
-                            reward = new SwordTulwar();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordTulwar>();
                             break;
 
                         case 18:
                         case 19:
                         case 20:
-                            reward = new SwordBroadSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>();
                             break;
 
                         case 21:
                         case 22:
                         case 23:
-                            reward = new SwordLongSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
                             break;
 
                         case 24:
                         case 25:
                         case 26:
-                            reward = new SwordScimitar();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordScimitar>();
                             break;
 
                         case 27:
-                            reward = new SwordKatana();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordKatana>();
                             break;
 
                         case 28:
                         case 29:
-                            reward = new SwordBastardSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBastardSword>();
                             break;
 
                         case 30:
                         case 31:
-                            reward = new SwordTwoHandedSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordTwoHandedSword>();
                             break;
 
                         case 32:
-                            reward = new SwordExecutionersSword();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordExecutionersSword>();
                             break;
 
                         default:
-                            reward = new SwordBladeofChaos();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeofChaos>();
                             break;
                     }
                     qPtr.AssignItemType(reward);

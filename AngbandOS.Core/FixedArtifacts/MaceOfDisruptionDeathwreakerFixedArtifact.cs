@@ -8,7 +8,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MaceOfDisruptionDeathwreakerFixedArtifact : BaseFixedArtifact
 {
-    public override ItemClass BaseItemCategory => new HaftedMace();
+    private readonly ItemClass _baseItemCategory;
+    private MaceOfDisruptionDeathwreakerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMace>();
+    }
+
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.Purple;

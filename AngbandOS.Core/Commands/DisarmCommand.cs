@@ -6,7 +6,7 @@
     [Serializable]
     internal class DisarmCommand : ICommand
     {
-        private DisarmCommand() { } // This object is a singleton.
+        private DisarmCommand(SaveGame saveGame) { } // This object is a singleton.
 
         public char Key => 'D';
 

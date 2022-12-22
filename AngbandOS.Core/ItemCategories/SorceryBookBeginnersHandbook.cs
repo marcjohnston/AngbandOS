@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SorceryBookBeginnersHandbook : SorceryBookItemClass
     {
+        private SorceryBookBeginnersHandbook(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "[Beginner's Handbook]";

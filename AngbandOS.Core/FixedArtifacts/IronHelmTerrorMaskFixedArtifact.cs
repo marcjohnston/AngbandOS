@@ -10,6 +10,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronHelmTerrorMaskFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
+    }
+
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         if (saveGame.Player.ProfessionIndex == CharacterClass.Warrior)
@@ -38,7 +44,7 @@ internal class IronHelmTerrorMaskFixedArtifact : BaseFixedArtifact, IActivatible
         item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
     }
     public string DescribeActivationEffect() => "rays of fear in every direction";
-    public override ItemClass BaseItemCategory => new HelmIronHelm();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";

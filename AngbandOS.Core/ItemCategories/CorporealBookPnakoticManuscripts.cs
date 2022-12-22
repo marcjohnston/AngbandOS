@@ -7,6 +7,8 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CorporealBookPnakoticManuscripts : CorporealBookItemClass
     {
+        private CorporealBookPnakoticManuscripts(SaveGame saveGame) { } // This object is a singleton.
+
         public override char Character => '?';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "[Pnakotic Manuscripts]";

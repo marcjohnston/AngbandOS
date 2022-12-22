@@ -9,6 +9,12 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerIceFixedArtifact : BaseFixedArtifact, IActivatible
 {
+    private readonly ItemClass _baseItemCategory;
+    private RingOfElementalPowerIceFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingNenya>();
+    }
+
     // Ring of Elemental Ice casts a coldball
     public void ActivateItem(SaveGame saveGame, Item item)
     {
@@ -28,7 +34,7 @@ internal class RingOfElementalPowerIceFixedArtifact : BaseFixedArtifact, IActiva
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
 
-    public override ItemClass BaseItemCategory => new RingNenya();
+    public override ItemClass BaseItemCategory => _baseItemCategory;
 
     public override char Character => '=';
     public override string Name => "The Ring of Elemental Power (Ice)";

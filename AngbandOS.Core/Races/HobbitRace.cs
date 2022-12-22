@@ -67,7 +67,7 @@ namespace AngbandOS.Core.Races
             if (saveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
             {
                 Item item = new Item(saveGame);
-                item.AssignItemType(new FoodRation());
+                item.AssignItemType(saveGame.SingletonRepository.ItemCategories.Get<FoodRation>());
                 saveGame.Level.DropNear(item, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 saveGame.MsgPrint("You cook some food.");
             }
