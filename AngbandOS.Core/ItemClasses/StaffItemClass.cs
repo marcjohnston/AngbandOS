@@ -1,4 +1,5 @@
-﻿using AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.EventArgs;
+using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 using static AngbandOS.Extensions;
 
@@ -7,6 +8,13 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class StaffItemClass : ItemClass
     {
+        /// <summary>
+        /// Executes the staff action.  Returns true, if the usage identifies the staff.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <returns></returns>
+        public abstract void UseStaff(UseStaffEvent eventArgs);
+
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)

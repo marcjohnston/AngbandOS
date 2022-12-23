@@ -1,4 +1,6 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
+using System;
 
 namespace AngbandOS.Core.ItemCategories
 {
@@ -19,5 +21,10 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int? SubCategory => 4;
         public override int Weight => 50;
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            eventArgs.SaveGame.TeleportPlayer(100);
+            eventArgs.Identified = true;
+        }
     }
 }

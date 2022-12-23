@@ -1,3 +1,4 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
@@ -19,5 +20,13 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 5, 0, 0, 0 };
         public override int? SubCategory => 16;
         public override int Weight => 50;
+
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.Player.RestoreHealth(Program.Rng.DieRoll(8)))
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

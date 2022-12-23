@@ -1,3 +1,4 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
@@ -19,5 +20,18 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int? SubCategory => 7;
         public override int Weight => 50;
+
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.Player.TimedBlindness == 0)
+            {
+                eventArgs.SaveGame.MsgPrint("The end of the staff glows brightly...");
+            }
+            for (int k = 0; k < 8; k++)
+            {
+                eventArgs.SaveGame.LightLine(eventArgs.SaveGame.Level.OrderedDirection[k]);
+            }
+            eventArgs.Identified = true;
+        }
     }
 }

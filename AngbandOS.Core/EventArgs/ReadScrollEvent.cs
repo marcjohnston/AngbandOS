@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.EventArgs
 {
+
     internal class ReadScrollEvent
     {
         /// <summary>
@@ -8,7 +9,7 @@
         public SaveGame SaveGame { get; }
 
         /// <summary>
-        /// Returns whether or not the scroll was identified after being read.  Returns false, by default.  Set to true, to identify scroll to the player.
+        /// Returns whether or not the scroll was identified after being read.  Returns false, by default.  Set to true, to identify the scroll to the player.
         /// </summary>
         public bool Identified { get; set; } = false;
 

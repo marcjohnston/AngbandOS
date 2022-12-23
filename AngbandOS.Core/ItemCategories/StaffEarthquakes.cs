@@ -1,3 +1,4 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
@@ -19,5 +20,10 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 40, 0, 0, 0 };
         public override int? SubCategory => 28;
         public override int Weight => 50;
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            eventArgs.SaveGame.Earthquake(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 10);
+            eventArgs.Identified = true;
+        }
     }
 }

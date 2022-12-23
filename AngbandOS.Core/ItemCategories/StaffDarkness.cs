@@ -1,3 +1,4 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
@@ -18,5 +19,20 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 5, 50, 0, 0 };
         public override int? SubCategory => 0;
         public override int Weight => 50;
+
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            if (!eventArgs.SaveGame.Player.HasBlindnessResistance && !eventArgs.SaveGame.Player.HasDarkResistance)
+            {
+                if (eventArgs.SaveGame.Player.SetTimedBlindness(eventArgs.SaveGame.Player.TimedBlindness + 3 + Program.Rng.DieRoll(5)))
+                {
+                    eventArgs.Identified = true;
+                }
+            }
+            if (eventArgs.SaveGame.UnlightArea(10, 3))
+            {
+                eventArgs.Identified = true;
+            }
+        }
     }
 }

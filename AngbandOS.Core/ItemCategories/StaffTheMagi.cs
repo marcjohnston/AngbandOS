@@ -1,4 +1,6 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.ItemCategories
 {
@@ -19,5 +21,21 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 70, 0, 0, 0 };
         public override int? SubCategory => 19;
         public override int Weight => 50;
+
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            if (eventArgs.SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+            {
+                eventArgs.Identified = true;
+            }
+            if (eventArgs.SaveGame.Player.Mana < eventArgs.SaveGame.Player.MaxMana)
+            {
+                eventArgs.SaveGame.Player.Mana = eventArgs.SaveGame.Player.MaxMana;
+                eventArgs.SaveGame.Player.FractionalMana = 0;
+                eventArgs.Identified = true;
+                eventArgs.SaveGame.MsgPrint("Your feel your head clear.");
+                eventArgs.SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using AngbandOS.Core.EventArgs;
 using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
@@ -18,5 +19,15 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 10, 50, 0, 0 };
         public override int? SubCategory => 3;
         public override int Weight => 50;
+        public override void UseStaff(UseStaffEvent eventArgs)
+        {
+            for (int k = 0; k < Program.Rng.DieRoll(4); k++)
+            {
+                if (eventArgs.SaveGame.Level.Monsters.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, null))
+                {
+                    eventArgs.Identified = true;
+                }
+            }
+        }
     }
 }
