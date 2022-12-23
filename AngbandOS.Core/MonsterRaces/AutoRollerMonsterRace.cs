@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AutoRollerMonsterRace : MonsterRace
     {
+        protected AutoRollerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'g';
         public override string Name => "Auto-roller";
 

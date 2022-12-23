@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GromMasterOfEarthMonsterRace : MonsterRace
     {
+        protected GromMasterOfEarthMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new AcidBallMonsterSpell(),
             new AcidBoltMonsterSpell());

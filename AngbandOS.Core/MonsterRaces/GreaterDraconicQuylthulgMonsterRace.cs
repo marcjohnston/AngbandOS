@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreaterDraconicQuylthulgMonsterRace : MonsterRace
     {
+        protected GreaterDraconicQuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BlinkMonsterSpell(),
             new SummonHiDragonMonsterSpell(),

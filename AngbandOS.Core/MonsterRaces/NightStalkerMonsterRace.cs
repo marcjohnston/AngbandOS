@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NightStalkerMonsterRace : MonsterRace
     {
+        protected NightStalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'E';
         public override Colour Colour => Colour.Grey;
         public override string Name => "Night stalker";

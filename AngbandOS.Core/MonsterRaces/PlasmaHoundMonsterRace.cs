@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PlasmaHoundMonsterRace : MonsterRace
     {
+        protected PlasmaHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreathePlasmaMonsterSpell());
         public override char Character => 'Z';

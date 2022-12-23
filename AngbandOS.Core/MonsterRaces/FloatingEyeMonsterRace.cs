@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FloatingEyeMonsterRace : MonsterRace
     {
+        protected FloatingEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'e';
         public override string Name => "Floating eye";
 

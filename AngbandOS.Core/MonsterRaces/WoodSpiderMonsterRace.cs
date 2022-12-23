@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WoodSpiderMonsterRace : MonsterRace
     {
+        protected WoodSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'S';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Wood spider";

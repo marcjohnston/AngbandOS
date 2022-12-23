@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class DeathSwordMonsterRace : MonsterRace
     {
+        protected DeathSwordMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => '|';
         public override Colour Colour => Colour.BrightWhite;
         public override string Name => "Death sword";

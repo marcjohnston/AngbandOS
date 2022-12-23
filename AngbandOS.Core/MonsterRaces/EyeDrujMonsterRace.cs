@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EyeDrujMonsterRace : MonsterRace
     {
+        protected EyeDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ManaBoltMonsterSpell(),
             new NetherBallMonsterSpell(),

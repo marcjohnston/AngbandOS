@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class YetiMonsterRace : MonsterRace
     {
+        protected YetiMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'Y';
         public override string Name => "Yeti";
 

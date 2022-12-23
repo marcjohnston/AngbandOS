@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     {
+        protected KlingsorEvilMasterOfMagicMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ChaosBallMonsterSpell(),
             new CauseCriticalWoundsMonsterSpell(),

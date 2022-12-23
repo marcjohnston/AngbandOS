@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class RattlesnakeMonsterRace : MonsterRace
     {
+        protected RattlesnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'J';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Rattlesnake";

@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OozeElementalMonsterRace : MonsterRace
     {
+        protected OozeElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new AcidBallMonsterSpell(),
             new AcidBoltMonsterSpell());

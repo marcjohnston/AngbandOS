@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheDisembodiedHandMonsterRace : MonsterRace
     {
+        protected TheDisembodiedHandMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'z';
         public override Colour Colour => Colour.Green;
         public override string Name => "The disembodied hand";

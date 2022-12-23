@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FlyingPolypMonsterRace : MonsterRace
     {
+        protected FlyingPolypMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ConfuseMonsterSpell(),
             new ManaBoltMonsterSpell(),

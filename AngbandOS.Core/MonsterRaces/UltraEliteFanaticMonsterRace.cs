@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class UltraEliteFanaticMonsterRace : MonsterRace
     {
+        protected UltraEliteFanaticMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new HealMonsterSpell());
         public override char Character => 'p';

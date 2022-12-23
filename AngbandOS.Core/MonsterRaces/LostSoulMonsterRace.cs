@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LostSoulMonsterRace : MonsterRace
     {
+        protected LostSoulMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new DrainManaMonsterSpell(),
             new TeleportSelfMonsterSpell());

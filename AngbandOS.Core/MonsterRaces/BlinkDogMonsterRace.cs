@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class BlinkDogMonsterRace : MonsterRace
     {
+        protected BlinkDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BlinkMonsterSpell(),
             new TeleportToMonsterSpell());

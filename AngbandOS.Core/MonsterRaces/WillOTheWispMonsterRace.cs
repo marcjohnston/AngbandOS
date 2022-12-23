@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WillOTheWispMonsterRace : MonsterRace
     {
+        protected WillOTheWispMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new CauseSeriousWoundsMonsterSpell(),
             new ConfuseMonsterSpell(),

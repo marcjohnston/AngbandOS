@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MemoryMossMonsterRace : MonsterRace
     {
+        protected MemoryMossMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ForgetMonsterSpell());
         public override char Character => ',';

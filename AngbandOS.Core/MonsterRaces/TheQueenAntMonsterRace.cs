@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TheQueenAntMonsterRace : MonsterRace
     {
+        protected TheQueenAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new SummonAntMonsterSpell());
         public override char Character => 'a';

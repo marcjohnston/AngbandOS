@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class VibrationHoundMonsterRace : MonsterRace
     {
+        protected VibrationHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreatheSoundMonsterSpell());
         public override char Character => 'Z';

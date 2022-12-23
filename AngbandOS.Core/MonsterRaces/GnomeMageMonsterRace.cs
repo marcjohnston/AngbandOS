@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GnomeMageMonsterRace : MonsterRace
     {
+        protected GnomeMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ColdBoltMonsterSpell(),
             new BlinkMonsterSpell(),

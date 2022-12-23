@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class TimeVortexMonsterRace : MonsterRace
     {
+        protected TimeVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreatheTimeMonsterSpell());
         public override char Character => 'v';

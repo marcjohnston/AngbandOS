@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class RavingLunaticMonsterRace : MonsterRace
     {
+        protected RavingLunaticMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 't';
         public override Colour Colour => Colour.BrightGreen;
         public override string Name => "Raving lunatic";

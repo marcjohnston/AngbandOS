@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreatCthulhuMonsterRace : MonsterRace
     {
+        protected GreatCthulhuMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreatheAcidMonsterSpell(),
             new BreatheChaosMonsterSpell(),

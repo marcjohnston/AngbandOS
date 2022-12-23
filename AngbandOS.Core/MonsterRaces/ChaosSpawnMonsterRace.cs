@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ChaosSpawnMonsterRace : MonsterRace
     {
+        protected ChaosSpawnMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'e';
         public override Colour Colour => Colour.Purple;
         public override string Name => "Chaos spawn";

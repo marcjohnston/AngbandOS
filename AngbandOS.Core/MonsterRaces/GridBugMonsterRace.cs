@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GridBugMonsterRace : MonsterRace
     {
+        protected GridBugMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'I';
         public override Colour Colour => Colour.BrightPurple;
         public override string Name => "Grid bug";

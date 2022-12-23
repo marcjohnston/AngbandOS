@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class JubjubBirdMonsterRace : MonsterRace
     {
+        protected JubjubBirdMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'B';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Jubjub bird";

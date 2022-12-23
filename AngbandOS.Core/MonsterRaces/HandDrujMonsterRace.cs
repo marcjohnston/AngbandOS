@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class HandDrujMonsterRace : MonsterRace
     {
+        protected HandDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BlindnessMonsterSpell(),
             new CauseCriticalWoundsMonsterSpell(),

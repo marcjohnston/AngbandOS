@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MatureGreenDragonMonsterRace : MonsterRace
     {
+        protected MatureGreenDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreathePoisonMonsterSpell(),
             new ScareMonsterSpell());

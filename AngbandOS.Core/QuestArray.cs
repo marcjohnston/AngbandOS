@@ -129,7 +129,7 @@ namespace AngbandOS
 
         public void PlayerBirthQuests()
         {
-            SaveGame.MonsterRaces.ResetUniqueOnlyGuardianStatus();
+            SaveGame.ResetUniqueOnlyGuardianStatus();
             int index = 0;
             Clear();
             for (int i = 0; i < _maxQuests; i++)
@@ -141,7 +141,7 @@ namespace AngbandOS
                 if (SaveGame.Dungeons[i].FirstGuardian != "")
                 {
                     this[index].Level = SaveGame.Dungeons[i].FirstLevel;
-                    this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].FirstGuardian);
+                    this[index].RIdx = SaveGame.GetMonsterIndexFromName(SaveGame.Dungeons[i].FirstGuardian);
                     SaveGame.MonsterRaces[this[index].RIdx].OnlyGuardian = true;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;
@@ -151,7 +151,7 @@ namespace AngbandOS
                 if (SaveGame.Dungeons[i].SecondGuardian != "")
                 {
                     this[index].Level = SaveGame.Dungeons[i].SecondLevel;
-                    this[index].RIdx = SaveGame.MonsterRaces.IndexFromName(SaveGame.Dungeons[i].SecondGuardian);
+                    this[index].RIdx = SaveGame.GetMonsterIndexFromName(SaveGame.Dungeons[i].SecondGuardian);
                     SaveGame.MonsterRaces[this[index].RIdx].OnlyGuardian = true;
                     this[index].Dungeon = i;
                     this[index].ToKill = 1;

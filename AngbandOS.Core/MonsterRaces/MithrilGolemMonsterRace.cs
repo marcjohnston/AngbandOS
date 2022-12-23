@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MithrilGolemMonsterRace : MonsterRace
     {
+        protected MithrilGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'g';
         public override Colour Colour => Colour.BrightBlue;
         public override string Name => "Mithril golem";

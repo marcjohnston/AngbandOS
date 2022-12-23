@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GapingMawMonsterRace : MonsterRace
     {
+        protected GapingMawMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => '·';
         public override string Name => "Gaping Maw";
 

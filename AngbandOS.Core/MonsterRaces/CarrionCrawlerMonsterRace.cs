@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CarrionCrawlerMonsterRace : MonsterRace
     {
+        protected CarrionCrawlerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'c';
         public override Colour Colour => Colour.Green;
         public override string Name => "Carrion crawler";

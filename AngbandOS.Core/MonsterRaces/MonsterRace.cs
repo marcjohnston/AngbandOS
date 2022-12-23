@@ -379,7 +379,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public virtual bool WeirdMind => false;
 
-        public MonsterRace()
+        protected MonsterRace(SaveGame saveGame)
         {
             int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
             int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);

@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AlberichTheNibelungKingMonsterRace : MonsterRace
     {
+        protected AlberichTheNibelungKingMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new AcidBallMonsterSpell(),
             new AcidBoltMonsterSpell(),

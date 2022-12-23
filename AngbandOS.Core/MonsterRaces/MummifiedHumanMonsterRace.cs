@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MummifiedHumanMonsterRace : MonsterRace
     {
+        protected MummifiedHumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'z';
         public override Colour Colour => Colour.Beige;
         public override string Name => "Mummified human";

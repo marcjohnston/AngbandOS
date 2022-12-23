@@ -6,12 +6,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.MonsterRaces;
+using System.Collections;
 using System.Reflection;
 
 namespace AngbandOS
 {
     [Serializable]
-    internal class MonsterRaceArray
+    internal class MonsterRaceArray : IEnumerable<MonsterRace>
     {
         private readonly SaveGame SaveGame;
         private List<MonsterRace> monsterRaces = new List<MonsterRace>();
@@ -37,7 +38,8 @@ namespace AngbandOS
                     if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
                     {
                         // Load the monster.
-                        MonsterRace monsterRace = (MonsterRace)Activator.CreateInstance(type);
+                        ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                        MonsterRace monsterRace = (MonsterRace)constructors[0].Invoke(new object[] { saveGame });
 
                         if (monsterRace.LevelFound == level)
                         {
@@ -50,40 +52,14 @@ namespace AngbandOS
             }
         }
 
-        public void AddKnowledge()
+        public IEnumerator<MonsterRace> GetEnumerator()
         {
-            foreach (MonsterRace monsterType in monsterRaces)
-            {
-                monsterType.Knowledge = new MonsterKnowledge(SaveGame, monsterType);
-            }
+            return monsterRaces.GetEnumerator();
         }
 
-        public int IndexFromName(string name)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            foreach (MonsterRace race in monsterRaces)
-            {
-                if (race.Name == name)
-                {
-                    return race.Index;
-                }
-            }
-            return 0;
-        }
-
-        public void ResetGuardians()
-        {
-            foreach (MonsterRace race in monsterRaces)
-            {
-                race.Guardian = false;
-            }
-        }
-
-        public void ResetUniqueOnlyGuardianStatus()
-        {
-            foreach (MonsterRace race in monsterRaces)
-            {
-                race.OnlyGuardian = false;
-            }
+            return monsterRaces.GetEnumerator();
         }
     }
 }

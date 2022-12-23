@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FleshGolemMonsterRace : MonsterRace
     {
+        protected FleshGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'g';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Flesh golem";

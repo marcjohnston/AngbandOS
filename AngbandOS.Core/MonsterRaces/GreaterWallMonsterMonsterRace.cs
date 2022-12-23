@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class GreaterWallMonsterMonsterRace : MonsterRace
     {
+        protected GreaterWallMonsterMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => '#';
         public override string Name => "Greater wall monster";
 

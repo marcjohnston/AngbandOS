@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AimlessLookingMerchantMonsterRace : MonsterRace
     {
+        protected AimlessLookingMerchantMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 't';
         public override Colour Colour => Colour.Orange;
         public override string Name => "Aimless looking merchant";

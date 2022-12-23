@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class NetherWormMassMonsterRace : MonsterRace
     {
+        protected NetherWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'w';
         public override Colour Colour => Colour.Black;
         public override string Name => "Nether worm mass";

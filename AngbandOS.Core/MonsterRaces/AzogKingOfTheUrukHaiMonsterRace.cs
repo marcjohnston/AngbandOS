@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AzogKingOfTheUrukHaiMonsterRace : MonsterRace
     {
+        protected AzogKingOfTheUrukHaiMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'o';
         public override Colour Colour => Colour.Red;
         public override string Name => "Azog, King of the Uruk-Hai";

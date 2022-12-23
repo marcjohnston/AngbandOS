@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
     {
+        protected QlzqqlzuupTheLordOfFleshMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new SummonAntMonsterSpell(),
             new SummonCthuloidMonsterSpell(),

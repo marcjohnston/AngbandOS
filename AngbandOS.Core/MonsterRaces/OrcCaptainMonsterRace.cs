@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class OrcCaptainMonsterRace : MonsterRace
     {
+        protected OrcCaptainMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new Arrow1D6MonsterSpell());
         public override char Character => 'o';

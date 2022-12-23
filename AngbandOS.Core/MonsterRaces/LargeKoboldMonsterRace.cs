@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class LargeKoboldMonsterRace : MonsterRace
     {
+        protected LargeKoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'k';
         public override string Name => "Large kobold";
 

@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class CreepingAdamantiteCoinsMonsterRace : MonsterRace
     {
+        protected CreepingAdamantiteCoinsMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => '$';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Creeping adamantite coins";

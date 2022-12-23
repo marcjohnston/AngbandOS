@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MirkwoodSpiderMonsterRace : MonsterRace
     {
+        protected MirkwoodSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'S';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Mirkwood spider";

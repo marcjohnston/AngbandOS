@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ImpactHoundMonsterRace : MonsterRace
     {
+        protected ImpactHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new BreatheForceMonsterSpell());
         public override char Character => 'Z';

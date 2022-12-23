@@ -271,9 +271,45 @@ namespace AngbandOS
         private void PopulateNewProfile()
         {
             MonsterRaces = new MonsterRaceArray(this);
-            MonsterRaces.AddKnowledge();
+            AddKnowledge();
             RareItemTypes = new RareItemTypeArray(this);
             VaultTypes = new VaultTypeArray(this);
+        }
+
+        private void AddKnowledge()
+        {
+            foreach (MonsterRace monsterType in MonsterRaces)
+            {
+                monsterType.Knowledge = new MonsterKnowledge(this, monsterType);
+            }
+        }
+
+        public int GetMonsterIndexFromName(string name)
+        {
+            foreach (MonsterRace race in MonsterRaces)
+            {
+                if (race.Name == name)
+                {
+                    return race.Index;
+                }
+            }
+            return 0;
+        }
+
+        public void ResetGuardians()
+        {
+            foreach (MonsterRace race in MonsterRaces)
+            {
+                race.Guardian = false;
+            }
+        }
+
+        public void ResetUniqueOnlyGuardianStatus()
+        {
+            foreach (MonsterRace race in MonsterRaces)
+            {
+                race.OnlyGuardian = false;
+            }
         }
 
         public void Quit(string reason)
@@ -15836,7 +15872,7 @@ namespace AngbandOS
         {
             int i;
             int k;
-            MonsterRaces.ResetGuardians();
+            ResetGuardians();
             if (Quests.IsQuest(CurrentDepth))
             {
                 MonsterRaces[Quests.GetQuestMonster()].Guardian = true;

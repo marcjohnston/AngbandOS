@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class PitifulLookingBeggarMonsterRace : MonsterRace
     {
+        protected PitifulLookingBeggarMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 't';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Pitiful looking beggar";

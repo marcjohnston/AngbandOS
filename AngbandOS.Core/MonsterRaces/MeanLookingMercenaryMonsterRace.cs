@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MeanLookingMercenaryMonsterRace : MonsterRace
     {
+        protected MeanLookingMercenaryMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 't';
         public override Colour Colour => Colour.BrightRed;
         public override string Name => "Mean looking mercenary";

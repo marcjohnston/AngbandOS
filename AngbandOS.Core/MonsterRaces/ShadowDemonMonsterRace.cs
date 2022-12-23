@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class ShadowDemonMonsterRace : MonsterRace
     {
+        protected ShadowDemonMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new NetherBoltMonsterSpell());
         public override char Character => 'G';

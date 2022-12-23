@@ -6,6 +6,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class MagicMushroomPatchMonsterRace : MonsterRace
     {
+        protected MagicMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ScareMonsterSpell(),
             new SlowMonsterSpell(),

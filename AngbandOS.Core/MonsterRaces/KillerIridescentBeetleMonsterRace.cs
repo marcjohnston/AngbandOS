@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class KillerIridescentBeetleMonsterRace : MonsterRace
     {
+        protected KillerIridescentBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'K';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Killer iridescent beetle";

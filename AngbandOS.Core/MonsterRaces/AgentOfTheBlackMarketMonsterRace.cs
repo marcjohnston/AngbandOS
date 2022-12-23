@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AgentOfTheBlackMarketMonsterRace : MonsterRace
     {
+        protected AgentOfTheBlackMarketMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 't';
         public override Colour Colour => Colour.Black;
         public override string Name => "Agent of the black market";

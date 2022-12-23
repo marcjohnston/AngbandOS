@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class WormtongueAgentOfSarumanMonsterRace : MonsterRace
     {
+        protected WormtongueAgentOfSarumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new ColdBoltMonsterSpell(),
             new PoisonBallMonsterSpell(),

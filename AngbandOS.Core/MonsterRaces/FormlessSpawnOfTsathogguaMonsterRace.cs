@@ -8,6 +8,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
     {
+        protected FormlessSpawnOfTsathogguaMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override MonsterSpellList Spells => new MonsterSpellList(
             new AcidBoltMonsterSpell(),
             new FireBoltMonsterSpell(),

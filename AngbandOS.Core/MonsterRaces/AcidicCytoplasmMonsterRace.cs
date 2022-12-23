@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class AcidicCytoplasmMonsterRace : MonsterRace
     {
+        protected AcidicCytoplasmMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'j';
         public override Colour Colour => Colour.Chartreuse;
         public override string Name => "Acidic cytoplasm";

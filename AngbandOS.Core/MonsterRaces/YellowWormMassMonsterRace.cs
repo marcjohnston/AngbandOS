@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class YellowWormMassMonsterRace : MonsterRace
     {
+        protected YellowWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'w';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Yellow worm mass";

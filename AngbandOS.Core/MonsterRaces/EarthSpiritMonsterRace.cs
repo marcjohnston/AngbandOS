@@ -7,6 +7,8 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal class EarthSpiritMonsterRace : MonsterRace
     {
+        protected EarthSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
+ 
         public override char Character => 'E';
         public override Colour Colour => Colour.BrightBrown;
         public override string Name => "Earth spirit";
