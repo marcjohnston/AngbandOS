@@ -2065,5 +2065,12 @@ namespace AngbandOS
         /// <param name="item"></param>
         /// <returns></returns>
         public abstract bool ItemMatches(Item item);
+
+        /// <summary>
+        /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <returns></returns>
+        public virtual bool DoorsLocked(SaveGame saveGame) => false;
     }
 }

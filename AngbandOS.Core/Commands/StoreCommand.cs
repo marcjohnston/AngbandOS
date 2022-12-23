@@ -32,7 +32,7 @@ namespace AngbandOS.Commands
             }
             Store which = saveGame.GetWhichStore();
             // We can't enter a house unless we own it
-            if (which.StoreType == StoreType.StoreHome && saveGame.Player.TownWithHouse != saveGame.CurTown.Index)
+            if (which.DoorsLocked(saveGame))
             {
                 saveGame.MsgPrint("The door is locked.");
                 return;

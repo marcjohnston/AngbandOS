@@ -117,5 +117,15 @@ namespace AngbandOS.Stores
             }
             oldStore.MoveInventoryToAnotherStore(newStore);
         }
+
+        /// <summary>
+        /// Returns true, if the player doesn't own the home; false, if the player owns the home.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <returns></returns>
+        public override bool DoorsLocked(SaveGame saveGame)
+        {
+            return saveGame.Player.TownWithHouse != saveGame.CurTown.Index;
+        }
     }
 }
