@@ -18,6 +18,10 @@
       text-align: right;
     }
 
+    & th {
+      padding-right: 10px;
+    }
+
     & [mat-cell] {
       vertical-align: top;
       padding-top: 10px;

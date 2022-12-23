@@ -2,7 +2,7 @@
 @import '../../theme.scss';
 
 nav {
-    margin: 0 !important; // Override the margins for the nav to allow the logo to consume and become the margin space
+  margin: 0 !important; // Override the margins for the nav to allow the logo to consume and become the margin space
 }
 
 a.navbar-brand {
@@ -13,24 +13,35 @@ a.navbar-brand {
 
 .container {
   display: flex;
-  margin: 0 15px 0 15px; // We need left and right margins
+
+  @media (min-width: 768px) {
+    margin: 0 15px 0 15px; // We need left and right margins
+  }
+
+  @media (max-width: 767px) {
+    padding: 0; // We need left and right margins
+    & .navbar-toggler {
+        padding: 0;
+    }
+  }
+
   width: 100%;
   max-width: 100%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+  @media (min-width: 768px) {
+    html {
+      font-size: 16px;
+    }
   }
-}
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+  .box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  }
 
-#logo {
-  font-size: 6pt;
-  color: mat-color($primary, 100);
-  font-weight: bold;
-  white-space: nowrap;
-}
+  #logo {
+    font-size: 6pt;
+    color: mat-color($primary, 100);
+    font-weight: bold;
+    white-space: nowrap;
+  }
