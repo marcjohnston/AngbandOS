@@ -9,7 +9,6 @@ using AngbandOS.ActivationPowers;
 using AngbandOS.Commands;
 using AngbandOS.Core;
 using AngbandOS.Core.ChestTrapConfigurations;
-using AngbandOS.Core.ChestTraps;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.ItemClasses;

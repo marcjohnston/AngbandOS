@@ -71,196 +71,74 @@ namespace AngbandOS.Core.ItemClasses
             }
             else if (power == 1) // Good
             {
-                switch (Program.Rng.DieRoll(30))
-                {
-                    case 1:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfFlame;
-                        break;
-                    case 2:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfFrost;
-                        break;
-                    case 3:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfAcid;
-                        break;
-                    case 4:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfLightning;
-                        break;
-                    case 5:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfLight;
-                        break;
-                    case 6:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfDarkness;
-                        break;
-                    case 7:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfLife;
-                        break;
-                    case 8:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfSight;
-                        break;
-                    case 9:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfCourage;
-                        break;
-                    case 10:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfCourage;
-                        break;
-                    case 11:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfVenom;
-                        break;
-                    case 12:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfClarity;
-                        break;
-                    case 13:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfSound;
-                        break;
-                    case 14:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfChaos;
-                        break;
-                    case 15:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfShards;
-                        break;
-                    case 16:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfUnlife;
-                        break;
-                    case 17:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfStability;
-                        break;
-                    case 18:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfMagic;
-                        break;
-                    case 19:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfFreedom;
-                        break;
-                    case 20:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfStrength;
-                        break;
-                    case 21:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfIntelligence;
-                        break;
-                    case 22:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfWisdom;
-                        break;
-                    case 23:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfDexterity;
-                        break;
-                    case 24:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfConstitution;
-                        break;
-                    case 25:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfCharisma;
-                        break;
-                    case 26:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfLightness;
-                        break;
-                    case 27:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfInsight;
-                        break;
-                    case 28:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfTheMind;
-                        break;
-                    case 29:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfSustenance;
-                        break;
-                    case 30:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfHealth;
-                        break;
-                }
+                WeightedRandom<Enumerations.RareItemType> weightedRandom = new WeightedRandom<Enumerations.RareItemType>();
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfFlame);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfFrost);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfAcid);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfLightning);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfLight);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfDarkness);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfLife);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfSight);
+                weightedRandom.Add(2, Enumerations.RareItemType.OrbOfCourage);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfVenom);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfClarity);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfSound);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfChaos);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfShards);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfUnlife);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfStability);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfMagic);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfFreedom);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfStrength);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfIntelligence);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfWisdom);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfDexterity);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfConstitution);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfCharisma);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfLightness);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfInsight);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfTheMind);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfSustenance);
+                weightedRandom.Add(1, Enumerations.RareItemType.OrbOfHealth);
+                item.RareItemTypeIndex = weightedRandom.Choose();
             }
             else if (power == 2) // Great
             {
                 item.RareItemTypeIndex = Enumerations.RareItemType.OrbOfPower;
                 for (int i = 0; i < 3; i++)
                 {
-                    switch (Program.Rng.DieRoll(30))
-                    {
-                        case 1:
-                        case 2:
-                            item.RandartItemCharacteristics.ResDark = true;
-                            break;
-                        case 3:
-                            item.RandartItemCharacteristics.ResLight = true;
-                            break;
-                        case 4:
-                            item.RandartItemCharacteristics.ResBlind = true;
-                            break;
-                        case 5:
-                            item.RandartItemCharacteristics.ResFear = true;
-                            break;
-                        case 6:
-                            item.RandartItemCharacteristics.ResAcid = true;
-                            break;
-                        case 7:
-                            item.RandartItemCharacteristics.ResElec = true;
-                            break;
-                        case 8:
-                            item.RandartItemCharacteristics.ResFire = true;
-                            break;
-                        case 9:
-                            item.RandartItemCharacteristics.ResCold = true;
-                            break;
-                        case 10:
-                            item.RandartItemCharacteristics.ResPois = true;
-                            break;
-                        case 11:
-                            item.RandartItemCharacteristics.ResConf = true;
-                            break;
-                        case 12:
-                            item.RandartItemCharacteristics.ResSound = true;
-                            break;
-                        case 13:
-                            item.RandartItemCharacteristics.ResShards = true;
-                            break;
-                        case 14:
-                            item.RandartItemCharacteristics.ResNether = true;
-                            break;
-                        case 15:
-                            item.RandartItemCharacteristics.ResNexus = true;
-                            break;
-                        case 16:
-                            item.RandartItemCharacteristics.ResChaos = true;
-                            break;
-                        case 17:
-                            item.RandartItemCharacteristics.ResDisen = true;
-                            break;
-                        case 18:
-                            item.RandartItemCharacteristics.FreeAct = true;
-                            break;
-                        case 19:
-                            item.RandartItemCharacteristics.HoldLife = true;
-                            break;
-                        case 20:
-                            item.RandartItemCharacteristics.SustStr = true;
-                            break;
-                        case 21:
-                            item.RandartItemCharacteristics.SustInt = true;
-                            break;
-                        case 22:
-                            item.RandartItemCharacteristics.SustWis = true;
-                            break;
-                        case 23:
-                            item.RandartItemCharacteristics.SustDex = true;
-                            break;
-                        case 24:
-                            item.RandartItemCharacteristics.SustCon = true;
-                            break;
-                        case 25:
-                            item.RandartItemCharacteristics.SustCha = true;
-                            break;
-                        case 26:
-                            item.RandartItemCharacteristics.Feather = true;
-                            break;
-                        case 27:
-                            item.RandartItemCharacteristics.SeeInvis = true;
-                            break;
-                        case 28:
-                            item.RandartItemCharacteristics.Telepathy = true;
-                            break;
-                        case 29:
-                            item.RandartItemCharacteristics.SlowDigest = true;
-                            break;
-                        case 30:
-                            item.RandartItemCharacteristics.Regen = true;
-                            break;
-                    }
+                    WeightedRandomAction weightedRandomAction = new WeightedRandomAction();
+                    weightedRandomAction.Add(2, () => item.RandartItemCharacteristics.ResDark = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResLight = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResBlind = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResFear = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResAcid = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResElec = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResFire = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResCold = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResPois = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResConf = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResSound = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResShards = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResNether = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResNexus = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResChaos = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.ResDisen = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.FreeAct = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.HoldLife = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustStr = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustInt = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustWis = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustDex = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustCon = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SustCha = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.Feather = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SeeInvis = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.Telepathy = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.SlowDigest = true);
+                    weightedRandomAction.Add(1, () => item.RandartItemCharacteristics.Regen = true);
+                    weightedRandomAction.Choose();
                 }
             }
         }

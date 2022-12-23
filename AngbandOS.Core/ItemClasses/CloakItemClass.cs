@@ -14,38 +14,13 @@ namespace AngbandOS.Core.ItemClasses
 
         protected override void ApplyRandomGoodRareCharacteristics(Item item)
         {
-            switch (Program.Rng.DieRoll(19))
-            {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfProtection;
-                    break;
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfStealth;
-                    break;
-                case 17:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfAman;
-                    break;
-                case 18:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfElectricity;
-                    break;
-                case 19:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfImmolation;
-                    break;
-            }
+            WeightedRandom<Enumerations.RareItemType> weightedRandom = new WeightedRandom<Enumerations.RareItemType>();
+            weightedRandom.Add(8, Enumerations.RareItemType.CloakOfProtection);
+            weightedRandom.Add(8, Enumerations.RareItemType.CloakOfStealth);
+            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfAman);
+            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfElectricity);
+            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfImmolation);
+            item.RareItemTypeIndex = weightedRandom.Choose();
         }
 
         protected override void ApplyRandomPoorRareCharacteristics(Item item)
