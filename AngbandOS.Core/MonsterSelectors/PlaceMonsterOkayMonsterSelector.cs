@@ -13,7 +13,7 @@ namespace AngbandOS.Core.MonsterSelectors
 
         public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
         {
-            MonsterRace pPtr = saveGame.MonsterRaces[_placeMonsterIdx];
+            MonsterRace pPtr = saveGame.SingletonRepository.MonsterRaces[_placeMonsterIdx];
             if (rPtr.Character != pPtr.Character)
             {
                 return false;

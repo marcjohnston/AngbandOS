@@ -156,7 +156,7 @@ namespace AngbandOS
         {
             for (int i = 0; GlobalData.SymbolIdentification[i] != null; i++)
             {
-                if (GlobalData.SymbolIdentification[i][0] == SaveGame.MonsterRaces[rIdx].Character)
+                if (GlobalData.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Character)
                 {
                     string name = GlobalData.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
@@ -167,12 +167,12 @@ namespace AngbandOS
             SaveGame.Goto(5, 0);
             DisplayMonsterHeader(rIdx);
             SaveGame.Goto(6, 0);
-            SaveGame.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
+            SaveGame.SingletonRepository.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
         }
 
         private void DisplayMonsterHeader(int rIdx)
         {
-            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
             char c1 = rPtr.Character;
             Colour a1 = rPtr.Colour;
             if (!rPtr.Unique)
@@ -428,14 +428,14 @@ namespace AngbandOS
 
         private void JournalKills()
         {
-            string[] names = new string[SaveGame.MonsterRaces.Count];
-            int[] counts = new int[SaveGame.MonsterRaces.Count];
-            bool[] unique = new bool[SaveGame.MonsterRaces.Count];
+            string[] names = new string[SaveGame.SingletonRepository.MonsterRaces.Count];
+            int[] counts = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
+            bool[] unique = new bool[SaveGame.SingletonRepository.MonsterRaces.Count];
             int maxCount = 0;
             int total = 0;
-            for (int i = 0; i < SaveGame.MonsterRaces.Count - 1; i++)
+            for (int i = 0; i < SaveGame.SingletonRepository.MonsterRaces.Count - 1; i++)
             {
-                MonsterRace monster = SaveGame.MonsterRaces[i];
+                MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
                 if (monster.Unique)
                 {
                     bool dead = monster.MaxNum == 0;
@@ -546,8 +546,8 @@ namespace AngbandOS
 
         private void JournalMonsters()
         {
-            int[] seen = new int[SaveGame.MonsterRaces.Count];
-            int[] filtered = new int[SaveGame.MonsterRaces.Count];
+            int[] seen = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
+            int[] filtered = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
             int maxSeen = 0;
             bool[] filterMask = new bool[256];
             int[] filterLookup = new int[256];
@@ -557,13 +557,13 @@ namespace AngbandOS
             {
                 filterMask[i] = false;
             }
-            for (int i = 1; i < SaveGame.MonsterRaces.Count; i++)
+            for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
             {
-                if (SaveGame.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.Player.IsWizard)
+                if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.Player.IsWizard)
                 {
                     seen[maxSeen] = i;
                     maxSeen++;
-                    char symbol = SaveGame.MonsterRaces[i].Character;
+                    char symbol = SaveGame.SingletonRepository.MonsterRaces[i].Character;
                     if (!filterMask[symbol])
                     {
                         filterMask[symbol] = true;
@@ -599,7 +599,7 @@ namespace AngbandOS
                 int maxFiltered = 0;
                 for (int i = 0; i < maxSeen; i++)
                 {
-                    if (SaveGame.MonsterRaces[seen[i]].Character == currentFilter)
+                    if (SaveGame.SingletonRepository.MonsterRaces[seen[i]].Character == currentFilter)
                     {
                         filtered[maxFiltered] = seen[i];
                         maxFiltered++;
@@ -886,12 +886,12 @@ namespace AngbandOS
 
         private void JournalUniques()
         {
-            string[] names = new string[SaveGame.MonsterRaces.Count];
-            bool[] alive = new bool[SaveGame.MonsterRaces.Count];
+            string[] names = new string[SaveGame.SingletonRepository.MonsterRaces.Count];
+            bool[] alive = new bool[SaveGame.SingletonRepository.MonsterRaces.Count];
             int maxCount = 0;
-            for (int i = 0; i < SaveGame.MonsterRaces.Count - 1; i++)
+            for (int i = 0; i < SaveGame.SingletonRepository.MonsterRaces.Count - 1; i++)
             {
-                MonsterRace monster = SaveGame.MonsterRaces[i];
+                MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
                 if (monster.Unique &&
                     (monster.Knowledge.RSights > 0 || SaveGame.Player.IsWizard))
                 {

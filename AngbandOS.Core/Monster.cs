@@ -167,7 +167,7 @@ namespace AngbandOS
                 MonsterRace halluRace;
                 do
                 {
-                    halluRace = SaveGame.MonsterRaces[Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2)];
+                    halluRace = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)];
                 } while (halluRace.Unique);
                 string sillyName = halluRace.Name;
                 name = sillyName;

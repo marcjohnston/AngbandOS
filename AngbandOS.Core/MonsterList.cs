@@ -67,7 +67,7 @@ namespace AngbandOS
                 {
                     return false;
                 }
-                rPtr = SaveGame.MonsterRaces[rIdx];
+                rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
                 if (!rPtr.Unique && !rPtr.EscortsGroup)
                 {
                     break;
@@ -402,7 +402,7 @@ namespace AngbandOS
                     continue;
                 }
                 int rIdx = table[i].Index;
-                MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
+                MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
 
                 // Do not allow more than 1 unique of this type to be created.
                 if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
@@ -744,7 +744,7 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    MonsterRace race = SaveGame.MonsterRaces[z];
+                    MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[z];
                     PlaceMonsterOne(ny, nx, race, slp, charm);
                     if (race.Friends ||
                         rPtr.EscortsGroup)
@@ -766,7 +766,7 @@ namespace AngbandOS
 
         public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
         {
-            return PlaceMonsterAux(y, x, SaveGame.MonsterRaces[index], slp, grp, charm);
+            return PlaceMonsterAux(y, x, SaveGame.SingletonRepository.MonsterRaces[index], slp, grp, charm);
         }
 
         public void ReplacePet(int y1, int x1, Monster monster)
@@ -842,7 +842,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            MonsterRace race = SaveGame.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[rIdx];
             if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
             {
                 return false;
@@ -882,7 +882,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            MonsterRace race = SaveGame.MonsterRaces[rIdx];
+            MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[rIdx];
             if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
             {
                 return false;
@@ -1174,7 +1174,7 @@ namespace AngbandOS
 
         private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
         {
-            MonsterRace rPtr = SaveGame.MonsterRaces[rIdx];
+            MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
             int extra = 0;
             int[] hackY = new int[Constants.GroupMax];
             int[] hackX = new int[Constants.GroupMax];

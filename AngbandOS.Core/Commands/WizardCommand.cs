@@ -496,7 +496,7 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizNamed(SaveGame saveGame, int rIdx, bool slp)
         {
-            if (rIdx >= saveGame.MonsterRaces.Count - 1)
+            if (rIdx >= saveGame.SingletonRepository.MonsterRaces.Count - 1)
             {
                 return;
             }
@@ -517,7 +517,7 @@ namespace AngbandOS.Commands
 
         private void DoCmdWizNamedFriendly(SaveGame saveGame, int rIdx, bool slp)
         {
-            if (rIdx >= saveGame.MonsterRaces.Count - 1)
+            if (rIdx >= saveGame.SingletonRepository.MonsterRaces.Count - 1)
             {
                 return;
             }

@@ -1341,9 +1341,9 @@ namespace AngbandOS
         public void PutQuestMonster(int rIdx)
         {
             int y, x;
-            if (SaveGame.MonsterRaces[rIdx].MaxNum == 0)
+            if (SaveGame.SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
             {
-                SaveGame.MonsterRaces[rIdx].MaxNum++;
+                SaveGame.SingletonRepository.MonsterRaces[rIdx].MaxNum++;
                 SaveGame.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
             }
             do
@@ -2240,8 +2240,8 @@ namespace AngbandOS
 
         private void ImageMonster(out Colour ap, out char cp)
         {
-            cp = SaveGame.MonsterRaces[Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2)].Character;
-            ap = SaveGame.MonsterRaces[Program.Rng.DieRoll(SaveGame.MonsterRaces.Count - 2)].Colour;
+            cp = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Character;
+            ap = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Colour;
         }
 
         private void ImageObject(out Colour ap, out char cp)
@@ -2486,7 +2486,7 @@ namespace AngbandOS
             }
             if (y == _player.MapY && x == _player.MapX)
             {
-                MonsterRace rPtr = SaveGame.MonsterRaces[0];
+                MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[0];
                 a = rPtr.Colour;
                 c = rPtr.Character;
                 ap = a;

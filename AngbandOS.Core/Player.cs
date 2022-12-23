@@ -258,9 +258,9 @@ namespace AngbandOS
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;
             }
-            for (int i = 1; i < SaveGame.MonsterRaces.Count; i++)
+            for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
             {
-                MonsterRace rPtr = SaveGame.MonsterRaces[i];
+                MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[i];
                 rPtr.CurNum = 0;
                 rPtr.MaxNum = 100;
                 if (rPtr.Unique)
@@ -269,7 +269,7 @@ namespace AngbandOS
                 }
                 rPtr.Knowledge.RPkills = 0;
             }
-            SaveGame.MonsterRaces[SaveGame.MonsterRaces.Count - 1].MaxNum = 0;
+            SaveGame.SingletonRepository.MonsterRaces[SaveGame.SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
             Food = Constants.PyFoodFull - 1;
             IsWizard = false;
             IsWinner = false;

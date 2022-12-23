@@ -48,5 +48,14 @@ namespace AngbandOS.Core
                 }
             }
         }
+
+        public SingletonFactory(SaveGame saveGame, T[] items)
+        {
+            foreach (T item in items)
+            {
+                list.Add(item);
+                dictionary.Add(item.GetType().Name, item);
+            }
+        }
     }
 }

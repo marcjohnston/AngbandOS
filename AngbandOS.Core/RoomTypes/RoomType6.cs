@@ -95,11 +95,11 @@ namespace AngbandOS.Core.RoomTypes
                     int _templateRace;
                     do
                     {
-                        _templateRace = Program.Rng.DieRoll(saveGame.MonsterRaces.Count - 2);
-                    } while (saveGame.MonsterRaces[_templateRace].Unique ||
-                             saveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                        _templateRace = Program.Rng.DieRoll(saveGame.SingletonRepository.MonsterRaces.Count - 2);
+                    } while (saveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
+                             saveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                              saveGame.Difficulty + Program.Rng.DieRoll(5));
-                    getMonNumHook = new SymbolMonsterSelector(saveGame.MonsterRaces[_templateRace].Character);
+                    getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Character);
                 }
                 else
                 {
@@ -172,8 +172,8 @@ namespace AngbandOS.Core.RoomTypes
                 {
                     int i1 = j;
                     int i2 = j + 1;
-                    int p1 = saveGame.MonsterRaces[what[i1]].Level;
-                    int p2 = saveGame.MonsterRaces[what[i2]].Level;
+                    int p1 = saveGame.SingletonRepository.MonsterRaces[what[i1]].Level;
+                    int p2 = saveGame.SingletonRepository.MonsterRaces[what[i2]].Level;
                     if (p1 > p2)
                     {
                         tmp = what[i1];

@@ -1,7 +1,9 @@
 ﻿using AngbandOS.Commands;
 using AngbandOS.Core.FixedArtifacts;
 using AngbandOS.Core.ItemClasses;
+using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
+using System.Reflection;
 
 namespace AngbandOS.Core
 {
@@ -15,6 +17,7 @@ namespace AngbandOS.Core
         public SingletonFactory<ItemClass> ItemCategories;
         public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonFactory<MonsterRace> MonsterRaces;
 
         public void Initialize(SaveGame saveGame)
         {
@@ -28,6 +31,31 @@ namespace AngbandOS.Core
                 dictionary.Add(baseFixedArtifact.FixedArtifactID, new FixedArtifact(baseFixedArtifact));
             }
             FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
+
+            int index = 0;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            List<MonsterRace> monsterRaces = new List<MonsterRace>();
+            for (int level = -1; level < 128; level++)
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    // Check to see if the type implements the MonsterRace interface and is not an abstract class.
+                    if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
+                    {
+                        // Load the monster.
+                        ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                        MonsterRace monsterRace = (MonsterRace)constructors[0].Invoke(new object[] { saveGame });
+
+                        if (monsterRace.LevelFound == level)
+                        {
+                            monsterRace.Index = index;
+                            monsterRaces.Add(monsterRace);
+                            index++;
+                        }
+                    }
+                }
+            }
+            MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces.ToArray());
         }
     }
 }

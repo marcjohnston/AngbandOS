@@ -146,7 +146,7 @@ namespace AngbandOS.Projection
                     note = " changes!";
                     dam = 0;
                     SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    MonsterRace race = SaveGame.MonsterRaces[tmp];
+                    MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
                     SaveGame.Level.Monsters.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
                     mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
                 }

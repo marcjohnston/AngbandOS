@@ -83,17 +83,17 @@ namespace AngbandOS.Core.RoomTypes
 
                 do
                 {
-                    _templateRace = Program.Rng.DieRoll(saveGame.MonsterRaces.Count - 2);
-                } while (saveGame.MonsterRaces[_templateRace].Unique ||
-                         saveGame.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                    _templateRace = Program.Rng.DieRoll(saveGame.SingletonRepository.MonsterRaces.Count - 2);
+                } while (saveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
+                         saveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                          saveGame.Difficulty + Program.Rng.DieRoll(5));
                 if (Program.Rng.DieRoll(2) != 1 && saveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
                 {
-                    getMonNumHook = new SymbolMonsterSelector(saveGame.MonsterRaces[_templateRace].Character);
+                    getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Character);
                 }
                 else
                 {
-                    getMonNumHook = new CloneMonsterSelector(saveGame.MonsterRaces[_templateRace]);
+                    getMonNumHook = new CloneMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace]);
                 }
             }
             else if (tmp < 25)
@@ -148,7 +148,7 @@ namespace AngbandOS.Core.RoomTypes
                 for (x = xval - 9; x <= xval + 9; x++)
                 {
                     int rIdx = what[Program.Rng.RandomLessThan(64)];
-                    MonsterRace race = saveGame.MonsterRaces[rIdx];
+                    MonsterRace race = saveGame.SingletonRepository.MonsterRaces[rIdx];
                     saveGame.Level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
                 }
             }

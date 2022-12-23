@@ -99,7 +99,6 @@ namespace AngbandOS
         public const int HurtChance = 16;
 
         public ExPlayer ExPlayer;
-        public MonsterRaceArray MonsterRaces;
         public RareItemTypeArray RareItemTypes;
         public VaultTypeArray VaultTypes;
         private readonly List<string> _messageBuf = new List<string>();
@@ -270,23 +269,13 @@ namespace AngbandOS
 
         private void PopulateNewProfile()
         {
-            MonsterRaces = new MonsterRaceArray(this);
-            AddKnowledge();
             RareItemTypes = new RareItemTypeArray(this);
             VaultTypes = new VaultTypeArray(this);
         }
 
-        private void AddKnowledge()
-        {
-            foreach (MonsterRace monsterType in MonsterRaces)
-            {
-                monsterType.Knowledge = new MonsterKnowledge(this, monsterType);
-            }
-        }
-
         public int GetMonsterIndexFromName(string name)
         {
-            foreach (MonsterRace race in MonsterRaces)
+            foreach (MonsterRace race in SingletonRepository.MonsterRaces)
             {
                 if (race.Name == name)
                 {
@@ -298,7 +287,7 @@ namespace AngbandOS
 
         public void ResetGuardians()
         {
-            foreach (MonsterRace race in MonsterRaces)
+            foreach (MonsterRace race in SingletonRepository.MonsterRaces)
             {
                 race.Guardian = false;
             }
@@ -306,7 +295,7 @@ namespace AngbandOS
 
         public void ResetUniqueOnlyGuardianStatus()
         {
-            foreach (MonsterRace race in MonsterRaces)
+            foreach (MonsterRace race in SingletonRepository.MonsterRaces)
             {
                 race.OnlyGuardian = false;
             }
@@ -2200,9 +2189,9 @@ namespace AngbandOS
             aux = new int[Constants.MaxDepth];
             num = new int[Constants.MaxDepth];
             AllocRaceSize = 0;
-            for (i = 1; i < MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SingletonRepository.MonsterRaces.Count - 1; i++)
             {
-                rPtr = MonsterRaces[i];
+                rPtr = SingletonRepository.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     AllocRaceSize++;
@@ -2223,9 +2212,9 @@ namespace AngbandOS
                 AllocRaceTable[k] = new AllocationEntry();
             }
             table = AllocRaceTable;
-            for (i = 1; i < MonsterRaces.Count - 1; i++)
+            for (i = 1; i < SingletonRepository.MonsterRaces.Count - 1; i++)
             {
-                rPtr = MonsterRaces[i];
+                rPtr = SingletonRepository.MonsterRaces[i];
                 if (rPtr.Rarity != 0)
                 {
                     int x = rPtr.Level;
@@ -5229,7 +5218,7 @@ namespace AngbandOS
                 {
                     break;
                 }
-                rPtr = MonsterRaces[r];
+                rPtr = SingletonRepository.MonsterRaces[r];
                 if (rPtr.Unique)
                 {
                     continue;
@@ -8545,7 +8534,7 @@ namespace AngbandOS
                             {
                                 MsgPrint($"{monsterName} changes!");
                                 Level.Monsters.DeleteMonsterByIndex(tile.MonsterIndex, true);
-                                MonsterRace newRace = MonsterRaces[newRaceIndex];
+                                MonsterRace newRace = SingletonRepository.MonsterRaces[newRaceIndex];
                                 Level.Monsters.PlaceMonsterAux(y, x, newRace, false, false, false);
                                 monster = Level.Monsters[tile.MonsterIndex];
                                 monsterName = monster.Name;
@@ -15875,7 +15864,7 @@ namespace AngbandOS
             ResetGuardians();
             if (Quests.IsQuest(CurrentDepth))
             {
-                MonsterRaces[Quests.GetQuestMonster()].Guardian = true;
+                SingletonRepository.MonsterRaces[Quests.GetQuestMonster()].Guardian = true;
             }
             if (Program.Rng.PercentileRoll(4) && !CurDungeon.Tower)
             {
@@ -15904,7 +15893,7 @@ namespace AngbandOS
             {
                 int rIdx = Quests.GetQuestMonster();
                 int qIdx = Quests.GetQuestNumber();
-                while (MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
+                while (SingletonRepository.MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
                 {
                     Level.PutQuestMonster(Quests[qIdx].RIdx);
                 }

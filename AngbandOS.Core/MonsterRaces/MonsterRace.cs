@@ -7,6 +7,7 @@ namespace AngbandOS.Core.MonsterRaces
     [Serializable]
     internal abstract class MonsterRace : IMonsterCharacteristics
     {
+        protected SaveGame SaveGame;
         public virtual MonsterSpellList Spells => new MonsterSpellList();
 
         public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
@@ -381,6 +382,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         protected MonsterRace(SaveGame saveGame)
         {
+            SaveGame = SaveGame;
+            Knowledge = new MonsterKnowledge(saveGame, this);
             int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
             int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
             FrequencyChance = (freqInate + freqSpell) / 2;
