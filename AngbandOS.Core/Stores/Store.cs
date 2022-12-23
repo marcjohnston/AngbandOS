@@ -1528,7 +1528,6 @@ namespace AngbandOS
                             if (command.RequiresRerendering)
                                 DisplayStore();
 
-                            // The command was processed.  Skip the SWITCH statement.
                             return;
                         }
                     }

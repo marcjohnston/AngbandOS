@@ -2,18 +2,21 @@
 {
     internal class WeightedRandom<T>
     {
-        Dictionary<int, T> values = new Dictionary<int, T>();
-        public void Add(int weight, T value)
+        Dictionary<int, T> dictionary = new Dictionary<int, T>();
+        public void Add(int weight, params T[] values)
         {
             for (int i = 0; i < weight; i++)
             {
-                values.Add(values.Count, value);
+                foreach (T value in values)
+                {
+                    dictionary.Add(dictionary.Count, value);
+                }
             }
         }
         public T Choose()
         {
-            int choice = Program.Rng.RandomLessThan(values.Count);
-            return values[choice];
+            int choice = Program.Rng.RandomLessThan(dictionary.Count);
+            return dictionary[choice];
         }
     }
     internal class WeightedRandomAction

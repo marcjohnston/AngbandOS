@@ -13430,8 +13430,7 @@ namespace AngbandOS
                 Level.PanelColMax = 0;
                 if (CurrentDepth == 0)
                 {
-                    if (Wilderness[Player.WildernessY][Player.WildernessX]
-                            .Town != null)
+                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                     {
                         CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
                         DungeonDifficulty = 0;

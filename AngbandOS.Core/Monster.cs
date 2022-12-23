@@ -11,6 +11,7 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Core.SpellResistantDetections;
+using AngbandOS.Core.WeightedRandoms;
 using AngbandOS.Enumerations;
 using AngbandOS.Projection;
 
@@ -82,27 +83,12 @@ namespace AngbandOS
         public int Speed;
         public int StolenGold;
         public int StunLevel;
-        private static readonly string[] _funnyComments = { "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!" };
         private readonly SaveGame SaveGame;
 
         public Monster(SaveGame saveGame)
         {
             SaveGame = saveGame;
         }
-
-        private static readonly string[] _funnyDesc =
-        {
-            "silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
-            "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
-            "amazing", "incredible", "chaotic", "wild", "preposterous"
-        };
-
-        private static readonly string[] _horrorDesc =
-        {
-            "abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
-            "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
-            "sacrilegious", "terrible", "unclean", "unspeakable"
-        };
 
         /// <summary>
         /// Returns the name of the monster.
@@ -375,15 +361,18 @@ namespace AngbandOS
                 }
                 if (player.TimedHallucinations != 0)
                 {
-                    SaveGame.MsgPrint($"You behold the {_funnyDesc[Program.Rng.DieRoll(Constants.MaxFunny) - 1]} visage of {mName}!");
+                    FunnyDescriptions funnyDescriptions = new FunnyDescriptions();
+                    SaveGame.MsgPrint($"You behold the {funnyDescriptions.Choose()} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        SaveGame.MsgPrint(_funnyComments[Program.Rng.DieRoll(Constants.MaxComment) - 1]);
+                        FunnyComments funnyComments = new FunnyComments();
+                        SaveGame.MsgPrint(funnyComments.Choose());
                         player.TimedHallucinations += Program.Rng.DieRoll(Race.Level);
                     }
                     return;
                 }
-                SaveGame.MsgPrint($"You behold the {_horrorDesc[Program.Rng.DieRoll(Constants.MaxHorror) - 1]} visage of {mName}!");
+                HorrificDescriptions horrificDescriptions = new HorrificDescriptions();
+                SaveGame.MsgPrint($"You behold the {horrificDescriptions.Choose()} visage of {mName}!");
                 Race.Knowledge.Characteristics.EldritchHorror = true;
 
                 // Allow the race to resist.
