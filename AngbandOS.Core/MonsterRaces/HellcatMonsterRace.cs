@@ -16,9 +16,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 5),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 5),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 5),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
         };
         public override string Description => "It is as large as a tiger, its yellow eyes are pupilless.";
         public override bool Evil => true;

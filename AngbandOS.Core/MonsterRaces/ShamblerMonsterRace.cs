@@ -18,10 +18,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 150;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12),
-            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 8, 12)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 12),
+            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 8, 12)
         };
         public override bool BashDoor => true;
         public override string Description => "This elemental creature is power incarnate; it looks like a huge polar bear with a huge gaping maw instead of a head.";

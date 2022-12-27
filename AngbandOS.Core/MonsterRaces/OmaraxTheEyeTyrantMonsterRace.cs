@@ -30,10 +30,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new Exp40AttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Gaze, new UnPowerAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Gaze, new LoseIntAttackEffect(), 2, 6)
+            new MonsterAttack(new GazeAttackType(), new Exp40AttackEffect(), 2, 6),
+            new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 2, 6),
+            new MonsterAttack(new GazeAttackType(), new UnPowerAttackEffect(), 2, 6),
+            new MonsterAttack(new GazeAttackType(), new LoseIntAttackEffect(), 2, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A disembodied eye, floating in the air. His gaze seems to shred your soul and his spells crush your will. He is ancient, his history steeped in forgotten evils, his atrocities numerous and sickening.";

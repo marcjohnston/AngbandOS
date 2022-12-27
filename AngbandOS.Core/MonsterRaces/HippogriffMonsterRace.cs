@@ -16,8 +16,8 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 14;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 5),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 5),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 5),
         };
         public override bool BashDoor => true;
         public override string Description => "A strange hybrid of eagle, lion and horse. It looks weird.";

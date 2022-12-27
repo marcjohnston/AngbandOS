@@ -38,10 +38,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 160;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 10, 12),
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 10, 12),
-            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0)
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 10, 12),
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 10, 12),
+            new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
         public override string Description => "Mighty in spells and enchantments,he created the One Ring. His eyes glow with power and his gaze seeks to destroy your soul. He has many servants, and rarely fights without them.";

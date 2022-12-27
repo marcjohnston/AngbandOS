@@ -15,10 +15,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 5)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5)
         };
         public override bool BashDoor => true;
         public override string Description => "Another of Morgoth's servants, this orc is strong and cunning. He is ugly and scarred from many power struggles.";

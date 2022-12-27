@@ -22,9 +22,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 6),
         };
         public override string Description => "A dragon of elemental power, with control over light and dark, the ethereal drake's eyes glare with white hatred from the shadows.";
         public override bool Dragon => true;

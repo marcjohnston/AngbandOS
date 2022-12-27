@@ -1,6 +1,7 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -16,7 +17,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 15;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crawl, new Exp10AttackEffect(), 0, 0),
+            new MonsterAttack(new CrawlAttackType(), new Exp10AttackEffect(), 0, 0),
         };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;

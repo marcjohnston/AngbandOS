@@ -22,10 +22,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 14, 6),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 14, 6)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 14, 6),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 14, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "The mighty dragon of the Norse myth, Fafner was a giant who slew his brother to win a treasure hoard, and then transformed himself into a dragon, greedily watching over his hoard.";

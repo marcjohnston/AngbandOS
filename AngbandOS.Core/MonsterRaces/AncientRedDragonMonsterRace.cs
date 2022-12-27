@@ -21,9 +21,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 5, 14),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 5, 14),
         };
         public override bool BashDoor => true;
         public override string Description => "A huge draconic form. Wisps of smoke steam from its nostrils and the extreme heat surrounding it makes you gasp for breath.";

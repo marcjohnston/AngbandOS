@@ -14,7 +14,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Drool, null, 0, 0),
+            new MonsterAttack(new DroolAttackType(), null, 0, 0),
         };
         public override bool BashDoor => true;
         public override string Description => "Ugly doesn't begin to describe him.";

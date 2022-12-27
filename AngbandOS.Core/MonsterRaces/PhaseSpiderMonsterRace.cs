@@ -20,9 +20,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 25;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 6),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
         public override string Description => "A spider that never seems quite there. Everywhere you look it is just half-seen in the corner of one eye.";

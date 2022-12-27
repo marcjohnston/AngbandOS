@@ -16,9 +16,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 8),
         };
         public override string Description => "Devil-bats, notoriously difficult to kill.";
         public override bool Evil => true;

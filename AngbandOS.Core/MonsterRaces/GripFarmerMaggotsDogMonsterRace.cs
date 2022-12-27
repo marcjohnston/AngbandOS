@@ -16,7 +16,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 4),
         };
         public override bool BashDoor => true;
         public override string Description => "A rather vicious dog belonging to Farmer Maggot. It thinks you are stealing mushrooms.";

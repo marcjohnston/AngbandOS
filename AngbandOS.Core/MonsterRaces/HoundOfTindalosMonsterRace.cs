@@ -22,10 +22,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new LoseWisAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new LoseWisAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new LoseWisAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new LoseWisAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new LoseWisAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new LoseWisAttackEffect(), 2, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool Cthuloid => true;
         public override string Description => "'They are lean and athirst!'";

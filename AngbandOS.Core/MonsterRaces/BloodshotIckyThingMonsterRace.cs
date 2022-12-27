@@ -18,8 +18,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 18;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new HurtAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Crawl, new AcidAttackEffect(), 2, 4),
+            new MonsterAttack(new TouchAttackType(), new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new CrawlAttackType(), new AcidAttackEffect(), 2, 4),
         };
         public override string Description => "It is a strange, slimy, icky creature.";
         public override bool EmptyMind => true;

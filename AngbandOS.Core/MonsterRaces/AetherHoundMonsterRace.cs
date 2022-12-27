@@ -1,7 +1,7 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
-using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -37,10 +37,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;

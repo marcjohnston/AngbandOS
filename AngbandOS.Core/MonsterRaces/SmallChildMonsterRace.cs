@@ -14,7 +14,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Worship, null, 0, 0),
+            new MonsterAttack(new WorshipAttackType(), null, 0, 0),
         };
         public override string Description => "A rather cute child with large trusting eyes.";
         public override int FreqInate => 0;

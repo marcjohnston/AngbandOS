@@ -24,10 +24,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 150;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 4, 6)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6)
         };
         public override bool ColdBlood => true;
         public override string Description => "This huge affront to existence twists and tears at the fabric of space.Darkness itself recoils from the touch of Tselakus as he leaves a trailof death and destruction. Mighty claws rend reality as heannihilates all in his path to your soul!";

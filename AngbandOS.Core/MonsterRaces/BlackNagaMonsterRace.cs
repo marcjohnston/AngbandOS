@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 40;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 1, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A large black serpent's body with a female torso.";

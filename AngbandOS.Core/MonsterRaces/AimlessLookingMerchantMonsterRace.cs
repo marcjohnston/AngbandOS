@@ -1,6 +1,7 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -15,7 +16,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 3),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
         public override string Description => "The typical ponce around town, with purse jingling, and looking for more amulets of adornment to buy.";

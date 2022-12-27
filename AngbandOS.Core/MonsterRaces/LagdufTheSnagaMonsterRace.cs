@@ -15,10 +15,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 32;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9)
         };
         public override bool BashDoor => true;
         public override string Description => "A captain of a regiment of weaker orcs, Lagduf keeps his troop in order with displays of excessive violence.";

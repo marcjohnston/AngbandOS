@@ -7,6 +7,7 @@
 // copies. Other copyrights may also apply.�
 using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
+using AngbandOS.Core.AttackTypes;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.MonsterSpells;
@@ -1172,7 +1173,6 @@ namespace AngbandOS
         {
             Monster target = saveGame.Level.Monsters[targetIndex];
             MonsterRace targetRace = target.Race;
-            bool touched = false;
             int ySaver = target.MapY;
             int xSaver = target.MapX;
             // If we never attack then we shouldn't this time
@@ -1183,7 +1183,6 @@ namespace AngbandOS
             int armourClass = targetRace.ArmourClass;
             int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
             string monsterName = Name;
-            string targetName = target.Name;
 
             bool blinked = false;
             // If the player can't see either monster, they just hear noise
@@ -1198,11 +1197,9 @@ namespace AngbandOS
                 {
                     bool visible = false;
                     bool obvious = false;
-                    int power = 0;
                     int damage = 0;
-                    string act = null;
-                    BaseAttackEffect effect = Race.Attacks[attackNumber].Effect;
-                    AttackType method = Race.Attacks[attackNumber].Method;
+                    BaseAttackEffect? effect = Race.Attacks[attackNumber].Effect;
+                    BaseAttackType method = Race.Attacks[attackNumber].Method;
                     int dDice = Race.Attacks[attackNumber].DDice;
                     int dSide = Race.Attacks[attackNumber].DSide;
                     // Can't attack ourselves
@@ -1215,11 +1212,6 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    // If we don't have an attack in this attack slot, abort
-                    if (method == 0)
-                    {
-                        break;
-                    }
                     // If we blinked away after stealing on a previous attack, abort
                     if (blinked)
                     {
@@ -1229,137 +1221,20 @@ namespace AngbandOS
                     {
                         visible = true;
                     }
-                    // Get the power of the attack based on the attack type
-                    power = effect.Power;
 
                     // If we hit the monster, describe the type of hit
-                    if (effect == null || CheckHitMonsterVersusMonster(power, monsterLevel, armourClass))
+                    if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armourClass))
                     {
                         saveGame.Disturb(true);
-                        switch (method)
+                        if (method.AttackAwakensTarget)
                         {
-                            case AttackType.Hit:
-                                act = "hits {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Touch:
-                                act = "touches {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Punch:
-                                act = "punches {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Kick:
-                                act = "kicks {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Claw:
-                                act = "claws {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Bite:
-                                act = "bites {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Sting:
-                                act = "stings {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Butt:
-                                act = "butts {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Crush:
-                                act = "crushes {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Engulf:
-                                act = "engulfs {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Charge:
-                                act = "charges {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Crawl:
-                                act = "crawls on {0}.";
-                                touched = true;
-                                break;
-
-                            case AttackType.Drool:
-                                act = "drools on {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Spit:
-                                act = "spits on {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Gaze:
-                                act = "gazes at {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Wail:
-                                act = "wails at {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Spore:
-                                act = "releases spores at {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Worship:
-                                act = "hero worships {0}.";
-                                touched = false;
-                                break;
-
-                            case AttackType.Beg:
-                                act = "begs {0} for money.";
-                                touched = false;
-                                target.SleepLevel = 0;
-                                break;
-
-                            case AttackType.Insult:
-                                act = "insults {0}.";
-                                touched = false;
-                                target.SleepLevel = 0;
-                                break;
-
-                            case AttackType.Moan:
-                                act = "moans at {0}.";
-                                touched = false;
-                                target.SleepLevel = 0;
-                                break;
-
-                            case AttackType.Show:
-                                act = "sings to {0}.";
-                                touched = false;
-                                target.SleepLevel = 0;
-                                break;
+                            target.SleepLevel = 0;
                         }
+
                         // Display the attack description
-                        if (!string.IsNullOrEmpty(act))
+                        if (IsVisible || target.IsVisible)
                         {
-                            string temp = string.Format(act, targetName);
-                            if (IsVisible || target.IsVisible)
-                            {
-                                saveGame.MsgPrint($"{monsterName} {temp}");
-                            }
+                            saveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
                         }
                         obvious = true;
                         damage = Program.Rng.DiceRoll(dDice, dSide);
@@ -1380,7 +1255,7 @@ namespace AngbandOS
                         {
                             saveGame.Project(GetMonsterIndex(saveGame), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             // If we touched the target we might get burned or zapped
-                            if (touched)
+                            if (method.AttackTouchesTarget)
                             {
                                 if (targetRace.FireAura && !Race.ImmuneFire)
                                 {
@@ -1419,25 +1294,10 @@ namespace AngbandOS
                     else
                     {
                         // We didn't hit, so just let the player know that if we are visible
-                        switch (method)
+                        if (method.AttackTouchesTarget && !method.RendersMissMessage && IsVisible)
                         {
-                            case AttackType.Hit:
-                            case AttackType.Touch:
-                            case AttackType.Punch:
-                            case AttackType.Kick:
-                            case AttackType.Claw:
-                            case AttackType.Bite:
-                            case AttackType.Sting:
-                            case AttackType.Butt:
-                            case AttackType.Crush:
-                            case AttackType.Engulf:
-                            case AttackType.Charge:
-                                if (IsVisible)
-                                {
-                                    saveGame.Disturb(false);
-                                    saveGame.MsgPrint($"{monsterName} misses {targetName}.");
-                                }
-                                break;
+                            saveGame.Disturb(false);
+                            saveGame.MsgPrint($"{monsterName} misses {target.Name}.");
                         }
                     }
                     // If the player saw what happened, they know more abouyt what attacks we have
@@ -2798,16 +2658,11 @@ namespace AngbandOS
                     bool obvious = false;
                     int power = 0;
                     int damage = 0;
-                    string act = null;
                     BaseAttackEffect? effect = Race.Attacks[attackNumber].Effect;
-                    AttackType method = Race.Attacks[attackNumber].Method;
+                    BaseAttackType method = Race.Attacks[attackNumber].Method;
                     int damageDice = Race.Attacks[attackNumber].DDice;
                     int damageSides = Race.Attacks[attackNumber].DSide;
-                    // If the monster doesn't have an attack in this slot, stop looping
-                    if (method == AttackType.Nothing)
-                    {
-                        break;
-                    }
+
                     // Stop if player is dead or gone
                     if (!alive || saveGame.Player.IsDead || saveGame.NewLevelFlag)
                     {
@@ -2836,149 +2691,12 @@ namespace AngbandOS
                             saveGame.MsgPrint($"{monsterName} is repelled.");
                             continue;
                         }
-                        bool doCut = false;
-                        bool doStun = false;
-                        // Give a description and remember the possible extras based on the attack method
-                        switch (method)
-                        {
-                            case AttackType.Hit:
-                                {
-                                    act = "hits you.";
-                                    doCut = true;
-                                    doStun = true;
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Touch:
-                                {
-                                    act = "touches you.";
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Punch:
-                                {
-                                    act = "punches you.";
-                                    touched = true;
-                                    doStun = true;
-                                    break;
-                                }
-                            case AttackType.Kick:
-                                {
-                                    act = "kicks you.";
-                                    touched = true;
-                                    doStun = true;
-                                    break;
-                                }
-                            case AttackType.Claw:
-                                {
-                                    act = "claws you.";
-                                    touched = true;
-                                    doCut = true;
-                                    break;
-                                }
-                            case AttackType.Bite:
-                                {
-                                    act = "bites you.";
-                                    doCut = true;
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Sting:
-                                {
-                                    act = "stings you.";
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Butt:
-                                {
-                                    act = "butts you.";
-                                    doStun = true;
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Crush:
-                                {
-                                    act = "crushes you.";
-                                    doStun = true;
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Engulf:
-                                {
-                                    act = "engulfs you.";
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Charge:
-                                {
-                                    act = "charges you.";
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Crawl:
-                                {
-                                    act = "crawls on you.";
-                                    touched = true;
-                                    break;
-                                }
-                            case AttackType.Drool:
-                                {
-                                    act = "drools on you.";
-                                    break;
-                                }
-                            case AttackType.Spit:
-                                {
-                                    act = "spits on you.";
-                                    break;
-                                }
-                            case AttackType.Gaze:
-                                {
-                                    act = "gazes at you.";
-                                    break;
-                                }
-                            case AttackType.Wail:
-                                {
-                                    act = "wails at you.";
-                                    break;
-                                }
-                            case AttackType.Spore:
-                                {
-                                    act = "releases spores at you.";
-                                    break;
-                                }
-                            case AttackType.Worship:
-                                {
-                                    string[] worships = { "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!", "dances around you!", "tugs at your clothing!", "asks if you will adopt him!" };
-                                    act = worships[Program.Rng.RandomLessThan(8)];
-                                    break;
-                                }
-                            case AttackType.Beg:
-                                {
-                                    act = "begs you for money.";
-                                    break;
-                                }
-                            case AttackType.Insult:
-                                {
-                                    string[] insults = { "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!", "dances around you!", "makes obscene gestures!", "moons you!" };
-                                    act = insults[Program.Rng.RandomLessThan(8)];
-                                    break;
-                                }
-                            case AttackType.Moan:
-                                {
-                                    string[] moans = { "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms." };
-                                    act = moans[Program.Rng.RandomLessThan(4)];
-                                    break;
-                                }
-                            case AttackType.Show:
-                                {
-                                    act = Program.Rng.DieRoll(3) == 1 ? "sings 'We are a happy family.'" : "sings 'I love you, you love me.'";
-                                    break;
-                                }
-                        }
+    
                         // Print the message
-                        if (!string.IsNullOrEmpty(act))
+                        string action = method.PlayerAction(saveGame);
+                        if (!string.IsNullOrEmpty(action))
                         {
-                            saveGame.MsgPrint($"{monsterName} {act}");
+                            saveGame.MsgPrint($"{monsterName} {action}.");
                         }
                         obvious = true;
                         // Work out base damage done by the attack
@@ -2993,6 +2711,8 @@ namespace AngbandOS
                             effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(saveGame), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
 
                         // Be nice and don't let us be both stunned and cut by the same blow
+                        bool doCut = method.AttackCutsTarget;
+                        bool doStun = method.AttackStunsTarget;
                         if (doCut && doStun)
                         {
                             if (Program.Rng.RandomLessThan(100) < 50)
@@ -3143,25 +2863,10 @@ namespace AngbandOS
                     else
                     {
                         // It missed us, so give us the appropriate message
-                        switch (method)
+                        if (method.RendersMissMessage && IsVisible)
                         {
-                            case AttackType.Hit:
-                            case AttackType.Touch:
-                            case AttackType.Punch:
-                            case AttackType.Kick:
-                            case AttackType.Claw:
-                            case AttackType.Bite:
-                            case AttackType.Sting:
-                            case AttackType.Butt:
-                            case AttackType.Crush:
-                            case AttackType.Engulf:
-                            case AttackType.Charge:
-                                if (IsVisible)
-                                {
-                                    saveGame.Disturb(true);
-                                    saveGame.MsgPrint($"{monsterName} misses you.");
-                                }
-                                break;
+                            saveGame.Disturb(true);
+                            saveGame.MsgPrint($"{monsterName} misses you.");
                         }
                     }
                     // If the player saw the monster, they now know more about what attacks it can do

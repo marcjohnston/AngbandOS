@@ -18,7 +18,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 3;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new HurtAttackEffect(), 1, 1),
+            new MonsterAttack(new TouchAttackType(), new HurtAttackEffect(), 1, 1),
         };
         public override string Description => "A strange fibrous growth springing up everywhere.";
         public override bool EmptyMind => true;

@@ -21,8 +21,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 13;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new EatGoldAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new EatItemAttackEffect(), 0, 0),
         };
         public override bool ColdBlood => true;
         public override string Description => "This little creature has a fiendish gleam in its eyes.";

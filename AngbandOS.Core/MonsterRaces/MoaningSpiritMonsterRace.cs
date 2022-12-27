@@ -19,8 +19,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 20;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Wail, new TerrifyAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new LoseDexAttackEffect(), 1, 8),
+            new MonsterAttack(new WailAttackType(), new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 1, 8),
         };
         public override bool ColdBlood => true;
         public override string Description => "A ghostly apparition that shrieks horribly.";

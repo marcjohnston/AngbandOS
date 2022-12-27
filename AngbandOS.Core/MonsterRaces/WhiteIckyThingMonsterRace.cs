@@ -13,7 +13,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 7;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new HurtAttackEffect(), 1, 2),
+            new MonsterAttack(new TouchAttackType(), new HurtAttackEffect(), 1, 2),
         };
         public override string Description => "It is a smallish, slimy, icky creature.";
         public override bool EmptyMind => true;

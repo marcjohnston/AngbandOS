@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 16;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crawl, new ColdAttackEffect(), 1, 4),
+            new MonsterAttack(new CrawlAttackType(), new ColdAttackEffect(), 1, 4),
         };
         public override string Description => "It's blue and it's oozing.";
         public override bool Drop60 => true;

@@ -20,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 130;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 10),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 6, 14)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 10),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 6, 14)
         };
         public override bool BashDoor => true;
         public override string Description => "An ancient and wise Dragon. Scatha has grown clever over the long years. His scales are covered with frost, and his breath sends a shower of ice into the air.";

@@ -1,7 +1,9 @@
 using AngbandOS.Core.AttackEffects;
+using AngbandOS.Core.AttackTypes;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
-using AngbandOS.Enumerations;
+
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -19,9 +21,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 63;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "It has a form that legends are made of. Its still-tender scales are a tarnished gold hue, and light is reflected from its form.";

@@ -16,8 +16,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 12),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 12),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 12),
         };
         public override bool BashDoor => true;
         public override string Description => "Fighting for a good cause, and they consider you an agent of evil.";

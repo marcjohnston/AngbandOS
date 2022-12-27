@@ -15,8 +15,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 40;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
         };
         public override bool ColdBlood => true;
         public override string Description => "A whirling form of sentient rock.";

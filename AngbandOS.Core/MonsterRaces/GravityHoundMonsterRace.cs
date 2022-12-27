@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
         public override string Description => "Unfettered by the usual constraints of gravity, these unnatural creatures are walking on the walls and even the ceiling! The earth suddenly feels rather less solid as you see gravity warp all round the monsters.";

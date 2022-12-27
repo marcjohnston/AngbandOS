@@ -29,10 +29,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 120;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 10, 6),
-            new MonsterAttack(AttackType.Crush, new ColdAttackEffect(), 10, 6),
-            new MonsterAttack(AttackType.Crush, new AcidAttackEffect(), 10, 6),
-            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 16, 6)
+            new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 10, 6),
+            new MonsterAttack(new CrushAttackType(), new ColdAttackEffect(), 10, 6),
+            new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 10, 6),
+            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 16, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";

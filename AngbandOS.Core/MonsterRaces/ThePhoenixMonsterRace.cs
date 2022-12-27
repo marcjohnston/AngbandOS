@@ -24,10 +24,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 130;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 12, 6),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 12, 6),
-            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12),
-            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 9, 12)
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 12, 6),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 12, 6),
+            new MonsterAttack(new HitAttackType(), new FireAttackEffect(), 9, 12),
+            new MonsterAttack(new HitAttackType(), new FireAttackEffect(), 9, 12)
         };
         public override bool BashDoor => true;
         public override string Description => "A massive glowing eagle bathed in flames. The searing heat chars your skin and melts your armour.";

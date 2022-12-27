@@ -16,8 +16,8 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A large black cat, stalking you with intent. It thinks you're its next meal.";

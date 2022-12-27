@@ -24,9 +24,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 24;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A great yeek, powerful in magic and sorcery, but a yeek all the same.";

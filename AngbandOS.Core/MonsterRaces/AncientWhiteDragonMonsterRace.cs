@@ -19,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 9),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 9),
-            new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 5, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 9),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 9),
+            new MonsterAttack(new BiteAttackType(), new ColdAttackEffect(), 5, 12),
         };
         public override bool BashDoor => true;
         public override string Description => "A huge draconic form. Frost covers it from head to tail.";

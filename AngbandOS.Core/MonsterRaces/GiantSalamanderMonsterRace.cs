@@ -19,7 +19,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 40;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 6),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 3, 6),
         };
         public override string Description => "A large black and yellow lizard. You'd better run away!";
         public override bool ForceSleep => true;

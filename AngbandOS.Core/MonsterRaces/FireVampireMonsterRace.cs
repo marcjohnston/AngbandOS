@@ -18,7 +18,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 6;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new FireAttackEffect(), 1, 4),
+            new MonsterAttack(new TouchAttackType(), new FireAttackEffect(), 1, 4),
         };
         public override bool BashDoor => true;
         public override bool Cthuloid => true;

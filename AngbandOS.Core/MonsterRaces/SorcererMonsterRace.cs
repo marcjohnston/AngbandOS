@@ -29,9 +29,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A human figure in robes, he moves with magically improved speed, and his hands are ablur with spell casting.";

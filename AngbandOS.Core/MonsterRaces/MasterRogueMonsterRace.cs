@@ -15,9 +15,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Hit, new EatGoldAttackEffect(), 4, 4),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new EatGoldAttackEffect(), 4, 4),
         };
         public override bool BashDoor => true;
         public override string Description => "A thief of great power and shifty speed.";

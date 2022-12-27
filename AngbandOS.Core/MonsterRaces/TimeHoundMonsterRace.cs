@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
         public override string Description => "You get a terrible sense of deja vu, or is it a premonition? All at once you see a little puppy and a toothless old dog. Perhaps you should give up and go to bed.";

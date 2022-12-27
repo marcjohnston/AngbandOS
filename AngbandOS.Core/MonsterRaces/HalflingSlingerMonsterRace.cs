@@ -18,8 +18,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 40;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
         };
         public override string Description => "A rebel halfling who has rejected the halfling tradition of archery.";
         public override bool Drop90 => true;

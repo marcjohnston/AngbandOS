@@ -27,10 +27,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 5, 5),
-            new MonsterAttack(AttackType.Hit, new UnPowerAttackEffect(), 5, 5),
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 5, 5)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
+            new MonsterAttack(new HitAttackType(), new UnPowerAttackEffect(), 5, 5),
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 5, 5)
         };
         public override bool BashDoor => true;
         public override string Description => "Mandor is one of the greatest chaos Masters, a formidable magician.";

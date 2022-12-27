@@ -15,8 +15,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 12;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new PoisonAttackEffect(), 1, 6),
-            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 1, 6),
+            new MonsterAttack(new TouchAttackType(), new PoisonAttackEffect(), 1, 6),
+            new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 1, 6),
         };
         public override bool ColdBlood => true;
         public override string Description => "A sickening mound of decaying flesh, bones, hands and so on. It seems to be growing.";

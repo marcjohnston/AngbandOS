@@ -26,10 +26,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 140;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 8, 6),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 8, 6),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 12, 6),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 12, 6)
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 8, 6),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 8, 6),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 12, 6),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 12, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A massive legendary hydra. It has twelve powerful heads. Its many eyes stare at you as clouds of smoke and poisonous vapour rise from its seething form.";

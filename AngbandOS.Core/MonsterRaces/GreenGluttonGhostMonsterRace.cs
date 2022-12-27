@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 20;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new EatFoodAttackEffect(), 1, 1),
+            new MonsterAttack(new TouchAttackType(), new EatFoodAttackEffect(), 1, 1),
         };
         public override bool ColdBlood => true;
         public override string Description => "It is a very ugly green ghost with a voracious appetite.";

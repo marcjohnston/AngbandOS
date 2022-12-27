@@ -20,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 6),
-            new MonsterAttack(AttackType.Touch, new UnBonusAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 0, 0)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
+            new MonsterAttack(new TouchAttackType(), new UnBonusAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new EatGoldAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
         public override string Description => "This tiny night dwarf is as greedy for gold as his brother, Alberich.";

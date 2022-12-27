@@ -16,10 +16,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 50;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 10)
         };
         public override bool BashDoor => true;
         public override string Description => "A fierce and dangerous cat, its huge tusks and sharp claws would lacerate even the strongest armour.";

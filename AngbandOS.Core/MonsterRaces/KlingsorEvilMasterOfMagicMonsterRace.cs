@@ -31,10 +31,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 6, 8),
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 6, 8),
-            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new UnPowerAttackEffect(), 0, 0)
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 6, 8),
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 6, 8),
+            new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
         public override string Description => "Klingsor, whose hopeless effort to join the Knights of the Grail was thwarted, turned to black magic and became a deadly necromancer.";

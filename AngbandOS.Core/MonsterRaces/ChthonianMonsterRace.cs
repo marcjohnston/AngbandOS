@@ -26,10 +26,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 3, 11),
-            new MonsterAttack(AttackType.Crush, new ShatterAttackEffect(), 3, 11),
-            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 1, 2),
-            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 1, 2)
+            new MonsterAttack(new CrushAttackType(), new ShatterAttackEffect(), 3, 11),
+            new MonsterAttack(new CrushAttackType(), new ShatterAttackEffect(), 3, 11),
+            new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 1, 2),
+            new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 1, 2)
         };
         public override bool Cthuloid => true;
         public override string Description => "A huge subterranean worm whose body ends in a mass of groping tentacles.";

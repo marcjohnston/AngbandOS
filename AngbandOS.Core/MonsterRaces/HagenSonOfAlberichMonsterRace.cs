@@ -20,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 7),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 7),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 7),
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 0, 0)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 7),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 7),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 7),
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 0, 0)
         };
         public override bool BashDoor => true;
         public override string Description => "Alberich's son, born of a mortal woman won with gold.";

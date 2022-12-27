@@ -18,7 +18,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 6;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new LoseStrAttackEffect(), 1, 6),
+            new MonsterAttack(new GazeAttackType(), new LoseStrAttackEffect(), 1, 6),
         };
         public override string Description => "A disembodied eye, crackling with energy.";
         public override int FreqInate => 11;

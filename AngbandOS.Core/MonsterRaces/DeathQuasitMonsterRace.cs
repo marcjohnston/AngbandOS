@@ -21,9 +21,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new LoseDexAttackEffect(), 3, 6),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
+            new MonsterAttack(new BiteAttackType(), new LoseDexAttackEffect(), 3, 6),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
         };
         public override bool Demon => true;
         public override string Description => "It is a demon of small stature, but its armoured frame moves with lightning speed and its powers make it a tornado of death and destruction.";

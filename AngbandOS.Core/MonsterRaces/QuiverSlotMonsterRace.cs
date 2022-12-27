@@ -18,7 +18,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Spore, new ConfuseAttackEffect(), 1, 1),
+            new MonsterAttack(new SporeAttackType(), new ConfuseAttackEffect(), 1, 1),
         };
         public override bool ColdBlood => true;
         public override string Description => "An arrow hole in the floor, covered in fungal tendrils.";

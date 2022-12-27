@@ -19,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new ElectricityAttackEffect(), 1, 3),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 3),
-            new MonsterAttack(AttackType.Bite, new ElectricityAttackEffect(), 1, 3),
+            new MonsterAttack(new BiteAttackType(), new ElectricityAttackEffect(), 1, 3),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 3),
+            new MonsterAttack(new BiteAttackType(), new ElectricityAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
         public override string Description => "Saint Elmo's Fire forms a ghostly halo around this hound, and sparks sting your fingers as energy builds up in the air around you.";

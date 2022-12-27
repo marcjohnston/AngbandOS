@@ -24,10 +24,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 200;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 8, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 8, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 8, 12),
-            new MonsterAttack(AttackType.Bite, new ElectricityAttackEffect(), 9, 15)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(new BiteAttackType(), new ElectricityAttackEffect(), 9, 15)
         };
         public override bool BashDoor => true;
         public override string Description => "The mightiest elemental dragon of air, it can destroy you with ease.";

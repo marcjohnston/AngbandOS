@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Bite, new AcidAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new AcidAttackEffect(), 2, 8),
+            new MonsterAttack(new BiteAttackType(), new AcidAttackEffect(), 2, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
         public override string Description => "Liquid footprints follow this hound as it pads around the dungeon. An acrid smell of acid rises from the dog's pelt.";

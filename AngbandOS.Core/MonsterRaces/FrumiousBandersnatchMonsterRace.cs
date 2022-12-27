@@ -16,9 +16,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 4),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 4),
-            new MonsterAttack(AttackType.Sting, new HurtAttackEffect(), 2, 4),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 4),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 4),
+            new MonsterAttack(new StingAttackType(), new HurtAttackEffect(), 2, 4),
         };
         public override bool BashDoor => true;
         public override string Description => "It is a vast armoured centipede with massive mandibles and a spiked tail.";

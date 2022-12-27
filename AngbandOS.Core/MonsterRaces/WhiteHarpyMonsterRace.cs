@@ -14,9 +14,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 17;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 1),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 1),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 2),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 1),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 1),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 2),
         };
         public override string Description => "A flying, screeching bird with a woman's face.";
         public override bool Evil => true;

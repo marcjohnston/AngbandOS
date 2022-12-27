@@ -20,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 20;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crawl, new PoisonAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Crawl, new EatFoodAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 4)
+            new MonsterAttack(new CrawlAttackType(), new PoisonAttackEffect(), 1, 4),
+            new MonsterAttack(new CrawlAttackType(), new EatFoodAttackEffect(), 0, 0),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4)
         };
         public override bool BashDoor => true;
         public override string Description => "It is a strange, slimy, icky creature, with rudimentary intelligence, but evil cunning. It hungers for food, and you look tasty.";

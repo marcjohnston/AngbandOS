@@ -23,10 +23,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 170;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 5, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 5, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 5, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 8, 14)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 5, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 5, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 5, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 8, 14)
         };
         public override bool BashDoor => true;
         public override string Description => "A massive dragon of powerful intellect. It seeks to dominate the universe and despises all other life. It sees all who do not obey it as mere insects to be crushed underfoot.";

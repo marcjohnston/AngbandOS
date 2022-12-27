@@ -21,9 +21,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Gaze, new ConfuseAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Gaze, new UnBonusAttackEffect(), 0, 0),
+            new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 1, 4),
+            new MonsterAttack(new GazeAttackType(), new ConfuseAttackEffect(), 1, 4),
+            new MonsterAttack(new GazeAttackType(), new UnBonusAttackEffect(), 0, 0),
         };
         public override string Description => "It has three small eyestalks and a large central eye.";
         public override bool EmptyMind => true;

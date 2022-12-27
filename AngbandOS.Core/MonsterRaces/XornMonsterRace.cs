@@ -15,10 +15,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 6)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6)
         };
         public override bool ColdBlood => true;
         public override string Description => "A huge creature of the element Earth. Able to merge with its element, it has four huge arms protruding from its enormous torso.";

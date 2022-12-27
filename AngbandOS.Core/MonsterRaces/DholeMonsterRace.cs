@@ -19,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 64;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Spit, new AcidAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Engulf, new AcidAttackEffect(), 2, 8),
-            new MonsterAttack(AttackType.Crush, new HurtAttackEffect(), 4, 8),
+            new MonsterAttack(new SpitAttackType(), new AcidAttackEffect(), 1, 8),
+            new MonsterAttack(new EngulfAttackType(), new AcidAttackEffect(), 2, 8),
+            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 4, 8),
         };
         public override bool Cthuloid => true;
         public override string Description => "A gigantic worm dripping with acid.";

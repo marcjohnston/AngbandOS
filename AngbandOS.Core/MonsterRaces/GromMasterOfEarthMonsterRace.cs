@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 97;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 6, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 6, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 6, 6),
-            new MonsterAttack(AttackType.Hit, new ShatterAttackEffect(), 10, 10)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 6, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 6, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 6, 6),
+            new MonsterAttack(new HitAttackType(), new ShatterAttackEffect(), 10, 10)
         };
         public override bool ColdBlood => true;
         public override string Description => "A towering stone elemental stands before you. The walls and ceiling are reduced to rubble as Grom advances.";

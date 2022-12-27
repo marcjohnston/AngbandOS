@@ -23,8 +23,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new LoseIntAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Gaze, new LoseWisAttackEffect(), 2, 6),
+            new MonsterAttack(new GazeAttackType(), new LoseIntAttackEffect(), 2, 6),
+            new MonsterAttack(new GazeAttackType(), new LoseWisAttackEffect(), 2, 6),
         };
         public override bool BashDoor => true;
         public override string Description => "A humanoid form with a gruesome head, tentacular mouth, and piercing eyes. Claws reach out for you and you feel a presence invade your mind.";

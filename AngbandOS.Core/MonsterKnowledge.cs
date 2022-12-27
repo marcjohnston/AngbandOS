@@ -69,7 +69,7 @@ namespace AngbandOS
                 {
                     for (m = 0; m < _monsterType.Attacks.Length; m++)
                     {
-                        if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != 0)
+                        if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != null)
                         {
                             knowledge.RBlows[m] = Constants.MaxUchar;
                         }
@@ -1223,7 +1223,7 @@ namespace AngbandOS
             {
                 for (m = 0; m < _monsterType.Attacks.Length; m++)
                 {
-                    if (_monsterType.Attacks[m].Method == 0)
+                    if (_monsterType.Attacks[m].Method == null)
                     {
                         continue;
                     }
@@ -1238,7 +1238,7 @@ namespace AngbandOS
             {
                 for (m = 0; m < _monsterType.Attacks.Length; m++)
                 {
-                    if (_monsterType.Attacks[m].Method == 0)
+                    if (_monsterType.Attacks[m].Method == null)
                     {
                         continue;
                     }
@@ -1246,101 +1246,11 @@ namespace AngbandOS
                     {
                         continue;
                     }
-                    AttackType method = _monsterType.Attacks[m].Method;
+                    BaseAttackType method = _monsterType.Attacks[m].Method;
                     BaseAttackEffect? effect = _monsterType.Attacks[m].Effect;
                     int d1 = _monsterType.Attacks[m].DDice;
                     int d2 = _monsterType.Attacks[m].DSide;
-                    p = null;
-                    switch (method)
-                    {
-                        case AttackType.Hit:
-                            p = "hit";
-                            break;
-
-                        case AttackType.Touch:
-                            p = "touch";
-                            break;
-
-                        case AttackType.Punch:
-                            p = "punch";
-                            break;
-
-                        case AttackType.Kick:
-                            p = "kick";
-                            break;
-
-                        case AttackType.Claw:
-                            p = "claw";
-                            break;
-
-                        case AttackType.Bite:
-                            p = "bite";
-                            break;
-
-                        case AttackType.Sting:
-                            p = "sting";
-                            break;
-
-                        case AttackType.Butt:
-                            p = "butt";
-                            break;
-
-                        case AttackType.Crush:
-                            p = "crush";
-                            break;
-
-                        case AttackType.Engulf:
-                            p = "engulf";
-                            break;
-
-                        case AttackType.Charge:
-                            p = "charge";
-                            break;
-
-                        case AttackType.Crawl:
-                            p = "crawl on you";
-                            break;
-
-                        case AttackType.Drool:
-                            p = "drool on you";
-                            break;
-
-                        case AttackType.Spit:
-                            p = "spit";
-                            break;
-
-                        case AttackType.Gaze:
-                            p = "gaze";
-                            break;
-
-                        case AttackType.Wail:
-                            p = "wail";
-                            break;
-
-                        case AttackType.Spore:
-                            p = "release spores";
-                            break;
-
-                        case AttackType.Worship:
-                            p = "hero worship";
-                            break;
-
-                        case AttackType.Beg:
-                            p = "beg";
-                            break;
-
-                        case AttackType.Insult:
-                            p = "insult";
-                            break;
-
-                        case AttackType.Moan:
-                            p = "moan";
-                            break;
-
-                        case AttackType.Show:
-                            p = "sing";
-                            break;
-                    }
+                    p = method.KnowledgeAction;
                     if (effect == null)
                         q = null;
                     else

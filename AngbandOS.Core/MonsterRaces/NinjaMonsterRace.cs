@@ -15,9 +15,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new PoisonAttackEffect(), 3, 4),
-            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 3, 4),
-            new MonsterAttack(AttackType.Hit, new LoseConAttackEffect(), 3, 4),
+            new MonsterAttack(new HitAttackType(), new PoisonAttackEffect(), 3, 4),
+            new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 3, 4),
+            new MonsterAttack(new HitAttackType(), new LoseConAttackEffect(), 3, 4),
         };
         public override bool BashDoor => true;
         public override string Description => "A humanoid clothed in black who moves with blinding speed.";

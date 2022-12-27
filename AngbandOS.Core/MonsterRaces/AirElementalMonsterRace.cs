@@ -2,6 +2,7 @@ using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -18,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 50;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 1, 4),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 10),
         };
         public override bool BashDoor => true;
         public override bool ColdBlood => true;

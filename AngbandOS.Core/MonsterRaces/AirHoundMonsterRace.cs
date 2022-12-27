@@ -2,6 +2,7 @@ using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -19,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 3, 3)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
         };
         public override bool BashDoor => true;
         public override string Description => "Swirling vapours surround this beast as it floats towards you, seemingly walking on air. Noxious gases sting your throat.";

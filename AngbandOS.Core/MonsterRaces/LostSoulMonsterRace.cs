@@ -19,8 +19,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 10;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 2),
-            new MonsterAttack(AttackType.Touch, new LoseWisAttackEffect(), 0, 0),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 2),
+            new MonsterAttack(new TouchAttackType(), new LoseWisAttackEffect(), 0, 0),
         };
         public override bool ColdBlood => true;
         public override string Description => "It is almost insubstantial.";

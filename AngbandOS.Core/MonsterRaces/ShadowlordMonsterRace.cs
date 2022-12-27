@@ -29,10 +29,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 150;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new Exp40AttackEffect(), 6, 6),
-            new MonsterAttack(AttackType.Hit, new Exp40AttackEffect(), 6, 6),
-            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Gaze, new TerrifyAttackEffect(), 4, 6)
+            new MonsterAttack(new HitAttackType(), new Exp40AttackEffect(), 6, 6),
+            new MonsterAttack(new HitAttackType(), new Exp40AttackEffect(), 6, 6),
+            new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6),
+            new MonsterAttack(new GazeAttackType(), new TerrifyAttackEffect(), 4, 6)
         };
         public override bool ColdBlood => true;
         public override string Description => "An aura of hatred, cowardice and falsehood surrounds you as this cloaked figure floats towards you.";

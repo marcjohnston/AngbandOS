@@ -1,6 +1,7 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -15,9 +16,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 3, 3),
-            new MonsterAttack(AttackType.Claw, new PoisonAttackEffect(), 3, 3),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 6),
+            new MonsterAttack(new ClawAttackType(), new PoisonAttackEffect(), 3, 3),
+            new MonsterAttack(new ClawAttackType(), new PoisonAttackEffect(), 3, 3),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
         public override string Description => "A powerful troll form. Venom drips from its needlelike claws.";

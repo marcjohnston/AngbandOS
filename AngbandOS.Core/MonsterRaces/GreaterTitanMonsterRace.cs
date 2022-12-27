@@ -20,10 +20,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 125;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
-            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
-            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12),
-            new MonsterAttack(AttackType.Hit, new ConfuseAttackEffect(), 12, 12)
+            new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 12, 12),
+            new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 12, 12)
         };
         public override bool BashDoor => true;
         public override string Description => "A forty foot tall humanoid that shakes the ground as it walks. The power radiating from its frame shakes your courage, its hatred inspired by your defiance.";

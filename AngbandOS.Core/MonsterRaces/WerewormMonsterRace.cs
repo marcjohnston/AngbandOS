@@ -16,10 +16,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 70;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new Exp20AttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Crawl, new AcidAttackEffect(), 2, 4),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6)
+            new MonsterAttack(new GazeAttackType(), new Exp20AttackEffect(), 0, 0),
+            new MonsterAttack(new CrawlAttackType(), new AcidAttackEffect(), 2, 4),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A huge wormlike shape dripping acid, twisted by evil sorcery into a foul monster that breeds on death.";

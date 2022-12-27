@@ -21,10 +21,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 150;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 9)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9)
         };
         public override string Description => "A strange ball of glowing light. It disappears and reappears and seems to draw you to it. You seem somehow compelled to stand still and watch its strange dancing motion.";
         public override bool EmptyMind => true;

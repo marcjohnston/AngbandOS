@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A Black Numenorean with a blacker heart.";

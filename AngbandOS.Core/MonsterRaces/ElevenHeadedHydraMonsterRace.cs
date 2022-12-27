@@ -23,10 +23,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 12),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 3, 12)
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 3, 12),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 3, 12),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 3, 12),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 3, 12)
         };
         public override bool BashDoor => true;
         public override string Description => "A strange reptilian hybrid with eleven smouldering heads.";

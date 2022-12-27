@@ -18,9 +18,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 15;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 10),
-            new MonsterAttack(AttackType.Bite, new FireAttackEffect(), 1, 3),
-            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 1, 3),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 10),
+            new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 1, 3),
+            new MonsterAttack(new ButtAttackType(), new HurtAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
         public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";

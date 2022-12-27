@@ -1,7 +1,6 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -23,10 +22,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 125;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 5, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 6, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 8, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 10, 14)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 5, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 6, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 8, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 14)
         };
         public override bool BashDoor => true;
         public override string Description => "'Rushing Jaws' is his name, and death is his game. No dragon of the brood of Glaurung can match him.";

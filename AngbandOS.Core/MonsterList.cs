@@ -494,7 +494,7 @@ namespace AngbandOS
             {
                 for (var m = 0; m < rPtr.Attacks.Length; m++)
                 {
-                    if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != 0)
+                    if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
                     {
                         knowledge.RBlows[m] = Constants.MaxUchar;
                     }

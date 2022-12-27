@@ -19,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 75;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 1, 8),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 10),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 10),
         };
         public override bool BashDoor => true;
         public override string Description => "A large dragon, scales tinted deep blue.";

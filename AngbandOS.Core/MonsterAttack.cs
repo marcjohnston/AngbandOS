@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.AttackEffects;
+using AngbandOS.Core.AttackTypes;
 using AngbandOS.Enumerations;
 
 namespace AngbandOS
@@ -16,9 +17,9 @@ namespace AngbandOS
         public int DDice;
         public int DSide;
         public BaseAttackEffect? Effect;
-        public AttackType Method;
+        public BaseAttackType Method;
 
-        public MonsterAttack(AttackType method, BaseAttackEffect? effect, int dice, int sides)
+        public MonsterAttack(BaseAttackType method, BaseAttackEffect? effect, int dice, int sides)
         {
             Method = method;
             Effect = effect;

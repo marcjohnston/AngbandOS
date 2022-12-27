@@ -21,9 +21,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Wail, new TerrifyAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Touch, new Exp40AttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Claw, new LoseWisAttackEffect(), 5, 5),
+            new MonsterAttack(new WailAttackType(), new TerrifyAttackEffect(), 0, 0),
+            new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(new ClawAttackType(), new LoseWisAttackEffect(), 5, 5),
         };
         public override bool ColdBlood => true;
         public override string Description => "A phantasmal shrieking spirit. Its wail drives the intense cold of pure evil deep within your body.";

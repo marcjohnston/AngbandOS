@@ -1,4 +1,5 @@
 using AngbandOS.Core.AttackEffects;
+using AngbandOS.Core.AttackTypes;
 using AngbandOS.Core.Interface;
 using AngbandOS.Enumerations;
 
@@ -15,8 +16,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Beg, null, 0, 0),
-            new MonsterAttack(AttackType.Touch, new LoseConAttackEffect(), 0, 0),
+            new MonsterAttack(new BegAttackType(), null, 0, 0),
+            new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 0, 0),
         };
         public override string Description => "You feel it isn't safe to touch him.";
         public override int FreqInate => 0;

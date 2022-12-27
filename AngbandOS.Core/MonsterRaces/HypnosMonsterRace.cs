@@ -33,10 +33,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 13, 13),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 13, 13),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 13, 13),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 13, 13)
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 13, 13),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 13, 13),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 13, 13),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 13, 13)
         };
         public override bool BashDoor => true;
         public override string Description => "Beautiful and youthful, this Outer God appears almost human. But appearances can be deceptive.";

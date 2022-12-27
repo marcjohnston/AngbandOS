@@ -21,10 +21,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 180;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new UnBonusAttackEffect(), 6, 8),
-            new MonsterAttack(AttackType.Hit, new AcidAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10)
+            new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 6, 8),
+            new MonsterAttack(new HitAttackType(), new AcidAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10)
         };
         public override bool BashDoor => true;
         public override string Description => "'Not shapeless, but so complex that the eye could recognise no discernable shape.' J.Ramsey Campbell - 'The Render of the Veils'.";

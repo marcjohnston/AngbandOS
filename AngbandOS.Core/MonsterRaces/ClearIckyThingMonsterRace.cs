@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 6;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new HurtAttackEffect(), 1, 2),
+            new MonsterAttack(new TouchAttackType(), new HurtAttackEffect(), 1, 2),
         };
         public override bool AttrClear => true;
         public override string Description => "It is a smallish, slimy, icky, blobby creature.";

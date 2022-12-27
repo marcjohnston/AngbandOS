@@ -15,7 +15,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 33;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A hideous, smallish giant that is often found near or with orcs.";

@@ -40,9 +40,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 15),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 15),
-            new MonsterAttack(AttackType.Hit, new LoseConAttackEffect(), 10, 15),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 15),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 15),
+            new MonsterAttack(new HitAttackType(), new LoseConAttackEffect(), 10, 15),
         };
         public override bool BashDoor => true;
         public override string Description => "Oval bodied with countless thin spines, and three baleful yellow eyes on thin stalks.";

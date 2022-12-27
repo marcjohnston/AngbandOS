@@ -15,9 +15,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 1;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Spore, new LoseConAttackEffect(), 1, 2),
-            new MonsterAttack(AttackType.Spore, new LoseConAttackEffect(), 1, 2),
-            new MonsterAttack(AttackType.Spore, new LoseConAttackEffect(), 1, 2),
+            new MonsterAttack(new SporeAttackType(), new LoseConAttackEffect(), 1, 2),
+            new MonsterAttack(new SporeAttackType(), new LoseConAttackEffect(), 1, 2),
+            new MonsterAttack(new SporeAttackType(), new LoseConAttackEffect(), 1, 2),
         };
         public override string Description => "Yum! It looks quite tasty.";
         public override bool EmptyMind => true;

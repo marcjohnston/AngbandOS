@@ -19,9 +19,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 70;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 3, 7),
-            new MonsterAttack(AttackType.Hit, new FireAttackEffect(), 3, 7),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new FireAttackEffect(), 3, 7),
+            new MonsterAttack(new HitAttackType(), new FireAttackEffect(), 3, 7),
         };
         public override string Description => "It is a towering glowing form of molten hate.";
         public override bool EmptyMind => true;

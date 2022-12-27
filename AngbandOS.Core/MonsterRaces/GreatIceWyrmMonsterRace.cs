@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 170;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 12),
-            new MonsterAttack(AttackType.Bite, new ColdAttackEffect(), 5, 14)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 12),
+            new MonsterAttack(new BiteAttackType(), new ColdAttackEffect(), 5, 14)
         };
         public override bool BashDoor => true;
         public override string Description => "An immense dragon capable of awesome destruction. You have never felt such extreme cold, or witnessed such an icy stare. Begone quickly or feel its wrath!";

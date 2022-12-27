@@ -1,7 +1,7 @@
 using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
-using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -39,10 +39,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crush, new LoseConAttackEffect(), 30, 4),
-            new MonsterAttack(AttackType.Hit, new LoseStrAttackEffect(), 30, 4),
-            new MonsterAttack(AttackType.Touch, new LoseIntAttackEffect(), 1, 50),
-            new MonsterAttack(AttackType.Crawl, new LoseWisAttackEffect(), 1, 50)
+            new MonsterAttack(new CrushAttackType(), new LoseConAttackEffect(), 30, 4),
+            new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 30, 4),
+            new MonsterAttack(new TouchAttackType(), new LoseIntAttackEffect(), 1, 50),
+            new MonsterAttack(new CrawlAttackType(), new LoseWisAttackEffect(), 1, 50)
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;

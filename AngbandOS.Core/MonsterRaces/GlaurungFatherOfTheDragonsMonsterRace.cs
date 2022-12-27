@@ -21,10 +21,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 120;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 7, 12),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 7, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 8, 14),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 8, 14)
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 7, 12),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 7, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 8, 14),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 8, 14)
         };
         public override bool BashDoor => true;
         public override string Description => "Glaurung is the father of all dragons, and was for a long time the most powerful. Nevertheless, he still has full command over his brood and can command them to appear whenever he so wishes. He is the definition of dragonfire.";

@@ -16,7 +16,7 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 32;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 4, 4),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 4, 4),
         };
         public override bool BashDoor => true;
         public override string Description => "It has glistening black skin, a sleek body and highly venomous fangs.";

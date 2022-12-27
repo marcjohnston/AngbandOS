@@ -2,6 +2,7 @@ using AngbandOS.Core.AttackEffects;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
 using AngbandOS.Enumerations;
+using AngbandOS.Core.AttackTypes;
 
 namespace AngbandOS.Core.MonsterRaces
 {
@@ -21,9 +22,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 8),
-            new MonsterAttack(AttackType.Claw, new HurtAttackEffect(), 4, 8),
-            new MonsterAttack(AttackType.Bite, new EatGoldAttackEffect(), 5, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 8),
+            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 8),
+            new MonsterAttack(new BiteAttackType(), new EatGoldAttackEffect(), 5, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "A huge draconic form. Lightning crackles along its length.";

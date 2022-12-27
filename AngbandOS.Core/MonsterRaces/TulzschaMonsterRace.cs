@@ -28,10 +28,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 170;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new Exp80AttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Hit, new BlindAttackEffect(), 10, 5),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 10, 10)
+            new MonsterAttack(new TouchAttackType(), new Exp80AttackEffect(), 0, 0),
+            new MonsterAttack(new HitAttackType(), new BlindAttackEffect(), 10, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(new EngulfAttackType(), new HurtAttackEffect(), 10, 10)
         };
         public override bool BashDoor => true;
         public override string Description => "'A belching column of sick greenish flame... spouting volcanically from depths profound and inconceivable, casting no shadows as a healthy flame should, and coating the nitrous stone with a nasty venomous verdigris.' H.P.Lovecraft - 'The Festival'.";

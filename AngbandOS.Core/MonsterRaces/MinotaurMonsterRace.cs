@@ -15,10 +15,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 25;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6)
+            new MonsterAttack(new ButtAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new ButtAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "It is a cross between a human and a bull.";

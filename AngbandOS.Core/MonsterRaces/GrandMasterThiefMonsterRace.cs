@@ -18,9 +18,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 6),
-            new MonsterAttack(AttackType.Touch, new EatGoldAttackEffect(), 5, 5),
-            new MonsterAttack(AttackType.Touch, new EatItemAttackEffect(), 5, 5),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
+            new MonsterAttack(new TouchAttackType(), new EatGoldAttackEffect(), 5, 5),
+            new MonsterAttack(new TouchAttackType(), new EatItemAttackEffect(), 5, 5),
         };
         public override bool BashDoor => true;
         public override string Description => "A furtive figure who makes you want to hide all your valuables.";

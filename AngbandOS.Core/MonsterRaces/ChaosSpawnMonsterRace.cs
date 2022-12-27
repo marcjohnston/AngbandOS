@@ -15,10 +15,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 50;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Gaze, new UnBonusAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Gaze, new Exp40AttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Gaze, new HurtAttackEffect(), 10, 6)
+            new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0),
+            new MonsterAttack(new GazeAttackType(), new UnBonusAttackEffect(), 0, 0),
+            new MonsterAttack(new GazeAttackType(), new Exp40AttackEffect(), 0, 0),
+            new MonsterAttack(new GazeAttackType(), new HurtAttackEffect(), 10, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "It has two eyestalks and a large central eye. Its gaze can kill.";

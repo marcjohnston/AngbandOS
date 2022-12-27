@@ -22,9 +22,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 1, 12),
-            new MonsterAttack(AttackType.Bite, new PoisonAttackEffect(), 1, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 12),
+            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 6),
         };
         public override bool BashDoor => true;
         public override string Description => "A dark elven torso merged with the bloated form of a giant spider.";

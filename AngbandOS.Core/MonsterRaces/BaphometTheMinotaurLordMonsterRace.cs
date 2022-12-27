@@ -23,10 +23,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 120;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 12, 13),
-            new MonsterAttack(AttackType.Butt, new HurtAttackEffect(), 12, 13),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 10, 10)
+            new MonsterAttack(new ButtAttackType(), new HurtAttackEffect(), 12, 13),
+            new MonsterAttack(new ButtAttackType(), new HurtAttackEffect(), 12, 13),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10)
         };
         public override bool BashDoor => true;
         public override string Description => "A fearsome bull-headed demon, Baphomet swings a mighty axe as he curses all that defy him.";

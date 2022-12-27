@@ -31,10 +31,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 100;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Crush, new LoseWisAttackEffect(), 20, 5),
-            new MonsterAttack(AttackType.Crush, new LoseIntAttackEffect(), 20, 5),
-            new MonsterAttack(AttackType.Bite, new LoseStrAttackEffect(), 10, 2),
-            new MonsterAttack(AttackType.Bite, new LoseConAttackEffect(), 10, 2)
+            new MonsterAttack(new CrushAttackType(), new LoseWisAttackEffect(), 20, 5),
+            new MonsterAttack(new CrushAttackType(), new LoseIntAttackEffect(), 20, 5),
+            new MonsterAttack(new BiteAttackType(), new LoseStrAttackEffect(), 10, 2),
+            new MonsterAttack(new BiteAttackType(), new LoseConAttackEffect(), 10, 2)
         };
         public override bool AttrAny => true;
         public override bool AttrMulti => true;

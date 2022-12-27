@@ -28,10 +28,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 80;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 10),
-            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 2, 5),
-            new MonsterAttack(AttackType.Sting, new LoseStrAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 2, 5)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 10),
+            new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 2, 5),
+            new MonsterAttack(new StingAttackType(), new LoseStrAttackEffect(), 1, 4),
+            new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 2, 5)
         };
         public override bool BashDoor => true;
         public override string Description => "Shelob is an enormous bloated spider, rumoured to have been one of the brood of Ungoliant the Unlight. Her poison is legendary, as is her ego, which may be her downfall. She used to guard the pass through Cirith Ungol, but has not been seen there for many eons.";

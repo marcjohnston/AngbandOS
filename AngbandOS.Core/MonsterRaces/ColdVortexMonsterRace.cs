@@ -18,7 +18,7 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Engulf, new ColdAttackEffect(), 3, 3),
+            new MonsterAttack(new EngulfAttackType(), new ColdAttackEffect(), 3, 3),
         };
         public override bool BashDoor => true;
         public override string Description => "A twisting whirlpool of frost.";

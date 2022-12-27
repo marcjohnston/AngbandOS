@@ -14,8 +14,8 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 30;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 4),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 1, 3),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 4),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 3),
         };
         public override bool BashDoor => true;
         public override string Description => "A large and muscled wolf from the northern wastes. Its breath is cold and icy and its fur coated in frost.";

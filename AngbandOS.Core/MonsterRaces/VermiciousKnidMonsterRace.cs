@@ -15,9 +15,9 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 55;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Touch, new TerrifyAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Crawl, new HurtAttackEffect(), 4, 6),
-            new MonsterAttack(AttackType.Engulf, new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new TouchAttackType(), new TerrifyAttackEffect(), 4, 6),
+            new MonsterAttack(new CrawlAttackType(), new HurtAttackEffect(), 4, 6),
+            new MonsterAttack(new EngulfAttackType(), new HurtAttackEffect(), 4, 6),
         };
         public override bool ColdBlood => true;
         public override string Description => "An amorphous shape that looks like wet grey clay with two pale eyes. It is totally silent as it oozes towards you.";

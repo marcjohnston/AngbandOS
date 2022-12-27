@@ -26,10 +26,10 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 120;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new Exp80AttackEffect(), 4, 4),
-            new MonsterAttack(AttackType.Bite, new ParalyzeAttackEffect(), 4, 4),
-            new MonsterAttack(AttackType.Bite, new LoseIntAttackEffect(), 4, 4),
-            new MonsterAttack(AttackType.Bite, new LoseWisAttackEffect(), 4, 4)
+            new MonsterAttack(new BiteAttackType(), new Exp80AttackEffect(), 4, 4),
+            new MonsterAttack(new BiteAttackType(), new ParalyzeAttackEffect(), 4, 4),
+            new MonsterAttack(new BiteAttackType(), new LoseIntAttackEffect(), 4, 4),
+            new MonsterAttack(new BiteAttackType(), new LoseWisAttackEffect(), 4, 4)
         };
         public override bool ColdBlood => true;
         public override string Description => "A glowing skull possessed by sorcerous power. It need not move, but merely blast you with mighty magic.";

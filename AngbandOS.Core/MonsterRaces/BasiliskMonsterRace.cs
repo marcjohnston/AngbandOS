@@ -19,10 +19,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 90;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Gaze, new ParalyzeAttackEffect(), 0, 0),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12),
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 12)
+            new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12)
         };
         public override bool BashDoor => true;
         public override string Description => "An evil reptile whose eyes stare deeply at you and your soul starts to wilt!";

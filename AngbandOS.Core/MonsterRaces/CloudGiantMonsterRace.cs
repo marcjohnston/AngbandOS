@@ -15,8 +15,8 @@ namespace AngbandOS.Core.MonsterRaces
 
         public override int ArmourClass => 60;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Hit, new ElectricityAttackEffect(), 3, 8),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 3, 8),
+            new MonsterAttack(new HitAttackType(), new ElectricityAttackEffect(), 3, 8),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 8),
         };
         public override bool BashDoor => true;
         public override string Description => "It is a twenty foot tall giant wreathed in clouds.";

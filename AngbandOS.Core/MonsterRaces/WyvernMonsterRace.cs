@@ -16,10 +16,10 @@ namespace AngbandOS.Core.MonsterRaces
         public override bool Animal => true;
         public override int ArmourClass => 65;
         public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(AttackType.Bite, new HurtAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Hit, new HurtAttackEffect(), 2, 6),
-            new MonsterAttack(AttackType.Sting, new PoisonAttackEffect(), 1, 6)
+            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
+            new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 1, 6)
         };
         public override bool BashDoor => true;
         public override string Description => "A fast-moving and deadly dragonian animal. Beware its poisonous sting!";
