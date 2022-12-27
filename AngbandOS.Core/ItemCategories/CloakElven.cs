@@ -31,24 +31,27 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void ApplyMagic(Item item, int level, int power)
         {
-            // Apply the standard armour characteristics.
-            base.ApplyMagic(item, level, power);
+            if (power != 0)
+            {
+                // Apply the standard armour characteristics.
+                base.ApplyMagic(item, level, power);
 
-            item.TypeSpecificValue = Program.Rng.DieRoll(4);
-            if (power > 1)
-            {
-                if (Program.Rng.DieRoll(20) == 1)
+                item.TypeSpecificValue = Program.Rng.DieRoll(4);
+                if (power > 1)
                 {
-                    item.CreateRandart(false);
+                    if (Program.Rng.DieRoll(20) == 1)
+                    {
+                        item.CreateRandart(false);
+                    }
+                    else
+                    {
+                        ApplyRandomGoodRareCharacteristics(item);
+                    }
                 }
-                else
+                else if (power < -1)
                 {
-                    ApplyRandomGoodRareCharacteristics(item);
+                    ApplyRandomPoorRareCharacteristics(item);
                 }
-            }
-            else if (power < -1)
-            {
-                ApplyRandomPoorRareCharacteristics(item);
             }
         }
     }

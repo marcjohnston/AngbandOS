@@ -46,10 +46,6 @@ namespace AngbandOS.Core.ItemClasses
                 // Apply the standard armour characteristics.
                 base.ApplyMagic(item, level, power);
 
-                if (item.ItemSubCategory == CloakType.SvElvenCloak)
-                {
-                    item.TypeSpecificValue = Program.Rng.DieRoll(4);
-                }
                 if (power > 1)
                 {
                     if (Program.Rng.DieRoll(20) == 1)
