@@ -550,7 +550,7 @@ namespace AngbandOS.Commands
             bool changed;
             saveGame.FullScreenOverlay = true;
             saveGame.SaveScreen();
-            Item qPtr = new Item(saveGame, oPtr);
+            Item qPtr = oPtr.Clone();
             while (true)
             {
                 WizDisplayItem(saveGame, qPtr);
@@ -964,7 +964,7 @@ namespace AngbandOS.Commands
             {
                 return oPtr;
             }
-            Item qPtr = new Item(saveGame, oPtr);
+            Item qPtr = oPtr.Clone();
             while (true)
             {
                 WizDisplayItem(saveGame, qPtr);

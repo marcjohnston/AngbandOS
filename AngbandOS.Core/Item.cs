@@ -114,44 +114,45 @@ namespace AngbandOS
             SaveGame = saveGame;
         }
 
-        public Item(SaveGame saveGame, Item original)
+        public Item Clone(int? newCount = null)
         {
-            SaveGame = saveGame;
-            BaseArmourClass = original.BaseArmourClass;
-            RandartItemCharacteristics.Copy(original.RandartItemCharacteristics);
-            RandartName = original.RandartName;
-            DamageDice = original.DamageDice;
-            Discount = original.Discount;
-            DamageDiceSides = original.DamageDiceSides;
-            HoldingMonsterIndex = original.HoldingMonsterIndex;
+            Item clonedItem = new Item(SaveGame);
+            clonedItem.BaseArmourClass = BaseArmourClass;
+            clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
+            clonedItem.RandartName = RandartName;
+            clonedItem.DamageDice = DamageDice;
+            clonedItem.Discount = Discount;
+            clonedItem.DamageDiceSides = DamageDiceSides;
+            clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
 
-            IdentSense = original.IdentSense;
-            IdentFixed = original.IdentFixed;
-            IdentEmpty = original.IdentEmpty;
-            IdentKnown = original.IdentKnown;
-            IdentStoreb = original.IdentStoreb;
-            IdentMental = original.IdentMental;
-            IdentCursed = original.IdentCursed;
-            IdentBroken = original.IdentBroken;
+            clonedItem.IdentSense = IdentSense;
+            clonedItem.IdentFixed = IdentFixed;
+            clonedItem.IdentEmpty = IdentEmpty;
+            clonedItem.IdentKnown = IdentKnown;
+            clonedItem.IdentStoreb = IdentStoreb;
+            clonedItem.IdentMental = IdentMental;
+            clonedItem.IdentCursed = IdentCursed;
+            clonedItem.IdentBroken = IdentBroken;
 
-            X = original.X;
-            Y = original.Y;
-            BaseItemCategory = original.BaseItemCategory;
-            Marked = original.Marked;
-            FixedArtifact = original.FixedArtifact;
-            RareItemTypeIndex = original.RareItemTypeIndex;
-            NextInStack = original.NextInStack;
-            Inscription = original.Inscription;
-            Count = original.Count;
-            TypeSpecificValue = original.TypeSpecificValue;
-            ItemSubCategory = original.ItemSubCategory;
-            RechargeTimeLeft = original.RechargeTimeLeft;
-            BonusArmourClass = original.BonusArmourClass;
-            BonusDamage = original.BonusDamage;
-            BonusToHit = original.BonusToHit;
-            Weight = original.Weight;
-            BonusPowerType = original.BonusPowerType;
-            BonusPowerSubType = original.BonusPowerSubType;
+            clonedItem.X = X;
+            clonedItem.Y = Y;
+            clonedItem.BaseItemCategory = BaseItemCategory;
+            clonedItem.Marked = Marked;
+            clonedItem.FixedArtifact = FixedArtifact;
+            clonedItem.RareItemTypeIndex = RareItemTypeIndex;
+            clonedItem.NextInStack = NextInStack;
+            clonedItem.Inscription = Inscription;
+            clonedItem.Count = newCount ?? Count;
+            clonedItem.TypeSpecificValue = TypeSpecificValue;
+            clonedItem.ItemSubCategory = ItemSubCategory;
+            clonedItem.RechargeTimeLeft = RechargeTimeLeft;
+            clonedItem.BonusArmourClass = BonusArmourClass;
+            clonedItem.BonusDamage = BonusDamage;
+            clonedItem.BonusToHit = BonusToHit;
+            clonedItem.Weight = Weight;
+            clonedItem.BonusPowerType = BonusPowerType;
+            clonedItem.BonusPowerSubType = BonusPowerSubType;
+            return clonedItem;
         }
 
         public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));

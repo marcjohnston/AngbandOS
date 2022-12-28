@@ -59,7 +59,7 @@ namespace AngbandOS.StoreCommands
             // Use some energy
             saveGame.EnergyUse = 100;
             // Pull one item out of the item stack
-            Item wornItem = new Item(saveGame, item) { Count = 1 };
+            Item wornItem = item.Clone(1);
             // Reduce the count of the item stack accordingly
             if (itemIndex >= 0)
             {

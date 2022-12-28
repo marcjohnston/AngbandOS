@@ -9,7 +9,6 @@ using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS
 {
@@ -64,7 +63,7 @@ namespace AngbandOS
                         int k;
                         for (k = i; k < InventorySlot.Pack; k++)
                         {
-                            _items[k] = new Item(SaveGame, _items[k + 1]);
+                            _items[k] = _items[k + 1].Clone();
                         }
                         _items[k] = new Item(SaveGame); // No ItemType here
                         break;
@@ -204,11 +203,11 @@ namespace AngbandOS
                 i = j;
                 for (int k = n; k >= i; k--)
                 {
-                    _items[k + 1] = new Item(SaveGame, _items[k]);
+                    _items[k + 1] = _items[k].Clone();
                 }
                 _items[i] = new Item(SaveGame); // No ItemType here
             }
-            _items[i] = new Item(SaveGame, oPtr);
+            _items[i] = oPtr.Clone();
             oPtr = _items[i];
             oPtr.Y = 0;
             oPtr.X = 0;
@@ -305,7 +304,7 @@ namespace AngbandOS
                 item = InvenTakeoff(item, amt);
                 oPtr = _items[item];
             }
-            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
+            Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
             SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
             SaveGame.Level.DropNear(qPtr, 0, _player.MapY, _player.MapX);
@@ -386,7 +385,7 @@ namespace AngbandOS
             {
                 amt = oPtr.Count;
             }
-            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
+            Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
             if (item == InventorySlot.MeleeWeapon)
             {
@@ -555,12 +554,12 @@ namespace AngbandOS
                     continue;
                 }
                 flag = true;
-                Item qPtr = new Item(SaveGame, _items[i]);
+                Item qPtr = _items[i].Clone();
                 for (int k = i; k > j; k--)
                 {
-                    _items[k] = new Item(SaveGame, _items[k - 1]);
+                    _items[k] = _items[k - 1].Clone();
                 }
-                _items[j] = new Item(SaveGame, qPtr);
+                _items[j] = qPtr.Clone();
             }
             if (flag)
             {

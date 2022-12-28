@@ -1236,7 +1236,7 @@ namespace AngbandOS
                 Item oPtr = Level.Items[thisOIdx];
                 nextOIdx = oPtr.NextInStack;
                 oPtr.HoldingMonsterIndex = 0;
-                qPtr = new Item(this, Level.Items[thisOIdx]);
+                qPtr = Level.Items[thisOIdx].Clone();
                 Level.DeleteObjectIdx(thisOIdx);
                 Level.DropNear(qPtr, -1, y, x);
             }
@@ -12645,7 +12645,7 @@ namespace AngbandOS
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 _player.Inventory.InvenCarry(item, false);
-                Item carried = new Item(this, item) { Count = 1 };
+                Item carried = item.Clone(1);
                 _player.Inventory[InventorySlot.Lightsource] = carried;
                 _player.WeightCarried += carried.Weight;
             }

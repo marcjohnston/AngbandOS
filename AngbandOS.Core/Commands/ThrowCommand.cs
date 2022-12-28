@@ -42,7 +42,7 @@ namespace AngbandOS.Commands
                 return;
             }
             // Copy a single item from the item stack as the thrown item
-            Item missile = new Item(saveGame, item) { Count = 1 };
+            Item missile = item.Clone(1);
             if (itemIndex >= 0)
             {
                 saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);

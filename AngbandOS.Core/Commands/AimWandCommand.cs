@@ -112,7 +112,7 @@ namespace AngbandOS.Commands
                 // If the wand is part of a stack, split it off from the others
                 if (itemIndex >= 0 && item.Count > 1)
                 {
-                    Item splitItem = new Item(saveGame, item) { Count = 1 };
+                    Item splitItem = item.Clone(1);
                     item.TypeSpecificValue++;
                     item.Count--;
                     saveGame.Player.WeightCarried -= splitItem.Weight;

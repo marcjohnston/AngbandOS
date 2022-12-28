@@ -68,7 +68,7 @@ namespace AngbandOS
             newStore._stockNum = _stockNum;
             for (int i = 0; i < _stock.Length; i++)
             {
-                newStore._stock[i] = new Item(SaveGame, _stock[i]);
+                newStore._stock[i] = _stock[i].Clone();
                 _stock[i] = new Item(SaveGame);
             }
             _stockNum = 0;
@@ -218,7 +218,7 @@ namespace AngbandOS
                     else
                     {
                         SaveGame.MsgPrint("Your pack overflows!");
-                        Item qPtr = new Item(SaveGame, oPtr);
+                        Item qPtr = oPtr.Clone();
                         string oName = qPtr.Description(true, 3);
                         SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                         SaveGame.Player.Inventory.InvenItemIncrease(item, -255);
@@ -777,10 +777,10 @@ namespace AngbandOS
             }
             for (int i = _stockNum; i > slot; i--)
             {
-                _stock[i] = new Item(SaveGame, _stock[i - 1]);
+                _stock[i] = _stock[i - 1].Clone();
             }
             _stockNum++;
-            _stock[slot] = new Item(SaveGame, oPtr);
+            _stock[slot] = oPtr.Clone();
             return slot;
         }
 
@@ -990,7 +990,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
+            Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
             qPtr.Inscription = "";
             int finalAsk = PriceItem(qPtr, _owner.MinInflate, true) * qPtr.Count;
@@ -1807,7 +1807,7 @@ namespace AngbandOS
             item += _storeTop;
             Item oPtr = _stock[item];
             int amt = 1;
-            Item jPtr = new Item(SaveGame, oPtr) { Count = amt };
+            Item jPtr = oPtr.Clone(amt);
             if (!SaveGame.Player.Inventory.InvenCarryOkay(jPtr))
             {
                 SaveGame.MsgPrint("You cannot carry that many different items.");
@@ -1834,7 +1834,7 @@ namespace AngbandOS
                     }
                 }
             }
-            jPtr = new Item(SaveGame, oPtr) { Count = amt };
+            jPtr = oPtr.Clone(amt);
             if (!SaveGame.Player.Inventory.InvenCarryOkay(jPtr))
             {
                 SaveGame.MsgPrint("You cannot carry that many items.");
@@ -1996,7 +1996,8 @@ namespace AngbandOS
                     return;
                 }
             }
-            Item qPtr = new Item(SaveGame, oPtr) { Count = amt };
+            Item qPtr = oPtr.Clone();
+            qPtr.Count = amt;
             string oName = qPtr.Description(true, 3);
             if (!StoreMaintainsInscription)
             {
@@ -2025,7 +2026,8 @@ namespace AngbandOS
                         oPtr.BecomeKnown();
                     }
                     SaveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
-                    qPtr = new Item(SaveGame, oPtr) { Count = amt };
+                    qPtr = oPtr.Clone();
+                    qPtr.Count = amt;
                     int value;
                     if (!StoreAnalyzesPurchases)
                     {

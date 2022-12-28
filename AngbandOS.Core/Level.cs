@@ -565,7 +565,7 @@ namespace AngbandOS
             }
             if (!done)
             {
-                Items[oIdx] = new Item(SaveGame, jPtr);
+                Items[oIdx] = jPtr.Clone();
                 jPtr = Items[oIdx];
                 jPtr.Y = by;
                 jPtr.X = bx;
@@ -1184,7 +1184,7 @@ namespace AngbandOS
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = new Item(SaveGame, qPtr);
+                Items[oIdx] = qPtr.Clone();
                 Item oPtr = Items[oIdx];
                 oPtr.Y = y;
                 oPtr.X = x;
@@ -1214,7 +1214,7 @@ namespace AngbandOS
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = new Item(SaveGame, qPtr);
+                Items[oIdx] = qPtr.Clone();
                 Item oPtr = Items[oIdx];
                 oPtr.Y = y;
                 oPtr.X = x;

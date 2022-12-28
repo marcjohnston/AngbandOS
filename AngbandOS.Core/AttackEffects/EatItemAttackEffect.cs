@@ -47,7 +47,7 @@ namespace AngbandOS.Core.AttackEffects
                 if (nextObjectIndex != 0)
                 {
                     // Give the item to the thief so it can later drop it
-                    Item stolenItem = new Item(saveGame, item);
+                    Item stolenItem = item.Clone();
                     saveGame.Level.Items[nextObjectIndex] = stolenItem;
                     stolenItem.Count = 1;
                     stolenItem.Marked = false;
