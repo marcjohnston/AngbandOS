@@ -3,11 +3,11 @@
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonDictionaryFactory<S, T> : IEnumerable<KeyValuePair<S, T>>
+    internal class SingletonDictionaryFactory<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
     {
-        Dictionary<S, T> instances = new Dictionary<S, T>();
+        Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();
         public int Count => instances.Count;
-        public T this[S index]
+        public TValue this[TKey index]
         {
             get
             {
@@ -15,7 +15,7 @@ namespace AngbandOS.Core
             }
         }
 
-        public IEnumerator<KeyValuePair<S, T>> GetEnumerator()
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
             return instances.GetEnumerator();
         }
@@ -25,7 +25,7 @@ namespace AngbandOS.Core
             return instances.GetEnumerator();
         }
 
-        public SingletonDictionaryFactory(SaveGame saveGame, Dictionary<S, T> dictionary)
+        public SingletonDictionaryFactory(SaveGame saveGame, Dictionary<TKey, TValue> dictionary)
         {
             instances = dictionary;
         }
