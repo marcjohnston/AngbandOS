@@ -526,7 +526,7 @@ namespace AngbandOS.Enumerations
                 return false;
 
             // We can compare if the object inherits from the IItemCharacteristics interface.
-            if (typeof(IItemCharacteristics).IsAssignableFrom(obj.GetType()))
+            if (!typeof(IItemCharacteristics).IsAssignableFrom(obj.GetType()))
                 return false;
 
             IItemCharacteristics objCharacteristics = (IItemCharacteristics)obj;
