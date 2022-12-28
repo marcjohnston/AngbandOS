@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfPolarisFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightStarEssenceGaladriel>();
+    public StarEssenceOfPolarisFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new LightStarEssenceGaladriel(SaveGame);
     }
 
     // Star Essence of Polaris lights the area

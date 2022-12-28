@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SpikeIronSpike : SpikeItemClass
     {
-        private SpikeIronSpike(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public SpikeIronSpike(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '~';
         public override Colour Colour => Colour.Black;

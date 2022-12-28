@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class TarotBookEltdownShards : TarotBookItemClass
     {
-        private TarotBookEltdownShards(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public TarotBookEltdownShards(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override Colour Colour => Colour.Pink;

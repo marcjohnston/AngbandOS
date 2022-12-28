@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfGhoulsFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+    public SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new GlovesSetOfGauntlets(SaveGame);
     }
 
     // Ghouls shoot cold bolts

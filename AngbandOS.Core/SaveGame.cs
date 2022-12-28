@@ -436,21 +436,21 @@ namespace AngbandOS
 
         private void ResetStompability()
         {
-            foreach (ItemClass item in SingletonRepository.ItemCategories)
+            foreach (ItemClassProperties itemClassProperties in SingletonRepository.ItemClassProperties)
             {
-                if (item.HasQuality)
+                if (itemClassProperties.HasQuality)
                 {
-                    item.ItemClassProperties.Stompable[0] = true;
-                    item.ItemClassProperties.Stompable[1] = false;
-                    item.ItemClassProperties.Stompable[2] = false;
-                    item.ItemClassProperties.Stompable[3] = false;
+                    itemClassProperties.Stompable[0] = true;
+                    itemClassProperties.Stompable[1] = false;
+                    itemClassProperties.Stompable[2] = false;
+                    itemClassProperties.Stompable[3] = false;
                 }
                 else
                 {
-                    item.ItemClassProperties.Stompable[0] = item.Cost <= 0;
-                    item.ItemClassProperties.Stompable[1] = false;
-                    item.ItemClassProperties.Stompable[2] = false;
-                    item.ItemClassProperties.Stompable[3] = false;
+                    itemClassProperties.Stompable[0] = itemClassProperties.Cost <= 0;
+                    itemClassProperties.Stompable[1] = false;
+                    itemClassProperties.Stompable[2] = false;
+                    itemClassProperties.Stompable[3] = false;
                 }
             }
         }
@@ -2165,7 +2165,7 @@ namespace AngbandOS
                 AllocKindTable[k] = new AllocationEntry();
             }
             AllocationEntry[] table = AllocKindTable;
-            for (i = 1; i < SingletonRepository.ItemCategories.Count; i++)
+            for (i = 1; i < SingletonRepository.ItemClassProperties.Count; i++)
             {
                 kPtr = SingletonRepository.ItemCategories[i];
                 for (j = 0; j < 4; j++)

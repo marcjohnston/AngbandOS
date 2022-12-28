@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollSpecialEnchantArmor : ScrollItemClass
     {
-        private ScrollSpecialEnchantArmor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollSpecialEnchantArmor(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "*Enchant Armor*";

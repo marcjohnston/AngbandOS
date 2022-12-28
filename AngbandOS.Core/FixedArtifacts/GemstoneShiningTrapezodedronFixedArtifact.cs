@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GemstoneShiningTrapezodedronFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>();
+    public GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new LightGemstone(SaveGame);
     }
 
     // Shining Trapezohedron lights the entire level and recalls us, but drains

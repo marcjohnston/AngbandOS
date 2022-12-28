@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BattleAxeSpleenSlicerFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBattleAxe>();
+    public BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new PolearmBattleAxe(SaveGame);
     }
 
     // Spleens Slicer heals you

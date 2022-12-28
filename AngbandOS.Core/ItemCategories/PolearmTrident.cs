@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PolearmTrident : PolearmItemClass
     {
-        private PolearmTrident(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public PolearmTrident(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '/';
         public override Colour Colour => Colour.Yellow;

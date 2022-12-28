@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class LightBrassLantern : LightSourceItemClass
     {
-        private LightBrassLantern(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public LightBrassLantern(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '~';
         public override Colour Colour => Colour.BrightBrown;

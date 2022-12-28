@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollAcquirement : ScrollItemClass
     {
-        private ScrollAcquirement(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollAcquirement(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Acquirement";

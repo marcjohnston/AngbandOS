@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordVorpalBladeFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private LongSwordVorpalBladeFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+    public LongSwordVorpalBladeFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SwordLongSword(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

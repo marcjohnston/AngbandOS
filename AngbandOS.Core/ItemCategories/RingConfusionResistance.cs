@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingConfusionResistance : RingItemClass
     {
-        private RingConfusionResistance(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingConfusionResistance(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Confusion Resistance";

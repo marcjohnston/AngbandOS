@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmHardLeatherCap>();
+    public HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HelmHardLeatherCap(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

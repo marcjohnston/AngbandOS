@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfCestiOfCombatFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfCesti>();
+    public SetOfCestiOfCombatFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new GlovesSetOfCesti(SaveGame);
     }
 
     // Cesti shoot arrows

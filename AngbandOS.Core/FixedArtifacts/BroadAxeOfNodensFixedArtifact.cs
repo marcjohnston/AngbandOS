@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadAxeOfNodensFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private BroadAxeOfNodensFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBroadAxe>();
+    public BroadAxeOfNodensFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new PolearmBroadAxe(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

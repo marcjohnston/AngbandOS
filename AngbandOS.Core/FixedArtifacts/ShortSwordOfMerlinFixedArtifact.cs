@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShortSwordOfMerlinFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private ShortSwordOfMerlinFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>();
+    public ShortSwordOfMerlinFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SwordShortSword(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

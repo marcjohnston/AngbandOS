@@ -14,6 +14,12 @@ namespace AngbandOS.Core.FixedArtifacts
     [Serializable]
     internal abstract class BaseFixedArtifact : IItemCharacteristics // TODO: Merge this with ItemClass
     {
+        protected SaveGame SaveGame;
+        public BaseFixedArtifact(SaveGame saveGame)
+        {
+            SaveGame = saveGame;    
+        }
+
         /// <summary>
         /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
         /// </summary>

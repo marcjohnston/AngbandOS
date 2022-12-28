@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DeathBookNecronomicon : DeathBookItemClass
     {
-        private DeathBookNecronomicon(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public DeathBookNecronomicon(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override Colour Colour => Colour.Black;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class JunkBrokenStick : JunkItemClass
     {
-        private JunkBrokenStick(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public JunkBrokenStick(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '~';
         public override Colour Colour => Colour.Red;

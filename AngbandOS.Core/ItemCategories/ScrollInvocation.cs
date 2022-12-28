@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollInvocation : ScrollItemClass
     {
-        private ScrollInvocation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollInvocation(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Invocation";

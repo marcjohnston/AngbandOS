@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BeakedAxeOfTheodenFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBeakedAxe>();
+    public BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new PolearmBeakedAxe(SaveGame);
     }
 
     // Theoden drains life

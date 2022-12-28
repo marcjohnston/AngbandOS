@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodDoorStairLocation : RodItemClass
     {
-        private RodDoorStairLocation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RodDoorStairLocation(SaveGame saveGame) : base(saveGame) { }
 
         public override bool RequiresAiming => false;
         public override char Character => '-';

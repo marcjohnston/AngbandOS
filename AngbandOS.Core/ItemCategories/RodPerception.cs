@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodPerception : RodItemClass
     {
-        private RodPerception(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RodPerception(SaveGame saveGame) : base(saveGame) { }
 
         public override bool RequiresAiming => false;
         public override char Character => '-';

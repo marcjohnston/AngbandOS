@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakOfBarzaiFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private CloakOfBarzaiFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+    public CloakOfBarzaiFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new Cloak(SaveGame);
     }
 
     // Cloak of Barzai gives resistances

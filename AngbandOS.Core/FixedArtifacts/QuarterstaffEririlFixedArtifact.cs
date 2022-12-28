@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffEririlFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private QuarterstaffEririlFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+    public QuarterstaffEririlFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HaftedQuarterstaff(SaveGame);
     }
 
     // Ereril does identify

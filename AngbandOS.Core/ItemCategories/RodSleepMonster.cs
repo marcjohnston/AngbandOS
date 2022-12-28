@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodSleepMonster : RodItemClass
     {
-        private RodSleepMonster(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RodSleepMonster(SaveGame saveGame) : base(saveGame) { }
 
         public override bool RequiresAiming => true;
         public override char Character => '-';

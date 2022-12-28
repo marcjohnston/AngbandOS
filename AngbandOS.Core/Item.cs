@@ -70,7 +70,7 @@ namespace AngbandOS
         public int DamageDice;
         public int DamageDiceSides;
         public int Discount;
-        public FixedArtifactId FixedArtifactIndex
+        public FixedArtifactId FixedArtifactIndex // TODO: Deprecated
         {
             get
             {

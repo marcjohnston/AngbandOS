@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class MushroomCureSeriousWounds : MushroomFoodItemClass
     {
-        private MushroomCureSeriousWounds(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public MushroomCureSeriousWounds(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => ',';
         public override string Name => "Cure Serious Wounds";

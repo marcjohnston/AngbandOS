@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalBrigandineArmourOfSerpentsFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private MetalBrigandineArmourOfSerpentsFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMetalBrigandineArmour>();
+    public MetalBrigandineArmourOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HardArmorMetalBrigandineArmour(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

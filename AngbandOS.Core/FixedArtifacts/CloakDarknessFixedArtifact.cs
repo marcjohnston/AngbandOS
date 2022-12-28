@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakDarknessFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private CloakDarknessFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+    public CloakDarknessFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new Cloak(SaveGame);
     }
 
     // Darkness sends monsters to sleep

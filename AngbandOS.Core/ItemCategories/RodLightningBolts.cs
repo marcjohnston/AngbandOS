@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodLightningBolts : RodItemClass
     {
-        private RodLightningBolts(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RodLightningBolts(SaveGame saveGame) : base(saveGame) { }
 
         public override bool RequiresAiming => true;
         public override char Character => '-';

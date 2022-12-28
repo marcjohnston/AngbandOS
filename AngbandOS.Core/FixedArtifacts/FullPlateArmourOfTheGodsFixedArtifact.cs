@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class FullPlateArmourOfTheGodsFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorFullPlateArmour>();
+    public FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HardArmorFullPlateArmour(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

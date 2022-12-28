@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DiggingDwarvenShovel : DiggingItemClass
     {
-        private DiggingDwarvenShovel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public DiggingDwarvenShovel(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '\\';
         public override Colour Colour => Colour.BrightBlue;

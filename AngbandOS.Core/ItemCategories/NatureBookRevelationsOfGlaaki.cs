@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class NatureBookRevelationsOfGlaaki : NatureBookItemClass
     {
-        private NatureBookRevelationsOfGlaaki(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public NatureBookRevelationsOfGlaaki(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override Colour Colour => Colour.Green;

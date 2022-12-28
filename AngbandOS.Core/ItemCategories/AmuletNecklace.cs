@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class AmuletNecklace : AmuletItemClass
     {
-        private AmuletNecklace(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public AmuletNecklace(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '"';
         public override string Name => "Dwarves";

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ExecutionersSwordOfNyarlathotepFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordExecutionersSword>();
+    public ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SwordExecutionersSword(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

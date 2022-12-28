@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MaceThunderFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private MaceThunderFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMace>();
+    public MaceThunderFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HaftedMace(SaveGame);
     }
 
     // Thunder does haste

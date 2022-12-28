@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfElementalPowerIceFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private RingOfElementalPowerIceFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingNenya>();
+    public RingOfElementalPowerIceFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new RingNenya(SaveGame);
     }
 
     // Ring of Elemental Ice casts a coldball

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LeadCrownOfTheUniverseFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CrownLead>();
+    public LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new CrownLead(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsWhiteSparkFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+    public SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new GlovesSetOfGauntlets(SaveGame);
     }
 
     // White Spark shoot lightning bolts

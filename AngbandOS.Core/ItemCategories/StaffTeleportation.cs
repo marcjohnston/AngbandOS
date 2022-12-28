@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffTeleportation : StaffItemClass
     {
-        private StaffTeleportation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public StaffTeleportation(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '_';
         public override string Name => "Teleportation";

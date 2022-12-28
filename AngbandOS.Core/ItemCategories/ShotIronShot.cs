@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ShotIronShot : ShotItemClass
     {
-        private ShotIronShot(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ShotIronShot(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '{';
         public override Colour Colour => Colour.Grey;

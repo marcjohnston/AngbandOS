@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SteelHelmOfHammerhandFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmSteelHelm>();
+    public SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HelmSteelHelm(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

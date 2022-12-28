@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingSearching : RingItemClass
     {
-        private RingSearching(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingSearching(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Searching";

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorMultiHuedDragonScaleMail>();
+    public MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new DragArmorMultiHuedDragonScaleMail(SaveGame);
     }
 
     // Razorback gives you a point-blank lightning ball

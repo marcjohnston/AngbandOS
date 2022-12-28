@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandStinkingCloud : WandItemClass
     {
-        private WandStinkingCloud(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public WandStinkingCloud(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '-';
         public override string Name => "Stinking Cloud";

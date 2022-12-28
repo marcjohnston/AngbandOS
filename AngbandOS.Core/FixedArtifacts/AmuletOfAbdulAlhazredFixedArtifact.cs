@@ -8,9 +8,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfAbdulAlhazredFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletIngwe>();
+    public AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new AmuletIngwe(SaveGame);
     }
 
     // Amulet of Abdul Alhazred dispels evil

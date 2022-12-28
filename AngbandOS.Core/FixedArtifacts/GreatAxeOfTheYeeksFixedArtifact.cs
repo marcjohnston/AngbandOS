@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GreatAxeOfTheYeeksFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGreatAxe>();
+    public GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new PolearmGreatAxe(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

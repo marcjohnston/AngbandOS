@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsSoftLeatherBoots>();
+    public PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new BootsSoftLeatherBoots(SaveGame);
     }
 
     // Dancing heal poison and fear

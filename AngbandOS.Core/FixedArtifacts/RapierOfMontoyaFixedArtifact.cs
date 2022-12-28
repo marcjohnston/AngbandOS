@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RapierOfMontoyaFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private RapierOfMontoyaFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordRapier>();
+    public RapierOfMontoyaFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SwordRapier(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

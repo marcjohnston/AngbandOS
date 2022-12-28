@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class KatanaOfGrooFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private KatanaOfGrooFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordKatana>();
+    public KatanaOfGrooFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SwordKatana(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

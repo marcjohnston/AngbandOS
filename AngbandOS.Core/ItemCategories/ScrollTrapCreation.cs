@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollTrapCreation : ScrollItemClass
     {
-        private ScrollTrapCreation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollTrapCreation(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Trap Creation";

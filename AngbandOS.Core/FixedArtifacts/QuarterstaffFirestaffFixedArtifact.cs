@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffFirestaffFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private QuarterstaffFirestaffFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+    public QuarterstaffFirestaffFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HaftedQuarterstaff(SaveGame);
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

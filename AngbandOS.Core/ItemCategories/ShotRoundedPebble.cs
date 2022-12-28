@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ShotRoundedPebble : ShotItemClass
     {
-        private ShotRoundedPebble(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ShotRoundedPebble(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '{';
         public override Colour Colour => Colour.Grey;

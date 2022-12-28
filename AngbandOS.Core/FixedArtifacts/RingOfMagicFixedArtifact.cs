@@ -8,9 +8,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfMagicFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private RingOfMagicFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingBarahir>();
+    public RingOfMagicFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new RingBarahir(SaveGame);
     }
 
     // Ring of Magic has a djinn in it that drains life from an opponent

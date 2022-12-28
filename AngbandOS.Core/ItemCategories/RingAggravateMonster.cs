@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingAggravateMonster : RingItemClass
     {
-        private RingAggravateMonster(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingAggravateMonster(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Aggravate Monster";

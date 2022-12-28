@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingProtection : RingItemClass
     {
-        private RingProtection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingProtection(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Protection";

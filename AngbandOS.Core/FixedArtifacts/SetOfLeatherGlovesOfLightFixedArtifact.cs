@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfLeatherGlovesOfLightFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfLeatherGloves>();
+    public SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new GlovesSetOfLeatherGloves(SaveGame);
     }
 
     // Light shoots magic missiles

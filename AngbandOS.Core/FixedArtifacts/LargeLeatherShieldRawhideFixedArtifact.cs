@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeLeatherShieldRawhideFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldLargeLeatherShield>();
+    public LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new ShieldLargeLeatherShield(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingDisenchantmentResistance : RingItemClass
     {
-        private RingDisenchantmentResistance(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingDisenchantmentResistance(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Disenchantment Resistance";

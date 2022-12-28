@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfElementalPowerFireFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private RingOfElementalPowerFireFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingNarya>();
+    public RingOfElementalPowerFireFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new RingNarya(SaveGame);
     }
 
     // Ring of Elemental Fire casts a fireball

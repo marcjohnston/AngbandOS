@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodHavoc : RodItemClass
     {
-        private RodHavoc(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RodHavoc(SaveGame saveGame) : base(saveGame) { }
 
         public override bool RequiresAiming => true;
         public override char Character => '-';

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfNyogthaFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CloakShadow>();
+    public ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new CloakShadow(SaveGame);
     }
 
     // Nyogtha restores experience

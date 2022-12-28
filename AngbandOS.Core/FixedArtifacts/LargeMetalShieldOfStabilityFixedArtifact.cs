@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeMetalShieldOfStabilityFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldLargeMetalShield>();
+    public LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new ShieldLargeMetalShield(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class FolkBookMinorMagicks : FolkBookItemClass
     {
-        private FolkBookMinorMagicks(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public FolkBookMinorMagicks(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightPurple;

@@ -8,9 +8,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfLobonFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private AmuletOfLobonFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletCarlammas>();
+    public AmuletOfLobonFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new AmuletCarlammas(SaveGame);
     }
 
     // Amulet of Lobon protects us from evil

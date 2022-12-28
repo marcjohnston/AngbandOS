@@ -7,8 +7,17 @@ namespace AngbandOS.Core
     [Serializable]
     internal class ItemClassPropertiesSingleton : IEnumerable<ItemClassProperties>
     {
+        List<ItemClassProperties> list = new List<ItemClassProperties>();
         Dictionary<string, ItemClassProperties> instances = new Dictionary<string, ItemClassProperties>();
         public int Count => instances.Count;
+
+        public ItemClassProperties this[int index]
+        {
+            get
+            {
+                return list[index];
+            }
+        }
 
         public ItemClassProperties Get(Type type)
         {
@@ -17,12 +26,12 @@ namespace AngbandOS.Core
 
         public IEnumerator<ItemClassProperties> GetEnumerator()
         {
-            return instances.Values.GetEnumerator();
+            return list.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return instances.Values.GetEnumerator();
+            return list.GetEnumerator();
         }
 
         public ItemClassPropertiesSingleton(SaveGame saveGame)
@@ -33,7 +42,9 @@ namespace AngbandOS.Core
                 // Load Commands.
                 if (!type.IsAbstract && typeof(ItemClass).IsAssignableFrom(type))
                 {
-                    instances.Add(type.Name, new ItemClassProperties());
+                    ItemClassProperties itemClassProperties = new ItemClassProperties();
+                    instances.Add(type.Name, itemClassProperties);
+                    list.Add(itemClassProperties);
                 }
             }
         }

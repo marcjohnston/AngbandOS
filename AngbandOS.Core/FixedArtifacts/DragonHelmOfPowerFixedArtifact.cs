@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DragonHelmOfPowerFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private DragonHelmOfPowerFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmDragonHelm>();
+    public DragonHelmOfPowerFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HelmDragonHelm(SaveGame);
     }
 
     // Dragon Helm and Terror Mask cause fear

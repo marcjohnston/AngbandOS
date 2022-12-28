@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private SoftLeatherArmourOfTheKoboldChiefFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>();
+    public SoftLeatherArmourOfTheKoboldChiefFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new SoftArmorSoftLeatherArmour(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ChainMailHeartguardFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    private ChainMailHeartguardFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorChainMail>();
+    public ChainMailHeartguardFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new HardArmorChainMail(SaveGame);
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

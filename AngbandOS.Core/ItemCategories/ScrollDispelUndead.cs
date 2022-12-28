@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollDispelUndead : ScrollItemClass
     {
-        private ScrollDispelUndead(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollDispelUndead(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Dispel Undead";

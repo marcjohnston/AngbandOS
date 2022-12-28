@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollMonsterConfusion : ScrollItemClass
     {
-        private ScrollMonsterConfusion(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollMonsterConfusion(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Monster Confusion";

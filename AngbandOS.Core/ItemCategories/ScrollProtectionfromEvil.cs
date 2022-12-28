@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollProtectionFromEvil : ScrollItemClass
     {
-        private ScrollProtectionFromEvil(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Protection from Evil";

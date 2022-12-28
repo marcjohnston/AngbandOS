@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class TarotBookConjuringsTricks : TarotBookItemClass
     {
-        private TarotBookConjuringsTricks(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public TarotBookConjuringsTricks(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightPink;

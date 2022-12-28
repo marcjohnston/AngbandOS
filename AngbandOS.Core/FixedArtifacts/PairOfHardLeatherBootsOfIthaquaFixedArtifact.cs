@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsHardLeatherBoots>();
+    public PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new BootsHardLeatherBoots(SaveGame);
     }
 
     // Boots haste you

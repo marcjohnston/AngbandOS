@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollRuneofProtection : ScrollItemClass
     {
-        private ScrollRuneofProtection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public ScrollRuneofProtection(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '?';
         public override string Name => "Rune of Protection";

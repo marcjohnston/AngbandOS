@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfXothFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    private StarEssenceOfXothFixedArtifact(SaveGame saveGame)
-    {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightStarEssenceElendil>();
+    public StarEssenceOfXothFixedArtifact(SaveGame saveGame) : base(saveGame)
+     {
+        _baseItemCategory = new LightStarEssenceElendil(SaveGame);
     }
 
     // Star essence of Xoth lights and maps the area

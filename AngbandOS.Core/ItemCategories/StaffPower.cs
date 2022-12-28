@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffPower : StaffItemClass
     {
-        private StaffPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public StaffPower(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '_';
         public override string Name => "Power";

@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingNexusResistance : RingItemClass
     {
-        private RingNexusResistance(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        public RingNexusResistance(SaveGame saveGame) : base(saveGame) { }
 
         public override char Character => '=';
         public override string Name => "Nexus Resistance";
