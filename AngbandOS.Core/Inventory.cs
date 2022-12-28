@@ -63,7 +63,7 @@ namespace AngbandOS
                         int k;
                         for (k = i; k < InventorySlot.Pack; k++)
                         {
-                            _items[k] = _items[k + 1].Clone();
+                            _items[k] = _items[k + 1];
                         }
                         _items[k] = new Item(SaveGame); // No ItemType here
                         break;
