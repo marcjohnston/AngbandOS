@@ -77,12 +77,12 @@ namespace AngbandOS
         public int Resting;
         public int Running;
         public List<AmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
-        public List<MushroomFlavour> MushroomFlavours;
-        public List<PotionFlavour> PotionFlavours;
-        public List<RingFlavour> RingFlavours;
-        public List<RodFlavour> RodFlavours;
+        public List<MushroomFlavour> MushroomFlavours; // TODO: Move these to the singletons repository
+        public List<PotionFlavour> PotionFlavours; // TODO: Move these to the singletons repository
+        public List<RingFlavour> RingFlavours; // TODO: Move these to the singletons repository
+        public List<RodFlavour> RodFlavours; // TODO: Move these to the singletons repository
         public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
-        public List<StaffFlavour> StaffFlavours;
+        public List<StaffFlavour> StaffFlavours; // TODO: Move these to the singletons repository
         public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
         public int TargetCol;
         public int TargetRow;
