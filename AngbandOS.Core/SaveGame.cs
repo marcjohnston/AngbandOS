@@ -308,7 +308,7 @@ namespace AngbandOS
             }
         }
 
-        public ItemClass RandomItemType(int level, bool doNotAllowChestToBeCreated)
+        public ItemClass RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
         {
             int i;
             int j;
@@ -334,7 +334,10 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                table[i].FinalProbability = table[i].FilteredProbabiity;
+
+                // Determine the final probability.  If only good objects are requested and the object is not good, then set it to 0.
+                table[i].FinalProbability = good && !kPtr.KindIsGood ? 0 : table[i].BaseProbability;
+
                 total += table[i].FinalProbability;
             }
             if (total <= 0)

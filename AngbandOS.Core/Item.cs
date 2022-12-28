@@ -2461,15 +2461,7 @@ namespace AngbandOS
             int baselevel = good ? SaveGame.Level.ObjectLevel + 10 : SaveGame.Level.ObjectLevel;
             if (Program.Rng.RandomLessThan(prob) != 0 || !MakeFixedArtifact())
             {
-                if (good)
-                {
-                    PrepareAllocationTableForGoodObjects();
-                }
-                ItemClass kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated);
-                if (good)
-                {
-                    PrepareAllocationTable();
-                }
+                ItemClass kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
                 if (kIdx == null)
                 {
                     return false;
@@ -2974,31 +2966,6 @@ namespace AngbandOS
                 return true;
             }
             return false;
-        }
-
-        private void PrepareAllocationTable()
-        {
-            AllocationEntry[] table = SaveGame.AllocKindTable;
-            for (int i = 0; i < SaveGame.AllocKindSize; i++)
-            {
-                table[i].FilteredProbabiity = table[i].BaseProbability;
-            }
-        }
-
-        private void PrepareAllocationTableForGoodObjects()
-        {
-            AllocationEntry[] table = SaveGame.AllocKindTable;
-            for (int i = 0; i < SaveGame.AllocKindSize; i++)
-            {
-                if (SaveGame.SingletonRepository.ItemCategories[table[i].Index].KindIsGood)
-                {
-                    table[i].FilteredProbabiity = table[i].BaseProbability;
-                }
-                else
-                {
-                    table[i].FilteredProbabiity = 0;
-                }
-            }
         }
     }
 }
