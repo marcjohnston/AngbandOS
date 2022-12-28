@@ -2,7 +2,7 @@
 
 namespace AngbandOS.ActivationPowers
 {
-    internal static class ActivationPowerManager
+    internal static class ActivationPowerManager // TODO: This is a singleton
     {
         public static readonly ActivationPower[] ActivationPowers;
 
