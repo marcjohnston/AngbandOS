@@ -449,6 +449,10 @@ namespace AngbandOS
 
         public bool StatsAreSame(Item other)
         {
+            if (!IsKnown())
+            {
+                return false;
+            }
             if (IsKnown() != other.IsKnown())
             {
                 return false;
@@ -516,7 +520,7 @@ namespace AngbandOS
                 return false;
             }
 
-            if (RandartItemCharacteristics != other.RandartItemCharacteristics)
+            if (!RandartItemCharacteristics.Equals(other.RandartItemCharacteristics))
             {
                 return false;
             }
