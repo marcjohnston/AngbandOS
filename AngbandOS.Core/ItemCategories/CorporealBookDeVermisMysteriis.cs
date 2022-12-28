@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CorporealBookDeVermisMysteriis : CorporealBookItemClass
     {
-        private CorporealBookDeVermisMysteriis(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private CorporealBookDeVermisMysteriis(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightYellow;

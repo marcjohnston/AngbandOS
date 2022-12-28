@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class RodItemClass : ItemClass
     {
-        public RodItemClass(SaveGame saveGame) : base(saveGame) { }
         public abstract bool RequiresAiming { get; }
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;

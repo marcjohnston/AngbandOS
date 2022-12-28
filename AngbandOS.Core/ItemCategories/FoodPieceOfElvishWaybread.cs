@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class FoodPieceOfElvishWaybread : FoodItemClass
     {
-        private FoodPieceOfElvishWaybread(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private FoodPieceOfElvishWaybread(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => ',';
         public override Colour Colour => Colour.BrightBlue;

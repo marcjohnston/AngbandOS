@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ChestLargeSteel : ChestItemClass
     {
-        private ChestLargeSteel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ChestLargeSteel(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '~';
         public override Colour Colour => Colour.Grey;

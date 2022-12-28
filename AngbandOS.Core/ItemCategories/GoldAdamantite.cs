@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GoldAdamantite : GoldItemClass
     {
-        private GoldAdamantite(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private GoldAdamantite(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '$';
         public override Colour Colour => Colour.Chartreuse;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollSpecialRemoveCurse : ScrollItemClass
     {
-        private ScrollSpecialRemoveCurse(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ScrollSpecialRemoveCurse(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "*Remove Curse*";

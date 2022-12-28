@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingSoundResistance : RingItemClass
     {
-        private RingSoundResistance(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private RingSoundResistance(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Sound Resistance";

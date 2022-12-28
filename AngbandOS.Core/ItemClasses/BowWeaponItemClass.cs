@@ -8,7 +8,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class BowWeaponItemClass : WeaponItemClass
     {
-        public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.
         /// </summary>

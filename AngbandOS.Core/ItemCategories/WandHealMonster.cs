@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandHealMonster : WandItemClass
     {
-        private WandHealMonster(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private WandHealMonster(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Heal Monster";

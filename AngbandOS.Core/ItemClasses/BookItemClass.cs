@@ -3,7 +3,6 @@
     [Serializable]
     internal abstract class BookItemClass : ItemClass
     {
-        public BookItemClass(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
         /// Returns true for all books.
         /// </summary>

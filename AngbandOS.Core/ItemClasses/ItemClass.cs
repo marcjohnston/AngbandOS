@@ -13,25 +13,28 @@ namespace AngbandOS.Core.ItemClasses
 
     internal abstract class ItemClass : IItemCharacteristics
     {
-        private ItemClassProperties _itemClassProperties;
+        /// <summary>
+        /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
+        /// Use StompableType enum to address each index.
+        /// </summary>
+        public readonly bool[] Stompable = new bool[4];
 
         /// <summary>
-        /// Returns the single ItemClass properties for this object.
+        /// The special flavor of the item has been identified. (e.g. of "seeing")
         /// </summary>
-        public ItemClassProperties ItemClassProperties => _itemClassProperties;
+        public bool FlavourAware;
 
-        protected SaveGame SaveGame { get; }
+        /// <summary>
+        /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories
+        /// that have flavor may override this character and replace it with a different character from the flavor.
+        /// </summary>
+        public char FlavorCharacter;
 
-        public ItemClass(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-
-            // Instantiate the singleton ItemClass properties for this item.
-            _itemClassProperties = saveGame.SingletonRepository.ItemClassProperties.Get(this.GetType());
-
-            _itemClassProperties.FlavorCharacter = Character;
-            _itemClassProperties.FlavorColour = Colour;
-        }
+        /// <summary>
+        /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
+        /// that have flavor may override this color and replace it with a different color from the flavor.
+        /// </summary>
+        public Colour FlavorColour;
 
         /// <summary>
         /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
@@ -45,6 +48,12 @@ namespace AngbandOS.Core.ItemClasses
             }
         }
 
+        public ItemClass()
+        {
+            FlavorCharacter = Character;
+            FlavorColour = Colour;
+        }
+
         /// <summary>
         /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.  All others types return false.
         /// </summary>
@@ -54,6 +63,11 @@ namespace AngbandOS.Core.ItemClasses
         /// Returns true, if the object type has flavors.  Returns false, by default.
         /// </summary>
         public virtual bool HasFlavor => false;
+
+        /// <summary>
+        /// Returns true, if the player has attempted/tried the item.
+        /// </summary>
+        public bool Tried;
 
         /// <summary>
         /// Returns the character to be used when displaying items of this category.  This character will be initially used to set the FlavorCharacter and item
@@ -304,16 +318,16 @@ namespace AngbandOS.Core.ItemClasses
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Broken];
+                        return item.BaseItemCategory.Stompable[StompableType.Broken];
 
                     case "average":
-                        return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Average];
+                        return item.BaseItemCategory.Stompable[StompableType.Average];
 
                     case "good":
-                        return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Good];
+                        return item.BaseItemCategory.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Excellent];
+                        return item.BaseItemCategory.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -322,7 +336,7 @@ namespace AngbandOS.Core.ItemClasses
                         throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
                 }
             }
-            return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Broken];
+            return item.BaseItemCategory.Stompable[StompableType.Broken];
         }
 
         //    public virtual bool CanSlay => false;
@@ -627,7 +641,7 @@ namespace AngbandOS.Core.ItemClasses
             {
                 tmpVal2 = "empty";
             }
-            else if (!item.IsFlavourAware() && item.BaseItemCategory.ItemClassProperties.Tried)
+            else if (!item.IsFlavourAware() && item.BaseItemCategory.Tried)
             {
                 tmpVal2 = "tried";
             }

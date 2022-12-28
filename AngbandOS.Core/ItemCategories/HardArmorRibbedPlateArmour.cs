@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HardArmorRibbedPlateArmour : HardArmorItemClass
     {
-        private HardArmorRibbedPlateArmour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private HardArmorRibbedPlateArmour(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.BrightWhite;

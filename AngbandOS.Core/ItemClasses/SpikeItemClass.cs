@@ -6,7 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class SpikeItemClass : ItemClass
     {
-        public SpikeItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
         public override Colour Colour => Colour.Grey;

@@ -489,7 +489,7 @@ namespace AngbandOS.Commands
             {
                 if (kPtr.Level <= saveGame.CommandArgument)
                 {
-                    kPtr.ItemClassProperties.FlavourAware = true;
+                    kPtr.FlavourAware = true;
                 }
             }
         }

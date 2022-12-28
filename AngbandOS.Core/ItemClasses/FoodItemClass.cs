@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class FoodItemClass : ItemClass
     {
-        public FoodItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
         public override bool CanAbsorb(Item item, Item other)

@@ -1059,7 +1059,7 @@ namespace AngbandOS
             for (int i = 0; i < 4; i++)
             {
                 _menuItem[i] = qualityText[i];
-                _menuColours[i] = kPtr.ItemClassProperties.Stompable[i] ? Colour.Red : Colour.Green;
+                _menuColours[i] = kPtr.Stompable[i] ? Colour.Red : Colour.Green;
             }
             _menuLength = 4;
             int menu = 1;
@@ -1082,8 +1082,8 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        kPtr.ItemClassProperties.Stompable[menu] = !kPtr.ItemClassProperties.Stompable[menu];
-                        _menuColours[menu] = kPtr.ItemClassProperties.Stompable[menu] ? Colour.Red : Colour.Green;
+                        kPtr.Stompable[menu] = !kPtr.Stompable[menu];
+                        _menuColours[menu] = kPtr.Stompable[menu] ? Colour.Red : Colour.Green;
                         break;
                     }
                     if (c == '4')
@@ -1101,7 +1101,7 @@ namespace AngbandOS
             for (int i = 0; i < 4; i++)
             {
                 _menuItem[i] = qualityText[i];
-                _menuColours[i] = kPtr.ItemClassProperties.Stompable[i] ? Colour.Red : Colour.Green;
+                _menuColours[i] = kPtr.Stompable[i] ? Colour.Red : Colour.Green;
             }
             _menuLength = 4;
             int menu = 1;
@@ -1124,8 +1124,8 @@ namespace AngbandOS
                     }
                     if (c == '6')
                     {
-                        kPtr.ItemClassProperties.Stompable[menu] = !kPtr.ItemClassProperties.Stompable[menu];
-                        _menuColours[menu] = kPtr.ItemClassProperties.Stompable[menu] ? Colour.Red : Colour.Green;
+                        kPtr.Stompable[menu] = !kPtr.Stompable[menu];
+                        _menuColours[menu] = kPtr.Stompable[menu] ? Colour.Red : Colour.Green;
                         break;
                     }
                     if (c == '4')
@@ -1155,7 +1155,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        _menuColours[_menuLength] = kPtr.ItemClassProperties.Stompable[0] ? Colour.Red : Colour.Green;
+                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                     }
                     _menuIndices[_menuLength] = i;
                     _menuLength++;
@@ -1202,7 +1202,7 @@ namespace AngbandOS
                                     }
                                     else
                                     {
-                                        _menuColours[_menuLength] = kPtr.ItemClassProperties.Stompable[0] ? Colour.Red : Colour.Green;
+                                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                                     }
                                     _menuIndices[_menuLength] = i;
                                     _menuLength++;
@@ -1229,7 +1229,7 @@ namespace AngbandOS
                                     }
                                     else
                                     {
-                                        _menuColours[_menuLength] = kPtr.ItemClassProperties.Stompable[0] ? Colour.Red : Colour.Green;
+                                        _menuColours[_menuLength] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                                     }
                                     _menuIndices[_menuLength] = i;
                                     _menuLength++;
@@ -1238,8 +1238,8 @@ namespace AngbandOS
                         }
                         else
                         {
-                            kPtr.ItemClassProperties.Stompable[0] = !kPtr.ItemClassProperties.Stompable[0];
-                            _menuColours[menu] = kPtr.ItemClassProperties.Stompable[0] ? Colour.Red : Colour.Green;
+                            kPtr.Stompable[0] = !kPtr.Stompable[0];
+                            _menuColours[menu] = kPtr.Stompable[0] ? Colour.Red : Colour.Green;
                         }
                         break;
                     }

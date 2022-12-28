@@ -422,7 +422,7 @@ namespace AngbandOS
 
         public void BecomeFlavourAware()
         {
-            BaseItemCategory.ItemClassProperties.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
         }
 
         public void BecomeKnown()
@@ -1524,7 +1524,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            return BaseItemCategory.ItemClassProperties.FlavourAware;
+            return BaseItemCategory.FlavourAware;
         }
 
         public bool IsKnown()
@@ -1537,7 +1537,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (BaseItemCategory.EasyKnow && BaseItemCategory.ItemClassProperties.FlavourAware)
+            if (BaseItemCategory.EasyKnow && BaseItemCategory.FlavourAware)
             {
                 return true;
             }
@@ -1660,7 +1660,7 @@ namespace AngbandOS
 
         public void ObjectTried()
         {
-            BaseItemCategory.ItemClassProperties.Tried = true;
+            BaseItemCategory.Tried = true;
         }
 
         public int RealValue()
@@ -1717,7 +1717,7 @@ namespace AngbandOS
                 {
                     if (IsFlavourAware())
                     {
-                        return BaseItemCategory.ItemClassProperties.Stompable[StompableType.Broken];
+                        return BaseItemCategory.Stompable[StompableType.Broken];
                     }
                 }
                 if (!IdentSense)
@@ -1730,12 +1730,12 @@ namespace AngbandOS
 
         public string StoreDescription(bool pref, int mode)
         {
-            bool hackAware = BaseItemCategory.ItemClassProperties.FlavourAware;
+            bool hackAware = BaseItemCategory.FlavourAware;
             bool hackKnown = IdentKnown;
             IdentKnown = true;
-            BaseItemCategory.ItemClassProperties.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
             string buf = Description(pref, mode);
-            BaseItemCategory.ItemClassProperties.FlavourAware = hackAware;
+            BaseItemCategory.FlavourAware = hackAware;
             if (!hackKnown)
             {
                 IdentKnown = false;
@@ -1813,6 +1813,11 @@ namespace AngbandOS
                 return "teleport every 50+d50 turns";
             }
             return BaseItemCategory.DescribeActivationEffect(this);
+        }
+
+        private bool IsTried()
+        {
+            return BaseItemCategory.Tried;
         }
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)

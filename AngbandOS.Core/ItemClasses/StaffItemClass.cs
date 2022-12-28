@@ -8,7 +8,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class StaffItemClass : ItemClass
     {
-        public StaffItemClass(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
         /// Executes the staff action.  Returns true, if the usage identifies the staff.
         /// </summary>

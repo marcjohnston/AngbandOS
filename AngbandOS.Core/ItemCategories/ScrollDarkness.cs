@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollDarkness : ScrollItemClass
     {
-        private ScrollDarkness(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ScrollDarkness(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Darkness";

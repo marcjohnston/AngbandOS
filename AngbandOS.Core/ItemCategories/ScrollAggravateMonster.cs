@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollAggravateMonster : ScrollItemClass
     {
-        private ScrollAggravateMonster(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ScrollAggravateMonster(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Aggravate Monster";

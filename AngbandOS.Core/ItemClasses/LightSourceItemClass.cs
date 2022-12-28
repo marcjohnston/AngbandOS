@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class LightSourceItemClass : ItemClass
     {
-        public LightSourceItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;

@@ -6,7 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class ArrowItemClass : AmmunitionItemClass
     {
-        public ArrowItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

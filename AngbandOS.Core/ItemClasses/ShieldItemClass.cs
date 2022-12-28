@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class ShieldItemClass : ArmourItemClass
     {
-        public ShieldItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
         public override bool HatesAcid => true;
 

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollHolyPrayer : ScrollItemClass
     {
-        private ScrollHolyPrayer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ScrollHolyPrayer(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Holy Prayer";

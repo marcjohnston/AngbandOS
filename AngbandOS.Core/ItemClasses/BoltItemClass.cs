@@ -6,7 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class BoltItemClass : AmmunitionItemClass
     {
-        public BoltItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
         public override Colour Colour => Colour.BrightBrown;
 

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollCurseWeapon : ScrollItemClass
     {
-        private ScrollCurseWeapon(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ScrollCurseWeapon(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Curse Weapon";

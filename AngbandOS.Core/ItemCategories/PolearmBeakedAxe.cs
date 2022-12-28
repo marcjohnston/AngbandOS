@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PolearmBeakedAxe : PolearmItemClass
     {
-        private PolearmBeakedAxe(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private PolearmBeakedAxe(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '/';
         public override Colour Colour => Colour.Grey;

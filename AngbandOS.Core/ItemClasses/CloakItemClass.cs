@@ -6,7 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class CloakItemClass : ArmourItemClass
     {
-        public CloakItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

@@ -55,8 +55,8 @@ namespace AngbandOS.Commands
                 saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
             string missileName = missile.Description(false, 3);
-            Colour missileColour = missile.BaseItemCategory.ItemClassProperties.FlavorColour;
-            char missileCharacter = missile.BaseItemCategory.ItemClassProperties.FlavorCharacter;
+            Colour missileColour = missile.BaseItemCategory.FlavorColour;
+            char missileCharacter = missile.BaseItemCategory.FlavorCharacter;
             // Thrown distance is based on the weight of the missile
             int multiplier = 10 + (2 * (damageMultiplier - 1));
             int divider = missile.Weight > 10 ? missile.Weight : 10;

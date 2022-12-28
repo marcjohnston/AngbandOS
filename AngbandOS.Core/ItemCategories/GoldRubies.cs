@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GoldRubies : GoldItemClass
     {
-        private GoldRubies(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private GoldRubies(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '$';
         public override Colour Colour => Colour.Red;

@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class WandItemClass : ItemClass
     {
-        public WandItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
         public abstract bool ExecuteActivation(SaveGame saveGame, int dir);

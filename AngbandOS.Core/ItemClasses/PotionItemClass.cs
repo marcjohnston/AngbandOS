@@ -7,7 +7,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class PotionItemClass : ItemClass
     {
-        public PotionItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         /// <summary>
         /// Have a potion affect the player.  Activates the potion effect.

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class BoltSeeker : BoltItemClass
     {
-        private BoltSeeker(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private BoltSeeker(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '{';
         public override Colour Colour => Colour.BrightBlue;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HardArmorMetalScaleMail : HardArmorItemClass
     {
-        private HardArmorMetalScaleMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private HardArmorMetalScaleMail(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.Grey;

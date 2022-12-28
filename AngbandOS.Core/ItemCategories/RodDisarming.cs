@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodDisarming : RodItemClass
     {
-        private RodDisarming(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private RodDisarming(SaveGame saveGame) { } // This object is a singleton.
 
         public override bool RequiresAiming => true;
         public override char Character => '-';

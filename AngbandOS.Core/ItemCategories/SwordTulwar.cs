@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SwordTulwar : SwordItemClass
     {
-        private SwordTulwar(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SwordTulwar(SaveGame saveGame) { } // This object is a singleton.
 
         public override char Character => '|';
         public override Colour Colour => Colour.BrightWhite;

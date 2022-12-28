@@ -440,17 +440,17 @@ namespace AngbandOS
             {
                 if (item.HasQuality)
                 {
-                    item.ItemClassProperties.Stompable[0] = true;
-                    item.ItemClassProperties.Stompable[1] = false;
-                    item.ItemClassProperties.Stompable[2] = false;
-                    item.ItemClassProperties.Stompable[3] = false;
+                    item.Stompable[0] = true;
+                    item.Stompable[1] = false;
+                    item.Stompable[2] = false;
+                    item.Stompable[3] = false;
                 }
                 else
                 {
-                    item.ItemClassProperties.Stompable[0] = item.Cost <= 0;
-                    item.ItemClassProperties.Stompable[1] = false;
-                    item.ItemClassProperties.Stompable[2] = false;
-                    item.ItemClassProperties.Stompable[3] = false;
+                    item.Stompable[0] = item.Cost <= 0;
+                    item.Stompable[1] = false;
+                    item.Stompable[2] = false;
+                    item.Stompable[3] = false;
                 }
             }
         }
@@ -1528,43 +1528,43 @@ namespace AngbandOS
                     switch (kPtr.CategoryEnum)
                     {
                         case ItemTypeEnum.Food:
-                            kPtr.ItemClassProperties.FlavorCharacter = MushroomFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = MushroomFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = MushroomFlavours[indexx].Character;
+                            kPtr.FlavorColour = MushroomFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Potion:
-                            kPtr.ItemClassProperties.FlavorCharacter = PotionFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = PotionFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = PotionFlavours[indexx].Character;
+                            kPtr.FlavorColour = PotionFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Scroll:
-                            kPtr.ItemClassProperties.FlavorCharacter = ScrollFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = ScrollFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = ScrollFlavours[indexx].Character;
+                            kPtr.FlavorColour = ScrollFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Amulet:
-                            kPtr.ItemClassProperties.FlavorCharacter = AmuletFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = AmuletFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = AmuletFlavours[indexx].Character;
+                            kPtr.FlavorColour = AmuletFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Ring:
-                            kPtr.ItemClassProperties.FlavorCharacter = RingFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = RingFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = RingFlavours[indexx].Character;
+                            kPtr.FlavorColour = RingFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Staff:
-                            kPtr.ItemClassProperties.FlavorCharacter = StaffFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = StaffFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = StaffFlavours[indexx].Character;
+                            kPtr.FlavorColour = StaffFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Wand:
-                            kPtr.ItemClassProperties.FlavorCharacter = WandFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = WandFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = WandFlavours[indexx].Character;
+                            kPtr.FlavorColour = WandFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Rod:
-                            kPtr.ItemClassProperties.FlavorCharacter = RodFlavours[indexx].Character;
-                            kPtr.ItemClassProperties.FlavorColour = RodFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = RodFlavours[indexx].Character;
+                            kPtr.FlavorColour = RodFlavours[indexx].Colour;
                             break;
                     }
                 }
@@ -2126,7 +2126,7 @@ namespace AngbandOS
                 }
                 if (!kPtr.HasFlavor)
                 {
-                    kPtr.ItemClassProperties.FlavourAware = true;
+                    kPtr.FlavourAware = true;
                 }
             }
         }

@@ -6,7 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class DiggingItemClass : WeaponItemClass
     {
-        public DiggingItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
         public override Colour Colour => Colour.Grey;
 
