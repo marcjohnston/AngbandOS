@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SkeletonGnomeSkeleton : SkeletonItemClass
     {
-        public SkeletonGnomeSkeleton(SaveGame saveGame) : base(saveGame) { }
+        private SkeletonGnomeSkeleton(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '~';
         public override Colour Colour => Colour.Beige;

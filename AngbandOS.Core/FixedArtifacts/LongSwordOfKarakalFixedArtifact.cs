@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfKarakalFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public LongSwordOfKarakalFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordLongSword(SaveGame);
+    private LongSwordOfKarakalFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
     }
 
     // Karakal teleports you randomly

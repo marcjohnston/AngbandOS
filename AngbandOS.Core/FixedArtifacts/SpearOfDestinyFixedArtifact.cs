@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearOfDestinyFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public SpearOfDestinyFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmSpear(SaveGame);
+    private SpearOfDestinyFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
     }
 
     // Destiny does rock to mud

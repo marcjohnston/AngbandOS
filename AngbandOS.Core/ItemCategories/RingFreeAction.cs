@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingFreeAction : RingItemClass
     {
-        public RingFreeAction(SaveGame saveGame) : base(saveGame) { }
+        private RingFreeAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Free Action";

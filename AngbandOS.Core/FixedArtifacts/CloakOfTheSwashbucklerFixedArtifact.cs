@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakOfTheSwashbucklerFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new Cloak(SaveGame);
+    private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
     }
 
     // Swashbuckler recharges items

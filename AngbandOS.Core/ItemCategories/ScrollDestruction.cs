@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollDestruction : ScrollItemClass
     {
-        public ScrollDestruction(SaveGame saveGame) : base(saveGame) { }
+        private ScrollDestruction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "*Destruction*";

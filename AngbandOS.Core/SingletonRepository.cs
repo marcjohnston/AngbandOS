@@ -15,9 +15,9 @@ namespace AngbandOS.Core
     internal class SingletonRepository
     {
         public SingletonFactory<ICommand> GameCommands;
- //       public SingletonFactory<ItemClass> ItemCategories;
- //       public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
- //       public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonFactory<ItemClass> ItemCategories;
+        public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
+        public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
         public ItemClassPropertiesSingleton ItemClassProperties;
 
@@ -25,15 +25,15 @@ namespace AngbandOS.Core
         {
             GameCommands = new SingletonFactory<ICommand>(saveGame);
             ItemClassProperties = new ItemClassPropertiesSingleton(saveGame);
-    //        ItemCategories = new SingletonFactory<ItemClass>(saveGame);
-   //         BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
+            ItemCategories = new SingletonFactory<ItemClass>(saveGame);
+            BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
 
-            //Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
-            //foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)
-            //{
-            //    dictionary.Add(baseFixedArtifact.FixedArtifactID, new FixedArtifact(baseFixedArtifact));
-            //}
-            //FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
+            Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
+            foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)
+            {
+                dictionary.Add(baseFixedArtifact.FixedArtifactID, new FixedArtifact(baseFixedArtifact));
+            }
+            FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
 
             int index = 0;
             Assembly assembly = Assembly.GetExecutingAssembly();

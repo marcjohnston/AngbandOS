@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollSpecialEnchantWeapon : ScrollItemClass
     {
-        public ScrollSpecialEnchantWeapon(SaveGame saveGame) : base(saveGame) { }
+        private ScrollSpecialEnchantWeapon(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "*Enchant Weapon*";

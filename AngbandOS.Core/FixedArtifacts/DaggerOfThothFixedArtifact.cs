@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerOfThothFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public DaggerOfThothFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordDagger(SaveGame);
+    private DaggerOfThothFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
     }
 
     // Thoth shoots a poison ball

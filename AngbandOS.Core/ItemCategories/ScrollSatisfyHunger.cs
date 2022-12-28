@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollSatisfyHunger : ScrollItemClass
     {
-        public ScrollSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
+        private ScrollSatisfyHunger(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Satisfy Hunger";

@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronHelmTerrorMaskFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public IronHelmTerrorMaskFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HelmIronHelm(SaveGame);
+    private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

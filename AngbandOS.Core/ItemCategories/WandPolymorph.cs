@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandPolymorph : WandItemClass
     {
-        public WandPolymorph(SaveGame saveGame) : base(saveGame) { }
+        private WandPolymorph(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Polymorph";

@@ -1139,9 +1139,9 @@ namespace AngbandOS
         private void WorthlessItemTypeSelection(ItemTypeEnum tval)
         {
             _menuLength = 0;
-            for (int i = 0; i < SaveGame.SingletonRepository.ItemClassProperties.Count; i++)
+            for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
             {
-                ItemClassProperties kPtr = SaveGame.SingletonRepository.ItemClassProperties[i];
+                ItemClass kPtr = SaveGame.SingletonRepository.ItemCategories[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     if (kPtr.InstaArt)

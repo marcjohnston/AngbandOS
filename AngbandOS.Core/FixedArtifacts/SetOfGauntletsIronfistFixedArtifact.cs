@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsIronfistFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public SetOfGauntletsIronfistFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new GlovesSetOfGauntlets(SaveGame);
+    private SetOfGauntletsIronfistFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
     }
 
     // Iron Fist shoots fire bolts

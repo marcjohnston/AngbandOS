@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LeatherScaleMailWyvernscaleFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SoftArmorLeatherScaleMail(SaveGame);
+    private LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SoftArmorLeatherScaleMail>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

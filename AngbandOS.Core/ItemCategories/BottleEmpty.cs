@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class BottleEmpty : BottleItemClass
     {
-        public BottleEmpty(SaveGame saveGame) : base(saveGame) { }
+        private BottleEmpty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Empty Bottle";

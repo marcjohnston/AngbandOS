@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffOfAtalFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public QuarterstaffOfAtalFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HaftedQuarterstaff(SaveGame);
+    private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
     }
 
     // Atal does full identify

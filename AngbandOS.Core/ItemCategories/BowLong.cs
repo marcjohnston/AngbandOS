@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class BowLong : BowWeaponItemClass
     {
-        public BowLong(SaveGame saveGame) : base(saveGame) { }
+        private BowLong(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '}';
         public override Colour Colour => Colour.BrightBrown;

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HardArmorAdamantitePlateMail(SaveGame);
+    private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorAdamantitePlateMail>();
     }
 
     // Soulkeeper heals you a lot

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollDetectInvisible : ScrollItemClass
     {
-        public ScrollDetectInvisible(SaveGame saveGame) : base(saveGame) { }
+        private ScrollDetectInvisible(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Detect Invisible";

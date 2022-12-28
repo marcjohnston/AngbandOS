@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingConstitution : RingItemClass
     {
-        public RingConstitution(SaveGame saveGame) : base(saveGame) { }
+        private RingConstitution(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Constitution";

@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingSpeed : RingItemClass
     {
-        public RingSpeed(SaveGame saveGame) : base(saveGame) { }
+        private RingSpeed(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Speed";

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HardArmorMithrilChainMail(SaveGame);
+    private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMithrilChainMail>();
     }
 
     // Vampire Hunter cures most ailments

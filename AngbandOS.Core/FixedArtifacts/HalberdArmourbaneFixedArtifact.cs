@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HalberdArmourbaneFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public HalberdArmourbaneFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmHalberd(SaveGame);
+    private HalberdArmourbaneFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmHalberd>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

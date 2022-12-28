@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GoldSapphires : GoldItemClass
     {
-        public GoldSapphires(SaveGame saveGame) : base(saveGame) { }
+        private GoldSapphires(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '$';
         public override Colour Colour => Colour.Blue;

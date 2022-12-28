@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HelmHardLeatherCap : HelmItemClass
     {
-        public HelmHardLeatherCap(SaveGame saveGame) : base(saveGame) { }
+        private HelmHardLeatherCap(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.Brown;

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LanceSkewerFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public LanceSkewerFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmLance(SaveGame);
+    private LanceSkewerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmLance>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

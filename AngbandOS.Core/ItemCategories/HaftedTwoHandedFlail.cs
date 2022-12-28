@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HaftedTwoHandedFlail : HaftedItemClass
     {
-        public HaftedTwoHandedFlail(SaveGame saveGame) : base(saveGame) { }
+        private HaftedTwoHandedFlail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.Yellow;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalScaleMailOfTheOrcsFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HardArmorMetalScaleMail(SaveGame);
+    private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMetalScaleMail>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

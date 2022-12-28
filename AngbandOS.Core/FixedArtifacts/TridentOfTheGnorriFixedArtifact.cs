@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TridentOfTheGnorriFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public TridentOfTheGnorriFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmTrident(SaveGame);
+    private TridentOfTheGnorriFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmTrident>();
     }
 
     // Gnorri teleports monsters away

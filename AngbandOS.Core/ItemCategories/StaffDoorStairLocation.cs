@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffDoorStairLocation : StaffItemClass
     {
-        public StaffDoorStairLocation(SaveGame saveGame) : base(saveGame) { }
+        private StaffDoorStairLocation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '_';
         public override string Name => "Door/Stair Location";

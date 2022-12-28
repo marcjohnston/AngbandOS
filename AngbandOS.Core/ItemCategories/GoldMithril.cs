@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GoldMithril : GoldItemClass
     {
-        public GoldMithril(SaveGame saveGame) : base(saveGame) { }
+        private GoldMithril(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '$';
         public override Colour Colour => Colour.BrightBlue;

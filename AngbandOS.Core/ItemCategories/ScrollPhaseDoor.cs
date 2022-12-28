@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollPhaseDoor : ScrollItemClass
     {
-        public ScrollPhaseDoor(SaveGame saveGame) : base(saveGame) { }
+        private ScrollPhaseDoor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Phase Door";

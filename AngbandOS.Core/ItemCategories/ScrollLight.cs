@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollLight : ScrollItemClass
     {
-        public ScrollLight(SaveGame saveGame) : base(saveGame) { }
+        private ScrollLight(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Light";

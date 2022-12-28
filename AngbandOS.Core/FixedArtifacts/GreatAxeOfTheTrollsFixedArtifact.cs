@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GreatAxeOfTheTrollsFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmGreatAxe(SaveGame);
+    private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGreatAxe>();
     }
 
     // Trolls does mass carnage

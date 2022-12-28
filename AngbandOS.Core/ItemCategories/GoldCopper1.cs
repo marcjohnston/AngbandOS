@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GoldCopper1 : GoldItemClass
     {
-        public GoldCopper1(SaveGame saveGame) : base(saveGame) { }
+        private GoldCopper1(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '$';
         public override Colour Colour => Colour.Copper;

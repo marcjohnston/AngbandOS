@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerCharityFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public DaggerCharityFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordDagger(SaveGame);
+    private DaggerCharityFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
     }
 
     // Charity shoots a lightning bolt

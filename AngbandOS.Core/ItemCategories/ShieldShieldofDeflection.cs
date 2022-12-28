@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ShieldShieldofDeflection : ShieldItemClass
     {
-        public ShieldShieldofDeflection(SaveGame saveGame) : base(saveGame) { }
+        private ShieldShieldofDeflection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.BrightBlue;

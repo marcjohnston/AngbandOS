@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodSpeed : RodItemClass
     {
-        public RodSpeed(SaveGame saveGame) : base(saveGame) { }
+        private RodSpeed(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override bool RequiresAiming => false;
         public override char Character => '-';

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollObjectDetection : ScrollItemClass
     {
-        public ScrollObjectDetection(SaveGame saveGame) : base(saveGame) { }
+        private ScrollObjectDetection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Object Detection";

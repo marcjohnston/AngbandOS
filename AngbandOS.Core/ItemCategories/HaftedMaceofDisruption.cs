@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HaftedMaceofDisruption : HaftedItemClass
     {
-        public HaftedMaceofDisruption(SaveGame saveGame) : base(saveGame) { }
+        private HaftedMaceofDisruption(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.Purple;

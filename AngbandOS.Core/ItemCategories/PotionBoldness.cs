@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionBoldness : PotionItemClass
     {
-        public PotionBoldness(SaveGame saveGame) : base(saveGame) { }
+        private PotionBoldness(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Boldness";

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HardArmorMetalLamellarArmour : HardArmorItemClass
     {
-        public HardArmorMetalLamellarArmour(SaveGame saveGame) : base(saveGame) { }
+        private HardArmorMetalLamellarArmour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.BrightWhite;

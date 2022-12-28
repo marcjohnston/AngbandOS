@@ -12,9 +12,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfEverflameFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public LongSwordOfEverflameFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordLongSword(SaveGame);
+    private LongSwordOfEverflameFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
     }
 
     // Everflame shoots a fire ball

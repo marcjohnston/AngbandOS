@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class AmuletReflection : AmuletItemClass
     {
-        public AmuletReflection(SaveGame saveGame) : base(saveGame) { }
+        private AmuletReflection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '"';
         public override string Name => "Reflection";

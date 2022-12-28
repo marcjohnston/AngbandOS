@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandTrapDoorDestruction : WandItemClass
     {
-        public WandTrapDoorDestruction(SaveGame saveGame) : base(saveGame) { }
+        private WandTrapDoorDestruction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Trap/Door Destruction";

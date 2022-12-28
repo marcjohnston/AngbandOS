@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandShardBalls : WandItemClass
     {
-        public WandShardBalls(SaveGame saveGame) : base(saveGame) { }
+        private WandShardBalls(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Shard Balls";

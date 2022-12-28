@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DeathBookBlackMass : DeathBookItemClass
     {
-        public DeathBookBlackMass(SaveGame saveGame) : base(saveGame) { }
+        private DeathBookBlackMass(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.Grey;

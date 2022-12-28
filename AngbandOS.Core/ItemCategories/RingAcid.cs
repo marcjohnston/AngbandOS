@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingAcid : RingItemClass
     {
-        public RingAcid(SaveGame saveGame) : base(saveGame) { }
+        private RingAcid(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Acid";

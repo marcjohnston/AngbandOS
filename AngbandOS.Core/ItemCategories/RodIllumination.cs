@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodIllumination : RodItemClass
     {
-        public RodIllumination(SaveGame saveGame) : base(saveGame) { }
+        private RodIllumination(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override bool RequiresAiming => false;
         public override char Character => '-';

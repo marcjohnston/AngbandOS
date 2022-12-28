@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingPower : RingItemClass
     {
-        public RingPower(SaveGame saveGame) : base(saveGame) { }
+        private RingPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override Colour Colour => Colour.Yellow;

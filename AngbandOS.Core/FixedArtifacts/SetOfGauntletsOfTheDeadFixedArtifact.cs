@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfTheDeadFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new GlovesSetOfGauntlets(SaveGame);
+    private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
     }
 
     // The Dead shoot acid bolts

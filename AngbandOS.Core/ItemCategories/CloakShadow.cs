@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CloakShadow : CloakItemClass
     {
-        public CloakShadow(SaveGame saveGame) : base(saveGame) { }
+        private CloakShadow(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '(';
         public override Colour Colour => Colour.Black;

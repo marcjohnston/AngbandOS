@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ChestSmallSteel : ChestItemClass
     {
-        public ChestSmallSteel(SaveGame saveGame) : base(saveGame) { }
+        private ChestSmallSteel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '~';
         public override Colour Colour => Colour.Grey;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SmallSwordStingFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public SmallSwordStingFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordShortSword(SaveGame);
+    private SmallSwordStingFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

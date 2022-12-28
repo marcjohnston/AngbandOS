@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionSlimeMoldJuice : PotionItemClass
     {
-        public PotionSlimeMoldJuice(SaveGame saveGame) : base(saveGame) { }
+        private PotionSlimeMoldJuice(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Slime Mold Juice";
@@ -17,7 +17,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Ds => 1;
         public override string FriendlyName => "Slime Mold Juice";
         public override int Pval => 400;
-        public override int? SubCategory => (int?)PotionType.SlimeMold;
+        public override int? SubCategory => (int)PotionType.SlimeMold;
         public override int Weight => 4;
         public override bool Quaff(SaveGame saveGame)
         {
@@ -53,99 +53,99 @@ namespace AngbandOS.Core.ItemCategories
             switch (Program.Rng.DieRoll(48))
             {
                 case 1:
-                    return new PotionWater(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionWater>();
                 case 2:
-                    return new PotionAppleJuice(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionAppleJuice>();
                 case 3:
-                    return new PotionSlowness(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSlowness>();
                 case 4:
-                    return new PotionSaltWater(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSaltWater>();
                 case 5:
-                    return new PotionPoison(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionPoison>();
                 case 6:
-                    return new PotionBlindness(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionBlindness>();
                 case 7:
-                    return new PotionBooze(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionBooze>();
                 case 8:
-                    return new PotionSleep(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSleep>();
                 case 9:
-                    return new PotionInfravision(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionInfravision>();
                 case 10:
-                    return new PotionDetectInvisible(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionDetectInvisible>();
                 case 11:
-                    return new PotionSlowPoison(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSlowPoison>();
                 case 12:
-                    return new PotionNeutralizePoison(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionNeutralizePoison>();
                 case 13:
-                    return new PotionBoldness(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionBoldness>();
                 case 14:
-                    return new PotionSpeed(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSpeed>();
                 case 15:
-                    return new PotionResistHeat(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionResistHeat>();
                 case 16:
-                    return new PotionResistCold(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionResistCold>();
                 case 17:
-                    return new PotionHeroism(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionHeroism>();
                 case 18:
-                    return new PotionBerserkStrength(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionBerserkStrength>();
                 case 19:
-                    return new PotionCureLightWounds(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionCureLightWounds>();
                 case 20:
-                    return new PotionCureSeriousWounds(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionCureSeriousWounds>();
                 case 21:
-                    return new PotionCureCriticalWounds(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionCureCriticalWounds>();
                 case 22:
-                    return new PotionHealing(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionHealing>();
                 case 23:
-                    return new PotionSpecialHealing(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSpecialHealing>();
                 case 24:
-                    return new PotionLife(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionLife>();
                 case 25:
-                    return new PotionRestoreMana(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreMana>();
                 case 26:
-                    return new PotionRestoreLifeLevels(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreLifeLevels>();
                 case 27:
-                    return new PotionRestoreStrength(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreStrength>();
                 case 28:
-                    return new PotionRestoreIntelligence(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreIntelligence>();
                 case 29:
-                    return new PotionRestoreWisdom(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreWisdom>();
                 case 30:
-                    return new PotionRestoreDexterity(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreDexterity>();
                 case 31:
-                    return new PotionRestoreConstitution(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreConstitution>();
                 case 32:
-                    return new PotionRestoreCharisma(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionRestoreCharisma>();
                 case 33:
-                    return new PotionStrength(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionStrength>();
                 case 34:
-                    return new PotionIntelligence(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionIntelligence>();
                 case 35:
-                    return new PotionWisdom(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionWisdom>();
                 case 36:
-                    return new PotionDexterity(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionDexterity>();
                 case 37:
-                    return new PotionConstitution(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionConstitution>();
                 case 38:
-                    return new PotionCharisma(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionCharisma>();
                 case 39:
-                    return new PotionAugmentation(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionAugmentation>();
                 case 40:
-                    return new PotionEnlightenment(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionEnlightenment>();
                 case 41:
-                    return new PotionSpecialEnlightenment(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSpecialEnlightenment>();
                 case 42:
-                    return new PotionSelfKnowledge(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionSelfKnowledge>();
                 case 43:
-                    return new PotionExperience(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionExperience>();
                 case 44:
-                    return new PotionResistance(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionResistance>();
                 case 45:
-                    return new PotionCuring(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionCuring>();
                 case 46:
-                    return new PotionInvulnerability(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionInvulnerability>();
                 case 47:
-                    return new PotionNewLife(saveGame);
+                    return (PotionItemClass)saveGame.SingletonRepository.ItemCategories.Get<PotionNewLife>();
                 default:
                     throw new Exception("Invalid random potion chosen.");
             }

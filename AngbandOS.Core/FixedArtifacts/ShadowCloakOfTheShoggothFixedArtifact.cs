@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfTheShoggothFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public ShadowCloakOfTheShoggothFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new CloakShadow(SaveGame);
+    private ShadowCloakOfTheShoggothFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CloakShadow>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

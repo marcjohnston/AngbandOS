@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GlaiveOfPainFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public GlaiveOfPainFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmGlaive(SaveGame);
+    private GlaiveOfPainFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGlaive>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

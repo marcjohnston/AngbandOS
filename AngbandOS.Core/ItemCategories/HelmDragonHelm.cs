@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HelmDragonHelm : HelmItemClass
     {
-        public HelmDragonHelm(SaveGame saveGame) : base(saveGame) { }
+        private HelmDragonHelm(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.BrightGreen;

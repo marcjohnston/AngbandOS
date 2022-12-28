@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronCrownOfMiseryFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public IronCrownOfMiseryFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new CrownIron(SaveGame);
+    private IronCrownOfMiseryFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CrownIron>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

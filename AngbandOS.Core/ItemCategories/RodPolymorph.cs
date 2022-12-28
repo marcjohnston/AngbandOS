@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RodPolymorph : RodItemClass
     {
-        public RodPolymorph(SaveGame saveGame) : base(saveGame) { }
+        private RodPolymorph(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override bool RequiresAiming => true;
         public override char Character => '-';

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfTheDawnFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public LongSwordOfTheDawnFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordLongSword(SaveGame);
+    private LongSwordOfTheDawnFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
     }
 
     // Dawn Sword summons a reaver

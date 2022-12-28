@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingWeakness : RingItemClass
     {
-        public RingWeakness(SaveGame saveGame) : base(saveGame) { }
+        private RingWeakness(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Weakness";

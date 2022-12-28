@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionSlowness : PotionItemClass
     {
-        public PotionSlowness(SaveGame saveGame) : base(saveGame) { }
+        private PotionSlowness(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Slowness";

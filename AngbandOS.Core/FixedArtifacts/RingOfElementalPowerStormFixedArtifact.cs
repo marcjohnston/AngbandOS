@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfElementalPowerStormFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public RingOfElementalPowerStormFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new RingVilya(SaveGame);
+    private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingVilya>();
     }
 
     // Ring of Elemental Lightning casts a lightning ball

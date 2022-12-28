@@ -8,9 +8,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfBastFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public RingOfBastFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new RingTulkas(SaveGame);
+    private RingOfBastFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingTulkas>();
     }
 
     // Ring of Bast hastes you

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LochaberAxeOfTheDwarvesFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmLochaberAxe(SaveGame);
+    private LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmLochaberAxe>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

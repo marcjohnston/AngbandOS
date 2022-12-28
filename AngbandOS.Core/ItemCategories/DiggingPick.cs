@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DiggingPick : DiggingItemClass
     {
-        public DiggingPick(SaveGame saveGame) : base(saveGame) { }
+        private DiggingPick(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.Grey;

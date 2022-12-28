@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TwoHandedSwordFiretongueFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordTwoHandedSword(SaveGame);
+    private TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordTwoHandedSword>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

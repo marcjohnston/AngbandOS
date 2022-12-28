@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HardArmorMetalBrigandineArmour : HardArmorItemClass
     {
-        public HardArmorMetalBrigandineArmour(SaveGame saveGame) : base(saveGame) { }
+        private HardArmorMetalBrigandineArmour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.Grey;

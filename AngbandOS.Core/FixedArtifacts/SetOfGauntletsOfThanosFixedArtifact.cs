@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfThanosFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public SetOfGauntletsOfThanosFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new GlovesSetOfGauntlets(SaveGame);
+    private SetOfGauntletsOfThanosFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

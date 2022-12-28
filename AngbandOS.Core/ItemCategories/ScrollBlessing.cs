@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollBlessing : ScrollItemClass
     {
-        public ScrollBlessing(SaveGame saveGame) : base(saveGame) { }
+        private ScrollBlessing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Blessing";

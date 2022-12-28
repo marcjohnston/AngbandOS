@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearGungnirFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public SpearGungnirFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmSpear(SaveGame);
+    private SpearGungnirFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
     }
 
     // Grungnir shoots a lightning ball

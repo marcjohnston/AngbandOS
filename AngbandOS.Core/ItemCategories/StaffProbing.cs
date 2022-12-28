@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class StaffProbing : StaffItemClass
     {
-        public StaffProbing(SaveGame saveGame) : base(saveGame) { }
+        private StaffProbing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '_';
         public override string Name => "Probing";

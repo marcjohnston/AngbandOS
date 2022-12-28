@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerOfAssassinFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public DaggerOfAssassinFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordDagger(SaveGame);
+    private DaggerOfAssassinFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SwordMainGauche : SwordItemClass
     {
-        public SwordMainGauche(SaveGame saveGame) : base(saveGame) { }
+        private SwordMainGauche(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '|';
         public override Colour Colour => Colour.BrightWhite;

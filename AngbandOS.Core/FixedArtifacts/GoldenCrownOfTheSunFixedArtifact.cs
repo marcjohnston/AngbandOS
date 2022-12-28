@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GoldenCrownOfTheSunFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new CrownGolden(SaveGame);
+    private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CrownGolden>();
     }
 
     // Sun Crown heals

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollMagicMapping : ScrollItemClass
     {
-        public ScrollMagicMapping(SaveGame saveGame) : base(saveGame) { }
+        private ScrollMagicMapping(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Magic Mapping";

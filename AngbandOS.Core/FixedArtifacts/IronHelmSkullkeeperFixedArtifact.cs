@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronHelmSkullkeeperFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public IronHelmSkullkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HelmIronHelm(SaveGame);
+    private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
     }
 
     // Skull Keeper detects everything

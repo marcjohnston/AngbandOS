@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandDrainLife : WandItemClass
     {
-        public WandDrainLife(SaveGame saveGame) : base(saveGame) { }
+        private WandDrainLife(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Drain Life";

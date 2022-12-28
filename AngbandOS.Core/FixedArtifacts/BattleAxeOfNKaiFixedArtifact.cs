@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BattleAxeOfNKaiFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public BattleAxeOfNKaiFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmBattleAxe(SaveGame);
+    private BattleAxeOfNKaiFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBattleAxe>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

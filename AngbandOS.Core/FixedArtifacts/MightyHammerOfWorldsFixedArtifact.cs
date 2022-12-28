@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MightyHammerOfWorldsFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public MightyHammerOfWorldsFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HaftedMightyHammer(SaveGame);
+    private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMightyHammer>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

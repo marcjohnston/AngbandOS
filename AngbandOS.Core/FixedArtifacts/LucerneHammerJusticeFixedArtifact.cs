@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TheLucerneHammerJusticeFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HaftedLucerneHammer(SaveGame);
+    private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedLucerneHammer>();
     }
 
     // Justice drains life

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class FlailTotilaFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public FlailTotilaFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new HaftedFlail(SaveGame);
+    private FlailTotilaFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedFlail>();
     }
 
     // Totila does confusion

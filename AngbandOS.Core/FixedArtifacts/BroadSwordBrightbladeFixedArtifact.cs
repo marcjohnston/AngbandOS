@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadSwordBrightbladeFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public BroadSwordBrightbladeFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordBroadSword(SaveGame);
+    private BroadSwordBrightbladeFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

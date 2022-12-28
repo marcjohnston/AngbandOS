@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SoftArmorRobe : SoftArmorItemClass
     {
-        public SoftArmorRobe(SaveGame saveGame) : base(saveGame) { }
+        private SoftArmorRobe(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '(';
         public override Colour Colour => Colour.Blue;

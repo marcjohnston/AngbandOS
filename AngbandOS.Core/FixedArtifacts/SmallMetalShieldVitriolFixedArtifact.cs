@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SmallMetalShieldVitriolFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new ShieldSmallMetalShield(SaveGame);
+    private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldSmallMetalShield>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

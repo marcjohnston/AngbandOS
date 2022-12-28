@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TwoHandedSwordTwilightFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public TwoHandedSwordTwilightFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordTwoHandedSword(SaveGame);
+    private TwoHandedSwordTwilightFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordTwoHandedSword>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

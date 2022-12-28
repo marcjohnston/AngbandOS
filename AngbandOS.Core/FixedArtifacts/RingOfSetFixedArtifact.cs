@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfSetFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public RingOfSetFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new RingPower(SaveGame);
+    private RingOfSetFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingPower>();
     }
 
     // Ring of Set has a random effect

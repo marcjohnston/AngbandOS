@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PolearmGlaive : PolearmItemClass
     {
-        public PolearmGlaive(SaveGame saveGame) : base(saveGame) { }
+        private PolearmGlaive(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '/';
         public override Colour Colour => Colour.Grey;

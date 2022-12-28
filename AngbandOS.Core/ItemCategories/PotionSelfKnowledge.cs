@@ -6,7 +6,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionSelfKnowledge : PotionItemClass
     {
-        public PotionSelfKnowledge(SaveGame saveGame) : base(saveGame) { }
+        private PotionSelfKnowledge(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Self Knowledge";

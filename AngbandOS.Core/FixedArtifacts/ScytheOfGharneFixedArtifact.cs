@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScytheOfGharneFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public ScytheOfGharneFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new PolearmScythe(SaveGame);
+    private ScytheOfGharneFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmScythe>();
     }
 
     // G'Harne does Word of Recall

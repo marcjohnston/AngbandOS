@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new DragArmorPowerDragonScaleMail(SaveGame);
+    private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorPowerDragonScaleMail>();
     }
 
     // Bladeturner heals you and gives you timed resistances

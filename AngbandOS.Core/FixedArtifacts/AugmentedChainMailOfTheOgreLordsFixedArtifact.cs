@@ -10,9 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new AmuletBrilliance(SaveGame);
+    private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletBrilliance>();
     }
 
     // Ogre Lords destroys doors

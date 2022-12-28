@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakShifterFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public CloakShifterFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new Cloak(SaveGame);
+    private CloakShifterFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
     }
 
     // Shifter teleports you

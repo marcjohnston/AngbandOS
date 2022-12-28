@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WandMagicMissile : WandItemClass
     {
-        public WandMagicMissile(SaveGame saveGame) : base(saveGame) { }
+        private WandMagicMissile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Magic Missile";

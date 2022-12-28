@@ -11,9 +11,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LightCrossbowOfDeathFixedArtifact : BaseFixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
-    public LightCrossbowOfDeathFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new BowLightCrossbow(SaveGame);
+    private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BowLightCrossbow>();
     }
 
     // Death brands your bolts

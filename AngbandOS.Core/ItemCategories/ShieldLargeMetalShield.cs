@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ShieldLargeMetalShield : ShieldItemClass
     {
-        public ShieldLargeMetalShield(SaveGame saveGame) : base(saveGame) { }
+        private ShieldLargeMetalShield(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ')';
         public override Colour Colour => Colour.Grey;

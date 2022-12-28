@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class JunkShardofPottery : JunkItemClass
     {
-        public JunkShardofPottery(SaveGame saveGame) : base(saveGame) { }
+        private JunkShardofPottery(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '~';
         public override Colour Colour => Colour.Red;

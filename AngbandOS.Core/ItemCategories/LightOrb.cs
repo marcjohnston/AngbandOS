@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class LightOrb : LightSourceItemClass
     {
-        public LightOrb(SaveGame saveGame) : base(saveGame) { }
+        private LightOrb(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '~';
         public override Colour Colour => Colour.BrightYellow;

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class LightStarEssenceElendil : LightSourceItemClass
     {
-        public LightStarEssenceElendil(SaveGame saveGame) : base(saveGame) { }
+        private LightStarEssenceElendil(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '*';
         public override Colour Colour => Colour.Yellow;

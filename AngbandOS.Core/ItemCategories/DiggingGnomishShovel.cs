@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DiggingGnomishShovel : DiggingItemClass
     {
-        public DiggingGnomishShovel(SaveGame saveGame) : base(saveGame) { }
+        private DiggingGnomishShovel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.BrightGreen;

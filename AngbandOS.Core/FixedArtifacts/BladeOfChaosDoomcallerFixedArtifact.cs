@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BladeOfChaosDoomcallerFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new SwordBladeofChaos(SaveGame);
+    private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeofChaos>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;

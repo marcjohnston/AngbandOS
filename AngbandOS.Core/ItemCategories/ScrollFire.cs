@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollFire : ScrollItemClass
     {
-        public ScrollFire(SaveGame saveGame) : base(saveGame) { }
+        private ScrollFire(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Fire";

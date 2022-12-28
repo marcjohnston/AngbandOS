@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class LifeBookBookofCommonPrayer : LifeBookItemClass
     {
-        public LifeBookBookofCommonPrayer(SaveGame saveGame) : base(saveGame) { }
+        private LifeBookBookofCommonPrayer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "[Book of Common Prayer]";

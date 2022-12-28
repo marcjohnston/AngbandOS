@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class MushroomPoison : MushroomFoodItemClass
     {
-        public MushroomPoison(SaveGame saveGame) : base(saveGame) { }
+        private MushroomPoison(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ',';
         public override string Name => "Poison";

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class ScrollIce : ScrollItemClass
     {
-        public ScrollIce(SaveGame saveGame) : base(saveGame) { }
+        private ScrollIce(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "Ice";

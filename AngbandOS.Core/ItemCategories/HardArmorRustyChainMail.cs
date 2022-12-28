@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HardArmorRustyChainMail : HardArmorItemClass
     {
-        public HardArmorRustyChainMail(SaveGame saveGame) : base(saveGame) { }
+        private HardArmorRustyChainMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.Red;

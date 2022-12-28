@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class GlovesSetOfGauntlets : GlovesItemClass
     {
-        public GlovesSetOfGauntlets(SaveGame saveGame) : base(saveGame) { }
+        private GlovesSetOfGauntlets(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.BrightBrown;

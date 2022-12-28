@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingTeleportation : RingItemClass
     {
-        public RingTeleportation(SaveGame saveGame) : base(saveGame) { }
+        private RingTeleportation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Teleportation";

@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowSureshotFixedArtifact : BaseFixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
-    public LongBowSureshotFixedArtifact(SaveGame saveGame) : base(saveGame)
-     {
-        _baseItemCategory = new BowLong(SaveGame);
+    private LongBowSureshotFixedArtifact(SaveGame saveGame)
+    {
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BowLong>();
     }
 
     public override ItemClass BaseItemCategory => _baseItemCategory;
