@@ -6,6 +6,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class ShotItemClass : AmmunitionItemClass
     {
+        public ShotItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
         public override Colour Colour => Colour.BrightBrown;
         public override int GetAdditionalMassProduceCount(Item item)

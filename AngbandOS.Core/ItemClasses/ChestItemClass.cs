@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class ChestItemClass : ItemClass
     {
+        public ChestItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
@@ -31,21 +32,21 @@ namespace AngbandOS.Core.ItemClasses
             }
             else if (item.TypeSpecificValue == 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Broken];
+                return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Broken];
             }
             else if (item.TypeSpecificValue < 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Average];
+                return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Average];
             }
             else
             {
                 if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
                 {
-                      return item.BaseItemCategory.Stompable[StompableType.Good];
+                      return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Good];
                 }
                 else
                 {
-                    return item.BaseItemCategory.Stompable[StompableType.Excellent];
+                    return item.BaseItemCategory.ItemClassProperties.Stompable[StompableType.Excellent];
                 }
             }
         }

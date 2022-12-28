@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class HaftedBallAndChain : HaftedItemClass
     {
-        private HaftedBallAndChain(SaveGame saveGame) { } // This object is a singleton.
+        private HaftedBallAndChain(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.Black;

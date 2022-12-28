@@ -3,6 +3,7 @@ using AngbandOS.Core.FixedArtifacts;
 using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Enumerations;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace AngbandOS.Core
@@ -18,10 +19,12 @@ namespace AngbandOS.Core
         public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
+        public ItemClassPropertiesSingleton ItemClassProperties;
 
         public void Initialize(SaveGame saveGame)
         {
             GameCommands = new SingletonFactory<ICommand>(saveGame);
+            ItemClassProperties = new ItemClassPropertiesSingleton(saveGame);
             ItemCategories = new SingletonFactory<ItemClass>(saveGame);
             BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
 

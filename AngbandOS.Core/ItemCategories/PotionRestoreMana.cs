@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class PotionRestoreMana : PotionItemClass
     {
-        private PotionRestoreMana(SaveGame saveGame) { } // This object is a singleton.
+        private PotionRestoreMana(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '!';
         public override string Name => "Restore Mana";

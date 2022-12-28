@@ -632,8 +632,8 @@ namespace AngbandOS
                 SaveGame.Print(tmpVal, j + 1, col);
                 if (oPtr.BaseItemCategory != null)
                 {
-                    Colour a = oPtr.BaseItemCategory.FlavorColour;
-                    char c = oPtr.BaseItemCategory.FlavorCharacter;
+                    Colour a = oPtr.BaseItemCategory.ItemClassProperties.FlavorColour;
+                    char c = oPtr.BaseItemCategory.ItemClassProperties.FlavorCharacter;
                     SaveGame.Place(a, c, j + 1, col + 3);
                 }
                 else
@@ -707,8 +707,8 @@ namespace AngbandOS
                 SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
                 string tmpVal = $"{i.IndexToLabel()})";
                 SaveGame.Print(tmpVal, j + 1, col);
-                Colour a = oPtr.BaseItemCategory.FlavorColour;
-                char c = oPtr.BaseItemCategory.FlavorCharacter;
+                Colour a = oPtr.BaseItemCategory.ItemClassProperties.FlavorColour;
+                char c = oPtr.BaseItemCategory.ItemClassProperties.FlavorCharacter;
                 SaveGame.Place(a, c, j + 1, col + 3);
                 SaveGame.Print(outColour[j], outDesc[j], j + 1, col + 5);
                 int wgt = oPtr.Weight * oPtr.Count;

@@ -5,6 +5,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class MeleeWeaponItemClass : WeaponItemClass
     {
+        public MeleeWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         protected virtual bool CanBeWeaponOfLaw => false;
         protected virtual bool CapableOfVorpalSlaying => false;
         protected virtual bool CanBeWeaponOfSharpness => false;

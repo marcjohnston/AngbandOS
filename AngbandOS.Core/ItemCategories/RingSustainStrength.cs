@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingSustainStrength : RingItemClass
     {
-        private RingSustainStrength(SaveGame saveGame) { } // This object is a singleton.
+        private RingSustainStrength(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Sustain Strength";

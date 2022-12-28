@@ -2246,8 +2246,8 @@ namespace AngbandOS
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorCharacter;
-            ap = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorColour;
+            cp = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].ItemClassProperties.FlavorCharacter;
+            ap = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].ItemClassProperties.FlavorColour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)
@@ -2395,8 +2395,8 @@ namespace AngbandOS
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Marked)
                 {
-                    cp = oPtr.BaseItemCategory.FlavorCharacter;
-                    ap = oPtr.BaseItemCategory.FlavorColour;
+                    cp = oPtr.BaseItemCategory.ItemClassProperties.FlavorCharacter;
+                    ap = oPtr.BaseItemCategory.ItemClassProperties.FlavorColour;
                     if (_player.TimedHallucinations != 0)
                     {
                         ImageObject(out ap, out cp);

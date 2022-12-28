@@ -67,7 +67,7 @@ namespace AngbandOS.StoreCommands
                         {
                             if (saveGame.GetCheck($"Always destroy {itemName}?"))
                             {
-                                item.BaseItemCategory.Stompable[0] = true;
+                                item.BaseItemCategory.ItemClassProperties.Stompable[0] = true;
                             }
                         }
                     }

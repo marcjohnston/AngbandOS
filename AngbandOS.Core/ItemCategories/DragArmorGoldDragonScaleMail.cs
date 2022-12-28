@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class DragArmorGoldDragonScaleMail : DragArmorItemClass
     {
-        private DragArmorGoldDragonScaleMail(SaveGame saveGame) { } // This object is a singleton.
+        private DragArmorGoldDragonScaleMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.Gold;

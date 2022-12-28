@@ -255,8 +255,8 @@ namespace AngbandOS
             }
             foreach (ItemClass kPtr in SaveGame.SingletonRepository.ItemCategories)
             {
-                kPtr.Tried = false;
-                kPtr.FlavourAware = false;
+                kPtr.ItemClassProperties.Tried = false;
+                kPtr.ItemClassProperties.FlavourAware = false;
             }
             for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
             {

@@ -8,6 +8,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class ScrollItemClass : ItemClass
     {
+        public ScrollItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;

@@ -5,7 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class RingExtraAttacks : RingItemClass
     {
-        private RingExtraAttacks(SaveGame saveGame) { } // This object is a singleton.
+        private RingExtraAttacks(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '=';
         public override string Name => "Extra Attacks";
