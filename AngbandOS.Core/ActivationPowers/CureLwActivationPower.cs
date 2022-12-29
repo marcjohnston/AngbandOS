@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Heal 30 health and remove fear.

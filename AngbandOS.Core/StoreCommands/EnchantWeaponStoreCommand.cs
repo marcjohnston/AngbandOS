@@ -1,25 +1,17 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class EnchantWeaponStoreCommand : IStoreCommand
+    internal class EnchantWeaponStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Enchant your weapon";
 
-        public string Description => "Enchant your weapon";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.EnchantWeapon();
+            storeCommandEvent.Store.EnchantWeapon();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreWeapon);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreWeapon);
     }
 }

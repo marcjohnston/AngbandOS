@@ -1,8 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-using AngbandOS.Core.SpellResistantDetections;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class DarknessMonsterSpell : BallProjectileMonsterSpell

@@ -1,26 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Wield/wear an item
     /// </summary>
     [Serializable]
-    internal class WieldStoreCommand : IStoreCommand
+    internal class WieldStoreCommand : BaseStoreCommand
     {
-        public char Key => 'w';
+        public override char Key => 'w';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdWield(saveGame);
+            DoCmdWield(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdWield(SaveGame saveGame)

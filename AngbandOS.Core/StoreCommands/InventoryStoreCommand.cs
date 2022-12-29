@@ -1,25 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the player's inventory
     /// </summary>
     [Serializable]
-    internal class InventoryStoreCommand : IStoreCommand
+    internal class InventoryStoreCommand : BaseStoreCommand
     {
-        public char Key => 'i';
+        public override char Key => 'i';
 
-        public string Description => "";
+        public override string Description => "";
 
-        public bool RequiresRerendering => false;
-
-        public bool IsEnabled(Store store) => true;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdInventory(saveGame);
+            DoCmdInventory(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdInventory(SaveGame saveGame)

@@ -1,25 +1,17 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class RestorationStoreCommand : IStoreCommand
+    internal class RestorationStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "buy Restoration";
 
-        public string Description => "buy Restoration";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.Restoration();
+            storeCommandEvent.Store.Restoration();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreAlchemist);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreAlchemist);
     }
 }

@@ -1,25 +1,17 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class HireRoomStoreCommand : IStoreCommand
+    internal class HireRoomStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "hire a Room";
 
-        public string Description => "hire a Room";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.HireRoom();
+            storeCommandEvent.Store.HireRoom();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreInn);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreInn);
     }
 }

@@ -1,9 +1,5 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
+﻿using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.Races;
-using AngbandOS.Enumerations;
-using AngbandOS.StoreCommands;
 
 namespace AngbandOS.Stores
 {
@@ -91,6 +87,6 @@ namespace AngbandOS.Stores
             }
         }
 
-        protected override IStoreCommand AdvertisedStoreCommand4 => new HireEscortStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => new HireEscortStoreCommand();
     }
 }

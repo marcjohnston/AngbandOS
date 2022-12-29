@@ -1,6 +1,4 @@
-﻿using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Let the player scroll through previous messages

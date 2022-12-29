@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Map the local area.

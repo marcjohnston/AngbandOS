@@ -1,6 +1,3 @@
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Enumerations;
-
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]

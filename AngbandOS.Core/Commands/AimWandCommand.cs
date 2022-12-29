@@ -1,10 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Aim a wand from your inventory

@@ -1,6 +1,4 @@
-﻿using AngbandOS.Projection;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class WaterBallMonsterSpell : BallProjectileMonsterSpell

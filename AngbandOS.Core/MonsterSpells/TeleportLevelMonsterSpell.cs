@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.SpellResistantDetections;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class TeleportLevelMonsterSpell : MonsterSpell

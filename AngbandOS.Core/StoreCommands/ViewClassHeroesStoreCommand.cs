@@ -1,25 +1,20 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class ViewClassHeroesStoreCommand : IStoreCommand
+    internal class ViewClassHeroesStoreCommand : BaseStoreCommand
     {
-        public char Key => 'c';
+        public override char Key => 'c';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "view Class heroes";
 
-        public string Description => "view Class heroes";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            saveGame.SaveScreen();
+            storeCommandEvent.SaveGame.SaveScreen();
             //Program.HiScores.ClassFilter = saveGame.Player.ProfessionIndex;
             //Program.HiScores.DisplayScores(new HighScore(saveGame));
             //Program.HiScores.ClassFilter = -1;
-            saveGame.Load();
+            storeCommandEvent.SaveGame.Load();
         }
 
-        public bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
     }
 }

@@ -7,12 +7,8 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.ActivationPowers;
 using AngbandOS.ArtifactBiases;
-using AngbandOS.Core;
 using AngbandOS.Core.FixedArtifacts;
 using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS
 {

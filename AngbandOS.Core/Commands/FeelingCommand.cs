@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Repeat the level feeling for the player and also say where we are

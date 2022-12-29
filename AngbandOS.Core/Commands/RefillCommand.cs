@@ -1,8 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Refill a light source with fuel

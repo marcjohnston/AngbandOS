@@ -1,10 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Throw an item

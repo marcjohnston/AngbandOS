@@ -1,26 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Destroy a single item
     /// </summary>
     [Serializable]
-    internal class DestroyStoreCommand : IStoreCommand
+    internal class DestroyStoreCommand : BaseStoreCommand
     {
-        public char Key => 'k';
+        public override char Key => 'k';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdDestroy(saveGame);
+            DoCmdDestroy(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdDestroy(SaveGame saveGame)

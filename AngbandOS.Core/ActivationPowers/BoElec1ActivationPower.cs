@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot a lightning bolt that does 4d8 damage

@@ -5,12 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core;
 using AngbandOS.Core.AttackEffects;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.MonsterRaces;
 using AngbandOS.Core.MonsterSpells;
-using AngbandOS.Enumerations;
 using System.Text;
 
 namespace AngbandOS

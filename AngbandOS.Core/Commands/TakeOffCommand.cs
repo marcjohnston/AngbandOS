@@ -1,6 +1,4 @@
-﻿using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Take off an item

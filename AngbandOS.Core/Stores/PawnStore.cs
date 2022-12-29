@@ -1,7 +1,4 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.Races;
-using AngbandOS.Enumerations;
-using AngbandOS.StoreCommands;
+﻿using AngbandOS.Core.Races;
 
 namespace AngbandOS.Stores
 {
@@ -75,7 +72,7 @@ namespace AngbandOS.Stores
                 return price / 3;
             }
         }
-        protected override IStoreCommand AdvertisedStoreCommand4 => new IdentifyAllStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => new IdentifyAllStoreCommand();
         protected override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
 
         protected override bool StoreIdentifiesItems => false;

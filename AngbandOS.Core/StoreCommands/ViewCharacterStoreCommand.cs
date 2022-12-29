@@ -1,26 +1,19 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.Interface;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// View the character sheet
     /// </summary>
     [Serializable]
-    internal class ViewCharacterStoreCommand : IStoreCommand
+    internal class ViewCharacterStoreCommand : BaseStoreCommand
     {
-        public char Key => 'C';
+        public override char Key => 'C';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => true;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdViewCharacter(saveGame);
+            DoCmdViewCharacter(storeCommandEvent.SaveGame);
+            storeCommandEvent.RequiresRerendering = true;
         }
 
         public static void DoCmdViewCharacter(SaveGame saveGame)

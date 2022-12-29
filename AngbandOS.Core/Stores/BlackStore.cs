@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.Races;
-using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Races;
 
 namespace AngbandOS.Stores
 {
@@ -11,6 +9,10 @@ namespace AngbandOS.Stores
         {
         }
 
+        public override int MaxInventory => 75;
+        public override int StoreMinKeep => 35;
+        public override int StoreMaxKeep => 65;
+        public override int StoreTurnover => 5;
         public override string FeatureType => "BlackMarket";
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]

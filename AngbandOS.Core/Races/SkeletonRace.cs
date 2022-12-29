@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.Syllables;
-using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.Syllables;
 
 namespace AngbandOS.Core.Races
 {

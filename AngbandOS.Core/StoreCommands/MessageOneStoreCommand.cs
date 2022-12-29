@@ -1,24 +1,18 @@
-﻿using AngbandOS.Commands;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the previous message
     /// </summary>
     [Serializable]
-    internal class MessageOneStoreCommand : IStoreCommand
+    internal class MessageOneStoreCommand : BaseStoreCommand
     {
-        public char Key => 'O';
+        public override char Key => 'O';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdMessageOne(saveGame);
+            DoCmdMessageOne(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdMessageOne(SaveGame saveGame)

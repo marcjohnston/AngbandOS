@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot an arrow that does 150 damage.

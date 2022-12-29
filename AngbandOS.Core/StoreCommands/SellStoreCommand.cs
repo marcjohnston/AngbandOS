@@ -1,21 +1,16 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class SellStoreCommand : IStoreCommand
+    internal class SellStoreCommand : BaseStoreCommand
     {
-        public char Key => 's';
+        public override char Key => 's';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Sell an item";
 
-        public string Description => "Sell an item";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.StoreSell();
+            storeCommandEvent.Store.StoreSell();
         }
 
-        public bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
+        public override bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
     }
 }

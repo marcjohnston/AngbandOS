@@ -1,21 +1,16 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class DropStoreCommand : IStoreCommand
+    internal class DropStoreCommand : BaseStoreCommand
     {
-        public char Key => 'd';
+        public override char Key => 'd';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Drop an item";
 
-        public string Description => "Drop an item";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.StoreSell();
+            storeCommandEvent.Store.StoreSell();
         }
 
-        public bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
+        public override bool IsEnabled(Store store) => (store.StoreType != StoreType.StoreHall);
     }
 }

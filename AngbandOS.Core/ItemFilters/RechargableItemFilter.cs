@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.Core.ItemFilters
+﻿namespace AngbandOS.Core.ItemFilters
 {
     internal class RechargableItemFilter : ItemCategoryItemFilter
     {

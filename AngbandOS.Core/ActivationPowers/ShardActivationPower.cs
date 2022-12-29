@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot a shard ball for 120 + level damage.

@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.Core.ChestTraps
+﻿namespace AngbandOS.Core.ChestTraps
 {
     internal class LoseStrChestTrap : BaseChestTrap
     {

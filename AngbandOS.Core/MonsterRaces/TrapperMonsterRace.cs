@@ -1,5 +1,4 @@
 using AngbandOS.Core.AttackEffects;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.MonsterRaces
 {

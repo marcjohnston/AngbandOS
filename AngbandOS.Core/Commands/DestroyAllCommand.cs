@@ -1,6 +1,4 @@
-﻿using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Destroy all worthless items in your pack

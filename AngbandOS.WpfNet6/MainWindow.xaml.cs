@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace WpfApp1
+namespace Cthangband
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -418,7 +418,6 @@ namespace WpfApp1
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            //Print(1, 1, "Xena", Colour.Red, Colour.Black);
             thread.DoWork += Thread_DoWork;
             thread.RunWorkerCompleted += Thread_RunWorkerCompleted;
             thread.RunWorkerAsync();
@@ -426,7 +425,7 @@ namespace WpfApp1
 
         private void Thread_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
     }
 }

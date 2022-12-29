@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Look around (using the target code) stopping on anything interesting rather than just

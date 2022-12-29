@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.Stores
+﻿namespace AngbandOS.Stores
 {
     [Serializable]
     internal class EmptyLotStore : Store

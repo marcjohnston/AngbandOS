@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Interface;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Display a list of all the keyboard commands

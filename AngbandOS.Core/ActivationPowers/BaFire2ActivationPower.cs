@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Shoot a fire ball that does 120 damage with a larger radius.

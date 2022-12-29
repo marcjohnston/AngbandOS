@@ -1,8 +1,5 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.ItemCategories;
+﻿using AngbandOS.Core.ItemCategories;
 using AngbandOS.Core.Races;
-using AngbandOS.Enumerations;
-using AngbandOS.StoreCommands;
 
 namespace AngbandOS.Stores
 {
@@ -66,7 +63,7 @@ namespace AngbandOS.Stores
         }
 
         public override int StoreMaxKeep => 4;
-        protected override IStoreCommand AdvertisedStoreCommand4 => new HireRoomStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => new HireRoomStoreCommand();
         protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

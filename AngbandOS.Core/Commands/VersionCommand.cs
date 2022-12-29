@@ -1,5 +1,4 @@
-﻿using AngbandOS.Core;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace AngbandOS.Commands
 {

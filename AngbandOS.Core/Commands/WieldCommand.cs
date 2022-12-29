@@ -1,6 +1,4 @@
-﻿using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Wield/wear an item

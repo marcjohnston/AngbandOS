@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace AngbandOS.Core.ChestTraps
+﻿namespace AngbandOS.Core.ChestTraps
 {
     internal class SummonChestTrap : BaseChestTrap
     {

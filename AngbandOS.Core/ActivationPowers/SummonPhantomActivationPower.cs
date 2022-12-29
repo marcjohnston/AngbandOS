@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.MonsterSelectors;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Summon phantom warriors or beasts.

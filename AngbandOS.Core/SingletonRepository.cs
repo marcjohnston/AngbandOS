@@ -1,8 +1,4 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.FixedArtifacts;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
+﻿using AngbandOS.Core.FixedArtifacts;
 using System.Reflection;
 
 namespace AngbandOS.Core

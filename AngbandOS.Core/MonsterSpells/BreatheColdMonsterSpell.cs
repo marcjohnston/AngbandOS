@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.SpellResistantDetections;
-using AngbandOS.Projection;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class BreatheColdMonsterSpell : BreatheProjectileMonsterSpell

@@ -1,11 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Fire the missile weapon we have in our hand

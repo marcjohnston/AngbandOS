@@ -1,6 +1,4 @@
-﻿using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons

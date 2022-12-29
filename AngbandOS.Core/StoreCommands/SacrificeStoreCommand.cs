@@ -1,24 +1,16 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class SacrificeStoreCommand : IStoreCommand
+    internal class SacrificeStoreCommand : BaseStoreCommand
     {
-        public char Key => 'v';
+        public override char Key => 'v';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Sacrifice Item";
 
-        public string Description => "Sacrifice Item";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.SacrificeItem();
+            storeCommandEvent.Store.SacrificeItem();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreTemple);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreTemple);
     }
 }

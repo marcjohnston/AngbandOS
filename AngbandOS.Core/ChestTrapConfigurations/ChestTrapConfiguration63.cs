@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ChestTraps;
-
-namespace AngbandOS.Core.ChestTrapConfigurations
+﻿namespace AngbandOS.Core.ChestTrapConfigurations
 {
     internal class ChestTrapConfiguration63 : ChestTrapConfiguration
     {

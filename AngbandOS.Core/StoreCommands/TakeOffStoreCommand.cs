@@ -1,25 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Take off an item
     /// </summary>
     [Serializable]
-    internal class TakeOffStoreCommand : IStoreCommand
+    internal class TakeOffStoreCommand : BaseStoreCommand
     {
-        public char Key => 't';
+        public override char Key => 't';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdTakeOff(saveGame);
+            DoCmdTakeOff(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdTakeOff(SaveGame saveGame)

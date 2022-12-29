@@ -1,8 +1,4 @@
-using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.MonsterSelectors;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.FixedArtifacts;
 

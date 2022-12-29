@@ -1,8 +1,5 @@
 using AngbandOS.ArtifactBiases;
-using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.FixedArtifacts;
 

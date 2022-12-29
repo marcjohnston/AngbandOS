@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterSelectors;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class SummonKinMonsterSpell : SummonMonsterSpell

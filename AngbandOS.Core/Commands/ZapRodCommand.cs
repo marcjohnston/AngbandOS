@@ -1,11 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Use a rod from the inventory or ground

@@ -1,7 +1,5 @@
 ﻿using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.Syllables;
-using AngbandOS.Enumerations;
 
 namespace AngbandOS.Core.Races
 {

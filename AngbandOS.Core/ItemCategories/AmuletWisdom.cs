@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ItemClasses;
-
-namespace AngbandOS.Core.ItemCategories
+﻿namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
     internal class AmuletWisdom : AmuletItemClass

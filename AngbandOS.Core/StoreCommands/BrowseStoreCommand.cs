@@ -1,26 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core;
-using AngbandOS.Core.ItemFilters;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Browse a book
     /// </summary>
     [Serializable]
-    internal class BrowseStoreCommand : IStoreCommand
+    internal class BrowseStoreCommand : BaseStoreCommand
     {
-        public char Key => 'b';
+        public override char Key => 'b';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool IsEnabled(Store store) => true;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdBrowse(saveGame);
+            DoCmdBrowse(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdBrowse(SaveGame saveGame)

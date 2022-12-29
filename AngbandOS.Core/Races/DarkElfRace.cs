@@ -1,6 +1,4 @@
 ﻿using AngbandOS.Core.Syllables;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
 
 namespace AngbandOS.Core.Races
 {

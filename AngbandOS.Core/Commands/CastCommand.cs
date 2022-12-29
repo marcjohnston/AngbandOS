@@ -1,11 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Core.MonsterSelectors;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-using AngbandOS.Spells;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     [Serializable]
     internal class CastCommand : ICommand

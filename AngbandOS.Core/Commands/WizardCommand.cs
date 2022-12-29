@@ -1,9 +1,4 @@
 ﻿using AngbandOS.ActivationPowers;
-using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
 
 namespace AngbandOS.Commands
 {

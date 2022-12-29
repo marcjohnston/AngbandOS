@@ -1,24 +1,20 @@
-﻿using AngbandOS.Commands;
-
+﻿
 namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons
     /// </summary>
     [Serializable]
-    internal class JournalStoreCommand : IStoreCommand
+    internal class JournalStoreCommand : BaseStoreCommand
     {
-        public char Key => 'J';
+        public override char Key => 'J';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => true;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdJournal(saveGame);
+            DoCmdJournal(storeCommandEvent.SaveGame);
+            storeCommandEvent.RequiresRerendering = true;
         }
 
         public static void DoCmdJournal(SaveGame saveGame)

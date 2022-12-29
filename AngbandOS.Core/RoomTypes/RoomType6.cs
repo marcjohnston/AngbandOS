@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterSelectors;
-
-namespace AngbandOS.Core.RoomTypes
+﻿namespace AngbandOS.Core.RoomTypes
 {
     internal class RoomType6 : RoomType
     {

@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     /// <summary>
     /// Represents a ball projectile spell but the radius is presented as a negative radius to indicate a cone instead of a ball.  The messages

@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.WeightedRandoms;
-using System.Threading;
-
-namespace AngbandOS.Core.AttackTypes
+﻿namespace AngbandOS.Core.AttackTypes
 {
     internal class ShowAttackType : BaseAttackType
     {

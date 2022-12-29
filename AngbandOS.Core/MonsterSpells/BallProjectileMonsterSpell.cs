@@ -1,7 +1,4 @@
-﻿using AngbandOS.Enumerations;
-using AngbandOS.Projection;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     /// <summary>
     /// Represents a bolt projectile but also adds a radius damage and uses ball applicable projectile flags.  The messages to the player

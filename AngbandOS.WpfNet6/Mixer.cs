@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media;
 
-namespace WpfApp1
+namespace Cthangband
 {
     public class Mixer
     {

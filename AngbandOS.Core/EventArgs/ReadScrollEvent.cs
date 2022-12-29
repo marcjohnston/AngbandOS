@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.EventArgs
 {
-
     internal class ReadScrollEvent
     {
         /// <summary>

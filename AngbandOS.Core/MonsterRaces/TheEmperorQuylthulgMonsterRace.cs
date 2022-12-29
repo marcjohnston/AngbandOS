@@ -1,4 +1,3 @@
-using AngbandOS.Core.Interface;
 using AngbandOS.Core.MonsterSpells;
 
 namespace AngbandOS.Core.MonsterRaces

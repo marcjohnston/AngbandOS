@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace AngbandOS.Core.AttackTypes
+﻿namespace AngbandOS.Core.AttackTypes
 {
     internal class BegAttackType : BaseAttackType
     {

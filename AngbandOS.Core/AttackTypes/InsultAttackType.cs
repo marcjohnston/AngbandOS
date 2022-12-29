@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.WeightedRandoms;
-
-namespace AngbandOS.Core.AttackTypes
+﻿namespace AngbandOS.Core.AttackTypes
 {
     internal class InsultAttackType : BaseAttackType
     {

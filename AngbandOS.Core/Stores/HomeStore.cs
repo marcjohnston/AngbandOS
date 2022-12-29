@@ -1,9 +1,4 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.Interface;
-using AngbandOS.Enumerations;
-using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Stores
+﻿namespace AngbandOS.Stores
 {
     [Serializable]
     internal class HomeStore : Store
@@ -12,6 +7,7 @@ namespace AngbandOS.Stores
         {
         }
 
+        public override int MaxInventory => 100;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             new StoreOwner("Your home", 0, 100, null)
@@ -43,9 +39,9 @@ namespace AngbandOS.Stores
         protected override string NoStockMessage => "Your home is empty.";
         protected override string PurchaseMessage => "Which item do you want to take? ";
 
-        protected override IStoreCommand AdvertisedStoreCommand1 => new GetStoreCommand();
-        protected override IStoreCommand AdvertisedStoreCommand2 => new DropStoreCommand();
-        protected override IStoreCommand AdvertisedStoreCommand4 => new RestStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand1 => new GetStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand2 => new DropStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => new RestStoreCommand();
         protected override string FleeMessage => "Your pack is so full that you flee your home...";
 
         protected override string GetItemDescription(Item oPtr)

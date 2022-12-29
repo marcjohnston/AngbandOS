@@ -5,24 +5,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Commands;
-using AngbandOS.Core;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Core.WeightedRandoms;
-using AngbandOS.Pantheon;
-using AngbandOS.Spells;
-using AngbandOS.StoreCommands;
-using AngbandOS.Stores;
 
 namespace AngbandOS
 {
     [Serializable]
-    internal abstract class Store : IStore, IItemFilter
+    internal abstract class Store : IItemFilter
     {
         protected readonly SaveGame SaveGame;
         public readonly StoreType StoreType;
+        public virtual int PageSize => 26;
 
         /// <summary>
         /// The grid x coordinate of the store on the town level.
@@ -38,8 +29,7 @@ namespace AngbandOS
         private int _y;
 
         private static readonly string[] _comment1 = { "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!" };
-        private readonly Item[] _stock;
-        private readonly int _stockSize;
+        private readonly List<Item> _inventory = new List<Item>();
 
         /// <summary>
         /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
@@ -48,24 +38,33 @@ namespace AngbandOS
         private readonly int[] _table;
         private bool _leaveStore;
         private StoreOwner _owner;
-        private int _stockNum;
         private int _storeTop;
 
-        public void MoveInventoryToAnotherStore(Store newStore)
-        {
-            newStore._stockNum = _stockNum;
-            for (int i = 0; i < _stock.Length; i++)
-            {
-                newStore._stock[i] = _stock[i].Clone();
-                _stock[i] = new Item(SaveGame);
-            }
-            _stockNum = 0;
-        }
+        /// <summary>
+        /// Returns the maximum number of items the store can accomodate.  Returns one pagesize (26), by default.
+        /// </summary>
+        public virtual int MaxInventory => PageSize; // Cthangband only supports 1 page of items 
 
         /// <summary>
-        /// Returns the maximum number of items the store can accomodate.  Returns 26, by default.
+        /// Returns whether or not the store should perform maintenance.  When true, which is by default, the store will automatically 
+        /// maintain stock levels based on the MinKeep, MaxKeep and Turnover values.
         /// </summary>
-        public virtual int MaxInventory => 26;
+        protected virtual bool MaintainsStockLevels => true;
+
+        /// <summary>
+        /// Returns the maximum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
+        /// </summary>
+        public virtual int StoreMaxKeep => 18;
+
+        /// <summary>
+        /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
+        /// </summary>
+        public virtual int StoreMinKeep => 6; 
+
+        /// <summary>
+        /// Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.
+        /// </summary>
+        public virtual int StoreTurnover => 9;
 
         /// <summary>
         /// Returns an array of item types that the store carries.  Returns null, if the store does not carry items for sale.
@@ -77,12 +76,7 @@ namespace AngbandOS
         {
             SaveGame = saveGame;
             StoreType = storeType;
-            _stockSize = MaxInventory;
-            _stock = new Item[_stockSize];
-            for (int k = 0; k < _stockSize; k++)
-            {
-                _stock[k] = new Item(SaveGame);
-            }
+            _inventory.Clear();
             StockStoreInventoryItem[] master = GetStoreTable();
             if (master == null)
             {
@@ -109,6 +103,31 @@ namespace AngbandOS
             _table = table.ToArray();
         }
 
+        public void MoveInventoryToAnotherStore(Store newStore)
+        {
+            newStore._inventory.Clear();
+            newStore._inventory.AddRange(_inventory);
+            _inventory.Clear();
+        }
+
+        public void PageUp()
+        {
+            if (_storeTop > 0)
+            {
+                _storeTop = 0;
+                DisplayInventory();
+            }
+        }
+
+        public void PageDown()
+        {
+            if (_storeTop + PageSize < _inventory.Count)
+            {
+                _storeTop += PageSize;
+                DisplayInventory();
+            }
+        }
+
         public void SetLocation(int x, int y)
         {
             _x = x;
@@ -124,7 +143,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 31.
@@ -133,7 +152,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 42, 56.
@@ -142,7 +161,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 56.
@@ -151,7 +170,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand4 => null;
+        protected virtual BaseStoreCommand AdvertisedStoreCommand4 => null;
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 0.
@@ -160,9 +179,9 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual IStoreCommand AdvertisedStoreCommand5 => null;
+        protected virtual BaseStoreCommand AdvertisedStoreCommand5 => null;
 
-        private void RenderAdvertisedCommand(IStoreCommand command, int row, int col)
+        private void RenderAdvertisedCommand(BaseStoreCommand command, int row, int col)
         {
             if (command != null)
             {
@@ -221,7 +240,7 @@ namespace AngbandOS
                         int itemPos = HomeCarry(qPtr);
                         if (itemPos >= 0)
                         {
-                            _storeTop = itemPos / 26 * 26;
+                            _storeTop = itemPos / PageSize * PageSize;
                             DisplayInventory();
                         }
                     }
@@ -247,33 +266,8 @@ namespace AngbandOS
         public virtual void StoreInit()
         {
             _owner = GetRandomOwner();
-            _stockNum = 0;
-            for (int k = 0; k < _stockSize; k++)
-            {
-                _stock[k] = new Item(SaveGame);
-            }
+            _inventory.Clear();
         }
-
-        /// <summary>
-        /// Returns whether or not the store should perform maintenance.  When true, which is by default, the store will automatically 
-        /// maintain stock levels based on the MinKeep, MaxKeep and Turnover values.
-        /// </summary>
-        protected virtual bool MaintainsStockLevels => true;
-
-        /// <summary>
-        /// Returns the maximum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
-        /// </summary>
-        public virtual int StoreMaxKeep => 18;
-
-        /// <summary>
-        /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
-        /// </summary>
-        public virtual int StoreMinKeep => 6;
-
-        /// <summary>
-        /// Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.
-        /// </summary>
-        public virtual int StoreTurnover => 9;
 
         public virtual void StoreMaint()
         {
@@ -286,7 +280,7 @@ namespace AngbandOS
             {
                 return;
             }
-            int j = _stockNum;
+            int j = _inventory.Count;
             j -= Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
@@ -300,11 +294,11 @@ namespace AngbandOS
             {
                 j = 0;
             }
-            while (_stockNum > j)
+            while (_inventory.Count > j)
             {
                 StoreDelete();
             }
-            j = _stockNum;
+            j = _inventory.Count;
             j += Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
@@ -314,11 +308,11 @@ namespace AngbandOS
             {
                 j = StoreMinKeep;
             }
-            if (j >= _stockSize)
+            if (j >= MaxInventory)
             {
-                j = _stockSize - 1;
+                j = MaxInventory - 1;
             }
-            while (_stockNum < j)
+            while (_inventory.Count < j)
             {
                 StoreCreate();
             }
@@ -348,9 +342,9 @@ namespace AngbandOS
                 return;
             }
             _owner = GetRandomOwner();
-            for (int i = 0; i < _stockNum; i++)
+            for (int i = 0; i < _inventory.Count; i++)
             {
-                Item oPtr = _stock[i];
+                Item oPtr = _inventory[i];
                 if (string.IsNullOrEmpty(oPtr.RandartName))
                 {
                     oPtr.Discount = 50;
@@ -384,8 +378,8 @@ namespace AngbandOS
         {
             string oName;
             int maxwid = WidthOfDescriptionColumn;
-            Item oPtr = _stock[pos];
-            int i = pos % 26;
+            Item oPtr = _inventory[pos];
+            int i = pos % PageSize;
             string outVal = $"{i.IndexToLetter()}) ";
             SaveGame.PrintLine(outVal, i + 6, 0);
             Colour a = oPtr.BaseItemCategory.FlavorColour;
@@ -423,23 +417,26 @@ namespace AngbandOS
         private void DisplayInventory()
         {
             int k;
-            for (k = 0; k < 26; k++)
+            for (k = 0; k < PageSize; k++)
             {
-                if (_storeTop + k >= _stockNum)
+                if (_storeTop + k >= _inventory.Count)
                 {
                     break;
                 }
                 DisplayEntry(_storeTop + k);
             }
-            for (int i = k; i < 27; i++)
+            for (int i = k; i <= PageSize; i++)
             {
                 SaveGame.PrintLine("", i + 6, 0);
             }
-            SaveGame.Print("        ", 5, 20);
-            if (_stockNum > 26)
+            SaveGame.Print(new String(' ', _inventory.Count.ToString().Length * 2 + 11), 5, 20);
+            if (_storeTop + PageSize < _inventory.Count)
             {
                 SaveGame.PrintLine("-more-", k + 6, 3);
-                SaveGame.Print($"(Page {(_storeTop / 26) + 1})", 5, 20);
+            }
+            if (_inventory.Count > PageSize)
+            {
+                SaveGame.Print($"(Page {(_storeTop / PageSize) + 1} of {(_inventory.Count / PageSize) + 1})", 5, 20);
             }
         }
 
@@ -629,22 +626,22 @@ namespace AngbandOS
                 oPtr.IdentMental = true;
                 oPtr.Inscription = "";
             }
-            for (slot = 0; slot < _stockNum; slot++)
+            for (slot = 0; slot < _inventory.Count; slot++)
             {
-                jPtr = _stock[slot];
+                jPtr = _inventory[slot];
                 if (StoreObjectSimilar(jPtr, oPtr))
                 {
                     StoreObjectAbsorb(jPtr, oPtr);
                     return slot;
                 }
             }
-            if (_stockNum >= _stockSize)
+            if (_inventory.Count >= MaxInventory)
             {
                 return -1;
             }
-            for (slot = 0; slot < _stockNum; slot++)
+            for (slot = 0; slot < _inventory.Count; slot++)
             {
-                jPtr = _stock[slot];
+                jPtr = _inventory[slot];
                 if (oPtr.Category > jPtr.Category)
                 {
                     break;
@@ -681,12 +678,7 @@ namespace AngbandOS
                 {
                 }
             }
-            for (int i = _stockNum; i > slot; i--)
-            {
-                _stock[i] = _stock[i - 1];
-            }
-            _stockNum++;
-            _stock[slot] = oPtr;
+            _inventory.Insert(slot, oPtr);
             return slot;
         }
 
@@ -699,23 +691,23 @@ namespace AngbandOS
         {
             int slot;
             Item jPtr;
-            for (slot = 0; slot < _stockNum; slot++)
+            for (slot = 0; slot < _inventory.Count; slot++)
             {
-                jPtr = _stock[slot];
+                jPtr = _inventory[slot];
                 if (jPtr.CanAbsorb(oPtr))
                 {
                     jPtr.Absorb(oPtr);
                     return slot;
                 }
             }
-            if (_stockNum >= _stockSize)
+            if (_inventory.Count >= MaxInventory)
             {
                 return -1;
             }
             int value = oPtr.Value();
-            for (slot = 0; slot < _stockNum; slot++)
+            for (slot = 0; slot < _inventory.Count; slot++)
             {
-                jPtr = _stock[slot];
+                jPtr = _inventory[slot];
                 if (oPtr.Category > jPtr.Category)
                 {
                     break;
@@ -768,12 +760,7 @@ namespace AngbandOS
                 {
                 }
             }
-            for (int i = _stockNum; i > slot; i--)
-            {
-                _stock[i] = _stock[i - 1].Clone();
-            }
-            _stockNum++;
-            _stock[slot] = oPtr.Clone();
+            _inventory.Insert(slot, oPtr.Clone());
             return slot;
         }
 
@@ -1076,13 +1063,13 @@ namespace AngbandOS
         {
             int i;
             Item jPtr;
-            if (_stockNum < _stockSize)
+            if (_inventory.Count < MaxInventory)
             {
                 return true;
             }
-            for (i = 0; i < _stockNum; i++)
+            for (i = 0; i < _inventory.Count; i++)
             {
-                jPtr = _stock[i];
+                jPtr = _inventory[i];
                 if (StoreCanMergeItem(oPtr, jPtr))
                 {
                     return true;
@@ -1108,7 +1095,7 @@ namespace AngbandOS
 
         private void StoreCreate()
         {
-            if (_stockNum >= _stockSize)
+            if (_inventory.Count >= MaxInventory)
             {
                 return;
             }
@@ -1149,8 +1136,8 @@ namespace AngbandOS
 
         private void StoreDelete()
         {
-            int what = Program.Rng.RandomLessThan(_stockNum);
-            int num = _stock[what].Count;
+            int what = Program.Rng.RandomLessThan(_inventory.Count);
+            int num = _inventory[what].Count;
             if (Program.Rng.RandomLessThan(100) < 50)
             {
                 num = (num + 1) / 2;
@@ -1165,15 +1152,15 @@ namespace AngbandOS
 
         public void StoreExamine()
         {
-            if (_stockNum <= 0)
+            if (_inventory.Count <= 0)
             {
                 SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
-            int i = _stockNum - _storeTop;
-            if (i > 26)
+            int i = _inventory.Count - _storeTop;
+            if (i > PageSize)
             {
-                i = 26;
+                i = PageSize;
             }
             const string outVal = "Which item do you want to examine? ";
             if (!GetStock(out int item, outVal, 0, i - 1))
@@ -1181,7 +1168,7 @@ namespace AngbandOS
                 return;
             }
             item += _storeTop;
-            Item oPtr = _stock[item];
+            Item oPtr = _inventory[item];
             if (oPtr.Category == ItemTypeEnum.LifeBook || oPtr.Category == ItemTypeEnum.SorceryBook ||
                 oPtr.Category == ItemTypeEnum.NatureBook || oPtr.Category == ItemTypeEnum.ChaosBook ||
                 oPtr.Category == ItemTypeEnum.DeathBook ||
@@ -1272,7 +1259,7 @@ namespace AngbandOS
 
         private void StoreItemIncrease(int item, int num)
         {
-            Item oPtr = _stock[item];
+            Item oPtr = _inventory[item];
             int cnt = oPtr.Count + num;
             if (cnt > 255)
             {
@@ -1289,7 +1276,7 @@ namespace AngbandOS
         private void StoreItemOptimize(int item)
         {
             int j;
-            Item oPtr = _stock[item];
+            Item oPtr = _inventory[item];
             if (oPtr.BaseItemCategory == null)
             {
                 return;
@@ -1298,12 +1285,7 @@ namespace AngbandOS
             {
                 return;
             }
-            _stockNum--;
-            for (j = item; j < _stockNum; j++)
-            {
-                _stock[j] = _stock[j + 1];
-            }
-            _stock[j] = new Item(SaveGame);
+            _inventory.RemoveAt(item);
         }
 
         private void StoreObjectAbsorb(Item oPtr, Item jPtr)
@@ -1507,7 +1489,7 @@ namespace AngbandOS
                 bool matchingCommandFound = false;
 
                 // Process commands
-                foreach (IStoreCommand command in ObjectRepository.StoreCommands)
+                foreach (BaseStoreCommand command in ObjectRepository.StoreCommands)
                 {
                     // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                     // attached for improved performance.
@@ -1516,9 +1498,10 @@ namespace AngbandOS
                         matchingCommandFound = true;
                         if (command.IsEnabled(this))
                         {
-                            command.Execute(SaveGame, this);
+                            StoreCommandEvent storeCommandEvent = new StoreCommandEvent(SaveGame, this);
+                            command.Execute(storeCommandEvent);
 
-                            if (command.RequiresRerendering)
+                            if (storeCommandEvent.RequiresRerendering)
                                 DisplayStore();
 
                             return;
@@ -1782,15 +1765,15 @@ namespace AngbandOS
         {
             int itemNew;
             string oName;
-            if (_stockNum <= 0)
+            if (_inventory.Count <= 0)
             {
                 SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
-            int i = _stockNum - _storeTop;
-            if (i > 26)
+            int i = _inventory.Count - _storeTop;
+            if (i > PageSize)
             {
-                i = 26;
+                i = PageSize;
             }
             string outVal = PurchaseMessage;
             if (!GetStock(out int item, outVal, 0, i - 1))
@@ -1798,7 +1781,7 @@ namespace AngbandOS
                 return;
             }
             item += _storeTop;
-            Item oPtr = _stock[item];
+            Item oPtr = _inventory[item];
             int amt = 1;
             Item jPtr = oPtr.Clone(amt);
             if (!SaveGame.Player.Inventory.InvenCarryOkay(jPtr))
@@ -1869,10 +1852,10 @@ namespace AngbandOS
                         oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
                         SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                         SaveGame.HandleStuff();
-                        i = _stockNum;
+                        i = _inventory.Count;
                         StoreItemIncrease(item, -amt);
                         StoreItemOptimize(item);
-                        if (_stockNum == 0)
+                        if (_inventory.Count == 0)
                         {
                             if (MaintainsStockLevels)
                             {
@@ -1893,11 +1876,11 @@ namespace AngbandOS
                             _storeTop = 0;
                             DisplayInventory();
                         }
-                        else if (_stockNum != i)
+                        else if (_inventory.Count != i)
                         {
-                            if (_storeTop >= _stockNum)
+                            if (_storeTop >= _inventory.Count)
                             {
-                                _storeTop -= 26;
+                                _storeTop -= PageSize;
                             }
                             DisplayInventory();
                         }
@@ -1918,22 +1901,22 @@ namespace AngbandOS
                 oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
                 SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                 SaveGame.HandleStuff();
-                i = _stockNum;
+                i = _inventory.Count;
                 StoreItemIncrease(item, -amt);
                 StoreItemOptimize(item);
-                if (i == _stockNum)
+                if (i == _inventory.Count)
                 {
                     DisplayEntry(item);
                 }
                 else
                 {
-                    if (_stockNum == 0)
+                    if (_inventory.Count == 0)
                     {
                         _storeTop = 0;
                     }
-                    else if (_storeTop >= _stockNum)
+                    else if (_storeTop >= _inventory.Count)
                     {
-                        _storeTop -= 26;
+                        _storeTop -= PageSize;
                     }
                     DisplayInventory();
                 }
@@ -2047,7 +2030,7 @@ namespace AngbandOS
             itemPos = CarryItem(qPtr);
             if (itemPos >= 0)
             {
-                _storeTop = itemPos / 26 * 26;
+                _storeTop = itemPos / PageSize * PageSize;
                 DisplayInventory();
             }
         }

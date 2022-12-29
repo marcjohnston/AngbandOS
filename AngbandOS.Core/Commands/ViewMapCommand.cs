@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Interface;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Display a map of the area on screen

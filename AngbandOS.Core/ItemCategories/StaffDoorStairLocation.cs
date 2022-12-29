@@ -1,5 +1,4 @@
 using AngbandOS.Core.EventArgs;
-using AngbandOS.Core.ItemClasses;
 
 namespace AngbandOS.Core.ItemCategories
 {

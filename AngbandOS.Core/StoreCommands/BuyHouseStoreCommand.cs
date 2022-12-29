@@ -1,27 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-using AngbandOS.Stores;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class BuyHouseStoreCommand : IStoreCommand
+    internal class BuyHouseStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Buy a house";
 
-        public string Description => "Buy a house";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            HomeStore homeStore = HomeStore.FindHomeStore(saveGame, saveGame.CurTown.Index);
-            homeStore.BuyHouse(saveGame.Player);
+            HomeStore homeStore = HomeStore.FindHomeStore(storeCommandEvent.SaveGame, storeCommandEvent.SaveGame.CurTown.Index);
+            homeStore.BuyHouse(storeCommandEvent.SaveGame.Player);
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreHall);
-        }
+        public bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
     }
 }

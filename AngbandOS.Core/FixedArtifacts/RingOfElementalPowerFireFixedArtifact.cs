@@ -1,7 +1,4 @@
 using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
 
 namespace AngbandOS.Core.FixedArtifacts;
 

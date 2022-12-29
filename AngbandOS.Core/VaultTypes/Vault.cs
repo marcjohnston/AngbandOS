@@ -1,5 +1,4 @@
-﻿using AngbandOS.Core.Interface;
-namespace AngbandOS.Core
+﻿namespace AngbandOS.Core
 {
     internal abstract class Vault
     {

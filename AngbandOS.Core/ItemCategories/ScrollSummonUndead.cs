@@ -1,8 +1,5 @@
 using AngbandOS.Core.EventArgs;
 
-using AngbandOS.Core.ItemClasses;
-using AngbandOS.Core.MonsterSelectors;
-
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]

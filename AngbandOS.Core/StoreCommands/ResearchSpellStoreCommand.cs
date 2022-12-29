@@ -1,25 +1,17 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class ResearchSpellStoreCommand : IStoreCommand
+    internal class ResearchSpellStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "Research a spell";
 
-        public string Description => "Research a spell";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.ResearchSpell();
+            storeCommandEvent.Store.ResearchSpell();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreLibrary);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreLibrary);
     }
 }

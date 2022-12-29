@@ -1,24 +1,18 @@
-﻿using AngbandOS.Commands;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Examine an item from the player's inventory
     /// </summary>
     [Serializable]
-    internal class ExamineInventoryStoreCommand : IStoreCommand
+    internal class ExamineInventoryStoreCommand : BaseStoreCommand
     {
-        public char Key => 'I';
+        public override char Key => 'I';
 
-        public string Description => "";
+        public override string Description => "";
 
-        public bool RequiresRerendering => false;
-
-        public bool IsEnabled(Store store) => true;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdExamine(saveGame);
+            DoCmdExamine(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdExamine(SaveGame saveGame)

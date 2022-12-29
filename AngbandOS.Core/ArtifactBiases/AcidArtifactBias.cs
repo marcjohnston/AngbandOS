@@ -1,6 +1,4 @@
-﻿using AngbandOS.Enumerations;
-
-namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.ArtifactBiases
 {
     internal class AcidArtifactBias : ArtifactBias
     {

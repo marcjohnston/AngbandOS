@@ -1,25 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Equip an item
     /// </summary>
     [Serializable]
-    internal class EquipStoreCommand : IStoreCommand
+    internal class EquipStoreCommand : BaseStoreCommand
     {
-        public char Key => 'e';
+        public override char Key => 'e';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdEquip(saveGame);
+            DoCmdEquip(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdEquip(SaveGame saveGame)

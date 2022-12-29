@@ -1,25 +1,17 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class RemoveCurseStoreCommand : IStoreCommand
+    internal class RemoveCurseStoreCommand : BaseStoreCommand
 
     {
-        public char Key => 'r';
+        public override char Key => 'r';
 
-        public bool RequiresRerendering => false;
+        public override string Description => "buy Remove Curse";
 
-        public string Description => "buy Remove Curse";
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            store.RemoveCurse();
+            storeCommandEvent.Store.RemoveCurse();
         }
 
-        public bool IsEnabled(Store store)
-        {
-            return (store.StoreType == StoreType.StoreTemple);
-        }
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreTemple);
     }
 }

@@ -1,25 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core.Interface;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Let the player scroll through previous messages
     /// </summary>
     [Serializable]
-    internal class MessagesStoreCommand : IStoreCommand
+    internal class MessagesStoreCommand : BaseStoreCommand
     {
-        public char Key => 'P';
+        public override char Key => 'P';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdMessages(saveGame);
+            DoCmdMessages(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdMessages(SaveGame saveGame)

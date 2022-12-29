@@ -1,7 +1,5 @@
 using AngbandOS.ArtifactBiases;
 
-using AngbandOS.Core.ItemClasses;
-
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]

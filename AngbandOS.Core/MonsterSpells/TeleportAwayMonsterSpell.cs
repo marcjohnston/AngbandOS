@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class TeleportAwayMonsterSpell : MonsterSpell

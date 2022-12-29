@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Interface;
-
-namespace AngbandOS
+﻿namespace AngbandOS
 {
     /// <summary>
     /// Represents an encapsulating  wrapper for a saved gamed that publically exposes various functionality.

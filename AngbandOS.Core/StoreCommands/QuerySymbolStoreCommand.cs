@@ -1,25 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Core;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the player what a particular symbol represents
     /// </summary>
     [Serializable]
-    internal class QuerySymbolStoreCommand : IStoreCommand
+    internal class QuerySymbolStoreCommand : BaseStoreCommand
     {
-        public char Key => '/';
+        public override char Key => '/';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdQuerySymbol(saveGame);
+            DoCmdQuerySymbol(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdQuerySymbol(SaveGame saveGame)

@@ -1,9 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.FixedArtifacts;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.ItemFilters;
-using AngbandOS.Enumerations;
-using AngbandOS.Projection;
+﻿using AngbandOS.Core.FixedArtifacts;
 
 namespace AngbandOS.Commands
 {

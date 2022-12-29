@@ -1,8 +1,4 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-using AngbandOS.StoreCommands;
-
-namespace AngbandOS.Stores
+﻿namespace AngbandOS.Stores
 {
     [Serializable]
     internal class HallStore : Store
@@ -32,10 +28,10 @@ namespace AngbandOS.Stores
         protected override string OwnerName => "";
         protected override string Title => "Hall Of Records";
         protected override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
-        protected override IStoreCommand AdvertisedStoreCommand1 => new ViewRacialHeroesStoreCommand();
-        protected override IStoreCommand AdvertisedStoreCommand2 => new ViewClassHeroesStoreCommand();
-        protected override IStoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
-        protected override IStoreCommand AdvertisedStoreCommand4 => new BuyHouseStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand1 => new ViewRacialHeroesStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand2 => new ViewClassHeroesStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => new BuyHouseStoreCommand();
         protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

@@ -1,19 +1,13 @@
-﻿using AngbandOS.Commands;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
-    internal class CarriageReturnStoreCommand : IStoreCommand
+    internal class CarriageReturnStoreCommand : BaseStoreCommand
     {
-        public char Key => '\r';
+        public override char Key => '\r';
 
-        public string Description => "";
+        public override string Description => "";
 
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
         }
-
-        public bool IsEnabled(Store store) => true;
     }
 }

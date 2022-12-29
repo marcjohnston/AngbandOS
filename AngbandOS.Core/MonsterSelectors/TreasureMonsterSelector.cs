@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-
-namespace AngbandOS.Core.MonsterSelectors
+﻿namespace AngbandOS.Core.MonsterSelectors
 {
     [Serializable]
     internal class TreasureMonsterSelector : MonsterSelector

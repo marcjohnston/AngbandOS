@@ -1,8 +1,4 @@
-﻿using AngbandOS.Core.MonsterRaces;
-using AngbandOS.Enumerations;
-using AngbandOS.Core.SpellResistantDetections;
-
-namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells
 {
     [Serializable]
     internal class DrainManaMonsterSpell : MonsterSpell

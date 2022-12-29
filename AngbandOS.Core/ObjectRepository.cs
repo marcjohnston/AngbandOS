@@ -1,13 +1,11 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Core.ChestTrapConfigurations;
-using AngbandOS.Core.FixedArtifacts;
+﻿using AngbandOS.Core.ChestTrapConfigurations;
 using System.Reflection;
 
 namespace AngbandOS.Commands
 {
     internal static class ObjectRepository
     {
-        public static List<IStoreCommand> StoreCommands = new List<IStoreCommand>();
+        public static List<BaseStoreCommand> StoreCommands = new List<BaseStoreCommand>();
         public static List<AmuletFlavour> AmuletFlavours = new List<AmuletFlavour>();
         public static List<MushroomFlavour> MushroomFlavours = new List<MushroomFlavour>();
         public static List<PotionFlavour> PotionFlavours = new List<PotionFlavour>();
@@ -29,9 +27,9 @@ namespace AngbandOS.Commands
             foreach (Type type in assembly.GetTypes())
             {
                 // Load StoreCommands.
-                if (!type.IsAbstract && typeof(IStoreCommand).IsAssignableFrom(type))
+                if (!type.IsAbstract && typeof(BaseStoreCommand).IsAssignableFrom(type))
                 {
-                    IStoreCommand command = (IStoreCommand)Activator.CreateInstance(type);
+                    BaseStoreCommand command = (BaseStoreCommand)Activator.CreateInstance(type);
                     StoreCommands.Add(command);
                 }
 

@@ -1,5 +1,3 @@
-using AngbandOS.Core.Interface;
-
 namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]

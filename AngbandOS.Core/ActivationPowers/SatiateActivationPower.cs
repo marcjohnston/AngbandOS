@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Fill us up.

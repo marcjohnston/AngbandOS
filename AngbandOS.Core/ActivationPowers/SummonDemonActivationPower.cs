@@ -1,7 +1,4 @@
-﻿using AngbandOS.Core.MonsterSelectors;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.ActivationPowers
 {
     /// <summary>
     /// Summon a demon, with a 1-in-3 chance of it being hostile.

@@ -1,26 +1,18 @@
-﻿using AngbandOS.Commands;
-using AngbandOS.Enumerations;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Destroy all worthless items in your pack
     /// </summary>
     [Serializable]
-    internal class DestroyAllStoreCommand : IStoreCommand
+    internal class DestroyAllStoreCommand : BaseStoreCommand
     {
-        public char Key => 'K';
+        public override char Key => 'K';
 
-        public bool IsEnabled(Store store) => true;
+        public override string Description => "";
 
-
-        public string Description => "";
-
-        public bool RequiresRerendering => false;
-
-        public void Execute(SaveGame saveGame, Store store)
+        public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdDestroyAll(saveGame);
+            DoCmdDestroyAll(storeCommandEvent.SaveGame);
         }
 
         public static void DoCmdDestroyAll(SaveGame saveGame)
