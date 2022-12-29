@@ -476,12 +476,10 @@ namespace AngbandOS
             }
             if (Player == null)
             {
-                Player newPlayer = CharacterGeneration(ExPlayer);
-                if (newPlayer == null)
+                if (!CharacterGeneration(ExPlayer))
                 {
                     return;
                 }
-                Player = newPlayer;
                 foreach (Town town in Towns)
                 {
                     foreach (Store store in town.Stores)
@@ -11045,7 +11043,6 @@ namespace AngbandOS
 
         private readonly Gender[] _sexInfo = { new Gender("Female", "Queen"), new Gender("Male", "King"), new Gender("Other", "Monarch") };
         private int _menuLength;
-        private Player _player;
         private int _prevClass;
         private int _prevGeneration;
         private string _prevName;
@@ -11060,58 +11057,58 @@ namespace AngbandOS
         private Realm _prevRealm2;
         private int _prevSex;
 
-        public Player CharacterGeneration(ExPlayer ex)
+        public bool CharacterGeneration(ExPlayer ex)
         {
             SetBackground(BackgroundImage.Paper);
             PlayMusic(MusicTrack.Chargen);
-            _player = new Player(this);
+            Player = new Player(this);
             if (PlayerBirth(ex))
             {
-                return _player;
+                return true;
             }
-            return null;
+            return false;
         }
 
         private Realm ChooseRealmRandomly(int choices)
         {
             Realm[] picks = new Realm[Constants.MaxRealm];
             int n = 0;
-            if ((choices & RealmChoice.Chaos) != 0 && _player.Realm1 != Realm.Chaos)
+            if ((choices & RealmChoice.Chaos) != 0 && Player.Realm1 != Realm.Chaos)
             {
                 picks[n] = Realm.Chaos;
                 n++;
             }
-            if ((choices & RealmChoice.Corporeal) != 0 && _player.Realm1 != Realm.Corporeal)
+            if ((choices & RealmChoice.Corporeal) != 0 && Player.Realm1 != Realm.Corporeal)
             {
                 picks[n] = Realm.Corporeal;
                 n++;
             }
-            if ((choices & RealmChoice.Death) != 0 && _player.Realm1 != Realm.Death)
+            if ((choices & RealmChoice.Death) != 0 && Player.Realm1 != Realm.Death)
             {
                 picks[n] = Realm.Death;
                 n++;
             }
-            if ((choices & RealmChoice.Folk) != 0 && _player.Realm1 != Realm.Folk)
+            if ((choices & RealmChoice.Folk) != 0 && Player.Realm1 != Realm.Folk)
             {
                 picks[n] = Realm.Folk;
                 n++;
             }
-            if ((choices & RealmChoice.Life) != 0 && _player.Realm1 != Realm.Life)
+            if ((choices & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
             {
                 picks[n] = Realm.Life;
                 n++;
             }
-            if ((choices & RealmChoice.Nature) != 0 && _player.Realm1 != Realm.Nature)
+            if ((choices & RealmChoice.Nature) != 0 && Player.Realm1 != Realm.Nature)
             {
                 picks[n] = Realm.Nature;
                 n++;
             }
-            if ((choices & RealmChoice.Tarot) != 0 && _player.Realm1 != Realm.Tarot)
+            if ((choices & RealmChoice.Tarot) != 0 && Player.Realm1 != Realm.Tarot)
             {
                 picks[n] = Realm.Tarot;
                 n++;
             }
-            if ((choices & RealmChoice.Sorcery) != 0 && _player.Realm1 != Realm.Sorcery)
+            if ((choices & RealmChoice.Sorcery) != 0 && Player.Realm1 != Realm.Sorcery)
             {
                 picks[n] = Realm.Sorcery;
                 n++;
@@ -11298,8 +11295,8 @@ namespace AngbandOS
             Print(Colour.Blue, "Gender      :", 3, 1);
             if (stage == 0)
             {
-                _player.Gender = _sexInfo[_prevSex];
-                str = _player.Gender.Title;
+                Player.Gender = _sexInfo[_prevSex];
+                str = Player.Gender.Title;
             }
             else if (stage < 6)
             {
@@ -11307,15 +11304,15 @@ namespace AngbandOS
             }
             else
             {
-                _player.Gender = _sexInfo[_player.GenderIndex];
-                str = _player.Gender.Title;
+                Player.Gender = _sexInfo[Player.GenderIndex];
+                str = Player.Gender.Title;
             }
             Print(Colour.Brown, str, 3, 15);
             Print(Colour.Blue, "Race        :", 4, 1);
             if (stage == 0)
             {
-                _player.Race = _prevRace;
-                str = _player.Race.Title;
+                Player.Race = _prevRace;
+                str = Player.Race.Title;
             }
             else if (stage < 3)
             {
@@ -11323,14 +11320,14 @@ namespace AngbandOS
             }
             else
             {
-                str = _player.Race.Title;
+                str = Player.Race.Title;
             }
             Print(Colour.Brown, str, 4, 15);
             Print(Colour.Blue, "Class       :", 5, 1);
             if (stage == 0)
             {
-                _player.Profession = Profession.ClassInfo[_prevClass];
-                str = _player.Profession.Title;
+                Player.Profession = Profession.ClassInfo[_prevClass];
+                str = Player.Profession.Title;
             }
             else if (stage < 2)
             {
@@ -11338,8 +11335,8 @@ namespace AngbandOS
             }
             else
             {
-                _player.Profession = Profession.ClassInfo[_player.ProfessionIndex];
-                str = _player.Profession.Title;
+                Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
+                str = Player.Profession.Title;
             }
             Print(Colour.Brown, str, 5, 15);
             string buf = string.Empty;
@@ -11374,22 +11371,22 @@ namespace AngbandOS
             else
             {
                 buf = string.Empty;
-                if (_player.Realm1 != Realm.None)
+                if (Player.Realm1 != Realm.None)
                 {
-                    if (_player.Realm2 != Realm.None)
+                    if (Player.Realm2 != Realm.None)
                     {
-                        buf = Spellcasting.RealmName(_player.Realm1) + "/" + Spellcasting.RealmName(_player.Realm2);
+                        buf = Spellcasting.RealmName(Player.Realm1) + "/" + Spellcasting.RealmName(Player.Realm2);
                     }
                     else
                     {
-                        buf = Spellcasting.RealmName(_player.Realm1);
+                        buf = Spellcasting.RealmName(Player.Realm1);
                     }
                 }
-                if (_player.Realm1 != Realm.None || _player.Realm2 != Realm.None)
+                if (Player.Realm1 != Realm.None || Player.Realm2 != Realm.None)
                 {
                     Print(Colour.Blue, "Magic       :", 6, 1);
                 }
-                if (_player.Realm1 != Realm.None)
+                if (Player.Realm1 != Realm.None)
                 {
                     Print(Colour.Brown, buf, 6, 15);
                 }
@@ -11441,7 +11438,7 @@ namespace AngbandOS
             {
                 for (i = 0; i < 6; i++)
                 {
-                    buf = _player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                    buf = Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                     Print(Colour.Brown, buf, 22 + i, 20);
                 }
             }
@@ -11456,7 +11453,7 @@ namespace AngbandOS
             {
                 for (i = 0; i < 6; i++)
                 {
-                    buf = (_player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
+                    buf = (Player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
                     Print(Colour.Brown, buf, 22 + i, 14);
                 }
             }
@@ -11472,7 +11469,7 @@ namespace AngbandOS
             Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[_player.ProfessionIndex].AbilityBonus[i];
+                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[Player.ProfessionIndex].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -11486,14 +11483,14 @@ namespace AngbandOS
             Print(Colour.Purple, "Infravision :", 38, 31);
             Print(Colour.Purple, "Searching   :", 39, 31);
             Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[_player.ProfessionIndex].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[_player.ProfessionIndex].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[_player.ProfessionIndex].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[_player.ProfessionIndex].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[_player.ProfessionIndex].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[_player.ProfessionIndex].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Profession.ClassInfo[_player.ProfessionIndex].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[_player.ProfessionIndex].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[_player.ProfessionIndex].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[_player.ProfessionIndex].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[_player.ProfessionIndex].RangedAttackBonusPerLevel);
-            Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[_player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
-            Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[_player.ProfessionIndex].HitDieBonus), 37, 45);
+            DisplayAPlusB(67, 36, Profession.ClassInfo[Player.ProfessionIndex].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[Player.ProfessionIndex].DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, Profession.ClassInfo[Player.ProfessionIndex].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[Player.ProfessionIndex].DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, Profession.ClassInfo[Player.ProfessionIndex].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[Player.ProfessionIndex].SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, (Profession.ClassInfo[Player.ProfessionIndex].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[Player.ProfessionIndex].StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, Profession.ClassInfo[Player.ProfessionIndex].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, Profession.ClassInfo[Player.ProfessionIndex].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].RangedAttackBonusPerLevel);
+            Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
+            Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.ProfessionIndex].HitDieBonus), 37, 45);
             if (race.Infravision == 0)
             {
                 Print(Colour.Black, "nil", 38, 45);
@@ -11502,8 +11499,8 @@ namespace AngbandOS
             {
                 Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
             }
-            Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
-            Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[_player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
+            Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
+            Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
 
             // Retrieve the description for the race and split the description into lines.
             string[] description = race.Description.Split("\n");
@@ -11595,31 +11592,31 @@ namespace AngbandOS
 
         private void GetAhw()
         {
-            _player.Age = _player.Race.BaseAge + Program.Rng.DieRoll(_player.Race.AgeRange);
-            bool startAtDusk = _player.Race.RestsTillDuskInsteadOfDawn;
-            _player.GameTime = new GameTime(this, Program.Rng.DieRoll(365), startAtDusk);
+            Player.Age = Player.Race.BaseAge + Program.Rng.DieRoll(Player.Race.AgeRange);
+            bool startAtDusk = Player.Race.RestsTillDuskInsteadOfDawn;
+            Player.GameTime = new GameTime(this, Program.Rng.DieRoll(365), startAtDusk);
 
-            if (_player.GenderIndex == Constants.SexMale)
+            if (Player.GenderIndex == Constants.SexMale)
             {
-                _player.Height = Program.Rng.RandomNormal(_player.Race.MaleBaseHeight, _player.Race.MaleHeightRange);
-                _player.Weight = Program.Rng.RandomNormal(_player.Race.MaleBaseWeight, _player.Race.MaleWeightRange);
+                Player.Height = Program.Rng.RandomNormal(Player.Race.MaleBaseHeight, Player.Race.MaleHeightRange);
+                Player.Weight = Program.Rng.RandomNormal(Player.Race.MaleBaseWeight, Player.Race.MaleWeightRange);
             }
-            else if (_player.GenderIndex == Constants.SexFemale)
+            else if (Player.GenderIndex == Constants.SexFemale)
             {
-                _player.Height = Program.Rng.RandomNormal(_player.Race.FemaleBaseHeight, _player.Race.FemaleHeightRange);
-                _player.Weight = Program.Rng.RandomNormal(_player.Race.FemaleBaseWeight, _player.Race.FemaleWeightRange);
+                Player.Height = Program.Rng.RandomNormal(Player.Race.FemaleBaseHeight, Player.Race.FemaleHeightRange);
+                Player.Weight = Program.Rng.RandomNormal(Player.Race.FemaleBaseWeight, Player.Race.FemaleWeightRange);
             }
             else
             {
                 if (Program.Rng.DieRoll(2) == 1)
                 {
-                    _player.Height = Program.Rng.RandomNormal(_player.Race.MaleBaseHeight, _player.Race.MaleHeightRange);
-                    _player.Weight = Program.Rng.RandomNormal(_player.Race.MaleBaseWeight, _player.Race.MaleWeightRange);
+                    Player.Height = Program.Rng.RandomNormal(Player.Race.MaleBaseHeight, Player.Race.MaleHeightRange);
+                    Player.Weight = Program.Rng.RandomNormal(Player.Race.MaleBaseWeight, Player.Race.MaleWeightRange);
                 }
                 else
                 {
-                    _player.Height = Program.Rng.RandomNormal(_player.Race.FemaleBaseHeight, _player.Race.FemaleHeightRange);
-                    _player.Weight = Program.Rng.RandomNormal(_player.Race.FemaleBaseWeight, _player.Race.FemaleWeightRange);
+                    Player.Height = Program.Rng.RandomNormal(Player.Race.FemaleBaseHeight, Player.Race.FemaleHeightRange);
+                    Player.Weight = Program.Rng.RandomNormal(Player.Race.FemaleBaseWeight, Player.Race.FemaleWeightRange);
                 }
             }
         }
@@ -11627,69 +11624,69 @@ namespace AngbandOS
         private void GetExtra()
         {
             int i;
-            _player.MaxLevelGained = 1;
-            _player.Level = 1;
-            _player.ExperienceMultiplier = _player.Race.ExperienceFactor + _player.Profession.ExperienceFactor;
-            _player.HitDie = _player.Race.HitDieBonus + _player.Profession.HitDieBonus;
-            _player.MaxHealth = _player.HitDie;
-            _player.PlayerHp[0] = _player.HitDie;
-            int lastroll = _player.HitDie;
+            Player.MaxLevelGained = 1;
+            Player.Level = 1;
+            Player.ExperienceMultiplier = Player.Race.ExperienceFactor + Player.Profession.ExperienceFactor;
+            Player.HitDie = Player.Race.HitDieBonus + Player.Profession.HitDieBonus;
+            Player.MaxHealth = Player.HitDie;
+            Player.PlayerHp[0] = Player.HitDie;
+            int lastroll = Player.HitDie;
             for (i = 1; i < Constants.PyMaxLevel; i++)
             {
-                _player.PlayerHp[i] = lastroll;
+                Player.PlayerHp[i] = lastroll;
                 lastroll--;
                 if (lastroll < 1)
                 {
-                    lastroll = _player.HitDie;
+                    lastroll = Player.HitDie;
                 }
             }
             for (i = 1; i < Constants.PyMaxLevel; i++)
             {
                 int j = Program.Rng.DieRoll(Constants.PyMaxLevel - 1);
-                lastroll = _player.PlayerHp[i];
-                _player.PlayerHp[i] = _player.PlayerHp[j];
-                _player.PlayerHp[j] = lastroll;
+                lastroll = Player.PlayerHp[i];
+                Player.PlayerHp[i] = Player.PlayerHp[j];
+                Player.PlayerHp[j] = lastroll;
             }
             for (i = 1; i < Constants.PyMaxLevel; i++)
             {
-                _player.PlayerHp[i] = _player.PlayerHp[i - 1] + _player.PlayerHp[i];
+                Player.PlayerHp[i] = Player.PlayerHp[i - 1] + Player.PlayerHp[i];
             }
         }
 
         private void GetMoney()
         {
-            int gold = (_player.SocialClass * 6) + Program.Rng.DieRoll(100) + 300;
+            int gold = (Player.SocialClass * 6) + Program.Rng.DieRoll(100) + 300;
             for (int i = 0; i < 6; i++)
             {
-                if (_player.AbilityScores[i].Adjusted >= 18 + 50)
+                if (Player.AbilityScores[i].Adjusted >= 18 + 50)
                 {
                     gold -= 300;
                 }
-                else if (_player.AbilityScores[i].Adjusted >= 18 + 20)
+                else if (Player.AbilityScores[i].Adjusted >= 18 + 20)
                 {
                     gold -= 200;
                 }
-                else if (_player.AbilityScores[i].Adjusted > 18)
+                else if (Player.AbilityScores[i].Adjusted > 18)
                 {
                     gold -= 150;
                 }
                 else
                 {
-                    gold -= (_player.AbilityScores[i].Adjusted - 8) * 10;
+                    gold -= (Player.AbilityScores[i].Adjusted - 8) * 10;
                 }
             }
             if (gold < 100)
             {
                 gold = 100;
             }
-            _player.Gold = gold;
+            Player.Gold = gold;
         }
 
         private void GetRealmsRandomly()
         {
-            int pclas = _player.ProfessionIndex;
-            _player.Realm1 = Realm.None;
-            _player.Realm2 = Realm.None;
+            int pclas = Player.ProfessionIndex;
+            Player.Realm1 = Realm.None;
+            Player.Realm2 = Realm.None;
             if (_realmChoices[pclas] == RealmChoice.None)
             {
                 return;
@@ -11697,31 +11694,31 @@ namespace AngbandOS
             switch (pclas)
             {
                 case CharacterClass.WarriorMage:
-                    _player.Realm1 = Realm.Folk;
+                    Player.Realm1 = Realm.Folk;
                     break;
 
                 case CharacterClass.Fanatic:
-                    _player.Realm1 = Realm.Chaos;
+                    Player.Realm1 = Realm.Chaos;
                     break;
 
                 case CharacterClass.Priest:
-                    _player.Realm1 = ChooseRealmRandomly(RealmChoice.Life | RealmChoice.Death);
+                    Player.Realm1 = ChooseRealmRandomly(RealmChoice.Life | RealmChoice.Death);
                     break;
 
                 case CharacterClass.Ranger:
-                    _player.Realm1 = Realm.Nature;
+                    Player.Realm1 = Realm.Nature;
                     break;
 
                 case CharacterClass.Druid:
-                    _player.Realm1 = Realm.Nature;
+                    Player.Realm1 = Realm.Nature;
                     break;
 
                 case CharacterClass.Cultist:
-                    _player.Realm1 = Realm.Chaos;
+                    Player.Realm1 = Realm.Chaos;
                     break;
 
                 default:
-                    _player.Realm1 = ChooseRealmRandomly(_realmChoices[pclas]);
+                    Player.Realm1 = ChooseRealmRandomly(_realmChoices[pclas]);
                     break;
             }
             if (pclas == CharacterClass.Paladin || pclas == CharacterClass.Rogue || pclas == CharacterClass.Fanatic ||
@@ -11730,39 +11727,39 @@ namespace AngbandOS
             {
                 return;
             }
-            _player.Realm2 = ChooseRealmRandomly(_realmChoices[pclas]);
-            if (_player.ProfessionIndex == CharacterClass.Priest)
+            Player.Realm2 = ChooseRealmRandomly(_realmChoices[pclas]);
+            if (Player.ProfessionIndex == CharacterClass.Priest)
             {
-                switch (_player.Realm2)
+                switch (Player.Realm2)
                 {
                     case Realm.Nature:
-                        _player.Religion.Deity = GodName.Hagarg_Ryonis;
+                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
                         break;
 
                     case Realm.Folk:
-                        _player.Religion.Deity = GodName.Zo_Kalar;
+                        Player.Religion.Deity = GodName.Zo_Kalar;
                         break;
 
                     case Realm.Chaos:
-                        _player.Religion.Deity = GodName.Nath_Horthah;
+                        Player.Religion.Deity = GodName.Nath_Horthah;
                         break;
 
                     case Realm.Corporeal:
-                        _player.Religion.Deity = GodName.Lobon;
+                        Player.Religion.Deity = GodName.Lobon;
                         break;
 
                     case Realm.Tarot:
-                        _player.Religion.Deity = GodName.Tamash;
+                        Player.Religion.Deity = GodName.Tamash;
                         break;
 
                     default:
-                        _player.Religion.Deity = GodName.None;
+                        Player.Religion.Deity = GodName.None;
                         break;
                 }
             }
             else
             {
-                _player.Religion.Deity = GodName.None;
+                Player.Religion.Deity = GodName.None;
             }
         }
 
@@ -11777,13 +11774,12 @@ namespace AngbandOS
                     int index = Program.Rng.DieRoll(dice.Count) - 1;
                     j = dice[index];
                     dice.RemoveAt(index);
-                    _player.AbilityScores[i].InnateMax = j;
-                    int bonus = _player.Race.AbilityBonus[i] + _player.Profession.AbilityBonus[i];
-                    _player.AbilityScores[i].Innate = _player.AbilityScores[i].InnateMax;
-                    _player.AbilityScores[i].Adjusted = _player.AbilityScores[i]
-                        .ModifyStatValue(_player.AbilityScores[i].InnateMax, bonus);
+                    Player.AbilityScores[i].InnateMax = j;
+                    int bonus = Player.Race.AbilityBonus[i] + Player.Profession.AbilityBonus[i];
+                    Player.AbilityScores[i].Innate = Player.AbilityScores[i].InnateMax;
+                    Player.AbilityScores[i].Adjusted = Player.AbilityScores[i].ModifyStatValue(Player.AbilityScores[i].InnateMax, bonus);
                 }
-                if (_player.AbilityScores[Profession.PrimeStat(_player.ProfessionIndex)].InnateMax > 13)
+                if (Player.AbilityScores[Profession.PrimeStat(Player.ProfessionIndex)].InnateMax > 13)
                 {
                     break;
                 }
@@ -11835,14 +11831,14 @@ namespace AngbandOS
             {
                 return false;
             }
-            _player.RaceAtBirth = _player.Race;
+            Player.RaceAtBirth = Player.Race;
             Quests.PlayerBirthQuests();
             MessageAdd(" ");
             MessageAdd("  ");
             MessageAdd("====================");
             MessageAdd("  ");
             MessageAdd(" ");
-            _player.IsDead = false;
+            Player.IsDead = false;
             PlayerOutfit();
             return true;
         }
@@ -11868,7 +11864,7 @@ namespace AngbandOS
                 switch (stage)
                 {
                     case BirthStage.Introduction:
-                        _player.Religion.Deity = GodName.None;
+                        Player.Religion.Deity = GodName.None;
                         for (i = 0; i < 8; i++)
                         {
                             autoChose[i] = false;
@@ -11899,8 +11895,7 @@ namespace AngbandOS
                                 Print(Colour.Purple, "last time.", 36, 20);
                                 break;
                         }
-                        Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true & !Shutdown)
                         {
                             c = Inkey();
@@ -11937,20 +11932,20 @@ namespace AngbandOS
                         break;
 
                     case BirthStage.ClassSelection:
-                        _player.Religion.Deity = GodName.None;
+                        Player.Religion.Deity = GodName.None;
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.ProfessionIndex = _prevClass;
-                            _player.Profession = Profession.ClassInfo[_player.ProfessionIndex];
+                            Player.ProfessionIndex = _prevClass;
+                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
                             stage++;
                             break;
                         }
                         if (menu[0] == Constants.GenerateRandom)
                         {
                             autoChose[stage] = true;
-                            _player.ProfessionIndex = Program.Rng.RandomLessThan(Constants.MaxClass);
-                            _player.Profession = Profession.ClassInfo[_player.ProfessionIndex];
+                            Player.ProfessionIndex = Program.Rng.RandomLessThan(Constants.MaxClass);
+                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
                             stage++;
                             break;
                         }
@@ -11967,8 +11962,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayClassInfo(_classMenu[menu[stage]].Item);
-                        Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
@@ -12009,8 +12003,8 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.ClassSelection)
                         {
-                            _player.ProfessionIndex = _classMenu[menu[BirthStage.ClassSelection]].Item;
-                            _player.Profession = Profession.ClassInfo[_player.ProfessionIndex];
+                            Player.ProfessionIndex = _classMenu[menu[BirthStage.ClassSelection]].Item;
+                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
                         }
                         break;
 
@@ -12018,8 +12012,8 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.Race = _prevRace;
-                            _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                            Player.Race = _prevRace;
+                            Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             stage++;
                             break;
                         }
@@ -12029,10 +12023,10 @@ namespace AngbandOS
                             do
                             {
                                 int raceIndex = Program.Rng.RandomLessThan(Races.Count);
-                                _player.Race = Races[raceIndex];
-                                _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                                Player.Race = Races[raceIndex];
+                                Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             }
-                            while ((_player.Race.Choice & (1L << _player.ProfessionIndex)) == 0);
+                            while ((Player.Race.Choice & (1L << Player.ProfessionIndex)) == 0);
                             stage++;
                             break;
                         }
@@ -12095,8 +12089,8 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RaceSelection)
                         {
-                            _player.Race = _raceMenu[menu[BirthStage.RaceSelection]].Item;
-                            _player.GetFirstLevelMutation = _player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                            Player.Race = _raceMenu[menu[BirthStage.RaceSelection]].Item;
+                            Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                         }
                         break;
 
@@ -12104,7 +12098,7 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.Realm1 = _prevRealm1;
+                            Player.Realm1 = _prevRealm1;
                             stage++;
                             break;
                         }
@@ -12115,25 +12109,25 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        switch (_player.ProfessionIndex)
+                        switch (Player.ProfessionIndex)
                         {
                             case CharacterClass.Cultist:
                             case CharacterClass.Fanatic:
                                 autoChose[stage] = true;
-                                _player.Realm1 = Realm.Chaos;
+                                Player.Realm1 = Realm.Chaos;
                                 stage++;
                                 break;
 
                             case CharacterClass.WarriorMage:
                                 autoChose[stage] = true;
-                                _player.Realm1 = Realm.Folk;
+                                Player.Realm1 = Realm.Folk;
                                 stage++;
                                 break;
 
                             case CharacterClass.Druid:
                             case CharacterClass.Ranger:
                                 autoChose[stage] = true;
-                                _player.Realm1 = Realm.Nature;
+                                Player.Realm1 = Realm.Nature;
                                 stage++;
                                 break;
 
@@ -12178,7 +12172,7 @@ namespace AngbandOS
                             case CharacterClass.Mystic:
                             case CharacterClass.Warrior:
                                 autoChose[stage] = true;
-                                _player.Realm1 = Realm.None;
+                                Player.Realm1 = Realm.None;
                                 stage++;
                                 break;
                         }
@@ -12240,7 +12234,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RealmSelection1)
                         {
-                            _player.Realm1 = realmChoice[menu[BirthStage.RealmSelection1]];
+                            Player.Realm1 = realmChoice[menu[BirthStage.RealmSelection1]];
                         }
                         break;
 
@@ -12248,39 +12242,39 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.Realm2 = _prevRealm2;
-                            if (_player.ProfessionIndex == CharacterClass.Priest)
+                            Player.Realm2 = _prevRealm2;
+                            if (Player.ProfessionIndex == CharacterClass.Priest)
                             {
-                                switch (_player.Realm2)
+                                switch (Player.Realm2)
                                 {
                                     case Realm.Nature:
-                                        _player.Religion.Deity = GodName.Hagarg_Ryonis;
+                                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
                                         break;
 
                                     case Realm.Folk:
-                                        _player.Religion.Deity = GodName.Zo_Kalar;
+                                        Player.Religion.Deity = GodName.Zo_Kalar;
                                         break;
 
                                     case Realm.Chaos:
-                                        _player.Religion.Deity = GodName.Nath_Horthah;
+                                        Player.Religion.Deity = GodName.Nath_Horthah;
                                         break;
 
                                     case Realm.Corporeal:
-                                        _player.Religion.Deity = GodName.Lobon;
+                                        Player.Religion.Deity = GodName.Lobon;
                                         break;
 
                                     case Realm.Tarot:
-                                        _player.Religion.Deity = GodName.Tamash;
+                                        Player.Religion.Deity = GodName.Tamash;
                                         break;
 
                                     default:
-                                        _player.Religion.Deity = GodName.None;
+                                        Player.Religion.Deity = GodName.None;
                                         break;
                                 }
                             }
                             else
                             {
-                                _player.Religion.Deity = GodName.None;
+                                Player.Religion.Deity = GodName.None;
                             }
                             stage++;
                             break;
@@ -12291,8 +12285,8 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        _player.Realm2 = Realm.None;
-                        switch (_player.ProfessionIndex)
+                        Player.Realm2 = Realm.None;
+                        switch (Player.ProfessionIndex)
                         {
                             case CharacterClass.ChosenOne:
                             case CharacterClass.Channeler:
@@ -12306,7 +12300,7 @@ namespace AngbandOS
                             case CharacterClass.Mystic:
                             case CharacterClass.Druid:
                                 autoChose[stage] = true;
-                                _player.Realm2 = Realm.None;
+                                Player.Realm2 = Realm.None;
                                 stage++;
                                 break;
 
@@ -12316,43 +12310,43 @@ namespace AngbandOS
                             case CharacterClass.Priest:
                             case CharacterClass.Mage:
                                 _menuLength = 0;
-                                int realmFilter = _realmChoices[_player.ProfessionIndex];
-                                if ((realmFilter & RealmChoice.Life) != 0 && _player.Realm1 != Realm.Life)
+                                int realmFilter = _realmChoices[Player.ProfessionIndex];
+                                if ((realmFilter & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
                                 {
                                     realmChoice[_menuLength] = Realm.Life;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Death) != 0 && _player.Realm1 != Realm.Death)
+                                if ((realmFilter & RealmChoice.Death) != 0 && Player.Realm1 != Realm.Death)
                                 {
                                     realmChoice[_menuLength] = Realm.Death;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Nature) != 0 && _player.Realm1 != Realm.Nature)
+                                if ((realmFilter & RealmChoice.Nature) != 0 && Player.Realm1 != Realm.Nature)
                                 {
                                     realmChoice[_menuLength] = Realm.Nature;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Sorcery) != 0 && _player.Realm1 != Realm.Sorcery)
+                                if ((realmFilter & RealmChoice.Sorcery) != 0 && Player.Realm1 != Realm.Sorcery)
                                 {
                                     realmChoice[_menuLength] = Realm.Sorcery;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Corporeal) != 0 && _player.Realm1 != Realm.Corporeal)
+                                if ((realmFilter & RealmChoice.Corporeal) != 0 && Player.Realm1 != Realm.Corporeal)
                                 {
                                     realmChoice[_menuLength] = Realm.Corporeal;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Tarot) != 0 && _player.Realm1 != Realm.Tarot)
+                                if ((realmFilter & RealmChoice.Tarot) != 0 && Player.Realm1 != Realm.Tarot)
                                 {
                                     realmChoice[_menuLength] = Realm.Tarot;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Chaos) != 0 && _player.Realm1 != Realm.Chaos)
+                                if ((realmFilter & RealmChoice.Chaos) != 0 && Player.Realm1 != Realm.Chaos)
                                 {
                                     realmChoice[_menuLength] = Realm.Chaos;
                                     _menuLength++;
                                 }
-                                if ((realmFilter & RealmChoice.Folk) != 0 && _player.Realm1 != Realm.Folk)
+                                if ((realmFilter & RealmChoice.Folk) != 0 && Player.Realm1 != Realm.Folk)
                                 {
                                     realmChoice[_menuLength] = Realm.Folk;
                                     _menuLength++;
@@ -12417,39 +12411,39 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RealmSelection2)
                         {
-                            _player.Realm2 = realmChoice[menu[BirthStage.RealmSelection2]];
-                            if (_player.ProfessionIndex == CharacterClass.Priest)
+                            Player.Realm2 = realmChoice[menu[BirthStage.RealmSelection2]];
+                            if (Player.ProfessionIndex == CharacterClass.Priest)
                             {
-                                switch (_player.Realm2)
+                                switch (Player.Realm2)
                                 {
                                     case Realm.Nature:
-                                        _player.Religion.Deity = GodName.Hagarg_Ryonis;
+                                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
                                         break;
 
                                     case Realm.Folk:
-                                        _player.Religion.Deity = GodName.Zo_Kalar;
+                                        Player.Religion.Deity = GodName.Zo_Kalar;
                                         break;
 
                                     case Realm.Chaos:
-                                        _player.Religion.Deity = GodName.Nath_Horthah;
+                                        Player.Religion.Deity = GodName.Nath_Horthah;
                                         break;
 
                                     case Realm.Corporeal:
-                                        _player.Religion.Deity = GodName.Lobon;
+                                        Player.Religion.Deity = GodName.Lobon;
                                         break;
 
                                     case Realm.Tarot:
-                                        _player.Religion.Deity = GodName.Tamash;
+                                        Player.Religion.Deity = GodName.Tamash;
                                         break;
 
                                     default:
-                                        _player.Religion.Deity = GodName.None;
+                                        Player.Religion.Deity = GodName.None;
                                         break;
                                 }
                             }
                             else
                             {
-                                _player.Religion.Deity = GodName.None;
+                                Player.Religion.Deity = GodName.None;
                             }
                         }
                         break;
@@ -12458,16 +12452,16 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            _player.GenderIndex = _prevSex;
-                            _player.Gender = _sexInfo[_player.GenderIndex];
+                            Player.GenderIndex = _prevSex;
+                            Player.Gender = _sexInfo[Player.GenderIndex];
                             stage++;
                             break;
                         }
                         if (menu[0] == Constants.GenerateRandom)
                         {
                             autoChose[stage] = true;
-                            _player.GenderIndex = Program.Rng.RandomBetween(0, 1);
-                            _player.Gender = _sexInfo[_player.GenderIndex];
+                            Player.GenderIndex = Program.Rng.RandomBetween(0, 1);
+                            Player.Gender = _sexInfo[Player.GenderIndex];
                             stage++;
                             break;
                         }
@@ -12526,37 +12520,35 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.GenderSelection)
                         {
-                            _player.GenderIndex = menu[BirthStage.GenderSelection];
-                            _player.Gender = _sexInfo[_player.GenderIndex];
+                            Player.GenderIndex = menu[BirthStage.GenderSelection];
+                            Player.Gender = _sexInfo[Player.GenderIndex];
                         }
                         break;
 
                     case BirthStage.Confirmation:
                         if (menu[0] != Constants.GenerateReplay)
                         {
-                            _player.Name = _player.Race.CreateRandomName();
-                            _player.Generation = 1;
+                            Player.Name = Player.Race.CreateRandomName();
+                            Player.Generation = 1;
                         }
                         else
                         {
-                            _player.Name = string.IsNullOrEmpty(_prevName) ? _player.Race.CreateRandomName() : _prevName;
-                            _player.Generation = _prevGeneration + 1;
+                            Player.Name = string.IsNullOrEmpty(_prevName) ? Player.Race.CreateRandomName() : _prevName;
+                            Player.Generation = _prevGeneration + 1;
                         }
                         GetStats();
                         GetExtra();
                         GetAhw();
-                        GetHistory(_player);
+                        GetHistory(Player);
                         GetMoney();
-                        _player.Spellcasting = new Spellcasting(_player);
-                        _player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
-                        _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth);
-                        Player = _player;
+                        Player.Spellcasting = new Spellcasting(Player);
+                        Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
+                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth);
                         UpdateStuff();
-                        Player = null;
-                        _player.Health = _player.MaxHealth;
-                        _player.Mana = _player.MaxMana;
-                        _player.Energy = 150;
-                        CharacterViewer characterViewer = new CharacterViewer(this, _player);
+                        Player.Health = Player.MaxHealth;
+                        Player.Mana = Player.MaxMana;
+                        Player.Energy = 150;
+                        CharacterViewer characterViewer = new CharacterViewer(this, Player);
                         while (true && !Shutdown)
                         {
                             characterViewer.DisplayPlayer();
@@ -12601,7 +12593,7 @@ namespace AngbandOS
                         break;
 
                     case BirthStage.Naming:
-                        _player.InputPlayerName();
+                        Player.InputPlayerName();
                         return true;
                 }
             }
@@ -12612,14 +12604,14 @@ namespace AngbandOS
         {
             Item item = new Item(this);
 
-            if (_player.Race.OutfitsWithScrollsOfSatisfyHunger)
+            if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
                 item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>());
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                _player.Inventory.InvenCarry(item, false);
+                Player.Inventory.InvenCarry(item, false);
                 item = new Item(this);
             }
             else
@@ -12628,17 +12620,17 @@ namespace AngbandOS
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                _player.Inventory.InvenCarry(item, false);
+                Player.Inventory.InvenCarry(item, false);
                 item = new Item(this);
             }
-            if (_player.Race.OutfitsWithScrollsOfLight || _player.ProfessionIndex == CharacterClass.ChosenOne)
+            if (Player.Race.OutfitsWithScrollsOfLight || Player.ProfessionIndex == CharacterClass.ChosenOne)
             {
                 item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollLight>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                _player.Inventory.InvenCarry(item, false);
+                Player.Inventory.InvenCarry(item, false);
             }
             else
             {
@@ -12647,10 +12639,10 @@ namespace AngbandOS
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                _player.Inventory.InvenCarry(item, false);
+                Player.Inventory.InvenCarry(item, false);
                 Item carried = item.Clone(1);
-                _player.Inventory[InventorySlot.Lightsource] = carried;
-                _player.WeightCarried += carried.Weight;
+                Player.Inventory[InventorySlot.Lightsource] = carried;
+                Player.WeightCarried += carried.Weight;
             }
 
             ItemClass[][] _playerInit = new ItemClass[16][];
@@ -12751,15 +12743,15 @@ namespace AngbandOS
                 SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
 
-            ItemClass[] startingItems = _playerInit[_player.ProfessionIndex];
+            ItemClass[] startingItems = _playerInit[Player.ProfessionIndex];
             for (int i = 0; i < startingItems.Length; i++)
             {
                 ItemClass itemClass = startingItems[i];
 
-                itemClass = _player.Race.OutfitItem(this, itemClass);
+                itemClass = Player.Race.OutfitItem(this, itemClass);
                 item = new Item(this);
                 item.AssignItemType(itemClass);
-                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && _player.ProfessionIndex == CharacterClass.Rogue && _player.Realm1 == Realm.Death)
+                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && Player.ProfessionIndex == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
                 }
@@ -12770,15 +12762,15 @@ namespace AngbandOS
                 item.IdentStoreb = true;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                int slot = _player.Inventory.WieldSlot(item);
+                int slot = Player.Inventory.WieldSlot(item);
                 if (slot == -1)
                 {
-                    _player.Inventory.InvenCarry(item, false);
+                    Player.Inventory.InvenCarry(item, false);
                 }
                 else
                 {
-                    _player.Inventory[slot] = item;
-                    _player.WeightCarried += item.Weight;
+                    Player.Inventory[slot] = item;
+                    Player.WeightCarried += item.Weight;
                 }
             }
         }
