@@ -13,16 +13,18 @@ using AngbandOS.Core.ItemFilters;
 namespace AngbandOS
 {
     [Serializable]
-    internal class Inventory // TODO: This is a container
+    internal class Inventory
     {
         private readonly Item[] _items;
+        private readonly Player _player;
         private int _invenCnt;
         private readonly SaveGame SaveGame;
 
-        public Inventory(SaveGame saveGame)
+        public Inventory(SaveGame saveGame, Player player)
         {
             SaveGame = saveGame;
             _items = new Item[InventorySlot.Total];
+            _player = player;
             for (int i = 0; i < InventorySlot.Total; i++)
             {
                 _items[i] = new Item(SaveGame); // No ItemType here
@@ -101,8 +103,8 @@ namespace AngbandOS
                     if (oPtr.CanAbsorb(jPtr))
                     {
                         jPtr.Absorb(oPtr);
-                        SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
-                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                        _player.WeightCarried += oPtr.Count * oPtr.Weight;
+                        _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                         return j;
                     }
                 }
@@ -130,19 +132,19 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -211,10 +213,10 @@ namespace AngbandOS
             oPtr.X = 0;
             oPtr.NextInStack = 0;
             oPtr.HoldingMonsterIndex = 0;
-            SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
+            _player.WeightCarried += oPtr.Count * oPtr.Weight;
             _invenCnt++;
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            _player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             return i;
         }
 
@@ -275,7 +277,7 @@ namespace AngbandOS
                         if (oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
                         {
                             PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                            potion.Smash(SaveGame, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
+                            potion.Smash(SaveGame, 0, _player.MapY, _player.MapX);
                         }
                         InvenItemIncrease(i, -amt);
                         InvenItemOptimize(i);
@@ -305,7 +307,7 @@ namespace AngbandOS
             Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
             SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-            SaveGame.Level.DropNear(qPtr, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
+            SaveGame.Level.DropNear(qPtr, 0, _player.MapY, _player.MapX);
             InvenItemIncrease(item, -amt);
             InvenItemDescribe(item);
             InvenItemOptimize(item);
@@ -334,10 +336,10 @@ namespace AngbandOS
             if (num != 0)
             {
                 oPtr.Count += num;
-                SaveGame.Player.WeightCarried += num * oPtr.Weight;
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
-                SaveGame.Player.NoticeFlags |= Constants.PnCombine;
+                _player.WeightCarried += num * oPtr.Weight;
+                _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                _player.NoticeFlags |= Constants.PnCombine;
             }
         }
 
@@ -365,9 +367,9 @@ namespace AngbandOS
             else
             {
                 _items[item] = new Item(SaveGame); // No ItemType here
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                _player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                _player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+                _player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
             }
         }
 
@@ -479,19 +481,19 @@ namespace AngbandOS
                     {
                         break;
                     }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         break;
                     }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm1)
                     {
                         continue;
                     }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
+                    if (oPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         break;
                     }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
+                    if (jPtr.BaseItemCategory.SpellBookToToRealm == _player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != _player.Realm2)
                     {
                         continue;
                     }
@@ -740,7 +742,7 @@ namespace AngbandOS
                     return InventorySlot.RangedWeapon;
 
                 case ItemTypeEnum.Ring:
-                    if (SaveGame.Player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
+                    if (_player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
                     {
                         return InventorySlot.RightHand;
                     }
@@ -840,7 +842,7 @@ namespace AngbandOS
             if (i == InventorySlot.MeleeWeapon)
             {
                 Item oPtr = _items[i];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+                if (_player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "Just lifting";
                 }
@@ -848,7 +850,7 @@ namespace AngbandOS
             if (i == InventorySlot.RangedWeapon)
             {
                 Item oPtr = _items[i];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+                if (_player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "Just holding";
                 }
