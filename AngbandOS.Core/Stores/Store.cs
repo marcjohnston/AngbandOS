@@ -62,6 +62,7 @@ namespace AngbandOS
             _stockNum = 0;
         }
 
+        public virtual int MaxInventory => 26;
         /// <summary>
         /// Returns the maximum number of items the store can accomodate.  Returns 26, by default.
         /// </summary>
