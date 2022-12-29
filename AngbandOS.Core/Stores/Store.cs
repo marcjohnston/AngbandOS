@@ -11,7 +11,6 @@ using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.ItemFilters;
 using AngbandOS.Core.WeightedRandoms;
-using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
 using AngbandOS.Spells;
 using AngbandOS.StoreCommands;
@@ -64,6 +63,11 @@ namespace AngbandOS
         }
 
         /// <summary>
+        /// Returns the maximum number of items the store can accomodate.  Returns 26, by default.
+        /// </summary>
+        public virtual int MaxInventory => 26;
+
+        /// <summary>
         /// Returns an array of item types that the store carries.  Returns null, if the store does not carry items for sale.
         /// </summary>
         /// <returns></returns>
@@ -73,7 +77,7 @@ namespace AngbandOS
         {
             SaveGame = saveGame;
             StoreType = storeType;
-            _stockSize = Constants.StoreInvenMax;
+            _stockSize = MaxInventory;
             _stock = new Item[_stockSize];
             for (int k = 0; k < _stockSize; k++)
             {

@@ -93,7 +93,6 @@ namespace AngbandOS.Core
         public const int ScreenWid = 66;
         public const int SexFemale = 0;
         public const int SexMale = 1;
-        public const int StoreInvenMax = 26;
         public const int StoreObjLevel = 5;
         public const int StoreShuffle = 21;
         public const int StoreTurns = 1000;
