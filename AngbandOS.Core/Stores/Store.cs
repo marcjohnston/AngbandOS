@@ -10,6 +10,7 @@ using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.ItemClasses;
 using AngbandOS.Core.ItemFilters;
+using AngbandOS.Core.WeightedRandoms;
 using AngbandOS.Enumerations;
 using AngbandOS.Pantheon;
 using AngbandOS.Spells;
@@ -36,18 +37,6 @@ namespace AngbandOS
 
         private int _x;
         private int _y;
-
-        private static readonly string[] _comment_7A =
-            {"Arrgghh!", "You bastard!", "You hear someone sobbing...", "The shopkeeper howls in agony!"};
-
-        private static readonly string[] _comment_7B =
-            {"Damn!", "You bastard!", "The shopkeeper curses at you.", "The shopkeeper glares at you."};
-
-        private static readonly string[] _comment_7C =
-            {"Cool!", "You've made my day!", "The shopkeeper giggles.", "The shopkeeper laughs loudly."};
-
-        private static readonly string[] _comment_7D =
-            {"Yipee!", "I think I'll retire!", "The shopkeeper jumps for joy.", "The shopkeeper smiles gleefully."};
 
         private static readonly string[] _comment1 = { "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!" };
         private readonly Item[] _stock;
@@ -862,22 +851,22 @@ namespace AngbandOS
         {
             if (value <= 0 && price > value)
             {
-                SaveGame.MsgPrint(_comment_7A[Program.Rng.RandomLessThan(_comment_7A.Length)]);
+                SaveGame.MsgPrint(new ShopKeeperWorthlessComments().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldWorthless);
             }
             else if (value < guess && price > value)
             {
-                SaveGame.MsgPrint(_comment_7B[Program.Rng.RandomLessThan(_comment_7B.Length)]);
+                SaveGame.MsgPrint(new ShopKeeperLessThanGuessComments().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldBargain);
             }
             else if (value > guess && value < 4 * guess && price < value)
             {
-                SaveGame.MsgPrint(_comment_7C[Program.Rng.RandomLessThan(_comment_7C.Length)]);
+                SaveGame.MsgPrint(new ShopKeeperGoodComments().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldCheaply);
             }
             else if (value > guess && price < value)
             {
-                SaveGame.MsgPrint(_comment_7D[Program.Rng.RandomLessThan(_comment_7D.Length)]);
+                SaveGame.MsgPrint(new ShopKeeperBargainComments().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldExtraCheaply);
             }
         }
