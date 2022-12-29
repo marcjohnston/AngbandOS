@@ -247,7 +247,7 @@ namespace AngbandOS
                 AbilityScores[i] = new AbilityScore();
             }
             WeightCarried = 0;
-            Inventory = new Inventory(SaveGame, this);
+            Inventory = new Inventory(SaveGame);
             foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
             {
                 FixedArtifact aPtr = pair.Value;
