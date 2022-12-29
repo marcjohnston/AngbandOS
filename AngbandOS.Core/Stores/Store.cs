@@ -28,7 +28,6 @@ namespace AngbandOS
         private int _x;
         private int _y;
 
-        private static readonly string[] _comment1 = { "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!" };
         private readonly List<Item> _inventory = new List<Item>();
 
         /// <summary>
@@ -1017,7 +1016,7 @@ namespace AngbandOS
 
         protected void SayComment_1()
         {
-            SaveGame.MsgPrint(_comment1[Program.Rng.RandomLessThan(_comment1.Length)]);
+            SaveGame.MsgPrint(new StoreOwnerAcceptedComments().Choose());
         }
 
         private bool SellHaggle(Item oPtr, out int price)
