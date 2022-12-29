@@ -12751,7 +12751,7 @@ namespace AngbandOS
                 item.IdentStoreb = true;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                int slot = Player.Inventory.WieldSlot(item);
+                int slot = item.BaseItemCategory.WieldSlot;
                 if (slot == -1)
                 {
                     Player.Inventory.InvenCarry(item, false);

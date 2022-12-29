@@ -30,7 +30,7 @@
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Find the correct item slot
-            int slot = saveGame.Player.Inventory.WieldSlot(item);
+            int slot = item.BaseItemCategory.WieldSlot;
             // Can't replace a cursed item
             if (saveGame.Player.Inventory[slot].IsCursed())
             {
