@@ -30,7 +30,7 @@ namespace AngbandOS.Core.AttackEffects
             // Have ten tries at picking a suitable item to steal
             for (int k = 0; k < 10; k++)
             {
-                int i = Program.Rng.RandomLessThan(InventorySlot.Pack);
+                int i = Program.Rng.RandomLessThan(InventorySlot.PackCount);
                 Item item = saveGame.Player.Inventory[i];
                 if (item.BaseItemCategory == null)
                 {

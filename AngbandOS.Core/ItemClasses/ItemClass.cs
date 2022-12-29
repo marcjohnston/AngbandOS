@@ -14,7 +14,17 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class ItemClass : IItemCharacteristics
     {
         public SaveGame SaveGame { get; }
-        public ItemClass(SaveGame saveGame) { }
+        public ItemClass(SaveGame saveGame) 
+        {
+            SaveGame = saveGame;
+            FlavorCharacter = Character;
+            FlavorColour = Colour;
+        }
+        /// <summary>
+        /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
+        /// </summary>
+        public virtual int WieldSlot => InventorySlot.Pack; 
+
         /// <summary>
         /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
         /// Use StompableType enum to address each index.
@@ -48,12 +58,6 @@ namespace AngbandOS.Core.ItemClasses
             {
                 return Str || Int || Wis || Dex || Con || Cha || Stealth || Search || Infra || Tunnel || Speed || Blows;
             }
-        }
-
-        public ItemClass()
-        {
-            FlavorCharacter = Character;
-            FlavorColour = Colour;
         }
 
         /// <summary>

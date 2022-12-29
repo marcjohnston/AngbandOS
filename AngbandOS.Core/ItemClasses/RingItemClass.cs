@@ -9,6 +9,17 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class RingItemClass : JewelleryItemClass
     {
         public RingItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot 
+        {
+            get
+            {
+                if (SaveGame.Player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
+                {
+                    return InventorySlot.RightHand;
+                }
+                return InventorySlot.LeftHand;
+            }
+        }
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)

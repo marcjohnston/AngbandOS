@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class HardArmorItemClass : ArmourItemClass
     {
         public HardArmorItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.Body;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
         public override bool HatesAcid => true;
 

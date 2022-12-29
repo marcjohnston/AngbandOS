@@ -41,7 +41,7 @@ namespace AngbandOS
         public void CombinePack()
         {
             bool flag = false;
-            for (int i = InventorySlot.Pack; i > 0; i--)
+            for (int i = InventorySlot.PackCount; i > 0; i--)
             {
                 Item oPtr = _items[i];
                 if (oPtr.BaseItemCategory == null)
@@ -61,7 +61,7 @@ namespace AngbandOS
                         jPtr.Absorb(oPtr);
                         _invenCnt--;
                         int k;
-                        for (k = i; k < InventorySlot.Pack; k++)
+                        for (k = i; k < InventorySlot.PackCount; k++)
                         {
                             _items[k] = _items[k + 1];
                         }
@@ -92,7 +92,7 @@ namespace AngbandOS
             Item jPtr;
             if (!final)
             {
-                for (j = 0; j < InventorySlot.Pack; j++)
+                for (j = 0; j < InventorySlot.PackCount; j++)
                 {
                     jPtr = _items[j];
                     if (jPtr.BaseItemCategory == null)
@@ -109,11 +109,11 @@ namespace AngbandOS
                     }
                 }
             }
-            if (_invenCnt > InventorySlot.Pack)
+            if (_invenCnt > InventorySlot.PackCount)
             {
                 return -1;
             }
-            for (j = 0; j <= InventorySlot.Pack; j++)
+            for (j = 0; j <= InventorySlot.PackCount; j++)
             {
                 jPtr = _items[j];
                 if (jPtr.BaseItemCategory == null)
@@ -122,10 +122,10 @@ namespace AngbandOS
                 }
             }
             int i = j;
-            if (!final && i < InventorySlot.Pack)
+            if (!final && i < InventorySlot.PackCount)
             {
                 int oValue = oPtr.Value();
-                for (j = 0; j < InventorySlot.Pack; j++)
+                for (j = 0; j < InventorySlot.PackCount; j++)
                 {
                     jPtr = _items[j];
                     if (jPtr.BaseItemCategory == null)
@@ -222,11 +222,11 @@ namespace AngbandOS
 
         public bool InvenCarryOkay(Item oPtr)
         {
-            if (_invenCnt < InventorySlot.Pack)
+            if (_invenCnt < InventorySlot.PackCount)
             {
                 return true;
             }
-            for (int j = 0; j < InventorySlot.Pack; j++)
+            for (int j = 0; j < InventorySlot.PackCount; j++)
             {
                 Item jPtr = _items[j];
                 if (jPtr.BaseItemCategory == null)
@@ -244,7 +244,7 @@ namespace AngbandOS
         public int InvenDamage(Func<Item, bool> testerFunc, int perc)
         {
             int k = 0;
-            for (int i = 0; i < InventorySlot.Pack; i++)
+            for (int i = 0; i < InventorySlot.PackCount; i++)
             {
                 Item oPtr = _items[i];
                 if (oPtr.BaseItemCategory == null)
@@ -358,7 +358,7 @@ namespace AngbandOS
             {
                 int i;
                 _invenCnt--;
-                for (i = item; i < InventorySlot.Pack; i++)
+                for (i = item; i < InventorySlot.PackCount; i++)
                 {
                     _items[i] = _items[i + 1];
                 }
@@ -447,7 +447,7 @@ namespace AngbandOS
         public int LabelToInven(char c)
         {
             int i = char.IsLower(c) ? c.LetterToNumber() : -1;
-            if (i < 0 || i > InventorySlot.Pack)
+            if (i < 0 || i > InventorySlot.PackCount)
             {
                 return -1;
             }
@@ -461,9 +461,9 @@ namespace AngbandOS
         public void ReorderPack()
         {
             bool flag = false;
-            for (int i = 0; i < InventorySlot.Pack; i++)
+            for (int i = 0; i < InventorySlot.PackCount; i++)
             {
-                if (i == InventorySlot.Pack && _invenCnt == InventorySlot.Pack)
+                if (i == InventorySlot.PackCount && _invenCnt == InventorySlot.PackCount)
                 {
                     break;
                 }
@@ -474,7 +474,7 @@ namespace AngbandOS
                 }
                 int oValue = oPtr.Value();
                 int j;
-                for (j = 0; j < InventorySlot.Pack; j++)
+                for (j = 0; j < InventorySlot.PackCount; j++)
                 {
                     Item jPtr = _items[j];
                     if (jPtr.BaseItemCategory == null)
@@ -665,7 +665,7 @@ namespace AngbandOS
             int lim = 79 - 3;
             lim -= 9;
             lim -= 2;
-            for (i = 0; i < InventorySlot.Pack; i++)
+            for (i = 0; i < InventorySlot.PackCount; i++)
             {
                 oPtr = _items[i];
                 if (oPtr.BaseItemCategory == null)
@@ -728,54 +728,7 @@ namespace AngbandOS
         /// <returns></returns>
         public int WieldSlot(Item oPtr)
         {
-            switch (oPtr.Category)
-            {
-                case ItemTypeEnum.Digging:
-                    return InventorySlot.Digger;
-
-                case ItemTypeEnum.Hafted:
-                case ItemTypeEnum.Polearm:
-                case ItemTypeEnum.Sword:
-                    return InventorySlot.MeleeWeapon;
-
-                case ItemTypeEnum.Bow:
-                    return InventorySlot.RangedWeapon;
-
-                case ItemTypeEnum.Ring:
-                    if (_player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
-                    {
-                        return InventorySlot.RightHand;
-                    }
-                    return InventorySlot.LeftHand;
-
-                case ItemTypeEnum.Amulet:
-                    return InventorySlot.Neck;
-
-                case ItemTypeEnum.Light:
-                    return InventorySlot.Lightsource;
-
-                case ItemTypeEnum.DragArmor:
-                case ItemTypeEnum.HardArmor:
-                case ItemTypeEnum.SoftArmor:
-                    return InventorySlot.Body;
-
-                case ItemTypeEnum.Cloak:
-                    return InventorySlot.Cloak;
-
-                case ItemTypeEnum.Shield:
-                    return InventorySlot.Arm;
-
-                case ItemTypeEnum.Crown:
-                case ItemTypeEnum.Helm:
-                    return InventorySlot.Head;
-
-                case ItemTypeEnum.Gloves:
-                    return InventorySlot.Hands;
-
-                case ItemTypeEnum.Boots:
-                    return InventorySlot.Feet;
-            }
-            return -1;
+            return oPtr.BaseItemCategory.WieldSlot;
         }
 
         private string MentionUse(int i)

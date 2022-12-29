@@ -27,7 +27,7 @@ namespace AngbandOS.StoreCommands
         {
             int count = 0;
             // Look for worthless items
-            for (int i = InventorySlot.Pack - 1; i >= 0; i--)
+            for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
             {
                 Item item = saveGame.Player.Inventory[i];
                 if (item.BaseItemCategory == null)

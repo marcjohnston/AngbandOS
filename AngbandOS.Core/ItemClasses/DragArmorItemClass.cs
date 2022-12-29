@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class DragArmorItemClass : ArmourItemClass
     {
         public DragArmorItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.Body;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
         public override bool HatesAcid => true;
 

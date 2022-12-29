@@ -918,7 +918,7 @@ namespace AngbandOS
             bool item = false;
             itemIndex = -1;
             int i1 = 0;
-            int i2 = InventorySlot.Pack - 1;
+            int i2 = InventorySlot.PackCount - 1;
             if (!canChooseFromInventory)
             {
                 i2 = -1;
@@ -2335,9 +2335,9 @@ namespace AngbandOS
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 UpdateScreen();
-                if (Player.Inventory[InventorySlot.Pack].BaseItemCategory != null)
+                if (Player.Inventory[InventorySlot.PackCount].BaseItemCategory != null)
                 {
-                    const int item = InventorySlot.Pack;
+                    const int item = InventorySlot.PackCount;
                     Item oPtr = Player.Inventory[item];
                     Disturb(false);
                     MsgPrint("Your pack overflows!");
@@ -2929,7 +2929,7 @@ namespace AngbandOS
                     }
                 }
             }
-            for (j = 0, i = 0; i < InventorySlot.Pack; i++)
+            for (j = 0, i = 0; i < InventorySlot.PackCount; i++)
             {
                 oPtr = Player.Inventory[i];
                 if (oPtr.BaseItemCategory == null)
@@ -6918,7 +6918,7 @@ namespace AngbandOS
         /// </summary>
         public void BrandBolts()
         {
-            for (int i = 0; i < InventorySlot.Pack; i++)
+            for (int i = 0; i < InventorySlot.PackCount; i++)
             {
                 // Find a set of non-artifact bolts in our inventory
                 Item item = Player.Inventory[i];
@@ -7699,7 +7699,7 @@ namespace AngbandOS
         public bool GetSpike(out int inventoryIndex)
         {
             // Loop through the inventory
-            for (int i = 0; i < InventorySlot.Pack; i++)
+            for (int i = 0; i < InventorySlot.PackCount; i++)
             {
                 Item item = Player.Inventory[i];
                 if (item.BaseItemCategory == null)

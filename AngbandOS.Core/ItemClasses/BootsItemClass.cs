@@ -8,6 +8,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class BootsItemClass : ArmourItemClass
     {
         public BootsItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.Feet;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

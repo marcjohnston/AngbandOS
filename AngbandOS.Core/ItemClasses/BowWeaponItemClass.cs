@@ -9,6 +9,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class BowWeaponItemClass : WeaponItemClass
     {
         public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.RangedWeapon;
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.
         /// </summary>

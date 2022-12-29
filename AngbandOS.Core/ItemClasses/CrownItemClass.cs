@@ -8,6 +8,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class CrownItemClass : ArmourItemClass
     {
         public CrownItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.Head;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
         public override bool HatesAcid => true;
 

@@ -8,6 +8,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class AmuletItemClass : JewelleryItemClass
     {
         public AmuletItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override int WieldSlot => InventorySlot.Neck;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {

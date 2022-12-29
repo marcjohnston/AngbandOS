@@ -201,9 +201,9 @@ namespace AngbandOS
                 SaveGame.FullScreenOverlay = true;
                 SaveGame.NoticeStuff();
                 SaveGame.HandleStuff();
-                if (SaveGame.Player.Inventory[InventorySlot.Pack].BaseItemCategory != null)
+                if (SaveGame.Player.Inventory[InventorySlot.PackCount].BaseItemCategory != null)
                 {
-                    const int item = InventorySlot.Pack;
+                    const int item = InventorySlot.PackCount;
                     Item oPtr = SaveGame.Player.Inventory[item];
                     if (StoreType != StoreType.StoreHome)
                     {
