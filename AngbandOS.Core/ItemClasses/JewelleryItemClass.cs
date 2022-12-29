@@ -6,6 +6,7 @@
     /// </summary>
     internal abstract class JewelleryItemClass : ItemClass
     {
+        public JewelleryItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool IsStompable(Item item)
         {
             if (item.BonusDamage < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.TypeSpecificValue < 0)

@@ -3,6 +3,7 @@
     [Serializable]
     internal abstract class AmmunitionItemClass : WeaponItemClass
     {
+        public AmmunitionItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int? GetBonusRealValue(Item item, int value)
         {
             if (item.BonusToHit + item.BonusDamage < 0)

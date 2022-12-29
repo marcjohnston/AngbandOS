@@ -9,6 +9,7 @@ namespace AngbandOS.Core.ItemClasses
     /// </summary>
     internal abstract class ArmourItemClass : ItemClass
     {
+        public ArmourItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasQuality => true;
 
         public override void ApplyRandartBonus(Item item)

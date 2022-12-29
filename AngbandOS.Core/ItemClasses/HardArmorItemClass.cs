@@ -6,6 +6,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class HardArmorItemClass : ArmourItemClass
     {
+        public HardArmorItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
         public override bool HatesAcid => true;
 

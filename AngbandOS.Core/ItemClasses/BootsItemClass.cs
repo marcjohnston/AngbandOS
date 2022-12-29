@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class BootsItemClass : ArmourItemClass
     {
+        public BootsItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

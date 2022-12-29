@@ -13,6 +13,8 @@ namespace AngbandOS.Core.ItemClasses
 
     internal abstract class ItemClass : IItemCharacteristics
     {
+        public SaveGame SaveGame { get; }
+        public ItemClass(SaveGame saveGame) { }
         /// <summary>
         /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
         /// Use StompableType enum to address each index.

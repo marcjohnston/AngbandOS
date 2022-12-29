@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class CrownIron : CrownItemClass
     {
-        private CrownIron(SaveGame saveGame) { } // This object is a singleton.
+        private CrownIron(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.Grey;

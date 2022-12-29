@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class DeathBookItemClass : BookItemClass
     {
+        public DeathBookItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {

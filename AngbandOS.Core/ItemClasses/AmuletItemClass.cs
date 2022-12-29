@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class AmuletItemClass : JewelleryItemClass
     {
+        public AmuletItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {

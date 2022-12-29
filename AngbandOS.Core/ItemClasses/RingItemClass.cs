@@ -8,6 +8,7 @@ namespace AngbandOS.Core.ItemClasses
     [Serializable]
     internal abstract class RingItemClass : JewelleryItemClass
     {
+        public RingItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)

@@ -7,7 +7,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class BowHeavyCrossbow : BowWeaponItemClass
     {
-        private BowHeavyCrossbow(SaveGame saveGame) { } // This object is a singleton.
+        private BowHeavyCrossbow(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '}';
         public override Colour Colour => Colour.Grey;
