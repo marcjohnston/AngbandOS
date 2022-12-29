@@ -1478,44 +1478,37 @@ namespace AngbandOS
         private void StoreProcessCommand()
         {
             char c = SaveGame.CurrentCommand;
+            bool matchingCommandFound = false;
 
-            if (c == '\x1b')
+            // Process commands
+            foreach (BaseStoreCommand command in ObjectRepository.StoreCommands)
             {
-                _leaveStore = true;
+                // TODO: The IF statement below can be converted into a dictionary with the applicable object 
+                // attached for improved performance.
+                if (command.Key == c)
+                {
+                    matchingCommandFound = true;
+                    if (command.IsEnabled(this))
+                    {
+                        StoreCommandEvent storeCommandEvent = new StoreCommandEvent(SaveGame, this);
+                        command.Execute(storeCommandEvent);
+
+                        if (storeCommandEvent.RequiresRerendering)
+                            DisplayStore();
+                        _leaveStore = storeCommandEvent.LeaveStore;
+
+                        return;
+                    }
+                }
+            }
+
+            if (matchingCommandFound)
+            {
+                SaveGame.MsgPrint("That command does not work in this Store.");
             }
             else
             {
-                bool matchingCommandFound = false;
-
-                // Process commands
-                foreach (BaseStoreCommand command in ObjectRepository.StoreCommands)
-                {
-                    // TODO: The IF statement below can be converted into a dictionary with the applicable object 
-                    // attached for improved performance.
-                    if (command.Key == c)
-                    {
-                        matchingCommandFound = true;
-                        if (command.IsEnabled(this))
-                        {
-                            StoreCommandEvent storeCommandEvent = new StoreCommandEvent(SaveGame, this);
-                            command.Execute(storeCommandEvent);
-
-                            if (storeCommandEvent.RequiresRerendering)
-                                DisplayStore();
-
-                            return;
-                        }
-                    }
-                }
-
-                if (matchingCommandFound)
-                {
-                    SaveGame.MsgPrint("That command does not work in this Store.");
-                }
-                else
-                {
-                    SaveGame.MsgPrint("That command does not work in stores.");
-                }
+                SaveGame.MsgPrint("That command does not work in stores.");
             }
         }
 
