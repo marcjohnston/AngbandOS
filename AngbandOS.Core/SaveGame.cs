@@ -55,7 +55,6 @@ namespace AngbandOS
         public int DungeonDifficulty;
         public int EnergyUse;
         public bool HackMind;
-        public int ItemDisplayColumn = 50;
         public Level Level;
         public bool MartialArtistArmourAux;
         public bool MartialArtistNotifyAux;
@@ -898,7 +897,6 @@ namespace AngbandOS
         public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-            Inventory inventory = Player.Inventory;
             int currentItemIndex;
             int nextItemIndex;
             bool allowFloor = false;
@@ -912,11 +910,11 @@ namespace AngbandOS
             {
                 i2 = -1;
             }
-            while (i1 <= i2 && !inventory.GetItemOkay(i1, itemFilter))
+            while (i1 <= i2 && !Player.Inventory.GetItemOkay(i1, itemFilter))
             {
                 i1++;
             }
-            while (i1 <= i2 && !inventory.GetItemOkay(i2, itemFilter))
+            while (i1 <= i2 && !Player.Inventory.GetItemOkay(i2, itemFilter))
             {
                 i2--;
             }
@@ -926,11 +924,11 @@ namespace AngbandOS
             {
                 e2 = -1;
             }
-            while (e1 <= e2 && !inventory.GetItemOkay(e1, itemFilter))
+            while (e1 <= e2 && !Player.Inventory.GetItemOkay(e1, itemFilter))
             {
                 e1++;
             }
-            while (e1 <= e2 && !inventory.GetItemOkay(e2, itemFilter))
+            while (e1 <= e2 && !Player.Inventory.GetItemOkay(e2, itemFilter))
             {
                 e2--;
             }
@@ -940,7 +938,7 @@ namespace AngbandOS
                 {
                     Item oPtr = Level.Items[currentItemIndex];
                     nextItemIndex = oPtr.NextInStack;
-                    if (inventory.ItemMatchesFilter(oPtr, itemFilter))
+                    if (Player.Inventory.ItemMatchesFilter(oPtr, itemFilter))
                     {
                         allowFloor = true;
                     }
@@ -954,10 +952,6 @@ namespace AngbandOS
             }
             else
             {
-                if (!ViewingItemList)
-                {
-                    ItemDisplayColumn = 50;
-                }
                 if (ViewingItemList && ViewingEquipment && canChooseFromEquipment)
                 {
                     ViewingEquipment = true;
@@ -1044,7 +1038,6 @@ namespace AngbandOS
                 {
                     case '\x1b':
                         {
-                            ItemDisplayColumn = 50;
                             done = true;
                             break;
                         }
@@ -1086,7 +1079,7 @@ namespace AngbandOS
                                 {
                                     Item oPtr = Level.Items[currentItemIndex];
                                     nextItemIndex = oPtr.NextInStack;
-                                    if (!inventory.ItemMatchesFilter(oPtr, itemFilter))
+                                    if (!Player.Inventory.ItemMatchesFilter(oPtr, itemFilter))
                                     {
                                         continue;
                                     }
@@ -1112,7 +1105,7 @@ namespace AngbandOS
                             {
                                 k = e1 == e2 ? e1 : -1;
                             }
-                            if (!inventory.GetItemOkay(k, itemFilter))
+                            if (!Player.Inventory.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }
@@ -1129,7 +1122,7 @@ namespace AngbandOS
                                 which = char.ToLower(which);
                             }
                             k = !ViewingEquipment ? Player.Inventory.LabelToInven(which) : Player.Inventory.LabelToEquip(which);
-                            if (!inventory.GetItemOkay(k, itemFilter))
+                            if (!Player.Inventory.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }

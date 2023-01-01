@@ -577,14 +577,14 @@ namespace AngbandOS
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
-        public void ShowEquip(IItemFilter? itemFilter)
+        public void ShowEquip(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
         {
             int i, j, k;
             Item oPtr;
             int[] outIndex = new int[23];
             Colour[] outColour = new Colour[23];
             string[] outDesc = new string[23];
-            int col = SaveGame.ItemDisplayColumn;
+            int col = maxItemDisplayColumn;
             int len = 79 - col;
             int lim = 79 - 3;
             lim -= 14 + 2;
@@ -644,17 +644,20 @@ namespace AngbandOS
             {
                 SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
-            SaveGame.ItemDisplayColumn = col;
         }
 
-        public void ShowInven(IItemFilter? itemFilter)
+        public void ShowInven(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
         {
             int i, j, k, z = 0;
             Item oPtr;
             int[] outIndex = new int[26];
             Colour[] outColour = new Colour[26];
             string[] outDesc = new string[26];
-            int col = SaveGame.ItemDisplayColumn;
+
+            // Set the initial left column.
+            int col = maxItemDisplayColumn;
+
+            // Compute the minimum length.  
             int len = 79 - col;
             int lim = 79 - 3;
             lim -= 9;
@@ -692,7 +695,10 @@ namespace AngbandOS
                 }
                 k++;
             }
+
+            // Do not allow the left side of the print to be less than 3.  We need space for the a.)
             col = len > 76 ? 0 : 79 - len;
+
             for (j = 0; j < k; j++)
             {
                 i = outIndex[j];
@@ -712,7 +718,6 @@ namespace AngbandOS
             {
                 SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
             }
-            SaveGame.ItemDisplayColumn = col;
         }
 
         private string MentionUse(int i)

@@ -31,7 +31,6 @@
             if (saveGame.QueuedCommand == '\x1b')
             {
                 saveGame.QueuedCommand = (char)0;
-                saveGame.ItemDisplayColumn = 50;
             }
             else
             {

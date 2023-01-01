@@ -23,8 +23,7 @@
             // We want to see everything
             saveGame.Player.Inventory.ShowInven(null);
             // Get a new command
-            string outVal =
-                $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+            string outVal = $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             saveGame.PrintLine(outVal, 0, 0);
             saveGame.QueuedCommand = saveGame.Inkey();
             saveGame.Load();
@@ -32,7 +31,6 @@
             if (saveGame.QueuedCommand == '\x1b')
             {
                 saveGame.QueuedCommand = (char)0;
-                saveGame.ItemDisplayColumn = 50;
             }
             else
             {
