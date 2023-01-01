@@ -1,5 +1,4 @@
 using AngbandOS.ActivationPowers;
-using AngbandOS.ArtifactBiases;
 using AngbandOS.Core.ItemCategories;
 
 namespace AngbandOS.Core.FixedArtifacts;

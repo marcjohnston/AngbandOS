@@ -16,3 +16,4 @@ global using AngbandOS.Core.ChestTraps;
 global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Projection;
 global using AngbandOS.Core.MonsterSelectors;
+global using AngbandOS.ArtifactBiases;
