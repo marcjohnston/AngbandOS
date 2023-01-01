@@ -983,8 +983,6 @@ namespace AngbandOS
             {
                 if (!ViewingEquipment)
                 {
-                    i1.IndexToLetter();
-                    i2.IndexToLetter();
                     if (ViewingItemList)
                     {
                         Player.Inventory.ShowInven(itemFilter);
@@ -992,8 +990,6 @@ namespace AngbandOS
                 }
                 else
                 {
-                    (e1 - InventorySlot.MeleeWeapon).IndexToLetter();
-                    (e2 - InventorySlot.MeleeWeapon).IndexToLetter();
                     if (ViewingItemList)
                     {
                         Player.Inventory.ShowEquip(itemFilter);
