@@ -5,6 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     {
         private LightOrb(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        public override bool IdentityCanBeSensed => true;
         public override char Character => '~';
         public override Colour Colour => Colour.BrightYellow;
         public override string Name => "Orb";

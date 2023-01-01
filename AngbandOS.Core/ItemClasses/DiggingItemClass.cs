@@ -6,6 +6,7 @@
         public DiggingItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Digger;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
+        public override bool IdentityCanBeSensed => true;
         public override Colour Colour => Colour.Grey;
 
         public override void ApplyMagic(Item item, int level, int power)

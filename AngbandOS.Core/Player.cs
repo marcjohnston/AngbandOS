@@ -1318,44 +1318,12 @@ namespace AngbandOS
             }
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                bool okay = false;
                 Item item = Inventory[i];
                 if (item.BaseItemCategory == null)
                 {
                     continue;
                 }
-                switch (item.Category)
-                {
-                    case ItemTypeEnum.Shot:
-                    case ItemTypeEnum.Arrow:
-                    case ItemTypeEnum.Bolt:
-                    case ItemTypeEnum.Bow:
-                    case ItemTypeEnum.Digging:
-                    case ItemTypeEnum.Hafted:
-                    case ItemTypeEnum.Polearm:
-                    case ItemTypeEnum.Sword:
-                    case ItemTypeEnum.Boots:
-                    case ItemTypeEnum.Gloves:
-                    case ItemTypeEnum.Helm:
-                    case ItemTypeEnum.Crown:
-                    case ItemTypeEnum.Shield:
-                    case ItemTypeEnum.Cloak:
-                    case ItemTypeEnum.SoftArmor:
-                    case ItemTypeEnum.HardArmor:
-                    case ItemTypeEnum.DragArmor:
-                        {
-                            okay = true;
-                            break;
-                        }
-                    case ItemTypeEnum.Light: // Only orbs
-                        {
-                            if (item.ItemSubCategory == LightType.Orb)
-                            {
-                                okay = true;
-                            }
-                            break;
-                        }
-                }
+                bool okay = item.BaseItemCategory.IdentityCanBeSensed;
                 if (!okay)
                 {
                     continue;

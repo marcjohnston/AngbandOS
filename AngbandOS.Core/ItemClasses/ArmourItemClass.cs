@@ -5,11 +5,12 @@ namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     /// <summary>
-    /// Represents armour items.  Boots, clocks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
+    /// Represents armour items.  Boots, cloaks, crowns, dragon armour, gloves, hard armour, helm, shield and soft armour are all armour classes.
     /// </summary>
     internal abstract class ArmourItemClass : ItemClass
     {
         public ArmourItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override bool IdentityCanBeSensed => true;
         public override bool HasQuality => true;
 
         public override void ApplyRandartBonus(Item item)

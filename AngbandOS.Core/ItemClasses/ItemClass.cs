@@ -12,7 +12,8 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class ItemClass : IItemCharacteristics
     {
         public SaveGame SaveGame { get; }
-        public ItemClass(SaveGame saveGame) 
+
+        public ItemClass(SaveGame saveGame)
         {
             SaveGame = saveGame;
             FlavorCharacter = Character;
@@ -21,7 +22,12 @@ namespace AngbandOS.Core.ItemClasses
         /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
-        public virtual int WieldSlot => InventorySlot.Pack; 
+        public virtual int WieldSlot => InventorySlot.Pack;
+
+        /// <summary>
+        /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
+        /// </summary>
+        public virtual bool IdentityCanBeSensed => false;
 
         /// <summary>
         /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).

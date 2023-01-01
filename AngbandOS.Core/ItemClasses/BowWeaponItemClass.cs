@@ -12,6 +12,7 @@ namespace AngbandOS.Core.ItemClasses
         /// Returns a damage multiplier when the missile weapon is used.
         /// </summary>
         public virtual int MissileDamageMultiplier => 1;
+        public override bool IdentityCanBeSensed => true;
         public override int? SubCategory => null; // The subcategory for all bows have been resolved.
 
         public abstract ItemTypeEnum AmmunitionItemCategory { get; }
