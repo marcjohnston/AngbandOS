@@ -1,12 +1,11 @@
-﻿using AngbandOS.ArtifactBiases;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class BootsItemClass : ArmourItemClass
     {
         public BootsItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Feet;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<FeetInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;

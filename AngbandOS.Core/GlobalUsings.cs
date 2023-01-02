@@ -17,3 +17,4 @@ global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Projection;
 global using AngbandOS.Core.MonsterSelectors;
 global using AngbandOS.ArtifactBiases;
+global using AngbandOS.Core.InventorySlots;

@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     {
         public AmuletItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Neck;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<NeckInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {

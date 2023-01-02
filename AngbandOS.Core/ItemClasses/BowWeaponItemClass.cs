@@ -1,5 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-using static AngbandOS.Extensions;
+﻿using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
 {
@@ -8,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     {
         public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.RangedWeapon;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.
         /// </summary>

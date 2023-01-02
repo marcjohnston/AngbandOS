@@ -1,6 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     /// <summary>
     /// Represents common characteristics for melee weapons.  Hafted, polearm and swords are all melee weapons.
@@ -9,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class MeleeWeaponItemClass : WeaponItemClass
     {
         public MeleeWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
         protected virtual bool CanBeWeaponOfLaw => false;
         public override int WieldSlot => InventorySlot.MeleeWeapon;
         public override bool IdentityCanBeSensed => true;

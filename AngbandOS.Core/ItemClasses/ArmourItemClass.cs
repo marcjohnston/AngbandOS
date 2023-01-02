@@ -1,5 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-using static AngbandOS.Extensions;
+﻿using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
 {

@@ -1,5 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-using static AngbandOS.Extensions;
+﻿using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
 {
@@ -19,10 +18,16 @@ namespace AngbandOS.Core.ItemClasses
             FlavorCharacter = Character;
             FlavorColour = Colour;
         }
+
         /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
         public virtual int WieldSlot => InventorySlot.Pack;
+
+        /// <summary>
+        /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
+        /// </summary>
+        public virtual BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
 
         /// <summary>
         /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.

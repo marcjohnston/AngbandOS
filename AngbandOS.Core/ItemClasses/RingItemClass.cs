@@ -1,5 +1,4 @@
-﻿using AngbandOS.ArtifactBiases;
-using static AngbandOS.Extensions;
+﻿using static AngbandOS.Extensions;
 
 namespace AngbandOS.Core.ItemClasses
 {
@@ -7,7 +6,7 @@ namespace AngbandOS.Core.ItemClasses
     internal abstract class RingItemClass : JewelleryItemClass
     {
         public RingItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot 
+        public override int WieldSlot
         {
             get
             {
@@ -16,6 +15,18 @@ namespace AngbandOS.Core.ItemClasses
                     return InventorySlot.RightHand;
                 }
                 return InventorySlot.LeftHand;
+            }
+        }
+        public override BaseInventorySlot BaseWieldSlot
+        {
+            get
+            {
+                BaseInventorySlot rightHand = SaveGame.SingletonRepository.InventorySlots.Get<RightHandInventorySlot>();
+                if (rightHand.Count == 0)
+                {
+                    return rightHand;
+                }
+                return SaveGame.SingletonRepository.InventorySlots.Get<LeftHandInventorySlot>();
             }
         }
         public override bool HasFlavor => true;

@@ -7,6 +7,7 @@ namespace AngbandOS.Core.ItemClasses
     {
         public LightSourceItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Lightsource;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
         public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;

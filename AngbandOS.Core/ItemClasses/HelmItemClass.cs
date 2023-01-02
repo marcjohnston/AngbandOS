@@ -5,6 +5,7 @@
     {
         public HelmItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Head;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HeadInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
         public override bool HatesAcid => true;
 

@@ -14,6 +14,7 @@ namespace AngbandOS.Core
         public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
+        public SingletonFactory<BaseInventorySlot> InventorySlots;
 
         public void Initialize(SaveGame saveGame)
         {

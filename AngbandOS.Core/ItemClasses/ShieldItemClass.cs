@@ -1,12 +1,11 @@
-﻿using AngbandOS.ArtifactBiases;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class ShieldItemClass : ArmourItemClass
     {
         public ShieldItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.Arm;
+        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<ArmInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
         public override bool HatesAcid => true;
 
