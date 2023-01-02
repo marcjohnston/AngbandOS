@@ -894,6 +894,56 @@ namespace AngbandOS
             DiedFrom = "(alive and well)";
         }
 
+        /// <summary>
+        /// Returns a list of labels and label ranges to represent inventory slot selections.  Example: a,c-g
+        /// </summary>
+        /// <param name="inventorySlots"></param>
+        /// <returns></returns>
+        private string GetLabelRanges(IEnumerable<int> inventorySlots)
+        {
+            int[] inventorySlotsArray = inventorySlots.ToArray();
+            string ranges = "";
+            int? last = null;
+            int? current = null;
+            for (int i = 0; i < inventorySlotsArray.Length; i++)
+            {
+                int inventorySlot = inventorySlotsArray[i];
+                bool finish = false;
+                if (last == null)
+                {
+                    last = inventorySlot;
+                    current = inventorySlot;
+                }
+                else if (current + 1 == inventorySlot)
+                {
+                    current = inventorySlot;
+                }
+                else
+                {
+                    finish = true;
+                }
+                if (finish || i + 1 == inventorySlotsArray.Length)
+                { 
+                    if (ranges.Length > 0)
+                    {
+                        ranges += ",";
+                    } 
+                        
+                    if (last == current)
+                    {
+                        ranges += $"{last.Value.IndexToLabel()}";
+                    }
+                    else
+                    {
+                        ranges += $"{last.Value.IndexToLabel()}-{current.Value.IndexToLabel()}";
+                    }
+                    last = inventorySlot;
+                    current = inventorySlot;
+                }
+            }
+            return ranges;
+        }
+
         public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
@@ -904,33 +954,29 @@ namespace AngbandOS
             bool done = false;
             bool item = false;
             itemIndex = -1;
-            int i1 = 0;
-            int i2 = InventorySlot.PackCount - 1;
-            if (!canChooseFromInventory)
+            List<int> inventory = new List<int>();
+            List<int> equipment = new List<int>();
+            if (canChooseFromInventory)
             {
-                i2 = -1;
+                for (int ii = 0; ii < InventorySlot.PackCount; ii++)
+                {
+                    Item oPtr = Player.Inventory[ii];
+                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    {
+                        inventory.Add(ii);
+                    }
+                }
             }
-            while (i1 <= i2 && !Player.Inventory.GetItemOkay(i1, itemFilter))
+            if (canChooseFromEquipment)
             {
-                i1++;
-            }
-            while (i1 <= i2 && !Player.Inventory.GetItemOkay(i2, itemFilter))
-            {
-                i2--;
-            }
-            int e1 = InventorySlot.MeleeWeapon;
-            int e2 = InventorySlot.Total - 1;
-            if (!canChooseFromEquipment)
-            {
-                e2 = -1;
-            }
-            while (e1 <= e2 && !Player.Inventory.GetItemOkay(e1, itemFilter))
-            {
-                e1++;
-            }
-            while (e1 <= e2 && !Player.Inventory.GetItemOkay(e2, itemFilter))
-            {
-                e2--;
+                for (int ii = InventorySlot.MeleeWeapon; ii < InventorySlot.Total; ii++)
+                {
+                    Item oPtr = Player.Inventory[ii];
+                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    {
+                        equipment.Add(ii);
+                    }
+                }
             }
             if (canChooseFromFloor)
             {
@@ -944,7 +990,7 @@ namespace AngbandOS
                     }
                 }
             }
-            if (!allowFloor && i1 > i2 && e1 > e2)
+            if (!allowFloor && inventory.Count == 0 && equipment.Count == 0)
             {
                 ViewingItemList = false;
                 itemIndex = -2;
@@ -994,9 +1040,9 @@ namespace AngbandOS
                 if (!ViewingEquipment)
                 {
                     outVal = "Inven:";
-                    if (i1 <= i2)
+                    if (inventory.Count > 0)
                     {
-                        tmpVal = $" {i1.IndexToLabel()}-{i2.IndexToLabel()},";
+                        tmpVal = $" {GetLabelRanges(inventory)},";
                         outVal += tmpVal;
                     }
                     if (!ViewingItemList)
@@ -1011,9 +1057,9 @@ namespace AngbandOS
                 else
                 {
                     outVal = "Equip:";
-                    if (e1 <= e2)
+                    if (equipment.Count > 0)
                     {
-                        tmpVal = $" {e1.IndexToLabel()}-{e2.IndexToLabel()}";
+                        tmpVal = $" {GetLabelRanges(equipment)}";
                         outVal += tmpVal;
                     }
                     if (!ViewingItemList)
@@ -1099,11 +1145,11 @@ namespace AngbandOS
                         {
                             if (!ViewingEquipment)
                             {
-                                k = i1 == i2 ? i1 : -1;
+                                k = inventory.Count == 1 ? inventory[0] : -1;
                             }
                             else
                             {
-                                k = e1 == e2 ? e1 : -1;
+                                k = equipment.Count == 1 ? equipment[0] : -1;
                             }
                             if (!Player.Inventory.GetItemOkay(k, itemFilter))
                             {

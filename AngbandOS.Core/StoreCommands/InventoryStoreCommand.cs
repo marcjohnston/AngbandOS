@@ -34,6 +34,8 @@
             }
             else
             {
+                // If the player selected a command that needs to select an item, it will automatically
+                // show the inventory
                 saveGame.ViewingItemList = true;
             }
         }
