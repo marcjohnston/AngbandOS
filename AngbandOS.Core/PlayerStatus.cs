@@ -6,6 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using AngbandOS.Core.ItemCategories;
+using System.Collections.Immutable;
 
 namespace AngbandOS
 {
@@ -624,35 +625,14 @@ namespace AngbandOS
             }
             if ((SaveGame.Player.ProfessionIndex == CharacterClass.Monk || SaveGame.Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
             {
-                if (SaveGame.Player.Inventory[InventorySlot.Body].BaseItemCategory == null)
+                foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
                 {
-                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level * 3 / 2;
-                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level * 3 / 2;
-                }
-                if (SaveGame.Player.Inventory[InventorySlot.Cloak].BaseItemCategory == null && SaveGame.Player.Level > 15)
-                {
-                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
-                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 13) / 3;
-                }
-                if (SaveGame.Player.Inventory[InventorySlot.Arm].BaseItemCategory == null && SaveGame.Player.Level > 10)
-                {
-                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
-                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 8) / 3;
-                }
-                if (SaveGame.Player.Inventory[InventorySlot.Head].BaseItemCategory == null && SaveGame.Player.Level > 4)
-                {
-                    SaveGame.Player.ArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
-                    SaveGame.Player.DisplayedArmourClassBonus += (SaveGame.Player.Level - 2) / 3;
-                }
-                if (SaveGame.Player.Inventory[InventorySlot.Hands].BaseItemCategory == null)
-                {
-                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 2;
-                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 2;
-                }
-                if (SaveGame.Player.Inventory[InventorySlot.Feet].BaseItemCategory == null)
-                {
-                    SaveGame.Player.ArmourClassBonus += SaveGame.Player.Level / 3;
-                    SaveGame.Player.DisplayedArmourClassBonus += SaveGame.Player.Level / 3;
+                    if (inventorySlot.Count == 0)
+                    {
+                        int bareArmourBonus = inventorySlot.BareArmourClassBonus;
+                        SaveGame.Player.ArmourClassBonus += bareArmourBonus;
+                        SaveGame.Player.DisplayedArmourClassBonus += bareArmourBonus;
+                    }
                 }
             }
             if (SaveGame.Player.HasFireShield)
@@ -1246,12 +1226,21 @@ namespace AngbandOS
                 }
                 SaveGame.Player.HasRestrictingArmour = false;
                 int curWgt = 0;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Body].Weight;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Head].Weight;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Arm].Weight;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Cloak].Weight;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Hands].Weight;
-                curWgt += SaveGame.Player.Inventory[InventorySlot.Feet].Weight;
+                foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+                {
+                    if (inventorySlot.IsWeightRestricting)
+                    {
+                        Item item = SaveGame.Player.Inventory[inventorySlot.InventorySlotId];
+                        if (item.BaseItemCategory != null)
+                        {
+                            curWgt += item.Weight;
+                        }
+                        //foreach (Item item in inventorySlot)
+                        //{
+                        //    curWgt += item.Weight;
+                        //}
+                    }
+                }
                 int maxWgt = SaveGame.Player.Spellcasting.SpellWeight;
                 if ((curWgt - maxWgt) / 10 > 0)
                 {
@@ -1614,12 +1603,21 @@ namespace AngbandOS
             {
                 return false;
             }
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Body].Weight;
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Head].Weight;
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Arm].Weight;
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Cloak].Weight;
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Hands].Weight;
-            martialArtistArmWgt += SaveGame.Player.Inventory[InventorySlot.Feet].Weight;
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+            {
+                if (inventorySlot.IsArmour)
+                {
+                    Item item = SaveGame.Player.Inventory[inventorySlot.InventorySlotId];
+                    if (item.BaseItemCategory != null)
+                    {
+                        martialArtistArmWgt += item.Weight;
+                    }
+                    //foreach (Item item in inventorySlot)
+                    //{
+                    //    martialArtistArmWgt += item.Weight;
+                    //}
+                }
+            }
             return martialArtistArmWgt > 100 + (SaveGame.Player.Level * 4);
         }
 
