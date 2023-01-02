@@ -11,8 +11,13 @@ namespace AngbandOS
     [Serializable]
     internal abstract class Store : IItemFilter
     {
+        private int _x;
+        private int _y;
+
         protected readonly SaveGame SaveGame;
+
         public readonly StoreType StoreType;
+
         public virtual int PageSize => 26;
 
         /// <summary>
@@ -25,10 +30,23 @@ namespace AngbandOS
         /// </summary>
         public int Y => _y;
 
-        private int _x;
-        private int _y;
-
         private readonly List<Item> _inventory = new List<Item>();
+
+        protected virtual int CarryItem(Item qPtr) => StoreCarry(qPtr);
+
+        /// <summary>
+        /// Returns true, if the store will accept items from the player (e.g. sell or drop).
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public abstract bool ItemMatches(Item item);
+
+        /// <summary>
+        /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <returns></returns>
+        public virtual bool DoorsLocked(SaveGame saveGame) => false;
 
         /// <summary>
         /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
@@ -37,6 +55,10 @@ namespace AngbandOS
         private readonly int[] _table;
         private bool _leaveStore;
         private StoreOwner _owner;
+
+        /// <summary>
+        /// Represents the first item being displayed in a page of inventory items.
+        /// </summary>
         private int _storeTop;
 
         /// <summary>
@@ -70,6 +92,76 @@ namespace AngbandOS
         /// </summary>
         /// <returns></returns>
         protected abstract StockStoreInventoryItem[] GetStoreTable();
+
+        protected virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
+
+        public abstract string FeatureType { get; }
+
+        /// <summary>
+        /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will
+        /// automatically perform this shuffling.
+        /// </summary>
+        public virtual bool ShufflesOwnersAndPricing => true;
+
+        /// <summary>
+        /// Represents a pool of possible store owners for the store.
+        /// </summary>
+        protected abstract StoreOwner[] StoreOwners { get; }
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 42, 31.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual BaseStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 31.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual BaseStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 42, 56.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual BaseStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 56.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual BaseStoreCommand AdvertisedStoreCommand4 => null;
+
+        /// <summary>
+        /// Returns the store command that should be advertised to the player @ position 43, 0.
+        /// </summary>
+        /// <remarks>
+        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
+        /// won't affect game play.
+        /// </remarks>
+        protected virtual BaseStoreCommand AdvertisedStoreCommand5 => null;
+
+        /// <summary>
+        /// Returns the width of the description column for rendering items in the store inventory.
+        /// </summary>
+        protected virtual int WidthOfDescriptionColumn => 58;
+
+        /// <summary>
+        /// Returns whether the weight column should render the lb. units of measurement.  The players home has sufficient space to render, but the other stores do not.
+        /// </summary>
+        protected virtual bool RenderWeightUnitOfMeasurement => false;
 
         public Store(SaveGame saveGame, StoreType storeType)
         {
@@ -133,53 +225,6 @@ namespace AngbandOS
             _y = y;
         }
 
-        public abstract string FeatureType { get; }
-
-        /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 42, 31.
-        /// </summary>
-        /// <remarks>
-        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
-        /// won't affect game play.
-        /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
-
-        /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 43, 31.
-        /// </summary>
-        /// <remarks>
-        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
-        /// won't affect game play.
-        /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
-
-        /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 42, 56.
-        /// </summary>
-        /// <remarks>
-        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
-        /// won't affect game play.
-        /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
-
-        /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 43, 56.
-        /// </summary>
-        /// <remarks>
-        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
-        /// won't affect game play.
-        /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand4 => null;
-
-        /// <summary>
-        /// Returns the store command that should be advertised to the player @ position 43, 0.
-        /// </summary>
-        /// <remarks>
-        /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
-        /// won't affect game play.
-        /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand5 => null;
-
         private void RenderAdvertisedCommand(BaseStoreCommand command, int row, int col)
         {
             if (command != null)
@@ -187,8 +232,6 @@ namespace AngbandOS
                 SaveGame.PrintLine($" {command.Key}) {command.Description}.", row, col);
             }
         }
-
-        protected virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
 
         public virtual void EnterStore()
         {
@@ -321,14 +364,6 @@ namespace AngbandOS
             }
         }
 
-        /// <summary>
-        /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will
-        /// automatically perform this shuffling.
-        /// </summary>
-        public virtual bool ShufflesOwnersAndPricing => true;
-
-        protected abstract StoreOwner[] StoreOwners { get; }
-
         private StoreOwner GetRandomOwner()
         {
             return StoreOwners[Program.Rng.RandomLessThan(StoreOwners.Length)];
@@ -362,16 +397,6 @@ namespace AngbandOS
         {
             return oPtr.StoreDescription(true, 3);
         }
-
-        /// <summary>
-        /// Returns the width of the description column for rendering items in the store inventory.
-        /// </summary>
-        protected virtual int WidthOfDescriptionColumn => 58;
-
-        /// <summary>
-        /// Returns whether the weight column should render the lb. units of measurement.  The players home has sufficient space to render, but the other stores do not.
-        /// </summary>
-        protected virtual bool RenderWeightUnitOfMeasurement => false;
 
         private void DisplayEntry(int pos)
         {
@@ -2026,21 +2051,5 @@ namespace AngbandOS
                 DisplayInventory();
             }
         }
-
-        protected virtual int CarryItem(Item qPtr) => StoreCarry(qPtr);
-
-        /// <summary>
-        /// Returns true, if the store will accept items from the player (e.g. sell or drop).
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public abstract bool ItemMatches(Item item);
-
-        /// <summary>
-        /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        /// <returns></returns>
-        public virtual bool DoorsLocked(SaveGame saveGame) => false;
     }
 }
