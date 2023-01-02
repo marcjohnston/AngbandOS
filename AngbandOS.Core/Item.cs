@@ -6,7 +6,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.�
 using AngbandOS.ActivationPowers;
-using AngbandOS.ArtifactBiases;
 using AngbandOS.Core.FixedArtifacts;
 using AngbandOS.Core.ItemCategories;
 
