@@ -17,8 +17,6 @@
 
         public static void DoCmdWield(SaveGame saveGame)
         {
-            string weildPhrase;
-            string itemName;
             // Only interested in wearable items
             if (!saveGame.GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
             {
@@ -31,6 +29,7 @@
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Find the correct item slot
             int slot = item.BaseItemCategory.WieldSlot;
+            string itemName;
             // Can't replace a cursed item
             if (saveGame.Player.Inventory[slot].IsCursed())
             {
@@ -74,28 +73,10 @@
             // Add the weight of the item
             saveGame.Player.WeightCarried += wornItem.Weight;
             // Inform us what we did
-            if (slot == InventorySlot.MeleeWeapon)
-            {
-                weildPhrase = "You are wielding";
-            }
-            else if (slot == InventorySlot.RangedWeapon)
-            {
-                weildPhrase = "You are shooting with";
-            }
-            else if (slot == InventorySlot.Lightsource)
-            {
-                weildPhrase = "Your light source is";
-            }
-            else if (slot == InventorySlot.Digger)
-            {
-                weildPhrase = "You are digging with";
-            }
-            else
-            {
-                weildPhrase = "You are wearing";
-            }
+            BaseInventorySlot inventorySlot = saveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlotId == slot);
+            string wieldPhrase = inventorySlot.WieldPhrase;
             itemName = wornItem.Description(true, 3);
-            saveGame.MsgPrint($"{weildPhrase} {itemName} ({slot.IndexToLabel()}).");
+            saveGame.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
             // Let us know if it's cursed
             if (wornItem.IsCursed())
             {
