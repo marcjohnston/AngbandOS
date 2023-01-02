@@ -18,11 +18,28 @@
         {
             int itemIndex = -999;
 
-            // Make sure we actually have a light source to refuel
-            Item lightSource = saveGame.Player.Inventory[InventorySlot.Lightsource];
-            if (lightSource.Category != ItemTypeEnum.Light)
+            // Make sure we actually have a light source to refuel.           
+            BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.WeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+
+            // Check to ensure there is an inventory slot for light sources.
+            if (chosenLightSourceInventorySlot == null)
             {
                 saveGame.MsgPrint("You are not wielding a light.");
+                return;
+            }
+
+            //// Now choose a light source item.
+            //Item? lightSource = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+            //if (lightSource == null)
+            //{
+            //    saveGame.MsgPrint("You are not wielding a light.");
+            //}
+
+            Item lightSource = saveGame.Player.Inventory[chosenLightSourceInventorySlot.InventorySlotId];
+            if (lightSource.BaseItemCategory == null)
+            {
+                saveGame.MsgPrint("You are not wielding a light.");
+                return;
             }
             else if (lightSource.ItemSubCategory == LightType.Lantern)
             {

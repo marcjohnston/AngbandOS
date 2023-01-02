@@ -16,7 +16,31 @@ namespace AngbandOS.Core.AttackEffects
         public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
         {
             saveGame.Player.TakeHit(damage, monsterDescription);
-            Item item = saveGame.Player.Inventory[InventorySlot.Lightsource];
+
+            // Choose an inventory slot for lights.
+            BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.WeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+
+            // Check to see if there are no slots.
+            if (chosenLightSourceInventorySlot == null)
+            {
+                return;
+            }
+
+            // Get a random light source            
+            //Item? item = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+
+            // Check if there were no choices.
+            //if (chosenLightSourceInventorySlot == null)
+            //{
+            //    return;
+            //}
+
+            Item item = saveGame.Player.Inventory[chosenLightSourceInventorySlot.InventorySlotId];
+            if (item.BaseItemCategory == null)
+            {
+                return;
+            }
+
             // Only dim lights that consume fuel
             if (item.TypeSpecificValue > 0 && !item.IsFixedArtifact())
             {
