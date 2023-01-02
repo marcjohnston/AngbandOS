@@ -571,78 +571,8 @@ namespace AngbandOS
 
         public string DescribeWieldLocation(int index)
         {
-            string p;
-            switch (index)
-            {
-                case InventorySlot.MeleeWeapon:
-                    p = "attacking monsters with";
-                    break;
-
-                case InventorySlot.RangedWeapon:
-                    p = "shooting missiles with";
-                    break;
-
-                case InventorySlot.LeftHand:
-                    p = "wearing on your left hand";
-                    break;
-
-                case InventorySlot.RightHand:
-                    p = "wearing on your right hand";
-                    break;
-
-                case InventorySlot.Neck:
-                    p = "wearing around your neck";
-                    break;
-
-                case InventorySlot.Lightsource:
-                    p = "using to light the way";
-                    break;
-
-                case InventorySlot.Body:
-                    p = "wearing on your body";
-                    break;
-
-                case InventorySlot.Cloak:
-                    p = "wearing on your back";
-                    break;
-
-                case InventorySlot.Arm:
-                    p = "wearing on your arm";
-                    break;
-
-                case InventorySlot.Head:
-                    p = "wearing on your head";
-                    break;
-
-                case InventorySlot.Hands:
-                    p = "wearing on your hands";
-                    break;
-
-                case InventorySlot.Feet:
-                    p = "wearing on your feet";
-                    break;
-
-                default:
-                    p = "carrying in your pack";
-                    break;
-            }
-            if (index == InventorySlot.MeleeWeapon)
-            {
-                Item oPtr = Inventory[index];
-                if (AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "just lifting";
-                }
-            }
-            if (index == InventorySlot.RangedWeapon)
-            {
-                Item oPtr = Inventory[index];
-                if (AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "just holding";
-                }
-            }
-            return p;
+            BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlotId == index);
+            return inventorySlot.DescribeWieldLocation;
         }
 
         public void GainExperience(int amount)
