@@ -3506,42 +3506,16 @@ namespace AngbandOS
 
         public bool ApplyDisenchant()
         {
-            int t = 0;
-            switch (Program.Rng.DieRoll(8))
+            BaseInventorySlot? t = new DisenchantInventorySlotWeightedRandom(this).Choose();
+
+            if (t == null)
             {
-                case 1:
-                    t = InventorySlot.MeleeWeapon;
-                    break;
-
-                case 2:
-                    t = InventorySlot.RangedWeapon;
-                    break;
-
-                case 3:
-                    t = InventorySlot.Body;
-                    break;
-
-                case 4:
-                    t = InventorySlot.Cloak;
-                    break;
-
-                case 5:
-                    t = InventorySlot.Arm;
-                    break;
-
-                case 6:
-                    t = InventorySlot.Head;
-                    break;
-
-                case 7:
-                    t = InventorySlot.Hands;
-                    break;
-
-                case 8:
-                    t = InventorySlot.Feet;
-                    break;
+                // There are no inventory slots capable of being disenchanted.
+                return false;
             }
-            Item oPtr = Player.Inventory[t];
+            Item oPtr = Player.Inventory[t.InventorySlotId];
+
+            // The chosen slot does not have an item to disenchant.
             if (oPtr.BaseItemCategory == null)
             {
                 return false;
@@ -3552,11 +3526,10 @@ namespace AngbandOS
             }
             string oName = oPtr.Description(false, 0);
             string s;
-            if ((oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false) &&
-                Program.Rng.RandomLessThan(100) < 71)
+            if ((oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false) && Program.Rng.RandomLessThan(100) < 71)
             {
                 s = oPtr.Count != 1 ? "" : "s";
-                MsgPrint($"Your {oName} ({t.IndexToLabel()}) resist{s} disenchantment!");
+                MsgPrint($"Your {oName} ({t.Label(0)}) resist{s} disenchantment!");
                 return true;
             }
             if (oPtr.BonusToHit > 0)
@@ -3584,7 +3557,7 @@ namespace AngbandOS
                 oPtr.BonusArmourClass--;
             }
             s = oPtr.Count != 1 ? "were" : "was";
-            MsgPrint($"Your {oName} ({t.IndexToLabel()}) {s} disenchanted!");
+            MsgPrint($"Your {oName} ({t.Label(0)}) {s} disenchanted!");
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             return true;
         }

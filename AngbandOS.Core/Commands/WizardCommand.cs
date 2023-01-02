@@ -71,6 +71,10 @@ namespace AngbandOS.Commands
                     saveGame.DetectAll();
                     break;
 
+                case 'D':
+                    saveGame.ApplyDisenchant();
+                    break;
+
                 case 'e':
                     DoCmdWizChange(saveGame);
                     break;

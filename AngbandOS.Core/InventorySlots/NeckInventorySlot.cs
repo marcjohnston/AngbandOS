@@ -11,7 +11,8 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class NeckInventorySlot : BaseInventorySlot
     {
-        public NeckInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private NeckInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        public override int InventorySlotId => InventorySlot.Neck;
         public override string Label(int index) => "f";
         public override string MentionUse => "Around neck";
         public override string DescribeWieldLocation => "wearing around your neck";

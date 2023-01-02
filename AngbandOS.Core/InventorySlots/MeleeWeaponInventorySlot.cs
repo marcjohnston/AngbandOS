@@ -11,7 +11,8 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class MeleeWeaponInventorySlot : BaseInventorySlot
     {
-        public MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        public override int InventorySlotId => InventorySlot.MeleeWeapon;
         public override string Label(int index) => "a";
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are wielding";

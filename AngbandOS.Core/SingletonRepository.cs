@@ -21,6 +21,7 @@ namespace AngbandOS.Core
             GameCommands = new SingletonFactory<ICommand>(saveGame);
             ItemCategories = new SingletonFactory<ItemClass>(saveGame);
             BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
+            InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame);
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

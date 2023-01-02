@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class FeetInventorySlot : BaseInventorySlot
     {
-        public FeetInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private FeetInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "m";
+        public override int InventorySlotId => InventorySlot.Feet;
         public override string MentionUse => "On feet";
         public override string DescribeWieldLocation => "wearing on your feet";
         public override int BareArmourClassBonus => SaveGame.Player.Level / 3;

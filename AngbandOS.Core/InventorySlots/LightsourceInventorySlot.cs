@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class LightsourceInventorySlot : BaseInventorySlot
     {
-        public LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "g";
+        public override int InventorySlotId => InventorySlot.Lightsource;
         public override string MentionUse => "Light source";
         public override string DescribeWieldLocation => "using to light the way";
         public override string WieldPhrase => "Your light source is";

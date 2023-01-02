@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class HandsInventorySlot : BaseInventorySlot
     {
-        public HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "l";
+        public override int InventorySlotId => InventorySlot.Hands;
         public override string MentionUse => "On hands";
         public override string DescribeWieldLocation => "wearing on your hands";
         public override int BareArmourClassBonus => SaveGame.Player.Level > 4 ? SaveGame.Player.Level / 2 : 0;

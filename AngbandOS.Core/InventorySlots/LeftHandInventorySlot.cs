@@ -11,7 +11,8 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class LeftHandInventorySlot : BaseInventorySlot
     {
-        public LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        public override int InventorySlotId => InventorySlot.LeftHand;
         public override string Label(int index) => "d";
         public override string MentionUse => "On left hand";
         public override string DescribeWieldLocation => "wearing on your left hand";

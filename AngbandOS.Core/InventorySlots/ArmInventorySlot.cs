@@ -11,7 +11,8 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class ArmInventorySlot : BaseInventorySlot
     {
-        public ArmInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private ArmInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        public override int InventorySlotId => InventorySlot.Arm;
         public override string Label(int index) => "j";
         public override string MentionUse => "On arm";
         public override string DescribeWieldLocation => "wearing on your arm";

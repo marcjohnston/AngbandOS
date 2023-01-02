@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class HeadInventorySlot : BaseInventorySlot
     {
-        public HeadInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private HeadInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "k";
+        public override int InventorySlotId => InventorySlot.Head;
         public override string MentionUse => "On head";
         public override string DescribeWieldLocation => "wearing on your head";
         public override int BareArmourClassBonus => (SaveGame.Player.Level - 2) / 3;

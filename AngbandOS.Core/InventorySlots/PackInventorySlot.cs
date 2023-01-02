@@ -11,7 +11,7 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class PackInventorySlot : BaseInventorySlot
     {
-        public PackInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private PackInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => alphabet[index].ToString();
         public override string MentionUse => "In pack";
         public override string SenseLocation => "in your pack";

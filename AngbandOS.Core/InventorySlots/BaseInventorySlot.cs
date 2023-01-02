@@ -15,11 +15,12 @@ namespace AngbandOS.Core.InventorySlots
     {
         protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
         public SaveGame SaveGame { get; }
-        public BaseInventorySlot(SaveGame saveGame)
+        protected BaseInventorySlot(SaveGame saveGame)
         {
             SaveGame = saveGame;
         }
         private List<Item> Items = new List<Item>();
+        public virtual int InventorySlotId => InventorySlot.Pack;
         public abstract string Label(int index);
 
         public virtual string SenseLocation => $"you are {DescribeWieldLocation}";

@@ -11,7 +11,8 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class DiggerInventorySlot : BaseInventorySlot
     {
-        public DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        public override int InventorySlotId => InventorySlot.Digger;
         public override string Label(int index) => "c";
         public override string MentionUse => "Digging with";
         public override string DescribeWieldLocation => "carrying in your pack";

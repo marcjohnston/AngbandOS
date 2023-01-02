@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class CloakInventorySlot : BaseInventorySlot
     {
-        public CloakInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private CloakInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "i";
+        public override int InventorySlotId => InventorySlot.Cloak;
         public override string MentionUse => "About body";
         public override string DescribeWieldLocation => "wearing on your back";
         public override int BareArmourClassBonus => SaveGame.Player.Level > 15 ? (SaveGame.Player.Level - 13) / 3 : 0;

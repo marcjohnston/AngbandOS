@@ -11,8 +11,9 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class RangedWeaponInventorySlot : BaseInventorySlot
     {
-        public RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+        private RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "b";
+        public override int InventorySlotId => InventorySlot.RangedWeapon;
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are shooting with";
         public override string MentionUse
