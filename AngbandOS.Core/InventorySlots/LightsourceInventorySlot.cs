@@ -13,9 +13,9 @@ namespace AngbandOS.Core.InventorySlots
     {
         private LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "g";
-        public override int InventorySlotId => InventorySlot.Lightsource;
-        public override string MentionUse => "Light source";
-        public override string DescribeWieldLocation => "using to light the way";
+        public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };
+        public override string MentionUse(int index) => "Light source";
+        public override string DescribeWieldLocation(int index) => "using to light the way";
         public override string WieldPhrase => "Your light source is";
         public override bool ProvidesLight => true;
     }

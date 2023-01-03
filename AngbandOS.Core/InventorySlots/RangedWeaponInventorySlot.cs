@@ -13,41 +13,37 @@ namespace AngbandOS.Core.InventorySlots
     {
         private RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "b";
-        public override int InventorySlotId => InventorySlot.RangedWeapon;
+        public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are shooting with";
-        public override string MentionUse
+        public override string MentionUse(int index)
         {
-            get
+            string p = "Shooting";
+            if (Count > 0)
             {
-                string p = "Shooting";
-                if (Count > 0)
+                int i = InventorySlots[index];
+                Item oPtr = SaveGame.Player.Inventory[i];
+                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
-                    Item oPtr = this[0];
-                    if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                    {
-                        p = "Just holding";
-                    }
+                    p = "Just holding";
                 }
-                return p;
             }
+            return p;
         }
 
-        public override string DescribeWieldLocation
+        public override string DescribeWieldLocation(int index)
         {
-            get
+            string p = "shooting missiles with";
+            if (Count > 0)
             {
-                string p = "shooting missiles with";
-                if (Count > 0)
+                int i = InventorySlots[index];
+                Item oPtr = SaveGame.Player.Inventory[i];
+                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
-                    Item oPtr = this[0];
-                    if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                    {
-                        p = "just holding";
-                    }
+                    p = "just holding";
                 }
-                return p;
             }
+            return p;
         }
     }
 }

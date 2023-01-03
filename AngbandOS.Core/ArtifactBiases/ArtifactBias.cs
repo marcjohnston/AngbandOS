@@ -1,6 +1,4 @@
-﻿using AngbandOS.ActivationPowers;
-
-namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.ArtifactBiases
 {
     /// <summary>
     /// Represents the bias used when applying special abilities to an artifact.

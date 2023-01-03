@@ -5,13 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.ActivationPowers;
 using AngbandOS.Core.ChestTrapConfigurations;
-using AngbandOS.Core.ItemCategories;
-using AngbandOS.Core.Races;
 using AngbandOS.Core.RoomTypes;
-using AngbandOS.Mutations;
-using AngbandOS.Patrons;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -1630,7 +1625,7 @@ namespace AngbandOS
             }
         }
 
-        private void CreateWorld()
+        private void CreateWorld()  // TODO: This method participated in a hang during startup
         {
             int i;
             int j;
@@ -3506,14 +3501,17 @@ namespace AngbandOS
 
         public bool ApplyDisenchant()
         {
-            BaseInventorySlot? t = new DisenchantInventorySlotWeightedRandom(this).Choose();
-
-            if (t == null)
+            // Select an inventory slot where items can be disenchanted.
+            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).Choose();
+            if (inventorySlot == null)
             {
                 // There are no inventory slots capable of being disenchanted.
                 return false;
             }
-            Item oPtr = Player.Inventory[t.InventorySlotId];
+
+            // Select an item in the inventory slot to be disenchanted.
+            int i = inventorySlot.WeightedRandom.Choose();
+            Item oPtr = Player.Inventory[i];
 
             // The chosen slot does not have an item to disenchant.
             if (oPtr.BaseItemCategory == null)
@@ -3529,7 +3527,7 @@ namespace AngbandOS
             if ((oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false) && Program.Rng.RandomLessThan(100) < 71)
             {
                 s = oPtr.Count != 1 ? "" : "s";
-                MsgPrint($"Your {oName} ({t.Label(0)}) resist{s} disenchantment!");
+                MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
                 return true;
             }
             if (oPtr.BonusToHit > 0)
@@ -3557,7 +3555,7 @@ namespace AngbandOS
                 oPtr.BonusArmourClass--;
             }
             s = oPtr.Count != 1 ? "were" : "was";
-            MsgPrint($"Your {oName} ({t.Label(0)}) {s} disenchanted!");
+            MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             return true;
         }

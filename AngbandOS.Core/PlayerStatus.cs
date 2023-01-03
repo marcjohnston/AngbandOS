@@ -1,14 +1,4 @@
-﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
-using AngbandOS.Core.ItemCategories;
-using System.Collections.Immutable;
-
-namespace AngbandOS
+﻿namespace AngbandOS
 {
     internal class PlayerStatus
     {
@@ -1230,15 +1220,18 @@ namespace AngbandOS
                 {
                     if (inventorySlot.IsWeightRestricting)
                     {
-                        Item item = SaveGame.Player.Inventory[inventorySlot.InventorySlotId];
-                        if (item.BaseItemCategory != null)
+                        foreach (int index in inventorySlot)
                         {
-                            curWgt += item.Weight;
+                            Item item = SaveGame.Player.Inventory[index];
+                            if (item.BaseItemCategory != null)
+                            {
+                                curWgt += item.Weight;
+                            }
+                            //foreach (Item item in inventorySlot)
+                            //{
+                            //    curWgt += item.Weight;
+                            //}
                         }
-                        //foreach (Item item in inventorySlot)
-                        //{
-                        //    curWgt += item.Weight;
-                        //}
                     }
                 }
                 int maxWgt = SaveGame.Player.Spellcasting.SpellWeight;
@@ -1607,15 +1600,18 @@ namespace AngbandOS
             {
                 if (inventorySlot.IsArmour)
                 {
-                    Item item = SaveGame.Player.Inventory[inventorySlot.InventorySlotId];
-                    if (item.BaseItemCategory != null)
+                    foreach (int index in inventorySlot)
                     {
-                        martialArtistArmWgt += item.Weight;
+                        Item item = SaveGame.Player.Inventory[index];
+                        if (item.BaseItemCategory != null)
+                        {
+                            martialArtistArmWgt += item.Weight;
+                        }
+                        //foreach (Item item in inventorySlot)
+                        //{
+                        //    martialArtistArmWgt += item.Weight;
+                        //}
                     }
-                    //foreach (Item item in inventorySlot)
-                    //{
-                    //    martialArtistArmWgt += item.Weight;
-                    //}
                 }
             }
             return martialArtistArmWgt > 100 + (SaveGame.Player.Level * 4);

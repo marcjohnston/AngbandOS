@@ -13,9 +13,9 @@ namespace AngbandOS.Core.InventorySlots
     {
         private HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "l";
-        public override int InventorySlotId => InventorySlot.Hands;
-        public override string MentionUse => "On hands";
-        public override string DescribeWieldLocation => "wearing on your hands";
+        public override int[] InventorySlots => new int[] { InventorySlot.Hands };
+        public override string MentionUse(int index) => "On hands";
+        public override string DescribeWieldLocation(int index) => "wearing on your hands";
         public override int BareArmourClassBonus => SaveGame.Player.Level > 4 ? SaveGame.Player.Level / 2 : 0;
         public override bool IsWeightRestricting => true;
         public override bool IsArmour => true;

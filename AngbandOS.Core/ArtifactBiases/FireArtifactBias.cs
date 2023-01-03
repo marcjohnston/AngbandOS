@@ -1,6 +1,4 @@
-﻿using AngbandOS.ActivationPowers;
-
-namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.ArtifactBiases
 {
     internal class FireArtifactBias : ArtifactBias
     {

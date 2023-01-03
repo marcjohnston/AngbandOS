@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Races;
-
-namespace AngbandOS.Stores
+﻿namespace AngbandOS.Stores
 {
     [Serializable]
     internal class PawnStore : Store

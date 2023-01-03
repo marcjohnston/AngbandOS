@@ -1,6 +1,4 @@
-﻿using AngbandOS.ActivationPowers;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     [Serializable]
     internal class WizardCommand : ICommand
@@ -150,6 +148,11 @@ namespace AngbandOS.Commands
                     }
                     DoCmdWizSummon(saveGame, saveGame.CommandArgument);
                     break;
+
+                case 'S':
+                    saveGame.Player.SenseInventory();
+                    break;
+
 
                 case 't':
                     saveGame.TeleportPlayer(100);

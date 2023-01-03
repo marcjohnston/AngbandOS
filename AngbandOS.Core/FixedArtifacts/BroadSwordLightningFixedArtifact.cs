@@ -1,5 +1,3 @@
-using AngbandOS.Core.ItemCategories;
-
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]

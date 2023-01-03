@@ -12,42 +12,38 @@ namespace AngbandOS.Core.InventorySlots
     internal class MeleeWeaponInventorySlot : BaseInventorySlot
     {
         private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int InventorySlotId => InventorySlot.MeleeWeapon;
+        public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
         public override string Label(int index) => "a";
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are wielding";
-        public override string MentionUse
+        public override string MentionUse(int index)
         {
-            get
+            string p = "Wielding";
+            if (Count > 0)
             {
-                string p = "Wielding";
-                if (Count > 0)
+                int i = InventorySlots[index];
+                Item oPtr = SaveGame.Player.Inventory[i];
+                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
-                    Item oPtr = this[0];
-                    if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                    {
-                        p = "Just lifting";
-                    }
+                    p = "Just lifting";
                 }
-                return p;
             }
+            return p;
         }
 
-        public override string DescribeWieldLocation
+        public override string DescribeWieldLocation(int index)
         {
-            get
+            string p = "attacking monsters with";
+            if (Count > 0)
             {
-                string p = "attacking monsters with";
-                if (Count > 0)
+                int i = InventorySlots[index];
+                Item oPtr = SaveGame.Player.Inventory[i];
+                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
-                    Item oPtr = this[0];
-                    if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                    {
-                        p = "just lifting";
-                    }
+                    p = "just lifting";
                 }
-                return p;
             }
+            return p;
         }
     }
 }

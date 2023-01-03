@@ -28,6 +28,14 @@
                 return;
             }
 
+            // Now choose a light source item.
+            int? i = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+            if (i == null)
+            {
+                saveGame.MsgPrint("You are not wielding a light.");
+                return;
+            }
+
             //// Now choose a light source item.
             //Item? lightSource = chosenLightSourceInventorySlot.WeightedRandom.Choose();
             //if (lightSource == null)
@@ -35,7 +43,7 @@
             //    saveGame.MsgPrint("You are not wielding a light.");
             //}
 
-            Item lightSource = saveGame.Player.Inventory[chosenLightSourceInventorySlot.InventorySlotId];
+            Item lightSource = saveGame.Player.Inventory[i.Value];
             if (lightSource.BaseItemCategory == null)
             {
                 saveGame.MsgPrint("You are not wielding a light.");

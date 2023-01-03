@@ -1,5 +1,4 @@
-﻿using AngbandOS.Core.FixedArtifacts;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace AngbandOS.Core
 {

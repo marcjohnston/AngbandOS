@@ -1,14 +1,3 @@
-// Cthangband: � 1997 - 2022 Dean Anderson; Based on Angband: � 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: � 1985 Robert Alan Koeneke and Umoria: � 1989 James E.Wilson
-//
-// This game is released under the �Angband License�, defined as: �� 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.�
-using AngbandOS.Core.Races;
-using AngbandOS.Mutations;
-using AngbandOS.Patrons;
-
 namespace AngbandOS
 {
     [Serializable]
@@ -571,8 +560,8 @@ namespace AngbandOS
 
         public string DescribeWieldLocation(int index)
         {
-            BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlotId == index);
-            return inventorySlot.DescribeWieldLocation;
+            BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
+            return inventorySlot.DescribeWieldLocation(index);
         }
 
         public void GainExperience(int amount)
@@ -1246,54 +1235,50 @@ namespace AngbandOS
                         break;
                     }
             }
-            for (int i = 0; i < InventorySlot.Total; i++)
+
+            // Enumerate each of the inventory slots.
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
             {
-                Item item = Inventory[i];
-                if (item.BaseItemCategory == null)
+                // Enumerate each of the items in the inventory slot.
+                foreach (int i in inventorySlot)
                 {
-                    continue;
-                }
-                bool okay = item.BaseItemCategory.IdentityCanBeSensed;
-                if (!okay)
-                {
-                    continue;
-                }
-                if (item.IdentSense)
-                {
-                    continue;
-                }
-                if (item.IsKnown())
-                {
-                    continue;
-                }
-                if (i < InventorySlot.MeleeWeapon && 0 != Program.Rng.RandomLessThan(5))
-                {
-                    continue;
-                }
-                string feel = detailed ? item.GetDetailedFeeling() : item.GetVagueFeeling();
-                if (string.IsNullOrEmpty(feel))
-                {
-                    continue;
-                }
-                string oName = item.Description(false, 0);
-                if (i >= InventorySlot.MeleeWeapon)
-                {
+                    Item item = Inventory[i];
+                    if (item.BaseItemCategory == null)
+                    {
+                        continue;
+                    }
+                    bool okay = item.BaseItemCategory.IdentityCanBeSensed;
+                    if (!okay)
+                    {
+                        continue;
+                    }
+                    if (item.IdentSense)
+                    {
+                        continue;
+                    }
+                    if (item.IsKnown())
+                    {
+                        continue;
+                    }
+                    if (!inventorySlot.IdentitySenseChanceTest)
+                    {
+                        continue;
+                    }
+                    string feel = detailed ? item.GetDetailedFeeling() : item.GetVagueFeeling();
+                    if (string.IsNullOrEmpty(feel))
+                    {
+                        continue;
+                    }
+                    string oName = item.Description(false, 0);
                     string isare = item.Count == 1 ? "is" : "are";
-                    SaveGame.MsgPrint(
-                        $"You feel the {oName} ({i.IndexToLabel()}) you are {DescribeWieldLocation(i)} {isare} {feel}...");
+                    SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation} {isare} {feel}...");
+                    item.IdentSense = true;
+                    if (string.IsNullOrEmpty(item.Inscription))
+                    {
+                        item.Inscription = feel;
+                    }
+                    NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
                 }
-                else
-                {
-                    string isare = item.Count == 1 ? "is" : "are";
-                    SaveGame.MsgPrint(
-                        $"You feel the {oName} ({i.IndexToLabel()}) in your pack {isare} {feel}...");
-                }
-                item.IdentSense = true;
-                if (string.IsNullOrEmpty(item.Inscription))
-                {
-                    item.Inscription = feel;
-                }
-                NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             }
         }
 

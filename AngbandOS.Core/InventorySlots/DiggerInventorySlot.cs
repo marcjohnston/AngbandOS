@@ -12,10 +12,10 @@ namespace AngbandOS.Core.InventorySlots
     internal class DiggerInventorySlot : BaseInventorySlot
     {
         private DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int InventorySlotId => InventorySlot.Digger;
+        public override int[] InventorySlots => new int[] { InventorySlot.Digger };
         public override string Label(int index) => "c";
-        public override string MentionUse => "Digging with";
-        public override string DescribeWieldLocation => "carrying in your pack";
+        public override string MentionUse(int index) => "Digging with";
+        public override string DescribeWieldLocation(int index) => "carrying in your pack";
         public override string WieldPhrase => "You are digging with";
     }
 }

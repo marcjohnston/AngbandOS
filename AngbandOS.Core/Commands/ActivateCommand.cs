@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.FixedArtifacts;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Activate an artifact or similar

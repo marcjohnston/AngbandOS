@@ -11,7 +11,7 @@ using System.Collections;
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal abstract class BaseInventorySlot : IEnumerable<Item>
+    internal abstract class BaseInventorySlot : IEnumerable<int>
     {
         protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
         public SaveGame SaveGame { get; }
@@ -20,12 +20,12 @@ namespace AngbandOS.Core.InventorySlots
             SaveGame = saveGame;
         }
         private List<Item> Items = new List<Item>();
-        public virtual int InventorySlotId => InventorySlot.Pack;
+        public abstract int[] InventorySlots { get; }
         public abstract string Label(int index);
 
         public virtual string SenseLocation => $"you are {DescribeWieldLocation}";
 
-        public WeightedRandom<Item> WeightedRandom => new WeightedRandom<Item>(Items);
+        public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(InventorySlots);
 
         /// <summary>
         /// Returns true, if the inventory slot provides light; false, otherwise.  Returns false, by default.
@@ -60,7 +60,8 @@ namespace AngbandOS.Core.InventorySlots
         public virtual bool IsArmour => false;
 
         /// <summary>
-        /// Returns true, if items in the slot are restricting, based on their weight.  Returns false, by default.
+        /// Returns true, if items in the slot restrict player movement.  When true, the weight of the item may adversely affect the movement of the
+        /// player.  Returns false, by default.
         /// </summary>
         public virtual bool IsWeightRestricting => false;
 
@@ -76,20 +77,42 @@ namespace AngbandOS.Core.InventorySlots
         /// </summary>
         public virtual bool IdentitySenseChanceTest => true;
 
-        public IEnumerator<Item> GetEnumerator()
+        /// <summary>
+        /// Returns a string that describes how an item in the inventory slot is being used.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public abstract string MentionUse(int index);
+
+        /// <summary>
+        /// Returns a string that describes the wielding location of an item in the slot.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public abstract string DescribeWieldLocation(int index);
+
+        public IEnumerator<int> GetEnumerator()
         {
-            return Items.GetEnumerator();
+            IEnumerable<int> inventorySlots = InventorySlots;
+            return inventorySlots.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Items.GetEnumerator();
+            return InventorySlots.GetEnumerator();
         }
 
-        public abstract string MentionUse { get; }
-        public abstract string DescribeWieldLocation { get; }
+        /// <summary>
+        /// Returns the quantity of items in the inventory slot.
+        /// </summary>
         public virtual int Count => Items.Count;
-        public virtual Item this[int index] => Items[index];
+
+        /// <summary>
+        /// Returns the item in a specific inventory slot position.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public virtual int this[int index] => InventorySlots[index];
 
         /// <summary>
         /// Returns a bonus for armour class, for Monk and Mystic character classes when the player doesn't have use the slot.

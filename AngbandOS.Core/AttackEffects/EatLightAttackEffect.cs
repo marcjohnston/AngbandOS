@@ -35,7 +35,15 @@ namespace AngbandOS.Core.AttackEffects
             //    return;
             //}
 
-            Item item = saveGame.Player.Inventory[chosenLightSourceInventorySlot.InventorySlotId];
+            // Choose an item in from the inventory slot.
+            int? i = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+
+            if (i == null)
+            {
+                return;
+            }
+
+            Item item = saveGame.Player.Inventory[i.Value];
             if (item.BaseItemCategory == null)
             {
                 return;
