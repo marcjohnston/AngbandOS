@@ -35,11 +35,11 @@ namespace AngbandOS
                 ((wildX - 1) * (Constants.WildernessWidth - 1)) + x + 1];
         }
 
-        public void MakeIslandContours()
+        public void MakeIslandContours() // TODO: This method participated in a hang during startup
         {
-            bool reject = false;
             do
             {
+                bool reject = false;
                 PerlinNoise perlinNoise = new PerlinNoise(Program.Rng.RandomLessThan(int.MaxValue - 1));
                 const int mapWidth = (10 * (Constants.WildernessWidth - 1)) + 3;
                 const int mapHeight = (10 * (Constants.WildernessHeight - 1)) + 3;
@@ -90,11 +90,11 @@ namespace AngbandOS
                         reject = true;
                     }
                 }
-                if (reject)
+                if (!reject)
                 {
-                    continue;
+                    break;
                 }
-            } while (reject);
+            } while (true);
         }
     }
 }
