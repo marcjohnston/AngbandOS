@@ -24,3 +24,6 @@ global using AngbandOS.Core.FixedArtifacts;
 global using AngbandOS.Patrons;
 global using AngbandOS.Mutations;
 global using AngbandOS.Core.Races;
+global using AngbandOS.Core.ConsoleElements;
+global using AngbandOS.Core.RoomTypes;
+global using AngbandOS.Core.ChestTrapConfigurations;

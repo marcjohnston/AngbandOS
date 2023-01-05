@@ -5,8 +5,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.ChestTrapConfigurations;
-using AngbandOS.Core.RoomTypes;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -10369,6 +10367,27 @@ namespace AngbandOS
         {
             Goto(row, col);
             Print(Colour.White, str, -1);
+        }
+
+        /// <summary>
+        /// Renders a window.
+        /// </summary>
+        /// <param name="leftMargin"></param>
+        /// <param name="topMargin"></param>
+        /// <param name="lines"></param>
+        public void PrintWindow(int leftMargin, int topMargin, ConsoleString[] lines)
+        {
+            int y = topMargin;
+            foreach (ConsoleString consoleString in lines)
+            {
+                int x = leftMargin;
+                foreach (ConsoleChar consoleChar in consoleString)
+                {
+                    Print(consoleChar.Colour, consoleChar.Char, y, x);
+                    x++;
+                }
+                y++;
+            }
         }
 
         /// <summary>

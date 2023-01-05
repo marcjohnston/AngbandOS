@@ -1,11 +1,3 @@
-// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
-
 namespace AngbandOS
 {
     [Serializable]
@@ -577,73 +569,50 @@ namespace AngbandOS
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
+        public BaseInventorySlot[] EquipmentInventorySlots
+        {
+            get
+            {
+                BaseInventorySlot[] equipmentInventorySlots = SaveGame.SingletonRepository.InventorySlots
+                    .Where(_inventorySlot => _inventorySlot.IsEquipment)
+                    .OrderBy(_inventorySlot => _inventorySlot.InventorySlots[0])
+                    .ToArray();
+                return equipmentInventorySlots;
+            }
+        }
+
         public void ShowEquip(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
         {
-            int i, j, k;
-            Item oPtr;
-            int[] outIndex = new int[23];
-            Colour[] outColour = new Colour[23];
-            string[] outDesc = new string[23];
-            int col = maxItemDisplayColumn;
-            int len = 79 - col;
-            int lim = 79 - 3;
-            lim -= 14 + 2;
-            lim -= 9;
-            lim -= 2;
-            for (k = 0, i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            ConsoleTable consoleTable = new ConsoleTable("label", "flavour", "use", "description", "weight");
+            consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
+            foreach (BaseInventorySlot inventorySlot in EquipmentInventorySlots)
             {
-                oPtr = _items[i];
-                if (!ItemMatchesFilter(oPtr, itemFilter))
+                foreach (int index in inventorySlot.InventorySlots)
                 {
-                    continue;
+                    Item oPtr = _items[index];
+                    ConsoleTableRow consoleRow = consoleTable.AddRow();
+                    consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");
+
+                    if (oPtr.BaseItemCategory != null)
+                    {
+                        // Apply flavour visuals
+                        consoleRow["flavour"] = new ConsoleChar(oPtr.BaseItemCategory.FlavorColour, oPtr.BaseItemCategory.FlavorCharacter);
+                    }
+                    else
+                    {
+                        // There is no item.
+                        consoleRow["flavour"] = new ConsoleChar(Colour.Background, ' ');
+                    }
+                    consoleRow["use"] = new ConsoleString(Colour.White, $"{MentionUse(index)}:");
+
+                    Colour colour = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
+                    consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
+
+                    int wgt = oPtr.Weight * oPtr.Count;
+                    consoleRow["weight"] = new ConsoleString(Colour.White, $"{wgt / 10}.{wgt % 10} lb");
                 }
-                string oName = oPtr.Description(true, 3);
-                if (oName.Length > lim)
-                {
-                    oName = oName.Substring(0, lim);
-                }
-                outIndex[k] = i;
-                outColour[k] = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
-                outDesc[k] = oName;
-                int l = outDesc[k].Length + 5;
-                l += 16;
-                l += 9;
-                l += 2;
-                if (l > len)
-                {
-                    len = l;
-                }
-                k++;
             }
-            col = len > 76 ? 0 : 79 - len;
-            for (j = 0; j < k; j++)
-            {
-                i = outIndex[j];
-                oPtr = _items[i];
-                SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
-                string tmpVal = $"{i.IndexToLabel()})";
-                SaveGame.Print(tmpVal, j + 1, col);
-                if (oPtr.BaseItemCategory != null)
-                {
-                    Colour a = oPtr.BaseItemCategory.FlavorColour;
-                    char c = oPtr.BaseItemCategory.FlavorCharacter;
-                    SaveGame.Place(a, c, j + 1, col + 3);
-                }
-                else
-                {
-                    SaveGame.Place(Colour.Background, ' ', j + 1, col + 3);
-                }
-                tmpVal = $"{MentionUse(i)}: ";
-                SaveGame.Print(tmpVal, j + 1, col + 5);
-                SaveGame.Print(outColour[j], outDesc[j], j + 1, col + 21);
-                int wgt = oPtr.Weight * oPtr.Count;
-                tmpVal = $"{wgt / 10}.{wgt % 10} lb";
-                SaveGame.Print(tmpVal, j + 1, 71);
-            }
-            if (j != 0 && j < 23)
-            {
-                SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
-            }
+            consoleTable.Print(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
         }
 
         public void ShowInven(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
