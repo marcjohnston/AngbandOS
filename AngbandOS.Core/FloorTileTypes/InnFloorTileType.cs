@@ -6,7 +6,6 @@ internal class InnFloorTileType : FloorTileType
     public override char Character => '&';
     public override Colour Colour => Colour.Purple;
     public override string Name => "Inn";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Inn";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

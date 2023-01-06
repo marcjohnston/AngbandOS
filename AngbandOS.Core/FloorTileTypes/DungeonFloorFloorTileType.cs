@@ -5,7 +5,6 @@ internal class DungeonFloorFloorTileType : FloorTileType
 {
     public override char Character => '·';
     public override string Name => "DungeonFloor";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "DungeonFloor";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
     public override string Description => "open floor";

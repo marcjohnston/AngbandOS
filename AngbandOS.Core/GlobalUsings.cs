@@ -28,3 +28,4 @@ global using AngbandOS.Core.ConsoleElements;
 global using AngbandOS.Core.RoomTypes;
 global using AngbandOS.Core.ChestTrapConfigurations;
 global using AngbandOS.Core.EventArgs;
+global using AngbandOS.Core.AlterActions;

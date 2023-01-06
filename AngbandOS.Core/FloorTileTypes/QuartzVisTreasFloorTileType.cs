@@ -6,7 +6,7 @@ internal class QuartzVisTreasFloorTileType : FloorTileType
     public override char Character => '*';
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "QuartzVisTreas";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "QuartzVisTreas";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;

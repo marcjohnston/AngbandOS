@@ -36,34 +36,16 @@
                 else
                 {
                     // Check the action based on the type of tile
-                    switch (tile.FeatureType.AlterAction)
+                    AlterAction? alterAction = tile.FeatureType.AlterAction;
+                    if (alterAction == null)
                     {
-                        case FloorTileAlterAction.Nothing:
-                            saveGame.MsgPrint("You're not sure what you can do with that...");
-                            break;
-
-                        case FloorTileAlterAction.Tunnel:
-                            disturb = saveGame.TunnelThroughTile(y, x);
-                            break;
-
-                        case FloorTileAlterAction.Disarm:
-                            disturb = saveGame.DisarmTrap(y, x, dir);
-                            break;
-
-                        case FloorTileAlterAction.Open:
-                            disturb = saveGame.OpenDoor(y, x);
-                            break;
-
-                        case FloorTileAlterAction.Close:
-                            disturb = saveGame.CloseDoor(y, x);
-                            break;
-
-                        case FloorTileAlterAction.Bash:
-                            disturb = saveGame.BashClosedDoor(y, x, dir);
-                            break;
-
-                        default:
-                            throw new ArgumentOutOfRangeException();
+                        saveGame.MsgPrint("You're not sure what you can do with that...");
+                    }
+                    else
+                    {
+                        AlterEventArgs alterEventArgs = new AlterEventArgs(saveGame, y, x);
+                        alterAction.Execute(alterEventArgs);
+                        disturb = alterEventArgs.Disturbed;
                     }
                 }
             }

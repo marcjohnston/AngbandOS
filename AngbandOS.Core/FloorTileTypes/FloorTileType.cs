@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.AlterActions;
+
 namespace AngbandOS.Core
 {
     [Serializable]
@@ -16,9 +18,9 @@ namespace AngbandOS.Core
         public abstract string Name { get; }
 
         /// <summary>
-        /// The action to be taken when this tile is altered.
+        /// Returns a single action to perform on the tile.
         /// </summary>
-        public abstract FloorTileAlterAction AlterAction { get; }
+        public virtual AlterAction? AlterAction => null;
 
         /// <summary>
         /// The the tile this one should appear to be when looked at.

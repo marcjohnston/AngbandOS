@@ -5,7 +5,7 @@ internal class WallPermInnerFloorTileType : FloorTileType
 {
     public override char Character => '#';
     public override string Name => "WallPermInner";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "WallPermInner";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

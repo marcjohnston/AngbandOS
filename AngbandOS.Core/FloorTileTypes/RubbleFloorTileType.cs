@@ -5,7 +5,7 @@ internal class RubbleFloorTileType : FloorTileType
 {
     public override char Character => ':';
     public override string Name => "Rubble";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Rubble";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Rubble;

@@ -6,7 +6,7 @@ internal class PitFloorTileType : FloorTileType
     public override char Character => '^';
     public override Colour Colour => Colour.Grey;
     public override string Name => "Pit";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "Pit";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "pit";

@@ -6,7 +6,6 @@ internal class PawnbrokersFloorTileType : FloorTileType
     public override char Character => '0';
     public override Colour Colour => Colour.Turquoise;
     public override string Name => "Pawnbrokers";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Pawnbrokers";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

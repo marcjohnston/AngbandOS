@@ -6,7 +6,6 @@ internal class HomeFloorTileType : FloorTileType
     public override char Character => '@';
     public override Colour Colour => Colour.Pink;
     public override string Name => "Home";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Home";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

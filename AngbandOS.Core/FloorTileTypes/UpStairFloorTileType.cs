@@ -6,7 +6,6 @@ internal class UpStairFloorTileType : FloorTileType
     public override char Character => '<';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "UpStair";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "UpStair";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.UpStair;
     public override string Description => "up staircase";

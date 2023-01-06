@@ -56,7 +56,7 @@
                 }
                 else
                 {
-                    disturb = saveGame.DisarmTrap(y, x, dir);
+                    disturb = saveGame.DisarmTrap(y, x);
                 }
             }
             if (!disturb)

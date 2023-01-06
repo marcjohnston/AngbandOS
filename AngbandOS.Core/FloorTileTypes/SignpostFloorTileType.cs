@@ -6,7 +6,7 @@ internal class SignpostFloorTileType : FloorTileType
     public override char Character => ':';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Signpost";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Signpost";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Tree;
     public override string Description => "signpost";

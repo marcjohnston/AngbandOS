@@ -6,7 +6,6 @@ internal class WaterBorderFloorTileType : FloorTileType
     public override char Character => '~';
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "WaterBorder";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Water";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Border;

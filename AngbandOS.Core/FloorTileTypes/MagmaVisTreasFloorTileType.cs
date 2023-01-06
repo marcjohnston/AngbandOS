@@ -6,7 +6,7 @@ internal class MagmaVisTreasFloorTileType : FloorTileType
     public override char Character => '*';
     public override Colour Colour => Colour.BrightOrange;
     public override string Name => "MagmaVisTreas";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "MagmaVisTreas";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;

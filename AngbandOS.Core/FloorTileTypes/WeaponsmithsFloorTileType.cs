@@ -5,7 +5,6 @@ internal class WeaponsmithsFloorTileType : FloorTileType
 {
     public override char Character => '3';
     public override string Name => "Weaponsmiths";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Weaponsmiths";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

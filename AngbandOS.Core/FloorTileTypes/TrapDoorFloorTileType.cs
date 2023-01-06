@@ -5,7 +5,7 @@ internal class TrapDoorFloorTileType : FloorTileType
 {
     public override char Character => '^';
     public override string Name => "TrapDoor";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TrapDoor";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.TrapDoor;
     public override string Description => "trap door";

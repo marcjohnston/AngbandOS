@@ -6851,7 +6851,7 @@ namespace AngbandOS
             }
         }
 
-        public bool BashClosedDoor(int y, int x, int dir)
+        public bool BashClosedDoor(int y, int x)
         {
             bool more = false;
             EnergyUse = 100;
@@ -6869,7 +6869,7 @@ namespace AngbandOS
                 MsgPrint("The door crashes open!");
                 Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
                 PlaySound(SoundEffect.OpenDoor);
-                MovePlayer(dir, false);
+                MovePlayer(y, x, false);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             }
@@ -7487,7 +7487,7 @@ namespace AngbandOS
         /// <param name="x"> The x coordinate of the trap </param>
         /// <param name="dir"> The direction the player should move in </param>
         /// <returns> </returns>
-        public bool DisarmTrap(int y, int x, int dir)
+        public bool DisarmTrap(int y, int x)
         {
             bool more = false;
             // Disarming a trap costs a turn
@@ -7518,7 +7518,7 @@ namespace AngbandOS
                 Player.GainExperience(power);
                 tile.TileFlags.Clear(GridTile.PlayerMemorised);
                 Level.RevertTileToBackground(y, x);
-                MovePlayer(dir, true);
+                MovePlayer(y, x, true);
             }
             // We might set the trap off if we failed to disarm it
             else if (i > 5 && Program.Rng.DieRoll(i) > 5)
@@ -7529,7 +7529,7 @@ namespace AngbandOS
             else
             {
                 MsgPrint($"You set off the {trapName}!");
-                MovePlayer(dir, true);
+                MovePlayer(y, x, true);
             }
             return more;
         }
@@ -7739,9 +7739,14 @@ namespace AngbandOS
         /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
         public void MovePlayer(int direction, bool dontPickup)
         {
-            bool canPassWalls = false;
             int newY = Player.MapY + Level.KeypadDirectionYOffset[direction];
             int newX = Player.MapX + Level.KeypadDirectionXOffset[direction];
+            MovePlayer(newY, newX, dontPickup);
+        }
+
+        public void MovePlayer(int newY, int newX, bool dontPickup)
+        { 
+            bool canPassWalls = false;
             GridTile tile = Level.Grid[newY][newX];
             Monster monster = Level.Monsters[tile.MonsterIndex];
             // Check if we can pass through walls
@@ -7799,7 +7804,7 @@ namespace AngbandOS
             if (!dontPickup && tile.FeatureType.IsTrap)
             {
                 // If we're walking onto a known trap, assume we're trying to disarm it
-                DisarmTrap(newY, newX, direction);
+                DisarmTrap(newY, newX);
                 return;
             }
             // If the tile we're moving onto isn't passable then we can't move onto it

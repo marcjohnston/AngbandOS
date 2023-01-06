@@ -6,7 +6,7 @@ internal class BrokenDoorFloorTileType : FloorTileType
     public override char Character => '\'';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "BrokenDoor";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Close;
+    public override AlterAction? AlterAction => new CloseAlterAction();
     public override string AppearAs => "BrokenDoor";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.OpenDoorway;
     public override string Description => "broken door";

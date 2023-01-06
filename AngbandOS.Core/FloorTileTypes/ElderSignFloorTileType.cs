@@ -6,7 +6,6 @@ internal class ElderSignFloorTileType : FloorTileType
     public override char Character => '*';
     public override Colour Colour => Colour.Green;
     public override string Name => "ElderSign";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "ElderSign";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Sigil;
     public override string Description => "Elder Sign";

@@ -6,7 +6,7 @@ internal class PoisonPitFloorTileType : FloorTileType
     public override char Character => '^';
     public override Colour Colour => Colour.Grey;
     public override string Name => "PoisonPit";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "PoisonPit";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "pit";

@@ -6,7 +6,7 @@ internal class ScarecrowFloorTileType : FloorTileType
     public override char Character => 't';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Scarecrow";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Scarecrow";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Tree;

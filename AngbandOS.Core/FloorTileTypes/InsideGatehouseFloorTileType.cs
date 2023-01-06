@@ -5,7 +5,6 @@ internal class InsideGatehouseFloorTileType : FloorTileType
 {
     public override char Character => '·';
     public override string Name => "InsideGatehouse";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "InsideGatehouse";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "open floor";

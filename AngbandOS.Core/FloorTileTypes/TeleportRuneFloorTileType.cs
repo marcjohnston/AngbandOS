@@ -6,7 +6,7 @@ internal class TeleportRuneFloorTileType : FloorTileType
     public override char Character => '^';
     public override Colour Colour => Colour.Purple;
     public override string Name => "TeleportRune";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TeleportRune";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "strange rune";

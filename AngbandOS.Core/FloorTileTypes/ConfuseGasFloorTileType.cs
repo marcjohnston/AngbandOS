@@ -6,7 +6,7 @@ internal class ConfuseGasFloorTileType : FloorTileType
     public override char Character => '^';
     public override Colour Colour => Colour.Green;
     public override string Name => "ConfuseGas";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "ConfuseGas";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "gas trap";

@@ -6,7 +6,6 @@ internal class MagicShopFloorTileType : FloorTileType
     public override char Character => '6';
     public override Colour Colour => Colour.Red;
     public override string Name => "MagicShop";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "MagicShop";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

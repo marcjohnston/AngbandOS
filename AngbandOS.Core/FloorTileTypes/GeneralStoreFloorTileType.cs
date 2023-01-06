@@ -6,7 +6,6 @@ internal class GeneralStoreFloorTileType : FloorTileType
     public override char Character => '1';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "GeneralStore";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "GeneralStore";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

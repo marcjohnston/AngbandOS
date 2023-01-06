@@ -5,7 +5,7 @@ internal class RockFloorTileType : FloorTileType
 {
     public override char Character => ':';
     public override string Name => "Rock";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Rock";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

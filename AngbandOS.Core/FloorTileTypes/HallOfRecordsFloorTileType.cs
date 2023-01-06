@@ -6,7 +6,6 @@ internal class HallOfRecordsFloorTileType : FloorTileType
     public override char Character => '8';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "HallOfRecords";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "HallOfRecords";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

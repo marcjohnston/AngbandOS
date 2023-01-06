@@ -6,7 +6,6 @@ internal class TempleFloorTileType : FloorTileType
     public override char Character => '4';
     public override Colour Colour => Colour.Green;
     public override string Name => "Temple";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Temple";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

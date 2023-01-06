@@ -40,7 +40,7 @@
                 else
                 {
                     // Bash the door
-                    disturb = saveGame.BashClosedDoor(y, x, dir);
+                    disturb = saveGame.BashClosedDoor(y, x);
                 }
             }
             if (!disturb)

@@ -6,7 +6,6 @@ internal class PathBorderEWFloorTileType : FloorTileType
     public override char Character => '-';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathBorderEW";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "PathBorderEW";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Border;

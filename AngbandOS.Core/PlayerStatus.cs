@@ -1450,14 +1450,16 @@
             }
         }
 
+        /// <summary>
+        /// Compute the level of light.  The player may be wielding multiple sources of light.
+        /// </summary>
         public void CalcTorch()
         {
             SaveGame.Player.LightLevel = 0;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item oPtr = SaveGame.Player.Inventory[i];
-                if (i == InventorySlot.Lightsource && oPtr.BaseItemCategory != null &&
-                    oPtr.Category == ItemTypeEnum.Light)
+                if (i == InventorySlot.Lightsource && oPtr.BaseItemCategory != null && oPtr.Category == ItemTypeEnum.Light)
                 {
                     if (oPtr.ItemSubCategory == LightType.Torch && oPtr.TypeSpecificValue > 0)
                     {

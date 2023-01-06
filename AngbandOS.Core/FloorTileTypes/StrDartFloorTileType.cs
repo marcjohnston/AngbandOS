@@ -6,7 +6,7 @@ internal class StrDartFloorTileType : FloorTileType
     public override char Character => '^';
     public override Colour Colour => Colour.Red;
     public override string Name => "StrDart";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Disarm;
+    public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "StrDart";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "dart trap";

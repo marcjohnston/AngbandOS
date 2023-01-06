@@ -5,7 +5,6 @@ internal class TowerFloorFloorTileType : FloorTileType
 {
     public override char Character => '·';
     public override string Name => "TowerFloor";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "TowerFloor";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
     public override string Description => "open floor";

@@ -6,7 +6,6 @@ internal class BookstoreFloorTileType : FloorTileType
     public override char Character => '9';
     public override Colour Colour => Colour.Orange;
     public override string Name => "Bookstore";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Bookstore";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

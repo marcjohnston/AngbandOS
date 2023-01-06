@@ -6,7 +6,6 @@ internal class WildBorderFloorTileType : FloorTileType
     public override char Character => '·';
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "WildBorder";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Grass";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Border;

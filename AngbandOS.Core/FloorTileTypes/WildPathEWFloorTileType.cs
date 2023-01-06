@@ -6,7 +6,6 @@ internal class WildPathEWFloorTileType : FloorTileType
     public override char Character => '-';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "WildPathEW";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "WildPathEW";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
     public override string Description => "path";

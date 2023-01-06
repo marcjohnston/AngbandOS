@@ -6,7 +6,7 @@ internal class RoofFloorTileType : FloorTileType
     public override char Character => '#';
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Roof";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Roof";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

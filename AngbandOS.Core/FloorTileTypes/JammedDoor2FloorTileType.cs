@@ -6,7 +6,7 @@ internal class JammedDoor2FloorTileType : FloorTileType
     public override char Character => '+';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "JammedDoor2";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Bash;
+    public override AlterAction? AlterAction => new BashAlterAction();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.JammedDoor;

@@ -6,7 +6,6 @@ internal class GrassFloorTileType : FloorTileType
     public override char Character => '·';
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Grass";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Grass";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
     public override string Description => "open floor";

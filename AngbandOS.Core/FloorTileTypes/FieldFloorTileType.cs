@@ -6,7 +6,6 @@ internal class FieldFloorTileType : FloorTileType
     public override char Character => '·';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Field";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Field";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
     public override string Description => "field";

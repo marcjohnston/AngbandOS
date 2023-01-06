@@ -6,7 +6,6 @@ internal class ArmouryFloorTileType : FloorTileType
     public override char Character => '2';
     public override Colour Colour => Colour.Grey;
     public override string Name => "Armoury";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "Armoury";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

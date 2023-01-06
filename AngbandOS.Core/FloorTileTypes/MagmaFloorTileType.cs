@@ -6,7 +6,7 @@ internal class MagmaFloorTileType : FloorTileType
     public override char Character => '#';
     public override Colour Colour => Colour.Grey;
     public override string Name => "Magma";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Magma";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;

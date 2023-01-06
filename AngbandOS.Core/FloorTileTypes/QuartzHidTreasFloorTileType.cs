@@ -5,7 +5,7 @@ internal class QuartzHidTreasFloorTileType : FloorTileType
 {
     public override char Character => '#';
     public override string Name => "QuartzHidTreas";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Tunnel;
+    public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Quartz";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;

@@ -6,7 +6,6 @@ internal class BlackMarketFloorTileType : FloorTileType
     public override char Character => '7';
     public override Colour Colour => Colour.Black;
     public override string Name => "BlackMarket";
-    public override FloorTileAlterAction AlterAction => FloorTileAlterAction.Nothing;
     public override string AppearAs => "BlackMarket";
     public override bool BlocksLos => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;
