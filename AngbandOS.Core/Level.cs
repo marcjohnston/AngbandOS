@@ -57,7 +57,6 @@ namespace AngbandOS
         private const int _ratio = 3;
         private readonly int[] _lightX = new int[Constants.LightMax];
         private readonly int[] _lightY = new int[Constants.LightMax];
-        private readonly Player _player;
 
         private readonly int[] _viewX = new int[Constants.ViewMax];
         private readonly int[] _viewY = new int[Constants.ViewMax];
@@ -71,14 +70,12 @@ namespace AngbandOS
         public Level(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            // Get a local reference to the player for efficiency
-            _player = SaveGame.Player;
             for (int i = 0; i < MaxHgt; i++)
             {
                 Grid[i] = new GridTile[MaxWid];
                 for (int j = 0; j < MaxWid; j++)
                 {
-                    Grid[i][j] = new GridTile(SaveGame);
+                    Grid[i][j] = new GridTile();
                 }
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)
@@ -251,8 +248,8 @@ namespace AngbandOS
         public int CoordsToDir(int y, int x)
         {
             int[][] d = { new[] { 7, 4, 1 }, new[] { 8, 5, 2 }, new[] { 9, 6, 3 } };
-            int dy = y - _player.MapY;
-            int dx = x - _player.MapX;
+            int dy = y - SaveGame.Player.MapY;
+            int dx = x - SaveGame.Player.MapX;
             if (Math.Abs(dx) > 1 || Math.Abs(dy) > 1)
             {
                 return 0;
@@ -397,19 +394,19 @@ namespace AngbandOS
                 {
                     ta = ma[y][x];
                     tc = mc[y][x];
-                    if (_player.TimedInvulnerability != 0)
+                    if (SaveGame.Player.TimedInvulnerability != 0)
                     {
                         ta = Colour.White;
                     }
-                    else if (_player.TimedEtherealness != 0)
+                    else if (SaveGame.Player.TimedEtherealness != 0)
                     {
                         ta = Colour.Black;
                     }
                     SaveGame.Print(ta, tc);
                 }
             }
-            cy = yOffset + (_player.MapY / _ratio) + 1;
-            cx = xOffset + (_player.MapX / _ratio) + 1;
+            cy = yOffset + (SaveGame.Player.MapY / _ratio) + 1;
+            cx = xOffset + (SaveGame.Player.MapX / _ratio) + 1;
         }
 
         public int Distance(int y1, int x1, int y2, int x2)
@@ -711,7 +708,7 @@ namespace AngbandOS
         public bool GridOpenNoItemOrCreature(int y, int x)
         {
             return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].ItemIndex == 0 && Grid[y][x].MonsterIndex == 0 &&
-                   !(y == _player.MapY && x == _player.MapX);
+                   !(y == SaveGame.Player.MapY && x == SaveGame.Player.MapX);
         }
 
         public bool GridPassable(int y, int x)
@@ -721,7 +718,7 @@ namespace AngbandOS
 
         public bool GridPassableNoCreature(int y, int x)
         {
-            return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == _player.MapY && x == _player.MapX);
+            return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == SaveGame.Player.MapY && x == SaveGame.Player.MapX);
         }
 
         public bool InBounds(int y, int x)
@@ -951,7 +948,7 @@ namespace AngbandOS
                     }
                 }
             }
-            _player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
         }
 
         public void MoveCursorRelative(int row, int col)
@@ -992,14 +989,14 @@ namespace AngbandOS
 
         public bool NoLight()
         {
-            return !PlayerCanSeeBold(_player.MapY, _player.MapX);
+            return !PlayerCanSeeBold(SaveGame.Player.MapY, SaveGame.Player.MapX);
         }
 
         public void NoteSpot(int y, int x)
         {
             GridTile cPtr = Grid[y][x];
             int nextOIdx;
-            if (_player.TimedBlindness != 0)
+            if (SaveGame.Player.TimedBlindness != 0)
             {
                 return;
             }
@@ -1036,8 +1033,8 @@ namespace AngbandOS
                 }
                 else
                 {
-                    int yy = y < _player.MapY ? y + 1 : y > _player.MapY ? y - 1 : y;
-                    int xx = x < _player.MapX ? x + 1 : x > _player.MapX ? x - 1 : x;
+                    int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
+                    int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
                     if (Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit))
                     {
                         cPtr.TileFlags.Set(GridTile.PlayerMemorised);
@@ -1242,7 +1239,7 @@ namespace AngbandOS
 
         public bool PlayerCanSeeBold(int y, int x)
         {
-            if (_player.TimedBlindness != 0)
+            if (SaveGame.Player.TimedBlindness != 0)
             {
                 return false;
             }
@@ -1263,8 +1260,8 @@ namespace AngbandOS
             {
                 return true;
             }
-            int yy = y < _player.MapY ? y + 1 : y > _player.MapY ? y - 1 : y;
-            int xx = x < _player.MapX ? x + 1 : x > _player.MapX ? x - 1 : x;
+            int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
+            int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
             return Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit);
         }
 
@@ -1277,11 +1274,11 @@ namespace AngbandOS
         {
             if (PanelContains(y, x))
             {
-                if (_player.TimedInvulnerability != 0)
+                if (SaveGame.Player.TimedInvulnerability != 0)
                 {
                     a = Colour.White;
                 }
-                else if (_player.TimedEtherealness != 0)
+                else if (SaveGame.Player.TimedEtherealness != 0)
                 {
                     a = Colour.Black;
                 }
@@ -1317,18 +1314,18 @@ namespace AngbandOS
                 for (int x = PanelColMin; x <= PanelColMax; x++)
                 {
                     MapInfo(y, x, out Colour a, out char c);
-                    if (_player.TimedInvulnerability != 0)
+                    if (SaveGame.Player.TimedInvulnerability != 0)
                     {
                         a = Colour.White;
                     }
-                    else if (_player.TimedEtherealness != 0)
+                    else if (SaveGame.Player.TimedEtherealness != 0)
                     {
                         a = Colour.Black;
                     }
                     SaveGame.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
                 }
             }
-            RedrawSingleLocation(_player.MapY, _player.MapX);
+            RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
             SaveGame.CursorVisible = v;
         }
 
@@ -1369,11 +1366,11 @@ namespace AngbandOS
                 {
                     MapInfo(y, x, out a, out c);
                 }
-                if (_player.TimedInvulnerability != 0)
+                if (SaveGame.Player.TimedInvulnerability != 0)
                 {
                     a = Colour.White;
                 }
-                else if (_player.TimedEtherealness != 0)
+                else if (SaveGame.Player.TimedEtherealness != 0)
                 {
                     a = Colour.Black;
                 }
@@ -1483,7 +1480,7 @@ namespace AngbandOS
             _flowN++;
             _flowHead = 0;
             _flowTail = 0;
-            UpdateFlowAux(_player.MapY, _player.MapX, 0);
+            UpdateFlowAux(SaveGame.Player.MapY, SaveGame.Player.MapX, 0);
             while (_flowHead != _flowTail)
             {
                 y = TempY[_flowTail];
@@ -1504,10 +1501,10 @@ namespace AngbandOS
         public void UpdateLight()
         {
             int i, x, y;
-            if (_player.LightLevel <= 0)
+            if (SaveGame.Player.LightLevel <= 0)
             {
                 ForgetLight();
-                RedrawSingleLocation(_player.MapY, _player.MapX);
+                RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
                 return;
             }
             for (i = 0; i < _lightN; i++)
@@ -1521,84 +1518,84 @@ namespace AngbandOS
                 TempN++;
             }
             _lightN = 0;
-            CaveLightHack(_player.MapY, _player.MapX);
-            if (_player.LightLevel >= 1)
+            CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX);
+            if (SaveGame.Player.LightLevel >= 1)
             {
-                CaveLightHack(_player.MapY + 1, _player.MapX);
-                CaveLightHack(_player.MapY - 1, _player.MapX);
-                CaveLightHack(_player.MapY, _player.MapX + 1);
-                CaveLightHack(_player.MapY, _player.MapX - 1);
-                CaveLightHack(_player.MapY + 1, _player.MapX + 1);
-                CaveLightHack(_player.MapY + 1, _player.MapX - 1);
-                CaveLightHack(_player.MapY - 1, _player.MapX + 1);
-                CaveLightHack(_player.MapY - 1, _player.MapX - 1);
+                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX);
+                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX);
+                CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX + 1);
+                CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX - 1);
+                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 1);
+                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 1);
+                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 1);
+                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 1);
             }
-            if (_player.LightLevel >= 2)
+            if (SaveGame.Player.LightLevel >= 2)
             {
-                if (GridPassable(_player.MapY + 1, _player.MapX))
+                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX))
                 {
-                    CaveLightHack(_player.MapY + 2, _player.MapX);
-                    CaveLightHack(_player.MapY + 2, _player.MapX + 1);
-                    CaveLightHack(_player.MapY + 2, _player.MapX - 1);
+                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX);
+                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX + 1);
+                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX - 1);
                 }
-                if (GridPassable(_player.MapY - 1, _player.MapX))
+                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX))
                 {
-                    CaveLightHack(_player.MapY - 2, _player.MapX);
-                    CaveLightHack(_player.MapY - 2, _player.MapX + 1);
-                    CaveLightHack(_player.MapY - 2, _player.MapX - 1);
+                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX);
+                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX + 1);
+                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX - 1);
                 }
-                if (GridPassable(_player.MapY, _player.MapX + 1))
+                if (GridPassable(SaveGame.Player.MapY, SaveGame.Player.MapX + 1))
                 {
-                    CaveLightHack(_player.MapY, _player.MapX + 2);
-                    CaveLightHack(_player.MapY + 1, _player.MapX + 2);
-                    CaveLightHack(_player.MapY - 1, _player.MapX + 2);
+                    CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX + 2);
+                    CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 2);
+                    CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 2);
                 }
-                if (GridPassable(_player.MapY, _player.MapX - 1))
+                if (GridPassable(SaveGame.Player.MapY, SaveGame.Player.MapX - 1))
                 {
-                    CaveLightHack(_player.MapY, _player.MapX - 2);
-                    CaveLightHack(_player.MapY + 1, _player.MapX - 2);
-                    CaveLightHack(_player.MapY - 1, _player.MapX - 2);
+                    CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX - 2);
+                    CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 2);
+                    CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 2);
                 }
             }
-            if (_player.LightLevel >= 3)
+            if (SaveGame.Player.LightLevel >= 3)
             {
-                int p = _player.LightLevel;
+                int p = SaveGame.Player.LightLevel;
                 if (p > 5)
                 {
                     p = 5;
                 }
-                if (GridPassable(_player.MapY + 1, _player.MapX + 1))
+                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 1))
                 {
-                    CaveLightHack(_player.MapY + 2, _player.MapX + 2);
+                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX + 2);
                 }
-                if (GridPassable(_player.MapY + 1, _player.MapX - 1))
+                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 1))
                 {
-                    CaveLightHack(_player.MapY + 2, _player.MapX - 2);
+                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX - 2);
                 }
-                if (GridPassable(_player.MapY - 1, _player.MapX + 1))
+                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 1))
                 {
-                    CaveLightHack(_player.MapY - 2, _player.MapX + 2);
+                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX + 2);
                 }
-                if (GridPassable(_player.MapY - 1, _player.MapX - 1))
+                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 1))
                 {
-                    CaveLightHack(_player.MapY - 2, _player.MapX - 2);
+                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX - 2);
                 }
-                int minY = _player.MapY - p;
+                int minY = SaveGame.Player.MapY - p;
                 if (minY < 0)
                 {
                     minY = 0;
                 }
-                int maxY = _player.MapY + p;
+                int maxY = SaveGame.Player.MapY + p;
                 if (maxY > CurHgt - 1)
                 {
                     maxY = CurHgt - 1;
                 }
-                int minX = _player.MapX - p;
+                int minX = SaveGame.Player.MapX - p;
                 if (minX < 0)
                 {
                     minX = 0;
                 }
-                int maxX = _player.MapX + p;
+                int maxX = SaveGame.Player.MapX + p;
                 if (maxX > CurWid - 1)
                 {
                     maxX = CurWid - 1;
@@ -1607,8 +1604,8 @@ namespace AngbandOS
                 {
                     for (x = minX; x <= maxX; x++)
                     {
-                        int dy = _player.MapY > y ? _player.MapY - y : y - _player.MapY;
-                        int dx = _player.MapX > x ? _player.MapX - x : x - _player.MapX;
+                        int dy = SaveGame.Player.MapY > y ? SaveGame.Player.MapY - y : y - SaveGame.Player.MapY;
+                        int dx = SaveGame.Player.MapX > x ? SaveGame.Player.MapX - x : x - SaveGame.Player.MapX;
                         if (dy <= 2 && dx <= 2)
                         {
                             continue;
@@ -1685,8 +1682,8 @@ namespace AngbandOS
                 TempN++;
             }
             _viewN = 0;
-            y = _player.MapY;
-            x = _player.MapX;
+            y = SaveGame.Player.MapY;
+            x = SaveGame.Player.MapX;
             cPtr = Grid[y][x];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y, x);
@@ -2067,10 +2064,10 @@ namespace AngbandOS
                 }
                 oPtr.Marked = false;
             }
-            _player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            _player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            _player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
         }
 
         public void WizLight()
@@ -2111,8 +2108,8 @@ namespace AngbandOS
                     }
                 }
             }
-            _player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            _player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
         }
 
         private void CaveLightHack(int y, int x)
@@ -2267,13 +2264,13 @@ namespace AngbandOS
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
                     ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
-                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && _player.TimedBlindness == 0))
+                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness == 0))
                 {
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (_player.TimedBlindness != 0)
+                        if (SaveGame.Player.TimedBlindness != 0)
                         {
                             a = Colour.Black;
                         }
@@ -2335,7 +2332,7 @@ namespace AngbandOS
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (_player.TimedBlindness != 0)
+                        if (SaveGame.Player.TimedBlindness != 0)
                         {
                             a = Colour.Black;
                         }
@@ -2358,8 +2355,8 @@ namespace AngbandOS
                             }
                             else
                             {
-                                int yy = y < _player.MapY ? y + 1 : y > _player.MapY ? y - 1 : y;
-                                int xx = x < _player.MapX ? x + 1 : x > _player.MapX ? x - 1 : x;
+                                int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
+                                int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
                                 if (Grid[yy][xx].TileFlags.IsClear(GridTile.SelfLit))
                                 {
                                     a = DimColour(a);
@@ -2374,7 +2371,7 @@ namespace AngbandOS
                     c = ObjectRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
-            if (_player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+            if (SaveGame.Player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
             {
                 ImageRandom(out ap, out cp);
             }
@@ -2391,7 +2388,7 @@ namespace AngbandOS
                 {
                     cp = oPtr.BaseItemCategory.FlavorCharacter;
                     ap = oPtr.BaseItemCategory.FlavorColour;
-                    if (_player.TimedHallucinations != 0)
+                    if (SaveGame.Player.TimedHallucinations != 0)
                     {
                         ImageObject(out ap, out cp);
                     }
@@ -2472,13 +2469,13 @@ namespace AngbandOS
                             ap = a;
                         }
                     }
-                    if (_player.TimedHallucinations != 0)
+                    if (SaveGame.Player.TimedHallucinations != 0)
                     {
                         ImageMonster(out ap, out cp);
                     }
                 }
             }
-            if (y == _player.MapY && x == _player.MapX)
+            if (y == SaveGame.Player.MapY && x == SaveGame.Player.MapX)
             {
                 MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[0];
                 a = rPtr.Colour;
@@ -2559,7 +2556,7 @@ namespace AngbandOS
                 CaveViewHack(cPtr, y, x);
                 return true;
             }
-            if (Los(_player.MapY, _player.MapX, y, x))
+            if (Los(SaveGame.Player.MapY, SaveGame.Player.MapX, y, x))
             {
                 CaveViewHack(cPtr, y, x);
                 return false;
