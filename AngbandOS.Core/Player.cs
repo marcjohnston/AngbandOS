@@ -1,5 +1,3 @@
-using AngbandOS.Core.EventArgs;
-
 namespace AngbandOS
 {
     [Serializable]
@@ -3253,12 +3251,13 @@ namespace AngbandOS
 
             if (consoleTable.Width < 29)
             {
-                consoleTable.Print(SaveGame, new ConsoleWindow(50, 1, 79, 26), new ConsoleTopLeftAlignment());
+                ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
+                container.Clear(SaveGame, Colour.Background);
+                consoleTable.Print(SaveGame, container, new ConsoleTopLeftAlignment());
             }
             else
             {
                 consoleTable.Print(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
-
             }
         }
     }

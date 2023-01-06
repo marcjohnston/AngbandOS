@@ -27,3 +27,4 @@ global using AngbandOS.Core.Races;
 global using AngbandOS.Core.ConsoleElements;
 global using AngbandOS.Core.RoomTypes;
 global using AngbandOS.Core.ChestTrapConfigurations;
+global using AngbandOS.Core.EventArgs;
