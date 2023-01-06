@@ -60,15 +60,15 @@
                 item.BecomeFlavourAware();
                 saveGame.Player.GainExperience((itemLevel + (saveGame.Player.Level >> 1)) / saveGame.Player.Level);
             }
-            // Dwarf bread isn't actually eaten so reduce our hunger and return early
-            if (item.ItemSubCategory == FoodType.Dwarfbread)
-            {
-                saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
-                return;
-            }
 
             // Now races process the sustenance.
             saveGame.Player.Race.Eat(saveGame, item);
+
+            // Dwarf bread isn't actually eaten so return early
+            if (item.ItemSubCategory == FoodType.Dwarfbread)
+            {
+                return;
+            }
 
             // Use up the item (if it fell to the floor this will have already been dealt with)
             if (itemIndex >= 0)

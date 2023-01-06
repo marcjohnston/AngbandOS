@@ -15,6 +15,10 @@ namespace AngbandOS.Spells
         public readonly int[] SpellOrder = new int[64];
         public readonly SpellList[] Spells = new SpellList[2];
         public readonly int SpellStat;
+
+        /// <summary>
+        /// Returns the maximum amount of armour weight that the player carry before it affects spellcasting.
+        /// </summary>
         public readonly int SpellWeight;
         public readonly TalentList Talents;
         public readonly CastingType Type;

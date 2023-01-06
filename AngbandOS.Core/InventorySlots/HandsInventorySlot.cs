@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Enumerations;
+
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
@@ -20,5 +22,36 @@ namespace AngbandOS.Core.InventorySlots
         public override bool IsWeightRestricting => true;
         public override bool IsArmour => true;
         public override int SortOrder => 12;
+
+        public override int CalcMana(SaveGame saveGame, int msp)
+        {
+            if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
+            {
+                foreach (int index in InventorySlots)
+                {
+                    Item oPtr = SaveGame.Player.Inventory[index];
+                    oPtr.RefreshFlagBasedProperties();
+                    
+                    if (oPtr.BaseItemCategory != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
+                    {
+                        msp = 3 * msp / 4;
+                        if (!SaveGame.Player.OldRestrictingGloves)
+                        {
+                            SaveGame.MsgPrint("Your covered hands feel unsuitable for spellcasting.");
+                            SaveGame.Player.OldRestrictingGloves = true;
+                        }
+                    }
+                    else
+                    {
+                        if (SaveGame.Player.OldRestrictingGloves)
+                        {
+                            SaveGame.MsgPrint("Your hands feel more suitable for spellcasting.");
+                            SaveGame.Player.OldRestrictingGloves = false;
+                        }
+                    }
+                }
+            }
+            return msp;
+        }
     }
 }

@@ -82,6 +82,20 @@ namespace AngbandOS
         public string RandartName = "";
         public Enumerations.RareItemType RareItemTypeIndex;
         public int RechargeTimeLeft;
+
+        /// <summary>
+        /// Returns a value that is specific to the item class.
+        /// Gold - The amount of gold.
+        /// Light - The number of turns remaining.
+        /// Rod - Recharge time remaining.
+        /// Wand - Number of charges remaining.
+        /// Chest - The number of items in the chest.
+        /// Food - The amount of sustenence the food provides.
+        /// Potion - The amount of sustenence the potion provides.
+        /// Staff - The number of charges remaining.
+        /// Weapons (Blows) - The weapon attacks
+        /// FOR ALL EQUIMENT - The bonus value for item.characteristic.(str, int, wis, dex, cha, dex, stealth, search, infra, tunnel, speed and blows
+        /// </summary>
         public int TypeSpecificValue;
         public int Weight;
         public int X;

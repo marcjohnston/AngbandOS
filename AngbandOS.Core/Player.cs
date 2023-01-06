@@ -150,7 +150,14 @@ namespace AngbandOS
         public bool OldHeavyBow;
         public bool OldHeavyWeapon;
         public int OldLightLevel;
+
+        /// <summary>
+        /// Returns the previous computation of weight restricting armour.  This is used to render a message to the player, when the player puts on
+        /// or takes off armour that is restricting the spell casting ability.  This value is static because multiple pieces of armour
+        /// will have this affect.
+        /// </summary>
         public bool OldRestrictingArmour;
+
         public bool OldRestrictingGloves;
         public int OldSpareSpellSlots;
         public bool OldUnpriestlyWeapon;
