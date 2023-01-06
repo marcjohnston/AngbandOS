@@ -748,7 +748,11 @@
             {
                 return;
             }
-            FixedArtifact aPtr = saveGame.SingletonRepository.FixedArtifacts[aIdx];
+            FixedArtifact? aPtr = saveGame.SingletonRepository.FixedArtifacts.SingleOrDefault(_fixedArtifact => _fixedArtifact.Value.BaseFixedArtifact.FixedArtifactID == aIdx).Value;
+            if (aPtr == null)
+            {
+                return;
+            }
             Item qPtr = new Item(saveGame);
             if (string.IsNullOrEmpty(aPtr.Name))
             {

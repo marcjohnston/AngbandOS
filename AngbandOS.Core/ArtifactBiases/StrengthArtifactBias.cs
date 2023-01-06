@@ -7,7 +7,7 @@
             if (!item.RandartItemCharacteristics.Str)
             {
                 item.RandartItemCharacteristics.Str = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (Program.Rng.DieRoll(2) == 1) // 50% chance of being a "free" power
                 {
                     return true;
                 }

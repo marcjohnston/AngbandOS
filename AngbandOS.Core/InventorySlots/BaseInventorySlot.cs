@@ -28,6 +28,17 @@ namespace AngbandOS.Core.InventorySlots
         /// </summary>
         public abstract int SortOrder { get; }
 
+        /// <summary>
+        /// Returns a new mana value after the inventory items performs its effect.  By default, the initial mana amount is returned, with no change.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="msp">The total amount of mana.</param>
+        /// <returns></returns>
+        public virtual int CalcMana(SaveGame saveGame, int msp)
+        {
+            return msp;
+        }
+
         public virtual string SenseLocation => $"you are {DescribeWieldLocation}";
 
         /// <summary>
@@ -69,9 +80,9 @@ namespace AngbandOS.Core.InventorySlots
 
         /// <summary>
         /// Returns true, if items in the slot restrict player movement.  When true, the weight of the item may adversely affect the movement of the
-        /// player.  Returns false, by default.
+        /// player.  By default, items denoted as armour (IsArmour = true), return true.
         /// </summary>
-        public virtual bool IsWeightRestricting => false;
+        public virtual bool IsWeightRestricting => IsArmour;
 
         /// <summary>
         /// Returns true, if the inventory slot represents equipment; false, if the inventory slot represents a pack.  Defaults to true.

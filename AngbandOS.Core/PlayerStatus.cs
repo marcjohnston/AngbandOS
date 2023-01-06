@@ -1204,17 +1204,16 @@
             {
                 msp += msp / 4;
             }
+
+            // Allow inventory slots access to the CalcMana process.
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+            {
+                // Update the mana for the inventory slot.
+                msp = inventorySlot.CalcMana(SaveGame, msp);
+            }
+
             if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
             {
-                SaveGame.Player.HasRestrictingGloves = false;
-                Item oPtr = SaveGame.Player.Inventory[InventorySlot.Hands];
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.BaseItemCategory != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
-                {
-                    SaveGame.Player.HasRestrictingGloves = true;
-                    msp = 3 * msp / 4;
-                }
-                SaveGame.Player.HasRestrictingArmour = false;
                 int curWgt = 0;
                 foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
                 {
@@ -1227,24 +1226,34 @@
                             {
                                 curWgt += item.Weight;
                             }
-                            //foreach (Item item in inventorySlot)
-                            //{
-                            //    curWgt += item.Weight;
-                            //}
                         }
                     }
                 }
                 int maxWgt = SaveGame.Player.Spellcasting.SpellWeight;
                 if ((curWgt - maxWgt) / 10 > 0)
                 {
-                    SaveGame.Player.HasRestrictingArmour = true;
                     msp -= (curWgt - maxWgt) / 10;
+                    if (!SaveGame.Player.OldRestrictingArmour)
+                    {
+                        SaveGame.MsgPrint("The weight of your armour encumbers your movement.");
+                        SaveGame.Player.OldRestrictingArmour = true;
+                    }
+                }
+                else
+                {
+                    if (SaveGame.Player.OldRestrictingArmour)
+                    {
+                        SaveGame.MsgPrint("You feel able to move more freely.");
+                        SaveGame.Player.OldRestrictingArmour = false;
+                    }
                 }
             }
+
             if (msp < 0)
             {
                 msp = 0;
             }
+
             var mult = SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
             msp *= mult;
             msp /= 10;
@@ -1261,20 +1270,6 @@
             if (SaveGame.CharacterXtra)
             {
                 return;
-            }
-            if (SaveGame.Player.OldRestrictingGloves != SaveGame.Player.HasRestrictingGloves)
-            {
-                SaveGame.MsgPrint(SaveGame.Player.HasRestrictingGloves
-                    ? "Your covered hands feel unsuitable for spellcasting."
-                    : "Your hands feel more suitable for spellcasting.");
-                SaveGame.Player.OldRestrictingGloves = SaveGame.Player.HasRestrictingGloves;
-            }
-            if (SaveGame.Player.OldRestrictingArmour != SaveGame.Player.HasRestrictingArmour)
-            {
-                SaveGame.MsgPrint(SaveGame.Player.HasRestrictingArmour
-                    ? "The weight of your armour encumbers your movement."
-                    : "You feel able to move more freely.");
-                SaveGame.Player.OldRestrictingArmour = SaveGame.Player.HasRestrictingArmour;
             }
         }
 
