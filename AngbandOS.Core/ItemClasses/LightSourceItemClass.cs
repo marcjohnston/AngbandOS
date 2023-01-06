@@ -14,6 +14,11 @@ namespace AngbandOS.Core.ItemClasses
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 
+        public virtual void Refill(SaveGame saveGame, Item item)
+        {
+            saveGame.MsgPrint("Your light cannot be refilled.");
+        }
+
         public override int? GetTypeSpecificRealValue(Item item, int value)
         {
             return ComputeTypeSpecificRealValue(item, value);
