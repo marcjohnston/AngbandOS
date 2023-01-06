@@ -7330,7 +7330,17 @@ namespace AngbandOS
         /// <returns> true if there was armour to curse, false otherwise </returns>
         public bool CurseArmour()
         {
-            Item item = Player.Inventory[InventorySlot.Body];
+            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).Choose();
+
+            // Check to see if there are any slots capable of cursing.
+            if (inventorySlot == null)
+            {
+                return false;
+            }
+
+            // Choose an item from the slot.
+            Item item = Player.Inventory[inventorySlot.WeightedRandom.Choose()];
+
             // If we're not wearing armour then nothing can happen
             if (item.BaseItemCategory == null)
             {
