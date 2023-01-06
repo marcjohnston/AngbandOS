@@ -23,7 +23,7 @@
             saveGame.SaveScreen();
             saveGame.SetBackground(BackgroundImage.Paper);
             // Load the character viewer
-            CharacterViewer characterViewer = new CharacterViewer(saveGame, saveGame.Player);
+            CharacterViewer characterViewer = new CharacterViewer(saveGame);
             while (true && !saveGame.Shutdown)
             {
                 characterViewer.DisplayPlayer();

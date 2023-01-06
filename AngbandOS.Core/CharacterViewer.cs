@@ -13,13 +13,11 @@ namespace AngbandOS
     /// </summary>
     internal class CharacterViewer
     {
-        private readonly Player _player;
         private readonly SaveGame SaveGame;
 
-        public CharacterViewer(SaveGame saveGame, Player player)
+        public CharacterViewer(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            _player = player;
         }
 
         /// <summary>
@@ -28,11 +26,11 @@ namespace AngbandOS
         /// <param name="player"> The player whose equippy characters should be displayed </param>
         /// <param name="screenRow"> The row on which to print the characters </param>
         /// <param name="screenCol"> The column in which to start printing the characters </param>
-        public static void DisplayPlayerEquippy(SaveGame saveGame, Player player, int screenRow, int screenCol)
+        public static void DisplayPlayerEquippy(SaveGame saveGame, int screenRow, int screenCol)
         {
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                Item item = player.Inventory[i];
+                Item item = saveGame.Player.Inventory[i];
                 Colour colour = Colour.Background;
                 char character = ' ';
                 // Only print items that exist
@@ -50,9 +48,9 @@ namespace AngbandOS
         /// in the default location on the main game screen
         /// </summary>
         /// <param name="player"> The player whose equippy characters should be displayed </param>
-        public static void PrintEquippy(SaveGame saveGame, Player player)
+        public static void PrintEquippy(SaveGame saveGame)
         {
-            DisplayPlayerEquippy(saveGame, player, ScreenLocation.RowEquippy, ScreenLocation.ColEquippy);
+            DisplayPlayerEquippy(saveGame, ScreenLocation.RowEquippy, ScreenLocation.ColEquippy);
         }
 
         /// <summary>
@@ -83,7 +81,7 @@ namespace AngbandOS
             string bonus4 = string.Empty;
             string bonus5 = string.Empty;
             // Get the score
-            AbilityScore ability = _player.AbilityScores[abilityIndex];
+            AbilityScore ability = SaveGame.Player.AbilityScores[abilityIndex];
             // Fill in up to five pieces of bonus text
             switch (abilityIndex)
             {
@@ -143,14 +141,14 @@ namespace AngbandOS
                     break;
             }
             // Add the bonus text for spell casting abilities
-            if (_player.Spellcasting.SpellStat == abilityIndex && abilityIndex != Ability.Strength)
+            if (SaveGame.Player.Spellcasting.SpellStat == abilityIndex && abilityIndex != Ability.Strength)
             {
                 int mana = ability.ManaBonus;
                 // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
                 bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
                 // Not all casting classes have actual spells
-                if (_player.ProfessionIndex != CharacterClass.Mindcrafter && _player.ProfessionIndex != CharacterClass.Mystic
-                    && _player.ProfessionIndex != CharacterClass.Channeler)
+                if (SaveGame.Player.ProfessionIndex != CharacterClass.Mindcrafter && SaveGame.Player.ProfessionIndex != CharacterClass.Mystic
+                    && SaveGame.Player.ProfessionIndex != CharacterClass.Channeler)
                 {
                     int spells = ability.HalfSpellsPerLevel;
                     if (spells == 2)
@@ -167,7 +165,7 @@ namespace AngbandOS
                     }
                 }
                 // Almost all casting classes have a failure chance
-                if (_player.ProfessionIndex != CharacterClass.Channeler)
+                if (SaveGame.Player.ProfessionIndex != CharacterClass.Channeler)
                 {
                     int fail = ability.SpellMinFailChance;
                     bonus5 = $", {fail}% min fail";
@@ -187,10 +185,10 @@ namespace AngbandOS
             {
                 string buf;
                 // If they've been drained, make them visually distinct
-                if (_player.AbilityScores[i].Innate < _player.AbilityScores[i].InnateMax)
+                if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
                     SaveGame.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 14 + i, 1);
-                    int value = _player.AbilityScores[i].Adjusted;
+                    int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
                     SaveGame.Print(Colour.Grey, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
@@ -199,7 +197,7 @@ namespace AngbandOS
                 else
                 {
                     SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], 14 + i, 1);
-                    buf = _player.AbilityScores[i].Adjusted.StatToString();
+                    buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
                     SaveGame.Print(Colour.Green, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
                     SaveGame.Print(Colour.Green, buf, i + 14, 13);
@@ -264,40 +262,40 @@ namespace AngbandOS
             {
                 // Reverse engineer our equipment bonuses from our score
                 int equipmentBonuses = 0;
-                if (_player.AbilityScores[i].InnateMax > 18 && _player.AbilityScores[i].AdjustedMax > 18)
+                if (SaveGame.Player.AbilityScores[i].InnateMax > 18 && SaveGame.Player.AbilityScores[i].AdjustedMax > 18)
                 {
-                    equipmentBonuses = (_player.AbilityScores[i].AdjustedMax - _player.AbilityScores[i].InnateMax) / 10;
+                    equipmentBonuses = (SaveGame.Player.AbilityScores[i].AdjustedMax - SaveGame.Player.AbilityScores[i].InnateMax) / 10;
                 }
-                if (_player.AbilityScores[i].InnateMax <= 18 && _player.AbilityScores[i].AdjustedMax <= 18)
+                if (SaveGame.Player.AbilityScores[i].InnateMax <= 18 && SaveGame.Player.AbilityScores[i].AdjustedMax <= 18)
                 {
-                    equipmentBonuses = _player.AbilityScores[i].AdjustedMax - _player.AbilityScores[i].InnateMax;
+                    equipmentBonuses = SaveGame.Player.AbilityScores[i].AdjustedMax - SaveGame.Player.AbilityScores[i].InnateMax;
                 }
-                if (_player.AbilityScores[i].InnateMax <= 18 && _player.AbilityScores[i].AdjustedMax > 18)
+                if (SaveGame.Player.AbilityScores[i].InnateMax <= 18 && SaveGame.Player.AbilityScores[i].AdjustedMax > 18)
                 {
-                    equipmentBonuses = ((_player.AbilityScores[i].AdjustedMax - 18) / 10) - _player.AbilityScores[i].InnateMax + 18;
+                    equipmentBonuses = ((SaveGame.Player.AbilityScores[i].AdjustedMax - 18) / 10) - SaveGame.Player.AbilityScores[i].InnateMax + 18;
                 }
-                if (_player.AbilityScores[i].InnateMax > 18 && _player.AbilityScores[i].AdjustedMax <= 18)
+                if (SaveGame.Player.AbilityScores[i].InnateMax > 18 && SaveGame.Player.AbilityScores[i].AdjustedMax <= 18)
                 {
-                    equipmentBonuses = _player.AbilityScores[i].AdjustedMax - ((_player.AbilityScores[i].InnateMax - 18) / 10) - 19;
+                    equipmentBonuses = SaveGame.Player.AbilityScores[i].AdjustedMax - ((SaveGame.Player.AbilityScores[i].InnateMax - 18) / 10) - 19;
                 }
                 // Take out the bonuses we got for our our race and profession
-                equipmentBonuses -= _player.Race.AbilityBonus[i];
-                equipmentBonuses -= _player.Profession.AbilityBonus[i];
+                equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
+                equipmentBonuses -= SaveGame.Player.Profession.AbilityBonus[i];
                 // Print each of the scores and bonuses
                 SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], row + i, statCol);
-                string buf = _player.AbilityScores[i].InnateMax.StatToString();
+                string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
                 SaveGame.Print(Colour.Purple, buf, row + i, statCol + 4);
-                buf = _player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Print(Colour.Brown, buf, row + i, statCol + 13);
-                buf = _player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                buf = SaveGame.Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Print(Colour.Brown, buf, row + i, statCol + 19);
                 buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Print(Colour.Brown, buf, row + i, statCol + 24);
-                buf = _player.AbilityScores[i].AdjustedMax.StatToString();
+                buf = SaveGame.Player.AbilityScores[i].AdjustedMax.StatToString();
                 SaveGame.Print(Colour.Green, buf, row + i, statCol + 27);
-                if (_player.AbilityScores[i].Adjusted < _player.AbilityScores[i].AdjustedMax)
+                if (SaveGame.Player.AbilityScores[i].Adjusted < SaveGame.Player.AbilityScores[i].AdjustedMax)
                 {
-                    buf = _player.AbilityScores[i].Adjusted.StatToString();
+                    buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
                     SaveGame.Print(Colour.Red, buf, row + i, statCol + 35);
                 }
             }
@@ -308,7 +306,7 @@ namespace AngbandOS
             SaveGame.Print(Colour.Blue, "Modifications", row + 6, col);
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                Item item = _player.Inventory[i];
+                Item item = SaveGame.Player.Inventory[i];
                 // Only extract known bonuses, not full bonuses
                 ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
                 ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
@@ -320,13 +318,13 @@ namespace AngbandOS
                 col++;
             }
 
-            ItemCharacteristics playerCharacteristics = _player.GetAbilitiesAsItemFlags();
-            DisplayPlayerStatWithModification(_player.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
-            DisplayPlayerStatWithModification(_player.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
-            DisplayPlayerStatWithModification(_player.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
-            DisplayPlayerStatWithModification(_player.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
-            DisplayPlayerStatWithModification(_player.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
-            DisplayPlayerStatWithModification(_player.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
+            ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
+            DisplayPlayerStatWithModification(SaveGame.Player.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
         }
 
         private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)
@@ -366,9 +364,9 @@ namespace AngbandOS
         /// </summary>
         private void DisplayPlayerEssentials()
         {
-            int showTohit = _player.DisplayedAttackBonus;
-            int showTodam = _player.DisplayedDamageBonus;
-            Item item = _player.Inventory[InventorySlot.MeleeWeapon];
+            int showTohit = SaveGame.Player.DisplayedAttackBonus;
+            int showTodam = SaveGame.Player.DisplayedDamageBonus;
+            Item item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
             // Only show bonuses if we know them
             if (item.IsKnown())
             {
@@ -381,51 +379,51 @@ namespace AngbandOS
             // Print some basics
             PrintBonus("+ To Hit    ", showTohit, 30, 1, Colour.Brown);
             PrintBonus("+ To Damage ", showTodam, 31, 1, Colour.Brown);
-            PrintBonus("+ To AC     ", _player.DisplayedArmourClassBonus, 32, 1, Colour.Brown);
-            PrintShortScore("  Base AC   ", _player.DisplayedBaseArmourClass, 33, 1, Colour.Brown);
-            PrintShortScore("Level      ", _player.Level, 30, 28, Colour.Green);
-            PrintLongScore("Experience ", _player.ExperiencePoints, 31, 28,
-                _player.ExperiencePoints >= _player.MaxExperienceGained ? Colour.Green : Colour.Red);
-            PrintLongScore("Max Exp    ", _player.MaxExperienceGained, 32, 28, Colour.Green);
+            PrintBonus("+ To AC     ", SaveGame.Player.DisplayedArmourClassBonus, 32, 1, Colour.Brown);
+            PrintShortScore("  Base AC   ", SaveGame.Player.DisplayedBaseArmourClass, 33, 1, Colour.Brown);
+            PrintShortScore("Level      ", SaveGame.Player.Level, 30, 28, Colour.Green);
+            PrintLongScore("Experience ", SaveGame.Player.ExperiencePoints, 31, 28,
+                SaveGame.Player.ExperiencePoints >= SaveGame.Player.MaxExperienceGained ? Colour.Green : Colour.Red);
+            PrintLongScore("Max Exp    ", SaveGame.Player.MaxExperienceGained, 32, 28, Colour.Green);
             // If we're max level we don't have any experience to advance
-            if (_player.Level >= Constants.PyMaxLevel)
+            if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
                 SaveGame.Print(Colour.Blue, "Exp to Adv.", 33, 28);
                 SaveGame.Print(Colour.Green, "    *****", 33, 28 + 11);
             }
             else
             {
-                PrintLongScore("Exp to Adv.", (int)(GlobalData.PlayerExp[_player.Level - 1] * _player.ExperienceMultiplier / 100L), 33, 28,
+                PrintLongScore("Exp to Adv.", (int)(GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100L), 33, 28,
                     Colour.Green);
             }
-            PrintLongScore("Exp Factor ", _player.ExperienceMultiplier, 34, 28, Colour.Green);
-            PrintShortScore("Max Hit Points ", _player.MaxHealth, 30, 52, Colour.Green);
-            if (_player.Health >= _player.MaxHealth)
+            PrintLongScore("Exp Factor ", SaveGame.Player.ExperienceMultiplier, 34, 28, Colour.Green);
+            PrintShortScore("Max Hit Points ", SaveGame.Player.MaxHealth, 30, 52, Colour.Green);
+            if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
             {
-                PrintShortScore("Cur Hit Points ", _player.Health, 31, 52, Colour.Green);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.Green);
             }
-            else if (_player.Health > _player.MaxHealth * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 10)
             {
-                PrintShortScore("Cur Hit Points ", _player.Health, 31, 52, Colour.BrightYellow);
-            }
-            else
-            {
-                PrintShortScore("Cur Hit Points ", _player.Health, 31, 52, Colour.BrightRed);
-            }
-            PrintShortScore("Max SP (Mana)  ", _player.MaxMana, 32, 52, Colour.Green);
-            if (_player.Mana >= _player.MaxMana)
-            {
-                PrintShortScore("Cur SP (Mana)  ", _player.Mana, 33, 52, Colour.Green);
-            }
-            else if (_player.Mana > _player.MaxMana * GlobalData.HitpointWarn / 10)
-            {
-                PrintShortScore("Cur SP (Mana)  ", _player.Mana, 33, 52, Colour.BrightYellow);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.BrightYellow);
             }
             else
             {
-                PrintShortScore("Cur SP (Mana)  ", _player.Mana, 33, 52, Colour.BrightRed);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.BrightRed);
             }
-            PrintLongScore("Gold           ", _player.Gold, 34, 52, Colour.Green);
+            PrintShortScore("Max SP (Mana)  ", SaveGame.Player.MaxMana, 32, 52, Colour.Green);
+            if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
+            {
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.Green);
+            }
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 10)
+            {
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.BrightYellow);
+            }
+            else
+            {
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.BrightRed);
+            }
+            PrintLongScore("Gold           ", SaveGame.Player.Gold, 34, 52, Colour.Green);
         }
 
         /// <summary>
@@ -435,7 +433,7 @@ namespace AngbandOS
         {
             for (int i = 0; i < 4; i++)
             {
-                SaveGame.Print(Colour.Brown, _player.History[i], i + 9, 10);
+                SaveGame.Print(Colour.Brown, SaveGame.Player.History[i], i + 9, 10);
             }
         }
 
@@ -444,14 +442,14 @@ namespace AngbandOS
         /// </summary>
         private void DisplayPlayerSkills()
         {
-            Item item = _player.Inventory[InventorySlot.MeleeWeapon];
-            int tmp = _player.AttackBonus + item.BonusToHit;
-            int fighting = _player.SkillMelee + (tmp * Constants.BthPlusAdj);
-            item = _player.Inventory[InventorySlot.RangedWeapon];
-            tmp = _player.AttackBonus + item.BonusToHit;
-            int shooting = _player.SkillRanged + (tmp * Constants.BthPlusAdj);
-            item = _player.Inventory[InventorySlot.MeleeWeapon];
-            int dambonus = _player.DisplayedDamageBonus;
+            Item item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            int tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
+            int fighting = SaveGame.Player.SkillMelee + (tmp * Constants.BthPlusAdj);
+            item = SaveGame.Player.Inventory[InventorySlot.RangedWeapon];
+            tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
+            int shooting = SaveGame.Player.SkillRanged + (tmp * Constants.BthPlusAdj);
+            item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            int dambonus = SaveGame.Player.DisplayedDamageBonus;
             // Only include weapon damage if the player knows what it is
             if (item.IsKnown())
             {
@@ -459,13 +457,13 @@ namespace AngbandOS
             }
             int damdice = item.DamageDice;
             int damsides = item.DamageDiceSides;
-            int attacksPerRound = _player.MeleeAttacksPerRound;
-            int disarmTraps = _player.SkillDisarmTraps;
-            int useDevice = _player.SkillUseDevice;
-            int savingThrow = _player.SkillSavingThrow;
-            int stealth = _player.SkillStealth;
-            int searching = _player.SkillSearching;
-            int searchFrequency = _player.SkillSearchFrequency;
+            int attacksPerRound = SaveGame.Player.MeleeAttacksPerRound;
+            int disarmTraps = SaveGame.Player.SkillDisarmTraps;
+            int useDevice = SaveGame.Player.SkillUseDevice;
+            int savingThrow = SaveGame.Player.SkillSavingThrow;
+            int stealth = SaveGame.Player.SkillStealth;
+            int searching = SaveGame.Player.SkillSearching;
+            int searchFrequency = SaveGame.Player.SkillSearchFrequency;
             SaveGame.Print(Colour.Blue, "Fighting    :", 36, 1);
             PrintCategorisedNumber(fighting, 12, 36, 15);
             SaveGame.Print(Colour.Blue, "Shooting    :", 37, 1);
@@ -483,7 +481,7 @@ namespace AngbandOS
             SaveGame.Print(Colour.Blue, "Magic Device:", 39, 28);
             PrintCategorisedNumber(useDevice, 6, 39, 42);
             SaveGame.Print(Colour.Blue, "Blows/Action:", 36, 55);
-            SaveGame.Print(Colour.Green, $"{_player.MeleeAttacksPerRound}", 36, 69);
+            SaveGame.Print(Colour.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
             SaveGame.Print(Colour.Blue, "Tot.Dmg./Act:", 37, 55);
             // Work out damage per action
             var buf = string.Empty;
@@ -499,9 +497,9 @@ namespace AngbandOS
             }
             SaveGame.Print(Colour.Green, buf, 37, 69);
             SaveGame.Print(Colour.Blue, "Shots/Action:", 38, 55);
-            SaveGame.Print(Colour.Green, $"{_player.MissileAttacksPerRound}", 38, 69);
+            SaveGame.Print(Colour.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
             SaveGame.Print(Colour.Blue, "Infra-Vision:", 39, 55);
-            SaveGame.Print(Colour.Green, $"{_player.InfravisionRange * 10} feet", 39, 69);
+            SaveGame.Print(Colour.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
         }
 
         /// <summary>
@@ -514,68 +512,68 @@ namespace AngbandOS
             SaveGame.Print(Colour.Blue, "Gender      :", 3, 1);
             SaveGame.Print(Colour.Blue, "Race        :", 4, 1);
             SaveGame.Print(Colour.Blue, "Class       :", 5, 1);
-            if (_player.Realm1 != 0 || _player.Realm2 != 0)
+            if (SaveGame.Player.Realm1 != 0 || SaveGame.Player.Realm2 != 0)
             {
                 SaveGame.Print(Colour.Blue, "Magic       :", 6, 1);
             }
-            SaveGame.Print(Colour.Brown, _player.Name, 2, 15);
-            SaveGame.Print(Colour.Brown, _player.Gender.Title, 3, 15);
-            SaveGame.Print(Colour.Brown, _player.Race.Title, 4, 15);
-            SaveGame.Print(Colour.Brown, Profession.ClassSubName(_player.ProfessionIndex, _player.Realm1), 5, 15);
+            SaveGame.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
+            SaveGame.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
+            SaveGame.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
+            SaveGame.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), 5, 15);
             // Only print realms if we have them
-            if (_player.Realm1 != 0)
+            if (SaveGame.Player.Realm1 != 0)
             {
-                if (_player.Realm2 != 0)
+                if (SaveGame.Player.Realm2 != 0)
                 {
-                    realmBuff = Spellcasting.RealmName(_player.Realm1) + "/" + Spellcasting.RealmName(_player.Realm2);
+                    realmBuff = Spellcasting.RealmName(SaveGame.Player.Realm1) + "/" + Spellcasting.RealmName(SaveGame.Player.Realm2);
                 }
                 else
                 {
-                    realmBuff = Spellcasting.RealmName(_player.Realm1);
+                    realmBuff = Spellcasting.RealmName(SaveGame.Player.Realm1);
                 }
             }
-            if (_player.Realm1 != 0)
+            if (SaveGame.Player.Realm1 != 0)
             {
                 SaveGame.Print(Colour.Brown, realmBuff, 6, 15);
             }
             // Fanatics and Cultists get a patron
-            if (_player.ProfessionIndex == CharacterClass.Fanatic || _player.ProfessionIndex == CharacterClass.Cultist)
+            if (SaveGame.Player.ProfessionIndex == CharacterClass.Fanatic || SaveGame.Player.ProfessionIndex == CharacterClass.Cultist)
             {
                 SaveGame.Print(Colour.Blue, "Patron      :", 7, 1);
-                SaveGame.Print(Colour.Brown, _player.GooPatron.LongName, 7, 15);
+                SaveGame.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
             }
             // Priests get a deity
-            if (_player.Religion.Deity != Pantheon.GodName.None)
+            if (SaveGame.Player.Religion.Deity != Pantheon.GodName.None)
             {
                 SaveGame.Print(Colour.Blue, "Deity       :", 7, 1);
-                SaveGame.Print(Colour.Brown, _player.Religion.GetPatronDeity().LongName, 7, 15);
+                SaveGame.Print(Colour.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
             }
             SaveGame.Print(Colour.Blue, "Birthday", 2, 32);
-            string dateBuff = _player.GameTime.BirthdayText.PadLeft(8);
+            string dateBuff = SaveGame.Player.GameTime.BirthdayText.PadLeft(8);
             SaveGame.Print(Colour.Brown, dateBuff, 2, 46);
-            PrintShortScore("Age          ", _player.Age, 3, 32, Colour.Brown);
-            PrintShortScore("Height       ", _player.Height, 4, 32, Colour.Brown);
-            PrintShortScore("Weight       ", _player.Weight, 5, 32, Colour.Brown);
-            PrintShortScore("Social Class ", _player.SocialClass, 6, 32, Colour.Brown);
+            PrintShortScore("Age          ", SaveGame.Player.Age, 3, 32, Colour.Brown);
+            PrintShortScore("Height       ", SaveGame.Player.Height, 4, 32, Colour.Brown);
+            PrintShortScore("Weight       ", SaveGame.Player.Weight, 5, 32, Colour.Brown);
+            PrintShortScore("Social Class ", SaveGame.Player.SocialClass, 6, 32, Colour.Brown);
             int i;
             // Print a quick summary of ability scores, but no detail
             for (i = 0; i < 6; i++)
             {
                 string buf;
-                if (_player.AbilityScores[i].Innate < _player.AbilityScores[i].InnateMax)
+                if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
                     SaveGame.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 2 + i, 61);
-                    int value = _player.AbilityScores[i].Adjusted;
+                    int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
                     SaveGame.Print(Colour.Red, buf, 2 + i, 66);
-                    value = _player.AbilityScores[i].AdjustedMax;
+                    value = SaveGame.Player.AbilityScores[i].AdjustedMax;
                     buf = value.StatToString();
                     SaveGame.Print(Colour.Green, buf, 2 + i, 73);
                 }
                 else
                 {
                     SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], 2 + i, 61);
-                    buf = _player.AbilityScores[i].Adjusted.StatToString();
+                    buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
                     SaveGame.Print(Colour.Green, buf, 2 + i, 66);
                 }
             }

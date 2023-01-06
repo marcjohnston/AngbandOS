@@ -3068,7 +3068,7 @@ namespace AngbandOS
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrEquippy))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrEquippy);
-                CharacterViewer.PrintEquippy(this, Player);
+                CharacterViewer.PrintEquippy(this);
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMisc))
             {
@@ -12557,7 +12557,7 @@ namespace AngbandOS
                         Player.Health = Player.MaxHealth;
                         Player.Mana = Player.MaxMana;
                         Player.Energy = 150;
-                        CharacterViewer characterViewer = new CharacterViewer(this, Player);
+                        CharacterViewer characterViewer = new CharacterViewer(this);
                         while (true && !Shutdown)
                         {
                             characterViewer.DisplayPlayer();

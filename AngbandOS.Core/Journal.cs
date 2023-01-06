@@ -183,7 +183,7 @@ namespace AngbandOS
         {
             SaveGame.Clear();
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 0 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 0 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 0 + 11);
             DisplayStat("Add Str", 2, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Str);
             DisplayStat("Add Int", 3, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Int);
@@ -202,7 +202,7 @@ namespace AngbandOS
             DisplayStat("Chaotic", 16, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Chaotic);
             DisplayStat("Vampiric", 17, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Vampiric);
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 26 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 26 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 26 + 11);
             DisplayStat("Slay Anim.", 2, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayAnimal);
             DisplayStat("Slay Evil", 3, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayEvil);
@@ -221,7 +221,7 @@ namespace AngbandOS
             DisplayStat("Fire Brand", 16, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandFire);
             DisplayStat("Cold Brand", 17, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandCold);
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 0, 52 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 52 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 52 + 11);
             DisplayStat("Sust Str", 2, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr);
             DisplayStat("Sust Int", 3, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt);
@@ -240,7 +240,7 @@ namespace AngbandOS
             DisplayStat("Free Act", 16, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.FreeAct);
             DisplayStat("Hold Life", 17, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife);
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 0 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 0 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 0 + 11);
             DisplayStat("Res Acid", 22, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResAcid);
             DisplayStat("Res Elec", 23, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResElec);
@@ -259,7 +259,7 @@ namespace AngbandOS
             DisplayStat("Res Chaos", 36, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResChaos);
             DisplayStat("Res Disen", 37, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen);
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 26 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 26 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 26 + 11);
             DisplayStat("Aura Fire", 22, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShFire);
             DisplayStat("Aura Elec", 23, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShElec);
@@ -278,7 +278,7 @@ namespace AngbandOS
             DisplayStat("See Invis", 36, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis);
             DisplayStat("Telepathy", 37, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy);
 
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, SaveGame.Player, 20, 52 + 11);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 52 + 11);
             SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 52 + 11);
             DisplayStat("Digestion", 22, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest);
             DisplayStat("Regen", 23, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen);
