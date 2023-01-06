@@ -6567,33 +6567,13 @@ namespace AngbandOS
 
         private bool MinusAc()
         {
-            Item oPtr = null;
-            switch (Program.Rng.DieRoll(6))
+            BaseInventorySlot? inventorySlot = new ArmourInventorySlotWeightedRandom(this).Choose();
+            if (inventorySlot == null)
             {
-                case 1:
-                    oPtr = Player.Inventory[InventorySlot.Body];
-                    break;
-
-                case 2:
-                    oPtr = Player.Inventory[InventorySlot.Arm];
-                    break;
-
-                case 3:
-                    oPtr = Player.Inventory[InventorySlot.Cloak];
-                    break;
-
-                case 4:
-                    oPtr = Player.Inventory[InventorySlot.Hands];
-                    break;
-
-                case 5:
-                    oPtr = Player.Inventory[InventorySlot.Head];
-                    break;
-
-                case 6:
-                    oPtr = Player.Inventory[InventorySlot.Feet];
-                    break;
+                // No inventory slots are affected by acid or the slot is empty.
+                return false;
             }
+            Item oPtr = Player.Inventory[inventorySlot.WeightedRandom.Choose()];
             if (oPtr == null)
             {
                 return false;

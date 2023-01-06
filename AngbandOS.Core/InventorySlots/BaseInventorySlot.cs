@@ -30,6 +30,9 @@ namespace AngbandOS.Core.InventorySlots
 
         public virtual string SenseLocation => $"you are {DescribeWieldLocation}";
 
+        /// <summary>
+        /// Returns a weighted random chooser for an item in the slot.  Each item has an equal weight.
+        /// </summary>
         public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(InventorySlots);
 
         /// <summary>
