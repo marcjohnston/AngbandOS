@@ -1,3 +1,6 @@
+using AngbandOS.Core.EventArgs;
+using System;
+
 namespace AngbandOS
 {
     [Serializable]
@@ -569,204 +572,75 @@ namespace AngbandOS
                 : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
-        public BaseInventorySlot[] EquipmentInventorySlots
+        public void ShowEquip(IItemFilter? itemFilter)
         {
-            get
+            ShowInventoryOptions options = new ShowInventoryOptions()
             {
-                BaseInventorySlot[] equipmentInventorySlots = SaveGame.SingletonRepository.InventorySlots
-                    .Where(_inventorySlot => _inventorySlot.IsEquipment)
-                    .OrderBy(_inventorySlot => _inventorySlot.InventorySlots[0])
-                    .ToArray();
-                return equipmentInventorySlots;
-            }
+                ShowEmptySlotsAsNothing = true,
+                ShowFlavourColumn = true,
+                ShowUsageColumn = true
+            };
+            ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, options);
         }
 
-        public void ShowEquip(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
+        public void ShowInven(Func<BaseInventorySlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
         {
-            ConsoleTable consoleTable = new ConsoleTable("label", "flavour", "use", "description", "weight");
-            consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
-            foreach (BaseInventorySlot inventorySlot in EquipmentInventorySlots)
+            if (options == null)
             {
+                options = new ShowInventoryOptions();
+            }
+
+            BaseInventorySlot[] inventorySlots = SaveGame.SingletonRepository.InventorySlots
+                .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
+                .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
+                .ToArray();
+
+            const string labels = "abcdefghijklmnopqrstuvwxyz";
+            ConsoleTable consoleTable = new ConsoleTable("label", "flavour", "usage", "description", "weight");
+            consoleTable.Column("flavour").IsVisible = options.ShowFlavourColumn;
+            consoleTable.Column("usage").IsVisible = options.ShowFlavourColumn;
+            consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
+            foreach (BaseInventorySlot inventorySlot in inventorySlots)
+            {
+                bool slotIsEmpty = true;
                 foreach (int index in inventorySlot.InventorySlots)
                 {
                     Item oPtr = _items[index];
+                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    {
+                        ConsoleTableRow consoleRow = consoleTable.AddRow();
+                        consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");
+
+                        if (oPtr.BaseItemCategory != null)
+                        {
+                            // Apply flavour visuals
+                            consoleRow["flavour"] = new ConsoleChar(oPtr.BaseItemCategory.FlavorColour, oPtr.BaseItemCategory.FlavorCharacter);
+                        }
+                        else
+                        {
+                            // There is no item.
+                            consoleRow["flavour"] = new ConsoleChar(Colour.Background, ' ');
+                        }
+                        consoleRow["usage"] = new ConsoleString(Colour.White, $"{inventorySlot.MentionUse(index)}:");
+
+                        Colour colour = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
+                        consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
+
+                        int wgt = oPtr.Weight * oPtr.Count;
+                        consoleRow["weight"] = new ConsoleString(Colour.White, $"{wgt / 10}.{wgt % 10} lb");
+                        slotIsEmpty = false;
+                    }
+                }
+                if (options.ShowEmptySlotsAsNothing && slotIsEmpty)
+                {
                     ConsoleTableRow consoleRow = consoleTable.AddRow();
-                    consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");
-
-                    if (oPtr.BaseItemCategory != null)
-                    {
-                        // Apply flavour visuals
-                        consoleRow["flavour"] = new ConsoleChar(oPtr.BaseItemCategory.FlavorColour, oPtr.BaseItemCategory.FlavorCharacter);
-                    }
-                    else
-                    {
-                        // There is no item.
-                        consoleRow["flavour"] = new ConsoleChar(Colour.Background, ' ');
-                    }
-                    consoleRow["use"] = new ConsoleString(Colour.White, $"{MentionUse(index)}:");
-
-                    Colour colour = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
-                    consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
-
-                    int wgt = oPtr.Weight * oPtr.Count;
-                    consoleRow["weight"] = new ConsoleString(Colour.White, $"{wgt / 10}.{wgt % 10} lb");
+                    consoleRow["label"] = new ConsoleString(Colour.White, $"{labels[consoleTable.Rows.Count() - 1]})");
+                    consoleRow["usage"] = new ConsoleString(Colour.White, $"{inventorySlot.MentionUse(null)}:");
+                    consoleRow["description"] = new ConsoleString(Colour.White, "(nothing)");
+                    consoleRow["weight"] = new ConsoleString(Colour.White, $"0.0 lb");
                 }
             }
             consoleTable.Print(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
-        }
-
-        public void ShowInven(IItemFilter? itemFilter, int maxItemDisplayColumn = 50)
-        {
-            int i, j, k, z = 0;
-            Item oPtr;
-            int[] outIndex = new int[26];
-            Colour[] outColour = new Colour[26];
-            string[] outDesc = new string[26];
-
-            // Set the initial left column.
-            int col = maxItemDisplayColumn;
-
-            // Compute the minimum length.  
-            int len = 79 - col;
-            int lim = 79 - 3;
-            lim -= 9;
-            lim -= 2;
-            for (i = 0; i < InventorySlot.PackCount; i++)
-            {
-                oPtr = _items[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                z = i + 1;
-            }
-            for (k = 0, i = 0; i < z; i++)
-            {
-                oPtr = _items[i];
-                if (!ItemMatchesFilter(oPtr, itemFilter))
-                {
-                    continue;
-                }
-                string oName = oPtr.Description(true, 3);
-                if (oName.Length > lim)
-                {
-                    oName = oName.Substring(0, lim);
-                }
-                outIndex[k] = i;
-                outColour[k] = oPtr.BaseItemCategory.Colour;
-                outDesc[k] = oName;
-                int l = outDesc[k].Length + 5;
-                l += 9;
-                l += 2;
-                if (l > len)
-                {
-                    len = l;
-                }
-                k++;
-            }
-
-            // Do not allow the left side of the print to be less than 3.  We need space for the a.)
-            col = len > 76 ? 0 : 79 - len;
-
-            for (j = 0; j < k; j++)
-            {
-                i = outIndex[j];
-                oPtr = _items[i];
-                SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
-                string tmpVal = $"{i.IndexToLabel()})";
-                SaveGame.Print(tmpVal, j + 1, col);
-                Colour a = oPtr.BaseItemCategory.FlavorColour;
-                char c = oPtr.BaseItemCategory.FlavorCharacter;
-                SaveGame.Place(a, c, j + 1, col + 3);
-                SaveGame.Print(outColour[j], outDesc[j], j + 1, col + 5);
-                int wgt = oPtr.Weight * oPtr.Count;
-                tmpVal = $"{wgt / 10,2}.{wgt % 10} lb";
-                SaveGame.Print(tmpVal, j + 1, 71);
-            }
-            if (j != 0 && j < 26)
-            {
-                SaveGame.PrintLine("", j + 1, col != 0 ? col - 2 : col);
-            }
-        }
-
-        private string MentionUse(int i)
-        {
-            string p;
-            switch (i)
-            {
-                case InventorySlot.MeleeWeapon:
-                    p = "Wielding";
-                    break;
-
-                case InventorySlot.RangedWeapon:
-                    p = "Shooting";
-                    break;
-
-                case InventorySlot.Digger:
-                    p = "Digging with";
-                    break;
-
-                case InventorySlot.LeftHand:
-                    p = "On left hand";
-                    break;
-
-                case InventorySlot.RightHand:
-                    p = "On right hand";
-                    break;
-
-                case InventorySlot.Neck:
-                    p = "Around neck";
-                    break;
-
-                case InventorySlot.Lightsource:
-                    p = "Light source";
-                    break;
-
-                case InventorySlot.Body:
-                    p = "On body";
-                    break;
-
-                case InventorySlot.Cloak:
-                    p = "About body";
-                    break;
-
-                case InventorySlot.Arm:
-                    p = "On arm";
-                    break;
-
-                case InventorySlot.Head:
-                    p = "On head";
-                    break;
-
-                case InventorySlot.Hands:
-                    p = "On hands";
-                    break;
-
-                case InventorySlot.Feet:
-                    p = "On feet";
-                    break;
-
-                default:
-                    p = "In pack";
-                    break;
-            }
-            if (i == InventorySlot.MeleeWeapon)
-            {
-                Item oPtr = _items[i];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "Just lifting";
-                }
-            }
-            if (i == InventorySlot.RangedWeapon)
-            {
-                Item oPtr = _items[i];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "Just holding";
-                }
-            }
-            return p;
         }
     }
 }

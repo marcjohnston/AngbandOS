@@ -10,13 +10,13 @@
         public ConsoleLocation BottomRight { get; }
         public ConsoleLocation TopRight => new ConsoleLocation(Right, Top);
         public ConsoleLocation BottomLeft => new ConsoleLocation(Left, Bottom);
-        public void Clear(SaveGame saveGame)
+        public void Clear(SaveGame saveGame, Colour colour)
         {
             for (int y = Top; y <= Bottom; y++)
             {
                 for (int x  = Left; x <= Right; x++)
                 {
-                    saveGame.Print(Colour.Background, ' ', y, x);
+                    saveGame.Print(colour, ' ', y, x);
                 }
             }
         }

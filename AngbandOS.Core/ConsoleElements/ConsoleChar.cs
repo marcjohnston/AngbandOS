@@ -14,9 +14,9 @@
 
         public override void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
-            containerWindow.Clear(saveGame);
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
+            location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
             saveGame.Print(Colour, Char, location.Y, location.X);
         }
 

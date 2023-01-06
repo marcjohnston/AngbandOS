@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.StoreCommands
+﻿using AngbandOS.Core.ItemFilters;
+
+namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the player's inventory
@@ -21,7 +23,7 @@
             saveGame.ViewingEquipment = false;
             saveGame.SaveScreen();
             // We want to see everything
-            saveGame.Player.Inventory.ShowInven(null);
+            saveGame.Player.Inventory.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
             // Get a new command
             string outVal = $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             saveGame.PrintLine(outVal, 0, 0);

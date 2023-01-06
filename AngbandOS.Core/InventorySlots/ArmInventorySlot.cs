@@ -14,10 +14,11 @@ namespace AngbandOS.Core.InventorySlots
         private ArmInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.Arm };
         public override string Label(int index) => "j";
-        public override string MentionUse(int index) => "On arm";
+        public override string MentionUse(int? index) => "On arm";
         public override string DescribeWieldLocation(int index) => "wearing on your arm";
         public override int BareArmourClassBonus => SaveGame.Player.Level > 10 ? (SaveGame.Player.Level - 8) / 3 : 0;
         public override bool IsWeightRestricting => true;
         public override bool IsArmour => true;
+        public override int SortOrder => 10;
     }
 }

@@ -13,15 +13,16 @@ namespace AngbandOS.Core.InventorySlots
     {
         private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
+        public override int SortOrder => 1;
         public override string Label(int index) => "a";
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are wielding";
-        public override string MentionUse(int index)
+        public override string MentionUse(int? index)
         {
             string p = "Wielding";
-            if (Count > 0)
+            if (Count > 0 && index.HasValue)
             {
-                int i = InventorySlots[index];
+                int i = InventorySlots[index.Value];
                 Item oPtr = SaveGame.Player.Inventory[i];
                 if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {

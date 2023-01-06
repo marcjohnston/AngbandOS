@@ -14,7 +14,8 @@ namespace AngbandOS.Core.InventorySlots
         private LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.LeftHand };
         public override string Label(int index) => "d";
-        public override string MentionUse(int index) => "On left hand";
+        public override string MentionUse(int? index) => "On left hand";
         public override string DescribeWieldLocation(int index) => "wearing on your left hand";
+        public override int SortOrder => 4;
     }
 }

@@ -16,12 +16,13 @@ namespace AngbandOS.Core.InventorySlots
         public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are shooting with";
-        public override string MentionUse(int index)
+        public override int SortOrder => 2;
+        public override string MentionUse(int? index)
         {
             string p = "Shooting";
-            if (Count > 0)
+            if (Count > 0 && index.HasValue)
             {
-                int i = InventorySlots[index];
+                int i = InventorySlots[index.Value];
                 Item oPtr = SaveGame.Player.Inventory[i];
                 if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {

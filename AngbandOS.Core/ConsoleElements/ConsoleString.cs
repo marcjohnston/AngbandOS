@@ -42,13 +42,13 @@ namespace AngbandOS.Core.ConsoleElements
 
         public override void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
-            containerWindow.Clear(saveGame);
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-            
+            location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
+
             foreach (ConsoleChar consoleChar in characters)
             {
-                consoleChar.Print(saveGame, location.ToWindow(1, 1), alignment);
+                consoleChar.Print(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
                 location = location.Offset(1, 0);
             }
         }

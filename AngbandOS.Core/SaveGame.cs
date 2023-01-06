@@ -1018,7 +1018,7 @@ namespace AngbandOS
                 {
                     if (ViewingItemList)
                     {
-                        Player.Inventory.ShowInven(itemFilter);
+                        Player.Inventory.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
                     }
                 }
                 else

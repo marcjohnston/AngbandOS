@@ -23,6 +23,11 @@ namespace AngbandOS.Core.InventorySlots
         public abstract int[] InventorySlots { get; }
         public abstract string Label(int index);
 
+        /// <summary>
+        /// Returns the sort order when displayed in a list with other inventory slots.  Lower numbers show before higher numbers.
+        /// </summary>
+        public abstract int SortOrder { get; }
+
         public virtual string SenseLocation => $"you are {DescribeWieldLocation}";
 
         public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(InventorySlots);
@@ -80,9 +85,9 @@ namespace AngbandOS.Core.InventorySlots
         /// <summary>
         /// Returns a string that describes how an item in the inventory slot is being used.
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">The index of the item.  If null, a generic non-item based usage is returned.</param>
         /// <returns></returns>
-        public abstract string MentionUse(int index);
+        public abstract string MentionUse(int? index);
 
         /// <summary>
         /// Returns a string that describes the wielding location of an item in the slot.
