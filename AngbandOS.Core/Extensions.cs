@@ -15,16 +15,6 @@ namespace AngbandOS
     internal static class Extensions
     {
         /// <summary>
-        /// Undoes the changes the ToCsvFriendly has done to recreate the original string
-        /// </summary>
-        /// <param name="s"> The csv-friendly string </param>
-        /// <returns> The original string </returns>
-        public static string FromCsvFriendly(this string s)
-        {
-            return s.Replace('£', '"').Replace('§', ',');
-        }
-
-        /// <summary>
         /// Converts an index (0-37) to a letter (a-z) for an inventory or equipment slot
         /// </summary>
         /// <param name="i"> The index </param>
@@ -210,17 +200,6 @@ namespace AngbandOS
             return val.ToString().PadLeft(6);
         }
 
-        ///// <summary>
-        ///// Strips characters from a string that would clash with viewing the string as
-        ///// comma-separated text
-        ///// </summary>
-        ///// <param name="s"> The original string </param>
-        ///// <returns> The csv-file friendly version of the string </returns>
-        //public static string ToCsvFriendly(this string s)
-        //{
-        //    return s.Replace('"', '£').Replace(',', '§');
-        //}
-
         /// <summary>
         /// Try to parse the string to an integer, returning 0 rather than an error if it can't be parsed
         /// </summary>
@@ -382,12 +361,6 @@ namespace AngbandOS
             }
         }
 
-        public static string ApplyDescriptionMacros(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
-        {
-            string pluralizedName = ApplyPlurizationMacro(name, count);
-            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, count, isKnownArtifact);
-        }
-
         public static string GetSignedValue(int value)
         {
             if (value >= 0)
@@ -397,18 +370,6 @@ namespace AngbandOS
             else
             {
                 return $"{value}";
-            }
-        }
-
-        public static string Delimit(string prefix, string delimiter, string suffix)
-        {
-            if (!String.IsNullOrEmpty(prefix) && !String.IsNullOrEmpty(suffix))
-            {
-                return $"{prefix}{delimiter}{suffix}";
-            }
-            else
-            {
-                return $"{prefix}{suffix}";
             }
         }
     }
