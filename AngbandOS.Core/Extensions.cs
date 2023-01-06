@@ -238,7 +238,7 @@ namespace AngbandOS
             }
             // Roman numerals are not positional, so simply start with the highest number and keep
             // appending and subtracting until we can't
-            foreach (System.Collections.Generic.KeyValuePair<int, string> item in GlobalData.NumberRomanDictionary)
+            foreach (KeyValuePair<int, string> item in GlobalData.NumberRomanDictionary)
             {
                 while (number >= item.Key)
                 {

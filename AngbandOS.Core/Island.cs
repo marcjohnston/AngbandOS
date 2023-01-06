@@ -35,7 +35,7 @@ namespace AngbandOS
                 ((wildX - 1) * (Constants.WildernessWidth - 1)) + x + 1];
         }
 
-        public void MakeIslandContours() // TODO: This method participated in a hang during startup
+        public void MakeIslandContours() 
         {
             do
             {
