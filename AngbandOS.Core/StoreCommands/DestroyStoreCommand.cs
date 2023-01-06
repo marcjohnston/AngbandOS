@@ -131,9 +131,9 @@
             // Tidy up the player's inventory
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -amount);
-                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -amount);
+                saveGame.Player.InvenItemDescribe(itemIndex);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {

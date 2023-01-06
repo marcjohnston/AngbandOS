@@ -186,7 +186,7 @@ namespace AngbandOS.Projection
                 }
                 if (Program.Rng.DieRoll(6) == 1)
                 {
-                    SaveGame.Player.Inventory.InvenDamage(SaveGame.SetAcidDestroy, 2);
+                    SaveGame.Player.InvenDamage(SaveGame.SetAcidDestroy, 2);
                 }
             }
             return true;

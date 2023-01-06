@@ -148,7 +148,7 @@ namespace AngbandOS.Projection
             }
             if (Program.Rng.DieRoll(5) == 1)
             {
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 3);
+                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
             }
             SaveGame.Player.TakeHit(dam, killer);
             return true;

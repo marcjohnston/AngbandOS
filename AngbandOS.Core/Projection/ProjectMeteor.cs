@@ -205,9 +205,9 @@ namespace AngbandOS.Projection
             {
                 if (!SaveGame.Player.HasFireImmunity)
                 {
-                    SaveGame.Player.Inventory.InvenDamage(SaveGame.SetFireDestroy, 2);
+                    SaveGame.Player.InvenDamage(SaveGame.SetFireDestroy, 2);
                 }
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 2);
+                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
             }
             return true;
         }

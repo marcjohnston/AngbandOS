@@ -33,7 +33,7 @@
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is a potion
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
             {
                 saveGame.MsgPrint("That is not a potion!");
                 return;
@@ -69,9 +69,9 @@
                 // We didn't channel it, so use up one potion from the stack
                 if (itemIndex >= 0)
                 {
-                    saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                    saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                    saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                    saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                    saveGame.Player.InvenItemDescribe(itemIndex);
+                    saveGame.Player.InvenItemOptimize(itemIndex);
                 }
                 else
                 {

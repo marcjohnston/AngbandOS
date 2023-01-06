@@ -37,7 +37,7 @@
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex]; // TODO: Remove access to Level
             // Check that the book is useable by the player
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new UsableSpellBookItemFilter(saveGame)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new UsableSpellBookItemFilter(saveGame)))
             {
                 saveGame.MsgPrint("You can't read that.");
                 return;

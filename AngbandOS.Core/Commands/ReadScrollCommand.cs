@@ -52,7 +52,7 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a scroll
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
             {
                 saveGame.MsgPrint("That is not a scroll!");
                 return;
@@ -90,9 +90,9 @@ namespace AngbandOS.Commands
                 // If it wasn't used up then decrease the amount in the stack
                 if (itemIndex >= 0)
                 {
-                    saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                    saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                    saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                    saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                    saveGame.Player.InvenItemDescribe(itemIndex);
+                    saveGame.Player.InvenItemOptimize(itemIndex);
                 }
                 else
                 {

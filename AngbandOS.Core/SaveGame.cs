@@ -977,7 +977,7 @@ namespace AngbandOS
                 {
                     Item oPtr = Level.Items[currentItemIndex];
                     nextItemIndex = oPtr.NextInStack;
-                    if (Player.Inventory.ItemMatchesFilter(oPtr, itemFilter))
+                    if (Player.ItemMatchesFilter(oPtr, itemFilter))
                     {
                         allowFloor = true;
                     }
@@ -1018,14 +1018,14 @@ namespace AngbandOS
                 {
                     if (ViewingItemList)
                     {
-                        Player.Inventory.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
+                        Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
                     }
                 }
                 else
                 {
                     if (ViewingItemList)
                     {
-                        Player.Inventory.ShowEquip(itemFilter);
+                        Player.ShowEquip(itemFilter);
                     }
                 }
                 string tmpVal;
@@ -1118,7 +1118,7 @@ namespace AngbandOS
                                 {
                                     Item oPtr = Level.Items[currentItemIndex];
                                     nextItemIndex = oPtr.NextInStack;
-                                    if (!Player.Inventory.ItemMatchesFilter(oPtr, itemFilter))
+                                    if (!Player.ItemMatchesFilter(oPtr, itemFilter))
                                     {
                                         continue;
                                     }
@@ -1144,7 +1144,7 @@ namespace AngbandOS
                             {
                                 k = equipment.Count == 1 ? equipment[0] : -1;
                             }
-                            if (!Player.Inventory.GetItemOkay(k, itemFilter))
+                            if (!Player.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }
@@ -1160,8 +1160,8 @@ namespace AngbandOS
                             {
                                 which = char.ToLower(which);
                             }
-                            k = !ViewingEquipment ? Player.Inventory.LabelToInven(which) : Player.Inventory.LabelToEquip(which);
-                            if (!Player.Inventory.GetItemOkay(k, itemFilter))
+                            k = !ViewingEquipment ? Player.LabelToInven(which) : Player.LabelToEquip(which);
+                            if (!Player.GetItemOkay(k, itemFilter))
                             {
                                 break;
                             }
@@ -1390,12 +1390,12 @@ namespace AngbandOS
             if ((Player.NoticeFlags & Constants.PnCombine) != 0)
             {
                 Player.NoticeFlags &= ~Constants.PnCombine;
-                Player.Inventory.CombinePack();
+                Player.CombinePack();
             }
             if ((Player.NoticeFlags & Constants.PnReorder) != 0)
             {
                 Player.NoticeFlags &= ~Constants.PnReorder;
-                Player.Inventory.ReorderPack();
+                Player.ReorderPack();
             }
         }
 
@@ -2361,9 +2361,9 @@ namespace AngbandOS
                     string oName = oPtr.Description(true, 3);
                     MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                     Level.DropNear(oPtr, 0, Player.MapY, Player.MapX);
-                    Player.Inventory.InvenItemIncrease(item, -255);
-                    Player.Inventory.InvenItemDescribe(item);
-                    Player.Inventory.InvenItemOptimize(item);
+                    Player.InvenItemIncrease(item, -255);
+                    Player.InvenItemDescribe(item);
+                    Player.InvenItemOptimize(item);
                     if (Player.NoticeFlags != 0)
                     {
                         NoticeStuff();
@@ -3274,7 +3274,7 @@ namespace AngbandOS
             Player.TakeHit(dam, kbStr);
             if (!(Player.TimedAcidResistance != 0 && Player.HasAcidResistance))
             {
-                Player.Inventory.InvenDamage(SetAcidDestroy, inv);
+                Player.InvenDamage(SetAcidDestroy, inv);
             }
         }
 
@@ -3477,9 +3477,9 @@ namespace AngbandOS
             }
             if (item >= 0)
             {
-                Player.Inventory.InvenItemIncrease(item, -amt);
-                Player.Inventory.InvenItemDescribe(item);
-                Player.Inventory.InvenItemOptimize(item);
+                Player.InvenItemIncrease(item, -amt);
+                Player.InvenItemDescribe(item);
+                Player.InvenItemOptimize(item);
             }
             else
             {
@@ -3891,7 +3891,7 @@ namespace AngbandOS
             Player.TakeHit(dam, kbStr);
             if (!(Player.HasColdResistance && Player.TimedColdResistance != 0))
             {
-                Player.Inventory.InvenDamage(SetColdDestroy, inv);
+                Player.InvenDamage(SetColdDestroy, inv);
             }
         }
 
@@ -4724,7 +4724,7 @@ namespace AngbandOS
             Player.TakeHit(dam, kbStr);
             if (!(Player.TimedLightningResistance != 0 && Player.HasLightningResistance))
             {
-                Player.Inventory.InvenDamage(SetElecDestroy, inv);
+                Player.InvenDamage(SetElecDestroy, inv);
             }
         }
 
@@ -4966,7 +4966,7 @@ namespace AngbandOS
             Player.TakeHit(dam, kbStr);
             if (!(Player.HasFireResistance && Player.TimedFireResistance != 0))
             {
-                Player.Inventory.InvenDamage(SetFireDestroy, inv);
+                Player.InvenDamage(SetFireDestroy, inv);
             }
         }
 
@@ -5007,8 +5007,8 @@ namespace AngbandOS
                     string itemName = oPtr.Description(true, 3);
                     MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
-                    Player.Inventory.InvenItemIncrease(item, -amount);
-                    Player.Inventory.InvenItemOptimize(item);
+                    Player.InvenItemIncrease(item, -amount);
+                    Player.InvenItemOptimize(item);
                 }
             }
             else if (item >= 0)
@@ -5018,8 +5018,8 @@ namespace AngbandOS
                 {
                     MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
-                    Player.Inventory.InvenItemIncrease(item, -amount);
-                    Player.Inventory.InvenItemOptimize(item);
+                    Player.InvenItemIncrease(item, -amount);
+                    Player.InvenItemOptimize(item);
                 }
             }
             else
@@ -5053,8 +5053,8 @@ namespace AngbandOS
                 {
                     MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
-                    Player.Inventory.InvenItemIncrease(item, -amount);
-                    Player.Inventory.InvenItemOptimize(item);
+                    Player.InvenItemIncrease(item, -amount);
+                    Player.InvenItemOptimize(item);
                 }
             }
             else if (item >= 0)
@@ -5064,8 +5064,8 @@ namespace AngbandOS
                 {
                     MsgPrint($"You destroy {oName}.");
                     int amount = oPtr.Count;
-                    Player.Inventory.InvenItemIncrease(item, -amount);
-                    Player.Inventory.InvenItemOptimize(item);
+                    Player.InvenItemIncrease(item, -amount);
+                    Player.InvenItemOptimize(item);
                 }
             }
             else
@@ -5091,8 +5091,8 @@ namespace AngbandOS
                     string itemName = oPtr.Description(true, 3);
                     MsgPrint($"You destroy {itemName}.");
                     int amount = oPtr.Count;
-                    Player.Inventory.InvenItemIncrease(i, -amount);
-                    Player.Inventory.InvenItemOptimize(i);
+                    Player.InvenItemIncrease(i, -amount);
+                    Player.InvenItemOptimize(i);
                     i--;
                 }
             }
@@ -5327,9 +5327,9 @@ namespace AngbandOS
                     MsgPrint("There is a bright flash of light.");
                     if (item >= 0)
                     {
-                        Player.Inventory.InvenItemIncrease(item, -999);
-                        Player.Inventory.InvenItemDescribe(item);
-                        Player.Inventory.InvenItemOptimize(item);
+                        Player.InvenItemIncrease(item, -999);
+                        Player.InvenItemDescribe(item);
+                        Player.InvenItemOptimize(item);
                     }
                     else
                     {
@@ -8156,14 +8156,14 @@ namespace AngbandOS
                         MsgPrint($"You stomp on {itemName}.");
                     }
                     // If we can't carry the item, let us know
-                    else if (!Player.Inventory.InvenCarryOkay(item))
+                    else if (!Player.InvenCarryOkay(item))
                     {
                         MsgPrint($"You have no room for {itemName}.");
                     }
                     else
                     {
                         // Actually pick up the item
-                        int slot = Player.Inventory.InvenCarry(item, false);
+                        int slot = Player.InvenCarry(item, false);
                         item = Player.Inventory[slot];
                         itemName = item.Description(true, 3);
                         MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
@@ -12625,7 +12625,7 @@ namespace AngbandOS
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                Player.Inventory.InvenCarry(item, false);
+                Player.InvenCarry(item, false);
                 item = new Item(this);
             }
             else
@@ -12634,7 +12634,7 @@ namespace AngbandOS
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                Player.Inventory.InvenCarry(item, false);
+                Player.InvenCarry(item, false);
                 item = new Item(this);
             }
             if (Player.Race.OutfitsWithScrollsOfLight || Player.ProfessionIndex == CharacterClass.ChosenOne)
@@ -12644,7 +12644,7 @@ namespace AngbandOS
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                Player.Inventory.InvenCarry(item, false);
+                Player.InvenCarry(item, false);
             }
             else
             {
@@ -12653,7 +12653,7 @@ namespace AngbandOS
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                Player.Inventory.InvenCarry(item, false);
+                Player.InvenCarry(item, false);
                 Item carried = item.Clone(1);
                 Player.Inventory[InventorySlot.Lightsource] = carried;
                 Player.WeightCarried += carried.Weight;
@@ -12779,7 +12779,7 @@ namespace AngbandOS
                 int slot = item.BaseItemCategory.WieldSlot;
                 if (slot == -1)
                 {
-                    Player.Inventory.InvenCarry(item, false);
+                    Player.InvenCarry(item, false);
                 }
                 else
                 {

@@ -52,8 +52,8 @@ namespace AngbandOS.Core.AttackEffects
                     stolenItem.NextInStack = monster.FirstHeldItemIndex;
                     monster.FirstHeldItemIndex = nextObjectIndex;
                 }
-                saveGame.Player.Inventory.InvenItemIncrease(i, -1);
-                saveGame.Player.Inventory.InvenItemOptimize(i);
+                saveGame.Player.InvenItemIncrease(i, -1);
+                saveGame.Player.InvenItemOptimize(i);
                 obvious = true;
                 blinked = true;
                 return;

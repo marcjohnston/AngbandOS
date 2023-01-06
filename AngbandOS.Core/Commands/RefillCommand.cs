@@ -83,7 +83,7 @@
             }
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure our item is suitable fuel
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
+            if (!saveGame.Player.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
             {
                 saveGame.MsgPrint("You can't refill a lantern from that!");
                 return;
@@ -103,9 +103,9 @@
             // Update the inventory
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.InvenItemDescribe(itemIndex);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {
@@ -136,7 +136,7 @@
             }
             Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check that our fuel is suitable
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
+            if (!saveGame.Player.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
             {
                 saveGame.MsgPrint("You can't refill a torch with that!");
                 return;
@@ -160,9 +160,9 @@
             // Update the player's inventory
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.InvenItemDescribe(itemIndex);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {

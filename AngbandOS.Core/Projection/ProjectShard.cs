@@ -142,7 +142,7 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(12) == 1)
             {
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 3);
+                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
             }
             SaveGame.Player.TakeHit(dam, killer);
             return true;

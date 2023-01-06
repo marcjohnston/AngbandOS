@@ -45,7 +45,7 @@
             // Dropping things takes half a turn
             saveGame.EnergyUse = 50;
             // Drop it
-            saveGame.Player.Inventory.InvenDrop(itemIndex, amount);
+            saveGame.Player.InvenDrop(itemIndex, amount);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrEquippy);
         }
     }

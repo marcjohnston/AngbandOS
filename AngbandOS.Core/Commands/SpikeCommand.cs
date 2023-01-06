@@ -61,9 +61,9 @@
                             }
                         }
                         // Use up the spike from the player's inventory
-                        saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                        saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                        saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                        saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                        saveGame.Player.InvenItemDescribe(itemIndex);
+                        saveGame.Player.InvenItemOptimize(itemIndex);
                     }
                 }
             }

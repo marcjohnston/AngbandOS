@@ -33,7 +33,7 @@
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a rod
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
             {
                 saveGame.MsgPrint("That is not a rod!");
                 return;
@@ -414,7 +414,7 @@
                     item.TypeSpecificValue = 0;
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleRod.Weight;
-                    saveGame.Player.Inventory.InvenCarry(singleRod, false);
+                    saveGame.Player.InvenCarry(singleRod, false);
                     saveGame.MsgPrint("You unstack your rod.");
                 }
             }

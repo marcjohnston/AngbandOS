@@ -275,9 +275,9 @@ namespace AngbandOS
                         Item qPtr = oPtr.Clone();
                         string oName = qPtr.Description(true, 3);
                         SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                        SaveGame.Player.Inventory.InvenItemIncrease(item, -255);
-                        SaveGame.Player.Inventory.InvenItemDescribe(item);
-                        SaveGame.Player.Inventory.InvenItemOptimize(item);
+                        SaveGame.Player.InvenItemIncrease(item, -255);
+                        SaveGame.Player.InvenItemDescribe(item);
+                        SaveGame.Player.InvenItemOptimize(item);
                         SaveGame.HandleStuff();
                         int itemPos = HomeCarry(qPtr);
                         if (itemPos >= 0)
@@ -998,9 +998,9 @@ namespace AngbandOS
             string oName = qPtr.Description(true, 3);
             qPtr.Inscription = "";
             int finalAsk = PriceItem(qPtr, _owner.MinInflate, true) * qPtr.Count;
-            SaveGame.Player.Inventory.InvenItemIncrease(item, -amt);
-            SaveGame.Player.Inventory.InvenItemDescribe(item);
-            SaveGame.Player.Inventory.InvenItemOptimize(item);
+            SaveGame.Player.InvenItemIncrease(item, -amt);
+            SaveGame.Player.InvenItemDescribe(item);
+            SaveGame.Player.InvenItemOptimize(item);
             SaveGame.HandleStuff();
             var deityName = deity.ShortName;
             if (finalAsk <= 0)
@@ -1801,7 +1801,7 @@ namespace AngbandOS
             Item oPtr = _inventory[item];
             int amt = 1;
             Item jPtr = oPtr.Clone(amt);
-            if (!SaveGame.Player.Inventory.InvenCarryOkay(jPtr))
+            if (!SaveGame.Player.InvenCarryOkay(jPtr))
             {
                 SaveGame.MsgPrint("You cannot carry that many different items.");
                 return;
@@ -1828,7 +1828,7 @@ namespace AngbandOS
                 }
             }
             jPtr = oPtr.Clone(amt);
-            if (!SaveGame.Player.Inventory.InvenCarryOkay(jPtr))
+            if (!SaveGame.Player.InvenCarryOkay(jPtr))
             {
                 SaveGame.MsgPrint("You cannot carry that many items.");
                 return;
@@ -1865,7 +1865,7 @@ namespace AngbandOS
                         oName = jPtr.Description(true, 3);
                         SaveGame.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";
-                        itemNew = SaveGame.Player.Inventory.InvenCarry(jPtr, false);
+                        itemNew = SaveGame.Player.InvenCarry(jPtr, false);
                         oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
                         SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                         SaveGame.HandleStuff();
@@ -1914,7 +1914,7 @@ namespace AngbandOS
             }
             else
             {
-                itemNew = SaveGame.Player.Inventory.InvenCarry(jPtr, false);
+                itemNew = SaveGame.Player.InvenCarry(jPtr, false);
                 oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
                 SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                 SaveGame.HandleStuff();
@@ -2040,9 +2040,9 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
             }
 
-            SaveGame.Player.Inventory.InvenItemIncrease(item, -amt);
-            SaveGame.Player.Inventory.InvenItemDescribe(item);
-            SaveGame.Player.Inventory.InvenItemOptimize(item);
+            SaveGame.Player.InvenItemIncrease(item, -amt);
+            SaveGame.Player.InvenItemDescribe(item);
+            SaveGame.Player.InvenItemOptimize(item);
             SaveGame.HandleStuff();
             itemPos = CarryItem(qPtr);
             if (itemPos >= 0)

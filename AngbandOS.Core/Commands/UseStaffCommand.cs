@@ -35,7 +35,7 @@ namespace AngbandOS.Commands
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is actually a staff
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
             {
                 saveGame.MsgPrint("That is not a staff!");
                 return;
@@ -114,13 +114,13 @@ namespace AngbandOS.Commands
                     item.TypeSpecificValue++;
                     item.Count--;
                     saveGame.Player.WeightCarried -= singleStaff.Weight;
-                    itemIndex = saveGame.Player.Inventory.InvenCarry(singleStaff, false);
+                    itemIndex = saveGame.Player.InvenCarry(singleStaff, false);
                     saveGame.MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
                 if (itemIndex >= 0)
                 {
-                    saveGame.Player.Inventory.ReportChargeUsageFromInventory(itemIndex);
+                    saveGame.Player.ReportChargeUsageFromInventory(itemIndex);
                 }
                 else
                 {

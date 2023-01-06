@@ -35,7 +35,7 @@
             // Get the item from the index
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Check if the item is activatable
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ActivatableItemFilter()))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ActivatableItemFilter()))
             {
                 saveGame.MsgPrint("You can't activate that!");
                 return;

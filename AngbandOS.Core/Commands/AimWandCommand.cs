@@ -32,7 +32,7 @@
             }
             // Get the item and check if it is really a wand
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
             {
                 saveGame.MsgPrint("That is not a wand!");
                 return;
@@ -110,13 +110,13 @@
                     item.TypeSpecificValue++;
                     item.Count--;
                     saveGame.Player.WeightCarried -= splitItem.Weight;
-                    itemIndex = saveGame.Player.Inventory.InvenCarry(splitItem, false);
+                    itemIndex = saveGame.Player.InvenCarry(splitItem, false);
                     saveGame.MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
                 if (itemIndex >= 0)
                 {
-                    saveGame.Player.Inventory.ReportChargeUsageFromInventory(itemIndex);
+                    saveGame.Player.ReportChargeUsageFromInventory(itemIndex);
                 }
                 else
                 {

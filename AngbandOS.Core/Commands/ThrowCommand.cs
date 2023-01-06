@@ -39,9 +39,9 @@
             Item missile = item.Clone(1);
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.InvenItemDescribe(itemIndex);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {

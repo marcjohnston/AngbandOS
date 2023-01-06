@@ -275,8 +275,8 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
             {
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetElecDestroy, 2);
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetFireDestroy, 2);
+                SaveGame.Player.InvenDamage(SaveGame.SetElecDestroy, 2);
+                SaveGame.Player.InvenDamage(SaveGame.SetFireDestroy, 2);
             }
             SaveGame.Player.TakeHit(dam, killer);
             return true;

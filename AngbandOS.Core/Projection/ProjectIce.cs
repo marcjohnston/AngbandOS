@@ -223,7 +223,7 @@ namespace AngbandOS.Projection
             {
                 if (!SaveGame.Player.HasColdImmunity)
                 {
-                    SaveGame.Player.Inventory.InvenDamage(SaveGame.SetColdDestroy, 3);
+                    SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
                 }
             }
             return true;

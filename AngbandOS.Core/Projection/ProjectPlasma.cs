@@ -219,7 +219,7 @@ namespace AngbandOS.Projection
             }
             if (!(SaveGame.Player.HasFireResistance || SaveGame.Player.TimedFireResistance != 0 || SaveGame.Player.HasFireImmunity))
             {
-                SaveGame.Player.Inventory.InvenDamage(SaveGame.SetAcidDestroy, 3);
+                SaveGame.Player.InvenDamage(SaveGame.SetAcidDestroy, 3);
             }
             return true;
         }

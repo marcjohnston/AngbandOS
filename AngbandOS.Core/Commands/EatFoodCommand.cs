@@ -32,7 +32,7 @@
             }
             Item item = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
             // Make sure the item is edible
-            if (!saveGame.Player.Inventory.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
+            if (!saveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
             {
                 saveGame.MsgPrint("You can't eat that!");
                 return;
@@ -73,9 +73,9 @@
             // Use up the item (if it fell to the floor this will have already been dealt with)
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.Inventory.InvenItemDescribe(itemIndex);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.InvenItemDescribe(itemIndex);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {

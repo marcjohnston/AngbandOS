@@ -60,8 +60,8 @@
             // Reduce the count of the item stack accordingly
             if (itemIndex >= 0)
             {
-                saveGame.Player.Inventory.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.Inventory.InvenItemOptimize(itemIndex);
+                saveGame.Player.InvenItemIncrease(itemIndex, -1);
+                saveGame.Player.InvenItemOptimize(itemIndex);
             }
             else
             {
@@ -72,7 +72,7 @@
             item = saveGame.Player.Inventory[slot];
             if (item.BaseItemCategory != null)
             {
-                saveGame.Player.Inventory.InvenTakeoff(slot, 255);
+                saveGame.Player.InvenTakeoff(slot, 255);
             }
             // Put the item into the wield slot
             saveGame.Player.Inventory[slot] = wornItem;

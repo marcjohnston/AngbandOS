@@ -34,8 +34,8 @@ namespace AngbandOS.Core.AttackEffects
                 string itemName = item.Description(false, 0);
                 string y = item.Count > 1 ? "One of y" : "Y";
                 saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                saveGame.Player.Inventory.InvenItemIncrease(i, -1);
-                saveGame.Player.Inventory.InvenItemOptimize(i);
+                saveGame.Player.InvenItemIncrease(i, -1);
+                saveGame.Player.InvenItemOptimize(i);
                 obvious = true;
                 return;
             }

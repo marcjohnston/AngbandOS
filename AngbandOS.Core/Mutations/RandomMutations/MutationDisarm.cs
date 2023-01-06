@@ -35,7 +35,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 return;
             }
             saveGame.MsgPrint("You drop your weapon!");
-            saveGame.Player.Inventory.InvenDrop(InventorySlot.MeleeWeapon, 1);
+            saveGame.Player.InvenDrop(InventorySlot.MeleeWeapon, 1);
         }
     }
 }

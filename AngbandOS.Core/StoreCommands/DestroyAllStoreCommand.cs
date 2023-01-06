@@ -35,8 +35,8 @@
                 saveGame.MsgPrint($"You destroy {itemName}.");
                 count++;
                 int amount = item.Count;
-                saveGame.Player.Inventory.InvenItemIncrease(i, -amount);
-                saveGame.Player.Inventory.InvenItemOptimize(i);
+                saveGame.Player.InvenItemIncrease(i, -amount);
+                saveGame.Player.InvenItemOptimize(i);
             }
             if (count == 0)
             {
