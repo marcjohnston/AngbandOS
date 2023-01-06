@@ -14,10 +14,8 @@ namespace AngbandOS
     [Serializable]
     internal class GridTile
     {
-        private readonly SaveGame SaveGame;
-        public GridTile(SaveGame saveGame)
+        public GridTile()
         {
-            SaveGame = saveGame;
             BackgroundFeature = ObjectRepository.FloorTileTypes["Nothing"];
             FeatureType = ObjectRepository.FloorTileTypes["Nothing"];
         }

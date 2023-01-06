@@ -78,7 +78,7 @@ namespace AngbandOS
                 Grid[i] = new GridTile[MaxWid];
                 for (int j = 0; j < MaxWid; j++)
                 {
-                    Grid[i][j] = new GridTile(SaveGame);
+                    Grid[i][j] = new GridTile();
                 }
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)

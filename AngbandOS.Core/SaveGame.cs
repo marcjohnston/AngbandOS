@@ -13413,7 +13413,7 @@ namespace AngbandOS
                     Level.Grid[i] = new GridTile[Level.MaxWid];
                     for (int j = 0; j < Level.MaxWid; j++)
                     {
-                        Level.Grid[i][j] = new GridTile(this);
+                        Level.Grid[i][j] = new GridTile();
                         if (CurrentDepth == 0)
                         {
                             Level.Grid[i][j].SetBackgroundFeature("Grass");
