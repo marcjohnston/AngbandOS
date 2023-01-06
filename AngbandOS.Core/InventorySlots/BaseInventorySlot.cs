@@ -21,6 +21,7 @@ namespace AngbandOS.Core.InventorySlots
         }
         private List<Item> Items = new List<Item>();
         public abstract int[] InventorySlots { get; }
+        public virtual string TakeOffMessage => "You were wearing";
         public abstract string Label(int index);
 
         /// <summary>

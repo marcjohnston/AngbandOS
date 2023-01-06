@@ -19,5 +19,6 @@ namespace AngbandOS.Core.InventorySlots
         public override string WieldPhrase => "Your light source is";
         public override bool ProvidesLight => true;
         public override int SortOrder => 7;
+        public override string TakeOffMessage => "You were holding";
     }
 }

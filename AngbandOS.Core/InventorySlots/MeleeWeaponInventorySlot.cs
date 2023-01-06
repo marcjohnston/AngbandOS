@@ -17,6 +17,7 @@ namespace AngbandOS.Core.InventorySlots
         public override string Label(int index) => "a";
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are wielding";
+        public override string TakeOffMessage => "You were wielding";
         public override string MentionUse(int? index)
         {
             string p = "Wielding";

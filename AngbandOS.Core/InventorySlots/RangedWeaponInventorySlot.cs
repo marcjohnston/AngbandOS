@@ -17,6 +17,7 @@ namespace AngbandOS.Core.InventorySlots
         public override bool IsMelee => true;
         public override string WieldPhrase => "You are shooting with";
         public override int SortOrder => 2;
+        public override string TakeOffMessage => "You were holding";
         public override string MentionUse(int? index)
         {
             string p = "Shooting";

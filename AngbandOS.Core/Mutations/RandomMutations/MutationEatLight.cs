@@ -31,11 +31,16 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 saveGame.Player.RestoreHealth(10);
             }
-            Item oPtr = saveGame.Player.Inventory[InventorySlot.Lightsource];
+            BaseInventorySlot? inventorySlot = saveGame.SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
+            if (inventorySlot == null)
+            {
+                return;
+            }
+            int index = inventorySlot.WeightedRandom.Choose();
+            Item oPtr = saveGame.Player.Inventory[index];
             if (oPtr.Category == ItemTypeEnum.Light)
             {
-                if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) &&
-                    oPtr.TypeSpecificValue > 0)
+                if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
                 {
                     saveGame.Player.RestoreHealth(oPtr.TypeSpecificValue / 20);
                     oPtr.TypeSpecificValue /= 2;

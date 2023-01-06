@@ -2991,22 +2991,8 @@ namespace AngbandOS
             }
             Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
-            if (item == InventorySlot.MeleeWeapon)
-            {
-                act = "You were wielding";
-            }
-            else if (item == InventorySlot.RangedWeapon)
-            {
-                act = "You were holding";
-            }
-            else if (item == InventorySlot.Lightsource)
-            {
-                act = "You were holding";
-            }
-            else
-            {
-                act = "You were wearing";
-            }
+            BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(item));
+            act = inventorySlot.TakeOffMessage;
             InvenItemIncrease(item, -amt);
             InvenItemOptimize(item);
             int slot = InvenCarry(qPtr, false);
