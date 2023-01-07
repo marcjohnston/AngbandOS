@@ -1456,41 +1456,14 @@
         public void CalcTorch()
         {
             SaveGame.Player.LightLevel = 0;
-            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
-                Item oPtr = SaveGame.Player.Inventory[i];
-                if (i == InventorySlot.Lightsource && oPtr.BaseItemCategory != null && oPtr.Category == ItemTypeEnum.Light)
+                foreach (int i in inventorySlot.InventorySlots)
                 {
-                    if (oPtr.ItemSubCategory == LightType.Torch && oPtr.TypeSpecificValue > 0)
+                    Item oPtr = SaveGame.Player.Inventory[i];
+                    if (oPtr.BaseItemCategory != null)
                     {
-                        SaveGame.Player.LightLevel++;
-                        continue;
-                    }
-                    if (oPtr.ItemSubCategory == LightType.Lantern && oPtr.TypeSpecificValue > 0)
-                    {
-                        SaveGame.Player.LightLevel += 2;
-                        continue;
-                    }
-                    if (oPtr.ItemSubCategory == LightType.Orb)
-                    {
-                        SaveGame.Player.LightLevel += 2;
-                        continue;
-                    }
-                    if (oPtr.IsFixedArtifact())
-                    {
-                        SaveGame.Player.LightLevel += 3;
-                    }
-                }
-                else
-                {
-                    if (oPtr.BaseItemCategory == null)
-                    {
-                        continue;
-                    }
-                    oPtr.RefreshFlagBasedProperties();
-                    if (oPtr.Characteristics.Lightsource)
-                    {
-                        SaveGame.Player.LightLevel++;
+                        SaveGame.Player.LightLevel += oPtr.BaseItemCategory.CalcTorch(oPtr);
                     }
                 }
             }

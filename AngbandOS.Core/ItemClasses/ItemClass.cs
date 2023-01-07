@@ -25,6 +25,25 @@ namespace AngbandOS.Core.ItemClasses
         public virtual int WieldSlot => InventorySlot.Pack;
 
         /// <summary>
+        /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
+        /// lightsource characteristic.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public virtual int CalcTorch(Item oPtr)
+        {
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.Characteristics.Lightsource)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
         public virtual BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();

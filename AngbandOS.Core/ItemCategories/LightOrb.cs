@@ -13,6 +13,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 1000;
         public override int Dd => 1;
+
+        /// <summary>
+        /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
+        /// if the orb is an artifact.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public override int CalcTorch(Item oPtr)
+        {
+            return base.CalcTorch(oPtr) + 2;
+        }
         public override int Ds => 1;
         public override string FriendlyName => "& Orb~";
         public override int Level => 10;

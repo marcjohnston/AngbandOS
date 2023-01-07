@@ -9,6 +9,16 @@ namespace AngbandOS.Core.ItemCategories
         public override Colour Colour => Colour.Brown;
         public override string Name => "Wooden Torch";
 
+        /// <summary>
+        /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3
+        /// if the torch is an artifact.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public override int CalcTorch(Item oPtr)
+        {
+            return base.CalcTorch(oPtr) + oPtr.TypeSpecificValue > 0 ? 1 : 0;
+        }
         public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 2;
         public override int Dd => 1;
@@ -21,6 +31,13 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 0;
         public override int Weight => 30;
 
+        public override void ApplyMagic(Item item, int level, int power)
+        {
+            if (item.TypeSpecificValue != 0)
+            {
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.TypeSpecificValue);
+            }
+        }
         /// <summary>
         /// Refill a torch from another torch
         /// </summary>

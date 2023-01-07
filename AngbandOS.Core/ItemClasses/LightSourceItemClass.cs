@@ -14,6 +14,22 @@ namespace AngbandOS.Core.ItemClasses
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 
+        /// <summary>
+        /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public override int CalcTorch(Item oPtr)
+        {
+            if (oPtr.IsFixedArtifact())
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public virtual void Refill(SaveGame saveGame, Item item)
         {
             saveGame.MsgPrint("Your light cannot be refilled.");
@@ -39,22 +55,6 @@ namespace AngbandOS.Core.ItemClasses
 
         public override void ApplyMagic(Item item, int level, int power)
         {
-            if (item.ItemSubCategory == LightType.Torch)
-            {
-                if (item.TypeSpecificValue != 0)
-                {
-                    item.TypeSpecificValue = Program.Rng.DieRoll(item.TypeSpecificValue);
-                }
-                return;
-            }
-            if (item.ItemSubCategory == LightType.Lantern)
-            {
-                if (item.TypeSpecificValue != 0)
-                {
-                    item.TypeSpecificValue = Program.Rng.DieRoll(item.TypeSpecificValue);
-                }
-                return;
-            }
             if (power < 0) // Cursed
             {
                 switch (Program.Rng.DieRoll(2)) // Cursed
