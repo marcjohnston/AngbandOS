@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 30;
         public override int? SubCategory => 5;
         public override int Weight => 5;
+        public override bool ProvidesSunlight => true;
     }
 }

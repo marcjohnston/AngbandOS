@@ -5,6 +5,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Enumerations;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -2571,34 +2572,26 @@ namespace AngbandOS
             }
             Item oPtr;
             bool caveNoRegen = false;
-            if (Player.Race.IsBurnedBySunlight)
+
+            // Allow inventory slots access to the process world.
+            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
             {
-                if (CurrentDepth <= 0 && !Player.HasLightResistance && Player.TimedInvulnerability == 0 && Player.GameTime.IsLight)
+                ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs(this);
+                inventorySlot.ProcessWorld(inventorySlotProcessWorldEventArgs);
+                if (inventorySlotProcessWorldEventArgs.DisableRegeneration)
                 {
-                    if (Level.Grid[Player.MapY][Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
-                    {
-                        MsgPrint("The sun's rays scorch your undead flesh!");
-                        Player.TakeHit(1, "sunlight");
-                        caveNoRegen = true;
-                    }
-                }
-                if (Player.Inventory[InventorySlot.Lightsource].Category != 0 &&
-                    Player.Inventory[InventorySlot.Lightsource].ItemSubCategory >= LightType.Galadriel &&
-                    Player.Inventory[InventorySlot.Lightsource].ItemSubCategory < LightType.Thrain &&
-                    !Player.HasLightResistance)
-                {
-                    oPtr = Player.Inventory[InventorySlot.Lightsource];
-                    string oName = oPtr.Description(false, 0);
-                    MsgPrint($"The {oName} scorches your undead flesh!");
                     caveNoRegen = true;
-                    oName = oPtr.Description(true, 0);
-                    string ouch = $"wielding {oName}";
-                    if (Player.TimedInvulnerability == 0)
-                    {
-                        Player.TakeHit(1, ouch);
-                    }
                 }
             }
+
+            // Allow the race access to the process world.
+            ProcessWorldEventArgs processWorldEventArgs = new ProcessWorldEventArgs(this);
+            Player.Race.ProcessWorld(processWorldEventArgs);
+            if (processWorldEventArgs.DisableRegeneration)
+            {
+                caveNoRegen = true;
+            }
+
             if (!Level.GridPassable(Player.MapY, Player.MapX))
             {
                 caveNoRegen = true;

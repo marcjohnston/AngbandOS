@@ -908,6 +908,11 @@ namespace AngbandOS.Core.ItemClasses
         /// </summary>
         public virtual bool CanApplyTunnelBonus => false;
 
+        /// <summary>
+        /// Returns true, if the item provides sunlight, which burns certain races.  Returns false, by default.
+        /// </summary>
+        public virtual bool ProvidesSunlight => false;
+
         protected int GetBonusValue(int max, int level)
         {
             if (level > Constants.MaxDepth - 1)

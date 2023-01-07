@@ -109,6 +109,12 @@ namespace AngbandOS.Core.Races
         public virtual bool IsBurnedBySunlight => false;
 
         /// <summary>
+        /// Allows the race to process world.  Does nothing by default.
+        /// </summary>
+        /// <param name="processWorldEventArgs"></param>
+        public virtual void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs) { }
+
+        /// <summary>
         /// Returns true, if the race is damaged by darkness.  Returns true, by default.  Only vampires return false.
         /// </summary>
         public virtual bool IsDamagedByDarkness => true;

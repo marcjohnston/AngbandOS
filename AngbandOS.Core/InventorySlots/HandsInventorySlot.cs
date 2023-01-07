@@ -11,7 +11,7 @@ using AngbandOS.Enumerations;
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class HandsInventorySlot : BaseInventorySlot
+    internal class HandsInventorySlot : EquipmentInventorySlot
     {
         private HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "l";

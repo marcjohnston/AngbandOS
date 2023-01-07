@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class HeadInventorySlot : BaseInventorySlot
+    internal class HeadInventorySlot : EquipmentInventorySlot
     {
         private HeadInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "k";

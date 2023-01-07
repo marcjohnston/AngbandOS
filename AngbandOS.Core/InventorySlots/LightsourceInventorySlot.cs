@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class LightsourceInventorySlot : BaseInventorySlot
+    internal class LightsourceInventorySlot : EquipmentInventorySlot
     {
         private LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "g";

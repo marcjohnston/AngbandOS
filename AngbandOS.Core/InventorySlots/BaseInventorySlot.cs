@@ -25,6 +25,11 @@ namespace AngbandOS.Core.InventorySlots
         public abstract string Label(int index);
 
         /// <summary>
+        /// Allows the inventory slot a slice during the process world.  Does nothing, by default.
+        /// </summary>
+        public virtual void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs) { }
+
+        /// <summary>
         /// Returns the sort order when displayed in a list with other inventory slots.  Lower numbers show before higher numbers.
         /// </summary>
         public abstract int SortOrder { get; }
@@ -86,9 +91,9 @@ namespace AngbandOS.Core.InventorySlots
         public virtual bool IsWeightRestricting => IsArmour;
 
         /// <summary>
-        /// Returns true, if the inventory slot represents equipment; false, if the inventory slot represents a pack.  Defaults to true.
+        /// Returns true, if the inventory slot represents equipment; false, if the inventory slot represents a pack.  Defaults to false.
         /// </summary>
-        public virtual bool IsEquipment => true;
+        public virtual bool IsEquipment => false;
 
         /// <summary>
         /// Returns true, if an identity sense chance test passes so that the item is identified; false, if the

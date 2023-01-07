@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class MeleeWeaponInventorySlot : BaseInventorySlot
+    internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
     {
         private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };

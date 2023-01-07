@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class ArmInventorySlot : BaseInventorySlot
+    internal class ArmInventorySlot : EquipmentInventorySlot
     {
         private ArmInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.Arm };

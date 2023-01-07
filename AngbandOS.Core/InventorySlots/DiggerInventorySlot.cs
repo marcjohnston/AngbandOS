@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal class DiggerInventorySlot : BaseInventorySlot
+    internal class DiggerInventorySlot : EquipmentInventorySlot
     {
         private DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.Digger };

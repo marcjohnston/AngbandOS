@@ -128,5 +128,21 @@ namespace AngbandOS.Core.Races
         public override bool OutfitsWithScrollsOfSatisfyHunger => true;
         public override bool OutfitsWithScrollsOfLight => true;
         public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
+
+        public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
+        {
+            if (processWorldEventArgs.SaveGame.CurrentDepth <= 0 && 
+                !processWorldEventArgs.SaveGame.Player.HasLightResistance &&
+                processWorldEventArgs.SaveGame.Player.TimedInvulnerability == 0 &&
+                processWorldEventArgs.SaveGame.Player.GameTime.IsLight)
+            {
+                if (processWorldEventArgs.SaveGame.Level.Grid[processWorldEventArgs.SaveGame.Player.MapY][processWorldEventArgs.SaveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
+                {
+                    processWorldEventArgs.SaveGame.MsgPrint("The sun's rays scorch your undead flesh!");
+                    processWorldEventArgs.SaveGame.Player.TakeHit(1, "sunlight");
+                    processWorldEventArgs.DisableRegeneration = true;
+                }
+            }
+        }
     }
 }
