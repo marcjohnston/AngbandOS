@@ -625,7 +625,6 @@ namespace AngbandOS
         public ItemCharacteristics GetAbilitiesAsItemFlags()
         {
             ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-            PlayerStatus playerStatus = new PlayerStatus(SaveGame);
             if ((ProfessionIndex == CharacterClass.Warrior && Level > 29) || (ProfessionIndex == CharacterClass.Paladin && Level > 39) || (ProfessionIndex == CharacterClass.Fanatic && Level > 39))
             {
                 itemCharacteristics.ResFear = true;
@@ -638,11 +637,11 @@ namespace AngbandOS
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 9 && !playerStatus.MartialArtistHeavyArmour())
+            if (ProfessionIndex == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 24 && !playerStatus.MartialArtistHeavyArmour())
+            if (ProfessionIndex == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.FreeAct = true;
             }
@@ -671,7 +670,7 @@ namespace AngbandOS
                 {
                     itemCharacteristics.ResConf = true;
                 }
-                if (Level > 9 && !playerStatus.MartialArtistHeavyArmour())
+                if (Level > 9 && !SaveGame.MartialArtistHeavyArmour())
                 {
                     itemCharacteristics.Speed = true;
                 }
@@ -679,7 +678,7 @@ namespace AngbandOS
                 {
                     itemCharacteristics.ResFear = true;
                 }
-                if (Level > 29 && !playerStatus.MartialArtistHeavyArmour())
+                if (Level > 29 && !SaveGame.MartialArtistHeavyArmour())
                 {
                     itemCharacteristics.FreeAct = true;
                 }
