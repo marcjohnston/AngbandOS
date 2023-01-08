@@ -87,12 +87,12 @@
                 // Our disable traps skill also doubles up as a lockpicking skill
                 int i = saveGame.Player.SkillDisarmTraps;
                 // Hard to pick locks in the dark
-                if (saveGame.Player.TimedBlindness != 0 || saveGame.Level.NoLight())
+                if (saveGame.Player.TimedBlindness.TimeRemaining != 0 || saveGame.Level.NoLight())
                 {
                     i /= 10;
                 }
                 // Hard to pick locks when you're confused or hallucinating
-                if (saveGame.Player.TimedConfusion != 0 || saveGame.Player.TimedHallucinations.TimeRemaining != 0)
+                if (saveGame.Player.TimedConfusion.TimeRemaining != 0 || saveGame.Player.TimedHallucinations.TimeRemaining != 0)
                 {
                     i /= 10;
                 }

@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!saveGame.Player.HasFreeAction)
             {
-                if (saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(10) + 10))
+                if (saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(10) + 10))
                 {
                     return true;
                 }

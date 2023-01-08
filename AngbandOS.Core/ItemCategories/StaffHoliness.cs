@@ -26,15 +26,15 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
             int k = 3 * eventArgs.SaveGame.Player.Level;
-            if (eventArgs.SaveGame.Player.SetTimedProtectionFromEvil(eventArgs.SaveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + k))
+            if (eventArgs.SaveGame.Player.TimedProtectionFromEvil.SetTimer(eventArgs.SaveGame.Player.TimedProtectionFromEvil.TimeRemaining + Program.Rng.DieRoll(25) + k))
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedPoison(0))
+            if (eventArgs.SaveGame.Player.TimedPoison.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedFear(0))
+            if (eventArgs.SaveGame.Player.TimedFear.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
@@ -42,7 +42,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedStun(0))
+            if (eventArgs.SaveGame.Player.TimedStun.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }

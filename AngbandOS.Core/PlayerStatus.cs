@@ -461,7 +461,7 @@
                 }
                 if (oPtr.Characteristics.Wraith)
                 {
-                    SaveGame.Player.TimedEtherealness = Math.Max(SaveGame.Player.TimedEtherealness, 20);
+                    SaveGame.Player.TimedEtherealness.Reset(Math.Max(SaveGame.Player.TimedEtherealness.TimeRemaining, 20));
                 }
                 if (oPtr.Characteristics.ImFire)
                 {
@@ -695,60 +695,60 @@
                     }
                 }
             }
-            if (SaveGame.Player.TimedStun > 50)
+            if (SaveGame.Player.TimedStun.TimeRemaining > 50)
             {
                 SaveGame.Player.AttackBonus -= 20;
                 SaveGame.Player.DisplayedAttackBonus -= 20;
                 SaveGame.Player.DamageBonus -= 20;
                 SaveGame.Player.DisplayedDamageBonus -= 20;
             }
-            else if (SaveGame.Player.TimedStun != 0)
+            else if (SaveGame.Player.TimedStun.TimeRemaining != 0)
             {
                 SaveGame.Player.AttackBonus -= 5;
                 SaveGame.Player.DisplayedAttackBonus -= 5;
                 SaveGame.Player.DamageBonus -= 5;
                 SaveGame.Player.DisplayedDamageBonus -= 5;
             }
-            if (SaveGame.Player.TimedInvulnerability != 0)
+            if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 100;
                 SaveGame.Player.DisplayedArmourClassBonus += 100;
             }
-            if (SaveGame.Player.TimedEtherealness != 0)
+            if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 100;
                 SaveGame.Player.DisplayedArmourClassBonus += 100;
                 SaveGame.Player.HasReflection = true;
             }
-            if (SaveGame.Player.TimedBlessing != 0)
+            if (SaveGame.Player.TimedBlessing.TimeRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 5;
                 SaveGame.Player.DisplayedArmourClassBonus += 5;
                 SaveGame.Player.AttackBonus += 10;
                 SaveGame.Player.DisplayedAttackBonus += 10;
             }
-            if (SaveGame.Player.TimedStoneskin != 0)
+            if (SaveGame.Player.TimedStoneskin.TimeRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 50;
                 SaveGame.Player.DisplayedArmourClassBonus += 50;
             }
-            if (SaveGame.Player.TimedHeroism != 0)
+            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0)
             {
                 SaveGame.Player.AttackBonus += 12;
                 SaveGame.Player.DisplayedAttackBonus += 12;
             }
-            if (SaveGame.Player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
             {
                 SaveGame.Player.AttackBonus += 24;
                 SaveGame.Player.DisplayedAttackBonus += 24;
                 SaveGame.Player.ArmourClassBonus -= 10;
                 SaveGame.Player.DisplayedArmourClassBonus -= 10;
             }
-            if (SaveGame.Player.TimedHaste != 0)
+            if (SaveGame.Player.TimedHaste.TimeRemaining != 0)
             {
                 SaveGame.Player.Speed += 10;
             }
-            if (SaveGame.Player.TimedSlow != 0)
+            if (SaveGame.Player.TimedSlow.TimeRemaining != 0)
             {
                 SaveGame.Player.Speed -= 10;
             }
@@ -756,15 +756,15 @@
             {
                 SaveGame.Player.Speed += SaveGame.Player.Level / 10;
             }
-            if (SaveGame.Player.TimedTelepathy != 0)
+            if (SaveGame.Player.TimedTelepathy.TimeRemaining != 0)
             {
                 SaveGame.Player.HasTelepathy = true;
             }
-            if (SaveGame.Player.TimedSeeInvisibility != 0)
+            if (SaveGame.Player.TimedSeeInvisibility.TimeRemaining != 0)
             {
                 SaveGame.Player.HasSeeInvisibility = true;
             }
-            if (SaveGame.Player.TimedInfravision != 0)
+            if (SaveGame.Player.TimedInfravision.TimeRemaining != 0)
             {
                 SaveGame.Player.InfravisionRange++;
             }
@@ -772,7 +772,7 @@
             {
                 SaveGame.Player.HasConfusionResistance = true;
             }
-            if (SaveGame.Player.TimedHeroism != 0 || SaveGame.Player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0 || SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
             {
                 SaveGame.Player.HasFearResistance = true;
             }
@@ -1147,11 +1147,11 @@
             {
                 mhp = SaveGame.Player.Level + 1;
             }
-            if (SaveGame.Player.TimedHeroism != 0)
+            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0)
             {
                 mhp += 10;
             }
-            if (SaveGame.Player.TimedSuperheroism != 0)
+            if (SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
             {
                 mhp += 30;
             }
@@ -1596,7 +1596,7 @@
 
         public void PrtAfraid()
         {
-            if (SaveGame.Player.TimedFear > 0)
+            if (SaveGame.Player.TimedFear.TimeRemaining > 0)
             {
                 SaveGame.Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
             }
@@ -1608,7 +1608,7 @@
 
         public void PrtBlind()
         {
-            if (SaveGame.Player.TimedBlindness > 0)
+            if (SaveGame.Player.TimedBlindness.TimeRemaining > 0)
             {
                 SaveGame.Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
             }
@@ -1620,7 +1620,7 @@
 
         public void PrtConfused()
         {
-            if (SaveGame.Player.TimedConfusion > 0)
+            if (SaveGame.Player.TimedConfusion.TimeRemaining > 0)
             {
                 SaveGame.Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
             }
@@ -1868,7 +1868,7 @@
 
         public void PrtPoisoned()
         {
-            if (SaveGame.Player.TimedPoison > 0)
+            if (SaveGame.Player.TimedPoison.TimeRemaining > 0)
             {
                 SaveGame.Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
             }
@@ -1957,7 +1957,7 @@
         {
             Colour attr = Colour.White;
             string text;
-            if (SaveGame.Player.TimedParalysis > 0)
+            if (SaveGame.Player.TimedParalysis.TimeRemaining > 0)
             {
                 attr = Colour.Red;
                 text = "Paralyzed!";
@@ -2011,7 +2011,7 @@
 
         public void PrtStun()
         {
-            int s = SaveGame.Player.TimedStun;
+            int s = SaveGame.Player.TimedStun.TimeRemaining;
             if (s > 100)
             {
                 SaveGame.Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);

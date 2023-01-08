@@ -193,31 +193,31 @@ namespace AngbandOS
         public int SpareSpellSlots;
         public int Speed;
         public Spellcasting Spellcasting;
-        public int TimedAcidResistance;
-        public BleedingTimedAction TimedBleeding;
-        public int TimedBlessing;
-        public int TimedBlindness;
-        public int TimedColdResistance;
-        public int TimedConfusion;
-        public int TimedEtherealness;
-        public int TimedFear;
-        public int TimedFireResistance;
-        public HallucinationsTimedAction TimedHallucinations;
-        public int TimedHaste;
-        public int TimedHeroism;
-        public int TimedInfravision;
-        public int TimedInvulnerability;
-        public int TimedLightningResistance;
-        public int TimedParalysis;
-        public int TimedPoison;
-        public int TimedPoisonResistance;
-        public int TimedProtectionFromEvil;
-        public int TimedSeeInvisibility;
-        public int TimedSlow;
-        public int TimedStoneskin;
-        public int TimedStun;
-        public int TimedSuperheroism;
-        public int TimedTelepathy;
+        public TimedAction TimedAcidResistance;
+        public TimedAction TimedBleeding;
+        public TimedAction TimedBlessing;
+        public TimedAction TimedBlindness;
+        public TimedAction TimedColdResistance;
+        public TimedAction TimedConfusion;
+        public TimedAction TimedEtherealness;
+        public TimedAction TimedFear;
+        public TimedAction TimedFireResistance;
+        public TimedAction TimedHallucinations;
+        public TimedAction TimedHaste;
+        public TimedAction TimedHeroism;
+        public TimedAction TimedInfravision;
+        public TimedAction TimedInvulnerability;
+        public TimedAction TimedLightningResistance;
+        public TimedAction TimedParalysis;
+        public TimedAction TimedPoison;
+        public TimedAction TimedPoisonResistance;
+        public TimedAction TimedProtectionFromEvil;
+        public TimedAction TimedSeeInvisibility;
+        public TimedAction TimedSlow;
+        public TimedAction TimedStoneskin;
+        public TimedAction TimedStun;
+        public TimedAction TimedSuperheroism;
+        public TimedAction TimedTelepathy;
         public int TownWithHouse;
         public FlagSet UpdatesNeeded = new FlagSet();
         public int Weight;
@@ -230,8 +230,31 @@ namespace AngbandOS
         public Player(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            TimedBleeding = new BleedingTimedAction(SaveGame);
-            TimedHallucinations = new HallucinationsTimedAction(SaveGame);
+            TimedAcidResistance = new AcidResistanceTimedAction(saveGame);
+            TimedBleeding = new BleedingTimedAction(saveGame);
+            TimedBlessing = new BlessingTimedAction(saveGame);
+            TimedBlindness = new BlindnessTimedAction(saveGame);
+            TimedColdResistance = new ColdResistanceTimedAction(saveGame);
+            TimedConfusion = new ConfusionTimedAction(saveGame);
+            TimedEtherealness = new EtherealnessTimedAction(saveGame);
+            TimedFear = new FearTimedAction(saveGame);
+            TimedFireResistance = new FireResistanceTimedAction(saveGame);
+            TimedHallucinations = new HallucinationsTimedAction(saveGame);
+            TimedHaste = new HasteTimedAction(saveGame);
+            TimedHeroism = new HeroismTimedAction(saveGame);
+            TimedInfravision = new InfravisionTimedAction(saveGame);
+            TimedInvulnerability = new InvulnerabilityTimedAction(saveGame);
+            TimedLightningResistance = new LightningResistanceTimedAction(saveGame);
+            TimedParalysis = new ParalysisTimedAction(saveGame);
+            TimedPoison = new PoisonTimedAction(saveGame);
+            TimedPoisonResistance = new PoisonResistanceTimedAction(saveGame);
+            TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(saveGame);
+            TimedSeeInvisibility = new SeeInvisibilityTimedAction(saveGame);
+            TimedSlow = new SlowTimedAction(saveGame);
+            TimedStoneskin = new StoneskinTimedAction(saveGame);
+            TimedStun = new StunTimedAction(saveGame);
+            TimedSuperheroism = new SuperHeroismTimedAction(saveGame);
+            TimedTelepathy = new TelepathyTimedAction(saveGame);
             Dna = new Genome(SaveGame);
             for (int i = 0; i < 4; i++)
             {
@@ -1157,7 +1180,7 @@ namespace AngbandOS
         {
             int playerLevel = Level;
             bool detailed = false;
-            if (TimedConfusion != 0)
+            if (TimedConfusion.TimeRemaining != 0)
             {
                 return;
             }
@@ -1419,811 +1442,6 @@ namespace AngbandOS
             return true;
         }
 
-        public void SetTimedAcidResistance(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedAcidResistance == 0)
-                {
-                    SaveGame.MsgPrint("You feel resistant to acid!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedAcidResistance != 0)
-                {
-                    SaveGame.MsgPrint("You feel less resistant to acid.");
-                    notice = true;
-                }
-            }
-            TimedAcidResistance = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedBlessing(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedBlessing == 0)
-                {
-                    SaveGame.MsgPrint("You feel righteous!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedBlessing != 0)
-                {
-                    SaveGame.MsgPrint("The prayer has expired.");
-                    notice = true;
-                }
-            }
-            TimedBlessing = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedBlindness(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedBlindness == 0)
-                {
-                    SaveGame.MsgPrint("You are blind!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedBlindness != 0)
-                {
-                    SaveGame.MsgPrint("You can see again.");
-                    notice = true;
-                }
-            }
-            TimedBlindness = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            RedrawNeeded.Set(RedrawFlag.PrMap);
-            RedrawNeeded.Set(RedrawFlag.PrBlind);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedColdResistance(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedColdResistance == 0)
-                {
-                    SaveGame.MsgPrint("You feel resistant to cold!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedColdResistance != 0)
-                {
-                    SaveGame.MsgPrint("You feel less resistant to cold.");
-                    notice = true;
-                }
-            }
-            TimedColdResistance = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedConfusion(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedConfusion == 0)
-                {
-                    SaveGame.MsgPrint("You are confused!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedConfusion != 0)
-                {
-                    SaveGame.MsgPrint("You feel less confused now.");
-                    notice = true;
-                }
-            }
-            TimedConfusion = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            RedrawNeeded.Set(RedrawFlag.PrConfused);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public void SetTimedEtherealness(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedEtherealness == 0)
-                {
-                    SaveGame.MsgPrint("You leave the physical world and turn into a wraith-being!");
-                    notice = true;
-                    {
-                        RedrawNeeded.Set(RedrawFlag.PrMap);
-                        UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    }
-                }
-            }
-            else
-            {
-                if (TimedEtherealness != 0)
-                {
-                    SaveGame.MsgPrint("You feel opaque.");
-                    notice = true;
-                    {
-                        RedrawNeeded.Set(RedrawFlag.PrMap);
-                        UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    }
-                }
-            }
-            TimedEtherealness = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedFear(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedFear == 0)
-                {
-                    SaveGame.MsgPrint("You are terrified!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedFear != 0)
-                {
-                    SaveGame.MsgPrint("You feel bolder now.");
-                    notice = true;
-                }
-            }
-            TimedFear = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            RedrawNeeded.Set(RedrawFlag.PrAfraid);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedFireResistance(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedFireResistance == 0)
-                {
-                    SaveGame.MsgPrint("You feel resistant to fire!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedFireResistance != 0)
-                {
-                    SaveGame.MsgPrint("You feel less resistant to fire.");
-                    notice = true;
-                }
-            }
-            TimedFireResistance = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedHaste(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedHaste == 0)
-                {
-                    SaveGame.MsgPrint("You feel yourself moving faster!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedHaste != 0)
-                {
-                    SaveGame.MsgPrint("You feel yourself slow down.");
-                    notice = true;
-                }
-            }
-            TimedHaste = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedHeroism(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedHeroism == 0)
-                {
-                    SaveGame.MsgPrint("You feel like a hero!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedHeroism != 0)
-                {
-                    SaveGame.MsgPrint("The heroism wears off.");
-                    notice = true;
-                }
-            }
-            TimedHeroism = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedInfravision(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedInfravision == 0)
-                {
-                    SaveGame.MsgPrint("Your eyes begin to tingle!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedInfravision != 0)
-                {
-                    SaveGame.MsgPrint("Your eyes stop tingling.");
-                    notice = true;
-                }
-            }
-            TimedInfravision = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public void SetTimedInvulnerability(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedInvulnerability == 0)
-                {
-                    SaveGame.MsgPrint("Invulnerability!");
-                    notice = true;
-                    {
-                        RedrawNeeded.Set(RedrawFlag.PrMap);
-                        UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    }
-                }
-            }
-            else
-            {
-                if (TimedInvulnerability != 0)
-                {
-                    SaveGame.MsgPrint("The invulnerability wears off.");
-                    notice = true;
-                    {
-                        RedrawNeeded.Set(RedrawFlag.PrMap);
-                        UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    }
-                }
-            }
-            TimedInvulnerability = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-        }
-
-        public void SetTimedLightningResistance(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedLightningResistance == 0)
-                {
-                    SaveGame.MsgPrint("You feel resistant to electricity!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedLightningResistance != 0)
-                {
-                    SaveGame.MsgPrint("You feel less resistant to electricity.");
-                    notice = true;
-                }
-            }
-            TimedLightningResistance = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedParalysis(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedParalysis == 0)
-                {
-                    SaveGame.MsgPrint("You are paralyzed!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedParalysis != 0)
-                {
-                    SaveGame.MsgPrint("You can move again.");
-                    notice = true;
-                }
-            }
-            TimedParalysis = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            RedrawNeeded.Set(RedrawFlag.PrState);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedPoison(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedPoison == 0)
-                {
-                    SaveGame.MsgPrint("You are poisoned!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedPoison != 0)
-                {
-                    SaveGame.MsgPrint("You are no longer poisoned.");
-                    notice = true;
-                }
-            }
-            TimedPoison = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            RedrawNeeded.Set(RedrawFlag.PrPoisoned);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public void SetTimedPoisonResistance(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedPoisonResistance == 0)
-                {
-                    SaveGame.MsgPrint("You feel resistant to poison!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedPoisonResistance != 0)
-                {
-                    SaveGame.MsgPrint("You feel less resistant to poison.");
-                    notice = true;
-                }
-            }
-            TimedPoisonResistance = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedProtectionFromEvil(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedProtectionFromEvil == 0)
-                {
-                    SaveGame.MsgPrint("You feel safe from evil!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedProtectionFromEvil != 0)
-                {
-                    SaveGame.MsgPrint("You no longer feel safe from evil.");
-                    notice = true;
-                }
-            }
-            TimedProtectionFromEvil = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedSeeInvisibility(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedSeeInvisibility == 0)
-                {
-                    SaveGame.MsgPrint("Your eyes feel very sensitive!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedSeeInvisibility != 0)
-                {
-                    SaveGame.MsgPrint("Your eyes feel less sensitive.");
-                    notice = true;
-                }
-            }
-            TimedSeeInvisibility = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedSlow(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedSlow == 0)
-                {
-                    SaveGame.MsgPrint("You feel yourself moving slower!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedSlow != 0)
-                {
-                    SaveGame.MsgPrint("You feel yourself speed up.");
-                    notice = true;
-                }
-            }
-            TimedSlow = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public void SetTimedStoneskin(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedStoneskin == 0)
-                {
-                    SaveGame.MsgPrint("Your skin turns to stone.");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedStoneskin != 0)
-                {
-                    SaveGame.MsgPrint("Your skin returns to normal.");
-                    notice = true;
-                }
-            }
-            TimedStoneskin = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedStun(int v)
-        {
-            int oldAux, newAux;
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (!Race.CanBeStunned)
-            {
-                v = 0;
-            }
-            if (TimedStun > 100)
-            {
-                oldAux = 3;
-            }
-            else if (TimedStun > 50)
-            {
-                oldAux = 2;
-            }
-            else if (TimedStun > 0)
-            {
-                oldAux = 1;
-            }
-            else
-            {
-                oldAux = 0;
-            }
-            if (v > 100)
-            {
-                newAux = 3;
-            }
-            else if (v > 50)
-            {
-                newAux = 2;
-            }
-            else if (v > 0)
-            {
-                newAux = 1;
-            }
-            else
-            {
-                newAux = 0;
-            }
-            if (newAux > oldAux)
-            {
-                switch (newAux)
-                {
-                    case 1:
-                        SaveGame.MsgPrint("You have been stunned.");
-                        break;
-
-                    case 2:
-                        SaveGame.MsgPrint("You have been heavily stunned.");
-                        break;
-
-                    case 3:
-                        SaveGame.MsgPrint("You have been knocked out.");
-                        break;
-                }
-                if (Program.Rng.DieRoll(1000) < v || Program.Rng.DieRoll(16) == 1)
-                {
-                    SaveGame.MsgPrint("A vicious Attack hits your head.");
-                    if (Program.Rng.DieRoll(3) == 1)
-                    {
-                        if (!HasSustainIntelligence)
-                        {
-                            TryDecreasingAbilityScore(Ability.Intelligence);
-                        }
-                        if (!HasSustainWisdom)
-                        {
-                            TryDecreasingAbilityScore(Ability.Wisdom);
-                        }
-                    }
-                    else if (Program.Rng.DieRoll(2) == 1)
-                    {
-                        if (!HasSustainIntelligence)
-                        {
-                            TryDecreasingAbilityScore(Ability.Intelligence);
-                        }
-                    }
-                    else
-                    {
-                        if (!HasSustainWisdom)
-                        {
-                            TryDecreasingAbilityScore(Ability.Wisdom);
-                        }
-                    }
-                }
-                notice = true;
-            }
-            else if (newAux < oldAux)
-            {
-                switch (newAux)
-                {
-                    case 0:
-                        SaveGame.MsgPrint("You are no longer stunned.");
-                        SaveGame.Disturb(false);
-                        break;
-                }
-                notice = true;
-            }
-            TimedStun = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            RedrawNeeded.Set(RedrawFlag.PrStun);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public bool SetTimedSuperheroism(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedSuperheroism == 0)
-                {
-                    SaveGame.MsgPrint("You feel like a killing machine!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedSuperheroism != 0)
-                {
-                    SaveGame.MsgPrint("You feel less Berserk.");
-                    notice = true;
-                }
-            }
-            TimedSuperheroism = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
-        public void SetTimedTelepathy(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedTelepathy == 0)
-                {
-                    SaveGame.MsgPrint("You feel your consciousness expand!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedTelepathy != 0)
-                {
-                    SaveGame.MsgPrint("Your consciousness contracts again.");
-                    notice = true;
-                }
-            }
-            TimedTelepathy = v;
-            if (!notice)
-            {
-                return;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.HandleStuff();
-        }
-
         public void ShuffleAbilityScores()
         {
             int jj;
@@ -2270,7 +1488,7 @@ namespace AngbandOS
                 return;
             }
             SaveGame.Disturb(true);
-            if (TimedInvulnerability != 0 && damage < 9000)
+            if (TimedInvulnerability.TimeRemaining != 0 && damage < 9000)
             {
                 if (Program.Rng.DieRoll(Constants.PenetrateInvulnerability) == 1)
                 {
@@ -2281,7 +1499,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            if (TimedEtherealness != 0)
+            if (TimedEtherealness.TimeRemaining != 0)
             {
                 damage /= 10;
                 if (damage == 0 && Program.Rng.DieRoll(10) == 1)

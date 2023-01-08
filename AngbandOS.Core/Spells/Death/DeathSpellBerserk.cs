@@ -13,9 +13,9 @@ namespace AngbandOS.Spells.Death
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(30);
-            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.TimedFear.SetTimer(0);
         }
 
         public override void Initialise(int characterClass)

@@ -8,7 +8,7 @@
             {
                 monster.SmResPois = true;
             }
-            if (saveGame.Player.TimedPoisonResistance != 0)
+            if (saveGame.Player.TimedPoisonResistance.TimeRemaining != 0)
             {
                 monster.SmOppPois = true;
             }

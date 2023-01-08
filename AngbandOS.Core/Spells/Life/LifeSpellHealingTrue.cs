@@ -14,7 +14,7 @@ namespace AngbandOS.Spells.Life
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.RestoreHealth(2000);
-            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.TimedStun.SetTimer(0);
             saveGame.Player.TimedBleeding.SetTimer(0);
         }
 

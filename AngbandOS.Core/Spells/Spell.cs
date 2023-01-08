@@ -73,11 +73,11 @@ namespace AngbandOS.Spells
             {
                 chance = minfail;
             }
-            if (player.TimedStun > 50)
+            if (player.TimedStun.TimeRemaining > 50)
             {
                 chance += 25;
             }
-            else if (player.TimedStun != 0)
+            else if (player.TimedStun.TimeRemaining != 0)
             {
                 chance += 15;
             }

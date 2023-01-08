@@ -24,11 +24,11 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.MsgPrint("You feel life flow through your body!");
             saveGame.Player.RestoreLevel();
             saveGame.Player.RestoreHealth(5000);
-            saveGame.Player.SetTimedPoison(0);
-            saveGame.Player.SetTimedBlindness(0);
-            saveGame.Player.SetTimedConfusion(0);
+            saveGame.Player.TimedPoison.SetTimer(0);
+            saveGame.Player.TimedBlindness.SetTimer(0);
+            saveGame.Player.TimedConfusion.SetTimer(0);
             saveGame.Player.TimedHallucinations.SetTimer(0);
-            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.TimedStun.SetTimer(0);
             saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
             saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);

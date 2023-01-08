@@ -28,7 +28,7 @@ namespace AngbandOS.Core.AttackEffects
             }
             else
             {
-                if (saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + 3 + Program.Rng.DieRoll(monsterLevel)))
+                if (saveGame.Player.TimedFear.SetTimer(saveGame.Player.TimedFear.TimeRemaining + 3 + Program.Rng.DieRoll(monsterLevel)))
                 {
                     obvious = true;
                 }

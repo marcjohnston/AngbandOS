@@ -8,7 +8,7 @@
             {
                 monster.SmResCold = true;
             }
-            if (saveGame.Player.TimedColdResistance != 0)
+            if (saveGame.Player.TimedColdResistance.TimeRemaining != 0)
             {
                 monster.SmOppCold = true;
             }

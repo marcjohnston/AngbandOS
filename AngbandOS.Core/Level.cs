@@ -394,11 +394,11 @@ namespace AngbandOS
                 {
                     ta = ma[y][x];
                     tc = mc[y][x];
-                    if (SaveGame.Player.TimedInvulnerability != 0)
+                    if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
                     {
                         ta = Colour.White;
                     }
-                    else if (SaveGame.Player.TimedEtherealness != 0)
+                    else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
                     {
                         ta = Colour.Black;
                     }
@@ -996,7 +996,7 @@ namespace AngbandOS
         {
             GridTile cPtr = Grid[y][x];
             int nextOIdx;
-            if (SaveGame.Player.TimedBlindness != 0)
+            if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
             {
                 return;
             }
@@ -1239,7 +1239,7 @@ namespace AngbandOS
 
         public bool PlayerCanSeeBold(int y, int x)
         {
-            if (SaveGame.Player.TimedBlindness != 0)
+            if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
             {
                 return false;
             }
@@ -1274,11 +1274,11 @@ namespace AngbandOS
         {
             if (PanelContains(y, x))
             {
-                if (SaveGame.Player.TimedInvulnerability != 0)
+                if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
                 {
                     a = Colour.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness != 0)
+                else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
                 {
                     a = Colour.Black;
                 }
@@ -1314,11 +1314,11 @@ namespace AngbandOS
                 for (int x = PanelColMin; x <= PanelColMax; x++)
                 {
                     MapInfo(y, x, out Colour a, out char c);
-                    if (SaveGame.Player.TimedInvulnerability != 0)
+                    if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
                     {
                         a = Colour.White;
                     }
-                    else if (SaveGame.Player.TimedEtherealness != 0)
+                    else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
                     {
                         a = Colour.Black;
                     }
@@ -1366,11 +1366,11 @@ namespace AngbandOS
                 {
                     MapInfo(y, x, out a, out c);
                 }
-                if (SaveGame.Player.TimedInvulnerability != 0)
+                if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
                 {
                     a = Colour.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness != 0)
+                else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
                 {
                     a = Colour.Black;
                 }
@@ -2264,13 +2264,13 @@ namespace AngbandOS
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
                     ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
-                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness == 0))
+                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TimeRemaining == 0))
                 {
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (SaveGame.Player.TimedBlindness != 0)
+                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
                         {
                             a = Colour.Black;
                         }
@@ -2332,7 +2332,7 @@ namespace AngbandOS
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (SaveGame.Player.TimedBlindness != 0)
+                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
                         {
                             a = Colour.Black;
                         }

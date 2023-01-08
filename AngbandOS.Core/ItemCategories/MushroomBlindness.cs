@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!saveGame.Player.HasBlindnessResistance)
             {
-                if (saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + Program.Rng.RandomLessThan(200) + 200))
+                if (saveGame.Player.TimedBlindness.SetTimer(saveGame.Player.TimedBlindness.TimeRemaining + Program.Rng.RandomLessThan(200) + 200))
                 {
                     return true;
                 }

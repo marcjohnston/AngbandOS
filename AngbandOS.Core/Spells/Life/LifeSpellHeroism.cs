@@ -13,9 +13,9 @@ namespace AngbandOS.Spells.Life
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.TimedHeroism.SetTimer(saveGame.Player.TimedHeroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(10);
-            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.TimedFear.SetTimer(0);
         }
 
         public override void Initialise(int characterClass)

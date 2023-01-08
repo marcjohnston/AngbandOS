@@ -75,8 +75,8 @@ namespace AngbandOS.Core.Races
             if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, saveGame.Player.ProfessionIndex == CharacterClass.Warrior ? 6 : 12))
             {
                 saveGame.MsgPrint("RAAAGH!");
-                saveGame.Player.SetTimedFear(0);
-                saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + 10 + Program.Rng.DieRoll(saveGame.Player.Level));
+                saveGame.Player.TimedFear.SetTimer(0);
+                saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + 10 + Program.Rng.DieRoll(saveGame.Player.Level));
                 saveGame.Player.RestoreHealth(30);
             }
         }

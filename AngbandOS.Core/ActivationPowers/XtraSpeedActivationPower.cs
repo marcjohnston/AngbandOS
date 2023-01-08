@@ -12,13 +12,13 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            if (saveGame.Player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
             {
-                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(75) + 75);
+                saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(75) + 75);
             }
             else
             {
-                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
+                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + 5);
             }
             return true;
         }

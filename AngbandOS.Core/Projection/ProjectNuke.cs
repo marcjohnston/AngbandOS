@@ -148,7 +148,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -164,14 +164,14 @@ namespace AngbandOS.Projection
             {
                 dam = ((2 * dam) + 2) / 5;
             }
-            if (SaveGame.Player.TimedPoisonResistance != 0)
+            if (SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0)
             {
                 dam = ((2 * dam) + 2) / 5;
             }
             SaveGame.Player.TakeHit(dam, killer);
-            if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance != 0))
+            if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0))
             {
-                SaveGame.Player.SetTimedPoison(SaveGame.Player.TimedPoison + Program.Rng.RandomLessThan(dam) + 10);
+                SaveGame.Player.TimedPoison.SetTimer(SaveGame.Player.TimedPoison.TimeRemaining + Program.Rng.RandomLessThan(dam) + 10);
                 if (Program.Rng.DieRoll(5) == 1)
                 {
                     SaveGame.MsgPrint("You undergo a freakish metamorphosis!");

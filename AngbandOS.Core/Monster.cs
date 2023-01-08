@@ -375,7 +375,7 @@ namespace AngbandOS
             {
                 if (!player.HasConfusionResistance)
                 {
-                    player.SetTimedConfusion(player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedConfusion.SetTimer(player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
                 {
@@ -393,11 +393,11 @@ namespace AngbandOS
             {
                 if (!player.HasConfusionResistance)
                 {
-                    player.SetTimedConfusion(player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedConfusion.SetTimer(player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!player.HasFreeAction)
                 {
-                    player.SetTimedParalysis(player.TimedParalysis + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedParalysis.SetTimer(player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 }
                 while (Program.Rng.RandomLessThan(100) > player.SkillSavingThrow)
                 {
@@ -1453,7 +1453,7 @@ namespace AngbandOS
             saveGame.Disturb(true);
 
             // Render a message to the player.
-            bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
             string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
             if (message != null)
             {
@@ -1590,7 +1590,7 @@ namespace AngbandOS
 
                 // Against other monsters we pick spells randomly
                 MonsterSpell thrownSpell = Race.Spells.ChooseRandom();
-                bool blind = saveGame.Player.TimedBlindness != 0;
+                bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
                 bool seeTarget = !blind && target.IsVisible;
                 bool seen = !blind && IsVisible;
                 bool seeEither = seen || seeTarget;
@@ -2670,7 +2670,7 @@ namespace AngbandOS
                     {
                         saveGame.Disturb(true);
                         // Protection From Evil might repel the attack
-                        if (saveGame.Player.TimedProtectionFromEvil > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
+                        if (saveGame.Player.TimedProtectionFromEvil.TimeRemaining > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
                         {
                             if (IsVisible)
                             {
@@ -2799,7 +2799,7 @@ namespace AngbandOS
                             }
                             if (k != 0)
                             {
-                                saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + k);
+                                saveGame.Player.TimedStun.SetTimer(saveGame.Player.TimedStun.TimeRemaining + k);
                             }
                         }
                         // If the monster touched us then it may take damage from our defensive abilities

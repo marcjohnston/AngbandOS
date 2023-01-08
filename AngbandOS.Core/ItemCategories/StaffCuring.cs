@@ -22,19 +22,19 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void UseStaff(UseStaffEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.SetTimedBlindness(0))
+            if (eventArgs.SaveGame.Player.TimedBlindness.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedPoison(0))
+            if (eventArgs.SaveGame.Player.TimedPoison.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedConfusion(0))
+            if (eventArgs.SaveGame.Player.TimedConfusion.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedStun(0))
+            if (eventArgs.SaveGame.Player.TimedStun.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }

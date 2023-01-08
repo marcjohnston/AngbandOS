@@ -138,7 +138,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -157,7 +157,7 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasConfusionResistance)
             {
-                SaveGame.Player.SetTimedConfusion(SaveGame.Player.TimedConfusion + Program.Rng.DieRoll(20) + 10);
+                SaveGame.Player.TimedConfusion.SetTimer(SaveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.DieRoll(20) + 10);
             }
             SaveGame.Player.TakeHit(dam, killer);
             return true;

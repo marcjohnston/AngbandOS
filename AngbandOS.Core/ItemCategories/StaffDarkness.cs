@@ -23,7 +23,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!eventArgs.SaveGame.Player.HasBlindnessResistance && !eventArgs.SaveGame.Player.HasDarkResistance)
             {
-                if (eventArgs.SaveGame.Player.SetTimedBlindness(eventArgs.SaveGame.Player.TimedBlindness + 3 + Program.Rng.DieRoll(5)))
+                if (eventArgs.SaveGame.Player.TimedBlindness.SetTimer(eventArgs.SaveGame.Player.TimedBlindness.TimeRemaining + 3 + Program.Rng.DieRoll(5)))
                 {
                     eventArgs.Identified = true;
                 }

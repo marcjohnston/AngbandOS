@@ -95,12 +95,12 @@ namespace AngbandOS.Core.Races
                 if (saveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
                 {
                     saveGame.MsgPrint("You dream of a time of health and peace...");
-                    saveGame.Player.SetTimedPoison(0);
+                    saveGame.Player.TimedPoison.SetTimer(0);
                     saveGame.Player.TimedHallucinations.SetTimer(0);
-                    saveGame.Player.SetTimedStun(0);
+                    saveGame.Player.TimedStun.SetTimer(0);
                     saveGame.Player.TimedBleeding.SetTimer(0);
-                    saveGame.Player.SetTimedBlindness(0);
-                    saveGame.Player.SetTimedFear(0);
+                    saveGame.Player.TimedBlindness.SetTimer(0);
+                    saveGame.Player.TimedFear.SetTimer(0);
                     saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
                     saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
                     saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);

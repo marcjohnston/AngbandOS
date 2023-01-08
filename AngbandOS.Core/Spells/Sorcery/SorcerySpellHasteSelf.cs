@@ -13,13 +13,13 @@ namespace AngbandOS.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            if (saveGame.Player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
             {
-                saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
+                saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
+                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(5));
             }
         }
 

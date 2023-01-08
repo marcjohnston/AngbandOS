@@ -19,27 +19,27 @@ namespace AngbandOS.Mutations.ActiveMutations
                 int dur = Program.Rng.DieRoll(20) + 20;
                 if (Program.Rng.RandomLessThan(5) < num)
                 {
-                    player.SetTimedAcidResistance(player.TimedAcidResistance + dur);
+                    player.TimedAcidResistance.SetTimer(player.TimedAcidResistance.TimeRemaining + dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(4) < num)
                 {
-                    player.SetTimedLightningResistance(player.TimedLightningResistance + dur);
+                    player.TimedLightningResistance.SetTimer(player.TimedLightningResistance.TimeRemaining + dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(3) < num)
                 {
-                    player.SetTimedFireResistance(player.TimedFireResistance + dur);
+                    player.TimedFireResistance.SetTimer(player.TimedFireResistance.TimeRemaining + dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(2) < num)
                 {
-                    player.SetTimedColdResistance(player.TimedColdResistance + dur);
+                    player.TimedColdResistance.SetTimer(player.TimedColdResistance.TimeRemaining + dur);
                     num--;
                 }
                 if (num != 0)
                 {
-                    player.SetTimedPoisonResistance(player.TimedPoisonResistance + dur);
+                    player.TimedPoisonResistance.SetTimer(player.TimedPoisonResistance.TimeRemaining + dur);
                 }
             }
         }

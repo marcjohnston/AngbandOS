@@ -16,7 +16,7 @@ namespace AngbandOS.Spells.Sorcery
             saveGame.Level.WizLight();
             if (!saveGame.Player.HasTelepathy)
             {
-                saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + Program.Rng.DieRoll(30) + 25);
+                saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.TimedTelepathy.TimeRemaining + Program.Rng.DieRoll(30) + 25);
             }
         }
 

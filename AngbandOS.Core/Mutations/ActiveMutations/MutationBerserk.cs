@@ -17,9 +17,9 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            player.SetTimedSuperheroism(player.TimedSuperheroism + Program.Rng.DieRoll(25) + 25);
+            player.TimedSuperheroism.SetTimer(player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
             player.RestoreHealth(30);
-            player.SetTimedFear(0);
+            player.TimedFear.SetTimer(0);
         }
 
         public override string ActivationSummary(int lvl)

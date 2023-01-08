@@ -5,7 +5,7 @@
         public override void Activate(ActivateChestTrapEventArgs eventArgs)
         {
             eventArgs.SaveGame.MsgPrint("A puff of green gas surrounds you!");
-            if (!(eventArgs.SaveGame.Player.HasPoisonResistance || eventArgs.SaveGame.Player.TimedPoisonResistance != 0))
+            if (!(eventArgs.SaveGame.Player.HasPoisonResistance || eventArgs.SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0))
             {
                 if (Program.Rng.DieRoll(10) <= eventArgs.SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
@@ -13,7 +13,7 @@
                 }
                 else
                 {
-                    eventArgs.SaveGame.Player.SetTimedPoison(eventArgs.SaveGame.Player.TimedPoison + 10 + Program.Rng.DieRoll(20));
+                    eventArgs.SaveGame.Player.TimedPoison.SetTimer(eventArgs.SaveGame.Player.TimedPoison.TimeRemaining + 10 + Program.Rng.DieRoll(20));
                 }
             }
         }

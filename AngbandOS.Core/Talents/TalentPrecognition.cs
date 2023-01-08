@@ -48,7 +48,7 @@ namespace AngbandOS.Talents
             }
             if (saveGame.Player.Level > 24 && saveGame.Player.Level < 40)
             {
-                saveGame.Player.SetTimedTelepathy(saveGame.Player.TimedTelepathy + saveGame.Player.Level);
+                saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.TimedTelepathy.TimeRemaining + saveGame.Player.Level);
             }
             if (!b)
             {

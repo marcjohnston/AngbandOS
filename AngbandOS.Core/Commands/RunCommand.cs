@@ -17,7 +17,7 @@
         public void Execute(SaveGame saveGame)
         {
             // Can't run if we're confused
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You are too confused!");
                 return;

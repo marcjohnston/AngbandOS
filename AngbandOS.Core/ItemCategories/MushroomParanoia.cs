@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!saveGame.Player.HasFearResistance)
             {
-                if (saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.RandomLessThan(10) + 10))
+                if (saveGame.Player.TimedFear.SetTimer(saveGame.Player.TimedFear.TimeRemaining + Program.Rng.RandomLessThan(10) + 10))
                 {
                     return true;
                 }

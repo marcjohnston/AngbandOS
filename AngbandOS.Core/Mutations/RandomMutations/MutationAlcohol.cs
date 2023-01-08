@@ -52,7 +52,7 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 if (!saveGame.Player.HasConfusionResistance)
                 {
-                    saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 15);
+                    saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 15);
                 }
                 if (Program.Rng.DieRoll(3) == 1 && !saveGame.Player.HasChaosResistance)
                 {

@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
             // Confusion makes you confused and possibly other effects
             if (!(saveGame.Player.HasConfusionResistance || saveGame.Player.HasChaosResistance))
             {
-                if (saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(20) + 15))
+                if (saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 15))
                 {
                     identified = true;
                 }

@@ -55,7 +55,7 @@
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
             int chance = saveGame.Player.SkillUseDevice;
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 chance /= 2;
             }

@@ -136,12 +136,12 @@
                 saveGame.MsgPrint("You cannot cast spells!");
                 return;
             }
-            if (saveGame.Player.TimedBlindness != 0 || saveGame.Level.NoLight())
+            if (saveGame.Player.TimedBlindness.TimeRemaining != 0 || saveGame.Level.NoLight())
             {
                 saveGame.MsgPrint("You cannot see!");
                 return;
             }
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You are too confused!");
                 return;
@@ -223,7 +223,7 @@
                 saveGame.Player.Mana = 0;
                 saveGame.Player.FractionalMana = 0;
                 saveGame.MsgPrint("You faint from the effort!");
-                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
@@ -237,7 +237,7 @@
         private void DoCmdMentalism(SaveGame saveGame)
         {
             int plev = saveGame.Player.Level;
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You are too confused!");
                 return;
@@ -275,11 +275,11 @@
                     else if (i < 45)
                     {
                         saveGame.MsgPrint("Your brain is addled!");
-                        saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.DieRoll(8));
+                        saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.DieRoll(8));
                     }
                     else if (i < 90)
                     {
-                        saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + Program.Rng.DieRoll(8));
+                        saveGame.Player.TimedStun.SetTimer(saveGame.Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(8));
                     }
                     else
                     {
@@ -307,7 +307,7 @@
                 saveGame.Player.Mana = 0;
                 saveGame.Player.FractionalMana = 0;
                 saveGame.MsgPrint("You faint from the effort!");
-                saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.DieRoll((5 * oops) + 1));
+                saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;

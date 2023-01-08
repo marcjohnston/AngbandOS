@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             // Steal some money
             saveGame.Player.TakeHit(damage, monsterDescription);
             obvious = true;
-            if ((saveGame.Player.TimedParalysis == 0 && Program.Rng.RandomLessThan(100) < saveGame.Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.Player.Level) || saveGame.Player.HasAntiTheft)
+            if ((saveGame.Player.TimedParalysis.TimeRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.Player.Level) || saveGame.Player.HasAntiTheft)
             {
                 saveGame.MsgPrint("You quickly protect your money pouch!");
                 if (Program.Rng.RandomLessThan(3) != 0)

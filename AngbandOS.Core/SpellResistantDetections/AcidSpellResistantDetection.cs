@@ -8,7 +8,7 @@
             {
                 monster.SmResAcid = true;
             }
-            if (saveGame.Player.TimedAcidResistance != 0)
+            if (saveGame.Player.TimedAcidResistance.TimeRemaining != 0)
             {
                 monster.SmOppAcid = true;
             }

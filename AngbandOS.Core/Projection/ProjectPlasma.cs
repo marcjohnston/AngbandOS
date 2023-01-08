@@ -199,7 +199,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -215,9 +215,9 @@ namespace AngbandOS.Projection
             if (!SaveGame.Player.HasSoundResistance)
             {
                 int kk = Program.Rng.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
-                SaveGame.Player.SetTimedStun(SaveGame.Player.TimedStun + kk);
+                SaveGame.Player.TimedStun.SetTimer(SaveGame.Player.TimedStun.TimeRemaining + kk);
             }
-            if (!(SaveGame.Player.HasFireResistance || SaveGame.Player.TimedFireResistance != 0 || SaveGame.Player.HasFireImmunity))
+            if (!(SaveGame.Player.HasFireResistance || SaveGame.Player.TimedFireResistance.TimeRemaining != 0 || SaveGame.Player.HasFireImmunity))
             {
                 SaveGame.Player.InvenDamage(SaveGame.SetAcidDestroy, 3);
             }

@@ -13,12 +13,12 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : BaseFixedArtifa
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("A heavenly choir sings...");
-        saveGame.Player.SetTimedPoison(0);
+        saveGame.Player.TimedPoison.SetTimer(0);
         saveGame.Player.TimedBleeding.SetTimer(0);
-        saveGame.Player.SetTimedStun(0);
-        saveGame.Player.SetTimedConfusion(0);
-        saveGame.Player.SetTimedBlindness(0);
-        saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + Program.Rng.DieRoll(25) + 25);
+        saveGame.Player.TimedStun.SetTimer(0);
+        saveGame.Player.TimedConfusion.SetTimer(0);
+        saveGame.Player.TimedBlindness.SetTimer(0);
+        saveGame.Player.TimedHeroism.SetTimer(saveGame.Player.TimedHeroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
         saveGame.Player.RestoreHealth(777);
         item.RechargeTimeLeft = 300;
     }

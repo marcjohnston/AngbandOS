@@ -34,7 +34,7 @@ namespace AngbandOS.Core.InventorySlots
                         processWorldEventArgs.DisableRegeneration = true;
                         oName = oPtr.Description(true, 0);
                         string ouch = $"wielding {oName}";
-                        if (processWorldEventArgs.SaveGame.Player.TimedInvulnerability == 0)
+                        if (processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TimeRemaining == 0)
                         {
                             processWorldEventArgs.SaveGame.Player.TakeHit(1, ouch);
                         }

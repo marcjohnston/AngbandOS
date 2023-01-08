@@ -18,7 +18,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 1;
         public override bool Eat(SaveGame saveGame)
         {
-            if (saveGame.Player.SetTimedConfusion(0))
+            if (saveGame.Player.TimedConfusion.SetTimer(0))
             {
                 return true;
             }

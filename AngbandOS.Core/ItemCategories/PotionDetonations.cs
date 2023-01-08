@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
             // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
             saveGame.MsgPrint("Massive explosions rupture your body!");
             saveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
-            saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + 75);
+            saveGame.Player.TimedStun.SetTimer(saveGame.Player.TimedStun.TimeRemaining + 75);
             saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + 5000);
             return true;
         }

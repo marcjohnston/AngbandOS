@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Detect invisible gives you times see invisibility
-            return saveGame.Player.SetTimedSeeInvisibility(saveGame.Player.TimedSeeInvisibility + 12 + Program.Rng.DieRoll(12));
+            return saveGame.Player.TimedSeeInvisibility.SetTimer(saveGame.Player.TimedSeeInvisibility.TimeRemaining + 12 + Program.Rng.DieRoll(12));
         }
     }
 }

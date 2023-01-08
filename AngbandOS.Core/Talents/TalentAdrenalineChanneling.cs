@@ -21,25 +21,25 @@ namespace AngbandOS.Talents
 
         public override void Use(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedFear(0);
-            saveGame.Player.SetTimedStun(0);
+            saveGame.Player.TimedFear.SetTimer(0);
+            saveGame.Player.TimedStun.SetTimer(0);
             saveGame.Player.RestoreHealth(saveGame.Player.Level);
             int i = 10 + Program.Rng.DieRoll(saveGame.Player.Level * 3 / 2);
             if (saveGame.Player.Level < 35)
             {
-                saveGame.Player.SetTimedHeroism(saveGame.Player.TimedHeroism + i);
+                saveGame.Player.TimedHeroism.SetTimer(saveGame.Player.TimedHeroism.TimeRemaining + i);
             }
             else
             {
-                saveGame.Player.SetTimedSuperheroism(saveGame.Player.TimedSuperheroism + i);
+                saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + i);
             }
-            if (saveGame.Player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
             {
-                saveGame.Player.SetTimedHaste(i);
+                saveGame.Player.TimedHaste.SetTimer(i);
             }
             else
             {
-                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + i);
+                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + i);
             }
         }
 

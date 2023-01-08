@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
         public override void Read(ReadScrollEvent eventArgs)
         {
             eventArgs.SaveGame.FireBall(new ProjectFire(eventArgs.SaveGame), 0, 150, 4);
-            if (!(eventArgs.SaveGame.Player.TimedFireResistance != 0 || eventArgs.SaveGame.Player.HasFireResistance || eventArgs.SaveGame.Player.HasFireImmunity))
+            if (!(eventArgs.SaveGame.Player.TimedFireResistance.TimeRemaining != 0 || eventArgs.SaveGame.Player.HasFireResistance || eventArgs.SaveGame.Player.HasFireImmunity))
             {
                 eventArgs.SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "a Scroll of Fire");
             }

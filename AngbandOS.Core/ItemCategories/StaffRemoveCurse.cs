@@ -24,7 +24,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (eventArgs.SaveGame.RemoveCurse())
             {
-                if (eventArgs.SaveGame.Player.TimedBlindness == 0)
+                if (eventArgs.SaveGame.Player.TimedBlindness.TimeRemaining == 0)
                 {
                     eventArgs.SaveGame.MsgPrint("The staff glows blue for a moment...");
                 }

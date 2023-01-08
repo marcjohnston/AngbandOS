@@ -22,16 +22,16 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void UseStaff(UseStaffEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.TimedHaste == 0)
+            if (eventArgs.SaveGame.Player.TimedHaste.TimeRemaining == 0)
             {
-                if (eventArgs.SaveGame.Player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
+                if (eventArgs.SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
                 {
                     eventArgs.Identified = true;
                 }
             }
             else
             {
-                eventArgs.SaveGame.Player.SetTimedHaste(eventArgs.SaveGame.Player.TimedHaste + 5);
+                eventArgs.SaveGame.Player.TimedHaste.SetTimer(eventArgs.SaveGame.Player.TimedHaste.TimeRemaining + 5);
             }
         }
     }

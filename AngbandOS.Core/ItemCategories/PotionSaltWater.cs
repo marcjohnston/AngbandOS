@@ -20,8 +20,8 @@ namespace AngbandOS.Core.ItemCategories
             // Salt water makes you vomit, but gets rid of poison
             saveGame.MsgPrint("The saltiness makes you vomit!");
             saveGame.Player.SetFood(Constants.PyFoodStarve - 1);
-            saveGame.Player.SetTimedPoison(0);
-            saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + 4);
+            saveGame.Player.TimedPoison.SetTimer(0);
+            saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + 4);
             return true;
         }
 

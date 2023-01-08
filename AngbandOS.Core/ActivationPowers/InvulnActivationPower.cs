@@ -12,7 +12,7 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedInvulnerability(saveGame.Player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
+            saveGame.Player.TimedInvulnerability.SetTimer(saveGame.Player.TimedInvulnerability.TimeRemaining + Program.Rng.DieRoll(8) + 8);
             return true;
         }
 

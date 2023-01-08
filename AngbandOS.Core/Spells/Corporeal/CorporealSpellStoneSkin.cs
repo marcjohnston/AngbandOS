@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedStoneskin(saveGame.Player.TimedStoneskin + Program.Rng.DieRoll(20) + 30);
+            saveGame.Player.TimedStoneskin.SetTimer(saveGame.Player.TimedStoneskin.TimeRemaining + Program.Rng.DieRoll(20) + 30);
         }
 
         public override void Initialise(int characterClass)

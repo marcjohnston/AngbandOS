@@ -25,7 +25,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedStun(0))
+            if (eventArgs.SaveGame.Player.TimedStun.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }

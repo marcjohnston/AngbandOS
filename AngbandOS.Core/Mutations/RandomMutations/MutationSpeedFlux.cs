@@ -27,25 +27,25 @@ namespace AngbandOS.Mutations.RandomMutations
                 if (Program.Rng.DieRoll(2) == 1)
                 {
                     saveGame.MsgPrint("Everything around you speeds up.");
-                    if (saveGame.Player.TimedHaste > 0)
+                    if (saveGame.Player.TimedHaste.TimeRemaining > 0)
                     {
-                        saveGame.Player.SetTimedHaste(0);
+                        saveGame.Player.TimedHaste.SetTimer(0);
                     }
                     else
                     {
-                        saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.DieRoll(30) + 10);
+                        saveGame.Player.TimedSlow.SetTimer(saveGame.Player.TimedSlow.TimeRemaining + Program.Rng.DieRoll(30) + 10);
                     }
                 }
                 else
                 {
                     saveGame.MsgPrint("Everything around you slows down.");
-                    if (saveGame.Player.TimedSlow > 0)
+                    if (saveGame.Player.TimedSlow.TimeRemaining > 0)
                     {
-                        saveGame.Player.SetTimedSlow(0);
+                        saveGame.Player.TimedSlow.SetTimer(0);
                     }
                     else
                     {
-                        saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + Program.Rng.DieRoll(30) + 10);
+                        saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(30) + 10);
                     }
                 }
                 saveGame.MsgPrint(null);

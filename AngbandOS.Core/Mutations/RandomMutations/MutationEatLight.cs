@@ -45,7 +45,7 @@ namespace AngbandOS.Mutations.RandomMutations
                     saveGame.Player.RestoreHealth(oPtr.TypeSpecificValue / 20);
                     oPtr.TypeSpecificValue /= 2;
                     saveGame.MsgPrint("You absorb energy from your light!");
-                    if (saveGame.Player.TimedBlindness != 0)
+                    if (saveGame.Player.TimedBlindness.TimeRemaining != 0)
                     {
                         if (oPtr.TypeSpecificValue == 0)
                         {

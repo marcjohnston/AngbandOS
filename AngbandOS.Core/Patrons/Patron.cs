@@ -318,11 +318,11 @@ namespace AngbandOS.Patrons
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Rise, my servant!'");
                     saveGame.Player.RestoreLevel();
-                    saveGame.Player.SetTimedPoison(0);
-                    saveGame.Player.SetTimedBlindness(0);
-                    saveGame.Player.SetTimedConfusion(0);
+                    saveGame.Player.TimedPoison.SetTimer(0);
+                    saveGame.Player.TimedBlindness.SetTimer(0);
+                    saveGame.Player.TimedConfusion.SetTimer(0);
                     saveGame.Player.TimedHallucinations.SetTimer(0);
-                    saveGame.Player.SetTimedStun(0);
+                    saveGame.Player.TimedStun.SetTimer(0);
                     saveGame.Player.TimedBleeding.SetTimer(0);
                     saveGame.Player.RestoreHealth(5000);
                     for (dummy = 0; dummy < 6; dummy++)

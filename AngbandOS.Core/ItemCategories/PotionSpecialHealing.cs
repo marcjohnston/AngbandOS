@@ -27,19 +27,19 @@ namespace AngbandOS.Core.ItemCategories
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedBlindness(0))
+            if (saveGame.Player.TimedBlindness.SetTimer(0))
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedConfusion(0))
+            if (saveGame.Player.TimedConfusion.SetTimer(0))
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedPoison(0))
+            if (saveGame.Player.TimedPoison.SetTimer(0))
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedStun(0))
+            if (saveGame.Player.TimedStun.SetTimer(0))
             {
                 identified = true;
             }

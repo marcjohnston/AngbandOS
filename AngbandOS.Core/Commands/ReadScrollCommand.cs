@@ -23,7 +23,7 @@ namespace AngbandOS.Commands
 
             int i;
             // Make sure we're in a situation where we can read
-            if (saveGame.Player.TimedBlindness != 0)
+            if (saveGame.Player.TimedBlindness.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You can't see anything.");
                 return;
@@ -33,7 +33,7 @@ namespace AngbandOS.Commands
                 saveGame.MsgPrint("You have no light to read by.");
                 return;
             }
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You are too confused!");
                 return;

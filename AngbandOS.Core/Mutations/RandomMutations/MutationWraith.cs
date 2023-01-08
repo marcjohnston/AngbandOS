@@ -28,7 +28,7 @@ namespace AngbandOS.Mutations.RandomMutations
             saveGame.Disturb(false);
             saveGame.MsgPrint("You feel insubstantial!");
             saveGame.MsgPrint(null);
-            saveGame.Player.SetTimedEtherealness(saveGame.Player.TimedEtherealness + Program.Rng.DieRoll(saveGame.Player.Level / 2) + saveGame.Player.Level / 2);
+            saveGame.Player.TimedEtherealness.SetTimer(saveGame.Player.TimedEtherealness.TimeRemaining + Program.Rng.DieRoll(saveGame.Player.Level / 2) + saveGame.Player.Level / 2);
         }
     }
 }

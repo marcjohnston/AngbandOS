@@ -51,7 +51,7 @@
             // Work out the chance of using the item successfully based on its level and the
             // player's skill
             int chance = saveGame.Player.SkillUseDevice;
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 chance /= 2;
             }
@@ -260,21 +260,21 @@
                     case RingType.Acid:
                         {
                             saveGame.FireBall(new ProjectAcid(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedAcidResistance(saveGame.Player.TimedAcidResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.TimedAcidResistance.SetTimer(saveGame.Player.TimedAcidResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
                             saveGame.FireBall(new ProjectCold(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.TimedColdResistance.SetTimer(saveGame.Player.TimedColdResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
                             saveGame.FireBall(new ProjectFire(saveGame), dir, 50, 2);
-                            saveGame.Player.SetTimedFireResistance(saveGame.Player.TimedFireResistance + Program.Rng.DieRoll(20) + 20);
+                            saveGame.Player.TimedFireResistance.SetTimer(saveGame.Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }

@@ -46,12 +46,12 @@ namespace AngbandOS.Spells.Death
             if (die < 14)
             {
                 saveGame.MsgPrint("An unnamable evil brushes against your mind...");
-                saveGame.Player.SetTimedFear(saveGame.Player.TimedFear + Program.Rng.DieRoll(4) + 4);
+                saveGame.Player.TimedFear.SetTimer(saveGame.Player.TimedFear.TimeRemaining + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 26)
             {
                 saveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-                saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.DieRoll(4) + 4);
+                saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.DieRoll(4) + 4);
             }
             if (die < 31)
             {

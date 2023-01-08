@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Resist cold gives you timed frost resistance
-            return saveGame.Player.SetTimedColdResistance(saveGame.Player.TimedColdResistance + Program.Rng.DieRoll(10) + 10);
+            return saveGame.Player.TimedColdResistance.SetTimer(saveGame.Player.TimedColdResistance.TimeRemaining + Program.Rng.DieRoll(10) + 10);
         }
     }
 }

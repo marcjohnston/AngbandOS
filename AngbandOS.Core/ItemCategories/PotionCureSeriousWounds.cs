@@ -28,11 +28,11 @@ namespace AngbandOS.Core.ItemCategories
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedBlindness(0))
+            if (saveGame.Player.TimedBlindness.SetTimer(0))
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedConfusion(0))
+            if (saveGame.Player.TimedConfusion.SetTimer(0))
             {
                 identified = true;
             }

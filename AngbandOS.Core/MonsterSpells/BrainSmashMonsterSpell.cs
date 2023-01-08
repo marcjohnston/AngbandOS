@@ -15,7 +15,7 @@
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
-            bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
             string monsterDescription = monster.IndefiniteVisibleName;
 
             if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
@@ -28,17 +28,17 @@
                 saveGame.Player.TakeHit(Program.Rng.DiceRoll(12, 15), monsterDescription);
                 if (!saveGame.Player.HasBlindnessResistance)
                 {
-                    saveGame.Player.SetTimedBlindness(saveGame.Player.TimedBlindness + 8 + Program.Rng.RandomLessThan(8));
+                    saveGame.Player.TimedBlindness.SetTimer(saveGame.Player.TimedBlindness.TimeRemaining + 8 + Program.Rng.RandomLessThan(8));
                 }
                 if (!saveGame.Player.HasConfusionResistance)
                 {
-                    saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + Program.Rng.RandomLessThan(4) + 4);
+                    saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!saveGame.Player.HasFreeAction)
                 {
-                    saveGame.Player.SetTimedParalysis(saveGame.Player.TimedParalysis + Program.Rng.RandomLessThan(4) + 4);
+                    saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 }
-                saveGame.Player.SetTimedSlow(saveGame.Player.TimedSlow + Program.Rng.RandomLessThan(4) + 4);
+                saveGame.Player.TimedSlow.SetTimer(saveGame.Player.TimedSlow.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
                 while (Program.Rng.RandomLessThan(100) > saveGame.Player.SkillSavingThrow)
                 {
                     saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
@@ -56,10 +56,10 @@
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
             int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-            bool playerIsBlind = saveGame.Player.TimedBlindness != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
             bool seen = !playerIsBlind && monster.IsVisible;
             string targetName = target.Name;
-            bool blind = saveGame.Player.TimedBlindness != 0;
+            bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
             bool seeTarget = !blind && target.IsVisible;
             MonsterRace targetRace = target.Race;
 

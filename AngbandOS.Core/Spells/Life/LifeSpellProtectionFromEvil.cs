@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Life
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedProtectionFromEvil(saveGame.Player.TimedProtectionFromEvil + Program.Rng.DieRoll(25) + (3 * saveGame.Player.Level));
+            saveGame.Player.TimedProtectionFromEvil.SetTimer(saveGame.Player.TimedProtectionFromEvil.TimeRemaining + Program.Rng.DieRoll(25) + (3 * saveGame.Player.Level));
         }
 
         public override void Initialise(int characterClass)

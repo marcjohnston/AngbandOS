@@ -26,14 +26,14 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 return;
             }
-            if (saveGame.Player.HasFearResistance || saveGame.Player.TimedHeroism != 0 || saveGame.Player.TimedSuperheroism != 0)
+            if (saveGame.Player.HasFearResistance || saveGame.Player.TimedHeroism.TimeRemaining != 0 || saveGame.Player.TimedSuperheroism.TimeRemaining != 0)
             {
                 return;
             }
             saveGame.Disturb(false);
             saveGame.MsgPrint("It's so dark... so scary!");
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrAfraid);
-            saveGame.Player.TimedFear = saveGame.Player.TimedFear + 13 + Program.Rng.DieRoll(26);
+            saveGame.Player.TimedFear.Reset(saveGame.Player.TimedFear.TimeRemaining + 13 + Program.Rng.DieRoll(26));
         }
     }
 }

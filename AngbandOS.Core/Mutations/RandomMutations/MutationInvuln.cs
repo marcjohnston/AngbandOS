@@ -26,7 +26,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 saveGame.Disturb(false);
                 saveGame.MsgPrint("You feel invincible!");
                 saveGame.MsgPrint(null);
-                saveGame.Player.SetTimedInvulnerability(saveGame.Player.TimedInvulnerability + Program.Rng.DieRoll(8) + 8);
+                saveGame.Player.TimedInvulnerability.SetTimer(saveGame.Player.TimedInvulnerability.TimeRemaining + Program.Rng.DieRoll(8) + 8);
             }
         }
     }

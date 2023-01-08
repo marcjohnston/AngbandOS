@@ -33,7 +33,7 @@
                 powerDesc[num] = "";
             }
             num = 0;
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 saveGame.MsgPrint("You are too confused to use any powers!");
                 saveGame.EnergyUse = 0;

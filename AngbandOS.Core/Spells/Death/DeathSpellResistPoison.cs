@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Death
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedPoisonResistance(saveGame.Player.TimedPoisonResistance + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.TimedPoisonResistance.SetTimer(saveGame.Player.TimedPoisonResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
         }
 
         public override void Initialise(int characterClass)

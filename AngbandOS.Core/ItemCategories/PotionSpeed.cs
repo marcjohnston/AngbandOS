@@ -20,16 +20,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Speed temporarily hastes you
-            if (saveGame.Player.TimedHaste == 0)
+            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
             {
-                if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(25) + 15))
+                if (saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
                 {
                     return true;
                 }
             }
             else
             {
-                saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
+                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + 5);
             }
             return false;
         }

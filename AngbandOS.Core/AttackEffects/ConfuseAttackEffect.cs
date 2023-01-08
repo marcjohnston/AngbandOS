@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             saveGame.Player.TakeHit(damage, monsterDescription);
             if (!saveGame.Player.HasConfusionResistance)
             {
-                if (saveGame.Player.SetTimedConfusion(saveGame.Player.TimedConfusion + 3 + Program.Rng.DieRoll(monsterLevel)))
+                if (saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + 3 + Program.Rng.DieRoll(monsterLevel)))
                 {
                     obvious = true;
                 }

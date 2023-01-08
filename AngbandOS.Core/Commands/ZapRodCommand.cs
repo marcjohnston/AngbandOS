@@ -60,7 +60,7 @@
             int itemLevel = item.BaseItemCategory.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
             int chance = saveGame.Player.SkillUseDevice;
-            if (saveGame.Player.TimedConfusion != 0)
+            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 chance /= 2;
             }
@@ -158,19 +158,19 @@
                     }
                 case RodType.Curing:
                     {
-                        if (saveGame.Player.SetTimedBlindness(0))
+                        if (saveGame.Player.TimedBlindness.SetTimer(0))
                         {
                             identified = true;
                         }
-                        if (saveGame.Player.SetTimedPoison(0))
+                        if (saveGame.Player.TimedPoison.SetTimer(0))
                         {
                             identified = true;
                         }
-                        if (saveGame.Player.SetTimedConfusion(0))
+                        if (saveGame.Player.TimedConfusion.SetTimer(0))
                         {
                             identified = true;
                         }
-                        if (saveGame.Player.SetTimedStun(0))
+                        if (saveGame.Player.TimedStun.SetTimer(0))
                         {
                             identified = true;
                         }
@@ -191,7 +191,7 @@
                         {
                             identified = true;
                         }
-                        if (saveGame.Player.SetTimedStun(0))
+                        if (saveGame.Player.TimedStun.SetTimer(0))
                         {
                             identified = true;
                         }
@@ -237,16 +237,16 @@
                     }
                 case RodType.Speed:
                     {
-                        if (saveGame.Player.TimedHaste == 0)
+                        if (saveGame.Player.TimedHaste.TimeRemaining == 0)
                         {
-                            if (saveGame.Player.SetTimedHaste(Program.Rng.DieRoll(30) + 15))
+                            if (saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
                             {
                                 identified = true;
                             }
                         }
                         else
                         {
-                            saveGame.Player.SetTimedHaste(saveGame.Player.TimedHaste + 5);
+                            saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + 5);
                         }
                         item.TypeSpecificValue = 99;
                         break;

@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.SetTimedFear(0);
+            saveGame.Player.TimedFear.SetTimer(0);
         }
 
         public override void Initialise(int characterClass)

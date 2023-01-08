@@ -120,12 +120,12 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
             if (blind)
             {
                 SaveGame.MsgPrint("You are hit by something!");
             }
-            SaveGame.Player.SetTimedHaste(SaveGame.Player.TimedHaste + Program.Rng.DieRoll(5));
+            SaveGame.Player.TimedHaste.SetTimer(SaveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(5));
             return true;
         }
     }

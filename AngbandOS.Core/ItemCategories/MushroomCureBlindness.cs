@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Eat(SaveGame saveGame)
         {
-            if (saveGame.Player.SetTimedBlindness(0))
+            if (saveGame.Player.TimedBlindness.SetTimer(0))
             {
                 return true;
             }

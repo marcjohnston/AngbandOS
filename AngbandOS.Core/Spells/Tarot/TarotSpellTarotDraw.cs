@@ -76,7 +76,7 @@ namespace AngbandOS.Spells.Tarot
             else if (die < 42)
             {
                 saveGame.MsgPrint("It's the Star.");
-                saveGame.Player.SetTimedBlessing(saveGame.Player.TimedBlessing + saveGame.Player.Level);
+                saveGame.Player.TimedBlessing.SetTimer(saveGame.Player.TimedBlessing.TimeRemaining + saveGame.Player.Level);
             }
             else if (die < 47)
             {

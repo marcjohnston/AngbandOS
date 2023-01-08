@@ -7,7 +7,7 @@
             eventArgs.SaveGame.MsgPrint("A puff of yellow gas surrounds you!");
             if (!eventArgs.SaveGame.Player.HasFreeAction)
             {
-                eventArgs.SaveGame.Player.SetTimedParalysis(eventArgs.SaveGame.Player.TimedParalysis + 10 + Program.Rng.DieRoll(20));
+                eventArgs.SaveGame.Player.TimedParalysis.SetTimer(eventArgs.SaveGame.Player.TimedParalysis.TimeRemaining + 10 + Program.Rng.DieRoll(20));
             }
         }
 

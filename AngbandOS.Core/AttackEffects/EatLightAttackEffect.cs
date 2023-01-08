@@ -57,7 +57,7 @@ namespace AngbandOS.Core.AttackEffects
                 {
                     item.TypeSpecificValue = 1;
                 }
-                if (saveGame.Player.TimedBlindness == 0)
+                if (saveGame.Player.TimedBlindness.TimeRemaining == 0)
                 {
                     saveGame.MsgPrint("Your light dims.");
                     obvious = true;

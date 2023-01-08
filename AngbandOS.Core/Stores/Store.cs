@@ -929,35 +929,35 @@ namespace AngbandOS
                     }
                 }
             }
-            SaveGame.Player.TimedHaste = 0;
-            SaveGame.Player.TimedSlow = 0;
-            SaveGame.Player.TimedBlindness = 0;
-            SaveGame.Player.TimedParalysis = 0;
-            SaveGame.Player.TimedConfusion = 0;
-            SaveGame.Player.TimedFear = 0;
+            SaveGame.Player.TimedHaste.Reset();
+            SaveGame.Player.TimedSlow.Reset();
+            SaveGame.Player.TimedBlindness.Reset();
+            SaveGame.Player.TimedParalysis.Reset();
+            SaveGame.Player.TimedConfusion.Reset();
+            SaveGame.Player.TimedFear.Reset();
             SaveGame.Player.TimedHallucinations.Reset();
-            SaveGame.Player.TimedPoison = 0;
+            SaveGame.Player.TimedPoison.Reset();
             SaveGame.Player.TimedBleeding.Reset();
-            SaveGame.Player.TimedStun = 0;
-            SaveGame.Player.TimedProtectionFromEvil = 0;
-            SaveGame.Player.TimedInvulnerability = 0;
-            SaveGame.Player.TimedHeroism = 0;
-            SaveGame.Player.TimedSuperheroism = 0;
-            SaveGame.Player.TimedStoneskin = 0;
-            SaveGame.Player.TimedBlessing = 0;
-            SaveGame.Player.TimedSeeInvisibility = 0;
-            SaveGame.Player.TimedEtherealness = 0;
-            SaveGame.Player.TimedInfravision = 0;
-            SaveGame.Player.TimedAcidResistance = 0;
-            SaveGame.Player.TimedLightningResistance = 0;
-            SaveGame.Player.TimedFireResistance = 0;
-            SaveGame.Player.TimedColdResistance = 0;
-            SaveGame.Player.TimedPoisonResistance = 0;
+            SaveGame.Player.TimedStun.Reset();
+            SaveGame.Player.TimedProtectionFromEvil.Reset();
+            SaveGame.Player.TimedInvulnerability.Reset();
+            SaveGame.Player.TimedHeroism.Reset();
+            SaveGame.Player.TimedSuperheroism.Reset();
+            SaveGame.Player.TimedStoneskin.Reset();
+            SaveGame.Player.TimedBlessing.Reset();
+            SaveGame.Player.TimedSeeInvisibility.Reset();
+            SaveGame.Player.TimedEtherealness.Reset();
+            SaveGame.Player.TimedInfravision.Reset();
+            SaveGame.Player.TimedAcidResistance.Reset();
+            SaveGame.Player.TimedLightningResistance.Reset();
+            SaveGame.Player.TimedFireResistance.Reset();
+            SaveGame.Player.TimedColdResistance.Reset();
+            SaveGame.Player.TimedPoisonResistance.Reset();
             SaveGame.Player.Health = SaveGame.Player.MaxHealth;
             SaveGame.Player.Mana = SaveGame.Player.MaxMana;
-            SaveGame.Player.SetTimedBlindness(0);
-            SaveGame.Player.SetTimedConfusion(0);
-            SaveGame.Player.TimedStun = 0;
+            SaveGame.Player.TimedBlindness.Reset();
+            SaveGame.Player.TimedConfusion.Reset();
+            SaveGame.Player.TimedStun.Reset(0);
             SaveGame.NewLevelFlag = true;
             SaveGame.CameFrom = LevelStart.StartWalk;
         }
@@ -1401,12 +1401,12 @@ namespace AngbandOS
                 return;
             }
             // We can't learn spells if we're blind or confused
-            if (SaveGame.Player.TimedBlindness != 0)
+            if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
             {
                 SaveGame.MsgPrint("You cannot see!");
                 return;
             }
-            if (SaveGame.Player.TimedConfusion != 0)
+            if (SaveGame.Player.TimedConfusion.TimeRemaining != 0)
             {
                 SaveGame.MsgPrint("You are too confused!");
                 return;
@@ -1564,7 +1564,7 @@ namespace AngbandOS
         public void HireRoom()
         {
             int price;
-            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
+            if (SaveGame.Player.TimedPoison.TimeRemaining > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
             {
                 SaveGame.MsgPrint("You need a healer, not a room!");
                 SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
@@ -1596,7 +1596,7 @@ namespace AngbandOS
 
         public void Rest()
         {
-            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
+            if (SaveGame.Player.TimedPoison.TimeRemaining > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
             {
                 SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
             }
