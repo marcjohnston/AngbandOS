@@ -36,7 +36,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 identified = true;
             }
-            if (saveGame.Player.SetTimedBleeding((saveGame.Player.TimedBleeding / 2) - 50))
+            if (saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TimeRemaining / 2) - 50))
             {
                 identified = true;
             }

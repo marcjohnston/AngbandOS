@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Corporeal
         {
             saveGame.Player.RestoreHealth(300);
             saveGame.Player.SetTimedStun(0);
-            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.TimedBleeding.SetTimer(0);
         }
 
         public override void Initialise(int characterClass)

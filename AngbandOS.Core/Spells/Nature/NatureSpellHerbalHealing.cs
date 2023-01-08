@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Nature
         {
             saveGame.Player.RestoreHealth(1000);
             saveGame.Player.SetTimedStun(0);
-            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.SetTimedPoison(0);
         }
 

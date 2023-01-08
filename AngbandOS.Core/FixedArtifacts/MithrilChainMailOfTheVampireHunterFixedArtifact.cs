@@ -14,7 +14,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : BaseFixedArtifa
     {
         saveGame.MsgPrint("A heavenly choir sings...");
         saveGame.Player.SetTimedPoison(0);
-        saveGame.Player.SetTimedBleeding(0);
+        saveGame.Player.TimedBleeding.SetTimer(0);
         saveGame.Player.SetTimedStun(0);
         saveGame.Player.SetTimedConfusion(0);
         saveGame.Player.SetTimedBlindness(0);

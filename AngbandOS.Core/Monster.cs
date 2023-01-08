@@ -2758,7 +2758,7 @@ namespace AngbandOS
                             }
                             if (k != 0)
                             {
-                                saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + k);
+                                saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + k);
                             }
                         }
                         if (doStun)

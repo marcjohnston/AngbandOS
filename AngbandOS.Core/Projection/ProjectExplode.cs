@@ -198,7 +198,7 @@ namespace AngbandOS.Projection
             }
             else
             {
-                SaveGame.Player.SetTimedBleeding(SaveGame.Player.TimedBleeding + dam);
+                SaveGame.Player.TimedBleeding.SetTimer(SaveGame.Player.TimedBleeding.TimeRemaining + dam);
             }
             if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(13) == 1)
             {

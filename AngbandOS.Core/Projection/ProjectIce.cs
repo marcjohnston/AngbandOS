@@ -213,7 +213,7 @@ namespace AngbandOS.Projection
             SaveGame.ColdDam(dam, killer);
             if (!SaveGame.Player.HasShardResistance)
             {
-                SaveGame.Player.SetTimedBleeding(SaveGame.Player.TimedBleeding + Program.Rng.DiceRoll(5, 8));
+                SaveGame.Player.TimedBleeding.SetTimer(SaveGame.Player.TimedBleeding.TimeRemaining + Program.Rng.DiceRoll(5, 8));
             }
             if (!SaveGame.Player.HasSoundResistance)
             {

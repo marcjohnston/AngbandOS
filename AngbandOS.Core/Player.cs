@@ -1,3 +1,5 @@
+using AngbandOS.Core.TimedActions;
+
 namespace AngbandOS
 {
     [Serializable]
@@ -192,7 +194,7 @@ namespace AngbandOS
         public int Speed;
         public Spellcasting Spellcasting;
         public int TimedAcidResistance;
-        public int TimedBleeding;
+        public TimedAction TimedBleeding;
         public int TimedBlessing;
         public int TimedBlindness;
         public int TimedColdResistance;
@@ -228,6 +230,7 @@ namespace AngbandOS
         public Player(SaveGame saveGame)
         {
             SaveGame = saveGame;
+            TimedBleeding = new BleedingTimedAction(SaveGame);
             Dna = new Genome(SaveGame);
             for (int i = 0; i < 4; i++)
             {
@@ -966,7 +969,7 @@ namespace AngbandOS
 
         public void PolymorphWounds()
         {
-            int wounds = TimedBleeding;
+            int wounds = TimedBleeding.TimeRemaining;
             int hitP = MaxHealth - Health;
             int change = Program.Rng.DiceRoll(Level, 5);
             bool nastyEffect = Program.Rng.DieRoll(5) == 1;
@@ -978,13 +981,13 @@ namespace AngbandOS
             {
                 SaveGame.MsgPrint("A new wound was created!");
                 TakeHit(change, "a polymorphed wound");
-                SetTimedBleeding(change);
+                TimedBleeding.SetTimer(change);
             }
             else
             {
                 SaveGame.MsgPrint("Your wounds are polymorphed into less serious ones.");
                 RestoreHealth(change);
-                SetTimedBleeding(TimedBleeding - (change / 2));
+                TimedBleeding.SetTimer(TimedBleeding.TimeRemaining - (change / 2));
             }
         }
 
@@ -1442,144 +1445,6 @@ namespace AngbandOS
             }
             SaveGame.Disturb(false);
             SaveGame.HandleStuff();
-        }
-
-        public bool SetTimedBleeding(int v)
-        {
-            int oldAux, newAux;
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (!Race.CanBleed(Level))
-            {
-                v = 0;
-            }
-            if (TimedBleeding > 1000)
-            {
-                oldAux = 7;
-            }
-            else if (TimedBleeding > 200)
-            {
-                oldAux = 6;
-            }
-            else if (TimedBleeding > 100)
-            {
-                oldAux = 5;
-            }
-            else if (TimedBleeding > 50)
-            {
-                oldAux = 4;
-            }
-            else if (TimedBleeding > 25)
-            {
-                oldAux = 3;
-            }
-            else if (TimedBleeding > 10)
-            {
-                oldAux = 2;
-            }
-            else if (TimedBleeding > 0)
-            {
-                oldAux = 1;
-            }
-            else
-            {
-                oldAux = 0;
-            }
-            if (v > 1000)
-            {
-                newAux = 7;
-            }
-            else if (v > 200)
-            {
-                newAux = 6;
-            }
-            else if (v > 100)
-            {
-                newAux = 5;
-            }
-            else if (v > 50)
-            {
-                newAux = 4;
-            }
-            else if (v > 25)
-            {
-                newAux = 3;
-            }
-            else if (v > 10)
-            {
-                newAux = 2;
-            }
-            else if (v > 0)
-            {
-                newAux = 1;
-            }
-            else
-            {
-                newAux = 0;
-            }
-            if (newAux > oldAux)
-            {
-                switch (newAux)
-                {
-                    case 1:
-                        SaveGame.MsgPrint("You have been given a graze.");
-                        break;
-
-                    case 2:
-                        SaveGame.MsgPrint("You have been given a light cut.");
-                        break;
-
-                    case 3:
-                        SaveGame.MsgPrint("You have been given a bad cut.");
-                        break;
-
-                    case 4:
-                        SaveGame.MsgPrint("You have been given a nasty cut.");
-                        break;
-
-                    case 5:
-                        SaveGame.MsgPrint("You have been given a severe cut.");
-                        break;
-
-                    case 6:
-                        SaveGame.MsgPrint("You have been given a deep gash.");
-                        break;
-
-                    case 7:
-                        SaveGame.MsgPrint("You have been given a mortal wound.");
-                        break;
-                }
-                notice = true;
-                if (Program.Rng.DieRoll(1000) < v || Program.Rng.DieRoll(16) == 1)
-                {
-                    if (!HasSustainCharisma)
-                    {
-                        SaveGame.MsgPrint("You have been horribly scarred.");
-                        TryDecreasingAbilityScore(Ability.Charisma);
-                    }
-                }
-            }
-            else if (newAux < oldAux)
-            {
-                switch (newAux)
-                {
-                    case 0:
-                        SaveGame.MsgPrint("You are no longer bleeding.");
-                        SaveGame.Disturb(false);
-                        break;
-                }
-                notice = true;
-            }
-            TimedBleeding = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            RedrawNeeded.Set(RedrawFlag.PrCut);
-            SaveGame.HandleStuff();
-            return true;
         }
 
         public bool SetTimedBlessing(int v)

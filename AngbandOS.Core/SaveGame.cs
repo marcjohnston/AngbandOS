@@ -2320,7 +2320,7 @@ namespace AngbandOS
                 {
                     if (Player.Health == Player.MaxHealth && Player.Mana == Player.MaxMana && Player.TimedBlindness == 0 &&
                         Player.TimedConfusion == 0 && Player.TimedPoison == 0 && Player.TimedFear == 0 && Player.TimedStun == 0 &&
-                        Player.TimedBleeding == 0 && Player.TimedSlow == 0 && Player.TimedParalysis == 0 && Player.TimedHallucinations == 0 &&
+                        Player.TimedBleeding.TimeRemaining == 0 && Player.TimedSlow == 0 && Player.TimedParalysis == 0 && Player.TimedHallucinations == 0 &&
                         Player.WordOfRecallDelay == 0)
                     {
                         Disturb(false);
@@ -2612,13 +2612,13 @@ namespace AngbandOS
                 }
             }
             int i;
-            if (Player.TimedBleeding != 0 && Player.TimedInvulnerability == 0)
+            if (Player.TimedBleeding.TimeRemaining != 0 && Player.TimedInvulnerability == 0)
             {
-                if (Player.TimedBleeding > 200)
+                if (Player.TimedBleeding.TimeRemaining > 200)
                 {
                     i = 3;
                 }
-                else if (Player.TimedBleeding > 100)
+                else if (Player.TimedBleeding.TimeRemaining > 100)
                 {
                     i = 2;
                 }
@@ -2734,7 +2734,7 @@ namespace AngbandOS
             {
                 regenAmount = 0;
             }
-            if (Player.TimedBleeding != 0)
+            if (Player.TimedBleeding.TimeRemaining != 0)
             {
                 regenAmount = 0;
             }
@@ -2848,15 +2848,7 @@ namespace AngbandOS
                 int adjust = Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
                 Player.SetTimedStun(Player.TimedStun - adjust);
             }
-            if (Player.TimedBleeding != 0)
-            {
-                int adjust = Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
-                if (Player.TimedBleeding > 1000)
-                {
-                    adjust = 0;
-                }
-                Player.SetTimedBleeding(Player.TimedBleeding - adjust);
-            }
+            Player.TimedBleeding.ProcessWorld();
             oPtr = Player.Inventory[InventorySlot.Lightsource];
             if (oPtr.Category == ItemTypeEnum.Light)
             {
@@ -5527,7 +5519,7 @@ namespace AngbandOS
             {
                 info[i++] = "You are terrified.";
             }
-            if (Player.TimedBleeding != 0)
+            if (Player.TimedBleeding.TimeRemaining != 0)
             {
                 info[i++] = "You are bleeding.";
             }
@@ -9352,7 +9344,7 @@ namespace AngbandOS
                                 MsgPrint("You are impaled!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
+                                Player.TimedBleeding.SetTimer(Player.TimedBleeding.TimeRemaining + Program.Rng.DieRoll(damage));
                             }
                             Player.TakeHit(damage, name);
                         }
@@ -9377,7 +9369,7 @@ namespace AngbandOS
                                 MsgPrint("You are impaled on poisonous spikes!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.SetTimedBleeding(Player.TimedBleeding + Program.Rng.DieRoll(damage));
+                                Player.TimedBleeding.SetTimer(Player.TimedBleeding.TimeRemaining + Program.Rng.DieRoll(damage));
                                 // Hagarg Ryonis can save us from the poison
                                 if (Player.HasPoisonResistance || Player.TimedPoisonResistance != 0)
                                 {

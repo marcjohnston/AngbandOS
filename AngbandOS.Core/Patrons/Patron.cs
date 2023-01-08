@@ -323,7 +323,7 @@ namespace AngbandOS.Patrons
                     saveGame.Player.SetTimedConfusion(0);
                     saveGame.Player.SetTimedHallucinations(0);
                     saveGame.Player.SetTimedStun(0);
-                    saveGame.Player.SetTimedBleeding(0);
+                    saveGame.Player.TimedBleeding.SetTimer(0);
                     saveGame.Player.RestoreHealth(5000);
                     for (dummy = 0; dummy < 6; dummy++)
                     {

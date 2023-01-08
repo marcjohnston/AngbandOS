@@ -23,7 +23,7 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.MsgPrint("Massive explosions rupture your body!");
             saveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
             saveGame.Player.SetTimedStun(saveGame.Player.TimedStun + 75);
-            saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + 5000);
+            saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + 5000);
             return true;
         }
 

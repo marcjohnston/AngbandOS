@@ -46,7 +46,7 @@
 
                 if (TimedBleeding > 0)
                 {
-                    saveGame.Player.SetTimedBleeding(saveGame.Player.TimedBleeding + TimedBleeding);
+                    saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + TimedBleeding);
                 }
             }
         }

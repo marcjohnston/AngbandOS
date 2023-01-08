@@ -937,7 +937,7 @@ namespace AngbandOS
             SaveGame.Player.TimedFear = 0;
             SaveGame.Player.TimedHallucinations = 0;
             SaveGame.Player.TimedPoison = 0;
-            SaveGame.Player.TimedBleeding = 0;
+            SaveGame.Player.TimedBleeding.Reset();
             SaveGame.Player.TimedStun = 0;
             SaveGame.Player.TimedProtectionFromEvil = 0;
             SaveGame.Player.TimedInvulnerability = 0;
@@ -1562,7 +1562,7 @@ namespace AngbandOS
         public void HireRoom()
         {
             int price;
-            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding > 0)
+            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
             {
                 SaveGame.MsgPrint("You need a healer, not a room!");
                 SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
@@ -1594,7 +1594,7 @@ namespace AngbandOS
 
         public void Rest()
         {
-            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding > 0)
+            if (SaveGame.Player.TimedPoison > 0 || SaveGame.Player.TimedBleeding.TimeRemaining > 0)
             {
                 SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
             }

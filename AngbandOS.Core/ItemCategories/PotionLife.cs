@@ -29,7 +29,7 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.SetTimedConfusion(0);
             saveGame.Player.SetTimedHallucinations(0);
             saveGame.Player.SetTimedStun(0);
-            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
             saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
             saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);

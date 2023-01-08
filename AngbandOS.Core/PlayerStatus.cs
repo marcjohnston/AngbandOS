@@ -1632,7 +1632,7 @@
 
         public void PrtCut()
         {
-            int c = SaveGame.Player.TimedBleeding;
+            int c = SaveGame.Player.TimedBleeding.TimeRemaining;
             if (c > 1000)
             {
                 SaveGame.Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);

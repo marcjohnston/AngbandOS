@@ -98,7 +98,7 @@ namespace AngbandOS.Core.Races
                     saveGame.Player.SetTimedPoison(0);
                     saveGame.Player.SetTimedHallucinations(0);
                     saveGame.Player.SetTimedStun(0);
-                    saveGame.Player.SetTimedBleeding(0);
+                    saveGame.Player.TimedBleeding.SetTimer(0);
                     saveGame.Player.SetTimedBlindness(0);
                     saveGame.Player.SetTimedFear(0);
                     saveGame.Player.TryRestoringAbilityScore(Ability.Strength);

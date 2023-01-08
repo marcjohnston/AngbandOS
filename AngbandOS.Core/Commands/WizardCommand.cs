@@ -398,7 +398,7 @@
             saveGame.Player.SetTimedParalysis(0);
             saveGame.Player.SetTimedHallucinations(0);
             saveGame.Player.SetTimedStun(0);
-            saveGame.Player.SetTimedBleeding(0);
+            saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.SetTimedSlow(0);
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);
             DoCmdRedraw(saveGame);

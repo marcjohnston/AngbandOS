@@ -38,7 +38,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedBleeding(0))
+            if (eventArgs.SaveGame.Player.TimedBleeding.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }
