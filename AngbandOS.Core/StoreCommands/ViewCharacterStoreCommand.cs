@@ -45,8 +45,9 @@
             saveGame.SetBackground(BackgroundImage.Overhead);
             saveGame.Load();
             saveGame.FullScreenOverlay = false;
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
-                             RedrawFlag.PrEquippy);
+            saveGame.PrMapRedrawAction.Set();
+            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
             saveGame.HandleStuff();
         }
     }

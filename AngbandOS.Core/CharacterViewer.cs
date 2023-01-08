@@ -44,16 +44,6 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Display the 'Equippy' characters (the visual representation of a character's equipment)
-        /// in the default location on the main game screen
-        /// </summary>
-        /// <param name="player"> The player whose equippy characters should be displayed </param>
-        public static void PrintEquippy(SaveGame saveGame)
-        {
-            DisplayPlayerEquippy(saveGame, ScreenLocation.RowEquippy, ScreenLocation.ColEquippy);
-        }
-
-        /// <summary>
         /// Display the player's entire character sheet
         /// </summary>
         public void DisplayPlayer()

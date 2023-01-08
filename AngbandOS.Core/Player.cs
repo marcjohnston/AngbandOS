@@ -334,7 +334,7 @@ namespace AngbandOS
             SaveGame.Level.PanelColMin = pcolMin;
             SaveGame.Level.PanelBoundsCenter();
             UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.PrMapRedrawAction.Set();
         }
 
         public void ChangeRace(Race newRace)

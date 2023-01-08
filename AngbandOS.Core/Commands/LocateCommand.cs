@@ -76,14 +76,14 @@
                     saveGame.Level.PanelCol = currentCol;
                     saveGame.Level.PanelBounds();
                     saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                    saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+                    saveGame.PrMapRedrawAction.Set();
                     saveGame.HandleStuff();
                 }
             }
             // We've finished, so snap back to the player's location
             saveGame.Player.RecenterScreenAroundPlayer();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            saveGame.PrMapRedrawAction.Set();
             saveGame.HandleStuff();
         }
     }

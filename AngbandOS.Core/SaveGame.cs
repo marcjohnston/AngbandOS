@@ -1,11 +1,4 @@
-﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
-// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
-using System.Drawing;
+﻿using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -14,6 +7,9 @@ namespace AngbandOS
     [Serializable]
     internal class SaveGame
     {
+        public RedrawAction PrMapRedrawAction { get; }
+        public RedrawAction PrEquippyRedrawAction { get; }
+
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
         /// <summary>
@@ -222,6 +218,9 @@ namespace AngbandOS
         /// </summary>
         public SaveGame()
         {
+            PrMapRedrawAction = new PrMapRedrawAction(this);
+            PrEquippyRedrawAction = new PrEquippyRedrawAction(this);
+
             SingletonRepository.Initialize(this);
             LoadAllTypes();
             _autoNavigator = new AutoNavigator(this);
@@ -1839,8 +1838,9 @@ namespace AngbandOS
             Level.PanelBoundsCenter();
             MsgPrint(null);
             CharacterXtra = true;
-            Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrEquippy);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrEquippyRedrawAction.Set();
+            Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            PrMapRedrawAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
             UpdateStuff();
@@ -2532,7 +2532,7 @@ namespace AngbandOS
                     }
                 }
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+                PrMapRedrawAction.Set();
             }
             if (Player.GameTime.IsMidnight)
             {
@@ -2960,11 +2960,7 @@ namespace AngbandOS
                 MsgPrint(null);
                 Clear();
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMap))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMap);
-                Level.PrtMap();
-            }
+            PrMapRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrBasic))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrBasic);
@@ -2974,11 +2970,7 @@ namespace AngbandOS
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDepth | RedrawFlag.PrHealth);
                 PrtFrameBasic();
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrEquippy))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrEquippy);
-                CharacterViewer.PrintEquippy(this);
-            }
+            PrEquippyRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMisc))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMisc);
@@ -3891,7 +3883,7 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
         }
 
         public bool DestroyDoor(int dir)
@@ -4242,7 +4234,7 @@ namespace AngbandOS
                 }
             }
             Player.RedrawNeeded.Set(RedrawFlag.PrDtrap);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
             if (detect)
             {
                 MsgPrint("You sense the presence of traps!");
@@ -4588,7 +4580,7 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
         }
 
         public void ElderSign()
@@ -6308,7 +6300,7 @@ namespace AngbandOS
             _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
         }
 
         public bool WallToMud(int dir)
@@ -7921,7 +7913,7 @@ namespace AngbandOS
             // We'll need to update and redraw various things
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
             // If we're not actively searching, then have a chance of doing it passively
             if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
             {
@@ -8799,7 +8791,7 @@ namespace AngbandOS
             item.Y = Player.MapY;
             item.X = Player.MapX;
             Level.NoteSpot(Player.MapY, Player.MapX);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            PrMapRedrawAction.Set();
         }
 
         /// <summary>

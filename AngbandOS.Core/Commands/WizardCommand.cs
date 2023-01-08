@@ -266,8 +266,9 @@
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrMap |
-                              RedrawFlag.PrEquippy);
+            saveGame.PrMapRedrawAction.Set();
+            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
             saveGame.HandleStuff();
             saveGame.Redraw();
         }

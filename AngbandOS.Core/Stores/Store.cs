@@ -301,8 +301,9 @@ namespace AngbandOS
             SaveGame.SetBackground(BackgroundImage.Overhead);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrBasic | RedrawFlag.PrExtra | RedrawFlag.PrEquippy);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            SaveGame.PrMapRedrawAction.Set();
+            SaveGame.PrEquippyRedrawAction.Set();
         }
 
         public virtual void StoreInit()

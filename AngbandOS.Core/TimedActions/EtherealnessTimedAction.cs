@@ -29,7 +29,7 @@
             {
                 return false;
             }
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.PrMapRedrawAction.Set();
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             SaveGame.Disturb(false);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);

@@ -181,7 +181,7 @@ namespace AngbandOS
             if (size != 0)
             {
                 SaveGame.MsgPrint("Compacting objects...");
-                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+                SaveGame.PrMapRedrawAction.Set();
             }
             for (num = 0, cnt = 1; num < size; cnt++)
             {
@@ -948,7 +948,7 @@ namespace AngbandOS
                     }
                 }
             }
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.PrMapRedrawAction.Set();
         }
 
         public void MoveCursorRelative(int row, int col)
@@ -1303,30 +1303,6 @@ namespace AngbandOS
                 MoveOneStepTowards(out y, out x, y, x, y1, x1, y2, x2);
             }
             return false;
-        }
-
-        public void PrtMap()
-        {
-            bool v = SaveGame.CursorVisible;
-            SaveGame.CursorVisible = false;
-            for (int y = PanelRowMin; y <= PanelRowMax; y++)
-            {
-                for (int x = PanelColMin; x <= PanelColMax; x++)
-                {
-                    MapInfo(y, x, out Colour a, out char c);
-                    if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
-                    {
-                        a = Colour.White;
-                    }
-                    else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
-                    {
-                        a = Colour.Black;
-                    }
-                    SaveGame.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
-                }
-            }
-            RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
-            SaveGame.CursorVisible = v;
         }
 
         public void PutQuestMonster(int rIdx)
@@ -2067,7 +2043,7 @@ namespace AngbandOS
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.PrMapRedrawAction.Set();
         }
 
         public void WizLight()
@@ -2109,7 +2085,7 @@ namespace AngbandOS
                 }
             }
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMap);
+            SaveGame.PrMapRedrawAction.Set();
         }
 
         private void CaveLightHack(int y, int x)
@@ -2253,7 +2229,7 @@ namespace AngbandOS
             }
         }
 
-        private void MapInfo(int y, int x, out Colour ap, out char cp)
+        public void MapInfo(int y, int x, out Colour ap, out char cp)
         {
             int nextOIdx;
             Colour a;
