@@ -245,7 +245,7 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasChaosResistance)
             {
-                SaveGame.Player.SetTimedHallucinations(SaveGame.Player.TimedHallucinations + Program.Rng.DieRoll(10));
+                SaveGame.Player.TimedHallucinations.SetTimer(SaveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.DieRoll(10));
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     SaveGame.MsgPrint("Your body is twisted by chaos!");

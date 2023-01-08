@@ -2320,7 +2320,7 @@ namespace AngbandOS
                 {
                     if (Player.Health == Player.MaxHealth && Player.Mana == Player.MaxMana && Player.TimedBlindness == 0 &&
                         Player.TimedConfusion == 0 && Player.TimedPoison == 0 && Player.TimedFear == 0 && Player.TimedStun == 0 &&
-                        Player.TimedBleeding.TimeRemaining == 0 && Player.TimedSlow == 0 && Player.TimedParalysis == 0 && Player.TimedHallucinations == 0 &&
+                        Player.TimedBleeding.TimeRemaining == 0 && Player.TimedSlow == 0 && Player.TimedParalysis == 0 && Player.TimedHallucinations.TimeRemaining == 0 &&
                         Player.WordOfRecallDelay == 0)
                     {
                         Disturb(false);
@@ -2746,10 +2746,6 @@ namespace AngbandOS
             {
                 Player.RegenerateHealth(regenAmount);
             }
-            if (Player.TimedHallucinations != 0)
-            {
-                Player.SetTimedHallucinations(Player.TimedHallucinations - 1);
-            }
             if (Player.TimedBlindness != 0)
             {
                 Player.SetTimedBlindness(Player.TimedBlindness - 1);
@@ -2849,6 +2845,7 @@ namespace AngbandOS
                 Player.SetTimedStun(Player.TimedStun - adjust);
             }
             Player.TimedBleeding.ProcessWorld();
+            Player.TimedHallucinations.ProcessWorld();
             oPtr = Player.Inventory[InventorySlot.Lightsource];
             if (oPtr.Category == ItemTypeEnum.Light)
             {
@@ -5373,9 +5370,9 @@ namespace AngbandOS
                 info2[i] = ReportMagicsAux(Player.TimedPoison);
                 info[i++] = "You are poisoned";
             }
-            if (Player.TimedHallucinations != 0)
+            if (Player.TimedHallucinations.TimeRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedHallucinations);
+                info2[i] = ReportMagicsAux(Player.TimedHallucinations.TimeRemaining);
                 info[i++] = "You are hallucinating";
             }
             if (Player.TimedBlessing != 0)
@@ -5531,7 +5528,7 @@ namespace AngbandOS
             {
                 info[i++] = "You are poisoned.";
             }
-            if (Player.TimedHallucinations != 0)
+            if (Player.TimedHallucinations.TimeRemaining != 0)
             {
                 info[i++] = "You are hallucinating.";
             }
@@ -7419,7 +7416,7 @@ namespace AngbandOS
                 i /= 10;
             }
             // Disarming is tricky when confused
-            if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
+            if (Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0)
             {
                 i /= 10;
             }
@@ -7486,7 +7483,7 @@ namespace AngbandOS
                 i /= 10;
             }
             // Difficult to disarm when we're confused
-            if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
+            if (Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0)
             {
                 i /= 10;
             }
@@ -7749,7 +7746,7 @@ namespace AngbandOS
             if (tile.MonsterIndex != 0 && (monster.IsVisible || Level.GridPassable(newY, newX) || canPassWalls))
             {
                 // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-                if (monster.SmFriendly && !(Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible || Player.TimedStun != 0) &&
+                if (monster.SmFriendly && !(Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0 || !monster.IsVisible || Player.TimedStun != 0) &&
                     (Level.GridPassable(newY, newX) || canPassWalls))
                 {
                     // Wake up the monster, and track it
@@ -7882,7 +7879,7 @@ namespace AngbandOS
                     if (tile.FeatureType.Name == "Rubble")
                     {
                         MsgPrint("There is rubble blocking your way.");
-                        if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations != 0))
+                        if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations.TimeRemaining != 0))
                         {
                             EnergyUse = 0;
                         }
@@ -7956,7 +7953,7 @@ namespace AngbandOS
                     else
                     {
                         MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                        if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations != 0))
+                        if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations.TimeRemaining != 0))
                         {
                             EnergyUse = 0;
                         }
@@ -7977,7 +7974,7 @@ namespace AngbandOS
             // If we're leaving an area where we've detected traps at a run, then stop running
             if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
             {
-                if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations != 0))
+                if (!(Player.TimedConfusion != 0 || Player.TimedStun != 0 || Player.TimedHallucinations.TimeRemaining != 0))
                 {
                     EnergyUse = 0;
                 }
@@ -8061,7 +8058,7 @@ namespace AngbandOS
                     i /= 10;
                 }
                 // Hard to pick locks when you're confused or hallucinating
-                if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
+                if (Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0)
                 {
                     i /= 10;
                 }
@@ -8194,7 +8191,7 @@ namespace AngbandOS
                 HealthTrack(tile.MonsterIndex);
             }
             // if the monster is our friend and we're not confused, we can avoid hitting it
-            if (monster.SmFriendly && !(Player.TimedStun != 0 || Player.TimedConfusion != 0 || Player.TimedHallucinations != 0 || !monster.IsVisible))
+            if (monster.SmFriendly && !(Player.TimedStun != 0 || Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0 || !monster.IsVisible))
             {
                 MsgPrint($"You stop to avoid hitting {monsterName}.");
                 return;
@@ -8747,7 +8744,7 @@ namespace AngbandOS
                 chance /= 10;
             }
             // If we're confused it's hard to search
-            if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
+            if (Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0)
             {
                 chance /= 10;
             }
@@ -9068,7 +9065,7 @@ namespace AngbandOS
                     skill /= 10;
                 }
                 // Lockpicking is hard when you're confused
-                if (Player.TimedConfusion != 0 || Player.TimedHallucinations != 0)
+                if (Player.TimedConfusion != 0 || Player.TimedHallucinations.TimeRemaining != 0)
                 {
                     skill /= 10;
                 }
@@ -16414,7 +16411,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (Player.TimedHallucinations != 0)
+            if (Player.TimedHallucinations.TimeRemaining != 0)
             {
                 return false;
             }
@@ -16428,7 +16425,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (Player.TimedHallucinations != 0)
+            if (Player.TimedHallucinations.TimeRemaining != 0)
             {
                 return false;
             }
@@ -16474,7 +16471,7 @@ namespace AngbandOS
                     s2 = "on ";
                 }
                 string outVal;
-                if (Player.TimedHallucinations != 0)
+                if (Player.TimedHallucinations.TimeRemaining != 0)
                 {
                     const string name = "something strange";
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";

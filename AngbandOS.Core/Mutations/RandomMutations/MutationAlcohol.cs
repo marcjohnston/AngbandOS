@@ -57,7 +57,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 if (Program.Rng.DieRoll(3) == 1 && !saveGame.Player.HasChaosResistance)
                 {
                     saveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                    saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(150) + 150);
+                    saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(150) + 150);
                 }
             }
         }

@@ -2371,7 +2371,7 @@ namespace AngbandOS
                     c = ObjectRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
-            if (SaveGame.Player.TimedHallucinations != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+            if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
             {
                 ImageRandom(out ap, out cp);
             }
@@ -2388,7 +2388,7 @@ namespace AngbandOS
                 {
                     cp = oPtr.BaseItemCategory.FlavorCharacter;
                     ap = oPtr.BaseItemCategory.FlavorColour;
-                    if (SaveGame.Player.TimedHallucinations != 0)
+                    if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
                     {
                         ImageObject(out ap, out cp);
                     }
@@ -2469,7 +2469,7 @@ namespace AngbandOS
                             ap = a;
                         }
                     }
-                    if (SaveGame.Player.TimedHallucinations != 0)
+                    if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
                     {
                         ImageMonster(out ap, out cp);
                     }

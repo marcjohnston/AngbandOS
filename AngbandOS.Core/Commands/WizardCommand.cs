@@ -396,7 +396,7 @@
             saveGame.Player.SetTimedPoison(0);
             saveGame.Player.SetTimedFear(0);
             saveGame.Player.SetTimedParalysis(0);
-            saveGame.Player.SetTimedHallucinations(0);
+            saveGame.Player.TimedHallucinations.SetTimer(0);
             saveGame.Player.SetTimedStun(0);
             saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.SetTimedSlow(0);

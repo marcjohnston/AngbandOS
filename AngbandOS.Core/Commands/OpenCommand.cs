@@ -92,7 +92,7 @@
                     i /= 10;
                 }
                 // Hard to pick locks when you're confused or hallucinating
-                if (saveGame.Player.TimedConfusion != 0 || saveGame.Player.TimedHallucinations != 0)
+                if (saveGame.Player.TimedConfusion != 0 || saveGame.Player.TimedHallucinations.TimeRemaining != 0)
                 {
                     i /= 10;
                 }

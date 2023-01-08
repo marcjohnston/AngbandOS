@@ -27,7 +27,7 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.SetTimedPoison(0);
             saveGame.Player.SetTimedBlindness(0);
             saveGame.Player.SetTimedConfusion(0);
-            saveGame.Player.SetTimedHallucinations(0);
+            saveGame.Player.TimedHallucinations.SetTimer(0);
             saveGame.Player.SetTimedStun(0);
             saveGame.Player.TimedBleeding.SetTimer(0);
             saveGame.Player.TryRestoringAbilityScore(Ability.Strength);

@@ -1496,7 +1496,7 @@
             {
                 SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }
-            else if (SaveGame.Player.TimedHallucinations != 0)
+            else if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
             {
                 SaveGame.Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
             }

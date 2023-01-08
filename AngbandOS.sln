@@ -17,6 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cthangband", "AngbandOS.Wpf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.PersistentStorage.FileSystem", "AngbandOS.PersistentStorage.FileSystem\AngbandOS.PersistentStorage.FileSystem.csproj", "{BC3E66FE-4A4B-419E-BDB6-A83EF3F5898B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51426F80-0656-494C-A7DF-988048B8F846}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Separate Folders)|Any CPU = Debug (Separate Folders)|Any CPU

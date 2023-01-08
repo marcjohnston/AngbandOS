@@ -96,7 +96,7 @@ namespace AngbandOS.Core.Races
                 {
                     saveGame.MsgPrint("You dream of a time of health and peace...");
                     saveGame.Player.SetTimedPoison(0);
-                    saveGame.Player.SetTimedHallucinations(0);
+                    saveGame.Player.TimedHallucinations.SetTimer(0);
                     saveGame.Player.SetTimedStun(0);
                     saveGame.Player.TimedBleeding.SetTimer(0);
                     saveGame.Player.SetTimedBlindness(0);

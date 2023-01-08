@@ -194,7 +194,7 @@ namespace AngbandOS
         public int Speed;
         public Spellcasting Spellcasting;
         public int TimedAcidResistance;
-        public TimedAction TimedBleeding;
+        public BleedingTimedAction TimedBleeding;
         public int TimedBlessing;
         public int TimedBlindness;
         public int TimedColdResistance;
@@ -202,7 +202,7 @@ namespace AngbandOS
         public int TimedEtherealness;
         public int TimedFear;
         public int TimedFireResistance;
-        public int TimedHallucinations;
+        public HallucinationsTimedAction TimedHallucinations;
         public int TimedHaste;
         public int TimedHeroism;
         public int TimedInfravision;
@@ -231,6 +231,7 @@ namespace AngbandOS
         {
             SaveGame = saveGame;
             TimedBleeding = new BleedingTimedAction(SaveGame);
+            TimedHallucinations = new HallucinationsTimedAction(SaveGame);
             Dna = new Genome(SaveGame);
             for (int i = 0; i < 4; i++)
             {
@@ -1673,38 +1674,6 @@ namespace AngbandOS
             return true;
         }
 
-        public bool SetTimedHallucinations(int v)
-        {
-            bool notice = false;
-            v = v > 10000 ? 10000 : v < 0 ? 0 : v;
-            if (v != 0)
-            {
-                if (TimedHallucinations == 0)
-                {
-                    SaveGame.MsgPrint("Oh, wow! Everything looks so cosmic now!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimedHallucinations != 0)
-                {
-                    SaveGame.MsgPrint("You can see clearly again.");
-                    notice = true;
-                }
-            }
-            TimedHallucinations = v;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
-            RedrawNeeded.Set(RedrawFlag.PrMap);
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.HandleStuff();
-            return true;
-        }
-
         public bool SetTimedHaste(int v)
         {
             bool notice = false;
@@ -2345,7 +2314,7 @@ namespace AngbandOS
                         SaveGame.MsgPrint("You die.");
                         SaveGame.MsgPrint(null);
                         SaveGame.DiedFrom = hitFrom;
-                        if (TimedHallucinations != 0)
+                        if (TimedHallucinations.TimeRemaining != 0)
                         {
                             SaveGame.DiedFrom += "(?)";
                         }

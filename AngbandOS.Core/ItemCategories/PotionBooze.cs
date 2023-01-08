@@ -29,7 +29,7 @@ namespace AngbandOS.Core.ItemCategories
                 // 50% chance of having hallucinations
                 if (Program.Rng.DieRoll(2) == 1)
                 {
-                    if (saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(150) + 150))
+                    if (saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(150) + 150))
                     {
                         identified = true;
                     }

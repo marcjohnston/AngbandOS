@@ -270,7 +270,7 @@
                     else if (i < 15)
                     {
                         saveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                        saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + 5 + Program.Rng.DieRoll(10));
+                        saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + 5 + Program.Rng.DieRoll(10));
                     }
                     else if (i < 45)
                     {

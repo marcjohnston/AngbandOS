@@ -42,7 +42,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.SetTimedHallucinations(0))
+            if (eventArgs.SaveGame.Player.TimedHallucinations.SetTimer(0))
             {
                 eventArgs.Identified = true;
             }

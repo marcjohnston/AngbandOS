@@ -13,6 +13,6 @@
             homeStore.BuyHouse(storeCommandEvent.SaveGame.Player);
         }
 
-        public bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
+        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHall);
     }
 }

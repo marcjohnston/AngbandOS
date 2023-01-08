@@ -31,7 +31,7 @@
                 }
                 if (!saveGame.Player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
                 {
-                    saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 150);
+                    saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
                 }
 
                 string monsterDescription = monster.IndefiniteVisibleName;

@@ -49,7 +49,7 @@
             FoodItemClass foodItem = (FoodItemClass)item.BaseItemCategory;
 
             // Allow the food item to process the consumption.
-            foodItem.Eat(saveGame);
+            ident = foodItem.Eat(saveGame);
 
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             // We've tried this type of object

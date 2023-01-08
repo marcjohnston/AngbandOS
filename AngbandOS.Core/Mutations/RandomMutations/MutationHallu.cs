@@ -31,7 +31,7 @@ namespace AngbandOS.Mutations.RandomMutations
             }
             saveGame.Disturb(false);
             saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrExtra);
-            saveGame.Player.SetTimedHallucinations(saveGame.Player.TimedHallucinations + Program.Rng.RandomLessThan(50) + 20);
+            saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(50) + 20);
         }
     }
 }

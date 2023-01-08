@@ -935,7 +935,7 @@ namespace AngbandOS
             SaveGame.Player.TimedParalysis = 0;
             SaveGame.Player.TimedConfusion = 0;
             SaveGame.Player.TimedFear = 0;
-            SaveGame.Player.TimedHallucinations = 0;
+            SaveGame.Player.TimedHallucinations.Reset();
             SaveGame.Player.TimedPoison = 0;
             SaveGame.Player.TimedBleeding.Reset();
             SaveGame.Player.TimedStun = 0;
@@ -1513,6 +1513,8 @@ namespace AngbandOS
                 if (command.Key == c)
                 {
                     matchingCommandFound = true;
+
+                    // Ensure this command works in this store.
                     if (command.IsEnabled(this))
                     {
                         StoreCommandEvent storeCommandEvent = new StoreCommandEvent(SaveGame, this);

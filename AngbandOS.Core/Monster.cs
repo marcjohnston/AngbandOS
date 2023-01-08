@@ -141,7 +141,7 @@ namespace AngbandOS
             }
             string desc;
             string name = Race.Name;
-            if (SaveGame.Player.TimedHallucinations != 0)
+            if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
             {
                 MonsterRace halluRace;
                 do
@@ -286,7 +286,7 @@ namespace AngbandOS
             }
             else
             {
-                if (Race.Unique && SaveGame.Player.TimedHallucinations == 0)
+                if (Race.Unique && SaveGame.Player.TimedHallucinations.TimeRemaining == 0)
                 {
                     desc = name;
                 }
@@ -352,20 +352,17 @@ namespace AngbandOS
                 {
                     return;
                 }
-                if (player.TimedHallucinations != 0)
+                if (player.TimedHallucinations.TimeRemaining != 0)
                 {
-                    FunnyDescriptions funnyDescriptions = new FunnyDescriptions();
-                    SaveGame.MsgPrint($"You behold the {funnyDescriptions.Choose()} visage of {mName}!");
+                    SaveGame.MsgPrint($"You behold the {new FunnyDescriptions().Choose()} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        FunnyComments funnyComments = new FunnyComments();
-                        SaveGame.MsgPrint(funnyComments.Choose());
-                        player.TimedHallucinations += Program.Rng.DieRoll(Race.Level);
+                        SaveGame.MsgPrint(new FunnyComments().Choose());
+                        player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.DieRoll(Race.Level));
                     }
                     return;
                 }
-                HorrificDescriptions horrificDescriptions = new HorrificDescriptions();
-                SaveGame.MsgPrint($"You behold the {horrificDescriptions.Choose()} visage of {mName}!");
+                SaveGame.MsgPrint($"You behold the {new HorrificDescriptions().Choose()} visage of {mName}!");
                 Race.Knowledge.Characteristics.EldritchHorror = true;
 
                 // Allow the race to resist.
@@ -382,7 +379,7 @@ namespace AngbandOS
                 }
                 if (!player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
                 {
-                    player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 150);
+                    player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
                 }
                 return;
             }
@@ -412,7 +409,7 @@ namespace AngbandOS
                 }
                 if (!player.HasChaosResistance)
                 {
-                    player.SetTimedHallucinations(player.TimedHallucinations + Program.Rng.RandomLessThan(250) + 150);
+                    player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
                 }
                 return;
             }
