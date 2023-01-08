@@ -1464,31 +1464,30 @@ namespace AngbandOS
             {
                 return;
             }
-            PlayerStatus playerStatus = new PlayerStatus(this);
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateBonuses);
-                playerStatus.CalcBonuses();
+                CalcBonuses();
             }
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateTorchRadius))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateTorchRadius);
-                playerStatus.CalcTorch();
+                CalcTorch();
             }
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateHealth))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateHealth);
-                playerStatus.CalcHitpoints();
+                CalcHitpoints();
             }
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMana))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMana);
-                playerStatus.CalcMana();
+                CalcMana();
             }
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateSpells))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateSpells);
-                playerStatus.CalcSpells();
+                CalcSpells();
             }
             if (Player == null)
             {
@@ -2955,7 +2954,6 @@ namespace AngbandOS
             {
                 return;
             }
-            PlayerStatus playerStatus = new PlayerStatus(this);
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrWipe))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrWipe);
@@ -2974,7 +2972,7 @@ namespace AngbandOS
                 Player.RedrawNeeded.Clear(RedrawFlag.PrLev | RedrawFlag.PrExp | RedrawFlag.PrGold);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrArmor | RedrawFlag.PrHp | RedrawFlag.PrMana);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDepth | RedrawFlag.PrHealth);
-                playerStatus.PrtFrameBasic();
+                PrtFrameBasic();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrEquippy))
             {
@@ -2984,64 +2982,64 @@ namespace AngbandOS
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMisc))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMisc);
-                playerStatus.PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-                playerStatus.PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass,
+                PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
+                PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass,
                     ScreenLocation.ColClass);
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrTitle))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrTitle);
-                playerStatus.PrtTitle();
+                PrtTitle();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrLev))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrLev);
-                playerStatus.PrtLevel();
+                PrtLevel();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExp))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrExp);
-                playerStatus.PrtExp();
+                PrtExp();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStats))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrStats);
-                playerStatus.PrtStat(Ability.Strength);
-                playerStatus.PrtStat(Ability.Intelligence);
-                playerStatus.PrtStat(Ability.Wisdom);
-                playerStatus.PrtStat(Ability.Dexterity);
-                playerStatus.PrtStat(Ability.Constitution);
-                playerStatus.PrtStat(Ability.Charisma);
+                PrtStat(Ability.Strength);
+                PrtStat(Ability.Intelligence);
+                PrtStat(Ability.Wisdom);
+                PrtStat(Ability.Dexterity);
+                PrtStat(Ability.Constitution);
+                PrtStat(Ability.Charisma);
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrArmor))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrArmor);
-                playerStatus.PrtAc();
+                PrtAc();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHp))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrHp);
-                playerStatus.PrtHp();
+                PrtHp();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMana))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
-                playerStatus.PrtSp();
+                PrtSp();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrGold))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrGold);
-                playerStatus.PrtGold();
+                PrtGold();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrDepth))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDepth);
-                playerStatus.PrtDepth();
+                PrtDepth();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHealth))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrHealth);
-                playerStatus.HealthRedraw();
+                HealthRedraw();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExtra))
             {
@@ -3051,64 +3049,64 @@ namespace AngbandOS
                 Player.RedrawNeeded.Clear(RedrawFlag.PrBlind | RedrawFlag.PrConfused);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrAfraid | RedrawFlag.PrPoisoned);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrState | RedrawFlag.PrSpeed | RedrawFlag.PrStudy);
-                playerStatus.PrtFrameExtra();
+                PrtFrameExtra();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrCut))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrCut);
-                playerStatus.PrtCut();
+                PrtCut();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStun))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrStun);
-                playerStatus.PrtStun();
+                PrtStun();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHunger))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrHunger);
-                playerStatus.PrtHunger();
+                PrtHunger();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrDtrap))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDtrap);
-                playerStatus.PrtDtrap();
+                PrtDtrap();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrBlind))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrBlind);
-                playerStatus.PrtBlind();
+                PrtBlind();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrConfused))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrConfused);
-                playerStatus.PrtConfused();
+                PrtConfused();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrAfraid))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrAfraid);
-                playerStatus.PrtAfraid();
+                PrtAfraid();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrPoisoned))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrPoisoned);
-                playerStatus.PrtPoisoned();
+                PrtPoisoned();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrState))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrState);
-                playerStatus.PrtState();
+                PrtState();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrSpeed))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrSpeed);
-                playerStatus.PrtSpeed();
+                PrtSpeed();
             }
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStudy))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrStudy);
-                playerStatus.PrtStudy();
+                PrtStudy();
             }
-            playerStatus.PrtTime();
+            PrtTime();
         }
 
         private void RegenMonsters()
@@ -8143,12 +8141,11 @@ namespace AngbandOS
                 // Check if we hit
                 if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
                 {
-                    PlayerStatus playerStatus = new PlayerStatus(this);
                     PlaySound(SoundEffect.MeleeHit);
                     // Tell the player they hit it with the appropriate message
                     if (!(backstab || stabFleeing))
                     {
-                        if (!((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands()))
+                        if (!((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands()))
                         {
                             MsgPrint($"You hit {monsterName}.");
                         }
@@ -8184,7 +8181,7 @@ namespace AngbandOS
                     // Vorpal weapons have a chance of a deep cut
                     bool vorpalCut = item.Characteristics.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
-                    if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && playerStatus.MartialArtistEmptyHands())
+                    if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
                     {
                         int specialEffect = 0;
                         int stunEffect = 0;
@@ -14264,30 +14261,30 @@ namespace AngbandOS
             bool destroyed = false;
             bool emptyLevel = false;
 
-            Cent = new MapCoordinate[SaveGame.CentMax];
-            for (int i = 0; i < SaveGame.CentMax; i++)
+            Cent = new MapCoordinate[CentMax];
+            for (int i = 0; i < CentMax; i++)
             {
                 Cent[i] = new MapCoordinate();
             }
-            Door = new MapCoordinate[SaveGame.DoorMax];
-            for (int i = 0; i < SaveGame.DoorMax; i++)
+            Door = new MapCoordinate[DoorMax];
+            for (int i = 0; i < DoorMax; i++)
             {
                 Door[i] = new MapCoordinate();
             }
-            Wall = new MapCoordinate[SaveGame.WallMax];
-            for (int i = 0; i < SaveGame.WallMax; i++)
+            Wall = new MapCoordinate[WallMax];
+            for (int i = 0; i < WallMax; i++)
             {
                 Wall[i] = new MapCoordinate();
             }
-            Tunn = new MapCoordinate[SaveGame.TunnMax];
-            for (int i = 0; i < SaveGame.TunnMax; i++)
+            Tunn = new MapCoordinate[TunnMax];
+            for (int i = 0; i < TunnMax; i++)
             {
                 Tunn[i] = new MapCoordinate();
             }
-            RoomMap = new bool[SaveGame.MaxRoomsRow][];
-            for (int i = 0; i < SaveGame.MaxRoomsRow; i++)
+            RoomMap = new bool[MaxRoomsRow][];
+            for (int i = 0; i < MaxRoomsRow; i++)
             {
-                RoomMap[i] = new bool[SaveGame.MaxRoomsCol];
+                RoomMap[i] = new bool[MaxRoomsCol];
             }
 
             if (Level.MaxPanelRows == 0)
@@ -16608,6 +16605,2056 @@ namespace AngbandOS
                 Level.TempX[i] = list[i].X;
                 Level.TempY[i] = list[i].Y;
             }
+        }
+
+        private readonly int[][] _blowsTable =
+    {
+            new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},
+            new[] {1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4},
+            new[] {1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5},
+            new[] {1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 5},
+            new[] {1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5},
+            new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
+            new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
+            new[] {2, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 6},
+            new[] {3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6},
+            new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6},
+            new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6},
+            new[] {3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6}
+        };
+
+        public void CalcBonuses()
+        {
+            int i;
+            int extraShots;
+            Item oPtr;
+            int oldSpeed = Player.Speed;
+            bool oldTelepathy = Player.HasTelepathy;
+            bool oldSeeInv = Player.HasSeeInvisibility;
+            int oldDisAc = Player.DisplayedBaseArmourClass;
+            int oldDisToA = Player.DisplayedArmourClassBonus;
+            int extraBlows = extraShots = 0;
+            for (i = 0; i < 6; i++)
+            {
+                Player.AbilityScores[i].Bonus = 0;
+            }
+            Player.DisplayedBaseArmourClass = 0;
+            Player.BaseArmourClass = 0;
+            Player.DisplayedAttackBonus = 0;
+            Player.AttackBonus = 0;
+            Player.DisplayedDamageBonus = 0;
+            Player.DamageBonus = 0;
+            Player.DisplayedArmourClassBonus = 0;
+            Player.ArmourClassBonus = 0;
+            Player.HasAggravation = false;
+            Player.HasRandomTeleport = false;
+            Player.HasExperienceDrain = false;
+            Player.HasBlessedBlade = false;
+            Player.HasExtraMight = false;
+            Player.HasQuakeWeapon = false;
+            Player.HasSeeInvisibility = false;
+            Player.HasFreeAction = false;
+            Player.HasSlowDigestion = false;
+            Player.HasRegeneration = false;
+            Player.HasFeatherFall = false;
+            Player.HasHoldLife = false;
+            Player.HasTelepathy = false;
+            Player.HasGlow = false;
+            Player.HasSustainStrength = false;
+            Player.HasSustainIntelligence = false;
+            Player.HasSustainWisdom = false;
+            Player.HasSustainConstitution = false;
+            Player.HasSustainDexterity = false;
+            Player.HasSustainCharisma = false;
+            Player.HasAcidResistance = false;
+            Player.HasLightningResistance = false;
+            Player.HasFireResistance = false;
+            Player.HasColdResistance = false;
+            Player.HasPoisonResistance = false;
+            Player.HasConfusionResistance = false;
+            Player.HasSoundResistance = false;
+            Player.HasTimeResistance = false;
+            Player.HasLightResistance = false;
+            Player.HasDarkResistance = false;
+            Player.HasChaosResistance = false;
+            Player.HasDisenchantResistance = false;
+            Player.HasShardResistance = false;
+            Player.HasNexusResistance = false;
+            Player.HasBlindnessResistance = false;
+            Player.HasNetherResistance = false;
+            Player.HasFearResistance = false;
+            Player.HasElementalVulnerability = false;
+            Player.HasReflection = false;
+            Player.HasFireShield = false;
+            Player.HasLightningShield = false;
+            Player.HasAntiMagic = false;
+            Player.HasAntiTeleport = false;
+            Player.HasAntiTheft = false;
+            Player.HasAcidImmunity = false;
+            Player.HasLightningImmunity = false;
+            Player.HasFireImmunity = false;
+            Player.HasColdImmunity = false;
+            Player.InfravisionRange = Player.Race.Infravision;
+            Player.SkillDisarmTraps = Player.Race.BaseDisarmBonus + Player.Profession.BaseDisarmBonus;
+            Player.SkillUseDevice = Player.Race.BaseDeviceBonus + Player.Profession.BaseDeviceBonus;
+            Player.SkillSavingThrow = Player.Race.BaseSaveBonus + Player.Profession.BaseSaveBonus;
+            Player.SkillStealth = Player.Race.BaseStealthBonus + Player.Profession.BaseStealthBonus;
+            Player.SkillSearching = Player.Race.BaseSearchBonus + Player.Profession.BaseSearchBonus;
+            Player.SkillSearchFrequency = Player.Race.BaseSearchFrequency + Player.Profession.BaseSearchFrequency;
+            Player.SkillMelee = Player.Race.BaseMeleeAttackBonus + Player.Profession.BaseMeleeAttackBonus;
+            Player.SkillRanged = Player.Race.BaseRangedAttackBonus + Player.Profession.BaseRangedAttackBonus;
+            Player.SkillThrowing = Player.Race.BaseRangedAttackBonus + Player.Profession.BaseRangedAttackBonus;
+            Player.SkillDigging = 0;
+            if ((Player.ProfessionIndex == CharacterClass.Warrior && Player.Level > 29) ||
+                (Player.ProfessionIndex == CharacterClass.Paladin && Player.Level > 39) ||
+                (Player.ProfessionIndex == CharacterClass.Fanatic && Player.Level > 39))
+            {
+                Player.HasFearResistance = true;
+            }
+            if (Player.ProfessionIndex == CharacterClass.Fanatic && Player.Level > 29)
+            {
+                Player.HasChaosResistance = true;
+            }
+            if (Player.ProfessionIndex == CharacterClass.Cultist && Player.Level > 19)
+            {
+                Player.HasChaosResistance = true;
+            }
+            if (Player.ProfessionIndex == CharacterClass.Mindcrafter)
+            {
+                if (Player.Level > 9)
+                {
+                    Player.HasFearResistance = true;
+                }
+                if (Player.Level > 19)
+                {
+                    Player.HasSustainWisdom = true;
+                }
+                if (Player.Level > 29)
+                {
+                    Player.HasConfusionResistance = true;
+                }
+                if (Player.Level > 39)
+                {
+                    Player.HasTelepathy = true;
+                }
+            }
+            if (Player.ProfessionIndex == CharacterClass.Monk && Player.Level > 24 && !MartialArtistHeavyArmour())
+            {
+                Player.HasFreeAction = true;
+            }
+            if (Player.ProfessionIndex == CharacterClass.Mystic)
+            {
+                if (Player.Level > 9)
+                {
+                    Player.HasConfusionResistance = true;
+                }
+                if (Player.Level > 24)
+                {
+                    Player.HasFearResistance = true;
+                }
+                if (Player.Level > 29 && !MartialArtistHeavyArmour())
+                {
+                    Player.HasFreeAction = true;
+                }
+                if (Player.Level > 39)
+                {
+                    Player.HasTelepathy = true;
+                }
+            }
+            if (Player.ProfessionIndex == CharacterClass.ChosenOne)
+            {
+                Player.HasGlow = true;
+                if (Player.Level >= 2)
+                {
+                    Player.HasConfusionResistance = true;
+                }
+                if (Player.Level >= 4)
+                {
+                    Player.HasFearResistance = true;
+                }
+                if (Player.Level >= 6)
+                {
+                    Player.HasBlindnessResistance = true;
+                }
+                if (Player.Level >= 8)
+                {
+                    Player.HasFeatherFall = true;
+                }
+                if (Player.Level >= 10)
+                {
+                    Player.HasSeeInvisibility = true;
+                }
+                if (Player.Level >= 12)
+                {
+                    Player.HasSlowDigestion = true;
+                }
+                if (Player.Level >= 14)
+                {
+                    Player.HasSustainConstitution = true;
+                }
+                if (Player.Level >= 16)
+                {
+                    Player.HasPoisonResistance = true;
+                }
+                if (Player.Level >= 18)
+                {
+                    Player.HasSustainDexterity = true;
+                }
+                if (Player.Level >= 20)
+                {
+                    Player.HasSustainStrength = true;
+                }
+                if (Player.Level >= 22)
+                {
+                    Player.HasHoldLife = true;
+                }
+                if (Player.Level >= 24)
+                {
+                    Player.HasFreeAction = true;
+                }
+                if (Player.Level >= 26)
+                {
+                    Player.HasTelepathy = true;
+                }
+                if (Player.Level >= 28)
+                {
+                    Player.HasDarkResistance = true;
+                }
+                if (Player.Level >= 30)
+                {
+                    Player.HasLightResistance = true;
+                }
+                if (Player.Level >= 32)
+                {
+                    Player.HasSustainCharisma = true;
+                }
+                if (Player.Level >= 34)
+                {
+                    Player.HasSoundResistance = true;
+                }
+                if (Player.Level >= 36)
+                {
+                    Player.HasDisenchantResistance = true;
+                }
+                if (Player.Level >= 38)
+                {
+                    Player.HasRegeneration = true;
+                }
+                if (Player.Level >= 40)
+                {
+                    Player.HasSustainIntelligence = true;
+                }
+                if (Player.Level >= 42)
+                {
+                    Player.HasChaosResistance = true;
+                }
+                if (Player.Level >= 44)
+                {
+                    Player.HasSustainWisdom = true;
+                }
+                if (Player.Level >= 46)
+                {
+                    Player.HasNexusResistance = true;
+                }
+                if (Player.Level >= 48)
+                {
+                    Player.HasShardResistance = true;
+                }
+                if (Player.Level >= 50)
+                {
+                    Player.HasNetherResistance = true;
+                }
+            }
+            Player.Race.CalcBonuses(this);
+            Player.Speed = 110;
+            Player.MeleeAttacksPerRound = 1;
+            Player.MissileAttacksPerRound = 1;
+            Player.AmmunitionItemCategory = 0;
+            for (i = 0; i < 6; i++)
+            {
+                Player.AbilityScores[i].Bonus += Player.Race.AbilityBonus[i] + Player.Profession.AbilityBonus[i];
+            }
+            Player.AbilityScores[Ability.Strength].Bonus += Player.Dna.StrengthBonus;
+            Player.AbilityScores[Ability.Intelligence].Bonus += Player.Dna.IntelligenceBonus;
+            Player.AbilityScores[Ability.Wisdom].Bonus += Player.Dna.WisdomBonus;
+            Player.AbilityScores[Ability.Dexterity].Bonus += Player.Dna.DexterityBonus;
+            Player.AbilityScores[Ability.Constitution].Bonus += Player.Dna.ConstitutionBonus;
+            Player.AbilityScores[Ability.Charisma].Bonus += Player.Dna.CharismaBonus;
+            Player.Speed += Player.Dna.SpeedBonus;
+            Player.HasRegeneration |= Player.Dna.Regen;
+            Player.SkillSearchFrequency += Player.Dna.SearchBonus;
+            Player.SkillSearching += Player.Dna.SearchBonus;
+            Player.InfravisionRange += Player.Dna.InfravisionBonus;
+            Player.HasLightningShield |= Player.Dna.ElecHit;
+            Player.HasFireShield |= Player.Dna.FireHit;
+            Player.HasGlow |= Player.Dna.FireHit;
+            Player.ArmourClassBonus += Player.Dna.ArmourClassBonus;
+            Player.DisplayedArmourClassBonus += Player.Dna.ArmourClassBonus;
+            Player.HasFeatherFall |= Player.Dna.FeatherFall;
+            Player.HasFearResistance |= Player.Dna.ResFear;
+            Player.HasTimeResistance |= Player.Dna.ResTime;
+            Player.HasTelepathy |= Player.Dna.Esp;
+            Player.SkillStealth += Player.Dna.StealthBonus;
+            Player.HasFreeAction |= Player.Dna.FreeAction;
+            Player.HasElementalVulnerability |= Player.Dna.Vulnerable;
+            if (Player.Dna.MagicResistance)
+            {
+                Player.SkillSavingThrow += 15 + (Player.Level / 5);
+            }
+            if (Player.Dna.SuppressRegen)
+            {
+                Player.HasRegeneration = false;
+            }
+            if (Player.Dna.CharismaOverride)
+            {
+                Player.AbilityScores[Ability.Charisma].Bonus = 0;
+            }
+            if (Player.Dna.SustainAll)
+            {
+                Player.HasSustainConstitution = true;
+                if (Player.Level > 9)
+                {
+                    Player.HasSustainStrength = true;
+                }
+                if (Player.Level > 19)
+                {
+                    Player.HasSustainDexterity = true;
+                }
+                if (Player.Level > 29)
+                {
+                    Player.HasSustainWisdom = true;
+                }
+                if (Player.Level > 39)
+                {
+                    Player.HasSustainIntelligence = true;
+                }
+                if (Player.Level > 49)
+                {
+                    Player.HasSustainCharisma = true;
+                }
+            }
+            for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            {
+                oPtr = Player.Inventory[i];
+                if (oPtr.BaseItemCategory == null)
+                {
+                    continue;
+                }
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.Characteristics.Str)
+                {
+                    Player.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Int)
+                {
+                    Player.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Wis)
+                {
+                    Player.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Dex)
+                {
+                    Player.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Con)
+                {
+                    Player.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Cha)
+                {
+                    Player.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Stealth)
+                {
+                    Player.SkillStealth += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Search)
+                {
+                    Player.SkillSearching += oPtr.TypeSpecificValue * 5;
+                }
+                if (oPtr.Characteristics.Search)
+                {
+                    Player.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
+                }
+                if (oPtr.Characteristics.Infra)
+                {
+                    Player.InfravisionRange += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Tunnel)
+                {
+                    Player.SkillDigging += oPtr.TypeSpecificValue * 20;
+                }
+                if (oPtr.Characteristics.Speed)
+                {
+                    Player.Speed += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Blows)
+                {
+                    extraBlows += oPtr.TypeSpecificValue;
+                }
+                if (oPtr.Characteristics.Impact)
+                {
+                    Player.HasQuakeWeapon = true;
+                }
+                if (oPtr.Characteristics.AntiTheft)
+                {
+                    Player.HasAntiTheft = true;
+                }
+                if (oPtr.Characteristics.XtraShots)
+                {
+                    extraShots++;
+                }
+                if (oPtr.Characteristics.Aggravate)
+                {
+                    Player.HasAggravation = true;
+                }
+                if (oPtr.Characteristics.Teleport)
+                {
+                    Player.HasRandomTeleport = true;
+                }
+                if (oPtr.Characteristics.DrainExp)
+                {
+                    Player.HasExperienceDrain = true;
+                }
+                if (oPtr.Characteristics.Blessed)
+                {
+                    Player.HasBlessedBlade = true;
+                }
+                if (oPtr.Characteristics.XtraMight)
+                {
+                    Player.HasExtraMight = true;
+                }
+                if (oPtr.Characteristics.SlowDigest)
+                {
+                    Player.HasSlowDigestion = true;
+                }
+                if (oPtr.Characteristics.Regen)
+                {
+                    Player.HasRegeneration = true;
+                }
+                if (oPtr.Characteristics.Telepathy)
+                {
+                    Player.HasTelepathy = true;
+                }
+                if (oPtr.Characteristics.Lightsource)
+                {
+                    Player.HasGlow = true;
+                }
+                if (oPtr.Characteristics.SeeInvis)
+                {
+                    Player.HasSeeInvisibility = true;
+                }
+                if (oPtr.Characteristics.Feather)
+                {
+                    Player.HasFeatherFall = true;
+                }
+                if (oPtr.Characteristics.FreeAct)
+                {
+                    Player.HasFreeAction = true;
+                }
+                if (oPtr.Characteristics.HoldLife)
+                {
+                    Player.HasHoldLife = true;
+                }
+                if (oPtr.Characteristics.Wraith)
+                {
+                    Player.TimedEtherealness.Reset(Math.Max(Player.TimedEtherealness.TimeRemaining, 20));
+                }
+                if (oPtr.Characteristics.ImFire)
+                {
+                    Player.HasFireImmunity = true;
+                }
+                if (oPtr.Characteristics.ImAcid)
+                {
+                    Player.HasAcidImmunity = true;
+                }
+                if (oPtr.Characteristics.ImCold)
+                {
+                    Player.HasColdImmunity = true;
+                }
+                if (oPtr.Characteristics.ImElec)
+                {
+                    Player.HasLightningImmunity = true;
+                }
+                if (oPtr.Characteristics.ResAcid)
+                {
+                    Player.HasAcidResistance = true;
+                }
+                if (oPtr.Characteristics.ResElec)
+                {
+                    Player.HasLightningResistance = true;
+                }
+                if (oPtr.Characteristics.ResFire)
+                {
+                    Player.HasFireResistance = true;
+                }
+                if (oPtr.Characteristics.ResCold)
+                {
+                    Player.HasColdResistance = true;
+                }
+                if (oPtr.Characteristics.ResPois)
+                {
+                    Player.HasPoisonResistance = true;
+                }
+                if (oPtr.Characteristics.ResFear)
+                {
+                    Player.HasFearResistance = true;
+                }
+                if (oPtr.Characteristics.ResConf)
+                {
+                    Player.HasConfusionResistance = true;
+                }
+                if (oPtr.Characteristics.ResSound)
+                {
+                    Player.HasSoundResistance = true;
+                }
+                if (oPtr.Characteristics.ResLight)
+                {
+                    Player.HasLightResistance = true;
+                }
+                if (oPtr.Characteristics.ResDark)
+                {
+                    Player.HasDarkResistance = true;
+                }
+                if (oPtr.Characteristics.ResChaos)
+                {
+                    Player.HasChaosResistance = true;
+                }
+                if (oPtr.Characteristics.ResDisen)
+                {
+                    Player.HasDisenchantResistance = true;
+                }
+                if (oPtr.Characteristics.ResShards)
+                {
+                    Player.HasShardResistance = true;
+                }
+                if (oPtr.Characteristics.ResNexus)
+                {
+                    Player.HasNexusResistance = true;
+                }
+                if (oPtr.Characteristics.ResBlind)
+                {
+                    Player.HasBlindnessResistance = true;
+                }
+                if (oPtr.Characteristics.ResNether)
+                {
+                    Player.HasNetherResistance = true;
+                }
+                if (oPtr.Characteristics.Reflect)
+                {
+                    Player.HasReflection = true;
+                }
+                if (oPtr.Characteristics.ShFire)
+                {
+                    Player.HasFireShield = true;
+                }
+                if (oPtr.Characteristics.ShElec)
+                {
+                    Player.HasLightningShield = true;
+                }
+                if (oPtr.Characteristics.NoMagic)
+                {
+                    Player.HasAntiMagic = true;
+                }
+                if (oPtr.Characteristics.NoTele)
+                {
+                    Player.HasAntiTeleport = true;
+                }
+                if (oPtr.Characteristics.SustStr)
+                {
+                    Player.HasSustainStrength = true;
+                }
+                if (oPtr.Characteristics.SustInt)
+                {
+                    Player.HasSustainIntelligence = true;
+                }
+                if (oPtr.Characteristics.SustWis)
+                {
+                    Player.HasSustainWisdom = true;
+                }
+                if (oPtr.Characteristics.SustDex)
+                {
+                    Player.HasSustainDexterity = true;
+                }
+                if (oPtr.Characteristics.SustCon)
+                {
+                    Player.HasSustainConstitution = true;
+                }
+                if (oPtr.Characteristics.SustCha)
+                {
+                    Player.HasSustainCharisma = true;
+                }
+                Player.BaseArmourClass += oPtr.BaseArmourClass;
+                Player.DisplayedBaseArmourClass += oPtr.BaseArmourClass;
+                Player.ArmourClassBonus += oPtr.BonusArmourClass;
+                if (oPtr.IsKnown())
+                {
+                    Player.DisplayedArmourClassBonus += oPtr.BonusArmourClass;
+                }
+                if (i == InventorySlot.MeleeWeapon)
+                {
+                    continue;
+                }
+                if (i == InventorySlot.RangedWeapon)
+                {
+                    continue;
+                }
+                Player.AttackBonus += oPtr.BonusToHit;
+                Player.DamageBonus += oPtr.BonusDamage;
+                if (oPtr.IsKnown())
+                {
+                    Player.DisplayedAttackBonus += oPtr.BonusToHit;
+                }
+                if (oPtr.IsKnown())
+                {
+                    Player.DisplayedDamageBonus += oPtr.BonusDamage;
+                }
+            }
+            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
+            {
+                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+                {
+                    if (inventorySlot.Count == 0)
+                    {
+                        int bareArmourBonus = inventorySlot.BareArmourClassBonus;
+                        Player.ArmourClassBonus += bareArmourBonus;
+                        Player.DisplayedArmourClassBonus += bareArmourBonus;
+                    }
+                }
+            }
+            if (Player.HasFireShield)
+            {
+                Player.HasGlow = true;
+            }
+            for (i = 0; i < 6; i++)
+            {
+                int ind;
+                int top = Player.AbilityScores[i]
+                    .ModifyStatValue(Player.AbilityScores[i].InnateMax, Player.AbilityScores[i].Bonus);
+                if (Player.AbilityScores[i].AdjustedMax != top)
+                {
+                    Player.AbilityScores[i].AdjustedMax = top;
+                    Player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                }
+                int use = Player.AbilityScores[i]
+                    .ModifyStatValue(Player.AbilityScores[i].Innate, Player.AbilityScores[i].Bonus);
+                if (i == Ability.Charisma && Player.Dna.CharismaOverride)
+                {
+                    if (use < 8 + (2 * Player.Level))
+                    {
+                        use = 8 + (2 * Player.Level);
+                    }
+                }
+                if (Player.AbilityScores[i].Adjusted != use)
+                {
+                    Player.AbilityScores[i].Adjusted = use;
+                    Player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                }
+                if (use <= 18)
+                {
+                    ind = use - 3;
+                }
+                else if (use <= 18 + 219)
+                {
+                    ind = 15 + ((use - 18) / 10);
+                }
+                else
+                {
+                    ind = 37;
+                }
+                if (Player.AbilityScores[i].TableIndex != ind)
+                {
+                    Player.AbilityScores[i].TableIndex = ind;
+                    if (i == Ability.Constitution)
+                    {
+                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
+                    }
+                    else if (i == Ability.Intelligence)
+                    {
+                        if (Player.Spellcasting.SpellStat == Ability.Intelligence)
+                        {
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                        }
+                    }
+                    else if (i == Ability.Wisdom)
+                    {
+                        if (Player.Spellcasting.SpellStat == Ability.Wisdom)
+                        {
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                        }
+                    }
+                    else if (i == Ability.Charisma)
+                    {
+                        if (Player.Spellcasting.SpellStat == Ability.Charisma)
+                        {
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                        }
+                    }
+                }
+            }
+            if (Player.TimedStun.TimeRemaining > 50)
+            {
+                Player.AttackBonus -= 20;
+                Player.DisplayedAttackBonus -= 20;
+                Player.DamageBonus -= 20;
+                Player.DisplayedDamageBonus -= 20;
+            }
+            else if (Player.TimedStun.TimeRemaining != 0)
+            {
+                Player.AttackBonus -= 5;
+                Player.DisplayedAttackBonus -= 5;
+                Player.DamageBonus -= 5;
+                Player.DisplayedDamageBonus -= 5;
+            }
+            if (Player.TimedInvulnerability.TimeRemaining != 0)
+            {
+                Player.ArmourClassBonus += 100;
+                Player.DisplayedArmourClassBonus += 100;
+            }
+            if (Player.TimedEtherealness.TimeRemaining != 0)
+            {
+                Player.ArmourClassBonus += 100;
+                Player.DisplayedArmourClassBonus += 100;
+                Player.HasReflection = true;
+            }
+            if (Player.TimedBlessing.TimeRemaining != 0)
+            {
+                Player.ArmourClassBonus += 5;
+                Player.DisplayedArmourClassBonus += 5;
+                Player.AttackBonus += 10;
+                Player.DisplayedAttackBonus += 10;
+            }
+            if (Player.TimedStoneskin.TimeRemaining != 0)
+            {
+                Player.ArmourClassBonus += 50;
+                Player.DisplayedArmourClassBonus += 50;
+            }
+            if (Player.TimedHeroism.TimeRemaining != 0)
+            {
+                Player.AttackBonus += 12;
+                Player.DisplayedAttackBonus += 12;
+            }
+            if (Player.TimedSuperheroism.TimeRemaining != 0)
+            {
+                Player.AttackBonus += 24;
+                Player.DisplayedAttackBonus += 24;
+                Player.ArmourClassBonus -= 10;
+                Player.DisplayedArmourClassBonus -= 10;
+            }
+            if (Player.TimedHaste.TimeRemaining != 0)
+            {
+                Player.Speed += 10;
+            }
+            if (Player.TimedSlow.TimeRemaining != 0)
+            {
+                Player.Speed -= 10;
+            }
+            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
+            {
+                Player.Speed += Player.Level / 10;
+            }
+            if (Player.TimedTelepathy.TimeRemaining != 0)
+            {
+                Player.HasTelepathy = true;
+            }
+            if (Player.TimedSeeInvisibility.TimeRemaining != 0)
+            {
+                Player.HasSeeInvisibility = true;
+            }
+            if (Player.TimedInfravision.TimeRemaining != 0)
+            {
+                Player.InfravisionRange++;
+            }
+            if (Player.HasChaosResistance)
+            {
+                Player.HasConfusionResistance = true;
+            }
+            if (Player.TimedHeroism.TimeRemaining != 0 || Player.TimedSuperheroism.TimeRemaining != 0)
+            {
+                Player.HasFearResistance = true;
+            }
+            if (Player.HasTelepathy != oldTelepathy)
+            {
+                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            }
+            if (Player.HasSeeInvisibility != oldSeeInv)
+            {
+                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            }
+            int j = Player.WeightCarried;
+            i = WeightLimit();
+            if (j > i / 2)
+            {
+                Player.Speed -= (j - (i / 2)) / (i / 10);
+            }
+            if (Player.Food >= Constants.PyFoodMax)
+            {
+                Player.Speed -= 10;
+            }
+            if (Player.IsSearching)
+            {
+                Player.Speed -= 10;
+            }
+            if (Player.Speed != oldSpeed)
+            {
+                Player.RedrawNeeded.Set(RedrawFlag.PrSpeed);
+            }
+            Player.ArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+            Player.DamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
+            Player.AttackBonus += Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
+            Player.AttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
+            Player.DisplayedArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+            Player.DisplayedDamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
+            Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
+            Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
+            if (Player.DisplayedBaseArmourClass != oldDisAc || Player.DisplayedArmourClassBonus != oldDisToA)
+            {
+                Player.RedrawNeeded.Set(RedrawFlag.PrArmor);
+            }
+            int hold = Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
+            oPtr = Player.Inventory[InventorySlot.RangedWeapon];
+            Player.HasHeavyBow = false;
+            if (hold < oPtr.Weight / 10)
+            {
+                Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                Player.HasHeavyBow = true;
+            }
+            if (oPtr.BaseItemCategory != null && !Player.HasHeavyBow)
+            {
+                // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
+                BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)oPtr.BaseItemCategory;
+                Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
+                if (Player.ProfessionIndex == CharacterClass.Ranger && Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
+                {
+                    if (Player.Level >= 20)
+                    {
+                        Player.MissileAttacksPerRound++;
+                    }
+                    if (Player.Level >= 40)
+                    {
+                        Player.MissileAttacksPerRound++;
+                    }
+                }
+                if (Player.ProfessionIndex == CharacterClass.Warrior && Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
+                    Player.AmmunitionItemCategory >= ItemTypeEnum.Shot)
+                {
+                    if (Player.Level >= 25)
+                    {
+                        Player.MissileAttacksPerRound++;
+                    }
+                    if (Player.Level >= 50)
+                    {
+                        Player.MissileAttacksPerRound++;
+                    }
+                }
+                Player.MissileAttacksPerRound += extraShots;
+                if (Player.MissileAttacksPerRound < 1)
+                {
+                    Player.MissileAttacksPerRound = 1;
+                }
+            }
+            oPtr = Player.Inventory[InventorySlot.MeleeWeapon];
+            Player.HasHeavyWeapon = false;
+            if (hold < oPtr.Weight / 10)
+            {
+                Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
+                Player.HasHeavyWeapon = true;
+            }
+            if (oPtr.BaseItemCategory != null && !Player.HasHeavyWeapon)
+            {
+                int num = 0, wgt = 0, mul = 0;
+                switch (Player.ProfessionIndex)
+                {
+                    case CharacterClass.Warrior:
+                        num = 6;
+                        wgt = 30;
+                        mul = 5;
+                        break;
+
+                    case CharacterClass.Mage:
+                    case CharacterClass.HighMage:
+                    case CharacterClass.Cultist:
+                    case CharacterClass.Channeler:
+                        num = 4;
+                        wgt = 40;
+                        mul = 2;
+                        break;
+
+                    case CharacterClass.Priest:
+                    case CharacterClass.Mindcrafter:
+                    case CharacterClass.Druid:
+                    case CharacterClass.ChosenOne:
+                        num = 5;
+                        wgt = 35;
+                        mul = 3;
+                        break;
+
+                    case CharacterClass.Rogue:
+                        num = 5;
+                        wgt = 30;
+                        mul = 3;
+                        break;
+
+                    case CharacterClass.Ranger:
+                        num = 5;
+                        wgt = 35;
+                        mul = 4;
+                        break;
+
+                    case CharacterClass.Paladin:
+                        num = 5;
+                        wgt = 30;
+                        mul = 4;
+                        break;
+
+                    case CharacterClass.WarriorMage:
+                        num = 5;
+                        wgt = 35;
+                        mul = 3;
+                        break;
+
+                    case CharacterClass.Fanatic:
+                        num = 5;
+                        wgt = 30;
+                        mul = 4;
+                        break;
+
+                    case CharacterClass.Monk:
+                    case CharacterClass.Mystic:
+                        num = Player.Level < 40 ? 3 : 4;
+                        wgt = 40;
+                        mul = 4;
+                        break;
+                }
+                int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
+                int strIndex = Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent * mul / div;
+                if (strIndex > 11)
+                {
+                    strIndex = 11;
+                }
+                int dexIndex = Player.AbilityScores[Ability.Dexterity].DexAttackSpeedComponent;
+                if (dexIndex > 11)
+                {
+                    dexIndex = 11;
+                }
+                Player.MeleeAttacksPerRound = _blowsTable[strIndex][dexIndex];
+                if (Player.MeleeAttacksPerRound > num)
+                {
+                    Player.MeleeAttacksPerRound = num;
+                }
+                Player.MeleeAttacksPerRound += extraBlows;
+                if (Player.ProfessionIndex == CharacterClass.Warrior)
+                {
+                    Player.MeleeAttacksPerRound += Player.Level / 15;
+                }
+                if (Player.MeleeAttacksPerRound < 1)
+                {
+                    Player.MeleeAttacksPerRound = 1;
+                }
+                Player.SkillDigging += oPtr.Weight / 10;
+            }
+            else if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
+            {
+                Player.MeleeAttacksPerRound = 0;
+                if (Player.Level > 9)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 19)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 29)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 34)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 39)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 44)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (Player.Level > 49)
+                {
+                    Player.MeleeAttacksPerRound++;
+                }
+                if (MartialArtistHeavyArmour())
+                {
+                    Player.MeleeAttacksPerRound /= 2;
+                }
+                Player.MeleeAttacksPerRound += 1 + extraBlows;
+                if (!MartialArtistHeavyArmour())
+                {
+                    Player.AttackBonus += Player.Level / 3;
+                    Player.DamageBonus += Player.Level / 3;
+                    Player.DisplayedAttackBonus += Player.Level / 3;
+                    Player.DisplayedDamageBonus += Player.Level / 3;
+                }
+            }
+            Player.HasUnpriestlyWeapon = false;
+            MartialArtistArmourAux = false;
+            if (Player.ProfessionIndex == CharacterClass.Warrior)
+            {
+                Player.AttackBonus += Player.Level / 5;
+                Player.DamageBonus += Player.Level / 5;
+                Player.DisplayedAttackBonus += Player.Level / 5;
+                Player.DisplayedDamageBonus += Player.Level / 5;
+            }
+            if ((Player.ProfessionIndex == CharacterClass.Priest || Player.ProfessionIndex == CharacterClass.Druid) &&
+                !Player.HasBlessedBlade && (oPtr.Category == ItemTypeEnum.Sword ||
+                                        oPtr.Category == ItemTypeEnum.Polearm))
+            {
+                Player.AttackBonus -= 2;
+                Player.DamageBonus -= 2;
+                Player.DisplayedAttackBonus -= 2;
+                Player.DisplayedDamageBonus -= 2;
+                Player.HasUnpriestlyWeapon = true;
+            }
+
+            // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
+            // todo: this should by characterclass
+            if (Player.ProfessionIndex == CharacterClass.Cultist &&
+                Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
+                !typeof(SwordBladeofChaos).IsAssignableFrom(oPtr.BaseItemCategory.GetType()))
+            {
+                oPtr.RefreshFlagBasedProperties();
+                if (!oPtr.Characteristics.Chaotic)
+                {
+                    Player.AttackBonus -= 10;
+                    Player.DamageBonus -= 10;
+                    Player.DisplayedAttackBonus -= 10;
+                    Player.DisplayedDamageBonus -= 10;
+                    Player.HasUnpriestlyWeapon = true;
+                }
+            }
+            if (MartialArtistHeavyArmour())
+            {
+                MartialArtistArmourAux = true;
+            }
+            Player.SkillStealth++;
+            Player.SkillDisarmTraps += Player.AbilityScores[Ability.Dexterity].DexDisarmBonus;
+            Player.SkillDisarmTraps += Player.AbilityScores[Ability.Intelligence].IntDisarmBonus;
+            Player.SkillUseDevice += Player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
+            Player.SkillSavingThrow += Player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
+            Player.SkillDigging += Player.AbilityScores[Ability.Strength].StrDiggingBonus;
+            Player.SkillDisarmTraps += (Player.Profession.DisarmBonusPerLevel * Player.Level) / 10;
+            Player.SkillUseDevice += (Player.Profession.DeviceBonusPerLevel * Player.Level) / 10;
+            Player.SkillSavingThrow += (Player.Profession.SaveBonusPerLevel * Player.Level) / 10;
+            Player.SkillStealth += (Player.Profession.StealthBonusPerLevel * Player.Level) / 10;
+            Player.SkillSearching += (Player.Profession.SearchBonusPerLevel * Player.Level) / 10;
+            Player.SkillSearchFrequency += (Player.Profession.SearchFrequencyPerLevel * Player.Level) / 10;
+            Player.SkillMelee += (Player.Profession.MeleeAttackBonusPerLevel * Player.Level) / 10;
+            Player.SkillRanged += (Player.Profession.RangedAttackBonusPerLevel * Player.Level) / 10;
+            Player.SkillThrowing += (Player.Profession.RangedAttackBonusPerLevel * Player.Level) / 10;
+            if (Player.SkillStealth > 30)
+            {
+                Player.SkillStealth = 30;
+            }
+            if (Player.SkillStealth < 0)
+            {
+                Player.SkillStealth = 0;
+            }
+            if (Player.SkillDigging < 1)
+            {
+                Player.SkillDigging = 1;
+            }
+            if (Player.HasAntiMagic && Player.SkillSavingThrow < 95)
+            {
+                Player.SkillSavingThrow = 95;
+            }
+            if (CharacterXtra)
+            {
+                return;
+            }
+            if (Player.OldHeavyBow != Player.HasHeavyBow)
+            {
+                if (Player.HasHeavyBow)
+                {
+                    MsgPrint("You have trouble wielding such a heavy bow.");
+                }
+                else if (Player.Inventory[InventorySlot.RangedWeapon].BaseItemCategory != null)
+                {
+                    MsgPrint("You have no trouble wielding your bow.");
+                }
+                else
+                {
+                    MsgPrint("You feel relieved to put down your heavy bow.");
+                }
+                Player.OldHeavyBow = Player.HasHeavyBow;
+            }
+            if (Player.OldHeavyWeapon != Player.HasHeavyWeapon)
+            {
+                if (Player.HasHeavyWeapon)
+                {
+                    MsgPrint("You have trouble wielding such a heavy weapon.");
+                }
+                else if (Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
+                {
+                    MsgPrint("You have no trouble wielding your weapon.");
+                }
+                else
+                {
+                    MsgPrint("You feel relieved to put down your heavy weapon.");
+                }
+                Player.OldHeavyWeapon = Player.HasHeavyWeapon;
+            }
+            if (Player.OldUnpriestlyWeapon != Player.HasUnpriestlyWeapon)
+            {
+                if (Player.HasUnpriestlyWeapon)
+                {
+                    MsgPrint(Player.ProfessionIndex == CharacterClass.Cultist
+                        ? "Your weapon restricts the flow of chaos through you."
+                        : "You do not feel comfortable with your weapon.");
+                }
+                else if (Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
+                {
+                    MsgPrint("You feel comfortable with your weapon.");
+                }
+                else
+                {
+                    MsgPrint(Player.ProfessionIndex == CharacterClass.Cultist
+                        ? "Chaos flows freely through you again."
+                        : "You feel more comfortable after removing your weapon.");
+                }
+                Player.OldUnpriestlyWeapon = Player.HasUnpriestlyWeapon;
+            }
+            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistArmourAux !=
+                MartialArtistNotifyAux)
+            {
+                MsgPrint(MartialArtistHeavyArmour()
+                    ? "The weight of your armour disrupts your balance."
+                    : "You regain your balance.");
+                MartialArtistNotifyAux = MartialArtistArmourAux;
+            }
+        }
+
+        public void CalcHitpoints()
+        {
+            int bonus = Player.AbilityScores[Ability.Constitution].ConHealthBonus;
+            int mhp = Player.PlayerHp[Player.Level - 1] + (bonus * Player.Level / 2);
+            if (mhp < Player.Level + 1)
+            {
+                mhp = Player.Level + 1;
+            }
+            if (Player.TimedHeroism.TimeRemaining != 0)
+            {
+                mhp += 10;
+            }
+            if (Player.TimedSuperheroism.TimeRemaining != 0)
+            {
+                mhp += 30;
+            }
+            var mult = Player.Religion.GetNamedDeity(Pantheon.GodName.Nath_Horthah).AdjustedFavour + 10;
+            mhp *= mult;
+            mhp /= 10;
+            if (Player.MaxHealth != mhp)
+            {
+                if (Player.Health >= mhp)
+                {
+                    Player.Health = mhp;
+                    Player.FractionalHealth = 0;
+                }
+                Player.MaxHealth = mhp;
+                Player.RedrawNeeded.Set(RedrawFlag.PrHp);
+            }
+        }
+
+        public void CalcMana()
+        {
+            int levels;
+            switch (Player.Spellcasting.Type)
+            {
+                case CastingType.None:
+                    return;
+
+                case CastingType.Arcane:
+                case CastingType.Divine:
+                    levels = Player.Level - Player.Spellcasting.SpellFirst + 1;
+                    break;
+
+                case CastingType.Mentalism:
+                case CastingType.Channeling:
+                    levels = Player.Level;
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            if (levels < 0)
+            {
+                levels = 0;
+            }
+            int msp = Player.AbilityScores[Player.Spellcasting.SpellStat].ManaBonus * levels / 2;
+            if (msp != 0)
+            {
+                msp++;
+            }
+            if (msp != 0 && Player.ProfessionIndex == CharacterClass.HighMage)
+            {
+                msp += msp / 4;
+            }
+
+            // Allow inventory slots access to the CalcMana process.
+            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+            {
+                // Update the mana for the inventory slot.
+                msp = inventorySlot.CalcMana(this, msp);
+            }
+
+            if (Player.Spellcasting.Type == CastingType.Arcane)
+            {
+                int curWgt = 0;
+                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+                {
+                    if (inventorySlot.IsWeightRestricting)
+                    {
+                        foreach (int index in inventorySlot)
+                        {
+                            Item item = Player.Inventory[index];
+                            if (item.BaseItemCategory != null)
+                            {
+                                curWgt += item.Weight;
+                            }
+                        }
+                    }
+                }
+                int maxWgt = Player.Spellcasting.SpellWeight;
+                if ((curWgt - maxWgt) / 10 > 0)
+                {
+                    msp -= (curWgt - maxWgt) / 10;
+                    if (!Player.OldRestrictingArmour)
+                    {
+                        MsgPrint("The weight of your armour encumbers your movement.");
+                        Player.OldRestrictingArmour = true;
+                    }
+                }
+                else
+                {
+                    if (Player.OldRestrictingArmour)
+                    {
+                        MsgPrint("You feel able to move more freely.");
+                        Player.OldRestrictingArmour = false;
+                    }
+                }
+            }
+
+            if (msp < 0)
+            {
+                msp = 0;
+            }
+
+            var mult = Player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
+            msp *= mult;
+            msp /= 10;
+            if (Player.MaxMana != msp)
+            {
+                if (Player.Mana >= msp)
+                {
+                    Player.Mana = msp;
+                    Player.FractionalMana = 0;
+                }
+                Player.MaxMana = msp;
+                Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            }
+            if (CharacterXtra)
+            {
+                return;
+            }
+        }
+
+        public void CalcSpells()
+        {
+            int i, j;
+            Spell sPtr;
+            if (Player == null)
+            {
+                return;
+            }
+            string p = Player.Spellcasting.Type == CastingType.Arcane ? "spell" : "prayer";
+            if (Player.Spellcasting.Type == CastingType.None)
+            {
+                return;
+            }
+            if (Player.Realm1 == Realm.None)
+            {
+                return;
+            }
+            if (CharacterXtra)
+            {
+                return;
+            }
+            int levels = Player.Level - Player.Spellcasting.SpellFirst + 1;
+            if (levels < 0)
+            {
+                levels = 0;
+            }
+            int numAllowed = Player.AbilityScores[Player.Spellcasting.SpellStat].HalfSpellsPerLevel * levels / 2;
+            int numKnown = 0;
+            for (j = 0; j < 64; j++)
+            {
+                if (Player.Spellcasting.Spells[j / 32][j % 32].Learned)
+                {
+                    numKnown++;
+                }
+            }
+            Player.SpareSpellSlots = numAllowed - numKnown;
+            for (i = 63; i >= 0; i--)
+            {
+                if (numKnown == 0)
+                {
+                    break;
+                }
+                j = Player.Spellcasting.SpellOrder[i];
+                if (j >= 99)
+                {
+                    continue;
+                }
+                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level <= Player.Level)
+                {
+                    continue;
+                }
+                if (!sPtr.Learned)
+                {
+                    continue;
+                }
+                sPtr.Forgotten = true;
+                sPtr.Learned = false;
+                numKnown--;
+                MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                Player.SpareSpellSlots++;
+            }
+            for (i = 63; i >= 0; i--)
+            {
+                if (Player.SpareSpellSlots >= 0)
+                {
+                    break;
+                }
+                if (numKnown == 0)
+                {
+                    break;
+                }
+                j = Player.Spellcasting.SpellOrder[i];
+                if (j >= 99)
+                {
+                    continue;
+                }
+                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
+                if (!sPtr.Learned)
+                {
+                    continue;
+                }
+                sPtr.Forgotten = true;
+                sPtr.Learned = false;
+                numKnown--;
+                MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
+                Player.SpareSpellSlots++;
+            }
+            int forgottenTotal = 0;
+            for (int l = 0; l < 64; l++)
+            {
+                if (Player.Spellcasting.Spells[l / 32][l % 32].Forgotten)
+                {
+                    forgottenTotal++;
+                }
+            }
+            for (i = 0; i < 64; i++)
+            {
+                if (Player.SpareSpellSlots <= 0)
+                {
+                    break;
+                }
+                if (forgottenTotal == 0)
+                {
+                    break;
+                }
+                j = Player.Spellcasting.SpellOrder[i];
+                if (j >= 99)
+                {
+                    break;
+                }
+                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level > Player.Level)
+                {
+                    continue;
+                }
+                if (!sPtr.Forgotten)
+                {
+                    continue;
+                }
+                sPtr.Forgotten = false;
+                sPtr.Learned = true;
+                forgottenTotal--;
+                if (!FullScreenOverlay)
+                {
+                    MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
+                }
+                Player.SpareSpellSlots--;
+            }
+            int k = 0;
+            int limit = Player.Realm2 == Realm.None ? 32 : 64;
+            for (j = 0; j < limit; j++)
+            {
+                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
+                if (sPtr.Level > Player.Level)
+                {
+                    continue;
+                }
+                if (sPtr.Learned)
+                {
+                    continue;
+                }
+                k++;
+            }
+            if (Player.Realm2 == 0)
+            {
+                if (k > 32)
+                {
+                    k = 32;
+                }
+            }
+            else
+            {
+                if (k > 64)
+                {
+                    k = 64;
+                }
+            }
+            if (Player.SpareSpellSlots > k)
+            {
+                Player.SpareSpellSlots = k;
+            }
+            if (Player.OldSpareSpellSlots != Player.SpareSpellSlots)
+            {
+                if (Player.SpareSpellSlots != 0)
+                {
+                    if (!FullScreenOverlay)
+                    {
+                        string suffix = Player.SpareSpellSlots != 1 ? "s" : "";
+                        MsgPrint($"You can learn {Player.SpareSpellSlots} more {p}{suffix}.");
+                    }
+                }
+                Player.OldSpareSpellSlots = Player.SpareSpellSlots;
+                Player.RedrawNeeded.Set(RedrawFlag.PrStudy);
+            }
+        }
+
+        /// <summary>
+        /// Compute the level of light.  The player may be wielding multiple sources of light.
+        /// </summary>
+        public void CalcTorch()
+        {
+            Player.LightLevel = 0;
+            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+            {
+                foreach (int i in inventorySlot.InventorySlots)
+                {
+                    Item oPtr = Player.Inventory[i];
+                    if (oPtr.BaseItemCategory != null)
+                    {
+                        Player.LightLevel += oPtr.BaseItemCategory.CalcTorch(oPtr);
+                    }
+                }
+            }
+            if (Player.LightLevel > 5)
+            {
+                Player.LightLevel = 5;
+            }
+            if (Player.LightLevel == 0 && Player.HasGlow)
+            {
+                Player.LightLevel = 1;
+            }
+            if (Player.OldLightLevel != Player.LightLevel)
+            {
+                Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
+                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                Player.OldLightLevel = Player.LightLevel;
+            }
+        }
+
+        public void HealthRedraw()
+        {
+            if (TrackedMonsterIndex == 0)
+            {
+                Erase(ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+                Erase(ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
+                Erase(ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
+                Erase(ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
+            }
+            else if (!Level.Monsters[TrackedMonsterIndex].IsVisible)
+            {
+                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+            }
+            else if (Player.TimedHallucinations.TimeRemaining != 0)
+            {
+                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+            }
+            else if (Level.Monsters[TrackedMonsterIndex].Health < 0)
+            {
+                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
+            }
+            else
+            {
+                Monster mPtr = Level.Monsters[TrackedMonsterIndex];
+                Colour attr = Colour.Red;
+                string smb = "**********";
+                int pct = 100 * mPtr.Health / mPtr.MaxHealth;
+                if (pct >= 10)
+                {
+                    attr = Colour.BrightRed;
+                }
+                if (pct >= 25)
+                {
+                    attr = Colour.Orange;
+                }
+                if (pct >= 60)
+                {
+                    attr = Colour.Yellow;
+                }
+                if (pct >= 100)
+                {
+                    attr = Colour.BrightGreen;
+                }
+                if (mPtr.FearLevel != 0)
+                {
+                    attr = Colour.Purple;
+                    smb = "AFRAID****";
+                }
+                if (mPtr.SleepLevel != 0)
+                {
+                    attr = Colour.Blue;
+                    smb = "SLEEPING**";
+                }
+                if (mPtr.SmFriendly)
+                {
+                    attr = Colour.BrightBrown;
+                    smb = "FRIENDLY**";
+                }
+                int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
+                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo);
+                Print(attr, smb, ScreenLocation.RowInfo, ScreenLocation.ColInfo + 1, len);
+                Print(Colour.White, mPtr.Race.SplitName1, ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
+                Print(Colour.White, mPtr.Race.SplitName2, ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
+                Print(Colour.White, mPtr.Race.SplitName3, ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
+            }
+        }
+
+        public bool MartialArtistEmptyHands()
+        {
+            if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
+            {
+                return false;
+            }
+            return Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory == null;
+        }
+
+        public bool MartialArtistHeavyArmour()
+        {
+            int martialArtistArmWgt = 0;
+            if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
+            {
+                return false;
+            }
+            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+            {
+                if (inventorySlot.IsArmour)
+                {
+                    foreach (int index in inventorySlot)
+                    {
+                        Item item = Player.Inventory[index];
+                        if (item.BaseItemCategory != null)
+                        {
+                            martialArtistArmWgt += item.Weight;
+                        }
+                        //foreach (Item item in inventorySlot)
+                        //{
+                        //    martialArtistArmWgt += item.Weight;
+                        //}
+                    }
+                }
+            }
+            return martialArtistArmWgt > 100 + (Player.Level * 4);
+        }
+
+        public void PrtAc()
+        {
+            Print("Cur AC ", ScreenLocation.RowAc, ScreenLocation.ColAc);
+            string tmp = (Player.DisplayedBaseArmourClass + Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
+            Print(Colour.BrightGreen, tmp, ScreenLocation.RowAc, ScreenLocation.ColAc + 7);
+        }
+
+        public void PrtAfraid()
+        {
+            if (Player.TimedFear.TimeRemaining > 0)
+            {
+                Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
+            }
+            else
+            {
+                Print("      ", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
+            }
+        }
+
+        public void PrtBlind()
+        {
+            if (Player.TimedBlindness.TimeRemaining > 0)
+            {
+                Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
+            }
+            else
+            {
+                Print("     ", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
+            }
+        }
+
+        public void PrtConfused()
+        {
+            if (Player.TimedConfusion.TimeRemaining > 0)
+            {
+                Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
+            }
+            else
+            {
+                Print("        ", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
+            }
+        }
+
+        public void PrtCut()
+        {
+            int c = Player.TimedBleeding.TimeRemaining;
+            if (c > 1000)
+            {
+                Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 200)
+            {
+                Print(Colour.Red, "Deep gash   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 100)
+            {
+                Print(Colour.Red, "Severe cut  ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 50)
+            {
+                Print(Colour.Orange, "Nasty cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 25)
+            {
+                Print(Colour.Orange, "Bad cut     ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 10)
+            {
+                Print(Colour.Yellow, "Light cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else if (c > 0)
+            {
+                Print(Colour.Yellow, "Graze       ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+            else
+            {
+                Print("            ", ScreenLocation.RowCut, ScreenLocation.ColCut);
+            }
+        }
+
+        public void PrtDepth()
+        {
+            string depths;
+            if (CurrentDepth == 0)
+            {
+                if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
+                {
+                    depths = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Shortname;
+                    Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Visited = true;
+                }
+                else
+                {
+                    depths = $"Wild ({Player.WildernessX},{Player.WildernessY})";
+                }
+            }
+            else
+            {
+                depths = $"lvl {CurrentDepth}+{DungeonDifficulty}";
+                CurDungeon.KnownOffset = true;
+                if (CurrentDepth == CurDungeon.MaxLevel)
+                {
+                    CurDungeon.KnownDepth = true;
+                }
+            }
+            PrintLine(depths.PadLeft(9), ScreenLocation.RowDepth, ScreenLocation.ColDepth);
+        }
+
+        public void PrtDtrap()
+        {
+            int count = 0;
+            if (Level.Grid[Player.MapY][Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
+            {
+                Print(Colour.Green, "     ", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+                return;
+            }
+            if (Level.Grid[Player.MapY - 1][Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+            {
+                count++;
+            }
+            if (Level.Grid[Player.MapY + 1][Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+            {
+                count++;
+            }
+            if (Level.Grid[Player.MapY][Player.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
+            {
+                count++;
+            }
+            if (Level.Grid[Player.MapY][Player.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
+            {
+                count++;
+            }
+            if (count == 4)
+            {
+                Print(Colour.Green, "DTrap", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+            }
+            else
+            {
+                Print(Colour.Yellow, "DTRAP", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
+            }
+        }
+
+        public void PrtExp()
+        {
+            Colour colour = Colour.BrightGreen;
+            if (Player.ExperiencePoints < Player.MaxExperienceGained)
+            {
+                colour = Colour.Yellow;
+            }
+            Print("NEXT", ScreenLocation.RowExp, 0);
+            if (Player.Level >= Constants.PyMaxLevel)
+            {
+                Print(Colour.BrightGreen, "   *****", ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
+            }
+            else
+            {
+                string outVal = ((GlobalData.PlayerExp[Player.Level - 1] * Player.ExperienceMultiplier / 100) - Player.ExperiencePoints).ToString()
+                    .PadLeft(8);
+                Print(colour, outVal, ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
+            }
+        }
+
+        public void PrtField(string info, int row, int col)
+        {
+            Print(Colour.White, "             ", row, col);
+            Print(Colour.BrightBlue, info, row, col);
+        }
+
+        public void PrtFrameBasic()
+        {
+            PrtField(Player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
+            PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
+            PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
+            PrtTitle();
+            PrtLevel();
+            PrtExp();
+            for (int i = 0; i < 6; i++)
+            {
+                PrtStat(i);
+            }
+            PrtAc();
+            PrtHp();
+            PrtSp();
+            PrtGold();
+            PrtDepth();
+            HealthRedraw();
+        }
+
+        public void PrtFrameExtra()
+        {
+            PrtCut();
+            PrtStun();
+            PrtHunger();
+            PrtDtrap();
+            PrtBlind();
+            PrtConfused();
+            PrtAfraid();
+            PrtPoisoned();
+            PrtState();
+            PrtSpeed();
+            PrtStudy();
+        }
+
+        public void PrtGold()
+        {
+            Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
+            string tmp = Player.Gold.ToString().PadLeft(9);
+            Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
+        }
+
+        public void PrtHp()
+        {
+            Print("Max HP ", ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp);
+            string tmp = Player.MaxHealth.ToString().PadLeft(5);
+            Colour colour = Colour.BrightGreen;
+            Print(colour, tmp, ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp + 7);
+            Print("Cur HP ", ScreenLocation.RowCurhp, ScreenLocation.ColCurhp);
+            tmp = Player.Health.ToString().PadLeft(5);
+            if (Player.Health >= Player.MaxHealth)
+            {
+                colour = Colour.BrightGreen;
+            }
+            else if (Player.Health > Player.MaxHealth * GlobalData.HitpointWarn / 5)
+            {
+                colour = Colour.BrightYellow;
+            }
+            else if (Player.Health > Player.MaxHealth * GlobalData.HitpointWarn / 10)
+            {
+                colour = Colour.Orange;
+            }
+            else
+            {
+                colour = Colour.BrightRed;
+            }
+            Print(colour, tmp, ScreenLocation.RowCurhp, ScreenLocation.ColCurhp + 7);
+        }
+
+        public void PrtHunger()
+        {
+            if (Player.Food < Constants.PyFoodFaint)
+            {
+                Print(Colour.Red, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+            else if (Player.Food < Constants.PyFoodWeak)
+            {
+                Print(Colour.Orange, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+            else if (Player.Food < Constants.PyFoodAlert)
+            {
+                Print(Colour.Yellow, "Hungry", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+            else if (Player.Food < Constants.PyFoodFull)
+            {
+                Print(Colour.BrightGreen, "      ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+            else if (Player.Food < Constants.PyFoodMax)
+            {
+                Print(Colour.BrightGreen, "Full  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+            else
+            {
+                Print(Colour.Green, "Gorged", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
+            }
+        }
+
+        public void PrtLevel()
+        {
+            string tmp = Player.Level.ToString().PadLeft(6);
+            if (Player.Level >= Player.MaxLevelGained)
+            {
+                Print("LEVEL ", ScreenLocation.RowLevel, 0);
+                Print(Colour.BrightGreen, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
+            }
+            else
+            {
+                Print("Level ", ScreenLocation.RowLevel, 0);
+                Print(Colour.Yellow, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
+            }
+        }
+
+        public void PrtPoisoned()
+        {
+            if (Player.TimedPoison.TimeRemaining > 0)
+            {
+                Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
+            }
+            else
+            {
+                Print("        ", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
+            }
+        }
+
+        public void PrtSp()
+        {
+            if (Player.Spellcasting.Type == CastingType.None)
+            {
+                return;
+            }
+            Print("Max SP ", ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp);
+            string tmp = Player.MaxMana.ToString().PadLeft(5);
+            Colour colour = Colour.BrightGreen;
+            Print(colour, tmp, ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp + 7);
+            Print("Cur SP ", ScreenLocation.RowCursp, ScreenLocation.ColCursp);
+            tmp = Player.Mana.ToString().PadLeft(5);
+            if (Player.Mana >= Player.MaxMana)
+            {
+                colour = Colour.BrightGreen;
+            }
+            else if (Player.Mana > Player.MaxMana * GlobalData.HitpointWarn / 5)
+            {
+                colour = Colour.BrightYellow;
+            }
+            else if (Player.Mana > Player.MaxMana * GlobalData.HitpointWarn / 10)
+            {
+                colour = Colour.Orange;
+            }
+            else
+            {
+                colour = Colour.BrightRed;
+            }
+            Print(colour, tmp, ScreenLocation.RowCursp, ScreenLocation.ColCursp + 7);
+        }
+
+        public void PrtSpeed()
+        {
+            int i = Player.Speed;
+            Colour attr = Colour.White;
+            string buf = "";
+            if (Player.IsSearching)
+            {
+                i += 10;
+            }
+            int energy = GlobalData.ExtractEnergy[i];
+            if (i > 110)
+            {
+                attr = Colour.BrightGreen;
+                buf = $"Fast {energy / 10.0}";
+            }
+            else if (i < 110)
+            {
+                attr = Colour.BrightBrown;
+                buf = $"Slow {energy / 10.0}";
+            }
+            Print(attr, buf.PadRight(14), ScreenLocation.RowSpeed, ScreenLocation.ColSpeed);
+        }
+
+        public void PrtStat(int stat)
+        {
+            string tmp;
+            if (Player.AbilityScores[stat].Innate < Player.AbilityScores[stat].InnateMax)
+            {
+                Print(GlobalData.StatNamesReduced[stat], ScreenLocation.RowStat + stat, 0);
+                tmp = Player.AbilityScores[stat].Adjusted.StatToString();
+                Print(Colour.Yellow, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
+            }
+            else
+            {
+                Print(GlobalData.StatNames[stat], ScreenLocation.RowStat + stat, 0);
+                tmp = Player.AbilityScores[stat].Adjusted.StatToString();
+                Print(Colour.BrightGreen, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
+            }
+            if (Player.AbilityScores[stat].InnateMax == 18 + 100)
+            {
+                Print("!", ScreenLocation.RowStat + stat, 3);
+            }
+        }
+
+        public void PrtState()
+        {
+            Colour attr = Colour.White;
+            string text;
+            if (Player.TimedParalysis.TimeRemaining > 0)
+            {
+                attr = Colour.Red;
+                text = "Paralyzed!";
+            }
+            else if (Resting != 0)
+            {
+                text = "Rest ";
+                if (Resting > 0)
+                {
+                    text += Resting.ToString().PadLeft(5);
+                }
+                else if (Resting == -1)
+                {
+                    text += "*****";
+                }
+                else if (Resting == -2)
+                {
+                    text += "&&&&&";
+                }
+                else
+                {
+                    text += "?????";
+                }
+            }
+            else if (CommandRepeat != 0)
+            {
+                if (CommandRepeat > 999)
+                {
+                    text = "Rep. " + CommandRepeat.ToString().PadRight(5);
+                }
+                else
+                {
+                    text = "Repeat " + CommandRepeat.ToString().PadRight(3);
+                }
+            }
+            else if (Player.IsSearching)
+            {
+                text = "Searching ";
+            }
+            else
+            {
+                text = "          ";
+            }
+            Print(attr, text, ScreenLocation.RowState, ScreenLocation.ColState);
+        }
+
+        public void PrtStudy()
+        {
+            Print(Player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
+        }
+
+        public void PrtStun()
+        {
+            int s = Player.TimedStun.TimeRemaining;
+            if (s > 100)
+            {
+                Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+            }
+            else if (s > 50)
+            {
+                Print(Colour.Orange, "Heavy stun  ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+            }
+            else if (s > 0)
+            {
+                Print(Colour.Orange, "Stun        ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+            }
+            else
+            {
+                Print("            ", ScreenLocation.RowStun, ScreenLocation.ColStun);
+            }
+        }
+
+        public void PrtTime()
+        {
+            Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
+            Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.colDate);
+            Print(Colour.BrightGreen, Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
+            Print(Colour.BrightGreen, Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
+        }
+
+        public void PrtTitle()
+        {
+            string p;
+            if (Player.IsWizard)
+            {
+                p = "-=<WIZARD>=-";
+                PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
+            }
+            else if (Player.IsWinner || Player.Level > Constants.PyMaxLevel)
+            {
+                p = "***WINNER***";
+                PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
+            }
+        }
+
+        private int WeightLimit()
+        {
+            int i = Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100;
+            return i;
         }
     }
 }
