@@ -1454,7 +1454,8 @@ namespace AngbandOS
                     Level.DeleteObject(y, x);
                     MsgPrint("A magical stairway appears...");
                     Level.CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
+                    UpdateScentFlaggedAction.Set();
+                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
                 }
             }
         }
@@ -1601,11 +1602,6 @@ namespace AngbandOS
                 Level.UpdateLight();
             }
             UpdateScentFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateScent))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateScent);
-                Level.UpdateFlow();
-            }
             UpdateDistancesFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateDistances))
             {
@@ -1934,7 +1930,8 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
             UpdateStuff();
             RedrawStuff();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateDistances);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateDistances);
             UpdateStuff();
             RedrawStuff();
             CharacterXtra = false;
@@ -3831,7 +3828,8 @@ namespace AngbandOS
                 }
             }
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             RedrawMapFlaggedAction.Set();
         }
@@ -4527,7 +4525,8 @@ namespace AngbandOS
                 }
             }
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             RedrawHealthFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
@@ -6026,7 +6025,8 @@ namespace AngbandOS
             }
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
             Player.RecenterScreenAroundPlayer();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             HandleStuff();
         }
@@ -6113,7 +6113,8 @@ namespace AngbandOS
             Level.RedrawSingleLocation(oy, ox);
             Level.RedrawSingleLocation(Player.MapY, Player.MapX);
             Player.RecenterScreenAroundPlayer();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             HandleStuff();
         }
@@ -6159,7 +6160,8 @@ namespace AngbandOS
                     Level.RedrawSingleLocation(ty, tx);
                     Level.RedrawSingleLocation(Player.MapY, Player.MapX);
                     Player.RecenterScreenAroundPlayer();
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+                    UpdateScentFlaggedAction.Set();
+                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
                     Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
                     HandleStuff();
                 }
@@ -6248,7 +6250,8 @@ namespace AngbandOS
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
             _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             RedrawMapFlaggedAction.Set();
         }
@@ -7861,7 +7864,8 @@ namespace AngbandOS
             // Recenter the screen if we have to
             Player.RecenterScreenAroundPlayer();
             // We'll need to update and redraw various things
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
             RedrawMapFlaggedAction.Set();
             // If we're not actively searching, then have a chance of doing it passively
@@ -8885,7 +8889,8 @@ namespace AngbandOS
             // If we successfully made the tunnel,
             if (!Level.GridPassable(y, x))
             {
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
+                UpdateScentFlaggedAction.Set();
+                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
             }
             if (!repeat)
             {
@@ -9125,7 +9130,8 @@ namespace AngbandOS
             // Clear the tile
             tile.TileFlags.Clear(GridTile.PlayerMemorised);
             Level.RevertTileToBackground(y, x);
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
+            UpdateScentFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
             return true;
         }
 

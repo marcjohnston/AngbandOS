@@ -60,9 +60,6 @@ namespace AngbandOS
 
         private readonly int[] _viewX = new int[Constants.ViewMax];
         private readonly int[] _viewY = new int[Constants.ViewMax];
-        private int _flowHead;
-        private int _flowN;
-        private int _flowTail;
         private int _lightN;
         private int _viewN;
         private readonly SaveGame SaveGame;
@@ -1434,46 +1431,6 @@ namespace AngbandOS
             }
         }
 
-        public void UpdateFlow()
-        {
-            int x, y;
-            if (TempN != 0)
-            {
-                return;
-            }
-            if (_flowN == 255)
-            {
-                for (y = 0; y < CurHgt; y++)
-                {
-                    for (x = 0; x < CurWid; x++)
-                    {
-                        int w = Grid[y][x].ScentAge;
-                        Grid[y][x].ScentAge = w > 128 ? w - 128 : 0;
-                    }
-                }
-                _flowN = 127;
-            }
-            _flowN++;
-            _flowHead = 0;
-            _flowTail = 0;
-            UpdateFlowAux(SaveGame.Player.MapY, SaveGame.Player.MapX, 0);
-            while (_flowHead != _flowTail)
-            {
-                y = TempY[_flowTail];
-                x = TempX[_flowTail];
-                if (++_flowTail == Constants.TempMax)
-                {
-                    _flowTail = 0;
-                }
-                for (int d = 0; d < 8; d++)
-                {
-                    UpdateFlowAux(y + OrderedDirectionYOffset[d], x + OrderedDirectionXOffset[d], Grid[y][x].ScentStrength + 1);
-                }
-            }
-            _flowHead = 0;
-            _flowTail = 0;
-        }
-
         public void UpdateLight()
         {
             int i, x, y;
@@ -2458,36 +2415,6 @@ namespace AngbandOS
                 c = rPtr.Character;
                 ap = a;
                 cp = c;
-            }
-        }
-
-        private void UpdateFlowAux(int y, int x, int n)
-        {
-            int oldHead = _flowHead;
-            GridTile cPtr = Grid[y][x];
-            if (cPtr.ScentAge == _flowN)
-            {
-                return;
-            }
-            if (cPtr.FeatureType.BlocksLos && cPtr.FeatureType.Name != "SecretDoor")
-            {
-                return;
-            }
-            cPtr.ScentAge = _flowN;
-            cPtr.ScentStrength = n;
-            if (n == Constants.MonsterFlowDepth)
-            {
-                return;
-            }
-            TempY[_flowHead] = y;
-            TempX[_flowHead] = x;
-            if (++_flowHead == Constants.TempMax)
-            {
-                _flowHead = 0;
-            }
-            if (_flowHead == _flowTail)
-            {
-                _flowHead = oldHead;
             }
         }
 

@@ -65,7 +65,8 @@ namespace AngbandOS.Mutations.ActiveMutations
             level.RedrawSingleLocation(player.MapY, player.MapX);
             level.RedrawSingleLocation(oy, ox);
             player.RecenterScreenAroundPlayer();
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
+            saveGame.UpdateScentFlaggedAction.Set();
+            player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
         }
 

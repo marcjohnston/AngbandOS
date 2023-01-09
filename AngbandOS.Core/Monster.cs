@@ -1103,7 +1103,8 @@ namespace AngbandOS
             // Update the view if necessary
             if (doView)
             {
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
+                saveGame.UpdateScentFlaggedAction.Set();
+                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
             }
             // If we did something unusual and the player saw, let them remember we can do that
             if (IsVisible)

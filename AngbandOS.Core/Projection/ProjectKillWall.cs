@@ -91,7 +91,8 @@ namespace AngbandOS.Projection
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
                 SaveGame.Level.RevertTileToBackground(y, x);
             }
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent | UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateScentFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
             return obvious;
         }
 

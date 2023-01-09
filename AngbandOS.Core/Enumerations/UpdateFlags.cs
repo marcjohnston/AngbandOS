@@ -18,7 +18,6 @@ namespace AngbandOS.Enumerations
         public const uint UpdateMonsters = 0x01000000;
         public const uint UpdateRemoveLight = 0x00020000;
         public const uint UpdateRemoveView = 0x00010000;
-        public const uint UpdateScent = 0x10000000;
         public const uint UpdateSpells = 0x00000040;
         public const uint UpdateTorchRadius = 0x00000002;
         public const uint UpdateView = 0x00100000;
