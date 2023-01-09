@@ -1,5 +1,4 @@
-﻿
-namespace AngbandOS.Core.FlaggedActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
     internal class UpdateTorchRadiusFlaggedAction : FlaggedAction

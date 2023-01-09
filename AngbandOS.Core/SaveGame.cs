@@ -1551,11 +1551,6 @@ namespace AngbandOS
             }
             UpdateTorchRadiusFlaggedAction.Check();
             UpdateHealthFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateHealth))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateHealth);
-                CalcHitpoints();
-            }
             UpdateManaFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMana))
             {
@@ -17686,37 +17681,6 @@ namespace AngbandOS
                     ? "The weight of your armour disrupts your balance."
                     : "You regain your balance.");
                 MartialArtistNotifyAux = MartialArtistArmourAux;
-            }
-        }
-
-        public void CalcHitpoints()
-        {
-            int bonus = Player.AbilityScores[Ability.Constitution].ConHealthBonus;
-            int mhp = Player.PlayerHp[Player.Level - 1] + (bonus * Player.Level / 2);
-            if (mhp < Player.Level + 1)
-            {
-                mhp = Player.Level + 1;
-            }
-            if (Player.TimedHeroism.TimeRemaining != 0)
-            {
-                mhp += 10;
-            }
-            if (Player.TimedSuperheroism.TimeRemaining != 0)
-            {
-                mhp += 30;
-            }
-            var mult = Player.Religion.GetNamedDeity(Pantheon.GodName.Nath_Horthah).AdjustedFavour + 10;
-            mhp *= mult;
-            mhp /= 10;
-            if (Player.MaxHealth != mhp)
-            {
-                if (Player.Health >= mhp)
-                {
-                    Player.Health = mhp;
-                    Player.FractionalHealth = 0;
-                }
-                Player.MaxHealth = mhp;
-                RedrawHpFlaggedAction.Set();
             }
         }
 
