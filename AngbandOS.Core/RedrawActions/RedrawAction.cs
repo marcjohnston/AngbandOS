@@ -1,19 +1,20 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿
+namespace AngbandOS.Core.RedrawActions
 {
     [Serializable]
     internal abstract class RedrawAction
     {
         protected SaveGame SaveGame { get; }
         private bool _flag;
-        public void Set()
+        public virtual void Set()
         {
             _flag = true;
         }
-        public void Clear()
+        public virtual void Clear()
         {
             _flag = false;
         }
-        public bool IsSet => _flag;
+        public virtual bool IsSet => _flag;
         public void Redraw(bool force = false)
         {
             if (IsSet || force)

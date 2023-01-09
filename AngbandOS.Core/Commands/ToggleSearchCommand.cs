@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.Commands
+﻿using Microsoft.VisualBasic;
+
+namespace AngbandOS.Commands
 {
     /// <summary>
     /// Toggle whether we're automatically searching while moving
@@ -20,13 +22,14 @@
             {
                 saveGame.Player.IsSearching = false;
                 saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                saveGame.PrStateRedrawAction.Set();
             }
             else
             {
                 saveGame.Player.IsSearching = true;
                 saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState | RedrawFlag.PrSpeed);
+                saveGame.PrStateRedrawAction.Set();
+                saveGame.PrSpeedRedrawAction.Set();
             }
         }
     }

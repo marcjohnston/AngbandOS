@@ -35,7 +35,7 @@ namespace AngbandOS.Spells.Death
                 saveGame.Player.Mana++;
                 saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);
                 saveGame.PrHpRedrawAction.Set();
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                saveGame.PrManaRedrawAction.Set();
                 saveGame.HandleStuff();
                 saveGame.UpdateScreen();
                 saveGame.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);

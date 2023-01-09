@@ -177,7 +177,6 @@ namespace AngbandOS
         public Race RaceAtBirth;
         public Realm Realm1;
         public Realm Realm2;
-        public FlagSet RedrawNeeded = new FlagSet();
         public Religion Religion = new Religion();
         public int SkillDigging;
         public int SkillDisarmTraps;
@@ -366,7 +365,7 @@ namespace AngbandOS
             }
             CheckExperience();
             MaxLevelGained = Level;
-            RedrawNeeded.Set(RedrawFlag.PrBasic);
+            SaveGame.PrBasicRedrawAction.Set();
             UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             SaveGame.HandleStuff();
         }
@@ -1089,7 +1088,7 @@ namespace AngbandOS
             }
             if (oldMana != Mana)
             {
-                RedrawNeeded.Set(RedrawFlag.PrMana);
+                SaveGame.PrManaRedrawAction.Set();
             }
         }
 
@@ -1439,7 +1438,7 @@ namespace AngbandOS
             }
             SaveGame.Disturb(false);
             UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            RedrawNeeded.Set(RedrawFlag.PrHunger);
+            SaveGame.PrHungerRedrawAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

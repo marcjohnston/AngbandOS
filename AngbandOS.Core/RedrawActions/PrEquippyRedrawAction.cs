@@ -3,6 +3,8 @@
     [Serializable]
     internal class PrEquippyRedrawAction : RedrawAction
     {
+        private const int ColEquippy = 0;
+        private const int RowEquippy = 13;
         public PrEquippyRedrawAction(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
@@ -12,7 +14,7 @@
         /// <param name="player"> The player whose equippy characters should be displayed </param>
         protected override void Draw()
         {
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, ScreenLocation.RowEquippy, ScreenLocation.ColEquippy);
+            CharacterViewer.DisplayPlayerEquippy(SaveGame, RowEquippy, ColEquippy);
         }
     }
 }

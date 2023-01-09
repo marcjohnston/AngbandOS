@@ -231,7 +231,7 @@
                     saveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            saveGame.PrManaRedrawAction.Set();
         }
 
         private void DoCmdMentalism(SaveGame saveGame)
@@ -315,7 +315,7 @@
                     saveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
                 }
             }
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            saveGame.PrManaRedrawAction.Set();
         }
 
         private bool GetMentalismTalent(SaveGame saveGame, out int sn, Player player)

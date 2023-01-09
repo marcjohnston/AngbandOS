@@ -30,7 +30,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrExtra);
+            saveGame.PrExtraRedrawAction.Set();
             saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(50) + 20);
         }
     }

@@ -44,7 +44,7 @@
                 {
                     saveGame.Player.Mana -= r1;
                 }
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                saveGame.PrManaRedrawAction.Set();
                 if (monster.Health < monster.MaxHealth)
                 {
                     monster.Health += 6 * r1;

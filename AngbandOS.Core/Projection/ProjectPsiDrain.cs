@@ -62,7 +62,7 @@ namespace AngbandOS.Projection
                         string killer = mPtr.IndefiniteVisibleName;
                         SaveGame.MsgPrint("Your psychic energy is drained!");
                         SaveGame.Player.Mana = Math.Max(0, SaveGame.Player.Mana - (Program.Rng.DiceRoll(5, dam) / 2));
-                        SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                        SaveGame.PrManaRedrawAction.Set();
                         SaveGame.Player.TakeHit(dam, killer);
                     }
                     dam = 0;
@@ -75,7 +75,7 @@ namespace AngbandOS.Projection
                 SaveGame.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
                 b = Math.Min(SaveGame.Player.MaxMana, SaveGame.Player.Mana + b);
                 SaveGame.Player.Mana = b;
-                SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                SaveGame.PrManaRedrawAction.Set();
             }
             string noteDies = " collapses, a mindless husk.";
             if (rPtr.Guardian)

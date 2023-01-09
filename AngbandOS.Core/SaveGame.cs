@@ -16,6 +16,26 @@ namespace AngbandOS
         public RedrawAction PrExpRedrawAction { get; }
         public RedrawAction PrCutRedrawAction { get; }
         public RedrawAction PrHealthRedrawAction { get; }
+        public RedrawAction PrManaRedrawAction { get; }
+        public RedrawAction PrGoldRedrawAction { get; }
+        public RedrawAction PrDepthRedrawAction { get; }
+        public RedrawAction PrStunRedrawAction { get; }
+        public RedrawAction PrHungerRedrawAction { get; }
+        public RedrawAction PrDTrapRedrawAction { get; }
+        public RedrawAction PrBlindRedrawAction { get; }
+        public RedrawAction PrConfusedRedrawAction { get; }
+        public RedrawAction PrAfraidRedrawAction { get; }
+        public RedrawAction PrPoisonedRedrawAction { get; }
+        public RedrawAction PrStateRedrawAction { get; }
+        public RedrawAction PrSpeedRedrawAction { get; }
+        public RedrawAction PrStatsRedrawAction { get; }
+        public RedrawAction PrStudyRedrawAction { get; }
+        public RedrawAction PrTimeRedrawAction { get; }
+        public RedrawAction PrPlayerRedrawAction { get; }
+
+        public RedrawAction PrExtraRedrawAction { get; }
+        public RedrawAction PrBasicRedrawAction { get; }
+        public RedrawAction PrWipeRedrawAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -234,8 +254,32 @@ namespace AngbandOS
             PrExpRedrawAction = new PrExpRedrawAction(this);
             PrCutRedrawAction = new PrCutRedrawAction(this);
             PrHealthRedrawAction = new PrHealthRedrawAction(this);
+            PrManaRedrawAction = new PrManaRedrawAction(this);
+            PrGoldRedrawAction = new PrGoldRedrawAction(this);
+            PrDepthRedrawAction = new PrDepthRedrawAction(this);
+            PrStunRedrawAction = new PrStunRedrawAction(this);
+            PrHungerRedrawAction = new PrHungerRedrawAction(this);
+            PrDTrapRedrawAction = new PrDTrapRedrawAction(this);
+            PrBlindRedrawAction = new PrBlindRedrawAction(this);
+            PrConfusedRedrawAction = new PrConfusedRedrawAction(this);
+            PrAfraidRedrawAction = new PrAfraidRedrawAction(this);
+            PrPoisonedRedrawAction = new PrPoisonedRedrawAction(this);
+            PrStateRedrawAction = new PrStateRedrawAction(this);
+            PrSpeedRedrawAction = new PrSpeedRedrawAction(this);
+            PrStatsRedrawAction = new PrStatsRedrawAction(this);
+            PrStudyRedrawAction = new PrStudyRedrawAction(this);
+            PrTimeRedrawAction = new PrTimeRedrawAction(this);
+            PrPlayerRedrawAction = new PrPlayerRedrawAction(this);
+            PrWipeRedrawAction = new PrWipeRedrawAction(this);
 
-            SingletonRepository.Initialize(this);
+            PrExtraRedrawAction = new GroupSetRedrawAction(this, 
+                PrCutRedrawAction, PrHungerRedrawAction, PrDTrapRedrawAction, PrBlindRedrawAction, PrConfusedRedrawAction, 
+                PrAfraidRedrawAction, PrPoisonedRedrawAction, PrStateRedrawAction, PrSpeedRedrawAction, PrStudyRedrawAction);
+            PrBasicRedrawAction = new GroupSetRedrawAction(this,
+                PrPlayerRedrawAction, PrTitleRedrawAction, PrStatsRedrawAction, PrLevRedrawAction, PrExpRedrawAction, PrGoldRedrawAction,
+                PrArmorRedrawAction, PrHpRedrawAction, PrManaRedrawAction, PrDepthRedrawAction, PrHealthRedrawAction, PrSpeedRedrawAction);
+
+        SingletonRepository.Initialize(this);
             LoadAllTypes();
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
@@ -538,10 +582,7 @@ namespace AngbandOS
                 {
                     UpdateStuff();
                 }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
+                RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
                 Level.ForgetLight();
@@ -865,12 +906,12 @@ namespace AngbandOS
             if (CommandRepeat != 0)
             {
                 CommandRepeat = 0;
-                Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                PrStateRedrawAction.Set();
             }
             if (Resting != 0)
             {
                 Resting = 0;
-                Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                PrStateRedrawAction.Set();
             }
             if (Running != 0)
             {
@@ -881,7 +922,7 @@ namespace AngbandOS
             {
                 Player.IsSearching = false;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                PrStateRedrawAction.Set();
             }
         }
 
@@ -1222,10 +1263,7 @@ namespace AngbandOS
             {
                 UpdateStuff();
             }
-            if (Player.RedrawNeeded.IsSet())
-            {
-                RedrawStuff();
-            }
+            RedrawStuff();
         }
 
         public void HealthTrack(int mIdx)
@@ -1853,7 +1891,9 @@ namespace AngbandOS
             MsgPrint(null);
             CharacterXtra = true;
             PrEquippyRedrawAction.Set();
-            Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            PrExtraRedrawAction.Set();
+            PrBasicRedrawAction.Set();
+            PrWipeRedrawAction.Set(); // TODO: special case ... should be some form of invalidateclient
             PrMapRedrawAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
@@ -1935,10 +1975,7 @@ namespace AngbandOS
                 {
                     UpdateStuff();
                 }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
+                RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
                 {
@@ -1955,10 +1992,7 @@ namespace AngbandOS
                 {
                     UpdateStuff();
                 }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
+                RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
                 {
@@ -1973,10 +2007,7 @@ namespace AngbandOS
                 {
                     UpdateStuff();
                 }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
+                RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
                 {
@@ -2350,7 +2381,7 @@ namespace AngbandOS
             }
             while (Player.Energy >= 100 && !Shutdown)
             {
-                Player.RedrawNeeded.Set(RedrawFlag.PrDtrap);
+                PrDTrapRedrawAction.Set();
                 if (Player.NoticeFlags != 0)
                 {
                     NoticeStuff();
@@ -2359,10 +2390,7 @@ namespace AngbandOS
                 {
                     UpdateStuff();
                 }
-                if (Player.RedrawNeeded.IsSet())
-                {
-                    RedrawStuff();
-                }
+                RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 UpdateScreen();
                 if (Player.Inventory[InventorySlot.PackCount].BaseItemCategory != null)
@@ -2385,10 +2413,7 @@ namespace AngbandOS
                     {
                         UpdateStuff();
                     }
-                    if (Player.RedrawNeeded.IsSet())
-                    {
-                        RedrawStuff();
-                    }
+                    RedrawStuff();
                 }
                 if (QueuedCommand == 0)
                 {
@@ -2404,7 +2429,7 @@ namespace AngbandOS
                     if (Resting > 0)
                     {
                         Resting--;
-                        Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                        PrStateRedrawAction.Set();
                     }
                     EnergyUse = 100;
                 }
@@ -2415,7 +2440,7 @@ namespace AngbandOS
                 else if (CommandRepeat != 0)
                 {
                     CommandRepeat--;
-                    Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                    PrStateRedrawAction.Set();
                     RedrawStuff();
                     MsgFlag = false;
                     PrintLine("", 0, 0);
@@ -2956,141 +2981,39 @@ namespace AngbandOS
 
         private void RedrawStuff()
         {
-            if (Player.RedrawNeeded.IsClear())
-            {
-                return;
-            }
-            if (Player == null)
-            {
-                return;
-            }
             if (FullScreenOverlay)
             {
                 return;
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrWipe))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrWipe);
-                MsgPrint(null);
-                Clear();
-            }
+
+            // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
+            PrWipeRedrawAction.Redraw();
+
             PrMapRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrBasic))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrBasic);
-                PrTitleRedrawAction.Clear();
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMisc | RedrawFlag.PrStats);
-                PrLevRedrawAction.Clear();
-                PrExpRedrawAction.Clear();
-                Player.RedrawNeeded.Clear(RedrawFlag.PrGold);
-                PrArmorRedrawAction.Clear();
-                PrHpRedrawAction.Clear();
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrDepth);
-                PrHealthRedrawAction.Clear();
-                PrtFrameBasic();
-            }
+            PrPlayerRedrawAction.Redraw();
             PrEquippyRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMisc))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMisc);
-                PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-                PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
-            }
             PrTitleRedrawAction.Redraw();
             PrLevRedrawAction.Redraw();
             PrExpRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStats))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrStats);
-                PrtStat(Ability.Strength);
-                PrtStat(Ability.Intelligence);
-                PrtStat(Ability.Wisdom);
-                PrtStat(Ability.Dexterity);
-                PrtStat(Ability.Constitution);
-                PrtStat(Ability.Charisma);
-            }
+            PrStatsRedrawAction.Redraw();
             PrArmorRedrawAction.Redraw();
             PrHpRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMana))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
-                PrtSp();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrGold))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrGold);
-                PrtGold();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrDepth))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrDepth);
-                PrtDepth();
-            }
+            PrManaRedrawAction.Redraw();
+            PrGoldRedrawAction.Redraw();
+            PrDepthRedrawAction.Redraw();
             PrHealthRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExtra))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrExtra);
-                PrCutRedrawAction.Clear();
-                Player.RedrawNeeded.Clear(RedrawFlag.PrStun);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrHunger | RedrawFlag.PrDtrap);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrBlind | RedrawFlag.PrConfused);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrAfraid | RedrawFlag.PrPoisoned);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrState | RedrawFlag.PrSpeed | RedrawFlag.PrStudy);
-                PrtFrameExtra();
-            }
             PrCutRedrawAction.Redraw();
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStun))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrStun);
-                PrtStun();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHunger))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrHunger);
-                PrtHunger();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrDtrap))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrDtrap);
-                PrtDtrap();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrBlind))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrBlind);
-                PrtBlind();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrConfused))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrConfused);
-                PrtConfused();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrAfraid))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrAfraid);
-                PrtAfraid();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrPoisoned))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrPoisoned);
-                PrtPoisoned();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrState))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrState);
-                PrtState();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrSpeed))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrSpeed);
-                PrtSpeed();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStudy))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrStudy);
-                PrtStudy();
-            }
-            PrtTime();
+            PrStunRedrawAction.Redraw();
+            PrHungerRedrawAction.Redraw();
+            PrDTrapRedrawAction.Redraw();
+            PrBlindRedrawAction.Redraw();
+            PrConfusedRedrawAction.Redraw();
+            PrAfraidRedrawAction.Redraw();
+            PrPoisonedRedrawAction.Redraw();
+            PrStateRedrawAction.Redraw();
+            PrSpeedRedrawAction.Redraw();
+            PrStudyRedrawAction.Redraw();
+            PrTimeRedrawAction.Redraw(true);
         }
 
         private void RegenMonsters()
@@ -3366,7 +3289,7 @@ namespace AngbandOS
                 }
                 MsgPrint($"You turn {oName} to {price} coins worth of gold.");
                 Player.Gold += price;
-                Player.RedrawNeeded.Set(RedrawFlag.PrGold);
+                PrGoldRedrawAction.Set();
             }
             if (item >= 0)
             {
@@ -4225,7 +4148,7 @@ namespace AngbandOS
                     }
                 }
             }
-            Player.RedrawNeeded.Set(RedrawFlag.PrDtrap);
+            PrDTrapRedrawAction.Set();
             PrMapRedrawAction.Set();
             if (detect)
             {
@@ -6708,7 +6631,7 @@ namespace AngbandOS
                     if (CommandArgument > 0)
                     {
                         CommandRepeat = CommandArgument - 1;
-                        Player.RedrawNeeded.Set(RedrawFlag.PrState);
+                        PrStateRedrawAction.Set();
                         CommandArgument = 0;
                     }
 
@@ -6999,7 +6922,7 @@ namespace AngbandOS
             }
             // We'll need to redraw
             PrHpRedrawAction.Set();
-            Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            PrManaRedrawAction.Set();
             // Check to see if we were successful
             if (Program.Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
                 (difficulty / 2) + Program.Rng.DieRoll(difficulty / 2))
@@ -7478,13 +7401,13 @@ namespace AngbandOS
             {
                 MsgPrint("You channel mana to power the effect.");
                 Player.Mana -= cost;
-                Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                PrManaRedrawAction.Set();
                 return true;
             }
             // Use some mana in the attempt, even if we failed
             MsgPrint("You mana is insufficient to power the effect.");
             Player.Mana -= Program.Rng.RandomLessThan(Player.Mana / 2);
-            Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            PrManaRedrawAction.Set();
             return false;
         }
 
@@ -7880,7 +7803,7 @@ namespace AngbandOS
             // the notification
             if (oldTrapsDetected != newTrapsDetected)
             {
-                Player.RedrawNeeded.Set(RedrawFlag.PrDtrap);
+                PrDTrapRedrawAction.Set();
             }
             // If we're leaving an area where we've detected traps at a run, then stop running
             if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
@@ -8027,7 +7950,7 @@ namespace AngbandOS
                 {
                     MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                     Player.Gold += item.TypeSpecificValue;
-                    Player.RedrawNeeded.Set(RedrawFlag.PrGold);
+                    PrGoldRedrawAction.Set();
                     Level.DeleteObjectIdx(thisItemIndex);
                 }
                 else
@@ -8944,7 +8867,7 @@ namespace AngbandOS
             // Check the player's race to see what their power is
             Player.Race.UseRacialPower(this);
             PrHpRedrawAction.Set();
-            Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+            PrManaRedrawAction.Set();
         }
 
         /// <summary>
@@ -17228,7 +17151,7 @@ namespace AngbandOS
                 if (Player.AbilityScores[i].AdjustedMax != top)
                 {
                     Player.AbilityScores[i].AdjustedMax = top;
-                    Player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                    PrStatsRedrawAction.Set();
                 }
                 int use = Player.AbilityScores[i]
                     .ModifyStatValue(Player.AbilityScores[i].Innate, Player.AbilityScores[i].Bonus);
@@ -17242,7 +17165,7 @@ namespace AngbandOS
                 if (Player.AbilityScores[i].Adjusted != use)
                 {
                     Player.AbilityScores[i].Adjusted = use;
-                    Player.RedrawNeeded.Set(RedrawFlag.PrStats);
+                    PrStatsRedrawAction.Set();
                 }
                 if (use <= 18)
                 {
@@ -17391,7 +17314,7 @@ namespace AngbandOS
             }
             if (Player.Speed != oldSpeed)
             {
-                Player.RedrawNeeded.Set(RedrawFlag.PrSpeed);
+                PrSpeedRedrawAction.Set();
             }
             Player.ArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
             Player.DamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
@@ -17856,7 +17779,7 @@ namespace AngbandOS
                     Player.FractionalMana = 0;
                 }
                 Player.MaxMana = msp;
-                Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                PrManaRedrawAction.Set();
             }
             if (CharacterXtra)
             {
@@ -18037,7 +17960,7 @@ namespace AngbandOS
                     }
                 }
                 Player.OldSpareSpellSlots = Player.SpareSpellSlots;
-                Player.RedrawNeeded.Set(RedrawFlag.PrStudy);
+                PrStudyRedrawAction.Set();
             }
         }
 
@@ -18109,351 +18032,6 @@ namespace AngbandOS
                 }
             }
             return martialArtistArmWgt > 100 + (Player.Level * 4);
-        }
-
-        public void PrtAfraid()
-        {
-            if (Player.TimedFear.TimeRemaining > 0)
-            {
-                Print(Colour.Orange, "Afraid", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
-            }
-            else
-            {
-                Print("      ", ScreenLocation.RowAfraid, ScreenLocation.ColAfraid);
-            }
-        }
-
-        public void PrtBlind()
-        {
-            if (Player.TimedBlindness.TimeRemaining > 0)
-            {
-                Print(Colour.Orange, "Blind", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
-            }
-            else
-            {
-                Print("     ", ScreenLocation.RowBlind, ScreenLocation.ColBlind);
-            }
-        }
-
-        public void PrtConfused()
-        {
-            if (Player.TimedConfusion.TimeRemaining > 0)
-            {
-                Print(Colour.Orange, "Confused", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
-            }
-            else
-            {
-                Print("        ", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
-            }
-        }
-
-        public void PrtDepth()
-        {
-            string depths;
-            if (CurrentDepth == 0)
-            {
-                if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
-                {
-                    depths = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Shortname;
-                    Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Visited = true;
-                }
-                else
-                {
-                    depths = $"Wild ({Player.WildernessX},{Player.WildernessY})";
-                }
-            }
-            else
-            {
-                depths = $"lvl {CurrentDepth}+{DungeonDifficulty}";
-                CurDungeon.KnownOffset = true;
-                if (CurrentDepth == CurDungeon.MaxLevel)
-                {
-                    CurDungeon.KnownDepth = true;
-                }
-            }
-            PrintLine(depths.PadLeft(9), ScreenLocation.RowDepth, ScreenLocation.ColDepth);
-        }
-
-        public void PrtDtrap()
-        {
-            int count = 0;
-            if (Level.Grid[Player.MapY][Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
-            {
-                Print(Colour.Green, "     ", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
-                return;
-            }
-            if (Level.Grid[Player.MapY - 1][Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
-            {
-                count++;
-            }
-            if (Level.Grid[Player.MapY + 1][Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
-            {
-                count++;
-            }
-            if (Level.Grid[Player.MapY][Player.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
-            {
-                count++;
-            }
-            if (Level.Grid[Player.MapY][Player.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
-            {
-                count++;
-            }
-            if (count == 4)
-            {
-                Print(Colour.Green, "DTrap", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
-            }
-            else
-            {
-                Print(Colour.Yellow, "DTRAP", ScreenLocation.RowDtrap, ScreenLocation.ColDtrap);
-            }
-        }
-
-        public void PrtField(string info, int row, int col)
-        {
-            Print(Colour.White, "             ", row, col);
-            Print(Colour.BrightBlue, info, row, col);
-        }
-
-        public void PrtFrameBasic()
-        {
-            PrtField(Player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
-            PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-            PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
-            PrTitleRedrawAction.Redraw(true);
-            PrLevRedrawAction.Redraw(true);
-            PrExpRedrawAction.Redraw(true);
-            for (int i = 0; i < 6; i++)
-            {
-                PrtStat(i);
-            }
-            PrArmorRedrawAction.Redraw(true);
-            PrHpRedrawAction.Redraw(true);
-            PrtSp();
-            PrtGold();
-            PrtDepth();
-            PrHealthRedrawAction.Redraw(true);
-        }
-
-        public void PrtFrameExtra()
-        {
-            PrCutRedrawAction.Redraw(true);
-            PrtStun();
-            PrtHunger();
-            PrtDtrap();
-            PrtBlind();
-            PrtConfused();
-            PrtAfraid();
-            PrtPoisoned();
-            PrtState();
-            PrtSpeed();
-            PrtStudy();
-        }
-
-        public void PrtGold()
-        {
-            Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
-            string tmp = Player.Gold.ToString().PadLeft(9);
-            Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
-        }
-
-        public void PrtHunger()
-        {
-            if (Player.Food < Constants.PyFoodFaint)
-            {
-                Print(Colour.Red, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-            else if (Player.Food < Constants.PyFoodWeak)
-            {
-                Print(Colour.Orange, "Weak  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-            else if (Player.Food < Constants.PyFoodAlert)
-            {
-                Print(Colour.Yellow, "Hungry", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-            else if (Player.Food < Constants.PyFoodFull)
-            {
-                Print(Colour.BrightGreen, "      ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-            else if (Player.Food < Constants.PyFoodMax)
-            {
-                Print(Colour.BrightGreen, "Full  ", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-            else
-            {
-                Print(Colour.Green, "Gorged", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-        }
-
-        public void PrtPoisoned()
-        {
-            if (Player.TimedPoison.TimeRemaining > 0)
-            {
-                Print(Colour.Orange, "Poisoned", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
-            }
-            else
-            {
-                Print("        ", ScreenLocation.RowPoisoned, ScreenLocation.ColPoisoned);
-            }
-        }
-
-        public void PrtSp()
-        {
-            if (Player.Spellcasting.Type == CastingType.None)
-            {
-                return;
-            }
-            Print("Max SP ", ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp);
-            string tmp = Player.MaxMana.ToString().PadLeft(5);
-            Colour colour = Colour.BrightGreen;
-            Print(colour, tmp, ScreenLocation.RowMaxsp, ScreenLocation.ColMaxsp + 7);
-            Print("Cur SP ", ScreenLocation.RowCursp, ScreenLocation.ColCursp);
-            tmp = Player.Mana.ToString().PadLeft(5);
-            if (Player.Mana >= Player.MaxMana)
-            {
-                colour = Colour.BrightGreen;
-            }
-            else if (Player.Mana > Player.MaxMana * GlobalData.HitpointWarn / 5)
-            {
-                colour = Colour.BrightYellow;
-            }
-            else if (Player.Mana > Player.MaxMana * GlobalData.HitpointWarn / 10)
-            {
-                colour = Colour.Orange;
-            }
-            else
-            {
-                colour = Colour.BrightRed;
-            }
-            Print(colour, tmp, ScreenLocation.RowCursp, ScreenLocation.ColCursp + 7);
-        }
-
-        public void PrtSpeed()
-        {
-            int i = Player.Speed;
-            Colour attr = Colour.White;
-            string buf = "";
-            if (Player.IsSearching)
-            {
-                i += 10;
-            }
-            int energy = GlobalData.ExtractEnergy[i];
-            if (i > 110)
-            {
-                attr = Colour.BrightGreen;
-                buf = $"Fast {energy / 10.0}";
-            }
-            else if (i < 110)
-            {
-                attr = Colour.BrightBrown;
-                buf = $"Slow {energy / 10.0}";
-            }
-            Print(attr, buf.PadRight(14), ScreenLocation.RowSpeed, ScreenLocation.ColSpeed);
-        }
-
-        public void PrtStat(int stat)
-        {
-            string tmp;
-            if (Player.AbilityScores[stat].Innate < Player.AbilityScores[stat].InnateMax)
-            {
-                Print(GlobalData.StatNamesReduced[stat], ScreenLocation.RowStat + stat, 0);
-                tmp = Player.AbilityScores[stat].Adjusted.StatToString();
-                Print(Colour.Yellow, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
-            }
-            else
-            {
-                Print(GlobalData.StatNames[stat], ScreenLocation.RowStat + stat, 0);
-                tmp = Player.AbilityScores[stat].Adjusted.StatToString();
-                Print(Colour.BrightGreen, tmp, ScreenLocation.RowStat + stat, ScreenLocation.ColStat + 6);
-            }
-            if (Player.AbilityScores[stat].InnateMax == 18 + 100)
-            {
-                Print("!", ScreenLocation.RowStat + stat, 3);
-            }
-        }
-
-        public void PrtState()
-        {
-            Colour attr = Colour.White;
-            string text;
-            if (Player.TimedParalysis.TimeRemaining > 0)
-            {
-                attr = Colour.Red;
-                text = "Paralyzed!";
-            }
-            else if (Resting != 0)
-            {
-                text = "Rest ";
-                if (Resting > 0)
-                {
-                    text += Resting.ToString().PadLeft(5);
-                }
-                else if (Resting == -1)
-                {
-                    text += "*****";
-                }
-                else if (Resting == -2)
-                {
-                    text += "&&&&&";
-                }
-                else
-                {
-                    text += "?????";
-                }
-            }
-            else if (CommandRepeat != 0)
-            {
-                if (CommandRepeat > 999)
-                {
-                    text = "Rep. " + CommandRepeat.ToString().PadRight(5);
-                }
-                else
-                {
-                    text = "Repeat " + CommandRepeat.ToString().PadRight(3);
-                }
-            }
-            else if (Player.IsSearching)
-            {
-                text = "Searching ";
-            }
-            else
-            {
-                text = "          ";
-            }
-            Print(attr, text, ScreenLocation.RowState, ScreenLocation.ColState);
-        }
-
-        public void PrtStudy()
-        {
-            Print(Player.SpareSpellSlots != 0 ? "Study" : "     ", ScreenLocation.RowStudy, ScreenLocation.ColStudy);
-        }
-
-        public void PrtStun()
-        {
-            int s = Player.TimedStun.TimeRemaining;
-            if (s > 100)
-            {
-                Print(Colour.Red, "Knocked out ", ScreenLocation.RowStun, ScreenLocation.ColStun);
-            }
-            else if (s > 50)
-            {
-                Print(Colour.Orange, "Heavy stun  ", ScreenLocation.RowStun, ScreenLocation.ColStun);
-            }
-            else if (s > 0)
-            {
-                Print(Colour.Orange, "Stun        ", ScreenLocation.RowStun, ScreenLocation.ColStun);
-            }
-            else
-            {
-                Print("            ", ScreenLocation.RowStun, ScreenLocation.ColStun);
-            }
-        }
-
-        public void PrtTime()
-        {
-            Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
-            Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.ColDate);
-            Print(Colour.BrightGreen, Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
-            Print(Colour.BrightGreen, Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.ColDate + 4);
         }
 
         private int WeightLimit()

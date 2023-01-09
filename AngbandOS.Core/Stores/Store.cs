@@ -296,12 +296,13 @@ namespace AngbandOS
             SaveGame.FullScreenOverlay = false;
             SaveGame.QueuedCommand = '\0';
             SaveGame.ViewingItemList = false;
-            SaveGame.MsgPrint(null);
-            SaveGame.Clear();
+            SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
+            SaveGame.Clear();// TODO: This is a PrWipeRedrawAction
             SaveGame.SetBackground(BackgroundImage.Overhead);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            SaveGame.PrExtraRedrawAction.Set();
+            SaveGame.PrBasicRedrawAction.Set();
             SaveGame.PrMapRedrawAction.Set();
             SaveGame.PrEquippyRedrawAction.Set();
         }
@@ -1498,7 +1499,7 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} more {spellType}{plural}.");
             }
             SaveGame.Player.OldSpareSpellSlots = SaveGame.Player.SpareSpellSlots;
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrStudy);
+            SaveGame.PrStudyRedrawAction.Set();
         }
 
         private void StoreProcessCommand()

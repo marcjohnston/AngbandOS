@@ -30,7 +30,7 @@ namespace AngbandOS.Mutations.RandomMutations
                 return;
             }
             saveGame.Disturb(false);
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrExtra);
+            saveGame.PrExtraRedrawAction.Set();
             saveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
             if (Program.Rng.DieRoll(20) == 1)
             {

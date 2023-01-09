@@ -25,7 +25,7 @@ namespace AngbandOS.Core.ItemCategories
                 saveGame.Player.Mana = saveGame.Player.MaxMana;
                 saveGame.Player.FractionalMana = 0;
                 saveGame.MsgPrint("Your feel your head clear.");
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
+                saveGame.PrManaRedrawAction.Set();
                 return true;
             }
             return false;

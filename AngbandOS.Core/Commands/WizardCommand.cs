@@ -268,7 +268,9 @@
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             saveGame.PrMapRedrawAction.Set();
             saveGame.PrEquippyRedrawAction.Set();
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            saveGame.PrExtraRedrawAction.Set();
+            saveGame.PrBasicRedrawAction.Set();
+            saveGame.PrWipeRedrawAction.Set(); // TODO: Special case ... should be some form of invalidateclient
             saveGame.HandleStuff();
             saveGame.Redraw();
         }

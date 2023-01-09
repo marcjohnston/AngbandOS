@@ -38,7 +38,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrPoisoned);
+            SaveGame.PrPoisonedRedrawAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

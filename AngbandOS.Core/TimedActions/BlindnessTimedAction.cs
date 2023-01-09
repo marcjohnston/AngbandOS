@@ -34,7 +34,7 @@
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             SaveGame.PrMapRedrawAction.Set();
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrBlind);
+            SaveGame.PrBlindRedrawAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

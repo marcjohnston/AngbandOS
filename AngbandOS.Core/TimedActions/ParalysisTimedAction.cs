@@ -30,7 +30,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.Player.RedrawNeeded.Set(RedrawFlag.PrState);
+            SaveGame.PrStateRedrawAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

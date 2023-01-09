@@ -47,7 +47,9 @@
             saveGame.FullScreenOverlay = false;
             saveGame.PrMapRedrawAction.Set();
             saveGame.PrEquippyRedrawAction.Set();
-            saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrWipe | RedrawFlag.PrBasic | RedrawFlag.PrExtra);
+            saveGame.PrExtraRedrawAction.Set();
+            saveGame.PrBasicRedrawAction.Set();
+            saveGame.PrWipeRedrawAction.Set(); // TODO: special case ... should be some form of invalidate
             saveGame.HandleStuff();
         }
     }
