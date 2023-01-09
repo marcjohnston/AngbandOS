@@ -14,7 +14,6 @@ namespace AngbandOS.Enumerations
         public const uint PrMana = 0x00000080;
         public const uint PrGold = 0x00000100;
         public const uint PrDepth = 0x00000200;
-        public const uint PrHealth = 0x00000800;
         public const uint PrStun = 0x00002000;
         public const uint PrHunger = 0x00004000;
         public const uint PrDtrap = 0x00008000;

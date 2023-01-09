@@ -15,6 +15,7 @@ namespace AngbandOS
         public RedrawAction PrHpRedrawAction { get; }
         public RedrawAction PrExpRedrawAction { get; }
         public RedrawAction PrCutRedrawAction { get; }
+        public RedrawAction PrHealthRedrawAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -232,6 +233,7 @@ namespace AngbandOS
             PrHpRedrawAction = new PrHpRedrawAction(this);
             PrExpRedrawAction = new PrExpRedrawAction(this);
             PrCutRedrawAction = new PrCutRedrawAction(this);
+            PrHealthRedrawAction = new PrHealthRedrawAction(this);
 
             SingletonRepository.Initialize(this);
             LoadAllTypes();
@@ -1229,7 +1231,7 @@ namespace AngbandOS
         public void HealthTrack(int mIdx)
         {
             TrackedMonsterIndex = mIdx;
-            Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+            PrHealthRedrawAction.Set();
         }
 
         public void MonsterDeath(int mIdx)
@@ -2984,7 +2986,8 @@ namespace AngbandOS
                 PrArmorRedrawAction.Clear();
                 PrHpRedrawAction.Clear();
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrDepth | RedrawFlag.PrHealth);
+                Player.RedrawNeeded.Clear(RedrawFlag.PrDepth);
+                PrHealthRedrawAction.Clear();
                 PrtFrameBasic();
             }
             PrEquippyRedrawAction.Redraw();
@@ -3024,11 +3027,7 @@ namespace AngbandOS
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDepth);
                 PrtDepth();
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHealth))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrHealth);
-                HealthRedraw();
-            }
+            PrHealthRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExtra))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrExtra);
@@ -3122,7 +3121,7 @@ namespace AngbandOS
                     }
                     if (TrackedMonsterIndex == i)
                     {
-                        Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        PrHealthRedrawAction.Set();
                     }
                 }
             }
@@ -4572,7 +4571,7 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
-            Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+            PrHealthRedrawAction.Set();
             PrMapRedrawAction.Set();
         }
 
@@ -18075,73 +18074,6 @@ namespace AngbandOS
             }
         }
 
-        public void HealthRedraw()
-        {
-            if (TrackedMonsterIndex == 0)
-            {
-                Erase(ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
-                Erase(ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
-                Erase(ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
-                Erase(ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
-            }
-            else if (!Level.Monsters[TrackedMonsterIndex].IsVisible)
-            {
-                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
-            }
-            else if (Player.TimedHallucinations.TimeRemaining != 0)
-            {
-                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
-            }
-            else if (Level.Monsters[TrackedMonsterIndex].Health < 0)
-            {
-                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo, 12);
-            }
-            else
-            {
-                Monster mPtr = Level.Monsters[TrackedMonsterIndex];
-                Colour attr = Colour.Red;
-                string smb = "**********";
-                int pct = 100 * mPtr.Health / mPtr.MaxHealth;
-                if (pct >= 10)
-                {
-                    attr = Colour.BrightRed;
-                }
-                if (pct >= 25)
-                {
-                    attr = Colour.Orange;
-                }
-                if (pct >= 60)
-                {
-                    attr = Colour.Yellow;
-                }
-                if (pct >= 100)
-                {
-                    attr = Colour.BrightGreen;
-                }
-                if (mPtr.FearLevel != 0)
-                {
-                    attr = Colour.Purple;
-                    smb = "AFRAID****";
-                }
-                if (mPtr.SleepLevel != 0)
-                {
-                    attr = Colour.Blue;
-                    smb = "SLEEPING**";
-                }
-                if (mPtr.SmFriendly)
-                {
-                    attr = Colour.BrightBrown;
-                    smb = "FRIENDLY**";
-                }
-                int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
-                Print(Colour.White, "[----------]", ScreenLocation.RowInfo, ScreenLocation.ColInfo);
-                Print(attr, smb, ScreenLocation.RowInfo, ScreenLocation.ColInfo + 1, len);
-                Print(Colour.White, mPtr.Race.SplitName1, ScreenLocation.RowInfo - 3, ScreenLocation.ColInfo, 12);
-                Print(Colour.White, mPtr.Race.SplitName2, ScreenLocation.RowInfo - 2, ScreenLocation.ColInfo, 12);
-                Print(Colour.White, mPtr.Race.SplitName3, ScreenLocation.RowInfo - 1, ScreenLocation.ColInfo, 12);
-            }
-        }
-
         public bool MartialArtistEmptyHands()
         {
             if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
@@ -18299,7 +18231,7 @@ namespace AngbandOS
             PrtSp();
             PrtGold();
             PrtDepth();
-            HealthRedraw();
+            PrHealthRedrawAction.Redraw(true);
         }
 
         public void PrtFrameExtra()

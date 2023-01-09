@@ -1738,7 +1738,7 @@ namespace AngbandOS
             // Track the monster that has just taken damage
             if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
             {
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                saveGame.PrHealthRedrawAction.Set();
             }
             SleepLevel = 0;
             // Take the damage

@@ -37,7 +37,7 @@ namespace AngbandOS.Core.AttackEffects
                     }
                     if (saveGame.TrackedMonsterIndex == monsterIndex)
                     {
-                        saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        saveGame.PrHealthRedrawAction.Set();
                     }
                     item.TypeSpecificValue = 0;
                     saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;

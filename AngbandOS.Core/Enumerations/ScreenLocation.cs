@@ -20,7 +20,6 @@ namespace AngbandOS.Enumerations
         public const int ColEquippy = 0;
         public const int ColGold = 0;
         public const int ColHungry = 0;
-        public const int ColInfo = 0;
         public const int ColMaxsp = 0;
         public const int ColName = 0;
         public const int ColPoisoned = 33;
@@ -42,7 +41,6 @@ namespace AngbandOS.Enumerations
         public const int RowEquippy = 13;
         public const int RowGold = 11;
         public const int RowHungry = 44;
-        public const int RowInfo = 32;
         public const int RowMaxsp = 25;
         public const int RowName = 1;
         public const int RowPoisoned = 44;

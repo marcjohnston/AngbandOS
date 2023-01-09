@@ -54,7 +54,7 @@
                     }
                     if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
                     {
-                        saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        saveGame.PrHealthRedrawAction.Set();
                     }
                     if (seenByPlayer)
                     {
@@ -96,7 +96,7 @@
                     }
                     if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
                     {
-                        saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHealth);
+                        saveGame.PrHealthRedrawAction.Set();
                     }
                     if (seen)
                     {
