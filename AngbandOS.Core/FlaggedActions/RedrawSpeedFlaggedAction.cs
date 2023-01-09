@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrSpeedRedrawAction : RedrawAction
+    internal class RedrawSpeedFlaggedAction : FlaggedAction
     {
         private const int ColSpeed = 43;
         private const int RowSpeed = 44;
-        public PrSpeedRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawSpeedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             int i = SaveGame.Player.Speed;
             Colour attr = Colour.White;

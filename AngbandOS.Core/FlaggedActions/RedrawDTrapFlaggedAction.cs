@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrDTrapRedrawAction : RedrawAction
+    internal class RedrawDTrapFlaggedAction : FlaggedAction
     {
         private const int ColDtrap = 53;
         private const int RowDtrap = 44;
-        public PrDTrapRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawDTrapFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             int count = 0;
             if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))

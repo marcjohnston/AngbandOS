@@ -1,8 +1,8 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrPlayerRedrawAction : RedrawAction
+    internal class RedrawPlayerFlaggedAction : FlaggedAction
     {
         private const int ColName = 0;
         private const int RowName = 1;
@@ -10,13 +10,13 @@ namespace AngbandOS.Core.RedrawActions
         private const int RowRace = 2;
         private const int ColClass = 0;
         private const int RowClass = 3;
-        public PrPlayerRedrawAction(SaveGame saveGame) : base(saveGame) { }
+        public RedrawPlayerFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         private void PrtField(string info, int row, int col) // TODO: Duplicate with PrTitleRedrawAction
         {
             SaveGame.Print(Colour.White, "             ", row, col);
             SaveGame.Print(Colour.BrightBlue, info, row, col);
         }
-        protected override void Draw()
+        protected override void Execute()
         {
             PrtField(SaveGame.Player.Name, RowName, ColName);
             PrtField(SaveGame.Player.Race.Title, RowRace, ColRace);

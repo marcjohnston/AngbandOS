@@ -7,35 +7,35 @@ namespace AngbandOS
     [Serializable]
     internal class SaveGame
     {
-        public RedrawAction PrMapRedrawAction { get; }
-        public RedrawAction PrEquippyRedrawAction { get; }
-        public RedrawAction PrTitleRedrawAction { get; }
-        public RedrawAction PrLevRedrawAction { get; }
-        public RedrawAction PrArmorRedrawAction { get; }
-        public RedrawAction PrHpRedrawAction { get; }
-        public RedrawAction PrExpRedrawAction { get; }
-        public RedrawAction PrCutRedrawAction { get; }
-        public RedrawAction PrHealthRedrawAction { get; }
-        public RedrawAction PrManaRedrawAction { get; }
-        public RedrawAction PrGoldRedrawAction { get; }
-        public RedrawAction PrDepthRedrawAction { get; }
-        public RedrawAction PrStunRedrawAction { get; }
-        public RedrawAction PrHungerRedrawAction { get; }
-        public RedrawAction PrDTrapRedrawAction { get; }
-        public RedrawAction PrBlindRedrawAction { get; }
-        public RedrawAction PrConfusedRedrawAction { get; }
-        public RedrawAction PrAfraidRedrawAction { get; }
-        public RedrawAction PrPoisonedRedrawAction { get; }
-        public RedrawAction PrStateRedrawAction { get; }
-        public RedrawAction PrSpeedRedrawAction { get; }
-        public RedrawAction PrStatsRedrawAction { get; }
-        public RedrawAction PrStudyRedrawAction { get; }
-        public RedrawAction PrTimeRedrawAction { get; }
-        public RedrawAction PrPlayerRedrawAction { get; }
+        public FlaggedAction PrMapRedrawAction { get; }
+        public FlaggedAction PrEquippyRedrawAction { get; }
+        public FlaggedAction PrTitleRedrawAction { get; }
+        public FlaggedAction PrLevRedrawAction { get; }
+        public FlaggedAction PrArmorRedrawAction { get; }
+        public FlaggedAction PrHpRedrawAction { get; }
+        public FlaggedAction PrExpRedrawAction { get; }
+        public FlaggedAction PrCutRedrawAction { get; }
+        public FlaggedAction PrHealthRedrawAction { get; }
+        public FlaggedAction PrManaRedrawAction { get; }
+        public FlaggedAction PrGoldRedrawAction { get; }
+        public FlaggedAction PrDepthRedrawAction { get; }
+        public FlaggedAction PrStunRedrawAction { get; }
+        public FlaggedAction PrHungerRedrawAction { get; }
+        public FlaggedAction PrDTrapRedrawAction { get; }
+        public FlaggedAction PrBlindRedrawAction { get; }
+        public FlaggedAction PrConfusedRedrawAction { get; }
+        public FlaggedAction PrAfraidRedrawAction { get; }
+        public FlaggedAction PrPoisonedRedrawAction { get; }
+        public FlaggedAction PrStateRedrawAction { get; }
+        public FlaggedAction PrSpeedRedrawAction { get; }
+        public FlaggedAction PrStatsRedrawAction { get; }
+        public FlaggedAction PrStudyRedrawAction { get; }
+        public FlaggedAction PrTimeRedrawAction { get; }
+        public FlaggedAction PrPlayerRedrawAction { get; }
 
-        public RedrawAction PrExtraRedrawAction { get; }
-        public RedrawAction PrBasicRedrawAction { get; }
-        public RedrawAction PrWipeRedrawAction { get; }
+        public FlaggedAction PrExtraRedrawAction { get; }
+        public FlaggedAction PrBasicRedrawAction { get; }
+        public FlaggedAction PrWipeRedrawAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -245,37 +245,37 @@ namespace AngbandOS
         /// </summary>
         public SaveGame()
         {
-            PrMapRedrawAction = new PrMapRedrawAction(this);
-            PrEquippyRedrawAction = new PrEquippyRedrawAction(this);
-            PrTitleRedrawAction = new PrTitleRedrawAction(this);
-            PrLevRedrawAction = new PrLevRedrawAction(this);
-            PrArmorRedrawAction = new PrArmorRedrawAction(this);
-            PrHpRedrawAction = new PrHpRedrawAction(this);
-            PrExpRedrawAction = new PrExpRedrawAction(this);
-            PrCutRedrawAction = new PrCutRedrawAction(this);
-            PrHealthRedrawAction = new PrHealthRedrawAction(this);
-            PrManaRedrawAction = new PrManaRedrawAction(this);
-            PrGoldRedrawAction = new PrGoldRedrawAction(this);
-            PrDepthRedrawAction = new PrDepthRedrawAction(this);
-            PrStunRedrawAction = new PrStunRedrawAction(this);
-            PrHungerRedrawAction = new PrHungerRedrawAction(this);
-            PrDTrapRedrawAction = new PrDTrapRedrawAction(this);
-            PrBlindRedrawAction = new PrBlindRedrawAction(this);
-            PrConfusedRedrawAction = new PrConfusedRedrawAction(this);
-            PrAfraidRedrawAction = new PrAfraidRedrawAction(this);
-            PrPoisonedRedrawAction = new PrPoisonedRedrawAction(this);
-            PrStateRedrawAction = new PrStateRedrawAction(this);
-            PrSpeedRedrawAction = new PrSpeedRedrawAction(this);
-            PrStatsRedrawAction = new PrStatsRedrawAction(this);
-            PrStudyRedrawAction = new PrStudyRedrawAction(this);
-            PrTimeRedrawAction = new PrTimeRedrawAction(this);
-            PrPlayerRedrawAction = new PrPlayerRedrawAction(this);
-            PrWipeRedrawAction = new PrWipeRedrawAction(this);
+            PrMapRedrawAction = new RedrawMapFlaggedAction(this);
+            PrEquippyRedrawAction = new RedrawEquippyFlaggedAction(this);
+            PrTitleRedrawAction = new RedrawTitleFlaggedAction(this);
+            PrLevRedrawAction = new RedrawLevelFlaggedAction(this);
+            PrArmorRedrawAction = new RedrawArmorFlaggedAction(this);
+            PrHpRedrawAction = new RedrawHpFlaggedAction(this);
+            PrExpRedrawAction = new RedrawExpFlaggedAction(this);
+            PrCutRedrawAction = new RedrawCutFlaggedAction(this);
+            PrHealthRedrawAction = new RedrawHealthFlaggedAction(this);
+            PrManaRedrawAction = new RedrawManaFlaggedAction(this);
+            PrGoldRedrawAction = new RedrawGoldFlaggedAction(this);
+            PrDepthRedrawAction = new RedrawDepthFlaggedAction(this);
+            PrStunRedrawAction = new RedrawStunFlaggedAction(this);
+            PrHungerRedrawAction = new RedrawHungerFlaggedAction(this);
+            PrDTrapRedrawAction = new RedrawDTrapFlaggedAction(this);
+            PrBlindRedrawAction = new RedrawBlindFlaggedAction(this);
+            PrConfusedRedrawAction = new RedrawConfusedFlaggedAction(this);
+            PrAfraidRedrawAction = new RedrawAfraidFlaggedAction(this);
+            PrPoisonedRedrawAction = new RedrawPoisonedFlaggedAction(this);
+            PrStateRedrawAction = new RedrawStateFlaggedAction(this);
+            PrSpeedRedrawAction = new RedrawSpeedFlaggedAction(this);
+            PrStatsRedrawAction = new RedrawStatsFlaggedAction(this);
+            PrStudyRedrawAction = new RedrawStudyFlaggedAction(this);
+            PrTimeRedrawAction = new RedrawTimeFlaggedAction(this);
+            PrPlayerRedrawAction = new RedrawPlayerFlaggedAction(this);
+            PrWipeRedrawAction = new RedrawAllFlaggedAction(this);
 
-            PrExtraRedrawAction = new GroupSetRedrawAction(this, 
+            PrExtraRedrawAction = new RedrawGroupFlaggedAction(this, 
                 PrCutRedrawAction, PrHungerRedrawAction, PrDTrapRedrawAction, PrBlindRedrawAction, PrConfusedRedrawAction, 
                 PrAfraidRedrawAction, PrPoisonedRedrawAction, PrStateRedrawAction, PrSpeedRedrawAction, PrStudyRedrawAction);
-            PrBasicRedrawAction = new GroupSetRedrawAction(this,
+            PrBasicRedrawAction = new RedrawGroupFlaggedAction(this,
                 PrPlayerRedrawAction, PrTitleRedrawAction, PrStatsRedrawAction, PrLevRedrawAction, PrExpRedrawAction, PrGoldRedrawAction,
                 PrArmorRedrawAction, PrHpRedrawAction, PrManaRedrawAction, PrDepthRedrawAction, PrHealthRedrawAction, PrSpeedRedrawAction);
 
@@ -2987,33 +2987,33 @@ namespace AngbandOS
             }
 
             // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
-            PrWipeRedrawAction.Redraw();
+            PrWipeRedrawAction.Check();
 
-            PrMapRedrawAction.Redraw();
-            PrPlayerRedrawAction.Redraw();
-            PrEquippyRedrawAction.Redraw();
-            PrTitleRedrawAction.Redraw();
-            PrLevRedrawAction.Redraw();
-            PrExpRedrawAction.Redraw();
-            PrStatsRedrawAction.Redraw();
-            PrArmorRedrawAction.Redraw();
-            PrHpRedrawAction.Redraw();
-            PrManaRedrawAction.Redraw();
-            PrGoldRedrawAction.Redraw();
-            PrDepthRedrawAction.Redraw();
-            PrHealthRedrawAction.Redraw();
-            PrCutRedrawAction.Redraw();
-            PrStunRedrawAction.Redraw();
-            PrHungerRedrawAction.Redraw();
-            PrDTrapRedrawAction.Redraw();
-            PrBlindRedrawAction.Redraw();
-            PrConfusedRedrawAction.Redraw();
-            PrAfraidRedrawAction.Redraw();
-            PrPoisonedRedrawAction.Redraw();
-            PrStateRedrawAction.Redraw();
-            PrSpeedRedrawAction.Redraw();
-            PrStudyRedrawAction.Redraw();
-            PrTimeRedrawAction.Redraw(true);
+            PrMapRedrawAction.Check();
+            PrPlayerRedrawAction.Check();
+            PrEquippyRedrawAction.Check();
+            PrTitleRedrawAction.Check();
+            PrLevRedrawAction.Check();
+            PrExpRedrawAction.Check();
+            PrStatsRedrawAction.Check();
+            PrArmorRedrawAction.Check();
+            PrHpRedrawAction.Check();
+            PrManaRedrawAction.Check();
+            PrGoldRedrawAction.Check();
+            PrDepthRedrawAction.Check();
+            PrHealthRedrawAction.Check();
+            PrCutRedrawAction.Check();
+            PrStunRedrawAction.Check();
+            PrHungerRedrawAction.Check();
+            PrDTrapRedrawAction.Check();
+            PrBlindRedrawAction.Check();
+            PrConfusedRedrawAction.Check();
+            PrAfraidRedrawAction.Check();
+            PrPoisonedRedrawAction.Check();
+            PrStateRedrawAction.Check();
+            PrSpeedRedrawAction.Check();
+            PrStudyRedrawAction.Check();
+            PrTimeRedrawAction.Check(true); // TODO: Trigger this from GameTime
         }
 
         private void RegenMonsters()

@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrDepthRedrawAction : RedrawAction
+    internal class RedrawDepthFlaggedAction : FlaggedAction
     {
         private const int ColDepth = 69;
         private const int RowDepth = 44;
-        public PrDepthRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawDepthFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             string depths;
             if (SaveGame.CurrentDepth == 0)

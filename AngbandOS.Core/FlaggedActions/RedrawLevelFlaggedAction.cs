@@ -1,12 +1,12 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrLevRedrawAction : RedrawAction
+    internal class RedrawLevelFlaggedAction : FlaggedAction
     {
         private const int RowLevel = 5;
         private const int ColLevel = 0;
-        public PrLevRedrawAction(SaveGame saveGame) : base (saveGame) { }
-        protected override void Draw()
+        public RedrawLevelFlaggedAction(SaveGame saveGame) : base (saveGame) { }
+        protected override void Execute()
         {
             string tmp = SaveGame.Player.Level.ToString().PadLeft(6);
             if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)

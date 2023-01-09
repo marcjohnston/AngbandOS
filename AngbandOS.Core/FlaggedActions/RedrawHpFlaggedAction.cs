@@ -1,14 +1,14 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrHpRedrawAction : RedrawAction
+    internal class RedrawHpFlaggedAction : FlaggedAction
     {
         private const int RowMaxhp = 23;
         private const int RowCurhp = 24;
         private const int ColMaxhp = 0;
         private const int ColCurhp = 0;
-        public PrHpRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawHpFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             SaveGame.Print("Max HP ", RowMaxhp, ColMaxhp);
             string tmp = SaveGame.Player.MaxHealth.ToString().PadLeft(5);

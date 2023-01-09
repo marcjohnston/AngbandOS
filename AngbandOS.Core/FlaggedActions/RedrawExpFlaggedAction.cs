@@ -1,12 +1,12 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrExpRedrawAction : RedrawAction
+    internal class RedrawExpFlaggedAction : FlaggedAction
     {
         private const int RowExp = 6;
         private const int ColExp = 0;
-        public PrExpRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawExpFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             Colour colour = Colour.BrightGreen;
             if (SaveGame.Player.ExperiencePoints < SaveGame.Player.MaxExperienceGained)

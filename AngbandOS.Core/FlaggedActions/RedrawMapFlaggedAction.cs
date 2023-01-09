@@ -1,10 +1,10 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrMapRedrawAction : RedrawAction
+    internal class RedrawMapFlaggedAction : FlaggedAction
     {
-        public PrMapRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawMapFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             bool v = SaveGame.CursorVisible;
             SaveGame.CursorVisible = false;

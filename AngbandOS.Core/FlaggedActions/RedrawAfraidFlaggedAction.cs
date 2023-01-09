@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrAfraidRedrawAction : RedrawAction
+    internal class RedrawAfraidFlaggedAction : FlaggedAction
     {
         private const int ColAfraid = 25;
         private const int RowAfraid = 44;
-        public PrAfraidRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawAfraidFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.Player.TimedFear.TimeRemaining > 0)
             {

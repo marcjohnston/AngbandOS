@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrHungerRedrawAction : RedrawAction
+    internal class RedrawHungerFlaggedAction : FlaggedAction
     {
         private const int ColHungry = 0;
         private const int RowHungry = 44;
-        public PrHungerRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawHungerFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.Player.Food < Constants.PyFoodFaint)
             {

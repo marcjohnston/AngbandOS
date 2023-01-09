@@ -1,15 +1,15 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrManaRedrawAction : RedrawAction
+    internal class RedrawManaFlaggedAction : FlaggedAction
     {
         private const int ColCursp = 0;
         private const int RowCursp = 26;
         private const int RowMaxsp = 25;
         private const int ColMaxsp = 0;
-        public PrManaRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.Player.Spellcasting.Type == CastingType.None)
             {

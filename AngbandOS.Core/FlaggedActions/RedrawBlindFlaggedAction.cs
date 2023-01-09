@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrBlindRedrawAction : RedrawAction
+    internal class RedrawBlindFlaggedAction : FlaggedAction
     {
         private const int ColBlind = 8;
         private const int RowBlind = 44;
-        public PrBlindRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawBlindFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.Player.TimedBlindness.TimeRemaining > 0)
             {

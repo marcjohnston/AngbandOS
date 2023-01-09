@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrStunRedrawAction : RedrawAction
+    internal class RedrawStunFlaggedAction : FlaggedAction
     {
         private const int ColStun = 0;
         private const int RowStun = 43;
-        public PrStunRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawStunFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             int s = SaveGame.Player.TimedStun.TimeRemaining;
             if (s > 100)

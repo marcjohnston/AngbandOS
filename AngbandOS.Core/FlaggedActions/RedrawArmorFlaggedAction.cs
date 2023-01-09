@@ -1,12 +1,12 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrArmorRedrawAction : RedrawAction
+    internal class RedrawArmorFlaggedAction : FlaggedAction
     {
         private const int ColAc = 0;
         private const int RowAc = 22;
-        public PrArmorRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawArmorFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             SaveGame.Print("Cur AC ", RowAc, ColAc);
             string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);

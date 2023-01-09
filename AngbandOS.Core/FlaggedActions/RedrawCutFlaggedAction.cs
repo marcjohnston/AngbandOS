@@ -1,12 +1,12 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrCutRedrawAction : RedrawAction
+    internal class RedrawCutFlaggedAction : FlaggedAction
     {
         private const int RowCut = 43;
         private const int ColCut = 13;
-        public PrCutRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawCutFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             int c = SaveGame.Player.TimedBleeding.TimeRemaining;
             if (c > 1000)

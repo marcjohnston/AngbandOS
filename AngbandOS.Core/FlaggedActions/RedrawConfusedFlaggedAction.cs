@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrConfusedRedrawAction : RedrawAction
+    internal class RedrawConfusedFlaggedAction : FlaggedAction
     {
         private const int ColConfused = 15;
         private const int RowConfused = 44;
-        public PrConfusedRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawConfusedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.Player.TimedConfusion.TimeRemaining > 0)
             {

@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrStateRedrawAction : RedrawAction
+    internal class RedrawStateFlaggedAction : FlaggedAction
     {
         private const int ColState = 27;
         private const int RowState = 43;
-        public PrStateRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawStateFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             Colour attr = Colour.White;
             string text;

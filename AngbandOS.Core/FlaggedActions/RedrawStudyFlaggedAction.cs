@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrStudyRedrawAction : RedrawAction
+    internal class RedrawStudyFlaggedAction : FlaggedAction
     {
         private const int RowStudy = 44;
         private const int ColStudy = 60;
-        public PrStudyRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawStudyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             SaveGame.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", RowStudy, ColStudy);
         }

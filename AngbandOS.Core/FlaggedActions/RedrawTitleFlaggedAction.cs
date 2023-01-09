@@ -1,17 +1,17 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrTitleRedrawAction : RedrawAction
+    internal class RedrawTitleFlaggedAction : FlaggedAction
     {
         private const int RowTitle = 4;
         private const int ColTitle = 0;
-        public PrTitleRedrawAction(SaveGame saveGame) : base(saveGame) { }
+        public RedrawTitleFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         private void PrtField(string info, int row, int col) // TODO: Duplicate with PrPlayerRedrawAction
         {
             SaveGame.Print(Colour.White, "             ", row, col);
             SaveGame.Print(Colour.BrightBlue, info, row, col);
         }
-        protected override void Draw()
+        protected override void Execute()
         {
             if (SaveGame.Player.IsWizard)
             {

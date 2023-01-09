@@ -1,12 +1,12 @@
-﻿namespace AngbandOS.Core.RedrawActions
+﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrHealthRedrawAction : RedrawAction
+    internal class RedrawHealthFlaggedAction : FlaggedAction
     {
         private const int RowInfo = 32;
         private const int ColInfo = 0;
-        public PrHealthRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawHealthFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             if (SaveGame.TrackedMonsterIndex == 0)
             {

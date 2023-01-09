@@ -1,12 +1,12 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrStatsRedrawAction : RedrawAction
+    internal class RedrawStatsFlaggedAction : FlaggedAction
     {
         private const int RowStat = 15;
         private const int ColStat = 6;
-        public PrStatsRedrawAction(SaveGame saveGame) : base(saveGame) { }
+        public RedrawStatsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         private void PrtStat(int stat)
         {
             if (SaveGame.Player.AbilityScores[stat].Innate < SaveGame.Player.AbilityScores[stat].InnateMax)
@@ -27,7 +27,7 @@ namespace AngbandOS.Core.RedrawActions
             }
         }
 
-        protected override void Draw()
+        protected override void Execute()
         {
             PrtStat(Ability.Strength);
             PrtStat(Ability.Intelligence);

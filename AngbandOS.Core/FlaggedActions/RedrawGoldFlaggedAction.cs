@@ -1,13 +1,13 @@
 ﻿
-namespace AngbandOS.Core.RedrawActions
+namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class PrGoldRedrawAction : RedrawAction
+    internal class RedrawGoldFlaggedAction : FlaggedAction
     {
         private const int ColGold = 0;
         private const int RowGold = 11;
-        public PrGoldRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Draw()
+        public RedrawGoldFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void Execute()
         {
             SaveGame.Print("GP ", RowGold, ColGold);
             string tmp = SaveGame.Player.Gold.ToString().PadLeft(9);
