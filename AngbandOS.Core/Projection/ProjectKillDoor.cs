@@ -30,7 +30,9 @@ namespace AngbandOS.Projection
                     obvious = true;
                     if (cPtr.FeatureType.IsClosedDoor)
                     {
-                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
+                        SaveGame.UpdateMonstersFlaggedAction.Set();
+                        SaveGame.UpdateLightFlaggedAction.Set();
+                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
                     }
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);

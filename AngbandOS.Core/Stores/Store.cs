@@ -299,8 +299,9 @@ namespace AngbandOS
             SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
             SaveGame.Clear();// TODO: This is a PrWipeRedrawAction
             SaveGame.SetBackground(BackgroundImage.Overhead);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateLightFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.PrExtraRedrawAction.Set();
             SaveGame.PrBasicRedrawAction.Set();
             SaveGame.RedrawMapFlaggedAction.Set();

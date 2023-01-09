@@ -32,8 +32,8 @@
             }
             if (OldLightLevel != SaveGame.Player.LightLevel)
             {
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.UpdateLightFlaggedAction.Set();
+                SaveGame.UpdateMonstersFlaggedAction.Set();
                 OldLightLevel = SaveGame.Player.LightLevel;
             }
         }

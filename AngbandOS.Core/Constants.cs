@@ -26,6 +26,10 @@ namespace AngbandOS.Core
         public const int KeymapModeOrig = 0;
         public const int KeymapModeRogue = 1;
         public const int KeymapModes = 2;
+
+        /// <summary>
+        /// Returns the maximum number of grid tiles that can be lit at one time.
+        /// </summary>
         public const int LightMax = 128;
         public const int MaKnee = 1;
         public const int MaSlow = 2;

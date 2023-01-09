@@ -31,7 +31,9 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
+            SaveGame.UpdateLightFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
             return obvious;
         }
 

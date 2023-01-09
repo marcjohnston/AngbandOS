@@ -31,7 +31,7 @@
             }
             SaveGame.Disturb(false);
             SaveGame.UpdateBonusesFlaggedAction.Set();
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

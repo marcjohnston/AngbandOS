@@ -267,8 +267,9 @@
             saveGame.UpdateSpellsFlaggedAction.Set();
             saveGame.UpdateBonusesFlaggedAction.Set();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            saveGame.UpdateLightFlaggedAction.Set();
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            saveGame.UpdateMonstersFlaggedAction.Set();
             saveGame.RedrawMapFlaggedAction.Set();
             saveGame.RedrawEquippyFlaggedAction.Set();
             saveGame.PrExtraRedrawAction.Set();

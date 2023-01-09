@@ -320,7 +320,7 @@ namespace AngbandOS
             SaveGame.Level.PanelRowMin = prowMin;
             SaveGame.Level.PanelColMin = pcolMin;
             SaveGame.Level.PanelBoundsCenter();
-            UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.RedrawMapFlaggedAction.Set();
         }
 

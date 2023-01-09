@@ -21,7 +21,7 @@ namespace AngbandOS
         public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7, 5 };
         public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
         public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
-        public readonly int[] TempX = new int[Constants.TempMax];
+        public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
         public readonly int[] TempY = new int[Constants.TempMax];
         public int CurHgt;
         public int CurWid;
@@ -55,12 +55,13 @@ namespace AngbandOS
         private const int _mapHgt = MaxHgt / _ratio;
         private const int _mapWid = MaxWid / _ratio;
         private const int _ratio = 3;
-        private readonly int[] _lightX = new int[Constants.LightMax];
-        private readonly int[] _lightY = new int[Constants.LightMax];
+
+        public readonly int[] _lightX = new int[Constants.LightMax];
+        public readonly int[] _lightY = new int[Constants.LightMax];
+        public int _lightN;
 
         private readonly int[] _viewX = new int[Constants.ViewMax];
         private readonly int[] _viewY = new int[Constants.ViewMax];
-        private int _lightN;
         private int _viewN;
         private readonly SaveGame SaveGame;
 
@@ -1431,168 +1432,6 @@ namespace AngbandOS
             }
         }
 
-        public void UpdateLight()
-        {
-            int i, x, y;
-            if (SaveGame.Player.LightLevel <= 0)
-            {
-                ForgetLight();
-                RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
-                return;
-            }
-            for (i = 0; i < _lightN; i++)
-            {
-                y = _lightY[i];
-                x = _lightX[i];
-                Grid[y][x].TileFlags.Clear(GridTile.PlayerLit);
-                Grid[y][x].TileFlags.Set(GridTile.TempFlag);
-                TempY[TempN] = y;
-                TempX[TempN] = x;
-                TempN++;
-            }
-            _lightN = 0;
-            CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX);
-            if (SaveGame.Player.LightLevel >= 1)
-            {
-                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX);
-                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX);
-                CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX + 1);
-                CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX - 1);
-                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 1);
-                CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 1);
-                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 1);
-                CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 1);
-            }
-            if (SaveGame.Player.LightLevel >= 2)
-            {
-                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX))
-                {
-                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX);
-                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX + 1);
-                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX - 1);
-                }
-                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX))
-                {
-                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX);
-                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX + 1);
-                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX - 1);
-                }
-                if (GridPassable(SaveGame.Player.MapY, SaveGame.Player.MapX + 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX + 2);
-                    CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 2);
-                    CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 2);
-                }
-                if (GridPassable(SaveGame.Player.MapY, SaveGame.Player.MapX - 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX - 2);
-                    CaveLightHack(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 2);
-                    CaveLightHack(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 2);
-                }
-            }
-            if (SaveGame.Player.LightLevel >= 3)
-            {
-                int p = SaveGame.Player.LightLevel;
-                if (p > 5)
-                {
-                    p = 5;
-                }
-                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX + 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX + 2);
-                }
-                if (GridPassable(SaveGame.Player.MapY + 1, SaveGame.Player.MapX - 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY + 2, SaveGame.Player.MapX - 2);
-                }
-                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX + 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX + 2);
-                }
-                if (GridPassable(SaveGame.Player.MapY - 1, SaveGame.Player.MapX - 1))
-                {
-                    CaveLightHack(SaveGame.Player.MapY - 2, SaveGame.Player.MapX - 2);
-                }
-                int minY = SaveGame.Player.MapY - p;
-                if (minY < 0)
-                {
-                    minY = 0;
-                }
-                int maxY = SaveGame.Player.MapY + p;
-                if (maxY > CurHgt - 1)
-                {
-                    maxY = CurHgt - 1;
-                }
-                int minX = SaveGame.Player.MapX - p;
-                if (minX < 0)
-                {
-                    minX = 0;
-                }
-                int maxX = SaveGame.Player.MapX + p;
-                if (maxX > CurWid - 1)
-                {
-                    maxX = CurWid - 1;
-                }
-                for (y = minY; y <= maxY; y++)
-                {
-                    for (x = minX; x <= maxX; x++)
-                    {
-                        int dy = SaveGame.Player.MapY > y ? SaveGame.Player.MapY - y : y - SaveGame.Player.MapY;
-                        int dx = SaveGame.Player.MapX > x ? SaveGame.Player.MapX - x : x - SaveGame.Player.MapX;
-                        if (dy <= 2 && dx <= 2)
-                        {
-                            continue;
-                        }
-                        int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-                        if (d > p)
-                        {
-                            continue;
-                        }
-                        if (PlayerHasLosBold(y, x))
-                        {
-                            CaveLightHack(y, x);
-                        }
-                    }
-                }
-            }
-            for (i = 0; i < _lightN; i++)
-            {
-                y = _lightY[i];
-                x = _lightX[i];
-                if (Grid[y][x].TileFlags.IsSet(GridTile.TempFlag))
-                {
-                    continue;
-                }
-                NoteSpot(y, x);
-                RedrawSingleLocation(y, x);
-            }
-            for (i = 0; i < TempN; i++)
-            {
-                y = TempY[i];
-                x = TempX[i];
-                Grid[y][x].TileFlags.Clear(GridTile.TempFlag);
-                if (Grid[y][x].TileFlags.IsSet(GridTile.PlayerLit))
-                {
-                    continue;
-                }
-                RedrawSingleLocation(y, x);
-            }
-            TempN = 0;
-        }
-
-        public void UpdateMonsters(bool full)
-        {
-            for (int i = 1; i < MMax; i++)
-            {
-                Monster mPtr = Monsters[i];
-                if (mPtr.Race == null)
-                {
-                    continue;
-                }
-                Monsters.UpdateMonsterVisibility(i, full);
-            }
-        }
-
         public void UpdateView()
         {
             int n;
@@ -1998,8 +1837,9 @@ namespace AngbandOS
                 oPtr.Marked = false;
             }
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateLightFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.RedrawMapFlaggedAction.Set();
         }
 
@@ -2041,16 +1881,8 @@ namespace AngbandOS
                     }
                 }
             }
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+            SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.RedrawMapFlaggedAction.Set();
-        }
-
-        private void CaveLightHack(int y, int x)
-        {
-            Grid[y][x].TileFlags.Set(GridTile.PlayerLit);
-            _lightY[_lightN] = y;
-            _lightX[_lightN] = x;
-            _lightN++;
         }
 
         private void CaveViewHack(GridTile c, int y, int x)

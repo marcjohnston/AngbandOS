@@ -180,7 +180,7 @@ namespace AngbandOS.Projection
                 SaveGame.Player.TimedEtherealness.Reset();
                 SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
                 SaveGame.RedrawMapFlaggedAction.Set();
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.UpdateMonstersFlaggedAction.Set();
             }
             return true;
         }

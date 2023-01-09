@@ -251,8 +251,9 @@ namespace AngbandOS.Projection
                                         SaveGame.Level.RevertTileToBackground(y, x);
                                     }
                                     SaveGame.UpdateScentFlaggedAction.Set();
-                                    SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight |
-                                                      UpdateFlags.UpdateMonsters);
+                                    SaveGame.UpdateMonstersFlaggedAction.Set();
+                                    SaveGame.UpdateLightFlaggedAction.Set();
+                                    SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
                                 }
                                 else
                                 {

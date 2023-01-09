@@ -66,8 +66,9 @@ namespace AngbandOS.Mutations.ActiveMutations
             level.RedrawSingleLocation(oy, ox);
             player.RecenterScreenAroundPlayer();
             saveGame.UpdateScentFlaggedAction.Set();
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
+            saveGame.UpdateLightFlaggedAction.Set();
+            player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            saveGame.UpdateDistancesFlaggedAction.Set();
         }
 
         public override string ActivationSummary(int lvl)

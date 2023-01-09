@@ -783,11 +783,11 @@ namespace AngbandOS.Core.FlaggedActions
             }
             if (SaveGame.Player.HasTelepathy != oldTelepathy)
             {
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.UpdateMonstersFlaggedAction.Set();
             }
             if (SaveGame.Player.HasSeeInvisibility != oldSeeInv)
             {
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.UpdateMonstersFlaggedAction.Set();
             }
             int j = SaveGame.Player.WeightCarried;
 
