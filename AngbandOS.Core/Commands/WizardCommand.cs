@@ -22,7 +22,7 @@
             }
             else
             {
-                DoCmdWizmode(saveGame);
+                DoCmdWizMode(saveGame);
             }
         }
 
@@ -172,7 +172,7 @@
 
                 case 'W':
                     saveGame.Player.IsWinner = true;
-                    saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
+                    saveGame.PrLevRedrawAction.Set();
                     saveGame.MsgPrint("*** CONGRATULATIONS ***");
                     saveGame.MsgPrint("You have won the game!");
                     saveGame.MsgPrint("You may retire ('Q') when you are ready.");
@@ -204,7 +204,7 @@
             }
         }
 
-        public void DoCmdWizmode(SaveGame saveGame)
+        public void DoCmdWizMode(SaveGame saveGame)
         {
             saveGame.PrintLine("Enter Wizard Code: ", 0, 0);
             if (!saveGame.AskforAux(out string tmp, "", 31))
@@ -217,7 +217,7 @@
             {
                 saveGame.Player.IsWizard = true;
                 saveGame.MsgPrint("Wizard mode activated.");
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
+                saveGame.PrLevRedrawAction.Set();
             }
         }
 

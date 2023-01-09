@@ -395,14 +395,15 @@ namespace AngbandOS
             {
                 MaxExperienceGained = ExperiencePoints;
             }
-            RedrawNeeded.Set(RedrawFlag.PrExp);
+            SaveGame.PrExpRedrawAction.Set();
             SaveGame.HandleStuff();
             while (Level > 1 && ExperiencePoints < GlobalData.PlayerExp[Level - 2] * ExperienceMultiplier / 100L)
             {
                 Level--;
                 SaveGame.Level.RedrawSingleLocation(MapY, MapX);
                 UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
-                RedrawNeeded.Set(RedrawFlag.PrLev | RedrawFlag.PrTitle);
+                SaveGame.PrTitleRedrawAction.Set();
+                SaveGame.PrLevRedrawAction.Set();
                 SaveGame.HandleStuff();
             }
             while (Level < Constants.PyMaxLevel && ExperiencePoints >= GlobalData.PlayerExp[Level - 1] * ExperienceMultiplier / 100L)
@@ -431,7 +432,9 @@ namespace AngbandOS
                 SaveGame.PlaySound(SoundEffect.LevelGain);
                 SaveGame.MsgPrint($"Welcome to level {Level}.");
                 UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
-                RedrawNeeded.Set(RedrawFlag.PrExp | RedrawFlag.PrLev | RedrawFlag.PrTitle);
+                SaveGame.PrTitleRedrawAction.Set();
+                SaveGame.PrLevRedrawAction.Set();
+                SaveGame.PrExpRedrawAction.Set();
                 SaveGame.HandleStuff();
                 if (levelReward)
                 {
@@ -1056,7 +1059,7 @@ namespace AngbandOS
             }
             if (oldHealth != Health)
             {
-                RedrawNeeded.Set(RedrawFlag.PrHp);
+                SaveGame.PrHpRedrawAction.Set();
             }
         }
 
@@ -1116,7 +1119,7 @@ namespace AngbandOS
                 PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
             }
             UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
-            RedrawNeeded.Set(RedrawFlag.PrHp);
+            SaveGame.PrHpRedrawAction.Set();
             SaveGame.HandleStuff();
         }
 
@@ -1141,7 +1144,7 @@ namespace AngbandOS
                     Health = MaxHealth;
                     FractionalHealth = 0;
                 }
-                RedrawNeeded.Set(RedrawFlag.PrHp);
+                SaveGame.PrHpRedrawAction.Set();
                 if (num < 5)
                 {
                     SaveGame.MsgPrint("You feel a little better.");
@@ -1507,7 +1510,7 @@ namespace AngbandOS
                 }
             }
             Health -= damage;
-            RedrawNeeded.Set(RedrawFlag.PrHp);
+            SaveGame.PrHpRedrawAction.Set();
             if (penInvuln)
             {
                 SaveGame.MsgPrint("The attack penetrates your shield of invulnerability!");

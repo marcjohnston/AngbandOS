@@ -9,6 +9,11 @@ namespace AngbandOS
     {
         public RedrawAction PrMapRedrawAction { get; }
         public RedrawAction PrEquippyRedrawAction { get; }
+        public RedrawAction PrTitleRedrawAction { get; }
+        public RedrawAction PrLevRedrawAction { get; }
+        public RedrawAction PrArmorRedrawAction { get; }
+        public RedrawAction PrHpRedrawAction { get; }
+        public RedrawAction PrExpRedrawAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -220,6 +225,11 @@ namespace AngbandOS
         {
             PrMapRedrawAction = new PrMapRedrawAction(this);
             PrEquippyRedrawAction = new PrEquippyRedrawAction(this);
+            PrTitleRedrawAction = new PrTitleRedrawAction(this);
+            PrLevRedrawAction = new PrLevRedrawAction(this);
+            PrArmorRedrawAction = new PrArmorRedrawAction(this);
+            PrHpRedrawAction = new PrHpRedrawAction(this);
+            PrExpRedrawAction = new PrExpRedrawAction(this);
 
             SingletonRepository.Initialize(this);
             LoadAllTypes();
@@ -1356,7 +1366,7 @@ namespace AngbandOS
             if (Quests.ActiveQuests == 0)
             {
                 Player.IsWinner = true;
-                Player.RedrawNeeded.Set(RedrawFlag.PrTitle);
+                PrTitleRedrawAction.Set();
                 MsgPrint("*** CONGRATULATIONS ***");
                 MsgPrint("You have won the game!");
                 MsgPrint("You may retire ('Q') when you are ready.");
@@ -2964,9 +2974,14 @@ namespace AngbandOS
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrBasic))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrBasic);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrMisc | RedrawFlag.PrTitle | RedrawFlag.PrStats);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrLev | RedrawFlag.PrExp | RedrawFlag.PrGold);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrArmor | RedrawFlag.PrHp | RedrawFlag.PrMana);
+                PrTitleRedrawAction.Clear();
+                Player.RedrawNeeded.Clear(RedrawFlag.PrMisc | RedrawFlag.PrStats);
+                PrLevRedrawAction.Clear();
+                PrExpRedrawAction.Clear();
+                Player.RedrawNeeded.Clear(RedrawFlag.PrGold);
+                PrArmorRedrawAction.Clear();
+                PrHpRedrawAction.Clear();
+                Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrDepth | RedrawFlag.PrHealth);
                 PrtFrameBasic();
             }
@@ -2975,24 +2990,11 @@ namespace AngbandOS
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMisc);
                 PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
-                PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass,
-                    ScreenLocation.ColClass);
+                PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrTitle))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrTitle);
-                PrtTitle();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrLev))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrLev);
-                PrtLevel();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExp))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrExp);
-                PrtExp();
-            }
+            PrTitleRedrawAction.Redraw();
+            PrLevRedrawAction.Redraw();
+            PrExpRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStats))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrStats);
@@ -3003,16 +3005,8 @@ namespace AngbandOS
                 PrtStat(Ability.Constitution);
                 PrtStat(Ability.Charisma);
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrArmor))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrArmor);
-                PrtAc();
-            }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrHp))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrHp);
-                PrtHp();
-            }
+            PrArmorRedrawAction.Redraw();
+            PrHpRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrMana))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrMana);
@@ -3731,7 +3725,7 @@ namespace AngbandOS
                     Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                Player.RedrawNeeded.Set(RedrawFlag.PrHp);
+                PrHpRedrawAction.Set();
                 HandleStuff();
                 UpdateScreen();
                 Pause(msec);
@@ -5078,7 +5072,7 @@ namespace AngbandOS
                     Player.TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                Player.RedrawNeeded.Set(RedrawFlag.PrHp);
+                PrHpRedrawAction.Set();
                 HandleStuff();
                 UpdateScreen();
                 Pause(msec);
@@ -7006,7 +7000,7 @@ namespace AngbandOS
                 Player.Mana -= (cost / 2) + Program.Rng.DieRoll(cost / 2);
             }
             // We'll need to redraw
-            Player.RedrawNeeded.Set(RedrawFlag.PrHp);
+            PrHpRedrawAction.Set();
             Player.RedrawNeeded.Set(RedrawFlag.PrMana);
             // Check to see if we were successful
             if (Program.Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
@@ -8951,7 +8945,8 @@ namespace AngbandOS
         {
             // Check the player's race to see what their power is
             Player.Race.UseRacialPower(this);
-            Player.RedrawNeeded.Set(RedrawFlag.PrHp | RedrawFlag.PrMana);
+            PrHpRedrawAction.Set();
+            Player.RedrawNeeded.Set(RedrawFlag.PrMana);
         }
 
         /// <summary>
@@ -17402,7 +17397,7 @@ namespace AngbandOS
             Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
             if (Player.DisplayedBaseArmourClass != oldDisAc || Player.DisplayedArmourClassBonus != oldDisToA)
             {
-                Player.RedrawNeeded.Set(RedrawFlag.PrArmor);
+                PrArmorRedrawAction.Set();
             }
             int hold = Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
             oPtr = Player.Inventory[InventorySlot.RangedWeapon];
@@ -17756,7 +17751,7 @@ namespace AngbandOS
                     Player.FractionalHealth = 0;
                 }
                 Player.MaxHealth = mhp;
-                Player.RedrawNeeded.Set(RedrawFlag.PrHp);
+                PrHpRedrawAction.Set();
             }
         }
 

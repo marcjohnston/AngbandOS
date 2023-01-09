@@ -28,4 +28,13 @@
             SaveGame = saveGame;
         }
     }
+    [Serializable]
+    internal class PrExpRedrawAction : RedrawAction
+    {
+        public PrExpRedrawAction(SaveGame saveGame) : base(saveGame) { }
+        protected override void RedrawNow()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

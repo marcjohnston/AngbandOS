@@ -34,7 +34,8 @@ namespace AngbandOS.Spells.Death
                 saveGame.Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
                 saveGame.Player.Mana++;
                 saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);
-                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrHp | RedrawFlag.PrMana);
+                saveGame.PrHpRedrawAction.Set();
+                saveGame.Player.RedrawNeeded.Set(RedrawFlag.PrMana);
                 saveGame.HandleStuff();
                 saveGame.UpdateScreen();
                 saveGame.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);
