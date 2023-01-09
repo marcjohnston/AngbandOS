@@ -402,7 +402,8 @@ namespace AngbandOS
                 SaveGame.Level.RedrawSingleLocation(MapY, MapX);
                 SaveGame.UpdateHealthFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
+                SaveGame.UpdateSpellsFlaggedAction.Set();
+                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.HandleStuff();
@@ -434,7 +435,8 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"Welcome to level {Level}.");
                 SaveGame.UpdateHealthFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
+                SaveGame.UpdateSpellsFlaggedAction.Set();
+                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.RedrawExpFlaggedAction.Set();

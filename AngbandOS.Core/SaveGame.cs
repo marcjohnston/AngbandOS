@@ -1553,11 +1553,6 @@ namespace AngbandOS
             UpdateHealthFlaggedAction.Check();
             UpdateManaFlaggedAction.Check();
             UpdateSpellsFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateSpells))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateSpells);
-                CalcSpells();
-            }
             if (FullScreenOverlay)
             {
                 return;
@@ -1913,7 +1908,8 @@ namespace AngbandOS
             RedrawMapFlaggedAction.Set();
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
+            UpdateSpellsFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             UpdateTorchRadiusFlaggedAction.Set();
             UpdateStuff();
             RedrawStuff();
@@ -1924,7 +1920,8 @@ namespace AngbandOS
             CharacterXtra = false;
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
+            UpdateSpellsFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             NoticeStuff();
             UpdateStuff();
@@ -17223,7 +17220,7 @@ namespace AngbandOS
                         if (Player.Spellcasting.SpellStat == Ability.Intelligence)
                         {
                             UpdateManaFlaggedAction.Set();
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
+                            UpdateSpellsFlaggedAction.Set();
                         }
                     }
                     else if (i == Ability.Wisdom)
@@ -17231,7 +17228,7 @@ namespace AngbandOS
                         if (Player.Spellcasting.SpellStat == Ability.Wisdom)
                         {
                             UpdateManaFlaggedAction.Set();
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
+                            UpdateSpellsFlaggedAction.Set();
                         }
                     }
                     else if (i == Ability.Charisma)
@@ -17239,7 +17236,7 @@ namespace AngbandOS
                         if (Player.Spellcasting.SpellStat == Ability.Charisma)
                         {
                             UpdateManaFlaggedAction.Set();
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
+                            UpdateSpellsFlaggedAction.Set();
                         }
                     }
                 }
@@ -17684,183 +17681,6 @@ namespace AngbandOS
                     ? "The weight of your armour disrupts your balance."
                     : "You regain your balance.");
                 MartialArtistNotifyAux = MartialArtistArmourAux;
-            }
-        }
-
-        public void CalcSpells()
-        {
-            int i, j;
-            Spell sPtr;
-            if (Player == null)
-            {
-                return;
-            }
-            string p = Player.Spellcasting.Type == CastingType.Arcane ? "spell" : "prayer";
-            if (Player.Spellcasting.Type == CastingType.None)
-            {
-                return;
-            }
-            if (Player.Realm1 == Realm.None)
-            {
-                return;
-            }
-            if (CharacterXtra)
-            {
-                return;
-            }
-            int levels = Player.Level - Player.Spellcasting.SpellFirst + 1; // TODO: This should be moved to an action so that CharacterXtra isn't needed
-            if (levels < 0)
-            {
-                levels = 0;
-            }
-            int numAllowed = Player.AbilityScores[Player.Spellcasting.SpellStat].HalfSpellsPerLevel * levels / 2;
-            int numKnown = 0;
-            for (j = 0; j < 64; j++)
-            {
-                if (Player.Spellcasting.Spells[j / 32][j % 32].Learned)
-                {
-                    numKnown++;
-                }
-            }
-            Player.SpareSpellSlots = numAllowed - numKnown;
-            for (i = 63; i >= 0; i--)
-            {
-                if (numKnown == 0)
-                {
-                    break;
-                }
-                j = Player.Spellcasting.SpellOrder[i];
-                if (j >= 99)
-                {
-                    continue;
-                }
-                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level <= Player.Level)
-                {
-                    continue;
-                }
-                if (!sPtr.Learned)
-                {
-                    continue;
-                }
-                sPtr.Forgotten = true;
-                sPtr.Learned = false;
-                numKnown--;
-                MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
-                Player.SpareSpellSlots++;
-            }
-            for (i = 63; i >= 0; i--)
-            {
-                if (Player.SpareSpellSlots >= 0)
-                {
-                    break;
-                }
-                if (numKnown == 0)
-                {
-                    break;
-                }
-                j = Player.Spellcasting.SpellOrder[i];
-                if (j >= 99)
-                {
-                    continue;
-                }
-                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
-                if (!sPtr.Learned)
-                {
-                    continue;
-                }
-                sPtr.Forgotten = true;
-                sPtr.Learned = false;
-                numKnown--;
-                MsgPrint($"You have forgotten the {p} of {sPtr.Name}.");
-                Player.SpareSpellSlots++;
-            }
-            int forgottenTotal = 0;
-            for (int l = 0; l < 64; l++)
-            {
-                if (Player.Spellcasting.Spells[l / 32][l % 32].Forgotten)
-                {
-                    forgottenTotal++;
-                }
-            }
-            for (i = 0; i < 64; i++)
-            {
-                if (Player.SpareSpellSlots <= 0)
-                {
-                    break;
-                }
-                if (forgottenTotal == 0)
-                {
-                    break;
-                }
-                j = Player.Spellcasting.SpellOrder[i];
-                if (j >= 99)
-                {
-                    break;
-                }
-                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level > Player.Level)
-                {
-                    continue;
-                }
-                if (!sPtr.Forgotten)
-                {
-                    continue;
-                }
-                sPtr.Forgotten = false;
-                sPtr.Learned = true;
-                forgottenTotal--;
-                if (!FullScreenOverlay)
-                {
-                    MsgPrint($"You have remembered the {p} of {sPtr.Name}.");
-                }
-                Player.SpareSpellSlots--;
-            }
-            int k = 0;
-            int limit = Player.Realm2 == Realm.None ? 32 : 64;
-            for (j = 0; j < limit; j++)
-            {
-                sPtr = Player.Spellcasting.Spells[j / 32][j % 32];
-                if (sPtr.Level > Player.Level)
-                {
-                    continue;
-                }
-                if (sPtr.Learned)
-                {
-                    continue;
-                }
-                k++;
-            }
-            if (Player.Realm2 == 0)
-            {
-                if (k > 32)
-                {
-                    k = 32;
-                }
-            }
-            else
-            {
-                if (k > 64)
-                {
-                    k = 64;
-                }
-            }
-            if (Player.SpareSpellSlots > k)
-            {
-                Player.SpareSpellSlots = k;
-            }
-            if (Player.OldSpareSpellSlots != Player.SpareSpellSlots)
-            {
-                if (Player.SpareSpellSlots != 0)
-                {
-                    if (!FullScreenOverlay)
-                    {
-                        string suffix = Player.SpareSpellSlots != 1 ? "s" : "";
-                        MsgPrint($"You can learn {Player.SpareSpellSlots} more {p}{suffix}.");
-                    }
-                }
-                Player.OldSpareSpellSlots = Player.SpareSpellSlots;
-                RedrawStudyFlaggedAction.Set();
             }
         }
 

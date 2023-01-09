@@ -264,7 +264,8 @@
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.UpdateHealthFlaggedAction.Set();
             saveGame.UpdateManaFlaggedAction.Set();
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
+            saveGame.UpdateSpellsFlaggedAction.Set();
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
