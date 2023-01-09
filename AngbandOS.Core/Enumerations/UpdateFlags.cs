@@ -10,7 +10,6 @@ namespace AngbandOS.Enumerations
 {
     internal class UpdateFlags
     {
-        public const uint UpdateBonuses = 0x00000001;
         public const uint UpdateDistances = 0x02000000;
         public const uint UpdateLight = 0x00200000;
         public const uint UpdateMonsters = 0x01000000;

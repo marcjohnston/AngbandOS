@@ -13,6 +13,7 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class HandsInventorySlot : EquipmentInventorySlot
     {
+        private bool OldRestrictingGloves;
         private HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "l";
         public override int[] InventorySlots => new int[] { InventorySlot.Hands };
@@ -34,18 +35,18 @@ namespace AngbandOS.Core.InventorySlots
                     if (oPtr.BaseItemCategory != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
                     {
                         msp = 3 * msp / 4;
-                        if (!SaveGame.Player.OldRestrictingGloves)
+                        if (!OldRestrictingGloves)
                         {
                             SaveGame.MsgPrint("Your covered hands feel unsuitable for spellcasting.");
-                            SaveGame.Player.OldRestrictingGloves = true;
+                            OldRestrictingGloves = true;
                         }
                     }
                     else
                     {
-                        if (SaveGame.Player.OldRestrictingGloves)
+                        if (OldRestrictingGloves)
                         {
                             SaveGame.MsgPrint("Your hands feel more suitable for spellcasting.");
-                            SaveGame.Player.OldRestrictingGloves = false;
+                            OldRestrictingGloves = false;
                         }
                     }
                 }

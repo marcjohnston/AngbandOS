@@ -86,8 +86,6 @@ namespace AngbandOS
         public int EnergyUse;
         public bool HackMind;
         public Level Level;
-        public bool MartialArtistArmourAux;
-        public bool MartialArtistNotifyAux;
         public bool NewLevelFlag;
         public Player Player;
         public bool Playing;
@@ -948,7 +946,7 @@ namespace AngbandOS
             if (stopSearch && Player.IsSearching)
             {
                 Player.IsSearching = false;
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                UpdateBonusesFlaggedAction.Set();
                 RedrawStateFlaggedAction.Set();
             }
         }
@@ -1544,11 +1542,6 @@ namespace AngbandOS
                 return;
             }
             UpdateBonusesFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateBonuses);
-                CalcBonuses();
-            }
             UpdateTorchRadiusFlaggedAction.Check();
             UpdateHealthFlaggedAction.Check();
             UpdateManaFlaggedAction.Check();
@@ -1590,7 +1583,7 @@ namespace AngbandOS
                 Level.UpdateMonsters(true);
             }
             UpdateBonusesFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
+            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMonsters))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMonsters);
                 Level.UpdateMonsters(false);
@@ -1909,7 +1902,7 @@ namespace AngbandOS
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
             UpdateSpellsFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             UpdateTorchRadiusFlaggedAction.Set();
             UpdateStuff();
             RedrawStuff();
@@ -1921,7 +1914,7 @@ namespace AngbandOS
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
             UpdateSpellsFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             NoticeStuff();
             UpdateStuff();
@@ -3389,7 +3382,7 @@ namespace AngbandOS
             }
             s = oPtr.Count != 1 ? "were" : "was";
             MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             return true;
         }
 
@@ -3518,7 +3511,7 @@ namespace AngbandOS
                 oPtr.IdentCursed = false;
                 oPtr.IdentSense = true;
                 oPtr.Inscription = "uncursed";
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                UpdateBonusesFlaggedAction.Set();
             }
             if (oPtr.Characteristics.Blessed)
             {
@@ -3574,7 +3567,7 @@ namespace AngbandOS
                     MsgPrint($"{your} {oName} {s} disenchanted!");
                 }
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
         }
 
         public void CallChaos()
@@ -4693,7 +4686,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             return true;
         }
@@ -4832,7 +4825,7 @@ namespace AngbandOS
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
             oPtr.IdentMental = true;
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             HandleStuff();
             string oName = oPtr.Description(true, 3);
@@ -4880,7 +4873,7 @@ namespace AngbandOS
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             string oName = oPtr.Description(true, 3);
             if (item >= InventorySlot.MeleeWeapon)
@@ -4979,7 +4972,7 @@ namespace AngbandOS
                 oPtr.IdentKnown = false;
                 oPtr.IdentSense = false;
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             Level.WizDark();
             return true;
@@ -6436,7 +6429,7 @@ namespace AngbandOS
             }
             MsgPrint($"Your {oName} is damaged!");
             oPtr.BonusArmourClass--;
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            UpdateBonusesFlaggedAction.Set();
             return true;
         }
 
@@ -6499,7 +6492,7 @@ namespace AngbandOS
                     oPtr.RandartItemCharacteristics.HeavyCurse = false;
                 }
                 oPtr.Inscription = "uncursed";
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                UpdateBonusesFlaggedAction.Set();
                 cnt++;
             }
             return cnt > 0;
@@ -7208,7 +7201,7 @@ namespace AngbandOS
                 item.RandartItemCharacteristics.Clear();
                 item.IdentCursed = true;
                 item.IdentBroken = true;
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                UpdateBonusesFlaggedAction.Set();
                 UpdateManaFlaggedAction.Set();
             }
             return true;
@@ -7249,7 +7242,7 @@ namespace AngbandOS
                 item.RandartItemCharacteristics.Clear();
                 item.IdentCursed = true;
                 item.IdentBroken = true;
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                UpdateBonusesFlaggedAction.Set();
                 UpdateManaFlaggedAction.Set();
             }
             return true;
@@ -12405,7 +12398,7 @@ namespace AngbandOS
                         Player.Spellcasting = new Spellcasting(Player);
                         Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
                         UpdateHealthFlaggedAction.Set();
-                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                        UpdateBonusesFlaggedAction.Set();
                         UpdateStuff();
                         Player.Health = Player.MaxHealth;
                         Player.Mana = Player.MaxMana;
@@ -16552,1138 +16545,6 @@ namespace AngbandOS
             }
         }
 
-        private readonly int[][] _blowsTable =
-        {
-            new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},
-            new[] {1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4},
-            new[] {1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5},
-            new[] {1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 5},
-            new[] {1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5},
-            new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
-            new[] {2, 2, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6},
-            new[] {2, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 6},
-            new[] {3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6},
-            new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6},
-            new[] {3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6},
-            new[] {3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6}
-        };
-
-        public void CalcBonuses()
-        {
-            int i;
-            int extraShots;
-            Item oPtr;
-            int oldSpeed = Player.Speed;
-            bool oldTelepathy = Player.HasTelepathy;
-            bool oldSeeInv = Player.HasSeeInvisibility;
-            int oldDisAc = Player.DisplayedBaseArmourClass;
-            int oldDisToA = Player.DisplayedArmourClassBonus;
-            int extraBlows = extraShots = 0;
-            for (i = 0; i < 6; i++)
-            {
-                Player.AbilityScores[i].Bonus = 0;
-            }
-            Player.DisplayedBaseArmourClass = 0;
-            Player.BaseArmourClass = 0;
-            Player.DisplayedAttackBonus = 0;
-            Player.AttackBonus = 0;
-            Player.DisplayedDamageBonus = 0;
-            Player.DamageBonus = 0;
-            Player.DisplayedArmourClassBonus = 0;
-            Player.ArmourClassBonus = 0;
-            Player.HasAggravation = false;
-            Player.HasRandomTeleport = false;
-            Player.HasExperienceDrain = false;
-            Player.HasBlessedBlade = false;
-            Player.HasExtraMight = false;
-            Player.HasQuakeWeapon = false;
-            Player.HasSeeInvisibility = false;
-            Player.HasFreeAction = false;
-            Player.HasSlowDigestion = false;
-            Player.HasRegeneration = false;
-            Player.HasFeatherFall = false;
-            Player.HasHoldLife = false;
-            Player.HasTelepathy = false;
-            Player.HasGlow = false;
-            Player.HasSustainStrength = false;
-            Player.HasSustainIntelligence = false;
-            Player.HasSustainWisdom = false;
-            Player.HasSustainConstitution = false;
-            Player.HasSustainDexterity = false;
-            Player.HasSustainCharisma = false;
-            Player.HasAcidResistance = false;
-            Player.HasLightningResistance = false;
-            Player.HasFireResistance = false;
-            Player.HasColdResistance = false;
-            Player.HasPoisonResistance = false;
-            Player.HasConfusionResistance = false;
-            Player.HasSoundResistance = false;
-            Player.HasTimeResistance = false;
-            Player.HasLightResistance = false;
-            Player.HasDarkResistance = false;
-            Player.HasChaosResistance = false;
-            Player.HasDisenchantResistance = false;
-            Player.HasShardResistance = false;
-            Player.HasNexusResistance = false;
-            Player.HasBlindnessResistance = false;
-            Player.HasNetherResistance = false;
-            Player.HasFearResistance = false;
-            Player.HasElementalVulnerability = false;
-            Player.HasReflection = false;
-            Player.HasFireShield = false;
-            Player.HasLightningShield = false;
-            Player.HasAntiMagic = false;
-            Player.HasAntiTeleport = false;
-            Player.HasAntiTheft = false;
-            Player.HasAcidImmunity = false;
-            Player.HasLightningImmunity = false;
-            Player.HasFireImmunity = false;
-            Player.HasColdImmunity = false;
-            Player.InfravisionRange = Player.Race.Infravision;
-            Player.SkillDisarmTraps = Player.Race.BaseDisarmBonus + Player.Profession.BaseDisarmBonus;
-            Player.SkillUseDevice = Player.Race.BaseDeviceBonus + Player.Profession.BaseDeviceBonus;
-            Player.SkillSavingThrow = Player.Race.BaseSaveBonus + Player.Profession.BaseSaveBonus;
-            Player.SkillStealth = Player.Race.BaseStealthBonus + Player.Profession.BaseStealthBonus;
-            Player.SkillSearching = Player.Race.BaseSearchBonus + Player.Profession.BaseSearchBonus;
-            Player.SkillSearchFrequency = Player.Race.BaseSearchFrequency + Player.Profession.BaseSearchFrequency;
-            Player.SkillMelee = Player.Race.BaseMeleeAttackBonus + Player.Profession.BaseMeleeAttackBonus;
-            Player.SkillRanged = Player.Race.BaseRangedAttackBonus + Player.Profession.BaseRangedAttackBonus;
-            Player.SkillThrowing = Player.Race.BaseRangedAttackBonus + Player.Profession.BaseRangedAttackBonus;
-            Player.SkillDigging = 0;
-            if ((Player.ProfessionIndex == CharacterClass.Warrior && Player.Level > 29) ||
-                (Player.ProfessionIndex == CharacterClass.Paladin && Player.Level > 39) ||
-                (Player.ProfessionIndex == CharacterClass.Fanatic && Player.Level > 39))
-            {
-                Player.HasFearResistance = true;
-            }
-            if (Player.ProfessionIndex == CharacterClass.Fanatic && Player.Level > 29)
-            {
-                Player.HasChaosResistance = true;
-            }
-            if (Player.ProfessionIndex == CharacterClass.Cultist && Player.Level > 19)
-            {
-                Player.HasChaosResistance = true;
-            }
-            if (Player.ProfessionIndex == CharacterClass.Mindcrafter)
-            {
-                if (Player.Level > 9)
-                {
-                    Player.HasFearResistance = true;
-                }
-                if (Player.Level > 19)
-                {
-                    Player.HasSustainWisdom = true;
-                }
-                if (Player.Level > 29)
-                {
-                    Player.HasConfusionResistance = true;
-                }
-                if (Player.Level > 39)
-                {
-                    Player.HasTelepathy = true;
-                }
-            }
-            if (Player.ProfessionIndex == CharacterClass.Monk && Player.Level > 24 && !MartialArtistHeavyArmour())
-            {
-                Player.HasFreeAction = true;
-            }
-            if (Player.ProfessionIndex == CharacterClass.Mystic)
-            {
-                if (Player.Level > 9)
-                {
-                    Player.HasConfusionResistance = true;
-                }
-                if (Player.Level > 24)
-                {
-                    Player.HasFearResistance = true;
-                }
-                if (Player.Level > 29 && !MartialArtistHeavyArmour())
-                {
-                    Player.HasFreeAction = true;
-                }
-                if (Player.Level > 39)
-                {
-                    Player.HasTelepathy = true;
-                }
-            }
-            if (Player.ProfessionIndex == CharacterClass.ChosenOne)
-            {
-                Player.HasGlow = true;
-                if (Player.Level >= 2)
-                {
-                    Player.HasConfusionResistance = true;
-                }
-                if (Player.Level >= 4)
-                {
-                    Player.HasFearResistance = true;
-                }
-                if (Player.Level >= 6)
-                {
-                    Player.HasBlindnessResistance = true;
-                }
-                if (Player.Level >= 8)
-                {
-                    Player.HasFeatherFall = true;
-                }
-                if (Player.Level >= 10)
-                {
-                    Player.HasSeeInvisibility = true;
-                }
-                if (Player.Level >= 12)
-                {
-                    Player.HasSlowDigestion = true;
-                }
-                if (Player.Level >= 14)
-                {
-                    Player.HasSustainConstitution = true;
-                }
-                if (Player.Level >= 16)
-                {
-                    Player.HasPoisonResistance = true;
-                }
-                if (Player.Level >= 18)
-                {
-                    Player.HasSustainDexterity = true;
-                }
-                if (Player.Level >= 20)
-                {
-                    Player.HasSustainStrength = true;
-                }
-                if (Player.Level >= 22)
-                {
-                    Player.HasHoldLife = true;
-                }
-                if (Player.Level >= 24)
-                {
-                    Player.HasFreeAction = true;
-                }
-                if (Player.Level >= 26)
-                {
-                    Player.HasTelepathy = true;
-                }
-                if (Player.Level >= 28)
-                {
-                    Player.HasDarkResistance = true;
-                }
-                if (Player.Level >= 30)
-                {
-                    Player.HasLightResistance = true;
-                }
-                if (Player.Level >= 32)
-                {
-                    Player.HasSustainCharisma = true;
-                }
-                if (Player.Level >= 34)
-                {
-                    Player.HasSoundResistance = true;
-                }
-                if (Player.Level >= 36)
-                {
-                    Player.HasDisenchantResistance = true;
-                }
-                if (Player.Level >= 38)
-                {
-                    Player.HasRegeneration = true;
-                }
-                if (Player.Level >= 40)
-                {
-                    Player.HasSustainIntelligence = true;
-                }
-                if (Player.Level >= 42)
-                {
-                    Player.HasChaosResistance = true;
-                }
-                if (Player.Level >= 44)
-                {
-                    Player.HasSustainWisdom = true;
-                }
-                if (Player.Level >= 46)
-                {
-                    Player.HasNexusResistance = true;
-                }
-                if (Player.Level >= 48)
-                {
-                    Player.HasShardResistance = true;
-                }
-                if (Player.Level >= 50)
-                {
-                    Player.HasNetherResistance = true;
-                }
-            }
-            Player.Race.CalcBonuses(this);
-            Player.Speed = 110;
-            Player.MeleeAttacksPerRound = 1;
-            Player.MissileAttacksPerRound = 1;
-            Player.AmmunitionItemCategory = 0;
-            for (i = 0; i < 6; i++)
-            {
-                Player.AbilityScores[i].Bonus += Player.Race.AbilityBonus[i] + Player.Profession.AbilityBonus[i];
-            }
-            Player.AbilityScores[Ability.Strength].Bonus += Player.Dna.StrengthBonus;
-            Player.AbilityScores[Ability.Intelligence].Bonus += Player.Dna.IntelligenceBonus;
-            Player.AbilityScores[Ability.Wisdom].Bonus += Player.Dna.WisdomBonus;
-            Player.AbilityScores[Ability.Dexterity].Bonus += Player.Dna.DexterityBonus;
-            Player.AbilityScores[Ability.Constitution].Bonus += Player.Dna.ConstitutionBonus;
-            Player.AbilityScores[Ability.Charisma].Bonus += Player.Dna.CharismaBonus;
-            Player.Speed += Player.Dna.SpeedBonus;
-            Player.HasRegeneration |= Player.Dna.Regen;
-            Player.SkillSearchFrequency += Player.Dna.SearchBonus;
-            Player.SkillSearching += Player.Dna.SearchBonus;
-            Player.InfravisionRange += Player.Dna.InfravisionBonus;
-            Player.HasLightningShield |= Player.Dna.ElecHit;
-            Player.HasFireShield |= Player.Dna.FireHit;
-            Player.HasGlow |= Player.Dna.FireHit;
-            Player.ArmourClassBonus += Player.Dna.ArmourClassBonus;
-            Player.DisplayedArmourClassBonus += Player.Dna.ArmourClassBonus;
-            Player.HasFeatherFall |= Player.Dna.FeatherFall;
-            Player.HasFearResistance |= Player.Dna.ResFear;
-            Player.HasTimeResistance |= Player.Dna.ResTime;
-            Player.HasTelepathy |= Player.Dna.Esp;
-            Player.SkillStealth += Player.Dna.StealthBonus;
-            Player.HasFreeAction |= Player.Dna.FreeAction;
-            Player.HasElementalVulnerability |= Player.Dna.Vulnerable;
-            if (Player.Dna.MagicResistance)
-            {
-                Player.SkillSavingThrow += 15 + (Player.Level / 5);
-            }
-            if (Player.Dna.SuppressRegen)
-            {
-                Player.HasRegeneration = false;
-            }
-            if (Player.Dna.CharismaOverride)
-            {
-                Player.AbilityScores[Ability.Charisma].Bonus = 0;
-            }
-            if (Player.Dna.SustainAll)
-            {
-                Player.HasSustainConstitution = true;
-                if (Player.Level > 9)
-                {
-                    Player.HasSustainStrength = true;
-                }
-                if (Player.Level > 19)
-                {
-                    Player.HasSustainDexterity = true;
-                }
-                if (Player.Level > 29)
-                {
-                    Player.HasSustainWisdom = true;
-                }
-                if (Player.Level > 39)
-                {
-                    Player.HasSustainIntelligence = true;
-                }
-                if (Player.Level > 49)
-                {
-                    Player.HasSustainCharisma = true;
-                }
-            }
-            for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
-            {
-                oPtr = Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Characteristics.Str)
-                {
-                    Player.AbilityScores[Ability.Strength].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Int)
-                {
-                    Player.AbilityScores[Ability.Intelligence].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Wis)
-                {
-                    Player.AbilityScores[Ability.Wisdom].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Dex)
-                {
-                    Player.AbilityScores[Ability.Dexterity].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Con)
-                {
-                    Player.AbilityScores[Ability.Constitution].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Cha)
-                {
-                    Player.AbilityScores[Ability.Charisma].Bonus += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Stealth)
-                {
-                    Player.SkillStealth += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Search)
-                {
-                    Player.SkillSearching += oPtr.TypeSpecificValue * 5;
-                }
-                if (oPtr.Characteristics.Search)
-                {
-                    Player.SkillSearchFrequency += oPtr.TypeSpecificValue * 5;
-                }
-                if (oPtr.Characteristics.Infra)
-                {
-                    Player.InfravisionRange += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Tunnel)
-                {
-                    Player.SkillDigging += oPtr.TypeSpecificValue * 20;
-                }
-                if (oPtr.Characteristics.Speed)
-                {
-                    Player.Speed += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Blows)
-                {
-                    extraBlows += oPtr.TypeSpecificValue;
-                }
-                if (oPtr.Characteristics.Impact)
-                {
-                    Player.HasQuakeWeapon = true;
-                }
-                if (oPtr.Characteristics.AntiTheft)
-                {
-                    Player.HasAntiTheft = true;
-                }
-                if (oPtr.Characteristics.XtraShots)
-                {
-                    extraShots++;
-                }
-                if (oPtr.Characteristics.Aggravate)
-                {
-                    Player.HasAggravation = true;
-                }
-                if (oPtr.Characteristics.Teleport)
-                {
-                    Player.HasRandomTeleport = true;
-                }
-                if (oPtr.Characteristics.DrainExp)
-                {
-                    Player.HasExperienceDrain = true;
-                }
-                if (oPtr.Characteristics.Blessed)
-                {
-                    Player.HasBlessedBlade = true;
-                }
-                if (oPtr.Characteristics.XtraMight)
-                {
-                    Player.HasExtraMight = true;
-                }
-                if (oPtr.Characteristics.SlowDigest)
-                {
-                    Player.HasSlowDigestion = true;
-                }
-                if (oPtr.Characteristics.Regen)
-                {
-                    Player.HasRegeneration = true;
-                }
-                if (oPtr.Characteristics.Telepathy)
-                {
-                    Player.HasTelepathy = true;
-                }
-                if (oPtr.Characteristics.Lightsource)
-                {
-                    Player.HasGlow = true;
-                }
-                if (oPtr.Characteristics.SeeInvis)
-                {
-                    Player.HasSeeInvisibility = true;
-                }
-                if (oPtr.Characteristics.Feather)
-                {
-                    Player.HasFeatherFall = true;
-                }
-                if (oPtr.Characteristics.FreeAct)
-                {
-                    Player.HasFreeAction = true;
-                }
-                if (oPtr.Characteristics.HoldLife)
-                {
-                    Player.HasHoldLife = true;
-                }
-                if (oPtr.Characteristics.Wraith)
-                {
-                    Player.TimedEtherealness.Reset(Math.Max(Player.TimedEtherealness.TimeRemaining, 20));
-                }
-                if (oPtr.Characteristics.ImFire)
-                {
-                    Player.HasFireImmunity = true;
-                }
-                if (oPtr.Characteristics.ImAcid)
-                {
-                    Player.HasAcidImmunity = true;
-                }
-                if (oPtr.Characteristics.ImCold)
-                {
-                    Player.HasColdImmunity = true;
-                }
-                if (oPtr.Characteristics.ImElec)
-                {
-                    Player.HasLightningImmunity = true;
-                }
-                if (oPtr.Characteristics.ResAcid)
-                {
-                    Player.HasAcidResistance = true;
-                }
-                if (oPtr.Characteristics.ResElec)
-                {
-                    Player.HasLightningResistance = true;
-                }
-                if (oPtr.Characteristics.ResFire)
-                {
-                    Player.HasFireResistance = true;
-                }
-                if (oPtr.Characteristics.ResCold)
-                {
-                    Player.HasColdResistance = true;
-                }
-                if (oPtr.Characteristics.ResPois)
-                {
-                    Player.HasPoisonResistance = true;
-                }
-                if (oPtr.Characteristics.ResFear)
-                {
-                    Player.HasFearResistance = true;
-                }
-                if (oPtr.Characteristics.ResConf)
-                {
-                    Player.HasConfusionResistance = true;
-                }
-                if (oPtr.Characteristics.ResSound)
-                {
-                    Player.HasSoundResistance = true;
-                }
-                if (oPtr.Characteristics.ResLight)
-                {
-                    Player.HasLightResistance = true;
-                }
-                if (oPtr.Characteristics.ResDark)
-                {
-                    Player.HasDarkResistance = true;
-                }
-                if (oPtr.Characteristics.ResChaos)
-                {
-                    Player.HasChaosResistance = true;
-                }
-                if (oPtr.Characteristics.ResDisen)
-                {
-                    Player.HasDisenchantResistance = true;
-                }
-                if (oPtr.Characteristics.ResShards)
-                {
-                    Player.HasShardResistance = true;
-                }
-                if (oPtr.Characteristics.ResNexus)
-                {
-                    Player.HasNexusResistance = true;
-                }
-                if (oPtr.Characteristics.ResBlind)
-                {
-                    Player.HasBlindnessResistance = true;
-                }
-                if (oPtr.Characteristics.ResNether)
-                {
-                    Player.HasNetherResistance = true;
-                }
-                if (oPtr.Characteristics.Reflect)
-                {
-                    Player.HasReflection = true;
-                }
-                if (oPtr.Characteristics.ShFire)
-                {
-                    Player.HasFireShield = true;
-                }
-                if (oPtr.Characteristics.ShElec)
-                {
-                    Player.HasLightningShield = true;
-                }
-                if (oPtr.Characteristics.NoMagic)
-                {
-                    Player.HasAntiMagic = true;
-                }
-                if (oPtr.Characteristics.NoTele)
-                {
-                    Player.HasAntiTeleport = true;
-                }
-                if (oPtr.Characteristics.SustStr)
-                {
-                    Player.HasSustainStrength = true;
-                }
-                if (oPtr.Characteristics.SustInt)
-                {
-                    Player.HasSustainIntelligence = true;
-                }
-                if (oPtr.Characteristics.SustWis)
-                {
-                    Player.HasSustainWisdom = true;
-                }
-                if (oPtr.Characteristics.SustDex)
-                {
-                    Player.HasSustainDexterity = true;
-                }
-                if (oPtr.Characteristics.SustCon)
-                {
-                    Player.HasSustainConstitution = true;
-                }
-                if (oPtr.Characteristics.SustCha)
-                {
-                    Player.HasSustainCharisma = true;
-                }
-                Player.BaseArmourClass += oPtr.BaseArmourClass;
-                Player.DisplayedBaseArmourClass += oPtr.BaseArmourClass;
-                Player.ArmourClassBonus += oPtr.BonusArmourClass;
-                if (oPtr.IsKnown())
-                {
-                    Player.DisplayedArmourClassBonus += oPtr.BonusArmourClass;
-                }
-                if (i == InventorySlot.MeleeWeapon)
-                {
-                    continue;
-                }
-                if (i == InventorySlot.RangedWeapon)
-                {
-                    continue;
-                }
-                Player.AttackBonus += oPtr.BonusToHit;
-                Player.DamageBonus += oPtr.BonusDamage;
-                if (oPtr.IsKnown())
-                {
-                    Player.DisplayedAttackBonus += oPtr.BonusToHit;
-                }
-                if (oPtr.IsKnown())
-                {
-                    Player.DisplayedDamageBonus += oPtr.BonusDamage;
-                }
-            }
-            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
-            {
-                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
-                {
-                    if (inventorySlot.Count == 0)
-                    {
-                        int bareArmourBonus = inventorySlot.BareArmourClassBonus;
-                        Player.ArmourClassBonus += bareArmourBonus;
-                        Player.DisplayedArmourClassBonus += bareArmourBonus;
-                    }
-                }
-            }
-            if (Player.HasFireShield)
-            {
-                Player.HasGlow = true;
-            }
-            for (i = 0; i < 6; i++)
-            {
-                int ind;
-                int top = Player.AbilityScores[i]
-                    .ModifyStatValue(Player.AbilityScores[i].InnateMax, Player.AbilityScores[i].Bonus);
-                if (Player.AbilityScores[i].AdjustedMax != top)
-                {
-                    Player.AbilityScores[i].AdjustedMax = top;
-                    RedrawStatsFlaggedAction.Set();
-                }
-                int use = Player.AbilityScores[i]
-                    .ModifyStatValue(Player.AbilityScores[i].Innate, Player.AbilityScores[i].Bonus);
-                if (i == Ability.Charisma && Player.Dna.CharismaOverride)
-                {
-                    if (use < 8 + (2 * Player.Level))
-                    {
-                        use = 8 + (2 * Player.Level);
-                    }
-                }
-                if (Player.AbilityScores[i].Adjusted != use)
-                {
-                    Player.AbilityScores[i].Adjusted = use;
-                    RedrawStatsFlaggedAction.Set();
-                }
-                if (use <= 18)
-                {
-                    ind = use - 3;
-                }
-                else if (use <= 18 + 219)
-                {
-                    ind = 15 + ((use - 18) / 10);
-                }
-                else
-                {
-                    ind = 37;
-                }
-                if (Player.AbilityScores[i].TableIndex != ind)
-                {
-                    Player.AbilityScores[i].TableIndex = ind;
-                    if (i == Ability.Constitution)
-                    {
-                        UpdateHealthFlaggedAction.Set();
-                    }
-                    else if (i == Ability.Intelligence)
-                    {
-                        if (Player.Spellcasting.SpellStat == Ability.Intelligence)
-                        {
-                            UpdateManaFlaggedAction.Set();
-                            UpdateSpellsFlaggedAction.Set();
-                        }
-                    }
-                    else if (i == Ability.Wisdom)
-                    {
-                        if (Player.Spellcasting.SpellStat == Ability.Wisdom)
-                        {
-                            UpdateManaFlaggedAction.Set();
-                            UpdateSpellsFlaggedAction.Set();
-                        }
-                    }
-                    else if (i == Ability.Charisma)
-                    {
-                        if (Player.Spellcasting.SpellStat == Ability.Charisma)
-                        {
-                            UpdateManaFlaggedAction.Set();
-                            UpdateSpellsFlaggedAction.Set();
-                        }
-                    }
-                }
-            }
-            if (Player.TimedStun.TimeRemaining > 50)
-            {
-                Player.AttackBonus -= 20;
-                Player.DisplayedAttackBonus -= 20;
-                Player.DamageBonus -= 20;
-                Player.DisplayedDamageBonus -= 20;
-            }
-            else if (Player.TimedStun.TimeRemaining != 0)
-            {
-                Player.AttackBonus -= 5;
-                Player.DisplayedAttackBonus -= 5;
-                Player.DamageBonus -= 5;
-                Player.DisplayedDamageBonus -= 5;
-            }
-            if (Player.TimedInvulnerability.TimeRemaining != 0)
-            {
-                Player.ArmourClassBonus += 100;
-                Player.DisplayedArmourClassBonus += 100;
-            }
-            if (Player.TimedEtherealness.TimeRemaining != 0)
-            {
-                Player.ArmourClassBonus += 100;
-                Player.DisplayedArmourClassBonus += 100;
-                Player.HasReflection = true;
-            }
-            if (Player.TimedBlessing.TimeRemaining != 0)
-            {
-                Player.ArmourClassBonus += 5;
-                Player.DisplayedArmourClassBonus += 5;
-                Player.AttackBonus += 10;
-                Player.DisplayedAttackBonus += 10;
-            }
-            if (Player.TimedStoneskin.TimeRemaining != 0)
-            {
-                Player.ArmourClassBonus += 50;
-                Player.DisplayedArmourClassBonus += 50;
-            }
-            if (Player.TimedHeroism.TimeRemaining != 0)
-            {
-                Player.AttackBonus += 12;
-                Player.DisplayedAttackBonus += 12;
-            }
-            if (Player.TimedSuperheroism.TimeRemaining != 0)
-            {
-                Player.AttackBonus += 24;
-                Player.DisplayedAttackBonus += 24;
-                Player.ArmourClassBonus -= 10;
-                Player.DisplayedArmourClassBonus -= 10;
-            }
-            if (Player.TimedHaste.TimeRemaining != 0)
-            {
-                Player.Speed += 10;
-            }
-            if (Player.TimedSlow.TimeRemaining != 0)
-            {
-                Player.Speed -= 10;
-            }
-            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && !MartialArtistHeavyArmour())
-            {
-                Player.Speed += Player.Level / 10;
-            }
-            if (Player.TimedTelepathy.TimeRemaining != 0)
-            {
-                Player.HasTelepathy = true;
-            }
-            if (Player.TimedSeeInvisibility.TimeRemaining != 0)
-            {
-                Player.HasSeeInvisibility = true;
-            }
-            if (Player.TimedInfravision.TimeRemaining != 0)
-            {
-                Player.InfravisionRange++;
-            }
-            if (Player.HasChaosResistance)
-            {
-                Player.HasConfusionResistance = true;
-            }
-            if (Player.TimedHeroism.TimeRemaining != 0 || Player.TimedSuperheroism.TimeRemaining != 0)
-            {
-                Player.HasFearResistance = true;
-            }
-            if (Player.HasTelepathy != oldTelepathy)
-            {
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            }
-            if (Player.HasSeeInvisibility != oldSeeInv)
-            {
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            }
-            int j = Player.WeightCarried;
-            i = WeightLimit();
-            if (j > i / 2)
-            {
-                Player.Speed -= (j - (i / 2)) / (i / 10);
-            }
-            if (Player.Food >= Constants.PyFoodMax)
-            {
-                Player.Speed -= 10;
-            }
-            if (Player.IsSearching)
-            {
-                Player.Speed -= 10;
-            }
-            if (Player.Speed != oldSpeed)
-            {
-                RedrawSpeedFlaggedAction.Set();
-            }
-            Player.ArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
-            Player.DamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
-            Player.AttackBonus += Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
-            Player.AttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
-            Player.DisplayedArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
-            Player.DisplayedDamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
-            Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Dexterity].DexAttackBonus;
-            Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
-            if (Player.DisplayedBaseArmourClass != oldDisAc || Player.DisplayedArmourClassBonus != oldDisToA)
-            {
-                RedrawArmorFlaggedAction.Set();
-            }
-            int hold = Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
-            oPtr = Player.Inventory[InventorySlot.RangedWeapon];
-            Player.HasHeavyBow = false;
-            if (hold < oPtr.Weight / 10)
-            {
-                Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                Player.HasHeavyBow = true;
-            }
-            if (oPtr.BaseItemCategory != null && !Player.HasHeavyBow)
-            {
-                // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)oPtr.BaseItemCategory;
-                Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
-                if (Player.ProfessionIndex == CharacterClass.Ranger && Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
-                {
-                    if (Player.Level >= 20)
-                    {
-                        Player.MissileAttacksPerRound++;
-                    }
-                    if (Player.Level >= 40)
-                    {
-                        Player.MissileAttacksPerRound++;
-                    }
-                }
-                if (Player.ProfessionIndex == CharacterClass.Warrior && Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
-                    Player.AmmunitionItemCategory >= ItemTypeEnum.Shot)
-                {
-                    if (Player.Level >= 25)
-                    {
-                        Player.MissileAttacksPerRound++;
-                    }
-                    if (Player.Level >= 50)
-                    {
-                        Player.MissileAttacksPerRound++;
-                    }
-                }
-                Player.MissileAttacksPerRound += extraShots;
-                if (Player.MissileAttacksPerRound < 1)
-                {
-                    Player.MissileAttacksPerRound = 1;
-                }
-            }
-            oPtr = Player.Inventory[InventorySlot.MeleeWeapon];
-            Player.HasHeavyWeapon = false;
-            if (hold < oPtr.Weight / 10)
-            {
-                Player.AttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                Player.DisplayedAttackBonus += 2 * (hold - (oPtr.Weight / 10));
-                Player.HasHeavyWeapon = true;
-            }
-            if (oPtr.BaseItemCategory != null && !Player.HasHeavyWeapon)
-            {
-                int num = 0, wgt = 0, mul = 0;
-                switch (Player.ProfessionIndex)
-                {
-                    case CharacterClass.Warrior:
-                        num = 6;
-                        wgt = 30;
-                        mul = 5;
-                        break;
-
-                    case CharacterClass.Mage:
-                    case CharacterClass.HighMage:
-                    case CharacterClass.Cultist:
-                    case CharacterClass.Channeler:
-                        num = 4;
-                        wgt = 40;
-                        mul = 2;
-                        break;
-
-                    case CharacterClass.Priest:
-                    case CharacterClass.Mindcrafter:
-                    case CharacterClass.Druid:
-                    case CharacterClass.ChosenOne:
-                        num = 5;
-                        wgt = 35;
-                        mul = 3;
-                        break;
-
-                    case CharacterClass.Rogue:
-                        num = 5;
-                        wgt = 30;
-                        mul = 3;
-                        break;
-
-                    case CharacterClass.Ranger:
-                        num = 5;
-                        wgt = 35;
-                        mul = 4;
-                        break;
-
-                    case CharacterClass.Paladin:
-                        num = 5;
-                        wgt = 30;
-                        mul = 4;
-                        break;
-
-                    case CharacterClass.WarriorMage:
-                        num = 5;
-                        wgt = 35;
-                        mul = 3;
-                        break;
-
-                    case CharacterClass.Fanatic:
-                        num = 5;
-                        wgt = 30;
-                        mul = 4;
-                        break;
-
-                    case CharacterClass.Monk:
-                    case CharacterClass.Mystic:
-                        num = Player.Level < 40 ? 3 : 4;
-                        wgt = 40;
-                        mul = 4;
-                        break;
-                }
-                int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
-                int strIndex = Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent * mul / div;
-                if (strIndex > 11)
-                {
-                    strIndex = 11;
-                }
-                int dexIndex = Player.AbilityScores[Ability.Dexterity].DexAttackSpeedComponent;
-                if (dexIndex > 11)
-                {
-                    dexIndex = 11;
-                }
-                Player.MeleeAttacksPerRound = _blowsTable[strIndex][dexIndex];
-                if (Player.MeleeAttacksPerRound > num)
-                {
-                    Player.MeleeAttacksPerRound = num;
-                }
-                Player.MeleeAttacksPerRound += extraBlows;
-                if (Player.ProfessionIndex == CharacterClass.Warrior)
-                {
-                    Player.MeleeAttacksPerRound += Player.Level / 15;
-                }
-                if (Player.MeleeAttacksPerRound < 1)
-                {
-                    Player.MeleeAttacksPerRound = 1;
-                }
-                Player.SkillDigging += oPtr.Weight / 10;
-            }
-            else if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
-            {
-                Player.MeleeAttacksPerRound = 0;
-                if (Player.Level > 9)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 19)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 29)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 34)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 39)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 44)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (Player.Level > 49)
-                {
-                    Player.MeleeAttacksPerRound++;
-                }
-                if (MartialArtistHeavyArmour())
-                {
-                    Player.MeleeAttacksPerRound /= 2;
-                }
-                Player.MeleeAttacksPerRound += 1 + extraBlows;
-                if (!MartialArtistHeavyArmour())
-                {
-                    Player.AttackBonus += Player.Level / 3;
-                    Player.DamageBonus += Player.Level / 3;
-                    Player.DisplayedAttackBonus += Player.Level / 3;
-                    Player.DisplayedDamageBonus += Player.Level / 3;
-                }
-            }
-            Player.HasUnpriestlyWeapon = false;
-            MartialArtistArmourAux = false;
-            if (Player.ProfessionIndex == CharacterClass.Warrior)
-            {
-                Player.AttackBonus += Player.Level / 5;
-                Player.DamageBonus += Player.Level / 5;
-                Player.DisplayedAttackBonus += Player.Level / 5;
-                Player.DisplayedDamageBonus += Player.Level / 5;
-            }
-            if ((Player.ProfessionIndex == CharacterClass.Priest || Player.ProfessionIndex == CharacterClass.Druid) &&
-                !Player.HasBlessedBlade && (oPtr.Category == ItemTypeEnum.Sword ||
-                                        oPtr.Category == ItemTypeEnum.Polearm))
-            {
-                Player.AttackBonus -= 2;
-                Player.DamageBonus -= 2;
-                Player.DisplayedAttackBonus -= 2;
-                Player.DisplayedDamageBonus -= 2;
-                Player.HasUnpriestlyWeapon = true;
-            }
-
-            // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
-            // todo: this should by characterclass
-            if (Player.ProfessionIndex == CharacterClass.Cultist &&
-                Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
-                !typeof(SwordBladeofChaos).IsAssignableFrom(oPtr.BaseItemCategory.GetType()))
-            {
-                oPtr.RefreshFlagBasedProperties();
-                if (!oPtr.Characteristics.Chaotic)
-                {
-                    Player.AttackBonus -= 10;
-                    Player.DamageBonus -= 10;
-                    Player.DisplayedAttackBonus -= 10;
-                    Player.DisplayedDamageBonus -= 10;
-                    Player.HasUnpriestlyWeapon = true;
-                }
-            }
-            if (MartialArtistHeavyArmour())
-            {
-                MartialArtistArmourAux = true;
-            }
-            Player.SkillStealth++;
-            Player.SkillDisarmTraps += Player.AbilityScores[Ability.Dexterity].DexDisarmBonus;
-            Player.SkillDisarmTraps += Player.AbilityScores[Ability.Intelligence].IntDisarmBonus;
-            Player.SkillUseDevice += Player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
-            Player.SkillSavingThrow += Player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
-            Player.SkillDigging += Player.AbilityScores[Ability.Strength].StrDiggingBonus;
-            Player.SkillDisarmTraps += (Player.Profession.DisarmBonusPerLevel * Player.Level) / 10;
-            Player.SkillUseDevice += (Player.Profession.DeviceBonusPerLevel * Player.Level) / 10;
-            Player.SkillSavingThrow += (Player.Profession.SaveBonusPerLevel * Player.Level) / 10;
-            Player.SkillStealth += (Player.Profession.StealthBonusPerLevel * Player.Level) / 10;
-            Player.SkillSearching += (Player.Profession.SearchBonusPerLevel * Player.Level) / 10;
-            Player.SkillSearchFrequency += (Player.Profession.SearchFrequencyPerLevel * Player.Level) / 10;
-            Player.SkillMelee += (Player.Profession.MeleeAttackBonusPerLevel * Player.Level) / 10;
-            Player.SkillRanged += (Player.Profession.RangedAttackBonusPerLevel * Player.Level) / 10;
-            Player.SkillThrowing += (Player.Profession.RangedAttackBonusPerLevel * Player.Level) / 10;
-            if (Player.SkillStealth > 30)
-            {
-                Player.SkillStealth = 30;
-            }
-            if (Player.SkillStealth < 0)
-            {
-                Player.SkillStealth = 0;
-            }
-            if (Player.SkillDigging < 1)
-            {
-                Player.SkillDigging = 1;
-            }
-            if (Player.HasAntiMagic && Player.SkillSavingThrow < 95)
-            {
-                Player.SkillSavingThrow = 95;
-            }
-            if (CharacterXtra)
-            {
-                return;
-            }
-            if (Player.OldHeavyBow != Player.HasHeavyBow) // TODO: This should be moved to the wield action
-            {
-                if (Player.HasHeavyBow)
-                {
-                    MsgPrint("You have trouble wielding such a heavy bow.");
-                }
-                else if (Player.Inventory[InventorySlot.RangedWeapon].BaseItemCategory != null)
-                {
-                    MsgPrint("You have no trouble wielding your bow.");
-                }
-                else
-                {
-                    MsgPrint("You feel relieved to put down your heavy bow.");
-                }
-                Player.OldHeavyBow = Player.HasHeavyBow;
-            }
-            if (Player.OldHeavyWeapon != Player.HasHeavyWeapon) // TODO: This should be moved to the wield action
-            {
-                if (Player.HasHeavyWeapon)
-                {
-                    MsgPrint("You have trouble wielding such a heavy weapon.");
-                }
-                else if (Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
-                {
-                    MsgPrint("You have no trouble wielding your weapon.");
-                }
-                else
-                {
-                    MsgPrint("You feel relieved to put down your heavy weapon.");
-                }
-                Player.OldHeavyWeapon = Player.HasHeavyWeapon;
-            }
-            if (Player.OldUnpriestlyWeapon != Player.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
-            {
-                if (Player.HasUnpriestlyWeapon)
-                {
-                    MsgPrint(Player.ProfessionIndex == CharacterClass.Cultist
-                        ? "Your weapon restricts the flow of chaos through you."
-                        : "You do not feel comfortable with your weapon.");
-                }
-                else if (Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
-                {
-                    MsgPrint("You feel comfortable with your weapon.");
-                }
-                else
-                {
-                    MsgPrint(Player.ProfessionIndex == CharacterClass.Cultist
-                        ? "Chaos flows freely through you again."
-                        : "You feel more comfortable after removing your weapon.");
-                }
-                Player.OldUnpriestlyWeapon = Player.HasUnpriestlyWeapon;
-            }
-            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistArmourAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
-            {
-                MsgPrint(MartialArtistHeavyArmour()
-                    ? "The weight of your armour disrupts your balance."
-                    : "You regain your balance.");
-                MartialArtistNotifyAux = MartialArtistArmourAux;
-            }
-        }
-
         public bool MartialArtistEmptyHands()
         {
             if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
@@ -17719,12 +16580,6 @@ namespace AngbandOS
                 }
             }
             return martialArtistArmWgt > 100 + (Player.Level * 4);
-        }
-
-        private int WeightLimit()
-        {
-            int i = Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100;
-            return i;
         }
     }
 }

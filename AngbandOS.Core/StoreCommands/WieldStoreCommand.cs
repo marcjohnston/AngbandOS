@@ -90,7 +90,7 @@
                 saveGame.MsgPrint("Oops! It feels deathly cold!");
                 wornItem.IdentSense = true;
             }
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            saveGame.UpdateBonusesFlaggedAction.Set();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.UpdateManaFlaggedAction.Set();
             saveGame.RedrawEquippyFlaggedAction.Set();

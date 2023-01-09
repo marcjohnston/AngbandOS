@@ -3,6 +3,7 @@
     [Serializable]
     internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     {
+        private int OldLightLevel;
         public UpdateTorchRadiusFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
         /// Compute the level of light.  The player may be wielding multiple sources of light.
@@ -29,11 +30,11 @@
             {
                 SaveGame.Player.LightLevel = 1;
             }
-            if (SaveGame.Player.OldLightLevel != SaveGame.Player.LightLevel)
+            if (OldLightLevel != SaveGame.Player.LightLevel)
             {
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                SaveGame.Player.OldLightLevel = SaveGame.Player.LightLevel;
+                OldLightLevel = SaveGame.Player.LightLevel;
             }
         }
     }

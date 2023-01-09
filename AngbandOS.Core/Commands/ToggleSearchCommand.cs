@@ -21,13 +21,13 @@ namespace AngbandOS.Commands
             if (saveGame.Player.IsSearching)
             {
                 saveGame.Player.IsSearching = false;
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.RedrawStateFlaggedAction.Set();
             }
             else
             {
                 saveGame.Player.IsSearching = true;
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.RedrawStateFlaggedAction.Set();
                 saveGame.RedrawSpeedFlaggedAction.Set();
             }

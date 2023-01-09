@@ -213,7 +213,7 @@ namespace AngbandOS.Mutations
                 _possessed.Add(mutation);
                 mutation.OnGain(this);
                 saveGame.MsgPrint(mutation.GainMessage);
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.HandleStuff();
                 return;
             }
@@ -249,7 +249,7 @@ namespace AngbandOS.Mutations
                 _notPossessed.Add(mutation);
                 SaveGame.MsgPrint(mutation.LoseMessage);
             } while (_possessed.Count > 0);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
 
@@ -281,7 +281,7 @@ namespace AngbandOS.Mutations
                 return;
             }
             SaveGame.MsgPrint("Oops! Fell out of mutation list!");
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
 

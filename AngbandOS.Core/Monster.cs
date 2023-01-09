@@ -439,7 +439,7 @@ namespace AngbandOS
             }
             SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
             player.Dna.GainMutation(saveGame);
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
 

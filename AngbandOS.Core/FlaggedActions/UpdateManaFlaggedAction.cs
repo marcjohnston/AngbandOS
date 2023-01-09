@@ -4,6 +4,13 @@ namespace AngbandOS.Core.FlaggedActions
     [Serializable]
     internal class UpdateManaFlaggedAction : FlaggedAction
     {
+        /// <summary>
+        /// Returns the previous computation of weight restricting armour.  This is used to render a message to the player, when the player puts on
+        /// or takes off armour that is restricting the spell casting ability.  This value is static because multiple pieces of armour
+        /// will have this affect.
+        /// </summary>
+        private bool OldRestrictingArmour;
+
         public UpdateManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
@@ -68,18 +75,18 @@ namespace AngbandOS.Core.FlaggedActions
                 if ((curWgt - maxWgt) / 10 > 0)
                 {
                     msp -= (curWgt - maxWgt) / 10;
-                    if (!SaveGame.Player.OldRestrictingArmour)
+                    if (!OldRestrictingArmour)
                     {
                         SaveGame.MsgPrint("The weight of your armour encumbers your movement.");
-                        SaveGame.Player.OldRestrictingArmour = true;
+                        OldRestrictingArmour = true;
                     }
                 }
                 else
                 {
-                    if (SaveGame.Player.OldRestrictingArmour)
+                    if (OldRestrictingArmour)
                     {
                         SaveGame.MsgPrint("You feel able to move more freely.");
-                        SaveGame.Player.OldRestrictingArmour = false;
+                        OldRestrictingArmour = false;
                     }
                 }
             }

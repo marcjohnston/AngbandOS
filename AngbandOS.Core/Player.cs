@@ -149,20 +149,8 @@ namespace AngbandOS
             }
         }
         public uint NoticeFlags;
-        public bool OldHeavyBow;
-        public bool OldHeavyWeapon;
-        public int OldLightLevel;
 
-        /// <summary>
-        /// Returns the previous computation of weight restricting armour.  This is used to render a message to the player, when the player puts on
-        /// or takes off armour that is restricting the spell casting ability.  This value is static because multiple pieces of armour
-        /// will have this affect.
-        /// </summary>
-        public bool OldRestrictingArmour;
-
-        public bool OldRestrictingGloves;
         public int OldSpareSpellSlots;
-        public bool OldUnpriestlyWeapon;
         public Profession Profession = new Profession();
         public int ProfessionIndex;
 
@@ -366,7 +354,7 @@ namespace AngbandOS
             CheckExperience();
             MaxLevelGained = Level;
             SaveGame.PrBasicRedrawAction.Set();
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
 
@@ -403,7 +391,7 @@ namespace AngbandOS
                 SaveGame.UpdateHealthFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
                 SaveGame.UpdateSpellsFlaggedAction.Set();
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.HandleStuff();
@@ -436,7 +424,7 @@ namespace AngbandOS
                 SaveGame.UpdateHealthFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
                 SaveGame.UpdateSpellsFlaggedAction.Set();
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.RedrawExpFlaggedAction.Set();
@@ -604,7 +592,7 @@ namespace AngbandOS
             {
                 AbilityScores[stat].Innate = cur;
                 AbilityScores[stat].InnateMax = max;
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
             }
             return res;
         }
@@ -1133,7 +1121,7 @@ namespace AngbandOS
             if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
             {
                 AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 return true;
             }
             return false;
@@ -1443,7 +1431,7 @@ namespace AngbandOS
                 return false;
             }
             SaveGame.Disturb(false);
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.RedrawHungerFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
@@ -1464,7 +1452,7 @@ namespace AngbandOS
             AbilityScores[ii].Innate = cur2;
             AbilityScores[jj].InnateMax = max1;
             AbilityScores[jj].Innate = cur1;
-            UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
         }
 
         public bool SpellOkay(int spell, bool known, bool realm2)
@@ -1696,7 +1684,7 @@ namespace AngbandOS
                 {
                     AbilityScores[which].InnateMax = value;
                 }
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 return true;
             }
             return false;
@@ -1767,7 +1755,7 @@ namespace AngbandOS
                     {
                         jPtr.Absorb(oPtr);
                         SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
-                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                        SaveGame.UpdateBonusesFlaggedAction.Set();
                         return j;
                     }
                 }
@@ -1878,7 +1866,7 @@ namespace AngbandOS
             oPtr.HoldingMonsterIndex = 0;
             SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
             _invenCnt++;
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             return i;
         }
@@ -2000,7 +1988,7 @@ namespace AngbandOS
             {
                 oPtr.Count += num;
                 SaveGame.Player.WeightCarried += num * oPtr.Weight;
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
                 SaveGame.Player.NoticeFlags |= Constants.PnCombine;
             }
@@ -2030,7 +2018,7 @@ namespace AngbandOS
             else
             {
                 Inventory[item] = new Item(SaveGame); // No ItemType here
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.UpdateTorchRadiusFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
             }

@@ -62,7 +62,7 @@
             saveGame.EnergyUse = 100;
             saveGame.Resting = saveGame.CommandArgument;
             saveGame.Player.IsSearching = false;
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            saveGame.UpdateBonusesFlaggedAction.Set();
             saveGame.RedrawStateFlaggedAction.Set();
             saveGame.HandleStuff();
             saveGame.UpdateScreen();

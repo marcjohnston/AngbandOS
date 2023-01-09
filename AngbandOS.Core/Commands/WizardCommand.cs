@@ -265,7 +265,7 @@
             saveGame.UpdateHealthFlaggedAction.Set();
             saveGame.UpdateManaFlaggedAction.Set();
             saveGame.UpdateSpellsFlaggedAction.Set();
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+            saveGame.UpdateBonusesFlaggedAction.Set();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
@@ -602,7 +602,7 @@
                 {
                     saveGame.Level.Items[0 - item] = qPtr;
                 }
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             }
             else
@@ -1008,7 +1008,7 @@
             }
             if (changed)
             {
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
                 return qPtr;
             }

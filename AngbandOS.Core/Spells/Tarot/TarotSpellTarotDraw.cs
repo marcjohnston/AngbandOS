@@ -157,7 +157,7 @@ namespace AngbandOS.Spells.Tarot
                 {
                     saveGame.MsgPrint("You are cured of all mutations.");
                     saveGame.Player.Dna.LoseAllMutations();
-                    saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                    saveGame.UpdateBonusesFlaggedAction.Set();
                     saveGame.HandleStuff();
                 }
             }

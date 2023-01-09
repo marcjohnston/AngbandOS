@@ -26,7 +26,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 saveGame.MsgPrint("You are cured of all mutations.");
                 saveGame.Player.Dna.LoseAllMutations();
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                saveGame.UpdateBonusesFlaggedAction.Set();
                 saveGame.HandleStuff();
             }
             if (!(saveGame.Player.Race.GetType() == saveGame.Player.RaceAtBirth.GetType()))

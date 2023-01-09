@@ -193,7 +193,7 @@ namespace AngbandOS.Projection
                             {
                                 SaveGame.Player.AbilityScores[k].Innate = 3;
                             }
-                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                            SaveGame.UpdateBonusesFlaggedAction.Set();
                             break;
                         }
                     case 10:
@@ -207,7 +207,7 @@ namespace AngbandOS.Projection
                                     SaveGame.Player.AbilityScores[k].Innate = 3;
                                 }
                             }
-                            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
+                            SaveGame.UpdateBonusesFlaggedAction.Set();
                             break;
                         }
                 }
