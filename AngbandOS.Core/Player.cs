@@ -2025,7 +2025,7 @@ namespace AngbandOS
             {
                 Inventory[item] = new Item(SaveGame); // No ItemType here
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+                SaveGame.UpdateTorchRadiusFlaggedAction.Set();
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
             }
         }

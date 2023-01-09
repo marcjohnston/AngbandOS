@@ -261,7 +261,7 @@
         private void DoCmdRedraw(SaveGame saveGame)
         {
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);

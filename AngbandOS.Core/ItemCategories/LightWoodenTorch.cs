@@ -92,7 +92,7 @@ namespace AngbandOS.Core.ItemCategories
                 saveGame.Level.FloorItemDescribe(0 - itemIndex);
                 saveGame.Level.FloorItemOptimize(0 - itemIndex);
             }
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
     }
 }

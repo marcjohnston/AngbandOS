@@ -91,7 +91,7 @@
                 wornItem.IdentSense = true;
             }
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
             saveGame.RedrawEquippyFlaggedAction.Set();
         }

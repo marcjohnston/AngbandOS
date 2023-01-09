@@ -943,7 +943,7 @@ namespace AngbandOS
             if (Running != 0)
             {
                 Running = 0;
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+                UpdateTorchRadiusFlaggedAction.Set();
             }
             if (stopSearch && Player.IsSearching)
             {
@@ -1550,11 +1550,6 @@ namespace AngbandOS
                 CalcBonuses();
             }
             UpdateTorchRadiusFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateTorchRadius))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateTorchRadius);
-                CalcTorch();
-            }
             UpdateHealthFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateHealth))
             {
@@ -1927,7 +1922,7 @@ namespace AngbandOS
             RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidateclient
             RedrawMapFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            UpdateTorchRadiusFlaggedAction.Set();
             UpdateStuff();
             RedrawStuff();
             UpdateScentFlaggedAction.Set();
@@ -2869,7 +2864,7 @@ namespace AngbandOS
                     }
                 }
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            UpdateTorchRadiusFlaggedAction.Set();
             if (Player.HasExperienceDrain)
             {
                 if (Program.Rng.RandomLessThan(100) < 10 && Player.ExperiencePoints > 0)
@@ -7175,7 +7170,7 @@ namespace AngbandOS
                 MsgPrint("Your light item is full.");
             }
             // We need to update our light after this
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+            UpdateTorchRadiusFlaggedAction.Set();
         }
 
         /// <summary>
@@ -8547,7 +8542,7 @@ namespace AngbandOS
                     Disturb(false);
                     return;
                 }
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
+                UpdateTorchRadiusFlaggedAction.Set();
                 // Initialise our navigation state
                 _autoNavigator = new AutoNavigator(this, direction); // TODO: This is aweful
             }
@@ -18002,39 +17997,6 @@ namespace AngbandOS
                 }
                 Player.OldSpareSpellSlots = Player.SpareSpellSlots;
                 RedrawStudyFlaggedAction.Set();
-            }
-        }
-
-        /// <summary>
-        /// Compute the level of light.  The player may be wielding multiple sources of light.
-        /// </summary>
-        public void CalcTorch()
-        {
-            Player.LightLevel = 0;
-            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
-            {
-                foreach (int i in inventorySlot.InventorySlots)
-                {
-                    Item oPtr = Player.Inventory[i];
-                    if (oPtr.BaseItemCategory != null)
-                    {
-                        Player.LightLevel += oPtr.BaseItemCategory.CalcTorch(oPtr);
-                    }
-                }
-            }
-            if (Player.LightLevel > 5)
-            {
-                Player.LightLevel = 5;
-            }
-            if (Player.LightLevel == 0 && Player.HasGlow)
-            {
-                Player.LightLevel = 1;
-            }
-            if (Player.OldLightLevel != Player.LightLevel)
-            {
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                Player.OldLightLevel = Player.LightLevel;
             }
         }
 

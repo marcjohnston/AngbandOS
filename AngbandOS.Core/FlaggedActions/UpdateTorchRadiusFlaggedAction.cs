@@ -10,8 +10,32 @@ namespace AngbandOS.Core.FlaggedActions
         /// </summary>
         protected override void Execute()
         {
-            throw new NotImplementedException();
+            SaveGame.Player.LightLevel = 0;
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+            {
+                foreach (int i in inventorySlot.InventorySlots)
+                {
+                    Item oPtr = SaveGame.Player.Inventory[i];
+                    if (oPtr.BaseItemCategory != null)
+                    {
+                        SaveGame.Player.LightLevel += oPtr.BaseItemCategory.CalcTorch(oPtr);
+                    }
+                }
+            }
+            if (SaveGame.Player.LightLevel > 5)
+            {
+                SaveGame.Player.LightLevel = 5;
+            }
+            if (SaveGame.Player.LightLevel == 0 && SaveGame.Player.HasGlow)
+            {
+                SaveGame.Player.LightLevel = 1;
+            }
+            if (SaveGame.Player.OldLightLevel != SaveGame.Player.LightLevel)
+            {
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateLight);
+                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
+                SaveGame.Player.OldLightLevel = SaveGame.Player.LightLevel;
+            }
         }
-
     }
 }
