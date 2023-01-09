@@ -10,7 +10,6 @@ namespace AngbandOS.Enumerations
 {
     internal class UpdateFlags
     {
-        public const uint UpdateRemoveView = 0x00010000;
         public const uint UpdateView = 0x00100000;
     }
 }

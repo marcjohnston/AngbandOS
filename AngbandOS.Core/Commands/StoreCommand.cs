@@ -37,7 +37,7 @@
             }
             // Switch from the normal game interface to the store interface
             saveGame.UpdateRemoveLightFlaggedAction.Check(true);
-            saveGame.Level.ForgetView();
+            saveGame.UpdateRemoveViewFlaggedAction.Check(true);
             saveGame.FullScreenOverlay = true;
             saveGame.CommandArgument = 0;
             //            CommandRepeat = 0; TODO: Confirm this is not needed

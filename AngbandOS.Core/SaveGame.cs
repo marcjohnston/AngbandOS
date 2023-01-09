@@ -611,7 +611,7 @@ namespace AngbandOS
                 TargetWho = 0;
                 HealthTrack(0);
                 UpdateRemoveLightFlaggedAction.Check(true);
-                Level.ForgetView();
+                UpdateRemoveViewFlaggedAction.Check(true);
                 if (!Playing && !Player.IsDead)
                 {
                     break;
@@ -1554,11 +1554,6 @@ namespace AngbandOS
             }
             UpdateRemoveLightFlaggedAction.Check();
             UpdateRemoveViewFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateRemoveView))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateRemoveView);
-                Level.ForgetView();
-            }
             UpdateViewFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateView))
             {
@@ -3791,7 +3786,7 @@ namespace AngbandOS
                 }
             }
             UpdateRemoveLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
+            UpdateRemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
@@ -4490,7 +4485,7 @@ namespace AngbandOS
                 }
             }
             UpdateRemoveLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
+            UpdateRemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);

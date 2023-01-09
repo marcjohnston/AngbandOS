@@ -56,13 +56,14 @@ namespace AngbandOS
         private const int _mapWid = MaxWid / _ratio;
         private const int _ratio = 3;
 
-        public readonly int[] _lightX = new int[Constants.LightMax];
+        public readonly int[] _lightX = new int[Constants.LightMax]; // TODO: Make this a list
         public readonly int[] _lightY = new int[Constants.LightMax];
         public int _lightN;
 
-        private readonly int[] _viewX = new int[Constants.ViewMax];
-        private readonly int[] _viewY = new int[Constants.ViewMax];
-        private int _viewN;
+        public readonly int[] _viewX = new int[Constants.ViewMax]; // TODO: Make this a list
+        public readonly int[] _viewY = new int[Constants.ViewMax];
+        public int _viewN;
+
         private readonly SaveGame SaveGame;
 
         public Level(SaveGame saveGame)
@@ -663,23 +664,6 @@ namespace AngbandOS
                 return;
             }
             DeleteObjectIdx(item);
-        }
-
-        public void ForgetView()
-        {
-            if (_viewN == 0)
-            {
-                return;
-            }
-            for (int i = 0; i < _viewN; i++)
-            {
-                int y = _viewY[i];
-                int x = _viewX[i];
-                GridTile cPtr = Grid[y][x];
-                cPtr.TileFlags.Clear(GridTile.IsVisible);
-                RedrawSingleLocation(y, x);
-            }
-            _viewN = 0;
         }
 
         public bool GridOpenNoItem(int y, int x)
@@ -1821,7 +1805,7 @@ namespace AngbandOS
                 oPtr.Marked = false;
             }
             SaveGame.UpdateRemoveLightFlaggedAction.Set();
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
+            SaveGame.UpdateRemoveViewFlaggedAction.Set();
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
             SaveGame.UpdateMonstersFlaggedAction.Set();
