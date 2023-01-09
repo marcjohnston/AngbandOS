@@ -84,7 +84,7 @@
                 ident = true;
             }
 
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // Mark the wand as having been tried
             item.ObjectTried();
             // If we just discovered the item's flavour, mark it as so

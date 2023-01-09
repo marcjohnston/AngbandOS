@@ -2025,7 +2025,7 @@ namespace AngbandOS
                         oPtr.BecomeFlavourAware();
                         oPtr.BecomeKnown();
                     }
-                    SaveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                    SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
                     qPtr = oPtr.Clone();
                     qPtr.Count = amt;
                     int value;

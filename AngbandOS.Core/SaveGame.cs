@@ -50,6 +50,9 @@ namespace AngbandOS
         public FlaggedAction UpdateSpellsFlaggedAction { get; }
         public FlaggedAction UpdateTorchRadiusFlaggedAction { get; }
         public FlaggedAction UpdateViewFlaggedAction { get; }
+        public FlaggedAction NoticeCombineFlaggedAction { get; }
+        public FlaggedAction NoticeReorderFlaggedAction { get; }
+        public FlaggedAction NoticeCombineAndReorderFlaggedAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -297,10 +300,14 @@ namespace AngbandOS
             UpdateTorchRadiusFlaggedAction = new UpdateTorchRadiusFlaggedAction(this);
             UpdateViewFlaggedAction = new UpdateViewFlaggedAction(this);
 
-            PrExtraRedrawAction = new RedrawGroupFlaggedAction(this, 
+            NoticeCombineFlaggedAction = new NoticeCombineFlaggedAction(this);
+            NoticeReorderFlaggedAction = new NoticeReorderFlaggedAction(this);
+
+            NoticeCombineAndReorderFlaggedAction = new GroupSetFlaggedAction(this, NoticeCombineFlaggedAction, NoticeReorderFlaggedAction);
+            PrExtraRedrawAction = new GroupSetFlaggedAction(this, 
                 RedrawCutFlaggedAction, RedrawHungerFlaggedAction, RedrawDTrapFlaggedAction, RedrawBlindFlaggedAction, RedrawConfusedFlaggedAction, 
                 RedrawAfraidFlaggedAction, RedrawPoisonedFlaggedAction, RedrawStateFlaggedAction, RedrawSpeedFlaggedAction, RedrawStudyFlaggedAction);
-            PrBasicRedrawAction = new RedrawGroupFlaggedAction(this,
+            PrBasicRedrawAction = new GroupSetFlaggedAction(this,
                 RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
                 RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
@@ -599,10 +606,7 @@ namespace AngbandOS
                 DungeonLoop();
 
                 // The dungeon level is changing.
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
+                NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
                 TargetWho = 0;
@@ -1456,20 +1460,8 @@ namespace AngbandOS
 
         public void NoticeStuff()
         {
-            if (Player.NoticeFlags == 0)
-            {
-                return;
-            }
-            if ((Player.NoticeFlags & Constants.PnCombine) != 0)
-            {
-                Player.NoticeFlags &= ~Constants.PnCombine;
-                Player.CombinePack();
-            }
-            if ((Player.NoticeFlags & Constants.PnReorder) != 0)
-            {
-                Player.NoticeFlags &= ~Constants.PnReorder;
-                Player.ReorderPack();
-            }
+            NoticeCombineFlaggedAction.Check();
+            NoticeReorderFlaggedAction.Check();
         }
 
         public void OpenChest(int y, int x, int oIdx)
@@ -1878,7 +1870,7 @@ namespace AngbandOS
             UpdateManaFlaggedAction.Set();
             UpdateSpellsFlaggedAction.Set();
             UpdateBonusesFlaggedAction.Set();
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
@@ -1941,10 +1933,7 @@ namespace AngbandOS
                 }
                 ProcessPlayer();
 
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
+                NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
@@ -1955,10 +1944,7 @@ namespace AngbandOS
                 TotalFriends = 0;
                 TotalFriendLevels = 0;
                 ProcessAllMonsters();
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
+                NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
@@ -1967,10 +1953,7 @@ namespace AngbandOS
                     break;
                 }
                 ProcessWorld();
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
+                NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
@@ -2347,10 +2330,7 @@ namespace AngbandOS
             while (Player.Energy >= 100 && !Shutdown)
             {
                 RedrawDTrapFlaggedAction.Set();
-                if (Player.NoticeFlags != 0)
-                {
-                    NoticeStuff();
-                }
+                NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
@@ -2367,10 +2347,7 @@ namespace AngbandOS
                     Player.InvenItemIncrease(item, -255);
                     Player.InvenItemDescribe(item);
                     Player.InvenItemOptimize(item);
-                    if (Player.NoticeFlags != 0)
-                    {
-                        NoticeStuff();
-                    }
+                    NoticeStuff();
                     UpdateStuff();
                     RedrawStuff();
                 }
@@ -2873,7 +2850,7 @@ namespace AngbandOS
             }
             if (j != 0)
             {
-                Player.NoticeFlags |= Constants.PnCombine;
+                NoticeCombineFlaggedAction.Set();
             }
             Player.SenseInventory();
             for (i = 1; i < Level.OMax; i++)
@@ -3228,7 +3205,7 @@ namespace AngbandOS
                 }
                 oPtr.Inscription = feel;
                 oPtr.IdentSense = true;
-                Player.NoticeFlags |= Constants.PnCombine;
+                NoticeCombineFlaggedAction.Set();
                 return;
             }
             int price = oPtr.RealValue();
@@ -4639,7 +4616,7 @@ namespace AngbandOS
                 return false;
             }
             UpdateBonusesFlaggedAction.Set();
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             return true;
         }
 
@@ -4778,7 +4755,7 @@ namespace AngbandOS
             oPtr.BecomeKnown();
             oPtr.IdentMental = true;
             UpdateBonusesFlaggedAction.Set();
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             HandleStuff();
             string oName = oPtr.Description(true, 3);
             if (item >= InventorySlot.MeleeWeapon)
@@ -4826,7 +4803,7 @@ namespace AngbandOS
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
             UpdateBonusesFlaggedAction.Set();
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             string oName = oPtr.Description(true, 3);
             if (item >= InventorySlot.MeleeWeapon)
             {
@@ -4925,7 +4902,7 @@ namespace AngbandOS
                 oPtr.IdentSense = false;
             }
             UpdateBonusesFlaggedAction.Set();
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             Level.WizDark();
             return true;
         }
@@ -5131,7 +5108,7 @@ namespace AngbandOS
                     oPtr.IdentEmpty = false;
                 }
             }
-            Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            NoticeCombineAndReorderFlaggedAction.Set();
             return true;
         }
 

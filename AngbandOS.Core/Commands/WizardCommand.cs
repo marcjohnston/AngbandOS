@@ -260,7 +260,7 @@
 
         private void DoCmdRedraw(SaveGame saveGame)
         {
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.UpdateHealthFlaggedAction.Set();
             saveGame.UpdateManaFlaggedAction.Set();
@@ -605,7 +605,7 @@
                     saveGame.Level.Items[0 - item] = qPtr;
                 }
                 saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             }
             else
             {
@@ -1011,7 +1011,7 @@
             if (changed)
             {
                 saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                saveGame.NoticeCombineAndReorderFlaggedAction.Set();
                 return qPtr;
             }
             return oPtr;

@@ -6,7 +6,7 @@ namespace AngbandOS
     internal class Player
     {
         public readonly Item[] Inventory;
-        private int _invenCnt;
+        public int _invenCnt;
 
         public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
         public readonly Genome Dna;
@@ -148,8 +148,6 @@ namespace AngbandOS
                 SaveGame.UpdateNotifier?.CharacterRenamed(_name);
             }
         }
-        public uint NoticeFlags;
-
         public int OldSpareSpellSlots;
         public Profession Profession = new Profession();
         public int ProfessionIndex;
@@ -1314,7 +1312,7 @@ namespace AngbandOS
                     {
                         item.Inscription = feel;
                     }
-                    NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                    SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
                 }
             }
         }
@@ -1688,44 +1686,6 @@ namespace AngbandOS
             }
             return false;
         }
-        public void CombinePack()
-        {
-            bool flag = false;
-            for (int i = InventorySlot.PackCount; i > 0; i--)
-            {
-                Item oPtr = Inventory[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                for (int j = 0; j < i; j++)
-                {
-                    Item jPtr = Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
-                    {
-                        continue;
-                    }
-                    if (jPtr.CanAbsorb(oPtr))
-                    {
-                        flag = true;
-                        jPtr.Absorb(oPtr);
-                        _invenCnt--;
-                        int k;
-                        for (k = i; k < InventorySlot.PackCount; k++)
-                        {
-                            Inventory[k] = Inventory[k + 1];
-                        }
-                        Inventory[k] = new Item(SaveGame); // No ItemType here
-                        break;
-                    }
-                }
-            }
-            if (flag)
-            {
-                SaveGame.MsgPrint("You combine some items in your pack.");
-            }
-        }
-
         public bool GetItemOkay(int i, IItemFilter? itemFilter)
         {
             if (i < 0 || i >= InventorySlot.Total)
@@ -1866,7 +1826,7 @@ namespace AngbandOS
             SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
             _invenCnt++;
             SaveGame.UpdateBonusesFlaggedAction.Set();
-            SaveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
             return i;
         }
 
@@ -1989,7 +1949,7 @@ namespace AngbandOS
                 SaveGame.Player.WeightCarried += num * oPtr.Weight;
                 SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
-                SaveGame.Player.NoticeFlags |= Constants.PnCombine;
+                SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
             }
         }
 
@@ -2092,115 +2052,6 @@ namespace AngbandOS
                 return -1;
             }
             return i;
-        }
-
-        public void ReorderPack()
-        {
-            bool flag = false;
-            for (int i = 0; i < InventorySlot.PackCount; i++)
-            {
-                if (i == InventorySlot.PackCount && _invenCnt == InventorySlot.PackCount)
-                {
-                    break;
-                }
-                Item oPtr = Inventory[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                int oValue = oPtr.Value();
-                int j;
-                for (j = 0; j < InventorySlot.PackCount; j++)
-                {
-                    Item jPtr = Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
-                    {
-                        break;
-                    }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
-                    {
-                        break;
-                    }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
-                    {
-                        continue;
-                    }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
-                    {
-                        break;
-                    }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
-                    {
-                        continue;
-                    }
-                    if (oPtr.Category > jPtr.Category)
-                    {
-                        break;
-                    }
-                    if (oPtr.Category < jPtr.Category)
-                    {
-                        continue;
-                    }
-                    if (!oPtr.IsFlavourAware())
-                    {
-                        continue;
-                    }
-                    if (!jPtr.IsFlavourAware())
-                    {
-                        break;
-                    }
-                    if (oPtr.ItemSubCategory < jPtr.ItemSubCategory)
-                    {
-                        break;
-                    }
-                    if (oPtr.ItemSubCategory > jPtr.ItemSubCategory)
-                    {
-                        continue;
-                    }
-                    if (!oPtr.IsKnown())
-                    {
-                        continue;
-                    }
-                    if (!jPtr.IsKnown())
-                    {
-                        break;
-                    }
-                    if (oPtr.Category == ItemTypeEnum.Rod)
-                    {
-                        if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
-                        {
-                            break;
-                        }
-                        if (oPtr.TypeSpecificValue > jPtr.TypeSpecificValue)
-                        {
-                            continue;
-                        }
-                    }
-                    int jValue = jPtr.Value();
-                    if (oValue > jValue)
-                    {
-                        break;
-                    }
-                    if (oValue < jValue)
-                    {
-                    }
-                }
-                if (j >= i)
-                {
-                    continue;
-                }
-                flag = true;
-                Item qPtr = Inventory[i].Clone();
-                for (int k = i; k > j; k--)
-                {
-                    Inventory[k] = Inventory[k - 1].Clone();
-                }
-                Inventory[j] = qPtr.Clone();
-            }
-            if (flag)
-            {
-                SaveGame.MsgPrint("You reorder some items in your pack.");
-            }
         }
 
         public void ReportChargeUsageFromInventory(int item)

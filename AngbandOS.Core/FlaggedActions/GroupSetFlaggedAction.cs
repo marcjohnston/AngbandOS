@@ -2,10 +2,10 @@
 namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class RedrawGroupFlaggedAction : FlaggedAction
+    internal class GroupSetFlaggedAction : FlaggedAction
     {
         private FlaggedAction[] RedrawActions { get; }
-        public RedrawGroupFlaggedAction(SaveGame saveGame, params FlaggedAction[] redrawActions) : base(saveGame)
+        public GroupSetFlaggedAction(SaveGame saveGame, params FlaggedAction[] redrawActions) : base(saveGame)
         {
             RedrawActions = redrawActions;
         }

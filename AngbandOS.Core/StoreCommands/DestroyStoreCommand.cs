@@ -79,7 +79,7 @@
                 }
                 item.Inscription = feel;
                 item.IdentSense = true;
-                saveGame.Player.NoticeFlags |= Constants.PnCombine;
+                saveGame.NoticeCombineFlaggedAction.Set();
                 saveGame.RedrawEquippyFlaggedAction.Set();
                 return;
             }

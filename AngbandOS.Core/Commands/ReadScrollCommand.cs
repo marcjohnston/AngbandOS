@@ -66,7 +66,7 @@ namespace AngbandOS.Commands
             ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(saveGame);
             scrollItem.Read(readScrollEventArgs);
 
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // We might have just identified the scroll
             item.ObjectTried();
             if (readScrollEventArgs.Identified && !item.IsFlavourAware())

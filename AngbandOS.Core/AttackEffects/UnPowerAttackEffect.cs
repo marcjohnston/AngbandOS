@@ -40,7 +40,7 @@ namespace AngbandOS.Core.AttackEffects
                         saveGame.RedrawHealthFlaggedAction.Set();
                     }
                     item.TypeSpecificValue = 0;
-                    saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+                    saveGame.NoticeCombineAndReorderFlaggedAction.Set();
                     return;
                 }
             }

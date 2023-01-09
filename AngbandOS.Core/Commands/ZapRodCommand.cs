@@ -381,7 +381,7 @@
                         break;
                     }
             }
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // We may have just discovered what the rod does
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())

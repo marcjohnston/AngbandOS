@@ -84,7 +84,7 @@ namespace AngbandOS.Commands
             // Do the specific effect for the type of staff
             staffItem.UseStaff(eventArgs);
 
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // We might now know what the staff does
             item.ObjectTried();
             if (eventArgs.Identified && !item.IsFlavourAware())

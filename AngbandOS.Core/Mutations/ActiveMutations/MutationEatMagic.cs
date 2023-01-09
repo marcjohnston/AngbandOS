@@ -52,7 +52,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 player.Mana = player.MaxMana;
             }
-            player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
         }
 
         public override string ActivationSummary(int lvl)

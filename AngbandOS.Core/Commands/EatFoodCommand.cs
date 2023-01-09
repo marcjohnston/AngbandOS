@@ -51,7 +51,7 @@
             // Allow the food item to process the consumption.
             ident = foodItem.Eat(saveGame);
 
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // We've tried this type of object
             item.ObjectTried();
             // Learn its flavour if necessary

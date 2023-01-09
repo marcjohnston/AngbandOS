@@ -66,7 +66,7 @@ namespace AngbandOS.Talents
             {
                 oPtr.Inscription = feel;
             }
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
         }
     }
 }

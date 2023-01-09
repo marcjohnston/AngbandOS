@@ -48,7 +48,7 @@
 
             // Skeletons are messy drinkers
             saveGame.Player.Race.Quaff(saveGame, potion);
-            saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
+            saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             // We may now know the potion's type
             item.ObjectTried();
             if (identified && !item.IsFlavourAware())
