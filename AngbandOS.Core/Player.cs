@@ -206,7 +206,6 @@ namespace AngbandOS
         public TimedAction TimedSuperheroism;
         public TimedAction TimedTelepathy;
         public int TownWithHouse;
-        public FlagSet UpdatesNeeded = new FlagSet();
         public int Weight;
         public int WeightCarried;
         public int WildernessX;

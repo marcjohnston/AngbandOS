@@ -67,7 +67,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             player.RecenterScreenAroundPlayer();
             saveGame.UpdateScentFlaggedAction.Set();
             saveGame.UpdateLightFlaggedAction.Set();
-            player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            saveGame.UpdateViewFlaggedAction.Set();
             saveGame.UpdateDistancesFlaggedAction.Set();
         }
 

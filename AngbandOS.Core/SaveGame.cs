@@ -603,10 +603,7 @@ namespace AngbandOS
                 {
                     NoticeStuff();
                 }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
+                UpdateStuff();
                 RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
@@ -1284,10 +1281,7 @@ namespace AngbandOS
             {
                 return;
             }
-            if (Player.UpdatesNeeded.IsSet())
-            {
-                UpdateStuff();
-            }
+            UpdateStuff();
             RedrawStuff();
         }
 
@@ -1455,7 +1449,7 @@ namespace AngbandOS
                     UpdateScentFlaggedAction.Set();
                     UpdateMonstersFlaggedAction.Set();
                     UpdateLightFlaggedAction.Set();
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                    UpdateViewFlaggedAction.Set();
                 }
             }
         }
@@ -1539,10 +1533,6 @@ namespace AngbandOS
 
         public void UpdateStuff()
         {
-            if (Player.UpdatesNeeded.IsClear())
-            {
-                return;
-            }
             UpdateBonusesFlaggedAction.Check();
             UpdateTorchRadiusFlaggedAction.Check();
             UpdateHealthFlaggedAction.Check();
@@ -1555,11 +1545,6 @@ namespace AngbandOS
             UpdateRemoveLightFlaggedAction.Check();
             UpdateRemoveViewFlaggedAction.Check();
             UpdateViewFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateView))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateView);
-                Level.UpdateView();
-            }
             UpdateLightFlaggedAction.Check();
             UpdateScentFlaggedAction.Check();
             UpdateDistancesFlaggedAction.Check();
@@ -1885,7 +1870,7 @@ namespace AngbandOS
             UpdateScentFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateStuff();
             RedrawStuff();
             CharacterXtra = false;
@@ -1960,10 +1945,7 @@ namespace AngbandOS
                 {
                     NoticeStuff();
                 }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
+                UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
@@ -1977,10 +1959,7 @@ namespace AngbandOS
                 {
                     NoticeStuff();
                 }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
+                UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
@@ -1992,10 +1971,7 @@ namespace AngbandOS
                 {
                     NoticeStuff();
                 }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
+                UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 if (!Playing || Player.IsDead || NewLevelFlag)
@@ -2375,10 +2351,7 @@ namespace AngbandOS
                 {
                     NoticeStuff();
                 }
-                if (Player.UpdatesNeeded.IsSet())
-                {
-                    UpdateStuff();
-                }
+                UpdateStuff();
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 UpdateScreen();
@@ -2398,10 +2371,7 @@ namespace AngbandOS
                     {
                         NoticeStuff();
                     }
-                    if (Player.UpdatesNeeded.IsSet())
-                    {
-                        UpdateStuff();
-                    }
+                    UpdateStuff();
                     RedrawStuff();
                 }
                 if (QueuedCommand == 0)
@@ -3789,7 +3759,7 @@ namespace AngbandOS
             UpdateRemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateMonstersFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
         }
@@ -4488,7 +4458,7 @@ namespace AngbandOS
             UpdateRemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
             RedrawHealthFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
@@ -5989,7 +5959,7 @@ namespace AngbandOS
             Player.RecenterScreenAroundPlayer();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
             HandleStuff();
         }
@@ -6078,7 +6048,7 @@ namespace AngbandOS
             Player.RecenterScreenAroundPlayer();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
             HandleStuff();
         }
@@ -6126,7 +6096,7 @@ namespace AngbandOS
                     Player.RecenterScreenAroundPlayer();
                     UpdateScentFlaggedAction.Set();
                     UpdateLightFlaggedAction.Set();
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                    UpdateViewFlaggedAction.Set();
                     UpdateDistancesFlaggedAction.Set();
                     HandleStuff();
                 }
@@ -6217,7 +6187,7 @@ namespace AngbandOS
             _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateMonstersFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
         }
@@ -6691,7 +6661,7 @@ namespace AngbandOS
                 PlaySound(SoundEffect.OpenDoor);
                 MovePlayer(y, x, false);
                 UpdateLightFlaggedAction.Set();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                UpdateViewFlaggedAction.Set();
                 UpdateDistancesFlaggedAction.Set();
             }
             else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.Level)
@@ -6958,7 +6928,7 @@ namespace AngbandOS
                 Level.CaveSetFeat(y, x, "LockedDoor0");
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                UpdateViewFlaggedAction.Set();
                 PlaySound(SoundEffect.ShutDoor);
             }
             return false;
@@ -7835,7 +7805,7 @@ namespace AngbandOS
             // We'll need to update and redraw various things
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
             // If we're not actively searching, then have a chance of doing it passively
@@ -7919,7 +7889,7 @@ namespace AngbandOS
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     UpdateMonstersFlaggedAction.Set();
                     UpdateLightFlaggedAction.Set();
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                    UpdateViewFlaggedAction.Set();
                     PlaySound(SoundEffect.LockpickSuccess);
                     // Picking a lock gains you an experience point
                     Player.GainExperience(1);
@@ -7936,7 +7906,7 @@ namespace AngbandOS
                 Level.CaveSetFeat(y, x, "OpenDoor");
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                UpdateViewFlaggedAction.Set();
                 PlaySound(SoundEffect.OpenDoor);
             }
             return more;
@@ -8866,7 +8836,7 @@ namespace AngbandOS
                 UpdateScentFlaggedAction.Set();
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                UpdateViewFlaggedAction.Set();
             }
             if (!repeat)
             {
@@ -8932,7 +8902,7 @@ namespace AngbandOS
                     Level.CaveSetFeat(y, x, "OpenDoor");
                     UpdateMonstersFlaggedAction.Set();
                     UpdateLightFlaggedAction.Set();
-                    Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                    UpdateViewFlaggedAction.Set();
                     PlaySound(SoundEffect.LockpickSuccess);
                     Player.GainExperience(1);
                 }
@@ -8948,7 +8918,7 @@ namespace AngbandOS
                 Level.CaveSetFeat(y, x, "OpenDoor");
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                UpdateViewFlaggedAction.Set();
                 PlaySound(SoundEffect.OpenDoor);
             }
             return true;
@@ -9113,7 +9083,7 @@ namespace AngbandOS
             UpdateScentFlaggedAction.Set();
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            UpdateViewFlaggedAction.Set();
             return true;
         }
 

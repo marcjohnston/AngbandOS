@@ -1106,7 +1106,7 @@ namespace AngbandOS
                 saveGame.UpdateScentFlaggedAction.Set();
                 saveGame.UpdateMonstersFlaggedAction.Set();
                 saveGame.UpdateLightFlaggedAction.Set();
-                saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                saveGame.UpdateViewFlaggedAction.Set();
             }
             // If we did something unusual and the player saw, let them remember we can do that
             if (IsVisible)

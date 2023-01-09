@@ -253,7 +253,7 @@ namespace AngbandOS.Projection
                                     SaveGame.UpdateScentFlaggedAction.Set();
                                     SaveGame.UpdateMonstersFlaggedAction.Set();
                                     SaveGame.UpdateLightFlaggedAction.Set();
-                                    SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                                    SaveGame.UpdateViewFlaggedAction.Set();
                                 }
                                 else
                                 {

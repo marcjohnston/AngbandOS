@@ -33,7 +33,7 @@
             SaveGame.UpdateRemoveLightFlaggedAction.Set();
             SaveGame.UpdateRemoveViewFlaggedAction.Set();
             SaveGame.UpdateLightFlaggedAction.Set();
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+            SaveGame.UpdateViewFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();
             SaveGame.RedrawMapFlaggedAction.Set();
             SaveGame.RedrawBlindFlaggedAction.Set();

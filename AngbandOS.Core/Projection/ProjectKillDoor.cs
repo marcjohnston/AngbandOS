@@ -32,7 +32,7 @@ namespace AngbandOS.Projection
                     {
                         SaveGame.UpdateMonstersFlaggedAction.Set();
                         SaveGame.UpdateLightFlaggedAction.Set();
-                        SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
+                        SaveGame.UpdateViewFlaggedAction.Set();
                     }
                 }
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
