@@ -610,7 +610,7 @@ namespace AngbandOS
                 RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
-                Level.ForgetLight();
+                UpdateRemoveLightFlaggedAction.Check(true);
                 Level.ForgetView();
                 if (!Playing && !Player.IsDead)
                 {
@@ -1553,11 +1553,6 @@ namespace AngbandOS
                 return;
             }
             UpdateRemoveLightFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateRemoveLight))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateRemoveLight);
-                Level.ForgetLight();
-            }
             UpdateRemoveViewFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateRemoveView))
             {
@@ -3795,7 +3790,8 @@ namespace AngbandOS
                     Player.TimedBlindness.SetTimer(Player.TimedBlindness.TimeRemaining + 10 + Program.Rng.DieRoll(10));
                 }
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            UpdateRemoveLightFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
@@ -4493,7 +4489,8 @@ namespace AngbandOS
                     }
                 }
             }
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            UpdateRemoveLightFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);

@@ -665,22 +665,6 @@ namespace AngbandOS
             DeleteObjectIdx(item);
         }
 
-        public void ForgetLight()
-        {
-            if (_lightN == 0)
-            {
-                return;
-            }
-            for (int i = 0; i < _lightN; i++)
-            {
-                int y = _lightY[i];
-                int x = _lightX[i];
-                Grid[y][x].TileFlags.Clear(GridTile.PlayerLit);
-                RedrawSingleLocation(y, x);
-            }
-            _lightN = 0;
-        }
-
         public void ForgetView()
         {
             if (_viewN == 0)
@@ -1836,7 +1820,8 @@ namespace AngbandOS
                 }
                 oPtr.Marked = false;
             }
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            SaveGame.UpdateRemoveLightFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
             SaveGame.UpdateMonstersFlaggedAction.Set();

@@ -36,7 +36,7 @@
                 return;
             }
             // Switch from the normal game interface to the store interface
-            saveGame.Level.ForgetLight();
+            saveGame.UpdateRemoveLightFlaggedAction.Check(true);
             saveGame.Level.ForgetView();
             saveGame.FullScreenOverlay = true;
             saveGame.CommandArgument = 0;

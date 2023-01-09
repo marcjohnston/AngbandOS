@@ -30,7 +30,8 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
+            SaveGame.UpdateRemoveLightFlaggedAction.Set();
+            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView);
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView);
             SaveGame.UpdateMonstersFlaggedAction.Set();
