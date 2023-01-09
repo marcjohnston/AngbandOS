@@ -4,7 +4,7 @@
     internal class PrMapRedrawAction : RedrawAction
     {
         public PrMapRedrawAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void RedrawNow()
+        protected override void Draw()
         {
             bool v = SaveGame.CursorVisible;
             SaveGame.CursorVisible = false;

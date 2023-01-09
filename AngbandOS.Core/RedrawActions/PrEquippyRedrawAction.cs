@@ -10,7 +10,7 @@
         /// in the default location on the main game screen
         /// </summary>
         /// <param name="player"> The player whose equippy characters should be displayed </param>
-        protected override void RedrawNow()
+        protected override void Draw()
         {
             CharacterViewer.DisplayPlayerEquippy(SaveGame, ScreenLocation.RowEquippy, ScreenLocation.ColEquippy);
         }

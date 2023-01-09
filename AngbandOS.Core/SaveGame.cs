@@ -14,6 +14,7 @@ namespace AngbandOS
         public RedrawAction PrArmorRedrawAction { get; }
         public RedrawAction PrHpRedrawAction { get; }
         public RedrawAction PrExpRedrawAction { get; }
+        public RedrawAction PrCutRedrawAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -230,6 +231,7 @@ namespace AngbandOS
             PrArmorRedrawAction = new PrArmorRedrawAction(this);
             PrHpRedrawAction = new PrHpRedrawAction(this);
             PrExpRedrawAction = new PrExpRedrawAction(this);
+            PrCutRedrawAction = new PrCutRedrawAction(this);
 
             SingletonRepository.Initialize(this);
             LoadAllTypes();
@@ -3030,18 +3032,15 @@ namespace AngbandOS
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrExtra))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrExtra);
-                Player.RedrawNeeded.Clear(RedrawFlag.PrCut | RedrawFlag.PrStun);
+                PrCutRedrawAction.Clear();
+                Player.RedrawNeeded.Clear(RedrawFlag.PrStun);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrHunger | RedrawFlag.PrDtrap);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrBlind | RedrawFlag.PrConfused);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrAfraid | RedrawFlag.PrPoisoned);
                 Player.RedrawNeeded.Clear(RedrawFlag.PrState | RedrawFlag.PrSpeed | RedrawFlag.PrStudy);
                 PrtFrameExtra();
             }
-            if (Player.RedrawNeeded.IsSet(RedrawFlag.PrCut))
-            {
-                Player.RedrawNeeded.Clear(RedrawFlag.PrCut);
-                PrtCut();
-            }
+            PrCutRedrawAction.Redraw();
             if (Player.RedrawNeeded.IsSet(RedrawFlag.PrStun))
             {
                 Player.RedrawNeeded.Clear(RedrawFlag.PrStun);
@@ -10893,14 +10892,22 @@ namespace AngbandOS
         ////////////////// PLAYER FACTORY
         private readonly MenuItem<int>[] _classMenu =
         {
-            new MenuItem<int>("Channeler", CharacterClass.Channeler), new MenuItem<int>("Chosen One", CharacterClass.ChosenOne),
-            new MenuItem<int>("Cultist", CharacterClass.Cultist), new MenuItem<int>("Druid", CharacterClass.Druid),
-            new MenuItem<int>("Fanatic", CharacterClass.Fanatic), new MenuItem<int>("High Mage", CharacterClass.HighMage),
-            new MenuItem<int>("Mage", CharacterClass.Mage), new MenuItem<int>("Monk", CharacterClass.Monk),
-            new MenuItem<int>("Mindcrafter", CharacterClass.Mindcrafter), new MenuItem<int>("Mystic", CharacterClass.Mystic),
-            new MenuItem<int>("Paladin", CharacterClass.Paladin), new MenuItem<int>("Priest", CharacterClass.Priest),
-            new MenuItem<int>("Ranger", CharacterClass.Ranger), new MenuItem<int>("Rogue", CharacterClass.Rogue),
-            new MenuItem<int>("Warrior", CharacterClass.Warrior), new MenuItem<int>("Warrior Mage", CharacterClass.WarriorMage)
+            new MenuItem<int>("Channeler", CharacterClass.Channeler), 
+            new MenuItem<int>("Chosen One", CharacterClass.ChosenOne),
+            new MenuItem<int>("Cultist", CharacterClass.Cultist), 
+            new MenuItem<int>("Druid", CharacterClass.Druid),
+            new MenuItem<int>("Fanatic", CharacterClass.Fanatic), 
+            new MenuItem<int>("High Mage", CharacterClass.HighMage),
+            new MenuItem<int>("Mage", CharacterClass.Mage), 
+            new MenuItem<int>("Monk", CharacterClass.Monk),
+            new MenuItem<int>("Mindcrafter", CharacterClass.Mindcrafter), 
+            new MenuItem<int>("Mystic", CharacterClass.Mystic),
+            new MenuItem<int>("Paladin", CharacterClass.Paladin), 
+            new MenuItem<int>("Priest", CharacterClass.Priest),
+            new MenuItem<int>("Ranger", CharacterClass.Ranger), 
+            new MenuItem<int>("Rogue", CharacterClass.Rogue),
+            new MenuItem<int>("Warrior", CharacterClass.Warrior), 
+            new MenuItem<int>("Warrior Mage", CharacterClass.WarriorMage)
         };
 
         private readonly string[] _menuItem = new string[32];
@@ -16595,7 +16602,7 @@ namespace AngbandOS
         }
 
         private readonly int[][] _blowsTable =
-    {
+        {
             new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},
             new[] {1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4},
             new[] {1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5},
@@ -18172,13 +18179,6 @@ namespace AngbandOS
             return martialArtistArmWgt > 100 + (Player.Level * 4);
         }
 
-        public void PrtAc()
-        {
-            Print("Cur AC ", ScreenLocation.RowAc, ScreenLocation.ColAc);
-            string tmp = (Player.DisplayedBaseArmourClass + Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
-            Print(Colour.BrightGreen, tmp, ScreenLocation.RowAc, ScreenLocation.ColAc + 7);
-        }
-
         public void PrtAfraid()
         {
             if (Player.TimedFear.TimeRemaining > 0)
@@ -18212,43 +18212,6 @@ namespace AngbandOS
             else
             {
                 Print("        ", ScreenLocation.RowConfused, ScreenLocation.ColConfused);
-            }
-        }
-
-        public void PrtCut()
-        {
-            int c = Player.TimedBleeding.TimeRemaining;
-            if (c > 1000)
-            {
-                Print(Colour.BrightRed, "Mortal wound", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 200)
-            {
-                Print(Colour.Red, "Deep gash   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 100)
-            {
-                Print(Colour.Red, "Severe cut  ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 50)
-            {
-                Print(Colour.Orange, "Nasty cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 25)
-            {
-                Print(Colour.Orange, "Bad cut     ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 10)
-            {
-                Print(Colour.Yellow, "Light cut   ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else if (c > 0)
-            {
-                Print(Colour.Yellow, "Graze       ", ScreenLocation.RowCut, ScreenLocation.ColCut);
-            }
-            else
-            {
-                Print("            ", ScreenLocation.RowCut, ScreenLocation.ColCut);
             }
         }
 
@@ -18313,26 +18276,6 @@ namespace AngbandOS
             }
         }
 
-        public void PrtExp()
-        {
-            Colour colour = Colour.BrightGreen;
-            if (Player.ExperiencePoints < Player.MaxExperienceGained)
-            {
-                colour = Colour.Yellow;
-            }
-            Print("NEXT", ScreenLocation.RowExp, 0);
-            if (Player.Level >= Constants.PyMaxLevel)
-            {
-                Print(Colour.BrightGreen, "   *****", ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
-            }
-            else
-            {
-                string outVal = ((GlobalData.PlayerExp[Player.Level - 1] * Player.ExperienceMultiplier / 100) - Player.ExperiencePoints).ToString()
-                    .PadLeft(8);
-                Print(colour, outVal, ScreenLocation.RowExp, ScreenLocation.ColExp + 4);
-            }
-        }
-
         public void PrtField(string info, int row, int col)
         {
             Print(Colour.White, "             ", row, col);
@@ -18344,15 +18287,15 @@ namespace AngbandOS
             PrtField(Player.Name, ScreenLocation.RowName, ScreenLocation.ColName);
             PrtField(Player.Race.Title, ScreenLocation.RowRace, ScreenLocation.ColRace);
             PrtField(Profession.ClassSubName(Player.ProfessionIndex, Player.Realm1), ScreenLocation.RowClass, ScreenLocation.ColClass);
-            PrtTitle();
-            PrtLevel();
-            PrtExp();
+            PrTitleRedrawAction.Redraw(true);
+            PrLevRedrawAction.Redraw(true);
+            PrExpRedrawAction.Redraw(true);
             for (int i = 0; i < 6; i++)
             {
                 PrtStat(i);
             }
-            PrtAc();
-            PrtHp();
+            PrArmorRedrawAction.Redraw(true);
+            PrHpRedrawAction.Redraw(true);
             PrtSp();
             PrtGold();
             PrtDepth();
@@ -18361,7 +18304,7 @@ namespace AngbandOS
 
         public void PrtFrameExtra()
         {
-            PrtCut();
+            PrCutRedrawAction.Redraw(true);
             PrtStun();
             PrtHunger();
             PrtDtrap();
@@ -18379,33 +18322,6 @@ namespace AngbandOS
             Print("GP ", ScreenLocation.RowGold, ScreenLocation.ColGold);
             string tmp = Player.Gold.ToString().PadLeft(9);
             Print(Colour.BrightGreen, tmp, ScreenLocation.RowGold, ScreenLocation.ColGold + 3);
-        }
-
-        public void PrtHp()
-        {
-            Print("Max HP ", ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp);
-            string tmp = Player.MaxHealth.ToString().PadLeft(5);
-            Colour colour = Colour.BrightGreen;
-            Print(colour, tmp, ScreenLocation.RowMaxhp, ScreenLocation.ColMaxhp + 7);
-            Print("Cur HP ", ScreenLocation.RowCurhp, ScreenLocation.ColCurhp);
-            tmp = Player.Health.ToString().PadLeft(5);
-            if (Player.Health >= Player.MaxHealth)
-            {
-                colour = Colour.BrightGreen;
-            }
-            else if (Player.Health > Player.MaxHealth * GlobalData.HitpointWarn / 5)
-            {
-                colour = Colour.BrightYellow;
-            }
-            else if (Player.Health > Player.MaxHealth * GlobalData.HitpointWarn / 10)
-            {
-                colour = Colour.Orange;
-            }
-            else
-            {
-                colour = Colour.BrightRed;
-            }
-            Print(colour, tmp, ScreenLocation.RowCurhp, ScreenLocation.ColCurhp + 7);
         }
 
         public void PrtHunger()
@@ -18433,21 +18349,6 @@ namespace AngbandOS
             else
             {
                 Print(Colour.Green, "Gorged", ScreenLocation.RowHungry, ScreenLocation.ColHungry);
-            }
-        }
-
-        public void PrtLevel()
-        {
-            string tmp = Player.Level.ToString().PadLeft(6);
-            if (Player.Level >= Player.MaxLevelGained)
-            {
-                Print("LEVEL ", ScreenLocation.RowLevel, 0);
-                Print(Colour.BrightGreen, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
-            }
-            else
-            {
-                Print("Level ", ScreenLocation.RowLevel, 0);
-                Print(Colour.Yellow, tmp, ScreenLocation.RowLevel, ScreenLocation.ColLevel + 6);
             }
         }
 
@@ -18618,24 +18519,9 @@ namespace AngbandOS
         public void PrtTime()
         {
             Print(Colour.White, "Time", ScreenLocation.RowTime, ScreenLocation.ColTime);
-            Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.colDate);
+            Print(Colour.White, "Day", ScreenLocation.RowDate, ScreenLocation.ColDate);
             Print(Colour.BrightGreen, Player.GameTime.TimeText.PadLeft(8), ScreenLocation.RowTime, ScreenLocation.ColTime + 4);
-            Print(Colour.BrightGreen, Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.colDate + 4);
-        }
-
-        public void PrtTitle()
-        {
-            string p;
-            if (Player.IsWizard)
-            {
-                p = "-=<WIZARD>=-";
-                PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
-            }
-            else if (Player.IsWinner || Player.Level > Constants.PyMaxLevel)
-            {
-                p = "***WINNER***";
-                PrtField(p, ScreenLocation.RowTitle, ScreenLocation.ColTitle);
-            }
+            Print(Colour.BrightGreen, Player.GameTime.DateText.PadLeft(8), ScreenLocation.RowDate, ScreenLocation.ColDate + 4);
         }
 
         private int WeightLimit()
