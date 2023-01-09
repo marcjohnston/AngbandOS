@@ -919,7 +919,8 @@ namespace AngbandOS
                 SaveGame.MsgPrint("You eat a hearty breakfast.");
             }
             SaveGame.Player.Religion.DecayFavour();
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
+            SaveGame.UpdateHealthFlaggedAction.Set();
+            SaveGame.UpdateManaFlaggedAction.Set();
             SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
             foreach (Town town in SaveGame.Towns)
             {
@@ -1038,7 +1039,8 @@ namespace AngbandOS
             {
                 SaveGame.MsgPrint($"{deityName} is delighted by your sacrifice!");
             }
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
+            SaveGame.UpdateHealthFlaggedAction.Set();
+            SaveGame.UpdateManaFlaggedAction.Set();
         }
 
         protected void SayComment_1()

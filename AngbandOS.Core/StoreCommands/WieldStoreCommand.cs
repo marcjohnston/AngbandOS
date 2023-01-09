@@ -92,7 +92,7 @@
             }
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+            saveGame.UpdateManaFlaggedAction.Set();
             saveGame.RedrawEquippyFlaggedAction.Set();
         }
     }

@@ -12,9 +12,7 @@ namespace AngbandOS.Enumerations
     {
         public const uint UpdateBonuses = 0x00000001;
         public const uint UpdateDistances = 0x02000000;
-        public const uint UpdateHealth = 0x00000010;
         public const uint UpdateLight = 0x00200000;
-        public const uint UpdateMana = 0x00000020;
         public const uint UpdateMonsters = 0x01000000;
         public const uint UpdateRemoveLight = 0x00020000;
         public const uint UpdateRemoveView = 0x00010000;

@@ -75,7 +75,7 @@ namespace AngbandOS
         public int AllocRaceSize;
         public AllocationEntry[] AllocRaceTable;
         public LevelStart CameFrom;
-        public bool CharacterXtra;
+        public bool CharacterXtra; // TODO: This global can be removed when actions are updated
         public bool CreateDownStair;
         public bool CreateUpStair;
         public Dungeon CurDungeon;
@@ -1552,11 +1552,6 @@ namespace AngbandOS
             UpdateTorchRadiusFlaggedAction.Check();
             UpdateHealthFlaggedAction.Check();
             UpdateManaFlaggedAction.Check();
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMana))
-            {
-                Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMana);
-                CalcMana();
-            }
             UpdateSpellsFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateSpells))
             {
@@ -1916,7 +1911,9 @@ namespace AngbandOS
             PrBasicRedrawAction.Set();
             RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidateclient
             RedrawMapFlaggedAction.Set();
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+            UpdateHealthFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
             UpdateTorchRadiusFlaggedAction.Set();
             UpdateStuff();
             RedrawStuff();
@@ -1925,7 +1922,9 @@ namespace AngbandOS
             UpdateStuff();
             RedrawStuff();
             CharacterXtra = false;
-            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+            UpdateHealthFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
             Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             NoticeStuff();
             UpdateStuff();
@@ -2598,7 +2597,8 @@ namespace AngbandOS
             if (Player.GameTime.IsMidnight)
             {
                 Player.Religion.DecayFavour();
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana);
+                UpdateHealthFlaggedAction.Set();
+                UpdateManaFlaggedAction.Set();
                 foreach (Town town in Towns)
                 {
                     foreach (Store store in town.Stores)
@@ -7212,7 +7212,7 @@ namespace AngbandOS
                 item.IdentCursed = true;
                 item.IdentBroken = true;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                UpdateManaFlaggedAction.Set();
             }
             return true;
         }
@@ -7253,7 +7253,7 @@ namespace AngbandOS
                 item.IdentCursed = true;
                 item.IdentBroken = true;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                UpdateManaFlaggedAction.Set();
             }
             return true;
         }
@@ -12407,7 +12407,8 @@ namespace AngbandOS
                         GetMoney();
                         Player.Spellcasting = new Spellcasting(Player);
                         Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
-                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth);
+                        UpdateHealthFlaggedAction.Set();
+                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                         UpdateStuff();
                         Player.Health = Player.MaxHealth;
                         Player.Mana = Player.MaxMana;
@@ -17215,27 +17216,30 @@ namespace AngbandOS
                     Player.AbilityScores[i].TableIndex = ind;
                     if (i == Ability.Constitution)
                     {
-                        Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
+                        UpdateHealthFlaggedAction.Set();
                     }
                     else if (i == Ability.Intelligence)
                     {
                         if (Player.Spellcasting.SpellStat == Ability.Intelligence)
                         {
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            UpdateManaFlaggedAction.Set();
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
                         }
                     }
                     else if (i == Ability.Wisdom)
                     {
                         if (Player.Spellcasting.SpellStat == Ability.Wisdom)
                         {
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            UpdateManaFlaggedAction.Set();
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
                         }
                     }
                     else if (i == Ability.Charisma)
                     {
                         if (Player.Spellcasting.SpellStat == Ability.Charisma)
                         {
-                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                            UpdateManaFlaggedAction.Set();
+                            Player.UpdatesNeeded.Set(UpdateFlags.UpdateSpells);
                         }
                     }
                 }
@@ -17622,7 +17626,7 @@ namespace AngbandOS
             {
                 return;
             }
-            if (Player.OldHeavyBow != Player.HasHeavyBow)
+            if (Player.OldHeavyBow != Player.HasHeavyBow) // TODO: This should be moved to the wield action
             {
                 if (Player.HasHeavyBow)
                 {
@@ -17638,7 +17642,7 @@ namespace AngbandOS
                 }
                 Player.OldHeavyBow = Player.HasHeavyBow;
             }
-            if (Player.OldHeavyWeapon != Player.HasHeavyWeapon)
+            if (Player.OldHeavyWeapon != Player.HasHeavyWeapon) // TODO: This should be moved to the wield action
             {
                 if (Player.HasHeavyWeapon)
                 {
@@ -17654,7 +17658,7 @@ namespace AngbandOS
                 }
                 Player.OldHeavyWeapon = Player.HasHeavyWeapon;
             }
-            if (Player.OldUnpriestlyWeapon != Player.HasUnpriestlyWeapon)
+            if (Player.OldUnpriestlyWeapon != Player.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
             {
                 if (Player.HasUnpriestlyWeapon)
                 {
@@ -17674,116 +17678,12 @@ namespace AngbandOS
                 }
                 Player.OldUnpriestlyWeapon = Player.HasUnpriestlyWeapon;
             }
-            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistArmourAux !=
-                MartialArtistNotifyAux)
+            if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistArmourAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
             {
                 MsgPrint(MartialArtistHeavyArmour()
                     ? "The weight of your armour disrupts your balance."
                     : "You regain your balance.");
                 MartialArtistNotifyAux = MartialArtistArmourAux;
-            }
-        }
-
-        public void CalcMana()
-        {
-            int levels;
-            switch (Player.Spellcasting.Type)
-            {
-                case CastingType.None:
-                    return;
-
-                case CastingType.Arcane:
-                case CastingType.Divine:
-                    levels = Player.Level - Player.Spellcasting.SpellFirst + 1;
-                    break;
-
-                case CastingType.Mentalism:
-                case CastingType.Channeling:
-                    levels = Player.Level;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            if (levels < 0)
-            {
-                levels = 0;
-            }
-            int msp = Player.AbilityScores[Player.Spellcasting.SpellStat].ManaBonus * levels / 2;
-            if (msp != 0)
-            {
-                msp++;
-            }
-            if (msp != 0 && Player.ProfessionIndex == CharacterClass.HighMage)
-            {
-                msp += msp / 4;
-            }
-
-            // Allow inventory slots access to the CalcMana process.
-            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
-            {
-                // Update the mana for the inventory slot.
-                msp = inventorySlot.CalcMana(this, msp);
-            }
-
-            if (Player.Spellcasting.Type == CastingType.Arcane)
-            {
-                int curWgt = 0;
-                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
-                {
-                    if (inventorySlot.IsWeightRestricting)
-                    {
-                        foreach (int index in inventorySlot)
-                        {
-                            Item item = Player.Inventory[index];
-                            if (item.BaseItemCategory != null)
-                            {
-                                curWgt += item.Weight;
-                            }
-                        }
-                    }
-                }
-                int maxWgt = Player.Spellcasting.SpellWeight;
-                if ((curWgt - maxWgt) / 10 > 0)
-                {
-                    msp -= (curWgt - maxWgt) / 10;
-                    if (!Player.OldRestrictingArmour)
-                    {
-                        MsgPrint("The weight of your armour encumbers your movement.");
-                        Player.OldRestrictingArmour = true;
-                    }
-                }
-                else
-                {
-                    if (Player.OldRestrictingArmour)
-                    {
-                        MsgPrint("You feel able to move more freely.");
-                        Player.OldRestrictingArmour = false;
-                    }
-                }
-            }
-
-            if (msp < 0)
-            {
-                msp = 0;
-            }
-
-            var mult = Player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
-            msp *= mult;
-            msp /= 10;
-            if (Player.MaxMana != msp)
-            {
-                if (Player.Mana >= msp)
-                {
-                    Player.Mana = msp;
-                    Player.FractionalMana = 0;
-                }
-                Player.MaxMana = msp;
-                RedrawManaFlaggedAction.Set();
-            }
-            if (CharacterXtra)
-            {
-                return;
             }
         }
 
@@ -17808,7 +17708,7 @@ namespace AngbandOS
             {
                 return;
             }
-            int levels = Player.Level - Player.Spellcasting.SpellFirst + 1;
+            int levels = Player.Level - Player.Spellcasting.SpellFirst + 1; // TODO: This should be moved to an action so that CharacterXtra isn't needed
             if (levels < 0)
             {
                 levels = 0;

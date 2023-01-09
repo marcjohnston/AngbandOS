@@ -400,7 +400,9 @@ namespace AngbandOS
             {
                 Level--;
                 SaveGame.Level.RedrawSingleLocation(MapY, MapX);
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                SaveGame.UpdateHealthFlaggedAction.Set();
+                SaveGame.UpdateManaFlaggedAction.Set();
+                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.HandleStuff();
@@ -430,7 +432,9 @@ namespace AngbandOS
                 }
                 SaveGame.PlaySound(SoundEffect.LevelGain);
                 SaveGame.MsgPrint($"Welcome to level {Level}.");
-                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+                SaveGame.UpdateHealthFlaggedAction.Set();
+                SaveGame.UpdateManaFlaggedAction.Set();
+                UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
                 SaveGame.RedrawTitleFlaggedAction.Set();
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.RedrawExpFlaggedAction.Set();
@@ -1117,7 +1121,7 @@ namespace AngbandOS
             {
                 PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
             }
-            UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
+            SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.RedrawHpFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
@@ -1995,7 +1999,7 @@ namespace AngbandOS
                 oPtr.Count += num;
                 SaveGame.Player.WeightCarried += num * oPtr.Weight;
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                SaveGame.UpdateManaFlaggedAction.Set();
                 SaveGame.Player.NoticeFlags |= Constants.PnCombine;
             }
         }
@@ -2026,7 +2030,7 @@ namespace AngbandOS
                 Inventory[item] = new Item(SaveGame); // No ItemType here
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
                 SaveGame.UpdateTorchRadiusFlaggedAction.Set();
-                SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMana);
+                SaveGame.UpdateManaFlaggedAction.Set();
             }
         }
 

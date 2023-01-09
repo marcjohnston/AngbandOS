@@ -262,7 +262,9 @@
         {
             saveGame.Player.NoticeFlags |= Constants.PnCombine | Constants.PnReorder;
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
-            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
+            saveGame.UpdateHealthFlaggedAction.Set();
+            saveGame.UpdateManaFlaggedAction.Set();
+            saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateSpells);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);

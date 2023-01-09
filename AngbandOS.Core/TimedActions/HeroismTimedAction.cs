@@ -31,7 +31,7 @@
             }
             SaveGame.Disturb(false);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateHealth);
+            SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }
