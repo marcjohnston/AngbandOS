@@ -45,11 +45,11 @@
             saveGame.SetBackground(BackgroundImage.Overhead);
             saveGame.Load();
             saveGame.FullScreenOverlay = false;
-            saveGame.PrMapRedrawAction.Set();
-            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.RedrawMapFlaggedAction.Set();
+            saveGame.RedrawEquippyFlaggedAction.Set();
             saveGame.PrExtraRedrawAction.Set();
             saveGame.PrBasicRedrawAction.Set();
-            saveGame.PrWipeRedrawAction.Set(); // TODO: special case ... should be some form of invalidate
+            saveGame.RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidate
             saveGame.HandleStuff();
         }
     }

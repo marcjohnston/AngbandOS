@@ -28,7 +28,7 @@
             }
             if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
             {
-                saveGame.PrHealthRedrawAction.Set();
+                saveGame.RedrawHealthFlaggedAction.Set();
             }
             if (monster.FearLevel != 0)
             {
@@ -56,7 +56,7 @@
             }
             if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
             {
-                saveGame.PrHealthRedrawAction.Set();
+                saveGame.RedrawHealthFlaggedAction.Set();
             }
             if (monster.FearLevel != 0)
             {

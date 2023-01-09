@@ -63,7 +63,7 @@
             saveGame.Resting = saveGame.CommandArgument;
             saveGame.Player.IsSearching = false;
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            saveGame.PrStateRedrawAction.Set();
+            saveGame.RedrawStateFlaggedAction.Set();
             saveGame.HandleStuff();
             saveGame.UpdateScreen();
         }

@@ -44,7 +44,7 @@
                 {
                     saveGame.Player.Mana -= r1;
                 }
-                saveGame.PrManaRedrawAction.Set();
+                saveGame.RedrawManaFlaggedAction.Set();
                 if (monster.Health < monster.MaxHealth)
                 {
                     monster.Health += 6 * r1;
@@ -54,7 +54,7 @@
                     }
                     if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
                     {
-                        saveGame.PrHealthRedrawAction.Set();
+                        saveGame.RedrawHealthFlaggedAction.Set();
                     }
                     if (seenByPlayer)
                     {
@@ -96,7 +96,7 @@
                     }
                     if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
                     {
-                        saveGame.PrHealthRedrawAction.Set();
+                        saveGame.RedrawHealthFlaggedAction.Set();
                     }
                     if (seen)
                     {

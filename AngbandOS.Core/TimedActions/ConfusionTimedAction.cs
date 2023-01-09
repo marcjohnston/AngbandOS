@@ -30,7 +30,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.PrConfusedRedrawAction.Set();
+            SaveGame.RedrawConfusedFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

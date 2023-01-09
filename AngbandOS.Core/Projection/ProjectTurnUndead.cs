@@ -90,7 +90,7 @@ namespace AngbandOS.Projection
             {
                 if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
                 {
-                    SaveGame.PrHealthRedrawAction.Set();
+                    SaveGame.RedrawHealthFlaggedAction.Set();
                 }
                 mPtr.SleepLevel = 0;
                 mPtr.Health -= dam;

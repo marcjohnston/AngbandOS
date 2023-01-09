@@ -303,8 +303,8 @@ namespace AngbandOS
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             SaveGame.PrExtraRedrawAction.Set();
             SaveGame.PrBasicRedrawAction.Set();
-            SaveGame.PrMapRedrawAction.Set();
-            SaveGame.PrEquippyRedrawAction.Set();
+            SaveGame.RedrawMapFlaggedAction.Set();
+            SaveGame.RedrawEquippyFlaggedAction.Set();
         }
 
         public virtual void StoreInit()
@@ -1499,7 +1499,7 @@ namespace AngbandOS
                 SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} more {spellType}{plural}.");
             }
             SaveGame.Player.OldSpareSpellSlots = SaveGame.Player.SpareSpellSlots;
-            SaveGame.PrStudyRedrawAction.Set();
+            SaveGame.RedrawStudyFlaggedAction.Set();
         }
 
         private void StoreProcessCommand()

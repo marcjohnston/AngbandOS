@@ -31,7 +31,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.PrMapRedrawAction.Set();
+            SaveGame.RedrawMapFlaggedAction.Set();
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             SaveGame.HandleStuff();
             return true;

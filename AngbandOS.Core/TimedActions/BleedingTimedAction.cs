@@ -139,7 +139,7 @@
             }
             SaveGame.Disturb(false);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.PrCutRedrawAction.Set();
+            SaveGame.RedrawCutFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

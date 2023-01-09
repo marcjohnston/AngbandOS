@@ -200,7 +200,7 @@ namespace AngbandOS
             MonsterRace rPtr = mPtr.Race;
             if (SaveGame.TrackedMonsterIndex == mIdx)
             {
-                SaveGame.PrHealthRedrawAction.Set();
+                SaveGame.RedrawHealthFlaggedAction.Set();
             }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;
@@ -992,7 +992,7 @@ namespace AngbandOS
                     _level.RedrawSingleLocation(fy, fx);
                     if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
-                        SaveGame.PrHealthRedrawAction.Set();
+                        SaveGame.RedrawHealthFlaggedAction.Set();
                     }
                     if (rPtr.Knowledge.RSights < Constants.MaxShort)
                     {
@@ -1035,7 +1035,7 @@ namespace AngbandOS
                     _level.RedrawSingleLocation(fy, fx);
                     if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
-                        SaveGame.PrHealthRedrawAction.Set();
+                        SaveGame.RedrawHealthFlaggedAction.Set();
                     }
                 }
             }

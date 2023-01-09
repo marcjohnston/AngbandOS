@@ -32,7 +32,7 @@ namespace AngbandOS.Mutations.RandomMutations
             }
             saveGame.Disturb(false);
             saveGame.MsgPrint("It's so dark... so scary!");
-            saveGame.PrAfraidRedrawAction.Set();
+            saveGame.RedrawAfraidFlaggedAction.Set();
             saveGame.Player.TimedFear.Reset(saveGame.Player.TimedFear.TimeRemaining + 13 + Program.Rng.DieRoll(26));
         }
     }

@@ -181,7 +181,7 @@ namespace AngbandOS
             if (size != 0)
             {
                 SaveGame.MsgPrint("Compacting objects...");
-                SaveGame.PrMapRedrawAction.Set();
+                SaveGame.RedrawMapFlaggedAction.Set();
             }
             for (num = 0, cnt = 1; num < size; cnt++)
             {
@@ -948,7 +948,7 @@ namespace AngbandOS
                     }
                 }
             }
-            SaveGame.PrMapRedrawAction.Set();
+            SaveGame.RedrawMapFlaggedAction.Set();
         }
 
         public void MoveCursorRelative(int row, int col)
@@ -2043,7 +2043,7 @@ namespace AngbandOS
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.PrMapRedrawAction.Set();
+            SaveGame.RedrawMapFlaggedAction.Set();
         }
 
         public void WizLight()
@@ -2085,7 +2085,7 @@ namespace AngbandOS
                 }
             }
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            SaveGame.PrMapRedrawAction.Set();
+            SaveGame.RedrawMapFlaggedAction.Set();
         }
 
         private void CaveLightHack(int y, int x)

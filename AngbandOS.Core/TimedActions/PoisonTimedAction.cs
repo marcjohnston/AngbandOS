@@ -38,7 +38,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.PrPoisonedRedrawAction.Set();
+            SaveGame.RedrawPoisonedFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

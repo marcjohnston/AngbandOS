@@ -30,7 +30,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.PrStateRedrawAction.Set();
+            SaveGame.RedrawStateFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

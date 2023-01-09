@@ -172,7 +172,7 @@
 
                 case 'W':
                     saveGame.Player.IsWinner = true;
-                    saveGame.PrLevRedrawAction.Set();
+                    saveGame.RedrawLevelFlaggedAction.Set();
                     saveGame.MsgPrint("*** CONGRATULATIONS ***");
                     saveGame.MsgPrint("You have won the game!");
                     saveGame.MsgPrint("You may retire ('Q') when you are ready.");
@@ -217,7 +217,7 @@
             {
                 saveGame.Player.IsWizard = true;
                 saveGame.MsgPrint("Wizard mode activated.");
-                saveGame.PrLevRedrawAction.Set();
+                saveGame.RedrawLevelFlaggedAction.Set();
             }
         }
 
@@ -266,11 +266,11 @@
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight);
             saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            saveGame.PrMapRedrawAction.Set();
-            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.RedrawMapFlaggedAction.Set();
+            saveGame.RedrawEquippyFlaggedAction.Set();
             saveGame.PrExtraRedrawAction.Set();
             saveGame.PrBasicRedrawAction.Set();
-            saveGame.PrWipeRedrawAction.Set(); // TODO: Special case ... should be some form of invalidateclient
+            saveGame.RedrawAllFlaggedAction.Set(); // TODO: Special case ... should be some form of invalidateclient
             saveGame.HandleStuff();
             saveGame.Redraw();
         }

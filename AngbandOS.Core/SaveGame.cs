@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using AngbandOS.Core.FlaggedActions;
+using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -7,35 +8,48 @@ namespace AngbandOS
     [Serializable]
     internal class SaveGame
     {
-        public FlaggedAction PrMapRedrawAction { get; }
-        public FlaggedAction PrEquippyRedrawAction { get; }
-        public FlaggedAction PrTitleRedrawAction { get; }
-        public FlaggedAction PrLevRedrawAction { get; }
-        public FlaggedAction PrArmorRedrawAction { get; }
-        public FlaggedAction PrHpRedrawAction { get; }
-        public FlaggedAction PrExpRedrawAction { get; }
-        public FlaggedAction PrCutRedrawAction { get; }
-        public FlaggedAction PrHealthRedrawAction { get; }
-        public FlaggedAction PrManaRedrawAction { get; }
-        public FlaggedAction PrGoldRedrawAction { get; }
-        public FlaggedAction PrDepthRedrawAction { get; }
-        public FlaggedAction PrStunRedrawAction { get; }
-        public FlaggedAction PrHungerRedrawAction { get; }
-        public FlaggedAction PrDTrapRedrawAction { get; }
-        public FlaggedAction PrBlindRedrawAction { get; }
-        public FlaggedAction PrConfusedRedrawAction { get; }
-        public FlaggedAction PrAfraidRedrawAction { get; }
-        public FlaggedAction PrPoisonedRedrawAction { get; }
-        public FlaggedAction PrStateRedrawAction { get; }
-        public FlaggedAction PrSpeedRedrawAction { get; }
-        public FlaggedAction PrStatsRedrawAction { get; }
-        public FlaggedAction PrStudyRedrawAction { get; }
-        public FlaggedAction PrTimeRedrawAction { get; }
-        public FlaggedAction PrPlayerRedrawAction { get; }
+        public FlaggedAction RedrawMapFlaggedAction { get; }
+        public FlaggedAction RedrawEquippyFlaggedAction { get; }
+        public FlaggedAction RedrawTitleFlaggedAction { get; }
+        public FlaggedAction RedrawLevelFlaggedAction { get; }
+        public FlaggedAction RedrawArmorFlaggedAction { get; }
+        public FlaggedAction RedrawHpFlaggedAction { get; }
+        public FlaggedAction RedrawExpFlaggedAction { get; }
+        public FlaggedAction RedrawCutFlaggedAction { get; }
+        public FlaggedAction RedrawHealthFlaggedAction { get; }
+        public FlaggedAction RedrawManaFlaggedAction { get; }
+        public FlaggedAction RedrawGoldFlaggedAction { get; }
+        public FlaggedAction RedrawDepthFlaggedAction { get; }
+        public FlaggedAction RedrawStunFlaggedAction { get; }
+        public FlaggedAction RedrawHungerFlaggedAction { get; }
+        public FlaggedAction RedrawDTrapFlaggedAction { get; }
+        public FlaggedAction RedrawBlindFlaggedAction { get; }
+        public FlaggedAction RedrawConfusedFlaggedAction { get; }
+        public FlaggedAction RedrawAfraidFlaggedAction { get; }
+        public FlaggedAction RedrawPoisonedFlaggedAction { get; }
+        public FlaggedAction RedrawStateFlaggedAction { get; }
+        public FlaggedAction RedrawSpeedFlaggedAction { get; }
+        public FlaggedAction RedrawStatsFlaggedAction { get; }
+        public FlaggedAction RedrawStudyFlaggedAction { get; }
+        public FlaggedAction RedrawTimeFlaggedAction { get; }
+        public FlaggedAction RedrawPlayerFlaggedAction { get; }
 
         public FlaggedAction PrExtraRedrawAction { get; }
         public FlaggedAction PrBasicRedrawAction { get; }
-        public FlaggedAction PrWipeRedrawAction { get; }
+        public FlaggedAction RedrawAllFlaggedAction { get; }
+
+        public FlaggedAction UpdateBonusesFlaggedAction { get; }
+        public FlaggedAction UpdateDistancesFlaggedAction { get; }
+        public FlaggedAction UpdateHealthFlaggedAction { get; }
+        public FlaggedAction UpdateLightFlaggedAction { get; }
+        public FlaggedAction UpdateManaFlaggedAction { get; }
+        public FlaggedAction UpdateMonstersFlaggedAction { get; }
+        public FlaggedAction UpdateRemoveLightFlaggedAction { get; }
+        public FlaggedAction UpdateRemoveViewFlaggedAction { get; }
+        public FlaggedAction UpdateScentFlaggedAction { get; }
+        public FlaggedAction UpdateSpellsFlaggedAction { get; }
+        public FlaggedAction UpdateTorchRadiusFlaggedAction { get; }
+        public FlaggedAction UpdateViewFlaggedAction { get; }
 
         public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -245,39 +259,52 @@ namespace AngbandOS
         /// </summary>
         public SaveGame()
         {
-            PrMapRedrawAction = new RedrawMapFlaggedAction(this);
-            PrEquippyRedrawAction = new RedrawEquippyFlaggedAction(this);
-            PrTitleRedrawAction = new RedrawTitleFlaggedAction(this);
-            PrLevRedrawAction = new RedrawLevelFlaggedAction(this);
-            PrArmorRedrawAction = new RedrawArmorFlaggedAction(this);
-            PrHpRedrawAction = new RedrawHpFlaggedAction(this);
-            PrExpRedrawAction = new RedrawExpFlaggedAction(this);
-            PrCutRedrawAction = new RedrawCutFlaggedAction(this);
-            PrHealthRedrawAction = new RedrawHealthFlaggedAction(this);
-            PrManaRedrawAction = new RedrawManaFlaggedAction(this);
-            PrGoldRedrawAction = new RedrawGoldFlaggedAction(this);
-            PrDepthRedrawAction = new RedrawDepthFlaggedAction(this);
-            PrStunRedrawAction = new RedrawStunFlaggedAction(this);
-            PrHungerRedrawAction = new RedrawHungerFlaggedAction(this);
-            PrDTrapRedrawAction = new RedrawDTrapFlaggedAction(this);
-            PrBlindRedrawAction = new RedrawBlindFlaggedAction(this);
-            PrConfusedRedrawAction = new RedrawConfusedFlaggedAction(this);
-            PrAfraidRedrawAction = new RedrawAfraidFlaggedAction(this);
-            PrPoisonedRedrawAction = new RedrawPoisonedFlaggedAction(this);
-            PrStateRedrawAction = new RedrawStateFlaggedAction(this);
-            PrSpeedRedrawAction = new RedrawSpeedFlaggedAction(this);
-            PrStatsRedrawAction = new RedrawStatsFlaggedAction(this);
-            PrStudyRedrawAction = new RedrawStudyFlaggedAction(this);
-            PrTimeRedrawAction = new RedrawTimeFlaggedAction(this);
-            PrPlayerRedrawAction = new RedrawPlayerFlaggedAction(this);
-            PrWipeRedrawAction = new RedrawAllFlaggedAction(this);
+            RedrawMapFlaggedAction = new RedrawMapFlaggedAction(this);
+            RedrawEquippyFlaggedAction = new RedrawEquippyFlaggedAction(this);
+            RedrawTitleFlaggedAction = new RedrawTitleFlaggedAction(this);
+            RedrawLevelFlaggedAction = new RedrawLevelFlaggedAction(this);
+            RedrawArmorFlaggedAction = new RedrawArmorFlaggedAction(this);
+            RedrawHpFlaggedAction = new RedrawHpFlaggedAction(this);
+            RedrawExpFlaggedAction = new RedrawExpFlaggedAction(this);
+            RedrawCutFlaggedAction = new RedrawCutFlaggedAction(this);
+            RedrawHealthFlaggedAction = new RedrawHealthFlaggedAction(this);
+            RedrawManaFlaggedAction = new RedrawManaFlaggedAction(this);
+            RedrawGoldFlaggedAction = new RedrawGoldFlaggedAction(this);
+            RedrawDepthFlaggedAction = new RedrawDepthFlaggedAction(this);
+            RedrawStunFlaggedAction = new RedrawStunFlaggedAction(this);
+            RedrawHungerFlaggedAction = new RedrawHungerFlaggedAction(this);
+            RedrawDTrapFlaggedAction = new RedrawDTrapFlaggedAction(this);
+            RedrawBlindFlaggedAction = new RedrawBlindFlaggedAction(this);
+            RedrawConfusedFlaggedAction = new RedrawConfusedFlaggedAction(this);
+            RedrawAfraidFlaggedAction = new RedrawAfraidFlaggedAction(this);
+            RedrawPoisonedFlaggedAction = new RedrawPoisonedFlaggedAction(this);
+            RedrawStateFlaggedAction = new RedrawStateFlaggedAction(this);
+            RedrawSpeedFlaggedAction = new RedrawSpeedFlaggedAction(this);
+            RedrawStatsFlaggedAction = new RedrawStatsFlaggedAction(this);
+            RedrawStudyFlaggedAction = new RedrawStudyFlaggedAction(this);
+            RedrawTimeFlaggedAction = new RedrawTimeFlaggedAction(this);
+            RedrawPlayerFlaggedAction = new RedrawPlayerFlaggedAction(this);
+            RedrawAllFlaggedAction = new RedrawAllFlaggedAction(this);
+
+            UpdateBonusesFlaggedAction = new UpdateBonusesFlaggedAction(this);
+            UpdateDistancesFlaggedAction = new UpdateDistancesFlaggedAction(this);
+            UpdateHealthFlaggedAction = new UpdateHealthFlaggedAction(this);
+            UpdateLightFlaggedAction = new UpdateLightFlaggedAction(this);
+            UpdateManaFlaggedAction = new UpdateManaFlaggedAction(this);
+            UpdateMonstersFlaggedAction = new UpdateMonstersFlaggedAction(this);
+            UpdateRemoveLightFlaggedAction = new UpdateRemoveLightFlaggedAction(this);
+            UpdateRemoveViewFlaggedAction = new UpdateRemoveViewFlaggedAction(this);
+            UpdateScentFlaggedAction = new UpdateScentFlaggedAction(this);
+            UpdateSpellsFlaggedAction = new UpdateSpellsFlaggedAction(this);
+            UpdateTorchRadiusFlaggedAction = new UpdateTorchRadiusFlaggedAction(this);
+            UpdateViewFlaggedAction = new UpdateViewFlaggedAction(this);
 
             PrExtraRedrawAction = new RedrawGroupFlaggedAction(this, 
-                PrCutRedrawAction, PrHungerRedrawAction, PrDTrapRedrawAction, PrBlindRedrawAction, PrConfusedRedrawAction, 
-                PrAfraidRedrawAction, PrPoisonedRedrawAction, PrStateRedrawAction, PrSpeedRedrawAction, PrStudyRedrawAction);
+                RedrawCutFlaggedAction, RedrawHungerFlaggedAction, RedrawDTrapFlaggedAction, RedrawBlindFlaggedAction, RedrawConfusedFlaggedAction, 
+                RedrawAfraidFlaggedAction, RedrawPoisonedFlaggedAction, RedrawStateFlaggedAction, RedrawSpeedFlaggedAction, RedrawStudyFlaggedAction);
             PrBasicRedrawAction = new RedrawGroupFlaggedAction(this,
-                PrPlayerRedrawAction, PrTitleRedrawAction, PrStatsRedrawAction, PrLevRedrawAction, PrExpRedrawAction, PrGoldRedrawAction,
-                PrArmorRedrawAction, PrHpRedrawAction, PrManaRedrawAction, PrDepthRedrawAction, PrHealthRedrawAction, PrSpeedRedrawAction);
+                RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
+                RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
         SingletonRepository.Initialize(this);
             LoadAllTypes();
@@ -906,12 +933,12 @@ namespace AngbandOS
             if (CommandRepeat != 0)
             {
                 CommandRepeat = 0;
-                PrStateRedrawAction.Set();
+                RedrawStateFlaggedAction.Set();
             }
             if (Resting != 0)
             {
                 Resting = 0;
-                PrStateRedrawAction.Set();
+                RedrawStateFlaggedAction.Set();
             }
             if (Running != 0)
             {
@@ -922,7 +949,7 @@ namespace AngbandOS
             {
                 Player.IsSearching = false;
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                PrStateRedrawAction.Set();
+                RedrawStateFlaggedAction.Set();
             }
         }
 
@@ -1269,7 +1296,7 @@ namespace AngbandOS
         public void HealthTrack(int mIdx)
         {
             TrackedMonsterIndex = mIdx;
-            PrHealthRedrawAction.Set();
+            RedrawHealthFlaggedAction.Set();
         }
 
         public void MonsterDeath(int mIdx)
@@ -1408,7 +1435,7 @@ namespace AngbandOS
             if (Quests.ActiveQuests == 0)
             {
                 Player.IsWinner = true;
-                PrTitleRedrawAction.Set();
+                RedrawTitleFlaggedAction.Set();
                 MsgPrint("*** CONGRATULATIONS ***");
                 MsgPrint("You have won the game!");
                 MsgPrint("You may retire ('Q') when you are ready.");
@@ -1515,71 +1542,79 @@ namespace AngbandOS
             {
                 return;
             }
+            UpdateBonusesFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateBonuses);
                 CalcBonuses();
             }
+            UpdateTorchRadiusFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateTorchRadius))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateTorchRadius);
                 CalcTorch();
             }
+            UpdateHealthFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateHealth))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateHealth);
                 CalcHitpoints();
             }
+            UpdateManaFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMana))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMana);
                 CalcMana();
             }
+            UpdateSpellsFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateSpells))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateSpells);
                 CalcSpells();
             }
-            if (Player == null)
-            {
-                return;
-            }
             if (FullScreenOverlay)
             {
                 return;
             }
+            UpdateRemoveLightFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateRemoveLight))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateRemoveLight);
                 Level.ForgetLight();
             }
+            UpdateRemoveViewFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateRemoveView))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateRemoveView);
                 Level.ForgetView();
             }
+            UpdateViewFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateView))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateView);
                 Level.UpdateView();
             }
+            UpdateLightFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateLight))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateLight);
                 Level.UpdateLight();
             }
+            UpdateScentFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateScent))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateScent);
                 Level.UpdateFlow();
             }
+            UpdateDistancesFlaggedAction.Check();
             if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateDistances))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateDistances);
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMonsters);
                 Level.UpdateMonsters(true);
             }
-            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateMonsters))
+            UpdateBonusesFlaggedAction.Check();
+            if (Player.UpdatesNeeded.IsSet(UpdateFlags.UpdateBonuses))
             {
                 Player.UpdatesNeeded.Clear(UpdateFlags.UpdateMonsters);
                 Level.UpdateMonsters(false);
@@ -1890,11 +1925,11 @@ namespace AngbandOS
             Level.PanelBoundsCenter();
             MsgPrint(null);
             CharacterXtra = true;
-            PrEquippyRedrawAction.Set();
+            RedrawEquippyFlaggedAction.Set();
             PrExtraRedrawAction.Set();
             PrBasicRedrawAction.Set();
-            PrWipeRedrawAction.Set(); // TODO: special case ... should be some form of invalidateclient
-            PrMapRedrawAction.Set();
+            RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidateclient
+            RedrawMapFlaggedAction.Set();
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses | UpdateFlags.UpdateHealth | UpdateFlags.UpdateMana | UpdateFlags.UpdateSpells);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateTorchRadius);
             UpdateStuff();
@@ -2381,7 +2416,7 @@ namespace AngbandOS
             }
             while (Player.Energy >= 100 && !Shutdown)
             {
-                PrDTrapRedrawAction.Set();
+                RedrawDTrapFlaggedAction.Set();
                 if (Player.NoticeFlags != 0)
                 {
                     NoticeStuff();
@@ -2429,7 +2464,7 @@ namespace AngbandOS
                     if (Resting > 0)
                     {
                         Resting--;
-                        PrStateRedrawAction.Set();
+                        RedrawStateFlaggedAction.Set();
                     }
                     EnergyUse = 100;
                 }
@@ -2440,7 +2475,7 @@ namespace AngbandOS
                 else if (CommandRepeat != 0)
                 {
                     CommandRepeat--;
-                    PrStateRedrawAction.Set();
+                    RedrawStateFlaggedAction.Set();
                     RedrawStuff();
                     MsgFlag = false;
                     PrintLine("", 0, 0);
@@ -2571,7 +2606,7 @@ namespace AngbandOS
                     }
                 }
                 Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-                PrMapRedrawAction.Set();
+                RedrawMapFlaggedAction.Set();
             }
             if (Player.GameTime.IsMidnight)
             {
@@ -2987,33 +3022,33 @@ namespace AngbandOS
             }
 
             // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
-            PrWipeRedrawAction.Check();
+            RedrawAllFlaggedAction.Check();
 
-            PrMapRedrawAction.Check();
-            PrPlayerRedrawAction.Check();
-            PrEquippyRedrawAction.Check();
-            PrTitleRedrawAction.Check();
-            PrLevRedrawAction.Check();
-            PrExpRedrawAction.Check();
-            PrStatsRedrawAction.Check();
-            PrArmorRedrawAction.Check();
-            PrHpRedrawAction.Check();
-            PrManaRedrawAction.Check();
-            PrGoldRedrawAction.Check();
-            PrDepthRedrawAction.Check();
-            PrHealthRedrawAction.Check();
-            PrCutRedrawAction.Check();
-            PrStunRedrawAction.Check();
-            PrHungerRedrawAction.Check();
-            PrDTrapRedrawAction.Check();
-            PrBlindRedrawAction.Check();
-            PrConfusedRedrawAction.Check();
-            PrAfraidRedrawAction.Check();
-            PrPoisonedRedrawAction.Check();
-            PrStateRedrawAction.Check();
-            PrSpeedRedrawAction.Check();
-            PrStudyRedrawAction.Check();
-            PrTimeRedrawAction.Check(true); // TODO: Trigger this from GameTime
+            RedrawMapFlaggedAction.Check();
+            RedrawPlayerFlaggedAction.Check();
+            RedrawEquippyFlaggedAction.Check();
+            RedrawTitleFlaggedAction.Check();
+            RedrawLevelFlaggedAction.Check();
+            RedrawExpFlaggedAction.Check();
+            RedrawStatsFlaggedAction.Check();
+            RedrawArmorFlaggedAction.Check();
+            RedrawHpFlaggedAction.Check();
+            RedrawManaFlaggedAction.Check();
+            RedrawGoldFlaggedAction.Check();
+            RedrawDepthFlaggedAction.Check();
+            RedrawHealthFlaggedAction.Check();
+            RedrawCutFlaggedAction.Check();
+            RedrawStunFlaggedAction.Check();
+            RedrawHungerFlaggedAction.Check();
+            RedrawDTrapFlaggedAction.Check();
+            RedrawBlindFlaggedAction.Check();
+            RedrawConfusedFlaggedAction.Check();
+            RedrawAfraidFlaggedAction.Check();
+            RedrawPoisonedFlaggedAction.Check();
+            RedrawStateFlaggedAction.Check();
+            RedrawSpeedFlaggedAction.Check();
+            RedrawStudyFlaggedAction.Check();
+            RedrawTimeFlaggedAction.Check(true); // TODO: Trigger this from GameTime
         }
 
         private void RegenMonsters()
@@ -3044,7 +3079,7 @@ namespace AngbandOS
                     }
                     if (TrackedMonsterIndex == i)
                     {
-                        PrHealthRedrawAction.Set();
+                        RedrawHealthFlaggedAction.Set();
                     }
                 }
             }
@@ -3289,7 +3324,7 @@ namespace AngbandOS
                 }
                 MsgPrint($"You turn {oName} to {price} coins worth of gold.");
                 Player.Gold += price;
-                PrGoldRedrawAction.Set();
+                RedrawGoldFlaggedAction.Set();
             }
             if (item >= 0)
             {
@@ -3646,7 +3681,7 @@ namespace AngbandOS
                     Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                PrHpRedrawAction.Set();
+                RedrawHpFlaggedAction.Set();
                 HandleStuff();
                 UpdateScreen();
                 Pause(msec);
@@ -3798,7 +3833,7 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            PrMapRedrawAction.Set();
+            RedrawMapFlaggedAction.Set();
         }
 
         public bool DestroyDoor(int dir)
@@ -4148,8 +4183,8 @@ namespace AngbandOS
                     }
                 }
             }
-            PrDTrapRedrawAction.Set();
-            PrMapRedrawAction.Set();
+            RedrawDTrapFlaggedAction.Set();
+            RedrawMapFlaggedAction.Set();
             if (detect)
             {
                 MsgPrint("You sense the presence of traps!");
@@ -4494,8 +4529,8 @@ namespace AngbandOS
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateRemoveView | UpdateFlags.UpdateRemoveLight);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
-            PrHealthRedrawAction.Set();
-            PrMapRedrawAction.Set();
+            RedrawHealthFlaggedAction.Set();
+            RedrawMapFlaggedAction.Set();
         }
 
         public void ElderSign()
@@ -4993,7 +5028,7 @@ namespace AngbandOS
                     Player.TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
                 }
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
-                PrHpRedrawAction.Set();
+                RedrawHpFlaggedAction.Set();
                 HandleStuff();
                 UpdateScreen();
                 Pause(msec);
@@ -6215,7 +6250,7 @@ namespace AngbandOS
             _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
-            PrMapRedrawAction.Set();
+            RedrawMapFlaggedAction.Set();
         }
 
         public bool WallToMud(int dir)
@@ -6631,7 +6666,7 @@ namespace AngbandOS
                     if (CommandArgument > 0)
                     {
                         CommandRepeat = CommandArgument - 1;
-                        PrStateRedrawAction.Set();
+                        RedrawStateFlaggedAction.Set();
                         CommandArgument = 0;
                     }
 
@@ -6921,8 +6956,8 @@ namespace AngbandOS
                 Player.Mana -= (cost / 2) + Program.Rng.DieRoll(cost / 2);
             }
             // We'll need to redraw
-            PrHpRedrawAction.Set();
-            PrManaRedrawAction.Set();
+            RedrawHpFlaggedAction.Set();
+            RedrawManaFlaggedAction.Set();
             // Check to see if we were successful
             if (Program.Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
                 (difficulty / 2) + Program.Rng.DieRoll(difficulty / 2))
@@ -7401,13 +7436,13 @@ namespace AngbandOS
             {
                 MsgPrint("You channel mana to power the effect.");
                 Player.Mana -= cost;
-                PrManaRedrawAction.Set();
+                RedrawManaFlaggedAction.Set();
                 return true;
             }
             // Use some mana in the attempt, even if we failed
             MsgPrint("You mana is insufficient to power the effect.");
             Player.Mana -= Program.Rng.RandomLessThan(Player.Mana / 2);
-            PrManaRedrawAction.Set();
+            RedrawManaFlaggedAction.Set();
             return false;
         }
 
@@ -7803,7 +7838,7 @@ namespace AngbandOS
             // the notification
             if (oldTrapsDetected != newTrapsDetected)
             {
-                PrDTrapRedrawAction.Set();
+                RedrawDTrapFlaggedAction.Set();
             }
             // If we're leaving an area where we've detected traps at a run, then stop running
             if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
@@ -7828,7 +7863,7 @@ namespace AngbandOS
             // We'll need to update and redraw various things
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateView | UpdateFlags.UpdateLight | UpdateFlags.UpdateScent);
             Player.UpdatesNeeded.Set(UpdateFlags.UpdateDistances);
-            PrMapRedrawAction.Set();
+            RedrawMapFlaggedAction.Set();
             // If we're not actively searching, then have a chance of doing it passively
             if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
             {
@@ -7950,7 +7985,7 @@ namespace AngbandOS
                 {
                     MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                     Player.Gold += item.TypeSpecificValue;
-                    PrGoldRedrawAction.Set();
+                    RedrawGoldFlaggedAction.Set();
                     Level.DeleteObjectIdx(thisItemIndex);
                 }
                 else
@@ -8706,7 +8741,7 @@ namespace AngbandOS
             item.Y = Player.MapY;
             item.X = Player.MapX;
             Level.NoteSpot(Player.MapY, Player.MapX);
-            PrMapRedrawAction.Set();
+            RedrawMapFlaggedAction.Set();
         }
 
         /// <summary>
@@ -8866,8 +8901,8 @@ namespace AngbandOS
         {
             // Check the player's race to see what their power is
             Player.Race.UseRacialPower(this);
-            PrHpRedrawAction.Set();
-            PrManaRedrawAction.Set();
+            RedrawHpFlaggedAction.Set();
+            RedrawManaFlaggedAction.Set();
         }
 
         /// <summary>
@@ -17151,7 +17186,7 @@ namespace AngbandOS
                 if (Player.AbilityScores[i].AdjustedMax != top)
                 {
                     Player.AbilityScores[i].AdjustedMax = top;
-                    PrStatsRedrawAction.Set();
+                    RedrawStatsFlaggedAction.Set();
                 }
                 int use = Player.AbilityScores[i]
                     .ModifyStatValue(Player.AbilityScores[i].Innate, Player.AbilityScores[i].Bonus);
@@ -17165,7 +17200,7 @@ namespace AngbandOS
                 if (Player.AbilityScores[i].Adjusted != use)
                 {
                     Player.AbilityScores[i].Adjusted = use;
-                    PrStatsRedrawAction.Set();
+                    RedrawStatsFlaggedAction.Set();
                 }
                 if (use <= 18)
                 {
@@ -17314,7 +17349,7 @@ namespace AngbandOS
             }
             if (Player.Speed != oldSpeed)
             {
-                PrSpeedRedrawAction.Set();
+                RedrawSpeedFlaggedAction.Set();
             }
             Player.ArmourClassBonus += Player.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
             Player.DamageBonus += Player.AbilityScores[Ability.Strength].StrDamageBonus;
@@ -17326,7 +17361,7 @@ namespace AngbandOS
             Player.DisplayedAttackBonus += Player.AbilityScores[Ability.Strength].StrAttackBonus;
             if (Player.DisplayedBaseArmourClass != oldDisAc || Player.DisplayedArmourClassBonus != oldDisToA)
             {
-                PrArmorRedrawAction.Set();
+                RedrawArmorFlaggedAction.Set();
             }
             int hold = Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
             oPtr = Player.Inventory[InventorySlot.RangedWeapon];
@@ -17680,7 +17715,7 @@ namespace AngbandOS
                     Player.FractionalHealth = 0;
                 }
                 Player.MaxHealth = mhp;
-                PrHpRedrawAction.Set();
+                RedrawHpFlaggedAction.Set();
             }
         }
 
@@ -17779,7 +17814,7 @@ namespace AngbandOS
                     Player.FractionalMana = 0;
                 }
                 Player.MaxMana = msp;
-                PrManaRedrawAction.Set();
+                RedrawManaFlaggedAction.Set();
             }
             if (CharacterXtra)
             {
@@ -17960,7 +17995,7 @@ namespace AngbandOS
                     }
                 }
                 Player.OldSpareSpellSlots = Player.SpareSpellSlots;
-                PrStudyRedrawAction.Set();
+                RedrawStudyFlaggedAction.Set();
             }
         }
 

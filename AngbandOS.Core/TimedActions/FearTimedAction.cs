@@ -30,7 +30,7 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.PrAfraidRedrawAction.Set();
+            SaveGame.RedrawAfraidFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }

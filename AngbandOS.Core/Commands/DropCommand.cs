@@ -46,7 +46,7 @@
             saveGame.EnergyUse = 50;
             // Drop it
             saveGame.Player.InvenDrop(itemIndex, amount);
-            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.RedrawEquippyFlaggedAction.Set();
         }
     }
 }

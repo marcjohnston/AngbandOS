@@ -36,7 +36,7 @@
             // Take off the item
             saveGame.EnergyUse = 50;
             saveGame.Player.InvenTakeoff(itemIndex, 255);
-            saveGame.PrEquippyRedrawAction.Set();
+            saveGame.RedrawEquippyFlaggedAction.Set();
         }
     }
 }

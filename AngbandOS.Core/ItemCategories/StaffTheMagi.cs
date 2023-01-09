@@ -32,7 +32,7 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.SaveGame.Player.FractionalMana = 0;
                 eventArgs.Identified = true;
                 eventArgs.SaveGame.MsgPrint("Your feel your head clear.");
-                eventArgs.SaveGame.PrManaRedrawAction.Set();
+                eventArgs.SaveGame.RedrawManaFlaggedAction.Set();
             }
         }
     }

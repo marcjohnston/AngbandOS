@@ -61,7 +61,7 @@ namespace AngbandOS.Core.AttackEffects
                     saveGame.MsgPrint("Your purse feels lighter.");
                     saveGame.MsgPrint("All of your coins were stolen!");
                 }
-                saveGame.PrGoldRedrawAction.Set();
+                saveGame.RedrawGoldFlaggedAction.Set();
                 blinked = true;
             }
         }

@@ -91,7 +91,7 @@ namespace AngbandOS.Projection
             {
                 if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
                 {
-                    SaveGame.PrHealthRedrawAction.Set();
+                    SaveGame.RedrawHealthFlaggedAction.Set();
                 }
                 mPtr.SleepLevel = 0;
                 mPtr.Health -= dam;
@@ -179,7 +179,7 @@ namespace AngbandOS.Projection
             {
                 SaveGame.Player.TimedEtherealness.Reset();
                 SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
-                SaveGame.PrMapRedrawAction.Set();
+                SaveGame.RedrawMapFlaggedAction.Set();
                 SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateMonsters);
             }
             return true;

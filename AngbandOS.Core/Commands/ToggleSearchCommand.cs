@@ -22,14 +22,14 @@ namespace AngbandOS.Commands
             {
                 saveGame.Player.IsSearching = false;
                 saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                saveGame.PrStateRedrawAction.Set();
+                saveGame.RedrawStateFlaggedAction.Set();
             }
             else
             {
                 saveGame.Player.IsSearching = true;
                 saveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-                saveGame.PrStateRedrawAction.Set();
-                saveGame.PrSpeedRedrawAction.Set();
+                saveGame.RedrawStateFlaggedAction.Set();
+                saveGame.RedrawSpeedFlaggedAction.Set();
             }
         }
     }

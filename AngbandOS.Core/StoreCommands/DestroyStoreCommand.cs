@@ -80,7 +80,7 @@
                 item.Inscription = feel;
                 item.IdentSense = true;
                 saveGame.Player.NoticeFlags |= Constants.PnCombine;
-                saveGame.PrEquippyRedrawAction.Set();
+                saveGame.RedrawEquippyFlaggedAction.Set();
                 return;
             }
             saveGame.MsgPrint($"You destroy {itemName}.");

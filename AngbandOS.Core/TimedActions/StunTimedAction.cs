@@ -118,7 +118,7 @@
             }
             SaveGame.Disturb(false);
             SaveGame.Player.UpdatesNeeded.Set(UpdateFlags.UpdateBonuses);
-            SaveGame.PrStunRedrawAction.Set();
+            SaveGame.RedrawStunFlaggedAction.Set();
             SaveGame.HandleStuff();
             return true;
         }
