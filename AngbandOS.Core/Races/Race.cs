@@ -5,6 +5,11 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal abstract class Race
     {
+        protected SaveGame SaveGame { get; }
+        public Race(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
         public abstract int[] AbilityBonus { get; }
         public abstract int AgeRange { get; }
         public abstract int BaseAge { get; }

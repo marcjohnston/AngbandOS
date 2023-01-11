@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class SpriteRace : Race
     {
+        private SpriteRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Sprite";
         public override int[] AbilityBonus => new int[] { -4, 3, 3, 3, -2, 2 };
         public override int BaseDisarmBonus => 10;

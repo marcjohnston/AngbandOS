@@ -951,8 +951,8 @@ namespace AngbandOS
                             Race newRace;
                             do
                             {
-                                newRaceIndex = Program.Rng.RandomLessThan(SaveGame.Races.Count);
-                                newRace = SaveGame.Races[newRaceIndex];
+                                newRaceIndex = Program.Rng.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
+                                newRace = SaveGame.SingletonRepository.Races[newRaceIndex];
                             } while (newRace is Race);
                             SaveGame.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                             ChangeRace(newRace);

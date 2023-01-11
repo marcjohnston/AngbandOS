@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class TchoTchoRace : Race
     {
+        private TchoTchoRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Tcho-Tcho";
         public override int[] AbilityBonus => new int[] { 3, -2, -1, 1, 2, -2 };
         public override int BaseDisarmBonus => -2;

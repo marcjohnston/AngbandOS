@@ -14,6 +14,7 @@ namespace AngbandOS.Core
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
         public SingletonFactory<BaseInventorySlot> InventorySlots;
+        public SingletonFactory<Race> Races;
 
         public void Initialize(SaveGame saveGame)
         {
@@ -53,6 +54,7 @@ namespace AngbandOS.Core
                 }
             }
             MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces.ToArray());
+            Races = new SingletonFactory<Race>(saveGame);
         }
     }
 }

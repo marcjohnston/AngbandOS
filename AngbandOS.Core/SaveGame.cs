@@ -189,8 +189,6 @@ namespace AngbandOS
         private string[][] _keymapAct;
         private string _requestCommandBuffer;
 
-        public readonly List<Race> Races = new List<Race>();
-
         /// <summary>
         /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
         /// </summary>
@@ -311,8 +309,7 @@ namespace AngbandOS
                 RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
                 RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
-        SingletonRepository.Initialize(this);
-            LoadAllTypes();
+            SingletonRepository.Initialize(this);
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             PopulateNewProfile();
@@ -320,20 +317,6 @@ namespace AngbandOS
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
-        }
-
-        private void LoadAllTypes()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            foreach (Type type in assembly.GetTypes())
-            {
-                // Load Races.
-                if (!type.IsAbstract && typeof(Race).IsAssignableFrom(type))
-                {
-                    Race race = (Race)Activator.CreateInstance(type);
-                    Races.Add(race);
-                }
-            }
         }
 
         private void PopulateNewProfile()
@@ -11613,7 +11596,7 @@ namespace AngbandOS
             if (ex == null)
             {
                 _prevSex = Constants.SexFemale;
-                _prevRace = new HumanRace();
+                _prevRace = SingletonRepository.Races.Get<HumanRace>();
                 _prevClass = CharacterClass.Warrior;
                 _prevRealm1 = Realm.None;
                 _prevRealm2 = Realm.None;
@@ -11825,8 +11808,8 @@ namespace AngbandOS
                             autoChose[stage] = true;
                             do
                             {
-                                int raceIndex = Program.Rng.RandomLessThan(Races.Count);
-                                Player.Race = Races[raceIndex];
+                                int raceIndex = Program.Rng.RandomLessThan(SingletonRepository.Races.Count);
+                                Player.Race = SingletonRepository.Races[raceIndex];
                                 Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             }
                             while ((Player.Race.Choice & (1L << Player.ProfessionIndex)) == 0);
@@ -11834,12 +11817,12 @@ namespace AngbandOS
                             break;
                         }
                         autoChose[stage] = false;
-                        _menuLength = Races.Count;
+                        _menuLength = SingletonRepository.Races.Count;
 
                         // Create the menu for the races.
-                        MenuItem<Race>[] _raceMenu = Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
+                        MenuItem<Race>[] _raceMenu = SingletonRepository.Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
 
-                        for (i = 0; i < Races.Count; i++)
+                        for (i = 0; i < SingletonRepository.Races.Count; i++)
                         {
                             _menuItem[i] = _raceMenu[i].Text;
                         }
@@ -13198,12 +13181,14 @@ namespace AngbandOS
 
         public void GenerateNewLevel()
         {
-            for (int num = 0; ; num++)
+            // Loop until we are able to build the level.  Keep track of the number of attempts.
+            for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
             {
                 bool okay = true;
                 Level.OMax = 1;
-                int i;
-                for (i = 0; i < Level.MaxHgt; i++)
+
+                // Allocate and reset the grid tiles.
+                for (int i = 0; i < Level.MaxHgt; i++)
                 {
                     Level.Grid[i] = new GridTile[Level.MaxWid];
                     for (int j = 0; j < Level.MaxWid; j++)
@@ -13223,6 +13208,7 @@ namespace AngbandOS
                         }
                     }
                 }
+
                 Level.PanelRowMin = 0;
                 Level.PanelRowMax = 0;
                 Level.PanelColMin = 0;
@@ -13276,8 +13262,7 @@ namespace AngbandOS
                     Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
                     Level.PanelRow = Level.MaxPanelRows;
                     Level.PanelCol = Level.MaxPanelCols;
-                    if (Wilderness[Player.WildernessY][Player.WildernessX]
-                            .Town != null)
+                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
                     {
                         TownGen();
                     }
@@ -13418,7 +13403,7 @@ namespace AngbandOS
                 {
                     okay = false;
                 }
-                if (num < 100)
+                if (generateAttemptNumber < 100)
                 {
                     int totalFeeling = Level.TreasureFeeling + Level.DangerFeeling;
                     if (totalFeeling > 18 ||
@@ -13434,6 +13419,8 @@ namespace AngbandOS
                 {
                     break;
                 }
+
+                // Reset the level so that we can attempt again.
                 Level.WipeOList();
                 Level.Monsters.WipeMList();
             }

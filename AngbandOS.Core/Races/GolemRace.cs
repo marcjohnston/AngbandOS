@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class GolemRace : Race
     {
+        private GolemRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Golem";
         public override int[] AbilityBonus => new int[] { 4, -5, -5, 0, 4, -4 };
         public override int BaseDisarmBonus => -5;

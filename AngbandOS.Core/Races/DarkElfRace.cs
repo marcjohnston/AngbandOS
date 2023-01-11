@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class DarkElfRace : Race
     {
+        private DarkElfRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Dark Elf";
         public override int[] AbilityBonus => new int[] { -1, 3, 2, 2, -2, 1 };
         public override int BaseDisarmBonus => 5;

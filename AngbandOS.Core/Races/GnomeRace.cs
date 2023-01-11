@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class GnomeRace : Race
     {
+        private GnomeRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Gnome";
         public override int[] AbilityBonus => new int[] { -1, 2, 0, 2, 1, -2 };
         public override int BaseDisarmBonus => 10;

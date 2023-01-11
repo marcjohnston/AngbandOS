@@ -5,6 +5,7 @@ namespace AngbandOS.Core.Races
     [Serializable]
     internal class MindFlayerRace : Race
     {
+        private MindFlayerRace(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Mind Flayer";
         public override int[] AbilityBonus => new int[] { -3, 4, 4, 0, -2, -5 };
         public override int BaseDisarmBonus => 10;

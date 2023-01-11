@@ -5,26 +5,26 @@
     {
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Mauser the Chemist", 10000, 111, new HalfElfRace()),
-            new StoreOwner("Wizzle the Chaotic", 10000, 110, new HobbitRace()),
-            new StoreOwner("Kakalrakakal", 15000, 116, new KlackonRace()),
-            new StoreOwner("Jal-Eth the Alchemist", 15000, 111, new ElfRace()),
-            new StoreOwner("Fanelath the Cautious", 10000, 111, new DwarfRace()),
-            new StoreOwner("Runcie the Insane", 10000, 110, new HumanRace()),
-            new StoreOwner("Grumbleworth", 15000, 116, new GnomeRace()),
-            new StoreOwner("Flitter", 15000, 111, new SpriteRace()),
-            new StoreOwner("Xarillus", 10000, 111, new HumanRace()),
-            new StoreOwner("Egbert the Old", 10000, 110, new DwarfRace()),
-            new StoreOwner("Valindra the Proud", 15000, 116, new HighElfRace()),
-            new StoreOwner("Taen the Alchemist", 15000, 111, new HumanRace()),
-            new StoreOwner("Cayd the Sweet", 10000, 111, new VampireRace()),
-            new StoreOwner("Fulir the Dark", 10000, 110, new NibelungRace()),
-            new StoreOwner("Domli the Humble", 15000, 116, new DwarfRace()),
-            new StoreOwner("Yaarjukka Demonspawn", 15000, 111, new ImpRace()),
-            new StoreOwner("Gelaraldor the Herbmaster", 10000, 111, new HighElfRace()),
-            new StoreOwner("Olelaldan the Wise", 10000, 110, new TchoTchoRace()),
-            new StoreOwner("Fthoglo the Demonicist", 15000, 116, new ImpRace()),
-            new StoreOwner("Dridash the Alchemist", 15000, 111, new HalfOrcRace())
+            new StoreOwner("Mauser the Chemist", 10000, 111, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
+            new StoreOwner("Wizzle the Chaotic", 10000, 110, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
+            new StoreOwner("Kakalrakakal", 15000, 116, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
+            new StoreOwner("Jal-Eth the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
+            new StoreOwner("Fanelath the Cautious", 10000, 111, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
+            new StoreOwner("Runcie the Insane", 10000, 110, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
+            new StoreOwner("Grumbleworth", 15000, 116, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
+            new StoreOwner("Flitter", 15000, 111, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
+            new StoreOwner("Xarillus", 10000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
+            new StoreOwner("Egbert the Old", 10000, 110, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
+            new StoreOwner("Valindra the Proud", 15000, 116, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
+            new StoreOwner("Taen the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
+            new StoreOwner("Cayd the Sweet", 10000, 111, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
+            new StoreOwner("Fulir the Dark", 10000, 110, SaveGame.SingletonRepository.Races.Get<NibelungRace>()),
+            new StoreOwner("Domli the Humble", 15000, 116, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
+            new StoreOwner("Yaarjukka Demonspawn", 15000, 111, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
+            new StoreOwner("Gelaraldor the Herbmaster", 10000, 111, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
+            new StoreOwner("Olelaldan the Wise", 10000, 110, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
+            new StoreOwner("Fthoglo the Demonicist", 15000, 116, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
+            new StoreOwner("Dridash the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>())
         };
 
         public AlchemistStore(SaveGame saveGame) : base(saveGame, StoreType.StoreAlchemist)
