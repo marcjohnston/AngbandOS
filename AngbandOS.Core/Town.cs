@@ -16,6 +16,10 @@ namespace AngbandOS
         public readonly string Name;
         public readonly Store[] Stores;
         public int Index;
+
+        /// <summary>
+        /// Represents the RND seed that is used to generate the town.  This ensures the town is regenerated the same when the player returns.
+        /// </summary>
         public int Seed;
         public bool Visited;
         public int X;

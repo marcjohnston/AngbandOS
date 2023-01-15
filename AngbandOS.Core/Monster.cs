@@ -2085,13 +2085,11 @@ namespace AngbandOS
             int moveVal = 0;
             bool done = false;
             // Default to moving towards the player's exact location
-            MapCoordinate targetLocation = new MapCoordinate(saveGame.Player.MapX, saveGame.Player.MapY);
+            GridCoordinate targetLocation = new GridCoordinate(saveGame.Player.MapX, saveGame.Player.MapY);
             // Adjust our target based on the player's scent if we can't move in a straight line to them
             TrackPlayerByScent(saveGame, targetLocation);
             // Get the relative move needed to reach our target location
-            MapCoordinate desiredRelativeMovement = new MapCoordinate();
-            desiredRelativeMovement.Y = MapY - targetLocation.Y;
-            desiredRelativeMovement.X = MapX - targetLocation.X;
+            GridCoordinate desiredRelativeMovement = new GridCoordinate(MapX - targetLocation.X, MapY - targetLocation.Y);
             if (!SmFriendly)
             {
                 // If we're a pack animal that can't go through walls
@@ -2124,14 +2122,12 @@ namespace AngbandOS
                     for (int i = 0; i < 8; i++)
                     {
                         int monsterIndex = GetMonsterIndex(saveGame);
-                        targetLocation.Y = saveGame.Player.MapY + saveGame.Level.OrderedDirectionYOffset[(monsterIndex + i) & 7];
-                        targetLocation.X = saveGame.Player.MapX + saveGame.Level.OrderedDirectionXOffset[(monsterIndex + i) & 7];
+                        targetLocation = new GridCoordinate(saveGame.Player.MapX + saveGame.Level.OrderedDirectionXOffset[(monsterIndex + i) & 7], saveGame.Player.MapY + saveGame.Level.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                         // We might have got a '5' meaning stay where we are, so replace that with
                         // moving towards the player
                         if (MapY == targetLocation.Y && MapX == targetLocation.X)
                         {
-                            targetLocation.Y = saveGame.Player.MapY;
-                            targetLocation.X = saveGame.Player.MapX;
+                            targetLocation = new GridCoordinate(saveGame.Player.MapX, saveGame.Player.MapY);
                             break;
                         }
                         // Repeat till we get a direction we can move in
@@ -2141,8 +2137,7 @@ namespace AngbandOS
                         }
                         break;
                     }
-                    desiredRelativeMovement.Y = MapY - targetLocation.Y;
-                    desiredRelativeMovement.X = MapX - targetLocation.X;
+                    desiredRelativeMovement = new GridCoordinate(MapX - targetLocation.X, MapY - targetLocation.Y);
                     done = true;
                 }
             }
@@ -2152,8 +2147,7 @@ namespace AngbandOS
                 if (MonsterShouldRetreat(saveGame))
                 {
                     // If we should be scared, simply move the opposite way to the player
-                    desiredRelativeMovement.Y = -desiredRelativeMovement.Y;
-                    desiredRelativeMovement.X = -desiredRelativeMovement.X;
+                    desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, - desiredRelativeMovement.Y);
                 }
             }
             else
@@ -2166,8 +2160,7 @@ namespace AngbandOS
                     if (!FindSafeSpot(saveGame, desiredRelativeMovement))
                     {
                         // If we failed to find one, just back off
-                        desiredRelativeMovement.Y = -desiredRelativeMovement.Y;
-                        desiredRelativeMovement.X = -desiredRelativeMovement.X;
+                        desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, -desiredRelativeMovement.Y);
                     }
                     else
                     {
@@ -2360,7 +2353,7 @@ namespace AngbandOS
         /// </summary>
         /// <param name="monsterIndex"> The index of the monster </param>
         /// <param name="coord"> The location we're moving to </param>
-        private void AvoidPlayersScent(SaveGame saveGame, MapCoordinate coord)
+        private void AvoidPlayersScent(SaveGame saveGame, GridCoordinate coord)
         {
             int monsterY = MapY;
             int monsterX = MapX;
@@ -2419,8 +2412,7 @@ namespace AngbandOS
                 return;
             }
             // Go towards the weakest scent
-            coord.Y = monsterY - gy;
-            coord.X = monsterX - gx;
+            coord = new GridCoordinate(monsterX - gx, monsterY - gy);
         }
 
         /// <summary>
@@ -2428,7 +2420,7 @@ namespace AngbandOS
         /// </summary>
         /// <param name="monsterIndex"> The index of the monster trying to move </param>
         /// <param name="target"> The target location we're moving to </param>
-        private void TrackPlayerByScent(SaveGame saveGame, MapCoordinate target)
+        private void TrackPlayerByScent(SaveGame saveGame, GridCoordinate target)
         {
             // If we can move through walls then we don't need to adjust anything
             if (Race.PassWall)
@@ -2485,8 +2477,7 @@ namespace AngbandOS
                 when = saveGame.Level.Grid[y][x].ScentAge;
                 cost = saveGame.Level.Grid[y][x].ScentStrength;
                 // Give us a target in the general direction of the strongest scent
-                target.Y = saveGame.Player.MapY + (16 * saveGame.Level.OrderedDirectionYOffset[i]);
-                target.X = saveGame.Player.MapX + (16 * saveGame.Level.OrderedDirectionXOffset[i]);
+                target = new GridCoordinate(saveGame.Player.MapX + (16 * saveGame.Level.OrderedDirectionXOffset[i]), saveGame.Player.MapY + (16 * saveGame.Level.OrderedDirectionYOffset[i]));
             }
         }
 
@@ -2498,7 +2489,7 @@ namespace AngbandOS
         /// A map location, which will be amended to contain the hiding spot
         /// </param>
         /// <returns> True if a hiding spot was found, or false if it wasn't </returns>
-        private bool FindAmbushSpot(SaveGame saveGame, MapCoordinate relativeTarget)
+        private bool FindAmbushSpot(SaveGame saveGame, GridCoordinate relativeTarget)
         {
             int fy = MapY;
             int fx = MapX;
@@ -2547,8 +2538,7 @@ namespace AngbandOS
                 // If we found at least one spot, return true with the coordinates
                 if (shortestDistance < 999)
                 {
-                    relativeTarget.Y = fy - hidingSpotY;
-                    relativeTarget.X = fx - hidingSpotX;
+                    relativeTarget = new GridCoordinate(fx - hidingSpotX, fy - hidingSpotY);
                     return true;
                 }
             }
@@ -3171,7 +3161,7 @@ namespace AngbandOS
         /// A map location, which will be amended to contain the safe spot
         /// </param>
         /// <returns> True if a safe spot was found, or false if it wasn't </returns>
-        private bool FindSafeSpot(SaveGame saveGame, MapCoordinate relativeTarget)
+        private bool FindSafeSpot(SaveGame saveGame, GridCoordinate relativeTarget)
         {
             int safeSpotY = 0;
             int safeSpotX = 0;
@@ -3226,8 +3216,7 @@ namespace AngbandOS
                 // If we found a spot then save its coordinates and return true
                 if (longestDistance > 0)
                 {
-                    relativeTarget.Y = MapY - safeSpotY;
-                    relativeTarget.X = MapY - safeSpotX;
+                    relativeTarget = new GridCoordinate(MapY - safeSpotX, MapY - safeSpotY);
                     return true;
                 }
             }

@@ -18,15 +18,15 @@
         {
             bool disturb = false;
             // Check if there's only one thing we can open
-            MapCoordinate coord = new MapCoordinate();
-            int numDoors = saveGame.CountClosedDoors(coord);
-            int numChests = saveGame.CountChests(coord, false);
+            int numDoors = saveGame.CountClosedDoors(out GridCoordinate? doorCoord);
+            int numChests = saveGame.CountChests(out GridCoordinate? chestCoord, false);
             if (numDoors != 0 || numChests != 0)
             {
                 bool tooMany = (numDoors != 0 && numChests != 0) || numDoors > 1 || numChests > 1;
                 if (!tooMany)
                 {
                     // There's only one thing we can open, so assume we mean that thing
+                    GridCoordinate coord = numDoors == 1 ? doorCoord : chestCoord;
                     saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }

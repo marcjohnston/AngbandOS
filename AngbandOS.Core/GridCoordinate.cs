@@ -9,26 +9,20 @@
 namespace AngbandOS
 {
     /// <summary>
-    /// A simple co-ordinate, stored in a reference type so it can be passed from function to
-    /// function and have its properties updated
+    /// A simple immutable coordinate, stored in a reference type so it can be passed from function to function.
     /// </summary>
     [Serializable]
-    internal class MapCoordinate
+    internal class GridCoordinate
     {
-        public int X;
-        public int Y;
+        public readonly int X;
+        public readonly int Y;
 
-        public MapCoordinate()
+        public GridCoordinate Clone()
         {
+            return new GridCoordinate(X, Y);
         }
 
-        public MapCoordinate(MapCoordinate original)
-        {
-            X = original.X;
-            Y = original.Y;
-        }
-
-        public MapCoordinate(int x, int y)
+        public GridCoordinate(int x, int y)
         {
             X = x;
             Y = y;

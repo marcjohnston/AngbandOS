@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.FlaggedActions;
-using System.Drawing;
-using System.Reflection;
+﻿using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS
@@ -240,11 +238,11 @@ namespace AngbandOS
             new Room(-1, 2, -2, 3, 10), new Room(0, 1, -1, 1, 1)
         };
 
-        private MapCoordinate[] Cent;
-        private MapCoordinate[] Door;
+        private GridCoordinate[] Cent;
+        private GridCoordinate[] Door;
         private bool[][] RoomMap;
-        private MapCoordinate[] Tunn;
-        private MapCoordinate[] Wall;
+        private GridCoordinate[] Tunn;
+        private GridCoordinate[] Wall;
         private int CentN;
         private int ColRooms;
         private bool Crowded;
@@ -6901,9 +6899,10 @@ namespace AngbandOS
         /// <param name="mapCoordinate"> The coordinate to fill in with the location </param>
         /// <param name="trappedOnly"> True if we're only interested in trapped chests </param>
         /// <returns> The number of chests </returns>
-        public int CountChests(MapCoordinate mapCoordinate, bool trappedOnly)
+        public int CountChests(out GridCoordinate? mapCoordinate, bool trappedOnly)
         {
             int count = 0;
+            mapCoordinate = null;
             for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
             {
                 int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
@@ -6928,8 +6927,7 @@ namespace AngbandOS
                 }
                 count++;
                 // Remember the coordinate
-                mapCoordinate.Y = yy;
-                mapCoordinate.X = xx;
+                mapCoordinate = new GridCoordinate(xx, yy);
             }
             return count;
         }
@@ -6940,9 +6938,10 @@ namespace AngbandOS
         /// </summary>
         /// <param name="mapCoordinate"> The location around which to search </param>
         /// <returns> The number of closed doors </returns>
-        public int CountClosedDoors(MapCoordinate mapCoordinate)
+        public int CountClosedDoors(out GridCoordinate? mapCoordinate)
         {
             int count = 0;
+            mapCoordinate = null;
             for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
             {
                 int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
@@ -6964,8 +6963,7 @@ namespace AngbandOS
                 }
                 count++;
                 // Remember the coordinate
-                mapCoordinate.Y = yy;
-                mapCoordinate.X = xx;
+                mapCoordinate = new GridCoordinate(xx, yy);
             }
             return count;
         }
@@ -6978,9 +6976,10 @@ namespace AngbandOS
         /// The coordinate in which to store the location of the last trap found
         /// </param>
         /// <returns> The number of traps found </returns>
-        public int CountKnownTraps(MapCoordinate mapCoordinate)
+        public int CountKnownTraps(out GridCoordinate? mapCoordinate)
         {
             int count = 0;
+            mapCoordinate = null;
             for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
             {
                 int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
@@ -6997,8 +6996,7 @@ namespace AngbandOS
                 }
                 count++;
                 // Remember its location
-                mapCoordinate.Y = yy;
-                mapCoordinate.X = xx;
+                mapCoordinate = new GridCoordinate(xx, yy);
             }
             return count;
         }
@@ -7011,9 +7009,10 @@ namespace AngbandOS
         /// The map coordinate into which the location should be placed
         /// </param>
         /// <returns> The number of open doors found </returns>
-        public int CountOpenDoors(MapCoordinate mapCoordinate)
+        public int CountOpenDoors(out GridCoordinate? mapCoordinate)
         {
             int count = 0;
+            mapCoordinate = null;
             for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
             {
                 int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
@@ -7030,8 +7029,7 @@ namespace AngbandOS
                 }
                 count++;
                 // Remember the location
-                mapCoordinate.Y = yy;
-                mapCoordinate.X = xx;
+                mapCoordinate = new GridCoordinate(xx, yy);
             }
             return count;
         }
@@ -13228,9 +13226,7 @@ namespace AngbandOS
                     }
                     else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
                     {
-                        DungeonDifficulty =
-                            Wilderness[Player.WildernessY][Player.WildernessX]
-                                .Dungeon.Offset / 2;
+                        DungeonDifficulty = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Offset / 2;
                         if (DungeonDifficulty < 4)
                         {
                             DungeonDifficulty = 4;
@@ -13789,8 +13785,7 @@ namespace AngbandOS
                     col1 = tmpCol;
                     if (WallN < WallMax)
                     {
-                        Wall[WallN].Y = row1;
-                        Wall[WallN].X = col1;
+                        Wall[WallN] = new GridCoordinate(col1, row1);
                         WallN++;
                     }
                     for (y = row1 - 1; y <= row1 + 1; y++)
@@ -13815,8 +13810,7 @@ namespace AngbandOS
                     col1 = tmpCol;
                     if (TunnN < TunnMax)
                     {
-                        Tunn[TunnN].Y = row1;
-                        Tunn[TunnN].X = col1;
+                        Tunn[TunnN] = new GridCoordinate(col1, row1);
                         TunnN++;
                     }
                     doorFlag = false;
@@ -13829,8 +13823,7 @@ namespace AngbandOS
                     {
                         if (DoorN < DoorMax)
                         {
-                            Door[DoorN].Y = row1;
-                            Door[DoorN].X = col1;
+                            Door[DoorN] = new GridCoordinate(col1, row1);
                             DoorN++;
                         }
                         doorFlag = true;
@@ -14135,26 +14128,26 @@ namespace AngbandOS
             bool destroyed = false;
             bool emptyLevel = false;
 
-            Cent = new MapCoordinate[CentMax];
-            for (int i = 0; i < CentMax; i++)
-            {
-                Cent[i] = new MapCoordinate();
-            }
-            Door = new MapCoordinate[DoorMax];
-            for (int i = 0; i < DoorMax; i++)
-            {
-                Door[i] = new MapCoordinate();
-            }
-            Wall = new MapCoordinate[WallMax];
-            for (int i = 0; i < WallMax; i++)
-            {
-                Wall[i] = new MapCoordinate();
-            }
-            Tunn = new MapCoordinate[TunnMax];
-            for (int i = 0; i < TunnMax; i++)
-            {
-                Tunn[i] = new MapCoordinate();
-            }
+            Cent = new GridCoordinate[CentMax];
+            //for (int i = 0; i < CentMax; i++)
+            //{
+            //    Cent[i] = new MapCoordinate();
+            //}
+            Door = new GridCoordinate[DoorMax];
+            //for (int i = 0; i < DoorMax; i++)
+            //{
+            //    Door[i] = new MapCoordinate();
+            //}
+            Wall = new GridCoordinate[WallMax];
+            //for (int i = 0; i < WallMax; i++)
+            //{
+            //    Wall[i] = new MapCoordinate();
+            //}
+            Tunn = new GridCoordinate[TunnMax];
+            //for (int i = 0; i < TunnMax; i++)
+            //{
+            //    Tunn[i] = new MapCoordinate();
+            //}
             RoomMap = new bool[MaxRoomsRow][];
             for (int i = 0; i < MaxRoomsRow; i++)
             {
@@ -14303,10 +14296,8 @@ namespace AngbandOS
                 int pick2 = Program.Rng.RandomLessThan(CentN);
                 int y1 = Cent[pick1].Y;
                 int x1 = Cent[pick1].X;
-                Cent[pick1].Y = Cent[pick2].Y;
-                Cent[pick1].X = Cent[pick2].X;
-                Cent[pick2].Y = y1;
-                Cent[pick2].X = x1;
+                Cent[pick1] = Cent[pick2].Clone();
+                Cent[pick2] = new GridCoordinate(x1, y1);
             }
             DoorN = 0;
             y = Cent[CentN - 1].Y;
@@ -15562,8 +15553,7 @@ namespace AngbandOS
             roomType.Build(this, y, x);
             if (CentN < CentMax)
             {
-                Cent[CentN].Y = y;
-                Cent[CentN].X = x;
+                Cent[CentN] = new GridCoordinate(x, y);
                 CentN++;
             }
             for (y = y1; y <= y2; y++)

@@ -17,9 +17,8 @@
         public void Execute(SaveGame saveGame)
         {
             bool disturb = false;
-            MapCoordinate coord = new MapCoordinate();
-            int numTraps = saveGame.CountKnownTraps(coord);
-            int numChests = saveGame.CountChests(coord, true);
+            int numTraps = saveGame.CountKnownTraps(out GridCoordinate? trapCoord);
+            int numChests = saveGame.CountChests(out GridCoordinate? chestCoord, true);
             // Count the possible traps and chests we might want to disarm
             if (numTraps != 0 || numChests != 0)
             {
@@ -27,6 +26,7 @@
                 // If only one then we have our target
                 if (!tooMany)
                 {
+                    GridCoordinate coord = numTraps == 1 ? trapCoord : chestCoord;
                     saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
                 }
             }

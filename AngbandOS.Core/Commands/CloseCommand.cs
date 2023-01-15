@@ -16,10 +16,9 @@
 
         public void Execute(SaveGame saveGame)
         {
-            MapCoordinate coord = new MapCoordinate();
             bool disturb = false;
             // If there's only one door, assume we mean that one and don't ask for a direction
-            if (saveGame.CountOpenDoors(coord) == 1)
+            if (saveGame.CountOpenDoors(out GridCoordinate? coord) == 1)
             {
                 saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
             }
