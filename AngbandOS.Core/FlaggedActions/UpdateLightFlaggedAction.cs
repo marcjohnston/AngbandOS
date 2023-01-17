@@ -8,31 +8,26 @@ namespace AngbandOS.Core.FlaggedActions
         private void CaveLightHack(int y, int x)
         {
             SaveGame.Level.Grid[y][x].TileFlags.Set(GridTile.PlayerLit);
-            SaveGame.Level._lightY[SaveGame.Level._lightN] = y;
-            SaveGame.Level._lightX[SaveGame.Level._lightN] = x;
-            SaveGame.Level._lightN++;
+            SaveGame.Level.Light.Add(new GridCoordinate(x, y));
         }
 
         protected override void Execute()
         {
-            int i, x, y;
             if (SaveGame.Player.LightLevel <= 0)
             {
                 SaveGame.UpdateRemoveLightFlaggedAction.Check(true);
                 SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
                 return;
             }
-            for (i = 0; i < SaveGame.Level._lightN; i++)
+            foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
             {
-                y = SaveGame.Level._lightY[i];
-                x = SaveGame.Level._lightX[i];
-                SaveGame.Level.Grid[y][x].TileFlags.Clear(GridTile.PlayerLit);
-                SaveGame.Level.Grid[y][x].TileFlags.Set(GridTile.TempFlag);
-                SaveGame.Level.TempY[SaveGame.Level.TempN] = y;
-                SaveGame.Level.TempX[SaveGame.Level.TempN] = x;
+                SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
+                SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Set(GridTile.TempFlag);
+                SaveGame.Level.TempY[SaveGame.Level.TempN] = gridCoordinate.Y;
+                SaveGame.Level.TempX[SaveGame.Level.TempN] = gridCoordinate.X;
                 SaveGame.Level.TempN++;
             }
-            SaveGame.Level._lightN = 0;
+            SaveGame.Level.Light.Clear();
             CaveLightHack(SaveGame.Player.MapY, SaveGame.Player.MapX);
             if (SaveGame.Player.LightLevel >= 1)
             {
@@ -115,9 +110,9 @@ namespace AngbandOS.Core.FlaggedActions
                 {
                     maxX = SaveGame.Level.CurWid - 1;
                 }
-                for (y = minY; y <= maxY; y++)
+                for (int y = minY; y <= maxY; y++)
                 {
-                    for (x = minX; x <= maxX; x++)
+                    for (int x = minX; x <= maxX; x++)
                     {
                         int dy = SaveGame.Player.MapY > y ? SaveGame.Player.MapY - y : y - SaveGame.Player.MapY;
                         int dx = SaveGame.Player.MapX > x ? SaveGame.Player.MapX - x : x - SaveGame.Player.MapX;
@@ -137,21 +132,19 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                 }
             }
-            for (i = 0; i < SaveGame.Level._lightN; i++)
+            foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
             {
-                y = SaveGame.Level._lightY[i];
-                x = SaveGame.Level._lightX[i];
-                if (SaveGame.Level.Grid[y][x].TileFlags.IsSet(GridTile.TempFlag))
+                if (SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.IsSet(GridTile.TempFlag))
                 {
                     continue;
                 }
-                SaveGame.Level.NoteSpot(y, x);
-                SaveGame.Level.RedrawSingleLocation(y, x);
+                SaveGame.Level.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
+                SaveGame.Level.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
             }
-            for (i = 0; i < SaveGame.Level.TempN; i++)
+            for (int i = 0; i < SaveGame.Level.TempN; i++)
             {
-                y = SaveGame.Level.TempY[i];
-                x = SaveGame.Level.TempX[i];
+                int y = SaveGame.Level.TempY[i];
+                int x = SaveGame.Level.TempX[i];
                 SaveGame.Level.Grid[y][x].TileFlags.Clear(GridTile.TempFlag);
                 if (SaveGame.Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerLit))
                 {

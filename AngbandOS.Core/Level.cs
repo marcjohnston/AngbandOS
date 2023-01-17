@@ -56,9 +56,7 @@ namespace AngbandOS
         private const int _mapWid = MaxWid / _ratio;
         private const int _ratio = 3;
 
-        public readonly int[] _lightX = new int[Constants.LightMax]; // TODO: Make this a list
-        public readonly int[] _lightY = new int[Constants.LightMax];
-        public int _lightN;
+        public readonly List<GridCoordinate> Light = new List<GridCoordinate>();
 
         public readonly int[] _viewX = new int[Constants.ViewMax]; // TODO: Make this a list
         public readonly int[] _viewY = new int[Constants.ViewMax];
