@@ -15,7 +15,7 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.LightLevel <= 0)
             {
-                SaveGame.UpdateRemoveLightFlaggedAction.Check(true);
+                SaveGame.RemoveLightFlaggedAction.Check(true);
                 SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
                 return;
             }

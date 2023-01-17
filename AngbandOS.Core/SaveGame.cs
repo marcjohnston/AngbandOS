@@ -43,8 +43,8 @@ namespace AngbandOS
         public FlaggedAction UpdateLightFlaggedAction { get; }
         public FlaggedAction UpdateManaFlaggedAction { get; }
         public FlaggedAction UpdateMonstersFlaggedAction { get; }
-        public FlaggedAction UpdateRemoveLightFlaggedAction { get; }
-        public FlaggedAction UpdateRemoveViewFlaggedAction { get; }
+        public FlaggedAction RemoveLightFlaggedAction { get; }
+        public FlaggedAction RemoveViewFlaggedAction { get; }
         public FlaggedAction UpdateScentFlaggedAction { get; }
         public FlaggedAction UpdateSpellsFlaggedAction { get; }
         public FlaggedAction UpdateTorchRadiusFlaggedAction { get; }
@@ -290,8 +290,8 @@ namespace AngbandOS
             UpdateLightFlaggedAction = new UpdateLightFlaggedAction(this);
             UpdateManaFlaggedAction = new UpdateManaFlaggedAction(this);
             UpdateMonstersFlaggedAction = new UpdateMonstersFlaggedAction(this);
-            UpdateRemoveLightFlaggedAction = new UpdateRemoveLightFlaggedAction(this);
-            UpdateRemoveViewFlaggedAction = new UpdateRemoveViewFlaggedAction(this);
+            RemoveLightFlaggedAction = new RemoveLightFlaggedAction(this);
+            RemoveViewFlaggedAction = new RemoveViewFlaggedAction(this);
             UpdateScentFlaggedAction = new UpdateScentFlaggedAction(this);
             UpdateSpellsFlaggedAction = new UpdateSpellsFlaggedAction(this);
             UpdateTorchRadiusFlaggedAction = new UpdateTorchRadiusFlaggedAction(this);
@@ -593,8 +593,8 @@ namespace AngbandOS
                 RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
-                UpdateRemoveLightFlaggedAction.Check(true);
-                UpdateRemoveViewFlaggedAction.Check(true);
+                RemoveLightFlaggedAction.Check(true);
+                RemoveViewFlaggedAction.Check(true);
                 if (!Playing && !Player.IsDead)
                 {
                     break;
@@ -1520,8 +1520,8 @@ namespace AngbandOS
             {
                 return;
             }
-            UpdateRemoveLightFlaggedAction.Check();
-            UpdateRemoveViewFlaggedAction.Check();
+            RemoveLightFlaggedAction.Check();
+            RemoveViewFlaggedAction.Check();
             UpdateViewFlaggedAction.Check();
             UpdateLightFlaggedAction.Check();
             UpdateScentFlaggedAction.Check();
@@ -3718,8 +3718,8 @@ namespace AngbandOS
                     Player.TimedBlindness.SetTimer(Player.TimedBlindness.TimeRemaining + 10 + Program.Rng.DieRoll(10));
                 }
             }
-            UpdateRemoveLightFlaggedAction.Set();
-            UpdateRemoveViewFlaggedAction.Set();
+            RemoveLightFlaggedAction.Set();
+            RemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -4417,8 +4417,8 @@ namespace AngbandOS
                     }
                 }
             }
-            UpdateRemoveLightFlaggedAction.Set();
-            UpdateRemoveViewFlaggedAction.Set();
+            RemoveLightFlaggedAction.Set();
+            RemoveViewFlaggedAction.Set();
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -9780,8 +9780,8 @@ namespace AngbandOS
                 return;
             }
             // Switch from the normal game interface to the store interface
-            UpdateRemoveLightFlaggedAction.Check(true);
-            UpdateRemoveViewFlaggedAction.Check(true);
+            RemoveLightFlaggedAction.Check(true);
+            RemoveViewFlaggedAction.Check(true);
             FullScreenOverlay = true;
             CommandArgument = 0;
             //            CommandRepeat = 0; TODO: Confirm this is not needed

@@ -30,8 +30,8 @@
                 return false;
             }
             SaveGame.Disturb(false);
-            SaveGame.UpdateRemoveLightFlaggedAction.Set();
-            SaveGame.UpdateRemoveViewFlaggedAction.Set();
+            SaveGame.RemoveLightFlaggedAction.Set();
+            SaveGame.RemoveViewFlaggedAction.Set();
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.UpdateViewFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();

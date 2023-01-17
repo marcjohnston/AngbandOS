@@ -56,11 +56,8 @@ namespace AngbandOS
         private const int _mapWid = MaxWid / _ratio;
         private const int _ratio = 3;
 
-        public readonly List<GridCoordinate> Light = new List<GridCoordinate>();
-
-        public readonly int[] _viewX = new int[Constants.ViewMax]; // TODO: Make this a list
-        public readonly int[] _viewY = new int[Constants.ViewMax];
-        public int _viewN;
+        public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
+        public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
 
         private readonly SaveGame SaveGame;
 
@@ -1448,8 +1445,8 @@ namespace AngbandOS
                 }
                 oPtr.Marked = false;
             }
-            SaveGame.UpdateRemoveLightFlaggedAction.Set();
-            SaveGame.UpdateRemoveViewFlaggedAction.Set();
+            SaveGame.RemoveLightFlaggedAction.Set();
+            SaveGame.RemoveViewFlaggedAction.Set();
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.UpdateViewFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();

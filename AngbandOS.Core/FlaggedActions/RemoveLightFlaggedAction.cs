@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.FlaggedActions
 {
     [Serializable]
-    internal class UpdateRemoveLightFlaggedAction : FlaggedAction
+    internal class RemoveLightFlaggedAction : FlaggedAction
     {
-        public UpdateRemoveLightFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+        public RemoveLightFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
             foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
