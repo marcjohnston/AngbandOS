@@ -17,7 +17,7 @@ namespace AngbandOS.Mutations.ActiveMutations
             {
                 return;
             }
-            ThrowCommand.DoCmdThrow(saveGame, 2 + (player.Level / 16));
+            saveGame.DoCmdThrow(2 + (player.Level / 16));
         }
 
         public override string ActivationSummary(int lvl)

@@ -4,19 +4,16 @@
     /// Show the previous message
     /// </summary>
     [Serializable]
-    internal class MessageOneCommand : ICommand
+    internal class MessageOneCommand : Command
     {
-        private MessageOneCommand(SaveGame saveGame) { } // This object is a singleton.
+        private MessageOneCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'O';
+        public override char Key => 'O';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            MessageOneStoreCommand.DoCmdMessageOne(saveGame);
+            SaveGame.DoCmdMessageOne();
+            return false;
         }
     }
 }

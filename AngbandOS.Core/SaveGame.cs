@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS
@@ -908,6 +909,10 @@ namespace AngbandOS
             Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
         }
 
+        /// <summary>
+        /// Interrupts a repeat command.  This is known as disturbing the player.
+        /// </summary>
+        /// <param name="stopSearch"></param>
         public void Disturb(bool stopSearch)
         {
             if (CommandRepeat != 0)
@@ -1869,7 +1874,7 @@ namespace AngbandOS
             HackMind = true;
             if (CameFrom == LevelStart.StartHouse)
             {
-                StoreCommand.DoCmdStore(this);
+                DoCmdStore();
                 CameFrom = LevelStart.StartRandom;
             }
             if (CurrentDepth == 0)
@@ -1949,7 +1954,7 @@ namespace AngbandOS
                 }
                 if (CurrentDepth > 0)
                 {
-                    Commands.FeelingAndLocationCommand.DoCmdFeeling(this, true);
+                    DoCmdFeeling(true);
                 }
             }
         }
@@ -6535,6 +6540,31 @@ namespace AngbandOS
             Level.RedrawSingleLocation(ny, nx);
         }
 
+        public void DoCmdEquip()
+        {
+            // We're viewing equipment
+            ViewingEquipment = true;
+            SaveScreen();
+            // We're interested in seeing everything
+            Player.ShowEquip(null);
+            // Get a command
+            string outVal = $"Equipment: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+            PrintLine(outVal, 0, 0);
+            QueuedCommand = Inkey();
+            Load();
+            // Display details if the player wants
+            if (QueuedCommand == '\x1b')
+            {
+                QueuedCommand = (char)0;
+            }
+            else
+            {
+                // If the player selects a command that uses getitem, it will automatically show the
+                // inventory
+                ViewingItemList = true;
+            }
+        }
+
         // CommandHandler
         /// <summary>
         /// Process the player's latest command
@@ -6545,17 +6575,21 @@ namespace AngbandOS
             char c = CurrentCommand;
 
             // Process commands
-            foreach (ICommand command in SingletonRepository.GameCommands)
+            foreach (Command command in SingletonRepository.GameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.
                 if (command.IsEnabled && command.Key == c)
                 {
-                    command.Execute(this);
+                    bool more = command.Execute();
 
-                    // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
-                    if (!isRepeated && command.Repeat.HasValue)
+                    if (!more)
                     {
+                        Disturb(false);
+                    }
+                    else if (!isRepeated && command.Repeat.HasValue)
+                    {
+                        // Apply the default repeat value.  This handles the 0, for no repeat and default repeat count (TBDocs+ ... count = 99).
                         // Only apply the default once.
                         CommandArgument = command.Repeat.Value;
                     }
@@ -6599,6 +6633,12 @@ namespace AngbandOS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <returns>Returns true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
         public bool BashClosedDoor(int y, int x)
         {
             bool more = false;
@@ -6872,7 +6912,7 @@ namespace AngbandOS
         /// </summary>
         /// <param name="y"> The y map coordinate of the door </param>
         /// <param name="x"> The x map coordinate of the door </param>
-        /// <returns> True if the player should be disturbed by the door closing </returns>
+        /// <returns>True if the command can be repeated; false, if the command succeeds or is futile.</returns>
         public bool CloseDoor(int y, int x)
         {
             EnergyUse = 100;
@@ -7237,7 +7277,7 @@ namespace AngbandOS
         /// <param name="y"> The y coordinate of the trap </param>
         /// <param name="x"> The x coordinate of the trap </param>
         /// <param name="dir"> The direction the player should move in </param>
-        /// <returns> </returns>
+        /// <returns>True, if the command can be repeated; false if the disarm succeeds or is futile.</returns>
         public bool DisarmTrap(int y, int x)
         {
             bool more = false;
@@ -7806,7 +7846,7 @@ namespace AngbandOS
         /// </summary>
         /// <param name="y"> The y coordinate of the location </param>
         /// <param name="x"> The x coordinate of the location </param>
-        /// <returns> True if opening the door should disturb the player </returns>
+        /// <returns>True if the command can be repeated; false, if the command succeeds or is futile.</returns>
         public bool OpenDoor(int y, int x)
         {
             bool more = false;
@@ -8505,6 +8545,3445 @@ namespace AngbandOS
             MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
         }
 
+        public void DoActivate()
+        {
+            int itemIndex = -999;
+            if (itemIndex == -999)
+            {
+                // No item passed in, so get one; filtering to activatable items only
+                if (!GetItem(out itemIndex, "Activate which item? ", true, false, false, new ActivatableItemFilter()))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have nothing to activate.");
+                    }
+                    return;
+                }
+            }
+            // Get the item from the index
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Check if the item is activatable
+            if (!Player.ItemMatchesFilter(item, new ActivatableItemFilter()))
+            {
+                MsgPrint("You can't activate that!");
+                return;
+            }
+            // Activating an item uses 100 energy
+            EnergyUse = 100;
+            // Get the level of the item
+            int itemLevel = item.BaseItemCategory.Level;
+            if (item.FixedArtifact != null && item.IsFixedArtifact())
+            {
+                itemLevel = item.FixedArtifact.Level;
+            }
+            // Work out the chance of using the item successfully based on its level and the
+            // player's skill
+            int chance = Player.SkillUseDevice;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                chance /= 2;
+            }
+            chance -= itemLevel > 50 ? 50 : itemLevel;
+            // Always give a slight chance of success
+            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            {
+                chance = Constants.UseDevice;
+            }
+            // If we fail our use item roll just tell us and quit
+            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+            {
+                MsgPrint("You failed to activate it properly.");
+                return;
+            }
+            // If the item is still recharging, then just tell us and quit
+            if (item.RechargeTimeLeft != 0)
+            {
+                MsgPrint("It whines, glows and fades...");
+                return;
+            }
+            // We passed the checks, so the item is activated
+            MsgPrint("You activate it...");
+            PlaySound(SoundEffect.ActivateArtifact);
+            // If it is a random artifact then use its ability and quit
+            if (string.IsNullOrEmpty(item.RandartName) == false)
+            {
+                ActivateRandomArtifact(item);
+                return;
+            }
+            // If it's a fixed artifact then use its ability
+            if (item.FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(item.FixedArtifact.BaseFixedArtifact.GetType()))
+            {
+                IActivatible activatibleFixedArtifact = (IActivatible)item.FixedArtifact.BaseFixedArtifact;
+                activatibleFixedArtifact.ActivateItem(this, item);
+                return;
+            }
+            // If it wasn't an artifact, then check the other types of activatable item Planar
+            // weapon teleports you
+            if (item.RareItemTypeIndex == Enumerations.RareItemType.WeaponPlanarWeapon)
+            {
+                TeleportPlayer(100);
+                item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
+                return;
+            }
+            // Dragon armour gives you a ball of the relevant damage type
+            if (item.Category == ItemTypeEnum.DragArmor)
+            {
+                if (!GetDirectionWithAim(out int dir))
+                {
+                    return;
+                }
+                switch (item.ItemSubCategory) // TODO: Move to ItemCategories
+                {
+                    case DragonArmour.SvDragonBlue:
+                        {
+                            MsgPrint("You breathe lightning.");
+                            FireBall(new ProjectElec(this), dir, 100, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonWhite:
+                        {
+                            MsgPrint("You breathe frost.");
+                            FireBall(new ProjectCold(this), dir, 110, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonBlack:
+                        {
+                            MsgPrint("You breathe acid.");
+                            FireBall(new ProjectAcid(this), dir, 130, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonGreen:
+                        {
+                            MsgPrint("You breathe poison gas.");
+                            FireBall(new ProjectPois(this), dir, 150, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonRed:
+                        {
+                            MsgPrint("You breathe fire.");
+                            FireBall(new ProjectFire(this), dir, 200, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonMultihued:
+                        {
+                            chance = Program.Rng.RandomLessThan(5);
+                            string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
+                            MsgPrint($"You breathe {element}.");
+                            switch (chance)
+                            {
+                                case 0:
+                                    FireBall(new ProjectFire(this),
+                                        dir, 250, -2);
+                                    break;
+
+                                case 1:
+                                    FireBall(new ProjectElec(this),
+                                        dir, 250, -2);
+                                    break;
+
+                                case 2:
+                                    FireBall(new ProjectCold(this),
+                                        dir, 250, -2);
+                                    break;
+
+                                case 3:
+                                    FireBall(new ProjectAcid(this),
+                                        dir, 250, -2);
+                                    break;
+
+                                case 4:
+                                    FireBall(new ProjectPois(this),
+                                        dir, 250, -2);
+                                    break;
+                            }
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+                            break;
+                        }
+                    case DragonArmour.SvDragonBronze:
+                        {
+                            MsgPrint("You breathe confusion.");
+                            FireBall(new ProjectConfusion(this), dir, 120, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonGold:
+                        {
+                            MsgPrint("You breathe sound.");
+                            FireBall(new ProjectSound(this), dir, 130, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                            break;
+                        }
+                    case DragonArmour.SvDragonChaos:
+                        {
+                            chance = Program.Rng.RandomLessThan(2);
+                            string element = chance == 1 ? "chaos" : "disenchantment";
+                            MsgPrint($"You breathe {element}.");
+                            FireBall(projectile: chance == 1 ? (Projectile)new ProjectChaos(this) : new ProjectDisenchant(this), dir: dir, dam: 220, rad: -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            break;
+                        }
+                    case DragonArmour.SvDragonLaw:
+                        {
+                            chance = Program.Rng.RandomLessThan(2);
+                            string element = chance == 1 ? "sound" : "shards";
+                            MsgPrint($"You breathe {element}.");
+                            FireBall(chance == 1 ? (Projectile)new ProjectSound(this) : new ProjectExplode(this), dir, 230, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            break;
+                        }
+                    case DragonArmour.SvDragonBalance:
+                        {
+                            chance = Program.Rng.RandomLessThan(4);
+                            string element = chance == 1
+                                ? "chaos"
+                                : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
+                            MsgPrint($"You breathe {element}.");
+                            FireBall(chance == 1 ? new ProjectChaos(this) : (chance == 2 ? new ProjectDisenchant(this) : (chance == 3 ? (Projectile)new ProjectSound(this) : new ProjectExplode(this))), dir, 250, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            break;
+                        }
+                    case DragonArmour.SvDragonShining:
+                        {
+                            chance = Program.Rng.RandomLessThan(2);
+                            string element = chance == 0 ? "light" : "darkness";
+                            MsgPrint($"You breathe {element}.");
+                            FireBall(chance == 0 ? (Projectile)new ProjectLight(this) : new ProjectDark(this), dir, 200, -2);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            break;
+                        }
+                    case DragonArmour.SvDragonPower:
+                        {
+                            MsgPrint("You breathe the elements.");
+                            FireBall(new ProjectMissile(this), dir, 300, -3);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                            break;
+                        }
+                }
+                return;
+            }
+            // Elemental rings give you a ball of the appropriate element
+            if (item.Category == ItemTypeEnum.Ring)
+            {
+                if (!GetDirectionWithAim(out int dir))
+                {
+                    return;
+                }
+                switch (item.ItemSubCategory)
+                {
+                    case RingType.Acid:
+                        {
+                            FireBall(new ProjectAcid(this), dir, 50, 2);
+                            Player.TimedAcidResistance.SetTimer(Player.TimedAcidResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            break;
+                        }
+                    case RingType.Ice:
+                        {
+                            FireBall(new ProjectCold(this), dir, 50, 2);
+                            Player.TimedColdResistance.SetTimer(Player.TimedColdResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            break;
+                        }
+                    case RingType.Flames:
+                        {
+                            FireBall(new ProjectFire(this), dir, 50, 2);
+                            Player.TimedFireResistance.SetTimer(Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+                            break;
+                        }
+                }
+            }
+            // We ran out of item types
+            MsgPrint("Oops. That object cannot be activated.");
+        }
+
+        public bool GetSpell(out int sn, string prompt, int sval, bool known, bool realm2, Player player)
+        {
+            int i;
+            int spell;
+            int num = 0;
+            int[] spells = new int[64];
+            Realm useRealm = realm2 ? player.Realm2 : player.Realm1;
+            string p = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            for (spell = 0; spell < 32; spell++)
+            {
+                if ((GlobalData.BookSpellFlags[sval] & (1u << spell)) != 0)
+                {
+                    spells[num++] = spell;
+                }
+            }
+            bool okay = false;
+            sn = -2;
+            for (i = 0; i < num; i++)
+            {
+                if (player.SpellOkay(spells[i], known, realm2))
+                {
+                    okay = true;
+                }
+            }
+            if (!okay)
+            {
+                return false;
+            }
+            sn = -1;
+            bool flag = false;
+            bool redraw = false;
+            string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
+            while (!flag && GetCom(outVal, out char choice))
+            {
+                if (choice == ' ' || choice == '*' || choice == '?')
+                {
+                    if (!redraw)
+                    {
+                        redraw = true;
+                        SaveScreen();
+                        player.PrintSpells(spells, num, 1, 20, useRealm);
+                    }
+                    else
+                    {
+                        redraw = false;
+                        Load();
+                    }
+                    continue;
+                }
+                bool ask = char.IsUpper(choice);
+                if (ask)
+                {
+                    choice = char.ToLower(choice);
+                }
+                i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
+                if (i < 0 || i >= num)
+                {
+                    continue;
+                }
+                spell = spells[i];
+                if (!player.SpellOkay(spell, known, realm2))
+                {
+                    MsgPrint($"You may not {prompt} that {p}.");
+                    continue;
+                }
+                if (ask)
+                {
+                    Spell sPtr = player.Spellcasting.Spells[realm2 ? 1 : 0][spell % 32];
+                    string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance(player)}% fail)? ";
+                    if (!GetCheck(tmpVal))
+                    {
+                        continue;
+                    }
+                }
+                flag = true;
+            }
+            if (redraw)
+            {
+                Load();
+            }
+            if (!flag)
+            {
+                return false;
+            }
+            sn = spell;
+            return true;
+        }
+
+        public bool DoBash()
+        {
+            // Assume it won't disturb us
+            bool more = false;
+
+            // Get the direction to bash
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                // Can only bash closed doors
+                if (!tile.FeatureType.IsClosedDoor)
+                {
+                    MsgPrint("You see nothing there to bash.");
+                }
+                else if (tile.MonsterIndex != 0)
+                {
+                    // Oops - a montser got in the way
+                    EnergyUse = 100;
+                    MsgPrint("There is a monster in the way!");
+                    PlayerAttackMonster(y, x);
+                }
+                else
+                {
+                    // Bash the door
+                    more = BashClosedDoor(y, x);
+                }
+            }
+            return more;
+        }
+
+        public void DoCmdDestroyAll()
+        {
+            int count = 0;
+            // Look for worthless items
+            for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
+            {
+                Item item = Player.Inventory[i];
+                if (item.BaseItemCategory == null)
+                {
+                    continue;
+                }
+                // Only destroy if it's stompable (i.e. worthless or marked as unwanted)
+                if (!item.Stompable())
+                {
+                    continue;
+                }
+                string itemName = item.Description(true, 3);
+                MsgPrint($"You destroy {itemName}.");
+                count++;
+                int amount = item.Count;
+                Player.InvenItemIncrease(i, -amount);
+                Player.InvenItemOptimize(i);
+            }
+            if (count == 0)
+            {
+                MsgPrint("You are carrying nothing worth destroying.");
+                EnergyUse = 0;
+            }
+            else
+            {
+                // If we destroyed at least one thing, take a turn
+                EnergyUse = 100;
+            }
+        }
+
+        public void DoCmdDestroy()
+        {
+            int amount = 1;
+            bool force = CommandArgument > 0;
+            // Get an item to destroy
+            if (!GetItem(out int itemIndex, "Destroy which item? ", false, true, true, null))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing to destroy.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            // If we have more than one we might not want to destroy all of them
+            if (item.Count > 1)
+            {
+                amount = GetQuantity(null, item.Count, true);
+                if (amount <= 0)
+                {
+                    return;
+                }
+            }
+            int oldNumber = item.Count;
+            item.Count = amount;
+            string itemName = item.Description(true, 3);
+            item.Count = oldNumber;
+            //Only confirm if it's not a worthless item
+            if (!force)
+            {
+                if (!item.Stompable())
+                {
+                    string outVal = $"Really destroy {itemName}? ";
+                    if (!GetCheck(outVal))
+                    {
+                        return;
+                    }
+                    // If it was something we might want to destroy again, ask
+                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemTypeEnum.Chest)
+                    {
+                        if (item.IsKnown())
+                        {
+                            if (GetCheck($"Always destroy {itemName}?"))
+                            {
+                                item.BaseItemCategory.Stompable[0] = true;
+                            }
+                        }
+                    }
+                }
+            }
+            // Destroying something takes a turn
+            EnergyUse = 100;
+            // Can't destroy an artifact artifact
+            if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
+            {
+                string feel = "special";
+                EnergyUse = 0;
+                MsgPrint($"You cannot destroy {itemName}.");
+                if (item.IsCursed() || item.IsBroken())
+                {
+                    feel = "terrible";
+                }
+                item.Inscription = feel;
+                item.IdentSense = true;
+                NoticeCombineFlaggedAction.Set();
+                RedrawEquippyFlaggedAction.Set();
+                return;
+            }
+            MsgPrint($"You destroy {itemName}.");
+            // Warriors and paladins get experience for destroying magic books
+            if (ItemFilterHighLevelBook(item))
+            {
+                bool gainExpr = false;
+                if (Player.ProfessionIndex == CharacterClass.Warrior)
+                {
+                    gainExpr = true;
+                }
+                else if (Player.ProfessionIndex == CharacterClass.Paladin)
+                {
+                    if (Player.Realm1 == Realm.Life)
+                    {
+                        if (item.Category == ItemTypeEnum.DeathBook)
+                        {
+                            gainExpr = true;
+                        }
+                    }
+                    else
+                    {
+                        if (item.Category == ItemTypeEnum.LifeBook)
+                        {
+                            gainExpr = true;
+                        }
+                    }
+                }
+                if (gainExpr && Player.ExperiencePoints < Constants.PyMaxExp)
+                {
+                    int testerExp = Player.MaxExperienceGained / 20;
+                    if (testerExp > 10000)
+                    {
+                        testerExp = 10000;
+                    }
+                    if (item.ItemSubCategory < 3)
+                    {
+                        testerExp /= 4;
+                    }
+                    if (testerExp < 1)
+                    {
+                        testerExp = 1;
+                    }
+                    MsgPrint("You feel more experienced.");
+                    Player.GainExperience(testerExp * amount);
+                }
+            }
+            // Tidy up the player's inventory
+            if (itemIndex >= 0)
+            {
+                Player.InvenItemIncrease(itemIndex, -amount);
+                Player.InvenItemDescribe(itemIndex);
+                Player.InvenItemOptimize(itemIndex);
+            }
+            else
+            {
+                Level.FloorItemIncrease(0 - itemIndex, -amount);
+                Level.FloorItemDescribe(0 - itemIndex);
+                Level.FloorItemOptimize(0 - itemIndex);
+            }
+        }
+
+        public void DoCmdInventory()
+        {
+            // We're not viewing equipment
+            ViewingEquipment = false;
+            SaveScreen();
+            // We want to see everything
+            Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+            // Get a new command
+            string outVal = $"Inventory: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+            PrintLine(outVal, 0, 0);
+            QueuedCommand = Inkey();
+            Load();
+            // Display details if the player wants
+            if (QueuedCommand == '\x1b')
+            {
+                QueuedCommand = (char)0;
+            }
+            else
+            {
+                // If the player selected a command that needs to select an item, it will automatically
+                // show the inventory
+                ViewingItemList = true;
+            }
+        }
+
+        public void DoCmdQuerySymbol()
+        {
+            int index;
+            // Get the symbol
+            if (!GetCom("Enter character to be identified: ", out char symbol))
+            {
+                return;
+            }
+            // Run through the identification array till we find the symbol
+            for (index = 0; GlobalData.SymbolIdentification[index] != null; ++index)
+            {
+                if (symbol == GlobalData.SymbolIdentification[index][0])
+                {
+                    break;
+                }
+            }
+            // Display the symbol and its idenfitication
+            string buf = GlobalData.SymbolIdentification[index] != null
+                ? $"{symbol} - {GlobalData.SymbolIdentification[index].Substring(2)}."
+                : $"{symbol} - Unknown Symbol";
+            MsgPrint(buf);
+        }
+
+        public void DoCmdListCommands()
+        {
+            FullScreenOverlay = true;
+            SaveScreen();
+            UpdateScreen();
+            Clear();
+            SetBackground(BackgroundImage.Normal);
+            Print(Colour.Yellow, "Numpad", 1, 1);
+            Print("7 8 9", 3, 1);
+            Print(" \\|/", 4, 1);
+            Print("4- -6 = Move", 5, 1);
+            Print(" /|\\    (+Shift = run)", 6, 1);
+            Print("1 2 3", 7, 1);
+            Print("5 = Stand still", 8, 1);
+            Print(Colour.Yellow, "Other Symbols", 10, 1);
+            Print(". = Run", 12, 1);
+            Print("< = Go up stairs", 13, 1);
+            Print("> = Go down stairs", 14, 1);
+            Print("+ = Auto-alter a space", 15, 1);
+            Print("* = Target a creature", 16, 1);
+            Print("/ = Identify a symbol", 17, 1);
+            Print("? = Command list", 18, 1);
+            Print("Esc = Save and quit", 20, 1);
+            Print(Colour.Yellow, "Without Shift", 1, 25);
+            Print("a = Aim a wand", 3, 25);
+            Print("b = Browse a book", 4, 25);
+            Print("c = Close a door", 5, 25);
+            Print("d = Drop object", 6, 25);
+            Print("e = Show equipment", 7, 25);
+            Print("f = Fire a missile weapon", 8, 25);
+            Print("g = Get (pick up) object", 9, 25);
+            Print("h = View game help", 10, 25);
+            Print("i = Show Inventory", 11, 25);
+            Print("j = Jam spike in a door", 12, 25);
+            Print("k = Destroy an item", 13, 25);
+            Print("l = Look around", 14, 25);
+            Print("m = Cast spell/Use talent", 15, 25);
+            Print("n =", 16, 25);
+            Print("o = Open a door/chest", 17, 25);
+            Print("p = Mutant/Racial power", 18, 25);
+            Print("q = Quaff a potion", 19, 25);
+            Print("r = Read a scroll", 20, 25);
+            Print("s = Search for traps", 21, 25);
+            Print("t = Take off an item", 22, 25);
+            Print("u = Use a staff", 23, 25);
+            Print("v = Throw object", 24, 25);
+            Print("w = Wield/wear an item", 25, 25);
+            Print("x = Examine an object", 26, 25);
+            Print("y =", 27, 25);
+            Print("z = Zap a rod", 28, 25);
+            Print(Colour.Yellow, "With Shift", 1, 52);
+            Print("A = Activate an artifact", 3, 52);
+            Print("B = Bash a stuck door", 4, 52);
+            Print("C = View your character", 5, 52);
+            Print("D = Disarm a trap", 6, 52);
+            Print("E = Eat some food", 7, 52);
+            Print("F = Fuel a light source", 8, 52);
+            Print("H = How you feel here", 10, 52);
+            Print("J = View your journal", 12, 52);
+            Print("K = Destroy trash objects", 13, 52);
+            Print("L = Locate player", 14, 52);
+            Print("M = View the map", 15, 52);
+            Print("O = Show last message", 17, 52);
+            Print("P = Show previous messages", 18, 52);
+            Print("Q = Quit (Retire character)", 19, 52);
+            Print("R = Rest", 20, 52);
+            Print("S = Auto-search on/off", 21, 52);
+            Print("T = Tunnel", 22, 52);
+            Print("V = Version info", 24, 52);
+            if (Player.IsWizard)
+            {
+                Print("W = Wizard command", 25, 52);
+            }
+            AnyKey(44);
+            Load();
+            SetBackground(BackgroundImage.Overhead);
+            FullScreenOverlay = false;
+        }
+
+        public void DoCmdZapRod()
+        {
+            int itemIndex = -999;
+
+            // Get the item if we weren't passed it
+            if (itemIndex == -999)
+            {
+                if (!GetItem(out itemIndex, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have no rod to zap.");
+                    }
+                    return;
+                }
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Make sure the item is actually a rod
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+            {
+                MsgPrint("That is not a rod!");
+                return;
+            }
+            // Rods can't be used from the floor
+            if (itemIndex < 0 && item.Count > 1)
+            {
+                MsgPrint("You must first pick up the rods.");
+                return;
+            }
+            // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
+            // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
+            // would ask for a direction.
+            RodItemClass rodItemCategory = (RodItemClass)item.BaseItemCategory;
+            int? dir = 5;
+            if (rodItemCategory.RequiresAiming || !item.IsFlavourAware()) 
+            {
+                if (!GetDirectionWithAim(out int direction))
+                {
+                    return;
+                }
+                dir = direction;
+            }
+
+            // Using a rod takes a whole turn
+            EnergyUse = 100;
+            bool identified = false;
+            int itemLevel = item.BaseItemCategory.Level;
+            // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
+            int chance = Player.SkillUseDevice;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                chance /= 2;
+            }
+            chance -= itemLevel > 50 ? 50 : itemLevel;
+            // There's always a small chance of success
+            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            {
+                chance = Constants.UseDevice;
+            }
+            // Do the actual check
+            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+            {
+                MsgPrint("You failed to use the rod properly.");
+                return;
+            }
+            // Rods only have a single charge but recharge over time
+            if (item.TypeSpecificValue != 0)
+            {
+                MsgPrint("The rod is still charging.");
+                return;
+            }
+            PlaySound(SoundEffect.ZapRod);
+            // Do the rod-specific effect
+            bool useCharge = true;
+            RodItemClass rodItem = (RodItemClass)item.BaseItemCategory;
+            ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
+            rodItem.Execute(zapRodEvent);
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // We may have just discovered what the rod does
+            item.ObjectTried();
+            if (identified && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+            // We may not have actually used a charge
+            if (!useCharge)
+            {
+                item.TypeSpecificValue = 0;
+                return;
+            }
+            // Channelers can spend mana instead of a charge
+            bool channeled = false;
+            if (Player.Spellcasting.Type == CastingType.Channeling)
+            {
+                channeled = DoCmdChannel(item);
+                if (channeled)
+                {
+                    item.TypeSpecificValue = 0;
+                }
+            }
+            if (!channeled)
+            {
+                // If the rod was part of a stack, remove it
+                if (itemIndex >= 0 && item.Count > 1)
+                {
+                    Item singleRod = item.Clone(1);
+                    item.TypeSpecificValue = 0;
+                    item.Count--;
+                    Player.WeightCarried -= singleRod.Weight;
+                    Player.InvenCarry(singleRod, false);
+                    MsgPrint("You unstack your rod.");
+                }
+            }
+        }
+
+        public void DoViewMap()
+        {
+            int cy = -1;
+            int cx = -1;
+            FullScreenOverlay = true;
+            SaveScreen();
+            Clear();
+            // If we're on the surface, display the island map
+            if (CurrentDepth == 0)
+            {
+                SetBackground(BackgroundImage.WildMap);
+                DisplayWildMap();
+            }
+            else
+            {
+                // We're not on the surface, so draw the level map
+                SetBackground(BackgroundImage.Map);
+                Level.DisplayMap(out cy, out cx);
+            }
+            // Give us a prompt, and display the cursor in the player's location
+            Print(Colour.Orange, "[Press any key to continue]", 43, 26);
+            if (CurrentDepth == 0)
+            {
+                Goto(Player.WildernessY + 2, Player.WildernessX + 2);
+            }
+            else
+            {
+                Goto(cy, cx);
+            }
+            // Wait for a keypress, and restore the screen (looking at the map takes no time)
+            Inkey();
+            Load();
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImage.Overhead);
+        }
+
+        public bool DoDisarm()
+        {
+            bool more = false;
+            int numTraps = CountKnownTraps(out GridCoordinate? trapCoord);
+            int numChests = CountChests(out GridCoordinate? chestCoord, true);
+            // Count the possible traps and chests we might want to disarm
+            if (numTraps != 0 || numChests != 0)
+            {
+                bool tooMany = (numTraps != 0 && numChests != 0) || numTraps > 1 || numChests > 1;
+                // If only one then we have our target
+                if (!tooMany)
+                {
+                    GridCoordinate coord = numTraps == 1 ? trapCoord : chestCoord;
+                    CommandDirection = Level.CoordsToDir(coord.Y, coord.X);
+                }
+            }
+            // Get a direction if we don't already have one
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                // Check for a chest
+                int itemIndex = Level.ChestCheck(y, x);
+                if (!tile.FeatureType.IsTrap &&
+                    itemIndex == 0)
+                {
+                    MsgPrint("You see nothing there to disarm.");
+                }
+                // Can't disarm with a monster in the way
+                else if (tile.MonsterIndex != 0)
+                {
+                    MsgPrint("There is a monster in the way!");
+                    PlayerAttackMonster(y, x);
+                }
+                // Disarm the chest or trap
+                else if (itemIndex != 0)
+                {
+                    more = DisarmChest(y, x, itemIndex);
+                }
+                else
+                {
+                    more = DisarmTrap(y, x);
+                }
+            }
+            return more;
+        }
+
+        public bool DoCmdOpen()
+        {
+            bool more = false;
+            // Check if there's only one thing we can open
+            int numDoors = CountClosedDoors(out GridCoordinate? doorCoord);
+            int numChests = CountChests(out GridCoordinate? chestCoord, false);
+            if (numDoors != 0 || numChests != 0)
+            {
+                bool tooMany = (numDoors != 0 && numChests != 0) || numDoors > 1 || numChests > 1;
+                if (!tooMany)
+                {
+                    // There's only one thing we can open, so assume we mean that thing
+                    GridCoordinate coord = numDoors == 1 ? doorCoord : chestCoord;
+                    CommandDirection = Level.CoordsToDir(coord.Y, coord.X);
+                }
+            }
+            // If we don't already have a direction, prompt for one
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                int itemIndex = Level.ChestCheck(y, x);
+                // Make sure there is something to open in the direction we chose
+                if (!tile.FeatureType.IsClosedDoor &&
+                    itemIndex == 0)
+                {
+                    MsgPrint("You see nothing there to open.");
+                }
+                // Can't open something if there's a monster in the way
+                else if (tile.MonsterIndex != 0)
+                {
+                    EnergyUse = 100;
+                    MsgPrint("There is a monster in the way!");
+                    PlayerAttackMonster(y, x);
+                }
+                // Open the chest or door
+                else if (itemIndex != 0)
+                {
+                    more = OpenChestAtGivenLocation(y, x, itemIndex);
+                }
+                else
+                {
+                    more = OpenDoor(y, x);
+                }
+            }
+            return more;
+        }
+
+        public void DoCmdQuaff()
+        {
+            int itemIndex = -999;
+
+            // Get an item if we didn't already have one
+            if (itemIndex == -999)
+            {
+                if (!GetItem(out itemIndex, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have no potions to quaff.");
+                    }
+                    return;
+                }
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Make sure the item is a potion
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+            {
+                MsgPrint("That is not a potion!");
+                return;
+            }
+            PlaySound(SoundEffect.Quaff);
+            // Drinking a potion costs a whole turn
+            EnergyUse = 100;
+            int itemLevel = item.BaseItemCategory.Level;
+            // Do the actual potion effect
+            PotionItemClass potion = (PotionItemClass)item.BaseItemCategory; // The item will be a potion.
+            bool identified = potion.Quaff(this);
+
+            // Skeletons are messy drinkers
+            Player.Race.Quaff(this, potion);
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // We may now know the potion's type
+            item.ObjectTried();
+            if (identified && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+            // Most potions give us a bit of food too
+            Player.SetFood(Player.Food + item.TypeSpecificValue);
+            bool channeled = false;
+            // If we're a channeler, we might be able to spend mana instead of using it up
+            if (Player.Spellcasting.Type == CastingType.Channeling)
+            {
+                channeled = DoCmdChannel(item);
+            }
+            if (!channeled)
+            {
+                // We didn't channel it, so use up one potion from the stack
+                if (itemIndex >= 0)
+                {
+                    Player.InvenItemIncrease(itemIndex, -1);
+                    Player.InvenItemDescribe(itemIndex);
+                    Player.InvenItemOptimize(itemIndex);
+                }
+                else
+                {
+                    Level.FloorItemIncrease(0 - itemIndex, -1);
+                    Level.FloorItemDescribe(0 - itemIndex);
+                    Level.FloorItemOptimize(0 - itemIndex);
+                }
+            }
+        }
+
+        public void DoToggleSearch()
+        {
+            if (Player.IsSearching)
+            {
+                Player.IsSearching = false;
+                UpdateBonusesFlaggedAction.Set();
+                RedrawStateFlaggedAction.Set();
+            }
+            else
+            {
+                Player.IsSearching = true;
+                UpdateBonusesFlaggedAction.Set();
+                RedrawStateFlaggedAction.Set();
+                RedrawSpeedFlaggedAction.Set();
+            }
+        }
+
+        public void DoCmdTarget()
+        {
+            if (TargetSet(Constants.TargetKill))
+            {
+                MsgPrint(TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+            }
+            else
+            {
+                MsgPrint("Target Aborted.");
+            }
+        }
+
+        public void DoCmdThrow(int damageMultiplier)
+        {
+            // Get an item to throw
+            if (!GetItem(out int itemIndex, "Throw which item? ", false, true, true, null))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing to throw.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            if (!GetDirectionWithAim(out int dir))
+            {
+                return;
+            }
+            // Copy a single item from the item stack as the thrown item
+            Item missile = item.Clone(1);
+            if (itemIndex >= 0)
+            {
+                Player.InvenItemIncrease(itemIndex, -1);
+                Player.InvenItemDescribe(itemIndex);
+                Player.InvenItemOptimize(itemIndex);
+            }
+            else
+            {
+                Level.FloorItemIncrease(0 - itemIndex, -1);
+                Level.FloorItemOptimize(0 - itemIndex);
+            }
+            string missileName = missile.Description(false, 3);
+            Colour missileColour = missile.BaseItemCategory.FlavorColour;
+            char missileCharacter = missile.BaseItemCategory.FlavorCharacter;
+            // Thrown distance is based on the weight of the missile
+            int multiplier = 10 + (2 * (damageMultiplier - 1));
+            int divider = missile.Weight > 10 ? missile.Weight : 10;
+            int throwDistance = (Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
+            if (throwDistance > 10)
+            {
+                throwDistance = 10;
+            }
+            // Work out the damage done
+            int damage = Program.Rng.DiceRoll(missile.DamageDice, missile.DamageDiceSides) + missile.BonusDamage;
+            damage *= damageMultiplier;
+            int chance = Player.SkillThrowing + (Player.AttackBonus * Constants.BthPlusAdj);
+            // Throwing something always uses a full turn, even if you can make multiple missile attacks
+            EnergyUse = 100;
+            int y = Player.MapY;
+            int x = Player.MapX;
+            int targetX = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+            int targetY = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+            if (dir == 5 && TargetOkay())
+            {
+                targetX = TargetCol;
+                targetY = TargetRow;
+            }
+            HandleStuff();
+            int newY = Player.MapY;
+            int newX = Player.MapX;
+            bool hitBody = false;
+            // Send the thrown object in the right direction one square at a time
+            for (int curDis = 0; curDis <= throwDistance;)
+            {
+                // If we reach our limit, stop the object moving
+                if (y == targetY && x == targetX)
+                {
+                    break;
+                }
+                Level.MoveOneStepTowards(out newY, out newX, y, x, Player.MapY, Player.MapX, targetY, targetX);
+                // If we hit a wall or something stop moving
+                if (!Level.GridPassable(newY, newX))
+                {
+                    break;
+                }
+                curDis++;
+                x = newX;
+                y = newY;
+                const int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+                // If we can see, display the thrown item with a suitable delay
+                if (Level.PanelContains(y, x) && Level.PlayerCanSeeBold(y, x))
+                {
+                    Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                    Level.MoveCursorRelative(y, x);
+                    UpdateScreen();
+                    Pause(msec);
+                    Level.RedrawSingleLocation(y, x);
+                    UpdateScreen();
+                }
+                else
+                {
+                    // Delay even if we don't see it, so it doesn't look weird when it passes behind something
+                    Pause(msec);
+                }
+                // If there's a monster in the way, we might hit it regardless of whether or not it
+                // is our intended target
+                if (Level.Grid[y][x].MonsterIndex != 0)
+                {
+                    GridTile tile = Level.Grid[y][x];
+                    Monster monster = Level.Monsters[tile.MonsterIndex];
+                    MonsterRace race = monster.Race;
+                    bool visible = monster.IsVisible;
+                    hitBody = true;
+                    // See if it actually hit the monster
+                    if (PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
+                    {
+                        string noteDies = " dies.";
+                        if (race.Demon || race.Undead ||
+                            race.Cthuloid || race.Stupid ||
+                            "Evg".Contains(race.Character.ToString()))
+                        {
+                            noteDies = " is destroyed.";
+                        }
+                        // Let the player know what happened
+                        if (!visible)
+                        {
+                            MsgPrint($"The {missileName} finds a mark.");
+                        }
+                        else
+                        {
+                            string mName = monster.Name;
+                            MsgPrint($"The {missileName} hits {mName}.");
+                            if (monster.IsVisible)
+                            {
+                                HealthTrack(tile.MonsterIndex);
+                            }
+                        }
+                        // Adjust the damage for the particular monster type
+                        damage = missile.AdjustDamageForMonsterType(damage, monster);
+                        damage = PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
+                        if (damage < 0)
+                        {
+                            damage = 0;
+                        }
+                        if (Level.Monsters.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                        {
+                            // The monster is dead, so don't add further statuses or messages
+                        }
+                        else
+                        {
+                            // Let the player know what happens to the monster
+                            Level.Monsters.MessagePain(tile.MonsterIndex, damage);
+                            if (monster.SmFriendly && missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
+                            {
+                                string mName = monster.Name;
+                                MsgPrint($"{mName} gets angry!");
+                                monster.SmFriendly = false;
+                            }
+                            if (fear && monster.IsVisible)
+                            {
+                                PlaySound(SoundEffect.MonsterFlees);
+                                string mName = monster.Name;
+                                MsgPrint($"{mName} flees in terror!");
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            // There's a chance of breakage if we hit a creature
+            int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
+            // If we hit with a potion, the potion might affect the creature
+            if (missile.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
+            {
+                if (hitBody || !Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
+                {
+                    PotionItemClass potion = (PotionItemClass)missile.BaseItemCategory;
+                    MsgPrint($"The {missileName} shatters!");
+                    if (potion.Smash(this, 1, y, x))
+                    {
+                        if (Level.Grid[y][x].MonsterIndex != 0 && Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly)
+                        {
+                            string mName = Level.Monsters[Level.Grid[y][x].MonsterIndex].Name;
+                            MsgPrint($"{mName} gets angry!");
+                            Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly = false;
+                        }
+                    }
+                    return;
+                }
+                chanceToBreak = 0;
+            }
+            // Drop the item on the floor
+            Level.DropNear(missile, chanceToBreak, y, x);
+        }
+
+        public bool DoCmdWalk(bool dontPickup)
+        {
+            bool more = false;
+            // If we don't already have a direction, get one
+            if (GetDirectionNoAim(out int dir))
+            {
+                // Walking takes a full turn
+                EnergyUse = 100;
+                MovePlayer(dir, dontPickup);
+                more = true;
+            }
+            return more;
+        }
+
+        public void DoCmdVersion()
+        {
+            AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
+            Version version = assembly.Version;
+            DateTime CompileTime = new DateTime(2000, 1, 1).AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
+            MsgPrint($"You are playing {Constants.VersionName} {version}.");
+            MsgPrint($"(Build time: {CompileTime})");
+        }
+
+        public void DoCmdStore() // TODO: Move content
+        {
+            GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+            // Make sure we're actually on a shop tile
+            if (!tile.FeatureType.IsShop)
+            {
+                MsgPrint("You see no Stores here.");
+                return;
+            }
+            Store which = GetWhichStore();
+            // We can't enter a house unless we own it
+            if (which.DoorsLocked(this))
+            {
+                MsgPrint("The door is locked.");
+                return;
+            }
+            // Switch from the normal game interface to the store interface
+            UpdateRemoveLightFlaggedAction.Check(true);
+            UpdateRemoveViewFlaggedAction.Check(true);
+            FullScreenOverlay = true;
+            CommandArgument = 0;
+            //            CommandRepeat = 0; TODO: Confirm this is not needed
+            QueuedCommand = '\0';
+            which.EnterStore();
+        }
+
+        /// <param name="pickup"> Whether or not we should pick up an object in our location </param>
+        public void DoCmdStay(bool pickup) // TODO: Move to SaveGame or Commands
+        {
+            // Standing still takes a turn
+            EnergyUse = 100;
+            // Periodically search if we're not actively in search mode
+            if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
+            {
+                Search();
+            }
+            // Always search if we are actively in search mode
+            if (Player.IsSearching)
+            {
+                Search();
+            }
+            // Pick up items if we should
+            PickUpItems(pickup);
+            // If we're in a shop doorway, enter the shop
+            GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+            if (tile.FeatureType.IsShop)
+            {
+                Disturb(false);
+                QueuedCommand = '_';
+            }
+        }
+
+        public void DoCmdPopup()
+        {
+            List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
+            PopupMenu menu = new PopupMenu(menuItems);
+            int result = menu.Show(this);
+            switch (result)
+            {
+                // Escape or Resume Game
+                case -1:
+                case 0:
+                    break;
+                // Save and Quit
+                case 1:
+                    Playing = false; // TODO: Need to use event arguments
+                    break;
+            }
+        }
+
+        public void DoCmdSearch()
+        {
+            EnergyUse = 100;
+            Search();
+        }
+
+        public void DoCmdMutantPower()
+        {
+            int i = 0;
+            int num;
+            int[] powers = new int[36];
+            string[] powerDesc = new string[36];
+            int pets = 0;
+            int petCtr;
+            bool allPets = false;
+            Monster monster;
+            bool hasRacial = Player.Race.HasRacialPowers;
+            string racialPowersDescription = Player.Race.RacialPowersDescription(Player.Level);
+            for (num = 0; num < 36; num++)
+            {
+                powers[num] = 0;
+                powerDesc[num] = "";
+            }
+            num = 0;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                MsgPrint("You are too confused to use any powers!");
+                EnergyUse = 0;
+                return;
+            }
+            for (petCtr = Level.MMax - 1; petCtr >= 1; petCtr--)
+            {
+                monster = Level.Monsters[petCtr];
+                if (monster.SmFriendly)
+                {
+                    pets++;
+                }
+            }
+            List<Mutations.Mutation> activeMutations = Player.Dna.ActivatableMutations(Player);
+            if (!hasRacial && activeMutations.Count == 0 && pets == 0)
+            {
+                MsgPrint("You have no powers to activate.");
+                EnergyUse = 0;
+                return;
+            }
+            if (hasRacial)
+            {
+                powers[0] = int.MaxValue;
+                powerDesc[0] = racialPowersDescription;
+                num++;
+            }
+            for (int j = 0; j < activeMutations.Count; j++)
+            {
+                powers[num] = j + 100;
+                powerDesc[num] = activeMutations[j].ActivationSummary(Player.Level);
+                num++;
+            }
+            if (pets > 0)
+            {
+                powerDesc[num] = "dismiss pets";
+                powers[num++] = 3;
+            }
+            bool flag = false;
+            bool redraw = false;
+            string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
+            while (!flag && GetCom(outVal, out char choice))
+            {
+                if (choice == ' ' || choice == '*' || choice == '?')
+                {
+                    if (!redraw)
+                    {
+                        int y = 1, x = 13;
+                        int ctr = 0;
+                        redraw = true;
+                        SaveScreen();
+                        PrintLine("", y++, x);
+                        while (ctr < num)
+                        {
+                            string dummy = $"{ctr.IndexToLetter()}) {powerDesc[ctr]}";
+                            PrintLine(dummy, y + ctr, x);
+                            ctr++;
+                        }
+                        PrintLine("", y + ctr, x);
+                    }
+                    else
+                    {
+                        redraw = false;
+                        Load();
+                    }
+                    continue;
+                }
+                if (choice == '\r' && num == 1)
+                {
+                    choice = 'a';
+                }
+                bool ask = char.IsUpper(choice);
+                if (ask)
+                {
+                    choice = char.ToLower(choice);
+                }
+                i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
+                if (i < 0 || i >= num)
+                {
+                    continue;
+                }
+                if (ask)
+                {
+                    string tmpVal = $"Use {powerDesc[i]}? ";
+                    if (!GetCheck(tmpVal))
+                    {
+                        continue;
+                    }
+                }
+                flag = true;
+            }
+            if (redraw)
+            {
+                Load();
+            }
+            if (!flag)
+            {
+                EnergyUse = 0;
+                return;
+            }
+            if (powers[i] == int.MaxValue)
+            {
+                UseRacialPower();
+            }
+            else if (powers[i] == 3)
+            {
+                int dismissed = 0;
+                if (GetCheck("Dismiss all pets? "))
+                {
+                    allPets = true;
+                }
+                for (petCtr = Level.MMax - 1; petCtr >= 1; petCtr--)
+                {
+                    monster = Level.Monsters[petCtr];
+                    if (monster.SmFriendly)
+                    {
+                        bool deleteThis = false;
+                        if (allPets)
+                        {
+                            deleteThis = true;
+                        }
+                        else
+                        {
+                            string friendName = monster.VisibleName;
+                            string checkFriend = $"Dismiss {friendName}? ";
+                            if (GetCheck(checkFriend))
+                            {
+                                deleteThis = true;
+                            }
+                        }
+                        if (deleteThis)
+                        {
+                            Level.Monsters.DeleteMonsterByIndex(petCtr, true);
+                            dismissed++;
+                        }
+                    }
+                }
+                string s = dismissed == 1 ? "" : "s";
+                MsgPrint($"You have dismissed {dismissed} pet{s}.");
+            }
+            else
+            {
+                EnergyUse = 100;
+                activeMutations[powers[i] - 100].Activate(this, Player, Level);
+            }
+        }
+
+        public void DoCmdLook()
+        {
+            if (TargetSet(Constants.TargetLook))
+            {
+                MsgPrint(TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+            }
+        }
+
+        public void DoCmdLocate()
+        {
+            int startRow = Level.PanelRow;
+            int startCol = Level.PanelCol;
+            int currentRow = startRow;
+            int currentCol = startCol;
+            // Enter a loop so the player can browse the level
+            while (true)
+            {
+                // Describe the location being viewed
+                string offsetText;
+                if (currentRow == startRow && currentCol == startCol)
+                {
+                    offsetText = "";
+                }
+                else
+                {
+                    string northSouth = currentRow < startRow ? " North" : currentRow > startRow ? " South" : "";
+                    string eastWest = currentCol < startCol ? " West" : currentCol > startCol ? " East" : "";
+                    offsetText = $"{northSouth}{eastWest} of";
+                }
+                string message = $"Map sector [{currentRow},{currentCol}], which is{offsetText} your sector. Direction?";
+                // Get a direction command or escape
+                int dir = 0;
+                while (dir == 0)
+                {
+                    if (!GetCom(message, out char command))
+                    {
+                        break;
+                    }
+                    dir = GetKeymapDir(command);
+                }
+                if (dir == 0)
+                {
+                    break;
+                }
+                // Move the view based on the direction
+                currentRow += Level.KeypadDirectionYOffset[dir];
+                currentCol += Level.KeypadDirectionXOffset[dir];
+                if (currentRow > Level.MaxPanelRows)
+                {
+                    currentRow = Level.MaxPanelRows;
+                }
+                else if (currentRow < 0)
+                {
+                    currentRow = 0;
+                }
+                if (currentCol > Level.MaxPanelCols)
+                {
+                    currentCol = Level.MaxPanelCols;
+                }
+                else if (currentCol < 0)
+                {
+                    currentCol = 0;
+                }
+                // Update the view if necessary
+                if (currentRow != Level.PanelRow || currentCol != Level.PanelCol)
+                {
+                    Level.PanelRow = currentRow;
+                    Level.PanelCol = currentCol;
+                    Level.PanelBounds();
+                    UpdateMonstersFlaggedAction.Set();
+                    RedrawMapFlaggedAction.Set();
+                    HandleStuff();
+                }
+            }
+            // We've finished, so snap back to the player's location
+            Player.RecenterScreenAroundPlayer();
+            UpdateMonstersFlaggedAction.Set();
+            RedrawMapFlaggedAction.Set();
+            HandleStuff();
+        }
+
+        public void DoGoDown()
+        {
+            bool isTrapDoor = false;
+            GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+            if (tile.FeatureType.Category == FloorTileTypeCategory.TrapDoor)
+            {
+                isTrapDoor = true;
+            }
+            // Need to be on a staircase or trapdoor
+            if (tile.FeatureType.Name != "DownStair" && !isTrapDoor)
+            {
+                MsgPrint("I see no down staircase here.");
+                EnergyUse = 0;
+                return;
+            }
+            // Going onto a new level takes no energy, so the monsters on that level don't get to
+            // move before us
+            EnergyUse = 0;
+            if (isTrapDoor)
+            {
+                MsgPrint("You deliberately jump through the trap door.");
+            }
+            else
+            {
+                // If we're on the surface, enter the relevant dungeon
+                if (CurrentDepth == 0)
+                {
+                    CurDungeon = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon;
+                    MsgPrint($"You enter {CurDungeon.Name}");
+                }
+                else
+                {
+                    MsgPrint("You enter a maze of down staircases.");
+                }
+                // Save the game, just in case
+                DoCmdSaveGame(true);
+            }
+            // If we're in a tower, a down staircase reduces our level number
+            if (CurDungeon.Tower)
+            {
+                int stairLength = Program.Rng.DieRoll(5);
+                if (stairLength > CurrentDepth)
+                {
+                    stairLength = 1;
+                }
+                CurrentDepth -= stairLength;
+                if (CurrentDepth < 0)
+                {
+                    CurrentDepth = 0;
+                }
+                // If we left the dungeon, remember where we are
+                if (CurrentDepth == 0)
+                {
+                    Player.WildernessX = CurDungeon.X;
+                    Player.WildernessY = CurDungeon.Y;
+                    CameFrom = LevelStart.StartStairs;
+                }
+            }
+            else
+            {
+                // We're not in a tower, so a down staircase increases our level number
+                int stairLength = Program.Rng.DieRoll(5);
+                if (stairLength > CurrentDepth)
+                {
+                    stairLength = 1;
+                }
+                // Check if we're about to go past a quest level
+                for (int i = 0; i < stairLength; i++)
+                {
+                    CurrentDepth++;
+                    if (Quests.IsQuest(CurrentDepth))
+                    {
+                        // Stop on the quest level
+                        break;
+                    }
+                }
+                // Don't go past the max dungeon level
+                if (CurrentDepth > CurDungeon.MaxLevel)
+                {
+                    CurrentDepth = CurDungeon.MaxLevel;
+                }
+                // From the surface we always go to the first level
+                if (CurrentDepth == 0)
+                {
+                    CurrentDepth++;
+                }
+            }
+            // We need a new level
+            NewLevelFlag = true;
+            if (!isTrapDoor)
+            {
+                // Create an up staircase if we went down a staircase
+                CreateUpStair = true;
+            }
+        }
+
+        public void DoGoUp()
+        {
+            // We need to actually be on an up staircase
+            GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+            if (tile.FeatureType.Name != "UpStair")
+            {
+                MsgPrint("I see no up staircase here.");
+                EnergyUse = 0;
+                return;
+            }
+            // Use no energy, so monsters in the new level don't get to go first
+            EnergyUse = 0;
+            // If we're outside then we must be entering a tower
+            if (CurrentDepth == 0)
+            {
+                CurDungeon = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon;
+                MsgPrint($"You enter {CurDungeon.Name}");
+            }
+            else
+            {
+                MsgPrint("You enter a maze of up staircases.");
+            }
+            // Autosave, just in case
+            DoCmdSaveGame(true);
+            // In a tower, going up increases our level number
+            if (CurDungeon.Tower)
+            {
+                int stairLength = Program.Rng.DieRoll(5);
+                if (stairLength > CurrentDepth)
+                {
+                    stairLength = 1;
+                }
+                // Make sure we don't go past a quest level
+                for (int i = 0; i < stairLength; i++)
+                {
+                    CurrentDepth++;
+                    if (Quests.IsQuest(CurrentDepth))
+                    {
+                        break;
+                    }
+                }
+                // Make sure we don't go deeper than the dungeon depth
+                if (CurrentDepth > CurDungeon.MaxLevel)
+                {
+                    CurrentDepth = CurDungeon.MaxLevel;
+                }
+            }
+            else
+            {
+                // We're not in a tower, so going up decreases our level number
+                int j = Program.Rng.DieRoll(5);
+                if (j > CurrentDepth)
+                {
+                    j = 1;
+                }
+                CurrentDepth -= j;
+                if (CurrentDepth < 0)
+                {
+                    CurrentDepth = 0;
+                }
+                if (CurrentDepth == 0)
+                {
+                    Player.WildernessX = CurDungeon.X;
+                    Player.WildernessY = CurDungeon.Y;
+                    CameFrom = LevelStart.StartStairs;
+                }
+            }
+            NewLevelFlag = true;
+            CreateDownStair = true;
+        }
+
+        public void DoDropCmd()
+        {
+            int amount = 1;
+            // Get an item from the inventory/equipment
+            if (!GetItem(out int itemIndex, "Drop which item? ", true, true, false, null))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing to drop.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Can't drop a cursed item
+            if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
+            {
+                MsgPrint("Hmmm, it seems to be cursed.");
+                return;
+            }
+            // It's a stack, so find out how many to drop
+            if (item.Count > 1)
+            {
+                amount = GetQuantity(null, item.Count, true);
+                if (amount <= 0)
+                {
+                    return;
+                }
+            }
+            // Dropping things takes half a turn
+            EnergyUse = 50;
+            // Drop it
+            Player.InvenDrop(itemIndex, amount);
+            RedrawEquippyFlaggedAction.Set();
+        }
+
+        public void DoCmdRun()
+        {
+            // Can't run if we're confused
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                MsgPrint("You are too confused!");
+                return;
+            }
+            // Get a direction if we don't already have one
+            if (GetDirectionNoAim(out int dir))
+            {
+                // If we don't have a distance, assume we'll run for 1,000 steps
+                Running = CommandArgument != 0 ? CommandArgument : 1000;
+                // Run one step in the chosen direction
+                RunOneStep(dir);
+            }
+        }
+
+        public void DoUseStaff()
+        {
+            int itemIndex = -999;
+
+            // Get an item if we weren't passed one
+            if (itemIndex == -999)
+            {
+                if (!GetItem(out itemIndex, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have no staff to use.");
+                    }
+                    return;
+                }
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Make sure the item is actually a staff
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+            {
+                MsgPrint("That is not a staff!");
+                return;
+            }
+
+            StaffItemClass staffItem = (StaffItemClass)item.BaseItemCategory;
+
+            // We can't use a staff from the floor
+            if (itemIndex < 0 && item.Count > 1)
+            {
+                MsgPrint("You must first pick up the staff.");
+                return;
+            }
+            // Using a staff costs a full turn
+            EnergyUse = 100;
+            int itemLevel = item.BaseItemCategory.Level;
+            // We have a chance of the device working equal to skill (halved if confused) - item
+            // level (capped at 50)
+            int chance = Player.SkillUseDevice;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                chance /= 2;
+            }
+            chance -= itemLevel > 50 ? 50 : itemLevel;
+            // Always a small chance of it working
+            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            {
+                chance = Constants.UseDevice;
+            }
+            // Check to see if we use it properly
+            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+            {
+                MsgPrint("You failed to use the staff properly.");
+                return;
+            }
+            // Make sure it has charges left
+            if (item.TypeSpecificValue <= 0)
+            {
+                MsgPrint("The staff has no charges left.");
+                item.IdentEmpty = true;
+                return;
+            }
+            PlaySound(SoundEffect.UseStaff);
+            UseStaffEvent useStaffEventArgs = new UseStaffEvent(this);
+
+            // Do the specific effect for the type of staff
+            staffItem.UseStaff(useStaffEventArgs);
+
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // We might now know what the staff does
+            item.ObjectTried();
+            if (useStaffEventArgs.Identified && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+            // We may not have used up a charge
+            if (!useStaffEventArgs.ChargeUsed)
+            {
+                return;
+            }
+            // Channelers can use mana instead of a charge
+            bool channeled = false;
+            if (Player.Spellcasting.Type == CastingType.Channeling)
+            {
+                channeled = DoCmdChannel(item);
+            }
+            if (!channeled)
+            {
+                // Use the actual charge
+                item.TypeSpecificValue--;
+                // If the staff was part of a stack, separate it from the rest
+                if (itemIndex >= 0 && item.Count > 1)
+                {
+                    Item singleStaff = item.Clone(1);
+                    item.TypeSpecificValue++;
+                    item.Count--;
+                    Player.WeightCarried -= singleStaff.Weight;
+                    itemIndex = Player.InvenCarry(singleStaff, false);
+                    MsgPrint("You unstack your staff.");
+                }
+                // Let the player know what happened
+                if (itemIndex >= 0)
+                {
+                    Player.ReportChargeUsageFromInventory(itemIndex);
+                }
+                else
+                {
+                    Level.ReportChargeUsageFromFloor(0 - itemIndex);
+                }
+            }
+        }
+
+        public void DoCmdRetire()
+        {
+            // If we're a winner it's a simple question with a more positive connotation
+            if (Player.IsWinner)
+            {
+                if (!GetCheck("Do you want to retire? "))
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
+                // character doesn't need a prompt/confirmation
+                if (!Player.IsWizard)
+                {
+                    if (!GetCheck("Do you really want to give up? "))
+                    {
+                        return;
+                    }
+                    // Require a confirmation to make sure the player doesn't accidentally give up a
+                    // long-running character
+                    PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
+                    int i = Inkey();
+                    PrintLine("", 0, 0);
+                    if (i != '@')
+                    {
+                        return;
+                    }
+                }
+            }
+            // Assuming whe player didn't give up, "kill" the character by quitting
+            Playing = false;
+            Player.IsDead = true;
+            DiedFrom = "quitting";
+        }
+
+        public void DoCmdRest()
+        {
+            if (CommandArgument <= 0)
+            {
+                const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
+                if (!GetString(prompt, out string choice, "&", 4))
+                {
+                    return;
+                }
+                // Default to resting until we're fine
+                if (string.IsNullOrEmpty(choice))
+                {
+                    choice = "&";
+                }
+                // -2 means rest until we're fine
+                if (choice[0] == '&')
+                {
+                    CommandArgument = -2;
+                }
+                // -1 means rest until we're at full health, but don't worry about waiting for other
+                // status effects to go away
+                else if (choice[0] == '*')
+                {
+                    CommandArgument = -1;
+                }
+                else
+                {
+                    // A number means rest for that many turns
+                    if (int.TryParse(choice, out int i))
+                    {
+                        CommandArgument = i;
+                    }
+                    // The player might not have put a number in - so abandon if they didn't
+                    if (CommandArgument <= 0)
+                    {
+                        return;
+                    }
+                }
+            }
+            // Can't rest for more than 9999 turns
+            if (CommandArgument > 9999)
+            {
+                CommandArgument = 9999;
+            }
+            // Resting takes at least one turn (we'll also be skipping future turns)
+            EnergyUse = 100;
+            Resting = CommandArgument;
+            Player.IsSearching = false;
+            UpdateBonusesFlaggedAction.Set();
+            RedrawStateFlaggedAction.Set();
+            HandleStuff();
+            UpdateScreen();
+        }
+
+        public void DoCmdReadScroll()
+        {
+            int itemIndex = -999;
+
+            int i;
+            // Make sure we're in a situation where we can read
+            if (Player.TimedBlindness.TimeRemaining != 0)
+            {
+                MsgPrint("You can't see anything.");
+                return;
+            }
+            if (Level.NoLight())
+            {
+                MsgPrint("You have no light to read by.");
+                return;
+            }
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                MsgPrint("You are too confused!");
+                return;
+            }
+            // If we weren't passed in an item, prompt for one
+            if (itemIndex == -999)
+            {
+                if (!GetItem(out itemIndex, "Read which scroll? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have no scrolls to read.");
+                    }
+                    return;
+                }
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Make sure the item is actually a scroll
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
+            {
+                MsgPrint("That is not a scroll!");
+                return;
+            }
+            // Scrolls use a full turn
+            EnergyUse = 100;
+            //bool identified = false;
+            //bool usedUp = true;
+
+            ScrollItemClass scrollItem = (ScrollItemClass)item.BaseItemCategory;
+            ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(this);
+            scrollItem.Read(readScrollEventArgs);
+
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // We might have just identified the scroll
+            item.ObjectTried();
+            if (readScrollEventArgs.Identified && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                int itemLevel = item.BaseItemCategory.Level;
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+            bool channeled = false;
+            // Channelers can use mana instead of the scroll being used up
+            if (Player.Spellcasting.Type == CastingType.Channeling)
+            {
+                channeled = DoCmdChannel(item);
+            }
+            if (!channeled)
+            {
+                if (!readScrollEventArgs.UsedUp)
+                {
+                    return;
+                }
+                // If it wasn't used up then decrease the amount in the stack
+                if (itemIndex >= 0)
+                {
+                    Player.InvenItemIncrease(itemIndex, -1);
+                    Player.InvenItemDescribe(itemIndex);
+                    Player.InvenItemOptimize(itemIndex);
+                }
+                else
+                {
+                    Level.FloorItemIncrease(0 - itemIndex, -1);
+                    Level.FloorItemDescribe(0 - itemIndex);
+                    Level.FloorItemOptimize(0 - itemIndex);
+                }
+            }
+        }
+
+        public void DoCmdRefill()
+        {
+            // Make sure we actually have a light source to refuel.           
+            BaseInventorySlot? chosenLightSourceInventorySlot = SingletonRepository.InventorySlots.WeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+
+            // Check to ensure there is an inventory slot for light sources.
+            if (chosenLightSourceInventorySlot == null)
+            {
+                MsgPrint("You are not wielding a light.");
+                return;
+            }
+
+            // Now choose a light source item.
+            int? i = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+            if (i == null)
+            {
+                MsgPrint("You are not wielding a light.");
+                return;
+            }
+
+            Item lightSource = Player.Inventory[i.Value];
+            if (lightSource.BaseItemCategory == null)
+            {
+                MsgPrint("You are not wielding a light.");
+                return;
+            }
+
+            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.BaseItemCategory;
+            lightSourceItem.Refill(this, lightSource);
+        }
+
+        /// <summary>
+        /// Open a chest at a given location
+        /// </summary>
+        /// <param name="y"> The y coordinate of the location </param>
+        /// <param name="x"> The x coordinate of the location </param>
+        /// <param name="itemIndex"> The index of the chest item </param>
+        /// <returns> Whether or not the player should be disturbed by the action </returns>
+        private bool OpenChestAtGivenLocation(int y, int x, int itemIndex)
+        {
+            bool openedSuccessfully = true;
+            bool more = false;
+            Item item = Level.Items[itemIndex];
+            // Opening a chest takes an action
+            EnergyUse = 100;
+            // If the chest is locked, we may need to pick it
+            if (item.TypeSpecificValue > 0)
+            {
+                openedSuccessfully = false;
+                // Our disable traps skill also doubles up as a lockpicking skill
+                int i = Player.SkillDisarmTraps;
+                // Hard to pick locks in the dark
+                if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+                {
+                    i /= 10;
+                }
+                // Hard to pick locks when you're confused or hallucinating
+                if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+                {
+                    i /= 10;
+                }
+                // Some locks are harder to pick than others
+                int j = i - item.TypeSpecificValue;
+                if (j < 2)
+                {
+                    j = 2;
+                }
+                // See if we succeeded
+                if (Program.Rng.RandomLessThan(100) < j)
+                {
+                    MsgPrint("You have picked the lock.");
+                    Player.GainExperience(1);
+                    openedSuccessfully = true;
+                }
+                else
+                {
+                    more = true;
+                    MsgPrint("You failed to pick the lock.");
+                }
+            }
+            // If we successfully opened it, set of any traps and then actually open the chest
+            if (openedSuccessfully)
+            {
+                ChestTrap(y, x, itemIndex);
+                OpenChest(y, x, itemIndex);
+            }
+            return more;
+        }
+
+        public void DoCmdFire()
+        {
+            // Check that we're actually wielding a ranged weapon
+            Item missileWeapon = Player.Inventory[InventorySlot.RangedWeapon];
+            if (missileWeapon.Category == 0)
+            {
+                MsgPrint("You have nothing to fire with.");
+                return;
+            }
+            // Get the ammunition to fire
+            if (!GetItem(out int itemIndex, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(Player.AmmunitionItemCategory)))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing to fire.");
+                }
+                return;
+            }
+            Item ammunitionStack = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Find out where we're aiming at
+            if (!GetDirectionWithAim(out int dir))
+            {
+                return;
+            }
+            // Copy an ammunition piece from the stack...
+            Item individualAmmunition = ammunitionStack.Clone(1);
+            // ...and reduced the amount in the stack
+            if (itemIndex >= 0)
+            {
+                Player.InvenItemIncrease(itemIndex, -1);
+                Player.InvenItemDescribe(itemIndex);
+                Player.InvenItemOptimize(itemIndex);
+            }
+            else
+            {
+                Level.FloorItemIncrease(0 - itemIndex, -1);
+                Level.FloorItemOptimize(0 - itemIndex);
+            }
+            PlaySound(SoundEffect.Shoot);
+            // Get the details of the shot
+            string missileName = individualAmmunition.Description(false, 3);
+            Colour missileColour = individualAmmunition.BaseItemCategory.FlavorColour;
+            char missileCharacter = individualAmmunition.BaseItemCategory.FlavorCharacter;
+            int shotSpeed = Player.MissileAttacksPerRound;
+            int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
+            int attackBonus = Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
+            int chanceToHit = Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
+            // Damage multiplier depends on weapon
+            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.BaseItemCategory;
+            int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
+            // Extra might gives us an increased multiplier
+            if (Player.HasExtraMight)
+            {
+                damageMultiplier++;
+            }
+            shotDamage *= damageMultiplier;
+            // We're actually going to track the shot and draw it square by square
+            int shotDistance = 10 + (5 * damageMultiplier);
+            // Divide by our shot speed to give the equivalent of x shots per turn
+            EnergyUse = 100 / shotSpeed;
+            int y = Player.MapY;
+            int x = Player.MapX;
+            int targetX = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+            int targetY = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+            // Special case for if we're hitting our own square
+            if (dir == 5 && TargetOkay())
+            {
+                targetX = TargetCol;
+                targetY = TargetRow;
+            }
+            HandleStuff();
+            bool hitBody = false;
+            // Loop until we've reached our distance or hit something
+            for (int curDis = 0; curDis <= shotDistance;)
+            {
+                if (y == targetY && x == targetX)
+                {
+                    break;
+                }
+                // Move a step towards the target
+                Level.MoveOneStepTowards(out int newY, out int newX, y, x, Player.MapY, Player.MapX, targetY, targetX);
+                // If we were blocked by a wall or something then stop short
+                if (!Level.GridPassable(newY, newX))
+                {
+                    break;
+                }
+                curDis++;
+                x = newX;
+                y = newY;
+                int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+                // If we can see the current projectile location, show it briefly
+                if (Level.PanelContains(y, x) && Level.PlayerCanSeeBold(y, x))
+                {
+                    Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                    Level.MoveCursorRelative(y, x);
+                    UpdateScreen();
+                    Pause(msec);
+                    Level.RedrawSingleLocation(y, x);
+                    UpdateScreen();
+                }
+                else
+                {
+                    // Pause even if we can't see it so it doesn't look weird if it goes in and out
+                    // of sight
+                    Pause(msec);
+                }
+                // Check if we might hit a monster (not necessarily the one we were aiming at)
+                if (Level.Grid[y][x].MonsterIndex != 0)
+                {
+                    GridTile tile = Level.Grid[y][x];
+                    Monster monster = Level.Monsters[tile.MonsterIndex];
+                    MonsterRace race = monster.Race;
+                    bool visible = monster.IsVisible;
+                    hitBody = true;
+                    // Check if we actually hit it
+                    if (PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
+                    {
+                        string noteDies = " dies.";
+                        if (race.Demon || race.Undead ||
+                            race.Cthuloid || race.Stupid ||
+                            "Evg".Contains(race.Character.ToString()))
+                        {
+                            noteDies = " is destroyed.";
+                        }
+                        if (!visible)
+                        {
+                            MsgPrint($"The {missileName} finds a mark.");
+                        }
+                        else
+                        {
+                            string monsterName = monster.Name;
+                            MsgPrint($"The {missileName} hits {monsterName}.");
+                            if (monster.IsVisible)
+                            {
+                                HealthTrack(tile.MonsterIndex);
+                            }
+                            // Note that pets only get angry if they see us and we see them
+                            if (monster.SmFriendly)
+                            {
+                                monsterName = monster.Name;
+                                MsgPrint($"{monsterName} gets angry!");
+                                monster.SmFriendly = false;
+                            }
+                        }
+                        // Work out the damage done
+                        shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
+                        shotDamage = PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
+                        if (shotDamage < 0)
+                        {
+                            shotDamage = 0;
+                        }
+                        if (Level.Monsters.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                        {
+                            // The monster is dead, so don't add further statuses or messages
+                        }
+                        else
+                        {
+                            Level.Monsters.MessagePain(tile.MonsterIndex, shotDamage);
+                            if (fear && monster.IsVisible)
+                            {
+                                PlaySound(SoundEffect.MonsterFlees);
+                                string mName = monster.Name;
+                                MsgPrint($"{mName} flees in terror!");
+                            }
+                        }
+                    }
+                    // Stop the ammo's travel since we hit something
+                    break;
+                }
+            }
+            // If we hit something we have a chance to break the ammo, otherwise it just drops at
+            // the end of its travel
+            int j = hitBody ? individualAmmunition.BreakageChance() : 0;
+            Level.DropNear(individualAmmunition, j, y, x);
+        }
+
+        public void DoEatCmd()
+        {
+            int itemIndex = -999;
+            // Get a food item from the inventory if one wasn't already specified
+            if (itemIndex == -999)
+            {
+                if (!GetItem(out itemIndex, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have nothing to eat.");
+                    }
+                    return;
+                }
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            // Make sure the item is edible
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
+            {
+                MsgPrint("You can't eat that!");
+                return;
+            }
+            // We don't actually eat dwarf bread
+            if (item.ItemSubCategory != FoodType.Dwarfbread)
+            {
+                PlaySound(SoundEffect.Eat);
+            }
+            // Eating costs 100 energy
+            EnergyUse = 100;
+            bool ident = false;
+            int itemLevel = item.BaseItemCategory.Level;
+            FoodItemClass foodItem = (FoodItemClass)item.BaseItemCategory;
+
+            // Allow the food item to process the consumption.
+            ident = foodItem.Eat(this);
+
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // We've tried this type of object
+            item.ObjectTried();
+            // Learn its flavour if necessary
+            if (ident && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+
+            // Now races process the sustenance.
+            Player.Race.Eat(this, item);
+
+            // Dwarf bread isn't actually eaten so return early
+            if (item.ItemSubCategory == FoodType.Dwarfbread)
+            {
+                return;
+            }
+
+            // Use up the item (if it fell to the floor this will have already been dealt with)
+            if (itemIndex >= 0)
+            {
+                Player.InvenItemIncrease(itemIndex, -1);
+                Player.InvenItemDescribe(itemIndex);
+                Player.InvenItemOptimize(itemIndex);
+            }
+            else
+            {
+                Level.FloorItemIncrease(0 - itemIndex, -1);
+                Level.FloorItemDescribe(0 - itemIndex);
+                Level.FloorItemOptimize(0 - itemIndex);
+            }
+        }
+
+        public bool DoCmdTunnel()
+        {
+            bool more = false;
+            // Get the direction in which we wish to tunnel
+            if (GetDirectionNoAim(out int dir))
+            {
+                // Pick up the tile that the player wishes to tunnel through
+                int tileY = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int tileX = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[tileY][tileX];
+                // Check if it can be tunneled through
+                if (tile.FeatureType.IsPassable || tile.FeatureType.Name == "YellowSign")
+                {
+                    MsgPrint("You cannot tunnel through air.");
+                }
+                else if (tile.FeatureType.IsClosedDoor)
+                {
+                    MsgPrint("You cannot tunnel through doors.");
+                }
+                // Can't tunnel if there's a monster there - so attack the monster instead
+                else if (tile.MonsterIndex != 0)
+                {
+                    EnergyUse = 100;
+                    MsgPrint("There is a monster in the way!");
+                    PlayerAttackMonster(tileY, tileX);
+                }
+                else
+                {
+                    // Tunnel through the tile
+                    more = TunnelThroughTile(tileY, tileX);
+                }
+            }
+            return more;
+        }
+
+        public void DoCmdSpike()
+        {
+            // Get the location to be spiked
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                // Make sure it can be spiked and we have spikes to do it with
+                if (!tile.FeatureType.IsClosedDoor)
+                {
+                    MsgPrint("You see nothing there to spike.");
+                }
+                else
+                {
+                    if (!GetSpike(out int itemIndex))
+                    {
+                        MsgPrint("You have no spikes!");
+                    }
+                    // Can't close a door if there's someone in the way
+                    else if (tile.MonsterIndex != 0)
+                    {
+                        // Attempting costs a turn anyway
+                        EnergyUse = 100;
+                        MsgPrint("There is a monster in the way!");
+                        PlayerAttackMonster(y, x);
+                    }
+                    else
+                    {
+                        // Spiking a door costs a turn
+                        EnergyUse = 100;
+                        MsgPrint("You jam the door with a spike.");
+                        // Replace the door feature with a jammed door
+                        if (tile.FeatureType.Category == FloorTileTypeCategory.LockedDoor)
+                        {
+                            tile.SetFeature(tile.FeatureType.Name.Replace("Locked", "Jammed"));
+                        }
+                        // If it's already jammed, strengthen it
+                        if (tile.FeatureType.Category == FloorTileTypeCategory.JammedDoor)
+                        {
+                            int strength = int.Parse(tile.FeatureType.Name.Substring(10));
+                            if (strength < 7)
+                            {
+                                tile.SetFeature($"JammedDoor{strength + 1}");
+                            }
+                        }
+                        // Use up the spike from the player's inventory
+                        Player.InvenItemIncrease(itemIndex, -1);
+                        Player.InvenItemDescribe(itemIndex);
+                        Player.InvenItemOptimize(itemIndex);
+                    }
+                }
+            }
+        }
+
+        public void DoCmdFeeling(bool feelingOnly)
+        {
+            // Some sanity checks
+            if (Level.DangerFeeling < 0)
+            {
+                Level.DangerFeeling = 0;
+            }
+            if (Level.DangerFeeling > 10)
+            {
+                Level.DangerFeeling = 10;
+            }
+            if (Level.TreasureFeeling < 0)
+            {
+                Level.TreasureFeeling = 0;
+            }
+            if (Level.TreasureFeeling > 10)
+            {
+                Level.TreasureFeeling = 10;
+            }
+            if (CurrentDepth <= 0)
+            {
+                // If we need to say where we are, do so
+                if (!feelingOnly)
+                {
+                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                    {
+                        MsgPrint($"You are in {CurTown.Name}.");
+                    }
+                    else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
+                    {
+                        MsgPrint($"You are outside {Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Name}.");
+                    }
+                    else
+                    {
+                        MsgPrint("You are wandering around outside.");
+                    }
+                }
+                // If we're not in a dungeon, there's no feeling to be had
+                return;
+            }
+            // If we need to say where we are, do so
+            if (!feelingOnly)
+            {
+                MsgPrint($"You are in {CurDungeon.Name}.");
+                if (Quests.IsQuest(CurrentDepth))
+                {
+                    Quests.PrintQuestMessage();
+                }
+            }
+            // Special feeling overrides the normal two-part feeling
+            if (Level.DangerFeeling == 1 || Level.TreasureFeeling == 1)
+            {
+                string message = GlobalData.DangerFeelingText[1];
+                MsgPrint(Player.GameTime.LevelFeel ? message : GlobalData.DangerFeelingText[0]);
+            }
+            else
+            {
+                // Make the two-part feeling make a bit more sense by using the correct conjunction
+                string conjunction = ", and ";
+                if ((Level.DangerFeeling > 5 && Level.TreasureFeeling < 6) || (Level.DangerFeeling < 6 && Level.TreasureFeeling > 5))
+                {
+                    conjunction = ", but ";
+                }
+                string message = GlobalData.DangerFeelingText[Level.DangerFeeling] + conjunction + GlobalData.TreasureFeelingText[Level.TreasureFeeling];
+                MsgPrint(Player.GameTime.LevelFeel ? message : GlobalData.DangerFeelingText[0]);
+            }
+        }
+
+        public bool DoCmdClose()
+        {
+            bool more = false;
+            // If there's only one door, assume we mean that one and don't ask for a direction
+            if (CountOpenDoors(out GridCoordinate? coord) == 1)
+            {
+                CommandDirection = Level.CoordsToDir(coord.Y, coord.X);
+            }
+            // Get the location to close
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                // Can only close actual open doors
+                if (tile.FeatureType.Category != FloorTileTypeCategory.OpenDoorway)
+                {
+                    MsgPrint("You see nothing there to close.");
+                }
+                // Can't close if there's a monster in the way
+                else if (tile.MonsterIndex != 0)
+                {
+                    EnergyUse = 100;
+                    MsgPrint("There is a monster in the way!");
+                    PlayerAttackMonster(y, x);
+                }
+                // Actually close the door
+                else
+                {
+                    more = CloseDoor(y, x);
+                }
+            }
+            return more;
+        }
+
+        public void DoCmdWield()
+        {
+            // Only interested in wearable items
+            if (!GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing you can wear or wield.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+
+            // Find the inventory slot where the item is to be wielded.
+            int slot = item.BaseItemCategory.WieldSlot;
+
+
+            // Can't replace a cursed item
+            if (Player.Inventory[slot].IsCursed())
+            {
+                string cursedItemName = Player.Inventory[slot].Description(false, 0);
+                MsgPrint($"The {cursedItemName} you are {Player.DescribeWieldLocation(slot)} appears to be cursed.");
+                return;
+            }
+
+            // If we know the item to be cursed, confirm its wearing
+            if (item.IsCursed() && (item.IsKnown() || item.IdentSense))
+            {
+                string cursedItemName = item.Description(false, 0);
+                string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
+                if (!GetCheck(dummy))
+                {
+                    return;
+                }
+            }
+
+            // Use some energy
+            EnergyUse = 100;
+
+            // Pull one item out of the item stack
+            Item wornItem = item.Clone(1);
+
+            // Reduce the count of the item stack accordingly
+            if (itemIndex >= 0)
+            {
+                Player.InvenItemIncrease(itemIndex, -1);
+                Player.InvenItemOptimize(itemIndex);
+            }
+            else
+            {
+                Level.FloorItemIncrease(0 - itemIndex, -1);
+                Level.FloorItemOptimize(0 - itemIndex);
+            }
+            // Take off the old item
+            item = Player.Inventory[slot];
+            if (item.BaseItemCategory != null)
+            {
+                Player.InvenTakeoff(slot, 255);
+            }
+            // Put the item into the wield slot
+            Player.Inventory[slot] = wornItem;
+            // Add the weight of the item
+            Player.WeightCarried += wornItem.Weight;
+
+            // Inform us what we did
+            BaseInventorySlot inventorySlot = SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
+            string wieldPhrase = inventorySlot.WieldPhrase;
+            string itemName = wornItem.Description(true, 3);
+            MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
+            // Let us know if it's cursed
+            if (wornItem.IsCursed())
+            {
+                MsgPrint("Oops! It feels deathly cold!");
+                wornItem.IdentSense = true;
+            }
+            UpdateBonusesFlaggedAction.Set();
+            UpdateTorchRadiusFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            RedrawEquippyFlaggedAction.Set();
+        }
+
+        public void DoCmdViewCharacter()
+        {
+            // Save the current screen
+            FullScreenOverlay = true;
+            SaveScreen();
+            SetBackground(BackgroundImage.Paper);
+            // Load the character viewer
+            CharacterViewer characterViewer = new CharacterViewer(this);
+            while (true && !Shutdown)
+            {
+                characterViewer.DisplayPlayer();
+                Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+                char keyPress = Inkey();
+                // Escape breaks us out of the loop
+                if (keyPress == '\x1b')
+                {
+                    break;
+                }
+                // 'c' changes name
+                if (keyPress == 'c' || keyPress == 'C')
+                {
+                    Player.InputPlayerName();
+                }
+                MsgPrint(null);
+            }
+            // Restore the screen
+            SetBackground(BackgroundImage.Overhead);
+            Load();
+            FullScreenOverlay = false;
+            RedrawMapFlaggedAction.Set();
+            RedrawEquippyFlaggedAction.Set();
+            PrExtraRedrawAction.Set();
+            PrBasicRedrawAction.Set();
+            RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidate
+            HandleStuff();
+        }
+
+        public void DoCmdTakeOff()
+        {
+            // Get the item to take off
+            if (!GetItem(out int itemIndex, "Take off which item? ", true, false, false, null))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You are not wearing anything to take off.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            // Can't take of cursed items
+            if (item.IsCursed())
+            {
+                MsgPrint("Hmmm, it seems to be cursed.");
+                return;
+            }
+            // Take off the item
+            EnergyUse = 50;
+            Player.InvenTakeoff(itemIndex, 255);
+            RedrawEquippyFlaggedAction.Set();
+        }
+
+        public void DoCmdMessages()
+        {
+            int messageNumber = MessageNum();
+            int index = 0;
+            int horizontalOffset = 0;
+            FullScreenOverlay = true;
+            SaveScreen();
+            SetBackground(BackgroundImage.Normal);
+            // Infinite loop showing a page of messages from the index
+            while (true && !Shutdown)
+            {
+                // Clear the screen
+                Clear();
+                int row;
+                // Print the messages
+                for (row = 0; row < 40 && index + row < messageNumber; row++)
+                {
+                    string msg = MessageStr((short)(index + row));
+                    msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
+                    Print(Colour.White, msg, 41 - row, 0);
+                }
+                // Get a command
+                PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
+                PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
+                int keyCode = Inkey();
+                if (keyCode == '\x1b')
+                {
+                    // Break out of the infinite loop
+                    break;
+                }
+                if (keyCode == '4')
+                {
+                    horizontalOffset = horizontalOffset >= 40 ? horizontalOffset - 40 : 0;
+                    continue;
+                }
+                if (keyCode == '6')
+                {
+                    horizontalOffset += 40;
+                    continue;
+                }
+                if (keyCode == '8' || keyCode == '\n' || keyCode == '\r')
+                {
+                    if (index + 1 < messageNumber)
+                    {
+                        index++;
+                    }
+                }
+                if (keyCode == 'p' || keyCode == ' ')
+                {
+                    if (index + 40 < messageNumber)
+                    {
+                        index += 40;
+                    }
+                }
+                if (keyCode == 'n')
+                {
+                    index = index >= 40 ? index - 40 : 0;
+                }
+                if (keyCode == '2')
+                {
+                    index = index >= 1 ? index - 1 : 0;
+                }
+            }
+            // Tidy up after ourselves
+            Load();
+            FullScreenOverlay = false;
+        }
+
+        public void DoCmdMessageOne()
+        {
+            PrintLine($"> {MessageStr(0)}", 0, 0);
+        }
+
+        public void DoCmdManual()
+        {
+            ShowManual();
+        }
+
+        public void DoCmdJournal()
+        {
+            // Let the journal itself handle it from here
+            Journal journal = new Journal(this);
+            journal.ShowMenu();
+        }
+
+        public void DoCmdExamine()
+        {
+            // Get the item to examine
+            if (!GetItem(out int itemIndex, "Examine which item? ", true, true, true, null))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have nothing to examine.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            // Do we know anything about it?
+            if (!item.IdentMental)
+            {
+                MsgPrint("You have no special knowledge about that item.");
+                return;
+            }
+            string itemName = item.Description(true, 3);
+            MsgPrint($"Examining {itemName}...");
+            // We're not actually identifying it, because it's already itentified, but we want to
+            // repeat the identification text
+            if (!item.IdentifyFully())
+            {
+                MsgPrint("You see nothing special.");
+            }
+        }
+
+        public void DoCmdBrowse()
+        {
+            int spell;
+            int spellIndex = 0;
+            int[] spells = new int[64];
+            // Make sure we can read
+            if (Player.Realm1 == 0 && Player.Realm2 == 0)
+            {
+                MsgPrint("You cannot read books!");
+                return;
+            }
+            // Get a book to read if we don't already have one
+            if (!GetItem(out int itemIndex, "Browse which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
+            {
+                if (itemIndex == -2)
+                {
+                    MsgPrint("You have no books that you can read.");
+                }
+                return;
+            }
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            // Check that the book is useable by the player
+            if (!Player.ItemMatchesFilter(item, new UsableSpellBookItemFilter(this)))
+            {
+                MsgPrint("You can't read that.");
+                return;
+            }
+            int bookSubCategory = item.ItemSubCategory;
+            HandleStuff();
+            // Find all spells in the book and add them to the array
+            for (spell = 0; spell < 32; spell++)
+            {
+                if ((GlobalData.BookSpellFlags[bookSubCategory] & (1u << spell)) != 0)
+                {
+                    spells[spellIndex++] = spell;
+                }
+            }
+            // Save the screen and overprint the spells in the book
+            SaveScreen();
+            Player.PrintSpells(spells, spellIndex, 1, 20, item.BaseItemCategory.SpellBookToToRealm);
+            PrintLine("", 0, 0);
+            // Wait for a keypress and re-load the screen
+            Print("[Press any key to continue]", 0, 23);
+            Inkey();
+            Load();
+        }
+
+        public bool DoAlter()
+        {
+            // Assume we won't disturb the player
+            bool more = false;
+
+            // Get the direction in which to alter something
+            if (GetDirectionNoAim(out int dir))
+            {
+                int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
+                int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
+                GridTile tile = Level.Grid[y][x];
+                // Altering a tile will take a turn
+                EnergyUse = 100;
+                // We 'alter' a tile by attacking it
+                if (tile.MonsterIndex != 0)
+                {
+                    PlayerAttackMonster(y, x);
+                }
+                else
+                {
+                    // Check the action based on the type of tile
+                    AlterAction? alterAction = tile.FeatureType.AlterAction;
+                    if (alterAction == null)
+                    {
+                        MsgPrint("You're not sure what you can do with that...");
+                    }
+                    else
+                    {
+                        AlterEventArgs alterEventArgs = new AlterEventArgs(this, y, x);
+                        alterAction.Execute(alterEventArgs);
+                        more = alterEventArgs.More;
+                    }
+                }
+            }
+            return more;
+        }
+
+        public void DoCast()
+        {
+            if (Player.HasAntiMagic)
+            {
+                string whichMagicType = "magic";
+                if (Player.ProfessionIndex == CharacterClass.Mindcrafter || Player.ProfessionIndex == CharacterClass.Mystic)
+                {
+                    whichMagicType = "psychic talents";
+                }
+                else if (Player.Spellcasting.Type == CastingType.Divine)
+                {
+                    whichMagicType = "prayer";
+                }
+                MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+                EnergyUse = 5;
+            }
+            else
+            {
+                if (Player.Spellcasting.Type == CastingType.Mentalism)
+                {
+                    DoCmdMentalism();
+                }
+                else
+                {
+                    DoCmdCast();
+                }
+            }
+        }
+
+        private void DoCmdCast()
+        {
+            string prayer = Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            if (Player.Realm1 == 0)
+            {
+                MsgPrint("You cannot cast spells!");
+                return;
+            }
+            if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+            {
+                MsgPrint("You cannot see!");
+                return;
+            }
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                MsgPrint("You are too confused!");
+                return;
+            }
+            if (!GetItem(out int item, "Use which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
+            {
+                if (item == -2)
+                {
+                    MsgPrint($"You have no {prayer} books!");
+                }
+                return;
+            }
+            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            int sval = oPtr.ItemSubCategory;
+            bool useSetTwo = oPtr.Category == Player.Realm2.ToSpellBookItemCategory();
+            HandleStuff();
+            if (!GetSpell(out int spell, Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval, true, useSetTwo, Player))
+            {
+                if (spell == -2)
+                {
+                    MsgPrint($"You don't know any {prayer}s in that book.");
+                }
+                return;
+            }
+            Spell sPtr = useSetTwo ? Player.Spellcasting.Spells[1][spell] : Player.Spellcasting.Spells[0][spell];
+            if (sPtr.ManaCost > Player.Mana)
+            {
+                string cast = Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
+                MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+                if (!GetCheck("Attempt it anyway? "))
+                {
+                    return;
+                }
+            }
+            int chance = sPtr.FailureChance(Player);
+            if (Program.Rng.RandomLessThan(100) < chance)
+            {
+                MsgPrint($"You failed to get the {prayer} off!");
+                if (oPtr.Category == ItemTypeEnum.ChaosBook && Program.Rng.DieRoll(100) < spell)
+                {
+                    MsgPrint("You produce a chaotic effect!");
+                    WildMagic(spell);
+                }
+                else if (oPtr.Category == ItemTypeEnum.DeathBook && Program.Rng.DieRoll(100) < spell)
+                {
+                    if (sval == 3 && Program.Rng.DieRoll(2) == 1)
+                    {
+                        Level.Monsters[0].SanityBlast(this, true);
+                    }
+                    else
+                    {
+                        MsgPrint("It hurts!");
+                        Player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
+                        if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !Player.HasHoldLife)
+                        {
+                            Player.LoseExperience(spell * 250);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                sPtr.Cast(this);
+                if (!sPtr.Worked)
+                {
+                    int e = sPtr.FirstCastExperience;
+                    sPtr.Worked = true;
+                    Player.GainExperience(e * sPtr.Level);
+                }
+            }
+            EnergyUse = 100;
+            if (sPtr.ManaCost <= Player.Mana)
+            {
+                Player.Mana -= sPtr.ManaCost;
+            }
+            else
+            {
+                int oops = sPtr.ManaCost - Player.Mana;
+                Player.Mana = 0;
+                Player.FractionalMana = 0;
+                MsgPrint("You faint from the effort!");
+                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
+                if (Program.Rng.RandomLessThan(100) < 50)
+                {
+                    bool perm = Program.Rng.RandomLessThan(100) < 25;
+                    MsgPrint("You have damaged your health!");
+                    Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+                }
+            }
+            RedrawManaFlaggedAction.Set();
+        }
+
+        public void DoCmdMentalism()
+        {
+            int plev = Player.Level;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                MsgPrint("You are too confused!");
+                return;
+            }
+            if (!GetMentalismTalent(out int n, Player))
+            {
+                return;
+            }
+            Talents.Talent talent = Player.Spellcasting.Talents[n];
+            if (talent.ManaCost > Player.Mana)
+            {
+                MsgPrint("You do not have enough mana to use this talent.");
+                if (!GetCheck("Attempt it anyway? "))
+                {
+                    return;
+                }
+            }
+            int chance = talent.FailureChance(Player);
+            if (Program.Rng.RandomLessThan(100) < chance)
+            {
+                MsgPrint("You failed to concentrate hard enough!");
+                if (Program.Rng.DieRoll(100) < chance / 2)
+                {
+                    int i = Program.Rng.DieRoll(100);
+                    if (i < 5)
+                    {
+                        MsgPrint("Oh, no! Your mind has gone blank!");
+                        LoseAllInfo();
+                    }
+                    else if (i < 15)
+                    {
+                        MsgPrint("Weird visions seem to dance before your eyes...");
+                        Player.TimedHallucinations.SetTimer(Player.TimedHallucinations.TimeRemaining + 5 + Program.Rng.DieRoll(10));
+                    }
+                    else if (i < 45)
+                    {
+                        MsgPrint("Your brain is addled!");
+                        Player.TimedConfusion.SetTimer(Player.TimedConfusion.TimeRemaining + Program.Rng.DieRoll(8));
+                    }
+                    else if (i < 90)
+                    {
+                        Player.TimedStun.SetTimer(Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(8));
+                    }
+                    else
+                    {
+                        MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
+                        Project(1, 2 + (plev / 10), Player.MapY, Player.MapX, plev * 2,
+                            new ProjectMana(this),
+                            ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
+                            ProjectionFlag.ProjectItem);
+                        Player.Mana = Math.Max(0, Player.Mana - (plev * Math.Max(1, plev / 10)));
+                    }
+                }
+            }
+            else
+            {
+                talent.Use(this);
+            }
+            EnergyUse = 100;
+            if (talent.ManaCost <= Player.Mana)
+            {
+                Player.Mana -= talent.ManaCost;
+            }
+            else
+            {
+                int oops = talent.ManaCost - Player.Mana;
+                Player.Mana = 0;
+                Player.FractionalMana = 0;
+                MsgPrint("You faint from the effort!");
+                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
+                if (Program.Rng.RandomLessThan(100) < 50)
+                {
+                    bool perm = Program.Rng.RandomLessThan(100) < 25;
+                    MsgPrint("You have damaged your mind!");
+                    Player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
+                }
+            }
+            RedrawManaFlaggedAction.Set();
+        }
+
+        private bool GetMentalismTalent(out int sn, Player player)
+        {
+            int i;
+            int num = 0;
+            int y = 1;
+            int x = 20;
+            int plev = player.Level;
+            string p = "talent";
+            sn = -1;
+            bool flag = false;
+            bool redraw = false;
+            TalentList talents = player.Spellcasting.Talents;
+            for (i = 0; i < talents.Count; i++)
+            {
+                if (talents[i].Level <= plev)
+                {
+                    num++;
+                }
+            }
+            string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
+            while (!flag && GetCom(outVal, out char choice))
+            {
+                if (choice == ' ' || choice == '*' || choice == '?')
+                {
+                    if (!redraw)
+                    {
+                        redraw = true;
+                        SaveScreen();
+                        PrintLine("", y, x);
+                        Print("Name", y, x + 5);
+                        Print("Lv Mana Fail Info", y, x + 35);
+                        for (i = 0; i < talents.Count; i++)
+                        {
+                            Talents.Talent talent = talents[i];
+                            if (talent.Level > plev)
+                            {
+                                break;
+                            }
+                            string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(player)}";
+                            PrintLine(psiDesc, y + i + 1, x);
+                        }
+                        PrintLine("", y + i + 1, x);
+                    }
+                    else
+                    {
+                        redraw = false;
+                        Load();
+                    }
+                    continue;
+                }
+                bool ask = char.IsUpper(choice);
+                if (ask)
+                {
+                    choice = char.ToLower(choice);
+                }
+                i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
+                if (i < 0 || i >= num)
+                {
+                    continue;
+                }
+                if (ask)
+                {
+                    string tmpVal = $"Use {talents[i].Name}? ";
+                    if (!GetCheck(tmpVal))
+                    {
+                        continue;
+                    }
+                }
+                flag = true;
+            }
+            if (redraw)
+            {
+                Load();
+            }
+            if (!flag)
+            {
+                return false;
+            }
+            sn = i;
+            return true;
+        }
+
+        private void WildMagic(int spell)
+        {
+            switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
+            {
+                case 1:
+                case 2:
+                case 3:
+                    TeleportPlayer(10);
+                    break;
+
+                case 4:
+                case 5:
+                case 6:
+                    TeleportPlayer(100);
+                    break;
+
+                case 7:
+                case 8:
+                    TeleportPlayer(200);
+                    break;
+
+                case 9:
+                case 10:
+                case 11:
+                    UnlightArea(10, 3);
+                    break;
+
+                case 12:
+                case 13:
+                case 14:
+                    LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                    break;
+
+                case 15:
+                    DestroyDoorsTouch();
+                    break;
+
+                case 16:
+                case 17:
+                    WallBreaker();
+                    break;
+
+                case 18:
+                    SleepMonstersTouch();
+                    break;
+
+                case 19:
+                case 20:
+                    TrapCreation();
+                    break;
+
+                case 21:
+                case 22:
+                    DoorCreation();
+                    break;
+
+                case 23:
+                case 24:
+                case 25:
+                    AggravateMonsters();
+                    break;
+
+                case 26:
+                    Earthquake(Player.MapY, Player.MapX, 5);
+                    break;
+
+                case 27:
+                case 28:
+                    Player.Dna.GainMutation(this);
+                    break;
+
+                case 29:
+                case 30:
+                    ApplyDisenchant();
+                    break;
+
+                case 31:
+                    LoseAllInfo();
+                    break;
+
+                case 32:
+                    FireBall(new ProjectChaos(this), 0, spell + 5, 1 + (spell / 10));
+                    break;
+
+                case 33:
+                    WallStone();
+                    break;
+
+                case 34:
+                case 35:
+                    int counter = 0;
+                    while (counter++ < 8)
+                    {
+                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                    }
+                    break;
+
+                case 36:
+                case 37:
+                    ActivateHiSummon();
+                    break;
+
+                case 38:
+                    SummonReaver();
+                    break;
+
+                default:
+                    ActivateDreadCurse();
+                    break;
+            }
+        }
+
+        public void DoAimWand()
+        {
+            int itemIndex = -999;
+            if (itemIndex == -999)
+            {
+                // Prompt for an item, showing only wands
+                if (!GetItem(out itemIndex, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
+                {
+                    if (itemIndex == -2)
+                    {
+                        MsgPrint("You have no wand to aim.");
+                    }
+                    return;
+                }
+            }
+            // Get the item and check if it is really a wand
+            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
+            {
+                MsgPrint("That is not a wand!");
+                return;
+            }
+            // We can't use wands directly from the floor, since we need to aim them
+            if (itemIndex < 0 && item.Count > 1)
+            {
+                MsgPrint("You must first pick up the wand.");
+                return;
+            }
+            // Aim the wand
+            if (!GetDirectionWithAim(out int dir))
+            {
+                return;
+            }
+            // Using a wand takes 100 energy
+            EnergyUse = 100;
+            bool ident = false;
+            int itemLevel = item.BaseItemCategory.Level;
+            // Chance of success is your skill - item level, with item level capped at 50 and your
+            // skill halved if you're confused
+            int chance = Player.SkillUseDevice;
+            if (Player.TimedConfusion.TimeRemaining != 0)
+            {
+                chance /= 2;
+            }
+            chance -= itemLevel > 50 ? 50 : itemLevel;
+            // Always a small chance of success
+            if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+            {
+                chance = Constants.UseDevice;
+            }
+            if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+            {
+                MsgPrint("You failed to use the wand properly.");
+                return;
+            }
+            // Make sure we have charges
+            if (item.TypeSpecificValue <= 0)
+            {
+                MsgPrint("The wand has no charges left.");
+                item.IdentEmpty = true;
+                return;
+            }
+            PlaySound(SoundEffect.ZapRod);
+            WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
+            if (activateableItem.ExecuteActivation(this, dir))
+            {
+                ident = true;
+            }
+
+            NoticeCombineAndReorderFlaggedAction.Set();
+            // Mark the wand as having been tried
+            item.ObjectTried();
+            // If we just discovered the item's flavour, mark it as so
+            if (ident && !item.IsFlavourAware())
+            {
+                item.BecomeFlavourAware();
+                Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
+            }
+            // If we're a channeler then we should be using mana instead of charges
+            bool channeled = false;
+            if (Player.Spellcasting.Type == CastingType.Channeling)
+            {
+                channeled = DoCmdChannel(item);
+            }
+            // We didn't use mana, so decrease the wand's charges
+            if (!channeled)
+            {
+                item.TypeSpecificValue--;
+                // If the wand is part of a stack, split it off from the others
+                if (itemIndex >= 0 && item.Count > 1)
+                {
+                    Item splitItem = item.Clone(1);
+                    item.TypeSpecificValue++;
+                    item.Count--;
+                    Player.WeightCarried -= splitItem.Weight;
+                    itemIndex = Player.InvenCarry(splitItem, false);
+                    MsgPrint("You unstack your wand.");
+                }
+                // Let us know we have used a charge
+                if (itemIndex >= 0)
+                {
+                    Player.ReportChargeUsageFromInventory(itemIndex);
+                }
+                else
+                {
+                    Level.ReportChargeUsageFromFloor(0 - itemIndex);
+                }
+            }
+        }
+
         /// <summary>
         /// Search around the player for secret doors and traps
         /// </summary>
@@ -8655,10 +12134,10 @@ namespace AngbandOS
         /// </summary>
         /// <param name="y"> The y coordinate of the tile to be tunneled through </param>
         /// <param name="x"> The x coordinate of the tile to be tunneled through </param>
-        /// <returns> Whether or not the command can be repeated </returns>
+        /// <returns>True, if the command should be allowed to be continued; false, if the command succeeded, or is futile.</returns>
         public bool TunnelThroughTile(int y, int x)
         {
-            bool repeat = false;
+            bool more = false;
             // Tunnelling uses an entire turn
             EnergyUse = 100;
             GridTile tile = Level.Grid[y][x];
@@ -8672,7 +12151,7 @@ namespace AngbandOS
                 else
                 {
                     MsgPrint($"You hack away at the {tile.FeatureType.Description}.");
-                    repeat = true;
+                    more = true;
                 }
             }
             // Pillars are a bit easier than walls
@@ -8685,7 +12164,7 @@ namespace AngbandOS
                 else
                 {
                     MsgPrint("You hack away at the pillar.");
-                    repeat = true;
+                    more = true;
                 }
             }
             // We can't tunnel through water
@@ -8708,7 +12187,7 @@ namespace AngbandOS
                 else
                 {
                     MsgPrint("You tunnel into the granite wall.");
-                    repeat = true;
+                    more = true;
                 }
             }
             // It's a rock seam, so it might have treasure
@@ -8751,12 +12230,12 @@ namespace AngbandOS
                 else if (isMagma)
                 {
                     MsgPrint("You tunnel into the magma vein.");
-                    repeat = true;
+                    more = true;
                 }
                 else
                 {
                     MsgPrint("You tunnel into the quartz vein.");
-                    repeat = true;
+                    more = true;
                 }
             }
             // Rubble is easy to tunnel through
@@ -8778,14 +12257,14 @@ namespace AngbandOS
                 else
                 {
                     MsgPrint("You dig in the rubble.");
-                    repeat = true;
+                    more = true;
                 }
             }
             // We don't recognise what we're tunnelling into, so just assume it's permanent
             else
             {
                 MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
-                repeat = true;
+                more = true;
                 Search();
             }
             // If we successfully made the tunnel,
@@ -8796,11 +12275,11 @@ namespace AngbandOS
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
             }
-            if (!repeat)
+            if (!more)
             {
                 PlaySound(SoundEffect.Dig);
             }
-            return repeat;
+            return more;
         }
 
         /// <summary>

@@ -115,7 +115,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand1 => new PurchaseStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<PurchaseStoreCommand>();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 31.
@@ -124,7 +124,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand2 => new SellStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<SellStoreCommand>();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 42, 56.
@@ -133,7 +133,7 @@ namespace AngbandOS
         /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
         /// won't affect game play.
         /// </remarks>
-        protected virtual BaseStoreCommand AdvertisedStoreCommand3 => new ExamineStoreCommand();
+        protected virtual BaseStoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get<ExamineStoreCommand>();
 
         /// <summary>
         /// Returns the store command that should be advertised to the player @ position 43, 56.
@@ -1443,7 +1443,7 @@ namespace AngbandOS
             // Arcane casters can choose their spell
             if (SaveGame.Player.Spellcasting.Type != CastingType.Divine)
             {
-                if (!CastCommand.GetSpell(SaveGame, out spellIndex, "study", itemSubCategory, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
+                if (!SaveGame.GetSpell(out spellIndex, "study", itemSubCategory, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
                 {
                     return;
                 }
@@ -1511,7 +1511,7 @@ namespace AngbandOS
             bool matchingCommandFound = false;
 
             // Process commands
-            foreach (BaseStoreCommand command in ObjectRepository.StoreCommands)
+            foreach (BaseStoreCommand command in SaveGame.SingletonRepository.StoreCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.
@@ -1522,7 +1522,7 @@ namespace AngbandOS
                     // Ensure this command works in this store.
                     if (command.IsEnabled(this))
                     {
-                        StoreCommandEvent storeCommandEvent = new StoreCommandEvent(SaveGame, this);
+                        StoreCommandEvent storeCommandEvent = new StoreCommandEvent(this);
                         command.Execute(storeCommandEvent);
 
                         if (storeCommandEvent.RequiresRerendering)

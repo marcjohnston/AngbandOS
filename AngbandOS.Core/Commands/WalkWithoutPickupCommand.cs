@@ -1,19 +1,18 @@
 ﻿namespace AngbandOS.Commands
 {
     [Serializable]
-    internal class WalkWithoutPickupCommand : ICommand
+    internal class WalkWithoutPickupCommand : Command
     {
-        private WalkWithoutPickupCommand(SaveGame saveGame) { } // This object is a singleton.
+        private WalkWithoutPickupCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => '-';
+        public override char Key => '-';
 
-        public int? Repeat => null;
+        public override int? Repeat => null;
 
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            WalkAndPickupCommand.DoCmdWalk(saveGame, true);
+            SaveGame.DoCmdWalk(true);
+            return false;
         }
     }
 }

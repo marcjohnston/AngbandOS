@@ -4,19 +4,16 @@
     /// View the character sheet
     /// </summary>
     [Serializable]
-    internal class ViewCharacterCommand : ICommand
+    internal class ViewCharacterCommand : Command
     {
-        private ViewCharacterCommand(SaveGame saveGame) { } // This object is a singleton.
+        private ViewCharacterCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'C';
+        public override char Key => 'C';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            ViewCharacterStoreCommand.DoCmdViewCharacter(saveGame);
+            SaveGame.DoCmdViewCharacter();
+            return false;
         }
     }
 }

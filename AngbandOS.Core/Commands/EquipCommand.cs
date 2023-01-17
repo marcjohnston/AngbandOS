@@ -4,19 +4,16 @@
     /// Equip an item
     /// </summary>
     [Serializable]
-    internal class EquipCommand : ICommand
+    internal class EquipCommand : Command
     {
-        private EquipCommand(SaveGame saveGame) { } // This object is a singleton.
+        private EquipCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'e';
+        public override char Key => 'e';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            EquipStoreCommand.DoCmdEquip(saveGame);
+            SaveGame.DoCmdEquip();
+            return false;
         }
     }
 }

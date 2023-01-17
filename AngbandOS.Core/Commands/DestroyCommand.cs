@@ -4,19 +4,16 @@
     /// Destroy a single item
     /// </summary>
     [Serializable]
-    internal class DestroyCommand : ICommand
+    internal class DestroyCommand : Command
     {
-        private DestroyCommand(SaveGame saveGame) { } // This object is a singleton.
+        private DestroyCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'k';
+        public override char Key => 'k';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            DestroyStoreCommand.DoCmdDestroy(saveGame);
+            SaveGame.DoCmdDestroy();
+            return false;
         }
     }
 }

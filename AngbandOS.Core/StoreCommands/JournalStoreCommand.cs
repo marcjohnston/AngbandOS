@@ -1,5 +1,4 @@
-﻿
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons
@@ -7,21 +6,15 @@ namespace AngbandOS.StoreCommands
     [Serializable]
     internal class JournalStoreCommand : BaseStoreCommand
     {
+        private JournalStoreCommand(SaveGame saveGame) : base(saveGame) { }
         public override char Key => 'J';
 
         public override string Description => "";
 
         public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdJournal(storeCommandEvent.SaveGame);
+            SaveGame.DoCmdJournal();
             storeCommandEvent.RequiresRerendering = true;
-        }
-
-        public static void DoCmdJournal(SaveGame saveGame)
-        {
-            // Let the journal itself handle it from here
-            Journal journal = new Journal(saveGame);
-            journal.ShowMenu();
         }
     }
 }

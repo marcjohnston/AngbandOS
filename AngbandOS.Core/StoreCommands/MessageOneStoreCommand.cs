@@ -6,18 +6,14 @@
     [Serializable]
     internal class MessageOneStoreCommand : BaseStoreCommand
     {
+        private MessageOneStoreCommand(SaveGame saveGame) : base(saveGame) { }
         public override char Key => 'O';
 
         public override string Description => "";
 
         public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdMessageOne(storeCommandEvent.SaveGame);
-        }
-
-        public static void DoCmdMessageOne(SaveGame saveGame)
-        {
-            saveGame.PrintLine($"> {saveGame.MessageStr(0)}", 0, 0);
+            SaveGame.DoCmdMessageOne();
         }
     }
 }

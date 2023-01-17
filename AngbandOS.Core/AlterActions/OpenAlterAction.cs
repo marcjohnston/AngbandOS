@@ -5,8 +5,8 @@
     {
         public override void Execute(AlterEventArgs alterEventArgs)
         {
-            alterEventArgs.Disturbed = true;
-            alterEventArgs.SaveGame.OpenDoor(alterEventArgs.Y, alterEventArgs.X);
+            // Disturb the player, if the action did not fail.
+            alterEventArgs.More = alterEventArgs.SaveGame.OpenDoor(alterEventArgs.Y, alterEventArgs.X);
         }
     }
 }

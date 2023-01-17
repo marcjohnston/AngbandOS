@@ -5,7 +5,7 @@
         /// <summary>
         /// Provided to the scroll for access to the entire game structure.  Future version may only limit what the scroll has access to.
         /// </summary>
-        public SaveGame SaveGame { get; }
+        public SaveGame SaveGame { get; } // TODO: Remove
 
         /// <summary>
         /// Returns whether or not the scroll was identified after being read.  Returns false, by default.  Set to true, to identify the scroll to the player.

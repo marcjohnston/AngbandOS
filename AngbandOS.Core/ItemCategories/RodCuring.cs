@@ -18,5 +18,33 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 65, 0, 0, 0 };
         public override int? SubCategory => 8;
         public override int Weight => 15;
+        public override void Execute(ZapRodEvent zapRodEvent)
+        {
+            if (SaveGame.Player.TimedBlindness.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TimedPoison.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TimedConfusion.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TimedStun.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TimedBleeding.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TimedHallucinations.SetTimer(0))
+            {
+                zapRodEvent.Identified = true;
+            }
+            zapRodEvent.Item.TypeSpecificValue = 999;
+        }
     }
 }

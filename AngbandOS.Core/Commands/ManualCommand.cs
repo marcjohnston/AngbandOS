@@ -4,19 +4,16 @@
     /// Show the game manual
     /// </summary>
     [Serializable]
-    internal class ManualCommand : ICommand
+    internal class ManualCommand : Command
     {
-        private ManualCommand(SaveGame saveGame) { } // This object is a singleton.
+        private ManualCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'h';
+        public override char Key => 'h';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            ManualStoreCommand.DoCmdManual(saveGame);
+            SaveGame.DoCmdManual();
+            return false;
         }
     }
 }

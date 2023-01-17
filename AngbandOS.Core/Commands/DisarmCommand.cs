@@ -4,65 +4,17 @@
     /// Attempt to disarm a trap on a door or chest
     /// </summary>
     [Serializable]
-    internal class DisarmCommand : ICommand
+    internal class DisarmCommand : Command
     {
-        private DisarmCommand(SaveGame saveGame) { } // This object is a singleton.
+        private DisarmCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'D';
+        public override char Key => 'D';
 
-        public int? Repeat => 99;
+        public override int? Repeat => 99;
 
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            bool disturb = false;
-            int numTraps = saveGame.CountKnownTraps(out GridCoordinate? trapCoord);
-            int numChests = saveGame.CountChests(out GridCoordinate? chestCoord, true);
-            // Count the possible traps and chests we might want to disarm
-            if (numTraps != 0 || numChests != 0)
-            {
-                bool tooMany = (numTraps != 0 && numChests != 0) || numTraps > 1 || numChests > 1;
-                // If only one then we have our target
-                if (!tooMany)
-                {
-                    GridCoordinate coord = numTraps == 1 ? trapCoord : chestCoord;
-                    saveGame.CommandDirection = saveGame.Level.CoordsToDir(coord.Y, coord.X);
-                }
-            }
-            // Get a direction if we don't already have one
-            if (saveGame.GetDirectionNoAim(out int dir))
-            {
-                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-                GridTile tile = saveGame.Level.Grid[y][x];
-                // Check for a chest
-                int itemIndex = saveGame.Level.ChestCheck(y, x);
-                if (!tile.FeatureType.IsTrap &&
-                    itemIndex == 0)
-                {
-                    saveGame.MsgPrint("You see nothing there to disarm.");
-                }
-                // Can't disarm with a monster in the way
-                else if (tile.MonsterIndex != 0)
-                {
-                    saveGame.MsgPrint("There is a monster in the way!");
-                    saveGame.PlayerAttackMonster(y, x);
-                }
-                // Disarm the chest or trap
-                else if (itemIndex != 0)
-                {
-                    disturb = saveGame.DisarmChest(y, x, itemIndex);
-                }
-                else
-                {
-                    disturb = saveGame.DisarmTrap(y, x);
-                }
-            }
-            if (!disturb)
-            {
-                saveGame.Disturb(false);
-            }
+            return SaveGame.DoDisarm();
         }
     }
 }

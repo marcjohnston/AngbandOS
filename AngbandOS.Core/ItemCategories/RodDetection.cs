@@ -18,5 +18,11 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 30, 0, 0, 0 };
         public override int? SubCategory => 6;
         public override int Weight => 15;
+        public override void Execute(ZapRodEvent zapRodEvent)
+        {
+            SaveGame.DetectAll();
+            zapRodEvent.Identified = true;
+            zapRodEvent.Item.TypeSpecificValue = 99;
+        }
     }
 }

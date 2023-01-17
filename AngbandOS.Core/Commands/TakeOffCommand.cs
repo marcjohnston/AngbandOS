@@ -4,19 +4,16 @@
     /// Take off an item
     /// </summary>
     [Serializable]
-    internal class TakeOffCommand : ICommand
+    internal class TakeOffCommand : Command
     {
-        private TakeOffCommand(SaveGame saveGame) { } // This object is a singleton.
+        private TakeOffCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 't';
+        public override char Key => 't';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            TakeOffStoreCommand.DoCmdTakeOff(saveGame);
+            SaveGame.DoCmdTakeOff();
+            return false;
         }
     }
 }

@@ -1,18 +1,15 @@
 ﻿namespace AngbandOS.Commands
 {
     [Serializable]
-    internal class SpaceCommand : ICommand
+    internal class SpaceCommand : Command
     {
-        private SpaceCommand(SaveGame saveGame) { } // This object is a singleton.
+        private SpaceCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => ' ';
+        public override char Key => ' ';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
+            return false;
         }
     }
 }

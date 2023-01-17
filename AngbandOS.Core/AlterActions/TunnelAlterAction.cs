@@ -5,8 +5,7 @@
     {
         public override void Execute(AlterEventArgs alterEventArgs)
         {
-            alterEventArgs.Disturbed = true;
-            alterEventArgs.SaveGame.TunnelThroughTile(alterEventArgs.Y, alterEventArgs.X);
+            alterEventArgs.More = alterEventArgs.SaveGame.TunnelThroughTile(alterEventArgs.Y, alterEventArgs.X);
         }
     }
 }

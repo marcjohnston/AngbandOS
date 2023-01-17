@@ -81,7 +81,7 @@
                     return false;
             }
         }
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new RemoveCurseStoreCommand();
-        protected override BaseStoreCommand AdvertisedStoreCommand5 => new SacrificeStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RemoveCurseStoreCommand>();
+        protected override BaseStoreCommand AdvertisedStoreCommand5 => SaveGame.SingletonRepository.StoreCommands.Get<SacrificeStoreCommand>();
     }
 }

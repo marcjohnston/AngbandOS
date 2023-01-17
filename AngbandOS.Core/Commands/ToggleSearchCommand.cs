@@ -6,31 +6,16 @@ namespace AngbandOS.Commands
     /// Toggle whether we're automatically searching while moving
     /// </summary>
     [Serializable]
-    internal class ToggleSearchCommand : ICommand
+    internal class ToggleSearchCommand : Command
     {
-        private ToggleSearchCommand(SaveGame saveGame) { } // This object is a singleton.
+        private ToggleSearchCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'S';
+        public override char Key => 'S';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            if (saveGame.Player.IsSearching)
-            {
-                saveGame.Player.IsSearching = false;
-                saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.RedrawStateFlaggedAction.Set();
-            }
-            else
-            {
-                saveGame.Player.IsSearching = true;
-                saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.RedrawStateFlaggedAction.Set();
-                saveGame.RedrawSpeedFlaggedAction.Set();
-            }
+            SaveGame.DoToggleSearch();
+            return false;
         }
     }
 }

@@ -4,19 +4,16 @@
     /// Show the player's inventory
     /// </summary>
     [Serializable]
-    internal class InventoryCommand : ICommand
+    internal class InventoryCommand : Command
     {
-        private InventoryCommand(SaveGame saveGame) { } // This object is a singleton.
+        private InventoryCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'i';
+        public override char Key => 'i';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            InventoryStoreCommand.DoCmdInventory(saveGame);
+            SaveGame.DoCmdInventory();
+            return false;
         }
     }
 }

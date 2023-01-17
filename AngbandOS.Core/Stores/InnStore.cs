@@ -60,7 +60,7 @@
         }
 
         public override int StoreMaxKeep => 4;
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new HireRoomStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<HireRoomStoreCommand>();
         protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

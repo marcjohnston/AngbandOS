@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ItemFilters;
-
-namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.StoreCommands
 {
     /// <summary>
     /// Show the player's inventory
@@ -8,38 +6,14 @@ namespace AngbandOS.StoreCommands
     [Serializable]
     internal class InventoryStoreCommand : BaseStoreCommand
     {
+        private InventoryStoreCommand(SaveGame saveGame) : base(saveGame) { }
         public override char Key => 'i';
 
         public override string Description => "";
 
         public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            DoCmdInventory(storeCommandEvent.SaveGame);
-        }
-
-        public static void DoCmdInventory(SaveGame saveGame)
-        {
-            // We're not viewing equipment
-            saveGame.ViewingEquipment = false;
-            saveGame.SaveScreen();
-            // We want to see everything
-            saveGame.Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
-            // Get a new command
-            string outVal = $"Inventory: carrying {saveGame.Player.WeightCarried / 10}.{saveGame.Player.WeightCarried % 10} pounds ({saveGame.Player.WeightCarried * 100 / (saveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-            saveGame.PrintLine(outVal, 0, 0);
-            saveGame.QueuedCommand = saveGame.Inkey();
-            saveGame.Load();
-            // Display details if the player wants
-            if (saveGame.QueuedCommand == '\x1b')
-            {
-                saveGame.QueuedCommand = (char)0;
-            }
-            else
-            {
-                // If the player selected a command that needs to select an item, it will automatically
-                // show the inventory
-                saveGame.ViewingItemList = true;
-            }
+            SaveGame.DoCmdInventory();
         }
     }
 }

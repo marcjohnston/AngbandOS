@@ -4,19 +4,16 @@
     /// Destroy all worthless items in your pack
     /// </summary>
     [Serializable]
-    internal class DestroyAllCommand : ICommand
+    internal class DestroyAllCommand : Command
     {
-        private DestroyAllCommand(SaveGame saveGame) { } // This object is a singleton.
+        private DestroyAllCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'K';
+        public override char Key => 'K';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            DestroyAllStoreCommand.DoCmdDestroyAll(saveGame);
+            SaveGame.DoCmdDestroyAll();
+            return false;
         }
     }
 }

@@ -1,18 +1,15 @@
 ﻿namespace AngbandOS.Commands
 {
     [Serializable]
-    internal class CarriageReturnCommand : ICommand
+    internal class CarriageReturnCommand : Command
     {
-        private CarriageReturnCommand(SaveGame saveGame) { } // This object is a singleton.
+        private CarriageReturnCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => '\r';
+        public override char Key => '\r';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
+            return false;
         }
     }
 }

@@ -4,19 +4,16 @@
     /// Show the player what a particular symbol represents
     /// </summary>
     [Serializable]
-    internal class QuerySymbolCommand : ICommand
+    internal class QuerySymbolCommand : Command
     {
-        private QuerySymbolCommand(SaveGame saveGame) { } // This object is a singleton.
+        private QuerySymbolCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => '/';
+        public override char Key => '/';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            QuerySymbolStoreCommand.DoCmdQuerySymbol(saveGame);
+            SaveGame.DoCmdQuerySymbol();
+            return false;
         }
     }
 }

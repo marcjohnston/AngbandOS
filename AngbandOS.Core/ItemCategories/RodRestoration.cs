@@ -18,5 +18,37 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 80, 0, 0, 0 };
         public override int? SubCategory => 10;
         public override int Weight => 15;
+        public override void Execute(ZapRodEvent zapRodEvent)
+        {
+            if (SaveGame.Player.RestoreLevel())
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Strength))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+            {
+                zapRodEvent.Identified = true;
+            }
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
+            {
+                zapRodEvent.Identified = true;
+            }
+            zapRodEvent.Item.TypeSpecificValue = 999;
+        }
     }
 }

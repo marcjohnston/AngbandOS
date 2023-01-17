@@ -1,21 +1,23 @@
 ﻿namespace AngbandOS.Core.StoreCommands
 {
+    [Serializable]
     internal class PageStoreCommand : BaseStoreCommand
     {
+        private PageStoreCommand(SaveGame saveGame) : base(saveGame) { }
         public override char Key => ';';
 
         public override string Description => "scroll ";
 
         public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            int dir = storeCommandEvent.SaveGame.CommandDirection;
+            int dir = SaveGame.CommandDirection;
             while (dir == 0)
             {
-                if (!storeCommandEvent.SaveGame.GetCom("Direction (Escape to cancel)? ", out char ch))
+                if (!SaveGame.GetCom("Direction (Escape to cancel)? ", out char ch))
                 {
                     break;
                 }
-                dir = storeCommandEvent.SaveGame.GetKeymapDir(ch);
+                dir = SaveGame.GetKeymapDir(ch);
             }
             if (dir == 9)
             {

@@ -4,20 +4,18 @@
     /// Spend a turn searching for traps and secret doors
     /// </summary>
     [Serializable]
-    internal class SearchCommand : ICommand
+    internal class SearchCommand : Command
     {
-        private SearchCommand(SaveGame saveGame) { } // This object is a singleton.
+        private SearchCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 's';
+        public override char Key => 's';
 
-        public int? Repeat => 99;
+        public override int? Repeat => null;
 
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            saveGame.EnergyUse = 100;
-            saveGame.Search();
+            SaveGame.DoCmdSearch();
+            return false;
         }
     }
 }

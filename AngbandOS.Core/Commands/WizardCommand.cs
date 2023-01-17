@@ -1,29 +1,26 @@
 ﻿namespace AngbandOS.Commands
 {
     [Serializable]
-    internal class WizardCommand : ICommand
+    internal class WizardCommand : Command
     {
-        private WizardCommand(SaveGame saveGame) { } // This object is a singleton.
+        private WizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'W';
-
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
+        public override char Key => 'W';
 
         private const int _testRoll = 100000;
         private readonly char[] _head = { 'a', 'A', '0' };
 
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            if (saveGame.Player.IsWizard)
+            if (SaveGame.Player.IsWizard)
             {
-                DoCmdWizard(saveGame);
+                DoCmdWizard(SaveGame);
             }
             else
             {
-                DoCmdWizMode(saveGame);
+                DoCmdWizMode(SaveGame);
             }
+            return false;
         }
 
         public void DoCmdWizard(SaveGame saveGame)

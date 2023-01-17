@@ -39,9 +39,9 @@
         protected override string NoStockMessage => "Your home is empty.";
         protected override string PurchaseMessage => "Which item do you want to take? ";
 
-        protected override BaseStoreCommand AdvertisedStoreCommand1 => new GetStoreCommand();
-        protected override BaseStoreCommand AdvertisedStoreCommand2 => new DropStoreCommand();
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new RestStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<GetStoreCommand>();
+        protected override BaseStoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<DropStoreCommand>();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RestStoreCommand>();
         protected override string FleeMessage => "Your pack is so full that you flee your home...";
 
         protected override string GetItemDescription(Item oPtr)

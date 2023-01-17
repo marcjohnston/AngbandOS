@@ -4,19 +4,16 @@
     /// Browse a book
     /// </summary>
     [Serializable]
-    internal class BrowseCommand : ICommand
+    internal class BrowseCommand : Command
     {
-        private BrowseCommand(SaveGame saveGame) { } // This object is a singleton.
+        private BrowseCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'b';
+        public override char Key => 'b';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            BrowseStoreCommand.DoCmdBrowse(saveGame);
+            SaveGame.DoCmdBrowse();
+            return false;
         }
     }
 }

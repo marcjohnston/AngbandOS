@@ -102,6 +102,6 @@
                     return false;
             }
         }
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new ResearchItemStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<ResearchItemStoreCommand>();
     }
 }

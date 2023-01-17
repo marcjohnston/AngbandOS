@@ -4,19 +4,16 @@
     /// Wield/wear an item
     /// </summary>
     [Serializable]
-    internal class WieldCommand : ICommand
+    internal class WieldCommand : Command
     {
-        private WieldCommand(SaveGame saveGame) { } // This object is a singleton.
+        private WieldCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'w';
+        public override char Key => 'w';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            WieldStoreCommand.DoCmdWield(saveGame);
+            SaveGame.DoCmdWield();
+            return false;
         }
     }
 }

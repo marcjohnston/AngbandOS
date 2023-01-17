@@ -28,10 +28,10 @@
         protected override string OwnerName => "";
         protected override string Title => "Hall Of Records";
         protected override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
-        protected override BaseStoreCommand AdvertisedStoreCommand1 => new ViewRacialHeroesStoreCommand();
-        protected override BaseStoreCommand AdvertisedStoreCommand2 => new ViewClassHeroesStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<ViewRacialHeroesStoreCommand>();
+        protected override BaseStoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<ViewClassHeroesStoreCommand>();
         protected override BaseStoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new BuyHouseStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<BuyHouseStoreCommand>();
         protected override bool PerformsMaintenanceWhenResting => false;
     }
 }

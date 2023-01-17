@@ -84,6 +84,6 @@
             }
         }
 
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => new HireEscortStoreCommand();
+        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<HireEscortStoreCommand>();
     }
 }

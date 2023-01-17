@@ -37,6 +37,7 @@ namespace AngbandOS.Core.ItemClasses
             s += base.GetVerboseDescription(item);
             return s;
         }
-    }
 
+        public abstract void Execute(ZapRodEvent zapRodEvent);
+    }
 }

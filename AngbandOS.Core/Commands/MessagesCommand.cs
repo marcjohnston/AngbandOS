@@ -4,19 +4,16 @@
     /// Let the player scroll through previous messages
     /// </summary>
     [Serializable]
-    internal class MessagesCommand : ICommand
+    internal class MessagesCommand : Command
     {
-        private MessagesCommand(SaveGame saveGame) { } // This object is a singleton.
+        private MessagesCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'P';
+        public override char Key => 'P';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            MessagesStoreCommand.DoCmdMessages(saveGame);
+            SaveGame.DoCmdMessages();
+            return false;
         }
     }
 }

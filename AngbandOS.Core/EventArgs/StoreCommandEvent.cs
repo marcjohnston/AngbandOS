@@ -2,7 +2,6 @@
 {
     internal class StoreCommandEvent
     {
-        public SaveGame SaveGame { get; }
         public Store Store { get; }
 
         /// <summary>
@@ -15,9 +14,8 @@
         /// </summary>
         public bool LeaveStore = false;
 
-        public StoreCommandEvent(SaveGame saveGame, Store store)
+        public StoreCommandEvent(Store store)
         {
-            SaveGame = saveGame;
             Store = store;
         }
     }

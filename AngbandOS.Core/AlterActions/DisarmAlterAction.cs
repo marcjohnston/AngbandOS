@@ -5,8 +5,7 @@
     {
         public override void Execute(AlterEventArgs alterEventArgs)
         {
-            alterEventArgs.Disturbed = true;
-            alterEventArgs.SaveGame.DisarmTrap(alterEventArgs.Y, alterEventArgs.X);
+            alterEventArgs.More = alterEventArgs.SaveGame.DisarmTrap(alterEventArgs.Y, alterEventArgs.X);
         }
     }
 }

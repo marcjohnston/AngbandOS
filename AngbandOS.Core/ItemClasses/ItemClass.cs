@@ -60,7 +60,7 @@ namespace AngbandOS.Core.ItemClasses
         public readonly bool[] Stompable = new bool[4];
 
         /// <summary>
-        /// The special flavor of the item has been identified. (e.g. of "seeing")
+        /// The special flavor of the item has been identified. (e.g. "of seeing")
         /// </summary>
         public bool FlavourAware;
 

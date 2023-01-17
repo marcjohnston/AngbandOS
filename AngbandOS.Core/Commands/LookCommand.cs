@@ -5,22 +5,16 @@
     /// things that can be targeted
     /// </summary>
     [Serializable]
-    internal class LookCommand : ICommand
+    internal class LookCommand : Command
     {
-        private LookCommand(SaveGame saveGame) { } // This object is a singleton.
+        private LookCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'l';
+        public override char Key => 'l';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            if (saveGame.TargetSet(Constants.TargetLook))
-            {
-                saveGame.MsgPrint(saveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
-            }
+            SaveGame.DoCmdLook();
+            return false;
         }
     }
 }

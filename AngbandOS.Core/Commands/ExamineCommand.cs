@@ -4,19 +4,16 @@
     /// Examine an item
     /// </summary>
     [Serializable]
-    internal class ExamineCommand : ICommand
+    internal class ExamineCommand : Command
     {
-        private ExamineCommand(SaveGame saveGame) { } // This object is a singleton.
+        private ExamineCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => 'x';
+        public override char Key => 'x';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            ExamineInventoryStoreCommand.DoCmdExamine(saveGame);
+            SaveGame.DoCmdExamine();
+            return false;
         }
     }
 }

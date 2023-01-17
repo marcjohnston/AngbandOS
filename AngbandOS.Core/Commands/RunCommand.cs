@@ -4,32 +4,16 @@
     /// Start running
     /// </summary>
     [Serializable]
-    internal class RunCommand : ICommand
+    internal class RunCommand : Command
     {
-        private RunCommand(SaveGame saveGame) { } // This object is a singleton.
+        private RunCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public char Key => '.';
+        public override char Key => '.';
 
-        public int? Repeat => 0;
-
-        public bool IsEnabled => true;
-
-        public void Execute(SaveGame saveGame)
+        public override bool Execute()
         {
-            // Can't run if we're confused
-            if (saveGame.Player.TimedConfusion.TimeRemaining != 0)
-            {
-                saveGame.MsgPrint("You are too confused!");
-                return;
-            }
-            // Get a direction if we don't already have one
-            if (saveGame.GetDirectionNoAim(out int dir))
-            {
-                // If we don't have a distance, assume we'll run for 1,000 steps
-                saveGame.Running = saveGame.CommandArgument != 0 ? saveGame.CommandArgument : 1000;
-                // Run one step in the chosen direction
-                saveGame.RunOneStep(dir);
-            }
+            SaveGame.DoCmdRun();
+            return true;
         }
     }
 }
