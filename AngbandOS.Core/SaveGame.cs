@@ -13081,7 +13081,8 @@ namespace AngbandOS
             char i = '\0';
             int k = 0;
             bool done = false;
-            Locate(out int y, out int x);
+            int x = Screen.Cx;
+            int y = Screen.Cy;
             if (len < 1)
             {
                 len = 1;
@@ -13675,8 +13676,9 @@ namespace AngbandOS
         /// <param name="str"> The string to print </param>
         public void PrintWrap(Colour a, string str)
         {
-            GetSize(out int w, out _);
-            Locate(out int y, out int x);
+            int w = Width;
+            int y = Screen.Cy;
+            int x = Screen.Cx;
             string[] split = str.Split(' ');
             for (int i = 0; i < split.Length; i++)
             {
@@ -13727,11 +13729,6 @@ namespace AngbandOS
         {
             TotalErase = true;
             UpdateScreen();
-        }
-
-        private string ToHex(Color c)
-        {
-            return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
         }
 
         /// <summary>
@@ -14095,28 +14092,6 @@ namespace AngbandOS
                 KeyTail = 0;
             }
             return true;
-        }
-
-        /// <summary>
-        /// Gets the size of the GUI display
-        /// </summary>
-        /// <param name="w"> The width of the display </param>
-        /// <param name="h"> The height of the display </param>
-        private void GetSize(out int w, out int h)
-        {
-            w = Width;
-            h = Height;
-        }
-
-        /// <summary>
-        /// Retrieves the cursor location
-        /// </summary>
-        /// <param name="row"> The row of the cursor </param>
-        /// <param name="col"> The column of the cursor </param>
-        private void Locate(out int row, out int col)
-        {
-            col = Screen.Cx;
-            row = Screen.Cy;
         }
 
         private void MapMovementKeys()
