@@ -79,9 +79,9 @@
             }
         }
 
-        public void Refresh(IConsole console)
+        public void RefreshSpectatorConsole(IConsole spectatorConsole)
         {
-            saveGame.Refresh(console);
+            saveGame.RefreshSpectatorConsole(spectatorConsole);
         }
 
         public void InitiateShutDown()

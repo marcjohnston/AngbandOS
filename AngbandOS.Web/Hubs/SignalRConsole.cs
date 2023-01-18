@@ -53,7 +53,7 @@ namespace AngbandOS.Web.Hubs
             _spectators.Add(watcherHub);
 
             // Send a request to the game to refresh the screen.
-            _gameServer.Refresh(new SpectatorConsole(watcherHub));
+            _gameServer.RefreshSpectatorConsole(new SpectatorConsole(watcherHub));
         }
 
         public void RemoveWatcher(ISpectatorsHub watcherHub)

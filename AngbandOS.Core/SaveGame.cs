@@ -167,8 +167,17 @@ namespace AngbandOS
         public int Height;
         public char[] KeyQueue;
         public int KeySize;
+
+        /// <summary>
+        /// The contents of the screen that was last sent to the console.  Facilitates as the double buffer.
+        /// </summary>
         public Screen Old;
+
+        /// <summary>
+        /// The current contents of the game screen.
+        /// </summary>
         public Screen Scr;
+
         public int Width;
         public int[] X1;
         public int[] X2;
@@ -13735,7 +13744,7 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Update the screen, drawing all queued print and erase requests.
+        /// Update the screen using a double buffer, drawing all queued print and erase requests.
         /// </summary>
         public void UpdateScreen()
         {
@@ -13879,37 +13888,30 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Refresh the window, drawing all queued print and erase requests
+        /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
         /// </summary>
-        public void Refresh(IConsole console)
+        public void RefreshSpectatorConsole(IConsole spectatorConsole)
         {
             List<PrintLine> batchPrintLines = new List<PrintLine>();
-            Screen scr = Scr; // This will always be the game screen contents.
-            int y;
-            int w = Width;
-            int h = Height;
-            int y1 = Y1;
-            int y2 = Y2;
-
-            console.Clear();
+            spectatorConsole.Clear();
 
             // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
-            for (y = 0; y < Height; ++y)
+            for (int y = 0; y < Height; ++y)
             {
-                int scrAa = scr.A[y];
-                int scrCc = scr.C[y];
+                int scrAa = Scr.A[y];
+                int scrCc = Scr.C[y];
                 int fn = 0;
                 int fx = 0;
                 Colour currentColor = AttrBlank;
                 for (int x = 0; x < Width; x++)
                 {
-                    Colour na = scr.Va[scrAa + x];
-                    char nc = scr.Vc[scrCc + x];
+                    Colour na = Scr.Va[scrAa + x];
+                    char nc = Scr.Vc[scrCc + x];
                     if (currentColor != na)
                     {
                         if (fn != 0)
                         {
-                            batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                            batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                             fn = 0;
                         }
                         currentColor = na;
@@ -13921,14 +13923,14 @@ namespace AngbandOS
                 }
                 if (fn != 0)
                 {
-                    batchPrintLines.Add(new PrintLine(y, fx, new string(scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                    batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                 }
             }
 
-            if (scr.CursorVisible)
+            if (Scr.CursorVisible)
             {
-                int scrCc = scr.C[scr.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(scr.Cy, scr.Cx, scr.Vc[scrCc + scr.Cx].ToString(), scr.Va[scrCc + scr.Cx], Colour.Purple));
+                int scrCc = Scr.C[Scr.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Scr.Cy, Scr.Cx, Scr.Vc[scrCc + Scr.Cx].ToString(), Scr.Va[scrCc + Scr.Cx], Colour.Purple));
             }
 
             if (batchPrintLines.Count > 0)
