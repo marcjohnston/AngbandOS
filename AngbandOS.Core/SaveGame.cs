@@ -161,8 +161,6 @@ namespace AngbandOS
         public bool InPopupMenu;
         public char QueuedCommand;
         /// DISPLAY
-        public Colour AttrBlank;
-        public char CharBlank;
         public char[] KeyQueue;
         public int KeySize;
 
@@ -1509,8 +1507,6 @@ namespace AngbandOS
             Y1 = 0;
             Y2 = h - 1;
             TotalErase = true;
-            AttrBlank = 0;
-            CharBlank = ' ';
         }
 
         public void UpdateStuff()
@@ -13150,8 +13146,8 @@ namespace AngbandOS
         {
             int w = Screen.Width;
             int h = Screen.Height;
-            Colour na = AttrBlank;
-            char nc = CharBlank;
+            Colour na = Screen.AttrBlank;
+            char nc = Screen.CharBlank;
             Screen.Cu = false;
             Screen.Cx = 0;
             Screen.Cy = 0;
@@ -13183,8 +13179,8 @@ namespace AngbandOS
             int w = Screen.Width;
             int x1 = -1;
             int x2 = -1;
-            Colour na = AttrBlank;
-            char nc = CharBlank;
+            Colour na = Screen.AttrBlank;
+            char nc = Screen.CharBlank;
             Goto(row, col);
             if (col + length > w)
             {
@@ -13762,8 +13758,8 @@ namespace AngbandOS
                     int cc = Old.C[y];
                     for (int x = 0; x < w; x++)
                     {
-                        Old.Va[aa++] = AttrBlank; // Background color
-                        Old.Vc[cc++] = CharBlank; // Space
+                        Old.Va[aa++] = Screen.AttrBlank; // Background color
+                        Old.Vc[cc++] = Screen.CharBlank; // Space
                     }
                 }
                 // Reset the size of the display to be full height.
@@ -13799,7 +13795,7 @@ namespace AngbandOS
                     int scrCc = Screen.C[y];
                     int fn = 0;
                     int fx = 0;
-                    Colour fa = AttrBlank;
+                    Colour fa = Screen.AttrBlank;
                     for (int x = x1; x <= x2; x++)
                     {
                         Colour oa = Old.Va[oldAa + x];
@@ -13885,7 +13881,7 @@ namespace AngbandOS
                 int scrCc = Screen.C[y];
                 int fn = 0;
                 int fx = 0;
-                Colour currentColor = AttrBlank;
+                Colour currentColor = Screen.AttrBlank;
                 for (int x = 0; x < Screen.Width; x++)
                 {
                     Colour na = Screen.Va[scrAa + x];

@@ -11,6 +11,9 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Screen
     {
+        public Colour AttrBlank;
+        public char CharBlank;
+
         /// <summary>
         /// The height of the screen.
         /// </summary>
@@ -47,6 +50,9 @@ namespace AngbandOS.Core
         {
             Width = w;
             Height = h;
+
+            AttrBlank = 0;
+            CharBlank = ' ';
 
             // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
             A = new int[h];
