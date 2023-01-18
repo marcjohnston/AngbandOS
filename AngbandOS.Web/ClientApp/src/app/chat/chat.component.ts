@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     const now: Date = new Date();
 
     // Check to see if the message was sent today.
-    if (date.getDay() === now.getDay() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear()) {
+    if (date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear()) {
       // Do not show the date.
       return date.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' });
     } else {
