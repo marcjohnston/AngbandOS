@@ -164,6 +164,7 @@ namespace AngbandOS
         /// DISPLAY
         public Colour AttrBlank;
         public char CharBlank;
+        public int Height;
         public char[] KeyQueue;
         public int KeySize;
 
@@ -177,7 +178,6 @@ namespace AngbandOS
         /// </summary>
         public Screen Screen;
 
-        public int Height;
         public int Width;
         public int[] X1;
         public int[] X2;
@@ -1500,6 +1500,8 @@ namespace AngbandOS
         {
             KeySize = k;
             KeyQueue = new char[k];
+            Width = w;
+            Height = h;
             X1 = new int[h];
             X2 = new int[h];
             Old = new Screen(w, h);
@@ -13079,8 +13081,7 @@ namespace AngbandOS
             char i = '\0';
             int k = 0;
             bool done = false;
-            int y = Screen.Cy;
-            int x = Screen.Cx;
+            Locate(out int y, out int x);
             if (len < 1)
             {
                 len = 1;
@@ -13140,7 +13141,7 @@ namespace AngbandOS
         /// <param name="row"> The first row to clear </param>
         public void Clear(int row)
         {
-            for (int y = row; y < Screen.Height; y++)
+            for (int y = row; y < Height; y++)
             {
                 Erase(y, 0, 255);
             }
@@ -13151,8 +13152,8 @@ namespace AngbandOS
         /// </summary>
         public void Clear()
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             Colour na = AttrBlank;
             char nc = CharBlank;
             Screen.Cu = false;
@@ -13366,8 +13367,8 @@ namespace AngbandOS
         /// <param name="col"> The column at which to print </param>
         public void Goto(int row, int col)
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             if (col < 0 || col >= w)
             {
                 return;
@@ -13449,8 +13450,8 @@ namespace AngbandOS
         /// </summary>
         public void Load()
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             if (Mem == null)
             {
                 Mem = new Screen(w, h);
@@ -13483,8 +13484,8 @@ namespace AngbandOS
         /// <param name="col"> The column at which to place the character </param>
         public void Place(Colour attr, char ch, int row, int col)
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             if (col < 0 || col >= w)
             {
                 return;
@@ -13674,8 +13675,8 @@ namespace AngbandOS
         /// <param name="str"> The string to print </param>
         public void PrintWrap(Colour a, string str)
         {
-            int y = Screen.Cy;
-            int x = Screen.Cx;
+            GetSize(out int w, out _);
+            Locate(out int y, out int x);
             string[] split = str.Split(' ');
             for (int i = 0; i < split.Length; i++)
             {
@@ -13684,7 +13685,7 @@ namespace AngbandOS
                 {
                     s = " " + s;
                 }
-                if (x + s.Length > Screen.Width)
+                if (x + s.Length > w)
                 {
                     x = 0;
                     y++;
@@ -13740,8 +13741,8 @@ namespace AngbandOS
         {
             List<PrintLine> batchPrintLines = new List<PrintLine>();
             int y;
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             int y1 = Y1;
             int y2 = Y2;
 
@@ -13886,14 +13887,14 @@ namespace AngbandOS
             spectatorConsole.Clear();
 
             // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
-            for (int y = 0; y < Screen.Height; ++y)
+            for (int y = 0; y < Height; ++y)
             {
                 int scrAa = Screen.A[y];
                 int scrCc = Screen.C[y];
                 int fn = 0;
                 int fx = 0;
                 Colour currentColor = AttrBlank;
-                for (int x = 0; x < Screen.Width; x++)
+                for (int x = 0; x < Width; x++)
                 {
                     Colour na = Screen.Va[scrAa + x];
                     char nc = Screen.Vc[scrCc + x];
@@ -14033,8 +14034,8 @@ namespace AngbandOS
         /// </summary>
         public void SaveScreen()
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
+            int w = Width;
+            int h = Height;
             (Mem ?? (Mem = new Screen(w, h))).Copy(Screen, w, h);
         }
 
@@ -14094,6 +14095,28 @@ namespace AngbandOS
                 KeyTail = 0;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Gets the size of the GUI display
+        /// </summary>
+        /// <param name="w"> The width of the display </param>
+        /// <param name="h"> The height of the display </param>
+        private void GetSize(out int w, out int h)
+        {
+            w = Width;
+            h = Height;
+        }
+
+        /// <summary>
+        /// Retrieves the cursor location
+        /// </summary>
+        /// <param name="row"> The row of the cursor </param>
+        /// <param name="col"> The column of the cursor </param>
+        private void Locate(out int row, out int col)
+        {
+            col = Screen.Cx;
+            row = Screen.Cy;
         }
 
         private void MapMovementKeys()
