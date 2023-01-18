@@ -179,7 +179,6 @@ namespace AngbandOS
         public int KeyHead = 0;
         public int KeyTail = 0;
         public Screen Mem;
-        public bool TotalErase;
         public int Y1;
         public int Y2;
         /// DISPLAY
@@ -1506,7 +1505,6 @@ namespace AngbandOS
             }
             Y1 = 0;
             Y2 = h - 1;
-            TotalErase = true;
         }
 
         public void UpdateStuff()
@@ -13165,7 +13163,7 @@ namespace AngbandOS
             }
             Y1 = 0;
             Y2 = h - 1;
-            TotalErase = true;
+            Screen.TotalErase = true;
         }
 
         /// <summary>
@@ -13718,7 +13716,7 @@ namespace AngbandOS
         /// </summary>
         public void Redraw()
         {
-            TotalErase = true;
+            Screen.TotalErase = true;
             UpdateScreen();
         }
 
@@ -13735,13 +13733,13 @@ namespace AngbandOS
             int y2 = Y2;
 
             // Check to see if any updates are needed.
-            if (y1 > y2 && Screen.Cu == Old.Cu && Screen.CursorVisible == Old.CursorVisible && Screen.Cx == Old.Cx && Screen.Cy == Old.Cy && !TotalErase)
+            if (y1 > y2 && Screen.Cu == Old.Cu && Screen.CursorVisible == Old.CursorVisible && Screen.Cx == Old.Cx && Screen.Cy == Old.Cy && !Screen.TotalErase)
             {
                 // No updates are needed.
                 return;
             }
 
-            if (TotalErase)
+            if (Screen.TotalErase)
             {
                 // Clear the "old" screen 
                 _console.Clear();
@@ -13772,7 +13770,7 @@ namespace AngbandOS
                     X1[y] = 0;
                     X2[y] = w - 1;
                 }
-                TotalErase = false;
+                Screen.TotalErase = false;
             }
             if (Screen.Cu || !Screen.CursorVisible)
             {

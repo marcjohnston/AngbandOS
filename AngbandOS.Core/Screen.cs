@@ -30,6 +30,8 @@ namespace AngbandOS.Core
         public readonly char[] Vc; // Array of character data for the entire screen
         public bool Cu;
 
+        public bool TotalErase; // TODO: Needs to be deleted
+
         /// <summary>
         /// Whether or nt the cursor is visible.  Encapsulated using the CursorVisible property.
         /// </summary>
@@ -53,6 +55,8 @@ namespace AngbandOS.Core
 
             AttrBlank = 0;
             CharBlank = ' ';
+
+            TotalErase = true;
 
             // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
             A = new int[h];
