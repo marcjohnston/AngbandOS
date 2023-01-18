@@ -214,7 +214,7 @@
             {
                 saveGame.Player.IsWizard = true;
                 saveGame.MsgPrint("Wizard mode activated.");
-                saveGame.RedrawLevelFlaggedAction.Set();
+                saveGame.RedrawTitleFlaggedAction.Set();
             }
         }
 
