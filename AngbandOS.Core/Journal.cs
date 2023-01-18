@@ -158,9 +158,9 @@ namespace AngbandOS
                     break;
                 }
             }
-            SaveGame.Goto(5, 0);
+            SaveGame.Screen.Goto(5, 0);
             DisplayMonsterHeader(rIdx);
-            SaveGame.Goto(6, 0);
+            SaveGame.Screen.Goto(6, 0);
             SaveGame.SingletonRepository.MonsterRaces[rIdx].Knowledge.DisplayBody(Colour.Brown);
         }
 
@@ -872,7 +872,7 @@ namespace AngbandOS
             description += "Your Word of Recall position has its dungeon location updated ";
             description += "only when you recall from a new dungeon or tower; but has its level updated ";
             description += "each time you reach a new level within that dungeon or tower. In either case, you will be transported to a random location on the dungeon or tower level.)";
-            SaveGame.Goto(8, 0);
+            SaveGame.Screen.Goto(8, 0);
             SaveGame.PrintWrap(Colour.Blue, description);
             SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
@@ -947,7 +947,7 @@ namespace AngbandOS
             SaveGame.Clear();
             SaveGame.Print(Colour.Blue, "Worthless Items", 0, 1);
             SaveGame.Print(Colour.Blue, "===============", 1, 1);
-            SaveGame.Goto(3, 0);
+            SaveGame.Screen.Goto(3, 0);
             string text = "Items marked in red ";
             text += "will be considered 'worthless' and you will stomp on them (destroying them) rather than ";
             text += "picking them up. Destroying (using 'k' or 'K') a worthless object will be done automatically ";

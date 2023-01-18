@@ -1361,7 +1361,7 @@ namespace AngbandOS
             char c1 = _monsterType.Character;
             Colour a1 = _monsterType.Colour;
             SaveGame.Erase(0, 0, 255);
-            SaveGame.Goto(0, 0);
+            SaveGame.Screen.Goto(0, 0);
             if (!_monsterType.Unique)
             {
                 SaveGame.Print(Colour.White, "The ", -1);

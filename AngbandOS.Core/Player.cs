@@ -894,7 +894,7 @@ namespace AngbandOS
             const int col = 15;
             while (true)
             {
-                SaveGame.Goto(2, col);
+                SaveGame.Screen.Goto(2, col);
                 if (SaveGame.AskforAux(out string newName, Name, 12))
                 {
                     Name = newName;

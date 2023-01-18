@@ -9342,11 +9342,11 @@ namespace AngbandOS
             Print(Colour.Orange, "[Press any key to continue]", 43, 26);
             if (CurrentDepth == 0)
             {
-                Goto(Player.WildernessY + 2, Player.WildernessX + 2);
+                Screen.Goto(Player.WildernessY + 2, Player.WildernessX + 2);
             }
             else
             {
-                Goto(cy, cx);
+                Screen.Goto(cy, cx);
             }
             // Wait for a keypress, and restore the screen (looking at the map takes no time)
             Inkey();
@@ -13081,7 +13081,7 @@ namespace AngbandOS
             Print(Colour.Grey, buf, y, x);
             while (!done && !Shutdown)
             {
-                Goto(y, x + k);
+                Screen.Goto(y, x + k);
                 i = Inkey();
                 switch (i)
                 {
@@ -13153,7 +13153,7 @@ namespace AngbandOS
             int x2 = -1;
             Colour na = Screen.AttrBlank;
             char nc = Screen.CharBlank;
-            Goto(row, col);
+            Screen.Goto(row, col);
             if (col + length > w)
             {
                 length = w - col;
@@ -13307,28 +13307,6 @@ namespace AngbandOS
             bool res = AskforAux(out buf, initial, len);
             PrintLine("", 0, 0);
             return res;
-        }
-
-        /// <summary>
-        /// Moves the cursor and print location to a new position
-        /// </summary>
-        /// <param name="row"> The row at which to print </param>
-        /// <param name="col"> The column at which to print </param>
-        public void Goto(int row, int col)
-        {
-            int w = Screen.Width;
-            int h = Screen.Height;
-            if (col < 0 || col >= w)
-            {
-                return;
-            }
-            if (row < 0 || row >= h)
-            {
-                return;
-            }
-            Screen.Cx = col;
-            Screen.Cy = row;
-            Screen.Cu = false;
         }
 
         /// <summary>
@@ -13487,7 +13465,7 @@ namespace AngbandOS
         /// <param name="col"> The x position at which to print </param>
         public void Print(Colour attr, char ch, int row, int col)
         {
-            Goto(row, col);
+            Screen.Goto(row, col);
             Print(attr, ch);
         }
 
@@ -13537,7 +13515,7 @@ namespace AngbandOS
         /// <param name="length"> The number of characters to print (-1 for all) </param>
         public void Print(Colour attr, string str, int row, int col, int length)
         {
-            Goto(row, col);
+            Screen.Goto(row, col);
             Print(attr, str, length);
         }
 
@@ -13549,7 +13527,7 @@ namespace AngbandOS
         /// <param name="col"> The column at which to print </param>
         public void Print(string str, int row, int col)
         {
-            Goto(row, col);
+            Screen.Goto(row, col);
             Print(Colour.White, str, -1);
         }
 
@@ -13583,7 +13561,7 @@ namespace AngbandOS
         /// <param name="col"> The column at which to print </param>
         public void Print(Colour attr, string str, int row, int col)
         {
-            Goto(row, col);
+            Screen.Goto(row, col);
             Print(attr, str, -1);
         }
 

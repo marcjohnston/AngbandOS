@@ -35,9 +35,17 @@ namespace AngbandOS.Core
         /// <summary>
         /// Whether or nt the cursor is visible.  Encapsulated using the CursorVisible property.
         /// </summary>
-        private bool _cursorVisible;
-        public int Cx;
-        public int Cy;
+        private bool _cursorVisible; // TODO: Combine this into a GridCoordinate? (nullable)
+
+        /// <summary>
+        /// The x coordinate position of the cursor.
+        /// </summary>
+        public int Cx; // TODO: Combine this into a GridCoordinate? (nullable)
+
+        /// <summary>
+        /// The y coordinate position of the cursor.
+        /// </summary>
+        public int Cy; // TODO: Combine this into a GridCoordinate? (nullable)
 
         /// <summary>
         /// Sets or returns whether the cursor is visible
@@ -46,6 +54,26 @@ namespace AngbandOS.Core
         {
             get => _cursorVisible;
             set => _cursorVisible = value;
+        }
+
+        /// <summary>
+        /// Moves the cursor and print location to a new position
+        /// </summary>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void Goto(int row, int col)
+        {
+            if (col < 0 || col >= Width)
+            {
+                return;
+            }
+            if (row < 0 || row >= Height)
+            {
+                return;
+            }
+            Cx = col;
+            Cy = row;
+            Cu = false;
         }
 
         public void Clear()

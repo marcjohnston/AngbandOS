@@ -61,7 +61,7 @@
         /// <summary>
         /// Update the screen using a double buffer, drawing all queued print and erase requests.
         /// </summary>
-        public void UpdateScreen(Screen Screen, Screen Old, IConsole _console)
+        public void UpdateScreen(Screen Screen, Screen Old, IConsole console)
         {
             List<PrintLine> batchPrintLines = new List<PrintLine>();
             int y;
@@ -76,7 +76,7 @@
             if (Screen.TotalErase)
             {
                 // Clear the "old" screen 
-                _console.Clear();
+                console.Clear();
                 Old.CursorVisible = false;
                 Old.Cu = false;
                 Old.Cx = 0;
@@ -191,9 +191,10 @@
             Old.Cx = Screen.Cx;
             Old.Cy = Screen.Cy;
 
+            // Now emit the batched print objects to the console.
             if (batchPrintLines.Count > 0)
             {
-                _console.BatchPrint(batchPrintLines.ToArray());
+                console.BatchPrint(batchPrintLines.ToArray());
             }
         }
     }

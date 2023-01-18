@@ -383,7 +383,7 @@ namespace AngbandOS
             }
             for (y = 0; y < maxy + 2; ++y)
             {
-                SaveGame.Goto(yOffset + y, xOffset);
+                SaveGame.Screen.Goto(yOffset + y, xOffset);
                 for (x = 0; x < maxx + 2; ++x)
                 {
                     ta = ma[y][x];
@@ -916,7 +916,7 @@ namespace AngbandOS
         {
             row -= PanelRowPrt;
             col -= PanelColPrt;
-            SaveGame.Goto(row, col);
+            SaveGame.Screen.Goto(row, col);
         }
 
         public void MoveOneStepTowards(out int newY, out int newX, int currentY, int currentX, int startY, int startX, int targetY, int targetX)
