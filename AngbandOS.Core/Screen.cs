@@ -11,6 +11,14 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Screen
     {
+        /// <summary>
+        /// The height of the screen.
+        /// </summary>
+        public int Height;
+
+        // The width of the screen.
+        public int Width;
+
         public readonly int[] A; // Represents fast character index into Va for each row.  0, 80, 160 etc ...  // Was a pointer to part of va, now an index into it // TODO: not sure if this is needed anymore
         public readonly int[] C; // Was a pointer to part of va, now an index into it
         public readonly Colour[] Va; // Array of color data for the entire screen
@@ -21,8 +29,14 @@ namespace AngbandOS.Core
         /// Whether or nt the cursor is visible.  Encapsulated using the CursorVisible property.
         /// </summary>
         private bool _cursorVisible;
-        public int Cx;
-        public int Cy;
+
+        /// <summary>
+        /// Cursor x position.
+        /// </summary>
+        public int Cx; // TODO: Convert to GridCoordinate.
+
+        // Cursor y position.
+        public int Cy; // TODO: Convert to GridCoordinate.
 
         /// <summary>
         /// Sets or returns whether the cursor is visible
@@ -35,6 +49,9 @@ namespace AngbandOS.Core
 
         public Screen(int w, int h)
         {
+            Width = w;
+            Height = h;
+
             // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
             A = new int[h];
             C = new int[h];
