@@ -13135,23 +13135,7 @@ namespace AngbandOS
         /// </summary>
         public void Clear()
         {
-            int w = Screen.Width;
-            int h = Screen.Height;
-            Colour na = Screen.AttrBlank;
-            char nc = Screen.CharBlank;
-            Screen.Cu = false;
-            Screen.Cx = 0;
-            Screen.Cy = 0;
-            for (int y = 0; y < h; y++)
-            {
-                int scrAa = Screen.A[y];
-                int scrCc = Screen.C[y];
-                for (int x = 0; x < w; x++)
-                {
-                    Screen.Va[scrAa + x] = na;
-                    Screen.Vc[scrCc + x] = nc;
-                }
-            }
+            Screen.Clear();
             UpdateWindow.Reset();
             Screen.TotalErase = true;
         }

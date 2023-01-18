@@ -48,6 +48,23 @@ namespace AngbandOS.Core
             set => _cursorVisible = value;
         }
 
+        public void Clear()
+        {
+            Cu = false;
+            Cx = 0;
+            Cy = 0;
+            for (int y = 0; y < Height; y++)
+            {
+                int scrAa = A[y];
+                int scrCc = C[y];
+                for (int x = 0; x < Width; x++)
+                {
+                    Va[scrAa + x] = AttrBlank;
+                    Vc[scrCc + x] = CharBlank;
+                }
+            }
+        }
+
         public Screen(int w, int h)
         {
             Width = w;
