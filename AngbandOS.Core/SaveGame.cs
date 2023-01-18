@@ -176,7 +176,7 @@ namespace AngbandOS
         /// <summary>
         /// The current contents of the game screen.
         /// </summary>
-        public Screen Scr;
+        public Screen Screen;
 
         public int Width;
         public int[] X1;
@@ -530,7 +530,7 @@ namespace AngbandOS
 
             FullScreenOverlay = true;
             SetBackground(BackgroundImage.Normal);
-            CursorVisible = false;
+            Screen.CursorVisible = false;
             if (Program.Rng.UseFixed)
             {
                 Program.Rng.UseFixed = false;
@@ -1505,7 +1505,7 @@ namespace AngbandOS
             X1 = new int[h];
             X2 = new int[h];
             Old = new Screen(w, h);
-            Scr = new Screen(w, h);
+            Screen = new Screen(w, h);
             for (int y = 0; y < h; y++)
             {
                 X1[y] = 0;
@@ -13064,15 +13064,6 @@ namespace AngbandOS
 
         /// GUI
         /// <summary>
-        /// Sets or returns whether the cursor is visible
-        /// </summary>
-        public bool CursorVisible
-        {
-            get => Scr.CursorVisible;
-            set => Scr.CursorVisible = value;
-        }
-
-        /// <summary>
         /// Prints a 'press any key' message and waits for a key press
         /// </summary>
         /// <param name="row"> The row on which to print the message </param>
@@ -13165,17 +13156,17 @@ namespace AngbandOS
             int h = Height;
             Colour na = AttrBlank;
             char nc = CharBlank;
-            Scr.Cu = false;
-            Scr.Cx = 0;
-            Scr.Cy = 0;
+            Screen.Cu = false;
+            Screen.Cx = 0;
+            Screen.Cy = 0;
             for (int y = 0; y < h; y++)
             {
-                int scrAa = Scr.A[y];
-                int scrCc = Scr.C[y];
+                int scrAa = Screen.A[y];
+                int scrCc = Screen.C[y];
                 for (int x = 0; x < w; x++)
                 {
-                    Scr.Va[scrAa + x] = na;
-                    Scr.Vc[scrCc + x] = nc;
+                    Screen.Va[scrAa + x] = na;
+                    Screen.Vc[scrCc + x] = nc;
                 }
                 X1[y] = 0;
                 X2[y] = w - 1;
@@ -13203,18 +13194,18 @@ namespace AngbandOS
             {
                 length = w - col;
             }
-            int scrAa = Scr.A[row];
-            int scrCc = Scr.C[row];
+            int scrAa = Screen.A[row];
+            int scrCc = Screen.C[row];
             for (int i = 0; i < length; i++, col++)
             {
-                Colour oa = Scr.Va[scrAa + col];
-                int oc = Scr.Vc[scrCc + col];
+                Colour oa = Screen.Va[scrAa + col];
+                int oc = Screen.Vc[scrCc + col];
                 if (oa == na && oc == nc)
                 {
                     continue;
                 }
-                Scr.Va[scrAa + col] = na;
-                Scr.Vc[scrCc + col] = nc;
+                Screen.Va[scrAa + col] = na;
+                Screen.Vc[scrCc + col] = nc;
                 if (x1 < 0)
                 {
                     x1 = col;
@@ -13386,9 +13377,9 @@ namespace AngbandOS
             {
                 return;
             }
-            Scr.Cx = col;
-            Scr.Cy = row;
-            Scr.Cu = false;
+            Screen.Cx = col;
+            Screen.Cy = row;
+            Screen.Cu = false;
         }
 
         /// <summary>
@@ -13408,14 +13399,14 @@ namespace AngbandOS
                 return ch;
             }
             _keyBuffer = null;
-            bool v = CursorVisible;
+            bool v = Screen.CursorVisible;
             if (!DoNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
             {
-                CursorVisible = true;
+                Screen.CursorVisible = true;
             }
             if (InPopupMenu)
             {
-                CursorVisible = false;
+                Screen.CursorVisible = false;
             }
             while (ch == 0 && !Shutdown)
             {
@@ -13448,7 +13439,7 @@ namespace AngbandOS
                     ch = '\0';
                 }
             }
-            CursorVisible = v;
+            Screen.CursorVisible = v;
             HideCursorOnFullScreenInkey = false;
             DoNotWaitOnInkey = false;
             return ch;
@@ -13465,7 +13456,7 @@ namespace AngbandOS
             {
                 Mem = new Screen(w, h);
             }
-            Scr.Copy(Mem, w, h);
+            Screen.Copy(Mem, w, h);
             for (int y = 0; y < h; y++)
             {
                 X1[y] = 0;
@@ -13527,7 +13518,7 @@ namespace AngbandOS
         public void Print(Colour attr, char ch)
         {
             int w = Width;
-            if (Scr.Cu)
+            if (Screen.Cu)
             {
                 return;
             }
@@ -13535,13 +13526,13 @@ namespace AngbandOS
             {
                 return;
             }
-            QueueCharacter(Scr.Cx, Scr.Cy, attr, ch);
-            Scr.Cx++;
-            if (Scr.Cx < w)
+            QueueCharacter(Screen.Cx, Screen.Cy, attr, ch);
+            Screen.Cx++;
+            if (Screen.Cx < w)
             {
                 return;
             }
-            Scr.Cu = true;
+            Screen.Cu = true;
         }
 
         /// <summary>
@@ -13572,7 +13563,7 @@ namespace AngbandOS
             int w = Width;
             int res = 0;
             int len = str.Length;
-            if (Scr.Cu)
+            if (Screen.Cu)
             {
                 return;
             }
@@ -13580,16 +13571,16 @@ namespace AngbandOS
             for (length = 0; length < k && length < len; length++)
             {
             }
-            if (Scr.Cx + length >= w)
+            if (Screen.Cx + length >= w)
             {
-                res = w - Scr.Cx;
-                length = w - Scr.Cx;
+                res = w - Screen.Cx;
+                length = w - Screen.Cx;
             }
-            QueueCharacters(Scr.Cx, Scr.Cy, length, attr, str);
-            Scr.Cx += length;
+            QueueCharacters(Screen.Cx, Screen.Cy, length, attr, str);
+            Screen.Cx += length;
             if (res != 0)
             {
-                Scr.Cu = true;
+                Screen.Cu = true;
             }
         }
 
@@ -13756,7 +13747,7 @@ namespace AngbandOS
             int y2 = Y2;
 
             // Check to see if any updates are needed.
-            if (y1 > y2 && Scr.Cu == Old.Cu && Scr.CursorVisible == Old.CursorVisible && Scr.Cx == Old.Cx && Scr.Cy == Old.Cy && !TotalErase)
+            if (y1 > y2 && Screen.Cu == Old.Cu && Screen.CursorVisible == Old.CursorVisible && Screen.Cx == Old.Cx && Screen.Cy == Old.Cy && !TotalErase)
             {
                 // No updates are needed.
                 return;
@@ -13795,7 +13786,7 @@ namespace AngbandOS
                 }
                 TotalErase = false;
             }
-            if (Scr.Cu || !Scr.CursorVisible)
+            if (Screen.Cu || !Screen.CursorVisible)
             {
                 int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
@@ -13812,8 +13803,8 @@ namespace AngbandOS
                     /////// Start RefreshTextRow
                     int oldAa = Old.A[y];
                     int oldCc = Old.C[y];
-                    int scrAa = Scr.A[y];
-                    int scrCc = Scr.C[y];
+                    int scrAa = Screen.A[y];
+                    int scrCc = Screen.C[y];
                     int fn = 0;
                     int fx = 0;
                     Colour fa = AttrBlank;
@@ -13821,13 +13812,13 @@ namespace AngbandOS
                     {
                         Colour oa = Old.Va[oldAa + x];
                         char oc = Old.Vc[oldCc + x];
-                        Colour na = Scr.Va[scrAa + x];
-                        char nc = Scr.Vc[scrCc + x];
+                        Colour na = Screen.Va[scrAa + x];
+                        char nc = Screen.Vc[scrCc + x];
                         if (na == oa && nc == oc)
                         {
                             if (fn != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             continue;
@@ -13838,7 +13829,7 @@ namespace AngbandOS
                         {
                             if (fn != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), fa, Colour.Background));
                                 fn = 0;
                             }
                             fa = na;
@@ -13850,7 +13841,7 @@ namespace AngbandOS
                     }
                     if (fn != 0)
                     {
-                        batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), fa, Colour.Background));
+                        batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), fa, Colour.Background));
                     }
 
                     /////// end RefreshTextRow
@@ -13861,12 +13852,12 @@ namespace AngbandOS
             Y1 = h;
             Y2 = 0;
 
-            if (Scr.Cu)
+            if (Screen.Cu)
             {
                 int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
             }
-            else if (!Scr.CursorVisible)
+            else if (!Screen.CursorVisible)
             {
                 int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
@@ -13875,13 +13866,13 @@ namespace AngbandOS
             {
                 int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
-                scrCc = Scr.C[Scr.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Scr.Cy, Scr.Cx, Scr.Vc[scrCc + Scr.Cx].ToString(), Scr.Va[scrCc + Scr.Cx], Colour.Purple));
+                scrCc = Screen.C[Screen.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Screen.Cy, Screen.Cx, Screen.Vc[scrCc + Screen.Cx].ToString(), Screen.Va[scrCc + Screen.Cx], Colour.Purple));
             }
-            Old.Cu = Scr.Cu;
-            Old.CursorVisible = Scr.CursorVisible;
-            Old.Cx = Scr.Cx;
-            Old.Cy = Scr.Cy;
+            Old.Cu = Screen.Cu;
+            Old.CursorVisible = Screen.CursorVisible;
+            Old.Cx = Screen.Cx;
+            Old.Cy = Screen.Cy;
 
             if (batchPrintLines.Count > 0)
                 _console.BatchPrint(batchPrintLines.ToArray());
@@ -13898,20 +13889,20 @@ namespace AngbandOS
             // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
             for (int y = 0; y < Height; ++y)
             {
-                int scrAa = Scr.A[y];
-                int scrCc = Scr.C[y];
+                int scrAa = Screen.A[y];
+                int scrCc = Screen.C[y];
                 int fn = 0;
                 int fx = 0;
                 Colour currentColor = AttrBlank;
                 for (int x = 0; x < Width; x++)
                 {
-                    Colour na = Scr.Va[scrAa + x];
-                    char nc = Scr.Vc[scrCc + x];
+                    Colour na = Screen.Va[scrAa + x];
+                    char nc = Screen.Vc[scrCc + x];
                     if (currentColor != na)
                     {
                         if (fn != 0)
                         {
-                            batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                            batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                             fn = 0;
                         }
                         currentColor = na;
@@ -13923,14 +13914,14 @@ namespace AngbandOS
                 }
                 if (fn != 0)
                 {
-                    batchPrintLines.Add(new PrintLine(y, fx, new string(Scr.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                    batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
                 }
             }
 
-            if (Scr.CursorVisible)
+            if (Screen.CursorVisible)
             {
-                int scrCc = Scr.C[Scr.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Scr.Cy, Scr.Cx, Scr.Vc[scrCc + Scr.Cx].ToString(), Scr.Va[scrCc + Scr.Cx], Colour.Purple));
+                int scrCc = Screen.C[Screen.Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Screen.Cy, Screen.Cx, Screen.Vc[scrCc + Screen.Cx].ToString(), Screen.Va[scrCc + Screen.Cx], Colour.Purple));
             }
 
             if (batchPrintLines.Count > 0)
@@ -14045,7 +14036,7 @@ namespace AngbandOS
         {
             int w = Width;
             int h = Height;
-            (Mem ?? (Mem = new Screen(w, h))).Copy(Scr, w, h);
+            (Mem ?? (Mem = new Screen(w, h))).Copy(Screen, w, h);
         }
 
         public void ShowManual() // TODO: Needs to be deleted
@@ -14124,8 +14115,8 @@ namespace AngbandOS
         /// <param name="col"> The column of the cursor </param>
         private void Locate(out int row, out int col)
         {
-            col = Scr.Cx;
-            row = Scr.Cy;
+            col = Screen.Cx;
+            row = Screen.Cy;
         }
 
         private void MapMovementKeys()
@@ -14159,16 +14150,16 @@ namespace AngbandOS
         /// <param name="c"> The character to display </param>
         private void QueueCharacter(int x, int y, Colour a, char c)
         {
-            int scrAa = Scr.A[y];
-            int scrCc = Scr.C[y];
-            Colour oa = Scr.Va[scrAa + x];
-            int oc = Scr.Vc[scrCc + x];
+            int scrAa = Screen.A[y];
+            int scrCc = Screen.C[y];
+            Colour oa = Screen.Va[scrAa + x];
+            int oc = Screen.Vc[scrCc + x];
             if (oa == a && oc == c)
             {
                 return;
             }
-            Scr.Va[scrAa + x] = a;
-            Scr.Vc[scrCc + x] = c;
+            Screen.Va[scrAa + x] = a;
+            Screen.Vc[scrCc + x] = c;
             if (y < Y1)
             {
                 Y1 = y;
@@ -14199,21 +14190,21 @@ namespace AngbandOS
         {
             int x1 = -1;
             int x2 = -1;
-            int scrAa = Scr.A[y];
-            int scrCc = Scr.C[y];
+            int scrAa = Screen.A[y];
+            int scrCc = Screen.C[y];
             int index = 0;
             for (; n != 0 && index < s.Length; n--)
             {
-                Colour oa = Scr.Va[scrAa + x];
-                int oc = Scr.Vc[scrCc + x];
+                Colour oa = Screen.Va[scrAa + x];
+                int oc = Screen.Vc[scrCc + x];
                 if (oa == a && oc == s[index])
                 {
                     x++;
                     index++;
                     continue;
                 }
-                Scr.Va[scrAa + x] = a;
-                Scr.Vc[scrCc + x] = s[index];
+                Screen.Va[scrAa + x] = a;
+                Screen.Vc[scrCc + x] = s[index];
                 if (x1 < 0)
                 {
                     x1 = x;
@@ -19576,8 +19567,8 @@ namespace AngbandOS
             bool success = false;
             x = Player.MapX;
             y = Player.MapY;
-            bool cv = CursorVisible;
-            CursorVisible = true;
+            bool cv = Screen.CursorVisible;
+            Screen.CursorVisible = true;
             MsgPrint("Select a point and press space.");
             while (ch != 27 && ch != ' ' && !Shutdown)
             {
@@ -19621,7 +19612,7 @@ namespace AngbandOS
                         }
                 }
             }
-            CursorVisible = cv;
+            Screen.CursorVisible = cv;
             UpdateScreen();
             return success;
         }

@@ -6,8 +6,11 @@
         public RedrawMapFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            bool v = SaveGame.CursorVisible;
-            SaveGame.CursorVisible = false;
+            // Save the cursor visible state, we will temporarily reset it.
+            bool v = SaveGame.Screen.CursorVisible;
+
+            // Turn off the cursor visible.
+            SaveGame.Screen.CursorVisible = false; // TODO: Is this really needed, if we have a double-buffer?
             for (int y = SaveGame.Level.PanelRowMin; y <= SaveGame.Level.PanelRowMax; y++)
             {
                 for (int x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
@@ -25,7 +28,9 @@
                 }
             }
             SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
-            SaveGame.CursorVisible = v;
+
+            // Restore the cursor visible.
+            SaveGame.Screen.CursorVisible = v;
         }
     }
 }

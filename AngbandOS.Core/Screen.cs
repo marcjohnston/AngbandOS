@@ -16,9 +16,22 @@ namespace AngbandOS.Core
         public readonly Colour[] Va; // Array of color data for the entire screen
         public readonly char[] Vc; // Array of character data for the entire screen
         public bool Cu;
-        public bool CursorVisible;
+
+        /// <summary>
+        /// Whether or nt the cursor is visible.  Encapsulated using the CursorVisible property.
+        /// </summary>
+        private bool _cursorVisible;
         public int Cx;
         public int Cy;
+
+        /// <summary>
+        /// Sets or returns whether the cursor is visible
+        /// </summary>
+        public bool CursorVisible
+        {
+            get => _cursorVisible;
+            set => _cursorVisible = value;
+        }
 
         public Screen(int w, int h)
         {
