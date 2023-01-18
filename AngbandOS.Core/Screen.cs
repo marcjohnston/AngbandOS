@@ -89,5 +89,55 @@ namespace AngbandOS.Core
             Cu = f.Cu;
             CursorVisible = f.CursorVisible;
         }
+
+        /// <summary>
+        /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
+        /// </summary>
+        public void RefreshSpectatorConsole(IConsole spectatorConsole)
+        {
+            List<PrintLine> batchPrintLines = new List<PrintLine>();
+            spectatorConsole.Clear();
+
+            // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
+            for (int y = 0; y < Height; ++y)
+            {
+                int scrAa = A[y];
+                int scrCc = C[y];
+                int fn = 0;
+                int fx = 0;
+                Colour currentColor = AttrBlank;
+                for (int x = 0; x < Width; x++)
+                {
+                    Colour na = Va[scrAa + x];
+                    char nc = Vc[scrCc + x];
+                    if (currentColor != na)
+                    {
+                        if (fn != 0)
+                        {
+                            batchPrintLines.Add(new PrintLine(y, fx, new string(Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                            fn = 0;
+                        }
+                        currentColor = na;
+                    }
+                    if (fn++ == 0)
+                    {
+                        fx = x;
+                    }
+                }
+                if (fn != 0)
+                {
+                    batchPrintLines.Add(new PrintLine(y, fx, new string(Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                }
+            }
+
+            if (CursorVisible)
+            {
+                int scrCc = C[Cy]; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Cy, Cx, Vc[scrCc + Cx].ToString(), Va[scrCc + Cx], Colour.Purple));
+            }
+
+            if (batchPrintLines.Count > 0)
+                spectatorConsole.BatchPrint(batchPrintLines.ToArray());
+        }
     }
 }

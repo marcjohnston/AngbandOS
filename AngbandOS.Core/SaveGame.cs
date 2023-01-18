@@ -13864,56 +13864,6 @@ namespace AngbandOS
                 _console.BatchPrint(batchPrintLines.ToArray());
         }
 
-        /// <summary>
-        /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
-        /// </summary>
-        public void RefreshSpectatorConsole(IConsole spectatorConsole)
-        {
-            List<PrintLine> batchPrintLines = new List<PrintLine>();
-            spectatorConsole.Clear();
-
-            // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
-            for (int y = 0; y < Screen.Height; ++y)
-            {
-                int scrAa = Screen.A[y];
-                int scrCc = Screen.C[y];
-                int fn = 0;
-                int fx = 0;
-                Colour currentColor = Screen.AttrBlank;
-                for (int x = 0; x < Screen.Width; x++)
-                {
-                    Colour na = Screen.Va[scrAa + x];
-                    char nc = Screen.Vc[scrCc + x];
-                    if (currentColor != na)
-                    {
-                        if (fn != 0)
-                        {
-                            batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
-                            fn = 0;
-                        }
-                        currentColor = na;
-                    }
-                    if (fn++ == 0)
-                    {
-                        fx = x;
-                    }
-                }
-                if (fn != 0)
-                {
-                    batchPrintLines.Add(new PrintLine(y, fx, new string(Screen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
-                }
-            }
-
-            if (Screen.CursorVisible)
-            {
-                int scrCc = Screen.C[Screen.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Screen.Cy, Screen.Cx, Screen.Vc[scrCc + Screen.Cx].ToString(), Screen.Va[scrCc + Screen.Cx], Colour.Purple));
-            }
-
-            if (batchPrintLines.Count > 0)
-                _console.BatchPrint(batchPrintLines.ToArray());
-        }
-
         public void PlayMusic(MusicTrack musicTrack)
         {
             _console.PlayMusic(musicTrack);

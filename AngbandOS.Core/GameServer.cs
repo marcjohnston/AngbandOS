@@ -81,7 +81,7 @@
 
         public void RefreshSpectatorConsole(IConsole spectatorConsole)
         {
-            saveGame.RefreshSpectatorConsole(spectatorConsole);
+            saveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
         }
 
         public void InitiateShutDown()
