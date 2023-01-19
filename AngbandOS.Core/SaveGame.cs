@@ -717,12 +717,12 @@ namespace AngbandOS
                         split = check;
                     }
                 }
-                Print(Colour.White, t.Substring(0, split), 0, 0, split);
+                Print(Colour.White, t.Substring(0, split), 0, 0);
                 MsgFlush(split + 1);
                 t = t.Substring(split);
                 n -= split;
             }
-            Print(Colour.White, t, 0, _msgPrintP, n);
+            Print(Colour.White, t.Substring(0, n), 0, _msgPrintP);
             MsgFlag = true;
             _msgPrintP += n + 1;
         }
@@ -13438,22 +13438,16 @@ namespace AngbandOS
         /// <param name="ch"> The character to print </param>
         public void Print(Colour attr, char ch)
         {
-            int w = Screen.Width;
-            if (Screen.Cu)
+            // Ensure the cursor is within the screen width.
+            if (Screen.Cx < Screen.Width)
             {
-                return;
+                if (ch == 0)
+                {
+                    return;
+                }
+                QueueCharacter(Screen.Cx, Screen.Cy, attr, ch);
+                Screen.Cx++;
             }
-            if (ch == 0)
-            {
-                return;
-            }
-            QueueCharacter(Screen.Cx, Screen.Cy, attr, ch);
-            Screen.Cx++;
-            if (Screen.Cx < w)
-            {
-                return;
-            }
-            Screen.Cu = true;
         }
 
         /// <summary>
@@ -13475,33 +13469,26 @@ namespace AngbandOS
         /// <param name="attr"> The colour in which to print the string </param>
         /// <param name="str"> The string to print </param>
         /// <param name="length"> The number of characters to print (-1 for all) </param>
-        public void Print(Colour attr, string str, int length)
+        public void Print(Colour attr, string str)
         {
             if (string.IsNullOrEmpty(str))
             {
                 return;
             }
-            int w = Screen.Width;
-            int res = 0;
-            int len = str.Length;
-            if (Screen.Cu)
+
+            // Compute the length that can be printed.
+            int length = str.Length;
+
+            /// Check to see if we need to truncate the text.
+            if (Screen.Cx + length >= Screen.Width)
             {
-                return;
+                // Truncate the text.
+                length = Screen.Width - Screen.Cx;
             }
-            int k = length < 0 ? w + 1 : length;
-            for (length = 0; length < k && length < len; length++)
+            if (length > 0)
             {
-            }
-            if (Screen.Cx + length >= w)
-            {
-                res = w - Screen.Cx;
-                length = w - Screen.Cx;
-            }
-            QueueCharacters(Screen.Cx, Screen.Cy, length, attr, str);
-            Screen.Cx += length;
-            if (res != 0)
-            {
-                Screen.Cu = true;
+                QueueCharacters(Screen.Cx, Screen.Cy, length, attr, str);
+                Screen.Cx += length;
             }
         }
 
@@ -13512,11 +13499,10 @@ namespace AngbandOS
         /// <param name="str"> The string to print </param>
         /// <param name="row"> The y position at which to print the string </param>
         /// <param name="col"> The x position at which to print the string </param>
-        /// <param name="length"> The number of characters to print (-1 for all) </param>
-        public void Print(Colour attr, string str, int row, int col, int length)
+        public void Print(Colour attr, string str, int row, int col)
         {
             Screen.Goto(row, col);
-            Print(attr, str, length);
+            Print(attr, str);
         }
 
         /// <summary>
@@ -13528,7 +13514,7 @@ namespace AngbandOS
         public void Print(string str, int row, int col)
         {
             Screen.Goto(row, col);
-            Print(Colour.White, str, -1);
+            Print(Colour.White, str);
         }
 
         /// <summary>
@@ -13553,19 +13539,6 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Prints a string
-        /// </summary>
-        /// <param name="attr"> The colour in which to print </param>
-        /// <param name="str"> The string to print </param>
-        /// <param name="row"> The row at which to print </param>
-        /// <param name="col"> The column at which to print </param>
-        public void Print(Colour attr, string str, int row, int col)
-        {
-            Screen.Goto(row, col);
-            Print(attr, str, -1);
-        }
-
-        /// <summary>
         /// Print a string, wiping the rest of the line
         /// </summary>
         /// <param name="attr"> The colour in which to print </param>
@@ -13575,7 +13548,7 @@ namespace AngbandOS
         public void PrintLine(Colour attr, string str, int row, int col)
         {
             Erase(row, col, 255);
-            Print(attr, str, -1);
+            Print(attr, str);
         }
 
         /// <summary>
@@ -19449,7 +19422,7 @@ namespace AngbandOS
                             {
                                 SaveScreen();
                                 rPtr.Knowledge.Display();
-                                Print(Colour.White, $"  [r,{info}]", -1);
+                                Print(Colour.White, $"  [r,{info}]");
                                 query = Inkey();
                                 Load();
                             }

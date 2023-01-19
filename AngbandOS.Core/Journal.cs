@@ -171,12 +171,12 @@ namespace AngbandOS
             Colour a1 = rPtr.Colour;
             if (!rPtr.Unique)
             {
-                SaveGame.Print(Colour.Brown, "The ", -1);
+                SaveGame.Print(Colour.Brown, "The ");
             }
-            SaveGame.Print(Colour.Brown, rPtr.Name, -1);
-            SaveGame.Print(Colour.Brown, " ('", -1);
+            SaveGame.Print(Colour.Brown, rPtr.Name);
+            SaveGame.Print(Colour.Brown, " ('");
             SaveGame.Print(a1, c1);
-            SaveGame.Print(Colour.Brown, "')", -1);
+            SaveGame.Print(Colour.Brown, "')");
         }
 
         private void JournalAbilities()
