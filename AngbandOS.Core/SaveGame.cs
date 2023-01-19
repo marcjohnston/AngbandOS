@@ -174,11 +174,6 @@ namespace AngbandOS
         /// </summary>
         public Screen Screen;
 
-        /// <summary>
-        /// A window that represents modified contents.
-        /// </summary>
-        public UpdateWindow UpdateWindow;
-
         public int KeyHead = 0;
         public int KeyTail = 0;
         public Screen Mem;
@@ -1497,7 +1492,6 @@ namespace AngbandOS
             KeyQueue = new char[k];
             Old = new Screen(w, h);
             Screen = new Screen(w, h);
-            UpdateWindow = new UpdateWindow(Screen.Height, Screen.Width);
         }
 
         public void UpdateStuff()
@@ -13136,7 +13130,7 @@ namespace AngbandOS
         public void Clear()
         {
             Screen.Clear();
-            UpdateWindow.Reset();
+            Screen.UpdateWindow.Reset();
             Screen.TotalErase = true;
         }
 
@@ -13178,7 +13172,7 @@ namespace AngbandOS
             }
             if (x1 >= 0)
             {
-                UpdateWindow.EncompassRow(row, x1, x2);
+                Screen.UpdateWindow.EncompassRow(row, x1, x2);
             }
         }
 
@@ -13384,7 +13378,7 @@ namespace AngbandOS
                 Mem = new Screen(w, h);
             }
             Screen.Copy(Mem, w, h);
-            UpdateWindow.Reset();
+            Screen.UpdateWindow.Reset();
         }
 
         /// <summary>
@@ -13629,7 +13623,7 @@ namespace AngbandOS
         /// </summary>
         public void UpdateScreen()
         {
-            UpdateWindow.UpdateScreen(Screen, Old, _console);
+            Screen.UpdateWindow.UpdateScreen(Screen, Old, _console);
         }
 
         public void PlayMusic(MusicTrack musicTrack)
@@ -13842,7 +13836,7 @@ namespace AngbandOS
             }
             Screen.Va[scrAa + x] = a;
             Screen.Vc[scrCc + x] = c;
-            UpdateWindow.EncompassRow(y, x, x);
+            Screen.UpdateWindow.EncompassRow(y, x, x);
         }
 
         /// <summary>
@@ -13882,7 +13876,7 @@ namespace AngbandOS
             }
             if (x1 >= 0)
             {
-                UpdateWindow.EncompassRow(y, x1, x2);
+                Screen.UpdateWindow.EncompassRow(y, x1, x2);
             }
         }
 

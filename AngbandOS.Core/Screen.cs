@@ -11,6 +11,11 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Screen
     {
+        /// <summary>
+        /// A window that represents modified contents.
+        /// </summary>
+        public UpdateWindow UpdateWindow;
+
         public Colour AttrBlank;
         public char CharBlank;
 
@@ -94,6 +99,8 @@ namespace AngbandOS.Core
         {
             Width = w;
             Height = h;
+
+            UpdateWindow = new UpdateWindow(Height, Width);
 
             AttrBlank = 0;
             CharBlank = ' ';
