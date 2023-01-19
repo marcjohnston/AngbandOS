@@ -17,15 +17,15 @@
             }
             else if (!SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
             {
-                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo);
             }
             else if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
             {
-                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo);
             }
             else if (SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
             {
-                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo, 12);
+                SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo);
             }
             else
             {
@@ -66,10 +66,10 @@
                 }
                 int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
                 SaveGame.Print(Colour.White, "[----------]", RowInfo, ColInfo);
-                SaveGame.Print(attr, smb, RowInfo, ColInfo + 1, len);
-                SaveGame.Print(Colour.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo, 12);
-                SaveGame.Print(Colour.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo, 12);
-                SaveGame.Print(Colour.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo, 12);
+                SaveGame.Print(attr, smb.Substring(0, len), RowInfo, ColInfo + 1);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
+                SaveGame.Print(Colour.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
             }
         }
     }

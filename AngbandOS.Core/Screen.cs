@@ -28,7 +28,6 @@ namespace AngbandOS.Core
         public readonly int[] C; // Was a pointer to part of va, now an index into it
         public readonly Colour[] Va; // Array of color data for the entire screen
         public readonly char[] Vc; // Array of character data for the entire screen
-        public bool Cu;
 
         public bool TotalErase; // TODO: Needs to be deleted
 
@@ -73,12 +72,10 @@ namespace AngbandOS.Core
             }
             Cx = col;
             Cy = row;
-            Cu = false;
         }
 
         public void Clear()
         {
-            Cu = false;
             Cx = 0;
             Cy = 0;
             for (int y = 0; y < Height; y++)
@@ -131,7 +128,6 @@ namespace AngbandOS.Core
             }
             Cx = f.Cx;
             Cy = f.Cy;
-            Cu = f.Cu;
             CursorVisible = f.CursorVisible;
         }
 
@@ -184,5 +180,5 @@ namespace AngbandOS.Core
             if (batchPrintLines.Count > 0)
                 spectatorConsole.BatchPrint(batchPrintLines.ToArray());
         }
-    }
+   }
 }

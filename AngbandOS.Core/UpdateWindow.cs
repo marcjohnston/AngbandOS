@@ -6,10 +6,10 @@
     [Serializable]
     internal class UpdateWindow
     {
-        public int Y1;
-        public int Y2;
-        public int[] X1;
-        public int[] X2;
+        private int Y1;
+        private int Y2;
+        private int[] X1;
+        private int[] X2;
         private readonly int Width;
         private readonly int Height;
 
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// Resets the window to full screen.
+        /// Resets the window to full screen.  This means that the entire window will be updated.
         /// </summary>
         /// <param name="h"></param>
         /// <param name="w"></param>
@@ -59,7 +59,7 @@
         }
 
         /// <summary>
-        /// Update the screen using a double buffer, drawing all queued print and erase requests.
+        /// Update the screen using a double buffer.  Only the window portion of the screen is checked.  The update window will be reverse reset so that no update would happen.
         /// </summary>
         public void UpdateScreen(Screen Screen, Screen Old, IConsole console)
         {
@@ -67,7 +67,7 @@
             int y;
 
             // Check to see if any updates are needed.
-            if (Y1 > Y2 && Screen.Cu == Old.Cu && Screen.CursorVisible == Old.CursorVisible && Screen.Cx == Old.Cx && Screen.Cy == Old.Cy && !Screen.TotalErase)
+            if (Y1 > Y2 && Screen.CursorVisible == Old.CursorVisible && Screen.Cx == Old.Cx && Screen.Cy == Old.Cy && !Screen.TotalErase)
             {
                 // No updates are needed.
                 return;
@@ -78,7 +78,6 @@
                 // Clear the "old" screen 
                 console.Clear();
                 Old.CursorVisible = false;
-                Old.Cu = false;
                 Old.Cx = 0;
                 Old.Cy = 0;
 
@@ -106,12 +105,10 @@
                 }
                 Screen.TotalErase = false;
             }
-            if (Screen.Cu || !Screen.CursorVisible)
-            {
-                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
-            }
-
+ 
+            int indexForOldCursor = Old.C[Old.Cy] + Old.Cx; // This is the index to the row of characters in the screen array.
+            batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[indexForOldCursor].ToString(), Old.Va[indexForOldCursor], Colour.Background));
+ 
             // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
             for (y = Y1; y <= Y2; ++y)
             {
@@ -169,24 +166,11 @@
             Y1 = Screen.Height;
             Y2 = 0;
 
-            if (Screen.Cu)
+             if (Screen.CursorVisible)
             {
-                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
+                int indexForNewCursor = Screen.C[Screen.Cy] + Screen.Cx; // This is the index to the row of characters in the screen array.
+                batchPrintLines.Add(new PrintLine(Screen.Cy, Screen.Cx, Screen.Vc[indexForNewCursor].ToString(), Screen.Va[indexForNewCursor], Colour.Purple));
             }
-            else if (!Screen.CursorVisible)
-            {
-                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
-            }
-            else
-            {
-                int scrCc = Old.C[Old.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Old.Cy, Old.Cx, Old.Vc[scrCc + Old.Cx].ToString(), Old.Va[scrCc + Old.Cx], Colour.Background));
-                scrCc = Screen.C[Screen.Cy]; // This is the index to the row of characters in the screen array.
-                batchPrintLines.Add(new PrintLine(Screen.Cy, Screen.Cx, Screen.Vc[scrCc + Screen.Cx].ToString(), Screen.Va[scrCc + Screen.Cx], Colour.Purple));
-            }
-            Old.Cu = Screen.Cu;
             Old.CursorVisible = Screen.CursorVisible;
             Old.Cx = Screen.Cx;
             Old.Cy = Screen.Cy;

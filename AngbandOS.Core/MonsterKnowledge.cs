@@ -1364,12 +1364,12 @@ namespace AngbandOS
             SaveGame.Screen.Goto(0, 0);
             if (!_monsterType.Unique)
             {
-                SaveGame.Print(Colour.White, "The ", -1);
+                SaveGame.Print(Colour.White, "The ");
             }
-            SaveGame.Print(Colour.White, _monsterType.Name, -1);
-            SaveGame.Print(Colour.White, " ('", -1);
+            SaveGame.Print(Colour.White, _monsterType.Name);
+            SaveGame.Print(Colour.White, " ('");
             SaveGame.Print(a1, c1);
-            SaveGame.Print(Colour.White, "')", -1);
+            SaveGame.Print(Colour.White, "')");
         }
 
         private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)
