@@ -11,19 +11,19 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.AbilityScores[stat].Innate < SaveGame.Player.AbilityScores[stat].InnateMax)
             {
-                SaveGame.Print(GlobalData.StatNamesReduced[stat], RowStat + stat, 0);
+                SaveGame.Screen.Print(GlobalData.StatNamesReduced[stat], RowStat + stat, 0);
                 string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-                SaveGame.Print(Colour.Yellow, tmp, RowStat + stat, ColStat);
+                SaveGame.Screen.Print(Colour.Yellow, tmp, RowStat + stat, ColStat);
             }
             else
             {
-                SaveGame.Print(GlobalData.StatNames[stat], RowStat + stat, 0);
+                SaveGame.Screen.Print(GlobalData.StatNames[stat], RowStat + stat, 0);
                 string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-                SaveGame.Print(Colour.BrightGreen, tmp, RowStat + stat, ColStat);
+                SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowStat + stat, ColStat);
             }
             if (SaveGame.Player.AbilityScores[stat].InnateMax == 18 + 100)
             {
-                SaveGame.Print("!", RowStat + stat, 3);
+                SaveGame.Screen.Print("!", RowStat + stat, 3);
             }
         }
 

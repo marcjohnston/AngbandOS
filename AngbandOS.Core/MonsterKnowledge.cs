@@ -46,7 +46,7 @@ namespace AngbandOS
         public void Display()
         {
             SaveGame.MsgPrint(null);
-            SaveGame.Erase(1, 0, 255);
+            SaveGame.Screen.Erase(1, 0);
             DisplayBody(Colour.White);
             DisplayHeader();
         }
@@ -1353,23 +1353,23 @@ namespace AngbandOS
             {
                 _description.Append("You feel an intense desire to kill this monster... ");
             }
-            SaveGame.PrintWrap(bodyColour, _description.ToString());
+            SaveGame.Screen.PrintWrap(bodyColour, _description.ToString());
         }
 
         private void DisplayHeader()
         {
             char c1 = _monsterType.Character;
             Colour a1 = _monsterType.Colour;
-            SaveGame.Erase(0, 0, 255);
+            SaveGame.Screen.Erase(0, 0);
             SaveGame.Screen.Goto(0, 0);
             if (!_monsterType.Unique)
             {
-                SaveGame.Print(Colour.White, "The ");
+                SaveGame.Screen.Print(Colour.White, "The ");
             }
-            SaveGame.Print(Colour.White, _monsterType.Name);
-            SaveGame.Print(Colour.White, " ('");
-            SaveGame.Print(a1, c1);
-            SaveGame.Print(Colour.White, "')");
+            SaveGame.Screen.Print(Colour.White, _monsterType.Name);
+            SaveGame.Screen.Print(Colour.White, " ('");
+            SaveGame.Screen.Print(a1, c1.ToString());
+            SaveGame.Screen.Print(Colour.White, "')");
         }
 
         private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)

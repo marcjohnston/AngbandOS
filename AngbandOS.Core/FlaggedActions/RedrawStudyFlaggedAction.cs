@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawStudyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            SaveGame.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", RowStudy, ColStudy);
+            SaveGame.Screen.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", RowStudy, ColStudy);
         }
     }
 }

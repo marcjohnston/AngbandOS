@@ -11,10 +11,10 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawTimeFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            SaveGame.Print(Colour.White, "Time", RowTime, ColTime);
-            SaveGame.Print(Colour.White, "Day", RowDate, ColDate);
-            SaveGame.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
-            SaveGame.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
+            SaveGame.Screen.Print(Colour.White, "Time", RowTime, ColTime);
+            SaveGame.Screen.Print(Colour.White, "Day", RowDate, ColDate);
+            SaveGame.Screen.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
+            SaveGame.Screen.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
         }
     }
 }

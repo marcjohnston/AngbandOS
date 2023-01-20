@@ -39,7 +39,7 @@ namespace AngbandOS
                     colour = item.BaseItemCategory.FlavorColour;
                     character = item.BaseItemCategory.FlavorCharacter;
                 }
-                saveGame.Print(colour, character, screenRow, screenCol + i - InventorySlot.MeleeWeapon);
+                saveGame.Screen.Print(colour, character, screenRow, screenCol + i - InventorySlot.MeleeWeapon);
             }
         }
 
@@ -48,7 +48,7 @@ namespace AngbandOS
         /// </summary>
         public void DisplayPlayer()
         {
-            SaveGame.Clear(0);
+            SaveGame.Screen.Clear(0);
             DisplayPlayerTop();
             DisplayPlayerHistory();
             DisplayPlayerAbilityScoresWithEffects();
@@ -177,20 +177,20 @@ namespace AngbandOS
                 // If they've been drained, make them visually distinct
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 14 + i, 1);
+                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 14 + i, 1);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
-                    SaveGame.Print(Colour.Grey, buf, 14 + i, 6);
+                    SaveGame.Screen.Print(Colour.Grey, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
-                    SaveGame.Print(Colour.Grey, buf, i + 14, 13);
+                    SaveGame.Screen.Print(Colour.Grey, buf, i + 14, 13);
                 }
                 else
                 {
-                    SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], 14 + i, 1);
+                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], 14 + i, 1);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Print(Colour.Green, buf, 14 + i, 6);
+                    SaveGame.Screen.Print(Colour.Green, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
-                    SaveGame.Print(Colour.Green, buf, i + 14, 13);
+                    SaveGame.Screen.Print(Colour.Green, buf, i + 14, 13);
                 }
             }
         }
@@ -200,7 +200,7 @@ namespace AngbandOS
             if (hasSustain)
             {
                 // Sustains show a green 's'
-                SaveGame.Print(Colour.Green, "s", row, col);
+                SaveGame.Screen.Print(Colour.Green, "s", row, col);
             }
             else if (hasStat)
             {
@@ -208,28 +208,28 @@ namespace AngbandOS
                 if (typeSpecificValue <= -10)
                 {
                     // Max display for negative value
-                    SaveGame.Print(Colour.Red, "*", row, col);
+                    SaveGame.Screen.Print(Colour.Red, "*", row, col);
                 }
                 else if (typeSpecificValue < 0)
                 {
                     // Display negative value
-                    SaveGame.Print(Colour.Red, (char)('0' - (char)typeSpecificValue), row, col);
+                    SaveGame.Screen.Print(Colour.Red, (char)('0' - (char)typeSpecificValue), row, col);
                 }
                 else if (typeSpecificValue >= 10)
                 {
                     // Display max 
-                    SaveGame.Print(Colour.Green, "*", row, col);
+                    SaveGame.Screen.Print(Colour.Green, "*", row, col);
                 }
                 else if (typeSpecificValue > 0)
                 {
                     // Display positive value
-                    SaveGame.Print(Colour.Green, (char)('0' + (char)typeSpecificValue), row, col);
+                    SaveGame.Screen.Print(Colour.Green, (char)('0' + (char)typeSpecificValue), row, col);
                 }
             }
             else
             {
                 // Display neutral
-                SaveGame.Print(Colour.Grey, ".", row, col);
+                SaveGame.Screen.Print(Colour.Grey, ".", row, col);
             }
         }
 
@@ -243,10 +243,10 @@ namespace AngbandOS
             char c;
             const int statCol = 1;
             const int row = 22;
-            SaveGame.Print(Colour.Purple, "Initial", row - 1, statCol + 5);
-            SaveGame.Print(Colour.Brown, "Race Class Mods", row - 1, statCol + 13);
-            SaveGame.Print(Colour.Green, "Actual", row - 1, statCol + 29);
-            SaveGame.Print(Colour.Red, "Reduced", row - 1, statCol + 36);
+            SaveGame.Screen.Print(Colour.Purple, "Initial", row - 1, statCol + 5);
+            SaveGame.Screen.Print(Colour.Brown, "Race Class Mods", row - 1, statCol + 13);
+            SaveGame.Screen.Print(Colour.Green, "Actual", row - 1, statCol + 29);
+            SaveGame.Screen.Print(Colour.Red, "Reduced", row - 1, statCol + 36);
             // Loop through the scores
             for (i = 0; i < 6; i++)
             {
@@ -272,28 +272,28 @@ namespace AngbandOS
                 equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
                 equipmentBonuses -= SaveGame.Player.Profession.AbilityBonus[i];
                 // Print each of the scores and bonuses
-                SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], row + i, statCol);
+                SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], row + i, statCol);
                 string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
-                SaveGame.Print(Colour.Purple, buf, row + i, statCol + 4);
+                SaveGame.Screen.Print(Colour.Purple, buf, row + i, statCol + 4);
                 buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Print(Colour.Brown, buf, row + i, statCol + 13);
+                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 13);
                 buf = SaveGame.Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Print(Colour.Brown, buf, row + i, statCol + 19);
+                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 19);
                 buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Print(Colour.Brown, buf, row + i, statCol + 24);
+                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 24);
                 buf = SaveGame.Player.AbilityScores[i].AdjustedMax.StatToString();
-                SaveGame.Print(Colour.Green, buf, row + i, statCol + 27);
+                SaveGame.Screen.Print(Colour.Green, buf, row + i, statCol + 27);
                 if (SaveGame.Player.AbilityScores[i].Adjusted < SaveGame.Player.AbilityScores[i].AdjustedMax)
                 {
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Print(Colour.Red, buf, row + i, statCol + 35);
+                    SaveGame.Screen.Print(Colour.Red, buf, row + i, statCol + 35);
                 }
             }
 
             // Print the bonuses for each score and each item we have
             int col = statCol + 44;
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
-            SaveGame.Print(Colour.Blue, "Modifications", row + 6, col);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
+            SaveGame.Screen.Print(Colour.Blue, "Modifications", row + 6, col);
             for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item item = SaveGame.Player.Inventory[i];
@@ -346,7 +346,7 @@ namespace AngbandOS
                 a = Colour.Green;
                 c = 's';
             }
-            SaveGame.Print(a, c, row, col);
+            SaveGame.Screen.Print(a, c, row, col);
         }
 
         /// <summary>
@@ -378,8 +378,8 @@ namespace AngbandOS
             // If we're max level we don't have any experience to advance
             if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
-                SaveGame.Print(Colour.Blue, "Exp to Adv.", 33, 28);
-                SaveGame.Print(Colour.Green, "    *****", 33, 28 + 11);
+                SaveGame.Screen.Print(Colour.Blue, "Exp to Adv.", 33, 28);
+                SaveGame.Screen.Print(Colour.Green, "    *****", 33, 28 + 11);
             }
             else
             {
@@ -423,7 +423,7 @@ namespace AngbandOS
         {
             for (int i = 0; i < 4; i++)
             {
-                SaveGame.Print(Colour.Brown, SaveGame.Player.History[i], i + 9, 10);
+                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.History[i], i + 9, 10);
             }
         }
 
@@ -454,25 +454,25 @@ namespace AngbandOS
             int stealth = SaveGame.Player.SkillStealth;
             int searching = SaveGame.Player.SkillSearching;
             int searchFrequency = SaveGame.Player.SkillSearchFrequency;
-            SaveGame.Print(Colour.Blue, "Fighting    :", 36, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Fighting    :", 36, 1);
             PrintCategorisedNumber(fighting, 12, 36, 15);
-            SaveGame.Print(Colour.Blue, "Shooting    :", 37, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Shooting    :", 37, 1);
             PrintCategorisedNumber(shooting, 12, 37, 15);
-            SaveGame.Print(Colour.Blue, "Saving Throw:", 38, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Saving Throw:", 38, 1);
             PrintCategorisedNumber(savingThrow, 6, 38, 15);
-            SaveGame.Print(Colour.Blue, "Stealth     :", 39, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Stealth     :", 39, 1);
             PrintCategorisedNumber(stealth, 1, 39, 15);
-            SaveGame.Print(Colour.Blue, "Perception  :", 36, 28);
+            SaveGame.Screen.Print(Colour.Blue, "Perception  :", 36, 28);
             PrintCategorisedNumber(searchFrequency, 6, 36, 42);
-            SaveGame.Print(Colour.Blue, "Searching   :", 37, 28);
+            SaveGame.Screen.Print(Colour.Blue, "Searching   :", 37, 28);
             PrintCategorisedNumber(searching, 6, 37, 42);
-            SaveGame.Print(Colour.Blue, "Disarming   :", 38, 28);
+            SaveGame.Screen.Print(Colour.Blue, "Disarming   :", 38, 28);
             PrintCategorisedNumber(disarmTraps, 8, 38, 42);
-            SaveGame.Print(Colour.Blue, "Magic Device:", 39, 28);
+            SaveGame.Screen.Print(Colour.Blue, "Magic Device:", 39, 28);
             PrintCategorisedNumber(useDevice, 6, 39, 42);
-            SaveGame.Print(Colour.Blue, "Blows/Action:", 36, 55);
-            SaveGame.Print(Colour.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
-            SaveGame.Print(Colour.Blue, "Tot.Dmg./Act:", 37, 55);
+            SaveGame.Screen.Print(Colour.Blue, "Blows/Action:", 36, 55);
+            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
+            SaveGame.Screen.Print(Colour.Blue, "Tot.Dmg./Act:", 37, 55);
             // Work out damage per action
             var buf = string.Empty;
             if (damdice == 0 || damsides == 0)
@@ -485,11 +485,11 @@ namespace AngbandOS
                     ? $"{attacksPerRound * damdice}d{damsides}"
                     : $"{attacksPerRound * damdice}d{damsides}{attacksPerRound * dambonus:+0;-0;+0}";
             }
-            SaveGame.Print(Colour.Green, buf, 37, 69);
-            SaveGame.Print(Colour.Blue, "Shots/Action:", 38, 55);
-            SaveGame.Print(Colour.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
-            SaveGame.Print(Colour.Blue, "Infra-Vision:", 39, 55);
-            SaveGame.Print(Colour.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
+            SaveGame.Screen.Print(Colour.Green, buf, 37, 69);
+            SaveGame.Screen.Print(Colour.Blue, "Shots/Action:", 38, 55);
+            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
+            SaveGame.Screen.Print(Colour.Blue, "Infra-Vision:", 39, 55);
+            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
         }
 
         /// <summary>
@@ -498,18 +498,18 @@ namespace AngbandOS
         private void DisplayPlayerTop()
         {
             string realmBuff = "";
-            SaveGame.Print(Colour.Blue, "Name        :", 2, 1);
-            SaveGame.Print(Colour.Blue, "Gender      :", 3, 1);
-            SaveGame.Print(Colour.Blue, "Race        :", 4, 1);
-            SaveGame.Print(Colour.Blue, "Class       :", 5, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Name        :", 2, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Gender      :", 3, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Race        :", 4, 1);
+            SaveGame.Screen.Print(Colour.Blue, "Class       :", 5, 1);
             if (SaveGame.Player.Realm1 != 0 || SaveGame.Player.Realm2 != 0)
             {
-                SaveGame.Print(Colour.Blue, "Magic       :", 6, 1);
+                SaveGame.Screen.Print(Colour.Blue, "Magic       :", 6, 1);
             }
-            SaveGame.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
-            SaveGame.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
-            SaveGame.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
-            SaveGame.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), 5, 15);
+            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
+            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
+            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
+            SaveGame.Screen.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), 5, 15);
             // Only print realms if we have them
             if (SaveGame.Player.Realm1 != 0)
             {
@@ -524,23 +524,23 @@ namespace AngbandOS
             }
             if (SaveGame.Player.Realm1 != 0)
             {
-                SaveGame.Print(Colour.Brown, realmBuff, 6, 15);
+                SaveGame.Screen.Print(Colour.Brown, realmBuff, 6, 15);
             }
             // Fanatics and Cultists get a patron
             if (SaveGame.Player.ProfessionIndex == CharacterClass.Fanatic || SaveGame.Player.ProfessionIndex == CharacterClass.Cultist)
             {
-                SaveGame.Print(Colour.Blue, "Patron      :", 7, 1);
-                SaveGame.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
+                SaveGame.Screen.Print(Colour.Blue, "Patron      :", 7, 1);
+                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
             }
             // Priests get a deity
             if (SaveGame.Player.Religion.Deity != Pantheon.GodName.None)
             {
-                SaveGame.Print(Colour.Blue, "Deity       :", 7, 1);
-                SaveGame.Print(Colour.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
+                SaveGame.Screen.Print(Colour.Blue, "Deity       :", 7, 1);
+                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
             }
-            SaveGame.Print(Colour.Blue, "Birthday", 2, 32);
+            SaveGame.Screen.Print(Colour.Blue, "Birthday", 2, 32);
             string dateBuff = SaveGame.Player.GameTime.BirthdayText.PadLeft(8);
-            SaveGame.Print(Colour.Brown, dateBuff, 2, 46);
+            SaveGame.Screen.Print(Colour.Brown, dateBuff, 2, 46);
             PrintShortScore("Age          ", SaveGame.Player.Age, 3, 32, Colour.Brown);
             PrintShortScore("Height       ", SaveGame.Player.Height, 4, 32, Colour.Brown);
             PrintShortScore("Weight       ", SaveGame.Player.Weight, 5, 32, Colour.Brown);
@@ -552,19 +552,19 @@ namespace AngbandOS
                 string buf;
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 2 + i, 61);
+                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 2 + i, 61);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
-                    SaveGame.Print(Colour.Red, buf, 2 + i, 66);
+                    SaveGame.Screen.Print(Colour.Red, buf, 2 + i, 66);
                     value = SaveGame.Player.AbilityScores[i].AdjustedMax;
                     buf = value.StatToString();
-                    SaveGame.Print(Colour.Green, buf, 2 + i, 73);
+                    SaveGame.Screen.Print(Colour.Green, buf, 2 + i, 73);
                 }
                 else
                 {
-                    SaveGame.Print(Colour.Blue, GlobalData.StatNames[i], 2 + i, 61);
+                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], 2 + i, 61);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Print(Colour.Green, buf, 2 + i, 66);
+                    SaveGame.Screen.Print(Colour.Green, buf, 2 + i, 66);
                 }
             }
         }
@@ -580,10 +580,10 @@ namespace AngbandOS
         private void PrintBonus(string header, int num, int row, int col, Colour colour)
         {
             int len = header.Length;
-            SaveGame.Print(Colour.Blue, header, row, col);
-            SaveGame.Print(Colour.Blue, "   ", row, col + len);
+            SaveGame.Screen.Print(Colour.Blue, header, row, col);
+            SaveGame.Screen.Print(Colour.Blue, "   ", row, col + len);
             string outVal = num.ToString("+0;-0;0").PadLeft(6);
-            SaveGame.Print(colour, outVal, row, col + len + 3);
+            SaveGame.Screen.Print(colour, outVal, row, col + len + 3);
         }
 
         /// <summary>
@@ -677,7 +677,7 @@ namespace AngbandOS
                         }
                 }
             }
-            SaveGame.Print(colour, text, screenRow, screenCol);
+            SaveGame.Screen.Print(colour, text, screenRow, screenCol);
         }
 
         /// <summary>
@@ -691,9 +691,9 @@ namespace AngbandOS
         private void PrintLongScore(string title, int number, int row, int col, Colour colour)
         {
             int len = title.Length;
-            SaveGame.Print(Colour.Blue, title, row, col);
+            SaveGame.Screen.Print(Colour.Blue, title, row, col);
             string outVal = number.ToString().PadLeft(9);
-            SaveGame.Print(colour, outVal, row, col + len);
+            SaveGame.Screen.Print(colour, outVal, row, col + len);
         }
 
         /// <summary>
@@ -707,10 +707,10 @@ namespace AngbandOS
         private void PrintShortScore(string header, int num, int row, int col, Colour colour)
         {
             int len = header.Length;
-            SaveGame.Print(Colour.Blue, header, row, col);
-            SaveGame.Print(Colour.Blue, "   ", row, col + len);
+            SaveGame.Screen.Print(Colour.Blue, header, row, col);
+            SaveGame.Screen.Print(Colour.Blue, "   ", row, col + len);
             string outVal = num.ToString().PadLeft(6);
-            SaveGame.Print(colour, outVal, row, col + len + 3);
+            SaveGame.Screen.Print(colour, outVal, row, col + len + 3);
         }
     }
 }

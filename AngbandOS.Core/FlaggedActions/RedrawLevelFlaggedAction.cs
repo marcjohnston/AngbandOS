@@ -11,13 +11,13 @@
             string tmp = SaveGame.Player.Level.ToString().PadLeft(6);
             if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)
             {
-                SaveGame.Print("LEVEL ", RowLevel, 0);
-                SaveGame.Print(Colour.BrightGreen, tmp, RowLevel, ColLevel + 6);
+                SaveGame.Screen.Print("LEVEL ", RowLevel, 0);
+                SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowLevel, ColLevel + 6);
             }
             else
             {
-                SaveGame.Print("Level ", RowLevel, 0);
-                SaveGame.Print(Colour.Yellow, tmp, RowLevel, ColLevel + 6);
+                SaveGame.Screen.Print("Level ", RowLevel, 0);
+                SaveGame.Screen.Print(Colour.Yellow, tmp, RowLevel, ColLevel + 6);
             }
         }
     }

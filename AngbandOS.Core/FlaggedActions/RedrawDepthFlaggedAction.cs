@@ -31,7 +31,7 @@ namespace AngbandOS.Core.FlaggedActions
                     SaveGame.CurDungeon.KnownDepth = true;
                 }
             }
-            SaveGame.PrintLine(depths.PadLeft(9), RowDepth, ColDepth);
+            SaveGame.Screen.PrintLine(depths.PadLeft(9), RowDepth, ColDepth);
         }
     }
 }

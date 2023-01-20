@@ -8,8 +8,8 @@
         public RedrawTitleFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         private void PrtField(string info, int row, int col) // TODO: Duplicate with PrPlayerRedrawAction
         {
-            SaveGame.Print(Colour.White, "             ", row, col);
-            SaveGame.Print(Colour.BrightBlue, info, row, col);
+            SaveGame.Screen.Print(Colour.White, "             ", row, col);
+            SaveGame.Screen.Print(Colour.BrightBlue, info, row, col);
         }
         protected override void Execute()
         {

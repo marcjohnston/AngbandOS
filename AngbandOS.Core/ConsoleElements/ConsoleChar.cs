@@ -17,7 +17,7 @@
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
             location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
-            saveGame.Print(Colour, Char, location.Y, location.X);
+            saveGame.Screen.Print(Colour, Char, location.Y, location.X);
         }
 
         public ConsoleChar(Colour colour, char c)

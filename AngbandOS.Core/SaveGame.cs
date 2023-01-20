@@ -107,7 +107,7 @@ namespace AngbandOS
         public int TotalFriendLevels;
         public int TotalFriends;
         public int TrackedMonsterIndex;
-        public bool ViewingEquipment;
+        public bool ViewingEquipment; // TODO: Convert to parameter
         public bool ViewingItemList;
 
         private List<Monster> _petList = new List<Monster>();
@@ -176,7 +176,6 @@ namespace AngbandOS
 
         public int KeyHead = 0;
         public int KeyTail = 0;
-        public Screen Mem;
         /// DISPLAY
 
         /// <summary>
@@ -712,25 +711,25 @@ namespace AngbandOS
                         split = check;
                     }
                 }
-                Print(Colour.White, t.Substring(0, split), 0, 0);
+                Screen.Print(Colour.White, t.Substring(0, split), 0, 0);
                 MsgFlush(split + 1);
                 t = t.Substring(split);
                 n -= split;
             }
-            Print(Colour.White, t.Substring(0, n), 0, _msgPrintP);
+            Screen.Print(Colour.White, t.Substring(0, n), 0, _msgPrintP);
             MsgFlag = true;
             _msgPrintP += n + 1;
         }
         private void MsgFlush(int x)
         {
             const Colour a = Colour.BrightBlue;
-            Print(a, "-more-", 0, x);
+            Screen.Print(a, "-more-", 0, x);
             while (true && !Shutdown)
             {
                 Inkey();
                 break;
             }
-            Erase(0, 0, 255);
+            Screen.Erase(0, 0);
         }
         // PROFILE MESSAGING END
 
@@ -866,16 +865,16 @@ namespace AngbandOS
                         wildMapSymbol = "~";
                         wildMapAttr = Colour.Blue;
                     }
-                    Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
+                    Screen.Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
                 }
             }
-            Print(Colour.Purple, "+------------+", 1, 1);
+            Screen.Print(Colour.Purple, "+------------+", 1, 1);
             for (y = 0; y < 12; y++)
             {
-                Print(Colour.Purple, "|", y + 2, 1);
-                Print(Colour.Purple, "|", y + 2, 14);
+                Screen.Print(Colour.Purple, "|", y + 2, 1);
+                Screen.Print(Colour.Purple, "|", y + 2, 14);
             }
-            Print(Colour.Purple, "+------------+", 14, 1);
+            Screen.Print(Colour.Purple, "+------------+", 14, 1);
             for (y = 0; y < Constants.MaxCaves; y++)
             {
                 string depth = Dungeons[y].KnownDepth ? $"{Dungeons[y].MaxLevel}" : "?";
@@ -900,12 +899,12 @@ namespace AngbandOS
                 {
                     keyAttr = Colour.BrightRed;
                 }
-                Print(keyAttr, buffer, y + 1, 19);
+                Screen.Print(keyAttr, buffer, y + 1, 19);
             }
-            Print(Colour.Purple, "L:levels", 16, 1);
-            Print(Colour.Purple, "D:difficulty", 17, 1);
-            Print(Colour.Purple, "Q:quests", 18, 1);
-            Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
+            Screen.Print(Colour.Purple, "L:levels", 16, 1);
+            Screen.Print(Colour.Purple, "D:difficulty", 17, 1);
+            Screen.Print(Colour.Purple, "Q:quests", 18, 1);
+            Screen.Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
         }
 
         /// <summary>
@@ -1073,9 +1072,10 @@ namespace AngbandOS
                     ViewingEquipment = false;
                 }
             }
+            Screen? savedScreen = null;
             if (ViewingItemList)
             {
-                SaveScreen();
+                savedScreen = Screen.Clone();
             }
             while (!done && !Shutdown)
             {
@@ -1135,7 +1135,7 @@ namespace AngbandOS
                 }
                 outVal += " ESC";
                 tmpVal = $"({outVal}) {prompt}";
-                PrintLine(tmpVal, 0, 0);
+                Screen.PrintLine(tmpVal, 0, 0);
                 char which = Inkey();
                 int k;
                 switch (which)
@@ -1151,12 +1151,12 @@ namespace AngbandOS
                         {
                             if (!ViewingItemList)
                             {
-                                SaveScreen();
+                                savedScreen = Screen.Clone();
                                 ViewingItemList = true;
                             }
                             else
                             {
-                                Load();
+                                Screen.Restore(savedScreen);
                                 ViewingItemList = false;
                             }
                             break;
@@ -1169,8 +1169,7 @@ namespace AngbandOS
                             }
                             if (ViewingItemList)
                             {
-                                Load();
-                                SaveScreen();
+                                Screen.Restore(savedScreen);
                             }
                             ViewingEquipment = !ViewingEquipment;
                             break;
@@ -1242,12 +1241,12 @@ namespace AngbandOS
                         }
                 }
             }
-            if (ViewingItemList)
+            if (savedScreen != null)
             {
-                Load();
+                Screen.Restore(savedScreen);
             }
             ViewingItemList = false;
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             return item;
         }
 
@@ -2219,7 +2218,7 @@ namespace AngbandOS
             Player.Level = Player.MaxLevelGained;
             Player.Gold += 10000000;
             SetBackground(BackgroundImage.Crown);
-            Clear();
+            Screen.Clear();
             AnyKey(44);
         }
 
@@ -2237,21 +2236,21 @@ namespace AngbandOS
                     SetBackground(BackgroundImage.Tomb);
                     PlayMusic(MusicTrack.Death);
                 }
-                Clear();
+                Screen.Clear();
                 string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);
                 if (corpse.IsWinner || corpse.Level > Constants.PyMaxLevel)
                 {
                     buf += " the Magnificent";
                 }
-                Print(buf, 39, 1);
+                Screen.Print(buf, 39, 1);
                 buf = $"Level {corpse.Level} {Profession.ClassSubName(corpse.ProfessionIndex, corpse.Realm1)}";
-                Print(buf, 40, 1);
+                Screen.Print(buf, 40, 1);
                 string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
-                Print(tmp, 39, 34);
+                Screen.Print(tmp, 39, 34);
                 tmp = $"by {DiedFrom}".PadLeft(45);
-                Print(tmp, 40, 34);
+                Screen.Print(tmp, 40, 34);
                 tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
-                Print(tmp, 41, 34);
+                Screen.Print(tmp, 41, 34);
                 AnyKey(44);
             }
         }
@@ -2350,7 +2349,7 @@ namespace AngbandOS
                     RedrawStateFlaggedAction.Set();
                     RedrawStuff();
                     MsgFlag = false;
-                    PrintLine("", 0, 0);
+                    Screen.PrintLine("", 0, 0);
                     ProcessCommand(true);
                 }
                 else
@@ -5193,29 +5192,29 @@ namespace AngbandOS
                 info2[i] = ReportMagicsAux(Player.TimedPoisonResistance.TimeRemaining);
                 info[i++] = "You are resistant to poison";
             }
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             for (k = 1; k < 24; k++)
             {
-                PrintLine("", k, 13);
+                Screen.PrintLine("", k, 13);
             }
-            PrintLine("     Your Current Magic:", 1, 15);
+            Screen.PrintLine("     Your Current Magic:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
                 string dummy = $"{info[j]} {GlobalData.ReportMagicDurations[info2[j]]}.";
-                PrintLine(dummy, k++, 15);
+                Screen.PrintLine(dummy, k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    PrintLine("-- more --", k, 15);
+                    Screen.PrintLine("-- more --", k, 15);
                     Inkey();
                     for (; k > 2; k--)
                     {
-                        PrintLine("", k, 15);
+                        Screen.PrintLine("", k, 15);
                     }
                 }
             }
-            PrintLine("[Press any key to continue]", k, 13);
+            Screen.PrintLine("[Press any key to continue]", k, 13);
             Inkey();
-            Load();
+            Screen.Restore(savedScreen);
         }
 
         public void SelfKnowledge()
@@ -5641,28 +5640,28 @@ namespace AngbandOS
                     info[i++] = "Your weapon is a great bane of dragons.";
                 }
             }
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             for (k = 1; k < 24; k++)
             {
-                PrintLine("", k, 13);
+                Screen.PrintLine("", k, 13);
             }
-            PrintLine("     Your Attributes:", 1, 15);
+            Screen.PrintLine("     Your Attributes:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
-                PrintLine(info[j], k++, 15);
+                Screen.PrintLine(info[j], k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    PrintLine("-- more --", k, 15);
+                    Screen.PrintLine("-- more --", k, 15);
                     Inkey();
                     for (; k > 2; k--)
                     {
-                        PrintLine("", k, 15);
+                        Screen.PrintLine("", k, 15);
                     }
                 }
             }
-            PrintLine("[Press any key to continue]", k, 13);
+            Screen.PrintLine("[Press any key to continue]", k, 13);
             Inkey();
-            Load();
+            Screen.Restore(savedScreen);
         }
 
         public bool SetAcidDestroy(Item oPtr)
@@ -6529,14 +6528,14 @@ namespace AngbandOS
         {
             // We're viewing equipment
             ViewingEquipment = true;
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             // We're interested in seeing everything
             Player.ShowEquip(null);
             // Get a command
             string outVal = $"Equipment: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-            PrintLine(outVal, 0, 0);
+            Screen.PrintLine(outVal, 0, 0);
             QueuedCommand = Inkey();
-            Load();
+            Screen.Restore(savedScreen);
             // Display details if the player wants
             if (QueuedCommand == '\x1b')
             {
@@ -6590,7 +6589,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            PrintLine("Type '?' for a list of commands.", 0, 0);
+            Screen.PrintLine("Type '?' for a list of commands.", 0, 0);
         }
 
         // Command Engine
@@ -8817,22 +8816,21 @@ namespace AngbandOS
             }
             sn = -1;
             bool flag = false;
-            bool redraw = false;
+            Screen? savedScreen = null;
             string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
-            while (!flag && GetCom(outVal, out char choice))
+            while (!flag && GetCom(outVal, out char choice) && !Shutdown)
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
-                    if (!redraw)
+                    if (savedScreen == null)
                     {
-                        redraw = true;
-                        SaveScreen();
+                        savedScreen = Screen.Clone();
                         player.PrintSpells(spells, num, 1, 20, useRealm);
                     }
                     else
                     {
-                        redraw = false;
-                        Load();
+                        Screen.Restore(savedScreen);
+                        savedScreen = null;
                     }
                     continue;
                 }
@@ -8863,9 +8861,9 @@ namespace AngbandOS
                 }
                 flag = true;
             }
-            if (redraw)
+            if (savedScreen != null)
             {
-                Load();
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {
@@ -9074,14 +9072,14 @@ namespace AngbandOS
         {
             // We're not viewing equipment
             ViewingEquipment = false;
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             // We want to see everything
             Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
             // Get a new command
             string outVal = $"Inventory: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-            PrintLine(outVal, 0, 0);
+            Screen.PrintLine(outVal, 0, 0);
             QueuedCommand = Inkey();
-            Load();
+            Screen.Restore(savedScreen);
             // Display details if the player wants
             if (QueuedCommand == '\x1b')
             {
@@ -9121,78 +9119,78 @@ namespace AngbandOS
         public void DoCmdListCommands()
         {
             FullScreenOverlay = true;
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             UpdateScreen();
-            Clear();
+            Screen.Clear();
             SetBackground(BackgroundImage.Normal);
-            Print(Colour.Yellow, "Numpad", 1, 1);
-            Print("7 8 9", 3, 1);
-            Print(" \\|/", 4, 1);
-            Print("4- -6 = Move", 5, 1);
-            Print(" /|\\    (+Shift = run)", 6, 1);
-            Print("1 2 3", 7, 1);
-            Print("5 = Stand still", 8, 1);
-            Print(Colour.Yellow, "Other Symbols", 10, 1);
-            Print(". = Run", 12, 1);
-            Print("< = Go up stairs", 13, 1);
-            Print("> = Go down stairs", 14, 1);
-            Print("+ = Auto-alter a space", 15, 1);
-            Print("* = Target a creature", 16, 1);
-            Print("/ = Identify a symbol", 17, 1);
-            Print("? = Command list", 18, 1);
-            Print("Esc = Save and quit", 20, 1);
-            Print(Colour.Yellow, "Without Shift", 1, 25);
-            Print("a = Aim a wand", 3, 25);
-            Print("b = Browse a book", 4, 25);
-            Print("c = Close a door", 5, 25);
-            Print("d = Drop object", 6, 25);
-            Print("e = Show equipment", 7, 25);
-            Print("f = Fire a missile weapon", 8, 25);
-            Print("g = Get (pick up) object", 9, 25);
-            Print("h = View game help", 10, 25);
-            Print("i = Show Inventory", 11, 25);
-            Print("j = Jam spike in a door", 12, 25);
-            Print("k = Destroy an item", 13, 25);
-            Print("l = Look around", 14, 25);
-            Print("m = Cast spell/Use talent", 15, 25);
-            Print("n =", 16, 25);
-            Print("o = Open a door/chest", 17, 25);
-            Print("p = Mutant/Racial power", 18, 25);
-            Print("q = Quaff a potion", 19, 25);
-            Print("r = Read a scroll", 20, 25);
-            Print("s = Search for traps", 21, 25);
-            Print("t = Take off an item", 22, 25);
-            Print("u = Use a staff", 23, 25);
-            Print("v = Throw object", 24, 25);
-            Print("w = Wield/wear an item", 25, 25);
-            Print("x = Examine an object", 26, 25);
-            Print("y =", 27, 25);
-            Print("z = Zap a rod", 28, 25);
-            Print(Colour.Yellow, "With Shift", 1, 52);
-            Print("A = Activate an artifact", 3, 52);
-            Print("B = Bash a stuck door", 4, 52);
-            Print("C = View your character", 5, 52);
-            Print("D = Disarm a trap", 6, 52);
-            Print("E = Eat some food", 7, 52);
-            Print("F = Fuel a light source", 8, 52);
-            Print("H = How you feel here", 10, 52);
-            Print("J = View your journal", 12, 52);
-            Print("K = Destroy trash objects", 13, 52);
-            Print("L = Locate player", 14, 52);
-            Print("M = View the map", 15, 52);
-            Print("O = Show last message", 17, 52);
-            Print("P = Show previous messages", 18, 52);
-            Print("Q = Quit (Retire character)", 19, 52);
-            Print("R = Rest", 20, 52);
-            Print("S = Auto-search on/off", 21, 52);
-            Print("T = Tunnel", 22, 52);
-            Print("V = Version info", 24, 52);
+            Screen.Print(Colour.Yellow, "Numpad", 1, 1);
+            Screen.Print("7 8 9", 3, 1);
+            Screen.Print(" \\|/", 4, 1);
+            Screen.Print("4- -6 = Move", 5, 1);
+            Screen.Print(" /|\\    (+Shift = run)", 6, 1);
+            Screen.Print("1 2 3", 7, 1);
+            Screen.Print("5 = Stand still", 8, 1);
+            Screen.Print(Colour.Yellow, "Other Symbols", 10, 1);
+            Screen.Print(". = Run", 12, 1);
+            Screen.Print("< = Go up stairs", 13, 1);
+            Screen.Print("> = Go down stairs", 14, 1);
+            Screen.Print("+ = Auto-alter a space", 15, 1);
+            Screen.Print("* = Target a creature", 16, 1);
+            Screen.Print("/ = Identify a symbol", 17, 1);
+            Screen.Print("? = Command list", 18, 1);
+            Screen.Print("Esc = Save and quit", 20, 1);
+            Screen.Print(Colour.Yellow, "Without Shift", 1, 25);
+            Screen.Print("a = Aim a wand", 3, 25);
+            Screen.Print("b = Browse a book", 4, 25);
+            Screen.Print("c = Close a door", 5, 25);
+            Screen.Print("d = Drop object", 6, 25);
+            Screen.Print("e = Show equipment", 7, 25);
+            Screen.Print("f = Fire a missile weapon", 8, 25);
+            Screen.Print("g = Get (pick up) object", 9, 25);
+            Screen.Print("h = View game help", 10, 25);
+            Screen.Print("i = Show Inventory", 11, 25);
+            Screen.Print("j = Jam spike in a door", 12, 25);
+            Screen.Print("k = Destroy an item", 13, 25);
+            Screen.Print("l = Look around", 14, 25);
+            Screen.Print("m = Cast spell/Use talent", 15, 25);
+            Screen.Print("n =", 16, 25);
+            Screen.Print("o = Open a door/chest", 17, 25);
+            Screen.Print("p = Mutant/Racial power", 18, 25);
+            Screen.Print("q = Quaff a potion", 19, 25);
+            Screen.Print("r = Read a scroll", 20, 25);
+            Screen.Print("s = Search for traps", 21, 25);
+            Screen.Print("t = Take off an item", 22, 25);
+            Screen.Print("u = Use a staff", 23, 25);
+            Screen.Print("v = Throw object", 24, 25);
+            Screen.Print("w = Wield/wear an item", 25, 25);
+            Screen.Print("x = Examine an object", 26, 25);
+            Screen.Print("y =", 27, 25);
+            Screen.Print("z = Zap a rod", 28, 25);
+            Screen.Print(Colour.Yellow, "With Shift", 1, 52);
+            Screen.Print("A = Activate an artifact", 3, 52);
+            Screen.Print("B = Bash a stuck door", 4, 52);
+            Screen.Print("C = View your character", 5, 52);
+            Screen.Print("D = Disarm a trap", 6, 52);
+            Screen.Print("E = Eat some food", 7, 52);
+            Screen.Print("F = Fuel a light source", 8, 52);
+            Screen.Print("H = How you feel here", 10, 52);
+            Screen.Print("J = View your journal", 12, 52);
+            Screen.Print("K = Destroy trash objects", 13, 52);
+            Screen.Print("L = Locate player", 14, 52);
+            Screen.Print("M = View the map", 15, 52);
+            Screen.Print("O = Show last message", 17, 52);
+            Screen.Print("P = Show previous messages", 18, 52);
+            Screen.Print("Q = Quit (Retire character)", 19, 52);
+            Screen.Print("R = Rest", 20, 52);
+            Screen.Print("S = Auto-search on/off", 21, 52);
+            Screen.Print("T = Tunnel", 22, 52);
+            Screen.Print("V = Version info", 24, 52);
             if (Player.IsWizard)
             {
-                Print("W = Wizard command", 25, 52);
+                Screen.Print("W = Wizard command", 25, 52);
             }
             AnyKey(44);
-            Load();
+            Screen.Restore(savedScreen);
             SetBackground(BackgroundImage.Overhead);
             FullScreenOverlay = false;
         }
@@ -9318,8 +9316,8 @@ namespace AngbandOS
             int cy = -1;
             int cx = -1;
             FullScreenOverlay = true;
-            SaveScreen();
-            Clear();
+            Screen savedScreen = Screen.Clone();
+            Screen.Clear();
             // If we're on the surface, display the island map
             if (CurrentDepth == 0)
             {
@@ -9333,7 +9331,7 @@ namespace AngbandOS
                 Level.DisplayMap(out cy, out cx);
             }
             // Give us a prompt, and display the cursor in the player's location
-            Print(Colour.Orange, "[Press any key to continue]", 43, 26);
+            Screen.Print(Colour.Orange, "[Press any key to continue]", 43, 26);
             if (CurrentDepth == 0)
             {
                 Screen.Goto(Player.WildernessY + 2, Player.WildernessX + 2);
@@ -9344,7 +9342,7 @@ namespace AngbandOS
             }
             // Wait for a keypress, and restore the screen (looking at the map takes no time)
             Inkey();
-            Load();
+            Screen.Restore(savedScreen);
             FullScreenOverlay = false;
             SetBackground(BackgroundImage.Overhead);
         }
@@ -9881,31 +9879,30 @@ namespace AngbandOS
                 powers[num++] = 3;
             }
             bool flag = false;
-            bool redraw = false;
+            Screen? savedScreen = null;
             string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
             while (!flag && GetCom(outVal, out char choice))
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
-                    if (!redraw)
+                    if (savedScreen == null)
                     {
                         int y = 1, x = 13;
                         int ctr = 0;
-                        redraw = true;
-                        SaveScreen();
-                        PrintLine("", y++, x);
+                        savedScreen = Screen.Clone();
+                        Screen.PrintLine("", y++, x);
                         while (ctr < num)
                         {
                             string dummy = $"{ctr.IndexToLetter()}) {powerDesc[ctr]}";
-                            PrintLine(dummy, y + ctr, x);
+                            Screen.PrintLine(dummy, y + ctr, x);
                             ctr++;
                         }
-                        PrintLine("", y + ctr, x);
+                        Screen.PrintLine("", y + ctr, x);
                     }
                     else
                     {
-                        redraw = false;
-                        Load();
+                        Screen.Restore(savedScreen);
+                        savedScreen = null;
                     }
                     continue;
                 }
@@ -9933,9 +9930,9 @@ namespace AngbandOS
                 }
                 flag = true;
             }
-            if (redraw)
+            if (savedScreen != null)
             {
-                Load();
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {
@@ -10424,9 +10421,9 @@ namespace AngbandOS
                     }
                     // Require a confirmation to make sure the player doesn't accidentally give up a
                     // long-running character
-                    PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
+                    Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
                     int i = Inkey();
-                    PrintLine("", 0, 0);
+                    Screen.PrintLine("", 0, 0);
                     if (i != '@')
                     {
                         return;
@@ -11192,14 +11189,14 @@ namespace AngbandOS
         {
             // Save the current screen
             FullScreenOverlay = true;
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(this);
             while (true && !Shutdown)
             {
                 characterViewer.DisplayPlayer();
-                Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+                Screen.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
                 char keyPress = Inkey();
                 // Escape breaks us out of the loop
                 if (keyPress == '\x1b')
@@ -11215,7 +11212,7 @@ namespace AngbandOS
             }
             // Restore the screen
             SetBackground(BackgroundImage.Overhead);
-            Load();
+            Screen.Restore(savedScreen);
             FullScreenOverlay = false;
             RedrawMapFlaggedAction.Set();
             RedrawEquippyFlaggedAction.Set();
@@ -11255,24 +11252,24 @@ namespace AngbandOS
             int index = 0;
             int horizontalOffset = 0;
             FullScreenOverlay = true;
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
             while (true && !Shutdown)
             {
                 // Clear the screen
-                Clear();
+                Screen.Clear();
                 int row;
                 // Print the messages
                 for (row = 0; row < 40 && index + row < messageNumber; row++)
                 {
                     string msg = MessageStr((short)(index + row));
                     msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
-                    Print(Colour.White, msg, 41 - row, 0);
+                    Screen.Print(Colour.White, msg, 41 - row, 0);
                 }
                 // Get a command
-                PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
-                PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
+                Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
+                Screen.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
                 int keyCode = Inkey();
                 if (keyCode == '\x1b')
                 {
@@ -11313,13 +11310,13 @@ namespace AngbandOS
                 }
             }
             // Tidy up after ourselves
-            Load();
+            Screen.Restore(savedScreen);
             FullScreenOverlay = false;
         }
 
         public void DoCmdMessageOne()
         {
-            PrintLine($"> {MessageStr(0)}", 0, 0);
+            Screen.PrintLine($"> {MessageStr(0)}", 0, 0);
         }
 
         public void DoCmdManual()
@@ -11400,13 +11397,13 @@ namespace AngbandOS
                 }
             }
             // Save the screen and overprint the spells in the book
-            SaveScreen();
+            Screen savedScreen = Screen.Clone();
             Player.PrintSpells(spells, spellIndex, 1, 20, item.BaseItemCategory.SpellBookToToRealm);
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
-            Print("[Press any key to continue]", 0, 23);
+            Screen.Print("[Press any key to continue]", 0, 23);
             Inkey();
-            Load();
+            Screen.Restore(savedScreen);
         }
 
         public bool DoAlter()
@@ -11675,7 +11672,7 @@ namespace AngbandOS
             string p = "talent";
             sn = -1;
             bool flag = false;
-            bool redraw = false;
+            Screen? savedScreen = null;
             TalentList talents = player.Spellcasting.Talents;
             for (i = 0; i < talents.Count; i++)
             {
@@ -11689,13 +11686,12 @@ namespace AngbandOS
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
                 {
-                    if (!redraw)
+                    if (savedScreen == null)
                     {
-                        redraw = true;
-                        SaveScreen();
-                        PrintLine("", y, x);
-                        Print("Name", y, x + 5);
-                        Print("Lv Mana Fail Info", y, x + 35);
+                        savedScreen = Screen.Clone();
+                        Screen.PrintLine("", y, x);
+                        Screen.Print("Name", y, x + 5);
+                        Screen.Print("Lv Mana Fail Info", y, x + 35);
                         for (i = 0; i < talents.Count; i++)
                         {
                             Talents.Talent talent = talents[i];
@@ -11704,14 +11700,14 @@ namespace AngbandOS
                                 break;
                             }
                             string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(player)}";
-                            PrintLine(psiDesc, y + i + 1, x);
+                            Screen.PrintLine(psiDesc, y + i + 1, x);
                         }
-                        PrintLine("", y + i + 1, x);
+                        Screen.PrintLine("", y + i + 1, x);
                     }
                     else
                     {
-                        redraw = false;
-                        Load();
+                        Screen.Restore(savedScreen);
+                        savedScreen = null;
                     }
                     continue;
                 }
@@ -11735,9 +11731,9 @@ namespace AngbandOS
                 }
                 flag = true;
             }
-            if (redraw)
+            if (savedScreen != null)
             {
-                Load();
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {
@@ -13045,10 +13041,10 @@ namespace AngbandOS
         /// <param name="row"> The row on which to print the message </param>
         public void AnyKey(int row)
         {
-            PrintLine("", row, 0);
-            Print(Colour.Orange, "[Press any key to continue]", row, 27);
+            Screen.PrintLine("", row, 0);
+            Screen.Print(Colour.Orange, "[Press any key to continue]", row, 27);
             Inkey();
-            PrintLine("", row, 0);
+            Screen.PrintLine("", row, 0);
         }
 
         public bool AskforAux(out string buf, string initial, int len)
@@ -13071,8 +13067,8 @@ namespace AngbandOS
             {
                 len = Constants.ConsoleWidth - x;
             }
-            Erase(y, x, len);
-            Print(Colour.Grey, buf, y, x);
+            Screen.Erase(y, x, len);
+            Screen.Print(Colour.Grey, buf, y, x);
             while (!done && !Shutdown)
             {
                 Screen.Goto(y, x + k);
@@ -13106,74 +13102,10 @@ namespace AngbandOS
                         }
                         break;
                 }
-                Erase(y, x, len);
-                Print(Colour.Black, buf, y, x);
+                Screen.Erase(y, x, len);
+                Screen.Print(Colour.Black, buf, y, x);
             }
             return i != '\x1b';
-        }
-
-        /// <summary>
-        /// Clears the screen from the specified row downwards
-        /// </summary>
-        /// <param name="row"> The first row to clear </param>
-        public void Clear(int row)
-        {
-            for (int y = row; y < Screen.Height; y++)
-            {
-                Erase(y, 0, 255);
-            }
-        }
-
-        /// <summary>
-        /// Clears the entire screen
-        /// </summary>
-        public void Clear()
-        {
-            Screen.Clear();
-            Screen.UpdateWindow.Reset();
-            Screen.TotalErase = true;
-        }
-
-        /// <summary>
-        /// Erases a number of characters on the screen
-        /// </summary>
-        /// <param name="row"> The row position of the first character </param>
-        /// <param name="col"> The column position of the first character </param>
-        /// <param name="length"> The number of characters to erase </param>
-        public void Erase(int row, int col, int length)
-        {
-            int w = Screen.Width;
-            int x1 = -1;
-            int x2 = -1;
-            Colour na = Screen.AttrBlank;
-            char nc = Screen.CharBlank;
-            Screen.Goto(row, col);
-            if (col + length > w)
-            {
-                length = w - col;
-            }
-            int scrAa = Screen.A[row];
-            int scrCc = Screen.C[row];
-            for (int i = 0; i < length; i++, col++)
-            {
-                Colour oa = Screen.Va[scrAa + col];
-                int oc = Screen.Vc[scrCc + col];
-                if (oa == na && oc == nc)
-                {
-                    continue;
-                }
-                Screen.Va[scrAa + col] = na;
-                Screen.Vc[scrCc + col] = nc;
-                if (x1 < 0)
-                {
-                    x1 = col;
-                }
-                x2 = col;
-            }
-            if (x1 >= 0)
-            {
-                Screen.UpdateWindow.EncompassRow(row, x1, x2);
-            }
         }
 
         public bool GetCheck(string prompt)
@@ -13181,7 +13113,7 @@ namespace AngbandOS
             int i = 0;
             MsgPrint(null);
             string buf = $"{prompt}[Y/n]";
-            PrintLine(buf, 0, 0);
+            Screen.PrintLine(buf, 0, 0);
             while (true && !Shutdown)
             {
                 i = Inkey();
@@ -13200,7 +13132,7 @@ namespace AngbandOS
                 }
                 break;
             }
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             return i == 'Y' || i == 'y' || i == 13;
         }
 
@@ -13211,9 +13143,9 @@ namespace AngbandOS
             {
                 prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
             }
-            PrintLine(prompt, 0, 0);
+            Screen.PrintLine(prompt, 0, 0);
             command = Inkey();
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             return command != '\x1b';
         }
 
@@ -13297,9 +13229,9 @@ namespace AngbandOS
         public bool GetString(string prompt, out string buf, string initial, int len)
         {
             MsgPrint(null);
-            PrintLine(prompt, 0, 0);
+            Screen.PrintLine(prompt, 0, 0);
             bool res = AskforAux(out buf, initial, len);
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             return res;
         }
 
@@ -13367,53 +13299,12 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Re-loads the saved screen to the GUI
-        /// </summary>
-        public void Load()
-        {
-            int w = Screen.Width;
-            int h = Screen.Height;
-            if (Mem == null)
-            {
-                Mem = new Screen(w, h);
-            }
-            Screen.Copy(Mem, w, h);
-            Screen.UpdateWindow.Reset();
-        }
-
-        /// <summary>
         /// Pauses for a duration
         /// </summary>
         /// <param name="duration"> The duration of the pause, in milliseconds </param>
         public void Pause(int duration)
         {
             Thread.Sleep(duration);
-        }
-
-        /// <summary>
-        /// Places a character without moving the text position
-        /// </summary>
-        /// <param name="attr"> The colour to use for the character </param>
-        /// <param name="ch"> The character to place </param>
-        /// <param name="row"> The row at which to place the character </param>
-        /// <param name="col"> The column at which to place the character </param>
-        public void Place(Colour attr, char ch, int row, int col)
-        {
-            int w = Screen.Width;
-            int h = Screen.Height;
-            if (col < 0 || col >= w)
-            {
-                return;
-            }
-            if (row < 0 || row >= h)
-            {
-                return;
-            }
-            if (ch == 0)
-            {
-                return;
-            }
-            QueueCharacter(col, row, attr, ch);
         }
 
         /// <summary>
@@ -13426,204 +13317,11 @@ namespace AngbandOS
         }
 
         /// <summary>
-        /// Prints a character at the current cursor position
-        /// </summary>
-        /// <param name="attr"> The colour in which to print the character </param>
-        /// <param name="ch"> The character to print </param>
-        public void Print(Colour attr, char ch)
-        {
-            // Ensure the cursor is within the screen width.
-            if (Screen.Cx < Screen.Width)
-            {
-                if (ch == 0)
-                {
-                    return;
-                }
-                QueueCharacter(Screen.Cx, Screen.Cy, attr, ch);
-                Screen.Cx++;
-            }
-        }
-
-        /// <summary>
-        /// Prints a character at a given location
-        /// </summary>
-        /// <param name="attr"> The colour in which to print </param>
-        /// <param name="ch"> The character to print </param>
-        /// <param name="row"> The y position at which to print </param>
-        /// <param name="col"> The x position at which to print </param>
-        public void Print(Colour attr, char ch, int row, int col)
-        {
-            Screen.Goto(row, col);
-            Print(attr, ch);
-        }
-
-        /// <summary>
-        /// Prints a string at the current location
-        /// </summary>
-        /// <param name="attr"> The colour in which to print the string </param>
-        /// <param name="str"> The string to print </param>
-        /// <param name="length"> The number of characters to print (-1 for all) </param>
-        public void Print(Colour attr, string str)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return;
-            }
-
-            // Compute the length that can be printed.
-            int length = str.Length;
-
-            /// Check to see if we need to truncate the text.
-            if (Screen.Cx + length >= Screen.Width)
-            {
-                // Truncate the text.
-                length = Screen.Width - Screen.Cx;
-            }
-            if (length > 0)
-            {
-                QueueCharacters(Screen.Cx, Screen.Cy, length, attr, str);
-                Screen.Cx += length;
-            }
-        }
-
-        /// <summary>
-        /// Prints a string at a given location
-        /// </summary>
-        /// <param name="attr"> The colour in which to print </param>
-        /// <param name="str"> The string to print </param>
-        /// <param name="row"> The y position at which to print the string </param>
-        /// <param name="col"> The x position at which to print the string </param>
-        public void Print(Colour attr, string str, int row, int col)
-        {
-            Screen.Goto(row, col);
-            Print(attr, str);
-        }
-
-        /// <summary>
-        /// Prints a string at a given location
-        /// </summary>
-        /// <param name="str"> The string to print </param>
-        /// <param name="row"> The row at which to print </param>
-        /// <param name="col"> The column at which to print </param>
-        public void Print(string str, int row, int col)
-        {
-            Screen.Goto(row, col);
-            Print(Colour.White, str);
-        }
-
-        /// <summary>
-        /// Renders a window.
-        /// </summary>
-        /// <param name="leftMargin"></param>
-        /// <param name="topMargin"></param>
-        /// <param name="lines"></param>
-        public void PrintWindow(int leftMargin, int topMargin, ConsoleString[] lines)
-        {
-            int y = topMargin;
-            foreach (ConsoleString consoleString in lines)
-            {
-                int x = leftMargin;
-                foreach (ConsoleChar consoleChar in consoleString)
-                {
-                    Print(consoleChar.Colour, consoleChar.Char, y, x);
-                    x++;
-                }
-                y++;
-            }
-        }
-
-        /// <summary>
-        /// Print a string, wiping the rest of the line
-        /// </summary>
-        /// <param name="attr"> The colour in which to print </param>
-        /// <param name="str"> The string to print </param>
-        /// <param name="row"> The row at which to print </param>
-        /// <param name="col"> The column at which to print </param>
-        public void PrintLine(Colour attr, string str, int row, int col)
-        {
-            Erase(row, col, 255);
-            Print(attr, str);
-        }
-
-        /// <summary>
-        /// Print a string, wiping to the end of the line
-        /// </summary>
-        /// <param name="str"> The string to print </param>
-        /// <param name="row"> The row at which to print </param>
-        /// <param name="col"> The column at which to print </param>
-        public void PrintLine(string str, int row, int col)
-        {
-            PrintLine(Colour.White, str, row, col);
-        }
-
-        /// <summary>
-        /// Prints a string, word-wrapping it onto successive lines
-        /// </summary>
-        /// <param name="a"> The colour in which to print </param>
-        /// <param name="str"> The string to print </param>
-        public void PrintWrap(Colour a, string str)
-        {
-            int w = Screen.Width;
-            int y = Screen.Cy;
-            int x = Screen.Cx;
-            string[] split = str.Split(' ');
-            for (int i = 0; i < split.Length; i++)
-            {
-                string s = split[i];
-                if (i > 0)
-                {
-                    s = " " + s;
-                }
-                if (x + s.Length > w)
-                {
-                    x = 0;
-                    y++;
-                    if (y > 22)
-                    {
-                        return;
-                    }
-                    Erase(y, x, 255);
-                }
-                foreach (char c in s)
-                {
-                    if (c == ' ' && x == 0)
-                    {
-                    }
-                    else if (c == '\n')
-                    {
-                        x = 0;
-                        y++;
-                        Erase(y, x, 255);
-                    }
-                    else if (c >= ' ')
-                    {
-                        Print(a, c, y, x);
-                        x++;
-                    }
-                    else
-                    {
-                        Print(a, ' ', y, x);
-                        x++;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Redraw the entire window
-        /// </summary>
-        public void Redraw()
-        {
-            Screen.TotalErase = true;
-            UpdateScreen();
-        }
-
-        /// <summary>
         /// Update the screen using a double buffer, drawing all queued print and erase requests.
         /// </summary>
         public void UpdateScreen()
         {
-            Screen.UpdateWindow.UpdateScreen(Screen, Old, _console);
+            Screen.UpdateScreen(Old, _console);
         }
 
         public void PlayMusic(MusicTrack musicTrack)
@@ -13652,19 +13350,19 @@ namespace AngbandOS
                     HideCursorOnFullScreenInkey = true;
                     cmd = Inkey();
                 }
-                PrintLine("", 0, 0);
+                Screen.PrintLine("", 0, 0);
                 if (cmd == '0')
                 {
                     int oldArg = CommandArgument;
                     CommandArgument = 0;
-                    PrintLine("Count: ", 0, 0);
+                    Screen.PrintLine("Count: ", 0, 0);
                     while (true && !Shutdown)
                     {
                         cmd = Inkey();
                         if (cmd == 0x7F || cmd == 0x08)
                         {
                             CommandArgument /= 10;
-                            PrintLine($"Count: {CommandArgument}", 0, 0);
+                            Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                         }
                         else if (cmd >= '0' && cmd <= '9')
                         {
@@ -13676,7 +13374,7 @@ namespace AngbandOS
                             {
                                 CommandArgument = (CommandArgument * 10) + cmd.ToString().ToIntSafely();
                             }
-                            PrintLine($"Count: {CommandArgument}", 0, 0);
+                            Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                         }
                         else
                         {
@@ -13686,12 +13384,12 @@ namespace AngbandOS
                     if (CommandArgument == 0)
                     {
                         CommandArgument = 99;
-                        PrintLine($"Count: {CommandArgument}", 0, 0);
+                        Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                     }
                     if (oldArg != 0)
                     {
                         CommandArgument = oldArg;
-                        PrintLine($"Count: {CommandArgument}", 0, 0);
+                        Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                     }
                     if (cmd == ' ' || cmd == '\n' || cmd == '\r')
                     {
@@ -13724,17 +13422,7 @@ namespace AngbandOS
                 CurrentCommand = cmd;
                 break;
             }
-            PrintLine("", 0, 0);
-        }
-
-        /// <summary>
-        /// Save the screen to memory for later re-loading
-        /// </summary>
-        public void SaveScreen()
-        {
-            int w = Screen.Width;
-            int h = Screen.Height;
-            (Mem ?? (Mem = new Screen(w, h))).Copy(Screen, w, h);
+            Screen.PrintLine("", 0, 0);
         }
 
         public void ShowManual() // TODO: Needs to be deleted
@@ -13815,69 +13503,6 @@ namespace AngbandOS
             _keymapAct[0]['7'] = ";7";
             _keymapAct[0]['8'] = ";8";
             _keymapAct[0]['9'] = ";9";
-        }
-
-        /// <summary>
-        /// Queue up a printed character to be displayed when the screen is refreshed
-        /// </summary>
-        /// <param name="x"> The x location to display the character </param>
-        /// <param name="y"> The y location to display the character </param>
-        /// <param name="a"> The colour in which to display the character </param>
-        /// <param name="c"> The character to display </param>
-        private void QueueCharacter(int x, int y, Colour a, char c)
-        {
-            int scrAa = Screen.A[y];
-            int scrCc = Screen.C[y];
-            Colour oa = Screen.Va[scrAa + x];
-            int oc = Screen.Vc[scrCc + x];
-            if (oa == a && oc == c)
-            {
-                return;
-            }
-            Screen.Va[scrAa + x] = a;
-            Screen.Vc[scrCc + x] = c;
-            Screen.UpdateWindow.EncompassRow(y, x, x);
-        }
-
-        /// <summary>
-        /// Queue up a printed string to be displayed when the screen is refreshed
-        /// </summary>
-        /// <param name="x"> The x location to display the string </param>
-        /// <param name="y"> The y location to display the string </param>
-        /// <param name="n"> The number of characters to display (-1 for all) </param>
-        /// <param name="a"> The colour in which to display the string </param>
-        /// <param name="s"> The string to print </param>
-        private void QueueCharacters(int x, int y, int n, Colour a, string s)
-        {
-            int x1 = -1;
-            int x2 = -1;
-            int scrAa = Screen.A[y];
-            int scrCc = Screen.C[y];
-            int index = 0;
-            for (; n != 0 && index < s.Length; n--)
-            {
-                Colour oa = Screen.Va[scrAa + x];
-                int oc = Screen.Vc[scrCc + x];
-                if (oa == a && oc == s[index])
-                {
-                    x++;
-                    index++;
-                    continue;
-                }
-                Screen.Va[scrAa + x] = a;
-                Screen.Vc[scrCc + x] = s[index];
-                if (x1 < 0)
-                {
-                    x1 = x;
-                }
-                x2 = x;
-                x++;
-                index++;
-            }
-            if (x1 >= 0)
-            {
-                Screen.UpdateWindow.EncompassRow(y, x1, x2);
-            }
         }
 
         ////////////////// PLAYER FACTORY
@@ -14022,33 +13647,33 @@ namespace AngbandOS
         private void DisplayAPlusB(int x, int y, int initial, int bonus)
         {
             string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
-            Print(Colour.Black, buf, y, x);
+            Screen.Print(Colour.Black, buf, y, x);
         }
 
         private void DisplayClassInfo(int pclass)
         {
-            Print(Colour.Purple, "STR:", 36, 21);
-            Print(Colour.Purple, "INT:", 37, 21);
-            Print(Colour.Purple, "WIS:", 38, 21);
-            Print(Colour.Purple, "DEX:", 39, 21);
-            Print(Colour.Purple, "CON:", 40, 21);
-            Print(Colour.Purple, "CHA:", 41, 21);
+            Screen.Print(Colour.Purple, "STR:", 36, 21);
+            Screen.Print(Colour.Purple, "INT:", 37, 21);
+            Screen.Print(Colour.Purple, "WIS:", 38, 21);
+            Screen.Print(Colour.Purple, "DEX:", 39, 21);
+            Screen.Print(Colour.Purple, "CON:", 40, 21);
+            Screen.Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
                 int bonus = Profession.ClassInfo[pclass].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
-            Print(Colour.Purple, "Disarming   :", 36, 53);
-            Print(Colour.Purple, "Magic Device:", 37, 53);
-            Print(Colour.Purple, "Saving Throw:", 38, 53);
-            Print(Colour.Purple, "Stealth     :", 39, 53);
-            Print(Colour.Purple, "Fighting    :", 40, 53);
-            Print(Colour.Purple, "Shooting    :", 41, 53);
-            Print(Colour.Purple, "Experience  :", 36, 31);
-            Print(Colour.Purple, "Hit Dice    :", 37, 31);
-            Print(Colour.Purple, "Infravision :", 38, 31);
-            Print(Colour.Purple, "Searching   :", 39, 31);
-            Print(Colour.Purple, "Perception  :", 40, 31);
+            Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
+            Screen.Print(Colour.Purple, "Magic Device:", 37, 53);
+            Screen.Print(Colour.Purple, "Saving Throw:", 38, 53);
+            Screen.Print(Colour.Purple, "Stealth     :", 39, 53);
+            Screen.Print(Colour.Purple, "Fighting    :", 40, 53);
+            Screen.Print(Colour.Purple, "Shooting    :", 41, 53);
+            Screen.Print(Colour.Purple, "Experience  :", 36, 31);
+            Screen.Print(Colour.Purple, "Hit Dice    :", 37, 31);
+            Screen.Print(Colour.Purple, "Infravision :", 38, 31);
+            Screen.Print(Colour.Purple, "Searching   :", 39, 31);
+            Screen.Print(Colour.Purple, "Perception  :", 40, 31);
             DisplayAPlusB(67, 36, Profession.ClassInfo[pclass].BaseDisarmBonus, Profession.ClassInfo[pclass].DisarmBonusPerLevel);
             DisplayAPlusB(67, 37, Profession.ClassInfo[pclass].BaseDeviceBonus, Profession.ClassInfo[pclass].DeviceBonusPerLevel);
             DisplayAPlusB(67, 38, Profession.ClassInfo[pclass].BaseSaveBonus, Profession.ClassInfo[pclass].SaveBonusPerLevel);
@@ -14056,132 +13681,132 @@ namespace AngbandOS
             DisplayAPlusB(67, 40, Profession.ClassInfo[pclass].BaseMeleeAttackBonus, Profession.ClassInfo[pclass].MeleeAttackBonusPerLevel);
             DisplayAPlusB(67, 41, Profession.ClassInfo[pclass].BaseRangedAttackBonus, Profession.ClassInfo[pclass].RangedAttackBonusPerLevel);
             string buf = "+" + Profession.ClassInfo[pclass].ExperienceFactor + "%";
-            Print(Colour.Black, buf, 36, 45);
+            Screen.Print(Colour.Black, buf, 36, 45);
             buf = "1d" + Profession.ClassInfo[pclass].HitDieBonus;
-            Print(Colour.Black, buf, 37, 45);
-            Print(Colour.Black, "-", 38, 45);
+            Screen.Print(Colour.Black, buf, 37, 45);
+            Screen.Print(Colour.Black, "-", 38, 45);
             buf = $"{Profession.ClassInfo[pclass].BaseSearchBonus:00}%";
-            Print(Colour.Black, buf, 39, 45);
+            Screen.Print(Colour.Black, buf, 39, 45);
             buf = $"{Profession.ClassInfo[pclass].BaseSearchFrequency:00}%";
-            Print(Colour.Black, buf, 40, 45);
+            Screen.Print(Colour.Black, buf, 40, 45);
             switch (pclass)
             {
                 case CharacterClass.Cultist:
-                    Print(Colour.Purple, "INT based spell casters, who use Chaos and another realm", 30, 20);
-                    Print(Colour.Purple, "of their choice. Can't wield weapons except for powerful", 31, 20);
-                    Print(Colour.Purple, "chaos blades. Learn to resist chaos (at lvl 20). Have a", 32, 20);
-                    Print(Colour.Purple, "cult patron who will randomly give them rewards or", 33, 20);
-                    Print(Colour.Purple, "punishments as they increase in level.", 34, 20);
+                    Screen.Print(Colour.Purple, "INT based spell casters, who use Chaos and another realm", 30, 20);
+                    Screen.Print(Colour.Purple, "of their choice. Can't wield weapons except for powerful", 31, 20);
+                    Screen.Print(Colour.Purple, "chaos blades. Learn to resist chaos (at lvl 20). Have a", 32, 20);
+                    Screen.Print(Colour.Purple, "cult patron who will randomly give them rewards or", 33, 20);
+                    Screen.Print(Colour.Purple, "punishments as they increase in level.", 34, 20);
                     break;
 
                 case CharacterClass.Fanatic:
-                    Print(Colour.Purple, "Warriors who dabble in INT based Chaos magic. Have a cult", 30, 20);
-                    Print(Colour.Purple, "patron who will randomly give them rewards or punishments", 31, 20);
-                    Print(Colour.Purple, "as they increase in level. Learn to resist chaos", 32, 20);
-                    Print(Colour.Purple, "(at lvl 30) and fear (at lvl 40).", 33, 20);
+                    Screen.Print(Colour.Purple, "Warriors who dabble in INT based Chaos magic. Have a cult", 30, 20);
+                    Screen.Print(Colour.Purple, "patron who will randomly give them rewards or punishments", 31, 20);
+                    Screen.Print(Colour.Purple, "as they increase in level. Learn to resist chaos", 32, 20);
+                    Screen.Print(Colour.Purple, "(at lvl 30) and fear (at lvl 40).", 33, 20);
                     break;
 
                 case CharacterClass.ChosenOne:
-                    Print(Colour.Purple, "Warriors of fate, who have no spell casting abilities but", 30, 20);
-                    Print(Colour.Purple, "gain a large number of passive magical abilities (too long", 31, 20);
-                    Print(Colour.Purple, "to list here) as they increase in level.", 32, 20);
+                    Screen.Print(Colour.Purple, "Warriors of fate, who have no spell casting abilities but", 30, 20);
+                    Screen.Print(Colour.Purple, "gain a large number of passive magical abilities (too long", 31, 20);
+                    Screen.Print(Colour.Purple, "to list here) as they increase in level.", 32, 20);
                     break;
 
                 case CharacterClass.Channeler:
-                    Print(Colour.Purple, "Similar to a spell caster, but rather than casting spells", 30, 20);
-                    Print(Colour.Purple, "from a book, they can use their CHA to channel mana into", 31, 20);
-                    Print(Colour.Purple, "most types of item, powering the effects of the items", 32, 20);
-                    Print(Colour.Purple, "without depleting them.", 33, 20);
+                    Screen.Print(Colour.Purple, "Similar to a spell caster, but rather than casting spells", 30, 20);
+                    Screen.Print(Colour.Purple, "from a book, they can use their CHA to channel mana into", 31, 20);
+                    Screen.Print(Colour.Purple, "most types of item, powering the effects of the items", 32, 20);
+                    Screen.Print(Colour.Purple, "without depleting them.", 33, 20);
                     break;
 
                 case CharacterClass.Druid:
-                    Print(Colour.Purple, "Nature priests who use WIS based spell casting and who are", 30, 20);
-                    Print(Colour.Purple, "limited to the Nature realm. As priests, they can't use", 31, 20);
-                    Print(Colour.Purple, "edged weapons unless those weapons are holy; but they can", 32, 20);
-                    Print(Colour.Purple, "wear heavy armour without it disrupting their casting.", 33, 20);
+                    Screen.Print(Colour.Purple, "Nature priests who use WIS based spell casting and who are", 30, 20);
+                    Screen.Print(Colour.Purple, "limited to the Nature realm. As priests, they can't use", 31, 20);
+                    Screen.Print(Colour.Purple, "edged weapons unless those weapons are holy; but they can", 32, 20);
+                    Screen.Print(Colour.Purple, "wear heavy armour without it disrupting their casting.", 33, 20);
                     break;
 
                 case CharacterClass.HighMage:
-                    Print(Colour.Purple, "INT based spell casters who specialise in a single realm", 30, 20);
-                    Print(Colour.Purple, "of magic. They may choose any realm, and are better at", 31, 20);
-                    Print(Colour.Purple, "casting spells from that realm than a normal mage. High", 32, 20);
-                    Print(Colour.Purple, "mages also get more mana than other spell casters do.", 33, 20);
-                    Print(Colour.Purple, "Wearing too much armour disrupts their casting.", 34, 20);
+                    Screen.Print(Colour.Purple, "INT based spell casters who specialise in a single realm", 30, 20);
+                    Screen.Print(Colour.Purple, "of magic. They may choose any realm, and are better at", 31, 20);
+                    Screen.Print(Colour.Purple, "casting spells from that realm than a normal mage. High", 32, 20);
+                    Screen.Print(Colour.Purple, "mages also get more mana than other spell casters do.", 33, 20);
+                    Screen.Print(Colour.Purple, "Wearing too much armour disrupts their casting.", 34, 20);
                     break;
 
                 case CharacterClass.Mage:
-                    Print(Colour.Purple, "Flexible INT based spell casters who can cast magic from", 30, 20);
-                    Print(Colour.Purple, "any two realms of their choice. However, they can't wear", 31, 20);
-                    Print(Colour.Purple, "much armour before it starts disrupting their casting.", 32, 20);
+                    Screen.Print(Colour.Purple, "Flexible INT based spell casters who can cast magic from", 30, 20);
+                    Screen.Print(Colour.Purple, "any two realms of their choice. However, they can't wear", 31, 20);
+                    Screen.Print(Colour.Purple, "much armour before it starts disrupting their casting.", 32, 20);
                     break;
 
                 case CharacterClass.Monk:
-                    Print(Colour.Purple, "Masters of unarmed combat. While wearing only light armour", 30, 20);
-                    Print(Colour.Purple, "they can move faster and dodge blows and can learn to", 31, 20);
-                    Print(Colour.Purple, "resist paralysis (at lvl 25). While not wielding a weapon", 32, 20);
-                    Print(Colour.Purple, "they have extra attacks and do increased damage. They are", 33, 20);
-                    Print(Colour.Purple, "WIS based casters using Chaos, Tarot or Corporeal magic.", 34, 20);
+                    Screen.Print(Colour.Purple, "Masters of unarmed combat. While wearing only light armour", 30, 20);
+                    Screen.Print(Colour.Purple, "they can move faster and dodge blows and can learn to", 31, 20);
+                    Screen.Print(Colour.Purple, "resist paralysis (at lvl 25). While not wielding a weapon", 32, 20);
+                    Screen.Print(Colour.Purple, "they have extra attacks and do increased damage. They are", 33, 20);
+                    Screen.Print(Colour.Purple, "WIS based casters using Chaos, Tarot or Corporeal magic.", 34, 20);
                     break;
 
                 case CharacterClass.Mindcrafter:
-                    Print(Colour.Purple, "Disciples of the psionic arts, Mindcrafters learn a range", 30, 20);
-                    Print(Colour.Purple, "of mental abilities; which they power using WIS. As well", 31, 20);
-                    Print(Colour.Purple, "as their powers, they learn to resist fear (at lvl 10),", 32, 20);
-                    Print(Colour.Purple, "prevent wis drain (at lvl 20), resist confusion", 33, 20);
-                    Print(Colour.Purple, "(at lvl 30), and gain telepathy (at lvl 40).", 34, 20);
+                    Screen.Print(Colour.Purple, "Disciples of the psionic arts, Mindcrafters learn a range", 30, 20);
+                    Screen.Print(Colour.Purple, "of mental abilities; which they power using WIS. As well", 31, 20);
+                    Screen.Print(Colour.Purple, "as their powers, they learn to resist fear (at lvl 10),", 32, 20);
+                    Screen.Print(Colour.Purple, "prevent wis drain (at lvl 20), resist confusion", 33, 20);
+                    Screen.Print(Colour.Purple, "(at lvl 30), and gain telepathy (at lvl 40).", 34, 20);
                     break;
 
                 case CharacterClass.Mystic:
-                    Print(Colour.Purple, "Mystics master both martial and psionic arts, which they", 30, 20);
-                    Print(Colour.Purple, "power using WIS. Can resist confusion (at lvl 10), fear", 31, 20);
-                    Print(Colour.Purple, "(lvl 25), paralysis (lvl 30). Telepathy (lvl 40). While", 32, 20);
-                    Print(Colour.Purple, "wearing only light armour they can move faster and dodge,", 33, 20);
-                    Print(Colour.Purple, "and while not wielding a weapon they do increased damage.", 34, 20);
+                    Screen.Print(Colour.Purple, "Mystics master both martial and psionic arts, which they", 30, 20);
+                    Screen.Print(Colour.Purple, "power using WIS. Can resist confusion (at lvl 10), fear", 31, 20);
+                    Screen.Print(Colour.Purple, "(lvl 25), paralysis (lvl 30). Telepathy (lvl 40). While", 32, 20);
+                    Screen.Print(Colour.Purple, "wearing only light armour they can move faster and dodge,", 33, 20);
+                    Screen.Print(Colour.Purple, "and while not wielding a weapon they do increased damage.", 34, 20);
                     break;
 
                 case CharacterClass.Paladin:
-                    Print(Colour.Purple, "Holy warriors who use WIS based spell casting to supplement", 30, 20);
-                    Print(Colour.Purple, "their fighting skills. Paladins can specialise in either", 31, 20);
-                    Print(Colour.Purple, "Life or Death magic, but their spell casting is weak in", 32, 20);
-                    Print(Colour.Purple, "comparison to a full priest. Paladins learn to resist fear", 33, 20);
-                    Print(Colour.Purple, "(at lvl 40).", 34, 20);
+                    Screen.Print(Colour.Purple, "Holy warriors who use WIS based spell casting to supplement", 30, 20);
+                    Screen.Print(Colour.Purple, "their fighting skills. Paladins can specialise in either", 31, 20);
+                    Screen.Print(Colour.Purple, "Life or Death magic, but their spell casting is weak in", 32, 20);
+                    Screen.Print(Colour.Purple, "comparison to a full priest. Paladins learn to resist fear", 33, 20);
+                    Screen.Print(Colour.Purple, "(at lvl 40).", 34, 20);
                     break;
 
                 case CharacterClass.Priest:
-                    Print(Colour.Purple, "Devout followers of the Great Ones, Priests use WIS based", 30, 20);
-                    Print(Colour.Purple, "spell casting. They may choose either Life or Death magic,", 31, 20);
-                    Print(Colour.Purple, "and another realm of their choice. Priests can't use edged", 32, 20);
-                    Print(Colour.Purple, "weapons unless they are blessed, but can use any armour.", 33, 20);
+                    Screen.Print(Colour.Purple, "Devout followers of the Great Ones, Priests use WIS based", 30, 20);
+                    Screen.Print(Colour.Purple, "spell casting. They may choose either Life or Death magic,", 31, 20);
+                    Screen.Print(Colour.Purple, "and another realm of their choice. Priests can't use edged", 32, 20);
+                    Screen.Print(Colour.Purple, "weapons unless they are blessed, but can use any armour.", 33, 20);
                     break;
 
                 case CharacterClass.Ranger:
-                    Print(Colour.Purple, "Masters of ranged combat, especiallly using bows. Rangers", 30, 20);
-                    Print(Colour.Purple, "supplement their shooting and stealth with INT based spell", 31, 20);
-                    Print(Colour.Purple, "casting from the Nature realm plus another realm of their", 32, 20);
-                    Print(Colour.Purple, "choice from Death, Corporeal, Tarot, Chaos, and Folk.", 33, 20);
+                    Screen.Print(Colour.Purple, "Masters of ranged combat, especiallly using bows. Rangers", 30, 20);
+                    Screen.Print(Colour.Purple, "supplement their shooting and stealth with INT based spell", 31, 20);
+                    Screen.Print(Colour.Purple, "casting from the Nature realm plus another realm of their", 32, 20);
+                    Screen.Print(Colour.Purple, "choice from Death, Corporeal, Tarot, Chaos, and Folk.", 33, 20);
                     break;
 
                 case CharacterClass.Rogue:
-                    Print(Colour.Purple, "Stealth based characters who are adept at picking locks,", 30, 20);
-                    Print(Colour.Purple, "searching, and disarming traps. Rogues can use stealth to", 31, 20);
-                    Print(Colour.Purple, "their advantage in order to backstab sleeping or fleeing", 32, 20);
-                    Print(Colour.Purple, "foes. They also dabble in INT based magic, learning spells", 33, 20);
-                    Print(Colour.Purple, "from the Tarot, Sorcery, Death, or Folk realms.", 34, 20);
+                    Screen.Print(Colour.Purple, "Stealth based characters who are adept at picking locks,", 30, 20);
+                    Screen.Print(Colour.Purple, "searching, and disarming traps. Rogues can use stealth to", 31, 20);
+                    Screen.Print(Colour.Purple, "their advantage in order to backstab sleeping or fleeing", 32, 20);
+                    Screen.Print(Colour.Purple, "foes. They also dabble in INT based magic, learning spells", 33, 20);
+                    Screen.Print(Colour.Purple, "from the Tarot, Sorcery, Death, or Folk realms.", 34, 20);
                     break;
 
                 case CharacterClass.Warrior:
-                    Print(Colour.Purple, "Straightforward, no-nonsense fighters. They are the best", 30, 20);
-                    Print(Colour.Purple, "characters at melee combat, and require the least amount", 31, 20);
-                    Print(Colour.Purple, "of experience to increase in level. They can learn to", 32, 20);
-                    Print(Colour.Purple, "resist fear (at lvl 30). The ideal class for novices.", 33, 20);
+                    Screen.Print(Colour.Purple, "Straightforward, no-nonsense fighters. They are the best", 30, 20);
+                    Screen.Print(Colour.Purple, "characters at melee combat, and require the least amount", 31, 20);
+                    Screen.Print(Colour.Purple, "of experience to increase in level. They can learn to", 32, 20);
+                    Screen.Print(Colour.Purple, "resist fear (at lvl 30). The ideal class for novices.", 33, 20);
                     break;
 
                 case CharacterClass.WarriorMage:
-                    Print(Colour.Purple, "A blend of both warrior and mage, getting the abilities of", 30, 20);
-                    Print(Colour.Purple, "both but not being the best at either. They use INT based", 31, 20);
-                    Print(Colour.Purple, "spell casting, getting access to the Folk realm plus a", 32, 20);
-                    Print(Colour.Purple, "second realm of their choice. They pay for their extreme", 33, 20);
-                    Print(Colour.Purple, "flexibility by increasing in level only slowly.", 34, 20);
+                    Screen.Print(Colour.Purple, "A blend of both warrior and mage, getting the abilities of", 30, 20);
+                    Screen.Print(Colour.Purple, "both but not being the best at either. They use INT based", 31, 20);
+                    Screen.Print(Colour.Purple, "spell casting, getting access to the Folk realm plus a", 32, 20);
+                    Screen.Print(Colour.Purple, "second realm of their choice. They pay for their extreme", 33, 20);
+                    Screen.Print(Colour.Purple, "flexibility by increasing in level only slowly.", 34, 20);
                     break;
             }
         }
@@ -14191,10 +13816,10 @@ namespace AngbandOS
             int i;
             string str;
             const string spaces = "                 ";
-            Clear(0);
-            Print(Colour.Blue, "Name        :", 2, 1);
-            Print(Colour.Brown, stage == 0 ? _prevName : spaces, 2, 15);
-            Print(Colour.Blue, "Gender      :", 3, 1);
+            Screen.Clear(0);
+            Screen.Print(Colour.Blue, "Name        :", 2, 1);
+            Screen.Print(Colour.Brown, stage == 0 ? _prevName : spaces, 2, 15);
+            Screen.Print(Colour.Blue, "Gender      :", 3, 1);
             if (stage == 0)
             {
                 Player.Gender = _sexInfo[_prevSex];
@@ -14209,8 +13834,8 @@ namespace AngbandOS
                 Player.Gender = _sexInfo[Player.GenderIndex];
                 str = Player.Gender.Title;
             }
-            Print(Colour.Brown, str, 3, 15);
-            Print(Colour.Blue, "Race        :", 4, 1);
+            Screen.Print(Colour.Brown, str, 3, 15);
+            Screen.Print(Colour.Blue, "Race        :", 4, 1);
             if (stage == 0)
             {
                 Player.Race = _prevRace;
@@ -14224,8 +13849,8 @@ namespace AngbandOS
             {
                 str = Player.Race.Title;
             }
-            Print(Colour.Brown, str, 4, 15);
-            Print(Colour.Blue, "Class       :", 5, 1);
+            Screen.Print(Colour.Brown, str, 4, 15);
+            Screen.Print(Colour.Blue, "Class       :", 5, 1);
             if (stage == 0)
             {
                 Player.Profession = Profession.ClassInfo[_prevClass];
@@ -14240,7 +13865,7 @@ namespace AngbandOS
                 Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
                 str = Player.Profession.Title;
             }
-            Print(Colour.Brown, str, 5, 15);
+            Screen.Print(Colour.Brown, str, 5, 15);
             string buf = string.Empty;
             if (stage == 0)
             {
@@ -14257,18 +13882,18 @@ namespace AngbandOS
                 }
                 if (_prevRealm1 != Realm.None || _prevRealm2 != Realm.None)
                 {
-                    Print(Colour.Blue, "Magic       :", 6, 1);
+                    Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
                 if (_prevRealm1 != Realm.None)
                 {
-                    Print(Colour.Brown, buf, 6, 15);
+                    Screen.Print(Colour.Brown, buf, 6, 15);
                 }
             }
             else if (stage < 4)
             {
                 str = spaces;
-                Print(Colour.Blue, str, 6, 0);
-                Print(Colour.Brown, str, 6, 15);
+                Screen.Print(Colour.Blue, str, 6, 0);
+                Screen.Print(Colour.Brown, str, 6, 15);
             }
             else
             {
@@ -14286,54 +13911,54 @@ namespace AngbandOS
                 }
                 if (Player.Realm1 != Realm.None || Player.Realm2 != Realm.None)
                 {
-                    Print(Colour.Blue, "Magic       :", 6, 1);
+                    Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
                 if (Player.Realm1 != Realm.None)
                 {
-                    Print(Colour.Brown, buf, 6, 15);
+                    Screen.Print(Colour.Brown, buf, 6, 15);
                 }
             }
-            Print(Colour.Blue, "Birthday", 2, 32);
-            Print(Colour.Blue, "Age          ", 3, 32);
-            Print(Colour.Blue, "Height       ", 4, 32);
-            Print(Colour.Blue, "Weight       ", 5, 32);
-            Print(Colour.Blue, "Social Class ", 6, 32);
-            Print(Colour.Blue, "STR:", 2 + Ability.Strength, 61);
-            Print(Colour.Blue, "INT:", 2 + Ability.Intelligence, 61);
-            Print(Colour.Blue, "WIS:", 2 + Ability.Wisdom, 61);
-            Print(Colour.Blue, "DEX:", 2 + Ability.Dexterity, 61);
-            Print(Colour.Blue, "CON:", 2 + Ability.Constitution, 61);
-            Print(Colour.Blue, "CHA:", 2 + Ability.Charisma, 61);
-            Print(Colour.Blue, "STR:", 14 + Ability.Strength, 1);
-            Print(Colour.Blue, "INT:", 14 + Ability.Intelligence, 1);
-            Print(Colour.Blue, "WIS:", 14 + Ability.Wisdom, 1);
-            Print(Colour.Blue, "DEX:", 14 + Ability.Dexterity, 1);
-            Print(Colour.Blue, "CON:", 14 + Ability.Constitution, 1);
-            Print(Colour.Blue, "CHA:", 14 + Ability.Charisma, 1);
-            Print(Colour.Blue, "STR:", 22 + Ability.Strength, 1);
-            Print(Colour.Blue, "INT:", 22 + Ability.Intelligence, 1);
-            Print(Colour.Blue, "WIS:", 22 + Ability.Wisdom, 1);
-            Print(Colour.Blue, "DEX:", 22 + Ability.Dexterity, 1);
-            Print(Colour.Blue, "CON:", 22 + Ability.Constitution, 1);
-            Print(Colour.Blue, "CHA:", 22 + Ability.Charisma, 1);
-            Print(Colour.Purple, "Initial", 21, 6);
-            Print(Colour.Brown, "Race Class Mods", 21, 14);
-            Print(Colour.Green, "Actual", 21, 30);
-            Print(Colour.Red, "Reduced", 21, 37);
-            Print(Colour.Blue, "abcdefghijklm@", 21, 45);
-            Print(Colour.Grey, "..............", 22, 45);
-            Print(Colour.Grey, "..............", 23, 45);
-            Print(Colour.Grey, "..............", 24, 45);
-            Print(Colour.Grey, "..............", 25, 45);
-            Print(Colour.Grey, "..............", 26, 45);
-            Print(Colour.Grey, "..............", 27, 45);
-            Print(Colour.Blue, "Modifications", 28, 45);
+            Screen.Print(Colour.Blue, "Birthday", 2, 32);
+            Screen.Print(Colour.Blue, "Age          ", 3, 32);
+            Screen.Print(Colour.Blue, "Height       ", 4, 32);
+            Screen.Print(Colour.Blue, "Weight       ", 5, 32);
+            Screen.Print(Colour.Blue, "Social Class ", 6, 32);
+            Screen.Print(Colour.Blue, "STR:", 2 + Ability.Strength, 61);
+            Screen.Print(Colour.Blue, "INT:", 2 + Ability.Intelligence, 61);
+            Screen.Print(Colour.Blue, "WIS:", 2 + Ability.Wisdom, 61);
+            Screen.Print(Colour.Blue, "DEX:", 2 + Ability.Dexterity, 61);
+            Screen.Print(Colour.Blue, "CON:", 2 + Ability.Constitution, 61);
+            Screen.Print(Colour.Blue, "CHA:", 2 + Ability.Charisma, 61);
+            Screen.Print(Colour.Blue, "STR:", 14 + Ability.Strength, 1);
+            Screen.Print(Colour.Blue, "INT:", 14 + Ability.Intelligence, 1);
+            Screen.Print(Colour.Blue, "WIS:", 14 + Ability.Wisdom, 1);
+            Screen.Print(Colour.Blue, "DEX:", 14 + Ability.Dexterity, 1);
+            Screen.Print(Colour.Blue, "CON:", 14 + Ability.Constitution, 1);
+            Screen.Print(Colour.Blue, "CHA:", 14 + Ability.Charisma, 1);
+            Screen.Print(Colour.Blue, "STR:", 22 + Ability.Strength, 1);
+            Screen.Print(Colour.Blue, "INT:", 22 + Ability.Intelligence, 1);
+            Screen.Print(Colour.Blue, "WIS:", 22 + Ability.Wisdom, 1);
+            Screen.Print(Colour.Blue, "DEX:", 22 + Ability.Dexterity, 1);
+            Screen.Print(Colour.Blue, "CON:", 22 + Ability.Constitution, 1);
+            Screen.Print(Colour.Blue, "CHA:", 22 + Ability.Charisma, 1);
+            Screen.Print(Colour.Purple, "Initial", 21, 6);
+            Screen.Print(Colour.Brown, "Race Class Mods", 21, 14);
+            Screen.Print(Colour.Green, "Actual", 21, 30);
+            Screen.Print(Colour.Red, "Reduced", 21, 37);
+            Screen.Print(Colour.Blue, "abcdefghijklm@", 21, 45);
+            Screen.Print(Colour.Grey, "..............", 22, 45);
+            Screen.Print(Colour.Grey, "..............", 23, 45);
+            Screen.Print(Colour.Grey, "..............", 24, 45);
+            Screen.Print(Colour.Grey, "..............", 25, 45);
+            Screen.Print(Colour.Grey, "..............", 26, 45);
+            Screen.Print(Colour.Grey, "..............", 27, 45);
+            Screen.Print(Colour.Blue, "Modifications", 28, 45);
 
             if (stage < 2)
             {
                 for (i = 0; i < 6; i++)
                 {
-                    Print(Colour.Brown, "   ", 22 + i, 20);
+                    Screen.Print(Colour.Brown, "   ", 22 + i, 20);
                 }
             }
             else
@@ -14341,14 +13966,14 @@ namespace AngbandOS
                 for (i = 0; i < 6; i++)
                 {
                     buf = Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                    Print(Colour.Brown, buf, 22 + i, 20);
+                    Screen.Print(Colour.Brown, buf, 22 + i, 20);
                 }
             }
             if (stage < 3)
             {
                 for (i = 0; i < 6; i++)
                 {
-                    Print(Colour.Brown, "   ", 22 + i, 14);
+                    Screen.Print(Colour.Brown, "   ", 22 + i, 14);
                 }
             }
             else
@@ -14356,53 +13981,53 @@ namespace AngbandOS
                 for (i = 0; i < 6; i++)
                 {
                     buf = (Player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
-                    Print(Colour.Brown, buf, 22 + i, 14);
+                    Screen.Print(Colour.Brown, buf, 22 + i, 14);
                 }
             }
         }
 
         private void DisplayRaceInfo(Race race)
         {
-            Print(Colour.Purple, "STR:", 36, 21);
-            Print(Colour.Purple, "INT:", 37, 21);
-            Print(Colour.Purple, "WIS:", 38, 21);
-            Print(Colour.Purple, "DEX:", 39, 21);
-            Print(Colour.Purple, "CON:", 40, 21);
-            Print(Colour.Purple, "CHA:", 41, 21);
+            Screen.Print(Colour.Purple, "STR:", 36, 21);
+            Screen.Print(Colour.Purple, "INT:", 37, 21);
+            Screen.Print(Colour.Purple, "WIS:", 38, 21);
+            Screen.Print(Colour.Purple, "DEX:", 39, 21);
+            Screen.Print(Colour.Purple, "CON:", 40, 21);
+            Screen.Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
                 int bonus = race.AbilityBonus[i] + Profession.ClassInfo[Player.ProfessionIndex].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
-            Print(Colour.Purple, "Disarming   :", 36, 53);
-            Print(Colour.Purple, "Magic Device:", 37, 53);
-            Print(Colour.Purple, "Saving Throw:", 38, 53);
-            Print(Colour.Purple, "Stealth     :", 39, 53);
-            Print(Colour.Purple, "Fighting    :", 40, 53);
-            Print(Colour.Purple, "Shooting    :", 41, 53);
-            Print(Colour.Purple, "Experience  :", 36, 31);
-            Print(Colour.Purple, "Hit Dice    :", 37, 31);
-            Print(Colour.Purple, "Infravision :", 38, 31);
-            Print(Colour.Purple, "Searching   :", 39, 31);
-            Print(Colour.Purple, "Perception  :", 40, 31);
+            Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
+            Screen.Print(Colour.Purple, "Magic Device:", 37, 53);
+            Screen.Print(Colour.Purple, "Saving Throw:", 38, 53);
+            Screen.Print(Colour.Purple, "Stealth     :", 39, 53);
+            Screen.Print(Colour.Purple, "Fighting    :", 40, 53);
+            Screen.Print(Colour.Purple, "Shooting    :", 41, 53);
+            Screen.Print(Colour.Purple, "Experience  :", 36, 31);
+            Screen.Print(Colour.Purple, "Hit Dice    :", 37, 31);
+            Screen.Print(Colour.Purple, "Infravision :", 38, 31);
+            Screen.Print(Colour.Purple, "Searching   :", 39, 31);
+            Screen.Print(Colour.Purple, "Perception  :", 40, 31);
             DisplayAPlusB(67, 36, Profession.ClassInfo[Player.ProfessionIndex].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[Player.ProfessionIndex].DisarmBonusPerLevel);
             DisplayAPlusB(67, 37, Profession.ClassInfo[Player.ProfessionIndex].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[Player.ProfessionIndex].DeviceBonusPerLevel);
             DisplayAPlusB(67, 38, Profession.ClassInfo[Player.ProfessionIndex].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[Player.ProfessionIndex].SaveBonusPerLevel);
             DisplayAPlusB(67, 39, (Profession.ClassInfo[Player.ProfessionIndex].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[Player.ProfessionIndex].StealthBonusPerLevel * 4);
             DisplayAPlusB(67, 40, Profession.ClassInfo[Player.ProfessionIndex].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].MeleeAttackBonusPerLevel);
             DisplayAPlusB(67, 41, Profession.ClassInfo[Player.ProfessionIndex].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].RangedAttackBonusPerLevel);
-            Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
-            Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.ProfessionIndex].HitDieBonus), 37, 45);
+            Screen.Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
+            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.ProfessionIndex].HitDieBonus), 37, 45);
             if (race.Infravision == 0)
             {
-                Print(Colour.Black, "nil", 38, 45);
+                Screen.Print(Colour.Black, "nil", 38, 45);
             }
             else
             {
-                Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
+                Screen.Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
             }
-            Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
-            Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
 
             // Retrieve the description for the race and split the description into lines.
             string[] description = race.Description.Split("\n");
@@ -14411,7 +14036,7 @@ namespace AngbandOS
             int descriptionRow = 32 - (int)Math.Floor((double)description.Length / 2);
             foreach (string descriptionLine in description)
             {
-                Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
+                Screen.Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
             }
         }
 
@@ -14420,55 +14045,55 @@ namespace AngbandOS
             switch (prealm)
             {
                 case Realm.Chaos:
-                    Print(Colour.Purple, "The Chaos realm is the most destructive realm. It focuses", 30, 20);
-                    Print(Colour.Purple, "on combat spells. It is a very good choice for anyone who", 31, 20);
-                    Print(Colour.Purple, "wants to be able to damage their foes directly, but is ", 32, 20);
-                    Print(Colour.Purple, "somewhat lacking in non-combat spells.", 33, 20);
+                    Screen.Print(Colour.Purple, "The Chaos realm is the most destructive realm. It focuses", 30, 20);
+                    Screen.Print(Colour.Purple, "on combat spells. It is a very good choice for anyone who", 31, 20);
+                    Screen.Print(Colour.Purple, "wants to be able to damage their foes directly, but is ", 32, 20);
+                    Screen.Print(Colour.Purple, "somewhat lacking in non-combat spells.", 33, 20);
                     break;
 
                 case Realm.Corporeal:
-                    Print(Colour.Purple, "The Corporeal realm contains spells that exclusively affect", 30, 20);
-                    Print(Colour.Purple, "the caster's body, although some spells also indirectly", 31, 20);
-                    Print(Colour.Purple, "affect other creatures or objects. The corporeal realm is", 32, 20);
-                    Print(Colour.Purple, "particularly good at sensing spells.", 33, 20);
+                    Screen.Print(Colour.Purple, "The Corporeal realm contains spells that exclusively affect", 30, 20);
+                    Screen.Print(Colour.Purple, "the caster's body, although some spells also indirectly", 31, 20);
+                    Screen.Print(Colour.Purple, "affect other creatures or objects. The corporeal realm is", 32, 20);
+                    Screen.Print(Colour.Purple, "particularly good at sensing spells.", 33, 20);
                     break;
 
                 case Realm.Death:
-                    Print(Colour.Purple, "The Death realm has a combination of life-draining spells,", 30, 20);
-                    Print(Colour.Purple, "curses, and undead summoning. Like chaos, it is a very", 31, 20);
-                    Print(Colour.Purple, "offensive realm.", 32, 20);
+                    Screen.Print(Colour.Purple, "The Death realm has a combination of life-draining spells,", 30, 20);
+                    Screen.Print(Colour.Purple, "curses, and undead summoning. Like chaos, it is a very", 31, 20);
+                    Screen.Print(Colour.Purple, "offensive realm.", 32, 20);
                     break;
 
                 case Realm.Folk:
-                    Print(Colour.Purple, "The Folk realm is the least specialised of all the realms.", 30, 20);
-                    Print(Colour.Purple, "Folk magic is capable of doing any effect that is possible", 31, 20);
-                    Print(Colour.Purple, "in other realms - but usually less effectively than the", 32, 20);
-                    Print(Colour.Purple, "specialist realms.", 33, 20);
+                    Screen.Print(Colour.Purple, "The Folk realm is the least specialised of all the realms.", 30, 20);
+                    Screen.Print(Colour.Purple, "Folk magic is capable of doing any effect that is possible", 31, 20);
+                    Screen.Print(Colour.Purple, "in other realms - but usually less effectively than the", 32, 20);
+                    Screen.Print(Colour.Purple, "specialist realms.", 33, 20);
                     break;
 
                 case Realm.Life:
-                    Print(Colour.Purple, "The Life realm is devoted to healing and buffing, with some", 30, 20);
-                    Print(Colour.Purple, "offensive capability against undead and demons. It is the", 31, 20);
-                    Print(Colour.Purple, "most defensive of the realms.", 32, 20);
+                    Screen.Print(Colour.Purple, "The Life realm is devoted to healing and buffing, with some", 30, 20);
+                    Screen.Print(Colour.Purple, "offensive capability against undead and demons. It is the", 31, 20);
+                    Screen.Print(Colour.Purple, "most defensive of the realms.", 32, 20);
                     break;
 
                 case Realm.Nature:
-                    Print(Colour.Purple, "The Nature realm has a large number of summoning spells and", 30, 20);
-                    Print(Colour.Purple, "miscellaneous spells, but little in the way of offensive", 31, 20);
-                    Print(Colour.Purple, "and defensive capabilities.", 32, 20);
+                    Screen.Print(Colour.Purple, "The Nature realm has a large number of summoning spells and", 30, 20);
+                    Screen.Print(Colour.Purple, "miscellaneous spells, but little in the way of offensive", 31, 20);
+                    Screen.Print(Colour.Purple, "and defensive capabilities.", 32, 20);
                     break;
 
                 case Realm.Sorcery:
-                    Print(Colour.Purple, "The Sorcery realm contains spells dealing with raw magic", 30, 20);
-                    Print(Colour.Purple, "itself, for example spells dealing with magical items.", 31, 20);
-                    Print(Colour.Purple, "It is the premier source of miscellaneous non-combat", 32, 20);
-                    Print(Colour.Purple, "utility spells.", 33, 20);
+                    Screen.Print(Colour.Purple, "The Sorcery realm contains spells dealing with raw magic", 30, 20);
+                    Screen.Print(Colour.Purple, "itself, for example spells dealing with magical items.", 31, 20);
+                    Screen.Print(Colour.Purple, "It is the premier source of miscellaneous non-combat", 32, 20);
+                    Screen.Print(Colour.Purple, "utility spells.", 33, 20);
                     break;
 
                 case Realm.Tarot:
-                    Print(Colour.Purple, "The Tarot realm is one of the most specialised realms of", 30, 20);
-                    Print(Colour.Purple, "all, almost exclusively containing summoning and transport", 31, 20);
-                    Print(Colour.Purple, "spells.", 32, 20);
+                    Screen.Print(Colour.Purple, "The Tarot realm is one of the most specialised realms of", 30, 20);
+                    Screen.Print(Colour.Purple, "all, almost exclusively containing summoning and transport", 31, 20);
+                    Screen.Print(Colour.Purple, "spells.", 32, 20);
                     break;
             }
         }
@@ -14478,17 +14103,17 @@ namespace AngbandOS
             string buf;
             if (bonus == 0)
             {
-                Print(Colour.Black, "+0", y, x);
+                Screen.Print(Colour.Black, "+0", y, x);
             }
             else if (bonus < 0)
             {
                 buf = bonus.ToString();
-                Print(Colour.BrightRed, buf, y, x);
+                Screen.Print(Colour.BrightRed, buf, y, x);
             }
             else
             {
                 buf = "+" + bonus;
-                Print(Colour.Green, buf, y, x);
+                Screen.Print(Colour.Green, buf, y, x);
             }
         }
 
@@ -14690,8 +14315,8 @@ namespace AngbandOS
 
         private void MenuDisplay(int current)
         {
-            Clear(30);
-            Print(Colour.Orange, "=>", 35, 0);
+            Screen.Clear(30);
+            Screen.Print(Colour.Orange, "=>", 35, 0);
             for (int i = 0; i < _menuLength; i++)
             {
                 int row = 35 + i - current;
@@ -14702,7 +14327,7 @@ namespace AngbandOS
                     {
                         a = Colour.Pink;
                     }
-                    Print(a, _menuItem[i], row, 2);
+                    Screen.Print(a, _menuItem[i], row, 2);
                 }
             }
         }
@@ -14758,7 +14383,7 @@ namespace AngbandOS
             }
             menu[BirthStage.ClassSelection] = 14;
             menu[BirthStage.RaceSelection] = 16;
-            Clear();
+            Screen.Clear();
             int viewMode = 1;
             while (true && !Shutdown)
             {
@@ -14784,20 +14409,20 @@ namespace AngbandOS
                         switch (menu[stage])
                         {
                             case 0:
-                                Print(Colour.Purple, "Choose your character's race, sex, and class; and select", 35, 20);
-                                Print(Colour.Purple, "which realms of magic your character will use.", 36, 20);
+                                Screen.Print(Colour.Purple, "Choose your character's race, sex, and class; and select", 35, 20);
+                                Screen.Print(Colour.Purple, "which realms of magic your character will use.", 36, 20);
                                 break;
 
                             case 1:
-                                Print(Colour.Purple, "Let the game generate a character for you randomly.", 35, 20);
+                                Screen.Print(Colour.Purple, "Let the game generate a character for you randomly.", 35, 20);
                                 break;
 
                             case 2:
-                                Print(Colour.Purple, "Re-play with a character similar to the one you played", 35, 20);
-                                Print(Colour.Purple, "last time.", 36, 20);
+                                Screen.Print(Colour.Purple, "Re-play with a character similar to the one you played", 35, 20);
+                                Screen.Print(Colour.Purple, "last time.", 36, 20);
                                 break;
                         }
-                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true & !Shutdown)
                         {
                             c = Inkey();
@@ -14864,7 +14489,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayClassInfo(_classMenu[menu[stage]].Item);
-                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
@@ -14950,7 +14575,7 @@ namespace AngbandOS
                         MenuDisplay(menu[stage]);
 
                         DisplayRaceInfo(_raceMenu[menu[stage]].Item);
-                        Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
@@ -15094,7 +14719,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayRealmInfo(realmChoice[menu[stage]]);
-                        Print(Colour.Orange,
+                        Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -15271,7 +14896,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayRealmInfo(realmChoice[menu[stage]]);
-                        Print(Colour.Orange,
+                        Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -15379,8 +15004,8 @@ namespace AngbandOS
                             menu[stage] = 0;
                         }
                         MenuDisplay(menu[stage]);
-                        Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
-                        Print(Colour.Orange,
+                        Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
+                        Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -15455,7 +15080,7 @@ namespace AngbandOS
                         while (true && !Shutdown)
                         {
                             characterViewer.DisplayPlayer();
-                            Print(Colour.Orange,
+                            Screen.Print(Colour.Orange,
                                 "[Use return to confirm, or left to go back.]", 43, 1);
                             c = Inkey();
                             if (c == 13)
@@ -19203,7 +18828,7 @@ namespace AngbandOS
                 }
             }
             Level.TempN = 0;
-            PrintLine("", 0, 0);
+            Screen.PrintLine("", 0, 0);
             return TargetWho != 0;
         }
 
@@ -19383,7 +19008,7 @@ namespace AngbandOS
                 {
                     const string name = "something strange";
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
-                    PrintLine(outVal, 0, 0);
+                    Screen.PrintLine(outVal, 0, 0);
                     Level.MoveCursorRelative(y, x);
                     query = Inkey();
                     if (!Shutdown)
@@ -19414,18 +19039,18 @@ namespace AngbandOS
                         {
                             if (recall)
                             {
-                                SaveScreen();
+                                Screen savedScreen = Screen.Clone();
                                 rPtr.Knowledge.Display();
-                                Print(Colour.White, $"  [r,{info}]");
+                                Screen.Print(Colour.White, $"  [r,{info}]");
                                 query = Inkey();
-                                Load();
+                                Screen.Restore(savedScreen);
                             }
                             else
                             {
                                 string c = mPtr.SmCloned ? " (clone)" : "";
                                 string a = mPtr.SmFriendly ? " (allied) " : " ";
                                 outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
-                                PrintLine(outVal, 0, 0);
+                                Screen.PrintLine(outVal, 0, 0);
                                 Level.MoveCursorRelative(y, x);
                                 query = Inkey();
                             }
@@ -19459,7 +19084,7 @@ namespace AngbandOS
                             nextOIdx = oPtr.NextInStack;
                             string oName = oPtr.Description(true, 3);
                             outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                            PrintLine(outVal, 0, 0);
+                            Screen.PrintLine(outVal, 0, 0);
                             Level.MoveCursorRelative(y, x);
                             query = Inkey();
                             if (query != '\r' && query != '\n' && query != ' ')
@@ -19488,7 +19113,7 @@ namespace AngbandOS
                         boring = false;
                         string oName = oPtr.Description(true, 3);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                        PrintLine(outVal, 0, 0);
+                        Screen.PrintLine(outVal, 0, 0);
                         Level.MoveCursorRelative(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
@@ -19535,7 +19160,7 @@ namespace AngbandOS
                         s3 = name[0].IsVowel() ? "the entrance to an " : "the entrance to a ";
                     }
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";
-                    PrintLine(outVal, 0, 0);
+                    Screen.PrintLine(outVal, 0, 0);
                     Level.MoveCursorRelative(y, x);
                     query = Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')

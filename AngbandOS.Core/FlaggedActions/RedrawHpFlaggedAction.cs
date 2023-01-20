@@ -10,11 +10,11 @@
         public RedrawHpFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            SaveGame.Print("Max HP ", RowMaxhp, ColMaxhp);
+            SaveGame.Screen.Print("Max HP ", RowMaxhp, ColMaxhp);
             string tmp = SaveGame.Player.MaxHealth.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
-            SaveGame.Print(colour, tmp, RowMaxhp, ColMaxhp + 7);
-            SaveGame.Print("Cur HP ", RowCurhp, ColCurhp);
+            SaveGame.Screen.Print(colour, tmp, RowMaxhp, ColMaxhp + 7);
+            SaveGame.Screen.Print("Cur HP ", RowCurhp, ColCurhp);
             tmp = SaveGame.Player.Health.ToString().PadLeft(5);
             if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
             {
@@ -32,7 +32,7 @@
             {
                 colour = Colour.BrightRed;
             }
-            SaveGame.Print(colour, tmp, RowCurhp, ColCurhp + 7);
+            SaveGame.Screen.Print(colour, tmp, RowCurhp, ColCurhp + 7);
         }
     }
 }

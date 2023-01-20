@@ -42,15 +42,15 @@ namespace AngbandOS.Core
             var topBottomBorder = "+" + new string('-', _menuWidth) + "+";
             var leftRightBorder = "|" + new string(' ', _menuWidth) + "|";
             var chosenItem = 0;
-            saveGame.Print(Colour.White, topBottomBorder, top, left);
+            saveGame.Screen.Print(Colour.White, topBottomBorder, top, left);
             for (int i = 0; i < _text.Count + _items.Count; i++)
             {
-                saveGame.Print(Colour.White, leftRightBorder, top + i + 1, left);
+                saveGame.Screen.Print(Colour.White, leftRightBorder, top + i + 1, left);
             }
-            saveGame.Print(Colour.White, topBottomBorder, top + _items.Count + _text.Count + 1, left);
+            saveGame.Screen.Print(Colour.White, topBottomBorder, top + _items.Count + _text.Count + 1, left);
             for (int i = 0; i < _text.Count; i++)
             {
-                saveGame.Print(Colour.White, _text[i], top + i + 1, left + 1);
+                saveGame.Screen.Print(Colour.White, _text[i], top + i + 1, left + 1);
             }
             while (true && !saveGame.Shutdown)
             {
@@ -58,11 +58,11 @@ namespace AngbandOS.Core
                 {
                     if (i == chosenItem)
                     {
-                        saveGame.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Screen.Print(Colour.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
                     }
                     else
                     {
-                        saveGame.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
+                        saveGame.Screen.Print(Colour.White, _items[i], top + _text.Count + i + 1, left + 1);
                     }
                 }
                 saveGame.HideCursorOnFullScreenInkey = true;
@@ -101,9 +101,9 @@ namespace AngbandOS.Core
         {
             saveGame.InPopupMenu = true;
             saveGame.FullScreenOverlay = true;
-            saveGame.SaveScreen();
+            Screen savedScreen = saveGame.Screen.Clone();
             var result = DisplayMenu(saveGame);
-            saveGame.Load();
+            saveGame.Screen.Restore(savedScreen);
             saveGame.InPopupMenu = false;
             saveGame.FullScreenOverlay = false;
             return result;

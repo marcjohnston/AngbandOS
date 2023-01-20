@@ -12,19 +12,19 @@ namespace AngbandOS.Core.FlaggedActions
             int s = SaveGame.Player.TimedStun.TimeRemaining;
             if (s > 100)
             {
-                SaveGame.Print(Colour.Red, "Knocked out ", RowStun, ColStun);
+                SaveGame.Screen.Print(Colour.Red, "Knocked out ", RowStun, ColStun);
             }
             else if (s > 50)
             {
-                SaveGame.Print(Colour.Orange, "Heavy stun  ", RowStun, ColStun);
+                SaveGame.Screen.Print(Colour.Orange, "Heavy stun  ", RowStun, ColStun);
             }
             else if (s > 0)
             {
-                SaveGame.Print(Colour.Orange, "Stun        ", RowStun, ColStun);
+                SaveGame.Screen.Print(Colour.Orange, "Stun        ", RowStun, ColStun);
             }
             else
             {
-                SaveGame.Print("            ", RowStun, ColStun);
+                SaveGame.Screen.Print("            ", RowStun, ColStun);
             }
         }
     }

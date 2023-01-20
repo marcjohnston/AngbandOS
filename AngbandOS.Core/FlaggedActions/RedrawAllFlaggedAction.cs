@@ -8,7 +8,7 @@ namespace AngbandOS.Core.FlaggedActions
         protected override void Execute()
         {
             SaveGame.MsgPrint(null);
-            SaveGame.Clear();
+            SaveGame.Screen.Clear();
         }
     }
 }

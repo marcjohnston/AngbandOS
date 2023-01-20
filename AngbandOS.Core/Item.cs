@@ -1481,28 +1481,28 @@ namespace AngbandOS
             {
                 return false;
             }
-            SaveGame.SaveScreen();
+            Screen savedScreen = SaveGame.Screen.Clone();
             for (k = 1; k < 24; k++)
             {
-                SaveGame.PrintLine("", k, 13);
+                SaveGame.Screen.PrintLine("", k, 13);
             }
-            SaveGame.PrintLine("     Item Attributes:", 1, 15);
+            SaveGame.Screen.PrintLine("     Item Attributes:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
-                SaveGame.PrintLine(info[j], k++, 15);
+                SaveGame.Screen.PrintLine(info[j], k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
-                    SaveGame.PrintLine("-- more --", k, 15);
+                    SaveGame.Screen.PrintLine("-- more --", k, 15);
                     SaveGame.Inkey();
                     for (; k > 2; k--)
                     {
-                        SaveGame.PrintLine("", k, 15);
+                        SaveGame.Screen.PrintLine("", k, 15);
                     }
                 }
             }
-            SaveGame.PrintLine("[Press any key to continue]", k, 15);
+            SaveGame.Screen.PrintLine("[Press any key to continue]", k, 15);
             SaveGame.Inkey();
-            SaveGame.Load();
+            SaveGame.Screen.Restore(savedScreen);
             return true;
         }
 

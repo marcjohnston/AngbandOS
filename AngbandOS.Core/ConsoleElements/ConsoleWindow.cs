@@ -16,7 +16,7 @@
             {
                 for (int x  = Left; x <= Right; x++)
                 {
-                    saveGame.Print(colour, ' ', y, x);
+                    saveGame.Screen.Print(colour, ' ', y, x);
                 }
             }
         }

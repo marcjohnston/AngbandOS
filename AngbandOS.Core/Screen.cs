@@ -93,6 +93,8 @@ namespace AngbandOS.Core
                     Vc[scrCc + x] = CharBlank;
                 }
             }
+            UpdateWindow.Reset();
+            TotalErase = true;
         }
 
         public Screen(int w, int h)
@@ -119,15 +121,51 @@ namespace AngbandOS.Core
             }
         }
 
-        public void Copy(Screen f, int w, int h)
+        /// <summary>
+        /// Clears the screen from the specified row downwards
+        /// </summary>
+        /// <param name="row"> The first row to clear </param>
+        public void Clear(int row)
         {
-            for (int y = 0; y < h; y++)
+            for (int y = row; y < Height; y++)
+            {
+                Erase(y, 0);
+            }
+        }
+
+        public Screen Clone()
+        {
+            Screen f = new Screen(Width, Height);
+            for (int y = 0; y < Height; y++)
             {
                 int fAa = f.A[y];
                 int fCc = f.C[y];
                 int sAa = A[y];
                 int sCc = C[y];
-                for (int x = 0; x < w; x++)
+                for (int x = 0; x < Width; x++)
+                {
+                    f.Va[sAa++] = Va[fAa++];
+                    f.Vc[sCc++] = Vc[fCc++];
+                }
+            }
+            f.Cx = Cx;
+            f.Cy = Cy;
+            f.CursorVisible = CursorVisible;
+            return f;
+        }
+
+        /// <summary>
+        /// Re-loads a saved screen to the GUI
+        /// </summary>
+        public void Restore(Screen f)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                int fAa = f.A[y];
+                int fCc = f.C[y];
+                int sAa = A[y];
+                int sCc = C[y];
+                for (int x = 0; x < Width; x++)
                 {
                     Va[sAa++] = f.Va[fAa++];
                     Vc[sCc++] = f.Vc[fCc++];
@@ -136,6 +174,12 @@ namespace AngbandOS.Core
             Cx = f.Cx;
             Cy = f.Cy;
             CursorVisible = f.CursorVisible;
+            UpdateWindow.Reset();
+        }
+
+        public void UpdateScreen(Screen old, IConsole console)
+        {
+            UpdateWindow.UpdateScreen(this, old, console);
         }
 
         /// <summary>
@@ -187,5 +231,257 @@ namespace AngbandOS.Core
             if (batchPrintLines.Count > 0)
                 spectatorConsole.BatchPrint(batchPrintLines.ToArray());
         }
-   }
+
+        /// <summary>
+        /// Erases a number of characters on the screen
+        /// </summary>
+        /// <param name="row"> The row position of the first character </param>
+        /// <param name="col"> The column position of the first character </param>
+        /// <param name="length"> The number of characters to erase </param>
+        public void Erase(int row, int col, int? length = null)
+        {
+            if (length == null)
+            {
+                length = Width;
+            }
+
+            int w = Width;
+            int x1 = -1;
+            int x2 = -1;
+            Colour na = AttrBlank;
+            char nc = CharBlank;
+            Goto(row, col);
+            if (col + length > w)
+            {
+                length = w - col;
+            }
+            int scrAa = A[row];
+            int scrCc = C[row];
+            for (int i = 0; i < length; i++, col++)
+            {
+                Colour oa = Va[scrAa + col];
+                int oc = Vc[scrCc + col];
+                if (oa == na && oc == nc)
+                {
+                    continue;
+                }
+                Va[scrAa + col] = na;
+                Vc[scrCc + col] = nc;
+                if (x1 < 0)
+                {
+                    x1 = col;
+                }
+                x2 = col;
+            }
+            if (x1 >= 0)
+            {
+                UpdateWindow.EncompassRow(row, x1, x2);
+            }
+        }
+
+        /// <summary>
+        /// Prints a character at a given location
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="ch"> The character to print </param>
+        /// <param name="row"> The y position at which to print </param>
+        /// <param name="col"> The x position at which to print </param>
+        public void Print(Colour attr, char ch, int row, int col)
+        {
+            Goto(row, col);
+            Print(attr, ch.ToString());
+        }
+
+        /// <summary>
+        /// Prints a string at a given location
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The y position at which to print the string </param>
+        /// <param name="col"> The x position at which to print the string </param>
+        public void Print(Colour attr, string str, int row, int col)
+        {
+            Goto(row, col);
+            Print(attr, str);
+        }
+
+        /// <summary>
+        /// Prints a string, word-wrapping it onto successive lines
+        /// </summary>
+        /// <param name="a"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        public void PrintWrap(Colour a, string str)
+        {
+            int y = Cy;
+            int x = Cx;
+            string[] split = str.Split(' ');
+            for (int i = 0; i < split.Length; i++)
+            {
+                string s = split[i];
+                if (i > 0)
+                {
+                    s = " " + s;
+                }
+                if (x + s.Length > Width)
+                {
+                    x = 0;
+                    y++;
+                    if (y > 22)
+                    {
+                        return;
+                    }
+                    Erase(y, x);
+                }
+                foreach (char c in s)
+                {
+                    if (c == ' ' && x == 0)
+                    {
+                    }
+                    else if (c == '\n')
+                    {
+                        x = 0;
+                        y++;
+                        Erase(y, x);
+                    }
+                    else if (c >= ' ')
+                    {
+                        Print(a, c, y, x);
+                        x++;
+                    }
+                    else
+                    {
+                        Print(a, ' ', y, x);
+                        x++;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prints a string at a given location
+        /// </summary>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void Print(string str, int row, int col)
+        {
+            Goto(row, col);
+            Print(Colour.White, str);
+        }
+
+        /// <summary>
+        /// Print a string in a specific color, erasing the rest of the line to the width of the screen.
+        /// </summary>
+        /// <param name="attr"> The colour in which to print </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void PrintLine(Colour attr, string str, int row, int col)
+        {
+            Erase(row, col);
+            Print(attr, str);
+        }
+
+        /// <summary>
+        /// Print a string in white color, erasing the rest of the line to the width of the screen.
+        /// </summary>
+        /// <param name="str"> The string to print </param>
+        /// <param name="row"> The row at which to print </param>
+        /// <param name="col"> The column at which to print </param>
+        public void PrintLine(string str, int row, int col)
+        {
+            PrintLine(Colour.White, str, row, col);
+        }
+
+        /// <summary>
+        /// Prints a string at the current cursor position.  The cursor position is moved.
+        /// </summary>
+        /// <param name="attr"> The colour in which to print the string </param>
+        /// <param name="str"> The string to print </param>
+        /// <param name="length"> The number of characters to print (-1 for all) </param>
+        public void Print(Colour attr, string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return;
+            }
+
+            // Compute the length that can be printed.
+            int length = str.Length;
+
+            /// Check to see if we need to truncate the text.
+            if (Cx + length >= Width)
+            {
+                // Truncate the text.
+                length = Width - Cx;
+            }
+            if (length > 0)
+            {
+                RenderString(Cx, Cy, attr, str.Substring(0, length));
+                Cx += length;
+            }
+        }
+
+        /// <summary>
+        /// Places a character without moving the text position
+        /// </summary>
+        /// <param name="attr"> The colour to use for the character </param>
+        /// <param name="ch"> The character to place </param>
+        /// <param name="row"> The row at which to place the character </param>
+        /// <param name="col"> The column at which to place the character </param>
+        public void PutChar(Colour attr, char ch, int row, int col)
+        {
+            if (col < 0 || col >= Width)
+            {
+                return;
+            }
+            if (row < 0 || row >= Height)
+            {
+                return;
+            }
+            if (ch == 0)
+            {
+                return;
+            }
+            RenderString(col, row, attr, ch.ToString());
+        }
+
+        /// <summary>
+        /// Prints a string on the screen, without moving the cursor.  No checks are made to ensure the string fits on the string.
+        /// </summary>
+        /// <param name="x"> The x location to display the string </param>
+        /// <param name="y"> The y location to display the string </param>
+        /// <param name="n"> The number of characters to display (-1 for all) </param>
+        /// <param name="a"> The colour in which to display the string </param>
+        /// <param name="s"> The string to print </param>
+        public void RenderString(int x, int y, Colour a, string s)
+        {
+            int? x1 = null;
+            int? x2 = null;
+            int scrAa = A[y];
+            int scrCc = C[y];
+            foreach (char c in s)
+            {
+                Colour oa = Va[scrAa + x];
+                int oc = Vc[scrCc + x];
+                if (oa == a && oc == c)
+                {
+                    x++;
+                    continue;
+                }
+                Va[scrAa + x] = a;
+                Vc[scrCc + x] = c;
+                if (x1 == null)
+                {
+                    x1 = x;
+                }
+                x2 = x;
+                x++;
+            }
+            if (x1 != null)
+            {
+                UpdateWindow.EncompassRow(y, x1.Value, x2.Value);
+            }
+        }
+    }
 }

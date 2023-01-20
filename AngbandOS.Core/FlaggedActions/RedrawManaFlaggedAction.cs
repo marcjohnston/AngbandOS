@@ -15,11 +15,11 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 return;
             }
-            SaveGame.Print("Max SP ", RowMaxsp, ColMaxsp);
+            SaveGame.Screen.Print("Max SP ", RowMaxsp, ColMaxsp);
             string tmp = SaveGame.Player.MaxMana.ToString().PadLeft(5);
             Colour colour = Colour.BrightGreen;
-            SaveGame.Print(colour, tmp, RowMaxsp, ColMaxsp + 7);
-            SaveGame.Print("Cur SP ", RowCursp, ColCursp);
+            SaveGame.Screen.Print(colour, tmp, RowMaxsp, ColMaxsp + 7);
+            SaveGame.Screen.Print("Cur SP ", RowCursp, ColCursp);
             tmp = SaveGame.Player.Mana.ToString().PadLeft(5);
             if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
             {
@@ -37,7 +37,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 colour = Colour.BrightRed;
             }
-            SaveGame.Print(colour, tmp, RowCursp, ColCursp + 7);
+            SaveGame.Screen.Print(colour, tmp, RowCursp, ColCursp + 7);
         }
     }
 }

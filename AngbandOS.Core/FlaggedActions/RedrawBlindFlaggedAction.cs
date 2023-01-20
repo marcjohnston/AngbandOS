@@ -11,11 +11,11 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.TimedBlindness.TimeRemaining > 0)
             {
-                SaveGame.Print(Colour.Orange, "Blind", RowBlind, ColBlind);
+                SaveGame.Screen.Print(Colour.Orange, "Blind", RowBlind, ColBlind);
             }
             else
             {
-                SaveGame.Print("     ", RowBlind, ColBlind);
+                SaveGame.Screen.Print("     ", RowBlind, ColBlind);
             }
         }
     }

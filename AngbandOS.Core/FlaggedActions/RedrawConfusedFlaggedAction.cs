@@ -11,11 +11,11 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.TimedConfusion.TimeRemaining > 0)
             {
-                SaveGame.Print(Colour.Orange, "Confused", RowConfused, ColConfused);
+                SaveGame.Screen.Print(Colour.Orange, "Confused", RowConfused, ColConfused);
             }
             else
             {
-                SaveGame.Print("        ", RowConfused, ColConfused);
+                SaveGame.Screen.Print("        ", RowConfused, ColConfused);
             }
         }
     }

@@ -27,7 +27,7 @@ namespace AngbandOS.Core.FlaggedActions
                 attr = Colour.BrightBrown;
                 buf = $"Slow {energy / 10.0}";
             }
-            SaveGame.Print(attr, buf.PadRight(14), RowSpeed, ColSpeed);
+            SaveGame.Screen.Print(attr, buf.PadRight(14), RowSpeed, ColSpeed);
         }
     }
 }

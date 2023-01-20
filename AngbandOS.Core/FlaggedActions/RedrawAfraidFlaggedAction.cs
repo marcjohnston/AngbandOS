@@ -11,11 +11,11 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.TimedFear.TimeRemaining > 0)
             {
-                SaveGame.Print(Colour.Orange, "Afraid", RowAfraid, ColAfraid);
+                SaveGame.Screen.Print(Colour.Orange, "Afraid", RowAfraid, ColAfraid);
             }
             else
             {
-                SaveGame.Print("      ", RowAfraid, ColAfraid);
+                SaveGame.Screen.Print("      ", RowAfraid, ColAfraid);
             }
         }
     }

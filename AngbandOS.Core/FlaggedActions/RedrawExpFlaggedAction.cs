@@ -13,16 +13,16 @@
             {
                 colour = Colour.Yellow;
             }
-            SaveGame.Print("NEXT", RowExp, 0);
+            SaveGame.Screen.Print("NEXT", RowExp, 0);
             if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
-                SaveGame.Print(Colour.BrightGreen, "   *****", RowExp, ColExp + 4);
+                SaveGame.Screen.Print(Colour.BrightGreen, "   *****", RowExp, ColExp + 4);
             }
             else
             {
                 string outVal = ((GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
                     .PadLeft(8);
-                SaveGame.Print(colour, outVal, RowExp, ColExp + 4);
+                SaveGame.Screen.Print(colour, outVal, RowExp, ColExp + 4);
             }
         }
     }

@@ -396,7 +396,7 @@ namespace AngbandOS
                     {
                         ta = Colour.Black;
                     }
-                    SaveGame.Print(ta, tc);
+                    SaveGame.Screen.Print(ta, tc.ToString());
                 }
             }
             cy = yOffset + (SaveGame.Player.MapY / _ratio) + 1;
@@ -1243,7 +1243,7 @@ namespace AngbandOS
                 {
                     a = Colour.Black;
                 }
-                SaveGame.Place(a, c, y - PanelRowPrt, x - PanelColPrt);
+                SaveGame.Screen.PutChar(a, c, y - PanelRowPrt, x - PanelColPrt);
             }
         }
 
@@ -1311,7 +1311,7 @@ namespace AngbandOS
                 {
                     a = Colour.Black;
                 }
-                SaveGame.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
+                SaveGame.Screen.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
             }
         }
 

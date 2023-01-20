@@ -889,8 +889,8 @@ namespace AngbandOS
 
         public void InputPlayerName()
         {
-            SaveGame.Clear(42);
-            SaveGame.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+            SaveGame.Screen.Clear(42);
+            SaveGame.Screen.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
             const int col = 15;
             while (true)
             {
@@ -909,8 +909,8 @@ namespace AngbandOS
                 break;
             }
             Name = Name.PadRight(12);
-            SaveGame.Print(Colour.Brown, Name, 2, col);
-            SaveGame.Clear(22);
+            SaveGame.Screen.Print(Colour.Brown, Name, 2, col);
+            SaveGame.Screen.Clear(22);
         }
 
         public void LoseExperience(int amount)
@@ -1011,16 +1011,16 @@ namespace AngbandOS
         {
             int i;
             int set = realm == Realm1 ? 0 : 1;
-            SaveGame.PrintLine("", y, x);
-            SaveGame.Print("Name", y, x + 5);
-            SaveGame.Print("Lv Mana Fail Info", y, x + 35);
+            SaveGame.Screen.PrintLine("", y, x);
+            SaveGame.Screen.Print("Name", y, x + 5);
+            SaveGame.Screen.Print("Lv Mana Fail Info", y, x + 35);
             for (i = 0; i < num; i++)
             {
                 int spell = spells[i];
                 Spell sPtr = Spellcasting.Spells[set][spell];
-                SaveGame.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
+                SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
             }
-            SaveGame.PrintLine("", y + i + 1, x);
+            SaveGame.Screen.PrintLine("", y + i + 1, x);
         }
 
         public void RegenerateHealth(int percent)

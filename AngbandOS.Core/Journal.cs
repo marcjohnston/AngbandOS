@@ -24,25 +24,25 @@ namespace AngbandOS
         public void ShowMenu()
         {
             SaveGame.FullScreenOverlay = true;
-            SaveGame.SaveScreen();
+            Screen savedScreen = SaveGame.Screen.Clone();
             SaveGame.SetBackground(BackgroundImage.Paper);
             while (true && !SaveGame.Shutdown)
             {
                 SaveGame.UpdateScreen();
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Journal", 0, 1);
-                SaveGame.Print(Colour.Blue, "=======", 1, 1);
-                SaveGame.Print(Colour.Blue, "(a) Abilities", 3, 0);
-                SaveGame.Print(Colour.Blue, "(d) Deities", 4, 0);
-                SaveGame.Print(Colour.Blue, "(k) Kill Count", 5, 0);
-                SaveGame.Print(Colour.Blue, "(m) Mutations", 6, 0);
-                SaveGame.Print(Colour.Blue, "(p) Pets", 7, 0);
-                SaveGame.Print(Colour.Blue, "(q) Quests", 8, 0);
-                SaveGame.Print(Colour.Blue, "(r) Word of Recall", 9, 0);
-                SaveGame.Print(Colour.Blue, "(s) Monsters Seen", 10, 0);
-                SaveGame.Print(Colour.Blue, "(u) Uniques", 11, 0);
-                SaveGame.Print(Colour.Blue, "(w) Worthless Items", 12, 0);
-                SaveGame.Print(Colour.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Journal", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "=======", 1, 1);
+                SaveGame.Screen.Print(Colour.Blue, "(a) Abilities", 3, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(d) Deities", 4, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(k) Kill Count", 5, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(m) Mutations", 6, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(p) Pets", 7, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(q) Quests", 8, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(r) Word of Recall", 9, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(s) Monsters Seen", 10, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(u) Uniques", 11, 0);
+                SaveGame.Screen.Print(Colour.Blue, "(w) Worthless Items", 12, 0);
+                SaveGame.Screen.Print(Colour.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
                 char k = SaveGame.Inkey();
                 if (k == '\x1b')
                 {
@@ -102,7 +102,7 @@ namespace AngbandOS
                 }
             }
             SaveGame.SetBackground(BackgroundImage.Overhead);
-            SaveGame.Load();
+            SaveGame.Screen.Restore(savedScreen);
             SaveGame.FullScreenOverlay = false;
         }
 
@@ -119,29 +119,29 @@ namespace AngbandOS
             }
 
             Colour baseColour = hasStat ? Colour.Green : Colour.Blue; // Blue default color for missing stat, green when stat is possessed.
-            SaveGame.Print(baseColour, title, row, col);
-            SaveGame.Print(baseColour, ':', row, col + 10); // Right aligned
+            SaveGame.Screen.Print(baseColour, title, row, col);
+            SaveGame.Screen.Print(baseColour, ':', row, col + 10); // Right aligned
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
                 Item oPtr = SaveGame.Player.Inventory[i];
                 IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
                 if (getStat(itemCharacteristics))
                 {
-                    SaveGame.Print(baseColour, "+", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
+                    SaveGame.Screen.Print(baseColour, "+", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
                 }
                 else
                 {
-                    SaveGame.Print(Colour.Grey, ".", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
+                    SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
                 }
             }
             ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
             if (getStat(playerCharacteristics))
             {
-                SaveGame.Print(baseColour, "+", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+                SaveGame.Screen.Print(baseColour, "+", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
             else
             {
-                SaveGame.Print(Colour.Grey, ".", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+                SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
 
         }
@@ -154,7 +154,7 @@ namespace AngbandOS
                 {
                     string name = GlobalData.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
-                    SaveGame.Print(Colour.Blue, buf, 3, 0);
+                    SaveGame.Screen.Print(Colour.Blue, buf, 3, 0);
                     break;
                 }
             }
@@ -171,20 +171,19 @@ namespace AngbandOS
             Colour a1 = rPtr.Colour;
             if (!rPtr.Unique)
             {
-                SaveGame.Print(Colour.Brown, "The ");
+                SaveGame.Screen.Print(Colour.Brown, "The ");
             }
-            SaveGame.Print(Colour.Brown, rPtr.Name);
-            SaveGame.Print(Colour.Brown, " ('");
-            SaveGame.Print(a1, c1);
-            SaveGame.Print(Colour.Brown, "')");
+            SaveGame.Screen.Print(Colour.Brown, $"{rPtr.Name} ('");
+            SaveGame.Screen.Print(a1, c1.ToString());
+            SaveGame.Screen.Print(Colour.Brown, "')");
         }
 
         private void JournalAbilities()
         {
-            SaveGame.Clear();
+            SaveGame.Screen.Clear();
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 0 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 0 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 1, 0 + 11);
             DisplayStat("Add Str", 2, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Str);
             DisplayStat("Add Int", 3, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Int);
             DisplayStat("Add Wis", 4, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Wis);
@@ -203,7 +202,7 @@ namespace AngbandOS
             DisplayStat("Vampiric", 17, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Vampiric);
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 26 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 26 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 1, 26 + 11);
             DisplayStat("Slay Anim.", 2, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayAnimal);
             DisplayStat("Slay Evil", 3, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayEvil);
             DisplayStat("Slay Und.", 4, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayUndead);
@@ -222,7 +221,7 @@ namespace AngbandOS
             DisplayStat("Cold Brand", 17, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandCold);
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 0, 52 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 1, 52 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 1, 52 + 11);
             DisplayStat("Sust Str", 2, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr);
             DisplayStat("Sust Int", 3, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt);
             DisplayStat("Sust Wis", 4, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis);
@@ -241,7 +240,7 @@ namespace AngbandOS
             DisplayStat("Hold Life", 17, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife);
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 0 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 0 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 21, 0 + 11);
             DisplayStat("Res Acid", 22, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResAcid);
             DisplayStat("Res Elec", 23, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResElec);
             DisplayStat("Res Fire", 24, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResFire);
@@ -260,7 +259,7 @@ namespace AngbandOS
             DisplayStat("Res Disen", 37, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen);
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 26 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 26 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 21, 26 + 11);
             DisplayStat("Aura Fire", 22, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShFire);
             DisplayStat("Aura Elec", 23, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShElec);
 
@@ -279,7 +278,7 @@ namespace AngbandOS
             DisplayStat("Telepathy", 37, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy);
 
             CharacterViewer.DisplayPlayerEquippy(SaveGame, 20, 52 + 11);
-            SaveGame.Print(Colour.Blue, "abcdefghijklm@", 21, 52 + 11);
+            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", 21, 52 + 11);
             DisplayStat("Digestion", 22, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest);
             DisplayStat("Regen", 23, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen);
             DisplayStat("Xtra Might", 24, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.XtraMight);
@@ -297,15 +296,15 @@ namespace AngbandOS
             DisplayStat("Hvy Curse", 36, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HeavyCurse);
             DisplayStat("Prm Curse", 37, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.PermaCurse);
 
-            SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Screen.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
         }
 
         private void JournalDeities()
         {
-            SaveGame.Clear();
-            SaveGame.Print(Colour.Blue, "Standings with Deities", 0, 1);
-            SaveGame.Print(Colour.Blue, "======================", 1, 1);
+            SaveGame.Screen.Clear();
+            SaveGame.Screen.Print(Colour.Blue, "Standings with Deities", 0, 1);
+            SaveGame.Screen.Print(Colour.Blue, "======================", 1, 1);
             int row = 3;
             God patron = null;
             foreach (var deity in SaveGame.Player.Religion.GetAllDeities())
@@ -403,20 +402,20 @@ namespace AngbandOS
                     }
                 }
                 text += ".";
-                SaveGame.Print(Colour.Blue, text, row, 1);
+                SaveGame.Screen.Print(Colour.Blue, text, row, 1);
                 row++;
             }
             if (patron != null)
             {
-                SaveGame.Print(Colour.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
-                SaveGame.Print(Colour.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
-                SaveGame.Print(Colour.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
+                SaveGame.Screen.Print(Colour.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
+                SaveGame.Screen.Print(Colour.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
+                SaveGame.Screen.Print(Colour.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
             }
             else
             {
-                SaveGame.Print(Colour.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
+                SaveGame.Screen.Print(Colour.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
             }
-            SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Screen.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
         }
 
@@ -477,12 +476,12 @@ namespace AngbandOS
             while (true && !SaveGame.Shutdown)
             {
                 string buf;
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Kill Count", 0, 1);
-                SaveGame.Print(Colour.Blue, "==========", 1, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Kill Count", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "==========", 1, 1);
                 if (maxCount == 0)
                 {
-                    SaveGame.Print(Colour.Blue, "You haven't killed anything yet!", 3, 0);
+                    SaveGame.Screen.Print(Colour.Blue, "You haven't killed anything yet!", 3, 0);
                 }
                 for (int i = first; i < first + 38; i++)
                 {
@@ -504,12 +503,12 @@ namespace AngbandOS
                                 buf = $"You have killed {counts[i]} {names[i]}";
                             }
                         }
-                        SaveGame.Print(Colour.Blue, buf, i - first + 3, 0);
+                        SaveGame.Screen.Print(Colour.Blue, buf, i - first + 3, 0);
                     }
                 }
                 buf = $"Total Kills: {total}";
-                SaveGame.Print(Colour.Blue, buf, 41, 0);
-                SaveGame.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Blue, buf, 41, 0);
+                SaveGame.Screen.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
                 int c = SaveGame.Inkey();
                 if (c == '\x1b')
                 {
@@ -577,11 +576,11 @@ namespace AngbandOS
             }
             if (maxSeen == 0)
             {
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Monsters Seen", 0, 1);
-                SaveGame.Print(Colour.Blue, "=============", 1, 1);
-                SaveGame.Print(Colour.Blue, "You haven't seen any monsters yet!", 3, 0);
-                SaveGame.Print(Colour.Orange, "[Press any key to finish]", 43, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Monsters Seen", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "=============", 1, 1);
+                SaveGame.Screen.Print(Colour.Blue, "You haven't seen any monsters yet!", 3, 0);
+                SaveGame.Screen.Print(Colour.Orange, "[Press any key to finish]", 43, 1);
                 SaveGame.Inkey();
                 return;
             }
@@ -607,11 +606,11 @@ namespace AngbandOS
                 char c = '\x00';
                 while (true && !SaveGame.Shutdown)
                 {
-                    SaveGame.Clear();
-                    SaveGame.Print(Colour.Blue, "Monsters Seen", 0, 1);
-                    SaveGame.Print(Colour.Blue, "=============", 1, 1);
+                    SaveGame.Screen.Clear();
+                    SaveGame.Screen.Print(Colour.Blue, "Monsters Seen", 0, 1);
+                    SaveGame.Screen.Print(Colour.Blue, "=============", 1, 1);
                     DisplayMonster(filtered[currentIndex], currentIndex, maxFiltered);
-                    SaveGame.Print(Colour.Orange,
+                    SaveGame.Screen.Print(Colour.Orange,
                         "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
                     c = SaveGame.Inkey();
                     if (c == '4')
@@ -692,12 +691,12 @@ namespace AngbandOS
             int first = 0;
             while (true && !SaveGame.Shutdown)
             {
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Mutations", 0, 1);
-                SaveGame.Print(Colour.Blue, "=========", 1, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Mutations", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "=========", 1, 1);
                 if (maxFeature == 0)
                 {
-                    SaveGame.Print(Colour.Blue, "You have no mutations.", 3, 0);
+                    SaveGame.Screen.Print(Colour.Blue, "You have no mutations.", 3, 0);
                 }
                 else
                 {
@@ -705,11 +704,11 @@ namespace AngbandOS
                     {
                         if (i < maxFeature)
                         {
-                            SaveGame.Print(Colour.Blue, features[i], i - first + 3, 0);
+                            SaveGame.Screen.Print(Colour.Blue, features[i], i - first + 3, 0);
                         }
                     }
                 }
-                SaveGame.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
                 int c = SaveGame.Inkey();
                 if (c == '\x1b')
                 {
@@ -756,12 +755,12 @@ namespace AngbandOS
             int first = 0;
             while (true && !SaveGame.Shutdown)
             {
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Pets", 0, 1);
-                SaveGame.Print(Colour.Blue, "====", 1, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Pets", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "====", 1, 1);
                 if (pets == 0)
                 {
-                    SaveGame.Print(Colour.Blue, "You have no pets.", 3, 0);
+                    SaveGame.Screen.Print(Colour.Blue, "You have no pets.", 3, 0);
                 }
                 else
                 {
@@ -769,11 +768,11 @@ namespace AngbandOS
                     {
                         if (i < pets)
                         {
-                            SaveGame.Print(Colour.Blue, petNames[i], i - first + 3, 0);
+                            SaveGame.Screen.Print(Colour.Blue, petNames[i], i - first + 3, 0);
                         }
                     }
                 }
-                SaveGame.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
                 int c = SaveGame.Inkey();
                 if (c == '\x1b')
                 {
@@ -804,9 +803,9 @@ namespace AngbandOS
 
         private void JournalQuests()
         {
-            SaveGame.Clear();
-            SaveGame.Print(Colour.Blue, "Outstanding Quests", 0, 1);
-            SaveGame.Print(Colour.Blue, "==================", 1, 1);
+            SaveGame.Screen.Clear();
+            SaveGame.Screen.Print(Colour.Blue, "Outstanding Quests", 0, 1);
+            SaveGame.Screen.Print(Colour.Blue, "==================", 1, 1);
             int[] lev = new int[Constants.MaxCaves];
             int[] first = new int[Constants.MaxCaves];
             for (int i = 0; i < Constants.MaxCaves; i++)
@@ -833,35 +832,35 @@ namespace AngbandOS
                 if (first[i] != -1)
                 {
                     string line = SaveGame.Quests.DescribeQuest(first[i]);
-                    SaveGame.Print(Colour.Blue, line, row, 0);
+                    SaveGame.Screen.Print(Colour.Blue, line, row, 0);
                     row++;
                 }
             }
             if (row == 3)
             {
-                SaveGame.Print(Colour.Blue, "Congratulations! You have completed all the quests.", row, 0);
+                SaveGame.Screen.Print(Colour.Blue, "Congratulations! You have completed all the quests.", row, 0);
             }
-            SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Screen.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
         }
 
         private void JournalRecall()
         {
-            SaveGame.Clear();
-            SaveGame.Print(Colour.Blue, "Word of Recall", 0, 1);
-            SaveGame.Print(Colour.Blue, "==============", 1, 1);
+            SaveGame.Screen.Clear();
+            SaveGame.Screen.Print(Colour.Blue, "Word of Recall", 0, 1);
+            SaveGame.Screen.Print(Colour.Blue, "==============", 1, 1);
             string recallTown = SaveGame.Player.TownWithHouse > -1
                 ? SaveGame.Towns[SaveGame.Player.TownWithHouse].Name
                 : SaveGame.CurTown.Name;
             string recallDungeon = SaveGame.Dungeons[SaveGame.RecallDungeon].Name;
             int recallLev = SaveGame.Player.MaxDlv[SaveGame.RecallDungeon];
-            SaveGame.Print(Colour.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
-            SaveGame.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
+            SaveGame.Screen.Print(Colour.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
+            SaveGame.Screen.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
             if (SaveGame.Player.TownWithHouse > -1)
             {
                 recallTown = "your house in " + SaveGame.Dungeons[SaveGame.Player.TownWithHouse].Shortname;
             }
-            SaveGame.Print(Colour.Brown,
+            SaveGame.Screen.Print(Colour.Brown,
                 SaveGame.CurrentDepth == 0
                     ? $"If you recall now, you will return to level {recallLev} of {recallDungeon}."
                     : $"If you recall now, you will return to {recallTown}.", 6, 0);
@@ -873,8 +872,8 @@ namespace AngbandOS
             description += "only when you recall from a new dungeon or tower; but has its level updated ";
             description += "each time you reach a new level within that dungeon or tower. In either case, you will be transported to a random location on the dungeon or tower level.)";
             SaveGame.Screen.Goto(8, 0);
-            SaveGame.PrintWrap(Colour.Blue, description);
-            SaveGame.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
+            SaveGame.Screen.PrintWrap(Colour.Blue, description);
+            SaveGame.Screen.Print(Colour.Orange, "[Press any key to finish.]", 43, 1);
             SaveGame.Inkey();
         }
 
@@ -898,22 +897,22 @@ namespace AngbandOS
             int first = 0;
             while (true && !SaveGame.Shutdown)
             {
-                SaveGame.Clear();
-                SaveGame.Print(Colour.Blue, "Unique Foes", 0, 1);
-                SaveGame.Print(Colour.Blue, "===========", 1, 1);
+                SaveGame.Screen.Clear();
+                SaveGame.Screen.Print(Colour.Blue, "Unique Foes", 0, 1);
+                SaveGame.Screen.Print(Colour.Blue, "===========", 1, 1);
                 if (maxCount == 0)
                 {
-                    SaveGame.Print(Colour.Blue, "You know of no unique foes!", 3, 0);
+                    SaveGame.Screen.Print(Colour.Blue, "You know of no unique foes!", 3, 0);
                 }
                 for (int i = first; i < first + 38; i++)
                 {
                     if (i < maxCount)
                     {
                         string buf = alive[i] ? $"{names[i]} is alive." : $"{names[i]} is dead.";
-                        SaveGame.Print(Colour.Blue, buf, i - first + 3, 0);
+                        SaveGame.Screen.Print(Colour.Blue, buf, i - first + 3, 0);
                     }
                 }
-                SaveGame.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
                 int c = SaveGame.Inkey();
                 if (c == '\x1b')
                 {
@@ -944,9 +943,9 @@ namespace AngbandOS
 
         private void JournalWorthlessItems()
         {
-            SaveGame.Clear();
-            SaveGame.Print(Colour.Blue, "Worthless Items", 0, 1);
-            SaveGame.Print(Colour.Blue, "===============", 1, 1);
+            SaveGame.Screen.Clear();
+            SaveGame.Screen.Print(Colour.Blue, "Worthless Items", 0, 1);
+            SaveGame.Screen.Print(Colour.Blue, "===============", 1, 1);
             SaveGame.Screen.Goto(3, 0);
             string text = "Items marked in red ";
             text += "will be considered 'worthless' and you will stomp on them (destroying them) rather than ";
@@ -954,7 +953,7 @@ namespace AngbandOS
             text += "without you being prompted. Items will only be destroyed if they are on the floor or in your ";
             text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
             text += "quality to a non-worthless level).";
-            SaveGame.PrintWrap(Colour.Blue, text);
+            SaveGame.Screen.PrintWrap(Colour.Blue, text);
             for (int i = 0; i < TvalDescriptionPair.Tvals.Length - 1; i++)
             {
                 _menuItem[i] = TvalDescriptionPair.Tvals[i].Desc;
@@ -965,7 +964,7 @@ namespace AngbandOS
             while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
-                SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
                     char c = SaveGame.Inkey();
@@ -1000,8 +999,8 @@ namespace AngbandOS
 
         private void MenuDisplay(int current)
         {
-            SaveGame.Clear(9);
-            SaveGame.Print(Colour.Orange, "=>", 25, 0);
+            SaveGame.Screen.Clear(9);
+            SaveGame.Screen.Print(Colour.Orange, "=>", 25, 0);
             string desc = string.Empty;
             Colour descColour = Colour.Brown;
             for (int i = 0; i < _menuLength; i++)
@@ -1033,9 +1032,9 @@ namespace AngbandOS
                     }
                     descColour = a;
                 }
-                SaveGame.Print(a, _menuItem[i], row, 2);
+                SaveGame.Screen.Print(a, _menuItem[i], row, 2);
             }
-            SaveGame.Print(descColour, desc, 25, 33);
+            SaveGame.Screen.Print(descColour, desc, 25, 33);
         }
 
         private string StripDownName(string name)
@@ -1060,7 +1059,7 @@ namespace AngbandOS
             while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
-                SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
                     char c = SaveGame.Inkey();
@@ -1102,7 +1101,7 @@ namespace AngbandOS
             while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
-                SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
                     char c = SaveGame.Inkey();
@@ -1159,7 +1158,7 @@ namespace AngbandOS
             while (true && !SaveGame.Shutdown)
             {
                 MenuDisplay(menu);
-                SaveGame.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+                SaveGame.Screen.Print(Colour.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
                 while (true)
                 {
                     char c = SaveGame.Inkey();

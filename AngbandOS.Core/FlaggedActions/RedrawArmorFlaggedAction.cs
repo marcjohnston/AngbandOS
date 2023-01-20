@@ -8,9 +8,9 @@
         public RedrawArmorFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            SaveGame.Print("Cur AC ", RowAc, ColAc);
+            SaveGame.Screen.Print("Cur AC ", RowAc, ColAc);
             string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
-            SaveGame.Print(Colour.BrightGreen, tmp, RowAc, ColAc + 7);
+            SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowAc, ColAc + 7);
         }
     }
 }

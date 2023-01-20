@@ -229,7 +229,7 @@ namespace AngbandOS
         {
             if (command != null)
             {
-                SaveGame.PrintLine($" {command.Key}) {command.Description}.", row, col);
+                SaveGame.Screen.PrintLine($" {command.Key}) {command.Description}.", row, col);
             }
         }
 
@@ -240,16 +240,16 @@ namespace AngbandOS
             _leaveStore = false;
             while (!_leaveStore)
             {
-                SaveGame.PrintLine("", 1, 0);
+                SaveGame.Screen.PrintLine("", 1, 0);
                 int tmpCha = SaveGame.Player.AbilityScores[Ability.Charisma].Adjusted;
-                SaveGame.Clear(41);
-                SaveGame.PrintLine(" ESC) Exit from Building.", 42, 0);
+                SaveGame.Screen.Clear(41);
+                SaveGame.Screen.PrintLine(" ESC) Exit from Building.", 42, 0);
                 RenderAdvertisedCommand(AdvertisedStoreCommand1, 42, 31);
                 RenderAdvertisedCommand(AdvertisedStoreCommand2, 43, 31);
                 RenderAdvertisedCommand(AdvertisedStoreCommand3, 42, 56);
                 RenderAdvertisedCommand(AdvertisedStoreCommand5, 43, 0); // This needs to be before #4 to not erase it.
                 RenderAdvertisedCommand(AdvertisedStoreCommand4, 43, 56);
-                SaveGame.Print("You may: ", 41, 0);
+                SaveGame.Screen.Print("You may: ", 41, 0);
                 SaveGame.RequestCommand(true);
                 StoreProcessCommand();
                 SaveGame.FullScreenOverlay = true;
@@ -297,7 +297,7 @@ namespace AngbandOS
             SaveGame.QueuedCommand = '\0';
             SaveGame.ViewingItemList = false;
             SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
-            SaveGame.Clear();// TODO: This is a PrWipeRedrawAction
+            SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction
             SaveGame.SetBackground(BackgroundImage.Overhead);
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.UpdateViewFlaggedAction.Set();
@@ -408,19 +408,19 @@ namespace AngbandOS
             Item oPtr = _inventory[pos];
             int i = pos % PageSize;
             string outVal = $"{i.IndexToLetter()}) ";
-            SaveGame.PrintLine(outVal, i + 6, 0);
+            SaveGame.Screen.PrintLine(outVal, i + 6, 0);
             Colour a = oPtr.BaseItemCategory.FlavorColour;
             char c = oPtr.BaseItemCategory.FlavorCharacter;
-            SaveGame.Place(a, c, i + 6, 3);
+            SaveGame.Screen.Print(a, c.ToString(), i + 6, 3);
             oName = GetItemDescription(oPtr);
             if (maxwid < oName.Length)
             {
                 oName = oName.Substring(0, maxwid);
             }
-            SaveGame.Print(oPtr.BaseItemCategory.Colour, oName, i + 6, 5);
+            SaveGame.Screen.Print(oPtr.BaseItemCategory.Colour, oName, i + 6, 5);
             int wgt = oPtr.Weight;
             outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
-            SaveGame.Print(outVal, i + 6, 61);
+            SaveGame.Screen.Print(outVal, i + 6, 61);
 
             if (ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
             {
@@ -429,14 +429,14 @@ namespace AngbandOS
                 {
                     x = PriceItem(oPtr, _owner.MinInflate, false);
                     outVal = $"{x,9} F";
-                    SaveGame.Print(outVal, i + 6, 68);
+                    SaveGame.Screen.Print(outVal, i + 6, 68);
                 }
                 else
                 {
                     x = PriceItem(oPtr, _owner.MinInflate, false);
                     x += x / 10;
                     outVal = $"{x,9}  ";
-                    SaveGame.Print(outVal, i + 6, 68);
+                    SaveGame.Screen.Print(outVal, i + 6, 68);
                 }
             }
         }
@@ -454,16 +454,16 @@ namespace AngbandOS
             }
             for (int i = k; i <= PageSize; i++)
             {
-                SaveGame.PrintLine("", i + 6, 0);
+                SaveGame.Screen.PrintLine("", i + 6, 0);
             }
-            SaveGame.Print(new String(' ', _inventory.Count.ToString().Length * 2 + 11), 5, 20);
+            SaveGame.Screen.Print(new String(' ', _inventory.Count.ToString().Length * 2 + 11), 5, 20);
             if (_storeTop + PageSize < _inventory.Count)
             {
-                SaveGame.PrintLine("-more-", k + 6, 3);
+                SaveGame.Screen.PrintLine("-more-", k + 6, 3);
             }
             if (_inventory.Count > PageSize)
             {
-                SaveGame.Print($"(Page {(_storeTop / PageSize) + 1} of {(_inventory.Count / PageSize) + 1})", 5, 20);
+                SaveGame.Screen.Print($"(Page {(_storeTop / PageSize) + 1} of {(_inventory.Count / PageSize) + 1})", 5, 20);
             }
         }
 
@@ -501,31 +501,31 @@ namespace AngbandOS
 
         private void DisplayStore()
         {
-            SaveGame.Clear();
+            SaveGame.Screen.Clear();
             SaveGame.SetBackground(BackgroundImage.Normal);
             string ownerName = OwnerName;
             if (String.IsNullOrEmpty(ownerName))
             {
-                SaveGame.PrintLine(Title, 3, 30);
+                SaveGame.Screen.PrintLine(Title, 3, 30);
             }
             else
             {
-                SaveGame.Print(OwnerName, 3, 10);
-                SaveGame.PrintLine(Title, 3, 50);
+                SaveGame.Screen.Print(OwnerName, 3, 10);
+                SaveGame.Screen.PrintLine(Title, 3, 50);
             }
 
             if (ShowInventoryDisplayType != StoreInventoryDisplayTypeEnum.DoNotShowInventory)
             {
-                SaveGame.Print("Item Description", 5, 3);
+                SaveGame.Screen.Print("Item Description", 5, 3);
             }
             if (ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
             {
-                SaveGame.Print("Weight", 5, 60);
-                SaveGame.Print("Price", 5, 72);
+                SaveGame.Screen.Print("Weight", 5, 60);
+                SaveGame.Screen.Print("Price", 5, 72);
             }
             else if (ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithoutPrice)
             {
-                SaveGame.Print("Weight", 5, 70);
+                SaveGame.Screen.Print("Weight", 5, 70);
             }
             StorePrtGold();
             DisplayInventory();
@@ -543,81 +543,92 @@ namespace AngbandOS
                     spells[num++] = spell;
                 }
             }
-            SaveGame.SaveScreen();
+            Screen savedScreen = SaveGame.Screen.Clone();
             SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.BaseItemCategory.SpellBookToToRealm);
-            SaveGame.PrintLine("", 0, 0);
-            SaveGame.Print("[Press any key to continue]", 0, 23);
+            SaveGame.Screen.PrintLine("", 0, 0);
+            SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
             SaveGame.Inkey();
-            SaveGame.Load();
+            SaveGame.Screen.Restore(savedScreen);
         }
 
         private Town GetEscortDestination(Dictionary<char, Town> towns)
         {
-            SaveGame.SaveScreen();
-            var keys = towns.Keys.ToList();
-            keys.Sort();
-            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
-            for (int i = 0; i < keys.Count; i++)
+            Screen savedScreen = SaveGame.Screen.Clone();
+            try
             {
-                SaveGame.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
-            }
-            SaveGame.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
-            while (SaveGame.GetCom(outVal, out char choice))
-            {
-                choice = choice.ToString().ToUpper()[0];
-                foreach (var c in keys)
+                var keys = towns.Keys.ToList();
+                keys.Sort();
+                string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
+                for (int i = 0; i < keys.Count; i++)
                 {
-                    if (choice == c)
+                    SaveGame.Screen.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
+                }
+                SaveGame.Screen.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
+                while (SaveGame.GetCom(outVal, out char choice))
+                {
+                    choice = choice.ToString().ToUpper()[0];
+                    foreach (var c in keys)
                     {
-                        SaveGame.Load();
-                        return towns[c];
+                        if (choice == c)
+                        {
+                            return towns[c];
+                        }
                     }
                 }
             }
-            SaveGame.Load();
+            finally
+            {
+                SaveGame.Screen.Restore(savedScreen);
+            }
             return null;
         }
 
         private GodName GetSacrificeTarget()
         {
-            SaveGame.SaveScreen();
-            var deities = SaveGame.Player.Religion.GetAllDeities();
-            var names = new List<string>();
-            var keys = new List<char>();
-            foreach (var deity in deities)
+            Screen savedScreen = SaveGame.Screen.Clone();
+            try
             {
-                names.Add(deity.LongName);
-                keys.Add(deity.LongName[0]);
-            }
-            names.Sort();
-            keys.Sort();
-            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
-            for (int i = 0; i < keys.Count; i++)
-            {
-                SaveGame.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
-            }
-            SaveGame.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
-            while (SaveGame.GetCom(outVal, out char choice))
-            {
-                choice = choice.ToString().ToUpper()[0];
-                foreach (var c in keys)
+                var deities = SaveGame.Player.Religion.GetAllDeities();
+                var names = new List<string>();
+                var keys = new List<char>();
+                foreach (var deity in deities)
                 {
-                    if (choice == c)
+                    names.Add(deity.LongName);
+                    keys.Add(deity.LongName[0]);
+                }
+                names.Sort();
+                keys.Sort();
+                string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    SaveGame.Screen.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
+                }
+                SaveGame.Screen.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
+                while (SaveGame.GetCom(outVal, out char choice))
+                {
+                    choice = choice.ToString().ToUpper()[0];
+                    foreach (var c in keys)
                     {
-                        foreach (var deity in deities)
+                        if (choice == c)
                         {
-                            if (deity.ShortName.StartsWith(choice.ToString()))
+                            foreach (var deity in deities)
                             {
-                                SaveGame.Load();
-                                return deity.Name;
+                                if (deity.ShortName.StartsWith(choice.ToString()))
+                                {
+                                    return deity.Name;
+                                }
                             }
+                            return GodName.None;
                         }
-                        return GodName.None;
                     }
                 }
+                return GodName.None;
+
             }
-            SaveGame.Load();
-            return GodName.None;
+            finally
+            {
+                SaveGame.Screen.Restore(savedScreen);
+            }
         }
 
         private bool GetStock(out int comVal, string pmt, int i, int j)
@@ -635,7 +646,7 @@ namespace AngbandOS
                     break;
                 }
             }
-            SaveGame.PrintLine("", 0, 0);
+            SaveGame.Screen.PrintLine("", 0, 0);
             return command != '\x1b';
         }
 
@@ -899,7 +910,7 @@ namespace AngbandOS
             finalAsk *= oPtr.Count;
             price = finalAsk;
             string outVal = $"{pmt} :  {finalAsk}";
-            SaveGame.Print(outVal, 1, 0);
+            SaveGame.Screen.Print(outVal, 1, 0);
             return !SaveGame.GetCheck("Accept deal? ");
         }
 
@@ -1069,7 +1080,7 @@ namespace AngbandOS
             finalAsk *= oPtr.Count;
             price = finalAsk;
             string outVal = $"{pmt} :  {finalAsk}";
-            SaveGame.Print(outVal, 1, 0);
+            SaveGame.Screen.Print(outVal, 1, 0);
             return !SaveGame.GetCheck("Accept deal? ");
         }
 
@@ -1082,7 +1093,7 @@ namespace AngbandOS
             price = finalAsk;
             const string pmt = "Final Offer";
             string outVal = $"{pmt} :  {finalAsk}";
-            SaveGame.Print(outVal, 1, 0);
+            SaveGame.Screen.Print(outVal, 1, 0);
             return !SaveGame.GetCheck("Accept deal? ");
         }
 
@@ -1772,9 +1783,9 @@ namespace AngbandOS
 
         protected void StorePrtGold()
         {
-            SaveGame.PrintLine("Gold Remaining: ", 39, 53);
+            SaveGame.Screen.PrintLine("Gold Remaining: ", 39, 53);
             string outVal = $"{SaveGame.Player.Gold,9}";
-            SaveGame.PrintLine(outVal, 39, 68);
+            SaveGame.Screen.PrintLine(outVal, 39, 68);
         }
 
         protected virtual string NoStockMessage => "I am currently out of stock.";

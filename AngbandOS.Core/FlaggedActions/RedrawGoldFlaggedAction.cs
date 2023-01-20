@@ -9,9 +9,9 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawGoldFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            SaveGame.Print("GP ", RowGold, ColGold);
+            SaveGame.Screen.Print("GP ", RowGold, ColGold);
             string tmp = SaveGame.Player.Gold.ToString().PadLeft(9);
-            SaveGame.Print(Colour.BrightGreen, tmp, RowGold, ColGold + 3);
+            SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowGold, ColGold + 3);
         }
     }
 }

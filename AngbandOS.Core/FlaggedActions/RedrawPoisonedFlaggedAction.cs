@@ -11,11 +11,11 @@ namespace AngbandOS.Core.FlaggedActions
         {
             if (SaveGame.Player.TimedPoison.TimeRemaining > 0)
             {
-                SaveGame.Print(Colour.Orange, "Poisoned", RowPoisoned, ColPoisoned);
+                SaveGame.Screen.Print(Colour.Orange, "Poisoned", RowPoisoned, ColPoisoned);
             }
             else
             {
-                SaveGame.Print("        ", RowPoisoned, ColPoisoned);
+                SaveGame.Screen.Print("        ", RowPoisoned, ColPoisoned);
             }
         }
     }

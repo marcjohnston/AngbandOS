@@ -203,13 +203,13 @@
 
         public void DoCmdWizMode(SaveGame saveGame)
         {
-            saveGame.PrintLine("Enter Wizard Code: ", 0, 0);
+            saveGame.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
             if (!saveGame.AskforAux(out string tmp, "", 31))
             {
-                saveGame.Erase(0, 0, 255);
+                saveGame.Screen.Erase(0, 0);
                 return;
             }
-            saveGame.Erase(0, 0, 255);
+            saveGame.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {
                 saveGame.Player.IsWizard = true;
@@ -221,38 +221,43 @@
         private void DoCmdWizActivatePower(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.SaveScreen();
-            saveGame.SetBackground(BackgroundImage.Normal);
-
-            saveGame.Clear();
-            int index = 0;
-            foreach (ActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+            Screen savedScreen = saveGame.Screen.Clone();
+            try
             {
-                int row = 2 + (index % 40);
-                int col = 30 * (index / 40);
-                saveGame.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
-                index++;
-            }
-            if (!saveGame.GetString("Activation power?", out string selection, "", 3))
-            {
-                return;
-            }
+                saveGame.SetBackground(BackgroundImage.Normal);
 
-            saveGame.Load();
-            saveGame.FullScreenOverlay = false;
-            saveGame.SetBackground(BackgroundImage.Overhead);
+                saveGame.Screen.Clear();
+                int index = 0;
+                foreach (ActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+                {
+                    int row = 2 + (index % 40);
+                    int col = 30 * (index / 40);
+                    saveGame.Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                    index++;
+                }
+                if (!saveGame.GetString("Activation power?", out string selection, "", 3))
+                {
+                    return;
+                }
 
-            if (!Int32.TryParse(selection, out int selectedIndex))
-            {
-                return;
-            }
-            selectedIndex--;
-            if (selectedIndex < 0 || selectedIndex > ActivationPowerManager.ActivationPowers.Length)
-            {
-                return;
-            }
+                if (!Int32.TryParse(selection, out int selectedIndex))
+                {
+                    return;
+                }
+                selectedIndex--;
+                if (selectedIndex < 0 || selectedIndex > ActivationPowerManager.ActivationPowers.Length)
+                {
+                    return;
+                }
 
-            ActivationPowerManager.ActivationPowers[selectedIndex].Activate(saveGame);
+                ActivationPowerManager.ActivationPowers[selectedIndex].Activate(saveGame);
+            }
+            finally
+            {
+                saveGame.Screen.Restore(savedScreen);
+                saveGame.FullScreenOverlay = false;
+                saveGame.SetBackground(BackgroundImage.Overhead);
+            }
         }
 
         private void DoCmdRedraw(SaveGame saveGame)
@@ -274,7 +279,8 @@
             saveGame.PrBasicRedrawAction.Set();
             saveGame.RedrawAllFlaggedAction.Set(); // TODO: Special case ... should be some form of invalidateclient
             saveGame.HandleStuff();
-            saveGame.Redraw();
+            saveGame.Screen.TotalErase = true;
+            saveGame.UpdateScreen();
         }
 
         private void DoCmdSummonHorde(SaveGame saveGame)
@@ -412,56 +418,62 @@
         private void DoCmdWizHelp(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.SaveScreen();
-            saveGame.UpdateScreen();
-            saveGame.Clear();
-            saveGame.SetBackground(BackgroundImage.Normal);
-            saveGame.Print(Colour.Red, "Wizard Commands", 1, 31);
-            saveGame.Print(Colour.Red, "===============", 2, 31);
-            saveGame.Print(Colour.Red, "Character Editing", 4, 1);
-            saveGame.Print(Colour.Red, "=================", 5, 1);
-            saveGame.Print("a = Cure All", 7, 1);
-            saveGame.Print("e = Edit Stats", 8, 1);
-            saveGame.Print("h = Reroll Hitpoints", 9, 1);
-            saveGame.Print("k = Self Knowledge", 10, 1);
-            saveGame.Print("M = Gain Mutation", 11, 1);
-            saveGame.Print("r = Gain Level Reward", 12, 1);
-            saveGame.Print("x = Gain Experience", 13, 1);
-            saveGame.Print(Colour.Red, "Movement", 15, 1);
-            saveGame.Print(Colour.Red, "========", 16, 1);
-            saveGame.Print("b = Teleport to Target", 18, 1);
-            saveGame.Print("j = Jump Levels", 19, 1);
-            saveGame.Print("p = Phase Door", 20, 1);
-            saveGame.Print("t = Teleport", 21, 1);
-            saveGame.Print(Colour.Red, "Monsters", 4, 26);
-            saveGame.Print(Colour.Red, "========", 5, 26);
-            saveGame.Print("s = Summon Monster", 7, 26);
-            saveGame.Print("n = Summon Named Monster", 8, 26);
-            saveGame.Print("N = Summon Named Pet", 9, 26);
-            saveGame.Print("H = Summon Horde", 10, 26);
-            saveGame.Print("Z = Carnage True", 11, 26);
-            saveGame.Print("z = Zap (Wizard Bolt)", 12, 26);
-            saveGame.Print(Colour.Red, "General Commands", 14, 26);
-            saveGame.Print(Colour.Red, "================", 15, 26);
-            saveGame.Print("\" = Generate spoilers", 17, 26);
-            saveGame.Print("d = Detect All", 18, 26);
-            saveGame.Print("m = Map Area", 19, 26);
-            saveGame.Print("w = Wizard Light", 20, 26);
-            saveGame.Print(Colour.Red, "Object Commands", 4, 51);
-            saveGame.Print(Colour.Red, "===============", 5, 51);
-            saveGame.Print("c = Create Item", 7, 51);
-            saveGame.Print("C = Create Named artifact", 8, 51);
-            saveGame.Print("f = Identify Fully", 9, 51);
-            saveGame.Print("g = Generate Good Object", 10, 51);
-            saveGame.Print("i = Identify Pack", 11, 51);
-            saveGame.Print("l = Learn About Objects", 12, 51);
-            saveGame.Print("o = Object Editor", 13, 51);
-            saveGame.Print("v = Generate Very Good Object", 14, 51);
-            saveGame.Print("Hit any key to continue", 43, 23);
-            saveGame.Inkey();
-            saveGame.Load();
-            saveGame.SetBackground(BackgroundImage.Overhead);
-            saveGame.FullScreenOverlay = false;
+            Screen savedScreen = saveGame.Screen.Clone();
+            try
+            {
+                saveGame.UpdateScreen();
+                saveGame.Screen.Clear();
+                saveGame.SetBackground(BackgroundImage.Normal);
+                saveGame.Screen.Print(Colour.Red, "Wizard Commands", 1, 31);
+                saveGame.Screen.Print(Colour.Red, "===============", 2, 31);
+                saveGame.Screen.Print(Colour.Red, "Character Editing", 4, 1);
+                saveGame.Screen.Print(Colour.Red, "=================", 5, 1);
+                saveGame.Screen.Print("a = Cure All", 7, 1);
+                saveGame.Screen.Print("e = Edit Stats", 8, 1);
+                saveGame.Screen.Print("h = Reroll Hitpoints", 9, 1);
+                saveGame.Screen.Print("k = Self Knowledge", 10, 1);
+                saveGame.Screen.Print("M = Gain Mutation", 11, 1);
+                saveGame.Screen.Print("r = Gain Level Reward", 12, 1);
+                saveGame.Screen.Print("x = Gain Experience", 13, 1);
+                saveGame.Screen.Print(Colour.Red, "Movement", 15, 1);
+                saveGame.Screen.Print(Colour.Red, "========", 16, 1);
+                saveGame.Screen.Print("b = Teleport to Target", 18, 1);
+                saveGame.Screen.Print("j = Jump Levels", 19, 1);
+                saveGame.Screen.Print("p = Phase Door", 20, 1);
+                saveGame.Screen.Print("t = Teleport", 21, 1);
+                saveGame.Screen.Print(Colour.Red, "Monsters", 4, 26);
+                saveGame.Screen.Print(Colour.Red, "========", 5, 26);
+                saveGame.Screen.Print("s = Summon Monster", 7, 26);
+                saveGame.Screen.Print("n = Summon Named Monster", 8, 26);
+                saveGame.Screen.Print("N = Summon Named Pet", 9, 26);
+                saveGame.Screen.Print("H = Summon Horde", 10, 26);
+                saveGame.Screen.Print("Z = Carnage True", 11, 26);
+                saveGame.Screen.Print("z = Zap (Wizard Bolt)", 12, 26);
+                saveGame.Screen.Print(Colour.Red, "General Commands", 14, 26);
+                saveGame.Screen.Print(Colour.Red, "================", 15, 26);
+                saveGame.Screen.Print("\" = Generate spoilers", 17, 26);
+                saveGame.Screen.Print("d = Detect All", 18, 26);
+                saveGame.Screen.Print("m = Map Area", 19, 26);
+                saveGame.Screen.Print("w = Wizard Light", 20, 26);
+                saveGame.Screen.Print(Colour.Red, "Object Commands", 4, 51);
+                saveGame.Screen.Print(Colour.Red, "===============", 5, 51);
+                saveGame.Screen.Print("c = Create Item", 7, 51);
+                saveGame.Screen.Print("C = Create Named artifact", 8, 51);
+                saveGame.Screen.Print("f = Identify Fully", 9, 51);
+                saveGame.Screen.Print("g = Generate Good Object", 10, 51);
+                saveGame.Screen.Print("i = Identify Pack", 11, 51);
+                saveGame.Screen.Print("l = Learn About Objects", 12, 51);
+                saveGame.Screen.Print("o = Object Editor", 13, 51);
+                saveGame.Screen.Print("v = Generate Very Good Object", 14, 51);
+                saveGame.Screen.Print("Hit any key to continue", 43, 23);
+                saveGame.Inkey();
+            }
+            finally
+            {
+                saveGame.Screen.Restore(savedScreen);
+                saveGame.SetBackground(BackgroundImage.Overhead);
+                saveGame.FullScreenOverlay = false;
+            }
         }
 
         private void DoCmdWizJump(SaveGame saveGame)
@@ -554,59 +566,64 @@
                 return;
             }
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
-            bool changed;
+            bool changed = false;
             saveGame.FullScreenOverlay = true;
-            saveGame.SaveScreen();
-            Item qPtr = oPtr.Clone();
-            while (true)
+            Screen savedScreen = saveGame.Screen.Clone();
+            try
             {
-                WizDisplayItem(saveGame, qPtr);
-                if (!saveGame.GetCom("[a]ccept [s]tatistics [r]eroll [t]weak [q]uantity? ", out char ch))
+                Item qPtr = oPtr.Clone();
+                while (true)
                 {
-                    changed = false;
-                    break;
-                }
-                if (ch == 'A' || ch == 'a')
-                {
-                    changed = true;
-                    break;
-                }
-                if (ch == 's' || ch == 'S')
-                {
-                    WizStatistics(saveGame, qPtr);
-                }
-                if (ch == 'r' || ch == 'r')
-                {
-                    qPtr = WizRerollItem(saveGame, qPtr);
-                }
-                if (ch == 't' || ch == 'T')
-                {
-                    WizTweakItem(saveGame, qPtr);
-                }
-                if (ch == 'q' || ch == 'Q')
-                {
-                    WizQuantityItem(saveGame, qPtr);
+                    WizDisplayItem(saveGame, qPtr);
+                    if (!saveGame.GetCom("[a]ccept [s]tatistics [r]eroll [t]weak [q]uantity? ", out char ch))
+                    {
+                        break;
+                    }
+                    if (ch == 'A' || ch == 'a')
+                    {
+                        if (item >= 0)
+                        {
+                            saveGame.Player.Inventory[item] = qPtr;
+                        }
+                        else
+                        {
+                            saveGame.Level.Items[0 - item] = qPtr;
+                        }
+                        saveGame.UpdateBonusesFlaggedAction.Set();
+                        saveGame.NoticeCombineAndReorderFlaggedAction.Set();
+                        changed = true;
+                        break;
+                    }
+                    if (ch == 's' || ch == 'S')
+                    {
+                        WizStatistics(saveGame, qPtr);
+                    }
+                    if (ch == 'r' || ch == 'r')
+                    {
+                        qPtr = WizRerollItem(saveGame, qPtr);
+                    }
+                    if (ch == 't' || ch == 'T')
+                    {
+                        WizTweakItem(saveGame, qPtr);
+                    }
+                    if (ch == 'q' || ch == 'Q')
+                    {
+                        WizQuantityItem(saveGame, qPtr);
+                    }
                 }
             }
-            saveGame.Load();
-            saveGame.FullScreenOverlay = false;
-            if (changed)
+            finally
             {
-                saveGame.MsgPrint("Changes accepted.");
-                if (item >= 0)
+                saveGame.Screen.Restore(savedScreen);
+                saveGame.FullScreenOverlay = false;
+                if (changed)
                 {
-                    saveGame.Player.Inventory[item] = qPtr;
+                    saveGame.MsgPrint("Changes accepted.");
                 }
                 else
                 {
-                    saveGame.Level.Items[0 - item] = qPtr;
+                    saveGame.MsgPrint("Changes ignored.");
                 }
-                saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.NoticeCombineAndReorderFlaggedAction.Set();
-            }
-            else
-            {
-                saveGame.MsgPrint("Changes ignored.");
             }
         }
 
@@ -638,21 +655,21 @@
         {
             if (isSet)
             {
-                saveGame.Print(Colour.Blue, '*', row, col);
+                saveGame.Screen.Print(Colour.Blue, '*', row, col);
             }
             else
             {
-                saveGame.Print(Colour.White, '-', row, col);
+                saveGame.Screen.Print(Colour.White, '-', row, col);
             }
         }
 
         private void WizCreateItem(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            saveGame.SaveScreen();
+            Screen savedScreen = saveGame.Screen.Clone();
             saveGame.SetBackground(BackgroundImage.Normal);
             int kIdx = WizCreateItemtype(saveGame);
-            saveGame.Load();
+            saveGame.Screen.Restore(savedScreen);
             saveGame.FullScreenOverlay = false;
             saveGame.SetBackground(BackgroundImage.Overhead);
             if (kIdx == 0)
@@ -664,6 +681,7 @@
             qPtr.ApplyMagic(saveGame.Difficulty, false, false, false);
             saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
             saveGame.MsgPrint("Allocated.");
+
         }
 
         private int WizCreateItemtype(SaveGame saveGame)
@@ -672,13 +690,13 @@
             int col, row;
             char ch;
             int[] choice = new int[60];
-            saveGame.Clear();
+            saveGame.Screen.Clear();
             for (num = 0; num < 60 && TvalDescriptionPair.Tvals[num].Tval != 0; num++)
             {
                 row = 2 + (num % 20);
                 col = 30 * (num / 20);
                 ch = (char)(_head[num / 20] + (char)(num % 20));
-                saveGame.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
+                saveGame.Screen.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
             }
             int maxNum = num;
             if (!saveGame.GetCom("Get what type of object? ", out ch))
@@ -704,7 +722,7 @@
             }
             ItemTypeEnum tval = TvalDescriptionPair.Tvals[num].Tval;
             string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
-            saveGame.Clear();
+            saveGame.Screen.Clear();
             const int maxLetters = 26;
             const int maxNumbers = 10;
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
@@ -718,7 +736,7 @@
                     ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
                     string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", "");
 
-                    saveGame.PrintLine($"[{ch}] {itemName}", row, col);
+                    saveGame.Screen.PrintLine($"[{ch}] {itemName}", row, col);
                     choice[num++] = i;
                 }
             }
@@ -789,23 +807,23 @@
             oPtr.RefreshFlagBasedProperties();
             for (int i = 1; i <= 23; i++)
             {
-                saveGame.PrintLine("", i, j - 2);
+                saveGame.Screen.PrintLine("", i, j - 2);
             }
             string buf = oPtr.StoreDescription(true, 3);
-            saveGame.PrintLine(buf, 2, j);
-            saveGame.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
-            saveGame.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
-            saveGame.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
-            saveGame.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
-            saveGame.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
-            saveGame.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
-            saveGame.PrintLine($"IdentCursed = {oPtr.IdentCursed} IdentBroken = {oPtr.IdentBroken} timeout = {oPtr.RechargeTimeLeft}", 8, j);
-            saveGame.PrintLine("+------------FLAGS1------------+", 10, j);
-            saveGame.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
-            saveGame.PrintLine("              cvae      xsqpaefc", 12, j);
-            saveGame.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
-            saveGame.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
-            saveGame.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
+            saveGame.Screen.PrintLine(buf, 2, j);
+            saveGame.Screen.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            saveGame.Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
+            saveGame.Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
+            saveGame.Screen.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
+            saveGame.Screen.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
+            saveGame.Screen.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
+            saveGame.Screen.PrintLine($"IdentCursed = {oPtr.IdentCursed} IdentBroken = {oPtr.IdentBroken} timeout = {oPtr.RechargeTimeLeft}", 8, j);
+            saveGame.Screen.PrintLine("+------------FLAGS1------------+", 10, j);
+            saveGame.Screen.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
+            saveGame.Screen.PrintLine("              cvae      xsqpaefc", 12, j);
+            saveGame.Screen.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
+            saveGame.Screen.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
+            saveGame.Screen.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
 
             PrtBinary(saveGame, oPtr.Characteristics.Str, 16, j + 0);
             PrtBinary(saveGame, oPtr.Characteristics.Int, 16, j + 1);
@@ -846,12 +864,12 @@
             PrtBinary(saveGame, oPtr.Characteristics.BrandFire, 16, j + 30);
             PrtBinary(saveGame, oPtr.Characteristics.BrandCold, 16, j + 31);
 
-            saveGame.PrintLine("+------------FLAGS2------------+", 17, j);
-            saveGame.PrintLine("SUST....IMMUN.RESIST............", 18, j);
-            saveGame.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
-            saveGame.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
-            saveGame.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
-            saveGame.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
+            saveGame.Screen.PrintLine("+------------FLAGS2------------+", 17, j);
+            saveGame.Screen.PrintLine("SUST....IMMUN.RESIST............", 18, j);
+            saveGame.Screen.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
+            saveGame.Screen.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
+            saveGame.Screen.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
+            saveGame.Screen.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
 
             PrtBinary(saveGame, oPtr.Characteristics.SustStr, 23, j + 0);
             PrtBinary(saveGame, oPtr.Characteristics.SustInt, 23, j + 1);
@@ -892,15 +910,15 @@
             PrtBinary(saveGame, oPtr.Characteristics.ResChaos, 23, j + 30);
             PrtBinary(saveGame, oPtr.Characteristics.ResDisen, 23, j + 31);
 
-            saveGame.PrintLine("+------------FLAGS3------------+", 10, j + 32);
-            saveGame.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
-            saveGame.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
-            saveGame.PrintLine("re  nowysdose eld   nnnntalrl ym", 13, j + 32);
-            saveGame.PrintLine("ec  omrcyewta ieirmsrrrriieaeccc", 14, j + 32);
-            saveGame.PrintLine("aa  taauktmatlnpgeihaefcvnpvsuuu", 15, j + 32);
-            saveGame.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
-            saveGame.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
-            saveGame.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
+            saveGame.Screen.PrintLine("+------------FLAGS3------------+", 10, j + 32);
+            saveGame.Screen.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
+            saveGame.Screen.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
+            saveGame.Screen.PrintLine("re  nowysdose eld   nnnntalrl ym", 13, j + 32);
+            saveGame.Screen.PrintLine("ec  omrcyewta ieirmsrrrriieaeccc", 14, j + 32);
+            saveGame.Screen.PrintLine("aa  taauktmatlnpgeihaefcvnpvsuuu", 15, j + 32);
+            saveGame.Screen.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
+            saveGame.Screen.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
+            saveGame.Screen.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
 
             PrtBinary(saveGame, oPtr.Characteristics.ShFire, 19, j + 32 + 0);
             PrtBinary(saveGame, oPtr.Characteristics.ShElec, 19, j + 32 + 1);
@@ -1071,7 +1089,7 @@
                         {
                             break;
                         }
-                        saveGame.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
+                        saveGame.Screen.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
                         saveGame.UpdateScreen();
                     }
                     Item qPtr = new Item(saveGame);

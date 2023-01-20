@@ -13,7 +13,7 @@
         public override bool Execute() // TODO: Why can't this command take in a count?
         {
             SaveGame.DoCmdRest();
-            return false;
+            return true; // Do not disturb our rest.
         }
     }
 }

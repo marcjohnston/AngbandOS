@@ -55,7 +55,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 text = "          ";
             }
-            SaveGame.Print(attr, text, RowState, ColState);
+            SaveGame.Screen.Print(attr, text, RowState, ColState);
         }
     }
 }
