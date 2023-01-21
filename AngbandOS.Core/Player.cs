@@ -910,7 +910,7 @@ namespace AngbandOS
             }
             Name = Name.PadRight(12);
             SaveGame.Screen.Print(Colour.Brown, Name, 2, col);
-            SaveGame.Screen.Clear(22);
+            //SaveGame.Screen.Clear(22);
         }
 
         public void LoseExperience(int amount)
