@@ -13053,25 +13053,24 @@ namespace AngbandOS
             char i = '\0';
             int k = 0;
             bool done = false;
-            int x = Screen.Cx;
-            int y = Screen.Cy;
+            GridCoordinate cursorPosition = Screen.CursorPosition;
             if (len < 1)
             {
                 len = 1;
             }
-            if (x < 0 || x >= Constants.ConsoleWidth)
+            if (cursorPosition.X < 0 || cursorPosition.X >= Constants.ConsoleWidth)
             {
-                x = 0;
+                cursorPosition = new GridCoordinate(0, cursorPosition.Y);
             }
-            if (x + len > Constants.ConsoleWidth)
+            if (cursorPosition.X + len > Constants.ConsoleWidth)
             {
-                len = Constants.ConsoleWidth - x;
+                len = Constants.ConsoleWidth - cursorPosition.X;
             }
-            Screen.Erase(y, x, len);
-            Screen.Print(Colour.Grey, buf, y, x);
+            Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+            Screen.Print(Colour.Grey, buf, cursorPosition.Y, cursorPosition.X);
             while (!done && !Shutdown)
             {
-                Screen.Goto(y, x + k);
+                Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
                 i = Inkey();
                 switch (i)
                 {
@@ -13102,8 +13101,8 @@ namespace AngbandOS
                         }
                         break;
                 }
-                Screen.Erase(y, x, len);
-                Screen.Print(Colour.Black, buf, y, x);
+                Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+                Screen.Print(Colour.Black, buf, cursorPosition.Y, cursorPosition.X);
             }
             return i != '\x1b';
         }

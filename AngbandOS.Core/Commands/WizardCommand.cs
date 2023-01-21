@@ -118,6 +118,10 @@
                     saveGame.Player.Dna.GainMutation(saveGame);
                     break;
 
+                case 'R':
+                    DoCmdRedraw(saveGame);
+                    break;
+
                 case 'r':
                     saveGame.Player.GainLevelReward();
                     break;
@@ -262,6 +266,7 @@
 
         private void DoCmdRedraw(SaveGame saveGame)
         {
+            saveGame.Screen.Clear();
             saveGame.NoticeCombineAndReorderFlaggedAction.Set();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
             saveGame.UpdateHealthFlaggedAction.Set();
@@ -279,7 +284,6 @@
             saveGame.PrBasicRedrawAction.Set();
             saveGame.RedrawAllFlaggedAction.Set(); // TODO: Special case ... should be some form of invalidateclient
             saveGame.HandleStuff();
-            saveGame.Screen.TotalErase = true;
             saveGame.UpdateScreen();
         }
 
