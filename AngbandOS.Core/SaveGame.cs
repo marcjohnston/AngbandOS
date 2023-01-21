@@ -1151,7 +1151,7 @@ namespace AngbandOS
                             }
                             else
                             {
-                                Screen.Restore(savedScreen.Value);
+                                Screen.Restore(savedScreen);
                                 ViewingItemList = false;
                             }
                             break;
@@ -1164,7 +1164,7 @@ namespace AngbandOS
                             }
                             if (ViewingItemList)
                             {
-                                Screen.Restore(savedScreen.Value);
+                                Screen.Restore(savedScreen);
                             }
                             ViewingEquipment = !ViewingEquipment;
                             break;
@@ -1238,7 +1238,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen.Value);
+                Screen.Restore(savedScreen);
             }
             ViewingItemList = false;
             Screen.PrintLine("", 0, 0);
@@ -8823,7 +8823,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen.Value);
+                        Screen.Restore(savedScreen);
                         savedScreen = null;
                     }
                     continue;
@@ -8857,7 +8857,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen.Value);
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {
@@ -9895,7 +9895,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen.Value);
+                        Screen.Restore(savedScreen);
                         savedScreen = null;
                     }
                     continue;
@@ -9926,7 +9926,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen.Value);
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {
@@ -11700,7 +11700,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen.Value);
+                        Screen.Restore(savedScreen);
                         savedScreen = null;
                     }
                     continue;
@@ -11727,7 +11727,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen.Value);
+                Screen.Restore(savedScreen);
             }
             if (!flag)
             {

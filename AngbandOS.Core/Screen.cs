@@ -11,7 +11,14 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Screen
     {
+        /// <summary>
+        /// Represents the active screen display.
+        /// </summary>
         private ScreenBuffer ActiveScreen;
+
+        /// <summary>
+        /// Represents the screen that was last emitted to the console.  This acts as the double buffer.
+        /// </summary>
         private ScreenBuffer OldScreen;
 
         /// <summary>

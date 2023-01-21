@@ -12,7 +12,7 @@ namespace AngbandOS.Core
     /// Represents a buffer of screen data.  This buffer is used for the screen contents and the double buffer to emit to the console.
     /// </summary>
     [Serializable]
-    internal struct ScreenBuffer
+    internal class ScreenBuffer
     {
         /// <summary>
         /// Array of color data for the entire screen.
