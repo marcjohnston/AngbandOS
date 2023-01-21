@@ -1481,7 +1481,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            Screen savedScreen = SaveGame.Screen.Clone();
+            ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             for (k = 1; k < 24; k++)
             {
                 SaveGame.Screen.PrintLine("", k, 13);

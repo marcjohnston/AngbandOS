@@ -225,7 +225,7 @@
         private void DoCmdWizActivatePower(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            Screen savedScreen = saveGame.Screen.Clone();
+            ScreenBuffer savedScreen = saveGame.Screen.Clone();
             try
             {
                 saveGame.SetBackground(BackgroundImage.Normal);
@@ -422,7 +422,7 @@
         private void DoCmdWizHelp(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            Screen savedScreen = saveGame.Screen.Clone();
+            ScreenBuffer savedScreen = saveGame.Screen.Clone();
             try
             {
                 saveGame.UpdateScreen();
@@ -572,7 +572,7 @@
             Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             bool changed = false;
             saveGame.FullScreenOverlay = true;
-            Screen savedScreen = saveGame.Screen.Clone();
+            ScreenBuffer savedScreen = saveGame.Screen.Clone();
             try
             {
                 Item qPtr = oPtr.Clone();
@@ -670,7 +670,7 @@
         private void WizCreateItem(SaveGame saveGame)
         {
             saveGame.FullScreenOverlay = true;
-            Screen savedScreen = saveGame.Screen.Clone();
+            ScreenBuffer savedScreen = saveGame.Screen.Clone();
             saveGame.SetBackground(BackgroundImage.Normal);
             int kIdx = WizCreateItemtype(saveGame);
             saveGame.Screen.Restore(savedScreen);

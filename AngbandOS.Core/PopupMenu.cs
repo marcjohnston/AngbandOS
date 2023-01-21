@@ -101,7 +101,7 @@ namespace AngbandOS.Core
         {
             saveGame.InPopupMenu = true;
             saveGame.FullScreenOverlay = true;
-            Screen savedScreen = saveGame.Screen.Clone();
+            ScreenBuffer savedScreen = saveGame.Screen.Clone();
             var result = DisplayMenu(saveGame);
             saveGame.Screen.Restore(savedScreen);
             saveGame.InPopupMenu = false;

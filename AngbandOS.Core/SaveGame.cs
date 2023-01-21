@@ -165,11 +165,6 @@ namespace AngbandOS
         public int KeySize;
 
         /// <summary>
-        /// The contents of the screen that was last sent to the console.  Facilitates as the double buffer.
-        /// </summary>
-        public Screen Old;
-
-        /// <summary>
         /// The current contents of the game screen.
         /// </summary>
         public Screen Screen;
@@ -1072,7 +1067,7 @@ namespace AngbandOS
                     ViewingEquipment = false;
                 }
             }
-            Screen? savedScreen = null;
+            ScreenBuffer? savedScreen = null;
             if (ViewingItemList)
             {
                 savedScreen = Screen.Clone();
@@ -1156,7 +1151,7 @@ namespace AngbandOS
                             }
                             else
                             {
-                                Screen.Restore(savedScreen);
+                                Screen.Restore(savedScreen.Value);
                                 ViewingItemList = false;
                             }
                             break;
@@ -1169,7 +1164,7 @@ namespace AngbandOS
                             }
                             if (ViewingItemList)
                             {
-                                Screen.Restore(savedScreen);
+                                Screen.Restore(savedScreen.Value);
                             }
                             ViewingEquipment = !ViewingEquipment;
                             break;
@@ -1243,7 +1238,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen);
+                Screen.Restore(savedScreen.Value);
             }
             ViewingItemList = false;
             Screen.PrintLine("", 0, 0);
@@ -1489,7 +1484,6 @@ namespace AngbandOS
         {
             KeySize = k;
             KeyQueue = new char[k];
-            Old = new Screen(w, h);
             Screen = new Screen(w, h);
         }
 
@@ -5192,7 +5186,7 @@ namespace AngbandOS
                 info2[i] = ReportMagicsAux(Player.TimedPoisonResistance.TimeRemaining);
                 info[i++] = "You are resistant to poison";
             }
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             for (k = 1; k < 24; k++)
             {
                 Screen.PrintLine("", k, 13);
@@ -5640,7 +5634,7 @@ namespace AngbandOS
                     info[i++] = "Your weapon is a great bane of dragons.";
                 }
             }
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             for (k = 1; k < 24; k++)
             {
                 Screen.PrintLine("", k, 13);
@@ -6528,7 +6522,7 @@ namespace AngbandOS
         {
             // We're viewing equipment
             ViewingEquipment = true;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             // We're interested in seeing everything
             Player.ShowEquip(null);
             // Get a command
@@ -8816,7 +8810,7 @@ namespace AngbandOS
             }
             sn = -1;
             bool flag = false;
-            Screen? savedScreen = null;
+            ScreenBuffer? savedScreen = null;
             string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
             while (!flag && GetCom(outVal, out char choice) && !Shutdown)
             {
@@ -8829,7 +8823,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen);
+                        Screen.Restore(savedScreen.Value);
                         savedScreen = null;
                     }
                     continue;
@@ -8863,7 +8857,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen);
+                Screen.Restore(savedScreen.Value);
             }
             if (!flag)
             {
@@ -9072,7 +9066,7 @@ namespace AngbandOS
         {
             // We're not viewing equipment
             ViewingEquipment = false;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             // We want to see everything
             Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
             // Get a new command
@@ -9119,7 +9113,7 @@ namespace AngbandOS
         public void DoCmdListCommands()
         {
             FullScreenOverlay = true;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             UpdateScreen();
             Screen.Clear();
             SetBackground(BackgroundImage.Normal);
@@ -9316,7 +9310,7 @@ namespace AngbandOS
             int cy = -1;
             int cx = -1;
             FullScreenOverlay = true;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             Screen.Clear();
             // If we're on the surface, display the island map
             if (CurrentDepth == 0)
@@ -9879,7 +9873,7 @@ namespace AngbandOS
                 powers[num++] = 3;
             }
             bool flag = false;
-            Screen? savedScreen = null;
+            ScreenBuffer? savedScreen = null;
             string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
             while (!flag && GetCom(outVal, out char choice))
             {
@@ -9901,7 +9895,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen);
+                        Screen.Restore(savedScreen.Value);
                         savedScreen = null;
                     }
                     continue;
@@ -9932,7 +9926,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen);
+                Screen.Restore(savedScreen.Value);
             }
             if (!flag)
             {
@@ -11189,7 +11183,7 @@ namespace AngbandOS
         {
             // Save the current screen
             FullScreenOverlay = true;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             SetBackground(BackgroundImage.Paper);
             // Load the character viewer
             CharacterViewer characterViewer = new CharacterViewer(this);
@@ -11252,7 +11246,7 @@ namespace AngbandOS
             int index = 0;
             int horizontalOffset = 0;
             FullScreenOverlay = true;
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             SetBackground(BackgroundImage.Normal);
             // Infinite loop showing a page of messages from the index
             while (true && !Shutdown)
@@ -11397,7 +11391,7 @@ namespace AngbandOS
                 }
             }
             // Save the screen and overprint the spells in the book
-            Screen savedScreen = Screen.Clone();
+            ScreenBuffer savedScreen = Screen.Clone();
             Player.PrintSpells(spells, spellIndex, 1, 20, item.BaseItemCategory.SpellBookToToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
@@ -11672,7 +11666,7 @@ namespace AngbandOS
             string p = "talent";
             sn = -1;
             bool flag = false;
-            Screen? savedScreen = null;
+            ScreenBuffer? savedScreen = null;
             TalentList talents = player.Spellcasting.Talents;
             for (i = 0; i < talents.Count; i++)
             {
@@ -11706,7 +11700,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        Screen.Restore(savedScreen);
+                        Screen.Restore(savedScreen.Value);
                         savedScreen = null;
                     }
                     continue;
@@ -11733,7 +11727,7 @@ namespace AngbandOS
             }
             if (savedScreen != null)
             {
-                Screen.Restore(savedScreen);
+                Screen.Restore(savedScreen.Value);
             }
             if (!flag)
             {
@@ -13320,7 +13314,7 @@ namespace AngbandOS
         /// </summary>
         public void UpdateScreen()
         {
-            Screen.UpdateScreen(Old, _console);
+            Screen.UpdateScreen(_console);
         }
 
         public void PlayMusic(MusicTrack musicTrack)
@@ -19038,7 +19032,7 @@ namespace AngbandOS
                         {
                             if (recall)
                             {
-                                Screen savedScreen = Screen.Clone();
+                                ScreenBuffer savedScreen = Screen.Clone();
                                 rPtr.Knowledge.Display();
                                 Screen.Print(Colour.White, $"  [r,{info}]");
                                 query = Inkey();

@@ -1,5 +1,8 @@
 ﻿namespace AngbandOS.Core.ConsoleElements
 {
+    /// <summary>
+    /// Represents an element that can be rendered on the screen.
+    /// </summary>
     internal abstract class ConsoleElement
     {
         public abstract int Width { get; }

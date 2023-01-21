@@ -24,7 +24,7 @@ namespace AngbandOS
         public void ShowMenu()
         {
             SaveGame.FullScreenOverlay = true;
-            Screen savedScreen = SaveGame.Screen.Clone();
+            ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             SaveGame.SetBackground(BackgroundImage.Paper);
             while (true && !SaveGame.Shutdown)
             {

@@ -543,7 +543,7 @@ namespace AngbandOS
                     spells[num++] = spell;
                 }
             }
-            Screen savedScreen = SaveGame.Screen.Clone();
+            ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             SaveGame.Player.PrintSpells(spells, num, 1, 20, oPtr.BaseItemCategory.SpellBookToToRealm);
             SaveGame.Screen.PrintLine("", 0, 0);
             SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
@@ -553,7 +553,7 @@ namespace AngbandOS
 
         private Town GetEscortDestination(Dictionary<char, Town> towns)
         {
-            Screen savedScreen = SaveGame.Screen.Clone();
+            ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             try
             {
                 var keys = towns.Keys.ToList();
@@ -585,7 +585,7 @@ namespace AngbandOS
 
         private GodName GetSacrificeTarget()
         {
-            Screen savedScreen = SaveGame.Screen.Clone();
+            ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             try
             {
                 var deities = SaveGame.Player.Religion.GetAllDeities();
